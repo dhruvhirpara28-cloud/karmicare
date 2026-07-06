@@ -74,6 +74,23 @@
       padding-top: 0.5rem;
     }
   }
+
+  /* ── Day/Night toggle inside header ── */
+  .kc-day-night-toggle {
+    display: flex;
+    align-items: center;
+    margin: 0 0.8rem;
+    cursor: pointer;
+  }
+
+  .kc-day-night-toggle .toggle-button {
+    outline: none;
+  }
+
+  .kc-day-night-toggle .toggle-button:focus-visible {
+    box-shadow: 0 0 0 2px rgba(var(--color-foreground), 0.5);
+    border-radius: 14px;
+  }
 </style>
 
 {%- style -%}
@@ -284,6 +301,31 @@
             {% render block %}
         {%- endcase -%}
       {%- endfor -%}
+
+      {%- comment -%}── Day / Night mode toggle ──────────────────────────────{%- endcomment -%}
+      <div class="menu-toggle-btn kc-day-night-toggle" aria-label="Toggle day/night mode" title="Switch between day and night mode">
+        <div class="toggle-wrapper">
+          <div class="toggle-button" role="button" tabindex="0" aria-pressed="false">
+            <div class="toggle-circle"></div>
+            <img
+              loading="lazy"
+              src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/67850b58fe872279bb018673_Vector.svg"
+              alt="Day mode"
+              class="toggle-sun"
+              width="13"
+              height="13"
+            >
+            <img
+              loading="lazy"
+              src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/6786196ae0f8375ca16b5577_moon-icon.svg"
+              alt="Night mode"
+              class="toggle-moon"
+              width="13"
+              height="13"
+            >
+          </div>
+        </div>
+      </div>
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}

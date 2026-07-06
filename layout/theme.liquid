@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -28,6 +27,10 @@
 
     {% render 'meta-tags' %}
 
+    {% comment %}Required by Shopify — must appear before all scripts{% endcomment %}
+    {{ content_for_header }}
+
+
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
 
@@ -36,17 +39,21 @@
       customElements.define('collection-component', StandardEvents.createViewEventElement());
       customElements.define(
         'product-component',
-        StandardEvents.createViewEventElement(HTMLElement, { defaultTrigger: 'intersect' }),
+        StandardEvents.createViewEventElement(HTMLElement, { defaultTrigger: 'intersect' })
       );
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const template = document.querySelector('main[data-template]')?.dataset.template || '';
-        document.dispatchEvent(
-          new StandardEvents.PageViewEvent({
-            page: { template, title: document.title, url: window.location.href },
-          })
-        );
-      }, { once: true });
+      document.addEventListener(
+        'DOMContentLoaded',
+        () => {
+          const template = document.querySelector('main[data-template]')?.dataset.template || '';
+          document.dispatchEvent(
+            new StandardEvents.PageViewEvent({
+              page: { template, title: document.title, url: window.location.href },
+            })
+          );
+        },
+        { once: true }
+      );
     </script>
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
@@ -62,8 +69,6 @@
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-
-    {{ content_for_header }}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -278,7 +283,70 @@
       }
     {% endstyle %}
 
+    {% comment %}Day/Night mode — overrides Shopify color scheme variables{% endcomment %}
+    <style>
+      :root {
+        /* KarmaCare custom day/night hex variables */
+        --kc-day-bg-color:        {{ settings.day_mode_bg_color   | default: '#ffffff' }};
+        --kc-day-heading-color:   {{ settings.day_mode_heading_color | default: '#121212' }};
+        --kc-day-text-color:      {{ settings.day_mode_text_color  | default: '#121212' }};
+        --kc-night-bg-color:      {{ settings.night_mode_bg_color  | default: '#0f0f0f' }};
+        --kc-night-heading-color: {{ settings.night_mode_heading_color | default: '#ffffff' }};
+        --kc-night-text-color:    {{ settings.night_mode_text_color | default: '#e5e5e5' }};
+
+        /* RGB components for use in css `rgb(var(--kc-day-bg-r), ...)` */
+        --kc-day-bg-r:    {{ settings.day_mode_bg_color.red   | default: 255 }};
+        --kc-day-bg-g:    {{ settings.day_mode_bg_color.green | default: 255 }};
+        --kc-day-bg-b:    {{ settings.day_mode_bg_color.blue  | default: 255 }};
+        --kc-day-text-r:  {{ settings.day_mode_text_color.red   | default: 18 }};
+        --kc-day-text-g:  {{ settings.day_mode_text_color.green | default: 18 }};
+        --kc-day-text-b:  {{ settings.day_mode_text_color.blue  | default: 18 }};
+        --kc-night-bg-r:    {{ settings.night_mode_bg_color.red   | default: 15  }};
+        --kc-night-bg-g:    {{ settings.night_mode_bg_color.green | default: 15  }};
+        --kc-night-bg-b:    {{ settings.night_mode_bg_color.blue  | default: 15  }};
+        --kc-night-text-r:  {{ settings.night_mode_text_color.red   | default: 229 }};
+        --kc-night-text-g:  {{ settings.night_mode_text_color.green | default: 229 }};
+        --kc-night-text-b:  {{ settings.night_mode_text_color.blue  | default: 229 }};
+
+        {%- if settings.day_mode_bg_image != blank -%}
+        --kc-day-bg-image: url('{{ settings.day_mode_bg_image | image_url: width: 2000 }}');
+        {%- endif -%}
+        {%- if settings.night_mode_bg_image != blank -%}
+        --kc-night-bg-image: url('{{ settings.night_mode_bg_image | image_url: width: 2000 }}');
+        {%- endif -%}
+      }
+
+      /*
+       * ── DAY MODE: Override Shopify's Dawn --color-background / --color-foreground ──
+       * These are used as rgb(var(--color-background)) across ALL sections in Dawn.
+       * Setting them on body.day-mode + all color-scheme children ensures full coverage.
+       */
+      body.day-mode,
+      body.day-mode [class*="color-scheme-"],
+      body.day-mode .header-wrapper,
+      body.day-mode .section-header {
+        --color-background:          {{ settings.day_mode_bg_color.red | default: 255 }},{{ settings.day_mode_bg_color.green | default: 255 }},{{ settings.day_mode_bg_color.blue | default: 255 }};
+        --color-foreground:          {{ settings.day_mode_text_color.red | default: 18 }},{{ settings.day_mode_text_color.green | default: 18 }},{{ settings.day_mode_text_color.blue | default: 18 }};
+        --color-background-contrast: {{ settings.day_mode_bg_color.red | default: 230 }},{{ settings.day_mode_bg_color.green | default: 230 }},{{ settings.day_mode_bg_color.blue | default: 230 }};
+        --gradient-background:       {{ settings.day_mode_bg_color | default: '#ffffff' }};
+      }
+
+      /*
+       * ── NIGHT MODE: Override Shopify's Dawn --color-background / --color-foreground ──
+       */
+      body.night-mode,
+      body.night-mode [class*="color-scheme-"],
+      body.night-mode .header-wrapper,
+      body.night-mode .section-header {
+        --color-background:          {{ settings.night_mode_bg_color.red | default: 15 }},{{ settings.night_mode_bg_color.green | default: 15 }},{{ settings.night_mode_bg_color.blue | default: 15 }};
+        --color-foreground:          {{ settings.night_mode_text_color.red | default: 229 }},{{ settings.night_mode_text_color.green | default: 229 }},{{ settings.night_mode_text_color.blue | default: 229 }};
+        --color-background-contrast: {{ settings.night_mode_bg_color.red | default: 40 }},{{ settings.night_mode_bg_color.green | default: 40 }},{{ settings.night_mode_bg_color.blue | default: 40 }};
+        --gradient-background:       {{ settings.night_mode_bg_color | default: '#0f0f0f' }};
+      }
+    </style>
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'day-night-mode.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -321,7 +389,7 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}{% if settings.day_mode_bg_image != blank %} kc-has-day-image{% endif %}{% if settings.night_mode_bg_image != blank %} kc-has-night-image{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -397,6 +465,9 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {% comment %}Day/Night mode controller — must load early, before DOMContentLoaded{% endcomment %}
+    <script src="{{ 'day-night-mode.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
