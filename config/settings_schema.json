@@ -1451,5 +1451,76 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Day / Night Mode",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Set separate colors and background images for Day and Night modes. The site auto-switches based on the visitor's local sunrise/sunset times. Visitors can also toggle manually."
+      },
+      {
+        "type": "header",
+        "content": "☀️ Day Mode"
+      },
+      {
+        "type": "color",
+        "id": "day_mode_bg_color",
+        "label": "Background color (Day)",
+        "default": "#ffffff",
+        "info": "Page background color in day mode."
+      },
+      {
+        "type": "color",
+        "id": "day_mode_heading_color",
+        "label": "Heading color (Day)",
+        "default": "#121212",
+        "info": "H1–H6 heading color in day mode."
+      },
+      {
+        "type": "color",
+        "id": "day_mode_text_color",
+        "label": "Text color (Day)",
+        "default": "#121212",
+        "info": "Body text color in day mode."
+      },
+      {
+        "type": "image_picker",
+        "id": "day_mode_bg_image",
+        "label": "Background image (Day)",
+        "info": "Optional full-page background image for day mode. Leave empty to use solid color only."
+      },
+      {
+        "type": "header",
+        "content": "🌙 Night Mode"
+      },
+      {
+        "type": "color",
+        "id": "night_mode_bg_color",
+        "label": "Background color (Night)",
+        "default": "#0f0f0f",
+        "info": "Page background color in night mode."
+      },
+      {
+        "type": "color",
+        "id": "night_mode_heading_color",
+        "label": "Heading color (Night)",
+        "default": "#ffffff",
+        "info": "H1–H6 heading color in night mode."
+      },
+      {
+        "type": "color",
+        "id": "night_mode_text_color",
+        "label": "Text color (Night)",
+        "default": "#e5e5e5",
+        "info": "Body text color in night mode."
+      },
+      {
+        "type": "image_picker",
+        "id": "night_mode_bg_image",
+        "label": "Background image (Night)",
+        "info": "Optional full-page background image for night mode. Leave empty to use solid color only."
+      }
+    ]
   }
 ]
