@@ -79,7 +79,12 @@ if (!customElements.get('media-gallery')) {
         thumbnail.querySelector('button').setAttribute('aria-current', true);
         if (this.elements.thumbnails.isSlideVisible(thumbnail, 10)) return;
 
-        this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
+        const isVertical = window.getComputedStyle(this.elements.thumbnails.slider).flexDirection === 'column';
+        if (isVertical) {
+          this.elements.thumbnails.slider.scrollTo({ top: thumbnail.offsetTop });
+        } else {
+          this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
+        }
       }
 
       announceLiveRegion(activeItem, position) {

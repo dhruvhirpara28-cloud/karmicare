@@ -748,12 +748,20 @@ class SliderComponent extends HTMLElement {
   }
 
   initPages() {
-    this.sliderItemsToShow = Array.from(this.sliderItems).filter((element) => element.clientWidth > 0);
+    this.isVertical = window.getComputedStyle(this.slider).flexDirection === 'column';
+    this.sliderItemsToShow = Array.from(this.sliderItems).filter((element) => (this.isVertical ? element.clientHeight > 0 : element.clientWidth > 0));
     if (this.sliderItemsToShow.length < 2) return;
-    this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
-    this.slidesPerPage = Math.floor(
-      (this.slider.clientWidth - this.sliderItemsToShow[0].offsetLeft) / this.sliderItemOffset
-    );
+    if (this.isVertical) {
+      this.sliderItemOffset = this.sliderItemsToShow[1].offsetTop - this.sliderItemsToShow[0].offsetTop;
+      this.slidesPerPage = Math.floor(
+        (this.slider.clientHeight - this.sliderItemsToShow[0].offsetTop) / this.sliderItemOffset
+      );
+    } else {
+      this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
+      this.slidesPerPage = Math.floor(
+        (this.slider.clientWidth - this.sliderItemsToShow[0].offsetLeft) / this.sliderItemOffset
+      );
+    }
     this.totalPages = this.sliderItemsToShow.length - this.slidesPerPage + 1;
     this.update();
   }
@@ -769,7 +777,8 @@ class SliderComponent extends HTMLElement {
     if (!this.slider || !this.nextButton) return;
 
     const previousPage = this.currentPage;
-    this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
+    this.isVertical = window.getComputedStyle(this.slider).flexDirection === 'column';
+    this.currentPage = Math.round((this.isVertical ? this.slider.scrollTop : this.slider.scrollLeft) / this.sliderItemOffset) + 1;
 
     if (this.currentPageElement && this.pageTotalElement) {
       this.currentPageElement.textContent = this.currentPage;
@@ -789,7 +798,9 @@ class SliderComponent extends HTMLElement {
 
     if (this.enableSliderLooping) return;
 
-    if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
+    const isFirstVisible = this.isSlideVisible(this.sliderItemsToShow[0]);
+    const isScrollAtStart = (this.isVertical ? this.slider.scrollTop === 0 : this.slider.scrollLeft === 0);
+    if (isFirstVisible && isScrollAtStart) {
       this.prevButton.setAttribute('disabled', 'disabled');
     } else {
       this.prevButton.removeAttribute('disabled');
@@ -803,24 +814,45 @@ class SliderComponent extends HTMLElement {
   }
 
   isSlideVisible(element, offset = 0) {
-    const lastVisibleSlide = this.slider.clientWidth + this.slider.scrollLeft - offset;
-    return element.offsetLeft + element.clientWidth <= lastVisibleSlide && element.offsetLeft >= this.slider.scrollLeft;
+    this.isVertical = window.getComputedStyle(this.slider).flexDirection === 'column';
+    if (this.isVertical) {
+      const lastVisibleSlide = this.slider.clientHeight + this.slider.scrollTop - offset;
+      return element.offsetTop + element.clientHeight <= lastVisibleSlide && element.offsetTop >= this.slider.scrollTop;
+    } else {
+      const lastVisibleSlide = this.slider.clientWidth + this.slider.scrollLeft - offset;
+      return element.offsetLeft + element.clientWidth <= lastVisibleSlide && element.offsetLeft >= this.slider.scrollLeft;
+    }
   }
 
   onButtonClick(event) {
     event.preventDefault();
     const step = event.currentTarget.dataset.step || 1;
-    this.slideScrollPosition =
-      event.currentTarget.name === 'next'
-        ? this.slider.scrollLeft + step * this.sliderItemOffset
-        : this.slider.scrollLeft - step * this.sliderItemOffset;
+    this.isVertical = window.getComputedStyle(this.slider).flexDirection === 'column';
+    if (this.isVertical) {
+      this.slideScrollPosition =
+        event.currentTarget.name === 'next'
+          ? this.slider.scrollTop + step * this.sliderItemOffset
+          : this.slider.scrollTop - step * this.sliderItemOffset;
+    } else {
+      this.slideScrollPosition =
+        event.currentTarget.name === 'next'
+          ? this.slider.scrollLeft + step * this.sliderItemOffset
+          : this.slider.scrollLeft - step * this.sliderItemOffset;
+    }
     this.setSlidePosition(this.slideScrollPosition);
   }
 
   setSlidePosition(position) {
-    this.slider.scrollTo({
-      left: position,
-    });
+    this.isVertical = window.getComputedStyle(this.slider).flexDirection === 'column';
+    if (this.isVertical) {
+      this.slider.scrollTo({
+        top: position,
+      });
+    } else {
+      this.slider.scrollTo({
+        left: position,
+      });
+    }
   }
 }
 

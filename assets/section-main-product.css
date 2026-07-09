@@ -27,7 +27,8 @@ product-info {
     z-index: 2;
   }
 
-  .product--thumbnail .thumbnail-list {
+  .product--thumbnail .thumbnail-list,
+  .product--thumbnail_vertical .thumbnail-list {
     padding-right: var(--media-shadow-horizontal-offset);
   }
 
@@ -422,7 +423,8 @@ a.product__text {
 @media screen and (min-width: 750px) {
 
   .product--thumbnail .product__media-list,
-  .product--thumbnail_slider .product__media-list {
+  .product--thumbnail_slider .product__media-list,
+  .product--thumbnail_vertical .product__media-list {
     padding-bottom: calc(var(--media-shadow-vertical-offset) * var(--media-shadow-visible));
   }
 
@@ -431,7 +433,8 @@ a.product__text {
   }
 
   .product--thumbnail .product__media-item:not(.is-active),
-  .product--thumbnail_slider .product__media-item:not(.is-active) {
+  .product--thumbnail_slider .product__media-item:not(.is-active),
+  .product--thumbnail_vertical .product__media-item:not(.is-active) {
     display: none;
   }
 
@@ -449,7 +452,8 @@ a.product__text {
     padding-left: 0;
   }
 
-  .product--thumbnail_slider .product__media-list {
+  .product--thumbnail_slider .product__media-list,
+  .product--thumbnail_vertical .product__media-list {
     margin-left: 0;
   }
 
@@ -662,12 +666,14 @@ a.product__text {
 @media screen and (max-width: 749px) {
 
   .product--thumbnail .is-active .product__modal-opener:not(.product__modal-opener--image),
-  .product--thumbnail_slider .is-active .product__modal-opener:not(.product__modal-opener--image) {
+  .product--thumbnail_slider .is-active .product__modal-opener:not(.product__modal-opener--image),
+  .product--thumbnail_vertical .is-active .product__modal-opener:not(.product__modal-opener--image) {
     display: none;
   }
 
   .product--thumbnail .is-active .deferred-media,
-  .product--thumbnail_slider .is-active .deferred-media {
+  .product--thumbnail_slider .is-active .deferred-media,
+  .product--thumbnail_vertical .is-active .deferred-media {
     display: block;
     width: 100%;
   }
@@ -976,7 +982,9 @@ a.product__text {
 }
 
 @media screen and (min-width: 750px) {
-  .product--thumbnail_slider .thumbnail-slider {
+
+  .product--thumbnail_slider .thumbnail-slider,
+  .product--thumbnail_vertical .thumbnail-slider {
     display: flex;
     align-items: center;
   }
@@ -996,7 +1004,8 @@ a.product__text {
     width: calc(25% - 0.8rem);
   }
 
-  .product--thumbnail_slider .slider-mobile-gutter .slider-button {
+  .product--thumbnail_slider .slider-mobile-gutter .slider-button,
+  .product--thumbnail_vertical .slider-mobile-gutter .slider-button {
     display: flex;
   }
 }
@@ -1012,6 +1021,7 @@ a.product__text {
 }
 
 .thumbnail {
+  border-radius: 12px;
   position: absolute;
   top: 0;
   left: 0;
@@ -1022,6 +1032,7 @@ a.product__text {
   color: rgb(var(--color-foreground));
   cursor: pointer;
   background-color: transparent;
+  border: 2px solid transparent;
 }
 
 .thumbnail:hover {
@@ -1033,8 +1044,7 @@ a.product__text {
 }
 
 .thumbnail[aria-current] {
-  box-shadow: 0 0 0rem 0.1rem rgb(var(--color-foreground));
-  border-color: rgb(var(--color-foreground));
+  border: 2px solid #7FB9FF;
 }
 
 .image-magnify-full-size {
@@ -1313,7 +1323,8 @@ a.product__text {
 
 .product-media-container.constrain-height.media-fit-contain {
   --contained-width: calc(var(--constrained-height) * var(--aspect-ratio));
-  width: min(var(--contained-width), 100%);
+  /* width: min(var(--contained-width), 100%); */
+  width: 100%;
 }
 
 .product-media-container .media {
@@ -1321,7 +1332,9 @@ a.product__text {
 }
 
 .product-media-container.constrain-height .media {
-  padding-top: min(var(--constrained-height), var(--ratio-percent));
+  /* padding-top: min(var(--constrained-height), var(--ratio-percent)); */
+  padding-top: 100%;
+  border-radius: 12px;
 }
 
 @media screen and (max-width: 749px) {
@@ -1499,16 +1512,11 @@ a.product__text {
   }
 }
 
-/* =====================================================
-   Vertical Left-Side Thumbnail Slider — Desktop/Laptop
-   Only applies at ≥750px (tablet, laptop, desktop)
-   ===================================================== */
 
 @media screen and (min-width: 750px) {
 
   /* Make the media-gallery a horizontal flex row so thumbnails sit left of the main image */
-  .product--thumbnail_slider media-gallery,
-  .product--thumbnail media-gallery {
+  .product--thumbnail_vertical media-gallery {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -1516,90 +1524,129 @@ a.product__text {
   }
 
   /* Thumbnail slider column — fixed width on the left */
-  .product--thumbnail_slider .thumbnail-slider,
-  .product--thumbnail .thumbnail-slider {
-    display: flex !important;
+  .product--thumbnail_vertical slider-component.thumbnail-slider {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    order: -1;             /* push thumbnails to the left */
+    order: -1;
+    /* push thumbnails to the left */
     flex-shrink: 0;
     width: 80px;
+    position: relative;
+  }
+
+  /* Style prev and next buttons with white background and black arrow, absolute positioned on top of the list */
+  .product--thumbnail_vertical .thumbnail-slider .slider-button {
+    display: flex;
+    position: absolute;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+    z-index: 10;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: background-color var(--duration-short) ease, transform var(--duration-short) ease, opacity var(--duration-short) ease;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .product--thumbnail_vertical .thumbnail-slider .slider-button--prev {
+    top: -12px;
+  }
+
+  .product--thumbnail_vertical .thumbnail-slider .slider-button--next {
+    bottom: -12px;
+  }
+
+  .product--thumbnail_vertical .thumbnail-slider .slider-button:hover {
+    background-color: #f0f0f0;
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  .product--thumbnail_vertical .thumbnail-slider .slider-button[disabled] {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .product--thumbnail_vertical .thumbnail-slider .slider-button .icon {
+    color: #000000;
+    height: 0.8rem;
   }
 
   /* Thumbnail list — stack items vertically */
-  .product--thumbnail_slider .thumbnail-list,
-  .product--thumbnail .thumbnail-list {
-    display: flex !important;
+  .product--thumbnail_vertical .thumbnail-slider .thumbnail-list.slider--tablet-up {
+    display: flex;
     flex-direction: column;
     grid-template-columns: unset;
     gap: 0.8rem;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 520px;
-    padding: 0.4rem;
+    height: 304px;
+    /* height for exactly 3.5 thumbnails visible */
+    max-height: none;
+    padding: 0.2rem;
     width: 100%;
+    margin: 0;
+    position: relative;
   }
 
   /* Each thumbnail item — full width of the column */
-  .product--thumbnail_slider .thumbnail-list__item,
-  .product--thumbnail .thumbnail-list__item {
-    width: 100% !important;
+  .product--thumbnail_vertical .thumbnail-slider .thumbnail-list.slider--tablet-up .thumbnail-list__item.slider__slide {
+    width: 100%;
     flex-shrink: 0;
+    margin: 0;
   }
 
   /* Main image slider — takes remaining space */
-  .product--thumbnail_slider slider-component:not(.thumbnail-slider),
-  .product--thumbnail slider-component:not(.thumbnail-slider) {
+  .product--thumbnail_vertical slider-component:not(.thumbnail-slider) {
     flex: 1;
     min-width: 0;
   }
 
-
-  /* Rotate the prev/next slider buttons to point up/down */
-  .product--thumbnail_slider .thumbnail-slider .slider-button--prev .svg-wrapper svg,
-  .product--thumbnail .thumbnail-slider .slider-button--prev .svg-wrapper svg {
-    transform: rotate(90deg);
+  /* Correct Arrow/Caret Rotations for Vertical Scroll:
+     Prev button should point UP (rotated 180deg instead of 90deg)
+     Next button should point DOWN (rotated 0deg instead of -90deg) */
+  .product--thumbnail_vertical .thumbnail-slider .slider-button--prev .icon {
+    transform: rotate(180deg);
   }
 
-  .product--thumbnail_slider .thumbnail-slider .slider-button--next .svg-wrapper svg,
-  .product--thumbnail .thumbnail-slider .slider-button--next .svg-wrapper svg {
-    transform: rotate(90deg);
+  .product--thumbnail_vertical .thumbnail-slider .slider-button--next .icon {
+    transform: rotate(0deg);
   }
 
-  /* Stack prev → list → next vertically */
-  .product--thumbnail_slider .thumbnail-slider .slider-button--prev,
-  .product--thumbnail .thumbnail-slider .slider-button--prev {
-    order: 0;
-    margin-bottom: 0.4rem;
+  .product--thumbnail_vertical .thumbnail-slider .slider-button--prev:not([disabled]):hover .icon {
+    transform: rotate(180deg) scale(1.1);
   }
 
-  .product--thumbnail_slider .thumbnail-slider .thumbnail-list,
-  .product--thumbnail .thumbnail-slider .thumbnail-list {
-    order: 1;
-  }
-
-  .product--thumbnail_slider .thumbnail-slider .slider-button--next,
-  .product--thumbnail .thumbnail-slider .slider-button--next {
-    order: 2;
-    margin-top: 0.4rem;
-  }
-
-  /* Show slider buttons for vertical nav (override the hide rule) */
-  .product--thumbnail_slider .thumbnail-slider .slider-button,
-  .product--thumbnail .thumbnail-slider .slider-button {
-    display: flex !important;
+  .product--thumbnail_vertical .thumbnail-slider .slider-button--next:not([disabled]):hover .icon {
+    transform: rotate(0deg) scale(1.1);
   }
 }
 
 /* Wider thumbnails on larger screens */
 @media screen and (min-width: 990px) {
-  .product--thumbnail_slider .thumbnail-slider,
-  .product--thumbnail .thumbnail-slider {
+
+  .product--thumbnail_vertical slider-component.thumbnail-slider {
     width: 96px;
+    position: relative;
   }
 
-  .product--thumbnail_slider .thumbnail-list,
-  .product--thumbnail .thumbnail-list {
-    max-height: 620px;
+  .product--thumbnail_vertical .thumbnail-slider .thumbnail-list.slider--tablet-up {
+    height: 360px;
+    /* height for exactly 3.5 thumbnails visible */
+    max-height: none;
   }
-}
+}
+
+/* Fix product media image containment styling */
+.product-media-container.media-fit-contain .media>img {
+  object-fit: contain !important;
+}
