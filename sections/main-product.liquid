@@ -228,6 +228,10 @@
                       </div>
                     </details>
                   </div>
+                {%- when 'highlights_slider' -%}
+                  {% render 'product-highlights', block: block %}
+                {%- when 'info_card' -%}
+                  {% render 'product-info-card', block: block %}
                 {%- when 'quantity_selector' -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
@@ -761,6 +765,262 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "info_card",
+      "name": "Info Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Card Content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "header_text",
+          "label": "Card Subtitle / Header",
+          "default": "OUR MISSION"
+        },
+        {
+          "type": "richtext",
+          "id": "body_text",
+          "label": "Card Body Text",
+          "default": "<p>Equip you with the tools for achieving a confident, resilient and a future proof smile.</p>"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "footer_text",
+          "label": "Card Footer / Accent Text",
+          "default": "Strengthen your teeth. Strengthen yourself."
+        },
+        {
+          "type": "header",
+          "content": "Card Colors"
+        },
+        {
+          "type": "color",
+          "id": "header_color",
+          "label": "Header Text Color"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color"
+        },
+        {
+          "type": "header",
+          "content": "Card Layout"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size (Desktop)",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size (Mobile)",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Border Radius",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "padding_vertical",
+          "min": 10,
+          "max": 50,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding (Vertical)",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "padding_horizontal",
+          "min": 10,
+          "max": 50,
+          "step": 2,
+          "unit": "px",
+          "label": "Padding (Horizontal)",
+          "default": 24
+        }
+      ]
+    },
+    {
+      "type": "highlights_slider",
+      "name": "Highlights Slider",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Style Settings"
+        },
+        {
+          "type": "range",
+          "id": "font_size_desktop",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size (Desktop)",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size (Mobile)",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Border Radius",
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "Highlight Items"
+        },
+        {
+          "type": "header",
+          "content": "Highlight Item 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Icon Image 1"
+        },
+        {
+          "type": "html",
+          "id": "svg_1",
+          "label": "Custom SVG 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "Used by +100 kPNI practitioners"
+        },
+        {
+          "type": "header",
+          "content": "Highlight Item 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Icon Image 2"
+        },
+        {
+          "type": "html",
+          "id": "svg_2",
+          "label": "Custom SVG 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "Backed by 39 peer-reviewed studies"
+        },
+        {
+          "type": "header",
+          "content": "Highlight Item 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Icon Image 3"
+        },
+        {
+          "type": "html",
+          "id": "svg_3",
+          "label": "Custom SVG 3"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_3",
+          "label": "Text 3"
+        },
+        {
+          "type": "header",
+          "content": "Highlight Item 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Icon Image 4"
+        },
+        {
+          "type": "html",
+          "id": "svg_4",
+          "label": "Custom SVG 4"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_4",
+          "label": "Text 4"
+        },
+        {
+          "type": "header",
+          "content": "Highlight Item 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Icon Image 5"
+        },
+        {
+          "type": "html",
+          "id": "svg_5",
+          "label": "Custom SVG 5"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_5",
+          "label": "Text 5"
+        },
+        {
+          "type": "header",
+          "content": "Highlight Item 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Icon Image 6"
+        },
+        {
+          "type": "html",
+          "id": "svg_6",
+          "label": "Custom SVG 6"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_6",
+          "label": "Text 6"
+        }
+      ]
     },
     {
       "type": "text",
@@ -2224,6 +2484,10 @@
         {
           "value": "thumbnail_slider",
           "label": "t:sections.main-product.settings.gallery_layout.options__4.label"
+        },
+        {
+          "value": "thumbnail_vertical",
+          "label": "t:sections.main-product.settings.gallery_layout.options__5.label"
         }
       ],
       "default": "stacked",
