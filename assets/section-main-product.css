@@ -1498,3 +1498,108 @@ a.product__text {
     border: none;
   }
 }
+
+/* =====================================================
+   Vertical Left-Side Thumbnail Slider — Desktop/Laptop
+   Only applies at ≥750px (tablet, laptop, desktop)
+   ===================================================== */
+
+@media screen and (min-width: 750px) {
+
+  /* Make the media-gallery a horizontal flex row so thumbnails sit left of the main image */
+  .product--thumbnail_slider media-gallery,
+  .product--thumbnail media-gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* Thumbnail slider column — fixed width on the left */
+  .product--thumbnail_slider .thumbnail-slider,
+  .product--thumbnail .thumbnail-slider {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    order: -1;             /* push thumbnails to the left */
+    flex-shrink: 0;
+    width: 80px;
+  }
+
+  /* Thumbnail list — stack items vertically */
+  .product--thumbnail_slider .thumbnail-list,
+  .product--thumbnail .thumbnail-list {
+    display: flex !important;
+    flex-direction: column;
+    grid-template-columns: unset;
+    gap: 0.8rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 520px;
+    padding: 0.4rem;
+    width: 100%;
+  }
+
+  /* Each thumbnail item — full width of the column */
+  .product--thumbnail_slider .thumbnail-list__item,
+  .product--thumbnail .thumbnail-list__item {
+    width: 100% !important;
+    flex-shrink: 0;
+  }
+
+  /* Main image slider — takes remaining space */
+  .product--thumbnail_slider slider-component:not(.thumbnail-slider),
+  .product--thumbnail slider-component:not(.thumbnail-slider) {
+    flex: 1;
+    min-width: 0;
+  }
+
+
+  /* Rotate the prev/next slider buttons to point up/down */
+  .product--thumbnail_slider .thumbnail-slider .slider-button--prev .svg-wrapper svg,
+  .product--thumbnail .thumbnail-slider .slider-button--prev .svg-wrapper svg {
+    transform: rotate(90deg);
+  }
+
+  .product--thumbnail_slider .thumbnail-slider .slider-button--next .svg-wrapper svg,
+  .product--thumbnail .thumbnail-slider .slider-button--next .svg-wrapper svg {
+    transform: rotate(90deg);
+  }
+
+  /* Stack prev → list → next vertically */
+  .product--thumbnail_slider .thumbnail-slider .slider-button--prev,
+  .product--thumbnail .thumbnail-slider .slider-button--prev {
+    order: 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .product--thumbnail_slider .thumbnail-slider .thumbnail-list,
+  .product--thumbnail .thumbnail-slider .thumbnail-list {
+    order: 1;
+  }
+
+  .product--thumbnail_slider .thumbnail-slider .slider-button--next,
+  .product--thumbnail .thumbnail-slider .slider-button--next {
+    order: 2;
+    margin-top: 0.4rem;
+  }
+
+  /* Show slider buttons for vertical nav (override the hide rule) */
+  .product--thumbnail_slider .thumbnail-slider .slider-button,
+  .product--thumbnail .thumbnail-slider .slider-button {
+    display: flex !important;
+  }
+}
+
+/* Wider thumbnails on larger screens */
+@media screen and (min-width: 990px) {
+  .product--thumbnail_slider .thumbnail-slider,
+  .product--thumbnail .thumbnail-slider {
+    width: 96px;
+  }
+
+  .product--thumbnail_slider .thumbnail-list,
+  .product--thumbnail .thumbnail-list {
+    max-height: 620px;
+  }
+}
