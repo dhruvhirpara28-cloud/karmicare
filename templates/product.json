@@ -12,6 +12,10 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "top_tags_block": {
+          "type": "top_tags",
+          "settings": {}
+        },
         "judge_me_reviews_preview_badge_NjrVVk": {
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
@@ -93,10 +97,10 @@
             "header_text": "OUR MISSION",
             "body_text": "<p>Equip you with the tools for achieving a confident, resilient and a future proof smile.</p>",
             "footer_text": "Strengthen your teeth. Strengthen yourself.",
-            "header_color": "#7FB9FF",
-            "text_color": "#ffffff",
-            "background_color": "rgba(0,0,0,0)",
-            "border_color": "#7FB9FF",
+            "header_color": "#7fb9ff",
+            "border_color": "#7fb9ff",
+            "font_size_desktop": 14,
+            "font_size_mobile": 12,
             "border_radius": 16,
             "padding_vertical": 20,
             "padding_horizontal": 24
@@ -108,17 +112,54 @@
             "header_text": "OUR COMMITMENT TO YOU",
             "body_text": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
             "footer_text": "",
-            "header_color": "#7FB9FF",
-            "text_color": "#ffffff",
-            "background_color": "rgba(0,0,0,0)",
-            "border_color": "#7FB9FF",
+            "header_color": "#7fb9ff",
+            "border_color": "#7fb9ff",
+            "font_size_desktop": 14,
+            "font_size_mobile": 12,
             "border_radius": 16,
             "padding_vertical": 20,
             "padding_horizontal": 24
           }
+        },
+        "collapsible_tab_6FG4GF": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredient List",
+            "icon": "none",
+            "content": "<p>{{ product.metafields.custom.ingredient_list | metafield_tag }}</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_3y7NzH": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What does it do",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.what_does_it_do | metafield_tag }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_xk8A9d": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Technical Information",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.technical_information | metafield_tag }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_RJHCUi": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Active Ingredients",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.active_ingredients | metafield_tag }}",
+            "page": ""
+          }
         }
       },
       "block_order": [
+        "top_tags_block",
         "judge_me_reviews_preview_badge_NjrVVk",
         "title",
         "description",
@@ -130,7 +171,11 @@
         "buy_buttons",
         "icon_with_text_xhaDGB",
         "info_card_XMyag4",
-        "info_card_FnBcaN"
+        "info_card_FnBcaN",
+        "collapsible_tab_6FG4GF",
+        "collapsible_tab_3y7NzH",
+        "collapsible_tab_xk8A9d",
+        "collapsible_tab_RJHCUi"
       ],
       "settings": {
         "enable_sticky_info": true,

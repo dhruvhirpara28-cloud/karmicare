@@ -143,6 +143,244 @@
         "unit": "%",
         "label": "t:settings_schema.typography.settings.body_scale.label",
         "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Custom Font Sizes"
+      },
+      {
+        "type": "range",
+        "id": "body_font_size_mobile",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 15,
+        "unit": "px",
+        "label": "Body Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "body_font_size_desktop",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "default": 16,
+        "unit": "px",
+        "label": "Body Font Size (Desktop)"
+      },
+      {
+        "type": "range",
+        "id": "h1_font_size_mobile",
+        "min": 10,
+        "max": 80,
+        "step": 1,
+        "default": 30,
+        "unit": "px",
+        "label": "H1 Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "h1_font_size_desktop",
+        "min": 10,
+        "max": 100,
+        "step": 1,
+        "default": 40,
+        "unit": "px",
+        "label": "H1 Font Size (Desktop)"
+      },
+      {
+        "type": "range",
+        "id": "h2_font_size_mobile",
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "default": 20,
+        "unit": "px",
+        "label": "H2 Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "h2_font_size_desktop",
+        "min": 10,
+        "max": 80,
+        "step": 1,
+        "default": 24,
+        "unit": "px",
+        "label": "H2 Font Size (Desktop)"
+      },
+      {
+        "type": "range",
+        "id": "h3_font_size_mobile",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "default": 17,
+        "unit": "px",
+        "label": "H3 Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "h3_font_size_desktop",
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "default": 18,
+        "unit": "px",
+        "label": "H3 Font Size (Desktop)"
+      },
+      {
+        "type": "range",
+        "id": "h4_font_size_mobile",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "default": 15,
+        "unit": "px",
+        "label": "H4 Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "h4_font_size_desktop",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "default": 16,
+        "unit": "px",
+        "label": "H4 Font Size (Desktop)"
+      },
+      {
+        "type": "range",
+        "id": "h5_font_size_mobile",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 12,
+        "unit": "px",
+        "label": "H5 Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "h5_font_size_desktop",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "default": 13,
+        "unit": "px",
+        "label": "H5 Font Size (Desktop)"
+      },
+      {
+        "type": "range",
+        "id": "h6_font_size_mobile",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 10,
+        "unit": "px",
+        "label": "H6 Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "h6_font_size_desktop",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 12,
+        "unit": "px",
+        "label": "H6 Font Size (Desktop)"
+      },
+      {
+        "type": "header",
+        "content": "Heading Font Weights"
+      },
+      {
+        "type": "select",
+        "id": "h1_font_weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra Bold" },
+          { "value": "900", "label": "Black" }
+        ],
+        "default": "700",
+        "label": "H1 Font Weight"
+      },
+      {
+        "type": "select",
+        "id": "h2_font_weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra Bold" },
+          { "value": "900", "label": "Black" }
+        ],
+        "default": "700",
+        "label": "H2 Font Weight"
+      },
+      {
+        "type": "select",
+        "id": "h3_font_weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra Bold" },
+          { "value": "900", "label": "Black" }
+        ],
+        "default": "700",
+        "label": "H3 Font Weight"
+      },
+      {
+        "type": "select",
+        "id": "h4_font_weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra Bold" },
+          { "value": "900", "label": "Black" }
+        ],
+        "default": "700",
+        "label": "H4 Font Weight"
+      },
+      {
+        "type": "select",
+        "id": "h5_font_weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra Bold" },
+          { "value": "900", "label": "Black" }
+        ],
+        "default": "700",
+        "label": "H5 Font Weight"
+      },
+      {
+        "type": "select",
+        "id": "h6_font_weight",
+        "options": [
+          { "value": "300", "label": "Light" },
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" },
+          { "value": "800", "label": "Extra Bold" },
+          { "value": "900", "label": "Black" }
+        ],
+        "default": "700",
+        "label": "H6 Font Weight"
       }
     ]
   },
@@ -1520,6 +1758,41 @@
         "id": "night_mode_bg_image",
         "label": "Background image (Night)",
         "info": "Optional full-page background image for night mode. Leave empty to use solid color only."
+      }
+    ]
+  },
+  {
+    "name": "Border Radius",
+    "settings": [
+      {
+        "type": "range",
+        "id": "primary-border-radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Primary Border Radius",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "secondary-border-radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Secondary Border Radius",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "tertiary-border-radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Tertiary Border Radius",
+        "default": 5
       }
     ]
   }
