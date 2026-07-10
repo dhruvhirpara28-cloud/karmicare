@@ -51,6 +51,34 @@
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
+        --font-body-size-mobile: {{ settings.body_font_size_mobile | divided_by: 10.0 }}rem;
+        --font-body-size-desktop: {{ settings.body_font_size_desktop | divided_by: 10.0 }}rem;
+
+        --font-h1-size-mobile: calc(var(--font-heading-scale) * {{ settings.h1_font_size_mobile | divided_by: 10.0 }}rem);
+        --font-h1-size-desktop: calc(var(--font-heading-scale) * {{ settings.h1_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --font-h2-size-mobile: calc(var(--font-heading-scale) * {{ settings.h2_font_size_mobile | divided_by: 10.0 }}rem);
+        --font-h2-size-desktop: calc(var(--font-heading-scale) * {{ settings.h2_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --font-h3-size-mobile: calc(var(--font-heading-scale) * {{ settings.h3_font_size_mobile | divided_by: 10.0 }}rem);
+        --font-h3-size-desktop: calc(var(--font-heading-scale) * {{ settings.h3_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --font-h4-size-mobile: calc(var(--font-heading-scale) * {{ settings.h4_font_size_mobile | divided_by: 10.0 }}rem);
+        --font-h4-size-desktop: calc(var(--font-heading-scale) * {{ settings.h4_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --font-h5-size-mobile: calc(var(--font-heading-scale) * {{ settings.h5_font_size_mobile | divided_by: 10.0 }}rem);
+        --font-h5-size-desktop: calc(var(--font-heading-scale) * {{ settings.h5_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --font-h6-size-mobile: calc(var(--font-heading-scale) * {{ settings.h6_font_size_mobile | divided_by: 10.0 }}rem);
+        --font-h6-size-desktop: calc(var(--font-heading-scale) * {{ settings.h6_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --font-h1-weight: {{ settings.h1_font_weight | default: '700' }};
+        --font-h2-weight: {{ settings.h2_font_weight | default: '700' }};
+        --font-h3-weight: {{ settings.h3_font_weight | default: '700' }};
+        --font-h4-weight: {{ settings.h4_font_weight | default: '500' }};
+        --font-h5-weight: {{ settings.h5_font_weight | default: '500' }};
+        --font-h6-weight: {{ settings.h6_font_weight | default: '500' }};
+
         {% assign scheme = settings.color_schemes | first %}
         --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
         {% if scheme.settings.background_gradient != empty -%}

@@ -1,0 +1,12 @@
+{%- if product.metafields.custom.product_top_tag_list.value != blank -%}
+  {{ 'product-top-tags.css' | asset_url | stylesheet_tag }}
+  <div class="product-top-tags-container" {{ block.shopify_attributes }}>
+    <div class="product-top-tags-scroll">
+      {%- for tag in product.metafields.custom.product_top_tag_list.value -%}
+        {%- if tag != blank -%}
+          <span class="product-top-tag-pill h5 tertiary-border-radius">{{ tag }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

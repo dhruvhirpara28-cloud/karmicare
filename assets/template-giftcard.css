@@ -30,6 +30,7 @@ html {
 body {
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
+  font-size: var(--font-body-size-mobile);
   letter-spacing: 0.07rem;
   line-height: calc(1 + 0.8 / var(--font-body-scale));
   max-width: var(--page-width);
@@ -42,6 +43,7 @@ body {
 
 @media only screen and (min-width: 750px) {
   body {
+    font-size: var(--font-body-size-desktop);
     line-height: calc(1 + 0.8 / var(--font-body-scale));
   }
 }
@@ -64,25 +66,27 @@ h2,
 
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  font-size: var(--font-h1-size-mobile);
+  font-weight: var(--font-h1-weight);
 }
 
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: calc(var(--font-heading-scale) * 4rem);
+    font-size: var(--font-h1-size-desktop);
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(var(--font-heading-scale) * 2rem);
+  font-size: var(--font-h2-size-mobile);
+  font-weight: var(--font-h2-weight);
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: calc(var(--font-heading-scale) * 2.4rem);
+    font-size: var(--font-h2-size-desktop);
   }
 }
 
