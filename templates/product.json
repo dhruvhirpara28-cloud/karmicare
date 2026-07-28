@@ -37,11 +37,12 @@
             "image_1": "shopify://shop_images/ab1b759c8879afedbacd43446c89ff56.svg",
             "svg_1": "",
             "text_1": "Used by +100 kPNI practitioners",
-            "image_2": "shopify://shop_images/3afe70031e63c2a1f9cec774ae2bac0c.svg",
+            "image_2": "shopify://shop_images/marker_2.png",
             "svg_2": "",
-            "text_2": "Backed by 39 peer-reviewed studies",
+            "text_2": "Leave-on Technology",
+            "image_3": "shopify://shop_images/3afe70031e63c2a1f9cec774ae2bac0c.svg",
             "svg_3": "",
-            "text_3": "",
+            "text_3": "Backed by 39 peer-reviewed studies",
             "svg_4": "",
             "text_4": "",
             "svg_5": "",
@@ -55,8 +56,16 @@
           "settings": {}
         },
         "loop_subscriptions_loop_widget_3gqW9U": {
-          "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
-          "settings": {}
+          "type": "loop_subscriptions",
+          "settings": {
+            "welcome_kit_products": [
+              "morning-toothbrush",
+              "evening-toothbrush",
+              "whitening-charcoal-dental-floss"
+            ],
+            "welcome_kit_plans": "60-Day Supply",
+            "welcome_kit_title": "Welcome Kit · with first order"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -183,7 +192,7 @@
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "thumbnail_vertical",
+        "gallery_layout": "stacked",
         "mobile_thumbnails": "show",
         "media_position": "left",
         "image_zoom": "lightbox",

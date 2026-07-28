@@ -497,6 +497,20 @@
                     block: block,
                     product_form_id: product_form_id
                   %}
+                {%- when 'loop_subscriptions' -%}
+                  {%- comment -%} LOOP WIDGET CODE STARTS {%- endcomment -%}
+                  {%- capture template_content -%}
+                    {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
+                  {%- endcapture -%}
+
+                  {%- if template_content contains 'Rendering loop-subscriptions' -%}
+                    {%- assign template_exists = true -%}
+                  {%- endif -%}
+
+                  {%- if template_exists -%}
+                    {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
+                  {%- endif -%}
+                  {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                 {%- when 'buy_buttons' -%}
                   {%- render 'buy-buttons',
                     block: block,
@@ -2410,6 +2424,32 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "loop_subscriptions",
+      "name": "Loop Subscriptions",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product_list",
+          "id": "welcome_kit_products",
+          "label": "Welcome Kit Products",
+          "info": "Select one or more products to display in the Welcome Kit section of eligible subscription plans."
+        },
+        {
+          "type": "text",
+          "id": "welcome_kit_plans",
+          "label": "Welcome Kit Plan Names",
+          "default": "60-Day Supply",
+          "info": "Comma-separated list of selling plan names (e.g. '60-Day Supply') that include the Welcome Kit. If left blank, plans containing 'Welcome Kit' in their name or description will be auto-detected."
+        },
+        {
+          "type": "text",
+          "id": "welcome_kit_title",
+          "label": "Welcome Kit Title",
+          "default": "Welcome Kit · with first order"
         }
       ]
     }

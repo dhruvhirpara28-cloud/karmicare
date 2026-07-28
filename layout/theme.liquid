@@ -68,7 +68,12 @@
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
-
+    <script
+      type="text/javascript"
+      id="loop-subscription-script"
+      src="{{ 'loop-widget.js' | asset_url }}"
+      defer="defer"
+    ></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -388,7 +393,9 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'day-night-mode.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
-
+    <style class="loop-style">
+      {% render 'loop-widget.css.liquid' %}
+    </style>
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
