@@ -27,13 +27,20 @@
     overflow-x: auto;
     flex-wrap: nowrap;
     padding: 0.4rem 0.2rem;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    user-select: none;
   }
 
   .highlights-list::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari */
+    display: none;
+  }
+
+  .highlights-list:active,
+  .highlights-list.dragging {
+    cursor: grabbing;
   }
 
   .highlight-pill {
@@ -128,3 +135,43 @@
     {%- endfor -%}
   </div>
 </div>
+
+<script>
+  (function () {
+    const init = () => {
+      document.querySelectorAll('.highlights-list').forEach((list) => {
+        if (list.dataset.dragInit) return;
+        list.dataset.dragInit = 'true';
+        let startX,
+          scrollLeft,
+          isDown = false;
+
+        list.addEventListener('mousedown', (e) => {
+          isDown = true;
+          list.classList.add('dragging');
+          startX = e.pageX - list.offsetLeft;
+          scrollLeft = list.scrollLeft;
+        });
+
+        const stop = () => {
+          isDown = false;
+          list.classList.remove('dragging');
+        };
+        list.addEventListener('mouseleave', stop);
+        list.addEventListener('mouseup', stop);
+
+        list.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          list.scrollLeft = scrollLeft - (e.pageX - list.offsetLeft - startX) * 1.5;
+        });
+
+        list
+          .querySelectorAll('img, a, svg')
+          .forEach((el) => el.addEventListener('dragstart', (e) => e.preventDefault()));
+      });
+    };
+    init();
+    document.addEventListener('shopify:section:load', init);
+  })();
+</script>

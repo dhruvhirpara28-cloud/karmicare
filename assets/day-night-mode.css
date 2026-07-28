@@ -82,7 +82,8 @@ body svg {
   flex-shrink: 0 !important;
   visibility: visible !important;
   opacity: 1 !important;
-  overflow: hidden;   /* keep circle inside pill */
+  overflow: hidden;
+  /* keep circle inside pill */
   padding: 0 !important;
   margin: 0 !important;
   transition: background 0.35s ease, border-color 0.35s ease !important;
@@ -120,7 +121,8 @@ body svg {
   z-index: 1;
   pointer-events: none;
   transition: opacity 0.3s ease !important;
-  opacity: 1 !important;   /* visible in night mode by default */
+  opacity: 1 !important;
+  /* visible in night mode by default */
 }
 
 /* ── Moon icon (shown when it is currently day — click → go to night) ── */
@@ -135,7 +137,8 @@ body svg {
   z-index: 1;
   pointer-events: none;
   transition: opacity 0.3s ease !important;
-  opacity: 0 !important;   /* hidden in night mode by default */
+  opacity: 0 !important;
+  /* hidden in night mode by default */
 }
 
 /* ─────────────────────────────────────────────────────
@@ -151,7 +154,8 @@ body.night-mode .toggle-circle {
 }
 
 body.night-mode .toggle-sun {
-  opacity: 1 !important;   /* sun visible → "click to switch to day" */
+  opacity: 1 !important;
+  /* sun visible → "click to switch to day" */
 }
 
 body.night-mode .toggle-moon {
@@ -167,7 +171,8 @@ body.day-mode .toggle-button {
 }
 
 body.day-mode .toggle-circle {
-  transform: translateY(-50%) translateX(24px) !important;  /* slide right */
+  transform: translateY(-50%) translateX(24px) !important;
+  /* slide right */
 }
 
 body.day-mode .toggle-sun {
@@ -175,7 +180,8 @@ body.day-mode .toggle-sun {
 }
 
 body.day-mode .toggle-moon {
-  opacity: 1 !important;   /* moon visible → "click to switch to night" */
+  opacity: 1 !important;
+  /* moon visible → "click to switch to night" */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -299,8 +305,8 @@ body.night-mode .header-wrapper,
 body.night-mode header.header,
 body.night-mode .shopify-section,
 body.night-mode [class*="color-scheme-"] {
-  --color-background:  var(--kc-night-bg-r, 15), var(--kc-night-bg-g, 15), var(--kc-night-bg-b, 15);
-  --color-foreground:  var(--kc-night-text-r, 229), var(--kc-night-text-g, 229), var(--kc-night-text-b, 229);
+  --color-background: var(--kc-night-bg-r, 15), var(--kc-night-bg-g, 15), var(--kc-night-bg-b, 15);
+  --color-foreground: var(--kc-night-text-r, 229), var(--kc-night-text-g, 229), var(--kc-night-text-b, 229);
   --gradient-background: var(--kc-night-bg-color, #0f0f0f);
   background-color: rgb(var(--color-background)) !important;
   color: rgba(var(--color-foreground), 0.9) !important;
@@ -312,8 +318,8 @@ body.day-mode .header-wrapper,
 body.day-mode header.header,
 body.day-mode .shopify-section,
 body.day-mode [class*="color-scheme-"] {
-  --color-background:  var(--kc-day-bg-r, 255), var(--kc-day-bg-g, 255), var(--kc-day-bg-b, 255);
-  --color-foreground:  var(--kc-day-text-r, 18), var(--kc-day-text-g, 18), var(--kc-day-text-b, 18);
+  --color-background: var(--kc-day-bg-r, 255), var(--kc-day-bg-g, 255), var(--kc-day-bg-b, 255);
+  --color-foreground: var(--kc-day-text-r, 18), var(--kc-day-text-g, 18), var(--kc-day-text-b, 18);
   --gradient-background: var(--kc-day-bg-color, #ffffff);
   background-color: rgb(var(--color-background)) !important;
   color: rgba(var(--color-foreground), 0.9) !important;
