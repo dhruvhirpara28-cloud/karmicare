@@ -192,6 +192,20 @@ product-info {
 
 .product-form__submit {
   margin-bottom: 1rem;
+  color: var(--color-text-primary);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--tertiary-border-radius);
+  font-weight: 700;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.product-form__submit::before,
+.product-form__submit::after,
+.product-form__submit.button:not([disabled]):hover:after {
+  box-shadow: none;
 }
 
 .product-form__submit[aria-disabled='true']+.shopify-payment-button .shopify-payment-button__button[disabled],
@@ -1319,6 +1333,7 @@ a.product__text {
   --constrained-height: max(var(--constrained-min-height), calc(100vh - var(--viewport-offset)));
   margin-right: auto;
   margin-left: auto;
+  border: none;
 }
 
 .product-media-container.constrain-height.media-fit-contain {

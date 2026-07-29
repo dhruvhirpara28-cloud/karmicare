@@ -57,11 +57,50 @@ async function initLoopWidget(productId) {
         listenLoopCustomEvent();
         hideDifferentVariantSellingPlansLoop(productData);
         displayLoopWidget(productId);
+        renderKCRewards();
+        renderKCTestimonial(productId);
         observeFormChangesLoop(productData);
         hideLoopSkeletonLoader(productId);
     } catch (error) {
         logError(error);
         hideLoopSkeletonLoader(productId);
+    }
+}
+
+function renderKCRewards() {
+    const targetGrids = document.querySelectorAll('.kc-reward-grid');
+    const sourceTemplate = document.querySelector('#kc-reward-grid-template');
+    if (targetGrids.length > 0 && sourceTemplate) {
+        targetGrids.forEach(grid => {
+            grid.innerHTML = sourceTemplate.innerHTML;
+            grid.style.display = 'flex';
+        });
+    }
+}
+
+function renderKCTestimonial(productId) {
+    const existingTestimonials = document.querySelectorAll(".kc-testimonial-section");
+    if (existingTestimonials) {
+        existingTestimonials.forEach(section => section.remove());
+    }
+
+    const sourceTemplate = document.querySelector('#kc-testimonial-template');
+    if (!sourceTemplate) return;
+
+    const variant = findSelectedVariantLoop(productId);
+    const loopPropsProduct = window.loopProps?.[productId];
+    if (!loopPropsProduct || !variant) return;
+
+    const descriptionElement = document.querySelector(
+        `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
+    );
+
+    if (descriptionElement) {
+        const targetContainer = descriptionElement.querySelector("div") || descriptionElement;
+        const wrapper = document.createElement("div");
+        wrapper.className = "kc-testimonial-section";
+        wrapper.innerHTML = sourceTemplate.innerHTML;
+        targetContainer.appendChild(wrapper);
     }
 }
 
@@ -1941,6 +1980,9 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
         descriptionElement,
         descriptionValue
     );
+
+    renderKCRewards();
+    renderKCTestimonial(productId);
 
     if (typeof updateWelcomeKitUI === "function") {
         updateWelcomeKitUI(productId);
