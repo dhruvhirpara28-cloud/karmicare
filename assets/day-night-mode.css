@@ -309,7 +309,7 @@ body.night-mode [class*="color-scheme-"] {
   --color-foreground: var(--kc-night-text-r, 229), var(--kc-night-text-g, 229), var(--kc-night-text-b, 229);
   --gradient-background: var(--kc-night-bg-color, #0f0f0f);
   background-color: rgb(var(--color-background)) !important;
-  color: rgba(var(--color-foreground), 0.9) !important;
+  color: rgba(var(--color-foreground)) !important;
 }
 
 /* ── Day mode: force ALL Shopify color scheme sections to go light ── */

@@ -17,39 +17,48 @@
   .product-highlights {
     margin: 1.5rem 0;
     width: 100%;
-  }
-
-  .highlights-list {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1.2rem;
     overflow-x: auto;
-    flex-wrap: nowrap;
-    padding: 0.4rem 0.2rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 28px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 28px), transparent 100%);
     cursor: grab;
-    user-select: none;
   }
 
+  /* Safari and Chrome */
+  .product-highlights::-webkit-scrollbar,
   .highlights-list::-webkit-scrollbar {
     display: none;
   }
 
-  .highlights-list:active,
-  .highlights-list.dragging {
+  .product-highlights.dragging {
     cursor: grabbing;
+    scroll-behavior: auto;
+  }
+
+  .highlights-list {
+    cursor: grab;
+    user-select: none;
+    gap: 10px;
+    display: flex;
+    width: max-content;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 36px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 36px), transparent 100%);
   }
 
   .highlight-pill {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    padding: 0.6rem 1.6rem;
+    gap: 0.6rem;
+    padding: 4px 9px;
     border-radius: var(--pill-border-radius, 3rem);
-    font-size: var(--pill-font-size-mobile, 1.2rem);
+    font-size: var(--pill-font-size-mobile, 1.3rem);
     font-weight: 500;
     line-height: 1.2;
     white-space: nowrap;
@@ -60,16 +69,12 @@
     transition: transform var(--duration-short) ease, background-color var(--duration-short) ease;
   }
 
-  .highlight-pill:hover {
-    transform: translateY(-1px);
-  }
-
   .highlight-pill__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
@@ -91,9 +96,7 @@
 
   @media screen and (min-width: 750px) {
     .highlight-pill {
-      font-size: var(--pill-font-size-desktop, 1.4rem);
-      gap: 1rem;
-      padding: 0.8rem 1.8rem;
+      font-size: var(--pill-font-size-desktop, 1.5rem);
     }
   }
 {% endstyle %}
@@ -137,41 +140,72 @@
 </div>
 
 <script>
-  (function () {
-    const init = () => {
-      document.querySelectorAll('.highlights-list').forEach((list) => {
-        if (list.dataset.dragInit) return;
-        list.dataset.dragInit = 'true';
-        let startX,
-          scrollLeft,
-          isDown = false;
+  (() => {
+    const initSlider = (slider) => {
+      if (slider.dataset.jsInitialized) return;
+      slider.dataset.jsInitialized = 'true';
 
-        list.addEventListener('mousedown', (e) => {
-          isDown = true;
-          list.classList.add('dragging');
-          startX = e.pageX - list.offsetLeft;
-          scrollLeft = list.scrollLeft;
-        });
+      let isDown = false;
+      let startX;
+      let scrollLeft;
 
-        const stop = () => {
-          isDown = false;
-          list.classList.remove('dragging');
-        };
-        list.addEventListener('mouseleave', stop);
-        list.addEventListener('mouseup', stop);
+      // Translate vertical wheel scroll to horizontal scroll
+      slider.addEventListener(
+        'wheel',
+        (e) => {
+          if (slider.scrollWidth > slider.clientWidth) {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+              e.preventDefault();
+              slider.scrollLeft += e.deltaY;
+            }
+          }
+        },
+        { passive: false }
+      );
 
-        list.addEventListener('mousemove', (e) => {
-          if (!isDown) return;
-          e.preventDefault();
-          list.scrollLeft = scrollLeft - (e.pageX - list.offsetLeft - startX) * 1.5;
-        });
+      // Grab to scroll (mouse drag)
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('dragging');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
 
-        list
-          .querySelectorAll('img, a, svg')
-          .forEach((el) => el.addEventListener('dragstart', (e) => e.preventDefault()));
+      const endDrag = () => {
+        isDown = false;
+        slider.classList.remove('dragging');
+      };
+
+      slider.addEventListener('mouseleave', endDrag);
+      slider.addEventListener('mouseup', endDrag);
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5; // Drag speed multiplier
+        slider.scrollLeft = scrollLeft - walk;
       });
     };
-    init();
-    document.addEventListener('shopify:section:load', init);
+
+    const setupLazyInit = () => {
+      const sliders = document.querySelectorAll('.product-highlights');
+      sliders.forEach((slider) => {
+        const triggerInit = () => {
+          initSlider(slider);
+          slider.removeEventListener('pointerenter', triggerInit);
+          slider.removeEventListener('touchstart', triggerInit);
+        };
+        slider.addEventListener('pointerenter', triggerInit, { passive: true });
+        slider.addEventListener('touchstart', triggerInit, { passive: true });
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupLazyInit);
+    } else {
+      setupLazyInit();
+    }
+    document.addEventListener('shopify:section:load', setupLazyInit);
   })();
 </script>
