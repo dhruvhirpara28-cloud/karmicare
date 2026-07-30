@@ -49,138 +49,173 @@ body svg {
 
 /* Outer wrapper — always visible */
 .menu-toggle-btn {
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
-  visibility: visible !important;
-  opacity: 1 !important;
+  visibility: visible;
+  opacity: 1;
   position: relative;
   z-index: 100;
 }
 
 /* Flex row that holds the pill */
 .toggle-wrapper {
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
-  visibility: visible !important;
-  opacity: 1 !important;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* ── The pill itself ── */
 .toggle-button {
-  position: relative !important;
-  display: flex !important;
+  position: relative;
+  display: flex;
   align-items: center;
-  width: 52px !important;
-  height: 28px !important;
-  border-radius: 14px !important;
-  cursor: pointer !important;
-  background: rgba(120, 120, 140, 0.35) !important;
-  border: 1.5px solid rgba(180, 180, 200, 0.4) !important;
-  box-sizing: border-box !important;
-  flex-shrink: 0 !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  cursor: pointer;
+  background: rgba(120, 120, 140, 0.35);
+  border: 1.5px solid rgba(180, 180, 200, 0.4);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  visibility: visible;
+  opacity: 1;
   overflow: hidden;
   /* keep circle inside pill */
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: background 0.35s ease, border-color 0.35s ease !important;
+  padding: 0;
+  margin: 0;
+  transition: background 0.35s ease, border-color 0.35s ease;
   user-select: none;
   -webkit-user-select: none;
 }
 
 /* ── Sliding circle ── */
 .toggle-circle {
-  position: absolute !important;
-  top: 50% !important;
-  left: 4px !important;
-  transform: translateY(-50%) translateX(0) !important;
-  width: 20px !important;
-  height: 20px !important;
-  border-radius: 50% !important;
-  background: #ffffff !important;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.30) !important;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%) translateX(0);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.30);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
   pointer-events: none;
-  visibility: visible !important;
-  opacity: 1 !important;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* ── Sun icon (shown when it is currently night — click → go to day) ── */
 .toggle-sun {
-  position: absolute !important;
-  right: 6px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 13px !important;
-  height: 13px !important;
-  object-fit: contain !important;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
   z-index: 1;
   pointer-events: none;
-  transition: opacity 0.3s ease !important;
-  opacity: 1 !important;
+  transition: opacity 0.3s ease;
+  opacity: 1;
   /* visible in night mode by default */
 }
 
 /* ── Moon icon (shown when it is currently day — click → go to night) ── */
 .toggle-moon {
-  position: absolute !important;
-  left: 6px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 13px !important;
-  height: 13px !important;
-  object-fit: contain !important;
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
   z-index: 1;
   pointer-events: none;
-  transition: opacity 0.3s ease !important;
-  opacity: 0 !important;
+  transition: opacity 0.3s ease;
+  opacity: 0;
   /* hidden in night mode by default */
 }
 
 /* ─────────────────────────────────────────────────────
    NIGHT MODE toggle state (circle left, sun visible)
    ───────────────────────────────────────────────────── */
+:root {
+  --accent: #7fb9ff;
+  --accent-deep: #5a83b5;
+  --grot: var(--sans);
+  --mono: var(--sans);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --bg: #fffbf6;
+  --bg-rgb: 255 251 246;
+  --surface: #ffffff;
+  --surface-2: #f3eee5;
+  --surface-3: #efece8;
+  --text: #191f38;
+  --body: rgba(25, 31, 56, 0.78);
+  --muted: rgba(25, 31, 56, 0.70);
+  --whisper: rgba(25, 31, 56, 0.32);
+  --hairline: rgba(25, 31, 56, 0.12);
+  --border: rgba(25, 31, 56, 0.10);
+  --nav-bg: rgba(255, 251, 246, 0.85);
+}
+
+.night-mode {
+  --bg: #0d1124;
+  --bg-rgb: 13 17 36;
+  --surface: #141934;
+  --surface-2: #1d2548;
+  --surface-3: #2c3a60;
+  --text: #fffbf6;
+  --body: rgba(255, 251, 246, 0.82);
+  --muted: rgba(255, 251, 246, 0.58);
+  --whisper: rgba(255, 251, 246, 0.32);
+  --hairline: rgba(255, 251, 246, 0.14);
+  --border: rgba(255, 251, 246, 0.12);
+  --nav-bg: rgba(13, 17, 36, 0.85);
+}
+
 body.night-mode .toggle-button {
-  background: rgba(30, 30, 50, 0.6) !important;
-  border-color: rgba(100, 100, 150, 0.5) !important;
+  background: rgba(30, 30, 50, 0.6);
+  border-color: rgba(100, 100, 150, 0.5);
 }
 
 body.night-mode .toggle-circle {
-  transform: translateY(-50%) translateX(0px) !important;
+  transform: translateY(-50%) translateX(0px);
 }
 
 body.night-mode .toggle-sun {
-  opacity: 1 !important;
+  opacity: 1;
   /* sun visible → "click to switch to day" */
 }
 
 body.night-mode .toggle-moon {
-  opacity: 0 !important;
+  opacity: 0;
 }
 
 /* ─────────────────────────────────────────────────────
    DAY MODE toggle state (circle right, moon visible)
    ───────────────────────────────────────────────────── */
 body.day-mode .toggle-button {
-  background: rgba(210, 220, 255, 0.5) !important;
-  border-color: rgba(120, 140, 220, 0.4) !important;
+  background: rgba(210, 220, 255, 0.5);
+  border-color: rgba(120, 140, 220, 0.4);
 }
 
 body.day-mode .toggle-circle {
-  transform: translateY(-50%) translateX(24px) !important;
+  transform: translateY(-50%) translateX(24px);
   /* slide right */
 }
 
 body.day-mode .toggle-sun {
-  opacity: 0 !important;
+  opacity: 0;
 }
 
 body.day-mode .toggle-moon {
-  opacity: 1 !important;
+  opacity: 1;
   /* moon visible → "click to switch to night" */
 }
 
@@ -189,12 +224,12 @@ body.day-mode .toggle-moon {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 body.day-mode {
-  background-color: var(--kc-day-bg-color, #ffffff) !important;
-  color: var(--kc-day-text-color, #121212) !important;
+  background-color: var(--kc-day-bg-color, #ffffff);
+  color: var(--kc-day-text-color, #121212);
 }
 
 body.day-mode.kc-has-day-image {
-  background-image: var(--kc-day-bg-image) !important;
+  background-image: var(--kc-day-bg-image);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -208,7 +243,7 @@ body.day-mode h3,
 body.day-mode h4,
 body.day-mode h5,
 body.day-mode h6 {
-  color: var(--kc-day-heading-color, #121212) !important;
+  color: var(--kc-day-heading-color, #121212);
 }
 
 /* Day navigation areas */
@@ -218,7 +253,7 @@ body.day-mode .navbar-wrapper,
 body.day-mode .nav-menu-wrapper,
 body.day-mode .sidemenu-bar-inner,
 body.day-mode .kc_nav-menu {
-  background-color: var(--kc-day-bg-color, #ffffff) !important;
+  background-color: var(--kc-day-bg-color, #ffffff);
 }
 
 /* Day text elements */
@@ -230,12 +265,12 @@ body.day-mode .copyright-text,
 body.day-mode .copyright-link,
 body.day-mode .top-cart-title,
 body.day-mode .cart-count {
-  color: var(--kc-day-text-color, #121212) !important;
+  color: var(--kc-day-text-color, #121212);
 }
 
 body.day-mode .outline-button {
-  border-color: var(--kc-day-text-color, #121212) !important;
-  color: var(--kc-day-text-color, #121212) !important;
+  border-color: var(--kc-day-text-color, #121212);
+  color: var(--kc-day-text-color, #121212);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -243,12 +278,12 @@ body.day-mode .outline-button {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 body.night-mode {
-  background-color: var(--kc-night-bg-color, #0f0f0f) !important;
-  color: var(--kc-night-text-color, #e5e5e5) !important;
+  background-color: var(--kc-night-bg-color, #0f0f0f);
+  color: var(--kc-night-text-color, #e5e5e5);
 }
 
 body.night-mode.kc-has-night-image {
-  background-image: var(--kc-night-bg-image) !important;
+  background-image: var(--kc-night-bg-image);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -262,7 +297,7 @@ body.night-mode h3,
 body.night-mode h4,
 body.night-mode h5,
 body.night-mode h6 {
-  color: var(--kc-night-heading-color, #ffffff) !important;
+  color: var(--kc-night-heading-color, #ffffff);
 }
 
 /* Night navigation areas */
@@ -272,7 +307,7 @@ body.night-mode .navbar-wrapper,
 body.night-mode .nav-menu-wrapper,
 body.night-mode .sidemenu-bar-inner,
 body.night-mode .kc_nav-menu {
-  background-color: var(--kc-night-bg-color, #0f0f0f) !important;
+  background-color: var(--kc-night-bg-color, #0f0f0f);
 }
 
 /* Night text elements */
@@ -284,12 +319,12 @@ body.night-mode .copyright-text,
 body.night-mode .copyright-link,
 body.night-mode .top-cart-title,
 body.night-mode .cart-count {
-  color: var(--kc-night-text-color, #e5e5e5) !important;
+  color: var(--kc-night-text-color, #e5e5e5);
 }
 
 body.night-mode .outline-button {
-  border-color: var(--kc-night-text-color, #e5e5e5) !important;
-  color: var(--kc-night-text-color, #e5e5e5) !important;
+  border-color: var(--kc-night-text-color, #e5e5e5);
+  color: var(--kc-night-text-color, #e5e5e5);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -308,8 +343,8 @@ body.night-mode [class*="color-scheme-"] {
   --color-background: var(--kc-night-bg-r, 15), var(--kc-night-bg-g, 15), var(--kc-night-bg-b, 15);
   --color-foreground: var(--kc-night-text-r, 229), var(--kc-night-text-g, 229), var(--kc-night-text-b, 229);
   --gradient-background: var(--kc-night-bg-color, #0f0f0f);
-  background-color: rgb(var(--color-background)) !important;
-  color: rgba(var(--color-foreground)) !important;
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground));
 }
 
 /* ── Day mode: force ALL Shopify color scheme sections to go light ── */
@@ -321,8 +356,8 @@ body.day-mode [class*="color-scheme-"] {
   --color-background: var(--kc-day-bg-r, 255), var(--kc-day-bg-g, 255), var(--kc-day-bg-b, 255);
   --color-foreground: var(--kc-day-text-r, 18), var(--kc-day-text-g, 18), var(--kc-day-text-b, 18);
   --gradient-background: var(--kc-day-bg-color, #ffffff);
-  background-color: rgb(var(--color-background)) !important;
-  color: rgba(var(--color-foreground), 0.9) !important;
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.9);
 }
 
 /* ── Ensure nav links, headings, buttons within sections also follow mode ── */
@@ -332,7 +367,7 @@ body.night-mode [class*="color-scheme-"] .h2,
 body.night-mode [class*="color-scheme-"] .h3,
 body.night-mode [class*="color-scheme-"] nav a,
 body.night-mode header a {
-  color: var(--kc-night-text-color, #e5e5e5) !important;
+  color: var(--kc-night-text-color, #e5e5e5);
 }
 
 body.day-mode [class*="color-scheme-"] a,
@@ -341,35 +376,35 @@ body.day-mode [class*="color-scheme-"] .h2,
 body.day-mode [class*="color-scheme-"] .h3,
 body.day-mode [class*="color-scheme-"] nav a,
 body.day-mode header a {
-  color: var(--kc-day-text-color, #121212) !important;
+  color: var(--kc-day-text-color, #121212);
 }
 
 /* ── Logo SVG / text follows mode ── */
 body.night-mode .header__heading-link,
 body.night-mode .header__heading-link svg,
 body.night-mode .header__heading-link span {
-  color: var(--kc-night-text-color, #e5e5e5) !important;
-  fill: var(--kc-night-text-color, #e5e5e5) !important;
+  color: var(--kc-night-text-color, #e5e5e5);
+  fill: var(--kc-night-text-color, #e5e5e5);
 }
 
 body.day-mode .header__heading-link,
 body.day-mode .header__heading-link svg,
 body.day-mode .header__heading-link span {
-  color: var(--kc-day-text-color, #121212) !important;
-  fill: var(--kc-day-text-color, #121212) !important;
+  color: var(--kc-day-text-color, #121212);
+  fill: var(--kc-day-text-color, #121212);
 }
 
 /* ── Header icons (cart, search, account) ── */
 body.night-mode .header__icon,
 body.night-mode .header__icon svg,
 body.night-mode .header__icon path {
-  color: var(--kc-night-text-color, #e5e5e5) !important;
-  fill: currentColor !important;
+  color: var(--kc-night-text-color, #e5e5e5);
+  fill: currentColor;
 }
 
 body.day-mode .header__icon,
 body.day-mode .header__icon svg,
 body.day-mode .header__icon path {
-  color: var(--kc-day-text-color, #121212) !important;
-  fill: currentColor !important;
+  color: var(--kc-day-text-color, #121212);
+  fill: currentColor;
 }
