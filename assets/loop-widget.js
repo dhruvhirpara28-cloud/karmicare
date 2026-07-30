@@ -46,10 +46,13 @@ async function initLoopWidget(productId) {
             product: productData,
         };
         generateLoopWidgetVariantSPMaps(productId);
-        await fetchStoreJson(productId);
-        await setLoopUIProperties(Shopify.shop);
-        await processLoopBundleProduct(productId);
-        await getLoopBundleSpgs(productId);
+        // Load store configurations and UI properties in parallel to speed up initial load
+        await Promise.all([
+            fetchStoreJson(productId),
+            setLoopUIProperties(Shopify.shop)
+        ]);
+
+        // Initialize and display widget UI immediately once settings are loaded
         showSellingPlanFieldsetLoop(productId);
         showLoopPurchaseOptionsLabel(productId);
         initializeLoopUI(productData);
@@ -61,6 +64,12 @@ async function initLoopWidget(productId) {
         renderKCTestimonial(productId);
         observeFormChangesLoop(productData);
         hideLoopSkeletonLoader(productId);
+
+        // Process bundle settings and exclusions in the background without blocking widget display
+        Promise.all([
+            processLoopBundleProduct(productId),
+            getLoopBundleSpgs(productId)
+        ]).catch(error => logError(error));
     } catch (error) {
         logError(error);
         hideLoopSkeletonLoader(productId);
@@ -79,28 +88,74 @@ function renderKCRewards() {
 }
 
 function renderKCTestimonial(productId) {
-    const existingTestimonials = document.querySelectorAll(".kc-testimonial-section");
-    if (existingTestimonials) {
-        existingTestimonials.forEach(section => section.remove());
+    // Remove only dynamically created testimonial sections and bottom labels
+    const dynamicTestimonials = document.querySelectorAll(".kc-testimonial-section[data-dynamic='true']");
+    if (dynamicTestimonials) {
+        dynamicTestimonials.forEach(section => section.remove());
+    }
+    const dynamicBottomLabels = document.querySelectorAll(".kc-bottom_label[data-dynamic='true']");
+    if (dynamicBottomLabels) {
+        dynamicBottomLabels.forEach(label => label.remove());
     }
 
-    const sourceTemplate = document.querySelector('#kc-testimonial-template');
+    const sourceTemplate = Array.from(document.querySelectorAll('.kc-testimonial-wrapper')).find(el => !el.closest('.kc-testimonial-section'));
     if (!sourceTemplate) return;
+
+    const buttonTemplate = document.querySelector('#kc-testimonial-button-template');
 
     const variant = findSelectedVariantLoop(productId);
     const loopPropsProduct = window.loopProps?.[productId];
     if (!loopPropsProduct || !variant) return;
 
-    const descriptionElement = document.querySelector(
+    const activeDescription = document.querySelector(
         `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
     );
 
-    if (descriptionElement) {
-        const targetContainer = descriptionElement.querySelector("div") || descriptionElement;
-        const wrapper = document.createElement("div");
-        wrapper.className = "kc-testimonial-section";
-        wrapper.innerHTML = sourceTemplate.innerHTML;
-        targetContainer.appendChild(wrapper);
+    // Find any static/manually-placed testimonial sections and bottom labels on the page
+    const staticTestimonials = Array.from(document.querySelectorAll(".kc-testimonial-section")).filter(el => {
+        const isDynamic = el.getAttribute('data-dynamic') === 'true';
+        const isTemplateContainer = el.contains(sourceTemplate);
+        if (isDynamic || isTemplateContainer) return false;
+
+        // If it is inside some selling plan description, it must be the active one
+        const parentDesc = el.closest('[id^="loop-selling-plan-description-"]');
+        if (parentDesc && parentDesc !== activeDescription) {
+            return false;
+        }
+        return true;
+    });
+
+    const staticBottomLabels = Array.from(document.querySelectorAll(".kc-bottom_label")).filter(el => {
+        const isDynamic = el.getAttribute('data-dynamic') === 'true';
+        const isTemplateContainer = buttonTemplate && el.contains(buttonTemplate);
+        if (isDynamic || isTemplateContainer) return false;
+
+        // If it is inside some selling plan description, it must be the active one
+        const parentDesc = el.closest('[id^="loop-selling-plan-description-"]');
+        if (parentDesc && parentDesc !== activeDescription) {
+            return false;
+        }
+        return true;
+    });
+
+    // Handle Testimonial Content
+    if (staticTestimonials.length > 0) {
+        staticTestimonials.forEach(section => {
+            section.innerHTML = sourceTemplate.outerHTML;
+            const wrapper = section.querySelector('.kc-testimonial-wrapper');
+            if (wrapper) {
+                wrapper.removeAttribute('style');
+                wrapper.classList.remove('loop-hidden');
+            }
+        });
+    }
+
+    // Handle Testimonial Button Content
+    if (buttonTemplate && staticBottomLabels.length > 0) {
+        staticBottomLabels.forEach(label => {
+            label.innerHTML = buttonTemplate.innerHTML;
+            label.style.display = ''; // Ensure it is shown
+        });
     }
 }
 
@@ -354,6 +409,15 @@ const fetchWithCacheControl = async (url, key) => {
 
 async function fetchStoreJson(productId) {
     try {
+        const cacheKey = `loop_store_json_${myShopifyDomain}`;
+        try {
+            const cached = sessionStorage.getItem(cacheKey);
+            if (cached) {
+                window.loopProps[productId].storeJson = JSON.parse(cached);
+                return;
+            }
+        } catch (e) { }
+
         const storesRes = await fetchWithCacheControl(
             `${baseUrl}/store.json`,
             "store"
@@ -368,6 +432,9 @@ async function fetchStoreJson(productId) {
         }
 
         window.loopProps[productId].storeJson = { ...storeJson };
+        try {
+            sessionStorage.setItem(cacheKey, JSON.stringify(storeJson));
+        } catch (e) { }
     } catch (error) {
         window.loopProps[productId].storeJson = null;
     }
@@ -381,10 +448,24 @@ async function setLoopUIProperties(shopifyDomain) {
 }
 
 async function fetchLoopUIProperties(shopifyDomain) {
+    const cacheKey = `loop_ui_props_${shopifyDomain}`;
+    try {
+        const cached = sessionStorage.getItem(cacheKey);
+        if (cached) {
+            return JSON.parse(cached);
+        }
+    } catch (e) { }
+
     log(`fetch loop subscription UI props: ${shopifyDomain}`);
     const endpoint = `https://d217z8zw4dqir.cloudfront.net/${shopifyDomain}.json`;
     const response = await fetch(endpoint);
-    return (await response.json()) ?? {};
+    const data = (await response.json()) ?? {};
+
+    try {
+        sessionStorage.setItem(cacheKey, JSON.stringify(data));
+    } catch (e) { }
+
+    return data;
 }
 
 // for showing fieldset where selling plans are present
