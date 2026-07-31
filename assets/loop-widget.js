@@ -80,8 +80,9 @@ function renderKCRewards() {
     const targetGrids = document.querySelectorAll('.kc-reward-grid');
     const sourceTemplate = document.querySelector('#kc-reward-grid-template');
     if (targetGrids.length > 0 && sourceTemplate) {
+        const translatedHTML = translateDescriptionEuroPrices(sourceTemplate.innerHTML);
         targetGrids.forEach(grid => {
-            grid.innerHTML = sourceTemplate.innerHTML;
+            grid.innerHTML = translatedHTML;
             grid.style.display = 'flex';
         });
     }
@@ -2216,13 +2217,37 @@ function updateWelcomeKitUI(productId) {
     }
 }
 
+function translateDescriptionEuroPrices(html) {
+    if (!html) return html;
+    try {
+        const rate = parseFloat(window.Shopify?.currency?.rate || 1.0);
+        const regex = /(?:€|&euro;)\s*([0-9]+(?:\.[0-9]+)?)/g;
+
+        return html.replace(regex, (match, p1) => {
+            const eurVal = parseFloat(p1);
+            const activeVal = eurVal * rate;
+            const cents = Math.round(activeVal * 100);
+            let formatted = loopFormatMoney(cents, true);
+
+            if (!p1.includes('.')) {
+                formatted = formatted.replace(/[\.,]00$/, '');
+            }
+            return formatted;
+        });
+    } catch (e) {
+        console.error("Error translating description prices: ", e);
+        return html;
+    }
+}
+
 function updateLoopSellingPlanDescriptionElement(
     descriptionElement,
     descriptionValue
 ) {
     if (!descriptionElement) return;
 
-    descriptionElement.innerHTML = descriptionValue;
+    const translatedDescriptionValue = translateDescriptionEuroPrices(descriptionValue);
+    descriptionElement.innerHTML = translatedDescriptionValue;
     if (!descriptionValue) {
         descriptionElement.classList.add("loop-display-none");
     } else {
@@ -2256,12 +2281,11 @@ function determinePriceLoop(productId, variant) {
 }
 
 function updatePricesInUILoop(price) {
-    return; //uncomment this to enable parent price update in PDP
     loopPriceSelectors.forEach((selector) => {
-        const priceElement = document.querySelector(selector);
-        if (priceElement) {
+        const priceElements = document.querySelectorAll(selector);
+        priceElements.forEach((priceElement) => {
             priceElement.innerHTML = `${price}`;
-        }
+        });
     });
 }
 

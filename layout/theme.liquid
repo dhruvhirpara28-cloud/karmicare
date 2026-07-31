@@ -532,17 +532,5 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-
-
-<script>
-  const loopStyleObserver = new MutationObserver(() => {
-    const target = document.querySelector('.loop-one-time-purchase-option-radio');
-    if (target) {
-      target.style.cssText = "width: 2rem !important; height: 1.2rem !important;";
-    }
-  });
-  loopStyleObserver.observe(document.body, { childList: true, subtree: true });
-</script>
-  
-</body>
+  </body>
 </html>
