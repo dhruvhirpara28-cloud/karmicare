@@ -876,7 +876,7 @@ function addExtraLoopStyles() {
             selling_plan_group_selected: [".loop-selected-selling-plan-group"],
             selling_plan_group_radio: [
                 ".loop-subscription-group-radio",
-                // ".loop-one-time-purchase-option-radio",
+                ".loop-one-time-purchase-option-radio",
             ],
         };
 
