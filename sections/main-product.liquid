@@ -117,6 +117,16 @@
                       price_class: 'price--large'
                     -%}
                   </div>
+                  <div id="kc-pricing-summary-{{ section.id }}" class="kc-pricing-summary" style="display:none;" data-section-id="{{ section.id }}">
+                    <div class="kc-pricing-summary__total-row">
+                      <span class="kc-pricing-summary__label">Total today</span>
+                      <span class="kc-pricing-summary__price"></span>
+                    </div>
+                    <div class="kc-pricing-summary__sub-row">
+                      <span class="kc-pricing-summary__per-brushing"></span>
+                      <span class="kc-pricing-summary__interval"></span>
+                    </div>
+                  </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
