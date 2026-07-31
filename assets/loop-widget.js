@@ -2268,6 +2268,124 @@ function updatePriceInParentElementsLoop({ productId }) {
 
     loopPriceSelectors.push(`.loop-product-${productId}`);
     updatePricesInUILoop(price);
+
+    // Update and toggle the kc-pricing-summary block
+    updateKcPricingSummary(productId, variant);
+}
+
+function updateKcPricingSummary(productId, variant) {
+    const isOneTime = determineOneTimeOrderLoop(productId);
+
+    // Find the summary block - it uses section id embedded in the id attribute
+    const summaryEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
+    const priceBlock = document.querySelector('[id^="price-"]');
+    const taxBlock = document.querySelector('.product__tax');
+    const installmentBlock = document.querySelector('.installment');
+
+    if (!summaryEl) return;
+
+    if (isOneTime) {
+        // One-time purchase: show default price block, hide summary
+        summaryEl.style.display = 'none';
+        if (priceBlock) priceBlock.style.display = '';
+        if (taxBlock) taxBlock.style.display = '';
+        if (installmentBlock) installmentBlock.style.display = '';
+        return;
+    }
+
+    // Subscription: hide default price block, show summary
+    if (priceBlock) priceBlock.style.display = 'none';
+    if (taxBlock) taxBlock.style.display = 'none';
+    if (installmentBlock) installmentBlock.style.display = 'none';
+
+    const sellingPlanAllocation = window?.loopProps[productId]?.sellingPlanAllocation;
+    const sellingPlanPrice = sellingPlanAllocation?.price;
+    if (!sellingPlanPrice || !variant) return;
+
+    // Format total price
+    const totalFormatted = loopFormatMoney(sellingPlanPrice, true);
+
+    // Build billing interval label (e.g. "billed every 8 weeks", "billed yearly")
+    let intervalLabel = '';
+    let perBrushingLabel = '';
+    try {
+        // Source 1: sellingPlanAllocation.selling_plan.billing_policy (from variant JSON)
+        // Source 2: sellingPlanDefination.billing_policy (from selling_plan_groups JSON)
+        // Source 3: derive from plan group name string
+        const billingPolicyA = sellingPlanAllocation?.selling_plan?.billing_policy;
+        const billingPolicyB = window.loopProps[productId]?.sellingPlanDefination?.billing_policy;
+        const billingPolicy = billingPolicyA || billingPolicyB;
+
+        let interval = '';
+        let intervalCount = 1;
+
+        if (billingPolicy) {
+            interval = (billingPolicy.interval || '').toLowerCase();
+            intervalCount = Number(billingPolicy.interval_count) || 1;
+        } else {
+            // Source 3: derive from the plan group name (e.g. "Year Supply", "60-Day Supply")
+            const planName = (window.loopProps[productId]?.sellingPlanGroupName || '').toLowerCase();
+            if (planName.includes('year')) {
+                interval = 'year'; intervalCount = 1;
+            } else {
+                // Parse "60-day" or "8-week" patterns
+                const dayMatch = planName.match(/(\d+)[- ]?day/);
+                const weekMatch = planName.match(/(\d+)[- ]?week/);
+                const monthMatch = planName.match(/(\d+)[- ]?month/);
+                if (dayMatch) { interval = 'day'; intervalCount = parseInt(dayMatch[1]); }
+                else if (weekMatch) { interval = 'week'; intervalCount = parseInt(weekMatch[1]); }
+                else if (monthMatch) { interval = 'month'; intervalCount = parseInt(monthMatch[1]); }
+            }
+        }
+
+        if (interval) {
+            const intervalMap = { day: 'day', week: 'week', month: 'month', year: 'year' };
+            const base = intervalMap[interval] || interval;
+
+            // Interval label on right: "/ year", "/ 8 weeks", etc.
+            if (intervalCount === 1) {
+                intervalLabel = `/ ${base}`;
+            } else {
+                intervalLabel = `/ ${intervalCount} ${base}s`;
+            }
+
+            // Per-brushing calculation (2 brushings/day)
+            let totalDays = 0;
+            if (interval === 'day') totalDays = intervalCount;
+            else if (interval === 'week') totalDays = intervalCount * 7;
+            else if (interval === 'month') totalDays = intervalCount * 30;
+            else if (interval === 'year') totalDays = intervalCount * 365;
+
+            if (totalDays > 0) {
+                const totalBrushings = totalDays * 2;
+                const perBrushingCents = Math.round(sellingPlanPrice / totalBrushings);
+                const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
+
+                let billedLabel = '';
+                if (intervalCount === 1 && interval === 'year') {
+                    billedLabel = 'billed yearly';
+                } else if (intervalCount === 1) {
+                    billedLabel = `billed every ${base}`;
+                } else {
+                    billedLabel = `billed every ${intervalCount} ${base}s`;
+                }
+                perBrushingLabel = `${perBrushingFormatted} per brushing, ${billedLabel}`;
+            }
+        }
+    } catch (e) {
+        console.warn('kc-pricing-summary: could not compute per-brushing', e);
+    }
+
+    // Populate the summary element fields
+    const priceEl = summaryEl.querySelector('.kc-pricing-summary__price');
+    const perBrushingEl = summaryEl.querySelector('.kc-pricing-summary__per-brushing');
+    const intervalEl = summaryEl.querySelector('.kc-pricing-summary__interval');
+
+    if (priceEl) priceEl.textContent = totalFormatted;
+    if (perBrushingEl) perBrushingEl.textContent = perBrushingLabel;
+    if (intervalEl) intervalEl.textContent = intervalLabel;
+
+    summaryEl.style.display = 'block';
 }
 
 function determinePriceLoop(productId, variant) {

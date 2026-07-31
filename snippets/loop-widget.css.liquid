@@ -622,7 +622,55 @@
     }
 }
 
+/* KC Pricing Summary Box */
+.kc-pricing-summary {
+    background: var(--color-loop-pricing-summary-bg, #0d1b2e);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.kc-pricing-summary__total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+}
+
+.kc-pricing-summary__label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-loop-pricing-summary-text, #ffffff);
+    letter-spacing: -0.01em;
+}
+
+.kc-pricing-summary__price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-loop-pricing-summary-text, #ffffff);
+    letter-spacing: -0.02em;
+}
+
+.kc-pricing-summary__sub-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kc-pricing-summary__per-brushing,
+.kc-pricing-summary__interval {
+    font-size: 12px;
+    color: var(--color-loop-pricing-summary-muted, rgba(255,255,255,0.55));
+    letter-spacing: 0;
+}
+
+.night-mode .kc-pricing-summary {
+    background: #0d1b2e;
+}
+
 /* KC Tooltip */
+
 .kc-return_care-tooltip {
     display: inline-flex;
     flex-direction: column;
