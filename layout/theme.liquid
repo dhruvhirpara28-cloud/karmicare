@@ -533,15 +533,16 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+
 <script>
-  const observer = new MutationObserver(((mutations) => {
-    const radio = document.querySelector('.loop-one-time-purchase-option-radio');
-    if (radio) {
-      radio.style.setProperty('width', 'auto', 'important');
-      // observer.disconnect(); // Uncomment if you only need to run this once
+  const loopStyleObserver = new MutationObserver(() => {
+    const target = document.querySelector('.loop-one-time-purchase-option-radio');
+    if (target) {
+      target.style.cssText = "width: 1.2rem !important; height: 1.2rem !important;";
     }
-  }));
-  observer.observe(document.body, { childList: true, subtree: true });
-</script> 
+  });
+  loopStyleObserver.observe(document.body, { childList: true, subtree: true });
+</script>
+  
 </body>
 </html>
