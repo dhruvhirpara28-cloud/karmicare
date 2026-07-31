@@ -51,10 +51,6 @@
             "text_6": ""
           }
         },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -82,8 +78,7 @@
             "testimonial_stars": 5,
             "testimonial_text": "Na mijn laatste bezoek aan de tandarts voor het eerst in 5 jaar geen gaatjes!",
             "show_testimonial_button": true,
-            "testimonial_button_text": "2× RETURN ON CARE",
-            "testimonial_button_link": ""
+            "testimonial_button_text": "2× RETURN ON CARE"
           }
         },
         "loop_subscriptions_loop_widget_3gqW9U": {
@@ -93,6 +88,11 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
           "settings": {}
         },
         "buy_buttons": {
@@ -190,11 +190,11 @@
         "title",
         "description",
         "highlights_slider_9wAjAb",
-        "price",
         "variant_picker",
         "loop_subscriptions_WEk4XJ",
         "loop_subscriptions_loop_widget_3gqW9U",
         "quantity_selector",
+        "price",
         "buy_buttons",
         "icon_with_text_xhaDGB",
         "info_card_XMyag4",
