@@ -781,6 +781,134 @@
       </script>
     </div>
   </product-component>
+  <div class="kc-bd" data-kc-theme="night">
+    <div class="kc-bd-outro"></div>
+    <div class="kc-bd-stage">
+      <div class="kc-bd-grain"></div>
+    </div>
+  </div>
+  <style>
+    .product-single-section-row { position: relative; isolation: isolate; }
+    html:has(.kc-bd) { overflow-x: clip; max-width: 100%; }
+
+    .kc-bd {
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 100vw;
+      transform: translateX(-50%);
+      z-index: -1;
+      pointer-events: none;
+      overflow: clip;
+    }
+
+    .kc-bd-outro {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 80vh;
+      z-index: 6;
+      pointer-events: none;
+      background: linear-gradient(to bottom,
+        rgba(13,17,36,0) 0%, rgba(13,17,36,0.18) 34%, rgba(13,17,36,0.55) 60%,
+        rgba(13,17,36,0.86) 80%, rgba(13,17,36,0.98) 93%, rgba(13,17,36,1) 100%);
+    }
+
+    .kc-bd-stage {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .kc-bd[data-kc-theme="night"] .kc-bd-stage {
+      background:
+        linear-gradient(to right,
+          rgba(25,31,56,0) 0%, rgba(25,31,56,0) 36%, rgba(25,31,56,0.26) 50%,
+          rgba(25,31,56,0.72) 60%, rgba(25,31,56,0.93) 70%, rgba(25,31,56,0.98) 82%,
+          rgba(25,31,56,0.99) 100%),
+        radial-gradient(ellipse 48% 34% at 32% 52%, rgba(126,169,232,0.30) 0%, rgba(126,169,232,0.12) 40%, rgba(126,169,232,0) 68%),
+        radial-gradient(ellipse 42% 30% at 28% 34%, rgba(190,214,255,0.18) 0%, rgba(190,214,255,0.06) 44%, rgba(190,214,255,0) 70%),
+        radial-gradient(ellipse 64% 28% at 40% 76%, rgba(196,220,255,0.22) 0%, rgba(196,220,255,0) 72%),
+        linear-gradient(to bottom,
+          #020308 0%, #101321 18%, #191f38 36%, #212a49 54%, #313e5c 63%,
+          #4a5977 72%, #6e7d97 80%, #93a1b8 87%, #b7c4d8 93%, #d3dbe7 97%, #f0f3f7 100%);
+    }
+
+    .kc-bd-stage::before {
+      content: "";
+      position: absolute;
+      inset: -12%;
+      z-index: 1;
+      pointer-events: none;
+      filter: blur(12px);
+      animation: kc-breathe 8s ease-in-out infinite alternate;
+    }
+
+    .kc-bd[data-kc-theme="night"] .kc-bd-stage::before {
+      background:
+        radial-gradient(ellipse 128% 54% at 46% 97%, rgba(232,243,255,0.95) 0%, rgba(198,220,248,0.66) 22%, rgba(96,124,178,0.34) 46%, rgba(0,0,0,0) 74%),
+        radial-gradient(ellipse 92% 32% at 36% 74%, rgba(135,168,222,0.32) 0%, rgba(64,90,150,0.16) 46%, rgba(0,0,0,0) 76%);
+    }
+
+    .kc-bd-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .kc-bd[data-kc-theme="night"] .kc-bd-stage::after {
+      background: radial-gradient(ellipse 88% 92% at 50% 88%,
+        rgba(0,0,0,0) 42%, rgba(0,0,0,0.20) 78%, rgba(0,0,0,0.46) 100%);
+    }
+
+    .kc-bd-grain {
+      position: absolute;
+      inset: -50%;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.30;
+      mix-blend-mode: overlay;
+      background-repeat: repeat;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+      animation: kc-grain-drift 7s steps(6) infinite;
+    }
+
+    @keyframes kc-breathe { from { opacity: 0.86; } to { opacity: 1; } }
+    @keyframes kc-grain-drift {
+      0% { transform: translate3d(0,0,0); }
+      16% { transform: translate3d(-6px,4px,0); }
+      33% { transform: translate3d(5px,-7px,0); }
+      50% { transform: translate3d(-8px,-3px,0); }
+      66% { transform: translate3d(7px,6px,0); }
+      83% { transform: translate3d(-4px,8px,0); }
+      100% { transform: translate3d(0,0,0); }
+    }
+
+    .product-container { background: transparent; position: relative; z-index: 1; }
+    body.night-mode .product-information,
+    body.night-mode .product-title { color: #fffbf6; }
+
+    @media (max-width: 1080px) {
+      .kc-bd[data-kc-theme="night"] .kc-bd-stage {
+        background:
+          radial-gradient(ellipse 60% 26% at 40% 60%, rgba(126,169,232,0.20) 0%, rgba(126,169,232,0.07) 44%, rgba(126,169,232,0) 72%),
+          linear-gradient(to bottom,
+            #020308 0%, #0c0f1c 22%, #141a2f 44%, #1b2340 62%, #232d4e 76%,
+            #2c3859 86%, #3a4869 94%, #4a5a7e 100%);
+      }
+      .kc-bd[data-kc-theme="night"] .kc-bd-stage::before {
+        background:
+          radial-gradient(ellipse 150% 42% at 50% 118%, rgba(232,243,255,0.85) 0%, rgba(190,214,246,0.42) 26%, rgba(96,124,178,0.18) 52%, rgba(0,0,0,0) 78%),
+          radial-gradient(ellipse 100% 24% at 42% 92%, rgba(135,168,222,0.16) 0%, rgba(64,90,150,0.07) 50%, rgba(0,0,0,0) 78%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kc-bd-grain, .kc-bd-stage::before { animation: none; }
+    }
+  </style>
 </product-info>
 
 {% schema %}
