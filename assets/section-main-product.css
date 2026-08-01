@@ -1668,6 +1668,89 @@ a.product__text {
   object-fit: contain !important;
 }
 
+/* KC Tooltip */
+
+.kc-return_care-tooltip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-tip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+}
+
+.info-tip .info-icon {
+  background: rgba(255, 251, 246, 0.1);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.info-tip-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  display: block;
+  width: 240px;
+  max-width: 240px;
+  box-sizing: border-box;
+  transform: translateX(-50%);
+  padding: 12px 14px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(127, 185, 255, 0.06) inset, 0 16px 36px -10px rgba(25, 31, 56, 0.18), 0 4px 12px -4px rgba(25, 31, 56, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity .2s, visibility .2s, transform .2s var(--ease);
+  z-index: 30;
+}
+
+.night-mode .info-tip-popover {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+  box-shadow: 0 1px 0 rgba(127, 185, 255, 0.06) inset, 0 20px 48px -10px rgba(0, 0, 0, 0.55), 0 4px 12px -4px rgba(0, 0, 0, 0.40);
+}
+
+.info-tip:hover .info-tip-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.info-tip-popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: var(--surface);
+}
+
+.night-mode .info-tip-popover::after {
+  border-top-color: var(--surface-2);
+}
+
 /* .kc__block-main-product product-info {
   width: 100%;
   background: linear-gradient(to right, rgba(13, 17, 36, 0) 0%, rgba(13, 17, 36, 0) 38%, rgba(13, 17, 36, 0.22) 55%, rgba(13, 17, 36, 0.62) 72%, rgba(13, 17, 36, 0.88) 86%, rgba(13, 17, 36, 0.94) 100%), linear-gradient(to bottom, #000000 0%, #010206 17%, #050a17 39%, #10192d 53%, #3f5278 64%, #afc3e3 76%, #d8e6f8 85%);
