@@ -117,7 +117,12 @@
                       price_class: 'price--large'
                     -%}
                   </div>
-                  <div id="kc-pricing-summary-{{ section.id }}" class="kc-pricing-summary" style="display:none;" data-section-id="{{ section.id }}">
+                  <div
+                    id="kc-pricing-summary-{{ section.id }}"
+                    class="kc-pricing-summary"
+                    style="display:none;"
+                    data-section-id="{{ section.id }}"
+                  >
                     <div class="kc-pricing-summary__total-row">
                       <span class="kc-pricing-summary__label">Total today</span>
                       <span class="kc-pricing-summary__price"></span>
@@ -244,6 +249,12 @@
                   {% render 'product-highlights', block: block %}
                 {%- when 'info_card' -%}
                   {% render 'product-info-card', block: block %}
+                {%- when 'treatment_journey' -%}
+                  {% render 'treatment-journey', block: block, product: product %}
+                {%- when 'professional_testimonials' -%}
+                  {% render 'professional-testimonials', block: block, product: product %}
+                {%- when 'mission_card' -%}
+                  {% render 'mission-card', block: block, product: product %}
                 {%- when 'quantity_selector' -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
@@ -781,6 +792,362 @@
       </script>
     </div>
   </product-component>
+  <div class="kc-bd" data-kc-theme="night">
+    <div class="kc-bd-outro"></div>
+    <div class="kc-bd-stage">
+      <div class="kc-bd-grain"></div>
+    </div>
+  </div>
+  <style>
+        product-info {
+          position: relative;
+          isolation: isolate;
+        }
+        html:has(.kc-bd) {
+          overflow-x: clip;
+          max-width: 100%;
+        }
+
+        .kc-bd-outro,
+        .kc-bd-grain {
+          display: block !important;
+        }
+
+        .kc-bd {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 50%;
+          width: 100vw;
+          transform: translateX(-50%);
+          z-index: -1;
+          pointer-events: none;
+          overflow: clip;
+        }
+
+        .kc-bd-outro {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 80vh;
+          z-index: 6;
+          pointer-events: none;
+          background: linear-gradient(
+            to bottom,
+            rgb(var(--bg-rgb) / 0) 0%,
+            rgb(var(--bg-rgb) / 0.18) 34%,
+            rgb(var(--bg-rgb) / 0.55) 60%,
+            rgb(var(--bg-rgb) / 0.86) 80%,
+            rgb(var(--bg-rgb) / 0.98) 93%,
+            rgb(var(--bg-rgb) / 1) 100%
+          );
+        }
+
+        .kc-bd-stage {
+          position: sticky;
+          top: 0;
+          height: 100svh;
+          width: 100%;
+          overflow: hidden;
+        }
+
+        body.night-mode .kc-bd-stage {
+          background: linear-gradient(
+              to right,
+              rgba(25, 31, 56, 0) 0%,
+              rgba(25, 31, 56, 0) 36%,
+              rgba(25, 31, 56, 0.26) 50%,
+              rgba(25, 31, 56, 0.72) 60%,
+              rgba(25, 31, 56, 0.93) 70%,
+              rgba(25, 31, 56, 0.98) 82%,
+              rgba(25, 31, 56, 0.99) 100%
+            ),
+            radial-gradient(
+              ellipse 48% 34% at 32% 52%,
+              rgba(126, 169, 232, 0.3) 0%,
+              rgba(126, 169, 232, 0.12) 40%,
+              rgba(126, 169, 232, 0) 68%
+            ),
+            radial-gradient(
+              ellipse 42% 30% at 28% 34%,
+              rgba(190, 214, 255, 0.18) 0%,
+              rgba(190, 214, 255, 0.06) 44%,
+              rgba(190, 214, 255, 0) 70%
+            ),
+            radial-gradient(ellipse 64% 28% at 40% 76%, rgba(196, 220, 255, 0.22) 0%, rgba(196, 220, 255, 0) 72%),
+            linear-gradient(
+              to bottom,
+              #020308 0%,
+              #101321 18%,
+              #191f38 36%,
+              #212a49 54%,
+              #313e5c 63%,
+              #4a5977 72%,
+              #6e7d97 80%,
+              #93a1b8 87%,
+              #b7c4d8 93%,
+              #d3dbe7 97%,
+              #f0f3f7 100%
+            );
+        }
+
+        body.day-mode .kc-bd-stage {
+          background: radial-gradient(
+              ellipse 48% 34% at 32% 52%,
+              rgba(255, 255, 255, 0.3) 0%,
+              rgba(255, 255, 255, 0.14) 38%,
+              rgba(255, 255, 255, 0) 68%
+            ),
+            radial-gradient(
+              ellipse 42% 30% at 28% 34%,
+              rgba(255, 248, 238, 0.22) 0%,
+              rgba(255, 248, 238, 0.1) 40%,
+              rgba(255, 248, 238, 0) 70%
+            ),
+            linear-gradient(
+              to bottom,
+              #c5e1ff 0%,
+              #d0e7ff 18%,
+              #dcedff 36%,
+              #e9f3ff 54%,
+              #f6f7f6 72%,
+              #fff9f0 90%,
+              #fff8ee 100%
+            );
+        }
+
+        .kc-bd-stage::before {
+          content: '';
+          position: absolute;
+          inset: -12%;
+          z-index: 1;
+          pointer-events: none;
+          filter: blur(12px);
+          animation: kc-breathe 8s ease-in-out infinite alternate;
+        }
+
+        body.night-mode .kc-bd-stage::before {
+          background: radial-gradient(
+              ellipse 128% 54% at 46% 97%,
+              rgba(232, 243, 255, 0.95) 0%,
+              rgba(198, 220, 248, 0.66) 22%,
+              rgba(96, 124, 178, 0.34) 46%,
+              rgba(0, 0, 0, 0) 74%
+            ),
+            radial-gradient(
+              ellipse 92% 32% at 36% 74%,
+              rgba(135, 168, 222, 0.32) 0%,
+              rgba(64, 90, 150, 0.16) 46%,
+              rgba(0, 0, 0, 0) 76%
+            );
+        }
+
+        body.day-mode .kc-bd-stage::before {
+          background: radial-gradient(
+              ellipse 110% 52% at 38% 96%,
+              rgba(255, 248, 238, 0.92) 0%,
+              rgba(255, 248, 238, 0.62) 28%,
+              rgba(197, 225, 255, 0.22) 54%,
+              rgba(0, 0, 0, 0) 78%
+            ),
+            radial-gradient(
+              ellipse 88% 30% at 38% 76%,
+              rgba(255, 248, 238, 0.42) 0%,
+              rgba(214, 233, 255, 0.2) 46%,
+              rgba(0, 0, 0, 0) 78%
+            ),
+            radial-gradient(
+              ellipse 72% 46% at 50% 58%,
+              rgba(255, 255, 255, 0.34) 0%,
+              rgba(197, 225, 255, 0.18) 40%,
+              rgba(0, 0, 0, 0) 72%
+            );
+        }
+
+        .kc-bd-stage::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        body.night-mode .kc-bd-stage::after {
+    <<<<<<< HEAD
+          background: radial-gradient(
+            ellipse 88% 92% at 50% 88%,
+            rgba(0, 0, 0, 0) 42%,
+            rgba(0, 0, 0, 0.2) 78%,
+            rgba(0, 0, 0, 0.46) 100%
+          );
+        }
+
+        body.day-mode .kc-bd-stage::after {
+          background: radial-gradient(
+            ellipse 90% 94% at 50% 88%,
+            rgba(255, 255, 255, 0) 44%,
+            rgba(138, 177, 218, 0.06) 80%,
+            rgba(143, 178, 213, 0.14) 100%
+          );
+    =======
+          background: radial-gradient(ellipse 88% 92% at 50% 88%,
+            rgba(0,0,0,0) 42%, rgba(0,0,0,0.20) 78%, rgba(0,0,0,0.46) 100%);
+        }
+
+        body.day-mode .kc-bd-stage::after {
+          background: radial-gradient(ellipse 90% 94% at 50% 88%,
+            rgba(255,255,255,0) 44%, rgba(138,177,218,0.06) 80%, rgba(143,178,213,0.14) 100%);
+    >>>>>>> 5f688a1e5a41893c9a94026f958c4956301b185d
+        }
+
+        .kc-bd-grain {
+          position: absolute;
+          inset: -50%;
+          z-index: 3;
+          pointer-events: none;
+    <<<<<<< HEAD
+          opacity: 0.3;
+          mix-blend-mode: overlay;
+          background-repeat: repeat;
+          animation: kc-grain-drift 7s steps(6) infinite;
+        }
+
+        body.day-mode .kc-bd-grain {
+          opacity: 0.16;
+          mix-blend-mode: multiply;
+        }
+
+        @keyframes kc-breathe {
+          from {
+            opacity: 0.86;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes kc-grain-drift {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          16% {
+            transform: translate3d(-6px, 4px, 0);
+          }
+          33% {
+            transform: translate3d(5px, -7px, 0);
+          }
+          50% {
+            transform: translate3d(-8px, -3px, 0);
+          }
+          66% {
+            transform: translate3d(7px, 6px, 0);
+          }
+          83% {
+            transform: translate3d(-4px, 8px, 0);
+          }
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
+        .product-container {
+          background: transparent;
+          position: relative;
+          z-index: 1;
+        }
+
+        @media (max-width: 1080px) {
+          body.night-mode .kc-bd-stage {
+            background: radial-gradient(
+                ellipse 60% 26% at 40% 60%,
+                rgba(126, 169, 232, 0.2) 0%,
+                rgba(126, 169, 232, 0.07) 44%,
+                rgba(126, 169, 232, 0) 72%
+              ),
+              linear-gradient(
+                to bottom,
+                #020308 0%,
+                #0c0f1c 22%,
+                #141a2f 44%,
+                #1b2340 62%,
+                #232d4e 76%,
+                #2c3859 86%,
+                #3a4869 94%,
+                #4a5a7e 100%
+              );
+          }
+          body.night-mode .kc-bd-stage::before {
+            background: radial-gradient(
+                ellipse 150% 42% at 50% 118%,
+                rgba(232, 243, 255, 0.85) 0%,
+                rgba(190, 214, 246, 0.42) 26%,
+                rgba(96, 124, 178, 0.18) 52%,
+                rgba(0, 0, 0, 0) 78%
+              ),
+              radial-gradient(
+                ellipse 100% 24% at 42% 92%,
+                rgba(135, 168, 222, 0.16) 0%,
+                rgba(64, 90, 150, 0.07) 50%,
+                rgba(0, 0, 0, 0) 78%
+              );
+    =======
+          opacity: 0.30;
+          mix-blend-mode: overlay;
+          background-repeat: repeat;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+          animation: kc-grain-drift 7s steps(6) infinite;
+        }
+
+        body.day-mode .kc-bd-grain { opacity: 0.16; mix-blend-mode: multiply; }
+
+        @keyframes kc-breathe { from { opacity: 0.86; } to { opacity: 1; } }
+        @keyframes kc-grain-drift {
+          0% { transform: translate3d(0,0,0); }
+          16% { transform: translate3d(-6px,4px,0); }
+          33% { transform: translate3d(5px,-7px,0); }
+          50% { transform: translate3d(-8px,-3px,0); }
+          66% { transform: translate3d(7px,6px,0); }
+          83% { transform: translate3d(-4px,8px,0); }
+          100% { transform: translate3d(0,0,0); }
+        }
+
+        .product-container { background: transparent; position: relative; z-index: 1; }
+
+        @media (max-width: 1080px) {
+          body.night-mode .kc-bd-stage {
+            background:
+              radial-gradient(ellipse 60% 26% at 40% 60%, rgba(126,169,232,0.20) 0%, rgba(126,169,232,0.07) 44%, rgba(126,169,232,0) 72%),
+              linear-gradient(to bottom,
+                #020308 0%, #0c0f1c 22%, #141a2f 44%, #1b2340 62%, #232d4e 76%,
+                #2c3859 86%, #3a4869 94%, #4a5a7e 100%);
+          }
+          body.night-mode .kc-bd-stage::before {
+            background:
+              radial-gradient(ellipse 150% 42% at 50% 118%, rgba(232,243,255,0.85) 0%, rgba(190,214,246,0.42) 26%, rgba(96,124,178,0.18) 52%, rgba(0,0,0,0) 78%),
+              radial-gradient(ellipse 100% 24% at 42% 92%, rgba(135,168,222,0.16) 0%, rgba(64,90,150,0.07) 50%, rgba(0,0,0,0) 78%);
+    >>>>>>> 5f688a1e5a41893c9a94026f958c4956301b185d
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+    <<<<<<< HEAD
+          .kc-bd-grain,
+          .kc-bd-stage::before {
+            animation: none;
+          }
+        }
+
+        .kc-bd-outro,
+        .kc-bd-grain {
+          display: block !important;
+        }
+    =======
+          .kc-bd-grain, .kc-bd-stage::before { animation: none; }
+        }
+
+        .kc-bd-outro, .kc-bd-grain { display: block !important; }
+    >>>>>>> 5f688a1e5a41893c9a94026f958c4956301b185d
+  </style>
 </product-info>
 
 {% schema %}
@@ -2544,6 +2911,77 @@
           "default": "2× RETURN ON CARE"
         }
       ]
+    },
+    {
+      "type": "treatment_journey",
+      "name": "Treatment Journey",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "badge_background_color",
+          "label": "Heading Badge Background Color",
+          "default": "#2b2b2b"
+        },
+        {
+          "type": "color",
+          "id": "read_more_color",
+          "label": "Read More/Less Text Color",
+          "default": "#7fb9ff"
+        },
+        {
+          "type": "text",
+          "id": "read_more_text",
+          "label": "Read More Label",
+          "default": "Read more"
+        },
+        {
+          "type": "text",
+          "id": "read_less_text",
+          "label": "Read Less Label",
+          "default": "Read less"
+        },
+        {
+          "type": "range",
+          "id": "visible_items",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "label": "Visible Items Count",
+          "default": 3
+        },
+        {
+          "type": "inline_richtext",
+          "id": "disclaimer_text",
+          "label": "Disclaimer Text",
+          "default": "* What members report with continued use — individual experiences vary."
+        }
+      ]
+    },
+    {
+      "type": "professional_testimonials",
+      "name": "Professional Testimonials",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading Text",
+          "default": "Approved by nature. Used by professionals"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading Color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
+      "type": "mission_card",
+      "name": "Mission Card",
+      "limit": 1,
+      "settings": []
     }
   ],
   "settings": [

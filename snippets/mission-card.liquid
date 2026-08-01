@@ -1,0 +1,77 @@
+{%- liquid
+  assign mission_card = product.metafields.custom.mission_card.value
+-%}
+
+{%- if mission_card != blank -%}
+  {{ 'mission-card.css' | asset_url | stylesheet_tag }}
+
+  <div class="kc-mission-card">
+    <div class="kc-mission-card-inner">
+      {%- if mission_card.image != blank -%}
+        <div class="kc-mission-card-avatar-wrapper">
+          {{ mission_card.image | image_url: width: 120 | image_tag: class: 'kc-mission-card-avatar', loading: 'lazy' }}
+        </div>
+      {%- endif -%}
+
+      <div class="kc-mission-card-content">
+        {%- if mission_card.title != blank -%}
+          <span class="kc-mission-card-label">{{ mission_card.title }}</span>
+        {%- endif -%}
+
+        {%- if mission_card.description != blank -%}
+          <div class="kc-mission-card-desc">
+            {{ mission_card.description | metafield_tag }}
+          </div>
+        {%- endif -%}
+
+        {%- if mission_card.highlight_text != blank -%}
+          <div class="kc-mission-card-highlight">
+            {{ mission_card.highlight_text | metafield_tag }}
+          </div>
+        {%- endif -%}
+
+        {%- if mission_card.author_name != blank or mission_card.author_designation != blank -%}
+          <div class="kc-mission-card-author">
+            {%- if mission_card.author_name != blank -%}
+              <span class="kc-mission-card-author-name">{{ mission_card.author_name | metafield_tag }}</span>
+            {%- endif -%}
+            {%- if mission_card.author_designation != blank -%}
+              <span class="kc-mission-card-author-desig">{{ mission_card.author_designation | metafield_tag }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  {%- if request.design_mode -%}
+    {{ 'mission-card.css' | asset_url | stylesheet_tag }}
+    <div class="kc-mission-card" style="opacity: 0.6; border: 1px dashed #7fb9ff;">
+      <div class="kc-mission-card-inner">
+        <div
+          class="kc-mission-card-avatar-wrapper"
+          style="background: #2b2b2b; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #7fb9ff; width: 56px; height: 56px; border-radius: 50%;"
+        >
+          👤
+        </div>
+        <div class="kc-mission-card-content">
+          <span class="kc-mission-card-label">OUR MISSION (Placeholder)</span>
+          <div class="kc-mission-card-desc">
+            <p>
+              This is a preview. To customize, please populate the <strong>Mission Card</strong> metafield (<code
+                >custom.mission_card</code
+              >) for this product in your Shopify Admin.
+            </p>
+          </div>
+          <div class="kc-mission-card-highlight">
+            <p>Strengthen your teeth. Strengthen yourself.</p>
+          </div>
+          <div class="kc-mission-card-author">
+            <span class="kc-mission-card-author-prefix">— </span>
+            <span class="kc-mission-card-author-name">Victor</span>,
+            <span class="kc-mission-card-author-desig">founder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

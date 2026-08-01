@@ -1,0 +1,395 @@
+{%- liquid
+  assign heading_1 = product.metafields.custom.treatment_journey_one_heading.value
+  assign list_1 = product.metafields.custom.treatment_journey_list_one.value
+  assign heading_2 = product.metafields.custom.treatment_journey_two_heading.value
+  assign list_2 = product.metafields.custom.treatment_journey_list_two.value
+  assign visible_items_count = block.settings.visible_items
+-%}
+
+{%- if list_1 != blank or list_2 != blank -%}
+  <!-- Premium Treatment Journey Styles -->
+  <style>
+    .kc-treatment-journey-block {
+      margin: 3.2rem 0;
+      font-family: inherit;
+    }
+
+    /* Journey Container */
+    .kc-journey-container {
+      margin-bottom: 4rem;
+    }
+    .kc-journey-container:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Header & Badge Layout */
+    .kc-journey-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 2.4rem;
+    }
+    .kc-journey-title {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .kc-journey-subtitle {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-left: 0.6rem;
+    }
+    .kc-journey-badge {
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      text-transform: capitalize;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* List Layout */
+    .kc-journey-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .kc-journey-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.6rem;
+      margin-bottom: 1.2rem;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      position: relative;
+    }
+    .kc-journey-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Icon Styling */
+    .kc-journey-item-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+    .kc-journey-item-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      display: block;
+    }
+    .kc-journey-icon-img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Content Layout */
+    .kc-journey-item-content {
+      font-size: 1.5rem;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+    .kc-journey-item-content p,
+    .kc-journey-item-content div,
+    .kc-journey-item-content span {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+    .kc-journey-item-title {
+      font-weight: 700;
+    }
+
+
+    /* Lock Icon Styling */
+    .kc-journey-item-lock {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .kc-journey-item-lock svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      display: block;
+    }
+    .kc-journey-lock-img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Disclaimer Styling */
+    .kc-journey-disclaimer {
+      font-size: 1.2rem;
+      color: {{ block.settings.subheading_color | default: 'rgba(255, 255, 255, 0.5)' }};
+      margin: 1.5rem 0 1rem 0;
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    /* Collapsible Items Animation */
+    .kc-journey-item-collapsible {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-bottom: 0;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.35s ease,
+                  margin-bottom 0.35s ease;
+    }
+    .kc-journey-item-collapsible.expanded {
+      opacity: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Read More Toggle Container */
+    .kc-journey-toggle-container {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .kc-journey-toggle-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: {{ block.settings.read_more_color | default: '#7fb9ff' }};
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0;
+      transition: opacity 0.2s ease;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .kc-journey-toggle-btn:hover {
+      opacity: 0.85;
+    }
+    .kc-journey-toggle-icon {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+
+  <div class="kc-treatment-journey-block">
+    <!-- Journey One Block -->
+    {%- if list_1 != blank -%}
+      {%- assign list_1_sorted = list_1 | sort: 'sort_order' -%}
+      <div class="kc-journey-container active" data-journey-index="1" id="kc-journey-1-{{ section.id }}">
+        <div class="kc-journey-header">
+          <h3 class="kc-journey-title">
+            {{ heading_1.heading | default: "What you'll feel" }}
+            {%- if heading_1.sub_heading != blank -%}
+              <span class="kc-journey-subtitle">{{ heading_1.sub_heading }}</span>
+            {%- endif -%}
+          </h3>
+          {%- if heading_1.active_tab_title != blank -%}
+            <span
+              class="kc-journey-badge"
+              style="background-color: {{ block.settings.badge_background_color | default: '#2b2b2b' }}; color: {{ block.settings.badge_text_color | default: '#ffffff' }};"
+            >
+              {{- heading_1.active_tab_title -}}
+            </span>
+          {%- endif -%}
+        </div>
+
+        <ul class="kc-journey-list">
+          {%- for item in list_1_sorted -%}
+            <li class="kc-journey-item {% if forloop.index > visible_items_count %}kc-journey-item-collapsible{% endif %}">
+              <div class="kc-journey-item-icon">
+                {%- if item.icon_svg != blank -%}
+                  {{ item.icon_svg }}
+                {%- elsif item.icon != blank -%}
+                  {{ item.icon | image_url: width: 32 | image_tag: class: 'kc-journey-icon-img', loading: 'lazy' }}
+                {%- endif -%}
+              </div>
+              <div class="kc-journey-item-content">
+                <span class="kc-journey-item-title">{{ item.title | metafield_tag }}</span>
+                <span class="kc-journey-item-desc">{{ item.description | metafield_tag }}</span>
+              </div>
+              {%- if item.locked_close_svg != blank or item.locked_close != blank -%}
+                <div class="kc-journey-item-lock">
+                  {%- if item.locked_close_svg != blank -%}
+                    {{ item.locked_close_svg }}
+                  {%- elsif item.locked_close != blank -%}
+                    {{
+                      item.locked_close
+                      | image_url: width: 32
+                      | image_tag: class: 'kc-journey-lock-img', loading: 'lazy'
+                    }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if list_1_sorted.size > visible_items_count -%}
+          <div class="kc-journey-toggle-container">
+            <button class="kc-journey-toggle-btn" data-expanded="false">
+              <span class="kc-journey-toggle-text">{{ block.settings.read_more_text | default: 'Read more' }}</span>
+              <svg
+                class="kc-journey-toggle-icon"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Journey Two Block -->
+    {%- if list_2 != blank -%}
+      {%- assign list_2_sorted = list_2 | sort: 'sort_order' -%}
+      <div class="kc-journey-container active" data-journey-index="2" id="kc-journey-2-{{ section.id }}">
+        <div class="kc-journey-header">
+          <h3 class="kc-journey-title">
+            {{ heading_2.heading | default: "What you'll feel" }}
+            {%- if heading_2.sub_heading != blank -%}
+              <span class="kc-journey-subtitle">{{ heading_2.sub_heading }}</span>
+            {%- endif -%}
+          </h3>
+          {%- if heading_2.active_tab_title != blank -%}
+            <span
+              class="kc-journey-badge"
+              style="background-color: {{ block.settings.badge_background_color | default: '#2b2b2b' }}; color: {{ block.settings.badge_text_color | default: '#ffffff' }};"
+            >
+              {{- heading_2.active_tab_title -}}
+            </span>
+          {%- endif -%}
+        </div>
+
+        <ul class="kc-journey-list">
+          {%- for item in list_2_sorted -%}
+            <li class="kc-journey-item {% if forloop.index > visible_items_count %}kc-journey-item-collapsible{% endif %}">
+              <div class="kc-journey-item-icon">
+                {%- if item.icon_svg != blank -%}
+                  {{ item.icon_svg }}
+                {%- elsif item.icon != blank -%}
+                  {{ item.icon | image_url: width: 32 | image_tag: class: 'kc-journey-icon-img', loading: 'lazy' }}
+                {%- endif -%}
+              </div>
+              <div class="kc-journey-item-content">
+                <span class="kc-journey-item-title">{{ item.title | metafield_tag }}</span>
+                <span class="kc-journey-item-desc">{{ item.description | metafield_tag }}</span>
+              </div>
+              {%- if item.locked_close_svg != blank or item.locked_close != blank -%}
+                <div class="kc-journey-item-lock">
+                  {%- if item.locked_close_svg != blank -%}
+                    {{ item.locked_close_svg }}
+                  {%- elsif item.locked_close != blank -%}
+                    {{
+                      item.locked_close
+                      | image_url: width: 32
+                      | image_tag: class: 'kc-journey-lock-img', loading: 'lazy'
+                    }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if block.settings.disclaimer_text != blank -%}
+          <p class="kc-journey-disclaimer">{{ block.settings.disclaimer_text }}</p>
+        {%- endif -%}
+
+        {%- if list_2_sorted.size > visible_items_count -%}
+          <div class="kc-journey-toggle-container">
+            <button class="kc-journey-toggle-btn" data-expanded="false">
+              <span class="kc-journey-toggle-text">{{ block.settings.read_more_text | default: 'Read more' }}</span>
+              <svg
+                class="kc-journey-toggle-icon"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Interactive Local JavaScript for Accordion -->
+  <script type="text/javascript">
+    (function() {
+      // Accordion Toggle logic
+      const toggleButtons = document.querySelectorAll('.kc-journey-toggle-btn');
+      toggleButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const container = this.closest('.kc-journey-container');
+          const collapsibleItems = container.querySelectorAll('.kc-journey-item-collapsible');
+          const isExpanded = this.getAttribute('data-expanded') === 'true';
+          const textSpan = this.querySelector('.kc-journey-toggle-text');
+          const icon = this.querySelector('.kc-journey-toggle-icon');
+
+          const readMoreText = {{ block.settings.read_more_text | default: 'Read more' | json }};
+          const readLessText = {{ block.settings.read_less_text | default: 'Read less' | json }};
+
+          if (isExpanded) {
+            // Collapse items smoothly
+            collapsibleItems.forEach(item => {
+              item.style.maxHeight = '0px';
+              item.classList.remove('expanded');
+            });
+            this.setAttribute('data-expanded', 'false');
+            textSpan.textContent = readMoreText;
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          } else {
+            // Expand items smoothly
+            collapsibleItems.forEach(item => {
+              // temporarily reset maxHeight to get the full scroll height
+              item.style.maxHeight = 'none';
+              const fullHeight = item.scrollHeight;
+              item.style.maxHeight = '0px';
+
+              // Force reflow
+              item.offsetHeight;
+
+              item.classList.add('expanded');
+              item.style.maxHeight = fullHeight + 'px';
+            });
+            this.setAttribute('data-expanded', 'true');
+            textSpan.textContent = readLessText;
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
