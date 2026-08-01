@@ -32,12 +32,10 @@
 
         {%- if mission_card.author_name != blank or mission_card.author_designation != blank -%}
           <div class="kc-mission-card-author">
-            <span class="kc-mission-card-author-prefix">— </span>
             {%- if mission_card.author_name != blank -%}
               <span class="kc-mission-card-author-name">{{ mission_card.author_name | metafield_tag }}</span>
             {%- endif -%}
             {%- if mission_card.author_designation != blank -%}
-              ,
               <span class="kc-mission-card-author-desig">{{ mission_card.author_designation | metafield_tag }}</span>
             {%- endif -%}
           </div>
