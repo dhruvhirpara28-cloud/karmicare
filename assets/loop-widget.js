@@ -2271,6 +2271,85 @@ function updatePriceInParentElementsLoop({ productId }) {
 
     // Update and toggle the kc-pricing-summary block
     updateKcPricingSummary(productId, variant);
+
+    // Update per-brushing sub-row text on all subscription plan cards
+    updateSubscriptionGroupCardSubRow(productId, variant);
+}
+
+/**
+ * Dynamically updates each subscription plan card sub-row.
+ * Uses Loop's own <select> option text for the shipping label (e.g. "ships every 60 days", "2 deliveries a year").
+ *   LEFT  (inside .loop-subscription-group-text):  "£0.43 / brushing · ships every 60 days"
+ *   RIGHT (inside .loop-subscription-group-price-container): "/ 60 days"
+ */
+function updateSubscriptionGroupCardSubRow(productId, variant) {
+    if (!variant?.selling_plan_allocations?.length) return;
+    const loopContainer = getLoopSubscriptionContainer(productId);
+    if (!loopContainer) return;
+
+    const dayMap = { day: 1, week: 7, month: 30, year: 365 };
+
+    loopContainer.querySelectorAll('.loop-subscription-group').forEach((groupEl) => {
+        const radio = groupEl.querySelector('.loop-subscription-group-radio');
+        if (!radio?.dataset?.id || radio.dataset.id === 'loop-one-time-purchase') return;
+
+        const alloc = variant.selling_plan_allocations.find(
+            a => String(a.selling_plan_group_id) === String(radio.dataset.id)
+        );
+        if (!alloc?.price) return;
+
+        // 1. Shipping label — read directly from Loop's <select> option (e.g. "ships every 60 days")
+        const select = groupEl.querySelector('.loop-selling-plan-selector');
+        const optionText = (select?.options?.[select.selectedIndex]?.text || select?.querySelector('option')?.text || '').trim();
+
+        // 2. Billing interval for per-brushing calculation and right-side short label
+        const bp = alloc?.selling_plan?.billing_policy;
+        let bInterval = (bp?.interval || '').toLowerCase();
+        let bCount = Number(bp?.interval_count) || 1;
+        if (!bInterval) {
+            const name = (radio.dataset.name || '').toLowerCase();
+            const m = name.match(/(\d+)[- ]?(day|week|month|year)/);
+            if (m) { bCount = parseInt(m[1]); bInterval = m[2]; }
+            else if (name.includes('year')) { bInterval = 'year'; bCount = 1; }
+        }
+        if (!bInterval) return;
+
+        const billingDays = (dayMap[bInterval] || 1) * bCount;
+        const isAnnual = bInterval === 'year' || (bInterval === 'month' && bCount === 12);
+
+        // 3. Per-brushing cost (price ÷ billingDays × 2 brushings/day)
+        const perBrushingCents = Math.round(alloc.price / (billingDays * 2));
+        const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
+
+        // 4. Right-side short label: "/ year" or "/ 60 days"
+        const rightLabel = isAnnual ? '/ year' : bCount === 1 ? `/ ${bInterval}` : `/ ${billingDays} days`;
+
+        // LEFT: inject/update .kc-plan-subrow inside .loop-subscription-group-text (below plan name)
+        const textContainer = groupEl.querySelector('.loop-subscription-group-text');
+        if (textContainer) {
+            let subRow = textContainer.querySelector('.kc-plan-subrow');
+            if (!subRow) {
+                subRow = document.createElement('div');
+                subRow.className = 'kc-plan-subrow';
+                textContainer.appendChild(subRow);
+            }
+            subRow.textContent = optionText
+                ? `${perBrushingFormatted} / brushing · ${optionText}`
+                : `${perBrushingFormatted} / brushing`;
+        }
+
+        // RIGHT: inject/update .kc-plan-interval-label inside .loop-subscription-group-price-container
+        const priceContainer = groupEl.querySelector('.loop-subscription-group-price-container');
+        if (priceContainer) {
+            let labelEl = priceContainer.querySelector('.kc-plan-interval-label');
+            if (!labelEl) {
+                labelEl = document.createElement('span');
+                labelEl.className = 'kc-plan-interval-label';
+                priceContainer.appendChild(labelEl);
+            }
+            labelEl.textContent = rightLabel;
+        }
+    });
 }
 
 function updateKcPricingSummary(productId, variant) {

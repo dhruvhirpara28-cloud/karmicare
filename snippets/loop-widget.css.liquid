@@ -267,53 +267,20 @@
     margin-top: 8px;
 }
 
-.loop-selling-plan-selector-label {
-    width: auto !important;
-    padding: 0;
-    margin: 0.5em 0 0.5em 0;
-    line-height: 1.2em;
-    font-size: 1em;
-}
-
+/* Frequency dropdown hidden — JS dynamically builds per-brushing sub-row text */
 .loop-selling-plan-selector {
-    width: auto !important;
-    display: block !important;
-    border-color: #c3d0d9 !important;
-    border-width: 1px !important;
-    margin: 6px 0 0 12px !important;
-    padding: 0.5em 2.5em 0.5em 0.7em !important;
-    border-radius: 5px !important;
-    font-size: 1em !important;
-    background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-        linear-gradient(135deg, gray 50%, transparent 50%),
-        linear-gradient(to right, #ccc, #ccc);
-    background-position: calc(100% - 20px) calc(1em), calc(100% - 15px) calc(1em),
-        calc(100% - 2.5em) 0.5em;
-    background-size: 5px 5px, 5px 5px, 0px 1.5em;
-    background-repeat: no-repeat;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    display: none;
 }
 
-.loop-selling-plan-selector:focus {
-    background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-        linear-gradient(135deg, gray 50%, transparent 50%),
-        linear-gradient(to right, #ccc, #ccc);
-    background-position: calc(100% - 20px) calc(1em), calc(100% - 15px) calc(1em),
-        calc(100% - 2.5em) 0.5em;
-    background-size: 5px 5px, 5px 5px, 0px 1.5em;
-    background-repeat: no-repeat;
-    border-color: green;
-    outline: 0;
-    padding: 0.5em 2.5em 0.5em 0.7em !important;
+.loop-selling-plan-selector-label {
+    display: none !important;
 }
 
+.loop-selling-plan-selector,
+.loop-selling-plan-selector:focus,
+.loop-selling-plan-selector:focus-visible,
 .loop-selling-plan-selector:-moz-focusring {
-    color: transparent;
-    text-shadow: 0 0 0 #000;
+    display: none !important;
 }
 
 .loop-selling-plan-selector-option {
@@ -334,12 +301,17 @@
     display: none !important;
 }
 
-.loop-selling-plan-selector:focus-visible {
-    outline: none !important;
-    outline-offset: 0.3rem;
-    box-shadow: none !important;
+/* "/ 60 days" or "/ year" label — RIGHT side, injected by JS inside price-container */
+.kc-plan-interval-label {
+    display: block;
+    font-size: 0.72em;
+    opacity: 0.7;
+    margin-top: 2px;
+    text-align: right;
+    white-space: nowrap;
 }
 
+/* "£0.43 / brushing · ships every 60 days" — LEFT side, injected by JS inside group-text */
 .loop-price-container {
     display: flex;
     align-items: center;
@@ -355,7 +327,6 @@
 .loop-price-section-subscription-banner {
     display: flex;
     align-items: center;
-    font-size: 12px;
     padding: 0px 5px;
     border: 1px solid;
     border-radius: 5px;
@@ -363,15 +334,9 @@
     margin-left: 8px;
 }
 
-.loop-final-price {}
 
 .loop-compare-price {
     text-decoration: line-through;
-    opacity: 0.5;
-}
-
-.loop-price-sub-text {
-    font-size: 11px;
 }
 
 .loop-dot {
@@ -661,95 +626,12 @@
 .kc-pricing-summary__per-brushing,
 .kc-pricing-summary__interval {
     font-size: 12px;
-    color: var(--color-loop-pricing-summary-muted, rgba(255,255,255,0.55));
+    color: var(--color-loop-pricing-summary-muted, rgba(255, 255, 255, 0.55));
     letter-spacing: 0;
 }
 
 .night-mode .kc-pricing-summary {
     background: #0d1b2e;
-}
-
-/* KC Tooltip */
-
-.kc-return_care-tooltip {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.kc-return_care .info-tip {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    margin-left: 6px;
-}
-
-.kc-return_care .info-tip .info-icon {
-    background: rgba(255, 251, 246, 0.1);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    letter-spacing: 0;
-}
-
-.kc-return_care .info-tip-popover {
-    position: absolute;
-    bottom: calc(100% + 10px);
-    left: 50%;
-    display: block;
-    width: 240px;
-    max-width: 240px;
-    box-sizing: border-box;
-    transform: translateX(-50%);
-    padding: 12px 14px;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--hairline);
-    border-radius: 10px;
-    font-weight: 400;
-    letter-spacing: 0.005em;
-    text-transform: none;
-    white-space: normal;
-    word-break: normal;
-    overflow-wrap: break-word;
-    text-align: left;
-    box-shadow: 0 1px 0 rgba(127, 185, 255, 0.06) inset, 0 16px 36px -10px rgba(25, 31, 56, 0.18), 0 4px 12px -4px rgba(25, 31, 56, 0.10);
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-    transition: opacity .2s, visibility .2s, transform .2s var(--ease);
-    z-index: 30;
-}
-
-.night-mode .kc-return_care .info-tip-popover {
-    background: var(--surface-2);
-    color: var(--text);
-    border-color: var(--border);
-    box-shadow: 0 1px 0 rgba(127, 185, 255, 0.06) inset, 0 20px 48px -10px rgba(0, 0, 0, 0.55), 0 4px 12px -4px rgba(0, 0, 0, 0.40);
-}
-
-.info-tip:hover .info-tip-popover {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-2px);
-}
-
-.info-tip-popover::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -6px;
-    border: 6px solid transparent;
-    border-top-color: var(--surface);
-}
-
-.night-mode .info-tip-popover::after {
-    border-top-color: var(--surface-2);
 }
 
 /* KC Reward Grid Styles */
