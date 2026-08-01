@@ -76,34 +76,39 @@ async function initLoopWidget(productId) {
     }
 }
 
+/* ============================================================
+   KC CUSTOM FUNCTIONS — WIDGET INIT
+   - renderKCRewards       : Populates reward grid tiles
+   - renderKCTestimonial   : Populates testimonial sections per plan
+   ============================================================ */
+
+/** Populates .kc-reward-grid elements from the #kc-reward-grid-template */
 function renderKCRewards() {
     const targetGrids = document.querySelectorAll('.kc-reward-grid');
     const sourceTemplate = document.querySelector('#kc-reward-grid-template');
-    if (targetGrids.length > 0 && sourceTemplate) {
-        const translatedHTML = translateDescriptionEuroPrices(sourceTemplate.innerHTML);
-        targetGrids.forEach(grid => {
-            grid.innerHTML = translatedHTML;
-            grid.style.display = 'flex';
-        });
-    }
+    if (!targetGrids.length || !sourceTemplate) return;
+
+    const translatedHTML = translateDescriptionEuroPrices(sourceTemplate.innerHTML);
+    targetGrids.forEach(grid => {
+        grid.innerHTML = translatedHTML;
+        grid.style.display = 'flex';
+    });
 }
 
+/**
+ * Populates .kc-testimonial-section elements from the template wrapper.
+ * Runs on every init/plan change to show the correct plan's testimonial.
+ */
 function renderKCTestimonial(productId) {
-    // Remove only dynamically created testimonial sections and bottom labels
-    const dynamicTestimonials = document.querySelectorAll(".kc-testimonial-section[data-dynamic='true']");
-    if (dynamicTestimonials) {
-        dynamicTestimonials.forEach(section => section.remove());
-    }
-    const dynamicBottomLabels = document.querySelectorAll(".kc-bottom_label[data-dynamic='true']");
-    if (dynamicBottomLabels) {
-        dynamicBottomLabels.forEach(label => label.remove());
-    }
+    // Remove previously injected dynamic sections
+    document.querySelectorAll(".kc-testimonial-section[data-dynamic='true']").forEach(el => el.remove());
+    document.querySelectorAll(".kc-bottom_label[data-dynamic='true']").forEach(el => el.remove());
 
-    const sourceTemplate = Array.from(document.querySelectorAll('.kc-testimonial-wrapper')).find(el => !el.closest('.kc-testimonial-section'));
+    const sourceTemplate = Array.from(document.querySelectorAll('.kc-testimonial-wrapper'))
+        .find(el => !el.closest('.kc-testimonial-section'));
     if (!sourceTemplate) return;
 
     const buttonTemplate = document.querySelector('#kc-testimonial-button-template');
-
     const variant = findSelectedVariantLoop(productId);
     const loopPropsProduct = window.loopProps?.[productId];
     if (!loopPropsProduct || !variant) return;
@@ -112,50 +117,35 @@ function renderKCTestimonial(productId) {
         `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
     );
 
-    // Find any static/manually-placed testimonial sections and bottom labels on the page
-    const staticTestimonials = Array.from(document.querySelectorAll(".kc-testimonial-section")).filter(el => {
-        const isDynamic = el.getAttribute('data-dynamic') === 'true';
-        const isTemplateContainer = el.contains(sourceTemplate);
-        if (isDynamic || isTemplateContainer) return false;
-
-        // If it is inside some selling plan description, it must be the active one
+    // Collect only static (non-dynamic) sections that belong to the active plan
+    const isVisible = (el, templateEl) => {
+        if (el.getAttribute('data-dynamic') === 'true') return false;
+        if (templateEl && el.contains(templateEl)) return false;
         const parentDesc = el.closest('[id^="loop-selling-plan-description-"]');
-        if (parentDesc && parentDesc !== activeDescription) {
-            return false;
+        return !parentDesc || parentDesc === activeDescription;
+    };
+
+    const staticTestimonials = Array.from(document.querySelectorAll('.kc-testimonial-section'))
+        .filter(el => isVisible(el, sourceTemplate));
+
+    const staticBottomLabels = Array.from(document.querySelectorAll('.kc-bottom_label'))
+        .filter(el => isVisible(el, buttonTemplate));
+
+    // Inject testimonial HTML into static containers
+    staticTestimonials.forEach(section => {
+        section.innerHTML = sourceTemplate.outerHTML;
+        const wrapper = section.querySelector('.kc-testimonial-wrapper');
+        if (wrapper) {
+            wrapper.removeAttribute('style');
+            wrapper.classList.remove('loop-hidden');
         }
-        return true;
     });
 
-    const staticBottomLabels = Array.from(document.querySelectorAll(".kc-bottom_label")).filter(el => {
-        const isDynamic = el.getAttribute('data-dynamic') === 'true';
-        const isTemplateContainer = buttonTemplate && el.contains(buttonTemplate);
-        if (isDynamic || isTemplateContainer) return false;
-
-        // If it is inside some selling plan description, it must be the active one
-        const parentDesc = el.closest('[id^="loop-selling-plan-description-"]');
-        if (parentDesc && parentDesc !== activeDescription) {
-            return false;
-        }
-        return true;
-    });
-
-    // Handle Testimonial Content
-    if (staticTestimonials.length > 0) {
-        staticTestimonials.forEach(section => {
-            section.innerHTML = sourceTemplate.outerHTML;
-            const wrapper = section.querySelector('.kc-testimonial-wrapper');
-            if (wrapper) {
-                wrapper.removeAttribute('style');
-                wrapper.classList.remove('loop-hidden');
-            }
-        });
-    }
-
-    // Handle Testimonial Button Content
-    if (buttonTemplate && staticBottomLabels.length > 0) {
+    // Inject button HTML into static bottom label containers
+    if (buttonTemplate) {
         staticBottomLabels.forEach(label => {
             label.innerHTML = buttonTemplate.innerHTML;
-            label.style.display = ''; // Ensure it is shown
+            label.style.display = '';
         });
     }
 }
@@ -2272,15 +2262,20 @@ function updatePriceInParentElementsLoop({ productId }) {
     // Update and toggle the kc-pricing-summary block
     updateKcPricingSummary(productId, variant);
 
-    // Update per-brushing sub-row text on all subscription plan cards
+    // Update per-brushing sub-row on each subscription plan card
     updateSubscriptionGroupCardSubRow(productId, variant);
 }
 
+/* ============================================================
+   KC CUSTOM FUNCTIONS
+   - updateSubscriptionGroupCardSubRow  : Plan card sub-row
+   - updateKcPricingSummary             : "Total today" summary box
+   ============================================================ */
+
 /**
- * Dynamically updates each subscription plan card sub-row.
- * Uses Loop's own <select> option text for the shipping label (e.g. "ships every 60 days", "2 deliveries a year").
- *   LEFT  (inside .loop-subscription-group-text):  "£0.43 / brushing · ships every 60 days"
- *   RIGHT (inside .loop-subscription-group-price-container): "/ 60 days"
+ * Plan card sub-row (dynamic, per variant selection)
+ * LEFT  (.loop-subscription-group-text):          "£0.43 / brushing · ships every 60 days"
+ * RIGHT (.loop-subscription-group-price-container): "/ 60 days"
  */
 function updateSubscriptionGroupCardSubRow(productId, variant) {
     if (!variant?.selling_plan_allocations?.length) return;
@@ -2352,6 +2347,9 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
     });
 }
 
+/**
+ * "Total today" summary pricing box (shown on subscription, hidden on one-time)
+ */
 function updateKcPricingSummary(productId, variant) {
     const isOneTime = determineOneTimeOrderLoop(productId);
 

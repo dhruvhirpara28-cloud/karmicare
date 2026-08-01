@@ -1,0 +1,88 @@
+.kc-mission-card {
+  margin: 2.4rem 0;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2.4rem;
+  width: 100%;
+  font-family: inherit;
+}
+
+.kc-mission-card-inner {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.kc-mission-card-avatar-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.kc-mission-card-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kc-mission-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.kc-mission-card-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #7fb9ff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+}
+
+.kc-mission-card-desc {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.kc-mission-card-desc p,
+.kc-mission-card-desc div,
+.kc-mission-card-desc span {
+  margin: 0;
+  display: inline;
+}
+
+.kc-mission-card-highlight {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+.kc-mission-card-highlight p,
+.kc-mission-card-highlight div,
+.kc-mission-card-highlight span {
+  margin: 0;
+  display: inline;
+}
+
+.kc-mission-card-author {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.kc-mission-card-author p,
+.kc-mission-card-author div,
+.kc-mission-card-author span {
+  margin: 0;
+  display: inline;
+}
