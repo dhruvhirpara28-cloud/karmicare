@@ -1693,6 +1693,7 @@ a.product__text {
   justify-content: center;
   text-align: center;
   letter-spacing: 0;
+  border: 1.2px solid var(--accent);
 }
 
 .info-tip-popover {
@@ -1737,6 +1738,11 @@ a.product__text {
   transform: translateX(-50%) translateY(-2px);
 }
 
+.night-mode .info-tip:hover .info-icon {
+  color: var(--bg);
+  background: var(--accent);
+}
+
 .info-tip-popover::after {
   content: "";
   position: absolute;
@@ -1750,15 +1756,3 @@ a.product__text {
 .night-mode .info-tip-popover::after {
   border-top-color: var(--surface-2);
 }
-
-/* .kc__block-main-product product-info {
-  width: 100%;
-  background: linear-gradient(to right, rgba(13, 17, 36, 0) 0%, rgba(13, 17, 36, 0) 38%, rgba(13, 17, 36, 0.22) 55%, rgba(13, 17, 36, 0.62) 72%, rgba(13, 17, 36, 0.88) 86%, rgba(13, 17, 36, 0.94) 100%), linear-gradient(to bottom, #000000 0%, #010206 17%, #050a17 39%, #10192d 53%, #3f5278 64%, #afc3e3 76%, #d8e6f8 85%);
-  transition: background .6s var(--ease);
-}
-
-.night-mode .kc__block-main-product product-info {
-  background: linear-gradient(to right, rgba(25, 31, 56, 0) 0%, rgba(25, 31, 56, 0) 36%,
-      rgba(25, 31, 56, 0.26) 50%, rgba(25, 31, 56, 0.72) 60%,
-      rgba(25, 31, 56, 0.93) 70%, rgba(25, 31, 56, 0.98) 82%, rgba(25, 31, 56, 0.99) 100%), radial-gradient(ellipse 48% 34% at 32% 52%, rgba(126, 169, 232, 0.30) 0%, rgba(126, 169, 232, 0.12) 40%, rgba(126, 169, 232, 0) 68%), radial-gradient(ellipse 42% 30% at 28% 34%, rgba(190, 214, 255, 0.18) 0%, rgba(190, 214, 255, 0.06) 44%, rgba(190, 214, 255, 0) 70%), radial-gradient(ellipse 64% 28% at 40% 76%, rgba(196, 220, 255, 0.22) 0%, rgba(196, 220, 255, 0) 72%), linear-gradient(to bottom, #020308 0%, #101321 18%, #191f38 36%, #212a49 54%, #313e5c 63%, #4a5977 72%, #6e7d97 80%, #93a1b8 87%, #b7c4d8 93%, #d3dbe7 97%, #f0f3f7 100%);
-} */
