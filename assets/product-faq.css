@@ -1,0 +1,543 @@
+/* ============================================================
+   Karmicare FAQ Section & Accordions Styles
+   ============================================================ */
+
+.kc-faq-block {
+  margin: 3.2rem 0;
+  font-family: inherit;
+}
+
+.kc-faq-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.kc-faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.kc-faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.kc-faq-item:last-child {
+  border-bottom: none;
+}
+
+.kc-faq-summary {
+  list-style: none;
+  padding: 1.5rem 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: -0.010em;
+  color: var(--text);
+  transition: color 0.2s ease;
+}
+
+.kc-faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.kc-faq-summary:hover {
+  color: var(--accent);
+}
+
+.kc-faq-summary .kc-faq-glyph {
+  font-weight: 200;
+  font-size: 2.2rem;
+  color: var(--accent);
+  transition: transform .25s ease;
+  width: 24px;
+  text-align: center;
+  line-height: 1;
+}
+
+.kc-faq-item[open] .kc-faq-summary .kc-faq-glyph {
+  transform: rotate(45deg);
+}
+
+.kc-faq-body {
+  padding: 0 0.4rem 2.6rem;
+  font-size: 1.4rem;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+.kc-faq-body p {
+  margin: 0 0 1.2rem 0;
+}
+
+.kc-faq-body p:last-child {
+  margin-bottom: 0;
+}
+
+.kc-faq-description {
+  margin-bottom: 1rem;
+}
+
+.kc-faq-section-content {
+  font-size: 1.4rem;
+  color: var(--body);
+}
+
+/* ============================================================
+   Key Differentiators & Ingredients Cards
+   ============================================================ */
+
+.bf-differentiators {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 6px 0 18px;
+}
+
+@media screen and (min-width: 600px) {
+  .bf-differentiators {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.bf-diff-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 14px 12px;
+}
+
+.bf-diff-card .diff-title {
+  font-weight: 700;
+  font-size: var(--fs-label);
+  letter-spacing: 0.01em;
+  color: var(--accent-deep);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.bf-diff-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bf-diff-card li {
+  font-size: var(--fs-label);
+  color: var(--text);
+  padding-left: 16px;
+  position: relative;
+  line-height: var(--lh-label);
+}
+
+.bf-diff-card li::before {
+  content: "★";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: var(--fs-label);
+}
+
+.bf-foundation {
+  grid-column: 1 / -1;
+  position: relative;
+  margin-top: 2px;
+  padding: 14px 15px 13px;
+  border-radius: 10px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+}
+
+.bf-foundation-tag {
+  position: absolute;
+  top: -1px;
+  left: 22%;
+  width: 56%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent);
+  opacity: 0.5;
+}
+
+.bf-foundation-label {
+  font-family: var(--grot);
+  font-weight: 700;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 10px;
+}
+
+.bf-foundation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.bf-foundation li {
+  color: var(--text);
+  padding-left: 16px;
+  position: relative;
+  line-height: var(--lh-label);
+}
+
+.bf-foundation li::before {
+  content: "◆";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 10px;
+}
+
+/* ============================================================
+   INCI Block & Ingredients Lists
+   ============================================================ */
+
+.bf-inci-block {
+  font-family: var(--grot);
+  font-size: var(--fs-label);
+  color: var(--muted);
+  line-height: var(--lh-body-snug);
+  letter-spacing: 0.01em;
+  margin-top: 14px;
+  padding-top: 2px;
+}
+
+.bf-inci-block .inci-acc summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  cursor: pointer;
+  list-style: none;
+  padding: 4px 0 2px;
+  font-family: var(--grot);
+  font-weight: 700;
+  font-size: var(--fs-caption);
+  line-height: var(--lh-label-tight);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.bf-inci-block .inci-acc .inci-chev {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  color: currentColor;
+  transition: transform .25s ease;
+}
+
+.bf-inci-block .inci-acc[open] .inci-chev {
+  transform: rotate(180deg);
+}
+
+.bf-inci-block .inci-acc .inci-body {
+  padding-top: 10px;
+  color: var(--body);
+}
+
+.bf-inci-block .inci-label {
+  display: inline-block;
+  font-weight: 700;
+  font-size: var(--fs-label);
+  letter-spacing: 0.01em;
+  color: var(--text);
+  margin-right: 6px;
+}
+
+.bf-inci-block .inci-note {
+  margin-top: 10px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Allergen Badges & Tags
+   ============================================================ */
+
+.acc-tags-label {
+  font-family: var(--grot);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 14px 0 8px;
+}
+
+.acc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 2px 0 14px;
+}
+
+.acc-tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: var(--body);
+}
+
+.acc-tag.is-allergen {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.acc-tag.has-tip {
+  position: relative;
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.acc-tag.has-tip .info-tip-popover {
+  width: 258px;
+  max-width: 258px;
+  font-size: var(--fs-md);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  padding: 12px 14px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  white-space: normal;
+  word-break: normal;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity .2s, visibility .2s, transform .2s ease;
+  z-index: 30;
+}
+
+.acc-tag.has-tip .info-tip-popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: var(--surface);
+}
+
+.acc-tag.has-tip:hover .info-tip-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.acc-tag.has-tip.tip-start .info-tip-popover {
+  left: 0;
+  transform: translateX(0) translateY(2px);
+}
+
+.acc-tag.has-tip.tip-start:hover .info-tip-popover {
+  transform: translateX(0) translateY(0);
+}
+
+.acc-tag.has-tip.tip-start .info-tip-popover::after {
+  left: 22px;
+  margin-left: 0;
+}
+
+/* ============================================================
+   Steps & Usage Indicators
+   ============================================================ */
+
+.bf-steps.bf-steps-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 20px 0 24px;
+  text-align: center;
+}
+
+.bf-step .bf-step-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+  color: var(--accent-deep);
+  border-radius: 50%;
+}
+
+.bf-step .bf-step-icon > svg {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
+.bf-step .label {
+  font-size: var(--fs-body);
+  color: var(--text);
+  letter-spacing: -0.1px;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.bf-step .desc {
+  font-size: var(--fs-label);
+  color: var(--muted);
+}
+
+/* ============================================================
+   RDA Table & Safety Specs
+   ============================================================ */
+
+.rda-data {
+  margin-top: 16px;
+}
+
+.rda-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-label);
+}
+
+.rda-tbl th,
+.rda-tbl td {
+  text-align: left;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.rda-tbl thead th {
+  font-size: var(--fs-caption);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.rda-tbl td {
+  color: var(--body);
+}
+
+.rda-tbl td b {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.rda-tbl .num {
+  font-family: var(--grot);
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.rda-tbl .rda-limit-row td {
+  color: var(--muted);
+  border-bottom: none;
+}
+
+.rda-ok {
+  color: #38b26b;
+  font-weight: 800;
+}
+
+.rda-interp {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rda-interp li {
+  font-size: var(--fs-label);
+  color: var(--body);
+  padding-left: 12px;
+  position: relative;
+}
+
+.rda-interp li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .6em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+}
+
+.rda-interp li b {
+  color: var(--text);
+}
+
+.rda-scalekey {
+  margin-top: 12px;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  line-height: var(--lh-caption);
+}
+
+.rda-scalekey b {
+  color: var(--text);
+}
+
+.rda-practice {
+  margin-top: 26px;
+  font-size: var(--fs-label);
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.rda-practice .rda-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent-deep) 45%, transparent);
+  transition: text-decoration-color .2s;
+}
+
+.rda-practice .rda-link:hover {
+  text-decoration-color: var(--accent-deep);
+}
+
+.rda-evidence {
+  margin-top: 26px;
+  color: var(--body);
+}
+
+.acc-tag.is-spec {
+  border-color: color-mix(in srgb, var(--accent-deep) 40%, transparent);
+  background: color-mix(in srgb, var(--accent-deep) 6%, transparent);
+  color: var(--accent-deep);
+}

@@ -154,41 +154,9 @@
             "padding_horizontal": 24
           }
         },
-        "collapsible_tab_6FG4GF": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Ingredient List",
-            "icon": "none",
-            "content": "<p>{{ product.metafields.custom.ingredient_list | metafield_tag }}</p>",
-            "page": ""
-          }
-        },
-        "collapsible_tab_3y7NzH": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "What does it do",
-            "icon": "none",
-            "content": "{{ product.metafields.custom.what_does_it_do | metafield_tag }}",
-            "page": ""
-          }
-        },
-        "collapsible_tab_xk8A9d": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Technical Information",
-            "icon": "none",
-            "content": "{{ product.metafields.custom.technical_information | metafield_tag }}",
-            "page": ""
-          }
-        },
-        "collapsible_tab_RJHCUi": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Active Ingredients",
-            "icon": "none",
-            "content": "{{ product.metafields.custom.active_ingredients | metafield_tag }}",
-            "page": ""
-          }
+        "product_faq_block": {
+          "type": "product_faq",
+          "settings": {}
         }
       },
       "block_order": [
@@ -208,10 +176,7 @@
         "professional_testimonials_block",
         "mission_card_block",
         "info_card_FnBcaN",
-        "collapsible_tab_6FG4GF",
-        "collapsible_tab_3y7NzH",
-        "collapsible_tab_xk8A9d",
-        "collapsible_tab_RJHCUi"
+        "product_faq_block"
       ],
       "settings": {
         "enable_sticky_info": true,

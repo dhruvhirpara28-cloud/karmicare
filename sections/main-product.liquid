@@ -255,6 +255,8 @@
                   {% render 'professional-testimonials', block: block, product: product %}
                 {%- when 'mission_card' -%}
                   {% render 'mission-card', block: block, product: product %}
+                {%- when 'product_faq' -%}
+                  {% render 'product-faq', block: block, product: product %}
                 {%- when 'quantity_selector' -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
@@ -2981,6 +2983,11 @@
       "type": "mission_card",
       "name": "Mission Card",
       "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "product_faq",
+      "name": "Product FAQ",
       "settings": []
     }
   ],

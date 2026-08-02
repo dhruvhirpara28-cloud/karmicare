@@ -1,0 +1,32 @@
+{%- liquid
+  assign faq_items = product.metafields.custom.product_faq.value
+-%}
+{%- if faq_items != blank -%}
+  {{ 'product-faq.css' | asset_url | stylesheet_tag }}
+  <div class="kc-faq-block pdp">
+    <div class="kc-faq-list">
+      {%- for item in faq_items -%}
+        <details
+          class="kc-faq-item"
+        >
+          <summary class="kc-faq-summary">
+            <span>{{ item.title }}</span>
+            <span class="kc-faq-glyph">+</span>
+          </summary>
+          <div class="kc-faq-body">
+            {%- if item.description != blank -%}
+              <div class="kc-faq-description">
+                {{ item.description | metafield_tag }}
+              </div>
+            {%- endif -%}
+            {%- if item.section_content != blank -%}
+              <div class="kc-faq-section-content">
+                {{ item.section_content }}
+              </div>
+            {%- endif -%}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
