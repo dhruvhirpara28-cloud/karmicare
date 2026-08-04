@@ -192,10 +192,10 @@
       "type": "product-compare-plans",
       "name": "Product Compare Plans",
       "settings": {
-        "eyebrow": "Choose your rhythm",
-        "title": "",
-        "subtitle": "<p>Start with one set, refill every 60 days, or choose the full year — the ritual stays the same: <strong>Awake</strong> in the morning, <strong>Asleep</strong> at night.</p>",
-        "footer_text": "<p>Every subscription earns <strong>Care Credit</strong>: real euros toward more Karmicare products — a return on the care you keep.</p>"
+        "eyebrow": "{{ product.metafields.custom.compare_table_header_footer.value.small_heading.value }}",
+        "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
+        "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
+        "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}"
       }
     },
     "disclosures": {

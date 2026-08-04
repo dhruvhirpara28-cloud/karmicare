@@ -59,6 +59,57 @@
       assign welcome_kit_title = block.settings.welcome_kit_title | default: 'Welcome Kit - with first order'
       assign welcome_kit_plans = block.settings.welcome_kit_plans | default: '60-Day Supply'
 
+      if welcome_kit_products == blank
+        assign compare_table = product.metafields.custom.compare_table.value
+        if compare_table != blank
+          assign plans = compare_table.compare_plans.value | sort: 'sort_order'
+          assign rows = compare_table.compare_rows.value | sort: 'sort'
+          for row in rows
+            assign row_type = row.row_type.value | default: row.row_type | downcase
+            assign row_key = row.row_key.value | default: row.row_key | downcase
+            assign row_handle = row.system.handle
+            if row_type == 'welcome_kit' or row_key == 'welcome_kit' or row_handle == 'welcome-kit'
+              if row.welcome_kit.value != blank
+                assign welcome_kit_products = row.welcome_kit.value
+                assign plan_titles = ""
+                for plan in plans
+                  assign cell_value = nil
+                  for val in shop.metaobjects.compare_value.values
+                    assign val_plan = val.compare_plan.value
+                    assign val_row = val.compare_row.value
+                    assign val_plan_id = val_plan.system.id | default: val_plan.id
+                    assign plan_id = plan.system.id | default: plan.id
+                    assign val_row_id = val_row.system.id | default: val_row.id
+                    assign row_id = row.system.id | default: row.id
+                    if val_plan_id == plan_id and val_row_id == row_id
+                      assign cell_value = val
+                      break
+                    endif
+                  endfor
+                  
+                  if cell_value != blank and cell_value.hide_cell.value != true
+                    assign display_type = cell_value.display_type.value | default: cell_value.display_type | downcase
+                    if display_type == 'checkmark' or display_type == 'yes' or display_type == 'true'
+                      assign plan_title = plan.title.value | default: plan.title
+                      if plan_titles == ""
+                        assign plan_titles = plan_title
+                      else
+                        assign plan_titles = plan_titles | append: "," | append: plan_title
+                      endif
+                    endif
+                  endif
+                endfor
+                
+                if plan_titles != ""
+                  assign welcome_kit_plans = plan_titles
+                endif
+                break
+              endif
+            endif
+          endfor
+        endif
+      endif
+
       if block.settings.reward_laurel_image != blank
         assign reward_laurel_url = block.settings.reward_laurel_image | image_url: width: 120
       else

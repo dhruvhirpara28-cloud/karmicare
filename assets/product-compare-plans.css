@@ -253,6 +253,14 @@
   box-sizing: border-box;
 }
 
+.info-tip-popover p {
+  margin: 0;
+}
+
+.info-tip-popover p + p {
+  margin-top: 0.5em;
+}
+
 .info-tip-popover::after {
   content: "";
   position: absolute;
@@ -372,27 +380,7 @@
   font-weight: 700;
 }
 
-/* Mobile responsive selector */
-.pc-mobile-toggle {
-  display: none;
-  justify-content: center;
-  gap: 1rem;
-  margin: 0 auto 3rem auto;
-  padding: 0 1.5rem;
-  max-width: 500px;
-}
 
-.pc-mob-tab {
-  flex: 1;
-  height: 38px;
-  border-radius: 19px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    THEME STYLES (DAY / NIGHT)
@@ -480,17 +468,7 @@ body.day-mode .pc-tag-top {
   border: 1px solid rgba(60, 90, 133, 0.2);
 }
 
-body.day-mode .pc-mob-tab {
-  background: rgba(0, 0, 0, 0.03);
-  color: #555555;
-  border-color: rgba(0, 0, 0, 0.08);
-}
 
-body.day-mode .pc-mob-tab.active {
-  background: #1a2238;
-  color: #ffffff;
-  border-color: #1a2238;
-}
 
 /* ── NIGHT MODE (Dark theme) ── */
 body.night-mode .pc-eyebrow {
@@ -575,17 +553,7 @@ body.night-mode .pc-tag-top {
   border: 1px solid rgba(127, 185, 255, 0.2);
 }
 
-body.night-mode .pc-mob-tab {
-  background: rgba(255, 255, 255, 0.03);
-  color: #a0aec0;
-  border-color: rgba(255, 255, 255, 0.08);
-}
 
-body.night-mode .pc-mob-tab.active {
-  background: #7fb9ff;
-  color: #0d1326;
-  border-color: #7fb9ff;
-}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    RESPONSIVE DESIGN (MOBILE TOGGLE)
@@ -599,30 +567,39 @@ body.night-mode .pc-mob-tab.active {
     font-size: 2.8rem;
   }
 
-  .pc-mobile-toggle {
+  .pc-table {
     display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    padding: 30px 1rem 1rem 1rem;
+    position: relative;
   }
 
-  .pc-table {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 0;
-    padding: 0 1rem;
+  .pc-table::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .pc-table::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .pc-table::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-foreground), 0.15);
+    border-radius: 3px;
+  }
+
+  .pc-col-label {
+    flex: 0 0 150px;
+    min-width: 150px;
   }
 
   .pc-col[data-plan] {
-    display: none;
-  }
-
-  .pc-col[data-plan].mob-visible {
-    display: flex;
-  }
-
-  /* Make sure columns span correctly */
-  .pc-col-label,
-  .pc-col[data-plan].mob-visible {
-    flex: none;
-    width: 100%;
+    flex: 0 0 240px;
+    min-width: 240px;
+    scroll-snap-align: start;
+    display: flex !important;
   }
 
   /* Reset layout of headers and cells on mobile */
@@ -638,19 +615,6 @@ body.night-mode .pc-mob-tab.active {
 
   .pc-cta {
     width: 90%;
-  }
-
-  .pc-featured {
-    border-radius: 0 12px 12px 0;
-    border-left: none;
-  }
-  
-  body.day-mode .pc-featured {
-    border-left: none;
-  }
-  
-  body.night-mode .pc-featured {
-    border-left: none;
   }
 
   .info-tip-popover {

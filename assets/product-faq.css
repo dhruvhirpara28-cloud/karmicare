@@ -168,9 +168,7 @@
 }
 
 .bf-foundation-label {
-  font-family: var(--grot);
   font-weight: 700;
-  font-size: var(--fs-caption);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--accent-deep);
@@ -334,7 +332,7 @@
   white-space: normal;
   word-break: normal;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
@@ -394,7 +392,7 @@
   border-radius: 50%;
 }
 
-.bf-step .bf-step-icon > svg {
+.bf-step .bf-step-icon>svg {
   width: 64px;
   height: 64px;
   display: block;
