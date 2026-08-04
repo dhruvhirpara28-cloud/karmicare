@@ -81,11 +81,6 @@
             "testimonial_button_text": "2× RETURN ON CARE"
           }
         },
-        "loop_subscriptions_loop_widget_3gqW9U": {
-          "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
-          "disabled": true,
-          "settings": {}
-        },
         "quantity_selector": {
           "type": "quantity_selector",
           "disabled": true,
@@ -167,7 +162,6 @@
         "highlights_slider_9wAjAb",
         "variant_picker",
         "loop_subscriptions_WEk4XJ",
-        "loop_subscriptions_loop_widget_3gqW9U",
         "quantity_selector",
         "price",
         "buy_buttons",
@@ -192,6 +186,16 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
+      }
+    },
+    "product_compare_plans_gz9xxx": {
+      "type": "product-compare-plans",
+      "name": "Product Compare Plans",
+      "settings": {
+        "eyebrow": "Choose your rhythm",
+        "title": "",
+        "subtitle": "<p>Start with one set, refill every 60 days, or choose the full year — the ritual stays the same: <strong>Awake</strong> in the morning, <strong>Asleep</strong> at night.</p>",
+        "footer_text": "<p>Every subscription earns <strong>Care Credit</strong>: real euros toward more Karmicare products — a return on the care you keep.</p>"
       }
     },
     "disclosures": {
@@ -226,6 +230,7 @@
   },
   "order": [
     "main",
+    "product_compare_plans_gz9xxx",
     "disclosures",
     "related-products"
   ]

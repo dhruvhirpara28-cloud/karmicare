@@ -1,0 +1,293 @@
+{%- liquid
+  assign compare_table = product.metafields.custom.compare_table.value
+-%}
+
+{%- if compare_table != blank and compare_table.enable.value != false -%}
+  {{ 'product-compare-plans.css' | asset_url | stylesheet_tag }}
+
+  {%- liquid
+    assign plans = compare_table.compare_plans.value | sort: 'sort_order'
+    assign rows = compare_table.compare_rows.value | sort: 'sort'
+    
+    assign eyebrow = section.settings.eyebrow | default: "Choose your rhythm"
+    assign title = section.settings.title | default: compare_table.title | default: "One system. Three ways to begin."
+    assign subtitle = section.settings.subtitle | default: "Start with one set, refill every 60 days, or choose the full year — the ritual stays the same: <b>Awake</b> in the morning, <b>Asleep</b> at night."
+    assign footer_text = section.settings.footer_text | default: "Every subscription earns <b>Care Credit</b>: real euros toward more Karmicare products — a return on the care you keep."
+  -%}
+
+  <section aria-label="Compare plans" class="plan-compare" id="compare-plans-{{ section.id }}">
+    <div class="pc-head">
+      <div class="pc-eyebrow">{{ eyebrow }}</div>
+      <h2 class="pc-title">{{ title }}</h2>
+      <div class="pc-sub">{{ subtitle }}</div>
+    </div>
+
+    <!-- Mobile Tabs Selector -->
+    <div class="pc-mobile-toggle">
+      {%- for plan in plans -%}
+        {%- unless plan.hide_plan.value == true -%}
+          <button 
+            type="button" 
+            class="pc-mob-tab{% if plan.featured.value == true %} active{% endif %}" 
+            data-target-plan="{{ plan.handle_item.value | default: plan.handle_item | escape }}"
+          >
+            {{ plan.title.value | default: plan.title }}
+          </button>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="pc-table">
+      <!-- LABEL COLUMN -->
+      <div class="pc-col pc-col-label">
+        <div class="pc-lhead">
+          <span class="pc-lhead-tag">Compare</span>
+        </div>
+        {%- for row in rows -%}
+          {%- if row.show_row.value == false -%}{%- continue -%}{%- endif -%}
+          <div class="pc-lcell">
+            {%- if row.row_type.value == 'welcome_kit' or row.row_key.value == 'welcome_kit' -%}
+              <span class="pc-kit">
+                <span>{{ row.label.value | default: row.label }}</span>
+                {%- if row.welcome_kit.value != blank -%}
+                  <span aria-hidden="true" class="pc-kit-thumbs">
+                    {%- for prod in row.welcome_kit.value -%}
+                      <img alt="{{ prod.title | escape }}" decoding="async" height="22" src="{{ prod.featured_image | image_url: width: 44 }}" width="22">
+                    {%- endfor -%}
+                  </span>
+                  <span class="pc-kit-pop" role="tooltip">
+                    <span class="pc-kit-poptitle">{{ row.label.value | default: row.label }} · <b>Free</b></span>
+                    {%- for prod in row.welcome_kit.value -%}
+                      <span class="pc-kit-item">
+                        <img alt="{{ prod.title | escape }}" decoding="async" height="34" src="{{ prod.featured_image | image_url: width: 68 }}" width="34">
+                        <span class="pc-kit-itxt">
+                          <b>{{ prod.title }}</b>
+                          <em>Free{% if prod.compare_at_price > prod.price %} · <s>{{ prod.compare_at_price | money_without_trailing_zeros }}</s>{% elsif prod.price > 0 %} · <s>{{ prod.price | money_without_trailing_zeros }}</s>{% endif %}</em>
+                        </span>
+                      </span>
+                    {%- endfor -%}
+                  </span>
+                {%- endif -%}
+              </span>
+            {%- else -%}
+              {{ row.label.value | default: row.label }}
+              {%- if row.tooltip.value != blank -%}
+                <span class="info-tip">
+                  <span aria-hidden="true" class="info-icon">i</span>
+                  <span class="info-tip-popover" role="tooltip">{{ row.tooltip.value }}</span>
+                </span>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+        <div class="pc-lcta"></div>
+      </div>
+
+      <!-- PLAN COLUMNS -->
+      {%- for plan in plans -%}
+        {%- if plan.hide_plan.value == true -%}{%- continue -%}{%- endif -%}
+        {%- assign plan_handle = plan.handle_item.value | default: plan.handle_item -%}
+        <div 
+          class="pc-col{% if plan.featured.value == true %} pc-featured{% endif %}" 
+          data-plan="{{ plan_handle | escape }}"
+        >
+          {%- if plan.ribbon_text.value != blank -%}
+            <span class="pc-ribbon">{{ plan.ribbon_text.value }}</span>
+          {%- endif -%}
+          {%- if plan.top_badge.value != blank -%}
+            <span class="pc-tag pc-tag-top">{{ plan.top_badge.value }}</span>
+          {%- endif -%}
+          
+          <div class="pc-hcell">
+            <span class="pc-name">{{ plan.title.value | default: plan.title }}</span>
+            <span class="pc-price">{{ plan.price_override.value | default: plan.price_override }}</span>
+            <span class="pc-cycle">{{ plan.cycle_text.value | default: plan.cycle_text }}</span>
+          </div>
+
+          {%- for row in rows -%}
+            {%- if row.show_row.value == false -%}{%- continue -%}{%- endif -%}
+            
+            {%- comment -%} Find matching Compare Value cell {%- endcomment -%}
+            {%- assign cell_value = nil -%}
+            {%- for val in shop.metaobjects.compare_value.values -%}
+              {%- assign val_plan = val.compare_plan.value -%}
+              {%- assign val_row = val.compare_row.value -%}
+              {%- assign val_plan_id = val_plan.system.id | default: val_plan.id -%}
+              {%- assign plan_id = plan.system.id | default: plan.id -%}
+              {%- assign val_row_id = val_row.system.id | default: val_row.id -%}
+              {%- assign row_id = row.system.id | default: row.id -%}
+              {%- if val_plan_id == plan_id and val_row_id == row_id -%}
+                {%- assign cell_value = val -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            <div class="pc-cell" data-label="{{ row.label.value | default: row.label | escape }}">
+              {%- if cell_value == blank or cell_value.hide_cell.value == true -%}
+                <span aria-label="Not included" class="pc-no" role="img">—</span>
+              {%- else -%}
+                {%- assign display_type = cell_value.display_type.value | default: cell_value.display_type | downcase -%}
+                {%- if display_type == 'checkmark' or display_type == 'yes' or display_type == 'true' -%}
+                  <span aria-label="Included" class="pc-yes" role="img">✓</span>
+                {%- elsif display_type == 'dash' or display_type == 'no' or display_type == 'false' -%}
+                  <span aria-label="Not included" class="pc-no" role="img">—</span>
+                {%- else -%}
+                  {{ cell_value.value.value | default: cell_value.value }}
+                  {%- if cell_value.tooltip.value != blank -%}
+                    <span class="info-tip pc-tip-end">
+                      <span aria-hidden="true" class="info-icon">i</span>
+                      <span class="info-tip-popover" role="tooltip">{{ cell_value.tooltip.value }}</span>
+                    </span>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+          <div class="pc-ctacell">
+            <button 
+              class="pc-cta{% if plan.featured.value == true %} pc-cta-primary{% endif %}" 
+              data-choose="{{ plan_handle | escape }}"
+              data-selling-plan-id="{{ plan.selling_plan_id.value | default: plan.selling_plan_id | escape }}"
+              data-selling-plan-name="{{ plan.selling_plan_name.value | default: plan.selling_plan_name | escape }}"
+              type="button"
+            >
+              {{ plan.cta_button.value | default: plan.cta_button | default: "Choose plan" }}
+            </button>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if footer_text != blank -%}
+      <div class="pc-foot">{{ footer_text }}</div>
+    {%- endif -%}
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const section = document.getElementById('compare-plans-{{ section.id }}');
+      if (!section) return;
+
+      // Mobile Plan Tabs Toggle
+      const mobileTabs = section.querySelectorAll('.pc-mob-tab');
+      const columns = section.querySelectorAll('.pc-col[data-plan]');
+
+      function showMobilePlan(planHandle) {
+        columns.forEach(col => {
+          if (col.getAttribute('data-plan') === planHandle) {
+            col.classList.add('mob-visible');
+          } else {
+            col.classList.remove('mob-visible');
+          }
+        });
+      }
+
+      // Initialize mobile view
+      const activeTab = section.querySelector('.pc-mob-tab.active') || mobileTabs[0];
+      if (activeTab) {
+        showMobilePlan(activeTab.getAttribute('data-target-plan'));
+      }
+
+      mobileTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          mobileTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          showMobilePlan(this.getAttribute('data-target-plan'));
+        });
+      });
+
+      // Synchronize CTA buttons with Loop subscription widget
+      const chooseButtons = section.querySelectorAll('[data-choose]');
+      chooseButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const chooseVal = this.getAttribute('data-choose');
+          const sellingPlanId = this.getAttribute('data-selling-plan-id');
+          const sellingPlanName = this.getAttribute('data-selling-plan-name');
+          
+          if (chooseVal === 'once') {
+            const oneTimeRadio = document.querySelector('input.loop-one-time-purchase-option-radio');
+            if (oneTimeRadio) {
+              oneTimeRadio.click();
+              oneTimeRadio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          } else {
+            let selectedOption = null;
+            if (sellingPlanId) {
+              selectedOption = document.querySelector(`.loop-selling-plan-selector-option[value="${sellingPlanId}"]`);
+            }
+            
+            if (!selectedOption && sellingPlanName) {
+              document.querySelectorAll('.loop-selling-plan-selector-option').forEach(opt => {
+                if (opt.textContent.trim().toLowerCase().includes(sellingPlanName.toLowerCase())) {
+                  selectedOption = opt;
+                }
+              });
+            }
+            
+            if (selectedOption) {
+              const select = selectedOption.closest('select');
+              if (select) {
+                select.value = selectedOption.value;
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+                
+                const groupContainer = select.closest('.loop-subscription-group');
+                if (groupContainer) {
+                  const radio = groupContainer.querySelector('input.loop-subscription-group-radio');
+                  if (radio) {
+                    radio.click();
+                    radio.dispatchEvent(new Event('change', { bubbles: true }));
+                  }
+                }
+              }
+            }
+          }
+
+          // Smoothly scroll to variant picker or product form
+          const productForm = document.querySelector('product-info, form[action*="/cart/add"]');
+          if (productForm) {
+            productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      });
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Compare Plans",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Choose your rhythm"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title text override (Defaults to Metaobject Title)"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle text",
+      "default": "<p>Start with one set, refill every 60 days, or choose the full year — the ritual stays the same: <b>Awake</b> in the morning, <b>Asleep</b> at night.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "<p>Every subscription earns <b>Care Credit</b>: real euros toward more Karmicare products — a return on the care you keep.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Compare Plans"
+    }
+  ]
+}
+{% endschema %}
