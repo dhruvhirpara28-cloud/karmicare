@@ -32,7 +32,17 @@
         {%- for row in rows -%}
           {%- if row.show_row.value == false -%}{%- continue -%}{%- endif -%}
           <div class="pc-lcell">
-            {%- if row.row_type.value == 'welcome_kit' or row.row_key.value == 'welcome_kit' -%}
+            {%- liquid
+              assign row_type = row.row_type.value | default: row.row_type | downcase
+              assign row_key = row.row_key.value | default: row.row_key | downcase
+              assign row_handle = row.system.handle | default: row.handle | downcase
+              assign row_label = row.label.value | default: row.label | downcase
+              assign is_welcome_kit = false
+              if row_type == 'welcome_kit' or row_key == 'welcome_kit' or row_handle == 'welcome-kit' or row_handle == 'welcome_kit' or row_label contains 'welcome kit'
+                assign is_welcome_kit = true
+              endif
+            -%}
+            {%- if is_welcome_kit -%}
               <span class="pc-kit">
                 <span>{{ row.label.value | default: row.label }}</span>
                 {%- if row.welcome_kit.value != blank -%}
