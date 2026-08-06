@@ -834,20 +834,14 @@ function addExtraLoopStyles() {
         let classList = {
             purchase_option_label: [".loop-purchase-options-label"],
             widget_feildset: [".loop-selling-plan-fieldset"],
-            selling_plan_group_container: [
-                ".loop-one-time-purchase-option",
-                ".loop-subscription-group",
-            ],
+            selling_plan_group_container: [],
             selling_plan_group_label: [
                 ".loop-one-time-purchase-option-label",
                 ".loop-subscription-group-label",
             ],
             selling_plan_label: [".loop-selling-plan-selector-label"],
             selling_plan_selector: [".loop-selling-plan-selector"],
-            selling_plan_price_label: [
-                ".loop-one-time-purchase-option-price-amount",
-                ".loop-subscription-group-price-amount",
-            ],
+            selling_plan_price_label: [],
             selling_plan_price_subtitle_label: [
                 ".loop-one-time-purchase-option-price-quantity",
                 ".loop-subscription-group-price-quantity",

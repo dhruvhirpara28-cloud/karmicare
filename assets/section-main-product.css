@@ -1047,6 +1047,7 @@ a.product__text {
   cursor: pointer;
   background-color: transparent;
   border: 2px solid transparent;
+  overflow: hidden;
 }
 
 .thumbnail:hover {
@@ -1324,7 +1325,25 @@ a.product__text {
   position: relative;
   width: 100%;
   max-width: calc(100% - calc(var(--media-border-width) * 2));
+  border: var(--media-border-width) solid rgba(var(--color-foreground), var(--media-border-opacity));
+  border-radius: var(--secondary-border-radius);
+  overflow: hidden;
 }
+
+.product-media-container .product__modal-opener,
+.product-media-container .media,
+.product-media-container .deferred-media,
+.product-media-container img,
+.product-media-container video,
+.product-media-container iframe {
+  border-radius: var(--secondary-border-radius);
+  overflow: hidden;
+}
+
+.product-media-container:after {
+  border-radius: var(--secondary-border-radius);
+}
+
 
 .product-media-container.constrain-height {
   /* arbitrary offset value based on average theme spacing and header height */
@@ -1397,6 +1416,8 @@ a.product__text {
   background: linear-gradient(135deg, rgba(255, 251, 246, 0.13) 0%, rgba(255, 251, 246, 0.04) 30%, transparent 58%);
   border-radius: var(--secondary-border-radius);
 }
+
+
 
 @media screen and (min-width: 750px) {
   .product-media-container .product__modal-opener:not(.product__modal-opener--image) {
@@ -1775,4 +1796,43 @@ a.product__text {
 .remove-first-bg .product__media-list .product__media-item:first-child .product-media-container .product__modal-opener,
 .product__media-item.remove-first-bg .product-media-container .product__modal-opener {
   background: transparent;
+}
+
+/* ── Product Page Gallery & Subscriptions (Day Mode Customizations) ── */
+
+body.day-mode .product-media-container .product__modal-opener {
+  background: linear-gradient(to bottom, #c5e1ff 0%, #d0e7ff 30%, #dcedff 55%, #e9f3ff 80%, #f6f7f6 100%);
+}
+
+body.day-mode .loop-subscription-group,
+body.day-mode .loop-one-time-purchase-option-position {
+  background: #ffffff;
+  border-color: rgba(25, 31, 56, 0.12);
+}
+
+body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked),
+body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
+  background: #eef6ff;
+  border-color: var(--accent, #7fb9ff);
+  box-shadow: 0 0 0 1px var(--accent, #7fb9ff);
+}
+
+body.day-mode .loop-subscription-group-radio,
+body.day-mode .loop-one-time-purchase-option-radio {
+  border-color: rgba(25, 31, 56, 0.3);
+}
+
+body.day-mode .loop-subscription-group-radio:checked,
+body.day-mode .loop-one-time-purchase-option-radio:checked {
+  border-color: var(--accent, #7fb9ff);
+}
+
+body.day-mode .loop-subscription-group-label,
+body.day-mode .loop-one-time-purchase-option-label {
+  color: #191f38;
+}
+
+body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-label,
+body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option-label {
+  color: var(--accent-deep, #7fb9ff);
 }
