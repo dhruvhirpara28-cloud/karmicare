@@ -184,8 +184,9 @@
         "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
+        "remove_first_media_bg": true,
+        "padding_top": 40,
+        "padding_bottom": 60
       }
     },
     "product_compare_plans_gz9xxx": {
@@ -211,6 +212,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "heading": "You may also like",
         "heading_size": "h2",
