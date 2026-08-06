@@ -78,7 +78,7 @@
           {%- unless placeholder -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
           {%- else -%}
-            <div class="product__media-item">
+            <div class="product__media-item{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}">
               <div
                 class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
@@ -1503,6 +1503,12 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.featured-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_first_media_bg",
+      "default": false,
+      "label": "Remove background from first media"
     },
     {
       "type": "header",

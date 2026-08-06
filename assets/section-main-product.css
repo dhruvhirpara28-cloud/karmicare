@@ -1394,7 +1394,7 @@ a.product__text {
 .product-media-container .product__modal-opener {
   display: block;
   position: relative;
-  background: #191f38;
+  background: linear-gradient(135deg, rgba(255, 251, 246, 0.13) 0%, rgba(255, 251, 246, 0.04) 30%, transparent 58%);
   border-radius: var(--secondary-border-radius);
 }
 
@@ -1755,4 +1755,24 @@ a.product__text {
 
 .night-mode .info-tip-popover::after {
   border-top-color: var(--surface-2);
+}
+
+/* Remove background from first product media container (Desktop & Mobile) */
+.remove-first-bg .product__media-list .product__media-item:first-child .product-media-container,
+.product__media-item.remove-first-bg .product-media-container {
+  background: transparent;
+  background-image: none;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.remove-first-bg .product__media-list .product__media-item:first-child .product-media-container:after,
+.product__media-item.remove-first-bg .product-media-container:after {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.remove-first-bg .product__media-list .product__media-item:first-child .product-media-container .product__modal-opener,
+.product__media-item.remove-first-bg .product-media-container .product__modal-opener {
+  background: transparent;
 }
