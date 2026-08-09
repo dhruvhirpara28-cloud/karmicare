@@ -34,8 +34,8 @@
 
 .loop-one-time-purchase-option-position {
     display: flex;
-    background: rgba(255, 251, 246, 0.03);
-    border: 1px solid rgba(255, 251, 246, 0.1);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 12px;
     box-sizing: border-box;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
@@ -43,15 +43,15 @@
 }
 
 .loop-purchase-options-label {
-    width: auto !important;
+    width: auto;
     flex: 2;
-    padding: 0 !important;
-    margin: 0 !important;
-    font-size: 1.1em !important;
-    line-height: 1.1em !important;
+    padding: 0;
+    margin: 0;
+    font-size: var(--km-body-2xl);
     display: flex;
     gap: var(--gap-lg);
     align-items: center;
+    font-weight: 700;
 }
 
 .loop-purchase-options-label .continuum-eyebrow {
@@ -62,7 +62,7 @@
 }
 
 .loop-purchase-options-label .continuum-line {
-    background: rgba(255, 251, 246, 0.15);
+    background: var(--hairline);
     flex: 1;
     height: 1px;
 }
@@ -127,6 +127,7 @@
     padding: 0;
     margin: 0;
     letter-spacing: -0.015em;
+    line-height: 1.2;
 }
 
 .loop-one-time-purchase-option-price-container {
@@ -137,6 +138,7 @@
 .loop-one-time-purchase-option-price-amount {
     line-height: 1.2em;
     font-size: 1em;
+    font-weight: 700;
 }
 
 .loop-one-time-purchase-option-price-quantity {
@@ -151,15 +153,12 @@
 }
 
 .loop-subscription-group {
-    display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    background: rgba(255, 251, 246, 0.03);
-    border: 1px solid rgba(255, 251, 246, 0.1);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 12px;
     box-sizing: border-box;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    width: 100%;
     position: relative;
 }
 
@@ -173,9 +172,9 @@
 
 .loop-subscription-group:has(.loop-subscription-group-radio:checked),
 .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
-    border-color: var(--accent, #7fb9ff);
-    box-shadow: 0 0 0 1px var(--accent, #7fb9ff);
-    background: rgb(22, 28, 56);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+    background: var(--surface-3);
 }
 
 .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-label,
@@ -231,13 +230,12 @@
 
 .loop-subscription-group-label {
     width: auto;
-    padding: 0;
-    margin: 0 1em 0 0;
     font-size: var(--km-body-2xl);
     font-weight: 600;
     display: flex;
     align-items: center;
-    letter-spacing: -0.015em
+    letter-spacing: -0.015em;
+    line-height: 1.2;
 }
 
 .loop-subscription-group-discount-badge {
@@ -259,6 +257,7 @@
 .loop-subscription-group-price-amount {
     line-height: 1.2em;
     font-size: 1em;
+    font-weight: 700;
 }
 
 .loop-subscription-group-price-quantity {
@@ -292,14 +291,6 @@
     align-items: center;
 }
 
-.loop-selling-plan-selector-description {
-    width: 100%;
-    font-size: 0.9em;
-    line-height: normal;
-    margin: 0;
-    padding: 0;
-    opacity: 1;
-}
 
 .loop-subscription-group-radio:not(:checked)~.loop-subscription-group-selling-plans-container {
     display: none;
@@ -326,6 +317,31 @@
     opacity: 0.75;
     margin-top: 3px;
     line-height: 1.3;
+}
+
+.kc-return_care {
+    background: var(--surface-4);
+    color: var(--text);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    max-width: fit-content;
+}
+
+.block__loop-description .kc-description-list {
+    margin-top: 15px;
+}
+
+.block__loop-description .kc-description-list+.kc-description-list {
+    margin-top: 5px;
+}
+
+.kc-description-list .arrow {
+    color: var(--accent);
 }
 
 .loop-price-container {
@@ -446,8 +462,8 @@
 
 /* KC Welcome Kit Custom Styles */
 .loop-welcome-kit-section {
-    background: rgba(17, 21, 45, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
     margin-top: 16px;
@@ -469,18 +485,18 @@
 .loop-welcome-kit-title {
     font-size: 13px;
     font-weight: 600;
-    color: #FFFFFF;
+    color: var(--text);
     font-family: inherit;
     letter-spacing: -0.2px;
 }
 
 .loop-welcome-kit-badge {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--surface-4);
     border-radius: 100px;
     padding: 4px 12px;
     font-size: 11px;
     font-weight: 600;
-    color: #E2E4F0;
+    color: var(--text);
     text-transform: lowercase;
     white-space: nowrap;
     letter-spacing: -0.1px;
@@ -489,7 +505,7 @@
 .loop-welcome-kit-toggle {
     font-size: 18px;
     font-weight: 400;
-    color: #A3A7C7;
+    color: var(--muted);
     margin-left: 12px;
     display: inline-flex;
     align-items: center;
@@ -502,7 +518,7 @@
 }
 
 .loop-welcome-kit-header:hover .loop-welcome-kit-toggle {
-    color: #FFFFFF;
+    color: var(--text);
 }
 
 .loop-welcome-kit-toggle::before {
@@ -538,7 +554,8 @@
     height: 64px;
     object-fit: contain;
     margin-bottom: 8px;
-    border-radius: 4px;
+    border: 1px solid var(--border);
+    border-radius: var(--primary-border-radius);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -547,9 +564,8 @@
 }
 
 .loop-welcome-kit-product-link {
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.3;
-    color: #E2E4F0;
     text-decoration: underline;
     text-underline-offset: 3px;
     font-weight: 500;
@@ -558,18 +574,17 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    height: 2.6em;
     cursor: pointer;
     transition: color 0.15s ease-in-out;
 }
 
 .loop-welcome-kit-product-link:hover {
-    color: #FFFFFF;
+    color: var(--accent);
 }
 
 .loop-welcome-kit-product-price {
     font-size: 11px;
-    color: #A3A7C7;
+    color: var(--muted);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -613,7 +628,7 @@
 
 /* KC Pricing Summary Box */
 .kc-pricing-summary {
-    background: var(--color-loop-pricing-summary-bg, #0d1b2e);
+    background: var(--surface-2);
     border-radius: 10px;
     padding: 14px 18px;
     margin-top: 4px;
@@ -630,14 +645,14 @@
 .kc-pricing-summary__label {
     font-size: 18px;
     font-weight: 700;
-    color: var(--color-loop-pricing-summary-text, #ffffff);
+    color: var(--text);
     letter-spacing: -0.01em;
 }
 
 .kc-pricing-summary__price {
     font-size: 26px;
     font-weight: 700;
-    color: var(--color-loop-pricing-summary-text, #ffffff);
+    color: var(--text);
     letter-spacing: -0.02em;
 }
 
@@ -650,12 +665,8 @@
 .kc-pricing-summary__per-brushing,
 .kc-pricing-summary__interval {
     font-size: 12px;
-    color: var(--color-loop-pricing-summary-muted, rgba(255, 255, 255, 0.55));
+    color: var(--muted);
     letter-spacing: 0;
-}
-
-.night-mode .kc-pricing-summary {
-    background: #0d1b2e;
 }
 
 /* ============================================
@@ -676,8 +687,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
-    background: rgba(255, 251, 246, 0.03);
-    border: 1px solid rgba(255, 251, 246, 0.1);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 16px;
     box-sizing: border-box;
     min-height: 90px;
@@ -695,7 +706,7 @@
 
 .kc-reward-amt {
     font-size: 24px;
-    color: rgb(var(--color-foreground, 255, 255, 255));
+    color: rgb(var(--color-foreground));
     line-height: 1.1;
     letter-spacing: -0.04em;
 }
@@ -703,7 +714,7 @@
 .kc-reward-label {
     font-size: 12px;
     font-weight: 500;
-    color: rgba(var(--color-foreground, 255, 255, 255), 0.8);
+    color: rgba(var(--color-foreground), 0.8);
     line-height: 1.3;
 }
 
@@ -767,8 +778,8 @@
     align-items: center;
     gap: 16px;
     padding: 16px;
-    background: rgba(255, 251, 246, 0.03);
-    border: 1px solid rgba(255, 251, 246, 0.1);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 16px;
     box-sizing: border-box;
 }
@@ -788,8 +799,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255, 251, 246, 0.1);
-    color: rgba(255, 251, 246, 0.6);
+    background: var(--border);
+    color: var(--body);
     flex-shrink: 0;
 }
 
@@ -814,7 +825,7 @@
 .kc-testimonial-text {
     font-size: 13px;
     font-style: italic;
-    color: rgb(var(--color-foreground, 255, 255, 255));
+    color: rgb(var(--color-foreground));
     line-height: 1.4;
     margin: 0;
     padding: 0;

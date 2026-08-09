@@ -976,23 +976,6 @@
         }
 
         body.night-mode .kc-bd-stage::after {
-    <<<<<<< HEAD
-          background: radial-gradient(
-            ellipse 88% 92% at 50% 88%,
-            rgba(0, 0, 0, 0) 42%,
-            rgba(0, 0, 0, 0.2) 78%,
-            rgba(0, 0, 0, 0.46) 100%
-          );
-        }
-
-        body.day-mode .kc-bd-stage::after {
-          background: radial-gradient(
-            ellipse 90% 94% at 50% 88%,
-            rgba(255, 255, 255, 0) 44%,
-            rgba(138, 177, 218, 0.06) 80%,
-            rgba(143, 178, 213, 0.14) 100%
-          );
-    =======
           background: radial-gradient(ellipse 88% 92% at 50% 88%,
             rgba(0,0,0,0) 42%, rgba(0,0,0,0.20) 78%, rgba(0,0,0,0.46) 100%);
         }
@@ -1000,7 +983,6 @@
         body.day-mode .kc-bd-stage::after {
           background: radial-gradient(ellipse 90% 94% at 50% 88%,
             rgba(255,255,255,0) 44%, rgba(138,177,218,0.06) 80%, rgba(143,178,213,0.14) 100%);
-    >>>>>>> 5f688a1e5a41893c9a94026f958c4956301b185d
         }
 
         .kc-bd-grain {
@@ -1008,91 +990,6 @@
           inset: -50%;
           z-index: 3;
           pointer-events: none;
-    <<<<<<< HEAD
-          opacity: 0.3;
-          mix-blend-mode: overlay;
-          background-repeat: repeat;
-          animation: kc-grain-drift 7s steps(6) infinite;
-        }
-
-        body.day-mode .kc-bd-grain {
-          opacity: 0.16;
-          mix-blend-mode: multiply;
-        }
-
-        @keyframes kc-breathe {
-          from {
-            opacity: 0.86;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        @keyframes kc-grain-drift {
-          0% {
-            transform: translate3d(0, 0, 0);
-          }
-          16% {
-            transform: translate3d(-6px, 4px, 0);
-          }
-          33% {
-            transform: translate3d(5px, -7px, 0);
-          }
-          50% {
-            transform: translate3d(-8px, -3px, 0);
-          }
-          66% {
-            transform: translate3d(7px, 6px, 0);
-          }
-          83% {
-            transform: translate3d(-4px, 8px, 0);
-          }
-          100% {
-            transform: translate3d(0, 0, 0);
-          }
-        }
-
-        .product-container {
-          background: transparent;
-          position: relative;
-          z-index: 1;
-        }
-
-        @media (max-width: 1080px) {
-          body.night-mode .kc-bd-stage {
-            background: radial-gradient(
-                ellipse 60% 26% at 40% 60%,
-                rgba(126, 169, 232, 0.2) 0%,
-                rgba(126, 169, 232, 0.07) 44%,
-                rgba(126, 169, 232, 0) 72%
-              ),
-              linear-gradient(
-                to bottom,
-                #020308 0%,
-                #0c0f1c 22%,
-                #141a2f 44%,
-                #1b2340 62%,
-                #232d4e 76%,
-                #2c3859 86%,
-                #3a4869 94%,
-                #4a5a7e 100%
-              );
-          }
-          body.night-mode .kc-bd-stage::before {
-            background: radial-gradient(
-                ellipse 150% 42% at 50% 118%,
-                rgba(232, 243, 255, 0.85) 0%,
-                rgba(190, 214, 246, 0.42) 26%,
-                rgba(96, 124, 178, 0.18) 52%,
-                rgba(0, 0, 0, 0) 78%
-              ),
-              radial-gradient(
-                ellipse 100% 24% at 42% 92%,
-                rgba(135, 168, 222, 0.16) 0%,
-                rgba(64, 90, 150, 0.07) 50%,
-                rgba(0, 0, 0, 0) 78%
-              );
-    =======
           opacity: 0.30;
           mix-blend-mode: overlay;
           background-repeat: repeat;
@@ -1125,30 +1022,16 @@
           }
           body.night-mode .kc-bd-stage::before {
             background:
-              radial-gradient(ellipse 150% 42% at 50% 118%, rgba(232,243,255,0.85) 0%, rgba(190,214,246,0.42) 26%, rgba(96,124,178,0.18) 52%, rgba(0,0,0,0) 78%),
-              radial-gradient(ellipse 100% 24% at 42% 92%, rgba(135,168,222,0.16) 0%, rgba(64,90,150,0.07) 50%, rgba(0,0,0,0) 78%);
-    >>>>>>> 5f688a1e5a41893c9a94026f958c4956301b185d
+              radial-gradient(ellipse 150% 42% at 50% 118%, rgba(232,243,255,0.85) 0%, rgba(190, 214, 246, 0.42) 26%, rgba(96, 124, 178, 0.18) 52%, rgba(0,0,0,0) 78%),
+              radial-gradient(ellipse 100% 24% at 42% 92%, rgba(135,168,222,0.16) 0%, rgba(64, 90, 150, 0.07) 50%, rgba(0, 0, 0, 0) 78%);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-    <<<<<<< HEAD
-          .kc-bd-grain,
-          .kc-bd-stage::before {
-            animation: none;
-          }
-        }
-
-        .kc-bd-outro,
-        .kc-bd-grain {
-          display: block !important;
-        }
-    =======
           .kc-bd-grain, .kc-bd-stage::before { animation: none; }
         }
 
         .kc-bd-outro, .kc-bd-grain { display: block !important; }
-    >>>>>>> 5f688a1e5a41893c9a94026f958c4956301b185d
   </style>
 </product-info>
 

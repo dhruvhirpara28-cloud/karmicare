@@ -146,15 +146,14 @@ body svg {
    ───────────────────────────────────────────────────── */
 :root {
   --accent: #7fb9ff;
-  --accent-deep: #7fb9ff;
   --grot: var(--sans);
-  --mono: var(--sans);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --bg: #fffbf6;
   --bg-rgb: 255 251 246;
   --surface: #ffffff;
-  --surface-2: #f3eee5;
-  --surface-3: #efece8;
+  --surface-2: rgba(25, 31, 56, 0.04);
+  --surface-3: rgb(25 31 56 / 8%);
+  --surface-4: rgba(127, 185, 255, 0.15);
   --text: #191f38;
   --body: rgba(25, 31, 56, 0.78);
   --muted: rgba(25, 31, 56, 0.70);
@@ -170,6 +169,7 @@ body svg {
   --surface: #141934;
   --surface-2: #1d2548;
   --surface-3: #2c3a60;
+  --surface-4: rgba(127, 185, 255, 0.25);
   --text: #fffbf6;
   --body: rgba(255, 251, 246, 0.82);
   --muted: rgba(255, 251, 246, 0.58);
@@ -243,7 +243,7 @@ body.day-mode h3,
 body.day-mode h4,
 body.day-mode h5,
 body.day-mode h6 {
-  color: var(--kc-day-heading-color, #121212);
+  color: var(--kc-day-heading-color);
 }
 
 /* Day navigation areas */
@@ -253,7 +253,7 @@ body.day-mode .navbar-wrapper,
 body.day-mode .nav-menu-wrapper,
 body.day-mode .sidemenu-bar-inner,
 body.day-mode .kc_nav-menu {
-  background-color: var(--kc-day-bg-color, #ffffff);
+  background-color: var(--kc-day-bg-color);
 }
 
 /* Day text elements */
@@ -265,12 +265,12 @@ body.day-mode .copyright-text,
 body.day-mode .copyright-link,
 body.day-mode .top-cart-title,
 body.day-mode .cart-count {
-  color: var(--kc-day-text-color, #121212);
+  color: var(--kc-day-text-color);
 }
 
 body.day-mode .outline-button {
-  border-color: var(--kc-day-text-color, #121212);
-  color: var(--kc-day-text-color, #121212);
+  border-color: var(--kc-day-text-color);
+  color: var(--kc-day-text-color);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -278,8 +278,8 @@ body.day-mode .outline-button {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 body.night-mode {
-  background-color: var(--kc-night-bg-color, #0f0f0f);
-  color: var(--kc-night-text-color, #e5e5e5);
+  background-color: var(--kc-night-bg-color);
+  color: var(--kc-night-text-color);
 }
 
 body.night-mode.kc-has-night-image {
@@ -297,7 +297,7 @@ body.night-mode h3,
 body.night-mode h4,
 body.night-mode h5,
 body.night-mode h6 {
-  color: var(--kc-night-heading-color, #ffffff);
+  color: var(--kc-night-heading-color);
 }
 
 /* Night navigation areas */
@@ -307,7 +307,7 @@ body.night-mode .navbar-wrapper,
 body.night-mode .nav-menu-wrapper,
 body.night-mode .sidemenu-bar-inner,
 body.night-mode .kc_nav-menu {
-  background-color: var(--kc-night-bg-color, #0f0f0f);
+  background-color: var(--kc-night-bg-color);
 }
 
 /* Night text elements */
@@ -319,12 +319,12 @@ body.night-mode .copyright-text,
 body.night-mode .copyright-link,
 body.night-mode .top-cart-title,
 body.night-mode .cart-count {
-  color: var(--kc-night-text-color, #e5e5e5);
+  color: var(--kc-night-text-color);
 }
 
 body.night-mode .outline-button {
-  border-color: var(--kc-night-text-color, #e5e5e5);
-  color: var(--kc-night-text-color, #e5e5e5);
+  border-color: var(--kc-night-text-color);
+  color: var(--kc-night-text-color);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -357,7 +357,7 @@ body.day-mode [class*="color-scheme-"] {
   --color-foreground: var(--kc-day-text-r, 18), var(--kc-day-text-g, 18), var(--kc-day-text-b, 18);
   --gradient-background: var(--kc-day-bg-color, #ffffff);
   background-color: rgb(var(--color-background));
-  color: rgba(var(--color-foreground), 0.9);
+  color: rgb(var(--color-foreground));
 }
 
 /* ── Ensure nav links, headings, buttons within sections also follow mode ── */

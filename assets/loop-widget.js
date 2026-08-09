@@ -705,9 +705,12 @@ function addLoopPurchaseOptionLabelText(productId) {
     if (elements) {
         elements.forEach((element) => {
             if (element) {
-                element.innerHTML = `${window.loopPropsUI.loopPurchaseOptionslabel ||
-                    "Purchase Options"
-                    }`;
+                const hasCustom = element.querySelector(".continuum-desc, .continuum-eyebrow");
+                if (!hasCustom) {
+                    element.innerHTML = `${window.loopPropsUI.loopPurchaseOptionslabel ||
+                        "Purchase Options"
+                        }`;
+                }
             }
         });
     }
@@ -832,13 +835,10 @@ function hideLoopTooltip(productId) {
 function addExtraLoopStyles() {
     if (window && window.loopPropsUI && window.loopPropsUI.style) {
         let classList = {
-            purchase_option_label: [".loop-purchase-options-label"],
+            purchase_option_label: [],
             widget_feildset: [".loop-selling-plan-fieldset"],
             selling_plan_group_container: [],
-            selling_plan_group_label: [
-                ".loop-one-time-purchase-option-label",
-                ".loop-subscription-group-label",
-            ],
+            selling_plan_group_label: [],
             selling_plan_label: [".loop-selling-plan-selector-label"],
             selling_plan_selector: [".loop-selling-plan-selector"],
             selling_plan_price_label: [],
@@ -846,9 +846,7 @@ function addExtraLoopStyles() {
                 ".loop-one-time-purchase-option-price-quantity",
                 ".loop-subscription-group-price-quantity",
             ],
-            selling_plan_description_label: [
-                ".loop-selling-plan-selector-description",
-            ],
+            selling_plan_description_label: [],
             selling_plan_discount_badge_style: [
                 ".loop-subscription-group-discount-badge",
             ],
@@ -936,10 +934,15 @@ function hideLoopSellingPlanFieldset(productId) {
 function applyLoopSettings({ productId }) {
     let product = window.loopProps[productId].product;
     const variant = findSelectedVariantLoop(productId);
+    const hasCustomLabel = getLoopSubscriptionContainer(productId)?.querySelector(
+        ".loop-purchase-options-label .continuum-desc, .loop-purchase-options-label .continuum-eyebrow"
+    );
+
     if (
         window &&
         window.loopPropsUI &&
-        window.loopPropsUI.displayLoopPurchaseOptionLabel === false
+        window.loopPropsUI.displayLoopPurchaseOptionLabel === false &&
+        !hasCustomLabel
     ) {
         hideLoopPurchaseOptionsLabel(productId);
     }
@@ -2740,10 +2743,16 @@ function hideLoopStorefrontExcludedSPG(productId) {
 
 function clickUpdatedSPGLoop(productId) {
     showSellingPlanFieldsetLoop(productId);
+    const hasCustomLabel = getLoopSubscriptionContainer(productId)?.querySelector(
+        ".loop-purchase-options-label .continuum-desc, .loop-purchase-options-label .continuum-eyebrow"
+    );
+
     if (
-        window &&
-        window.loopPropsUI &&
-        window.loopPropsUI.displayLoopPurchaseOptionLabel
+        hasCustomLabel || (
+            window &&
+            window.loopPropsUI &&
+            window.loopPropsUI.displayLoopPurchaseOptionLabel
+        )
     ) {
         showLoopPurchaseOptionsLabel(productId);
     } else {
