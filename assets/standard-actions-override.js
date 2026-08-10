@@ -114,6 +114,7 @@ async function refreshDawnCartUI() {
     cartData: cartData ?? undefined,
   });
 }
+window.refreshDawnCartUI = refreshDawnCartUI;
 
 function initStandardActions() {
   const actions = window.Shopify?.actions;

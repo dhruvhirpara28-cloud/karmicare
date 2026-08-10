@@ -3,21 +3,37 @@
     (function () {
       // ─── CONFIG (Theme Settings Driven) ──────────────────────────────────────
       const BUNDLE_PRODUCT_IDS = [
-        {% for product in settings.welcome_kit_bundle_products %}
-          {{ product.id }}{% unless forloop.last %},{% endunless %}
+        {% for prod_item in settings.welcome_kit_bundle_products %}
+          {%- liquid
+            assign prod = prod_item
+            if prod_item.id == nil
+              assign prod = all_products[prod_item]
+            endif
+          -%}
+          {% if prod != blank and prod.id != blank %}
+            {{ prod.id }}{% unless forloop.last %},{% endunless %}
+          {% endif %}
         {% endfor %}
       ];
 
       const FREE_PRODUCTS = [
-        {% for product in settings.welcome_kit_free_product %}
-          {
-            variantId: {{ product.variants.first.id }},
-            productId: {{ product.id }}
-          }{% unless forloop.last %},{% endunless %}
+        {% for prod_item in settings.welcome_kit_free_product %}
+          {%- liquid
+            assign prod = prod_item
+            if prod_item.id == nil
+              assign prod = all_products[prod_item]
+            endif
+          -%}
+          {% if prod != blank and prod.variants.first != blank %}
+            {
+              variantId: {{ prod.variants.first.id }},
+              productId: {{ prod.id }}
+            }{% unless forloop.last %},{% endunless %}
+          {% endif %}
         {% endfor %}
       ];
 
-      const DISCOUNT_CODE = 'WelCome Kit Free';
+      const DISCOUNT_CODE = 'Welcome Kit';
 
       console.log("Welcome Kit: Loaded configuration", {
         FREE_PRODUCTS,
@@ -44,7 +60,7 @@
         window.location.pathname.includes('/orders/') ||
         (typeof Shopify !== 'undefined' && Shopify.Checkout && Shopify.Checkout.page === 'thank_you')
       ) {
-        document.cookie = "welcome_kit_purchased=true; path=/; max-age=315360000; SameSite=Lax; Secure";
+        document.cookie = "welcome_kit_purchased=true; path=/; max-age=31536000; SameSite=Lax; Secure";
       }
 
       let isUpdating = false;
