@@ -1,0 +1,116 @@
+<script>
+  (function() {
+    const stdBtn = document.getElementById('ProductSubmitButton-{{ section_id }}');
+    const customBtn = document.getElementById('CustomSubmitButton-{{ section_id }}');
+    if (!stdBtn || !customBtn) return;
+
+    customBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const form = customBtn.closest('product-form') || customBtn.closest('form');
+      const variantIdInput = form ? form.querySelector('[name="id"]') : null;
+      const variantId = variantIdInput ? variantIdInput.value : null;
+      if (!variantId) return;
+
+      const sellingPlanInput = form ? form.querySelector('[name="selling_plan"]') : null;
+      const sellingPlanId = sellingPlanInput ? sellingPlanInput.value : null;
+
+      const quantityInput = form ? form.querySelector('[name="quantity"]') : null;
+      const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+
+      {% if block.settings.redirect_to_checkout %}
+        // Direct Checkout Flow
+        customBtn.classList.add('loading');
+        const customSpinner = customBtn.querySelector('.loading__spinner');
+        if (customSpinner) customSpinner.classList.remove('hidden');
+
+        const mainItem = { id: parseInt(variantId), quantity: quantity };
+        if (sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
+          mainItem.selling_plan = parseInt(sellingPlanId);
+        }
+        const items = [mainItem];
+
+        // Welcome Kit Eligibility check
+        const customerAlreadyPurchased = {% if customer %}{% if customer.orders_count > 0 or customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %}{% else %}false{% endif %};
+        const hasWelcomeKitCookie = document.cookie.split('; ').some(row => row.startsWith('welcome_kit_purchased='));
+        const isBundleProduct = {{ is_bundle_product | default: false }};
+        const welcomeKitVariantId = {{ welcome_kit_variant_id | json }};
+
+        if (sellingPlanId && !isNaN(parseInt(sellingPlanId)) && isBundleProduct && welcomeKitVariantId && !customerAlreadyPurchased && !hasWelcomeKitCookie) {
+          items.push({ id: parseInt(welcomeKitVariantId), quantity: 1 });
+        }
+
+        try {
+          // Add selected items to cart
+          const addResponse = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: items })
+          });
+          if (!addResponse.ok) throw new Error('Cart add failed');
+
+          // Auto-apply discount if welcome kit was added
+          if (items.length > 1) {
+            const updateResponse = await fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ discount: 'Welcome Kit' })
+            });
+            if (!updateResponse.ok) throw new Error('Discount update failed');
+          }
+
+          // Redirect directly to checkout
+          window.location.href = '/checkout';
+        } catch (err) {
+          console.error('Checkout redirect failed:', err);
+          customBtn.classList.remove('loading');
+          const customSpinner = customBtn.querySelector('.loading__spinner');
+          if (customSpinner) customSpinner.classList.add('hidden');
+          stdBtn.click();
+        }
+      {% else %}
+        // Standard Cart Flow
+        stdBtn.click();
+      {% endif %}
+    });
+
+    // Sync classes/loading/disabled states from standard button to custom button
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isLoading = stdBtn.classList.contains('loading');
+          customBtn.classList.toggle('loading', isLoading);
+          const customSpinner = customBtn.querySelector('.loading__spinner');
+          if (customSpinner) {
+            customSpinner.classList.toggle('hidden', !isLoading);
+          }
+        }
+        if (mutation.attributeName === 'disabled') {
+          const isDisabled = stdBtn.hasAttribute('disabled');
+          if (isDisabled) {
+            customBtn.setAttribute('disabled', 'disabled');
+          } else {
+            customBtn.removeAttribute('disabled');
+          }
+        }
+        if (mutation.attributeName === 'aria-disabled') {
+          const isAriaDisabled = stdBtn.getAttribute('aria-disabled');
+          if (isAriaDisabled) {
+            customBtn.setAttribute('aria-disabled', isAriaDisabled);
+          } else {
+            customBtn.removeAttribute('aria-disabled');
+          }
+        }
+      });
+    });
+
+    observer.observe(stdBtn, { attributes: true });
+
+    // Reset loading state on browser back/forward navigation (bfcache)
+    window.addEventListener('pageshow', () => {
+      customBtn.classList.remove('loading');
+      const customSpinner = customBtn.querySelector('.loading__spinner');
+      if (customSpinner) customSpinner.classList.add('hidden');
+    });
+  })();
+</script>

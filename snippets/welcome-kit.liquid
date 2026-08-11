@@ -124,9 +124,10 @@
           const items = cart.items || [];
           console.log("Welcome Kit: Current cart items:", items);
 
-          // FIX 4: product_id in cart is a NUMBER, so parse BUNDLE_PRODUCT_IDS as numbers
+          // Check that the cart has a bundle product AND it has a subscription selected
           const hasBundleItem = items.some((item) =>
-            BUNDLE_PRODUCT_IDS.includes(item.product_id)
+            BUNDLE_PRODUCT_IDS.includes(item.product_id) &&
+            item.selling_plan_allocation != null
           );
 
           const isNotEligible = customerAlreadyPurchased || hasWelcomeKitCookie();

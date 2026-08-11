@@ -90,10 +90,16 @@ async function refreshDawnCartUI() {
     : '';
   // `routes` is a Dawn global, but don't assume it's defined.
   const cartUrl = (typeof routes !== 'undefined' && routes?.cart_url) || '/cart';
-  const url = `${cartUrl}.js${sectionsQuery}`;
-  const cartData = await fetch(url, { headers: { Accept: 'application/json' } })
-    .then((r) => (r.ok ? r.json() : null))
-    .catch(() => null);
+
+  // Fetch both the cart JSON and the rendered sections in parallel
+  const [cartJson, sectionsJson] = await Promise.all([
+    fetch(`${cartUrl}.js`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    sections.size
+      ? fetch(`${cartUrl}${sectionsQuery}`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+      : Promise.resolve(null)
+  ]);
+
+  const cartData = cartJson ? { ...cartJson, sections: sectionsJson } : null;
 
   if (cartData?.sections) {
     for (const [id, { mount, extractSelector }] of sections) {

@@ -71,11 +71,57 @@
               assign quantity_rule_soldout = true
             endif
           -%}
+          {%- liquid
+            assign is_bundle_product = false
+            for prod_item in settings.welcome_kit_bundle_products
+              assign prod = prod_item
+              if prod_item.id == null
+                assign prod = all_products[prod_item]
+              endif
+              if prod != blank and prod.id == product.id
+                assign is_bundle_product = true
+              endif
+            endfor
+
+            assign welcome_kit_variant_id = null
+            for prod_item in settings.welcome_kit_free_product
+              assign prod = prod_item
+              if prod_item.id == null
+                assign prod = all_products[prod_item]
+              endif
+              if prod != blank and prod.variants.first != blank
+                assign welcome_kit_variant_id = prod.variants.first.id
+              endif
+            endfor
+          -%}
+
+          {%- if block.settings.show_custom_button -%}
+            <button
+              id="CustomSubmitButton-{{ section_id }}"
+              type="button"
+              class="product-form__submit product-form__custom-submit block__animate-button button button--full-width button--primary"
+              style="margin-bottom: 1rem;"
+              {% if product.selected_or_first_available_variant.available == false
+                or quantity_rule_soldout
+                or product.selected_or_first_available_variant == null
+              %}
+                disabled
+              {% endif %}
+            >
+              <span>{{ block.settings.custom_button_text | default: 'Begin Now' }}</span>
+              <span class="arrow">›</span>
+              {%- render 'loading-spinner' -%}
+            </button>
+          {%- endif -%}
+
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
             class="product-form__submit block__animate-button button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            {% if block.settings.show_add_to_cart == false %}
+              style="display: none;"
+            {% endif %}
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
@@ -98,19 +144,42 @@
             >
             {%- render 'loading-spinner' -%}
           </button>
+
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
         </div>
       {%- endform -%}
     </product-form>
+
+    {%- if block.settings.show_custom_button -%}
+      {% render 'custom-button-script',
+        section_id: section_id,
+        is_bundle_product: is_bundle_product,
+        welcome_kit_variant_id: welcome_kit_variant_id,
+        block: block
+      %}
+    {%- endif -%}
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">
+        {%- if block.settings.show_custom_button -%}
+          <button
+            type="button"
+            class="product-form__submit button button--full-width button--primary"
+            style="margin-bottom: 1rem;"
+            disabled
+          >
+            {{ block.settings.custom_button_text | default: 'Begin Now' }}
+          </button>
+        {%- endif -%}
         <button
           type="submit"
           name="add"
           class="product-form__submit button button--full-width button--primary"
+          {% if block.settings.show_add_to_cart == false %}
+            style="display: none;"
+          {% endif %}
           disabled
         >
           {{ 'products.product.sold_out' | t }}
