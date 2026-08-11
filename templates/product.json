@@ -93,8 +93,12 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": false
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "show_add_to_cart": false,
+            "show_custom_button": true,
+            "custom_button_text": "Begin Now",
+            "redirect_to_checkout": true
           }
         },
         "icon_with_text_xhaDGB": {
