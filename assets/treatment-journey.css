@@ -1,0 +1,231 @@
+.kc-treatment-journey-block {
+  margin: 3.2rem 0;
+  font-family: inherit;
+}
+
+/* Journey Container */
+.kc-journey-container {
+  margin-bottom: 4rem;
+}
+
+.kc-journey-container:last-child {
+  margin-bottom: 0;
+}
+
+/* Header & Badge Layout */
+.kc-journey-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+
+.kc-journey-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.kc-journey-header .head-rule {
+  flex: 1 1 auto;
+  min-width: 14px;
+  height: 1px;
+  background: var(--hairline);
+  align-self: center;
+}
+
+.kc-journey-subtitle {
+  margin-left: 0.6rem;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.kc-journey-badge {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  text-transform: capitalize;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* List Layout */
+.kc-journey-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kc-journey-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+  margin-bottom: 1.2rem;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  position: relative;
+}
+
+.kc-journey-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Icon Styling */
+.kc-journey-item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.kc-journey-item-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.kc-journey-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+body.night-mode .kc-journey-item-icon svg {
+  color: var(--accent);
+}
+
+/* Content Layout */
+.kc-journey-item-content {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.kc-journey-item-content p,
+.kc-journey-item-content div,
+.kc-journey-item-content span {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.kc-journey-item-title {
+  font-weight: 700;
+}
+
+/* Lock Icon Styling */
+.kc-journey-item-lock {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.kc-journey-item-lock svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.kc-journey-item-lock svg {
+  color: rgb(var(--color-foreground));
+}
+
+.kc-journey-lock-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Default state: hide lock-open and show lock-closed */
+.kc-journey-item-lock .lock-open {
+  display: none;
+}
+
+.kc-journey-item-lock .lock-closed {
+  display: block;
+}
+
+.kc-journey-item-lock {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Active yearly plan state: show lock-open, hide lock-closed, and color blue */
+.kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-open {
+  display: block;
+}
+
+.kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-closed {
+  display: none;
+}
+
+.kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock {
+  color: var(--accent);
+}
+
+/* Disclaimer Styling */
+.kc-journey-disclaimer {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin: 1.5rem 0 1rem 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Collapsible Items Animation */
+.kc-journey-item-collapsible {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-bottom: 0;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease,
+    margin-bottom 0.35s ease;
+}
+
+.kc-journey-item-collapsible.expanded {
+  opacity: 1;
+  margin-bottom: 1.2rem;
+}
+
+/* Read More Toggle Container */
+.kc-journey-toggle-container {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.kc-journey-toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--read-more-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0;
+  transition: opacity 0.2s ease;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.kc-journey-toggle-btn:hover {
+  opacity: 0.85;
+}
+
+.kc-journey-toggle-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

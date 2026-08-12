@@ -6,211 +6,11 @@
   assign visible_items_count = block.settings.visible_items
 -%}
 {%- if list_1 != blank or list_2 != blank -%}
-  <!-- Premium Treatment Journey Styles -->
-  <style>
-    .kc-treatment-journey-block {
-      margin: 3.2rem 0;
-      font-family: inherit;
-    }
-    /* Journey Container */
-    .kc-journey-container {
-      margin-bottom: 4rem;
-    }
-    .kc-journey-container:last-child {
-      margin-bottom: 0;
-    }
-    /* Header & Badge Layout */
-    .kc-journey-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-bottom: 2.4rem;
-    }
-    .kc-journey-title {
-      margin: 0;
-      font-size: 2.2rem;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-    .kc-journey-subtitle {
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-left: 0.6rem;
-    }
-    .kc-journey-badge {
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      text-transform: capitalize;
-      letter-spacing: 0.05em;
-      white-space: nowrap;
-    }
-    /* List Layout */
-    .kc-journey-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .kc-journey-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.6rem;
-      margin-bottom: 1.2rem;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-      position: relative;
-    }
-    .kc-journey-item:last-child {
-      margin-bottom: 0;
-    }
-    /* Icon Styling */
-    .kc-journey-item-icon {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-    }
-    .kc-journey-item-icon svg {
-      width: 20px;
-      height: 20px;
-      display: block;
-    }
-    .kc-journey-icon-img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      display: block;
-    }
-    .kc-journey-item-icon svg path,
-    .kc-journey-item-icon svg rect {
-      stroke: {{ block.settings.read_more_color }};
-    }
-    .kc-journey-item-icon svg path{fill: {{ block.settings.read_more_color }};}
-    .kc-journey-item-icon svg path,.kc-journey-item-icon svg circle{fill: {{ block.settings.read_more_color }};}
-
-    .day-mode .kc-journey-item-lock svg path,
-    .day-mode .kc-journey-item-lock svg rect,
-    .day-mode .kc-journey-item-icon svg path,
-    .kc-journey-item-icon svg rect {
-      stroke: rgb(var(--color-foreground));
-    }
-    .day-mode .kc-journey-item-icon svg path,.day-mode .kc-journey-item-lock svg circle{fill: rgb(var(--color-foreground));}
-    .day-mode .kc-journey-item-icon svg path,.kc-journey-item-icon svg circle{fill: rgb(var(--color-foreground));}
-
-    /* Content Layout */
-    .kc-journey-item-content {
-      font-size: 1.5rem;
-      line-height: 1.5;
-      flex-grow: 1;
-    }
-    .kc-journey-item-content p,
-    .kc-journey-item-content div,
-    .kc-journey-item-content span {
-      display: inline;
-      margin: 0;
-      padding: 0;
-    }
-    .kc-journey-item-title {
-      font-weight: 700;
-    }
-    /* Lock Icon Styling */
-    .kc-journey-item-lock {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-    }
-    .kc-journey-item-lock svg {
-      width: 20px;
-      height: 20px;
-      display: block;
-    }
-    .kc-journey-lock-img {
-      width: 16px;
-      height: 16px;
-      object-fit: contain;
-      display: block;
-    }
-    /* Default state: hide lock-open and show lock-closed */
-    .kc-journey-item-lock .lock-open {
-      display: none;
-    }
-    .kc-journey-item-lock .lock-closed {
-      display: block;
-    }
-    .kc-journey-item-lock {
-      color: rgba(255, 255, 255, 0.4);
-    }
-    /* Active yearly plan state: show lock-open, hide lock-closed, and color blue */
-    .kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-open {
-      display: block;
-    }
-    .kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-closed {
-      display: none;
-    }
-    .kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock {
-      color: #7fb9ff;
-    }
-    /* Disclaimer Styling */
-    .kc-journey-disclaimer {
-      font-size: 1.2rem;
-      color: {{ block.settings.subheading_color }};
-      margin: 1.5rem 0 1rem 0;
-      line-height: 1.4;
-      font-style: italic;
-    }
-    /* Collapsible Items Animation */
-    .kc-journey-item-collapsible {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      margin-bottom: 0;
-      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.35s ease,
-                  margin-bottom 0.35s ease;
-    }
-    .kc-journey-item-collapsible.expanded {
-      opacity: 1;
-      margin-bottom: 1.2rem;
-    }
-    /* Read More Toggle Container */
-    .kc-journey-toggle-container {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: flex-start;
-    }
-    .kc-journey-toggle-btn {
-      background: transparent;
-      border: none;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: {{ block.settings.read_more_color }};
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.6rem 0;
-      transition: opacity 0.2s ease;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-    .kc-journey-toggle-btn:hover {
-      opacity: 0.85;
-    }
-    .kc-journey-toggle-icon {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  </style>
-  <div class="kc-treatment-journey-block">
+  {{ 'treatment-journey.css' | asset_url | stylesheet_tag }}
+  <div
+    class="kc-treatment-journey-block"
+    style="--read-more-color: {{ block.settings.read_more_color | default: '#7fb9ff' }};"
+  >
     <!-- Journey One Block -->
     {%- if list_1 != blank -%}
       {%- assign list_1_sorted = list_1 | sort: 'sort_order' -%}
@@ -222,10 +22,11 @@
               <span class="kc-journey-subtitle">{{ heading_1.sub_heading }}</span>
             {%- endif -%}
           </h3>
+          <span aria-hidden="true" class="head-rule"></span>
           {%- if heading_1.active_tab_title != blank -%}
             <span
               class="kc-journey-badge"
-              style="background-color: {{ block.settings.badge_background_color | default: '#2b2b2b' }}; color: {{ block.settings.badge_text_color | default: '#ffffff' }};"
+              style="background-color: {{ block.settings.badge_background_color }}; color: {{ block.settings.badge_text_color }};"
             >
               {{- heading_1.active_tab_title -}}
             </span>
@@ -307,10 +108,11 @@
               <span class="kc-journey-subtitle">{{ heading_2.sub_heading }}</span>
             {%- endif -%}
           </h3>
+          <span aria-hidden="true" class="head-rule"></span>
           {%- if heading_2.active_tab_title != blank -%}
             <span
               class="kc-journey-badge"
-              style="background-color: {{ block.settings.badge_background_color | default: '#2b2b2b' }}; color: {{ block.settings.badge_text_color | default: '#ffffff' }};"
+              style="background-color: {{ block.settings.badge_background_color }}; color: {{ block.settings.badge_text_color}};"
             >
               {{- heading_2.active_tab_title -}}
             </span>

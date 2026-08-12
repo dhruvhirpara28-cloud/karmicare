@@ -5,8 +5,11 @@
 {%- if testimonials != blank -%}
   {{ 'professional-testimonials.css' | asset_url | stylesheet_tag }}
 
-  <div class="kc-professional-testimonials">
-    <h3 class="kc-testimonials-heading" style="color: {{ block.settings.heading_color | default: '#ffffff' }};">
+  <div
+    class="kc-professional-testimonials"
+    style="--heading-color-day: {{ block.settings.heading_color_day | default: '#191f38' }}; --heading-color-night: {{ block.settings.heading_color_night | default: '#ffffff' }};"
+  >
+    <h3 class="kc-testimonials-heading">
       {{ block.settings.heading | default: 'Approved by nature. Used by professionals' }}
     </h3>
 
@@ -15,16 +18,23 @@
         <div class="kc-testimonial-card-item">
           {%- if testimonial.image != blank -%}
             <div class="kc-testimonial-card-bg">
-              {{ testimonial.image | image_url: width: 400 | image_tag: class: 'kc-testimonial-card-img', loading: 'lazy' }}
+              {{
+                testimonial.image
+                | image_url: width: 400
+                | image_tag: class: 'kc-testimonial-card-img', loading: 'lazy'
+              }}
+              <div
+                class="kc-testimonial-card-overlay"
+                style="--overlay-color-day: {{ block.settings.overlay_color_day | default: '#000000' }}; --overlay-color-night: {{ block.settings.overlay_color_night | default: '#ffffff' }}; --overlay-opacity: {{ block.settings.overlay_opacity | default: 40 | divided_by: 100.0 }};"
+              >&nbsp;</div>
             </div>
           {%- endif -%}
-          <div class="kc-testimonial-card-overlay"></div>
           <div class="kc-testimonial-card-content">
             <div class="kc-testimonial-card-desc">
               {{ testimonial.description | metafield_tag }}
             </div>
             <div class="kc-testimonial-card-author">
-              <h4 class="kc-testimonial-card-name">{{ testimonial.name }}</h4>
+              <span class="kc-testimonial-card-name">{{ testimonial.name }}</span>
               <p class="kc-testimonial-card-designation">{{ testimonial.designation }}</p>
             </div>
           </div>

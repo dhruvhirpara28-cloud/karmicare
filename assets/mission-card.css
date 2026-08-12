@@ -1,10 +1,9 @@
 .kc-mission-card {
   margin: 2.4rem 0;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2.4rem;
+  background: rgba(127, 185, 255, .07);
+  border-radius: var(--secondary-border-radius);
+  padding: 1.5rem;
   width: 100%;
   font-family: inherit;
 }
@@ -34,7 +33,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .kc-mission-card-label {
@@ -47,9 +46,8 @@
 }
 
 .kc-mission-card-desc {
-  font-size: 1.4rem;
+  font-size: var(--font-body-small-size);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .kc-mission-card-desc p,
@@ -60,10 +58,9 @@
 }
 
 .kc-mission-card-highlight {
-  font-size: 1.4rem;
+  font-size: var(--font-body-small-size);
   font-weight: 700;
   line-height: 1.6;
-  color: #ffffff;
 }
 
 .kc-mission-card-highlight p,
@@ -75,7 +72,6 @@
 
 .kc-mission-card-author {
   font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.5);
   font-style: italic;
   line-height: 1.4;
 }

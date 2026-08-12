@@ -30,14 +30,11 @@
 
 .kc-faq-summary {
   list-style: none;
-  padding: 1.5rem 0.4rem;
+  padding: 1.2rem 0.4rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: 700;
-  font-size: 1.8rem;
-  letter-spacing: -0.010em;
   color: var(--text);
   transition: color 0.2s ease;
 }
@@ -66,7 +63,7 @@
 
 .kc-faq-body {
   padding: 0 0.4rem 2.6rem;
-  font-size: 1.4rem;
+  font-size: var(--font-body-small-size);
   line-height: 1.65;
   color: var(--body);
 }
@@ -84,7 +81,7 @@
 }
 
 .kc-faq-section-content {
-  font-size: 1.4rem;
+  font-size: var(--font-body-small-size);
   color: var(--body);
 }
 
@@ -317,6 +314,7 @@
 }
 
 .acc-tag.has-tip .info-tip-popover {
+  display: block;
   width: 258px;
   max-width: 258px;
   font-size: var(--fs-md);

@@ -173,6 +173,9 @@
 
         --font-body-size-mobile: {{ settings.body_font_size_mobile | divided_by: 10.0 }}rem;
         --font-body-size-desktop: {{ settings.body_font_size_desktop | divided_by: 10.0 }}rem;
+        --font-body-small-size-mobile: {{ settings.body_small_font_size_mobile | default: 13 | divided_by: 10.0 }}rem;
+        --font-body-small-size-desktop: {{ settings.body_small_font_size_desktop | default: 14 | divided_by: 10.0 }}rem;
+        --font-body-small-size: var(--font-body-small-size-mobile);
 
         --font-h1-size-mobile: calc(var(--font-heading-scale) * {{ settings.h1_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h1-size-desktop: calc(var(--font-heading-scale) * {{ settings.h1_font_size_desktop | divided_by: 10.0 }}rem);
@@ -335,6 +338,9 @@
       }
 
       @media screen and (min-width: 750px) {
+        :root {
+          --font-body-small-size: var(--font-body-small-size-desktop);
+        }
         body {
           font-size: var(--font-body-size-desktop);
         }
