@@ -1,6 +1,11 @@
 .kc-professional-testimonials {
   margin: 3.2rem 0;
   font-family: inherit;
+  --heading-color: var(--heading-color-day, #191f38);
+}
+
+body.night-mode .kc-professional-testimonials {
+  --heading-color: var(--heading-color-night, #ffffff);
 }
 
 .kc-testimonials-heading {
@@ -8,6 +13,7 @@
   font-weight: 700;
   margin-bottom: 2.4rem;
   line-height: 1.2;
+  color: var(--heading-color);
 }
 
 .kc-testimonials-grid {
@@ -27,7 +33,7 @@
   position: relative;
   min-height: 340px;
   height: 100%;
-  border-radius: 16px;
+  border-radius: var(--secondary-border-radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -49,34 +55,34 @@
 
 .kc-testimonial-card-overlay {
   position: absolute;
+  display: block;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.15) 30%,
-    rgba(0, 0, 0, 0.55) 60%,
-    rgba(0, 0, 0, 0.85) 90%,
-    rgba(0, 0, 0, 0.95) 100%
-  );
+  background-color: var(--overlay-color-day);
+  opacity: var(--overlay-opacity);
   z-index: 2;
   pointer-events: none;
+  transition: background-color 0.4s ease, opacity 0.4s ease;
+}
+
+body.night-mode .kc-testimonial-card-overlay {
+  background-color: var(--overlay-color-night);
 }
 
 .kc-testimonial-card-content {
   position: relative;
   z-index: 3;
-  padding: 2rem;
-  color: #ffffff;
+  padding: 1.5rem;
+  color: var(--white);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
 .kc-testimonial-card-desc {
-  font-size: 1.4rem;
+  font-size: var(--font-body-small-size);
   line-height: 1.5;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--white);
 }
 
 .kc-testimonial-card-desc p,
@@ -94,14 +100,14 @@
 }
 
 .kc-testimonial-card-name {
-  margin: 0;
-  font-size: 1.4rem;
+  font-size: var(--font-body-small-size);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .kc-testimonial-card-designation {
   margin: 0;
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--white);
+  opacity: 0.65;
 }

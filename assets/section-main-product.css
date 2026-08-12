@@ -1705,7 +1705,7 @@ a.product__text {
 }
 
 .info-tip .info-icon {
-  background: rgba(255, 251, 246, 0.1);
+  background: var(--surface);
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -1715,6 +1715,8 @@ a.product__text {
   text-align: center;
   letter-spacing: 0;
   border: 1.2px solid var(--accent);
+  color: var(--accent);
+  transition: background .2s, color .2s;
 }
 
 .info-tip-popover {

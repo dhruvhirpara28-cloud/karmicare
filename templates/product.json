@@ -120,6 +120,7 @@
           "type": "treatment_journey",
           "settings": {
             "badge_background_color": "#2b2b2b",
+            "badge_text_color": "#ffffff",
             "read_more_color": "#7fb9ff",
             "read_more_text": "Read more",
             "read_less_text": "Read less",
@@ -131,7 +132,11 @@
           "type": "professional_testimonials",
           "settings": {
             "heading": "Approved by nature. Used by professionals",
-            "heading_color": "#ffffff"
+            "heading_color_day": "#191f38",
+            "heading_color_night": "#ffffff",
+            "overlay_color_day": "#000000",
+            "overlay_color_night": "#ffffff",
+            "overlay_opacity": 15
           }
         },
         "mission_card_block": {

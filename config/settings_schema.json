@@ -170,6 +170,26 @@
       },
       {
         "type": "range",
+        "id": "body_small_font_size_mobile",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 13,
+        "unit": "px",
+        "label": "Body Small Font Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "body_small_font_size_desktop",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "default": 14,
+        "unit": "px",
+        "label": "Body Small Font Size (Desktop)"
+      },
+      {
+        "type": "range",
         "id": "h1_font_size_mobile",
         "min": 10,
         "max": 80,

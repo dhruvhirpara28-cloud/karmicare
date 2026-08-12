@@ -22,7 +22,6 @@
       <div class="pc-sub">{{ subtitle }}</div>
     </div>
 
-
     <div class="pc-table">
       <!-- LABEL COLUMN -->
       <div class="pc-col pc-col-label">
@@ -58,7 +57,23 @@
                     {%- endfor -%}
                   </span>
                   <span class="pc-kit-pop" role="tooltip">
-                    <span class="pc-kit-poptitle">{{ row.label.value | default: row.label }} · <b>Free</b></span>
+                    {%- assign total_value = 0 -%}
+                    {%- for prod in row.welcome_kit.value -%}
+                      {%- if prod.compare_at_price > 0 -%}
+                        {%- assign total_value = total_value | plus: prod.compare_at_price -%}
+                      {%- else -%}
+                        {%- assign total_value = total_value | plus: prod.price -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <span class="pc-kit-poptitle">
+                      {{- row.label.value | default: row.label -}}
+                      <span class="value">
+                        {%- if total_value > 0 -%}
+                          · {{ total_value | money_without_trailing_zeros }} Value
+                        {%- endif -%}
+                        · <b>Free</b>
+                      </span>
+                    </span>
                     {%- for prod in row.welcome_kit.value -%}
                       <span class="pc-kit-item">
                         <img
@@ -202,7 +217,6 @@
     document.addEventListener('DOMContentLoaded', function () {
       const section = document.getElementById('compare-plans-{{ section.id }}');
       if (!section) return;
-
 
       // Synchronize CTA buttons with Loop subscription widget
       const chooseButtons = section.querySelectorAll('[data-choose]');
