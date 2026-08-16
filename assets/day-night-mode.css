@@ -100,7 +100,7 @@ body svg {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--white);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.30);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
@@ -152,7 +152,7 @@ body svg {
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --bg: #fffbf6;
   --bg-rgb: 255 251 246;
-  --surface: #ffffff;
+  --surface: var(--white);
   --surface-2: rgba(25, 31, 56, 0.04);
   --surface-3: rgb(25 31 56 / 8%);
   --surface-4: rgba(127, 185, 255, 0.15);
@@ -226,7 +226,7 @@ body.day-mode .toggle-moon {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 body.day-mode {
-  background-color: var(--kc-day-bg-color, #ffffff);
+  background-color: var(--kc-day-bg-color, var(--white));
   color: var(--kc-day-text-color, #121212);
 }
 
@@ -357,7 +357,7 @@ body.day-mode .shopify-section,
 body.day-mode [class*="color-scheme-"] {
   --color-background: var(--kc-day-bg-r, 255), var(--kc-day-bg-g, 255), var(--kc-day-bg-b, 255);
   --color-foreground: var(--kc-day-text-r, 18), var(--kc-day-text-g, 18), var(--kc-day-text-b, 18);
-  --gradient-background: var(--kc-day-bg-color, #ffffff);
+  --gradient-background: var(--kc-day-bg-color, var(--white));
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
 }

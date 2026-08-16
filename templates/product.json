@@ -14,7 +14,9 @@
       "blocks": {
         "top_tags_block": {
           "type": "top_tags",
-          "settings": {}
+          "settings": {
+            "default_to_subscription": true
+          }
         },
         "judge_me_reviews_preview_badge_NjrVVk": {
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
@@ -31,6 +33,7 @@
         "highlights_slider_9wAjAb": {
           "type": "highlights_slider",
           "settings": {
+            "default_to_subscription": true,
             "font_size_desktop": 14,
             "font_size_mobile": 12,
             "border_radius": 30,
@@ -54,6 +57,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
+            "default_to_subscription": true,
             "picker_type": "button",
             "swatch_shape": "circle"
           }
@@ -61,6 +65,7 @@
         "loop_subscriptions_WEk4XJ": {
           "type": "loop_subscriptions",
           "settings": {
+            "default_to_subscription": true,
             "welcome_kit_products": [
               "morning-toothbrush",
               "evening-toothbrush",
@@ -93,6 +98,7 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
+            "default_to_subscription": true,
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false,
             "show_add_to_cart": false,
@@ -104,6 +110,7 @@
         "icon_with_text_xhaDGB": {
           "type": "icon-with-text",
           "settings": {
+            "default_to_subscription": true,
             "layout": "horizontal",
             "icon_1": "heart",
             "image_1": "shopify://shop_images/Frame.svg",
@@ -119,6 +126,7 @@
         "treatment_journey_block": {
           "type": "treatment_journey",
           "settings": {
+            "default_to_subscription": true,
             "badge_background_color": "#2b2b2b",
             "badge_text_color": "#ffffff",
             "read_more_color": "#7fb9ff",
@@ -131,6 +139,7 @@
         "professional_testimonials_block": {
           "type": "professional_testimonials",
           "settings": {
+            "default_to_subscription": true,
             "heading": "Approved by nature. Used by professionals",
             "heading_color_day": "#191f38",
             "heading_color_night": "#ffffff",
@@ -141,11 +150,14 @@
         },
         "mission_card_block": {
           "type": "mission_card",
-          "settings": {}
+          "settings": {
+            "default_to_subscription": true
+          }
         },
         "info_card_FnBcaN": {
           "type": "info_card",
           "settings": {
+            "default_to_subscription": true,
             "header_text": "OUR COMMITMENT TO YOU",
             "body_text": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
             "footer_text": "",
@@ -160,7 +172,21 @@
         },
         "product_faq_block": {
           "type": "product_faq",
-          "settings": {}
+          "settings": {
+            "default_to_subscription": true
+          }
+        },
+        "sticky_cart_block": {
+          "type": "sticky_cart",
+          "settings": {
+            "default_to_subscription": true,
+            "button_text": "Begin Now",
+            "show_image": true,
+            "show_variants": true,
+            "show_subscriptions": true,
+            "color_scheme_day": "#FFFFFF",
+            "color_scheme_night": "#191F38"
+          }
         }
       },
       "block_order": [
@@ -179,9 +205,11 @@
         "professional_testimonials_block",
         "mission_card_block",
         "info_card_FnBcaN",
-        "product_faq_block"
+        "product_faq_block",
+        "sticky_cart_block"
       ],
       "settings": {
+        "default_to_subscription": true,
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
         "media_size": "large",
@@ -205,7 +233,13 @@
         "eyebrow": "{{ product.metafields.custom.compare_table_header_footer.value.small_heading.value }}",
         "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
         "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
-        "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}"
+        "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}",
+        "color_scheme_day": "",
+        "color_scheme_night": "",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
       }
     },
     "disclosures": {

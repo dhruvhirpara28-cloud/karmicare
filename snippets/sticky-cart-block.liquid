@@ -1,0 +1,527 @@
+{% comment %}
+  Sticky Cart Block — Dynamic Loop Subscription Aware
+{% endcomment %}
+
+{{ 'component-sticky-cart.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {%- if block.settings.color_scheme_day != blank -%}
+    body.day-mode #stickyCta {
+      background: {{ block.settings.color_scheme_day }} !important;
+    }
+  {%- endif -%}
+  {%- if block.settings.color_scheme_night != blank -%}
+    body.night-mode #stickyCta {
+      background: {{ block.settings.color_scheme_night }} !important;
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign button_text = block.settings.button_text -%}
+
+<div
+  class="sticky-cta sc-style-fog"
+  id="stickyCta"
+  data-product-id="{{ product.id }}"
+  data-variant-id="{{ current_variant.id }}"
+  data-default-to-subscription="{{ block.settings.default_to_subscription}}"
+>
+  <div class="sticky-cta-inner">
+    {%- if block.settings.show_image and product.featured_image -%}
+      <div class="sc-product">
+        <div class="sc-img">
+          {{
+            product.featured_image
+            | image_url: width: 80
+            | image_tag: loading: 'lazy', width: 40, height: 40, class: 'sc-product-img'
+          }}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="sc-dropdown" id="scDropdown">
+      <button
+        aria-expanded="false"
+        class="sc-do-trigger"
+        id="scTrigger"
+        type="button"
+      >
+        <div class="sc-trigger-inner">
+          <div class="sc-trigger-top">
+            <span class="sc-plan-label" id="scPlanLabel">
+              {%- if product.selling_plan_groups.size > 0 -%}
+                {{ product.selling_plan_groups.first.name }}
+              {%- else -%}
+                One Time Purchase
+              {%- endif -%}
+            </span>
+            <span class="sc-plan-badge" id="scPlanBadge" style="display:none;"></span>
+            <span class="sc-plan-price-wrap">
+              <span class="sc-plan-price" id="scPlanPrice">{{ current_variant.price | money }}</span>
+              <span class="sc-plan-interval" id="scPlanInterval" style="display:none;"></span>
+            </span>
+          </div>
+          <div class="sc-trigger-sub">
+            <span class="sc-plan-subrow" id="scPlanSubrow"></span>
+          </div>
+        </div>
+        <span class="sc-caret" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 7.5L6 10.5L9 7.5M9 4.5L6 1.5L3 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <div class="sc-dd-menu" id="scDdMenu" role="listbox">
+        {%- unless product.requires_selling_plan -%}
+          <div
+            class="sc-dd-option"
+            role="option"
+            data-type="onetime"
+            data-selling-plan=""
+            data-price="{{ current_variant.price }}"
+            data-label="One Time Purchase"
+            data-interval=""
+            data-loop-group-id=""
+          >
+            <span class="sc-dd-radio"></span>
+            <span class="sc-dd-option-text">
+              <span class="sc-dd-name-wrap">
+                <span class="sc-dd-name">One Time Purchase</span>
+                <span class="sc-dd-badge" style="display:none;"></span>
+              </span>
+              <span class="sc-dd-subrow" id="sc-subrow-onetime"></span>
+            </span>
+            <span class="sc-dd-price-group">
+              <span class="sc-dd-price">{{ current_variant.price | money }}</span>
+            </span>
+          </div>
+        {%- endunless -%}
+
+        {%- for selling_plan_group in product.selling_plan_groups -%}
+          {%- if selling_plan_group.app_id == '5284869' -%}
+            {%- assign spg_id = selling_plan_group.id -%}
+            {%- assign first_alloc = null -%}
+            {%- for alloc in current_variant.selling_plan_allocations -%}
+              {%- if alloc.selling_plan_group_id == spg_id and first_alloc == null -%}
+                {%- assign first_alloc = alloc -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- assign sp = selling_plan_group.selling_plans.first -%}
+
+            <div
+              class="sc-dd-option"
+              role="option"
+              data-type="subscription"
+              data-selling-plan-group-id="{{ spg_id }}"
+              data-selling-plan="{{ sp.id }}"
+              data-price="{{ first_alloc.price | default: current_variant.price }}"
+              data-label="{{ selling_plan_group.name | escape }}"
+              data-interval="{{ sp.options.first.value | escape }}"
+              data-loop-group-id="{{ selling_plan_group.id }}"
+              data-loop-description="{{ sp.description | escape }}"
+            >
+              <span class="sc-dd-radio"></span>
+              <span class="sc-dd-option-text">
+                <span class="sc-dd-name-wrap">
+                  <span class="sc-dd-name">{{ selling_plan_group.name }}</span>
+                  <span class="sc-dd-badge" style="display:none;"></span>
+                </span>
+                <span class="sc-dd-subrow" id="sc-subrow-{{ spg_id }}"></span>
+              </span>
+              <span class="sc-dd-price-group">
+                <span class="sc-dd-price">
+                  {{ first_alloc.price | default: current_variant.price | money }}
+                </span>
+                {%- if sp.options.first.value != blank -%}
+                  <span class="sc-dd-interval" style="display:none;">/ {{ sp.options.first.value }}</span>
+                {%- endif -%}
+              </span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <form method="post" action="/cart/add" id="scCtaForm" class="sc-cta">
+      <input type="hidden" name="id" id="scVariantId" value="{{ current_variant.id }}">
+      <input type="hidden" name="selling_plan" id="scSellingPlanInput" value="">
+      <input type="hidden" name="quantity" value="1">
+      <button
+        type="submit"
+        id="scCtaBtn"
+        class="sc-cta-btn product-form__submit product-form__custom-submit block__animate-button button--primary button--block"
+        aria-label="{{ button_text }}"
+      >
+        <span>{{ button_text }}</span>
+        <span class="arrow">›</span>
+      </button>
+    </form>
+  </div>
+</div>
+<script>
+  (function () {
+    'use strict';
+    var SC_BAR = document.getElementById('stickyCta');
+    var SC_TRIGGER = document.getElementById('scTrigger');
+    var SC_MENU = document.getElementById('scDdMenu');
+    var PLAN_LABEL = document.getElementById('scPlanLabel');
+    var PLAN_PRICE = document.getElementById('scPlanPrice');
+    var PLAN_INT = document.getElementById('scPlanInterval');
+    var PLAN_SUBROW = document.getElementById('scPlanSubrow');
+    var PLAN_BADGE = document.getElementById('scPlanBadge');
+    var SP_INPUT = document.getElementById('scSellingPlanInput');
+    var OPTIONS = SC_MENU ? Array.from(SC_MENU.querySelectorAll('.sc-dd-option')) : [];
+    var selectedOption = null;
+
+    function formatMoney(cents) {
+      if (window.Shopify && typeof Shopify.formatMoney === 'function') {
+        return Shopify.formatMoney(cents);
+      }
+      return '\u20AC' + (cents / 100).toFixed(2).replace('.', ',');
+    }
+
+    function getLoopPriceText(variantId, spgId, isOnetime) {
+      var id = isOnetime ? 'loop-price-one-time' : 'loop-price-' + variantId + '-' + spgId;
+      var el = document.getElementById(id);
+      return el ? el.textContent.trim() : null;
+    }
+
+    /* Parse Loop DOM for rich data (Care Credit, Return on Care, Cost per brushing) */
+    function getRichPlanData(spgId, isOnetime, optPriceCents) {
+      var data = { costPerBrushing: '', badge: '', subrow: '' };
+      if (isOnetime) return data;
+
+      var radio = document.querySelector('input[data-id="' + spgId + '"]');
+      if (!radio) return data;
+      var groupEl = radio.closest('.loop-subscription-group');
+      if (!groupEl) return data;
+
+      /* Extract cost per brushing from standard Loop subrow */
+      var subEl = groupEl.querySelector('.kc-plan-subrow');
+      if (subEl) {
+        var parts = subEl.textContent.split('·');
+        if (parts.length > 0) {
+          data.costPerBrushing = parts[0].replace('/', 'per').trim();
+        }
+      }
+
+      /* Extract Return on Care & Check-up reward from Liquid data */
+      var returns = [];
+      var optEl = document.querySelector('.sc-dd-option[data-selling-plan-group-id="' + spgId + '"]');
+      if (optEl && optEl.dataset.loopDescription) {
+        var temp = document.createElement('div');
+        temp.innerHTML = optEl.dataset.loopDescription;
+        returns = Array.from(temp.querySelectorAll('.kc-return_care'));
+      }
+
+      var creditValue = 0;
+      var checkupText = '';
+
+      returns.forEach(function (rc) {
+        var node = rc.childNodes[0];
+        var text = node ? node.textContent.trim() : '';
+        if (text.indexOf('%') !== -1) {
+          var match = text.match(/(\d+)%/);
+          if (match) {
+            var pct = parseInt(match[1], 10);
+            data.badge = 'Receive ' + pct + '% Return on Care';
+            creditValue = (optPriceCents / 100) * (pct / 100);
+          }
+        } else if (text.indexOf('Check-up Reward') !== -1) {
+          var match = text.match(/€\s*(\d+)/);
+          if (match) {
+            checkupText = 'up to €' + match[1] + ' Check up Reward';
+          }
+        }
+      });
+
+      var suffixParts = [];
+      if (creditValue > 0) {
+        /* Format Care Credit string based on whether Checkup Reward exists (like the mockup) */
+        if (checkupText) {
+          suffixParts.push('€' + creditValue.toFixed(2) + ' Care Credit');
+        } else {
+          suffixParts.push('€' + creditValue.toFixed(2) + ' Care Credit received');
+        }
+      }
+      if (checkupText) {
+        suffixParts.push(checkupText);
+      }
+
+      var subrowParts = [];
+      if (data.costPerBrushing) subrowParts.push(data.costPerBrushing);
+      if (suffixParts.length > 0) {
+        /* Use hyphen for multiple rewards, middot for single */
+        var separator = checkupText ? ' - ' : ' · ';
+        subrowParts.push(suffixParts.join(' - '));
+        data.subrow = subrowParts.join(separator);
+      } else {
+        /* Fallback to original Loop text */
+        data.subrow = subEl ? subEl.textContent.trim() : '';
+      }
+
+      return data;
+    }
+
+    function applyOption(optEl, priceText, richData) {
+      OPTIONS.forEach(function (o) {
+        o.classList.remove('is-selected');
+      });
+      optEl.classList.add('is-selected');
+      selectedOption = optEl;
+
+      PLAN_LABEL.textContent = optEl.dataset.label || 'One Time Purchase';
+      SP_INPUT.value = optEl.dataset.sellingPlan || '';
+      PLAN_PRICE.textContent = priceText || formatMoney(parseInt(optEl.dataset.price || '0', 10));
+
+      /* Hide standard interval if we have rich subrow data */
+      var hasRichData = richData && (richData.subrow || richData.badge);
+      if (PLAN_INT) {
+        if (hasRichData) {
+          PLAN_INT.style.display = 'none';
+        } else {
+          var iv = optEl.dataset.interval || '';
+          PLAN_INT.textContent = iv ? '/ ' + iv : '';
+          PLAN_INT.style.display = '';
+        }
+      }
+
+      if (PLAN_SUBROW) {
+        var sub = richData ? richData.subrow : '';
+        PLAN_SUBROW.textContent = sub;
+        PLAN_SUBROW.style.display = sub ? '' : 'none';
+      }
+
+      if (PLAN_BADGE) {
+        var badge = richData ? richData.badge : '';
+        PLAN_BADGE.textContent = badge;
+        PLAN_BADGE.style.display = badge ? '' : 'none';
+      }
+
+      /* Store data on option for quick retrieval */
+      if (richData) {
+        optEl.dataset.subrow = richData.subrow || '';
+        optEl.dataset.badge = richData.badge || '';
+      }
+    }
+
+    /* Populate all dropdown option texts from Loop */
+    function refreshAllSubrows() {
+      OPTIONS.forEach(function (opt) {
+        var isOt = opt.dataset.type === 'onetime';
+        var oSpgId = opt.dataset.sellingPlanGroupId || '';
+        var pCents = parseInt(opt.dataset.price || '0', 10);
+        var richData = getRichPlanData(oSpgId, isOt, pCents);
+
+        var subEl = opt.querySelector('.sc-dd-subrow');
+        if (subEl) {
+          subEl.textContent = richData.subrow;
+          subEl.style.display = richData.subrow ? '' : 'none';
+        }
+        var badgeEl = opt.querySelector('.sc-dd-badge');
+        if (badgeEl) {
+          badgeEl.textContent = richData.badge;
+          badgeEl.style.display = richData.badge ? '' : 'none';
+        }
+
+        opt.dataset.subrow = richData.subrow;
+        opt.dataset.badge = richData.badge;
+      });
+    }
+
+    function syncToLoop(isOnetime, spgId) {
+      var fs = document.getElementById('loop-selling-plan-fieldset');
+      if (!fs) return;
+      var radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
+      var r = isOnetime
+        ? radios.find(function (x) {
+            return x.dataset.id === 'loop-one-time-purchase';
+          })
+        : radios.find(function (x) {
+            return x.dataset.id === spgId;
+          });
+      if (r && !r.checked) r.click();
+    }
+
+    function syncFromLoop() {
+      var fs = document.getElementById('loop-selling-plan-fieldset');
+      if (!fs) return;
+      var checked = fs.querySelector('input[type="radio"]:checked');
+      if (!checked) return;
+
+      var isOnetime = checked.dataset.id === 'loop-one-time-purchase';
+      var spgId = isOnetime ? '' : checked.dataset.id || '';
+      var vid = checked.dataset.variantId || (SC_BAR ? SC_BAR.dataset.variantId : '');
+
+      var match = isOnetime
+        ? OPTIONS.find(function (o) {
+            return o.dataset.type === 'onetime';
+          })
+        : OPTIONS.find(function (o) {
+            return o.dataset.sellingPlanGroupId === spgId;
+          });
+
+      if (!match) return;
+
+      var pCents = parseInt(match.dataset.price || '0', 10);
+      var pt = getLoopPriceText(vid, spgId, isOnetime);
+      var richData = getRichPlanData(spgId, isOnetime, pCents);
+
+      applyOption(match, pt, richData);
+      refreshAllSubrows();
+    }
+
+    function attachLoopObserver() {
+      var fs = document.getElementById('loop-selling-plan-fieldset');
+      if (!fs) {
+        setTimeout(attachLoopObserver, 300);
+        return;
+      }
+
+      fs.addEventListener('change', function (e) {
+        if (e.target && e.target.type === 'radio') setTimeout(syncFromLoop, 150);
+      });
+
+      var mo = new MutationObserver(function () {
+        syncFromLoop();
+      });
+      mo.observe(fs, { subtree: true, characterData: true, childList: true, attributes: true });
+      setTimeout(syncFromLoop, 700);
+    }
+
+    function openDropdown() {
+      SC_MENU.classList.add('is-open');
+      SC_TRIGGER.setAttribute('aria-expanded', 'true');
+      SC_BAR.classList.add('sc-dd-active');
+    }
+
+    function closeDropdown() {
+      SC_MENU.classList.remove('is-open');
+      SC_TRIGGER.setAttribute('aria-expanded', 'false');
+      SC_BAR.classList.remove('sc-dd-active');
+    }
+
+    function syncPosition() {
+      if (window.innerWidth < 1081) {
+        SC_BAR.style.left = '';
+        SC_BAR.style.width = '';
+        SC_BAR.style.right = '';
+        return;
+      }
+      var infoEl =
+        document.querySelector('.product__info-container') || document.querySelector('.product__info-wrapper');
+      if (infoEl) {
+        var rect = infoEl.getBoundingClientRect();
+        SC_BAR.style.left = rect.left + 'px';
+        SC_BAR.style.width = rect.width + 'px';
+        SC_BAR.style.right = 'auto';
+      }
+    }
+    window.addEventListener('resize', syncPosition);
+    window.addEventListener('scroll', syncPosition, { passive: true });
+
+    function initScrollVisibility() {
+      var buyBtn = document.querySelector('.product-form__submit');
+      if (!buyBtn) {
+        SC_BAR.classList.add('is-visible');
+        return;
+      }
+      var obs = new IntersectionObserver(
+        function (entries) {
+          SC_BAR.classList.toggle('is-visible', !entries[0].isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+      obs.observe(buyBtn);
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      var form = document.getElementById('scCtaForm');
+      var data = new FormData(form);
+      var btn = document.getElementById('scCtaBtn');
+      btn.disabled = true;
+      btn.classList.add('is-loading');
+      fetch('/cart/add.js', { method: 'POST', body: data })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function () {
+          var t = document.querySelector('[aria-controls="cart-drawer"]');
+          if (t) t.click();
+          else document.dispatchEvent(new CustomEvent('cart:open'));
+          closeDropdown();
+        })
+        .catch(function (err) {
+          console.error('[StickyCart]', err);
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.classList.remove('is-loading');
+        });
+    }
+
+    function init() {
+      if (!SC_BAR) return;
+
+      OPTIONS.forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          var isOnetime = opt.dataset.type === 'onetime';
+          var spgId = opt.dataset.sellingPlanGroupId || '';
+          var vid = SC_BAR.dataset.variantId || '';
+          var pCents = parseInt(opt.dataset.price || '0', 10);
+          var pt = getLoopPriceText(vid, spgId, isOnetime);
+          var richData = getRichPlanData(spgId, isOnetime, pCents);
+
+          applyOption(opt, pt, richData);
+          syncToLoop(isOnetime, spgId);
+          closeDropdown();
+        });
+      });
+
+      if (SC_TRIGGER) {
+        SC_TRIGGER.addEventListener('click', function (e) {
+          e.stopPropagation();
+          SC_MENU.classList.contains('is-open') ? closeDropdown() : openDropdown();
+        });
+      }
+
+      document.addEventListener('click', function (e) {
+        if (SC_BAR && !SC_BAR.contains(e.target)) closeDropdown();
+      });
+
+      var form = document.getElementById('scCtaForm');
+      if (form) form.addEventListener('submit', handleSubmit);
+
+      syncPosition();
+      initScrollVisibility();
+      attachLoopObserver();
+
+      if (OPTIONS.length) {
+        var themeDefaultToSubscription = SC_BAR ? SC_BAR.dataset.defaultToSubscription === 'true' : false;
+        var defaultOpt = OPTIONS[0];
+        if (themeDefaultToSubscription) {
+          var subOpt = OPTIONS.find(function (o) {
+            return o.dataset.type === 'subscription';
+          });
+          if (subOpt) defaultOpt = subOpt;
+        }
+        var pCents = parseInt(defaultOpt.dataset.price || '0', 10);
+        var rData = getRichPlanData(
+          defaultOpt.dataset.sellingPlanGroupId,
+          defaultOpt.dataset.type === 'onetime',
+          pCents
+        );
+        applyOption(defaultOpt, null, rData);
+      }
+
+      setTimeout(refreshAllSubrows, 800);
+      setTimeout(refreshAllSubrows, 1500);
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+</script>
