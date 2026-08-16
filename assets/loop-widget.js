@@ -1325,7 +1325,10 @@ function toggleVariantDisplayLoop(product, selectedVariantId) {
 }
 
 function applyDefaultSelectionBasedOnLoopSettings(selectedVariant, productId) {
-    const shouldDefaultToSubscription =
+    const loopContainer = getLoopSubscriptionContainer(productId);
+    const themeDefaultToSubscription = loopContainer ? loopContainer.dataset.defaultToSubscription === 'true' : false;
+
+    const shouldDefaultToSubscription = themeDefaultToSubscription ||
         window.loopPropsUI?.byDefaultChooseSubscriptionOption;
 
     if (shouldDefaultToSubscription) {
@@ -2776,10 +2779,14 @@ function clickUpdatedSPGLoop(productId) {
     );
     nonBundleSpgs = nonBundleSpgs.filter((spg) => variantSpgs.includes(spg));
 
+    const loopContainer = getLoopSubscriptionContainer(productId);
+    const themeDefaultToSubscription = loopContainer ? loopContainer.dataset.defaultToSubscription === 'true' : false;
+    const shouldDefaultToSub = themeDefaultToSubscription || window.loopPropsUI.byDefaultChooseSubscriptionOption;
+
     if (isProductBundle(productId)) {
         if (
             bundleSpgs.length !== 0 &&
-            window.loopPropsUI.byDefaultChooseSubscriptionOption
+            shouldDefaultToSub
         ) {
             showLoopWidget(productId);
             const firstAvailableBundleSpg = bundleSpgs[0];
@@ -2813,7 +2820,7 @@ function clickUpdatedSPGLoop(productId) {
         }
     } else if (
         nonBundleSpgs.length !== 0 &&
-        window.loopPropsUI.byDefaultChooseSubscriptionOption
+        shouldDefaultToSub
     ) {
         showLoopWidget(productId);
         const firstAvailableNonBundleSpg = nonBundleSpgs[0];

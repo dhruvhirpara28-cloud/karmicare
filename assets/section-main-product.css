@@ -1577,7 +1577,7 @@ a.product__text {
   .product--thumbnail_vertical .thumbnail-slider .slider-button {
     display: flex;
     position: absolute;
-    background-color: #ffffff;
+    background-color: var(--white);
     color: #000000;
     border-radius: 50%;
     width: 32px;
@@ -1808,7 +1808,7 @@ body.day-mode .product-media-container .product__modal-opener {
 
 body.day-mode .loop-subscription-group,
 body.day-mode .loop-one-time-purchase-option-position {
-  background: #ffffff;
+  background: var(--white);
   border-color: rgba(25, 31, 56, 0.12);
 }
 
