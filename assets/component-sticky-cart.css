@@ -1,3 +1,9 @@
+@property --kc-plan-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 /* ============================================================
    Sticky Cart Bar — component-sticky-cart.css
    ============================================================ */
@@ -42,7 +48,6 @@
 
 .kc__block-main-product {
   position: relative;
-  z-index: 999;
 }
 
 .sticky-cta {
@@ -53,8 +58,8 @@
   z-index: 200;
   display: flex;
   align-items: center;
-  border-radius: var(--primary-border-radius);
-  padding: 10px 12px;
+  border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
+  padding: 14px 14px;
   transform: translateY(100%);
   box-sizing: border-box;
   font-family: inherit;
@@ -82,6 +87,7 @@
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 /* ── Positioned variant (JS sets left/width for inline) ── */
@@ -93,6 +99,7 @@
   border-radius: var(--primary-border-radius);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(var(--color-foreground), 0.15);
 }
 
 .sc-product-img {
@@ -135,12 +142,14 @@
 
 .night-mode .sc-plan-label {
   color: var(--accent);
+  font-size: var(--font-body-size-desktop, 16px);
 }
 
 .sc-plan-price {
   font-weight: 700;
   flex-shrink: 0;
   color: var(--kc-night-heading-color);
+  font-size: var(--font-body-size-desktop, 16px);
 }
 
 .sc-plan-interval {
@@ -312,6 +321,10 @@
 
   .sc-plan-price {
     font-size: 13px;
+  }
+
+  .night-mode .sc-plan-label {
+    font-size: 12px;
   }
 }
 
