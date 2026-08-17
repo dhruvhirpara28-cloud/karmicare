@@ -20,6 +20,30 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 {%- assign button_text = block.settings.button_text -%}
 
+{%- liquid
+  assign is_bundle_product = false
+  for prod_item in settings.welcome_kit_bundle_products
+    assign prod = prod_item
+    if prod_item.id == null
+      assign prod = all_products[prod_item]
+    endif
+    if prod != blank and prod.id == product.id
+      assign is_bundle_product = true
+    endif
+  endfor
+
+  assign welcome_kit_variant_id = null
+  for prod_item in settings.welcome_kit_free_product
+    assign prod = prod_item
+    if prod_item.id == null
+      assign prod = all_products[prod_item]
+    endif
+    if prod != blank and prod.variants.first != blank
+      assign welcome_kit_variant_id = prod.variants.first.id
+    endif
+  endfor
+-%}
+
 <div
   class="sticky-cta sc-style-fog"
   id="stickyCta"
@@ -67,8 +91,8 @@
           </div>
         </div>
         <span class="sc-caret" aria-hidden="true">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 7.5L6 10.5L9 7.5M9 4.5L6 1.5L3 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
       </button>
@@ -430,7 +454,9 @@
       }
       var obs = new IntersectionObserver(
         function (entries) {
-          SC_BAR.classList.toggle('is-visible', !entries[0].isIntersecting);
+          var isVisible = !entries[0].isIntersecting;
+          SC_BAR.classList.toggle('is-visible', isVisible);
+          document.body.classList.toggle('has-sticky-cta', isVisible);
         },
         { threshold: 0.1 }
       );
@@ -440,31 +466,72 @@
     function handleSubmit(e) {
       e.preventDefault();
       var form = document.getElementById('scCtaForm');
-      var data = new FormData(form);
       var btn = document.getElementById('scCtaBtn');
       btn.disabled = true;
       btn.classList.add('is-loading');
-      fetch('/cart/add.js', { method: 'POST', body: data })
-        .then(function (r) {
-          return r.json();
-        })
-        .then(function () {
-          var t = document.querySelector('[aria-controls="cart-drawer"]');
-          if (t) t.click();
-          else document.dispatchEvent(new CustomEvent('cart:open'));
-          closeDropdown();
-        })
-        .catch(function (err) {
-          console.error('[StickyCart]', err);
-        })
-        .finally(function () {
-          btn.disabled = false;
-          btn.classList.remove('is-loading');
-        });
+
+      var variantId = form.querySelector('[name="id"]').value;
+      var sellingPlanInput = form.querySelector('[name="selling_plan"]');
+      var sellingPlanId = sellingPlanInput ? sellingPlanInput.value : '';
+      var quantity = parseInt(form.querySelector('[name="quantity"]').value) || 1;
+
+      var mainItem = { id: parseInt(variantId), quantity: quantity };
+      if (sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
+        mainItem.selling_plan = parseInt(sellingPlanId);
+      }
+      var items = [mainItem];
+
+      // Welcome Kit Eligibility check
+      var customerAlreadyPurchased = {% if customer %}{% if customer.orders_count > 0 or customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %}{% else %}false{% endif %};
+      var hasWelcomeKitCookie = document.cookie.split('; ').some(function(row) { return row.startsWith('welcome_kit_purchased='); });
+      var isBundleProduct = {{ is_bundle_product | default: false }};
+      var welcomeKitVariantId = {{ welcome_kit_variant_id | json }};
+
+      if (sellingPlanId && !isNaN(parseInt(sellingPlanId)) && isBundleProduct && welcomeKitVariantId && !customerAlreadyPurchased && !hasWelcomeKitCookie) {
+        items.push({ id: parseInt(welcomeKitVariantId), quantity: 1 });
+      }
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: items })
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Cart add failed');
+        return r.json();
+      })
+      .then(function () {
+        if (items.length > 1) {
+          return fetch('/cart/update.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ discount: 'Welcome Kit' })
+          })
+          .then(function (res) {
+            if (!res.ok) throw new Error('Discount update failed');
+            return res.json();
+          });
+        }
+      })
+      .then(function () {
+        window.location.href = '/checkout';
+      })
+      .catch(function (err) {
+        console.error('[StickyCart] Checkout redirect failed:', err);
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.classList.remove('is-loading');
+      });
     }
 
     function init() {
       if (!SC_BAR) return;
+      
+      /* Move to body to prevent stacking context trapping */
+      if (SC_BAR.parentNode !== document.body) {
+        document.body.appendChild(SC_BAR);
+      }
 
       OPTIONS.forEach(function (opt) {
         opt.addEventListener('click', function () {

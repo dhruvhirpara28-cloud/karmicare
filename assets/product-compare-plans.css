@@ -1,6 +1,6 @@
-/**
- * KARMICARE Product Subscription Comparison Plans stylesheet
- */
+.plan-compare {
+  overflow-x: clip;
+}
 
 .plan-compare .page-width {
   width: 100%;
@@ -572,6 +572,7 @@ body.night-mode .pc-tag-top {
 
   .pc-table {
     display: flex;
+    justify-content: flex-start;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
@@ -596,6 +597,7 @@ body.night-mode .pc-tag-top {
   .pc-col-label {
     flex: 0 0 150px;
     min-width: 150px;
+    scroll-snap-align: start;
   }
 
   .pc-col[data-plan] {
@@ -620,26 +622,13 @@ body.night-mode .pc-tag-top {
     width: 90%;
   }
 
-  .info-tip-popover {
-    width: 200px;
-    left: auto;
-    right: 0;
-    transform: translateY(-10px);
-  }
-
-  .info-tip-popover::after {
-    left: auto;
-    right: 20px;
-  }
-
+  .info-tip-popover,
   .pc-kit-pop {
-    left: auto;
-    right: 0;
-    transform: translateY(-10px);
+    width: 240px;
   }
 
+  .info-tip-popover::after,
   .pc-kit-pop::after {
-    left: auto;
-    right: 20px;
+    display: none;
   }
 }
