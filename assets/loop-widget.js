@@ -1878,6 +1878,19 @@ function updateLoopProperties({
             hiddenInput.name = "selling_plan";
             hiddenInput.value = selectedSellingPlanId;
             form.appendChild(hiddenInput);
+
+            // KC CUSTOM: inject/update subscription name as a cart attribute
+            const existingSubAttr = form.querySelectorAll(
+                'input[name="attributes[Subscription]"]'
+            );
+            existingSubAttr.forEach((el) => el.remove());
+            if (sellingPlanGroupName) {
+                const subAttrInput = document.createElement("input");
+                subAttrInput.type = "hidden";
+                subAttrInput.name = "attributes[Subscription]";
+                subAttrInput.value = sellingPlanGroupName;
+                form.appendChild(subAttrInput);
+            }
         });
 }
 
@@ -2060,6 +2073,144 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
     }
 }
 
+// ── Welcome-kit product popup ──────────────────────────────────────────
+function loopShowWelcomeKitProductPopup(title, image, price, comparePrice) {
+    // Inject styles once
+    if (!document.getElementById("loop-wk-popup-styles")) {
+        const style = document.createElement("style");
+        style.id = "loop-wk-popup-styles";
+        style.textContent = `
+            .loop-wk-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 99999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(10, 14, 26, 0.72);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                opacity: 0;
+                transition: opacity 0.25s ease;
+                cursor: pointer;
+            }
+            .loop-wk-overlay.loop-wk-visible {
+                opacity: 1;
+            }
+            .loop-wk-modal {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                cursor: default;
+                transform: translateY(18px) scale(0.97);
+                transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;
+                opacity: 0;
+                max-width: 420px;
+                width: 90%;
+                pointer-events: none;
+            }
+            .loop-wk-overlay.loop-wk-visible .loop-wk-modal {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .loop-wk-modal-img {
+                width: 260px;
+                height: 340px;
+                object-fit: contain;
+                filter: drop-shadow(0 24px 48px rgba(0,0,0,0.55));
+                border-radius: 4px;
+            }
+            .loop-wk-modal-info {
+                text-align: center;
+            }
+            .loop-wk-modal-title {
+                font-family: inherit;
+                font-size: 18px;
+                font-weight: 600;
+                color: #ffffff;
+                margin: 0 0 6px;
+                letter-spacing: 0.01em;
+            }
+            .loop-wk-modal-price {
+                font-size: 14px;
+                color: rgba(255,255,255,0.7);
+            }
+            .loop-wk-modal-price .loop-wk-free {
+                color: #5db8ff;
+                font-weight: 600;
+            }
+            .loop-wk-modal-price del {
+                opacity: 0.55;
+                margin-left: 2px;
+            }
+            .loop-wk-modal-hint {
+                font-size: 12px;
+                color: rgba(255,255,255,0.38);
+                margin-top: 4px;
+            }
+            .loop-wk-close {
+                position: absolute;
+                top: -38px;
+                right: 0;
+                background: rgba(255,255,255,0.1);
+                border: none;
+                color: #fff;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s;
+            }
+            .loop-wk-close:hover { background: rgba(255,255,255,0.22); }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Build overlay
+    const overlay = document.createElement("div");
+    overlay.className = "loop-wk-overlay";
+    overlay.innerHTML = `
+        <div class="loop-wk-modal" role="dialog" aria-modal="true" aria-label="${title}">
+            <button class="loop-wk-close" aria-label="Close">&#x2715;</button>
+            <img class="loop-wk-modal-img" src="${image}" alt="${title}" />
+            <div class="loop-wk-modal-info">
+                <p class="loop-wk-modal-title">${title}</p>
+                <p class="loop-wk-modal-price">
+                    <span class="loop-wk-free">Free</span> · <del>${comparePrice}</del>
+                </p>
+                <p class="loop-wk-modal-hint">Click outside to close</p>
+            </div>
+        </div>
+    `;
+
+    const closePopup = () => {
+        overlay.classList.remove("loop-wk-visible");
+        setTimeout(() => overlay.remove(), 280);
+        document.removeEventListener("keydown", onKey);
+    };
+    const onKey = (e) => { if (e.key === "Escape") closePopup(); };
+
+    // Close on backdrop click (not modal itself)
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closePopup();
+    });
+    overlay.querySelector(".loop-wk-close").addEventListener("click", closePopup);
+    document.addEventListener("keydown", onKey);
+
+    document.body.appendChild(overlay);
+    // Trigger animation on next frame
+    requestAnimationFrame(() => requestAnimationFrame(() => overlay.classList.add("loop-wk-visible")));
+}
+// ── End popup helper ─────────────────────────────────────────────────────
+
 function checkPlanQualifiesForWelcomeKit(productId) {
     const loopPropsProduct = window.loopProps?.[productId];
     if (!loopPropsProduct || !loopPropsProduct.sellingPlanDefination) {
@@ -2123,9 +2274,14 @@ function updateWelcomeKitUI(productId) {
         const formattedComparePrice = loopFormatMoney(itemComparePrice, true);
 
         productsHtml += `
-            <div class="loop-welcome-kit-product">
+            <div class="loop-welcome-kit-product loop-wk-clickable"
+                 style="cursor:pointer;"
+                 data-wk-title="${itemTitle}"
+                 data-wk-image="${itemImage}"
+                 data-wk-price="${formattedComparePrice}"
+                 data-wk-compare-price="${formattedComparePrice}">
                 <img class="loop-welcome-kit-product-img" src="${itemImage}" alt="${itemTitle}" loading="lazy" />
-                <a class="loop-welcome-kit-product-link" href="${itemUrl}" target="_blank" title="${itemTitle}">${itemTitle}</a>
+                <span class="loop-welcome-kit-product-link" title="${itemTitle}">${itemTitle}</span>
                 <div class="loop-welcome-kit-product-price">
                     <span>Free</span> · <del>${formattedComparePrice}</del>
                 </div>
@@ -2168,6 +2324,21 @@ function updateWelcomeKitUI(productId) {
 
         const expanded = welcomeKitContainer.classList.toggle("is-expanded");
         window.loopWelcomeKitExpanded[productId] = expanded;
+    });
+
+    // Attach click listeners to each product card to open popup
+    const productCards = welcomeKitContainer.querySelectorAll(".loop-wk-clickable");
+    productCards.forEach(card => {
+        card.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const t = card.dataset.wkTitle;
+            const img = card.dataset.wkImage;
+            const cp = card.dataset.wkComparePrice;
+            // Use a larger image if the URL contains a width param
+            const largeImg = img.replace(/width=\d+/, "width=600");
+            loopShowWelcomeKitProductPopup(t, largeImg, cp, cp);
+        });
     });
 
     const variant = findSelectedVariantLoop(productId);
@@ -3455,10 +3626,13 @@ async function loopWidgetCreateAddToCartPayload(
     quantity,
     productBundleData
 ) {
+    // KC CUSTOM: resolve subscription name for cart attributes
+    const kcSubscriptionName = window.loopProps[productId]?.sellingPlanGroupName || "";
     const formData = {
         items: [],
         attributes: {
             _loopBundleDiscountAttributes: {},
+            ...(kcSubscriptionName ? { Subscription: kcSubscriptionName } : {}),
         },
     };
 

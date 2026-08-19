@@ -1,5 +1,5 @@
 {%- comment -%}
-  Renders product highlights badges/pills slider.
+  Renders product highlights badges/pills slider — infinite marquee animation.
   Accepts:
   - block: {Object} passes block settings to the snippet.
 
@@ -10,53 +10,48 @@
 {%- assign font_size_desktop = block.settings.font_size_desktop -%}
 {%- assign font_size_mobile = block.settings.font_size_mobile -%}
 {%- assign border_radius = block.settings.border_radius -%}
+{%- assign marquee_speed = block.settings.marquee_speed | default: 28 -%}
 {% style %}
   /* =====================================================
-   Product Highlights Badge Slider
+   Product Highlights Badge Slider — Infinite Marquee
    ===================================================== */
   .product-highlights {
     margin: 1.5rem 0;
     width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 28px), transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 28px), transparent 100%);
-    cursor: grab;
+    /* overflow-x: clip lets vertical hover lift escape without being cut */
+    overflow-x: clip;
+    overflow-y: visible;
+    /* add breathing room so pills don't touch the clip edge on hover */
+    padding-block: 4px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
   }
 
-  /* Safari and Chrome */
-  .product-highlights::-webkit-scrollbar,
-  .highlights-list::-webkit-scrollbar {
-    display: none;
-  }
-
-  .product-highlights.dragging {
-    cursor: grabbing;
-    scroll-behavior: auto;
-  }
-
+  /* Marquee track — doubled for seamless loop */
   .highlights-list {
-    cursor: grab;
-    user-select: none;
-    gap: 10px;
     display: flex;
     width: max-content;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
-    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 36px), transparent 100%);
-    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 36px), transparent 100%);
+    gap: 10px;
+    animation: pill-marquee var(--marquee-speed, 28s) linear infinite;
+    will-change: transform;
+  }
+
+  /* Pause on hover so users can read */
+  .product-highlights:hover .highlights-list {
+    animation-play-state: paused;
+  }
+
+  @keyframes pill-marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .highlight-pill {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 4px 9px;
+    padding: 4px 12px;
     border-radius: var(--pill-border-radius, 3rem);
     font-size: var(--pill-font-size-mobile, 1.3rem);
     font-weight: 500;
@@ -66,7 +61,12 @@
     border: 1px solid rgb(var(--color-foreground));
     color: rgb(var(--color-foreground));
     flex-shrink: 0;
-    transition: transform var(--duration-short) ease, background-color var(--duration-short) ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .highlight-pill:hover {
+    background-color: rgba(var(--color-foreground), 0.14);
+    box-shadow: 0 2px 8px rgba(var(--color-foreground), 0.15);
   }
 
   .highlight-pill__icon {
@@ -99,7 +99,55 @@
       font-size: var(--pill-font-size-desktop, 1.5rem);
     }
   }
+
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .highlights-list {
+      animation: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .highlights-list::-webkit-scrollbar { display: none; }
+    .product-highlights {
+      -webkit-mask-image: none;
+      mask-image: none;
+      overflow-x: auto;
+    }
+  }
 {% endstyle %}
+
+{%- comment -%} Collect non-empty pills {%- endcomment -%}
+{%- assign pills_html = '' -%}
+{%- for i in (1..6) -%}
+  {%- assign text_key  = 'text_'  | append: i -%}
+  {%- assign image_key = 'image_' | append: i -%}
+  {%- assign svg_key   = 'svg_'   | append: i -%}
+
+  {%- assign item_text  = block.settings[text_key] -%}
+  {%- assign item_image = block.settings[image_key] -%}
+  {%- assign item_svg   = block.settings[svg_key] -%}
+
+  {%- if item_text != blank or item_image != blank or item_svg != blank -%}
+    {%- capture pill_item -%}
+      <div class="highlight-pill" aria-hidden="false">
+        {%- if item_image != blank or item_svg != blank -%}
+          <div class="highlight-pill__icon">
+            {%- if item_image != blank -%}
+              <img src="{{ item_image | image_url: width: 40 }}" alt="" loading="lazy" width="20" height="20">
+            {%- elsif item_svg != blank -%}
+              {{ item_svg }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if item_text != blank -%}
+          <span class="highlight-pill__text">{{ item_text }}</span>
+        {%- endif -%}
+      </div>
+    {%- endcapture -%}
+    {%- assign pills_html = pills_html | append: pill_item -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div
   class="product-highlights"
   {{ block.shopify_attributes }}
@@ -107,105 +155,11 @@
     --pill-font-size-desktop: {{ font_size_desktop }}px;
     --pill-font-size-mobile: {{ font_size_mobile }}px;
     --pill-border-radius: {{ border_radius }}px;
+    --marquee-speed: {{ marquee_speed }}s;
   "
 >
-  <div class="highlights-list">
-    {%- for i in (1..6) -%}
-      {%- assign text_key = 'text_' | append: i -%}
-      {%- assign image_key = 'image_' | append: i -%}
-      {%- assign svg_key = 'svg_' | append: i -%}
-
-      {%- assign item_text = block.settings[text_key] -%}
-      {%- assign item_image = block.settings[image_key] -%}
-      {%- assign item_svg = block.settings[svg_key] -%}
-
-      {%- if item_text != blank or item_image != blank or item_svg != blank -%}
-        <div class="highlight-pill">
-          {%- if item_image != blank or item_svg != blank -%}
-            <div class="highlight-pill__icon">
-              {%- if item_image != blank -%}
-                <img src="{{ item_image | image_url: width: 40 }}" alt="" loading="lazy" width="20" height="20">
-              {%- elsif item_svg != blank -%}
-                {{ item_svg }}
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-          {%- if item_text != blank -%}
-            <span class="highlight-pill__text">{{ item_text }}</span>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
+  <div class="highlights-list" aria-label="Product highlights">
+    {{- pills_html -}}
+    {{- pills_html -}}
   </div>
 </div>
-
-<script>
-  (() => {
-    const initSlider = (slider) => {
-      if (slider.dataset.jsInitialized) return;
-      slider.dataset.jsInitialized = 'true';
-
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-
-      // Translate vertical wheel scroll to horizontal scroll
-      slider.addEventListener(
-        'wheel',
-        (e) => {
-          if (slider.scrollWidth > slider.clientWidth) {
-            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-              e.preventDefault();
-              slider.scrollLeft += e.deltaY;
-            }
-          }
-        },
-        { passive: false }
-      );
-
-      // Grab to scroll (mouse drag)
-      slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.classList.add('dragging');
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-      });
-
-      const endDrag = () => {
-        isDown = false;
-        slider.classList.remove('dragging');
-      };
-
-      slider.addEventListener('mouseleave', endDrag);
-      slider.addEventListener('mouseup', endDrag);
-
-      slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5; // Drag speed multiplier
-        slider.scrollLeft = scrollLeft - walk;
-      });
-    };
-
-    const setupLazyInit = () => {
-      const sliders = document.querySelectorAll('.product-highlights');
-      sliders.forEach((slider) => {
-        const triggerInit = () => {
-          initSlider(slider);
-          slider.removeEventListener('pointerenter', triggerInit);
-          slider.removeEventListener('touchstart', triggerInit);
-        };
-        slider.addEventListener('pointerenter', triggerInit, { passive: true });
-        slider.addEventListener('touchstart', triggerInit, { passive: true });
-      });
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupLazyInit);
-    } else {
-      setupLazyInit();
-    }
-    document.addEventListener('shopify:section:load', setupLazyInit);
-  })();
-</script>

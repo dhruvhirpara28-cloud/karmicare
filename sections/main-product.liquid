@@ -533,36 +533,39 @@
                   {%- if template_exists -%}
                     {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
                     {%- if block.settings.default_to_subscription -%}
-                                                                      <script>
-                          (function() {
-                            var attempts = 0;
-                            var interval = setInterval(function() {
-                              if (attempts++ > 50) { clearInterval(interval); return; }
-                              var fs = document.getElementById('loop-selling-plan-fieldset');
-                              if (!fs) return;
-                              
-                              // Find all radio buttons inside Loop widget
-                              var radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
-                              // Find the first one that is NOT one-time purchase
-                              var firstSub = radios.find(function(r) {
-                                var val = r.value || '';
-                                var id = r.dataset.id || '';
-                                return val !== 'autodeliver-off' && id !== 'loop-one-time-purchase' && (val || id);
-                              });
+                      <script>
+                        (function () {
+                          var attempts = 0;
+                          var interval = setInterval(function () {
+                            if (attempts++ > 50) {
+                              clearInterval(interval);
+                              return;
+                            }
+                            var fs = document.getElementById('loop-selling-plan-fieldset');
+                            if (!fs) return;
 
-                              if (firstSub) {
-                                if (!firstSub.checked) {
-                                  firstSub.click();
-                                  var group = firstSub.closest('.loop-subscription-group');
-                                  if(group) group.click();
-                                } else {
-                                  clearInterval(interval);
-                                  firstSub.dispatchEvent(new Event('change', {bubbles: true}));
-                                }
+                            // Find all radio buttons inside Loop widget
+                            var radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
+                            // Find the first one that is NOT one-time purchase
+                            var firstSub = radios.find(function (r) {
+                              var val = r.value || '';
+                              var id = r.dataset.id || '';
+                              return val !== 'autodeliver-off' && id !== 'loop-one-time-purchase' && (val || id);
+                            });
+
+                            if (firstSub) {
+                              if (!firstSub.checked) {
+                                firstSub.click();
+                                var group = firstSub.closest('.loop-subscription-group');
+                                if (group) group.click();
+                              } else {
+                                clearInterval(interval);
+                                firstSub.dispatchEvent(new Event('change', { bubbles: true }));
                               }
-                            }, 100);
-                          })();
-                        </script>
+                            }
+                          }, 100);
+                        })();
+                      </script>
                     {%- endif -%}
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
@@ -1038,6 +1041,16 @@
           "default": 30
         },
         {
+          "type": "range",
+          "id": "marquee_speed",
+          "min": 5,
+          "max": 60,
+          "step": 5,
+          "unit": "s",
+          "label": "Marquee Speed (lower = faster)",
+          "default": 30
+        },
+        {
           "type": "header",
           "content": "Highlight Items"
         },
@@ -1169,7 +1182,8 @@
           "id": "default_to_subscription",
           "label": "Default to first subscription",
           "default": true
-        },]
+        }
+      ]
     },
     {
       "type": "text",
@@ -2891,7 +2905,8 @@
           "id": "default_to_subscription",
           "label": "Default to first subscription",
           "default": true
-        },]
+        }
+      ]
     },
     {
       "type": "product_faq",
@@ -2902,16 +2917,17 @@
           "id": "default_to_subscription",
           "label": "Default to first subscription",
           "default": true
-        },]
+        }
+      ]
     }
   ],
   "settings": [
-        {
-          "type": "checkbox",
-          "id": "default_to_subscription",
-          "label": "Default to first subscription",
-          "default": true
-        },
+    {
+      "type": "checkbox",
+      "id": "default_to_subscription",
+      "label": "Default to first subscription",
+      "default": true
+    },
     {
       "type": "checkbox",
       "id": "enable_sticky_info",
@@ -3099,11 +3115,3 @@
   ]
 }
 {% endschema %}
-
-
-
-
-
-
-
-
