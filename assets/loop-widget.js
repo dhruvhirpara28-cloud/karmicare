@@ -1411,6 +1411,7 @@ function changeInSellingPlanGroupLoopMobile(
     updateCartButtonTextLoop({ productId });
     updatePriceInUILoop({ productId });
     updatePrepaidPriceInUILoop({ productId });
+    updateDynamicReturnOnCareLabels(productId);
     applyLoopBundleDiscount(productId);
     checkAllowCheckoutIfBundle(productId);
     let removeElementId = ".loop-selected-selling-plan-group";
@@ -1484,6 +1485,7 @@ function changeInSellingPlanGroupLoop(option) {
     updateCartButtonTextLoop({ productId });
     updatePriceInUILoop({ productId });
     updatePrepaidPriceInUILoop({ productId });
+    updateDynamicReturnOnCareLabels(productId);
     applyLoopBundleDiscount(productId);
     checkAllowCheckoutIfBundle(productId);
 
@@ -1528,6 +1530,7 @@ function changeInDeliveryOptionLoop(option) {
     displayLoopDiscountBadge({ productId });
     updatePriceInUILoop({ productId });
     updatePrepaidPriceInUILoop({ productId });
+    updateDynamicReturnOnCareLabels(productId);
     applyLoopBundleDiscount(productId);
     checkAllowCheckoutIfBundle(productId);
 }
@@ -1539,6 +1542,7 @@ function changeInDeliveryOptionLoopV2(productId, sellingPlanId) {
     displayLoopDiscountBadge({ productId });
     updatePriceInUILoop({ productId });
     updatePrepaidPriceInUILoop({ productId });
+    updateDynamicReturnOnCareLabels(productId);
     applyLoopBundleDiscount(productId);
     checkAllowCheckoutIfBundle(productId);
 }
@@ -2071,6 +2075,11 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
     if (typeof updateWelcomeKitUI === "function") {
         updateWelcomeKitUI(productId);
     }
+
+    // Update dynamic Return-on-Care price spans after description HTML is refreshed
+    if (typeof updateDynamicReturnOnCareLabels === "function") {
+        updateDynamicReturnOnCareLabels(productId);
+    }
 }
 
 // ── Welcome-kit product popup ──────────────────────────────────────────
@@ -2375,6 +2384,14 @@ function updateWelcomeKitUI(productId) {
             }
         }
     }
+
+    // Update all .dynamic_free_welcome_price spans in the active description
+    // so checklist lines like "Free Welcome Kit (€17.00 in value)" stay in sync
+    if (descriptionElement) {
+        descriptionElement.querySelectorAll('.dynamic_free_welcome_price').forEach(el => {
+            el.textContent = formattedTotalValue;
+        });
+    }
 }
 
 function translateDescriptionEuroPrices(html) {
@@ -2514,6 +2531,52 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             }
             labelEl.textContent = rightLabel;
         }
+    });
+}
+
+/**
+ * Updates .dynamic_prices_10 and .dynamic_prices_20 elements inside each
+ * plan card description with the correct calculated Return-on-Care amount.
+ *
+ * Rules:
+ *  - .dynamic_prices_10  → 10% of that plan's total allocation price
+ *  - .dynamic_prices_20  → 20% of that plan's total allocation price
+ *  - If the span's current text ends with '%' it is a label (e.g. "10%") and
+ *    is left unchanged. Only money-amount spans are recalculated.
+ *
+ * Called after every plan/variant change and on currency change.
+ */
+function updateDynamicReturnOnCareLabels(productId) {
+    const variant = findSelectedVariantLoop(
+        productId,
+        window.loopProps?.[productId]?.selectedVariantId
+    );
+    if (!variant?.selling_plan_allocations?.length) return;
+
+    const loopContainer = getLoopSubscriptionContainer(productId);
+    if (!loopContainer) return;
+
+    loopContainer.querySelectorAll('.loop-subscription-group').forEach((groupEl) => {
+        const radio = groupEl.querySelector('.loop-subscription-group-radio');
+        if (!radio?.dataset?.id || radio.dataset.id === 'loop-one-time-purchase') return;
+
+        const alloc = variant.selling_plan_allocations.find(
+            a => String(a.selling_plan_group_id) === String(radio.dataset.id)
+        );
+        if (!alloc?.price) return;
+
+        const planPrice = alloc.price; // total allocation price in cents
+
+        // Helper: update ALL spans with a given percentage → shows money amount
+        const updateSpans = (selector, pct) => {
+            groupEl.querySelectorAll(selector).forEach(el => {
+                const amount = Math.round(planPrice * pct);
+                el.textContent = loopFormatMoney(amount, true);
+            });
+        };
+
+        updateSpans('.dynamic_prices_10', 0.10);
+        updateSpans('.dynamic_prices_20', 0.20);
     });
 }
 
@@ -2678,24 +2741,24 @@ function updatePriceInUILoop({ productId }) {
                 ) || {};
             const {
                 selling_plan_group_id,
-                per_delivery_price,
+                price,
             } = sellingPlanAllcotion;
             let element = document.querySelector(
                 `#loop-price-${variant.id}-${selling_plan_group_id}`
             );
             if (element) {
-                element.innerHTML = loopFormatMoney(per_delivery_price, true);
+                element.innerHTML = loopFormatMoney(price, true);
             }
         }
     });
 
     if (sellingPlan && sellingPlan.selling_plan_group_id) {
-        const { selling_plan_group_id, per_delivery_price } = sellingPlan;
+        const { selling_plan_group_id, price } = sellingPlan;
         let element = document.querySelector(
             `#loop-price-${variant.id}-${selling_plan_group_id}`
         );
         if (element) {
-            element.innerHTML = loopFormatMoney(per_delivery_price, true);
+            element.innerHTML = loopFormatMoney(price, true);
         }
     }
 
@@ -3855,39 +3918,30 @@ function updatePrepaidPriceInUILoop({ productId }) {
                 ) || {};
             const {
                 selling_plan_group_id,
-                per_delivery_price,
+                price,
             } = sellingPlanAllcotion;
             let element = document.querySelector(
                 `#loop-price-${variant.id}-${selling_plan_group_id}`
             );
             if (element) {
-                element.innerHTML = loopFormatMoney(
-                    per_delivery_price / deliveriesPerBillingCycle,
-                    true
-                );
+                element.innerHTML = loopFormatMoney(price, true);
             }
         }
     });
 
     if (sellingPlan && sellingPlan.selling_plan_group_id) {
-        const { selling_plan_group_id, per_delivery_price } = sellingPlan;
+        const { selling_plan_group_id, price } = sellingPlan;
         if (
             !prepaidSellingPlans[sellingPlan.selling_plan_id] ||
             !prepaidSellingPlans[sellingPlan.selling_plan_id]?.isPrepaidV2
         ) {
             return;
         }
-        const deliveriesPerBillingCycle =
-            prepaidSellingPlans[sellingPlan.selling_plan_id]
-                ?.deliveriesPerBillingCycle || 1;
         let element = document.querySelector(
             `#loop-price-${variant.id}-${selling_plan_group_id}`
         );
         if (element) {
-            element.innerHTML = loopFormatMoney(
-                per_delivery_price / deliveriesPerBillingCycle,
-                true
-            );
+            element.innerHTML = loopFormatMoney(price, true);
         }
     }
 }

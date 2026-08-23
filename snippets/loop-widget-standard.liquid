@@ -53,7 +53,11 @@
   </div>
   {% comment %} Loop widget skeleton loader ends {% endcomment %}
 
-  <div id="loop-subscription-container-{{product.id}}" class="loop-subscription-container loop-display-none" data-default-to-subscription="{{ block.settings.default_to_subscription | default: 'false' }}">
+  <div
+    id="loop-subscription-container-{{product.id}}"
+    class="loop-subscription-container loop-display-none"
+    data-default-to-subscription="{{ block.settings.default_to_subscription | default: 'false' }}"
+  >
     {%- liquid
       assign welcome_kit_products = block.settings.welcome_kit_products
       assign welcome_kit_title = block.settings.welcome_kit_title
