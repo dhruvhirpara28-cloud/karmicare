@@ -102,6 +102,52 @@
     ]
   },
   {
+    "name": "Fonts Brand Guide",
+    "settings": [
+      {
+        "type": "header",
+        "content": "CUSTOM FONT FAMILY"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_custom_font",
+        "label": "Enable Custom Font",
+        "info": "This setting will replace the Shopify Typography fonts with custom fonts",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "header_font_name",
+        "label": "Header Font Name",
+        "info": "Enter the font name that will be used in the styling. Example:- 'Roboto', sans-serif"
+      },
+      {
+        "type": "range",
+        "id": "header_font_weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "default": 400,
+        "label": "Header Font Weight"
+      },
+      {
+        "type": "text",
+        "id": "body_font_name",
+        "label": "Body Font Name",
+        "info": "Enter the font name that will be used in the styling. Example:- 'Roboto', sans-serif"
+      },
+      {
+        "type": "range",
+        "id": "body_font_weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "default": 400,
+        "label": "Body Font Weight"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.typography.name",
     "settings": [
       {

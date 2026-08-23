@@ -317,7 +317,6 @@
       *::after {
         box-sizing: inherit;
       }
-
       html {
         box-sizing: border-box;
         font-size: calc(var(--font-body-scale) * 62.5%);
@@ -346,7 +345,19 @@
         }
       }
     {% endstyle %}
-
+    {% if settings.enable_custom_font != blank %}
+      <link rel="stylesheet" href="https://use.typekit.net/kss0igj.css">
+      {% style %}
+        :root  {
+          --font-heading-family: {{ settings.header_font_name }};
+          --font-heading-weight: {{ settings.header_font_weight }};
+        }
+        :root  {
+          --font-body-family: {{ settings.body_font_name }};
+          --font-body-weight: {{ settings.body_font_weight }};
+        }
+      {% endstyle %}
+    {% endif %}
     {% comment %}Day/Night mode — overrides Shopify color scheme variables{% endcomment %}
     <style>
       :root {
