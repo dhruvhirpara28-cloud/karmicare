@@ -62,6 +62,7 @@ async function initLoopWidget(productId) {
         displayLoopWidget(productId);
         renderKCRewards();
         renderKCTestimonial(productId);
+        injectOrUpdateKcTryOnceLink(productId, findSelectedVariantLoop(productId));
         observeFormChangesLoop(productData);
         hideLoopSkeletonLoader(productId);
 
@@ -2361,6 +2362,9 @@ function updatePriceInParentElementsLoop({ productId }) {
 
     // Update per-brushing sub-row on each subscription plan card
     updateSubscriptionGroupCardSubRow(productId, variant);
+
+    // Inject and update the "Or Try once" link above the pricing summary
+    injectOrUpdateKcTryOnceLink(productId, variant);
 }
 
 /* ============================================================
@@ -2504,26 +2508,34 @@ function updateKcPricingSummary(productId, variant) {
 
     if (!summaryEl) return;
 
-    if (isOneTime) {
-        // One-time purchase: show default price block, hide summary
-        summaryEl.style.display = 'none';
-        if (priceBlock) priceBlock.style.display = '';
-        if (taxBlock) taxBlock.style.display = '';
-        if (installmentBlock) installmentBlock.style.display = '';
-        return;
-    }
+    let tryOnceContainer = document.querySelector(`#kc-try-once-container-${productId}`);
 
-    // Subscription: hide default price block, show summary
-    if (priceBlock) priceBlock.style.display = 'none';
-    if (taxBlock) taxBlock.style.display = 'none';
-    if (installmentBlock) installmentBlock.style.display = 'none';
+    if (isOneTime) {
+        // Hide default price block
+        if (priceBlock) priceBlock.style.display = 'none';
+        if (taxBlock) taxBlock.style.display = 'none';
+        if (installmentBlock) installmentBlock.style.display = 'none';
+        
+        if (tryOnceContainer) tryOnceContainer.style.display = 'block';
+    } else {
+        // Subscription: hide default price block, show summary, show try once link
+        if (priceBlock) priceBlock.style.display = 'none';
+        if (taxBlock) taxBlock.style.display = 'none';
+        if (installmentBlock) installmentBlock.style.display = 'none';
+
+        if (tryOnceContainer) tryOnceContainer.style.display = 'block';
+    }
 
     const sellingPlanAllocation = window?.loopProps[productId]?.sellingPlanAllocation;
     const sellingPlanPrice = sellingPlanAllocation?.price;
-    if (!sellingPlanPrice || !variant) return;
+    if (!variant) return;
+    if (!isOneTime && !sellingPlanPrice) return;
 
     // Format total price
-    const totalFormatted = loopFormatMoney(sellingPlanPrice, true);
+    let totalFormatted = '';
+    if (!isOneTime && sellingPlanPrice) {
+        totalFormatted = loopFormatMoney(sellingPlanPrice, true);
+    }
 
     // Build billing interval label (e.g. "billed every 8 weeks", "billed yearly")
     let intervalLabel = '';
@@ -2596,6 +2608,16 @@ function updateKcPricingSummary(productId, variant) {
         console.warn('kc-pricing-summary: could not compute per-brushing', e);
     }
 
+    if (isOneTime) {
+        // One-time styling overrides
+        const oneTimePriceCents = variant.price;
+        totalFormatted = loopFormatMoney(oneTimePriceCents, true);
+        intervalLabel = 'one-time';
+        // Assume 120 brushings (60 days) for one-time standard size as fallback
+        const perBrushingCents = Math.round(oneTimePriceCents / 120);
+        perBrushingLabel = `${loopFormatMoney(perBrushingCents, true)} per brushing · no Care Credit`;
+    }
+
     // Populate the summary element fields
     const priceEl = summaryEl.querySelector('.kc-pricing-summary__price');
     const perBrushingEl = summaryEl.querySelector('.kc-pricing-summary__per-brushing');
@@ -2605,7 +2627,109 @@ function updateKcPricingSummary(productId, variant) {
     if (perBrushingEl) perBrushingEl.textContent = perBrushingLabel;
     if (intervalEl) intervalEl.textContent = intervalLabel;
 
+    // --- Update Rewards Block ---
+    let rewardsBlock = summaryEl.querySelector('.kc-pricing-summary__rewards');
+    
+    if (isOneTime) {
+        if (rewardsBlock) rewardsBlock.style.display = 'none';
+    } else {
+        let careCreditCents = 0;
+        let checkupRewardStr = '';
+
+        const planName = (window.loopProps[productId]?.sellingPlanGroupName || '').toLowerCase();
+        if (planName.includes('year')) {
+            careCreditCents = 7180;
+            checkupRewardStr = 'up to €40';
+        } else {
+            // standard 60-day logic
+            const basePrice = sellingPlanPrice || variant.price;
+            careCreditCents = Math.round(basePrice * 0.1);
+        }
+
+        if (rewardsBlock) {
+            let hasRewards = false;
+            
+            const careCreditRow = rewardsBlock.querySelector('.kc-care-credit-row');
+            if (careCreditRow) {
+                if (careCreditCents > 0) {
+                    const valueEl = careCreditRow.querySelector('.kc-care-credit-value');
+                    if (valueEl) valueEl.textContent = loopFormatMoney(careCreditCents, true);
+                    careCreditRow.style.display = 'flex';
+                    hasRewards = true;
+                } else {
+                    careCreditRow.style.display = 'none';
+                }
+            }
+
+            const checkupRow = rewardsBlock.querySelector('.kc-checkup-reward-row');
+            if (checkupRow) {
+                if (checkupRewardStr) {
+                    const valueEl = checkupRow.querySelector('.kc-checkup-reward-value');
+                    if (valueEl) valueEl.textContent = checkupRewardStr;
+                    checkupRow.style.display = 'flex';
+                    hasRewards = true;
+                } else {
+                    checkupRow.style.display = 'none';
+                }
+            }
+
+            rewardsBlock.style.display = hasRewards ? 'block' : 'none';
+        }
+    }
+
     summaryEl.style.display = 'block';
+}
+
+function injectOrUpdateKcTryOnceLink(productId, variant) {
+    if (!variant) return;
+
+    const loopContainer = getLoopSubscriptionContainer(productId);
+    if (loopContainer) {
+        const topCard = loopContainer.querySelector('#loop-one-time-purchase-option-at-top');
+        if (topCard) {
+            topCard.style.setProperty('display', 'none', 'important');
+            topCard.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    const summaryEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
+    if (!summaryEl) return;
+
+    let tryOnceContainer = document.querySelector(`#kc-try-once-container-${productId}`);
+    if (!tryOnceContainer) return;
+
+    const oneTimePriceFormatted = loopFormatMoney(variant.price, true);
+    
+    // Update the dynamic price span inside the button
+    const priceSpan = tryOnceContainer.querySelector('.kc-try-once-price');
+    if (priceSpan) {
+        priceSpan.textContent = oneTimePriceFormatted;
+    }
+
+    const btn = tryOnceContainer.querySelector('.kc-try-once-btn');
+    if (btn) {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const loopContainer = getLoopSubscriptionContainer(productId);
+            if (!loopContainer) return;
+
+            const oneTimeRadio = loopContainer.querySelector('input.loop-one-time-purchase-option-radio');
+            if (!oneTimeRadio || oneTimeRadio.checked) return;
+
+            loopContainer.querySelectorAll('input[name="loop_purchase_option"]').forEach(r => {
+                r.checked = false;
+            });
+            oneTimeRadio.checked = true;
+
+            if (typeof changeInSellingPlanGroupLoop === 'function') {
+                changeInSellingPlanGroupLoop({ target: oneTimeRadio });
+            } else {
+                oneTimeRadio.click();
+            }
+        });
+    }
 }
 
 function determinePriceLoop(productId, variant) {

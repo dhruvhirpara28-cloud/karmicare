@@ -653,11 +653,81 @@
     align-items: center;
 }
 
+.kc-pricing-summary {
+    border-top: 1px solid var(--hairline);
+    padding-top: 15px;
+}
+
 .kc-pricing-summary__per-brushing,
 .kc-pricing-summary__interval {
     font-size: 12px;
     color: var(--muted);
     letter-spacing: 0;
+}
+
+.kc-reward-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    margin-bottom: 4px;
+}
+
+.kc-reward-row .info-tip {
+    margin-left: 6px;
+    position: relative;
+}
+
+.kc-reward-row .info-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+    line-height: 14px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: inherit;
+    background: transparent;
+}
+
+.kc-reward-row .info-tip-popover {
+    font-size: 12px;
+    font-weight: normal;
+    bottom: calc(100% + 8px);
+}
+
+.kc-checkup-reward-row {
+    opacity: 0.9;
+}
+
+/* ============================================
+   KC Custom: Try Once Link
+   ============================================ */
+
+.kc-try-once-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.tertiary-try-once-link {
+    text-align: center;
+}
+
+.tertiary-try-once-link .ft-note {
+    font-size: 12px;
+    opacity: 0.8;
+    display: block;
+    margin-top: 4px;
 }
 
 /* ============================================
