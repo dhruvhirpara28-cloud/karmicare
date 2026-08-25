@@ -118,13 +118,55 @@
                     -%}
                   </div>
                   <div
+                    id="kc-try-once-container-{{ product.id }}"
+                    class="tertiary-try-once-link figma-tryonce v9bb"
+                    data-active-plan="once"
+                    style="display: none;"
+                  >
+                    {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
+                    <span class="ft-line">
+                        Or <button class="ft-link kc-try-once-btn" data-plan="once" type="button">{{ loop_block.settings.try_once_text | escape }} - <span class="kc-try-once-price"></span></button> <span class="ft-ship">{{ loop_block.settings.try_once_shipping | escape }}</span>
+                    </span>
+                    <br>
+                    <span class="ft-note">{{ loop_block.settings.try_once_note | escape }}</span>
+                  </div>
+                  <div
                     id="kc-pricing-summary-{{ section.id }}"
                     class="kc-pricing-summary"
                     style="display:none;"
                     data-section-id="{{ section.id }}"
                   >
+                    {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
+                    <div class="kc-pricing-summary__rewards" style="display: none;">
+                      <div class="kc-reward-row kc-care-credit-row">
+                        <div style="display: flex; align-items: center;">
+                            <span>{{ loop_block.settings.pricing_summary_care_credit_title | escape }}</span>
+                            <span class="info-tip">
+                                <span aria-hidden="true" class="info-icon">i</span>
+                                <span class="info-tip-popover" role="tooltip">
+                                    {{ loop_block.settings.pricing_summary_care_credit_tooltip | escape }}
+                                </span>
+                            </span>
+                        </div>
+                        <strong class="kc-care-credit-value"></strong>
+                      </div>
+
+                      <div class="kc-reward-row kc-checkup-reward-row">
+                        <div style="display: flex; align-items: center;">
+                            <span>{{ loop_block.settings.pricing_summary_checkup_title | escape }}</span>
+                            <span class="info-tip">
+                                <span aria-hidden="true" class="info-icon">i</span>
+                                <span class="info-tip-popover" role="tooltip">
+                                    {{ loop_block.settings.pricing_summary_checkup_tooltip | escape }}
+                                </span>
+                            </span>
+                        </div>
+                        <strong class="kc-checkup-reward-value"></strong>
+                      </div>
+                    </div>
+
                     <div class="kc-pricing-summary__total-row">
-                      <span class="kc-pricing-summary__label">Total today</span>
+                      <span class="kc-pricing-summary__label">{{ loop_block.settings.pricing_summary_total_title | escape }}</span>
                       <span class="kc-pricing-summary__price"></span>
                     </div>
                     <div class="kc-pricing-summary__sub-row">
@@ -2741,6 +2783,62 @@
           "id": "reward_text_2",
           "label": "Reward 2 Text",
           "default": "Check-up Reward received"
+        },
+        {
+          "type": "header",
+          "content": "Try Once Link Settings"
+        },
+        {
+          "type": "text",
+          "id": "try_once_text",
+          "label": "Try Once Link Text",
+          "default": "Try once"
+        },
+        {
+          "type": "text",
+          "id": "try_once_shipping",
+          "label": "Shipping Text",
+          "default": "+ shipping"
+        },
+        {
+          "type": "text",
+          "id": "try_once_note",
+          "label": "Note Text",
+          "default": "€0 Care Credit · €0 check-up reward"
+        },
+        {
+          "type": "header",
+          "content": "Pricing Summary Rewards"
+        },
+        {
+          "type": "text",
+          "id": "pricing_summary_total_title",
+          "label": "Total Today Title",
+          "default": "Total today"
+        },
+        {
+          "type": "text",
+          "id": "pricing_summary_care_credit_title",
+          "label": "Care Credit Title",
+          "default": "Care Credit received"
+        },
+        {
+          "type": "textarea",
+          "id": "pricing_summary_care_credit_tooltip",
+          "label": "Care Credit Tooltip",
+          "default": "Care Credit is Return on Care in euros — spendable on member products and accessories. It lands in your account with your plan, so caring for your teeth pays you back."
+        },
+        {
+          "type": "text",
+          "id": "pricing_summary_checkup_title",
+          "label": "Check-up Reward Title",
+          "default": "Check-up Reward"
+        },
+        {
+          "type": "textarea",
+          "id": "pricing_summary_checkup_tooltip",
+          "label": "Check-up Reward Tooltip",
+          "default": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded."
         },
         {
           "type": "header",
