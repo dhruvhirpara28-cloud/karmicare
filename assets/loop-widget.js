@@ -2067,7 +2067,8 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
 
     updateLoopSellingPlanDescriptionElement(
         descriptionElement,
-        descriptionValue
+        descriptionValue,
+        productId
     );
 
     renderKCRewards();
@@ -2413,8 +2414,14 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const billingDays = (dayMap[bInterval] || 1) * bCount;
         const isAnnual = bInterval === 'year' || (bInterval === 'month' && bCount === 12);
 
-        // 3. Per-brushing cost (price ÷ billingDays × 2 brushings/day)
-        const perBrushingCents = Math.round(alloc.price / (billingDays * 2));
+        // Determine duos for calculation
+        const option = select?.querySelector(`option[value="${alloc.selling_plan_id}"]`);
+        const duosCount = parseInt(option?.dataset?.duos) || 1;
+        const brushingsPerDuo = parseInt(option?.dataset?.brushings) || 120;
+
+        // 3. Per-brushing cost (price ÷ (duos * 120))
+        let totalBrushings = duosCount * brushingsPerDuo;
+        const perBrushingCents = Math.round(alloc.price / totalBrushings);
         const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
 
         // 4. Right-side short label: "/ year" or "/ 60 days"
@@ -2515,7 +2522,7 @@ function updateKcPricingSummary(productId, variant) {
         if (priceBlock) priceBlock.style.display = 'none';
         if (taxBlock) taxBlock.style.display = 'none';
         if (installmentBlock) installmentBlock.style.display = 'none';
-        
+
         if (tryOnceContainer) tryOnceContainer.style.display = 'block';
     } else {
         // Subscription: hide default price block, show summary, show try once link
@@ -2581,15 +2588,27 @@ function updateKcPricingSummary(productId, variant) {
                 intervalLabel = `/ ${intervalCount} ${base}s`;
             }
 
-            // Per-brushing calculation (2 brushings/day)
-            let totalDays = 0;
-            if (interval === 'day') totalDays = intervalCount;
-            else if (interval === 'week') totalDays = intervalCount * 7;
-            else if (interval === 'month') totalDays = intervalCount * 30;
-            else if (interval === 'year') totalDays = intervalCount * 365;
+            // Per-brushing calculation (dynamically driven by data-duos and data-brushings)
+            let duosCount = 1;
+            let brushingsPerDuo = 120;
+            const loopPropsProduct = window.loopProps?.[productId];
+            if (loopPropsProduct && loopPropsProduct.sellingPlanGroupId && loopPropsProduct.sellingPlanId) {
+                const loopContainer = getLoopSubscriptionContainer(productId);
+                if (loopContainer) {
+                    const select = loopContainer.querySelector(`#loop-select-${loopPropsProduct.selectedVariantId}-${loopPropsProduct.sellingPlanGroupId}`);
+                    if (select) {
+                        const option = select.querySelector(`option[value="${loopPropsProduct.sellingPlanId}"]`);
+                        if (option) {
+                            if (option.dataset.duos) duosCount = parseInt(option.dataset.duos) || 1;
+                            if (option.dataset.brushings) brushingsPerDuo = parseInt(option.dataset.brushings) || 120;
+                        }
+                    }
+                }
+            }
 
-            if (totalDays > 0) {
-                const totalBrushings = totalDays * 2;
+            const totalBrushings = duosCount * brushingsPerDuo;
+
+            if (totalBrushings > 0) {
                 const perBrushingCents = Math.round(sellingPlanPrice / totalBrushings);
                 const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
 
@@ -2629,7 +2648,7 @@ function updateKcPricingSummary(productId, variant) {
 
     // --- Update Rewards Block ---
     let rewardsBlock = summaryEl.querySelector('.kc-pricing-summary__rewards');
-    
+
     if (isOneTime) {
         if (rewardsBlock) rewardsBlock.style.display = 'none';
     } else {
@@ -2648,7 +2667,7 @@ function updateKcPricingSummary(productId, variant) {
 
         if (rewardsBlock) {
             let hasRewards = false;
-            
+
             const careCreditRow = rewardsBlock.querySelector('.kc-care-credit-row');
             if (careCreditRow) {
                 if (careCreditCents > 0) {
@@ -2699,7 +2718,7 @@ function injectOrUpdateKcTryOnceLink(productId, variant) {
     if (!tryOnceContainer) return;
 
     const oneTimePriceFormatted = loopFormatMoney(variant.price, true);
-    
+
     // Update the dynamic price span inside the button
     const priceSpan = tryOnceContainer.querySelector('.kc-try-once-price');
     if (priceSpan) {
