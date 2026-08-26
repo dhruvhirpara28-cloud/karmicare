@@ -214,7 +214,26 @@
                             data-product-id="{{product.id}}"
                           >
                             {% for sp in selling_plan_group.selling_plans %}
-                              <option class="loop-selling-plan-selector-option" value="{{ sp.id }}">
+                              {%- assign matched_duos = 1 -%}
+                              {%- assign matched_brushings = 120 -%}
+                              {%- if product.metafields.custom.duos_count.value != blank -%}
+                                {%- for entry in product.metafields.custom.duos_count.value -%}
+                                  {%- if entry.selling_plan_name.value == selling_plan_group.name
+                                    or selling_plan_group.name contains entry.selling_plan_name.value
+                                  -%}
+                                    {%- assign matched_duos = entry.duos_count.value -%}
+                                    {%- if entry.brushings_count != blank -%}
+                                      {%- assign matched_brushings = entry.brushings_count.value -%}
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              {%- endif -%}
+                              <option
+                                class="loop-selling-plan-selector-option"
+                                value="{{ sp.id }}"
+                                data-duos="{{ matched_duos }}"
+                                data-brushings="{{ matched_brushings }}"
+                              >
                                 {{ sp.options[0].value }}
                               </option>
                             {% endfor %}
