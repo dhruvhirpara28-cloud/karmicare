@@ -149,7 +149,6 @@
 
 .loop-selling-plan-allocation {
     display: flex;
-    margin-bottom: 4px;
 }
 
 .loop-subscription-group {
@@ -160,6 +159,10 @@
     box-sizing: border-box;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
     position: relative;
+}
+
+[id^="loop-selling_plan_group-"] + [id^="loop-selling_plan_group-"] {
+    margin-top: 12px;
 }
 
 .loop-subscription-group-border-top {
@@ -284,6 +287,9 @@
 .loop-selling-plan-selector:-moz-focusring,
 .loop-selling-plan-selector-label {
     display: none;
+}
+.loop-selling-plan-selector-description {
+    width: 100%;
 }
 
 .loop-selling-plan-selector-option {
