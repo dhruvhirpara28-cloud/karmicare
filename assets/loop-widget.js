@@ -129,8 +129,14 @@ function renderKCTestimonial(productId) {
     const staticTestimonials = Array.from(document.querySelectorAll('.kc-testimonial-section'))
         .filter(el => isVisible(el, sourceTemplate));
 
+    const isVisibleLabel = (el, templateEl) => {
+        if (el.getAttribute('data-dynamic') === 'true') return false;
+        if (templateEl && el.contains(templateEl)) return false;
+        return true;
+    };
+
     const staticBottomLabels = Array.from(document.querySelectorAll('.kc-bottom_label'))
-        .filter(el => isVisible(el, buttonTemplate));
+        .filter(el => isVisibleLabel(el, buttonTemplate));
 
     // Inject testimonial HTML into static containers
     staticTestimonials.forEach(section => {
@@ -2055,21 +2061,26 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
     const variant = findSelectedVariantLoop(productId);
     const loopPropsProduct = window.loopProps?.[productId];
 
-    if (!loopPropsProduct?.sellingPlanGroupId) {
+    if (!loopPropsProduct?.product?.selling_plan_groups) {
         return;
     }
 
-    const descriptionValue =
-        loopPropsProduct?.sellingPlanDefination?.description || "";
-    const descriptionElement = document.querySelector(
-        `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
-    );
-
-    updateLoopSellingPlanDescriptionElement(
-        descriptionElement,
-        descriptionValue,
-        productId
-    );
+    // Populate descriptions for ALL selling plan groups so that tooltips are available even when unchecked
+    loopPropsProduct.product.selling_plan_groups.forEach(spg => {
+        const firstSp = spg.selling_plans[0];
+        const descriptionValue = firstSp?.description || "";
+        const descriptionElement = document.querySelector(
+            `#loop-selling-plan-description-${variant.id}-${spg.id}`
+        );
+        
+        if (descriptionElement) {
+            updateLoopSellingPlanDescriptionElement(
+                descriptionElement,
+                descriptionValue,
+                productId
+            );
+        }
+    });
 
     renderKCRewards();
     renderKCTestimonial(productId);
@@ -2456,17 +2467,10 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
 }
 
 /**
- * Updates .dynamic_prices_10 and .dynamic_prices_20 elements inside each
+ * Updates kc-dynamic_price elements inside each
  * plan card description with the correct calculated Return-on-Care amount.
- *
- * Rules:
- *  - .dynamic_prices_10  → 10% of that plan's total allocation price
- *  - .dynamic_prices_20  → 20% of that plan's total allocation price
- *  - If the span's current text ends with '%' it is a label (e.g. "10%") and
- *    is left unchanged. Only money-amount spans are recalculated.
- *
- * Called after every plan/variant change and on currency change.
  */
+
 function updateDynamicReturnOnCareLabels(productId) {
     const variant = findSelectedVariantLoop(
         productId,
@@ -2488,16 +2492,28 @@ function updateDynamicReturnOnCareLabels(productId) {
 
         const planPrice = alloc.price; // total allocation price in cents
 
-        // Helper: update ALL spans with a given percentage → shows money amount
-        const updateSpans = (selector, pct) => {
-            groupEl.querySelectorAll(selector).forEach(el => {
-                const amount = Math.round(planPrice * pct);
-                el.textContent = loopFormatMoney(amount, true);
-            });
-        };
+        // Fetch return-on-care percentage from the currently selected option
+        const selectId = `loop-select-${variant.id}-${radio.dataset.id}`;
+        const selectEl = loopContainer.querySelector(`#${selectId}`);
+        const selectedOption = selectEl?.querySelector(`option[value="${alloc.selling_plan_id}"]`);
 
-        updateSpans('.dynamic_prices_10', 0.10);
-        updateSpans('.dynamic_prices_20', 0.20);
+        let returnOnCareVal = 0;
+        if (selectedOption?.dataset?.returnOnCare) {
+            returnOnCareVal = parseInt(selectedOption.dataset.returnOnCare) || 0;
+        }
+
+        const pct = returnOnCareVal / 100;
+
+        // Display the calculated discount money amount wherever kc-dynamic_price is used
+        groupEl.querySelectorAll('.kc-dynamic_price').forEach(el => {
+            const amount = Math.round(planPrice * pct);
+            el.textContent = loopFormatMoney(amount, true);
+        });
+
+        // Display the percentage number (e.g. 20%) wherever kc-dynamic_percent is used
+        groupEl.querySelectorAll('.kc-dynamic_percent').forEach(el => {
+            el.textContent = `${returnOnCareVal}%`;
+        });
     });
 }
 

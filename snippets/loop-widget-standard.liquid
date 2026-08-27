@@ -216,14 +216,21 @@
                             {% for sp in selling_plan_group.selling_plans %}
                               {%- assign matched_duos = 1 -%}
                               {%- assign matched_brushings = 120 -%}
+                              {%- assign matched_return_on_care = 0 -%}
                               {%- if product.metafields.custom.duos_count.value != blank -%}
                                 {%- for entry in product.metafields.custom.duos_count.value -%}
                                   {%- if entry.selling_plan_name.value == selling_plan_group.name
                                     or selling_plan_group.name contains entry.selling_plan_name.value
                                   -%}
                                     {%- assign matched_duos = entry.duos_count.value -%}
+                                    {%- if entry.free_duo_s_count != blank -%}
+                                      {%- assign matched_duos = matched_duos | plus: entry.free_duo_s_count.value -%}
+                                    {%- endif -%}
                                     {%- if entry.brushings_count != blank -%}
                                       {%- assign matched_brushings = entry.brushings_count.value -%}
+                                    {%- endif -%}
+                                    {%- if entry.return_on_care != blank -%}
+                                      {%- assign matched_return_on_care = entry.return_on_care.value -%}
                                     {%- endif -%}
                                   {%- endif -%}
                                 {%- endfor -%}
@@ -233,6 +240,7 @@
                                 value="{{ sp.id }}"
                                 data-duos="{{ matched_duos }}"
                                 data-brushings="{{ matched_brushings }}"
+                                data-return-on-care="{{ matched_return_on_care }}"
                               >
                                 {{ sp.options[0].value }}
                               </option>
