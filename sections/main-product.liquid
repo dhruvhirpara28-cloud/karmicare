@@ -125,7 +125,11 @@
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <span class="ft-line">
-                        Or <button class="ft-link kc-try-once-btn" data-plan="once" type="button">{{ loop_block.settings.try_once_text | escape }} - <span class="kc-try-once-price"></span></button> <span class="ft-ship">{{ loop_block.settings.try_once_shipping | escape }}</span>
+                      Or
+                      <button class="ft-link kc-try-once-btn" data-plan="once" type="button">
+                        {{ loop_block.settings.try_once_text | escape }} - <span class="kc-try-once-price"></span>
+                      </button>
+                      <span class="ft-ship">{{ loop_block.settings.try_once_shipping | escape }}</span>
                     </span>
                     <br>
                     <span class="ft-note">{{ loop_block.settings.try_once_note | escape }}</span>
@@ -140,33 +144,35 @@
                     <div class="kc-pricing-summary__rewards" style="display: none;">
                       <div class="kc-reward-row kc-care-credit-row">
                         <div style="display: flex; align-items: center;">
-                            <span>{{ loop_block.settings.pricing_summary_care_credit_title | escape }}</span>
-                            <span class="info-tip">
-                                <span aria-hidden="true" class="info-icon">i</span>
-                                <span class="info-tip-popover" role="tooltip">
-                                    {{ loop_block.settings.pricing_summary_care_credit_tooltip | escape }}
-                                </span>
+                          <span>{{ loop_block.settings.pricing_summary_care_credit_title | escape }}</span>
+                          <span class="info-tip">
+                            <span aria-hidden="true" class="info-icon">i</span>
+                            <span class="info-tip-popover" role="tooltip">
+                              {{ loop_block.settings.pricing_summary_care_credit_tooltip | escape }}
                             </span>
+                          </span>
                         </div>
                         <strong class="kc-care-credit-value"></strong>
                       </div>
 
                       <div class="kc-reward-row kc-checkup-reward-row">
                         <div style="display: flex; align-items: center;">
-                            <span>{{ loop_block.settings.pricing_summary_checkup_title | escape }}</span>
-                            <span class="info-tip">
-                                <span aria-hidden="true" class="info-icon">i</span>
-                                <span class="info-tip-popover" role="tooltip">
-                                    {{ loop_block.settings.pricing_summary_checkup_tooltip | escape }}
-                                </span>
+                          <span>{{ loop_block.settings.pricing_summary_checkup_title | escape }}</span>
+                          <span class="info-tip">
+                            <span aria-hidden="true" class="info-icon">i</span>
+                            <span class="info-tip-popover" role="tooltip">
+                              {{ loop_block.settings.pricing_summary_checkup_tooltip | escape }}
                             </span>
+                          </span>
                         </div>
                         <strong class="kc-checkup-reward-value"></strong>
                       </div>
                     </div>
 
                     <div class="kc-pricing-summary__total-row">
-                      <span class="kc-pricing-summary__label">{{ loop_block.settings.pricing_summary_total_title | escape }}</span>
+                      <span class="kc-pricing-summary__label">
+                        {{- loop_block.settings.pricing_summary_total_title | escape -}}
+                      </span>
                       <span class="kc-pricing-summary__price"></span>
                     </div>
                     <div class="kc-pricing-summary__sub-row">
