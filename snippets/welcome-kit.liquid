@@ -35,34 +35,13 @@
 
       const DISCOUNT_CODE = 'Welcome Kit';
 
-      console.log("Welcome Kit: Loaded configuration", {
-        FREE_PRODUCTS,
-        BUNDLE_PRODUCT_IDS
-      });
-
       // ─── GUARD: Exit if not configured ───────────────────────────────────────
-      if (FREE_PRODUCTS.length === 0 || BUNDLE_PRODUCT_IDS.length === 0) {
-        console.warn("Welcome Kit: Exit because config is incomplete.");
-        return;
-      }
+      if (FREE_PRODUCTS.length === 0 || BUNDLE_PRODUCT_IDS.length === 0) return;
 
-      // ─── ELIGIBILITY CHECK ────────────────────────────────────────────────────
-      // FIX 1: Tag check now matches exact tag 'FREE WELCOME KIT RECEIVED' (with spaces)
-      const isCustomerLoggedIn = {% if customer %}true{% else %}false{% endif %};
-      const customerAlreadyPurchased = {% if customer %}{% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %}{% else %}false{% endif %};
-
-      function hasWelcomeKitCookie() {
-        return document.cookie.split('; ').some(row => row.startsWith('welcome_kit_purchased='));
-      }
-
-      // Set cookie on thank you / order confirmation page
-      if (
-        window.location.pathname.includes('/thank_you') ||
-        window.location.pathname.includes('/orders/') ||
-        (typeof Shopify !== 'undefined' && Shopify.Checkout && Shopify.Checkout.page === 'thank_you')
-      ) {
-        document.cookie = "welcome_kit_purchased=true; path=/; max-age=31536000; SameSite=Lax; Secure";
-      }
+      // ─── CUSTOMER ELIGIBILITY CHECK (Server-side Liquid) ─────────────────────
+      // true  = block free product (repeat buyer OR guest/not logged in)
+      // false = allow free product (logged-in first-time customer only)
+      const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %};
 
       let isUpdating = false;
 
@@ -87,7 +66,6 @@
         });
       }
 
-      // FIX 2: Apply discount code automatically to cart
       async function applyDiscountCode() {
         try {
           await fetch('/cart/update.js', {
@@ -95,13 +73,9 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ discount: DISCOUNT_CODE }),
           });
-          console.log("Welcome Kit: Discount code applied:", DISCOUNT_CODE);
-        } catch (e) {
-          console.error("Welcome Kit: Failed to apply discount code", e);
-        }
+        } catch (e) {}
       }
 
-      // FIX 3: Remove discount code when free products are removed
       async function removeDiscountCode() {
         try {
           await fetch('/cart/update.js', {
@@ -109,44 +83,31 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ discount: '' }),
           });
-          console.log("Welcome Kit: Discount code removed.");
-        } catch (e) {
-          console.error("Welcome Kit: Failed to remove discount code", e);
-        }
+        } catch (e) {}
       }
 
       async function syncFreeProduct() {
-        console.log("Welcome Kit: syncFreeProduct called", { isUpdating });
         if (isUpdating) return;
         isUpdating = true;
 
         try {
           const cart = await getCart();
           const items = cart.items || [];
-          console.log("Welcome Kit: Current cart items:", items);
 
-          // Check that the cart has a bundle product (subscription OR one-time purchase)
           const hasBundleItem = items.some((item) =>
             BUNDLE_PRODUCT_IDS.includes(item.product_id)
           );
 
-          const isNotEligible = !isCustomerLoggedIn || customerAlreadyPurchased || hasWelcomeKitCookie();
-          console.log("Welcome Kit: Evaluation", {
-            hasBundleItem,
-            isNotEligible,
-            isCustomerLoggedIn,
-            customerAlreadyPurchased,
-            cookiePurchased: hasWelcomeKitCookie()
-          });
-
           let cartChanged = false;
 
-          if (isNotEligible || !hasBundleItem) {
-            // Remove free products from cart
+          if (customerAlreadyReceivedFreeProduct || !hasBundleItem) {
+            // Guest OR repeat customer OR no bundle — remove free products (ONLY if they have the _welcome_kit property)
             const updates = {};
             for (const freeProd of FREE_PRODUCTS) {
-              const freeLineItem = items.find(
-                (item) => item.product_id === freeProd.productId
+              const freeLineItem = items.find((item) => 
+                item.product_id === freeProd.productId && 
+                item.properties && 
+                item.properties['_welcome_kit'] === 'true'
               );
               if (freeLineItem) {
                 updates[freeLineItem.key] = 0;
@@ -158,42 +119,37 @@
               cartChanged = true;
             }
           } else {
-            // Eligible — add missing free products
+            // Logged-in first-time customer logic
             const toAdd = [];
             for (const freeProd of FREE_PRODUCTS) {
-              const freeLineItem = items.find(
-                (item) => item.product_id === freeProd.productId
-              );
+              const freeLineItem = items.find((item) => item.product_id === freeProd.productId);
               if (!freeLineItem) {
-                toAdd.push({ id: freeProd.variantId, quantity: 1 });
+                toAdd.push({ 
+                  id: freeProd.variantId, 
+                  quantity: 1,
+                  properties: { '_welcome_kit': 'true' }
+                });
               }
             }
             if (toAdd.length > 0) {
-              console.log("Welcome Kit: Adding free products:", toAdd);
               await addMultipleToCart(toAdd);
-              await applyDiscountCode(); // FIX 2: auto-apply discount
+              await applyDiscountCode();
               cartChanged = true;
             }
           }
 
           if (cartChanged) {
-            await refreshCartDrawer();
+            refreshCartDrawer();
           }
-        } catch (e) {
-          console.error("Welcome Kit: error during syncFreeProduct", e);
         } finally {
           isUpdating = false;
         }
       }
 
-      async function refreshCartDrawer() {
+      function refreshCartDrawer() {
         document.dispatchEvent(new CustomEvent('cart:refresh'));
         if (typeof window.refreshDawnCartUI === 'function') {
-          try {
-            await window.refreshDawnCartUI();
-          } catch (e) {
-            console.error("Error refreshing Dawn Cart UI:", e);
-          }
+          window.refreshDawnCartUI().catch(() => {});
         } else if (typeof window.Shopify !== 'undefined') {
           fetch('/cart.js')
             .then((r) => r.json())
@@ -210,12 +166,10 @@
       window.fetch = async function (...args) {
         const response = await originalFetch.apply(this, args);
         const url = typeof args[0] === 'string' ? args[0] : args[0]?.url || '';
-        // FIX 5: Exclude /cart/add triggered by syncFreeProduct itself to prevent infinite loop
         if (
-          (url.includes('/cart/add') ||
+          url.includes('/cart/add') ||
           url.includes('/cart/change') ||
-          url.includes('/cart/update')) &&
-          !isUpdating
+          url.includes('/cart/update')
         ) {
           response.clone().json().then(() => syncFreeProduct()).catch(() => {});
         }
@@ -224,6 +178,16 @@
 
       document.addEventListener('cart:updated', syncFreeProduct);
       document.addEventListener('DOMContentLoaded', syncFreeProduct);
+      window.karmiWelcomeKitSync = syncFreeProduct;
+
+      // Tell the browser to run refreshCartDrawer() when the user clicks the "Back" button
+      window.addEventListener('pageshow', (event) => {
+        const isBackNavigation = event.persisted || 
+          (window.performance && window.performance.navigation && window.performance.navigation.type === 2);
+        if (isBackNavigation) {
+          refreshCartDrawer();
+        }
+      });
     })();
   </script>
 {% endif %}

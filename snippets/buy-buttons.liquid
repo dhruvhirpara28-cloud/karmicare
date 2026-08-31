@@ -83,14 +83,14 @@
               endif
             endfor
 
-            assign welcome_kit_variant_id = null
+            assign welcome_kit_variant_ids = ''
             for prod_item in settings.welcome_kit_free_product
               assign prod = prod_item
               if prod_item.id == null
                 assign prod = all_products[prod_item]
               endif
               if prod != blank and prod.variants.first != blank
-                assign welcome_kit_variant_id = prod.variants.first.id
+                assign welcome_kit_variant_ids = welcome_kit_variant_ids | append: prod.variants.first.id | append: ','
               endif
             endfor
           -%}
@@ -152,14 +152,12 @@
       {%- endform -%}
     </product-form>
 
-    {%- if block.settings.show_custom_button -%}
-      {% render 'custom-button-script',
-        section_id: section_id,
-        is_bundle_product: is_bundle_product,
-        welcome_kit_variant_id: welcome_kit_variant_id,
-        block: block
-      %}
-    {%- endif -%}
+    {% render 'custom-button-script',
+      section_id: section_id,
+      is_bundle_product: is_bundle_product,
+      welcome_kit_variant_ids: welcome_kit_variant_ids,
+      block: block
+    %}
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">
