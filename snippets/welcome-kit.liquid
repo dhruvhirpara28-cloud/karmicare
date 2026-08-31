@@ -48,6 +48,7 @@
 
       // ─── ELIGIBILITY CHECK ────────────────────────────────────────────────────
       // FIX 1: Tag check now matches exact tag 'FREE WELCOME KIT RECEIVED' (with spaces)
+      const isCustomerLoggedIn = {% if customer %}true{% else %}false{% endif %};
       const customerAlreadyPurchased = {% if customer %}{% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %}{% else %}false{% endif %};
 
       function hasWelcomeKitCookie() {
@@ -129,10 +130,11 @@
             BUNDLE_PRODUCT_IDS.includes(item.product_id)
           );
 
-          const isNotEligible = customerAlreadyPurchased || hasWelcomeKitCookie();
+          const isNotEligible = !isCustomerLoggedIn || customerAlreadyPurchased || hasWelcomeKitCookie();
           console.log("Welcome Kit: Evaluation", {
             hasBundleItem,
             isNotEligible,
+            isCustomerLoggedIn,
             customerAlreadyPurchased,
             cookiePurchased: hasWelcomeKitCookie()
           });
@@ -151,7 +153,6 @@
               }
             }
             if (Object.keys(updates).length > 0) {
-              console.log("Welcome Kit: Removing free products:", updates);
               await updateCartQuantities(updates);
               await removeDiscountCode();
               cartChanged = true;
