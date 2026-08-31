@@ -26,6 +26,10 @@
           "type": "title",
           "settings": {}
         },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -37,6 +41,7 @@
             "font_size_desktop": 14,
             "font_size_mobile": 12,
             "border_radius": 30,
+            "marquee_speed": 30,
             "image_1": "shopify://shop_images/ab1b759c8879afedbacd43446c89ff56.svg",
             "svg_1": "",
             "text_1": "Used by +100 kPNI practitioners",
@@ -62,37 +67,8 @@
             "swatch_shape": "circle"
           }
         },
-        "loop_subscriptions_WEk4XJ": {
-          "type": "loop_subscriptions",
-          "settings": {
-            "default_to_subscription": true,
-            "welcome_kit_products": [
-              "morning-toothbrush",
-              "evening-toothbrush",
-              "whitening-charcoal-dental-floss"
-            ],
-            "welcome_kit_plans": "60-Day Supply",
-            "welcome_kit_title": "Welcome Kit · with first order",
-            "reward_image_1": "shopify://shop_images/reward-laurel.png",
-            "reward_heading_1": "€ 70.80",
-            "reward_text_1": "Care Credit received",
-            "reward_image_2": "shopify://shop_images/reward-laurel.png",
-            "reward_heading_2": "€ 40",
-            "reward_text_2": "Check-up Reward received",
-            "testimonial_avatar": "shopify://shop_images/1662389495-victorpopov_8100379-small.jpg",
-            "testimonial_stars": 5,
-            "testimonial_text": "Na mijn laatste bezoek aan de tandarts voor het eerst in 5 jaar geen gaatjes!",
-            "show_testimonial_button": true,
-            "testimonial_button_text": "2× RETURN ON CARE"
-          }
-        },
         "quantity_selector": {
           "type": "quantity_selector",
-          "disabled": true,
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
           "settings": {}
         },
         "buy_buttons": {
@@ -101,10 +77,10 @@
             "default_to_subscription": true,
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false,
-            "show_add_to_cart": false,
-            "show_custom_button": true,
+            "show_add_to_cart": true,
+            "show_custom_button": false,
             "custom_button_text": "Begin Now",
-            "redirect_to_checkout": true
+            "redirect_to_checkout": false
           }
         },
         "icon_with_text_xhaDGB": {
@@ -184,8 +160,8 @@
             "show_image": true,
             "show_variants": true,
             "show_subscriptions": true,
-            "color_scheme_day": "#FFFFFF",
-            "color_scheme_night": "#191F38"
+            "color_scheme_day": "#ffffff",
+            "color_scheme_night": "#191f38"
           }
         }
       },
@@ -193,12 +169,11 @@
         "top_tags_block",
         "judge_me_reviews_preview_badge_NjrVVk",
         "title",
+        "price",
         "description",
         "highlights_slider_9wAjAb",
         "variant_picker",
-        "loop_subscriptions_WEk4XJ",
         "quantity_selector",
-        "price",
         "buy_buttons",
         "icon_with_text_xhaDGB",
         "treatment_journey_block",

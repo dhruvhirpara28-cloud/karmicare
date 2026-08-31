@@ -243,40 +243,68 @@
         btn.addEventListener('click', function () {
           const chooseVal = this.getAttribute('data-choose');
           const sellingPlanId = this.getAttribute('data-selling-plan-id');
-          const sellingPlanName = this.getAttribute('data-selling-plan-name');
+          const sellingPlanName = (this.getAttribute('data-selling-plan-name') || '').toLowerCase().trim();
+          
+          const fs = document.getElementById('loop-selling-plan-fieldset');
+          if (fs) {
+            const radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
+            
+            if (chooseVal === 'once' || sellingPlanName.includes('one time') || sellingPlanName.includes('once')) {
+              const r = radios.find(x => x.dataset.id === 'loop-one-time-purchase');
+              if (r) {
+                r.click();
+                r.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            } else {
+              let bestMatchRadio = null;
+              let highestScore = 0;
+              
+              // Break the typed name into meaningful words (length > 1)
+              const planWords = sellingPlanName.split(/\s+/).filter(w => w.length > 1);
 
-          if (chooseVal === 'once') {
-            const oneTimeRadio = document.querySelector('input.loop-one-time-purchase-option-radio');
-            if (oneTimeRadio) {
-              oneTimeRadio.click();
-              oneTimeRadio.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-          } else {
-            let selectedOption = null;
-            if (sellingPlanId) {
-              selectedOption = document.querySelector(`.loop-selling-plan-selector-option[value="${sellingPlanId}"]`);
-            }
+              radios.forEach(radio => {
+                const dataName = (radio.dataset.name || '').toLowerCase().trim();
+                const label = fs.querySelector(`label[for="${radio.id}"]`);
+                const labelText = label ? label.textContent.toLowerCase().trim() : '';
+                
+                let score = 0;
+                
+                // 1. Exact Name Match = Guaranteed Win
+                if (sellingPlanName && (dataName === sellingPlanName || labelText === sellingPlanName)) {
+                  score += 100;
+                } 
+                // 2. Exact ID Match = Guaranteed Win
+                else if (sellingPlanId && radio.dataset.id === sellingPlanId) {
+                  score += 100;
+                } 
+                // 3. Dynamic Word Scoring (Finds the best overlap without hardcoding)
+                else if (planWords.length > 0) {
+                  const dataWords = dataName.split(/\s+/).concat(labelText.split(/\s+/));
+                  planWords.forEach(w => {
+                    if (dataWords.includes(w)) {
+                      score += 1;
+                    }
+                  });
+                }
 
-            if (!selectedOption && sellingPlanName) {
-              document.querySelectorAll('.loop-selling-plan-selector-option').forEach((opt) => {
-                if (opt.textContent.trim().toLowerCase().includes(sellingPlanName.toLowerCase())) {
-                  selectedOption = opt;
+                // If this radio has a higher match score than the previous ones, it becomes the new best match
+                if (score > highestScore) {
+                  highestScore = score;
+                  bestMatchRadio = radio;
                 }
               });
-            }
-
-            if (selectedOption) {
-              const select = selectedOption.closest('select');
-              if (select) {
-                select.value = selectedOption.value;
-                select.dispatchEvent(new Event('change', { bubbles: true }));
-
-                const groupContainer = select.closest('.loop-subscription-group');
+              
+              if (bestMatchRadio) {
+                bestMatchRadio.click();
+                bestMatchRadio.dispatchEvent(new Event('change', { bubbles: true }));
+                
+                // If this group has a select dropdown, try to select the first option just to be safe
+                const groupContainer = bestMatchRadio.closest('.loop-subscription-group');
                 if (groupContainer) {
-                  const radio = groupContainer.querySelector('input.loop-subscription-group-radio');
-                  if (radio) {
-                    radio.click();
-                    radio.dispatchEvent(new Event('change', { bubbles: true }));
+                  const select = groupContainer.querySelector('select');
+                  if (select && select.options.length > 0) {
+                    select.value = select.options[0].value;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
                   }
                 }
               }
@@ -284,7 +312,7 @@
           }
 
           // Smoothly scroll to variant picker or product form
-          const productForm = document.querySelector('product-info, form[action*="/cart/add"]');
+          const productForm = document.querySelector('.product-form, product-info, form[action*="/cart/add"]');
           if (productForm) {
             productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
