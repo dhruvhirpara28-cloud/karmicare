@@ -334,15 +334,17 @@ slider-component.slider-component-full-width {
 }
 
 .slider-button {
-  color: rgba(var(--color-foreground), 0.75);
-  background: transparent;
-  border: none;
+  color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+  border: 1px solid rgb(var(--color-foreground));
+  border-radius: 50%;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 4px;
 }
 
 .slider-button:not([disabled]):hover {
@@ -350,7 +352,7 @@ slider-component.slider-component-full-width {
 }
 
 .slider-button .icon {
-  height: 0.6rem;
+  height: 0.8rem;
 }
 
 .slider-button[disabled] .icon {
