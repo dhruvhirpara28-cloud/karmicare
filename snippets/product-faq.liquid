@@ -8,6 +8,7 @@
       {%- for item in faq_items -%}
         <details
           class="kc-faq-item"
+          name="faq-accordion"
         >
           <summary class="kc-faq-summary">
             <span>{{ item.title }}</span>
@@ -29,4 +30,22 @@
       {%- endfor -%}
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqItems = document.querySelectorAll('.kc-faq-item');
+      faqItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'SUMMARY' && !e.target.closest('summary')) return;
+          if (!this.hasAttribute('open')) {
+            faqItems.forEach(otherItem => {
+              if (otherItem !== this && otherItem.hasAttribute('open')) {
+                otherItem.removeAttribute('open');
+              }
+            });
+          }
+        });
+      });
+    });
+  </script>
 {%- endif -%}

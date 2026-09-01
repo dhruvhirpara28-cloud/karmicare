@@ -39,10 +39,9 @@
       if (FREE_PRODUCTS.length === 0 || BUNDLE_PRODUCT_IDS.length === 0) return;
 
       // ─── CUSTOMER ELIGIBILITY CHECK (Server-side Liquid) ─────────────────────
-      // true  = block free product (repeat buyer OR guest/not logged in)
       // false = allow free product (logged-in first-time customer only)
-      const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %};
-
+      {% comment %} const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %}; {% endcomment %}
+      const customerAlreadyReceivedFreeProduct = {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %};
       let isUpdating = false;
 
       async function getCart() {
@@ -104,9 +103,9 @@
             // Guest OR repeat customer OR no bundle — remove free products (ONLY if they have the _welcome_kit property)
             const updates = {};
             for (const freeProd of FREE_PRODUCTS) {
-              const freeLineItem = items.find((item) => 
-                item.product_id === freeProd.productId && 
-                item.properties && 
+              const freeLineItem = items.find((item) =>
+                item.product_id === freeProd.productId &&
+                item.properties &&
                 item.properties['_welcome_kit'] === 'true'
               );
               if (freeLineItem) {
@@ -124,8 +123,8 @@
             for (const freeProd of FREE_PRODUCTS) {
               const freeLineItem = items.find((item) => item.product_id === freeProd.productId);
               if (!freeLineItem) {
-                toAdd.push({ 
-                  id: freeProd.variantId, 
+                toAdd.push({
+                  id: freeProd.variantId,
                   quantity: 1,
                   properties: { '_welcome_kit': 'true' }
                 });
@@ -182,7 +181,7 @@
 
       // Tell the browser to run refreshCartDrawer() when the user clicks the "Back" button
       window.addEventListener('pageshow', (event) => {
-        const isBackNavigation = event.persisted || 
+        const isBackNavigation = event.persisted ||
           (window.performance && window.performance.navigation && window.performance.navigation.type === 2);
         if (isBackNavigation) {
           refreshCartDrawer();

@@ -64,10 +64,17 @@
   position: relative;
   transition: all 0.4s ease;
   box-sizing: border-box;
+  z-index: 1;
+}
+
+.pc-col:hover,
+.pc-col:has(.active-tip) {
+  z-index: 20;
 }
 
 .pc-col-label {
   flex: 1.2 1 0%;
+  z-index: 10;
 }
 
 /* Ribbons & Tags */
@@ -280,7 +287,8 @@
   border-style: solid;
 }
 
-.info-tip:hover .info-tip-popover {
+.info-tip:hover .info-tip-popover,
+.info-tip.active-tip .info-tip-popover {
   display: block;
 }
 
@@ -378,7 +386,8 @@
   color: rgb(var(--color-foreground));
 }
 
-.pc-kit:hover .pc-kit-pop {
+.pc-kit:hover .pc-kit-pop,
+.pc-kit.active-tip .pc-kit-pop {
   display: flex;
 }
 

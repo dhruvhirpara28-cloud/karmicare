@@ -35,7 +35,8 @@
       const items = [mainItem];
 
       // Welcome Kit Eligibility check
-      const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %};
+      {% comment %} const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %}; {% endcomment %}
+      const customerAlreadyReceivedFreeProduct = {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %};
       const isBundleProduct = {{ is_bundle_product | default: false }};
       const welcomeKitVariantIdsStr = {{ welcome_kit_variant_ids | json }};
       const welcomeKitVariantIds = welcomeKitVariantIdsStr ? welcomeKitVariantIdsStr.split(',').filter(Boolean) : [];

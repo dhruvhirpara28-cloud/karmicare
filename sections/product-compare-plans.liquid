@@ -23,13 +23,13 @@
   {{ 'product-compare-plans.css' | asset_url | stylesheet_tag }}
 
   {%- liquid
-    assign plans = compare_table.compare_plans.value | sort: 'sort_order'
-    assign rows = compare_table.compare_rows.value | sort: 'sort'
+    assign plans = compare_table.compare_plans.value
+    assign rows = compare_table.compare_rows.value
 
-    assign eyebrow = section.settings.eyebrow | default: 'Choose your rhythm'
-    assign title = section.settings.title | default: compare_table.title | default: 'One system. Three ways to begin.'
-    assign subtitle = section.settings.subtitle | default: 'Start with one set, refill every 60 days, or choose the full year — the ritual stays the same: <b>Awake</b> in the morning, <b>Asleep</b> at night.'
-    assign footer_text = section.settings.footer_text | default: 'Every subscription earns <b>Care Credit</b>: real euros toward more Karmicare products — a return on the care you keep.'
+    assign eyebrow = section.settings.eyebrow
+    assign title = section.settings.title
+    assign subtitle = section.settings.subtitle
+    assign footer_text = section.settings.footer_text
   -%}
 
   <div aria-label="Compare plans" class="plan-compare" id="compare-plans-{{ section.id }}">
@@ -244,13 +244,13 @@
           const chooseVal = this.getAttribute('data-choose');
           const sellingPlanId = this.getAttribute('data-selling-plan-id');
           const sellingPlanName = (this.getAttribute('data-selling-plan-name') || '').toLowerCase().trim();
-          
+
           const fs = document.getElementById('loop-selling-plan-fieldset');
           if (fs) {
             const radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
-            
+
             if (chooseVal === 'once' || sellingPlanName.includes('one time') || sellingPlanName.includes('once')) {
-              const r = radios.find(x => x.dataset.id === 'loop-one-time-purchase');
+              const r = radios.find((x) => x.dataset.id === 'loop-one-time-purchase');
               if (r) {
                 r.click();
                 r.dispatchEvent(new Event('change', { bubbles: true }));
@@ -258,29 +258,29 @@
             } else {
               let bestMatchRadio = null;
               let highestScore = 0;
-              
-              // Break the typed name into meaningful words (length > 1)
-              const planWords = sellingPlanName.split(/\s+/).filter(w => w.length > 1);
 
-              radios.forEach(radio => {
+              // Break the typed name into meaningful words (length > 1)
+              const planWords = sellingPlanName.split(/\s+/).filter((w) => w.length > 1);
+
+              radios.forEach((radio) => {
                 const dataName = (radio.dataset.name || '').toLowerCase().trim();
                 const label = fs.querySelector(`label[for="${radio.id}"]`);
                 const labelText = label ? label.textContent.toLowerCase().trim() : '';
-                
+
                 let score = 0;
-                
+
                 // 1. Exact Name Match = Guaranteed Win
                 if (sellingPlanName && (dataName === sellingPlanName || labelText === sellingPlanName)) {
                   score += 100;
-                } 
+                }
                 // 2. Exact ID Match = Guaranteed Win
                 else if (sellingPlanId && radio.dataset.id === sellingPlanId) {
                   score += 100;
-                } 
+                }
                 // 3. Dynamic Word Scoring (Finds the best overlap without hardcoding)
                 else if (planWords.length > 0) {
                   const dataWords = dataName.split(/\s+/).concat(labelText.split(/\s+/));
-                  planWords.forEach(w => {
+                  planWords.forEach((w) => {
                     if (dataWords.includes(w)) {
                       score += 1;
                     }
@@ -293,11 +293,11 @@
                   bestMatchRadio = radio;
                 }
               });
-              
+
               if (bestMatchRadio) {
                 bestMatchRadio.click();
                 bestMatchRadio.dispatchEvent(new Event('change', { bubbles: true }));
-                
+
                 // If this group has a select dropdown, try to select the first option just to be safe
                 const groupContainer = bestMatchRadio.closest('.loop-subscription-group');
                 if (groupContainer) {
@@ -317,6 +317,31 @@
             productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         });
+      });
+
+      // Tooltip handling to ensure only one shows at a time on mobile
+      const tooltips = document.querySelectorAll('.info-tip, .pc-kit');
+      
+      tooltips.forEach(tooltip => {
+        tooltip.addEventListener('click', function (e) {
+          if (window.innerWidth <= 768) {
+            const isActive = this.classList.contains('active-tip');
+            
+            tooltips.forEach(t => t.classList.remove('active-tip'));
+            
+            if (!isActive) {
+              this.classList.add('active-tip');
+            }
+          }
+        });
+      });
+      
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          if (!e.target.closest('.info-tip') && !e.target.closest('.pc-kit')) {
+            tooltips.forEach(t => t.classList.remove('active-tip'));
+          }
+        }
       });
     });
   </script>
