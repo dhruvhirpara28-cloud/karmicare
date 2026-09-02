@@ -28,9 +28,11 @@
 {%- liquid
   assign loading_attr = 'lazy'
   assign fetchpriority_attr = 'auto'
+  assign preload_attr = false
   if lazy_load == false or position == 1
     assign loading_attr = 'eager'
     assign fetchpriority_attr = 'high'
+    assign preload_attr = true
   endif
 
   assign desktop_columns = 1
@@ -88,6 +90,7 @@
           class: image_class,
           loading: loading_attr,
           fetchpriority: fetchpriority_attr,
+          preload: preload_attr,
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
@@ -130,6 +133,7 @@
         | image_tag:
           loading: loading_attr,
           fetchpriority: fetchpriority_attr,
+          preload: preload_attr,
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}

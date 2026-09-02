@@ -133,7 +133,7 @@
         {%- if item_image != blank or item_svg != blank -%}
           <div class="highlight-pill__icon">
             {%- if item_image != blank -%}
-              <img src="{{ item_image | image_url: width: 40 }}" alt="" loading="lazy" width="20" height="20">
+              <img src="{{ item_image | image_url: width: 40 }}" alt="" loading="lazy" width="{{ item_image.width }}" height="{{ item_image.height }}">
             {%- elsif item_svg != blank -%}
               {{ item_svg }}
             {%- endif -%}

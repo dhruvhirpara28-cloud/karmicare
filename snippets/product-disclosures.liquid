@@ -24,8 +24,8 @@
               srcset="{{ img | image_url: width: 20 }} 1x, {{ img | image_url: width: 40 }} 2x, {{ img | image_url: width: 60 }} 3x"
               alt=""
               class="disclosures__icon"
-              width="40"
-              height="31"
+              width="{{ img.width }}"
+              height="{{ img.height }}"
               loading="lazy"
             >
           {%- endif -%}
@@ -45,8 +45,8 @@
                     srcset="{{ img | image_url: width: 20 }} 1x, {{ img | image_url: width: 40 }} 2x, {{ img | image_url: width: 60 }} 3x"
                     alt=""
                     class="disclosures__icon"
-                    width="40"
-                    height="31"
+                    width="{{ img.width }}"
+                    height="{{ img.height }}"
                     loading="lazy"
                   >
                 {%- endif -%}
