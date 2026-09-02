@@ -6,118 +6,26 @@
 
     if (!form) return;
 
-    // The core logic to add items and proceed
     const handleAction = async (e, buttonElement) => {
       e.preventDefault();
-      e.stopImmediatePropagation(); // Prevent Dawn's default cart drawer from opening
-
-      const variantIdInput = form.querySelector('[name="id"]');
-      const variantId = variantIdInput ? variantIdInput.value : null;
-      if (!variantId) return;
-
-      const sellingPlanInput = form.querySelector('[name="selling_plan"]');
-      const sellingPlanId = sellingPlanInput ? sellingPlanInput.value : null;
-
-      const quantityInput = form.querySelector('[name="quantity"]');
-      const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
-
-      // Begin Add Flow
-      if (buttonElement) {
-        buttonElement.classList.add('loading');
-        const customSpinner = buttonElement.querySelector('.loading__spinner');
-        if (customSpinner) customSpinner.classList.remove('hidden');
-      }
-
-      const mainItem = { id: parseInt(variantId), quantity: quantity };
-      if (sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
-        mainItem.selling_plan = parseInt(sellingPlanId);
-      }
-      const items = [mainItem];
-
-      // Welcome Kit Eligibility check
-      {% comment %} const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %}; {% endcomment %}
-      const customerAlreadyReceivedFreeProduct = {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %};
-      const isBundleProduct = {{ is_bundle_product | default: false }};
-      const welcomeKitVariantIdsStr = {{ welcome_kit_variant_ids | json }};
-      const welcomeKitVariantIds = welcomeKitVariantIdsStr ? welcomeKitVariantIdsStr.split(',').filter(Boolean) : [];
-
-      if (!customerAlreadyReceivedFreeProduct && isBundleProduct && welcomeKitVariantIds.length > 0) {
-        let cartItems = [];
-        try {
-           const cartRes = await fetch('/cart.js');
-           const cartData = await cartRes.json();
-           cartItems = cartData.items || [];
-        } catch(e) {}
-
-        for (const vid of welcomeKitVariantIds) {
-          const alreadyInCart = cartItems.some(item => item.variant_id === parseInt(vid));
-          if (!alreadyInCart) {
-            items.push({
-              id: parseInt(vid),
-              quantity: 1,
-              properties: { '_welcome_kit': 'true' }
-            });
-          }
-        }
-      }
-
-      try {
-        const addResponse = await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: items })
+      e.stopImmediatePropagation();
+      
+      if (typeof window.karmiAddToCart === 'function') {
+        const welcomeKitVariantIdsStr = {{ welcome_kit_variant_ids | json }};
+        const welcomeKitVariantIds = welcomeKitVariantIdsStr ? welcomeKitVariantIdsStr.split(',').filter(Boolean) : [];
+        
+        await window.karmiAddToCart(form, buttonElement, {
+          redirectToCheckout: {{ block.settings.redirect_to_checkout | default: false }},
+          isBundleProduct: {{ is_bundle_product | default: false }},
+          customerAlreadyReceivedFreeProduct: {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %},
+          welcomeKitVariantIds: welcomeKitVariantIds
         });
-        if (!addResponse.ok) throw new Error('Cart add failed');
-
-        if (items.length > 1) {
-          try {
-            await fetch('/cart/update.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ discount: 'Welcome Kit' })
-            });
-          } catch(e) {}
-        }
-
-        {% if block.settings.redirect_to_checkout %}
-          window.location.href = '/checkout';
-        {% else %}
-          if (buttonElement) {
-            buttonElement.classList.remove('loading');
-            const customSpinner = buttonElement.querySelector('.loading__spinner');
-            if (customSpinner) customSpinner.classList.add('hidden');
-          }
-
-          if (typeof window.refreshDawnCartUI === 'function') {
-            await window.refreshDawnCartUI();
-            // Force the drawer to open by simulating a click on the header cart icon
-            const cartIcon = document.getElementById('cart-icon-bubble');
-            if (cartIcon) {
-              cartIcon.click();
-            } else {
-              const cartDrawer = document.querySelector('cart-drawer');
-              if (cartDrawer && typeof cartDrawer.open === 'function') cartDrawer.open();
-            }
-          } else {
-            window.location.reload();
-          }
-        {% endif %}
-
-      } catch (err) {
-        console.error('Action failed:', err);
-        if (buttonElement) {
-          buttonElement.classList.remove('loading');
-          const customSpinner = buttonElement.querySelector('.loading__spinner');
-          if (customSpinner) customSpinner.classList.add('hidden');
-        }
       }
     };
 
-    // 1. Attach to Custom Button (if it exists)
     if (customBtn) {
       customBtn.addEventListener('click', (e) => handleAction(e, customBtn));
 
-      // Sync states from stdBtn to customBtn
       if (stdBtn) {
         const observer = new MutationObserver((mutations) => {
           mutations.forEach((mutation) => {
@@ -140,16 +48,12 @@
       }
     }
 
-    // 2. Intercept Standard Form Submit
-    // We only explicitly intercept the standard form if redirect_to_checkout is true (or if you want unified flow for both)
-    // By using useCapture = true, we intercept before Dawn's product-form.js can run.
     form.addEventListener('submit', (e) => {
       {% if block.settings.redirect_to_checkout %}
         handleAction(e, stdBtn);
       {% endif %}
     }, true);
 
-    // Reset loading state on browser back
     window.addEventListener('pageshow', () => {
       [customBtn, stdBtn].forEach(btn => {
         if (btn) {

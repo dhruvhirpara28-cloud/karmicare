@@ -1,7 +1,6 @@
 {% if settings.enable_welcome_kit %}
   <script>
     (function () {
-      // ─── CONFIG (Theme Settings Driven) ──────────────────────────────────────
       const BUNDLE_PRODUCT_IDS = [
         {% for prod_item in settings.welcome_kit_bundle_products %}
           {%- liquid
@@ -35,12 +34,8 @@
 
       const DISCOUNT_CODE = 'Welcome Kit';
 
-      // ─── GUARD: Exit if not configured ───────────────────────────────────────
       if (FREE_PRODUCTS.length === 0 || BUNDLE_PRODUCT_IDS.length === 0) return;
 
-      // ─── CUSTOMER ELIGIBILITY CHECK (Server-side Liquid) ─────────────────────
-      // false = allow free product (logged-in first-time customer only)
-      {% comment %} const customerAlreadyReceivedFreeProduct = {% if customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% elsif customer == null %}true{% else %}false{% endif %}; {% endcomment %}
       const customerAlreadyReceivedFreeProduct = {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %};
       let isUpdating = false;
 
@@ -52,7 +47,7 @@
       async function addMultipleToCart(itemsArray) {
         await fetch('/cart/add.js', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
           body: JSON.stringify({ items: itemsArray }),
         });
       }
@@ -60,7 +55,7 @@
       async function updateCartQuantities(updatesObject) {
         await fetch('/cart/update.js', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
           body: JSON.stringify({ updates: updatesObject }),
         });
       }
@@ -69,7 +64,7 @@
         try {
           await fetch('/cart/update.js', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
             body: JSON.stringify({ discount: DISCOUNT_CODE }),
           });
         } catch (e) {}
@@ -79,7 +74,7 @@
         try {
           await fetch('/cart/update.js', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
             body: JSON.stringify({ discount: '' }),
           });
         } catch (e) {}
@@ -100,7 +95,6 @@
           let cartChanged = false;
 
           if (customerAlreadyReceivedFreeProduct || !hasBundleItem) {
-            // Guest OR repeat customer OR no bundle — remove free products (ONLY if they have the _welcome_kit property)
             const updates = {};
             for (const freeProd of FREE_PRODUCTS) {
               const freeLineItem = items.find((item) =>
@@ -118,7 +112,6 @@
               cartChanged = true;
             }
           } else {
-            // Logged-in first-time customer logic
             const toAdd = [];
             for (const freeProd of FREE_PRODUCTS) {
               const freeLineItem = items.find((item) => item.product_id === freeProd.productId);
@@ -160,15 +153,19 @@
         }
       }
 
-      // ─── INTERCEPT CART EVENTS ────────────────────────────────────────────────
       const originalFetch = window.fetch;
       window.fetch = async function (...args) {
+        const options = args[1] || {};
+        const headers = options.headers || {};
+        const isInternalSync = headers['X-Karmi-Sync'] === 'false';
+
         const response = await originalFetch.apply(this, args);
         const url = typeof args[0] === 'string' ? args[0] : args[0]?.url || '';
         if (
-          url.includes('/cart/add') ||
+          !isInternalSync &&
+          (url.includes('/cart/add') ||
           url.includes('/cart/change') ||
-          url.includes('/cart/update')
+          url.includes('/cart/update'))
         ) {
           response.clone().json().then(() => syncFreeProduct()).catch(() => {});
         }
@@ -179,7 +176,6 @@
       document.addEventListener('DOMContentLoaded', syncFreeProduct);
       window.karmiWelcomeKitSync = syncFreeProduct;
 
-      // Tell the browser to run refreshCartDrawer() when the user clicks the "Back" button
       window.addEventListener('pageshow', (event) => {
         const isBackNavigation = event.persisted ||
           (window.performance && window.performance.navigation && window.performance.navigation.type === 2);

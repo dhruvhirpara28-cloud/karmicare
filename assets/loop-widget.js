@@ -2072,7 +2072,7 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
         const descriptionElement = document.querySelector(
             `#loop-selling-plan-description-${variant.id}-${spg.id}`
         );
-        
+
         if (descriptionElement) {
             updateLoopSellingPlanDescriptionElement(
                 descriptionElement,
