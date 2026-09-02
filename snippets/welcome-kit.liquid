@@ -1,9 +1,6 @@
 {% if settings.enable_welcome_kit %}
   <script>
     (function () {
-      if (window.__karmiWelcomeKitInitialized) return;
-      window.__karmiWelcomeKitInitialized = true;
-
       const BUNDLE_PRODUCT_IDS = [
         {% for prod_item in settings.welcome_kit_bundle_products %}
           {%- liquid

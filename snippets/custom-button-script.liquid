@@ -9,11 +9,11 @@
     const handleAction = async (e, buttonElement) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-
+      
       if (typeof window.karmiAddToCart === 'function') {
         const welcomeKitVariantIdsStr = {{ welcome_kit_variant_ids | json }};
         const welcomeKitVariantIds = welcomeKitVariantIdsStr ? welcomeKitVariantIdsStr.split(',').filter(Boolean) : [];
-
+        
         await window.karmiAddToCart(form, buttonElement, {
           redirectToCheckout: {{ block.settings.redirect_to_checkout | default: false }},
           isBundleProduct: {{ is_bundle_product | default: false }},
