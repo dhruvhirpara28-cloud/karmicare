@@ -14,11 +14,6 @@
     <link rel="dns-prefetch" href="https://cdn.shopify.com">
     <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
 
-    {%- if template.name == 'product' and product.featured_media -%}
-      <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}">
-      <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 400 }}" media="(max-width: 749px)">
-    {%- endif -%}
-
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -432,9 +427,11 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'day-night-mode.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
-    <style class="loop-style">
-      {% render 'loop-widget.css.liquid' %}
-    </style>
+    {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' -%}
+      <style class="loop-style">
+        {% render 'loop-widget.css.liquid' %}
+      </style>
+    {%- endif -%}
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
