@@ -30,18 +30,22 @@
       const items = [mainItem];
 
       if (options && options.isBundleProduct && !options.customerAlreadyReceivedFreeProduct && options.welcomeKitVariantIds && options.welcomeKitVariantIds.length > 0) {
-        let cartItems = [];
-        try {
-          const cartRes = await fetch('/cart.js');
-          const cartData = await cartRes.json();
-          cartItems = cartData.items || [];
-        } catch (e) { }
+        const existingDrawerVariants = Array.from(document.querySelectorAll('cart-drawer [data-variant-id], cart-items [data-variant-id]')).map(el => parseInt(el.dataset.variantId)).filter(Boolean);
+        let cartItems = null;
+        if (existingDrawerVariants.length === 0 && document.querySelector('cart-drawer:not(.is-empty)')) {
+          try {
+            const cartRes = await fetch('/cart.js');
+            const cartData = await cartRes.json();
+            cartItems = cartData.items || [];
+          } catch (e) { }
+        }
 
         for (const vid of options.welcomeKitVariantIds) {
-          const alreadyInCart = cartItems.some(item => item.variant_id === parseInt(vid));
+          const pVid = parseInt(vid);
+          const alreadyInCart = existingDrawerVariants.includes(pVid) || (cartItems && cartItems.some(item => item.variant_id === pVid));
           if (!alreadyInCart) {
             items.push({
-              id: parseInt(vid),
+              id: pVid,
               quantity: 1,
               properties: { '_welcome_kit': 'true' }
             });
@@ -51,26 +55,29 @@
 
       const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked');
       let cartAttributes = null;
-      if (selectedLoopOption && selectedLoopOption.dataset.name && sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
-        cartAttributes = { 'Subscription Name': selectedLoopOption.dataset.name };
+      if (sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
+        const subTitle = selectedLoopOption?.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
+          selectedLoopOption?.dataset?.name ||
+          document.querySelector('input[name="attributes[Subscription Name]"]')?.value ||
+          document.querySelector('#scPlanLabel')?.textContent?.trim() || '';
+        if (subTitle && subTitle !== 'loop-one-time-purchase' && !subTitle.toLowerCase().includes('one time')) {
+          cartAttributes = {
+            'Subscription Name': subTitle
+          };
+        }
+      }
+
+      const addPayload = { items: items };
+      if (cartAttributes) {
+        addPayload.attributes = cartAttributes;
       }
 
       const addRes = await fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-        body: JSON.stringify({ items: items }),
+        body: JSON.stringify(addPayload),
       });
       if (!addRes.ok) throw new Error('Cart add failed');
-
-      if (cartAttributes) {
-        try {
-          await fetch('/cart/update.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-            body: JSON.stringify({ attributes: cartAttributes })
-          });
-        } catch (e) { console.error('Cart attributes update failed', e); }
-      }
 
       if (items.length > 1) {
         try {
@@ -80,10 +87,6 @@
             body: JSON.stringify({ discount: 'Welcome Kit' })
           });
         } catch (e) { console.error('Cart discount update failed', e); }
-      }
-
-      if (typeof window.karmiWelcomeKitSync === 'function') {
-        await window.karmiWelcomeKitSync();
       }
 
       if (options && options.redirectToCheckout) {
