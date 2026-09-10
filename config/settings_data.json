@@ -12,10 +12,8 @@
     "logo_width": 90,
     "enable_custom_font": true,
     "header_font_name": "\"proxima-nova\", sans-serif",
-    "header_font_url": "https://use.typekit.net/kss0igj.css",
     "header_font_weight": 700,
     "body_font_name": "\"proxima-nova\", sans-serif",
-    "body_font_url": "https://use.typekit.net/kss0igj.css",
     "type_header_font": "montserrat_n7",
     "heading_scale": 100,
     "type_body_font": "montserrat_n4",
@@ -169,6 +167,8 @@
       "morning-toothbrush",
       "evening-toothbrush"
     ],
+    "header_font_url": "https://use.typekit.net/kss0igj.css",
+    "body_font_url": "https://use.typekit.net/kss0igj.css",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -190,13 +190,6 @@
         "disabled": false,
         "settings": {}
       },
-      "13047258039897440615": {
-        "type": "shopify://apps/judge-me-reviews/blocks/cart_drawer_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {
-          "widget_type": "review-widget"
-        }
-      },
       "8186395454278447088": {
         "type": "shopify://apps/loop-subscriptions/blocks/loop_referral_banner/267a7c64-5cb3-4552-b817-5485165f0a0b",
         "disabled": false,
@@ -206,6 +199,13 @@
         "type": "shopify://apps/loop-subscriptions/blocks/loop_referral_capture/267a7c64-5cb3-4552-b817-5485165f0a0b",
         "disabled": false,
         "settings": {}
+      },
+      "13047258039897440615": {
+        "type": "shopify://apps/judge-me-reviews/blocks/cart_drawer_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": true,
+        "settings": {
+          "widget_type": "review-widget"
+        }
       }
     },
     "color_schemes": {
