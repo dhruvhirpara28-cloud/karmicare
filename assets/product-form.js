@@ -32,6 +32,17 @@ if (!customElements.get('product-form')) {
         delete config.headers['Content-Type'];
 
         const formData = new FormData(this.form);
+        const sellingPlanVal = formData.get('selling_plan');
+        if (sellingPlanVal && !isNaN(parseInt(sellingPlanVal))) {
+          const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked');
+          if (selectedLoopOption) {
+            const subTitle = selectedLoopOption.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
+              selectedLoopOption.dataset.name || '';
+            if (subTitle && subTitle !== 'loop-one-time-purchase') {
+              formData.set('attributes[Subscription Name]', subTitle);
+            }
+          }
+        }
         if (this.cart) {
           formData.append(
             'sections',

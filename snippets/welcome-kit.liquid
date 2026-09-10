@@ -52,14 +52,6 @@
         });
       }
 
-      async function updateCartQuantities(updatesObject) {
-        await fetch('/cart/update.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-          body: JSON.stringify({ updates: updatesObject }),
-        });
-      }
-
       async function applyDiscountCode() {
         try {
           await fetch('/cart/update.js', {
@@ -70,22 +62,12 @@
         } catch (e) {}
       }
 
-      async function removeDiscountCode() {
-        try {
-          await fetch('/cart/update.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-            body: JSON.stringify({ discount: '' }),
-          });
-        } catch (e) {}
-      }
-
-      async function syncFreeProduct() {
+      async function syncFreeProduct(providedCart) {
         if (isUpdating) return;
         isUpdating = true;
 
         try {
-          const cart = await getCart();
+          const cart = (providedCart && Array.isArray(providedCart.items)) ? providedCart : await getCart();
           const items = cart.items || [];
 
           const hasBundleItem = items.some((item) =>
@@ -107,8 +89,15 @@
               }
             }
             if (Object.keys(updates).length > 0) {
-              await updateCartQuantities(updates);
-              await removeDiscountCode();
+              await fetch('/cart/update.js', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
+                body: JSON.stringify({
+                  updates: updates,
+                  discount: '',
+                  attributes: { 'Subscription Name': '' }
+                }),
+              });
               cartChanged = true;
             }
           } else {
@@ -167,7 +156,11 @@
           url.includes('/cart/change') ||
           url.includes('/cart/update'))
         ) {
-          response.clone().json().then(() => syncFreeProduct()).catch(() => {});
+          response.clone().json().then((cartData) => {
+            syncFreeProduct(cartData && Array.isArray(cartData.items) ? cartData : null);
+          }).catch(() => {
+            syncFreeProduct();
+          });
         }
         return response;
       };

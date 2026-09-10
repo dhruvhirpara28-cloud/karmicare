@@ -1891,16 +1891,30 @@ function updateLoopProperties({
             form.appendChild(hiddenInput);
 
             // KC CUSTOM: inject/update subscription name as a cart attribute
-            const existingSubAttr = form.querySelectorAll(
-                'input[name="attributes[Subscription]"]'
+            const existingSubAttrs = form.querySelectorAll(
+                'input[name="attributes[Subscription Name]"], input[name="attributes[Subscription]"]'
             );
-            existingSubAttr.forEach((el) => el.remove());
-            if (sellingPlanGroupName) {
-                const subAttrInput = document.createElement("input");
-                subAttrInput.type = "hidden";
-                subAttrInput.name = "attributes[Subscription]";
-                subAttrInput.value = sellingPlanGroupName;
-                form.appendChild(subAttrInput);
+            existingSubAttrs.forEach((el) => el.remove());
+
+            // Resolve accurate subscription title (e.g. "60-Day Supply", "Year Supply")
+            let subTitle = sellingPlanGroupName || window.loopProps[productId]?.sellingPlanGroupName || "";
+            const loopContainer = getLoopSubscriptionContainer(productId);
+            const checkedRadio = loopContainer?.querySelector('input[name="loop_purchase_option"]:checked');
+            if (checkedRadio) {
+                const groupLabel = checkedRadio.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim();
+                if (groupLabel) {
+                    subTitle = groupLabel;
+                } else if (checkedRadio.dataset.name && checkedRadio.dataset.name !== "loop-one-time-purchase") {
+                    subTitle = checkedRadio.dataset.name.trim();
+                }
+            }
+
+            if (subTitle && subTitle !== "loop-one-time-purchase" && selectedSellingPlanId) {
+                const subNameInput = document.createElement("input");
+                subNameInput.type = "hidden";
+                subNameInput.name = "attributes[Subscription Name]";
+                subNameInput.value = subTitle;
+                form.appendChild(subNameInput);
             }
         });
 }
@@ -3759,12 +3773,24 @@ async function loopWidgetCreateAddToCartPayload(
     productBundleData
 ) {
     // KC CUSTOM: resolve subscription name for cart attributes
-    const kcSubscriptionName = window.loopProps[productId]?.sellingPlanGroupName || "";
+    let kcSubscriptionName = window.loopProps[productId]?.sellingPlanGroupName || "";
+    const kcLoopContainer = getLoopSubscriptionContainer(productId);
+    const kcCheckedRadio = kcLoopContainer?.querySelector('input[name="loop_purchase_option"]:checked');
+    if (kcCheckedRadio) {
+        const kcGroupLabel = kcCheckedRadio.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim();
+        if (kcGroupLabel) {
+            kcSubscriptionName = kcGroupLabel;
+        } else if (kcCheckedRadio.dataset.name && kcCheckedRadio.dataset.name !== "loop-one-time-purchase") {
+            kcSubscriptionName = kcCheckedRadio.dataset.name.trim();
+        }
+    }
     const formData = {
         items: [],
         attributes: {
             _loopBundleDiscountAttributes: {},
-            ...(kcSubscriptionName ? { Subscription: kcSubscriptionName } : {}),
+            ...(kcSubscriptionName && selectedSellingPlanId ? {
+                'Subscription Name': kcSubscriptionName
+            } : {}),
         },
     };
 
