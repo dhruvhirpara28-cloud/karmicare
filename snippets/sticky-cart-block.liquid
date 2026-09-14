@@ -557,6 +557,8 @@
       var btn = document.getElementById('scCtaBtn');
       if (btn) {
         btn.disabled = false;
+        btn.removeAttribute('disabled');
+        btn.removeAttribute('aria-disabled');
         btn.classList.remove('loading');
         var spinner = btn.querySelector('.loading__spinner');
         if (spinner) spinner.classList.add('hidden');

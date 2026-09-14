@@ -57,6 +57,9 @@
     window.addEventListener('pageshow', () => {
       [customBtn, stdBtn].forEach(btn => {
         if (btn) {
+          btn.disabled = false;
+          btn.removeAttribute('disabled');
+          btn.removeAttribute('aria-disabled');
           btn.classList.remove('loading');
           const spinner = btn.querySelector('.loading__spinner');
           if (spinner) spinner.classList.add('hidden');

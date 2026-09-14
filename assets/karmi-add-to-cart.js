@@ -16,34 +16,41 @@
       const variantId = variantIdInput ? variantIdInput.value : null;
       if (!variantId) throw new Error('No variant ID found');
 
-      const sellingPlanInput = form.querySelector('[name="selling_plan"]');
-      const sellingPlanId = sellingPlanInput ? sellingPlanInput.value : null;
+      const sellingPlanInput = form.querySelector('[name="selling_plan"]') || document.querySelector('input[name="selling_plan"]');
+      let sellingPlanId = sellingPlanInput ? sellingPlanInput.value : null;
+
+      // Check Loop selection: if One-Time purchase is selected, ensure sellingPlanId is cleared
+      const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked') ||
+                                 document.querySelector('#loop-selling-plan-fieldset input[type="radio"]:checked');
+      const isLoopOneTime = selectedLoopOption && (
+        selectedLoopOption.dataset.id === 'loop-one-time-purchase' ||
+        selectedLoopOption.classList.contains('loop-one-time-purchase-option-radio') ||
+        (selectedLoopOption.dataset.name && selectedLoopOption.dataset.name.toLowerCase().includes('one time'))
+      );
+
+      if (isLoopOneTime) {
+        sellingPlanId = null;
+      }
+
+      const isSubscription = Boolean(!isLoopOneTime && sellingPlanId && !isNaN(parseInt(sellingPlanId)) && parseInt(sellingPlanId) > 0);
 
       const quantityInput = form.querySelector('[name="quantity"]');
       const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
 
       const mainItem = { id: parseInt(variantId), quantity: quantity };
-      if (sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
+      if (isSubscription) {
         mainItem.selling_plan = parseInt(sellingPlanId);
       }
 
       const items = [mainItem];
 
-      if (options && options.isBundleProduct && !options.customerAlreadyReceivedFreeProduct && options.welcomeKitVariantIds && options.welcomeKitVariantIds.length > 0) {
+      // Free Welcome Kit product is ONLY added for subscriptions
+      if (isSubscription && options && options.isBundleProduct && !options.customerAlreadyReceivedFreeProduct && options.welcomeKitVariantIds && options.welcomeKitVariantIds.length > 0) {
         const existingDrawerVariants = Array.from(document.querySelectorAll('cart-drawer [data-variant-id], cart-items [data-variant-id]')).map(el => parseInt(el.dataset.variantId)).filter(Boolean);
-        let cartItems = null;
-        if (existingDrawerVariants.length === 0 && document.querySelector('cart-drawer:not(.is-empty)')) {
-          try {
-            const cartRes = await fetch('/cart.js');
-            const cartData = await cartRes.json();
-            cartItems = cartData.items || [];
-          } catch (e) { }
-        }
 
         for (const vid of options.welcomeKitVariantIds) {
           const pVid = parseInt(vid);
-          const alreadyInCart = existingDrawerVariants.includes(pVid) || (cartItems && cartItems.some(item => item.variant_id === pVid));
-          if (!alreadyInCart) {
+          if (!existingDrawerVariants.includes(pVid)) {
             items.push({
               id: pVid,
               quantity: 1,
@@ -53,23 +60,17 @@
         }
       }
 
-      const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked');
-      let cartAttributes = null;
-      if (sellingPlanId && !isNaN(parseInt(sellingPlanId))) {
+      const addPayload = { items: items };
+
+      if (isSubscription) {
         const subTitle = selectedLoopOption?.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
           selectedLoopOption?.dataset?.name ||
+          form.querySelector('input[name="attributes[Subscription Name]"]')?.value ||
           document.querySelector('input[name="attributes[Subscription Name]"]')?.value ||
           document.querySelector('#scPlanLabel')?.textContent?.trim() || '';
         if (subTitle && subTitle !== 'loop-one-time-purchase' && !subTitle.toLowerCase().includes('one time')) {
-          cartAttributes = {
-            'Subscription Name': subTitle
-          };
+          addPayload.attributes = { 'Subscription Name': subTitle };
         }
-      }
-
-      const addPayload = { items: items };
-      if (cartAttributes) {
-        addPayload.attributes = cartAttributes;
       }
 
       const addRes = await fetch('/cart/add.js', {
@@ -79,21 +80,24 @@
       });
       if (!addRes.ok) throw new Error('Cart add failed');
 
-      if (items.length > 1) {
-        try {
-          await fetch('/cart/update.js', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-            body: JSON.stringify({ discount: 'Welcome Kit' })
-          });
-        } catch (e) { console.error('Cart discount update failed', e); }
-      }
-
       if (options && options.redirectToCheckout) {
-        window.location.href = '/checkout';
+        const checkoutUrl = (isSubscription && items.length > 1) ? '/checkout?discount=Welcome%20Kit' : '/checkout';
+        window.location.href = checkoutUrl;
       } else {
+        if (items.length > 1) {
+          try {
+            await fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
+              body: JSON.stringify({ discount: 'Welcome Kit' })
+            });
+          } catch (e) { console.error('Cart discount update failed', e); }
+        }
+
         if (buttonElement) {
           buttonElement.disabled = false;
+          buttonElement.removeAttribute('disabled');
+          buttonElement.removeAttribute('aria-disabled');
           buttonElement.classList.remove('loading');
           const customSpinner = buttonElement.querySelector('.loading__spinner');
           if (customSpinner) customSpinner.classList.add('hidden');
@@ -116,6 +120,8 @@
       console.error('[KarmiAddToCart] Checkout redirect failed:', err);
       if (buttonElement) {
         buttonElement.disabled = false;
+        buttonElement.removeAttribute('disabled');
+        buttonElement.removeAttribute('aria-disabled');
         buttonElement.classList.remove('loading');
         const customSpinner = buttonElement.querySelector('.loading__spinner');
         if (customSpinner) customSpinner.classList.add('hidden');
