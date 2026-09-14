@@ -70,13 +70,17 @@
           const cart = (providedCart && Array.isArray(providedCart.items)) ? providedCart : await getCart();
           const items = cart.items || [];
 
-          const hasBundleItem = items.some((item) =>
-            BUNDLE_PRODUCT_IDS.includes(item.product_id)
+          const hasBundleSubscription = items.some((item) =>
+            BUNDLE_PRODUCT_IDS.includes(item.product_id) &&
+            Boolean(
+              item.selling_plan_allocation ||
+              (item.selling_plan_id && !isNaN(parseInt(item.selling_plan_id)) && parseInt(item.selling_plan_id) > 0)
+            )
           );
 
           let cartChanged = false;
 
-          if (customerAlreadyReceivedFreeProduct || !hasBundleItem) {
+          if (customerAlreadyReceivedFreeProduct || !hasBundleSubscription) {
             const updates = {};
             for (const freeProd of FREE_PRODUCTS) {
               const freeLineItem = items.find((item) =>
