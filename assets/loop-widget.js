@@ -2756,26 +2756,30 @@ function injectOrUpdateKcTryOnceLink(productId, variant) {
     }
 
     const btn = tryOnceContainer.querySelector('.kc-try-once-btn');
-    if (btn) {
+    if (btn && !btn.dataset.bound) {
+        btn.dataset.bound = 'true';
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
 
             const loopContainer = getLoopSubscriptionContainer(productId);
-            if (!loopContainer) return;
+            if (loopContainer) {
+                const oneTimeRadio = loopContainer.querySelector('input.loop-one-time-purchase-option-radio');
+                if (oneTimeRadio) {
+                    loopContainer.querySelectorAll('input[name="loop_purchase_option"]').forEach(r => {
+                        r.checked = false;
+                    });
+                    oneTimeRadio.checked = true;
 
-            const oneTimeRadio = loopContainer.querySelector('input.loop-one-time-purchase-option-radio');
-            if (!oneTimeRadio || oneTimeRadio.checked) return;
+                    if (typeof changeInSellingPlanGroupLoop === 'function') {
+                        changeInSellingPlanGroupLoop({ target: oneTimeRadio });
+                    }
+                }
+            }
 
-            loopContainer.querySelectorAll('input[name="loop_purchase_option"]').forEach(r => {
-                r.checked = false;
-            });
-            oneTimeRadio.checked = true;
-
-            if (typeof changeInSellingPlanGroupLoop === 'function') {
-                changeInSellingPlanGroupLoop({ target: oneTimeRadio });
-            } else {
-                oneTimeRadio.click();
+            const submitBtn = document.querySelector('.product-form__custom-submit, .product-form__submit');
+            if (submitBtn) {
+                submitBtn.click();
             }
         });
     }
