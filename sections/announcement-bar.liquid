@@ -18,8 +18,59 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+{%- style -%}
+  {%- if section.settings.bg_color_day != blank -%}
+    .day-mode .announcement-bar-{{ section.id }},
+    body:not(.night-mode) .announcement-bar-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.text_color_day != blank -%}
+    .day-mode .announcement-bar-{{ section.id }},
+    .day-mode .announcement-bar-{{ section.id }} .announcement-bar__message,
+    .day-mode .announcement-bar-{{ section.id }} .announcement-bar__link,
+    body:not(.night-mode) .announcement-bar-{{ section.id }},
+    body:not(.night-mode) .announcement-bar-{{ section.id }} .announcement-bar__message,
+    body:not(.night-mode) .announcement-bar-{{ section.id }} .announcement-bar__link {
+      color: {{ section.settings.text_color_day }};
+    }
+    .day-mode .announcement-bar-{{ section.id }} svg,
+    body:not(.night-mode) .announcement-bar-{{ section.id }} svg {
+      fill: {{ section.settings.text_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.border_color_day != blank -%}
+    .day-mode .announcement-bar-{{ section.id }}.utility-bar--bottom-border,
+    body:not(.night-mode) .announcement-bar-{{ section.id }}.utility-bar--bottom-border {
+      border-bottom-color: {{ section.settings.border_color_day }};
+    }
+  {%- endif -%}
+
+  {%- if section.settings.bg_color_night != blank -%}
+    .night-mode .announcement-bar-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.text_color_night != blank -%}
+    .night-mode .announcement-bar-{{ section.id }},
+    .night-mode .announcement-bar-{{ section.id }} .announcement-bar__message,
+    .night-mode .announcement-bar-{{ section.id }} .announcement-bar__link {
+      color: {{ section.settings.text_color_night }};
+    }
+    .night-mode .announcement-bar-{{ section.id }} svg {
+      fill: {{ section.settings.text_color_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.border_color_night != blank -%}
+    .night-mode .announcement-bar-{{ section.id }}.utility-bar--bottom-border {
+      border-bottom-color: {{ section.settings.border_color_night }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
 <div
-  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
+  id="AnnouncementBar-{{ section.id }}"
+  class="utility-bar announcement-bar-{{ section.id }} color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
@@ -198,6 +249,44 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "border_color_day",
+      "label": "Border color (Day)"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "border_color_night",
+      "label": "Border color (Night)"
     },
     {
       "type": "header",

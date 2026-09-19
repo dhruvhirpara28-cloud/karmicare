@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
             "link": ""
           }
         }
@@ -30,6 +30,12 @@
         "change_slides_speed": 5,
         "color_scheme": "scheme-1",
         "show_line_separator": true,
+        "bg_color_day": "#f2f8ff",
+        "text_color_day": "#191f38",
+        "border_color_day": "",
+        "bg_color_night": "#141934",
+        "text_color_night": "#fffbf6",
+        "border_color_night": "",
         "show_social": false,
         "enable_country_selector": false,
         "enable_language_selector": false
@@ -38,20 +44,37 @@
     "header": {
       "type": "header",
       "settings": {
-        "logo_position": "middle-center",
+        "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "new-main-menu",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "reduce-logo-size",
-        "show_line_separator": true,
+        "sticky_header_type": "none",
+        "show_line_separator": false,
+        "show_cta_button": true,
+        "cta_text": "BEGIN NOW",
+        "cta_link": "",
+        "show_search": false,
+        "show_account": false,
+        "show_cart": false,
+        "show_day_night_toggle": true,
+        "bg_color_day": "",
+        "text_color_day": "",
+        "border_color_day": "",
+        "btn_bg_day": "",
+        "btn_text_day": "",
+        "bg_color_night": "",
+        "text_color_night": "",
+        "border_color_night": "",
+        "btn_bg_night": "",
+        "btn_text_night": "",
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "enable_customer_avatar": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": false,
         "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 12,
+        "padding_bottom": 12
       }
     }
   },
