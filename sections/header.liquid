@@ -16,105 +16,228 @@
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
-<style>
+{%- style -%}
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
   }
-
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
-    .scrolled-past-header .header__heading-logo-wrapper {
-      width: 75%;
-    }
+    .scrolled-past-header .header__heading-logo-wrapper { width: 75%; }
   {%- endif -%}
-
   {%- if section.settings.menu_type_desktop != "drawer" -%}
     @media screen and (min-width: 990px) {
-      header-drawer {
-        display: none;
-      }
+      header-drawer { display: none; }
     }
   {%- endif -%}
-
-  .menu-drawer-container {
-    display: flex;
-  }
-
-  .list-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .list-menu--inline {
-    display: inline-flex;
-    flex-wrap: wrap;
-  }
-
-  summary.list-menu__item {
-    padding-right: 2.7rem;
-  }
-
+  .menu-drawer-container { display: flex; }
+  .list-menu { list-style: none; padding: 0; margin: 0; }
+  .list-menu--inline { display: inline-flex; flex-wrap: wrap; }
+  summary.list-menu__item { padding-right: 2.7rem; }
   .list-menu__item {
     display: flex;
     align-items: center;
     line-height: calc(1 + 0.3 / var(--font-body-scale));
   }
-
   .list-menu__item--link {
     text-decoration: none;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    padding: 0.5rem 0;
     line-height: calc(1 + 0.8 / var(--font-body-scale));
   }
 
-  @media screen and (min-width: 750px) {
-    .list-menu__item--link {
-      padding-bottom: 0.5rem;
-      padding-top: 0.5rem;
-    }
-  }
-
-  /* ── Day/Night toggle inside header ── */
   .kc-day-night-toggle {
     display: flex;
     align-items: center;
     margin: 0 0.8rem;
     cursor: pointer;
   }
+  .kc-day-night-toggle .toggle-button { outline: none; }
 
-  .kc-day-night-toggle .toggle-button {
-    outline: none;
-  }
-
-  .kc-day-night-toggle .toggle-button:focus-visible {
-    box-shadow: 0 0 0 2px rgba(var(--color-foreground), 0.5);
-    border-radius: 14px;
-  }
-</style>
-
-{%- style -%}
-  .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
-  }
-
+  /* Floating pill navbar styles */
   .section-header {
-    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
-    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
   }
 
-  @media screen and (min-width: 750px) {
-    .section-header {
-      margin-bottom: {{ section.settings.margin_bottom }}px;
-    }
+  body.day-mode #shopify-section-{{ section.id }} .header-wrapper,
+  body.night-mode #shopify-section-{{ section.id }} .header-wrapper,
+  #shopify-section-{{ section.id }} .header-wrapper {
+    background: transparent;
+    background-color: transparent;
+    border-bottom: none;
+  }
+
+  #shopify-section-{{ section.id }} .header {
+    background-color: #ffffff;
+    border: 1px solid rgba(25, 31, 56, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(25, 31, 56, 0.04);
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: {{ section.settings.padding_top }}px 2.4rem {{ section.settings.padding_bottom }}px 2.4rem;
+    align-items: center;
   }
 
   @media screen and (min-width: 990px) {
-    .header {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+    #shopify-section-{{ section.id }} .header--middle-left {
+      grid-template-areas: 'heading navigation icons';
+      grid-template-columns: auto 1fr auto;
+      column-gap: 2.5rem;
+      align-items: center;
+    }
+    #shopify-section-{{ section.id }} .header--middle-left .header__inline-menu {
+      justify-self: center;
+      display: flex;
+      justify-content: center;
+    }
+    #shopify-section-{{ section.id }} .header--middle-left .header__icons {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
     }
   }
+
+  /* Logo text styling */
+  #shopify-section-{{ section.id }} .header__heading-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .header__heading-link .h2,
+  #shopify-section-{{ section.id }} .header__heading-link span {
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+  }
+
+  /* Menu items */
+  #shopify-section-{{ section.id }} .header__inline-menu .list-menu--inline {
+    gap: 2.8rem;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.6rem 0.4rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:hover {
+    opacity: 0.75;
+  }
+
+  /* CTA Button */
+  #shopify-section-{{ section.id }} .header__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2.2rem;
+    border-radius: 8px;
+    background-color: #7FB9FF;
+    color: #191F38;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.2;
+    transition: opacity 0.2s ease;
+  }
+  #shopify-section-{{ section.id }} .header__cta-btn:hover {
+    opacity: 0.88;
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.6rem;
+      margin: 0.8rem 1.2rem;
+    }
+    #shopify-section-{{ section.id }} .header__cta-btn {
+      padding: 0.7rem 1.4rem;
+      font-size: 1.15rem;
+    }
+  }
+
+  /* ── DAY MODE COLORS ── */
+  {%- if section.settings.bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header {
+      background-color: {{ section.settings.bg_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.border_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header {
+      border-color: {{ section.settings.border_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.text_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body.day-mode #shopify-section-{{ section.id }} .header a,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header a {
+      color: {{ section.settings.text_color_day }};
+      fill: {{ section.settings.text_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.btn_bg_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header__cta-btn {
+      background-color: {{ section.settings.btn_bg_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.btn_text_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header__cta-btn {
+      color: {{ section.settings.btn_text_day }};
+    }
+  {%- endif -%}
+
+  /* ── NIGHT MODE COLORS ── */
+  body.night-mode #shopify-section-{{ section.id }} .header {
+    background-color: #141934;
+    border-color: rgba(255, 251, 246, 0.12);
+  }
+  {%- if section.settings.bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header {
+      background-color: {{ section.settings.bg_color_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.border_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header {
+      border-color: {{ section.settings.border_color_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.text_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header,
+    body.night-mode #shopify-section-{{ section.id }} .header a {
+      color: {{ section.settings.text_color_night }};
+      fill: {{ section.settings.text_color_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.btn_bg_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
+      background-color: {{ section.settings.btn_bg_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.btn_text_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
+      color: {{ section.settings.btn_text_night }};
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -159,8 +282,10 @@
         render 'header-drawer'
       endif
 
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
+      if section.settings.show_search
+        if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+          render 'header-search', input_id: 'Search-In-Modal-1'
+        endif
       endif
     -%}
 
@@ -264,9 +389,11 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {%- if section.settings.show_search -%}
+        {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {%- endif -%}
 
-      {%- if shop.customer_accounts_enabled -%}
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
           class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
@@ -302,47 +429,60 @@
         {%- endcase -%}
       {%- endfor -%}
 
-      {%- comment -%}── Day / Night mode toggle ──────────────────────────────{%- endcomment -%}
-      <div class="menu-toggle-btn kc-day-night-toggle" aria-label="Toggle day/night mode" title="Switch between day and night mode">
-        <div class="toggle-wrapper">
-          <div class="toggle-button" role="button" tabindex="0" aria-pressed="false">
-            <div class="toggle-circle"></div>
-            <img
-              loading="lazy"
-              src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/67850b58fe872279bb018673_Vector.svg"
-              alt="Day mode"
-              class="toggle-sun"
-              width="13"
-              height="13"
-            >
-            <img
-              loading="lazy"
-              src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/6786196ae0f8375ca16b5577_moon-icon.svg"
-              alt="Night mode"
-              class="toggle-moon"
-              width="13"
-              height="13"
-            >
+      {%- if section.settings.show_day_night_toggle -%}
+        {%- comment -%}── Day / Night mode toggle ──────────────────────────────{%- endcomment -%}
+        <div class="menu-toggle-btn kc-day-night-toggle" aria-label="Toggle day/night mode" title="Switch between day and night mode">
+          <div class="toggle-wrapper">
+            <div class="toggle-button" role="button" tabindex="0" aria-pressed="false">
+              <div class="toggle-circle"></div>
+              <img
+                loading="lazy"
+                src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/67850b58fe872279bb018673_Vector.svg"
+                alt="Day mode"
+                class="toggle-sun"
+                width="13"
+                height="13"
+              >
+              <img
+                loading="lazy"
+                src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/6786196ae0f8375ca16b5577_moon-icon.svg"
+                alt="Night mode"
+                class="toggle-moon"
+                width="13"
+                height="13"
+              >
+            </div>
           </div>
         </div>
-      </div>
+      {%- endif -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-        {% if cart == empty %}
-          <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
-        {% else %}
-          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-        {% endif %}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-        {%- if cart != empty -%}
-          <div class="cart-count-bubble">
-            {%- if cart.item_count < 100 -%}
-              <span aria-hidden="true">{{ cart.item_count }}</span>
-            {%- endif -%}
-            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-          </div>
-        {%- endif -%}
-      </a>
+      {%- if section.settings.show_cart -%}
+        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+          {% if cart == empty %}
+            <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+          {% else %}
+            <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+          {% endif %}
+          <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+          {%- if cart != empty -%}
+            <div class="cart-count-bubble">
+              {%- if cart.item_count < 100 -%}
+                <span aria-hidden="true">{{ cart.item_count }}</span>
+              {%- endif -%}
+              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            </div>
+          {%- endif -%}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_cta_button and section.settings.cta_text != blank -%}
+        <a
+          href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}"
+          class="header__cta-btn"
+        >
+          {{ section.settings.cta_text }}
+        </a>
+      {%- endif -%}
     </div>
   </header>
 </{{ header_tag }}>
@@ -610,6 +750,113 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "CTA Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta_button",
+      "default": true,
+      "label": "Show button"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "default": "BEGIN NOW",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Visibility Toggles"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "default": false,
+      "label": "Show search"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "default": false,
+      "label": "Show account / login"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "default": false,
+      "label": "Show cart icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_day_night_toggle",
+      "default": false,
+      "label": "Show day/night toggle"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Header background (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Header text (Day)"
+    },
+    {
+      "type": "color",
+      "id": "border_color_day",
+      "label": "Header border (Day)"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_day",
+      "label": "Button background (Day)"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_day",
+      "label": "Button text (Day)"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Header background (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Header text (Night)"
+    },
+    {
+      "type": "color",
+      "id": "border_color_night",
+      "label": "Header border (Night)"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_night",
+      "label": "Button background (Night)"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_night",
+      "label": "Button text (Night)"
     },
     {
       "type": "header",
