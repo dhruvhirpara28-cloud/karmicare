@@ -64,8 +64,8 @@
     try {
       var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
       var sunrise = new Date(new Date(sunriseStr).toLocaleString('en-US', { timeZone: tz }));
-      var sunset  = new Date(new Date(sunsetStr).toLocaleString('en-US',  { timeZone: tz }));
-      var now     = new Date();
+      var sunset = new Date(new Date(sunsetStr).toLocaleString('en-US', { timeZone: tz }));
+      var now = new Date();
 
       if (isNaN(sunrise.getTime()) || isNaN(sunset.getTime())) {
         applyFallbackMode();
@@ -158,7 +158,7 @@
       return;
     }
     // Explicit day/night buttons
-    if (e.target.closest('.kc_day'))   { setManualMode('day');   return; }
+    if (e.target.closest('.kc_day')) { setManualMode('day'); return; }
     if (e.target.closest('.kc_night')) { setManualMode('night'); return; }
   });
 
