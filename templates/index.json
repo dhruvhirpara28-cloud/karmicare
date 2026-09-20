@@ -9,62 +9,113 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero_karmicare_XKKLDK": {
+      "type": "hero-karmicare",
       "blocks": {
-        "heading": {
+        "heading_RHmd8h": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
+            "bold_opacity": 20,
+            "heading_size": "h1",
+            "heading_color_day": "#191F38",
+            "heading_color_night": "#FFFFFF"
           }
         },
-        "button": {
+        "text_Y7L3hV": {
+          "type": "text",
+          "settings": {
+            "text": "Karmicare is a day-and-night oral care system designed around your mouth’s 24-hour rhythm. Awake for activation. Asleep for restoration.",
+            "text_color_day": "#4A5568",
+            "text_color_night": "#C0C8D6"
+          }
+        },
+        "buttons_DpYxth": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
+            "button_label_1": "BEGIN YOUR 60-DAY RITUAL",
+            "button_link_1": "",
+            "btn1_bg_day": "#7FB9FF",
+            "btn1_text_day": "#0A1628",
+            "btn1_border_day": "",
+            "btn1_bg_night": "#7FB9FF",
+            "btn1_text_night": "#0A1628",
+            "btn1_border_night": "",
+            "button_label_2": "WHY TWO FORMULAS?",
             "button_link_2": "",
-            "button_style_secondary_2": false
+            "btn2_bg_day": "",
+            "btn2_text_day": "#191F38",
+            "btn2_border_day": "#191F38",
+            "btn2_bg_night": "",
+            "btn2_text_night": "#FFFFFF",
+            "btn2_border_night": "#FFFFFF"
+          }
+        },
+        "image_8y77hE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/KARMICARE_Hero-shot_001-p-1.png",
+            "blob_bg_day": "radial-gradient(50% 50% at 50% 50%, rgba(67, 121, 192, 0.3) 0%, rgba(67, 121, 192, 0.13) 42%, rgba(67, 121, 192, 0) 100%)",
+            "blob_bg_night": "radial-gradient(50% 50% at 50% 50%, rgba(67, 121, 192, 0.35) 0%, rgba(67, 121, 192, 0.15) 42%, rgba(67, 121, 192, 0) 100%)"
+          }
+        },
+        "rhythm_toggle_ffWVXt": {
+          "type": "rhythm_toggle",
+          "settings": {
+            "awake_label": "AWAKE",
+            "asleep_label": "ASLEEP",
+            "status_day_text": "DAYTIME PROTECTION",
+            "status_night_text": "NIGHTTIME RESTORATION",
+            "status_color_day": "#191F38",
+            "status_color_night": "#FFFFFF",
+            "pill_bg_day": "#EAE7E1",
+            "pill_active_bg_day": "#FFFFFF",
+            "pill_active_text_day": "#191F38",
+            "pill_inactive_text_day": "#7D8290",
+            "block_bg_day": "",
+            "pill_bg_night": "#1E2540",
+            "pill_active_bg_night": "#4379C0",
+            "pill_active_text_night": "#FFFFFF",
+            "pill_inactive_text_night": "#8E9BB5",
+            "block_bg_night": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading_RHmd8h",
+        "text_Y7L3hV",
+        "buttons_DpYxth",
+        "image_8y77hE",
+        "rhythm_toggle_ffWVXt"
       ],
+      "name": "Hero - Karmicare Rhythm",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
+        "bg_color_day": "",
+        "bg_gradient_night": "linear-gradient(180deg, #171C33 0%, #212A49 100%)",
+        "bg_color_night": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 45,
+        "padding_bottom_mobile": 45
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 8,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -72,13 +123,14 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "image_banner",
+    "hero_karmicare_XKKLDK",
     "featured_collection"
   ]
 }

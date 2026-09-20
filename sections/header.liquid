@@ -44,15 +44,6 @@
     line-height: calc(1 + 0.8 / var(--font-body-scale));
   }
 
-  .kc-day-night-toggle {
-    display: flex;
-    align-items: center;
-    margin: 0 0.8rem;
-    cursor: pointer;
-  }
-  .kc-day-night-toggle .toggle-button { outline: none; }
-
-  /* Floating pill navbar styles */
   .section-header {
     position: sticky;
     top: 0;
@@ -60,22 +51,13 @@
     margin-bottom: {{ section.settings.margin_bottom }}px;
   }
 
-  body.day-mode #shopify-section-{{ section.id }} .header-wrapper,
-  body.night-mode #shopify-section-{{ section.id }} .header-wrapper,
-  #shopify-section-{{ section.id }} .header-wrapper {
-    background: transparent;
-    background-color: transparent;
-    border-bottom: none;
-  }
-
   #shopify-section-{{ section.id }} .header {
-    background-color: #ffffff;
-    border: 1px solid rgba(25, 31, 56, 0.08);
-    border-radius: 12px;
+    border: 1px solid transparent;
+    border-radius: var(--primary-border-radius);
     box-shadow: 0 2px 8px rgba(25, 31, 56, 0.04);
     max-width: 1200px;
     margin: 1rem auto;
-    padding: {{ section.settings.padding_top }}px 2.4rem {{ section.settings.padding_bottom }}px 2.4rem;
+    padding: {{ section.settings.padding_top }}px 2rem {{ section.settings.padding_bottom }}px 2rem;
     align-items: center;
   }
 
@@ -83,13 +65,26 @@
     #shopify-section-{{ section.id }} .header--middle-left {
       grid-template-areas: 'heading navigation icons';
       grid-template-columns: auto 1fr auto;
-      column-gap: 2.5rem;
+      column-gap: 1.5rem;
       align-items: center;
     }
     #shopify-section-{{ section.id }} .header--middle-left .header__inline-menu {
       justify-self: center;
       display: flex;
       justify-content: center;
+    }
+    #shopify-section-{{ section.id }} .header__inline-menu .list-menu--inline {
+      gap: 2rem;
+      align-items: center;
+    }
+    #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item {
+      font-weight: 600;
+      padding: 0.6rem 0.4rem;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:hover {
+      opacity: 0.75;
     }
     #shopify-section-{{ section.id }} .header--middle-left .header__icons {
       justify-self: end;
@@ -99,52 +94,14 @@
     }
   }
 
-  /* Logo text styling */
-  #shopify-section-{{ section.id }} .header__heading-link {
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-  }
-  #shopify-section-{{ section.id }} .header__heading-link .h2,
-  #shopify-section-{{ section.id }} .header__heading-link span {
-    font-family: inherit;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1;
-  }
-
-  /* Menu items */
-  #shopify-section-{{ section.id }} .header__inline-menu .list-menu--inline {
-    gap: 2.8rem;
-    align-items: center;
-  }
-  #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item {
-    font-size: 1.5rem;
-    font-weight: 500;
-    padding: 0.6rem 0.4rem;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-  }
-  #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:hover {
-    opacity: 0.75;
-  }
-
   /* CTA Button */
   #shopify-section-{{ section.id }} .header__cta-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.9rem 2.2rem;
-    border-radius: 8px;
-    background-color: #7FB9FF;
-    color: #191F38;
-    font-size: 1.3rem;
+    padding: 1.3rem 1.7rem;
+    border-radius: var(--primary-border-radius);
     font-weight: 600;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
@@ -152,6 +109,7 @@
     white-space: nowrap;
     line-height: 1.2;
     transition: opacity 0.2s ease;
+    font-size: var(--font-body-small-size-desktop);
   }
   #shopify-section-{{ section.id }} .header__cta-btn:hover {
     opacity: 0.88;
@@ -162,55 +120,60 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 1.6rem;
-      margin: 0.8rem 1.2rem;
+      padding: 1rem 1rem;
+      margin: 0.8rem 1rem;
     }
     #shopify-section-{{ section.id }} .header__cta-btn {
       padding: 0.7rem 1.4rem;
-      font-size: 1.15rem;
     }
   }
 
-  /* ── DAY MODE COLORS ── */
+  /* ── SECTION BACKGROUND (from section schema settings) ── */
+  {%- if section.settings.section_bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }},
+    body.day-mode #shopify-section-{{ section.id }} .header-wrapper {
+      background-color: {{ section.settings.section_bg_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.section_bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }},
+    body.night-mode #shopify-section-{{ section.id }} .header-wrapper {
+      background-color: {{ section.settings.section_bg_color_night }};
+    }
+  {%- endif -%}
+
+  /* ── DAY MODE COLORS (from section schema settings) ── */
   {%- if section.settings.bg_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header,
-    body:not(.night-mode) #shopify-section-{{ section.id }} .header {
+    body.day-mode #shopify-section-{{ section.id }} .header {
       background-color: {{ section.settings.bg_color_day }};
     }
   {%- endif -%}
   {%- if section.settings.border_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header,
-    body:not(.night-mode) #shopify-section-{{ section.id }} .header {
-      border-color: {{ section.settings.border_color_day }};
+    body.day-mode #shopify-section-{{ section.id }} .header {
+      border: 1px solid {{ section.settings.border_color_day }};
     }
   {%- endif -%}
   {%- if section.settings.text_color_day != blank -%}
     body.day-mode #shopify-section-{{ section.id }} .header,
-    body.day-mode #shopify-section-{{ section.id }} .header a,
-    body:not(.night-mode) #shopify-section-{{ section.id }} .header,
-    body:not(.night-mode) #shopify-section-{{ section.id }} .header a {
+    body.day-mode #shopify-section-{{ section.id }} .header a:not(.header__cta-btn) {
       color: {{ section.settings.text_color_day }};
       fill: {{ section.settings.text_color_day }};
     }
   {%- endif -%}
   {%- if section.settings.btn_bg_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn,
-    body:not(.night-mode) #shopify-section-{{ section.id }} .header__cta-btn {
+    body.day-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
+    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn {
       background-color: {{ section.settings.btn_bg_day }};
     }
   {%- endif -%}
   {%- if section.settings.btn_text_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn,
-    body:not(.night-mode) #shopify-section-{{ section.id }} .header__cta-btn {
+    body.day-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
+    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn {
       color: {{ section.settings.btn_text_day }};
     }
   {%- endif -%}
 
-  /* ── NIGHT MODE COLORS ── */
-  body.night-mode #shopify-section-{{ section.id }} .header {
-    background-color: #141934;
-    border-color: rgba(255, 251, 246, 0.12);
-  }
+  /* ── NIGHT MODE COLORS (from section schema settings) ── */
   {%- if section.settings.bg_color_night != blank -%}
     body.night-mode #shopify-section-{{ section.id }} .header {
       background-color: {{ section.settings.bg_color_night }};
@@ -218,24 +181,35 @@
   {%- endif -%}
   {%- if section.settings.border_color_night != blank -%}
     body.night-mode #shopify-section-{{ section.id }} .header {
-      border-color: {{ section.settings.border_color_night }};
+      border: 1px solid {{ section.settings.border_color_night }};
     }
   {%- endif -%}
   {%- if section.settings.text_color_night != blank -%}
     body.night-mode #shopify-section-{{ section.id }} .header,
-    body.night-mode #shopify-section-{{ section.id }} .header a {
+    body.night-mode #shopify-section-{{ section.id }} .header a:not(.header__cta-btn) {
       color: {{ section.settings.text_color_night }};
       fill: {{ section.settings.text_color_night }};
     }
   {%- endif -%}
   {%- if section.settings.btn_bg_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
     body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
       background-color: {{ section.settings.btn_bg_night }};
     }
   {%- endif -%}
   {%- if section.settings.btn_text_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
     body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
       color: {{ section.settings.btn_text_night }};
+    }
+  {%- endif -%}
+
+  {%- if settings.logo != blank and settings.logo_day != blank -%}
+    body.night-mode .header__heading-logo--day {
+      display: none;
+    }
+    body.day-mode .header__heading-logo--night {
+      display: none;
     }
   {%- endif -%}
 {%- endstyle -%}
@@ -290,36 +264,48 @@
     -%}
 
     {%- if section.settings.logo_position != 'middle-center' -%}
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
-      {%- endif -%}
-      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if settings.logo != blank -%}
-          <div class="header__heading-logo-wrapper">
-            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-            {{
-              settings.logo
-              | image_url: width: 600
-              | image_tag:
-                class: 'header__heading-logo motion-reduce',
-                widths: widths,
-                height: logo_height,
-                width: settings.logo_width,
-                alt: logo_alt,
-                sizes: sizes,
-                preload: true
-            }}
-          </div>
-        {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
-        {%- endif -%}
-      </a>
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {%- endif -%}
+      <div class="header__heading">
+        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+          {%- if settings.logo != blank or settings.logo_day != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- capture sizes -%}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{%- endcapture -%}
+              {%- capture widths -%}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{%- endcapture -%}
+              {%- if settings.logo != blank -%}
+                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+                {{
+                  settings.logo
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo header__heading-logo--night motion-reduce',
+                    widths: widths,
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt,
+                    sizes: sizes
+                }}
+              {%- endif -%}
+              {%- if settings.logo_day != blank -%}
+                {%- assign logo_day_alt = settings.logo_day.alt | default: shop.name | escape -%}
+                {%- assign logo_day_height = settings.logo_width | divided_by: settings.logo_day.aspect_ratio -%}
+                {{
+                  settings.logo_day
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo header__heading-logo--day motion-reduce',
+                    widths: widths,
+                    height: logo_day_height,
+                    width: settings.logo_width,
+                    alt: logo_day_alt,
+                    sizes: sizes
+                }}
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
     {%- endif -%}
 
     {%- liquid
@@ -333,36 +319,48 @@
     %}
 
     {%- if section.settings.logo_position == 'middle-center' -%}
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
-      {%- endif -%}
-      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if settings.logo != blank -%}
-          <div class="header__heading-logo-wrapper">
-            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-            {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-            {{
-              settings.logo
-              | image_url: width: 600
-              | image_tag:
-                class: 'header__heading-logo',
-                widths: widths,
-                height: logo_height,
-                width: settings.logo_width,
-                alt: logo_alt,
-                sizes: sizes,
-                preload: true
-            }}
-          </div>
-        {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
-        {%- endif -%}
-      </a>
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {%- endif -%}
+      <div class="header__heading">
+        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+          {%- if settings.logo != blank or settings.logo_day != blank -%}
+            <div class="header__heading-logo-wrapper">
+              {%- capture sizes -%}(min-width: 750px) {{ settings.logo_width }}px, 50vw{%- endcapture -%}
+              {%- capture widths -%}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{%- endcapture -%}
+              {%- if settings.logo != blank -%}
+                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+                {{
+                  settings.logo
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo header__heading-logo--night',
+                    widths: widths,
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt,
+                    sizes: sizes
+                }}
+              {%- endif -%}
+              {%- if settings.logo_day != blank -%}
+                {%- assign logo_day_alt = settings.logo_day.alt | default: shop.name | escape -%}
+                {%- assign logo_day_height = settings.logo_width | divided_by: settings.logo_day.aspect_ratio -%}
+                {{
+                  settings.logo_day
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'header__heading-logo header__heading-logo--day',
+                    widths: widths,
+                    height: logo_day_height,
+                    width: settings.logo_width,
+                    alt: logo_day_alt,
+                    sizes: sizes
+                }}
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
     {%- endif -%}
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
@@ -429,33 +427,6 @@
         {%- endcase -%}
       {%- endfor -%}
 
-      {%- if section.settings.show_day_night_toggle -%}
-        {%- comment -%}── Day / Night mode toggle ──────────────────────────────{%- endcomment -%}
-        <div class="menu-toggle-btn kc-day-night-toggle" aria-label="Toggle day/night mode" title="Switch between day and night mode">
-          <div class="toggle-wrapper">
-            <div class="toggle-button" role="button" tabindex="0" aria-pressed="false">
-              <div class="toggle-circle"></div>
-              <img
-                loading="lazy"
-                src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/67850b58fe872279bb018673_Vector.svg"
-                alt="Day mode"
-                class="toggle-sun"
-                width="13"
-                height="13"
-              >
-              <img
-                loading="lazy"
-                src="https://cdn.prod.website-files.com/677e8489a40f0b29863889fd/6786196ae0f8375ca16b5577_moon-icon.svg"
-                alt="Night mode"
-                class="toggle-moon"
-                width="13"
-                height="13"
-              >
-            </div>
-          </div>
-        </div>
-      {%- endif -%}
-
       {%- if section.settings.show_cart -%}
         <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
           {% if cart == empty %}
@@ -478,7 +449,7 @@
       {%- if section.settings.show_cta_button and section.settings.cta_text != blank -%}
         <a
           href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}"
-          class="header__cta-btn"
+          class="header__cta-btn "
         >
           {{ section.settings.cta_text }}
         </a>
@@ -615,6 +586,8 @@
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% elsif settings.logo_day %}
+      "logo": {{ settings.logo_day | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
       {{ settings.social_twitter_link | json }},
@@ -795,10 +768,18 @@
       "label": "Show cart icon"
     },
     {
-      "type": "checkbox",
-      "id": "show_day_night_toggle",
-      "default": false,
-      "label": "Show day/night toggle"
+      "type": "header",
+      "content": "Section Background Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color_day",
+      "label": "Section background (Day)"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color_night",
+      "label": "Section background (Night)"
     },
     {
       "type": "header",

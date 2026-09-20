@@ -1,0 +1,229 @@
+/* ── Hero Karmicare Section: Structural & Layout Styles ── */
+.hero-karmicare {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.hero-karmicare__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading */
+.hero-karmicare__heading-wrapper {
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.hero-karmicare__heading {
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+}
+
+.hero-karmicare__heading strong,
+.hero-karmicare__heading b {
+  font-weight: inherit;
+  opacity: 0.2;
+}
+
+@media screen and (min-width: 750px) {
+
+  .hero-karmicare__heading strong,
+  .hero-karmicare__heading b {
+    display: block;
+  }
+}
+
+/* Subtext */
+.hero-karmicare__text-wrapper {
+  margin-bottom: 3.2rem;
+  width: 100%;
+  max-width: 640px;
+}
+
+.hero-karmicare__text {
+  font-family: var(--font-body-family);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Dual Buttons */
+.hero-karmicare__buttons-wrapper {
+  display: flex;
+  gap: 1.4rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4.8rem;
+  width: 100%;
+}
+
+.hero-karmicare__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.35rem 2.6rem;
+  border-radius: var(--primary-border-radius);
+  font-weight: var(--font-heading-weight);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
+  line-height: 1.2;
+  border: 1px solid transparent;
+}
+
+.hero-karmicare__btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+@media screen and (max-width: 749px) {
+  .hero-karmicare__buttons-wrapper {
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 3.6rem;
+  }
+
+  .hero-karmicare__btn {
+    width: 100%;
+    max-width: 340px;
+    padding: 1.3rem 2rem;
+  }
+}
+
+/* Image & Soft Blob */
+.hero-karmicare__image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 2rem auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-karmicare__blob {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 92vw);
+  height: min(620px, 64vw);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(42px);
+  -webkit-filter: blur(42px);
+  will-change: transform, filter;
+  transition: background 0.4s ease;
+}
+
+.hero-karmicare__image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 840px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero-karmicare__image-placeholder {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--primary-border-radius);
+}
+
+.hero-karmicare__placeholder-svg {
+  width: 60%;
+  height: 60%;
+  opacity: 0.4;
+}
+
+/* Pill Switcher */
+.hero-karmicare__toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+  border-radius: var(--primary-border-radius);
+  transition: background 0.3s ease;
+}
+
+.hero-karmicare__pill-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem;
+  border-radius: 9999px;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero-karmicare__pill-btn {
+  border: none;
+  border-radius: 9999px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  outline: none;
+  font-family: inherit;
+  background-color: transparent;
+}
+
+/* Status text */
+.hero-karmicare__status-wrapper {
+  margin-top: 1.4rem;
+}
+
+.hero-karmicare__status-text {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.kc-hero-status-night {
+  display: none;
+}
+
+.kc-hero-status-day {
+  display: inline;
+}
+
+body.night-mode .kc-hero-status-day {
+  display: none;
+}
+
+body.night-mode .kc-hero-status-night {
+  display: inline;
+}
