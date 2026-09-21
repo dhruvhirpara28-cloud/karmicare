@@ -1,0 +1,392 @@
+{{ 'section-stat-strip-karmicare.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .stat-strip-karmicare .page-width{
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .stat-strip-karmicare .page-width{
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {%- assign h_border_alpha = section.settings.border_opacity | divided_by: 100.0 -%}
+  {%- assign v_divider_alpha = section.settings.divider_opacity | divided_by: 100.0 -%}
+
+  {%- if section.settings.show_top_border -%}
+    #shopify-section-{{ section.id }} .page-width { border-top: 1px solid rgba(var(--color-foreground), {{ h_border_alpha }}); }
+  {%- endif -%}
+  {%- if section.settings.show_bottom_border -%}
+    #shopify-section-{{ section.id }} .page-width { border-bottom: 1px solid rgba(var(--color-foreground), {{ h_border_alpha }}); }
+  {%- endif -%}
+
+  {%- unless section.settings.show_dividers -%}
+    #shopify-section-{{ section.id }} .stat-strip-karmicare__item::after { display: none; }
+  {%- endunless -%}
+
+  /* Day Mode */
+  {%- if section.settings.bg_gradient_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} { background: {{ section.settings.bg_gradient_day }}; }
+  {%- elsif section.settings.bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} { background-color: {{ section.settings.bg_color_day }}; }
+  {%- endif -%}
+  {%- if section.settings.border_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .page-width { border-color: {{ section.settings.border_color_day | color_modify: 'alpha', h_border_alpha }}; }
+  {%- endif -%}
+  {%- if section.settings.divider_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__item:not(:last-child)::after { background-color: {{ section.settings.divider_color_day | color_modify: 'alpha', v_divider_alpha }}; }
+  {%- endif -%}
+  {%- if section.settings.heading_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__heading { color: {{ section.settings.heading_color_day }}; }
+  {%- endif -%}
+  {%- if section.settings.text_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__text { color: {{ section.settings.text_color_day }}; }
+  {%- endif -%}
+  {%- if section.settings.tagline_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__tagline { color: {{ section.settings.tagline_color_day }}; }
+  {%- endif -%}
+
+  /* Night Mode */
+  {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} { background: {{ section.settings.bg_gradient_night }}; }
+  {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} { background-color: {{ section.settings.bg_color_night }}; }
+  {%- endif -%}
+  {%- if section.settings.border_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .page-width { border-color: {{ section.settings.border_color_night | color_modify: 'alpha', h_border_alpha }}; }
+  {%- endif -%}
+  {%- if section.settings.divider_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__item:not(:last-child)::after { background-color: {{ section.settings.divider_color_night | color_modify: 'alpha', v_divider_alpha }}; }
+  {%- endif -%}
+  {%- if section.settings.heading_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__heading { color: {{ section.settings.heading_color_night }}; }
+  {%- endif -%}
+  {%- if section.settings.text_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__text { color: {{ section.settings.text_color_night }}; }
+  {%- endif -%}
+  {%- if section.settings.tagline_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__tagline { color: {{ section.settings.tagline_color_night }}; }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section
+  id="StatStrip-{{ section.id }}"
+  class="stat-strip-karmicare"
+  aria-label="Karmicare Stats and Highlights"
+>
+  <div class="page-width">
+    {%- if section.blocks.size > 0 -%}
+      {%- assign heading_tag = section.settings.heading_tag | default: 'h4' -%}
+      <div class="stat-strip-karmicare__grid stat-strip-karmicare__grid--{{ section.settings.mobile_layout | default: 'scroll' }}">
+        {%- for block in section.blocks -%}
+          <div class="stat-strip-karmicare__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <{{ heading_tag }} class="stat-strip-karmicare__heading">
+                {{ block.settings.heading }}
+              </{{ heading_tag }}>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="stat-strip-karmicare__text">
+                {{ block.settings.text | escape }}
+              </p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.tagline != blank -%}
+      <div class="stat-strip-karmicare__tagline-wrapper">
+        <h6 class="stat-strip-karmicare__tagline">
+          {{ section.settings.tagline | escape }}
+        </h6>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stat Strip - Karmicare",
+  "tag": "section",
+  "class": "section-stat-strip-karmicare",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Borders & Dividers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "Show Top Border",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_border",
+      "label": "Show Bottom Border",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Show Vertical Dividers",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Horizontal Border Opacity",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "divider_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Vertical Divider Opacity",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Bottom Tagline"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline Text",
+      "default": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHOUSIASTS"
+    },
+    {
+      "type": "header",
+      "content": "SEO & Mobile Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Stat Heading HTML Tag (SEO)",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4 (Recommended)" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "Paragraph (p)" },
+        { "value": "span", "label": "Span (span)" },
+        { "value": "div", "label": "Div (div)" }
+      ],
+      "default": "h4",
+      "info": "Choose the appropriate semantic tag for SEO structure"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Layout (< 750px)",
+      "options": [
+        { "value": "scroll", "label": "Swipeable Scroll (Recommended)" },
+        { "value": "grid", "label": "2-Column Grid" }
+      ],
+      "default": "scroll",
+      "info": "Controls how the 5 items display on mobile devices"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)",
+      "info": "Optional CSS gradient string"
+    },
+    {
+      "type": "color",
+      "id": "border_color_day",
+      "label": "Border Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "divider_color_day",
+      "label": "Vertical Divider Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "heading_color_day",
+      "label": "Heading / Value Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Subtext Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color_day",
+      "label": "Tagline Color (Day)"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)",
+      "info": "Optional CSS gradient string"
+    },
+    {
+      "type": "color",
+      "id": "border_color_night",
+      "label": "Border Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "divider_color_night",
+      "label": "Vertical Divider Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "heading_color_night",
+      "label": "Heading / Value Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Subtext Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color_night",
+      "label": "Tagline Color (Night)"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Stat Value / Heading",
+          "default": "Clinically backed"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Stat Description / Subtext",
+          "default": "Formulated on +36 studies"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stat Strip - Karmicare",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "heading": "0%",
+            "text": "fluoride, SLS"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "heading": "1 pump",
+            "text": "the full dose"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "heading": "Clinically backed",
+            "text": "Formulated on +36 studies"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "heading": "64 days",
+            "text": "of AM/PM care per duo"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "heading": "No rinse",
+            "text": "works after the brush"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

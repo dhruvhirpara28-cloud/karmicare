@@ -17,10 +17,10 @@
           "settings": {
             "heading": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
             "heading_tag": "h1",
-            "bold_opacity": 40,
+            "bold_opacity": 20,
             "heading_size": "h1",
             "heading_color_day": "#191f38",
-            "heading_color_night": "#ffffff"
+            "heading_color_night": "#FFFBF6"
           }
         },
         "text_Y7L3hV": {
@@ -69,15 +69,15 @@
             "status_night_text": "NIGHTTIME RESTORATION",
             "status_color_day": "#191f38",
             "status_color_night": "#ffffff",
-            "pill_bg_day": "#eae7e1",
-            "pill_active_bg_day": "#ffffff",
-            "pill_active_text_day": "#191f38",
-            "pill_inactive_text_day": "#7d8290",
+            "pill_bg_day": "#FFFFFF",
+            "pill_active_bg_day": "#C4DFFF",
+            "pill_active_text_day": "#191F38",
+            "pill_inactive_text_day": "#191F38",
             "block_bg_day": "",
-            "pill_bg_night": "#1e2540",
-            "pill_active_bg_night": "#4379c0",
-            "pill_active_text_night": "#ffffff",
-            "pill_inactive_text_night": "#8e9bb5",
+            "pill_bg_night": "#212A49",
+            "pill_active_bg_night": "#C4DFFF",
+            "pill_active_text_night": "#FFFBF6",
+            "pill_inactive_text_night": "#FFFBF6",
             "block_bg_night": ""
           }
         }
@@ -93,12 +93,120 @@
       "settings": {
         "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
         "bg_color_day": "",
-        "bg_gradient_night": "linear-gradient(180deg, #171C33 0%, #212A49 100%)",
+        "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);",
         "bg_color_night": "",
         "padding_top": 80,
         "padding_bottom": 80,
         "padding_top_mobile": 45,
         "padding_bottom_mobile": 45
+      }
+    },
+    "stat_strip_karmicare": {
+      "type": "stat-strip-karmicare",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "heading": "0%",
+            "text": "fluoride, SLS"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "heading": "1 pump",
+            "text": "the full dose"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "heading": "Clinically backed",
+            "text": "Formulated on +36 studies"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "heading": "64 days",
+            "text": "of AM/PM care per duo"
+          }
+        },
+        "stat_5": {
+          "type": "stat",
+          "settings": {
+            "heading": "No rinse",
+            "text": "works after the brush"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "stat_5"
+      ],
+      "settings": {
+        "show_top_border": true,
+        "show_bottom_border": true,
+        "show_dividers": true,
+        "border_opacity": 20,
+        "divider_opacity": 20,
+        "tagline": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHOUSIASTS",
+        "heading_tag": "h4",
+        "mobile_layout": "scroll",
+        "bg_color_day": "#FFFBF6",
+        "bg_gradient_day": "",
+        "border_color_day": "",
+        "divider_color_day": "",
+        "heading_color_day": "",
+        "text_color_day": "",
+        "tagline_color_day": "",
+        "bg_color_night": "#191F38",
+        "bg_gradient_night": "",
+        "border_color_night": "",
+        "divider_color_night": "",
+        "heading_color_night": "",
+        "text_color_night": "",
+        "tagline_color_night": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    },
+    "chronobiology_clock_karmicare": {
+      "type": "chronobiology-clock-karmicare",
+      "settings": {
+        "eyebrow": "CHRONOBIOLOGY",
+        "title": "Your mouth runs on a 24-hour clock.",
+        "heading_tag": "h2",
+        "description": "Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00.",
+        "morning_badge": "06:40 · Neisseria peaks",
+        "morning_title": "Your mouth wakes up",
+        "morning_text": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
+        "night_badge": "22:00 · Fusobacterium peaks",
+        "night_title": "Your mouth switches to repair",
+        "night_text": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
+        "status_eyebrow": "09:06 · YOUR MOUTH RIGHT NOW:",
+        "status_text": "Breakfast and coffee pulled your pH down within minutes. Saliva needs about half an hour to bring it back.",
+        "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
+        "footer_link_text": "Read the science →",
+        "footer_link": "",
+        "link_color": "#7FB9FF",
+        "dial_image_day": "shopify://shop_images/timeline-day.png",
+        "dial_image_night": "shopify://shop_images/timeline-night.png",
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "text_color_day": "#191f38",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)",
+        "text_color_night": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 44,
+        "padding_bottom_mobile": 44
       }
     },
     "featured_collection": {
@@ -132,6 +240,8 @@
   },
   "order": [
     "hero_karmicare_XKKLDK",
+    "stat_strip_karmicare",
+    "chronobiology_clock_karmicare",
     "featured_collection"
   ]
 }
