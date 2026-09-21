@@ -1,0 +1,418 @@
+{{ 'section-chronobiology-clock-karmicare.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .chronobiology-clock {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .chronobiology-clock {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Day Mode */
+  {%- if section.settings.bg_gradient_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} { background: {{ section.settings.bg_gradient_day }}; }
+  {%- elsif section.settings.bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} { background-color: {{ section.settings.bg_color_day }}; }
+  {%- endif -%}
+  {%- if section.settings.text_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} { color: {{ section.settings.text_color_day }}; }
+  {%- endif -%}
+  /* Night Mode */
+  {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} { background: {{ section.settings.bg_gradient_night }}; }
+  {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} { background-color: {{ section.settings.bg_color_night }}; }
+  {%- endif -%}
+  {%- if section.settings.text_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} { color: {{ section.settings.text_color_night }}; }
+  {%- endif -%}
+
+  {%- if section.settings.link_color != blank -%}
+    #shopify-section-{{ section.id }} .chronobiology-clock__footer-link {
+      color: {{ section.settings.link_color }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section
+  id="ChronobiologyClock-{{ section.id }}"
+  class="chronobiology-clock"
+  aria-label="{{ section.settings.title | escape }}"
+>
+  <div class="page-width">
+    {%- if section.settings.eyebrow != blank
+      or section.settings.title != blank
+      or section.settings.description != blank
+    -%}
+      <div class="chronobiology-clock__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="chronobiology-clock__eyebrow">
+            {{ section.settings.eyebrow | escape }}
+          </span>
+        {%- endif -%}
+
+        {%- if section.settings.title != blank -%}
+          {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
+          <{{ heading_tag }} class="chronobiology-clock__title">
+            {{ section.settings.title | escape }}
+          </{{ heading_tag }}>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="chronobiology-clock__description">
+            {{ section.settings.description | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="chronobiology-clock__stage">
+      <!-- Morning Callout (06:40) -->
+      <div class="chronobiology-clock__card chronobiology-clock__card--morning">
+        {%- if section.settings.morning_badge != blank -%}
+          <span class="chronobiology-clock__badge">
+            {{ section.settings.morning_badge | escape }}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.morning_title != blank -%}
+          <h4 class="chronobiology-clock__card-title">
+            {{ section.settings.morning_title | escape }}
+          </h4>
+        {%- endif -%}
+        {%- if section.settings.morning_text != blank -%}
+          <p class="chronobiology-clock__small-text">
+            {{ section.settings.morning_text | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <!-- Central 24-Hour Dial Display -->
+      <div class="chronobiology-clock__dial-wrapper" aria-hidden="true">
+        {%- if section.settings.dial_image_day != blank -%}
+          {{
+            section.settings.dial_image_day
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              class: 'chronobiology-clock__image chronobiology-clock__image--day',
+              widths: '300, 420, 600, 800',
+              alt: section.settings.dial_image_day.alt
+            | default: 'Chronobiology dial day'
+          }}
+        {%- endif -%}
+
+        {%- if section.settings.dial_image_night != blank -%}
+          {{
+            section.settings.dial_image_night
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              class: 'chronobiology-clock__image chronobiology-clock__image--night',
+              widths: '300, 420, 600, 800',
+              alt: section.settings.dial_image_night.alt
+            | default: 'Chronobiology dial night'
+          }}
+        {%- endif -%}
+      </div>
+
+      <!-- Night Callout (22:00) -->
+      <div class="chronobiology-clock__card chronobiology-clock__card--night">
+        {%- if section.settings.night_badge != blank -%}
+          <span class="chronobiology-clock__badge">
+            {{ section.settings.night_badge | escape }}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.night_title != blank -%}
+          <h4 class="chronobiology-clock__card-title">
+            {{ section.settings.night_title | escape }}
+          </h4>
+        {%- endif -%}
+        {%- if section.settings.night_text != blank -%}
+          <p class="chronobiology-clock__small-text">
+            {{ section.settings.night_text | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Real-Time Status Under Dial -->
+    {%- if section.settings.status_eyebrow != blank or section.settings.status_text != blank -%}
+      <div class="chronobiology-clock__status">
+        {%- if section.settings.status_eyebrow != blank -%}
+          <span class="chronobiology-clock__badge">
+            {{ section.settings.status_eyebrow | escape }}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.status_text != blank -%}
+          <p class="chronobiology-clock__small-text">
+            {{ section.settings.status_text | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Bottom Footer CTA -->
+    {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}
+      <div class="chronobiology-clock__footer">
+        <p class="chronobiology-clock__footer-text">
+          {%- if section.settings.footer_text != blank -%}
+            <span>{{ section.settings.footer_text | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.footer_link_text != blank -%}
+            <a
+              href="{{ section.settings.footer_link | default: '#' }}"
+              class="chronobiology-clock__footer-link"
+            >
+              {{ section.settings.footer_link_text | escape }}
+            </a>
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Circadian 24h Clock",
+  "tag": "section",
+  "class": "section-chronobiology-clock",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Subheading",
+      "default": "CHRONOBIOLOGY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Heading",
+      "default": "Your mouth runs on a 24-hour clock."
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading HTML Tag (SEO)",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2 (Recommended)" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "p", "label": "Paragraph" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00."
+    },
+    {
+      "type": "header",
+      "content": "Morning Shift (Left Card)"
+    },
+    {
+      "type": "text",
+      "id": "morning_badge",
+      "label": "Morning Time Badge",
+      "default": "06:40 · Neisseria peaks"
+    },
+    {
+      "type": "text",
+      "id": "morning_title",
+      "label": "Morning Title",
+      "default": "Your mouth wakes up"
+    },
+    {
+      "type": "textarea",
+      "id": "morning_text",
+      "label": "Morning Description",
+      "default": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first."
+    },
+    {
+      "type": "header",
+      "content": "Night Shift (Right Card)"
+    },
+    {
+      "type": "text",
+      "id": "night_badge",
+      "label": "Night Time Badge",
+      "default": "22:00 · Fusobacterium peaks"
+    },
+    {
+      "type": "text",
+      "id": "night_title",
+      "label": "Night Title",
+      "default": "Your mouth switches to repair"
+    },
+    {
+      "type": "textarea",
+      "id": "night_text",
+      "label": "Night Description",
+      "default": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00."
+    },
+    {
+      "type": "header",
+      "content": "Live Rhythm Status (Center Bottom)"
+    },
+    {
+      "type": "text",
+      "id": "status_eyebrow",
+      "label": "Status Eyebrow",
+      "default": "09:06 · YOUR MOUTH RIGHT NOW:"
+    },
+    {
+      "type": "textarea",
+      "id": "status_text",
+      "label": "Status Text",
+      "default": "Breakfast and coffee pulled your pH down within minutes. Saliva needs about half an hour to bring it back."
+    },
+    {
+      "type": "header",
+      "content": "Footer Link / CTA"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer Note",
+      "default": "Formulated for both shifts: Awake by day, Asleep by night."
+    },
+    {
+      "type": "text",
+      "id": "footer_link_text",
+      "label": "Link Label",
+      "default": "Read the science →"
+    },
+    {
+      "type": "url",
+      "id": "footer_link",
+      "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#4F8EFF"
+    },
+    {
+      "type": "header",
+      "content": "Dial Images & Markers"
+    },
+    {
+      "type": "image_picker",
+      "id": "dial_image_day",
+      "label": "Dial Image (Day Mode)"
+    },
+    {
+      "type": "image_picker",
+      "id": "dial_image_night",
+      "label": "Dial Image (Night Mode)"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)",
+      "default": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)",
+      "default": "#191F38"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)",
+      "default": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 44
+    }
+  ],
+  "presets": [
+    {
+      "name": "Circadian 24h Clock"
+    }
+  ]
+}
+{% endschema %}

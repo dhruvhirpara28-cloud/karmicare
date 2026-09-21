@@ -1,0 +1,123 @@
+/* ── Stat Strip Karmicare Section ── */
+.stat-strip-karmicare {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ── Stats Row ── */
+.stat-strip-karmicare__grid {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stat-strip-karmicare__item {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.8rem 0.8rem;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 0;
+}
+
+/* Vertical Dividers between items */
+.stat-strip-karmicare__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 0;
+  height: 80%;
+  width: 1px;
+  transition: background-color 0.4s ease;
+}
+
+/* Stat Heading / Value */
+.stat-strip-karmicare__heading {
+  margin: 0;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+  transition: color 0.4s ease;
+}
+
+/* Stat Subtext */
+.stat-strip-karmicare__text {
+  margin: 0.5rem 0 0;
+  overflow-wrap: break-word;
+  transition: color 0.4s ease;
+}
+
+/* ── Bottom Tagline ── */
+.stat-strip-karmicare__tagline-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-top: 2.8rem;
+}
+
+.stat-strip-karmicare__tagline {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: color 0.4s ease;
+}
+
+/* Mobile Scroll Layout (Smooth Horizontal Swipe) */
+@media screen and (max-width: 749px) {
+  .stat-strip-karmicare__grid--scroll {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: flex-start;
+    padding-bottom: 0.5rem;
+  }
+
+  .stat-strip-karmicare__grid--scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stat-strip-karmicare__grid--scroll .stat-strip-karmicare__item {
+    flex: 0 0 44%;
+    min-width: 180px;
+    scroll-snap-align: center;
+  }
+
+  /* Mobile Grid Layout (2-column wrap) */
+  .stat-strip-karmicare__grid--grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2rem;
+  }
+
+  .stat-strip-karmicare__grid--grid .stat-strip-karmicare__item {
+    flex: 0 0 50%;
+    padding: 0.6rem 1rem;
+  }
+
+  .stat-strip-karmicare__grid--grid .stat-strip-karmicare__item:nth-child(2n)::after {
+    display: none;
+  }
+
+  .stat-strip-karmicare__grid--grid .stat-strip-karmicare__item:last-child {
+    flex: 0 0 100%;
+  }
+
+  .stat-strip-karmicare__tagline-wrapper {
+    margin-top: 2rem;
+  }
+
+  .stat-strip-karmicare__tagline {
+    letter-spacing: 0.1em;
+  }
+}

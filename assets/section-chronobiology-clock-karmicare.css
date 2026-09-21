@@ -1,0 +1,214 @@
+/* ── Chronobiology 24-Hour Clock Section ── */
+.chronobiology-clock {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.chronobiology-clock .page-width {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Section Header ── */
+.chronobiology-clock__header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3.5rem;
+}
+
+.chronobiology-clock__eyebrow {
+  display: inline-block;
+  margin: 0 0 1rem;
+  font-size: var(--font-body-small-size-desktop);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.chronobiology-clock__title {
+  letter-spacing: 1.5px;
+  max-width: 424px;
+  margin: 10px auto 15px;
+}
+
+.chronobiology-clock__description {
+  opacity: 0.76;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ── Interactive 24-Hour Stage (Desktop Grid) ── */
+.chronobiology-clock__stage {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 440px 1fr;
+  align-items: start;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+/* ── Side Callout Cards ── */
+.chronobiology-clock__card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.chronobiology-clock__card--night {
+  text-align: left;
+  max-width: 310px;
+  justify-self: start;
+  justify-content: end;
+}
+
+.chronobiology-clock__small-text {
+  font-size: var(--font-body-small-size-desktop);
+}
+
+/* ── Central Dial Wrapper ── */
+.chronobiology-clock__dial-wrapper {
+  position: relative;
+  width: 440px;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 36px;
+}
+
+/* Dial Images (Day & Night) */
+.chronobiology-clock__image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.4s ease;
+}
+
+@media screen and (min-width: 990px) {
+  .chronobiology-clock__card--morning {
+    text-align: right;
+    max-width: 280;
+    justify-self: end;
+    justify-content: center;
+  }
+
+  .chronobiology-clock__card--morning {
+    top: -22px;
+  }
+
+  .chronobiology-clock__card--night {
+    left: -50px;
+  }
+
+  .chronobiology-clock__card-title {
+    position: relative;
+  }
+
+  .chronobiology-clock__card--morning .chronobiology-clock__card-title:after {
+    width: 45px;
+    right: -50px;
+    left: auto;
+  }
+
+  .chronobiology-clock__card-title:after {
+    content: "";
+    position: absolute;
+    background-color: var(--kc-day-heading-color);
+    width: 60px;
+    height: 1px;
+    left: -70px;
+    top: 50%;
+    opacity: 0.35;
+  }
+}
+
+
+body.night-mode .chronobiology-clock__image--day {
+  display: none;
+}
+
+body.day-mode .chronobiology-clock__image--night {
+  display: none;
+}
+
+/* ── Real-Time Status Callout (Bottom Center) ── */
+.chronobiology-clock__status {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+
+
+/* ── Bottom Link / CTA ── */
+.chronobiology-clock__footer {
+  text-align: center;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+}
+
+.chronobiology-clock__footer-text {
+  margin: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.chronobiology-clock__footer-link {
+  text-decoration: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.chronobiology-clock__footer-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+/* ── Responsive Mobile Layout ── */
+@media screen and (max-width: 989px) {
+  .chronobiology-clock__stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 2.5rem;
+  }
+
+  .chronobiology-clock__card--morning,
+  .chronobiology-clock__card--night {
+    max-width: 480px;
+    text-align: center;
+    justify-self: center;
+    margin-top: 0;
+  }
+
+  .chronobiology-clock__dial-wrapper {
+    width: auto;
+    height: 440px;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .chronobiology-clock__header {
+    margin-bottom: 2rem;
+  }
+
+  .chronobiology-clock__status {
+    margin-top: 2rem;
+  }
+
+  .chronobiology-clock__footer {
+    margin-top: 2.5rem;
+  }
+}
