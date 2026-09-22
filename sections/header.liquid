@@ -204,14 +204,32 @@
     }
   {%- endif -%}
 
-  {%- if settings.logo != blank and settings.logo_day != blank -%}
-    body.night-mode .header__heading-logo--day {
-      display: none;
-    }
-    body.day-mode .header__heading-logo--night {
-      display: none;
-    }
-  {%- endif -%}
+  .header__heading-logo-wrapper--svg {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .header__heading-logo-svg {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    color: inherit;
+  }
+
+  .header__heading-logo-svg svg {
+    width: {{ settings.logo_width }}px;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    color: inherit;
+  }
+
+  .header__heading-logo-svg svg,
+  .header__heading-logo-svg svg path,
+  .header__heading-logo-svg svg [fill] {
+    fill: currentColor;
+    transition: fill 0.3s ease;
+  }
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -266,40 +284,29 @@
     {%- if section.settings.logo_position != 'middle-center' -%}
       <div class="header__heading">
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-          {%- if settings.logo != blank or settings.logo_day != blank -%}
+          {%- if settings.logo_svg != blank -%}
+            <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg">
+              <div class="header__heading-logo-svg" style="width: {{ settings.logo_width }}px;">
+                {{ settings.logo_svg }}
+              </div>
+            </div>
+          {%- elsif settings.logo != blank -%}
             <div class="header__heading-logo-wrapper">
               {%- capture sizes -%}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{%- endcapture -%}
               {%- capture widths -%}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{%- endcapture -%}
-              {%- if settings.logo != blank -%}
-                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {{
-                  settings.logo
-                  | image_url: width: 600
-                  | image_tag:
-                    class: 'header__heading-logo header__heading-logo--night motion-reduce',
-                    widths: widths,
-                    height: logo_height,
-                    width: settings.logo_width,
-                    alt: logo_alt,
-                    sizes: sizes
-                }}
-              {%- endif -%}
-              {%- if settings.logo_day != blank -%}
-                {%- assign logo_day_alt = settings.logo_day.alt | default: shop.name | escape -%}
-                {%- assign logo_day_height = settings.logo_width | divided_by: settings.logo_day.aspect_ratio -%}
-                {{
-                  settings.logo_day
-                  | image_url: width: 600
-                  | image_tag:
-                    class: 'header__heading-logo header__heading-logo--day motion-reduce',
-                    widths: widths,
-                    height: logo_day_height,
-                    width: settings.logo_width,
-                    alt: logo_day_alt,
-                    sizes: sizes
-                }}
-              {%- endif -%}
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {{
+                settings.logo
+                | image_url: width: 600
+                | image_tag:
+                  class: 'header__heading-logo motion-reduce',
+                  widths: widths,
+                  height: logo_height,
+                  width: settings.logo_width,
+                  alt: logo_alt,
+                  sizes: sizes
+              }}
             </div>
           {%- else -%}
             <span class="h2">{{ shop.name }}</span>
@@ -321,40 +328,29 @@
     {%- if section.settings.logo_position == 'middle-center' -%}
       <div class="header__heading">
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-          {%- if settings.logo != blank or settings.logo_day != blank -%}
+          {%- if settings.logo_svg != blank -%}
+            <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg">
+              <div class="header__heading-logo-svg" style="width: {{ settings.logo_width }}px;">
+                {{ settings.logo_svg }}
+              </div>
+            </div>
+          {%- elsif settings.logo != blank -%}
             <div class="header__heading-logo-wrapper">
               {%- capture sizes -%}(min-width: 750px) {{ settings.logo_width }}px, 50vw{%- endcapture -%}
               {%- capture widths -%}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{%- endcapture -%}
-              {%- if settings.logo != blank -%}
-                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {{
-                  settings.logo
-                  | image_url: width: 600
-                  | image_tag:
-                    class: 'header__heading-logo header__heading-logo--night',
-                    widths: widths,
-                    height: logo_height,
-                    width: settings.logo_width,
-                    alt: logo_alt,
-                    sizes: sizes
-                }}
-              {%- endif -%}
-              {%- if settings.logo_day != blank -%}
-                {%- assign logo_day_alt = settings.logo_day.alt | default: shop.name | escape -%}
-                {%- assign logo_day_height = settings.logo_width | divided_by: settings.logo_day.aspect_ratio -%}
-                {{
-                  settings.logo_day
-                  | image_url: width: 600
-                  | image_tag:
-                    class: 'header__heading-logo header__heading-logo--day',
-                    widths: widths,
-                    height: logo_day_height,
-                    width: settings.logo_width,
-                    alt: logo_day_alt,
-                    sizes: sizes
-                }}
-              {%- endif -%}
+              {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+              {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+              {{
+                settings.logo
+                | image_url: width: 600
+                | image_tag:
+                  class: 'header__heading-logo',
+                  widths: widths,
+                  height: logo_height,
+                  width: settings.logo_width,
+                  alt: logo_alt,
+                  sizes: sizes
+              }}
             </div>
           {%- else -%}
             <span class="h2">{{ shop.name }}</span>
@@ -586,8 +582,6 @@
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-    {% elsif settings.logo_day %}
-      "logo": {{ settings.logo_day | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
       {{ settings.social_twitter_link | json }},

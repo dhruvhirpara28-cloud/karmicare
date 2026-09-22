@@ -1,214 +1,736 @@
+@property --page {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fffbf6;
+}
+
+@property --gradient-end {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f2f8ff;
+}
+
 /* ── Chronobiology 24-Hour Clock Section ── */
 .chronobiology-clock {
+  --page: #fffbf6;
+  --gradient-end: #f2f8ff;
+  --ink: #191f38;
+  --body: #4f5468;
+  --surface: #fffdf9;
+  --hover: #e3ecf8;
+  --active: #7fb9ff;
+  --border: #727f94;
+  --focus: #315f99;
+  --sans: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --identity: 'Gotham Rounded', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --theme-duration: 550ms;
+  --theme-ease: cubic-bezier(.22, 1, .36, 1);
+
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden;
-  transition: background 0.4s ease, color 0.4s ease;
+  background: linear-gradient(180deg, var(--page), var(--gradient-end));
+  color: var(--ink);
+  font-family: var(--sans);
+  overflow: clip;
+  transition: color var(--theme-duration) var(--theme-ease), background var(--theme-duration) var(--theme-ease);
 }
 
-.chronobiology-clock .page-width {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.chronobiology-clock[data-theme="night"],
+body.night-mode .chronobiology-clock {
+  --page: #101526;
+  --gradient-end: #1c2a45;
+  --ink: #fffbf6;
+  --body: #c9d5e7;
+  --surface: #202d47;
+  --hover: #344867;
+  --active: #7fb9ff;
+  --border: #859ab8;
+  --focus: #a8d0ff;
 }
 
-/* ── Section Header ── */
-.chronobiology-clock__header {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 3.5rem;
-}
-
-.chronobiology-clock__eyebrow {
-  display: inline-block;
-  margin: 0 0 1rem;
-  font-size: var(--font-body-small-size-desktop);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-}
-
-.chronobiology-clock__title {
-  letter-spacing: 1.5px;
-  max-width: 424px;
-  margin: 10px auto 15px;
-}
-
-.chronobiology-clock__description {
-  opacity: 0.76;
-  max-width: 440px;
-  margin: 0 auto;
-}
-
-/* ── Interactive 24-Hour Stage (Desktop Grid) ── */
-.chronobiology-clock__stage {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: 1fr 440px 1fr;
-  align-items: start;
-  gap: 1rem;
-  margin: 0 auto;
-}
-
-/* ── Side Callout Cards ── */
-.chronobiology-clock__card {
-  display: flex;
-  flex-direction: column;
+.chronobiology-clock *,
+.chronobiology-clock *::before,
+.chronobiology-clock *::after {
   box-sizing: border-box;
-  position: relative;
-  z-index: 2;
-  height: 100%;
 }
 
-.chronobiology-clock__card--night {
-  text-align: left;
-  max-width: 310px;
-  justify-self: start;
-  justify-content: end;
+.chronobiology-clock button,
+.chronobiology-clock input {
+  font: inherit;
 }
 
-.chronobiology-clock__small-text {
-  font-size: var(--font-body-small-size-desktop);
+.chronobiology-clock button {
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Central Dial Wrapper ── */
-.chronobiology-clock__dial-wrapper {
-  position: relative;
-  width: 440px;
-  height: 440px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  margin-bottom: 36px;
+.chronobiology-clock img {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* Dial Images (Day & Night) */
-.chronobiology-clock__image {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: opacity 0.4s ease;
-}
-
-@media screen and (min-width: 990px) {
-  .chronobiology-clock__card--morning {
-    text-align: right;
-    max-width: 280;
-    justify-self: end;
-    justify-content: center;
-  }
-
-  .chronobiology-clock__card--morning {
-    top: -22px;
-  }
-
-  .chronobiology-clock__card--night {
-    left: -50px;
-  }
-
-  .chronobiology-clock__card-title {
-    position: relative;
-  }
-
-  .chronobiology-clock__card--morning .chronobiology-clock__card-title:after {
-    width: 45px;
-    right: -50px;
-    left: auto;
-  }
-
-  .chronobiology-clock__card-title:after {
-    content: "";
-    position: absolute;
-    background-color: var(--kc-day-heading-color);
-    width: 60px;
-    height: 1px;
-    left: -70px;
-    top: 50%;
-    opacity: 0.35;
-  }
-}
-
-
-body.night-mode .chronobiology-clock__image--day {
-  display: none;
-}
-
-body.day-mode .chronobiology-clock__image--night {
-  display: none;
-}
-
-/* ── Real-Time Status Callout (Bottom Center) ── */
-.chronobiology-clock__status {
-  text-align: center;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-
-
-/* ── Bottom Link / CTA ── */
-.chronobiology-clock__footer {
-  text-align: center;
-  margin-top: 3.5rem;
-  padding-top: 1.5rem;
-}
-
-.chronobiology-clock__footer-text {
+.chronobiology-clock h1,
+.chronobiology-clock h2,
+.chronobiology-clock h3,
+.chronobiology-clock h4,
+.chronobiology-clock p {
   margin: 0;
+}
+
+.chronobiology-clock a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+.chronobiology-clock :focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.chronobiology-clock .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── Main Clock Layout & Header ── */
+.chronobiology-clock .chrono {
+  max-width: 1440px;
+  margin: auto;
+  padding: 120px 24px;
+}
+
+.chronobiology-clock .heading {
+  padding: 0 24px;
+  text-align: center;
+}
+
+.chronobiology-clock .eyebrow {
+  font: 500 14px/16px var(--identity);
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+}
+
+.chronobiology-clock .clock-heading {
+  font-size: 44px;
+  line-height: 44px;
+  letter-spacing: -1.5px;
+  font-weight: 500;
+  margin: 24px auto;
+}
+
+.chronobiology-clock .lede {
+  color: var(--body);
+  font-size: 20px;
+  line-height: 28px;
+}
+
+/* ── Interactive Stage & Dial Artwork ── */
+.chronobiology-clock .stage {
+  position: relative;
+  height: 640px;
+}
+
+.chronobiology-clock .dial {
+  position: relative;
+  width: 604px;
+  height: 604px;
+  margin: 0 auto;
+  isolation: isolate;
+  touch-action: none;
+}
+
+.chronobiology-clock .artwork {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Exported geometry positioned inside 604px dial */
+.chronobiology-clock .blue-orb {
+  position: absolute;
+  width: 72.847682%;
+  height: 72.847682%;
+  left: 18.692%;
+  top: 7.015%;
+  transform: rotate(36.75deg) scaleY(-1);
+}
+
+.chronobiology-clock .white-orb {
+  position: absolute;
+  width: 72.847682%;
+  height: 72.847682%;
+  left: 10.547%;
+  top: 21.132%;
+  transform: rotate(19.42deg);
+}
+
+.chronobiology-clock .arcs {
+  position: absolute;
+  left: 19.86755%;
+  top: 19.86755%;
+  width: 60.2649%;
+  height: 60.2649%;
+}
+
+.chronobiology-clock .arc-asleep {
+  position: absolute;
+  left: 0;
+  top: 41.32%;
+  width: 75%;
+  height: 58.68%;
+}
+
+.chronobiology-clock .arc-awake {
+  position: absolute;
+  left: .76%;
+  top: 0;
+  width: 99.24%;
+  height: 93.3%;
+}
+
+.chronobiology-clock .ticks {
+  position: absolute;
+  left: 15.23179%;
+  top: 15.23179%;
+  width: 69.53642%;
+  height: 69.53642%;
+}
+
+.chronobiology-clock .sun,
+.chronobiology-clock .moon {
+  position: absolute;
+  left: 47.35099%;
+  width: 5.29801%;
+  height: 5.29801%;
+}
+
+.chronobiology-clock .sun {
+  top: 8.60927%;
+}
+
+.chronobiology-clock .moon {
+  top: 86.09272%;
+}
+
+.chronobiology-clock[data-theme="night"] .ticks,
+.chronobiology-clock[data-theme="night"] .sun,
+.chronobiology-clock[data-theme="night"] .moon,
+.chronobiology-clock[data-theme="night"] .leader,
+body.night-mode .chronobiology-clock .ticks,
+body.night-mode .chronobiology-clock .sun,
+body.night-mode .chronobiology-clock .moon,
+body.night-mode .chronobiology-clock .leader {
+  filter: brightness(0) invert(1);
+}
+
+.chronobiology-clock .pin {
+  position: absolute;
+  width: 4.96689%;
+  height: 4.96689%;
+}
+
+.chronobiology-clock .pin img:first-child {
+  width: 100%;
+  height: 100%;
+}
+
+.chronobiology-clock .pin img:last-child {
+  position: absolute;
+  width: 46.6667%;
+  height: 46.6667%;
+  left: 26.6667%;
+  top: 26.6667%;
+}
+
+.chronobiology-clock .pin-morning {
+  left: 18.49503%;
+  top: 42.39901%;
+}
+
+.chronobiology-clock .pin-evening {
+  left: 62.25166%;
+  top: 73.03808%;
+}
+
+.chronobiology-clock .leader {
+  position: absolute;
+  width: 9.60265%;
+  height: 1px;
+}
+
+.chronobiology-clock .leader-morning {
+  left: 8.06457%;
+  top: 44.86755%;
+}
+
+.chronobiology-clock .leader-evening {
+  left: 68.04636%;
+  top: 75.49669%;
+}
+
+.chronobiology-clock .shift-label {
+  position: absolute;
+  transform: translateX(-50%);
+  font: 500 12px/16px var(--identity);
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  padding: 3px 7px;
+}
+
+.chronobiology-clock .shift-awake {
+  left: 56.29139%;
+  top: 32.1192%;
+  color: #191f38;
+}
+
+.chronobiology-clock .shift-asleep {
+  left: 42.46689%;
+  top: 63.90728%;
+  color: #fffbf6;
+}
+
+/* The arc centerline radius is 178px inside 364px circle */
+.chronobiology-clock .orbit {
+  position: absolute;
+  left: 20.5298%;
+  top: 20.5298%;
+  width: 58.9404%;
+  height: 58.9404%;
+  pointer-events: none;
+}
+
+.chronobiology-clock .knob {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 20.5298%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid var(--focus);
+  border-radius: 50%;
+  background: var(--active);
+  color: #191f38;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 0 0 4px rgb(127 185 255 / .3);
+  transition: transform 150ms ease, background-color 150ms ease;
+  display: grid;
+  place-items: center;
+}
+
+.chronobiology-clock .knob img {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .chronobiology-clock .knob:hover:not(.is-active):not(.is-resting) {
+    background: var(--hover);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .chronobiology-clock[data-theme="night"] .knob:hover:not(.is-active):not(.is-resting) img,
+  body.night-mode .chronobiology-clock .knob:hover:not(.is-active):not(.is-resting) img {
+    filter: brightness(0) invert(1);
+  }
+}
+
+.chronobiology-clock .knob:focus-visible {
+  outline-offset: 5px;
+  box-shadow: 0 0 0 5px #191f38;
+}
+
+.chronobiology-clock .knob.is-active {
+  background: var(--active);
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.chronobiology-clock .knob.is-introducing {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.chronobiology-clock .knob.is-active img {
+  filter: none;
+}
+
+/* ── Callout Sections (Morning & Evening) ── */
+.chronobiology-clock .callout {
+  position: absolute;
+  width: 248px;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.chronobiology-clock .callout-morning {
+  right: calc(50% + 271px);
+  top: calc(271.5px - 24px - 16px);
+  text-align: right;
+}
+
+.chronobiology-clock .callout-evening {
+  left: calc(50% + 196px);
+  top: calc(456.5px - 24px - 16px);
+}
+
+.chronobiology-clock .callout-badge {
+  color: var(--body);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.chronobiology-clock .callout h2,
+.chronobiology-clock .callout h3 {
+  margin: 4px 0;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: -1px;
+  font-weight: 500;
+}
+
+.chronobiology-clock .callout .description {
+  color: var(--body);
+}
+
+/* ── Dynamic Biological Readout ── */
+.chronobiology-clock .readout {
+  width: min(604px, 100%);
+  padding: 0 24px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.chronobiology-clock .time-line {
+  font: 500 14px/20px var(--identity);
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.chronobiology-clock .state-copy {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 21px;
+  margin: 6px auto 0;
+  max-width: 56ch;
+  min-height: 63px;
+}
+
+.chronobiology-clock .hint {
   display: inline-flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 8px;
+  min-height: 44px;
+  max-width: 100%;
+  margin: 0 0 16px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: transparent;
+  font: 500 12px/12px var(--sans);
+  letter-spacing: 1.1px;
 }
 
-.chronobiology-clock__footer-link {
-  text-decoration: none;
-  transition: opacity 0.2s ease, color 0.2s ease;
+.chronobiology-clock .hint img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.chronobiology-clock__footer-link:hover {
-  text-decoration: underline;
-  opacity: 0.85;
-}
-
-/* ── Responsive Mobile Layout ── */
-@media screen and (max-width: 989px) {
-  .chronobiology-clock__stage {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 2.5rem;
-  }
-
-  .chronobiology-clock__card--morning,
-  .chronobiology-clock__card--night {
-    max-width: 480px;
-    text-align: center;
-    justify-self: center;
-    margin-top: 0;
-  }
-
-  .chronobiology-clock__dial-wrapper {
-    width: auto;
-    height: 440px;
-    max-width: 100%;
+@keyframes hint-turn {
+  to {
+    transform: rotate(1turn);
   }
 }
 
-@media screen and (max-width: 749px) {
-  .chronobiology-clock__header {
-    margin-bottom: 2rem;
+@media (hover: hover) {
+  .chronobiology-clock .hint:hover img {
+    animation: hint-turn 2.4s linear infinite;
+  }
+}
+
+.chronobiology-clock[data-theme="night"] .hint img,
+.chronobiology-clock[data-theme="night"] .science img,
+body.night-mode .chronobiology-clock .hint img,
+body.night-mode .chronobiology-clock .science img {
+  filter: brightness(0) invert(1);
+}
+
+/* ── Footer Link / Science CTA ── */
+.chronobiology-clock .footer {
+  padding: 64px 24px 0;
+  text-align: center;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.chronobiology-clock .science {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.chronobiology-clock .science img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Transitions */
+.chronobiology-clock,
+.chronobiology-clock .lede,
+.chronobiology-clock .callout,
+.chronobiology-clock .callout .description,
+.chronobiology-clock .state-copy,
+.chronobiology-clock .hint {
+  transition: color var(--theme-duration) var(--theme-ease), background-color var(--theme-duration) var(--theme-ease), border-color var(--theme-duration) var(--theme-ease);
+}
+
+.chronobiology-clock .ticks,
+.chronobiology-clock .sun,
+.chronobiology-clock .moon,
+.chronobiology-clock .leader,
+.chronobiology-clock .hint img,
+.chronobiology-clock .science img,
+.chronobiology-clock .knob img {
+  transition: filter var(--theme-duration) var(--theme-ease);
+}
+
+.chronobiology-clock .knob {
+  transition: transform 150ms ease, background-color 150ms ease, border-color var(--theme-duration) var(--theme-ease);
+}
+
+/* ── Tablet & Small Desktop (max-width: 1100px) ── */
+@media (max-width: 1100px) {
+  .chronobiology-clock .chrono {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 116px 24px 64px;
   }
 
-  .chronobiology-clock__status {
-    margin-top: 2rem;
+  .chronobiology-clock .heading {
+    order: 0;
+    padding: 0;
   }
 
-  .chronobiology-clock__footer {
-    margin-top: 2.5rem;
+  .chronobiology-clock .stage {
+    display: contents;
+  }
+
+  .chronobiology-clock .dial {
+    order: 1;
+    flex-shrink: 0;
+    width: min(604px, calc(100vw - 32px));
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .chronobiology-clock .readout {
+    order: 2;
+    padding: 0;
+  }
+
+  .chronobiology-clock .leader {
+    display: none;
+  }
+
+  .chronobiology-clock .callout {
+    position: static;
+    width: min(520px, 100%);
+    text-align: left;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .chronobiology-clock .callout-morning {
+    order: 3;
+    margin-top: 36px;
+  }
+
+  .chronobiology-clock .callout-evening {
+    order: 4;
+  }
+
+  .chronobiology-clock .footer {
+    order: 5;
+    padding: 24px 0 0;
+  }
+}
+
+/* ── Mobile (max-width: 600px) ── */
+@media (max-width: 600px) {
+  .chronobiology-clock .chrono {
+    padding: 24px 20px max(32px, env(safe-area-inset-bottom));
+  }
+
+  .chronobiology-clock .heading {
+    width: 100%;
+  }
+
+  .chronobiology-clock .eyebrow {
+    font-size: 12px;
+  }
+
+  .chronobiology-clock .clock-heading {
+    font-size: clamp(30px, 8.7vw, 36px);
+    line-height: 1.06;
+    letter-spacing: -1px;
+    margin: 16px 0;
+  }
+
+  .chronobiology-clock .lede {
+    max-width: 36ch;
+    margin: auto;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .chronobiology-clock .lede br {
+    display: none;
+  }
+
+  /* Transparent artwork margins extend into gutters while dial remains large */
+  .chronobiology-clock .dial {
+    width: min(480px, calc(100vw + 48px));
+    margin: -28px 0 -24px;
+  }
+
+  .chronobiology-clock .knob {
+    width: 48px;
+    height: 48px;
+  }
+
+  .chronobiology-clock .shift-label {
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: .6px;
+    padding: 3px 6px;
+  }
+
+  .chronobiology-clock .state-copy {
+    max-width: 36ch;
+    min-height: 84px;
+  }
+
+  .chronobiology-clock .hint {
+    margin-bottom: 12px;
+    font-size: 10px;
+    line-height: 10px;
+    letter-spacing: .7px;
+    gap: 6px;
+  }
+
+  .chronobiology-clock .time-line {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: .8px;
+  }
+
+  .chronobiology-clock .callout {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: 0 0 28px 24px;
+    border-top: 0;
+    border-left: 1px solid var(--border);
+  }
+
+  .chronobiology-clock .callout::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -5px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--active);
+    border-radius: 50%;
+    background: var(--active);
+  }
+
+  .chronobiology-clock .callout-morning {
+    margin-top: 32px;
+  }
+
+  .chronobiology-clock .callout-evening {
+    padding-bottom: 0;
+  }
+
+  .chronobiology-clock .callout-evening::before {
+    background: var(--surface);
+  }
+
+  .chronobiology-clock .callout>p:first-child {
+    color: var(--body);
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .chronobiology-clock .callout h2,
+  .chronobiology-clock .callout h3 {
+    margin: 6px 0 8px;
+    font-size: 26px;
+    line-height: 28px;
+    letter-spacing: -.7px;
+  }
+
+  .chronobiology-clock .callout .description {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .chronobiology-clock .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .chronobiology-clock .state-copy {
+    min-height: 105px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .chronobiology-clock *,
+  .chronobiology-clock *::before,
+  .chronobiology-clock *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .chronobiology-clock .knob {
+    border: 3px solid ButtonText;
+  }
+
+  .chronobiology-clock .shift-label {
+    forced-color-adjust: none;
   }
 }
