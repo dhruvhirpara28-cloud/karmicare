@@ -37,16 +37,6 @@
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'heading' -%}
-        #shopify-section-{{ section.id }} .hero-karmicare__heading-{{ block.id }} {
-          font-size: var(--font-{{ block.settings.heading_size }}-size-mobile);
-        }
-
-        @media screen and (min-width: 750px) {
-          #shopify-section-{{ section.id }} .hero-karmicare__heading-{{ block.id }} {
-            font-size: var(--font-{{ block.settings.heading_size }}-size-desktop);
-          }
-        }
-
         {%- if block.settings.heading_color_day != blank -%}
           body.day-mode #shopify-section-{{ section.id }} .hero-karmicare__heading-{{ block.id }} {
             color: {{ block.settings.heading_color_day }};
@@ -211,7 +201,9 @@
               <a
                 href="{{ block.settings.button_link_1 | default: '#' }}"
                 class="hero-karmicare__btn hero-karmicare__btn-1 hero-karmicare__btn-1-{{ block.id }}"
-                {% if block.settings.button_link_1 == blank %}role="button" aria-disabled="true"{% endif %}
+                {% if block.settings.button_link_1 == blank %}
+                  role="button" aria-disabled="true"
+                {% endif %}
               >
                 {{ block.settings.button_label_1 | escape }}
               </a>
@@ -220,7 +212,9 @@
               <a
                 href="{{ block.settings.button_link_2 | default: '#' }}"
                 class="hero-karmicare__btn hero-karmicare__btn-2 hero-karmicare__btn-2-{{ block.id }}"
-                {% if block.settings.button_link_2 == blank %}role="button" aria-disabled="true"{% endif %}
+                {% if block.settings.button_link_2 == blank %}
+                  role="button" aria-disabled="true"
+                {% endif %}
               >
                 {{ block.settings.button_label_2 | escape }}
               </a>
@@ -292,7 +286,10 @@
 
             <div class="hero-karmicare__status-wrapper">
               <p class="hero-karmicare__status-text hero-karmicare__status-text-{{ block.id }}">
-                <time class="kc-hero-live-time" datetime="{{ 'now' | date: '%Y-%m-%dT%H:%M' }}">{{ 'now' | date: '%I:%M %p' }}</time> ·
+                <time class="kc-hero-live-time" datetime="{{ 'now' | date: '%Y-%m-%dT%H:%M' }}">
+                  {{- 'now' | date: '%I:%M %p' -}}
+                </time>
+                ·
                 <span class="kc-hero-status-day">
                   {{- block.settings.status_day_text | default: 'DAYTIME PROTECTION' | escape -}}
                 </span>

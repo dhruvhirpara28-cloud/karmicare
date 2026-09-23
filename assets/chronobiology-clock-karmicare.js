@@ -59,7 +59,7 @@
     let timer = null;
 
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    let introPending = !reducedMotion.matches;
+    let introPending = false; // Disabled: intro animation unreliable in Shopify (observer may not fire)
     let introObserver = null;
 
     const normalize = minutes => ((minutes % 1440) + 1440) % 1440;
@@ -171,21 +171,22 @@
       if (returnFrame === null) knob.classList.remove('is-resting');
     });
 
-    knob.addEventListener('pointermove', event => {
-      if (event.pointerId !== pointerId) return;
-      const bounds = orbit.getBoundingClientRect();
+    document.addEventListener('pointermove', event => {
+      if (pointerId === null) return;
+      event.preventDefault(); // Prevents touch scrolling while dragging
+      const bounds = orbit.parentElement.getBoundingClientRect(); // Use .dial bounds
       const dx = event.clientX - (bounds.left + bounds.width / 2);
       const dy = event.clientY - (bounds.top + bounds.height / 2);
       if (Math.hypot(dx, dy) < 8) return;
       const angle = (Math.atan2(dx, -dy) * 180 / Math.PI + 360) % 360;
       const rawMinutes = (angle * 4 + 720) % 1440;
       draw(Math.round(rawMinutes / 5) * 5, true);
-    });
+    }, { capture: true, passive: false });
 
-    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => {
-      knob.addEventListener(type, event => {
-        if (event.pointerId === pointerId) reset();
-      });
+    ['pointerup', 'pointercancel'].forEach(type => {
+      document.addEventListener(type, event => {
+        if (pointerId !== null) reset();
+      }, { capture: true });
     });
 
     const deltas = { ArrowRight: 5, ArrowUp: 5, ArrowLeft: -5, ArrowDown: -5, PageUp: 60, PageDown: -60 };
@@ -261,10 +262,10 @@
 
     if (introPending && 'IntersectionObserver' in window) {
       introObserver = new IntersectionObserver(entries => {
-        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.75)) {
+        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.1)) {
           introduceClock();
         }
-      }, { threshold: 0.75 });
+      }, { threshold: 0.1 });
       introObserver.observe(orbit);
     } else if (introPending) {
       reset(false);

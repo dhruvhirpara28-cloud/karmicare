@@ -2,25 +2,6 @@
 <script src="{{ 'chronobiology-clock-karmicare.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
-  @font-face {
-    font-family: 'Proxima Nova';
-    src: url('{{ 'proxima-nova-regular.woff2' | asset_url }}') format('woff2');
-    font-weight: 400;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Proxima Nova';
-    src: url('{{ 'proxima-nova-medium.woff2' | asset_url }}') format('woff2');
-    font-weight: 500 800;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Gotham Rounded';
-    src: url('{{ 'gotham-rounded-medium.woff2' | asset_url }}') format('woff2');
-    font-weight: 500;
-    font-display: swap;
-  }
-
   #shopify-section-{{ section.id }} .chronobiology-clock {
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
@@ -87,8 +68,8 @@
   data-theme="day"
   aria-label="{{ section.settings.title | escape }}"
 >
-  <main class="chrono" aria-labelledby="clock-heading-{{ section.id }}">
-    <header class="heading">
+  <div class="chrono page-width" aria-labelledby="clock-heading-{{ section.id }}">
+    <div class="heading">
       {%- if section.settings.eyebrow != blank -%}
         <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
@@ -103,13 +84,20 @@
       {%- if section.settings.description != blank -%}
         <p class="lede">{{ section.settings.description }}</p>
       {%- endif -%}
-    </header>
+    </div>
 
     <div class="stage">
       <div class="dial">
         <div class="artwork" aria-hidden="true">
           <img class="blue-orb" src="{{ 'orb-blue.webp' | asset_url }}" alt="" width="440" height="440" loading="lazy">
-          <img class="white-orb" src="{{ 'orb-white.webp' | asset_url }}" alt="" width="440" height="440" loading="lazy">
+          <img
+            class="white-orb"
+            src="{{ 'orb-white.webp' | asset_url }}"
+            alt=""
+            width="440"
+            height="440"
+            loading="lazy"
+          >
           <div class="arcs">
             <img class="arc-asleep" src="{{ 'arc-asleep.svg' | asset_url }}" alt="" width="273" height="214">
             <img class="arc-awake" src="{{ 'arc-awake.svg' | asset_url }}" alt="" width="361" height="340">
@@ -177,16 +165,17 @@
     <div class="readout" data-mode="live">
       <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
         <img src="{{ 'drag.svg' | asset_url }}" alt="" width="24" height="24">
-        <span>EXPLORE YOUR DAILY RHYTHM</span>
+        <span>{{ section.settings.hint_label | escape }}</span>
       </button>
-      <p class="time-line"><time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> · <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span></p>
+      <p class="time-line">
+        <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
+        <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span>
+      </p>
       <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
-      <p class="sr-only" id="clock-help-{{ section.id }}">Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.</p>
-      <noscript><p>Enable JavaScript to explore the clock and see your current local time.</p></noscript>
     </div>
 
     {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}
-      <footer class="footer">
+      <div class="chronobiology-clock__footer">
         {%- if section.settings.footer_text != blank -%}
           <span>{{ section.settings.footer_text | escape }} </span>
         {%- endif -%}
@@ -199,12 +188,11 @@
           >
             {{- section.settings.footer_link_text | escape -}}
             <img src="{{ 'arrow-right.svg' | asset_url }}" alt="" width="16" height="16">
-            <span class="sr-only"> (opens a new tab)</span>
           </a>
         {%- endif -%}
-      </footer>
+      </div>
     {%- endif -%}
-  </main>
+  </div>
 </div>
 
 {% schema %}
@@ -296,20 +284,10 @@
       "default": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00."
     },
     {
-      "type": "header",
-      "content": "Live Rhythm Status (Center Bottom)"
-    },
-    {
       "type": "text",
-      "id": "status_eyebrow",
-      "label": "Status Eyebrow (Fallback)",
-      "default": "09:06 · YOUR MOUTH RIGHT NOW:"
-    },
-    {
-      "type": "textarea",
-      "id": "status_text",
-      "label": "Status Text (Fallback)",
-      "default": "Breakfast and coffee pulled your pH down within minutes. Saliva needs about half an hour to bring it back."
+      "id": "hint_label",
+      "label": "Explore Button Label",
+      "default": "EXPLORE YOUR DAILY RHYTHM"
     },
     {
       "type": "header",

@@ -45,7 +45,7 @@
 /* Stat Heading / Value */
 .stat-strip-karmicare__heading {
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--kc-responsive-h3-letter-spacing);
   overflow-wrap: break-word;
   transition: color 0.4s ease;
 }
@@ -69,6 +69,7 @@
   text-transform: uppercase;
   letter-spacing: 0.14em;
   transition: color 0.4s ease;
+  font-size: var(--kc-responsive-label-sm-text-size);
 }
 
 /* Mobile Scroll Layout (Smooth Horizontal Swipe) */

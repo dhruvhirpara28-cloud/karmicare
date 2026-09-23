@@ -6,6 +6,21 @@
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
 
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .stat-strip-karmicare__grid {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 1.5rem;
+    }
+    #shopify-section-{{ section.id }} .stat-strip-karmicare__item {
+      flex: 0 0 calc(100% / {{ section.settings.columns_tablet }});
+    }
+    /* Hide right border for the last item in a row to avoid weird lines */
+    #shopify-section-{{ section.id }} .stat-strip-karmicare__item:nth-child({{ section.settings.columns_tablet }}n)::after {
+      display: none;
+    }
+  }
+
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .stat-strip-karmicare .page-width{
       padding-top: {{ section.settings.padding_top }}px;
@@ -100,9 +115,9 @@
 
     {%- if section.settings.tagline != blank -%}
       <div class="stat-strip-karmicare__tagline-wrapper">
-        <h6 class="stat-strip-karmicare__tagline">
+        <p class="stat-strip-karmicare__tagline">
           {{ section.settings.tagline | escape }}
-        </h6>
+        </p>
       </div>
     {%- endif -%}
   </div>
@@ -200,6 +215,15 @@
       ],
       "default": "scroll",
       "info": "Controls how the 5 items display on mobile devices"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "Tablet Columns (750px - 1024px)"
     },
     {
       "type": "header",

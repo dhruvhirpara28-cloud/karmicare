@@ -25,7 +25,8 @@ span,
 .h1,
 .h3 {
   margin: 0;
-  padding: 0
+  padding: 0;
+  line-height: normal;
 }
 
 :root {
@@ -327,7 +328,7 @@ h6,
   font-weight: var(--font-heading-weight);
   letter-spacing: calc(var(--font-heading-scale) * 0.06rem);
   color: rgb(var(--color-foreground));
-  line-height: calc(1 + 0.3 / max(1, var(--font-heading-scale)));
+  line-height: normal;
   word-break: break-word;
 }
 
@@ -368,6 +369,7 @@ h1,
   h1,
   .h1 {
     font-size: var(--font-h1-size-desktop);
+    letter-spacing: var(--kc-responsive-h1-letter-spacing);
   }
 }
 
@@ -375,6 +377,7 @@ h2,
 .h2 {
   font-size: var(--font-h2-size-mobile);
   font-weight: var(--font-h2-weight);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
 }
 
 @media only screen and (min-width: 750px) {
