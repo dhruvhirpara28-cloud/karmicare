@@ -1,4 +1,5 @@
 {{ 'section-chronobiology-clock-karmicare.css' | asset_url | stylesheet_tag: preload: true }}
+<script src="{{ 'chronobiology-clock-karmicare.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   #shopify-section-{{ section.id }} .chronobiology-clock {
@@ -13,169 +14,186 @@
     }
   }
 
-  /* Day Mode */
+  /* Day Mode custom colors/gradient */
   {%- if section.settings.bg_gradient_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} { background: {{ section.settings.bg_gradient_day }}; }
+    #shopify-section-{{ section.id }} .chronobiology-clock {
+      background: {{ section.settings.bg_gradient_day }};
+    }
   {%- elsif section.settings.bg_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} { background-color: {{ section.settings.bg_color_day }}; }
+    #shopify-section-{{ section.id }} .chronobiology-clock {
+      --page: {{ section.settings.bg_color_day }};
+      background: {{ section.settings.bg_color_day }};
+    }
   {%- endif -%}
+
   {%- if section.settings.text_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} { color: {{ section.settings.text_color_day }}; }
+    #shopify-section-{{ section.id }} .chronobiology-clock {
+      --ink: {{ section.settings.text_color_day }};
+      color: {{ section.settings.text_color_day }};
+    }
   {%- endif -%}
-  /* Night Mode */
+
+  /* Night Mode custom colors/gradient */
   {%- if section.settings.bg_gradient_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} { background: {{ section.settings.bg_gradient_night }}; }
+    #shopify-section-{{ section.id }} .chronobiology-clock[data-theme="night"],
+    body.night-mode #shopify-section-{{ section.id }} .chronobiology-clock {
+      background: {{ section.settings.bg_gradient_night }};
+    }
   {%- elsif section.settings.bg_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} { background-color: {{ section.settings.bg_color_night }}; }
+    #shopify-section-{{ section.id }} .chronobiology-clock[data-theme="night"],
+    body.night-mode #shopify-section-{{ section.id }} .chronobiology-clock {
+      --page: {{ section.settings.bg_color_night }};
+      background: {{ section.settings.bg_color_night }};
+    }
   {%- endif -%}
+
   {%- if section.settings.text_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} { color: {{ section.settings.text_color_night }}; }
+    #shopify-section-{{ section.id }} .chronobiology-clock[data-theme="night"],
+    body.night-mode #shopify-section-{{ section.id }} .chronobiology-clock {
+      --ink: {{ section.settings.text_color_night }};
+      color: {{ section.settings.text_color_night }};
+    }
   {%- endif -%}
 
   {%- if section.settings.link_color != blank -%}
-    #shopify-section-{{ section.id }} .chronobiology-clock__footer-link {
+    #shopify-section-{{ section.id }} .chronobiology-clock .science {
       color: {{ section.settings.link_color }};
     }
   {%- endif -%}
 {%- endstyle -%}
 
-<section
+<div
   id="ChronobiologyClock-{{ section.id }}"
   class="chronobiology-clock"
+  data-theme="day"
   aria-label="{{ section.settings.title | escape }}"
 >
-  <div class="page-width">
-    {%- if section.settings.eyebrow != blank
-      or section.settings.title != blank
-      or section.settings.description != blank
-    -%}
-      <div class="chronobiology-clock__header">
-        {%- if section.settings.eyebrow != blank -%}
-          <span class="chronobiology-clock__eyebrow">
-            {{ section.settings.eyebrow | escape }}
-          </span>
-        {%- endif -%}
+  <div class="chrono page-width" aria-labelledby="clock-heading-{{ section.id }}">
+    <div class="heading">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
 
-        {%- if section.settings.title != blank -%}
-          {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
-          <{{ heading_tag }} class="chronobiology-clock__title">
-            {{ section.settings.title | escape }}
-          </{{ heading_tag }}>
-        {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
+        <{{ heading_tag }} id="clock-heading-{{ section.id }}" class="clock-heading">
+          {{ section.settings.title }}
+        </{{ heading_tag }}>
+      {%- endif -%}
 
-        {%- if section.settings.description != blank -%}
-          <p class="chronobiology-clock__description">
-            {{ section.settings.description | escape }}
-          </p>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-    <div class="chronobiology-clock__stage">
-      <!-- Morning Callout (06:40) -->
-      <div class="chronobiology-clock__card chronobiology-clock__card--morning">
-        {%- if section.settings.morning_badge != blank -%}
-          <span class="chronobiology-clock__badge">
-            {{ section.settings.morning_badge | escape }}
-          </span>
-        {%- endif -%}
-        {%- if section.settings.morning_title != blank -%}
-          <h4 class="chronobiology-clock__card-title">
-            {{ section.settings.morning_title | escape }}
-          </h4>
-        {%- endif -%}
-        {%- if section.settings.morning_text != blank -%}
-          <p class="chronobiology-clock__small-text">
-            {{ section.settings.morning_text | escape }}
-          </p>
-        {%- endif -%}
-      </div>
-
-      <!-- Central 24-Hour Dial Display -->
-      <div class="chronobiology-clock__dial-wrapper" aria-hidden="true">
-        {%- if section.settings.dial_image_day != blank -%}
-          {{
-            section.settings.dial_image_day
-            | image_url: width: 800
-            | image_tag:
-              loading: 'lazy',
-              class: 'chronobiology-clock__image chronobiology-clock__image--day',
-              widths: '300, 420, 600, 800',
-              alt: section.settings.dial_image_day.alt
-            | default: 'Chronobiology dial day'
-          }}
-        {%- endif -%}
-
-        {%- if section.settings.dial_image_night != blank -%}
-          {{
-            section.settings.dial_image_night
-            | image_url: width: 800
-            | image_tag:
-              loading: 'lazy',
-              class: 'chronobiology-clock__image chronobiology-clock__image--night',
-              widths: '300, 420, 600, 800',
-              alt: section.settings.dial_image_night.alt
-            | default: 'Chronobiology dial night'
-          }}
-        {%- endif -%}
-      </div>
-
-      <!-- Night Callout (22:00) -->
-      <div class="chronobiology-clock__card chronobiology-clock__card--night">
-        {%- if section.settings.night_badge != blank -%}
-          <span class="chronobiology-clock__badge">
-            {{ section.settings.night_badge | escape }}
-          </span>
-        {%- endif -%}
-        {%- if section.settings.night_title != blank -%}
-          <h4 class="chronobiology-clock__card-title">
-            {{ section.settings.night_title | escape }}
-          </h4>
-        {%- endif -%}
-        {%- if section.settings.night_text != blank -%}
-          <p class="chronobiology-clock__small-text">
-            {{ section.settings.night_text | escape }}
-          </p>
-        {%- endif -%}
-      </div>
+      {%- if section.settings.description != blank -%}
+        <p class="lede">{{ section.settings.description }}</p>
+      {%- endif -%}
     </div>
 
-    <!-- Real-Time Status Under Dial -->
-    {%- if section.settings.status_eyebrow != blank or section.settings.status_text != blank -%}
-      <div class="chronobiology-clock__status">
-        {%- if section.settings.status_eyebrow != blank -%}
-          <span class="chronobiology-clock__badge">
-            {{ section.settings.status_eyebrow | escape }}
+    <div class="stage">
+      <div class="dial">
+        <div class="artwork" aria-hidden="true">
+          <img class="blue-orb" src="{{ 'orb-blue.webp' | asset_url }}" alt="" width="440" height="440" loading="lazy">
+          <img
+            class="white-orb"
+            src="{{ 'orb-white.webp' | asset_url }}"
+            alt=""
+            width="440"
+            height="440"
+            loading="lazy"
+          >
+          <div class="arcs">
+            <img class="arc-asleep" src="{{ 'arc-asleep.svg' | asset_url }}" alt="" width="273" height="214">
+            <img class="arc-awake" src="{{ 'arc-awake.svg' | asset_url }}" alt="" width="361" height="340">
+          </div>
+          <img class="ticks" src="{{ 'hour-ticks.svg' | asset_url }}" alt="" width="420" height="420">
+          <img class="sun" src="{{ 'sun.svg' | asset_url }}" alt="" width="32" height="32">
+          <img class="moon" src="{{ 'moon.svg' | asset_url }}" alt="" width="32" height="32">
+          <img class="leader leader-morning" src="{{ 'leader.svg' | asset_url }}" alt="" width="58" height="1">
+          <img class="leader leader-evening" src="{{ 'leader.svg' | asset_url }}" alt="" width="58" height="1">
+          <span class="pin pin-morning">
+            <img src="{{ 'pin-morning.svg' | asset_url }}" alt="" width="30" height="30">
+            <img src="{{ 'pin-dot.svg' | asset_url }}" alt="" width="14" height="14">
           </span>
-        {%- endif -%}
-        {%- if section.settings.status_text != blank -%}
-          <p class="chronobiology-clock__small-text">
-            {{ section.settings.status_text | escape }}
-          </p>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+          <span class="pin pin-evening">
+            <img src="{{ 'pin-evening.svg' | asset_url }}" alt="" width="30" height="30">
+            <img src="{{ 'pin-dot.svg' | asset_url }}" alt="" width="14" height="14">
+          </span>
+          <span class="shift-label shift-awake">Awake</span>
+          <span class="shift-label shift-asleep">Asleep</span>
+        </div>
 
-    <!-- Bottom Footer CTA -->
+        <div class="orbit" aria-hidden="true"></div>
+
+        <div
+          class="knob"
+          id="clock-knob-{{ section.id }}"
+          tabindex="0"
+          role="slider"
+          aria-label="Explore your mouth's 24-hour clock"
+          aria-describedby="clock-help-{{ section.id }}"
+          aria-valuemin="0"
+          aria-valuemax="1439"
+          aria-valuenow="0"
+          aria-valuetext="Loading current local time"
+        >
+          <img src="{{ 'drag.svg' | asset_url }}" alt="" draggable="false" width="24" height="24">
+        </div>
+      </div>
+
+      <section class="callout callout-morning" aria-labelledby="morning-heading-{{ section.id }}">
+        {%- if section.settings.morning_badge != blank -%}
+          <p class="callout-badge">{{ section.settings.morning_badge | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.morning_title != blank -%}
+          <h3 id="morning-heading-{{ section.id }}">{{ section.settings.morning_title | escape }}</h3>
+        {%- endif -%}
+        {%- if section.settings.morning_text != blank -%}
+          <p class="description">{{ section.settings.morning_text | escape }}</p>
+        {%- endif -%}
+      </section>
+
+      <section class="callout callout-evening" aria-labelledby="evening-heading-{{ section.id }}">
+        {%- if section.settings.night_badge != blank -%}
+          <p class="callout-badge">{{ section.settings.night_badge | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.night_title != blank -%}
+          <h3 id="evening-heading-{{ section.id }}">{{ section.settings.night_title | escape }}</h3>
+        {%- endif -%}
+        {%- if section.settings.night_text != blank -%}
+          <p class="description">{{ section.settings.night_text | escape }}</p>
+        {%- endif -%}
+      </section>
+    </div>
+
+    <div class="readout" data-mode="live">
+      <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
+        <img src="{{ 'drag.svg' | asset_url }}" alt="" width="24" height="24">
+        <span>{{ section.settings.hint_label | escape }}</span>
+      </button>
+      <p class="time-line">
+        <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
+        <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span>
+      </p>
+      <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
+    </div>
+
     {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}
       <div class="chronobiology-clock__footer">
-        <p class="chronobiology-clock__footer-text">
-          {%- if section.settings.footer_text != blank -%}
-            <span>{{ section.settings.footer_text | escape }}</span>
-          {%- endif -%}
-          {%- if section.settings.footer_link_text != blank -%}
-            <a
-              href="{{ section.settings.footer_link | default: '#' }}"
-              class="chronobiology-clock__footer-link"
-            >
-              {{ section.settings.footer_link_text | escape }}
-            </a>
-          {%- endif -%}
-        </p>
+        {%- if section.settings.footer_text != blank -%}
+          <span>{{ section.settings.footer_text | escape }} </span>
+        {%- endif -%}
+        {%- if section.settings.footer_link_text != blank -%}
+          <a
+            class="science"
+            href="{{ section.settings.footer_link | default: 'https://karmicare.com/en/why-karmicare' }}"
+            target="_blank"
+            rel="noopener"
+          >
+            {{- section.settings.footer_link_text | escape -}}
+            <img src="{{ 'arrow-right.svg' | asset_url }}" alt="" width="16" height="16">
+          </a>
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>
-</section>
+</div>
 
 {% schema %}
 {
@@ -223,13 +241,13 @@
     },
     {
       "type": "header",
-      "content": "Morning Shift (Left Card)"
+      "content": "Morning Shift (Left Callout)"
     },
     {
       "type": "text",
       "id": "morning_badge",
       "label": "Morning Time Badge",
-      "default": "06:40 · Neisseria peaks"
+      "default": "≈ 06:40 · Neisseria peaks"
     },
     {
       "type": "text",
@@ -245,13 +263,13 @@
     },
     {
       "type": "header",
-      "content": "Night Shift (Right Card)"
+      "content": "Night Shift (Right Callout)"
     },
     {
       "type": "text",
       "id": "night_badge",
       "label": "Night Time Badge",
-      "default": "22:00 · Fusobacterium peaks"
+      "default": "≈ 22:00 · Fusobacterium peaks"
     },
     {
       "type": "text",
@@ -266,20 +284,10 @@
       "default": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00."
     },
     {
-      "type": "header",
-      "content": "Live Rhythm Status (Center Bottom)"
-    },
-    {
       "type": "text",
-      "id": "status_eyebrow",
-      "label": "Status Eyebrow",
-      "default": "09:06 · YOUR MOUTH RIGHT NOW:"
-    },
-    {
-      "type": "textarea",
-      "id": "status_text",
-      "label": "Status Text",
-      "default": "Breakfast and coffee pulled your pH down within minutes. Saliva needs about half an hour to bring it back."
+      "id": "hint_label",
+      "label": "Explore Button Label",
+      "default": "EXPLORE YOUR DAILY RHYTHM"
     },
     {
       "type": "header",
@@ -295,7 +303,7 @@
       "type": "text",
       "id": "footer_link_text",
       "label": "Link Label",
-      "default": "Read the science →"
+      "default": "Read the science"
     },
     {
       "type": "url",
@@ -306,21 +314,7 @@
       "type": "color",
       "id": "link_color",
       "label": "Link Color",
-      "default": "#4F8EFF"
-    },
-    {
-      "type": "header",
-      "content": "Dial Images & Markers"
-    },
-    {
-      "type": "image_picker",
-      "id": "dial_image_day",
-      "label": "Dial Image (Day Mode)"
-    },
-    {
-      "type": "image_picker",
-      "id": "dial_image_night",
-      "label": "Dial Image (Night Mode)"
+      "default": "#7FB9FF"
     },
     {
       "type": "header",
@@ -356,7 +350,7 @@
       "type": "text",
       "id": "bg_gradient_night",
       "label": "Background Gradient (Night)",
-      "default": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)"
+      "default": "linear-gradient(180deg, #101526 0%, #1C2A45 100%)"
     },
     {
       "type": "color",

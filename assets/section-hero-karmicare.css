@@ -28,14 +28,12 @@
 .hero-karmicare__heading {
   margin: 0;
   text-align: center;
-  letter-spacing: -0.02em;
   word-break: break-word;
 }
 
 .hero-karmicare__heading strong,
 .hero-karmicare__heading b {
   font-weight: inherit;
-  opacity: 0.2;
 }
 
 @media screen and (min-width: 750px) {
@@ -55,7 +53,6 @@
 
 .hero-karmicare__text {
   font-family: var(--font-body-family);
-  line-height: 1.6;
   margin: 0;
 }
 
@@ -76,13 +73,13 @@
   justify-content: center;
   padding: 1.35rem 2.6rem;
   border-radius: var(--primary-border-radius);
-  font-weight: var(--font-heading-weight);
+  font-weight: var(--font-500-weight);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity .2s ease, transform .2s ease;
   box-sizing: border-box;
-  line-height: 1.2;
+  line-height: normal;
   border: 1px solid transparent;
 }
 

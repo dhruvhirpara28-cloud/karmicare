@@ -13,12 +13,13 @@
       {
         "type": "image_picker",
         "id": "logo",
-        "label": "Logo Night"
+        "label": "t:settings_schema.logo.settings.logo_image.label"
       },
       {
-        "type": "image_picker",
-        "id": "logo_day",
-        "label": "Logo Day"
+        "type": "html",
+        "id": "logo_svg",
+        "label": "Logo SVG Code",
+        "info": "Paste custom <svg>...</svg> code here. It automatically switches color between Day and Night modes."
       },
       {
         "type": "range",
@@ -198,6 +199,16 @@
       {
         "type": "header",
         "content": "Custom Font Sizes"
+      },
+      {
+        "type": "range",
+        "id": "body_small_font_size_all",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 12,
+        "unit": "px",
+        "label": "Small Font Size"
       },
       {
         "type": "range",
