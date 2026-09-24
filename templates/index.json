@@ -160,7 +160,7 @@
         "bg_color_day": "#fffbf6",
         "bg_gradient_day": "",
         "border_color_day": "",
-        "divider_color_day": "#191F38",
+        "divider_color_day": "#191f38",
         "heading_color_day": "",
         "text_color_day": "",
         "tagline_color_day": "",
@@ -207,31 +207,58 @@
         "padding_bottom_mobile": 44
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "featured_product_J9iyPH": {
+      "type": "featured-product",
+      "blocks": {
+        "title_p9eeg4": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_dKxTyN": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_wtQWV7": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "buy_buttons_6z7XB4": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "show_add_to_cart": false,
+            "show_custom_button": true,
+            "custom_button_text": "Begin Now",
+            "redirect_to_checkout": false
+          }
+        }
+      },
+      "block_order": [
+        "title_p9eeg4",
+        "price_dKxTyN",
+        "variant_picker_wtQWV7",
+        "buy_buttons_6z7XB4"
+      ],
+      "name": "t:sections.featured-product.presets.name",
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
+        "product": "karmicare-biorhythmic-oral-care-system",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "remove_first_media_bg": false,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }
@@ -240,6 +267,6 @@
     "hero_karmicare_XKKLDK",
     "stat_strip_karmicare",
     "chronobiology_clock_karmicare",
-    "featured_collection"
+    "featured_product_J9iyPH"
   ]
 }
