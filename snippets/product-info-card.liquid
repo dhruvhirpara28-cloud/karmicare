@@ -24,7 +24,7 @@
 
   #ProductInfoCard-{{ block.id }} .product-info-card__header {
     font-size: calc({{ block.settings.font_size_mobile }}px * 0.85);
-    font-weight: 700;
+    font-weight: var(--font-700-weight);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     line-height: 1.2;
@@ -46,7 +46,7 @@
 
   #ProductInfoCard-{{ block.id }} .product-info-card__footer {
     font-size: {{ block.settings.font_size_mobile }}px;
-    font-weight: 700;
+    font-weight: var(--font-700-weight);
     line-height: 1.4;
     color: {{ block.settings.footer_color }};
   }

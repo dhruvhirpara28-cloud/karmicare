@@ -10,7 +10,7 @@ body.night-mode .kc-professional-testimonials {
 
 .kc-testimonials-heading {
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   margin-bottom: 2.4rem;
   line-height: 1.2;
   color: var(--heading-color);
@@ -97,7 +97,7 @@ body.night-mode .kc-professional-testimonials {
 
 .kc-testimonial-card-name {
   font-size: var(--font-body-small-size);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   color: var(--white);
 }
 

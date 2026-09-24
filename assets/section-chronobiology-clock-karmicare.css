@@ -32,7 +32,12 @@
   color: var(--ink);
   font-family: var(--font-body-family);
   overflow: clip;
-  transition: color var(--theme-duration) var(--theme-ease), background var(--theme-duration) var(--theme-ease);
+}
+
+/* ── Chronobiology 24-Hour Clock Section ── */
+.chronobiology-clock {
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .chronobiology-clock[data-theme="night"],
@@ -79,7 +84,6 @@ body.night-mode .chronobiology-clock {
 
 /* ── Main Clock Layout & Header ── */
 .chronobiology-clock .heading {
-  padding: 0 24px;
   text-align: center;
 }
 
@@ -92,17 +96,14 @@ body.night-mode .chronobiology-clock {
 }
 
 .chronobiology-clock .clock-heading {
-  font-size: 44px;
-  line-height: 44px;
-  letter-spacing: -1.5px;
-  font-weight: 500;
-  margin: 24px auto;
+  max-width: 360px;
+  margin: 15px auto 20px;
 }
 
 .chronobiology-clock .lede {
-  color: var(--body);
-  font-size: 20px;
-  line-height: 28px;
+  max-width: 436px;
+  margin: 0 auto;
+  opacity: 0.7;
 }
 
 /* ── Interactive Stage & Dial Artwork ── */
@@ -334,8 +335,14 @@ body.night-mode .chronobiology-clock .leader {
 .chronobiology-clock .callout {
   position: absolute;
   width: 248px;
-  font-size: 15px;
-  line-height: 20px;
+}
+
+.chronobiology-clock h4 {
+  margin: 3px 0;
+}
+
+.chronobiology-clock .description {
+  opacity: 0.7;
 }
 
 .chronobiology-clock .callout-morning {
@@ -349,42 +356,27 @@ body.night-mode .chronobiology-clock .leader {
   top: calc(456.5px - 24px - 16px);
 }
 
-.chronobiology-clock .callout-badge {
-  color: var(--body);
-  font-size: 14px;
-}
 
-.chronobiology-clock .callout h2,
-.chronobiology-clock .callout h3 {
-  margin: 4px 0;
-  font-size: 28px;
-  line-height: 32px;
-  letter-spacing: -1px;
-  font-weight: 500;
-}
 
 /* ── Dynamic Biological Readout ── */
 .chronobiology-clock .readout {
-  width: min(604px, 100%);
-  padding: 0 24px;
   margin: 0 auto;
   text-align: center;
 }
 
 .chronobiology-clock .time-line {
-  font: 500 14px/20px var(--font-heading-family);
-  letter-spacing: 1.25px;
+  font-size: var(--font-body-small-size-desktop);
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
+  font-weight: var(--font-500-weight);
 }
 
 .chronobiology-clock .state-copy {
-  color: var(--body);
-  font-size: 15px;
-  line-height: 21px;
   margin: 6px auto 0;
-  max-width: 56ch;
-  min-height: 63px;
+  max-width: 380px;
+  font-size: var(--font-body-small-size-desktop);
+  opacity: 0.7;
 }
 
 .chronobiology-clock .hint {
@@ -392,15 +384,13 @@ body.night-mode .chronobiology-clock .leader {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
   max-width: 100%;
   margin: 0 0 16px;
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: 24px;
+  padding: 9px 16px;
   background: transparent;
-  font: 500 12px/12px var(--font-body-family);
-  letter-spacing: 1.1px;
+  border: 1px solid var(--border);
+  border-radius: var(--secondary-border-radius);
+  font-size: var(--kc-responsive-label-sm-text-size);
 }
 
 .chronobiology-clock .hint img {
@@ -429,24 +419,13 @@ body.night-mode .chronobiology-clock .science img {
 }
 
 /* ── Footer / Science CTA ── */
-.chronobiology-clock__footer {
-  padding: 64px 24px 0;
-  text-align: center;
-  font-size: 15px;
-  line-height: 24px;
-}
-
 .chronobiology-clock .science {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-weight: var(--fw-bold);
+  font-weight: var(--font-600-weight);
 }
 
-.chronobiology-clock .science img {
-  width: 16px;
-  height: 16px;
-}
 
 /* ── Transitions ── */
 .chronobiology-clock,
@@ -482,7 +461,7 @@ body.night-mode .chronobiology-clock .science img {
 
   .chronobiology-clock .heading {
     order: 0;
-    padding: 0;
+    margin-bottom: 30px;
   }
 
   .chronobiology-clock .stage {
@@ -499,7 +478,7 @@ body.night-mode .chronobiology-clock .science img {
 
   .chronobiology-clock .readout {
     order: 2;
-    padding: 0;
+    margin-top: 30px;
   }
 
   .chronobiology-clock .leader {
@@ -525,30 +504,11 @@ body.night-mode .chronobiology-clock .science img {
 
   .chronobiology-clock__footer {
     order: 5;
-    padding: 24px 0 0;
   }
 }
 
 /* ── Mobile (max-width: 600px) ── */
 @media (max-width: 600px) {
-  .chronobiology-clock .heading {
-    width: 100%;
-  }
-
-
-  .chronobiology-clock .clock-heading {
-    font-size: clamp(30px, 8.7vw, 36px);
-    line-height: 1.06;
-    letter-spacing: -1px;
-    margin: 16px 0;
-  }
-
-  .chronobiology-clock .lede {
-    max-width: 36ch;
-    margin: auto;
-    font-size: 16px;
-    line-height: 22px;
-  }
 
   .chronobiology-clock .lede br {
     display: none;
@@ -560,35 +520,10 @@ body.night-mode .chronobiology-clock .science img {
   }
 
   .chronobiology-clock .knob {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
   }
 
-  .chronobiology-clock .shift-label {
-    font-size: 10px;
-    line-height: 14px;
-    letter-spacing: .6px;
-    padding: 3px 6px;
-  }
-
-  .chronobiology-clock .state-copy {
-    max-width: 36ch;
-    min-height: 84px;
-  }
-
-  .chronobiology-clock .hint {
-    margin-bottom: 12px;
-    font-size: 10px;
-    line-height: 10px;
-    letter-spacing: .7px;
-    gap: 6px;
-  }
-
-  .chronobiology-clock .time-line {
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: .8px;
-  }
 
   .chronobiology-clock .callout {
     position: relative;
@@ -623,11 +558,6 @@ body.night-mode .chronobiology-clock .science img {
     background: var(--surface);
   }
 
-  .chronobiology-clock .callout>p:first-child {
-    color: var(--body);
-    font-size: 13px;
-    line-height: 18px;
-  }
 
   .chronobiology-clock .callout h2,
   .chronobiology-clock .callout h3 {
@@ -637,28 +567,12 @@ body.night-mode .chronobiology-clock .science img {
     letter-spacing: -.7px;
   }
 
-  .chronobiology-clock .callout .description {
-    font-size: 16px;
-    line-height: 22px;
-  }
-
   .chronobiology-clock__footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     width: 100%;
-    margin-top: 28px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    font-size: 14px;
-    line-height: 20px;
-  }
-}
-
-@media (max-width: 360px) {
-  .chronobiology-clock .state-copy {
-    min-height: 105px;
   }
 }
 
@@ -673,12 +587,7 @@ body.night-mode .chronobiology-clock .science img {
   }
 }
 
-@media (forced-colors: active) {
-  .chronobiology-clock .knob {
-    border: 3px solid ButtonText;
-  }
-
-  .chronobiology-clock .shift-label {
-    forced-color-adjust: none;
-  }
+.chronobiology-clock__footer {
+  text-align: center;
+  margin-top: 50px;
 }

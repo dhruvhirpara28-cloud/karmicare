@@ -204,7 +204,7 @@ product-info {
   overflow: hidden;
   isolation: isolate;
   border-radius: var(--tertiary-border-radius);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   text-transform: capitalize;
   display: inline-block;
 }
@@ -324,7 +324,7 @@ a.product__text {
 }
 
 .product__description-title {
-  font-weight: 600;
+  font-weight: var(--font-600-weight);
 }
 
 .product--no-media .product__title,
@@ -1721,7 +1721,7 @@ a.product__text {
   color: var(--text);
   border: 1px solid var(--hairline);
   border-radius: 10px;
-  font-weight: 400;
+  font-weight: var(--font-400-weight);
   letter-spacing: 0.005em;
   text-transform: none;
   white-space: normal;

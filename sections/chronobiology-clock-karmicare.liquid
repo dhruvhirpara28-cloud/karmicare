@@ -142,7 +142,7 @@
           <p class="callout-badge">{{ section.settings.morning_badge | escape }}</p>
         {%- endif -%}
         {%- if section.settings.morning_title != blank -%}
-          <h3 id="morning-heading-{{ section.id }}">{{ section.settings.morning_title | escape }}</h3>
+          <h4 id="morning-heading-{{ section.id }}">{{ section.settings.morning_title | escape }}</h4>
         {%- endif -%}
         {%- if section.settings.morning_text != blank -%}
           <p class="description">{{ section.settings.morning_text | escape }}</p>
@@ -154,7 +154,7 @@
           <p class="callout-badge">{{ section.settings.night_badge | escape }}</p>
         {%- endif -%}
         {%- if section.settings.night_title != blank -%}
-          <h3 id="evening-heading-{{ section.id }}">{{ section.settings.night_title | escape }}</h3>
+          <h4 id="evening-heading-{{ section.id }}">{{ section.settings.night_title | escape }}</h4>
         {%- endif -%}
         {%- if section.settings.night_text != blank -%}
           <p class="description">{{ section.settings.night_text | escape }}</p>
@@ -187,7 +187,9 @@
             rel="noopener"
           >
             {{- section.settings.footer_link_text | escape -}}
-            <img src="{{ 'arrow-right.svg' | asset_url }}" alt="" width="16" height="16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M0.75 5.41667L10.0833 5.41667M5.41667 10.0833L10.0833 5.41667L5.41667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
         {%- endif -%}
       </div>

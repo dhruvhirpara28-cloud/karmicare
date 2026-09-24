@@ -3,7 +3,7 @@
    ============================================================ */
 
 .kc-faq-heading {
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   color: var(--text);
   margin-bottom: 2rem;
 }
@@ -107,7 +107,7 @@
 }
 
 .bf-diff-card .diff-title {
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   font-size: var(--fs-label);
   letter-spacing: 0.01em;
   color: var(--accent-deep);
@@ -162,7 +162,7 @@
 }
 
 .bf-foundation-label {
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--accent-deep);
@@ -217,7 +217,7 @@
   list-style: none;
   padding: 4px 0 2px;
   font-family: var(--grot);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   font-size: var(--fs-caption);
   line-height: var(--lh-label-tight);
   letter-spacing: 0.04em;
@@ -244,7 +244,7 @@
 
 .bf-inci-block .inci-label {
   display: inline-block;
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   font-size: var(--fs-label);
   letter-spacing: 0.01em;
   color: var(--text);
@@ -264,7 +264,7 @@
 .acc-tags-label {
   font-family: var(--grot);
   font-size: var(--fs-caption);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
@@ -297,7 +297,7 @@
 
 .acc-tag.is-allergen {
   color: var(--muted);
-  font-weight: 400;
+  font-weight: var(--font-400-weight);
 }
 
 .acc-tag.has-tip {
@@ -398,7 +398,7 @@
   color: var(--text);
   letter-spacing: -0.1px;
   margin-bottom: 4px;
-  font-weight: 600;
+  font-weight: var(--font-600-weight);
 }
 
 .bf-step .desc {
@@ -432,7 +432,7 @@
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--muted);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
 }
 
 .rda-tbl td {
@@ -441,7 +441,7 @@
 
 .rda-tbl td b {
   color: var(--text);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
 }
 
 .rda-tbl .num {

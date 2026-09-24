@@ -108,6 +108,35 @@
     ]
   },
   {
+    "name": "Fonts weight",
+    "settings": [
+      {
+        "type": "text",
+        "id": "font_400_weight",
+        "label": "Font Weight 400",
+        "default": "400"
+      },
+      {
+        "type": "text",
+        "id": "font_500_weight",
+        "label": "Font Weight 500",
+        "default": "500"
+      },
+      {
+        "type": "text",
+        "id": "font_600_weight",
+        "label": "Font Weight 600",
+        "default": "600"
+      },
+      {
+        "type": "text",
+        "id": "font_700_weight",
+        "label": "Font Weight 700",
+        "default": "700"
+      }
+    ]
+  },
+  {
     "name": "Fonts Brand Guide",
     "settings": [
       {
@@ -1931,12 +1960,6 @@
         "info": "Body text color in day mode."
       },
       {
-        "type": "image_picker",
-        "id": "day_mode_bg_image",
-        "label": "Background image (Day)",
-        "info": "Optional full-page background image for day mode. Leave empty to use solid color only."
-      },
-      {
         "type": "header",
         "content": "🌙 Night Mode"
       },
@@ -1960,12 +1983,6 @@
         "label": "Text color (Night)",
         "default": "#e5e5e5",
         "info": "Body text color in night mode."
-      },
-      {
-        "type": "image_picker",
-        "id": "night_mode_bg_image",
-        "label": "Background image (Night)",
-        "info": "Optional full-page background image for night mode. Leave empty to use solid color only."
       }
     ]
   },

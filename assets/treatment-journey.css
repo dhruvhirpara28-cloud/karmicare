@@ -38,13 +38,13 @@
 .kc-journey-subtitle {
   margin-left: 0.6rem;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: var(--font-400-weight);
   opacity: 0.6;
 }
 
 .kc-journey-badge {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: var(--font-600-weight);
   padding: 0.6rem 1.2rem;
   border-radius: 20px;
   text-transform: capitalize;
@@ -117,7 +117,7 @@ body.night-mode .kc-journey-item-icon svg {
 }
 
 .kc-journey-item-title {
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
 }
 
 /* Lock Icon Styling */
@@ -210,7 +210,7 @@ body.night-mode .kc-journey-item-icon svg {
   background: transparent;
   border: none;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: var(--font-600-weight);
   color: var(--read-more-color);
   cursor: pointer;
   display: flex;

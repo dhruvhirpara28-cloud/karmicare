@@ -19,7 +19,6 @@
 {%- style -%}
   header-drawer {
     justify-self: start;
-    margin-left: -1.2rem;
   }
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header__heading-logo-wrapper { width: 75%; }
@@ -78,7 +77,7 @@
       align-items: center;
     }
     #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item {
-      font-weight: 600;
+      font-weight: var(--font-500-weight);
       padding: 0.6rem 0.4rem;
       text-decoration: none;
       transition: opacity 0.2s ease;
@@ -99,32 +98,118 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 1.3rem 1.7rem;
+    padding: 1rem 1.5rem;
     border-radius: var(--primary-border-radius);
-    font-weight: 600;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
     cursor: pointer;
     white-space: nowrap;
-    line-height: 1.2;
+    line-height: normal;
     transition: opacity 0.2s ease;
     font-size: var(--font-body-small-size-desktop);
   }
   #shopify-section-{{ section.id }} .header__cta-btn:hover {
     opacity: 0.88;
   }
-
   @media screen and (max-width: 989px) {
-    #shopify-section-{{ section.id }} .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1rem;
-      margin: 0.8rem 1rem;
+  /* Hide the desktop inline menu on mobile */
+  #shopify-section-{{ section.id }} .header__inline-menu {
+    display: none !important;
+  }
+  /* When menu is open, remove bottom corners of header to make a seamless box with the drawer */
+  #shopify-section-{{ section.id }}:has(details[open]) .header,
+  #shopify-section-{{ section.id }}:has(details[open].menu-opening) .header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .header__cta-btn{margin-right:6px;}
+  #shopify-section-{{ section.id }} .header {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem;
+    margin: 1.2rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  /* Act as the white background for the header so it paints over the dark overlay */
+  #shopify-section-{{ section.id }} .header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--primary-border-radius);
+    z-index: -1;
+  }
+
+  /* When menu is open, remove bottom corners of header background */
+  #shopify-section-{{ section.id }}:has(details[open]) .header::before,
+  #shopify-section-{{ section.id }}:has(details[open].menu-opening) .header::before {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+    #shopify-section-{{ section.id }} .header__heading {
+      order: 1;
+      margin-right: auto;
     }
-    #shopify-section-{{ section.id }} .header__cta-btn {
-      padding: 0.7rem 1.4rem;
+    #shopify-section-{{ section.id }} .header__icons {
+      order: 2;
+    }
+    #shopify-section-{{ section.id }} header-drawer {
+      order: 3;
+    }
+
+
+
+        /* Seamless absolute drawer */
+          #shopify-section-{{ section.id }} .menu-drawer {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} details[open] .menu-drawer,
+    #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      height: auto;
+      max-height: none;
+      border-radius: 0 0 var(--primary-border-radius) var(--primary-border-radius);
+      border: none;
+      margin: 0;
+      padding: 1.6rem 0.4rem 1.6rem 0.4rem;
+      transform: none;
+    }
+
+    /* Figma Exact 16px Gap for Menu Links */
+    #shopify-section-{{ section.id }} .menu-drawer__navigation {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem; /* Exactly 16px gap from Figma */
+    }
+
+    /* Text alignment fix */
+
+
+    /* Hide utility links completely to match Figma */
+     .menu-drawer__utility-links {
+      display: none;
+    }
+
+    /* Keep BEGIN NOW and Hamburger button together */
+
+    #shopify-section-{{ section.id }} .header__icon--menu {
+      padding: 0;
+      width: 4rem;
+      height: 4rem;
+      background-color: #C4DFFF;
+      border-radius: var(--primary-border-radius);
+      border: none;
     }
   }
 
@@ -144,7 +229,9 @@
 
   /* ── DAY MODE COLORS (from section schema settings) ── */
   {%- if section.settings.bg_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header {
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body.day-mode #shopify-section-{{ section.id }} .header::before,
+    body.day-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
       background-color: {{ section.settings.bg_color_day }};
     }
   {%- endif -%}
@@ -175,7 +262,9 @@
 
   /* ── NIGHT MODE COLORS (from section schema settings) ── */
   {%- if section.settings.bg_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .header {
+    body.night-mode #shopify-section-{{ section.id }} .header,
+    body.night-mode #shopify-section-{{ section.id }} .header::before,
+    body.night-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
       background-color: {{ section.settings.bg_color_night }};
     }
   {%- endif -%}
@@ -203,7 +292,13 @@
       color: {{ section.settings.btn_text_night }};
     }
   {%- endif -%}
-
+  {% if section.settings.bg_color_night !=blank %}
+    body.night-mode .header__icon,
+    body.night-mode .header__icon svg, body.night-mode .header__icon path {
+      color: {{ section.settings.bg_color_night }};
+      fill: {{ section.settings.bg_color_night }};
+    }
+  {%- endif -%}
   .header__heading-logo-wrapper--svg {
     display: inline-flex;
     align-items: center;
