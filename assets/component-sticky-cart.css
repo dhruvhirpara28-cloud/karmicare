@@ -136,7 +136,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   color: #3f6497;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .sc-plan-price {
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   flex-shrink: 0;
   color: var(--kc-night-heading-color);
   font-size: var(--font-body-size-desktop, 16px);
@@ -155,7 +155,7 @@
 .sc-plan-interval {
   color: rgba(255, 255, 255, 0.5);
   font-size: 11px;
-  font-weight: 400;
+  font-weight: var(--font-400-weight);
   flex-shrink: 0;
 }
 
@@ -264,7 +264,7 @@
 }
 
 .sc-dd-name {
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   color: rgb(var(--color-foreground));
   white-space: nowrap;
   overflow: hidden;
@@ -277,7 +277,7 @@
 
 .sc-dd-sub {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: var(--font-400-weight);
 }
 
 /* ── Price group ── */
@@ -291,7 +291,7 @@
 }
 
 .sc-dd-price {
-  font-weight: 600;
+  font-weight: var(--font-600-weight);
   line-height: 1;
   color: var(--accent);
 }
@@ -373,7 +373,7 @@
 .sc-plan-subrow {
   display: block;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: var(--font-500-weight);
   margin-top: 2px;
   white-space: normal;
   line-height: 1.3;
@@ -392,7 +392,7 @@
 .sc-plan-badge,
 .sc-dd-badge {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   background: var(--surface-2);
   padding: 3px 6px;
   border-radius: var(--secondary-border-radius);

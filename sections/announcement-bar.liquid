@@ -73,6 +73,22 @@
       }
     {%- endif -%}
   {%- endfor -%}
+
+  @media screen and (max-width: 749px) {
+    #AnnouncementBar-{{ section.id }} .announcement-bar {
+      overflow: hidden;
+      display: block;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar__message {
+      white-space: nowrap;
+      animation: marqueeMobile 10s linear infinite;
+      display: inline-block;
+    }
+    @keyframes marqueeMobile {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+  }
 {%- endstyle -%}
 
 <div

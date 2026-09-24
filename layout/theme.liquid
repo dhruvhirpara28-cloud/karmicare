@@ -165,7 +165,11 @@
         --km-body-2xl: 24px;
         --kc-responsive-caption-letter-spacing:1.25;
 
-        --font-500-weight:500;
+        --font-400-weight:{{ settings.font_400_weight }};
+        --font-500-weight:{{ settings.font_500_weight }};
+        --font-600-weight:{{ settings.font_600_weight }};
+        --font-700-weight:{{ settings.font_700_weight }};
+
         --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
@@ -187,11 +191,11 @@
 
         --font-h1-size-mobile: calc(var(--font-heading-scale) * {{ settings.h1_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h1-size-desktop: calc(var(--font-heading-scale) * {{ settings.h1_font_size_desktop | divided_by: 10.0 }}rem);
-        --kc-responsive-h1-letter-spacing:-2px;
+        --kc-responsive-h1-letter-spacing:-1.25px;
 
         --font-h2-size-mobile: calc(var(--font-heading-scale) * {{ settings.h2_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h2-size-desktop: calc(var(--font-heading-scale) * {{ settings.h2_font_size_desktop | divided_by: 10.0 }}rem);
-        --kc-responsive-h2-letter-spacing:-1.5px;
+        --kc-responsive-h2-letter-spacing:-1px;
 
         --font-h3-size-mobile: calc(var(--font-heading-scale) * {{ settings.h3_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h3-size-desktop: calc(var(--font-heading-scale) * {{ settings.h3_font_size_desktop | divided_by: 10.0 }}rem);
@@ -199,6 +203,7 @@
 
         --font-h4-size-mobile: calc(var(--font-heading-scale) * {{ settings.h4_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h4-size-desktop: calc(var(--font-heading-scale) * {{ settings.h4_font_size_desktop | divided_by: 10.0 }}rem);
+        --kc-responsive-h4-letter-spacing:-1px;
 
         --font-h5-size-mobile: calc(var(--font-heading-scale) * {{ settings.h5_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h5-size-desktop: calc(var(--font-heading-scale) * {{ settings.h5_font_size_desktop | divided_by: 10.0 }}rem);
@@ -340,8 +345,7 @@
         min-height: 100%;
         margin: 0;
         font-size: var(--font-body-size-mobile);
-        letter-spacing: 0.06rem;
-        line-height: calc(1 + 0.8 / var(--font-body-scale));
+        line-height: calc(1 + 0.1 / var(--font-body-scale));
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
@@ -371,33 +375,25 @@
     <style>
       :root {
         /* KarmaCare custom day/night hex variables */
-        --kc-day-bg-color:        {{ settings.day_mode_bg_color   | default: '#ffffff' }};
-        --kc-day-heading-color:   {{ settings.day_mode_heading_color | default: '#121212' }};
-        --kc-day-text-color:      {{ settings.day_mode_text_color  | default: '#121212' }};
-        --kc-night-bg-color:      {{ settings.night_mode_bg_color  | default: '#0f0f0f' }};
-        --kc-night-heading-color: {{ settings.night_mode_heading_color | default: '#ffffff' }};
-        --kc-night-text-color:    {{ settings.night_mode_text_color | default: '#e5e5e5' }};
+        --kc-day-bg-color:        {{ settings.day_mode_bg_color }};
+        --kc-day-bg-r:            {{ settings.day_mode_bg_color.red | default: 255 }};
+        --kc-day-bg-g:            {{ settings.day_mode_bg_color.green | default: 255 }};
+        --kc-day-bg-b:            {{ settings.day_mode_bg_color.blue | default: 255 }};
+        --kc-day-heading-color:   {{ settings.day_mode_heading_color}};
+        --kc-day-text-color:      {{ settings.day_mode_text_color}};
+        --kc-day-text-r:          {{ settings.day_mode_text_color.red | default: 18 }};
+        --kc-day-text-g:          {{ settings.day_mode_text_color.green | default: 18 }};
+        --kc-day-text-b:          {{ settings.day_mode_text_color.blue | default: 18 }};
 
-        /* RGB components for use in css `rgb(var(--kc-day-bg-r), ...)` */
-        --kc-day-bg-r:    {{ settings.day_mode_bg_color.red   | default: 255 }};
-        --kc-day-bg-g:    {{ settings.day_mode_bg_color.green | default: 255 }};
-        --kc-day-bg-b:    {{ settings.day_mode_bg_color.blue  | default: 255 }};
-        --kc-day-text-r:  {{ settings.day_mode_text_color.red   | default: 18 }};
-        --kc-day-text-g:  {{ settings.day_mode_text_color.green | default: 18 }};
-        --kc-day-text-b:  {{ settings.day_mode_text_color.blue  | default: 18 }};
-        --kc-night-bg-r:    {{ settings.night_mode_bg_color.red   | default: 15  }};
-        --kc-night-bg-g:    {{ settings.night_mode_bg_color.green | default: 15  }};
-        --kc-night-bg-b:    {{ settings.night_mode_bg_color.blue  | default: 15  }};
-        --kc-night-text-r:  {{ settings.night_mode_text_color.red   | default: 229 }};
-        --kc-night-text-g:  {{ settings.night_mode_text_color.green | default: 229 }};
-        --kc-night-text-b:  {{ settings.night_mode_text_color.blue  | default: 229 }};
-
-        {%- if settings.day_mode_bg_image != blank -%}
-        --kc-day-bg-image: url('{{ settings.day_mode_bg_image | image_url: width: 2000 }}');
-        {%- endif -%}
-        {%- if settings.night_mode_bg_image != blank -%}
-        --kc-night-bg-image: url('{{ settings.night_mode_bg_image | image_url: width: 2000 }}');
-        {%- endif -%}
+        --kc-night-bg-color:      {{ settings.night_mode_bg_color}};
+        --kc-night-bg-r:          {{ settings.night_mode_bg_color.red | default: 15 }};
+        --kc-night-bg-g:          {{ settings.night_mode_bg_color.green | default: 15 }};
+        --kc-night-bg-b:          {{ settings.night_mode_bg_color.blue | default: 15 }};
+        --kc-night-heading-color: {{ settings.night_mode_heading_color}};
+        --kc-night-text-color:    {{ settings.night_mode_text_color}};
+        --kc-night-text-r:        {{ settings.night_mode_text_color.red | default: 229 }};
+        --kc-night-text-g:        {{ settings.night_mode_text_color.green | default: 229 }};
+        --kc-night-text-b:        {{ settings.night_mode_text_color.blue | default: 229 }};
       }
 
       /*
@@ -412,7 +408,7 @@
         --color-background:          {{ settings.day_mode_bg_color.red | default: 255 }},{{ settings.day_mode_bg_color.green | default: 255 }},{{ settings.day_mode_bg_color.blue | default: 255 }};
         --color-foreground:          {{ settings.day_mode_text_color.red | default: 18 }},{{ settings.day_mode_text_color.green | default: 18 }},{{ settings.day_mode_text_color.blue | default: 18 }};
         --color-background-contrast: {{ settings.day_mode_bg_color.red | default: 230 }},{{ settings.day_mode_bg_color.green | default: 230 }},{{ settings.day_mode_bg_color.blue | default: 230 }};
-        --gradient-background:       {{ settings.day_mode_bg_color | default: '#ffffff' }};
+        --gradient-background:       {{ settings.day_mode_bg_color}};
       }
 
       /*
@@ -425,7 +421,7 @@
         --color-background:          {{ settings.night_mode_bg_color.red | default: 15 }},{{ settings.night_mode_bg_color.green | default: 15 }},{{ settings.night_mode_bg_color.blue | default: 15 }};
         --color-foreground:          {{ settings.night_mode_text_color.red | default: 229 }},{{ settings.night_mode_text_color.green | default: 229 }},{{ settings.night_mode_text_color.blue | default: 229 }};
         --color-background-contrast: {{ settings.night_mode_bg_color.red | default: 40 }},{{ settings.night_mode_bg_color.green | default: 40 }},{{ settings.night_mode_bg_color.blue | default: 40 }};
-        --gradient-background:       {{ settings.night_mode_bg_color | default: '#0f0f0f' }};
+        --gradient-background:       {{ settings.night_mode_bg_color}};
       }
     </style>
 

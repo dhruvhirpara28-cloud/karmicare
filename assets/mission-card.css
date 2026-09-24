@@ -38,7 +38,7 @@
 
 .kc-mission-card-label {
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   color: #7fb9ff;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -59,7 +59,7 @@
 
 .kc-mission-card-highlight {
   font-size: var(--font-body-small-size);
-  font-weight: 700;
+  font-weight: var(--font-700-weight);
   line-height: 1.6;
 }
 

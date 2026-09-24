@@ -181,10 +181,9 @@
 
 .hero-karmicare__pill-btn {
   border: none;
-  border-radius: 9999px;
+  border-radius: var(--tertiary-border-radius);
   padding: 0.8rem 2rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -199,13 +198,13 @@
 }
 
 .hero-karmicare__status-text {
-  letter-spacing: 0.16em;
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   text-transform: uppercase;
   margin: 0;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  line-height: 1.4;
+  font-size: var(--kc-responsive-label-sm-text-size);
   transition: color 0.3s ease;
 }
 
