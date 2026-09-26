@@ -8,6 +8,77 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Button Setting",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary Button (Day Colors)"
+      },
+      {
+        "type": "color",
+        "id": "button_color_day",
+        "label": "Button Background Color"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color_day",
+        "label": "Button Text Color"
+      },
+      {
+        "type": "color",
+        "id": "button_border_color_day",
+        "label": "Button border Color"
+      },
+      {
+        "type": "header",
+        "content": "Primary Button (Night Colors)"
+      },
+      {
+        "type": "color",
+        "id": "button_color_night",
+        "label": "Button Background Color"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color_night",
+        "label": "Button Text Color"
+      },
+      {
+        "type": "color",
+        "id": "button_border_color_night",
+        "label": "Button border Color"
+      },
+      {
+        "type": "header",
+        "content": "Secondary Button (Day Colors)"
+      },
+      {
+        "type": "color",
+        "id": "button_secondary_text_color_day",
+        "label": "Secondary Button Text Color"
+      },
+      {
+        "type": "color",
+        "id": "button_secondary_border_color_day",
+        "label": "Secondary Button Border Color"
+      },
+      {
+        "type": "header",
+        "content": "Secondary Button (Night Colors)"
+      },
+      {
+        "type": "color",
+        "id": "button_secondary_text_color_night",
+        "label": "Secondary Button Text Color"
+      },
+      {
+        "type": "color",
+        "id": "button_secondary_border_color_night",
+        "label": "Secondary Button Border Color"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
@@ -228,6 +299,16 @@
       {
         "type": "header",
         "content": "Custom Font Sizes"
+      },
+      {
+        "type": "range",
+        "id": "extra_small_font_size_all",
+        "min": 10,
+        "max": 30,
+        "step": 1,
+        "default": 10,
+        "unit": "px",
+        "label": "Extra Small Font Size"
       },
       {
         "type": "range",
@@ -629,7 +710,7 @@
         "id": "page_width",
         "min": 1000,
         "max": 1600,
-        "step": 100,
+        "step": 20,
         "default": 1200,
         "unit": "px",
         "label": "t:settings_schema.layout.settings.page_width.label"
@@ -1998,6 +2079,16 @@
         "unit": "px",
         "label": "Primary Border Radius",
         "default": 20
+      },
+      {
+        "type": "range",
+        "id": "extra-primary-border-radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Extra Primary Border Radius",
+        "default": 12
       },
       {
         "type": "range",

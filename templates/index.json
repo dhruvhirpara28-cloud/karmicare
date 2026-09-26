@@ -36,20 +36,8 @@
           "settings": {
             "button_label_1": "BEGIN YOUR 60-DAY RITUAL",
             "button_link_1": "",
-            "btn1_bg_day": "#7fb9ff",
-            "btn1_text_day": "#0a1628",
-            "btn1_border_day": "",
-            "btn1_bg_night": "#7fb9ff",
-            "btn1_text_night": "#0a1628",
-            "btn1_border_night": "",
             "button_label_2": "WHY TWO FORMULAS?",
-            "button_link_2": "",
-            "btn2_bg_day": "",
-            "btn2_text_day": "#191f38",
-            "btn2_border_day": "#191f38",
-            "btn2_bg_night": "",
-            "btn2_text_night": "#ffffff",
-            "btn2_border_night": "#ffffff"
+            "button_link_2": ""
           }
         },
         "image_8y77hE": {
@@ -207,59 +195,367 @@
         "padding_bottom_mobile": 44
       }
     },
-    "featured_product_J9iyPH": {
-      "type": "featured-product",
+    "two_formulas_karmicare": {
+      "type": "two-formulas-karmicare",
+      "settings": {
+        "subheading": "BIORHYTHMIC ORAL CARE",
+        "heading": "Two formulas. One system. <strong>Designed around you.</strong>",
+        "heading_bold_opacity": 70,
+        "button_label": "BEGIN YOUR 60-DAY RITUAL",
+        "button_link": "",
+        "button_subtext": "€0,49 / brushing ritual",
+        "main_image": "shopify://shop_images/C-_Users_as_Downloads_KARMICARE_Productshot_Tubes-samen_002.png",
+        "left_heading": "Activated and strengthened by day",
+        "left_text": "Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated.",
+        "left_button_label": "SEE WHAT'S INSIDE",
+        "left_button_link": "",
+        "right_heading": "Purified and restored by night",
+        "right_text": "Valerian, cinnamon and orange — a gentle reset for everything behind. Your evening ritual, complete.",
+        "right_button_label": "SEE WHAT'S INSIDE",
+        "right_button_link": "",
+        "ingredients_list": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+        "show_bg_clock": true,
+        "bg_clock_image": "shopify://shop_images/bg_clock.png",
+        "bg_clock_html": "",
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
+        "text_color_day": "#191f38",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);",
+        "text_color_night": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 44,
+        "padding_bottom_mobile": 44
+      }
+    },
+    "product_benefits_karmicare_bcQ6tp": {
+      "type": "product-benefits-karmicare",
       "blocks": {
-        "title_p9eeg4": {
-          "type": "title",
+        "card_qMHDBq": {
+          "type": "card",
           "settings": {
-            "heading_size": "h1"
+            "label": "01 · NANO-HYDROXYAPATITE",
+            "heading": "Teeth that feel strong",
+            "text": "<p>New minerals with every brush. Cold or hot, no hesitation.</p>",
+            "image": "shopify://shop_images/Benefit_image.png"
           }
         },
-        "price_dKxTyN": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker_wtQWV7": {
-          "type": "variant_picker",
+        "card_pceBAE": {
+          "type": "card",
           "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
+            "label": "02 · Essential oils",
+            "heading": "Fresh that lasts",
+            "text": "<p>Mint and lime by day, cinnamon and orange by night.</p>",
+            "image": "shopify://shop_images/02_Essential_oils.png"
           }
         },
-        "buy_buttons_6z7XB4": {
-          "type": "buy_buttons",
+        "card_tM7UH3": {
+          "type": "card",
           "settings": {
-            "show_dynamic_checkout": false,
-            "show_gift_card_recipient": false,
-            "show_add_to_cart": false,
-            "show_custom_button": true,
-            "custom_button_text": "Begin Now",
-            "redirect_to_checkout": false
+            "label": "03 · Gentle foam",
+            "heading": "A velvet mouthfeel",
+            "text": "<p>Soft foam and a smooth finish that stays. Two minutes you enjoy.</p>"
+          }
+        },
+        "card_aXhzDi": {
+          "type": "card",
+          "settings": {
+            "label": "04 · mineral whitening",
+            "heading": "Naturally brighter",
+            "text": "<p>Remineralisation lifts the surface. No bleach, no strips.</p>"
+          }
+        },
+        "card_QdCWaE": {
+          "type": "card",
+          "settings": {
+            "label": "05 · Xylitol",
+            "heading": "A mouth in balance",
+            "text": "<p>Supports your mouth’s own balance. Less plaque, day and night.</p>"
+          }
+        },
+        "card_VP8KGi": {
+          "type": "card",
+          "settings": {
+            "label": "06 · No SLS",
+            "heading": "Radiant calm gums",
+            "text": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>"
+          }
+        },
+        "card_KRCrBY": {
+          "type": "card",
+          "settings": {
+            "label": "07 · Guarana & valerian",
+            "heading": "Focus by day,  calm by night",
+            "text": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>"
+          }
+        },
+        "card_AGFiEX": {
+          "type": "card",
+          "settings": {
+            "label": "08 · Leave-on",
+            "heading": "Wake up smoother",
+            "text": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>"
+          }
+        },
+        "card_jN7XcL": {
+          "type": "card",
+          "settings": {
+            "label": "09 · One pump",
+            "heading": "One pump, one dose",
+            "text": "<p>All the minerals your mouth need in one press. Hygienic, precise, nothing wasted.</p>"
           }
         }
       },
       "block_order": [
-        "title_p9eeg4",
-        "price_dKxTyN",
-        "variant_picker_wtQWV7",
-        "buy_buttons_6z7XB4"
+        "card_qMHDBq",
+        "card_pceBAE",
+        "card_tM7UH3",
+        "card_aXhzDi",
+        "card_QdCWaE",
+        "card_VP8KGi",
+        "card_KRCrBY",
+        "card_AGFiEX",
+        "card_jN7XcL"
       ],
-      "name": "t:sections.featured-product.presets.name",
+      "name": "Product Benefits",
       "settings": {
-        "product": "karmicare-biorhythmic-oral-care-system",
-        "color_scheme": "",
-        "secondary_background": false,
-        "media_size": "medium",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": false,
-        "enable_video_looping": false,
-        "remove_first_media_bg": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "subheading": "the benefits",
+        "heading": "Clean is not the same as healthy.",
+        "text": "<p>You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, keep your mouth in balance, morning and night. Not because you brush wrong. Because brushing cleans, and your mouth needs more than clean.</p>",
+        "button_label": "BEGIN YOUR 60-DAY RITUAL",
+        "button_link": "",
+        "button_subtext": "€0,49 / brushing ritual",
+        "bottom_note": "*Reported outcomes vary. Mechanisms and published evidence are shown separately.",
+        "columns_desktop": 3,
+        "slider_desktop": false,
+        "columns_laptop": 2,
+        "slider_laptop": false,
+        "columns_tablet": 2,
+        "slider_tablet": false,
+        "columns_mobile": "1.3",
+        "slider_mobile": true,
+        "show_slider_arrows": false,
+        "overlay_color": "#ffffff",
+        "overlay_opacity": 50,
+        "card_bg_color_day": "#ffffff",
+        "card_bg_color_night": "#212a49",
+        "card_bg_opacity": 100,
+        "show_card_bg_desktop": true,
+        "show_card_bg_mobile": true,
+        "section_bg_color_day": "rgba(0,0,0,0)",
+        "section_bg_color_night": "#191f38",
+        "show_border_top": true,
+        "show_border_bottom": true,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 52,
+        "padding_bottom_mobile": 52
+      }
+    },
+    "trusted_professionals_HAqYth": {
+      "type": "trusted-professionals",
+      "blocks": {
+        "card_h8d3WL": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
+            "heading": "Dr. Stephanie Spreuwers",
+            "text": "Functional Dentist, kPNI Therapist",
+            "hover_text": "<p>Quote placeholder - use only a real, written and approved quote from this professional.</p>"
+          }
+        },
+        "card_jrLPVC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
+            "heading": "Dr. Stephanie Spreuwers",
+            "text": "Functional Dentist, kPNI Therapist",
+            "hover_text": "<p>Quote placeholder - use only a real, written and approved quote from this professional.</p>"
+          }
+        },
+        "card_jcnr7Q": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Mariama_Banjai.png",
+            "heading": "Mariama Banjai",
+            "text": "Dental Hygienist, Oral Care Quality Manager",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_8dRing": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Leen_Ponet.png",
+            "heading": "Leen Ponet",
+            "text": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_HFdkaD": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Iveta_Plesa_Rutule.png",
+            "heading": "Dr. Iveta Pleša Rutule",
+            "text": "Holistic Dentist",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_Ah46TM": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Kris_Sienaert.png",
+            "heading": "Dr. Kris Sienaert",
+            "text": "Former GP, Lifestyle Medicine",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_CtQgU9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Sietske_Hamelink.png",
+            "heading": "Sietske Hamelink",
+            "text": "Nutritional Therapist, Menstrual Cycle Expert",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_qAPajg": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Kim_Verlot.png",
+            "heading": "Kim Verlot",
+            "text": "Breathing Coach, Heart Coherence Specialist",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_h8d3WL",
+        "card_jrLPVC",
+        "card_jcnr7Q",
+        "card_8dRing",
+        "card_HFdkaD",
+        "card_Ah46TM",
+        "card_CtQgU9",
+        "card_qAPajg"
+      ],
+      "name": "Trusted Professionals",
+      "settings": {
+        "show_border_top": false,
+        "show_border_bottom": true,
+        "bg_color_day": "rgba(0,0,0,0)",
+        "bg_color_night": "#191f38",
+        "subheading": "APPROVED BY NATURE",
+        "heading": "Trusted by professionals <strong>who look beyond the teeth</strong>",
+        "heading_bold_opacity": 70,
+        "bottom_text": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
+        "button_label": "REQUEST A PRACTITIONER SAMPLE",
+        "button_link": "",
+        "card_bg_color_day": "#fffbf6",
+        "card_bg_color_night": "#191f38",
+        "columns_desktop": 4,
+        "slider_desktop": false,
+        "columns_laptop": 3,
+        "slider_laptop": false,
+        "columns_tablet": 2,
+        "slider_tablet": false,
+        "columns_mobile": "1.3",
+        "slider_mobile": true,
+        "show_slider_arrows": false,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 52,
+        "padding_bottom_mobile": 52
+      }
+    },
+    "research_behind_system_EkjATL": {
+      "type": "research-behind-system",
+      "blocks": {
+        "card_bDxUVT": {
+          "type": "card",
+          "settings": {
+            "subheading": "NANO-HYDROXYAPATITE",
+            "heading": "Nano-HAp sealed 98% of open dentine tubules.",
+            "subtext": "Human dentine discs - 7 days",
+            "result_label": "RESULT",
+            "result_text": "98% occlusion vs 82% and 65% for two other desensitising technologies",
+            "method_label": "METHOD",
+            "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
+            "link_label": "Kulal et al. · 2016 · J Clin Diagn Res",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo.png",
+            "image": "shopify://shop_images/Picture.png",
+            "image_badge": ""
+          }
+        },
+        "card_yMiD9D": {
+          "type": "card",
+          "settings": {
+            "subheading": "ORAL–SLEEP CONNECTION",
+            "heading": "Poorer oral health was linked with poorer sleep.",
+            "subtext": "36,559 people · 8 studies",
+            "result_label": "RESULT",
+            "result_text": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
+            "method_label": "METHOD",
+            "method_text": "Meta-analysis of 8 studies, 2015–2023.",
+            "link_label": "Lei & Hu · 2025 · Biomedical Reports",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo-2.png",
+            "image": "shopify://shop_images/Picture.png",
+            "image_badge": ""
+          }
+        },
+        "card_fmFMFd": {
+          "type": "card",
+          "settings": {
+            "subheading": "NANO-HYDROXYAPATITE",
+            "heading": "Nano-HAp sealed 98% of open dentine tubules.",
+            "subtext": "Human dentine discs - 7 days",
+            "result_label": "RESULT",
+            "result_text": "98% occlusion vs 82% and 65% for two other desensitising technologies",
+            "method_label": "METHOD",
+            "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
+            "link_label": "Kulai Et Al. - 2016",
+            "link_url": "",
+            "image": "shopify://shop_images/Picture.png",
+            "image_badge": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_bDxUVT",
+        "card_yMiD9D",
+        "card_fmFMFd"
+      ],
+      "name": "Research Behind System",
+      "settings": {
+        "subheading": "CLINICALLY BACKED ORAL CARE",
+        "heading": "The research behind the system",
+        "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up...</p>",
+        "button_label": "EXPLORE THE FULL EVIDENCE BASE",
+        "button_link": "",
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "text_color_day": "",
+        "card_bg_color_day": "#ffffff",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)",
+        "text_color_night": "",
+        "card_bg_color_night": "#191f38",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "show_border_top": false,
+        "show_border_bottom": false,
+        "slider_desktop": true,
+        "slider_laptop": false,
+        "slider_tablet": false,
+        "slider_mobile": true,
+        "columns_desktop": 2,
+        "columns_laptop": 2,
+        "columns_tablet": 1,
+        "columns_mobile": 1
       }
     }
   },
@@ -267,6 +563,9 @@
     "hero_karmicare_XKKLDK",
     "stat_strip_karmicare",
     "chronobiology_clock_karmicare",
-    "featured_product_J9iyPH"
+    "two_formulas_karmicare",
+    "product_benefits_karmicare_bcQ6tp",
+    "trusted_professionals_HAqYth",
+    "research_behind_system_EkjATL"
   ]
 }

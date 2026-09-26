@@ -67,27 +67,6 @@
   width: 100%;
 }
 
-.hero-karmicare__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.35rem 2.6rem;
-  border-radius: var(--primary-border-radius);
-  font-weight: var(--font-500-weight);
-  text-transform: uppercase;
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  cursor: pointer;
-  transition: opacity .2s ease, transform .2s ease;
-  box-sizing: border-box;
-  line-height: normal;
-  border: 1px solid transparent;
-}
-
-.hero-karmicare__btn:hover {
-  opacity: 0.88;
-  transform: translateY(-1px);
-}
-
 @media screen and (max-width: 749px) {
   .hero-karmicare__buttons-wrapper {
     flex-direction: column;
@@ -134,12 +113,6 @@
 .hero-karmicare__image {
   position: relative;
   z-index: 2;
-  width: 100%;
-  max-width: 840px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
 }
 
 .hero-karmicare__image-placeholder {

@@ -8,6 +8,11 @@ a {
   color: inherit;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 h1,
 h2,
 h3,
@@ -137,7 +142,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 
 @media screen and (min-width: 990px) {
   .page-width {
-    padding: 0 0.5rem;
+    padding: 0 1.5rem;
   }
 
   .header.page-width,
@@ -160,11 +165,6 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 @media screen and (min-width: 990px) {
-  .header:not(.drawer-menu).page-width {
-    padding-left: 5rem;
-    padding-right: 5rem;
-  }
-
   .page-width--narrow {
     max-width: 72.6rem;
     padding: 0;
@@ -283,8 +283,14 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   background-color: rgba(var(--color-foreground), 0.2);
 }
 
+
+
 .primary-border-radius {
   border-radius: var(--primary-border-radius);
+}
+
+.extra-primary-border-radius {
+  border-radius: var(--extra-primary-border-radius);
 }
 
 .secondary-border-radius {
@@ -380,6 +386,11 @@ h2,
   letter-spacing: var(--kc-responsive-h2-letter-spacing);
 }
 
+h2 strong,
+.h2 strong {
+  font-weight: var(--font-h2-weight);
+}
+
 @media only screen and (min-width: 750px) {
 
   h2,
@@ -422,6 +433,7 @@ h5,
 .h5 {
   font-size: var(--font-h5-size-mobile);
   font-weight: var(--font-h5-weight);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
 }
 
 @media only screen and (min-width: 750px) {

@@ -65,38 +65,6 @@
             color: {{ block.settings.text_color_night }};
           }
         {%- endif -%}
-
-      {%- when 'buttons' -%}
-        {%- if block.settings.btn1_bg_day != blank or block.settings.btn1_text_day != blank or block.settings.btn1_border_day != blank -%}
-          body.day-mode #shopify-section-{{ section.id }} .hero-karmicare__btn-1-{{ block.id }} {
-            {%- if block.settings.btn1_bg_day != blank -%}background-color: {{ block.settings.btn1_bg_day }};{%- endif -%}
-            {%- if block.settings.btn1_text_day != blank -%}color: {{ block.settings.btn1_text_day }};{%- endif -%}
-            {%- if block.settings.btn1_border_day != blank -%}border: 1px solid {{ block.settings.btn1_border_day }};{%- endif -%}
-          }
-        {%- endif -%}
-        {%- if block.settings.btn1_bg_night != blank or block.settings.btn1_text_night != blank or block.settings.btn1_border_night != blank -%}
-          body.night-mode #shopify-section-{{ section.id }} .hero-karmicare__btn-1-{{ block.id }} {
-            {%- if block.settings.btn1_bg_night != blank -%}background-color: {{ block.settings.btn1_bg_night }};{%- endif -%}
-            {%- if block.settings.btn1_text_night != blank -%}color: {{ block.settings.btn1_text_night }};{%- endif -%}
-            {%- if block.settings.btn1_border_night != blank -%}border: 1px solid {{ block.settings.btn1_border_night }};{%- endif -%}
-          }
-        {%- endif -%}
-
-        {%- if block.settings.btn2_bg_day != blank or block.settings.btn2_text_day != blank or block.settings.btn2_border_day != blank -%}
-          body.day-mode #shopify-section-{{ section.id }} .hero-karmicare__btn-2-{{ block.id }} {
-            {%- if block.settings.btn2_bg_day != blank -%}background-color: {{ block.settings.btn2_bg_day }};{%- endif -%}
-            {%- if block.settings.btn2_text_day != blank -%}color: {{ block.settings.btn2_text_day }};{%- endif -%}
-            {%- if block.settings.btn2_border_day != blank -%}border: 1px solid {{ block.settings.btn2_border_day }};{%- endif -%}
-          }
-        {%- endif -%}
-        {%- if block.settings.btn2_bg_night != blank or block.settings.btn2_text_night != blank or block.settings.btn2_border_night != blank -%}
-          body.night-mode #shopify-section-{{ section.id }} .hero-karmicare__btn-2-{{ block.id }} {
-            {%- if block.settings.btn2_bg_night != blank -%}background-color: {{ block.settings.btn2_bg_night }};{%- endif -%}
-            {%- if block.settings.btn2_text_night != blank -%}color: {{ block.settings.btn2_text_night }};{%- endif -%}
-            {%- if block.settings.btn2_border_night != blank -%}border: 1px solid {{ block.settings.btn2_border_night }};{%- endif -%}
-          }
-        {%- endif -%}
-
       {%- when 'image' -%}
         {%- if block.settings.blob_bg_day != blank -%}
           body.day-mode #shopify-section-{{ section.id }} .hero-karmicare__blob-{{ block.id }} {
@@ -200,7 +168,7 @@
             {%- if block.settings.button_label_1 != blank -%}
               <a
                 href="{{ block.settings.button_link_1 | default: '#' }}"
-                class="hero-karmicare__btn hero-karmicare__btn-1 hero-karmicare__btn-1-{{ block.id }}"
+                class="hero-karmicare__btn hero-karmicare__btn-1 karmicare__btn-primary"
                 {% if block.settings.button_link_1 == blank %}
                   role="button" aria-disabled="true"
                 {% endif %}
@@ -211,7 +179,7 @@
             {%- if block.settings.button_label_2 != blank -%}
               <a
                 href="{{ block.settings.button_link_2 | default: '#' }}"
-                class="hero-karmicare__btn hero-karmicare__btn-2 hero-karmicare__btn-2-{{ block.id }}"
+                class="hero-karmicare__btn hero-karmicare__btn-2 karmicare__btn-secondary"
                 {% if block.settings.button_link_2 == blank %}
                   role="button" aria-disabled="true"
                 {% endif %}
@@ -220,147 +188,89 @@
               </a>
             {%- endif -%}
           </div>
-
         {%- when 'image' -%}
-          <figure class="hero-karmicare__image-wrapper" {{ block.shopify_attributes }}>
-            <div
-              class="hero-karmicare__blob hero-karmicare__blob-{{ block.id }}"
-              aria-hidden="true"
-            >
-              &nbsp;
+          <figure class="hero-karmicare__image-wrapper" {{ block.shopify_attributes }}> <div class="hero-karmicare__blob
+          hero-karmicare__blob-{{ block.id }}" aria-hidden="true" > &nbsp; </div>
+          {%- if block.settings.image != blank -%}
+            {%- liquid
+              assign hero_alt = block.settings.image.alt | default: 'Karmicare Oral Care System' | escape
+              assign hero_image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
+            -%}
+            {{
+              block.settings.image
+              | image_url: width: 1800
+              | image_tag:
+                width: block.settings.image.width,
+                height: hero_image_height,
+                loading: 'eager',
+                fetchpriority: 'high',
+                decoding: 'async',
+                preload: true,
+                sizes: '(min-width: 900px) 840px, 92vw',
+                widths: '375, 550, 750, 840, 1100, 1400, 1800',
+                class: 'hero-karmicare__image',
+                alt: hero_alt
+            }}
+          {%- else -%}
+            <div class="hero-karmicare__image-placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg hero-karmicare__placeholder-svg' }}
             </div>
-            {%- if block.settings.image != blank -%}
-              {%- liquid
-                assign hero_alt = block.settings.image.alt | default: 'Karmicare Oral Care System' | escape
-                assign hero_image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
-              -%}
-              {{
-                block.settings.image
-                | image_url: width: 1800
-                | image_tag:
-                  width: block.settings.image.width,
-                  height: hero_image_height,
-                  loading: 'eager',
-                  fetchpriority: 'high',
-                  decoding: 'async',
-                  preload: true,
-                  sizes: '(min-width: 900px) 840px, 92vw',
-                  widths: '375, 550, 750, 840, 1100, 1400, 1800',
-                  class: 'hero-karmicare__image',
-                  alt: hero_alt
-              }}
-            {%- else -%}
-              <div class="hero-karmicare__image-placeholder">
-                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg hero-karmicare__placeholder-svg' }}
-              </div>
-            {%- endif -%}
+          {%- endif -%}
           </figure>
 
         {%- when 'rhythm_toggle' -%}
-          <div
-            class="hero-karmicare__toggle-wrapper hero-karmicare__toggle-wrapper-{{ block.id }}"
-            {{ block.shopify_attributes }}
-          >
-            <div
-              class="hero-karmicare__pill-toggle hero-karmicare__pill-toggle-{{ block.id }}"
-              role="group"
-              aria-label="Day and Night Oral Rhythm Switcher"
-            >
-              <button
-                type="button"
-                class="hero-karmicare__pill-btn kc_day"
-                data-mode="day"
-                aria-label="{{ block.settings.awake_label | default: 'Awake' | escape }} mode"
-              >
-                {{ block.settings.awake_label | default: 'AWAKE' | escape }}
-              </button>
-              <button
-                type="button"
-                class="hero-karmicare__pill-btn kc_night"
-                data-mode="night"
-                aria-label="{{ block.settings.asleep_label | default: 'Asleep' | escape }} mode"
-              >
-                {{ block.settings.asleep_label | default: 'ASLEEP' | escape }}
-              </button>
-            </div>
+          <div class="hero-karmicare__toggle-wrapper hero-karmicare__toggle-wrapper-{{ block.id }}"
+          {{ block.shopify_attributes }}
+          > <div class="hero-karmicare__pill-toggle hero-karmicare__pill-toggle-{{ block.id }}" role="group"
+          aria-label="Day and Night Oral Rhythm Switcher" > <button type="button" class="hero-karmicare__pill-btn
+          kc_day" data-mode="day" aria-label="{{ block.settings.awake_label | default: 'Awake' | escape }} mode" >
+          {{ block.settings.awake_label | default: 'AWAKE' | escape }}
+          </button> <button type="button" class="hero-karmicare__pill-btn kc_night" data-mode="night" aria-label="
+          {{- block.settings.asleep_label | default: 'Asleep' | escape }}
+          mode" >
+          {{ block.settings.asleep_label | default: 'ASLEEP' | escape }}
+          </button> </div>
 
-            <div class="hero-karmicare__status-wrapper">
-              <p class="hero-karmicare__status-text hero-karmicare__status-text-{{ block.id }}">
-                <time class="kc-hero-live-time" datetime="{{ 'now' | date: '%Y-%m-%dT%H:%M' }}">
-                  {{- 'now' | date: '%I:%M %p' -}}
-                </time>
-                ·
-                <span class="kc-hero-status-day">
-                  {{- block.settings.status_day_text | default: 'DAYTIME PROTECTION' | escape -}}
-                </span>
-                <span class="kc-hero-status-night">
-                  {{- block.settings.status_night_text | default: 'NIGHTTIME RESTORATION' | escape -}}
-                </span>
-              </p>
-            </div>
-          </div>
+          <div class="hero-karmicare__status-wrapper"> <p class="hero-karmicare__status-text
+          hero-karmicare__status-text-{{ block.id }}"> <time class="kc-hero-live-time" datetime="
+          {{- 'now' | date: '%Y-%m-%dT%H:%M' -}}
+          ">
+          {{- 'now' | date: '%I:%M %p' -}}
+          </time> · <span class="kc-hero-status-day">
+          {{- block.settings.status_day_text | default: 'DAYTIME PROTECTION' | escape -}}
+          </span> <span class="kc-hero-status-night">
+          {{- block.settings.status_night_text | default: 'NIGHTTIME RESTORATION' | escape -}}
+          </span> </p> </div> </div>
       {%- endcase -%}
     {%- endfor -%}
-  </div>
-</section>
+    </div> </section>
 
-<script>
-  (function () {
-    function updateHeroLiveTime() {
-      var timeElements = document.querySelectorAll('#HeroKarmicare-{{ section.id }} .kc-hero-live-time');
-      if (!timeElements.length) return;
-      var now = new Date();
-      var hours = now.getHours();
-      var minutes = now.getMinutes();
-      var ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      var minutesStr = minutes < 10 ? '0' + minutes : minutes;
-      var timeStr = hours + ':' + minutesStr + ' ' + ampm;
-      timeElements.forEach(function (el) {
-        if (el.textContent !== timeStr) {
-          el.textContent = timeStr;
-        }
-      });
-    }
+    <script> (function () { function updateHeroLiveTime() { var timeElements =
+    document.querySelectorAll('#HeroKarmicare-{{ section.id }} .kc-hero-live-time'); if (!timeElements.length) return;
+    var now = new Date(); var hours = now.getHours(); var minutes = now.getMinutes(); var ampm = hours >= 12 ? 'PM' :
+    'AM'; hours = hours % 12; hours = hours ? hours : 12; var minutesStr = minutes < 10 ? '0' + minutes : minutes; var
+    timeStr = hours + ':' + minutesStr + ' ' + ampm; timeElements.forEach(function (el) { if (el.textContent !==
+    timeStr) { el.textContent = timeStr; } }); }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateHeroLiveTime);
-    } else {
-      updateHeroLiveTime();
-    }
-    setInterval(updateHeroLiveTime, 30000);
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', updateHeroLiveTime); } else {
+    updateHeroLiveTime(); } setInterval(updateHeroLiveTime, 30000);
 
-    // Sync pill toggle clicks with day-night-mode
-    var toggleSection = document.getElementById('HeroKarmicare-{{ section.id }}');
-    if (toggleSection) {
-      toggleSection.addEventListener('click', function (e) {
-        var btn = e.target.closest('.hero-karmicare__pill-btn');
-        if (!btn) return;
-        var mode = btn.getAttribute('data-mode');
-        if (!mode) return;
+    // Sync pill toggle clicks with day-night-mode var toggleSection = document.getElementById('HeroKarmicare-
+    {{- section.id -}}
+    '); if (toggleSection) { toggleSection.addEventListener('click', function (e) { var btn =
+    e.target.closest('.hero-karmicare__pill-btn'); if (!btn) return; var mode = btn.getAttribute('data-mode'); if
+    (!mode) return;
 
-        // Apply mode to body
-        document.body.classList.remove('day-mode', 'night-mode');
-        document.body.classList.add(mode + '-mode');
+    // Apply mode to body document.body.classList.remove('day-mode', 'night-mode'); document.body.classList.add(mode +
+    '-mode');
 
-        document.querySelectorAll('.day-mode, .night-mode').forEach(function (el) {
-          el.classList.remove('day-mode', 'night-mode');
-          el.classList.add(mode + '-mode');
-        });
+    document.querySelectorAll('.day-mode, .night-mode').forEach(function (el) { el.classList.remove('day-mode',
+    'night-mode'); el.classList.add(mode + '-mode'); });
 
-        // Persist
-        try {
-          localStorage.setItem('theme', mode);
-          localStorage.setItem('manualTheme', mode);
-          localStorage.setItem('themeChange', mode);
-        } catch (err) {}
-      });
-    }
-  })();
-</script>
+    // Persist try { localStorage.setItem('theme', mode); localStorage.setItem('manualTheme', mode);
+    localStorage.setItem('themeChange', mode); } catch (err) {} }); } })(); </script>
 
-{% schema %}
+    {% schema %}
 {
   "name": "Hero - Karmicare Rhythm",
   "tag": "section",
@@ -552,40 +462,6 @@
           "label": "Button 1 Link"
         },
         {
-          "type": "color",
-          "id": "btn1_bg_day",
-          "label": "Button 1 Background (Day)",
-          "default": "#4379C0"
-        },
-        {
-          "type": "color",
-          "id": "btn1_text_day",
-          "label": "Button 1 Text (Day)",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "btn1_border_day",
-          "label": "Button 1 Border (Day)"
-        },
-        {
-          "type": "color",
-          "id": "btn1_bg_night",
-          "label": "Button 1 Background (Night)",
-          "default": "#4379C0"
-        },
-        {
-          "type": "color",
-          "id": "btn1_text_night",
-          "label": "Button 1 Text (Night)",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "btn1_border_night",
-          "label": "Button 1 Border (Night)"
-        },
-        {
           "type": "header",
           "content": "Button 2 (Secondary / Outline)"
         },
@@ -599,40 +475,6 @@
           "type": "url",
           "id": "button_link_2",
           "label": "Button 2 Link"
-        },
-        {
-          "type": "color",
-          "id": "btn2_bg_day",
-          "label": "Button 2 Background (Day)"
-        },
-        {
-          "type": "color",
-          "id": "btn2_text_day",
-          "label": "Button 2 Text (Day)",
-          "default": "#191F38"
-        },
-        {
-          "type": "color",
-          "id": "btn2_border_day",
-          "label": "Button 2 Border (Day)",
-          "default": "#191F38"
-        },
-        {
-          "type": "color",
-          "id": "btn2_bg_night",
-          "label": "Button 2 Background (Night)"
-        },
-        {
-          "type": "color",
-          "id": "btn2_text_night",
-          "label": "Button 2 Text (Night)",
-          "default": "#FFFFFF"
-        },
-        {
-          "type": "color",
-          "id": "btn2_border_night",
-          "label": "Button 2 Border (Night)",
-          "default": "#FFFFFF"
         }
       ]
     },
@@ -789,4 +631,4 @@
     }
   ]
 }
-{% endschema %}
+    {% endschema %}

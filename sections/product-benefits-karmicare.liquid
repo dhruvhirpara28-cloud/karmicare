@@ -1,0 +1,558 @@
+{%- comment -%}
+  Product Benefits Section
+{%- endcomment -%}
+
+{{ 'section-product-benefits-karmicare.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{% if section.settings.show_border_top != blank %}
+  <div class="block__border-top border-{{ section.id }}">
+    <div class="page-width">
+      <div class="product-benefits__border"></div>
+    </div>
+  </div>
+{% endif %}
+<div class="product-benefits section-{{ section.id }}">
+  {%- style -%}
+    {%- assign opacity = section.settings.card_bg_opacity | divided_by: 100.0 -%}
+    {%- assign bg_day = section.settings.card_bg_color_day | default: 'transparent' -%}
+    {%- assign bg_night = section.settings.card_bg_color_night | default: 'transparent' -%}
+    {%- if bg_day != 'transparent' -%}
+      {%- assign bg_day = bg_day | color_modify: 'alpha', opacity -%}
+    {%- endif -%}
+    {%- if bg_night != 'transparent' -%}
+      {%- assign bg_night = bg_night | color_modify: 'alpha', opacity -%}
+    {%- endif -%}
+    {% if section.settings.section_bg_color_day !=blank %}
+    body.day-mode .section-{{ section.id }},
+    body.day-mode .border-{{ section.id }} {
+      background-color: {{ section.settings.section_bg_color_day }};
+    }
+    {% endif %}
+    {% if section.settings.section_bg_color_night !=blank %}
+    body.night-mode .section-{{ section.id }},
+    body.night-mode .border-{{ section.id }} {
+      background-color: {{ section.settings.section_bg_color_night }};
+    }
+    {% endif %}
+
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_desktop }}px;
+        padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+      }
+    }
+
+    .section-{{ section.id }} .product-benefits__card {
+      background-color: transparent;
+    }
+
+    {%- if section.settings.show_card_bg_mobile -%}
+      @media screen and (max-width: 749px) {
+        body.day-mode .section-{{ section.id }} .product-benefits__card,
+        body:not(.night-mode) .section-{{ section.id }} .product-benefits__card {
+          background-color: {{ bg_day }};
+        }
+        body.night-mode .section-{{ section.id }} .product-benefits__card {
+          background-color: {{ bg_night }};
+        }
+      }
+    {%- endif -%}
+
+    {%- if section.settings.show_card_bg_desktop -%}
+      @media screen and (min-width: 750px) {
+        body.day-mode .section-{{ section.id }} .product-benefits__card,
+        body:not(.night-mode) .section-{{ section.id }} .product-benefits__card {
+          background-color: {{ bg_day }};
+        }
+        body.night-mode .section-{{ section.id }} .product-benefits__card {
+          background-color: {{ bg_night }};
+        }
+      }
+    {%- endif -%}
+  {%- endstyle -%}
+  <div class="page-width">
+    <div class="product-benefits__inner">
+      <div class="product-benefits__left">
+        {%- if section.settings.subheading != blank -%}
+          <span class="product-benefits__subheading">{{ section.settings.subheading }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          {{ section.settings.text }}
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="karmicare__btn-primary">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.button_subtext != blank -%}
+          <p class="product-benefits__btn-subtext">{{ section.settings.button_subtext }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="product-benefits__right">
+        {%- capture slider_classes -%}
+          {% if section.settings.slider_mobile %} slider--mobile{% endif %}
+          {% if section.settings.slider_tablet %} slider--tablet{% endif %}
+          {% if section.settings.slider_laptop %} slider--desktop{% endif %}
+          {% if section.settings.slider_desktop %} slider--desktop{% endif %}
+        {%- endcapture -%}
+
+        {%- assign show_slider = false -%}
+        {%- if section.settings.slider_mobile
+          or section.settings.slider_tablet
+          or section.settings.slider_laptop
+          or section.settings.slider_desktop
+        -%}
+          {%- assign show_slider = true -%}
+        {%- endif -%}
+
+        {%- if show_slider -%}
+          <slider-component class="slider-mobile-gutter">
+        {%- endif -%}
+        <ul
+          class="product-benefits__grid{% if show_slider %} slider{{ slider_classes }}{% endif %}"
+          id="Slider-{{ section.id }}"
+          role="list"
+          style="--cols-desktop: {{ section.settings.columns_desktop }}; --cols-laptop: {{ section.settings.columns_laptop }}; --cols-tablet: {{ section.settings.columns_tablet }}; --cols-mobile: {{ section.settings.columns_mobile }};"
+        >
+          {%- for block in section.blocks -%}
+            <li
+              id="Slide-{{ section.id }}-{{ forloop.index }}"
+              class="product-benefits__card{% if show_slider %} slider__slide{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.image != blank -%}
+                <div class="product-benefits__card-bg">
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                  <div
+                    class="product-benefits__card-overlay"
+                    style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+                  ></div>
+                </div>
+              {%- endif -%}
+
+              <div class="product-benefits__card-content">
+                {%- if block.settings.label != blank -%}
+                  <span>{{ block.settings.label }}</span>
+                {%- endif -%}
+                <div class="heading-desc-wrap">
+                  {%- if block.settings.heading != blank -%}
+                    <h5>{{ block.settings.heading }}</h5>
+                  {%- endif -%}
+
+                  {%- if block.settings.text != blank -%}
+                    {{ block.settings.text }}
+                  {%- endif -%}
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if show_slider and section.settings.show_slider_arrows -%}
+          <div class="slider-buttons no-js-hidden" style="justify-content: center; margin-top: 1rem;">
+            <button
+              type="button"
+              class="slider-button slider-button--prev"
+              name="previous"
+              aria-label="{{ 'general.slider.previous_slide' | t }}"
+            >
+              <span class="svg-wrapper">
+                <svg
+                  viewBox="0 0 14 10"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                  class="icon icon-caret"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5366 1.46451C10.9271 1.07399 11.5603 1.07399 11.9508 1.46451C12.3413 1.85504 12.3413 2.4882 11.9508 2.87873L8.8295 6.00005C8.43898 6.39057 7.80581 6.39057 7.41529 6.00005L4.29402 2.87878C3.90349 2.48825 3.90349 1.85509 4.29402 1.46456C4.68454 1.07404 5.3177 1.07404 5.70823 1.46456L8.12239 3.87873L10.5366 1.46451Z" fill="currentColor"/>
+                </svg>
+              </span>
+            </button>
+            <div class="slider-counter caption">
+              <span class="slider-counter--current">1</span>
+              <span aria-hidden="true"> / </span>
+              <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+              <span class="slider-counter--total">{{ section.blocks.size }}</span>
+            </div>
+            <button
+              type="button"
+              class="slider-button slider-button--next"
+              name="next"
+              aria-label="{{ 'general.slider.next_slide' | t }}"
+            >
+              <span class="svg-wrapper">
+                <svg
+                  viewBox="0 0 14 10"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                  class="icon icon-caret"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5366 1.46451C10.9271 1.07399 11.5603 1.07399 11.9508 1.46451C12.3413 1.85504 12.3413 2.4882 11.9508 2.87873L8.8295 6.00005C8.43898 6.39057 7.80581 6.39057 7.41529 6.00005L4.29402 2.87878C3.90349 2.48825 3.90349 1.85509 4.29402 1.46456C4.68454 1.07404 5.3177 1.07404 5.70823 1.46456L8.12239 3.87873L10.5366 1.46451Z" fill="currentColor"/>
+                </svg>
+              </span>
+            </button>
+          </div>
+          </slider-component>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if section.settings.bottom_note != blank -%}
+      <p class="product-benefits__note">{{ section.settings.bottom_note }}</p>
+    {%- endif -%}
+  </div>
+</div>
+{%- if section.settings.show_border_bottom != blank -%}
+  <div class="block__border-bottom border-{{ section.id }}">
+    <div class="page-width">
+      <div class="product-benefits__border"></div>
+    </div>
+  </div>
+{% endif %}
+{%- if show_slider -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sliders = document.querySelectorAll('.product-benefits__grid.slider:not([data-initialized="true"])');
+      sliders.forEach((slider) => {
+        slider.setAttribute('data-initialized', 'true');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.style.cursor = 'grab';
+
+        slider.addEventListener('mousedown', (e) => {
+          isDown = true;
+          slider.style.cursor = 'grabbing';
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+          isDown = false;
+          slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mouseup', () => {
+          isDown = false;
+          slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 2;
+          slider.scrollLeft = scrollLeft - walk;
+        });
+      });
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Benefits",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "THE BENEFITS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Clean is not the same as healthy."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>You brush every day...</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "BEGIN YOUR 60-DAY RITUAL"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_subtext",
+      "label": "Button Subtext",
+      "default": "€0,49 / brushing ritual"
+    },
+    {
+      "type": "header",
+      "content": "Right Content / Grid"
+    },
+    {
+      "type": "text",
+      "id": "bottom_note",
+      "label": "Bottom Note",
+      "default": "*Reported outcomes vary. Mechanisms and published evidence are shown separately."
+    },
+    {
+      "type": "header",
+      "content": "Grid & Slider Options"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on Desktop (1200px+)",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_desktop",
+      "label": "Enable Slider on Desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_laptop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on Laptop (990px - 1199px)",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_laptop",
+      "label": "Enable Slider on Laptop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on Tablet (750px - 989px)",
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_tablet",
+      "label": "Enable Slider on Tablet",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile (< 750px)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.3", "label": "1.3" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.8", "label": "1.8" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_mobile",
+      "label": "Enable Slider on Mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_slider_arrows",
+      "label": "Show Slider Arrows",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card Image Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Overlay Opacity (%)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Card Background Settings"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
+    {
+      "type": "range",
+      "id": "card_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Card Background Opacity (%)",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_bg_desktop",
+      "label": "Show Card Background on Desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_bg_mobile",
+      "label": "Show Card Background on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Options"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color_day",
+      "label": "Section Background Color (Day)",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color_night",
+      "label": "Section Background Color (Night)",
+      "default": "transparent"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_top",
+      "label": "Show Border Top",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_bottom",
+      "label": "Show Border Bottom",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top Label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Benefits",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

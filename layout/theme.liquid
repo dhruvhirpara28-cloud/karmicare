@@ -123,6 +123,9 @@
       {% if settings.primary-border-radius != blank %}
         --primary-border-radius: {{ settings.primary-border-radius }}px;
       {% endif %}
+      {% if settings.extra-primary-border-radius != blank %}
+        --extra-primary-border-radius: {{ settings.extra-primary-border-radius }}px;
+      {% endif %}
       {% if settings.secondary-border-radius != blank %}
         --secondary-border-radius: {{ settings.secondary-border-radius }}px;
       {% endif %}
@@ -163,7 +166,9 @@
         --km-body-lg: 20px;
         --km-body-xl: 22px;
         --km-body-2xl: 24px;
-        --kc-responsive-caption-letter-spacing:1.25;
+        --kc-responsive-caption-letter-spacing:1.25px;
+        --kc-responsive-caption-letter-spacing:1px;
+
 
         --font-400-weight:{{ settings.font_400_weight }};
         --font-500-weight:{{ settings.font_500_weight }};
@@ -182,6 +187,7 @@
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
+        --extra_small_font_size_all: {{ settings.extra_small_font_size_all | divided_by: 10.0 }}rem;
         --kc-responsive-label-sm-text-size: {{ settings.body_small_font_size_all | divided_by: 10.0 }}rem;
         --font-body-size-mobile: {{ settings.body_font_size_mobile | divided_by: 10.0 }}rem;
         --font-body-size-desktop: {{ settings.body_font_size_desktop | divided_by: 10.0 }}rem;
@@ -199,7 +205,7 @@
 
         --font-h3-size-mobile: calc(var(--font-heading-scale) * {{ settings.h3_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h3-size-desktop: calc(var(--font-heading-scale) * {{ settings.h3_font_size_desktop | divided_by: 10.0 }}rem);
-        --kc-responsive-h3-letter-spacing:-0.01em;
+        --kc-responsive-h3-letter-spacing:-1px;
 
         --font-h4-size-mobile: calc(var(--font-heading-scale) * {{ settings.h4_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h4-size-desktop: calc(var(--font-heading-scale) * {{ settings.h4_font_size_desktop | divided_by: 10.0 }}rem);
@@ -207,6 +213,7 @@
 
         --font-h5-size-mobile: calc(var(--font-heading-scale) * {{ settings.h5_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h5-size-desktop: calc(var(--font-heading-scale) * {{ settings.h5_font_size_desktop | divided_by: 10.0 }}rem);
+        --kc-responsive-h5-letter-spacing:-0.5px;
 
         --font-h6-size-mobile: calc(var(--font-heading-scale) * {{ settings.h6_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h6-size-desktop: calc(var(--font-heading-scale) * {{ settings.h6_font_size_desktop | divided_by: 10.0 }}rem);
@@ -426,6 +433,7 @@
     </style>
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {% render 'button-styles' %}
     {{ 'day-night-mode.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' -%}
