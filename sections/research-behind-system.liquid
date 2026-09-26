@@ -1,0 +1,563 @@
+{{ 'section-research-behind-system.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_border_top != blank -%}
+  <div class="block__border-top border-{{ section.id }}">
+    <div class="page-width">
+      <div class="research-behind-system__border"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+<div class="research-behind-system section-{{ section.id }}">
+  {%- style -%}
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_desktop }}px;
+        padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+      }
+    }
+
+    /* Day Mode Colors */
+    {%- if section.settings.bg_gradient_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+      }
+    {%- elsif section.settings.bg_color_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_day }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.text_color_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+        color: {{ section.settings.text_color_day }};
+      }
+    {%- endif -%}
+
+    /* Night Mode Colors */
+    {%- if section.settings.bg_gradient_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+      }
+    {%- elsif section.settings.bg_color_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_night }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.text_color_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+        color: {{ section.settings.text_color_night }};
+      }
+    {%- endif -%}
+
+    /* Card Background Colors */
+    {%- if section.settings.card_bg_color_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }} .research-card {
+        --card-bg: {{ section.settings.card_bg_color_day }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.card_bg_color_night != blank -%}
+      body.night-mode .section-{{ section.id }} .research-card {
+        --card-bg: {{ section.settings.card_bg_color_night }};
+      }
+    {%- endif -%}
+  {%- endstyle -%}
+
+  <div class="page-width">
+    <div class="research-behind-system__header">
+      {%- if section.settings.subheading != blank -%}
+        <span>{{ section.settings.subheading }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- capture slider_classes -%}
+      {% if section.settings.slider_mobile %} slider--mobile{% endif %}
+      {% if section.settings.slider_tablet %} slider--tablet{% endif %}
+      {% if section.settings.slider_laptop %} slider--desktop{% endif %}
+      {% if section.settings.slider_desktop %} slider--desktop{% endif %}
+    {%- endcapture -%}
+
+    {%- assign show_slider = false -%}
+    {%- if section.settings.slider_mobile
+      or section.settings.slider_tablet
+      or section.settings.slider_laptop
+      or section.settings.slider_desktop
+    -%}
+      {%- assign show_slider = true -%}
+    {%- endif -%}
+
+    {%- if show_slider -%}
+      <slider-component>
+    {%- endif -%}
+
+    <ul
+      class="research-behind-system__grid{% if show_slider %} slider{{ slider_classes }}{% endif %}"
+      id="Slider-{{ section.id }}"
+      role="list"
+      style="
+        --cols-desktop: {{ section.settings.columns_desktop }};
+        --cols-laptop: {{ section.settings.columns_laptop }};
+        --cols-tablet: {{ section.settings.columns_tablet }};
+        --cols-mobile: {{ section.settings.columns_mobile }};
+        --cols-desktop-int: {{ section.settings.columns_desktop | round }};
+        --cols-laptop-int: {{ section.settings.columns_laptop | round }};
+        --cols-tablet-int: {{ section.settings.columns_tablet | round }};
+        --cols-mobile-int: {{ section.settings.columns_mobile | round }};
+      "
+    >
+      {%- for block in section.blocks -%}
+        <li class="research-card{% if show_slider %} slider__slide{% endif %}" {{ block.shopify_attributes }}>
+          <div class="research-card__content">
+            {%- if block.settings.subheading != blank -%}
+              <span class="research-card__subheading">{{ block.settings.subheading }}</span>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="research-card__heading h4">{{ block.settings.heading }}</h3>
+            {%- endif -%}
+            {%- if block.settings.subtext != blank -%}
+              <p class="research-card__subtext">{{ block.settings.subtext }}</p>
+            {%- endif -%}
+
+            <div class="research-card__details">
+              {%- if block.settings.result_text != blank -%}
+                <div class="research-card__detail-group">
+                  <span>{{ block.settings.result_label }}</span>
+                  <p>{{ block.settings.result_text }}</p>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.method_text != blank -%}
+                <div class="research-card__detail-group">
+                  <span>{{ block.settings.method_label }}</span>
+                  <p>{{ block.settings.method_text }}</p>
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div class="research-card__footer">
+              {%- if block.settings.link_label != blank -%}
+                <a href="{{ block.settings.link_url | default: '#' }}" class="">
+                  {{ block.settings.link_label }}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75L2.08333 12.75C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="#FFFBF6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+              {%- if block.settings.logo != blank -%}
+                {{ block.settings.logo | image_url: width: 200 | image_tag: loading: 'lazy' }}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="research-card__image-wrapper">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+
+            {%- if block.settings.image_badge != blank -%}
+              <span class="research-card__badge">{{ block.settings.image_badge }}</span>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if show_slider -%}
+      </slider-component>
+    {%- endif -%}
+
+    <div class="research-behind-system__footer">
+      {%- if section.settings.bottom_text != blank -%}
+        {{ section.settings.bottom_text }}
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="karmicare__btn-secondary">
+          {{ section.settings.button_label }}
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.25 7.5H13.75M8.75 12.5L13.75 7.5L8.75 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.show_border_bottom != blank -%}
+  <div class="block__border-bottom border-{{ section.id }}">
+    <div class="page-width">
+      <div class="research-behind-system__border"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+{%- if show_slider -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sliders = document.querySelectorAll('.research-behind-system__grid.slider:not([data-initialized="true"])');
+      sliders.forEach((slider) => {
+        slider.setAttribute('data-initialized', 'true');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.style.cursor = 'grab';
+
+        slider.addEventListener('mousedown', (e) => {
+          if (slider.scrollWidth <= slider.clientWidth) return;
+          isDown = true;
+          slider.style.cursor = 'grabbing';
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+          isDown = false;
+          slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mouseup', () => {
+          isDown = false;
+          slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 2;
+          slider.scrollLeft = scrollLeft - walk;
+        });
+      });
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Research Behind System",
+  "tag": "section",
+  "class": "section-research-behind-system",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "CLINICALLY BACKED ORAL CARE"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The research behind the system"
+    },
+    {
+      "type": "header",
+      "content": "Footer Content"
+    },
+    {
+      "type": "richtext",
+      "id": "bottom_text",
+      "label": "Bottom Text",
+      "default": "<p>Built for people who read the label, check the research and want their daily care to hold up...</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "EXPLORE THE FULL EVIDENCE BASE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_top",
+      "label": "Show Top Border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_bottom",
+      "label": "Show Bottom Border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_desktop",
+      "label": "Enable Slider on Desktop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_laptop",
+      "label": "Enable Slider on Laptop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_tablet",
+      "label": "Enable Slider on Tablet",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_mobile",
+      "label": "Enable Slider on Mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Columns"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1.0,
+      "max": 3.0,
+      "step": 0.1,
+      "label": "Columns on Desktop",
+      "default": 2.0
+    },
+    {
+      "type": "range",
+      "id": "columns_laptop",
+      "min": 1.0,
+      "max": 3.0,
+      "step": 0.1,
+      "label": "Columns on Laptop",
+      "default": 2.0
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1.0,
+      "max": 3.0,
+      "step": 0.1,
+      "label": "Columns on Tablet",
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1.0,
+      "max": 3.0,
+      "step": 0.1,
+      "label": "Columns on Mobile",
+      "default": 1.2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Research Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "NANO-HYDROXYAPATITE"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Nano-HAp sealed 98% of open dentine tubules."
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Human dentine discs - 7 days"
+        },
+        {
+          "type": "header",
+          "content": "Details (Result & Method)"
+        },
+        {
+          "type": "text",
+          "id": "result_label",
+          "label": "Result Label",
+          "default": "RESULT"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "result_text",
+          "label": "Result Text",
+          "default": "98% occlusion vs 82% and 65% for two other desensitising technologies"
+        },
+        {
+          "type": "text",
+          "id": "method_label",
+          "label": "Method Label",
+          "default": "METHOD"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "method_text",
+          "label": "Method Text",
+          "default": "In vitro SEM comparison of three pastes, ~1% nHAp."
+        },
+        {
+          "type": "header",
+          "content": "Footer Link & Logo"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link Label",
+          "default": "Kulai Et Al. - 2016"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo Image"
+        },
+        {
+          "type": "header",
+          "content": "Image & Badge"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_badge",
+          "label": "Image Badge Text",
+          "default": "DENTINE TUBULES - OPEN AND OCCLUDED"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Research Behind System",
+      "blocks": [{ "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

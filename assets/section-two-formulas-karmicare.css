@@ -1,0 +1,223 @@
+/* -----------------------------------------------------------------------------
+ * KARMICARE - TWO FORMULAS SYSTEM SECTION CSS
+ * -------------------------------------------------------------------------- */
+
+/* ── Background Clock Wrapper ── */
+
+
+@media screen and (min-width: 1080px) {
+  .two-formulas__bg-clock {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-width: 1236px;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ── Top Header Area ── */
+.two-formulas__header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.two-formulas__subheading {
+  font-size: var(--font-body-small-size-desktop);
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
+  display: block;
+  text-transform: uppercase;
+}
+
+.two-formulas__heading {
+  margin: 2.4rem auto;
+}
+
+.two-formulas__button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.two-formulas__subtext {
+  margin-top: 1.6rem;
+  opacity: 0.7;
+}
+
+/* ── Middle Stage Area ── */
+.two-formulas__stage {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 3.5rem;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 990px) {
+  .two-formulas__stage {
+    grid-template-areas: "left center right";
+    gap: 1.5rem;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .two-formulas__stage {
+    grid-template-columns: 1fr minmax(350px, 350px) 1fr;
+  }
+}
+
+.two-formulas__image-wrap {
+  display: block;
+  width: 100%;
+  text-align: center;
+  grid-area: center;
+}
+
+@media screen and (max-width: 1079px) {
+  .two-formulas__image-wrap {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .two-formulas__stage {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "center center"
+      "left right";
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 10px;
+  }
+}
+
+/* Features (Left and Right Columns) */
+.two-formulas__feature {
+  display: flex;
+  flex-direction: column;
+  max-width: 340px;
+  height: 100%;
+  justify-content: center;
+}
+
+.two-formulas__feature--left {
+  grid-area: left;
+  text-align: left;
+}
+
+.two-formulas__feature--right {
+  grid-area: right;
+  text-align: left;
+}
+
+@media screen and (min-width: 990px) {
+  .two-formulas__feature--left {
+    justify-self: end;
+    padding-right: 1.5rem;
+  }
+
+  .two-formulas__feature--right {
+    justify-self: start;
+    padding-left: 1.5rem;
+  }
+}
+
+.two-formulas__feature-text {
+  margin: 2.4rem 0;
+}
+
+@media screen and (max-width: 989px) {
+  .two-formulas__feature {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .two-formulas__feature--right {
+    text-align: right;
+  }
+
+  .two-formulas__feature-heading {
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1199px) {
+  .two-formulas__stage {
+    grid-template-columns: 1fr minmax(300px, 300px) 1fr;
+  }
+
+  .two-formulas__feature {
+    max-width: 280px;
+    padding: 0;
+  }
+}
+
+/* ── Bottom Ingredients / Benefits Pills ── */
+.two-formulas__pills {
+  width: 100%;
+  margin: 1rem auto 0 auto;
+}
+
+@media screen and (min-width: 1200px) {
+  .two-formulas__pills {
+    max-width: 750px;
+  }
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1199px) {
+  .two-formulas__pills {
+    max-width: 520px;
+  }
+}
+
+.two-formulas__pills ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  list-style: none;
+}
+
+.two-formulas__pills li {
+  text-transform: uppercase;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  font-weight: var(--font-500-weight);
+  border-radius: var(--tertiary-border-radius);
+
+}
+
+@media screen and (min-width: 1200px) {
+  .two-formulas__pills li {
+    padding: 8px 16px;
+    font-size: var(--kc-responsive-label-sm-text-size);
+    letter-spacing: var(--kc-responsive-caption-letter-spacing);
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .two-formulas__pills li {
+    font-size: var(--extra_small_font_size_all);
+    padding: 8px 10px;
+    letter-spacing: var(--kc-responsive-caption-letter-spacing);
+  }
+}

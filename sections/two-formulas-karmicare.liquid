@@ -1,0 +1,440 @@
+{{ 'section-two-formulas-karmicare.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .two-formulas-karmicare{
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .two-formulas-karmicare{
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-formulas__heading strong,
+  #shopify-section-{{ section.id }} .two-formulas__heading b {
+    opacity: {{ section.settings.heading_bold_opacity | divided_by: 100.0 }};
+  }
+
+  /* ── Background Clock Image ── */
+  {%- if section.settings.show_bg_clock and section.settings.bg_clock_image != blank -%}
+    @media screen and (min-width: 1080px) {
+      #shopify-section-{{ section.id }} .two-formulas__bg-clock {
+        background-image: url('{{ section.settings.bg_clock_image | image_url: width: 1400 }}');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+    }
+    @media screen and (max-width: 1079px) {
+      #shopify-section-{{ section.id }} .two-formulas__image-wrap {
+        background-image: url('{{ section.settings.bg_clock_image | image_url: width: 800 }}');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+    }
+  {%- endif -%}
+
+  /* ── Day Mode Colors & Background ── */
+  {%- if section.settings.bg_gradient_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .two-formulas-karmicare,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .two-formulas-karmicare {
+      background: {{ section.settings.bg_gradient_day }};
+    }
+  {%- elsif section.settings.bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .two-formulas-karmicare,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .two-formulas-karmicare {
+      background: {{ section.settings.bg_color_day }};
+    }
+  {%- endif -%}
+
+  {%- if section.settings.text_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .two-formulas-karmicare,
+    body:not(.night-mode) #shopify-section-{{ section.id }} .two-formulas-karmicare {
+      color: {{ section.settings.text_color_day }};
+    }
+  {%- endif -%}
+
+  /* ── Night Mode Colors & Background ── */
+  {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .two-formulas-karmicare {
+      background: {{ section.settings.bg_gradient_night }};
+    }
+  {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .two-formulas-karmicare {
+      background: {{ section.settings.bg_color_night }};
+    }
+  {%- endif -%}
+
+  {%- if section.settings.text_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .two-formulas-karmicare {
+      color: {{ section.settings.text_color_night }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div
+  id="TwoFormulas-{{ section.id }}"
+  class="two-formulas-karmicare"
+  aria-label="{{ section.settings.subheading | escape }}"
+>
+  <div class="page-width">
+    <div class="two-formulas__bg-clock">
+      {%- if section.settings.show_bg_clock and section.settings.bg_clock_html != blank -%}
+        <div class="two-formulas__bg-clock-svg" aria-hidden="true">
+          {{ section.settings.bg_clock_html }}
+        </div>
+      {%- endif -%}
+
+      <!-- Top Header Area -->
+      <div class="two-formulas__header">
+        {%- if section.settings.subheading != blank -%}
+          <span class="two-formulas__subheading">{{ section.settings.subheading | escape }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="two-formulas__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="two-formulas__button-wrapper">
+            <a
+              href="{{ section.settings.button_link | default: '#' }}"
+              class="karmicare__btn-primary"
+              role="button"
+            >
+              {{ section.settings.button_label | escape }}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_subtext != blank -%}
+          <p class="two-formulas__subtext">
+            {{ section.settings.button_subtext }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <!-- Middle Stage: Left Column, Center Tubes, Right Column -->
+      <div class="two-formulas__stage">
+        <!-- Left Feature (Daytime) -->
+        <div class="two-formulas__feature two-formulas__feature--left">
+          {%- if section.settings.left_heading != blank -%}
+            <h3 class="two-formulas__feature-heading">
+              {{ section.settings.left_heading | escape }}
+            </h3>
+          {%- endif -%}
+          {%- if section.settings.left_text != blank -%}
+            <p class="two-formulas__feature-text">
+              {{ section.settings.left_text | escape }}
+            </p>
+          {%- endif -%}
+          {%- if section.settings.left_button_label != blank -%}
+            <a
+              href="{{ section.settings.left_button_link | default: '#' }}"
+              class="karmicare__btn-secondary two-formulas__btn-secondary"
+              role="button"
+            >
+              {{ section.settings.left_button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        <!-- Center Image -->
+        <div class="two-formulas__image-wrap">
+          {%- if section.settings.main_image != blank -%}
+            {{
+              section.settings.main_image
+              | image_url: width: 220
+              | image_tag:
+                loading: 'lazy',
+                decoding: 'async',
+                class: 'two-formulas__image',
+                widths: '160, 200, 220, 260, 320, 440',
+                sizes: '220px',
+                alt: section.settings.heading
+            }}
+          {%- else -%}
+            <div class="two-formulas__image-placeholder">
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <!-- Right Feature (Nighttime) -->
+        <div class="two-formulas__feature two-formulas__feature--right">
+          {%- if section.settings.right_heading != blank -%}
+            <h3 class="two-formulas__feature-heading">
+              {{ section.settings.right_heading | escape }}
+            </h3>
+          {%- endif -%}
+          {%- if section.settings.right_text != blank -%}
+            <p class="two-formulas__feature-text">
+              {{ section.settings.right_text | escape }}
+            </p>
+          {%- endif -%}
+          {%- if section.settings.right_button_label != blank -%}
+            <a
+              href="{{ section.settings.right_button_link | default: '#' }}"
+              class="karmicare__btn-secondary two-formulas__btn-secondary"
+              role="button"
+            >
+              {{ section.settings.right_button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Bottom Ingredients / Benefits Pills -->
+      {%- if section.settings.ingredients_list != blank -%}
+        <div class="two-formulas__pills">
+          {{ section.settings.ingredients_list }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Two Formulas Karmicare",
+  "tag": "section",
+  "class": "section-two-formulas-karmicare",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top Heading & CTA"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading (Span tag)",
+      "default": "BIORHYTHMIC ORAL CARE",
+      "info": "Font 14px, letter-spacing 1.25, font-weight 500"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading (H2 tag)",
+      "default": "Two formulas. One system. Designed around you."
+    },
+    {
+      "type": "range",
+      "id": "heading_bold_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Heading Bold Text Opacity",
+      "default": 70
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button label",
+      "default": "BEGIN YOUR 60-DAY RITUAL"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_subtext",
+      "label": "Under button text (P tag)",
+      "default": "€0,49 / brushing ritual"
+    },
+    {
+      "type": "header",
+      "content": "Main Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main image",
+      "info": "Displays the product duo tubes in the center."
+    },
+    {
+      "type": "header",
+      "content": "Left Column (Day Ritual)"
+    },
+    {
+      "type": "text",
+      "id": "left_heading",
+      "label": "Left heading (H3 tag)",
+      "default": "Activated and strengthened by day"
+    },
+    {
+      "type": "textarea",
+      "id": "left_text",
+      "label": "Left text (P tag)",
+      "default": "Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated."
+    },
+    {
+      "type": "text",
+      "id": "left_button_label",
+      "label": "Left button label",
+      "default": "SEE WHAT'S INSIDE"
+    },
+    {
+      "type": "url",
+      "id": "left_button_link",
+      "label": "Left button link"
+    },
+    {
+      "type": "header",
+      "content": "Right Column (Night Ritual)"
+    },
+    {
+      "type": "text",
+      "id": "right_heading",
+      "label": "Right heading (H3 tag)",
+      "default": "Purified and restored by night"
+    },
+    {
+      "type": "textarea",
+      "id": "right_text",
+      "label": "Right text (P tag)",
+      "default": "Valerian, cinnamon and orange — a gentle reset for everything behind. Your evening ritual, complete."
+    },
+    {
+      "type": "text",
+      "id": "right_button_label",
+      "label": "Right button label",
+      "default": "SEE WHAT'S INSIDE"
+    },
+    {
+      "type": "url",
+      "id": "right_button_link",
+      "label": "Right button link"
+    },
+    {
+      "type": "header",
+      "content": "Ingredients / Highlights List"
+    },
+    {
+      "type": "richtext",
+      "id": "ingredients_list",
+      "label": "Ingredients list (styled as rounded pills)",
+      "default": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+      "info": "Use bullet points (Unordered list) in RichText. Each item will render as a rounded pill badge."
+    },
+    {
+      "type": "header",
+      "content": "Background Clock / Frame"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bg_clock",
+      "label": "Show background clock circle",
+      "default": true,
+      "info": "Displays the circular dashed clock frame from Figma behind the section."
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_clock_image",
+      "label": "Background clock image",
+      "info": "Upload an image for the background clock or frame."
+    },
+    {
+      "type": "html",
+      "id": "bg_clock_html",
+      "label": "Background clock custom HTML / SVG",
+      "info": "Paste custom SVG or HTML code for the background clock."
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (Mobile)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two Formulas Karmicare"
+    }
+  ]
+}
+{% endschema %}

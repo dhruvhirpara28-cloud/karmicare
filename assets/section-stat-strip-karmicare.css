@@ -67,7 +67,7 @@
 .stat-strip-karmicare__tagline {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   transition: color 0.4s ease;
   font-size: var(--kc-responsive-label-sm-text-size);
 }

@@ -51,13 +51,18 @@
   }
 
   #shopify-section-{{ section.id }} .header {
-    border: 1px solid transparent;
     border-radius: var(--primary-border-radius);
     box-shadow: 0 2px 8px rgba(25, 31, 56, 0.04);
     max-width: 1200px;
-    margin: 1rem auto;
+    margin: 1.2rem auto;
     padding: {{ section.settings.padding_top }}px 2rem {{ section.settings.padding_bottom }}px 2rem;
     align-items: center;
+  }
+  @media screen and (max-width: 1199px){
+    #shopify-section-{{ section.id }} .header {
+      margin-left: 1.2rem;
+      margin-right: 1.2rem;
+    }
   }
 
   @media screen and (min-width: 990px) {
@@ -94,24 +99,7 @@
   }
 
   /* CTA Button */
-  #shopify-section-{{ section.id }} .header__cta-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 1.5rem;
-    border-radius: var(--primary-border-radius);
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-    line-height: normal;
-    transition: opacity 0.2s ease;
-    font-size: var(--font-body-small-size-desktop);
-  }
-  #shopify-section-{{ section.id }} .header__cta-btn:hover {
-    opacity: 0.88;
-  }
+
   @media screen and (max-width: 989px) {
   /* Hide the desktop inline menu on mobile */
   #shopify-section-{{ section.id }} .header__inline-menu {
@@ -128,7 +116,6 @@
     display: flex;
     align-items: center;
     padding: 0.4rem;
-    margin: 1.2rem;
     position: relative;
     z-index: 100;
   }
@@ -247,18 +234,6 @@
       fill: {{ section.settings.text_color_day }};
     }
   {%- endif -%}
-  {%- if section.settings.btn_bg_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
-    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn {
-      background-color: {{ section.settings.btn_bg_day }};
-    }
-  {%- endif -%}
-  {%- if section.settings.btn_text_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
-    body.day-mode #shopify-section-{{ section.id }} .header__cta-btn {
-      color: {{ section.settings.btn_text_day }};
-    }
-  {%- endif -%}
 
   /* ── NIGHT MODE COLORS (from section schema settings) ── */
   {%- if section.settings.bg_color_night != blank -%}
@@ -278,18 +253,6 @@
     body.night-mode #shopify-section-{{ section.id }} .header a:not(.header__cta-btn) {
       color: {{ section.settings.text_color_night }};
       fill: {{ section.settings.text_color_night }};
-    }
-  {%- endif -%}
-  {%- if section.settings.btn_bg_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
-    body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
-      background-color: {{ section.settings.btn_bg_night }};
-    }
-  {%- endif -%}
-  {%- if section.settings.btn_text_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .header a.header__cta-btn,
-    body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
-      color: {{ section.settings.btn_text_night }};
     }
   {%- endif -%}
   {% if section.settings.bg_color_night !=blank %}
@@ -540,7 +503,7 @@
       {%- if section.settings.show_cta_button and section.settings.cta_text != blank -%}
         <a
           href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}"
-          class="header__cta-btn "
+          class="header__cta-btn karmicare__btn-primary"
         >
           {{ section.settings.cta_text }}
         </a>

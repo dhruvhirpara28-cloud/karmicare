@@ -1,0 +1,112 @@
+{%- comment -%}
+  Renders CSS for Karmicare Primary & Secondary buttons with dynamic Day & Night theme settings.
+{%- endcomment -%}
+
+<style id="karmicare-button-styles">
+  .karmicare__btn-primary,
+  .karmicare__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.35rem 1.5rem;
+    border-radius: var(--primary-border-radius);
+    font-weight: var(--font-500-weight);
+    text-transform: uppercase;
+    letter-spacing: var(--kc-responsive-caption-letter-spacing);
+    font-size: var(--font-body-small-size-desktop);
+    cursor: pointer;
+    transition: opacity .4s ease, transform .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+    box-sizing: border-box;
+    line-height: normal;
+    text-decoration: none;
+    border: 1px solid transparent;
+    text-align: center;
+  }
+
+  .karmicare__btn-secondary {
+    background: transparent;
+    border: 1px solid currentColor;
+  }
+
+  .karmicare__btn-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  .karmicare__btn-secondary:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  /* ── PRIMARY BUTTON (DAY MODE) ── */
+  body.day-mode .karmicare__btn-primary,
+  body:not(.night-mode) .karmicare__btn-primary {
+    {%- if settings.button_color_day != blank -%}
+      background-color: {{ settings.button_color_day }};
+    {%- endif -%}
+    {%- if settings.button_text_color_day != blank -%}
+      color: {{ settings.button_text_color_day }};
+    {%- endif -%}
+    {%- if settings.button_border_color_day != blank -%}
+      border-color: {{ settings.button_border_color_day }};
+    {%- endif -%}
+  }
+
+  /* ── SECONDARY BUTTON (DAY MODE) ── */
+  body.day-mode .karmicare__btn-secondary,
+  body:not(.night-mode) .karmicare__btn-secondary {
+    background: transparent;
+    {%- if settings.button_secondary_text_color_day != blank -%}
+      color: {{ settings.button_secondary_text_color_day }};
+    {%- elsif settings.button_text_color_day != blank -%}
+      color: {{ settings.button_text_color_day }};
+    {%- endif -%}
+    {%- if settings.button_secondary_border_color_day != blank -%}
+      border-color: {{ settings.button_secondary_border_color_day }};
+    {%- elsif settings.button_border_color_day != blank -%}
+      border-color: {{ settings.button_border_color_day }};
+    {%- else -%}
+      border-color: currentColor;
+    {%- endif -%}
+  }
+
+  /* ── PRIMARY BUTTON (NIGHT MODE) ── */
+  body.night-mode .karmicare__btn-primary {
+    {%- if settings.button_color_night != blank -%}
+      background-color: {{ settings.button_color_night }};
+    {%- endif -%}
+    {%- if settings.button_text_color_night != blank -%}
+      color: {{ settings.button_text_color_night }};
+    {%- endif -%}
+    {%- if settings.button_border_color_night != blank -%}
+      border-color: {{ settings.button_border_color_night }};
+    {%- endif -%}
+  }
+
+  /* ── SECONDARY BUTTON (NIGHT MODE) ── */
+  body.night-mode .karmicare__btn-secondary {
+    background: transparent;
+    {%- if settings.button_secondary_text_color_night != blank -%}
+      color: {{ settings.button_secondary_text_color_night }};
+    {%- elsif settings.button_text_color_night != blank -%}
+      color: {{ settings.button_text_color_night }};
+    {%- endif -%}
+    {%- if settings.button_secondary_border_color_night != blank -%}
+      border-color: {{ settings.button_secondary_border_color_night }};
+    {%- elsif settings.button_border_color_night != blank -%}
+      border-color: {{ settings.button_border_color_night }};
+    {%- else -%}
+      border-color: currentColor;
+    {%- endif -%}
+  }
+
+
+  .karmicare__btn-primary svg,.karmicare__btn-secondary svg{margin-left:10px;}
+  @media screen and (max-width: 749px) {
+    .karmicare__btn-primary,
+    .karmicare__btn-secondary {
+      font-size: var(--font-body-small-size-mobile);
+      padding: 1.2rem 1.2rem;
+    }
+  }
+</style>
