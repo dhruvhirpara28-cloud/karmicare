@@ -3550,3 +3550,26 @@ details-disclosure>details {
 .block__animate-button:hover .arrow {
   transform: translateX(4px);
 }
+
+.kc-caption-subheading {
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
+  font-size: var(--font-body-small-size-desktop);
+  font-weight: var(--font-500-weight);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.kc-caption-text>*:not(h2):not(a),
+.kc-caption-text p,
+p.kc-caption-text {
+  opacity: .76;
+}
+
+/* Reusable Section Border */
+.block__border-top .kc-section-border,
+.block__border-bottom .kc-section-border {
+  border-bottom: 1px solid currentColor;
+  opacity: 0.2;
+  display: block;
+}

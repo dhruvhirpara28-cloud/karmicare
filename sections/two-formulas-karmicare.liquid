@@ -92,7 +92,7 @@
       <!-- Top Header Area -->
       <div class="two-formulas__header">
         {%- if section.settings.subheading != blank -%}
-          <span class="two-formulas__subheading">{{ section.settings.subheading | escape }}</span>
+          <span class="kc-caption-subheading">{{ section.settings.subheading | escape }}</span>
         {%- endif -%}
 
         {%- if section.settings.heading != blank -%}
@@ -114,7 +114,7 @@
         {%- endif -%}
 
         {%- if section.settings.button_subtext != blank -%}
-          <p class="two-formulas__subtext">
+          <p class="two-formulas__subtext kc-caption-text">
             {{ section.settings.button_subtext }}
           </p>
         {%- endif -%}

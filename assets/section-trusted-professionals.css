@@ -11,13 +11,6 @@
   margin-bottom: 2rem;
 }
 
-.trusted-professionals__header span {
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  font-size: var(--font-body-small-size-desktop);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
 .trusted-professionals__header h2 {
   max-width: 500px;
 }
@@ -204,10 +197,6 @@
   font-weight: var(--font-700-weight);
 }
 
-.trusted-professionals__inner p {
-  opacity: 0.76;
-}
-
 /* Footer (Mobile Button/Text) */
 .trusted-professionals__footer {
   display: flex;
@@ -218,12 +207,4 @@
 
 .trusted-professionals__bottom-text {
   max-width: 480px;
-}
-
-/* Bottom Border Option */
-.block__border-top .trusted-professionals__border,
-.block__border-bottom .trusted-professionals__border {
-  border-bottom: 1px solid currentColor;
-  opacity: 0.2;
-  display: block;
 }

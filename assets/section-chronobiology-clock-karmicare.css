@@ -87,13 +87,6 @@ body.night-mode .chronobiology-clock {
   text-align: center;
 }
 
-.chronobiology-clock .eyebrow {
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  display: inline-block;
-  margin: 0 0 1rem;
-  font-size: var(--font-body-small-size-desktop);
-  text-transform: uppercase;
-}
 
 .chronobiology-clock .clock-heading {
   max-width: 360px;
@@ -103,7 +96,6 @@ body.night-mode .chronobiology-clock {
 .chronobiology-clock .lede {
   max-width: 436px;
   margin: 0 auto;
-  opacity: 0.7;
 }
 
 /* ── Interactive Stage & Dial Artwork ── */
@@ -341,10 +333,6 @@ body.night-mode .chronobiology-clock .leader {
   margin: 3px 0;
 }
 
-.chronobiology-clock .description {
-  opacity: 0.7;
-}
-
 .chronobiology-clock .callout-morning {
   right: calc(50% + 271px);
   top: calc(271.5px - 24px - 16px);
@@ -364,19 +352,12 @@ body.night-mode .chronobiology-clock .leader {
   text-align: center;
 }
 
-.chronobiology-clock .time-line {
-  font-size: var(--font-body-small-size-desktop);
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
-  font-weight: var(--font-500-weight);
-}
+
 
 .chronobiology-clock .state-copy {
   margin: 6px auto 0;
   max-width: 380px;
   font-size: var(--font-body-small-size-desktop);
-  opacity: 0.7;
 }
 
 .chronobiology-clock .hint {
