@@ -8,7 +8,7 @@
 {% if section.settings.show_border_top != blank %}
   <div class="block__border-top border-{{ section.id }}">
     <div class="page-width">
-      <div class="trusted-professionals__border"></div>
+      <div class="kc-section-border"></div>
     </div>
   </div>
 {% endif %}
@@ -64,7 +64,7 @@
     <div class="trusted-professionals__inner">
       <div class="trusted-professionals__header">
         {%- if section.settings.subheading != blank -%}
-          <span>{{ section.settings.subheading }}</span>
+          <span class="kc-caption-subheading">{{ section.settings.subheading }}</span>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
           <h2>{{ section.settings.heading }}</h2>
@@ -163,7 +163,7 @@
 
       <div class="trusted-professionals__footer">
         {%- if section.settings.bottom_text != blank -%}
-          <div class="trusted-professionals__bottom-text">
+          <div class="trusted-professionals__bottom-text kc-caption-text">
             {{ section.settings.bottom_text }}
           </div>
         {%- endif -%}
@@ -184,7 +184,7 @@
 {%- if section.settings.show_border_bottom != blank -%}
   <div class="block__border-bottom border-{{ section.id }}">
     <div class="page-width">
-      <div class="trusted-professionals__border"></div>
+      <div class="kc-section-border"></div>
     </div>
   </div>
 {% endif %}

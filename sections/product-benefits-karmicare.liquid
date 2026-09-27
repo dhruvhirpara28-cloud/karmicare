@@ -7,7 +7,7 @@
 {% if section.settings.show_border_top != blank %}
   <div class="block__border-top border-{{ section.id }}">
     <div class="page-width">
-      <div class="product-benefits__border"></div>
+      <div class="kc-section-border"></div>
     </div>
   </div>
 {% endif %}
@@ -77,9 +77,9 @@
   {%- endstyle -%}
   <div class="page-width">
     <div class="product-benefits__inner">
-      <div class="product-benefits__left">
+      <div class="product-benefits__left kc-caption-text">
         {%- if section.settings.subheading != blank -%}
-          <span class="product-benefits__subheading">{{ section.settings.subheading }}</span>
+          <span class="kc-caption-subheading">{{ section.settings.subheading }}</span>
         {%- endif -%}
 
         {%- if section.settings.heading != blank -%}
@@ -220,7 +220,7 @@
 {%- if section.settings.show_border_bottom != blank -%}
   <div class="block__border-bottom border-{{ section.id }}">
     <div class="page-width">
-      <div class="product-benefits__border"></div>
+      <div class="kc-section-border"></div>
     </div>
   </div>
 {% endif %}

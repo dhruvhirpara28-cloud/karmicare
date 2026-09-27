@@ -71,7 +71,7 @@
   <div class="chrono page-width" aria-labelledby="clock-heading-{{ section.id }}">
     <div class="heading">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <span class="kc-caption-subheading">{{ section.settings.eyebrow | escape }}</span>
       {%- endif -%}
 
       {%- if section.settings.title != blank -%}
@@ -82,7 +82,7 @@
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
-        <p class="lede">{{ section.settings.description }}</p>
+        <p class="kc-caption-text">{{ section.settings.description }}</p>
       {%- endif -%}
     </div>
 
@@ -145,7 +145,7 @@
           <h4 id="morning-heading-{{ section.id }}">{{ section.settings.morning_title | escape }}</h4>
         {%- endif -%}
         {%- if section.settings.morning_text != blank -%}
-          <p class="description">{{ section.settings.morning_text | escape }}</p>
+          <p class="kc-caption-text">{{ section.settings.morning_text | escape }}</p>
         {%- endif -%}
       </section>
 
@@ -157,7 +157,7 @@
           <h4 id="evening-heading-{{ section.id }}">{{ section.settings.night_title | escape }}</h4>
         {%- endif -%}
         {%- if section.settings.night_text != blank -%}
-          <p class="description">{{ section.settings.night_text | escape }}</p>
+          <p class="kc-caption-text">{{ section.settings.night_text | escape }}</p>
         {%- endif -%}
       </section>
     </div>
@@ -167,11 +167,11 @@
         <img src="{{ 'drag.svg' | asset_url }}" alt="" width="24" height="24">
         <span>{{ section.settings.hint_label | escape }}</span>
       </button>
-      <p class="time-line">
+      <p class="time-line kc-caption-subheading">
         <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
         <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span>
       </p>
-      <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
+      <p class="state-copy clock-copy kc-caption-text" id="clock-copy-{{ section.id }}"></p>
     </div>
 
     {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}

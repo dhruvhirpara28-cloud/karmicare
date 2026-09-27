@@ -55,7 +55,9 @@
   /* ── SECONDARY BUTTON (DAY MODE) ── */
   body.day-mode .karmicare__btn-secondary,
   body:not(.night-mode) .karmicare__btn-secondary {
-    background: transparent;
+    {%- if settings.button_secondary_background_color_day != blank -%}
+      background: {{ settings.button_secondary_background_color_day }};
+    {%- endif -%}
     {%- if settings.button_secondary_text_color_day != blank -%}
       color: {{ settings.button_secondary_text_color_day }};
     {%- elsif settings.button_text_color_day != blank -%}
@@ -85,7 +87,9 @@
 
   /* ── SECONDARY BUTTON (NIGHT MODE) ── */
   body.night-mode .karmicare__btn-secondary {
-    background: transparent;
+    {%- if settings.button_secondary_background_color_night != blank -%}
+      background: {{ settings.button_secondary_background_color_night }};
+    {%- endif -%}
     {%- if settings.button_secondary_text_color_night != blank -%}
       color: {{ settings.button_secondary_text_color_night }};
     {%- elsif settings.button_text_color_night != blank -%}

@@ -4,7 +4,7 @@
 {%- if section.settings.show_border_top != blank -%}
   <div class="block__border-top border-{{ section.id }}">
     <div class="page-width">
-      <div class="research-behind-system__border"></div>
+      <div class="kc-section-border"></div>
     </div>
   </div>
 {%- endif -%}
@@ -76,7 +76,7 @@
   <div class="page-width">
     <div class="research-behind-system__header">
       {%- if section.settings.subheading != blank -%}
-        <span>{{ section.settings.subheading }}</span>
+        <span class="kc-caption-subheading">{{ section.settings.subheading }}</span>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
         <h2>{{ section.settings.heading }}</h2>
@@ -128,20 +128,20 @@
               <h3 class="research-card__heading h4">{{ block.settings.heading }}</h3>
             {%- endif -%}
             {%- if block.settings.subtext != blank -%}
-              <p class="research-card__subtext">{{ block.settings.subtext }}</p>
+              <p class="research-card__subtext kc-caption-text">{{ block.settings.subtext }}</p>
             {%- endif -%}
 
             <div class="research-card__details">
               {%- if block.settings.result_text != blank -%}
                 <div class="research-card__detail-group">
                   <span>{{ block.settings.result_label }}</span>
-                  <p>{{ block.settings.result_text }}</p>
+                  <p class="kc-caption-text">{{ block.settings.result_text }}</p>
                 </div>
               {%- endif -%}
               {%- if block.settings.method_text != blank -%}
                 <div class="research-card__detail-group">
                   <span>{{ block.settings.method_label }}</span>
-                  <p>{{ block.settings.method_text }}</p>
+                  <p class="kc-caption-text">{{ block.settings.method_text }}</p>
                 </div>
               {%- endif -%}
             </div>
@@ -151,7 +151,7 @@
                 <a href="{{ block.settings.link_url | default: '#' }}" class="">
                   {{ block.settings.link_label }}
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75L2.08333 12.75C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="#FFFBF6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75L2.08333 12.75C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
               {%- endif -%}
@@ -179,15 +179,15 @@
       </slider-component>
     {%- endif -%}
 
-    <div class="research-behind-system__footer">
+    <div class="research-behind-system__footer kc-caption-text">
       {%- if section.settings.bottom_text != blank -%}
         {{ section.settings.bottom_text }}
       {%- endif -%}
       {%- if section.settings.button_label != blank -%}
         <a href="{{ section.settings.button_link | default: '#' }}" class="karmicare__btn-secondary">
           {{ section.settings.button_label }}
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.25 7.5H13.75M8.75 12.5L13.75 7.5L8.75 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75H2.08333C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       {%- endif -%}
@@ -198,7 +198,7 @@
 {%- if section.settings.show_border_bottom != blank -%}
   <div class="block__border-bottom border-{{ section.id }}">
     <div class="page-width">
-      <div class="research-behind-system__border"></div>
+      <div class="kc-section-border"></div>
     </div>
   </div>
 {%- endif -%}
@@ -428,40 +428,74 @@
       "content": "Columns"
     },
     {
-      "type": "range",
+      "type": "select",
       "id": "columns_desktop",
-      "min": 1.0,
-      "max": 3.0,
-      "step": 0.1,
       "label": "Columns on Desktop",
-      "default": 2.0
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.2", "label": "1.2" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.7", "label": "1.7" },
+        { "value": "1.8", "label": "1.8" },
+        { "value": "1.9", "label": "1.9" },
+        { "value": "2", "label": "2" },
+        { "value": "2.2", "label": "2.2" },
+        { "value": "2.5", "label": "2.5" },
+        { "value": "2.7", "label": "2.7" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "2"
     },
     {
-      "type": "range",
+      "type": "select",
       "id": "columns_laptop",
-      "min": 1.0,
-      "max": 3.0,
-      "step": 0.1,
       "label": "Columns on Laptop",
-      "default": 2.0
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.2", "label": "1.2" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.7", "label": "1.7" },
+        { "value": "2", "label": "2" },
+        { "value": "2.2", "label": "2.2" },
+        { "value": "2.5", "label": "2.5" },
+        { "value": "2.7", "label": "2.7" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "2"
     },
     {
-      "type": "range",
+      "type": "select",
       "id": "columns_tablet",
-      "min": 1.0,
-      "max": 3.0,
-      "step": 0.1,
       "label": "Columns on Tablet",
-      "default": 1.2
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.2", "label": "1.2" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.7", "label": "1.7" },
+        { "value": "2", "label": "2" },
+        { "value": "2.2", "label": "2.2" },
+        { "value": "2.5", "label": "2.5" },
+        { "value": "2.7", "label": "2.7" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "1.2"
     },
     {
-      "type": "range",
+      "type": "select",
       "id": "columns_mobile",
-      "min": 1.0,
-      "max": 3.0,
-      "step": 0.1,
       "label": "Columns on Mobile",
-      "default": 1.2
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.2", "label": "1.2" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.7", "label": "1.7" },
+        { "value": "2", "label": "2" },
+        { "value": "2.2", "label": "2.2" },
+        { "value": "2.5", "label": "2.5" },
+        { "value": "2.7", "label": "2.7" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "1.2"
     }
   ],
   "blocks": [
