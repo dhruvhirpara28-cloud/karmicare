@@ -57,6 +57,9 @@
     body.day-mode .section-{{ section.id }} {
     background-color: {{ section.settings.bg_color_day }};
     }
+    :root {
+        --text-color: {{ section.settings.text_color_night }};
+    }
 {%- endif -%}
 
 {% endstyle %}
@@ -260,22 +263,6 @@ details.km-faq__item[open] .km-faq__icon svg {
       "id": "subtext",
       "label": "Sub text",
       "default": "Everything people usually ask before switching to a day-and-night oral care system."
-    },
-    {
-      "type": "header",
-      "content": "Background gradient"
-    },
-    {
-      "type": "color",
-      "id": "bg_top",
-      "label": "Gradient top color",
-      "default": "#F1F7FF"
-    },
-    {
-      "type": "color",
-      "id": "bg_bottom",
-      "label": "Gradient bottom color",
-      "default": "#FFF9F1"
     },
     {
       "type": "checkbox",
