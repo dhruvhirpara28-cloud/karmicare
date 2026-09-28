@@ -774,12 +774,56 @@
   "tag": "div",
   "class": "km-footer-section",
   "settings": [
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F3F7FE" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#191F38" },
-    { "type": "color", "id": "card_color", "label": "Social / language box background", "default": "#FFFFFF" },
-    { "type": "color", "id": "input_bg", "label": "Email input background", "default": "#FFFBF2" },
-
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
     { "type": "header", "content": "Brand" },
     { "type": "image_picker", "id": "logo", "label": "Logo" },
     {
@@ -855,7 +899,7 @@
       "unit": "px",
       "label": "Padding bottom",
       "default": 40
-    }
+    },
   ],
   "presets": [
     { "name": "KM Footer" }
