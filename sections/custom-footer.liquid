@@ -1,0 +1,836 @@
+{%- comment -%}
+  Section: KM Footer (Dawn 15.5.0)
+  File: sections/km-footer.liquid
+  Note: Class / CSS ma section.id vaparyu nathi. Root variables (:root) vaparya che.
+{%- endcomment -%}
+
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign has_social_icons = false
+  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_tiktok_link != blank or settings.social_twitter_link != blank or settings.social_pinterest_link != blank or settings.social_snapchat_link != blank or settings.social_tumblr_link != blank or settings.social_vimeo_link != blank
+    assign has_social_icons = true
+  endif
+
+  assign show_locale = false
+  if section.settings.show_locale
+    if localization.available_countries.size > 1 or localization.available_languages.size > 1
+      assign show_locale = true
+    endif
+  endif
+-%}
+
+<footer
+  class="km-footer"
+  style="
+    --km-footer-bg: {{ section.settings.bg_color }};
+    --km-footer-text: {{ section.settings.text_color }};
+    --km-footer-card: {{ section.settings.card_color }};
+    --km-footer-input-bg: {{ section.settings.input_bg }};
+    --km-footer-pt: {{ section.settings.padding_top }}px;
+    --km-footer-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="km-footer__inner">
+
+    {%- comment -%} ========== TOP: brand / company / newsletter ========== {%- endcomment -%}
+    <div class="km-footer__top">
+
+      {%- comment -%} Brand {%- endcomment -%}
+      <div class="km-footer__col km-footer__brand">
+        <a href="{{ routes.root_url }}" class="km-footer__logo-link">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_w = section.settings.logo_width -%}
+            {{
+              section.settings.logo
+              | image_url: width: 800
+              | image_tag:
+                loading: 'lazy',
+                widths: '160, 240, 320, 480, 640, 800',
+                width: logo_w,
+                class: 'km-footer__logo'
+            }}
+          {%- else -%}
+            <span class="km-footer__logo-text">{{ shop.name | upcase }}</span>
+          {%- endif -%}
+        </a>
+        {%- if section.settings.tagline != blank -%}
+          <p class="km-footer__tagline">{{ section.settings.tagline | escape | newline_to_br }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Company links {%- endcomment -%}
+      <div class="km-footer__col km-footer__menu">
+        {%- if section.settings.menu_heading != blank -%}
+          <h2 class="km-footer__label">{{ section.settings.menu_heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.menu != blank -%}
+          <ul class="km-footer__links">
+            {%- for link in section.settings.menu.links -%}
+              <li>
+                <a href="{{ link.url }}" class="km-footer__link">{{ link.title | escape }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Newsletter {%- endcomment -%}
+      <div class="km-footer__col km-footer__newsletter">
+        {%- if section.settings.newsletter_heading != blank -%}
+          <h2 class="km-footer__label">{{ section.settings.newsletter_heading | escape }}</h2>
+        {%- endif -%}
+
+        {%- form 'customer', id: 'KmFooterNewsletterForm', class: 'km-footer__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <label class="km-footer__email-label" for="KmFooterEmail">
+            {{ section.settings.email_label | escape }}
+          </label>
+
+          <div class="km-footer__field">
+            <input
+              id="KmFooterEmail"
+              class="km-footer__input"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+              placeholder="{{ section.settings.email_placeholder | escape }}"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              aria-required="true"
+              required
+              {% if form.errors %}
+                autofocus
+                aria-invalid="true"
+                aria-describedby="KmFooterError"
+              {% elsif form.posted_successfully? %}
+                aria-describedby="KmFooterSuccess"
+              {% endif %}
+            >
+            <button type="submit" class="km-footer__submit" name="commit">
+              {{ section.settings.button_text | escape }}
+            </button>
+          </div>
+
+          {%- if form.errors -%}
+            <p class="km-footer__message km-footer__message--error" id="KmFooterError" role="alert">
+              {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+            </p>
+          {%- endif -%}
+
+          {%- if form.posted_successfully? -%}
+            <p class="km-footer__message km-footer__message--success" id="KmFooterSuccess" tabindex="-1" autofocus>
+              {{ 'newsletter.success' | t }}
+            </p>
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if section.settings.newsletter_note != blank -%}
+          <div class="km-footer__note">{{ section.settings.newsletter_note }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} ========== MIDDLE: social + locale ========== {%- endcomment -%}
+    {%- if section.settings.show_social and has_social_icons or show_locale -%}
+      <div class="km-footer__middle">
+        <div class="km-footer__social">
+          {%- if section.settings.show_social and has_social_icons -%}
+            {%- render 'social-icons', class: 'km-footer__social-list' -%}
+          {%- endif -%}
+        </div>
+
+        {%- if show_locale -%}
+          <div class="km-footer__locale" data-km-locale>
+            {%- form 'localization', id: 'KmFooterLocaleForm', class: 'km-footer__locale-form' -%}
+              <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+              <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+
+              <button
+                type="button"
+                class="km-footer__locale-toggle"
+                aria-expanded="false"
+                aria-haspopup="true"
+                data-km-locale-toggle
+              >
+                <img
+                  class="km-footer__flag"
+                  src="https://flagcdn.com/w80/{{ localization.country.iso_code | downcase }}.png"
+                  alt=""
+                  width="24"
+                  height="24"
+                  loading="lazy"
+                >
+                <span class="km-footer__locale-text">
+                  {{ localization.country.currency.iso_code }}/{{ localization.language.iso_code | upcase }}
+                </span>
+                <svg class="km-footer__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="km-footer__locale-panel" data-km-locale-panel hidden>
+                {%- if localization.available_languages.size > 1 -%}
+                  <p class="km-footer__locale-title">{{ 'localization.language_label' | t }}</p>
+                  <ul class="km-footer__locale-list">
+                    {%- for language in localization.available_languages -%}
+                      <li>
+                        <button
+                          type="button"
+                          class="km-footer__locale-item{% if language.iso_code == localization.language.iso_code %} is-active{% endif %}"
+                          data-km-type="language_code"
+                          data-km-value="{{ language.iso_code }}"
+                        >
+                          {{ language.endonym_name | capitalize }}
+                        </button>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+
+                {%- if localization.available_countries.size > 1 -%}
+                  <p class="km-footer__locale-title">{{ 'localization.country_label' | t }}</p>
+                  <ul class="km-footer__locale-list">
+                    {%- for country in localization.available_countries -%}
+                      <li>
+                        <button
+                          type="button"
+                          class="km-footer__locale-item{% if country.iso_code == localization.country.iso_code %} is-active{% endif %}"
+                          data-km-type="country_code"
+                          data-km-value="{{ country.iso_code }}"
+                        >
+                          <img
+                            class="km-footer__flag km-footer__flag--sm"
+                            src="https://flagcdn.com/w40/{{ country.iso_code | downcase }}.png"
+                            alt=""
+                            width="20"
+                            height="20"
+                            loading="lazy"
+                          >
+                          <span>{{ country.name }}</span>
+                          <span class="km-footer__locale-currency">{{ country.currency.iso_code }}</span>
+                        </button>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </div>
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ========== BOTTOM: copyright + legal + payments ========== {%- endcomment -%}
+    <div class="km-footer__bottom">
+      <div class="km-footer__copyright">
+        {%- if section.settings.copyright != blank -%}
+          {{ section.settings.copyright }}
+        {%- else -%}
+          <p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="km-footer__legal">
+        {%- if section.settings.legal_menu != blank -%}
+          <ul class="km-footer__legal-links">
+            {%- for link in section.settings.legal_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- elsif section.settings.show_policy -%}
+          <ul class="km-footer__legal-links">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.show_payment -%}
+          <div class="km-footer__payment">
+            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+            <ul class="list list-payment km-footer__payment-list" role="list">
+              {%- for type in shop.enabled_payment_types -%}
+                <li class="list-payment__item">
+                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .km-footer {
+    --km-footer-line: rgba(25, 31, 56, 0.12);
+    --km-footer-muted: #FFFBF6;
+
+    background: var(--km-footer-bg);
+    color: var(--km-footer-text);
+    font-family: var(--font-body-family);
+    font-style: normal;
+    padding: var(--km-footer-pt) 0 var(--km-footer-pb);
+  }
+
+  .km-footer *,
+  .km-footer *::before,
+  .km-footer *::after { box-sizing: border-box; }
+
+  .km-footer__inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--gap-2xl);
+  }
+
+  .km-footer a { color: inherit; }
+
+  /* ---------- TOP ---------- */
+  .km-footer__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-top: 1px solid var(--km-footer-line);
+  }
+
+  .km-footer__logo-link {
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .km-footer__logo { display: block; height: auto; max-width: 100%; }
+
+  .km-footer__logo-text {
+    font-weight: var(--font-500-weight, 500);
+    font-size: 28px;
+    letter-spacing: 8px;
+  }
+
+  .km-footer__tagline {
+    margin: 40px 0 0;
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body-xl, 22px);
+    line-height: 1.3;
+    letter-spacing: 0;
+    color: var(--km-footer-muted);
+  }
+
+  .km-footer__label {
+    margin: 0 0 var(--gap-2xl);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-500-weight, 500);
+    font-size: var(--km-body-xs, 13px);
+    line-height: 1.2;
+    letter-spacing: var(--kc-responsive-caption-letter-spacing, 1px);
+    text-transform: uppercase;
+    color: var(--km-footer-muted);
+  }
+
+  .km-footer__links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .km-footer__link {
+    display: inline-block;
+    font-weight: var(--font-500-weight, 500);
+    font-size: var(--km-body-lg, 20px);
+    line-height: 1.75;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .km-footer__link:hover { opacity: 0.65; }
+
+  /* Newsletter */
+  .km-footer__email-label {
+    display: block;
+    margin-bottom: var(--gap-md);
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body-lg, 20px);
+    line-height: 1.4;
+  }
+
+  .km-footer__field { position: relative; }
+
+  .km-footer__input {
+    display: block;
+    width: 100%;
+    height: 64px;
+    margin: 0;
+    padding: 0 96px 0 var(--gap-xl);
+    border: 1px solid var(--km-footer-text);
+    border-radius: 16px;
+    background: var(--km-footer-input-bg);
+    color: var(--km-footer-text);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body, 16px);
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+
+  .km-footer__input::placeholder { color: var(--km-footer-text); opacity: 0.85; }
+
+  .km-footer__input:focus-visible {
+    outline: 2px solid var(--km-footer-text);
+    outline-offset: 2px;
+  }
+
+  .km-footer__submit {
+    position: absolute;
+    top: 50%;
+    right: var(--gap-xl);
+    transform: translateY(-50%);
+    padding: var(--gap-md);
+    border: 0;
+    background: transparent;
+    color: var(--km-footer-text);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-500-weight, 500);
+    font-size: var(--km-body, 16px);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .km-footer__submit:hover { opacity: 0.6; }
+  .km-footer__submit:focus-visible { outline: 2px solid var(--km-footer-text); border-radius: 6px; }
+
+  .km-footer__message {
+    margin: var(--gap-lg) 0 0;
+    font-size: var(--km-body-sm, 14px);
+    line-height: 1.4;
+  }
+
+  .km-footer__message--error { color: #b3261e; }
+  .km-footer__message--success { color: #1a7f45; }
+
+  .km-footer__note {
+    margin-top: var(--gap-xl);
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body-sm, 14px);
+    line-height: 1.5;
+    color: var(--km-footer-muted);
+  }
+
+  .km-footer__note p { margin: 0; }
+  .km-footer__note a { text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- MIDDLE ---------- */
+  .km-footer__middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+    padding: 28px 0;
+    border-top: 1px solid var(--km-footer-line);
+    border-bottom: 1px solid var(--km-footer-line);
+  }
+
+  .km-footer__social-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .km-footer__social-list .list-social__item { margin: 0; padding: 0; }
+
+  .km-footer__social-list .list-social__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 12px;
+    background: var(--km-footer-card);
+    color: var(--km-footer-text);
+    transition: opacity 0.2s ease;
+  }
+
+  .km-footer__social-list .list-social__link:hover { opacity: 0.7; }
+  .km-footer__social-list .icon { width: 20px; height: 20px; }
+
+  /* Locale */
+  .km-footer__locale { position: relative; margin-left: auto; }
+  .km-footer__locale-form { margin: 0; }
+
+  .km-footer__locale-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-lg);
+    height: 44px;
+    padding: 0 var(--gap-xl) 0 var(--gap-md);
+    border: 0;
+    border-radius: 12px;
+    background: var(--km-footer-card);
+    color: var(--km-footer-text);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-500-weight, 500);
+    font-size: var(--km-body-sm, 14px);
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  .km-footer__locale-toggle:focus-visible { outline: 2px solid var(--km-footer-text); outline-offset: 2px; }
+
+  .km-footer__flag {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .km-footer__flag--sm { width: 20px; height: 20px; flex: 0 0 auto; }
+
+  .km-footer__locale-toggle[aria-expanded="true"] .km-footer__chevron { transform: rotate(180deg); }
+  .km-footer__chevron { transition: transform 0.2s ease; margin-left: var(--gap-md); }
+
+  .km-footer__locale-panel {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + var(--gap-md));
+    z-index: 5;
+    width: 260px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: var(--gap-lg);
+    border-radius: 12px;
+    background: var(--km-footer-card);
+    box-shadow: 0 8px 30px rgba(25, 31, 56, 0.14);
+  }
+
+  .km-footer__locale-panel[hidden] { display: none; }
+
+  .km-footer__locale-title {
+    margin: var(--gap-md) var(--gap-md) var(--gap-sm);
+    font-size: var(--km-body-xs, 13px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--km-footer-muted);
+  }
+
+  .km-footer__locale-list { margin: 0 0 var(--gap-md); padding: 0; list-style: none; }
+
+  .km-footer__locale-item {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-lg);
+    width: 100%;
+    padding: var(--gap-md);
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--km-footer-text);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body-sm, 14px);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .km-footer__locale-item:hover,
+  .km-footer__locale-item:focus-visible { background: var(--km-footer-bg); outline: none; }
+  .km-footer__locale-item.is-active { font-weight: var(--font-600-weight, 600); }
+  .km-footer__locale-currency { margin-left: auto; color: var(--km-footer-muted); font-size: var(--km-body-xs, 13px); }
+
+  /* ---------- BOTTOM ---------- */
+  .km-footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2xl);
+    padding-top: 28px;
+  }
+
+  .km-footer__copyright {
+    max-width: 780px;
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body-sm, 14px);
+    line-height: 1.6;
+    color: var(--km-footer-muted);
+  }
+
+  .km-footer__copyright p { margin: 0 0 var(--gap-lg); }
+  .km-footer__copyright p:last-child { margin-bottom: 0; }
+  .km-footer__copyright a { text-decoration: none; }
+
+  .km-footer__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-2xl);
+  }
+
+  .km-footer__legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-weight: var(--font-400-weight, 400);
+    font-size: var(--km-body-sm, 14px);
+    color: var(--km-footer-muted);
+  }
+
+  .km-footer__legal-links li + li::before {
+    content: "\00B7";
+    margin: 0 var(--gap-lg);
+  }
+
+  .km-footer__legal-links a { text-decoration: none; transition: opacity 0.2s ease; }
+  .km-footer__legal-links a:hover { opacity: 0.65; }
+
+  .km-footer__payment-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--gap-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .km-footer__payment-list .list-payment__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--km-footer-line);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.55);
+    overflow: hidden;
+  }
+
+  .km-footer__payment-list .icon { width: 100%; height: 100%; padding: 4px; }
+
+  /* ---------- TABLET ---------- */
+  @media screen and (min-width: 750px) {
+    .km-footer__inner { padding: 0 40px; }
+
+    .km-footer__top {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 40px;
+      padding: 72px 0 80px;
+    }
+
+    .km-footer__newsletter { grid-column: 1 / -1; }
+
+    .km-footer__input {
+      height: 76px;
+      padding: 0 110px 0 var(--gap-2xl);
+      font-size: var(--km-body-lg, 20px);
+    }
+
+    .km-footer__submit { right: var(--gap-2xl); font-size: var(--km-body, 16px); }
+
+    .km-footer__note { font-size: var(--km-body, 16px); }
+
+    .km-footer__middle { padding: 36px 0; }
+
+    .km-footer__social-list .list-social__link { width: 46px; height: 46px; }
+    .km-footer__locale-toggle { height: 46px; font-size: var(--km-body-sm, 14px); }
+
+    .km-footer__bottom { padding-top: 32px; }
+
+    .km-footer__copyright { font-size: var(--km-body, 16px); line-height: 1.45; }
+    .km-footer__legal-links { font-size: var(--km-body, 16px); }
+  }
+
+  /* ---------- DESKTOP ---------- */
+  @media screen and (min-width: 990px) {
+    .km-footer__top {
+      grid-template-columns: 1.2fr 1fr 1.55fr;
+      gap: 40px;
+      padding: 88px 0 120px;
+    }
+
+    .km-footer__newsletter { grid-column: auto; }
+
+    .km-footer__tagline {
+      margin-top: 44px;
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .km-footer__bottom {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 60px;
+    }
+
+    .km-footer__legal {
+      align-items: flex-end;
+      gap: 38px;
+      flex: 0 0 auto;
+    }
+
+    .km-footer__payment-list { justify-content: flex-end; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .km-footer *,
+    .km-footer *::before,
+    .km-footer *::after { transition: none !important; }
+  }
+</style>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-km-locale]').forEach(function (root) {
+      if (root.dataset.kmReady) return;
+      root.dataset.kmReady = '1';
+
+      var toggle = root.querySelector('[data-km-locale-toggle]');
+      var panel = root.querySelector('[data-km-locale-panel]');
+      var form = root.querySelector('form');
+      if (!toggle || !panel || !form) return;
+
+      function close() {
+        panel.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var willOpen = panel.hidden;
+        panel.hidden = !willOpen;
+        toggle.setAttribute('aria-expanded', String(willOpen));
+      });
+
+      panel.addEventListener('click', function (e) {
+        var item = e.target.closest('[data-km-value]');
+        if (!item) return;
+        var input = form.querySelector('[name="' + item.getAttribute('data-km-type') + '"]');
+        if (!input) return;
+        input.value = item.getAttribute('data-km-value');
+        form.submit();
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!root.contains(e.target)) close();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "KM Footer",
+  "tag": "div",
+  "class": "km-footer-section",
+  "settings": [
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F3F7FE" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#191F38" },
+    { "type": "color", "id": "card_color", "label": "Social / language box background", "default": "#FFFFFF" },
+    { "type": "color", "id": "input_bg", "label": "Email input background", "default": "#FFFBF2" },
+
+    { "type": "header", "content": "Brand" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 240
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline (new line = line break)",
+      "default": "Your mouth has a rhythm\nSo should your oral care"
+    },
+
+    { "type": "header", "content": "Company menu" },
+    { "type": "text", "id": "menu_heading", "label": "Heading", "default": "Company" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" },
+
+    { "type": "header", "content": "Newsletter" },
+    { "type": "text", "id": "newsletter_heading", "label": "Heading", "default": "Newsletter" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "you@example.com" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Join" },
+    {
+      "type": "richtext",
+      "id": "newsletter_note",
+      "label": "Note below input",
+      "default": "<p>By subscribing you agree to the <a href=\"/policies/terms-of-service\">Terms of Use</a> &amp; <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>"
+    },
+
+    { "type": "header", "content": "Middle row" },
+    { "type": "checkbox", "id": "show_social", "label": "Show social icons", "info": "Icons theme settings > Social media ma set karo.", "default": true },
+    { "type": "checkbox", "id": "show_locale", "label": "Show country / language selector", "info": "Shopify Markets ma 2+ country/language hoy tyare j dekhase.", "default": true },
+
+    { "type": "header", "content": "Bottom" },
+    {
+      "type": "richtext",
+      "id": "copyright",
+      "label": "Copyright text",
+      "default": "<p>Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) is a Belgium product formulated by certified chemists and manufactured under GMP. Formulations are CPNP notified and comply with the EU Cosmetic Regulation (EC) No 1223/2009. Packaging (Awake, Asleep bottle and shipping envelope) are recyclable.</p><p>KARMICARE™ is a brand of KARMICA bv. Vizierstraat 28, 8000, Belgium. Company number 0676.972.896 and VAT number BE0676.972.896 - Belfius: BE73 0689 0664 2960.</p>"
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Legal menu",
+      "info": "Terms and Conditions, Privacy Policy, Consumer Rights. Khali rakho to Shopify policies dekhase."
+    },
+    { "type": "checkbox", "id": "show_policy", "label": "Show Shopify policies (jyare legal menu khali hoy)", "default": true },
+    { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true },
+
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    { "name": "KM Footer" }
+  ]
+}
+{% endschema %}

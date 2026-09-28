@@ -11,8 +11,37 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "custom_footer_Pa7DVT": {
+      "type": "custom-footer",
+      "name": "KM Footer",
+      "settings": {
+        "bg_color": "#191F38",
+        "text_color": "#FFFBF6",
+        "card_color": "#2C3A60",
+        "input_bg": "#2C3A60",
+        "logo": "shopify://shop_images/svg-export-3x_1.png",
+        "logo_width": 210,
+        "tagline": "Your mouth has a rhythm\nSo should your oral care",
+        "menu_heading": "Company",
+        "menu": "new-main-menu",
+        "newsletter_heading": "Newsletter",
+        "email_label": "Email",
+        "email_placeholder": "you@example.com",
+        "button_text": "Join",
+        "newsletter_note": "<p>By subscribing you agree to the <a href=\"/policies/terms-of-service\">Terms of Use</a> & <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
+        "show_social": true,
+        "show_locale": true,
+        "copyright": "<p>Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) is a Belgium product formulated by certified chemists and manufactured under GMP. Formulations are CPNP notified and comply with the EU Cosmetic Regulation (EC) No 1223/2009. Packaging (Awake, Asleep bottle and shipping envelope) are recyclable.</p><p>KARMICARE™ is a brand of KARMICA bv. Vizierstraat 28, 8000, Belgium. Company number 0676.972.896 and VAT number BE0676.972.896 - Belfius: BE73 0689 0664 2960.</p>",
+        "legal_menu": "",
+        "show_policy": true,
+        "show_payment": true,
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
     "footer": {
       "type": "footer",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
@@ -30,6 +59,7 @@
     }
   },
   "order": [
+    "custom_footer_Pa7DVT",
     "footer"
   ]
 }

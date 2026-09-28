@@ -558,6 +558,69 @@
         "columns_tablet": "1",
         "columns_mobile": "1.2"
       }
+    },
+    "km_faq_accordion_FYcArV": {
+      "type": "km-faq-accordion",
+      "blocks": {
+        "faq_item_TNnqTQ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why two formulas instead of one?",
+            "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
+          }
+        },
+        "faq_item_kLMHax": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Karmicare fluoride-free?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_item_7jmEGi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_item_AL3DKF": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is nano-hydroxyapatite?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_item_qUxYCn": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Should I rinse after brushing?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_item_4KMG6C": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly will I notice a difference?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_TNnqTQ",
+        "faq_item_kLMHax",
+        "faq_item_7jmEGi",
+        "faq_item_AL3DKF",
+        "faq_item_qUxYCn",
+        "faq_item_4KMG6C"
+      ],
+      "name": "KM FAQ Accordion",
+      "settings": {
+        "heading": "Before you start",
+        "subtext": "Everything people usually ask before switching to a day-and-night oral care system.",
+        "bg_top": "#2C3A60",
+        "bg_bottom": "#191F38",
+        "open_first": true
+      }
     }
   },
   "order": [
@@ -567,6 +630,7 @@
     "two_formulas_karmicare",
     "product_benefits_karmicare_bcQ6tp",
     "trusted_professionals_HAqYth",
-    "research_behind_system_EkjATL"
+    "research_behind_system_EkjATL",
+    "km_faq_accordion_FYcArV"
   ]
 }
