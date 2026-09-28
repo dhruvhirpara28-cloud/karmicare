@@ -622,6 +622,7 @@
     font-weight: var(--font-400-weight, 400);
     font-size: var(--km-body-sm, 14px);
     color: var(--km-footer-text);
+    justify-content: flex-end;
   }
 
   .km-footer__legal-links li + li::before {
@@ -719,9 +720,10 @@
     }
 
     .km-footer__legal {
-      align-items: flex-end;
-      gap: 38px;
-      flex: 0 0 auto;
+        align-items: flex-end;
+        gap: 38px;
+        flex: 0 0 auto;
+        max-width: 370px;
     }
 
     .km-footer__payment-list { justify-content: flex-end; }
