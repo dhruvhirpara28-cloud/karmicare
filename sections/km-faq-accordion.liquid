@@ -48,17 +48,13 @@
     body:not(.night-mode) .section-{{ section.id }},
     body.day-mode .section-{{ section.id }} {
     background: {{ section.settings.bg_gradient_day }};
-    }
-    :root {
-        --text-color: {{ section.settings.text_color_day }};
-        --card-bg: {{ section.settings.card_bg_color_day }};
+    --text-color: {{ section.settings.text_color_day }};
+    --card-bg: {{ section.settings.card_bg_color_day }};
     }
 {%- elsif section.settings.bg_color_day != blank -%}
     body:not(.night-mode) .section-{{ section.id }},
     body.day-mode .section-{{ section.id }} {
         background-color: {{ section.settings.bg_color_day }};
-    }
-    :root {
         --text-color: {{ section.settings.text_color_night }};
         --card-bg: {{ section.settings.card_bg_color_day }};
     }
@@ -67,16 +63,12 @@
 {%- if section.settings.bg_gradient_night != blank -%}
     body.night-mode .section-{{ section.id }} {
     background: {{ section.settings.bg_gradient_night }};
-    }
-    :root {
-        --text-color: {{ section.settings.text_color_night }};
-        --card-bg: {{ section.settings.card_bg_color_night }};
+    --text-color: {{ section.settings.text_color_night }};
+    --card-bg: {{ section.settings.card_bg_color_night }};
     }
 {%- elsif section.settings.bg_color_night != blank -%}
     body.night-mode .section-{{ section.id }} {
         background-color: {{ section.settings.bg_color_night }};
-    }
-    :root {
         --text-color: {{ section.settings.text_color_night }};
         --card-bg: {{ section.settings.card_bg_color_night }};
     }
