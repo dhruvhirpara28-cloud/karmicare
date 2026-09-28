@@ -91,7 +91,6 @@
   border-radius: var(--extra-primary-border-radius);
   overflow: hidden;
   border: 1px solid rgba(var(--color-foreground), 0.12);
-  height: 100%;
 }
 
 @media screen and (min-width: 750px) {
@@ -170,6 +169,13 @@
   min-height: 300px;
 }
 
+@media screen and (min-width: 750px) {
+  .research-card__image-wrapper {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
 .research-card__image-wrapper img {
   position: absolute;
   top: 0;
@@ -183,7 +189,8 @@
 .research-card__badge {
   position: absolute;
   bottom: 2rem;
-  left: 3rem;
+  right: 0;
+  left: 0rem;
   background-color: var(--card-bg);
   padding: 6px 10px;
   border-radius: var(--tertiary-border-radius);
@@ -192,9 +199,10 @@
   font-weight: var(--font-500-weight);
   letter-spacing: var(--kc-responsive-caption-letter-spacing);
   white-space: normal;
-  text-align: left;
-  width: fit-content;
-  max-width: calc(100% - 1.5rem);
+  text-align: center;
+  width: 100%;
+  max-width: calc(100% - 20px);
+  margin: 10px;
 }
 
 
@@ -203,7 +211,7 @@
 }
 
 .research-card__footer a {
-  background-color: var(--kc-mapped-surface-tertiery-default);
+  background-color: var(--gradient-background);
   padding: 8px;
   font-size: var(--kc-responsive-label-sm-text-size);
   font-weight: var(--font-500-weight);
