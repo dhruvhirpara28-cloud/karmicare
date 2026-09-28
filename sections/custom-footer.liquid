@@ -21,13 +21,41 @@
   endif
 -%}
 
+{% style %}
+    {%- if section.settings.bg_gradient_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+        --km-footer-bg: {{ section.settings.bg_gradient_day }};
+        --km-footer-text: {{ section.settings.text_color_day }};
+        --km-footer-card: {{ section.settings.card_bg_color_day }};
+        }
+    {%- elsif section.settings.bg_color_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+            background-color: {{ section.settings.bg_color_day }};
+            --km-footer-text: {{ section.settings.text_color_night }};
+            --km-footer-card: {{ section.settings.card_bg_color_day }};
+        }
+    {%- endif -%}
+
+    {%- if section.settings.bg_gradient_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+        --text-color: {{ section.settings.text_color_night }};
+        --card-bg: {{ section.settings.card_bg_color_night }};
+        }
+    {%- elsif section.settings.bg_color_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+            background-color: {{ section.settings.bg_color_night }};
+            --text-color: {{ section.settings.text_color_night }};
+            --card-bg: {{ section.settings.card_bg_color_night }};
+        }
+    {%- endif -%}
+{% endstyle %}
+
 <footer
-  class="km-footer"
+  class="km-footer section-{{ section.id }}"
   style="
-    --km-footer-bg: {{ section.settings.bg_color }};
-    --km-footer-text: {{ section.settings.text_color }};
-    --km-footer-card: {{ section.settings.card_color }};
-    --km-footer-input-bg: {{ section.settings.input_bg }};
     --km-footer-pt: {{ section.settings.padding_top }}px;
     --km-footer-pb: {{ section.settings.padding_bottom }}px;
   "
