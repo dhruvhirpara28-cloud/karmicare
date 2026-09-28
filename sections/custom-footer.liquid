@@ -33,7 +33,7 @@
         body:not(.night-mode) .section-{{ section.id }},
         body.day-mode .section-{{ section.id }} {
             --km-footer-bg: {{ section.settings.bg_color_day }};
-            --km-footer-text: {{ section.settings.text_color_night }};
+            --km-footer-text: {{ section.settings.text_color_day }};
             --km-footer-card: {{ section.settings.card_bg_color_day }};
         }
     {%- endif -%}
