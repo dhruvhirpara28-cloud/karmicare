@@ -143,6 +143,12 @@
     align-items: center;
     justify-content: center;
 }
+details.km-faq__item .km-faq__icon svg {
+    transition: .4s;
+}   
+details.km-faq__item[open] .km-faq__icon svg {
+    transform: rotate(45deg);
+}
   {% comment %} .km-faq__icon::before,
   .km-faq__icon::after {
     content: "";
