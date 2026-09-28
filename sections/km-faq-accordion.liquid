@@ -249,7 +249,14 @@ details.km-faq__item[open] .km-faq__icon svg {
       line-height: 24px;
     }
   }
-
+  @media screen and (min-width: 749px) {
+    .km-faq__question {
+    padding: 20px;
+}
+.km-faq__answer {
+    padding: 0 20px 20px;
+}
+}
   @media (prefers-reduced-motion: reduce) {
     .km-faq__icon::before,
     .km-faq__icon::after { transition: none; }
