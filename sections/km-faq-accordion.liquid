@@ -13,7 +13,7 @@
           <h2 class="km-faq__title">{{ section.settings.heading | escape }}</h2>
         {%- endif -%}
         {%- if section.settings.subtext != blank -%}
-          <p class="km-faq__subtext" style="color: {{ section.settings.km-faq__subtext }};">{{ section.settings.subtext | escape }}</p>
+          <p class="km-faq__subtext">{{ section.settings.subtext | escape }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -48,6 +48,9 @@
     body:not(.night-mode) .section-{{ section.id }},
     body.day-mode .section-{{ section.id }} {
     background: {{ section.settings.bg_gradient_day }};
+    }
+    :root {
+        --text-color: {{ section.settings.text_color_day }};
     }
 {%- elsif section.settings.bg_color_day != blank -%}
     body:not(.night-mode) .section-{{ section.id }},
@@ -91,7 +94,7 @@
     line-height: 1;
     letter-spacing: 1.5px;
     text-align: center;
-    color: var(--km-faq-text);
+    color: var(--text-color);
   }
 
   .km-faq__subtext {
@@ -104,7 +107,7 @@
     line-height: 24px;
     letter-spacing: 0;
     text-align: center;
-    color: var(--km-faq-text);
+    color: var(--text-color);
   }
 
   /* ---------- List ---------- */
