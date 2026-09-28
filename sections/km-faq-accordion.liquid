@@ -74,8 +74,8 @@
     }
 {%- elsif section.settings.bg_color_night != blank -%}
     body.night-mode .section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color_night }};
-}
+        background-color: {{ section.settings.bg_color_night }};
+    }
     :root {
         --text-color: {{ section.settings.text_color_night }};
         --card-bg: {{ section.settings.card_bg_color_night }};
