@@ -4,7 +4,7 @@
   Note: koi pan class / CSS ma section.id vaparyu nathi. Root variables (:root) vaparya che.
 {%- endcomment -%}
 
-<section class="km-faq" style="--km-faq-bg-top: {{ section.settings.bg_top }}; --km-faq-bg-bottom: {{ section.settings.bg_bottom }};">
+<section class="km-faq section-{{ section.id }}" style="--km-faq-bg-top: {{ section.settings.bg_top }}; --km-faq-bg-bottom: {{ section.settings.bg_bottom }};">
   <div class="km-faq__container">
 
     {%- if section.settings.heading != blank or section.settings.subtext != blank -%}
@@ -42,6 +42,21 @@
 
   </div>
 </section>
+
+{% style %}
+{%- if section.settings.bg_gradient_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+    background: {{ section.settings.bg_gradient_day }};
+    }
+{%- elsif section.settings.bg_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color_day }};
+    }
+{%- endif -%}
+
+{% endstyle %}
 
 <style>
   .km-faq {
@@ -264,7 +279,57 @@ details.km-faq__item[open] .km-faq__icon svg {
       "id": "open_first",
       "label": "Open first question by default",
       "default": true
-    }
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
   ],
   "blocks": [
     {
