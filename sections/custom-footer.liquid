@@ -21,13 +21,41 @@
   endif
 -%}
 
+{% style %}
+    {%- if section.settings.bg_gradient_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+            --km-footer-bg: {{ section.settings.bg_gradient_day }};
+            --km-footer-text: {{ section.settings.text_color_day }};
+            --km-footer-card: {{ section.settings.card_bg_color_day }};
+        }
+    {%- elsif section.settings.bg_color_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+            --km-footer-bg: {{ section.settings.bg_color_day }};
+            --km-footer-text: {{ section.settings.text_color_day }};
+            --km-footer-card: {{ section.settings.card_bg_color_day }};
+        }
+    {%- endif -%}
+
+    {%- if section.settings.bg_gradient_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+            --km-footer-bg: {{ section.settings.bg_gradient_night }};
+            --km-footer-text: {{ section.settings.text_color_night }};
+            --km-footer-card: {{ section.settings.card_bg_color_night }};
+        }
+    {%- elsif section.settings.bg_color_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+            --km-footer-bg: {{ section.settings.bg_color_night }};
+            --km-footer-text: {{ section.settings.text_color_night }};
+            --km-footer-card: {{ section.settings.card_bg_color_night }};
+        }
+    {%- endif -%}
+{% endstyle %}
+
 <footer
-  class="km-footer"
+  class="km-footer section-{{ section.id }}"
   style="
-    --km-footer-bg: {{ section.settings.bg_color }};
-    --km-footer-text: {{ section.settings.text_color }};
-    --km-footer-card: {{ section.settings.card_color }};
-    --km-footer-input-bg: {{ section.settings.input_bg }};
     --km-footer-pt: {{ section.settings.padding_top }}px;
     --km-footer-pb: {{ section.settings.padding_bottom }}px;
   "
@@ -52,7 +80,9 @@
                 class: 'km-footer__logo'
             }}
           {%- else -%}
-            <span class="km-footer__logo-text">{{ shop.name | upcase }}</span>
+            <span class="km-footer__logo-text">
+                <svg width="147" height="14" viewBox="0 0 147 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.31484C0 0.638047 0.521347 0.135285 1.19717 0.135285C1.87299 0.135285 2.37502 0.638047 2.37502 1.31484V7.0386L8.78565 0.580036C9.07528 0.289981 9.3263 0.135285 9.77041 0.135285C10.4462 0.135285 10.871 0.638047 10.871 1.23749C10.871 1.56622 10.7359 1.87562 10.4462 2.127L6.23685 6.18777L10.7938 11.8535C11.0062 12.1049 11.1221 12.3369 11.1221 12.7043C11.1221 13.3811 10.6007 13.8646 9.92489 13.8646C9.46147 13.8646 9.17183 13.6325 8.92081 13.3038L4.57626 7.75407L2.37502 9.88114V12.685C2.37502 13.3618 1.87299 13.8646 1.19717 13.8646C0.521347 13.8646 0 13.3618 0 12.685V1.31484Z" fill="#191F38"></path><path d="M16.4128 12.2209L21.4331 1.00547C21.7228 0.406023 22.1862 0.0386193 22.862 0.0386193H22.9778C23.6537 0.0386193 24.0978 0.406023 24.3874 1.00547L29.4078 12.2209C29.5043 12.395 29.5429 12.5497 29.5429 12.7237C29.5429 13.3618 29.0602 13.8646 28.423 13.8646C27.8631 13.8646 27.4769 13.5552 27.2645 13.0331L26.1639 10.4999H19.5988L18.4595 13.1104C18.2471 13.6132 17.8802 13.8646 17.3589 13.8646C16.741 13.8646 16.2583 13.3812 16.2583 12.7624C16.2583 12.6077 16.3162 12.4336 16.4128 12.2209ZM25.2563 8.39221L22.8813 2.91984L20.5063 8.39221H25.2563Z" fill="#191F38"></path><path d="M35.5867 1.43085C35.5867 0.75405 36.1081 0.23195 36.7839 0.23195H41.6112C43.3104 0.23195 44.6427 0.734713 45.5116 1.58554C46.226 2.33968 46.6315 3.32587 46.6315 4.50543V4.5441C46.6315 6.72919 45.3764 8.00543 43.5614 8.58554L46.1488 11.8535C46.3805 12.1436 46.535 12.3949 46.535 12.7623C46.535 13.4391 45.9943 13.8645 45.3957 13.8645C44.8551 13.8645 44.5268 13.6132 44.2372 13.2458L40.9546 9.04963H37.9617V12.685C37.9617 13.3618 37.4597 13.8645 36.7839 13.8645C36.1081 13.8645 35.5867 13.3618 35.5867 12.685V1.43085ZM41.4374 6.94189C43.1366 6.94189 44.2179 6.07173 44.2179 4.67946V4.64079C44.2179 3.17118 43.1945 2.3977 41.4181 2.3977H37.9617V6.94189H41.4374Z" fill="#191F38"></path><path d="M53.0228 1.3535C53.0228 0.676702 53.5442 0.154603 54.22 0.154603H54.471C54.9924 0.154603 55.3399 0.425321 55.5716 0.792724L59.6652 7.21261L63.778 0.773388C64.029 0.36731 64.3959 0.154603 64.8593 0.154603H65.1104C65.7862 0.154603 66.3075 0.676702 66.3075 1.3535V12.685C66.3075 13.3618 65.7862 13.8645 65.1104 13.8645C64.4732 13.8645 63.9325 13.3231 63.9325 12.685V4.56344L60.6306 9.53306C60.3796 9.9198 60.0707 10.1518 59.6266 10.1518C59.1825 10.1518 58.8928 9.9198 58.6418 9.53306L55.3593 4.60212V12.7043C55.3593 13.3811 54.8572 13.8645 54.1814 13.8645C53.5056 13.8645 53.0228 13.3811 53.0228 12.7043V1.3535Z" fill="#191F38"></path><path d="M73.394 1.31484C73.394 0.638047 73.9153 0.135285 74.5911 0.135285C75.267 0.135285 75.769 0.638047 75.769 1.31484V12.685C75.769 13.3618 75.267 13.8646 74.5911 13.8646C73.9153 13.8646 73.394 13.3618 73.394 12.685V1.31484Z" fill="#191F38"></path><path d="M82.2568 7.03858V6.99991C82.2568 3.15184 85.1339 -9.15527e-05 89.2274 -9.15527e-05C91.3128 -9.15527e-05 92.6838 0.618693 93.8616 1.52753C94.1126 1.74024 94.325 2.0303 94.325 2.47505C94.325 3.15184 93.823 3.63527 93.1472 3.63527C92.8189 3.63527 92.5872 3.53858 92.4328 3.40322C91.5059 2.64908 90.5211 2.18499 89.2081 2.18499C86.64 2.18499 84.7477 4.3314 84.7477 6.96123V6.99991C84.7477 9.64908 86.6207 11.7955 89.2081 11.7955C90.6563 11.7955 91.6025 11.3314 92.5872 10.4999C92.761 10.3452 93.012 10.2292 93.3017 10.2292C93.9002 10.2292 94.4216 10.732 94.4216 11.3314C94.4216 11.6988 94.2478 11.9695 94.0354 12.1822C92.7417 13.3231 91.3128 13.9999 89.1309 13.9999C85.1918 13.9999 82.2568 10.9253 82.2568 7.03858Z" fill="#191F38"></path><path d="M99.8089 12.2209L104.829 1.00547C105.119 0.406023 105.582 0.0386193 106.258 0.0386193H106.374C107.05 0.0386193 107.494 0.406023 107.784 1.00547L112.804 12.2209C112.9 12.395 112.939 12.5497 112.939 12.7237C112.939 13.3618 112.456 13.8646 111.819 13.8646C111.259 13.8646 110.873 13.5552 110.661 13.0331L109.56 10.4999H102.995L101.856 13.1104C101.643 13.6132 101.276 13.8646 100.755 13.8646C100.137 13.8646 99.6544 13.3812 99.6544 12.7624C99.6544 12.6077 99.7123 12.4336 99.8089 12.2209ZM108.652 8.39221L106.277 2.91984L103.902 8.39221H108.652Z" fill="#191F38"></path><path d="M118.983 1.43085C118.983 0.75405 119.504 0.23195 120.18 0.23195H125.007C126.706 0.23195 128.039 0.734713 128.908 1.58554C129.622 2.33968 130.028 3.32587 130.028 4.50543V4.5441C130.028 6.72919 128.773 8.00543 126.957 8.58554L129.545 11.8535C129.777 12.1436 129.931 12.3949 129.931 12.7623C129.931 13.4391 129.39 13.8645 128.792 13.8645C128.251 13.8645 127.923 13.6132 127.633 13.2458L124.351 9.04963H121.358V12.685C121.358 13.3618 120.856 13.8645 120.18 13.8645C119.504 13.8645 118.983 13.3618 118.983 12.685V1.43085ZM124.833 6.94189C126.533 6.94189 127.614 6.07173 127.614 4.67946V4.64079C127.614 3.17118 126.591 2.3977 124.814 2.3977H121.358V6.94189H124.833Z" fill="#191F38"></path><path d="M137.616 13.7679C136.94 13.7679 136.419 13.2458 136.419 12.569V1.43085C136.419 0.75405 136.94 0.23195 137.616 0.23195H145.475C146.073 0.23195 146.537 0.696038 146.537 1.29549C146.537 1.89493 146.073 2.35902 145.475 2.35902H138.794V5.87836H144.606C145.205 5.87836 145.668 6.36178 145.668 6.96123C145.668 7.56068 145.205 8.00543 144.606 8.00543H138.794V11.6408H145.571C146.17 11.6408 146.633 12.1049 146.633 12.7043C146.633 13.3038 146.17 13.7679 145.571 13.7679H137.616Z" fill="#191F38"></path></svg>
+            </span>
           {%- endif -%}
         </a>
         {%- if section.settings.tagline != blank -%}
@@ -63,7 +93,7 @@
       {%- comment -%} Company links {%- endcomment -%}
       <div class="km-footer__col km-footer__menu">
         {%- if section.settings.menu_heading != blank -%}
-          <h2 class="km-footer__label">{{ section.settings.menu_heading | escape }}</h2>
+          <h2 class="km-footer__label kc-caption-text">{{ section.settings.menu_heading | escape }}</h2>
         {%- endif -%}
         {%- if section.settings.menu != blank -%}
           <ul class="km-footer__links">
@@ -272,7 +302,7 @@
 <style>
   .km-footer {
     --km-footer-line: rgba(25, 31, 56, 0.12);
-    --km-footer-muted: #FFFBF6;
+    --km-footer-text: #FFFBF6;
 
     background: var(--km-footer-bg);
     color: var(--km-footer-text);
@@ -288,10 +318,10 @@
   .km-footer__inner {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 var(--gap-2xl);
+    padding: 0;
   }
 
-  .km-footer a { color: inherit; }
+  .km-footer a { color: var(--km-footer-text); }
 
   /* ---------- TOP ---------- */
   .km-footer__top {
@@ -299,7 +329,7 @@
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 40px 0;
-    border-top: 1px solid var(--km-footer-line);
+    border-top: 1px solid rgba(var(--color-foreground), 0.2);
   }
 
   .km-footer__logo-link {
@@ -322,18 +352,19 @@
     font-size: var(--km-body-xl, 22px);
     line-height: 1.3;
     letter-spacing: 0;
-    color: var(--km-footer-muted);
+    color: var(--km-footer-text);
   }
 
   .km-footer__label {
     margin: 0 0 var(--gap-2xl);
     font-family: var(--font-body-family);
     font-weight: var(--font-500-weight, 500);
-    font-size: var(--km-body-xs, 13px);
+    font-size: var(--km-body-xs, 10px);
     line-height: 1.2;
     letter-spacing: var(--kc-responsive-caption-letter-spacing, 1px);
     text-transform: uppercase;
-    color: var(--km-footer-muted);
+    color: var(--km-footer-text);
+    opacity: 0.76;
   }
 
   .km-footer__links {
@@ -345,7 +376,7 @@
   .km-footer__link {
     display: inline-block;
     font-weight: var(--font-500-weight, 500);
-    font-size: var(--km-body-lg, 20px);
+    font-size: var(--km-body-lg, 16px);
     line-height: 1.75;
     letter-spacing: 0;
     text-decoration: none;
@@ -359,7 +390,7 @@
     display: block;
     margin-bottom: var(--gap-md);
     font-weight: var(--font-400-weight, 400);
-    font-size: var(--km-body-lg, 20px);
+    font-size: var(--km-body-lg, 14px);
     line-height: 1.4;
   }
 
@@ -373,7 +404,7 @@
     padding: 0 96px 0 var(--gap-xl);
     border: 1px solid var(--km-footer-text);
     border-radius: 16px;
-    background: var(--km-footer-input-bg);
+    background: var(--km-footer-card);
     color: var(--km-footer-text);
     font-family: var(--font-body-family);
     font-weight: var(--font-400-weight, 400);
@@ -422,9 +453,9 @@
   .km-footer__note {
     margin-top: var(--gap-xl);
     font-weight: var(--font-400-weight, 400);
-    font-size: var(--km-body-sm, 14px);
+    font-size: var(--km-body-sm, 12px);
     line-height: 1.5;
-    color: var(--km-footer-muted);
+    color: var(--km-footer-text);
   }
 
   .km-footer__note p { margin: 0; }
@@ -437,8 +468,8 @@
     justify-content: space-between;
     gap: var(--gap-xl);
     padding: 28px 0;
-    border-top: 1px solid var(--km-footer-line);
-    border-bottom: 1px solid var(--km-footer-line);
+    border-top: 1px solid rgba(var(--color-foreground), 0.2);
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
   }
 
   .km-footer__social-list {
@@ -464,6 +495,9 @@
     color: var(--km-footer-text);
     transition: opacity 0.2s ease;
   }
+  .km-footer__logo-text svg * {
+    fill: var(--km-footer-text);
+    }
 
   .km-footer__social-list .list-social__link:hover { opacity: 0.7; }
   .km-footer__social-list .icon { width: 20px; height: 20px; }
@@ -484,7 +518,7 @@
     color: var(--km-footer-text);
     font-family: var(--font-body-family);
     font-weight: var(--font-500-weight, 500);
-    font-size: var(--km-body-sm, 14px);
+    font-size: var(--km-body-sm, 10px);
     letter-spacing: 1px;
     cursor: pointer;
   }
@@ -525,7 +559,7 @@
     font-size: var(--km-body-xs, 13px);
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--km-footer-muted);
+    color: var(--km-footer-text);
   }
 
   .km-footer__locale-list { margin: 0 0 var(--gap-md); padding: 0; list-style: none; }
@@ -550,7 +584,7 @@
   .km-footer__locale-item:hover,
   .km-footer__locale-item:focus-visible { background: var(--km-footer-bg); outline: none; }
   .km-footer__locale-item.is-active { font-weight: var(--font-600-weight, 600); }
-  .km-footer__locale-currency { margin-left: auto; color: var(--km-footer-muted); font-size: var(--km-body-xs, 13px); }
+  .km-footer__locale-currency { margin-left: auto; color: var(--km-footer-text); font-size: var(--km-body-xs, 13px); }
 
   /* ---------- BOTTOM ---------- */
   .km-footer__bottom {
@@ -558,6 +592,7 @@
     flex-direction: column;
     gap: var(--gap-2xl);
     padding-top: 28px;
+    opacity: 0.76; 
   }
 
   .km-footer__copyright {
@@ -565,7 +600,7 @@
     font-weight: var(--font-400-weight, 400);
     font-size: var(--km-body-sm, 14px);
     line-height: 1.6;
-    color: var(--km-footer-muted);
+    color: var(--km-footer-text);
   }
 
   .km-footer__copyright p { margin: 0 0 var(--gap-lg); }
@@ -588,7 +623,8 @@
     list-style: none;
     font-weight: var(--font-400-weight, 400);
     font-size: var(--km-body-sm, 14px);
-    color: var(--km-footer-muted);
+    color: var(--km-footer-text);
+    justify-content: flex-end;
   }
 
   .km-footer__legal-links li + li::before {
@@ -658,13 +694,17 @@
     .km-footer__legal-links { font-size: var(--km-body, 16px); }
   }
 
+  .km-footer__col.km-footer__menu {
+    width: fit-content;
+    margin: auto;
+}
   /* ---------- DESKTOP ---------- */
   @media screen and (min-width: 990px) {
     .km-footer__top {
-      grid-template-columns: 1.2fr 1fr 1.55fr;
-      gap: 40px;
-      padding: 88px 0 120px;
-    }
+    grid-template-columns: 1fr 1fr 1.75fr;
+    gap: 40px;
+    padding: 88px 0 120px;
+}
 
     .km-footer__newsletter { grid-column: auto; }
 
@@ -682,9 +722,10 @@
     }
 
     .km-footer__legal {
-      align-items: flex-end;
-      gap: 38px;
-      flex: 0 0 auto;
+        align-items: flex-end;
+        gap: 38px;
+        flex: 0 0 auto;
+        max-width: 370px;
     }
 
     .km-footer__payment-list { justify-content: flex-end; }
@@ -695,6 +736,56 @@
     .km-footer *::before,
     .km-footer *::after { transition: none !important; }
   }
+  @media screen and (max-width: 749px) {
+    .km-footer__top > * {
+    padding: 0 20px;
+}
+.km-footer__col.km-footer__menu {
+    margin-left: 0;
+}
+.km-footer__tagline {
+    margin: 32px 0 0;
+}
+.km-footer__tagline {
+    font-size: 20px;
+}
+.km-footer__middle {
+    padding: 24px 20px;
+}
+.km-footer__bottom {
+    padding: 24px 20px 0;
+}
+.km-footer__legal-links {
+    justify-content: flex-start;
+}
+.km-footer__payment-list {
+    justify-content: flex-start;
+}
+.km-footer__flag {
+    width: 24px;
+    height: 24px;
+}
+.km-footer__input {
+    height: 60px;
+}
+.km-footer__email-label {
+    font-size: 14px;
+}
+.km-footer__link {
+    font-size: 16px;
+}
+.km-footer__label {
+    font-size: 10px;
+}
+.km-footer__social-list .list-social__link {
+    width: 32px;
+    height: 32px;
+}
+.km-footer__locale-toggle {
+    font-size: 10px;
+}
+}
+
 </style>
 
 <script>
@@ -746,12 +837,56 @@
   "tag": "div",
   "class": "km-footer-section",
   "settings": [
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F3F7FE" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#191F38" },
-    { "type": "color", "id": "card_color", "label": "Social / language box background", "default": "#FFFFFF" },
-    { "type": "color", "id": "input_bg", "label": "Email input background", "default": "#FFFBF2" },
-
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
     { "type": "header", "content": "Brand" },
     { "type": "image_picker", "id": "logo", "label": "Logo" },
     {
@@ -827,7 +962,7 @@
       "unit": "px",
       "label": "Padding bottom",
       "default": 40
-    }
+    },
   ],
   "presets": [
     { "name": "KM Footer" }

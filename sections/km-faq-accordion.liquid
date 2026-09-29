@@ -4,7 +4,7 @@
   Note: koi pan class / CSS ma section.id vaparyu nathi. Root variables (:root) vaparya che.
 {%- endcomment -%}
 
-<section class="km-faq" style="--km-faq-bg-top: {{ section.settings.bg_top }}; --km-faq-bg-bottom: {{ section.settings.bg_bottom }};">
+<section class="km-faq section-{{ section.id }}">
   <div class="km-faq__container">
 
     {%- if section.settings.heading != blank or section.settings.subtext != blank -%}
@@ -43,6 +43,38 @@
   </div>
 </section>
 
+{% style %}
+    {%- if section.settings.bg_gradient_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+        --text-color: {{ section.settings.text_color_day }};
+        --card-bg: {{ section.settings.card_bg_color_day }};
+        }
+    {%- elsif section.settings.bg_color_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+            background-color: {{ section.settings.bg_color_day }};
+            --text-color: {{ section.settings.text_color_night }};
+            --card-bg: {{ section.settings.card_bg_color_day }};
+        }
+    {%- endif -%}
+
+    {%- if section.settings.bg_gradient_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+        --text-color: {{ section.settings.text_color_night }};
+        --card-bg: {{ section.settings.card_bg_color_night }};
+        }
+    {%- elsif section.settings.bg_color_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+            background-color: {{ section.settings.bg_color_night }};
+            --text-color: {{ section.settings.text_color_night }};
+            --card-bg: {{ section.settings.card_bg_color_night }};
+        }
+    {%- endif -%}
+{% endstyle %}
+
 <style>
   .km-faq {
     --km-faq-text: #fffbf6;
@@ -54,6 +86,7 @@
     padding: var(--spacing-sections-mobile, 40px) var(--gap-xl);
     font-family: var(--font-body-family);
     color: var(--km-faq-text);
+    padding: 64px 20px;
   }
 
   .km-faq__container {
@@ -66,7 +99,7 @@
     text-align: center;
     margin-bottom: 40px;
   }
-
+{% comment %} 
   .km-faq__title {
     margin: 0;
     font-family: var(--font-body-family);
@@ -76,8 +109,8 @@
     line-height: 1;
     letter-spacing: 1.5px;
     text-align: center;
-    color: var(--km-faq-text);
-  }
+    color: var(--text-color);
+  } {% endcomment %}
 
   .km-faq__subtext {
     margin: var(--gap-xl) auto 0;
@@ -89,7 +122,7 @@
     line-height: 24px;
     letter-spacing: 0;
     text-align: center;
-    color: var(--km-faq-text);
+    color: var(--text-color);
   }
 
   /* ---------- List ---------- */
@@ -100,7 +133,7 @@
   }
 
   .km-faq__item {
-    background: var(--km-faq-card-bg);
+    background: var(--card-bg);
     border-radius: var(--km-faq-card-radius);
     overflow: hidden;
   }
@@ -119,14 +152,14 @@
     font-size: var(--km-body, 16px);
     line-height: 24px;
     letter-spacing: 0;
-    color: #2C3A60 ;
+    color: var(--text-color);
   }
 
   .km-faq__question::-webkit-details-marker { display: none; }
   .km-faq__question::marker { content: ""; }
 
   .km-faq__question:focus-visible {
-    outline: 2px solid #2C3A60;
+    outline: 2px solid var(--text-color);
     outline-offset: -2px;
   }
 
@@ -136,7 +169,7 @@
     flex: 0 0 auto;
     width: 40px;
     height: 40px;
-    border: 1px solid #2C3A60;
+    border: 1px solid var(--text-color);
     border-radius: 8px;
     background: transparent;
     display: flex;
@@ -146,6 +179,9 @@
 details.km-faq__item .km-faq__icon svg {
     transition: .4s;
 }   
+details.km-faq__item .km-faq__icon svg * {
+    stroke: var(--text-color);
+}
 details.km-faq__item[open] .km-faq__icon svg {
     transform: rotate(45deg);
 }
@@ -180,7 +216,7 @@ details.km-faq__item[open] .km-faq__icon svg {
     font-size: var(--km-body-sm, 14px);
     line-height: 20px;
     letter-spacing: 0;
-    color: var(--km-faq-answer-text);
+    color: var(--text-color);
   }
 
   .km-faq__answer p { margin: 0 0 var(--gap-md); }
@@ -194,10 +230,6 @@ details.km-faq__item[open] .km-faq__icon svg {
     }
 
     .km-faq__header { margin-bottom: 48px; }
-
-    .km-faq__title {
-      font-size: 44px;
-    }
 
     .km-faq__subtext {
       max-width: 460px;
@@ -217,7 +249,14 @@ details.km-faq__item[open] .km-faq__icon svg {
       line-height: 24px;
     }
   }
-
+  @media screen and (max-width: 749px) {
+    .km-faq__question {
+    padding: 20px;
+}
+.km-faq__answer {
+    padding: 0 20px 20px;
+}
+}
   @media (prefers-reduced-motion: reduce) {
     .km-faq__icon::before,
     .km-faq__icon::after { transition: none; }
@@ -244,27 +283,61 @@ details.km-faq__item[open] .km-faq__icon svg {
       "default": "Everything people usually ask before switching to a day-and-night oral care system."
     },
     {
-      "type": "header",
-      "content": "Background gradient"
-    },
-    {
-      "type": "color",
-      "id": "bg_top",
-      "label": "Gradient top color",
-      "default": "#F1F7FF"
-    },
-    {
-      "type": "color",
-      "id": "bg_bottom",
-      "label": "Gradient bottom color",
-      "default": "#FFF9F1"
-    },
-    {
       "type": "checkbox",
       "id": "open_first",
       "label": "Open first question by default",
       "default": true
-    }
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
   ],
   "blocks": [
     {
