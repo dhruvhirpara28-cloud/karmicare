@@ -22,7 +22,7 @@
         "bg_color_night": "#191f38",
         "bg_gradient_night": "",
         "text_color_night": "#ffffff",
-        "card_bg_color_night": "#2C3A60",
+        "card_bg_color_night": "#2c3a60",
         "logo_width": 210,
         "tagline": "Your mouth has a rhythm\nSo should your oral care",
         "menu_heading": "Company",
@@ -44,7 +44,26 @@
     },
     "footer": {
       "type": "footer",
-      "disabled": true,
+      "blocks": {
+        "image_pjti9X": {
+          "type": "image",
+          "settings": {
+            "image_width": 100,
+            "alignment": "center"
+          }
+        },
+        "link_list_Yna7wT": {
+          "type": "link_list",
+          "settings": {
+            "heading": "&nbsp;Company",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "image_pjti9X",
+        "link_list_Yna7wT"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
