@@ -3,10 +3,152 @@
   File: sections/km-faq-accordion.liquid
   Note: koi pan class / CSS ma section.id vaparyu nathi. Root variables (:root) vaparya che.
 {%- endcomment -%}
+{% style %}
+      .section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      }
 
-<section class="km-faq section-{{ section.id }}">
-  <div class="km-faq__container">
+      @media screen and (min-width: 750px) {
+        .section-{{ section.id }} {
+          padding-top: {{ section.settings.padding_top }}px;
+          padding-bottom: {{ section.settings.padding_bottom }}px;
+        }
+      }
+      {%- if section.settings.bg_gradient_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_day }};
+        }
+      {%- elsif section.settings.bg_color_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_day }};
+        }
+      {%- endif -%}
 
+      {%- if section.settings.bg_gradient_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_night }};
+        }
+      {%- elsif section.settings.bg_color_night != blank -%}
+        body.night-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_night }};
+        }
+      {%- endif -%}
+
+      .km-faq__header {
+        text-align: center;
+        max-width: 442px;
+        margin: 0 auto;
+        margin-bottom: 45px;
+    }
+
+    .km-faq__header p {
+        margin-top: 16px;
+    }
+
+    /* Filters */
+    .km-faq__filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .km-faq__filter-btn {
+      background: transparent;
+      border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+      color: color-mix(in srgb, currentColor 76%, transparent);
+      border-radius: 40px;
+      padding: 8px 15px;
+      font-size: var(--kc-responsive-label-sm-text-size);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .km-faq__filter-btn.active {
+      background-color: var(--kc-mapped-surface-accent-default);
+      color: var(--kc-mapped-text-accent-default-on-accent);
+      border-color: var(--kc-mapped-surface-accent-default);
+    }
+    details.km-faq__item {
+        max-width: 680px;
+        margin: 0 auto;
+        padding:24px;
+    }
+    body.day-mode .section-{{- section.id }} details.km-faq__item { background-color: {{ section.settings.card_bg_color_day }}; }
+    body.night-mode .section-{{ section.id }} details.km-faq__item { background-color: {{ section.settings.card_bg_color_night }}; }
+
+  details.km-faq__item{ margin-top: 16px; }
+
+  summary.km-faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+  }
+
+  span.km-faq__question-text {
+      flex: 1;
+  }
+
+  .km-faq__answer { margin-top: 24px; }
+
+  span.km-faq__icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid currentColor;
+      border-radius: 8px;
+  }
+
+  details.km-faq__item .km-faq__icon .minus {
+      display: none;
+  }
+  details.km-faq__item[open] .km-faq__icon .plus {
+      display: none;
+  }
+  details.km-faq__item[open] .km-faq__icon .minus {
+      display: block;
+  }
+  @media screen and (max-width: 750px) {
+    .km-faq__filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: flex-start;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      margin-left: -15px;
+      margin-right: -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .km-faq__filters::-webkit-scrollbar {
+      display: none;
+    }
+    .km-faq__filter-btn {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    details.km-faq__item {
+        padding: 20px;
+    }
+    .km-faq__answer,.km-faq__header p,details.km-faq__item {
+    margin-top: 12px;
+    }
+  }
+{% endstyle %}
+<div class="km-faq section-{{ section.id }}">
+  <div class="page-width">
     {%- if section.settings.heading != blank or section.settings.subtext != blank -%}
       <div class="km-faq__header">
         {%- if section.settings.heading != blank -%}
@@ -18,19 +160,61 @@
       </div>
     {%- endif -%}
 
+    {%- assign categories = '' -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.category != blank -%}
+        {%- assign categories = categories | append: block.settings.category | append: '|||' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign categories_array = categories | split: '|||' | uniq -%}
+
+    {%- if categories_array.size > 0 -%}
+      <div class="km-faq__filters">
+        <span class="km-faq__filter-btn active" data-filter="all">ALL</span>
+
+        {%- for category in categories_array -%}
+          {%- if category != blank -%}
+            <span class="km-faq__filter-btn" data-filter="{{ category | handleize }}">{{ category }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
     <div class="km-faq__list">
       {%- for block in section.blocks -%}
         <details
-          class="km-faq__item"
-          {% if section.settings.open_first and forloop.first %}open{% endif %}
+          class="km-faq__item extra-primary-border-radius"
+          data-category="{{ block.settings.category | handleize }}"
+          {% if section.settings.open_first and forloop.first %}
+            open
+          {% endif %}
           {{ block.shopify_attributes }}
         >
           <summary class="km-faq__question">
-            <span class="km-faq__question-text">{{ block.settings.question | escape }}</span>
-            <span class="km-faq__icon" aria-hidden="true">
-                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.75 5.41667L10.0833 5.41667M5.41667 0.75L5.41667 10.0833" stroke="#191F38" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <span class="km-faq__question-text h5">
+              {{- block.settings.question | escape -}}
+            </span>
+            <span class="km-faq__icon primary-border-radius" aria-hidden="true">
+              <svg
+                class="plus"
+                width="11"
+                height="11"
+                viewBox="0 0 11 11"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0.75 5.41667L10.0833 5.41667M5.41667 0.75L5.41667 10.0833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg
+                class="minus"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3.33398 8L12.6673 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </span>
           </summary>
           <div class="km-faq__answer">
@@ -39,236 +223,45 @@
         </details>
       {%- endfor -%}
     </div>
-
   </div>
-</section>
+</div>
 
-{% style %}
-    {%- if section.settings.bg_gradient_day != blank -%}
-        body:not(.night-mode) .section-{{ section.id }},
-        body.day-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_day }};
-        --text-color: {{ section.settings.text_color_day }};
-        --card-bg: {{ section.settings.card_bg_color_day }};
-        }
-    {%- elsif section.settings.bg_color_day != blank -%}
-        body:not(.night-mode) .section-{{ section.id }},
-        body.day-mode .section-{{ section.id }} {
-            background-color: {{ section.settings.bg_color_day }};
-            --text-color: {{ section.settings.text_color_night }};
-            --card-bg: {{ section.settings.card_bg_color_day }};
-        }
-    {%- endif -%}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const filterBtns = document.querySelectorAll('.km-faq__filter-btn');
+    const faqItems = document.querySelectorAll('.km-faq__item');
 
-    {%- if section.settings.bg_gradient_night != blank -%}
-        body.night-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-        --text-color: {{ section.settings.text_color_night }};
-        --card-bg: {{ section.settings.card_bg_color_night }};
-        }
-    {%- elsif section.settings.bg_color_night != blank -%}
-        body.night-mode .section-{{ section.id }} {
-            background-color: {{ section.settings.bg_color_night }};
-            --text-color: {{ section.settings.text_color_night }};
-            --card-bg: {{ section.settings.card_bg_color_night }};
-        }
-    {%- endif -%}
-{% endstyle %}
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        // Remove active class from all buttons
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
 
-<style>
-  .km-faq {
-    --km-faq-text: #fffbf6;
-    --km-faq-answer-text: rgba(25, 31, 56, 0.78);
-    --km-faq-card-bg: #ffffff;
-    --km-faq-card-radius: 12px;
+        const filterValue = this.getAttribute('data-filter');
 
-    background: linear-gradient(180deg, var(--km-faq-bg-top) 0%, var(--km-faq-bg-bottom) 100%);
-    padding: var(--spacing-sections-mobile, 40px) var(--gap-xl);
-    font-family: var(--font-body-family);
-    color: var(--km-faq-text);
-    padding: 64px 20px;
-  }
-
-  .km-faq__container {
-    max-width: 744px;
-    margin: 0 auto;
-  }
-
-  /* ---------- Header ---------- */
-  .km-faq__header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-{% comment %} 
-  .km-faq__title {
-    margin: 0;
-    font-family: var(--font-body-family);
-    font-style: normal;
-    font-weight: var(--font-500-weight, 500);
-    font-size: 30px;
-    line-height: 1;
-    letter-spacing: 1.5px;
-    text-align: center;
-    color: var(--text-color);
-  } {% endcomment %}
-
-  .km-faq__subtext {
-    margin: var(--gap-xl) auto 0;
-    max-width: 420px;
-    font-family: var(--font-body-family);
-    font-style: normal;
-    font-weight: var(--font-400-weight, 400);
-    font-size: var(--km-body, 16px);
-    line-height: 24px;
-    letter-spacing: 0;
-    text-align: center;
-    color: var(--text-color);
-  }
-
-  /* ---------- List ---------- */
-  .km-faq__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-lg);
-  }
-
-  .km-faq__item {
-    background: var(--card-bg);
-    border-radius: var(--km-faq-card-radius);
-    overflow: hidden;
-  }
-
-  .km-faq__question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-xl);
-    padding: var(--gap-2xl);
-    cursor: pointer;
-    list-style: none;
-    font-family: var(--font-body-family);
-    font-style: normal;
-    font-weight: var(--font-600-weight, 600);
-    font-size: var(--km-body, 16px);
-    line-height: 24px;
-    letter-spacing: 0;
-    color: var(--text-color);
-  }
-
-  .km-faq__question::-webkit-details-marker { display: none; }
-  .km-faq__question::marker { content: ""; }
-
-  .km-faq__question:focus-visible {
-    outline: 2px solid var(--text-color);
-    outline-offset: -2px;
-  }
-
-  /* Plus / Minus icon box */
-.km-faq__icon {
-    position: relative;
-    flex: 0 0 auto;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--text-color);
-    border-radius: 8px;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-details.km-faq__item .km-faq__icon svg {
-    transition: .4s;
-}   
-details.km-faq__item .km-faq__icon svg * {
-    stroke: var(--text-color);
-}
-details.km-faq__item[open] .km-faq__icon svg {
-    transform: rotate(45deg);
-}
-  {% comment %} .km-faq__icon::before,
-  .km-faq__icon::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 12px;
-    height: 1.5px;
-    background: #2C3A60; 
-    transform: translate(-50%, -50%);
-    transition: transform 0.25s ease, opacity 0.25s ease;
-  } {% endcomment %}
-
-  .km-faq__icon::after {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-
-  .km-faq__item[open] .km-faq__icon::after {
-    transform: translate(-50%, -50%) rotate(0deg);
-    opacity: 0;
-  }
-
-  /* Answer */
-  .km-faq__answer {
-    padding: 0 var(--gap-2xl) var(--gap-2xl);
-    font-family: var(--font-body-family);
-    font-style: normal;
-    font-weight: var(--font-500-weight, 500);
-    font-size: var(--km-body-sm, 14px);
-    line-height: 20px;
-    letter-spacing: 0;
-    color: var(--text-color);
-  }
-
-  .km-faq__answer p { margin: 0 0 var(--gap-md); }
-  .km-faq__answer p:last-child { margin-bottom: 0; }
-  .km-faq__answer a { color: inherit; text-decoration: underline; }
-
-  /* ---------- Desktop ---------- */
-  @media screen and (min-width: 750px) {
-    .km-faq {
-      padding: 120px 0;
-    }
-
-    .km-faq__header { margin-bottom: 48px; }
-
-    .km-faq__subtext {
-      max-width: 460px;
-      font-size: var(--km-body-lg, 20px);
-      line-height: 28px;
-    }
-
-    .km-faq__question {
-      padding: 24px;
-      font-size: var(--km-body-lg, 20px);
-      line-height: 28px;
-    }
-
-    .km-faq__answer {
-      padding: 0 24px 24px;
-      font-size: 18px;
-      line-height: 24px;
-    }
-  }
-  @media screen and (max-width: 749px) {
-    .km-faq__question {
-    padding: 20px;
-}
-.km-faq__answer {
-    padding: 0 20px 20px;
-}
-}
-  @media (prefers-reduced-motion: reduce) {
-    .km-faq__icon::before,
-    .km-faq__icon::after { transition: none; }
-  }
-</style>
+        faqItems.forEach((item) => {
+          if (filterValue === 'all') {
+            item.style.display = 'block';
+          } else {
+            if (item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
   "name": "KM FAQ Accordion",
   "tag": "section",
   "class": "km-faq-section",
-  "max_blocks": 12,
+  "max_blocks": 50,
   "settings": [
     {
       "type": "text",
@@ -290,6 +283,54 @@ details.km-faq__item[open] .km-faq__icon svg {
     },
     {
       "type": "header",
+      "content": "Desktop Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "Mobile Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding bottom",
+      "default": 64
+    },
+    {
+      "type": "header",
       "content": "Day Mode Colors"
     },
     {
@@ -301,11 +342,6 @@ details.km-faq__item[open] .km-faq__icon svg {
       "type": "text",
       "id": "bg_gradient_day",
       "label": "Background Gradient (Day)"
-    },
-    {
-      "type": "color",
-      "id": "text_color_day",
-      "label": "Text Color (Day)"
     },
     {
       "type": "color",
@@ -329,21 +365,22 @@ details.km-faq__item[open] .km-faq__icon svg {
     },
     {
       "type": "color",
-      "id": "text_color_night",
-      "label": "Text Color (Night)"
-    },
-    {
-      "type": "color",
       "id": "card_bg_color_night",
       "label": "Card Background Color (Night)",
       "default": "#191f38"
-    },
+    }
   ],
   "blocks": [
     {
       "type": "faq_item",
       "name": "FAQ item",
       "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "info": "Used for filtering (e.g. THE SYSTEM). Leave blank if no filter is needed."
+        },
         {
           "type": "text",
           "id": "question",
@@ -362,29 +399,7 @@ details.km-faq__item[open] .km-faq__icon svg {
   "presets": [
     {
       "name": "KM FAQ Accordion",
-      "blocks": [
-        { "type": "faq_item" },
-        {
-          "type": "faq_item",
-          "settings": { "question": "Is Karmicare fluoride-free?", "answer": "<p>Add your answer here.</p>" }
-        },
-        {
-          "type": "faq_item",
-          "settings": { "question": "Will Karmicare offer a biorhythmic toothpaste with fluoride?", "answer": "<p>Add your answer here.</p>" }
-        },
-        {
-          "type": "faq_item",
-          "settings": { "question": "What is nano-hydroxyapatite?", "answer": "<p>Add your answer here.</p>" }
-        },
-        {
-          "type": "faq_item",
-          "settings": { "question": "Should I rinse after brushing?", "answer": "<p>Add your answer here.</p>" }
-        },
-        {
-          "type": "faq_item",
-          "settings": { "question": "How quickly will I notice a difference?", "answer": "<p>Add your answer here.</p>" }
-        }
-      ]
+      "blocks": [{ "type": "faq_item" }]
     }
   ]
 }

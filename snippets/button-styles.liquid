@@ -73,7 +73,7 @@
   }
 
   /* ── PRIMARY BUTTON (NIGHT MODE) ── */
-  body.night-mode .karmicare__btn-primary {
+  body.night-mode .karmicare__btn-primary,body.night-mode header .karmicare__btn-primary {
     {%- if settings.button_color_night != blank -%}
       background-color: {{ settings.button_color_night }};
     {%- endif -%}

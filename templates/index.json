@@ -565,6 +565,7 @@
         "faq_item_TNnqTQ": {
           "type": "faq_item",
           "settings": {
+            "category": "The system",
             "question": "Why two formulas instead of one?",
             "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
           }
@@ -572,36 +573,41 @@
         "faq_item_kLMHax": {
           "type": "faq_item",
           "settings": {
+            "category": "Ingredients & safety",
             "question": "Is Karmicare fluoride-free?",
-            "answer": "<p>Add your answer here.</p>"
+            "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
           }
         },
         "faq_item_7jmEGi": {
           "type": "faq_item",
           "settings": {
+            "category": "The ritual",
             "question": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
-            "answer": "<p>Add your answer here.</p>"
+            "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
           }
         },
         "faq_item_AL3DKF": {
           "type": "faq_item",
           "settings": {
+            "category": "Results",
             "question": "What is nano-hydroxyapatite?",
-            "answer": "<p>Add your answer here.</p>"
+            "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
           }
         },
         "faq_item_qUxYCn": {
           "type": "faq_item",
           "settings": {
+            "category": "Plans & Return on Care",
             "question": "Should I rinse after brushing?",
-            "answer": "<p>Add your answer here.</p>"
+            "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
           }
         },
         "faq_item_4KMG6C": {
           "type": "faq_item",
           "settings": {
+            "category": "Shipping & guarantee",
             "question": "How quickly will I notice a difference?",
-            "answer": "<p>Add your answer here.</p>"
+            "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>"
           }
         }
       },
@@ -618,14 +624,81 @@
         "heading": "Before you start",
         "subtext": "Everything people usually ask before switching to a day-and-night oral care system.",
         "open_first": true,
+        "padding_top": 92,
+        "padding_bottom": 92,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
         "bg_color_day": "",
         "bg_gradient_day": "linear-gradient(180deg, #F2F8FF  0%, #FFFBF6  100%)",
-        "text_color_day": "#191f38",
         "card_bg_color_day": "#ffffff",
         "bg_color_night": "",
         "bg_gradient_night": "linear-gradient(180deg, #2C3A60  0%, #191F38  100%)",
-        "text_color_night": "#ffffff",
         "card_bg_color_night": "#2c3a60"
+      }
+    },
+    "featured_product_3XpDKw": {
+      "type": "featured-product",
+      "blocks": {
+        "title_4znD88": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_LVqFwq": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_9KdyJ3": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_nznbA8": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_UQznij": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "show_add_to_cart": false,
+            "show_custom_button": true,
+            "custom_button_text": "Begin Now",
+            "redirect_to_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "title_4znD88",
+        "price_LVqFwq",
+        "variant_picker_9KdyJ3",
+        "quantity_selector_nznbA8",
+        "buy_buttons_UQznij"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "karmicare-biorhythmic-oral-care-system",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "remove_first_media_bg": false,
+        "padding_top": 92,
+        "padding_bottom": 92,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)"
       }
     }
   },
@@ -637,6 +710,7 @@
     "product_benefits_karmicare_bcQ6tp",
     "trusted_professionals_HAqYth",
     "research_behind_system_EkjATL",
-    "km_faq_accordion_FYcArV"
+    "km_faq_accordion_FYcArV",
+    "featured_product_3XpDKw"
   ]
 }

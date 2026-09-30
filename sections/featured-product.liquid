@@ -29,8 +29,8 @@
 
   {%- style -%}
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
 
     @media screen and (min-width: 750px) {
@@ -39,6 +39,28 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    {%- if section.settings.bg_gradient_day != blank -%}
+      body:not(.night-mode) .featured-product-section-{{ section.id }},
+      body.day-mode .featured-product-section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+      }
+    {%- elsif section.settings.bg_color_day != blank -%}
+      body:not(.night-mode) .featured-product-section-{{ section.id }},
+      body.day-mode .featured-product-section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_day }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.bg_gradient_night != blank -%}
+      body.night-mode .featured-product-section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+      }
+    {%- elsif section.settings.bg_color_night != blank -%}
+      body.night-mode .featured-product-section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_night }};
+      }
+    {%- endif -%}
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -71,9 +93,9 @@
   {%- unless placeholder -%}
     <product-component view-event-payload="{{ product | standard_event_data: 'view' | escape }}">
   {%- endunless -%}
-  <section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
+  <section class="featured-product-section-{{ section.id }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
     <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
-      <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
           {%- unless placeholder -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
@@ -1423,12 +1445,6 @@
       "label": "t:sections.featured-product.settings.product.label"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
       "type": "checkbox",
       "id": "secondary_background",
       "default": false,
@@ -1536,27 +1552,79 @@
     },
     {
       "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "content": "Desktop Section Padding"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
+      "label": "Padding top",
       "default": 36
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
+      "label": "Padding bottom",
       "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Mobile Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding bottom",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
     }
   ],
   "presets": [
