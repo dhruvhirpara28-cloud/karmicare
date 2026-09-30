@@ -48,6 +48,35 @@
         margin-top: 16px;
     }
 
+    /* Filters */
+    .km-faq__filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .km-faq__filter-btn {
+      background: transparent;
+      border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+      color: color-mix(in srgb, currentColor 76%, transparent);
+      border-radius: 40px;
+      padding: 8px 15px;
+      font-size: var(--kc-responsive-label-sm-text-size);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .km-faq__filter-btn.active {
+      background-color: var(--kc-mapped-surface-accent-default);
+      color: var(--kc-mapped-text-accent-default-on-accent);
+      border-color: var(--kc-mapped-surface-accent-default);
+    }
     details.km-faq__item {
         max-width: 680px;
         margin: 0 auto;
@@ -58,10 +87,10 @@
 
   details.km-faq__item{ margin-top: 16px; }
 
-  summary.km-faq__question { 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
+  summary.km-faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
   }
 
@@ -92,6 +121,24 @@
       display: block;
   }
   @media screen and (max-width: 750px) {
+    .km-faq__filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: flex-start;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      margin-left: -15px;
+      margin-right: -15px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .km-faq__filters::-webkit-scrollbar {
+      display: none;
+    }
+    .km-faq__filter-btn {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
     details.km-faq__item {
         padding: 20px;
     }
@@ -113,10 +160,31 @@
       </div>
     {%- endif -%}
 
+    {%- assign categories = '' -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.category != blank -%}
+        {%- assign categories = categories | append: block.settings.category | append: '|||' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign categories_array = categories | split: '|||' | uniq -%}
+
+    {%- if categories_array.size > 0 -%}
+      <div class="km-faq__filters">
+        <span class="km-faq__filter-btn active" data-filter="all">ALL</span>
+
+        {%- for category in categories_array -%}
+          {%- if category != blank -%}
+            <span class="km-faq__filter-btn" data-filter="{{ category | handleize }}">{{ category }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
     <div class="km-faq__list">
       {%- for block in section.blocks -%}
         <details
           class="km-faq__item extra-primary-border-radius"
+          data-category="{{ block.settings.category | handleize }}"
           {% if section.settings.open_first and forloop.first %}
             open
           {% endif %}
@@ -127,10 +195,24 @@
               {{- block.settings.question | escape -}}
             </span>
             <span class="km-faq__icon primary-border-radius" aria-hidden="true">
-              <svg class="plus" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                class="plus"
+                width="11"
+                height="11"
+                viewBox="0 0 11 11"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path d="M0.75 5.41667L10.0833 5.41667M5.41667 0.75L5.41667 10.0833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <svg class="minus" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                class="minus"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path d="M3.33398 8L12.6673 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
@@ -144,12 +226,42 @@
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const filterBtns = document.querySelectorAll('.km-faq__filter-btn');
+    const faqItems = document.querySelectorAll('.km-faq__item');
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        // Remove active class from all buttons
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+
+        const filterValue = this.getAttribute('data-filter');
+
+        faqItems.forEach((item) => {
+          if (filterValue === 'all') {
+            item.style.display = 'block';
+          } else {
+            if (item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "KM FAQ Accordion",
   "tag": "section",
   "class": "km-faq-section",
-  "max_blocks": 12,
+  "max_blocks": 50,
   "settings": [
     {
       "type": "text",
@@ -263,6 +375,12 @@
       "type": "faq_item",
       "name": "FAQ item",
       "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "info": "Used for filtering (e.g. THE SYSTEM). Leave blank if no filter is needed."
+        },
         {
           "type": "text",
           "id": "question",
