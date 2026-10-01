@@ -655,208 +655,125 @@
   <script>
   (function() {
     var SECTION_ID = '{{ section.id }}';
-    var FAKE_PRODUCT_ID = {{ fake_loop_id }};
-    var LOOP_CONTAINER_ID = 'loop-subscription-container-' + FAKE_PRODUCT_ID;
-    var PRICE_WRAPPER_ID = 'price-' + FAKE_PRODUCT_ID;
+    var FP_ID = {{ fake_loop_id }};
+    var LOOP_CONT_ID = 'loop-subscription-container-' + FP_ID;
+    var PRICE_WRAP_ID = 'price-' + FP_ID;
+    var _busy = false;
 
-    /**
-     * Format price in cents to locale string using Shopify's money format.
-     * Falls back to loopFormatMoney if available, otherwise a simple fallback.
-     */
-    function formatPrice(cents) {
-      if (typeof loopFormatMoney === 'function') {
-        return loopFormatMoney(cents, true);
-      }
-      // Fallback: simple currency format
-      var moneyFormat = window.Shopify && window.Shopify.money_format
-        ? window.Shopify.money_format
-        : '{{amount}}';
-      var amount = (cents / 100).toFixed(2);
-      return moneyFormat.replace('{{amount}}', amount)
-                        .replace('{{amount_no_decimals}}', Math.floor(cents / 100))
-                        .replace('{{amount_with_comma_separator}}', amount.replace('.', ','));
+    function fmtPrice(cents) {
+      if (typeof loopFormatMoney === 'function') return loopFormatMoney(cents, true);
+      var fmt = (window.Shopify && window.Shopify.money_format) || '${{amount}}';
+      return fmt.replace('{{amount}}', (cents/100).toFixed(2))
+                .replace('{{amount_no_decimals}}', Math.floor(cents/100))
+                .replace('{{amount_with_comma_separator}}', (cents/100).toFixed(2).replace('.',','));
     }
 
-    /**
-     * Get the currently selected price for the Loop widget.
-     * Returns price in cents, or null if not yet initialized.
-     */
-    function getSelectedLoopPrice() {
-      var props = window.loopProps && window.loopProps[FAKE_PRODUCT_ID];
-      if (!props) return null;
-
-      // Check if a subscription plan is selected (not one-time)
-      var sellingPlanGroupId = props.sellingPlanGroupId;
-      var isOneTime = !sellingPlanGroupId || sellingPlanGroupId === 'loop-one-time-purchase';
-
-      if (!isOneTime) {
-        // Use the selling plan allocation price
-        var spPrice = props.sellingPlanAllocation && props.sellingPlanAllocation.price;
-        if (spPrice != null) return spPrice;
-        // Fall back to sellingPlan price
-        var sp = props.sellingPlan;
-        if (sp && sp.price != null) return sp.price;
+    function getLoopPrice() {
+      var p = window.loopProps && window.loopProps[FP_ID];
+      if (!p) return null;
+      var spgId = p.sellingPlanGroupId;
+      var isOnce = !spgId || spgId === 'loop-one-time-purchase';
+      if (!isOnce) {
+        if (p.sellingPlanAllocation && p.sellingPlanAllocation.price != null) return p.sellingPlanAllocation.price;
+        if (p.sellingPlan && p.sellingPlan.price != null) return p.sellingPlan.price;
       }
-
-      // One-time or fallback: use variant price
-      var variantId = props.selectedVariantId;
-      var product = props.product;
-      if (product && product.variants) {
-        var variant = product.variants.find(function(v) { return v.id == variantId; });
-        if (variant) return variant.price;
+      var prod = p.product;
+      var vid = p.selectedVariantId;
+      if (prod && prod.variants) {
+        var v = prod.variants.find(function(v){ return v.id == vid; });
+        if (v) return v.price;
       }
       return null;
     }
 
-    /**
-     * Get the compare-at price for compare display.
-     */
-    function getCompareAtPrice() {
-      var props = window.loopProps && window.loopProps[FAKE_PRODUCT_ID];
-      if (!props) return null;
-      var variantId = props.selectedVariantId;
-      var product = props.product;
-      if (product && product.variants) {
-        var variant = product.variants.find(function(v) { return v.id == variantId; });
-        if (variant) return variant.compare_at_price;
-      }
-      return null;
+    function getCmpPrice() {
+      var p = window.loopProps && window.loopProps[FP_ID];
+      if (!p || !p.product) return null;
+      var v = p.product.variants.find(function(v){ return v.id == p.selectedVariantId; });
+      return v ? v.compare_at_price : null;
     }
 
-    /**
-     * Update the price display elements inside the featured product price wrapper.
-     */
-    function updateFeaturedProductPrice() {
-      var price = getSelectedLoopPrice();
+    function syncPrice() {
+      if (_busy) return;
+      var price = getLoopPrice();
       if (price == null) return;
-
-      var compareAtPrice = getCompareAtPrice();
-      var priceWrapper = document.getElementById(PRICE_WRAPPER_ID);
-      if (!priceWrapper) return;
-
-      var formattedPrice = formatPrice(price);
-      var isOnSale = compareAtPrice && compareAtPrice > price;
-
-      // Toggle on-sale class on the price container
-      var priceEl = priceWrapper.querySelector('.price');
-      if (priceEl) {
-        if (isOnSale) {
-          priceEl.classList.add('price--on-sale');
-          priceEl.classList.remove('price--sold-out');
+      var wrap = document.getElementById(PRICE_WRAP_ID);
+      if (!wrap) return;
+      _busy = true;
+      try {
+        var cmp = getCmpPrice();
+        var sale = cmp && cmp > price;
+        var priceEl = wrap.querySelector('.price');
+        if (priceEl) priceEl.classList.toggle('price--on-sale', !!sale);
+        if (sale) {
+          wrap.querySelectorAll('.price-item--regular').forEach(function(el){ el.innerHTML = fmtPrice(cmp); });
+          wrap.querySelectorAll('.price-item--sale').forEach(function(el){ el.innerHTML = fmtPrice(price); });
         } else {
-          priceEl.classList.remove('price--on-sale');
+          wrap.querySelectorAll('.price-item--regular, .price-item--sale').forEach(function(el){ el.innerHTML = fmtPrice(price); });
         }
-      }
-
-      if (isOnSale) {
-        // On sale: show compare-at in .price-item--regular (strikethrough), subscription price in .price-item--sale
-        var regularEls = priceWrapper.querySelectorAll('.price-item--regular');
-        regularEls.forEach(function(el) {
-          el.innerHTML = formatPrice(compareAtPrice);
-        });
-        var saleEls = priceWrapper.querySelectorAll('.price-item--sale');
-        saleEls.forEach(function(el) {
-          el.innerHTML = formattedPrice;
-        });
-      } else {
-        // No sale: show current price in .price-item--regular
-        var regularEls = priceWrapper.querySelectorAll('.price-item--regular');
-        regularEls.forEach(function(el) {
-          el.innerHTML = formattedPrice;
-        });
-        // Also update sale element if present (in case switching back from sale to non-sale state)
-        var saleEls = priceWrapper.querySelectorAll('.price-item--sale');
-        saleEls.forEach(function(el) {
-          el.innerHTML = formattedPrice;
-        });
-      }
+      } finally { _busy = false; }
     }
 
-
-    /**
-     * Attach listeners to Loop widget radio buttons and dropdowns.
-     */
-    function attachLoopListeners() {
-      var container = document.getElementById(LOOP_CONTAINER_ID);
-      if (!container) return false;
-
-      // Listen to radio button changes (plan group selection)
-      var radios = container.querySelectorAll('input[name="loop_purchase_option_' + FAKE_PRODUCT_ID + '"], input[name^="loop_purchase_option"]');
-      radios.forEach(function(radio) {
-        if (!radio.dataset.kcFpBound) {
-          radio.dataset.kcFpBound = '1';
-          radio.addEventListener('change', function() {
-            setTimeout(updateFeaturedProductPrice, 50);
-          });
-          radio.addEventListener('click', function() {
-            setTimeout(updateFeaturedProductPrice, 50);
-          });
-        }
+    function bindInputs() {
+      var cont = document.getElementById(LOOP_CONT_ID);
+      if (!cont) return false;
+      cont.querySelectorAll('input[name^="loop_purchase_option"]').forEach(function(r) {
+        if (r.dataset.kcb) return;
+        r.dataset.kcb = '1';
+        r.addEventListener('change', function(){ setTimeout(syncPrice, 60); });
+        r.addEventListener('click',  function(){ setTimeout(syncPrice, 60); });
       });
-
-      // Listen to dropdown (delivery frequency) changes
-      var selects = container.querySelectorAll('.loop-selling-plan-selector');
-      selects.forEach(function(sel) {
-        if (!sel.dataset.kcFpBound) {
-          sel.dataset.kcFpBound = '1';
-          sel.addEventListener('change', function() {
-            setTimeout(updateFeaturedProductPrice, 50);
-          });
-        }
+      cont.querySelectorAll('.loop-selling-plan-selector').forEach(function(s) {
+        if (s.dataset.kcb) return;
+        s.dataset.kcb = '1';
+        s.addEventListener('change', function(){ setTimeout(syncPrice, 60); });
       });
-
       return true;
     }
 
-    /**
-     * Wait for Loop widget to initialize, then set up price syncing.
-     */
-    function initFeaturedProductLoopPriceSync() {
-      // Try attaching listeners immediately
-      if (attachLoopListeners()) {
-        updateFeaturedProductPrice();
+    function init() {
+      // Observe ONLY the section wrapper; disconnect as soon as loop container appears
+      // to prevent re-firing when we update price innerHTML inside it.
+      var sectionEl = document.querySelector('.featured-product-section-{{ section.id }}');
+      if (sectionEl && !document.getElementById(LOOP_CONT_ID)) {
+        var obs = new MutationObserver(function(_, o) {
+          if (document.getElementById(LOOP_CONT_ID)) {
+            o.disconnect();
+            bindInputs();
+            syncPrice();
+          }
+        });
+        obs.observe(sectionEl, { childList: true, subtree: true });
       }
 
-      // Also watch for DOM changes in case Loop renders after this script
-      var observer = new MutationObserver(function() {
-        if (attachLoopListeners()) {
-          updateFeaturedProductPrice();
-        }
-      });
+      // Try immediately
+      bindInputs();
+      syncPrice();
 
-      var productInfoWrapper = document.getElementById('ProductInfo-' + SECTION_ID);
-      if (productInfoWrapper) {
-        observer.observe(productInfoWrapper, { childList: true, subtree: true });
-      }
-
-      // Poll loopProps until it's populated with our fake product ID
-      var pollCount = 0;
-      var poll = setInterval(function() {
-        pollCount++;
-        if (pollCount > 100) { clearInterval(poll); return; } // give up after ~10s
-
-        var props = window.loopProps && window.loopProps[FAKE_PRODUCT_ID];
-        if (props && props.product) {
-          clearInterval(poll);
-          attachLoopListeners();
-          updateFeaturedProductPrice();
-
-          // Re-run after a short delay as the widget may still be setting defaults
-          setTimeout(updateFeaturedProductPrice, 500);
-          setTimeout(updateFeaturedProductPrice, 1500);
+      // Poll loopProps until populated (max 10 s)
+      var n = 0;
+      var t = setInterval(function() {
+        if (++n > 100) { clearInterval(t); return; }
+        var p = window.loopProps && window.loopProps[FP_ID];
+        if (p && p.product) {
+          clearInterval(t);
+          bindInputs();
+          syncPrice();
+          setTimeout(syncPrice, 700);
+          setTimeout(syncPrice, 2000);
         }
       }, 100);
     }
 
-    // Initialize after DOM is ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initFeaturedProductLoopPriceSync);
+      document.addEventListener('DOMContentLoaded', init);
     } else {
-      initFeaturedProductLoopPriceSync();
+      init();
     }
   })();
   </script>
   {%- endunless -%}
+
 </product-info>
 
 {% schema %}
