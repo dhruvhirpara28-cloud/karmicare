@@ -163,7 +163,7 @@
               {% assign cells = row | split: '|' %}
 
               <!-- Column 1 -->
-              <div class="comparison-table__cell comparison-table__cell--first">
+              <div class="comparison-table__cell comparison-table__cell--first comparison-table__cell--first{{ forloop.index }}">
                 {% if cells[0] != blank %}
                   {{ cells[0] | strip }}
                 {% endif %}
