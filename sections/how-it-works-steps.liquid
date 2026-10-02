@@ -274,14 +274,35 @@
 
     document.querySelectorAll('.kc-section:not([data-kc-init])').forEach(function (root) {
       root.setAttribute('data-kc-init', 'true');
+
       root.querySelectorAll('.kc-card').forEach(function (card) {
+        var pinned = false;
+
+        function togglePin() {
+          if (pinned) {
+            pinned = false;
+            card.classList.remove('is-pinned');
+            pause(card);
+          } else {
+            pinned = true;
+            card.classList.add('is-pinned');
+            play(card);
+          }
+        }
+
         if (canHover) {
-          card.addEventListener('mouseenter', function () { play(card); });
-          card.addEventListener('mouseleave', function () { pause(card); });
-        } else {
-          card.addEventListener('click', function () {
-            card.classList.contains('is-playing') ? pause(card) : play(card);
+          // Desktop: hover = play, leave = pause (sirf agar click/pin nahi kiya)
+          card.addEventListener('mouseenter', function () {
+            if (!pinned) play(card);
           });
+          card.addEventListener('mouseleave', function () {
+            if (!pinned) pause(card);
+          });
+          // Click = pin (bahar jaane pe bhi chalta rahega), dobara click = pause
+          card.addEventListener('click', togglePin);
+        } else {
+          // Mobile: tap = play/pause toggle
+          card.addEventListener('click', togglePin);
         }
       });
     });
