@@ -1,5 +1,6 @@
 {%- comment -%}
-  How it works / Ritual steps section
+  How it works / Ritual steps section (Swiper slider version)
+  - Slides: Desktop 3, Tablet 2.1, Mobile 1.2
   - No color settings and no color values in CSS.
   - Section header snippet ka use nahi hua.
   - Video: Shopify uploaded video, YouTube ya Vimeo link.
@@ -78,10 +79,15 @@
     margin: 0;
 }
 
+/* Swiper slider */
 .kc-section .kc-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.kc-section .kc-grid .swiper-slide {
+    height: auto;
+    box-sizing: border-box;
 }
 .kc-section .kc-card {
     position: relative;
@@ -163,9 +169,6 @@
     font-size: 11px;
 }
 
-@media screen and (min-width: 750px) {
-    .kc-section .kc-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-}
 @media screen and (max-width: 749px) {
     .kc-section {
         padding-top: {{ section.settings.padding_top_mob }}px;
@@ -173,7 +176,7 @@
     }
 }
 
-  {{ section.settings.custom_css }}
+{{ section.settings.custom_css }}
 {%- endstyle -%}
 
 <section class="kc-section section-{{ section.id }}">
@@ -193,7 +196,8 @@
       </div>
     {%- endif -%}
 
-    <div class="kc-grid">
+    <div class="kc-grid swiper">
+      <div class="swiper-wrapper">
       {%- for block in section.blocks -%}
         {%- liquid
           assign video_type = 'none'
@@ -204,7 +208,7 @@
           endif
           assign loop = block.settings.loop
         -%}
-        <div class="kc-step" {{ block.shopify_attributes }}>
+        <div class="kc-step swiper-slide" {{ block.shopify_attributes }}>
           <div class="kc-card" data-type="{{ video_type }}" data-loop="{{ loop }}">
             <div class="kc-media">
               {%- if video_type == 'shopify' -%}
@@ -266,6 +270,7 @@
           {%- endif -%}
         </div>
       {%- endfor -%}
+      </div>
     </div>
 
     {%- if section.settings.bottom_text != blank -%}
@@ -308,8 +313,47 @@
       card.classList.remove('is-playing');
     }
 
+    // Swiper load (jo pehla thi na hoy to CDN thi)
+    function loadSwiper(cb) {
+      if (window.Swiper) return cb();
+      if (!document.querySelector('link[data-kc-swiper]')) {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+        l.setAttribute('data-kc-swiper', 'true');
+        document.head.appendChild(l);
+      }
+      var existing = document.querySelector('script[data-kc-swiper]');
+      if (existing) {
+        existing.addEventListener('load', cb);
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+      s.setAttribute('data-kc-swiper', 'true');
+      s.onload = cb;
+      document.head.appendChild(s);
+    }
+
+    function initSlider(root) {
+      var el = root.querySelector('.kc-grid');
+      if (!el || el.swiper) return;
+      new Swiper(el, {
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+        grabCursor: true,
+        watchOverflow: true,
+        breakpoints: {
+          750: { slidesPerView: 2.1, spaceBetween: 12 },
+          990: { slidesPerView: 3, spaceBetween: 12 }
+        }
+      });
+    }
+
     document.querySelectorAll('.kc-section:not([data-kc-init])').forEach(function (root) {
       root.setAttribute('data-kc-init', 'true');
+
+      loadSwiper(function () { initSlider(root); });
 
       root.querySelectorAll('.kc-card').forEach(function (card) {
         var pinned = false;
