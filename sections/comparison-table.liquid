@@ -35,6 +35,20 @@
       color: {{ section.settings.text_color_night }};
     }
   {% endif %}
+
+  #section-{{ section.id }} {
+    padding-top: {{ section.settings.padding-top }}px;
+    padding-bottom: {{ section.settings.padding-bottom }}px;
+    color: {{ section.settings.text_color }};
+    background-color: {{ section.settings.bg_color }};
+    }
+    
+    @media only screen and (max-width: 767px) { 
+    #section-{{ section.id }} {
+        padding-top: {{ section.settings.padding-top-mobile }}px;
+        padding-bottom: {{ section.settings.padding-bottom-mobile }}px;
+    }
+    }
 </style>
 {% liquid
   assign comparison = product.metafields.custom.comparison_section.value
@@ -58,7 +72,7 @@
     assign table_headers = table_title | split: '|'
   %}
 
-  <section class="comparison-section">
+  <section class="comparison-section" id="section-{{ section.id }}">
     <div class="comparison-section__inner">
       <!--
         ==========================================
