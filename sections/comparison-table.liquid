@@ -1,230 +1,184 @@
-{%- if section.settings.bg_gradient_day != blank -%}
-body:not(.night-mode) .section-{{ section.id }},
-body.day-mode .section-{{ section.id }} {
-    background: {{ section.settings.bg_gradient_day }};
-}
-{%- elsif section.settings.bg_color_day != blank -%}
-body:not(.night-mode) .section-{{ section.id }},
-body.day-mode .section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color_day }};
-}
-{%- endif -%}
+<style>
+  {%- if section.settings.bg_gradient_day != blank -%}
+  body:not(.night-mode) .section-{{ section.id }},
+  body.day-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_day }};
+  }
+  {%- elsif section.settings.bg_color_day != blank -%}
+  body:not(.night-mode) .section-{{ section.id }},
+  body.day-mode .section-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_day }};
+  }
+  {%- endif -%}
 
-{%- if section.settings.bg_gradient_night != blank -%}
-body.night-mode .section-{{ section.id }} {
-    background: {{ section.settings.bg_gradient_night }};
-}
-{%- elsif section.settings.bg_color_night != blank -%}
-body.night-mode .section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color_night }};
-}
-{%- endif -%}   
-
+  {%- if section.settings.bg_gradient_night != blank -%}
+  body.night-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_night }};
+  }
+  {%- elsif section.settings.bg_color_night != blank -%}
+  body.night-mode .section-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_night }};
+  }
+  {%- endif -%}
+</style>
 {% liquid
   assign comparison = product.metafields.custom.comparison_section.value
 %}
 
 {% if comparison != blank %}
+  {% liquid
+    assign comparison = product.metafields.custom.comparison_section.value
 
-{% liquid
-  assign comparison = product.metafields.custom.comparison_section.value
+    assign section_subtitle = comparison.sub_title.value
+    assign section_title = comparison.title
+    assign section_description = comparison.short_description.value
 
-  assign section_subtitle = comparison.sub_title.value
-  assign section_title = comparison.title
-  assign section_description = comparison.short_description.value
+    assign table_title = comparison.table_title.value
+    assign table_logo = comparison.table_brand_logo.value
+    assign table_rows = comparison.table_list.value
 
-  assign table_title = comparison.table_title.value
-  assign table_logo = comparison.table_brand_logo.value
-  assign table_rows = comparison.table_list.value
+    assign button_text = comparison.table_button_text.value
+    assign button_url = comparison.table_button_url.value
 
-  assign button_text = comparison.table_button_text.value
-  assign button_url = comparison.table_button_url.value
-
-  assign table_headers = table_title | split: '|'
-%}
-
-
+    assign table_headers = table_title | split: '|'
+  %}
 
   <section class="comparison-section">
-
     <div class="comparison-section__inner">
-
-      <!-- ==========================================
-           TOP CONTENT
-      =========================================== -->
+      <!--
+        ==========================================
+             TOP CONTENT
+        ===========================================
+      -->
 
       {% if section_subtitle != blank %}
-  <div class="comparison-section__subtitle">
-    {{ section_subtitle }}
-  </div>
-{% endif %}
+        <div class="comparison-section__subtitle">
+          {{ section_subtitle }}
+        </div>
+      {% endif %}
 
+      {% if section_title != blank %}
+        <div class="comparison-section__title">
+          {{ section_title | metafield_tag }}
+        </div>
+      {% endif %}
 
-{% if section_title != blank %}
-  <div class="comparison-section__title">
-    {{ section_title | metafield_tag }}
-  </div>
-{% endif %}
+      {% if section_description != blank %}
+        <div class="comparison-section__description">
+          {{ section_description }}
+        </div>
+      {% endif %}
 
-
-{% if section_description != blank %}
-  <div class="comparison-section__description">
-    {{ section_description }}
-  </div>
-{% endif %}
-
-
-
-      <!-- ==========================================
-           COMPARISON TABLE
-      =========================================== -->
+      <!--
+        ==========================================
+             COMPARISON TABLE
+        ===========================================
+      -->
 
       <div class="comparison-table-wrapper">
-
         <div class="comparison-table">
-
-
-          <!-- ========================================
-               TABLE HEADER
-          ========================================= -->
+          <!--
+            ========================================
+                 TABLE HEADER
+            =========================================
+          -->
 
           <!-- Column 1 -->
           <div class="comparison-table__header comparison-table__header--first">
-
             {% if table_headers[0] != blank %}
               {{ table_headers[0] | strip }}
             {% endif %}
-
           </div>
-
 
           <!-- Column 2 - LOGO -->
           <div class="comparison-table__header comparison-table__header--brand">
-
             {% if table_logo != blank %}
-
               {{
                 table_logo
                 | image_url: width: 500
-                | image_tag:
-                  loading: 'lazy',
-                  widths: '100, 150, 200, 300, 500',
-                  class: 'comparison-table__brand-logo'
+                | image_tag: loading: 'lazy', widths: '100, 150, 200, 300, 500', class: 'comparison-table__brand-logo'
               }}
-
             {% endif %}
-
           </div>
-
 
           <!-- Column 3 -->
           <div class="comparison-table__header">
-
             {% if table_headers[2] != blank %}
               {{ table_headers[2] | strip }}
             {% endif %}
-
           </div>
-
 
           <!-- Column 4 -->
           <div class="comparison-table__header">
-
             {% if table_headers[3] != blank %}
               {{ table_headers[3] | strip }}
             {% endif %}
-
           </div>
-
 
           <!-- Column 5 -->
           <div class="comparison-table__header">
-
             {% if table_headers[4] != blank %}
               {{ table_headers[4] | strip }}
             {% endif %}
-
           </div>
 
-
-          <!-- ========================================
-               TABLE BODY
-          ========================================= -->
+          <!--
+            ========================================
+                 TABLE BODY
+            =========================================
+          -->
 
           {% if table_rows != blank %}
-
             {% for row in table_rows %}
-
               {% assign cells = row | split: '|' %}
-
 
               <!-- Column 1 -->
               <div class="comparison-table__cell comparison-table__cell--first">
-
                 {% if cells[0] != blank %}
                   {{ cells[0] | strip }}
                 {% endif %}
-
               </div>
-
 
               <!-- Column 2 -->
               <div class="comparison-table__cell comparison-table__cell--brand">
-
                 {% if cells[1] != blank %}
                   {{ cells[1] | strip }}
                 {% endif %}
-
               </div>
-
 
               <!-- Column 3 -->
               <div class="comparison-table__cell">
-
                 {% if cells[2] != blank %}
                   {{ cells[2] | strip }}
                 {% endif %}
-
               </div>
-
 
               <!-- Column 4 -->
               <div class="comparison-table__cell">
-
                 {% if cells[3] != blank %}
                   {{ cells[3] | strip }}
                 {% endif %}
-
               </div>
-
 
               <!-- Column 5 -->
               <div class="comparison-table__cell">
-
                 {% if cells[4] != blank %}
                   {{ cells[4] | strip }}
                 {% endif %}
-
               </div>
-
             {% endfor %}
-
           {% endif %}
-
-
         </div>
 
-
-        <!-- ========================================
-             BUTTON
-        ========================================= -->
+        <!--
+          ========================================
+               BUTTON
+          =========================================
+        -->
 
         {% if button_text != blank %}
-
           <div class="comparison-section__button-wrapper">
-
             {% if button_url != blank %}
-
               <a
                 href="{{ button_url }}"
                 class="comparison-section__button"
@@ -233,371 +187,357 @@ body.night-mode .section-{{ section.id }} {
               </a>
 
             {% else %}
-
               <button
                 type="button"
                 class="comparison-section__button"
               >
                 {{ button_text }}
               </button>
-
             {% endif %}
-
           </div>
-
         {% endif %}
-
       </div>
-
     </div>
-
   </section>
-
 {% endif %}
 
-
-
 <style>
-
-/* =========================================================
-   SECTION
-========================================================= */
-
-.comparison-section {
-  width: 100%;
-  padding: 80px 20px 100px;
-  box-sizing: border-box;
-}
-
-
-.comparison-section__inner {
-  width: 100%;
-  max-width: 1050px;
-  margin: 0 auto;
-}
-
-
-/* =========================================================
-   TOP CONTENT
-========================================================= */
-
-.comparison-section__subtitle {
-  text-align: center;
-
-  font-size: 11px;
-  line-height: 1.4;
-
-  letter-spacing: 2px;
-  text-transform: uppercase;
-
-  margin-bottom: 16px;
-}
-
-
-.comparison-section__title {
-  max-width: 720px;
-  margin: 0 auto;
-
-  text-align: center;
-
-  font-size: clamp(36px, 4vw, 54px);
-  line-height: 1;
-
-  letter-spacing: -1.5px;
-  font-weight: 400;
-}
-
-
-.comparison-section__title p {
-  margin: 0;
-}
-
-
-.comparison-section__description {
-  max-width: 620px;
-
-  margin: 20px auto 0;
-
-  text-align: center;
-
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   TABLE WRAPPER
-========================================================= */
-
-.comparison-table-wrapper {
-  position: relative;
-
-  width: 100%;
-
-  margin-top: 125px;
-
-  padding-bottom: 65px;
-
-  box-sizing: border-box;
-}
-
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-.comparison-table {
-  width: 100%;
-
-  display: grid;
-
-  grid-template-columns:
-    1.15fr
-    1.25fr
-    1.25fr
-    1.25fr
-    1.25fr;
-
-  box-sizing: border-box;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.comparison-table__header {
-  min-height: 54px;
-
-  padding: 0 12px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  font-size: 11px;
-  line-height: 1.35;
-  font-weight: 500;
-
-  box-sizing: border-box;
-}
-
-
-.comparison-table__header--first {
-  justify-content: flex-start;
-  text-align: left;
-}
-
-
-.comparison-table__header--brand {
-  position: relative;
-
-  border: 1px solid;
-  border-bottom: 0;
-
-  border-radius: 12px 12px 0 0;
-
-  padding: 10px 20px;
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.comparison-table__brand-logo {
-  display: block;
-
-  width: auto;
-  max-width: 105px;
-
-  max-height: 38px;
-
-  height: auto;
-
-  object-fit: contain;
-}
-
-
-/* =========================================================
-   BODY CELLS
-========================================================= */
-
-.comparison-table__cell {
-  min-height: 70px;
-
-  padding: 15px 12px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  font-size: 11px;
-  line-height: 1.45;
-
-  box-sizing: border-box;
-
-  border-top: 1px solid;
-}
-
-
-.comparison-table__cell--first {
-  justify-content: flex-start;
-
-  text-align: left;
-
-  font-weight: 500;
-}
-
-
-/* =========================================================
-   BRAND COLUMN
-========================================================= */
-
-.comparison-table__cell--brand {
-  border-left: 1px solid;
-  border-right: 1px solid;
-}
-
-
-/*
-  Since the table uses CSS grid, the last 5 cells
-  belong to the last row.
-*/
-
-.comparison-table__cell--brand:nth-last-child(4) {
-  border-bottom: 1px solid;
-  border-radius: 0 0 12px 12px;
-}
-
-
-/* =========================================================
-   BUTTON
-========================================================= */
-
-.comparison-section__button-wrapper {
-  position: absolute;
-
-  left: calc(100% * 1.15 / 6.15);
-
-  width: calc(100% * 1.25 / 6.15);
-
-  bottom: 0;
-
-  display: flex;
-
-  justify-content: center;
-}
-
-
-.comparison-section__button {
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  min-height: 42px;
-
-  padding: 0 24px;
-
-  border-radius: 6px;
-
-  text-decoration: none;
-
-  font-size: 10px;
-  line-height: 1;
-
-  font-weight: 600;
-
-  letter-spacing: 1px;
-
-  text-transform: uppercase;
-
-  white-space: nowrap;
-
-  box-sizing: border-box;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media screen and (max-width: 900px) {
+  /* =========================================================
+     SECTION
+  ========================================================= */
 
   .comparison-section {
-    padding: 60px 15px 80px;
+    width: 100%;
+    padding: 80px 20px 100px;
+    box-sizing: border-box;
   }
 
 
-  .comparison-table-wrapper {
-    margin-top: 75px;
-
-    overflow-x: auto;
-
-    padding-bottom: 65px;
+  .comparison-section__inner {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
   }
 
 
-  .comparison-table {
-    min-width: 850px;
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media screen and (max-width: 600px) {
-
-  .comparison-section {
-    padding: 50px 12px 70px;
-  }
-
+  /* =========================================================
+     TOP CONTENT
+  ========================================================= */
 
   .comparison-section__subtitle {
-    font-size: 9px;
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    margin-bottom: 16px;
   }
 
 
   .comparison-section__title {
-    font-size: 34px;
+    max-width: 720px;
+    margin: 0 auto;
+
+    text-align: center;
+
+    font-size: clamp(36px, 4vw, 54px);
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+    font-weight: 400;
+  }
+
+
+  .comparison-section__title p {
+    margin: 0;
   }
 
 
   .comparison-section__description {
-    font-size: 12px;
+    max-width: 620px;
+
+    margin: 20px auto 0;
+
+    text-align: center;
+
+    font-size: 13px;
+    line-height: 1.5;
   }
 
+
+  /* =========================================================
+     TABLE WRAPPER
+  ========================================================= */
 
   .comparison-table-wrapper {
-    margin-top: 55px;
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 125px;
+
+    padding-bottom: 65px;
+
+    box-sizing: border-box;
   }
 
+
+  /* =========================================================
+     TABLE
+  ========================================================= */
 
   .comparison-table {
-    min-width: 820px;
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      1.15fr
+      1.25fr
+      1.25fr
+      1.25fr
+      1.25fr;
+
+    box-sizing: border-box;
   }
 
 
-  .comparison-table__header,
+  /* =========================================================
+     HEADER
+  ========================================================= */
+
+  .comparison-table__header {
+    min-height: 54px;
+
+    padding: 0 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.35;
+    font-weight: 500;
+
+    box-sizing: border-box;
+  }
+
+
+  .comparison-table__header--first {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+
+  .comparison-table__header--brand {
+    position: relative;
+
+    border: 1px solid;
+    border-bottom: 0;
+
+    border-radius: 12px 12px 0 0;
+
+    padding: 10px 20px;
+  }
+
+
+  /* =========================================================
+     LOGO
+  ========================================================= */
+
+  .comparison-table__brand-logo {
+    display: block;
+
+    width: auto;
+    max-width: 105px;
+
+    max-height: 38px;
+
+    height: auto;
+
+    object-fit: contain;
+  }
+
+
+  /* =========================================================
+     BODY CELLS
+  ========================================================= */
+
   .comparison-table__cell {
-    font-size: 10px;
+    min-height: 70px;
+
+    padding: 15px 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.45;
+
+    box-sizing: border-box;
+
+    border-top: 1px solid;
   }
 
-}
 
+  .comparison-table__cell--first {
+    justify-content: flex-start;
+
+    text-align: left;
+
+    font-weight: 500;
+  }
+
+
+  /* =========================================================
+     BRAND COLUMN
+  ========================================================= */
+
+  .comparison-table__cell--brand {
+    border-left: 1px solid;
+    border-right: 1px solid;
+  }
+
+
+  /*
+    Since the table uses CSS grid, the last 5 cells
+    belong to the last row.
+  */
+
+  .comparison-table__cell--brand:nth-last-child(4) {
+    border-bottom: 1px solid;
+    border-radius: 0 0 12px 12px;
+  }
+
+
+  /* =========================================================
+     BUTTON
+  ========================================================= */
+
+  .comparison-section__button-wrapper {
+    position: absolute;
+
+    left: calc(100% * 1.15 / 6.15);
+
+    width: calc(100% * 1.25 / 6.15);
+
+    bottom: 0;
+
+    display: flex;
+
+    justify-content: center;
+  }
+
+
+  .comparison-section__button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 24px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    line-height: 1;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+  }
+
+
+  /* =========================================================
+     TABLET
+  ========================================================= */
+
+  @media screen and (max-width: 900px) {
+
+    .comparison-section {
+      padding: 60px 15px 80px;
+    }
+
+
+    .comparison-table-wrapper {
+      margin-top: 75px;
+
+      overflow-x: auto;
+
+      padding-bottom: 65px;
+    }
+
+
+    .comparison-table {
+      min-width: 850px;
+    }
+
+  }
+
+
+  /* =========================================================
+     MOBILE
+  ========================================================= */
+
+  @media screen and (max-width: 600px) {
+
+    .comparison-section {
+      padding: 50px 12px 70px;
+    }
+
+
+    .comparison-section__subtitle {
+      font-size: 9px;
+    }
+
+
+    .comparison-section__title {
+      font-size: 34px;
+    }
+
+
+    .comparison-section__description {
+      font-size: 12px;
+    }
+
+
+    .comparison-table-wrapper {
+      margin-top: 55px;
+    }
+
+
+    .comparison-table {
+      min-width: 820px;
+    }
+
+
+    .comparison-table__header,
+    .comparison-table__cell {
+      font-size: 10px;
+    }
+
+  }
 </style>
-
-
 
 {% schema %}
 {
@@ -605,7 +545,7 @@ body.night-mode .section-{{ section.id }} {
   "tag": "section",
   "class": "comparison-section-wrapper",
   "settings": [
-     {
+    {
       "type": "header",
       "content": "Day Mode Colors"
     },
