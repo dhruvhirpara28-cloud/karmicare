@@ -37,7 +37,7 @@
 
       {% if section_title != blank %}
         <div class="comparison-section__title">
-          {{ section_title }}
+          {{ section_title | metafield_tag }}
         </div>
       {% endif %}
 
