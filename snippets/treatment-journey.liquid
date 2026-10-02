@@ -16,12 +16,12 @@
       {%- assign list_1_sorted = list_1 | sort: 'sort_order' -%}
       <div class="kc-journey-container active" data-journey-index="1" id="kc-journey-1-{{ section.id }}">
         <div class="kc-journey-header">
-          <h3 class="kc-journey-title">
+          <h5 class="kc-journey-title">
             {{ heading_1.heading | default: "What you'll feel" }}
             {%- if heading_1.sub_heading != blank -%}
-              <span class="kc-journey-subtitle">{{ heading_1.sub_heading }}</span>
+              <span class="kc-journey-subtitle opacity-xl">{{ heading_1.sub_heading }}</span>
             {%- endif -%}
-          </h3>
+          </h5>
           <span aria-hidden="true" class="head-rule"></span>
           {%- if heading_1.active_tab_title != blank -%}
             <span
@@ -102,12 +102,12 @@
       {%- assign list_2_sorted = list_2 | sort: 'sort_order' -%}
       <div class="kc-journey-container active" data-journey-index="2" id="kc-journey-2-{{ section.id }}">
         <div class="kc-journey-header">
-          <h3 class="kc-journey-title">
+          <h5 class="kc-journey-title">
             {{ heading_2.heading | default: "What you'll feel" }}
             {%- if heading_2.sub_heading != blank -%}
-              <span class="kc-journey-subtitle">{{ heading_2.sub_heading }}</span>
+              <span class="kc-journey-subtitle opacity-xl">{{ heading_2.sub_heading }}</span>
             {%- endif -%}
-          </h3>
+          </h5>
           <span aria-hidden="true" class="head-rule"></span>
           {%- if heading_2.active_tab_title != blank -%}
             <span

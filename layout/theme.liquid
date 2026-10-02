@@ -148,30 +148,34 @@
       {% endfor %}
 
       {{ scheme_classes | prepend: 'body' }} {
-        color: rgba(var(--color-foreground), 0.75);
+        color: rgb(var(--color-foreground));
         background-color: rgb(var(--color-background));
       }
 
       :root {
-        --gap-xs:4px;
-        --gap-sm:6px;
-        --gap-md:8px;
-        --gap-lg:12px;
-        --gap-xl:16px;
-        --gap-2xl:20px;
-        --km-body-xs: 13px;
-        --km-body-sm: 14px;
-        --km-body: 16px;
-        --km-body-lg: 20px;
-        --km-body-xl: 22px;
-        --km-body-2xl: 24px;
-        --kc-mapped-surface-accent-default:#7FB9FF;
-        --kc-mapped-surface-primary-default:#FFFFFF;
-        --kc-mapped-text-accent-default-on-accent:#0A1628;
-        --kc-mapped-surface-tertiery-default:#DDDBD9;
-        --kc-responsive-caption-letter-spacing:1.25px;
-        --kc-responsive-caption-letter-spacing:1px;
-        --kc-responsive-h4-letter-spacing-sm:-0.25px;
+
+        --gap-xs: 5px;
+        --gap-sm: 8px;
+        --gap-md: 10px;
+        --gap-lg: 12px;
+        --gap-xl: 15px;
+        --gap-2xl: 18px;
+
+        --kc-white-surface-primary-default: #FFFFFF;
+        --kc-mapped-text-primary-default: #FFFBF6;
+        --kc-mapped-bg-primary-default: #2C3A60;
+        --kc-mapped-surface-primary-default: #191F38;
+        --kc-mapped-surface-secondary-default: #212A49;
+        --kc-mapped-surface-accent-default: #7FB9FF;
+        --kc-mapped-border-focus-default: #7FB9FF;
+        --kc-mapped-text-accent-default: #7FB9FF;
+        --kc-mapped-text-accent-default-on-accent: #0A1628;
+        --kc-mapped-surface-tertiery-default: #DDDBD9;
+
+        --kc-responsive-caption-letter-spacing: 1.25px;
+        --kc-responsive-caption-letter-spacing: 1px;
+        --kc-responsive-h4-letter-spacing-sm: -0.25px;
+        --kc-responsive-h5-letter-spacing: -0.5px;
 
 
         --font-400-weight:{{ settings.font_400_weight }};
@@ -217,17 +221,16 @@
 
         --font-h5-size-mobile: calc(var(--font-heading-scale) * {{ settings.h5_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h5-size-desktop: calc(var(--font-heading-scale) * {{ settings.h5_font_size_desktop | divided_by: 10.0 }}rem);
-        --kc-responsive-h5-letter-spacing:-0.5px;
 
         --font-h6-size-mobile: calc(var(--font-heading-scale) * {{ settings.h6_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h6-size-desktop: calc(var(--font-heading-scale) * {{ settings.h6_font_size_desktop | divided_by: 10.0 }}rem);
 
-        --font-h1-weight: {{ settings.h1_font_weight | default: '700' }};
-        --font-h2-weight: {{ settings.h2_font_weight | default: '700' }};
-        --font-h3-weight: {{ settings.h3_font_weight | default: '700' }};
-        --font-h4-weight: {{ settings.h4_font_weight | default: '700' }};
-        --font-h5-weight: {{ settings.h5_font_weight | default: '700' }};
-        --font-h6-weight: {{ settings.h6_font_weight | default: '700' }};
+        --font-h1-weight: {{ settings.h1_font_weight }};
+        --font-h2-weight: {{ settings.h2_font_weight }};
+        --font-h3-weight: {{ settings.h3_font_weight }};
+        --font-h4-weight: {{ settings.h4_font_weight }};
+        --font-h5-weight: {{ settings.h5_font_weight }};
+        --font-h6-weight: {{ settings.h6_font_weight }};
 
         --media-padding: {{ settings.media_padding }}px;
         --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
@@ -383,10 +386,9 @@
       {% endstyle %}
     {% endif %}
     {% comment %}Day/Night mode — overrides Shopify color scheme variables{% endcomment %}
-    {% render 'day-night-color-variables' %}
+    {% render 'day-night-color-variables', scheme_classes: scheme_classes %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'day-night-mode.css' | asset_url | stylesheet_tag }}
     {% render 'button-styles' %}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' -%}

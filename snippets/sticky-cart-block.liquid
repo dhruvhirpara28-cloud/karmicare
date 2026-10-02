@@ -237,7 +237,6 @@
         aria-label="{{ button_text }}"
       >
         <span>{{ button_text }}</span>
-        <span class="arrow">›</span>
         <div class="loading__spinner hidden">
           <svg
             aria-hidden="true"
@@ -336,7 +335,7 @@
         if (checkupText) {
           suffixParts.push('€' + creditValue.toFixed(2) + ' Care Credit');
         } else {
-          suffixParts.push('€' + creditValue.toFixed(2) + ' Care Credit received');
+          suffixParts.push('€' + creditValue.toFixed(2) + ' Care Credit back in your account');
         }
       }
       if (checkupText) {

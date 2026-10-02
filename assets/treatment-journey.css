@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.2rem;
+  gap: var(--gap-lg);
   margin-bottom: 2.4rem;
 }
 
@@ -31,24 +31,22 @@
   flex: 1 1 auto;
   min-width: 14px;
   height: 1px;
-  background: var(--hairline);
+  background: rgba(var(--color-foreground), 0.12);
   align-self: center;
 }
 
 .kc-journey-subtitle {
-  margin-left: 0.6rem;
-  font-size: 12px;
-  font-weight: var(--font-400-weight);
-  opacity: 0.6;
+  margin-left: 0.8rem;
+  font-size: var(--font-body-small-size);
 }
 
 .kc-journey-badge {
-  font-size: 1.2rem;
+  font-size: var(--kc-responsive-label-sm-text-size);
   font-weight: var(--font-600-weight);
   padding: 0.6rem 1.2rem;
-  border-radius: 20px;
+  border-radius: var(--secondary-border-radius);
   text-transform: capitalize;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   white-space: nowrap;
 }
 
@@ -61,9 +59,9 @@
 
 .kc-journey-item {
   display: flex;
-  align-items: flex-start;
-  gap: 1.6rem;
-  margin-bottom: 1.2rem;
+  align-items: center;
+  gap: var(--gap-xl);
+  margin-bottom: 0.8rem;
   opacity: 1;
   transition: opacity 0.3s ease;
   position: relative;
@@ -88,6 +86,7 @@
   width: 20px;
   height: 20px;
   display: block;
+  color: var(--kc-mapped-border-focus-default);
 }
 
 .kc-journey-icon-img {
@@ -97,15 +96,10 @@
   display: block;
 }
 
-body.night-mode .kc-journey-item-icon svg {
-  color: var(--accent);
-}
-
 /* Content Layout */
 .kc-journey-item-content {
-  font-size: 1.5rem;
-  line-height: 1.5;
   flex-grow: 1;
+  font-size: var(--font-body-small-size);
 }
 
 .kc-journey-item-content p,
@@ -157,9 +151,6 @@ body.night-mode .kc-journey-item-icon svg {
   display: block;
 }
 
-.kc-journey-item-lock {
-  color: rgba(255, 255, 255, 0.4);
-}
 
 /* Active yearly plan state: show lock-open, hide lock-closed, and color blue */
 .kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-open {
@@ -170,14 +161,8 @@ body.night-mode .kc-journey-item-icon svg {
   display: none;
 }
 
-.kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock {
-  color: var(--accent);
-}
-
 /* Disclaimer Styling */
 .kc-journey-disclaimer {
-  font-size: 1.2rem;
-  color: var(--muted);
   margin: 1.5rem 0 1rem 0;
   line-height: 1.4;
   font-style: italic;
@@ -209,9 +194,7 @@ body.night-mode .kc-journey-item-icon svg {
 .kc-journey-toggle-btn {
   background: transparent;
   border: none;
-  font-size: 1.4rem;
   font-weight: var(--font-600-weight);
-  color: var(--read-more-color);
   cursor: pointer;
   display: flex;
   align-items: center;

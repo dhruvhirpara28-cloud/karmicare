@@ -642,23 +642,20 @@
         "title_4znD88": {
           "type": "title",
           "settings": {
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         },
-        "price_LVqFwq": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker_9KdyJ3": {
-          "type": "variant_picker",
+        "loop_subscriptions_7dde8c": {
+          "type": "loop_subscriptions",
           "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
+            "default_to_subscription": true,
+            "welcome_kit_products": [
+              "evening-toothbrush",
+              "morning-toothbrush",
+              "whitening-charcoal-dental-floss"
+            ],
+            "pricing_summary_care_credit_title": "Care Credits back"
           }
-        },
-        "quantity_selector_nznbA8": {
-          "type": "quantity_selector",
-          "settings": {}
         },
         "buy_buttons_UQznij": {
           "type": "buy_buttons",
@@ -670,14 +667,28 @@
             "custom_button_text": "Begin Now",
             "redirect_to_checkout": true
           }
+        },
+        "icon_with_text_wUdX3G": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "heart",
+            "image_1": "shopify://shop_images/Frame.svg",
+            "heading_1": "60 day money back guarantee",
+            "icon_2": "return",
+            "image_2": "shopify://shop_images/Frame_1.svg",
+            "heading_2": "Cancel anytime",
+            "icon_3": "truck",
+            "image_3": "shopify://shop_images/Frame_2.svg",
+            "heading_3": "Free shipping"
+          }
         }
       },
       "block_order": [
         "title_4znD88",
-        "price_LVqFwq",
-        "variant_picker_9KdyJ3",
-        "quantity_selector_nznbA8",
-        "buy_buttons_UQznij"
+        "loop_subscriptions_7dde8c",
+        "buy_buttons_UQznij",
+        "icon_with_text_wUdX3G"
       ],
       "name": "t:sections.featured-product.presets.name",
       "settings": {

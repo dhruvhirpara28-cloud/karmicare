@@ -198,15 +198,17 @@ product-info {
 }
 
 .product-form__submit {
-  margin-bottom: 1rem;
-  color: var(--color-text-primary);
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  border-radius: var(--tertiary-border-radius);
+  border-radius: var(--extra-primary-border-radius);
   font-weight: var(--font-700-weight);
   text-transform: capitalize;
   display: inline-block;
+}
+
+.night-mode .product-form__submit {
+  color: var(--kc-mapped-surface-primary-default);
 }
 
 .product-form__submit::before,
@@ -1693,7 +1695,6 @@ a.product__text {
 }
 
 .info-tip .info-icon {
-  background: var(--surface);
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -1702,8 +1703,8 @@ a.product__text {
   justify-content: center;
   text-align: center;
   letter-spacing: 0;
-  border: 1.2px solid var(--accent);
-  color: var(--accent);
+  border: 1.2px solid rgb(var(--color-foreground));
+  color: var(--color-foreground);
   transition: background .2s, color .2s;
 }
 

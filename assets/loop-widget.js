@@ -60,8 +60,6 @@ async function initLoopWidget(productId) {
         listenLoopCustomEvent();
         hideDifferentVariantSellingPlansLoop(productData);
         displayLoopWidget(productId);
-        renderKCRewards();
-        renderKCTestimonial(productId);
         injectOrUpdateKcTryOnceLink(productId, findSelectedVariantLoop(productId));
         observeFormChangesLoop(productData);
         hideLoopSkeletonLoader(productId);
@@ -83,18 +81,6 @@ async function initLoopWidget(productId) {
    - renderKCTestimonial   : Populates testimonial sections per plan
    ============================================================ */
 
-/** Populates .kc-reward-grid elements from the #kc-reward-grid-template */
-function renderKCRewards() {
-    const targetGrids = document.querySelectorAll('.kc-reward-grid');
-    const sourceTemplate = document.querySelector('#kc-reward-grid-template');
-    if (!targetGrids.length || !sourceTemplate) return;
-
-    const translatedHTML = translateDescriptionEuroPrices(sourceTemplate.innerHTML);
-    targetGrids.forEach(grid => {
-        grid.innerHTML = translatedHTML;
-        grid.style.display = 'flex';
-    });
-}
 
 /**
  * Populates .kc-testimonial-section elements from the template wrapper.
@@ -102,32 +88,14 @@ function renderKCRewards() {
  */
 function renderKCTestimonial(productId) {
     // Remove previously injected dynamic sections
-    document.querySelectorAll(".kc-testimonial-section[data-dynamic='true']").forEach(el => el.remove());
     document.querySelectorAll(".kc-bottom_label[data-dynamic='true']").forEach(el => el.remove());
 
-    const sourceTemplate = Array.from(document.querySelectorAll('.kc-testimonial-wrapper'))
-        .find(el => !el.closest('.kc-testimonial-section'));
-    if (!sourceTemplate) return;
-
     const buttonTemplate = document.querySelector('#kc-testimonial-button-template');
+    if (!buttonTemplate) return;
+
     const variant = findSelectedVariantLoop(productId);
     const loopPropsProduct = window.loopProps?.[productId];
     if (!loopPropsProduct || !variant) return;
-
-    const activeDescription = document.querySelector(
-        `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
-    );
-
-    // Collect only static (non-dynamic) sections that belong to the active plan
-    const isVisible = (el, templateEl) => {
-        if (el.getAttribute('data-dynamic') === 'true') return false;
-        if (templateEl && el.contains(templateEl)) return false;
-        const parentDesc = el.closest('[id^="loop-selling-plan-description-"]');
-        return !parentDesc || parentDesc === activeDescription;
-    };
-
-    const staticTestimonials = Array.from(document.querySelectorAll('.kc-testimonial-section'))
-        .filter(el => isVisible(el, sourceTemplate));
 
     const isVisibleLabel = (el, templateEl) => {
         if (el.getAttribute('data-dynamic') === 'true') return false;
@@ -138,23 +106,14 @@ function renderKCTestimonial(productId) {
     const staticBottomLabels = Array.from(document.querySelectorAll('.kc-bottom_label'))
         .filter(el => isVisibleLabel(el, buttonTemplate));
 
-    // Inject testimonial HTML into static containers
-    staticTestimonials.forEach(section => {
-        section.innerHTML = sourceTemplate.outerHTML;
-        const wrapper = section.querySelector('.kc-testimonial-wrapper');
-        if (wrapper) {
-            wrapper.removeAttribute('style');
-            wrapper.classList.remove('loop-hidden');
-        }
-    });
-
     // Inject button HTML into static bottom label containers
-    if (buttonTemplate) {
-        staticBottomLabels.forEach(label => {
-            label.innerHTML = buttonTemplate.innerHTML;
-            label.style.display = '';
-        });
-    }
+    const btnHtml = buttonTemplate.innerHTML;
+    staticBottomLabels.forEach(label => {
+        if (label.dataset.baseContent === btnHtml) return;
+        label.dataset.baseContent = btnHtml;
+        label.innerHTML = btnHtml;
+        label.style.display = '';
+    });
 }
 
 function widgetLogger(message, ...additionalData) {
@@ -2095,8 +2054,6 @@ function updateLoopSellingPlanDescriptionUI({ productId }) {
             );
         }
     });
-
-    renderKCRewards();
     renderKCTestimonial(productId);
 
     if (typeof updateWelcomeKitUI === "function") {
@@ -2182,7 +2139,22 @@ function checkPlanQualifiesForWelcomeKit(productId) {
 }
 
 function updateWelcomeKitUI(productId) {
-    // Remove any existing welcome kit section first
+    const variant = findSelectedVariantLoop(productId);
+    const loopPropsProduct = window.loopProps?.[productId];
+    if (!loopPropsProduct || !variant) return;
+
+    const descriptionElement = document.querySelector(
+        `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
+    );
+    if (!descriptionElement) return;
+
+    // Prevent flickering by checking if the welcome kit is already inside this exact description element
+    const existingWelcomeKit = descriptionElement.querySelector(".loop-welcome-kit-section");
+    if (existingWelcomeKit) {
+        return; // Already present, no need to recreate
+    }
+
+    // Remove from other places (like inactive plans)
     const existingSections = document.querySelectorAll(".loop-welcome-kit-section");
     if (existingSections) {
         existingSections.forEach(section => section.remove());
@@ -2221,7 +2193,7 @@ function updateWelcomeKitUI(productId) {
                  data-wk-compare-price="${formattedComparePrice}">
                 <img class="loop-welcome-kit-product-img" src="${itemImage}" alt="${itemTitle}" loading="lazy" />
                 <span class="loop-welcome-kit-product-link" title="${itemTitle}">${itemTitle}</span>
-                <div class="loop-welcome-kit-product-price">
+                <div class="loop-welcome-kit-product-price opacity-xl">
                     <span>Free</span> · <del>${formattedComparePrice}</del>
                 </div>
             </div>
@@ -2287,13 +2259,7 @@ function updateWelcomeKitUI(productId) {
         });
     });
 
-    const variant = findSelectedVariantLoop(productId);
-    const loopPropsProduct = window.loopProps?.[productId];
-    if (!loopPropsProduct || !variant) return;
-
-    const descriptionElement = document.querySelector(
-        `#loop-selling-plan-description-${variant.id}-${loopPropsProduct.sellingPlanGroupId}`
-    );
+    // (Variables variant, loopPropsProduct, and descriptionElement are already declared at the top of the function)
 
     if (descriptionElement) {
         descriptionElement.classList.remove("loop-display-none");
@@ -2361,7 +2327,23 @@ function updateLoopSellingPlanDescriptionElement(
     if (!descriptionElement) return;
 
     const translatedDescriptionValue = translateDescriptionEuroPrices(descriptionValue);
+
+    // Calculate a simple hash or use the raw string to prevent resetting innerHTML if it hasn't changed.
+    // This prevents flickering caused by constant DOM destruction and recreation.
+    const currentBaseContent = translatedDescriptionValue || "";
+
+    if (descriptionElement.dataset.baseContent === currentBaseContent) {
+        if (!descriptionValue) {
+            descriptionElement.classList.add("loop-display-none");
+        } else {
+            descriptionElement.classList.remove("loop-display-none");
+        }
+        return;
+    }
+
+    descriptionElement.dataset.baseContent = currentBaseContent;
     descriptionElement.innerHTML = translatedDescriptionValue;
+
     if (!descriptionValue) {
         descriptionElement.classList.add("loop-display-none");
     } else {
@@ -2450,7 +2432,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
 
         // 4. Right-side short label: "/ year" or "/ 60 days"
-        const rightLabel = isAnnual ? '/ year' : bCount === 1 ? `/ ${bInterval}` : `/ ${billingDays} days`;
+        const rightLabel = isAnnual ? '/ year' : '/ cycle';
 
         // LEFT: inject/update .kc-plan-subrow inside .loop-subscription-group-text (below plan name)
         const textContainer = groupEl.querySelector('.loop-subscription-group-text');
@@ -2461,9 +2443,10 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 subRow.className = 'kc-plan-subrow';
                 textContainer.appendChild(subRow);
             }
-            subRow.textContent = optionText
-                ? `${perBrushingFormatted} / brushing · ${optionText}`
-                : `${perBrushingFormatted} / brushing`;
+            let formattedOptionText = optionText.replace(/ships/i, 'Renews');
+            subRow.innerHTML = formattedOptionText
+                ? `<div>${formattedOptionText}</div><div>${perBrushingFormatted} / brushing</div>`
+                : `<div>${perBrushingFormatted} / brushing</div>`;
         }
 
         // RIGHT: inject/update .kc-plan-interval-label inside .loop-subscription-group-price-container
@@ -2521,12 +2504,14 @@ function updateDynamicReturnOnCareLabels(productId) {
         // Display the calculated discount money amount wherever kc-dynamic_price is used
         groupEl.querySelectorAll('.kc-dynamic_price').forEach(el => {
             const amount = Math.round(planPrice * pct);
-            el.textContent = loopFormatMoney(amount, true);
+            const formatted = loopFormatMoney(amount, true);
+            if (el.textContent !== formatted) el.textContent = formatted;
         });
 
         // Display the percentage number (e.g. 20%) wherever kc-dynamic_percent is used
         groupEl.querySelectorAll('.kc-dynamic_percent').forEach(el => {
-            el.textContent = `${returnOnCareVal}%`;
+            const perc = `${returnOnCareVal}%`;
+            if (el.textContent !== perc) el.textContent = perc;
         });
     });
 }
