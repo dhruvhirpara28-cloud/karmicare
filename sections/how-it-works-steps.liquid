@@ -185,6 +185,7 @@
 {{ section.settings.custom_css }}
 {%- endstyle -%}
 
+{% if blocks.size != 0 %}
 <section class="kc-section section-{{ section.id }}">
   <div class="kc-inner">
 
@@ -402,7 +403,7 @@
     });
   })();
 </script>
-
+{% endif %}
 {% schema %}
 {
   "name": "How it works (Steps)",
