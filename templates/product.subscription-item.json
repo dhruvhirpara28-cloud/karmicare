@@ -241,8 +241,8 @@
       "settings": {
         "eyebrow": "{{ product.metafields.custom.compare_table_header_footer.value.small_heading.value }}",
         "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
-        "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
-        "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}",
+        "subtitle": "<p>{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}</p>",
+        "footer_text": "<p>{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}</p>",
         "color_scheme_day": "",
         "color_scheme_night": "",
         "padding_top_desktop": 80,
@@ -280,12 +280,110 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "how_it_works_steps_aAgVmF": {
+      "type": "how-it-works-steps",
+      "blocks": {
+        "step_iJdPLN": {
+          "type": "step",
+          "repeater": "{{ product.metafields.custom.how_it_works_steps.value }}",
+          "settings": {
+            "number": "{{ block.repeater.step_number.value }}",
+            "video": "{{ block.repeater.shopify_video.value }}",
+            "video_url": "",
+            "loop": true,
+            "show_text": true,
+            "title": "{{ block.repeater.title.value }}",
+            "show_description": true,
+            "description": "{{ block.repeater.description.value }}"
+          }
+        },
+        "step_U7HiXT": {
+          "type": "step",
+          "disabled": true,
+          "settings": {
+            "number": "02",
+            "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
+            "video_url": "",
+            "loop": true,
+            "show_text": true,
+            "title": "Pump and brush",
+            "show_description": true,
+            "description": "Apply one pump and brush gently for two minutes."
+          }
+        },
+        "step_EBicgt": {
+          "type": "step",
+          "disabled": true,
+          "settings": {
+            "number": "03",
+            "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
+            "video_url": "",
+            "loop": true,
+            "show_text": true,
+            "title": "Spit, no rinse",
+            "show_description": true,
+            "description": "Spit out the excess. Do not rinse afterwards."
+          }
+        }
+      },
+      "block_order": [
+        "step_iJdPLN",
+        "step_U7HiXT",
+        "step_EBicgt"
+      ],
+      "disabled": true,
+      "name": "How it works (Steps)",
+      "settings": {
+        "subtitle": "The Ritual",
+        "title": "How Karmicare works.",
+        "description": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>",
+        "hint_text": "Hover or tap to watch",
+        "bottom_text": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day.",
+        "aspect_ratio": "4 / 3",
+        "radius": 12,
+        "custom_css": "",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_mob": 60,
+        "padding_bottom_mob": 80,
+        "text_color_day": "#191f38",
+        "bg_color_day": "#fffbf6",
+        "bg_gradient_day": "",
+        "card_bg_color_day": "#ffffff",
+        "text_color_night": "#fffbf6",
+        "bg_color_night": "#2c3a60",
+        "bg_gradient_night": "",
+        "card_bg_color_night": "#191f38"
+      }
+    },
+    "comparison_table_r8CDbT": {
+      "type": "comparison-table",
+      "disabled": true,
+      "name": "Comparison Table",
+      "settings": {
+        "text_color_day": "#191f38",
+        "bg_color_day": "",
+        "col_text_day": "#ffffff",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "card_bg_color_day": "#ffffff",
+        "text_color_night": "#fffbf6",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)",
+        "card_bg_color_night": "#191f38",
+        "padding-top": 160,
+        "padding-bottom": 120,
+        "padding-top-mobile": 40,
+        "padding-bottom-mobile": 40
+      }
     }
   },
   "order": [
     "main",
     "product_compare_plans_gz9xxx",
     "disclosures",
-    "related-products"
+    "related-products",
+    "how_it_works_steps_aAgVmF",
+    "comparison_table_r8CDbT"
   ]
 }

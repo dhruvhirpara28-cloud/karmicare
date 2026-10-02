@@ -1,0 +1,645 @@
+<style>
+  {%- if section.settings.bg_gradient_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+    }
+{%- elsif section.settings.bg_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_day }};
+    }
+{%- endif -%}
+{%- if section.settings.col_text_day != blank -%}
+    body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
+        color: {{ section.settings.col_text_day }};
+    }
+    body.day-mode .section-{{ section.id }} .comparison-table__cell,
+    body.day-mode .section-{{ section.id }} .comparison-table__cell span {
+        color: {{ section.settings.col_text_day }};
+    }
+{%- endif -%}
+
+  {%- if section.settings.bg_gradient_night != blank -%}
+  body.night-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_night }};
+  }
+  {%- elsif section.settings.bg_color_night != blank -%}
+  body.night-mode .section-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_night }};
+  }
+  {%- endif -%}
+/* DAY MODE */
+  {% if section.settings.text_color_day != blank %}
+    body:not(.night-mode) .section-{{ section.id }} *,
+    body.day-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_day }};
+    }
+  {% endif %}
+
+
+  /* NIGHT MODE */
+  {% if section.settings.text_color_night != blank %}
+    body.night-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_night }};
+    }
+  {% endif %}
+
+  #section-{{ section.id }} {
+    padding-top: {{ section.settings.padding-top }}px;
+    padding-bottom: {{ section.settings.padding-bottom }}px;
+    color: {{ section.settings.text_color }};
+    background-color: {{ section.settings.bg_color }};
+    }
+    
+    @media only screen and (max-width: 767px) { 
+    #section-{{ section.id }} {
+        padding-top: {{ section.settings.padding-top-mobile }}px;
+        padding-bottom: {{ section.settings.padding-bottom-mobile }}px;
+    }
+    }
+</style>
+{% liquid
+  assign comparison = product.metafields.custom.comparison_section.value
+%}
+
+{% if comparison != blank %}
+  {% liquid
+    assign comparison = product.metafields.custom.comparison_section.value
+
+    assign section_subtitle = comparison.sub_title.value
+    assign section_title = comparison.title
+    assign section_description = comparison.short_description.value
+
+    assign table_title = comparison.table_title.value
+    assign table_logo = comparison.table_brand_logo.value
+    assign table_rows = comparison.table_list.value
+
+    assign button_text = comparison.table_button_text.value
+    assign button_url = comparison.table_button_url.value
+
+    assign table_headers = table_title | split: '|'
+  %}
+
+  <section class="comparison-section section-{{ section.id }}">
+    <div class="comparison-section__inner">
+      <!--
+        ==========================================
+             TOP CONTENT
+        ===========================================
+      -->
+        <div class="section-main-header">
+      {% if section_subtitle != blank %}
+        <p class="comparison-section__subtitle">
+          {{ section_subtitle }}
+        </p>
+      {% endif %}
+
+      {% if section_title != blank %}
+        <h2 class="comparison-section__title">
+          {{ section_title | metafield_tag }}
+        </h2>
+      {% endif %}
+
+      {% if section_description != blank %}
+        <div class="comparison-section__description">
+          {{ section_description }}
+        </div>
+      {% endif %}
+    </div>
+      <!--
+        ==========================================
+             COMPARISON TABLE
+        ===========================================
+      -->
+
+      <div class="comparison-table-wrapper">
+        <div class="comparison-table">
+          <!--
+            ========================================
+                 TABLE HEADER
+            =========================================
+          -->
+
+          <!-- Column 1 -->
+          <div class="comparison-table__header comparison-table__header--first">
+            {% if table_headers[0] != blank %}
+              {{ table_headers[0] | strip }}
+            {% endif %}
+          </div>
+
+          <!-- Column 2 - LOGO -->
+          <div class="comparison-table__header comparison-table__header--brand">
+
+            {% if table_logo != blank %}
+                <div class="comparison-table__brand-logo">
+                {{ table_logo }}
+                </div>
+            {% endif %}
+
+            </div>
+
+
+          <!-- Column 3 -->
+          <div class="comparison-table__header">
+            {% if table_headers[2] != blank %}
+              {{ table_headers[2] | strip }}
+            {% endif %}
+          </div>
+
+          <!-- Column 4 -->
+          <div class="comparison-table__header">
+            {% if table_headers[3] != blank %}
+              {{ table_headers[3] | strip }}
+            {% endif %}
+          </div>
+
+          <!-- Column 5 -->
+          <div class="comparison-table__header">
+            {% if table_headers[4] != blank %}
+              {{ table_headers[4] | strip }}
+            {% endif %}
+          </div>
+
+          <!--
+            ========================================
+                 TABLE BODY
+            =========================================
+          -->
+
+          {% if table_rows != blank %}
+            {% for row in table_rows %}
+              {% assign cells = row | split: '|' %}
+
+              <!-- Column 1 -->
+              <div class="comparison-table__cell comparison-table__cell--first comparison-table__cell--first{{ forloop.index }}">
+                {% if cells[0] != blank %}
+                  {{ cells[0] | strip }}
+                {% endif %}
+              </div>
+
+              <!-- Column 2 -->
+              <div class="comparison-table__cell comparison-table__cell--brand">
+                {% if cells[1] != blank %}
+                 <span>{{ cells[1] | strip }}</span>
+                {% endif %}
+              </div>
+
+              <!-- Column 3 -->
+              <div class="comparison-table__cell">
+                {% if cells[2] != blank %}
+                  <span>{{ cells[2] | strip }}</span>
+                {% endif %}
+              </div>
+
+              <!-- Column 4 -->
+              <div class="comparison-table__cell">
+                {% if cells[3] != blank %}
+                  <span>{{ cells[3] | strip }}</span>
+                {% endif %}
+              </div>
+
+              <!-- Column 5 -->
+              <div class="comparison-table__cell comparison-table__cell-last{{ forloop.index }}">
+                {% if cells[4] != blank %}
+                  <span>{{ cells[4] | strip }}</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <!--
+          ========================================
+               BUTTON
+          =========================================
+        -->
+
+        {% if button_text != blank %}
+          <div class="comparison-section__button-wrapper">
+            {% if button_url != blank %}
+              <a
+                href="{{ button_url }}"
+                class="comparison-section__button"
+              >
+                {{ button_text }}
+              </a>
+
+            {% else %}
+              <button
+                type="button"
+                class="comparison-section__button"
+              >
+                {{ button_text }}
+              </button>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<style>
+.comparison-section {
+    width: 100%;
+    padding: 80px 20px 100px;
+    box-sizing: border-box;
+}
+
+.comparison-section__inner {
+  width: 100%;
+  max-width: 1130px;
+  margin: 0 auto;
+}
+.comparison-section .section-main-header{
+    max-width:604px;
+    margin:0 auto;
+    width:100%;
+    text-align:center;
+}
+.comparison-section__subtitle {
+  text-align: center;
+  font-size: var(--km-body-sm);
+  line-height: 1.4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.comparison-section__title,
+.comparison-section__title p{
+  margin: 0 auto;
+  text-align: center;
+  {% comment %} font-weight: var(--font-500-weight);
+  letter-spacing: -1.5px; {% endcomment %}
+  line-height:1;
+}
+
+.comparison-section__title p {
+  margin: 0;
+}
+
+.comparison-section__title i,
+.comparison-section__title em {
+  opacity: 0.68;
+  font-style: normal;
+}
+.comparison-table__cell span {
+    opacity: 0.68;
+}
+.comparison-section__description {
+  max-width: 620px;
+  margin: 24px auto 0;
+  text-align: center;
+  {% comment %} font-size: var(--km-body-lg); {% endcomment %}
+  font-size: 18px;
+  line-height: 1.34;
+ letter-spacing: 0px;
+}
+
+.comparison-table-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 112px;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+.comparison-table {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.65fr
+    1.17fr
+    1.25fr
+    1.25fr
+    1.25fr;
+    box-sizing: border-box;
+    /* background: #191F38; */
+}
+
+.comparison-table__header {
+  min-height: 80px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.comparison-table__header--first {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.comparison-table__header--brand {
+  position: relative;
+  background: #212A49;
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  padding: 10px 20px;
+  border: 1px solid #7FB9FF;
+    border-radius: 12px;
+    border-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    z-index: 2;
+}
+
+.comparison-table__brand-logo svg path {
+  display: flex;
+}
+
+.comparison-table__cell {
+    min-height: 72px;
+    padding: 15px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    line-height: 20px;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(255 251 246 / 8%);
+    background: #191F38;
+}
+.comparison-table__cell--first {
+    border-left: 1px solid #FFFBF614;
+    border-top: 1px solid #FFFBF614;
+}
+.comparison-table__cell--first1 {
+    border-top-left-radius: 12px;
+}
+.comparison-table__cell-last1 {
+    border-top-right-radius: 12px;
+}
+.comparison-table__cell-last6{
+    border-bottom-right-radius: 12px;
+}
+.comparison-table__cell--first6 {
+    border-bottom-left-radius: 12px;
+}
+.comparison-table__cell--first {
+    justify-content: flex-start;
+    text-align: left;
+    font-weight: 500;
+    background: #191F38;
+}
+.comparison-section__button-wrapper:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #212A49;
+    z-index: -1;
+}
+.comparison-table__cell--first:first-child {
+    border-top: 1px solid rgb(255 251 246 / 8%);
+    border-top-left-radius: 12px;
+}
+
+.comparison-table__cell--brand {
+  background: #212A49;
+  z-index: 2;
+    border-left: 1px solid #7FB9FF;
+    border-right: 1px solid #7FB9FF;
+}
+
+.comparison-table__cell--brand:nth-last-child(4) {
+  border-bottom: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border-primary-hairline, #FFFBF614);
+}
+
+.comparison-section__button-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+ left: calc(100% * 1.65 / 6.57);
+    width: calc(100% * 1.17 / 6.57);
+    max-width: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 20px 18px;
+  box-sizing: border-box;
+  border: 1px solid #7FB9FF;
+  border-radius: 16px;
+  background: transparent;
+  pointer-events: none;
+  box-shadow: 0px 18px 44px -22px rgba(127, 185, 255, 0.55);
+  overflow: hidden;
+z-index: 1;
+}
+.comparison-section__button:hover {
+    opacity: 0.88;
+    transform: translateY(-1px)
+}
+.comparison-section__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: #7FB9FF;
+  color: #0A1628;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 16px;
+   letter-spacing: 1.25px;
+  transition: 0.5s ease all;
+}
+
+.comparison-section__button:hover,
+.comparison-section__button:focus {
+  color: #0A1628;
+}
+
+@media screen and (max-width: 900px) {
+  .comparison-table-wrapper {
+    margin-top: 75px;
+    overflow-x: auto;
+    padding-bottom: 65px;
+  }
+
+  .comparison-table {
+    min-width: 1130px;
+  }
+
+  .comparison-table__header {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .comparison-table__cell {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .comparison-section {
+    padding: 50px 12px 70px;
+  }
+
+  .comparison-section__subtitle {
+    font-size: 9px;
+  }
+
+  .comparison-section__title {
+    font-size: 34px;
+  }
+
+  .comparison-section__description {
+    font-size: 12px;
+  }
+
+  .comparison-table-wrapper {
+    margin-top: 55px;
+  }
+
+  .comparison-table {
+    min-width: 820px;
+  }
+
+  .comparison-table__header {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .comparison-table__cell {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .comparison-section__button-wrapper {
+    left: calc(820px * 1.15 / 6.15);
+    width: calc(820px * 1.25 / 6.15);
+  }
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "tag": "section",
+  "class": "comparison-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "col_text_day",
+      "label": "Table Text Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
+    },
+    {
+            "type": "header",
+            "content": "padding settings"
+          },
+          {
+            "type": "range",
+            "id": "padding-top",
+            "label": "Top Spacing",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "default": 80
+          },
+          {
+            "type": "range",
+            "id": "padding-bottom",
+            "label": "Bottom Spacing",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "default": 80
+          },
+          { 
+            "type": "range",
+            "id": "padding-top-mobile",
+            "label": "Top Mobile Spacing",
+            "min": 0,
+            "max": 150,
+            "step": 2,
+            "default": 40
+          },
+          {
+            "type": "range",
+            "id": "padding-bottom-mobile",
+            "label": "Bottom Mobile Spacing",
+            "min": 0,
+            "max": 150,
+            "step": 2,
+            "default": 40
+          }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table"
+    }
+  ]
+}
+{% endschema %}
