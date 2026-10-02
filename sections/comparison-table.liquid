@@ -1,0 +1,617 @@
+{% liquid
+  assign comparison = product.metafields.custom.comparison_section.value
+%}
+
+{% if comparison != blank %}
+
+  <section class="comparison-section">
+
+    <div class="comparison-section__container">
+
+      {% comment %}
+        ============================
+        HEADER
+        ============================
+      {% endcomment %}
+
+      {% if comparison.sub_title != blank %}
+        <div class="comparison-section__eyebrow">
+          {{ comparison.sub_title }}
+        </div>
+      {% endif %}
+
+      {% if comparison.title != blank %}
+        <div class="comparison-section__title">
+          {{ comparison.title }}
+        </div>
+      {% endif %}
+
+      {% if comparison.short_description != blank %}
+        <div class="comparison-section__description">
+          {{ comparison.short_description }}
+        </div>
+      {% endif %}
+
+
+      {% comment %}
+        ============================
+        COMPARISON TABLE
+        ============================
+      {% endcomment %}
+
+      <div class="comparison-table-wrapper">
+
+        <div class="comparison-table">
+
+          {% comment %}
+            First column heading
+          {% endcomment %}
+
+          <div class="comparison-table__label">
+            {% if comparison.table_title != blank %}
+              {{ comparison.table_title }}
+            {% endif %}
+          </div>
+
+
+          {% comment %}
+            Main / highlighted brand column
+          {% endcomment %}
+
+          <div class="comparison-table__brand">
+
+            <div class="comparison-table__brand-header">
+
+              {% if comparison.table_brand_logo != blank %}
+                <div class="comparison-table__logo">
+                  {{
+                    comparison.table_brand_logo
+                    | image_url: width: 500
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '150, 250, 350, 500',
+                      class: 'comparison-table__logo-image'
+                  }}
+                </div>
+              {% endif %}
+
+            </div>
+
+          </div>
+
+
+          {% comment %}
+            Empty header cells for remaining columns.
+            These are intentionally empty because the row data
+            comes from Table List.
+          {% endcomment %}
+
+          <div class="comparison-table__empty-header"></div>
+          <div class="comparison-table__empty-header"></div>
+          <div class="comparison-table__empty-header"></div>
+
+
+          {% comment %}
+            ============================
+            TABLE ROWS
+            ============================
+
+            Each Table List item should contain:
+
+            Column 1
+            ||
+            Column 2
+            ||
+            Column 3
+            ||
+            Column 4
+            ||
+            Column 5
+
+            Example:
+
+            It's timed to your biology||
+            Your mouth's own 24-hour cycle||
+            Same formula, any hour||
+            One dose fits all||
+            AM/PM by convention
+          {% endcomment %}
+
+          {% if comparison.table_list != blank %}
+
+            {% for row in comparison.table_list %}
+
+              {% assign cells = row | split: '||' %}
+
+              <div class="comparison-table__row">
+
+                {% for cell in cells %}
+
+                  {% assign cell_index = forloop.index0 %}
+
+                  <div
+                    class="
+                      comparison-table__cell
+
+                      {% if cell_index == 0 %}
+                        comparison-table__cell--label
+                      {% elsif cell_index == 1 %}
+                        comparison-table__cell--brand
+                      {% else %}
+                        comparison-table__cell--alternative
+                      {% endif %}
+                    "
+                  >
+                    {{ cell | strip }}
+                  </div>
+
+                {% endfor %}
+
+              </div>
+
+            {% endfor %}
+
+          {% endif %}
+
+        </div>
+
+        {% comment %}
+          ============================
+          BUTTON
+          ============================
+        {% endcomment %}
+
+        {% if comparison.table_button_text != blank %}
+
+          <div class="comparison-section__button-wrapper">
+
+            {% if comparison.table_button_url != blank %}
+
+              <a
+                href="{{ comparison.table_button_url }}"
+                class="comparison-section__button"
+              >
+                {{ comparison.table_button_text }}
+              </a>
+
+            {% else %}
+
+              <button
+                type="button"
+                class="comparison-section__button"
+              >
+                {{ comparison.table_button_text }}
+              </button>
+
+            {% endif %}
+
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </section>
+
+{% endif %}
+
+
+<style>
+
+  /*
+  ==========================================================
+  COMPARISON SECTION
+  ==========================================================
+  */
+
+  .comparison-section {
+    width: 100%;
+    padding: 80px 20px;
+    box-sizing: border-box;
+  }
+
+
+  .comparison-section__container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+
+  /*
+  ==========================================================
+  HEADER
+  ==========================================================
+  */
+
+  .comparison-section__eyebrow {
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+
+  .comparison-section__title {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+
+    font-size: clamp(34px, 4vw, 54px);
+    line-height: 0.98;
+    letter-spacing: -1.5px;
+    font-weight: 400;
+  }
+
+
+  .comparison-section__description {
+    max-width: 600px;
+    margin: 20px auto 0;
+
+    text-align: center;
+
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+
+  /*
+  ==========================================================
+  TABLE WRAPPER
+  ==========================================================
+  */
+
+  .comparison-table-wrapper {
+    width: 100%;
+    margin-top: 125px;
+    position: relative;
+  }
+
+
+  /*
+  ==========================================================
+  TABLE
+  ==========================================================
+  */
+
+  .comparison-table {
+    width: 100%;
+
+    display: grid;
+
+    /*
+      5 columns:
+
+      1 = row label
+      2 = KARMICARE / main brand
+      3 = Regular brushing
+      4 = Daily supplements
+      5 = Skincare routine
+    */
+
+    grid-template-columns:
+      1.15fr
+      1.25fr
+      1.25fr
+      1.25fr
+      1.25fr;
+
+    position: relative;
+  }
+
+
+  /*
+  ==========================================================
+  HEADER CELLS
+  ==========================================================
+  */
+
+  .comparison-table__label {
+    min-height: 52px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 12px;
+
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+
+  .comparison-table__brand {
+    min-height: 52px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 15px;
+
+    /*
+      Highlighted column structure.
+      Add your desired border/background/color here.
+    */
+    border: 1px solid;
+    border-bottom: 0;
+
+    border-radius: 12px 12px 0 0;
+  }
+
+
+  .comparison-table__brand-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .comparison-table__logo {
+    max-width: 100px;
+    width: 100%;
+  }
+
+
+  .comparison-table__logo-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+
+  .comparison-table__empty-header {
+    min-height: 52px;
+  }
+
+
+  /*
+  ==========================================================
+  ROW
+  ==========================================================
+  */
+
+  .comparison-table__row {
+    display: contents;
+  }
+
+
+  /*
+  ==========================================================
+  CELLS
+  ==========================================================
+  */
+
+  .comparison-table__cell {
+    min-height: 70px;
+
+    padding: 16px 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.45;
+
+    box-sizing: border-box;
+
+    border-top: 1px solid;
+  }
+
+
+  /*
+  First / label column
+  */
+
+  .comparison-table__cell--label {
+    justify-content: flex-start;
+    text-align: left;
+
+    font-weight: 500;
+  }
+
+
+  /*
+  Main Karmicare column
+  */
+
+  .comparison-table__cell--brand {
+    position: relative;
+
+    /*
+      Highlighted column.
+      Add background/border color here.
+    */
+
+    border-left: 1px solid;
+    border-right: 1px solid;
+  }
+
+
+  /*
+  Last brand cell gets bottom border
+  */
+
+  .comparison-table__row:last-child
+  .comparison-table__cell--brand {
+    border-bottom: 1px solid;
+    border-radius: 0 0 12px 12px;
+  }
+
+
+  /*
+  Alternative columns
+  */
+
+  .comparison-table__cell--alternative {
+    border-right: 1px solid;
+  }
+
+
+  /*
+  Last column should not have unnecessary right border
+  */
+
+  .comparison-table__cell--alternative:last-child {
+    border-right: 0;
+  }
+
+
+  /*
+  ==========================================================
+  BUTTON
+  ==========================================================
+  */
+
+  .comparison-section__button-wrapper {
+    position: absolute;
+
+    left: 0;
+
+    /*
+      Move button under highlighted Karmicare column.
+    */
+
+    width: calc(
+      (100% - 11.5% - 12.5% - 12.5% - 12.5%) / 1
+    );
+
+    margin-top: 12px;
+
+    transform: translateX(
+      calc(
+        100% + 0px
+      )
+    );
+  }
+
+
+  .comparison-section__button {
+    display: inline-flex;
+
+    min-height: 42px;
+
+    padding: 0 24px;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    border-radius: 6px;
+
+    box-sizing: border-box;
+
+    border: 0;
+  }
+
+
+  /*
+  ==========================================================
+  DESKTOP BUTTON POSITION FIX
+  ==========================================================
+  */
+
+  .comparison-table-wrapper {
+    padding-bottom: 70px;
+  }
+
+
+  /*
+  ==========================================================
+  TABLET
+  ==========================================================
+  */
+
+  @media screen and (max-width: 900px) {
+
+    .comparison-section {
+      padding: 60px 15px;
+    }
+
+    .comparison-table-wrapper {
+      margin-top: 70px;
+      overflow-x: auto;
+      padding-bottom: 65px;
+    }
+
+    .comparison-table {
+      min-width: 850px;
+    }
+
+    .comparison-table__cell {
+      font-size: 10px;
+      padding: 14px 10px;
+    }
+
+  }
+
+
+  /*
+  ==========================================================
+  MOBILE
+  ==========================================================
+  */
+
+  @media screen and (max-width: 600px) {
+
+    .comparison-section {
+      padding: 50px 12px;
+    }
+
+    .comparison-section__eyebrow {
+      font-size: 9px;
+    }
+
+    .comparison-section__title {
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .comparison-section__description {
+      font-size: 12px;
+    }
+
+    .comparison-table-wrapper {
+      margin-top: 55px;
+    }
+
+    .comparison-table {
+      min-width: 800px;
+    }
+
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "tag": "section",
+  "class": "comparison-section-wrapper",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Comparison Table"
+    }
+  ]
+}
+{% endschema %}
