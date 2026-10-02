@@ -20,25 +20,31 @@
       background-color: {{ section.settings.bg_color_night }};
   }
   {%- endif -%}
-  {% if section.settings.text_color_day != blank %}
-        body:not(.night-mode) .section-{{ section.id }} *,
-        body.day-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_day }};
-        }
-        body:not(.night-mode) .section-{{ section.id }} .comparison-table__brand-logo svg path,
-        body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path{
-            fill: {{ section.settings.text_color_day }};
-        }
-    {% endif %}
-    
-    {% if section.settings.text_color_night != blank %}
-        body:not(.night-mode) .section-{{ section.id }} .comparison-table__brand-logo svg path{
-            fill: {{ section.settings.text_color_night }};
-        }
-        body.night-mode .section-{{ section.id }} * {
-            color: {{ section.settings.text_color_night }};
-        }
-    {% endif %}
+ {% if section.settings.text_color_day != blank %}
+    body:not(.night-mode) .section-{{ section.id }} *,
+    body.day-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_day }};
+    }
+
+    body:not(.night-mode) .section-{{ section.id }} .comparison-table__brand-logo svg path,
+    body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
+      fill: {{ section.settings.text_color_day }} !important;
+    }
+  {% endif %}
+
+
+  /* =========================
+     NIGHT MODE
+  ========================= */
+  {% if section.settings.text_color_night != blank %}
+    body.night-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_night }};
+    }
+
+    body.night-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
+      fill: {{ section.settings.text_color_night }} !important;
+    }
+  {% endif %}
 </style>
 {% liquid
   assign comparison = product.metafields.custom.comparison_section.value
