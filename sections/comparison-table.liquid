@@ -104,14 +104,15 @@
 
           <!-- Column 2 - LOGO -->
           <div class="comparison-table__header comparison-table__header--brand">
+
             {% if table_logo != blank %}
-              {{
-                table_logo
-                | image_url: width: 500
-                | image_tag: loading: 'lazy', widths: '100, 150, 200, 300, 500', class: 'comparison-table__brand-logo'
-              }}
+                <div class="comparison-table__svg-logo">
+                {{ table_logo }}
+                </div>
             {% endif %}
-          </div>
+
+            </div>
+
 
           <!-- Column 3 -->
           <div class="comparison-table__header">
