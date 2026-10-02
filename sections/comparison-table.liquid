@@ -25,6 +25,10 @@
         body.day-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_day }};
         }
+        body:not(.night-mode) .comparison-table__brand-logo svg path,
+        body.day-mode .comparison-table__brand-logo svg path{
+            fill:{{ section.settings.text_color_day }};
+        }
     {% endif %}
  
     {% if section.settings.text_color_night != blank %}
