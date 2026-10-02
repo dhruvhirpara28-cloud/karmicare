@@ -4,77 +4,81 @@
 
 {% if comparison != blank %}
 
+  {% liquid
+    assign section_subtitle = comparison.sub_title.value
+    assign section_title = comparison.title.value
+    assign section_description = comparison.short_description.value
+
+    assign table_title = comparison.table_title.value
+    assign table_logo = comparison.table_brand_logo.value
+    assign table_rows = comparison.table_list.value
+
+    assign button_text = comparison.table_button_text.value
+    assign button_url = comparison.table_button_url.value
+
+    assign table_headers = table_title | split: '|'
+  %}
+
+
   <section class="comparison-section">
 
     <div class="comparison-section__inner">
 
-      {% comment %}
-      =====================================================
-      TOP CONTENT
-      =====================================================
-      {% endcomment %}
+      <!-- ==========================================
+           TOP CONTENT
+      =========================================== -->
 
-      {% if comparison.sub_title != blank %}
+      {% if section_subtitle != blank %}
         <div class="comparison-section__subtitle">
-          {{ comparison.sub_title }}
+          {{ section_subtitle }}
         </div>
       {% endif %}
 
 
-      {% if comparison.title != blank %}
+      {% if section_title != blank %}
         <div class="comparison-section__title">
-          {{ comparison.title | metafield_tag }}
+          {{ section_title }}
         </div>
       {% endif %}
 
 
-      {% if comparison.short_description != blank %}
+      {% if section_description != blank %}
         <div class="comparison-section__description">
-          {{ comparison.short_description }}
+          {{ section_description }}
         </div>
       {% endif %}
 
 
-      {% comment %}
-      =====================================================
-      TABLE
-      =====================================================
-      {% endcomment %}
-
-      {% assign table_headers = comparison.table_title | split: '|' %}
+      <!-- ==========================================
+           COMPARISON TABLE
+      =========================================== -->
 
       <div class="comparison-table-wrapper">
 
         <div class="comparison-table">
 
-          {% comment %}
-          =================================================
-          TABLE HEADER
-          =================================================
-          Table Title example:
 
-          Compare | Logo | Regular brushing |
-          Daily supplements | Skincare routine
+          <!-- ========================================
+               TABLE HEADER
+          ========================================= -->
 
-          Second column is replaced with table_brand_logo.
-          =================================================
-          {% endcomment %}
-
+          <!-- Column 1 -->
           <div class="comparison-table__header comparison-table__header--first">
+
             {% if table_headers[0] != blank %}
               {{ table_headers[0] | strip }}
             {% endif %}
+
           </div>
 
 
+          <!-- Column 2 - LOGO -->
           <div class="comparison-table__header comparison-table__header--brand">
 
-            {% assign brand_logo = comparison.table_brand_logo.value %}
-
-            {% if brand_logo != blank %}
+            {% if table_logo != blank %}
 
               {{
-                brand_logo
+                table_logo
                 | image_url: width: 500
                 | image_tag:
                   loading: 'lazy',
@@ -87,104 +91,119 @@
           </div>
 
 
+          <!-- Column 3 -->
           <div class="comparison-table__header">
+
             {% if table_headers[2] != blank %}
               {{ table_headers[2] | strip }}
             {% endif %}
+
           </div>
 
 
+          <!-- Column 4 -->
           <div class="comparison-table__header">
+
             {% if table_headers[3] != blank %}
               {{ table_headers[3] | strip }}
             {% endif %}
+
           </div>
 
 
+          <!-- Column 5 -->
           <div class="comparison-table__header">
+
             {% if table_headers[4] != blank %}
               {{ table_headers[4] | strip }}
             {% endif %}
+
           </div>
 
 
-          {% comment %}
-          =================================================
-          TABLE BODY
-          =================================================
+          <!-- ========================================
+               TABLE BODY
+          ========================================= -->
 
-          Every Table List item = one row.
+          {% if table_rows != blank %}
 
-          Example:
+            {% for row in table_rows %}
 
-          It's timed to your biology |
-          Your mouth's own 24-hour cycle |
-          Same formula, any hour |
-          One dose fits all |
-          AM/PM by convention
-          =================================================
-          {% endcomment %}
-
-          {% for row in comparison.table_list %}
-
-            {% assign cells = row | split: '|' %}
-
-            <div class="comparison-table__cell comparison-table__cell--first">
-              {% if cells[0] != blank %}
-                {{ cells[0] | strip }}
-              {% endif %}
-            </div>
+              {% assign cells = row | split: '|' %}
 
 
-            <div class="comparison-table__cell comparison-table__cell--brand">
-              {% if cells[1] != blank %}
-                {{ cells[1] | strip }}
-              {% endif %}
-            </div>
+              <!-- Column 1 -->
+              <div class="comparison-table__cell comparison-table__cell--first">
+
+                {% if cells[0] != blank %}
+                  {{ cells[0] | strip }}
+                {% endif %}
+
+              </div>
 
 
-            <div class="comparison-table__cell">
-              {% if cells[2] != blank %}
-                {{ cells[2] | strip }}
-              {% endif %}
-            </div>
+              <!-- Column 2 -->
+              <div class="comparison-table__cell comparison-table__cell--brand">
+
+                {% if cells[1] != blank %}
+                  {{ cells[1] | strip }}
+                {% endif %}
+
+              </div>
 
 
-            <div class="comparison-table__cell">
-              {% if cells[3] != blank %}
-                {{ cells[3] | strip }}
-              {% endif %}
-            </div>
+              <!-- Column 3 -->
+              <div class="comparison-table__cell">
+
+                {% if cells[2] != blank %}
+                  {{ cells[2] | strip }}
+                {% endif %}
+
+              </div>
 
 
-            <div class="comparison-table__cell">
-              {% if cells[4] != blank %}
-                {{ cells[4] | strip }}
-              {% endif %}
-            </div>
+              <!-- Column 4 -->
+              <div class="comparison-table__cell">
 
-          {% endfor %}
+                {% if cells[3] != blank %}
+                  {{ cells[3] | strip }}
+                {% endif %}
+
+              </div>
+
+
+              <!-- Column 5 -->
+              <div class="comparison-table__cell">
+
+                {% if cells[4] != blank %}
+                  {{ cells[4] | strip }}
+                {% endif %}
+
+              </div>
+
+            {% endfor %}
+
+          {% endif %}
+
 
         </div>
 
 
-        {% comment %}
-        =====================================================
-        BUTTON
-        =====================================================
-        {% endcomment %}
+        <!-- ========================================
+             BUTTON
+        ========================================= -->
 
-        {% if comparison.table_button_text != blank %}
+        {% if button_text != blank %}
 
           <div class="comparison-section__button-wrapper">
 
-            {% if comparison.table_button_url != blank %}
+            {% if button_url != blank %}
 
               <a
-                href="{{ comparison.table_button_url }}"
+                href="{{ button_url }}"
                 class="comparison-section__button"
               >
-                {{ comparison.table_button_text }}
+                {{ button_text }}
               </a>
 
             {% else %}
@@ -193,7 +212,7 @@
                 type="button"
                 class="comparison-section__button"
               >
-                {{ comparison.table_button_text }}
+                {{ button_text }}
               </button>
 
             {% endif %}
@@ -211,17 +230,19 @@
 {% endif %}
 
 
+
 <style>
 
 /* =========================================================
-   MAIN SECTION
+   SECTION
 ========================================================= */
 
 .comparison-section {
   width: 100%;
-  padding: 90px 20px 100px;
+  padding: 80px 20px 100px;
   box-sizing: border-box;
 }
+
 
 .comparison-section__inner {
   width: 100%;
@@ -243,28 +264,23 @@
   letter-spacing: 2px;
   text-transform: uppercase;
 
-  margin-bottom: 17px;
+  margin-bottom: 16px;
 }
 
 
 .comparison-section__title {
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto;
 
   text-align: center;
 
-  font-size: clamp(36px, 4.3vw, 54px);
+  font-size: clamp(36px, 4vw, 54px);
   line-height: 1;
 
-  letter-spacing: -1.8px;
+  letter-spacing: -1.5px;
   font-weight: 400;
 }
 
-
-/*
-Rich text title can generate <p>.
-Remove default margins.
-*/
 
 .comparison-section__title p {
   margin: 0;
@@ -272,7 +288,7 @@ Remove default margins.
 
 
 .comparison-section__description {
-  max-width: 600px;
+  max-width: 620px;
 
   margin: 20px auto 0;
 
@@ -302,14 +318,6 @@ Remove default margins.
 
 /* =========================================================
    TABLE
-
-   5 columns:
-
-   1 = Compare
-   2 = Brand / Karmicare
-   3 = Regular brushing
-   4 = Daily supplements
-   5 = Skincare routine
 ========================================================= */
 
 .comparison-table {
@@ -329,7 +337,7 @@ Remove default margins.
 
 
 /* =========================================================
-   TABLE HEADER
+   HEADER
 ========================================================= */
 
 .comparison-table__header {
@@ -338,32 +346,25 @@ Remove default margins.
   padding: 0 12px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   text-align: center;
 
   font-size: 11px;
-  line-height: 1.3;
+  line-height: 1.35;
   font-weight: 500;
 
   box-sizing: border-box;
 }
 
 
-/*
-First header
-*/
-
 .comparison-table__header--first {
   justify-content: flex-start;
   text-align: left;
 }
 
-
-/*
-Brand header
-*/
 
 .comparison-table__header--brand {
   position: relative;
@@ -378,7 +379,7 @@ Brand header
 
 
 /* =========================================================
-   BRAND LOGO
+   LOGO
 ========================================================= */
 
 .comparison-table__brand-logo {
@@ -387,7 +388,7 @@ Brand header
   width: auto;
   max-width: 105px;
 
-  max-height: 35px;
+  max-height: 38px;
 
   height: auto;
 
@@ -396,7 +397,7 @@ Brand header
 
 
 /* =========================================================
-   TABLE BODY CELLS
+   BODY CELLS
 ========================================================= */
 
 .comparison-table__cell {
@@ -420,10 +421,6 @@ Brand header
 }
 
 
-/*
-First column
-*/
-
 .comparison-table__cell--first {
   justify-content: flex-start;
 
@@ -433,25 +430,23 @@ First column
 }
 
 
-/*
-Highlighted brand column
-*/
+/* =========================================================
+   BRAND COLUMN
+========================================================= */
 
 .comparison-table__cell--brand {
-  position: relative;
-
   border-left: 1px solid;
   border-right: 1px solid;
 }
 
 
 /*
-Bottom of highlighted column
+  Since the table uses CSS grid, the last 5 cells
+  belong to the last row.
 */
 
-.comparison-table__cell--brand:last-of-type {
+.comparison-table__cell--brand:nth-last-child(4) {
   border-bottom: 1px solid;
-
   border-radius: 0 0 12px 12px;
 }
 
@@ -463,13 +458,9 @@ Bottom of highlighted column
 .comparison-section__button-wrapper {
   position: absolute;
 
-  left: calc(
-    100% * 1.15 / 6.15
-  );
+  left: calc(100% * 1.15 / 6.15);
 
-  width: calc(
-    100% * 1.25 / 6.15
-  );
+  width: calc(100% * 1.25 / 6.15);
 
   bottom: 0;
 
@@ -515,7 +506,7 @@ Bottom of highlighted column
 @media screen and (max-width: 900px) {
 
   .comparison-section {
-    padding: 70px 15px 80px;
+    padding: 60px 15px 80px;
   }
 
 
@@ -542,19 +533,17 @@ Bottom of highlighted column
 @media screen and (max-width: 600px) {
 
   .comparison-section {
-    padding: 55px 12px 70px;
+    padding: 50px 12px 70px;
   }
 
 
   .comparison-section__subtitle {
     font-size: 9px;
-    letter-spacing: 1.7px;
   }
 
 
   .comparison-section__title {
     font-size: 34px;
-    line-height: 1;
   }
 
 
@@ -565,8 +554,6 @@ Bottom of highlighted column
 
   .comparison-table-wrapper {
     margin-top: 55px;
-
-    overflow-x: auto;
   }
 
 
@@ -575,14 +562,15 @@ Bottom of highlighted column
   }
 
 
-  .comparison-table__cell,
-  .comparison-table__header {
+  .comparison-table__header,
+  .comparison-table__cell {
     font-size: 10px;
   }
 
 }
 
 </style>
+
 
 
 {% schema %}
