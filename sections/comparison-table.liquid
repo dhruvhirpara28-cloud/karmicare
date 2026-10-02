@@ -4,20 +4,23 @@
 
 {% if comparison != blank %}
 
-  {% liquid
-    assign section_subtitle = comparison.sub_title.value
-    assign section_title = comparison.title
-    assign section_description = comparison.short_description.value
+{% liquid
+  assign comparison = product.metafields.custom.comparison_section.value
 
-    assign table_title = comparison.table_title.value
-    assign table_logo = comparison.table_brand_logo.value
-    assign table_rows = comparison.table_list.value
+  assign section_subtitle = comparison.sub_title.value
+  assign section_title = comparison.title
+  assign section_description = comparison.short_description.value
 
-    assign button_text = comparison.table_button_text.value
-    assign button_url = comparison.table_button_url.value
+  assign table_title = comparison.table_title.value
+  assign table_logo = comparison.table_brand_logo.value
+  assign table_rows = comparison.table_list.value
 
-    assign table_headers = table_title | split: '|'
-  %}
+  assign button_text = comparison.table_button_text.value
+  assign button_url = comparison.table_button_url.value
+
+  assign table_headers = table_title | split: '|'
+%}
+
 
 
   <section class="comparison-section">
@@ -29,24 +32,25 @@
       =========================================== -->
 
       {% if section_subtitle != blank %}
-        <div class="comparison-section__subtitle">
-          {{ section_subtitle }}
-        </div>
-      {% endif %}
+  <div class="comparison-section__subtitle">
+    {{ section_subtitle }}
+  </div>
+{% endif %}
 
 
-      {% if section_title != blank %}
-        <div class="comparison-section__title">
-          {{ section_title | metafield_tag }}
-        </div>
-      {% endif %}
+{% if section_title != blank %}
+  <div class="comparison-section__title">
+    {{ section_title | metafield_tag }}
+  </div>
+{% endif %}
 
 
-      {% if section_description != blank %}
-        <div class="comparison-section__description">
-          {{ section_description }}
-        </div>
-      {% endif %}
+{% if section_description != blank %}
+  <div class="comparison-section__description">
+    {{ section_description }}
+  </div>
+{% endif %}
+
 
 
       <!-- ==========================================
