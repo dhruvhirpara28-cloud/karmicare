@@ -33,7 +33,7 @@
     
     {% if section.settings.text_color_night != blank %}
         body:not(.night-mode) .section-{{ section.id }} .comparison-table__brand-logo svg path{
-            fill: {{ section.settings.text_color_night }};
+            fill: {{ section.settings.text_color_day }};
         }
         body.night-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_night }};
