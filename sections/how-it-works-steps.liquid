@@ -28,6 +28,20 @@
             background-color: {{ section.settings.bg_color_night }};
         }
     {%- endif -%}
+
+    {% if section.settings.text_color_day != blank %}
+        body:not(.night-mode) .karmicare-footer *,
+        body.day-mode .karmicare-footer * {
+        color: {{ section.settings.text_color_day }};
+        }
+    {% endif %}
+
+    {% if section.settings.text_color_night != blank %}
+        body.night-mode .karmicare-footer * {
+        color: {{ section.settings.text_color_night }};
+        }
+    {% endif %}
+
   .kc-section {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -161,7 +175,7 @@
   {{ section.settings.custom_css }}
 {%- endstyle -%}
 
-<section class="kc-section">
+<section class="kc-section section-{{ section.id }}">
   <div class="kc-inner">
 
     {%- if section.settings.subtitle != blank or section.settings.title != blank or section.settings.description != blank -%}
@@ -364,9 +378,14 @@
     { "type": "header", "content": "Custom CSS (colors yahan add karein)" },
     { "type": "textarea", "id": "custom_css", "label": "Custom CSS" },
 
-     {
+    {
       "type": "header",
       "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
     },
     {
       "type": "color",
@@ -387,6 +406,11 @@
     {
       "type": "header",
       "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
     },
     {
       "type": "color",
