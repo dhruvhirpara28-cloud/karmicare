@@ -2,14 +2,17 @@
   {%- if section.settings.bg_gradient_day != blank -%}
   body:not(.night-mode) .section-{{ section.id }},
   body.day-mode .section-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_day }};
-  }
-  {%- elsif section.settings.bg_color_day != blank -%}
-  body:not(.night-mode) .section-{{ section.id }},
-  body.day-mode .section-{{ section.id }} {
-      background-color: {{ section.settings.bg_color_day }};
-  }
-  {%- endif -%}
+    background: {{ section.settings.bg_gradient_day }};
+}
+{%- elsif section.settings.bg_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_day }};
+    }
+{%- endif -%}
+body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
+    color: #fff;
+}
 
   {%- if section.settings.bg_gradient_night != blank -%}
   body.night-mode .section-{{ section.id }} {
