@@ -30,14 +30,14 @@
     {%- endif -%}
 
     {% if section.settings.text_color_day != blank %}
-        body:not(.night-mode) .karmicare-footer *,
-        body.day-mode .karmicare-footer * {
+        body:not(.night-mode) .section-{{ section.id }} *,
+        body.day-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_day }};
         }
     {% endif %}
 
     {% if section.settings.text_color_night != blank %}
-        body.night-mode .karmicare-footer * {
+        body.night-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_night }};
         }
     {% endif %}
