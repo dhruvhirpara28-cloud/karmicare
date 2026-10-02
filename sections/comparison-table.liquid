@@ -1,18 +1,24 @@
 <style>
   {%- if section.settings.bg_gradient_day != blank -%}
-  body:not(.night-mode) .section-{{ section.id }},
-  body.day-mode .section-{{ section.id }} {
-    background: {{ section.settings.bg_gradient_day }};
-}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+    }
 {%- elsif section.settings.bg_color_day != blank -%}
     body:not(.night-mode) .section-{{ section.id }},
     body.day-mode .section-{{ section.id }} {
         background-color: {{ section.settings.bg_color_day }};
     }
 {%- endif -%}
-body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
-    color: #fff;
-}
+{%- if section.settings.col_text_day != blank -%}
+    body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
+        color: {{ section.settings.col_text_day }};
+    }
+    body.day-mode .section-{{ section.id }} .comparison-table__cell,
+    body.day-mode .section-{{ section.id }} .comparison-table__cell span {
+        color: {{ section.settings.col_text_day }};
+    }
+{%- endif -%}
 
   {%- if section.settings.bg_gradient_night != blank -%}
   body.night-mode .section-{{ section.id }} {
