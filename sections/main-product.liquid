@@ -37,6 +37,43 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    /* Day Mode Colors */
+    {%- if section.settings.bg_gradient_day != blank -%}
+      body:not(.night-mode) #MainProduct-{{ section.id }},
+      body.day-mode #MainProduct-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+      }
+    {%- elsif section.settings.bg_color_day != blank -%}
+      body:not(.night-mode) #MainProduct-{{ section.id }},
+      body.day-mode #MainProduct-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_day }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.text_color_day != blank -%}
+      body:not(.night-mode) #MainProduct-{{ section.id }},
+      body.day-mode #MainProduct-{{ section.id }} {
+        color: {{ section.settings.text_color_day }};
+      }
+    {%- endif -%}
+
+    /* Night Mode Colors */
+    {%- if section.settings.bg_gradient_night != blank -%}
+      body.night-mode #MainProduct-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+      }
+    {%- elsif section.settings.bg_color_night != blank -%}
+      body.night-mode #MainProduct-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_night }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.text_color_night != blank -%}
+      body.night-mode #MainProduct-{{ section.id }} {
+        color: {{ section.settings.text_color_night }};
+      }
+    {%- endif -%}
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -101,7 +138,7 @@
                   {%- render 'product-top-tags', block: block -%}
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    <h1>{{ product.title | escape }}</h1>
+                    <h1 class="h4">{{ product.title | escape }}</h1>
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
                         {{ product.title | escape }}
@@ -142,7 +179,7 @@
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <div class="kc-pricing-summary__rewards" style="display: none;">
-                      <div class="kc-reward-row kc-care-credit-row">
+                      <div class="kc-reward-row kc-care-credit-row opacity-xl">
                         <div style="display: flex; align-items: center;">
                           <span>{{ loop_block.settings.pricing_summary_care_credit_title | escape }}</span>
                           <span class="info-tip">
@@ -155,7 +192,7 @@
                         <strong class="kc-care-credit-value"></strong>
                       </div>
 
-                      <div class="kc-reward-row kc-checkup-reward-row">
+                      <div class="kc-reward-row kc-checkup-reward-row opacity-xl">
                         <div style="display: flex; align-items: center;">
                           <span>{{ loop_block.settings.pricing_summary_checkup_title | escape }}</span>
                           <span class="info-tip">
@@ -170,12 +207,12 @@
                     </div>
 
                     <div class="kc-pricing-summary__total-row">
-                      <span class="kc-pricing-summary__label">
+                      <span class="kc-pricing-summary__label h5">
                         {{- loop_block.settings.pricing_summary_total_title | escape -}}
                       </span>
-                      <span class="kc-pricing-summary__price"></span>
+                      <span class="kc-pricing-summary__price h5"></span>
                     </div>
-                    <div class="kc-pricing-summary__sub-row">
+                    <div class="kc-pricing-summary__sub-row opacity-xl">
                       <span class="kc-pricing-summary__per-brushing"></span>
                       <span class="kc-pricing-summary__interval"></span>
                     </div>
@@ -259,7 +296,10 @@
                   </p>
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
-                    <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
+                    <div
+                      class="product__description opacity-xl rte quick-add-hidden "
+                      {{ block.shopify_attributes }}
+                    >
                       {{ product.description }}
                     </div>
                   {%- endif -%}
@@ -880,7 +920,6 @@
       </script>
     </div>
   </product-component>
-  {% render 'section-backgound-pdp', section: section %}
   {%- if render_sticky_cart -%}
     {% render 'sticky-cart-block', block: sticky_cart_block %}
   {%- endif -%}
@@ -2748,48 +2787,7 @@
           "label": "Welcome Kit Title",
           "default": "Welcome Kit · with first order"
         },
-        {
-          "type": "header",
-          "content": "Reward Card 1"
-        },
-        {
-          "type": "image_picker",
-          "id": "reward_image_1",
-          "label": "Reward 1 Image (Laurel Wreath)"
-        },
-        {
-          "type": "text",
-          "id": "reward_heading_1",
-          "label": "Reward 1 Heading",
-          "default": "€ 70.80"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "reward_text_1",
-          "label": "Reward 1 Text",
-          "default": "Care Credit received"
-        },
-        {
-          "type": "header",
-          "content": "Reward Card 2"
-        },
-        {
-          "type": "image_picker",
-          "id": "reward_image_2",
-          "label": "Reward 2 Image (Laurel Wreath)"
-        },
-        {
-          "type": "text",
-          "id": "reward_heading_2",
-          "label": "Reward 2 Heading",
-          "default": "€ 40"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "reward_text_2",
-          "label": "Reward 2 Text",
-          "default": "Check-up Reward received"
-        },
+
         {
           "type": "header",
           "content": "Try Once Link Settings"
@@ -2826,7 +2824,7 @@
           "type": "text",
           "id": "pricing_summary_care_credit_title",
           "label": "Care Credit Title",
-          "default": "Care Credit received"
+          "default": "Care Credit back in your account"
         },
         {
           "type": "textarea",
@@ -2846,30 +2844,7 @@
           "label": "Check-up Reward Tooltip",
           "default": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded."
         },
-        {
-          "type": "header",
-          "content": "Testimonial Card Settings"
-        },
-        {
-          "type": "image_picker",
-          "id": "testimonial_avatar",
-          "label": "Testimonial Avatar Image"
-        },
-        {
-          "type": "range",
-          "id": "testimonial_stars",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "label": "Testimonial Stars Count",
-          "default": 5
-        },
-        {
-          "type": "inline_richtext",
-          "id": "testimonial_text",
-          "label": "Testimonial Text",
-          "default": "Na mijn laatste bezoek aan de tandarts voor het eerst in 5 jaar geen gaatjes!"
-        },
+
         {
           "type": "header",
           "content": "Testimonial Button Settings"
@@ -3191,6 +3166,44 @@
       "id": "remove_first_media_bg",
       "default": false,
       "label": "Remove background from first media"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
     },
     {
       "type": "header",

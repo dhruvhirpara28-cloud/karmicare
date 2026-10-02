@@ -433,7 +433,6 @@ h5,
 .h5 {
   font-size: var(--font-h5-size-mobile);
   font-weight: var(--font-h5-weight);
-  letter-spacing: var(--kc-responsive-h5-letter-spacing);
 }
 
 @media only screen and (min-width: 750px) {
@@ -446,9 +445,6 @@ h5,
 
 h6,
 .h6 {
-  color: rgb(var(--color-foreground));
-  margin-block-start: 1.67em;
-  margin-block-end: 1.67em;
   font-size: var(--font-h6-size-mobile);
   font-weight: var(--font-h6-weight);
 }
@@ -3560,6 +3556,9 @@ details-disclosure>details {
   display: block;
 }
 
+.opacity-xl,
+.kc-plan-subrow,
+.tertiary-try-once-link .ft-note,
 .km-footer-top__col-1 h4,
 .km-footer-top__col-2 h3,
 .km-footer-top__col-3 h3,
@@ -3567,7 +3566,7 @@ details-disclosure>details {
 .kc-caption-text>*:not(h2):not(a),
 .kc-caption-text p,
 p.kc-caption-text {
-  opacity: .76;
+  opacity: .70;
 }
 
 /* Reusable Section Border */

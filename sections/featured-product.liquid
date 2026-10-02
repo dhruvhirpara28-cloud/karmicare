@@ -121,7 +121,6 @@
             data-url="{{ product.url }}"
           >
             {%- assign product_form_id = 'product-form-' | append: section.id -%}
-            {%- assign fake_loop_id = product.id | plus: 1 -%}
 
             {%- for block in section.blocks -%}
               {%- case block.type -%}
@@ -143,7 +142,7 @@
                     {%- endunless -%}
                   </h2>
                 {%- when 'price' -%}
-                  <div id="price-{{ fake_loop_id }}" role="status" {{ block.shopify_attributes }}>
+                  <div id="price-{{ product.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       placeholder: placeholder,
@@ -153,7 +152,7 @@
                     -%}
                   </div>
                   <div
-                    id="kc-try-once-container-{{ fake_loop_id }}"
+                    id="kc-try-once-container-{{ product.id }}"
                     class="tertiary-try-once-link figma-tryonce v9bb"
                     data-active-plan="once"
                     style="display: none;"
@@ -170,14 +169,14 @@
                     <span class="ft-note">{{ loop_block.settings.try_once_note | escape }}</span>
                   </div>
                   <div
-                    id="kc-pricing-summary-{{ fake_loop_id }}"
+                    id="kc-pricing-summary-{{ product.id }}"
                     class="kc-pricing-summary"
                     style="display:none;"
                     data-section-id="{{ section.id }}"
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <div class="kc-pricing-summary__rewards" style="display: none;">
-                      <div class="kc-reward-row kc-care-credit-row">
+                      <div class="kc-reward-row kc-care-credit-row opacity-xl">
                         <div style="display: flex; align-items: center;">
                           <span>{{ loop_block.settings.pricing_summary_care_credit_title | escape }}</span>
                           <span class="info-tip">
@@ -190,7 +189,7 @@
                         <strong class="kc-care-credit-value"></strong>
                       </div>
 
-                      <div class="kc-reward-row kc-checkup-reward-row">
+                      <div class="kc-reward-row kc-checkup-reward-row opacity-xl">
                         <div style="display: flex; align-items: center;">
                           <span>{{ loop_block.settings.pricing_summary_checkup_title | escape }}</span>
                           <span class="info-tip">
@@ -205,12 +204,12 @@
                     </div>
 
                     <div class="kc-pricing-summary__total-row">
-                      <span class="kc-pricing-summary__label">
+                      <span class="kc-pricing-summary__label h5">
                         {{- loop_block.settings.pricing_summary_total_title | escape -}}
                       </span>
-                      <span class="kc-pricing-summary__price"></span>
+                      <span class="kc-pricing-summary__price h5"></span>
                     </div>
-                    <div class="kc-pricing-summary__sub-row">
+                    <div class="kc-pricing-summary__sub-row opacity-xl">
                       <span class="kc-pricing-summary__per-brushing"></span>
                       <span class="kc-pricing-summary__interval"></span>
                     </div>
@@ -509,30 +508,11 @@
 
                     <div class="loop-featured-subscription-wrapper">
                       {%- comment -%} LOOP WIDGET CODE STARTS {%- endcomment -%}
-                      {%- comment -%} LOOP WIDGET CODE STARTS {%- endcomment -%}
-                      {%- assign product_id_str = product.id | append: '' -%}
-
                       {%- capture template_content -%}
                         {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
                       {%- endcapture -%}
 
-                      {%- assign template_content = template_content | replace: product_id_str, fake_loop_id -%}
-
-                      {%- assign fake_loop_name = 'loop_purchase_option_' | append: fake_loop_id -%}
-                      {%- assign template_content = template_content
-                        | replace: 'loop_purchase_option', fake_loop_name
-                      -%}
-
-                      {%- for variant in product.variants -%}
-                        {%- assign variant_id_str = variant.id | append: '' -%}
-                        {%- assign fake_variant_id = variant.id | append: '1' -%}
-                        {%- assign template_content = template_content | replace: variant_id_str, fake_variant_id -%}
-                      {%- endfor -%}
-
                       {%- if template_content contains 'Rendering loop-subscriptions' -%}
-                        {%- assign template_exists = true -%}
-                      {%- endif -%}
-                      {%- if template_exists -%}
                         <div
                           class="loop-featured-widget-container"
                           id="loop-featured-{{ section.id }}"
@@ -544,26 +524,28 @@
                       {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                     </div>
 
-                    {%- if welcome_kit_products != blank -%}
-                      <div class="loop-featured-welcome-kit">
-                        <div class="loop-featured-wk-contents">
-                          <ul class="wk-contents-list">
-                            {%- assign total_price = 0 -%}
-                            {%- for wk_product in welcome_kit_products -%}
-                              {%- assign wk_variant = wk_product.selected_or_first_available_variant -%}
-                              {%- assign total_price = total_price | plus: wk_variant.price -%}
-                              <li>
-                                <span class="wk-item-name">
-                                  <span class="check-icon">✓</span>
-                                  {{ wk_product.title }}
-                                </span>
-                                <span class="price-strike">{{ wk_variant.price | money }}</span>
-                              </li>
-                            {%- endfor -%}
-                          </ul>
+                    {% comment %}
+                      {%- if welcome_kit_products != blank -%}
+                        <div class="loop-featured-welcome-kit">
+                          <div class="loop-featured-wk-contents">
+                            <ul class="wk-contents-list">
+                              {%- assign total_price = 0 -%}
+                              {%- for wk_product in welcome_kit_products -%}
+                                {%- assign wk_variant = wk_product.selected_or_first_available_variant -%}
+                                {%- assign total_price = total_price | plus: wk_variant.price -%}
+                                <li>
+                                  <span class="wk-item-name">
+                                    <span class="check-icon">✓</span>
+                                    {{ wk_product.title }}
+                                  </span>
+                                  <span class="price-strike">{{ wk_variant.price | money }}</span>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
                         </div>
-                      </div>
-                    {%- endif -%}
+                      {%- endif -%}
+                    {% endcomment %}
                   </div>
                 {%- when 'buy_buttons' -%}
                   {%- render 'buy-buttons',
@@ -571,7 +553,7 @@
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
-                    loop_product_id: fake_loop_id
+                    loop_product_id: product.id
                   -%}
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}
@@ -650,130 +632,103 @@
     <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
   {% endif %}
-
   {%- unless placeholder -%}
-  <script>
-  (function() {
-    var SECTION_ID = '{{ section.id }}';
-    var FP_ID = {{ fake_loop_id }};
-    var LOOP_CONT_ID = 'loop-subscription-container-' + FP_ID;
-    var PRICE_WRAP_ID = 'price-' + FP_ID;
-    var _busy = false;
+    <script>
+      (function() {
+        var productId = {{ product.id }};
+        var originalPrice = '{{ product.selected_or_first_available_variant.price | money }}';
 
-    function fmtPrice(cents) {
-      if (typeof loopFormatMoney === 'function') return loopFormatMoney(cents, true);
-      var fmt = (window.Shopify && window.Shopify.money_format) || '${{amount}}';
-      return fmt.replace('{{amount}}', (cents/100).toFixed(2))
-                .replace('{{amount_no_decimals}}', Math.floor(cents/100))
-                .replace('{{amount_with_comma_separator}}', (cents/100).toFixed(2).replace('.',','));
-    }
+        function syncLoopPriceToMainDisplay() {
+          var priceDiv = document.getElementById('price-' + productId);
+          if (!priceDiv) return;
 
-    function getLoopPrice() {
-      var p = window.loopProps && window.loopProps[FP_ID];
-      if (!p) return null;
-      var spgId = p.sellingPlanGroupId;
-      var isOnce = !spgId || spgId === 'loop-one-time-purchase';
-      if (!isOnce) {
-        if (p.sellingPlanAllocation && p.sellingPlanAllocation.price != null) return p.sellingPlanAllocation.price;
-        if (p.sellingPlan && p.sellingPlan.price != null) return p.sellingPlan.price;
-      }
-      var prod = p.product;
-      var vid = p.selectedVariantId;
-      if (prod && prod.variants) {
-        var v = prod.variants.find(function(v){ return v.id == vid; });
-        if (v) return v.price;
-      }
-      return null;
-    }
+          var container = document.getElementById('loop-subscription-container-' + productId);
+          if (!container) return;
 
-    function getCmpPrice() {
-      var p = window.loopProps && window.loopProps[FP_ID];
-      if (!p || !p.product) return null;
-      var v = p.product.variants.find(function(v){ return v.id == p.selectedVariantId; });
-      return v ? v.compare_at_price : null;
-    }
+          // Find which radio is checked
+          var checkedRadio = container.querySelector('.loop-subscription-group-radio:checked, .loop-one-time-purchase-option-radio:checked');
 
-    function syncPrice() {
-      if (_busy) return;
-      var price = getLoopPrice();
-      if (price == null) return;
-      var wrap = document.getElementById(PRICE_WRAP_ID);
-      if (!wrap) return;
-      _busy = true;
-      try {
-        var cmp = getCmpPrice();
-        var sale = cmp && cmp > price;
-        var priceEl = wrap.querySelector('.price');
-        if (priceEl) priceEl.classList.toggle('price--on-sale', !!sale);
-        if (sale) {
-          wrap.querySelectorAll('.price-item--regular').forEach(function(el){ el.innerHTML = fmtPrice(cmp); });
-          wrap.querySelectorAll('.price-item--sale').forEach(function(el){ el.innerHTML = fmtPrice(price); });
-        } else {
-          wrap.querySelectorAll('.price-item--regular, .price-item--sale').forEach(function(el){ el.innerHTML = fmtPrice(price); });
-        }
-      } finally { _busy = false; }
-    }
+          var newPrice = null;
 
-    function bindInputs() {
-      var cont = document.getElementById(LOOP_CONT_ID);
-      if (!cont) return false;
-      cont.querySelectorAll('input[name^="loop_purchase_option"]').forEach(function(r) {
-        if (r.dataset.kcb) return;
-        r.dataset.kcb = '1';
-        r.addEventListener('change', function(){ setTimeout(syncPrice, 60); });
-        r.addEventListener('click',  function(){ setTimeout(syncPrice, 60); });
-      });
-      cont.querySelectorAll('.loop-selling-plan-selector').forEach(function(s) {
-        if (s.dataset.kcb) return;
-        s.dataset.kcb = '1';
-        s.addEventListener('change', function(){ setTimeout(syncPrice, 60); });
-      });
-      return true;
-    }
-
-    function init() {
-      // Observe ONLY the section wrapper; disconnect as soon as loop container appears
-      // to prevent re-firing when we update price innerHTML inside it.
-      var sectionEl = document.querySelector('.featured-product-section-{{ section.id }}');
-      if (sectionEl && !document.getElementById(LOOP_CONT_ID)) {
-        var obs = new MutationObserver(function(_, o) {
-          if (document.getElementById(LOOP_CONT_ID)) {
-            o.disconnect();
-            bindInputs();
-            syncPrice();
+          if (checkedRadio && checkedRadio.dataset.id === 'loop-one-time-purchase') {
+            // One-time: restore original
+            newPrice = originalPrice;
+          } else if (checkedRadio) {
+            var variantId = checkedRadio.dataset.variantId;
+            var spgId = checkedRadio.dataset.id;
+            var loopPriceEl = document.getElementById('loop-price-' + variantId + '-' + spgId);
+            if (loopPriceEl) {
+              newPrice = loopPriceEl.textContent.trim();
+            }
+          } else {
+            // Default: try to read the selected plan from fieldset
+            var fieldset = container.querySelector('[data-selling-plan-id]');
+            if (fieldset) {
+              var variantId = fieldset.dataset.selectedVariantId;
+              var spgId = fieldset.dataset.sellingPlanGroupId;
+              var loopPriceEl = document.getElementById('loop-price-' + variantId + '-' + spgId);
+              if (loopPriceEl) {
+                newPrice = loopPriceEl.textContent.trim();
+              }
+            }
           }
-        });
-        obs.observe(sectionEl, { childList: true, subtree: true });
-      }
 
-      // Try immediately
-      bindInputs();
-      syncPrice();
+          if (!newPrice) return;
 
-      // Poll loopProps until populated (max 10 s)
-      var n = 0;
-      var t = setInterval(function() {
-        if (++n > 100) { clearInterval(t); return; }
-        var p = window.loopProps && window.loopProps[FP_ID];
-        if (p && p.product) {
-          clearInterval(t);
-          bindInputs();
-          syncPrice();
-          setTimeout(syncPrice, 700);
-          setTimeout(syncPrice, 2000);
+          // Update the Shopify price display
+          var regularSpans = priceDiv.querySelectorAll('.price__regular .price-item--regular, .price__sale .price-item--sale.price-item--last');
+          regularSpans.forEach(function(el) {
+            el.textContent = newPrice;
+          });
         }
-      }, 100);
-    }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-  </script>
+        function initSync() {
+          var container = document.getElementById('loop-subscription-container-' + productId);
+          if (!container) {
+            setTimeout(initSync, 200);
+            return;
+          }
+
+          // Watch for price element content changes
+          var observer = new MutationObserver(function() {
+            syncLoopPriceToMainDisplay();
+          });
+
+          // Observe all loop-price elements
+          container.querySelectorAll('[id^="loop-price-"]').forEach(function(el) {
+            observer.observe(el, { childList: true, characterData: true, subtree: true });
+          });
+
+          // Also watch for new price elements added
+          var containerObserver = new MutationObserver(function() {
+            container.querySelectorAll('[id^="loop-price-"]').forEach(function(el) {
+              if (!el._loopObserved) {
+                el._loopObserved = true;
+                observer.observe(el, { childList: true, characterData: true, subtree: true });
+              }
+            });
+          });
+          containerObserver.observe(container, { childList: true, subtree: true });
+
+          // Listen for radio changes
+          container.addEventListener('change', function(e) {
+            if (e.target.classList.contains('loop-subscription-group-radio') || e.target.classList.contains('loop-one-time-purchase-option-radio')) {
+              setTimeout(syncLoopPriceToMainDisplay, 50);
+            }
+          });
+
+          // Initial sync after Loop initialises
+          setTimeout(syncLoopPriceToMainDisplay, 500);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initSync);
+        } else {
+          initSync();
+        }
+      })();
+    </script>
   {%- endunless -%}
-
 </product-info>
 
 {% schema %}

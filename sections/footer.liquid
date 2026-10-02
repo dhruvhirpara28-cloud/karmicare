@@ -105,7 +105,7 @@
   body.day-mode .km-footer-lang-switcher .country-selector__list,
   body.day-mode .km-footer-lang-switcher .localization-selector {
     border: 1px solid color-mix(in srgb, currentColor 76%, transparent);
-    background-color: var(--kc-mapped-surface-primary-default);
+    background-color: var(--kc-white-surface-primary-default);
   }
   body.night-mode .km-footer-newsletter-form,
   body.night-mode .km-footer-lang-switcher .country-selector__list,
@@ -129,7 +129,7 @@
     font-weight: normal;
   }
   body.night-mode .km-footer-newsletter-form button{
-    color:var(--kc-mapped-surface-primary-default);
+    color:var(--kc-white-surface-primary-default);
   }
   .km-footer-newsletter-note {
     font-size: var(--kc-responsive-label-sm-text-size);
@@ -159,7 +159,7 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--extra-primary-border-radius);
-    background-color: var(--kc-mapped-surface-primary-default);
+    background-color: var(--kc-white-surface-primary-default);
     text-decoration: none;
   }
   @media screen and (min-width:750px){
@@ -343,7 +343,13 @@
             <p>Email</p>
             {% form 'customer', class: 'km-footer-newsletter-form' %}
               <input type="hidden" name="contact[tags]" value="newsletter">
-              <input type="email" name="contact[email]" placeholder="you@example.com" aria-label="Email address" required>
+              <input
+                type="email"
+                name="contact[email]"
+                placeholder="you@example.com"
+                aria-label="Email address"
+                required
+              >
               <button type="submit" name="commit">Join</button>
             {% endform %}
 
@@ -396,7 +402,11 @@
             </svg>
           </a>
         {%- endif -%}
-        <a href="{{ settings.social_linkedin_link | default: '#' }}" class="km-footer-social-icon" aria-label="LinkedIn">
+        <a
+          href="{{ settings.social_linkedin_link | default: '#' }}"
+          class="km-footer-social-icon"
+          aria-label="LinkedIn"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <g clip-path="url(#clip0_2906_921)">
               <mask id="mask0_2906_921" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
