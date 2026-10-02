@@ -1,237 +1,4 @@
 <style>
-  {%- if section.settings.bg_gradient_day != blank -%}
-  body:not(.night-mode) .section-{{ section.id }},
-  body.day-mode .section-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_day }};
-  }
-  {%- elsif section.settings.bg_color_day != blank -%}
-  body:not(.night-mode) .section-{{ section.id }},
-  body.day-mode .section-{{ section.id }} {
-      background-color: {{ section.settings.bg_color_day }};
-  }
-  {%- endif -%}
-
-  {%- if section.settings.bg_gradient_night != blank -%}
-  body.night-mode .section-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_night }};
-  }
-  {%- elsif section.settings.bg_color_night != blank -%}
-  body.night-mode .section-{{ section.id }} {
-      background-color: {{ section.settings.bg_color_night }};
-  }
-  {%- endif -%}
-/* DAY MODE */
-  {% if section.settings.text_color_day != blank %}
-    body:not(.night-mode) .section-{{ section.id }} *,
-    body.day-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_day }};
-    }
-  {% endif %}
-
-
-  /* NIGHT MODE */
-  {% if section.settings.text_color_night != blank %}
-    body.night-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_night }};
-    }
-  {% endif %}
-
-  #section-{{ section.id }} {
-    padding-top: {{ section.settings.padding-top }}px;
-    padding-bottom: {{ section.settings.padding-bottom }}px;
-    color: {{ section.settings.text_color }};
-    background-color: {{ section.settings.bg_color }};
-    }
-    
-    @media only screen and (max-width: 767px) { 
-    #section-{{ section.id }} {
-        padding-top: {{ section.settings.padding-top-mobile }}px;
-        padding-bottom: {{ section.settings.padding-bottom-mobile }}px;
-    }
-    }
-</style>
-{% liquid
-  assign comparison = product.metafields.custom.comparison_section.value
-%}
-
-{% if comparison != blank %}
-  {% liquid
-    assign comparison = product.metafields.custom.comparison_section.value
-
-    assign section_subtitle = comparison.sub_title.value
-    assign section_title = comparison.title
-    assign section_description = comparison.short_description.value
-
-    assign table_title = comparison.table_title.value
-    assign table_logo = comparison.table_brand_logo.value
-    assign table_rows = comparison.table_list.value
-
-    assign button_text = comparison.table_button_text.value
-    assign button_url = comparison.table_button_url.value
-
-    assign table_headers = table_title | split: '|'
-  %}
-
-  <section class="comparison-section" id="section-{{ section.id }}">
-    <div class="comparison-section__inner">
-      <!--
-        ==========================================
-             TOP CONTENT
-        ===========================================
-      -->
-        <div class="section-main-header">
-      {% if section_subtitle != blank %}
-        <div class="comparison-section__subtitle">
-          {{ section_subtitle }}
-        </div>
-      {% endif %}
-
-      {% if section_title != blank %}
-        <h2 class="comparison-section__title">
-          {{ section_title | metafield_tag }}
-        </h2>
-      {% endif %}
-
-      {% if section_description != blank %}
-        <div class="comparison-section__description">
-          {{ section_description }}
-        </div>
-      {% endif %}
-    </div>
-      <!--
-        ==========================================
-             COMPARISON TABLE
-        ===========================================
-      -->
-
-      <div class="comparison-table-wrapper">
-        <div class="comparison-table">
-          <!--
-            ========================================
-                 TABLE HEADER
-            =========================================
-          -->
-
-          <!-- Column 1 -->
-          <div class="comparison-table__header comparison-table__header--first">
-            {% if table_headers[0] != blank %}
-              {{ table_headers[0] | strip }}
-            {% endif %}
-          </div>
-
-          <!-- Column 2 - LOGO -->
-          <div class="comparison-table__header comparison-table__header--brand">
-
-            {% if table_logo != blank %}
-                <div class="comparison-table__brand-logo">
-                {{ table_logo }}
-                </div>
-            {% endif %}
-
-            </div>
-
-
-          <!-- Column 3 -->
-          <div class="comparison-table__header">
-            {% if table_headers[2] != blank %}
-              {{ table_headers[2] | strip }}
-            {% endif %}
-          </div>
-
-          <!-- Column 4 -->
-          <div class="comparison-table__header">
-            {% if table_headers[3] != blank %}
-              {{ table_headers[3] | strip }}
-            {% endif %}
-          </div>
-
-          <!-- Column 5 -->
-          <div class="comparison-table__header">
-            {% if table_headers[4] != blank %}
-              {{ table_headers[4] | strip }}
-            {% endif %}
-          </div>
-
-          <!--
-            ========================================
-                 TABLE BODY
-            =========================================
-          -->
-
-          {% if table_rows != blank %}
-            {% for row in table_rows %}
-              {% assign cells = row | split: '|' %}
-
-              <!-- Column 1 -->
-              <div class="comparison-table__cell comparison-table__cell--first">
-                {% if cells[0] != blank %}
-                  {{ cells[0] | strip }}
-                {% endif %}
-              </div>
-
-              <!-- Column 2 -->
-              <div class="comparison-table__cell comparison-table__cell--brand">
-                {% if cells[1] != blank %}
-                  {{ cells[1] | strip }}
-                {% endif %}
-              </div>
-
-              <!-- Column 3 -->
-              <div class="comparison-table__cell">
-                {% if cells[2] != blank %}
-                  {{ cells[2] | strip }}
-                {% endif %}
-              </div>
-
-              <!-- Column 4 -->
-              <div class="comparison-table__cell">
-                {% if cells[3] != blank %}
-                  {{ cells[3] | strip }}
-                {% endif %}
-              </div>
-
-              <!-- Column 5 -->
-              <div class="comparison-table__cell">
-                {% if cells[4] != blank %}
-                  {{ cells[4] | strip }}
-                {% endif %}
-              </div>
-            {% endfor %}
-          {% endif %}
-        </div>
-
-        <!--
-          ========================================
-               BUTTON
-          =========================================
-        -->
-
-        {% if button_text != blank %}
-          <div class="comparison-section__button-wrapper">
-            {% if button_url != blank %}
-              <a
-                href="{{ button_url }}"
-                class="comparison-section__button"
-              >
-                {{ button_text }}
-              </a>
-
-            {% else %}
-              <button
-                type="button"
-                class="comparison-section__button"
-              >
-                {{ button_text }}
-              </button>
-            {% endif %}
-          </div>
-        {% endif %}
-      </div>
-    </div>
-  </section>
-{% endif %}
-
-<style>
 .comparison-section {
     width: 100%;
     padding: 80px 20px 100px;
@@ -243,28 +10,39 @@
   max-width: 1130px;
   margin: 0 auto;
 }
+
 .comparison-section .section-main-header{
-    max-width:604px;
-    margin:0 auto;
-    width:100%;
-    text-align:center;
+    max-width: 604px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
 }
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
 .comparison-section__subtitle {
   text-align: center;
-  font-size: var(--km-body-sm);
-  line-height: 1.4;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 24px;
 }
 
 .comparison-section__title,
-.comparison-section__title p{
+.comparison-section__title p {
   margin: 0 auto;
   text-align: center;
-  font-weight: var(--font-500-weight);
+
+  font-family: "Noto Sans", sans-serif;
+  font-size: 40px;
+  line-height: 1.04;
+  font-weight: 500;
   letter-spacing: -1.5px;
-  line-height:1;
 }
 
 .comparison-section__title p {
@@ -281,9 +59,18 @@
   max-width: 620px;
   margin: 24px auto 0;
   text-align: center;
-  font-size: var(--km-body-lg);
-  line-height: 1.5;
+
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0;
 }
+
+
+/* =========================
+   TABLE
+   ========================= */
 
 .comparison-table-wrapper {
   position: relative;
@@ -313,10 +100,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 500;
   box-sizing: border-box;
+
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 .comparison-table__header--first {
@@ -343,10 +133,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 15px;
-  line-height: 20px;
   box-sizing: border-box;
   border-top: 1px solid rgba(127, 185, 255, 0.1);
+
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .comparison-table__cell--first {
@@ -363,6 +157,11 @@
   border-bottom: 0;
   border-radius: 0;
 }
+
+
+/* =========================
+   BUTTON
+   ========================= */
 
 .comparison-section__button-wrapper {
   position: absolute;
@@ -390,18 +189,21 @@
   padding: 0 24px;
   border-radius: 6px;
   text-decoration: none;
+  box-sizing: border-box;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+
+  font-family: "Noto Sans", sans-serif;
   font-size: 10px;
   line-height: 1;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  white-space: nowrap;
-  box-sizing: border-box;
+
   background: #7FB9FF;
   color: #0A1628;
-  position: relative;
-  z-index: 2;
-  pointer-events: auto;
 }
 
 .comparison-section__button:hover,
@@ -409,7 +211,13 @@
   color: #0A1628;
 }
 
+
+/* =========================
+   TABLET
+   ========================= */
+
 @media screen and (max-width: 900px) {
+
   .comparison-section {
     padding: 60px 15px 80px;
   }
@@ -425,8 +233,8 @@
   }
 
   .comparison-table__header {
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 15px;
+    line-height: 21px;
   }
 
   .comparison-table__cell {
@@ -440,21 +248,33 @@
   }
 }
 
+
+/* =========================
+   MOBILE
+   ========================= */
+
 @media screen and (max-width: 600px) {
+
   .comparison-section {
     padding: 50px 12px 70px;
   }
 
   .comparison-section__subtitle {
     font-size: 9px;
+    line-height: 13px;
+    letter-spacing: 1.7px;
   }
 
-  .comparison-section__title {
+  .comparison-section__title,
+  .comparison-section__title p {
     font-size: 34px;
+    line-height: 1.06;
+    letter-spacing: -1.1px;
   }
 
   .comparison-section__description {
     font-size: 12px;
+    line-height: 1.5;
   }
 
   .comparison-table-wrapper {
@@ -480,110 +300,4 @@
     width: calc(820px * 1.25 / 6.15);
   }
 }
-
 </style>
-
-{% schema %}
-{
-  "name": "Comparison Table",
-  "tag": "section",
-  "class": "comparison-section-wrapper",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Day Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "text_color_day",
-      "label": "Text Color (Day)"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Color (Day)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
-    },
-    {
-      "type": "color",
-      "id": "card_bg_color_day",
-      "label": "Card Background Color (Day)",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Night Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "text_color_night",
-      "label": "Text Color (Night)"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Color (Night)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
-    },
-    {
-      "type": "color",
-      "id": "card_bg_color_night",
-      "label": "Card Background Color (Night)",
-      "default": "#191f38"
-    },
-    {
-            "type": "header",
-            "content": "padding settings"
-          },
-          {
-            "type": "range",
-            "id": "padding-top",
-            "label": "Top Spacing",
-            "min": 0,
-            "max": 200,
-            "step": 2,
-            "default": 80
-          },
-          {
-            "type": "range",
-            "id": "padding-bottom",
-            "label": "Bottom Spacing",
-            "min": 0,
-            "max": 200,
-            "step": 2,
-            "default": 80
-          },
-          { 
-            "type": "range",
-            "id": "padding-top-mobile",
-            "label": "Top Mobile Spacing",
-            "min": 0,
-            "max": 150,
-            "step": 2,
-            "default": 40
-          },
-          {
-            "type": "range",
-            "id": "padding-bottom-mobile",
-            "label": "Bottom Mobile Spacing",
-            "min": 0,
-            "max": 150,
-            "step": 2,
-            "default": 40
-          }
-  ],
-  "presets": [
-    {
-      "name": "Comparison Table"
-    }
-  ]
-}
-{% endschema %}
