@@ -8,40 +8,41 @@
 {%- endcomment -%}
 
 {%- style -%}
-    {%- if section.settings.bg_gradient_day != blank -%}
-        body:not(.night-mode) .section-{{ section.id }},
-        body.day-mode .section-{{ section.id }} {
-            background: {{ section.settings.bg_gradient_day }};
-        }
-    {%- elsif section.settings.bg_color_day != blank -%}
-        body:not(.night-mode) .section-{{ section.id }},
-        body.day-mode .section-{{ section.id }} {
-            background-color: {{ section.settings.bg_color_day }};
-        }
-    {%- endif -%}
 
-    {%- if section.settings.bg_gradient_night != blank -%}
-        body.night-mode .section-{{ section.id }} {
-            background: {{ section.settings.bg_gradient_night }};
-        }
-    {%- elsif section.settings.bg_color_night != blank -%}
-        body.night-mode .section-{{ section.id }} {
-            background-color: {{ section.settings.bg_color_night }};
-        }
-    {%- endif -%}
+{%- if section.settings.bg_gradient_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_day }};
+    }
+{%- elsif section.settings.bg_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_day }};
+    }
+{%- endif -%}
 
-    {% if section.settings.text_color_day != blank %}
-        body:not(.night-mode) .section-{{ section.id }} *,
-        body.day-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_day }};
-        }
-    {% endif %}
+{%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+    }
+{%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_night }};
+    }
+{%- endif -%}
 
-    {% if section.settings.text_color_night != blank %}
-        body.night-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_night }};
-        }
-    {% endif %}
+{% if section.settings.text_color_day != blank %}
+    body:not(.night-mode) .section-{{ section.id }} *,
+    body.day-mode .section-{{ section.id }} * {
+    color: {{ section.settings.text_color_day }};
+    }
+{% endif %}
+
+{% if section.settings.text_color_night != blank %}
+    body.night-mode .section-{{ section.id }} * {
+    color: {{ section.settings.text_color_night }};
+    }
+{% endif %}
 
 .kc-section {
     padding-top: {{ section.settings.padding_top }}px;
