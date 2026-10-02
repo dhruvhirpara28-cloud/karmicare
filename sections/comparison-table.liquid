@@ -20,7 +20,8 @@
       background-color: {{ section.settings.bg_color_night }};
   }
   {%- endif -%}
- {% if section.settings.text_color_day != blank %}
+/* DAY MODE */
+  {% if section.settings.text_color_day != blank %}
     body:not(.night-mode) .section-{{ section.id }} *,
     body.day-mode .section-{{ section.id }} * {
       color: {{ section.settings.text_color_day }};
@@ -33,9 +34,7 @@
   {% endif %}
 
 
-  /* =========================
-     NIGHT MODE
-  ========================= */
+  /* NIGHT MODE */
   {% if section.settings.text_color_night != blank %}
     body.night-mode .section-{{ section.id }} * {
       color: {{ section.settings.text_color_night }};
