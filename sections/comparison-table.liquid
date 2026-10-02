@@ -20,6 +20,18 @@
       background-color: {{ section.settings.bg_color_night }};
   }
   {%- endif -%}
+  {% if section.settings.text_color_day != blank %}
+        body:not(.night-mode) .karmicare-footer *,
+        body.day-mode .karmicare-footer * {
+        color: {{ section.settings.text_color_day }};
+        }
+    {% endif %}
+ 
+    {% if section.settings.text_color_night != blank %}
+        body.night-mode .karmicare-footer * {
+        color: {{ section.settings.text_color_night }};
+        }
+    {% endif %}
 </style>
 {% liquid
   assign comparison = product.metafields.custom.comparison_section.value
