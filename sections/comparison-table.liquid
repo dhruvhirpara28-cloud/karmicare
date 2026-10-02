@@ -172,28 +172,28 @@
               <!-- Column 2 -->
               <div class="comparison-table__cell comparison-table__cell--brand">
                 {% if cells[1] != blank %}
-                  {{ cells[1] | strip }}
+                 <span>{{ cells[1] | strip }}</span>
                 {% endif %}
               </div>
 
               <!-- Column 3 -->
               <div class="comparison-table__cell">
                 {% if cells[2] != blank %}
-                  {{ cells[2] | strip }}
+                  <span>{{ cells[2] | strip }}</span>
                 {% endif %}
               </div>
 
               <!-- Column 4 -->
               <div class="comparison-table__cell">
                 {% if cells[3] != blank %}
-                  {{ cells[3] | strip }}
+                  <span>{{ cells[3] | strip }}</span>
                 {% endif %}
               </div>
 
               <!-- Column 5 -->
               <div class="comparison-table__cell">
                 {% if cells[4] != blank %}
-                  {{ cells[4] | strip }}
+                  <span>{{ cells[4] | strip }}</span>
                 {% endif %}
               </div>
             {% endfor %}
