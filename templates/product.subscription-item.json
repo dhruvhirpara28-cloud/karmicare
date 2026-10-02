@@ -290,7 +290,11 @@
           "settings": {
             "number": "{{ block.repeater.step_number.value }}",
             "video": "{{ block.repeater.shopify_video.value }}",
+            "video_url": "",
+            "loop": true,
+            "show_text": true,
             "title": "{{ block.repeater.title.value }}",
+            "show_description": true,
             "description": "{{ block.repeater.description.value }}"
           }
         },
@@ -354,7 +358,6 @@
     },
     "comparison_table_r8CDbT": {
       "type": "comparison-table",
-      "disabled": true,
       "name": "Comparison Table",
       "settings": {
         "text_color_day": "#191f38",
