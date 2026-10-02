@@ -286,19 +286,17 @@
       "blocks": {
         "step_iJdPLN": {
           "type": "step",
+          "repeater": "{{ product.metafields.custom.how_it_works_steps.value }}",
           "settings": {
-            "number": "01",
-            "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
-            "video_url": "",
-            "loop": true,
-            "show_text": true,
-            "title": "Rinse before",
-            "show_description": true,
-            "description": "Start with a rinse before brushing."
+            "number": "{{ block.repeater.step_number.value }}",
+            "video": "{{ block.repeater.shopify_video.value }}",
+            "title": "{{ block.repeater.title.value }}",
+            "description": "{{ block.repeater.description.value }}"
           }
         },
         "step_U7HiXT": {
           "type": "step",
+          "disabled": true,
           "settings": {
             "number": "02",
             "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
@@ -312,6 +310,7 @@
         },
         "step_EBicgt": {
           "type": "step",
+          "disabled": true,
           "settings": {
             "number": "03",
             "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
@@ -355,6 +354,7 @@
     },
     "comparison_table_r8CDbT": {
       "type": "comparison-table",
+      "disabled": true,
       "name": "Comparison Table",
       "settings": {
         "text_color_day": "#191f38",
