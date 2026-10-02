@@ -373,7 +373,9 @@
 }
 
 .comparison-table__cell--brand {
-  background: #212A49;
+  z-index: 2;
+    border-left: 1px solid #7FB9FF;
+    border-right: 1px solid #7FB9FF;
 }
 
 .comparison-table__cell--brand:nth-last-child(4) {
@@ -395,9 +397,10 @@
   border: 1px solid #7FB9FF;
   border-radius: 16px;
   background: transparent;
-  z-index: 5;
   pointer-events: none;
   box-shadow: 0px 18px 44px -22px rgba(127, 185, 255, 0.55);
+  overflow: hidden;
+z-index: 1;
 }
 
 .comparison-section__button {
