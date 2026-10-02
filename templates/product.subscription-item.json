@@ -280,12 +280,72 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "how_it_works_steps_aAgVmF": {
+      "type": "how-it-works-steps",
+      "blocks": {
+        "step_iJdPLN": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
+            "loop": true,
+            "show_text": true,
+            "title": "Rinse before",
+            "show_description": true,
+            "description": "Start with a rinse before brushing."
+          }
+        },
+        "step_U7HiXT": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
+            "loop": true,
+            "show_text": true,
+            "title": "Pump and brush",
+            "show_description": true,
+            "description": "Apply one pump and brush gently for two minutes."
+          }
+        },
+        "step_EBicgt": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
+            "loop": true,
+            "show_text": true,
+            "title": "Spit, no rinse",
+            "show_description": true,
+            "description": "Spit out the excess. Do not rinse afterwards."
+          }
+        }
+      },
+      "block_order": [
+        "step_iJdPLN",
+        "step_U7HiXT",
+        "step_EBicgt"
+      ],
+      "name": "How it works (Steps)",
+      "settings": {
+        "subtitle": "The Ritual",
+        "title": "How Karmicare works.",
+        "description": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>",
+        "hint_text": "Hover or tap to watch",
+        "bottom_text": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day.",
+        "aspect_ratio": "4 / 3",
+        "radius": 8,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "custom_css": ""
+      }
     }
   },
   "order": [
     "main",
     "product_compare_plans_gz9xxx",
     "disclosures",
-    "related-products"
+    "related-products",
+    "how_it_works_steps_aAgVmF"
   ]
 }
