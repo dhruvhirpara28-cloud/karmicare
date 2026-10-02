@@ -177,25 +177,25 @@
 
 @media screen and (max-width: 1199px) {
   .kc-section .kc-number {
-    top: 18px;
-    left: 18px;
-    font-size: 42px;
-}
-.kc-section .kc-head {
-    margin-bottom: 30px;
-}
-.kc-section .kc-title, .kc-section .kc-subtitle {
-    margin: 0 0 14px;
-}
-.kc-section .kc-step-title {
-    font-size: 24px;
-}
-.kc-section .kc-step-desc {
-    font-size: 16px;
-}
-.kc-section .kc-bottom {
-    margin: 70px 0 0;
-}
+      top: 18px;
+      left: 18px;
+      font-size: 42px;
+  }
+  .kc-section .kc-head {
+      margin-bottom: 30px;
+  }
+  .kc-section .kc-title, .kc-section .kc-subtitle {
+      margin: 0 0 14px;
+  }
+  .kc-section .kc-step-title {
+      font-size: 24px;
+  }
+  .kc-section .kc-step-desc {
+      font-size: 16px;
+  }
+  .kc-section .kc-bottom {
+      margin: 70px 0 0;
+  }
  .kc-section .kc-description {
       font-size: 18px;
   }
@@ -205,14 +205,21 @@
     padding-top: {{ section.settings.padding_top_mob }}px;
     padding-bottom: {{ section.settings.padding_bottom_mob }}px;
   }
-    .kc-section .kc-description {
-      font-size: 16px;
-    }
+  .kc-section .kc-description {
+    font-size: 16px;
+  }
 }
 @media screen and (max-width: 575px) {
   .kc-section .kc-bottom {
-    margin: 50px 0 0;
-}
+      margin: 50px 0 0;
+  }
+  .kc-section .kc-step-desc {
+      font-size: 15px;
+  }
+  .kc-section .kc-step-title {
+      margin: 15px 0 7px;
+      font-size: 22px;
+  }
 }
 
 {{ section.settings.custom_css }}
