@@ -20,35 +20,42 @@
         background-color: {{ section.settings.bg_color_night }};
     }
     {%- endif -%}
-  /* DAY MODE */
-    {% if section.settings.text_color_day != blank %}
-      body:not(.night-mode) .section-{{ section.id }} *,
-      body.day-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_day }};
-      }
-       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner p,
-      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
-        color: rgba({{ section.settings.text_color_day }}, 0.68);
-      }
-       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
-      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
-        color: {{ section.settings.text_color_day }};
-      }
-    {% endif %}
+ /* DAY MODE */
+{% if section.settings.text_color_day != blank %}
+  body:not(.night-mode) .section-{{ section.id }} *,
+  body.day-mode .section-{{ section.id }} * {
+    color: {{ section.settings.text_color_day }};
+  }
+
+  body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner,
+  body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner {
+    color: color-mix(in srgb, {{ section.settings.text_color_day }} 68%, transparent);
+  }
+
+  body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
+  body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
+    color: {{ section.settings.text_color_day }} !important;
+    opacity: 1 !important;
+  }
+{% endif %}
 
 
-    /* NIGHT MODE */
-    {% if section.settings.text_color_night != blank %}
-      body.night-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_night }};
-      }
-      body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
-        color: rgba({{ section.settings.text_color_night }}, 0.68);
-      }
-       body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
-        color: {{ section.settings.text_color_night }};
-      }
-    {% endif %}
+/* NIGHT MODE */
+{% if section.settings.text_color_night != blank %}
+  body.night-mode .section-{{ section.id }} * {
+    color: {{ section.settings.text_color_night }};
+  }
+
+  body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner {
+    color: color-mix(in srgb, {{ section.settings.text_color_night }} 68%, transparent);
+  }
+
+  body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
+    color: {{ section.settings.text_color_night }} !important;
+    opacity: 1 !important;
+  }
+{% endif %}
+
 
     #section-{{ section.id }} {
       padding-top: {{ section.settings.padding_top }}px;
