@@ -1,0 +1,555 @@
+{% comment %}
+  LEGAL / INFORMATION PAGE WITH STICKY TABLE OF CONTENTS
+  - Shopify OS 2.0 section
+  - No nested blocks
+  - Each top-level block = one TOC item + one content section
+  - Rich text inside each block supports sub-headings, paragraphs,
+    bullets, numbered lists, links and bold text
+  - No hard-coded color values; inherits theme colors
+{% endcomment %}
+
+<section
+  id="LegalToc-{{ section.id }}"
+  class="legal-toc"
+  data-legal-toc
+>
+  <div class="legal-toc__container page-width">
+    {% if section.blocks.size > 0 %}
+      <div class="legal-toc__layout">
+
+        {%- comment -%} LEFT NAVIGATION {%- endcomment -%}
+        <aside class="legal-toc__sidebar" data-legal-toc-sidebar>
+          <div class="legal-toc__sidebar-inner">
+            {% if section.settings.nav_title != blank %}
+              <div class="legal-toc__eyebrow">
+                {{ section.settings.nav_title | escape }}
+              </div>
+            {% endif %}
+
+            <nav class="legal-toc__nav" aria-label="{{ section.settings.nav_title | default: 'On this page' | escape }}">
+              <ul class="legal-toc__nav-list" role="list">
+                {% for block in section.blocks %}
+                  {% assign target_id = 'LegalToc-' | append: section.id | append: '-section-' | append: block.id %}
+
+                  <li class="legal-toc__nav-item" {{ block.shopify_attributes }}>
+                    <a
+                      href="#{{ target_id }}"
+                      class="legal-toc__nav-link{% if forloop.first %} is-active{% endif %}"
+                      data-legal-toc-link
+                      data-target="{{ target_id }}"
+                    >
+                      {{ block.settings.nav_label | default: block.settings.title | escape }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        {%- comment -%} CONTENT {%- endcomment -%}
+        <main class="legal-toc__content">
+          {% for block in section.blocks %}
+            {% assign target_id = 'LegalToc-' | append: section.id | append: '-section-' | append: block.id %}
+
+            <article
+              id="{{ target_id }}"
+              class="legal-toc__section"
+              data-legal-toc-section
+              data-target="{{ target_id }}"
+              {{ block.shopify_attributes }}
+            >
+              {% if block.settings.title != blank %}
+                <h2 class="legal-toc__title">
+                  {{ block.settings.title | escape }}
+                </h2>
+              {% endif %}
+
+              {% if block.settings.lead != blank %}
+                <div class="legal-toc__lead rte">
+                  {{ block.settings.lead }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.content != blank %}
+                <div class="legal-toc__body rte">
+                  {{ block.settings.content }}
+                </div>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </main>
+
+      </div>
+    {% else %}
+      <div class="legal-toc__empty">
+        Add a content section from the Theme Editor.
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #LegalToc-{{ section.id }} {
+    width: 100%;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__container {
+    width: 100%;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
+    column-gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+  }
+
+  /* LEFT NAV */
+  #LegalToc-{{ section.id }} .legal-toc__sidebar {
+    position: sticky;
+    top: var(--header-height, 24px);
+    align-self: start;
+    min-width: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
+    border-left: 1px solid currentColor;
+    padding-left: 15px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__eyebrow {
+    margin: 0 0 22px;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-align: left;
+    text-decoration: none;
+    text-transform: uppercase;
+    opacity: .58;
+    transition: opacity .2s ease;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-link:hover,
+  #LegalToc-{{ section.id }} .legal-toc__nav-link:focus-visible,
+  #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active {
+    opacity: 1;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -16px;
+    width: 2px;
+    height: calc(100% + 8px);
+    transform: translateY(-50%);
+    background: currentColor;
+  }
+
+  /* CONTENT */
+  #LegalToc-{{ section.id }} .legal-toc__content {
+    min-width: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__section {
+    scroll-margin-top: calc(var(--header-height, 24px) + 32px);
+    padding: 0 0 40px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
+    padding-top: 42px;
+    border-top: 1px solid currentColor;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__title {
+    margin: 0 0 20px;
+    font-size: clamp(24px, 2.2vw, 34px);
+    line-height: 1.18;
+    font-weight: 500;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__lead {
+    margin: 0 0 24px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body > *:first-child,
+  #LegalToc-{{ section.id }} .legal-toc__lead > *:first-child {
+    margin-top: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body > *:last-child,
+  #LegalToc-{{ section.id }} .legal-toc__lead > *:last-child {
+    margin-bottom: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body p {
+    margin: 0 0 17px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body h3 {
+    margin: 28px 0 12px;
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body h4 {
+    margin: 22px 0 10px;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body ul,
+  #LegalToc-{{ section.id }} .legal-toc__body ol {
+    margin: 0 0 20px;
+    padding-left: 22px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body li + li {
+    margin-top: 8px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__empty {
+    padding: 40px 0;
+  }
+
+  /* TABLET / MOBILE */
+  @media screen and (max-width: 749px) {
+    #LegalToc-{{ section.id }} .legal-toc__layout {
+      display: block;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__sidebar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 0 -20px 36px;
+      padding: 14px 20px;
+      overflow-x: auto;
+      background: inherit;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
+      border-left: 0;
+      padding-left: 0;
+      min-width: max-content;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__eyebrow {
+      margin-bottom: 12px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-list {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-link {
+      width: auto;
+      white-space: nowrap;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
+      display: none;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section {
+      scroll-margin-top: 110px;
+      padding-bottom: 32px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
+      padding-top: 34px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #LegalToc-{{ section.id }} .legal-toc__nav-link {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.querySelector('#LegalToc-{{ section.id }}');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
+    const links = Array.from(root.querySelectorAll('[data-legal-toc-link]'));
+    const sections = Array.from(root.querySelectorAll('[data-legal-toc-section]'));
+
+    if (!links.length || !sections.length) return;
+
+    const getHeaderOffset = () => {
+      const rootStyles = getComputedStyle(root);
+      const customHeaderHeight = parseFloat(rootStyles.getPropertyValue('--header-height')) || 0;
+      const header = document.querySelector('header, .shopify-section-header');
+      const headerHeight = header ? header.getBoundingClientRect().height : customHeaderHeight;
+
+      if (window.innerWidth <= 749) {
+        return Math.max(headerHeight, 90);
+      }
+
+      return Math.max(headerHeight, 24) + 24;
+    };
+
+    const setActive = (targetId) => {
+      links.forEach((link) => {
+        const active = link.dataset.target === targetId;
+        link.classList.toggle('is-active', active);
+
+        if (active) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const updateActiveFromScroll = () => {
+      const offset = getHeaderOffset();
+      let activeSection = sections[0];
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= offset + 8) {
+          activeSection = section;
+        }
+      });
+
+      if (activeSection) {
+        setActive(activeSection.dataset.target);
+      }
+    };
+
+    links.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const targetId = link.dataset.target;
+        const target = root.querySelector('#' + CSS.escape(targetId));
+
+        if (!target) return;
+
+        event.preventDefault();
+        setActive(targetId);
+
+        const top = target.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        window.scrollTo({
+          top,
+          behavior: reduceMotion ? 'auto' : 'smooth'
+        });
+
+        if (history.pushState) {
+          history.pushState(null, '', '#' + targetId);
+        }
+      });
+    });
+
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+
+      window.requestAnimationFrame(() => {
+        updateActiveFromScroll();
+        ticking = false;
+      });
+
+      ticking = true;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateActiveFromScroll);
+
+    const initialHash = window.location.hash.replace('#', '');
+    const initialTarget = initialHash ? root.querySelector('#' + CSS.escape(initialHash)) : null;
+
+    if (initialTarget) {
+      requestAnimationFrame(() => {
+        const top = initialTarget.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+        window.scrollTo({ top, behavior: 'auto' });
+        setActive(initialHash);
+      });
+    } else {
+      updateActiveFromScroll();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Legal page with TOC",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "nav_title",
+      "label": "Navigation title",
+      "default": "On this page"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content_section",
+      "name": "Content section",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Navigation"
+        },
+        {
+          "type": "text",
+          "id": "nav_label",
+          "label": "Left menu label",
+          "info": "This text appears in the left-side navigation.",
+          "default": "Our commitment"
+        },
+        {
+          "type": "header",
+          "content": "Main content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Main title",
+          "default": "1. Our commitment to trust and transparency"
+        },
+        {
+          "type": "richtext",
+          "id": "lead",
+          "label": "Lead / introduction",
+          "info": "Optional. Use this for the bold introductory paragraph shown below the main title."
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "info": "Use this single field for paragraphs, H3/H4 subheadings, bullet lists, numbered lists, bold text and links. This replaces nested blocks."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Legal page with TOC",
+      "blocks": [
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Our commitment",
+            "title": "1. Our commitment to trust and transparency"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Safety and standards",
+            "title": "2. Safety and standards"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Refunds and withdrawal",
+            "title": "3. Refunds, withdrawal and the 60-day guarantee"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Two-year guarantee",
+            "title": "4. Two-year legal guarantee of conformity"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Delivery",
+            "title": "5. Delivery"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Your plan",
+            "title": "6. Your plan"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Pricing",
+            "title": "7. Pricing"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Complaints",
+            "title": "8. Complaints"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Applicable law",
+            "title": "9. Applicable law"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "nav_label": "Withdrawal form",
+            "title": "10. Withdrawal form"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20
+}
+{% endschema %}
