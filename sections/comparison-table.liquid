@@ -493,19 +493,19 @@
       padding-bottom: 12px;  
     }
   }
-  @media screen and (max-width: 600px) {
+ @media screen and (max-width: 600px) {
+
     .comparison-table-wrapper {
-        margin-top: 55px;    
-    }    
-    .comparison-table { 
-      min-width: 820px;   
-    }    
-    .comparison-section__button-wrapper { 
-      left: calc(820px * 1.65 / 6.57); 
-      width: calc(820px * 1.17 / 6.57);
-      max-width: none;    
+        overflow-x: auto;
+        margin-top: 55px;
+        padding-bottom: 65px;
     }
-  }
+
+    .comparison-table {
+        min-width: 820px;
+    }
+
+}
 </style>
 
 {% schema %}
