@@ -20,41 +20,52 @@
         background-color: {{ section.settings.bg_color_night }};
     }
     {%- endif -%}
- /* DAY MODE */
+/* DAY MODE */
 {% if section.settings.text_color_day != blank %}
-  body:not(.night-mode) .section-{{ section.id }} *,
-  body.day-mode .section-{{ section.id }} * {
+
+  body:not(.night-mode) .section-{{ section.id }} *:not(a),
+  body.day-mode .section-{{ section.id }} *:not(a) {
     color: {{ section.settings.text_color_day }};
   }
 
   body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner,
   body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner {
-    color: color-mix(in srgb, {{ section.settings.text_color_day }} 68%, transparent);
+    color: color-mix(
+      in srgb,
+      {{ section.settings.text_color_day }} 68%,
+      transparent
+    );
   }
 
   body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
   body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
     color: {{ section.settings.text_color_day }} !important;
-    opacity: 1 !important;
   }
+
 {% endif %}
 
 
 /* NIGHT MODE */
 {% if section.settings.text_color_night != blank %}
-  body.night-mode .section-{{ section.id }} * {
+
+  body.night-mode .section-{{ section.id }} *:not(a) {
     color: {{ section.settings.text_color_night }};
   }
 
   body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner {
-    color: color-mix(in srgb, {{ section.settings.text_color_night }} 68%, transparent);
+    color: color-mix(
+      in srgb,
+      {{ section.settings.text_color_night }} 68%,
+      transparent
+    );
   }
 
   body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
     color: {{ section.settings.text_color_night }} !important;
-    opacity: 1 !important;
   }
+
 {% endif %}
+
 
 
     #section-{{ section.id }} {
