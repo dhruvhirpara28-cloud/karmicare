@@ -10,15 +10,6 @@
           background-color: {{ section.settings.bg_color_day }};
       }
   {%- endif -%}
-  {%- if section.settings.col_text_day != blank -%}
-      body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
-          color: {{ section.settings.col_text_day }};
-      }
-      body.day-mode .section-{{ section.id }} .comparison-table__cell,
-      body.day-mode .section-{{ section.id }} .comparison-table__cell span {
-          color: {{ section.settings.col_text_day }};
-      }
-  {%- endif -%}
 
     {%- if section.settings.bg_gradient_night != blank -%}
     body.night-mode .section-{{ section.id }} {
@@ -261,6 +252,56 @@
       "id": "company_info",
       "label": "Company / Legal Information",
       "default": "<p>KARMICA BV, trading as KARMICARE · Vriezestraat 28, 8000 Bruges, Belgium · VAT BE 0676.972.896 · EORI BE0676972896<br>care@karmicare.com · Last updated October 2026</p>"
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_day",
+      "label": "Text Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Night Mode Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color_night",
+      "label": "Text Color (Night)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)",
+      "default": "#191f38"
     },
     {
       "type": "header",
