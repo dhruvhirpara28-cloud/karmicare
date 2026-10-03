@@ -26,6 +26,14 @@
       body.day-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_day }};
       }
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner,
+      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner {
+        color: color-mix(in srgb, {{ section.settings.text_color_day }} 68%, transparent);
+      }
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
+      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
+        color: {{ section.settings.text_color_day }} !important;
+      }
     {% endif %}
 
 
