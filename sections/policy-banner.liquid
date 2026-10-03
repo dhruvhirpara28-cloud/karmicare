@@ -1,3 +1,65 @@
+<style>
+    {%- if section.settings.bg_gradient_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_day }};
+      }
+  {%- elsif section.settings.bg_color_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_day }};
+      }
+  {%- endif -%}
+  {%- if section.settings.col_text_day != blank -%}
+      body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
+          color: {{ section.settings.col_text_day }};
+      }
+      body.day-mode .section-{{ section.id }} .comparison-table__cell,
+      body.day-mode .section-{{ section.id }} .comparison-table__cell span {
+          color: {{ section.settings.col_text_day }};
+      }
+  {%- endif -%}
+
+    {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+    }
+    {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_night }};
+    }
+    {%- endif -%}
+  /* DAY MODE */
+    {% if section.settings.text_color_day != blank %}
+      body:not(.night-mode) .section-{{ section.id }} *,
+      body.day-mode .section-{{ section.id }} * {
+        color: {{ section.settings.text_color_day }};
+      }
+    {% endif %}
+
+
+    /* NIGHT MODE */
+    {% if section.settings.text_color_night != blank %}
+      body.night-mode .section-{{ section.id }} * {
+        color: {{ section.settings.text_color_night }};
+      }
+    {% endif %}
+
+    #section-{{ section.id }} {
+      padding-top: {{ section.settings.padding-top }}px;
+      padding-bottom: {{ section.settings.padding-bottom }}px;
+      color: {{ section.settings.text_color }};
+      background-color: {{ section.settings.bg_color }};
+      }
+
+      @media only screen and (max-width: 767px) {
+      #section-{{ section.id }} {
+          padding-top: {{ section.settings.padding-top-mobile }}px;
+          padding-bottom: {{ section.settings.padding-bottom-mobile }}px;
+      }
+      }
+</style>
+
 <section
   id="section-{{ section.id }}"
   class="consumer-rights section-{{ section.id }}"
@@ -65,10 +127,6 @@
 </section>
 
 <style>
-  #section-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-  }
 
   #section-{{ section.id }} .consumer-rights__container {
     width: 100%;
@@ -146,10 +204,6 @@
   }
 
   @media screen and (max-width: 767px) {
-    #section-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    }
 
     #section-{{ section.id }} .consumer-rights__container {
       padding: 0 18px;
