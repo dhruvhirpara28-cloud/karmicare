@@ -110,30 +110,32 @@
       <div class="consumer-rights__cards">
 
         {% for block in section.blocks %}
-          <div
-            class="consumer-rights__card"
-            {{ block.shopify_attributes }}
-          >
-
             {% if block.settings.card_title != blank %}
-              <div class="consumer-rights__card-title">
-                {{ block.settings.card_title }}
-              </div>
-            {% endif %}
+                <div
+                    class="consumer-rights__card"
+                    {{ block.shopify_attributes }}
+                >
 
-            {% if block.settings.card_description != blank %}
-              <div class="consumer-rights__card-description">
-                {{ block.settings.card_description }}
-              </div>
-            {% endif %}
+                    {% if block.settings.card_title != blank %}
+                    <div class="consumer-rights__card-title">
+                        {{ block.settings.card_title }}
+                    </div>
+                    {% endif %}
 
-            {% if block.settings.card_bottom_text != blank %}
-              <div class="consumer-rights__card-bottom">
-                {{ block.settings.card_bottom_text }}
-              </div>
-            {% endif %}
+                    {% if block.settings.card_description != blank %}
+                    <div class="consumer-rights__card-description">
+                        {{ block.settings.card_description }}
+                    </div>
+                    {% endif %}
 
-          </div>
+                    {% if block.settings.card_bottom_text != blank %}
+                    <div class="consumer-rights__card-bottom">
+                        {{ block.settings.card_bottom_text }}
+                    </div>
+                    {% endif %}
+                    
+                </div>
+            {% endif %}
         {% endfor %}
 
       </div>
