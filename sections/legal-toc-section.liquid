@@ -41,12 +41,12 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
       }
 
-      @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       #LegalToc-{{ section.id }} {
           padding-top: {{ section.settings.padding_top_mobile }}px;
           padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
       }
-      }
+}
 </style>
 
 <section
@@ -54,7 +54,7 @@
   class="legal-toc section-{{ section.id }}"
   data-legal-toc
 >
-  <div class="legal-toc__container page-width">
+  <div class="legal-toc__container">
     {% if section.blocks.size > 0 %}
       <div class="legal-toc__layout">
         {%- comment -%} LEFT NAVIGATION {%- endcomment -%}
