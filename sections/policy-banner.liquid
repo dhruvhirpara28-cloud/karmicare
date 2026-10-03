@@ -80,6 +80,11 @@
         {{ section.settings.company_info }}
       </div>
     {% endif %}
+    {% if section.settings.company_last_updated != blank %}
+      <div class="consumer-rights__company-info">
+        {{ section.settings.company_last_updated }}
+      </div>
+    {% endif %}
 
     {% if section.blocks.size > 0 %}
       <div class="consumer-rights__cards">
