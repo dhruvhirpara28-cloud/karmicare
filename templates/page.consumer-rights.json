@@ -16,9 +16,72 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "policy_banner_Pgpxip": {
+      "type": "policy-banner",
+      "blocks": {
+        "benefit_card_MptPUi": {
+          "type": "benefit_card",
+          "settings": {
+            "card_title": "14 days",
+            "card_description": "To change your mind",
+            "card_bottom_text": "Legal right · one-time orders"
+          }
+        },
+        "benefit_card_hiciT4": {
+          "type": "benefit_card",
+          "settings": {
+            "card_title": "60 days",
+            "card_description": "Money-back guarantee",
+            "card_bottom_text": "Karmicare promise · plans"
+          }
+        },
+        "benefit_card_3DXGyT": {
+          "type": "benefit_card",
+          "settings": {
+            "card_title": "14 days",
+            "card_description": "To receive your refund",
+            "card_bottom_text": "Legal right · same payment method"
+          }
+        },
+        "benefit_card_Q4tabr": {
+          "type": "benefit_card",
+          "settings": {
+            "card_title": "2 years",
+            "card_description": "Legal guarantee",
+            "card_bottom_text": "Legal right · every order"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_card_MptPUi",
+        "benefit_card_hiciT4",
+        "benefit_card_3DXGyT",
+        "benefit_card_Q4tabr"
+      ],
+      "name": "Policy Bannner",
+      "settings": {
+        "eyebrow": "LEGAL",
+        "heading": "Consumer Rights & Transparency Charter",
+        "description": "<p>Your rights under Belgian and EU law, together with the promises Karmicare adds on top.</p>",
+        "company_info": "<p>KARMICA BV, trading as KARMICARE · Vriezestraat 28, 8000 Bruges, Belgium · VAT BE 0676.972.896 · EORI BE0676972896</p>",
+        "text_color_day": "",
+        "bg_color_day": "",
+        "bg_gradient_day": "",
+        "card_bg_color_day": "#ffffff",
+        "text_color_night": "",
+        "bg_color_night": "",
+        "bg_gradient_night": "",
+        "card_bg_color_night": "#191f38",
+        "padding_top": 50,
+        "padding_bottom": 40,
+        "padding_top_mobile": 35,
+        "padding_bottom_mobile": 30
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "policy_banner_Pgpxip"
   ]
 }
