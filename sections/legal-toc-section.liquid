@@ -22,8 +22,8 @@
     {%- endif -%}
   /* DAY MODE */
     {% if section.settings.text_color_day != blank %}
-      body:not(.night-mode) .section-{{ section.id }} .legal-toc__body,
-      body.day-mode .section-{{ section.id }} .legal-toc__body {
+      body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p,
+      body.day-mode .section-{{ section.id }} .legal-toc__body p{
         color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
       }
       body:not(.night-mode) .section-{{ section.id }} .legal-toc__body strong,
@@ -39,7 +39,7 @@
 
     /* NIGHT MODE */
     {% if section.settings.text_color_night != blank %}
-      body.night-mode .section-{{ section.id }} .legal-toc__body {
+      body.night-mode .section-{{ section.id }} .legal-toc__body p{
         color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
     }
       body.night-mode .section-{{ section.id }} .legal-toc__body strong {
