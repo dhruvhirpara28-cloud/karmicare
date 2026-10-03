@@ -42,6 +42,12 @@
       body.night-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_night }};
       }
+      body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner{
+        color: color-mix(in srgb, {{ section.settings.text_color_day }} 68%, transparent);
+      }
+       body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
+        color: {{ section.settings.text_color_day }} !important;
+      }
     {% endif %}
 
     #section-{{ section.id }} {
@@ -173,10 +179,8 @@
     font-size: 15px;
     line-height: 20px;
     letter-spacing:0px;
-    opacity:0.68;
 }
 #section-{{ section.id }} .consumer-rights__company-info-inner a{
-    opacity:1 !important;
     text-decoration:underline;
 }
 
