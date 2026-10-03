@@ -30,6 +30,14 @@
       body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
        color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
       }
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card-bottom,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card-bottom,
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card-description ,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card-description,
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card-title,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card-title{
+        color: {{ section.settings.text_color_night }};
+    }
        body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
       body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
         color: {{ section.settings.text_color_day }};
