@@ -1,12 +1,75 @@
-{% comment %}
-  LEGAL / INFORMATION PAGE WITH STICKY TABLE OF CONTENTS
-  - Shopify OS 2.0 section
-  - No nested blocks
-  - Each top-level block = one TOC item + one content section
-  - Rich text inside each block supports sub-headings, paragraphs,
-    bullets, numbered lists, links and bold text
-  - No hard-coded color values; inherits theme colors
-{% endcomment %}
+<style>
+    {%- if section.settings.bg_gradient_day != blank -%}
+        body:not(.night-mode) .section-{{ section.id }},
+        body.day-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_day }};
+      }
+  {%- elsif section.settings.bg_color_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_day }};
+      }
+  {%- endif -%}
+
+    {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+        background: {{ section.settings.bg_gradient_night }};
+    }
+    {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+        background-color: {{ section.settings.bg_color_night }};
+    }
+    {%- endif -%}
+  /* DAY MODE */
+    {% if section.settings.text_color_day != blank %}
+      body:not(.night-mode) .section-{{ section.id }} *,
+      body.day-mode .section-{{ section.id }} * {
+        color: {{ section.settings.text_color_day }};
+      }
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner p,
+      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
+       color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+      }
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card-bottom,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card-bottom,
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card-description ,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card-description,
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card-title,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card-title{
+        color: {{ section.settings.text_color_night }};
+    }
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
+      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
+        color: {{ section.settings.text_color_day }};
+      }
+    {% endif %}
+
+
+    /* NIGHT MODE */
+    {% if section.settings.text_color_night != blank %}
+      body.night-mode .section-{{ section.id }} * {
+        color: {{ section.settings.text_color_night }};
+      }
+      body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
+       color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
+      }
+       body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
+        color: {{ section.settings.text_color_night }};
+      }
+    {% endif %}
+
+    #section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+
+      @media only screen and (max-width: 767px) {
+      #section-{{ section.id }} {
+          padding-top: {{ section.settings.padding_top_mobile }}px;
+          padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      }
+      }
+</style>
 
 <section
   id="LegalToc-{{ section.id }}"
