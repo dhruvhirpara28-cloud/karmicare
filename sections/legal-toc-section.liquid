@@ -24,6 +24,10 @@
     {% if section.settings.text_color_day != blank %}
       body:not(.night-mode) .section-{{ section.id }} *,
       body.day-mode .section-{{ section.id }} * {
+        color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+      }
+      body:not(.night-mode) .section-{{ section.id }} *,
+      body.day-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_day }};
       }
     {% endif %}
@@ -31,6 +35,12 @@
 
     /* NIGHT MODE */
     {% if section.settings.text_color_night != blank %}
+      body.night-mode .section-{{ section.id }} .legal-toc__body {
+        color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+    }
+      body.night-mode .section-{{ section.id }} .legal-toc__body strong {
+        color: {{ section.settings.text_color_night }};
+      }
       body.night-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_night }};
       }
