@@ -26,8 +26,8 @@
       body.day-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_day }};
       }
-       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner,
-      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner {
+       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner p,
+      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
         color: rgba({{ section.settings.text_color_day }}, 0.68);
       }
        body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
@@ -42,7 +42,7 @@
       body.night-mode .section-{{ section.id }} * {
         color: {{ section.settings.text_color_night }};
       }
-      body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner{
+      body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
         color: rgba({{ section.settings.text_color_night }}, 0.68);
       }
        body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
