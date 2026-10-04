@@ -2,44 +2,131 @@
   assign testimonials = product.metafields.custom.professional_testimonials.value
 -%}
 
+{%- capture slider_classes -%}
+  {% if block.settings.slider_mobile %} slider--mobile{% endif %}
+  {% if block.settings.slider_tablet %} slider--tablet{% endif %}
+  {% if block.settings.slider_laptop %} slider--desktop{% endif %}
+  {% if block.settings.slider_desktop %} slider--desktop{% endif %}
+{%- endcapture -%}
+
+{%- assign show_slider = false -%}
+{%- if block.settings.slider_mobile
+  or block.settings.slider_tablet
+  or block.settings.slider_laptop
+  or block.settings.slider_desktop
+-%}
+  {%- assign show_slider = true -%}
+{%- endif -%}
+
 {%- if testimonials != blank -%}
-  {{ 'professional-testimonials.css' | asset_url | stylesheet_tag }}
+  {{ 'section-trusted-professionals.css' | asset_url | stylesheet_tag }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    {%- if block.settings.card_bg_color_day != blank -%}
+      #Testimonials-{{ block.id }} .trusted-professionals__card-content {
+        background-color: {{ block.settings.card_bg_color_day }};
+      }
+    {%- endif -%}
+    {%- if block.settings.card_bg_color_night != blank -%}
+      body.night-mode #Testimonials-{{ block.id }} .trusted-professionals__card-content {
+        background-color: {{ block.settings.card_bg_color_night }};
+      }
+    {%- endif -%}
+    .kc-professional-testimonials p{font-size:var(--font-body-small-size);}
+    .kc-professional-testimonials h6{font-weight:var(--font-600-weight);}
+  </style>
 
   <div
-    class="kc-professional-testimonials"
-    style="--heading-color-day: {{ block.settings.heading_color_day | default: '#191f38' }}; --heading-color-night: {{ block.settings.heading_color_night | default: '#ffffff' }};"
+    id="Testimonials-{{ block.id }}"
+    class="kc-professional-testimonials trusted-professionals"
+    style="--heading-color-day: {{ block.settings.heading_color_day }}; padding-top: 0; padding-bottom: 0; background-color: {{ block.settings.bg_color_day | default: 'transparent' }};"
   >
-    <h3 class="kc-testimonials-heading">
-      {{ block.settings.heading | default: 'Approved by nature. Used by professionals' }}
-    </h3>
+    <div class="trusted-professionals__inner" style="padding: 0;">
+      <div class="trusted-professionals__header" style="text-align: left; margin-bottom: 2rem;">
+        <h2 style="font-size: 2rem; color: var(--heading-color-day); margin: 0;">
+          {{ block.settings.heading }}
+        </h2>
+      </div>
 
-    <div class="kc-testimonials-grid">
-      {%- for testimonial in testimonials -%}
-        <div class="kc-testimonial-card-item">
-          {%- if testimonial.image != blank -%}
-            <div class="kc-testimonial-card-bg">
-              {{
-                testimonial.image
-                | image_url: width: 400
-                | image_tag: class: 'kc-testimonial-card-img', loading: 'lazy'
-              }}
-              <div
-                class="kc-testimonial-card-overlay"
-                style="--overlay-color-day: {{ block.settings.overlay_color_day | default: '#000000' }}; --overlay-color-night: {{ block.settings.overlay_color_night | default: '#ffffff' }}; --overlay-opacity: {{ block.settings.overlay_opacity | default: 40 | divided_by: 100.0 }};"
-              >&nbsp;</div>
+      {%- if show_slider -%}
+        <slider-component class="slider-mobile-gutter">
+      {%- endif -%}
+      <ul
+        class="trusted-professionals__grid{% if show_slider %} slider{{ slider_classes }}{% endif %}"
+        id="Slider-Testimonials-{{ block.id }}"
+        role="list"
+        style="--cols-desktop: {{ block.settings.columns_desktop | default: 3 }}; --cols-laptop: {{ block.settings.columns_laptop | default: 3 }}; --cols-tablet: {{ block.settings.columns_tablet | default: 2 }}; --cols-mobile: {{ block.settings.columns_mobile | default: 1 }};"
+      >
+        {%- for testimonial in testimonials -%}
+          <li
+            id="Slide-Testimonial-{{ block.id }}-{{ forloop.index }}"
+            class="trusted-professionals__card slider__slide"
+          >
+            <div class="trusted-professionals__card-image">
+              {%- if testimonial.image != blank -%}
+                {{ testimonial.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
             </div>
-          {%- endif -%}
-          <div class="kc-testimonial-card-content">
-            <div class="kc-testimonial-card-desc">
-              {{ testimonial.description | metafield_tag }}
+
+            <div class="trusted-professionals__card-content">
+              {%- if testimonial.description != blank -%}
+                <div class="trusted-professionals__card-quote">
+                  {{ testimonial.description | metafield_tag }}
+                </div>
+              {%- endif -%}
+              {%- if testimonial.name != blank -%}
+                <h6>{{ testimonial.name }}</h6>
+              {%- endif -%}
+              {%- if testimonial.designation != blank -%}
+                <p>{{ testimonial.designation }}</p>
+              {%- endif -%}
             </div>
-            <div class="kc-testimonial-card-author">
-              <span class="kc-testimonial-card-name">{{ testimonial.name }}</span>
-              <p class="kc-testimonial-card-designation">{{ testimonial.designation }}</p>
-            </div>
-          </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if show_slider and block.settings.show_slider_arrows -%}
+        <div class="slider-buttons no-js-hidden" style="justify-content: center; margin-top: 1rem;">
+          <button
+            type="button"
+            class="slider-button slider-button--prev"
+            name="previous"
+            aria-label="{{ 'general.slider.previous_slide' | t }}"
+          >
+            <span class="svg-wrapper">
+              <svg
+                style="transform: rotate(180deg);"
+                xmlns="http://www.w3.org/2000/svg"
+                width="27"
+                height="27"
+                viewBox="0 0 27 27"
+                fill="none"
+              >
+                <path d="M1.75061 13.4167H25.084M13.4173 25.0833L25.084 13.4167L13.4173 1.75" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <button
+            type="button"
+            class="slider-button slider-button--next"
+            name="next"
+            aria-label="{{ 'general.slider.next_slide' | t }}"
+          >
+            <span class="svg-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                <path d="M1.75061 13.4167H25.084M13.4173 25.0833L25.084 13.4167L13.4173 1.75" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
         </div>
-      {%- endfor -%}
+      {%- endif -%}
+
+      {%- if show_slider -%}
+        </slider-component>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}

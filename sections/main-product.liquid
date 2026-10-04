@@ -340,7 +340,15 @@
                 {%- when 'treatment_journey' -%}
                   {% render 'treatment-journey', block: block, product: product %}
                 {%- when 'professional_testimonials' -%}
-                  {% render 'professional-testimonials', block: block, product: product %}
+                  {%- if block.settings.show_under_media -%}
+                    <div class="medium-hide large-up-hide">
+                      {% render 'professional-testimonials', block: block, product: product %}
+                    </div>
+                  {%- else -%}
+                    <div>
+                      {% render 'professional-testimonials', block: block, product: product %}
+                    </div>
+                  {%- endif -%}
                 {%- when 'mission_card' -%}
                   {% render 'mission-card', block: block, product: product %}
                 {%- when 'product_faq' -%}
@@ -1019,8 +1027,23 @@
         },
         {
           "type": "color",
-          "id": "header_color",
-          "label": "Header Text Color"
+          "id": "background_color_day",
+          "label": "Background Color (Day)"
+        },
+        {
+          "type": "color",
+          "id": "background_color_night",
+          "label": "Background Color (Night)"
+        },
+        {
+          "type": "color",
+          "id": "header_color_day",
+          "label": "Header Text Color (Day)"
+        },
+        {
+          "type": "color",
+          "id": "header_color_night",
+          "label": "Header Text Color (Night)"
         },
         {
           "type": "color",
@@ -2928,54 +2951,220 @@
       "settings": [
         {
           "type": "checkbox",
-          "id": "default_to_subscription",
-          "label": "Default to first subscription",
-          "default": true
+          "id": "show_under_media",
+          "label": "Show under product media (desktop)",
+          "default": false
         },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading Text",
-          "default": "Approved by nature. Used by professionals"
-        },
-        {
-          "type": "color",
-          "id": "heading_color_day",
-          "label": "Heading Color (Day)",
-          "default": "#191f38"
-        },
-        {
-          "type": "color",
-          "id": "heading_color_night",
-          "label": "Heading Color (Night)",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "overlay_color_day",
-          "label": "Overlay Color (Day)",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "overlay_color_night",
-          "label": "Overlay Color (Night)",
-          "default": "#ffffff"
-        },
-        {
-          "type": "range",
-          "id": "overlay_opacity",
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "%",
-          "label": "Overlay Opacity",
-          "default": 40
-        }
+      {
+      "type": "header",
+      "content": "Top / Bottom Border"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_top",
+      "label": "Show Top Border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_bottom",
+      "label": "Show Bottom Border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_day",
+      "label": "Background Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_night",
+      "label": "Background Color (Night)"
+    },
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_bold_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Heading Bold Text Opacity",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Footer Content"
+    },
+    {
+      "type": "richtext",
+      "id": "bottom_text",
+      "label": "Bottom Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_day",
+      "label": "Card Background Color (Day)"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color_night",
+      "label": "Card Background Color (Night)"
+    },
+    {
+      "type": "header",
+      "content": "Grid & Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on Desktop (1200px+)",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_desktop",
+      "label": "Enable Slider on Desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_laptop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on Laptop (990px - 1199px)",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_laptop",
+      "label": "Enable Slider on Laptop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on Tablet (750px - 989px)",
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_tablet",
+      "label": "Enable Slider on Tablet",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile (< 750px)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.3", "label": "1.3" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.8", "label": "1.8" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
       ]
     },
     {
-      "type": "mission_card",
+      "type": "checkbox",
+      "id": "slider_mobile",
+    "label": "Enable Slider on Mobile",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_slider_arrows",
+    "label": "Show Slider Arrows",
+    "default": true
+  },
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "padding_top_desktop",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "unit": "px",
+    "label": "Padding Top (Desktop)",
+    "default": 64
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom_desktop",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "unit": "px",
+    "label": "Padding Bottom (Desktop)",
+    "default": 64
+  },
+  {
+    "type": "range",
+    "id": "padding_top_mobile",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "unit": "px",
+    "label": "Padding Top (Mobile)",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom_mobile",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "unit": "px",
+    "label": "Padding Bottom (Mobile)",
+    "default": 40
+  }
+]
+},
+{
+  "type": "mission_card",
       "name": "Mission Card",
       "limit": 1
     },
@@ -3224,3 +3413,8 @@
   ]
 }
 {% endschema %}
+
+
+
+
+

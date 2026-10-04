@@ -131,18 +131,6 @@
             "disclaimer_text": "* What members report with continued use — individual experiences vary."
           }
         },
-        "professional_testimonials_block": {
-          "type": "professional_testimonials",
-          "settings": {
-            "default_to_subscription": true,
-            "heading": "Approved by nature. Used by professionals",
-            "heading_color_day": "#191f38",
-            "heading_color_night": "#ffffff",
-            "overlay_color_day": "#000000",
-            "overlay_color_night": "#ffffff",
-            "overlay_opacity": 15
-          }
-        },
         "product_faq_block": {
           "type": "product_faq",
           "settings": {
@@ -157,16 +145,50 @@
           "type": "info_card",
           "settings": {
             "default_to_subscription": true,
-            "header_text": "OUR COMMITMENT TO YOU",
-            "body_text": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
-            "footer_text": "",
-            "header_color": "#7fb9ff",
+            "header_text": "More than two formulas",
+            "body_text": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+            "footer_text": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+            "background_color_day": "#F2F8FF",
+            "background_color_night": "#191F38",
+            "header_color_day": "#7FB9FF",
+            "header_color_night": "#7FB9FF",
             "border_color": "#7fb9ff",
             "font_size_desktop": 14,
             "font_size_mobile": 12,
-            "border_radius": 16,
-            "padding_vertical": 20,
-            "padding_horizontal": 24
+            "border_radius": 12,
+            "padding_vertical": 16,
+            "padding_horizontal": 16
+          }
+        },
+        "professional_testimonials_block": {
+          "type": "professional_testimonials",
+          "settings": {
+            "show_under_media": true,
+            "show_border_top": false,
+            "show_border_bottom": false,
+            "bg_color_day": "",
+            "bg_color_night": "",
+            "subheading": "",
+            "heading": "Trusted by professionals",
+            "heading_bold_opacity": 70,
+            "bottom_text": "",
+            "button_label": "",
+            "button_link": "",
+            "card_bg_color_day": "#fffbf6",
+            "card_bg_color_night": "#191f38",
+            "columns_desktop": 4,
+            "slider_desktop": true,
+            "columns_laptop": 3,
+            "slider_laptop": true,
+            "columns_tablet": 2,
+            "slider_tablet": true,
+            "columns_mobile": "1.3",
+            "slider_mobile": true,
+            "show_slider_arrows": true,
+            "padding_top_desktop": 64,
+            "padding_bottom_desktop": 64,
+            "padding_top_mobile": 40,
+            "padding_bottom_mobile": 40
           }
         },
         "sticky_cart_block": {
@@ -194,10 +216,10 @@
         "buy_buttons",
         "icon_with_text_xhaDGB",
         "treatment_journey_block",
-        "professional_testimonials_block",
         "product_faq_block",
         "mission_card_block",
         "info_card_FnBcaN",
+        "professional_testimonials_block",
         "sticky_cart_block"
       ],
       "settings": {
@@ -224,50 +246,149 @@
         "padding_bottom": 60
       }
     },
-    "product_compare_plans_gz9xxx": {
-      "type": "product-compare-plans",
-      "name": "Product Compare Plans",
+    "trusted_professionals_HAqYth": {
+      "type": "trusted-professionals",
+      "blocks": {
+        "card_h8d3WL": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
+            "heading": "Dr. Stephanie Spreuwers",
+            "text": "Functional Dentist, kPNI Therapist",
+            "hover_text": "<p>Quote placeholder - use only a real, written and approved quote from this professional.</p>"
+          }
+        },
+        "card_jrLPVC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
+            "heading": "Dr. Stephanie Spreuwers",
+            "text": "Functional Dentist, kPNI Therapist",
+            "hover_text": "<p>Quote placeholder - use only a real, written and approved quote from this professional.</p>"
+          }
+        },
+        "card_jcnr7Q": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Mariama_Banjai.png",
+            "heading": "Mariama Banjai",
+            "text": "Dental Hygienist, Oral Care Quality Manager",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_8dRing": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Leen_Ponet.png",
+            "heading": "Leen Ponet",
+            "text": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_HFdkaD": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Iveta_Plesa_Rutule.png",
+            "heading": "Dr. Iveta Pleša Rutule",
+            "text": "Holistic Dentist",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_Ah46TM": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Kris_Sienaert.png",
+            "heading": "Dr. Kris Sienaert",
+            "text": "Former GP, Lifestyle Medicine",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_CtQgU9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Sietske_Hamelink.png",
+            "heading": "Sietske Hamelink",
+            "text": "Nutritional Therapist, Menstrual Cycle Expert",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        },
+        "card_qAPajg": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Kim_Verlot.png",
+            "heading": "Kim Verlot",
+            "text": "Breathing Coach, Heart Coherence Specialist",
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_h8d3WL",
+        "card_jrLPVC",
+        "card_jcnr7Q",
+        "card_8dRing",
+        "card_HFdkaD",
+        "card_Ah46TM",
+        "card_CtQgU9",
+        "card_qAPajg"
+      ],
+      "name": "Trusted Professionals",
       "settings": {
-        "eyebrow": "{{ product.metafields.custom.compare_table_header_footer.value.small_heading.value }}",
-        "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
-        "subtitle": "<p>{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}</p>",
-        "footer_text": "<p>{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}</p>",
-        "color_scheme_day": "",
-        "color_scheme_night": "",
+        "show_border_top": false,
+        "show_border_bottom": false,
+        "bg_color_day": "rgba(0,0,0,0)",
+        "bg_color_night": "#191f38",
+        "subheading": "APPROVED BY NATURE",
+        "heading": "Trusted by professionals <strong>who look beyond the teeth</strong>",
+        "heading_bold_opacity": 70,
+        "bottom_text": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
+        "button_label": "REQUEST A PRACTITIONER SAMPLE",
+        "button_link": "",
+        "card_bg_color_day": "#fffbf6",
+        "card_bg_color_night": "#191f38",
+        "columns_desktop": 4,
+        "slider_desktop": true,
+        "columns_laptop": 3,
+        "slider_laptop": true,
+        "columns_tablet": 2,
+        "slider_tablet": true,
+        "columns_mobile": "1.3",
+        "slider_mobile": true,
+        "show_slider_arrows": false,
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80,
-        "padding_top_mobile": 50,
-        "padding_bottom_mobile": 50
+        "padding_top_mobile": 52,
+        "padding_bottom_mobile": 52
       }
     },
-    "disclosures": {
-      "type": "disclosures",
+    "chronobiology_clock_karmicare": {
+      "type": "chronobiology-clock-karmicare",
       "settings": {
-        "heading": "Disclosures",
-        "heading_size": "h2",
-        "open_by_default": false,
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 0
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
+        "eyebrow": "CHRONOBIOLOGY",
+        "title": "Your mouth runs on a 24-hour clock.",
+        "heading_tag": "h2",
+        "description": "Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00.",
+        "morning_badge": "≈ 06:40 · Neisseria peaks",
+        "morning_title": "Your mouth wakes up",
+        "morning_text": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
+        "night_badge": "≈ 22:00 · Fusobacterium peaks",
+        "night_title": "Your mouth switches to repair",
+        "night_text": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
+        "hint_label": "EXPLORE YOUR DAILY RHYTHM",
+        "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
+        "footer_link_text": "Read the science",
+        "footer_link": "",
+        "link_color": "#7fb9ff",
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "text_color_day": "#191f38",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)",
+        "text_color_night": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 44,
+        "padding_bottom_mobile": 44
       }
     },
     "how_it_works_steps_aAgVmF": {
@@ -361,14 +482,190 @@
         "padding-top-mobile": 40,
         "padding-bottom-mobile": 40
       }
+    },
+    "research_behind_system_EkjATL": {
+      "type": "research-behind-system",
+      "blocks": {
+        "card_bDxUVT": {
+          "type": "card",
+          "settings": {
+            "subheading": "NANO-HYDROXYAPATITE",
+            "heading": "Nano-HAp sealed 98% of open dentine tubules.",
+            "subtext": "Human dentine discs - 7 days",
+            "result_label": "RESULT",
+            "result_text": "98% occlusion vs 82% and 65% for two other desensitising technologies",
+            "method_label": "METHOD",
+            "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
+            "link_label": "Kulal et al. · 2016 · J Clin Diagn Res",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo.png",
+            "image": "shopify://shop_images/Picture_1.png",
+            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+          }
+        },
+        "card_yMiD9D": {
+          "type": "card",
+          "settings": {
+            "subheading": "ORAL–SLEEP CONNECTION",
+            "heading": "Poorer oral health was linked with poorer sleep.",
+            "subtext": "36,559 people · 8 studies",
+            "result_label": "RESULT",
+            "result_text": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
+            "method_label": "METHOD",
+            "method_text": "Meta-analysis of 8 studies, 2015–2023.",
+            "link_label": "Lei & Hu · 2025 · Biomedical Reports",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo-2.png",
+            "image": "shopify://shop_images/Sleep_airway.png",
+            "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
+          }
+        },
+        "card_fmFMFd": {
+          "type": "card",
+          "settings": {
+            "subheading": "NANO-HYDROXYAPATITE",
+            "heading": "Nano-HAp sealed 98% of open dentine tubules.",
+            "subtext": "Human dentine discs - 7 days",
+            "result_label": "RESULT",
+            "result_text": "98% occlusion vs 82% and 65% for two other desensitising technologies",
+            "method_label": "METHOD",
+            "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
+            "link_label": "Kulai Et Al. - 2016",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo-2.png",
+            "image": "shopify://shop_images/Picture_1.png",
+            "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
+          }
+        }
+      },
+      "block_order": [
+        "card_bDxUVT",
+        "card_yMiD9D",
+        "card_fmFMFd"
+      ],
+      "name": "Research Behind System",
+      "settings": {
+        "subheading": "CLINICALLY BACKED ORAL CARE",
+        "heading": "The research behind the system",
+        "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
+        "button_label": "Explore the full evidence base",
+        "button_link": "",
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "text_color_day": "",
+        "card_bg_color_day": "#ffffff",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)",
+        "text_color_night": "",
+        "card_bg_color_night": "#191f38",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "show_border_top": false,
+        "show_border_bottom": false,
+        "slider_desktop": true,
+        "slider_laptop": false,
+        "slider_tablet": false,
+        "slider_mobile": true,
+        "columns_desktop": "1.9",
+        "columns_laptop": "2",
+        "columns_tablet": "1",
+        "columns_mobile": "1.2"
+      }
+    },
+    "product_compare_plans_gz9xxx": {
+      "type": "product-compare-plans",
+      "name": "Product Compare Plans",
+      "settings": {
+        "eyebrow": "{{ product.metafields.custom.compare_table_header_footer.value.small_heading.value }}",
+        "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
+        "subtitle": "<p>{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}</p>",
+        "footer_text": "<p>{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}</p>",
+        "color_scheme_day": "",
+        "color_scheme_night": "",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
+      }
+    },
+    "featured_product_Eb93Xa": {
+      "type": "featured-product",
+      "blocks": {
+        "title_GDDYEK": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h2"
+          }
+        },
+        "loop_subscriptions_gPKypi": {
+          "type": "loop_subscriptions",
+          "settings": {
+            "only_first_subscription": true,
+            "default_to_subscription": true,
+            "welcome_kit_products": [
+              "morning-toothbrush",
+              "evening-toothbrush",
+              "whitening-charcoal-dental-floss"
+            ],
+            "pricing_summary_care_credit_title": "Care Credits back",
+            "subscription_title": "<strong>Awake & Asleep AM/PM Oral Care System</strong>&nbsp;",
+            "shipping_text": "Shipping",
+            "shipping_value_html": "<del>Varies</del> <strong>Free</strong>",
+            "care_credit_text_1": "10% / order",
+            "care_credit_text_2": "10% each purchase",
+            "per_brushing_text": "per brushing"
+          }
+        },
+        "buy_buttons_Ffxhap": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "show_add_to_cart": false,
+            "show_custom_button": true,
+            "custom_button_text": "Begin your 60-day ritual",
+            "redirect_to_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "title_GDDYEK",
+        "loop_subscriptions_gPKypi",
+        "buy_buttons_Ffxhap"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "karmicare-biorhythmic-oral-care-system",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "remove_first_media_bg": false,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 52,
+        "padding_bottom_mobile": 52,
+        "bg_color_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "bg_color_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)"
+      }
     }
   },
   "order": [
     "main",
-    "product_compare_plans_gz9xxx",
-    "disclosures",
-    "related-products",
+    "trusted_professionals_HAqYth",
+    "chronobiology_clock_karmicare",
     "how_it_works_steps_aAgVmF",
-    "comparison_table_r8CDbT"
+    "comparison_table_r8CDbT",
+    "research_behind_system_EkjATL",
+    "product_compare_plans_gz9xxx",
+    "featured_product_Eb93Xa"
   ]
 }
