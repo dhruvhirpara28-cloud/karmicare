@@ -86,11 +86,6 @@
             "testimonial_button_text": "2× RETURN ON CARE"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "disabled": true,
-          "settings": {}
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -148,11 +143,15 @@
             "overlay_opacity": 15
           }
         },
-        "mission_card_block": {
-          "type": "mission_card",
+        "product_faq_block": {
+          "type": "product_faq",
           "settings": {
             "default_to_subscription": true
           }
+        },
+        "mission_card_block": {
+          "type": "mission_card",
+          "settings": {}
         },
         "info_card_FnBcaN": {
           "type": "info_card",
@@ -168,12 +167,6 @@
             "border_radius": 16,
             "padding_vertical": 20,
             "padding_horizontal": 24
-          }
-        },
-        "product_faq_block": {
-          "type": "product_faq",
-          "settings": {
-            "default_to_subscription": true
           }
         },
         "sticky_cart_block": {
@@ -197,15 +190,14 @@
         "highlights_slider_9wAjAb",
         "variant_picker",
         "loop_subscriptions_WEk4XJ",
-        "quantity_selector",
         "price",
         "buy_buttons",
         "icon_with_text_xhaDGB",
         "treatment_journey_block",
         "professional_testimonials_block",
+        "product_faq_block",
         "mission_card_block",
         "info_card_FnBcaN",
-        "product_faq_block",
         "sticky_cart_block"
       ],
       "settings": {
@@ -223,10 +215,10 @@
         "enable_video_looping": false,
         "remove_first_media_bg": true,
         "bg_color_day": "",
-        "bg_gradient_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
         "text_color_day": "",
         "bg_color_night": "",
-        "bg_gradient_night": "",
+        "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);",
         "text_color_night": "",
         "padding_top": 40,
         "padding_bottom": 60

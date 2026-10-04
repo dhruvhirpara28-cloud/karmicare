@@ -14,11 +14,11 @@
 }
 
 .kc-faq-item:first-child {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(var(--color-foreground), 0.2);
 }
 
 .kc-faq-item {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
 }
 
 .kc-faq-block.pdp {
@@ -32,7 +32,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--text);
   transition: color 0.2s ease;
 }
 
@@ -40,29 +39,32 @@
   display: none;
 }
 
-.kc-faq-summary:hover {
-  color: var(--accent);
-}
+
 
 .kc-faq-summary .kc-faq-glyph {
   font-weight: 200;
   font-size: 2.2rem;
-  color: var(--accent);
   transition: transform .25s ease;
   width: 24px;
   text-align: center;
   line-height: 1;
 }
 
-.kc-faq-item[open] .kc-faq-summary .kc-faq-glyph {
-  transform: rotate(45deg);
+.kc-faq-glyph .minus {
+  display: none;
+}
+
+.kc-faq-item[open] .kc-faq-glyph .plus {
+  display: none;
+}
+
+.kc-faq-item[open] .kc-faq-glyph .minus {
+  display: block;
 }
 
 .kc-faq-body {
-  padding: 0 0 2.6rem;
+  padding: 0 0 2rem;
   font-size: var(--font-body-small-size);
-  line-height: 1.65;
-  color: var(--body);
 }
 
 .kc-faq-body p {
@@ -75,11 +77,12 @@
 
 .kc-faq-description {
   margin-bottom: 1rem;
+  font-weight: var(--font-300-weight);
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
 }
 
-.kc-faq-section-content {
-  font-size: var(--font-body-small-size);
-  color: var(--body);
+.kc-faq-description a {
+  text-decoration: none;
 }
 
 /* ============================================================
@@ -89,8 +92,15 @@
 .bf-differentiators {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
-  margin: 6px 0 18px;
+  gap: var(--gap-xl);
+  margin: 5px 0;
+}
+
+.bf-foundation {
+  grid-column: 1 / -1;
+  position: relative;
+  border-radius: 10px;
+  margin-top: 2px;
 }
 
 @media screen and (min-width: 600px) {
@@ -99,110 +109,38 @@
   }
 }
 
-.bf-diff-card {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 14px 12px;
-}
-
-.bf-diff-card .diff-title {
-  font-weight: var(--font-700-weight);
-  font-size: var(--fs-label);
-  letter-spacing: 0.01em;
-  color: var(--accent-deep);
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.bf-diff-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.bf-diff-card li {
-  font-size: var(--fs-label);
-  color: var(--text);
-  padding-left: 16px;
-  position: relative;
-  line-height: var(--lh-label);
-}
-
-.bf-diff-card li::before {
-  content: "★";
-  color: var(--accent);
-  position: absolute;
-  left: 0;
-  top: 1px;
-  font-size: var(--fs-label);
-}
-
 .bf-foundation {
   grid-column: 1 / -1;
   position: relative;
-  margin-top: 2px;
-  padding: 14px 15px 13px;
   border-radius: 10px;
-  background: var(--surface-3);
-  border: 1px solid var(--border);
+  margin-top: 2px;
 }
 
-.bf-foundation-tag {
-  position: absolute;
-  top: -1px;
-  left: 22%;
-  width: 56%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent);
-  opacity: 0.5;
-}
-
+.bf-diff-card .diff-title,
 .bf-foundation-label {
-  font-weight: var(--font-700-weight);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--accent-deep);
+  font-weight: var(--font-500-weight);
   margin-bottom: 10px;
+  letter-spacing: var(--kc-responsive-all-letter-spacing);
 }
 
+.bf-diff-card ul,
 .bf-foundation ul {
-  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
-}
-
-.bf-foundation li {
-  color: var(--text);
-  padding-left: 16px;
+  gap: var(--gap-xs);
   position: relative;
-  line-height: var(--lh-label);
+  left: 16px;
 }
 
-.bf-foundation li::before {
-  content: "◆";
-  color: var(--accent);
-  position: absolute;
-  left: 0;
-  top: 1px;
-  font-size: 10px;
-}
+
 
 /* ============================================================
    INCI Block & Ingredients Lists
    ============================================================ */
 
 .bf-inci-block {
-  font-family: var(--grot);
-  font-size: var(--fs-label);
-  color: var(--muted);
-  line-height: var(--lh-body-snug);
   letter-spacing: 0.01em;
   margin-top: 14px;
   padding-top: 2px;
@@ -212,17 +150,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 5px;
+  gap: var(--gap-xs);
   cursor: pointer;
   list-style: none;
   padding: 4px 0 2px;
-  font-family: var(--grot);
-  font-weight: var(--font-700-weight);
-  font-size: var(--fs-caption);
-  line-height: var(--lh-label-tight);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--kc-responsive-all-letter-spacing);
   text-transform: uppercase;
-  color: var(--accent);
+  text-decoration: underline;
+  text-underline-position: under;
 }
 
 .bf-inci-block .inci-acc .inci-chev {
@@ -239,22 +174,16 @@
 
 .bf-inci-block .inci-acc .inci-body {
   padding-top: 10px;
-  color: var(--body);
 }
 
 .bf-inci-block .inci-label {
   display: inline-block;
-  font-weight: var(--font-700-weight);
-  font-size: var(--fs-label);
-  letter-spacing: 0.01em;
-  color: var(--text);
   margin-right: 6px;
 }
 
 .bf-inci-block .inci-note {
   margin-top: 10px;
   font-style: italic;
-  color: var(--muted);
 }
 
 /* ============================================================
@@ -262,12 +191,7 @@
    ============================================================ */
 
 .acc-tags-label {
-  font-family: var(--grot);
-  font-size: var(--fs-caption);
-  font-weight: var(--font-700-weight);
-  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted);
   margin: 14px 0 8px;
 }
 
@@ -282,23 +206,16 @@
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 26px;
-  padding: 0 9px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: transparent;
-  font-size: var(--fs-label);
-  line-height: var(--lh-label);
+  gap: var(--gap-xs);
+  border-radius: var(--secondary-border-radius);
   letter-spacing: 0;
   white-space: nowrap;
-  color: var(--body);
+  border: 1.5px solid rgb(var(--color-foreground));
+  padding: 6px 8px;
+  text-decoration: underline;
+  text-decoration-style: wavy;
 }
 
-.acc-tag.is-allergen {
-  color: var(--muted);
-  font-weight: var(--font-400-weight);
-}
 
 .acc-tag.has-tip {
   position: relative;
@@ -314,15 +231,11 @@
   display: block;
   width: 258px;
   max-width: 258px;
-  font-size: var(--fs-md);
   position: absolute;
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) translateY(2px);
   padding: 12px 14px;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
   border-radius: 10px;
   white-space: normal;
   word-break: normal;
@@ -342,7 +255,6 @@
   left: 50%;
   margin-left: -6px;
   border: 6px solid transparent;
-  border-top-color: var(--surface);
 }
 
 .acc-tag.has-tip:hover .info-tip-popover {
@@ -383,7 +295,6 @@
   width: 64px;
   height: 64px;
   margin: 0 auto 10px;
-  color: var(--accent-deep);
   border-radius: 50%;
 }
 
@@ -394,11 +305,7 @@
 }
 
 .bf-step .label {
-  font-size: var(--fs-body);
-  color: var(--text);
-  letter-spacing: -0.1px;
   margin-bottom: 4px;
-  font-weight: var(--font-600-weight);
 }
 
 .bf-step .desc {
@@ -417,21 +324,16 @@
 .rda-tbl {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--fs-label);
 }
 
 .rda-tbl th,
 .rda-tbl td {
   text-align: left;
   padding: 7px 8px;
-  border-bottom: 1px solid var(--border);
 }
 
 .rda-tbl thead th {
-  font-size: var(--fs-caption);
-  letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--muted);
   font-weight: var(--font-700-weight);
 }
 
@@ -439,20 +341,15 @@
   color: var(--body);
 }
 
-.rda-tbl td b {
-  color: var(--text);
-  font-weight: var(--font-700-weight);
-}
+
 
 .rda-tbl .num {
-  font-family: var(--grot);
   font-variant-numeric: tabular-nums;
   text-align: left;
   white-space: nowrap;
 }
 
 .rda-tbl .rda-limit-row td {
-  color: var(--muted);
   border-bottom: none;
 }
 
@@ -471,8 +368,6 @@
 }
 
 .rda-interp li {
-  font-size: var(--fs-label);
-  color: var(--body);
   padding-left: 12px;
   position: relative;
 }
@@ -485,52 +380,168 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--accent-deep);
 }
 
-.rda-interp li b {
-  color: var(--text);
-}
 
 .rda-scalekey {
   margin-top: 12px;
-  font-size: var(--fs-caption);
-  color: var(--muted);
-  line-height: var(--lh-caption);
-}
-
-.rda-scalekey b {
-  color: var(--text);
 }
 
 .rda-practice {
   margin-top: 26px;
-  font-size: var(--fs-label);
-  line-height: 1.6;
-  color: var(--body);
 }
 
 .rda-practice .rda-link {
   display: inline-block;
   margin-top: 6px;
-  color: var(--accent-deep);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: color-mix(in srgb, var(--accent-deep) 45%, transparent);
   transition: text-decoration-color .2s;
 }
 
-.rda-practice .rda-link:hover {
-  text-decoration-color: var(--accent-deep);
-}
 
 .rda-evidence {
   margin-top: 26px;
-  color: var(--body);
 }
 
-.acc-tag.is-spec {
-  border-color: color-mix(in srgb, var(--accent-deep) 40%, transparent);
-  background: color-mix(in srgb, var(--accent-deep) 6%, transparent);
-  color: var(--accent-deep);
+.bf-charcoal-note {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  width: 100%;
+  gap: var(--gap-xs);
+  margin: 16px 0;
+}
+
+.bf-charcoal-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.bf-charcoal-icon span {
+  width: 21px;
+  height: 21px;
+  border: 1.3px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--kc-responsive-label-sm-text-size);
+}
+
+@media (max-width: 600px) {
+  .bf-charcoal-note {
+    grid-template-columns: 38px 1fr;
+  }
+
+}
+
+/* ============================================================
+   Allergen Badges & Tags
+   ============================================================ */
+
+.kc-faq-section-content tr {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
+}
+
+.kc-faq-section-content tbody tr:last-child {
+  border-bottom: none;
+}
+
+.bf-evidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.bf-evidence-item {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  column-gap: var(--gap-xl);
+  align-items: start;
+  padding: 10px;
+}
+
+.bf-evidence-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--kc-mapped-surface-accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+}
+
+.bf-evidence-icon svg {
+  width: 18px;
+  height: 20px;
+  display: block;
+}
+
+.bf-evidence-content {
+  letter-spacing: var(--kc-responsive-all-letter-spacing);
+}
+
+.bf-evidence-title {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-style: dotted;
+  border-color: var(--kc-mapped-surface-accent-default);
+}
+
+.bf-evidence-description {
+  margin-top: 2px;
+}
+
+.bf-evidence-meta {
+  margin-top: 3px;
+  font-size: var(--kc-responsive-label-sm-text-size);
+}
+
+.bf-evidence-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  margin-top: 14px;
+  text-decoration: none;
+  font-size: var(--kc-responsive-label-sm-text-size);
+}
+
+.bf-evidence-link svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.bf-see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bf-see-all-arrow {
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .bf-body {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .bf-evidence-item {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: var(--gap-xl);
+  }
+
+  .bf-evidence-icon {
+    width: 34px;
+    height: 34px;
+  }
 }

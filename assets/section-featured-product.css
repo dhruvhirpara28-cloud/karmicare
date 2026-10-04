@@ -119,3 +119,32 @@
   display: flex;
   justify-content: space-between;
 }
+
+.kc-custom-row,
+.kc-custom-welcome-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-sm);
+}
+
+.kc-custom-welcome-items {
+  flex-direction: column;
+  align-items: normal;
+  gap: var(--gap-sm);
+  font-weight: var(--font-500-weight);
+  border-top: 1px solid rgba(var(--color-foreground), 0.2);
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
+  margin: 20px 0;
+  padding: 16px 0;
+}
+
+.kc-custom-product-info .kc-custom-col-left,
+.kc-custom-product-info .kc-custom-interval {
+  margin-top: 4px;
+  display: block;
+}
+
+.product__info-wrapper .kc-custom-col-left span.check-icon {
+  margin-right: 5px;
+}
