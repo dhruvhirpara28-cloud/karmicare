@@ -648,13 +648,20 @@
         "loop_subscriptions_7dde8c": {
           "type": "loop_subscriptions",
           "settings": {
+            "only_first_subscription": true,
             "default_to_subscription": true,
             "welcome_kit_products": [
               "evening-toothbrush",
               "morning-toothbrush",
               "whitening-charcoal-dental-floss"
             ],
-            "pricing_summary_care_credit_title": "Care Credits back"
+            "pricing_summary_care_credit_title": "Care Credits back",
+            "subscription_title": "<strong>Awake & Asleep AM/PM Oral Care System</strong>",
+            "shipping_text": "Shipping",
+            "shipping_value_html": "Varies  Free",
+            "care_credit_text_1": "10% / order",
+            "care_credit_text_2": "10% each purchase",
+            "per_brushing_text": "per brushing"
           }
         },
         "buy_buttons_UQznij": {
@@ -664,7 +671,7 @@
             "show_gift_card_recipient": true,
             "show_add_to_cart": false,
             "show_custom_button": true,
-            "custom_button_text": "Begin Now",
+            "custom_button_text": "Begin your 60-day ritual",
             "redirect_to_checkout": true
           }
         },

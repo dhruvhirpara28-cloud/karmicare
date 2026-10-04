@@ -514,38 +514,197 @@
 
                       {%- if template_content contains 'Rendering loop-subscriptions' -%}
                         <div
-                          class="loop-featured-widget-container"
+                          class="loop-featured-widget-container{% if block.settings.only_first_subscription %} loop-only-first-subscription{% endif %}"
                           id="loop-featured-{{ section.id }}"
                           style="margin-top: 15px;"
                         >
                           {{ template_content }}
                         </div>
+                        {%- if block.settings.only_first_subscription -%}
+                          {%- assign current_variant = product.selected_or_first_available_variant -%}
+                          {%- assign sub_allocation = current_variant.selling_plan_allocations | first -%}
+                          {%- assign sub_price = sub_allocation.price | default: current_variant.price -%}
+                          {%- assign care_credit = sub_price | times: 0.1 -%}
+                          {%- assign per_brushing_cents = sub_price | divided_by: 120.0 | round -%}
+                          {%- assign plan_name = sub_allocation.selling_plan.name | downcase -%}
+                          {%- assign interval_text = '/ 60 days' -%}
+                          {%- if plan_name contains 'year' -%}
+                            {%- assign interval_text = '/ year' -%}
+                          {%- endif -%}
+                          <div class="kc-custom-subscription-widget">
+                            <div class="kc-custom-box">
+                              <div class="kc-custom-row kc-custom-product-info">
+                                <div class="kc-custom-col-left">
+                                  {{ block.settings.subscription_title | default: product.title }}
+                                  <div class="kc-custom-per-brushing opacity-xl">
+                                    <span id="kc-sync-per-brushing-money">{{ per_brushing_cents | money }}</span>
+                                    {{ block.settings.per_brushing_text }}
+                                  </div>
+                                </div>
+                                <div class="kc-custom-col-right" style="text-align: right;">
+                                  <strong id="kc-sync-price">{{ sub_price | money }}</strong>
+                                  <div class="kc-custom-interval opacity-xl">{{ interval_text }}</div>
+                                </div>
+                              </div>
+                              <div class="kc-custom-welcome-items">
+                                {%- if welcome_kit_products != blank -%}
+                                  {%- for wk_product in welcome_kit_products -%}
+                                    <div class="kc-custom-row">
+                                      <span class="kc-custom-col-left"
+                                        ><span class="check-icon" style="color:#78b5fa;">✓</span>
+                                        <span class="wk-item-name opacity-xl">{{ wk_product.title }}</span></span
+                                      >
+                                      <span class="kc-custom-col-right"
+                                        ><del class="opacity-xl">
+                                          {{-
+                                            wk_product.selected_or_first_available_variant.price
+                                            | money_without_trailing_zeros
+                                          -}}
+                                        </del>
+                                        <strong>Free</strong></span
+                                      >
+                                    </div>
+                                  {%- endfor -%}
+                                {%- endif -%}
+                                <div class="kc-custom-row">
+                                  <span class="kc-custom-col-left opacity-xl"
+                                    ><span class="check-icon" style="color:#78b5fa;">✓</span>
+                                    {{ block.settings.shipping_text -}}
+                                  </span>
+                                  <span class="kc-custom-col-right">{{ block.settings.shipping_value_html }}</span>
+                                </div>
+                              </div>
+                              <div class="kc-custom-row kc-custom-care-credits">
+                                <span class="kc-custom-col-left">
+                                  {{- block.settings.pricing_summary_care_credit_title }} &nbsp;&nbsp;&nbsp;
+                                  {{ block.settings.care_credit_text_1 -}}
+                                </span>
+                                <span class="kc-custom-col-right" style="text-align: right;">
+                                  <strong id="kc-sync-care-credit">{{ care_credit | money }}</strong>
+                                  <div class="kc-custom-interval opacity-xl">
+                                    {{ block.settings.care_credit_text_2 }}
+                                  </div>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <style>
+                            .loop-only-first-subscription {
+                              display: none !important;
+                            }
+                            .hide-when-only-first-subscription {
+                              display: none !important;
+                            }
+                          </style>
+                          <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                              var container = document.getElementById('loop-featured-{{ section.id }}');
+                              if (container) {
+                                var loopContainer = container.querySelector('.loop-subscription-container');
+                                if (loopContainer) {
+                                  var selectFirst = function () {
+                                    var firstRadio = loopContainer.querySelector(
+                                      'div[id^="loop-selling_plan_group-"]:first-of-type input[type="radio"]'
+                                    );
+                                    if (firstRadio && !firstRadio.checked) {
+                                      firstRadio.click();
+                                    }
+                                  };
+                                  var observer = new MutationObserver(function (mutations, obs) {
+                                    if (
+                                      loopContainer.style.display === 'block' ||
+                                      !loopContainer.classList.contains('loop-display-none')
+                                    ) {
+                                      selectFirst();
+                                      obs.disconnect();
+                                    }
+                                  });
+                                  observer.observe(loopContainer, {
+                                    attributes: true,
+                                    attributeFilter: ['class', 'style'],
+                                  });
+
+                                  if (
+                                    loopContainer.style.display === 'block' ||
+                                    !loopContainer.classList.contains('loop-display-none')
+                                  ) {
+                                    selectFirst();
+                                  }
+                                }
+                              }
+
+                              // Sync values dynamically from kc-pricing-summary for currency support
+                              var origSummary = document.getElementById('kc-pricing-summary-{{ product.id }}');
+                              if (origSummary) {
+                                var syncValues = function () {
+                                  var origPrice = origSummary.querySelector('.kc-pricing-summary__price');
+                                  var figmaPrice = document.getElementById('kc-sync-price');
+                                  if (origPrice && figmaPrice && origPrice.textContent.trim() !== '') {
+                                    figmaPrice.innerHTML = origPrice.innerHTML;
+                                  }
+
+                                  var origPerBrushing = origSummary.querySelector('.kc-pricing-summary__per-brushing');
+                                  var figmaPerBrushingMoney = document.getElementById('kc-sync-per-brushing-money');
+                                  if (
+                                    origPerBrushing &&
+                                    figmaPerBrushingMoney &&
+                                    origPerBrushing.textContent.trim() !== ''
+                                  ) {
+                                    var match = origPerBrushing.textContent.match(/^([^\d\s]*\s*[\d.,]+\s*[^\d\s]*)/);
+                                    if (match) {
+                                      figmaPerBrushingMoney.innerHTML = match[1].trim();
+                                    }
+                                  }
+
+                                  var origCareCredit = origSummary.querySelector('.kc-care-credit-value');
+                                  var figmaCareCredit = document.getElementById('kc-sync-care-credit');
+                                  if (origCareCredit && figmaCareCredit && origCareCredit.textContent.trim() !== '') {
+                                    figmaCareCredit.innerHTML = origCareCredit.innerHTML;
+                                  }
+                                };
+
+                                // Watch for changes (like currency switchers or loop JS updates)
+                                var syncObserver = new MutationObserver(syncValues);
+                                syncObserver.observe(origSummary, {
+                                  childList: true,
+                                  subtree: true,
+                                  characterData: true,
+                                });
+
+                                // Try syncing periodically for a few seconds to catch delayed currency apps
+                                var syncInterval = setInterval(syncValues, 500);
+                                setTimeout(function () {
+                                  clearInterval(syncInterval);
+                                }, 5000);
+                              }
+                            });
+                          </script>
+                        {%- endif -%}
                       {%- endif -%}
                       {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                     </div>
 
-                    {% comment %}
-                      {%- if welcome_kit_products != blank -%}
-                        <div class="loop-featured-welcome-kit">
-                          <div class="loop-featured-wk-contents">
-                            <ul class="wk-contents-list">
-                              {%- assign total_price = 0 -%}
-                              {%- for wk_product in welcome_kit_products -%}
-                                {%- assign wk_variant = wk_product.selected_or_first_available_variant -%}
-                                {%- assign total_price = total_price | plus: wk_variant.price -%}
-                                <li>
-                                  <span class="wk-item-name">
-                                    <span class="check-icon">✓</span>
-                                    {{ wk_product.title }}
-                                  </span>
-                                  <span class="price-strike">{{ wk_variant.price | money }}</span>
-                                </li>
-                              {%- endfor -%}
-                            </ul>
-                          </div>
+                    {%- if welcome_kit_products != blank -%}
+                      <div class="loop-featured-welcome-kit{% if block.settings.only_first_subscription %} hide-when-only-first-subscription{% endif %}">
+                        <div class="loop-featured-wk-contents">
+                          <ul class="wk-contents-list">
+                            {%- assign total_price = 0 -%}
+                            {%- for wk_product in welcome_kit_products -%}
+                              {%- assign wk_variant = wk_product.selected_or_first_available_variant -%}
+                              {%- assign total_price = total_price | plus: wk_variant.price -%}
+                              <li>
+                                <span class="wk-item-name">
+                                  <span class="check-icon">✓</span>
+                                  {{ wk_product.title }}
+                                </span>
+                                <span class="price-strike">{{ wk_variant.price | money }}</span>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
                         </div>
-                      {%- endif -%}
-                    {% endcomment %}
+                      </div>
+                    {%- endif -%}
                   </div>
                 {%- when 'buy_buttons' -%}
                   {%- render 'buy-buttons',
@@ -1645,6 +1804,12 @@
       "settings": [
         {
           "type": "checkbox",
+          "id": "only_first_subscription",
+          "label": "Show only first subscription option",
+          "default": false
+        },
+        {
+          "type": "checkbox",
           "id": "default_to_subscription",
           "label": "Default to first subscription",
           "default": true
@@ -1656,10 +1821,41 @@
           "info": "Select one or more products to display in the Welcome Kit section of eligible subscription plans."
         },
         {
-          "type": "text",
+          "type": "inline_richtext",
           "id": "pricing_summary_care_credit_title",
-          "label": "Care Credit Title",
-          "default": "Care Credits back"
+          "label": "Care Credit Title"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subscription_title",
+          "label": "Subscription Title",
+          "info": "Overrides the default product title (e.g. 'Awake & Asleep AM/PM Oral Care System')"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "shipping_text",
+          "label": "Shipping Text"
+        },
+        {
+          "type": "text",
+          "id": "shipping_value_html",
+          "label": "Shipping Value HTML",
+          "info": "You can use HTML tags like <del> and <strong> here."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "care_credit_text_1",
+          "label": "Care Credit Subtext 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "care_credit_text_2",
+          "label": "Care Credit Subtext 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "per_brushing_text",
+          "label": "Per Brushing Text"
         }
       ]
     }

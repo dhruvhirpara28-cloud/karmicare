@@ -12,7 +12,7 @@
         >
           <summary class="kc-faq-summary">
             <span>{{ item.title }}</span>
-            <span class="kc-faq-glyph">+</span>
+            {% render 'icon-plus-minus' %}
           </summary>
           <div class="kc-faq-body">
             {%- if item.description != blank -%}
@@ -32,13 +32,13 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const faqItems = document.querySelectorAll('.kc-faq-item');
-      faqItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+      faqItems.forEach((item) => {
+        item.addEventListener('click', function (e) {
           if (e.target.tagName !== 'SUMMARY' && !e.target.closest('summary')) return;
           if (!this.hasAttribute('open')) {
-            faqItems.forEach(otherItem => {
+            faqItems.forEach((otherItem) => {
               if (otherItem !== this && otherItem.hasAttribute('open')) {
                 otherItem.removeAttribute('open');
               }

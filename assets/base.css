@@ -3,6 +3,8 @@ collection-component {
   display: block;
 }
 
+
+
 a {
   text-decoration: none;
   color: inherit;
@@ -3558,6 +3560,7 @@ details-disclosure>details {
 
 .opacity-xl,
 .kc-plan-subrow,
+.bf-evidence-description,
 .tertiary-try-once-link .ft-note,
 .km-footer-top__col-1 h4,
 .km-footer-top__col-2 h3,
@@ -3575,4 +3578,8 @@ p.kc-caption-text {
   border-bottom: 1px solid currentColor;
   opacity: 0.2;
   display: block;
+}
+
+body>* {
+  line-height: var(--kc-responsive-body-line-height);
 }
