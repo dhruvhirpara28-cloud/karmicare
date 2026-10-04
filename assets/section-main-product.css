@@ -1033,14 +1033,30 @@ a.product__text {
   }
 }
 
+.product__media-wrapper .slider-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--primary-border-radius);
+  height: -webkit-fill-available;
+}
+
 @media screen and (min-width: 900px) {
   .product--small .thumbnail-list.slider--tablet-up .thumbnail-list__item.slider__slide {
-    width: calc(25% - 0.8rem);
+    width: calc(12.5% - 0.5rem);
   }
 
   .thumbnail-list.slider--tablet-up .thumbnail-list__item.slider__slide {
-    width: calc(20% - 0.8rem);
+    width: calc(12.5% - 0.5rem);
   }
+}
+
+.thumbnail-list {
+  gap: var(--gap-xs);
+}
+
+.product__media-wrapper .slider-button--prev .svg-wrapper {
+  transform: rotate(180deg);
 }
 
 .thumbnail {

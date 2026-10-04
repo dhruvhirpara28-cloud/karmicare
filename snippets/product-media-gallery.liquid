@@ -131,7 +131,7 @@
         aria-label="{{ 'general.slider.previous_slide' | t }}"
       >
         <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
+          {% render 'icon-arrow-right' %}
         </span>
       </button>
       <div class="slider-counter caption">
@@ -147,7 +147,7 @@
         aria-label="{{ 'general.slider.next_slide' | t }}"
       >
         <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
+          {% render 'icon-arrow-right' %}
         </span>
       </button>
     </div>
@@ -192,7 +192,7 @@
         data-step="3"
       >
         <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
+          {% render 'icon-arrow-right' %}
         </span>
       </button>
       <ul
@@ -322,9 +322,17 @@
         data-step="3"
       >
         <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
+          {% render 'icon-arrow-right' %}
         </span>
       </button>
     </slider-component>
   {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'professional_testimonials' and block.settings.show_under_media -%}
+      <div class="small-hide" style="margin-top: 2rem;">
+        {% render 'professional-testimonials', block: block, product: product %}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
 </media-gallery>
