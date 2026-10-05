@@ -38,6 +38,8 @@
   {% if section.settings.text_color_day != blank %}
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p,
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul,
+        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul li,
+        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol li,
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol,
       body.day-mode .section-{{ section.id }} .legal-toc__body ol,
       body.day-mode .section-{{ section.id }} .legal-toc__body ul,
