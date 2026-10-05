@@ -22,13 +22,13 @@
     {%- endif -%}
 
 {% if section.settings.border_color_night != blank %}
-    body.night-mode .section-{{ section.id }} .consumer-rights__card{
+    body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link {
       background-color: {{ section.settings.border_color_night }};
     }
   {%- endif -%}
 
   {% if section.settings.border_color_night != blank %}
-    body.night-mode .section-{{ section.id }} .consumer-rights__card{
+    body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link {
       background-color: {{ section.settings.border_color_night }};
     }
   {%- endif -%}
