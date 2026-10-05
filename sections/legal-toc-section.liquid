@@ -237,11 +237,12 @@
     text-decoration: none;
     text-transform: uppercase;
     opacity: .68;
-    transition: opacity .2s ease;
+    transition: all .2s ease;
   }
 
   #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active {
     opacity: 1;
+    border-width:2px;
   }
 
   {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
