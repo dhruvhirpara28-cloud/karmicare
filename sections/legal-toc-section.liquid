@@ -368,6 +368,16 @@
     #LegalToc-{{ section.id }} .legal-toc__empty {
       padding: 40px 0;
     }
+    #LegalToc-{{ section.id }} .legal-toc__blockbody{
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: 0px;
+    }
+    #LegalToc-{{ section.id }} .legal-toc__blockbody p{
+      padding: 12px 0px;
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+    }
     @media screen and (max-width: 989px) {
        #LegalToc-{{ section.id }} .legal-toc__layout{
         grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
@@ -396,16 +406,6 @@
       min-width: 0;
     }
 
-    #LegalToc-{{ section.id }} .legal-toc__blockbody{
-      font-size: 18px;
-      line-height: 24px;
-      letter-spacing: 0px;
-    }
-    #LegalToc-{{ section.id }} .legal-toc__blockbody p{
-      padding: 12px 0px;
-      border-top: 1px solid;
-      border-bottom: 1px solid;
-    }
     #LegalToc-{{ section.id }} .legal-toc__sidebar {
       width: 100%;
       max-width: 100%;
