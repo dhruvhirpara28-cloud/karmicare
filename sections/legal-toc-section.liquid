@@ -22,12 +22,15 @@
     {%- endif -%}
 
 {% if section.settings.border_color_night != blank %}
+    body.night-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
     body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link {
       border-color: {{ section.settings.border_color_night }};
     }
   {%- endif -%}
 
   {% if section.settings.border_color_day != blank %}
+    body.day-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
+    body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
     body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link,
     body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link {
       border-color: {{ section.settings.border_color_day }};
