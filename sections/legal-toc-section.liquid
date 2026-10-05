@@ -56,6 +56,8 @@
           border-color:  {{ section.settings.text_color_day }};
         }
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p a,
+        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body li a,
+        body.day-mode .section-{{ section.id }} .legal-toc__body li a,
         body.day-mode .section-{{ section.id }} .legal-toc__body p a,
       body:not(.night-mode) .section-{{ section.id }} .legal-toc__body strong,
       body.day-mode .section-{{ section.id }} .legal-toc__body strong{
