@@ -21,14 +21,14 @@
     }
   {%- endif -%}
   {% if section.settings.box_color_night != blank %}
-    body.night-mode .section-{{ section.id }} {
+    body.night-mode .section-{{ section.id }} .consumer-rights__card{
       background-color: {{ section.settings.box_color_night }};
     }
   {%- endif -%}
     /* DAY MODE */
     {% if section.settings.box_color_day != blank %}
-      body:not(.night-mode) .section-{{ section.id }} *,
-      body.day-mode .section-{{ section.id }} * {
+      body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card,
+      body.day-mode .section-{{ section.id }} .consumer-rights__card {
         background-color: {{ section.settings.box_color_day }};
       }
     {%- endif -%}
@@ -214,7 +214,6 @@
   }
 
   #section-{{ section.id }} .consumer-rights__card {
-    background-color:#212A49;
     padding: 24px;
     border-radius: 12px;
     display: flex;
