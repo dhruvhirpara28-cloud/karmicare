@@ -223,7 +223,7 @@
     opacity: 1;
   }
 
-  #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
+  {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -232,7 +232,7 @@
     height: calc(100% + 8px);
     transform: translateY(-50%);
     background: currentColor;
-  }
+  } {% endcomment %}
 
   /* CONTENT */
   #LegalToc-{{ section.id }} .legal-toc__content {
