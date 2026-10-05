@@ -360,10 +360,15 @@
       padding: 40px 0;
     }
     @media screen and (max-width: 989px) {
-       #LegalToc-{{ section.id }} .legal-toc__layout{
+      #LegalToc-{{ section.id }} .legal-toc__layout{
         grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
       }
-
+    }
+    @media screen and (max-width: 767px) {
+      #LegalToc-{{ section.id }} .legal-toc__nav-list {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
     }
     /* TABLET / MOBILE */
     @media screen and (max-width: 640px) {
