@@ -375,8 +375,10 @@
     }
     #LegalToc-{{ section.id }} .legal-toc__blockbody p{
       padding: 12px 0px;
-      border-top: 1px solid;
       border-bottom: 1px solid;
+    }
+    #LegalToc-{{ section.id }} .legal-toc__blockbody p:first-child{
+      border-top: 1px solid;
     }
     @media screen and (max-width: 989px) {
        #LegalToc-{{ section.id }} .legal-toc__layout{
