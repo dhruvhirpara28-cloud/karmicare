@@ -76,7 +76,10 @@
       /* NIGHT MODE */
       {% if section.settings.text_color_night != blank %}
         body.night-mode .section-{{ section.id }} .legal-toc__body ul,
+        body.night-mode .section-{{ section.id }} .legal-toc__blockbody ul,
         body.night-mode .section-{{ section.id }} .legal-toc__body ul li,
+        body.night-mode .section-{{ section.id }} .legal-toc__blockbody ul li,
+        body.night-mode .section-{{ section.id }} .legal-toc__blockbody ol li,
         body.night-mode .section-{{ section.id }} .legal-toc__body ol li,
         body.night-mode .section-{{ section.id }} .legal-toc__body ol,
         body.night-mode .section-{{ section.id }} .legal-toc__body p{
