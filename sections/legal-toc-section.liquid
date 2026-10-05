@@ -177,6 +177,12 @@
                   {{ block.settings.content }}
                 </div>
               {% endif %}
+
+              {% if block.settings.block_content != blank %}
+                <div class="legal-toc__blockbody rte">
+                  {{ block.settings.block_content }}
+                </div>
+              {% endif %}
             </article>
           {% endfor %}
         </main>
