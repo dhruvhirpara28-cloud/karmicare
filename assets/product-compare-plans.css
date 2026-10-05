@@ -228,6 +228,12 @@
   z-index: 2;
   padding: 0 5px
 }
+body:not(.night-mode) .pc-featured {
+    border: 1px solid #7FB9FF;
+}
+/* body.night-mode .pc-featured {
+  border: 1px solid #7FB9FF;
+} */
 
 /* Tooltips */
 .info-tip {
