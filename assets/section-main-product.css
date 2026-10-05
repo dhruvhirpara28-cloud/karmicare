@@ -1797,6 +1797,9 @@ body:not(.night-mode) .info-tip-popover {
     right: auto;
     transform: translateX(-50%);
   }
+  .pc-col.pc-col-label .info-tip-popover {
+    left: 140%;
+}
 
   .info-tip:hover .info-tip-popover {
     transform: translateX(-70%) translateY(-8px);
