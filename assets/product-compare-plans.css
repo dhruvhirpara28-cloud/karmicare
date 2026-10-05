@@ -226,10 +226,8 @@
   background: linear-gradient(180deg, rgba(127, 185, 255, 0.10), transparent 62%);
   box-shadow: 0 18px 44px -22px rgba(127, 185, 255, 0.55);
   z-index: 2;
-  padding: 0 5px
-}
-body:not(.night-mode) .pc-featured {
-    border: 1px solid #7FB9FF;
+  padding: 0 5px;
+  border: 1px solid #7FB9FF;
 }
 body.night-mode {
   .pc-ribbon {
