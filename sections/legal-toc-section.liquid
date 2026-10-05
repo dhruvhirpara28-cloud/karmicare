@@ -367,53 +367,107 @@
   }
   /* TABLET / MOBILE */
   @media screen and (max-width: 640px) {
-    #LegalToc-{{ section.id }} .legal-toc__layout {
-      display: block;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__sidebar {
-      position: unset;
-      margin: 0 -20px 36px;
-      padding: 14px 20px;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
-      border-left: 0;
-      padding-left: 0;
-      min-width: max-content;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__eyebrow {
-      margin-bottom: 12px;
-      font-size:12px;
-      line-height:12px;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__nav-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__nav-link {
-      width: auto;
-      white-space: nowrap;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
-      display: none;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__section {
-      scroll-margin-top: 110px;
-      padding-bottom: 32px;
-    }
-
-    #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
-      padding-top: 34px;
-    }
+  #LegalToc-{{ section.id }} {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
   }
 
+  #LegalToc-{{ section.id }} .legal-toc__container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__layout {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__sidebar {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 0 36px;
+    padding: 14px 0;
+    overflow: hidden;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding-left: 0;
+    overflow: hidden;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px 16px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-item {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__nav-link {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    /* Important: don't force the page wider */
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+
+    padding: 8px 8px 8px 12px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__title,
+  #LegalToc-{{ section.id }} .legal-toc__lead,
+  #LegalToc-{{ section.id }} .legal-toc__body {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body img,
+  #LegalToc-{{ section.id }} .legal-toc__body table,
+  #LegalToc-{{ section.id }} .legal-toc__body iframe {
+    max-width: 100%;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body table {
+    display: block;
+    overflow-x: auto;
+  }
+}
   @media (prefers-reduced-motion: reduce) {
     #LegalToc-{{ section.id }} .legal-toc__nav-link {
       transition: none;
