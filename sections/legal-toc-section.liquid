@@ -1,110 +1,110 @@
 <style>
-    {%- if section.settings.bg_gradient_day != blank -%}
+      {%- if section.settings.bg_gradient_day != blank -%}
+          body:not(.night-mode) .section-{{ section.id }},
+          body.day-mode .section-{{ section.id }} {
+            background: {{ section.settings.bg_gradient_day }};
+        }
+    {%- elsif section.settings.bg_color_day != blank -%}
         body:not(.night-mode) .section-{{ section.id }},
         body.day-mode .section-{{ section.id }} {
-          background: {{ section.settings.bg_gradient_day }};
-      }
-  {%- elsif section.settings.bg_color_day != blank -%}
-      body:not(.night-mode) .section-{{ section.id }},
-      body.day-mode .section-{{ section.id }} {
-          background-color: {{ section.settings.bg_color_day }};
-      }
-  {%- endif -%}
-
-    {%- if section.settings.bg_gradient_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-    }
-    {%- elsif section.settings.bg_color_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_night }};
-    }
+            background-color: {{ section.settings.bg_color_day }};
+        }
     {%- endif -%}
 
-{% if section.settings.border_color_night != blank %}
-    body.night-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
-    body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link {
-      border-color: {{ section.settings.border_color_night }};
-    }
-  {%- endif -%}
+      {%- if section.settings.bg_gradient_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_night }};
+      }
+      {%- elsif section.settings.bg_color_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_night }};
+      }
+      {%- endif -%}
 
-  {% if section.settings.border_color_day != blank %}
-    body.day-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
-    body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
-    body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link,
-    body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link {
-      border-color: {{ section.settings.border_color_day }};
-    }
-  {%- endif -%}
+  {% if section.settings.border_color_night != blank %}
+      body.night-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
+      body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link {
+        border-color: {{ section.settings.border_color_night }};
+      }
+    {%- endif -%}
 
-  /* DAY MODE */
-  {% if section.settings.text_color_day != blank %}
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p,
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul,
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul li,
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol li,
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol,
-        body.day-mode .section-{{ section.id }} .legal-toc__body ol,
-        body.day-mode .section-{{ section.id }} .legal-toc__body ol li,
-        body.day-mode .section-{{ section.id }} .legal-toc__body ul li,
-        body.day-mode .section-{{ section.id }} .legal-toc__body ul,
-        body.day-mode .section-{{ section.id }} .legal-toc__body p{
-          color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+    {% if section.settings.border_color_day != blank %}
+      body.day-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
+      body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
+      body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link,
+      body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link {
+        border-color: {{ section.settings.border_color_day }};
+      }
+    {%- endif -%}
+
+    /* DAY MODE */
+    {% if section.settings.text_color_day != blank %}
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p,
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul,
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul li,
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol li,
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol,
+          body.day-mode .section-{{ section.id }} .legal-toc__body ol,
+          body.day-mode .section-{{ section.id }} .legal-toc__body ol li,
+          body.day-mode .section-{{ section.id }} .legal-toc__body ul li,
+          body.day-mode .section-{{ section.id }} .legal-toc__body ul,
+          body.day-mode .section-{{ section.id }} .legal-toc__body p{
+            color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+          }
+          body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active,
+          body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active{
+            border-color:  {{ section.settings.text_color_day }};
+          }
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p a,
+          body:not(.night-mode) .section-{{ section.id }} .legal-toc__body li a,
+          body.day-mode .section-{{ section.id }} .legal-toc__body li a,
+          body.day-mode .section-{{ section.id }} .legal-toc__body p a,
+        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body strong,
+        body.day-mode .section-{{ section.id }} .legal-toc__body strong{
+          color:  {{ section.settings.text_color_day }};
         }
-        body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active,
-        body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active{
-          border-color:  {{ section.settings.text_color_day }};
+        body:not(.night-mode) .section-{{ section.id }} *,
+        body.day-mode .section-{{ section.id }} * {
+          color: {{ section.settings.text_color_day }};
         }
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p a,
-        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body li a,
-        body.day-mode .section-{{ section.id }} .legal-toc__body li a,
-        body.day-mode .section-{{ section.id }} .legal-toc__body p a,
-      body:not(.night-mode) .section-{{ section.id }} .legal-toc__body strong,
-      body.day-mode .section-{{ section.id }} .legal-toc__body strong{
-        color:  {{ section.settings.text_color_day }};
-      }
-      body:not(.night-mode) .section-{{ section.id }} *,
-      body.day-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_day }};
-      }
-    {% endif %}
+      {% endif %}
 
 
-    /* NIGHT MODE */
-    {% if section.settings.text_color_night != blank %}
-      body.night-mode .section-{{ section.id }} .legal-toc__body ul,
-      body.night-mode .section-{{ section.id }} .legal-toc__body ul li,
-      body.night-mode .section-{{ section.id }} .legal-toc__body ol li,
-      body.night-mode .section-{{ section.id }} .legal-toc__body ol,
-      body.night-mode .section-{{ section.id }} .legal-toc__body p{
-        color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
-    }
-      body.night-mode .section-{{ section.id }} .legal-toc__body p a,
-      body.night-mode .section-{{ section.id }} .legal-toc__body li a {
-        color: {{ section.settings.text_color_night }};
+      /* NIGHT MODE */
+      {% if section.settings.text_color_night != blank %}
+        body.night-mode .section-{{ section.id }} .legal-toc__body ul,
+        body.night-mode .section-{{ section.id }} .legal-toc__body ul li,
+        body.night-mode .section-{{ section.id }} .legal-toc__body ol li,
+        body.night-mode .section-{{ section.id }} .legal-toc__body ol,
+        body.night-mode .section-{{ section.id }} .legal-toc__body p{
+          color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
       }
-      body.night-mode .section-{{ section.id }} .legal-toc__body strong {
-        color: {{ section.settings.text_color_night }};
-      }
-       body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active{
-        border-color:  {{ section.settings.text_color_night }};
-      }
-      body.night-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_night }};
-      }
-    {% endif %}
+        body.night-mode .section-{{ section.id }} .legal-toc__body p a,
+        body.night-mode .section-{{ section.id }} .legal-toc__body li a {
+          color: {{ section.settings.text_color_night }};
+        }
+        body.night-mode .section-{{ section.id }} .legal-toc__body strong {
+          color: {{ section.settings.text_color_night }};
+        }
+         body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active{
+          border-color:  {{ section.settings.text_color_night }};
+        }
+        body.night-mode .section-{{ section.id }} * {
+          color: {{ section.settings.text_color_night }};
+        }
+      {% endif %}
 
-    #LegalToc-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-      }
-
-    @media only screen and (max-width: 767px) {
       #LegalToc-{{ section.id }} {
-          padding-top: {{ section.settings.padding_top_mobile }}px;
-          padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-      }
-}
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+        }
+
+      @media only screen and (max-width: 767px) {
+        #LegalToc-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top_mobile }}px;
+            padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        }
+  }
 </style>
 
 <section
@@ -188,292 +188,293 @@
 </section>
 
 <style>
-  #LegalToc-{{ section.id }} {
-    width: 100%;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__container {
-    width: 100%;
-    max-width:1416px;
-    padding:0 20px;
-    margin:0 auto;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__layout {
-    display: grid;
-    grid-template-columns: minmax(180px, 332px) minmax(0, 1fr);
-    column-gap: 16px;
-    align-items: start;
-  }
-
-  /* LEFT NAV */
-  #LegalToc-{{ section.id }} .legal-toc__sidebar {
-    position: sticky;
-    top: 97px;
-    align-self: start;
-    min-width: 0;
-  }
-
-
-  #LegalToc-{{ section.id }} .legal-toc__eyebrow {
-    margin: 0 0 24px;
-    font-weight: 500;
-    font-family: 'Gotham Rounded';
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 1.25px;
-    text-transform: uppercase;
-    opacity:0.68;
-}
-  #LegalToc-{{ section.id }} .legal-toc__nav-list {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-item {
-    padding:8px 0px 8px 16px; 
-    border-left:1px solid currentColor;
-  } {% endcomment %}
-  #LegalToc-{{ section.id }} .legal-toc__nav-link {
-    padding:8px 0px 8px 16px; 
-    border-left:1px solid;
-    position: relative;
-    display: block;
-    width: 100%;
-    font-weight: 500;
-    font-family: 'Gotham Rounded';
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 1.25px;
-    text-transform: uppercase;
-    text-decoration: none;
-    opacity: .68;
-    transition: all .2s ease;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active {
-    opacity: 1;
-    border-width:2px;
-  }
-
-  {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -16px;
-    width: 2px;
-    height: calc(100% + 8px);
-    transform: translateY(-50%);
-    background: currentColor;
-  } {% endcomment %}
-
-  /* CONTENT */
-  #LegalToc-{{ section.id }} .legal-toc__content {
-    min-width: 0;
-    max-width:680px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__section {
-    scroll-margin-top: calc(var(--header-height, 24px) + 32px);
-    padding: 0 0 32px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
-    padding-top: 32px;
-    border-top: 1px solid;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__title {
-    margin: 0 0 16px;
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 500;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__lead {
-    margin: 0 0 24px;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing:0px;
-}
-
-#LegalToc-{{ section.id }} .legal-toc__body {
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing:0px;
-}
-#LegalToc-{{ section.id }} .legal-toc__body ol,
-#LegalToc-{{ section.id }} .legal-toc__body ul {
-    list-style-position: outside !important;
-}
-#LegalToc-{{ section.id }} .legal-toc__body strong{
-    font-weight: 600;
-}
-
-  #LegalToc-{{ section.id }} .legal-toc__body > *:first-child,
-  #LegalToc-{{ section.id }} .legal-toc__lead > *:first-child {
-    margin-top: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body > *:last-child,
-  #LegalToc-{{ section.id }} .legal-toc__lead > *:last-child {
-    margin-bottom: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body p {
-    margin: 0 0 16px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body h3 {
-    margin: 28px 0 12px;
-    font-size: 16px;
-    line-height: 1.4;
-    font-weight: 600;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body h4 {
-    margin: 22px 0 10px;
-    font-size: 14px;
-    line-height: 1.4;
-    font-weight: 600;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body ul,
-  #LegalToc-{{ section.id }} .legal-toc__body ol {
-    margin: 0 0 16px;
-    padding-left: 22px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body li + li {
-    margin-top: 8px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body a {
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__empty {
-    padding: 40px 0;
-  }
-  @media screen and (max-width: 989px) {
-     #LegalToc-{{ section.id }} .legal-toc__layout{
-      grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
+    #LegalToc-{{ section.id }} {
+      width: 100%;
     }
-    
-  }
-  /* TABLET / MOBILE */
-  @media screen and (max-width: 640px) {
-  #LegalToc-{{ section.id }} {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip;
-  }
 
-  #LegalToc-{{ section.id }} .legal-toc__container {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding-left: 20px;
-    padding-right: 20px;
+    #LegalToc-{{ section.id }} .legal-toc__container {
+      width: 100%;
+      max-width:1416px;
+      padding:0 20px;
+      margin:0 auto;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__layout {
+      display: grid;
+      grid-template-columns: minmax(180px, 332px) minmax(0, 1fr);
+      column-gap: 16px;
+      align-items: start;
+    }
+
+    /* LEFT NAV */
+    #LegalToc-{{ section.id }} .legal-toc__sidebar {
+      position: sticky;
+      top: 97px;
+      align-self: start;
+      min-width: 0;
+    }
+
+
+    #LegalToc-{{ section.id }} .legal-toc__eyebrow {
+      margin: 0 0 24px;
+      font-weight: 500;
+      font-family: 'Gotham Rounded';
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+      opacity:0.68;
   }
+    #LegalToc-{{ section.id }} .legal-toc__nav-list {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-  #LegalToc-{{ section.id }} .legal-toc__layout {
-    display: block;
-    width: 100%;
-    min-width: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__sidebar {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    margin: 0 0 36px;
-    padding: 14px 0;
-    overflow: hidden;
-    position:unset;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    padding-left: 0;
-    overflow: hidden;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__nav {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__nav-list {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 12px 16px;
-    width: 100%;
-    min-width: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__nav-item {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__nav-link {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-
-    /* Important: don't force the page wider */
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: normal;
-
-    padding: 8px 8px 8px 12px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__content {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow-wrap: break-word;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__section {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__title,
-  #LegalToc-{{ section.id }} .legal-toc__lead,
-  #LegalToc-{{ section.id }} .legal-toc__body {
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body img,
-  #LegalToc-{{ section.id }} .legal-toc__body table,
-  #LegalToc-{{ section.id }} .legal-toc__body iframe {
-    max-width: 100%;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__body table {
-    display: block;
-    overflow-x: auto;
-  }
-}
-  @media (prefers-reduced-motion: reduce) {
+    {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-item {
+      padding:8px 0px 8px 16px;
+      border-left:1px solid currentColor;
+    } {% endcomment %}
     #LegalToc-{{ section.id }} .legal-toc__nav-link {
-      transition: none;
+      padding:8px 0px 8px 16px;
+      border-left:1px solid;
+      position: relative;
+      display: block;
+      width: 100%;
+      font-weight: 500;
+      font-family: 'Gotham Rounded';
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+      text-decoration: none;
+      opacity: .68;
+      transition: all .2s ease;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active {
+      opacity: 1;
+      border-width:2px;
+    }
+
+    {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -16px;
+      width: 2px;
+      height: calc(100% + 8px);
+      transform: translateY(-50%);
+      background: currentColor;
+    } {% endcomment %}
+
+    /* CONTENT */
+    #LegalToc-{{ section.id }} .legal-toc__content {
+      min-width: 0;
+      max-width:680px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section {
+      scroll-margin-top: calc(var(--header-height, 24px) + 32px);
+      padding: 0 0 32px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
+      padding-top: 32px;
+      border-top: 1px solid;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__title {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 500;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__lead {
+      margin: 0 0 24px;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing:0px;
+  }
+
+  #LegalToc-{{ section.id }} .legal-toc__body {
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing:0px;
+  }
+  #LegalToc-{{ section.id }} .legal-toc__body ol,
+  #LegalToc-{{ section.id }} .legal-toc__body ul {
+      list-style-position: outside !important;
+  }
+  #LegalToc-{{ section.id }} .legal-toc__body strong{
+      font-weight: 600;
+  }
+
+    #LegalToc-{{ section.id }} .legal-toc__body > *:first-child,
+    #LegalToc-{{ section.id }} .legal-toc__lead > *:first-child {
+      margin-top: 0;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body > *:last-child,
+    #LegalToc-{{ section.id }} .legal-toc__lead > *:last-child {
+      margin-bottom: 0;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body p {
+      margin: 0 0 16px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body h3 {
+      margin: 28px 0 12px;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body h4 {
+      margin: 22px 0 10px;
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body ul,
+    #LegalToc-{{ section.id }} .legal-toc__body ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body li + li {
+      margin-top: 8px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__empty {
+      padding: 40px 0;
+    }
+    @media screen and (max-width: 989px) {
+       #LegalToc-{{ section.id }} .legal-toc__layout{
+        grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
+      }
+
+    }
+    /* TABLET / MOBILE */
+    @media screen and (max-width: 640px) {
+    #LegalToc-{{ section.id }} {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__container {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__layout {
+      display: block;
+      width: 100%;
+      min-width: 0;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__sidebar {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      margin: 0 0 36px;
+      padding: 14px 0;
+      overflow: hidden;
+      position:unset;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      padding-left: 0;
+      overflow: hidden;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px 16px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-item {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-link {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      font-size: 12px;
+  line-height: 12px;
+      /* Important: don't force the page wider */
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: normal;
+
+      padding: 8px 8px 8px 12px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__content {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow-wrap: break-word;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__title,
+    #LegalToc-{{ section.id }} .legal-toc__lead,
+    #LegalToc-{{ section.id }} .legal-toc__body {
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body img,
+    #LegalToc-{{ section.id }} .legal-toc__body table,
+    #LegalToc-{{ section.id }} .legal-toc__body iframe {
+      max-width: 100%;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__body table {
+      display: block;
+      overflow-x: auto;
     }
   }
+    @media (prefers-reduced-motion: reduce) {
+      #LegalToc-{{ section.id }} .legal-toc__nav-link {
+        transition: none;
+      }
+    }
 </style>
 
 <script>
@@ -639,7 +640,7 @@
       "id": "bg_gradient_night",
       "label": "Background Gradient (Night)"
     },
-     {
+    {
       "type": "color",
       "id": "border_color_night",
       "label": "Border Color (Night)"
