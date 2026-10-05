@@ -44,17 +44,19 @@
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ul li,
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol li,
         body:not(.night-mode) .section-{{ section.id }} .legal-toc__body ol,
-      body.day-mode .section-{{ section.id }} .legal-toc__body ol,
-      body.day-mode .section-{{ section.id }} .legal-toc__body ol li,
-      body.day-mode .section-{{ section.id }} .legal-toc__body ul li,
-      body.day-mode .section-{{ section.id }} .legal-toc__body ul,
-      body.day-mode .section-{{ section.id }} .legal-toc__body p{
-        color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
-      }
-      body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active,
-      body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active{
-        border-color:  {{ section.settings.text_color_day }};
-      }
+        body.day-mode .section-{{ section.id }} .legal-toc__body ol,
+        body.day-mode .section-{{ section.id }} .legal-toc__body ol li,
+        body.day-mode .section-{{ section.id }} .legal-toc__body ul li,
+        body.day-mode .section-{{ section.id }} .legal-toc__body ul,
+        body.day-mode .section-{{ section.id }} .legal-toc__body p{
+          color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+        }
+        body:not(.night-mode) #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active,
+        body.day-mode #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active{
+          border-color:  {{ section.settings.text_color_day }};
+        }
+        body:not(.night-mode) .section-{{ section.id }} .legal-toc__body p a,
+        body.day-mode .section-{{ section.id }} .legal-toc__body p a,
       body:not(.night-mode) .section-{{ section.id }} .legal-toc__body strong,
       body.day-mode .section-{{ section.id }} .legal-toc__body strong{
         color:  {{ section.settings.text_color_day }};
