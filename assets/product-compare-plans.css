@@ -231,8 +231,13 @@
 body:not(.night-mode) .pc-featured {
     border: 1px solid #7FB9FF;
 }
-body.night-mode .pc-ribbon {
-  background: #7FB9FF;
+body.night-mode {
+  .pc-ribbon {
+    background: #7FB9FF;
+  }
+  .pc-cta-primary {
+    background: #7FB9FF;
+}
 }
 
 /* Tooltips */
