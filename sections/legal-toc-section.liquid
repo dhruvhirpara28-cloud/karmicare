@@ -359,7 +359,12 @@
   #LegalToc-{{ section.id }} .legal-toc__empty {
     padding: 40px 0;
   }
-
+  @media screen and (max-width: 989px) {
+     #LegalToc-{{ section.id }} .legal-toc__layout{
+      grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
+    }
+    
+  }
   /* TABLET / MOBILE */
   @media screen and (max-width: 749px) {
     #LegalToc-{{ section.id }} .legal-toc__layout {
