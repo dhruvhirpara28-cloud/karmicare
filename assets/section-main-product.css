@@ -1793,7 +1793,7 @@ body:not(.night-mode) .info-tip-popover {
 
 @media screen and (max-width: 767px) {
   .info-tip-popover {
-    left: 50%;
+    left: -140%;
     right: auto;
     transform: translateX(-50%);
   }
