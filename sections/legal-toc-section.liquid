@@ -367,57 +367,52 @@
   }
   /* TABLET / MOBILE */
   @media screen and (max-width: 640px) {
-  #LegalToc-{{ section.id }} .legal-toc__layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 16px;
-    align-items: start;
-  }
+    #LegalToc-{{ section.id }} .legal-toc__layout {
+      display: block;
+    }
 
-  #LegalToc-{{ section.id }} .legal-toc__sidebar {
-    position: unset;
-    margin: 0;
-    padding: 0;
-  }
+    #LegalToc-{{ section.id }} .legal-toc__sidebar {
+      position: unset;
+      margin: 0 -20px 36px;
+      padding: 14px 20px;
+    }
 
-  #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
-    border-left: 0;
-    padding-left: 0;
-    min-width: 0;
-  }
+    #LegalToc-{{ section.id }} .legal-toc__sidebar-inner {
+      border-left: 0;
+      padding-left: 0;
+      min-width: max-content;
+    }
 
-  #LegalToc-{{ section.id }} .legal-toc__eyebrow {
-    margin-bottom: 12px;
-    font-size: 12px;
-    line-height: 12px;
-  }
+    #LegalToc-{{ section.id }} .legal-toc__eyebrow {
+      margin-bottom: 12px;
+      font-size:12px;
+      line-height:12px;
+    }
 
-  #LegalToc-{{ section.id }} .legal-toc__nav-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__nav-link {
-    width: 100%;
-    white-space: normal;
-    padding: 8px 0 8px 12px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__content {
-    max-width: none;
-    min-width: 0;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__section {
-    scroll-margin-top: 110px;
-    padding-bottom: 32px;
-  }
-
-  #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
-    padding-top: 34px;
-  }
+    #LegalToc-{{ section.id }} .legal-toc__nav-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-link {
+      width: auto;
+      white-space: nowrap;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
+      display: none;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section {
+      scroll-margin-top: 110px;
+      padding-bottom: 32px;
+    }
+
+    #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section {
+      padding-top: 34px;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     #LegalToc-{{ section.id }} .legal-toc__nav-link {
