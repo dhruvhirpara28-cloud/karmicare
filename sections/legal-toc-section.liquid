@@ -23,6 +23,7 @@
 
   {% if section.settings.border_color_night != blank %}
       body.night-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
+      body.night-mode #LegalToc-{{ section.id }} .legal-toc__blockbody p,
       body.night-mode #LegalToc-{{ section.id }} .legal-toc__nav-link {
         border-color: {{ section.settings.border_color_night }};
       }
@@ -398,7 +399,10 @@
       line-height: 24px;
       letter-spacing: 0px;
     }
-    #LegalToc-{{ section.id }} .legal-toc__blockbody{
+    #LegalToc-{{ section.id }} .legal-toc__blockbody p{
+      padding:12px 0px;
+      border-top:1px solid;
+      border-bottom:1px solid;
     }
     #LegalToc-{{ section.id }} .legal-toc__sidebar {
       width: 100%;
