@@ -1724,6 +1724,12 @@ a.product__text {
   transition: background .2s, color .2s;
 }
 
+body.night-mode .info-tip-popover {
+  background: #232847 !important;
+}
+body:not(.night-mode) .info-tip-popover {
+  background: #fffbf6 !important;
+}
 .info-tip-popover {
   position: absolute;
   bottom: calc(100% + 10px);
@@ -1751,7 +1757,6 @@ a.product__text {
   visibility: hidden;
   transition: opacity .2s, visibility .2s, transform .2s var(--ease);
   z-index: 30;
-  background: #232847 !important;
 }
 
 .night-mode .info-tip-popover {
