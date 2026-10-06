@@ -8,445 +8,467 @@
 {%- endcomment -%}
 
 {%- style -%}
+  {%- if section.settings.bg_gradient_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_day }};
+      }
+  {%- elsif section.settings.bg_color_day != blank -%}
+      body:not(.night-mode) .section-{{ section.id }},
+      body.day-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_day }};
+      }
+  {%- endif -%}
 
-{%- if section.settings.bg_gradient_day != blank -%}
-    body:not(.night-mode) .section-{{ section.id }},
-    body.day-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_day }};
-    }
-{%- elsif section.settings.bg_color_day != blank -%}
-    body:not(.night-mode) .section-{{ section.id }},
-    body.day-mode .section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_day }};
-    }
-{%- endif -%}
+  {%- if section.settings.bg_gradient_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+          background: {{ section.settings.bg_gradient_night }};
+      }
+  {%- elsif section.settings.bg_color_night != blank -%}
+      body.night-mode .section-{{ section.id }} {
+          background-color: {{ section.settings.bg_color_night }};
+      }
+  {%- endif -%}
 
-{%- if section.settings.bg_gradient_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-    }
-{%- elsif section.settings.bg_color_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_night }};
-    }
-{%- endif -%}
+  {% if section.settings.text_color_day != blank %}
+      body:not(.night-mode) .section-{{ section.id }} *,
+      body.day-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_day }};
+      }
+  {% endif %}
 
-{% if section.settings.text_color_day != blank %}
-    body:not(.night-mode) .section-{{ section.id }} *,
-    body.day-mode .section-{{ section.id }} * {
-    color: {{ section.settings.text_color_day }};
-    }
-{% endif %}
+  {% if section.settings.text_color_night != blank %}
+      body.night-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_night }};
+      }
+  {% endif %}
 
-{% if section.settings.text_color_night != blank %}
-    body.night-mode .section-{{ section.id }} * {
-    color: {{ section.settings.text_color_night }};
-    }
-{% endif %}
-
-.kc-section {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    font-family: inherit;
-    font-weight: 400;
-    font-style: normal;
-}
-.kc-section .kc-inner {
-    max-width: 1416px;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-.kc-section .kc-head {
-    text-align: center;
-    margin-bottom: 48px;
-}
-.kc-section .kc-subtitle {
-    margin: 0 0 24px;
-    font-size: var(--km-body-sm);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-.kc-section .kc-title {
-    margin: 0 0 24px;
-    line-height: 1;
-}
-.kc-section .kc-description {
-    margin: 0 auto;
-    line-height: 1.5;
-    font-size: var(--km-body-lg);
-}
-.kc-section .kc-description p {
-    margin: 0;
-}
-
-/* Swiper slider */
-.kc-section .kc-grid {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-}
-.kc-section .kc-grid .swiper-slide {
-    height: auto;
-    box-sizing: border-box;
-}
-.kc-section .kc-card {
-    position: relative;
-    aspect-ratio: {{ section.settings.aspect_ratio }};
-    border-radius: {{ section.settings.radius }}px;
-    overflow: hidden;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-.kc-section .kc-media,
-.kc-section .kc-media video,
-.kc-section .kc-media iframe,
-.kc-section .kc-media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    object-fit: cover;
-    display: block;
-}
-.kc-section .kc-media iframe { pointer-events: none; }
-
-.kc-section .kc-number {
-    position: absolute;
-    top: 23px;
-    left: 23px;
-    z-index: 2;
-    /* font-family: inherit; */
-    font-weight: 500;
-    font-style: normal;
-    font-size: 52px;
-    line-height: 1;
-    pointer-events: none;
-}
-.kc-section .kc-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-}
-.kc-section .kc-play {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-.kc-section .kc-play svg {
-    width: 100%;
-    height: 100%;
-    margin-left: 2px;
-    fill: currentColor;
-}
-.kc-section .kc-hint { font-size: 11px; }
-.kc-section .kc-card.is-playing .kc-overlay { opacity: 0; }
-
-.kc-section .kc-step-title {
-    margin: 24px 0 7px;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 28px;
-    line-height: 1;
-}
-.kc-section .kc-step-desc {
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.3;
-    opacity: 0.68;
-    font-weight: 400;
-}
-.kc-section .kc-bottom {
-    margin: 92px 0 0;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 400;
-}
-
-@media screen and (max-width: 1199px) {
-  .kc-section .kc-number {
-      top: 18px;
-      left: 18px;
-      font-size: 42px;
+  .kc-section {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      font-family: inherit;
+      font-weight: 400;
+      font-style: normal;
+  }
+  .kc-section .kc-inner {
+      max-width: 1416px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box;
   }
   .kc-section .kc-head {
-      margin-bottom: 30px;
+      text-align: center;
+      margin-bottom: 48px;
   }
-  .kc-section .kc-title, .kc-section .kc-subtitle {
-      margin: 0 0 14px;
+  .kc-section .kc-subtitle {
+      margin: 0 0 24px;
+      font-size: var(--km-body-sm);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
   }
-  .kc-section .kc-step-title {
-      font-size: 24px;
-  }
-  .kc-section .kc-step-desc {
-      font-size: 16px;
-  }
-  .kc-section .kc-bottom {
-      margin: 70px 0 0;
-  }
- .kc-section .kc-description {
-      font-size: 18px;
-  }
-}
-@media screen and (max-width: 749px) {
-  .kc-section {
-    padding-top: {{ section.settings.padding_top_mob }}px;
-    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+  .kc-section .kc-title {
+      margin: 0 0 24px;
+      line-height: 1;
   }
   .kc-section .kc-description {
-    font-size: 16px;
+      margin: 0 auto;
+      line-height: 1.5;
+      font-size: var(--km-body-lg);
   }
-}
-@media screen and (max-width: 575px) {
-  .kc-section .kc-bottom {
-      margin: 50px 0 0;
+  .kc-section .kc-description p {
+      margin: 0;
+  }
+
+  /* Swiper slider */
+  .kc-section .kc-grid {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+  }
+  .kc-section .kc-grid .swiper-slide {
+      height: auto;
+      box-sizing: border-box;
+  }
+  .kc-section .kc-card {
+      position: relative;
+      aspect-ratio: {{ section.settings.aspect_ratio }};
+      border-radius: {{ section.settings.radius }}px;
+      overflow: hidden;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+  }
+  .kc-section .kc-media,
+  .kc-section .kc-media video,
+  .kc-section .kc-media iframe,
+  .kc-section .kc-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      object-fit: cover;
+      display: block;
+  }
+  .kc-section .kc-media iframe { pointer-events: none; }
+
+  .kc-section .kc-number {
+      position: absolute;
+      top: 23px;
+      left: 23px;
+      z-index: 2;
+      /* font-family: inherit; */
+      font-weight: 500;
+      font-style: normal;
+      font-size: 52px;
+      line-height: 1;
+      pointer-events: none;
+  }
+  .kc-section .kc-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+  }
+  .kc-section .kc-play {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+  }
+  .kc-section .kc-play svg {
+      width: 100%;
+      height: 100%;
+      margin-left: 2px;
+      fill: currentColor;
+  }
+  .kc-section .kc-hint { font-size: 11px; }
+  .kc-section .kc-card.is-playing .kc-overlay { opacity: 0; }
+
+  .kc-section .kc-step-title {
+      margin: 24px 0 7px;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 28px;
+      line-height: 1;
   }
   .kc-section .kc-step-desc {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.3;
+      opacity: 0.68;
+      font-weight: 400;
+  }
+  .kc-section .kc-bottom {
+      margin: 92px 0 0;
+      text-align: center;
       font-size: 15px;
+      font-weight: 400;
   }
-  .kc-section .kc-step-title {
-      margin: 15px 0 7px;
-      font-size: 22px;
-  }
-  .kc-section .kc-number {
-      top: 10px;
-      left: 10px;
-  }
-}
 
-{{ section.settings.custom_css }}
+  @media screen and (max-width: 1199px) {
+    .kc-section .kc-number {
+        top: 18px;
+        left: 18px;
+        font-size: 42px;
+    }
+    .kc-section .kc-head {
+        margin-bottom: 30px;
+    }
+    .kc-section .kc-title, .kc-section .kc-subtitle {
+        margin: 0 0 14px;
+    }
+    .kc-section .kc-step-title {
+        font-size: 24px;
+    }
+    .kc-section .kc-step-desc {
+        font-size: 16px;
+    }
+    .kc-section .kc-bottom {
+        margin: 70px 0 0;
+    }
+   .kc-section .kc-description {
+        font-size: 18px;
+    }
+  }
+  @media screen and (max-width: 749px) {
+    .kc-section {
+      padding-top: {{ section.settings.padding_top_mob }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    }
+    .kc-section .kc-description {
+      font-size: 16px;
+    }
+  }
+  @media screen and (max-width: 575px) {
+    .kc-section .kc-bottom {
+        margin: 50px 0 0;
+    }
+    .kc-section .kc-step-desc {
+        font-size: 15px;
+    }
+    .kc-section .kc-step-title {
+        margin: 15px 0 7px;
+        font-size: 22px;
+    }
+    .kc-section .kc-number {
+        top: 10px;
+        left: 10px;
+    }
+  }
+
+  {{ section.settings.custom_css }}
 {%- endstyle -%}
 
 {% if blocks.size != 0 %}
-<section class="kc-section section-{{ section.id }}">
-  <div class="kc-inner">
-
-    {%- if section.settings.subtitle != blank or section.settings.title != blank or section.settings.description != blank -%}
-      <div class="kc-head">
-        {%- if section.settings.subtitle != blank -%}
-          <p class="kc-subtitle">{{ section.settings.subtitle }}</p>
-        {%- endif -%}
-        {%- if section.settings.title != blank -%}
-          <h2 class="kc-title">{{ section.settings.title }}</h2>
-        {%- endif -%}
-        {%- if section.settings.description != blank -%}
-          <div class="kc-description">{{ section.settings.description }}</div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-    <div class="kc-grid swiper">
-      <div class="swiper-wrapper">
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign video_type = 'none'
-          if block.settings.video != blank
-            assign video_type = 'shopify'
-          elsif block.settings.video_url != blank
-            assign video_type = block.settings.video_url.type
-          endif
-          assign loop = block.settings.loop
-        -%}
-        <div class="kc-step swiper-slide" {{ block.shopify_attributes }}>
-          <div class="kc-card" data-type="{{ video_type }}" data-loop="{{ loop }}">
-            <div class="kc-media">
-              {%- if video_type == 'shopify' -%}
-                {{
-                  block.settings.video
-                  | video_tag:
-                    image_size: '900x',
-                    autoplay: false,
-                    loop: loop,
-                    muted: true,
-                    controls: false,
-                    playsinline: true,
-                    preload: 'metadata'
-                }}
-              {%- elsif video_type == 'youtube' -%}
-                {%- liquid
-                  assign yt_src = 'https://www.youtube-nocookie.com/embed/' | append: block.settings.video_url.id | append: '?enablejsapi=1&controls=0&mute=1&playsinline=1&rel=0&modestbranding=1'
-                  if loop
-                    assign yt_src = yt_src | append: '&loop=1&playlist=' | append: block.settings.video_url.id
-                  endif
-                -%}
-                <iframe src="{{ yt_src }}" title="{{ block.settings.title | escape }}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-              {%- elsif video_type == 'vimeo' -%}
-                {%- liquid
-                  assign vm_src = 'https://player.vimeo.com/video/' | append: block.settings.video_url.id | append: '?muted=1&controls=0&playsinline=1&title=0&byline=0&portrait=0'
-                  if loop
-                    assign vm_src = vm_src | append: '&loop=1'
-                  endif
-                -%}
-                <iframe src="{{ vm_src }}" title="{{ block.settings.title | escape }}" loading="lazy" allow="autoplay; picture-in-picture" allowfullscreen></iframe>
-              {%- elsif block.settings.poster != blank -%}
-                {{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 900' }}
-              {%- endif -%}
-            </div>
-
-            {%- if block.settings.number != blank -%}
-              <span class="kc-number">{{ block.settings.number }}</span>
-            {%- endif -%}
-
-            {%- if video_type != 'none' -%}
-              <div class="kc-overlay">
-                <span class="kc-play">
-                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <foreignObject x="-20" y="-20" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_0_4002_231_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="20">
-                    <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="#7FB9FF"/>
-                    <path d="M19.332 19.3332C19.332 19.0986 19.3938 18.8682 19.5113 18.6651C19.6288 18.462 19.7978 18.2936 20.0012 18.1767C20.2046 18.0598 20.4353 17.9987 20.6699 17.9995C20.9045 18.0003 21.1347 18.063 21.3374 18.1812L29.3354 22.8466C29.5372 22.9637 29.7048 23.1317 29.8213 23.3339C29.9379 23.5361 29.9993 23.7653 29.9995 23.9987C29.9997 24.232 29.9387 24.4614 29.8225 24.6637C29.7063 24.8661 29.539 25.0344 29.3374 25.1519L21.3374 29.8186C21.1347 29.9368 20.9045 29.9995 20.6699 30.0003C20.4353 30.0011 20.2046 29.94 20.0012 29.8231C19.7978 29.7062 19.6288 29.5378 19.5113 29.3347C19.3938 29.1316 19.332 28.9012 19.332 28.6666V19.3332Z" fill="#0A1628" stroke="#0A1628" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </g>
-                    <defs>
-                    <clipPath id="bgblur_0_4002_231_clip_path" transform="translate(20 20)"><path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"/>
-                    </clipPath></defs>
-                    </svg>
-                </span>
-                {%- if section.settings.hint_text != blank -%}
-                  <span class="kc-hint">{{ section.settings.hint_text }}</span>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-          </div>
-
-          {%- if block.settings.show_text -%}
-            {%- if block.settings.title != blank -%}
-              <h3 class="kc-step-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-            {%- if block.settings.show_description and block.settings.description != blank -%}
-              <p class="kc-step-desc">{{ block.settings.description }}</p>
-            {%- endif -%}
+  <section class="kc-section section-{{ section.id }}">
+    <div class="kc-inner">
+      {%- if section.settings.subtitle != blank
+        or section.settings.title != blank
+        or section.settings.description != blank
+      -%}
+        <div class="kc-head">
+          {%- if section.settings.subtitle != blank -%}
+            <p class="kc-subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="kc-title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="kc-description">{{ section.settings.description }}</div>
           {%- endif -%}
         </div>
-      {%- endfor -%}
+      {%- endif -%}
+
+      <div class="kc-grid swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign video_type = 'none'
+              if block.settings.video != blank
+                assign video_type = 'shopify'
+              elsif block.settings.video_url != blank
+                assign video_type = block.settings.video_url.type
+              endif
+              assign loop = block.settings.loop
+            -%}
+            <div class="kc-step swiper-slide" {{ block.shopify_attributes }}>
+              <div class="kc-card" data-type="{{ video_type }}" data-loop="{{ loop }}">
+                <div class="kc-media">
+                  {%- if video_type == 'shopify' -%}
+                    {{
+                      block.settings.video
+                      | video_tag:
+                        image_size: '900x',
+                        autoplay: false,
+                        loop: loop,
+                        muted: true,
+                        controls: false,
+                        playsinline: true,
+                        preload: 'metadata'
+                    }}
+                  {%- elsif video_type == 'youtube' -%}
+                    {%- liquid
+                      assign yt_src = 'https://www.youtube-nocookie.com/embed/' | append: block.settings.video_url.id | append: '?enablejsapi=1&controls=0&mute=1&playsinline=1&rel=0&modestbranding=1'
+                      if loop
+                        assign yt_src = yt_src | append: '&loop=1&playlist=' | append: block.settings.video_url.id
+                      endif
+                    -%}
+                    <iframe
+                      src="{{ yt_src }}"
+                      title="{{ block.settings.title | escape }}"
+                      loading="lazy"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  {%- elsif video_type == 'vimeo' -%}
+                    {%- liquid
+                      assign vm_src = 'https://player.vimeo.com/video/' | append: block.settings.video_url.id | append: '?muted=1&controls=0&playsinline=1&title=0&byline=0&portrait=0'
+                      if loop
+                        assign vm_src = vm_src | append: '&loop=1'
+                      endif
+                    -%}
+                    <iframe
+                      src="{{ vm_src }}"
+                      title="{{ block.settings.title | escape }}"
+                      loading="lazy"
+                      allow="autoplay; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  {%- elsif block.settings.poster != blank -%}
+                    {{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 900' }}
+                  {%- endif -%}
+                </div>
+
+                {%- if block.settings.number != blank -%}
+                  <span class="kc-number">{{ block.settings.number }}</span>
+                {%- endif -%}
+
+                {%- if video_type != 'none' -%}
+                  <div class="kc-overlay">
+                    <span class="kc-play">
+                      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <foreignObject x="-20" y="-20" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_0_4002_231_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="20">
+                        <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="#7FB9FF"/>
+                        <path d="M19.332 19.3332C19.332 19.0986 19.3938 18.8682 19.5113 18.6651C19.6288 18.462 19.7978 18.2936 20.0012 18.1767C20.2046 18.0598 20.4353 17.9987 20.6699 17.9995C20.9045 18.0003 21.1347 18.063 21.3374 18.1812L29.3354 22.8466C29.5372 22.9637 29.7048 23.1317 29.8213 23.3339C29.9379 23.5361 29.9993 23.7653 29.9995 23.9987C29.9997 24.232 29.9387 24.4614 29.8225 24.6637C29.7063 24.8661 29.539 25.0344 29.3374 25.1519L21.3374 29.8186C21.1347 29.9368 20.9045 29.9995 20.6699 30.0003C20.4353 30.0011 20.2046 29.94 20.0012 29.8231C19.7978 29.7062 19.6288 29.5378 19.5113 29.3347C19.3938 29.1316 19.332 28.9012 19.332 28.6666V19.3332Z" fill="#0A1628" stroke="#0A1628" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                        <clipPath id="bgblur_0_4002_231_clip_path" transform="translate(20 20)"><path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"/>
+                        </clipPath></defs>
+                      </svg>
+                    </span>
+                    {%- if section.settings.hint_text != blank -%}
+                      <span class="kc-hint">{{ section.settings.hint_text }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.show_text -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="kc-step-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.show_description and block.settings.description != blank -%}
+                  <p class="kc-step-desc">{{ block.settings.description }}</p>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
+
+      {%- if section.settings.bottom_text != blank -%}
+        <p class="kc-bottom">{{ section.settings.bottom_text }}</p>
+      {%- endif -%}
     </div>
+  </section>
 
-    {%- if section.settings.bottom_text != blank -%}
-      <p class="kc-bottom">{{ section.settings.bottom_text }}</p>
-    {%- endif -%}
-  </div>
-</section>
+  <script>
+    (function () {
+      var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-<script>
-  (function () {
-    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    function post(iframe, data) {
-      if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage(JSON.stringify(data), '*');
-    }
-
-    function play(card) {
-      var type = card.dataset.type;
-      if (type === 'shopify') {
-        var v = card.querySelector('video');
-        if (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-      } else if (type === 'youtube') {
-        post(card.querySelector('iframe'), { event: 'command', func: 'playVideo', args: [] });
-      } else if (type === 'vimeo') {
-        post(card.querySelector('iframe'), { method: 'play' });
-      } else { return; }
-      card.classList.add('is-playing');
-    }
-
-    function pause(card) {
-      var type = card.dataset.type;
-      if (type === 'shopify') {
-        var v = card.querySelector('video');
-        if (v) v.pause();
-      } else if (type === 'youtube') {
-        post(card.querySelector('iframe'), { event: 'command', func: 'pauseVideo', args: [] });
-      } else if (type === 'vimeo') {
-        post(card.querySelector('iframe'), { method: 'pause' });
-      } else { return; }
-      card.classList.remove('is-playing');
-    }
-
-    // Swiper load (jo pehla thi na hoy to CDN thi)
-    function loadSwiper(cb) {
-      if (window.Swiper) return cb();
-      if (!document.querySelector('link[data-kc-swiper]')) {
-        var l = document.createElement('link');
-        l.rel = 'stylesheet';
-        l.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
-        l.setAttribute('data-kc-swiper', 'true');
-        document.head.appendChild(l);
+      function post(iframe, data) {
+        if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage(JSON.stringify(data), '*');
       }
-      var existing = document.querySelector('script[data-kc-swiper]');
-      if (existing) {
-        existing.addEventListener('load', cb);
-        return;
-      }
-      var s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
-      s.setAttribute('data-kc-swiper', 'true');
-      s.onload = cb;
-      document.head.appendChild(s);
-    }
 
-    function initSlider(root) {
-      var el = root.querySelector('.kc-grid');
-      if (!el || el.swiper) return;
-      new Swiper(el, {
-        slidesPerView: 1.2,
-        spaceBetween: 16,
-        grabCursor: true,
-        watchOverflow: true,
-        breakpoints: {
-          750: { slidesPerView: 2.1 },
-          990: { slidesPerView: 3 }
-        }
-      });
-    }
-
-    document.querySelectorAll('.kc-section:not([data-kc-init])').forEach(function (root) {
-      root.setAttribute('data-kc-init', 'true');
-
-      loadSwiper(function () { initSlider(root); });
-
-      root.querySelectorAll('.kc-card').forEach(function (card) {
-        var pinned = false;
-
-        function togglePin() {
-          if (pinned) {
-            pinned = false;
-            card.classList.remove('is-pinned');
-            pause(card);
-          } else {
-            pinned = true;
-            card.classList.add('is-pinned');
-            play(card);
+      function play(card) {
+        var type = card.dataset.type;
+        if (type === 'shopify') {
+          var v = card.querySelector('video');
+          if (v) {
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
           }
-        }
-
-        if (canHover) {
-          // Desktop: hover = play, leave = pause (sirf agar click/pin nahi kiya)
-          card.addEventListener('mouseenter', function () {
-            if (!pinned) play(card);
-          });
-          card.addEventListener('mouseleave', function () {
-            if (!pinned) pause(card);
-          });
-          // Click = pin (bahar jaane pe bhi chalta rahega), dobara click = pause
-          card.addEventListener('click', togglePin);
+        } else if (type === 'youtube') {
+          post(card.querySelector('iframe'), { event: 'command', func: 'playVideo', args: [] });
+        } else if (type === 'vimeo') {
+          post(card.querySelector('iframe'), { method: 'play' });
         } else {
-          // Mobile: tap = play/pause toggle
-          card.addEventListener('click', togglePin);
+          return;
         }
+        card.classList.add('is-playing');
+      }
+
+      function pause(card) {
+        var type = card.dataset.type;
+        if (type === 'shopify') {
+          var v = card.querySelector('video');
+          if (v) v.pause();
+        } else if (type === 'youtube') {
+          post(card.querySelector('iframe'), { event: 'command', func: 'pauseVideo', args: [] });
+        } else if (type === 'vimeo') {
+          post(card.querySelector('iframe'), { method: 'pause' });
+        } else {
+          return;
+        }
+        card.classList.remove('is-playing');
+      }
+
+      // Swiper load (jo pehla thi na hoy to CDN thi)
+      function loadSwiper(cb) {
+        if (window.Swiper) return cb();
+        if (!document.querySelector('link[data-kc-swiper]')) {
+          var l = document.createElement('link');
+          l.rel = 'stylesheet';
+          l.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+          l.setAttribute('data-kc-swiper', 'true');
+          document.head.appendChild(l);
+        }
+        var existing = document.querySelector('script[data-kc-swiper]');
+        if (existing) {
+          existing.addEventListener('load', cb);
+          return;
+        }
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+        s.setAttribute('data-kc-swiper', 'true');
+        s.onload = cb;
+        document.head.appendChild(s);
+      }
+
+      function initSlider(root) {
+        var el = root.querySelector('.kc-grid');
+        if (!el || el.swiper) return;
+        new Swiper(el, {
+          slidesPerView: 1.2,
+          spaceBetween: 16,
+          grabCursor: true,
+          watchOverflow: true,
+          breakpoints: {
+            750: { slidesPerView: 2.1 },
+            990: { slidesPerView: 3 },
+          },
+        });
+      }
+
+      document.querySelectorAll('.kc-section:not([data-kc-init])').forEach(function (root) {
+        root.setAttribute('data-kc-init', 'true');
+
+        loadSwiper(function () {
+          initSlider(root);
+        });
+
+        root.querySelectorAll('.kc-card').forEach(function (card) {
+          var pinned = false;
+
+          function togglePin() {
+            if (pinned) {
+              pinned = false;
+              card.classList.remove('is-pinned');
+              pause(card);
+            } else {
+              pinned = true;
+              card.classList.add('is-pinned');
+              play(card);
+            }
+          }
+
+          if (canHover) {
+            // Desktop: hover = play, leave = pause (sirf agar click/pin nahi kiya)
+            card.addEventListener('mouseenter', function () {
+              if (!pinned) play(card);
+            });
+            card.addEventListener('mouseleave', function () {
+              if (!pinned) pause(card);
+            });
+            // Click = pin (bahar jaane pe bhi chalta rahega), dobara click = pause
+            card.addEventListener('click', togglePin);
+          } else {
+            // Mobile: tap = play/pause toggle
+            card.addEventListener('click', togglePin);
+          }
+        });
       });
-    });
-  })();
-</script>
+    })();
+  </script>
 {% endif %}
 {% schema %}
 {
@@ -457,9 +479,19 @@
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "The Ritual" },
     { "type": "text", "id": "title", "label": "Title", "default": "How Karmicare works." },
-    { "type": "richtext", "id": "description", "label": "Short description", "default": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>" },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Short description",
+      "default": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>"
+    },
     { "type": "text", "id": "hint_text", "label": "Video hint text", "default": "Hover or tap to watch" },
-    { "type": "textarea", "id": "bottom_text", "label": "Section bottom tag", "default": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day." },
+    {
+      "type": "textarea",
+      "id": "bottom_text",
+      "label": "Section bottom tag",
+      "default": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day."
+    },
 
     { "type": "header", "content": "Layout" },
     {
@@ -475,15 +507,60 @@
         { "value": "9 / 16", "label": "Portrait 9:16" }
       ]
     },
-    { "type": "range", "id": "radius", "label": "Video corner radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Video corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
     { "type": "header", "content": "Custom CSS (colors yahan add karein)" },
     { "type": "textarea", "id": "custom_css", "label": "Custom CSS" },
 
-    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
 
-    { "type": "range", "id": "padding_top_mob", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
-    { "type": "range", "id": "padding_bottom_mob", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "label": "Padding top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
     {
       "type": "header",
       "content": "Day Mode Colors"
@@ -527,12 +604,6 @@
       "type": "text",
       "id": "bg_gradient_night",
       "label": "Background Gradient (Night)"
-    },
-    {
-      "type": "color",
-      "id": "card_bg_color_night",
-      "label": "Card Background Color (Night)",
-      "default": "#191f38"
     }
   ],
   "blocks": [
@@ -554,7 +625,12 @@
         { "type": "checkbox", "id": "show_text", "label": "Show title below video", "default": true },
         { "type": "text", "id": "title", "label": "Title", "default": "Rinse before" },
         { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
-        { "type": "text", "id": "description", "label": "Description", "default": "Start with a rinse before brushing." }
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Start with a rinse before brushing."
+        }
       ]
     }
   ],
@@ -563,9 +639,26 @@
     {
       "name": "How it works (Steps)",
       "blocks": [
-        { "type": "step", "settings": { "number": "01", "title": "Rinse before", "description": "Start with a rinse before brushing." } },
-        { "type": "step", "settings": { "number": "02", "title": "Pump and brush", "description": "Apply one pump and brush gently for two minutes." } },
-        { "type": "step", "settings": { "number": "03", "title": "Spit, no rinse", "description": "Spit out the excess. Do not rinse afterwards." } }
+        {
+          "type": "step",
+          "settings": { "number": "01", "title": "Rinse before", "description": "Start with a rinse before brushing." }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Pump and brush",
+            "description": "Apply one pump and brush gently for two minutes."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Spit, no rinse",
+            "description": "Spit out the excess. Do not rinse afterwards."
+          }
+        }
       ]
     }
   ]
