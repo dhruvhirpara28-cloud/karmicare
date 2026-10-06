@@ -3,6 +3,35 @@ collection-component {
   display: block;
 }
 
+@font-face {
+  font-family: 'Nunito';
+  src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Bold.woff2?v=1791306567') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Bold.woff?v=1791306567') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Bold.ttf?v=1791306568') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Medium.woff2?v=1791306567') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Medium.woff?v=1791306567') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Medium.ttf?v=1791306568') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Regular.woff2?v=1791306567') format('woff2'),
+    url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Regular.woff?v=1791306567') format('woff'),
+    url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Nunito-Medium.ttf?v=1791306568') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 
 a {
@@ -3456,7 +3485,7 @@ details-disclosure>details {
 }
 
 .block__animate-button {
-  background-image: linear-gradient(to right, #cfe4ff 0%, #7fb9ff 25%, #6690c2 50%);
+  background-image: linear-gradient(to right, #cfe4ff 0%, var(--kc-mapped-surface-accent-default) 25%, #6690c2 50%);
   background-size: 200% 100%;
   background-position: 0 0;
   background-repeat: repeat;
@@ -3472,7 +3501,7 @@ details-disclosure>details {
   padding: 2px;
   z-index: 1;
   pointer-events: none;
-  background: conic-gradient(from var(--kc-plan-angle), #7fb9ff, #cfe2ff, #7fb9ff, #7fb9ff, #9ec7ff, #7fb9ff);
+  background: conic-gradient(from var(--kc-plan-angle), var(--kc-mapped-surface-accent-default), #cfe2ff, var(--kc-mapped-surface-accent-default), var(--kc-mapped-surface-accent-default), #9ec7ff, var(--kc-mapped-surface-accent-default));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -3582,4 +3611,12 @@ p.kc-caption-text {
 
 body>* {
   line-height: var(--kc-responsive-body-line-height);
+}
+
+.subtitle-item {
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  font-size: var(--font-body-small-size);
+  font-family: var(--kc-font-family-Nunito);
+  font-weight: var(--font-700-weight);
+  text-transform: uppercase;
 }

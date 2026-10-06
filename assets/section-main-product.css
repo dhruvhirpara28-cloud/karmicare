@@ -1030,15 +1030,35 @@ a.product__text {
   .product--thumbnail_slider .slider-mobile-gutter .slider-button,
   .product--thumbnail_vertical .slider-mobile-gutter .slider-button {
     display: flex;
+    height: -webkit-fill-available;
+    position: static;
+    transform: none;
+    border: none;
   }
+}
+
+.product__media-wrapper .slider-mobile-gutter {
+  position: relative;
 }
 
 .product__media-wrapper .slider-button {
   width: 40px;
   height: 40px;
-  border: none;
+  border: 1px solid rgb(var(--color-foreground));
   border-radius: var(--primary-border-radius);
-  height: -webkit-fill-available;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background-color: rgb(var(--color-background));
+}
+
+.product__media-wrapper .slider-button--prev {
+  left: 0;
+}
+
+.product__media-wrapper .slider-button--next {
+  right: 0;
 }
 
 @media screen and (min-width: 900px) {
@@ -1711,8 +1731,8 @@ a.product__text {
 }
 
 .info-tip .info-icon {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1722,14 +1742,17 @@ a.product__text {
   border: 1.2px solid rgb(var(--color-foreground));
   color: var(--color-foreground);
   transition: background .2s, color .2s;
+  font-size: var(--kc-responsive-label-sm-text-size);
 }
 
 body.night-mode .info-tip-popover {
   background: #232847 !important;
 }
+
 body:not(.night-mode) .info-tip-popover {
   background: #fffbf6 !important;
 }
+
 .info-tip-popover {
   position: absolute;
   bottom: calc(100% + 10px);
@@ -1772,10 +1795,7 @@ body:not(.night-mode) .info-tip-popover {
   transform: translateX(-48%) translateY(-8px);
 }
 
-.night-mode .info-tip:hover .info-icon {
-  color: var(--bg);
-  background: var(--accent);
-}
+
 
 .info-tip-popover::after {
   content: "";
@@ -1797,9 +1817,10 @@ body:not(.night-mode) .info-tip-popover {
     right: auto;
     transform: translateX(-50%);
   }
-.pc-col.pc-col-label .info-tip-popover {
+
+  .pc-col.pc-col-label .info-tip-popover {
     left: 400%;
-}
+  }
 
   .info-tip:hover .info-tip-popover {
     transform: translateX(-70%) translateY(-8px);

@@ -77,12 +77,14 @@
                   {{ testimonial.description | metafield_tag }}
                 </div>
               {%- endif -%}
-              {%- if testimonial.name != blank -%}
-                <h6>{{ testimonial.name }}</h6>
-              {%- endif -%}
-              {%- if testimonial.designation != blank -%}
-                <p>{{ testimonial.designation }}</p>
-              {%- endif -%}
+              <div class="trusted-professionals__card-body">
+                {%- if testimonial.name != blank -%}
+                  <h6>{{ testimonial.name }}</h6>
+                {%- endif -%}
+                {%- if testimonial.designation != blank -%}
+                  <p>{{ testimonial.designation }}</p>
+                {%- endif -%}
+              </div>
             </div>
           </li>
         {%- endfor -%}

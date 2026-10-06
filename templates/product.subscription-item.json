@@ -83,7 +83,7 @@
             "pricing_summary_checkup_title": "Check-up Reward",
             "pricing_summary_checkup_tooltip": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
             "show_testimonial_button": true,
-            "testimonial_button_text": "2× RETURN ON CARE"
+            "testimonial_button_text": "Brushing & Beyond"
           }
         },
         "price": {
@@ -148,13 +148,11 @@
             "header_text": "More than two formulas",
             "body_text": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
             "footer_text": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-            "background_color_day": "#F2F8FF",
-            "background_color_night": "#191F38",
-            "header_color_day": "#7FB9FF",
-            "header_color_night": "#7FB9FF",
+            "background_color_day": "#f2f8ff",
+            "background_color_night": "#191f38",
+            "header_color_day": "#7fb9ff",
+            "header_color_night": "#7fb9ff",
             "border_color": "#7fb9ff",
-            "font_size_desktop": 14,
-            "font_size_mobile": 12,
             "border_radius": 12,
             "padding_vertical": 16,
             "padding_horizontal": 16
@@ -451,36 +449,43 @@
         "bottom_text": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day.",
         "aspect_ratio": "4 / 3",
         "radius": 12,
-        "custom_css": "",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_top_mob": 60,
-        "padding_bottom_mob": 80,
-        "text_color_day": "#191f38",
+        "columns_desktop": 3,
+        "slider_desktop": false,
+        "columns_laptop": 3,
+        "slider_laptop": false,
+        "columns_tablet": 2,
+        "slider_tablet": true,
+        "columns_mobile": "1.5",
+        "slider_mobile": true,
+        "show_slider_arrows": true,
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 52,
+        "padding_bottom_mobile": 52,
+        "text_color_day": "",
         "bg_color_day": "#fffbf6",
         "bg_gradient_day": "",
         "card_bg_color_day": "#ffffff",
-        "text_color_night": "#fffbf6",
+        "text_color_night": "",
         "bg_color_night": "#2c3a60",
-        "bg_gradient_night": "",
-        "card_bg_color_night": "#191f38"
+        "bg_gradient_night": ""
       }
     },
     "comparison_table_r8CDbT": {
       "type": "comparison-table",
       "name": "Comparison Table",
       "settings": {
-        "text_color_day": "#191f38",
+        "text_color_day": "",
         "bg_color_day": "",
-        "col_text_day": "#ffffff",
-        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
+        "col_text_day": "",
+        "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
         "text_color_night": "#fffbf6",
         "bg_color_night": "",
-        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)",
-        "padding-top": 160,
+        "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);",
+        "padding-top": 120,
         "padding-bottom": 120,
-        "padding-top-mobile": 40,
-        "padding-bottom-mobile": 40
+        "padding-top-mobile": 60,
+        "padding-bottom-mobile": 60
       }
     },
     "research_behind_system_EkjATL": {
@@ -654,7 +659,7 @@
         "bg_color_day": "",
         "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
         "bg_color_night": "",
-        "bg_gradient_night": "linear-gradient(180deg, #191F38 0%, #2C3A60 100%)"
+        "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);"
       }
     }
   },

@@ -1,0 +1,76 @@
+{%- comment -%}
+  Renders product info card block (e.g. Mission statement or Commitment details).
+  Accepts:
+  - block: {Object} passes block settings to the snippet.
+
+  Usage:
+  {% render 'product-info-card', block: block %}
+{%- endcomment -%}
+
+{% style %}
+  #ProductInfoCard-{{ block.id }} {
+    margin: 1.5rem 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid transparent;
+    border-radius: {{ block.settings.border_radius}}px;
+    padding: {{ block.settings.padding_vertical}}px {{ block.settings.padding_horizontal}}px;
+    text-align: left;
+    width: 100%;
+  }
+
+  /* ── Day Mode Colors ── */
+  {% if block.settings.background_color_day != blank %}
+  body:not(.night-mode) #ProductInfoCard-{{ block.id }} {
+    background-color: {{ block.settings.background_color_day }};
+  }
+  {% endif %}
+
+  {% if block.settings.header_color_day != blank %}
+  body:not(.night-mode) #ProductInfoCard-{{ block.id }} .product-info-card__header {
+    color: {{ block.settings.header_color_day }};
+  }
+  {% endif %}
+
+  /* ── Night Mode Colors ── */
+  {% if block.settings.background_color_night != blank %}
+  body.night-mode #ProductInfoCard-{{ block.id }} {
+    background-color: {{ block.settings.background_color_night }};
+  }
+  {% endif %}
+
+  {% if block.settings.header_color_night != blank %}
+  body.night-mode #ProductInfoCard-{{ block.id }} .product-info-card__header {
+    color: {{ block.settings.header_color_night }};
+  }
+  {% endif %}
+
+  #ProductInfoCard-{{ block.id }} .product-info-card__header {
+    font-size: var(--kc-responsive-label-sm-text-size);
+    font-weight: var(--font-700-weight);
+    text-transform: uppercase;
+    letter-spacing:var(--kc-responsive-Nunito-letter-spacing);
+  }
+
+  #ProductInfoCard-{{ block.id }} .product-info-card__body p + p {
+    margin-top: 1.5rem;
+  }
+
+  #ProductInfoCard-{{ block.id }} .product-info-card__footer {
+    opacity:0.75
+  }
+{% endstyle %}
+
+<div id="ProductInfoCard-{{ block.id }}" class="product-info-card" {{ block.shopify_attributes }}>
+  {%- if block.settings.header_text != blank -%}
+    <div class="product-info-card__header">{{ block.settings.header_text }}</div>
+  {%- endif -%}
+  {%- if block.settings.body_text != blank -%}
+    <div class="product-info-card__body rte">{{ block.settings.body_text }}</div>
+  {%- endif -%}
+  {%- if block.settings.footer_text != blank -%}
+    <div class="product-info-card__footer">{{ block.settings.footer_text }}</div>
+  {%- endif -%}
+</div>

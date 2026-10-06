@@ -7,6 +7,10 @@
   - Font-family, font-weight, font-style, font-size, max-width static hain (CSS mein edit karo).
 {%- endcomment -%}
 
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{{ 'section-how-it-works-steps.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   {%- if section.settings.bg_gradient_day != blank -%}
       body:not(.night-mode) .section-{{ section.id }},
@@ -30,320 +34,199 @@
       }
   {%- endif -%}
 
-  {% if section.settings.text_color_day != blank %}
-      body:not(.night-mode) .section-{{ section.id }} *,
-      body.day-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_day }};
+
+  .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+      .section-{{ section.id }} {
+          padding-top: {{ section.settings.padding_top_desktop }}px;
+          padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
       }
-  {% endif %}
-
-  {% if section.settings.text_color_night != blank %}
-      body.night-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_night }};
-      }
-  {% endif %}
-
-  .kc-section {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-      font-family: inherit;
-      font-weight: 400;
-      font-style: normal;
-  }
-  .kc-section .kc-inner {
-      max-width: 1416px;
-      margin: 0 auto;
-      padding: 0 20px;
-      box-sizing: border-box;
-  }
-  .kc-section .kc-head {
-      text-align: center;
-      margin-bottom: 48px;
-  }
-  .kc-section .kc-subtitle {
-      margin: 0 0 24px;
-      font-size: var(--km-body-sm);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-  }
-  .kc-section .kc-title {
-      margin: 0 0 24px;
-      line-height: 1;
-  }
-  .kc-section .kc-description {
-      margin: 0 auto;
-      line-height: 1.5;
-      font-size: var(--km-body-lg);
-  }
-  .kc-section .kc-description p {
-      margin: 0;
   }
 
-  /* Swiper slider */
-  .kc-section .kc-grid {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-  }
-  .kc-section .kc-grid .swiper-slide {
-      height: auto;
-      box-sizing: border-box;
-  }
-  .kc-section .kc-card {
-      position: relative;
+  .kc-how-it-steps .kc-card {
       aspect-ratio: {{ section.settings.aspect_ratio }};
       border-radius: {{ section.settings.radius }}px;
-      overflow: hidden;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
   }
-  .kc-section .kc-media,
-  .kc-section .kc-media video,
-  .kc-section .kc-media iframe,
-  .kc-section .kc-media img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      object-fit: cover;
-      display: block;
-  }
-  .kc-section .kc-media iframe { pointer-events: none; }
-
-  .kc-section .kc-number {
-      position: absolute;
-      top: 23px;
-      left: 23px;
-      z-index: 2;
-      /* font-family: inherit; */
-      font-weight: 500;
-      font-style: normal;
-      font-size: 52px;
-      line-height: 1;
-      pointer-events: none;
-  }
-  .kc-section .kc-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-  }
-  .kc-section .kc-play {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-  }
-  .kc-section .kc-play svg {
-      width: 100%;
-      height: 100%;
-      margin-left: 2px;
-      fill: currentColor;
-  }
-  .kc-section .kc-hint { font-size: 11px; }
-  .kc-section .kc-card.is-playing .kc-overlay { opacity: 0; }
-
-  .kc-section .kc-step-title {
-      margin: 24px 0 7px;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 28px;
-      line-height: 1;
-  }
-  .kc-section .kc-step-desc {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.3;
-      opacity: 0.68;
-      font-weight: 400;
-  }
-  .kc-section .kc-bottom {
-      margin: 92px 0 0;
-      text-align: center;
-      font-size: 15px;
-      font-weight: 400;
-  }
-
-  @media screen and (max-width: 1199px) {
-    .kc-section .kc-number {
-        top: 18px;
-        left: 18px;
-        font-size: 42px;
-    }
-    .kc-section .kc-head {
-        margin-bottom: 30px;
-    }
-    .kc-section .kc-title, .kc-section .kc-subtitle {
-        margin: 0 0 14px;
-    }
-    .kc-section .kc-step-title {
-        font-size: 24px;
-    }
-    .kc-section .kc-step-desc {
-        font-size: 16px;
-    }
-    .kc-section .kc-bottom {
-        margin: 70px 0 0;
-    }
-   .kc-section .kc-description {
-        font-size: 18px;
-    }
-  }
-  @media screen and (max-width: 749px) {
-    .kc-section {
-      padding-top: {{ section.settings.padding_top_mob }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mob }}px;
-    }
-    .kc-section .kc-description {
-      font-size: 16px;
-    }
-  }
-  @media screen and (max-width: 575px) {
-    .kc-section .kc-bottom {
-        margin: 50px 0 0;
-    }
-    .kc-section .kc-step-desc {
-        font-size: 15px;
-    }
-    .kc-section .kc-step-title {
-        margin: 15px 0 7px;
-        font-size: 22px;
-    }
-    .kc-section .kc-number {
-        top: 10px;
-        left: 10px;
-    }
-  }
-
-  {{ section.settings.custom_css }}
 {%- endstyle -%}
 
 {% if blocks.size != 0 %}
-  <section class="kc-section section-{{ section.id }}">
-    <div class="kc-inner">
+  <section class="kc-how-it-steps section-{{ section.id }}">
+    <div class="page-width">
       {%- if section.settings.subtitle != blank
         or section.settings.title != blank
         or section.settings.description != blank
       -%}
-        <div class="kc-head">
+        <div class="kc-head center">
           {%- if section.settings.subtitle != blank -%}
-            <p class="kc-subtitle">{{ section.settings.subtitle }}</p>
+            <span class="subtitle-item">{{ section.settings.subtitle }}</span>
           {%- endif -%}
           {%- if section.settings.title != blank -%}
-            <h2 class="kc-title">{{ section.settings.title }}</h2>
+            <{{ section.settings.heading_tag | default: 'h2' }} class="kc-title {{ section.settings.heading_size | default: 'h2' }}">{{ section.settings.title }}</{{ section.settings.heading_tag | default: 'h2' }}>
           {%- endif -%}
           {%- if section.settings.description != blank -%}
-            <div class="kc-description">{{ section.settings.description }}</div>
+            {{- section.settings.description -}}
           {%- endif -%}
         </div>
       {%- endif -%}
 
-      <div class="kc-grid swiper">
-        <div class="swiper-wrapper">
-          {%- for block in section.blocks -%}
-            {%- liquid
-              assign video_type = 'none'
-              if block.settings.video != blank
-                assign video_type = 'shopify'
-              elsif block.settings.video_url != blank
-                assign video_type = block.settings.video_url.type
-              endif
-              assign loop = block.settings.loop
-            -%}
-            <div class="kc-step swiper-slide" {{ block.shopify_attributes }}>
-              <div class="kc-card" data-type="{{ video_type }}" data-loop="{{ loop }}">
-                <div class="kc-media">
-                  {%- if video_type == 'shopify' -%}
-                    {{
-                      block.settings.video
-                      | video_tag:
-                        image_size: '900x',
-                        autoplay: false,
-                        loop: loop,
-                        muted: true,
-                        controls: false,
-                        playsinline: true,
-                        preload: 'metadata'
-                    }}
-                  {%- elsif video_type == 'youtube' -%}
-                    {%- liquid
-                      assign yt_src = 'https://www.youtube-nocookie.com/embed/' | append: block.settings.video_url.id | append: '?enablejsapi=1&controls=0&mute=1&playsinline=1&rel=0&modestbranding=1'
-                      if loop
-                        assign yt_src = yt_src | append: '&loop=1&playlist=' | append: block.settings.video_url.id
-                      endif
-                    -%}
-                    <iframe
-                      src="{{ yt_src }}"
-                      title="{{ block.settings.title | escape }}"
-                      loading="lazy"
-                      allow="autoplay; encrypted-media; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  {%- elsif video_type == 'vimeo' -%}
-                    {%- liquid
-                      assign vm_src = 'https://player.vimeo.com/video/' | append: block.settings.video_url.id | append: '?muted=1&controls=0&playsinline=1&title=0&byline=0&portrait=0'
-                      if loop
-                        assign vm_src = vm_src | append: '&loop=1'
-                      endif
-                    -%}
-                    <iframe
-                      src="{{ vm_src }}"
-                      title="{{ block.settings.title | escape }}"
-                      loading="lazy"
-                      allow="autoplay; picture-in-picture"
-                      allowfullscreen
-                    ></iframe>
-                  {%- elsif block.settings.poster != blank -%}
-                    {{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 900' }}
-                  {%- endif -%}
-                </div>
+      {%- capture slider_classes -%}
+        {% if section.settings.slider_mobile %} slider--mobile{% endif %}
+        {% if section.settings.slider_tablet %} slider--tablet{% endif %}
+        {% if section.settings.slider_laptop %} slider--desktop{% endif %}
+        {% if section.settings.slider_desktop %} slider--desktop{% endif %}
+      {%- endcapture -%}
 
-                {%- if block.settings.number != blank -%}
-                  <span class="kc-number">{{ block.settings.number }}</span>
-                {%- endif -%}
+      {%- assign show_slider = false -%}
+      {%- if section.settings.slider_mobile
+        or section.settings.slider_tablet
+        or section.settings.slider_laptop
+        or section.settings.slider_desktop
+      -%}
+        {%- assign show_slider = true -%}
+      {%- endif -%}
 
-                {%- if video_type != 'none' -%}
-                  <div class="kc-overlay">
-                    <span class="kc-play">
-                      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <foreignObject x="-20" y="-20" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_0_4002_231_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="20">
-                        <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="#7FB9FF"/>
-                        <path d="M19.332 19.3332C19.332 19.0986 19.3938 18.8682 19.5113 18.6651C19.6288 18.462 19.7978 18.2936 20.0012 18.1767C20.2046 18.0598 20.4353 17.9987 20.6699 17.9995C20.9045 18.0003 21.1347 18.063 21.3374 18.1812L29.3354 22.8466C29.5372 22.9637 29.7048 23.1317 29.8213 23.3339C29.9379 23.5361 29.9993 23.7653 29.9995 23.9987C29.9997 24.232 29.9387 24.4614 29.8225 24.6637C29.7063 24.8661 29.539 25.0344 29.3374 25.1519L21.3374 29.8186C21.1347 29.9368 20.9045 29.9995 20.6699 30.0003C20.4353 30.0011 20.2046 29.94 20.0012 29.8231C19.7978 29.7062 19.6288 29.5378 19.5113 29.3347C19.3938 29.1316 19.332 28.9012 19.332 28.6666V19.3332Z" fill="#0A1628" stroke="#0A1628" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </g>
-                        <defs>
-                        <clipPath id="bgblur_0_4002_231_clip_path" transform="translate(20 20)"><path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"/>
-                        </clipPath></defs>
-                      </svg>
-                    </span>
-                    {%- if section.settings.hint_text != blank -%}
-                      <span class="kc-hint">{{ section.settings.hint_text }}</span>
-                    {%- endif -%}
-                  </div>
+      {%- if show_slider -%}
+        <slider-component>
+      {%- endif -%}
+
+      <ul
+        class="kc-grid{% if show_slider %} slider{{ slider_classes }}{% endif %}"
+        id="Slider-{{ section.id }}"
+        role="list"
+        style="--cols-desktop: {{ section.settings.columns_desktop }}; --cols-laptop: {{ section.settings.columns_laptop }}; --cols-tablet: {{ section.settings.columns_tablet }}; --cols-mobile: {{ section.settings.columns_mobile }};"
+      >
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign video_type = 'none'
+            if block.settings.video != blank
+              assign video_type = 'shopify'
+            elsif block.settings.video_url != blank
+              assign video_type = block.settings.video_url.type
+            endif
+            assign loop = block.settings.loop
+          -%}
+          <li
+            id="Slide-{{ section.id }}-{{ forloop.index }}"
+            class="kc-step{% if show_slider %} slider__slide{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="kc-card" data-type="{{ video_type }}" data-loop="{{ loop }}">
+              <div class="kc-media">
+                {%- if video_type == 'shopify' -%}
+                  {{
+                    block.settings.video
+                    | video_tag:
+                      image_size: '900x',
+                      autoplay: false,
+                      loop: loop,
+                      muted: true,
+                      controls: false,
+                      playsinline: true,
+                      preload: 'metadata'
+                  }}
+                {%- elsif video_type == 'youtube' -%}
+                  {%- liquid
+                    assign yt_src = 'https://www.youtube-nocookie.com/embed/' | append: block.settings.video_url.id | append: '?enablejsapi=1&controls=0&mute=1&playsinline=1&rel=0&modestbranding=1'
+                    if loop
+                      assign yt_src = yt_src | append: '&loop=1&playlist=' | append: block.settings.video_url.id
+                    endif
+                  -%}
+                  <iframe
+                    src="{{ yt_src }}"
+                    title="{{ block.settings.title | escape }}"
+                    loading="lazy"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                {%- elsif video_type == 'vimeo' -%}
+                  {%- liquid
+                    assign vm_src = 'https://player.vimeo.com/video/' | append: block.settings.video_url.id | append: '?muted=1&controls=0&playsinline=1&title=0&byline=0&portrait=0'
+                    if loop
+                      assign vm_src = vm_src | append: '&loop=1'
+                    endif
+                  -%}
+                  <iframe
+                    src="{{ vm_src }}"
+                    title="{{ block.settings.title | escape }}"
+                    loading="lazy"
+                    allow="autoplay; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                {%- elsif block.settings.poster != blank -%}
+                  {{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 900' }}
                 {%- endif -%}
               </div>
 
-              {%- if block.settings.show_text -%}
-                {%- if block.settings.title != blank -%}
-                  <h3 class="kc-step-title">{{ block.settings.title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.show_description and block.settings.description != blank -%}
-                  <p class="kc-step-desc">{{ block.settings.description }}</p>
-                {%- endif -%}
+              {%- if block.settings.number != blank -%}
+                <h2 class="kc-number">{{ block.settings.number }}</h2>
+              {%- endif -%}
+
+              {%- if video_type != 'none' -%}
+                <div class="kc-overlay">
+                  <span class="kc-play">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <foreignObject x="-20" y="-20" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_0_4002_231_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="20">
+                      <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="var(--kc-mapped-surface-accent-default)"/>
+                      <path d="M19.332 19.3332C19.332 19.0986 19.3938 18.8682 19.5113 18.6651C19.6288 18.462 19.7978 18.2936 20.0012 18.1767C20.2046 18.0598 20.4353 17.9987 20.6699 17.9995C20.9045 18.0003 21.1347 18.063 21.3374 18.1812L29.3354 22.8466C29.5372 22.9637 29.7048 23.1317 29.8213 23.3339C29.9379 23.5361 29.9993 23.7653 29.9995 23.9987C29.9997 24.232 29.9387 24.4614 29.8225 24.6637C29.7063 24.8661 29.539 25.0344 29.3374 25.1519L21.3374 29.8186C21.1347 29.9368 20.9045 29.9995 20.6699 30.0003C20.4353 30.0011 20.2046 29.94 20.0012 29.8231C19.7978 29.7062 19.6288 29.5378 19.5113 29.3347C19.3938 29.1316 19.332 28.9012 19.332 28.6666V19.3332Z" fill="#0A1628" stroke="#0A1628" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                      <clipPath id="bgblur_0_4002_231_clip_path" transform="translate(20 20)"><path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"/>
+                      </clipPath></defs>
+                    </svg>
+                  </span>
+                  {%- if section.settings.hint_text != blank -%}
+                    <span class="kc-hint opacity-xl">{{ section.settings.hint_text }}</span>
+                  {%- endif -%}
+                </div>
               {%- endif -%}
             </div>
-          {%- endfor -%}
+
+            {%- if block.settings.show_text -%}
+              {%- if block.settings.title != blank -%}
+                <h4 class="kc-step-title">{{ block.settings.title }}</h4>
+              {%- endif -%}
+              {%- if block.settings.show_description and block.settings.description != blank -%}
+                <p class="kc-step-desc opacity-xl">{{ block.settings.description }}</p>
+              {%- endif -%}
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if show_slider and section.settings.show_slider_arrows -%}
+        <div
+          class="slider-buttons no-js-hidden"
+          style="width: 100%; justify-content: center; gap: 16px; margin-top: 1rem;"
+        >
+          <button
+            type="button"
+            class="slider-button slider-button--prev"
+            name="previous"
+            aria-label="{{ 'general.slider.previous_slide' | t }}"
+          >
+            <span class="svg-wrapper">
+              {{ 'icon-caret.svg' | inline_asset_content }}
+            </span>
+          </button>
+          <button
+            type="button"
+            class="slider-button slider-button--next"
+            name="next"
+            aria-label="{{ 'general.slider.next_slide' | t }}"
+          >
+            <span class="svg-wrapper">
+              {{ 'icon-caret.svg' | inline_asset_content }}
+            </span>
+          </button>
         </div>
-      </div>
+      {%- endif -%}
+      {%- if show_slider -%}
+        </slider-component>
+      {%- endif -%}
 
       {%- if section.settings.bottom_text != blank -%}
         <p class="kc-bottom">{{ section.settings.bottom_text }}</p>
@@ -392,49 +275,8 @@
         card.classList.remove('is-playing');
       }
 
-      // Swiper load (jo pehla thi na hoy to CDN thi)
-      function loadSwiper(cb) {
-        if (window.Swiper) return cb();
-        if (!document.querySelector('link[data-kc-swiper]')) {
-          var l = document.createElement('link');
-          l.rel = 'stylesheet';
-          l.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
-          l.setAttribute('data-kc-swiper', 'true');
-          document.head.appendChild(l);
-        }
-        var existing = document.querySelector('script[data-kc-swiper]');
-        if (existing) {
-          existing.addEventListener('load', cb);
-          return;
-        }
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
-        s.setAttribute('data-kc-swiper', 'true');
-        s.onload = cb;
-        document.head.appendChild(s);
-      }
-
-      function initSlider(root) {
-        var el = root.querySelector('.kc-grid');
-        if (!el || el.swiper) return;
-        new Swiper(el, {
-          slidesPerView: 1.2,
-          spaceBetween: 16,
-          grabCursor: true,
-          watchOverflow: true,
-          breakpoints: {
-            750: { slidesPerView: 2.1 },
-            990: { slidesPerView: 3 },
-          },
-        });
-      }
-
-      document.querySelectorAll('.kc-section:not([data-kc-init])').forEach(function (root) {
+      document.querySelectorAll('.kc-how-it-steps:not([data-kc-init])').forEach(function (root) {
         root.setAttribute('data-kc-init', 'true');
-
-        loadSwiper(function () {
-          initSlider(root);
-        });
 
         root.querySelectorAll('.kc-card').forEach(function (card) {
           var pinned = false;
@@ -480,6 +322,36 @@
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "The Ritual" },
     { "type": "text", "id": "title", "label": "Title", "default": "How Karmicare works." },
     {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" },
+        { "value": "p", "label": "p" },
+        { "value": "div", "label": "div" }
+      ],
+      "default": "h2",
+      "label": "SEO Heading tag"
+    },
+    {
       "type": "richtext",
       "id": "description",
       "label": "Short description",
@@ -517,13 +389,90 @@
       "unit": "px",
       "default": 8
     },
-    { "type": "header", "content": "Custom CSS (colors yahan add karein)" },
-    { "type": "textarea", "id": "custom_css", "label": "Custom CSS" },
-
+    {
+      "type": "header",
+      "content": "Grid & Slider Settings"
+    },
     {
       "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on Desktop (1200px+)",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_desktop",
+      "label": "Enable Slider on Desktop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_laptop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on Laptop (990px - 1199px)",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_laptop",
+      "label": "Enable Slider on Laptop",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on Tablet (750px - 989px)",
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_tablet",
+      "label": "Enable Slider on Tablet",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile (< 750px)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.3", "label": "1.3" },
+        { "value": "1.5", "label": "1.5" },
+        { "value": "1.8", "label": "1.8" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "1.5"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_mobile",
+      "label": "Enable Slider on Mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_slider_arrows",
+      "label": "Show Slider Arrows",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding Top (Desktop)",
       "min": 0,
       "max": 160,
       "step": 4,
@@ -532,19 +481,8 @@
     },
     {
       "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "default": 80
-    },
-
-    {
-      "type": "range",
-      "id": "padding_top_mob",
-      "label": "Padding top",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom (Desktop)",
       "min": 0,
       "max": 160,
       "step": 4,
@@ -553,13 +491,23 @@
     },
     {
       "type": "range",
-      "id": "padding_bottom_mob",
-      "label": "Padding bottom",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
       "min": 0,
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 80
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 40
     },
     {
       "type": "header",
@@ -624,6 +572,33 @@
         { "type": "checkbox", "id": "loop", "label": "Loop video", "default": true },
         { "type": "checkbox", "id": "show_text", "label": "Show title below video", "default": true },
         { "type": "text", "id": "title", "label": "Title", "default": "Rinse before" },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ],
+          "default": "h4",
+          "label": "Heading size"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" },
+            { "value": "p", "label": "p" },
+            { "value": "div", "label": "div" }
+          ],
+          "default": "h4",
+          "label": "SEO Heading tag"
+        },
         { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
         {
           "type": "text",

@@ -1,0 +1,196 @@
+.kc-how-it-steps .kc-description {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* Native slider overrides */
+.kc-how-it-steps .kc-grid {
+    display: flex;
+    list-style: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.kc-how-it-steps .kc-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.kc-how-it-steps .kc-grid:not(.slider) {
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+.kc-how-it-steps .kc-step {
+    width: calc((100% - ((var(--cols-mobile) - 1) * 16px)) / var(--cols-mobile));
+    flex-shrink: 0;
+}
+
+@media screen and (max-width: 749px) {
+    .kc-how-it-steps .kc-grid.slider--mobile {
+        flex-wrap: nowrap;
+        overscroll-behavior-x: contain;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .kc-how-it-steps .kc-step {
+        width: calc((100% - ((var(--cols-tablet) - 1) * 16px)) / var(--cols-tablet));
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+    .kc-how-it-steps .kc-grid.slider--tablet {
+        flex-wrap: nowrap;
+        overscroll-behavior-x: contain;
+    }
+}
+
+@media screen and (min-width: 990px) {
+    .kc-how-it-steps .kc-step {
+        width: calc((100% - ((var(--cols-laptop) - 1) * 16px)) / var(--cols-laptop));
+    }
+
+    .kc-how-it-steps .kc-grid.slider--desktop {
+        flex-wrap: nowrap;
+        overscroll-behavior-x: contain;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .kc-how-it-steps .kc-step {
+        width: calc((100% - ((var(--cols-desktop) - 1) * 16px)) / var(--cols-desktop));
+    }
+}
+
+.kc-how-it-steps .kc-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.kc-how-it-steps .kc-media,
+.kc-how-it-steps .kc-media video,
+.kc-how-it-steps .kc-media iframe,
+.kc-how-it-steps .kc-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+    display: block;
+}
+
+.kc-how-it-steps .kc-media iframe {
+    pointer-events: none;
+}
+
+.kc-how-it-steps .kc-number {
+    position: absolute;
+    top: 23px;
+    left: 23px;
+    z-index: 2;
+}
+
+.kc-how-it-steps .kc-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.kc-how-it-steps .kc-play {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.kc-how-it-steps .kc-play svg {
+    width: 100%;
+    height: 100%;
+    margin-left: 2px;
+    fill: currentColor;
+}
+
+.kc-how-it-steps .kc-card.is-playing .kc-overlay {
+    opacity: 0;
+}
+
+.kc-how-it-steps .kc-step-title {
+    margin: 24px 0 7px;
+    font-style: normal;
+}
+
+.kc-how-it-steps .kc-step-desc {
+    margin: 0;
+}
+
+.kc-how-it-steps .kc-bottom {
+    margin: 40px 0 0;
+    text-align: center;
+}
+
+.kc-how-it-steps .page-width,
+.kc-how-it-steps .kc-head {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 990px) {
+    .kc-how-it-steps .kc-head {
+        gap: var(--gap-2-5xl);
+    }
+
+    .kc-how-it-steps .page-width {
+        gap: var(--gap-5xl);
+    }
+
+    .kc-how-it-steps .kc-grid {
+        gap: var(--gap-xl);
+    }
+
+    .kc-how-it-steps .kc-play {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media screen and (max-width: 989px) {
+    .kc-how-it-steps .kc-head {
+        gap: var(--gap-2xl);
+    }
+
+    .kc-how-it-steps .page-width {
+        gap: var(--gap-3xl);
+    }
+
+    .kc-how-it-steps .kc-grid {
+        gap: var(--gap-lg);
+    }
+
+    .kc-how-it-steps .kc-play {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .kc-how-it-steps .kc-number {
+        top: 18px;
+        left: 18px;
+    }
+}

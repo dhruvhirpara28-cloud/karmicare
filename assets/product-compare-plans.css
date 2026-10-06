@@ -218,26 +218,28 @@
 
 .pc-cta:hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
+  border-color: var(--kc-mapped-surface-accent-default);
 }
 
 /* Featured / Most Picked Column highlight */
 .pc-featured {
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid var(--kc-mapped-surface-accent-default);
   border-radius: var(--secondary-border-radius);
   background: linear-gradient(180deg, rgba(127, 185, 255, 0.10), transparent 62%);
   box-shadow: 0 18px 44px -22px rgba(127, 185, 255, 0.55);
   z-index: 2;
   padding: 0 5px;
-  border: 1px solid #7FB9FF;
+  border: 1px solid var(--kc-mapped-surface-accent-default);
 }
+
 body.night-mode {
   .pc-ribbon {
-    background: #7FB9FF;
+    background: var(--kc-mapped-surface-accent-default);
   }
+
   .pc-cta-primary {
-    background: #7FB9FF;
-}
+    background: var(--kc-mapped-surface-accent-default);
+  }
 }
 
 /* Tooltips */
@@ -248,18 +250,6 @@ body.night-mode {
   vertical-align: middle;
   margin-left: 6px;
   cursor: help;
-}
-
-.info-icon {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  font-size: 9px;
-  font-weight: var(--font-700-weight);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
 }
 
 .info-tip-popover {

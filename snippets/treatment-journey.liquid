@@ -9,7 +9,7 @@
   {{ 'treatment-journey.css' | asset_url | stylesheet_tag }}
   <div
     class="kc-treatment-journey-block"
-    style="--read-more-color: {{ block.settings.read_more_color | default: '#7fb9ff' }};"
+    style="--read-more-color: {{ block.settings.read_more_color | default: 'var(--kc-mapped-surface-accent-default)' }};"
   >
     <!-- Journey One Block -->
     {%- if list_1 != blank -%}

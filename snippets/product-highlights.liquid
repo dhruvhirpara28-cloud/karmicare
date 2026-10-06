@@ -43,8 +43,12 @@
   }
 
   @keyframes pill-marquee {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .highlight-pill {
@@ -57,28 +61,21 @@
     font-weight: var(--font-500-weight);
     line-height: 1.2;
     white-space: nowrap;
-    background-color: rgba(var(--color-foreground), 0.06);
-    border: 1px solid rgb(var(--color-foreground));
+    border: 1px solid var(--kc-mapped-surface-secondary-default);
     color: rgb(var(--color-foreground));
     flex-shrink: 0;
     transition: background-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .highlight-pill:hover {
-    background-color: rgba(var(--color-foreground), 0.14);
-    box-shadow: 0 2px 8px rgba(var(--color-foreground), 0.15);
   }
 
   .highlight-pill__icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.4rem;
+    height: 1.4;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    background-color: rgba(var(--color-foreground), 0.1);
   }
 
   .highlight-pill__icon img {
@@ -107,7 +104,9 @@
       overflow-x: auto;
       scrollbar-width: none;
     }
-    .highlights-list::-webkit-scrollbar { display: none; }
+    .highlights-list::-webkit-scrollbar {
+      display: none;
+    }
     .product-highlights {
       -webkit-mask-image: none;
       mask-image: none;
@@ -119,13 +118,13 @@
 {%- comment -%} Collect non-empty pills {%- endcomment -%}
 {%- assign pills_html = '' -%}
 {%- for i in (1..6) -%}
-  {%- assign text_key  = 'text_'  | append: i -%}
+  {%- assign text_key = 'text_' | append: i -%}
   {%- assign image_key = 'image_' | append: i -%}
-  {%- assign svg_key   = 'svg_'   | append: i -%}
+  {%- assign svg_key = 'svg_' | append: i -%}
 
-  {%- assign item_text  = block.settings[text_key] -%}
+  {%- assign item_text = block.settings[text_key] -%}
   {%- assign item_image = block.settings[image_key] -%}
-  {%- assign item_svg   = block.settings[svg_key] -%}
+  {%- assign item_svg = block.settings[svg_key] -%}
 
   {%- if item_text != blank or item_image != blank or item_svg != blank -%}
     {%- capture pill_item -%}
