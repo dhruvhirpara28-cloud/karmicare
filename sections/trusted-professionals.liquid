@@ -117,12 +117,14 @@
                   {{ block.settings.hover_text }}
                 </div>
               {%- endif -%}
-              {%- if block.settings.heading != blank -%}
-                <h5>{{ block.settings.heading }}</h5>
-              {%- endif -%}
-              {%- if block.settings.text != blank -%}
-                <p>{{ block.settings.text }}</p>
-              {%- endif -%}
+              <div class="trusted-professionals__card-body">
+                {%- if block.settings.heading != blank -%}
+                  <h5>{{ block.settings.heading }}</h5>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p>{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
             </div>
           </li>
         {%- endfor -%}

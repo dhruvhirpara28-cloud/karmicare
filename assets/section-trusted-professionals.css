@@ -8,7 +8,6 @@
 .trusted-professionals__header {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
 }
 
 .trusted-professionals__header h2 {
@@ -163,6 +162,17 @@
   transition: transform 0.3s ease;
   margin: 8px;
   border-radius: var(--extra-primary-border-radius);
+}
+
+.trusted-professionals__card:hover .trusted-professionals__card-content {
+  height: 100%;
+}
+
+.trusted-professionals__card-body {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
 }
 
 @media screen and (max-width: 749px) {

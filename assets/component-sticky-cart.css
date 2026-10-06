@@ -27,7 +27,7 @@
     z-index: 3;
     border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
     padding: 1.5px;
-    background: conic-gradient(from var(--kc-plan-angle), #7fb9ff, #cfe2ff, #7fb9ff, #5a83b5, #9ec7ff, #7fb9ff);
+    background: conic-gradient(from var(--kc-plan-angle), var(--kc-mapped-surface-accent-default), #cfe2ff, var(--kc-mapped-surface-accent-default), #5a83b5, #9ec7ff, var(--kc-mapped-surface-accent-default));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -82,12 +82,11 @@
 }
 
 .sticky-cta-inner .sc-cta-btn {
-  margin-bottom: 0;
-  padding: 6px 22px;
+  padding: 10px 22px;
   border: none;
-  display: flex;
-  align-items: center;
   cursor: pointer;
+  font-family: var(--kc-font-family-Nunito);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
 }
 
 /* ── Positioned variant (JS sets left/width for inline) ── */
@@ -137,19 +136,16 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: var(--font-700-weight);
-  color: #3f6497;
 }
 
 .night-mode .sc-plan-label {
-  color: var(--accent);
-  font-size: var(--font-body-size-desktop, 16px);
+  font-size: var(--font-body-size-desktop);
 }
 
 .sc-plan-price {
   font-weight: var(--font-700-weight);
   flex-shrink: 0;
-  color: var(--kc-night-heading-color);
-  font-size: var(--font-body-size-desktop, 16px);
+  font-size: var(--font-body-size-desktop);
 }
 
 .sc-plan-interval {
@@ -221,7 +217,7 @@
 
 .sc-dd-option.is-selected {
   background: linear-gradient(180deg, rgba(127, 185, 255, 0.16) 0%, rgba(127, 185, 255, 0.06) 100%);
-  box-shadow: inset 0 0 0 1.5px var(--accent);
+  box-shadow: inset 0 0 0 1.5px var(--kc-mapped-surface-accent-default);
 }
 
 /* ── Radio dot ── */
@@ -232,13 +228,13 @@
   border-radius: 50%;
   position: relative;
   margin-top: 2px;
-  border: 1.5px solid var(--hairline);
+  border: 1.5px solid var(--kc-mapped-surface-accent-default);
   transition: border-color .2s, background .2s;
 }
 
 .sc-dd-option.is-selected .sc-dd-radio {
-  border-color: var(--accent);
-  background: radial-gradient(circle, var(--accent) 0 4px, transparent 5px);
+  border-color: var(--kc-mapped-surface-accent-default);
+  background: radial-gradient(circle, var(--kc-mapped-surface-accent-default) 0 4px, transparent 5px);
 }
 
 .sc-dd-option.is-selected .sc-dd-radio::after {
@@ -272,7 +268,7 @@
 }
 
 .sc-dd-option.is-selected .sc-dd-radio+.sc-dd-option-text .sc-dd-name {
-  color: var(--accent);
+  color: var(--kc-mapped-surface-accent-default);
 }
 
 .sc-dd-sub {
@@ -293,7 +289,7 @@
 .sc-dd-price {
   font-weight: var(--font-600-weight);
   line-height: 1;
-  color: var(--accent);
+  color: var(--kc-mapped-surface-accent-default);
 }
 
 /* ── CTA form + button ── */
@@ -344,6 +340,7 @@
   flex-direction: column;
   gap: 2px;
   text-align: left;
+  color: rgb(var(--color-foreground));
 }
 
 .sc-trigger-top {
@@ -402,5 +399,5 @@
 
 /* ── Caret Icon color ── */
 .sc-caret {
-  color: #c9e0ff;
+  color: var(--kc-mapped-surface-accent-default);
 }

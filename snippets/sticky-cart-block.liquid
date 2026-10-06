@@ -233,7 +233,7 @@
       <button
         type="submit"
         id="scCtaBtn"
-        class="sc-cta-btn product-form__submit product-form__custom-submit block__animate-button button--primary button--block"
+        class="sc-cta-btn product-form__submit product-form__custom-submit block__animate-button button--primary button--block subtitle-item"
         aria-label="{{ button_text }}"
       >
         <span>{{ button_text }}</span>
@@ -465,6 +465,30 @@
       refreshAllSubrows();
     }
 
+    function syncVisibilityFromLoopData() {
+      var pId = {{ product.id }};
+      var loopData = window.loopProps && window.loopProps[pId];
+      if (loopData && loopData.storefrontExcludedSPGS) {
+        var excluded = loopData.storefrontExcludedSPGS;
+        var hasChanges = false;
+        OPTIONS.forEach(function (opt) {
+          if (opt.dataset.type === 'onetime') return;
+          var spgId = opt.dataset.sellingPlanGroupId;
+          if (spgId && excluded.indexOf(spgId) !== -1) {
+            if (opt.style.display !== 'none') {
+              opt.style.display = 'none';
+              hasChanges = true;
+            }
+          } else {
+            if (opt.style.display === 'none') {
+              opt.style.display = '';
+              hasChanges = true;
+            }
+          }
+        });
+      }
+    }
+
     function attachLoopObserver() {
       var fs = document.getElementById('loop-selling-plan-fieldset');
       if (!fs) {
@@ -472,15 +496,19 @@
         return;
       }
 
+      syncVisibilityFromLoopData();
+
       fs.addEventListener('change', function (e) {
         if (e.target && e.target.type === 'radio') setTimeout(syncFromLoop, 150);
       });
 
       var mo = new MutationObserver(function () {
         syncFromLoop();
+        syncVisibilityFromLoopData();
       });
       mo.observe(fs, { subtree: true, characterData: true, childList: true, attributes: true });
       setTimeout(syncFromLoop, 700);
+      setTimeout(syncVisibilityFromLoopData, 700);
     }
 
     function openDropdown() {

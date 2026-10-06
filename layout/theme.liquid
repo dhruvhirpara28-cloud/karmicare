@@ -159,10 +159,13 @@
         --gap-md: 10px;
         --gap-lg: 12px;
         --gap-xl: 15px;
-        --gap-2xl: 18px;
+        --gap-2xl: 20px;
         --gap-2-5xl: 25px;
         --gap-3xl: 30px;
+        --gap-4xl: 40px;
+        --gap-5xl: 50px;
 
+        --kc-font-family-Nunito: 'Nunito', sans-serif;
         --kc-white-surface-primary-default: #FFFFFF;
         --kc-mapped-text-primary-default: #FFFBF6;
         --kc-mapped-bg-primary-default: #2C3A60;
@@ -178,6 +181,7 @@
         --kc-responsive-body-line-height: 20px;
 
         --kc-responsive-all-letter-spacing: 0.5px;
+        --kc-responsive-Nunito-letter-spacing: 1.7px;
         --kc-responsive-caption-letter-spacing: 1.25px;
         --kc-responsive-caption-letter-spacing: 1px;
         --kc-responsive-h4-letter-spacing-sm: -0.25px;
@@ -193,11 +197,11 @@
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
         --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
-        
+
         --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
-        
+
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 

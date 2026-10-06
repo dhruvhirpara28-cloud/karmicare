@@ -18,7 +18,7 @@
   --body: #4f5468;
   --surface: #fffdf9;
   --hover: #e3ecf8;
-  --active: #7fb9ff;
+  --active: var(--kc-mapped-surface-accent-default);
   --border: #727f94;
   --focus: #315f99;
 
@@ -48,7 +48,7 @@ body.night-mode .chronobiology-clock {
   --body: #c9d5e7;
   --surface: #202d47;
   --hover: #344867;
-  --active: #7fb9ff;
+  --active: var(--kc-mapped-surface-accent-default);
   --border: #859ab8;
   --focus: #a8d0ff;
 }

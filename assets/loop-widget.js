@@ -2935,31 +2935,46 @@ async function getLoopBundleSpgs(productId) {
             window.loopProps[productId]["storeJson"]
                 .bundleShopifySellingPlanIds ?? [];
 
+        const storeDefaultSellingPlanIds =
+            window.loopProps[productId]["storeJson"]
+                .storeDefaultSellingPlanShopifyIds ?? [];
+
         const sps = [...new Set([...bundleShopifySellingPlanIds])];
 
         let bundleSellingPlanGroupIds = [];
         let nonBundleSellingPlanGroupIds = [];
-        let hideLoopStorefrontExcludedGroupIds = [];
+        
+        let excludedGroupIds = new Set();
+        let validGroupIds = new Set();
 
         for (const spg of spgs) {
-            if (
-                shopifySellingPlanIdsToExcludeOnWidget.includes(
-                    spg.selling_plan_id
-                )
-            ) {
-                hideLoopStorefrontExcludedGroupIds.push(
-                    spg.selling_plan_group_id
-                );
-            } else if (
-                sps.includes(spg.selling_plan_id) &&
-                window.loopProps[productId]?.storeJson?.preferences
-                    ?.hideBundleSellingPlansOnProductPage
-            ) {
-                bundleSellingPlanGroupIds.push(spg.selling_plan_group_id);
+            const isExcludedByWidget = shopifySellingPlanIdsToExcludeOnWidget.includes(
+                spg.selling_plan_id
+            );
+            // KC CUSTOM: Also treat plans not in storeDefaultSellingPlanShopifyIds as excluded
+            // This handles the case where Loop dashboard has "Storefront product pages" unchecked
+            // but store.json is not updated for custom widget setups
+            const isNotInDefaultList = storeDefaultSellingPlanIds.length > 0 &&
+                !storeDefaultSellingPlanIds.includes(spg.selling_plan_id);
+
+            if (isExcludedByWidget || isNotInDefaultList) {
+                excludedGroupIds.add(spg.selling_plan_group_id);
             } else {
-                nonBundleSellingPlanGroupIds.push(spg.selling_plan_group_id);
+                validGroupIds.add(spg.selling_plan_group_id);
+                if (
+                    sps.includes(spg.selling_plan_id) &&
+                    window.loopProps[productId]?.storeJson?.preferences
+                        ?.hideBundleSellingPlansOnProductPage
+                ) {
+                    bundleSellingPlanGroupIds.push(spg.selling_plan_group_id);
+                } else {
+                    nonBundleSellingPlanGroupIds.push(spg.selling_plan_group_id);
+                }
             }
         }
+        
+        // Only hide a group if ALL of its selling plans are excluded (no valid plan exists in group)
+        let hideLoopStorefrontExcludedGroupIds = [...excludedGroupIds].filter(id => !validGroupIds.has(id));
 
         window.loopProps[productId]["bundleSPGS"] = [
             ...new Set(bundleSellingPlanGroupIds),
