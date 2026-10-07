@@ -47,13 +47,6 @@
   }
   {% endif %}
 
-  #ProductInfoCard-{{ block.id }} .product-info-card__header {
-    font-size: var(--kc-responsive-label-sm-text-size);
-    font-weight: var(--font-700-weight);
-    text-transform: uppercase;
-    letter-spacing:var(--kc-responsive-Nunito-letter-spacing);
-  }
-
   #ProductInfoCard-{{ block.id }} .product-info-card__body p + p {
     margin-top: 1.5rem;
   }
@@ -65,7 +58,7 @@
 
 <div id="ProductInfoCard-{{ block.id }}" class="product-info-card" {{ block.shopify_attributes }}>
   {%- if block.settings.header_text != blank -%}
-    <div class="product-info-card__header">{{ block.settings.header_text }}</div>
+    <div class="product-info-card__header body-gl-nunito-xsm">{{ block.settings.header_text }}</div>
   {%- endif -%}
   {%- if block.settings.body_text != blank -%}
     <div class="product-info-card__body rte">{{ block.settings.body_text }}</div>

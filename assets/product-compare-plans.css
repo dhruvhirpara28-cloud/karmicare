@@ -85,7 +85,7 @@
   top: -15px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
+  background: var(--kc-mapped-surface-accent-default);
   color: #0d1326;
   font-size: 1.1rem;
   font-weight: var(--font-700-weight);
@@ -179,7 +179,7 @@
 }
 
 .pc-yes {
-  color: var(--accent);
+  color: var(--kc-mapped-surface-accent-default);
   font-weight: var(--font-700-weight);
   font-size: 1.8rem;
 }
@@ -481,7 +481,7 @@ body.day-mode .pc-tag-top {
 
 /* ── NIGHT MODE (Dark theme) ── */
 body.night-mode .pc-eyebrow {
-  color: var(--accent)
+  color: var(--kc-mapped-surface-accent-default)
 }
 
 body.night-mode .pc-title {
@@ -503,7 +503,7 @@ body.night-mode .pc-kit-thumbs img {
 }
 
 body.day-mode .pc-kit-thumbs img {
-  border: 1.2px solid var(--accent);
+  border: 1.2px solid var(--kc-mapped-surface-accent-default);
   background-color: var(--white);
 }
 
@@ -534,7 +534,7 @@ body.night-mode .pc-kit-pop {
 
 .pc-kit-poptitle span,
 .pc-kit-itxt em:has(s) {
-  color: var(--accent);
+  color: var(--kc-mapped-surface-accent-default);
 }
 
 body.night-mode .pc-kit-pop::after {
@@ -547,19 +547,19 @@ body.night-mode .pc-kit-poptitle {
 
 
 .pc-cta-primary {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--kc-mapped-surface-accent-default);
+  border-color: var(--kc-mapped-surface-accent-default);
   color: #0d1124;
 }
 
 .pc-cta-primary:hover {
-  background: var(--accent-deep);
-  border-color: var(--accent-deep);
+  background: var(--kc-mapped-surface-accent-default-deep);
+  border-color: var(--kc-mapped-surface-accent-default-deep);
   color: #fff;
 }
 
 body.night-mode .pc-tag-top {
-  color: var(--accent);
+  color: var(--kc-mapped-surface-accent-default);
   border: 1px solid rgba(127, 185, 255, 0.2);
 }
 

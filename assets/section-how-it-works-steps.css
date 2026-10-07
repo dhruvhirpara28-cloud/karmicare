@@ -151,16 +151,14 @@
 }
 
 @media screen and (min-width: 990px) {
-    .kc-how-it-steps .kc-head {
-        gap: var(--gap-2-5xl);
+
+    .kc-how-it-steps .kc-head,
+    .kc-how-it-steps .kc-grid {
+        gap: var(--gap-xl);
     }
 
     .kc-how-it-steps .page-width {
         gap: var(--gap-5xl);
-    }
-
-    .kc-how-it-steps .kc-grid {
-        gap: var(--gap-xl);
     }
 
     .kc-how-it-steps .kc-play {

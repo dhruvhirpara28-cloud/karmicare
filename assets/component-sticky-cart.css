@@ -10,12 +10,9 @@
 
 /* ── Container ── */
 .day-mode .sticky-cta {
-  background: rgba(255, 251, 246, 0.96);
   backdrop-filter: blur(14px) saturate(150%);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
-  border: 1px solid rgba(25, 31, 56, 0.10);
   border-bottom: none;
-  box-shadow: 0 -12px 34px -14px rgba(25, 31, 56, 0.22);
 }
 
 @media (min-width: 1081px) {
@@ -157,7 +154,6 @@
 
 .sc-caret {
   flex-shrink: 0;
-  color: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   transition: transform 0.2s ease;
@@ -173,7 +169,7 @@
   bottom: calc(100% + 12px);
   left: 0;
   right: 0;
-  background: var(--surface);
+  background: rgb(var(--color-background));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
