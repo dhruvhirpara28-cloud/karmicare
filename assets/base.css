@@ -2230,16 +2230,6 @@ input[type='checkbox'] {
   height: 100%;
 }
 
-.utility-bar--bottom-border {
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-}
-
-@media screen and (min-width: 990px) {
-  .utility-bar--bottom-border-social-only {
-    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  }
-}
-
 .utility-bar__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -2478,15 +2468,19 @@ input[type='checkbox'] {
 }
 
 /* Main Header Layout */
-.header-wrapper {
-  display: block;
-  position: relative;
+body .shopify-section-header-sticky.shopify-section-group-header-group {
   background-color: transparent;
 }
 
-body .section-header .header-wrapper {
+body .shopify-section-header-sticky .header-wrapper {
   background-color: transparent;
 }
+
+.header-wrapper {
+  display: block;
+  position: relative;
+}
+
 
 .header-wrapper--border-bottom {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
