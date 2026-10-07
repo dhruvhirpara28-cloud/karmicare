@@ -1,7 +1,7 @@
 .trusted-professionals__inner {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: var(--gap-3xl);
 }
 
 /* Header */
@@ -113,6 +113,17 @@
 @media screen and (min-width: 990px) {
   .trusted-professionals__grid:not(.slider--desktop)+.slider-buttons {
     display: none;
+  }
+
+  .trusted-professionals__grid:not(.slider--desktop) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .trusted-professionals__grid:not(.slider--desktop) .trusted-professionals__card {
+    flex: 0 0 calc(100% / var(--cols) - (16px * (var(--cols) - 1) / var(--cols)));
+    max-width: calc(100% / var(--cols) - (16px * (var(--cols) - 1) / var(--cols)));
   }
 }
 

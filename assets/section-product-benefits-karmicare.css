@@ -182,6 +182,20 @@
   display: flex;
   flex-direction: column;
   min-height: 280px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-benefits__card:hover {
+  transform: translateY(-5px);
+}
+
+body.day-mode .product-benefits__card:hover,
+body:not(.night-mode) .product-benefits__card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+body.night-mode .product-benefits__card:hover {
+  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.04);
 }
 
 .product-benefits__card-bg {
@@ -197,6 +211,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.8s ease;
+}
+
+.product-benefits__card:hover .product-benefits__card-bg img {
+  transform: scale(1.05);
 }
 
 .product-benefits__card-bg .product-benefits__card-overlay {
@@ -212,24 +231,31 @@
 .product-benefits__card-content {
   position: relative;
   z-index: 2;
-  padding: 2.4rem;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (min-width: 1200px) {
+  .product-benefits__card-content {
+    padding: 2.4rem;
+  }
+}
+
+@media screen and (min-width: 990px) and (max-width: 1199px) {
   .product-benefits__card-content {
     padding: 2rem;
   }
 }
 
+@media screen and (max-width: 989px) {
+  .product-benefits__card-content {
+    padding: 1.5rem;
+  }
+}
+
 .product-benefits__card-content>span {
-  text-transform: uppercase;
   margin-bottom: 1rem;
-  font-size: var(--kc-responsive-label-sm-text-size);
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  font-weight: var(--font-500-weight);
 }
 
 .product-benefits__card-content .heading-desc-wrap {

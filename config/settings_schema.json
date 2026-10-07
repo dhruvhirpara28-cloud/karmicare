@@ -507,6 +507,26 @@
         "label": "H6 Font Size (Desktop)"
       },
       {
+        "type": "range",
+        "id": "xl_font_size_mobile",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "default": 16,
+        "unit": "px",
+        "label": "XL Size (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "xl_font_size_desktop",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "default": 18,
+        "unit": "px",
+        "label": "XL Size (Desktop)"
+      },
+      {
         "type": "header",
         "content": "Heading Font Weights"
       },

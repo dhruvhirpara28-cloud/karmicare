@@ -64,6 +64,9 @@
   {%- if section.settings.font_size != blank -%}
     #AnnouncementBar-{{ section.id }} .announcement-bar__message {
       font-size: {{ section.settings.font_size }}px;
+      letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+      font-family: var(--kc-font-family-Nunito);
+      font-weight:var(--font-700-weight);
     }
   {%- endif -%}
   {%- for block in section.blocks -%}

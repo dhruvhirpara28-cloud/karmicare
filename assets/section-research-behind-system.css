@@ -101,7 +101,7 @@
 
 .research-card__content {
   flex: 1;
-  padding: 3rem;
+  padding: var(--gap-2xl);
   display: flex;
   flex-direction: column;
 }
@@ -110,13 +110,6 @@
   .research-card__content {
     padding: 1.5rem;
   }
-}
-
-.research-card__subheading {
-  text-transform: uppercase;
-  font-weight: var(--font-500-weight);
-  font-size: var(--kc-responsive-label-sm-text-size);
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
 }
 
 .research-card__heading {
@@ -142,10 +135,6 @@
 }
 
 .research-card__detail-group span {
-  text-transform: uppercase;
-  font-size: var(--kc-responsive-label-sm-text-size);
-  font-weight: var(--font-500-weight);
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   display: block;
   margin-bottom: 0.8rem;
 }
@@ -194,10 +183,6 @@
   background-color: var(--card-bg);
   padding: 6px 10px;
   border-radius: var(--tertiary-border-radius);
-  font-size: var(--kc-responsive-label-sm-text-size);
-  text-transform: uppercase;
-  font-weight: var(--font-500-weight);
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   white-space: normal;
   text-align: center;
   width: 100%;
@@ -213,14 +198,15 @@
 .research-card__footer a {
   background-color: var(--gradient-background);
   padding: 8px;
-  font-size: var(--kc-responsive-label-sm-text-size);
-  font-weight: var(--font-500-weight);
   border-radius: var(--tertiary-border-radius);
   display: flex;
   align-items: center;
   gap: 8px;
   width: fit-content;
   max-width: 100%;
+  font-size: 11px;
+  font-weight: var(--font-500-weight);
+  font-family: var(--kc-font-family-Nunito);
 }
 
 .research-behind-system__header {

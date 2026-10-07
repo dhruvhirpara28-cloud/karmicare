@@ -27,11 +27,17 @@
     body.day-mode .border-{{ section.id }} {
       background-color: {{ section.settings.section_bg_color_day }};
     }
+    body.day-mode .section-{{ section.id }} {
+      --card-overlay-color: {{ section.settings.overlay_color_day }};
+    }
     {% endif %}
     {% if section.settings.section_bg_color_night !=blank %}
     body.night-mode .section-{{ section.id }},
     body.night-mode .border-{{ section.id }} {
       background-color: {{ section.settings.section_bg_color_night }};
+    }
+    body.night-mode .section-{{ section.id }} {
+      --card-overlay-color: {{ section.settings.overlay_color_night }};
     }
     {% endif %}
 
@@ -79,7 +85,7 @@
     <div class="product-benefits__inner">
       <div class="product-benefits__left kc-caption-text">
         {%- if section.settings.subheading != blank -%}
-          <span class="kc-caption-subheading">{{ section.settings.subheading }}</span>
+          <span class="kc-caption-subheading subtitle-item">{{ section.settings.subheading }}</span>
         {%- endif -%}
 
         {%- if section.settings.heading != blank -%}
@@ -138,14 +144,14 @@
                   {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
                   <div
                     class="product-benefits__card-overlay"
-                    style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+                    style="background-color: var(--card-overlay-color, {{ section.settings.overlay_color_day }}); opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
                   ></div>
                 </div>
               {%- endif -%}
 
               <div class="product-benefits__card-content">
                 {%- if block.settings.label != blank -%}
-                  <span>{{ block.settings.label }}</span>
+                  <span class="body-gl-nunito-xsm">{{ block.settings.label }}</span>
                 {%- endif -%}
                 <div class="heading-desc-wrap">
                   {%- if block.settings.heading != blank -%}
@@ -153,7 +159,7 @@
                   {%- endif -%}
 
                   {%- if block.settings.text != blank -%}
-                    {{ block.settings.text }}
+                    <div class="text-xl">{{ block.settings.text }}</div>
                   {%- endif -%}
                 </div>
               </div>
@@ -397,9 +403,15 @@
     },
     {
       "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay Color",
-      "default": "#000000"
+      "id": "overlay_color_day",
+      "label": "Overlay Color (Day)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color_night",
+      "label": "Overlay Color (Night)",
+      "default": "#191F38"
     },
     {
       "type": "range",

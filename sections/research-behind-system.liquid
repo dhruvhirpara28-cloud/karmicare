@@ -76,7 +76,7 @@
   <div class="page-width">
     <div class="research-behind-system__header">
       {%- if section.settings.subheading != blank -%}
-        <span class="kc-caption-subheading">{{ section.settings.subheading }}</span>
+        <span class="kc-caption-subheading subtitle-item">{{ section.settings.subheading }}</span>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
         <h2>{{ section.settings.heading }}</h2>
@@ -122,25 +122,25 @@
         <li class="research-card{% if show_slider %} slider__slide{% endif %}" {{ block.shopify_attributes }}>
           <div class="research-card__content">
             {%- if block.settings.subheading != blank -%}
-              <span class="research-card__subheading">{{ block.settings.subheading }}</span>
+              <span class="research-card__subheading body-gl-nunito-xsm">{{ block.settings.subheading }}</span>
             {%- endif -%}
             {%- if block.settings.heading != blank -%}
               <h3 class="research-card__heading h4">{{ block.settings.heading }}</h3>
             {%- endif -%}
             {%- if block.settings.subtext != blank -%}
-              <p class="research-card__subtext kc-caption-text">{{ block.settings.subtext }}</p>
+              <p class="research-card__subtext kc-caption-text text-xl">{{ block.settings.subtext }}</p>
             {%- endif -%}
 
             <div class="research-card__details">
               {%- if block.settings.result_text != blank -%}
-                <div class="research-card__detail-group">
-                  <span>{{ block.settings.result_label }}</span>
+                <div class="research-card__detail-group ">
+                  <span class="body-gl-nunito-xsm">{{ block.settings.result_label }}</span>
                   <p class="kc-caption-text">{{ block.settings.result_text }}</p>
                 </div>
               {%- endif -%}
               {%- if block.settings.method_text != blank -%}
                 <div class="research-card__detail-group">
-                  <span>{{ block.settings.method_label }}</span>
+                  <span class="body-gl-nunito-xsm">{{ block.settings.method_label }}</span>
                   <p class="kc-caption-text">{{ block.settings.method_text }}</p>
                 </div>
               {%- endif -%}
@@ -168,7 +168,7 @@
             {%- endif -%}
 
             {%- if block.settings.image_badge != blank -%}
-              <span class="research-card__badge">{{ block.settings.image_badge }}</span>
+              <span class="research-card__badge body-gl-nunito-xsm">{{ block.settings.image_badge }}</span>
             {%- endif -%}
           </div>
         </li>

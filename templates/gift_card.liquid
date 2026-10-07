@@ -76,6 +76,9 @@
         --font-h6-size-mobile: calc(var(--font-heading-scale) * {{ settings.h6_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h6-size-desktop: calc(var(--font-heading-scale) * {{ settings.h6_font_size_desktop | divided_by: 10.0 }}rem);
 
+        --size-xl-mobile: {{ settings.xl_font_size_mobile | divided_by: 10.0 }}rem;
+        --size-xl-desktop: {{ settings.xl_font_size_desktop | divided_by: 10.0 }}rem;
+
         --font-h1-weight: {{ settings.h1_font_weight | default: '700' }};
         --font-h2-weight: {{ settings.h2_font_weight | default: '700' }};
         --font-h3-weight: {{ settings.h3_font_weight | default: '700' }};

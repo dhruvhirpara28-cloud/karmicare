@@ -488,6 +488,16 @@ h6,
   }
 }
 
+.text-xl {
+  font-size: var(--size-xl-mobile);
+}
+
+@media only screen and (min-width: 750px) {
+  .text-xl {
+    font-size: var(--size-xl-desktop);
+  }
+}
+
 blockquote {
   font-style: italic;
   color: rgba(var(--color-foreground), 0.75);
@@ -2471,7 +2481,11 @@ input[type='checkbox'] {
 .header-wrapper {
   display: block;
   position: relative;
-  background-color: rgb(var(--color-background));
+  background-color: transparent;
+}
+
+body .section-header .header-wrapper {
+  background-color: transparent;
 }
 
 .header-wrapper--border-bottom {
@@ -3579,10 +3593,6 @@ details-disclosure>details {
 }
 
 .kc-caption-subheading {
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  font-size: var(--font-body-small-size-desktop);
-  font-weight: var(--font-500-weight);
-  text-transform: uppercase;
   margin-bottom: 1rem;
   display: block;
 }
@@ -3616,6 +3626,14 @@ body>* {
 .subtitle-item {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   font-size: var(--font-body-small-size);
+  font-family: var(--kc-font-family-Nunito);
+  font-weight: var(--font-700-weight);
+  text-transform: uppercase;
+}
+
+.body-gl-nunito-xsm {
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  font-size: var(--kc-responsive-label-sm-text-size);
   font-family: var(--kc-font-family-Nunito);
   font-weight: var(--font-700-weight);
   text-transform: uppercase;
