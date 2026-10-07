@@ -183,7 +183,7 @@
         --kc-responsive-all-letter-spacing: 0.5px;
         --kc-responsive-Nunito-letter-spacing: 1.7px;
         --kc-responsive-caption-letter-spacing: 1.25px;
-        --kc-responsive-caption-letter-spacing: 1px;
+        --kc-responsive-caption-sm-letter-spacing: 1px;
         --kc-responsive-h4-letter-spacing-sm: -0.25px;
         --kc-responsive-h5-letter-spacing: -0.5px;
 
@@ -235,6 +235,9 @@
 
         --font-h6-size-mobile: calc(var(--font-heading-scale) * {{ settings.h6_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h6-size-desktop: calc(var(--font-heading-scale) * {{ settings.h6_font_size_desktop | divided_by: 10.0 }}rem);
+
+        --size-xl-mobile: {{ settings.xl_font_size_mobile | divided_by: 10.0 }}rem;
+        --size-xl-desktop: {{ settings.xl_font_size_desktop | divided_by: 10.0 }}rem;
 
         --font-h1-weight: {{ settings.h1_font_weight }};
         --font-h2-weight: {{ settings.h2_font_weight }};

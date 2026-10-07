@@ -262,7 +262,9 @@
   .km-footer-bottom-links a {
     text-decoration: none;
   }
-
+  .km-footer-bottom-links a:hover{
+    opacity: 1;
+  }
   .km-footer-payments {
     display: flex;
     gap: 8px;
@@ -593,7 +595,7 @@
     </div>
 
     <div class="km-footer-bottom">
-      <div class="km-footer-bottom-left">
+      <div class="km-footer-bottom-left opacity-xl">
         {{ section.settings.copyright_text }}
       </div>
 
@@ -602,7 +604,7 @@
           <div class="km-footer-bottom-links">
             {%- for policy in shop.policies -%}
               {%- if policy != blank -%}
-                <a href="{{ policy.url }}">{{ policy.title }}</a>
+                <a href="{{ policy.url }}" class="opacity-xl">{{ policy.title }}</a>
                 {%- unless forloop.last -%}
                   <span>·</span>
                 {%- endunless -%}

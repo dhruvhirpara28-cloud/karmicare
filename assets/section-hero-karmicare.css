@@ -36,6 +36,11 @@
   font-weight: inherit;
 }
 
+body.night-mode .hero-karmicare__btn-2,
+body.day-mode .hero-karmicare__btn-2 {
+  background-color: transparent;
+}
+
 @media screen and (min-width: 750px) {
 
   .hero-karmicare__heading strong,
@@ -156,12 +161,10 @@
   border: none;
   border-radius: var(--tertiary-border-radius);
   padding: 0.8rem 2rem;
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
   outline: none;
-  font-family: inherit;
   background-color: transparent;
 }
 
@@ -171,13 +174,10 @@
 }
 
 .hero-karmicare__status-text {
-  letter-spacing: var(--kc-responsive-caption-letter-spacing);
-  text-transform: uppercase;
   margin: 0;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: var(--kc-responsive-label-sm-text-size);
+  gap: var(--gap-xs);
   transition: color 0.3s ease;
 }
 

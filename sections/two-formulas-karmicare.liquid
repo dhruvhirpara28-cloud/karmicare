@@ -83,16 +83,10 @@
 >
   <div class="page-width">
     <div class="two-formulas__bg-clock">
-      {%- if section.settings.show_bg_clock and section.settings.bg_clock_html != blank -%}
-        <div class="two-formulas__bg-clock-svg" aria-hidden="true">
-          {{ section.settings.bg_clock_html }}
-        </div>
-      {%- endif -%}
-
       <!-- Top Header Area -->
       <div class="two-formulas__header">
         {%- if section.settings.subheading != blank -%}
-          <span class="kc-caption-subheading">{{ section.settings.subheading | escape }}</span>
+          <span class="kc-caption-subheading subtitle-item">{{ section.settings.subheading | escape }}</span>
         {%- endif -%}
 
         {%- if section.settings.heading != blank -%}
@@ -341,12 +335,6 @@
       "id": "bg_clock_image",
       "label": "Background clock image",
       "info": "Upload an image for the background clock or frame."
-    },
-    {
-      "type": "html",
-      "id": "bg_clock_html",
-      "label": "Background clock custom HTML / SVG",
-      "info": "Paste custom SVG or HTML code for the background clock."
     },
     {
       "type": "header",

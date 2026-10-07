@@ -54,12 +54,6 @@
       color: {{ section.settings.text_color_night }};
     }
   {%- endif -%}
-
-  {%- if section.settings.link_color != blank -%}
-    #shopify-section-{{ section.id }} .chronobiology-clock .science {
-      color: {{ section.settings.link_color }};
-    }
-  {%- endif -%}
 {%- endstyle -%}
 
 <div
@@ -71,7 +65,7 @@
   <div class="chrono page-width" aria-labelledby="clock-heading-{{ section.id }}">
     <div class="heading">
       {%- if section.settings.eyebrow != blank -%}
-        <span class="kc-caption-subheading">{{ section.settings.eyebrow | escape }}</span>
+        <span class="kc-caption-subheading subtitle-item">{{ section.settings.eyebrow | escape }}</span>
       {%- endif -%}
 
       {%- if section.settings.title != blank -%}
@@ -82,7 +76,7 @@
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
-        <p class="kc-caption-text">{{ section.settings.description }}</p>
+        <div class="kc-caption-text">{{ section.settings.description }}</div>
       {%- endif -%}
     </div>
 
@@ -115,8 +109,8 @@
             <img src="{{ 'pin-evening.svg' | asset_url }}" alt="" width="30" height="30">
             <img src="{{ 'pin-dot.svg' | asset_url }}" alt="" width="14" height="14">
           </span>
-          <span class="shift-label shift-awake">Awake</span>
-          <span class="shift-label shift-asleep">Asleep</span>
+          <span class="shift-label shift-awake subtitle-item">Awake</span>
+          <span class="shift-label shift-asleep subtitle-item">Asleep</span>
         </div>
 
         <div class="orbit" aria-hidden="true"></div>
@@ -163,11 +157,11 @@
     </div>
 
     <div class="readout" data-mode="live">
-      <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
+      <button type="button" class="hint body-gl-nunito-xsm" aria-controls="clock-knob-{{ section.id }}">
         <img src="{{ 'drag.svg' | asset_url }}" alt="" width="24" height="24">
-        <span>{{ section.settings.hint_label | escape }}</span>
+        <span class="body-gl-nunito-xsm">{{ section.settings.hint_label | escape }}</span>
       </button>
-      <p class="time-line kc-caption-subheading">
+      <p class="time-line kc-caption-subheading subtitle-item">
         <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
         <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span>
       </p>
@@ -236,10 +230,9 @@
       "default": "h2"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "description",
-      "label": "Description",
-      "default": "Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00."
+      "label": "Description"
     },
     {
       "type": "header",
@@ -311,12 +304,6 @@
       "type": "url",
       "id": "footer_link",
       "label": "Link URL"
-    },
-    {
-      "type": "color",
-      "id": "link_color",
-      "label": "Link Color",
-      "default": "#7FB9FF"
     },
     {
       "type": "header",

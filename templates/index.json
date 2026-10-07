@@ -35,7 +35,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "BEGIN YOUR 60-DAY RITUAL",
-            "button_link_1": "",
+            "button_link_1": "shopify://products/karmicare-biorhythmic-oral-care-system",
             "button_label_2": "WHY TWO FORMULAS?",
             "button_link_2": ""
           }
@@ -63,7 +63,7 @@
             "pill_inactive_text_day": "#191f38",
             "block_bg_day": "",
             "pill_bg_night": "#212a49",
-            "pill_active_bg_night": "#c4dfff",
+            "pill_active_bg_night": "#191f38",
             "pill_active_text_night": "#fffbf6",
             "pill_inactive_text_night": "#fffbf6",
             "block_bg_night": ""
@@ -171,7 +171,7 @@
         "eyebrow": "CHRONOBIOLOGY",
         "title": "Your mouth runs on a 24-hour clock.",
         "heading_tag": "h2",
-        "description": "Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00.",
+        "description": "<p>Bacteria, saliva and acids each keep their own hours.&nbsp;</p><p>What it needs at 07:00 is not what it needs at 22:00.</p>",
         "morning_badge": "≈ 06:40 · Neisseria peaks",
         "morning_title": "Your mouth wakes up",
         "morning_text": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
@@ -182,7 +182,6 @@
         "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
         "footer_link_text": "Read the science",
         "footer_link": "",
-        "link_color": "#7fb9ff",
         "bg_color_day": "",
         "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
         "text_color_day": "#191f38",
@@ -202,7 +201,7 @@
         "heading": "Two formulas. One system. <strong>Designed around you.</strong>",
         "heading_bold_opacity": 70,
         "button_label": "BEGIN YOUR 60-DAY RITUAL",
-        "button_link": "",
+        "button_link": "shopify://products/karmicare-biorhythmic-oral-care-system",
         "button_subtext": "€0,49 / brushing ritual",
         "main_image": "shopify://shop_images/C-_Users_as_Downloads_KARMICARE_Productshot_Tubes-samen_002.png",
         "left_heading": "Activated and strengthened by day",
@@ -215,8 +214,7 @@
         "right_button_link": "",
         "ingredients_list": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
         "show_bg_clock": true,
-        "bg_clock_image": "shopify://shop_images/bg_clock.png",
-        "bg_clock_html": "",
+        "bg_clock_image": "shopify://shop_images/bg_clock_1.svg",
         "bg_color_day": "",
         "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
         "text_color_day": "#191f38",
@@ -238,7 +236,7 @@
             "label": "01 · NANO-HYDROXYAPATITE",
             "heading": "Teeth that feel strong",
             "text": "<p>New minerals with every brush. Cold or hot, no hesitation.</p>",
-            "image": "shopify://shop_images/Benefit_image.png"
+            "image": "shopify://shop_images/Benefit_card_01_Nano-hydroxyapatite_Hover.png"
           }
         },
         "card_pceBAE": {
@@ -247,7 +245,7 @@
             "label": "02 · Essential oils",
             "heading": "Fresh that lasts",
             "text": "<p>Mint and lime by day, cinnamon and orange by night.</p>",
-            "image": "shopify://shop_images/02_Essential_oils.png"
+            "image": "shopify://shop_images/Benefit_image_1.png"
           }
         },
         "card_tM7UH3": {
@@ -255,7 +253,8 @@
           "settings": {
             "label": "03 · Gentle foam",
             "heading": "A velvet mouthfeel",
-            "text": "<p>Soft foam and a smooth finish that stays. Two minutes you enjoy.</p>"
+            "text": "<p>Soft foam and a smooth finish that stays. Two minutes you enjoy.</p>",
+            "image": "shopify://shop_images/Benefit_image_2.png"
           }
         },
         "card_aXhzDi": {
@@ -263,7 +262,8 @@
           "settings": {
             "label": "04 · mineral whitening",
             "heading": "Naturally brighter",
-            "text": "<p>Remineralisation lifts the surface. No bleach, no strips.</p>"
+            "text": "<p>Remineralisation lifts the surface. No bleach, no strips.</p>",
+            "image": "shopify://shop_images/Benefit_card_04_mineral_whitening_Hover.png"
           }
         },
         "card_QdCWaE": {
@@ -271,7 +271,8 @@
           "settings": {
             "label": "05 · Xylitol",
             "heading": "A mouth in balance",
-            "text": "<p>Supports your mouth’s own balance. Less plaque, day and night.</p>"
+            "text": "<p>Supports your mouth’s own balance. Less plaque, day and night.</p>",
+            "image": "shopify://shop_images/Benefit_image_3.png"
           }
         },
         "card_VP8KGi": {
@@ -279,7 +280,8 @@
           "settings": {
             "label": "06 · No SLS",
             "heading": "Radiant calm gums",
-            "text": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>"
+            "text": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
+            "image": "shopify://shop_images/Benefit_card_06_No_SLS_Hover.png"
           }
         },
         "card_KRCrBY": {
@@ -287,7 +289,8 @@
           "settings": {
             "label": "07 · Guarana & valerian",
             "heading": "Focus by day,  calm by night",
-            "text": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>"
+            "text": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>",
+            "image": "shopify://shop_images/Benefit_card_07_Guarana_valerian_Hover.png"
           }
         },
         "card_AGFiEX": {
@@ -295,7 +298,8 @@
           "settings": {
             "label": "08 · Leave-on",
             "heading": "Wake up smoother",
-            "text": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>"
+            "text": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>",
+            "image": "shopify://shop_images/Benefit_card_08_Leave-on_Hover.png"
           }
         },
         "card_jN7XcL": {
@@ -303,7 +307,8 @@
           "settings": {
             "label": "09 · One pump",
             "heading": "One pump, one dose",
-            "text": "<p>All the minerals your mouth need in one press. Hygienic, precise, nothing wasted.</p>"
+            "text": "<p>All the minerals your mouth need in one press. Hygienic, precise, nothing wasted.</p>",
+            "image": "shopify://shop_images/Benefit_card_09_One_pump_Hover.png"
           }
         }
       },
@@ -324,7 +329,7 @@
         "heading": "Clean is not the same as healthy.",
         "text": "<p>You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, keep your mouth in balance, morning and night. Not because you brush wrong. Because brushing cleans, and your mouth needs more than clean.</p>",
         "button_label": "BEGIN YOUR 60-DAY RITUAL",
-        "button_link": "",
+        "button_link": "shopify://products/karmicare-biorhythmic-oral-care-system",
         "button_subtext": "€0,49 / brushing ritual",
         "bottom_note": "*Reported outcomes vary. Mechanisms and published evidence are shown separately.",
         "columns_desktop": 3,
@@ -336,7 +341,6 @@
         "columns_mobile": "1.3",
         "slider_mobile": true,
         "show_slider_arrows": false,
-        "overlay_color": "#ffffff",
         "overlay_opacity": 50,
         "card_bg_color_day": "#ffffff",
         "card_bg_color_night": "#212a49",
@@ -362,16 +366,7 @@
             "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
             "heading": "Dr. Stephanie Spreuwers",
             "text": "Functional Dentist, kPNI Therapist",
-            "hover_text": "<p>Quote placeholder - use only a real, written and approved quote from this professional.</p>"
-          }
-        },
-        "card_jrLPVC": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
-            "heading": "Dr. Stephanie Spreuwers",
-            "text": "Functional Dentist, kPNI Therapist",
-            "hover_text": "<p>Quote placeholder - use only a real, written and approved quote from this professional.</p>"
+            "hover_text": "<p>“Quote placeholder — use only a real, written and approved quote from this professional.”</p>"
           }
         },
         "card_jcnr7Q": {
@@ -431,7 +426,6 @@
       },
       "block_order": [
         "card_h8d3WL",
-        "card_jrLPVC",
         "card_jcnr7Q",
         "card_8dRing",
         "card_HFdkaD",
@@ -508,25 +502,61 @@
         "card_fmFMFd": {
           "type": "card",
           "settings": {
-            "subheading": "NANO-HYDROXYAPATITE",
-            "heading": "Nano-HAp sealed 98% of open dentine tubules.",
-            "subtext": "Human dentine discs - 7 days",
-            "result_label": "RESULT",
-            "result_text": "98% occlusion vs 82% and 65% for two other desensitising technologies",
-            "method_label": "METHOD",
-            "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
-            "link_label": "Kulai Et Al. - 2016",
+            "subheading": "XYLITOL",
+            "heading": "Xylitol lowered tooth decay compared with controls.",
+            "subtext": "1,478 people · 7 trials",
+            "result_label": "Result",
+            "result_text": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
+            "method_label": "Method",
+            "method_text": "Systematic review and meta-analysis of 7 clinical trials.",
+            "link_label": "Janakiram et al. · 2017 · J Nat Sci Biol Med",
             "link_url": "",
-            "logo": "shopify://shop_images/Logo-2.png",
+            "logo": "shopify://shop_images/Logo_1.png",
             "image": "shopify://shop_images/Picture_1.png",
-            "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
+            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+          }
+        },
+        "card_Hi7YUD": {
+          "type": "card",
+          "settings": {
+            "subheading": "NANO-HYDROXYAPATITE",
+            "heading": "Nano-HAp beat fluoride on tooth sensitivity.",
+            "subtext": "105 people · 4 weeks",
+            "result_label": "RESULT",
+            "result_text": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
+            "method_label": "METHOD",
+            "method_text": "Double-blind randomised controlled trial, three arms.",
+            "link_label": "Vano et al. · 2018 · Clin Oral Investig",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo_2.png",
+            "image": "shopify://shop_images/Picture_1.png",
+            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+          }
+        },
+        "card_JeERX6": {
+          "type": "card",
+          "settings": {
+            "subheading": "SLS-FREE",
+            "heading": "No SLS meant fewer and shorter canker sores.",
+            "subtext": "124 people · 4 crossover RCTs",
+            "result_label": "RESULT",
+            "result_text": "Fewer ulcers, shorter duration, fewer episodes, less pain",
+            "method_label": "METHOD",
+            "method_text": "Systematic review and meta-analysis of 4 crossover RCTs.",
+            "link_label": "Alli et al. · 2019 · J Oral Pathol Med",
+            "link_url": "",
+            "logo": "shopify://shop_images/Logo_3.png",
+            "image": "shopify://shop_images/Picture_1.png",
+            "image_badge": "DENTINE TUBULES - OPEN AND OCCLUDED"
           }
         }
       },
       "block_order": [
         "card_bDxUVT",
         "card_yMiD9D",
-        "card_fmFMFd"
+        "card_fmFMFd",
+        "card_Hi7YUD",
+        "card_JeERX6"
       ],
       "name": "Research Behind System",
       "settings": {
@@ -553,7 +583,7 @@
         "slider_laptop": false,
         "slider_tablet": false,
         "slider_mobile": true,
-        "columns_desktop": "1.9",
+        "columns_desktop": "2",
         "columns_laptop": "2",
         "columns_tablet": "1",
         "columns_mobile": "1.2"
