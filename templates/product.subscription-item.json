@@ -238,7 +238,7 @@
         "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
         "text_color_day": "",
         "bg_color_night": "",
-        "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);",
+        "bg_gradient_night": "linear-gradient(180deg, #191F38  0%, #2C3A60 100%);",
         "text_color_night": "",
         "padding_top": 40,
         "padding_bottom": 60
@@ -365,7 +365,7 @@
         "eyebrow": "CHRONOBIOLOGY",
         "title": "Your mouth runs on a 24-hour clock.",
         "heading_tag": "h2",
-        "description": "Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00.",
+        "description": "<p>Bacteria, saliva and acids each keep their own hours. What it needs at 07:00 is not what it needs at 22:00.</p>",
         "morning_badge": "≈ 06:40 · Neisseria peaks",
         "morning_title": "Your mouth wakes up",
         "morning_text": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
@@ -376,7 +376,6 @@
         "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
         "footer_link_text": "Read the science",
         "footer_link": "",
-        "link_color": "#7fb9ff",
         "bg_color_day": "",
         "bg_gradient_day": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)",
         "text_color_day": "#191f38",
@@ -402,6 +401,8 @@
             "loop": true,
             "show_text": true,
             "title": "{{ block.repeater.title.value }}",
+            "heading_size": "h4",
+            "heading_tag": "h4",
             "show_description": true,
             "description": "{{ block.repeater.description.value }}"
           }
@@ -416,6 +417,8 @@
             "loop": true,
             "show_text": true,
             "title": "Pump and brush",
+            "heading_size": "h4",
+            "heading_tag": "h4",
             "show_description": true,
             "description": "Apply one pump and brush gently for two minutes."
           }
@@ -430,6 +433,8 @@
             "loop": true,
             "show_text": true,
             "title": "Spit, no rinse",
+            "heading_size": "h4",
+            "heading_tag": "h4",
             "show_description": true,
             "description": "Spit out the excess. Do not rinse afterwards."
           }
@@ -444,6 +449,8 @@
       "settings": {
         "subtitle": "The Ritual",
         "title": "How Karmicare works.",
+        "heading_size": "h2",
+        "heading_tag": "h2",
         "description": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>",
         "hint_text": "Hover or tap to watch",
         "bottom_text": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day.",
@@ -482,10 +489,10 @@
         "text_color_night": "#fffbf6",
         "bg_color_night": "",
         "bg_gradient_night": "linear-gradient(180deg, #2C3A60 0%, #191F38 100%);",
-        "padding-top": 120,
-        "padding-bottom": 120,
-        "padding-top-mobile": 60,
-        "padding-bottom-mobile": 60
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "research_behind_system_EkjATL": {
