@@ -1,0 +1,43 @@
+{% comment %}
+  This snippet contains CSS overrides specifically for the header on the Product page.
+  It is rendered inside a <style> tag in the header.liquid section.
+{% endcomment %}
+{% if template.name == 'product' or request.page_type == 'product' %}
+  {%- if section.settings.product_section_bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }},
+    body.day-mode #shopify-section-{{ section.id }} .header-wrapper {
+      background-color: {{ section.settings.product_section_bg_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.product_section_bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }},
+    body.night-mode #shopify-section-{{ section.id }} .header-wrapper {
+      background-color: {{ section.settings.product_section_bg_color_night }};
+    }
+  {%- endif -%}
+
+  {%- if section.settings.product_bg_color_day != blank -%}
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body.day-mode #shopify-section-{{ section.id }} .header::before,
+    body.day-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
+      background-color: {{ section.settings.product_bg_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.product_bg_color_night != blank -%}
+    body.night-mode #shopify-section-{{ section.id }} .header,
+    body.night-mode #shopify-section-{{ section.id }} .header::before,
+    body.night-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
+      background-color: {{ section.settings.product_bg_color_night }};
+    }
+  {%- endif -%}
+
+  /* Transparent background and no shadow when scrolled past top */
+  body.day-mode #shopify-section-{{ section.id }} .header.scrolled-past-header,
+  body.day-mode #shopify-section-{{ section.id }} .header.scrolled-past-header::before,
+  body.night-mode #shopify-section-{{ section.id }} .header.scrolled-past-header,
+  body.night-mode #shopify-section-{{ section.id }} .header.scrolled-past-header::before {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+{% endif %}

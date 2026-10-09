@@ -21,7 +21,12 @@
     }
   {% endif %}
 
-  {% if section.settings.bg_color_day != blank %}
+  {% if section.settings.bg_gradient_day != blank %}
+    body:not(.night-mode) .karmicare-footer,
+    body.day-mode .karmicare-footer {
+      background: {{ section.settings.bg_gradient_day }};
+    }
+  {% elsif section.settings.bg_color_day != blank %}
     body:not(.night-mode) .karmicare-footer,
     body.day-mode .karmicare-footer {
       background-color: {{ section.settings.bg_color_day }};
@@ -35,7 +40,11 @@
     }
   {% endif %}
 
-  {% if section.settings.bg_color_night != blank %}
+  {% if section.settings.bg_gradient_night != blank %}
+    body.night-mode .karmicare-footer {
+      background: {{ section.settings.bg_gradient_night }};
+    }
+  {% elsif section.settings.bg_color_night != blank %}
     body.night-mode .karmicare-footer {
       background-color: {{ section.settings.bg_color_night }};
     }
@@ -709,6 +718,11 @@
       "label": "Background Color (Day)"
     },
     {
+      "type": "text",
+      "id": "bg_gradient_day",
+      "label": "Background Gradient (Day)"
+    },
+    {
       "type": "color",
       "id": "text_color_day",
       "label": "Text Color (Day)"
@@ -721,6 +735,11 @@
       "type": "color",
       "id": "bg_color_night",
       "label": "Background Color (Night)"
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient_night",
+      "label": "Background Gradient (Night)"
     },
     {
       "type": "color",

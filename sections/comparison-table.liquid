@@ -44,23 +44,17 @@
   body.day-mode .section-{{ section.id }} .comparison-table__cell,
   body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--first,
   body.day-mode .section-{{ section.id }} .comparison-table__cell--first {
-      background-color: transparent;
-      border-color: rgba(0,0,0,0.08);
+      background-color: var(--kc-mapped-text-primary-default);
   }
 
   body:not(.night-mode) .section-{{ section.id }} .comparison-table__header--brand,
   body.day-mode .section-{{ section.id }} .comparison-table__header--brand,
   body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--brand,
   body.day-mode .section-{{ section.id }} .comparison-table__cell--brand {
-      background-color: var(--kc-mapped-surface-accent-default, #212A49);
+      background-color: var(--kc-white-surface-primary-default);
   }
 
-  body:not(.night-mode) .section-{{ section.id }} .comparison-table__header--brand *,
-  body.day-mode .section-{{ section.id }} .comparison-table__header--brand *,
-  body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--brand span,
-  body.day-mode .section-{{ section.id }} .comparison-table__cell--brand * {
-      color: #FFFFFF !important;
-  }
+
 
   /* NIGHT MODE */
   {% if section.settings.text_color_night != blank %}
@@ -108,16 +102,11 @@
     id="section-{{ section.id }}"
   >
     <div class="comparison-section__inner page-width">
-      <!--
-        ==========================================
-             TOP CONTENT
-        ===========================================
-      -->
       <div class="section-main-header">
         {% if section_subtitle != blank %}
-          <p class="comparison-section__subtitle">
+          <span class="comparison-section__subtitle subtitle-item ">
             {{ section_subtitle }}
-          </p>
+          </span>
         {% endif %}
 
         {% if section_title != blank %}
@@ -127,34 +116,22 @@
         {% endif %}
 
         {% if section_description != blank %}
-          <div class="comparison-section__description">
+          <div class="comparison-section__description text-xl">
             {{ section_description }}
           </div>
         {% endif %}
       </div>
-      <!--
-        ==========================================
-             COMPARISON TABLE
-        ===========================================
-      -->
-
       <div class="comparison-table-wrapper">
         <div class="comparison-table">
-          <!--
-            ========================================
-                 TABLE HEADER
-            =========================================
-          -->
-
           <!-- Column 1 -->
-          <div class="comparison-table__header comparison-table__header--first">
+          <div class="comparison-table__header text-xl comparison-table__header--first">
             {% if table_headers[0] != blank %}
               {{ table_headers[0] | strip }}
             {% endif %}
           </div>
 
           <!-- Column 2 - LOGO -->
-          <div class="comparison-table__header comparison-table__header--brand">
+          <div class="comparison-table__header text-xl comparison-table__header--brand">
             {% if table_logo != blank %}
               <div class="comparison-table__brand-logo">
                 {{ table_logo }}
@@ -163,31 +140,25 @@
           </div>
 
           <!-- Column 3 -->
-          <div class="comparison-table__header">
+          <div class="comparison-table__header text-xl">
             {% if table_headers[2] != blank %}
               {{ table_headers[2] | strip }}
             {% endif %}
           </div>
 
           <!-- Column 4 -->
-          <div class="comparison-table__header">
+          <div class="comparison-table__header text-xl">
             {% if table_headers[3] != blank %}
               {{ table_headers[3] | strip }}
             {% endif %}
           </div>
 
           <!-- Column 5 -->
-          <div class="comparison-table__header">
+          <div class="comparison-table__header text-xl">
             {% if table_headers[4] != blank %}
               {{ table_headers[4] | strip }}
             {% endif %}
           </div>
-
-          <!--
-            ========================================
-                 TABLE BODY
-            =========================================
-          -->
 
           {% if table_rows != blank %}
             {% for row in table_rows %}
@@ -230,19 +201,12 @@
             {% endfor %}
           {% endif %}
         </div>
-
-        <!--
-          ========================================
-               BUTTON
-          =========================================
-        -->
-
         {% if button_text != blank %}
           <div class="comparison-section__button-wrapper">
             {% if button_url != blank %}
               <a
                 href="{{ button_url }}"
-                class="comparison-section__button"
+                class="comparison-section__button karmicare__btn-primary"
               >
                 {{ button_text }}
               </a>

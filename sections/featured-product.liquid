@@ -135,11 +135,15 @@
                   </p>
                 {%- when 'title' -%}
                   <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                    {%- unless placeholder -%}
-                      {{ product.title | escape }}
+                    {%- if block.settings.custom_title != blank -%}
+                      {{ block.settings.custom_title }}
                     {%- else -%}
-                      {{ 'onboarding.product_title' | t }}
-                    {%- endunless -%}
+                      {%- unless placeholder -%}
+                        {{ product.title | escape }}
+                      {%- else -%}
+                        {{ 'onboarding.product_title' | t }}
+                      {%- endunless -%}
+                    {%- endif -%}
                   </h2>
                 {%- when 'price' -%}
                   <div id="price-{{ product.id }}" role="status" {{ block.shopify_attributes }}>
@@ -535,7 +539,11 @@
                             <div class="kc-custom-box">
                               <div class="kc-custom-row kc-custom-product-info">
                                 <div class="kc-custom-col-left">
-                                  {{ block.settings.subscription_title | default: product.title }}
+                                  {% if block.settings.subscription_title != blank %}
+                                    {{ block.settings.subscription_title }}
+                                  {% else %}
+                                    <strong>{{ product.title }}</strong>
+                                  {% endif %}
                                   <div class="kc-custom-per-brushing opacity-xl">
                                     <span id="kc-sync-per-brushing-money">{{ per_brushing_cents | money }}</span>
                                     {{ block.settings.per_brushing_text }}
@@ -939,6 +947,12 @@
       "name": "t:sections.featured-product.blocks.title.name",
       "limit": 1,
       "settings": [
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Overrides the default product title if set."
+        },
         {
           "type": "select",
           "id": "heading_size",
@@ -1389,6 +1403,11 @@
           "label": "t:sections.main-product.blocks.icon_with_text.settings.image_1.label"
         },
         {
+          "type": "html",
+          "id": "svg_1",
+          "label": "Custom SVG 1"
+        },
+        {
           "type": "inline_richtext",
           "id": "heading_1",
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_1.default",
@@ -1589,6 +1608,11 @@
           "label": "t:sections.main-product.blocks.icon_with_text.settings.image_2.label"
         },
         {
+          "type": "html",
+          "id": "svg_2",
+          "label": "Custom SVG 2"
+        },
+        {
           "type": "inline_richtext",
           "id": "heading_2",
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.default",
@@ -1787,6 +1811,11 @@
           "type": "image_picker",
           "id": "image_3",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.image_3.label"
+        },
+        {
+          "type": "html",
+          "id": "svg_3",
+          "label": "Custom SVG 3"
         },
         {
           "type": "inline_richtext",
