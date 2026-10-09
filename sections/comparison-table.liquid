@@ -44,14 +44,14 @@
   body.day-mode .section-{{ section.id }} .comparison-table__cell,
   body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--first,
   body.day-mode .section-{{ section.id }} .comparison-table__cell--first {
-      background-color: transparent;
+      background-color: var(--kc-mapped-text-primary-default);
   }
 
   body:not(.night-mode) .section-{{ section.id }} .comparison-table__header--brand,
   body.day-mode .section-{{ section.id }} .comparison-table__header--brand,
   body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--brand,
   body.day-mode .section-{{ section.id }} .comparison-table__cell--brand {
-      background-color: var(--kc-mapped-surface-accent-default);
+      background-color: var(--kc-white-surface-primary-default);
   }
 
 
@@ -206,7 +206,7 @@
             {% if button_url != blank %}
               <a
                 href="{{ button_url }}"
-                class="comparison-section__button"
+                class="comparison-section__button karmicare__btn-primary"
               >
                 {{ button_text }}
               </a>

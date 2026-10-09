@@ -153,7 +153,7 @@
 
 
         /* Seamless absolute drawer */
-          #shopify-section-{{ section.id }} .menu-drawer {
+    #shopify-section-{{ section.id }} .menu-drawer {
       display: none;
     }
     #shopify-section-{{ section.id }} details[open] .menu-drawer,
@@ -262,6 +262,16 @@
       fill: {{ section.settings.bg_color_night }};
     }
   {%- endif -%}
+
+  /* Smooth transition for background color changes (prevents jerk when returning to top) */
+  #shopify-section-{{ section.id }} .header,
+  #shopify-section-{{ section.id }} .header::before {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* ── PRODUCT PAGE OVERRIDES ── */
+  {% render 'product-header-css', section: section %}
+
   .header__heading-logo-wrapper--svg {
     display: inline-flex;
     align-items: center;
@@ -890,6 +900,30 @@
       "type": "color",
       "id": "btn_text_night",
       "label": "Button text (Night)"
+    },
+    {
+      "type": "header",
+      "content": "Product Page Settings"
+    },
+    {
+      "type": "color",
+      "id": "product_section_bg_color_day",
+      "label": "Section background (Day) on Product Page"
+    },
+    {
+      "type": "color",
+      "id": "product_section_bg_color_night",
+      "label": "Section background (Night) on Product Page"
+    },
+    {
+      "type": "color",
+      "id": "product_bg_color_day",
+      "label": "Header background (Day) on Product Page"
+    },
+    {
+      "type": "color",
+      "id": "product_bg_color_night",
+      "label": "Header background (Night) on Product Page"
     },
     {
       "type": "header",

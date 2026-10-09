@@ -157,7 +157,7 @@
         {%- when 'text' -%}
           <div class="hero-karmicare__text-wrapper" {{ block.shopify_attributes }}>
             {%- if block.settings.text != blank -%}
-              <p class="hero-karmicare__text hero-karmicare__text-{{ block.id }}">
+              <p class="hero-karmicare__text text-xl hero-karmicare__text-{{ block.id }}">
                 {{ block.settings.text | escape }}
               </p>
             {%- endif -%}

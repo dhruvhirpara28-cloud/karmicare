@@ -93,7 +93,9 @@
         {%- endif -%}
 
         {%- if section.settings.text != blank -%}
-          {{ section.settings.text }}
+          <div class="text-xl">
+            {{ section.settings.text }}
+          </div>
         {%- endif -%}
 
         {%- if section.settings.button_label != blank -%}

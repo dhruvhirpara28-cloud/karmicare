@@ -56,15 +56,15 @@
     align-items: center;
     gap: 0.6rem;
     padding: 4px 12px;
-    border-radius: var(--pill-border-radius, 3rem);
-    font-size: var(--pill-font-size-mobile, 1.3rem);
+    border-radius: var(--secondary-border-radius);
+    font-size: var(--font-body-small-size);
     font-weight: var(--font-500-weight);
     line-height: 1.2;
     white-space: nowrap;
-    border: 1px solid var(--kc-mapped-surface-secondary-default);
     color: rgb(var(--color-foreground));
     flex-shrink: 0;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    border: 1px solid rgba(var(--color-foreground), 0.2);
   }
 
   .highlight-pill__icon {
