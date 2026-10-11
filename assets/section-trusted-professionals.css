@@ -252,6 +252,7 @@
 .trusted-professionals__card-body {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: var(--gap-xs);
 }
 
@@ -268,6 +269,7 @@
 .trusted-professionals__card-quote {
   display: grid;
   grid-template-rows: 0fr;
+  min-height: 0;
   transition: grid-template-rows 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
 
@@ -283,6 +285,10 @@
   transition: opacity 0.25s ease, transform 0.35s ease;
 }
 
+.trusted-professionals__card-quote-text p + p {
+  margin-top: var(--gap-lg);
+}
+
 .trusted-professionals__card-quote-text > :first-child {
   margin-top: 0;
 }
@@ -294,6 +300,21 @@
 .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote {
   grid-template-rows: 1fr;
   transition: grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* A quote taller than the card scrolls inside the panel. No scrollbar (it
+   would flash during the open animation); instead the text fades out in the
+   24px above the name, which is empty padding when the quote fits. */
+.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+}
+
+.trusted-professionals__card-quote-inner::-webkit-scrollbar {
+  display: none;
 }
 
 .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-text {
