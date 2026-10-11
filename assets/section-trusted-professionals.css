@@ -132,6 +132,76 @@
   scroll-margin-left: 0;
 }
 
+/* Marquee: one full-bleed row that drifts (assets/trusted-professionals-marquee.js) */
+.trusted-professionals {
+  overflow-x: clip;
+}
+
+.trusted-professionals__marquee {
+  display: block;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.trusted-professionals__track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  will-change: transform;
+}
+
+/* Same card width as the grid: the page-width content box split into the
+   column count for the breakpoint (cqw = marquee width, without scrollbar) */
+.trusted-professionals__marquee {
+  --cols: var(--cols-mobile, 1.3);
+  container-type: inline-size;
+}
+
+@media screen and (min-width: 750px) {
+  .trusted-professionals__marquee {
+    --cols: var(--cols-tablet, 2);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .trusted-professionals__marquee {
+    --cols: var(--cols-laptop, 3);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .trusted-professionals__marquee {
+    --cols: var(--cols-desktop, 4);
+  }
+}
+
+.trusted-professionals__track .trusted-professionals__card {
+  flex: 0 0 calc((min(100cqw, var(--page-width)) - 3rem - 16px * (var(--cols) - 1)) / var(--cols));
+}
+
+.trusted-professionals__marquee.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* Reduced motion: no drift, the row scrolls by hand instead */
+.trusted-professionals__marquee.is-static {
+  overflow-x: auto;
+  scrollbar-width: none;
+  touch-action: auto;
+}
+
+.trusted-professionals__marquee.is-static .trusted-professionals__track {
+  padding-inline: max(1.5rem, calc(50vw - var(--page-width, 120rem) / 2 + 5rem));
+}
+
 /* Card Styling */
 .trusted-professionals__card {
   position: relative;
@@ -168,21 +238,21 @@
   padding: 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
   z-index: 2;
-  transition: transform 0.3s ease;
+  max-height: calc(100% - 16px);
+  overflow: hidden;
   margin: 8px;
   border-radius: var(--extra-primary-border-radius);
-}
-
-.trusted-professionals__card:hover .trusted-professionals__card-content {
-  height: 100%;
+  /* KC glass surface, background only (tokens in snippets/day-night-color-variables.liquid) */
+  background-color: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
 .trusted-professionals__card-body {
-  margin-top: auto;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: var(--gap-xs);
 }
 
@@ -192,25 +262,105 @@
   }
 }
 
+/* Hover quote: the panel sits at the bottom of the card, so opening the
+   0fr -> 1fr row grows it upwards exactly as tall as the quote needs.
+   Opening: the panel unfolds first, then the text settles in.
+   Closing: the text fades out first, then the panel folds back. */
 .trusted-professionals__card-quote {
-  display: none;
+  display: grid;
+  grid-template-rows: 0fr;
+  min-height: 0;
+  margin-bottom: 0;
+  transition:
+    grid-template-rows 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+    margin-bottom 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.trusted-professionals__card-quote-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.trusted-professionals__card-quote-text {
   opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.35s ease;
 }
 
-.trusted-professionals__card:hover .trusted-professionals__card-quote {
-  display: block;
-  animation: quoteFadeIn 0.3s ease forwards;
+.trusted-professionals__card-quote-text p + p {
+  margin-top: var(--gap-lg);
 }
 
-@keyframes quoteFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+.trusted-professionals__card-quote-text > :first-child {
+  margin-top: 0;
+}
+
+.trusted-professionals__card-quote-text > :last-child {
+  margin-bottom: 0;
+}
+
+.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote {
+  grid-template-rows: 1fr;
+  margin-bottom: 24px; /* space between quote and name, kept clear of text */
+  transition:
+    grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* A quote taller than the card scrolls inside the panel. No scrollbar (it
+   would flash during the open animation); instead the text fades out at the
+   bottom of the quote area, above the 24px gap. The fade is driven by the
+   scroll position: it only exists while there is more text below and
+   disappears at the end. A quote that fits has no scroll range, so the
+   timeline stays inactive and there is no fade. Without scroll-driven
+   animation support the text simply stops 24px above the name. */
+@property --kc-quote-fade {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
+}
+
+@supports (animation-timeline: scroll()) {
+  .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+    animation: kc-quote-fade linear both;
+    animation-timeline: scroll(self block);
+  }
+}
+
+@keyframes kc-quote-fade {
+  0%,
+  85% {
+    --kc-quote-fade: 40px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  100% {
+    --kc-quote-fade: 0px;
+  }
+}
+
+.trusted-professionals__card-quote-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-text {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease 0.25s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-professionals__card-quote,
+  .trusted-professionals__card-quote-text {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 }
 
