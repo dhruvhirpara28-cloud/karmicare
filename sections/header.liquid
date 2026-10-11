@@ -55,7 +55,6 @@
     box-shadow: 0 2px 8px rgba(25, 31, 56, 0.04);
     max-width: 1200px;
     margin: 1.2rem auto;
-    padding: {{ section.settings.padding_top }}px 2rem {{ section.settings.padding_bottom }}px 2rem;
     align-items: center;
   }
   @media screen and (max-width: 1199px){
@@ -65,36 +64,71 @@
     }
   }
 
+  /* Desktop: compact centred glass bar (Figma KC_navigation) */
   @media screen and (min-width: 990px) {
-    #shopify-section-{{ section.id }} .header--middle-left {
-      grid-template-areas: 'heading navigation icons';
-      grid-template-columns: auto 1fr auto;
-      column-gap: 1.5rem;
-      align-items: center;
-    }
-    #shopify-section-{{ section.id }} .header--middle-left .header__inline-menu {
-      justify-self: center;
+    #shopify-section-{{ section.id }} .header {
       display: flex;
-      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      width: fit-content;
+      max-width: calc(100% - 2.4rem);
+      margin: {{ section.settings.padding_top }}px auto {{ section.settings.padding_bottom }}px;
+      padding: 3px;
+      box-shadow: none;
+      {%- if section.settings.enable_glass_blur %}
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      {%- endif %}
+    }
+    #shopify-section-{{ section.id }} .header__heading-link {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1.6rem;
+    }
+    #shopify-section-{{ section.id }} .header__inline-menu {
+      display: flex;
     }
     #shopify-section-{{ section.id }} .header__inline-menu .list-menu--inline {
-      gap: 2rem;
+      flex-wrap: nowrap;
+      gap: 3px;
       align-items: center;
     }
     #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item {
-      font-weight: var(--font-500-weight);
-      padding: 0.6rem 0.4rem;
+      min-height: 4.4rem;
+      padding: 0 1.2rem;
+      border-radius: var(--primary-border-radius);
+      font-family: var(--font-body-family);
+      font-weight: var(--font-600-weight);
+      font-size: 1.5rem;
+      line-height: 2rem;
+      letter-spacing: 0;
+      white-space: nowrap;
       text-decoration: none;
       transition: opacity 0.2s ease;
+    }
+    #shopify-section-{{ section.id }} .header__inline-menu summary.header__menu-item {
+      padding-right: 2.7rem;
     }
     #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:hover {
       opacity: 0.75;
     }
-    #shopify-section-{{ section.id }} .header--middle-left .header__icons {
-      justify-self: end;
+    #shopify-section-{{ section.id }} .header__icons {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 3px;
+    }
+    #shopify-section-{{ section.id }} .desktop-localization-wrapper:empty {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .header__cta-btn {
+      min-height: 4.4rem;
+      padding: 0 1.6rem;
+      font-family: var(--kc-font-family-Nunito);
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      letter-spacing: 1.7px;
+      white-space: nowrap;
     }
   }
 
@@ -271,6 +305,55 @@
 
   /* ── PRODUCT PAGE OVERRIDES ── */
   {% render 'product-header-css', section: section %}
+
+  /* ── DESKTOP GLASS BACKGROUND (bar colour at reduced opacity) ── */
+  {%- liquid
+    assign glass_alpha = section.settings.glass_opacity | divided_by: 100.0
+    assign glass_bg_day = section.settings.bg_color_day
+    assign glass_bg_night = section.settings.bg_color_night
+    if template.name == 'product' or request.page_type == 'product'
+      if section.settings.product_bg_color_day != blank
+        assign glass_bg_day = section.settings.product_bg_color_day
+      endif
+      if section.settings.product_bg_color_night != blank
+        assign glass_bg_night = section.settings.product_bg_color_night
+      endif
+    endif
+  -%}
+  @media screen and (min-width: 990px) {
+    {%- if glass_bg_day != blank %}
+      body.day-mode #shopify-section-{{ section.id }} .header {
+        background-color: {{ glass_bg_day | color_modify: 'alpha', glass_alpha }};
+      }
+    {%- endif %}
+    {%- if glass_bg_night != blank %}
+      body.night-mode #shopify-section-{{ section.id }} .header {
+        background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
+      }
+    {%- endif %}
+  }
+
+  /* ── CTA BUTTON COLORS (from section schema settings) ── */
+  {%- if section.settings.btn_bg_day != blank or section.settings.btn_text_day != blank %}
+    body:not(.night-mode) #shopify-section-{{ section.id }} .header__cta-btn {
+      {%- if section.settings.btn_bg_day != blank %}
+        background-color: {{ section.settings.btn_bg_day }};
+      {%- endif %}
+      {%- if section.settings.btn_text_day != blank %}
+        color: {{ section.settings.btn_text_day }};
+      {%- endif %}
+    }
+  {%- endif %}
+  {%- if section.settings.btn_bg_night != blank or section.settings.btn_text_night != blank %}
+    body.night-mode #shopify-section-{{ section.id }} .header__cta-btn {
+      {%- if section.settings.btn_bg_night != blank %}
+        background-color: {{ section.settings.btn_bg_night }};
+      {%- endif %}
+      {%- if section.settings.btn_text_night != blank %}
+        color: {{ section.settings.btn_text_night }};
+      {%- endif %}
+    }
+  {%- endif %}
 
   .header__heading-logo-wrapper--svg {
     display: inline-flex;
@@ -903,6 +986,27 @@
     },
     {
       "type": "header",
+      "content": "Glass effect (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "glass_opacity",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Bar background opacity",
+      "info": "Applies to the bar background colour (Day and Night) on desktop.",
+      "default": 90
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_glass_blur",
+      "label": "Blur content behind the bar",
+      "default": true
+    },
+    {
+      "type": "header",
       "content": "Product Page Settings"
     },
     {
@@ -992,6 +1096,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
+      "info": "Space above the header bar on desktop.",
       "default": 20
     },
     {
@@ -1002,6 +1107,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
+      "info": "Space below the header bar on desktop.",
       "default": 20
     }
   ],
