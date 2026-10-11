@@ -173,6 +173,11 @@
   transition: transform 0.3s ease;
   margin: 8px;
   border-radius: var(--extra-primary-border-radius);
+  /* KC glass surface (tokens in snippets/day-night-color-variables.liquid) */
+  background-color: var(--kc-mapped-surface-glass-default);
+  border: 1px solid var(--kc-mapped-border-glass-border);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
 .trusted-professionals__card:hover .trusted-professionals__card-content {
