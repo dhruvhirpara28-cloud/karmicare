@@ -270,7 +270,10 @@
   display: grid;
   grid-template-rows: 0fr;
   min-height: 0;
-  transition: grid-template-rows 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  margin-bottom: 0;
+  transition:
+    grid-template-rows 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+    margin-bottom 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
 
 .trusted-professionals__card-quote-inner {
@@ -279,7 +282,6 @@
 }
 
 .trusted-professionals__card-quote-text {
-  padding-bottom: 24px; /* space between quote and name */
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.25s ease, transform 0.35s ease;
@@ -299,18 +301,49 @@
 
 .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote {
   grid-template-rows: 1fr;
-  transition: grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-bottom: 24px; /* space between quote and name, kept clear of text */
+  transition:
+    grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* A quote taller than the card scrolls inside the panel. No scrollbar (it
-   would flash during the open animation); instead the text fades out in the
-   24px above the name, which is empty padding when the quote fits. */
+   would flash during the open animation); instead the text fades out at the
+   bottom of the quote area, above the 24px gap. The fade is driven by the
+   scroll position: it only exists while there is more text below and
+   disappears at the end. A quote that fits has no scroll range, so the
+   timeline stays inactive and there is no fade. Without scroll-driven
+   animation support the text simply stops 24px above the name. */
+@property --kc-quote-fade {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
 .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
+}
+
+@supports (animation-timeline: scroll()) {
+  .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+    animation: kc-quote-fade linear both;
+    animation-timeline: scroll(self block);
+  }
+}
+
+@keyframes kc-quote-fade {
+  0%,
+  85% {
+    --kc-quote-fade: 40px;
+  }
+
+  100% {
+    --kc-quote-fade: 0px;
+  }
 }
 
 .trusted-professionals__card-quote-inner::-webkit-scrollbar {
