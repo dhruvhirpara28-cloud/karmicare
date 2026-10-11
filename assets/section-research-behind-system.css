@@ -34,6 +34,76 @@
   }
 }
 
+/* Marquee: one full-bleed row that drifts (assets/research-behind-system-marquee.js) */
+.research-behind-system {
+  overflow-x: clip;
+}
+
+.research-behind-system__marquee {
+  display: block;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.research-behind-system__track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  will-change: transform;
+}
+
+/* Same card width as the slider: the page-width content box split into the
+   column count for the breakpoint (cqw = marquee width, without scrollbar) */
+.research-behind-system__marquee {
+  --cols: var(--cols-mobile, 1.2);
+  container-type: inline-size;
+}
+
+@media screen and (min-width: 750px) {
+  .research-behind-system__marquee {
+    --cols: var(--cols-tablet, 1);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .research-behind-system__marquee {
+    --cols: var(--cols-laptop, 2);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .research-behind-system__marquee {
+    --cols: var(--cols-desktop, 2);
+  }
+}
+
+.research-behind-system__track .research-card {
+  flex: 0 0 calc((min(100cqw, var(--page-width)) - 3rem - 1.5rem * (var(--cols) - 1)) / var(--cols));
+}
+
+.research-behind-system__marquee.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* Reduced motion: no drift, the row scrolls by hand instead */
+.research-behind-system__marquee.is-static {
+  overflow-x: auto;
+  scrollbar-width: none;
+  touch-action: auto;
+}
+
+.research-behind-system__marquee.is-static .research-behind-system__track {
+  padding-inline: max(1.5rem, calc(50vw - var(--page-width, 120rem) / 2 + 5rem));
+}
+
 /* Slider Overrides */
 .research-behind-system__grid.slider {
   display: flex;
