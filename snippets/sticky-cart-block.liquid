@@ -293,8 +293,15 @@
 
       /* Extract cost per brushing from standard Loop subrow */
       var subEl = groupEl.querySelector('.kc-plan-subrow');
+      var rawSubText = '';
       if (subEl) {
-        var parts = subEl.textContent.split('·');
+        var divs = subEl.querySelectorAll('div');
+        if (divs.length > 0) {
+          rawSubText = Array.from(divs).map(function (d) { return d.textContent.trim(); }).filter(Boolean).join(' ');
+        } else {
+          rawSubText = subEl.textContent.trim();
+        }
+        var parts = rawSubText.split('·');
         if (parts.length > 0) {
           data.costPerBrushing = parts[0].replace('/', 'per').trim();
         }
@@ -354,7 +361,7 @@
         data.subrow = subrowParts.join(separator);
       } else {
         /* Fallback to original Loop text */
-        data.subrow = subEl ? subEl.textContent.trim() : '';
+        data.subrow = rawSubText || (subEl ? subEl.textContent.trim() : '');
       }
 
       return data;

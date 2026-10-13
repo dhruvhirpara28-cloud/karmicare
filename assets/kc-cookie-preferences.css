@@ -1,0 +1,334 @@
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) {
+    box-sizing: border-box;
+    background: var(--kc-mapped-surface-glass-default);
+    color: var(--kc-mapped-text-default-heading);
+    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
+    border-radius: var(--kc-shape-radius-md);
+    box-shadow: var(--kc-elevation-md);
+    -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+    backdrop-filter: blur(var(--kc-shape-blur-md));
+    font-family: var(--kc-font-use-body);
+    font-size: max(14px, var(--kc-responsive-body-sm-text-size));
+    line-height: 1.4;
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+    text-align: start;
+    scrollbar-width: thin;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) * {
+    box-sizing: border-box;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) :is(h2, h3, p, a, label) {
+    font-family: inherit;
+    letter-spacing: inherit;
+    text-transform: none;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) :is(h2, h3, label) {
+    color: var(--kc-mapped-text-default-heading);
+    font-weight: 600;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) h2 {
+    margin: 0;
+    font-family: var(--kc-font-role-identity);
+    font-size: var(--kc-responsive-label-lg-text-size);
+    font-weight: var(--font-700-weight, 700);
+    line-height: var(--kc-responsive-label-lg-line-height);
+    letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+    text-transform: uppercase;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) p {
+    margin: 0;
+    padding: 0;
+    color: var(--kc-mapped-text-default-body);
+    font-size: var(--kc-responsive-label-lg-text-size);
+    line-height: 1.4;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) a {
+    color: var(--kc-mapped-text-link-default);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) button {
+    width: auto;
+    min-width: 0;
+    min-height: var(--kc-responsive-size-control-min-height);
+    height: auto;
+    margin: 0;
+    padding: 8px 12px;
+    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-control-default);
+    border-radius: var(--kc-shape-radius-sm);
+    background: transparent;
+    color: var(--kc-mapped-text-default-heading);
+    font-family: var(--kc-font-use-ui);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    cursor: pointer;
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) button:hover {
+    background: var(--kc-mapped-surface-primary-default-hover);
+}
+
+body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) :is(button, a):focus-visible {
+    outline: 2px solid var(--kc-mapped-border-focus-strong);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+body #shopify-pc__banner {
+    inset: auto 16px 16px auto;
+    width: calc(100% - 32px);
+    max-width: 440px;
+    max-height: calc(100dvh - 32px);
+    padding: 16px;
+}
+
+body #shopify-pc__banner .shopify-pc__banner__wrapper {
+    display: grid;
+    gap: 12px;
+}
+
+body #shopify-pc__banner .shopify-pc__banner__body {
+    margin: 0;
+}
+
+body #shopify-pc__banner h2 {
+    margin-bottom: var(--kc-responsive-label-lg-paragraph-spacing);
+}
+
+body #shopify-pc__banner .shopify-pc__banner__btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 8px;
+}
+
+body #shopify-pc__banner .shopify-pc__banner__btns button {
+    order: 0;
+}
+
+body #shopify-pc__banner #shopify-pc__banner__btn-manage-prefs {
+    border-color: transparent;
+    padding-inline: 4px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+body #shopify-pc__banner #shopify-pc__banner__btn-manage-prefs:focus span {
+    outline: none;
+}
+
+body #shopify-pc__prefs__overlay {
+    background: var(--kc-mapped-surface-overlay-scrim);
+}
+
+body #shopify-pc__prefs__dialog {
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 32px);
+    min-width: 0;
+    max-width: 560px;
+    max-height: calc(100dvh - 32px);
+    overflow: hidden;
+}
+
+body #shopify-pc__prefs__dialog header {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+    background: transparent;
+}
+
+body #shopify-pc__prefs__dialog header h2 {
+    display: flex;
+    align-items: center;
+    padding: 0 40px 0 0 !important;
+    min-height: 24px;
+    text-align: start;
+}
+
+body #shopify-pc__prefs__dialog #shopify-pc__prefs__header-close {
+    top: 4px;
+    right: 4px;
+    width: var(--kc-responsive-size-control-min-width);
+    height: var(--kc-responsive-size-control-min-height);
+    padding: 0;
+    border: 0;
+}
+
+body #shopify-pc__prefs__dialog #shopify-pc__prefs__header-close svg path {
+    fill: currentColor;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+}
+
+body #shopify-pc__prefs__dialog #shopify-pc__prefs__header-save {
+    background: var(--kc-mapped-surface-accent-default);
+    color: var(--kc-mapped-text-accent-default-on-accent);
+    border-color: transparent;
+}
+
+body #shopify-pc__prefs__dialog #shopify-pc__prefs__header-save:hover {
+    background: var(--kc-mapped-surface-accent-default-hover);
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__scrollable {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kc-mapped-border-control-default) transparent;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__scrollable::-webkit-scrollbar {
+    width: 4px;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__intro-main {
+    padding: 12px 16px;
+    line-height: inherit;
+}
+
+body #shopify-pc__prefs__dialog h3 {
+    margin: 0 0 4px;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__options {
+    padding: 0 16px 8px;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option {
+    margin: 0;
+    padding: 8px 0;
+    border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+    font-size: inherit;
+    line-height: inherit;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option label {
+    gap: 6px;
+    align-items: center;
+    min-height: var(--kc-responsive-size-icon-md);
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option p {
+    padding-inline-start: calc(max(14px, var(--kc-responsive-body-sm-text-size)) + 6px);
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option label span,
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option label span svg {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    min-width: 0;
+    background: transparent;
+    color: var(--kc-mapped-icon-primary-default);
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option label svg path {
+    fill: currentColor;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option input[aria-readonly='true']~span svg {
+    opacity: 0.6;
+}
+
+body #shopify-pc__prefs__dialog .shopify-pc__prefs__option input:focus-visible~span svg {
+    outline: 2px solid var(--kc-mapped-border-focus-strong);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel {
+    inset: auto 16px 16px auto;
+    transform: none;
+    max-width: 440px;
+    pointer-events: auto;
+}
+
+body #shopify-pc__prefs:has(.kc-cookie-panel) {
+    pointer-events: none;
+}
+
+body #shopify-pc__prefs:has(.kc-cookie-panel) #shopify-pc__prefs__overlay {
+    display: none;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel header {
+    gap: 8px;
+    padding: 12px 16px 8px;
+    border: 0;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel .shopify-pc__prefs__intro {
+    display: none;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel .shopify-pc__prefs__options {
+    padding-bottom: 0;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel>.shopify-pc__prefs__header-actions {
+    flex: none;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    padding: 8px 16px 12px;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel:has(.kc-cookie-manage[aria-expanded='false'])>.shopify-pc__prefs__header-actions {
+    padding-top: 0;
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel #shopify-pc__prefs__header-save {
+    grid-column: 1 / -1;
+}
+
+body #shopify-pc__prefs__dialog .kc-cookie-manage {
+    padding-inline: 4px;
+    border-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+body #shopify-pc__prefs__dialog .kc-cookie-manage::after {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-inline-start: 6px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    content: '';
+    transform: translateY(-2px) rotate(45deg);
+}
+
+body #shopify-pc__prefs__dialog .kc-cookie-manage[aria-expanded='true']::after {
+    transform: translateY(1px) rotate(225deg);
+}
+
+body #shopify-pc__prefs__dialog.kc-cookie-panel [hidden] {
+    display: none !important;
+}
