@@ -1,0 +1,498 @@
+/* GENERATED from KC | Brand Design Library (Figma gcWcgYxS1nmheciKYOjOGx) on 2026-10-12. DO NOT EDIT.
+   Source: docs/design-tokens/kc-tokens.json. Regenerate: python3 docs/design-tokens/generate.py
+   Naming: --kc-<collection>-<figma path, '/' and spaces to '-'>. Opaque colours also ship as -rgb triplets.
+   Mapped colours: Day on :root and body.day-mode, Night on body.night-mode (the class assets/day-night-mode.js sets).
+   Responsive: mobile values on :root, desktop values from 750px.
+   Held back (4): these names already exist in the theme and keep their current source
+   until a later step moves them here on purpose:
+     --kc-mapped-border-glass-border
+     --kc-mapped-surface-glass-default
+     --kc-responsive-label-sm-text-size
+     --kc-shape-blur-md
+*/
+
+:root {
+  --kc-brand-original-off-white: #fffbf6;
+  --kc-brand-original-off-white-rgb: 255,251,246;
+  --kc-brand-fixed-white: #ffffff;
+  --kc-brand-fixed-white-rgb: 255,255,255;
+  --kc-brand-glass-bg-light: rgba(255,251,246,0.9);
+  --kc-brand-glass-bg-dark: rgba(25,31,56,0.85);
+  --kc-brand-glass-border-light: rgba(255,255,255,0.4);
+  --kc-brand-glass-border-dark: rgba(255,255,255,0.15);
+  --kc-brand-fixed-black: #000000;
+  --kc-brand-fixed-black-rgb: 0,0,0;
+  --kc-brand-fixed-accent-text: #0a1628;
+  --kc-brand-fixed-accent-text-rgb: 10,22,40;
+  --kc-brand-fixed-transparent: rgba(170,170,170,0);
+  --kc-brand-original-grey: #efece8;
+  --kc-brand-original-grey-rgb: 239,236,232;
+  --kc-brand-original-stone: #dddbd9;
+  --kc-brand-original-stone-rgb: 221,219,217;
+  --kc-brand-original-light-blue-accent: #7fb9ff;
+  --kc-brand-original-light-blue-accent-rgb: 127,185,255;
+  --kc-brand-original-middle-blue-1: #2c3a60;
+  --kc-brand-original-middle-blue-1-rgb: 44,58,96;
+  --kc-brand-original-middle-blue-2: #212a49;
+  --kc-brand-original-middle-blue-2-rgb: 33,42,73;
+  --kc-brand-glass-blur: 20px;
+  --kc-brand-original-dark-blue: #191f38;
+  --kc-brand-original-dark-blue-rgb: 25,31,56;
+  --kc-brand-glass-shadow: rgba(0,0,0,0.1);
+  --kc-shape-radius-none: 0;
+  --kc-shape-radius-sm: 8px;
+  --kc-shape-radius-md: 12px;
+  --kc-shape-radius-lg: 20px;
+  --kc-shape-radius-full: 999px;
+  --kc-shape-stroke-thin: 1px;
+  --kc-shape-stroke-medium: 1.5px;
+  --kc-shape-stroke-thick: 2px;
+  --kc-shape-opacity-30: 0.3;
+  --kc-shape-opacity-50: 0.5;
+  --kc-shape-opacity-60: 0.6;
+  --kc-shape-opacity-70: 0.7;
+  --kc-shape-opacity-80: 0.8;
+  --kc-shape-blur-xs: 3px;
+  --kc-shape-blur-lg: 32px;
+  --kc-font-role-identity: "Nunito", sans-serif;
+  --kc-font-role-soul: "Marlide Display", serif;
+  --kc-font-role-backbone: "Proxima Nova", "proxima-nova", sans-serif;
+  --kc-font-role-science: "Space Grotesk", sans-serif;
+  --kc-font-role-data: "Geist Mono", monospace;
+  --kc-font-role-long-form: "Noto Serif", serif;
+  --kc-font-use-lifestyle-display: "Marlide Display", serif;
+  --kc-font-use-heading: "Proxima Nova", "proxima-nova", sans-serif;
+  --kc-font-use-body: "Proxima Nova", "proxima-nova", sans-serif;
+  --kc-font-use-ui: "Proxima Nova", "proxima-nova", sans-serif;
+  --kc-font-use-science-heading: "Space Grotesk", sans-serif;
+  --kc-font-use-mono: "Geist Mono", monospace;
+  --kc-font-use-brand: "Nunito", sans-serif;
+  --kc-responsive-display-text-size: 48px;
+  --kc-responsive-display-line-height: 44px;
+  --kc-responsive-display-letter-spacing: -1px;
+  --kc-responsive-display-paragraph-spacing: 24px;
+  --kc-responsive-h1-text-size: 32px;
+  --kc-responsive-h1-line-height: 32px;
+  --kc-responsive-h1-paragraph-spacing: 16px;
+  --kc-responsive-h2-text-size: 28px;
+  --kc-responsive-h2-line-height: 28px;
+  --kc-responsive-h2-paragraph-spacing: 16px;
+  --kc-responsive-h3-text-size: 24px;
+  --kc-responsive-h3-line-height: 24px;
+  --kc-responsive-h3-paragraph-spacing: 12px;
+  --kc-responsive-h4-text-size: 20px;
+  --kc-responsive-h4-line-height: 24px;
+  --kc-responsive-h4-paragraph-spacing: 12px;
+  --kc-responsive-h5-text-size: 20px;
+  --kc-responsive-h5-line-height: 24px;
+  --kc-responsive-h5-paragraph-spacing: 12px;
+  --kc-responsive-h6-text-size: 14px;
+  --kc-responsive-h6-line-height: 20px;
+  --kc-responsive-h6-letter-spacing: 1px;
+  --kc-responsive-h6-paragraph-spacing: 8px;
+  --kc-responsive-body-lg-text-size: 16px;
+  --kc-responsive-body-lg-line-height: 22px;
+  --kc-responsive-body-lg-letter-spacing: 0;
+  --kc-responsive-body-lg-paragraph-spacing: 12px;
+  --kc-responsive-body-md-text-size: 14px;
+  --kc-responsive-body-md-line-height: 20px;
+  --kc-responsive-body-md-letter-spacing: 0;
+  --kc-responsive-body-md-paragraph-spacing: 8px;
+  --kc-responsive-body-sm-text-size: 12px;
+  --kc-responsive-body-sm-line-height: 16px;
+  --kc-responsive-body-sm-letter-spacing: 0;
+  --kc-responsive-body-sm-paragraph-spacing: 8px;
+  --kc-responsive-label-lg-text-size: 12px;
+  --kc-responsive-label-lg-line-height: 12px;
+  --kc-responsive-label-lg-letter-spacing: 0;
+  --kc-responsive-label-lg-paragraph-spacing: 4px;
+  --kc-responsive-label-sm-line-height: 10px;
+  --kc-responsive-label-sm-letter-spacing: 0;
+  --kc-responsive-label-sm-paragraph-spacing: 4px;
+  --kc-responsive-spacing-layout-xxs: 3px;
+  --kc-responsive-spacing-layout-xs: 8px;
+  --kc-responsive-spacing-layout-sm: 8px;
+  --kc-responsive-spacing-layout-md: 12px;
+  --kc-responsive-spacing-layout-lg: 20px;
+  --kc-responsive-spacing-layout-xl: 24px;
+  --kc-responsive-spacing-layout-2xl: 32px;
+  --kc-responsive-spacing-layout-3xl: 40px;
+  --kc-responsive-spacing-section-xs: 20px;
+  --kc-responsive-spacing-section-md: 64px;
+  --kc-responsive-spacing-section-lg: 96px;
+  --kc-responsive-spacing-section-xl: 120px;
+  --kc-responsive-spacing-page-gutter: 20px;
+  --kc-responsive-spacing-grid-gutter: 16px;
+  --kc-responsive-spacing-grid-gutter-tight: 8px;
+  --kc-responsive-spacing-page-container: 353px;
+  --kc-responsive-spacing-layout-comfortable: 16px;
+  --kc-responsive-spacing-layout-spacious: 24px;
+  --kc-responsive-size-control-min-height: 44px;
+  --kc-responsive-size-control-min-width: 44px;
+  --kc-responsive-size-input-height: 56px;
+  --kc-responsive-size-icon-sm: 16px;
+  --kc-responsive-size-icon-md: 24px;
+  --kc-responsive-spacing-section-comfortable: 48px;
+  --kc-responsive-size-table-row-min-height: 52px;
+  --kc-responsive-size-button-sm-height: 40px;
+  --kc-responsive-size-button-lg-height: 48px;
+  --kc-responsive-size-grid-columns-3: 361px;
+  --kc-responsive-size-grid-columns-4: 361px;
+  --kc-responsive-size-grid-columns-6: 361px;
+  --kc-responsive-size-grid-columns-7: 361px;
+  --kc-responsive-size-grid-columns-9: 361px;
+  --kc-responsive-size-grid-columns-8: 361px;
+  --kc-elevation-xs: 0 1px 2px 0 rgba(0,0,0,0.03);
+  --kc-elevation-sm: 0 1px 3px 0 rgba(0,0,0,0.04);
+  --kc-elevation-md: 0 4px 12px 0 rgba(0,0,0,0.05);
+  --kc-elevation-lg: 0 12px 24px 0 rgba(0,0,0,0.06);
+  --kc-elevation-xl: 0 20px 40px 0 rgba(0,0,0,0.08);
+  --kc-elevation-focus-visible: 0 0 0 2px #191f38;
+  --kc-elevation-selection-inset: 0 0 0 1px rgba(127,185,255,0.3);
+  --kc-elevation-selection-inset-backdrop-blur: 20px;
+}
+
+:root,
+body.day-mode {
+  --kc-mapped-surface-primary-default-hover: #efece8;
+  --kc-mapped-surface-primary-default-hover-rgb: 239,236,232;
+  --kc-mapped-surface-primary-default-pressed: #dddbd9;
+  --kc-mapped-surface-primary-default-pressed-rgb: 221,219,217;
+  --kc-mapped-surface-secondary-default-hover: #dddbd9;
+  --kc-mapped-surface-secondary-default-hover-rgb: 221,219,217;
+  --kc-mapped-surface-tertiary-default: #dddbd9;
+  --kc-mapped-surface-tertiary-default-rgb: 221,219,217;
+  --kc-mapped-surface-tertiary-default-hover: #efece8;
+  --kc-mapped-surface-tertiary-default-hover-rgb: 239,236,232;
+  --kc-mapped-surface-inverse-default: #191f38;
+  --kc-mapped-surface-inverse-default-rgb: 25,31,56;
+  --kc-mapped-surface-inverse-default-hover: #212a49;
+  --kc-mapped-surface-inverse-default-hover-rgb: 33,42,73;
+  --kc-mapped-surface-disabled-default: #dddbd9;
+  --kc-mapped-surface-disabled-default-rgb: 221,219,217;
+  --kc-mapped-surface-accent-default: #7fb9ff;
+  --kc-mapped-surface-accent-default-rgb: 127,185,255;
+  --kc-mapped-surface-accent-default-subtle: #c4dfff;
+  --kc-mapped-surface-accent-default-subtle-rgb: 196,223,255;
+  --kc-mapped-surface-accent-default-hover: #74a8e8;
+  --kc-mapped-surface-accent-default-hover-rgb: 116,168,232;
+  --kc-mapped-surface-status-default: #efece8;
+  --kc-mapped-surface-status-default-rgb: 239,236,232;
+  --kc-mapped-surface-status-default-hover: #dddbd9;
+  --kc-mapped-surface-status-default-hover-rgb: 221,219,217;
+  --kc-mapped-text-primary-default-stone: #c9c7c5;
+  --kc-mapped-text-primary-default-stone-rgb: 201,199,197;
+  --kc-mapped-text-primary-default-subtle: #212a49;
+  --kc-mapped-text-primary-default-subtle-rgb: 33,42,73;
+  --kc-mapped-text-primary-default-muted: #2c3a60;
+  --kc-mapped-text-primary-default-muted-rgb: 44,58,96;
+  --kc-mapped-text-inverse-default: #fffbf6;
+  --kc-mapped-text-inverse-default-rgb: 255,251,246;
+  --kc-mapped-text-inverse-default-subtle: #efece8;
+  --kc-mapped-text-inverse-default-subtle-rgb: 239,236,232;
+  --kc-mapped-text-disabled-default: #2c3a60;
+  --kc-mapped-text-disabled-default-rgb: 44,58,96;
+  --kc-mapped-text-accent-default: #7fb9ff;
+  --kc-mapped-text-accent-default-rgb: 127,185,255;
+  --kc-mapped-text-accent-default-subtle: #7fb9ff;
+  --kc-mapped-text-accent-default-subtle-rgb: 127,185,255;
+  --kc-mapped-text-accent-default-hover: #74a8e8;
+  --kc-mapped-text-accent-default-hover-rgb: 116,168,232;
+  --kc-mapped-text-status-title: #191f38;
+  --kc-mapped-text-status-title-rgb: 25,31,56;
+  --kc-mapped-text-accent-default-on-accent: #0a1628;
+  --kc-mapped-text-accent-default-on-accent-rgb: 10,22,40;
+  --kc-mapped-text-status-body: #212a49;
+  --kc-mapped-text-status-body-rgb: 33,42,73;
+  --kc-mapped-text-status-muted: #2c3a60;
+  --kc-mapped-text-status-muted-rgb: 44,58,96;
+  --kc-mapped-border-primary-default: #dddbd9;
+  --kc-mapped-border-primary-default-rgb: 221,219,217;
+  --kc-mapped-border-primary-default-subtle: #efece8;
+  --kc-mapped-border-primary-default-subtle-rgb: 239,236,232;
+  --kc-mapped-border-inverse-default: #191f38;
+  --kc-mapped-border-inverse-default-rgb: 25,31,56;
+  --kc-mapped-border-inverse-on-color: rgba(255,251,246,0.08);
+  --kc-mapped-border-disabled-default: #dddbd9;
+  --kc-mapped-border-disabled-default-rgb: 221,219,217;
+  --kc-mapped-border-disabled-on-color: #2c3a60;
+  --kc-mapped-border-disabled-on-color-rgb: 44,58,96;
+  --kc-mapped-border-focus-default: #7fb9ff;
+  --kc-mapped-border-focus-default-rgb: 127,185,255;
+  --kc-mapped-border-status-success: #22c55e;
+  --kc-mapped-border-status-success-rgb: 34,197,94;
+  --kc-mapped-border-status-warning: #f59e0b;
+  --kc-mapped-border-status-warning-rgb: 245,158,11;
+  --kc-mapped-border-status-error: #ef4444;
+  --kc-mapped-border-status-error-rgb: 239,68,68;
+  --kc-mapped-border-status-info: #7fb9ff;
+  --kc-mapped-border-status-info-rgb: 127,185,255;
+  --kc-mapped-icon-primary-default: #191f38;
+  --kc-mapped-icon-primary-default-rgb: 25,31,56;
+  --kc-mapped-icon-primary-default-subtle: #2c3a60;
+  --kc-mapped-icon-primary-default-subtle-rgb: 44,58,96;
+  --kc-mapped-icon-inverse-default: #fffbf6;
+  --kc-mapped-icon-inverse-default-rgb: 255,251,246;
+  --kc-mapped-icon-disabled-default: #2c3a60;
+  --kc-mapped-icon-disabled-default-rgb: 44,58,96;
+  --kc-mapped-icon-accent-default: #7fb9ff;
+  --kc-mapped-icon-accent-default-rgb: 127,185,255;
+  --kc-mapped-icon-accent-default-hover: #74a8e8;
+  --kc-mapped-icon-accent-default-hover-rgb: 116,168,232;
+  --kc-mapped-icon-accent-default-pressed: #5a83b5;
+  --kc-mapped-icon-accent-default-pressed-rgb: 90,131,181;
+  --kc-mapped-icon-accent-default-on-accent: #0a1628;
+  --kc-mapped-icon-accent-default-on-accent-rgb: 10,22,40;
+  --kc-mapped-icon-status-success: #22c55e;
+  --kc-mapped-icon-status-success-rgb: 34,197,94;
+  --kc-mapped-icon-status-warning: #f59e0b;
+  --kc-mapped-icon-status-warning-rgb: 245,158,11;
+  --kc-mapped-icon-status-error: #ef4444;
+  --kc-mapped-icon-status-error-rgb: 239,68,68;
+  --kc-mapped-icon-status-info: #7fb9ff;
+  --kc-mapped-icon-status-info-rgb: 127,185,255;
+  --kc-mapped-surface-page: #fffbf6;
+  --kc-mapped-surface-page-rgb: 255,251,246;
+  --kc-mapped-surface-page-secondary: #ffffff;
+  --kc-mapped-surface-page-secondary-rgb: 255,255,255;
+  --kc-mapped-surface-overlay-veil: rgba(255,251,246,0.8);
+  --kc-mapped-surface-overlay-scrim: rgba(25,31,56,0.48);
+  --kc-mapped-text-default-heading: #191f38;
+  --kc-mapped-text-default-heading-rgb: 25,31,56;
+  --kc-mapped-text-default-body: rgba(25,31,56,0.76);
+  --kc-mapped-text-default-caption: rgba(25,31,56,0.76);
+  --kc-mapped-text-default-placeholder: rgba(25,31,56,0.76);
+  --kc-mapped-text-link-default: #191f38;
+  --kc-mapped-text-link-default-rgb: 25,31,56;
+  --kc-mapped-text-link-default-hover: #7fb9ff;
+  --kc-mapped-text-link-default-hover-rgb: 127,185,255;
+  --kc-mapped-border-primary-hairline: rgba(25,31,56,0.12);
+  --kc-mapped-border-primary-default-hover: #2c3a60;
+  --kc-mapped-border-primary-default-hover-rgb: 44,58,96;
+  --kc-mapped-border-focus-strong: #191f38;
+  --kc-mapped-border-focus-strong-rgb: 25,31,56;
+  --kc-mapped-border-control-default: rgba(25,31,56,0.76);
+  --kc-mapped-surface-accent-default-pressed: #5a83b5;
+  --kc-mapped-surface-accent-default-pressed-rgb: 90,131,181;
+  --kc-mapped-gradient-section-accent: #f2f8ff;
+  --kc-mapped-gradient-section-accent-rgb: 242,248,255;
+  --kc-mapped-border-primary-rule: rgba(25,31,56,0.16);
+  --kc-mapped-surface-accent-highlight: rgba(127,185,255,0.35);
+}
+
+body.night-mode {
+  --kc-mapped-surface-primary-default-hover: #212a49;
+  --kc-mapped-surface-primary-default-hover-rgb: 33,42,73;
+  --kc-mapped-surface-primary-default-pressed: #2c3a60;
+  --kc-mapped-surface-primary-default-pressed-rgb: 44,58,96;
+  --kc-mapped-surface-secondary-default-hover: #2c3a60;
+  --kc-mapped-surface-secondary-default-hover-rgb: 44,58,96;
+  --kc-mapped-surface-tertiary-default: #2c3a60;
+  --kc-mapped-surface-tertiary-default-rgb: 44,58,96;
+  --kc-mapped-surface-tertiary-default-hover: #212a49;
+  --kc-mapped-surface-tertiary-default-hover-rgb: 33,42,73;
+  --kc-mapped-surface-inverse-default: #fffbf6;
+  --kc-mapped-surface-inverse-default-rgb: 255,251,246;
+  --kc-mapped-surface-inverse-default-hover: #efece8;
+  --kc-mapped-surface-inverse-default-hover-rgb: 239,236,232;
+  --kc-mapped-surface-disabled-default: #2c3a60;
+  --kc-mapped-surface-disabled-default-rgb: 44,58,96;
+  --kc-mapped-surface-accent-default: #7fb9ff;
+  --kc-mapped-surface-accent-default-rgb: 127,185,255;
+  --kc-mapped-surface-accent-default-subtle: #c4dfff;
+  --kc-mapped-surface-accent-default-subtle-rgb: 196,223,255;
+  --kc-mapped-surface-accent-default-hover: #74a8e8;
+  --kc-mapped-surface-accent-default-hover-rgb: 116,168,232;
+  --kc-mapped-surface-status-default: #212a49;
+  --kc-mapped-surface-status-default-rgb: 33,42,73;
+  --kc-mapped-surface-status-default-hover: #2c3a60;
+  --kc-mapped-surface-status-default-hover-rgb: 44,58,96;
+  --kc-mapped-text-primary-default-stone: #efece8;
+  --kc-mapped-text-primary-default-stone-rgb: 239,236,232;
+  --kc-mapped-text-primary-default-subtle: #efece8;
+  --kc-mapped-text-primary-default-subtle-rgb: 239,236,232;
+  --kc-mapped-text-primary-default-muted: #dddbd9;
+  --kc-mapped-text-primary-default-muted-rgb: 221,219,217;
+  --kc-mapped-text-inverse-default: #191f38;
+  --kc-mapped-text-inverse-default-rgb: 25,31,56;
+  --kc-mapped-text-inverse-default-subtle: #212a49;
+  --kc-mapped-text-inverse-default-subtle-rgb: 33,42,73;
+  --kc-mapped-text-disabled-default: #dddbd9;
+  --kc-mapped-text-disabled-default-rgb: 221,219,217;
+  --kc-mapped-text-accent-default: #7fb9ff;
+  --kc-mapped-text-accent-default-rgb: 127,185,255;
+  --kc-mapped-text-accent-default-subtle: #7fb9ff;
+  --kc-mapped-text-accent-default-subtle-rgb: 127,185,255;
+  --kc-mapped-text-accent-default-hover: #74a8e8;
+  --kc-mapped-text-accent-default-hover-rgb: 116,168,232;
+  --kc-mapped-text-status-title: #fffbf6;
+  --kc-mapped-text-status-title-rgb: 255,251,246;
+  --kc-mapped-text-accent-default-on-accent: #0a1628;
+  --kc-mapped-text-accent-default-on-accent-rgb: 10,22,40;
+  --kc-mapped-text-status-body: #efece8;
+  --kc-mapped-text-status-body-rgb: 239,236,232;
+  --kc-mapped-text-status-muted: #dddbd9;
+  --kc-mapped-text-status-muted-rgb: 221,219,217;
+  --kc-mapped-border-primary-default: #2c3a60;
+  --kc-mapped-border-primary-default-rgb: 44,58,96;
+  --kc-mapped-border-primary-default-subtle: #212a49;
+  --kc-mapped-border-primary-default-subtle-rgb: 33,42,73;
+  --kc-mapped-border-inverse-default: #fffbf6;
+  --kc-mapped-border-inverse-default-rgb: 255,251,246;
+  --kc-mapped-border-inverse-on-color: rgba(25,31,56,0.12);
+  --kc-mapped-border-disabled-default: #2c3a60;
+  --kc-mapped-border-disabled-default-rgb: 44,58,96;
+  --kc-mapped-border-disabled-on-color: #dddbd9;
+  --kc-mapped-border-disabled-on-color-rgb: 221,219,217;
+  --kc-mapped-border-focus-default: #7fb9ff;
+  --kc-mapped-border-focus-default-rgb: 127,185,255;
+  --kc-mapped-border-status-success: #22c55e;
+  --kc-mapped-border-status-success-rgb: 34,197,94;
+  --kc-mapped-border-status-warning: #f59e0b;
+  --kc-mapped-border-status-warning-rgb: 245,158,11;
+  --kc-mapped-border-status-error: #ef4444;
+  --kc-mapped-border-status-error-rgb: 239,68,68;
+  --kc-mapped-border-status-info: #7fb9ff;
+  --kc-mapped-border-status-info-rgb: 127,185,255;
+  --kc-mapped-icon-primary-default: #fffbf6;
+  --kc-mapped-icon-primary-default-rgb: 255,251,246;
+  --kc-mapped-icon-primary-default-subtle: #dddbd9;
+  --kc-mapped-icon-primary-default-subtle-rgb: 221,219,217;
+  --kc-mapped-icon-inverse-default: #191f38;
+  --kc-mapped-icon-inverse-default-rgb: 25,31,56;
+  --kc-mapped-icon-disabled-default: #dddbd9;
+  --kc-mapped-icon-disabled-default-rgb: 221,219,217;
+  --kc-mapped-icon-accent-default: #7fb9ff;
+  --kc-mapped-icon-accent-default-rgb: 127,185,255;
+  --kc-mapped-icon-accent-default-hover: #74a8e8;
+  --kc-mapped-icon-accent-default-hover-rgb: 116,168,232;
+  --kc-mapped-icon-accent-default-pressed: #5a83b5;
+  --kc-mapped-icon-accent-default-pressed-rgb: 90,131,181;
+  --kc-mapped-icon-accent-default-on-accent: #0a1628;
+  --kc-mapped-icon-accent-default-on-accent-rgb: 10,22,40;
+  --kc-mapped-icon-status-success: #22c55e;
+  --kc-mapped-icon-status-success-rgb: 34,197,94;
+  --kc-mapped-icon-status-warning: #f59e0b;
+  --kc-mapped-icon-status-warning-rgb: 245,158,11;
+  --kc-mapped-icon-status-error: #ef4444;
+  --kc-mapped-icon-status-error-rgb: 239,68,68;
+  --kc-mapped-icon-status-info: #7fb9ff;
+  --kc-mapped-icon-status-info-rgb: 127,185,255;
+  --kc-mapped-surface-page: #191f38;
+  --kc-mapped-surface-page-rgb: 25,31,56;
+  --kc-mapped-surface-page-secondary: #212a49;
+  --kc-mapped-surface-page-secondary-rgb: 33,42,73;
+  --kc-mapped-surface-overlay-veil: rgba(25,31,56,0.64);
+  --kc-mapped-surface-overlay-scrim: rgba(10,12,21,0.64);
+  --kc-mapped-text-default-heading: #fffbf6;
+  --kc-mapped-text-default-heading-rgb: 255,251,246;
+  --kc-mapped-text-default-body: rgba(255,251,246,0.68);
+  --kc-mapped-text-default-caption: rgba(255,251,246,0.68);
+  --kc-mapped-text-default-placeholder: rgba(255,251,246,0.68);
+  --kc-mapped-text-link-default: #fffbf6;
+  --kc-mapped-text-link-default-rgb: 255,251,246;
+  --kc-mapped-text-link-default-hover: #7fb9ff;
+  --kc-mapped-text-link-default-hover-rgb: 127,185,255;
+  --kc-mapped-border-primary-hairline: rgba(255,251,246,0.08);
+  --kc-mapped-border-primary-default-hover: #dddbd9;
+  --kc-mapped-border-primary-default-hover-rgb: 221,219,217;
+  --kc-mapped-border-focus-strong: #fffbf6;
+  --kc-mapped-border-focus-strong-rgb: 255,251,246;
+  --kc-mapped-border-control-default: rgba(255,251,246,0.68);
+  --kc-mapped-surface-accent-default-pressed: #5a83b5;
+  --kc-mapped-surface-accent-default-pressed-rgb: 90,131,181;
+  --kc-mapped-gradient-section-accent: #2c3a60;
+  --kc-mapped-gradient-section-accent-rgb: 44,58,96;
+  --kc-mapped-border-primary-rule: rgba(255,251,246,0.16);
+  --kc-mapped-surface-accent-highlight: rgba(127,185,255,0.28);
+}
+
+@media screen and (min-width: 750px) {
+  :root {
+    --kc-responsive-display-text-size: 68px;
+    --kc-responsive-display-line-height: 60px;
+    --kc-responsive-display-letter-spacing: 0;
+    --kc-responsive-display-paragraph-spacing: 32px;
+    --kc-responsive-h1-text-size: 52px;
+    --kc-responsive-h1-line-height: 52px;
+    --kc-responsive-h1-paragraph-spacing: 24px;
+    --kc-responsive-h2-text-size: 44px;
+    --kc-responsive-h2-line-height: 44px;
+    --kc-responsive-h2-paragraph-spacing: 24px;
+    --kc-responsive-h3-text-size: 36px;
+    --kc-responsive-h3-line-height: 36px;
+    --kc-responsive-h3-paragraph-spacing: 16px;
+    --kc-responsive-h4-text-size: 28px;
+    --kc-responsive-h4-line-height: 32px;
+    --kc-responsive-h4-paragraph-spacing: 16px;
+    --kc-responsive-h5-text-size: 24px;
+    --kc-responsive-h5-line-height: 28px;
+    --kc-responsive-h5-paragraph-spacing: 16px;
+    --kc-responsive-h6-text-size: 18px;
+    --kc-responsive-body-lg-text-size: 20px;
+    --kc-responsive-body-lg-line-height: 28px;
+    --kc-responsive-body-lg-paragraph-spacing: 16px;
+    --kc-responsive-body-md-text-size: 18px;
+    --kc-responsive-body-md-line-height: 24px;
+    --kc-responsive-body-md-paragraph-spacing: 12px;
+    --kc-responsive-body-sm-text-size: 15px;
+    --kc-responsive-body-sm-line-height: 20px;
+    --kc-responsive-label-lg-text-size: 14px;
+    --kc-responsive-label-lg-line-height: 16px;
+    --kc-responsive-label-lg-paragraph-spacing: 8px;
+    --kc-responsive-label-sm-line-height: 12px;
+    --kc-responsive-spacing-layout-sm: 12px;
+    --kc-responsive-spacing-layout-md: 16px;
+    --kc-responsive-spacing-layout-lg: 24px;
+    --kc-responsive-spacing-layout-xl: 32px;
+    --kc-responsive-spacing-layout-2xl: 48px;
+    --kc-responsive-spacing-layout-3xl: 64px;
+    --kc-responsive-spacing-section-xs: 32px;
+    --kc-responsive-spacing-section-md: 120px;
+    --kc-responsive-spacing-section-lg: 160px;
+    --kc-responsive-spacing-section-xl: 200px;
+    --kc-responsive-spacing-page-gutter: 32px;
+    --kc-responsive-spacing-page-container: 1376px;
+    --kc-responsive-spacing-layout-comfortable: 20px;
+    --kc-responsive-spacing-layout-spacious: 40px;
+    --kc-responsive-spacing-section-comfortable: 96px;
+    --kc-responsive-size-grid-columns-3: 332px;
+    --kc-responsive-size-grid-columns-4: 448px;
+    --kc-responsive-size-grid-columns-6: 680px;
+    --kc-responsive-size-grid-columns-7: 796px;
+    --kc-responsive-size-grid-columns-9: 1028px;
+    --kc-responsive-size-grid-columns-8: 912px;
+  }
+}
+
+/* Compatibility: names the theme read before they came from Figma (generate.py
+   HELD_AT_OLD_VALUE and COMPAT_ALIASES). Same value in Day and Night. Held values are
+   proposals for Victor: docs/design-tokens/baseline/proposals.md */
+:root {
+  --kc-mapped-text-primary-default: #FFFBF6; /* held at old value (P1) */
+  --kc-mapped-text-primary-default-rgb: 255,251,246; /* the held value as a triplet (P1) */
+  --kc-mapped-surface-primary-default: #191F38; /* held at old value (P2) */
+  --kc-mapped-surface-primary-default-rgb: 25,31,56; /* the held value as a triplet (P2) */
+  --kc-mapped-surface-secondary-default: #212A49; /* held at old value (P3) */
+  --kc-mapped-surface-secondary-default-rgb: 33,42,73; /* the held value as a triplet (P3) */
+  --kc-mapped-surface-tertiery-default: #DDDBD9; /* held at old value (P4) */
+  --kc-mapped-surface-tertiery-default-rgb: 221,219,217; /* the held value as a triplet (P4) */
+  --kc-mapped-bg-primary-default: #2C3A60; /* held at old value (P5) */
+  --kc-mapped-bg-primary-default-rgb: 44,58,96; /* the held value as a triplet (P5) */
+  /* --kc-responsive-spacing-section-sm: not emitted, held at its var() fallback (P6) */
+  --kc-responsive-h1-letter-spacing: -1.25px; /* held at old value (P7) */
+  --kc-responsive-h2-letter-spacing: -1px; /* held at old value (P8) */
+  --kc-responsive-h3-letter-spacing: -1px; /* held at old value (P9) */
+  --kc-responsive-h4-letter-spacing: -1px; /* held at old value (P10) */
+  --kc-responsive-h5-letter-spacing: -0.5px; /* held at old value (P11) */
+  --kc-responsive-caption-letter-spacing: 1.25px; /* held at old value (P12) */
+  --kc-responsive-Nunito-letter-spacing: 1.7px; /* held at old value (P13) */
+  --kc-responsive-h4-letter-spacing-sm: -0.25px; /* held at old value (P14) */
+  --kc-responsive-caption-sm-letter-spacing: 1px; /* held at old value (P15) */
+  --kc-responsive-all-letter-spacing: 0.5px; /* held at old value (P16) */
+  --kc-responsive-body-line-height: 20px; /* held at old value (P17) */
+  --kc-mapped-surface-accent-soft: var(--kc-mapped-surface-accent-default-subtle);
+  --kc-mapped-surface-accent-soft-rgb: var(--kc-mapped-surface-accent-default-subtle-rgb);
+  --kc-white-surface-primary-default: var(--kc-brand-fixed-white);
+  --kc-white-surface-primary-default-rgb: var(--kc-brand-fixed-white-rgb);
+}

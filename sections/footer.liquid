@@ -319,6 +319,41 @@
       font-size:var(--font-body-small-size-desktop);
     }
   }
+  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart,
+     48px logo -> slogan, 24px heading -> links, 120px to the social row,
+     32px around the social row */
+  @media screen and (min-width: 990px) {
+    .km-footer-top {
+      justify-content: flex-start;
+      gap: 160px;
+      margin-bottom: 120px;
+    }
+    .km-footer-top__col-1 {
+      flex: 0 0 286px;
+    }
+    .km-footer-top__col-2 {
+      flex: 0 0 215px;
+    }
+    .km-footer-top__col-3 {
+      flex: 1 1 auto;
+      max-width: none;
+    }
+    .km-footer-top__col-1 h4 {
+      margin-top: 32px;
+    }
+    .km-footer-top__col-2 h3,
+    .km-footer-top__col-3 h3 {
+      margin-bottom: 24px;
+    }
+    .km-footer-links {
+      gap: 3px;
+    }
+    .km-footer-middle {
+      padding: 32px 0;
+      margin-bottom: 32px;
+    }
+  }
+
 {%- endstyle -%}
 
 <footer class="karmicare-footer">

@@ -1,3 +1,39 @@
+{%- comment -%}
+  Dawn bridge, token first (docs/design-tokens/PLAN.md Step 3).
+  Dawn's --color-background, --color-background-contrast, --gradient-background and
+  --color-foreground read the Figma tokens in assets/kc-tokens.css. A theme-editor
+  Day/Night colour overrides its token only when it is filled and differs from the
+  token value. Values compared (KC Brand Design Library, mapped collection, export
+  of 12 Oct 2026; settings_data.json holds the same four colours today):
+    Day   background  surface/page          #fffbf6  rgb 255 251 246  (day_mode_bg_color #FFFBF6)
+    Day   text        text/default/heading  #191f38  rgb 25 31 56     (day_mode_text_color #191F38)
+    Night background  surface/page          #191f38  rgb 25 31 56     (night_mode_bg_color #191F38)
+    Night text        text/default/heading  #fffbf6  rgb 255 251 246  (night_mode_text_color #FFFBF6)
+  text/default/heading has the same Day and Night values as text/primary/default;
+  --kc-mapped-text-primary-default itself is held at an old value
+  (docs/design-tokens/baseline/proposals.md P1), so it cannot carry the foreground yet.
+  A Figma change to these tokens flows through as long as the editor colour still
+  equals the value listed here; picking a different colour in the editor overrides it.
+  The heading colours (day/night_mode_heading_color) only feed --kc-*-heading-color below.
+{%- endcomment -%}
+{%- liquid
+  assign day_bg_override = false
+  if settings.day_mode_bg_color != blank and settings.day_mode_bg_color.rgb != '255 251 246'
+    assign day_bg_override = true
+  endif
+  assign day_text_override = false
+  if settings.day_mode_text_color != blank and settings.day_mode_text_color.rgb != '25 31 56'
+    assign day_text_override = true
+  endif
+  assign night_bg_override = false
+  if settings.night_mode_bg_color != blank and settings.night_mode_bg_color.rgb != '25 31 56'
+    assign night_bg_override = true
+  endif
+  assign night_text_override = false
+  if settings.night_mode_text_color != blank and settings.night_mode_text_color.rgb != '255 251 246'
+    assign night_text_override = true
+  endif
+-%}
 <style>
   :root {
     /* KarmaCare custom day/night hex variables */
@@ -32,15 +68,27 @@
    * ── DAY MODE: Override Shopify's Dawn --color-background / --color-foreground ──
    * These are used as rgb(var(--color-background)) across ALL sections in Dawn.
    * Setting them on body.day-mode + all color-scheme children ensures full coverage.
+   * Token first: the values come from assets/kc-tokens.css; a theme-editor colour
+   * overrides only when it differs from the token (see the comment at the top).
    */
   body.day-mode,
   body.day-mode [class*="color-scheme-"],
   body.day-mode .header-wrapper,
   body.day-mode .section-header {
-    --color-background:          {{ settings.day_mode_bg_color.red | default: 255 }},{{ settings.day_mode_bg_color.green | default: 255 }},{{ settings.day_mode_bg_color.blue | default: 255 }};
-    --color-foreground:          {{ settings.day_mode_text_color.red | default: 18 }},{{ settings.day_mode_text_color.green | default: 18 }},{{ settings.day_mode_text_color.blue | default: 18 }};
-    --color-background-contrast: {{ settings.day_mode_bg_color.red | default: 230 }},{{ settings.day_mode_bg_color.green | default: 230 }},{{ settings.day_mode_bg_color.blue | default: 230 }};
-    --gradient-background:       {{ settings.day_mode_bg_color}};
+  {%- if day_bg_override %}
+    --color-background:          {{ settings.day_mode_bg_color.red }},{{ settings.day_mode_bg_color.green }},{{ settings.day_mode_bg_color.blue }};
+    --color-background-contrast: {{ settings.day_mode_bg_color.red }},{{ settings.day_mode_bg_color.green }},{{ settings.day_mode_bg_color.blue }};
+    --gradient-background:       {{ settings.day_mode_bg_color }};
+  {%- else %}
+    --color-background:          var(--kc-mapped-surface-page-rgb);
+    --color-background-contrast: var(--kc-mapped-surface-page-rgb);
+    --gradient-background:       var(--kc-mapped-surface-page);
+  {%- endif %}
+  {%- if day_text_override %}
+    --color-foreground:          {{ settings.day_mode_text_color.red }},{{ settings.day_mode_text_color.green }},{{ settings.day_mode_text_color.blue }};
+  {%- else %}
+    --color-foreground:          var(--kc-mapped-text-default-heading-rgb);
+  {%- endif %}
   }
 
   /*
@@ -50,10 +98,20 @@
   body.night-mode [class*="color-scheme-"],
   body.night-mode .header-wrapper,
   body.night-mode .section-header {
-    --color-background:          {{ settings.night_mode_bg_color.red | default: 15 }},{{ settings.night_mode_bg_color.green | default: 15 }},{{ settings.night_mode_bg_color.blue | default: 15 }};
-    --color-foreground:          {{ settings.night_mode_text_color.red | default: 229 }},{{ settings.night_mode_text_color.green | default: 229 }},{{ settings.night_mode_text_color.blue | default: 229 }};
-    --color-background-contrast: {{ settings.night_mode_bg_color.red | default: 40 }},{{ settings.night_mode_bg_color.green | default: 40 }},{{ settings.night_mode_bg_color.blue | default: 40 }};
-    --gradient-background:       {{ settings.night_mode_bg_color}};
+  {%- if night_bg_override %}
+    --color-background:          {{ settings.night_mode_bg_color.red }},{{ settings.night_mode_bg_color.green }},{{ settings.night_mode_bg_color.blue }};
+    --color-background-contrast: {{ settings.night_mode_bg_color.red }},{{ settings.night_mode_bg_color.green }},{{ settings.night_mode_bg_color.blue }};
+    --gradient-background:       {{ settings.night_mode_bg_color }};
+  {%- else %}
+    --color-background:          var(--kc-mapped-surface-page-rgb);
+    --color-background-contrast: var(--kc-mapped-surface-page-rgb);
+    --gradient-background:       var(--kc-mapped-surface-page);
+  {%- endif %}
+  {%- if night_text_override %}
+    --color-foreground:          {{ settings.night_mode_text_color.red }},{{ settings.night_mode_text_color.green }},{{ settings.night_mode_text_color.blue }};
+  {%- else %}
+    --color-foreground:          var(--kc-mapped-text-default-heading-rgb);
+  {%- endif %}
 
     /* KC glass tokens — Night mode values */
     --kc-mapped-surface-glass-default: rgba(25, 31, 56, 0.8);

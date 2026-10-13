@@ -14,6 +14,16 @@
   max-width: 500px;
 }
 
+/* Figma: a 12% hairline 64px above the label, 80px between the heading
+   and the cards on desktop */
+@media screen and (min-width: 990px) {
+  .trusted-professionals__header {
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    padding-top: 6.4rem;
+    margin-bottom: calc(8rem - var(--gap-3xl));
+  }
+}
+
 /* Grid System */
 .trusted-professionals__grid {
   --cols: var(--cols-mobile, 1);
@@ -183,7 +193,7 @@
 }
 
 .trusted-professionals__track .trusted-professionals__card {
-  flex: 0 0 calc((min(100cqw, var(--page-width)) - 3rem - 16px * (var(--cols) - 1)) / var(--cols));
+  flex: 0 0 calc((min(100cqw, var(--page-width)) - 2 * var(--page-gutter) - 16px * (var(--cols) - 1)) / var(--cols));
 }
 
 .trusted-professionals__marquee.is-dragging {
@@ -199,18 +209,19 @@
 }
 
 .trusted-professionals__marquee.is-static .trusted-professionals__track {
-  padding-inline: max(1.5rem, calc(50vw - var(--page-width, 120rem) / 2 + 5rem));
+  padding-inline: max(var(--page-gutter), calc(50vw - var(--page-width, 120rem) / 2 + var(--page-gutter)));
 }
 
 /* Card Styling */
 .trusted-professionals__card {
   position: relative;
-  border-radius: var(--primary-border-radius, 1rem);
+  border-radius: var(--extra-primary-border-radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  aspect-ratio: 3 / 4;
+  /* KC/Professional card proportion: 332 x 479 (desktop) = 280 x 404 (mobile) in the library */
+  aspect-ratio: 332 / 479;
 }
 
 .trusted-professionals__card-image {
@@ -235,7 +246,7 @@
 
 .trusted-professionals__card-content {
   position: relative;
-  padding: 1.2rem;
+  padding: 1.6rem;
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -253,7 +264,7 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: var(--gap-xs);
+  gap: var(--gap-sm);
 }
 
 @media screen and (max-width: 749px) {

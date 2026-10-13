@@ -74,7 +74,11 @@
             <div class="trusted-professionals__card-content">
               {%- if testimonial.description != blank -%}
                 <div class="trusted-professionals__card-quote">
-                  {{ testimonial.description | metafield_tag }}
+                  <div class="trusted-professionals__card-quote-inner">
+                    <div class="trusted-professionals__card-quote-text">
+                      {{ testimonial.description | metafield_tag }}
+                    </div>
+                  </div>
                 </div>
               {%- endif -%}
               <div class="trusted-professionals__card-body">

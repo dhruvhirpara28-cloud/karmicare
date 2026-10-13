@@ -25,6 +25,25 @@
     assign media_count = media_count | minus: variant_images.size | plus: 1
   endif
 
+  # Karmicare hero animation: replaces this product's Shopify-hosted video(s) with a transparent
+  # Awake (day) / Asleep (night) animation from Shopify Files, shown as slide 1.
+  assign kc_hero = false
+  if limit == null and section.settings.kc_hero_product_handle != blank
+    assign kc_hero_handle = section.settings.kc_hero_product_handle | strip
+    if product.handle == kc_hero_handle
+      assign kc_hero = true
+      assign kc_hero_modes = 'am,pm' | split: ','
+      assign kc_hero_videos = product.media | where: 'media_type', 'video'
+      assign kc_hero_alt = kc_hero_videos.first.alt | default: product.title
+      assign media_count = media_count | minus: kc_hero_videos.size | plus: 1
+      # The featured still duplicates the animation in the gallery; it stays the product's featured image elsewhere
+      if product.featured_media.media_type == 'image'
+        assign kc_hero_skip_id = product.featured_media.id
+        assign media_count = media_count | minus: 1
+      endif
+    endif
+  endif
+
   if media_count == 1 or single_media_visible
     assign single_media_visible_mobile = true
   endif
@@ -45,7 +64,7 @@
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
-  class="{% if section.settings.enable_sticky_info %}product__column-sticky{% endif %}{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}"
+  class="{% if section.settings.enable_sticky_info %}product__column-sticky{% endif %}{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}{% if kc_hero %} kc-hero-gallery{% endif %}"
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
@@ -59,14 +78,78 @@
       class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"
       role="list"
     >
+      {%- if kc_hero -%}
+        <li
+          id="Slide-{{ section.id }}-kc-hero"
+          class="product__media-item grid__item slider__slide is-active{% if single_media_visible %} product__media-item--single{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          data-media-id="{{ section.id }}-kc-hero"
+        >
+          {%- assign media_position = 1 -%}
+          <div
+            class="product-media-container media-type-video media-fit-contain{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+            style="--ratio: 1.125; --preview-ratio: 1.125;"
+          >
+            <kc-hero-animation class="kc-hero-animation product__media media media--transparent">
+              {%- for mode in kc_hero_modes -%}
+                {%- liquid
+                  assign key = 'kc_hero_' | append: mode
+                  assign hevc_key = key | append: '_hevc'
+                  assign webm_key = key | append: '_webm'
+                  assign poster_key = key | append: '_poster'
+                  assign animated_key = key | append: '_animated'
+                  assign poster_url = section.settings[poster_key] | file_url
+                  # file_url does not resolve .webm videos from Files, so the WebM setting also takes the file's CDN link
+                  assign webm_url = section.settings[webm_key] | strip
+                  unless webm_url contains '://'
+                    assign webm_url = webm_url | file_url
+                  endunless
+                -%}
+                <div
+                  class="kc-hero-animation__mode kc-hero-animation__mode--{{ mode }}"
+                  data-kc-mode="{{ mode }}"
+                  {% if section.settings[animated_key] != blank %}
+                    data-animated="{{ section.settings[animated_key] | file_url }}"
+                  {% endif %}
+                >
+                  <img
+                    src="{{ poster_url }}"
+                    alt="{{ kc_hero_alt | escape }}"
+                    width="1080"
+                    height="960"
+                    loading="lazy"
+                  >
+                  <template>
+                    <video
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      poster="{{ poster_url }}"
+                      aria-label="{{ kc_hero_alt | escape }}"
+                    >
+                      {%- if section.settings[hevc_key] != blank -%}
+                        <source src="{{ section.settings[hevc_key] | file_url }}" type='video/mp4; codecs="hvc1"'>
+                      {%- endif -%}
+                      {%- if section.settings[webm_key] != blank -%}
+                        <source src="{{ webm_url }}" type="video/webm">
+                      {%- endif -%}
+                    </video>
+                  </template>
+                </div>
+              {%- endfor -%}
+            </kc-hero-animation>
+          </div>
+        </li>
+      {%- endif -%}
       {%- if product.selected_or_first_available_variant.featured_media != null -%}
         {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
         <li
           id="Slide-{{ section.id }}-{{ featured_media.id }}"
-          class="product__media-item grid__item slider__slide is-active{% if single_media_visible %} product__media-item--single{% endif %}{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          class="product__media-item grid__item slider__slide{% unless kc_hero %} is-active{% endunless %}{% if single_media_visible %} product__media-item--single{% endif %}{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           data-media-id="{{ section.id }}-{{ featured_media.id }}"
         >
-          {%- assign media_position = 1 -%}
+          {%- assign media_position = media_position | default: 0 | plus: 1 -%}
           {% render 'product-thumbnail',
             media: featured_media,
             media_count: media_count,
@@ -91,11 +174,14 @@
         %}
           {% continue %}
         {% endif %}
+        {% if kc_hero and media.media_type == 'video' or media.id == kc_hero_skip_id %}
+          {% continue %}
+        {% endif %}
 
         {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
           <li
             id="Slide-{{ section.id }}-{{ media.id }}"
-            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if kc_hero == false and product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             data-media-id="{{ section.id }}-{{ media.id }}"
           >
             {%- liquid
@@ -206,6 +292,65 @@
           calc((100vw - 8rem) / 3)
         {%- endcapture -%}
 
+        {%- if kc_hero -%}
+          {%- liquid
+            capture media_index
+              increment video_index
+            endcapture
+            assign media_index = media_index | plus: 1
+          -%}
+          <li
+            id="Slide-Thumbnails-{{ section.id }}-kc-hero"
+            class="thumbnail-list__item slider__slide"
+            data-target="{{ section.id }}-kc-hero"
+            data-media-position="{{ media_index }}"
+          >
+            <button
+              class="thumbnail global-media-settings global-media-settings--no-shadow"
+              aria-label="{{ 'products.product.media.load_video' | t: index: media_index }}"
+              aria-current="true"
+              aria-controls="GalleryViewer-{{ section.id }}"
+              aria-describedby="Thumbnail-{{ section.id }}-kc-hero"
+            >
+              {%- for mode in kc_hero_modes -%}
+                {%- liquid
+                  assign poster_key = 'kc_hero_' | append: mode | append: '_poster'
+                  assign thumb_class = 'kc-hero-animation__thumb kc-hero-animation__thumb--' | append: mode
+                  assign thumb_id = nil
+                  if forloop.first
+                    assign thumb_id = 'Thumbnail-' | append: section.id | append: '-kc-hero'
+                  endif
+                  assign poster_image = images[section.settings[poster_key]]
+                -%}
+                {%- if poster_image -%}
+                  {{
+                    poster_image
+                    | image_url: width: 416
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: sizes,
+                      widths: '54, 74, 104, 162, 208, 324, 416',
+                      id: thumb_id,
+                      class: thumb_class,
+                      alt: kc_hero_alt
+                  }}
+                {%- else -%}
+                  <img
+                    {% if thumb_id %}
+                      id="{{ thumb_id }}"
+                    {% endif %}
+                    class="{{ thumb_class }}"
+                    src="{{ section.settings[poster_key] | file_url }}"
+                    alt="{{ kc_hero_alt | escape }}"
+                    width="1080"
+                    height="960"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              {%- endfor -%}
+            </button>
+          </li>
+        {%- endif -%}
         {%- if featured_media != null -%}
           {%- liquid
             capture media_index
@@ -231,7 +376,9 @@
             <button
               class="thumbnail global-media-settings global-media-settings--no-shadow"
               aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
-              aria-current="true"
+              {% unless kc_hero %}
+                aria-current="true"
+              {% endunless %}
               aria-controls="GalleryViewer-{{ section.id }}"
               aria-describedby="{{ thumbnail_id }}"
             >
@@ -250,6 +397,9 @@
           </li>
         {%- endif -%}
         {%- for media in product.media -%}
+          {% if kc_hero and media.media_type == 'video' or media.id == kc_hero_skip_id %}
+            {% continue %}
+          {% endif %}
           {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
             {%- liquid
               capture media_index
@@ -288,7 +438,8 @@
               <button
                 class="thumbnail global-media-settings global-media-settings--no-shadow"
                 aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
-                {% if media == product.selected_or_first_available_variant.featured_media
+                {% if kc_hero == false
+                  and media == product.selected_or_first_available_variant.featured_media
                   or product.selected_or_first_available_variant.featured_media == null
                   and forloop.index == 1
                 %}
@@ -335,4 +486,98 @@
       </div>
     {%- endif -%}
   {%- endfor -%}
+
+  {%- if kc_hero -%}
+    <style>
+      .kc-hero-animation__mode img,
+      .kc-hero-animation__mode video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: top;
+      }
+      .kc-hero-animation__mode.is-playing img {
+        visibility: hidden;
+      }
+      /* No painted holder behind any slide in this gallery (night navy, day blue gradient, sheen):
+         the media sits on the section background, like the transparent hero. */
+      body media-gallery.kc-hero-gallery .product-media-container,
+      body media-gallery.kc-hero-gallery .product-media-container .product__modal-opener {
+        background: transparent;
+        border-color: transparent;
+      }
+      body media-gallery.kc-hero-gallery .product-media-container:after {
+        box-shadow: none;
+        border-color: transparent;
+      }
+      .thumbnail .kc-hero-animation__thumb {
+        object-fit: contain;
+      }
+      body.night-mode .kc-hero-animation .kc-hero-animation__mode--am,
+      body:not(.night-mode) .kc-hero-animation .kc-hero-animation__mode--pm,
+      body.night-mode .thumbnail .kc-hero-animation__thumb--am,
+      body:not(.night-mode) .thumbnail .kc-hero-animation__thumb--pm {
+        display: none;
+      }
+    </style>
+    <script>
+      // Plays only the visible mode (Awake in day-mode, Asleep in night-mode), only while on screen.
+      // Reduced motion keeps the poster; a refused autoplay falls back to the animated WebP when set.
+      if (!customElements.get('kc-hero-animation')) {
+        customElements.define(
+          'kc-hero-animation',
+          class KcHeroAnimation extends HTMLElement {
+            connectedCallback() {
+              this.update = this.update.bind(this);
+              this.visible = false;
+              this.motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+              this.motion.addEventListener('change', this.update);
+              this.modeObserver = new MutationObserver(this.update);
+              this.modeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+              this.viewObserver = new IntersectionObserver((entries) => {
+                this.visible = entries[entries.length - 1].isIntersecting;
+                this.update();
+              });
+              this.viewObserver.observe(this);
+            }
+
+            disconnectedCallback() {
+              this.motion.removeEventListener('change', this.update);
+              this.modeObserver.disconnect();
+              this.viewObserver.disconnect();
+            }
+
+            update() {
+              const activeMode = document.body.classList.contains('night-mode') ? 'pm' : 'am';
+              this.querySelectorAll('[data-kc-mode]').forEach((panel) => {
+                let video = panel.querySelector('video');
+                if (this.motion.matches) {
+                  video?.remove();
+                  panel.classList.remove('is-playing');
+                  return;
+                }
+                if (panel.dataset.kcMode !== activeMode || !this.visible || panel.hasAttribute('data-refused')) {
+                  video?.pause();
+                  return;
+                }
+                if (!video) {
+                  panel.append(panel.querySelector('template').content.cloneNode(true));
+                  video = panel.querySelector('video');
+                  video.addEventListener('playing', () => panel.classList.add('is-playing'), { once: true });
+                }
+                video.play()?.catch((error) => {
+                  if (error.name !== 'NotAllowedError' || !panel.dataset.animated) return;
+                  panel.setAttribute('data-refused', '');
+                  video.remove();
+                  panel.querySelector('img').src = panel.dataset.animated;
+                });
+              });
+            }
+          }
+        );
+      }
+    </script>
+  {%- endif -%}
 </media-gallery>

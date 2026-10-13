@@ -43,6 +43,52 @@
       }
     }
 
+    {%- if template.name == 'index' -%}
+      /* Homepage "welcome kit" desktop spacing per the Figma homepage: content
+         column 80px from the image (x814, 564 wide), 32px under the heading,
+         benefit row 24px under the button with 16px icons inline */
+      @media screen and (min-width: 990px) {
+        .featured-product-section-{{ section.id }} .featured-product:not(.product--no-media) > .product__info-wrapper {
+          padding: 0 3rem 0 9.4rem;
+        }
+
+        .featured-product-section-{{ section.id }} .product__title {
+          margin-bottom: 3.2rem;
+        }
+
+        .featured-product-section-{{ section.id }} .product__info-container > div:has(product-form),
+        .featured-product-section-{{ section.id }} product-form.product-form {
+          margin-bottom: 0;
+        }
+
+        /* snippets/buy-buttons.liquid sets an inline 1rem margin on the button */
+        .featured-product-section-{{ section.id }} .product-form__submit {
+          margin-bottom: 0 !important;
+        }
+
+        .featured-product-section-{{ section.id }} .icon-with-text--horizontal {
+          margin-top: 2.4rem;
+          justify-content: center;
+          column-gap: 2.4rem;
+        }
+
+        .featured-product-section-{{ section.id }} .icon-with-text--horizontal .icon-with-text__item {
+          flex: 0 0 auto;
+          width: auto;
+          flex-direction: row;
+          align-items: center;
+          gap: 0.8rem;
+        }
+
+        .featured-product-section-{{ section.id }} .icon-with-text--horizontal .icon-with-text__item img,
+        .featured-product-section-{{ section.id }} .icon-with-text--horizontal .icon-with-text__item svg {
+          width: 1.6rem;
+          height: 1.6rem;
+          margin: 0;
+        }
+      }
+    {%- endif -%}
+
     {%- if section.settings.bg_gradient_day != blank -%}
       body:not(.night-mode) .featured-product-section-{{ section.id }},
       body.day-mode .featured-product-section-{{ section.id }} {
