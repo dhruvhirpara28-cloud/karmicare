@@ -1753,11 +1753,11 @@ a.product__text {
 }
 
 body.night-mode .info-tip-popover {
-  background: #232847 !important;
+  background: var(--kc-mapped-bg-primary-default);
 }
 
 body:not(.night-mode) .info-tip-popover {
-  background: #fffbf6 !important;
+  background: var(--kc-mapped-text-primary-default);
 }
 
 .info-tip-popover {
@@ -1770,11 +1770,7 @@ body:not(.night-mode) .info-tip-popover {
   box-sizing: border-box;
   transform: translateX(-50%);
   padding: 12px 14px;
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--hairline);
-  border-radius: 10px;
-  font-weight: var(--font-400-weight);
+  border-radius: var(--primary-border-radius);
   letter-spacing: 0.005em;
   text-transform: none;
   white-space: normal;
@@ -1811,11 +1807,14 @@ body:not(.night-mode) .info-tip-popover {
   left: 50%;
   margin-left: -6px;
   border: 6px solid transparent;
-  border-top-color: var(--surface);
 }
 
 .night-mode .info-tip-popover::after {
-  border-top-color: var(--surface-2);
+  border-top-color: var(--kc-mapped-bg-primary-default);
+}
+
+.day-mode .info-tip-popover::after {
+  border-top-color: var(--kc-mapped-text-primary-default);
 }
 
 @media screen and (max-width: 767px) {
@@ -1866,15 +1865,15 @@ body.day-mode .product-media-container .product__modal-opener {
 
 body.day-mode .loop-subscription-group,
 body.day-mode .loop-one-time-purchase-option-position {
-  background: var(--white);
+  background: var(--kc-white-surface-primary-default);
   border-color: rgba(25, 31, 56, 0.12);
 }
 
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked),
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
-  background: var(--white);
-  border-color: var(--accent, #7fb9ff);
-  box-shadow: 0 0 0 1px var(--accent, #7fb9ff);
+  background: var(--kc-white-surface-primary-default);
+  border-color: var(--kc-mapped-surface-accent-default);
+  box-shadow: 0 0 0 1px var(--kc-mapped-surface-accent-default);
 }
 
 body.day-mode .loop-subscription-group-radio,
@@ -1884,15 +1883,15 @@ body.day-mode .loop-one-time-purchase-option-radio {
 
 body.day-mode .loop-subscription-group-radio:checked,
 body.day-mode .loop-one-time-purchase-option-radio:checked {
-  border-color: var(--accent, #7fb9ff);
+  border-color: var(--kc-mapped-surface-accent-default);
 }
 
 body.day-mode .loop-subscription-group-label,
 body.day-mode .loop-one-time-purchase-option-label {
-  color: #191f38;
+  color: rgb(var(--color-foreground));
 }
 
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-label,
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option-label {
-  color: var(--accent-deep, #7fb9ff);
+  color: var(--kc-mapped-surface-accent-default);
 }

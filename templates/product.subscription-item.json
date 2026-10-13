@@ -56,8 +56,7 @@
             "image_3": "shopify://shop_images/marker_2.png",
             "svg_3": "",
             "text_3": "Leave-on, no rinse",
-            "image_4": "",
-            "svg_4": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\"><circle cx=\"7\" cy=\"7\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.5\"/><circle cx=\"7\" cy=\"7\" r=\"3\" fill=\"currentColor\"/></svg>",
+            "svg_4": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewbox=\"0 0 14 14\" fill=\"none\"><circle cx=\"7\" cy=\"7\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.5\"></circle><circle cx=\"7\" cy=\"7\" r=\"3\" fill=\"currentColor\"></circle></svg>",
             "text_4": "Nano-hydroxyapatite, fluoride-free",
             "svg_5": "",
             "text_5": "",
@@ -92,6 +91,10 @@
             "pricing_summary_care_credit_tooltip": "Care Credit is Return on Care in euros — spendable on member products and accessories. It lands in your account with your plan, so caring for your teeth pays you back.",
             "pricing_summary_checkup_title": "Dental Check-up Reward",
             "pricing_summary_checkup_tooltip": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
+            "pricing_summary_welcome_kit_title": "Welcome Kit on first order (value [value])",
+            "pricing_summary_welcome_kit_value": "FREE",
+            "plans_eyebrow": "Start here",
+            "plans_heading": "Choose how to begin",
             "show_testimonial_button": true,
             "testimonial_button_text": "Brushing & Beyond"
           }
@@ -156,7 +159,6 @@
         },
         "info_card_FnBcaN": {
           "type": "info_card",
-          "disabled": true,
           "settings": {
             "default_to_subscription": true,
             "header_text": "More than two formulas",
@@ -249,8 +251,15 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "remove_first_media_bg": true,
+        "kc_hero_product_handle": "karmicare-biorhythmic-oral-care-system",
+        "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
+        "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
+        "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
+        "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
         "bg_color_day": "",
         "bg_gradient_day": "linear-gradient(180deg, #FFFBF6  0%, #F2F8FF  100%)",
         "text_color_day": "",
@@ -597,6 +606,8 @@
         "padding_bottom_mobile": 40,
         "show_border_top": true,
         "show_border_bottom": false,
+        "marquee": true,
+        "marquee_speed": 22,
         "slider_desktop": true,
         "slider_laptop": false,
         "slider_tablet": false,
@@ -604,9 +615,7 @@
         "columns_desktop": "1.9",
         "columns_laptop": "2",
         "columns_tablet": "1",
-        "columns_mobile": "1.2",
-        "marquee": true,
-        "marquee_speed": 22
+        "columns_mobile": "1.2"
       }
     },
     "product_compare_plans_gz9xxx": {

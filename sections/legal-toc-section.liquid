@@ -28,7 +28,7 @@
         border-color: {{ section.settings.border_color_night }};
       }
     {%- endif -%}
-    
+
     {% if section.settings.border_color_day != blank %}
       body.day-mode #LegalToc-{{ section.id }} .legal-toc__section + .legal-toc__section,
       body.day-mode #LegalToc-{{ section.id }} .legal-toc__blockbody p,
@@ -141,19 +141,19 @@
   }
 </style>
 
-<section
+<div
   id="LegalToc-{{ section.id }}"
   class="legal-toc section-{{ section.id }}"
   data-legal-toc
 >
-  <div class="legal-toc__container">
+  <div class="page-width">
     {% if section.blocks.size > 0 %}
       <div class="legal-toc__layout">
         {%- comment -%} LEFT NAVIGATION {%- endcomment -%}
         <aside class="legal-toc__sidebar" data-legal-toc-sidebar>
           <div class="legal-toc__sidebar-inner">
             {% if section.settings.nav_title != blank %}
-              <div class="legal-toc__eyebrow">
+              <div class="legal-toc__eyebrow subtitle-item opacity-xl">
                 {{ section.settings.nav_title | escape }}
               </div>
             {% endif %}
@@ -169,7 +169,7 @@
                   <li class="legal-toc__nav-item" {{ block.shopify_attributes }}>
                     <a
                       href="#{{ target_id }}"
-                      class="legal-toc__nav-link{% if forloop.first %} is-active{% endif %}"
+                      class="legal-toc__nav-link subtitle-item opacity-xl{% if forloop.first %} is-active{% endif %}"
                       data-legal-toc-link
                       data-target="{{ target_id }}"
                     >
@@ -225,14 +225,14 @@
       <div class="legal-toc__empty">Add a content section from the Theme Editor.</div>
     {% endif %}
   </div>
-</section>
+</div>
 
 <style>
     #LegalToc-{{ section.id }} {
       width: 100%;
     }
 
-    #LegalToc-{{ section.id }} .legal-toc__container {
+    #LegalToc-{{ section.id }} .page-width {
       width: 100%;
       max-width:1416px;
       padding:0 20px;
@@ -298,18 +298,6 @@
       opacity: 1;
     }
 
-    {% comment %} #LegalToc-{{ section.id }} .legal-toc__nav-link.is-active::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -16px;
-      width: 2px;
-      height: calc(100% + 8px);
-      transform: translateY(-50%);
-      background: currentColor;
-    } {% endcomment %}
-
-    /* CONTENT */
     #LegalToc-{{ section.id }} .legal-toc__content {
       min-width: 0;
       max-width:680px;
@@ -494,8 +482,6 @@
       max-width: 100%;
       min-width: 0;
       box-sizing: border-box;
-      font-size: var(--kc-responsive-label-sm-text-size);
-      line-height: 12px;
       height:100%;
       display:flex;
       align-items:center;

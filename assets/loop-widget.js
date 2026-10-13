@@ -2469,7 +2469,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 }
             }
             subRow.innerHTML = formattedOptionText
-                ? `<div>${formattedOptionText}</div><div>${perBrushingLine}</div>`
+                ? `<div>${formattedOptionText}</div> <div>${perBrushingLine}</div>`
                 : `<div>${perBrushingLine}</div>`;
         }
 
@@ -3033,7 +3033,7 @@ async function getLoopBundleSpgs(productId) {
 
         let bundleSellingPlanGroupIds = [];
         let nonBundleSellingPlanGroupIds = [];
-        
+
         let excludedGroupIds = new Set();
         let validGroupIds = new Set();
 
@@ -3062,9 +3062,17 @@ async function getLoopBundleSpgs(productId) {
                 }
             }
         }
-        
-        // Only hide a group if ALL of its selling plans are excluded (no valid plan exists in group)
-        let hideLoopStorefrontExcludedGroupIds = [...excludedGroupIds].filter(id => !validGroupIds.has(id));
+
+        // KC CUSTOM: If a group has any plan excluded by widget, treat the whole group as excluded from storefront
+        let hideLoopStorefrontExcludedGroupIds = [...excludedGroupIds];
+
+        // Ensure excluded groups are not kept in valid bundle or non-bundle plan lists
+        nonBundleSellingPlanGroupIds = nonBundleSellingPlanGroupIds.filter(
+            (id) => !excludedGroupIds.has(id)
+        );
+        bundleSellingPlanGroupIds = bundleSellingPlanGroupIds.filter(
+            (id) => !excludedGroupIds.has(id)
+        );
 
         window.loopProps[productId]["bundleSPGS"] = [
             ...new Set(bundleSellingPlanGroupIds),
