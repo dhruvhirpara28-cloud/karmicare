@@ -81,6 +81,27 @@
         {%- endif -%}
       </div>
 
+      {%- if section.settings.marquee -%}
+        <trusted-professionals-marquee
+          class="trusted-professionals__marquee"
+          data-speed="{{ section.settings.marquee_speed }}"
+          style="--cols-desktop: {{ section.settings.columns_desktop }}; --cols-laptop: {{ section.settings.columns_laptop }}; --cols-tablet: {{ section.settings.columns_tablet }}; --cols-mobile: {{ section.settings.columns_mobile }};"
+        >
+          <ul class="trusted-professionals__track" id="Slider-{{ section.id }}" role="list">
+            {%- for block in section.blocks -%}
+              <li
+                id="Slide-{{ section.id }}-{{ forloop.index }}"
+                class="trusted-professionals__card"
+                {{ block.shopify_attributes }}
+              >
+                {%- render 'trusted-professional-card', block: block -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </trusted-professionals-marquee>
+        <script src="{{ 'trusted-professionals-marquee.js' | asset_url }}" defer="defer"></script>
+      {%- else -%}
+
       {%- capture slider_classes -%}
         {% if section.settings.slider_mobile %} slider--mobile{% endif %}
         {% if section.settings.slider_tablet %} slider--tablet{% endif %}
@@ -113,29 +134,7 @@
             class="trusted-professionals__card{% if show_slider %} slider__slide{% endif %}"
             {{ block.shopify_attributes }}
           >
-            <div class="trusted-professionals__card-image">
-              {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
-              {%- else -%}
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-            </div>
-
-            <div class="trusted-professionals__card-content">
-              {%- if block.settings.hover_text != blank -%}
-                <div class="trusted-professionals__card-quote">
-                  {{ block.settings.hover_text }}
-                </div>
-              {%- endif -%}
-              <div class="trusted-professionals__card-body">
-                {%- if block.settings.heading != blank -%}
-                  <h5>{{ block.settings.heading }}</h5>
-                {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <p>{{ block.settings.text }}</p>
-                {%- endif -%}
-              </div>
-            </div>
+            {%- render 'trusted-professional-card', block: block -%}
           </li>
         {%- endfor -%}
       </ul>
@@ -172,6 +171,7 @@
       {%- if show_slider -%}
         </slider-component>
       {%- endif -%}
+      {%- endif -%}
 
       <div class="trusted-professionals__footer">
         {%- if section.settings.bottom_text != blank -%}
@@ -201,7 +201,7 @@
   </div>
 {% endif %}
 
-{%- if show_slider -%}
+{%- if show_slider and section.settings.marquee == false -%}
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const sliders = document.querySelectorAll('.trusted-professionals__grid.slider:not([data-initialized="true"])');
@@ -342,6 +342,27 @@
       "type": "color",
       "id": "card_bg_color_night",
       "label": "Card Background Color (Night)"
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee",
+      "label": "Infinite marquee",
+      "info": "All cards in one full-width row that drifts slowly and glides to a stop on hover. Cards keep the width of the column counts below; the slider settings are ignored.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Marquee speed (px per second)",
+      "default": 22
     },
     {
       "type": "header",

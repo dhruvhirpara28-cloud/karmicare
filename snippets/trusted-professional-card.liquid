@@ -1,0 +1,34 @@
+{%- comment -%}
+  Trusted Professionals card body (image + glass content panel).
+  Shared by the grid/slider and the marquee in sections/trusted-professionals.liquid.
+
+  Accepts:
+  - block: {Object} The section's card block
+{%- endcomment -%}
+<div class="trusted-professionals__card-image">
+  {%- if block.settings.image != blank -%}
+    {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+  {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</div>
+
+<div class="trusted-professionals__card-content">
+  {%- if block.settings.hover_text != blank -%}
+    <div class="trusted-professionals__card-quote">
+      <div class="trusted-professionals__card-quote-inner">
+        <div class="trusted-professionals__card-quote-text">
+          {{ block.settings.hover_text }}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="trusted-professionals__card-body">
+    {%- if block.settings.heading != blank -%}
+      <h5>{{ block.settings.heading }}</h5>
+    {%- endif -%}
+    {%- if block.settings.text != blank -%}
+      <p>{{ block.settings.text }}</p>
+    {%- endif -%}
+  </div>
+</div>

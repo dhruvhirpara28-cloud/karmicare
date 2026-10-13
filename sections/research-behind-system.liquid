@@ -83,6 +83,23 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.marquee -%}
+      <research-behind-system-marquee
+        class="research-behind-system__marquee"
+        data-speed="{{ section.settings.marquee_speed }}"
+        style="--cols-desktop: {{ section.settings.columns_desktop }}; --cols-laptop: {{ section.settings.columns_laptop }}; --cols-tablet: {{ section.settings.columns_tablet }}; --cols-mobile: {{ section.settings.columns_mobile }};"
+      >
+        <ul class="research-behind-system__track" id="Slider-{{ section.id }}" role="list">
+          {%- for block in section.blocks -%}
+            <li class="research-card" {{ block.shopify_attributes }}>
+              {%- render 'research-card', block: block -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </research-behind-system-marquee>
+      <script src="{{ 'research-behind-system-marquee.js' | asset_url }}" defer="defer"></script>
+    {%- else -%}
+
     {%- capture slider_classes -%}
       {% if section.settings.slider_mobile %} slider--mobile{% endif %}
       {% if section.settings.slider_tablet %} slider--tablet{% endif %}
@@ -120,63 +137,14 @@
     >
       {%- for block in section.blocks -%}
         <li class="research-card{% if show_slider %} slider__slide{% endif %}" {{ block.shopify_attributes }}>
-          <div class="research-card__content">
-            {%- if block.settings.subheading != blank -%}
-              <span class="research-card__subheading body-gl-nunito-xsm">{{ block.settings.subheading }}</span>
-            {%- endif -%}
-            {%- if block.settings.heading != blank -%}
-              <h3 class="research-card__heading h4">{{ block.settings.heading }}</h3>
-            {%- endif -%}
-            {%- if block.settings.subtext != blank -%}
-              <p class="research-card__subtext kc-caption-text text-xl">{{ block.settings.subtext }}</p>
-            {%- endif -%}
-
-            <div class="research-card__details">
-              {%- if block.settings.result_text != blank -%}
-                <div class="research-card__detail-group ">
-                  <span class="body-gl-nunito-xsm">{{ block.settings.result_label }}</span>
-                  <p class="kc-caption-text">{{ block.settings.result_text }}</p>
-                </div>
-              {%- endif -%}
-              {%- if block.settings.method_text != blank -%}
-                <div class="research-card__detail-group">
-                  <span class="body-gl-nunito-xsm">{{ block.settings.method_label }}</span>
-                  <p class="kc-caption-text">{{ block.settings.method_text }}</p>
-                </div>
-              {%- endif -%}
-            </div>
-
-            <div class="research-card__footer">
-              {%- if block.settings.link_label != blank -%}
-                <a href="{{ block.settings.link_url | default: '#' }}" class="">
-                  {{ block.settings.link_label }}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75L2.08333 12.75C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </a>
-              {%- endif -%}
-              {%- if block.settings.logo != blank -%}
-                {{ block.settings.logo | image_url: width: 200 | image_tag: loading: 'lazy' }}
-              {%- endif -%}
-            </div>
-          </div>
-          <div class="research-card__image-wrapper">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
-            {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-
-            {%- if block.settings.image_badge != blank -%}
-              <span class="research-card__badge body-gl-nunito-xsm">{{ block.settings.image_badge }}</span>
-            {%- endif -%}
-          </div>
+          {%- render 'research-card', block: block -%}
         </li>
       {%- endfor -%}
     </ul>
 
     {%- if show_slider -%}
       </slider-component>
+    {%- endif -%}
     {%- endif -%}
 
     <div class="research-behind-system__footer kc-caption-text">
@@ -203,7 +171,7 @@
   </div>
 {%- endif -%}
 
-{%- if show_slider -%}
+{%- if show_slider and section.settings.marquee == false -%}
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const sliders = document.querySelectorAll('.research-behind-system__grid.slider:not([data-initialized="true"])');
@@ -394,6 +362,27 @@
       "id": "show_border_bottom",
       "label": "Show Bottom Border",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee",
+      "label": "Infinite marquee",
+      "info": "All cards in one full-width row that drifts slowly and glides to a stop on hover. Cards keep the width of the column counts below; the slider settings are ignored.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Marquee speed (px per second)",
+      "default": 22
     },
     {
       "type": "header",
