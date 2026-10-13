@@ -76,11 +76,16 @@
             assign wk_variant = wk_product.selected_or_first_available_variant
             assign price = wk_variant.price
             assign compare_price = wk_variant.compare_at_price | default: price
+            # Close-up tile image from the product's custom.kit_thumbnail metafield
+            # (Figma KC/Kit_item), so the product's own pictures stay untouched.
+            # Falls back to the featured image. Served at 144px = 3x the 48px tile.
+            assign wk_thumbnail = wk_product.metafields.custom.kit_thumbnail.value | default: wk_product.featured_image
           -%}
           <div
             class="loop-welcome-kit-product-item"
             data-title="{{ wk_product.title | escape }}"
-            data-image="{{ wk_product.featured_image | image_url: width: 120 }}"
+            data-image="{{ wk_thumbnail | image_url: width: 144 }}"
+            data-full-image="{{ wk_product.featured_image | image_url: width: 800 }}"
             data-price="{{ price }}"
             data-compare-price="{{ compare_price }}"
             data-url="{{ wk_product.url }}"
@@ -93,9 +98,9 @@
     <div id="loop-price-money_without_currency-format" class="loop-hidden">{{ 000 | money_without_currency }}</div>
     <input name="loop_variant_id" class="loop-hidden">
     <div class="loop-purchase-options-label loop-display-none body-gl-nunito-xsm ">
-      <span class="continuum-eyebrow">Continue</span>
+      <span class="continuum-eyebrow">{{ block.settings.plans_eyebrow | default: 'Start here' | escape }}</span>
       <span class="continuum-line"></span>
-      <span class="continuum-desc">Choose your supply</span>
+      <span class="continuum-desc">{{ block.settings.plans_heading | default: 'Choose how to begin' | escape }}</span>
     </div>
     <fieldset
       id="loop-selling-plan-fieldset"
@@ -126,10 +131,10 @@
                 id="loop-price-one-time-original"
                 class="loop-one-time-purchase-option-price-amount-original loop-display-none"
               >
-                {{ current_variant.price | money }}
+                {{ current_variant.price | money_without_trailing_zeros }}
               </div>
               <div id="loop-price-one-time" class="loop-one-time-purchase-option-price-amount">
-                {{ current_variant.price | money }}
+                {{ current_variant.price | money_without_trailing_zeros }}
               </div>
 
               <div class="loop-one-time-purchase-option-price-quantity">each</div>
@@ -180,13 +185,13 @@
                             id="loop-price-original-{{ variant.id }}-{{ selling_plan_group.id }}"
                             class="loop-subscription-group-price-amount-original loop-display-none"
                           >
-                            {{ current_variant.price | money }}
+                            {{ current_variant.price | money_without_trailing_zeros }}
                           </div>
                           <div
                             id="loop-price-{{ variant.id }}-{{ selling_plan_group.id }}"
                             class="loop-subscription-group-price-amount h5"
                           >
-                            {{ current_variant.price | money }}
+                            {{ current_variant.price | money_without_trailing_zeros }}
                           </div>
                           <div class="loop-subscription-group-price-quantity">each</div>
                         </div>

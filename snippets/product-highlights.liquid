@@ -148,7 +148,7 @@
 {%- endfor -%}
 
 <div
-  class="product-highlights"
+  class="product-highlights{% if block.settings.static_layout %} product-highlights--static{% endif %}"
   {{ block.shopify_attributes }}
   style="
     --pill-font-size-desktop: {{ font_size_desktop }}px;
@@ -159,6 +159,8 @@
 >
   <div class="highlights-list" aria-label="Product highlights">
     {{- pills_html -}}
-    {{- pills_html -}}
+    {%- unless block.settings.static_layout -%}
+      {{- pills_html -}}
+    {%- endunless -%}
   </div>
 </div>

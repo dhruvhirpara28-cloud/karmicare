@@ -579,3 +579,14 @@ body.night-mode .chronobiology-clock .science img {
   text-align: center;
   margin-top: 50px;
 }
+/* Desktop per the Figma homepage: 24px label -> heading -> text,
+   64px above the footer line */
+@media screen and (min-width: 990px) {
+  .chronobiology-clock .clock-heading {
+    margin: 2.4rem auto;
+  }
+
+  .chronobiology-clock__footer {
+    margin-top: 6.4rem;
+  }
+}

@@ -59,33 +59,33 @@
   will-change: transform;
 }
 
-/* Same card width as the slider: the page-width content box split into the
-   column count for the breakpoint (cqw = marquee width, without scrollbar) */
+/* Mobile (stacked card): the page-width content box split into the mobile
+   column count (cqw = marquee width, without scrollbar) */
 .research-behind-system__marquee {
   --cols: var(--cols-mobile, 1.2);
   container-type: inline-size;
 }
 
-@media screen and (min-width: 750px) {
-  .research-behind-system__marquee {
-    --cols: var(--cols-tablet, 1);
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .research-behind-system__marquee {
-    --cols: var(--cols-laptop, 2);
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .research-behind-system__marquee {
-    --cols: var(--cols-desktop, 2);
-  }
-}
-
 .research-behind-system__track .research-card {
-  flex: 0 0 calc((min(100cqw, var(--page-width)) - 3rem - 1.5rem * (var(--cols) - 1)) / var(--cols));
+  flex: 0 0 calc((min(100cqw, var(--page-width)) - 2 * var(--page-gutter) - 1.5rem * (var(--cols) - 1)) / var(--cols));
+}
+
+/* Tablet and up (side-by-side card), per design: 400px image + 380px content
+   (32px padding each side included), plus the 1px border on each side.
+   Narrower screens shrink the card but keep the 400:380 split. */
+@media screen and (min-width: 750px) {
+  .research-behind-system__track .research-card {
+    flex: 0 0 min(782px, 100cqw - 3rem);
+  }
+
+  .research-behind-system__track .research-card__image-wrapper {
+    flex: 0 0 calc(400 / 780 * 100%);
+    max-width: none;
+  }
+
+  .research-behind-system__track .research-card__content {
+    min-width: 0;
+  }
 }
 
 .research-behind-system__marquee.is-dragging {
@@ -101,7 +101,7 @@
 }
 
 .research-behind-system__marquee.is-static .research-behind-system__track {
-  padding-inline: max(1.5rem, calc(50vw - var(--page-width, 120rem) / 2 + 5rem));
+  padding-inline: max(var(--page-gutter), calc(50vw - var(--page-width, 120rem) / 2 + var(--page-gutter)));
 }
 
 /* Slider Overrides */
@@ -304,4 +304,24 @@
 
 .research-behind-system__footer {
   margin-top: 40px;
+}
+/* KC/Research_card: 20px corners */
+.research-card {
+  border-radius: 2rem;
+}
+
+/* Desktop per the Figma homepage: 80px heading -> cards -> note,
+   32px card padding */
+@media screen and (min-width: 990px) {
+  .research-behind-system__header {
+    margin-bottom: 8rem;
+  }
+
+  .research-behind-system__footer {
+    margin-top: 8rem;
+  }
+
+  .research-card__content {
+    padding: 3.2rem;
+  }
 }

@@ -96,11 +96,35 @@
           -%}
 
           {%- if block.settings.show_custom_button -%}
+            {%- liquid
+              # "Plan name: Label" per line -> JSON for updateKcPlanButtonLabel() in loop-widget.js
+              assign cta_default = block.settings.custom_button_text | default: 'Begin Now'
+              assign cta_plan_labels = '{'
+              assign cta_lines = block.settings.custom_button_text_by_plan | newline_to_br | split: '<br />'
+              for cta_line in cta_lines
+                assign cta_parts = cta_line | split: ':'
+                if cta_parts.size > 1
+                  assign cta_plan = cta_parts.first | strip
+                  assign cta_label = cta_line | remove_first: cta_parts.first | remove_first: ':' | strip
+                  if cta_plan != blank and cta_label != blank
+                    if cta_plan_labels != '{'
+                      assign cta_plan_labels = cta_plan_labels | append: ','
+                    endif
+                    assign cta_plan_json = cta_plan | json
+                    assign cta_label_json = cta_label | json
+                    assign cta_plan_labels = cta_plan_labels | append: cta_plan_json | append: ':' | append: cta_label_json
+                  endif
+                endif
+              endfor
+              assign cta_plan_labels = cta_plan_labels | append: '}'
+            -%}
             <button
               id="CustomSubmitButton-{{ section_id }}"
               type="button"
               class="product-form__submit product-form__custom-submit block__animate-button button button--full-width button--primary"
               style="margin-bottom: 1rem;"
+              data-default-label="{{ cta_default | escape }}"
+              data-plan-labels="{{ cta_plan_labels | escape }}"
               {% if product.selected_or_first_available_variant.available == false
                 or quantity_rule_soldout
                 or product.selected_or_first_available_variant == null
@@ -108,7 +132,7 @@
                 disabled
               {% endif %}
             >
-              <span>{{ block.settings.custom_button_text | default: 'Begin Now' }}</span>
+              <span class="kc-cta-label">{{ cta_default }}</span>
               {%- render 'loading-spinner' -%}
             </button>
           {%- endif -%}

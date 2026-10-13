@@ -1953,12 +1953,12 @@ function updateButtonInnerHTMLLoop(button, text) {
  */
 function loopFormatMoney(price, removeEach) {
     if (Shopify.locale && Shopify.country && Shopify.currency.active) {
-        return loopFormatPriceNew(
+        return loopDropZeroCents(loopFormatPriceNew(
             price,
             Shopify.locale,
             Shopify.country,
             Shopify.currency.active
-        );
+        ), price);
     }
 
     const moneyFormat = document.querySelector("#loop-price-money-format")
@@ -1976,7 +1976,13 @@ function loopFormatMoney(price, removeEach) {
     if (removeEach) {
         formattedPrice = formattedPrice.replace("each", "");
     }
-    return formattedPrice.trim();
+    return loopDropZeroCents(formattedPrice.trim(), price);
+}
+
+// Whole amounts drop their ".00" / ",00" (€59.00 -> €59, €0.49 stays €0.49),
+// as in the Figma buybox.
+function loopDropZeroCents(formatted, cents) {
+    return Number(cents) % 100 === 0 ? formatted.replace(/[.,]00(?!\d)/, '') : formatted;
 }
 
 function loopFormatPriceNew(value, locale, countryCode, currencyCode) {
@@ -2082,7 +2088,7 @@ function loopShowWelcomeKitProductPopup(title, image, price, comparePrice) {
                 <p class="loop-wk-modal-price">
                     <span class="loop-wk-free">Free</span> · <del>${comparePrice}</del>
                 </p>
-                <p class="loop-wk-modal-hint">Click outside to close</p>
+                <p class="loop-wk-modal-hint">Click next to the image to close</p>
             </div>
         </div>
     `;
@@ -2094,9 +2100,10 @@ function loopShowWelcomeKitProductPopup(title, image, price, comparePrice) {
     };
     const onKey = (e) => { if (e.key === "Escape") closePopup(); };
 
-    // Close on backdrop click (not modal itself)
+    // Close on any click next to the image (backdrop, name, price); a click
+    // on the image itself keeps it open
     overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) closePopup();
+        if (!e.target.closest(".loop-wk-modal-img")) closePopup();
     });
     overlay.querySelector(".loop-wk-close").addEventListener("click", closePopup);
     document.addEventListener("keydown", onKey);
@@ -2176,6 +2183,8 @@ function updateWelcomeKitUI(productId) {
     productItems.forEach(item => {
         const itemTitle = item.dataset.title || "";
         const itemImage = item.dataset.image || "";
+        // Popup shows the product's main image; the tile uses the close-up thumbnail
+        const itemFullImage = item.dataset.fullImage || itemImage;
         const itemPrice = parseInt(item.dataset.price || "0");
         const itemComparePrice = parseInt(item.dataset.comparePrice || item.dataset.price || "0");
         const itemUrl = item.dataset.url || "#";
@@ -2189,6 +2198,7 @@ function updateWelcomeKitUI(productId) {
                  style="cursor:pointer;"
                  data-wk-title="${itemTitle}"
                  data-wk-image="${itemImage}"
+                 data-wk-full-image="${itemFullImage}"
                  data-wk-price="${formattedComparePrice}"
                  data-wk-compare-price="${formattedComparePrice}">
                 <img class="loop-welcome-kit-product-img" src="${itemImage}" alt="${itemTitle}" loading="lazy" />
@@ -2253,8 +2263,9 @@ function updateWelcomeKitUI(productId) {
             const t = card.dataset.wkTitle;
             const img = card.dataset.wkImage;
             const cp = card.dataset.wkComparePrice;
-            // Use a larger image if the URL contains a width param
-            const largeImg = img.replace(/width=\d+/, "width=600");
+            // Main product image for the popup; older markup without it falls
+            // back to the tile image at a larger width
+            const largeImg = card.dataset.wkFullImage || img.replace(/width=\d+/, "width=600");
             loopShowWelcomeKitProductPopup(t, largeImg, cp, cp);
         });
     });
@@ -2432,7 +2443,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
 
         // 4. Right-side short label: "/ year" or "/ 60 days"
-        const rightLabel = isAnnual ? '/ year' : '/ cycle';
+        const rightLabel = isAnnual ? '/ year' : `/ ${billingDays} days`;
 
         // LEFT: inject/update .kc-plan-subrow inside .loop-subscription-group-text (below plan name)
         const textContainer = groupEl.querySelector('.loop-subscription-group-text');
@@ -2444,9 +2455,22 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 textContainer.appendChild(subRow);
             }
             let formattedOptionText = optionText.replace(/ships/i, 'Renews');
+            let perBrushingLine = `${perBrushingFormatted} / brushing`;
+            if (isAnnual) {
+                // Figma: "Renews every year" / "€0.49 / brushing · 6 duos in two deliveries".
+                // The duo count comes from the custom.duos_count metaobject (data-duos),
+                // the delivery count from Loop's frequency label ("2 deliveries a year").
+                formattedOptionText = 'Renews every year';
+                const deliveries = parseInt((optionText.match(/(\d+)\s*deliver/i) || [])[1]);
+                if (deliveries) {
+                    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+                    const deliveriesText = words[deliveries] || String(deliveries);
+                    perBrushingLine += ` · ${duosCount} duos in ${deliveriesText} deliveries`;
+                }
+            }
             subRow.innerHTML = formattedOptionText
-                ? `<div>${formattedOptionText}</div><div>${perBrushingFormatted} / brushing</div>`
-                : `<div>${perBrushingFormatted} / brushing</div>`;
+                ? `<div>${formattedOptionText}</div><div>${perBrushingLine}</div>`
+                : `<div>${perBrushingLine}</div>`;
         }
 
         // RIGHT: inject/update .kc-plan-interval-label inside .loop-subscription-group-price-container
@@ -2635,7 +2659,8 @@ function updateKcPricingSummary(productId, variant) {
                 } else {
                     billedLabel = `billed every ${intervalCount} ${base}s`;
                 }
-                perBrushingLabel = `${perBrushingFormatted} per brushing, ${billedLabel}`;
+                // Figma receipt: "Billed every 60 days" (the per-brushing price is on the plan card)
+                perBrushingLabel = billedLabel.charAt(0).toUpperCase() + billedLabel.slice(1);
             }
         }
     } catch (e) {
@@ -2671,13 +2696,31 @@ function updateKcPricingSummary(productId, variant) {
         let checkupRewardStr = '';
 
         const planName = (window.loopProps[productId]?.sellingPlanGroupName || '').toLowerCase();
-        if (planName.includes('year')) {
+        const basePrice = sellingPlanPrice || variant.price;
+
+        // Same source as the plan card chip: return_on_care % from the
+        // custom.duos_count metaobject (data-return-on-care on the plan option).
+        let returnOnCarePct = 0;
+        const loopPropsForCredit = window.loopProps?.[productId];
+        const creditContainer = getLoopSubscriptionContainer(productId);
+        if (creditContainer && loopPropsForCredit?.sellingPlanGroupId && loopPropsForCredit?.sellingPlanId) {
+            const creditOption = creditContainer.querySelector(
+                `#loop-select-${loopPropsForCredit.selectedVariantId}-${loopPropsForCredit.sellingPlanGroupId} option[value="${loopPropsForCredit.sellingPlanId}"]`
+            );
+            returnOnCarePct = parseInt(creditOption?.dataset?.returnOnCare) || 0;
+        }
+
+        if (returnOnCarePct > 0) {
+            careCreditCents = Math.round(basePrice * returnOnCarePct / 100);
+        } else if (planName.includes('year')) {
+            // Fallback when the metaobject has no entry for this plan
             careCreditCents = 7180;
-            checkupRewardStr = 'up to €40';
         } else {
-            // standard 60-day logic
-            const basePrice = sellingPlanPrice || variant.price;
             careCreditCents = Math.round(basePrice * 0.1);
+        }
+        if (planName.includes('year')) {
+            // Same wording as the Year card chip "€40 Dental Check-up Reward"
+            checkupRewardStr = '€40';
         }
 
         if (rewardsBlock) {
@@ -2707,11 +2750,58 @@ function updateKcPricingSummary(productId, variant) {
                 }
             }
 
+            // "Welcome Kit on first order (value €21) … FREE", only for plans that get the kit
+            const kitRow = rewardsBlock.querySelector('.kc-welcome-kit-row');
+            if (kitRow) {
+                const kitValueCents = getWelcomeKitValueCents();
+                if (kitValueCents > 0 && checkPlanQualifiesForWelcomeKit(productId)) {
+                    const labelEl = kitRow.querySelector('.kc-welcome-kit-label');
+                    if (labelEl) {
+                        const template = labelEl.dataset.template || labelEl.textContent;
+                        labelEl.dataset.template = template;
+                        labelEl.textContent = template.replace('[value]', loopFormatMoney(kitValueCents, true));
+                    }
+                    kitRow.style.display = 'flex';
+                    hasRewards = true;
+                } else {
+                    kitRow.style.display = 'none';
+                }
+            }
+
             rewardsBlock.style.display = hasRewards ? 'block' : 'none';
         }
     }
 
+    updateKcPlanButtonLabel(productId, isOneTime);
     summaryEl.style.display = 'block';
+}
+
+// Sum of the Welcome Kit items' values (compare-at, else price), in cents
+function getWelcomeKitValueCents() {
+    const dataEl = document.querySelector('#loop-welcome-kit-data');
+    if (!dataEl) return 0;
+    let total = 0;
+    dataEl.querySelectorAll('.loop-welcome-kit-product-item').forEach((item) => {
+        total += parseInt(item.dataset.comparePrice || item.dataset.price) || 0;
+    });
+    return total;
+}
+
+// CTA label per selected plan. The buy button carries data-plan-labels
+// ({"60-Day Rhythm": "Start my 60-Day rhythm", …}) from the buy_buttons block;
+// plans without a label, and one-time, use the button's default text.
+function updateKcPlanButtonLabel(productId, isOneTime) {
+    document.querySelectorAll('.product-form__custom-submit[data-plan-labels]').forEach((button) => {
+        const labelEl = button.querySelector('.kc-cta-label');
+        if (!labelEl) return;
+        let labels = {};
+        try { labels = JSON.parse(button.dataset.planLabels || '{}'); } catch (e) { labels = {}; }
+        const planName = (window.loopProps?.[productId]?.sellingPlanGroupName || '').trim();
+        const match = !isOneTime && Object.keys(labels).find(
+            (name) => name.trim().toLowerCase() === planName.toLowerCase()
+        );
+        labelEl.textContent = match ? labels[match] : button.dataset.defaultLabel;
+    });
 }
 
 function injectOrUpdateKcTryOnceLink(productId, variant) {

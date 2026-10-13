@@ -35,6 +35,24 @@
       fill: {{ section.settings.text_color_day }};
     }
   {%- endif -%}
+  /* Figma: 12% hairline under the bar; the colour settings below override it */
+  #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
+    border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  /* Figma: 28px bar (8px above a 12px line, the hairline closes it) */
+  @media screen and (min-width: 990px) {
+    #AnnouncementBar-{{ section.id }} .announcement-bar__message {
+      padding: 0.8rem 0 0.7rem;
+      min-height: 0;
+      line-height: 1.2rem;
+    }
+
+    #AnnouncementBar-{{ section.id }} .announcement-bar__message * {
+      line-height: inherit;
+    }
+  }
+
   {%- if section.settings.border_color_day != blank -%}
     body.day-mode #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
       border-bottom-color: {{ section.settings.border_color_day }};

@@ -214,3 +214,32 @@
     letter-spacing: var(--kc-responsive-caption-letter-spacing);
   }
 }
+/* Desktop per the Figma homepage: the clock artwork starts 112px above the
+   heading and ends 112px below the pills, so the section padding (160px)
+   is measured from the content, not from the artwork */
+@media screen and (min-width: 1080px) {
+  .two-formulas__bg-clock {
+    justify-content: flex-start;
+    padding-top: 11.2rem;
+    margin-block: -11.2rem;
+  }
+}
+
+/* 24px label -> heading, 48px heading block -> products -> pills */
+@media screen and (min-width: 990px) {
+  .two-formulas__heading {
+    margin-top: 0;
+  }
+
+  .two-formulas__header {
+    margin-bottom: 4.8rem;
+  }
+
+  .two-formulas__stage {
+    margin-bottom: 4.8rem;
+  }
+
+  .two-formulas__pills {
+    margin-top: 0;
+  }
+}

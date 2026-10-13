@@ -1,0 +1,52 @@
+/* Category strip above the PDP title (snippets/product-category-strip.liquid).
+   Figma 3391:12111. Values are KC tokens (assets/kc-tokens.css). */
+
+.kc-category-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--kc-responsive-spacing-layout-md);
+  margin: 0 0 var(--kc-responsive-spacing-layout-lg);
+}
+
+/* Night: stone #DDDBD9 as in Figma; Day: the same token's Day value */
+.kc-category-strip__brand {
+  display: block;
+  flex-shrink: 1;
+  /* The artwork's own width (assets/kc-logo-biorhythmic-oral-care.svg) */
+  width: 252.375px;
+  max-width: 100%;
+  aspect-ratio: 252.375 / 21;
+  background-color: var(--kc-mapped-icon-primary-default-subtle);
+  -webkit-mask: var(--kc-category-logo) left center / contain no-repeat;
+  mask: var(--kc-category-logo) left center / contain no-repeat;
+}
+
+.kc-category-strip__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xxs);
+}
+
+.kc-category-strip__rating .kc-icon--star {
+  display: block;
+  flex-shrink: 0;
+  color: var(--kc-mapped-icon-accent-default);
+}
+
+/* Label/Small. The caption tracking token is held back in kc-tokens.css,
+   so this uses the 1.7px the homepage labels already use. */
+.kc-category-strip__score {
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: 1;
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-category-strip__count {
+  color: var(--kc-mapped-text-default-body);
+}

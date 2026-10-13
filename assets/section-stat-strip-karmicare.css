@@ -70,6 +70,22 @@
   font-weight: var(--font-500-weight);
 }
 
+/* Desktop per the Figma homepage: five 256px columns (80px in from the
+   edges), 8px between value and label, 52px from the labels to the tagline */
+@media screen and (min-width: 990px) {
+  .stat-strip-karmicare__grid {
+    padding-inline: calc(8rem - var(--page-gutter));
+  }
+
+  .stat-strip-karmicare__text {
+    margin-top: 0.8rem;
+  }
+
+  .stat-strip-karmicare__tagline-wrapper {
+    margin-top: 4.4rem;
+  }
+}
+
 /* Mobile Scroll Layout (Smooth Horizontal Swipe) */
 @media screen and (max-width: 749px) {
   .stat-strip-karmicare__grid--scroll {

@@ -276,3 +276,33 @@ body.night-mode .product-benefits__card:hover {
   font-size: var(--font-body-small-size-desktop);
   text-align: center;
 }
+/* Desktop per the Figma homepage: 24px between label, heading, text and
+   button, 16px to the price line, 332px column, 137px to an 8px-gap grid */
+@media screen and (min-width: 990px) {
+  .product-benefits__left>h2 {
+    margin: 2.4rem 0;
+  }
+
+  .product-benefits__left>.text-xl>:last-child {
+    margin-bottom: 0;
+  }
+
+  .product-benefits__left>.karmicare__btn-primary {
+    margin-top: 2.4rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .product-benefits__grid {
+    gap: 8px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .product-benefits__inner {
+    gap: 13.7rem;
+  }
+
+  .product-benefits__left {
+    max-width: 332px;
+  }
+}

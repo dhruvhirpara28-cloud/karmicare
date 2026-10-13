@@ -1,0 +1,965 @@
+/* ============================================================
+   PDP buybox (right column) on the KC design tokens
+   ------------------------------------------------------------
+   Figma: KARMICARE Live Shopify Store, node 2868:2894 (desktop).
+   Mobile follows the homepage mobile rules through the same
+   responsive tokens (assets/kc-tokens.css switches at 750px).
+
+   Scope: everything sits under .kc-buybox, the class on the
+   main-product .product__info-container. The homepage
+   featured-product section renders the same Loop widget and
+   reads the same loop-widget CSS, so nothing here may leak out.
+
+   Loaded after section-main-product.css and after the inline
+   loop-widget styles, so equal specificity already wins. The
+   few !important rules are there because Loop injects
+   !important rules from its dashboard or a block writes an
+   inline style; each one says which.
+
+   Never edit kc-tokens.css; regenerate it.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Local aliases. Only for gaps in kc-tokens.css: the held-back
+   names keep their hand-typed values in layout/theme.liquid,
+   and some of those values are wrong in one mode.
+   ------------------------------------------------------------ */
+.kc-buybox {
+  /* Text/Small. Switch to body-md here to give the buybox 14px
+     body text on mobile instead of the token's 12px. */
+  --kc-buybox-body-size: var(--kc-responsive-body-sm-text-size);
+  --kc-buybox-body-line-height: var(--kc-responsive-body-sm-line-height);
+
+  /* Label/Small size and the caption tracking are held back in
+     kc-tokens.css (theme values: 12px on every width, 1.25px).
+     Figma: 12px / 1.7px on desktop, 10px / 1.2px on mobile.
+     --kc-responsive-Nunito-letter-spacing is the hand-typed
+     1.7px the homepage buttons already use. */
+  --kc-buybox-label-sm-size: var(--kc-responsive-label-sm-text-size);
+  --kc-buybox-label-tracking: var(--kc-responsive-Nunito-letter-spacing);
+  /* Label/Small line-height equals its size in Figma (12/12, 10/10).
+     The token line-height drops to 10px on mobile while the held-back
+     size stays 12px, which would squeeze the text, so pin it to 1. */
+  --kc-buybox-label-sm-line-height: 1;
+
+  /* Fixed component sizes from the KC Design Library that have no token:
+     KC/Chip height, the plan radio, and the KC/Kit_item tile. */
+  --kc-buybox-chip-height: 26px;
+  --kc-buybox-radio-size: 20px;
+  --kc-buybox-kit-tile-size: 48px;
+
+  /* text-primary, surface-primary and surface-secondary are held
+     back with Night values in both modes. These are the same
+     Figma colours under names that do switch with Day/Night. */
+  --kc-buybox-text: var(--kc-mapped-text-default-heading);
+  --kc-buybox-surface-card: var(--kc-mapped-surface-page-secondary);
+  --kc-buybox-surface-chip: var(--kc-mapped-surface-page);
+
+  color: var(--kc-buybox-text);
+}
+
+/* Rich text from metafields and Loop wraps lead phrases in <strong>/<b>.
+   The browser default is font-weight: bolder, which steps a 600 or 700
+   parent up to 900 (Black). Bold is the strongest weight Figma uses. */
+.kc-buybox strong,
+.kc-buybox b {
+  font-weight: var(--font-700-weight, 700);
+}
+
+/* featured-product.liquid loads section-main-product.css a second time,
+   after this file, so Dawn's ".product__info-container .product-form /
+   .product__description / .icon-with-text { margin: 2.5rem 0 }" would win
+   at equal specificity. The rules for those three use the doubled root
+   class (.kc-buybox.product__info-container) to stay ahead of it. */
+.kc-buybox.product__info-container .product-form {
+  margin: 0;
+}
+
+/* Dawn spaces every block in the column with
+   .product__info-container > * + * { margin: 1.5rem 0 } (15px). The
+   buybox follows the Figma gaps instead, so blocks start at 0 and each
+   one below sets its own margin. Higher specificity than Dawn's rule;
+   declared first so the per-block rules (same specificity) win. */
+.kc-buybox.product__info-container > *,
+.kc-buybox.product__info-container > * + * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   1. Header: title, description, proof strip
+   ============================================================ */
+
+/* Category strip → title: 24 (lg). Repeated here because the strip's own
+   stylesheet has lower specificity than the reset above. */
+.kc-buybox .kc-category-strip {
+  margin: 0 0 var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-buybox .product-top-tags-container {
+  margin: 0 0 var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-buybox .product__title {
+  margin: 0;
+}
+
+.kc-buybox .product__title h1 {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox.product__info-container .product__description {
+  margin: var(--kc-responsive-spacing-layout-sm) 0 0;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+  /* .opacity-xl dims it to 0.7; the body colour already carries the 68% / 76% */
+  opacity: 1;
+}
+
+.kc-buybox .product__description p {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+.kc-buybox .product-highlights {
+  margin: var(--kc-responsive-spacing-layout-lg) 0 0;
+}
+
+.kc-buybox .highlights-list {
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .highlight-pill {
+  min-height: var(--kc-buybox-chip-height);
+  padding: var(--kc-shape-stroke-thin, 1px) var(--kc-responsive-spacing-layout-xs);
+  gap: var(--kc-responsive-spacing-layout-xs);
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-full);
+  background-color: var(--kc-mapped-surface-glass-default);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-500-weight, 500);
+  color: var(--kc-buybox-text);
+}
+
+/* "Show all pills without scrolling": every pill visible, wrapping
+   onto rows, no marquee and no faded edges. */
+.kc-buybox .product-highlights--static {
+  overflow: visible;
+  padding-block: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.kc-buybox .product-highlights--static .highlights-list {
+  width: auto;
+  flex-wrap: wrap;
+  animation: none;
+  will-change: auto;
+}
+
+.kc-buybox .product-highlights--static .highlight-pill {
+  flex-shrink: 1;
+  white-space: normal;
+}
+
+.kc-buybox .product-highlights--static .highlight-pill__icon svg {
+  color: var(--kc-mapped-icon-accent-default);
+}
+
+/* ============================================================
+   2. Plan cards (Loop widget)
+   ============================================================ */
+
+.kc-buybox .loop-subscription-container {
+  margin-top: var(--kc-responsive-spacing-layout-comfortable);
+}
+
+/* Loop dashboard: margin 10px 0 15px !important on the fieldset */
+.kc-buybox .loop-selling-plan-fieldset {
+  margin: 0 !important;
+}
+
+/* "Start here ——— Choose how to begin". Loop dashboard sets
+   padding 0 !important on the label. */
+.kc-buybox .loop-purchase-options-label {
+  gap: var(--kc-responsive-spacing-layout-sm);
+  padding: var(--kc-responsive-spacing-layout-xs) 0 !important;
+  margin: 0 0 var(--kc-responsive-spacing-layout-xs) !important;
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-buybox-label-sm-size) !important;
+  line-height: var(--kc-buybox-label-sm-line-height) !important;
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-buybox-label-tracking);
+  text-transform: uppercase;
+}
+
+.kc-buybox .loop-purchase-options-label .continuum-line {
+  background: var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-buybox [id^="loop-selling_plan_group-"] + [id^="loop-selling_plan_group-"] {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .loop-subscription-group {
+  padding: var(--kc-responsive-spacing-layout-comfortable) var(--kc-responsive-spacing-layout-lg);
+  background: var(--kc-buybox-surface-card);
+  border: var(--kc-shape-stroke-thick, 2px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-md);
+  box-shadow: var(--kc-elevation-xs);
+}
+
+.kc-buybox .loop-subscription-group:has(.loop-subscription-group-radio:checked) {
+  border-color: var(--kc-mapped-border-focus-default);
+  box-shadow: var(--kc-elevation-lg);
+}
+
+/* Radio. Loop sets the width with !important; height is ours. */
+.kc-buybox .loop-subscription-group .loop-subscription-group-radio {
+  margin: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs) 0 0;
+  border: var(--kc-shape-stroke-medium, 1.5px) solid var(--kc-mapped-border-inverse-default);
+}
+
+.kc-buybox .loop-subscription-group .loop-subscription-group-radio:checked {
+  border-color: var(--kc-mapped-border-focus-default);
+}
+
+.kc-buybox .loop-subscription-group-label {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+}
+
+.kc-buybox .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .loop-subscription-group-label,
+.kc-buybox .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .loop-subscription-group-price-amount {
+  color: var(--kc-buybox-text);
+}
+
+/* "Renews every 60 days" / "€0.49 / brushing" (base.css dims it to 0.7) */
+.kc-buybox .kc-plan-subrow {
+  margin-top: 0;
+  gap: 0;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+  opacity: 1;
+}
+
+.kc-buybox .loop-subscription-group-price-amount {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+}
+
+.kc-buybox .kc-plan-interval-label {
+  margin-top: 0;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+  opacity: 1;
+}
+
+/* Care Credit / Dental Checkup chips, under the titles (radio 20 + gap 8) */
+.kc-buybox .kc-return_care-tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--kc-responsive-spacing-layout-xxs);
+  padding-left: calc(var(--kc-buybox-radio-size) + var(--kc-responsive-spacing-layout-xs));
+}
+
+.kc-buybox .kc-return_care,
+.night-mode .kc-buybox .kc-return_care,
+.day-mode .kc-buybox .kc-return_care {
+  gap: var(--kc-responsive-spacing-layout-xs);
+  padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-sm);
+  background-color: var(--kc-buybox-surface-chip);
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-full);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .info-tip .info-icon {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+}
+
+/* Checklist. The hairline between the header and the details runs
+   the full card width, so it is drawn on the first row and pulled
+   out over the card's side padding. */
+.kc-buybox .block__loop-description .kc-description-list {
+  position: relative;
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .block__loop-description .kc-return_care-tooltip + .kc-description-list {
+  margin-top: calc(var(--kc-responsive-spacing-layout-comfortable) * 2);
+}
+
+.kc-buybox .block__loop-description .kc-return_care-tooltip + .kc-description-list::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
+  left: calc(var(--kc-responsive-spacing-layout-lg) * -1);
+  right: calc(var(--kc-responsive-spacing-layout-lg) * -1);
+  height: var(--kc-shape-stroke-thin, 1px);
+  background: var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-buybox .kc-description-list strong {
+  font-weight: var(--font-600-weight, 600);
+}
+
+/* The "✓" text comes from the Loop plan description. Proxima Nova has
+   no ✓ glyph, so browsers fell back to a heavy, slanted system tick.
+   The text is hidden and the Figma tick (1.5px icon stroke) is drawn
+   as a mask in the accent colour instead. */
+.kc-buybox .kc-description-list .arrow {
+  display: inline-block;
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-buybox-body-line-height);
+  margin-right: var(--kc-responsive-spacing-layout-xxs);
+  vertical-align: top;
+  font-size: 0;
+  color: transparent;
+  background-color: var(--kc-mapped-icon-accent-default);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 9'%3E%3Cpath d='M1 4.6 4.3 7.8 11 1.2' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") left center / 12px 9px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 9'%3E%3Cpath d='M1 4.6 4.3 7.8 11 1.2' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") left center / 12px 9px no-repeat;
+}
+
+/* "€21 value · free" */
+.kc-buybox span.kc-welcome-kit-parent,
+.night-mode .kc-buybox span.kc-welcome-kit-parent,
+.day-mode .kc-buybox span.kc-welcome-kit-parent {
+  margin-left: var(--kc-responsive-spacing-layout-xxs);
+  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
+  background-color: var(--kc-mapped-surface-tertiary-default);
+  border: 0;
+  border-radius: var(--kc-shape-radius-full);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  white-space: nowrap;
+}
+
+/* Welcome Kit tiles */
+.kc-buybox .loop-welcome-kit-section {
+  margin-top: var(--kc-responsive-spacing-layout-md);
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .loop-welcome-kit-products {
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .loop-welcome-kit-product {
+  gap: var(--kc-responsive-spacing-layout-xxs);
+}
+
+.kc-buybox .loop-welcome-kit-product-img,
+.night-mode .kc-buybox .loop-welcome-kit-product-img,
+.day-mode .kc-buybox .loop-welcome-kit-product-img {
+  box-sizing: border-box;
+  width: var(--kc-buybox-kit-tile-size);
+  height: var(--kc-buybox-kit-tile-size);
+  margin: 0;
+  /* No padding: the close-ups (custom.kit_thumbnail, 144px squares) fill
+     the 46px inside the 1px border. With padding plus object-fit: contain,
+     a strip of tile background showed between the image's straight crop
+     edge and the rounded border. border-radius clips the image corners. */
+  padding: 0;
+  object-fit: cover;
+  background-color: var(--kc-buybox-surface-chip);
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-sm);
+}
+
+/* Figma KC/Kit_item shows only the name under the tile; the kit total
+   sits in the "€21 value · free" badge. The popup still shows the price. */
+.kc-buybox .loop-welcome-kit-product-price {
+  display: none;
+}
+
+.kc-buybox .loop-welcome-kit-product-link {
+  margin: 0;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  font-weight: var(--font-400-weight, 400);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .block__show-welcome-kit.kc-wel-kit-bottom {
+  margin-bottom: var(--kc-responsive-spacing-layout-md);
+}
+
+/* "Brushing & Beyond": its own row at the bottom right of the card,
+   flush with the card edge instead of hanging over the border. */
+.kc-buybox .kc-bottom_label {
+  display: flex;
+  justify-content: flex-end;
+  margin: var(--kc-responsive-spacing-layout-xs) calc(var(--kc-responsive-spacing-layout-lg) * -1) calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
+}
+
+.kc-buybox .kc-bottom_label:empty {
+  display: none;
+}
+
+.kc-buybox .kc-testimonial-button,
+body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
+  position: static;
+  padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-md);
+  border-radius: var(--kc-shape-radius-md) 0 calc(var(--kc-shape-radius-md) - var(--kc-shape-stroke-thick, 2px)) 0;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  font-weight: var(--font-600-weight, 600);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+}
+
+/* "Or Try once · €67 + shipping" */
+/* Last plan card → "Or Try once": 8 (plans gap) + 16 (padding) = 24 in Figma */
+.kc-buybox .tertiary-try-once-link {
+  margin: var(--kc-responsive-spacing-layout-xs) 0 var(--kc-responsive-spacing-layout-2xl);
+  padding-top: var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+}
+
+.kc-buybox .tertiary-try-once-link .ft-note {
+  margin-top: var(--kc-responsive-spacing-layout-xxs);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+  opacity: 1;
+}
+
+/* ============================================================
+   3. Receipt, CTA, trust row
+   ============================================================ */
+
+.kc-buybox .kc-pricing-summary {
+  margin: 0;
+  padding-top: var(--kc-responsive-spacing-layout-spacious);
+  border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-buybox .kc-reward-row {
+  gap: var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+  opacity: 1;
+}
+
+.kc-buybox .kc-reward-row .info-tip {
+  margin-left: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .kc-reward-row .info-icon {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+}
+
+.kc-buybox .kc-pricing-summary__total-row {
+  margin: var(--kc-responsive-spacing-layout-sm) 0 0;
+  line-height: var(--kc-responsive-body-lg-line-height);
+}
+
+.kc-buybox .kc-pricing-summary__label,
+.kc-buybox .kc-pricing-summary__price {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-pricing-summary__sub-row {
+  margin-bottom: var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+  opacity: 1;
+}
+
+/* CTA: the homepage primary button (snippets/button-styles.liquid,
+   .karmicare__btn-primary) in token form, without the gradient and
+   the sheen animation. The button carries style="margin-bottom: 1rem"
+   inline, hence the !important on the margin. */
+.kc-buybox .product-form__custom-submit.block__animate-button {
+  min-height: var(--kc-responsive-size-button-lg-height);
+  margin: 0 !important;
+  padding: 0 var(--kc-responsive-spacing-layout-comfortable);
+  justify-content: center;
+  background-image: none;
+  background-color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  box-shadow: none;
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-buybox-label-tracking);
+  text-transform: uppercase;
+  transition: opacity .4s ease, transform .2s ease;
+}
+
+.kc-buybox .product-form__custom-submit.block__animate-button::before,
+.kc-buybox .product-form__custom-submit.block__animate-button::after {
+  display: none;
+}
+
+.kc-buybox .product-form__custom-submit.block__animate-button:hover {
+  background-position: 0 0;
+  box-shadow: none;
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.kc-buybox .product-form__custom-submit.block__animate-button:focus-visible {
+  box-shadow: var(--kc-elevation-focus-visible);
+}
+
+.kc-buybox.product__info-container .icon-with-text {
+  margin: var(--kc-responsive-spacing-layout-md) 0 var(--kc-responsive-spacing-layout-2xl);
+  column-gap: var(--kc-responsive-spacing-layout-comfortable);
+}
+
+.kc-buybox .icon-with-text__item svg {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+  margin-bottom: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .icon-with-text .h6 {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-400-weight, 400);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  text-transform: none;
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* ============================================================
+   4. Timeline ("What you'll feel" / "The Karmicare Effect")
+   ============================================================ */
+
+.kc-buybox .kc-treatment-journey-block {
+  margin: 0;
+}
+
+.kc-buybox .kc-journey-container {
+  margin-bottom: var(--kc-responsive-spacing-layout-spacious);
+}
+
+.kc-buybox .kc-journey-container:last-child {
+  margin-bottom: 0;
+}
+
+.kc-buybox .kc-journey-header {
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin-bottom: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .kc-journey-title {
+  margin: 0;
+  align-items: baseline;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-journey-subtitle {
+  margin-left: var(--kc-responsive-spacing-layout-xxs);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  font-weight: var(--font-400-weight, 400);
+  opacity: 1;
+}
+
+.kc-buybox .kc-journey-header .head-rule {
+  background: var(--kc-mapped-border-primary-default);
+}
+
+/* The badge colours come from block settings as an inline style,
+   so they need !important to follow the tokens and Day/Night. */
+.kc-buybox .kc-journey-badge {
+  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
+  background-color: var(--kc-mapped-surface-tertiary-default) !important;
+  color: var(--kc-buybox-text) !important;
+  border-radius: var(--kc-shape-radius-full);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  text-transform: none;
+}
+
+/* Figma: 3px bottom padding per row + 8px gap. Kept as one margin,
+   because the Read more script measures collapsed rows (no padding)
+   to set their max-height, which would clip a padding. */
+.kc-buybox .kc-journey-item {
+  align-items: flex-start;
+  gap: var(--kc-responsive-spacing-layout-sm);
+  margin-bottom: calc(var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-spacing-layout-xxs));
+}
+
+/* Hairline connector from each glyph to the next one */
+.kc-buybox .kc-journey-item::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--kc-responsive-size-icon-sm) / 2);
+  top: calc(var(--kc-responsive-size-icon-sm) + var(--kc-responsive-spacing-layout-xxs));
+  bottom: calc(var(--kc-responsive-spacing-layout-xs) * -1);
+  width: var(--kc-shape-stroke-thin, 1px);
+  background: var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-buybox .kc-journey-item:last-child::after,
+.kc-buybox .kc-journey-item-collapsible:not(.expanded)::after {
+  display: none;
+}
+
+/* Collapsed list (Figma KC/Timeline benefits, State=Collapsed): the first
+   hidden row peeks out for ~32px and fades away under "Read more", so it
+   is clear there is more to read. A mask, not a colour overlay, so it
+   works on any surface in Day and Night. The toggle script writes an
+   inline max-height of 0 on collapse, hence the !important. */
+.kc-buybox .kc-journey-item:not(.kc-journey-item-collapsible) + .kc-journey-item-collapsible:not(.expanded) {
+  max-height: var(--kc-responsive-spacing-layout-xl) !important;
+  opacity: 1;
+  margin-bottom: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(#000 30%, transparent);
+  mask-image: linear-gradient(#000 30%, transparent);
+}
+
+/* Collapsed rows are max-height 0; without this their margin and
+   padding still open a gap above "Read more". */
+.kc-buybox .kc-journey-item-collapsible:not(.expanded) {
+  margin-bottom: 0;
+}
+
+.kc-buybox .kc-journey-item-collapsible.expanded {
+  margin-bottom: calc(var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-spacing-layout-xxs));
+}
+
+.kc-buybox .kc-journey-item-collapsible.expanded:last-child {
+  margin-bottom: 0;
+}
+
+.kc-buybox .kc-journey-item-icon {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-buybox-body-line-height);
+  margin-top: 0;
+}
+
+.kc-buybox .kc-journey-item-icon svg,
+.kc-buybox .kc-journey-icon-img {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+  color: var(--kc-mapped-icon-accent-default);
+}
+
+.kc-buybox .kc-journey-item-content {
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-buybox-text);
+}
+
+/* Text/Small (Strong). The title is a rich-text metafield, so the
+   lead sits in a <strong> that would otherwise render Bold/Black. */
+.kc-buybox .kc-journey-item-title,
+.kc-buybox .kc-journey-item-title strong,
+.kc-buybox .kc-journey-item-title b {
+  font-weight: var(--font-600-weight, 600);
+}
+
+/* Figma (3391:12196) has no lock icons on the Karmicare Effect rows.
+   Hidden, not removed: the markup, the metaobject fields and the
+   Year-plan unlock script stay, so this one rule brings them back. */
+.kc-buybox .kc-journey-item-lock {
+  display: none;
+}
+
+/* "Read more": a KC label button. Without an explicit font it falls
+   back to the browser's button font (Arial 13.3px). */
+.kc-buybox .kc-journey-toggle-container {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .kc-journey-toggle-btn {
+  min-height: var(--kc-responsive-size-control-min-height);
+  padding: 0 var(--kc-responsive-spacing-layout-xs);
+  gap: var(--kc-responsive-spacing-layout-xs);
+  border-radius: var(--kc-shape-radius-sm);
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-buybox-label-sm-size);
+  line-height: var(--kc-buybox-label-sm-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-buybox-label-tracking);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--kc-buybox-text);
+}
+
+/* Arrow right; the toggle script turns it to point up when expanded */
+.kc-buybox .kc-journey-toggle-icon {
+  display: inline-flex;
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+}
+
+.kc-buybox .kc-journey-toggle-icon svg {
+  display: block;
+}
+
+.kc-buybox .kc-journey-disclaimer {
+  margin: var(--kc-responsive-spacing-layout-xs) 0 0;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  font-style: normal;
+  color: var(--kc-mapped-text-default-body);
+  opacity: 1;
+}
+
+/* ============================================================
+   5. Accordions, mission card, info card
+   ============================================================ */
+
+.kc-buybox .kc-faq-block.pdp {
+  margin: var(--kc-responsive-spacing-layout-comfortable) 0 0;
+  padding-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .kc-faq-item:first-child {
+  border-top: 0;
+}
+
+.kc-buybox .kc-faq-item {
+  border-bottom: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+}
+
+.kc-buybox .kc-faq-summary {
+  min-height: var(--kc-responsive-size-button-sm-height);
+  padding: 0;
+  gap: var(--kc-responsive-spacing-layout-md);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  font-weight: var(--font-600-weight, 600);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-faq-summary .kc-faq-glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--kc-responsive-size-button-sm-height);
+  height: var(--kc-responsive-size-button-sm-height);
+  flex-shrink: 0;
+  color: var(--kc-mapped-icon-accent-default);
+}
+
+/* + closed / − open (Figma states 2868:3919), 16px in the 40px target.
+   icon-plus-minus.liquid swaps the two on [open]. */
+.kc-buybox .kc-faq-glyph {
+  font-size: 0;
+}
+
+.kc-buybox .kc-faq-body {
+  padding: var(--kc-responsive-spacing-layout-xs) 0 var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+}
+
+/* Answer text is Text/Small (regular, no tracking) in Figma.
+   product-faq.css sets weight 300 and the 1.25px caption tracking; with
+   the full Proxima family loaded, 300 now renders as Light. */
+.kc-buybox .kc-faq-description {
+  font-weight: var(--font-400-weight, 400);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.kc-buybox .kc-mission-card {
+  margin: var(--kc-responsive-spacing-layout-comfortable) 0 0;
+  padding: var(--kc-responsive-spacing-layout-md);
+}
+
+.kc-buybox .kc-mission-card-desc,
+.kc-buybox .kc-mission-card-author {
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+}
+
+/* "Strengthen your teeth. Strengthen yourself." Figma: Bold 13/16
+   (no token for 13px, so label-lg 14/16 as for the timeline badge). */
+.kc-buybox .kc-mission-card-highlight,
+.kc-buybox .kc-mission-card-highlight strong,
+.kc-buybox .kc-mission-card-highlight b {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+}
+
+/* The info card writes its margin in an #id rule from its block settings */
+.kc-buybox .product-info-card {
+  margin: var(--kc-responsive-spacing-layout-comfortable) 0 0 !important;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+}
+
+/* FAQ rich answers (section_content HTML from the custom.product_faq
+   metaobject), per the all-open Figma state 2868:3919. */
+
+/* "How to use" captions: second line same size and colour as the first */
+.kc-buybox .bf-step .desc {
+  font-size: inherit;
+  color: inherit;
+}
+
+/* "For dentists" spec chips are KC/Chip Tone=Neutral. The is-spec class
+   was used in the content but never defined, so they inherited the
+   wavy-underlined "What's not in it" look. */
+.kc-buybox .acc-tag.is-spec {
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  background: var(--kc-mapped-surface-glass-default);
+  text-decoration: none;
+}
+
+/* Links in the answer text are underlined in Figma (product-faq.css removes it) */
+.kc-buybox .kc-faq-description a {
+  text-decoration: underline;
+  text-underline-offset: var(--kc-responsive-spacing-layout-xxs);
+}
+
+/* FAQ answer typography, per the all-open Figma state (2868:3919).
+   Figma's 13px labels/items have no token; they use label-lg (14px), as
+   elsewhere in the buybox. */
+
+/* Ingredients: "Actives Awake/Asleep", "Foundation of both formulas" Bold;
+   their items Regular in the body colour; INCI toggle Bold 12 uppercase */
+.kc-buybox .bf-diff-card .diff-title,
+.kc-buybox .bf-foundation-label {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .bf-diff-card li,
+.kc-buybox .bf-foundation li {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-400-weight, 400);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-buybox .inci-acc > summary {
+  font-size: var(--kc-buybox-label-sm-size);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-all-letter-spacing);
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+/* "What's not in it" and "For dentists" chips: KC/Chip label, Medium 14/16 */
+.kc-buybox .acc-tag {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-500-weight, 500);
+}
+
+/* Quality & safety items: title Semibold, verifier Regular (body colour),
+   meta and link as small uppercase labels */
+.kc-buybox .bf-evidence-title {
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  font-weight: var(--font-600-weight, 600);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .bf-evidence-description {
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  font-weight: var(--font-400-weight, 400);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-buybox .bf-evidence-meta,
+.kc-buybox .bf-evidence-link {
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-buybox-label-sm-size);
+  line-height: var(--kc-buybox-label-sm-line-height);
+  font-weight: var(--font-500-weight, 500);
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
+}
+
+.kc-buybox .bf-evidence-meta {
+  color: var(--kc-mapped-text-primary-default-subtle);
+}
+
+.kc-buybox .bf-evidence-link {
+  text-transform: uppercase;
+  color: var(--kc-buybox-text);
+}
+
+/* "See every document →", "Request the evidence pack …": Regular 14/24 underlined */
+.kc-buybox .bf-see-all,
+.kc-buybox .rda-link {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  font-weight: var(--font-400-weight, 400);
+  text-decoration: underline;
+}
+
+/* For dentists table: headers Bold 12 uppercase; cells Regular 14 with a
+   Bold formula name */
+.kc-buybox .rda-tbl th {
+  font-size: var(--kc-buybox-label-sm-size);
+  font-weight: var(--font-700-weight, 700);
+  text-transform: uppercase;
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+}
+
+.kc-buybox .rda-tbl td {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  font-weight: var(--font-400-weight, 400);
+}
+
+.kc-buybox .rda-tbl td b,
+.kc-buybox .rda-tbl td strong {
+  font-weight: var(--font-700-weight, 700);
+}
+
+/* Charcoal note: Semibold lead-in, Regular text */
+.kc-buybox .bf-charcoal-text {
+  font-weight: var(--font-400-weight, 400);
+}
+
+.kc-buybox .bf-charcoal-text strong,
+.kc-buybox .bf-charcoal-text b {
+  font-weight: var(--font-600-weight, 600);
+}
