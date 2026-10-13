@@ -356,6 +356,34 @@
 
 {%- endstyle -%}
 
+{%- liquid
+  # Legal links go to the designed pages under /pages. The policies in Settings > Policies
+  # stay for checkout and order emails, and are only the fallback here.
+  assign legal_terms = section.settings.legal_terms_page
+  if legal_terms == blank
+    assign legal_terms = pages['terms-and-conditions-1']
+  endif
+  if legal_terms == blank
+    assign legal_terms = shop.terms_of_service
+  endif
+
+  assign legal_privacy = section.settings.legal_privacy_page
+  if legal_privacy == blank
+    assign legal_privacy = pages['privacy-policy']
+  endif
+  if legal_privacy == blank
+    assign legal_privacy = shop.privacy_policy
+  endif
+
+  assign legal_consumer_rights = section.settings.legal_consumer_rights_page
+  if legal_consumer_rights == blank
+    assign legal_consumer_rights = pages['new-consumer-rights']
+  endif
+  if legal_consumer_rights == blank
+    assign legal_consumer_rights = shop.refund_policy
+  endif
+-%}
+
 <footer class="karmicare-footer">
   <div class="page-width">
     <div class="km-footer-top">
@@ -411,8 +439,8 @@
             {% endform %}
 
             <p class="km-footer-newsletter-note">
-              By subscribing you agree to the <a href="/policies/terms-of-service">Terms of Use</a> &
-              <a href="/policies/privacy-policy">Privacy Policy</a>.
+              By subscribing you agree to the <a href="{{ legal_terms.url }}">Terms of Use</a> &
+              <a href="{{ legal_privacy.url }}">Privacy Policy</a>.
             </p>
           </div>
         {%- endif -%}
@@ -646,12 +674,17 @@
       <div class="km-footer-bottom-right">
         {%- if section.settings.show_policy -%}
           <div class="km-footer-bottom-links">
+            <a href="{{ legal_terms.url }}" class="opacity-xl">{{ section.settings.legal_terms_label | escape }}</a>
+            <span>·</span>
+            <a href="{{ legal_privacy.url }}" class="opacity-xl">{{ section.settings.legal_privacy_label | escape }}</a>
+            <span>·</span>
+            <a href="{{ legal_consumer_rights.url }}" class="opacity-xl">{{ section.settings.legal_consumer_rights_label | escape }}</a>
             {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
+              {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
+              {%- assign policy_url_start = policy.url | slice: 0 -%}
+              {%- if policy_url_start == '#' -%}
+                <span>·</span>
                 <a href="{{ policy.url }}" class="opacity-xl">{{ policy.title }}</a>
-                {%- unless forloop.last -%}
-                  <span>·</span>
-                {%- endunless -%}
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -720,6 +753,42 @@
       "id": "show_policy",
       "default": true,
       "label": "t:sections.footer.settings.show_policy.label"
+    },
+    {
+      "type": "page",
+      "id": "legal_terms_page",
+      "label": "Terms and Conditions page",
+      "info": "Empty uses the page terms-and-conditions-1"
+    },
+    {
+      "type": "text",
+      "id": "legal_terms_label",
+      "label": "Terms and Conditions link text",
+      "default": "Terms and Conditions"
+    },
+    {
+      "type": "page",
+      "id": "legal_privacy_page",
+      "label": "Privacy Policy page",
+      "info": "Empty uses the page privacy-policy"
+    },
+    {
+      "type": "text",
+      "id": "legal_privacy_label",
+      "label": "Privacy Policy link text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "page",
+      "id": "legal_consumer_rights_page",
+      "label": "Consumer Rights page",
+      "info": "Empty uses the page new-consumer-rights"
+    },
+    {
+      "type": "text",
+      "id": "legal_consumer_rights_label",
+      "label": "Consumer Rights link text",
+      "default": "Consumer Rights"
     },
     {
       "type": "checkbox",
