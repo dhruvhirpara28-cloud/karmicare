@@ -120,14 +120,12 @@
           endif
         %}
 
-      {%- comment -%}
-        Token first (docs/design-tokens/PLAN.md Step 4): shape/radius/sm (8px) and
-        shape/radius/md (12px) from assets/kc-tokens.css. The theme-editor value only
-        overrides when it differs from 8 / 12. Secondary (30) and tertiary (50) have no
-        matching Figma radius and stay on their settings.
-      {%- endcomment %}
-        --primary-border-radius: {% if settings.primary-border-radius != blank and settings.primary-border-radius != 8 %}{{ settings.primary-border-radius }}px{% else %}var(--kc-shape-radius-sm){% endif %};
-        --extra-primary-border-radius: {% if settings.extra-primary-border-radius != blank and settings.extra-primary-border-radius != 12 %}{{ settings.extra-primary-border-radius }}px{% else %}var(--kc-shape-radius-md){% endif %};
+      {% if settings.primary-border-radius != blank %}
+        --primary-border-radius: {{ settings.primary-border-radius }}px;
+      {% endif %}
+      {% if settings.extra-primary-border-radius != blank %}
+        --extra-primary-border-radius: {{ settings.extra-primary-border-radius }}px;
+      {% endif %}
       {% if settings.secondary-border-radius != blank %}
         --secondary-border-radius: {{ settings.secondary-border-radius }}px;
       {% endif %}
@@ -168,12 +166,26 @@
         --gap-5xl: 50px;
 
         --kc-font-family-Nunito: 'Nunito', sans-serif;
-        {%- comment -%}
-          The --kc-mapped-* colours, --kc-white-surface-primary-default and the
-          --kc-responsive-* letter-spacings and line height come from assets/kc-tokens.css
-          (generated, docs/design-tokens/generate.py). Names whose Figma value differs from
-          what renders today are held at their old value there.
-        {%- endcomment %}
+        --kc-white-surface-primary-default: #FFFFFF;
+        --kc-mapped-text-primary-default: #FFFBF6;
+        --kc-mapped-bg-primary-default: #2C3A60;
+        --kc-mapped-surface-primary-default: #191F38;
+        --kc-mapped-surface-secondary-default: #212A49;
+        --kc-mapped-surface-accent-default: #7FB9FF;
+        --kc-mapped-border-focus-default: #7FB9FF;
+        --kc-mapped-text-accent-default: #7FB9FF;
+        --kc-mapped-surface-accent-soft:#C4DFFF;
+        --kc-mapped-text-accent-default-on-accent: #0A1628;
+        --kc-mapped-surface-tertiery-default: #DDDBD9;
+
+        --kc-responsive-body-line-height: 20px;
+
+        --kc-responsive-all-letter-spacing: 0.5px;
+        --kc-responsive-Nunito-letter-spacing: 1.7px;
+        --kc-responsive-caption-letter-spacing: 1.25px;
+        --kc-responsive-caption-sm-letter-spacing: 1px;
+        --kc-responsive-h4-letter-spacing-sm: -0.25px;
+        --kc-responsive-h5-letter-spacing: -0.5px;
 
         --font-300-weight:{{ settings.font_300_weight }};
         --font-400-weight:{{ settings.font_400_weight }};
@@ -194,10 +206,6 @@
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
         --extra_small_font_size_all: {{ settings.extra_small_font_size_all | divided_by: 10.0 }}rem;
-        {%- comment -%}
-          Stays here: it follows the theme setting body_small_font_size_all. Figma
-          label-sm is 12px desktop / 10px mobile (docs/design-tokens/baseline/proposals.md P18).
-        {%- endcomment %}
         --kc-responsive-label-sm-text-size: {{ settings.body_small_font_size_all | divided_by: 10.0 }}rem;
         --font-body-size-mobile: {{ settings.body_font_size_mobile | divided_by: 10.0 }}rem;
         --font-body-size-desktop: {{ settings.body_font_size_desktop | divided_by: 10.0 }}rem;
@@ -208,15 +216,19 @@
 
         --font-h1-size-mobile: calc(var(--font-heading-scale) * {{ settings.h1_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h1-size-desktop: calc(var(--font-heading-scale) * {{ settings.h1_font_size_desktop | divided_by: 10.0 }}rem);
+        --kc-responsive-h1-letter-spacing:-1.25px;
 
         --font-h2-size-mobile: calc(var(--font-heading-scale) * {{ settings.h2_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h2-size-desktop: calc(var(--font-heading-scale) * {{ settings.h2_font_size_desktop | divided_by: 10.0 }}rem);
+        --kc-responsive-h2-letter-spacing:-1px;
 
         --font-h3-size-mobile: calc(var(--font-heading-scale) * {{ settings.h3_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h3-size-desktop: calc(var(--font-heading-scale) * {{ settings.h3_font_size_desktop | divided_by: 10.0 }}rem);
+        --kc-responsive-h3-letter-spacing:-1px;
 
         --font-h4-size-mobile: calc(var(--font-heading-scale) * {{ settings.h4_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h4-size-desktop: calc(var(--font-heading-scale) * {{ settings.h4_font_size_desktop | divided_by: 10.0 }}rem);
+        --kc-responsive-h4-letter-spacing:-1px;
 
         --font-h5-size-mobile: calc(var(--font-heading-scale) * {{ settings.h5_font_size_mobile | divided_by: 10.0 }}rem);
         --font-h5-size-desktop: calc(var(--font-heading-scale) * {{ settings.h5_font_size_desktop | divided_by: 10.0 }}rem);

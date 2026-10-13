@@ -3,11 +3,25 @@
    Naming: --kc-<collection>-<figma path, '/' and spaces to '-'>. Opaque colours also ship as -rgb triplets.
    Mapped colours: Day on :root and body.day-mode, Night on body.night-mode (the class assets/day-night-mode.js sets).
    Responsive: mobile values on :root, desktop values from 750px.
-   Held back (4): these names already exist in the theme and keep their current source
+   Held back (18): these names already exist in the theme and keep their current source
    until a later step moves them here on purpose:
+     --kc-mapped-border-focus-default
      --kc-mapped-border-glass-border
+     --kc-mapped-surface-accent-default
      --kc-mapped-surface-glass-default
+     --kc-mapped-surface-primary-default
+     --kc-mapped-surface-secondary-default
+     --kc-mapped-text-accent-default
+     --kc-mapped-text-accent-default-on-accent
+     --kc-mapped-text-primary-default
+     --kc-responsive-caption-letter-spacing
+     --kc-responsive-h1-letter-spacing
+     --kc-responsive-h2-letter-spacing
+     --kc-responsive-h3-letter-spacing
+     --kc-responsive-h4-letter-spacing
+     --kc-responsive-h5-letter-spacing
      --kc-responsive-label-sm-text-size
+     --kc-responsive-spacing-section-sm
      --kc-shape-blur-md
 */
 
@@ -170,8 +184,6 @@ body.day-mode {
   --kc-mapped-surface-inverse-default-hover-rgb: 33,42,73;
   --kc-mapped-surface-disabled-default: #dddbd9;
   --kc-mapped-surface-disabled-default-rgb: 221,219,217;
-  --kc-mapped-surface-accent-default: #7fb9ff;
-  --kc-mapped-surface-accent-default-rgb: 127,185,255;
   --kc-mapped-surface-accent-default-subtle: #c4dfff;
   --kc-mapped-surface-accent-default-subtle-rgb: 196,223,255;
   --kc-mapped-surface-accent-default-hover: #74a8e8;
@@ -192,16 +204,12 @@ body.day-mode {
   --kc-mapped-text-inverse-default-subtle-rgb: 239,236,232;
   --kc-mapped-text-disabled-default: #2c3a60;
   --kc-mapped-text-disabled-default-rgb: 44,58,96;
-  --kc-mapped-text-accent-default: #7fb9ff;
-  --kc-mapped-text-accent-default-rgb: 127,185,255;
   --kc-mapped-text-accent-default-subtle: #7fb9ff;
   --kc-mapped-text-accent-default-subtle-rgb: 127,185,255;
   --kc-mapped-text-accent-default-hover: #74a8e8;
   --kc-mapped-text-accent-default-hover-rgb: 116,168,232;
   --kc-mapped-text-status-title: #191f38;
   --kc-mapped-text-status-title-rgb: 25,31,56;
-  --kc-mapped-text-accent-default-on-accent: #0a1628;
-  --kc-mapped-text-accent-default-on-accent-rgb: 10,22,40;
   --kc-mapped-text-status-body: #212a49;
   --kc-mapped-text-status-body-rgb: 33,42,73;
   --kc-mapped-text-status-muted: #2c3a60;
@@ -217,8 +225,6 @@ body.day-mode {
   --kc-mapped-border-disabled-default-rgb: 221,219,217;
   --kc-mapped-border-disabled-on-color: #2c3a60;
   --kc-mapped-border-disabled-on-color-rgb: 44,58,96;
-  --kc-mapped-border-focus-default: #7fb9ff;
-  --kc-mapped-border-focus-default-rgb: 127,185,255;
   --kc-mapped-border-status-success: #22c55e;
   --kc-mapped-border-status-success-rgb: 34,197,94;
   --kc-mapped-border-status-warning: #f59e0b;
@@ -297,8 +303,6 @@ body.night-mode {
   --kc-mapped-surface-inverse-default-hover-rgb: 239,236,232;
   --kc-mapped-surface-disabled-default: #2c3a60;
   --kc-mapped-surface-disabled-default-rgb: 44,58,96;
-  --kc-mapped-surface-accent-default: #7fb9ff;
-  --kc-mapped-surface-accent-default-rgb: 127,185,255;
   --kc-mapped-surface-accent-default-subtle: #c4dfff;
   --kc-mapped-surface-accent-default-subtle-rgb: 196,223,255;
   --kc-mapped-surface-accent-default-hover: #74a8e8;
@@ -319,16 +323,12 @@ body.night-mode {
   --kc-mapped-text-inverse-default-subtle-rgb: 33,42,73;
   --kc-mapped-text-disabled-default: #dddbd9;
   --kc-mapped-text-disabled-default-rgb: 221,219,217;
-  --kc-mapped-text-accent-default: #7fb9ff;
-  --kc-mapped-text-accent-default-rgb: 127,185,255;
   --kc-mapped-text-accent-default-subtle: #7fb9ff;
   --kc-mapped-text-accent-default-subtle-rgb: 127,185,255;
   --kc-mapped-text-accent-default-hover: #74a8e8;
   --kc-mapped-text-accent-default-hover-rgb: 116,168,232;
   --kc-mapped-text-status-title: #fffbf6;
   --kc-mapped-text-status-title-rgb: 255,251,246;
-  --kc-mapped-text-accent-default-on-accent: #0a1628;
-  --kc-mapped-text-accent-default-on-accent-rgb: 10,22,40;
   --kc-mapped-text-status-body: #efece8;
   --kc-mapped-text-status-body-rgb: 239,236,232;
   --kc-mapped-text-status-muted: #dddbd9;
@@ -344,8 +344,6 @@ body.night-mode {
   --kc-mapped-border-disabled-default-rgb: 44,58,96;
   --kc-mapped-border-disabled-on-color: #dddbd9;
   --kc-mapped-border-disabled-on-color-rgb: 221,219,217;
-  --kc-mapped-border-focus-default: #7fb9ff;
-  --kc-mapped-border-focus-default-rgb: 127,185,255;
   --kc-mapped-border-status-success: #22c55e;
   --kc-mapped-border-status-success-rgb: 34,197,94;
   --kc-mapped-border-status-warning: #f59e0b;
@@ -463,36 +461,4 @@ body.night-mode {
     --kc-responsive-size-grid-columns-9: 1028px;
     --kc-responsive-size-grid-columns-8: 912px;
   }
-}
-
-/* Compatibility: names the theme read before they came from Figma (generate.py
-   HELD_AT_OLD_VALUE and COMPAT_ALIASES). Same value in Day and Night. Held values are
-   proposals for Victor: docs/design-tokens/baseline/proposals.md */
-:root {
-  --kc-mapped-text-primary-default: #FFFBF6; /* held at old value (P1) */
-  --kc-mapped-text-primary-default-rgb: 255,251,246; /* the held value as a triplet (P1) */
-  --kc-mapped-surface-primary-default: #191F38; /* held at old value (P2) */
-  --kc-mapped-surface-primary-default-rgb: 25,31,56; /* the held value as a triplet (P2) */
-  --kc-mapped-surface-secondary-default: #212A49; /* held at old value (P3) */
-  --kc-mapped-surface-secondary-default-rgb: 33,42,73; /* the held value as a triplet (P3) */
-  --kc-mapped-surface-tertiery-default: #DDDBD9; /* held at old value (P4) */
-  --kc-mapped-surface-tertiery-default-rgb: 221,219,217; /* the held value as a triplet (P4) */
-  --kc-mapped-bg-primary-default: #2C3A60; /* held at old value (P5) */
-  --kc-mapped-bg-primary-default-rgb: 44,58,96; /* the held value as a triplet (P5) */
-  /* --kc-responsive-spacing-section-sm: not emitted, held at its var() fallback (P6) */
-  --kc-responsive-h1-letter-spacing: -1.25px; /* held at old value (P7) */
-  --kc-responsive-h2-letter-spacing: -1px; /* held at old value (P8) */
-  --kc-responsive-h3-letter-spacing: -1px; /* held at old value (P9) */
-  --kc-responsive-h4-letter-spacing: -1px; /* held at old value (P10) */
-  --kc-responsive-h5-letter-spacing: -0.5px; /* held at old value (P11) */
-  --kc-responsive-caption-letter-spacing: 1.25px; /* held at old value (P12) */
-  --kc-responsive-Nunito-letter-spacing: 1.7px; /* held at old value (P13) */
-  --kc-responsive-h4-letter-spacing-sm: -0.25px; /* held at old value (P14) */
-  --kc-responsive-caption-sm-letter-spacing: 1px; /* held at old value (P15) */
-  --kc-responsive-all-letter-spacing: 0.5px; /* held at old value (P16) */
-  --kc-responsive-body-line-height: 20px; /* held at old value (P17) */
-  --kc-mapped-surface-accent-soft: var(--kc-mapped-surface-accent-default-subtle);
-  --kc-mapped-surface-accent-soft-rgb: var(--kc-mapped-surface-accent-default-subtle-rgb);
-  --kc-white-surface-primary-default: var(--kc-brand-fixed-white);
-  --kc-white-surface-primary-default-rgb: var(--kc-brand-fixed-white-rgb);
 }
