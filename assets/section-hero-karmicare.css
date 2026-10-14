@@ -9,6 +9,7 @@
 }
 
 .hero-karmicare__container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,6 +90,7 @@ body.day-mode .hero-karmicare__btn-2 {
 /* Desktop rhythm per the Figma homepage: 24px between heading, text and
    buttons, 16px between the two buttons */
 @media screen and (min-width: 990px) {
+
   .hero-karmicare__heading-wrapper,
   .hero-karmicare__text-wrapper {
     margin-bottom: 2.4rem;
@@ -209,4 +211,124 @@ body.night-mode .kc-hero-status-day {
 
 body.night-mode .kc-hero-status-night {
   display: inline;
+}
+
+/* ── Health Professionals Testimonial Badge ── */
+.hero-karmicare__badge-wrapper {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.4rem 0 0 0;
+  width: 100%;
+}
+
+.hero-karmicare__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  border-radius: var(--kc-shape-radius-md, 12px);
+  transition: opacity 0.25s ease, color 0.3s ease, background-color 0.3s ease;
+  max-width: 100%;
+}
+
+a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
+  transform: translateX(4px);
+}
+
+.hero-karmicare__badge-avatar-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-karmicare__badge-avatar {
+  width: 56px;
+  height: 72px;
+  border-radius: var(--kc-shape-radius-md);
+  object-fit: cover;
+  display: block;
+}
+
+.hero-karmicare__badge-avatar--placeholder {
+  background: var(--kc-brand-original-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 72px;
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.hero-karmicare__badge-avatar--placeholder svg {
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
+}
+
+.hero-karmicare__badge-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.hero-karmicare__badge-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-karmicare__badge-star {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.hero-karmicare__badge-rating-text {
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero-karmicare__badge-heading {
+  font-weight: var(--font-600-weight);
+}
+
+.hero-karmicare__badge-arrow {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  stroke: currentColor;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+/* Tablet & Desktop Layout */
+@media screen and (min-width: 990px) {
+  .hero-karmicare__badge-wrapper {
+    position: absolute;
+    left: var(--page-gutter, 3.2rem);
+    bottom: 0.8rem;
+    width: auto;
+    margin: 0;
+    justify-content: flex-start;
+  }
+
+  .hero-karmicare__badge-heading-wrap .hero-karmicare__badge-heading {
+    display: flow;
+    max-width: 170px;
+  }
+
+  .hero-karmicare__badge-rating-text {
+    font-size: 1.4rem;
+  }
 }
