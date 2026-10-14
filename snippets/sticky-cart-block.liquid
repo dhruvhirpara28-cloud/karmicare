@@ -552,10 +552,24 @@
     window.addEventListener('resize', syncPosition);
     window.addEventListener('scroll', syncPosition, { passive: true });
 
+    /* The bar is fixed over the bottom of the page. While it shows, --sticky-cta-height holds its
+       real height and the footer adds that much bottom padding, so nothing in the footer sits under it.
+       The cookie preferences panel (assets/kc-cookie-preferences.css) sits that much higher too. */
+    function reservePageEnd() {
+      if (SC_BAR.classList.contains('is-visible')) {
+        var height = Math.ceil(SC_BAR.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--sticky-cta-height', height + 'px');
+      } else {
+        document.documentElement.style.removeProperty('--sticky-cta-height');
+      }
+    }
+
     function initScrollVisibility() {
+      if (window.ResizeObserver) new ResizeObserver(reservePageEnd).observe(SC_BAR);
       var buyBtn = document.querySelector('.product-form__submit');
       if (!buyBtn) {
         SC_BAR.classList.add('is-visible');
+        reservePageEnd();
         return;
       }
       var obs = new IntersectionObserver(
@@ -563,6 +577,7 @@
           var isVisible = !entries[0].isIntersecting;
           SC_BAR.classList.toggle('is-visible', isVisible);
           document.body.classList.toggle('has-sticky-cta', isVisible);
+          reservePageEnd();
         },
         { threshold: 0.1 }
       );

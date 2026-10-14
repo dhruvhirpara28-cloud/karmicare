@@ -696,13 +696,6 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   font-weight: var(--font-600-weight, 600);
 }
 
-/* Figma (3391:12196) has no lock icons on the Karmicare Effect rows.
-   Hidden, not removed: the markup, the metaobject fields and the
-   Year-plan unlock script stay, so this one rule brings them back. */
-.kc-buybox .kc-journey-item-lock {
-  display: none;
-}
-
 /* "Read more": a KC label button. Without an explicit font it falls
    back to the browser's button font (Arial 13.3px). */
 .kc-buybox .kc-journey-toggle-container {
@@ -802,25 +795,12 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
 }
 
+/* Mission card: 24 / 32 (xl) above and below, so it keeps clear of the
+   rule over the accordions and of the mobile professionals block's top
+   rule. No inset, so it lines up with the accordion text. Its type and
+   layout live in mission-card.css. */
 .kc-buybox .kc-mission-card {
-  margin: var(--kc-responsive-spacing-layout-comfortable) 0 0;
-  padding: var(--kc-responsive-spacing-layout-md);
-}
-
-.kc-buybox .kc-mission-card-desc,
-.kc-buybox .kc-mission-card-author {
-  font-size: var(--kc-buybox-body-size);
-  line-height: var(--kc-buybox-body-line-height);
-}
-
-/* "Strengthen your teeth. Strengthen yourself." Figma: Bold 13/16
-   (no token for 13px, so label-lg 14/16 as for the timeline badge). */
-.kc-buybox .kc-mission-card-highlight,
-.kc-buybox .kc-mission-card-highlight strong,
-.kc-buybox .kc-mission-card-highlight b {
-  font-size: var(--kc-responsive-label-lg-text-size);
-  line-height: var(--kc-responsive-label-lg-line-height);
-  font-weight: var(--font-700-weight, 700);
+  margin: var(--kc-responsive-spacing-layout-xl) 0;
 }
 
 /* The info card writes its margin in an #id rule from its block settings */

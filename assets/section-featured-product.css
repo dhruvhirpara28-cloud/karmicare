@@ -63,10 +63,6 @@
     padding: 0 5rem 0 0;
   }
 
-  .featured-product:not(.product--no-media)>.product__info-wrapper {
-    padding: 0 7rem;
-  }
-
   .background-secondary .featured-product {
     padding: 6rem 7rem;
     position: relative;
@@ -74,24 +70,365 @@
   }
 }
 
-/* Custom Welcome Kit Styles for Featured Product */
-.loop-featured-subscription-wrapper {
-  margin-top: 15px;
+/* ── KC end CTA: "Your welcome kit includes" (Figma 3391:12844 PDP, 2642:2252 homepage,
+   2766:10665 mobile). Picture or hero animation left, ritual offer right; one restyle for
+   every instance. Differences between the frames come from section settings:
+   benefits_layout, show_hero_animation. ── */
+
+/* Layout: 701.79 px picture, 80 px gap, 564 px offer at 1440 */
+.featured-product.grid {
+  row-gap: 32px;
+  margin-bottom: 0;
 }
 
-.loop-featured-welcome-title {
+.featured-product > .grid__item {
+  padding: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .featured-product.grid {
+    flex-wrap: nowrap;
+    align-items: center;
+    column-gap: var(--kc-responsive-spacing-layout-xl);
+  }
+
+  .featured-product.grid > .product__media-wrapper,
+  .featured-product.grid > .product__info-wrapper {
+    flex: 1 1 0;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .featured-product.grid {
+    /* spacing/section/sm (80 px) is not emitted as a token yet (proposal P6) */
+    column-gap: 80px;
+  }
+
+  .featured-product.grid > .product__media-wrapper {
+    flex: 0 1 701.79px;
+  }
+
+  .featured-product.grid:not(.product--no-media) > .product__info-wrapper {
+    flex: 0 0 564px;
+    padding: 0;
+  }
+}
+
+/* Picture: the product still in the Figma box (522:445 desktop, 353:320 mobile), framed so
+   the kit fills it as the Figma still does. The holder is painted unless "Remove background
+   from first media" is on. */
+.featured-product .product__media-wrapper .product-media-container .media {
+  padding-top: calc(320 / 353 * 100%);
+}
+
+@media screen and (min-width: 750px) {
+  .featured-product .product__media-wrapper .product-media-container .media {
+    padding-top: calc(445 / 522 * 100%);
+  }
+}
+
+/* The still is 1080 × 960 with the kit centred at 49.8 % / 41.3 % */
+.featured-product .product__media-wrapper .product-media-container .media > img {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: 118%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 1080 / 960;
+  object-fit: contain !important;
+  transform: translate(-49.8%, -41.3%);
+}
+
+/* Hero animation (show_hero_animation): the kit fills 95 % of the media column width.
+   The box is the kit's motion range in the 1080 × 960 frame (every frame of both videos,
+   alpha > 8, shadows included): x 97-975, y 56-840. The poster, video and animated-WebP
+   fallback share the frame. Centre them with 5 % breathing room and let soft shadows
+   extend beyond the measured motion range. */
+.section-featured-product {
+  overflow-x: clip;
+}
+
+.featured-product__hero {
+  position: relative;
+  aspect-ratio: 878 / 784;
+  overflow: visible;
+}
+
+.featured-product__hero .kc-hero-animation {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform: scale(0.95);
+  transform-origin: center;
+}
+
+.featured-product__hero .kc-hero-animation__mode img,
+.featured-product__hero .kc-hero-animation__mode video {
+  inset: auto;
+  top: calc(-56 / 784 * 100%);
+  left: calc(-97 / 878 * 100%);
+  width: calc(1080 / 878 * 100%);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 1080 / 960;
+}
+
+/* Offer column (KC/Ritual offer) */
+.featured-product .product__info-container > * {
+  margin: 0;
+}
+
+.featured-product .product__title {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xl);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-h2-text-size);
+  line-height: var(--kc-responsive-h2-line-height);
+  font-weight: var(--font-500-weight, 500);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.featured-product .loop-featured-subscription-wrapper {
   margin-top: 0;
 }
 
-.loop-featured-wk-item-header {
+.kc-custom-box {
   display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-lg);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  font-weight: var(--font-500-weight, 500);
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* base.css resets p, span and li to line-height: normal; :where keeps this below the classes */
+:where(.kc-custom-box) span {
+  line-height: inherit;
+}
+
+.kc-custom-row {
+  display: flex;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-xs);
 }
 
-.loop-featured-wk-item-subtitle {
-  margin-bottom: 10px;
+.kc-custom-col-left,
+.kc-custom-col-right {
+  display: flex;
+  flex-direction: column;
 }
 
+.kc-custom-col-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.kc-custom-col-right {
+  flex: 0 0 auto;
+  align-items: flex-end;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.kc-custom-box strong {
+  font-weight: var(--font-600-weight, 600);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* Plan line: title and price over per brushing and interval */
+.kc-custom-title {
+  font-weight: var(--font-600-weight, 600);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-custom-per-brushing,
+.kc-custom-interval {
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  font-weight: var(--font-400-weight, 400);
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* Welcome kit list between hairlines */
+.kc-custom-welcome-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  padding: var(--kc-responsive-spacing-layout-md) 0;
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-custom-welcome-items .kc-custom-row {
+  align-items: center;
+}
+
+.kc-custom-welcome-items .kc-custom-col-left {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xxs);
+}
+
+.kc-custom-welcome-items .kc-custom-col-right {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-custom-welcome-items .check-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--kc-mapped-icon-accent-default);
+}
+
+.kc-custom-welcome-items .check-icon svg {
+  width: 13px;
+  height: auto;
+}
+
+.kc-custom-welcome-items del {
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* Care Credit: title and rate 24 px apart, the € amount at the right at every width
+   (brand rule: Care Credit in €) */
+.kc-custom-care-credits .kc-custom-col-left {
+  flex-direction: row;
+  gap: var(--kc-responsive-spacing-layout-lg);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-custom-care-credits .kc-custom-col-left > span {
+  white-space: nowrap;
+}
+
+.kc-custom-care-credits .kc-custom-col-right,
+.kc-custom-care-credits .kc-custom-col-right strong {
+  font-weight: var(--font-500-weight, 500);
+}
+
+/* CTA: KC/Button primary, large (as the buybox CTA in kc-buybox.css). The button carries
+   style="margin-bottom: 1rem" inline, hence the !important on the margin. */
+.featured-product .product-form {
+  margin: var(--kc-responsive-spacing-layout-lg) 0 0;
+}
+
+.featured-product .product-form__buttons {
+  max-width: none;
+}
+
+.featured-product .product-form__custom-submit.block__animate-button {
+  min-height: var(--kc-responsive-size-button-lg-height);
+  margin: 0 !important;
+  padding: 0 var(--kc-responsive-spacing-layout-comfortable);
+  justify-content: center;
+  background-image: none;
+  background-color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  box-shadow: none;
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  transition: opacity .4s ease, transform .2s ease;
+}
+
+.featured-product .product-form__custom-submit.block__animate-button::before,
+.featured-product .product-form__custom-submit.block__animate-button::after {
+  display: none;
+}
+
+.featured-product .product-form__custom-submit.block__animate-button:hover {
+  background-position: 0 0;
+  box-shadow: none;
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.featured-product .product-form__custom-submit.block__animate-button:focus-visible {
+  box-shadow: var(--kc-elevation-focus-visible);
+}
+
+/* Benefits under the CTA (Icon with text block): three columns with the icon above the
+   label (PDP, and every instance below 750 px), or one centred row (benefits_layout: inline) */
+.featured-product .icon-with-text {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin: var(--kc-responsive-spacing-layout-lg) 0 0;
+}
+
+.featured-product .icon-with-text .icon-with-text__item {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  width: auto;
+  margin: 0;
+}
+
+.featured-product .icon-with-text .icon-with-text__item svg,
+.featured-product .icon-with-text .icon-with-text__item img,
+.featured-product .icon-with-text .icon-with-text__item .svg-wrapper {
+  flex: 0 0 auto;
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  color: var(--kc-mapped-icon-primary-default-subtle);
+}
+
+.featured-product .icon-with-text .h6 {
+  margin: 0;
+  padding: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-400-weight, 400);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  text-transform: none;
+  text-align: center;
+  color: var(--kc-mapped-text-default-body);
+}
+
+@media screen and (min-width: 750px) {
+  .featured-product--benefits-inline .icon-with-text {
+    display: flex;
+    justify-content: center;
+    column-gap: var(--kc-responsive-spacing-layout-lg);
+  }
+
+  .featured-product--benefits-inline .icon-with-text .icon-with-text__item {
+    flex-direction: row;
+  }
+
+  .featured-product--benefits-inline .icon-with-text .h6 {
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+    text-align: left;
+    white-space: nowrap;
+  }
+}
+
+/* Welcome kit list when every Loop plan shows (only_first_subscription off) */
 .wk-contents-list {
   list-style-type: none;
   padding: 0;
@@ -109,42 +446,4 @@
   text-decoration: line-through;
   margin-left: auto;
   margin-right: 10px;
-}
-
-.loop-featured-care-credits {
-  margin-bottom: 15px;
-}
-
-.loop-featured-guarantees {
-  display: flex;
-  justify-content: space-between;
-}
-
-.kc-custom-row,
-.kc-custom-welcome-items {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-sm);
-}
-
-.kc-custom-welcome-items {
-  flex-direction: column;
-  align-items: normal;
-  gap: var(--gap-sm);
-  font-weight: var(--font-500-weight);
-  border-top: 1px solid rgba(var(--color-foreground), 0.2);
-  border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
-  margin: 20px 0;
-  padding: 16px 0;
-}
-
-.kc-custom-product-info .kc-custom-col-left,
-.kc-custom-product-info .kc-custom-interval {
-  margin-top: 4px;
-  display: block;
-}
-
-.product__info-wrapper .kc-custom-col-left span.check-icon {
-  margin-right: 5px;
 }

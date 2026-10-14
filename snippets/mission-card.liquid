@@ -1,3 +1,20 @@
+{%- comment -%}
+  Mission card: a signed note from the founder, rendered as a buybox block
+  by sections/main-product.liquid. Copy comes from the product metafield
+  custom.mission_card (title, highlight_text, description, author_name,
+  author_designation). The highlight is printed one sentence per line, then
+  the description, signed on the next line. Styles:
+  assets/mission-card.css; the block's margin sits with the other buybox
+  blocks in assets/kc-buybox.css.
+
+  Portrait: the theme assets kc-founder-portrait-{160,240,320,480}.webp,
+  made from the original in the KC Brand Design Library (Figma
+  gcWcgYxS1nmheciKYOjOGx, node 3995:10364, 2734 x 4096). The metafield's
+  own image is only 112 x 168, so it is no longer shown; its alt text is
+  still used when set. The portrait keeps 2:3 at the text's height, up to
+  120px wide, and up to ~140px of photo is drawn when the sides are
+  trimmed on narrow phones, so sizes asks for 140px.
+{%- endcomment -%}
 {%- liquid
   assign mission_card = product.metafields.custom.mission_card.value
 -%}
@@ -6,72 +23,88 @@
   {{ 'mission-card.css' | asset_url | stylesheet_tag }}
 
   <div class="kc-mission-card">
-    <div class="kc-mission-card-inner">
-      {%- if mission_card.image != blank -%}
-        <div class="kc-mission-card-avatar-wrapper">
-          {{ mission_card.image | image_url: width: 120 | image_tag: class: 'kc-mission-card-avatar', loading: 'lazy' }}
-        </div>
+    <div class="kc-mission-card-media">
+      <img
+        class="kc-mission-card-portrait"
+        src="{{ 'kc-founder-portrait-320.webp' | asset_url }}"
+        srcset="
+          {{ 'kc-founder-portrait-160.webp' | asset_url }} 160w,
+          {{ 'kc-founder-portrait-240.webp' | asset_url }} 240w,
+          {{ 'kc-founder-portrait-320.webp' | asset_url }} 320w,
+          {{ 'kc-founder-portrait-480.webp' | asset_url }} 480w
+        "
+        sizes="140px"
+        width="320"
+        height="480"
+        alt="{{ mission_card.image.alt | escape }}"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+
+    <div class="kc-mission-card-body">
+      {%- if mission_card.title != blank -%}
+        <p class="kc-mission-card-label">{{ mission_card.title }}</p>
       {%- endif -%}
 
-      <div class="kc-mission-card-content">
-        {%- if mission_card.title != blank -%}
-          <span class="kc-mission-card-label body-gl-nunito-xsm">{{ mission_card.title }}</span>
-        {%- endif -%}
+      {%- if mission_card.highlight_text != blank -%}
+        {%- assign motto_lines = mission_card.highlight_text | metafield_text | split: '. ' -%}
+        <blockquote class="kc-mission-card-quote">
+          <p class="kc-mission-card-motto">
+            {%- for line in motto_lines -%}
+              <span class="kc-mission-card-motto-line">
+                {{- line | strip | escape }}{% unless forloop.last %}.{% endunless -%}
+              </span>
+              {%- unless forloop.last -%}{{ ' ' }}{%- endunless -%}
+            {%- endfor -%}
+          </p>
+        </blockquote>
+      {%- endif -%}
 
-        {%- if mission_card.description != blank -%}
-          <div class="kc-mission-card-desc">
-            {{ mission_card.description | metafield_tag }}
-          </div>
-        {%- endif -%}
+      {%- liquid
+        assign has_desc = false
+        if mission_card.description != blank
+          assign has_desc = true
+        endif
+        assign has_signature = false
+        if mission_card.author_name != blank or mission_card.author_designation != blank
+          assign has_signature = true
+        endif
+      -%}
+      {%- if has_desc or has_signature -%}
+        <div class="kc-mission-card-text">
+          {%- if has_desc -%}
+            <div class="kc-mission-card-desc">
+              {{- mission_card.description | metafield_tag -}}
+            </div>
+          {%- endif -%}
+          {%- if has_signature -%}
+            <p class="kc-mission-card-signature">
+              {%- if mission_card.author_name != blank -%}
+                <span class="kc-mission-card-name">{{ mission_card.author_name | metafield_text | escape }}</span>
+              {%- endif -%}
+              {%- if mission_card.author_name != blank and mission_card.author_designation != blank -%}{{ ' ' }}{%- endif -%}
+              {%- if mission_card.author_designation != blank -%}
+                <span class="kc-mission-card-role">{{ mission_card.author_designation | metafield_text | escape }}</span>
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  {{ 'mission-card.css' | asset_url | stylesheet_tag }}
 
-        {%- if mission_card.highlight_text != blank -%}
-          <div class="kc-mission-card-highlight">
-            {{ mission_card.highlight_text | metafield_tag }}
-          </div>
-        {%- endif -%}
-
-        {%- if mission_card.author_name != blank or mission_card.author_designation != blank -%}
-          <div class="kc-mission-card-author">
-            {%- if mission_card.author_name != blank -%}
-              <span class="kc-mission-card-author-name">{{ mission_card.author_name | metafield_tag }}</span>
-            {%- endif -%}
-            {%- if mission_card.author_designation != blank -%}
-              <span class="kc-mission-card-author-desig">{{ mission_card.author_designation | metafield_tag }}</span>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
+  <div class="kc-mission-card kc-mission-card--placeholder">
+    <div class="kc-mission-card-body">
+      <p class="kc-mission-card-label">Our mission (placeholder)</p>
+      <div class="kc-mission-card-desc">
+        <p>
+          This is a preview. To customize, please populate the <strong>Mission Card</strong> metafield
+          (<code>custom.mission_card</code>) for this product in your Shopify Admin.
+        </p>
       </div>
     </div>
   </div>
-  {%- if request.design_mode -%}
-    {{ 'mission-card.css' | asset_url | stylesheet_tag }}
-    <div class="kc-mission-card" style="opacity: 0.6; border: 1px dashed var(--kc-mapped-surface-accent-default);">
-      <div class="kc-mission-card-inner">
-        <div
-          class="kc-mission-card-avatar-wrapper"
-          style="background: #2b2b2b; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--kc-mapped-surface-accent-default); width: 56px; height: 56px; border-radius: 50%;"
-        >
-          👤
-        </div>
-        <div class="kc-mission-card-content">
-          <span class="kc-mission-card-label">OUR MISSION (Placeholder)</span>
-          <div class="kc-mission-card-desc">
-            <p>
-              This is a preview. To customize, please populate the <strong>Mission Card</strong> metafield (<code
-                >custom.mission_card</code
-              >) for this product in your Shopify Admin.
-            </p>
-          </div>
-          <div class="kc-mission-card-highlight">
-            <p>Strengthen your teeth. Strengthen yourself.</p>
-          </div>
-          <div class="kc-mission-card-author">
-            <span class="kc-mission-card-author-prefix">— </span>
-            <span class="kc-mission-card-author-name">Victor</span>,
-            <span class="kc-mission-card-author-desig">founder</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  {%- endif -%}
 {%- endif -%}

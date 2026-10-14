@@ -798,6 +798,13 @@ class SliderComponent extends HTMLElement {
 
     if (this.enableSliderLooping) return;
 
+    if (this.hasAttribute('data-media-navigation')) {
+      const items = Array.from(this.querySelectorAll('[data-target]')).filter((item) => item.clientWidth > 0);
+      this.prevButton.disabled = items.length < 2;
+      this.nextButton.disabled = items.length < 2;
+      return;
+    }
+
     const isFirstVisible = this.isSlideVisible(this.sliderItemsToShow[0]);
     const isScrollAtStart = (this.isVertical ? this.slider.scrollTop === 0 : this.slider.scrollLeft === 0);
     if (isFirstVisible && isScrollAtStart) {
@@ -826,6 +833,15 @@ class SliderComponent extends HTMLElement {
 
   onButtonClick(event) {
     event.preventDefault();
+    if (this.hasAttribute('data-media-navigation')) {
+      const items = Array.from(this.querySelectorAll('[data-target]')).filter((item) => item.clientWidth > 0);
+      if (items.length < 2) return;
+      const current = Math.max(0, items.findIndex((item) => item.querySelector('[aria-current="true"]')));
+      const direction = event.currentTarget.name === 'next' ? 1 : -1;
+      const next = items[(current + direction + items.length) % items.length];
+      if (next) this.closest('media-gallery')?.setActiveMedia(next.dataset.target, false);
+      return;
+    }
     const step = event.currentTarget.dataset.step || 1;
     this.isVertical = window.getComputedStyle(this.slider).flexDirection === 'column';
     if (this.isVertical) {

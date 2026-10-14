@@ -54,7 +54,10 @@ if (!customElements.get('media-gallery')) {
         this.preventStickyHeader();
         window.setTimeout(() => {
           if (!this.mql.matches || this.elements.thumbnails) {
-            activeMedia.parentElement.scrollTo({ left: activeMedia.offsetLeft });
+            activeMedia.parentElement.scrollTo({
+              left: activeMedia.offsetLeft,
+              behavior: this.elements.thumbnails?.hasAttribute('data-media-navigation') ? 'instant' : 'auto',
+            });
           }
           const activeMediaRect = activeMedia.getBoundingClientRect();
           // Don't scroll if the image is already in view
@@ -77,6 +80,13 @@ if (!customElements.get('media-gallery')) {
           .querySelectorAll('button')
           .forEach((element) => element.removeAttribute('aria-current'));
         thumbnail.querySelector('button').setAttribute('aria-current', true);
+        if (this.elements.thumbnails.hasAttribute('data-media-navigation')) {
+          this.elements.thumbnails.update();
+          if (!this.elements.thumbnails.isSlideVisible(thumbnail, 10)) {
+            this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft, behavior: 'instant' });
+          }
+          return;
+        }
         if (this.elements.thumbnails.isSlideVisible(thumbnail, 10)) return;
 
         const isVertical = window.getComputedStyle(this.elements.thumbnails.slider).flexDirection === 'column';

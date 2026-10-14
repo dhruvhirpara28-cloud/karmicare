@@ -16,11 +16,16 @@
       const variantId = variantIdInput ? variantIdInput.value : null;
       if (!variantId) throw new Error('No variant ID found');
 
+      // A fixed offer (the end CTA) passes the plan it shows and buys exactly that plan,
+      // whatever the page's Loop widget has selected.
+      const fixedSellingPlanId = options && options.sellingPlanId ? String(options.sellingPlanId) : null;
+
       const sellingPlanInput = form.querySelector('[name="selling_plan"]') || document.querySelector('input[name="selling_plan"]');
-      let sellingPlanId = sellingPlanInput ? sellingPlanInput.value : null;
+      let sellingPlanId = fixedSellingPlanId || (sellingPlanInput ? sellingPlanInput.value : null);
 
       // Check Loop selection: if One-Time purchase is selected, ensure sellingPlanId is cleared
-      const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked') ||
+      const selectedLoopOption = fixedSellingPlanId ? null :
+                                 document.querySelector('input[name="loop_purchase_option"]:checked') ||
                                  document.querySelector('#loop-selling-plan-fieldset input[type="radio"]:checked');
       const isLoopOneTime = selectedLoopOption && (
         selectedLoopOption.dataset.id === 'loop-one-time-purchase' ||
@@ -63,7 +68,8 @@
       const addPayload = { items: items };
 
       if (isSubscription) {
-        const subTitle = selectedLoopOption?.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
+        const subTitle = fixedSellingPlanId ? (options.subscriptionName || '') :
+          selectedLoopOption?.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
           selectedLoopOption?.dataset?.name ||
           form.querySelector('input[name="attributes[Subscription Name]"]')?.value ||
           document.querySelector('input[name="attributes[Subscription Name]"]')?.value ||

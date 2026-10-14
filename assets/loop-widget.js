@@ -3035,7 +3035,6 @@ async function getLoopBundleSpgs(productId) {
         let nonBundleSellingPlanGroupIds = [];
 
         let excludedGroupIds = new Set();
-        let validGroupIds = new Set();
 
         for (const spg of spgs) {
             const isExcludedByWidget = shopifySellingPlanIdsToExcludeOnWidget.includes(
@@ -3050,7 +3049,6 @@ async function getLoopBundleSpgs(productId) {
             if (isExcludedByWidget || isNotInDefaultList) {
                 excludedGroupIds.add(spg.selling_plan_group_id);
             } else {
-                validGroupIds.add(spg.selling_plan_group_id);
                 if (
                     sps.includes(spg.selling_plan_id) &&
                     window.loopProps[productId]?.storeJson?.preferences
