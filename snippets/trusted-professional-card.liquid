@@ -1,13 +1,27 @@
 {%- comment -%}
-  Trusted Professionals card body (image + glass content panel).
+  KC/Professional card, Layout = Mobile (KC | Brand Design Library 3411:28):
+  the portrait is the surface, the credentials holder sits at the bottom.
+  A card with a quote (Testimonial = True) reveals it on hover, focus or tap.
+  Desktop shows the whole quote in the card (Victor, 13 Oct). Mobile caps it
+  at five lines; when the quote does not fit, the eye button ("Long quote")
+  opens the KC/Professional quote panel
+  (assets/trusted-professionals-quote-panel.js shows it only then).
   Shared by the grid/slider and the marquee in sections/trusted-professionals.liquid.
 
   Accepts:
   - block: {Object} The section's card block
+  - panel_id: {String} id of the section's quote panel (dialog)
 {%- endcomment -%}
 <div class="trusted-professionals__card-image">
   {%- if block.settings.image != blank -%}
-    {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+    {{
+      block.settings.image
+      | image_url: width: 900
+      | image_tag:
+        loading: 'lazy',
+        widths: '280, 332, 560, 664, 900',
+        sizes: '(min-width: 750px) 332px, 280px'
+    }}
   {%- else -%}
     {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
   {%- endif -%}
@@ -24,11 +38,25 @@
     </div>
   {%- endif -%}
   <div class="trusted-professionals__card-body">
-    {%- if block.settings.heading != blank -%}
-      <h5>{{ block.settings.heading }}</h5>
-    {%- endif -%}
+    <div class="trusted-professionals__card-name-row">
+      {%- if block.settings.heading != blank -%}
+        <h3 class="trusted-professionals__card-name">{{ block.settings.heading }}</h3>
+      {%- endif -%}
+      {%- if block.settings.hover_text != blank -%}
+        <button
+          type="button"
+          class="trusted-professionals__card-eye"
+          aria-haspopup="dialog"
+          aria-controls="{{ panel_id }}"
+          aria-expanded="false"
+          aria-label="{{ 'blogs.article.read_more_title' | t: title: block.settings.heading | escape }}"
+        >
+          {{ 'kc-icon-eye.svg' | inline_asset_content }}
+        </button>
+      {%- endif -%}
+    </div>
     {%- if block.settings.text != blank -%}
-      <p>{{ block.settings.text }}</p>
+      <p class="trusted-professionals__card-title">{{ block.settings.text }}</p>
     {%- endif -%}
   </div>
 </div>

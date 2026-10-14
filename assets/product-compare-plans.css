@@ -368,8 +368,8 @@
   justify-content: center;
 }
 
-.pc-lcell:nth-last-child(2),
-.pc-cell:nth-last-child(2) {
+.plan-compare:not(.plan-compare--kc) .pc-lcell:nth-last-child(2),
+.plan-compare:not(.plan-compare--kc) .pc-cell:nth-last-child(2) {
   border-bottom: none !important;
 }
 
@@ -532,5 +532,444 @@ body.night-mode .pc-kit-poptitle {
   .info-tip-popover::after,
   .pc-kit-pop::after {
     display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   KC DESIGN (section setting "Design" = KC tokens, .plan-compare--kc)
+   Figma: PDP band 3391:12660 (Night); mobile rule from the homepage mobile frame
+   2766:10305. Colours, type and spacing read assets/kc-tokens.css; a px literal is
+   a literal in Figma too. The classic rules above stay for templates that keep the
+   default ("Classic", templates/product.json). Columns fit from 990px; below that
+   the table scrolls sideways at fixed column widths.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.plan-compare--kc {
+  --pc-block-gap: 4rem; /* header -> table -> footnote */
+  --pc-label-col: 17rem;
+  --pc-plan-col: 16rem;
+  --pc-head-height: 9.6rem;
+  --pc-row-height: 6.4rem;
+  --pc-cta-height: 7.2rem;
+  --pc-rule: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+@media screen and (min-width: 750px) {
+  .plan-compare--kc {
+    --pc-block-gap: 8rem;
+    --pc-label-col: 24rem;
+    --pc-plan-col: 22rem;
+    --pc-head-height: 10.4rem;
+    --pc-row-height: 7.2rem;
+    --pc-cta-height: 8.5rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .plan-compare--kc {
+    --pc-label-col: 28.4rem;
+    --pc-plan-col: 28.2rem;
+  }
+}
+
+.plan-compare--kc .page-width {
+  max-width: var(--page-width);
+  padding: 0 var(--page-gutter);
+  gap: var(--pc-block-gap);
+}
+
+/* Header: eyebrow, two-tone heading, deck */
+.plan-compare--kc .pc-head {
+  max-width: 60.4rem;
+  gap: var(--kc-responsive-spacing-layout-lg);
+}
+
+.plan-compare--kc .pc-head .subtitle-item {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+}
+
+.plan-compare--kc .pc-title {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: var(--kc-responsive-h2-text-size);
+  line-height: var(--kc-responsive-h2-line-height);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
+  color: inherit;
+}
+
+/* The span in the heading is the muted second line (base.css dims it with opacity) */
+.plan-compare--kc .pc-head .pc-title span {
+  display: block;
+  opacity: 1;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.plan-compare--kc .pc-sub {
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+}
+
+.plan-compare--kc .pc-sub p,
+.plan-compare--kc .pc-foot p,
+.plan-compare--kc .pc-cell p {
+  margin: 0;
+  line-height: inherit; /* base.css sets p to normal */
+}
+
+/* Table: scroll strip below 990px, centred columns from 990px */
+.plan-compare--kc .pc-table {
+  justify-content: flex-start;
+  width: auto;
+  /* 2rem of the gap above sits inside the strip, so the ribbon is not clipped */
+  margin: calc(var(--kc-responsive-spacing-layout-xl) - 2rem) calc(-1 * var(--page-gutter)) 0;
+  padding: 2rem var(--page-gutter) 2.4rem;
+  overflow-x: auto;
+  scroll-snap-type: none;
+  font-family: var(--kc-font-role-backbone);
+}
+
+.plan-compare--kc .pc-table::before {
+  content: none;
+}
+
+.plan-compare--kc .pc-col,
+.plan-compare--kc .pc-col[data-plan] {
+  flex: 0 0 var(--pc-plan-col);
+  min-width: 0;
+  padding: 0;
+}
+
+.plan-compare--kc .pc-col-label {
+  flex-basis: var(--pc-label-col);
+}
+
+@media screen and (max-width: 749px) {
+  .plan-compare--kc .pc-col-label {
+    position: sticky;
+    inset-inline-start: 0;
+    z-index: 30; /* Keep scrolling columns, including hovered ones, underneath. */
+    background: linear-gradient(180deg, var(--kc-mapped-surface-page), var(--kc-mapped-gradient-section-accent));
+    transition: none;
+  }
+
+  .plan-compare--kc .pc-col-label::before {
+    content: "";
+    position: absolute;
+    inset: -2rem 0 -2.4rem calc(-1 * var(--page-gutter));
+    z-index: -1;
+    background: inherit;
+    pointer-events: none;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .plan-compare--kc .pc-table {
+    justify-content: center;
+    margin: var(--kc-responsive-spacing-layout-xl) 0 0;
+    padding: 0;
+    overflow-x: visible;
+  }
+
+  .plan-compare--kc .pc-col,
+  .plan-compare--kc .pc-col[data-plan] {
+    flex-shrink: 1;
+  }
+}
+
+/* Header cells */
+.plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-hcell {
+  height: var(--pc-head-height);
+  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-sm);
+  justify-content: center;
+}
+
+.plan-compare--kc .pc-lhead {
+  align-items: flex-start;
+}
+
+.plan-compare--kc .pc-lhead-tag {
+  font-weight: 600;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.plan-compare--kc .pc-hcell {
+  text-align: center;
+}
+
+.plan-compare--kc .pc-name {
+  margin: 0;
+  font-weight: 600;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+}
+
+.plan-compare--kc .pc-price {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  color: inherit;
+}
+
+.plan-compare--kc .pc-cycle {
+  margin: 0;
+  opacity: 1;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* Rows. Grid lines: a box with 12px outer corners around the rows; the featured
+   column draws its own outline instead of side rules. */
+.plan-compare--kc .pc-col .pc-lcell,
+.plan-compare--kc .pc-col .pc-cell {
+  height: var(--pc-row-height);
+  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md);
+  border-bottom: var(--pc-rule);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.plan-compare--kc .pc-col .pc-lcell {
+  gap: var(--kc-responsive-spacing-layout-xs);
+  padding-left: var(--kc-responsive-spacing-layout-md);
+  border-left: var(--pc-rule);
+  font-weight: 600;
+}
+
+.plan-compare--kc .pc-col .pc-cell {
+  font-weight: 400;
+}
+
+.plan-compare--kc .pc-col:not(.pc-featured) .pc-cell {
+  border-left: var(--pc-rule);
+}
+
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-cell {
+  border-right: var(--pc-rule);
+}
+
+.plan-compare--kc .pc-lhead + .pc-lcell,
+.plan-compare--kc .pc-hcell + .pc-cell {
+  border-top: var(--pc-rule);
+}
+
+.plan-compare--kc .pc-lhead + .pc-lcell {
+  border-top-left-radius: var(--kc-shape-radius-md);
+}
+
+.plan-compare--kc .pc-lcell:nth-last-child(2) {
+  border-bottom-left-radius: var(--kc-shape-radius-md);
+}
+
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell + .pc-cell {
+  border-top-right-radius: var(--kc-shape-radius-md);
+}
+
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-cell:nth-last-child(2) {
+  border-bottom-right-radius: var(--kc-shape-radius-md);
+}
+
+.plan-compare--kc .pc-no {
+  opacity: 1;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.plan-compare--kc .pc-yes {
+  font-weight: 700;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  color: var(--kc-mapped-text-accent-default);
+}
+
+/* Info icon (16px glyph; the popover keeps its existing style) */
+.plan-compare--kc .info-tip {
+  margin-left: 0;
+}
+
+.plan-compare--kc .pc-tip-end {
+  margin-left: var(--kc-responsive-spacing-layout-xs);
+}
+
+.plan-compare--kc .pc-info-icon {
+  display: block;
+  flex: 0 0 auto;
+  color: var(--kc-mapped-icon-primary-default);
+}
+
+/* Welcome Kit thumbnails: 30px chips overlapping by 9.5px */
+.plan-compare--kc .pc-kit-thumbs {
+  margin-left: var(--kc-responsive-spacing-layout-xs);
+}
+
+.plan-compare--kc .pc-kit-thumbs img {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-left: -0.95rem;
+  padding: 0.4rem;
+  border: 0.1364rem solid var(--kc-mapped-border-primary-default-subtle);
+  border-radius: var(--kc-shape-radius-full);
+  background-color: var(--kc-mapped-surface-page-secondary);
+  box-shadow: 0 0.1364rem var(--kc-shape-blur-xs) 0 rgba(var(--kc-brand-fixed-black-rgb), 0.16);
+  object-fit: contain;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:first-child {
+  margin-left: 0;
+}
+
+/* Featured column */
+.plan-compare--kc .pc-featured {
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-focus-default);
+  border-radius: 1.6rem;
+  background: linear-gradient(180deg, rgba(var(--kc-mapped-border-focus-default-rgb), 0.1) 0%, rgba(var(--kc-mapped-border-focus-default-rgb), 0) 62%);
+  box-shadow: 0 1.8rem 4.4rem 0 rgba(var(--kc-mapped-border-focus-default-rgb), 0.55);
+}
+
+/* Ribbon ("Most Picked") and top tag */
+.plan-compare--kc .pc-ribbon,
+.plan-compare--kc .pc-tag-top {
+  font-weight: 600;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  border-radius: var(--kc-shape-radius-full);
+}
+
+.plan-compare--kc .pc-ribbon {
+  top: -1.5rem;
+  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-sm);
+  background: var(--kc-mapped-surface-accent-default);
+  box-shadow: none;
+  filter: drop-shadow(0 0.6rem 0.8rem rgba(var(--kc-mapped-surface-accent-default-rgb), 0.85));
+  color: var(--kc-mapped-text-accent-default-on-accent);
+}
+
+.plan-compare--kc .pc-tag-top {
+  top: -1.4rem;
+  padding: 0.4rem 0.9rem;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
+  background: var(--kc-mapped-text-inverse-default);
+  color: var(--kc-mapped-surface-accent-default);
+}
+
+/* CTA row: KC/Button primary (featured), secondary, tertiary (first plan) */
+.plan-compare--kc .pc-lcta,
+.plan-compare--kc .pc-ctacell {
+  display: flex;
+  height: var(--pc-cta-height);
+  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-comfortable);
+}
+
+.plan-compare--kc .pc-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  min-height: 4.4rem;
+  padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-comfortable);
+  border: var(--kc-shape-stroke-thin) solid transparent;
+  border-radius: var(--kc-shape-radius-sm);
+  background: transparent;
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 100%; /* long labels wrap inside narrow columns instead of overflowing */
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+  backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.plan-compare--kc .pc-cta--primary {
+  background-color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+}
+
+.plan-compare--kc .pc-cta--primary:hover {
+  background-color: var(--kc-mapped-surface-accent-default-hover);
+  transform: translateY(-1px);
+}
+
+.plan-compare--kc .pc-cta--secondary {
+  border-color: var(--kc-mapped-border-control-default);
+  background-color: var(--kc-mapped-surface-glass-default);
+}
+
+.plan-compare--kc .pc-cta--secondary:hover {
+  border-color: var(--kc-mapped-border-primary-default-hover);
+  transform: translateY(-1px);
+}
+
+/* First plan column (after the labels): tertiary, an underlined label */
+.plan-compare--kc .pc-col:nth-child(2) .pc-cta--secondary {
+  padding-inline: var(--kc-responsive-spacing-layout-xs);
+  border-color: transparent;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.plan-compare--kc .pc-col:nth-child(2) .pc-cta--secondary:hover {
+  opacity: 0.8;
+  transform: none;
+}
+
+.plan-compare--kc .pc-cta:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+@media screen and (min-width: 750px) {
+  .plan-compare--kc .pc-cta--primary,
+  .plan-compare--kc .pc-cta--secondary {
+    min-height: 4.8rem;
+  }
+}
+
+/* Footnote under the table */
+.plan-compare--kc .pc-foot {
+  max-width: 60.8rem;
+  padding: 0;
+  opacity: 1;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.plan-compare--kc .pc-foot strong,
+.plan-compare--kc .pc-foot b {
+  font-weight: 700;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-compare--kc .pc-cta {
+    transition: none;
+  }
+
+  .plan-compare--kc .pc-cta:hover {
+    transform: none;
   }
 }

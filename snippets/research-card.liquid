@@ -1,58 +1,63 @@
 {%- comment -%}
-  Research card body (study content + image with badge).
+  Research card body: KC/Research_card (Figma 2642:2211, component 3374:8313).
   Shared by the grid/slider and the marquee in sections/research-behind-system.liquid.
+  With an image the card is the "Image=Right" variant (desktop 780 wide, picture on
+  the right; mobile picture under the body). Without one it is "Image=None" (380 wide).
+  The caller adds research-card--media on the <li> when block.settings.image is set.
 
   Accepts:
   - block: {Object} The section's card block
 {%- endcomment -%}
 <div class="research-card__content">
-  {%- if block.settings.subheading != blank -%}
-    <span class="research-card__subheading body-gl-nunito-xsm">{{ block.settings.subheading }}</span>
-  {%- endif -%}
-  {%- if block.settings.heading != blank -%}
-    <h3 class="research-card__heading h4">{{ block.settings.heading }}</h3>
-  {%- endif -%}
-  {%- if block.settings.subtext != blank -%}
-    <p class="research-card__subtext kc-caption-text text-xl">{{ block.settings.subtext }}</p>
-  {%- endif -%}
+  <div class="research-card__top">
+    {%- if block.settings.subheading != blank -%}
+      <p class="research-card__subheading">{{ block.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if block.settings.heading != blank -%}
+      <h3 class="research-card__heading">{{ block.settings.heading }}</h3>
+    {%- endif -%}
+    {%- if block.settings.subtext != blank -%}
+      <p class="research-card__subtext">{{ block.settings.subtext }}</p>
+    {%- endif -%}
+  </div>
 
   <div class="research-card__details">
     {%- if block.settings.result_text != blank -%}
-      <div class="research-card__detail-group ">
-        <span class="body-gl-nunito-xsm">{{ block.settings.result_label }}</span>
-        <p class="kc-caption-text">{{ block.settings.result_text }}</p>
+      <div class="research-card__detail-group">
+        <span class="research-card__label">{{ block.settings.result_label }}</span>
+        <p class="research-card__detail">{{ block.settings.result_text }}</p>
       </div>
     {%- endif -%}
     {%- if block.settings.method_text != blank -%}
       <div class="research-card__detail-group">
-        <span class="body-gl-nunito-xsm">{{ block.settings.method_label }}</span>
-        <p class="kc-caption-text">{{ block.settings.method_text }}</p>
+        <span class="research-card__label">{{ block.settings.method_label }}</span>
+        <p class="research-card__detail">{{ block.settings.method_text }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if block.settings.link_label != blank or block.settings.logo != blank -%}
+      <div class="research-card__footer">
+        {%- if block.settings.link_label != blank -%}
+          <a href="{{ block.settings.link_url | default: '#' }}" class="research-card__source">
+            <span class="research-card__source-text">{{ block.settings.link_label }}</span>
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M14 6V2H10M14 2L6.66667 9.33334M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39053C2.64057 4.14048 2.97971 4 3.33333 4H7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {%- endif -%}
+        {%- if block.settings.logo != blank -%}
+          {{ block.settings.logo | image_url: width: 200 | image_tag: loading: 'lazy', class: 'research-card__logo' }}
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>
+</div>
 
-  <div class="research-card__footer">
-    {%- if block.settings.link_label != blank -%}
-      <a href="{{ block.settings.link_url | default: '#' }}" class="">
-        {{ block.settings.link_label }}
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75L2.08333 12.75C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    {%- endif -%}
-    {%- if block.settings.logo != blank -%}
-      {{ block.settings.logo | image_url: width: 200 | image_tag: loading: 'lazy' }}
+{%- if block.settings.image != blank -%}
+  <div class="research-card__image-wrapper">
+    {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 400px, 320px', widths: '400, 640, 800' }}
+    {%- if block.settings.image_badge != blank -%}
+      <span class="research-card__badge">{{ block.settings.image_badge }}</span>
     {%- endif -%}
   </div>
-</div>
-<div class="research-card__image-wrapper">
-  {%- if block.settings.image != blank -%}
-    {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
-  {%- else -%}
-    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-  {%- endif -%}
-
-  {%- if block.settings.image_badge != blank -%}
-    <span class="research-card__badge body-gl-nunito-xsm">{{ block.settings.image_badge }}</span>
-  {%- endif -%}
-</div>
+{%- endif -%}

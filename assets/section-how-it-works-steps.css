@@ -1,194 +1,314 @@
-.kc-how-it-steps .kc-description {
-    margin: 0 auto;
-    max-width: 600px;
+/* section-how-it-works-steps.css
+   Figma: PDP band 3391:12461, card KC/UX/Video ritual step (State = Poster at rest,
+   State = Preview while a clip plays). Mobile rule: homepage mobile frame 2766:10305.
+   Colours, type and spacing read assets/kc-tokens.css; a px literal is a literal in Figma too.
+   Type and spacing tokens switch at 750px. */
+
+.kc-how-it-steps {
+  background: var(--kc-mapped-gradient-section-accent);
+  color: var(--kc-mapped-text-default-heading);
 }
 
-/* Native slider overrides */
+/* header -> steps -> note */
+.kc-how-it-steps .page-width {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-2xl);
+}
+
+/* Header: centred, 680px wide (grid span 6) */
+.kc-how-it-steps .kc-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-lg);
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.kc-how-it-steps .kc-eyebrow {
+  margin: 0;
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+}
+
+.kc-how-it-steps .kc-title {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  color: inherit;
+}
+
+/* Heading/H2 (the template's heading size); other sizes keep the theme scale */
+.kc-how-it-steps .kc-title.h2 {
+  font-size: var(--kc-responsive-h2-text-size);
+  line-height: var(--kc-responsive-h2-line-height);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
+}
+
+.kc-how-it-steps .kc-description {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-how-it-steps .kc-description > * {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Steps: flex row, the column variables come from the section settings */
 .kc-how-it-steps .kc-grid {
-    display: flex;
-    list-style: none;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  display: flex;
+  column-gap: var(--kc-responsive-spacing-grid-gutter);
+  row-gap: var(--kc-responsive-spacing-layout-xl);
+  list-style: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .kc-how-it-steps .kc-grid::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .kc-how-it-steps .kc-grid:not(.slider) {
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
 }
 
 .kc-how-it-steps .kc-step {
-    width: calc((100% - ((var(--cols-mobile) - 1) * 16px)) / var(--cols-mobile));
-    flex-shrink: 0;
+  --kc-step-cols: var(--cols-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-lg);
+  width: calc((100% - ((var(--kc-step-cols) - 1) * var(--kc-responsive-spacing-grid-gutter))) / var(--kc-step-cols));
+  flex-shrink: 0;
 }
 
 @media screen and (max-width: 749px) {
-    .kc-how-it-steps .kc-grid.slider--mobile {
-        flex-wrap: nowrap;
-        overscroll-behavior-x: contain;
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
+  /* Swipe row: bleeds to the screen edge, first card on the page gutter */
+  .kc-how-it-steps .kc-grid.slider--mobile {
+    flex-wrap: nowrap;
+    overscroll-behavior-x: contain;
+    margin: 0 calc(-1 * var(--page-gutter));
+    padding: 0 var(--page-gutter);
+  }
 }
 
 @media screen and (min-width: 750px) {
-    .kc-how-it-steps .kc-step {
-        width: calc((100% - ((var(--cols-tablet) - 1) * 16px)) / var(--cols-tablet));
-    }
+  .kc-how-it-steps .kc-step {
+    --kc-step-cols: var(--cols-tablet);
+  }
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
-    .kc-how-it-steps .kc-grid.slider--tablet {
-        flex-wrap: nowrap;
-        overscroll-behavior-x: contain;
-    }
+  .kc-how-it-steps .kc-grid.slider--tablet {
+    flex-wrap: nowrap;
+    overscroll-behavior-x: contain;
+  }
 }
 
 @media screen and (min-width: 990px) {
-    .kc-how-it-steps .kc-step {
-        width: calc((100% - ((var(--cols-laptop) - 1) * 16px)) / var(--cols-laptop));
-    }
+  .kc-how-it-steps .kc-step {
+    --kc-step-cols: var(--cols-laptop);
+  }
 
-    .kc-how-it-steps .kc-grid.slider--desktop {
-        flex-wrap: nowrap;
-        overscroll-behavior-x: contain;
-    }
+  .kc-how-it-steps .kc-grid.slider--desktop {
+    flex-wrap: nowrap;
+    overscroll-behavior-x: contain;
+  }
 }
 
 @media screen and (min-width: 1200px) {
-    .kc-how-it-steps .kc-step {
-        width: calc((100% - ((var(--cols-desktop) - 1) * 16px)) / var(--cols-desktop));
-    }
+  .kc-how-it-steps .kc-step {
+    --kc-step-cols: var(--cols-desktop);
+  }
 }
 
+/* Media · 4:3 (aspect ratio and corner radius come from the section settings).
+   Before a clip or picture loads, the card surface shows the Figma radial glow
+   (backdrop/blob-1 core / mid / none, not exported to kc-tokens.css, so literal here). */
 .kc-how-it-steps .kc-card {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(50% 50% at 50% 50%, rgba(126, 169, 232, 0.3) 0%, rgba(126, 169, 232, 0.12) 42%, rgba(126, 169, 232, 0) 100%),
+    var(--kc-mapped-surface-page-secondary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.kc-how-it-steps .kc-card[data-type='none'] {
+  cursor: default;
+}
+
+/* Hairline on top of the media, as the Figma stroke */
+.kc-how-it-steps .kc-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.kc-how-it-steps .kc-card:focus-visible {
+  outline: var(--kc-shape-stroke-thick) solid var(--kc-mapped-border-focus-default);
+  outline-offset: calc(-1 * var(--kc-shape-stroke-thick));
+  box-shadow: none;
 }
 
 .kc-how-it-steps .kc-media,
 .kc-how-it-steps .kc-media video,
 .kc-how-it-steps .kc-media iframe,
 .kc-how-it-steps .kc-media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    object-fit: cover;
-    display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  display: block;
 }
 
 .kc-how-it-steps .kc-media iframe {
-    pointer-events: none;
+  pointer-events: none;
 }
 
+/* Step number: Heading/H1, 24px in from the corner (Figma 23px inside the 1px stroke) */
 .kc-how-it-steps .kc-number {
-    position: absolute;
-    top: 23px;
-    left: 23px;
-    z-index: 2;
+  position: absolute;
+  top: var(--kc-responsive-spacing-layout-lg);
+  left: var(--kc-responsive-spacing-layout-lg);
+  z-index: 2;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: var(--kc-responsive-h1-text-size);
+  line-height: var(--kc-responsive-h1-line-height);
+  letter-spacing: var(--kc-responsive-h1-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
 }
 
+/* State = Preview: pause control and caption, only while the clip plays */
 .kc-how-it-steps .kc-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-}
-
-.kc-how-it-steps .kc-play {
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.kc-how-it-steps .kc-play svg {
-    width: 100%;
-    height: 100%;
-    margin-left: 2px;
-    fill: currentColor;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kc-responsive-spacing-layout-sm);
+  padding: var(--kc-responsive-spacing-layout-lg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
 .kc-how-it-steps .kc-card.is-playing .kc-overlay {
-    opacity: 0;
+  opacity: 1;
+}
+
+/* KC/Button, circle, primary, 48px */
+.kc-how-it-steps .kc-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  flex-shrink: 0;
+  border-radius: var(--kc-shape-radius-full);
+  background: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+  -webkit-backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+}
+
+.kc-how-it-steps .kc-play svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.kc-how-it-steps .kc-hint {
+  max-width: 36rem;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+  text-align: center;
+}
+
+/* Setting "Step number and caption on the video" = Light: off-white for dark clips,
+   in Day too (Night's text/primary and text/default/body values) */
+.kc-how-it-steps--media-text-light .kc-number {
+  color: var(--kc-brand-original-off-white);
+}
+
+.kc-how-it-steps--media-text-light .kc-hint {
+  color: rgba(var(--kc-brand-original-off-white-rgb), 0.68);
+}
+
+/* Step content: Heading/H4 + Text/Medium */
+.kc-how-it-steps .kc-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+@media screen and (min-width: 750px) {
+  .kc-how-it-steps .kc-step-content {
+    min-height: 8.4rem;
+  }
 }
 
 .kc-how-it-steps .kc-step-title {
-    margin: 24px 0 7px;
-    font-style: normal;
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-style: normal;
+  font-size: var(--kc-responsive-h4-text-size);
+  line-height: var(--kc-responsive-h4-line-height);
+  letter-spacing: var(--kc-responsive-h4-letter-spacing);
+  color: inherit;
 }
 
 .kc-how-it-steps .kc-step-desc {
-    margin: 0;
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
 }
 
+/* Note under the steps: Text/Small, 680px, 24px above (on top of the 48px gap) */
 .kc-how-it-steps .kc-bottom {
-    margin: 40px 0 0;
-    text-align: center;
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-top: var(--kc-responsive-spacing-layout-lg);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  text-align: center;
+  color: inherit;
 }
 
-.kc-how-it-steps .page-width,
-.kc-how-it-steps .kc-head {
-    display: flex;
-    flex-direction: column;
-}
-
-@media screen and (min-width: 990px) {
-
-    .kc-how-it-steps .kc-head,
-    .kc-how-it-steps .kc-grid {
-        gap: var(--gap-xl);
-    }
-
-    .kc-how-it-steps .page-width {
-        gap: var(--gap-5xl);
-    }
-
-    .kc-how-it-steps .kc-play {
-        width: 45px;
-        height: 45px;
-    }
-}
-
-@media screen and (max-width: 989px) {
-    .kc-how-it-steps .kc-head {
-        gap: var(--gap-2xl);
-    }
-
-    .kc-how-it-steps .page-width {
-        gap: var(--gap-3xl);
-    }
-
-    .kc-how-it-steps .kc-grid {
-        gap: var(--gap-lg);
-    }
-
-    .kc-how-it-steps .kc-play {
-        width: 35px;
-        height: 35px;
-    }
-}
-
-@media screen and (max-width: 1199px) {
-    .kc-how-it-steps .kc-number {
-        top: 18px;
-        left: 18px;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .kc-how-it-steps .kc-overlay {
+    transition: none;
+  }
 }

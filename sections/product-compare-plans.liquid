@@ -1,5 +1,9 @@
 {%- liquid
   assign compare_table = product.metafields.custom.compare_table.value
+  assign kc = false
+  if section.settings.design == 'kc'
+    assign kc = true
+  endif
 -%}
 {% style %}
   #compare-plans-{{ section.id }} {
@@ -45,7 +49,16 @@
     assign footer_text = section.settings.footer_text
   -%}
 
-  <div aria-label="Compare plans" class="plan-compare" id="compare-plans-{{ section.id }}">
+  {%- comment -%} KC design (Figma 3391:12660): the info icon is Figma's 16px "Interface" glyph {%- endcomment -%}
+  {%- capture kc_info_icon -%}
+    <svg class="pc-info-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10.6667V8M8 5.33333H8.00667M14.6667 8C14.6667 11.6819 11.6819 14.6667 8 14.6667C4.3181 14.6667 1.33333 11.6819 1.33333 8C1.33333 4.3181 4.3181 1.33333 8 1.33333C11.6819 1.33333 14.6667 4.3181 14.6667 8Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- endcapture -%}
+
+  <div
+    aria-label="Compare plans"
+    class="plan-compare{% if kc %} plan-compare--kc{% endif %}"
+    id="compare-plans-{{ section.id }}"
+  >
     <div class="page-width">
       <div class="pc-head">
         <span class="subtitle-item">{{ eyebrow }}</span>
@@ -134,7 +147,11 @@
                 {{ row.label.value | default: row.label }}
                 {%- if row.tooltip.value != blank -%}
                   <span class="info-tip">
-                    <span aria-hidden="true" class="info-icon">i</span>
+                    {%- if kc -%}
+                      {{ kc_info_icon }}
+                    {%- else -%}
+                      <span aria-hidden="true" class="info-icon">i</span>
+                    {%- endif -%}
                     <span class="info-tip-popover" role="tooltip">
                       {%- if row.tooltip.type == 'rich_text_field' -%}
                         {{ row.tooltip | metafield_tag }}
@@ -209,7 +226,11 @@
                     {%- endif -%}
                     {%- if cell_value.tooltip != blank -%}
                       <span class="info-tip pc-tip-end">
-                        <span aria-hidden="true" class="info-icon">i</span>
+                        {%- if kc -%}
+                          {{ kc_info_icon }}
+                        {%- else -%}
+                          <span aria-hidden="true" class="info-icon">i</span>
+                        {%- endif -%}
                         <span class="info-tip-popover" role="tooltip">
                           {%- if cell_value.tooltip.type == 'rich_text_field' -%}
                             {{ cell_value.tooltip | metafield_tag }}
@@ -226,7 +247,11 @@
 
             <div class="pc-ctacell center">
               <button
-                class="pc-cta subtitle-item{% if plan.featured.value == true %} karmicare__btn-primary{% else %} karmicare__btn-secondary{% endif %}"
+                {%- if kc %}
+                  class="pc-cta{% if plan.featured.value == true %} pc-cta--primary{% else %} pc-cta--secondary{% endif %}"
+                {%- else %}
+                  class="pc-cta subtitle-item{% if plan.featured.value == true %} karmicare__btn-primary{% else %} karmicare__btn-secondary{% endif %}"
+                {%- endif %}
                 data-choose="{{ plan_handle | escape }}"
                 data-selling-plan-id="{{ plan.selling_plan_id.value | default: plan.selling_plan_id | escape }}"
                 data-selling-plan-name="{{ plan.selling_plan_name.value | default: plan.selling_plan_name | escape }}"
@@ -366,6 +391,23 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "options": [
+        {
+          "value": "classic",
+          "label": "Classic"
+        },
+        {
+          "value": "kc",
+          "label": "KC tokens (Figma 2026)"
+        }
+      ],
+      "default": "classic",
+      "info": "KC tokens: the product page table from Figma, Day and Night through the KC tokens. Classic keeps the earlier look."
+    },
     {
       "type": "text",
       "id": "eyebrow",

@@ -37,12 +37,7 @@
       sectionEl.dataset.theme = mode;
     }
 
-    const currentSiteTheme = document.body.classList.contains('night-mode') ? 'night' : (
-      document.body.classList.contains('day-mode') ? 'day' : (
-        localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day')
-      )
-    );
-    syncTheme(currentSiteTheme);
+    syncTheme();
 
     // Watch for global site theme toggle on <body>
     const bodyObserver = new MutationObserver(() => {

@@ -1,20 +1,29 @@
 /*
-  Research Behind System — calm infinite marquee (same behaviour as
-  assets/trusted-professionals-marquee.js on the professional cards).
+  KC marquee — calm infinite band, shared by the Trusted Professionals cards
+  (sections/trusted-professionals.liquid) and the Research Behind System
+  cards (sections/research-behind-system.liquid).
 
-  The track drifts left at a slow, constant speed. Instead of stopping dead,
-  the speed eases towards its target: hovering (or focusing) a card glides the
-  band to a halt so the study can be read, leaving lets it drift off again.
-  Cards can be dragged; on release the band keeps the drag momentum and
-  settles back to its cruising speed. Off-screen, the loop sleeps.
-  With prefers-reduced-motion the band does not move and scrolls natively.
+  The track ([data-marquee-track]) drifts left at a slow, constant speed.
+  Instead of stopping dead, the speed eases towards its target: hovering (or
+  focusing) a card glides the band to a halt so the card can be read, leaving
+  lets it drift off again. Cards can be dragged; on release the band keeps
+  the drag momentum and settles back to its cruising speed. Off-screen, the
+  loop sleeps. With prefers-reduced-motion the band does not move and
+  scrolls natively.
+
+  Options on the element:
+    data-speed        cruising speed in px per second (default 24)
+    data-wheel        a horizontal trackpad swipe or Shift + wheel moves the
+                      band the same way as a drag (professionals)
+    data-align-start  start with the first card on the page content's left
+                      edge, as in Figma (research)
 */
-if (!customElements.get('research-behind-system-marquee')) {
+if (!customElements.get('kc-marquee')) {
   customElements.define(
-    'research-behind-system-marquee',
-    class ResearchBehindSystemMarquee extends HTMLElement {
+    'kc-marquee',
+    class KcMarquee extends HTMLElement {
       connectedCallback() {
-        this.track = this.querySelector('.research-behind-system__track');
+        this.track = this.querySelector('[data-marquee-track]');
         if (!this.track || this.track.children.length === 0) return;
 
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -33,8 +42,15 @@ if (!customElements.get('research-behind-system-marquee')) {
         this.touchHold = false;
         this.drag = null;
         this.resumeTimer = null;
+        this.wheelPending = 0; // px still to apply from the wheel
+        this.wheelAxis = null;
+        this.wheelTime = 0;
 
         this.fill();
+        if (this.hasAttribute('data-align-start')) {
+          this.offset = this.wrap(-this.contentInset());
+          this.render();
+        }
         this.bindEvents();
 
         this.resizeObserver = new ResizeObserver(() => this.fill());
@@ -72,12 +88,22 @@ if (!customElements.get('research-behind-system-marquee')) {
             // aria-hidden only: `inert` would also block hover, and after a
             // swipe the cards under the cursor are often clones.
             clone.setAttribute('aria-hidden', 'true');
-            clone.querySelectorAll('a, button').forEach((el) => el.setAttribute('tabindex', '-1'));
+            if (clone.hasAttribute('tabindex')) clone.setAttribute('tabindex', '-1');
+            clone.querySelectorAll('a, button, [tabindex]').forEach((el) => el.setAttribute('tabindex', '-1'));
             clone.dataset.marqueeClone = '';
             this.track.appendChild(clone);
           });
         }
         this.offset = this.wrap(this.offset);
+      }
+
+      /* Distance from the band's left edge to the page content (the .page-width
+         padding box this full-bleed band breaks out of). */
+      contentInset() {
+        const content = this.parentElement;
+        if (!content) return 0;
+        const padding = parseFloat(getComputedStyle(content).paddingLeft) || 0;
+        return content.getBoundingClientRect().left + padding - this.getBoundingClientRect().left;
       }
 
       bindEvents() {
@@ -104,6 +130,9 @@ if (!customElements.get('research-behind-system-marquee')) {
         this.addEventListener('pointermove', (event) => this.onPointerMove(event));
         this.addEventListener('pointerup', (event) => this.onPointerUp(event));
         this.addEventListener('pointercancel', (event) => this.onPointerUp(event));
+        if (this.hasAttribute('data-wheel')) {
+          this.addEventListener('wheel', (event) => this.onWheel(event), { passive: false });
+        }
         this.addEventListener('dragstart', (event) => event.preventDefault());
         this.addEventListener(
           'click',
@@ -119,7 +148,7 @@ if (!customElements.get('research-behind-system-marquee')) {
       }
 
       /* Touch has no hover: a tap holds the band still for a few seconds
-         so the quote can be read, then it drifts on. */
+         so the card can be read, then it drifts on. */
       updateTarget() {
         clearTimeout(this.resumeTimer);
         this.target = this.hovered || this.focused || this.touchHold ? 0 : this.speed;
@@ -142,6 +171,7 @@ if (!customElements.get('research-behind-system-marquee')) {
 
         if (!drag.moved) {
           drag.moved = true;
+          this.wheelPending = 0;
           this.setPointerCapture(event.pointerId);
           this.classList.add('is-dragging');
         }
@@ -176,6 +206,32 @@ if (!customElements.get('research-behind-system-marquee')) {
         }
       }
 
+      /* Each wheel gesture locks to the axis it starts on: a vertical page
+         scroll that strays sideways is never caught, and a horizontal swipe
+         is kept from the browser's back/forward swipe. */
+      onWheel(event) {
+        if (event.ctrlKey) return; // pinch zoom
+        let dx = event.deltaX;
+        let dy = event.deltaY;
+        if (event.shiftKey && dx === 0) [dx, dy] = [dy, 0];
+
+        if (event.timeStamp - this.wheelTime > 200) this.wheelAxis = null;
+        this.wheelTime = event.timeStamp;
+        if (!this.wheelAxis) {
+          if (dx === 0 && dy === 0) return;
+          this.wheelAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        }
+        // A clear vertical move hands the gesture back to the page, so a
+        // swipe's trailing momentum never blocks the next scroll down.
+        if (this.wheelAxis === 'x' && Math.abs(dy) > Math.abs(dx) * 2) this.wheelAxis = 'y';
+        if (this.wheelAxis !== 'x' || this.drag?.moved) return;
+
+        event.preventDefault();
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? this.offsetWidth : 1;
+        this.wheelPending += dx * unit;
+        this.velocity = 0;
+      }
+
       start() {
         if (this.frame) return;
         this.lastTime = performance.now();
@@ -197,7 +253,13 @@ if (!customElements.get('research-behind-system-marquee')) {
           const easing = this.target === 0 ? 3.2 : 1.1;
           this.velocity += (this.target - this.velocity) * (1 - Math.exp(-easing * dt));
           if (Math.abs(this.velocity) < 0.05 && this.target === 0) this.velocity = 0;
-          this.offset = this.wrap(this.offset + this.velocity * dt);
+          // Wheel distance eases in over a few frames, so a notched mouse
+          // wheel glides instead of jumping a card at a time. Without
+          // data-wheel nothing is pending and this adds 0.
+          let wheel = this.wheelPending * (1 - Math.exp(-20 * dt));
+          if (Math.abs(this.wheelPending) < 0.5) wheel = this.wheelPending;
+          this.wheelPending -= wheel;
+          this.offset = this.wrap(this.offset + this.velocity * dt + wheel);
           this.render();
         }
 
