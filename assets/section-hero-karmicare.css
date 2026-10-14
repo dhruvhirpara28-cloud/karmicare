@@ -90,6 +90,7 @@ body.day-mode .hero-karmicare__btn-2 {
 /* Desktop rhythm per the Figma homepage: 24px between heading, text and
    buttons, 16px between the two buttons */
 @media screen and (min-width: 990px) {
+
   .hero-karmicare__heading-wrapper,
   .hero-karmicare__text-wrapper {
     margin-bottom: 2.4rem;
@@ -247,21 +248,21 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
 }
 
 .hero-karmicare__badge-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: var(--kc-shape-radius-md, 12px);
+  width: 56px;
+  height: 72px;
+  border-radius: var(--kc-shape-radius-md);
   object-fit: cover;
   display: block;
 }
 
 .hero-karmicare__badge-avatar--placeholder {
-  background: var(--kc-brand-original-grey, #efece8);
+  background: var(--kc-brand-original-grey);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: var(--kc-shape-radius-md, 12px);
+  width: 56px;
+  height: 72px;
+  border-radius: var(--kc-shape-radius-md);
 }
 
 .hero-karmicare__badge-avatar--placeholder svg {
@@ -298,19 +299,8 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   letter-spacing: -0.01em;
 }
 
-.hero-karmicare__badge-heading-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
 .hero-karmicare__badge-heading {
-  font-family: var(--font-heading-family);
-  font-size: 1.5rem;
-  line-height: 1.25;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
+  font-weight: var(--font-600-weight);
 }
 
 .hero-karmicare__badge-arrow {
@@ -319,7 +309,7 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   flex-shrink: 0;
   stroke: currentColor;
   transition: transform 0.2s ease;
-  display: block;
+  vertical-align: middle;
 }
 
 /* Tablet & Desktop Layout */
@@ -333,18 +323,12 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
     justify-content: flex-start;
   }
 
-  .hero-karmicare__badge-avatar,
-  .hero-karmicare__badge-avatar--placeholder {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-  }
-
-  .hero-karmicare__badge-heading {
-    font-size: 1.6rem;
+  .hero-karmicare__badge-heading-wrap .hero-karmicare__badge-heading {
+    display: flow;
+    max-width: 170px;
   }
 
   .hero-karmicare__badge-rating-text {
     font-size: 1.4rem;
   }
-}
+}

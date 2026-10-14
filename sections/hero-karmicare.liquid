@@ -323,49 +323,52 @@
             {%- else -%}
               <div class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}">
             {%- endif -%}
-              <div class="hero-karmicare__badge-avatar-wrap">
-                {%- if block.settings.image != blank -%}
-                  {{
-                    block.settings.image
-                    | image_url: width: 140
-                    | image_tag:
-                      class: 'hero-karmicare__badge-avatar',
-                      loading: 'eager',
-                      fetchpriority: 'high',
-                      decoding: 'async',
-                      width: 56,
-                      height: 56,
-                      alt: block.settings.heading | default: 'Health professional' | escape
-                  }}
-                {%- else -%}
-                  <div class="hero-karmicare__badge-avatar hero-karmicare__badge-avatar--placeholder">
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                  </div>
-                {%- endif -%}
-              </div>
+            <div class="hero-karmicare__badge-avatar-wrap">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 140
+                  | image_tag:
+                    class: 'hero-karmicare__badge-avatar',
+                    loading: 'eager',
+                    fetchpriority: 'high',
+                    decoding: 'async',
+                    width: 56,
+                    height: 56,
+                    alt: block.settings.heading
+                  | default: 'Health professional'
+                  | escape
+                }}
+              {%- else -%}
+                <div class="hero-karmicare__badge-avatar hero-karmicare__badge-avatar--placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
 
-              <div class="hero-karmicare__badge-content">
-                {%- if block.settings.rating_text != blank -%}
-                  <div class="hero-karmicare__badge-rating">
-                    <svg
-                      class="hero-karmicare__badge-star"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M8.91749 0H6.91749L5.4304 4.57681L0.618034 4.57682L0 6.47893L3.89329 9.30756L2.40621 13.8843L4.02425 15.0599L7.9175 12.2313L11.8108 15.0599L13.4288 13.8843L11.9417 9.30754L15.835 6.47892L15.2169 4.57681H10.4046L8.91749 0Z" fill="{{ block.settings.star_color | default: '#7FB9FF' }}"/>
-                    </svg>
-                    <span class="hero-karmicare__badge-rating-text">{{ block.settings.rating_text | escape }}</span>
-                  </div>
-                {%- endif -%}
+            <div class="hero-karmicare__badge-content">
+              {%- if block.settings.rating_text != blank -%}
+                <div class="hero-karmicare__badge-rating">
+                  <svg
+                    class="hero-karmicare__badge-star"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M8.91749 0H6.91749L5.4304 4.57681L0.618034 4.57682L0 6.47893L3.89329 9.30756L2.40621 13.8843L4.02425 15.0599L7.9175 12.2313L11.8108 15.0599L13.4288 13.8843L11.9417 9.30754L15.835 6.47892L15.2169 4.57681H10.4046L8.91749 0Z" fill="{{ block.settings.star_color | default: '#7FB9FF' }}"/>
+                  </svg>
+                  <span class="hero-karmicare__badge-rating-text">{{ block.settings.rating_text | escape }}</span>
+                </div>
+              {%- endif -%}
 
-                {%- if block.settings.heading != blank -%}
-                  <div class="hero-karmicare__badge-heading-wrap">
-                    <span class="hero-karmicare__badge-heading">{{ block.settings.heading | escape }}</span>
+              {%- if block.settings.heading != blank -%}
+                <div class="hero-karmicare__badge-heading-wrap">
+                  <span class="hero-karmicare__badge-heading text-xl">
+                    {{- block.settings.heading | escape }}
                     <svg
                       class="hero-karmicare__badge-arrow"
                       xmlns="http://www.w3.org/2000/svg"
@@ -378,9 +381,10 @@
                     >
                       <path d="M3.33398 8.00004H12.6673M8.00065 12.6667L12.6673 8.00004L8.00065 3.33337" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                  </div>
-                {%- endif -%}
-              </div>
+                  </span>
+                </div>
+              {%- endif -%}
+            </div>
             {%- if block.settings.link != blank -%}
               </a>
             {%- else -%}
