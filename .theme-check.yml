@@ -1,0 +1,41 @@
+# Theme Check config. Run from the repo root:
+#   shopify theme check --fail-level error
+#
+# Recommended checks, plus a baseline for the 20 errors that exist on
+# karmicare/buybox at 6ef4a9b (2026-10-12). Each ignore below is scoped to one
+# check and one file or one missing path, so any NEW error still fails.
+# Warnings (23 at the same commit) are not ignored and stay in the report.
+# When one of these errors is fixed, delete its line here.
+extends: theme-check:recommended
+
+# 19 errors: the "Left side vertical" gallery layout (options__5, added to
+# main-product in 7522ed8) has an English label only. These are theme-editor
+# schema locales; customers never see these strings.
+MatchingTranslations:
+  ignore:
+    - locales/cs.schema.json
+    - locales/da.schema.json
+    - locales/de.schema.json
+    - locales/es.schema.json
+    - locales/fi.schema.json
+    - locales/fr.schema.json
+    - locales/it.schema.json
+    - locales/ja.schema.json
+    - locales/ko.schema.json
+    - locales/nb.schema.json
+    - locales/nl.schema.json
+    - locales/pl.schema.json
+    - locales/pt-BR.schema.json
+    - locales/pt-PT.schema.json
+    - locales/sv.schema.json
+    - locales/th.schema.json
+    - locales/tr.schema.json
+    - locales/zh-CN.schema.json
+    - locales/zh-TW.schema.json
+
+# 1 error: layout/theme.liquid renders 'loop-widget.css.liquid', which Theme
+# Check resolves to snippets/loop-widget.css.liquid.liquid. Only that one
+# missing path is ignored, so a new missing render in any file still fails.
+MissingTemplate:
+  ignoreMissing:
+    - snippets/loop-widget.css.liquid.liquid
