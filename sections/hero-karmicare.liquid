@@ -134,6 +134,30 @@
             color: {{ block.settings.status_color_night }};
           }
         {%- endif -%}
+
+      {%- when 'testimonial_badge' -%}
+        {%- if block.settings.text_color_day != blank -%}
+          body.day-mode #shopify-section-{{ section.id }} .hero-karmicare__badge-{{ block.id }} {
+            color: {{ block.settings.text_color_day }};
+          }
+        {%- endif -%}
+        {%- if block.settings.text_color_night != blank -%}
+          body.night-mode #shopify-section-{{ section.id }} .hero-karmicare__badge-{{ block.id }} {
+            color: {{ block.settings.text_color_night }};
+          }
+        {%- endif -%}
+        {%- if block.settings.bg_color_day != blank -%}
+          body.day-mode #shopify-section-{{ section.id }} .hero-karmicare__badge-{{ block.id }} {
+            background-color: {{ block.settings.bg_color_day }};
+            padding: 0.8rem 1.4rem;
+          }
+        {%- endif -%}
+        {%- if block.settings.bg_color_night != blank -%}
+          body.night-mode #shopify-section-{{ section.id }} .hero-karmicare__badge-{{ block.id }} {
+            background-color: {{ block.settings.bg_color_night }};
+            padding: 0.8rem 1.4rem;
+          }
+        {%- endif -%}
     {%- endcase -%}
   {%- endfor -%}
 {%- endstyle -%}
@@ -283,6 +307,89 @@
                 </span>
               </p>
             </div>
+          </div>
+
+        {%- when 'testimonial_badge' -%}
+          <div
+            class="hero-karmicare__badge-wrapper hero-karmicare__badge-wrapper-{{ block.id }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.link != blank -%}
+              <a
+                href="{{ block.settings.link }}"
+                class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}"
+                aria-label="{{ block.settings.heading | default: 'Backed by health professionals' | escape }}"
+              >
+            {%- else -%}
+              <div class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}">
+            {%- endif -%}
+            <div class="hero-karmicare__badge-avatar-wrap">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 140
+                  | image_tag:
+                    class: 'hero-karmicare__badge-avatar',
+                    loading: 'eager',
+                    fetchpriority: 'high',
+                    decoding: 'async',
+                    width: 56,
+                    height: 56,
+                    alt: block.settings.heading
+                  | default: 'Health professional'
+                  | escape
+                }}
+              {%- else -%}
+                <div class="hero-karmicare__badge-avatar hero-karmicare__badge-avatar--placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            </div>
+
+            <div class="hero-karmicare__badge-content">
+              {%- if block.settings.rating_text != blank -%}
+                <div class="hero-karmicare__badge-rating">
+                  <svg
+                    class="hero-karmicare__badge-star"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M8.91749 0H6.91749L5.4304 4.57681L0.618034 4.57682L0 6.47893L3.89329 9.30756L2.40621 13.8843L4.02425 15.0599L7.9175 12.2313L11.8108 15.0599L13.4288 13.8843L11.9417 9.30754L15.835 6.47892L15.2169 4.57681H10.4046L8.91749 0Z" fill="{{ block.settings.star_color | default: '#7FB9FF' }}"/>
+                  </svg>
+                  <span class="hero-karmicare__badge-rating-text">{{ block.settings.rating_text | escape }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.heading != blank -%}
+                <div class="hero-karmicare__badge-heading-wrap">
+                  <span class="hero-karmicare__badge-heading text-xl">
+                    {{- block.settings.heading | escape }}
+                    <svg
+                      class="hero-karmicare__badge-arrow"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3.33398 8.00004H12.6673M8.00065 12.6667L12.6673 8.00004L8.00065 3.33337" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
           </div>
       {%- endcase -%}
     {%- endfor -%}
@@ -654,6 +761,72 @@
           "info": "Optional background color or CSS gradient for the toggle wrapper"
         }
       ]
+    },
+    {
+      "type": "testimonial_badge",
+      "name": "Professionals Badge",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Professional Avatar Image"
+        },
+        {
+          "type": "text",
+          "id": "rating_text",
+          "label": "Rating Text",
+          "default": "4.8 (234)"
+        },
+        {
+          "type": "color",
+          "id": "star_color",
+          "label": "Star Icon Color",
+          "default": "#7FB9FF"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading Text",
+          "default": "Backed by health professionals"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL",
+          "info": "Optional link to Trusted Professionals section or page"
+        },
+        {
+          "type": "header",
+          "content": "Day Mode Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color_day",
+          "label": "Text Color (Day)",
+          "default": "#191F38"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_day",
+          "label": "Card Background Color (Day)"
+        },
+        {
+          "type": "header",
+          "content": "Night Mode Colors"
+        },
+        {
+          "type": "color",
+          "id": "text_color_night",
+          "label": "Text Color (Night)",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_night",
+          "label": "Card Background Color (Night)"
+        }
+      ]
     }
   ],
   "presets": [
@@ -664,7 +837,8 @@
         { "type": "text" },
         { "type": "buttons" },
         { "type": "image" },
-        { "type": "rhythm_toggle" }
+        { "type": "rhythm_toggle" },
+        { "type": "testimonial_badge" }
       ]
     }
   ]
