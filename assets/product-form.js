@@ -32,15 +32,14 @@ if (!customElements.get('product-form')) {
         delete config.headers['Content-Type'];
 
         const formData = new FormData(this.form);
+        // Loop Loyalty awards Care Credit by this exact value ("60-Day Supply", "Year Supply"): from the
+        // selling plan ID (assets/kc-plan-select.js), never from the visible plan name
+        formData.delete('attributes[Subscription Name]');
         const sellingPlanVal = formData.get('selling_plan');
         if (sellingPlanVal && !isNaN(parseInt(sellingPlanVal))) {
-          const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked');
-          if (selectedLoopOption) {
-            const subTitle = selectedLoopOption.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
-              selectedLoopOption.dataset.name || '';
-            if (subTitle && subTitle !== 'loop-one-time-purchase') {
-              formData.set('attributes[Subscription Name]', subTitle);
-            }
+          const subTitle = window.KCPlanSelect ? window.KCPlanSelect.subscriptionName(sellingPlanVal) : '';
+          if (subTitle) {
+            formData.set('attributes[Subscription Name]', subTitle);
           }
         }
         if (this.cart) {
@@ -78,9 +77,18 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
               return;
-            } else if (!this.cart) {
+            }
+
+            // The cart's "Subscription Name" follows the subscriptions now in it (assets/kc-plan-select.js)
+            const subscriptionNameSynced = window.KCPlanSelect
+              ? window.KCPlanSelect.syncCartSubscriptionName(sellingPlanVal).catch(() => {})
+              : Promise.resolve();
+
+            if (!this.cart) {
               this.resolveCartLinesUpdate(linesUpdateDeferred);
-              window.location = window.routes.cart_url;
+              subscriptionNameSynced.then(() => {
+                window.location = window.routes.cart_url;
+              });
               return;
             }
 

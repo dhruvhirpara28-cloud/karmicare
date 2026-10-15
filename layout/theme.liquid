@@ -79,6 +79,11 @@
         src="{{ 'loop-widget.js' | asset_url }}"
         defer="defer"
       ></script>
+      {%- comment -%}
+        Plans by selling plan ID and the "Subscription Name" for Care Credit, read by loop-widget.js,
+        karmi-add-to-cart.js and product-form.js
+      {%- endcomment -%}
+      <script src="{{ 'kc-plan-select.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'karmi-add-to-cart.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     {%- if settings.animations_reveal_on_scroll -%}

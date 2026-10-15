@@ -1,0 +1,48 @@
+{%- comment -%}
+  The "Subscription Name" order attribute of a selling plan. Loop Loyalty awards Care Credit by this
+  exact value, case-insensitive (program "Care Credit - 10%" matches "60-Day Supply", "Care Credit - 20%"
+  matches "Year Supply"), so it comes from the selling plan ID (its type in snippets/kc-plan-type.liquid),
+  never from the visible plan name, and the values must not change.
+
+  A compare plan's optional loyalty_key field overrides the value for its selling plan.
+
+  Accepts:
+  - product: {Object}
+  - plan_id: {String|Number} a selling plan ID
+
+  Outputs the value, or nothing when the plan has none (then no attribute is sent).
+{%- endcomment -%}
+{%- liquid
+  assign kc_wanted = plan_id | append: '' | strip
+  assign kc_key = ''
+
+  for kc_compare_plan in product.metafields.custom.compare_table.value.compare_plans.value
+    assign kc_override = kc_compare_plan.loyalty_key.value | default: kc_compare_plan.loyalty_key | append: '' | strip
+    if kc_override == blank
+      continue
+    endif
+    assign kc_raw_id = kc_compare_plan.selling_plan_id.value | default: kc_compare_plan.selling_plan_id
+    capture kc_resolved
+      render 'kc-plan-resolve', product: product, plan_id: kc_raw_id
+    endcapture
+    assign kc_resolved_id = kc_resolved | split: '|' | first
+    if kc_resolved_id == kc_wanted
+      assign kc_key = kc_override
+      break
+    endif
+  endfor
+
+  if kc_key == blank
+    capture kc_type
+      render 'kc-plan-type', plan_id: kc_wanted
+    endcapture
+    case kc_type
+      when '60-day'
+        assign kc_key = '60-Day Supply'
+      when 'year'
+        assign kc_key = 'Year Supply'
+    endcase
+  endif
+
+  echo kc_key
+-%}

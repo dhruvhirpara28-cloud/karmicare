@@ -1,0 +1,23 @@
+{%- comment -%}
+  Theme editor only: every selling plan of the product with its ID, its group and whether it is
+  public (set on a compare plan). Rendered inside the red plan notices of snippets/kc-plan-config.liquid
+  and sections/product-compare-plans.liquid, never for customers.
+
+  Accepts:
+  - product: {Object}
+  - public_plans: {String} output of snippets/kc-plan-public.liquid
+{%- endcomment -%}
+{%- if request.design_mode -%}
+  <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
+    {%- for kc_group in product.selling_plan_groups -%}
+      {%- for kc_plan in kc_group.selling_plans -%}
+        {%- assign kc_needle = ',' | append: kc_plan.id | append: ',' -%}
+        <li>
+          <code>{{ kc_plan.id }}</code> · {{ kc_group.name | escape }}
+          {%- if kc_group.selling_plans.size > 1 %} ({{ kc_plan.name | escape }}){% endif %} ·
+          {% if public_plans contains kc_needle %}public{% else %}not public{% endif %}
+        </li>
+      {%- endfor -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

@@ -19,17 +19,23 @@
     endif
   endif
 
-  # "Show first subscription only" (the end CTA) shows one fixed offer: the variant's first selling
-  # plan. The offer box below and the buy button both read it, so the button buys exactly that plan,
-  # whatever plan the buybox's Loop widget has selected.
+  # "Show first subscription only" (the end CTA) shows one fixed offer: the variant's first public
+  # selling plan (snippets/kc-plan-public.liquid), or its first selling plan while no compare plan
+  # holds a valid public ID. The offer box below and the buy button both read it, so the button buys
+  # exactly that plan, whatever plan the buybox's Loop widget has selected. Its "Subscription Name"
+  # for Care Credit comes from the plan ID in karmi-add-to-cart.js (snippets/kc-plan-loyalty.liquid).
   assign kc_offer_allocation = null
-  assign kc_offer_plan_name = ''
   assign kc_loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first
   if kc_loop_block.settings.only_first_subscription and placeholder != true
-    assign kc_offer_allocation = product.selected_or_first_available_variant.selling_plan_allocations | first
-    for kc_plan_group in product.selling_plan_groups
-      if kc_plan_group.id == kc_offer_allocation.selling_plan_group_id
-        assign kc_offer_plan_name = kc_plan_group.name
+    capture kc_public_plans
+      render 'kc-plan-public', product: product
+    endcapture
+    assign kc_public_plans = kc_public_plans | strip
+    for kc_allocation in product.selected_or_first_available_variant.selling_plan_allocations
+      assign kc_needle = ',' | append: kc_allocation.selling_plan.id | append: ','
+      if kc_public_plans == ',' or kc_public_plans contains kc_needle
+        assign kc_offer_allocation = kc_allocation
+        break
       endif
     endfor
   endif
@@ -560,6 +566,8 @@
                         >
                           {{ template_content }}
                         </div>
+                        {%- comment -%} Public plans only, in this widget too (assets/kc-plan-select.js) {%- endcomment -%}
+                        {%- render 'kc-plan-config', product: product, section: section, role: 'end-cta' -%}
                         {%- if block.settings.only_first_subscription -%}
                           {%- assign sub_allocation = kc_offer_allocation -%}
                           {%- assign sub_price = sub_allocation.price
@@ -567,9 +575,12 @@
                           -%}
                           {%- assign care_credit = sub_price | times: 0.1 -%}
                           {%- assign per_brushing_cents = sub_price | divided_by: 120.0 | round -%}
-                          {%- assign plan_name = sub_allocation.selling_plan.name | downcase -%}
+                          {%- comment -%} Interval by the plan's type (selling plan ID), never its name {%- endcomment -%}
+                          {%- capture kc_offer_type -%}
+                            {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id -%}
+                          {%- endcapture -%}
                           {%- assign interval_text = '/ 60 days' -%}
-                          {%- if plan_name contains 'year' -%}
+                          {%- if kc_offer_type == 'year' -%}
                             {%- assign interval_text = '/ year' -%}
                           {%- endif -%}
                           <div class="kc-custom-subscription-widget">
@@ -721,8 +732,7 @@
                     product_form_id: product_form_id,
                     section_id: section.id,
                     loop_product_id: product.id,
-                    selling_plan_id: kc_offer_allocation.selling_plan.id,
-                    selling_plan_name: kc_offer_plan_name
+                    selling_plan_id: kc_offer_allocation.selling_plan.id
                   -%}
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}

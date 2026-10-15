@@ -640,41 +640,16 @@
 
                   {%- if template_exists -%}
                     {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
-                    {%- if block.settings.default_to_subscription -%}
-                      <script>
-                        (function () {
-                          var attempts = 0;
-                          var interval = setInterval(function () {
-                            if (attempts++ > 50) {
-                              clearInterval(interval);
-                              return;
-                            }
-                            var fs = document.getElementById('loop-selling-plan-fieldset');
-                            if (!fs) return;
-
-                            // Find all radio buttons inside Loop widget
-                            var radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
-                            // Find the first one that is NOT one-time purchase
-                            var firstSub = radios.find(function (r) {
-                              var val = r.value || '';
-                              var id = r.dataset.id || '';
-                              return val !== 'autodeliver-off' && id !== 'loop-one-time-purchase' && (val || id);
-                            });
-
-                            if (firstSub) {
-                              if (!firstSub.checked) {
-                                firstSub.click();
-                                var group = firstSub.closest('.loop-subscription-group');
-                                if (group) group.click();
-                              } else {
-                                clearInterval(interval);
-                                firstSub.dispatchEvent(new Event('change', { bubbles: true }));
-                              }
-                            }
-                          }, 100);
-                        })();
-                      </script>
-                    {%- endif -%}
+                    {%- comment -%}
+                      Public plans only, selected by selling plan ID; "Default to subscription" starts
+                      on the first public plan (assets/kc-plan-select.js).
+                    {%- endcomment -%}
+                    {%- render 'kc-plan-config',
+                      product: product,
+                      section: section,
+                      role: 'buybox',
+                      default_to_subscription: block.settings.default_to_subscription
+                    -%}
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                 {%- when 'buy_buttons' -%}
@@ -1539,7 +1514,7 @@
           "type": "textarea",
           "id": "custom_button_text_by_plan",
           "label": "Custom Button Text per plan",
-          "info": "One line per plan, \"Plan name: Button text\", e.g. \"60-Day Rhythm: Start my 60-Day rhythm\". Plans without a line, and Try once, use the Custom Button Text."
+          "info": "One line per plan, \"Selling plan ID: Button text\", e.g. \"712106115453: Start my 60-Day rhythm\". Plans are matched by ID, so renaming or translating a plan keeps its text. Plans without a line, and Try once, use the Custom Button Text."
         },
         {
           "type": "checkbox",
@@ -2834,9 +2809,8 @@
         {
           "type": "text",
           "id": "welcome_kit_plans",
-          "label": "Welcome Kit Plan Names",
-          "default": "60-Day Supply",
-          "info": "Comma-separated list of selling plan names (e.g. '60-Day Supply') that include the Welcome Kit. If left blank, plans containing 'Welcome Kit' in their name or description will be auto-detected."
+          "label": "Welcome Kit plan IDs",
+          "info": "Comma-separated selling plan IDs (e.g. 712106115453) that show the Welcome Kit. Blank: every subscription plan, as the kit comes with every subscription. Plan names are not read."
         },
         {
           "type": "text",

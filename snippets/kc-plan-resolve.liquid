@@ -1,0 +1,25 @@
+{%- comment -%}
+  Resolves one selling plan ID against product.selling_plan_groups. Plans are matched by Shopify
+  selling plan ID only, never by name, so renaming or translating a plan does not change the match.
+
+  Accepts:
+  - product: {Object}
+  - plan_id: {String|Number} a selling plan ID ("712106115453" or a gid://shopify/SellingPlan/… ID)
+
+  Outputs "<plan id>|<group id>|<group name>" when plan_id is a selling plan of the product,
+  otherwise nothing. Capture it:
+    {%- capture kc_resolved -%}{%- render 'kc-plan-resolve', product: product, plan_id: id -%}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign kc_wanted = plan_id | append: '' | remove: 'gid://shopify/SellingPlan/' | strip
+  if kc_wanted != blank
+    for kc_group in product.selling_plan_groups
+      for kc_plan in kc_group.selling_plans
+        assign kc_id = kc_plan.id | append: ''
+        if kc_id == kc_wanted
+          echo kc_id | append: '|' | append: kc_group.id | append: '|' | append: kc_group.name
+        endif
+      endfor
+    endfor
+  endif
+-%}

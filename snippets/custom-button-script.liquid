@@ -21,7 +21,6 @@
           welcomeKitVariantIds: welcomeKitVariantIds,
           {%- if selling_plan_id != blank %}
           sellingPlanId: {{ selling_plan_id | json }},
-          subscriptionName: {{ selling_plan_name | json }},
           {%- endif %}
         });
       }

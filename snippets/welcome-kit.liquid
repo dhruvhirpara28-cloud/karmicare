@@ -92,15 +92,19 @@
                 updates[freeLineItem.key] = 0;
               }
             }
-            if (Object.keys(updates).length > 0) {
+            // "Subscription Name" (Care Credit) belongs to a subscription in the cart: clear it once none
+            // is left, also when there are no kit lines to remove, and keep it while one remains
+            // (only from a full cart: an add response lists just the added lines)
+            const isFullCart = Boolean(cart.attributes);
+            const hasAnySubscription = items.some((item) => item.selling_plan_allocation);
+            const staleSubscriptionName = isFullCart && !hasAnySubscription && cart.attributes['Subscription Name'];
+            if (Object.keys(updates).length > 0 || staleSubscriptionName) {
+              const body = Object.keys(updates).length > 0 ? { updates: updates, discount: '' } : {};
+              if (isFullCart && !hasAnySubscription) body.attributes = { 'Subscription Name': '' };
               await fetch('/cart/update.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-                body: JSON.stringify({
-                  updates: updates,
-                  discount: '',
-                  attributes: { 'Subscription Name': '' }
-                }),
+                body: JSON.stringify(body),
               });
               cartChanged = true;
             }

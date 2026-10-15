@@ -7,7 +7,6 @@
   - section_id: {String} id of section to which this snippet belongs.
   - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
   - selling_plan_id: {Number} a fixed selling plan the button always buys, whatever the Loop widget has selected (optional).
-  - selling_plan_name: {String} the subscription name sent with selling_plan_id (optional).
 
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
@@ -99,7 +98,7 @@
 
           {%- if block.settings.show_custom_button -%}
             {%- liquid
-              # "Plan name: Label" per line -> JSON for updateKcPlanButtonLabel() in loop-widget.js
+              # "Selling plan ID: Label" per line -> JSON for updateKcPlanButtonLabel() in loop-widget.js
               assign cta_default = block.settings.custom_button_text | default: 'Begin Now'
               assign cta_plan_labels = '{'
               assign cta_lines = block.settings.custom_button_text_by_plan | newline_to_br | split: '<br />'
@@ -182,7 +181,6 @@
       is_bundle_product: is_bundle_product,
       welcome_kit_variant_ids: welcome_kit_variant_ids,
       selling_plan_id: selling_plan_id,
-      selling_plan_name: selling_plan_name,
       block: block
     %}
   {%- else -%}

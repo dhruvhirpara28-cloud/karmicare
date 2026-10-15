@@ -202,7 +202,6 @@
               data-label="{{ selling_plan_group.name | escape }}"
               data-interval="{{ sp.options.first.value | escape }}"
               data-loop-group-id="{{ selling_plan_group.id }}"
-              data-loop-description="{{ sp.description | escape }}"
             >
               <span class="sc-dd-radio"></span>
               <span class="sc-dd-option-text">
@@ -307,36 +306,15 @@
         }
       }
 
-      /* Extract Return on Care & Check-up reward from Liquid data */
-      var returns = [];
+      /* Check-up Reward of the plan by selling plan ID (assets/kc-plan-select.js), not parsed from the
+         plan description. Care Credit and the Return on Care badge stay off in the bar as before: the
+         description parse they came from never found the percentage (docs/compare-plans-plan-id/NOTES.md). */
       var optEl = document.querySelector('.sc-dd-option[data-selling-plan-group-id="' + spgId + '"]');
-      if (optEl && optEl.dataset.loopDescription) {
-        var temp = document.createElement('div');
-        temp.innerHTML = optEl.dataset.loopDescription;
-        returns = Array.from(temp.querySelectorAll('.kc-return_care'));
-      }
+      var plan = optEl && window.KCPlanSelect ? window.KCPlanSelect.plan(optEl.dataset.sellingPlan) : null;
 
       var creditValue = 0;
-      var checkupText = '';
-
-      returns.forEach(function (rc) {
-        var node = rc.childNodes[0];
-        var text = node ? node.textContent.trim() : '';
-        if (text.indexOf('%') !== -1) {
-          var match = text.match(/(\d+)%/);
-          if (match) {
-            var pct = parseInt(match[1], 10);
-            data.badge = 'Receive ' + pct + '% Return on Care';
-            creditValue = (optPriceCents / 100) * (pct / 100);
-          }
-        } else if (/check-?\s?up reward/i.test(text)) {
-          var match = text.match(/€\s*(\d+)/);
-          if (match) {
-            // Same wording as the Year card chip
-            checkupText = '€' + match[1] + ' Dental Check-up Reward';
-          }
-        }
-      });
+      // Same wording as the Year card chip and the buybox summary
+      var checkupText = plan && plan.checkupReward ? '€40 Dental Check-up Reward' : '';
 
       var suffixParts = [];
       var creditAmount = creditValue % 1 === 0 ? String(creditValue) : creditValue.toFixed(2);
@@ -367,7 +345,9 @@
       return data;
     }
 
-    function applyOption(optEl, priceText, richData) {
+    /* planId: the exact selling plan the buybox has selected (a group can hold several plans; the
+       option only knows the group's first one) */
+    function applyOption(optEl, priceText, richData, planId) {
       OPTIONS.forEach(function (o) {
         o.classList.remove('is-selected');
       });
@@ -375,7 +355,7 @@
       selectedOption = optEl;
 
       PLAN_LABEL.textContent = optEl.dataset.label || 'One Time Purchase';
-      SP_INPUT.value = optEl.dataset.sellingPlan || '';
+      SP_INPUT.value = optEl.dataset.type === 'onetime' ? '' : planId || optEl.dataset.sellingPlan || '';
       PLAN_PRICE.textContent = priceText || formatMoney(parseInt(optEl.dataset.price || '0', 10));
 
       /* Hide standard interval if we have rich subrow data */
@@ -470,8 +450,10 @@
       var pCents = parseInt(match.dataset.price || '0', 10);
       var pt = getLoopPriceText(vid, spgId, isOnetime);
       var richData = getRichPlanData(spgId, isOnetime, pCents);
+      /* The bar buys exactly what the buybox form holds (assets/kc-plan-select.js) */
+      var planId = !isOnetime && window.KCPlanSelect ? window.KCPlanSelect.selectedPlanId({{ product.id | json }}) : '';
 
-      applyOption(match, pt, richData);
+      applyOption(match, pt, richData, planId);
       refreshAllSubrows();
     }
 
@@ -588,6 +570,8 @@
       e.preventDefault();
       var form = document.getElementById('scCtaForm');
       var btn = document.getElementById('scCtaBtn');
+      /* Submit what the buybox has selected right now, its exact plan included */
+      syncFromLoop();
 
       if (typeof window.karmiAddToCart === 'function') {
         var shouldRedirect = SC_BAR.dataset.redirectToCheckout === 'true';
@@ -662,8 +646,9 @@
         var themeDefaultToSubscription = SC_BAR ? SC_BAR.dataset.defaultToSubscription === 'true' : false;
         var defaultOpt = OPTIONS[0];
         if (themeDefaultToSubscription) {
+          /* The first subscription the bar shows (hidden legacy plans are skipped) */
           var subOpt = OPTIONS.find(function (o) {
-            return o.dataset.type === 'subscription';
+            return o.dataset.type === 'subscription' && getComputedStyle(o).display !== 'none';
           });
           if (subOpt) defaultOpt = subOpt;
         }
