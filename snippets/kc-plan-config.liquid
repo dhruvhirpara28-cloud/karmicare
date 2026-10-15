@@ -9,11 +9,14 @@
     always act on the buybox.
   - default_to_subscription: {Boolean} the Loop block setting: start on the first public plan
 
-  Every selling plan of the product is listed with its group, whether it is public, its type
-  (snippets/kc-plan-type.liquid), its "Subscription Name" for Loop Loyalty (snippets/kc-plan-loyalty.liquid)
-  and, when the custom.duos_count entry carries the plan's ID in its selling_plan_id field (comma-separated
-  IDs), its duos, brushings and Return on Care. kc-plan-select.js writes those onto the Loop plan options
-  by ID, so the Loop widget's name match no longer decides them.
+  Every selling plan of the product is listed with its group, whether it is public, its type, its Duos
+  per delivery and expected year total (snippets/kc-plan-type.liquid), its "Subscription Name" for Loop
+  Loyalty (snippets/kc-plan-loyalty.liquid) and, when the custom.duos_count entry carries the plan's ID
+  in its selling_plan_id field (comma-separated IDs), its duos, brushings and Return on Care.
+  kc-plan-select.js writes those onto the Loop plan options by ID, so the Loop widget's name match no
+  longer decides them. The theme editor lists each public plan with its Duos per delivery, Shopify's
+  allocation price and the total the checkout charges (price x Duos), red when a year plan's total
+  differs from the expected one while year plans are 3 Duos per delivery.
   Public plans come from the product's compare plans (snippets/kc-plan-public.liquid). The groups
   without a public plan are hidden here from first paint, in every Loop widget and in the sticky bar,
   and kc-plan-select.js keeps them hidden and unselectable. With no valid public plan ID the widgets
@@ -57,10 +60,14 @@
     "formId": {{ 'product-form-' | append: section.id | json }},
     "defaultToSubscription": {% if default_to_subscription %}true{% else %}false{% endif %},
     "kitVariantIds": {{ kc_kit_variant_ids | json }},
+    "shopCurrency": {{ shop.currency | json }},
     "plans": [
       {%- assign kc_separator = '' -%}
       {%- assign kc_missing_keys = '' -%}
       {%- assign kc_missing_duos = '' -%}
+      {%- assign kc_unknown_plans = '' -%}
+      {%- assign kc_unit_rows = '' -%}
+      {%- assign kc_total_wrong = false -%}
       {%- for kc_group in product.selling_plan_groups -%}
         {%- for kc_plan in kc_group.selling_plans -%}
           {%- liquid
@@ -70,6 +77,104 @@
               render 'kc-plan-type', plan_id: kc_plan.id
             endcapture
             assign kc_type = kc_type | strip
+            capture kc_units
+              render 'kc-plan-type', plan_id: kc_plan.id, field: 'units'
+            endcapture
+            assign kc_units = kc_units | strip | plus: 0
+            capture kc_expected_total
+              render 'kc-plan-type', plan_id: kc_plan.id, field: 'expected_total'
+            endcapture
+            assign kc_expected_total = kc_expected_total | strip
+            capture kc_credit_percent
+              render 'kc-plan-type', plan_id: kc_plan.id, field: 'care_credit_percent'
+            endcapture
+            assign kc_credit_percent = kc_credit_percent | strip | plus: 0
+            if kc_type == blank
+              assign kc_unknown_plans = kc_unknown_plans | append: '<li><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html | append: '</li>'
+            endif
+
+            # The year plan line next to the price, per variant ("6 duos · 3 now, 3 in month 6 · €59 per
+            # duo"), only while year plans are more than 1 Duo per delivery (snippets/kc-plan-year-duos.liquid)
+            assign kc_year_duos_json = '{}'
+            if kc_type == 'year' and kc_units > 1
+              assign kc_year_duos_json = ''
+              for kc_variant in product.variants
+                for kc_candidate in kc_variant.selling_plan_allocations
+                  if kc_candidate.selling_plan.id == kc_plan.id
+                    capture kc_year_line
+                      render 'kc-plan-year-duos', plan_id: kc_plan.id, price: kc_candidate.price
+                    endcapture
+                    assign kc_year_line = kc_year_line | strip
+                    if kc_year_line != blank
+                      if kc_year_duos_json != blank
+                        assign kc_year_duos_json = kc_year_duos_json | append: ', '
+                      endif
+                      assign kc_year_key = kc_variant.id | append: '' | json
+                      assign kc_year_value = kc_year_line | json
+                      assign kc_year_duos_json = kc_year_duos_json | append: kc_year_key | append: ': ' | append: kc_year_value
+                    endif
+                    break
+                  endif
+                endfor
+              endfor
+              assign kc_year_duos_json = '{' | append: kc_year_duos_json | append: '}'
+            endif
+
+            # Theme editor: what the checkout charges (allocation price x Duos) for each public plan and each
+            # year plan (legacy year plans are not sold here but renew through Loop at their price)
+            assign kc_list_row = false
+            if request.design_mode and role == 'buybox'
+              if kc_public contains kc_needle or kc_type == 'year'
+                assign kc_list_row = true
+              endif
+            endif
+            if kc_list_row
+              assign kc_allocation = null
+              for kc_candidate in product.selected_or_first_available_variant.selling_plan_allocations
+                if kc_candidate.selling_plan.id == kc_plan.id
+                  assign kc_allocation = kc_candidate
+                  break
+                endif
+              endfor
+              assign kc_row_style = ''
+              assign kc_row_note = ''
+              if kc_allocation == blank
+                assign kc_row_note = ' · not offered for this variant'
+              else
+                assign kc_plan_total = kc_allocation.price | times: kc_units
+                if kc_type == 'year' and kc_units > 1
+                  if kc_expected_total == blank
+                    assign kc_total_wrong = true
+                    assign kc_row_style = ' style="color: #b42318; font-weight: 700;"'
+                    assign kc_row_note = ' · no expected total in snippets/kc-plan-type.liquid'
+                  elsif cart.currency.iso_code != shop.currency
+                    assign kc_row_note = ' · not checked (prices in ' | append: cart.currency.iso_code | append: ')'
+                  else
+                    assign kc_expected_cents = kc_expected_total | plus: 0
+                    if kc_plan_total != kc_expected_cents
+                      assign kc_total_wrong = true
+                      assign kc_row_style = ' style="color: #b42318; font-weight: 700;"'
+                      assign kc_expected_money = kc_expected_cents | money
+                      assign kc_row_note = ' · expected ' | append: kc_expected_money | append: ': check the plan price in Loop'
+                    endif
+                  endif
+                endif
+              endif
+              unless kc_public contains kc_needle
+                assign kc_row_note = ' · not on the product page' | append: kc_row_note
+              endunless
+              capture kc_unit_row
+                echo '<li' | append: kc_row_style | append: '><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html
+                echo ' · ' | append: kc_units | append: ' Duo(s) per delivery'
+                if kc_allocation != blank
+                  assign kc_allocation_money = kc_allocation.price | money
+                  assign kc_total_money = kc_plan_total | money
+                  echo ' · allocation price ' | append: kc_allocation_money | append: ' · total ' | append: kc_total_money
+                endif
+                echo kc_row_note | append: '</li>'
+              endcapture
+              assign kc_unit_rows = kc_unit_rows | append: kc_unit_row
+            endif
             capture kc_loyalty_key
               render 'kc-plan-loyalty', product: product, plan_id: kc_plan.id
             endcapture
@@ -102,7 +207,7 @@
               assign kc_missing_duos = kc_missing_duos | append: '<li><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html | append: '</li>'
             endif
           -%}
-          {{ kc_separator }}{"id": {{ kc_plan.id | append: '' | json }}, "groupId": {{ kc_group.id | json }}, "groupName": {{ kc_group.name | json }}, "public": {% if kc_public contains kc_needle %}true{% else %}false{% endif %}, "type": {{ kc_type | json }}, "loyaltyKey": {{ kc_loyalty_key | json }}, "duos": {{ kc_duos_json }}}
+          {{ kc_separator }}{"id": {{ kc_plan.id | append: '' | json }}, "groupId": {{ kc_group.id | json }}, "groupName": {{ kc_group.name | json }}, "public": {% if kc_public contains kc_needle %}true{% else %}false{% endif %}, "type": {{ kc_type | json }}, "loyaltyKey": {{ kc_loyalty_key | json }}, "duos": {{ kc_duos_json }}, "units": {{ kc_units }}, "careCreditPercent": {{ kc_credit_percent }}, "expectedTotal": {% if kc_expected_total != blank %}{{ kc_expected_total | plus: 0 }}{% else %}null{% endif %}, "yearDuos": {{ kc_year_duos_json }}}
           {%- assign kc_separator = ',' -%}
         {%- endfor -%}
       {%- endfor -%}
@@ -111,6 +216,24 @@
 </script>
 <style>
   .kc-plan-hidden {
+    display: none !important;
+  }
+  {%- comment -%}
+    Only the final price: no Loop discount badge ("Save x%") and no compare-at price on any option
+  {%- endcomment %}
+  #ProductInfo-{{ section.id }} .loop-subscription-group-discount-badge,
+  #ProductInfo-{{ section.id }} .loop-subscription-group-price-amount-original,
+  #ProductInfo-{{ section.id }} .loop-one-time-purchase-option-price-amount-original {
+    display: none !important;
+  }
+  {%- comment -%}
+    Express checkout: Shopify's dynamic checkout button ("Buy it now", "Buy with Shop Pay") buys the form's
+    selling plan at quantity 1, not the plan's Duos per delivery, so it stays hidden while a plan is
+    selected (kc-plan-select.js adds kc-express-allowed for one time only). The Shop Pay installments
+    banner quotes the one-time price, never a plan's: hidden too.
+  {%- endcomment %}
+  #product-form-{{ section.id }}:not(.kc-express-allowed) .shopify-payment-button,
+  #product-form-installment-{{ section.id }} {
     display: none !important;
   }
   {%- if kc_public != ',' -%}
@@ -154,6 +277,45 @@
       Credit. Add a loyalty_key to their compare plan, or the value to snippets/kc-plan-loyalty.liquid:
       <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
         {{- kc_missing_keys -}}
+      </ul>
+    </div>
+  {%- endif -%}
+  {%- if kc_unknown_plans != blank -%}
+    <div
+      role="note"
+      style="margin: 1rem 0; padding: 0.8rem 1rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; font-size: 1.3rem; line-height: 1.4;"
+    >
+      <strong>Theme editor only · Duos per delivery:</strong>
+      these selling plans are not in snippets/kc-plan-type.liquid, so the theme adds 1 Duo per delivery
+      for them and they get no plan type. Add their IDs to that table:
+      <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
+        {{- kc_unknown_plans -}}
+      </ul>
+    </div>
+  {%- endif -%}
+  {%- if kc_unit_rows != blank -%}
+    {%- liquid
+      assign kc_list_color = '#344054'
+      assign kc_list_background = '#f9fafb'
+      if kc_total_wrong
+        assign kc_list_color = '#b42318'
+        assign kc_list_background = '#fef3f2'
+      endif
+    -%}
+    <div
+      role="note"
+      style="margin: 1rem 0; padding: 0.8rem 1rem; border: 2px solid {{ kc_list_color }}; border-radius: 8px; background: {{ kc_list_background }}; color: {{ kc_list_color }}; font-size: 1.3rem; line-height: 1.4;"
+    >
+      <strong>Theme editor only · what the checkout charges:</strong>
+      per public plan and per year plan, the Duos per delivery (year plans: theme setting "Year plans:
+      Duos per delivery", now {{ settings.kc_year_units_per_delivery | default: 3 }}), Shopify's allocation
+      price and the total (allocation price x Duos), which the product page shows and the checkout charges.
+      {%- if kc_total_wrong %}
+        A year plan's total is not the expected one: fix the plan price in Loop (only for the rollback,
+        set the setting back to 1 together with whole-year pricing in Loop).
+      {%- endif -%}
+      <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
+        {{- kc_unit_rows -}}
       </ul>
     </div>
   {%- endif -%}

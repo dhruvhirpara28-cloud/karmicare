@@ -5,8 +5,42 @@ class CartRemoveButton extends HTMLElement {
     this.addEventListener('click', (event) => {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
+      // KC: a subscription Duo can show as several lines of one purchase choice (the Welcome Kit
+      // discount takes one Duo, so Shopify splits the line, e.g. 2 + 1). Removing one of them removes
+      // them all (data-kc-choice-keys, snippets/cart-drawer.liquid, sections/main-cart-items.liquid), so
+      // a year plan never keeps fewer Duos per delivery.
+      const choiceKeys = (this.dataset.kcChoiceKeys || '').split(',').filter(Boolean);
+      if (choiceKeys.length > 1) {
+        this.removeChoice(cartItems, choiceKeys);
+        return;
+      }
       cartItems.updateQuantity(this.dataset.index, 0, event);
     });
+  }
+
+  removeChoice(cartItems, keys) {
+    const updates = {};
+    keys.forEach((key) => {
+      updates[key] = 0;
+    });
+    if (cartItems) cartItems.enableLoading(this.dataset.index);
+    const config = fetchConfig();
+    // The Welcome Kit sync (snippets/welcome-kit.liquid) runs once the lines are gone, before the cart
+    // is shown again, so the kit lines and "Subscription Name" leave with the subscription
+    config.headers['X-Karmi-Sync'] = 'false';
+    fetch(`${routes.cart_update_url}`, { ...config, ...{ body: JSON.stringify({ updates }) } })
+      .then((response) => response.json())
+      .then(() => (typeof window.karmiWelcomeKitSync === 'function' ? window.karmiWelcomeKitSync() : null))
+      .then(() => {
+        if (typeof window.refreshDawnCartUI === 'function' && this.closest('cart-drawer-items')) {
+          return window.refreshDawnCartUI();
+        }
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+        window.location.reload();
+      });
   }
 }
 

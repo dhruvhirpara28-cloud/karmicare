@@ -271,6 +271,17 @@
   opacity: 1;
 }
 
+/* Selected year plan, year plans at 3 Duos per delivery: "6 duos · 3 now, 3 in month 6 · €59 per duo"
+   on its own row under the price, the card's full width (assets/loop-widget.js) */
+.kc-buybox .kc-plan-year-duos:not([hidden]) {
+  display: block;
+  flex: 0 0 100%;
+  text-align: right;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
 /* Care Credit / Dental Checkup chips, under the titles (radio 20 + gap 8) */
 .kc-buybox .kc-return_care-tooltip {
   display: flex;
@@ -495,6 +506,15 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-mapped-text-default-body);
   opacity: 1;
+}
+
+/* Year plan at 3 Duos per delivery: the year's duos under "Total today" (assets/loop-widget.js) */
+.kc-buybox .kc-pricing-summary__year-duos:not([hidden]) {
+  display: block;
+  text-align: right;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
 }
 
 /* CTA: the homepage primary button (snippets/button-styles.liquid,

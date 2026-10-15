@@ -15,12 +15,19 @@
  *   for Care Credit, by plan ID. Every add-to-cart path (loop-widget.js, karmi-add-to-cart.js,
  *   product-form.js) reads it here; syncCartSubscriptionName() keeps the cart's value in line with
  *   the subscription lines in it.
- * - KCPlanSelect.clearPurchaseChoice(productId, planId): one purchase choice of a plan product in the
- *   cart; every add-to-cart path calls it before adding the product.
- * - KCPlanSelect.plan(planId): type, interval, deliveries, Check-up Reward, duos, brushings and Return
- *   on Care of a plan, by ID: the pricing summary, the plan cards, the Welcome Kit and the sticky bar
- *   read plans here instead of by name. selectedPlanId() and allowed() serve the sticky bar and
- *   karmi-add-to-cart.js.
+ * - KCPlanSelect.replaceChoice(productId, planId, add): one purchase choice of a plan product in the
+ *   cart; every add-to-cart path adds the product through it (clearPurchaseChoice, then the add, one
+ *   at a time on the page; the earlier choice comes back when the add is rejected). manages(productId)
+ *   tells which products it handles.
+ * - KCPlanSelect.plan(planId): type, interval, deliveries, Check-up Reward, Duos per delivery, duos,
+ *   brushings and Return on Care of a plan, by ID: the pricing summary, the plan cards, the Welcome Kit
+ *   and the sticky bar read plans here instead of by name. selectedPlanId() and allowed() serve the
+ *   sticky bar and karmi-add-to-cart.js.
+ * - KCPlanSelect.units(planId) / quantityFor(productId, planId, formQuantity): the Duos per delivery of a
+ *   plan (snippets/kc-plan-type.liquid; year plans follow the theme setting "Year plans: Duos per
+ *   delivery"). Every add-to-cart path adds that quantity for a subscription, and every price shown for
+ *   a plan is Shopify's allocation price x units, which is what the checkout charges. yearDuos(planId,
+ *   variantId): the year plan line shown next to the price while that setting is 3.
  * - Allowlist: the groups without a public plan stay hidden and unselectable in every Loop widget and
  *   the sticky bar; a non-public plan selected in the buybox is replaced by the first public one.
  * - Compare plan buttons (sections/product-compare-plans.liquid) carry data-kc-plan-choose: "plan"
@@ -38,8 +45,11 @@
   const READY_TIMEOUT_MS = 5000;
   // Loop's own default selection runs 300 to 500 ms after it shows the widget
   const LOOP_DEFAULT_SETTLE_MS = 800;
-  // How long a compare choice is kept against Loop's own late default selection
+  // How long a compare choice is kept against Loop's own late default selection, counted from the end
+  // of Loop's background step
   const INTENT_GUARD_MS = 3000;
+  // How long the guard polls for Loop's background step before it relies on enforce() alone
+  const INTENT_POLL_MAX_MS = 60000;
   const MAX_FIXES = 5;
   // Toothbrush variants of the earlier Welcome Kit, still in some carts: kit lines too
   const LEGACY_KIT_VARIANT_IDS = ['42732468142262', '42732468076726'];
@@ -58,7 +68,7 @@
   const runtime = {};
   let configSignature = '';
   let configCounter = 0;
-  // Last real click or change on a plan control (Loop widgets, sticky bar) by the shopper
+  // Last real pointer or key press on a plan control (Loop widgets, sticky bar) by the shopper
   let lastPlanControlAt = 0;
 
   function warn(message) {
@@ -92,6 +102,7 @@
       const product =
         products[productId] ||
         (products[productId] = { id: productId, widgets: [], plans: {}, groups: {}, publicCount: 0, kitVariantIds: [] });
+      if (!product.shopCurrency && config.shopCurrency) product.shopCurrency = config.shopCurrency;
       (config.kitVariantIds || []).forEach((id) => {
         if (!product.kitVariantIds.includes(String(id))) product.kitVariantIds.push(String(id));
       });
@@ -115,6 +126,10 @@
           type: entry.type || '',
           loyaltyKey: entry.loyaltyKey || '',
           duos: entry.duos || null,
+          units: entry.units,
+          careCreditPercent: Number(entry.careCreditPercent) || 0,
+          expectedTotal: typeof entry.expectedTotal === 'number' ? entry.expectedTotal : null,
+          yearDuos: entry.yearDuos || {},
         };
         const group = product.groups[entry.groupId] || (product.groups[entry.groupId] = { public: false });
         if (isPublic) {
@@ -366,29 +381,51 @@
     });
   }
 
-  // Loop may still run its own default selection (300-500 ms timers, its background step) right after
-  // a compare choice. For a short while, put the shopper's choice back if Loop (not the shopper)
-  // switches the plan, then check the settled form once more.
+  // Loop may still run its own default selection (300-500 ms timers, and its background step, which
+  // selects its first plan again and can arrive many seconds late) after a compare choice. The choice is
+  // guarded until Loop's background step has run and INTENT_GUARD_MS more have passed, however long
+  // that takes: if Loop (not the shopper) switches the plan, it is put back. A newer shopper choice
+  // ends the guard. Then the form is checked once more.
   function guardIntent(product, widget, plan, label) {
     const state = runtimeOf(product.id);
-    const intent = { planId: plan.id, label: label, at: Date.now(), until: Date.now() + INTENT_GUARD_MS, restores: 0 };
+    const intent = { planId: plan.id, label: label, at: Date.now(), until: 0, restores: 0 };
     state.intent = intent;
-    setTimeout(() => {
+    const check = () => {
       if (state.intent !== intent) return;
-      state.intent = null;
-      if (lastPlanControlAt > intent.at) return;
-      const current = products[product.id] ? buyboxOf(products[product.id]) : null;
-      if (current && formPlanId(current) !== plan.id) {
-        warn(label + ': the buybox moved from selling plan ' + plan.id + ' to "' + formPlanId(current) + '" without the shopper');
+      if (lastPlanControlAt > intent.at) {
+        state.intent = null;
+        return;
       }
-    }, INTENT_GUARD_MS + 100);
+      const current = products[product.id];
+      startGuardWindow(current, intent);
+      if (!intent.until || Date.now() < intent.until) {
+        // Without Loop's background step the guard stays on (enforce() keeps it); only the polling stops
+        if (Date.now() - intent.at < INTENT_POLL_MAX_MS) setTimeout(check, 250);
+        return;
+      }
+      state.intent = null;
+      const buybox = current ? buyboxOf(current) : null;
+      if (buybox && formPlanId(buybox) !== plan.id) {
+        warn(label + ': the buybox moved from selling plan ' + plan.id + ' to "' + formPlanId(buybox) + '" without the shopper');
+      }
+    };
+    setTimeout(check, 250);
+  }
+
+  // The guard window starts once Loop's background step has run
+  function startGuardWindow(product, intent) {
+    if (intent.until || !product) return;
+    const widget = buyboxOf(product);
+    const container = widget && containerOf(widget);
+    if (container && loopSettled(product, container)) intent.until = Date.now() + INTENT_GUARD_MS;
   }
 
   function keepIntent(product) {
     const state = runtimeOf(product.id);
     const intent = state.intent;
     if (!intent) return false;
-    if (Date.now() > intent.until || lastPlanControlAt > intent.at) {
+    startGuardWindow(product, intent);
+    if ((intent.until && Date.now() > intent.until) || lastPlanControlAt > intent.at) {
       state.intent = null;
       return false;
     }
@@ -461,10 +498,93 @@
       intervalCount: typeInfo ? typeInfo.intervalCount : 0,
       deliveries: (prepaid && prepaid.deliveriesPerBillingCycle) || (typeInfo ? typeInfo.deliveries : 1),
       checkupReward: Boolean(typeInfo && typeInfo.checkupReward),
+      units: units(id),
+      careCreditPercent: entry.careCreditPercent,
       duos: fromOption('duos', entry.duos ? entry.duos.duos : 1),
       brushings: fromOption('brushings', entry.duos ? entry.duos.brushings : 120),
       returnOnCare: fromOption('returnOnCare', entry.duos ? entry.duos.returnOnCare : 0),
     };
+  }
+
+  const warnedUnits = {};
+
+  // Duos per delivery of a selling plan (snippets/kc-plan-type.liquid): 60-day plans 1, year plans the
+  // theme setting "Year plans: Duos per delivery". A plan of a plan product that is not in that table
+  // gets 1 and one warning; a plan of any other product 1.
+  function units(planId) {
+    readConfigs();
+    const id = String(planId == null ? '' : planId).trim();
+    if (!/^\d+$/.test(id)) return 1;
+    const product = productOfPlan(id);
+    if (!product) return 1;
+    const entry = product.plans[id];
+    if (!entry.type && !warnedUnits[id]) {
+      warnedUnits[id] = true;
+      warn('selling plan ' + id + ' (' + entry.groupName + ') is not in snippets/kc-plan-type.liquid; 1 Duo per delivery');
+    }
+    const count = parseInt(entry.units, 10);
+    return Number.isFinite(count) && count > 0 ? count : 1;
+  }
+
+  // The quantity to add for a purchase choice: a plan product's subscription gets its plan's Duos per
+  // delivery (the shopper cannot change it in the cart); one time (Try Once) and every other product
+  // keep the form's quantity.
+  function quantityFor(productId, planId, formQuantity) {
+    readConfigs();
+    const parsed = parseInt(formQuantity, 10);
+    const fallback = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+    const id = String(planId == null ? '' : planId).trim();
+    if (!products[String(productId)] || !id) return fallback;
+    return units(id);
+  }
+
+  // The line a year plan shows next to its price for a variant ("6 duos · 3 now, 3 in month 6 · €59 per
+  // duo", snippets/kc-plan-year-duos.liquid), or '' (not a year plan, or year plans are 1 Duo per delivery)
+  function yearDuos(planId, variantId) {
+    readConfigs();
+    const id = String(planId == null ? '' : planId).trim();
+    const product = /^\d+$/.test(id) ? productOfPlan(id) : null;
+    if (!product) return '';
+    return product.plans[id].yearDuos[String(variantId)] || '';
+  }
+
+  const checkedTotals = {};
+
+  function euros(cents) {
+    return (cents / 100).toFixed(2);
+  }
+
+  // While year plans are more than 1 Duo per delivery, each year plan must cost its expected year total
+  // (snippets/kc-plan-type.liquid) at checkout: Shopify's allocation price x Duos. Warn when it does
+  // not, e.g. Loop still prices the whole year instead of one Duo. Prices in another currency than the
+  // shop's are not checked.
+  function checkTotals(product) {
+    const props = window.loopProps && window.loopProps[product.id];
+    const variants = props && props.product && props.product.variants;
+    if (!Array.isArray(variants)) return;
+    const active = window.Shopify && window.Shopify.currency && window.Shopify.currency.active;
+    if (product.shopCurrency && active && active !== product.shopCurrency) return;
+    variants.forEach((variant) => {
+      (variant.selling_plan_allocations || []).forEach((allocation) => {
+        // Every year plan, also those the page does not sell (legacy plans renew through Loop at this price)
+        const entry = product.plans[String(allocation.selling_plan_id)];
+        if (!entry || entry.type !== 'year') return;
+        const count = units(entry.id);
+        if (count <= 1) return;
+        const total = Number(allocation.price) * count;
+        const key = variant.id + ':' + entry.id + ':' + total;
+        if (checkedTotals[key]) return;
+        checkedTotals[key] = true;
+        const what =
+          'year plan ' + entry.id + ' (' + entry.groupName + ', variant ' + variant.id + '): allocation price ' +
+          euros(allocation.price) + ' x ' + count + ' Duos = ' + euros(total);
+        if (entry.expectedTotal == null) {
+          warn(what + ', and snippets/kc-plan-type.liquid has no expected total for it');
+        } else if (total !== entry.expectedTotal) {
+          warn(what + ', expected ' + euros(entry.expectedTotal) + ': the checkout charges ' + euros(total) + '; check the plan price in Loop');
+        }
+      });
+    });
   }
 
   // The selling plan the buybox form will buy ('' for one time)
@@ -473,6 +593,16 @@
     const product = products[String(productId)];
     const widget = product && buyboxOf(product);
     return widget ? formPlanId(widget) : '';
+  }
+
+  // The variant the buybox form will buy ('' when unknown); the sticky bar submits this one
+  function selectedVariantId(productId) {
+    readConfigs();
+    const product = products[String(productId)];
+    const widget = product && buyboxOf(product);
+    const form = widget && formOf(widget);
+    const input = form && form.querySelector('[name="id"]');
+    return input && input.value ? String(input.value) : '';
   }
 
   // false for a selling plan this page must not sell (a legacy plan while the allowlist is on)
@@ -567,10 +697,12 @@
   // One purchase choice of a plan product in the cart (Victor, 15 Oct: the cart held a 60-day and a Year
   // membership after a switch). Before a new choice of the product is added, one update call removes
   // every line of the product (any plan or one time) and every Welcome Kit line, and sets
-  // "Subscription Name" for the coming choice (cleared for one time). The caller then adds the choice,
-  // with one kit set for a subscription. Kit lines: the _welcome_kit property, the configured kit
+  // "Subscription Name" for the coming choice (cleared for one time). The caller then adds the choice as
+  // one line (quantityFor: the plan's Duos per delivery, 1 for Try Once), with one kit set for a
+  // subscription. Kit lines: the _welcome_kit property, the configured kit
   // variants, or the earlier kit's toothbrush variants. Resolves false for a product without a plan
-  // config (nothing changed); rejects when the cart could not be updated.
+  // config (nothing changed), else what it removed (recoverChoice puts it back after a failed add); rejects when the cart
+  // could not be updated. Callers go through replaceChoice().
   async function clearPurchaseChoice(productId, sellingPlanId) {
     readConfigs();
     const product = products[String(productId)];
@@ -579,16 +711,133 @@
     const cart = await fetch('/cart.js', { headers: headers }).then((response) => response.json());
     const kitVariantIds = product.kitVariantIds.concat(LEGACY_KIT_VARIANT_IDS);
     const updates = {};
+    const removed = [];
     (cart.items || []).forEach((item) => {
       const isKit =
         (item.properties && item.properties._welcome_kit === 'true') || kitVariantIds.includes(String(item.variant_id));
-      if (String(item.product_id) === product.id || isKit) updates[item.key] = 0;
+      if (String(item.product_id) !== product.id && !isKit) return;
+      updates[item.key] = 0;
+      const line = { id: item.variant_id, quantity: item.quantity };
+      if (item.selling_plan_allocation) line.selling_plan = item.selling_plan_allocation.selling_plan.id;
+      if (item.properties && Object.keys(item.properties).length) line.properties = item.properties;
+      removed.push(line);
     });
     const body = { attributes: { 'Subscription Name': sellingPlanId ? subscriptionName(sellingPlanId) : '' } };
     if (Object.keys(updates).length) body.updates = updates;
     const response = await fetch('/cart/update.js', { method: 'POST', headers: headers, body: JSON.stringify(body) });
     if (!response.ok) throw new Error('could not remove the earlier choice from the cart');
-    return true;
+    return { lines: removed, subscriptionName: (cart.attributes && cart.attributes['Subscription Name']) || '' };
+  }
+
+  // Puts back what clearPurchaseChoice removed (the earlier choice, its kit lines, "Subscription Name"),
+  // after a failed add. A failed request may still have added the new choice (a lost response): when the
+  // cart holds the product again, that choice stays and nothing is put back. When the cart cannot be read,
+  // nothing is put back either (it could double the choice). Resolves 'kept', 'restored', 'lost' (the
+  // earlier choice could not be put back) or 'unknown' (the cart could not be read).
+  async function recoverChoice(productId, removed) {
+    const headers = { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' };
+    let cart = null;
+    try {
+      const response = await fetch('/cart.js', { headers: headers });
+      const data = response.ok ? await response.json() : null;
+      if (data && Array.isArray(data.items)) cart = data;
+    } catch (error) {
+      cart = null;
+    }
+    if (!cart) {
+      warn('the add failed and the cart could not be read; the earlier choice was not put back');
+      return 'unknown';
+    }
+    try {
+      if (cart.items.some((item) => String(item.product_id) === String(productId))) {
+        warn('the add reported a failure but the cart holds a choice of the product; left as it is');
+        return 'kept';
+      }
+      let ok = true;
+      if (removed.lines.length) {
+        const added = await fetch('/cart/add.js', { method: 'POST', headers: headers, body: JSON.stringify({ items: removed.lines }) });
+        ok = added.ok;
+      }
+      if (ok) {
+        const updated = await fetch('/cart/update.js', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ attributes: { 'Subscription Name': removed.subscriptionName } }),
+        });
+        ok = updated.ok;
+      }
+      if (ok) {
+        warn('the new choice was not added to the cart; the earlier choice is back');
+        return 'restored';
+      }
+      warn('the new choice was not added and the earlier choice could not be put back');
+    } catch (error) {
+      warn('the new choice was not added and the earlier choice could not be put back: ' + error.message);
+    }
+    // "Subscription Name" was set for the choice that did not arrive: match it to what the cart holds
+    await syncCartSubscriptionName().catch(() => {});
+    return 'lost';
+  }
+
+  let purchaseQueue = Promise.resolve();
+  let choicesRequested = 0;
+  // Set once a replacement sends the page to checkout: later replacements leave the cart as it is
+  let navigating = false;
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) navigating = false;
+  });
+
+  // Replaces the purchase choice of a plan product: clearPurchaseChoice, then add() (the caller's cart
+  // add, resolving its fetch Response), then finish() (optional), all in one turn of a queue: one
+  // replacement at a time on the page, whichever path started it (buybox, compare, sticky bar, end CTA,
+  // Try Once, product-form.js, Loop's bundle add), so two quick clicks never both add and leave 6 Duos or
+  // two choices. finish({ superseded }) runs after a successful add (e.g. the Subscription Name sync) and
+  // may return a URL to go to: the queue sends the page there itself, only when no later replacement is
+  // waiting (superseded false); a replacement asked for after that rejects at once with kcSkipped, the
+  // cart untouched (the queue stays free, also after Back). When Shopify rejects the add or it fails,
+  // recoverChoice() runs. Resolves add()'s Response, marked kcSuperseded / kcNavigating / kcRecovery.
+  function replaceChoice(productId, sellingPlanId, add, finish) {
+    const ticket = ++choicesRequested;
+    const run = async () => {
+      // The page is on its way to checkout: changing the cart now could empty it under that checkout
+      if (navigating) {
+        const skipped = new Error('the page is going to checkout; this choice was not added');
+        skipped.kcSkipped = true;
+        throw skipped;
+      }
+      const removed = await clearPurchaseChoice(productId, sellingPlanId);
+      let response;
+      try {
+        response = await add();
+      } catch (error) {
+        if (removed) error.kcRecovery = await recoverChoice(productId, removed);
+        throw error;
+      }
+      if (!response.ok) {
+        if (removed) response.kcRecovery = await recoverChoice(productId, removed);
+        return response;
+      }
+      const superseded = ticket !== choicesRequested;
+      response.kcSuperseded = superseded;
+      if (finish) {
+        const url = await finish({ superseded: superseded });
+        if (url && !superseded && ticket === choicesRequested) {
+          navigating = true;
+          response.kcNavigating = true;
+          window.location.href = url;
+        }
+      }
+      return response;
+    };
+    const result = purchaseQueue.then(run, run);
+    purchaseQueue = result.catch(() => {});
+    return result;
+  }
+
+  // true for a product with a plan config on this page (its choice goes through replaceChoice)
+  function manages(productId) {
+    readConfigs();
+    return Boolean(products[String(productId)]);
   }
 
   // Hidden or disabled by this script (marked), so it can be undone when a plan becomes public again
@@ -710,10 +959,25 @@
       else hide(option);
     });
 
+    allowExpressCheckout(product);
     if (!on) return;
     if (stolen) recheckBuybox(product);
     if (keepIntent(product)) return;
     keepPublicSelection(product);
+  }
+
+  // Shopify's dynamic checkout button ("Buy it now", "Buy with Shop Pay") in a widget's form buys the
+  // form's selling plan at quantity 1, never the plan's Duos per delivery. kc-plan-config hides it from
+  // first paint; it shows (kc-express-allowed) only while the form holds no selling plan (one time).
+  function allowExpressCheckout(product) {
+    product.widgets.forEach((widget) => {
+      const form = formOf(widget);
+      if (!form) return;
+      // Only the buybox: the end CTA's button buys its fixed offer, which its form does not hold, so
+      // express checkout there could buy something else than the offer shown
+      const oneTime = widget.role === 'buybox' && formPlanId(widget) === '';
+      if (form.classList.contains('kc-express-allowed') !== oneTime) form.classList.toggle('kc-express-allowed', oneTime);
+    });
   }
 
   // Check the buybox radio of the group Loop has selected again (Loop's state did not change)
@@ -775,6 +1039,7 @@
         const widget = product && buyboxOf(product);
         if (!widget) return;
         enforce(product);
+        checkTotals(product);
         if (!widget.defaultToSubscription || touched || runtimeOf(productId).intent) return;
         const checked = container.querySelector(RADIO + ':checked');
         if (checked && checked.dataset.id !== ONE_TIME_ID) return;
@@ -799,12 +1064,14 @@
     });
   }
 
+  // A shopper's own plan choice: pointer or keyboard input only. Loop's defaults call radio.click(), and
+  // the change event that follows is trusted too, so click and change cannot tell Loop from the shopper.
   const markPlanControl = (event) => {
     if (!event.isTrusted || !event.target || !event.target.closest) return;
     if (event.target.closest(PLAN_CONTROLS)) lastPlanControlAt = Date.now();
   };
-  document.addEventListener('click', markPlanControl, true);
-  document.addEventListener('change', markPlanControl, true);
+  document.addEventListener('pointerdown', markPlanControl, true);
+  document.addEventListener('keydown', markPlanControl, true);
 
   document.addEventListener('click', (event) => {
     const button = event.target.closest && event.target.closest('[data-kc-plan-choose]');
@@ -832,10 +1099,15 @@
     tryOnce: tryOnce,
     subscriptionName: subscriptionName,
     syncCartSubscriptionName: syncCartSubscriptionName,
-    clearPurchaseChoice: clearPurchaseChoice,
+    replaceChoice: replaceChoice,
+    manages: manages,
     productIdOfVariant: productIdOfVariant,
     plan: plan,
+    units: units,
+    quantityFor: quantityFor,
+    yearDuos: yearDuos,
     selectedPlanId: selectedPlanId,
+    selectedVariantId: selectedVariantId,
     allowed: allowed,
     refresh: init,
   };

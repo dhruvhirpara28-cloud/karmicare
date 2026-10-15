@@ -12,6 +12,9 @@
     }
 
     try {
+      const previousError = (form.closest('product-form') || document).querySelector('.product-form__error-message-wrapper');
+      if (previousError) previousError.hidden = true;
+
       const variantIdInput = form.querySelector('[name="id"]');
       const variantId = variantIdInput ? variantIdInput.value : null;
       if (!variantId) throw new Error('No variant ID found');
@@ -51,8 +54,15 @@
         throw new Error('selling plan ' + sellingPlanId + ' is not offered on this page');
       }
 
+      const productId = form.dataset.loopProductId || (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(variantId) : '');
+
+      // A plan product's subscription adds its plan's Duos per delivery (year plans: theme setting "Year
+      // plans: Duos per delivery"); one time (Try Once) and other products keep the form's quantity
       const quantityInput = form.querySelector('[name="quantity"]');
-      const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+      const formQuantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+      const quantity = window.KCPlanSelect
+        ? window.KCPlanSelect.quantityFor(productId, isSubscription ? sellingPlanId : '', formQuantity)
+        : formQuantity;
 
       const mainItem = { id: parseInt(variantId), quantity: quantity };
       if (isSubscription) {
@@ -61,14 +71,10 @@
 
       const items = [mainItem];
 
-      // One purchase choice per plan product (assets/kc-plan-select.js): remove the product's earlier
-      // lines (any plan or one time) and every Welcome Kit line first, so switching plans or to Try Once
-      // never leaves two memberships or two kit sets in the cart
-      const productId = form.dataset.loopProductId || (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(variantId) : '');
-      const replacesChoice = Boolean(
-        window.KCPlanSelect && productId &&
-        await window.KCPlanSelect.clearPurchaseChoice(productId, isSubscription ? sellingPlanId : '')
-      );
+      // One purchase choice per plan product (assets/kc-plan-select.js replaceChoice): the product's earlier
+      // lines (any plan or one time) and every Welcome Kit line go first, so switching plans or to Try
+      // Once never leaves two memberships or two kit sets in the cart
+      const replacesChoice = Boolean(window.KCPlanSelect && productId && window.KCPlanSelect.manages(productId));
 
       // Free Welcome Kit product is ONLY added for subscriptions
       if (isSubscription && options && options.isBundleProduct && !options.customerAlreadyReceivedFreeProduct && options.welcomeKitVariantIds && options.welcomeKitVariantIds.length > 0) {
@@ -98,24 +104,56 @@
         }
       }
 
-      const addRes = await fetch('/cart/add.js', {
+      const addToCart = () => fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
         body: JSON.stringify(addPayload),
       });
-      if (!addRes.ok) throw new Error('Cart add failed');
+      const redirect = Boolean(options && options.redirectToCheckout);
+      const checkoutUrl = (isSubscription && items.length > 1) ? '/checkout?discount=Welcome%20Kit' : '/checkout';
 
       // The cart's "Subscription Name" follows the subscriptions now in it: a one-time order never keeps
       // an earlier subscription's value (assets/kc-plan-select.js)
-      if (window.KCPlanSelect) {
+      const syncSubscriptionName = async () => {
+        if (!window.KCPlanSelect) return;
         try {
           await window.KCPlanSelect.syncCartSubscriptionName(isSubscription ? sellingPlanId : null);
         } catch (e) { console.warn('[KarmiAddToCart] Subscription Name sync failed', e); }
-      }
+      };
 
-      if (options && options.redirectToCheckout) {
-        const checkoutUrl = (isSubscription && items.length > 1) ? '/checkout?discount=Welcome%20Kit' : '/checkout';
-        window.location.href = checkoutUrl;
+      // One replacement at a time (assets/kc-plan-select.js replaceChoice): the sync and the way to
+      // checkout run in the same turn, only the last of several quick choices goes to checkout, and a
+      // failed add puts the earlier choice back
+      const addRes = replacesChoice
+        ? await window.KCPlanSelect.replaceChoice(productId, isSubscription ? sellingPlanId : '', addToCart, async () => {
+            await syncSubscriptionName();
+            return redirect ? checkoutUrl : null;
+          })
+        : await addToCart();
+      if (!addRes.ok) {
+        const rejection = await addRes.json().catch(() => ({}));
+        const error = new Error('Cart add failed');
+        // Shopify's own message for the shopper ("only 2 left", …), else the theme's cart error
+        error.shopperMessage = rejection.description || rejection.message || '';
+        throw error;
+      }
+      if (addRes.kcNavigating) return;
+      if (!replacesChoice) await syncSubscriptionName();
+
+      if (redirect) {
+        if (!replacesChoice) {
+          window.location.href = checkoutUrl;
+          return;
+        }
+        // A later choice came in meanwhile: that one goes to checkout, this one stops here
+        if (buttonElement) {
+          buttonElement.disabled = false;
+          buttonElement.removeAttribute('disabled');
+          buttonElement.removeAttribute('aria-disabled');
+          buttonElement.classList.remove('loading');
+          const customSpinner = buttonElement.querySelector('.loading__spinner');
+          if (customSpinner) customSpinner.classList.add('hidden');
+        }
       } else {
         if (items.length > 1) {
           try {
@@ -150,7 +188,19 @@
         }
       }
     } catch (err) {
-      console.error('[KarmiAddToCart] Checkout redirect failed:', err);
+      // Skipped because the page is already going to checkout (assets/kc-plan-select.js): nothing to tell
+      const skipped = Boolean(err && err.kcSkipped);
+      if (!skipped) console.error('[KarmiAddToCart] Checkout redirect failed:', err);
+      // Tell the shopper (the earlier choice is back in the cart): Shopify's message, else the theme's
+      // cart error, in the product form's error line (the buybox's for the sticky bar)
+      const errorWrapper =
+        (form.closest('product-form') || document).querySelector('.product-form__error-message-wrapper');
+      const errorText = (err && err.shopperMessage) || (window.cartStrings && window.cartStrings.error) || '';
+      if (!skipped && errorWrapper && errorText) {
+        const errorMessage = errorWrapper.querySelector('.product-form__error-message');
+        if (errorMessage) errorMessage.textContent = errorText;
+        errorWrapper.hidden = false;
+      }
       if (buttonElement) {
         buttonElement.disabled = false;
         buttonElement.removeAttribute('disabled');

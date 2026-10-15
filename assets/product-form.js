@@ -53,21 +53,28 @@ if (!customElements.get('product-form')) {
         config.body = formData;
 
         const variantId = formData.get('id');
-        const quantity = parseInt(formData.get('quantity')) || 1;
-        const linesUpdateDeferred = this.createCartLinesUpdateEvent(variantId, quantity);
-
-        // One purchase choice per plan product (assets/kc-plan-select.js): the product's earlier lines and
-        // the Welcome Kit lines go first (welcome-kit.liquid adds one kit set back for a subscription)
         const choiceProductId =
           this.form.dataset.loopProductId || (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(variantId) : '');
         const isPlan = sellingPlanVal && !isNaN(parseInt(sellingPlanVal));
-        const choiceCleared =
-          window.KCPlanSelect && choiceProductId
-            ? window.KCPlanSelect.clearPurchaseChoice(choiceProductId, isPlan ? sellingPlanVal : '')
-            : Promise.resolve();
+        // A plan product's subscription adds its plan's Duos per delivery (assets/kc-plan-select.js);
+        // one time and other products keep the form's quantity
+        let quantity = parseInt(formData.get('quantity')) || 1;
+        if (window.KCPlanSelect) {
+          quantity = window.KCPlanSelect.quantityFor(choiceProductId, isPlan ? sellingPlanVal : '', quantity);
+          formData.set('quantity', String(quantity));
+        }
+        const linesUpdateDeferred = this.createCartLinesUpdateEvent(variantId, quantity);
 
-        choiceCleared
-          .then(() => fetch(`${routes.cart_add_url}`, config))
+        // One purchase choice per plan product (assets/kc-plan-select.js replaceChoice): the product's
+        // earlier lines and the Welcome Kit lines go first (welcome-kit.liquid adds one kit set back for a
+        // subscription), one replacement at a time, the earlier choice back if the add is rejected
+        const addToCart = () => fetch(`${routes.cart_add_url}`, config);
+        const added =
+          window.KCPlanSelect && choiceProductId && window.KCPlanSelect.manages(choiceProductId)
+            ? window.KCPlanSelect.replaceChoice(choiceProductId, isPlan ? sellingPlanVal : '', addToCart)
+            : addToCart();
+
+        added
           .then((response) => response.json())
           .then((response) => {
             if (response.status) {
