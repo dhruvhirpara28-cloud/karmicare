@@ -1,0 +1,161 @@
+{% comment %}
+  Renders the Karmicare hero animation: the transparent Awake (day) / Asleep (night) video from
+  Shopify Files over its poster. Only the visible mode plays, and only while on screen.
+  The files come from the calling section's kc_hero_* settings (same ids in main-product and
+  featured-product). Moved here unchanged from product-media-gallery so both sections share it.
+
+  Accepts:
+  - part: {String} (optional) 'assets' renders the style and script instead of the element
+  - alt: {String} alt text for the poster and the video
+  - class: {String} (optional) extra classes on <kc-hero-animation>
+
+  Usage:
+  {% render 'kc-hero-animation', alt: kc_hero_alt, class: 'product__media media media--transparent' %}
+  {% render 'kc-hero-animation', part: 'assets' %}
+{% endcomment %}
+
+{%- if part == 'assets' -%}
+  <style>
+    .kc-hero-animation__mode img,
+    .kc-hero-animation__mode video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top;
+    }
+    .kc-hero-animation__mode.is-playing img {
+      visibility: hidden;
+    }
+    /* No painted holder behind any slide in this gallery (night navy, day blue gradient, sheen):
+       the media sits on the section background, like the transparent hero. */
+    body media-gallery.kc-hero-gallery .product-media-container,
+    body media-gallery.kc-hero-gallery .product-media-container .product__modal-opener {
+      background: transparent;
+      border-color: transparent;
+    }
+    body media-gallery.kc-hero-gallery .product-media-container:after {
+      box-shadow: none;
+      border-color: transparent;
+    }
+    .thumbnail .kc-hero-animation__thumb {
+      object-fit: contain;
+    }
+    body.night-mode .kc-hero-animation .kc-hero-animation__mode--am,
+    body:not(.night-mode) .kc-hero-animation .kc-hero-animation__mode--pm,
+    body.night-mode .thumbnail .kc-hero-animation__thumb--am,
+    body:not(.night-mode) .thumbnail .kc-hero-animation__thumb--pm {
+      display: none;
+    }
+  </style>
+  <script>
+    // Plays only the visible mode (Awake in day-mode, Asleep in night-mode), only while on screen.
+    // Reduced motion keeps the poster; a refused autoplay falls back to the animated WebP when set.
+    if (!customElements.get('kc-hero-animation')) {
+      customElements.define(
+        'kc-hero-animation',
+        class KcHeroAnimation extends HTMLElement {
+          connectedCallback() {
+            this.update = this.update.bind(this);
+            this.visible = false;
+            this.motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            this.motion.addEventListener('change', this.update);
+            this.modeObserver = new MutationObserver(this.update);
+            this.modeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            this.viewObserver = new IntersectionObserver((entries) => {
+              this.visible = entries[entries.length - 1].isIntersecting;
+              this.update();
+            });
+            this.viewObserver.observe(this);
+          }
+
+          disconnectedCallback() {
+            this.motion.removeEventListener('change', this.update);
+            this.modeObserver.disconnect();
+            this.viewObserver.disconnect();
+          }
+
+          update() {
+            const activeMode = document.body.classList.contains('night-mode') ? 'pm' : 'am';
+            this.querySelectorAll('[data-kc-mode]').forEach((panel) => {
+              let video = panel.querySelector('video');
+              if (this.motion.matches) {
+                video?.remove();
+                panel.classList.remove('is-playing');
+                return;
+              }
+              if (panel.dataset.kcMode !== activeMode || !this.visible || panel.hasAttribute('data-refused')) {
+                video?.pause();
+                return;
+              }
+              if (!video) {
+                panel.append(panel.querySelector('template').content.cloneNode(true));
+                video = panel.querySelector('video');
+                video.addEventListener('playing', () => panel.classList.add('is-playing'), { once: true });
+              }
+              video.play()?.catch((error) => {
+                if (error.name !== 'NotAllowedError' || !panel.dataset.animated) return;
+                panel.setAttribute('data-refused', '');
+                video.remove();
+                panel.querySelector('img').src = panel.dataset.animated;
+              });
+            });
+          }
+        }
+      );
+    }
+  </script>
+{%- else -%}
+  {%- assign kc_hero_modes = 'am,pm' | split: ',' -%}
+  <kc-hero-animation class="kc-hero-animation{% if class != blank %} {{ class }}{% endif %}">
+    {%- for mode in kc_hero_modes -%}
+      {%- liquid
+        assign key = 'kc_hero_' | append: mode
+        assign hevc_key = key | append: '_hevc'
+        assign webm_key = key | append: '_webm'
+        assign poster_key = key | append: '_poster'
+        assign animated_key = key | append: '_animated'
+        assign poster_url = section.settings[poster_key] | file_url
+        # file_url does not resolve .webm videos from Files, so the WebM setting also takes the file's CDN link
+        assign webm_url = section.settings[webm_key] | strip
+        unless webm_url contains '://'
+          assign webm_url = webm_url | file_url
+        endunless
+      -%}
+      <div
+        class="kc-hero-animation__mode kc-hero-animation__mode--{{ mode }}"
+        data-kc-mode="{{ mode }}"
+        {% if section.settings[animated_key] != blank %}
+          data-animated="{{ section.settings[animated_key] | file_url }}"
+        {% endif %}
+      >
+        <img
+          src="{{ poster_url }}"
+          alt="{{ alt | escape }}"
+          width="1080"
+          height="960"
+          loading="lazy"
+        >
+        <template>
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="{{ poster_url }}"
+            aria-label="{{ alt | escape }}"
+          >
+            {%- if section.settings[hevc_key] != blank -%}
+              <source src="{{ section.settings[hevc_key] | file_url }}" type='video/mp4; codecs="hvc1"'>
+            {%- endif -%}
+            {%- if section.settings[webm_key] != blank -%}
+              <source src="{{ webm_url }}" type="video/webm">
+            {%- endif -%}
+          </video>
+        </template>
+      </div>
+    {%- endfor -%}
+  </kc-hero-animation>
+{%- endif -%}

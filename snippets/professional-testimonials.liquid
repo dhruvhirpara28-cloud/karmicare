@@ -1,5 +1,14 @@
+{% doc %}
+  Renders the compact professional cards within a product column.
+  @param {object} block - The professional testimonials block.
+  @param {product} product - The product providing the testimonials.
+  @param {string} [instance] - Unique placement within the product section.
+{% enddoc %}
+
 {%- liquid
   assign testimonials = product.metafields.custom.professional_testimonials.value
+  assign placement = instance | default: 'content'
+  assign testimonials_id = section.id | append: '-' | append: block.id | append: '-' | append: placement
 -%}
 
 {%- capture slider_classes -%}
@@ -21,58 +30,73 @@
 {%- if testimonials != blank -%}
   {{ 'section-trusted-professionals.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+  {{ 'component-professional-testimonials.css' | asset_url | stylesheet_tag }}
 
   <style>
     {%- if block.settings.card_bg_color_day != blank -%}
-      #Testimonials-{{ block.id }} .trusted-professionals__card-content {
+      #Testimonials-{{ testimonials_id }} .trusted-professionals__card-content {
         background-color: {{ block.settings.card_bg_color_day }};
       }
     {%- endif -%}
     {%- if block.settings.card_bg_color_night != blank -%}
-      body.night-mode #Testimonials-{{ block.id }} .trusted-professionals__card-content {
+      body.night-mode #Testimonials-{{ testimonials_id }} .trusted-professionals__card-content {
         background-color: {{ block.settings.card_bg_color_night }};
       }
     {%- endif -%}
-    .kc-professional-testimonials p{font-size:var(--font-body-small-size);}
-    .kc-professional-testimonials h6{font-weight:var(--font-600-weight);}
+    #Testimonials-{{ testimonials_id }} {
+      --kc-professionals-background: {{ block.settings.bg_color_day | default: 'transparent' }};
+    }
+    body.night-mode #Testimonials-{{ testimonials_id }} {
+      --kc-professionals-background: {{ block.settings.bg_color_night | default: 'transparent' }};
+    }
   </style>
 
   <div
-    id="Testimonials-{{ block.id }}"
+    id="Testimonials-{{ testimonials_id }}"
     class="kc-professional-testimonials trusted-professionals"
-    style="--heading-color-day: {{ block.settings.heading_color_day }}; padding-top: 0; padding-bottom: 0; background-color: {{ block.settings.bg_color_day | default: 'transparent' }};"
   >
-    <div class="trusted-professionals__inner" style="padding: 0;">
-      <div class="trusted-professionals__header" style="text-align: left; margin-bottom: 2rem;">
-        <h2 style="font-size: 2rem; color: var(--heading-color-day); margin: 0;">
+    <div class="trusted-professionals__inner">
+      {%- if block.settings.heading != blank -%}
+      <div class="trusted-professionals__header">
+        <span class="kc-caption-subheading subtitle-item">PROFESSIONAL PARTNERS</span>
+        <h2>
           {{ block.settings.heading }}
         </h2>
       </div>
+      {%- endif -%}
 
       {%- if show_slider -%}
-        <slider-component class="slider-mobile-gutter">
+        <slider-component class="kc-professional-testimonials__slider">
       {%- endif -%}
       <ul
         class="trusted-professionals__grid{% if show_slider %} slider{{ slider_classes }}{% endif %}"
-        id="Slider-Testimonials-{{ block.id }}"
+        id="Slider-Testimonials-{{ testimonials_id }}"
         role="list"
         style="--cols-desktop: {{ block.settings.columns_desktop | default: 3 }}; --cols-laptop: {{ block.settings.columns_laptop | default: 3 }}; --cols-tablet: {{ block.settings.columns_tablet | default: 2 }}; --cols-mobile: {{ block.settings.columns_mobile | default: 1 }};"
       >
         {%- for testimonial in testimonials -%}
+          {%- liquid
+            assign quote_text = testimonial.description | metafield_text | strip
+            assign has_quote = false
+            unless quote_text == blank or quote_text contains 'Quote placeholder'
+              assign has_quote = true
+            endunless
+          -%}
           <li
-            id="Slide-Testimonial-{{ block.id }}-{{ forloop.index }}"
+            id="Slide-Testimonial-{{ testimonials_id }}-{{ forloop.index }}"
             class="trusted-professionals__card slider__slide"
+            {% if has_quote %}tabindex="0"{% endif %}
           >
             <div class="trusted-professionals__card-image">
               {%- if testimonial.image != blank -%}
-                {{ testimonial.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                {{ testimonial.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240, 360, 480, 660, 900', sizes: '(min-width: 750px) 280px, 75vw' }}
               {%- else -%}
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
 
             <div class="trusted-professionals__card-content">
-              {%- if testimonial.description != blank -%}
+              {%- if has_quote -%}
                 <div class="trusted-professionals__card-quote">
                   <div class="trusted-professionals__card-quote-inner">
                     <div class="trusted-professionals__card-quote-text">
@@ -83,10 +107,10 @@
               {%- endif -%}
               <div class="trusted-professionals__card-body">
                 {%- if testimonial.name != blank -%}
-                  <h6>{{ testimonial.name }}</h6>
+                  <h3 class="trusted-professionals__card-name">{{ testimonial.name }}</h3>
                 {%- endif -%}
                 {%- if testimonial.designation != blank -%}
-                  <p>{{ testimonial.designation }}</p>
+                  <p class="trusted-professionals__card-title">{{ testimonial.designation }}</p>
                 {%- endif -%}
               </div>
             </div>
@@ -95,11 +119,12 @@
       </ul>
 
       {%- if show_slider and block.settings.show_slider_arrows -%}
-        <div class="slider-buttons no-js-hidden" style="justify-content: center; margin-top: 1rem;">
+        <div class="slider-buttons no-js-hidden">
           <button
             type="button"
             class="slider-button slider-button--prev"
             name="previous"
+            aria-controls="Slider-Testimonials-{{ testimonials_id }}"
             aria-label="{{ 'general.slider.previous_slide' | t }}"
           >
             <span class="svg-wrapper">
@@ -119,6 +144,7 @@
             type="button"
             class="slider-button slider-button--next"
             name="next"
+            aria-controls="Slider-Testimonials-{{ testimonials_id }}"
             aria-label="{{ 'general.slider.next_slide' | t }}"
           >
             <span class="svg-wrapper">

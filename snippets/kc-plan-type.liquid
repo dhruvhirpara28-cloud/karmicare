@@ -1,0 +1,26 @@
+{%- comment -%}
+  The type of a selling plan, by selling plan ID: "60-day" or "year". This is the only table of plan
+  IDs in the theme. Plan logic keys on the type, never on plan or group names, so renaming or
+  translating a plan changes nothing:
+  - the "Subscription Name" for Care Credit (snippets/kc-plan-loyalty.liquid)
+  - the billing interval, deliveries and Dental Check-up Reward (assets/kc-plan-select.js PLAN_TYPES)
+  - the end CTA interval (sections/featured-product.liquid)
+  It lists every selling plan of the product, the legacy email offers included (they never show on the
+  product page, but any theme path that adds them gets the same treatment).
+
+  Accepts:
+  - plan_id: {String|Number} a selling plan ID
+
+  Outputs "60-day", "year", or nothing for an unknown plan.
+{%- endcomment -%}
+{%- liquid
+  # 60-day: 60-Day Rhythm, 60-Day Supply, Subscribe and Save "Deliver every 60 days".
+  # Year: The Karmicare Year, Yearly Plan, both Subscribe and Save "Pay every 12 months" plans.
+  assign kc_wanted = plan_id | append: '' | remove: 'gid://shopify/SellingPlan/' | strip
+  case kc_wanted
+    when '712106115453', '712192164221', '712387297661'
+      echo '60-day'
+    when '712155431293', '712370356605', '712387330429', '712387363197'
+      echo 'year'
+  endcase
+-%}

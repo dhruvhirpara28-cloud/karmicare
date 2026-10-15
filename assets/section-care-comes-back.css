@@ -1,0 +1,353 @@
+/* section-care-comes-back.css
+   "Care that comes back" (PDP, before compare plans; homepage, before the FAQ, without the
+   receipt). No Figma frame yet: built on the KC tokens
+   and the patterns of its neighbours (head as in how-it-works and the comparison table, receipt
+   lines as the price ledger of frame 3446:8040, card surface and radius from the PDP cards).
+   A flat page background joins the research band above (ends on surface-page) to the plans
+   band below (starts on surface-page). Held Figma names are read through the generated names
+   that carry Figma's values (docs/design-tokens/baseline/proposals.md):
+     text/primary/default      -> --kc-mapped-text-default-heading (P1)
+     surface/secondary/default -> --kc-mapped-surface-page-secondary (P3) */
+
+.care-comes-back {
+  /* Band surface; the markers are filled with it so the line stops at their rings */
+  --ccb-surface: var(--kc-mapped-surface-page);
+  /* Loop geometry: marker circle, and the room left of the markers for the return line */
+  --ccb-marker: 36px;
+  --ccb-loop: 20px;
+  /* stepper in the secondary button's border (KC/Button secondary: border/control/default,
+     thin stroke), not the accent (Victor, 14 Oct) */
+  --ccb-line: var(--kc-shape-stroke-thin);
+  --ccb-line-colour: var(--kc-mapped-border-control-default);
+  /* receipt rows, as the comparison and plans tables: 64px / 72px from 750px */
+  --ccb-row-height: 6.4rem;
+  /* head -> loop and receipt -> fine print, as the comparison, research and plans bands
+     (--ct-block-gap, --pc-block-gap): 40px / 80px from 750px */
+  --ccb-block-gap: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ccb-block-gap);
+  /* Vertical padding comes from the section settings and the side gutter from the theme's
+     --page-gutter (15px mobile, 32px from 990px), as in the other PDP bands */
+  padding-inline: var(--page-gutter);
+  background: var(--ccb-surface);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-backbone);
+}
+
+/* Setting "Background: Accent": the colour the section gradients run to (#f2f8ff / #2c3a60),
+   so the band joins neighbours that end and start on it, as the research band and the FAQ on
+   the homepage */
+.care-comes-back--accent {
+  --ccb-surface: var(--kc-mapped-gradient-section-accent);
+}
+
+@media screen and (min-width: 750px) {
+  .care-comes-back {
+    --ccb-marker: 40px;
+    --ccb-loop: 28px;
+    --ccb-row-height: 7.2rem;
+    --ccb-block-gap: 8rem;
+  }
+}
+
+.care-comes-back p,
+.care-comes-back h2,
+.care-comes-back h3,
+.care-comes-back dl,
+.care-comes-back dd {
+  margin: 0;
+}
+
+/* Head */
+.care-comes-back__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 24px desktop / 20px mobile, as every PDP head (eyebrow, heading, intro) */
+  gap: var(--kc-responsive-spacing-layout-lg);
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+}
+
+/* Figma text style Label/Large */
+.care-comes-back__eyebrow {
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  /* 1.7px, the eyebrow letter spacing of every PDP band */
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kc-mapped-text-status-body);
+}
+
+.care-comes-back__heading {
+  font-weight: 500;
+  font-size: var(--kc-responsive-h2-text-size);
+  line-height: var(--kc-responsive-h2-line-height);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
+  text-wrap: balance;
+}
+
+.care-comes-back__heading em {
+  display: block;
+  font-style: normal;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.care-comes-back__intro {
+  max-width: 640px;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+  text-wrap: pretty;
+}
+
+/* Body: the loop beside the receipt (--split, stacked below 990px). One of them alone, as the
+   loop without receipt lines on the homepage, takes the 680px column of the centred bands
+   (the FAQ below it on the homepage). */
+.care-comes-back__body {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-spacious);
+  width: 100%;
+  max-width: 680px;
+}
+
+.care-comes-back__body--split {
+  max-width: 1040px;
+}
+
+@media screen and (min-width: 990px) {
+  .care-comes-back__body--split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: calc(var(--kc-responsive-spacing-layout-spacious) * 1.6);
+  }
+}
+
+/* The loop: markers 01–03 run down one line; the line turns at the bottom and runs back up to
+   01 with an arrow. Both are decoration (aria-hidden markers, pseudo-elements); the list
+   order carries the meaning. */
+.care-comes-back__loop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xl);
+  margin: 0;
+  padding: 0 0 0 var(--ccb-loop);
+  list-style: none;
+}
+
+.care-comes-back__loop::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--ccb-marker) / 2 - var(--ccb-line) / 2);
+  bottom: 0;
+  left: 0;
+  width: calc(var(--ccb-loop) + var(--ccb-marker) / 2 + var(--ccb-line) / 2);
+  border: var(--ccb-line) solid var(--ccb-line-colour);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+/* Arrow head on the return line, pointing into marker 01 */
+.care-comes-back__loop::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--ccb-marker) / 2 - 4px);
+  left: calc(var(--ccb-loop) - 11px);
+  width: 8px;
+  height: 8px;
+  border-top: var(--ccb-line) solid var(--ccb-line-colour);
+  border-right: var(--ccb-line) solid var(--ccb-line-colour);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.care-comes-back__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--kc-responsive-spacing-layout-md);
+  margin: 0;
+  padding: 0;
+}
+
+.care-comes-back__marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--ccb-marker);
+  height: var(--ccb-marker);
+  border: var(--ccb-line) solid var(--ccb-line-colour);
+  border-radius: 50%;
+  background: var(--ccb-surface);
+  font-weight: 600;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.care-comes-back__step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  /* first line of the title on the marker's centre */
+  padding-top: calc((var(--ccb-marker) - var(--kc-responsive-body-lg-line-height)) / 2);
+}
+
+.care-comes-back__step-title {
+  font-weight: 600;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+}
+
+.care-comes-back__step-body {
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+  text-wrap: pretty;
+}
+
+/* Receipt: the first Year in Care Credit as a two-column table, in the language of the
+   comparison and plans tables: hairline box and rules, cells padded layout-md x
+   layout-comfortable, rows 64px / 72px, header body-md 600, rows body-sm, the total in the
+   plans table's price style (h5 500), no rule under the last row. */
+.care-comes-back__receipt {
+  display: flex;
+  flex-direction: column;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-md);
+  overflow: hidden;
+  background: var(--kc-mapped-surface-page-secondary);
+}
+
+.care-comes-back__receipt-head,
+.care-comes-back__line {
+  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-comfortable);
+  border-bottom: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+}
+
+/* Title row: title left, the amount column's label right in the muted tone */
+.care-comes-back__receipt-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+}
+
+.care-comes-back__receipt-column {
+  flex: none;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.care-comes-back__receipt-title {
+  min-width: 0;
+  font-weight: 600;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+}
+
+.care-comes-back__line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+  min-height: var(--ccb-row-height);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.care-comes-back__line-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.care-comes-back__line-note {
+  font-weight: 400;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.care-comes-back__line-amount {
+  flex: none;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.care-comes-back__line--total {
+  border-bottom: 0;
+}
+
+.care-comes-back__line--total .care-comes-back__line-label {
+  font-weight: 400;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.care-comes-back__line--total .care-comes-back__line-amount {
+  font-weight: 500;
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+}
+
+/* "60-Day", "check-up" stay whole (snippets/care-comes-back-text.liquid) */
+.care-comes-back__nobreak {
+  white-space: nowrap;
+}
+
+/* Foot */
+.care-comes-back__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-sm);
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+}
+
+.care-comes-back__fine,
+.care-comes-back__terms {
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.care-comes-back__fine {
+  color: var(--kc-mapped-text-default-body);
+  text-wrap: pretty;
+}
+
+.care-comes-back__terms {
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.care-comes-back__terms:hover {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+.care-comes-back__terms:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

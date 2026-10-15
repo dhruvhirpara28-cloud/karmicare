@@ -1,9 +1,73 @@
-/* section-research-behind-system.css */
-.research-behind-system__header h2 {
-  max-width: 370px;
-  margin: 0;
+/* section-research-behind-system.css
+   Figma: PDP band 3391:12644, homepage 2642:2205 (desktop) and 2766:10628 (mobile),
+   card KC/Research_card 3374:8313. Colours, type and spacing read assets/kc-tokens.css;
+   a px literal is a literal in Figma too. Mobile below 750px, desktop from 750px. */
+
+.research-behind-system {
+  --rbs-block-gap: 4rem; /* heading -> cards -> note */
+  color: var(--kc-mapped-text-default-heading);
+  overflow-x: clip;
 }
 
+@media screen and (min-width: 750px) {
+  .research-behind-system {
+    --rbs-block-gap: 8rem;
+  }
+}
+
+/* Hairline above the heading (mobile only unless Show Top Border is on) */
+.research-behind-system__border .kc-section-border {
+  border-bottom-color: var(--kc-mapped-border-primary-hairline);
+  opacity: 1;
+}
+
+@media screen and (min-width: 750px) {
+  .research-behind-system__border--mobile {
+    display: none;
+  }
+}
+
+/* Header: centred on mobile, left from 750px */
+.research-behind-system__header {
+  margin-bottom: var(--rbs-block-gap);
+  text-align: center;
+}
+
+.research-behind-system__header .kc-caption-subheading {
+  margin-bottom: var(--kc-responsive-spacing-layout-lg);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+}
+
+.research-behind-system__heading {
+  max-width: 8.4em; /* breaks after "The research" as in Figma */
+  margin: 0 auto;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: var(--kc-responsive-h2-text-size);
+  line-height: var(--kc-responsive-h2-line-height);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
+  color: inherit;
+}
+
+/* Two-tone heading: italic text is the muted second line */
+.research-behind-system__heading em {
+  display: block;
+  font-style: normal;
+  color: var(--kc-mapped-text-default-body);
+}
+
+@media screen and (min-width: 750px) {
+  .research-behind-system__header {
+    text-align: left;
+  }
+
+  .research-behind-system__heading {
+    margin-inline: 0;
+  }
+}
+
+/* Grid (marquee and slider off) */
 .research-behind-system__grid {
   padding: 0;
   margin: 0;
@@ -12,7 +76,7 @@
 
 .research-behind-system__grid:not(.slider) {
   display: grid;
-  gap: var(--kc-responsive-spacing-section-sm, 2rem);
+  gap: var(--kc-responsive-spacing-layout-md);
   grid-template-columns: repeat(var(--cols-mobile, 1), 1fr);
 }
 
@@ -34,24 +98,19 @@
   }
 }
 
-/* Marquee: one full-bleed row that drifts (assets/research-behind-system-marquee.js) */
-.research-behind-system {
-  overflow-x: clip;
-}
-
+/* Marquee: one full-bleed row that drifts (assets/kc-marquee.js) */
 .research-behind-system__marquee {
   display: block;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
   touch-action: pan-y;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  container-type: inline-size;
 }
 
 .research-behind-system__track {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--kc-responsive-spacing-layout-md);
   width: max-content;
   margin: 0;
   padding: 0;
@@ -59,32 +118,19 @@
   will-change: transform;
 }
 
-/* Mobile (stacked card): the page-width content box split into the mobile
-   column count (cqw = marquee width, without scrollbar) */
-.research-behind-system__marquee {
-  --cols: var(--cols-mobile, 1.2);
-  container-type: inline-size;
-}
-
+/* Figma widths: mobile 320 (picture under the body); from 750px 380 without a
+   picture, 780 with one (380 text + 400 picture). Shrinks on narrow screens. */
 .research-behind-system__track .research-card {
-  flex: 0 0 calc((min(100cqw, var(--page-width)) - 2 * var(--page-gutter) - 1.5rem * (var(--cols) - 1)) / var(--cols));
+  flex: 0 0 min(32rem, 100cqw - 2 * var(--page-gutter));
 }
 
-/* Tablet and up (side-by-side card), per design: 400px image + 380px content
-   (32px padding each side included), plus the 1px border on each side.
-   Narrower screens shrink the card but keep the 400:380 split. */
 @media screen and (min-width: 750px) {
   .research-behind-system__track .research-card {
-    flex: 0 0 min(782px, 100cqw - 3rem);
+    flex-basis: min(38rem, 100cqw - 3rem);
   }
 
-  .research-behind-system__track .research-card__image-wrapper {
-    flex: 0 0 calc(400 / 780 * 100%);
-    max-width: none;
-  }
-
-  .research-behind-system__track .research-card__content {
-    min-width: 0;
+  .research-behind-system__track .research-card--media {
+    flex-basis: min(78rem, 100cqw - 3rem);
   }
 }
 
@@ -104,26 +150,23 @@
   padding-inline: max(var(--page-gutter), calc(50vw - var(--page-width, 120rem) / 2 + var(--page-gutter)));
 }
 
-/* Slider Overrides */
+/* Slider overrides */
 .research-behind-system__grid.slider {
   display: flex;
   flex-wrap: nowrap;
-  gap: 1.5rem;
+  gap: var(--kc-responsive-spacing-layout-md);
   padding: 0;
   margin: 0;
   justify-content: flex-start;
   scroll-padding-left: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .research-behind-system__grid.slider::-webkit-scrollbar {
   display: none;
-}
-
-.research-behind-system__grid.slider {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .research-behind-system__grid.slider .research-card:first-child {
@@ -132,196 +175,336 @@
 }
 
 .research-behind-system__grid.slider .research-card {
+  --slider-gap: var(--kc-responsive-spacing-layout-md);
   flex-shrink: 0;
-  width: calc(100% / var(--cols-mobile, 1) - (1.5rem * (var(--cols-mobile, 1) - 1) / var(--cols-mobile, 1)));
+  width: calc(100% / var(--cols-mobile, 1) - (var(--slider-gap) * (var(--cols-mobile, 1) - 1) / var(--cols-mobile, 1)));
 }
 
 @media screen and (min-width: 750px) {
   .research-behind-system__grid.slider .research-card {
-    width: calc(100% / var(--cols-tablet, 1) - (1.5rem * (var(--cols-tablet, 1) - 1) / var(--cols-tablet, 1)));
+    width: calc(100% / var(--cols-tablet, 1) - (var(--slider-gap) * (var(--cols-tablet, 1) - 1) / var(--cols-tablet, 1)));
   }
 }
 
 @media screen and (min-width: 990px) {
   .research-behind-system__grid.slider .research-card {
-    width: calc(100% / var(--cols-laptop, 2) - (1.5rem * (var(--cols-laptop, 2) - 1) / var(--cols-laptop, 2)));
+    width: calc(100% / var(--cols-laptop, 2) - (var(--slider-gap) * (var(--cols-laptop, 2) - 1) / var(--cols-laptop, 2)));
   }
 }
 
 @media screen and (min-width: 1440px) {
   .research-behind-system__grid.slider .research-card {
-    width: calc(100% / var(--cols-desktop, 2) - (1.5rem * (var(--cols-desktop, 2) - 1) / var(--cols-desktop, 2)));
+    width: calc(100% / var(--cols-desktop, 2) - (var(--slider-gap) * (var(--cols-desktop, 2) - 1) / var(--cols-desktop, 2)));
   }
 }
 
+/* KC/Research_card */
 .research-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--card-bg, transparent);
-  border-radius: var(--extra-primary-border-radius);
+  background-color: var(--card-bg, var(--kc-mapped-surface-page-secondary));
+  border-radius: var(--kc-shape-radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(var(--color-foreground), 0.12);
+  color: var(--kc-mapped-text-default-heading);
 }
 
-@media screen and (min-width: 750px) {
-  .research-card {
-    flex-direction: row;
-  }
+/* Hairline drawn over the picture edge, as in Figma */
+.research-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .research-card__content {
-  flex: 1;
-  padding: var(--gap-2xl);
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  gap: 2.4rem;
+  min-width: 0;
+  padding: var(--kc-responsive-spacing-layout-xl) 2rem;
 }
 
-@media screen and (max-width: 749px) {
-  .research-card__content {
-    padding: 1.5rem;
-  }
+.research-card__top {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--kc-responsive-spacing-layout-lg);
+}
+
+.research-card__subheading,
+.research-card__label {
+  font-family: var(--kc-font-role-identity);
+  font-weight: 500;
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+}
+
+.research-card__subheading {
+  margin: 0 0 2rem;
+  font-size: 1rem;
+  line-height: 1.6rem;
 }
 
 .research-card__heading {
-  margin: 16px 0 20px;
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+  letter-spacing: var(--kc-responsive-h4-letter-spacing);
+  color: inherit;
 }
 
-@media screen and (max-width: 750px) {
-  .research-card__heading {
-    margin: 20px 0 12px;
-  }
+.research-card__subtext {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
 }
 
+/* Result, Method and Source sit at the bottom of the body */
 .research-card__details {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 2rem;
-  margin: 3.5rem 0 2rem;
-  flex: 1;
+  margin-top: auto;
 }
 
-.research-card__detail-group:first-child {
-  flex: 1;
+.research-card__detail-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
 }
 
-.research-card__detail-group span {
-  display: block;
-  margin-bottom: 0.8rem;
+.research-card__label {
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: var(--kc-responsive-label-sm-line-height);
+}
+
+.research-card__detail {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
 }
 
 .research-card__footer {
   display: flex;
-  gap: 1rem;
   flex-direction: column;
   align-items: flex-start;
+  gap: 1.2rem;
 }
 
-.research-card__footer img {
-  height: 32px;
-  width: auto;
+/* Source chip: authors · year · journal, links to the study */
+.research-card__source {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  max-width: min(32rem, 100%);
+  padding: 0.6rem 1rem;
+  border-radius: var(--kc-shape-radius-full);
+  background-color: var(--kc-mapped-surface-tertiary-default);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-identity);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: var(--kc-responsive-label-sm-line-height);
+  letter-spacing: var(--kc-responsive-label-sm-letter-spacing);
+  text-transform: capitalize;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.research-card__source:hover {
+  background-color: var(--kc-mapped-surface-tertiary-default-hover);
+}
+
+.research-card__source:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: 2px;
+}
+
+.research-card__source-text {
+  min-width: 0;
+  line-height: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.research-card__source svg {
+  flex: 0 0 auto;
+}
+
+.research-card__logo {
+  display: block;
+  width: 9.5rem;
+  height: 3rem;
   object-fit: contain;
+  object-position: left center;
+  opacity: 0.85;
 }
 
+/* Picture: under the body on mobile, on the right from 750px */
 .research-card__image-wrapper {
   position: relative;
-  flex: 0 0 auto;
-  min-height: 300px;
-}
-
-@media screen and (min-width: 750px) {
-  .research-card__image-wrapper {
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
+  flex: 0 0 20rem;
+  overflow: hidden;
 }
 
 .research-card__image-wrapper img {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
+/* Legend chip on the picture (fixed colours: it sits on a photo) */
 .research-card__badge {
   position: absolute;
-  bottom: 2rem;
-  right: 0;
-  left: 0rem;
-  background-color: var(--card-bg);
-  padding: 6px 10px;
-  border-radius: var(--tertiary-border-radius);
-  white-space: normal;
-  text-align: center;
-  width: 100%;
-  max-width: calc(100% - 20px);
-  margin: 10px;
+  bottom: 1.6rem;
+  left: 1.6rem;
+  max-width: calc(100% - 3.2rem);
+  padding: 0.6rem 1rem;
+  border-radius: var(--kc-shape-radius-full);
+  background-color: rgba(var(--kc-brand-original-off-white-rgb), 0.92);
+  color: var(--kc-brand-original-dark-blue);
+  font-family: var(--kc-font-role-identity);
+  font-weight: 500;
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: var(--kc-responsive-label-sm-line-height);
+  letter-spacing: var(--kc-responsive-caption-letter-spacing);
 }
 
-
-.research-behind-system__footer {
-  max-width: 480px;
-}
-
-.research-card__footer a {
-  background-color: var(--gradient-background);
-  padding: 8px;
-  border-radius: var(--tertiary-border-radius);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: fit-content;
-  max-width: 100%;
-  font-size: 11px;
-  font-weight: var(--font-500-weight);
-  font-family: var(--kc-font-family-Nunito);
-}
-
-.research-behind-system__header {
-  margin-bottom: 40px;
-}
-
-
-
-.research-behind-system__footer p {
-  margin-bottom: 15px;
-}
-
-@media screen and (max-width: 750px) {
-
-  .research-behind-system__header h2,
-  .research-behind-system__footer {
-    margin: 0 auto;
-  }
-
-  .research-behind-system__header,
-  .research-behind-system__footer {
-    text-align: center;
+/* Mobile card variant: Figma sets the legend in 10px (label/sm mobile). The
+   theme token is held at 12px (proposal P18), at which the longest legend
+   wraps inside the 320px card. */
+@media screen and (max-width: 749px) {
+  .research-card__badge {
+    font-size: 1rem;
+    line-height: 1.2rem;
   }
 }
 
-.research-behind-system__footer {
-  margin-top: 40px;
-}
-/* KC/Research_card: 20px corners */
-.research-card {
-  border-radius: 2rem;
-}
-
-/* Desktop per the Figma homepage: 80px heading -> cards -> note,
-   32px card padding */
-@media screen and (min-width: 990px) {
-  .research-behind-system__header {
-    margin-bottom: 8rem;
+@media screen and (min-width: 750px) {
+  .research-card {
+    min-height: 48rem;
   }
 
-  .research-behind-system__footer {
-    margin-top: 8rem;
+  .research-card--media {
+    flex-direction: row;
   }
 
   .research-card__content {
-    padding: 3.2rem;
+    flex: 1 1 0;
+    gap: 2.8rem;
+    padding: var(--kc-responsive-spacing-layout-xl);
+  }
+
+  .research-card__subheading {
+    font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: var(--kc-responsive-label-sm-line-height);
+  }
+
+  .research-card__heading {
+    font-size: var(--kc-responsive-h4-text-size);
+    line-height: var(--kc-responsive-h4-line-height);
+  }
+
+  .research-card__image-wrapper {
+    flex: 0 0 calc(400 / 780 * 100%);
+  }
+}
+
+/* Note and KC/Button under the cards */
+.research-behind-system__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-md);
+  margin-top: var(--rbs-block-gap);
+  text-align: center;
+}
+
+.research-behind-system__note {
+  max-width: 47.9rem;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.research-behind-system__note > * {
+  margin: 0;
+  line-height: inherit; /* base.css sets p and span to normal */
+}
+
+.research-behind-system__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  min-height: 4.4rem;
+  padding: 0 var(--kc-responsive-spacing-layout-md);
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-control-default);
+  border-radius: var(--kc-shape-radius-sm);
+  background-color: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+  backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: var(--kc-responsive-label-sm-line-height);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.research-behind-system__button:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.research-behind-system__button:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: 2px;
+}
+
+.research-behind-system__button span {
+  line-height: inherit;
+}
+
+.research-behind-system__button svg {
+  flex: 0 0 auto;
+}
+
+@media screen and (min-width: 750px) {
+  .research-behind-system__footer {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .research-behind-system__button,
+  .research-card__source {
+    transition: none;
+  }
+
+  .research-behind-system__button:hover {
+    transform: none;
   }
 }

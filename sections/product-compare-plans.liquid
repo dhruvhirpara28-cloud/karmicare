@@ -1,5 +1,9 @@
 {%- liquid
   assign compare_table = product.metafields.custom.compare_table.value
+  assign kc = false
+  if section.settings.design == 'kc'
+    assign kc = true
+  endif
 -%}
 {% style %}
   #compare-plans-{{ section.id }} {
@@ -45,7 +49,16 @@
     assign footer_text = section.settings.footer_text
   -%}
 
-  <div aria-label="Compare plans" class="plan-compare" id="compare-plans-{{ section.id }}">
+  {%- comment -%} KC design (Figma 3391:12660): the info icon is Figma's 16px "Interface" glyph {%- endcomment -%}
+  {%- capture kc_info_icon -%}
+    <svg class="pc-info-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10.6667V8M8 5.33333H8.00667M14.6667 8C14.6667 11.6819 11.6819 14.6667 8 14.6667C4.3181 14.6667 1.33333 11.6819 1.33333 8C1.33333 4.3181 4.3181 1.33333 8 1.33333C11.6819 1.33333 14.6667 4.3181 14.6667 8Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- endcapture -%}
+
+  <div
+    aria-label="Compare plans"
+    class="plan-compare{% if kc %} plan-compare--kc{% endif %}"
+    id="compare-plans-{{ section.id }}"
+  >
     <div class="page-width">
       <div class="pc-head">
         <span class="subtitle-item">{{ eyebrow }}</span>
@@ -134,7 +147,11 @@
                 {{ row.label.value | default: row.label }}
                 {%- if row.tooltip.value != blank -%}
                   <span class="info-tip">
-                    <span aria-hidden="true" class="info-icon">i</span>
+                    {%- if kc -%}
+                      {{ kc_info_icon }}
+                    {%- else -%}
+                      <span aria-hidden="true" class="info-icon">i</span>
+                    {%- endif -%}
                     <span class="info-tip-popover" role="tooltip">
                       {%- if row.tooltip.type == 'rich_text_field' -%}
                         {{ row.tooltip | metafield_tag }}
@@ -153,7 +170,48 @@
         <!-- PLAN COLUMNS -->
         {%- for plan in plans -%}
           {%- if plan.hide_plan.value == true -%}{%- continue -%}{%- endif -%}
-          {%- assign plan_handle = plan.handle_item.value | default: plan.handle_item -%}
+          {%- liquid
+            assign plan_handle = plan.handle_item.value | default: plan.handle_item
+            assign plan_title = plan.title.value | default: plan.title
+
+            # handle_item 'once', 'one-time' or 'one time' (any case) is the Try Once card: one time,
+            # straight to checkout. Any other card selects its selling_plan_id in the buybox, by ID only;
+            # a missing or wrong ID selects nothing (it never falls back to one time).
+            # handle_item and selling_plan_id are keys and must not be translated. Should handle_item be
+            # translated anyway, a card without a selling_plan_id whose own entry handle (never
+            # translated, e.g. "try-onceonce") says once still counts as the Try Once card.
+            # selling_plan_name is no longer read: plans are matched by ID, not by name.
+            assign plan_raw_id = plan.selling_plan_id.value | default: plan.selling_plan_id | append: '' | strip
+            assign plan_kind = plan_handle | downcase | replace: '-', ' ' | strip
+            assign plan_entry_kind = plan.system.handle | downcase | replace: '-', ' '
+            assign plan_is_once = false
+            assign plan_once_by_entry = false
+            if plan_kind == 'once' or plan_kind == 'one time'
+              assign plan_is_once = true
+            elsif plan_raw_id == blank
+              if plan_entry_kind contains 'once' or plan_entry_kind contains 'one time'
+                assign plan_is_once = true
+                assign plan_once_by_entry = true
+              endif
+            endif
+
+            assign plan_resolved = ''
+            unless plan_is_once
+              capture plan_resolved
+                render 'kc-plan-resolve', product: product, plan_id: plan_raw_id
+              endcapture
+            endunless
+            assign plan_selling_plan_id = plan_raw_id
+            assign plan_group_id = ''
+            assign plan_group_name = ''
+            if plan_resolved != blank
+              assign plan_resolved_parts = plan_resolved | split: '|'
+              assign plan_selling_plan_id = plan_resolved_parts[0]
+              assign plan_group_id = plan_resolved_parts[1]
+              assign plan_group_prefix = plan_selling_plan_id | append: '|' | append: plan_group_id | append: '|'
+              assign plan_group_name = plan_resolved | remove_first: plan_group_prefix
+            endif
+          -%}
           <div
             class="pc-col{% if plan.featured.value == true %} pc-featured{% endif %}"
             data-plan="{{ plan_handle | escape }}"
@@ -209,7 +267,11 @@
                     {%- endif -%}
                     {%- if cell_value.tooltip != blank -%}
                       <span class="info-tip pc-tip-end">
-                        <span aria-hidden="true" class="info-icon">i</span>
+                        {%- if kc -%}
+                          {{ kc_info_icon }}
+                        {%- else -%}
+                          <span aria-hidden="true" class="info-icon">i</span>
+                        {%- endif -%}
                         <span class="info-tip-popover" role="tooltip">
                           {%- if cell_value.tooltip.type == 'rich_text_field' -%}
                             {{ cell_value.tooltip | metafield_tag }}
@@ -224,16 +286,71 @@
               </div>
             {%- endfor -%}
 
-            <div class="pc-ctacell center">
+            <div class="pc-ctacell center"{% if request.design_mode %} style="position: relative;"{% endif %}>
               <button
-                class="pc-cta subtitle-item{% if plan.featured.value == true %} karmicare__btn-primary{% else %} karmicare__btn-secondary{% endif %}"
-                data-choose="{{ plan_handle | escape }}"
-                data-selling-plan-id="{{ plan.selling_plan_id.value | default: plan.selling_plan_id | escape }}"
-                data-selling-plan-name="{{ plan.selling_plan_name.value | default: plan.selling_plan_name | escape }}"
+                {%- if kc %}
+                  class="pc-cta{% if plan.featured.value == true %} pc-cta--primary{% else %} pc-cta--secondary{% endif %}"
+                {%- else %}
+                  class="pc-cta subtitle-item{% if plan.featured.value == true %} karmicare__btn-primary{% else %} karmicare__btn-secondary{% endif %}"
+                {%- endif %}
+                data-kc-plan-product="{{ product.id }}"
+                data-kc-plan-title="{{ plan_title | escape }}"
+                {%- if plan_is_once %}
+                  data-kc-plan-choose="once"
+                {%- else %}
+                  data-kc-plan-choose="plan"
+                  data-selling-plan-id="{{ plan_selling_plan_id | escape }}"
+                  data-selling-plan-group-id="{{ plan_group_id }}"
+                {%- endif %}
                 type="button"
               >
                 {{ plan.cta_button.value | default: plan.cta_button | default: 'Choose plan' }}
               </button>
+              {%- if request.design_mode -%}
+                {%- comment -%}
+                  Theme editor only: what this button selects, hung below the button so the table keeps
+                  its row heights
+                {%- endcomment -%}
+                <div style="position: absolute; top: 100%; left: 0; right: 0; z-index: 2; padding: 0 0.8rem; font-size: 1.2rem; line-height: 1.4;">
+                  {%- if plan_is_once -%}
+                    <p style="margin: 0;">
+                      {%- if plan_once_by_entry %}
+                        <span style="color: #b42318;">
+                          handle_item "{{ plan_handle | escape }}" looks translated; read as once from the
+                          entry handle "{{ plan.system.handle | escape }}"
+                        </span>
+                        <br>
+                      {%- endif %}
+                      handle_item "{{ plan_handle | escape }}" → one time, no selling plan, straight to checkout ✓
+                      <br>handle_item and selling_plan_id are keys: never translate them in Translate &amp; Adapt
+                      ("once" stays "once" in every language)
+                    </p>
+                  {%- elsif plan_group_id != blank -%}
+                    {%- capture plan_loyalty_key -%}
+                      {%- render 'kc-plan-loyalty', product: product, plan_id: plan_selling_plan_id -%}
+                    {%- endcapture -%}
+                    <p style="margin: 0;">
+                      Plan-ID {{ plan_selling_plan_id }} → {{ plan_group_name | escape }} ✓
+                      {%- if plan_loyalty_key != blank %}
+                        <br>Subscription Name "{{ plan_loyalty_key | escape }}" (Care Credit) ✓
+                      {%- else %}
+                        <br><span style="color: #b42318;">no Subscription Name: orders on this plan earn no Care Credit</span>
+                      {%- endif %}
+                      <br>selling_plan_id and handle_item are keys: never translate them in Translate &amp; Adapt
+                    </p>
+                  {%- else -%}
+                    {%- capture plan_public_ids -%}{%- render 'kc-plan-public', product: product -%}{%- endcapture -%}
+                    <div
+                      role="note"
+                      style="padding: 0.6rem 0.8rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; text-align: left;"
+                    >
+                      Plan-ID "{{ plan_raw_id | escape }}" is not a selling plan of this product: this button
+                      selects nothing. Set selling_plan_id to one of:
+                      {%- render 'kc-plan-editor-list', product: product, public_plans: plan_public_ids -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
             </div>
           </div>
         {%- endfor -%}
@@ -245,93 +362,12 @@
     </div>
   </div>
 
+  {%- comment -%}
+    The plan buttons (data-kc-plan-choose) select their selling plan in the buybox, or buy one time
+    straight to checkout: assets/kc-plan-select.js, loaded in layout/theme.liquid.
+  {%- endcomment -%}
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const section = document.getElementById('compare-plans-{{ section.id }}');
-      if (!section) return;
-
-      // Synchronize CTA buttons with Loop subscription widget
-      const chooseButtons = section.querySelectorAll('[data-choose]');
-      chooseButtons.forEach((btn) => {
-        btn.addEventListener('click', function () {
-          const chooseVal = this.getAttribute('data-choose');
-          const sellingPlanId = this.getAttribute('data-selling-plan-id');
-          const sellingPlanName = (this.getAttribute('data-selling-plan-name') || '').toLowerCase().trim();
-
-          const fs = document.getElementById('loop-selling-plan-fieldset');
-          if (fs) {
-            const radios = Array.from(fs.querySelectorAll('input[type="radio"]'));
-
-            if (chooseVal === 'once' || sellingPlanName.includes('one time') || sellingPlanName.includes('once')) {
-              const r = radios.find((x) => x.dataset.id === 'loop-one-time-purchase');
-              if (r) {
-                r.click();
-                r.dispatchEvent(new Event('change', { bubbles: true }));
-              }
-            } else {
-              let bestMatchRadio = null;
-              let highestScore = 0;
-
-              // Break the typed name into meaningful words (length > 1)
-              const planWords = sellingPlanName.split(/\s+/).filter((w) => w.length > 1);
-
-              radios.forEach((radio) => {
-                const dataName = (radio.dataset.name || '').toLowerCase().trim();
-                const label = fs.querySelector(`label[for="${radio.id}"]`);
-                const labelText = label ? label.textContent.toLowerCase().trim() : '';
-
-                let score = 0;
-
-                // 1. Exact Name Match = Guaranteed Win
-                if (sellingPlanName && (dataName === sellingPlanName || labelText === sellingPlanName)) {
-                  score += 100;
-                }
-                // 2. Exact ID Match = Guaranteed Win
-                else if (sellingPlanId && radio.dataset.id === sellingPlanId) {
-                  score += 100;
-                }
-                // 3. Dynamic Word Scoring (Finds the best overlap without hardcoding)
-                else if (planWords.length > 0) {
-                  const dataWords = dataName.split(/\s+/).concat(labelText.split(/\s+/));
-                  planWords.forEach((w) => {
-                    if (dataWords.includes(w)) {
-                      score += 1;
-                    }
-                  });
-                }
-
-                // If this radio has a higher match score than the previous ones, it becomes the new best match
-                if (score > highestScore) {
-                  highestScore = score;
-                  bestMatchRadio = radio;
-                }
-              });
-
-              if (bestMatchRadio) {
-                bestMatchRadio.click();
-                bestMatchRadio.dispatchEvent(new Event('change', { bubbles: true }));
-
-                // If this group has a select dropdown, try to select the first option just to be safe
-                const groupContainer = bestMatchRadio.closest('.loop-subscription-group');
-                if (groupContainer) {
-                  const select = groupContainer.querySelector('select');
-                  if (select && select.options.length > 0) {
-                    select.value = select.options[0].value;
-                    select.dispatchEvent(new Event('change', { bubbles: true }));
-                  }
-                }
-              }
-            }
-          }
-
-          // Smoothly scroll to variant picker or product form
-          const productForm = document.querySelector('.product-form, product-info, form[action*="/cart/add"]');
-          if (productForm) {
-            productForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        });
-      });
-
       // Tooltip handling to ensure only one shows at a time on mobile
       const tooltips = document.querySelectorAll('.info-tip, .pc-kit');
 
@@ -366,6 +402,23 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "options": [
+        {
+          "value": "classic",
+          "label": "Classic"
+        },
+        {
+          "value": "kc",
+          "label": "KC tokens (Figma 2026)"
+        }
+      ],
+      "default": "classic",
+      "info": "KC tokens: the product page table from Figma, Day and Night through the KC tokens. Classic keeps the earlier look."
+    },
     {
       "type": "text",
       "id": "eyebrow",

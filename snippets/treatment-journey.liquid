@@ -46,32 +46,6 @@
                 <span class="kc-journey-item-title">{{ item.title | metafield_tag }}</span>
                 <span class="kc-journey-item-desc">{{ item.description | metafield_tag }}</span>
               </div>
-              {%- if item.locked_close_svg != blank
-                or item.locked_close != blank
-                or item.locked_open_svg != blank
-                or item.locked_open != blank
-              -%}
-                <div class="kc-journey-item-lock">
-                  {%- if item.locked_close_svg != blank -%}
-                    <span class="lock-closed">{{ item.locked_close_svg }}</span>
-                  {%- elsif item.locked_close != blank -%}
-                    {{
-                      item.locked_close
-                      | image_url: width: 32
-                      | image_tag: class: 'kc-journey-lock-img lock-closed', loading: 'lazy'
-                    }}
-                  {%- endif -%}
-                  {%- if item.locked_open_svg != blank -%}
-                    <span class="lock-open">{{ item.locked_open_svg }}</span>
-                  {%- elsif item.locked_open != blank -%}
-                    {{
-                      item.locked_open
-                      | image_url: width: 32
-                      | image_tag: class: 'kc-journey-lock-img lock-open', loading: 'lazy'
-                    }}
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
             </li>
           {%- endfor -%}
         </ul>
@@ -122,32 +96,6 @@
                 <span class="kc-journey-item-title">{{ item.title | metafield_tag }}</span>
                 <span class="kc-journey-item-desc">{{ item.description | metafield_tag }}</span>
               </div>
-              {%- if item.locked_close_svg != blank
-                or item.locked_close != blank
-                or item.locked_open_svg != blank
-                or item.locked_open != blank
-              -%}
-                <div class="kc-journey-item-lock">
-                  {%- if item.locked_close_svg != blank -%}
-                    <span class="lock-closed">{{ item.locked_close_svg }}</span>
-                  {%- elsif item.locked_close != blank -%}
-                    {{
-                      item.locked_close
-                      | image_url: width: 32
-                      | image_tag: class: 'kc-journey-lock-img lock-closed', loading: 'lazy'
-                    }}
-                  {%- endif -%}
-                  {%- if item.locked_open_svg != blank -%}
-                    <span class="lock-open">{{ item.locked_open_svg }}</span>
-                  {%- elsif item.locked_open != blank -%}
-                    {{
-                      item.locked_open
-                      | image_url: width: 32
-                      | image_tag: class: 'kc-journey-lock-img lock-open', loading: 'lazy'
-                    }}
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
             </li>
           {%- endfor -%}
         </ul>
@@ -208,39 +156,6 @@
           }
         });
       });
-      // Sync Treatment Journey locks with the selected plan
-      function syncJourneyLocks() {
-          requestAnimationFrame(() => {
-              const checkedRadio = document.querySelector('input[name="loop_purchase_option"]:checked');
-              const name = checkedRadio ? checkedRadio.getAttribute('data-name') || '' : '';
-              const isYearly = name.toLowerCase().includes('year');
-
-              const journeyContainers = document.querySelectorAll('.kc-journey-container');
-              journeyContainers.forEach(container => {
-                  const currentAttr = container.getAttribute('data-active-plan');
-                  if (isYearly) {
-                      if (currentAttr !== 'yearly') container.setAttribute('data-active-plan', 'yearly');
-                  } else {
-                      if (currentAttr) container.removeAttribute('data-active-plan');
-                  }
-              });
-          });
-      }
-
-      // Listen to click and change events on document for instant updates
-      document.addEventListener('click', syncJourneyLocks);
-      document.addEventListener('change', syncJourneyLocks);
-
-      // Run immediately and at intervals to sync after dynamic loads
-      syncJourneyLocks();
-      let syncCount = 0;
-      const syncInterval = setInterval(() => {
-          syncJourneyLocks();
-          syncCount++;
-          if (syncCount > 15) {
-              clearInterval(syncInterval);
-          }
-      }, 500);
     })();
   </script>
 {%- endif -%}

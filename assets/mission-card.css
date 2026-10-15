@@ -1,74 +1,170 @@
+/* ============================================================
+   Mission card (buybox block, snippets/mission-card.liquid)
+   ------------------------------------------------------------
+   A signed note from the founder under the PDP accordions:
+   portrait on the left; label, motto, paragraph and, on the next
+   line, the signature on the right. Copy comes from the metafield
+   custom.mission_card.
+
+   Type, one role per job (Victor, 14 Oct 2026):
+   - Label: Nunito (identity), the buybox Label/Small, in the
+     primary text colour.
+   - Motto: Marlide Display (soul) at 300, the only weight Marlide
+     is used in. One sentence per line at 28px: the h2 size on
+     mobile and the h4 size from 750px. Line-height 1.2 so the two
+     lines breathe (Victor: "so it breathes and reads easy").
+   - Paragraph and signature: Proxima Nova (backbone), 14/20 on
+     mobile and 15/20 from 750px.
+
+   The portrait keeps the photo's 2:3 proportion and takes the
+   height of the text, so its width follows the text's height: about
+   115-120px. It is absolutely placed in a fixed 120px slot, so the
+   text column never depends on the photo's width (a grid or flex
+   column sized from the row height loops: a narrower text column
+   makes the text taller, which makes the photo wider). On the
+   narrowest phones the text is taller than 120 x 1.5; the photo then
+   stays 120px wide and object-fit trims the white background at its
+   sides.
+
+   The block's margin from the accordions sits in kc-buybox.css
+   with the other buybox blocks. Figma 3391:12333 still shows the
+   earlier card.
+   ============================================================ */
+
 .kc-mission-card {
-  margin: 0.5rem 0 2.0rem;
-  box-sizing: border-box;
-  padding: 1.5rem;
-  width: 100%;
+  /* Photo slot. No size token exists for it. */
+  --kc-mission-card-portrait-max: 120px;
+  --kc-mission-card-motto-size: var(--kc-responsive-h2-text-size);
+  --kc-mission-card-motto-line-height: 1.2;
+  --kc-mission-card-text-size: var(--kc-responsive-body-md-text-size);
+  --kc-mission-card-text-line-height: var(--kc-responsive-body-md-line-height);
+
+  position: relative;
+  padding: 0 0 0 calc(var(--kc-mission-card-portrait-max) + var(--kc-responsive-spacing-layout-lg));
+  color: var(--kc-mapped-text-default-body);
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (min-width: 750px) {
   .kc-mission-card {
-    padding: 0;
+    --kc-mission-card-motto-size: var(--kc-responsive-h4-text-size);
+    --kc-mission-card-text-size: var(--kc-responsive-body-sm-text-size);
+    --kc-mission-card-text-line-height: var(--kc-responsive-body-sm-line-height);
   }
 }
 
-.kc-mission-card-inner {
-  display: flex;
-  gap: var(--gap-xl);
-  align-items: flex-start;
-}
-
-.kc-mission-card-avatar-wrapper {
-  width: 58px;
-  height: 97px;
+/* As tall as the text (the card's height), as wide as 2:3 allows,
+   capped at the slot. */
+.kc-mission-card-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  aspect-ratio: 2 / 3;
+  max-width: var(--kc-mission-card-portrait-max);
   overflow: hidden;
-  border-radius: var(--primary-border-radius);
-  flex-shrink: 0;
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-surface-page-secondary);
 }
 
-.kc-mission-card-avatar {
+.kc-mission-card-portrait {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  object-position: 50% 0;
 }
 
-.kc-mission-card-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xs);
+.kc-mission-card-body {
+  min-width: 0;
 }
 
 .kc-mission-card-label {
-  color: var(--kc-mapped-surface-accent-default);
+  margin: 0;
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-buybox-label-sm-size, var(--kc-responsive-label-sm-text-size));
+  line-height: 1;
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-buybox-label-tracking, var(--kc-responsive-Nunito-letter-spacing));
+  text-transform: uppercase;
+  color: var(--kc-buybox-text, var(--kc-mapped-text-default-heading));
+}
+
+/* Dawn styles blockquote (italic, rule, inset); this one is a plain
+   container for the founder's words. */
+.kc-mission-card-quote {
+  margin: var(--kc-responsive-spacing-layout-md) 0 0;
+  padding: 0;
+  border: 0;
+  font-style: normal;
+  color: inherit;
+}
+
+.kc-mission-card-motto {
+  margin: 0;
+  font-family: var(--kc-font-role-soul);
+  font-size: var(--kc-mission-card-motto-size);
+  line-height: var(--kc-mission-card-motto-line-height);
+  font-weight: var(--font-300-weight, 300);
+  letter-spacing: 0;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* base.css resets span and p to line-height: normal, so the lines,
+   the metafield paragraphs and the signature parts inherit again. */
+.kc-mission-card-motto-line {
+  display: block;
+  line-height: inherit;
+}
+
+.kc-mission-card-text,
+.kc-mission-card-desc {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-mission-card-text-size);
+  line-height: var(--kc-mission-card-text-line-height);
+  font-weight: var(--font-400-weight, 400);
+}
+
+.kc-mission-card-text {
+  margin: var(--kc-responsive-spacing-layout-lg) 0 0;
 }
 
 .kc-mission-card-desc {
-  font-size: var(--font-body-small-size) line-height: 1.6;
-}
-
-.kc-mission-card-desc p,
-.kc-mission-card-desc div,
-.kc-mission-card-desc span {
   margin: 0;
-  display: inline;
 }
 
-.kc-mission-card-highlight {
-  font-size: var(--font-body-small-size);
-  font-weight: var(--font-700-weight);
-}
-
-.kc-mission-card-highlight p,
-.kc-mission-card-highlight div,
-.kc-mission-card-highlight span {
+.kc-mission-card-desc p {
   margin: 0;
-  display: inline;
+  line-height: inherit;
 }
 
-.kc-mission-card-author p,
-.kc-mission-card-author div,
-.kc-mission-card-author span {
-  margin: 0;
-  display: inline;
+.kc-mission-card-desc p + p {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+/* Its own line after the paragraph, with a small breath (8px) */
+.kc-mission-card-signature {
+  margin: var(--kc-responsive-spacing-layout-xs) 0 0;
+  color: var(--kc-mapped-text-default-caption);
+}
+
+.kc-mission-card-signature span {
+  line-height: inherit;
+}
+
+.kc-mission-card-name {
+  font-weight: var(--font-600-weight, 600);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* Theme editor only, when the product has no mission card metafield */
+.kc-mission-card--placeholder {
+  padding: var(--kc-responsive-spacing-layout-md);
+  border: var(--kc-shape-stroke-thin, 1px) dashed var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.kc-mission-card-label + .kc-mission-card-desc {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
 }

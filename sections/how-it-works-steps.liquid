@@ -1,10 +1,10 @@
 {%- comment -%}
-  How it works / Ritual steps section (Swiper slider version)
-  - Slides: Desktop 3, Tablet 2.1, Mobile 1.2
-  - No color settings and no color values in CSS.
-  - Section header snippet ka use nahi hua.
-  - Video: Shopify uploaded video, YouTube ya Vimeo link.
-  - Font-family, font-weight, font-style, font-size, max-width static hain (CSS mein edit karo).
+  How it works / ritual steps.
+  Figma: PDP band 3391:12461, card KC/UX/Video ritual step (State = Poster at rest,
+  State = Preview while the clip plays). Colours, type and spacing come from
+  assets/kc-tokens.css (see assets/section-how-it-works-steps.css).
+  Video: Shopify uploaded video, YouTube or Vimeo link. A mouse hover previews the clip;
+  click, tap, Enter or Space pause a playing clip and play a paused one.
 {%- endcomment -%}
 
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -54,21 +54,21 @@
 {%- endstyle -%}
 
 {% if blocks.size != 0 %}
-  <section class="kc-how-it-steps section-{{ section.id }}">
+  <section class="kc-how-it-steps section-{{ section.id }}{% if section.settings.media_text_color == 'light' %} kc-how-it-steps--media-text-light{% endif %}">
     <div class="page-width">
       {%- if section.settings.subtitle != blank
         or section.settings.title != blank
         or section.settings.description != blank
       -%}
-        <div class="kc-head center">
+        <div class="kc-head">
           {%- if section.settings.subtitle != blank -%}
-            <span class="subtitle-item">{{ section.settings.subtitle }}</span>
+            <p class="kc-eyebrow">{{ section.settings.subtitle }}</p>
           {%- endif -%}
           {%- if section.settings.title != blank -%}
             <{{ section.settings.heading_tag | default: 'h2' }} class="kc-title {{ section.settings.heading_size | default: 'h2' }}">{{ section.settings.title }}</{{ section.settings.heading_tag | default: 'h2' }}>
           {%- endif -%}
           {%- if section.settings.description != blank -%}
-            {{- section.settings.description -}}
+            <div class="kc-description">{{- section.settings.description -}}</div>
           {%- endif -%}
         </div>
       {%- endif -%}
@@ -108,13 +108,24 @@
               assign video_type = block.settings.video_url.type
             endif
             assign loop = block.settings.loop
+            assign play_label = 'products.product.media.play_video' | t
+            if block.settings.title != blank
+              assign play_label = play_label | append: ': ' | append: block.settings.title
+            endif
           -%}
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
             class="kc-step{% if show_slider %} slider__slide{% endif %}"
             {{ block.shopify_attributes }}
           >
-            <div class="kc-card" data-type="{{ video_type }}" data-loop="{{ loop }}">
+            <div
+              class="kc-card"
+              data-type="{{ video_type }}"
+              data-loop="{{ loop }}"
+              {% if video_type != 'none' %}
+                role="button" tabindex="0" aria-pressed="false" aria-label="{{ play_label | escape }}"
+              {% endif %}
+            >
               <div class="kc-media">
                 {%- if video_type == 'shopify' -%}
                   {{
@@ -162,36 +173,34 @@
               </div>
 
               {%- if block.settings.number != blank -%}
-                <h2 class="kc-number">{{ block.settings.number }}</h2>
+                <span class="kc-number">{{ block.settings.number }}</span>
               {%- endif -%}
 
+              {%- comment -%} State = Preview: shown only while the clip plays {%- endcomment -%}
               {%- if video_type != 'none' -%}
-                <div class="kc-overlay">
+                <div class="kc-overlay" aria-hidden="true">
                   <span class="kc-play">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <foreignObject x="-20" y="-20" width="88" height="88"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_0_4002_231_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="20">
-                      <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="var(--kc-mapped-surface-accent-default)"/>
-                      <path d="M19.332 19.3332C19.332 19.0986 19.3938 18.8682 19.5113 18.6651C19.6288 18.462 19.7978 18.2936 20.0012 18.1767C20.2046 18.0598 20.4353 17.9987 20.6699 17.9995C20.9045 18.0003 21.1347 18.063 21.3374 18.1812L29.3354 22.8466C29.5372 22.9637 29.7048 23.1317 29.8213 23.3339C29.9379 23.5361 29.9993 23.7653 29.9995 23.9987C29.9997 24.232 29.9387 24.4614 29.8225 24.6637C29.7063 24.8661 29.539 25.0344 29.3374 25.1519L21.3374 29.8186C21.1347 29.9368 20.9045 29.9995 20.6699 30.0003C20.4353 30.0011 20.2046 29.94 20.0012 29.8231C19.7978 29.7062 19.6288 29.5378 19.5113 29.3347C19.3938 29.1316 19.332 28.9012 19.332 28.6666V19.3332Z" fill="#0A1628" stroke="#0A1628" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </g>
-                      <defs>
-                      <clipPath id="bgblur_0_4002_231_clip_path" transform="translate(20 20)"><path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"/>
-                      </clipPath></defs>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                      <path d="M11.9997 2L9.99968 2C9.63149 2 9.33301 2.29848 9.33301 2.66667V13.3333C9.33301 13.7015 9.63149 14 9.99968 14H11.9997C12.3679 14 12.6663 13.7015 12.6663 13.3333L12.6663 2.66667C12.6663 2.29848 12.3679 2 11.9997 2Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M5.99967 2L3.99967 2C3.63148 2 3.33301 2.29848 3.33301 2.66667L3.33301 13.3333C3.33301 13.7015 3.63148 14 3.99967 14H5.99967C6.36786 14 6.66634 13.7015 6.66634 13.3333L6.66634 2.66667C6.66634 2.29848 6.36786 2 5.99967 2Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                   {%- if section.settings.hint_text != blank -%}
-                    <span class="kc-hint opacity-xl">{{ section.settings.hint_text }}</span>
+                    <span class="kc-hint">{{ section.settings.hint_text }}</span>
                   {%- endif -%}
                 </div>
               {%- endif -%}
             </div>
 
             {%- if block.settings.show_text -%}
-              {%- if block.settings.title != blank -%}
-                <h4 class="kc-step-title">{{ block.settings.title }}</h4>
-              {%- endif -%}
-              {%- if block.settings.show_description and block.settings.description != blank -%}
-                <p class="kc-step-desc opacity-xl">{{ block.settings.description }}</p>
-              {%- endif -%}
+              <div class="kc-step-content">
+                {%- if block.settings.title != blank -%}
+                  <h4 class="kc-step-title">{{ block.settings.title }}</h4>
+                {%- endif -%}
+                {%- if block.settings.show_description and block.settings.description != blank -%}
+                  <p class="kc-step-desc">{{ block.settings.description }}</p>
+                {%- endif -%}
+              </div>
             {%- endif -%}
           </li>
         {%- endfor -%}
@@ -236,31 +245,26 @@
 
   <script>
     (function () {
-      var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
       function post(iframe, data) {
         if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage(JSON.stringify(data), '*');
       }
 
-      function play(card) {
+      function startMedia(card, onFail) {
         var type = card.dataset.type;
         if (type === 'shopify') {
           var v = card.querySelector('video');
           if (v) {
             var p = v.play();
-            if (p && p.catch) p.catch(function () {});
+            if (p && p.catch) p.catch(onFail);
           }
         } else if (type === 'youtube') {
           post(card.querySelector('iframe'), { event: 'command', func: 'playVideo', args: [] });
         } else if (type === 'vimeo') {
           post(card.querySelector('iframe'), { method: 'play' });
-        } else {
-          return;
         }
-        card.classList.add('is-playing');
       }
 
-      function pause(card) {
+      function stopMedia(card) {
         var type = card.dataset.type;
         if (type === 'shopify') {
           var v = card.querySelector('video');
@@ -269,43 +273,72 @@
           post(card.querySelector('iframe'), { event: 'command', func: 'pauseVideo', args: [] });
         } else if (type === 'vimeo') {
           post(card.querySelector('iframe'), { method: 'pause' });
-        } else {
-          return;
         }
-        card.classList.remove('is-playing');
       }
 
       document.querySelectorAll('.kc-how-it-steps:not([data-kc-init])').forEach(function (root) {
         root.setAttribute('data-kc-init', 'true');
 
         root.querySelectorAll('.kc-card').forEach(function (card) {
-          var pinned = false;
+          if (card.dataset.type === 'none') return;
 
-          function togglePin() {
-            if (pinned) {
-              pinned = false;
-              card.classList.remove('is-pinned');
-              pause(card);
+          // rest: poster, no choice made · preview: playing because the mouse is over it
+          // playing: started by the visitor · paused: stopped by the visitor (hover leaves it alone)
+          var state = 'rest';
+          var request = 0; // a failed play() only resets the state if nothing happened since
+
+          // One place for the visual state (Preview overlay) and aria-pressed
+          function setState(next) {
+            state = next;
+            var playing = next === 'preview' || next === 'playing';
+            card.classList.toggle('is-playing', playing);
+            card.setAttribute('aria-pressed', String(playing));
+          }
+
+          function play(next) {
+            var current = ++request;
+            setState(next);
+            startMedia(card, function () {
+              if (current === request) setState('rest');
+            });
+          }
+
+          function pause(next) {
+            request++;
+            stopMedia(card);
+            setState(next);
+          }
+
+          // Click, tap, Enter and Space: the visible pause control pauses whatever is playing,
+          // including a hover preview; the next activation plays again
+          function activate() {
+            if (state === 'preview' || state === 'playing') {
+              pause('paused');
             } else {
-              pinned = true;
-              card.classList.add('is-pinned');
-              play(card);
+              play('playing');
             }
           }
 
-          if (canHover) {
-            // Desktop: hover = play, leave = pause (sirf agar click/pin nahi kiya)
-            card.addEventListener('mouseenter', function () {
-              if (!pinned) play(card);
+          card.addEventListener('click', activate);
+          card.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            if (!event.repeat) activate();
+          });
+
+          // Mouse hover previews from rest only; touch and pen go through click
+          card.addEventListener('pointerenter', function (event) {
+            if (event.pointerType === 'mouse' && state === 'rest') play('preview');
+          });
+          card.addEventListener('pointerleave', function (event) {
+            if (event.pointerType === 'mouse' && state === 'preview') pause('rest');
+          });
+
+          var video = card.querySelector('video');
+          if (video) {
+            video.addEventListener('ended', function () {
+              setState('rest');
             });
-            card.addEventListener('mouseleave', function () {
-              if (!pinned) pause(card);
-            });
-            // Click = pin (bahar jaane pe bhi chalta rahega), dobara click = pause
-            card.addEventListener('click', togglePin);
-          } else {
-            // Mobile: tap = play/pause toggle
-            card.addEventListener('click', togglePin);
           }
         });
       });
@@ -357,7 +390,24 @@
       "label": "Short description",
       "default": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>"
     },
-    { "type": "text", "id": "hint_text", "label": "Video hint text", "default": "Hover or tap to watch" },
+    {
+      "type": "text",
+      "id": "hint_text",
+      "label": "Video preview caption",
+      "info": "Shown under the pause control while a clip plays.",
+      "default": "Preview · sound off"
+    },
+    {
+      "type": "select",
+      "id": "media_text_color",
+      "label": "Step number and caption on the video",
+      "info": "Token follows Figma (dark text in Day, light in Night). Use Light while the clips have a dark background.",
+      "options": [
+        { "value": "token", "label": "Token (Figma)" },
+        { "value": "light", "label": "Light (off-white, for dark clips)" }
+      ],
+      "default": "token"
+    },
     {
       "type": "textarea",
       "id": "bottom_text",
@@ -387,7 +437,7 @@
       "max": 40,
       "step": 1,
       "unit": "px",
-      "default": 8
+      "default": 12
     },
     {
       "type": "header",
@@ -451,7 +501,7 @@
         { "value": "3", "label": "3" },
         { "value": "4", "label": "4" }
       ],
-      "default": "1.5"
+      "default": "1.3"
     },
     {
       "type": "checkbox",
@@ -463,7 +513,7 @@
       "type": "checkbox",
       "id": "show_slider_arrows",
       "label": "Show Slider Arrows",
-      "default": true
+      "default": false
     },
     {
       "type": "header",
@@ -477,7 +527,7 @@
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -487,7 +537,7 @@
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -497,7 +547,7 @@
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 40
+      "default": 64
     },
     {
       "type": "range",
@@ -507,7 +557,7 @@
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 40
+      "default": 64
     },
     {
       "type": "header",
@@ -515,13 +565,9 @@
     },
     {
       "type": "color",
-      "id": "text_color_day",
-      "label": "Text Color (Day)"
-    },
-    {
-      "type": "color",
       "id": "bg_color_day",
-      "label": "Background Color (Day)"
+      "label": "Background Color (Day)",
+      "info": "Leave empty for the KC token gradient/section/accent."
     },
     {
       "type": "text",
@@ -529,24 +575,14 @@
       "label": "Background Gradient (Day)"
     },
     {
-      "type": "color",
-      "id": "card_bg_color_day",
-      "label": "Card Background Color (Day)",
-      "default": "#ffffff"
-    },
-    {
       "type": "header",
       "content": "Night Mode Colors"
     },
     {
       "type": "color",
-      "id": "text_color_night",
-      "label": "Text Color (Night)"
-    },
-    {
-      "type": "color",
       "id": "bg_color_night",
-      "label": "Background Color (Night)"
+      "label": "Background Color (Night)",
+      "info": "Leave empty for the KC token gradient/section/accent."
     },
     {
       "type": "text",

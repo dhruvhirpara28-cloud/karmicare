@@ -1855,20 +1855,13 @@ function updateLoopProperties({
             );
             existingSubAttrs.forEach((el) => el.remove());
 
-            // Resolve accurate subscription title (e.g. "60-Day Supply", "Year Supply")
-            let subTitle = sellingPlanGroupName || window.loopProps[productId]?.sellingPlanGroupName || "";
-            const loopContainer = getLoopSubscriptionContainer(productId);
-            const checkedRadio = loopContainer?.querySelector('input[name="loop_purchase_option"]:checked');
-            if (checkedRadio) {
-                const groupLabel = checkedRadio.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim();
-                if (groupLabel) {
-                    subTitle = groupLabel;
-                } else if (checkedRadio.dataset.name && checkedRadio.dataset.name !== "loop-one-time-purchase") {
-                    subTitle = checkedRadio.dataset.name.trim();
-                }
-            }
+            // Loop Loyalty awards Care Credit by this exact value ("60-Day Supply", "Year Supply"):
+            // from the selling plan ID (assets/kc-plan-select.js), never from the visible plan name
+            const subTitle = selectedSellingPlanId && window.KCPlanSelect
+                ? window.KCPlanSelect.subscriptionName(selectedSellingPlanId)
+                : "";
 
-            if (subTitle && subTitle !== "loop-one-time-purchase" && selectedSellingPlanId) {
+            if (subTitle) {
                 const subNameInput = document.createElement("input");
                 subNameInput.type = "hidden";
                 subNameInput.name = "attributes[Subscription Name]";
@@ -2114,35 +2107,23 @@ function loopShowWelcomeKitProductPopup(title, image, price, comparePrice) {
 }
 // ── End popup helper ─────────────────────────────────────────────────────
 
+// KC: by selling plan ID, never by plan name. The Welcome Kit comes free with every subscription
+// (karmi-add-to-cart.js adds it to each one), so a blank "Welcome Kit plan IDs" block setting
+// (data-plans) qualifies every subscription plan; a list of selling plan IDs limits it to those.
 function checkPlanQualifiesForWelcomeKit(productId) {
-    const loopPropsProduct = window.loopProps?.[productId];
-    if (!loopPropsProduct || !loopPropsProduct.sellingPlanDefination) {
-        return false;
-    }
-
-    const sp = loopPropsProduct.sellingPlanDefination;
-    const spName = sp.name || "";
-    const spDescription = sp.description || "";
+    const sellingPlanId = String(window.loopProps?.[productId]?.sellingPlanId || "");
+    if (!sellingPlanId || determineOneTimeOrderLoop(productId)) return false;
 
     const dataEl = document.querySelector("#loop-welcome-kit-data");
     if (!dataEl) return false;
 
-    const allowedPlansStr = dataEl.dataset.plans || "";
-    if (allowedPlansStr.trim() !== "") {
-        const allowedPlans = allowedPlansStr.split(",").map(p => p.trim().toLowerCase());
-        const spgName = (loopPropsProduct.sellingPlanGroupName || "").toLowerCase();
-        const optionValue = sp.options && sp.options[0] ? sp.options[0].value.toLowerCase() : "";
-        const nameMatches = allowedPlans.some(p =>
-            spName.toLowerCase().includes(p) ||
-            spgName.includes(p) ||
-            optionValue.includes(p)
-        );
-        if (nameMatches) return true;
+    const entries = (dataEl.dataset.plans || "").split(",").map(p => p.trim()).filter(Boolean);
+    const planIds = entries.filter(p => /^\d+$/.test(p));
+    if (planIds.length !== entries.length && !window.kcWelcomeKitPlansWarned) {
+        window.kcWelcomeKitPlansWarned = true;
+        console.warn("[KC plans] Welcome Kit plan IDs: ignoring entries that are not selling plan IDs", entries);
     }
-
-    // Fallback: check if description or name contains "welcome kit"
-    const textToSearch = (spName + " " + spDescription).toLowerCase();
-    return textToSearch.includes("welcome kit");
+    return planIds.length === 0 || planIds.includes(sellingPlanId);
 }
 
 function updateWelcomeKitUI(productId) {
@@ -2215,18 +2196,12 @@ function updateWelcomeKitUI(productId) {
     const welcomeKitContainer = document.createElement("div");
     welcomeKitContainer.className = "loop-welcome-kit-section";
 
-    // Open only if the FIRST subscription plan is currently selected.
-    // All other plans default to closed unless user manually toggled them.
+    // KC: open for the subscription selected in the buybox (the kit sits in that plan's description),
+    // unless the shopper closed it; no longer tied to the first plan radio on the page.
     if (!window.loopWelcomeKitExpanded) {
         window.loopWelcomeKitExpanded = {};
     }
-    const firstSubRadio = document.querySelector(".loop-subscription-group-radio");
-    const firstSpgId = firstSubRadio ? firstSubRadio.dataset.id : null;
-    const currentSpgId = String(window.loopProps?.[productId]?.sellingPlanGroupId ?? "");
-    const isFirstPlan = firstSpgId !== null && String(firstSpgId) === currentSpgId;
-    const isCurrentlyExpanded = isFirstPlan
-        ? true
-        : (window.loopWelcomeKitExpanded[productId] || false);
+    const isCurrentlyExpanded = window.loopWelcomeKitExpanded[productId] !== false;
     if (isCurrentlyExpanded) {
         welcomeKitContainer.classList.add("is-expanded");
     }
@@ -2417,16 +2392,12 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const select = groupEl.querySelector('.loop-selling-plan-selector');
         const optionText = (select?.options?.[select.selectedIndex]?.text || select?.querySelector('option')?.text || '').trim();
 
-        // 2. Billing interval for per-brushing calculation and right-side short label
+        // 2. Billing interval for per-brushing calculation and right-side short label, by selling plan
+        // ID (assets/kc-plan-select.js), never from the plan name
+        const kcPlan = window.KCPlanSelect ? window.KCPlanSelect.plan(alloc.selling_plan_id) : null;
         const bp = alloc?.selling_plan?.billing_policy;
-        let bInterval = (bp?.interval || '').toLowerCase();
-        let bCount = Number(bp?.interval_count) || 1;
-        if (!bInterval) {
-            const name = (radio.dataset.name || '').toLowerCase();
-            const m = name.match(/(\d+)[- ]?(day|week|month|year)/);
-            if (m) { bCount = parseInt(m[1]); bInterval = m[2]; }
-            else if (name.includes('year')) { bInterval = 'year'; bCount = 1; }
-        }
+        let bInterval = (bp?.interval || kcPlan?.intervalUnit || '').toLowerCase();
+        let bCount = Number(bp?.interval_count) || kcPlan?.intervalCount || 1;
         if (!bInterval) return;
 
         const billingDays = (dayMap[bInterval] || 1) * bCount;
@@ -2459,9 +2430,9 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             if (isAnnual) {
                 // Figma: "Renews every year" / "€0.49 / brushing · 6 duos in two deliveries".
                 // The duo count comes from the custom.duos_count metaobject (data-duos),
-                // the delivery count from Loop's frequency label ("2 deliveries a year").
+                // the delivery count from the plan by ID (Loop's prepaid data, else the plan type).
                 formattedOptionText = 'Renews every year';
-                const deliveries = parseInt((optionText.match(/(\d+)\s*deliver/i) || [])[1]);
+                const deliveries = kcPlan?.deliveries;
                 if (deliveries) {
                     const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
                     const deliveriesText = words[deliveries] || String(deliveries);
@@ -2576,6 +2547,10 @@ function updateKcPricingSummary(productId, variant) {
     const sellingPlanPrice = sellingPlanAllocation?.price;
     if (!variant) return;
     if (!isOneTime && !sellingPlanPrice) return;
+    // KC: the selected plan by selling plan ID (interval, Check-up Reward), never by its name
+    const kcPlan = !isOneTime && window.KCPlanSelect
+        ? window.KCPlanSelect.plan(window.loopProps[productId]?.sellingPlanId)
+        : null;
 
     // Format total price
     let totalFormatted = '';
@@ -2589,7 +2564,7 @@ function updateKcPricingSummary(productId, variant) {
     try {
         // Source 1: sellingPlanAllocation.selling_plan.billing_policy (from variant JSON)
         // Source 2: sellingPlanDefination.billing_policy (from selling_plan_groups JSON)
-        // Source 3: derive from plan group name string
+        // Source 3: the plan by selling plan ID (assets/kc-plan-select.js), never its name
         const billingPolicyA = sellingPlanAllocation?.selling_plan?.billing_policy;
         const billingPolicyB = window.loopProps[productId]?.sellingPlanDefination?.billing_policy;
         const billingPolicy = billingPolicyA || billingPolicyB;
@@ -2600,20 +2575,9 @@ function updateKcPricingSummary(productId, variant) {
         if (billingPolicy) {
             interval = (billingPolicy.interval || '').toLowerCase();
             intervalCount = Number(billingPolicy.interval_count) || 1;
-        } else {
-            // Source 3: derive from the plan group name (e.g. "Year Supply", "60-Day Supply")
-            const planName = (window.loopProps[productId]?.sellingPlanGroupName || '').toLowerCase();
-            if (planName.includes('year')) {
-                interval = 'year'; intervalCount = 1;
-            } else {
-                // Parse "60-day" or "8-week" patterns
-                const dayMatch = planName.match(/(\d+)[- ]?day/);
-                const weekMatch = planName.match(/(\d+)[- ]?week/);
-                const monthMatch = planName.match(/(\d+)[- ]?month/);
-                if (dayMatch) { interval = 'day'; intervalCount = parseInt(dayMatch[1]); }
-                else if (weekMatch) { interval = 'week'; intervalCount = parseInt(weekMatch[1]); }
-                else if (monthMatch) { interval = 'month'; intervalCount = parseInt(monthMatch[1]); }
-            }
+        } else if (kcPlan && kcPlan.intervalUnit) {
+            interval = kcPlan.intervalUnit;
+            intervalCount = kcPlan.intervalCount || 1;
         }
 
         if (interval) {
@@ -2695,7 +2659,7 @@ function updateKcPricingSummary(productId, variant) {
         let careCreditCents = 0;
         let checkupRewardStr = '';
 
-        const planName = (window.loopProps[productId]?.sellingPlanGroupName || '').toLowerCase();
+        const isYearPlan = kcPlan?.type === 'year';
         const basePrice = sellingPlanPrice || variant.price;
 
         // Same source as the plan card chip: return_on_care % from the
@@ -2712,13 +2676,13 @@ function updateKcPricingSummary(productId, variant) {
 
         if (returnOnCarePct > 0) {
             careCreditCents = Math.round(basePrice * returnOnCarePct / 100);
-        } else if (planName.includes('year')) {
+        } else if (isYearPlan) {
             // Fallback when the metaobject has no entry for this plan
             careCreditCents = 7180;
         } else {
             careCreditCents = Math.round(basePrice * 0.1);
         }
-        if (planName.includes('year')) {
+        if (kcPlan?.checkupReward) {
             // Same wording as the Year card chip "€40 Dental Check-up Reward"
             checkupRewardStr = '€40';
         }
@@ -2787,19 +2751,22 @@ function getWelcomeKitValueCents() {
     return total;
 }
 
-// CTA label per selected plan. The buy button carries data-plan-labels
-// ({"60-Day Rhythm": "Start my 60-Day rhythm", …}) from the buy_buttons block;
+// CTA label per selected plan, by selling plan ID. The buy button carries data-plan-labels
+// ({"712106115453": "Start my 60-Day rhythm", …}) from the buy_buttons block;
 // plans without a label, and one-time, use the button's default text.
 function updateKcPlanButtonLabel(productId, isOneTime) {
+    const sellingPlanId = String(window.loopProps?.[productId]?.sellingPlanId || '').trim();
     document.querySelectorAll('.product-form__custom-submit[data-plan-labels]').forEach((button) => {
         const labelEl = button.querySelector('.kc-cta-label');
         if (!labelEl) return;
         let labels = {};
         try { labels = JSON.parse(button.dataset.planLabels || '{}'); } catch (e) { labels = {}; }
-        const planName = (window.loopProps?.[productId]?.sellingPlanGroupName || '').trim();
-        const match = !isOneTime && Object.keys(labels).find(
-            (name) => name.trim().toLowerCase() === planName.toLowerCase()
-        );
+        const keys = Object.keys(labels).map((key) => key.trim());
+        if (keys.some((key) => !/^\d+$/.test(key)) && !button.dataset.kcLabelsWarned) {
+            button.dataset.kcLabelsWarned = 'true';
+            console.warn('[KC plans] Custom Button Text per plan: lines must start with a selling plan ID', keys);
+        }
+        const match = !isOneTime && sellingPlanId && Object.keys(labels).find((key) => key.trim() === sellingPlanId);
         labelEl.textContent = match ? labels[match] : button.dataset.defaultLabel;
     });
 }
@@ -2837,24 +2804,11 @@ function injectOrUpdateKcTryOnceLink(productId, variant) {
             e.preventDefault();
             e.stopPropagation();
 
-            const loopContainer = getLoopSubscriptionContainer(productId);
-            if (loopContainer) {
-                const oneTimeRadio = loopContainer.querySelector('input.loop-one-time-purchase-option-radio');
-                if (oneTimeRadio) {
-                    loopContainer.querySelectorAll('input[name="loop_purchase_option"]').forEach(r => {
-                        r.checked = false;
-                    });
-                    oneTimeRadio.checked = true;
-
-                    if (typeof changeInSellingPlanGroupLoop === 'function') {
-                        changeInSellingPlanGroupLoop({ target: oneTimeRadio });
-                    }
-                }
-            }
-
-            const submitBtn = document.querySelector('.product-form__custom-submit, .product-form__submit');
-            if (submitBtn) {
-                submitBtn.click();
+            // One time, straight to checkout, from this product's buybox form (assets/kc-plan-select.js)
+            if (window.KCPlanSelect) {
+                window.KCPlanSelect.tryOnce(productId, btn);
+            } else {
+                console.warn('[KC plans] Try Once: kc-plan-select.js is not loaded');
             }
         });
     }
@@ -3035,7 +2989,6 @@ async function getLoopBundleSpgs(productId) {
         let nonBundleSellingPlanGroupIds = [];
 
         let excludedGroupIds = new Set();
-        let validGroupIds = new Set();
 
         for (const spg of spgs) {
             const isExcludedByWidget = shopifySellingPlanIdsToExcludeOnWidget.includes(
@@ -3050,7 +3003,6 @@ async function getLoopBundleSpgs(productId) {
             if (isExcludedByWidget || isNotInDefaultList) {
                 excludedGroupIds.add(spg.selling_plan_group_id);
             } else {
-                validGroupIds.add(spg.selling_plan_group_id);
                 if (
                     sps.includes(spg.selling_plan_id) &&
                     window.loopProps[productId]?.storeJson?.preferences
@@ -3874,18 +3826,11 @@ async function loopWidgetCreateAddToCartPayload(
     quantity,
     productBundleData
 ) {
-    // KC CUSTOM: resolve subscription name for cart attributes
-    let kcSubscriptionName = window.loopProps[productId]?.sellingPlanGroupName || "";
-    const kcLoopContainer = getLoopSubscriptionContainer(productId);
-    const kcCheckedRadio = kcLoopContainer?.querySelector('input[name="loop_purchase_option"]:checked');
-    if (kcCheckedRadio) {
-        const kcGroupLabel = kcCheckedRadio.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim();
-        if (kcGroupLabel) {
-            kcSubscriptionName = kcGroupLabel;
-        } else if (kcCheckedRadio.dataset.name && kcCheckedRadio.dataset.name !== "loop-one-time-purchase") {
-            kcSubscriptionName = kcCheckedRadio.dataset.name.trim();
-        }
-    }
+    // KC CUSTOM: the "Subscription Name" cart attribute Loop Loyalty needs for Care Credit, from the
+    // selling plan ID (assets/kc-plan-select.js), never from the visible plan name
+    const kcSubscriptionName = selectedSellingPlanId && window.KCPlanSelect
+        ? window.KCPlanSelect.subscriptionName(selectedSellingPlanId)
+        : "";
     const formData = {
         items: [],
         attributes: {
@@ -3982,6 +3927,10 @@ async function shopifyAddToCartByLoopWidget(payload, productId) {
             body: JSON.stringify(payload),
         });
         const data = await response.json();
+        // KC CUSTOM: the cart's "Subscription Name" follows the subscriptions now in it (assets/kc-plan-select.js)
+        if (window.KCPlanSelect) {
+            await window.KCPlanSelect.syncCartSubscriptionName(payload?.items?.[0]?.selling_plan).catch(() => {});
+        }
         await dispatchLoopWidgetEvent(
             productId,
             "loopPresetAddToCartSuccessEvent",

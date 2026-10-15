@@ -14,164 +14,170 @@
     }
   }
 
-  /* Day Mode custom colors/gradient */
+  /* Optional overrides. Blank (the default) keeps the KC token colours. */
   {%- if section.settings.bg_gradient_day != blank -%}
     #shopify-section-{{ section.id }} .chronobiology-clock {
       background: {{ section.settings.bg_gradient_day }};
     }
   {%- elsif section.settings.bg_color_day != blank -%}
     #shopify-section-{{ section.id }} .chronobiology-clock {
-      --page: {{ section.settings.bg_color_day }};
       background: {{ section.settings.bg_color_day }};
     }
   {%- endif -%}
 
   {%- if section.settings.text_color_day != blank -%}
     #shopify-section-{{ section.id }} .chronobiology-clock {
-      --ink: {{ section.settings.text_color_day }};
-      color: {{ section.settings.text_color_day }};
+      --chrono-ink: {{ section.settings.text_color_day }};
     }
   {%- endif -%}
 
-  /* Night Mode custom colors/gradient */
   {%- if section.settings.bg_gradient_night != blank -%}
-    #shopify-section-{{ section.id }} .chronobiology-clock[data-theme="night"],
     body.night-mode #shopify-section-{{ section.id }} .chronobiology-clock {
       background: {{ section.settings.bg_gradient_night }};
     }
   {%- elsif section.settings.bg_color_night != blank -%}
-    #shopify-section-{{ section.id }} .chronobiology-clock[data-theme="night"],
     body.night-mode #shopify-section-{{ section.id }} .chronobiology-clock {
-      --page: {{ section.settings.bg_color_night }};
       background: {{ section.settings.bg_color_night }};
     }
   {%- endif -%}
 
   {%- if section.settings.text_color_night != blank -%}
-    #shopify-section-{{ section.id }} .chronobiology-clock[data-theme="night"],
     body.night-mode #shopify-section-{{ section.id }} .chronobiology-clock {
-      --ink: {{ section.settings.text_color_night }};
-      color: {{ section.settings.text_color_night }};
+      --chrono-ink: {{ section.settings.text_color_night }};
     }
   {%- endif -%}
 {%- endstyle -%}
 
 <div
   id="ChronobiologyClock-{{ section.id }}"
-  class="chronobiology-clock"
+  class="chronobiology-clock chronobiology-clock--{{ section.settings.gradient_direction | default: 'page_to_accent' }} chronobiology-clock--time-{{ section.settings.time_label_size | default: 'large' }}"
   data-theme="day"
   aria-label="{{ section.settings.title | escape }}"
 >
-  <div class="chrono page-width" aria-labelledby="clock-heading-{{ section.id }}">
+  <div class="chrono" aria-labelledby="clock-heading-{{ section.id }}">
     <div class="heading">
       {%- if section.settings.eyebrow != blank -%}
-        <span class="kc-caption-subheading subtitle-item">{{ section.settings.eyebrow | escape }}</span>
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
 
       {%- if section.settings.title != blank -%}
         {%- assign heading_tag = section.settings.heading_tag | default: 'h2' -%}
         <{{ heading_tag }} id="clock-heading-{{ section.id }}" class="clock-heading">
-          {{ section.settings.title }}
+          {{- section.settings.title -}}
         </{{ heading_tag }}>
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
-        <div class="kc-caption-text text-xl">{{ section.settings.description }}</div>
+        <div class="lede">{{ section.settings.description }}</div>
       {%- endif -%}
     </div>
 
     <div class="stage">
-      <div class="dial">
-        <div class="artwork" aria-hidden="true">
-          <img class="blue-orb" src="{{ 'orb-blue.webp' | asset_url }}" alt="" width="440" height="440" loading="lazy">
-          <img
-            class="white-orb"
-            src="{{ 'orb-white.webp' | asset_url }}"
-            alt=""
-            width="440"
-            height="440"
-            loading="lazy"
-          >
-          <div class="arcs">
-            <img class="arc-asleep" src="{{ 'arc-asleep.svg' | asset_url }}" alt="" width="273" height="214">
-            <img class="arc-awake" src="{{ 'arc-awake.svg' | asset_url }}" alt="" width="361" height="340">
+      <div class="timeline">
+        <div class="dial">
+          <div class="artwork" aria-hidden="true">
+            <img class="blue-orb" src="{{ 'orb-blue.webp' | asset_url }}" alt="" width="440" height="440" loading="lazy">
+            <img class="white-orb" src="{{ 'orb-white.webp' | asset_url }}" alt="" width="440" height="440" loading="lazy">
+            <div class="arcs">
+              <img class="arc-asleep" src="{{ 'arc-asleep.svg' | asset_url }}" alt="" width="273" height="214">
+              <img class="arc-awake" src="{{ 'arc-awake.svg' | asset_url }}" alt="" width="361" height="340">
+            </div>
+            {%- comment -%} Figma "hour ticks · 24h, noon on top" (its 23 tick paths drawn as one path), coloured by token {%- endcomment -%}
+            <svg class="ticks" viewBox="0 0 420 420" fill="none" focusable="false">
+              <path d="M210 402V413M160.31 395.461L159.01 400.291M114 376.279L111.5 380.609M74.2392 345.76L70.6992 349.3M43.7206 306L39.3906 308.5M24.5409 259.689L19.7109 260.989M18 210H7M24.5409 160.31L19.7109 159.01M43.7206 114L39.3906 111.5M74.2392 74.2392L70.6992 70.6992M114 43.7206L111.5 39.3906M160.31 24.5409L159.01 19.7109M210 18V7M259.689 24.5409L260.989 19.7109M306 43.7206L308.5 39.3906M345.76 74.2392L349.3 70.6992M376.279 114L380.609 111.5M395.461 160.31L400.291 159.01M402 210H413M395.461 259.689L400.291 260.989M376.279 306L380.609 308.5M345.76 345.76L349.3 349.3M259.689 395.461L260.989 400.291" stroke="currentColor"/>
+            </svg>
+            {%- comment -%} Figma "anchor · noon (sun)" and "anchor · midnight (moon)" {%- endcomment -%}
+            <svg class="sun" viewBox="0 0 36 36" fill="none" focusable="false">
+              <path d="M18 23.5C21.0376 23.5 23.5 21.0376 23.5 18C23.5 14.9624 21.0376 12.5 18 12.5C14.9624 12.5 12.5 14.9624 12.5 18C12.5 21.0376 14.9624 23.5 18 23.5Z" stroke="currentColor" stroke-width="1.25"/>
+              <path d="M27.5 18H31M24.7207 24.7207L27.1907 27.1907M18 27.5V31M11.2805 24.7207L8.81055 27.1907M8.5 18H5M11.2805 11.2805L8.81055 8.81055M18 8.5V5M24.7207 11.2805L27.1907 8.81055" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+            </svg>
+            <svg class="moon" viewBox="0 0 28 28" fill="none" focusable="false">
+              <path d="M17.0005 3.39992C14.9221 2.83867 12.7248 2.89964 10.6807 3.57526C8.63663 4.25088 6.83575 5.51145 5.50123 7.20076C4.16672 8.89006 3.35724 10.9338 3.17312 13.0788C2.989 15.2237 3.43833 17.3755 4.46543 19.2675C5.49253 21.1596 7.05224 22.7086 8.95126 23.7227C10.8503 24.7368 13.0051 25.1713 15.1488 24.9725C17.2924 24.7737 19.3306 23.9502 21.0107 22.6041C22.6908 21.2581 23.939 19.4486 24.6005 17.3999C22.987 17.3567 21.4133 16.8897 20.0374 16.0458C18.6614 15.202 17.5317 14.011 16.7616 12.5925C15.9916 11.1739 15.6082 9.57774 15.6502 7.9642C15.6921 6.35066 16.1578 4.77655 17.0005 3.39992Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+            </svg>
+            <span class="leader leader-morning"></span>
+            <span class="leader leader-evening"></span>
+            <svg class="pin pin-morning" viewBox="0 0 30 30" focusable="false">
+              <circle class="pin-ring" cx="15" cy="15" r="14" stroke-width="2"/>
+              <circle class="pin-dot" cx="15" cy="15" r="7"/>
+            </svg>
+            <svg class="pin pin-evening" viewBox="0 0 30 30" focusable="false">
+              <circle class="pin-ring" cx="15" cy="15" r="14" stroke-width="2"/>
+              <circle class="pin-dot" cx="15" cy="15" r="7"/>
+            </svg>
+            <span class="shift-label shift-awake">Awake</span>
+            <span class="shift-label shift-asleep">Asleep</span>
+            <span class="time-label time-label-morning">06:40</span>
+            <span class="time-label time-label-evening">22:00</span>
           </div>
-          <img class="ticks" src="{{ 'hour-ticks.svg' | asset_url }}" alt="" width="420" height="420">
-          <img class="sun" src="{{ 'sun.svg' | asset_url }}" alt="" width="32" height="32">
-          <img class="moon" src="{{ 'moon.svg' | asset_url }}" alt="" width="32" height="32">
-          <img class="leader leader-morning" src="{{ 'leader.svg' | asset_url }}" alt="" width="58" height="1">
-          <img class="leader leader-evening" src="{{ 'leader.svg' | asset_url }}" alt="" width="58" height="1">
-          <span class="pin pin-morning">
-            <img src="{{ 'pin-morning.svg' | asset_url }}" alt="" width="30" height="30">
-            <img src="{{ 'pin-dot.svg' | asset_url }}" alt="" width="14" height="14">
-          </span>
-          <span class="pin pin-evening">
-            <img src="{{ 'pin-evening.svg' | asset_url }}" alt="" width="30" height="30">
-            <img src="{{ 'pin-dot.svg' | asset_url }}" alt="" width="14" height="14">
-          </span>
-          <span class="shift-label shift-awake subtitle-item">Awake</span>
-          <span class="shift-label shift-asleep subtitle-item">Asleep</span>
-        </div>
 
-        <div class="orbit" aria-hidden="true"></div>
+          <div class="orbit" aria-hidden="true"></div>
 
-        <div
-          class="knob"
-          id="clock-knob-{{ section.id }}"
-          tabindex="0"
-          role="slider"
-          aria-label="Explore your mouth's 24-hour clock"
-          aria-describedby="clock-help-{{ section.id }}"
-          aria-valuemin="0"
-          aria-valuemax="1439"
-          aria-valuenow="0"
-          aria-valuetext="Loading current local time"
-        >
-          <img src="{{ 'drag.svg' | asset_url }}" alt="" draggable="false" width="24" height="24">
+          <div
+            class="knob"
+            id="clock-knob-{{ section.id }}"
+            tabindex="0"
+            role="slider"
+            aria-label="Explore your mouth's 24-hour clock"
+            aria-describedby="clock-help-{{ section.id }}"
+            aria-valuemin="0"
+            aria-valuemax="1439"
+            aria-valuenow="0"
+            aria-valuetext="Loading current local time"
+          >
+            {%- comment -%} Figma "now-dot" icon, cropped to the 40px dot {%- endcomment -%}
+            <svg viewBox="4 4 40 40" width="40" height="40" fill="none" aria-hidden="true" focusable="false">
+              <path d="M22.9584 16.6392C19.7481 14.7222 16.662 14.2932 15.1283 15.8269C12.9591 17.9961 14.7174 23.2727 19.0567 27.612C23.396 31.9512 28.6726 33.7096 30.8418 31.5403C31.1105 31.2716 31.3195 30.9542 31.4704 30.5975M26.8358 22.5152L31.2937 20.98L32.8289 25.438M31.2897 20.9887C30.5676 23.1014 29.0552 25.4702 26.9135 27.612C22.5742 31.9512 17.2976 33.7096 15.1283 31.5403C12.9591 29.3711 14.7174 24.0945 19.0567 19.7552C22.8578 15.9541 27.3778 14.1337 29.899 15.1983" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
       </div>
 
-      <section class="callout callout-morning" aria-labelledby="morning-heading-{{ section.id }}">
-        {%- if section.settings.morning_badge != blank -%}
-          <p class="callout-badge">{{ section.settings.morning_badge | escape }}</p>
-        {%- endif -%}
-        {%- if section.settings.morning_title != blank -%}
-          <h4 id="morning-heading-{{ section.id }}">{{ section.settings.morning_title | escape }}</h4>
-        {%- endif -%}
-        {%- if section.settings.morning_text != blank -%}
-          <p class="kc-caption-text">{{ section.settings.morning_text | escape }}</p>
-        {%- endif -%}
-      </section>
+      <div class="callouts">
+        <section class="callout callout-morning" aria-labelledby="morning-heading-{{ section.id }}">
+          {%- if section.settings.morning_badge != blank -%}
+            <p class="callout-badge">{{ section.settings.morning_badge | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.morning_title != blank -%}
+            <h4 id="morning-heading-{{ section.id }}" class="callout-title">{{ section.settings.morning_title | escape }}</h4>
+          {%- endif -%}
+          {%- if section.settings.morning_text != blank -%}
+            <p class="callout-text">{{ section.settings.morning_text | escape }}</p>
+          {%- endif -%}
+        </section>
 
-      <section class="callout callout-evening" aria-labelledby="evening-heading-{{ section.id }}">
-        {%- if section.settings.night_badge != blank -%}
-          <p class="callout-badge">{{ section.settings.night_badge | escape }}</p>
-        {%- endif -%}
-        {%- if section.settings.night_title != blank -%}
-          <h4 id="evening-heading-{{ section.id }}">{{ section.settings.night_title | escape }}</h4>
-        {%- endif -%}
-        {%- if section.settings.night_text != blank -%}
-          <p class="kc-caption-text">{{ section.settings.night_text | escape }}</p>
-        {%- endif -%}
-      </section>
+        <section class="callout callout-evening" aria-labelledby="evening-heading-{{ section.id }}">
+          {%- if section.settings.night_badge != blank -%}
+            <p class="callout-badge">{{ section.settings.night_badge | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.night_title != blank -%}
+            <h4 id="evening-heading-{{ section.id }}" class="callout-title">{{ section.settings.night_title | escape }}</h4>
+          {%- endif -%}
+          {%- if section.settings.night_text != blank -%}
+            <p class="callout-text">{{ section.settings.night_text | escape }}</p>
+          {%- endif -%}
+        </section>
+      </div>
     </div>
 
     <div class="readout" data-mode="live">
-      <button type="button" class="hint body-gl-nunito-xsm" aria-controls="clock-knob-{{ section.id }}">
-        <img src="{{ 'drag.svg' | asset_url }}" alt="" width="24" height="24">
-        <span class="body-gl-nunito-xsm">{{ section.settings.hint_label | escape }}</span>
+      <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
+        {%- comment -%} Figma "interaction hint · drag the ring" icon {%- endcomment -%}
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false">
+          <path d="M10.9773 5C10.4287 2.82467 9.30133 1.33333 8 1.33333C6.15933 1.33333 4.66667 4.318 4.66667 8C4.66667 11.682 6.15933 14.6667 8 14.6667C8.228 14.6667 8.45133 14.6207 8.66667 14.5333M10.1294 9.13802L12.6721 10.378L11.4321 12.9207M12.6667 10.38C11.464 10.97 9.81733 11.3333 8 11.3333C4.318 11.3333 1.33333 9.84067 1.33333 8C1.33333 6.15933 4.318 4.66667 8 4.66667C11.2253 4.66667 13.9153 5.812 14.5333 7.33333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ section.settings.hint_label | escape }}</span>
       </button>
-      <p class="time-line kc-caption-subheading subtitle-item">
+      <p class="time-line">
         <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
         <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span>
       </p>
-      <p class="state-copy clock-copy kc-caption-text" id="clock-copy-{{ section.id }}"></p>
+      <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
     </div>
 
     {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}
       <div class="chronobiology-clock__footer">
         {%- if section.settings.footer_text != blank -%}
-          <span>{{ section.settings.footer_text | escape }} </span>
+          <span class="footer-text">{{ section.settings.footer_text | escape }} </span>
         {%- endif -%}
         {%- if section.settings.footer_link_text != blank -%}
           <a
@@ -181,8 +187,9 @@
             rel="noopener"
           >
             {{- section.settings.footer_link_text | escape -}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M0.75 5.41667L10.0833 5.41667M5.41667 10.0833L10.0833 5.41667L5.41667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            {%- comment -%} KC/Icon/arrow-right {%- endcomment -%}
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false">
+              <path d="M3.33333 8H12.6667M8 12.6667L12.6667 8L8 3.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
         {%- endif -%}
@@ -232,7 +239,8 @@
     {
       "type": "richtext",
       "id": "description",
-      "label": "Description"
+      "label": "Description",
+      "info": "One paragraph per line on desktop; the lines run on as one paragraph on mobile."
     },
     {
       "type": "header",
@@ -282,7 +290,18 @@
       "type": "text",
       "id": "hint_label",
       "label": "Explore Button Label",
-      "default": "EXPLORE YOUR DAILY RHYTHM"
+      "info": "Shown from 750px; the mobile design has no button.",
+      "default": "DRAG THE RING · EXPLORE 24 HOURS"
+    },
+    {
+      "type": "select",
+      "id": "time_label_size",
+      "label": "Current time label size",
+      "options": [
+        { "value": "large", "label": "Label Large" },
+        { "value": "small", "label": "Label Small" }
+      ],
+      "default": "large"
     },
     {
       "type": "header",
@@ -307,7 +326,22 @@
     },
     {
       "type": "header",
-      "content": "Day Mode Colors"
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "Background gradient",
+      "options": [
+        { "value": "page_to_accent", "label": "Page colour at top, accent at the bottom" },
+        { "value": "accent_to_page", "label": "Accent at top, page colour at the bottom" }
+      ],
+      "default": "page_to_accent",
+      "info": "KC tokens surface/page and gradient/section-accent, in Day and Night. The colour fields below override it when filled in."
+    },
+    {
+      "type": "header",
+      "content": "Day Mode Colors (optional overrides)"
     },
     {
       "type": "color",
@@ -318,17 +352,17 @@
       "type": "text",
       "id": "bg_gradient_day",
       "label": "Background Gradient (Day)",
-      "default": "linear-gradient(180deg, #FFFBF6 0%, #F2F8FF 100%)"
+      "info": "Leave blank to use the KC tokens."
     },
     {
       "type": "color",
       "id": "text_color_day",
       "label": "Text Color (Day)",
-      "default": "#191F38"
+      "info": "Leave blank to use the KC tokens."
     },
     {
       "type": "header",
-      "content": "Night Mode Colors"
+      "content": "Night Mode Colors (optional overrides)"
     },
     {
       "type": "color",
@@ -339,13 +373,13 @@
       "type": "text",
       "id": "bg_gradient_night",
       "label": "Background Gradient (Night)",
-      "default": "linear-gradient(180deg, #101526 0%, #1C2A45 100%)"
+      "info": "Leave blank to use the KC tokens."
     },
     {
       "type": "color",
       "id": "text_color_night",
       "label": "Text Color (Night)",
-      "default": "#FFFFFF"
+      "info": "Leave blank to use the KC tokens."
     },
     {
       "type": "header",
@@ -359,7 +393,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Top (Desktop)",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -369,7 +403,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom (Desktop)",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -379,7 +413,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Top (Mobile)",
-      "default": 44
+      "default": 48
     },
     {
       "type": "range",
@@ -389,7 +423,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom (Mobile)",
-      "default": 44
+      "default": 48
     }
   ],
   "presets": [

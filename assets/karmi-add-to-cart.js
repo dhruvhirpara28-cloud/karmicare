@@ -16,16 +16,24 @@
       const variantId = variantIdInput ? variantIdInput.value : null;
       if (!variantId) throw new Error('No variant ID found');
 
+      // Try Once (assets/kc-plan-select.js) buys one time, whatever the page's Loop widget has selected.
+      const isFixedOneTime = Boolean(options && options.oneTime);
+
+      // A fixed offer (the end CTA) passes the plan it shows and buys exactly that plan,
+      // whatever the page's Loop widget has selected.
+      const fixedSellingPlanId = !isFixedOneTime && options && options.sellingPlanId ? String(options.sellingPlanId) : null;
+
       const sellingPlanInput = form.querySelector('[name="selling_plan"]') || document.querySelector('input[name="selling_plan"]');
-      let sellingPlanId = sellingPlanInput ? sellingPlanInput.value : null;
+      let sellingPlanId = fixedSellingPlanId || (sellingPlanInput ? sellingPlanInput.value : null);
 
       // Check Loop selection: if One-Time purchase is selected, ensure sellingPlanId is cleared
-      const selectedLoopOption = document.querySelector('input[name="loop_purchase_option"]:checked') ||
+      const selectedLoopOption = (isFixedOneTime || fixedSellingPlanId) ? null :
+                                 document.querySelector('input[name="loop_purchase_option"]:checked') ||
                                  document.querySelector('#loop-selling-plan-fieldset input[type="radio"]:checked');
-      const isLoopOneTime = selectedLoopOption && (
+      // By Loop's one-time ID, not by name: a plan renamed to contain "one time" stays a subscription
+      const isLoopOneTime = isFixedOneTime || selectedLoopOption && (
         selectedLoopOption.dataset.id === 'loop-one-time-purchase' ||
-        selectedLoopOption.classList.contains('loop-one-time-purchase-option-radio') ||
-        (selectedLoopOption.dataset.name && selectedLoopOption.dataset.name.toLowerCase().includes('one time'))
+        selectedLoopOption.classList.contains('loop-one-time-purchase-option-radio')
       );
 
       if (isLoopOneTime) {
@@ -33,6 +41,15 @@
       }
 
       const isSubscription = Boolean(!isLoopOneTime && sellingPlanId && !isNaN(parseInt(sellingPlanId)) && parseInt(sellingPlanId) > 0);
+
+      // Never the wrong plan (assets/kc-plan-select.js): a subscription is selected but the form lost its
+      // plan, or the plan is one this page must not sell (a legacy plan). Buy nothing rather than that.
+      if (selectedLoopOption && !isLoopOneTime && !isSubscription) {
+        throw new Error('a subscription is selected but the form holds no selling plan');
+      }
+      if (isSubscription && window.KCPlanSelect && !window.KCPlanSelect.allowed(sellingPlanId)) {
+        throw new Error('selling plan ' + sellingPlanId + ' is not offered on this page');
+      }
 
       const quantityInput = form.querySelector('[name="quantity"]');
       const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
@@ -63,12 +80,10 @@
       const addPayload = { items: items };
 
       if (isSubscription) {
-        const subTitle = selectedLoopOption?.closest('.loop-subscription-group')?.querySelector('.loop-subscription-group-label')?.textContent?.trim() ||
-          selectedLoopOption?.dataset?.name ||
-          form.querySelector('input[name="attributes[Subscription Name]"]')?.value ||
-          document.querySelector('input[name="attributes[Subscription Name]"]')?.value ||
-          document.querySelector('#scPlanLabel')?.textContent?.trim() || '';
-        if (subTitle && subTitle !== 'loop-one-time-purchase' && !subTitle.toLowerCase().includes('one time')) {
+        // Loop Loyalty awards Care Credit by this exact value ("60-Day Supply", "Year Supply"): from the
+        // selling plan ID (assets/kc-plan-select.js), never from the visible plan name
+        const subTitle = window.KCPlanSelect ? window.KCPlanSelect.subscriptionName(sellingPlanId) : '';
+        if (subTitle) {
           addPayload.attributes = { 'Subscription Name': subTitle };
         }
       }
@@ -79,6 +94,14 @@
         body: JSON.stringify(addPayload),
       });
       if (!addRes.ok) throw new Error('Cart add failed');
+
+      // The cart's "Subscription Name" follows the subscriptions now in it: a one-time order never keeps
+      // an earlier subscription's value (assets/kc-plan-select.js)
+      if (window.KCPlanSelect) {
+        try {
+          await window.KCPlanSelect.syncCartSubscriptionName(isSubscription ? sellingPlanId : null);
+        } catch (e) { console.warn('[KarmiAddToCart] Subscription Name sync failed', e); }
+      }
 
       if (options && options.redirectToCheckout) {
         const checkoutUrl = (isSubscription && items.length > 1) ? '/checkout?discount=Welcome%20Kit' : '/checkout';

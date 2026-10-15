@@ -59,15 +59,30 @@
   elsif section.settings.media_size == 'small'
     assign media_width = 0.45
   endif
+
+  assign kc_gallery_fit = false
+  assign gallery_controls = 'GalleryThumbnails-' | append: section.id
+  if kc_hero and section.settings.gallery_layout == 'thumbnail_slider'
+    assign kc_gallery_fit = true
+    assign gallery_controls = 'GalleryViewer-' | append: section.id
+  endif
 -%}
+
+{%- if kc_gallery_fit -%}
+  {{ 'kc-gallery.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'kc-gallery.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
-  class="{% if section.settings.enable_sticky_info %}product__column-sticky{% endif %}{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}{% if kc_hero %} kc-hero-gallery{% endif %}"
+  class="{% if section.settings.enable_sticky_info %}product__column-sticky{% endif %}{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}{% if kc_hero %} kc-hero-gallery{% endif %}{% if kc_gallery_fit %} kc-gallery-fit{% endif %}"
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
+  {%- if kc_gallery_fit -%}
+    <kc-gallery-sizing hidden></kc-gallery-sizing>
+  {%- endif -%}
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
@@ -89,56 +104,7 @@
             class="product-media-container media-type-video media-fit-contain{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
             style="--ratio: 1.125; --preview-ratio: 1.125;"
           >
-            <kc-hero-animation class="kc-hero-animation product__media media media--transparent">
-              {%- for mode in kc_hero_modes -%}
-                {%- liquid
-                  assign key = 'kc_hero_' | append: mode
-                  assign hevc_key = key | append: '_hevc'
-                  assign webm_key = key | append: '_webm'
-                  assign poster_key = key | append: '_poster'
-                  assign animated_key = key | append: '_animated'
-                  assign poster_url = section.settings[poster_key] | file_url
-                  # file_url does not resolve .webm videos from Files, so the WebM setting also takes the file's CDN link
-                  assign webm_url = section.settings[webm_key] | strip
-                  unless webm_url contains '://'
-                    assign webm_url = webm_url | file_url
-                  endunless
-                -%}
-                <div
-                  class="kc-hero-animation__mode kc-hero-animation__mode--{{ mode }}"
-                  data-kc-mode="{{ mode }}"
-                  {% if section.settings[animated_key] != blank %}
-                    data-animated="{{ section.settings[animated_key] | file_url }}"
-                  {% endif %}
-                >
-                  <img
-                    src="{{ poster_url }}"
-                    alt="{{ kc_hero_alt | escape }}"
-                    width="1080"
-                    height="960"
-                    loading="lazy"
-                  >
-                  <template>
-                    <video
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      preload="metadata"
-                      poster="{{ poster_url }}"
-                      aria-label="{{ kc_hero_alt | escape }}"
-                    >
-                      {%- if section.settings[hevc_key] != blank -%}
-                        <source src="{{ section.settings[hevc_key] | file_url }}" type='video/mp4; codecs="hvc1"'>
-                      {%- endif -%}
-                      {%- if section.settings[webm_key] != blank -%}
-                        <source src="{{ webm_url }}" type="video/webm">
-                      {%- endif -%}
-                    </video>
-                  </template>
-                </div>
-              {%- endfor -%}
-            </kc-hero-animation>
+            {% render 'kc-hero-animation', alt: kc_hero_alt, class: 'product__media media media--transparent' %}
           </div>
         </li>
       {%- endif -%}
@@ -267,6 +233,9 @@
   -%}
     <slider-component
       id="GalleryThumbnails-{{ section.id }}"
+      {% if kc_gallery_fit %}
+        data-media-navigation
+      {% endif %}
       class="thumbnail-slider slider-mobile-gutter quick-add-hidden{% unless section.settings.gallery_layout contains 'thumbnail' %} medium-hide large-up-hide{% endunless %}{% if section.settings.mobile_thumbnails != 'show' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}"
     >
       <button
@@ -274,7 +243,7 @@
         class="slider-button slider-button--prev{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}"
         name="previous"
         aria-label="{{ 'general.slider.previous_slide' | t }}"
-        aria-controls="GalleryThumbnails-{{ section.id }}"
+        aria-controls="{{ gallery_controls }}"
         data-step="3"
       >
         <span class="svg-wrapper">
@@ -469,7 +438,7 @@
         class="slider-button slider-button--next{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}"
         name="next"
         aria-label="{{ 'general.slider.next_slide' | t }}"
-        aria-controls="GalleryThumbnails-{{ section.id }}"
+        aria-controls="{{ gallery_controls }}"
         data-step="3"
       >
         <span class="svg-wrapper">
@@ -482,102 +451,12 @@
   {%- for block in section.blocks -%}
     {%- if block.type == 'professional_testimonials' and block.settings.show_under_media -%}
       <div class="small-hide" style="margin-top: 2rem;">
-        {% render 'professional-testimonials', block: block, product: product %}
+        {% render 'professional-testimonials', block: block, product: product, instance: 'media' %}
       </div>
     {%- endif -%}
   {%- endfor -%}
 
   {%- if kc_hero -%}
-    <style>
-      .kc-hero-animation__mode img,
-      .kc-hero-animation__mode video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: top;
-      }
-      .kc-hero-animation__mode.is-playing img {
-        visibility: hidden;
-      }
-      /* No painted holder behind any slide in this gallery (night navy, day blue gradient, sheen):
-         the media sits on the section background, like the transparent hero. */
-      body media-gallery.kc-hero-gallery .product-media-container,
-      body media-gallery.kc-hero-gallery .product-media-container .product__modal-opener {
-        background: transparent;
-        border-color: transparent;
-      }
-      body media-gallery.kc-hero-gallery .product-media-container:after {
-        box-shadow: none;
-        border-color: transparent;
-      }
-      .thumbnail .kc-hero-animation__thumb {
-        object-fit: contain;
-      }
-      body.night-mode .kc-hero-animation .kc-hero-animation__mode--am,
-      body:not(.night-mode) .kc-hero-animation .kc-hero-animation__mode--pm,
-      body.night-mode .thumbnail .kc-hero-animation__thumb--am,
-      body:not(.night-mode) .thumbnail .kc-hero-animation__thumb--pm {
-        display: none;
-      }
-    </style>
-    <script>
-      // Plays only the visible mode (Awake in day-mode, Asleep in night-mode), only while on screen.
-      // Reduced motion keeps the poster; a refused autoplay falls back to the animated WebP when set.
-      if (!customElements.get('kc-hero-animation')) {
-        customElements.define(
-          'kc-hero-animation',
-          class KcHeroAnimation extends HTMLElement {
-            connectedCallback() {
-              this.update = this.update.bind(this);
-              this.visible = false;
-              this.motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-              this.motion.addEventListener('change', this.update);
-              this.modeObserver = new MutationObserver(this.update);
-              this.modeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-              this.viewObserver = new IntersectionObserver((entries) => {
-                this.visible = entries[entries.length - 1].isIntersecting;
-                this.update();
-              });
-              this.viewObserver.observe(this);
-            }
-
-            disconnectedCallback() {
-              this.motion.removeEventListener('change', this.update);
-              this.modeObserver.disconnect();
-              this.viewObserver.disconnect();
-            }
-
-            update() {
-              const activeMode = document.body.classList.contains('night-mode') ? 'pm' : 'am';
-              this.querySelectorAll('[data-kc-mode]').forEach((panel) => {
-                let video = panel.querySelector('video');
-                if (this.motion.matches) {
-                  video?.remove();
-                  panel.classList.remove('is-playing');
-                  return;
-                }
-                if (panel.dataset.kcMode !== activeMode || !this.visible || panel.hasAttribute('data-refused')) {
-                  video?.pause();
-                  return;
-                }
-                if (!video) {
-                  panel.append(panel.querySelector('template').content.cloneNode(true));
-                  video = panel.querySelector('video');
-                  video.addEventListener('playing', () => panel.classList.add('is-playing'), { once: true });
-                }
-                video.play()?.catch((error) => {
-                  if (error.name !== 'NotAllowedError' || !panel.dataset.animated) return;
-                  panel.setAttribute('data-refused', '');
-                  video.remove();
-                  panel.querySelector('img').src = panel.dataset.animated;
-                });
-              });
-            }
-          }
-        );
-      }
-    </script>
+    {% render 'kc-hero-animation', part: 'assets' %}
   {%- endif -%}
 </media-gallery>

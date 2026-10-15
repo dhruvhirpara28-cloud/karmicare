@@ -6,6 +6,39 @@
   if product == blank
     assign placeholder = true
   endif
+
+  # Karmicare hero animation as the only media, as in the PDP gallery (main-product). Where it
+  # renders, the product gallery, its zoom/lightbox modal and their assets are not rendered.
+  assign kc_hero = false
+  if section.settings.show_hero_animation and placeholder != true
+    assign kc_hero_handle = section.settings.kc_hero_product_handle | strip
+    if product.handle == kc_hero_handle
+      assign kc_hero = true
+      assign kc_hero_videos = product.media | where: 'media_type', 'video'
+      assign kc_hero_alt = kc_hero_videos.first.alt | default: product.title
+    endif
+  endif
+
+  # "Show first subscription only" (the end CTA) shows one fixed offer: the variant's first public
+  # selling plan (snippets/kc-plan-public.liquid), or its first selling plan while no compare plan
+  # holds a valid public ID. The offer box below and the buy button both read it, so the button buys
+  # exactly that plan, whatever plan the buybox's Loop widget has selected. Its "Subscription Name"
+  # for Care Credit comes from the plan ID in karmi-add-to-cart.js (snippets/kc-plan-loyalty.liquid).
+  assign kc_offer_allocation = null
+  assign kc_loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first
+  if kc_loop_block.settings.only_first_subscription and placeholder != true
+    capture kc_public_plans
+      render 'kc-plan-public', product: product
+    endcapture
+    assign kc_public_plans = kc_public_plans | strip
+    for kc_allocation in product.selected_or_first_available_variant.selling_plan_allocations
+      assign kc_needle = ',' | append: kc_allocation.selling_plan.id | append: ','
+      if kc_public_plans == ',' or kc_public_plans contains kc_needle
+        assign kc_offer_allocation = kc_allocation
+        break
+      endif
+    endfor
+  endif
 -%}
 
 <product-info
@@ -13,7 +46,7 @@
   data-product-id="{{ product.id }}"
   data-update-url="false"
   data-url="{{ product.url }}"
-  {% if section.settings.image_zoom == 'hover' %}
+  {% if section.settings.image_zoom == 'hover' and kc_hero == false %}
     data-zoom-on-hover
   {% endif %}
 >
@@ -21,7 +54,9 @@
   {{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
-  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {%- unless kc_hero -%}
+    {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {%- endunless -%}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
   {% unless section.settings.product.has_only_default_variant %}
@@ -42,52 +77,6 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
-
-    {%- if template.name == 'index' -%}
-      /* Homepage "welcome kit" desktop spacing per the Figma homepage: content
-         column 80px from the image (x814, 564 wide), 32px under the heading,
-         benefit row 24px under the button with 16px icons inline */
-      @media screen and (min-width: 990px) {
-        .featured-product-section-{{ section.id }} .featured-product:not(.product--no-media) > .product__info-wrapper {
-          padding: 0 3rem 0 9.4rem;
-        }
-
-        .featured-product-section-{{ section.id }} .product__title {
-          margin-bottom: 3.2rem;
-        }
-
-        .featured-product-section-{{ section.id }} .product__info-container > div:has(product-form),
-        .featured-product-section-{{ section.id }} product-form.product-form {
-          margin-bottom: 0;
-        }
-
-        /* snippets/buy-buttons.liquid sets an inline 1rem margin on the button */
-        .featured-product-section-{{ section.id }} .product-form__submit {
-          margin-bottom: 0 !important;
-        }
-
-        .featured-product-section-{{ section.id }} .icon-with-text--horizontal {
-          margin-top: 2.4rem;
-          justify-content: center;
-          column-gap: 2.4rem;
-        }
-
-        .featured-product-section-{{ section.id }} .icon-with-text--horizontal .icon-with-text__item {
-          flex: 0 0 auto;
-          width: auto;
-          flex-direction: row;
-          align-items: center;
-          gap: 0.8rem;
-        }
-
-        .featured-product-section-{{ section.id }} .icon-with-text--horizontal .icon-with-text__item img,
-        .featured-product-section-{{ section.id }} .icon-with-text--horizontal .icon-with-text__item svg {
-          width: 1.6rem;
-          height: 1.6rem;
-          margin: 0;
-        }
-      }
-    {%- endif -%}
 
     {%- if section.settings.bg_gradient_day != blank -%}
       body:not(.night-mode) .featured-product-section-{{ section.id }},
@@ -118,7 +107,9 @@
 
   {% comment %} TODO: assign `product.selected_or_first_available_variant` to variable and replace usage to reduce verbosity {% endcomment %}
 
-  {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- unless kc_hero -%}
+    {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- endunless -%}
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -144,9 +135,14 @@
   {%- endunless -%}
   <section class="featured-product-section-{{ section.id }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
     <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
-      <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank or kc_hero %}grid--2-col-tablet{% else %}product--no-media{% endif %} featured-product--benefits-{{ section.settings.benefits_layout }}">
         <div class="grid__item product__media-wrapper">
-          {%- unless placeholder -%}
+          {%- if kc_hero -%}
+            <div class="featured-product__hero">
+              {% render 'kc-hero-animation', alt: kc_hero_alt %}
+            </div>
+            {% render 'kc-hero-animation', part: 'assets' %}
+          {%- elsif placeholder != true -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
           {%- else -%}
             <div class="product__media-item{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}">
@@ -157,7 +153,7 @@
                 {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               </div>
             </div>
-          {%- endunless -%}
+          {%- endif -%}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section
@@ -570,75 +566,89 @@
                         >
                           {{ template_content }}
                         </div>
+                        {%- comment -%} Public plans only, in this widget too (assets/kc-plan-select.js) {%- endcomment -%}
+                        {%- render 'kc-plan-config', product: product, section: section, role: 'end-cta' -%}
                         {%- if block.settings.only_first_subscription -%}
-                          {%- assign current_variant = product.selected_or_first_available_variant -%}
-                          {%- assign sub_allocation = current_variant.selling_plan_allocations | first -%}
-                          {%- assign sub_price = sub_allocation.price | default: current_variant.price -%}
+                          {%- assign sub_allocation = kc_offer_allocation -%}
+                          {%- assign sub_price = sub_allocation.price
+                            | default: product.selected_or_first_available_variant.price
+                          -%}
                           {%- assign care_credit = sub_price | times: 0.1 -%}
                           {%- assign per_brushing_cents = sub_price | divided_by: 120.0 | round -%}
-                          {%- assign plan_name = sub_allocation.selling_plan.name | downcase -%}
+                          {%- comment -%} Interval by the plan's type (selling plan ID), never its name {%- endcomment -%}
+                          {%- capture kc_offer_type -%}
+                            {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id -%}
+                          {%- endcapture -%}
                           {%- assign interval_text = '/ 60 days' -%}
-                          {%- if plan_name contains 'year' -%}
+                          {%- if kc_offer_type == 'year' -%}
                             {%- assign interval_text = '/ year' -%}
                           {%- endif -%}
                           <div class="kc-custom-subscription-widget">
                             <div class="kc-custom-box">
                               <div class="kc-custom-row kc-custom-product-info">
                                 <div class="kc-custom-col-left">
-                                  {% if block.settings.subscription_title != blank %}
-                                    {{ block.settings.subscription_title }}
-                                  {% else %}
-                                    <strong>{{ product.title }}</strong>
-                                  {% endif %}
-                                  <div class="kc-custom-per-brushing opacity-xl">
-                                    <span id="kc-sync-per-brushing-money">{{ per_brushing_cents | money }}</span>
+                                  <span class="kc-custom-title">
+                                    {%- if block.settings.subscription_title != blank -%}
+                                      {{ block.settings.subscription_title }}
+                                    {%- else -%}
+                                      {{ product.title }}
+                                    {%- endif -%}
+                                  </span>
+                                  <div class="kc-custom-per-brushing">
+                                    <span>{{ per_brushing_cents | money }}</span>
                                     {{ block.settings.per_brushing_text }}
                                   </div>
                                 </div>
-                                <div class="kc-custom-col-right" style="text-align: right;">
-                                  <strong id="kc-sync-price">{{ sub_price | money }}</strong>
-                                  <div class="kc-custom-interval opacity-xl">{{ interval_text }}</div>
+                                <div class="kc-custom-col-right">
+                                  <strong>{{ sub_price | money_without_trailing_zeros }}</strong>
+                                  <div class="kc-custom-interval">{{ interval_text }}</div>
                                 </div>
                               </div>
                               <div class="kc-custom-welcome-items">
                                 {%- if welcome_kit_products != blank -%}
                                   {%- for wk_product in welcome_kit_products -%}
                                     <div class="kc-custom-row">
-                                      <span class="kc-custom-col-left"
-                                        ><span class="check-icon" style="color:#78b5fa;">✓</span>
-                                        <span class="wk-item-name opacity-xl">{{ wk_product.title }}</span></span
-                                      >
-                                      <span class="kc-custom-col-right"
-                                        ><del class="opacity-xl">
+                                      <span class="kc-custom-col-left">
+                                        <span class="check-icon" aria-hidden="true">
+                                          {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                                        </span>
+                                        <span class="wk-item-name">{{ wk_product.title }}</span>
+                                      </span>
+                                      <span class="kc-custom-col-right">
+                                        <del>
                                           {{-
                                             wk_product.selected_or_first_available_variant.price
                                             | money_without_trailing_zeros
                                           -}}
                                         </del>
-                                        <strong>Free</strong></span
-                                      >
+                                        <strong>Free</strong>
+                                      </span>
                                     </div>
                                   {%- endfor -%}
                                 {%- endif -%}
                                 <div class="kc-custom-row">
-                                  <span class="kc-custom-col-left opacity-xl"
-                                    ><span class="check-icon" style="color:#78b5fa;">✓</span>
-                                    {{ block.settings.shipping_text -}}
+                                  <span class="kc-custom-col-left">
+                                    <span class="check-icon" aria-hidden="true">
+                                      {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                                    </span>
+                                    <span class="wk-item-name">{{ block.settings.shipping_text }}</span>
                                   </span>
                                   <span class="kc-custom-col-right">{{ block.settings.shipping_value_html }}</span>
                                 </div>
                               </div>
                               <div class="kc-custom-row kc-custom-care-credits">
                                 <span class="kc-custom-col-left">
-                                  {{- block.settings.pricing_summary_care_credit_title }} &nbsp;&nbsp;&nbsp;
-                                  {{ block.settings.care_credit_text_1 -}}
+                                  <span class="kc-custom-care-credits__title">
+                                    {{- block.settings.pricing_summary_care_credit_title -}}
+                                  </span>
+                                  <span class="kc-custom-care-credits__rate">{{ block.settings.care_credit_text_1 }}</span>
                                 </span>
-                                <span class="kc-custom-col-right" style="text-align: right;">
-                                  <strong id="kc-sync-care-credit">{{ care_credit | money }}</strong>
-                                  <div class="kc-custom-interval opacity-xl">
+                                <div class="kc-custom-col-right">
+                                  <strong>{{ care_credit | money }}</strong>
+                                  <div class="kc-custom-interval">
                                     {{ block.settings.care_credit_text_2 }}
                                   </div>
-                                </span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -687,51 +697,6 @@
                                   }
                                 }
                               }
-
-                              // Sync values dynamically from kc-pricing-summary for currency support
-                              var origSummary = document.getElementById('kc-pricing-summary-{{ product.id }}');
-                              if (origSummary) {
-                                var syncValues = function () {
-                                  var origPrice = origSummary.querySelector('.kc-pricing-summary__price');
-                                  var figmaPrice = document.getElementById('kc-sync-price');
-                                  if (origPrice && figmaPrice && origPrice.textContent.trim() !== '') {
-                                    figmaPrice.innerHTML = origPrice.innerHTML;
-                                  }
-
-                                  var origPerBrushing = origSummary.querySelector('.kc-pricing-summary__per-brushing');
-                                  var figmaPerBrushingMoney = document.getElementById('kc-sync-per-brushing-money');
-                                  if (
-                                    origPerBrushing &&
-                                    figmaPerBrushingMoney &&
-                                    origPerBrushing.textContent.trim() !== ''
-                                  ) {
-                                    var match = origPerBrushing.textContent.match(/^([^\d\s]*\s*[\d.,]+\s*[^\d\s]*)/);
-                                    if (match) {
-                                      figmaPerBrushingMoney.innerHTML = match[1].trim();
-                                    }
-                                  }
-
-                                  var origCareCredit = origSummary.querySelector('.kc-care-credit-value');
-                                  var figmaCareCredit = document.getElementById('kc-sync-care-credit');
-                                  if (origCareCredit && figmaCareCredit && origCareCredit.textContent.trim() !== '') {
-                                    figmaCareCredit.innerHTML = origCareCredit.innerHTML;
-                                  }
-                                };
-
-                                // Watch for changes (like currency switchers or loop JS updates)
-                                var syncObserver = new MutationObserver(syncValues);
-                                syncObserver.observe(origSummary, {
-                                  childList: true,
-                                  subtree: true,
-                                  characterData: true,
-                                });
-
-                                // Try syncing periodically for a few seconds to catch delayed currency apps
-                                var syncInterval = setInterval(syncValues, 500);
-                                setTimeout(function () {
-                                  clearInterval(syncInterval);
-                                }, 5000);
-                              }
                             });
                           </script>
                         {%- endif -%}
@@ -766,7 +731,8 @@
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
-                    loop_product_id: product.id
+                    loop_product_id: product.id,
+                    selling_plan_id: kc_offer_allocation.selling_plan.id
                   -%}
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}
@@ -815,7 +781,9 @@
           </section>
         </div>
       </div>
-      {% render 'product-media-modal', product: product, variant_images: variant_images %}
+      {%- unless kc_hero -%}
+        {% render 'product-media-modal', product: product, variant_images: variant_images %}
+      {%- endunless -%}
     </div>
   </section>
   {%- unless placeholder -%}
@@ -823,7 +791,7 @@
   {%- endunless -%}
 
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-  {%- if section.settings.image_zoom == 'hover' -%}
+  {%- if section.settings.image_zoom == 'hover' and kc_hero == false -%}
     <script id="EnableZoomOnHover-featured" src="{{ 'magnify.js' | asset_url }}" defer="defer"></script>
   {%- endif %}
   {%- if request.design_mode -%}
@@ -841,7 +809,7 @@
     {{ product | structured_data }}
   </script>
 
-  {% if product.media.size > 0 %}
+  {% if product.media.size > 0 and kc_hero == false %}
     <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
   {% endif %}
@@ -2046,6 +2014,95 @@
       "id": "remove_first_media_bg",
       "default": false,
       "label": "Remove background from first media"
+    },
+    {
+      "type": "header",
+      "content": "Hero animation (Awake / Asleep)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_animation",
+      "default": true,
+      "label": "Show the hero animation instead of the product image",
+      "info": "The PDP gallery's transparent Awake (day) / Asleep (night) animation, without a background, zoom or lightbox. Off: the product image gallery with the zoom setting above. File names below refer to Content > Files."
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_product_handle",
+      "label": "Product handle",
+      "default": "karmicare-biorhythmic-oral-care-system",
+      "info": "The animation only shows when the featured product has this handle."
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_am_hevc",
+      "label": "Awake: HEVC alpha (.mov, Safari/iOS)",
+      "default": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_am_webm",
+      "label": "Awake: VP9 alpha (.webm)",
+      "info": "File name, or the file's link from Content > Files (Shopify cannot look up .webm files by name).",
+      "default": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_am_poster",
+      "label": "Awake: poster (.webp)",
+      "default": "kc-anim-am-hero-1080x960-poster-v1.webp"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_am_animated",
+      "label": "Awake: animated WebP (autoplay refused)",
+      "default": "kc-anim-am-hero-540x480-animated-v1.webp"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_pm_hevc",
+      "label": "Asleep: HEVC alpha (.mov, Safari/iOS)",
+      "default": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_pm_webm",
+      "label": "Asleep: VP9 alpha (.webm)",
+      "info": "File name, or the file's link from Content > Files (Shopify cannot look up .webm files by name).",
+      "default": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_pm_poster",
+      "label": "Asleep: poster (.webp)",
+      "default": "kc-anim-pm-hero-1080x960-poster-v1.webp"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_pm_animated",
+      "label": "Asleep: animated WebP (autoplay refused)",
+      "default": "kc-anim-pm-hero-540x480-animated-v1.webp"
+    },
+    {
+      "type": "header",
+      "content": "Welcome kit offer"
+    },
+    {
+      "type": "select",
+      "id": "benefits_layout",
+      "options": [
+        {
+          "value": "inline",
+          "label": "One row, icon before the text"
+        },
+        {
+          "value": "stacked",
+          "label": "Three columns, icon above the text"
+        }
+      ],
+      "default": "inline",
+      "label": "Benefits under the button (desktop)",
+      "info": "Applies to the Icon with text block. Below 750 px the benefits always use three columns."
     },
     {
       "type": "header",

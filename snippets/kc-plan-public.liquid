@@ -1,0 +1,37 @@
+{%- comment -%}
+  The public selling plans of a product: the selling_plan_id of each compare_plan entry in the
+  product's custom.compare_table (hide_plan off, not the one-time card) that resolves to a selling
+  plan of the product. Every other selling plan (the legacy email offers) is never shown or
+  selected on the product page.
+
+  Accepts:
+  - product: {Object}
+
+  Outputs the plan IDs wrapped in commas (",712106115453,712155431293,"), or "," when none is valid.
+  Test a plan with: kc_public contains ',<plan id>,'
+{%- endcomment -%}
+{%- liquid
+  assign kc_compare_plans = product.metafields.custom.compare_table.value.compare_plans.value
+  assign kc_public = ','
+  for kc_compare_plan in kc_compare_plans
+    if kc_compare_plan.hide_plan.value == true
+      continue
+    endif
+    assign kc_kind = kc_compare_plan.handle_item.value | default: kc_compare_plan.handle_item | downcase | replace: '-', ' ' | strip
+    if kc_kind == 'once' or kc_kind == 'one time'
+      continue
+    endif
+    assign kc_raw_id = kc_compare_plan.selling_plan_id.value | default: kc_compare_plan.selling_plan_id
+    capture kc_resolved
+      render 'kc-plan-resolve', product: product, plan_id: kc_raw_id
+    endcapture
+    if kc_resolved != blank
+      assign kc_id = kc_resolved | split: '|' | first
+      assign kc_needle = ',' | append: kc_id | append: ','
+      unless kc_public contains kc_needle
+        assign kc_public = kc_public | append: kc_id | append: ','
+      endunless
+    endif
+  endfor
+  echo kc_public
+-%}

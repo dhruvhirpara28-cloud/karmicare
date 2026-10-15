@@ -184,6 +184,23 @@ body.day-mode .hero-karmicare__btn-2 {
   background-color: transparent;
 }
 
+/* Hover on the option you can switch to, the same light fill as the header menu links. In Night,
+   surface/primary/default/hover is the pill's own colour (#212A49), so Night takes the
+   secondary hover surface (#2C3A60) to stay visible. */
+@media (hover: hover) {
+  body.day-mode .hero-karmicare__pill-btn.kc_night:hover {
+    background-color: var(--kc-mapped-surface-primary-default-hover);
+  }
+  body.night-mode .hero-karmicare__pill-btn.kc_day:hover {
+    background-color: var(--kc-mapped-surface-secondary-default-hover);
+  }
+}
+
+.hero-karmicare__pill-btn:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: 2px;
+}
+
 /* Status text */
 .hero-karmicare__status-wrapper {
   margin-top: 1.4rem;

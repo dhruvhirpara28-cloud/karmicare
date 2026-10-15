@@ -1,0 +1,144 @@
+.kc-professional-testimonials {
+  min-width: 0;
+  background: var(--kc-professionals-background, transparent);
+}
+
+.kc-professional-testimonials .trusted-professionals__inner {
+  gap: var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-professional-testimonials .trusted-professionals__header {
+  margin: 0;
+  border-top: 0;
+  padding-top: var(--kc-responsive-spacing-layout-lg);
+  text-align: start;
+}
+
+.kc-professional-testimonials .trusted-professionals__header h2 {
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+}
+
+.kc-professional-testimonials .trusted-professionals__grid,
+.kc-professional-testimonials .trusted-professionals__grid.slider {
+  --kc-professional-gap: var(--kc-responsive-spacing-grid-gutter);
+  --kc-professional-width: max(22rem, calc((100% - (var(--cols) - 1) * var(--kc-professional-gap)) / var(--cols)));
+  gap: var(--kc-professional-gap);
+  margin: 0;
+  padding: 0;
+  scroll-padding-inline: 0;
+}
+
+.kc-professional-testimonials .trusted-professionals__grid::after {
+  content: none;
+}
+
+.kc-professional-testimonials .trusted-professionals__grid .trusted-professionals__card.slider__slide {
+  padding: var(--kc-responsive-spacing-layout-xs);
+  margin: 0;
+  scroll-margin: 0;
+  min-width: 0;
+}
+
+.kc-professional-testimonials .trusted-professionals__card-content {
+  padding: var(--kc-responsive-spacing-layout-sm);
+}
+
+.kc-professional-testimonials .trusted-professionals__card-name {
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+}
+
+.kc-professional-testimonials .slider-buttons {
+  justify-content: flex-end;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin-top: var(--kc-responsive-spacing-layout-md);
+}
+
+.kc-professional-testimonials .slider-buttons .slider-button {
+  position: static;
+  inset: auto;
+  transform: none;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-sm);
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-professional-testimonials .slider-buttons .slider-button .svg-wrapper {
+  width: 20px;
+  height: 20px;
+  transform: none;
+}
+
+.kc-professional-testimonials .slider-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.kc-professional-testimonials .slider-button:not(:disabled):hover {
+  background: var(--kc-mapped-surface-tertiary-default);
+}
+
+.kc-professional-testimonials .slider-button:focus-visible {
+  outline: var(--kc-shape-stroke-medium) solid var(--kc-mapped-border-focus-strong);
+  outline-offset: -3px;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .kc-professional-testimonials .trusted-professionals__grid.slider--tablet .trusted-professionals__card {
+    flex-basis: var(--kc-professional-width);
+    width: var(--kc-professional-width);
+    max-width: none;
+  }
+
+  .kc-professional-testimonials .slider--tablet + .slider-buttons {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .kc-professional-testimonials .trusted-professionals__grid.slider--desktop .trusted-professionals__card {
+    flex-basis: var(--kc-professional-width);
+    width: var(--kc-professional-width);
+    max-width: none;
+  }
+
+  .kc-professional-testimonials .slider--desktop + .slider-buttons {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .kc-professional-testimonials .slider--mobile + .slider-buttons {
+    display: flex;
+  }
+
+  .kc-professional-testimonials .trusted-professionals__card-quote-text {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+  }
+
+  .kc-professional-testimonials .trusted-professionals__card-quote-text p {
+    display: block;
+  }
+
+  .kc-professional-testimonials .trusted-professionals__card-quote-text p + p {
+    margin-top: var(--kc-responsive-body-md-paragraph-spacing);
+  }
+
+  .kc-professional-testimonials .trusted-professionals__card-quote-text p + p::before {
+    content: none;
+  }
+
+  .kc-professional-testimonials .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}

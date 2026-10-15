@@ -1,36 +1,91 @@
+/*
+  Trusted Professionals: Figma PDP band 3391:12340, homepage 2642:2147
+  (desktop) and 2766:10567 (mobile); cards follow KC/Professional card and
+  KC/Professional quote panel in the KC | Brand Design Library.
+
+  Colour tokens: the Figma names text/primary/default, surface/primary/default
+  and surface/tertiery/default are held at their pre-token values in
+  assets/kc-tokens.css (docs/design-tokens/baseline/proposals.md P1, P2, P4),
+  so this file reads the tokens that carry the same Figma Day/Night values:
+  text/default/heading, surface/page and surface/tertiary/default.
+*/
+
+trusted-professionals-quotes {
+  display: block;
+}
+
+.trusted-professionals {
+  overflow-x: clip;
+}
+
+/* Background setting "Page to accent gradient" (the PDP band) */
+.trusted-professionals--bg-accent {
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+/* section/sm between header, cards and footer (80 desktop, 48 mobile in the
+   library; the token is not emitted yet, P6, so the fallback carries it) */
 .trusted-professionals__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-3xl);
+  gap: var(--kc-responsive-spacing-section-sm, 4.8rem);
 }
 
-/* Header */
+@media screen and (min-width: 750px) {
+  .trusted-professionals__inner {
+    gap: var(--kc-responsive-spacing-section-sm, 8rem);
+  }
+}
+
+/* Header: hairline, label, two-line heading */
 .trusted-professionals__header {
   display: flex;
   flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-lg);
+  border-top: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  padding-top: var(--kc-responsive-spacing-section-md);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+@media screen and (min-width: 750px) {
+  .trusted-professionals__header {
+    padding-top: var(--kc-responsive-spacing-layout-3xl);
+  }
+}
+
+.trusted-professionals__header .kc-caption-subheading {
+  margin: 0;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-mapped-text-default-heading);
 }
 
 .trusted-professionals__header h2 {
-  max-width: 500px;
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-h2-text-size);
+  line-height: var(--kc-responsive-h2-line-height);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
 }
 
-/* Figma: a 12% hairline 64px above the label, 80px between the heading
-   and the cards on desktop */
-@media screen and (min-width: 990px) {
-  .trusted-professionals__header {
-    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-    padding-top: 6.4rem;
-    margin-bottom: calc(8rem - var(--gap-3xl));
-  }
+/* The bold part is the second line, in text/default/body, same weight */
+.trusted-professionals__header h2 strong,
+.trusted-professionals__header h2 b {
+  display: block;
+  font-weight: inherit;
+  color: var(--kc-mapped-text-default-body);
 }
 
 /* Grid System */
 .trusted-professionals__grid {
   --cols: var(--cols-mobile, 1);
   display: grid;
-  gap: 16px;
+  gap: var(--kc-responsive-spacing-grid-gutter);
   grid-template-columns: repeat(var(--cols), 1fr);
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 @media screen and (min-width: 750px) {
@@ -142,24 +197,19 @@
   scroll-margin-left: 0;
 }
 
-/* Marquee: one full-bleed row that drifts (assets/trusted-professionals-marquee.js) */
-.trusted-professionals {
-  overflow-x: clip;
-}
-
+/* Marquee: one full-bleed row that drifts (assets/kc-marquee.js).
+   Cards have the KC/Professional card size: 332 x 479, 280 x 404 on mobile. */
 .trusted-professionals__marquee {
   display: block;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
   overflow: hidden;
   touch-action: pan-y;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
 .trusted-professionals__track {
   display: flex;
-  gap: 16px;
+  gap: var(--kc-responsive-spacing-grid-gutter);
   width: max-content;
   margin: 0;
   padding: 0;
@@ -167,33 +217,14 @@
   will-change: transform;
 }
 
-/* Same card width as the grid: the page-width content box split into the
-   column count for the breakpoint (cqw = marquee width, without scrollbar) */
-.trusted-professionals__marquee {
-  --cols: var(--cols-mobile, 1.3);
-  container-type: inline-size;
+.trusted-professionals__track .trusted-professionals__card {
+  flex: 0 0 28rem;
 }
 
 @media screen and (min-width: 750px) {
-  .trusted-professionals__marquee {
-    --cols: var(--cols-tablet, 2);
+  .trusted-professionals__track .trusted-professionals__card {
+    flex-basis: 33.2rem;
   }
-}
-
-@media screen and (min-width: 990px) {
-  .trusted-professionals__marquee {
-    --cols: var(--cols-laptop, 3);
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .trusted-professionals__marquee {
-    --cols: var(--cols-desktop, 4);
-  }
-}
-
-.trusted-professionals__track .trusted-professionals__card {
-  flex: 0 0 calc((min(100cqw, var(--page-width)) - 2 * var(--page-gutter) - 16px * (var(--cols) - 1)) / var(--cols));
 }
 
 .trusted-professionals__marquee.is-dragging {
@@ -212,71 +243,133 @@
   padding-inline: max(var(--page-gutter), calc(50vw - var(--page-width, 120rem) / 2 + var(--page-gutter)));
 }
 
-/* Card Styling */
+/* KC/Professional card: portrait surface, 8px inset holder at the bottom */
 .trusted-professionals__card {
   position: relative;
-  border-radius: var(--extra-primary-border-radius);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  /* KC/Professional card proportion: 332 x 479 (desktop) = 280 x 404 (mobile) in the library */
   aspect-ratio: 332 / 479;
+  padding: var(--kc-responsive-spacing-layout-xs);
+  border-radius: var(--kc-shape-radius-md);
+  overflow: hidden;
+  background-color: var(--kc-mapped-surface-tertiary-default);
+}
+
+.trusted-professionals__card:focus-visible {
+  outline: var(--kc-shape-stroke-thick) solid var(--kc-mapped-border-focus-strong);
+  outline-offset: calc(-1 * var(--kc-shape-stroke-thick));
 }
 
 .trusted-professionals__card-image {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: 1;
 }
 
-.trusted-professionals__card-image img {
+.trusted-professionals__card-image img,
+.trusted-professionals__card-image .placeholder-svg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: var(--extra-primary-border-radius);
 }
 
+/* Credentials holder: glass on every card, also while the quote is open
+   (Victor, 13 Oct; homepage Figma 2642:2157). The photo behind it is
+   blurred with brand glass/blur (Victor, 13 Oct; the library card has none). */
 .trusted-professionals__card-content {
   position: relative;
-  padding: 1.6rem;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  z-index: 2;
-  max-height: calc(100% - 16px);
+  max-height: 100%;
   overflow: hidden;
-  margin: 8px;
-  border-radius: var(--extra-primary-border-radius);
-  /* KC glass surface, background only (tokens in snippets/day-night-color-variables.liquid) */
+  padding: var(--kc-responsive-spacing-layout-md);
+  border-radius: var(--kc-shape-radius-md);
   background-color: var(--kc-mapped-surface-glass-default);
   -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
   backdrop-filter: blur(var(--kc-shape-blur-md));
+  color: var(--kc-mapped-text-default-heading);
 }
 
 .trusted-professionals__card-body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: var(--gap-sm);
+  gap: var(--kc-responsive-spacing-layout-xs);
 }
 
-@media screen and (max-width: 749px) {
-  .trusted-professionals__card-content {
-    padding: 1.2rem;
-  }
+.trusted-professionals__card-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
 }
 
-/* Hover quote: the panel sits at the bottom of the card, so opening the
+.trusted-professionals__card-name {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: var(--font-700-weight, 700);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
+  overflow-wrap: break-word;
+}
+
+.trusted-professionals__card-title {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 400;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+  overflow-wrap: break-word;
+}
+
+/* "Long quote" (mobile only): the eye shows when the five-line quote is cut
+   (data-long-quote, set by assets/trusted-professionals-quote-panel.js) */
+.trusted-professionals__card-eye {
+  display: none;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--kc-responsive-size-control-min-width);
+  height: var(--kc-responsive-size-control-min-height);
+  margin-block: calc((var(--kc-responsive-body-lg-line-height) - var(--kc-responsive-size-control-min-height)) / 2);
+  margin-inline-end: calc(-1 * var(--kc-responsive-spacing-layout-xs));
+  padding: 0;
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  background: none;
+  color: var(--kc-mapped-icon-primary-default);
+  cursor: pointer;
+}
+
+
+.trusted-professionals__card-eye:hover {
+  color: var(--kc-mapped-text-accent-default);
+}
+
+.trusted-professionals__card-eye:focus-visible {
+  outline: var(--kc-shape-stroke-medium) solid var(--kc-mapped-border-focus-strong);
+  outline-offset: calc(-1 * var(--kc-shape-stroke-medium));
+}
+
+.trusted-professionals__card-eye .kc-icon {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+}
+
+/* Quote: the holder sits at the bottom of the card, so opening the
    0fr -> 1fr row grows it upwards exactly as tall as the quote needs.
-   Opening: the panel unfolds first, then the text settles in.
-   Closing: the text fades out first, then the panel folds back. */
+   Opening: the holder unfolds first, then the text settles in.
+   Closing: the text fades out first, then the holder folds back. */
 .trusted-professionals__card-quote {
   display: grid;
   grid-template-rows: 0fr;
@@ -292,58 +385,68 @@
   overflow: hidden;
 }
 
+/* Text/Medium */
 .trusted-professionals__card-quote-text {
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 400;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.25s ease, transform 0.35s ease;
 }
 
+.trusted-professionals__card-quote-text p {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
 .trusted-professionals__card-quote-text p + p {
-  margin-top: var(--gap-lg);
+  margin-top: var(--kc-responsive-body-md-paragraph-spacing);
 }
 
-.trusted-professionals__card-quote-text > :first-child {
-  margin-top: 0;
+/* Mobile: the quote is capped at five lines with an ellipsis (paragraphs run
+   on); when it is cut, the eye opens the full quote in the quote panel. */
+@media screen and (max-width: 749px) {
+  .trusted-professionals__card-quote-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+  }
+
+  .trusted-professionals__card-quote-text p {
+    display: inline;
+  }
+
+  .trusted-professionals__card-quote-text p + p {
+    margin-top: 0;
+  }
+
+  .trusted-professionals__card-quote-text p + p::before {
+    content: ' ';
+  }
+
+  .trusted-professionals__card[data-long-quote] .trusted-professionals__card-eye {
+    display: inline-flex;
+  }
 }
 
-.trusted-professionals__card-quote-text > :last-child {
-  margin-bottom: 0;
-}
-
-.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote {
-  grid-template-rows: 1fr;
-  margin-bottom: 24px; /* space between quote and name, kept clear of text */
-  transition:
-    grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    margin-bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* A quote taller than the card scrolls inside the panel. No scrollbar (it
-   would flash during the open animation); instead the text fades out at the
-   bottom of the quote area, above the 24px gap. The fade is driven by the
-   scroll position: it only exists while there is more text below and
-   disappears at the end. A quote that fits has no scroll range, so the
-   timeline stays inactive and there is no fade. Without scroll-driven
-   animation support the text simply stops 24px above the name. */
+/* Desktop: the whole quote opens in the card. A quote taller than the card
+   scrolls inside the holder, without a scrollbar (it would flash during the
+   open animation); the text fades out above the name while there is more
+   below, driven by the scroll position, and the fade is gone at the end. A
+   quote that fits has no scroll range, so there is no fade. Without
+   scroll-driven animation support the text simply stops above the name. */
 @property --kc-quote-fade {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
-}
-
-.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
-}
-
-@supports (animation-timeline: scroll()) {
-  .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
-    animation: kc-quote-fade linear both;
-    animation-timeline: scroll(self block);
-  }
 }
 
 @keyframes kc-quote-fade {
@@ -357,8 +460,33 @@
   }
 }
 
-.trusted-professionals__card-quote-inner::-webkit-scrollbar {
-  display: none;
+@media screen and (min-width: 750px) {
+  .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - var(--kc-quote-fade)), transparent);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-inner {
+      animation: kc-quote-fade linear both;
+      animation-timeline: scroll(self block);
+    }
+  }
+
+  .trusted-professionals__card-quote-inner::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote {
+  grid-template-rows: 1fr;
+  margin-bottom: var(--kc-responsive-spacing-layout-lg);
+  transition:
+    grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .trusted-professionals__card:is(:hover, :focus-within) .trusted-professionals__card-quote-text {
@@ -375,18 +503,192 @@
   }
 }
 
-.trusted-professionals__card-content h5 {
-  font-weight: var(--font-700-weight);
-}
-
-/* Footer (Mobile Button/Text) */
+/* Footer: research note and secondary button (mobile only in Figma) */
 .trusted-professionals__footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: var(--kc-responsive-spacing-layout-md);
 }
 
 .trusted-professionals__bottom-text {
-  max-width: 480px;
+  max-width: var(--kc-responsive-size-grid-columns-4);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.trusted-professionals__bottom-text > * {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+@media screen and (min-width: 750px) {
+  .trusted-professionals__footer--mobile-only {
+    display: none;
+  }
+}
+
+/* KC/Professional quote panel: 448 wide (full width on mobile), top right,
+   full height, scrolls; navy scrim behind it */
+.trusted-professionals__panel {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+@media screen and (min-width: 750px) {
+  .trusted-professionals__panel {
+    width: var(--kc-responsive-size-grid-columns-4);
+  }
+}
+
+.trusted-professionals__panel::backdrop {
+  background-color: var(--kc-mapped-surface-overlay-scrim, rgba(25, 31, 56, 0.48));
+}
+
+.trusted-professionals__panel[open] {
+  animation: kc-quote-panel-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trusted-professionals__panel[open]::backdrop {
+  animation: kc-quote-scrim-in 0.3s ease;
+}
+
+@keyframes kc-quote-panel-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes kc-quote-scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-professionals__panel[open],
+  .trusted-professionals__panel[open]::backdrop {
+    animation: none;
+  }
+}
+
+.trusted-professionals__panel-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--kc-responsive-spacing-layout-lg);
+  min-height: 100%;
+  padding: var(--kc-responsive-spacing-layout-xl);
+}
+
+/* Close: KC/Button, 40 x 40 on surface/accent */
+.trusted-professionals__panel-close {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--kc-responsive-size-button-sm-height);
+  height: var(--kc-responsive-size-button-sm-height);
+  padding: 0;
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  background-color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.trusted-professionals__panel-close:hover {
+  background-color: var(--kc-mapped-surface-accent-default-hover);
+}
+
+.trusted-professionals__panel-close:focus-visible {
+  outline: var(--kc-shape-stroke-medium) solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.trusted-professionals__panel-close .kc-icon {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+}
+
+.trusted-professionals__panel-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--kc-shape-radius-md);
+  background-color: var(--kc-mapped-surface-tertiary-default);
+}
+
+.trusted-professionals__panel-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+}
+
+.trusted-professionals__panel-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  width: 100%;
+}
+
+.trusted-professionals__panel-name {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: var(--font-700-weight, 700);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.trusted-professionals__panel-title {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.trusted-professionals__panel-quote {
+  width: 100%;
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 400;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.trusted-professionals__panel-quote > * {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.trusted-professionals__panel-quote > * + * {
+  margin-top: var(--kc-responsive-body-lg-paragraph-spacing);
 }

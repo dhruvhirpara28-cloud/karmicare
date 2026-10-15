@@ -1,67 +1,39 @@
 {{ 'section-comparison-table.css' | asset_url | stylesheet_tag }}
 {%- style -%}
   {%- if section.settings.bg_gradient_day != blank -%}
-      body:not(.night-mode) .section-{{ section.id }},
-      body.day-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_day }};
+    body:not(.night-mode) .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_day }};
     }
   {%- elsif section.settings.bg_color_day != blank -%}
-    body:not(.night-mode) .section-{{ section.id }},
-    body.day-mode .section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_day }};
+    body:not(.night-mode) .section-{{ section.id }} {
+      background: {{ section.settings.bg_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_night }};
+    }
+  {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_color_night }};
+    }
+  {%- endif -%}
+  {%- if section.settings.text_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }} {
+      color: {{ section.settings.text_color_day }};
+    }
+  {%- endif -%}
+  {%- if section.settings.text_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+      color: {{ section.settings.text_color_night }};
     }
   {%- endif -%}
   {%- if section.settings.col_text_day != blank -%}
-    body.day-mode .section-{{ section.id }} .comparison-table__brand-logo svg path {
-        color: {{ section.settings.col_text_day }};
-    }
-    body.day-mode .section-{{ section.id }} .comparison-table__cell,
-    body.day-mode .section-{{ section.id }} .comparison-table__cell span {
-        color: {{ section.settings.col_text_day }};
+    body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell:not(.comparison-table__cell--brand),
+    body:not(.night-mode) .section-{{ section.id }} .comparison-table__header:not(.comparison-table__header--brand) {
+      color: {{ section.settings.col_text_day }};
     }
   {%- endif -%}
-
-  {%- if section.settings.bg_gradient_night != blank -%}
-  body.night-mode .section-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_night }};
-  }
-  {%- elsif section.settings.bg_color_night != blank -%}
-  body.night-mode .section-{{ section.id }} {
-      background-color: {{ section.settings.bg_color_night }};
-  }
-  {%- endif -%}
-
-  /* DAY MODE */
-  {% if section.settings.text_color_day != blank %}
-    body:not(.night-mode) .section-{{ section.id }} *,
-    body.day-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_day }};
-    }
-  {% endif %}
-
-  /* TABLE DAY MODE SPECIFIC OVERRIDES */
-  body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell,
-  body.day-mode .section-{{ section.id }} .comparison-table__cell,
-  body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--first,
-  body.day-mode .section-{{ section.id }} .comparison-table__cell--first {
-      background-color: var(--kc-mapped-text-primary-default);
-  }
-
-  body:not(.night-mode) .section-{{ section.id }} .comparison-table__header--brand,
-  body.day-mode .section-{{ section.id }} .comparison-table__header--brand,
-  body:not(.night-mode) .section-{{ section.id }} .comparison-table__cell--brand,
-  body.day-mode .section-{{ section.id }} .comparison-table__cell--brand {
-      background-color: var(--kc-white-surface-primary-default);
-  }
-
-
-
-  /* NIGHT MODE */
-  {% if section.settings.text_color_night != blank %}
-    body.night-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_night }};
-    }
-  {% endif %}
 
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top_mobile }}px;
@@ -81,8 +53,6 @@
 
 {% if comparison != blank %}
   {% liquid
-    assign comparison = product.metafields.custom.comparison_section.value
-
     assign section_subtitle = comparison.sub_title.value
     assign section_title = comparison.title
     assign section_description = comparison.short_description.value
@@ -102,11 +72,9 @@
     id="section-{{ section.id }}"
   >
     <div class="comparison-section__inner page-width">
-      <div class="section-main-header">
+      <div class="comparison-section__header">
         {% if section_subtitle != blank %}
-          <span class="comparison-section__subtitle subtitle-item ">
-            {{ section_subtitle }}
-          </span>
+          <span class="comparison-section__subtitle subtitle-item">{{ section_subtitle }}</span>
         {% endif %}
 
         {% if section_title != blank %}
@@ -116,111 +84,56 @@
         {% endif %}
 
         {% if section_description != blank %}
-          <div class="comparison-section__description text-xl">
+          <div class="comparison-section__description">
             {{ section_description }}
           </div>
         {% endif %}
+
+        {%- comment -%} KC/Button, primary, large (Figma 3391:12478) {%- endcomment -%}
+        {% if button_text != blank %}
+          {% if button_url != blank %}
+            <a href="{{ button_url }}" class="comparison-section__button">{{ button_text }}</a>
+          {% else %}
+            <button type="button" class="comparison-section__button">{{ button_text }}</button>
+          {% endif %}
+        {% endif %}
       </div>
+
       <div class="comparison-table-wrapper">
         <div class="comparison-table">
-          <!-- Column 1 -->
-          <div class="comparison-table__header text-xl comparison-table__header--first">
-            {% if table_headers[0] != blank %}
-              {{ table_headers[0] | strip }}
-            {% endif %}
+          <div class="comparison-table__header comparison-table__header--first">
+            {%- if table_headers[0] != blank -%}{{ table_headers[0] | strip }}{%- endif -%}
           </div>
-
-          <!-- Column 2 - LOGO -->
-          <div class="comparison-table__header text-xl comparison-table__header--brand">
+          <div class="comparison-table__header comparison-table__header--brand">
             {% if table_logo != blank %}
               <div class="comparison-table__brand-logo">
                 {{ table_logo }}
               </div>
             {% endif %}
           </div>
-
-          <!-- Column 3 -->
-          <div class="comparison-table__header text-xl">
-            {% if table_headers[2] != blank %}
-              {{ table_headers[2] | strip }}
-            {% endif %}
-          </div>
-
-          <!-- Column 4 -->
-          <div class="comparison-table__header text-xl">
-            {% if table_headers[3] != blank %}
-              {{ table_headers[3] | strip }}
-            {% endif %}
-          </div>
-
-          <!-- Column 5 -->
-          <div class="comparison-table__header text-xl">
-            {% if table_headers[4] != blank %}
-              {{ table_headers[4] | strip }}
-            {% endif %}
-          </div>
+          {%- for i in (2..4) -%}
+            <div class="comparison-table__header">
+              {%- if table_headers[i] != blank -%}{{ table_headers[i] | strip }}{%- endif -%}
+            </div>
+          {%- endfor -%}
 
           {% if table_rows != blank %}
             {% for row in table_rows %}
               {% assign cells = row | split: '|' %}
-
-              <!-- Column 1 -->
-              <div class="comparison-table__cell comparison-table__cell--first comparison-table__cell--first{{ forloop.index }}">
-                {% if cells[0] != blank %}
-                  {{ cells[0] | strip }}
-                {% endif %}
+              <div class="comparison-table__cell comparison-table__cell--first">
+                {%- if cells[0] != blank -%}{{ cells[0] | strip }}{%- endif -%}
               </div>
-
-              <!-- Column 2 -->
               <div class="comparison-table__cell comparison-table__cell--brand">
-                {% if cells[1] != blank %}
-                  <span>{{ cells[1] | strip }}</span>
-                {% endif %}
+                {%- if cells[1] != blank -%}{{ cells[1] | strip }}{%- endif -%}
               </div>
-
-              <!-- Column 3 -->
-              <div class="comparison-table__cell">
-                {% if cells[2] != blank %}
-                  <span>{{ cells[2] | strip }}</span>
-                {% endif %}
-              </div>
-
-              <!-- Column 4 -->
-              <div class="comparison-table__cell">
-                {% if cells[3] != blank %}
-                  <span>{{ cells[3] | strip }}</span>
-                {% endif %}
-              </div>
-
-              <!-- Column 5 -->
-              <div class="comparison-table__cell comparison-table__cell-last{{ forloop.index }}">
-                {% if cells[4] != blank %}
-                  <span>{{ cells[4] | strip }}</span>
-                {% endif %}
-              </div>
+              {%- for i in (2..4) -%}
+                <div class="comparison-table__cell">
+                  {%- if cells[i] != blank -%}{{ cells[i] | strip }}{%- endif -%}
+                </div>
+              {%- endfor -%}
             {% endfor %}
           {% endif %}
         </div>
-        {% if button_text != blank %}
-          <div class="comparison-section__button-wrapper">
-            {% if button_url != blank %}
-              <a
-                href="{{ button_url }}"
-                class="comparison-section__button karmicare__btn-primary"
-              >
-                {{ button_text }}
-              </a>
-
-            {% else %}
-              <button
-                type="button"
-                class="comparison-section__button"
-              >
-                {{ button_text }}
-              </button>
-            {% endif %}
-          </div>
-        {% endif %}
       </div>
     </div>
   </section>
@@ -232,6 +145,10 @@
   "tag": "section",
   "class": "comparison-section-wrapper",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "Colours follow the KC tokens in Day and Night. Leave the colour and gradient fields empty unless this table needs an override."
+    },
     {
       "type": "header",
       "content": "Day Mode Colors"
@@ -287,7 +204,7 @@
       "max": 200,
       "step": 2,
       "unit": "px",
-      "default": 80
+      "default": 160
     },
     {
       "type": "range",
@@ -297,7 +214,7 @@
       "max": 200,
       "step": 2,
       "unit": "px",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -307,7 +224,7 @@
       "max": 150,
       "step": 2,
       "unit": "px",
-      "default": 40
+      "default": 64
     },
     {
       "type": "range",
@@ -317,7 +234,7 @@
       "max": 150,
       "step": 2,
       "unit": "px",
-      "default": 40
+      "default": 48
     }
   ],
   "presets": [

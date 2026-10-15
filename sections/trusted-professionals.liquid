@@ -13,7 +13,18 @@
   </div>
 {% endif %}
 
-<div class="trusted-professionals section-{{ section.id }}">
+{%- liquid
+  assign panel_id = 'QuotePanel-' | append: section.id
+  assign has_quotes = false
+  for block in section.blocks
+    if block.settings.hover_text != blank
+      assign has_quotes = true
+      break
+    endif
+  endfor
+-%}
+
+<div class="trusted-professionals section-{{ section.id }}{% if section.settings.background_style == 'accent_gradient' %} trusted-professionals--bg-accent{% endif %}">
   {%- style -%}
     .section-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_mobile }}px;
@@ -26,7 +37,7 @@
       }
     }
 
-    {%- if section.settings.heading_bold_opacity != blank -%}
+    {%- if section.settings.heading_bold_opacity < 100 -%}
       .section-{{ section.id }} .trusted-professionals__header h2 strong,
       .section-{{ section.id }} .trusted-professionals__header h2 b {
         opacity: {{ section.settings.heading_bold_opacity | divided_by: 100.0 }};
@@ -70,7 +81,7 @@
     {%- endif -%}
   {%- endstyle -%}
 
-  <div class="page-width">
+  <trusted-professionals-quotes class="page-width">
     <div class="trusted-professionals__inner">
       <div class="trusted-professionals__header">
         {%- if section.settings.subheading != blank -%}
@@ -82,24 +93,26 @@
       </div>
 
       {%- if section.settings.marquee -%}
-        <trusted-professionals-marquee
+        <kc-marquee
           class="trusted-professionals__marquee"
           data-speed="{{ section.settings.marquee_speed }}"
-          style="--cols-desktop: {{ section.settings.columns_desktop }}; --cols-laptop: {{ section.settings.columns_laptop }}; --cols-tablet: {{ section.settings.columns_tablet }}; --cols-mobile: {{ section.settings.columns_mobile }};"
+          data-wheel
         >
-          <ul class="trusted-professionals__track" id="Slider-{{ section.id }}" role="list">
+          <ul class="trusted-professionals__track" id="Slider-{{ section.id }}" role="list" data-marquee-track>
             {%- for block in section.blocks -%}
               <li
                 id="Slide-{{ section.id }}-{{ forloop.index }}"
                 class="trusted-professionals__card"
+                data-block-id="{{ block.id }}"
+                {% if block.settings.hover_text != blank %}tabindex="0"{% endif %}
                 {{ block.shopify_attributes }}
               >
-                {%- render 'trusted-professional-card', block: block -%}
+                {%- render 'trusted-professional-card', block: block, panel_id: panel_id -%}
               </li>
             {%- endfor -%}
           </ul>
-        </trusted-professionals-marquee>
-        <script src="{{ 'trusted-professionals-marquee.js' | asset_url }}" defer="defer"></script>
+        </kc-marquee>
+        <script src="{{ 'kc-marquee.js' | asset_url }}" defer="defer"></script>
       {%- else -%}
 
       {%- capture slider_classes -%}
@@ -132,9 +145,11 @@
           <li
             id="Slide-{{ section.id }}-{{ forloop.index }}"
             class="trusted-professionals__card{% if show_slider %} slider__slide{% endif %}"
+            data-block-id="{{ block.id }}"
+            {% if block.settings.hover_text != blank %}tabindex="0"{% endif %}
             {{ block.shopify_attributes }}
           >
-            {%- render 'trusted-professional-card', block: block -%}
+            {%- render 'trusted-professional-card', block: block, panel_id: panel_id -%}
           </li>
         {%- endfor -%}
       </ul>
@@ -173,24 +188,59 @@
       {%- endif -%}
       {%- endif -%}
 
-      <div class="trusted-professionals__footer">
-        {%- if section.settings.bottom_text != blank -%}
-          <div class="trusted-professionals__bottom-text kc-caption-text">
-            {{ section.settings.bottom_text }}
-          </div>
-        {%- endif -%}
+      {%- if section.settings.bottom_text != blank or section.settings.button_label != blank -%}
+        <div class="trusted-professionals__footer{% if section.settings.footer_display == 'mobile' %} trusted-professionals__footer--mobile-only{% endif %}">
+          {%- if section.settings.bottom_text != blank -%}
+            <div class="trusted-professionals__bottom-text">
+              {{ section.settings.bottom_text }}
+            </div>
+          {%- endif -%}
 
-        {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="karmicare__btn-secondary">
-            {{ section.settings.button_label }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M0.75 5.41667L10.0833 5.41667M5.41667 10.0833L10.0833 5.41667L5.41667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        {%- endif -%}
-      </div>
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link | default: '#' }}" class="karmicare__btn-secondary">
+              {{ section.settings.button_label }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" focusable="false">
+                <path d="M0.75 5.41667L10.0833 5.41667M5.41667 10.0833L10.0833 5.41667L5.41667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
-  </div>
+
+    {%- if has_quotes -%}
+      {%- comment -%}
+        KC/Professional quote panel (KC | Brand Design Library 3685:14514): side panel,
+        top right, navy scrim. Filled from the card whose eye button opened it.
+      {%- endcomment -%}
+      <dialog
+        id="{{ panel_id }}"
+        class="trusted-professionals__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="{{ panel_id }}-name"
+      >
+        <div class="trusted-professionals__panel-inner">
+          <button
+            type="button"
+            class="trusted-professionals__panel-close"
+            data-quote-panel-close
+            aria-label="{{ 'accessibility.close' | t }}"
+            autofocus
+          >
+            {{ 'kc-icon-close.svg' | inline_asset_content }}
+          </button>
+          <div class="trusted-professionals__panel-media" data-quote-panel-media></div>
+          <div class="trusted-professionals__panel-meta">
+            <p class="trusted-professionals__panel-name" id="{{ panel_id }}-name" data-quote-panel-name></p>
+            <p class="trusted-professionals__panel-title" data-quote-panel-title></p>
+          </div>
+          <div class="trusted-professionals__panel-quote" data-quote-panel-quote></div>
+        </div>
+      </dialog>
+      <script src="{{ 'trusted-professionals-quote-panel.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+  </trusted-professionals-quotes>
 </div>
 
 {%- if section.settings.show_border_bottom != blank -%}
@@ -267,6 +317,17 @@
       "content": "Section Settings"
     },
     {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background",
+      "options": [
+        { "value": "none", "label": "Page background" },
+        { "value": "accent_gradient", "label": "Page to accent gradient" }
+      ],
+      "default": "none",
+      "info": "KC tokens surface/page to gradient/section-accent, Day and Night. A colour or gradient below overrides it."
+    },
+    {
       "type": "color",
       "id": "bg_color_day",
       "label": "Background Color (Day)"
@@ -293,7 +354,8 @@
     {
       "type": "inline_richtext",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "Subheading",
+      "default": "PROFESSIONAL PARTNERS"
     },
     {
       "type": "inline_richtext",
@@ -308,7 +370,8 @@
       "step": 10,
       "unit": "%",
       "label": "Heading Bold Text Opacity",
-      "default": 70
+      "info": "The bold part is the second heading line in the KC text/default/body colour. 100% keeps that colour as designed; lower values fade it further.",
+      "default": 100
     },
     {
       "type": "header",
@@ -328,6 +391,16 @@
       "type": "url",
       "id": "button_link",
       "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "footer_display",
+      "label": "Show bottom text and button",
+      "options": [
+        { "value": "mobile", "label": "Mobile only" },
+        { "value": "all", "label": "All screen sizes" }
+      ],
+      "default": "mobile"
     },
     {
       "type": "header",
@@ -351,7 +424,7 @@
       "type": "checkbox",
       "id": "marquee",
       "label": "Infinite marquee",
-      "info": "All cards in one full-width row that drifts slowly and glides to a stop on hover. Cards keep the width of the column counts below; the slider settings are ignored.",
+      "info": "All cards in one full-width row that drifts slowly and glides to a stop on hover. Cards have the KC/Professional card size (332 x 479, 280 x 404 on mobile); the column and slider settings below apply to the grid only.",
       "default": false
     },
     {

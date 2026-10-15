@@ -21,6 +21,20 @@
 {%- endif -%}
 
 {%- style -%}
+  /* KC announcement bar: Figma homepage desktop 2642:1903 (28px, hairline below) and mobile
+     2766:10306 (30px, one line scrolling in from the page gutter). Colours default to the
+     KC tokens; the Day/Night colour settings below override them when filled. */
+  #AnnouncementBar-{{ section.id }} {
+    background: var(--kc-mapped-gradient-section-accent);
+    color: var(--kc-mapped-text-default-heading);
+  }
+  #AnnouncementBar-{{ section.id }} .announcement-bar {
+    color: inherit;
+  }
+  #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
+    border-bottom: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  }
+
   {%- if section.settings.bg_color_day != blank -%}
     body.day-mode #AnnouncementBar-{{ section.id }} {
       background: {{ section.settings.bg_color_day }};
@@ -35,10 +49,6 @@
       fill: {{ section.settings.text_color_day }};
     }
   {%- endif -%}
-  /* Figma: 12% hairline under the bar; the colour settings below override it */
-  #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
-    border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
-  }
 
   /* Figma: 28px bar (8px above a 12px line, the hairline closes it) */
   @media screen and (min-width: 990px) {
@@ -95,19 +105,66 @@
     {%- endif -%}
   {%- endfor -%}
 
+  /* The second copy of the text only exists for the mobile loop */
+  #AnnouncementBar-{{ section.id }} .announcement-bar__copy {
+    display: none;
+  }
+
+  /* Mobile: 30px bar, no hairline (Figma 2766:10306). The line starts at the page gutter and
+     scrolls left; two copies with equal trailing space make the loop seamless at -50%. */
   @media screen and (max-width: 749px) {
-    #AnnouncementBar-{{ section.id }} .announcement-bar {
-      overflow: hidden;
+    #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
+      border-bottom: none;
+    }
+    #AnnouncementBar-{{ section.id }} .utility-bar__grid {
+      padding: 0;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee {
       display: block;
+      overflow: hidden;
+      padding-left: var(--kc-responsive-spacing-page-gutter);
     }
-    #AnnouncementBar-{{ section.id }} .announcement-bar__message {
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message {
+      display: inline-flex;
+      min-height: 0;
+      padding: 0.8rem 0;
+      line-height: 1.4rem;
+      letter-spacing: var(--kc-responsive-caption-letter-spacing);
       white-space: nowrap;
-      animation: marqueeMobile 10s linear infinite;
-      display: inline-block;
+      animation: kc-announcement-marquee-{{ section.id }} 10s linear infinite;
     }
-    @keyframes marqueeMobile {
-      0% { transform: translateX(100vw); }
-      100% { transform: translateX(-100%); }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message > span {
+      padding-right: 4rem;
+      line-height: inherit;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__copy {
+      display: inline;
+    }
+  }
+  @keyframes kc-announcement-marquee-{{ section.id }} {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /* Reduced motion: the line stands still and wraps, centred */
+  @media screen and (max-width: 749px) and (prefers-reduced-motion: reduce) {
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee {
+      padding-right: var(--kc-responsive-spacing-page-gutter);
+      text-align: center;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message {
+      display: block;
+      white-space: normal;
+      animation: none;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message > span {
+      padding-right: 0;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__copy {
+      display: none;
     }
   }
 {%- endstyle -%}
@@ -122,7 +179,7 @@
     {%- endif -%}
     {%- if section.blocks.size == 1 -%}
       <div
-        class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
+        class="announcement-bar announcement-bar--marquee{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
         aria-label="{{ 'sections.header.announcement' | t }}"
         {{ section.blocks.first.shopify_attributes }}
@@ -136,6 +193,9 @@
           {%- endif -%}
           <p class="announcement-bar__message announcement-bar-message-{{ section.blocks.first.id }} h5">
             <span>{{ section.blocks.first.settings.text | escape }}</span>
+            <span class="announcement-bar__copy" aria-hidden="true">
+              {{- section.blocks.first.settings.text | escape -}}
+            </span>
             {%- if section.blocks.first.settings.link != blank -%}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             {%- endif -%}

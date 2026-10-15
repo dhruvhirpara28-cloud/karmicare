@@ -1,52 +1,40 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{% comment %}
+  KC footer, Figma homepage desktop 2642:2323 and mobile 2766:10773 (file iR5disvadVeKd5YmAt8sla).
+  Spacing and type read the --kc-responsive-* tokens, which switch from the mobile to the
+  desktop value at 750px, so one rule covers both frames. Figma text/primary, surface/primary and
+  surface/secondary are held at old values (docs/design-tokens/baseline/proposals.md P1-P3);
+  their same-value twins text/default/heading, surface/page and surface/page/secondary are used.
+  section-footer.css stays: it defines the animateLocalization keyframe that
+  component-localization-form.css runs on the country dropdown below.
+{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  /* A global rule sets line-height: normal on p, span, li, label and headings; text in the
+     footer takes the line height of the element that sets its type style instead. */
+  .karmicare-footer :where(p, span, li, label, ul) {
+    line-height: inherit;
+  }
+
+  /* --sticky-cta-height is the product page's fixed purchase bar while it shows
+     (snippets/sticky-cart-block.liquid); 0 on pages without the bar. */
   .karmicare-footer {
-    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: calc({{ section.settings.padding_bottom_mobile }}px + var(--sticky-cta-height, 0px));
+    background: {{ section.settings.bg_color_day | default: 'var(--kc-mapped-gradient-section-accent)' }};
+    color: var(--kc-mapped-text-default-heading);
+    font-family: var(--kc-font-role-backbone);
   }
 
-  .karmicare-footer .km-footer-top {
-    padding-top: {{ section.settings.padding_top_mobile }}px;
+  body.night-mode .karmicare-footer {
+    background: {{ section.settings.bg_color_night | default: 'var(--kc-mapped-gradient-section-accent)' }};
   }
-
-  {% if section.settings.show_top_border %}
-    .karmicare-footer .km-footer-top {
-      border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-    }
-  {% endif %}
-
-  {% if section.settings.bg_gradient_day != blank %}
-    body:not(.night-mode) .karmicare-footer,
-    body.day-mode .karmicare-footer {
-      background: {{ section.settings.bg_gradient_day }};
-    }
-  {% elsif section.settings.bg_color_day != blank %}
-    body:not(.night-mode) .karmicare-footer,
-    body.day-mode .karmicare-footer {
-      background-color: {{ section.settings.bg_color_day }};
-    }
-  {% endif %}
 
   {% if section.settings.text_color_day != blank %}
     body:not(.night-mode) .karmicare-footer *,
     body.day-mode .karmicare-footer * {
       color: {{ section.settings.text_color_day }};
-    }
-  {% endif %}
-
-  {% if section.settings.bg_gradient_night != blank %}
-    body.night-mode .karmicare-footer {
-      background: {{ section.settings.bg_gradient_night }};
-    }
-  {% elsif section.settings.bg_color_night != blank %}
-    body.night-mode .karmicare-footer {
-      background-color: {{ section.settings.bg_color_night }};
     }
   {% endif %}
 
@@ -56,304 +44,555 @@
     }
   {% endif %}
 
-  @media screen and (min-width: 750px) {
-    .karmicare-footer {
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-      margin-top: {{ section.settings.margin_top }}px;
-    }
-    .karmicare-footer .km-footer-top {
-      padding-top: {{ section.settings.padding_top }}px;
-    }
+  .km-footer {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 var(--kc-responsive-spacing-page-gutter);
   }
 
+  .km-footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kc-responsive-spacing-section-md);
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+  }
+
+  {% if section.settings.show_top_border %}
+    .km-footer__inner {
+      border-top: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+    }
+  {% endif %}
+
+  /* Footer top: brand, menu, newsletter */
   .km-footer-top {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: var(--kc-responsive-spacing-layout-2xl);
   }
 
-  .km-footer-top__col-1 {
+  .km-footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--kc-responsive-spacing-layout-2xl);
   }
 
-  .km-footer-logo-svg svg {
-    max-width: 200px;
-    height: auto;
+  .km-footer-brand__logo {
     display: block;
-  }
-  .km-footer-top__col-1 h4 {
-    max-width: 286px;
+    width: 210px;
+    line-height: 0;
   }
 
-  .km-footer-top__col-2 h3,
-  .km-footer-top__col-3 h3 {
-    text-transform: uppercase;
-    margin-bottom: 20px;
+  .km-footer-brand__logo svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .km-footer-brand__name {
+    margin: 0;
+    font-size: var(--kc-responsive-h4-text-size);
+    line-height: var(--kc-responsive-h4-line-height);
+  }
+
+  .km-footer-slogan {
+    max-width: 215px;
+    margin: 0;
+    font-family: var(--kc-font-use-heading);
+    font-weight: var(--font-500-weight);
+    font-size: var(--kc-responsive-h4-text-size);
+    line-height: var(--kc-responsive-h4-line-height);
+    letter-spacing: var(--kc-responsive-h4-letter-spacing-sm);
+    color: var(--kc-mapped-text-default-body);
+  }
+
+  .km-footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kc-responsive-spacing-layout-lg);
+  }
+
+  .km-footer-heading {
+    margin: 0;
+    font-family: var(--kc-font-role-backbone);
+    font-weight: var(--font-500-weight);
     font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: var(--kc-responsive-label-sm-line-height);
     letter-spacing: var(--kc-responsive-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--kc-mapped-text-default-body);
   }
 
   .km-footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--kc-responsive-spacing-layout-xxs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .km-footer-links a {
+    font-weight: var(--font-600-weight);
+    font-size: var(--kc-responsive-body-lg-text-size);
+    line-height: var(--kc-responsive-body-lg-line-height);
+    letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+    color: var(--kc-mapped-text-default-heading);
     text-decoration: none;
+    transition: color 0.15s ease-out;
   }
 
-  .km-footer-newsletter-wrapper {
+  .km-footer-links a:hover {
+    color: var(--kc-mapped-text-link-default-hover);
+  }
+
+  /* Newsletter: KC/Field (persistent label, 68px target from 750px and 60px below, 44px submit) */
+  .km-footer-newsletter__body {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--kc-responsive-spacing-layout-md);
   }
 
-  .km-footer-newsletter-form {
+  .km-footer-field {
     display: flex;
-    border-radius: var(--primary-border-radius);
-    padding: 20px 15px;
+    flex-direction: column;
+    gap: var(--kc-responsive-spacing-layout-xs);
+  }
+
+  .km-footer-field__label,
+  .km-footer-field__input,
+  .km-footer-field__submit {
+    font-family: var(--kc-font-role-backbone);
+    font-weight: var(--font-400-weight);
+    font-size: var(--kc-responsive-body-md-text-size);
+    line-height: var(--kc-responsive-body-md-line-height);
+    letter-spacing: 0;
+    color: var(--kc-mapped-text-default-heading);
+  }
+
+  /* Figma insets the 44px submit by layout/sm (12 / 8) from the outer edge, with the stroke
+     inside the frame: 68 / 60px outer. The border takes its width out of that inset. */
+  .km-footer-field__target {
+    display: flex;
     align-items: center;
+    gap: var(--kc-responsive-spacing-layout-sm);
+    padding: calc(var(--kc-responsive-spacing-layout-sm) - var(--kc-shape-stroke-thin)) var(--kc-responsive-spacing-layout-md);
+    background-color: var(--kc-mapped-surface-page);
+    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-control-default);
+    border-radius: var(--kc-shape-radius-md);
+    box-shadow: var(--kc-elevation-xs);
+    transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
   }
-  body.day-mode .km-footer-newsletter-form,
-  body.day-mode .km-footer-lang-switcher .country-selector__list,
-  body.day-mode .km-footer-lang-switcher .localization-selector {
-    border: 1px solid color-mix(in srgb, currentColor 76%, transparent);
-    background-color: var(--kc-white-surface-primary-default);
+
+  .km-footer-field__target:focus-within {
+    border-color: var(--kc-mapped-border-focus-default);
+    box-shadow: 0 0 0 var(--kc-shape-stroke-thin) var(--kc-mapped-border-focus-default);
   }
-  body.night-mode .km-footer-newsletter-form,
-  body.night-mode .km-footer-lang-switcher .country-selector__list,
-  body.night-mode .km-footer-lang-switcher .localization-selector {
-    border: 1px solid color-mix(in srgb, var(--kc-day-text-color) 76%, transparent);
-    background-color: var(--kc-day-text-color);
-  }
-  .km-footer-newsletter-form input[type='email'] {
-    border: none;
+
+  /* Fills the 44px row, so the whole row height is the input's click target */
+  .km-footer-field__input {
+    flex: 1 1 auto;
+    align-self: stretch;
+    min-width: 0;
+    padding: 0;
     background: transparent;
-    flex-grow: 1;
+    border: none;
     outline: none;
     box-shadow: none;
-    font-size: var(--km-body);
   }
 
-  .km-footer-newsletter-form button {
+  .km-footer-field__input::placeholder {
+    color: var(--kc-mapped-text-default-placeholder);
+    opacity: 1;
+  }
+
+  .km-footer-field__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
     background: transparent;
     border: none;
     cursor: pointer;
-    font-weight: normal;
-  }
-  body.night-mode .km-footer-newsletter-form button{
-    color:var(--kc-white-surface-primary-default);
-  }
-  .km-footer-newsletter-note {
-    font-size: var(--kc-responsive-label-sm-text-size);
+    transition: color 0.15s ease-out;
   }
 
-  .km-footer-newsletter-note a {
+  .km-footer-field__submit:hover {
+    color: var(--kc-mapped-text-link-default-hover);
+  }
+
+  .km-footer-field__submit:focus-visible {
+    outline: 2px solid var(--kc-mapped-border-focus-default);
+    outline-offset: 2px;
+    border-radius: var(--kc-shape-radius-sm);
+  }
+
+  .km-footer-field__message,
+  .km-footer-newsletter__note {
+    margin: 0;
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  }
+
+  .km-footer-field__message {
+    color: var(--kc-mapped-text-default-heading);
+  }
+
+  .km-footer-newsletter__note {
+    color: var(--kc-mapped-text-default-body);
+  }
+
+  .km-footer-newsletter__note a {
+    color: inherit;
     text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* Footer bottom: socials + localisation, then the legal row */
+  .km-footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kc-responsive-spacing-layout-xl);
+  }
+
+  .km-footer-middle,
+  .km-footer-legal {
+    padding-top: var(--kc-responsive-spacing-layout-xl);
+    border-top: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
   }
 
   .km-footer-middle {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 24px 0;
-    border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-    border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-    margin-bottom: 24px;
+    justify-content: space-between;
+    gap: var(--kc-responsive-spacing-layout-xs);
   }
 
   .km-footer-socials {
     display: flex;
-    gap: 16px;
+    align-items: center;
+    gap: var(--kc-responsive-spacing-layout-sm);
   }
 
   .km-footer-social-icon {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: var(--extra-primary-border-radius);
-    background-color: var(--kc-white-surface-primary-default);
+    padding: var(--kc-responsive-spacing-layout-sm);
+    background-color: var(--kc-mapped-surface-page-secondary);
+    border-radius: var(--kc-shape-radius-md);
+    color: var(--kc-mapped-icon-primary-default);
     text-decoration: none;
-  }
-  @media screen and (min-width:750px){
-    .km-footer-social-icon{
-      width: 40px;
-      height: 40px;
-    }
-    .km-footer-top__col-1 h4 {
-      margin-top: 30px;
-    }
-  }
-  @media screen and (max-width:749px){
-    .km-footer-social-icon{
-      width: 32px;
-      height: 32px;
-    }
-    .km-footer-top__col-1 h4 {
-      letter-spacing: var(--kc-responsive-h4-letter-spacing-sm);
-      margin-top: 15px;
-    }
+    transition: background-color 0.15s ease-out;
   }
 
-  .km-footer-lang-switcher {
+  .km-footer-social-icon svg {
+    display: block;
+    flex: none;
+  }
+
+  .km-footer-social-icon:hover {
+    background-color: var(--kc-mapped-surface-secondary-default-hover);
+  }
+
+  .km-footer-social-icon:focus-visible,
+  .km-footer-locale__button:focus-visible,
+  .km-footer-links a:focus-visible,
+  .km-footer-legal__links a:focus-visible,
+  .km-footer-newsletter__note a:focus-visible {
+    outline: 2px solid var(--kc-mapped-border-focus-default);
+    outline-offset: 2px;
+  }
+
+  .km-footer-locale {
     position: relative;
   }
 
-  .km-footer-lang-switcher .localization-selector {
+  .km-footer-locale .disclosure {
+    position: relative;
+  }
+
+  .km-footer .km-footer-locale__button {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px;
-    border-radius: var(--primary-border-radius);
-    font-size: var(--kc-responsive-label-sm-text-size);
-    font-weight: var(--font-500-weight);
-    cursor: pointer;
-    text-decoration: none;
+    justify-content: space-between;
+    gap: var(--kc-responsive-spacing-layout-md);
+    min-width: 144px;
+    min-height: 0;
+    margin: 0;
+    padding: var(--kc-responsive-spacing-layout-xs);
+    background-color: var(--kc-mapped-surface-page-secondary);
+    border: none;
+    border-radius: var(--kc-shape-radius-sm);
     box-shadow: none;
+    color: var(--kc-mapped-text-default-heading);
+    font-family: var(--kc-font-role-backbone);
+    font-weight: var(--font-500-weight);
+    font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: var(--kc-responsive-label-sm-line-height);
+    letter-spacing: var(--kc-responsive-caption-letter-spacing);
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
   }
 
-  .km-footer-lang-switcher .localization-selector span {
+  .km-footer-locale__current {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--kc-responsive-spacing-layout-md);
   }
 
-  .km-footer-lang-switcher .disclosure__list-wrapper {
+  .km-footer-locale__flag {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .km-footer-locale__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+  }
+
+  .km-footer .km-footer-locale__chevron .icon-caret {
+    position: static;
+    width: 10px;
+    height: 6px;
+    transition: transform 0.2s ease-out;
+  }
+
+  .km-footer-locale__button[aria-expanded='true'] .icon-caret {
+    transform: rotate(180deg);
+  }
+
+  .km-footer .km-footer-locale__panel {
+    position: absolute;
+    right: 0;
     bottom: 100%;
-    margin-bottom: 8px;
-    border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-    border-radius: var(--primary-border-radius);
-    overflow: hidden;
+    left: auto;
+    top: auto;
+    z-index: 3;
+    margin-bottom: var(--kc-responsive-spacing-layout-xs);
     padding: 0;
+    background-color: var(--kc-mapped-surface-page-secondary);
+    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+    border-radius: var(--kc-shape-radius-md);
+    box-shadow: var(--kc-elevation-xs);
+    overflow: hidden;
   }
 
-  .km-footer-lang-switcher .country-selector__list {
+  .km-footer-locale__list {
+    min-width: 200px;
     max-height: 320px;
     overflow-y: auto;
+    padding: var(--kc-responsive-spacing-layout-md);
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, currentColor 20%, transparent) transparent;
   }
 
-  .km-footer-lang-switcher .country-selector__list::-webkit-scrollbar {
-    width: 4px;
-  }
-  .km-footer-lang-switcher .country-selector__list::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .km-footer-lang-switcher .country-selector__list::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, currentColor 20%, transparent);
-    border-radius: 4px;
-  }
-  .km-footer-lang-switcher .country-selector__list::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in srgb, currentColor 40%, transparent);
+  .km-footer-locale__group-title {
+    margin: 0 0 var(--kc-responsive-spacing-layout-xs);
+    font-weight: var(--font-700-weight);
+    font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: var(--kc-responsive-label-sm-line-height);
+    letter-spacing: var(--kc-responsive-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--kc-mapped-text-default-body);
   }
 
-  .km-footer-bottom {
+  .km-footer-locale__group + .km-footer-locale__group-title {
+    margin-top: var(--kc-responsive-spacing-layout-md);
+  }
+
+  .km-footer-locale__group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .km-footer .km-footer-locale__link {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .km-footer-bottom-links {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
     align-items: center;
-  }
-
-  .km-footer-bottom-links a {
+    justify-content: space-between;
+    gap: var(--kc-responsive-spacing-layout-xs);
+    padding: 6px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--kc-mapped-text-default-heading);
     text-decoration: none;
   }
-  .km-footer-bottom-links a:hover{
-    opacity: 1;
+
+  .km-footer .km-footer-locale__link:hover {
+    color: var(--kc-mapped-text-link-default-hover);
   }
-  .km-footer-payments {
+
+  .km-footer-locale__country {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--kc-responsive-spacing-layout-xs);
   }
-  .km-footer-bottom > *{
-    font-size:var(--font-body-small-size-mobile);
+
+  .km-footer-locale__country img {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    object-fit: cover;
   }
-  .km-footer-bottom-right {
+
+  .km-footer-locale__currency {
+    color: var(--kc-mapped-text-default-body);
+  }
+
+  .km-footer-legal {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
+    gap: var(--kc-responsive-spacing-layout-xl);
   }
-  @media screen and (min-width: 750px) {
-    .km-footer-top {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 60px;
-    }
-    .km-footer-top__col-1 {
-      flex: 1;
-      max-width: 400px;
-    }
-    .km-footer-top__col-2 {
-      flex: 1;
-      max-width: 250px;
-    }
-    .km-footer-top__col-3 {
-      flex: 1;
-      max-width: 400px;
-    }
-    .km-footer-bottom {
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    .km-footer-bottom-left {
-      flex: 1;
-      max-width: 700px;
 
+  .km-footer-legal__copyright,
+  .km-footer-legal__links {
+    font-family: var(--kc-font-use-body);
+    font-weight: var(--font-400-weight);
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+    color: var(--kc-mapped-text-default-body);
+  }
+
+  .km-footer-legal__copyright p {
+    margin: 0 0 var(--kc-responsive-body-sm-paragraph-spacing);
+  }
+
+  .km-footer-legal__copyright p:last-child {
+    margin-bottom: 0;
+  }
+
+  .km-footer-legal__side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--kc-responsive-spacing-layout-comfortable);
+  }
+
+  .km-footer-legal__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--kc-responsive-spacing-layout-xs);
+  }
+
+  .km-footer-legal__links a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .km-footer-legal__links a:hover {
+    color: var(--kc-mapped-text-link-default-hover);
+  }
+
+  .km-footer-payments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .km-footer-payments svg {
+    display: block;
+    width: 38px;
+    height: 24px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .karmicare-footer {
+      margin-top: {{ section.settings.margin_top }}px;
+      padding-bottom: calc({{ section.settings.padding_bottom }}px + var(--sticky-cta-height, 0px));
+      background: {{ section.settings.bg_gradient_day | default: section.settings.bg_color_day | default: 'linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%)' }};
     }
-    .km-footer-bottom > *{
-      font-size:var(--font-body-small-size-desktop);
+
+    body.night-mode .karmicare-footer {
+      background: {{ section.settings.bg_gradient_night | default: section.settings.bg_color_night | default: 'linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%)' }};
+    }
+
+    .km-footer__inner {
+      padding-top: {{ section.settings.padding_top }}px;
+    }
+
+    .km-footer-top {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .km-footer-slogan {
+      max-width: 286px;
+      letter-spacing: var(--kc-responsive-h4-letter-spacing);
+    }
+
+    .km-footer-column--newsletter {
+      flex: 1 1 320px;
+    }
+
+    .km-footer-legal__links a {
+      text-decoration: none;
+    }
+
+    .km-footer-payments {
+      gap: var(--kc-responsive-spacing-layout-xxs);
     }
   }
-  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart,
-     48px logo -> slogan, 24px heading -> links, 120px to the social row,
-     32px around the social row */
-  @media screen and (min-width: 990px) {
+
+  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart */
+  @media screen and (min-width: 1200px) {
     .km-footer-top {
-      justify-content: flex-start;
-      gap: 160px;
-      margin-bottom: 120px;
+      flex-wrap: nowrap;
+      gap: var(--kc-responsive-spacing-section-lg);
     }
-    .km-footer-top__col-1 {
+
+    .km-footer-brand {
       flex: 0 0 286px;
     }
-    .km-footer-top__col-2 {
+
+    .km-footer-column--menu {
       flex: 0 0 215px;
     }
-    .km-footer-top__col-3 {
-      flex: 1 1 auto;
-      max-width: none;
+
+    .km-footer-legal {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--kc-responsive-spacing-layout-xs);
     }
-    .km-footer-top__col-1 h4 {
-      margin-top: 32px;
+
+    .km-footer-legal__copyright {
+      flex: 0 1 912px;
     }
-    .km-footer-top__col-2 h3,
-    .km-footer-top__col-3 h3 {
-      margin-bottom: 24px;
+
+    .km-footer-legal__side {
+      align-self: stretch;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--kc-responsive-spacing-layout-lg);
     }
-    .km-footer-links {
-      gap: 3px;
-    }
-    .km-footer-middle {
-      padding: 32px 0;
-      margin-bottom: 32px;
+
+    .km-footer-legal__links {
+      flex-wrap: nowrap;
+      white-space: nowrap;
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .km-footer-links a,
+    .km-footer-field__target,
+    .km-footer-field__submit,
+    .km-footer-social-icon,
+    .km-footer .km-footer-locale__chevron .icon-caret {
+      transition: none;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -385,318 +624,356 @@
 -%}
 
 <footer class="karmicare-footer">
-  <div class="page-width">
-    <div class="km-footer-top">
-      <div class="km-footer-top__col-1">
-        {%- if section.settings.logo_svg != blank -%}
-          <div class="km-footer-logo-svg">
-            {{ section.settings.logo_svg }}
-          </div>
-        {%- else -%}
-          <h2 class="h3">{{ shop.name }}</h2>
-        {%- endif -%}
+  <div class="km-footer">
+    <div class="km-footer__inner">
+      <div class="km-footer-top">
+        <div class="km-footer-brand">
+          {%- if section.settings.logo_svg != blank -%}
+            <div class="km-footer-brand__logo">
+              {{ section.settings.logo_svg }}
+            </div>
+          {%- else -%}
+            <p class="km-footer-brand__name">{{ shop.name }}</p>
+          {%- endif -%}
 
-        {%- if section.settings.slogan != blank -%}
-          <h4>{{ section.settings.slogan }}</h4>
-        {%- endif -%}
-      </div>
+          {%- if section.settings.slogan != blank -%}
+            <p class="km-footer-slogan">{{ section.settings.slogan }}</p>
+          {%- endif -%}
+        </div>
 
-      <div class="km-footer-top__col-2">
         {%- for block in section.blocks -%}
           {%- if block.type == 'link_list' -%}
-            {%- if block.settings.heading != blank -%}
-              <h3>{{ block.settings.heading }}</h3>
-            {%- endif -%}
-            {%- if block.settings.menu != blank -%}
-              <ul class="km-footer-links">
-                {%- for link in block.settings.menu.links -%}
-                  <li>
-                    <a href="{{ link.url }}">{{ link.title }}</a>
-                  </li>
-                {%- endfor -%}
-              </ul>
-            {%- endif -%}
+            <div class="km-footer-column km-footer-column--menu" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h3 class="km-footer-heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.menu != blank -%}
+                <ul class="km-footer-links" role="list">
+                  {%- for link in block.settings.menu.links -%}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
           {%- endif -%}
         {%- endfor -%}
-      </div>
 
-      <div class="km-footer-top__col-3">
         {%- if section.settings.newsletter_enable -%}
-          <h3>{{ section.settings.newsletter_heading | default: 'NEWSLETTER' }}</h3>
+          <div class="km-footer-column km-footer-column--newsletter">
+            <h3 class="km-footer-heading">{{ section.settings.newsletter_heading | default: 'NEWSLETTER' }}</h3>
 
-          <div class="km-footer-newsletter-wrapper">
-            <p>Email</p>
-            {% form 'customer', class: 'km-footer-newsletter-form' %}
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <input
-                type="email"
-                name="contact[email]"
-                placeholder="you@example.com"
-                aria-label="Email address"
-                required
-              >
-              <button type="submit" name="commit">Join</button>
-            {% endform %}
+            <div class="km-footer-newsletter__body">
+              {%- form 'customer', id: 'FooterNewsletterForm', class: 'km-footer-field' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <label class="km-footer-field__label" for="FooterNewsletterEmail">Email</label>
+                <div class="km-footer-field__target">
+                  <input
+                    id="FooterNewsletterEmail"
+                    class="km-footer-field__input"
+                    type="email"
+                    name="contact[email]"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    required
+                    {% if form.errors %}
+                      aria-invalid="true"
+                      aria-describedby="FooterNewsletterEmail-message"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="FooterNewsletterEmail-message"
+                    {% endif %}
+                  >
+                  <button type="submit" name="commit" class="km-footer-field__submit">Join</button>
+                </div>
+                {%- if form.errors -%}
+                  <p class="km-footer-field__message" id="FooterNewsletterEmail-message" role="alert">
+                    {{ form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email }}
+                  </p>
+                {%- elsif form.posted_successfully? -%}
+                  <p class="km-footer-field__message" id="FooterNewsletterEmail-message" role="status">
+                    {{ 'newsletter.success' | t }}
+                  </p>
+                {%- endif -%}
+              {%- endform -%}
 
-            <p class="km-footer-newsletter-note">
-              By subscribing you agree to the <a href="{{ legal_terms.url }}">Terms of Use</a> &
-              <a href="{{ legal_privacy.url }}">Privacy Policy</a>.
-            </p>
+              <p class="km-footer-newsletter__note">
+                By subscribing you agree to the <a href="{{ legal_terms.url }}">Terms of Use</a> &
+                <a href="{{ legal_privacy.url }}">Privacy Policy</a>.
+              </p>
+            </div>
           </div>
         {%- endif -%}
       </div>
-    </div>
 
-    <div class="km-footer-middle">
-      <div class="km-footer-socials">
-        {%- if settings.social_instagram_link != blank -%}
-          <a href="{{ settings.social_instagram_link }}" class="km-footer-social-icon" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <g clip-path="url(#clip0_2906_755)">
-                <mask id="mask0_2906_755" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-                  <path d="M16 0H0V16H16V0Z" fill="white"/>
-                </mask>
-                <g mask="url(#mask0_2906_755)">
-                  <path d="M16 8C16 11.9925 13.0706 15.3025 9.24669 15.9031V10.3276H11.1058L11.4596 8.02119H9.24669V6.52454C9.24669 5.89341 9.55587 5.27848 10.547 5.27848H11.5531V3.31494C11.5531 3.31494 10.6399 3.15911 9.76687 3.15911C7.94452 3.15911 6.75331 4.26367 6.75331 6.26336V8.02119H4.72744V10.3276H6.75331V15.9031C2.93003 15.3019 0 11.9922 0 8C0 3.58174 3.58174 0 8 0C12.4183 0 16 3.58174 16 8Z" fill="#191F38"/>
-                </g>
-              </g>
-              <defs>
-                <clipPath id="clip0_2906_755">
-                  <rect width="16" height="16" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </a>
-        {%- endif -%}
-        {%- if settings.social_facebook_link != blank -%}
-          <a href="{{ settings.social_facebook_link }}" class="km-footer-social-icon" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <g clip-path="url(#clip0_2906_783)">
-                <mask id="mask0_2906_783" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-                  <path d="M16 0H0V16H16V0Z" fill="white"/>
-                </mask>
-                <g mask="url(#mask0_2906_783)">
-                  <path d="M7.99978 3.89156C5.73125 3.89156 3.89188 5.73128 3.89188 7.99978C3.89188 10.2688 5.73125 12.1077 7.99978 12.1077C10.2688 12.1077 12.1084 10.2688 12.1084 7.99978C12.1084 5.73128 10.2688 3.89156 7.99978 3.89156ZM7.99978 10.6665C6.52728 10.6665 5.33303 9.47266 5.33303 7.99978C5.33303 6.52694 6.52725 5.33306 7.99978 5.33306C9.47262 5.33306 10.6668 6.52694 10.6668 7.99978C10.6668 9.47262 9.47262 10.6665 7.99978 10.6665ZM13.2304 3.72947C13.2304 4.25922 12.8005 4.68913 12.2704 4.68913C11.7404 4.68913 11.3104 4.25922 11.3104 3.72947C11.3104 3.1995 11.7403 2.76947 12.2704 2.76947C12.8005 2.76947 13.2304 3.1995 13.2304 3.72947ZM15.58 2.75963C15.3755 2.23331 15.102 1.78737 14.6575 1.34256C13.7608 0.445219 12.534 0.104094 11.2986 0.0481563C10.4452 0.00871875 10.1728 0 7.99978 0C5.82756 0 5.55512 0.00871875 4.70169 0.0481563C3.46334 0.104219 2.23794 0.447469 1.34291 1.34253C0.444375 2.24106 0.104844 3.46409 0.0480312 4.70169C0.00915625 5.55512 0 5.82725 0 7.99978C0 10.1723 0.00915625 10.4449 0.0480312 11.2987C0.105094 12.5406 0.444031 13.759 1.34284 14.6571C2.24153 15.5551 3.46419 15.8952 4.70169 15.9518C5.55512 15.9908 5.82756 15.9997 7.99978 15.9997C10.1728 15.9997 10.4452 15.9908 11.2987 15.9518C12.539 15.895 13.7605 15.5547 14.6574 14.6571C15.5538 13.7602 15.8958 12.5335 15.9518 11.2986C15.9908 10.4449 16 10.1723 16 7.99975C16 5.82719 15.9908 5.55509 15.9518 4.70166C15.9132 3.84994 15.7779 3.26863 15.58 2.75963ZM14.5118 11.2325C14.4723 12.1014 14.2704 13.0052 13.6382 13.6382C12.9977 14.2796 12.1073 14.472 11.2329 14.5119C10.3891 14.5501 10.1364 14.5585 7.99978 14.5585C5.86391 14.5585 5.61122 14.5501 4.76734 14.5119C3.89078 14.4719 3.00181 14.2763 2.36178 13.6383C1.72359 13.0022 1.52719 12.1008 1.48809 11.2325C1.44987 10.3891 1.4415 10.1361 1.4415 7.99975C1.4415 5.86387 1.44991 5.61087 1.48809 4.767C1.52706 3.90209 1.73284 2.99166 2.36166 2.36178C2.99922 1.72316 3.89744 1.52775 4.76741 1.48806C5.61122 1.44953 5.86391 1.44147 7.99978 1.44147C10.1361 1.44147 10.3891 1.44953 11.233 1.48806C12.109 1.52803 12.9995 1.72278 13.6381 2.36166C14.2771 3.00084 14.4722 3.89569 14.5118 4.76706C14.5505 5.61087 14.5589 5.86387 14.5589 7.99978C14.5588 10.1361 14.5505 10.3891 14.5118 11.2325Z" fill="#191F38"/>
-                </g>
-              </g>
-              <defs>
-                <clipPath id="clip0_2906_783">
-                  <rect width="16" height="16" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </a>
-        {%- endif -%}
-        <a
-          href="{{ settings.social_linkedin_link | default: '#' }}"
-          class="km-footer-social-icon"
-          aria-label="LinkedIn"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <g clip-path="url(#clip0_2906_921)">
-              <mask id="mask0_2906_921" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-                <path d="M16 0H0V16H16V0Z" fill="white"/>
-              </mask>
-              <g mask="url(#mask0_2906_921)">
-                <path d="M13.2807 13.281H11.0582V9.80031C11.0582 8.97029 11.0434 7.90183 9.90225 7.90183C8.74467 7.90183 8.56758 8.80616 8.56758 9.73988V13.2808H6.34507V6.12306H8.47871V7.10123H8.50858C8.94365 6.35735 9.75257 5.91305 10.6137 5.945C12.8664 5.945 13.2817 7.42672 13.2817 9.35438L13.2807 13.281ZM3.83727 5.14464C3.12495 5.14478 2.5474 4.56739 2.54726 3.85508C2.54713 3.14273 3.1245 2.56517 3.83678 2.56503C4.54911 2.56489 5.12665 3.14228 5.12679 3.85459C5.12692 4.56694 4.54959 5.14454 3.83727 5.14464ZM4.94852 13.281H2.72369V6.12306H4.94852V13.281ZM14.3887 0.501033H1.60686C1.00277 0.494207 0.50738 0.978113 0.5 1.58222V14.4176C0.507137 15.022 1.00246 15.5064 1.60686 15.4999H14.3887C14.9944 15.5075 15.4916 15.0231 15.5 14.4176V1.58132C15.4914 0.976 14.994 0.493064 14.3887 0.501033Z" fill="#191F38"/>
-              </g>
-            </g>
-            <defs>
-              <clipPath id="clip0_2906_921">
-                <rect width="16" height="16" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-        </a>
-      </div>
-
-      <div class="km-footer-localization isolate">
-        {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
-          <form
-            method="post"
-            action="/localization"
-            id="FooterUnifiedLocalizationForm"
-            accept-charset="UTF-8"
-            class="localization-form unified-localization-form"
-            enctype="multipart/form-data"
-          >
-            <input type="hidden" name="form_type" value="localization">
-            <input type="hidden" name="utf8" value="✓">
-            <input type="hidden" name="_method" value="put">
-            <input type="hidden" name="return_to" value="{{ request.path }}">
-            <input
-              type="hidden"
-              name="country_code"
-              id="UnifiedCountryCode"
-              value="{{ localization.country.iso_code }}"
-            >
-            <input type="hidden" name="locale_code" id="UnifiedLocaleCode" value="{{ localization.language.iso_code }}">
-
-            <div class="km-footer-lang-switcher">
-              <div class="disclosure unified-disclosure">
-                <button
-                  type="button"
-                  class="disclosure__button localization-form__select localization-selector link link--text caption-large"
-                  aria-expanded="false"
-                  aria-controls="UnifiedLocalizationResults"
-                  onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); this.nextElementSibling.toggleAttribute('hidden');"
+      <div class="km-footer-bottom">
+        <div class="km-footer-middle">
+          <div class="km-footer-socials">
+            {%- if settings.social_instagram_link != blank -%}
+              <a href="{{ settings.social_instagram_link }}" class="km-footer-social-icon" aria-label="Instagram">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
                 >
-                  <span>
-                    {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
-                      <img
-                        src="https://flagcdn.com/w40/{{ localization.country.iso_code | downcase }}.png"
-                        alt=""
-                        width="16"
-                        height="16"
-                        loading="lazy"
-                        style="width: 22px; height: 22px; border-radius: 50%; object-fit: cover;display: inline-block; vertical-align: middle;"
-                      >
-                      {{ localization.country.currency.iso_code }}
-                    {% endif %}
-                    {% if section.settings.enable_language_selector and localization.available_languages.size > 1 %}
-                      / {{ localization.language.iso_code | upcase }}
-                    {% endif %}
-                  </span>
-                  {{ 'icon-caret.svg' | inline_asset_content }}
-                </button>
-
-                <div
-                  class="disclosure__list-wrapper country-selector"
-                  hidden
-                  id="UnifiedLocalizationResults"
-                  style="bottom: 100%; margin-bottom: 8px;"
+                  <g clip-path="url(#clip0_2906_783)">
+                    <mask id="mask0_2906_783" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                      <path d="M16 0H0V16H16V0Z" fill="white"/>
+                    </mask>
+                    <g mask="url(#mask0_2906_783)">
+                      <path d="M7.99978 3.89156C5.73125 3.89156 3.89188 5.73128 3.89188 7.99978C3.89188 10.2688 5.73125 12.1077 7.99978 12.1077C10.2688 12.1077 12.1084 10.2688 12.1084 7.99978C12.1084 5.73128 10.2688 3.89156 7.99978 3.89156ZM7.99978 10.6665C6.52728 10.6665 5.33303 9.47266 5.33303 7.99978C5.33303 6.52694 6.52725 5.33306 7.99978 5.33306C9.47262 5.33306 10.6668 6.52694 10.6668 7.99978C10.6668 9.47262 9.47262 10.6665 7.99978 10.6665ZM13.2304 3.72947C13.2304 4.25922 12.8005 4.68913 12.2704 4.68913C11.7404 4.68913 11.3104 4.25922 11.3104 3.72947C11.3104 3.1995 11.7403 2.76947 12.2704 2.76947C12.8005 2.76947 13.2304 3.1995 13.2304 3.72947ZM15.58 2.75963C15.3755 2.23331 15.102 1.78737 14.6575 1.34256C13.7608 0.445219 12.534 0.104094 11.2986 0.0481563C10.4452 0.00871875 10.1728 0 7.99978 0C5.82756 0 5.55512 0.00871875 4.70169 0.0481563C3.46334 0.104219 2.23794 0.447469 1.34291 1.34253C0.444375 2.24106 0.104844 3.46409 0.0480312 4.70169C0.00915625 5.55512 0 5.82725 0 7.99978C0 10.1723 0.00915625 10.4449 0.0480312 11.2987C0.105094 12.5406 0.444031 13.759 1.34284 14.6571C2.24153 15.5551 3.46419 15.8952 4.70169 15.9518C5.55512 15.9908 5.82756 15.9997 7.99978 15.9997C10.1728 15.9997 10.4452 15.9908 11.2987 15.9518C12.539 15.895 13.7605 15.5547 14.6574 14.6571C15.5538 13.7602 15.8958 12.5335 15.9518 11.2986C15.9908 10.4449 16 10.1723 16 7.99975C16 5.82719 15.9908 5.55509 15.9518 4.70166C15.9132 3.84994 15.7779 3.26863 15.58 2.75963ZM14.5118 11.2325C14.4723 12.1014 14.2704 13.0052 13.6382 13.6382C12.9977 14.2796 12.1073 14.472 11.2329 14.5119C10.3891 14.5501 10.1364 14.5585 7.99978 14.5585C5.86391 14.5585 5.61122 14.5501 4.76734 14.5119C3.89078 14.4719 3.00181 14.2763 2.36178 13.6383C1.72359 13.0022 1.52719 12.1008 1.48809 11.2325C1.44987 10.3891 1.4415 10.1361 1.4415 7.99975C1.4415 5.86387 1.44991 5.61087 1.48809 4.767C1.52706 3.90209 1.73284 2.99166 2.36166 2.36178C2.99922 1.72316 3.89744 1.52775 4.76741 1.48806C5.61122 1.44953 5.86391 1.44147 7.99978 1.44147C10.1361 1.44147 10.3891 1.44953 11.233 1.48806C12.109 1.52803 12.9995 1.72278 13.6381 2.36166C14.2771 3.00084 14.4722 3.89569 14.5118 4.76706C14.5505 5.61087 14.5589 5.86387 14.5589 7.99978C14.5588 10.1361 14.5505 10.3891 14.5118 11.2325Z" fill="currentColor"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2906_783">
+                      <rect width="16" height="16" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_facebook_link != blank -%}
+              <a href="{{ settings.social_facebook_link }}" class="km-footer-social-icon" aria-label="Facebook">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
                 >
-                  <div class="disclosure__list country-selector__list" style="padding: 16px; min-width: 200px;">
-                    {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-                      <p
-                        class="caption-large text-body"
-                        style="font-size:var(--kc-responsive-label-sm-text-size); font-weight: bold; margin-bottom: 8px; text-transform: uppercase;"
-                      >
-                        Language
-                      </p>
-                      <ul role="list" class="list-unstyled" style="margin-bottom: 16px;">
-                        {%- for language in localization.available_languages -%}
-                          <li class="disclosure__item" tabindex="-1">
-                            <a
-                              class="link link--text disclosure__link caption-large focus-inset unified-loc-link"
-                              href="#"
-                              data-value="{{ language.iso_code }}"
-                              data-type="language"
-                              style="padding: 4px 0; font-size: 13px;"
-                            >
-                              {{ language.endonym_name | capitalize }}
-                            </a>
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    {%- endif -%}
+                  <g clip-path="url(#clip0_2906_755)">
+                    <mask id="mask0_2906_755" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                      <path d="M16 0H0V16H16V0Z" fill="white"/>
+                    </mask>
+                    <g mask="url(#mask0_2906_755)">
+                      <path d="M16 8C16 11.9925 13.0706 15.3025 9.24669 15.9031V10.3276H11.1058L11.4596 8.02119H9.24669V6.52454C9.24669 5.89341 9.55587 5.27848 10.547 5.27848H11.5531V3.31494C11.5531 3.31494 10.6399 3.15911 9.76687 3.15911C7.94452 3.15911 6.75331 4.26367 6.75331 6.26336V8.02119H4.72744V10.3276H6.75331V15.9031C2.93003 15.3019 0 11.9922 0 8C0 3.58174 3.58174 0 8 0C12.4183 0 16 3.58174 16 8Z" fill="currentColor"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2906_755">
+                      <rect width="16" height="16" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_linkedin_link != blank -%}
+              <a href="{{ settings.social_linkedin_link }}" class="km-footer-social-icon" aria-label="LinkedIn">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_2906_921)">
+                    <mask id="mask0_2906_921" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                      <path d="M16 0H0V16H16V0Z" fill="white"/>
+                    </mask>
+                    <g mask="url(#mask0_2906_921)">
+                      <path d="M13.2807 13.281H11.0582V9.80031C11.0582 8.97029 11.0434 7.90183 9.90225 7.90183C8.74467 7.90183 8.56758 8.80616 8.56758 9.73988V13.2808H6.34507V6.12306H8.47871V7.10123H8.50858C8.94365 6.35735 9.75257 5.91305 10.6137 5.945C12.8664 5.945 13.2817 7.42672 13.2817 9.35438L13.2807 13.281ZM3.83727 5.14464C3.12495 5.14478 2.5474 4.56739 2.54726 3.85508C2.54713 3.14273 3.1245 2.56517 3.83678 2.56503C4.54911 2.56489 5.12665 3.14228 5.12679 3.85459C5.12692 4.56694 4.54959 5.14454 3.83727 5.14464ZM4.94852 13.281H2.72369V6.12306H4.94852V13.281ZM14.3887 0.501033H1.60686C1.00277 0.494207 0.50738 0.978113 0.5 1.58222V14.4176C0.507137 15.022 1.00246 15.5064 1.60686 15.4999H14.3887C14.9944 15.5075 15.4916 15.0231 15.5 14.4176V1.58132C15.4914 0.976 14.994 0.493064 14.3887 0.501033Z" fill="currentColor"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_2906_921">
+                      <rect width="16" height="16" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
 
-                    {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-                      <p
-                        class="caption-large text-body"
-                        style="font-size:var(--kc-responsive-label-sm-text-size); font-weight: bold; margin-bottom: 8px; text-transform: uppercase;"
-                      >
-                        Country/Region
-                      </p>
-                      <ul role="list" class="list-unstyled">
-                        {%- for country in localization.available_countries -%}
-                          <li class="disclosure__item" tabindex="-1">
-                            <a
-                              class="link link--text disclosure__link caption-large focus-inset unified-loc-link"
-                              href="#"
-                              data-value="{{ country.iso_code }}"
-                              data-type="country"
-                              style="padding: 6px 0; font-size: 13px; display: flex; align-items: center; justify-content: space-between;"
-                            >
-                              <div style="display: flex; align-items: center; gap: 8px;">
-                                <img
-                                  src="https://flagcdn.com/w40/{{ country.iso_code | downcase }}.png"
-                                  alt=""
-                                  width="16"
-                                  height="16"
-                                  loading="lazy"
-                                  style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;"
-                                >
-                                <span>{{ country.name }}</span>
-                              </div>
-                              <span style="opacity: 0.7;">{{ country.currency.iso_code }}</span>
-                            </a>
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    {%- endif -%}
+          <div class="km-footer-locale isolate">
+            {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
+              <form
+                method="post"
+                action="/localization"
+                id="FooterUnifiedLocalizationForm"
+                accept-charset="UTF-8"
+                class="localization-form unified-localization-form"
+                enctype="multipart/form-data"
+              >
+                <input type="hidden" name="form_type" value="localization">
+                <input type="hidden" name="utf8" value="✓">
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="return_to" value="{{ request.path }}">
+                <input
+                  type="hidden"
+                  name="country_code"
+                  id="UnifiedCountryCode"
+                  value="{{ localization.country.iso_code }}"
+                >
+                <input type="hidden" name="locale_code" id="UnifiedLocaleCode" value="{{ localization.language.iso_code }}">
+
+                <div class="disclosure unified-disclosure">
+                  <button
+                    type="button"
+                    class="disclosure__button localization-selector km-footer-locale__button"
+                    aria-expanded="false"
+                    aria-controls="UnifiedLocalizationResults"
+                    onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'); this.nextElementSibling.toggleAttribute('hidden');"
+                  >
+                    <span class="km-footer-locale__current">
+                      {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+                        <img
+                          class="km-footer-locale__flag"
+                          src="https://flagcdn.com/w40/{{ localization.country.iso_code | downcase }}.png"
+                          alt=""
+                          width="24"
+                          height="24"
+                          loading="lazy"
+                        >
+                      {%- endif -%}
+                      <span>
+                        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+                          {{- localization.country.currency.iso_code -}}
+                        {%- endif -%}
+                        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+                          /{{- localization.language.iso_code | upcase -}}
+                        {%- endif -%}
+                      </span>
+                    </span>
+                    <span class="km-footer-locale__chevron">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>
+                  </button>
+
+                  <div
+                    class="disclosure__list-wrapper km-footer-locale__panel"
+                    hidden
+                    id="UnifiedLocalizationResults"
+                  >
+                    <div class="km-footer-locale__list">
+                      {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+                        <p class="km-footer-locale__group-title">Language</p>
+                        <ul role="list" class="km-footer-locale__group">
+                          {%- for language in localization.available_languages -%}
+                            <li>
+                              <a
+                                class="km-footer-locale__link unified-loc-link"
+                                href="#"
+                                data-value="{{ language.iso_code }}"
+                                data-type="language"
+                              >
+                                {{ language.endonym_name | capitalize }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+
+                      {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+                        <p class="km-footer-locale__group-title">Country/Region</p>
+                        <ul role="list" class="km-footer-locale__group">
+                          {%- for country in localization.available_countries -%}
+                            <li>
+                              <a
+                                class="km-footer-locale__link unified-loc-link"
+                                href="#"
+                                data-value="{{ country.iso_code }}"
+                                data-type="country"
+                              >
+                                <span class="km-footer-locale__country">
+                                  <img
+                                    src="https://flagcdn.com/w40/{{ country.iso_code | downcase }}.png"
+                                    alt=""
+                                    width="16"
+                                    height="16"
+                                    loading="lazy"
+                                  >
+                                  <span>{{ country.name }}</span>
+                                </span>
+                                <span class="km-footer-locale__currency">{{ country.currency.iso_code }}</span>
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
                   </div>
                 </div>
+              </form>
+
+              <script>
+                document.querySelectorAll('.unified-loc-link').forEach(function (link) {
+                  link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var type = this.getAttribute('data-type');
+                    var val = this.getAttribute('data-value');
+                    var form = document.getElementById('FooterUnifiedLocalizationForm');
+
+                    if (type === 'language') {
+                      document.getElementById('UnifiedLocaleCode').value = val;
+                    } else if (type === 'country') {
+                      document.getElementById('UnifiedCountryCode').value = val;
+                    }
+
+                    form.submit();
+                  });
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function (e) {
+                  var form = document.getElementById('FooterUnifiedLocalizationForm');
+                  if (form && !form.contains(e.target)) {
+                    var wrapper = form.querySelector('.disclosure__list-wrapper');
+                    var btn = form.querySelector('.disclosure__button');
+                    if (wrapper && !wrapper.hasAttribute('hidden')) {
+                      wrapper.setAttribute('hidden', '');
+                      btn.setAttribute('aria-expanded', 'false');
+                    }
+                  }
+                });
+              </script>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="km-footer-legal">
+          <div class="km-footer-legal__copyright">
+            {{ section.settings.copyright_text }}
+          </div>
+
+          <div class="km-footer-legal__side">
+            {%- if section.settings.show_policy -%}
+              <div class="km-footer-legal__links">
+                <a href="{{ legal_terms.url }}">{{ section.settings.legal_terms_label | escape }}</a>
+                <span aria-hidden="true">·</span>
+                <a href="{{ legal_privacy.url }}">{{ section.settings.legal_privacy_label | escape }}</a>
+                <span aria-hidden="true">·</span>
+                <a href="{{ legal_consumer_rights.url }}">{{ section.settings.legal_consumer_rights_label | escape }}</a>
+                {%- for policy in shop.policies -%}
+                  {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
+                  {%- assign policy_url_start = policy.url | slice: 0 -%}
+                  {%- if policy_url_start == '#' -%}
+                    <span aria-hidden="true">·</span>
+                    <a href="{{ policy.url }}">{{ policy.title }}</a>
+                  {%- endif -%}
+                {%- endfor -%}
               </div>
-            </div>
-          </form>
+            {%- endif -%}
 
-          <script>
-            document.querySelectorAll('.unified-loc-link').forEach(function (link) {
-              link.addEventListener('click', function (e) {
-                e.preventDefault();
-                var type = this.getAttribute('data-type');
-                var val = this.getAttribute('data-value');
-                var form = document.getElementById('FooterUnifiedLocalizationForm');
-
-                if (type === 'language') {
-                  document.getElementById('UnifiedLocaleCode').value = val;
-                } else if (type === 'country') {
-                  document.getElementById('UnifiedCountryCode').value = val;
-                }
-
-                form.submit();
-              });
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function (e) {
-              var form = document.getElementById('FooterUnifiedLocalizationForm');
-              if (form && !form.contains(e.target)) {
-                var wrapper = form.querySelector('.disclosure__list-wrapper');
-                var btn = form.querySelector('.disclosure__button');
-                if (wrapper && !wrapper.hasAttribute('hidden')) {
-                  wrapper.setAttribute('hidden', '');
-                  btn.setAttribute('aria-expanded', 'false');
-                }
-              }
-            });
-          </script>
-        {%- endif -%}
-      </div>
-    </div>
-
-    <div class="km-footer-bottom">
-      <div class="km-footer-bottom-left opacity-xl">
-        {{ section.settings.copyright_text }}
-      </div>
-
-      <div class="km-footer-bottom-right">
-        {%- if section.settings.show_policy -%}
-          <div class="km-footer-bottom-links">
-            <a href="{{ legal_terms.url }}" class="opacity-xl">{{ section.settings.legal_terms_label | escape }}</a>
-            <span>·</span>
-            <a href="{{ legal_privacy.url }}" class="opacity-xl">{{ section.settings.legal_privacy_label | escape }}</a>
-            <span>·</span>
-            <a href="{{ legal_consumer_rights.url }}" class="opacity-xl">{{ section.settings.legal_consumer_rights_label | escape }}</a>
-            {%- for policy in shop.policies -%}
-              {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
-              {%- assign policy_url_start = policy.url | slice: 0 -%}
-              {%- if policy_url_start == '#' -%}
-                <span>·</span>
-                <a href="{{ policy.url }}" class="opacity-xl">{{ policy.title }}</a>
-              {%- endif -%}
-            {%- endfor -%}
+            {%- if section.settings.payment_enable -%}
+              <div class="km-footer-payments">
+                {%- for type in shop.enabled_payment_types -%}
+                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
-        {%- endif -%}
-
-        {%- if section.settings.payment_enable -%}
-          <div class="km-footer-payments">
-            {%- for type in shop.enabled_payment_types -%}
-              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
+        </div>
       </div>
     </div>
   </div>
@@ -819,12 +1096,14 @@
     {
       "type": "color",
       "id": "bg_color_day",
-      "label": "Background Color (Day)"
+      "label": "Background Color (Day)",
+      "info": "Mobile background, and the desktop background when no gradient is set. Empty uses the KC section accent token."
     },
     {
       "type": "text",
       "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
+      "label": "Background Gradient (Day)",
+      "info": "Desktop (750px and up) only. Empty uses the KC page-to-accent gradient."
     },
     {
       "type": "color",
@@ -838,12 +1117,14 @@
     {
       "type": "color",
       "id": "bg_color_night",
-      "label": "Background Color (Night)"
+      "label": "Background Color (Night)",
+      "info": "Mobile background, and the desktop background when no gradient is set. Empty uses the KC section accent token."
     },
     {
       "type": "text",
       "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
+      "label": "Background Gradient (Night)",
+      "info": "Desktop (750px and up) only. Empty uses the KC page-to-accent gradient."
     },
     {
       "type": "color",

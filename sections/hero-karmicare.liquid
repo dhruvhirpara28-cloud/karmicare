@@ -397,30 +397,22 @@
 </div>
 
 <script>
-  (function () { function updateHeroLiveTime() { var timeElements =
-  document.querySelectorAll('#HeroKarmicare-{{ section.id }} .kc-hero-live-time'); if (!timeElements.length) return;
-  var now = new Date(); var hours = now.getHours(); var minutes = now.getMinutes(); var ampm = hours >= 12 ? 'PM' :
-  'AM'; hours = hours % 12; hours = hours ? hours : 12; var minutesStr = minutes < 10 ? '0' + minutes : minutes; var
-  timeStr = hours + ':' + minutesStr + ' ' + ampm; timeElements.forEach(function (el) { if (el.textContent !==
-  timeStr) { el.textContent = timeStr; } }); }
-
-  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', updateHeroLiveTime); } else {
-  updateHeroLiveTime(); } setInterval(updateHeroLiveTime, 30000);
-
-  // Sync pill toggle clicks with day-night-mode var toggleSection = document.getElementById('HeroKarmicare-
-  {{- section.id -}}
-  '); if (toggleSection) { toggleSection.addEventListener('click', function (e) { var btn =
-  e.target.closest('.hero-karmicare__pill-btn'); if (!btn) return; var mode = btn.getAttribute('data-mode'); if
-  (!mode) return;
-
-  // Apply mode to body document.body.classList.remove('day-mode', 'night-mode'); document.body.classList.add(mode +
-  '-mode');
-
-  document.querySelectorAll('.day-mode, .night-mode').forEach(function (el) { el.classList.remove('day-mode',
-  'night-mode'); el.classList.add(mode + '-mode'); });
-
-  // Persist try { localStorage.setItem('theme', mode); localStorage.setItem('manualTheme', mode);
-  localStorage.setItem('themeChange', mode); } catch (err) {} }); } })();
+  (function () {
+    function updateHeroLiveTime() {
+      var timeElements = document.querySelectorAll('#HeroKarmicare-{{ section.id }} .kc-hero-live-time');
+      if (!timeElements.length) return;
+      var now = new Date();
+      var hours = now.getHours();
+      var ampm = hours >= 12 ? 'PM' : 'AM';
+      var minutes = String(now.getMinutes()).padStart(2, '0');
+      var time = (hours % 12 || 12) + ':' + minutes + ' ' + ampm;
+      timeElements.forEach(function (element) {
+        if (element.textContent !== time) element.textContent = time;
+      });
+    }
+    updateHeroLiveTime();
+    setInterval(updateHeroLiveTime, 30000);
+  })();
 </script>
 
 {% schema %}

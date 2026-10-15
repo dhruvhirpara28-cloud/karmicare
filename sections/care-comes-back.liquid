@@ -1,0 +1,367 @@
+{%- comment -%}
+  Care that comes back: what Karmicare gives back to members, as a loop (your ritual, your
+  check-up, your next order) next to a receipt of the first Year in Care Credit. Replaces the
+  cost-of-waiting band on the PDP (Victor, 14 Oct 2026); placed before compare plans. The
+  homepage shows it too, before the FAQ, without receipt lines (T12).
+
+  Facts come from the Terms (clause 10 Care Credit, clause 11 Dental Check-up Reward) and the
+  plans table; docs/pdp/T10-cost-of-waiting/NOTES.md lists every string and its source. The
+  receipt total is a setting, not a sum: keep it equal to the lines above it.
+{%- endcomment -%}
+
+{{ 'section-care-comes-back.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign steps = section.blocks | where: 'type', 'step'
+  assign lines = section.blocks | where: 'type', 'line'
+-%}
+
+<div class="care-comes-back{% if section.settings.background == 'accent' %} care-comes-back--accent{% endif %} section-{{ section.id }}">
+  {%- comment -%}
+    Vertical padding from the settings. Defaults are the homepage's (120/120, mobile 48/48);
+    the PDP instance sets mobile top 64, as its other bands.
+  {%- endcomment -%}
+  {%- style -%}
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_desktop }}px;
+        padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+      }
+    }
+  {%- endstyle -%}
+  {%- if section.settings.eyebrow != blank
+    or section.settings.heading != blank
+    or section.settings.intro != blank
+  -%}
+    <div class="care-comes-back__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="care-comes-back__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="care-comes-back__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <p class="care-comes-back__intro">{%- render 'care-comes-back-text', text: section.settings.intro -%}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if steps.size > 0 or lines.size > 0 -%}
+    {%- comment -%} Loop and receipt side by side only when both render (the homepage has no receipt) {%- endcomment -%}
+    <div class="care-comes-back__body{% if steps.size > 0 and lines.size > 0 %} care-comes-back__body--split{% endif %}">
+      {%- if steps.size > 0 -%}
+        <ol class="care-comes-back__loop" role="list">
+          {%- for block in steps -%}
+            <li class="care-comes-back__step" {{ block.shopify_attributes }}>
+              <span class="care-comes-back__marker" aria-hidden="true">
+                {{- forloop.index | prepend: '0' | slice: -2, 2 -}}
+              </span>
+              <div class="care-comes-back__step-text">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="care-comes-back__step-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="care-comes-back__step-body">{%- render 'care-comes-back-text', text: block.settings.text -%}</p>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
+
+      {%- if lines.size > 0 -%}
+        <div class="care-comes-back__receipt">
+          {%- if section.settings.receipt_title != blank or section.settings.receipt_column_label != blank -%}
+            <div class="care-comes-back__receipt-head">
+              {%- if section.settings.receipt_title != blank -%}
+                <p class="care-comes-back__receipt-title" id="CareComesBackReceipt-{{ section.id }}">
+                  {{- section.settings.receipt_title | escape -}}
+                </p>
+              {%- endif -%}
+              {%- if section.settings.receipt_column_label != blank -%}
+                <p class="care-comes-back__receipt-column">{{ section.settings.receipt_column_label | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          <dl
+            class="care-comes-back__lines"
+            {% if section.settings.receipt_title != blank %}
+              aria-labelledby="CareComesBackReceipt-{{ section.id }}"
+            {% endif %}
+          >
+            {%- for block in lines -%}
+              <div class="care-comes-back__line" {{ block.shopify_attributes }}>
+                <dt class="care-comes-back__line-label">
+                  <span>{%- render 'care-comes-back-text', text: block.settings.label -%}</span>
+                  {%- if block.settings.note != blank -%}
+                    <span class="care-comes-back__line-note">{%- render 'care-comes-back-text', text: block.settings.note -%}</span>
+                  {%- endif -%}
+                </dt>
+                <dd class="care-comes-back__line-amount">{{ block.settings.amount | escape }}</dd>
+              </div>
+            {%- endfor -%}
+            {%- if section.settings.total != blank -%}
+              <div class="care-comes-back__line care-comes-back__line--total">
+                <dt class="care-comes-back__line-label"><span>{{ section.settings.total_label | escape }}</span></dt>
+                <dd class="care-comes-back__line-amount">{{ section.settings.total | escape }}</dd>
+              </div>
+            {%- endif -%}
+          </dl>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.fine_print != blank or section.settings.terms_link != blank -%}
+    <div class="care-comes-back__foot">
+      {%- if section.settings.fine_print != blank -%}
+        <p class="care-comes-back__fine">{{ section.settings.fine_print | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.terms_link != blank and section.settings.terms_link_label != blank -%}
+        <a class="care-comes-back__terms" href="{{ section.settings.terms_link }}">
+          {{- section.settings.terms_link_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Care that comes back",
+  "tag": "section",
+  "class": "section-care-comes-back",
+  "enabled_on": {
+    "templates": ["index", "product"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Return on Care"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Italic text starts a new line, upright, in the muted body colour.",
+      "default": "Care that comes back."
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go."
+    },
+    {
+      "type": "header",
+      "content": "Receipt",
+      "info": "The lines are blocks of type Receipt line. The total is not calculated: keep it equal to the lines."
+    },
+    {
+      "type": "text",
+      "id": "receipt_title",
+      "label": "Title",
+      "default": "Your first Year in Care Credit"
+    },
+    {
+      "type": "text",
+      "id": "receipt_column_label",
+      "label": "Amount column label",
+      "info": "Shown on the right of the title row, in the muted tone.",
+      "default": "Received"
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "Total label",
+      "default": "Up to"
+    },
+    {
+      "type": "text",
+      "id": "total",
+      "label": "Total",
+      "default": "€110.80"
+    },
+    {
+      "type": "header",
+      "content": "Fine print"
+    },
+    {
+      "type": "text",
+      "id": "fine_print",
+      "label": "Fine print",
+      "default": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment."
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "Terms link"
+    },
+    {
+      "type": "text",
+      "id": "terms_link_label",
+      "label": "Terms link label",
+      "default": "Terms, clauses 10 and 11"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page"
+        },
+        {
+          "value": "accent",
+          "label": "Accent"
+        }
+      ],
+      "default": "accent",
+      "info": "Accent is the colour the section gradients run to: for a place between bands that end and start on it, as the research band and the FAQ on the homepage."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Loop step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "line",
+      "name": "Receipt line",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under the label"
+        },
+        {
+          "type": "text",
+          "id": "amount",
+          "label": "Amount",
+          "info": "Care Credit in €, e.g. €40.00."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Care that comes back",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Your ritual",
+            "text": "Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Your check-up",
+            "text": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Your next order",
+            "text": "Spend Care Credit on any order. It stays valid while you are a member, and for 12 months after."
+          }
+        },
+        {
+          "type": "line",
+          "settings": {
+            "label": "Return on Care",
+            "note": "20% back on the Year",
+            "amount": "€70.80"
+          }
+        },
+        {
+          "type": "line",
+          "settings": {
+            "label": "Dental Check-up Reward",
+            "note": "after month six",
+            "amount": "€40.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

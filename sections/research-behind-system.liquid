@@ -1,8 +1,9 @@
 {{ 'section-research-behind-system.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 
-{%- if section.settings.show_border_top != blank -%}
-  <div class="block__border-top border-{{ section.id }}">
+{%- comment -%} Figma mobile 2766:10305: a hairline above the heading on mobile only {%- endcomment -%}
+{%- if section.settings.show_border_top or section.settings.show_border_top_mobile -%}
+  <div class="block__border-top research-behind-system__border{% unless section.settings.show_border_top %} research-behind-system__border--mobile{% endunless %} border-{{ section.id }}">
     <div class="page-width">
       <div class="kc-section-border"></div>
     </div>
@@ -79,25 +80,25 @@
         <span class="kc-caption-subheading subtitle-item">{{ section.settings.subheading }}</span>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2>{{ section.settings.heading }}</h2>
+        <h2 class="research-behind-system__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
     </div>
 
     {%- if section.settings.marquee -%}
-      <research-behind-system-marquee
+      <kc-marquee
         class="research-behind-system__marquee"
         data-speed="{{ section.settings.marquee_speed }}"
-        style="--cols-desktop: {{ section.settings.columns_desktop }}; --cols-laptop: {{ section.settings.columns_laptop }}; --cols-tablet: {{ section.settings.columns_tablet }}; --cols-mobile: {{ section.settings.columns_mobile }};"
+        data-align-start
       >
-        <ul class="research-behind-system__track" id="Slider-{{ section.id }}" role="list">
+        <ul class="research-behind-system__track" id="Slider-{{ section.id }}" role="list" data-marquee-track>
           {%- for block in section.blocks -%}
-            <li class="research-card" {{ block.shopify_attributes }}>
+            <li class="research-card{% if block.settings.image != blank %} research-card--media{% endif %}" {{ block.shopify_attributes }}>
               {%- render 'research-card', block: block -%}
             </li>
           {%- endfor -%}
         </ul>
-      </research-behind-system-marquee>
-      <script src="{{ 'research-behind-system-marquee.js' | asset_url }}" defer="defer"></script>
+      </kc-marquee>
+      <script src="{{ 'kc-marquee.js' | asset_url }}" defer="defer"></script>
     {%- else -%}
 
     {%- capture slider_classes -%}
@@ -136,7 +137,7 @@
       "
     >
       {%- for block in section.blocks -%}
-        <li class="research-card{% if show_slider %} slider__slide{% endif %}" {{ block.shopify_attributes }}>
+        <li class="research-card{% if block.settings.image != blank %} research-card--media{% endif %}{% if show_slider %} slider__slide{% endif %}" {{ block.shopify_attributes }}>
           {%- render 'research-card', block: block -%}
         </li>
       {%- endfor -%}
@@ -147,19 +148,20 @@
     {%- endif -%}
     {%- endif -%}
 
-    <div class="research-behind-system__footer kc-caption-text">
-      {%- if section.settings.bottom_text != blank -%}
-        {{ section.settings.bottom_text }}
-      {%- endif -%}
-      {%- if section.settings.button_label != blank -%}
-        <a href="{{ section.settings.button_link | default: '#' }}" class="karmicare__btn-secondary">
-          {{ section.settings.button_label }}
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M12.75 4.75V0.75L8.75 0.75M12.75 0.75L5.41667 8.08333M10.75 7.41667L10.75 11.4167C10.75 11.7703 10.6095 12.1094 10.3595 12.3595C10.1094 12.6095 9.77029 12.75 9.41667 12.75H2.08333C1.72971 12.75 1.39057 12.6095 1.14052 12.3595C0.890476 12.1094 0.75 11.7703 0.75 11.4167L0.75 4.08333C0.75 3.72971 0.890476 3.39057 1.14052 3.14052C1.39057 2.89048 1.72971 2.75 2.08333 2.75L6.08333 2.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      {%- endif -%}
-    </div>
+    {%- if section.settings.bottom_text != blank or section.settings.button_label != blank -%}
+      <div class="research-behind-system__footer">
+        {%- if section.settings.bottom_text != blank -%}
+          <div class="research-behind-system__note">{{ section.settings.bottom_text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          {%- comment -%} KC/Button, secondary, medium (Figma 3391:12659) {%- endcomment -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="research-behind-system__button">
+            <span>{{ section.settings.button_label }}</span>
+            {{- 'kc-icon-arrow-right.svg' | inline_asset_content -}}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -230,6 +232,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
+      "info": "Italic text starts a new line, upright, in the muted body colour (the second tone of a two-tone heading).",
       "default": "The research behind the system"
     },
     {
@@ -276,7 +279,7 @@
       "type": "color",
       "id": "card_bg_color_day",
       "label": "Card Background Color (Day)",
-      "default": "#ffffff"
+      "info": "Leave empty for the KC card surface (white)."
     },
     {
       "type": "header",
@@ -301,7 +304,7 @@
       "type": "color",
       "id": "card_bg_color_night",
       "label": "Card Background Color (Night)",
-      "default": "#191f38"
+      "info": "Leave empty for the KC card surface (#212A49)."
     },
     {
       "type": "header",
@@ -315,7 +318,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding Top (Desktop)",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -325,7 +328,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom (Desktop)",
-      "default": 80
+      "default": 120
     },
     {
       "type": "range",
@@ -335,7 +338,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding Top (Mobile)",
-      "default": 40
+      "default": 64
     },
     {
       "type": "range",
@@ -345,7 +348,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom (Mobile)",
-      "default": 40
+      "default": 48
     },
     {
       "type": "header",
@@ -356,6 +359,13 @@
       "id": "show_border_top",
       "label": "Show Top Border",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_top_mobile",
+      "label": "Show Top Border on mobile",
+      "info": "A hairline above the heading below 750px only. Ignored when Show Top Border is on.",
+      "default": true
     },
     {
       "type": "checkbox",
@@ -371,7 +381,7 @@
       "type": "checkbox",
       "id": "marquee",
       "label": "Infinite marquee",
-      "info": "All cards in one full-width row that drifts slowly and glides to a stop on hover. From tablet up each card is 780px (400px image, 380px text) and shrinks to fit smaller screens; on mobile the Columns on Mobile count sets the width. The slider settings are ignored.",
+      "info": "All cards in one full-width row that drifts slowly and glides to a stop on hover. From tablet up a card with an image is 780px (380px text, 400px image) and a card without one is 380px; on mobile every card is 320px with the image underneath. The slider and column settings are ignored.",
       "default": false
     },
     {
@@ -565,7 +575,8 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Image",
+          "info": "Leave empty for the text-only card."
         },
         {
           "type": "text",

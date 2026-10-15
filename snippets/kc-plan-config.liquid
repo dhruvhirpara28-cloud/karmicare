@@ -1,0 +1,160 @@
+{%- comment -%}
+  Plan selection for one Loop widget, read by assets/kc-plan-select.js (loaded in layout/theme.liquid).
+
+  Accepts:
+  - product: {Object}
+  - section: {Object} the section that renders the widget; its #ProductInfo-<section.id> holds the
+    widget and its form is #product-form-<section.id>
+  - role: {String} 'buybox' (main-product) or 'end-cta' (featured-product). Compare plans and Try Once
+    always act on the buybox.
+  - default_to_subscription: {Boolean} the Loop block setting: start on the first public plan
+
+  Every selling plan of the product is listed with its group, whether it is public, its type
+  (snippets/kc-plan-type.liquid), its "Subscription Name" for Loop Loyalty (snippets/kc-plan-loyalty.liquid)
+  and, when the custom.duos_count entry carries the plan's ID in its selling_plan_id field (comma-separated
+  IDs), its duos, brushings and Return on Care. kc-plan-select.js writes those onto the Loop plan options
+  by ID, so the Loop widget's name match no longer decides them.
+  Public plans come from the product's compare plans (snippets/kc-plan-public.liquid). The groups
+  without a public plan are hidden here from first paint, in every Loop widget and in the sticky bar,
+  and kc-plan-select.js keeps them hidden and unselectable. With no valid public plan ID the widgets
+  keep Loop's own visibility and the theme editor shows a warning, so the buybox is never empty.
+{%- endcomment -%}
+{%- liquid
+  capture kc_public
+    render 'kc-plan-public', product: product
+  endcapture
+  assign kc_public = kc_public | strip
+
+  assign kc_public_groups = ','
+  for kc_group in product.selling_plan_groups
+    for kc_plan in kc_group.selling_plans
+      assign kc_needle = ',' | append: kc_plan.id | append: ','
+      if kc_public contains kc_needle
+        assign kc_public_groups = kc_public_groups | append: kc_group.id | append: ','
+        break
+      endif
+    endfor
+  endfor
+-%}
+<script type="application/json" data-kc-plan-config>
+  {
+    "productId": {{ product.id | append: '' | json }},
+    "role": {{ role | json }},
+    "sectionId": {{ section.id | json }},
+    "formId": {{ 'product-form-' | append: section.id | json }},
+    "defaultToSubscription": {% if default_to_subscription %}true{% else %}false{% endif %},
+    "plans": [
+      {%- assign kc_separator = '' -%}
+      {%- assign kc_missing_keys = '' -%}
+      {%- assign kc_missing_duos = '' -%}
+      {%- for kc_group in product.selling_plan_groups -%}
+        {%- for kc_plan in kc_group.selling_plans -%}
+          {%- liquid
+            assign kc_needle = ',' | append: kc_plan.id | append: ','
+            assign kc_group_name_html = kc_group.name | escape
+            capture kc_type
+              render 'kc-plan-type', plan_id: kc_plan.id
+            endcapture
+            assign kc_type = kc_type | strip
+            capture kc_loyalty_key
+              render 'kc-plan-loyalty', product: product, plan_id: kc_plan.id
+            endcapture
+            assign kc_loyalty_key = kc_loyalty_key | strip
+            if kc_public contains kc_needle and kc_loyalty_key == blank
+              assign kc_missing_keys = kc_missing_keys | append: '<li><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html | append: '</li>'
+            endif
+
+            # Duos, brushings and Return on Care of this plan by ID: the custom.duos_count entry whose
+            # selling_plan_id field lists the plan (same sums as snippets/loop-widget-standard.liquid)
+            assign kc_duos_json = 'null'
+            for kc_entry in product.metafields.custom.duos_count.value
+              assign kc_entry_ids = kc_entry.selling_plan_id.value | default: kc_entry.selling_plan_id | append: '' | remove: 'gid://shopify/SellingPlan/' | remove: ' '
+              if kc_entry_ids == blank
+                continue
+              endif
+              assign kc_entry_ids = ',' | append: kc_entry_ids | append: ','
+              if kc_entry_ids contains kc_needle
+                assign kc_duos = kc_entry.duos_count.value | default: 1
+                if kc_entry.free_duo_s_count != blank
+                  assign kc_duos = kc_duos | plus: kc_entry.free_duo_s_count.value
+                endif
+                assign kc_brushings = kc_entry.brushings_count.value | default: 120
+                assign kc_return_on_care = kc_entry.return_on_care.value | default: 0
+                assign kc_duos_json = '{"duos": ' | append: kc_duos | append: ', "brushings": ' | append: kc_brushings | append: ', "returnOnCare": ' | append: kc_return_on_care | append: '}'
+                break
+              endif
+            endfor
+            if kc_public contains kc_needle and kc_duos_json == 'null' and product.metafields.custom.duos_count.value != blank
+              assign kc_missing_duos = kc_missing_duos | append: '<li><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html | append: '</li>'
+            endif
+          -%}
+          {{ kc_separator }}{"id": {{ kc_plan.id | append: '' | json }}, "groupId": {{ kc_group.id | json }}, "groupName": {{ kc_group.name | json }}, "public": {% if kc_public contains kc_needle %}true{% else %}false{% endif %}, "type": {{ kc_type | json }}, "loyaltyKey": {{ kc_loyalty_key | json }}, "duos": {{ kc_duos_json }}}
+          {%- assign kc_separator = ',' -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
+<style>
+  .kc-plan-hidden {
+    display: none !important;
+  }
+  {%- if kc_public != ',' -%}
+    {%- for kc_group in product.selling_plan_groups -%}
+      {%- assign kc_needle = ',' | append: kc_group.id | append: ',' -%}
+      {%- comment -%}
+        Scoped to this widget (and, from the buybox, the sticky bar), so a section reloaded in the theme
+        editor never leaves a stale rule on the other widget
+      {%- endcomment -%}
+      {%- unless kc_public_groups contains kc_needle %}
+        #ProductInfo-{{ section.id }} [id='loop-selling_plan_group-{{ kc_group.id }}']
+        {%- if role == 'buybox' %},
+          .sc-dd-option[data-selling-plan-group-id='{{ kc_group.id }}']
+        {%- endif %} {
+          display: none !important;
+        }
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif %}
+</style>
+{%- if request.design_mode and role == 'buybox' -%}
+  {%- if kc_public == ',' -%}
+    <div
+      role="note"
+      style="margin: 1rem 0; padding: 0.8rem 1rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; font-size: 1.3rem; line-height: 1.4;"
+    >
+      <strong>Theme editor only · plan selection:</strong>
+      no compare plan of this product holds a valid public selling plan ID, so these widgets show Loop's
+      own plan list (legacy offers included) and the compare plan buttons select nothing. Set
+      selling_plan_id on each compare plan to one of these IDs:
+      {%- render 'kc-plan-editor-list', product: product, public_plans: kc_public -%}
+    </div>
+  {%- endif -%}
+  {%- if kc_missing_keys != blank -%}
+    <div
+      role="note"
+      style="margin: 1rem 0; padding: 0.8rem 1rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; font-size: 1.3rem; line-height: 1.4;"
+    >
+      <strong>Theme editor only · Care Credit:</strong>
+      these public plans have no "Subscription Name" for Loop Loyalty, so their orders earn no Care
+      Credit. Add a loyalty_key to their compare plan, or the value to snippets/kc-plan-loyalty.liquid:
+      <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
+        {{- kc_missing_keys -}}
+      </ul>
+    </div>
+  {%- endif -%}
+  {%- if kc_missing_duos != blank -%}
+    <div
+      role="note"
+      style="margin: 1rem 0; padding: 0.8rem 1rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; font-size: 1.3rem; line-height: 1.4;"
+    >
+      <strong>Theme editor only · duos per plan:</strong>
+      the duos, brushings and Return on Care of these public plans are still matched by plan name (Loop
+      widget), so a renamed or translated plan loses them. Add a selling_plan_id field (single line text,
+      comma-separated plan IDs) to the selling_plan_duos entries and fill it for:
+      <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
+        {{- kc_missing_duos -}}
+      </ul>
+    </div>
+  {%- endif -%}
+{%- endif -%}

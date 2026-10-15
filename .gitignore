@@ -1,0 +1,47 @@
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node and Python tooling
+node_modules/
+npm-debug.log*
+__pycache__/
+*.pyc
+
+# Shopify CLI local state
+.shopify/
+
+# Local environment files
+.env
+.env.*
+
+# Agent local state (shared agent rules live in AGENTS.md and CLAUDE.md)
+.claude/settings.local.json
+.claude/.cc-writes/
+.claude/worktrees/
+CLAUDE.local.md
+
+# Evidence binaries (Victor, 13 Oct 2026): screenshots, PDFs and videos under docs/
+# are written for reviews but never committed; notes and reviews reference them by
+# local path. Markdown notes, reviews and small JSON stay tracked.
+docs/**/*.png
+docs/**/*.jpg
+docs/**/*.jpeg
+docs/**/*.webp
+docs/**/*.gif
+docs/**/*.pdf
+docs/**/*.mp4
+docs/**/*.webm
+docs/**/*.gz

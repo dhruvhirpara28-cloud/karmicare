@@ -1,0 +1,22 @@
+{%- comment -%}
+  Escaped text in which a word holding an en dash or a hyphen ("60-Day", "check-up") never
+  breaks inside the word; the text itself is unchanged. Used by sections/care-comes-back.liquid.
+
+  Accepts:
+  - text: {String} the setting value
+{%- endcomment -%}
+{%- liquid
+  assign words = text | split: ' '
+  for word in words
+    unless forloop.first
+      echo ' '
+    endunless
+    if word contains '–' or word contains '-'
+      echo '<span class="care-comes-back__nobreak">'
+      echo word | escape
+      echo '</span>'
+    else
+      echo word | escape
+    endif
+  endfor
+-%}

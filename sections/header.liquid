@@ -51,8 +51,7 @@
   }
 
   #shopify-section-{{ section.id }} .header {
-    border-radius: var(--primary-border-radius);
-    box-shadow: 0 2px 8px rgba(25, 31, 56, 0.04);
+    border-radius: var(--kc-shape-radius-sm);
     max-width: 1200px;
     margin: 1.2rem auto;
     align-items: center;
@@ -64,6 +63,18 @@
     }
   }
 
+  /* BEGIN NOW: KC/Button, Nunito Bold 12/12, 16px sides; 44px tall on desktop, 40px on mobile */
+  #shopify-section-{{ section.id }} .header__cta-btn {
+    min-height: 4.4rem;
+    padding: 0 1.6rem;
+    font-family: var(--kc-font-family-Nunito);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    letter-spacing: 1.7px;
+    white-space: nowrap;
+  }
+
   /* Desktop: compact centred glass bar (Figma KC_navigation) */
   @media screen and (min-width: 990px) {
     #shopify-section-{{ section.id }} .header {
@@ -73,8 +84,7 @@
       width: fit-content;
       max-width: calc(100% - 2.4rem);
       margin: {{ section.settings.padding_top }}px auto {{ section.settings.padding_bottom }}px;
-      padding: 3px 3px 3px 1em;
-      box-shadow: none;
+      padding: var(--kc-responsive-spacing-layout-xxs);
       {%- if section.settings.enable_glass_blur %}
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
@@ -83,6 +93,7 @@
     #shopify-section-{{ section.id }} .header__heading-link {
       display: flex;
       align-items: center;
+      margin: 0;
       padding: 0.8rem 1.6rem;
     }
     #shopify-section-{{ section.id }} .header__inline-menu {
@@ -104,13 +115,14 @@
       letter-spacing: 0;
       white-space: nowrap;
       text-decoration: none;
-      transition: opacity 0.2s ease;
+      transition: background-color 0.15s ease-out;
     }
     #shopify-section-{{ section.id }} .header__inline-menu summary.header__menu-item {
       padding-right: 2.7rem;
     }
-    #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:hover {
-      opacity: 0.75;
+    /* Hover fills the whole 44px cell with an opaque KC surface, so it reads on any page behind the glass */
+    #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:not(.kc-coming-soon):hover {
+      background-color: var(--kc-mapped-surface-primary-default-hover);
     }
     #shopify-section-{{ section.id }} .header__icons {
       display: flex;
@@ -120,73 +132,175 @@
     #shopify-section-{{ section.id }} .desktop-localization-wrapper:empty {
       display: none;
     }
-    #shopify-section-{{ section.id }} .header__cta-btn {
-      min-height: 4.4rem;
-      padding: 0 1.6rem;
-      font-family: var(--kc-font-family-Nunito);
-      font-weight: 700;
-      font-size: 1.2rem;
-      line-height: 1.2rem;
-      letter-spacing: 1.7px;
-      white-space: nowrap;
+  }
+
+  /* Menu links that point to # (no page yet): not clickable, "Coming soon" tooltip on hover,
+     keyboard focus or tap (tap and Escape: the script at the end of this file). No KC tooltip
+     component exists; built from the inverse surface and body/sm. */
+  #shopify-section-{{ section.id }} .kc-coming-soon {
+    position: relative;
+    cursor: default;
+  }
+  #shopify-section-{{ section.id }} .kc-coming-soon__tip {
+    position: absolute;
+    top: calc(100% + var(--kc-responsive-spacing-layout-xs));
+    left: 50%;
+    z-index: 2;
+    padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
+    background-color: var(--kc-mapped-surface-inverse-default);
+    color: var(--kc-mapped-text-inverse-default);
+    border-radius: var(--kc-shape-radius-sm);
+    box-shadow: var(--kc-elevation-md);
+    font-family: var(--kc-font-role-backbone);
+    font-weight: var(--font-600-weight);
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%);
+    translate: 0 -4px;
+    transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s linear 0.15s;
+  }
+  /* Bridges the gap to the item, so the pointer can move onto the tooltip without losing it */
+  #shopify-section-{{ section.id }} .kc-coming-soon__tip::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: calc(var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-spacing-layout-xxs));
+  }
+  @media (hover: hover) {
+    #shopify-section-{{ section.id }} .kc-coming-soon:hover .kc-coming-soon__tip {
+      opacity: 1;
+      visibility: visible;
+      translate: 0 0;
+      transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s;
+    }
+  }
+  #shopify-section-{{ section.id }} .kc-coming-soon:focus-visible .kc-coming-soon__tip,
+  #shopify-section-{{ section.id }} .kc-coming-soon.is-open .kc-coming-soon__tip {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 0;
+    transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s;
+  }
+  #shopify-section-{{ section.id }} .kc-coming-soon.is-dismissed .kc-coming-soon__tip {
+    opacity: 0;
+    visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .header__menu-item,
+    #shopify-section-{{ section.id }} .kc-coming-soon__tip {
+      transition: none !important;
+    }
+    #shopify-section-{{ section.id }} .kc-coming-soon__tip {
+      translate: 0 0 !important;
     }
   }
 
-  /* CTA Button */
-
+  /* Mobile and tablet: glass bar per Figma "Navigation · Mobile" (2766:10918), 4px below the
+     announcement bar, 4px padding, logo cell 16/8, BEGIN NOW and the menu button 3px apart.
+     The open menu drops down from the bar as one panel on the same surface. */
   @media screen and (max-width: 989px) {
-  /* Hide the desktop inline menu on mobile */
-  #shopify-section-{{ section.id }} .header__inline-menu {
-    display: none !important;
-  }
-  /* When menu is open, remove bottom corners of header to make a seamless box with the drawer */
-  #shopify-section-{{ section.id }}:has(details[open]) .header,
-  #shopify-section-{{ section.id }}:has(details[open].menu-opening) .header {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .header__cta-btn{margin-right:6px;}
-  #shopify-section-{{ section.id }} .header {
-    display: flex;
-    align-items: center;
-    padding: 0.4rem 0.4rem 0.4rem 0.4em;
-    position: relative;
-    z-index: 100;
-  }
+    #shopify-section-{{ section.id }} .header__inline-menu {
+      display: none !important;
+    }
+    #shopify-section-{{ section.id }} .header {
+      display: flex;
+      align-items: center;
+      margin-top: 0.4rem;
+      padding: 0.4rem;
+      position: relative;
+      z-index: 100;
+      {%- if section.settings.enable_glass_blur %}
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      {%- endif %}
+    }
 
-  /* Act as the white background for the header so it paints over the dark overlay */
-  #shopify-section-{{ section.id }} .header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: var(--primary-border-radius);
-    z-index: -1;
-  }
+    /* Paints the bar surface above the menu overlay (Dawn draws the overlay inside the header) */
+    #shopify-section-{{ section.id }} .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--kc-shape-radius-sm);
+      z-index: -1;
+    }
 
-  /* When menu is open, remove bottom corners of header background */
-  #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-  #shopify-section-{{ section.id }}:has(details[open].menu-opening) .header::before {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
+    /* Open menu: bar and panel form one box */
+    #shopify-section-{{ section.id }}:has(details[open]) .header,
+    #shopify-section-{{ section.id }}:has(details[open]) .header::before {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
     #shopify-section-{{ section.id }} .header__heading {
       order: 1;
       margin-right: auto;
     }
+    #shopify-section-{{ section.id }} .header__heading-link {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0.8rem 1.6rem;
+    }
+    #shopify-section-{{ section.id }} .header__heading-logo-svg svg {
+      width: 105px;
+    }
     #shopify-section-{{ section.id }} .header__icons {
       order: 2;
+      align-self: stretch;
+      align-items: stretch;
+      padding: 0;
     }
     #shopify-section-{{ section.id }} header-drawer {
       order: 3;
+      display: flex;
+      margin-left: var(--kc-responsive-spacing-layout-xxs);
     }
 
+    #shopify-section-{{ section.id }} .header__cta-btn {
+      min-height: 4rem;
+      margin: 0;
+    }
 
+    /* KC/Button, icon only: accent subtle surface, control border, 16px glyph */
+    #shopify-section-{{ section.id }} .header__icon--menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      padding: 0;
+      background-color: var(--kc-mapped-surface-accent-default-subtle);
+      border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-control-default);
+      border-radius: var(--kc-shape-radius-sm);
+      color: var(--kc-mapped-text-accent-default-on-accent);
+    }
+    #shopify-section-{{ section.id }} .header__icon--menu:focus-visible {
+      outline: 2px solid var(--kc-mapped-border-focus-default);
+      outline-offset: 2px;
+    }
+    #shopify-section-{{ section.id }} .header__icon--menu > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+    #shopify-section-{{ section.id }} .header__icon--menu .icon-hamburger {
+      width: 13px;
+      height: 10px;
+    }
+    #shopify-section-{{ section.id }} .header__icon--menu .icon.icon-close {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
 
-        /* Seamless absolute drawer */
+    /* Menu panel */
     #shopify-section-{{ section.id }} .menu-drawer {
       display: none;
     }
@@ -197,40 +311,73 @@
       top: 100%;
       left: 0;
       width: 100%;
-      box-sizing: border-box;
       height: auto;
-      max-height: none;
-      border-radius: 0 0 var(--primary-border-radius) var(--primary-border-radius);
-      border: none;
+      max-height: calc(100vh - 12rem);
+      overflow-y: auto;
+      box-sizing: border-box;
       margin: 0;
-      padding: 1.6rem 0.4rem 1.6rem 0.4rem;
+      padding: 0 0.4rem 1.2rem;
+      border: none;
+      border-radius: 0 0 var(--kc-shape-radius-sm) var(--kc-shape-radius-sm);
       transform: none;
+      visibility: visible;
     }
-
-    /* Figma Exact 16px Gap for Menu Links */
+    #shopify-section-{{ section.id }} .menu-drawer__inner-container,
+    #shopify-section-{{ section.id }} .menu-drawer__navigation-container {
+      height: auto;
+    }
     #shopify-section-{{ section.id }} .menu-drawer__navigation {
+      padding: 0;
+    }
+    #shopify-section-{{ section.id }} .menu-drawer__menu {
       display: flex;
       flex-direction: column;
-      gap: 1.6rem; /* Exactly 16px gap from Figma */
     }
-
-    /* Text alignment fix */
-
-
-    /* Hide utility links completely to match Figma */
-     .menu-drawer__utility-links {
+    #shopify-section-{{ section.id }} .menu-drawer__menu li {
+      margin: 0;
+    }
+    /* Links: the mobile footer link style (body/lg Semibold), 44px rows, text aligned with the logo */
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item {
+      display: flex;
+      align-items: center;
+      min-height: 4.4rem;
+      margin: 0;
+      padding: 0 1.6rem;
+      border-radius: var(--kc-shape-radius-sm);
+      font-family: var(--kc-font-role-backbone);
+      font-weight: var(--font-600-weight);
+      font-size: var(--kc-responsive-body-lg-text-size);
+      line-height: var(--kc-responsive-body-lg-line-height);
+      letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+      text-decoration: none;
+    }
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item:focus-visible {
+      outline: 2px solid var(--kc-mapped-border-focus-default);
+      outline-offset: -2px;
+    }
+    /* Same hover surface as the desktop links (Dawn's 4% tint is near invisible on the panel) */
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item:hover,
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item:focus {
+      background-color: var(--kc-mapped-surface-primary-default-hover);
+    }
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item.kc-coming-soon:hover,
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item.kc-coming-soon:focus {
+      background-color: transparent;
+    }
+    /* "Coming soon" sits next to the label in the panel row */
+    #shopify-section-{{ section.id }} .menu-drawer__menu-item.kc-coming-soon {
+      gap: var(--kc-responsive-spacing-layout-xs);
+    }
+    #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon__tip {
+      position: static;
+      transform: none;
+      translate: -4px 0;
+    }
+    #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon__tip::before {
+      content: none;
+    }
+    #shopify-section-{{ section.id }} .menu-drawer__utility-links {
       display: none;
-    }
-
-    /* Keep BEGIN NOW and Hamburger button together */
-
-    #shopify-section-{{ section.id }} .header__icon--menu {
-      padding: 0;
-      width: 4rem;
-      height: 4rem;
-      background-color: #C4DFFF;
-      border-radius: var(--primary-border-radius);
-      border: none;
     }
   }
 
@@ -289,24 +436,17 @@
       fill: {{ section.settings.text_color_night }};
     }
   {%- endif -%}
-  {% if section.settings.bg_color_night !=blank %}
-    body.night-mode .header__icon,
-    body.night-mode .header__icon svg, body.night-mode .header__icon path {
-      color: {{ section.settings.bg_color_night }};
-      fill: {{ section.settings.bg_color_night }};
-    }
-  {%- endif -%}
 
   /* Smooth transition for background color changes (prevents jerk when returning to top) */
   #shopify-section-{{ section.id }} .header,
   #shopify-section-{{ section.id }} .header::before {
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
   /* ── PRODUCT PAGE OVERRIDES ── */
   {% render 'product-header-css', section: section %}
 
-  /* ── DESKTOP GLASS BACKGROUND (bar colour at reduced opacity) ── */
+  /* ── GLASS BACKGROUND (bar colour at reduced opacity, Figma surface/glass) ── */
   {%- liquid
     assign glass_alpha = section.settings.glass_opacity | divided_by: 100.0
     assign glass_bg_day = section.settings.bg_color_day
@@ -329,6 +469,37 @@
     {%- if glass_bg_night != blank %}
       body.night-mode #shopify-section-{{ section.id }} .header {
         background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
+      }
+    {%- endif %}
+  }
+  /* Mobile: ::before paints the bar (it sits above Dawn's menu overlay). Glass while closed;
+     opaque with the panel while the menu is open. The blur is dropped while open because a
+     backdrop-filter would trap the fixed full-screen overlay inside the bar. */
+  @media screen and (max-width: 989px) {
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body.night-mode #shopify-section-{{ section.id }} .header {
+      background-color: transparent;
+    }
+    #shopify-section-{{ section.id }}:has(details[open]) .header {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    {%- if glass_bg_day != blank %}
+      body.day-mode #shopify-section-{{ section.id }} .header::before {
+        background-color: {{ glass_bg_day | color_modify: 'alpha', glass_alpha }};
+      }
+      body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
+      body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
+        background-color: {{ glass_bg_day }};
+      }
+    {%- endif %}
+    {%- if glass_bg_night != blank %}
+      body.night-mode #shopify-section-{{ section.id }} .header::before {
+        background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
+      }
+      body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
+      body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
+        background-color: {{ glass_bg_night }};
       }
     {%- endif %}
   }
@@ -437,7 +608,7 @@
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
           {%- if settings.logo_svg != blank -%}
             <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg">
-              <div class="header__heading-logo-svg" style="width: {{ settings.logo_width }}px;">
+              <div class="header__heading-logo-svg">
                 {{ settings.logo_svg }}
               </div>
             </div>
@@ -481,7 +652,7 @@
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
           {%- if settings.logo_svg != blank -%}
             <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg">
-              <div class="header__heading-logo-svg" style="width: {{ settings.logo_width }}px;">
+              <div class="header__heading-logo-svg">
                 {{ settings.logo_svg }}
               </div>
             </div>
@@ -724,6 +895,38 @@
   }
 
   customElements.define('sticky-header', StickyHeader);
+
+  /* "Coming soon" menu links: a tap toggles the tooltip (touch has no hover), a tap elsewhere
+     closes it, Escape hides it until the pointer or focus leaves the link. */
+  (() => {
+    const items = () => document.querySelectorAll('.kc-coming-soon');
+
+    document.addEventListener('click', (event) => {
+      const item = event.target.closest('.kc-coming-soon');
+      items().forEach((other) => {
+        if (other !== item) other.classList.remove('is-open');
+      });
+      if (item) {
+        item.classList.remove('is-dismissed');
+        item.classList.toggle('is-open');
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      items().forEach((item) => {
+        item.classList.remove('is-open');
+        if (item.matches(':hover, :focus-visible')) item.classList.add('is-dismissed');
+      });
+    });
+
+    const undismiss = (event) => {
+      const item = event.target.closest && event.target.closest('.kc-coming-soon');
+      if (item && !item.contains(event.relatedTarget)) item.classList.remove('is-dismissed');
+    };
+    document.addEventListener('pointerout', undismiss);
+    document.addEventListener('focusout', undismiss);
+  })();
 {% endjavascript %}
 
 <script type="application/ld+json">
@@ -739,6 +942,7 @@
       {{ settings.social_facebook_link | json }},
       {{ settings.social_pinterest_link | json }},
       {{ settings.social_instagram_link | json }},
+      {{ settings.social_linkedin_link | json }},
       {{ settings.social_tiktok_link | json }},
       {{ settings.social_tumblr_link | json }},
       {{ settings.social_snapchat_link | json }},
@@ -892,6 +1096,17 @@
     },
     {
       "type": "header",
+      "content": "Menu links without a page"
+    },
+    {
+      "type": "text",
+      "id": "coming_soon_label",
+      "default": "Coming soon",
+      "label": "Tooltip text",
+      "info": "Menu links set to # are shown but not clickable, with this tooltip on hover, focus or tap. Point the link to a page to enable it."
+    },
+    {
+      "type": "header",
       "content": "Visibility Toggles"
     },
     {
@@ -986,7 +1201,7 @@
     },
     {
       "type": "header",
-      "content": "Glass effect (desktop)"
+      "content": "Glass effect"
     },
     {
       "type": "range",
@@ -996,7 +1211,7 @@
       "step": 5,
       "unit": "%",
       "label": "Bar background opacity",
-      "info": "Applies to the bar background colour (Day and Night) on desktop.",
+      "info": "Applies to the bar background colour (Day and Night). On mobile the bar turns opaque while the menu is open.",
       "default": 90
     },
     {

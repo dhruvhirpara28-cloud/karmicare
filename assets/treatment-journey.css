@@ -114,53 +114,6 @@
   font-weight: var(--font-700-weight);
 }
 
-/* Lock Icon Styling */
-.kc-journey-item-lock {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 0.2rem;
-}
-
-.kc-journey-item-lock svg {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
-.kc-journey-item-lock svg {
-  color: rgb(var(--color-foreground));
-}
-
-.kc-journey-lock-img {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  display: block;
-}
-
-/* Default state: hide lock-open and show lock-closed */
-.kc-journey-item-lock .lock-open {
-  display: none;
-}
-
-.kc-journey-item-lock .lock-closed {
-  display: block;
-}
-
-
-/* Active yearly plan state: show lock-open, hide lock-closed, and color blue */
-.kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-open {
-  display: block;
-}
-
-.kc-journey-container[data-active-plan="yearly"] .kc-journey-item-lock .lock-closed {
-  display: none;
-}
-
 /* Disclaimer Styling */
 .kc-journey-disclaimer {
   margin: 1.5rem 0 1rem 0;
