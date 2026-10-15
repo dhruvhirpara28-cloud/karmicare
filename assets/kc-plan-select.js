@@ -15,6 +15,8 @@
  *   for Care Credit, by plan ID. Every add-to-cart path (loop-widget.js, karmi-add-to-cart.js,
  *   product-form.js) reads it here; syncCartSubscriptionName() keeps the cart's value in line with
  *   the subscription lines in it.
+ * - KCPlanSelect.clearPurchaseChoice(productId, planId): one purchase choice of a plan product in the
+ *   cart; every add-to-cart path calls it before adding the product.
  * - KCPlanSelect.plan(planId): type, interval, deliveries, Check-up Reward, duos, brushings and Return
  *   on Care of a plan, by ID: the pricing summary, the plan cards, the Welcome Kit and the sticky bar
  *   read plans here instead of by name. selectedPlanId() and allowed() serve the sticky bar and
@@ -39,6 +41,8 @@
   // How long a compare choice is kept against Loop's own late default selection
   const INTENT_GUARD_MS = 3000;
   const MAX_FIXES = 5;
+  // Toothbrush variants of the earlier Welcome Kit, still in some carts: kit lines too
+  const LEGACY_KIT_VARIANT_IDS = ['42732468142262', '42732468076726'];
 
   // What a plan type means (snippets/kc-plan-type.liquid gives each selling plan ID its type). Plan
   // logic reads these by ID, never the plan name: billing interval, deliveries per billing (Loop's own
@@ -86,7 +90,11 @@
     configs.forEach((config) => {
       const productId = String(config.productId);
       const product =
-        products[productId] || (products[productId] = { id: productId, widgets: [], plans: {}, groups: {}, publicCount: 0 });
+        products[productId] ||
+        (products[productId] = { id: productId, widgets: [], plans: {}, groups: {}, publicCount: 0, kitVariantIds: [] });
+      (config.kitVariantIds || []).forEach((id) => {
+        if (!product.kitVariantIds.includes(String(id))) product.kitVariantIds.push(String(id));
+      });
       if (!product.widgets.find((w) => w.sectionId === config.sectionId && w.role === config.role)) {
         product.widgets.push({
           role: config.role,
@@ -544,6 +552,45 @@
     return wanted;
   }
 
+  // The product a variant belongs to, from Loop's product data on the page ('' when unknown)
+  function productIdOfVariant(variantId) {
+    const id = String(variantId == null ? '' : variantId);
+    const props = window.loopProps || {};
+    return (
+      Object.keys(props).find((productId) => {
+        const variants = props[productId] && props[productId].product && props[productId].product.variants;
+        return Array.isArray(variants) && variants.some((v) => String(v.id) === id);
+      }) || ''
+    );
+  }
+
+  // One purchase choice of a plan product in the cart (Victor, 15 Oct: the cart held a 60-day and a Year
+  // membership after a switch). Before a new choice of the product is added, one update call removes
+  // every line of the product (any plan or one time) and every Welcome Kit line, and sets
+  // "Subscription Name" for the coming choice (cleared for one time). The caller then adds the choice,
+  // with one kit set for a subscription. Kit lines: the _welcome_kit property, the configured kit
+  // variants, or the earlier kit's toothbrush variants. Resolves false for a product without a plan
+  // config (nothing changed); rejects when the cart could not be updated.
+  async function clearPurchaseChoice(productId, sellingPlanId) {
+    readConfigs();
+    const product = products[String(productId)];
+    if (!product) return false;
+    const headers = { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' };
+    const cart = await fetch('/cart.js', { headers: headers }).then((response) => response.json());
+    const kitVariantIds = product.kitVariantIds.concat(LEGACY_KIT_VARIANT_IDS);
+    const updates = {};
+    (cart.items || []).forEach((item) => {
+      const isKit =
+        (item.properties && item.properties._welcome_kit === 'true') || kitVariantIds.includes(String(item.variant_id));
+      if (String(item.product_id) === product.id || isKit) updates[item.key] = 0;
+    });
+    const body = { attributes: { 'Subscription Name': sellingPlanId ? subscriptionName(sellingPlanId) : '' } };
+    if (Object.keys(updates).length) body.updates = updates;
+    const response = await fetch('/cart/update.js', { method: 'POST', headers: headers, body: JSON.stringify(body) });
+    if (!response.ok) throw new Error('could not remove the earlier choice from the cart');
+    return true;
+  }
+
   // Hidden or disabled by this script (marked), so it can be undone when a plan becomes public again
   function hide(element) {
     if (!element) return;
@@ -785,6 +832,8 @@
     tryOnce: tryOnce,
     subscriptionName: subscriptionName,
     syncCartSubscriptionName: syncCartSubscriptionName,
+    clearPurchaseChoice: clearPurchaseChoice,
+    productIdOfVariant: productIdOfVariant,
     plan: plan,
     selectedPlanId: selectedPlanId,
     allowed: allowed,

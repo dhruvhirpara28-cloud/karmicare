@@ -3921,6 +3921,10 @@ async function loopWidgetCreateAddToCartPayload(
 async function shopifyAddToCartByLoopWidget(payload, productId) {
     const endpoint = `${window.Shopify.routes.root}cart/add.js`;
     try {
+        // KC CUSTOM: one purchase choice per plan product: earlier lines and kit lines go first (assets/kc-plan-select.js)
+        if (window.KCPlanSelect) {
+            await window.KCPlanSelect.clearPurchaseChoice(productId, payload?.items?.[0]?.selling_plan || "");
+        }
         const response = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

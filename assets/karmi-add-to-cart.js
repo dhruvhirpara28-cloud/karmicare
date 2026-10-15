@@ -61,9 +61,19 @@
 
       const items = [mainItem];
 
+      // One purchase choice per plan product (assets/kc-plan-select.js): remove the product's earlier
+      // lines (any plan or one time) and every Welcome Kit line first, so switching plans or to Try Once
+      // never leaves two memberships or two kit sets in the cart
+      const productId = form.dataset.loopProductId || (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(variantId) : '');
+      const replacesChoice = Boolean(
+        window.KCPlanSelect && productId &&
+        await window.KCPlanSelect.clearPurchaseChoice(productId, isSubscription ? sellingPlanId : '')
+      );
+
       // Free Welcome Kit product is ONLY added for subscriptions
       if (isSubscription && options && options.isBundleProduct && !options.customerAlreadyReceivedFreeProduct && options.welcomeKitVariantIds && options.welcomeKitVariantIds.length > 0) {
-        const existingDrawerVariants = Array.from(document.querySelectorAll('cart-drawer [data-variant-id], cart-items [data-variant-id]')).map(el => parseInt(el.dataset.variantId)).filter(Boolean);
+        // After the clear above the cart holds no kit line: add exactly one set
+        const existingDrawerVariants = replacesChoice ? [] : Array.from(document.querySelectorAll('cart-drawer [data-variant-id], cart-items [data-variant-id]')).map(el => parseInt(el.dataset.variantId)).filter(Boolean);
 
         for (const vid of options.welcomeKitVariantIds) {
           const pVid = parseInt(vid);
