@@ -25,6 +25,19 @@
   endcapture
   assign kc_public = kc_public | strip
 
+  # The Welcome Kit variants (theme setting, as in snippets/buy-buttons.liquid): kit lines in the cart
+  assign kc_kit_variant_ids = ''
+  for kc_kit_item in settings.welcome_kit_free_product
+    assign kc_kit_product = kc_kit_item
+    if kc_kit_item.id == null
+      assign kc_kit_product = all_products[kc_kit_item]
+    endif
+    if kc_kit_product != blank and kc_kit_product.variants.first != blank
+      assign kc_kit_variant_ids = kc_kit_variant_ids | append: kc_kit_product.variants.first.id | append: ','
+    endif
+  endfor
+  assign kc_kit_variant_ids = kc_kit_variant_ids | split: ','
+
   assign kc_public_groups = ','
   for kc_group in product.selling_plan_groups
     for kc_plan in kc_group.selling_plans
@@ -43,6 +56,7 @@
     "sectionId": {{ section.id | json }},
     "formId": {{ 'product-form-' | append: section.id | json }},
     "defaultToSubscription": {% if default_to_subscription %}true{% else %}false{% endif %},
+    "kitVariantIds": {{ kc_kit_variant_ids | json }},
     "plans": [
       {%- assign kc_separator = '' -%}
       {%- assign kc_missing_keys = '' -%}

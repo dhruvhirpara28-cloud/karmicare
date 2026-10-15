@@ -56,7 +56,18 @@ if (!customElements.get('product-form')) {
         const quantity = parseInt(formData.get('quantity')) || 1;
         const linesUpdateDeferred = this.createCartLinesUpdateEvent(variantId, quantity);
 
-        fetch(`${routes.cart_add_url}`, config)
+        // One purchase choice per plan product (assets/kc-plan-select.js): the product's earlier lines and
+        // the Welcome Kit lines go first (welcome-kit.liquid adds one kit set back for a subscription)
+        const choiceProductId =
+          this.form.dataset.loopProductId || (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(variantId) : '');
+        const isPlan = sellingPlanVal && !isNaN(parseInt(sellingPlanVal));
+        const choiceCleared =
+          window.KCPlanSelect && choiceProductId
+            ? window.KCPlanSelect.clearPurchaseChoice(choiceProductId, isPlan ? sellingPlanVal : '')
+            : Promise.resolve();
+
+        choiceCleared
+          .then(() => fetch(`${routes.cart_add_url}`, config))
           .then((response) => response.json())
           .then((response) => {
             if (response.status) {
