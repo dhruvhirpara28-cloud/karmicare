@@ -88,9 +88,8 @@
         }
       }
 
-      // Cart and checkout order: the plan line on top of its kit (assets/kc-plan-select.js addOrder sends the
-      // kit lines first, the plan line last)
-      const addPayload = { items: window.KCPlanSelect ? window.KCPlanSelect.addOrder(items) : items.slice().reverse() };
+      // Cart and checkout order: the plan line on top, its kit nested under it (assets/kc-plan-select.js nestKit)
+      const addPayload = { items: window.KCPlanSelect ? window.KCPlanSelect.nestKit(items) : items };
 
       if (isSubscription) {
         // Loop Loyalty awards Care Credit by this exact value ("60-Day Supply", "Year Supply"): from the

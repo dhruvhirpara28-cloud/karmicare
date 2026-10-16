@@ -3947,11 +3947,11 @@ async function shopifyAddToCartByLoopWidget(payload, productId) {
     try {
         const kcSellingPlanId = payload?.items?.[0]?.selling_plan || "";
         const kcManaged = Boolean(window.KCPlanSelect && window.KCPlanSelect.manages(productId));
-        // KC CUSTOM: a plan product's subscription brings its Welcome Kit in the same add, in cart order:
-        // the kit lines first, the plan lines last, so the plan stays on top (assets/kc-plan-select.js addOrder)
+        // KC CUSTOM: a plan product's subscription brings its Welcome Kit in the same add, nested under the
+        // plan line in cart order (assets/kc-plan-select.js nestKit)
         const kcKit = kcManaged && kcSellingPlanId ? window.KCPlanSelect.kitLines(productId) : [];
         const kcPayload = kcKit.length
-            ? { ...payload, items: window.KCPlanSelect.addOrder(kcKit.concat(payload.items)) }
+            ? { ...payload, items: window.KCPlanSelect.nestKit(payload.items.concat(kcKit)) }
             : payload;
         // KC CUSTOM: one purchase choice per plan product: earlier lines and kit lines go first, one
         // replacement at a time, the earlier choice back if the add is rejected (assets/kc-plan-select.js)

@@ -23,9 +23,10 @@
  *   brushings and Return on Care of a plan, by ID: the pricing summary, the plan cards, the Welcome Kit
  *   and the sticky bar read plans here instead of by name. selectedPlanId() and allowed() serve the
  *   sticky bar and karmi-add-to-cart.js.
- * - KCPlanSelect.addOrder(lines) / kitLines(productId): the cart and checkout order, the plan line on top of
- *   Morning Toothbrush, Evening Toothbrush, Floss (KIT_ORDER): every add of a plan with its Welcome Kit
- *   sends its lines through addOrder; kitLines gives the kit lines a plan product's subscription brings.
+ * - KCPlanSelect.nestKit(lines) / kitLines(productId) / repairKit(): the cart and checkout order, the plan
+ *   line on top with Morning Toothbrush, Evening Toothbrush, Floss nested under it (KIT_ORDER): every add
+ *   of a plan with its Welcome Kit sends its lines through nestKit; kitLines gives the kit lines a plan
+ *   product's subscription brings; repairKit puts a missing or loose kit under the plan line.
  * - KCPlanSelect.units(planId) / quantityFor(productId, planId, formQuantity): the Duos per delivery of a
  *   plan (snippets/kc-plan-type.liquid; year plans follow the theme setting "Year plans: Duos per
  *   delivery"), which is the cart quantity. Every add-to-cart path adds that quantity for a
@@ -58,11 +59,13 @@
   // Toothbrush variants of the earlier Welcome Kit, still in some carts: kit lines too
   const LEGACY_KIT_VARIANT_IDS = ['42732468142262', '42732468076726'];
   // Cart and checkout order (Victor, 16 Oct): the plan line on top, then Morning Toothbrush, Evening
-  // Toothbrush, Floss. Shopify puts each added line at the top of the cart, line by line also within one
-  // /cart/add.js call, and checkout shows the cart order. So every add sends its lines in reverse (see
-  // addOrder): kit lines first (floss, evening, morning), the plan line last. This is the one place of
-  // that rule: a kit line's place comes from its product handle (kitHandles, snippets/kc-plan-config.liquid),
-  // never from the order of the Welcome Kit theme setting. A kit line it cannot place goes under them.
+  // Toothbrush, Floss. The kit lines are nested under the plan line (Shopify nested cart lines: parent_id
+  // in the same add, parent_line_key later). Shopify lists nested lines right after their parent in the
+  // order they were added, checkout shows them indented under it, and removing the plan line removes
+  // them. So every add sends the plan line, then the kit lines in this order (see nestKit). This is the
+  // one place of that rule: a kit line's place comes from its product handle (kitHandles,
+  // snippets/kc-plan-config.liquid), never from the order of the Welcome Kit theme setting. A kit line it
+  // cannot place goes under them.
   const KIT_ORDER = ['morning', 'evening', 'floss'];
 
   // What a plan type means (snippets/kc-plan-type.liquid gives each selling plan ID its type). Plan
@@ -727,25 +730,31 @@
     return rank === -1 ? KIT_ORDER.length : rank;
   }
 
-  // The lines of one /cart/add.js call ({ id: variant ID, … }) in the order to send them (KIT_ORDER): the
-  // kit lines from the bottom of the cart up, then the other lines (the plan line) as given, so the plan
-  // line ends on top. Every add of a plan with its kit goes through this.
-  function addOrder(lines) {
+  // The lines of one /cart/add.js call ({ id: variant ID, … }) in cart order (KIT_ORDER): the other lines
+  // (the plan line) as given, then the kit lines, each nested under the plan line (parent_id: its variant
+  // ID; the subscription line when there are several). Without a line to nest under, kit lines stay as
+  // they are. Every add of a plan with its kit goes through this.
+  function nestKit(lines) {
     readConfigs();
     const list = Array.isArray(lines) ? lines : [];
-    const kit = list.filter(isKitLine).sort((a, b) => kitRank(b) - kitRank(a));
-    return kit.concat(list.filter((line) => !isKitLine(line)));
+    const others = list.filter((line) => !isKitLine(line));
+    const parent = others.find((line) => line.selling_plan) || others[0];
+    const kit = list
+      .filter(isKitLine)
+      .sort((a, b) => kitRank(a) - kitRank(b))
+      .map((line) => (parent ? Object.assign({}, line, { parent_id: Number(parent.id) }) : line));
+    return others.concat(kit);
   }
 
   // The Welcome Kit lines a subscription of a plan product brings in its own add (kc-plan-config: a Welcome
-  // Kit bundle product, for a customer who has not received the kit yet), in add order; [] otherwise
+  // Kit bundle product, for a customer who has not received the kit yet), in KIT_ORDER; [] otherwise
   function kitLines(productId) {
     readConfigs();
     const product = products[String(productId)];
     if (!product || !product.welcomeKit) return [];
-    return addOrder(
-      product.kitVariantIds.map((id) => ({ id: Number(id), quantity: 1, properties: { _welcome_kit: 'true' } }))
-    );
+    return product.kitVariantIds
+      .map((id) => ({ id: Number(id), quantity: 1, properties: { _welcome_kit: 'true' } }))
+      .sort((a, b) => kitRank(a) - kitRank(b));
   }
 
   // One purchase choice of a plan product in the cart (Victor, 15 Oct: the cart held a 60-day and a Year
@@ -753,7 +762,7 @@
   // every line of the product (any plan or one time) and every Welcome Kit line, and sets
   // "Subscription Name" for the coming choice (cleared for one time). The caller then adds the choice as
   // one line (quantityFor: the plan's Duos per delivery, 1 for Try Once), with one kit set for a
-  // subscription, in cart order (addOrder). Kit lines: isKitLine. Resolves false for a product without a plan
+  // subscription nested under it (nestKit). Kit lines: isKitLine. Resolves false for a product without a plan
   // config (nothing changed), else what it removed (recoverChoice puts it back after a failed add); rejects when the cart
   // could not be updated. Callers go through replaceChoice().
   async function clearPurchaseChoice(productId, sellingPlanId) {
@@ -806,11 +815,11 @@
       }
       let ok = true;
       if (removed.lines.length) {
-        // In cart order (addOrder): the earlier plan line back on top of its kit
+        // In cart order (nestKit): the earlier plan line back, its kit nested under it
         const added = await fetch('/cart/add.js', {
           method: 'POST',
           headers: headers,
-          body: JSON.stringify({ items: addOrder(removed.lines) }),
+          body: JSON.stringify({ items: nestKit(removed.lines) }),
         });
         ok = added.ok;
       }
@@ -894,6 +903,67 @@
   function manages(productId) {
     readConfigs();
     return Boolean(products[String(productId)]);
+  }
+
+  // A plan subscription in the cart whose Welcome Kit is not nested under it in KIT_ORDER (a cart from
+  // outside the theme or from before the kit was nested; every add of the theme brings the kit in its own
+  // add). On a page that sells the plan product (kitLines), the kit lines in the cart go out and the whole
+  // kit goes in under the plan line (parent_line_key; a kit line added on its own would land under the
+  // others). The plan line, its quantity and its properties stay as they are; "Subscription Name" follows
+  // its plan (syncCartSubscriptionName). It runs in the purchase queue, after every choice asked for
+  // before it, and reads the cart in its own turn; it is no shopper's choice (choicesRequested stays), and
+  // once the page goes to checkout it leaves the cart alone. When the kit cannot be added, the earlier kit
+  // lines go back as they were. Resolves true when the kit was put under the plan line.
+  // snippets/welcome-kit.liquid calls it.
+  function repairKit() {
+    const run = async () => {
+      if (navigating) return false;
+      const headers = { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' };
+      const post = (url, body) => fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) });
+      const cart = await fetch('/cart.js', { headers: headers }).then((response) => response.json());
+      const items = cart.items || [];
+      const planItem = items.find((item) => item.selling_plan_allocation && kitLines(item.product_id).length);
+      if (!planItem) return false;
+      const kit = kitLines(planItem.product_id);
+      const kitItems = items.filter((item) => isKitLine({ id: item.variant_id, properties: item.properties }));
+      const inPlace =
+        kitItems.length === kit.length &&
+        kitItems.every(
+          (item, index) =>
+            item.variant_id === kit[index].id &&
+            item.parent_relationship &&
+            item.parent_relationship.parent_key === planItem.key
+        );
+      if (inPlace) return false;
+      if (kitItems.length) {
+        const updates = {};
+        kitItems.forEach((item) => {
+          updates[item.key] = 0;
+        });
+        if (!(await post('/cart/update.js', { updates: updates })).ok) return false;
+      }
+      const added = await post('/cart/add.js', {
+        items: kit.map((line) => Object.assign({}, line, { parent_line_key: planItem.key })),
+      });
+      if (added.ok) {
+        await syncCartSubscriptionName(planItem.selling_plan_allocation.selling_plan.id).catch(() => {});
+        return true;
+      }
+      warn('the Welcome Kit could not be put under the plan line');
+      if (kitItems.length) {
+        await post('/cart/add.js', {
+          items: kitItems.map((item) => {
+            const line = { id: item.variant_id, quantity: item.quantity, properties: item.properties };
+            if (item.parent_relationship) line.parent_line_key = item.parent_relationship.parent_key;
+            return line;
+          }),
+        }).catch(() => {});
+      }
+      return false;
+    };
+    const result = purchaseQueue.then(run, run);
+    purchaseQueue = result.catch(() => {});
+    return result;
   }
 
   // Hidden or disabled by this script (marked), so it can be undone when a plan becomes public again
@@ -1161,8 +1231,9 @@
     plan: plan,
     units: units,
     quantityFor: quantityFor,
-    addOrder: addOrder,
+    nestKit: nestKit,
     kitLines: kitLines,
+    repairKit: repairKit,
     selectedPlanId: selectedPlanId,
     selectedVariantId: selectedVariantId,
     allowed: allowed,

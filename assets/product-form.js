@@ -23,7 +23,7 @@ if (!customElements.get('product-form')) {
 
         // A plan product (assets/kc-plan-select.js manages it) is added like the buybox CTA, by
         // assets/karmi-add-to-cart.js: its plan's Duos per delivery, one purchase choice, "Subscription Name"
-        // and its Welcome Kit in the same add, in cart order (the plan line on top)
+        // and its Welcome Kit in the same add, nested under the plan line
         const planProductId =
           this.form.dataset.loopProductId ||
           (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(this.variantIdInput.value) : '');
