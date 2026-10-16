@@ -23,6 +23,9 @@
  *   brushings and Return on Care of a plan, by ID: the pricing summary, the plan cards, the Welcome Kit
  *   and the sticky bar read plans here instead of by name. selectedPlanId() and allowed() serve the
  *   sticky bar and karmi-add-to-cart.js.
+ * - KCPlanSelect.addOrder(lines) / kitLines(productId): the cart and checkout order, the plan line on top of
+ *   Morning Toothbrush, Evening Toothbrush, Floss (KIT_ORDER): every add of a plan with its Welcome Kit
+ *   sends its lines through addOrder; kitLines gives the kit lines a plan product's subscription brings.
  * - KCPlanSelect.units(planId) / quantityFor(productId, planId, formQuantity): the Duos per delivery of a
  *   plan (snippets/kc-plan-type.liquid; year plans follow the theme setting "Year plans: Duos per
  *   delivery"), which is the cart quantity. Every add-to-cart path adds that quantity for a
@@ -54,6 +57,13 @@
   const MAX_FIXES = 5;
   // Toothbrush variants of the earlier Welcome Kit, still in some carts: kit lines too
   const LEGACY_KIT_VARIANT_IDS = ['42732468142262', '42732468076726'];
+  // Cart and checkout order (Victor, 16 Oct): the plan line on top, then Morning Toothbrush, Evening
+  // Toothbrush, Floss. Shopify puts each added line at the top of the cart, line by line also within one
+  // /cart/add.js call, and checkout shows the cart order. So every add sends its lines in reverse (see
+  // addOrder): kit lines first (floss, evening, morning), the plan line last. This is the one place of
+  // that rule: a kit line's place comes from its product handle (kitHandles, snippets/kc-plan-config.liquid),
+  // never from the order of the Welcome Kit theme setting. A kit line it cannot place goes under them.
+  const KIT_ORDER = ['morning', 'evening', 'floss'];
 
   // What a plan type means (snippets/kc-plan-type.liquid gives each selling plan ID its type). Plan
   // logic reads these by ID, never the plan name: billing interval, deliveries per billing (Loop's own
@@ -102,11 +112,24 @@
       const productId = String(config.productId);
       const product =
         products[productId] ||
-        (products[productId] = { id: productId, widgets: [], plans: {}, groups: {}, publicCount: 0, kitVariantIds: [] });
+        (products[productId] = {
+          id: productId,
+          widgets: [],
+          plans: {},
+          groups: {},
+          publicCount: 0,
+          kitVariantIds: [],
+          kitHandles: {},
+          welcomeKit: false,
+        });
       if (!product.shopCurrency && config.shopCurrency) product.shopCurrency = config.shopCurrency;
       (config.kitVariantIds || []).forEach((id) => {
         if (!product.kitVariantIds.includes(String(id))) product.kitVariantIds.push(String(id));
       });
+      Object.keys(config.kitHandles || {}).forEach((id) => {
+        product.kitHandles[String(id)] = String(config.kitHandles[id]);
+      });
+      if (config.welcomeKit === true) product.welcomeKit = true;
       if (!product.widgets.find((w) => w.sectionId === config.sectionId && w.role === config.role)) {
         product.widgets.push({
           role: config.role,
@@ -684,13 +707,53 @@
     );
   }
 
+  // A Welcome Kit line: the _welcome_kit property, a configured kit variant or the earlier kit's toothbrushes
+  function isKitLine(line) {
+    if (!line) return false;
+    if (line.properties && line.properties._welcome_kit === 'true') return true;
+    const id = String(line.id);
+    return (
+      LEGACY_KIT_VARIANT_IDS.includes(id) ||
+      Object.keys(products).some((productId) => products[productId].kitVariantIds.includes(id))
+    );
+  }
+
+  // A kit line's place in KIT_ORDER by its product handle; KIT_ORDER.length when it has none
+  function kitRank(line) {
+    const id = String(line.id);
+    const owner = Object.keys(products).find((productId) => products[productId].kitHandles[id]);
+    const handle = owner ? products[owner].kitHandles[id] : '';
+    const rank = KIT_ORDER.findIndex((word) => handle.includes(word));
+    return rank === -1 ? KIT_ORDER.length : rank;
+  }
+
+  // The lines of one /cart/add.js call ({ id: variant ID, … }) in the order to send them (KIT_ORDER): the
+  // kit lines from the bottom of the cart up, then the other lines (the plan line) as given, so the plan
+  // line ends on top. Every add of a plan with its kit goes through this.
+  function addOrder(lines) {
+    readConfigs();
+    const list = Array.isArray(lines) ? lines : [];
+    const kit = list.filter(isKitLine).sort((a, b) => kitRank(b) - kitRank(a));
+    return kit.concat(list.filter((line) => !isKitLine(line)));
+  }
+
+  // The Welcome Kit lines a subscription of a plan product brings in its own add (kc-plan-config: a Welcome
+  // Kit bundle product, for a customer who has not received the kit yet), in add order; [] otherwise
+  function kitLines(productId) {
+    readConfigs();
+    const product = products[String(productId)];
+    if (!product || !product.welcomeKit) return [];
+    return addOrder(
+      product.kitVariantIds.map((id) => ({ id: Number(id), quantity: 1, properties: { _welcome_kit: 'true' } }))
+    );
+  }
+
   // One purchase choice of a plan product in the cart (Victor, 15 Oct: the cart held a 60-day and a Year
   // membership after a switch). Before a new choice of the product is added, one update call removes
   // every line of the product (any plan or one time) and every Welcome Kit line, and sets
   // "Subscription Name" for the coming choice (cleared for one time). The caller then adds the choice as
   // one line (quantityFor: the plan's Duos per delivery, 1 for Try Once), with one kit set for a
-  // subscription. Kit lines: the _welcome_kit property, the configured kit
-  // variants, or the earlier kit's toothbrush variants. Resolves false for a product without a plan
+  // subscription, in cart order (addOrder). Kit lines: isKitLine. Resolves false for a product without a plan
   // config (nothing changed), else what it removed (recoverChoice puts it back after a failed add); rejects when the cart
   // could not be updated. Callers go through replaceChoice().
   async function clearPurchaseChoice(productId, sellingPlanId) {
@@ -699,12 +762,10 @@
     if (!product) return false;
     const headers = { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' };
     const cart = await fetch('/cart.js', { headers: headers }).then((response) => response.json());
-    const kitVariantIds = product.kitVariantIds.concat(LEGACY_KIT_VARIANT_IDS);
     const updates = {};
     const removed = [];
     (cart.items || []).forEach((item) => {
-      const isKit =
-        (item.properties && item.properties._welcome_kit === 'true') || kitVariantIds.includes(String(item.variant_id));
+      const isKit = isKitLine({ id: item.variant_id, properties: item.properties });
       if (String(item.product_id) !== product.id && !isKit) return;
       updates[item.key] = 0;
       const line = { id: item.variant_id, quantity: item.quantity };
@@ -745,7 +806,12 @@
       }
       let ok = true;
       if (removed.lines.length) {
-        const added = await fetch('/cart/add.js', { method: 'POST', headers: headers, body: JSON.stringify({ items: removed.lines }) });
+        // In cart order (addOrder): the earlier plan line back on top of its kit
+        const added = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ items: addOrder(removed.lines) }),
+        });
         ok = added.ok;
       }
       if (ok) {
@@ -1095,6 +1161,8 @@
     plan: plan,
     units: units,
     quantityFor: quantityFor,
+    addOrder: addOrder,
+    kitLines: kitLines,
     selectedPlanId: selectedPlanId,
     selectedVariantId: selectedVariantId,
     allowed: allowed,

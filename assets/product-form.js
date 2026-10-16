@@ -21,6 +21,26 @@ if (!customElements.get('product-form')) {
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
+        // A plan product (assets/kc-plan-select.js manages it) is added like the buybox CTA, by
+        // assets/karmi-add-to-cart.js: its plan's Duos per delivery, one purchase choice, "Subscription Name"
+        // and its Welcome Kit in the same add, in cart order (the plan line on top)
+        const planProductId =
+          this.form.dataset.loopProductId ||
+          (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(this.variantIdInput.value) : '');
+        if (
+          window.KCPlanSelect &&
+          typeof window.karmiAddToCart === 'function' &&
+          planProductId &&
+          window.KCPlanSelect.manages(planProductId)
+        ) {
+          const kit = window.KCPlanSelect.kitLines(planProductId);
+          window.karmiAddToCart(this.form, this.submitButton, {
+            isBundleProduct: kit.length > 0,
+            welcomeKitVariantIds: kit.map((line) => String(line.id)),
+          });
+          return;
+        }
+
         this.handleErrorMessage();
 
         this.submitButton.setAttribute('aria-disabled', true);
@@ -53,28 +73,10 @@ if (!customElements.get('product-form')) {
         config.body = formData;
 
         const variantId = formData.get('id');
-        const choiceProductId =
-          this.form.dataset.loopProductId || (window.KCPlanSelect ? window.KCPlanSelect.productIdOfVariant(variantId) : '');
-        const isPlan = sellingPlanVal && !isNaN(parseInt(sellingPlanVal));
-        // A plan product's subscription adds its plan's Duos per delivery (assets/kc-plan-select.js);
-        // one time and other products keep the form's quantity
-        let quantity = parseInt(formData.get('quantity')) || 1;
-        if (window.KCPlanSelect) {
-          quantity = window.KCPlanSelect.quantityFor(choiceProductId, isPlan ? sellingPlanVal : '', quantity);
-          formData.set('quantity', String(quantity));
-        }
+        const quantity = parseInt(formData.get('quantity')) || 1;
         const linesUpdateDeferred = this.createCartLinesUpdateEvent(variantId, quantity);
 
-        // One purchase choice per plan product (assets/kc-plan-select.js replaceChoice): the product's
-        // earlier lines and the Welcome Kit lines go first (welcome-kit.liquid adds one kit set back for a
-        // subscription), one replacement at a time, the earlier choice back if the add is rejected
-        const addToCart = () => fetch(`${routes.cart_add_url}`, config);
-        const added =
-          window.KCPlanSelect && choiceProductId && window.KCPlanSelect.manages(choiceProductId)
-            ? window.KCPlanSelect.replaceChoice(choiceProductId, isPlan ? sellingPlanVal : '', addToCart)
-            : addToCart();
-
-        added
+        fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
             if (response.status) {

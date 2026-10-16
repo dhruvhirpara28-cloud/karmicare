@@ -30,8 +30,10 @@
   endcapture
   assign kc_public = kc_public | strip
 
-  # The Welcome Kit variants (theme setting, as in snippets/buy-buttons.liquid): kit lines in the cart
+  # The Welcome Kit variants (theme setting, as in snippets/buy-buttons.liquid): kit lines in the cart.
+  # Their product handles give the cart order (assets/kc-plan-select.js KIT_ORDER), never this list.
   assign kc_kit_variant_ids = ''
+  assign kc_kit_handles = ''
   for kc_kit_item in settings.welcome_kit_free_product
     assign kc_kit_product = kc_kit_item
     if kc_kit_item.id == null
@@ -39,9 +41,32 @@
     endif
     if kc_kit_product != blank and kc_kit_product.variants.first != blank
       assign kc_kit_variant_ids = kc_kit_variant_ids | append: kc_kit_product.variants.first.id | append: ','
+      if kc_kit_handles != blank
+        assign kc_kit_handles = kc_kit_handles | append: ', '
+      endif
+      assign kc_kit_key = kc_kit_product.variants.first.id | append: '' | json
+      assign kc_kit_handle = kc_kit_product.handle | json
+      assign kc_kit_handles = kc_kit_handles | append: kc_kit_key | append: ': ' | append: kc_kit_handle
     endif
   endfor
   assign kc_kit_variant_ids = kc_kit_variant_ids | split: ','
+  assign kc_kit_handles = '{' | append: kc_kit_handles | append: '}'
+
+  # A subscription of this product brings the Welcome Kit (as snippets/buy-buttons.liquid decides): a
+  # Welcome Kit bundle product, for a customer who has not received the kit yet
+  assign kc_welcome_kit = false
+  for kc_bundle_item in settings.welcome_kit_bundle_products
+    assign kc_bundle_product = kc_bundle_item
+    if kc_bundle_item.id == null
+      assign kc_bundle_product = all_products[kc_bundle_item]
+    endif
+    if kc_bundle_product != blank and kc_bundle_product.id == product.id
+      assign kc_welcome_kit = true
+    endif
+  endfor
+  if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED'
+    assign kc_welcome_kit = false
+  endif
 
   assign kc_public_groups = ','
   for kc_group in product.selling_plan_groups
@@ -62,6 +87,8 @@
     "formId": {{ 'product-form-' | append: section.id | json }},
     "defaultToSubscription": {% if default_to_subscription %}true{% else %}false{% endif %},
     "kitVariantIds": {{ kc_kit_variant_ids | json }},
+    "kitHandles": {{ kc_kit_handles }},
+    "welcomeKit": {{ kc_welcome_kit }},
     "shopCurrency": {{ shop.currency | json }},
     "plans": [
       {%- assign kc_separator = '' -%}

@@ -3944,20 +3944,36 @@ async function loopWidgetCreateAddToCartPayload(
 async function shopifyAddToCartByLoopWidget(payload, productId) {
     const endpoint = `${window.Shopify.routes.root}cart/add.js`;
     try {
+        const kcSellingPlanId = payload?.items?.[0]?.selling_plan || "";
+        const kcManaged = Boolean(window.KCPlanSelect && window.KCPlanSelect.manages(productId));
+        // KC CUSTOM: a plan product's subscription brings its Welcome Kit in the same add, in cart order:
+        // the kit lines first, the plan lines last, so the plan stays on top (assets/kc-plan-select.js addOrder)
+        const kcKit = kcManaged && kcSellingPlanId ? window.KCPlanSelect.kitLines(productId) : [];
+        const kcPayload = kcKit.length
+            ? { ...payload, items: window.KCPlanSelect.addOrder(kcKit.concat(payload.items)) }
+            : payload;
         // KC CUSTOM: one purchase choice per plan product: earlier lines and kit lines go first, one
         // replacement at a time, the earlier choice back if the add is rejected (assets/kc-plan-select.js)
         const addToCart = () => fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(kcPayload),
         });
-        const response = window.KCPlanSelect && window.KCPlanSelect.manages(productId)
-            ? await window.KCPlanSelect.replaceChoice(productId, payload?.items?.[0]?.selling_plan || "", addToCart)
+        const response = kcManaged
+            ? await window.KCPlanSelect.replaceChoice(productId, kcSellingPlanId, addToCart)
             : await addToCart();
         const data = await response.json();
+        // KC CUSTOM: the kit added here is free with the "Welcome Kit" code (as snippets/welcome-kit.liquid)
+        if (kcKit.length && response.ok) {
+            await fetch("/cart/update.js", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "X-Karmi-Sync": "false" },
+                body: JSON.stringify({ discount: "Welcome Kit" }),
+            }).catch(() => {});
+        }
         // KC CUSTOM: the cart's "Subscription Name" follows the subscriptions now in it (assets/kc-plan-select.js)
         if (window.KCPlanSelect) {
-            await window.KCPlanSelect.syncCartSubscriptionName(payload?.items?.[0]?.selling_plan).catch(() => {});
+            await window.KCPlanSelect.syncCartSubscriptionName(kcSellingPlanId).catch(() => {});
         }
         await dispatchLoopWidgetEvent(
             productId,

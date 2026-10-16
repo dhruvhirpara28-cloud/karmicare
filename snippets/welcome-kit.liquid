@@ -121,7 +121,10 @@
               }
             }
             if (toAdd.length > 0) {
-              await addMultipleToCart(toAdd);
+              // Only for a cart that lost its kit lines: every add path of the theme brings the kit in its
+              // own add, under the plan line (assets/kc-plan-select.js addOrder). Added here, the kit lines
+              // land above the plan line, in KIT_ORDER among themselves.
+              await addMultipleToCart(window.KCPlanSelect ? window.KCPlanSelect.addOrder(toAdd) : toAdd);
               await applyDiscountCode();
               cartChanged = true;
             }
