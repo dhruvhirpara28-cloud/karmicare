@@ -95,33 +95,6 @@
               assign kc_unknown_plans = kc_unknown_plans | append: '<li><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html | append: '</li>'
             endif
 
-            # The year plan line next to the price, per variant ("6 duos · 3 now, 3 in month 6 · €59 per
-            # duo"), only while year plans are more than 1 Duo per delivery (snippets/kc-plan-year-duos.liquid)
-            assign kc_year_duos_json = '{}'
-            if kc_type == 'year' and kc_units > 1
-              assign kc_year_duos_json = ''
-              for kc_variant in product.variants
-                for kc_candidate in kc_variant.selling_plan_allocations
-                  if kc_candidate.selling_plan.id == kc_plan.id
-                    capture kc_year_line
-                      render 'kc-plan-year-duos', plan_id: kc_plan.id, price: kc_candidate.price
-                    endcapture
-                    assign kc_year_line = kc_year_line | strip
-                    if kc_year_line != blank
-                      if kc_year_duos_json != blank
-                        assign kc_year_duos_json = kc_year_duos_json | append: ', '
-                      endif
-                      assign kc_year_key = kc_variant.id | append: '' | json
-                      assign kc_year_value = kc_year_line | json
-                      assign kc_year_duos_json = kc_year_duos_json | append: kc_year_key | append: ': ' | append: kc_year_value
-                    endif
-                    break
-                  endif
-                endfor
-              endfor
-              assign kc_year_duos_json = '{' | append: kc_year_duos_json | append: '}'
-            endif
-
             # Theme editor: what the checkout charges (Shopify's price per quantity x quantity; year plans:
             # Shopify's year price per quantity x quantity) for each public plan and each year plan (legacy
             # year plans are not sold here but renew through Loop at their price)
@@ -210,7 +183,7 @@
               assign kc_missing_duos = kc_missing_duos | append: '<li><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html | append: '</li>'
             endif
           -%}
-          {{ kc_separator }}{"id": {{ kc_plan.id | append: '' | json }}, "groupId": {{ kc_group.id | json }}, "groupName": {{ kc_group.name | json }}, "public": {% if kc_public contains kc_needle %}true{% else %}false{% endif %}, "type": {{ kc_type | json }}, "loyaltyKey": {{ kc_loyalty_key | json }}, "duos": {{ kc_duos_json }}, "units": {{ kc_units }}, "careCreditPercent": {{ kc_credit_percent }}, "expectedTotal": {% if kc_expected_total != blank %}{{ kc_expected_total | plus: 0 }}{% else %}null{% endif %}, "yearDuos": {{ kc_year_duos_json }}}
+          {{ kc_separator }}{"id": {{ kc_plan.id | append: '' | json }}, "groupId": {{ kc_group.id | json }}, "groupName": {{ kc_group.name | json }}, "public": {% if kc_public contains kc_needle %}true{% else %}false{% endif %}, "type": {{ kc_type | json }}, "loyaltyKey": {{ kc_loyalty_key | json }}, "duos": {{ kc_duos_json }}, "units": {{ kc_units }}, "careCreditPercent": {{ kc_credit_percent }}, "expectedTotal": {% if kc_expected_total != blank %}{{ kc_expected_total | plus: 0 }}{% else %}null{% endif %}}
           {%- assign kc_separator = ',' -%}
         {%- endfor -%}
       {%- endfor -%}

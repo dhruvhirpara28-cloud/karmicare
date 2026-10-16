@@ -2461,18 +2461,11 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 textContainer.appendChild(subRow);
             }
             let formattedOptionText = optionText.replace(/ships/i, 'Renews');
-            let perBrushingLine = `${perBrushingFormatted} / brushing`;
+            const perBrushingLine = `${perBrushingFormatted} / brushing`;
             if (isAnnual) {
-                // Figma: "Renews every year" / "€0.49 / brushing · 6 duos in two deliveries".
-                // The duo count comes from the custom.duos_count metaobject (data-duos),
-                // the delivery count from the plan by ID (Loop's prepaid data, else the plan type).
+                // Figma: "Renews every year" / "€0.49 / brushing" (Victor 16 Oct: without the
+                // Figma "· 6 duos in two deliveries")
                 formattedOptionText = 'Renews every year';
-                const deliveries = kcPlan?.deliveries;
-                if (deliveries) {
-                    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-                    const deliveriesText = words[deliveries] || String(deliveries);
-                    perBrushingLine += ` · ${duosCount} duos in ${deliveriesText} deliveries`;
-                }
             }
             subRow.innerHTML = formattedOptionText
                 ? `<div>${formattedOptionText}</div> <div>${perBrushingLine}</div>`
@@ -2489,25 +2482,6 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 priceContainer.appendChild(labelEl);
             }
             labelEl.textContent = rightLabel;
-
-            // KC: a full-width row right under the price of the selected year plan, while year plans are
-            // more than 1 Duo per delivery: "6 duos · 3 now, 3 in month 6 · €59 per duo"
-            // (assets/kc-plan-select.js yearDuos)
-            const loopPropsProduct = window.loopProps?.[productId];
-            const isSelectedGroup = String(loopPropsProduct?.sellingPlanGroupId || '') === String(radio.dataset.id);
-            const yearDuosText = isSelectedGroup && window.KCPlanSelect
-                ? window.KCPlanSelect.yearDuos(loopPropsProduct.sellingPlanId, variant.id)
-                : '';
-            let yearDuosEl = groupEl.querySelector(':scope > .kc-plan-year-duos');
-            if (yearDuosText && !yearDuosEl) {
-                yearDuosEl = document.createElement('div');
-                yearDuosEl.className = 'kc-plan-year-duos';
-                priceContainer.insertAdjacentElement('afterend', yearDuosEl);
-            }
-            if (yearDuosEl) {
-                if (yearDuosEl.textContent !== yearDuosText) yearDuosEl.textContent = yearDuosText;
-                yearDuosEl.hidden = !yearDuosText;
-            }
         }
     });
 }
@@ -2703,24 +2677,6 @@ function updateKcPricingSummary(productId, variant) {
     if (priceEl) priceEl.textContent = totalFormatted;
     if (perBrushingEl) perBrushingEl.textContent = perBrushingLabel;
     if (intervalEl) intervalEl.textContent = intervalLabel;
-
-    // KC: under "Total today" for a year plan, while year plans are more than 1 Duo per delivery:
-    // "6 duos · 3 now, 3 in month 6 · €59 per duo" (assets/kc-plan-select.js yearDuos)
-    const yearDuosText = !isOneTime && window.KCPlanSelect
-        ? window.KCPlanSelect.yearDuos(window.loopProps[productId]?.sellingPlanId, variant.id)
-        : '';
-    let yearDuosEl = summaryEl.querySelector('.kc-pricing-summary__year-duos');
-    if (yearDuosText && !yearDuosEl) {
-        yearDuosEl = document.createElement('div');
-        yearDuosEl.className = 'kc-pricing-summary__year-duos';
-        const subRow = summaryEl.querySelector('.kc-pricing-summary__sub-row');
-        if (subRow) subRow.insertAdjacentElement('beforebegin', yearDuosEl);
-        else summaryEl.appendChild(yearDuosEl);
-    }
-    if (yearDuosEl) {
-        if (yearDuosEl.textContent !== yearDuosText) yearDuosEl.textContent = yearDuosText;
-        yearDuosEl.hidden = !yearDuosText;
-    }
 
     // --- Update Rewards Block ---
     let rewardsBlock = summaryEl.querySelector('.kc-pricing-summary__rewards');

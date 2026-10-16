@@ -28,8 +28,7 @@
  *   delivery"), which is the cart quantity. Every add-to-cart path adds that quantity for a
  *   subscription, and every price shown for a plan is Shopify's price per quantity x quantity, which is
  *   what the checkout charges. For a year plan that is Shopify's year price per quantity x quantity
- *   (€118 x 3 = €354): a year price, never a per-Duo price. yearDuos(planId, variantId): the year plan
- *   line shown next to the price while that setting is 3.
+ *   (€118 x 3 = €354): a year price, never a per-Duo price.
  * - Allowlist: the groups without a public plan stay hidden and unselectable in every Loop widget and
  *   the sticky bar; a non-public plan selected in the buybox is replaced by the first public one.
  * - Compare plan buttons (sections/product-compare-plans.liquid) carry data-kc-plan-choose: "plan"
@@ -131,7 +130,6 @@
           units: entry.units,
           careCreditPercent: Number(entry.careCreditPercent) || 0,
           expectedTotal: typeof entry.expectedTotal === 'number' ? entry.expectedTotal : null,
-          yearDuos: entry.yearDuos || {},
         };
         const group = product.groups[entry.groupId] || (product.groups[entry.groupId] = { public: false });
         if (isPublic) {
@@ -538,16 +536,6 @@
     const id = String(planId == null ? '' : planId).trim();
     if (!products[String(productId)] || !id) return fallback;
     return units(id);
-  }
-
-  // The line a year plan shows next to its price for a variant ("6 duos · 3 now, 3 in month 6 · €59 per
-  // duo", snippets/kc-plan-year-duos.liquid), or '' (not a year plan, or year plans are 1 Duo per delivery)
-  function yearDuos(planId, variantId) {
-    readConfigs();
-    const id = String(planId == null ? '' : planId).trim();
-    const product = /^\d+$/.test(id) ? productOfPlan(id) : null;
-    if (!product) return '';
-    return product.plans[id].yearDuos[String(variantId)] || '';
   }
 
   const checkedTotals = {};
@@ -1107,7 +1095,6 @@
     plan: plan,
     units: units,
     quantityFor: quantityFor,
-    yearDuos: yearDuos,
     selectedPlanId: selectedPlanId,
     selectedVariantId: selectedVariantId,
     allowed: allowed,
