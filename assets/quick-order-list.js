@@ -346,6 +346,9 @@ if (!customElements.get('quick-order-list')) {
               source: this.id,
               cartData: parsedState,
             });
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting, on to /cart,
+            // which sends a cart with lines to checkout and an empty one to the product page
+            if (this.queue.length === 0 && !this.hasPendingQuantityUpdate) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);

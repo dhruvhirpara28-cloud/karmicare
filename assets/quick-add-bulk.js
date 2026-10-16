@@ -132,9 +132,10 @@ if (!customElements.get('quick-add-bulk')) {
             linesUpdate?.resolve(parsedState);
             this.renderSections(parsedState, ids);
             publish(PUB_SUB_EVENTS.cartUpdate, { source: 'quick-add', cartData: parsedState });
-            // No theme cart (Victor, 16 Oct; layout/theme.liquid): on to /cart, which sends a cart with lines
-            // to checkout and an empty one to the product page (sections/kc-cart-redirect.liquid)
-            window.location.href = routes.cart_url;
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting, on to /cart,
+            // which sends a cart with lines to checkout and an empty one to the product page
+            // (sections/kc-cart-redirect.liquid)
+            if (this.queue.length === 0) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);
