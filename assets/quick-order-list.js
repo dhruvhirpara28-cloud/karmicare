@@ -5,10 +5,10 @@ if (!customElements.get('quick-order-list')) {
       cartUpdateUnsubscriber = undefined;
       hasPendingQuantityUpdate = false;
       // Quantities changed but not yet queued (in their debounce, or invalid): the input's data-index, which a
-      // re-rendered row keeps, to the number of its latest edit. A debounced run clears the key only for that
-      // latest edit, so the run of an older, replaced row never clears a newer edit. While one is left, no
-      // answer goes on to checkout and no render replaces the table, so checkout never misses the shopper's
-      // latest quantities
+      // re-rendered row keeps, to the number of its latest edit. Only the debounced run of that latest edit
+      // validates, queues and clears the key, so the run of an older, replaced row never resets, sends or
+      // clears a newer edit. While one is left, no answer goes on to checkout and no render replaces the
+      // table, so checkout never misses the shopper's latest quantities
       unsentQuantities = new Map();
       editCount = 0;
       constructor() {
@@ -89,12 +89,13 @@ if (!customElements.get('quick-order-list')) {
         this.querySelectorAll('quantity-input').forEach((qty) => {
           const debouncedOnChange = debounce(
             (event) => {
-              const queued = this.queue.length;
               const index = event.target.dataset.index;
+              // A newer edit of this row (on a re-rendered input) supersedes this one: it neither validates
+              // nor queues, so it cannot reset or replace the newer quantity
+              if (this.unsentQuantities.get(index) !== event.kcEdit) return;
+              const queued = this.queue.length;
               this.onChange(event);
-              if (this.queue.length > queued && this.unsentQuantities.get(index) === event.kcEdit) {
-                this.unsentQuantities.delete(index);
-              }
+              if (this.queue.length > queued) this.unsentQuantities.delete(index);
             },
             BulkAdd.ASYNC_REQUEST_DELAY,
             true
