@@ -4,6 +4,13 @@ if (!customElements.get('quick-order-list')) {
     class QuickOrderList extends BulkAdd {
       cartUpdateUnsubscriber = undefined;
       hasPendingQuantityUpdate = false;
+      // Quantities changed but not yet queued (in their debounce, or invalid): the input's data-index, which a
+      // re-rendered row keeps, to the number of its latest edit. Only the debounced run of that latest edit
+      // validates, queues and clears the key, so the run of an older, replaced row never resets, sends or
+      // clears a newer edit. While one is left, no answer goes on to checkout and no render replaces the
+      // table, so checkout never misses the shopper's latest quantities
+      unsentQuantities = new Map();
+      editCount = 0;
       constructor() {
         super();
         this.isListInsideModal = this.closest('bulk-modal');
@@ -29,8 +36,9 @@ if (!customElements.get('quick-order-list')) {
 
       connectedCallback() {
         this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, async (event) => {
-          // skip if cart event was triggered by this section
-          if (event.source === this.id) return;
+          // skip if cart event was triggered by this section, or while a changed quantity is not yet queued
+          // (the refresh would replace its input; this list's own next answer renders the cart)
+          if (event.source === this.id || this.unsentQuantities.size > 0) return;
 
           this.toggleTableLoading(true);
           await this.refresh();
@@ -79,9 +87,23 @@ if (!customElements.get('quick-order-list')) {
         this.allInputsArray = Array.from(this.querySelectorAll('input[type="number"]'));
 
         this.querySelectorAll('quantity-input').forEach((qty) => {
-          const debouncedOnChange = debounce(this.onChange.bind(this), BulkAdd.ASYNC_REQUEST_DELAY, true);
+          const debouncedOnChange = debounce(
+            (event) => {
+              const index = event.target.dataset.index;
+              // A newer edit of this row (on a re-rendered input) supersedes this one: it neither validates
+              // nor queues, so it cannot reset or replace the newer quantity
+              if (this.unsentQuantities.get(index) !== event.kcEdit) return;
+              const queued = this.queue.length;
+              this.onChange(event);
+              if (this.queue.length > queued) this.unsentQuantities.delete(index);
+            },
+            BulkAdd.ASYNC_REQUEST_DELAY,
+            true
+          );
           qty.addEventListener('change', (event) => {
             this.hasPendingQuantityUpdate = true;
+            event.kcEdit = ++this.editCount;
+            this.unsentQuantities.set(event.target.dataset.index, event.kcEdit);
             debouncedOnChange(event);
           });
         });
@@ -158,19 +180,9 @@ if (!customElements.get('quick-order-list')) {
             selector: `#${this.id}`,
           },
           {
-            id: 'cart-icon-bubble',
-            section: 'cart-icon-bubble',
-            selector: '#shopify-section-cart-icon-bubble',
-          },
-          {
             id: `quick-order-list-live-region-text-${this.dataset.productId}`,
             section: 'cart-live-region-text',
             selector: '.shopify-section',
-          },
-          {
-            id: 'CartDrawer',
-            selector: '.drawer__inner',
-            section: 'cart-drawer',
           },
         ];
       }
@@ -202,7 +214,7 @@ if (!customElements.get('quick-order-list')) {
       }
 
       renderSections(parsedState) {
-        const { items, sections } = parsedState;
+        const { sections } = parsedState;
 
         this.getSectionsToRender().forEach(({ id, selector, section }) => {
           const sectionElement = document.getElementById(id);
@@ -211,7 +223,7 @@ if (!customElements.get('quick-order-list')) {
           const newSection = new DOMParser().parseFromString(sections[section], 'text/html').querySelector(selector);
 
           if (section === this.dataset.section) {
-            if (this.queue.length > 0 || this.hasPendingQuantityUpdate) return;
+            if (this.queue.length > 0 || this.hasPendingQuantityUpdate || this.unsentQuantities.size > 0) return;
 
             const focusedElement = document.activeElement;
             let focusTarget = focusedElement?.dataset?.target;
@@ -241,9 +253,6 @@ if (!customElements.get('quick-order-list')) {
 
               this.initVariantEventListeners();
             }
-          } else if (section === 'cart-drawer') {
-            sectionElement.closest('cart-drawer')?.classList.toggle('is-empty', items.length === 0);
-            sectionElement.querySelector(selector).innerHTML = newSection.innerHTML;
           } else {
             sectionElement.innerHTML = newSection.innerHTML;
           }
@@ -359,6 +368,10 @@ if (!customElements.get('quick-order-list')) {
               source: this.id,
               cartData: parsedState,
             });
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting (queued, in its
+            // debounce or invalid), on to /cart, which sends a cart with lines to checkout and an empty one to
+            // the product page
+            if (this.queue.length === 0 && this.unsentQuantities.size === 0) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);

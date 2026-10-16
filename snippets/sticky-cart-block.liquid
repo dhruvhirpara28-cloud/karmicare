@@ -89,16 +89,6 @@
       assign welcome_kit_variant_id = prod.variants.first.id
     endif
   endfor
-
-  assign redirect_to_checkout = false
-  for b in section.blocks
-    if b.type == 'buy_buttons'
-      if b.settings.redirect_to_checkout
-        assign redirect_to_checkout = true
-      endif
-      break
-    endif
-  endfor
 -%}
 
 <div
@@ -107,7 +97,6 @@
   data-product-id="{{ product.id }}"
   data-variant-id="{{ current_variant.id }}"
   data-default-to-subscription="{{ block.settings.default_to_subscription}}"
-  data-redirect-to-checkout="{{ redirect_to_checkout }}"
 >
   <div class="sticky-cta-inner">
     {%- if block.settings.show_image and product.featured_image -%}
@@ -587,13 +576,11 @@
       syncFromLoop();
 
       if (typeof window.karmiAddToCart === 'function') {
-        var shouldRedirect = SC_BAR.dataset.redirectToCheckout === 'true';
         var isBundleProduct = {{ is_bundle_product | default: false }};
         var welcomeKitVariantIdsStr = {{ welcome_kit_variant_ids | json }};
         var welcomeKitVariantIds = welcomeKitVariantIdsStr ? welcomeKitVariantIdsStr.split(',').filter(Boolean) : [];
 
         await window.karmiAddToCart(form, btn, {
-          redirectToCheckout: shouldRedirect,
           isBundleProduct: isBundleProduct,
           customerAlreadyReceivedFreeProduct: {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %},
           welcomeKitVariantIds: welcomeKitVariantIds

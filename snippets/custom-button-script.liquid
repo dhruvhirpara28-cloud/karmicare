@@ -15,7 +15,6 @@
         const welcomeKitVariantIds = welcomeKitVariantIdsStr ? welcomeKitVariantIdsStr.split(',').filter(Boolean) : [];
         
         await window.karmiAddToCart(form, buttonElement, {
-          redirectToCheckout: {{ block.settings.redirect_to_checkout | default: false }},
           isBundleProduct: {{ is_bundle_product | default: false }},
           customerAlreadyReceivedFreeProduct: {% if customer and customer.tags contains 'FREE WELCOME KIT RECEIVED' %}true{% else %}false{% endif %},
           welcomeKitVariantIds: welcomeKitVariantIds,

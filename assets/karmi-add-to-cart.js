@@ -76,24 +76,20 @@
       // Once never leaves two memberships or two kit sets in the cart
       const replacesChoice = Boolean(window.KCPlanSelect && productId && window.KCPlanSelect.manages(productId));
 
-      // Free Welcome Kit product is ONLY added for subscriptions
+      // Free Welcome Kit product is ONLY added for subscriptions: exactly one set (replaceChoice clears the
+      // earlier kit lines first)
       if (isSubscription && options && options.isBundleProduct && !options.customerAlreadyReceivedFreeProduct && options.welcomeKitVariantIds && options.welcomeKitVariantIds.length > 0) {
-        // After the clear above the cart holds no kit line: add exactly one set
-        const existingDrawerVariants = replacesChoice ? [] : Array.from(document.querySelectorAll('cart-drawer [data-variant-id], cart-items [data-variant-id]')).map(el => parseInt(el.dataset.variantId)).filter(Boolean);
-
         for (const vid of options.welcomeKitVariantIds) {
-          const pVid = parseInt(vid);
-          if (!existingDrawerVariants.includes(pVid)) {
-            items.push({
-              id: pVid,
-              quantity: 1,
-              properties: { '_welcome_kit': 'true' }
-            });
-          }
+          items.push({
+            id: parseInt(vid),
+            quantity: 1,
+            properties: { '_welcome_kit': 'true' }
+          });
         }
       }
 
-      const addPayload = { items: items };
+      // Cart and checkout order: the plan line on top, its kit nested under it (assets/kc-plan-select.js nestKit)
+      const addPayload = { items: window.KCPlanSelect ? window.KCPlanSelect.nestKit(items) : items };
 
       if (isSubscription) {
         // Loop Loyalty awards Care Credit by this exact value ("60-Day Supply", "Year Supply"): from the
@@ -109,8 +105,10 @@
         headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
         body: JSON.stringify(addPayload),
       });
-      const redirect = Boolean(options && options.redirectToCheckout);
-      const checkoutUrl = (isSubscription && items.length > 1) ? '/checkout?discount=Welcome%20Kit' : '/checkout';
+      // Every add goes to checkout: there is no theme cart (Victor, 16 Oct; layout/theme.liquid). In the
+      // shopper's language: Shopify.routes.root is "/" or "/fr/"
+      const checkoutBase = ((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'checkout';
+      const checkoutUrl = (isSubscription && items.length > 1) ? checkoutBase + '?discount=Welcome%20Kit' : checkoutBase;
 
       // The cart's "Subscription Name" follows the subscriptions now in it: a one-time order never keeps
       // an earlier subscription's value (assets/kc-plan-select.js)
@@ -127,7 +125,7 @@
       const addRes = replacesChoice
         ? await window.KCPlanSelect.replaceChoice(productId, isSubscription ? sellingPlanId : '', addToCart, async () => {
             await syncSubscriptionName();
-            return redirect ? checkoutUrl : null;
+            return checkoutUrl;
           })
         : await addToCart();
       if (!addRes.ok) {
@@ -138,54 +136,19 @@
         throw error;
       }
       if (addRes.kcNavigating) return;
-      if (!replacesChoice) await syncSubscriptionName();
-
-      if (redirect) {
-        if (!replacesChoice) {
-          window.location.href = checkoutUrl;
-          return;
-        }
-        // A later choice came in meanwhile: that one goes to checkout, this one stops here
-        if (buttonElement) {
-          buttonElement.disabled = false;
-          buttonElement.removeAttribute('disabled');
-          buttonElement.removeAttribute('aria-disabled');
-          buttonElement.classList.remove('loading');
-          const customSpinner = buttonElement.querySelector('.loading__spinner');
-          if (customSpinner) customSpinner.classList.add('hidden');
-        }
-      } else {
-        if (items.length > 1) {
-          try {
-            await fetch('/cart/update.js', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-              body: JSON.stringify({ discount: 'Welcome Kit' })
-            });
-          } catch (e) { console.error('Cart discount update failed', e); }
-        }
-
-        if (buttonElement) {
-          buttonElement.disabled = false;
-          buttonElement.removeAttribute('disabled');
-          buttonElement.removeAttribute('aria-disabled');
-          buttonElement.classList.remove('loading');
-          const customSpinner = buttonElement.querySelector('.loading__spinner');
-          if (customSpinner) customSpinner.classList.add('hidden');
-        }
-
-        if (typeof window.refreshDawnCartUI === 'function') {
-          await window.refreshDawnCartUI();
-          const cartIcon = document.getElementById('cart-icon-bubble');
-          if (cartIcon) {
-            cartIcon.click();
-          } else {
-            const cartDrawer = document.querySelector('cart-drawer');
-            if (cartDrawer && typeof cartDrawer.open === 'function') cartDrawer.open();
-          }
-        } else {
-          window.location.reload();
-        }
+      if (!replacesChoice) {
+        await syncSubscriptionName();
+        window.location.href = checkoutUrl;
+        return;
+      }
+      // A later choice came in meanwhile: that one goes to checkout, this one stops here
+      if (buttonElement) {
+        buttonElement.disabled = false;
+        buttonElement.removeAttribute('disabled');
+        buttonElement.removeAttribute('aria-disabled');
+        buttonElement.classList.remove('loading');
+        const customSpinner = buttonElement.querySelector('.loading__spinner');
+        if (customSpinner) customSpinner.classList.add('hidden');
       }
     } catch (err) {
       // Skipped because the page is already going to checkout (assets/kc-plan-select.js): nothing to tell

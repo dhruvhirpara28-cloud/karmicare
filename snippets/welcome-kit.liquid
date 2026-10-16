@@ -25,7 +25,6 @@
           -%}
           {% if prod != blank and prod.variants.first != blank %}
             {
-              variantId: {{ prod.variants.first.id }},
               productId: {{ prod.id }}
             }{% unless forloop.last %},{% endunless %}
           {% endif %}
@@ -44,12 +43,21 @@
         return res.json();
       }
 
-      async function addMultipleToCart(itemsArray) {
-        await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-          body: JSON.stringify({ items: itemsArray }),
-        });
+      // A subscription without exactly its kit nested under it (missing, loose, out of order, under another
+      // line or more than one of a kit line: a cart from outside the theme or from before the kit was nested;
+      // every add path of the theme brings the kit in its own add). On a page that sells the plan product,
+      // assets/kc-plan-select.js repairKit puts the whole kit under the plan line in cart order and leaves
+      // the plan line as it is; it reads the full cart and changes nothing when the kit is in place.
+      // Elsewhere the cart stays as it is.
+      async function repairKit() {
+        if (!window.KCPlanSelect) return false;
+        try {
+          if (!(await window.KCPlanSelect.repairKit())) return false;
+          await applyDiscountCode();
+          return true;
+        } catch (e) {
+          return false;
+        }
       }
 
       async function applyDiscountCode() {
@@ -109,22 +117,8 @@
               cartChanged = true;
             }
           } else {
-            const toAdd = [];
-            for (const freeProd of FREE_PRODUCTS) {
-              const freeLineItem = items.find((item) => item.product_id === freeProd.productId);
-              if (!freeLineItem) {
-                toAdd.push({
-                  id: freeProd.variantId,
-                  quantity: 1,
-                  properties: { '_welcome_kit': 'true' }
-                });
-              }
-            }
-            if (toAdd.length > 0) {
-              await addMultipleToCart(toAdd);
-              await applyDiscountCode();
-              cartChanged = true;
-            }
+            // repairKit checks the full cart: the plan line, each kit line once, its quantity, order, parent
+            cartChanged = await repairKit();
           }
 
           if (cartChanged) {

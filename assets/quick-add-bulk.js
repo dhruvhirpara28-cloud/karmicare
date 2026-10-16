@@ -6,15 +6,30 @@ if (!customElements.get('quick-add-bulk')) {
         super();
         this.quantity = this.querySelector('quantity-input');
 
+        // Quantities changed but not yet queued (in their debounce, or invalid): the input's data-index, which
+        // a re-rendered input keeps, to the number of its latest edit. Only the debounced run of that latest
+        // edit validates, queues and clears the key, so the run of an older, replaced input never resets,
+        // sends or clears a newer edit. While one is left, no answer goes on to checkout and no render replaces
+        // the input, so checkout never misses the shopper's latest quantity (as quick-order-list.js)
+        this.unsentQuantities = new Map();
+        this.editCount = 0;
         const debouncedOnChange = debounce((event) => {
+          const index = event.target.dataset.index;
+          if (this.unsentQuantities.get(index) !== event.kcEdit) return;
+          const queued = this.queue.length;
           if (parseInt(event.target.value) === 0) {
-            this.startQueue(event.target.dataset.index, parseInt(event.target.value));
+            this.startQueue(index, parseInt(event.target.value));
           } else {
             this.validateQuantity(event);
           }
+          if (this.queue.length > queued) this.unsentQuantities.delete(index);
         }, ON_CHANGE_DEBOUNCE_TIMER);
 
-        this.addEventListener('change', debouncedOnChange.bind(this));
+        this.addEventListener('change', (event) => {
+          event.kcEdit = ++this.editCount;
+          this.unsentQuantities.set(event.target.dataset.index, event.kcEdit);
+          debouncedOnChange(event);
+        });
         this.listenForActiveInput();
         this.listenForKeydown();
         this.lastActiveInputId = null;
@@ -29,6 +44,8 @@ if (!customElements.get('quick-add-bulk')) {
           ) {
             return;
           }
+          // A changed quantity not yet queued keeps its input; this card's own next answer renders the cart
+          if (this.unsentQuantities.size > 0) return;
           // If its another section that made the update
           this.onCartUpdate().then(() => {
             this.listenForActiveInput();
@@ -132,6 +149,10 @@ if (!customElements.get('quick-add-bulk')) {
             linesUpdate?.resolve(parsedState);
             this.renderSections(parsedState, ids);
             publish(PUB_SUB_EVENTS.cartUpdate, { source: 'quick-add', cartData: parsedState });
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting (queued, in its
+            // debounce or invalid), on to /cart, which sends a cart with lines to checkout and an empty one to
+            // the product page (sections/kc-cart-redirect.liquid)
+            if (this.queue.length === 0 && this.unsentQuantities.size === 0) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);
@@ -161,27 +182,16 @@ if (!customElements.get('quick-add-bulk')) {
             section: this.sectionId,
             selector: `#quick-add-bulk-${this.dataset.index}-${this.sectionId}`,
           },
-          {
-            id: 'cart-icon-bubble',
-            section: 'cart-icon-bubble',
-            selector: '.shopify-section',
-          },
-          {
-            id: 'CartDrawer',
-            selector: '.drawer__inner',
-            section: 'cart-drawer',
-          },
         ];
       }
 
       renderSections(parsedState, ids) {
         const intersection = this.queue.filter((element) => ids.includes(element.id));
         if (intersection.length !== 0) return;
+        // A changed quantity not yet queued keeps its input (a render would show the cart's quantity instead)
+        if (this.unsentQuantities.size > 0) return;
         this.getSectionsToRender().forEach((section) => {
           const sectionElement = document.getElementById(section.id);
-          if (section.section === 'cart-drawer') {
-            sectionElement.closest('cart-drawer')?.classList.toggle('is-empty', parsedState.items.length.length === 0);
-          }
           const elementToReplace =
             sectionElement && sectionElement.querySelector(section.selector)
               ? sectionElement.querySelector(section.selector)

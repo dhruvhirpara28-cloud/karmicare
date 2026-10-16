@@ -1,0 +1,17 @@
+{%- comment -%}
+  A page that only sends the visitor on (templates/cart.json): no header, no theme CSS or JS, so nothing
+  paints before its section's redirect runs.
+{%- endcomment -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>{{ shop.name }}</title>
+    {{ content_for_header }}
+  </head>
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>
