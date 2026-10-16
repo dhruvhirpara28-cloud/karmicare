@@ -4,10 +4,13 @@ if (!customElements.get('quick-order-list')) {
     class QuickOrderList extends BulkAdd {
       cartUpdateUnsubscriber = undefined;
       hasPendingQuantityUpdate = false;
-      // Quantities changed but not yet queued (in their debounce, or invalid), by the input's data-index,
-      // which a re-rendered row keeps: while one is left, no answer goes on to checkout and no render
-      // replaces the table, so checkout never misses the shopper's latest quantities
-      unsentQuantities = new Set();
+      // Quantities changed but not yet queued (in their debounce, or invalid): the input's data-index, which a
+      // re-rendered row keeps, to the number of its latest edit. A debounced run clears the key only for that
+      // latest edit, so the run of an older, replaced row never clears a newer edit. While one is left, no
+      // answer goes on to checkout and no render replaces the table, so checkout never misses the shopper's
+      // latest quantities
+      unsentQuantities = new Map();
+      editCount = 0;
       constructor() {
         super();
         this.isListInsideModal = this.closest('bulk-modal');
@@ -87,15 +90,19 @@ if (!customElements.get('quick-order-list')) {
           const debouncedOnChange = debounce(
             (event) => {
               const queued = this.queue.length;
+              const index = event.target.dataset.index;
               this.onChange(event);
-              if (this.queue.length > queued) this.unsentQuantities.delete(event.target.dataset.index);
+              if (this.queue.length > queued && this.unsentQuantities.get(index) === event.kcEdit) {
+                this.unsentQuantities.delete(index);
+              }
             },
             BulkAdd.ASYNC_REQUEST_DELAY,
             true
           );
           qty.addEventListener('change', (event) => {
             this.hasPendingQuantityUpdate = true;
-            this.unsentQuantities.add(event.target.dataset.index);
+            event.kcEdit = ++this.editCount;
+            this.unsentQuantities.set(event.target.dataset.index, event.kcEdit);
             debouncedOnChange(event);
           });
         });

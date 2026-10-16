@@ -6,22 +6,29 @@ if (!customElements.get('quick-add-bulk')) {
         super();
         this.quantity = this.querySelector('quantity-input');
 
-        // Quantities changed but not yet queued (in their debounce, or invalid), by the input's data-index,
-        // which a re-rendered input keeps: while one is left, no answer goes on to checkout and no render
-        // replaces the input, so checkout never misses the shopper's latest quantity (as quick-order-list.js)
-        this.unsentQuantities = new Set();
+        // Quantities changed but not yet queued (in their debounce, or invalid): the input's data-index, which
+        // a re-rendered input keeps, to the number of its latest edit. A debounced run clears the key only for
+        // that latest edit, so the run of an older, replaced input never clears a newer edit. While one is
+        // left, no answer goes on to checkout and no render replaces the input, so checkout never misses the
+        // shopper's latest quantity (as quick-order-list.js)
+        this.unsentQuantities = new Map();
+        this.editCount = 0;
         const debouncedOnChange = debounce((event) => {
           const queued = this.queue.length;
+          const index = event.target.dataset.index;
           if (parseInt(event.target.value) === 0) {
-            this.startQueue(event.target.dataset.index, parseInt(event.target.value));
+            this.startQueue(index, parseInt(event.target.value));
           } else {
             this.validateQuantity(event);
           }
-          if (this.queue.length > queued) this.unsentQuantities.delete(event.target.dataset.index);
+          if (this.queue.length > queued && this.unsentQuantities.get(index) === event.kcEdit) {
+            this.unsentQuantities.delete(index);
+          }
         }, ON_CHANGE_DEBOUNCE_TIMER);
 
         this.addEventListener('change', (event) => {
-          this.unsentQuantities.add(event.target.dataset.index);
+          event.kcEdit = ++this.editCount;
+          this.unsentQuantities.set(event.target.dataset.index, event.kcEdit);
           debouncedOnChange(event);
         });
         this.listenForActiveInput();
