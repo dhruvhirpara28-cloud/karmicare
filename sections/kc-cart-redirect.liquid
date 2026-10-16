@@ -3,14 +3,20 @@
   checkout. Shopify's URL redirects cannot redirect /cart, so this template does: a cart with lines goes
   to checkout (with the "Welcome Kit" code when it holds kit lines, as assets/karmi-add-to-cart.js), an
   empty cart to the main product page. The checkout's bag icon links here. layout/kc-redirect.liquid
-  holds nothing else, so nothing paints first. Without JS: a plain link.
+  holds nothing else, so nothing paints first. Without JS: a plain link. Checkout keeps the shopper's
+  language: /fr/cart goes to /fr/checkout (routes.root_url, "/" or "/fr").
 {%- endcomment -%}
 {%- liquid
   if cart.item_count > 0
-    assign kc_target = '/checkout'
+    assign kc_target = routes.root_url
+    assign kc_root_end = kc_target | slice: -1
+    if kc_root_end != '/'
+      assign kc_target = kc_target | append: '/'
+    endif
+    assign kc_target = kc_target | append: 'checkout'
     for kc_item in cart.items
       if kc_item.properties['_welcome_kit'] == 'true'
-        assign kc_target = '/checkout?discount=Welcome%20Kit'
+        assign kc_target = kc_target | append: '?discount=Welcome%20Kit'
         break
       endif
     endfor

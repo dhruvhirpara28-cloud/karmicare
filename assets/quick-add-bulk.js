@@ -132,6 +132,9 @@ if (!customElements.get('quick-add-bulk')) {
             linesUpdate?.resolve(parsedState);
             this.renderSections(parsedState, ids);
             publish(PUB_SUB_EVENTS.cartUpdate, { source: 'quick-add', cartData: parsedState });
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): on to /cart, which sends a cart with lines
+            // to checkout and an empty one to the product page (sections/kc-cart-redirect.liquid)
+            window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);
@@ -161,16 +164,6 @@ if (!customElements.get('quick-add-bulk')) {
             section: this.sectionId,
             selector: `#quick-add-bulk-${this.dataset.index}-${this.sectionId}`,
           },
-          {
-            id: 'cart-icon-bubble',
-            section: 'cart-icon-bubble',
-            selector: '.shopify-section',
-          },
-          {
-            id: 'CartDrawer',
-            selector: '.drawer__inner',
-            section: 'cart-drawer',
-          },
         ];
       }
 
@@ -179,9 +172,6 @@ if (!customElements.get('quick-add-bulk')) {
         if (intersection.length !== 0) return;
         this.getSectionsToRender().forEach((section) => {
           const sectionElement = document.getElementById(section.id);
-          if (section.section === 'cart-drawer') {
-            sectionElement.closest('cart-drawer')?.classList.toggle('is-empty', parsedState.items.length.length === 0);
-          }
           const elementToReplace =
             sectionElement && sectionElement.querySelector(section.selector)
               ? sectionElement.querySelector(section.selector)

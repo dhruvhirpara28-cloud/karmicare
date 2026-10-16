@@ -44,12 +44,50 @@
         return res.json();
       }
 
-      async function addMultipleToCart(itemsArray) {
-        await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
-          body: JSON.stringify({ items: itemsArray }),
-        });
+      // A subscription without its whole kit (a cart that lost kit lines outside the theme: every add path
+      // of the theme brings the kit in its own add). Added on its own, the kit would land above the plan
+      // line, and the plan line belongs on top (cart order: assets/kc-plan-select.js addOrder). So on a
+      // page that sells the plan product, its choice is added again with the whole kit, in order, through
+      // KCPlanSelect.replaceChoice: one cart change at a time on the page, the earlier lines and
+      // "Subscription Name" back when the add fails. Elsewhere the cart stays as it is. Reads the full cart.
+      async function repairKit() {
+        if (!window.KCPlanSelect) return false;
+        const items = (await getCart()).items || [];
+        const planItem = items.find((item) =>
+          BUNDLE_PRODUCT_IDS.includes(item.product_id) &&
+          item.selling_plan_allocation &&
+          window.KCPlanSelect.manages(String(item.product_id))
+        );
+        if (!planItem) return false;
+        if (FREE_PRODUCTS.every((freeProd) => items.some((item) => item.product_id === freeProd.productId))) return false;
+
+        // The choice as it is, its rows of the same variant and plan counted together
+        const planId = planItem.selling_plan_allocation.selling_plan.id;
+        const quantity = items
+          .filter((item) => item.variant_id === planItem.variant_id && item.selling_plan_allocation && item.selling_plan_allocation.selling_plan.id === planId)
+          .reduce((sum, item) => sum + item.quantity, 0);
+        const planLine = { id: planItem.variant_id, quantity: quantity, selling_plan: planId };
+        if (planItem.properties && Object.keys(planItem.properties).length) planLine.properties = planItem.properties;
+        const kitLines = FREE_PRODUCTS.map((freeProd) => ({
+          id: freeProd.variantId,
+          quantity: 1,
+          properties: { '_welcome_kit': 'true' }
+        }));
+        const lines = window.KCPlanSelect.addOrder(kitLines.concat(planLine));
+        try {
+          const response = await window.KCPlanSelect.replaceChoice(String(planItem.product_id), String(planId), () =>
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
+              body: JSON.stringify({ items: lines }),
+            })
+          );
+          if (!response.ok) return false;
+          await applyDiscountCode();
+          return true;
+        } catch (e) {
+          return false;
+        }
       }
 
       async function applyDiscountCode() {
@@ -109,25 +147,8 @@
               cartChanged = true;
             }
           } else {
-            const toAdd = [];
-            for (const freeProd of FREE_PRODUCTS) {
-              const freeLineItem = items.find((item) => item.product_id === freeProd.productId);
-              if (!freeLineItem) {
-                toAdd.push({
-                  id: freeProd.variantId,
-                  quantity: 1,
-                  properties: { '_welcome_kit': 'true' }
-                });
-              }
-            }
-            if (toAdd.length > 0) {
-              // Only for a cart that lost its kit lines: every add path of the theme brings the kit in its
-              // own add, under the plan line (assets/kc-plan-select.js addOrder). Added here, the kit lines
-              // land above the plan line, in KIT_ORDER among themselves.
-              await addMultipleToCart(window.KCPlanSelect ? window.KCPlanSelect.addOrder(toAdd) : toAdd);
-              await applyDiscountCode();
-              cartChanged = true;
-            }
+            const kitMissing = FREE_PRODUCTS.some((freeProd) => !items.some((item) => item.product_id === freeProd.productId));
+            if (kitMissing) cartChanged = await repairKit();
           }
 
           if (cartChanged) {

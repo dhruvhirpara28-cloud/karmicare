@@ -106,8 +106,10 @@
         headers: { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' },
         body: JSON.stringify(addPayload),
       });
-      // Every add goes to checkout: there is no theme cart (Victor, 16 Oct; layout/theme.liquid)
-      const checkoutUrl = (isSubscription && items.length > 1) ? '/checkout?discount=Welcome%20Kit' : '/checkout';
+      // Every add goes to checkout: there is no theme cart (Victor, 16 Oct; layout/theme.liquid). In the
+      // shopper's language: Shopify.routes.root is "/" or "/fr/"
+      const checkoutBase = ((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'checkout';
+      const checkoutUrl = (isSubscription && items.length > 1) ? checkoutBase + '?discount=Welcome%20Kit' : checkoutBase;
 
       // The cart's "Subscription Name" follows the subscriptions now in it: a one-time order never keeps
       // an earlier subscription's value (assets/kc-plan-select.js)

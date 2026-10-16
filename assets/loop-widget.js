@@ -3623,7 +3623,8 @@ function listenLoopCustomEvent() {
         function (event) {
             const productId = event.detail.productId;
             const response = event.detail.response;
-            window.location.href = "/cart";
+            // KC CUSTOM: the cart in the shopper's language; /cart goes on to checkout (sections/kc-cart-redirect.liquid)
+            window.location.href = `${window.Shopify.routes.root}cart`;
             widgetLogger(
                 `Loop Product ${productId} added to cart. Response:`,
                 response
@@ -3959,17 +3960,29 @@ async function shopifyAddToCartByLoopWidget(payload, productId) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(kcPayload),
         });
+        // KC CUSTOM: after a successful add of a plan product, as the buybox CTA (assets/karmi-add-to-cart.js):
+        // the cart's "Subscription Name", then checkout (no theme cart), with the "Welcome Kit" code for the
+        // kit added here. replaceChoice goes there only when no later choice is waiting.
+        const kcFinish = async () => {
+            await window.KCPlanSelect.syncCartSubscriptionName(kcSellingPlanId).catch(() => {});
+            const checkout = `${window.Shopify.routes.root}checkout`;
+            return kcKit.length ? `${checkout}?discount=Welcome%20Kit` : checkout;
+        };
         const response = kcManaged
-            ? await window.KCPlanSelect.replaceChoice(productId, kcSellingPlanId, addToCart)
+            ? await window.KCPlanSelect.replaceChoice(productId, kcSellingPlanId, addToCart, kcFinish)
             : await addToCart();
         const data = await response.json();
-        // KC CUSTOM: the kit added here is free with the "Welcome Kit" code (as snippets/welcome-kit.liquid)
-        if (kcKit.length && response.ok) {
-            await fetch("/cart/update.js", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "X-Karmi-Sync": "false" },
-                body: JSON.stringify({ discount: "Welcome Kit" }),
-            }).catch(() => {});
+        // KC CUSTOM: a rejected add is no success: the earlier choice is back in the cart (replaceChoice)
+        // and nothing goes to the cart or checkout
+        if (!response.ok) {
+            widgetLogger("shopifyAddToCartByLoopWidget", data);
+            enableAddToCartBtnLoop(productId);
+            return;
+        }
+        // KC CUSTOM: a plan product is on its way to checkout (kcFinish), or a later choice takes over
+        if (kcManaged) {
+            if (!response.kcNavigating) enableAddToCartBtnLoop(productId);
+            return;
         }
         // KC CUSTOM: the cart's "Subscription Name" follows the subscriptions now in it (assets/kc-plan-select.js)
         if (window.KCPlanSelect) {

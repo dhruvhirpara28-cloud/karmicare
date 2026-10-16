@@ -158,19 +158,9 @@ if (!customElements.get('quick-order-list')) {
             selector: `#${this.id}`,
           },
           {
-            id: 'cart-icon-bubble',
-            section: 'cart-icon-bubble',
-            selector: '#shopify-section-cart-icon-bubble',
-          },
-          {
             id: `quick-order-list-live-region-text-${this.dataset.productId}`,
             section: 'cart-live-region-text',
             selector: '.shopify-section',
-          },
-          {
-            id: 'CartDrawer',
-            selector: '.drawer__inner',
-            section: 'cart-drawer',
           },
         ];
       }
@@ -202,7 +192,7 @@ if (!customElements.get('quick-order-list')) {
       }
 
       renderSections(parsedState) {
-        const { items, sections } = parsedState;
+        const { sections } = parsedState;
 
         this.getSectionsToRender().forEach(({ id, selector, section }) => {
           const sectionElement = document.getElementById(id);
@@ -241,9 +231,6 @@ if (!customElements.get('quick-order-list')) {
 
               this.initVariantEventListeners();
             }
-          } else if (section === 'cart-drawer') {
-            sectionElement.closest('cart-drawer')?.classList.toggle('is-empty', items.length === 0);
-            sectionElement.querySelector(selector).innerHTML = newSection.innerHTML;
           } else {
             sectionElement.innerHTML = newSection.innerHTML;
           }

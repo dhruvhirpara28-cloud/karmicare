@@ -20,8 +20,9 @@ const DAWN_CART_TAGS = ['cart-drawer', 'cart-items', 'cart-drawer-items', 'cart-
 
 // Sections that Dawn's own pubsub subscribers refresh (cart.js's
 // CartItems#onCartUpdate fetches and replaces these directly when
-// cart-update fires; cart-drawer.js's renderContents handles the
-// drawer body). We skip them here to avoid double-rendering.
+// cart-update fires). We skip them here to avoid double-rendering.
+// The theme renders no cart drawer (no theme cart, layout/theme.liquid),
+// so the drawer entries only matter if one comes back.
 // Format is '<element-tag>:<getSectionsToRender entry id>'.
 // If you change which sections those subscribers refresh, update this set.
 const DAWN_PUBSUB_REFRESHED_SECTIONS = new Set([
