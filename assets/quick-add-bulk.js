@@ -6,9 +6,10 @@ if (!customElements.get('quick-add-bulk')) {
         super();
         this.quantity = this.querySelector('quantity-input');
 
-        // Inputs changed but not yet queued (in their debounce, or invalid): no answer goes on to checkout
-        // while one is left, so checkout never misses the shopper's latest quantity (as quick-order-list.js)
-        this.unsentInputs = new Set();
+        // Quantities changed but not yet queued (in their debounce, or invalid), by the input's data-index,
+        // which a re-rendered input keeps: while one is left, no answer goes on to checkout and no render
+        // replaces the input, so checkout never misses the shopper's latest quantity (as quick-order-list.js)
+        this.unsentQuantities = new Set();
         const debouncedOnChange = debounce((event) => {
           const queued = this.queue.length;
           if (parseInt(event.target.value) === 0) {
@@ -16,11 +17,11 @@ if (!customElements.get('quick-add-bulk')) {
           } else {
             this.validateQuantity(event);
           }
-          if (this.queue.length > queued) this.unsentInputs.delete(event.target);
+          if (this.queue.length > queued) this.unsentQuantities.delete(event.target.dataset.index);
         }, ON_CHANGE_DEBOUNCE_TIMER);
 
         this.addEventListener('change', (event) => {
-          this.unsentInputs.add(event.target);
+          this.unsentQuantities.add(event.target.dataset.index);
           debouncedOnChange(event);
         });
         this.listenForActiveInput();
@@ -37,6 +38,8 @@ if (!customElements.get('quick-add-bulk')) {
           ) {
             return;
           }
+          // A changed quantity not yet queued keeps its input; this card's own next answer renders the cart
+          if (this.unsentQuantities.size > 0) return;
           // If its another section that made the update
           this.onCartUpdate().then(() => {
             this.listenForActiveInput();
@@ -143,7 +146,7 @@ if (!customElements.get('quick-add-bulk')) {
             // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting (queued, in its
             // debounce or invalid), on to /cart, which sends a cart with lines to checkout and an empty one to
             // the product page (sections/kc-cart-redirect.liquid)
-            if (this.queue.length === 0 && this.unsentInputs.size === 0) window.location.href = routes.cart_url;
+            if (this.queue.length === 0 && this.unsentQuantities.size === 0) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);
@@ -179,6 +182,8 @@ if (!customElements.get('quick-add-bulk')) {
       renderSections(parsedState, ids) {
         const intersection = this.queue.filter((element) => ids.includes(element.id));
         if (intersection.length !== 0) return;
+        // A changed quantity not yet queued keeps its input (a render would show the cart's quantity instead)
+        if (this.unsentQuantities.size > 0) return;
         this.getSectionsToRender().forEach((section) => {
           const sectionElement = document.getElementById(section.id);
           const elementToReplace =
