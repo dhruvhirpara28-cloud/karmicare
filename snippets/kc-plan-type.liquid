@@ -13,15 +13,20 @@
   It lists every selling plan of the product, the legacy email offers included (they never show on the
   product page, but any theme path that adds them gets the same treatment).
 
-  Duos per delivery: 60-day plans 1; year plans the theme setting "Year plans: Duos per delivery"
-  (settings.kc_year_units_per_delivery, 1 or 3); an unknown plan 1 (kc-plan-config warns in the theme
-  editor, kc-plan-select.js on the storefront). Shopify's allocation price of a year plan is the price
-  of one Duo for the whole year (Loop prepaid, 2 deliveries), so the year costs allocation price x units.
+  Year plan: 3 Duos per delivery, 2 deliveries (now and month 6), paid up front: 6 Duos x €59 = €354.
+  Cart quantity = Duos per delivery = 3.
+  Shopify's price per quantity is a year price (€118, admin only), never a per-Duo price:
+  €118 x 3 = €354. Do not compare it with the Duos in one delivery.
 
-  Expected year total (in cents, shop currency) once year plans are 3 Duos per delivery: a safety check
-  only, never displayed. kc-plan-config and kc-plan-select.js warn when allocation price x 3 differs:
-  354.00 = 3 x 2 x 59 (The Karmicare Year and the swapped Subscribe and Save plan, today 354 per year),
-  294.00 = 3 x 2 x 49 (Yearly Plan and the first year of Subscribe and Save 49 -> 59, today 294).
+  Duos per delivery: 60-day plans 1; year plans the theme setting "Year plans: Duos per delivery"
+  (settings.kc_year_units_per_delivery: 3, or 1 as an emergency rollback); an unknown plan 1
+  (kc-plan-config warns in the theme editor, kc-plan-select.js on the storefront).
+
+  Expected year total (in cents, shop currency) while year plans are 3 Duos per delivery: a safety
+  check only, never displayed. kc-plan-config and kc-plan-select.js warn when Shopify's year price per
+  quantity x quantity differs:
+  354.00 = 6 x 59 (The Karmicare Year and the swapped Subscribe and Save plan),
+  294.00 = 6 x 49 (Yearly Plan and the first year of Subscribe and Save 49 -> 59).
 
   Deliveries per billing: 60-day plans 1, year plans 2 (paid for the year, delivered now and in month 6;
   the same as PLAN_TYPES in assets/kc-plan-select.js). A year plan holds units x 2 Duos a year.

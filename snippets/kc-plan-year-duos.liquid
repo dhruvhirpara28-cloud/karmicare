@@ -5,14 +5,16 @@
   computed (snippets/kc-plan-type.liquid):
   - Duos a year = Duos per delivery x deliveries
   - the month of the second delivery = 12 / deliveries
-  - price per Duo = allocation price x Duos per delivery / Duos a year, in the store money format
+  - price per Duo = Shopify's year price per quantity x quantity / Duos a year (€118 x 3 / 6 = €59), in
+    the store money format; quantity = Duos per delivery
   Strings: kc.year_plan.* in locales/en.default.json. Used by snippets/kc-plan-config.liquid for the
   buybox (assets/kc-plan-select.js yearDuos, shown by assets/loop-widget.js); the cart does not show it
   (customers go from the product page straight to checkout).
 
   Accepts:
   - plan_id: {String|Number} a selling plan ID
-  - price: {Number} Shopify's allocation price of one Duo of that plan, in cents
+  - price: {Number} Shopify's year price per quantity of that plan (its allocation price), in cents: a
+    year price, never a per-Duo price
 
   Outputs the line, or nothing for a plan that is not a year plan or while year plans are 1 Duo per
   delivery (the product page then keeps its earlier text).

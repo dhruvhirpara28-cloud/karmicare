@@ -2369,10 +2369,12 @@ function updatePriceInParentElementsLoop({ productId }) {
    ============================================================ */
 
 /**
- * What the checkout charges for a selling plan allocation, in cents: Shopify's allocation price x the
- * plan's Duos per delivery (assets/kc-plan-select.js; year plans follow the theme setting "Year plans:
- * Duos per delivery", everything else is 1). Every price shown for a plan reads this, never the
- * allocation price alone, so the page shows what the cart line costs.
+ * What the checkout charges for a selling plan allocation, in cents: Shopify's price per quantity (the
+ * allocation price) x quantity, the quantity being the plan's Duos per delivery (assets/kc-plan-select.js;
+ * year plans follow the theme setting "Year plans: Duos per delivery", everything else is 1). For a year
+ * plan that is Shopify's year price per quantity x quantity (€118 x 3 = €354): a year price, never a
+ * per-Duo price. Every price shown for a plan reads this, never the price per quantity alone, so the
+ * page shows what the cart line costs.
  */
 function kcPlanPrice(allocation) {
     if (!allocation || allocation.price == null) return allocation?.price;
@@ -2595,7 +2597,7 @@ function updateKcPricingSummary(productId, variant) {
     }
 
     const sellingPlanAllocation = window?.loopProps[productId]?.sellingPlanAllocation;
-    // KC: what the checkout charges (allocation price x Duos per delivery): total, per brushing, Care Credit
+    // KC: what the checkout charges (Shopify's price per quantity x quantity): total, per brushing, Care Credit
     const sellingPlanPrice = kcPlanPrice(sellingPlanAllocation);
     if (!variant) return;
     if (!isOneTime && !sellingPlanPrice) return;
@@ -2880,7 +2882,7 @@ function injectOrUpdateKcTryOnceLink(productId, variant) {
 }
 
 function determinePriceLoop(productId, variant) {
-    // KC: what the checkout charges (allocation price x Duos per delivery)
+    // KC: what the checkout charges (Shopify's price per quantity x quantity)
     const sellingPlanPrice = kcPlanPrice(
         window?.loopProps[productId]?.sellingPlanAllocation
     );
@@ -2918,7 +2920,7 @@ function updatePriceInUILoop({ productId }) {
             // KC: the card's selected, offered, allowed plan (kcCardAllocation), not the group's first one
             let sellingPlanAllcotion = kcCardAllocation(productId, variant, spg.id) || {};
             const { selling_plan_group_id } = sellingPlanAllcotion;
-            // KC: what the checkout charges (allocation price x Duos per delivery)
+            // KC: what the checkout charges (Shopify's price per quantity x quantity)
             const price = kcPlanPrice(sellingPlanAllcotion);
             let element = document.querySelector(
                 `#loop-price-${variant.id}-${selling_plan_group_id}`
@@ -2931,7 +2933,7 @@ function updatePriceInUILoop({ productId }) {
 
     if (sellingPlan && sellingPlan.selling_plan_group_id) {
         const { selling_plan_group_id } = sellingPlan;
-        // KC: what the checkout charges (allocation price x Duos per delivery)
+        // KC: what the checkout charges (Shopify's price per quantity x quantity)
         const price = kcPlanPrice(sellingPlan);
         let element = document.querySelector(
             `#loop-price-${variant.id}-${selling_plan_group_id}`
@@ -4141,7 +4143,7 @@ function updatePrepaidPriceInUILoop({ productId }) {
                         Number(firstSellingPlan.id)
                 ) || {};
             const { selling_plan_group_id } = sellingPlanAllcotion;
-            // KC: what the checkout charges (allocation price x Duos per delivery)
+            // KC: what the checkout charges (Shopify's price per quantity x quantity)
             const price = kcPlanPrice(sellingPlanAllcotion);
             let element = document.querySelector(
                 `#loop-price-${variant.id}-${selling_plan_group_id}`
@@ -4154,7 +4156,7 @@ function updatePrepaidPriceInUILoop({ productId }) {
 
     if (sellingPlan && sellingPlan.selling_plan_group_id) {
         const { selling_plan_group_id } = sellingPlan;
-        // KC: what the checkout charges (allocation price x Duos per delivery)
+        // KC: what the checkout charges (Shopify's price per quantity x quantity)
         const price = kcPlanPrice(sellingPlan);
         if (
             !prepaidSellingPlans[sellingPlan.selling_plan_id] ||

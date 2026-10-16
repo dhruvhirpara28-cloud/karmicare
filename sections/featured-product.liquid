@@ -573,8 +573,10 @@
                           {%- comment -%}
                             Interval, Duos per delivery, deliveries and Care Credit % by the plan's type
                             (selling plan ID, snippets/kc-plan-type.liquid), never its name. The price is what
-                            the checkout charges: the allocation price x Duos per delivery; per brushing over
-                            every brushing in that price (120 per Duo, every delivery of the billing).
+                            the checkout charges: Shopify's price per quantity x quantity (quantity = Duos per
+                            delivery; for a year plan Shopify's year price per quantity x quantity, never a
+                            per-Duo price); per brushing over every brushing in that price (120 per Duo, every
+                            delivery of the billing).
                           {%- endcomment -%}
                           {%- capture kc_offer_type -%}
                             {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id -%}

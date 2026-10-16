@@ -192,8 +192,10 @@
             {%- endfor -%}
             {%- assign sp = selling_plan_group.selling_plans.first -%}
             {%- comment -%}
-              What the checkout charges: the allocation price x the plan's Duos per delivery
-              (snippets/kc-plan-type.liquid); the buybox's live price replaces it once Loop has loaded
+              What the checkout charges: Shopify's price per quantity x quantity, the quantity being the
+              plan's Duos per delivery (snippets/kc-plan-type.liquid; for a year plan Shopify's year price
+              per quantity x quantity, never a per-Duo price); the buybox's live price replaces it once
+              Loop has loaded
             {%- endcomment -%}
             {%- capture sc_units -%}
               {%- render 'kc-plan-type', plan_id: first_alloc.selling_plan.id, field: 'units' -%}

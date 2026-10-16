@@ -14,9 +14,11 @@
   Loyalty (snippets/kc-plan-loyalty.liquid) and, when the custom.duos_count entry carries the plan's ID
   in its selling_plan_id field (comma-separated IDs), its duos, brushings and Return on Care.
   kc-plan-select.js writes those onto the Loop plan options by ID, so the Loop widget's name match no
-  longer decides them. The theme editor lists each public plan with its Duos per delivery, Shopify's
-  allocation price and the total the checkout charges (price x Duos), red when a year plan's total
-  differs from the expected one while year plans are 3 Duos per delivery.
+  longer decides them. The theme editor lists each public plan and each year plan with its quantity
+  (Duos per delivery), Shopify's price per quantity and the total the checkout charges (Shopify's price
+  per quantity x quantity; for a year plan Shopify's year price per quantity x quantity, never a per-Duo
+  price), red when a year plan's total differs from the expected one while year plans are 3 Duos per
+  delivery.
   Public plans come from the product's compare plans (snippets/kc-plan-public.liquid). The groups
   without a public plan are hidden here from first paint, in every Loop widget and in the sticky bar,
   and kc-plan-select.js keeps them hidden and unselectable. With no valid public plan ID the widgets
@@ -120,8 +122,9 @@
               assign kc_year_duos_json = '{' | append: kc_year_duos_json | append: '}'
             endif
 
-            # Theme editor: what the checkout charges (allocation price x Duos) for each public plan and each
-            # year plan (legacy year plans are not sold here but renew through Loop at their price)
+            # Theme editor: what the checkout charges (Shopify's price per quantity x quantity; year plans:
+            # Shopify's year price per quantity x quantity) for each public plan and each year plan (legacy
+            # year plans are not sold here but renew through Loop at their price)
             assign kc_list_row = false
             if request.design_mode and role == 'buybox'
               if kc_public contains kc_needle or kc_type == 'year'
@@ -155,7 +158,7 @@
                       assign kc_total_wrong = true
                       assign kc_row_style = ' style="color: #b42318; font-weight: 700;"'
                       assign kc_expected_money = kc_expected_cents | money
-                      assign kc_row_note = ' · expected ' | append: kc_expected_money | append: ': check the plan price in Loop'
+                      assign kc_row_note = ' · expected ' | append: kc_expected_money | append: ': check the year price per quantity in Loop'
                     endif
                   endif
                 endif
@@ -165,11 +168,11 @@
               endunless
               capture kc_unit_row
                 echo '<li' | append: kc_row_style | append: '><code>' | append: kc_plan.id | append: '</code> · ' | append: kc_group_name_html
-                echo ' · ' | append: kc_units | append: ' Duo(s) per delivery'
+                echo ' · quantity ' | append: kc_units
                 if kc_allocation != blank
                   assign kc_allocation_money = kc_allocation.price | money
                   assign kc_total_money = kc_plan_total | money
-                  echo ' · allocation price ' | append: kc_allocation_money | append: ' · total ' | append: kc_total_money
+                  echo " · Shopify's price per quantity " | append: kc_allocation_money | append: ' · total ' | append: kc_total_money
                 endif
                 echo kc_row_note | append: '</li>'
               endcapture
@@ -307,12 +310,14 @@
       style="margin: 1rem 0; padding: 0.8rem 1rem; border: 2px solid {{ kc_list_color }}; border-radius: 8px; background: {{ kc_list_background }}; color: {{ kc_list_color }}; font-size: 1.3rem; line-height: 1.4;"
     >
       <strong>Theme editor only · what the checkout charges:</strong>
-      per public plan and per year plan, the Duos per delivery (year plans: theme setting "Year plans:
-      Duos per delivery", now {{ settings.kc_year_units_per_delivery | default: 3 }}), Shopify's allocation
-      price and the total (allocation price x Duos), which the product page shows and the checkout charges.
+      per public plan and per year plan, the quantity (= Duos per delivery; year plans: theme setting
+      "Year plans: Duos per delivery", now {{ settings.kc_year_units_per_delivery | default: 3 }}),
+      Shopify's price per quantity and the total (Shopify's price per quantity x quantity), which the
+      product page shows and the checkout charges. For a year plan, Shopify's price per quantity is a year
+      price, never a per-Duo price: Shopify's year price per quantity x quantity is the year total.
       {%- if kc_total_wrong %}
-        A year plan's total is not the expected one: fix the plan price in Loop (only for the rollback,
-        set the setting back to 1 together with whole-year pricing in Loop).
+        A year plan's total is not the expected one: fix the year price per quantity in Loop (only for the
+        emergency rollback, set the setting back to 1 together with a full-year price per quantity in Loop).
       {%- endif -%}
       <ul style="margin: 0.4em 0 0; padding-left: 1.2em;">
         {{- kc_unit_rows -}}

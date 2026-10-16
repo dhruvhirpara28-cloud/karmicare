@@ -25,9 +25,11 @@
  *   sticky bar and karmi-add-to-cart.js.
  * - KCPlanSelect.units(planId) / quantityFor(productId, planId, formQuantity): the Duos per delivery of a
  *   plan (snippets/kc-plan-type.liquid; year plans follow the theme setting "Year plans: Duos per
- *   delivery"). Every add-to-cart path adds that quantity for a subscription, and every price shown for
- *   a plan is Shopify's allocation price x units, which is what the checkout charges. yearDuos(planId,
- *   variantId): the year plan line shown next to the price while that setting is 3.
+ *   delivery"), which is the cart quantity. Every add-to-cart path adds that quantity for a
+ *   subscription, and every price shown for a plan is Shopify's price per quantity x quantity, which is
+ *   what the checkout charges. For a year plan that is Shopify's year price per quantity x quantity
+ *   (€118 x 3 = €354): a year price, never a per-Duo price. yearDuos(planId, variantId): the year plan
+ *   line shown next to the price while that setting is 3.
  * - Allowlist: the groups without a public plan stay hidden and unselectable in every Loop widget and
  *   the sticky bar; a non-public plan selected in the buybox is replaced by the first public one.
  * - Compare plan buttons (sections/product-compare-plans.liquid) carry data-kc-plan-choose: "plan"
@@ -555,9 +557,9 @@
   }
 
   // While year plans are more than 1 Duo per delivery, each year plan must cost its expected year total
-  // (snippets/kc-plan-type.liquid) at checkout: Shopify's allocation price x Duos. Warn when it does
-  // not, e.g. Loop still prices the whole year instead of one Duo. Prices in another currency than the
-  // shop's are not checked.
+  // (snippets/kc-plan-type.liquid) at checkout: Shopify's year price per quantity x quantity. Warn when
+  // it does not, e.g. a year price per quantity in Loop that is still the full year (€354 x 3 = €1,062
+  // instead of €354). Prices in another currency than the shop's are not checked.
   function checkTotals(product) {
     const props = window.loopProps && window.loopProps[product.id];
     const variants = props && props.product && props.product.variants;
@@ -576,12 +578,12 @@
         if (checkedTotals[key]) return;
         checkedTotals[key] = true;
         const what =
-          'year plan ' + entry.id + ' (' + entry.groupName + ', variant ' + variant.id + '): allocation price ' +
-          euros(allocation.price) + ' x ' + count + ' Duos = ' + euros(total);
+          'year plan ' + entry.id + ' (' + entry.groupName + ', variant ' + variant.id + "): Shopify's year " +
+          'price per quantity ' + euros(allocation.price) + ' x quantity ' + count + ' = ' + euros(total);
         if (entry.expectedTotal == null) {
           warn(what + ', and snippets/kc-plan-type.liquid has no expected total for it');
         } else if (total !== entry.expectedTotal) {
-          warn(what + ', expected ' + euros(entry.expectedTotal) + ': the checkout charges ' + euros(total) + '; check the plan price in Loop');
+          warn(what + ', expected ' + euros(entry.expectedTotal) + ': the checkout charges ' + euros(total) + '; check the year price per quantity in Loop');
         }
       });
     });
