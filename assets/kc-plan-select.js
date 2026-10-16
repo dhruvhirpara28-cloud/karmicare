@@ -905,61 +905,92 @@
     return Boolean(products[String(productId)]);
   }
 
-  // A plan subscription in the cart whose Welcome Kit is not nested under it in KIT_ORDER (a cart from
-  // outside the theme or from before the kit was nested; every add of the theme brings the kit in its own
-  // add). On a page that sells the plan product (kitLines), the kit lines in the cart go out and the whole
-  // kit goes in under the plan line (parent_line_key; a kit line added on its own would land under the
-  // others). The plan line, its quantity and its properties stay as they are; "Subscription Name" follows
-  // its plan (syncCartSubscriptionName). It runs in the purchase queue, after every choice asked for
-  // before it, and reads the cart in its own turn; it is no shopper's choice (choicesRequested stays), and
-  // once the page goes to checkout it leaves the cart alone. When the kit cannot be added, the earlier kit
-  // lines go back as they were. Resolves true when the kit was put under the plan line.
-  // snippets/welcome-kit.liquid calls it.
+  // A plan subscription in the cart without exactly its Welcome Kit under it: each kit line of kitLines
+  // once, its quantity, in KIT_ORDER, nested under the plan line (a cart from outside the theme or from
+  // before the kit was nested; every add of the theme brings the kit in its own add). On a page that sells
+  // the plan product (kitLines), the kit lines in the cart go out and the whole kit goes in under the plan
+  // line (parent_line_key; a kit line added on its own would land under the others). The plan line, its
+  // quantity and its properties stay as they are; "Subscription Name" follows its plan
+  // (syncCartSubscriptionName). It runs in the purchase queue, after every choice asked for before it, and
+  // reads the cart in its own turn; it is no shopper's choice (choicesRequested stays), and once the page
+  // goes to checkout it leaves the cart alone. When a request is refused, fails or loses its answer, the
+  // cart as it is then decides: the kit in place counts as done, kit lines still there stay, and a cart
+  // left without kit lines gets the earlier ones back as they were. Resolves true when the kit is in place
+  // after a change. snippets/welcome-kit.liquid calls it for every cart with a Welcome Kit subscription.
   function repairKit() {
     const run = async () => {
       if (navigating) return false;
+      readConfigs();
+      // Off the pages that sell a plan product with a kit: no cart read at all
+      if (!Object.keys(products).some((productId) => products[productId].welcomeKit)) return false;
       const headers = { 'Content-Type': 'application/json', 'X-Karmi-Sync': 'false' };
       const post = (url, body) => fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(body) });
-      const cart = await fetch('/cart.js', { headers: headers }).then((response) => response.json());
-      const items = cart.items || [];
-      const planItem = items.find((item) => item.selling_plan_allocation && kitLines(item.product_id).length);
+      const readCart = () => fetch('/cart.js', { headers: headers }).then((response) => (response.ok ? response.json() : null));
+      const kitItemsOf = (cart) =>
+        (cart.items || []).filter((item) => isKitLine({ id: item.variant_id, properties: item.properties }));
+      const cart = await readCart();
+      if (!cart) return false;
+      const planItem = (cart.items || []).find((item) => item.selling_plan_allocation && kitLines(item.product_id).length);
       if (!planItem) return false;
       const kit = kitLines(planItem.product_id);
-      const kitItems = items.filter((item) => isKitLine({ id: item.variant_id, properties: item.properties }));
-      const inPlace =
+      const inPlace = (kitItems) =>
         kitItems.length === kit.length &&
         kitItems.every(
           (item, index) =>
             item.variant_id === kit[index].id &&
+            item.quantity === kit[index].quantity &&
             item.parent_relationship &&
             item.parent_relationship.parent_key === planItem.key
         );
-      if (inPlace) return false;
-      if (kitItems.length) {
-        const updates = {};
-        kitItems.forEach((item) => {
-          updates[item.key] = 0;
+      const kitItems = kitItemsOf(cart);
+      if (inPlace(kitItems)) return false;
+      let done = false;
+      try {
+        if (kitItems.length) {
+          const updates = {};
+          kitItems.forEach((item) => {
+            updates[item.key] = 0;
+          });
+          // Refused: nothing was removed
+          if (!(await post('/cart/update.js', { updates: updates })).ok) return false;
+        }
+        const added = await post('/cart/add.js', {
+          items: kit.map((line) => Object.assign({}, line, { parent_line_key: planItem.key })),
         });
-        if (!(await post('/cart/update.js', { updates: updates })).ok) return false;
+        done = added.ok;
+      } catch (error) {
+        done = false;
       }
-      const added = await post('/cart/add.js', {
-        items: kit.map((line) => Object.assign({}, line, { parent_line_key: planItem.key })),
-      });
-      if (added.ok) {
-        await syncCartSubscriptionName(planItem.selling_plan_allocation.selling_plan.id).catch(() => {});
-        return true;
+      if (!done) {
+        // The cart as it is now decides: a lost answer may have come with the change made
+        const now = await readCart().catch(() => null);
+        if (!now) {
+          warn('the Welcome Kit repair failed and the cart could not be read; the kit may be missing');
+          return false;
+        }
+        const kitNow = kitItemsOf(now);
+        if (!inPlace(kitNow)) {
+          if (kitNow.length || !kitItems.length) {
+            warn('the Welcome Kit could not be put under the plan line; the cart is left as it is');
+            return false;
+          }
+          const restored = await post('/cart/add.js', {
+            items: kitItems.map((item) => {
+              const line = { id: item.variant_id, quantity: item.quantity, properties: item.properties };
+              if (item.parent_relationship) line.parent_line_key = item.parent_relationship.parent_key;
+              return line;
+            }),
+          }).catch(() => null);
+          warn(
+            restored && restored.ok
+              ? 'the Welcome Kit could not be put under the plan line; the earlier kit lines are back'
+              : 'the Welcome Kit could not be put under the plan line, and the earlier kit lines could not be put back'
+          );
+          return false;
+        }
       }
-      warn('the Welcome Kit could not be put under the plan line');
-      if (kitItems.length) {
-        await post('/cart/add.js', {
-          items: kitItems.map((item) => {
-            const line = { id: item.variant_id, quantity: item.quantity, properties: item.properties };
-            if (item.parent_relationship) line.parent_line_key = item.parent_relationship.parent_key;
-            return line;
-          }),
-        }).catch(() => {});
-      }
-      return false;
+      await syncCartSubscriptionName(planItem.selling_plan_allocation.selling_plan.id).catch(() => {});
+      return true;
     };
     const result = purchaseQueue.then(run, run);
     purchaseQueue = result.catch(() => {});

@@ -43,10 +43,12 @@
         return res.json();
       }
 
-      // A subscription whose kit is missing or not nested under it (a cart from outside the theme or from
-      // before the kit was nested: every add path of the theme brings the kit in its own add). On a page
-      // that sells the plan product, assets/kc-plan-select.js repairKit puts the whole kit under the plan
-      // line in cart order and leaves the plan line as it is. Elsewhere the cart stays as it is.
+      // A subscription without exactly its kit nested under it (missing, loose, out of order, under another
+      // line or more than one of a kit line: a cart from outside the theme or from before the kit was nested;
+      // every add path of the theme brings the kit in its own add). On a page that sells the plan product,
+      // assets/kc-plan-select.js repairKit puts the whole kit under the plan line in cart order and leaves
+      // the plan line as it is; it reads the full cart and changes nothing when the kit is in place.
+      // Elsewhere the cart stays as it is.
       async function repairKit() {
         if (!window.KCPlanSelect) return false;
         try {
@@ -115,11 +117,8 @@
               cartChanged = true;
             }
           } else {
-            // Each kit product nested under a line; repairKit checks the rest against the full cart
-            const kitNested = FREE_PRODUCTS.every((freeProd) =>
-              items.some((item) => item.product_id === freeProd.productId && item.parent_relationship)
-            );
-            if (!kitNested) cartChanged = await repairKit();
+            // repairKit checks the full cart: the plan line, each kit line once, its quantity, order, parent
+            cartChanged = await repairKit();
           }
 
           if (cartChanged) {
