@@ -437,13 +437,12 @@
         {% render 'loop-widget.css.liquid' %}
       </style>
     {%- endif -%}
-    {%- if settings.cart_type == 'drawer' -%}
-      {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-      {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-      {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-      {{ 'component-price.css' | asset_url | stylesheet_tag }}
-      {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
-    {%- endif -%}
+    {%- comment -%}
+      No theme cart (Victor, 16 Oct): customers see the product page and the Shopify checkout. The cart
+      drawer (and in sections/header.liquid the cart notification and the bag icon) is not rendered,
+      whatever the "Cart type" setting says; every add goes to checkout and /cart redirects
+      (templates/cart.json).
+    {%- endcomment -%}
 
     {%- unless settings.type_body_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}
@@ -482,10 +481,6 @@
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
-
-    {%- if settings.cart_type == 'drawer' -%}
-      {%- render 'cart-drawer' -%}
-    {%- endif -%}
 
     {% sections 'header-group' %}
 
@@ -556,10 +551,6 @@
     {%- endif -%}
 
     <script src="{{ 'day-night-mode.js' | asset_url }}" defer="defer"></script>
-
-    {%- if settings.cart_type == 'drawer' -%}
-      <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
 
     {% render 'welcome-kit' %}
     {% render 'transparent-header' %}

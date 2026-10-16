@@ -477,7 +477,7 @@
       warn('Try Once: karmiAddToCart is not loaded');
       return Promise.resolve(false);
     }
-    return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true, redirectToCheckout: true })).then(
+    return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true })).then(
       () => true
     );
   }
