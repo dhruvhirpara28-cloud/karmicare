@@ -2363,9 +2363,45 @@ function updatePriceInParentElementsLoop({ productId }) {
 
 /* ============================================================
    KC CUSTOM FUNCTIONS
+   - kcPlanPrice                        : what the checkout charges for a plan
    - updateSubscriptionGroupCardSubRow  : Plan card sub-row
    - updateKcPricingSummary             : "Total today" summary box
    ============================================================ */
+
+/**
+ * What the checkout charges for a selling plan allocation, in cents: Shopify's price per quantity (the
+ * allocation price) x quantity, the quantity being the plan's Duos per delivery (assets/kc-plan-select.js;
+ * year plans follow the theme setting "Year plans: Duos per delivery", everything else is 1). For a year
+ * plan that is Shopify's year price per quantity x quantity (€118 x 3 = €354): a year price, never a
+ * per-Duo price. Every price shown for a plan reads this, never the price per quantity alone, so the
+ * page shows what the cart line costs.
+ */
+function kcPlanPrice(allocation) {
+    if (!allocation || allocation.price == null) return allocation?.price;
+    return Number(allocation.price) * kcPlanUnits(allocation.selling_plan_id);
+}
+
+// The Duos per delivery of a selling plan (assets/kc-plan-select.js), 1 without it
+function kcPlanUnits(sellingPlanId) {
+    return window.KCPlanSelect && sellingPlanId ? window.KCPlanSelect.units(sellingPlanId) : 1;
+}
+
+/**
+ * The allocation a plan card stands for: the plan selected in the card's own select when the variant
+ * offers it and the page may sell it, else the group's first such allocation. Every price-derived value
+ * of the card (price, per brushing, Care Credit) reads this one, never a private first plan.
+ */
+function kcCardAllocation(productId, variant, groupId) {
+    const allocations = (variant?.selling_plan_allocations || []).filter(
+        (a) => String(a.selling_plan_group_id) === String(groupId)
+    );
+    const allowed = (a) => !window.KCPlanSelect || window.KCPlanSelect.allowed(a.selling_plan_id);
+    const container = getLoopSubscriptionContainer(productId);
+    const select = container && container.querySelector(`#loop-select-${variant.id}-${groupId}`);
+    const chosen = select && allocations.find((a) => String(a.selling_plan_id) === String(select.value));
+    if (chosen && allowed(chosen)) return chosen;
+    return allocations.find(allowed) || allocations[0];
+}
 
 /**
  * Plan card sub-row (dynamic, per variant selection)
@@ -2383,9 +2419,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const radio = groupEl.querySelector('.loop-subscription-group-radio');
         if (!radio?.dataset?.id || radio.dataset.id === 'loop-one-time-purchase') return;
 
-        const alloc = variant.selling_plan_allocations.find(
-            a => String(a.selling_plan_group_id) === String(radio.dataset.id)
-        );
+        // KC: the card's selected, offered, allowed plan, not the group's first one
+        const alloc = kcCardAllocation(productId, variant, radio.dataset.id);
         if (!alloc?.price) return;
 
         // 1. Shipping label — read directly from Loop's <select> option (e.g. "ships every 60 days")
@@ -2408,9 +2443,9 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const duosCount = parseInt(option?.dataset?.duos) || 1;
         const brushingsPerDuo = parseInt(option?.dataset?.brushings) || 120;
 
-        // 3. Per-brushing cost (price ÷ (duos * 120))
+        // 3. Per-brushing cost (what the checkout charges ÷ (duos * 120))
         let totalBrushings = duosCount * brushingsPerDuo;
-        const perBrushingCents = Math.round(alloc.price / totalBrushings);
+        const perBrushingCents = Math.round(kcPlanPrice(alloc) / totalBrushings);
         const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
 
         // 4. Right-side short label: "/ year" or "/ 60 days"
@@ -2426,18 +2461,11 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 textContainer.appendChild(subRow);
             }
             let formattedOptionText = optionText.replace(/ships/i, 'Renews');
-            let perBrushingLine = `${perBrushingFormatted} / brushing`;
+            const perBrushingLine = `${perBrushingFormatted} / brushing`;
             if (isAnnual) {
-                // Figma: "Renews every year" / "€0.49 / brushing · 6 duos in two deliveries".
-                // The duo count comes from the custom.duos_count metaobject (data-duos),
-                // the delivery count from the plan by ID (Loop's prepaid data, else the plan type).
+                // Figma: "Renews every year" / "€0.49 / brushing" (Victor 16 Oct: without the
+                // Figma "· 6 duos in two deliveries")
                 formattedOptionText = 'Renews every year';
-                const deliveries = kcPlan?.deliveries;
-                if (deliveries) {
-                    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-                    const deliveriesText = words[deliveries] || String(deliveries);
-                    perBrushingLine += ` · ${duosCount} duos in ${deliveriesText} deliveries`;
-                }
             }
             subRow.innerHTML = formattedOptionText
                 ? `<div>${formattedOptionText}</div> <div>${perBrushingLine}</div>`
@@ -2477,12 +2505,11 @@ function updateDynamicReturnOnCareLabels(productId) {
         const radio = groupEl.querySelector('.loop-subscription-group-radio');
         if (!radio?.dataset?.id || radio.dataset.id === 'loop-one-time-purchase') return;
 
-        const alloc = variant.selling_plan_allocations.find(
-            a => String(a.selling_plan_group_id) === String(radio.dataset.id)
-        );
+        // KC: the card's selected, offered, allowed plan, not the group's first one
+        const alloc = kcCardAllocation(productId, variant, radio.dataset.id);
         if (!alloc?.price) return;
 
-        const planPrice = alloc.price; // total allocation price in cents
+        const planPrice = kcPlanPrice(alloc); // what the checkout charges, in cents
 
         // Fetch return-on-care percentage from the currently selected option
         const selectId = `loop-select-${variant.id}-${radio.dataset.id}`;
@@ -2544,7 +2571,8 @@ function updateKcPricingSummary(productId, variant) {
     }
 
     const sellingPlanAllocation = window?.loopProps[productId]?.sellingPlanAllocation;
-    const sellingPlanPrice = sellingPlanAllocation?.price;
+    // KC: what the checkout charges (Shopify's price per quantity x quantity): total, per brushing, Care Credit
+    const sellingPlanPrice = kcPlanPrice(sellingPlanAllocation);
     if (!variant) return;
     if (!isOneTime && !sellingPlanPrice) return;
     // KC: the selected plan by selling plan ID (interval, Check-up Reward), never by its name
@@ -2659,7 +2687,6 @@ function updateKcPricingSummary(productId, variant) {
         let careCreditCents = 0;
         let checkupRewardStr = '';
 
-        const isYearPlan = kcPlan?.type === 'year';
         const basePrice = sellingPlanPrice || variant.price;
 
         // Same source as the plan card chip: return_on_care % from the
@@ -2674,14 +2701,10 @@ function updateKcPricingSummary(productId, variant) {
             returnOnCarePct = parseInt(creditOption?.dataset?.returnOnCare) || 0;
         }
 
-        if (returnOnCarePct > 0) {
-            careCreditCents = Math.round(basePrice * returnOnCarePct / 100);
-        } else if (isYearPlan) {
-            // Fallback when the metaobject has no entry for this plan
-            careCreditCents = 7180;
-        } else {
-            careCreditCents = Math.round(basePrice * 0.1);
-        }
+        // Fallback when the metaobject has no entry for this plan: the plan's Care Credit % by selling
+        // plan ID (snippets/kc-plan-type.liquid: 60-day 10, year 20)
+        const creditPct = returnOnCarePct > 0 ? returnOnCarePct : (kcPlan?.careCreditPercent || 0);
+        careCreditCents = Math.round(basePrice * creditPct / 100);
         if (kcPlan?.checkupReward) {
             // Same wording as the Year card chip "€40 Dental Check-up Reward"
             checkupRewardStr = '€40';
@@ -2815,8 +2838,10 @@ function injectOrUpdateKcTryOnceLink(productId, variant) {
 }
 
 function determinePriceLoop(productId, variant) {
-    const sellingPlanPrice =
-        window?.loopProps[productId]?.sellingPlanAllocation?.price;
+    // KC: what the checkout charges (Shopify's price per quantity x quantity)
+    const sellingPlanPrice = kcPlanPrice(
+        window?.loopProps[productId]?.sellingPlanAllocation
+    );
 
     if (sellingPlanPrice) {
         return loopFormatMoney(sellingPlanPrice, true);
@@ -2848,17 +2873,11 @@ function updatePriceInUILoop({ productId }) {
     const { selling_plan_allocations } = variant;
     selling_plan_groups.map((spg) => {
         if (Array.isArray(spg.selling_plans) && spg.selling_plans.length) {
-            let firstSellingPlan = spg.selling_plans[0];
-            let sellingPlanAllcotion =
-                selling_plan_allocations.find(
-                    (a) =>
-                        Number(a.selling_plan_id) ===
-                        Number(firstSellingPlan.id)
-                ) || {};
-            const {
-                selling_plan_group_id,
-                price,
-            } = sellingPlanAllcotion;
+            // KC: the card's selected, offered, allowed plan (kcCardAllocation), not the group's first one
+            let sellingPlanAllcotion = kcCardAllocation(productId, variant, spg.id) || {};
+            const { selling_plan_group_id } = sellingPlanAllcotion;
+            // KC: what the checkout charges (Shopify's price per quantity x quantity)
+            const price = kcPlanPrice(sellingPlanAllcotion);
             let element = document.querySelector(
                 `#loop-price-${variant.id}-${selling_plan_group_id}`
             );
@@ -2869,7 +2888,9 @@ function updatePriceInUILoop({ productId }) {
     });
 
     if (sellingPlan && sellingPlan.selling_plan_group_id) {
-        const { selling_plan_group_id, price } = sellingPlan;
+        const { selling_plan_group_id } = sellingPlan;
+        // KC: what the checkout charges (Shopify's price per quantity x quantity)
+        const price = kcPlanPrice(sellingPlan);
         let element = document.querySelector(
             `#loop-price-${variant.id}-${selling_plan_group_id}`
         );
@@ -3452,7 +3473,8 @@ function applyLoopBundleDiscount(productId) {
                     bundleVariantInfo.sellingPlanPrices[firstSellingPlan.id] *
                     100 *
                     conversionRate;
-                element.innerHTML = loopFormatMoney(bundlePrice, true);
+                // KC CUSTOM: what the checkout charges, the plan's Duos per delivery included
+                element.innerHTML = loopFormatMoney(bundlePrice * kcPlanUnits(firstSellingPlan.id), true);
 
                 let totalDiscount = Math.round(
                     ((originaPrice - bundlePrice) / originaPrice) * 100
@@ -3510,7 +3532,8 @@ function applyLoopBundleDiscount(productId) {
                 ] *
                 100 *
                 conversionRate;
-            element.innerHTML = loopFormatMoney(bundlePrice, true);
+            // KC CUSTOM: what the checkout charges, the plan's Duos per delivery included
+            element.innerHTML = loopFormatMoney(bundlePrice * kcPlanUnits(sellingPlan.selling_plan_id), true);
 
             let totalDiscount = Math.round(
                 ((originaPrice - bundlePrice) / originaPrice) * 100
@@ -3921,15 +3944,16 @@ async function loopWidgetCreateAddToCartPayload(
 async function shopifyAddToCartByLoopWidget(payload, productId) {
     const endpoint = `${window.Shopify.routes.root}cart/add.js`;
     try {
-        // KC CUSTOM: one purchase choice per plan product: earlier lines and kit lines go first (assets/kc-plan-select.js)
-        if (window.KCPlanSelect) {
-            await window.KCPlanSelect.clearPurchaseChoice(productId, payload?.items?.[0]?.selling_plan || "");
-        }
-        const response = await fetch(endpoint, {
+        // KC CUSTOM: one purchase choice per plan product: earlier lines and kit lines go first, one
+        // replacement at a time, the earlier choice back if the add is rejected (assets/kc-plan-select.js)
+        const addToCart = () => fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
+        const response = window.KCPlanSelect && window.KCPlanSelect.manages(productId)
+            ? await window.KCPlanSelect.replaceChoice(productId, payload?.items?.[0]?.selling_plan || "", addToCart)
+            : await addToCart();
         const data = await response.json();
         // KC CUSTOM: the cart's "Subscription Name" follows the subscriptions now in it (assets/kc-plan-select.js)
         if (window.KCPlanSelect) {
@@ -3969,6 +3993,10 @@ async function loopHandleAddToCart(event, productId, quantity = 1) {
 
     const productBundleData = getLoopWidgetProductBundleData(productId);
     const selectedSellingPlanId = getSelectedSellingPlanLoop(productId);
+    // KC CUSTOM: a plan product's subscription adds its plan's Duos per delivery (assets/kc-plan-select.js)
+    if (window.KCPlanSelect) {
+        quantity = window.KCPlanSelect.quantityFor(productId, selectedSellingPlanId || "", quantity);
+    }
 
     const {
         bundleTransactionId,
@@ -4047,10 +4075,14 @@ function updatePrepaidPriceInUILoop({ productId }) {
     selling_plan_groups.map((spg) => {
         if (Array.isArray(spg.selling_plans) && spg.selling_plans.length) {
             // let firstSellingPlan = spg.selling_plans[0];
-            let firstSellingPlan = getFirstVariantPlanFromGroup(
-                selling_plan_allocations,
-                spg.selling_plans
-            );
+            // KC: the card's selected, offered, allowed plan (kcCardAllocation), else Loop's first one
+            const kcCard = kcCardAllocation(productId, variant, spg.id);
+            let firstSellingPlan = kcCard
+                ? { id: Number(kcCard.selling_plan_id) }
+                : getFirstVariantPlanFromGroup(
+                    selling_plan_allocations,
+                    spg.selling_plans
+                );
             if (
                 !prepaidSellingPlans[firstSellingPlan.id] ||
                 !prepaidSellingPlans[firstSellingPlan.id]?.isPrepaidV2
@@ -4066,10 +4098,9 @@ function updatePrepaidPriceInUILoop({ productId }) {
                         Number(a.selling_plan_id) ===
                         Number(firstSellingPlan.id)
                 ) || {};
-            const {
-                selling_plan_group_id,
-                price,
-            } = sellingPlanAllcotion;
+            const { selling_plan_group_id } = sellingPlanAllcotion;
+            // KC: what the checkout charges (Shopify's price per quantity x quantity)
+            const price = kcPlanPrice(sellingPlanAllcotion);
             let element = document.querySelector(
                 `#loop-price-${variant.id}-${selling_plan_group_id}`
             );
@@ -4080,7 +4111,9 @@ function updatePrepaidPriceInUILoop({ productId }) {
     });
 
     if (sellingPlan && sellingPlan.selling_plan_group_id) {
-        const { selling_plan_group_id, price } = sellingPlan;
+        const { selling_plan_group_id } = sellingPlan;
+        // KC: what the checkout charges (Shopify's price per quantity x quantity)
+        const price = kcPlanPrice(sellingPlan);
         if (
             !prepaidSellingPlans[sellingPlan.selling_plan_id] ||
             !prepaidSellingPlans[sellingPlan.selling_plan_id]?.isPrepaidV2

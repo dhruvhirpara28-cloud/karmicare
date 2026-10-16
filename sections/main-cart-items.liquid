@@ -82,6 +82,38 @@
 
               <tbody>
                 {%- for item in cart.items -%}
+                  {%- liquid
+                    # A subscription line of a plan product (a product with a selling plan in
+                    # snippets/kc-plan-type.liquid; the line's own plan may be a new one not in it yet) holds
+                    # the plan's Duos per delivery: it can be removed, its quantity not changed. The Welcome
+                    # Kit discount can split it into several lines (e.g. 2 + 1): kc_choice_keys lists them
+                    # all, and removing one removes all (assets/cart.js).
+                    assign kc_quantity_locked = false
+                    assign kc_choice_keys = ''
+                    if item.selling_plan_allocation != null
+                      for kc_group in item.product.selling_plan_groups
+                        for kc_group_plan in kc_group.selling_plans
+                          if kc_quantity_locked == false
+                            capture kc_line_plan_type
+                              render 'kc-plan-type', plan_id: kc_group_plan.id
+                            endcapture
+                            if kc_line_plan_type != blank
+                              assign kc_quantity_locked = true
+                            endif
+                          endif
+                        endfor
+                      endfor
+                      if kc_quantity_locked
+                        for kc_other in cart.items
+                          if kc_other.variant.id == item.variant.id and kc_other.selling_plan_allocation != null
+                            if kc_other.selling_plan_allocation.selling_plan.id == item.selling_plan_allocation.selling_plan.id
+                              assign kc_choice_keys = kc_choice_keys | append: kc_other.key | append: ','
+                            endif
+                          endif
+                        endfor
+                      endif
+                    endif
+                  -%}
                   <tr
                     class="cart-item {% if item.parent_relationship.parent != null %}cart-item__nested-line{% endif %}"
                     id="CartItem-{{ item.index | plus: 1 }}"
@@ -251,10 +283,10 @@
                             <quantity-input class="quantity cart-quantity">
                               {% assign can_update_quantity = item.instructions.can_update_quantity | default: true %}
                               <button
-                                class="quantity__button"
+                                class="quantity__button{% if kc_quantity_locked %} hidden{% endif %}"
                                 name="minus"
                                 type="button"
-                                {% if can_update_quantity == false %}
+                                {% if can_update_quantity == false or kc_quantity_locked %}
                                   disabled
                                 {% endif %}
                               >
@@ -287,12 +319,15 @@
                                 {% if can_update_quantity == false %}
                                   disabled
                                 {% endif %}
+                                {% if kc_quantity_locked %}
+                                  readonly
+                                {% endif %}
                               >
                               <button
-                                class="quantity__button"
+                                class="quantity__button{% if kc_quantity_locked %} hidden{% endif %}"
                                 name="plus"
                                 type="button"
-                                {% if can_update_quantity == false %}
+                                {% if can_update_quantity == false or kc_quantity_locked %}
                                   disabled
                                 {% endif %}
                               >
@@ -308,6 +343,9 @@
                           <cart-remove-button
                             id="Remove-{{ item.index | plus: 1 }}"
                             data-index="{{ item.index | plus: 1 }}"
+                            {% if kc_quantity_locked %}
+                              data-kc-choice-keys="{{ kc_choice_keys }}"
+                            {% endif %}
                             {% assign can_remove = item.instructions.can_remove | default: true %}
                             {% if can_remove == false %}
                               class="hidden"

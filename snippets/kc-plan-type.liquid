@@ -1,26 +1,86 @@
 {%- comment -%}
-  The type of a selling plan, by selling plan ID: "60-day" or "year". This is the only table of plan
-  IDs in the theme. Plan logic keys on the type, never on plan or group names, so renaming or
-  translating a plan changes nothing:
+  The type of a selling plan, by selling plan ID: "60-day" or "year", its Duos per delivery and, for a
+  year plan, the year total the checkout must charge. This is the only table of plan IDs in the theme.
+  Plan logic keys on the type, never on plan or group names, so renaming or translating a plan changes
+  nothing:
   - the "Subscription Name" for Care Credit (snippets/kc-plan-loyalty.liquid)
   - the billing interval, deliveries and Dental Check-up Reward (assets/kc-plan-select.js PLAN_TYPES)
-  - the end CTA interval (sections/featured-product.liquid)
+  - the Duos per delivery: the cart quantity of the plan and the prices shown for it
+    (snippets/kc-plan-config.liquid, assets/kc-plan-select.js units())
+  - the end CTA interval and price (sections/featured-product.liquid), the sticky bar price
+    (snippets/sticky-cart-block.liquid) and the cart quantity lock (snippets/cart-drawer.liquid,
+    sections/main-cart-items.liquid)
   It lists every selling plan of the product, the legacy email offers included (they never show on the
   product page, but any theme path that adds them gets the same treatment).
 
+  Year plan: 3 Duos per delivery, 2 deliveries (now and month 6), paid up front: 6 Duos x €59 = €354.
+  Cart quantity = Duos per delivery = 3.
+  Shopify's price per quantity is a year price (€118, admin only), never a per-Duo price:
+  €118 x 3 = €354. Do not compare it with the Duos in one delivery.
+
+  Duos per delivery: 60-day plans 1; year plans the theme setting "Year plans: Duos per delivery"
+  (settings.kc_year_units_per_delivery: 3, or 1 as an emergency rollback); an unknown plan 1
+  (kc-plan-config warns in the theme editor, kc-plan-select.js on the storefront).
+
+  Expected year total (in cents, shop currency) while year plans are 3 Duos per delivery: a safety
+  check only, never displayed. kc-plan-config and kc-plan-select.js warn when Shopify's year price per
+  quantity x quantity differs:
+  354.00 = 6 x 59 (The Karmicare Year and the swapped Subscribe and Save plan),
+  294.00 = 6 x 49 (Yearly Plan and the first year of Subscribe and Save 49 -> 59).
+
+  Deliveries per billing: 60-day plans 1, year plans 2 (paid for the year, delivered now and in month 6;
+  the same as PLAN_TYPES in assets/kc-plan-select.js). A year plan holds units x 2 Duos a year.
+
+  Care Credit per order, in %: 60-day plans 10 ("Care Credit - 10%" in Loop Loyalty, Subscription Name
+  "60-Day Supply"), year plans 20 ("Care Credit - 20%", "Year Supply"), an unknown plan 0 (no
+  Subscription Name). The preview where no duos metaobject value applies (end CTA, buybox fallback).
+
   Accepts:
   - plan_id: {String|Number} a selling plan ID
+  - field: {String} 'type' (default), 'units', 'deliveries', 'expected_total' or 'care_credit_percent'
 
-  Outputs "60-day", "year", or nothing for an unknown plan.
+  Outputs, by field: "60-day", "year" or nothing for an unknown plan; the Duos per delivery (1 for an
+  unknown plan); the deliveries per billing (1 for an unknown plan); the expected year total in cents,
+  or nothing; the Care Credit % (0 for an unknown plan).
 {%- endcomment -%}
 {%- liquid
   # 60-day: 60-Day Rhythm, 60-Day Supply, Subscribe and Save "Deliver every 60 days".
   # Year: The Karmicare Year, Yearly Plan, both Subscribe and Save "Pay every 12 months" plans.
   assign kc_wanted = plan_id | append: '' | remove: 'gid://shopify/SellingPlan/' | strip
+  assign kc_type = ''
+  assign kc_units = 1
+  assign kc_deliveries = 1
+  assign kc_expected_total = ''
+  assign kc_care_credit_percent = 0
+  assign kc_year_units = settings.kc_year_units_per_delivery | default: 3 | plus: 0
   case kc_wanted
     when '712106115453', '712192164221', '712387297661'
-      echo '60-day'
-    when '712155431293', '712370356605', '712387330429', '712387363197'
-      echo 'year'
+      assign kc_type = '60-day'
+      assign kc_care_credit_percent = 10
+    when '712155431293', '712387363197'
+      assign kc_type = 'year'
+      assign kc_units = kc_year_units
+      assign kc_deliveries = 2
+      assign kc_expected_total = '35400'
+      assign kc_care_credit_percent = 20
+    when '712370356605', '712387330429'
+      assign kc_type = 'year'
+      assign kc_units = kc_year_units
+      assign kc_deliveries = 2
+      assign kc_expected_total = '29400'
+      assign kc_care_credit_percent = 20
+  endcase
+
+  case field
+    when 'units'
+      echo kc_units
+    when 'deliveries'
+      echo kc_deliveries
+    when 'expected_total'
+      echo kc_expected_total
+    when 'care_credit_percent'
+      echo kc_care_credit_percent
+    else
+      echo kc_type
   endcase
 -%}

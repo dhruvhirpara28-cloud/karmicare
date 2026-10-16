@@ -570,19 +570,41 @@
                         {%- render 'kc-plan-config', product: product, section: section, role: 'end-cta' -%}
                         {%- if block.settings.only_first_subscription -%}
                           {%- assign sub_allocation = kc_offer_allocation -%}
-                          {%- assign sub_price = sub_allocation.price
-                            | default: product.selected_or_first_available_variant.price
-                          -%}
-                          {%- assign care_credit = sub_price | times: 0.1 -%}
-                          {%- assign per_brushing_cents = sub_price | divided_by: 120.0 | round -%}
-                          {%- comment -%} Interval by the plan's type (selling plan ID), never its name {%- endcomment -%}
+                          {%- comment -%}
+                            Interval, Duos per delivery, deliveries and Care Credit % by the plan's type
+                            (selling plan ID, snippets/kc-plan-type.liquid), never its name. The price is what
+                            the checkout charges: Shopify's price per quantity x quantity (quantity = Duos per
+                            delivery; for a year plan Shopify's year price per quantity x quantity, never a
+                            per-Duo price); per brushing over every brushing in that price (120 per Duo, every
+                            delivery of the billing).
+                          {%- endcomment -%}
                           {%- capture kc_offer_type -%}
                             {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id -%}
                           {%- endcapture -%}
+                          {%- capture kc_offer_units -%}
+                            {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id, field: 'units' -%}
+                          {%- endcapture -%}
+                          {%- capture kc_offer_deliveries -%}
+                            {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id, field: 'deliveries' -%}
+                          {%- endcapture -%}
+                          {%- capture kc_offer_credit_percent -%}
+                            {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id, field: 'care_credit_percent' -%}
+                          {%- endcapture -%}
+                          {%- assign kc_offer_duos = kc_offer_units | times: kc_offer_deliveries -%}
                           {%- assign interval_text = '/ 60 days' -%}
                           {%- if kc_offer_type == 'year' -%}
                             {%- assign interval_text = '/ year' -%}
                           {%- endif -%}
+                          {%- assign sub_price = sub_allocation.price
+                            | default: product.selected_or_first_available_variant.price
+                            | times: kc_offer_units
+                          -%}
+                          {%- assign care_credit = sub_price | times: kc_offer_credit_percent | divided_by: 100.0 -%}
+                          {%- assign per_brushing_cents = sub_price
+                            | divided_by: 120.0
+                            | divided_by: kc_offer_duos
+                            | round
+                          -%}
                           <div class="kc-custom-subscription-widget">
                             <div class="kc-custom-box">
                               <div class="kc-custom-row kc-custom-product-info">
@@ -641,12 +663,19 @@
                                   <span class="kc-custom-care-credits__title">
                                     {{- block.settings.pricing_summary_care_credit_title -}}
                                   </span>
-                                  <span class="kc-custom-care-credits__rate">{{ block.settings.care_credit_text_1 }}</span>
+                                  {%- comment -%}
+                                    The rate in the texts is the offer's plan rate (snippets/kc-plan-type.liquid):
+                                    "[rate]" or "10%" becomes it, so a Year offer reads 20% next to its amount
+                                  {%- endcomment -%}
+                                  {%- assign kc_offer_rate = kc_offer_credit_percent | strip | append: '%' -%}
+                                  <span class="kc-custom-care-credits__rate">
+                                    {{- block.settings.care_credit_text_1 | replace: '[rate]', kc_offer_rate | replace: '10%', kc_offer_rate -}}
+                                  </span>
                                 </span>
                                 <div class="kc-custom-col-right">
                                   <strong>{{ care_credit | money }}</strong>
                                   <div class="kc-custom-interval">
-                                    {{ block.settings.care_credit_text_2 }}
+                                    {{ block.settings.care_credit_text_2 | replace: '[rate]', kc_offer_rate | replace: '10%', kc_offer_rate }}
                                   </div>
                                 </div>
                               </div>
@@ -1888,12 +1917,14 @@
         {
           "type": "inline_richtext",
           "id": "care_credit_text_1",
-          "label": "Care Credit Subtext 1"
+          "label": "Care Credit Subtext 1",
+          "info": "\"10%\" or \"[rate]\" shows the Care Credit % of the offer's plan (60-day 10%, year 20%)."
         },
         {
           "type": "inline_richtext",
           "id": "care_credit_text_2",
-          "label": "Care Credit Subtext 2"
+          "label": "Care Credit Subtext 2",
+          "info": "\"10%\" or \"[rate]\" shows the Care Credit % of the offer's plan (60-day 10%, year 20%)."
         },
         {
           "type": "inline_richtext",

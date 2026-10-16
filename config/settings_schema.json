@@ -2184,5 +2184,27 @@
         "label": "Welcome Kit Free Product"
       }
     ]
+  },
+  {
+    "name": "Plans",
+    "settings": [
+      {
+        "type": "select",
+        "id": "kc_year_units_per_delivery",
+        "label": "Year plans: Duos per delivery",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          }
+        ],
+        "default": "3",
+        "info": "Year plan: 3 Duos per delivery, 2 deliveries (now and month 6), paid up front: 6 Duos x €59 = €354. Cart quantity = Duos per delivery = 3. Shopify's price per quantity is a year price (€118, admin only), never a per-Duo price: the product page shows and the checkout charges Shopify's year price per quantity x quantity (€118 x 3 = €354). The cart quantity, that price and the Care Credit preview follow this setting. Set 1 only as an emergency rollback, together with a full-year price per quantity in Loop. 60-day plans and Try Once always stay 1."
+      }
+    ]
   }
 ]

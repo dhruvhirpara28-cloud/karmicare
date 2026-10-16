@@ -191,6 +191,16 @@
               {%- endif -%}
             {%- endfor -%}
             {%- assign sp = selling_plan_group.selling_plans.first -%}
+            {%- comment -%}
+              What the checkout charges: Shopify's price per quantity x quantity, the quantity being the
+              plan's Duos per delivery (snippets/kc-plan-type.liquid; for a year plan Shopify's year price
+              per quantity x quantity, never a per-Duo price); the buybox's live price replaces it once
+              Loop has loaded
+            {%- endcomment -%}
+            {%- capture sc_units -%}
+              {%- render 'kc-plan-type', plan_id: first_alloc.selling_plan.id, field: 'units' -%}
+            {%- endcapture -%}
+            {%- assign sc_price = first_alloc.price | default: current_variant.price | times: sc_units -%}
 
             <div
               class="sc-dd-option"
@@ -198,7 +208,7 @@
               data-type="subscription"
               data-selling-plan-group-id="{{ spg_id }}"
               data-selling-plan="{{ sp.id }}"
-              data-price="{{ first_alloc.price | default: current_variant.price }}"
+              data-price="{{ sc_price }}"
               data-label="{{ selling_plan_group.name | escape }}"
               data-interval="{{ sp.options.first.value | escape }}"
               data-loop-group-id="{{ selling_plan_group.id }}"
@@ -213,7 +223,7 @@
               </span>
               <span class="sc-dd-price-group">
                 <span class="sc-dd-price">
-                  {{ first_alloc.price | default: current_variant.price | money_without_trailing_zeros }}
+                  {{ sc_price | money_without_trailing_zeros }}
                 </span>
                 {%- if sp.options.first.value != blank -%}
                   <span class="sc-dd-interval" style="display:none;">/ {{ sp.options.first.value }}</span>
@@ -450,8 +460,11 @@
       var pCents = parseInt(match.dataset.price || '0', 10);
       var pt = getLoopPriceText(vid, spgId, isOnetime);
       var richData = getRichPlanData(spgId, isOnetime, pCents);
-      /* The bar buys exactly what the buybox form holds (assets/kc-plan-select.js) */
+      /* The bar buys exactly what the buybox form holds, plan and variant (assets/kc-plan-select.js) */
       var planId = !isOnetime && window.KCPlanSelect ? window.KCPlanSelect.selectedPlanId({{ product.id | json }}) : '';
+      var buyboxVariantId = window.KCPlanSelect ? window.KCPlanSelect.selectedVariantId({{ product.id | json }}) : '';
+      var variantInput = document.getElementById('scVariantId');
+      if (variantInput && buyboxVariantId && variantInput.value !== buyboxVariantId) variantInput.value = buyboxVariantId;
 
       applyOption(match, pt, richData, planId);
       refreshAllSubrows();
