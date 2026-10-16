@@ -4,6 +4,9 @@ if (!customElements.get('quick-order-list')) {
     class QuickOrderList extends BulkAdd {
       cartUpdateUnsubscriber = undefined;
       hasPendingQuantityUpdate = false;
+      // Inputs changed but not yet queued (in their debounce, or invalid): no answer goes on to checkout
+      // while one is left, so checkout never misses the shopper's latest quantities
+      unsentInputs = new Set();
       constructor() {
         super();
         this.isListInsideModal = this.closest('bulk-modal');
@@ -79,9 +82,18 @@ if (!customElements.get('quick-order-list')) {
         this.allInputsArray = Array.from(this.querySelectorAll('input[type="number"]'));
 
         this.querySelectorAll('quantity-input').forEach((qty) => {
-          const debouncedOnChange = debounce(this.onChange.bind(this), BulkAdd.ASYNC_REQUEST_DELAY, true);
+          const debouncedOnChange = debounce(
+            (event) => {
+              const queued = this.queue.length;
+              this.onChange(event);
+              if (this.queue.length > queued) this.unsentInputs.delete(event.target);
+            },
+            BulkAdd.ASYNC_REQUEST_DELAY,
+            true
+          );
           qty.addEventListener('change', (event) => {
             this.hasPendingQuantityUpdate = true;
+            this.unsentInputs.add(event.target);
             debouncedOnChange(event);
           });
         });
@@ -346,9 +358,10 @@ if (!customElements.get('quick-order-list')) {
               source: this.id,
               cartData: parsedState,
             });
-            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting, on to /cart,
-            // which sends a cart with lines to checkout and an empty one to the product page
-            if (this.queue.length === 0 && !this.hasPendingQuantityUpdate) window.location.href = routes.cart_url;
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting (queued, in its
+            // debounce or invalid), on to /cart, which sends a cart with lines to checkout and an empty one to
+            // the product page
+            if (this.queue.length === 0 && this.unsentInputs.size === 0) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);

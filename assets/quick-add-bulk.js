@@ -6,18 +6,21 @@ if (!customElements.get('quick-add-bulk')) {
         super();
         this.quantity = this.querySelector('quantity-input');
 
+        // Inputs changed but not yet queued (in their debounce, or invalid): no answer goes on to checkout
+        // while one is left, so checkout never misses the shopper's latest quantity (as quick-order-list.js)
+        this.unsentInputs = new Set();
         const debouncedOnChange = debounce((event) => {
+          const queued = this.queue.length;
           if (parseInt(event.target.value) === 0) {
             this.startQueue(event.target.dataset.index, parseInt(event.target.value));
           } else {
             this.validateQuantity(event);
           }
+          if (this.queue.length > queued) this.unsentInputs.delete(event.target);
         }, ON_CHANGE_DEBOUNCE_TIMER);
 
-        // A changed quantity counts as pending from the change on, through the debounce, until it is sent
-        // (updateMultipleQty), so an earlier request does not go on to checkout without it (as quick-order-list.js)
         this.addEventListener('change', (event) => {
-          this.hasPendingQuantityUpdate = true;
+          this.unsentInputs.add(event.target);
           debouncedOnChange(event);
         });
         this.listenForActiveInput();
@@ -117,7 +120,6 @@ if (!customElements.get('quick-add-bulk')) {
       }
 
       updateMultipleQty(items) {
-        if (this.queue.length === 0) this.hasPendingQuantityUpdate = false;
         this.selectProgressBar().classList.remove('hidden');
 
         const ids = Object.keys(items);
@@ -138,10 +140,10 @@ if (!customElements.get('quick-add-bulk')) {
             linesUpdate?.resolve(parsedState);
             this.renderSections(parsedState, ids);
             publish(PUB_SUB_EVENTS.cartUpdate, { source: 'quick-add', cartData: parsedState });
-            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting (queued or still
-            // in its debounce), on to /cart, which sends a cart with lines to checkout and an empty one to the
-            // product page (sections/kc-cart-redirect.liquid)
-            if (this.queue.length === 0 && !this.hasPendingQuantityUpdate) window.location.href = routes.cart_url;
+            // No theme cart (Victor, 16 Oct; layout/theme.liquid): once no quantity is waiting (queued, in its
+            // debounce or invalid), on to /cart, which sends a cart with lines to checkout and an empty one to
+            // the product page (sections/kc-cart-redirect.liquid)
+            if (this.queue.length === 0 && this.unsentInputs.size === 0) window.location.href = routes.cart_url;
           })
           .catch((e) => {
             if (e.code !== 'INVALID') console.error(e);
