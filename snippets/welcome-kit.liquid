@@ -25,7 +25,6 @@
           -%}
           {% if prod != blank and prod.variants.first != blank %}
             {
-              variantId: {{ prod.variants.first.id }},
               productId: {{ prod.id }}
             }{% unless forloop.last %},{% endunless %}
           {% endif %}
