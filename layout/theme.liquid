@@ -35,7 +35,13 @@
     {{ content_for_header }}
 
     {% render 'day-night-locations' %}
-    <script>{{ 'day-night-sun.js' | inline_asset_content }}</script>
+    <script>
+      {
+        {
+          'day-night-sun.js' | inline_asset_content;
+        }
+      }
+    </script>
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
@@ -477,7 +483,9 @@
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}{% if settings.day_mode_bg_image != blank %} kc-has-day-image{% endif %}{% if settings.night_mode_bg_image != blank %} kc-has-night-image{% endif %}">
-    <script>window.KCDayNight.applyInitial();</script>
+    <script>
+      window.KCDayNight.applyInitial();
+    </script>
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

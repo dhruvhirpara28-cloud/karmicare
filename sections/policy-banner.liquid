@@ -1,77 +1,193 @@
 <style>
-    {%- if section.settings.bg_gradient_day != blank -%}
-        body:not(.night-mode) .section-{{ section.id }},
-        body.day-mode .section-{{ section.id }} {
-          background: {{ section.settings.bg_gradient_day }};
-      }
+  /* ==========================================================================
+     Policy Banner / Consumer Rights Section
+     ========================================================================== */
+
+  /* Base Section Layout */
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .section-{{ section.id }} .page-width {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Content Elements */
+  .section-{{ section.id }} .consumer-rights__eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .section-{{ section.id }} .consumer-rights__heading {
+    margin: 0 0 24px;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .section-{{ section.id }} .consumer-rights__description {
+    margin: 0 0 24px;
+  }
+
+  .section-{{ section.id }} .consumer-rights__company-info {
+    margin: 0 0 3px;
+    font-size: var(--font-body-medium-size-desktop);
+  }
+
+  .section-{{ section.id }} .consumer-rights__company-info-inner {
+    margin: 0 0 24px;
+    font-size: var(--font-body-medium-size-desktop);
+  }
+
+  .section-{{ section.id }} .consumer-rights__company-info-inner a {
+    text-decoration: underline;
+  }
+
+  /* Cards Grid */
+  .section-{{ section.id }} .consumer-rights__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-xl);
+    padding-top: 24px;
+    border-top: 1px solid #2C3A60;
+  }
+
+  .section-{{ section.id }} .consumer-rights__card {
+    padding: 14px;
+    border-radius: var(--extra-primary-border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    justify-content: flex-start;
+  }
+
+  .section-{{ section.id }} .consumer-rights__card-description {
+    font-weight: var(--font-500-weight);
+    font-size: var(--font-body-medium-size-desktop);
+  }
+
+  .section-{{ section.id }} .consumer-rights__card-bottom {
+    font-size: var(--font-body-medium-size-desktop);
+    opacity: 0.68;
+  }
+
+  /* Day Mode Colors */
+  {%- if section.settings.bg_gradient_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_day }};
+    }
   {%- elsif section.settings.bg_color_day != blank -%}
-      body:not(.night-mode) .section-{{ section.id }},
-      body.day-mode .section-{{ section.id }} {
-          background-color: {{ section.settings.bg_color_day }};
-      }
+    body:not(.night-mode) .section-{{ section.id }},
+    body.day-mode .section-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_day }};
+    }
   {%- endif -%}
 
-    {%- if section.settings.bg_gradient_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-    }
-    {%- elsif section.settings.bg_color_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_night }};
+  {%- if section.settings.box_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card,
+    body.day-mode .section-{{ section.id }} .consumer-rights__card {
+      background-color: {{ section.settings.box_color_day }};
     }
   {%- endif -%}
-  {% if section.settings.box_color_night != blank %}
-    body.night-mode .section-{{ section.id }} .consumer-rights__card{
+
+  {%- if section.settings.text_color_day != blank -%}
+    body:not(.night-mode) .section-{{ section.id }} *,
+    body.day-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_day }};
+    }
+
+    body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner p,
+    body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p {
+      color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
+    }
+
+    body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
+    body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
+      color: {{ section.settings.text_color_day }};
+    }
+  {%- endif -%}
+
+  /* Night Mode Colors */
+  {%- if section.settings.bg_gradient_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+      background: {{ section.settings.bg_gradient_night }};
+    }
+  {%- elsif section.settings.bg_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} {
+      background-color: {{ section.settings.bg_color_night }};
+    }
+  {%- endif -%}
+
+  {%- if section.settings.box_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} .consumer-rights__card {
       background-color: {{ section.settings.box_color_night }};
     }
   {%- endif -%}
-    /* DAY MODE */
-    {% if section.settings.box_color_day != blank %}
-      body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card,
-      body.day-mode .section-{{ section.id }} .consumer-rights__card {
-        background-color: {{ section.settings.box_color_day }};
-      }
-    {%- endif -%}
-    {% if section.settings.text_color_day != blank %}
-      body:not(.night-mode) .section-{{ section.id }} *,
-      body.day-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_day }};
-      }
-       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner p,
-      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
-       color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
-      }
-       body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
-      body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
-        color: {{ section.settings.text_color_day }};
-      }
-    {% endif %}
 
-
-    /* NIGHT MODE */
-    {% if section.settings.text_color_night != blank %}
-      body.night-mode .section-{{ section.id }} * {
-        color: {{ section.settings.text_color_night }};
-      }
-      body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner p{
-       color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
-      }
-       body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a{
-        color: {{ section.settings.text_color_night }};
-      }
-    {% endif %}
-
-    #section-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+  {%- if section.settings.text_color_night != blank -%}
+    body.night-mode .section-{{ section.id }} * {
+      color: {{ section.settings.text_color_night }};
     }
 
-    @media only screen and (max-width: 767px) {
-      #section-{{ section.id }} {
-          padding-top: {{ section.settings.padding_top_mobile }}px;
-          padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-      }
+    body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner p {
+      color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
     }
+
+    body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
+      color: {{ section.settings.text_color_night }};
+    }
+  {%- endif -%}
+
+  /* Responsive - Tablet & Mobile (< 768px) */
+  @media only screen and (max-width: 767px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    .section-{{ section.id }} .consumer-rights__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Responsive - Small Mobile (< 641px) */
+  @media only screen and (max-width: 640px) {
+    .section-{{ section.id }} .consumer-rights__cards {
+      padding-top: 20px;
+      gap: 12px;
+    }
+
+    .section-{{ section.id }} .consumer-rights__eyebrow,
+    .section-{{ section.id }} .consumer-rights__heading,
+    .section-{{ section.id }} .consumer-rights__description,
+    .section-{{ section.id }} .consumer-rights__company-info-inner {
+      margin-bottom: 20px;
+    }
+
+    .section-{{ section.id }} .consumer-rights__eyebrow {
+      font-size: var(--kc-responsive-label-sm-text-size);
+      line-height: 12px;
+    }
+
+    .section-{{ section.id }} .consumer-rights__card {
+      padding: 20px;
+    }
+
+    .section-{{ section.id }} .consumer-rights__card-title {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .section-{{ section.id }} .consumer-rights__card-description,
+    .section-{{ section.id }} .consumer-rights__card-bottom,
+    .section-{{ section.id }} .consumer-rights__company-info,
+    .section-{{ section.id }} .consumer-rights__company-info-inner {
+      font-size: var(--kc-responsive-label-sm-text-size);
+    }
+  }
 </style>
 
 <div
@@ -92,7 +208,7 @@
     {% endif %}
 
     {% if section.settings.description != blank %}
-      <div class="consumer-rights__description">
+      <div class="consumer-rights__description opacity-xl h5">
         {{ section.settings.description }}
       </div>
     {% endif %}
@@ -117,7 +233,7 @@
               {{ block.shopify_attributes }}
             >
               {% if block.settings.card_title != blank %}
-                <div class="consumer-rights__card-title">
+                <div class="consumer-rights__card-title h4">
                   {{ block.settings.card_title }}
                 </div>
               {% endif %}
@@ -140,139 +256,6 @@
     {% endif %}
   </div>
 </div>
-
-<style>
-    #section-{{ section.id }} .page-width {
-      width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    #section-{{ section.id }} .consumer-rights__eyebrow {
-      margin-bottom: 24px;
-  }
-
-  #section-{{ section.id }} .consumer-rights__heading {
-      margin: 0 0 24px;
-      line-height: 1;
-      letter-spacing: -2px;
-  }
-
-  #section-{{ section.id }} .consumer-rights__description {
-      margin: 0 0 24px;
-      font-size: 20px;
-      letter-spacing:0px;
-      line-height: 28px;
-      opacity:0.68;
-  }
-
-  #section-{{ section.id }} .consumer-rights__company-info {
-      margin: 0 0 3px;
-      font-size: var(--font-body-medium-size-desktop);
-      line-height: 20px;
-      letter-spacing:0px;
-      opacity:0.68;
-  }
-  #section-{{ section.id }} .consumer-rights__company-info-inner {
-      margin: 0 0 24px;
-      font-size: var(--font-body-medium-size-desktop);
-      line-height: 20px;
-      letter-spacing:0px;
-  }
-  #section-{{ section.id }} .consumer-rights__company-info-inner a{
-      text-decoration:underline;
-  }
-
-    #section-{{ section.id }} .consumer-rights__cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      padding-top: 24px;
-      border-top: 1px solid #2C3A60;
-    }
-
-    #section-{{ section.id }} .consumer-rights__card {
-      padding: 24px;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      gap:8px;
-      justify-content:start;
-    }
-
-    #section-{{ section.id }} .consumer-rights__card-title {
-      font-weight: var(--font-500-weight);
-      font-size: 28px;
-      line-height: 32px;
-      letter-spacing: -1px;
-  }
-
-  #section-{{ section.id }} .consumer-rights__card-description {
-      font-weight: var(--font-500-weight);
-      font-size:  var(--font-body-medium-size-desktop);
-      line-height: 20px;
-      letter-spacing: 0px;
-  }
-
-  #section-{{ section.id }} .consumer-rights__card-bottom {
-      font-size: var(--font-body-medium-size-desktop);
-      line-height: 20px;
-      opacity:0.68;
-      letter-spacing: 0px;
-    }
-    @media screen and (max-width: 767px) {
-      #section-{{ section.id }} .consumer-rights__cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-    }
-    @media screen and (max-width: 640px) {
-
-      #section-{{ section.id }} .consumer-rights__cards {
-        padding-top:20px;
-        gap:12px;
-      }
-      #section-{{ section.id }} .consumer-rights__company-info-inner,
-      #section-{{ section.id }} .consumer-rights__description,
-      #section-{{ section.id }} .consumer-rights__heading,
-      #section-{{ section.id }} .consumer-rights__eyebrow {
-        margin-bottom: 20px;
-      }
-      #section-{{ section.id }} .consumer-rights__eyebrow {
-        font-size:var(--kc-responsive-label-sm-text-size);
-        line-height:12px;
-      }
-      #section-{{ section.id }} .consumer-rights__card {
-          padding:20px;
-      }
-      #section-{{ section.id }} .consumer-rights__card-title {
-          font-size: 20px;
-          line-height: 24px;
-      }
-      #section-{{ section.id }} .consumer-rights__card-bottom {
-          font-size: var(--kc-responsive-label-sm-text-size);
-          line-height: 16px;
-      }
-      #section-{{ section.id }} .consumer-rights__card-description {
-          font-size: var(--kc-responsive-label-sm-text-size);
-          line-height: 16px;
-      }
-      #section-{{ section.id }} .consumer-rights__description {
-          font-size: 16px;
-          line-height: 22px;
-      }
-      #section-{{ section.id }} .consumer-rights__company-info-inner {
-          font-size: var(--kc-responsive-label-sm-text-size);
-          line-height: 16px;
-      }
-      #section-{{ section.id }} .consumer-rights__company-info {
-          font-size: var(--kc-responsive-label-sm-text-size);
-          line-height: 16px;
-      }
-    }
-</style>
-
 {% schema %}
 {
   "name": "Policy Bannner",
