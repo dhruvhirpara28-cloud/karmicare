@@ -300,10 +300,13 @@
 
 /* Checklist. The hairline between the header and the details runs
    the full card width, so it is drawn on the first row and pulled
-   out over the card's side padding. */
+   out over the card's side padding. The left padding is the tick cell
+   (Figma: 16 px tick, gap 3) so a wrapped line starts under the text,
+   not under the tick. */
 .kc-buybox .block__loop-description .kc-description-list {
   position: relative;
   margin-top: var(--kc-responsive-spacing-layout-xs);
+  padding-left: calc(var(--kc-responsive-size-icon-sm) + var(--kc-responsive-spacing-layout-xxs));
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-buybox-text);
@@ -330,13 +333,14 @@
 /* The "✓" text comes from the Loop plan description. Proxima Nova has
    no ✓ glyph, so browsers fell back to a heavy, slanted system tick.
    The text is hidden and the Figma tick (1.5px icon stroke) is drawn
-   as a mask in the accent colour instead. */
+   as a mask in the accent colour instead. It sits in the row's left
+   padding, one line high, so it stays on the first line. */
 .kc-buybox .kc-description-list .arrow {
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: var(--kc-responsive-size-icon-sm);
   height: var(--kc-buybox-body-line-height);
-  margin-right: var(--kc-responsive-spacing-layout-xxs);
-  vertical-align: top;
   font-size: 0;
   color: transparent;
   background-color: var(--kc-mapped-icon-accent-default);
@@ -355,6 +359,28 @@
   border-radius: var(--kc-shape-radius-full);
   font-size: var(--kc-responsive-label-lg-text-size);
   white-space: nowrap;
+}
+
+/* base.css gives every span line-height: normal, which made the pill
+   24 px tall instead of Figma's 22. */
+.kc-buybox span.kc-welcome-kit-parent > span {
+  line-height: inherit;
+}
+
+/* Mobile: the chip takes its own line under the benefit text, 3 px below
+   it and flush with the text column (Figma 4023:29018). Inline, it touched
+   the line above when it wrapped, and from 402 px it stayed on the first
+   line and pushed the text below the tick. */
+@media screen and (max-width: 749px) {
+  .kc-buybox span.kc-welcome-kit-parent,
+  .night-mode .kc-buybox span.kc-welcome-kit-parent,
+  .day-mode .kc-buybox span.kc-welcome-kit-parent {
+    display: block;
+    width: fit-content;
+    margin-top: var(--kc-responsive-spacing-layout-xxs);
+    margin-left: 0;
+    line-height: var(--kc-responsive-label-lg-line-height);
+  }
 }
 
 /* Welcome Kit tiles */
