@@ -1,4 +1,4 @@
-/* GENERATED from KC | Brand Design Library (Figma gcWcgYxS1nmheciKYOjOGx) on 2026-10-12. DO NOT EDIT.
+/* GENERATED from KC | Brand Design Library (Figma gcWcgYxS1nmheciKYOjOGx) on 2026-10-12, responsive re-exported 2026-10-17. DO NOT EDIT.
    Source: docs/design-tokens/kc-tokens.json. Regenerate: python3 docs/design-tokens/generate.py
    Naming: --kc-<collection>-<figma path, '/' and spaces to '-'>. Opaque colours also ship as -rgb triplets.
    Mapped colours: Day on :root and body.day-mode, Night on body.night-mode (the class assets/day-night-mode.js sets).
@@ -68,17 +68,17 @@
   --kc-font-use-mono: "Geist Mono", monospace;
   --kc-font-use-brand: "Nunito", sans-serif;
   --kc-responsive-display-text-size: 48px;
-  --kc-responsive-display-line-height: 44px;
+  --kc-responsive-display-line-height: 56px;
   --kc-responsive-display-letter-spacing: -1px;
   --kc-responsive-display-paragraph-spacing: 24px;
   --kc-responsive-h1-text-size: 32px;
-  --kc-responsive-h1-line-height: 32px;
+  --kc-responsive-h1-line-height: 36px;
   --kc-responsive-h1-paragraph-spacing: 16px;
   --kc-responsive-h2-text-size: 28px;
-  --kc-responsive-h2-line-height: 28px;
+  --kc-responsive-h2-line-height: 32px;
   --kc-responsive-h2-paragraph-spacing: 16px;
   --kc-responsive-h3-text-size: 24px;
-  --kc-responsive-h3-line-height: 24px;
+  --kc-responsive-h3-line-height: 28px;
   --kc-responsive-h3-paragraph-spacing: 12px;
   --kc-responsive-h4-text-size: 20px;
   --kc-responsive-h4-line-height: 24px;
@@ -90,23 +90,23 @@
   --kc-responsive-h6-line-height: 20px;
   --kc-responsive-h6-letter-spacing: 1px;
   --kc-responsive-h6-paragraph-spacing: 8px;
-  --kc-responsive-body-lg-text-size: 16px;
-  --kc-responsive-body-lg-line-height: 22px;
+  --kc-responsive-body-lg-text-size: 18px;
+  --kc-responsive-body-lg-line-height: 26px;
   --kc-responsive-body-lg-letter-spacing: 0;
   --kc-responsive-body-lg-paragraph-spacing: 12px;
-  --kc-responsive-body-md-text-size: 14px;
-  --kc-responsive-body-md-line-height: 20px;
+  --kc-responsive-body-md-text-size: 16px;
+  --kc-responsive-body-md-line-height: 24px;
   --kc-responsive-body-md-letter-spacing: 0;
   --kc-responsive-body-md-paragraph-spacing: 8px;
-  --kc-responsive-body-sm-text-size: 12px;
-  --kc-responsive-body-sm-line-height: 16px;
+  --kc-responsive-body-sm-text-size: 14px;
+  --kc-responsive-body-sm-line-height: 20px;
   --kc-responsive-body-sm-letter-spacing: 0;
   --kc-responsive-body-sm-paragraph-spacing: 8px;
-  --kc-responsive-label-lg-text-size: 12px;
-  --kc-responsive-label-lg-line-height: 12px;
+  --kc-responsive-label-lg-text-size: 13px;
+  --kc-responsive-label-lg-line-height: 16px;
   --kc-responsive-label-lg-letter-spacing: 0;
   --kc-responsive-label-lg-paragraph-spacing: 4px;
-  --kc-responsive-label-sm-line-height: 10px;
+  --kc-responsive-label-sm-line-height: 16px;
   --kc-responsive-label-sm-letter-spacing: 0;
   --kc-responsive-label-sm-paragraph-spacing: 4px;
   --kc-responsive-spacing-layout-xxs: 3px;
@@ -142,6 +142,8 @@
   --kc-responsive-size-grid-columns-7: 361px;
   --kc-responsive-size-grid-columns-9: 361px;
   --kc-responsive-size-grid-columns-8: 361px;
+  --kc-responsive-extra-small-text-size: 13px;
+  --kc-responsive-extra-small-line-height: 16px;
   --kc-elevation-xs: 0 1px 2px 0 rgba(0,0,0,0.03);
   --kc-elevation-sm: 0 1px 3px 0 rgba(0,0,0,0.04);
   --kc-elevation-md: 0 4px 12px 0 rgba(0,0,0,0.05);
@@ -433,12 +435,9 @@ body.night-mode {
     --kc-responsive-body-lg-line-height: 28px;
     --kc-responsive-body-lg-paragraph-spacing: 16px;
     --kc-responsive-body-md-text-size: 18px;
-    --kc-responsive-body-md-line-height: 24px;
     --kc-responsive-body-md-paragraph-spacing: 12px;
     --kc-responsive-body-sm-text-size: 15px;
-    --kc-responsive-body-sm-line-height: 20px;
     --kc-responsive-label-lg-text-size: 14px;
-    --kc-responsive-label-lg-line-height: 16px;
     --kc-responsive-label-lg-paragraph-spacing: 8px;
     --kc-responsive-label-sm-line-height: 12px;
     --kc-responsive-spacing-layout-sm: 12px;
