@@ -25,21 +25,22 @@
    and some of those values are wrong in one mode.
    ------------------------------------------------------------ */
 .kc-buybox {
-  /* Text/Small. Switch to body-md here to give the buybox 14px
-     body text on mobile instead of the token's 12px. */
+  /* Text/Small: 14/20 on mobile, 15/20 from 750px. Switch to body-md
+     here for 16px buybox body text on mobile. */
   --kc-buybox-body-size: var(--kc-responsive-body-sm-text-size);
   --kc-buybox-body-line-height: var(--kc-responsive-body-sm-line-height);
 
   /* Label/Small size and the caption tracking are held back in
      kc-tokens.css (theme values: 12px on every width, 1.25px).
-     Figma: 12px / 1.7px on desktop, 10px / 1.2px on mobile.
+     Figma: 12px on both widths since 17 Oct; tracking 1.7px desktop,
+     1.2px mobile.
      --kc-responsive-Nunito-letter-spacing is the hand-typed
      1.7px the homepage buttons already use. */
   --kc-buybox-label-sm-size: var(--kc-responsive-label-sm-text-size);
   --kc-buybox-label-tracking: var(--kc-responsive-Nunito-letter-spacing);
-  /* Label/Small line-height equals its size in Figma (12/12, 10/10).
-     The token line-height drops to 10px on mobile while the held-back
-     size stays 12px, which would squeeze the text, so pin it to 1. */
+  /* Pinned to 1 (12px) when the mobile token line-height was 10px under
+     a 12px size. Since 17 Oct the token is 12/16 on mobile; moving these
+     labels onto it is Phase 3 (docs/pdp-mobile/PLAN.md). */
   --kc-buybox-label-sm-line-height: 1;
 
   /* Fixed component sizes from the KC Design Library that have no token:
@@ -298,15 +299,20 @@
   height: var(--kc-responsive-size-icon-sm);
 }
 
-/* Checklist. The hairline between the header and the details runs
-   the full card width, so it is drawn on the first row and pulled
-   out over the card's side padding. The left padding is the tick cell
-   (Figma: 16 px tick, gap 3) so a wrapped line starts under the text,
-   not under the tick. */
-.kc-buybox .block__loop-description .kc-description-list {
+/* Checklist rows, wherever Loop renders them in the buybox: the left
+   padding is the tick cell (Figma: 16 px tick, gap 3) so a wrapped line
+   starts under the text, not under the tick; the row is the tick's
+   containing block. */
+.kc-buybox .kc-description-list {
   position: relative;
-  margin-top: var(--kc-responsive-spacing-layout-xs);
   padding-left: calc(var(--kc-responsive-size-icon-sm) + var(--kc-responsive-spacing-layout-xxs));
+}
+
+/* Inside the plan card. The hairline between the header and the details
+   runs the full card width, so it is drawn on the first row and pulled
+   out over the card's side padding. */
+.kc-buybox .block__loop-description .kc-description-list {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-buybox-text);

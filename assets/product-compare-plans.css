@@ -556,6 +556,16 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-default-heading);
 }
 
+/* Mobile header: the 16px plan names (body-md since 17 Oct) wrap "The
+   Karmicare Year" to two lines. 136px fits two name lines, price and cycle
+   in every column, with the title clear of the "Brushing & Beyond" badge
+   (Figma preview header 136). Shared by all columns, so rows stay aligned. */
+@media screen and (max-width: 749px) {
+  .plan-compare--kc {
+    --pc-head-height: 13.6rem;
+  }
+}
+
 @media screen and (min-width: 750px) {
   .plan-compare--kc {
     --pc-block-gap: 8rem;

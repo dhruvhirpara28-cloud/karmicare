@@ -203,8 +203,9 @@
 
         --extra_small_font_size_all: {{ settings.extra_small_font_size_all | divided_by: 10.0 }}rem;
         {%- comment -%}
-          Stays here: it follows the theme setting body_small_font_size_all. Figma
-          label-sm is 12px desktop / 10px mobile (docs/design-tokens/baseline/proposals.md P18).
+          Stays here: it follows the theme setting body_small_font_size_all (12). Figma
+          label-sm is 12px on both widths since 17 Oct, so the hold (proposal P18) can move
+          into kc-tokens.css in a separate commit.
         {%- endcomment %}
         --kc-responsive-label-sm-text-size: {{ settings.body_small_font_size_all | divided_by: 10.0 }}rem;
         --font-body-size-mobile: {{ settings.body_font_size_mobile | divided_by: 10.0 }}rem;
