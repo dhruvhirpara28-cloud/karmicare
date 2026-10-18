@@ -84,7 +84,7 @@
       <p class="sc-title"><span data-sc="name"></span><span class="sc-title-rest" data-sc="rest"></span></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
-    <button type="button" class="sc-change" data-sc-change>Change</button>
+    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | escape }}</button>
     <button type="submit" form="scCtaForm" class="sc-cta sc-cta--bar" data-sc-cta>
       <span>{{ block.settings.button_text | escape }}</span>
       {{- sc_spinner -}}
@@ -156,30 +156,31 @@
       "kitReceived": {{ kit_received | json }},
       "kitVariantIds": {{ welcome_kit_variant_ids | split: ',' | compact | json }},
       "prices": {{ sc_prices }},
+      {%- comment -%} Copy: the block settings (P1–P7 of the brief); [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
       "copy": {
-        "title_rhythm": "60-Day Rhythm · Awake + Asleep",
-        "title_year": "The Karmicare Year · 6 Duos",
-        "title_once": "Try Once · 1 Duo",
-        "price_rhythm": "[price] every 60 days",
-        "price_year": "[price] per year",
-        "price_once": "[price] one time",
-        "credit": "+ [credit] Care Credit back",
-        "credit_checkup": "+ [credit] Care Credit + €40 Check-up Reward",
-        "credit_info": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-        "checkup_info": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-        "panel_label": "Delivery & what's included",
-        "cta_rhythm": "Begin your 60-Day Rhythm",
-        "cta_year": "Begin the Karmicare Year",
-        "cta_once": "Try once",
-        "delivery_free": "Free delivery · 1–3 working days in Benelux",
-        "delivery_once": "Shipping calculated at checkout",
-        "kit": "Welcome Kit: two toothbrushes + floss",
-        "guarantee_member": "60-day money-back guarantee",
-        "guarantee_once": "14-day money-back guarantee",
-        "stop_rhythm": "Pause or stop anytime",
-        "stop_year": "Renews yearly · stop anytime before renewal",
-        "per_brushing": "[per_brushing] per brushing",
-        "try_once": "Not ready for a membership? Try once for [price]"
+        "title_rhythm": {{ block.settings.title_rhythm | json }},
+        "title_year": {{ block.settings.title_year | json }},
+        "title_once": {{ block.settings.title_once | json }},
+        "price_rhythm": {{ block.settings.price_rhythm | json }},
+        "price_year": {{ block.settings.price_year | json }},
+        "price_once": {{ block.settings.price_once | json }},
+        "credit": {{ block.settings.credit | json }},
+        "credit_checkup": {{ block.settings.credit_checkup | json }},
+        "credit_info": {{ block.settings.credit_info | json }},
+        "checkup_info": {{ block.settings.checkup_info | json }},
+        "panel_label": {{ block.settings.panel_label | json }},
+        "cta_rhythm": {{ block.settings.cta_rhythm | json }},
+        "cta_year": {{ block.settings.cta_year | json }},
+        "cta_once": {{ block.settings.cta_once | json }},
+        "delivery_free": {{ block.settings.delivery_free | json }},
+        "delivery_once": {{ block.settings.delivery_once | json }},
+        "kit": {{ block.settings.kit | json }},
+        "guarantee_member": {{ block.settings.guarantee_member | json }},
+        "guarantee_once": {{ block.settings.guarantee_once | json }},
+        "stop_rhythm": {{ block.settings.stop_rhythm | json }},
+        "stop_year": {{ block.settings.stop_year | json }},
+        "per_brushing": {{ block.settings.per_brushing | json }},
+        "try_once": {{ block.settings.try_once | json }}
       }
     }
   </script>
@@ -284,8 +285,9 @@
           : fill(state.checkupReward ? copy.credit_checkup : copy.credit, { credit: money(state.credit) });
       setText('credit', credit);
       setText('panel-label', copy.panel_label);
-      setText('info', once ? '' : copy.credit_info + (state.checkupReward ? ' ' + copy.checkup_info : ''));
-      field('info').hidden = once;
+      var info = once ? '' : [copy.credit_info, state.checkupReward ? copy.checkup_info : ''].filter(Boolean).join(' ');
+      setText('info', info);
+      field('info').hidden = !info;
       setText('delivery', once ? copy.delivery_once : copy.delivery_free);
       setText('kit', copy.kit);
       bar.querySelector('[data-sc-row="kit"]').hidden = once || !cfg.isBundle || cfg.kitReceived;
