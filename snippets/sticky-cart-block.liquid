@@ -135,9 +135,10 @@
       <p class="sc-kit-line" data-sc="kit-line" data-sc-kit></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
-    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | escape }}</button>
+    {%- comment -%} Control labels fall back to the schema defaults: a button never loses its name {%- endcomment -%}
+    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | default: 'Change' | escape }}</button>
     <button type="submit" form="scCtaForm" class="sc-cta sc-cta--bar" data-sc-cta>
-      <span>{{ block.settings.button_text | escape }}</span>
+      <span>{{ block.settings.button_text | default: 'Begin now' | escape }}</span>
       {{- sc_spinner -}}
     </button>
   </div>
@@ -201,7 +202,6 @@
   <script type="application/json" data-sc-config>
     {
       "productId": {{ product.id | json }},
-      "variantId": {{ current_variant.id | json }},
       "moneyFormat": {{ shop.money_format | json }},
       "isBundle": {{ is_bundle_product | json }},
       "kitReceived": {{ kit_received | json }},
@@ -209,7 +209,7 @@
       "hasPlans": {% if product.selling_plan_groups.size > 0 %}true{% else %}false{% endif %},
       "requiresPlan": {{ product.requires_selling_plan | json }},
       "productTitle": {{ product.title | json }},
-      "buttonText": {{ block.settings.button_text | json }},
+      "buttonText": {{ block.settings.button_text | default: 'Begin now' | json }},
       {%- comment -%} Positions are CSS only: phones 12 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
       "prices": {{ sc_prices }},
       {%- comment -%} Copy: the block settings (P1–P7 of the brief); [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
@@ -224,10 +224,10 @@
         "credit_checkup": {{ block.settings.credit_checkup | json }},
         "credit_info": {{ block.settings.credit_info | json }},
         "checkup_info": {{ block.settings.checkup_info | json }},
-        "panel_label": {{ block.settings.panel_label | json }},
-        "cta_rhythm": {{ block.settings.cta_rhythm | json }},
-        "cta_year": {{ block.settings.cta_year | json }},
-        "cta_once": {{ block.settings.cta_once | json }},
+        "panel_label": {{ block.settings.panel_label | default: "Delivery & what's included" | json }},
+        "cta_rhythm": {{ block.settings.cta_rhythm | default: 'Begin your 60-Day Rhythm' | json }},
+        "cta_year": {{ block.settings.cta_year | default: 'Begin the Karmicare Year' | json }},
+        "cta_once": {{ block.settings.cta_once | default: 'Try once' | json }},
         "delivery_free": {{ block.settings.delivery_free | json }},
         "delivery_once": {{ block.settings.delivery_once | json }},
         "kit": {{ block.settings.kit | json }},
@@ -321,8 +321,10 @@
       // A product without selling plans, or without Loop's plan choice on the page: what its buybox
       // form holds, one time
       if (!usesLoop) {
+        // No variant in the form = an unavailable option combination (Dawn clears it): nothing to buy
         var idInput = document.querySelector('.product__info-container [name="id"]');
-        var productVariant = String((idInput && idInput.value) || cfg.variantId);
+        var productVariant = idInput && idInput.value ? String(idInput.value) : '';
+        if (!productVariant) return null;
         var productPrice = cfg.prices.oneTime[productVariant];
         if (productPrice == null) return null;
         return {
@@ -344,7 +346,9 @@
       var planId = once ? '' : api.selectedPlanId(cfg.productId);
       var plan = planId ? api.plan(planId) : null;
       if (!once && !plan) return null;
-      var variantId = String(api.selectedVariantId(cfg.productId) || cfg.variantId);
+      // Only the variant the buybox form holds; none (an unavailable combination) = nothing to buy
+      var variantId = String(api.selectedVariantId(cfg.productId) || '');
+      if (!variantId) return null;
       var price = once
         ? cfg.prices.oneTime[variantId]
         : (cfg.prices.plans[variantId] || {})[planId];
@@ -415,9 +419,10 @@
       bar.querySelector('[data-sc-row="brushing"]').hidden = plain;
       setText('cta', plain ? cfg.buttonText || '' : copy['cta_' + state.type]);
       // Try once only where one time can be bought: not on subscription-only products
-      var tryOnce = !once && !cfg.requiresPlan && state.oneTimePrice != null;
-      setText('try-once', tryOnce ? fill(copy.try_once, { price: money(state.oneTimePrice) }) : '');
-      field('try-once').hidden = !tryOnce;
+      var tryOnceText = !once && !cfg.requiresPlan && state.oneTimePrice != null ? fill(copy.try_once, { price: money(state.oneTimePrice) }) : '';
+      setText('try-once', tryOnceText);
+      // A blank setting hides the link rather than leaving an empty, focusable button
+      field('try-once').hidden = !tryOnceText.trim();
       if (variantInput.value !== state.variantId) variantInput.value = state.variantId;
       if (planInput.value !== state.planId) planInput.value = state.planId;
       ready = true;
