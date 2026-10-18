@@ -560,8 +560,8 @@ body.night-mode .pc-kit-poptitle {
    Karmicare Year" to two lines. 136px fits two name lines, price and cycle
    in every column, with the title clear of the "Brushing & Beyond" badge
    (Figma preview header 136). Shared by all columns, so rows stay aligned.
-   The query is the exact complement of the tokens' min-width: 750px switch,
-   so fractional widths such as 749.5px get it too. */
+   On screens the query is the exact complement of the tokens' min-width:
+   750px switch, so fractional widths such as 749.5px get it too. */
 @media not all and (min-width: 750px) {
   .plan-compare--kc {
     --pc-head-height: 13.6rem;
