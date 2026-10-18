@@ -355,10 +355,54 @@
       }
     }
 
-    // Shown while the buybox CTA is out of view, and only once the bar knows the plan
-    var buyboxCtaVisible = true;
+    /* When the bar shows: only once the visitor has scrolled past the buybox CTA (never over the plan
+       cards while they choose), never while another way to begin is on screen (P8: the section of the
+       comparison table, the plans table or the end CTA, whole, so the bar never covers their cards),
+       and only once it knows the plan */
+    var CTA_SELECTOR = '.product-form__submit, .comparison-section__button, [data-kc-plan-choose]';
+    var buyboxCta = null;
+    var pastBuybox = false;
+    var sectionsOnScreen = new Set();
+    var watched = new WeakSet();
+    var ctaObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) sectionsOnScreen.add(entry.target);
+        else sectionsOnScreen.delete(entry.target);
+      });
+      sectionsOnScreen.forEach(function (section) {
+        if (!section.isConnected) sectionsOnScreen.delete(section);
+      });
+      updateVisibility();
+    });
+
+    // Past the buybox CTA = its bottom above the screen. Read on scroll, not from an observer: a jump
+    // from below the screen to above it (an anchor, a restored scroll position) crosses no threshold.
+    function checkBuybox() {
+      var past = !buyboxCta || buyboxCta.getBoundingClientRect().bottom <= 0;
+      if (past === pastBuybox) return;
+      pastBuybox = past;
+      updateVisibility();
+    }
+
+    function watchCtas() {
+      if (!buyboxCta) {
+        buyboxCta =
+          document.querySelector('.product__info-container .product-form__submit') ||
+          document.querySelector('.product-form__submit');
+        checkBuybox();
+      }
+      var buyboxSection = buyboxCta && buyboxCta.closest('.shopify-section');
+      Array.prototype.forEach.call(document.querySelectorAll(CTA_SELECTOR), function (cta) {
+        if (cta === buyboxCta || bar.contains(cta)) return;
+        var section = cta.closest('.shopify-section') || cta;
+        if (section === buyboxSection || watched.has(section)) return;
+        watched.add(section);
+        ctaObserver.observe(section);
+      });
+    }
+
     function updateVisibility() {
-      var visible = ready && !buyboxCtaVisible;
+      var visible = ready && pastBuybox && sectionsOnScreen.size === 0;
       if (visible === shown) return;
       shown = visible;
       if (!visible) setOpen(false);
@@ -412,22 +456,6 @@
       if (checked) checked.focus({ preventScroll: true });
     });
 
-    function watchBuyboxCta() {
-      var buyboxCta = document.querySelector('.product-form__submit');
-      if (!buyboxCta) {
-        buyboxCtaVisible = false;
-        updateVisibility();
-        return;
-      }
-      new IntersectionObserver(
-        function (entries) {
-          buyboxCtaVisible = entries[0].isIntersecting;
-          updateVisibility();
-        },
-        { threshold: 0.1 }
-      ).observe(buyboxCta);
-    }
-
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       var button = event.submitter || ctas[0];
@@ -466,7 +494,12 @@
         if (column) new ResizeObserver(position).observe(column);
         new ResizeObserver(reservePageEnd).observe(bar);
       }
-      watchBuyboxCta();
+      watchCtas();
+      window.addEventListener('scroll', checkBuybox, { passive: true });
+      window.addEventListener('resize', checkBuybox);
+      // Sections that render late, and sections the theme editor adds
+      setTimeout(watchCtas, 2000);
+      document.addEventListener('shopify:section:load', watchCtas);
       attachLoop(0);
     }
 
