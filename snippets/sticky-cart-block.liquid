@@ -79,9 +79,53 @@
     Line icons: Lucide (ISC), the "Interface" set of the KC Brand Design Library; stroke in .sc-icon
   {%- endcomment -%}
 
+  {%- comment -%}
+    Desktop (from 1081 px): the package as it will arrive, the Duo and the Welcome Kit items (the theme
+    setting's products, as the buybox shows them: custom.kit_thumbnail, value struck through, Free)
+  {%- endcomment -%}
+  <div class="sc-package">
+    <div class="sc-package-duo">
+      {%- if product.featured_image -%}
+        {{
+          product.featured_image
+          | image_url: width: 320
+          | image_tag: loading: 'lazy', width: 160, height: 160, class: 'sc-package-img', alt: block.settings.package_name
+        }}
+      {%- endif -%}
+      <p class="sc-package-name">{{ block.settings.package_name | escape }}</p>
+    </div>
+    <span class="sc-package-plus" aria-hidden="true" data-sc-kit>+</span>
+    <ul class="sc-kit" role="list" data-sc-kit>
+      {%- for prod_item in settings.welcome_kit_free_product -%}
+        {%- liquid
+          assign prod = prod_item
+          if prod_item.id == null
+            assign prod = all_products[prod_item]
+          endif
+          if prod == blank
+            continue
+          endif
+          assign kit_variant = prod.selected_or_first_available_variant
+          assign kit_value = kit_variant.compare_at_price | default: kit_variant.price
+          assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
+        -%}
+        <li class="sc-kit-item">
+          {%- if kit_thumbnail -%}
+            {{ kit_thumbnail | image_url: width: 144 | image_tag: loading: 'lazy', width: 48, height: 48, class: 'sc-kit-img', alt: '' }}
+          {%- endif -%}
+          <span class="sc-kit-name">{{ prod.title | escape }}</span>
+          <span class="sc-kit-value">
+            {{- block.settings.kit_free | escape }} · <s>{{ kit_value | money_without_trailing_zeros }}</s>
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
   <div class="sc-summary">
     <div class="sc-plan">
       <p class="sc-title"><span data-sc="name"></span><span class="sc-title-rest" data-sc="rest"></span></p>
+      <p class="sc-kit-line" data-sc="kit-line" data-sc-kit></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
     <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | escape }}</button>
@@ -155,6 +199,7 @@
       "isBundle": {{ is_bundle_product | json }},
       "kitReceived": {{ kit_received | json }},
       "kitVariantIds": {{ welcome_kit_variant_ids | split: ',' | compact | json }},
+      {%- comment -%} Positions are CSS only: phones 8 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
       "prices": {{ sc_prices }},
       {%- comment -%} Copy: the block settings (P1–P7 of the brief); [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
       "copy": {
@@ -289,8 +334,14 @@
       setText('info', info);
       field('info').hidden = !info;
       setText('delivery', once ? copy.delivery_once : copy.delivery_free);
+      // The Welcome Kit comes with a first membership order, until the customer has received it
+      var kitOffered = !once && cfg.isBundle && !cfg.kitReceived;
       setText('kit', copy.kit);
-      bar.querySelector('[data-sc-row="kit"]').hidden = once || !cfg.isBundle || cfg.kitReceived;
+      setText('kit-line', copy.kit ? '+ ' + copy.kit : '');
+      bar.querySelector('[data-sc-row="kit"]').hidden = !kitOffered;
+      Array.prototype.forEach.call(bar.querySelectorAll('[data-sc-kit]'), function (el) {
+        el.hidden = !kitOffered;
+      });
       setText('guarantee', once ? copy.guarantee_once : copy.guarantee_member);
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
       bar.querySelector('[data-sc-row="stop"]').hidden = once;
@@ -328,19 +379,6 @@
       queueRender();
     }
 
-    /* Positions: phones 8 px from the edges (CSS), 750–1080 centred (CSS), from 1081 the buybox column */
-    function position() {
-      var column = window.innerWidth >= 1081 && document.querySelector('.product__info-container');
-      if (!column) {
-        bar.style.left = '';
-        bar.style.width = '';
-        return;
-      }
-      var rect = column.getBoundingClientRect();
-      bar.style.left = rect.left + 'px';
-      bar.style.width = rect.width + 'px';
-    }
-
     /* The bar floats over the bottom of the page. While it shows, --sticky-cta-height holds how much of
        the bottom it covers (its height + its offset); the footer adds that much bottom padding and the
        cookie preferences panel (assets/kc-cookie-preferences.css) sits that much higher. */
@@ -375,10 +413,13 @@
       updateVisibility();
     });
 
-    // Past the buybox CTA = its bottom above the screen. Read on scroll, not from an observer: a jump
-    // from below the screen to above it (an anchor, a restored scroll position) crosses no threshold.
+    // Past the buybox CTA = its bottom above the screen; from 750 px (two columns, the gallery sticky
+    // beside the buybox) also past the gallery column, so the card never covers its thumbnails. Read on
+    // scroll, not from an observer: a jump from below the screen to above it crosses no threshold.
+    var gallery = document.querySelector('.product__media-wrapper');
     function checkBuybox() {
       var past = !buyboxCta || buyboxCta.getBoundingClientRect().bottom <= 0;
+      if (past && gallery && window.innerWidth >= 750) past = gallery.getBoundingClientRect().bottom <= 0;
       if (past === pastBuybox) return;
       pastBuybox = past;
       updateVisibility();
@@ -487,13 +528,7 @@
       });
       if (bar.parentNode !== document.body) document.body.appendChild(bar);
 
-      position();
-      window.addEventListener('resize', position);
-      var column = document.querySelector('.product__info-container');
-      if (window.ResizeObserver) {
-        if (column) new ResizeObserver(position).observe(column);
-        new ResizeObserver(reservePageEnd).observe(bar);
-      }
+      if (window.ResizeObserver) new ResizeObserver(reservePageEnd).observe(bar);
       watchCtas();
       window.addEventListener('scroll', checkBuybox, { passive: true });
       window.addEventListener('resize', checkBuybox);
