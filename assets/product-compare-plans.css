@@ -950,6 +950,15 @@ body.night-mode .pc-kit-poptitle {
   outline-offset: 2px;
 }
 
+/* Mobile: the 13px labels (label-lg since 17 Oct) wrap "Begin 60-Day Rhythm"
+   to three lines in the 134px button with 16px sides; 8px sides, as the
+   tertiary already has, keep it on two. */
+@media screen and (max-width: 749px) {
+  .plan-compare--kc .pc-cta {
+    padding-inline: var(--kc-responsive-spacing-layout-xs);
+  }
+}
+
 @media screen and (min-width: 750px) {
   .plan-compare--kc .pc-cta--primary,
   .plan-compare--kc .pc-cta--secondary {
