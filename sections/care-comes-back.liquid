@@ -16,7 +16,10 @@
   assign lines = section.blocks | where: 'type', 'line'
 -%}
 
-<div class="care-comes-back{% if section.settings.background == 'accent' %} care-comes-back--accent{% endif %} section-{{ section.id }}">
+<div
+  class="care-comes-back{% if section.settings.surface == 'accent' %} care-comes-back--accent{% endif %} section-{{ section.id }} kc-surface"
+  data-kc-surface="{{ section.settings.surface }}"
+>
   {%- comment -%}
     Vertical padding from the settings. Defaults are the homepage's (120/120, mobile 48/48);
     the PDP instance sets mobile top 64, as its other bands.
@@ -219,8 +222,8 @@
     },
     {
       "type": "select",
-      "id": "background",
-      "label": "Background",
+      "id": "surface",
+      "label": "Section surface",
       "options": [
         {
           "value": "page",
@@ -232,7 +235,7 @@
         }
       ],
       "default": "accent",
-      "info": "Accent is the colour the section gradients run to: for a place between bands that end and start on it, as the research band and the FAQ on the homepage."
+      "info": "Page and Accent hold their colour; this band has no Transition, its step markers are filled with the band colour. A hold that follows the other colour is shown as a transition and flagged here."
     },
     {
       "type": "header",

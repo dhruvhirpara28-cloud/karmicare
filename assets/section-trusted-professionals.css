@@ -18,11 +18,6 @@ trusted-professionals-quotes {
   overflow-x: clip;
 }
 
-/* Background setting "Page to accent gradient" (the PDP band) */
-.trusted-professionals--bg-accent {
-  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
-}
-
 /* section/sm between header, cards and footer (80 desktop, 48 mobile in the
    library; the token is not emitted yet, P6, so the fallback carries it) */
 .trusted-professionals__inner {

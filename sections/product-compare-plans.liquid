@@ -10,25 +10,6 @@
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
-  {%- if section.settings.bg_gradient_day != blank -%}
-    .day-mode #compare-plans-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_day }};
-    }
-  {%- elsif section.settings.color_scheme_day != blank -%}
-    .day-mode #compare-plans-{{ section.id }} {
-      background-color: {{ section.settings.color_scheme_day }};
-    }
-  {%- endif -%}
-
-  {%- if section.settings.bg_gradient_night != blank -%}
-    .night-mode #compare-plans-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_night }};
-    }
-  {%- elsif section.settings.color_scheme_night != blank -%}
-    .night-mode #compare-plans-{{ section.id }} {
-      background-color: {{ section.settings.color_scheme_night }};
-    }
-  {%- endif -%}
   @media screen and (min-width: 750px) {
     #compare-plans-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_desktop }}px;
@@ -56,8 +37,9 @@
 
   <div
     aria-label="Compare plans"
-    class="plan-compare{% if kc %} plan-compare--kc{% endif %}"
+    class="plan-compare{% if kc %} plan-compare--kc{% endif %} kc-surface"
     id="compare-plans-{{ section.id }}"
+    data-kc-surface="{{ section.settings.surface }}"
   >
     <div class="page-width">
       <div class="pc-head">
@@ -443,24 +425,16 @@
       "default": "<p>Every subscription earns <b>Care Credit</b>: real euros toward more Karmicare products — a return on the care you keep.</p>"
     },
     {
-      "type": "color",
-      "id": "color_scheme_day",
-      "label": "Color scheme (Day mode)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
-    },
-    {
-      "type": "color",
-      "id": "color_scheme_night",
-      "label": "Color scheme (Night mode)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "transition",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
     },
     {
       "type": "header",

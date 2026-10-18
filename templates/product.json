@@ -180,6 +180,7 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "remove_first_media_bg": true,
+        "surface": "page",
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -192,8 +193,7 @@
         "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
         "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
         "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}",
-        "color_scheme_day": "",
-        "color_scheme_night": "",
+        "surface": "transition",
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80,
         "padding_top_mobile": 20,

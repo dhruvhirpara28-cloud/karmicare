@@ -1,23 +1,5 @@
 {{ 'section-comparison-table.css' | asset_url | stylesheet_tag }}
 {%- style -%}
-  {%- if section.settings.bg_gradient_day != blank -%}
-    body:not(.night-mode) .section-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_day }};
-    }
-  {%- elsif section.settings.bg_color_day != blank -%}
-    body:not(.night-mode) .section-{{ section.id }} {
-      background: {{ section.settings.bg_color_day }};
-    }
-  {%- endif -%}
-  {%- if section.settings.bg_gradient_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-      background: {{ section.settings.bg_gradient_night }};
-    }
-  {%- elsif section.settings.bg_color_night != blank -%}
-    body.night-mode .section-{{ section.id }} {
-      background: {{ section.settings.bg_color_night }};
-    }
-  {%- endif -%}
   {%- if section.settings.text_color_day != blank -%}
     body:not(.night-mode) .section-{{ section.id }} {
       color: {{ section.settings.text_color_day }};
@@ -68,8 +50,9 @@
   %}
 
   <section
-    class="comparison-section section-{{ section.id }} section-{{ section.id }}-padding"
+    class="comparison-section section-{{ section.id }} section-{{ section.id }}-padding kc-surface"
     id="section-{{ section.id }}"
+    data-kc-surface="{{ section.settings.surface }}"
   >
     <div class="comparison-section__inner page-width">
       <div class="comparison-section__header">
@@ -147,7 +130,19 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Colours follow the KC tokens in Day and Night. Leave the colour and gradient fields empty unless this table needs an override."
+      "content": "Colours follow the KC tokens in Day and Night. Leave the colour fields empty unless this table needs an override."
+    },
+    {
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "transition",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
     },
     {
       "type": "header",
@@ -160,18 +155,8 @@
     },
     {
       "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Color (Day)"
-    },
-    {
-      "type": "color",
       "id": "col_text_day",
       "label": "Table Text Color (Day)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
     },
     {
       "type": "header",
@@ -181,16 +166,6 @@
       "type": "color",
       "id": "text_color_night",
       "label": "Text Color (Night)"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Color (Night)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
     },
     {
       "type": "header",

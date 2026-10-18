@@ -552,7 +552,6 @@ body.night-mode .pc-kit-poptitle {
   --pc-row-height: 6.4rem;
   --pc-cta-height: 7.2rem;
   --pc-rule: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
-  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
   color: var(--kc-mapped-text-default-heading);
 }
 
@@ -667,7 +666,8 @@ body.night-mode .pc-kit-poptitle {
     position: sticky;
     inset-inline-start: 0;
     z-index: 30; /* Keep scrolling columns, including hovered ones, underneath. */
-    background: linear-gradient(180deg, var(--kc-mapped-surface-page), var(--kc-mapped-gradient-section-accent));
+    /* The two colours of the section surface (assets/kc-surface.css) */
+    background: linear-gradient(180deg, var(--kc-surface-top), var(--kc-surface-bottom));
     transition: none;
   }
 

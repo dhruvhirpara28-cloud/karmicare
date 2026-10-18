@@ -22,13 +22,8 @@
   .karmicare-footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
     padding-bottom: calc({{ section.settings.padding_bottom_mobile }}px + var(--sticky-cta-height, 0px));
-    background: {{ section.settings.bg_color_day | default: 'var(--kc-mapped-gradient-section-accent)' }};
     color: var(--kc-mapped-text-default-heading);
     font-family: var(--kc-font-role-backbone);
-  }
-
-  body.night-mode .karmicare-footer {
-    background: {{ section.settings.bg_color_night | default: 'var(--kc-mapped-gradient-section-accent)' }};
   }
 
   {% if section.settings.text_color_day != blank %}
@@ -511,11 +506,6 @@
     .karmicare-footer {
       margin-top: {{ section.settings.margin_top }}px;
       padding-bottom: calc({{ section.settings.padding_bottom }}px + var(--sticky-cta-height, 0px));
-      background: {{ section.settings.bg_gradient_day | default: section.settings.bg_color_day | default: 'linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%)' }};
-    }
-
-    body.night-mode .karmicare-footer {
-      background: {{ section.settings.bg_gradient_night | default: section.settings.bg_color_night | default: 'linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%)' }};
     }
 
     .km-footer__inner {
@@ -623,7 +613,7 @@
   endif
 -%}
 
-<footer class="karmicare-footer">
+<footer class="karmicare-footer kc-surface" data-kc-surface="{{ section.settings.surface }}">
   <div class="km-footer">
     <div class="km-footer__inner">
       <div class="km-footer-top">
@@ -1091,19 +1081,29 @@
     },
     {
       "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "transition",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
+    },
+    {
+      "type": "header",
       "content": "Day Mode Colors"
     },
     {
       "type": "color",
       "id": "bg_color_day",
       "label": "Background Color (Day)",
-      "info": "Mobile background, and the desktop background when no gradient is set. Empty uses the KC section accent token."
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)",
-      "info": "Desktop (750px and up) only. Empty uses the KC page-to-accent gradient."
+      "info": "Not read: Section surface paints the footer. Kept until the footer surface decision."
     },
     {
       "type": "color",
@@ -1118,13 +1118,7 @@
       "type": "color",
       "id": "bg_color_night",
       "label": "Background Color (Night)",
-      "info": "Mobile background, and the desktop background when no gradient is set. Empty uses the KC section accent token."
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)",
-      "info": "Desktop (750px and up) only. Empty uses the KC page-to-accent gradient."
+      "info": "Not read: Section surface paints the footer. Kept until the footer surface decision."
     },
     {
       "type": "color",

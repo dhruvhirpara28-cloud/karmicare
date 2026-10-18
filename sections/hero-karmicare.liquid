@@ -4,7 +4,7 @@
   #shopify-section-{{ section.id }} .hero-karmicare {
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    transition: background 0.4s ease, color 0.4s ease;
+    transition: color 0.4s ease;
   }
 
   @media screen and (min-width: 750px) {
@@ -13,26 +13,6 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  {%- if section.settings.bg_gradient_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .hero-karmicare {
-      background: {{ section.settings.bg_gradient_day }};
-    }
-  {%- elsif section.settings.bg_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .hero-karmicare {
-      background: {{ section.settings.bg_color_day }};
-    }
-  {%- endif -%}
-
-  {%- if section.settings.bg_gradient_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .hero-karmicare {
-      background: {{ section.settings.bg_gradient_night }};
-    }
-  {%- elsif section.settings.bg_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .hero-karmicare {
-      background: {{ section.settings.bg_color_night }};
-    }
-  {%- endif -%}
 
   {%- for block in section.blocks -%}
     {%- case block.type -%}
@@ -164,7 +144,8 @@
 
 <div
   id="HeroKarmicare-{{ section.id }}"
-  class="hero-karmicare"
+  class="hero-karmicare kc-surface"
+  data-kc-surface="{{ section.settings.surface }}"
   aria-label="{{ section.settings.accessibility_label | default: 'Karmicare Oral Rhythm Hero' | escape }}"
 >
   <div class="page-width hero-karmicare__container">
@@ -426,35 +407,19 @@
   "settings": [
     {
       "type": "header",
-      "content": "Section Background (Day)"
+      "content": "Section Background"
     },
     {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)",
-      "default": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
-      "info": "CSS gradient string or solid color"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Solid Color fallback (Day)"
-    },
-    {
-      "type": "header",
-      "content": "Section Background (Night)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)",
-      "default": "linear-gradient(180deg, #171C33 0%, #212A49 100%)",
-      "info": "CSS gradient string or solid color"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Solid Color fallback (Night)"
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "transition",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
     },
     {
       "type": "header",

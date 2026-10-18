@@ -1,6 +1,7 @@
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} kc-surface"
+  data-kc-surface="{{ section.settings.surface }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -40,18 +41,6 @@
     }
 
     /* Day Mode Colors */
-    {%- if section.settings.bg_gradient_day != blank -%}
-      body:not(.night-mode) #MainProduct-{{ section.id }},
-      body.day-mode #MainProduct-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_day }};
-      }
-    {%- elsif section.settings.bg_color_day != blank -%}
-      body:not(.night-mode) #MainProduct-{{ section.id }},
-      body.day-mode #MainProduct-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_day }};
-      }
-    {%- endif -%}
-
     {%- if section.settings.text_color_day != blank -%}
       body:not(.night-mode) #MainProduct-{{ section.id }},
       body.day-mode #MainProduct-{{ section.id }} {
@@ -60,16 +49,6 @@
     {%- endif -%}
 
     /* Night Mode Colors */
-    {%- if section.settings.bg_gradient_night != blank -%}
-      body.night-mode #MainProduct-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-      }
-    {%- elsif section.settings.bg_color_night != blank -%}
-      body.night-mode #MainProduct-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_night }};
-      }
-    {%- endif -%}
-
     {%- if section.settings.text_color_night != blank -%}
       body.night-mode #MainProduct-{{ section.id }} {
         color: {{ section.settings.text_color_night }};
@@ -3594,17 +3573,23 @@
     },
     {
       "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "page",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
+    },
+    {
+      "type": "header",
       "content": "Day Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Color (Day)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
     },
     {
       "type": "color",
@@ -3614,16 +3599,6 @@
     {
       "type": "header",
       "content": "Night Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Color (Night)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
     },
     {
       "type": "color",

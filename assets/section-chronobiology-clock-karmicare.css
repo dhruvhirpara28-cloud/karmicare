@@ -3,18 +3,13 @@
    Colours come from the KC tokens (assets/kc-tokens.css), which switch on
    body.day-mode / body.night-mode. docs/pdp/T4-clock/NOTES.md maps the old palette. */
 
-/* Registered so the gradient fades with the theme switch. The initial values
-   only apply before the declarations below resolve. */
-@property --chrono-from {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #fffbf6;
-}
+/* The section surface (assets/kc-surface.css, setting "Section surface") paints the wrapper; its
+   two colours fade with the theme switch. The timing is set here so the clock inherits it. */
+.shopify-section:has(> .chronobiology-clock) {
+  --theme-duration: 550ms;
+  --theme-ease: cubic-bezier(.22, 1, .36, 1);
 
-@property --chrono-to {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #f2f8ff;
+  transition: --kc-surface-top var(--theme-duration) var(--theme-ease), --kc-surface-bottom var(--theme-duration) var(--theme-ease);
 }
 
 .chronobiology-clock {
@@ -25,29 +20,16 @@
   --chrono-accent: var(--kc-mapped-surface-accent-default);
   --chrono-pin-morning-fill: var(--kc-mapped-surface-page);
   --chrono-pin-evening-fill: var(--kc-mapped-surface-page);
-  --chrono-from: var(--kc-mapped-surface-page);
-  --chrono-to: var(--kc-mapped-gradient-section-accent);
 
   /* Dial artwork box: 604px in Figma desktop, 70% of it in Figma mobile */
   --dial-size: 604px;
 
-  --theme-duration: 550ms;
-  --theme-ease: cubic-bezier(.22, 1, .36, 1);
-
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  background: linear-gradient(180deg, var(--chrono-from), var(--chrono-to));
   color: var(--chrono-ink);
   font-family: var(--kc-font-role-backbone);
   overflow: clip;
-  transition: --chrono-from var(--theme-duration) var(--theme-ease), --chrono-to var(--theme-duration) var(--theme-ease);
-}
-
-/* PDP frame: "Section transition/Top" */
-.chronobiology-clock--accent_to_page {
-  --chrono-from: var(--kc-mapped-gradient-section-accent);
-  --chrono-to: var(--kc-mapped-surface-page);
 }
 
 /* Figma Night: the morning pin keeps a white fill, the evening pin turns middle blue */

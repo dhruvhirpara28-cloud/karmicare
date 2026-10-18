@@ -10,7 +10,8 @@
      surface/secondary/default -> --kc-mapped-surface-page-secondary (P3) */
 
 .care-comes-back {
-  /* Band surface; the markers are filled with it so the line stops at their rings */
+  /* Band colour (setting "Section surface", painted by assets/kc-surface.css); the markers are
+     filled with it so the line stops at their rings */
   --ccb-surface: var(--kc-mapped-surface-page);
   /* Loop geometry: marker circle, and the room left of the markers for the return line */
   --ccb-marker: 36px;
@@ -32,14 +33,13 @@
   /* Vertical padding comes from the section settings and the side gutter from the theme's
      --page-gutter (15px mobile, 32px from 990px), as in the other PDP bands */
   padding-inline: var(--page-gutter);
-  background: var(--ccb-surface);
   color: var(--kc-mapped-text-default-heading);
   font-family: var(--kc-font-role-backbone);
 }
 
-/* Setting "Background: Accent": the colour the section gradients run to (#f2f8ff / #2c3a60),
-   so the band joins neighbours that end and start on it, as the research band and the FAQ on
-   the homepage */
+/* Section surface Accent: the colour the section gradients run to (#f2f8ff / #2c3a60), so the
+   band joins neighbours that end and start on it, as the research band and the FAQ on the
+   homepage */
 .care-comes-back--accent {
   --ccb-surface: var(--kc-mapped-gradient-section-accent);
 }
