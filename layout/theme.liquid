@@ -35,13 +35,7 @@
     {{ content_for_header }}
 
     {% render 'day-night-locations' %}
-    <script>
-      {
-        {
-          'day-night-sun.js' | inline_asset_content;
-        }
-      }
-    </script>
+    <script>{{ 'day-night-sun.js' | inline_asset_content }}</script>
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
