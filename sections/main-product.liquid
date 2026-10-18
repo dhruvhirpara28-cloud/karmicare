@@ -331,15 +331,15 @@
                 {%- when 'treatment_journey' -%}
                   {% render 'treatment-journey', block: block, product: product %}
                 {%- when 'professional_testimonials' -%}
-                  {%- if block.settings.show_under_media -%}
-                    <div class="medium-hide large-up-hide">
-                      {% render 'professional-testimonials', block: block, product: product %}
-                    </div>
-                  {%- else -%}
+                  {%- comment -%}
+                    Under the media it shows from 750px only (product-media-gallery);
+                    phones skip it, the trusted-professionals section follows (Victor, 18 Oct).
+                  {%- endcomment -%}
+                  {%- unless block.settings.show_under_media -%}
                     <div>
                       {% render 'professional-testimonials', block: block, product: product %}
                     </div>
-                  {%- endif -%}
+                  {%- endunless -%}
                 {%- when 'mission_card' -%}
                   {% render 'mission-card', block: block, product: product %}
                 {%- when 'product_faq' -%}

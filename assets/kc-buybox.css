@@ -207,7 +207,11 @@
   background: var(--kc-mapped-border-primary-hairline);
 }
 
-.kc-buybox [id^="loop-selling_plan_group-"] + [id^="loop-selling_plan_group-"] {
+/* Between shown plan cards only. Hidden groups ([hidden] from
+   kc-plan-select.js, .loop-display-none from Loop) come first in the
+   list, and counting them put 8px above the first card: the label then
+   sat 24px from it instead of 16 (Victor, 18 Oct). */
+.kc-buybox [id^="loop-selling_plan_group-"]:not([hidden], .loop-display-none) ~ [id^="loop-selling_plan_group-"]:not([hidden], .loop-display-none) {
   margin-top: var(--kc-responsive-spacing-layout-xs);
 }
 
@@ -637,10 +641,16 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
 }
 
 /* The badge colours come from block settings as an inline style,
-   so they need !important to follow the tokens and Day/Night. */
+   so they need !important to follow the tokens and Day/Night.
+   Glass, like the highlight pills (Victor, 18 Oct): glass fill, hairline
+   and the library's blur; the padding gives up the border so the badge
+   stays 22px tall. */
 .kc-buybox .kc-journey-badge {
-  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
-  background-color: var(--kc-mapped-surface-tertiary-default) !important;
+  padding: calc(var(--kc-responsive-spacing-layout-xxs) - var(--kc-shape-stroke-thin, 1px)) calc(var(--kc-responsive-spacing-layout-xs) - var(--kc-shape-stroke-thin, 1px));
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  background-color: var(--kc-mapped-surface-glass-default) !important;
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
   color: var(--kc-buybox-text) !important;
   border-radius: var(--kc-shape-radius-full);
   font-size: var(--kc-responsive-label-lg-text-size);

@@ -111,7 +111,9 @@
   }
 
   /* Mobile: 30px bar, no hairline (Figma 2766:10306). The line starts at the page gutter and
-     scrolls left; two copies with equal trailing space make the loop seamless at -50%. */
+     scrolls left; two copies with equal trailing space make the loop seamless at -50%.
+     Type 10/14 as in Figma, under the 12px block setting; no token has that size. The loop
+     takes 20s, half the earlier speed (Victor, 18 Oct). */
   @media screen and (max-width: 749px) {
     #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
       border-bottom: none;
@@ -128,10 +130,11 @@
       display: inline-flex;
       min-height: 0;
       padding: 0.8rem 0;
+      font-size: 1rem;
       line-height: 1.4rem;
       letter-spacing: var(--kc-responsive-caption-letter-spacing);
       white-space: nowrap;
-      animation: kc-announcement-marquee-{{ section.id }} 10s linear infinite;
+      animation: kc-announcement-marquee-{{ section.id }} 20s linear infinite;
     }
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message > span {
       padding-right: 4rem;
