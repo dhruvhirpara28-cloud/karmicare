@@ -83,16 +83,23 @@
     Desktop (from 1081 px): the package as it will arrive, the Duo and the Welcome Kit items (the theme
     setting's products, as the buybox shows them: custom.kit_thumbnail, value struck through, Free)
   {%- endcomment -%}
+  {%- liquid
+    # The Duo's name on the Duo (the Welcome Kit bundle product); any other product shows its own title
+    assign package_name = product.title
+    if is_bundle_product
+      assign package_name = block.settings.package_name | default: product.title
+    endif
+  -%}
   <div class="sc-package">
     <div class="sc-package-duo">
       {%- if product.featured_image -%}
         {{
           product.featured_image
           | image_url: width: 320
-          | image_tag: loading: 'lazy', width: 160, height: 160, class: 'sc-package-img', alt: block.settings.package_name
+          | image_tag: loading: 'lazy', width: 160, height: 160, class: 'sc-package-img', alt: package_name
         }}
       {%- endif -%}
-      <p class="sc-package-name">{{ block.settings.package_name | escape }}</p>
+      <p class="sc-package-name">{{ package_name | escape }}</p>
     </div>
     <span class="sc-package-plus" aria-hidden="true" data-sc-kit>+</span>
     <ul class="sc-kit" role="list" data-sc-kit>
@@ -158,7 +165,7 @@
         <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
         <span data-sc="kit"></span>
       </li>
-      <li class="sc-row">
+      <li class="sc-row" data-sc-row="guarantee">
         <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
         <span data-sc="guarantee"></span>
       </li>
@@ -166,7 +173,7 @@
         <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><line x1="10" x2="10" y1="15" y2="9"/><line x1="14" x2="14" y1="15" y2="9"/></svg>
         <span data-sc="stop"></span>
       </li>
-      <li class="sc-row">
+      <li class="sc-row" data-sc-row="brushing">
         <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>
         <span data-sc="brushing"></span>
       </li>
@@ -199,7 +206,11 @@
       "isBundle": {{ is_bundle_product | json }},
       "kitReceived": {{ kit_received | json }},
       "kitVariantIds": {{ welcome_kit_variant_ids | split: ',' | compact | json }},
-      {%- comment -%} Positions are CSS only: phones 8 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
+      "hasPlans": {% if product.selling_plan_groups.size > 0 %}true{% else %}false{% endif %},
+      "requiresPlan": {{ product.requires_selling_plan | json }},
+      "productTitle": {{ product.title | json }},
+      "buttonText": {{ block.settings.button_text | json }},
+      {%- comment -%} Positions are CSS only: phones 12 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
       "prices": {{ sc_prices }},
       {%- comment -%} Copy: the block settings (P1–P7 of the brief); [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
       "copy": {
@@ -240,9 +251,37 @@
     var form = document.getElementById('scCtaForm');
     var variantInput = document.getElementById('scVariantId');
     var planInput = document.getElementById('scSellingPlanInput');
-    var ctas = Array.prototype.slice.call(bar.querySelectorAll('[data-sc-cta]'));
+    // Everything karmiAddToCart may disable while it works: the two CTAs and Try once
+    var busyButtons = Array.prototype.slice.call(bar.querySelectorAll('[data-sc-cta], [data-sc="try-once"]'));
+    var section = bar.closest('.shopify-section');
+    var sectionId = section ? section.id : '';
     var ready = false;
     var shown = false;
+    var disposed = false;
+    var observers = [];
+    // Plan mode only where the buybox shows Loop's plan choice (its server-rendered config is on the
+    // page); otherwise the bar buys what the buybox form holds, one time, like that form does
+    var usesLoop = cfg.hasPlans && Boolean(document.querySelector('.loopProductQuickJson-' + cfg.productId));
+
+    // Every window and document listener goes through on(), so a theme-editor reload of the section can
+    // dispose of this instance completely (dispose() below)
+    var abort = typeof AbortController === 'function' ? new AbortController() : null;
+    function on(target, type, handler, options) {
+      var opts = Object.assign({}, options || {});
+      if (abort) opts.signal = abort.signal;
+      target.addEventListener(type, handler, opts);
+    }
+
+    function dispose() {
+      if (disposed) return;
+      disposed = true;
+      if (abort) abort.abort();
+      observers.forEach(function (observer) {
+        observer.disconnect();
+      });
+      bar.remove();
+      document.documentElement.style.removeProperty('--sticky-cta-height');
+    }
 
     function field(name) {
       return bar.querySelector('[data-sc="' + name + '"]');
@@ -279,6 +318,24 @@
     // What the buybox will buy right now: plan (or one time), variant, and the values the bar shows,
     // all by selling plan ID (assets/kc-plan-select.js). null while Loop has not chosen yet.
     function readState() {
+      // A product without selling plans, or without Loop's plan choice on the page: what its buybox
+      // form holds, one time
+      if (!usesLoop) {
+        var idInput = document.querySelector('.product__info-container [name="id"]');
+        var productVariant = String((idInput && idInput.value) || cfg.variantId);
+        var productPrice = cfg.prices.oneTime[productVariant];
+        if (productPrice == null) return null;
+        return {
+          type: 'product',
+          planId: '',
+          variantId: productVariant,
+          price: productPrice,
+          oneTimePrice: productPrice,
+          credit: 0,
+          perBrushing: 0,
+          checkupReward: false
+        };
+      }
       var api = window.KCPlanSelect;
       var fieldset = document.getElementById('loop-selling-plan-fieldset');
       var checked = fieldset && fieldset.querySelector('input[type="radio"]:checked');
@@ -311,19 +368,27 @@
     // Loop can settle before kc-plan-select has read its config: try again for a few seconds
     var retries = 0;
     function render() {
+      if (disposed) return false;
       var state = readState();
       if (!state) {
+        // Never show (or buy) a stale plan: hidden until the buybox's selection reads again
+        if (ready) {
+          ready = false;
+          updateVisibility();
+        }
         if (retries++ < 40) setTimeout(queueRender, 300);
         return false;
       }
       retries = 0;
       var copy = cfg.copy;
-      var once = state.type === 'once';
-      var title = copy['title_' + state.type] || '';
-      var cut = title.indexOf(' · ');
+      // 'product': a product without plans; its own title and price, no membership lines
+      var plain = state.type === 'product';
+      var once = state.type === 'once' || plain;
+      var title = plain ? cfg.productTitle || '' : copy['title_' + state.type] || '';
+      var cut = plain ? -1 : title.indexOf(' · ');
       setText('name', cut === -1 ? title : title.slice(0, cut));
       setText('rest', cut === -1 ? '' : title.slice(cut));
-      setText('price', fill(copy['price_' + state.type], { price: money(state.price) }));
+      setText('price', plain ? money(state.price) : fill(copy['price_' + state.type], { price: money(state.price) }));
       var credit =
         once || state.credit <= 0
           ? copy.panel_label
@@ -343,12 +408,16 @@
         el.hidden = !kitOffered;
       });
       setText('guarantee', once ? copy.guarantee_once : copy.guarantee_member);
+      bar.querySelector('[data-sc-row="guarantee"]').hidden = plain;
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
       bar.querySelector('[data-sc-row="stop"]').hidden = once;
       setText('brushing', fill(copy.per_brushing, { per_brushing: money(state.perBrushing) }));
-      setText('cta', copy['cta_' + state.type]);
-      setText('try-once', once || state.oneTimePrice == null ? '' : fill(copy.try_once, { price: money(state.oneTimePrice) }));
-      field('try-once').hidden = once || state.oneTimePrice == null;
+      bar.querySelector('[data-sc-row="brushing"]').hidden = plain;
+      setText('cta', plain ? cfg.buttonText || '' : copy['cta_' + state.type]);
+      // Try once only where one time can be bought: not on subscription-only products
+      var tryOnce = !once && !cfg.requiresPlan && state.oneTimePrice != null;
+      setText('try-once', tryOnce ? fill(copy.try_once, { price: money(state.oneTimePrice) }) : '');
+      field('try-once').hidden = !tryOnce;
       if (variantInput.value !== state.variantId) variantInput.value = state.variantId;
       if (planInput.value !== state.planId) planInput.value = state.planId;
       ready = true;
@@ -359,7 +428,7 @@
     // One render per burst of Loop mutations (a timer, not a frame: a background tab draws no frames)
     var renderQueued = false;
     function queueRender() {
-      if (renderQueued) return;
+      if (renderQueued || disposed) return;
       renderQueued = true;
       setTimeout(function () {
         renderQueued = false;
@@ -367,15 +436,22 @@
       }, 50);
     }
 
-    // Follow the buybox: Loop rewrites its fieldset on every plan or variant change
+    // Follow the buybox: Loop rewrites its fieldset on every plan or variant change. A product without
+    // plans has no fieldset; its variant picker's changes reach the bar through on(document, 'change').
     function attachLoop(tries) {
+      if (disposed) return;
+      if (!usesLoop) {
+        queueRender();
+        return;
+      }
       var fieldset = document.getElementById('loop-selling-plan-fieldset');
       if (!fieldset) {
         if (tries < 100) setTimeout(attachLoop, 300, tries + 1);
         return;
       }
-      fieldset.addEventListener('change', queueRender);
-      new MutationObserver(queueRender).observe(fieldset, { subtree: true, childList: true, attributes: true });
+      var loopObserver = new MutationObserver(queueRender);
+      loopObserver.observe(fieldset, { subtree: true, childList: true, attributes: true });
+      observers.push(loopObserver);
       queueRender();
     }
 
@@ -407,11 +483,12 @@
         if (entry.isIntersecting) sectionsOnScreen.add(entry.target);
         else sectionsOnScreen.delete(entry.target);
       });
-      sectionsOnScreen.forEach(function (section) {
-        if (!section.isConnected) sectionsOnScreen.delete(section);
+      sectionsOnScreen.forEach(function (ctaSection) {
+        if (!ctaSection.isConnected) sectionsOnScreen.delete(ctaSection);
       });
       updateVisibility();
     });
+    observers.push(ctaObserver);
 
     // Past the buybox CTA = its bottom above the screen; from 750 px (two columns, the gallery sticky
     // beside the buybox) also past the gallery column, so the card never covers its thumbnails. Read on
@@ -426,6 +503,7 @@
     }
 
     function watchCtas() {
+      if (disposed) return;
       if (!buyboxCta) {
         buyboxCta =
           document.querySelector('.product__info-container .product-form__submit') ||
@@ -435,10 +513,10 @@
       var buyboxSection = buyboxCta && buyboxCta.closest('.shopify-section');
       Array.prototype.forEach.call(document.querySelectorAll(CTA_SELECTOR), function (cta) {
         if (cta === buyboxCta || bar.contains(cta)) return;
-        var section = cta.closest('.shopify-section') || cta;
-        if (section === buyboxSection || watched.has(section)) return;
-        watched.add(section);
-        ctaObserver.observe(section);
+        var ctaSection = cta.closest('.shopify-section') || cta;
+        if (ctaSection === buyboxSection || watched.has(ctaSection)) return;
+        watched.add(ctaSection);
+        ctaObserver.observe(ctaSection);
       });
     }
 
@@ -478,11 +556,19 @@
       if (event.target.closest('button')) return;
       setOpen(!open);
     });
-    document.addEventListener('keydown', function (event) {
+    on(document, 'keydown', function (event) {
       if (event.key === 'Escape' && open) setOpen(false, true);
     });
-    document.addEventListener('pointerdown', function (event) {
-      if (open && !bar.contains(event.target)) setOpen(false);
+    on(document, 'pointerdown', function (event) {
+      if (!open || bar.contains(event.target)) return;
+      // Focus on a control inside the panel would be lost as it closes: hand it to the chevron, unless
+      // the tap itself moved focus somewhere (a link, a field)
+      var focusInside = bar.contains(document.activeElement);
+      setOpen(false);
+      if (!focusInside) return;
+      setTimeout(function () {
+        if (!document.activeElement || document.activeElement === document.body) disclosure.focus({ preventScroll: true });
+      }, 0);
     });
 
     // Change (P7): one place to choose, the buybox plan cards
@@ -498,9 +584,14 @@
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
-      var button = event.submitter || ctas[0];
-      // Buy what the buybox holds right now, its exact plan included
-      render();
+      var button = event.submitter || busyButtons[0];
+      // Buy exactly what the buybox holds right now, its plan included. If the bar cannot read it (a
+      // variant without this plan, Loop still switching), buy nothing and hand over to the buybox.
+      if (!render()) {
+        var buybox = document.getElementById('loop-selling-plan-fieldset') || document.querySelector('.product__info-container');
+        if (buybox) buybox.scrollIntoView({ block: 'center' });
+        return;
+      }
       if (typeof window.karmiAddToCart !== 'function') return;
       window.karmiAddToCart(form, button, {
         isBundleProduct: cfg.isBundle,
@@ -509,9 +600,9 @@
       });
     });
 
-    // Back from checkout (bfcache): the CTAs are usable again
-    window.addEventListener('pageshow', function () {
-      ctas.forEach(function (button) {
+    // Back from checkout (bfcache): the CTAs and Try once are usable again
+    on(window, 'pageshow', function () {
+      busyButtons.forEach(function (button) {
         button.disabled = false;
         button.removeAttribute('aria-disabled');
         button.classList.remove('loading');
@@ -527,13 +618,25 @@
       });
       if (bar.parentNode !== document.body) document.body.appendChild(bar);
 
-      if (window.ResizeObserver) new ResizeObserver(reservePageEnd).observe(bar);
+      if (window.ResizeObserver) {
+        var barResize = new ResizeObserver(reservePageEnd);
+        barResize.observe(bar);
+        observers.push(barResize);
+      }
       watchCtas();
-      window.addEventListener('scroll', checkBuybox, { passive: true });
-      window.addEventListener('resize', checkBuybox);
+      on(window, 'scroll', checkBuybox, { passive: true });
+      on(window, 'resize', checkBuybox);
       // Sections that render late, and sections the theme editor adds
       setTimeout(watchCtas, 2000);
-      document.addEventListener('shopify:section:load', watchCtas);
+      on(document, 'shopify:section:load', watchCtas);
+      // Plan and variant changes in the buybox (Loop's radios, the variant picker)
+      on(document, 'change', function (event) {
+        if (event.target && event.target.closest && event.target.closest('.product__info-container')) queueRender();
+      });
+      // Theme editor: the section is reloaded or removed; its new script builds a fresh bar
+      on(document, 'shopify:section:unload', function (event) {
+        if (sectionId && event.target && event.target.id === sectionId) dispose();
+      });
       attachLoop(0);
     }
 
