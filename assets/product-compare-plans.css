@@ -559,8 +559,10 @@ body.night-mode .pc-kit-poptitle {
 /* Mobile header: the 16px plan names (body-md since 17 Oct) wrap "The
    Karmicare Year" to two lines. 136px fits two name lines, price and cycle
    in every column, with the title clear of the "Brushing & Beyond" badge
-   (Figma preview header 136). Shared by all columns, so rows stay aligned. */
-@media screen and (max-width: 749px) {
+   (Figma preview header 136). Shared by all columns, so rows stay aligned.
+   The query is the exact complement of the tokens' min-width: 750px switch,
+   so fractional widths such as 749.5px get it too. */
+@media not all and (min-width: 750px) {
   .plan-compare--kc {
     --pc-head-height: 13.6rem;
   }
@@ -952,8 +954,8 @@ body.night-mode .pc-kit-poptitle {
 
 /* Mobile: the 13px labels (label-lg since 17 Oct) wrap "Begin 60-Day Rhythm"
    to three lines in the 134px button with 16px sides; 8px sides, as the
-   tertiary already has, keep it on two. */
-@media screen and (max-width: 749px) {
+   tertiary already has, keep it on two. Same query as the header above. */
+@media not all and (min-width: 750px) {
   .plan-compare--kc .pc-cta {
     padding-inline: var(--kc-responsive-spacing-layout-xs);
   }

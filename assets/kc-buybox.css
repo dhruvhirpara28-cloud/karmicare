@@ -376,8 +376,10 @@
 /* Mobile: the chip takes its own line under the benefit text, 3 px below
    it and flush with the text column (Figma 4023:29018). Inline, it touched
    the line above when it wrapped, and from 402 px it stayed on the first
-   line and pushed the text below the tick. */
-@media screen and (max-width: 749px) {
+   line and pushed the text below the tick. The query is the exact
+   complement of the tokens' min-width: 750px switch, so fractional widths
+   such as 749.5 px get it too. */
+@media not all and (min-width: 750px) {
   .kc-buybox span.kc-welcome-kit-parent,
   .night-mode .kc-buybox span.kc-welcome-kit-parent,
   .day-mode .kc-buybox span.kc-welcome-kit-parent {
