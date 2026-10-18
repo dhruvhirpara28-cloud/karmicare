@@ -56,6 +56,19 @@
   transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s;
 }
 
+/* Open: the card grows upwards and scrolls inside when it outgrows the screen */
+.sticky-cta.is-open {
+  gap: var(--kc-responsive-spacing-layout-md);
+  max-height: calc(100dvh - var(--header-height, 0px) - 2 * var(--kc-responsive-spacing-layout-comfortable));
+  padding: var(--kc-responsive-spacing-layout-comfortable);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.sticky-cta [hidden] {
+  display: none !important;
+}
+
 /* 750–1080: centred, four grid columns wide; from 1081 the script docks it to the buybox column */
 @media screen and (min-width: 750px) {
   .sticky-cta {
@@ -119,17 +132,169 @@
   color: var(--kc-mapped-text-default-body);
 }
 
-/* ── Row 2: what comes back ── */
+/* Open: the full title (P1) and Change take the place of the bar CTA */
+.sc-title-rest,
+.sc-change,
+.sticky-cta.is-open .sc-cta--bar {
+  display: none;
+}
+
+.sticky-cta.is-open .sc-title-rest {
+  display: inline;
+}
+
+.sticky-cta.is-open .sc-change {
+  display: inline-flex;
+}
+
+.sc-change {
+  flex: none;
+  align-items: center;
+  min-height: var(--kc-responsive-size-control-min-height);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: var(--kc-responsive-spacing-layout-xxs);
+  cursor: pointer;
+}
+
+/* ── Row 2: what comes back + the disclosure ── */
 .sc-return {
   display: flex;
   align-items: center;
   gap: var(--kc-responsive-spacing-layout-xs);
+  cursor: pointer;
 }
 
 .sc-credit {
   flex: 1;
   min-width: 0;
   color: var(--kc-mapped-text-default-heading);
+}
+
+.sc-disclosure {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--kc-responsive-size-icon-md);
+  height: var(--kc-responsive-size-icon-md);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  background: none;
+  color: var(--kc-mapped-icon-primary-default);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* 44 px target around the 24 px chevron */
+.sc-disclosure::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--kc-responsive-size-icon-md) - var(--kc-responsive-size-control-min-height)) / 2);
+}
+
+.sc-disclosure .sc-icon {
+  transition: transform 0.2s ease;
+}
+
+.sticky-cta.is-open .sc-disclosure .sc-icon {
+  transform: rotate(180deg);
+}
+
+.sc-icon {
+  flex: none;
+  width: var(--kc-responsive-size-icon-md);
+  height: var(--kc-responsive-size-icon-md);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--kc-shape-stroke-medium);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Panel: Delivery & what's included ── */
+.sc-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-md);
+}
+
+.sc-info,
+.sc-row,
+.sc-try-once {
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.sc-info {
+  color: var(--kc-mapped-text-default-body);
+}
+
+.sc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin: 0;
+  padding: var(--kc-responsive-spacing-layout-md) 0;
+  border-top: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-bottom: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  list-style: none;
+}
+
+.sc-row {
+  display: flex;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-md);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.sc-row .sc-icon {
+  color: var(--kc-mapped-icon-primary-default);
+}
+
+.sc-cta--panel {
+  width: 100%;
+}
+
+.sc-try-once {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--kc-responsive-size-control-min-height);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kc-mapped-text-link-default);
+  font-family: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: var(--kc-responsive-spacing-layout-xxs);
+  cursor: pointer;
+}
+
+.sc-try-once:hover {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-disclosure .sc-icon {
+    transition: none;
+  }
 }
 
 /* ── CTA: the buybox button in token form (assets/kc-buybox.css) ── */

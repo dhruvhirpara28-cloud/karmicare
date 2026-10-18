@@ -68,22 +68,77 @@
   data-product-id="{{ product.id }}"
   inert
 >
+  {%- capture sc_spinner -%}
+    <span class="loading__spinner hidden">
+      <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+      </svg>
+    </span>
+  {%- endcapture -%}
+  {%- comment -%}
+    Line icons: Lucide (ISC), the "Interface" set of the KC Brand Design Library; stroke in .sc-icon
+  {%- endcomment -%}
+
   <div class="sc-summary">
     <div class="sc-plan">
-      <p class="sc-title"><span data-sc="name"></span></p>
+      <p class="sc-title"><span data-sc="name"></span><span class="sc-title-rest" data-sc="rest"></span></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
-    <button type="submit" form="scCtaForm" class="sc-cta" data-sc-cta>
+    <button type="button" class="sc-change" data-sc-change>Change</button>
+    <button type="submit" form="scCtaForm" class="sc-cta sc-cta--bar" data-sc-cta>
       <span>{{ block.settings.button_text | escape }}</span>
-      <span class="loading__spinner hidden">
-        <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-        </svg>
-      </span>
+      {{- sc_spinner -}}
     </button>
   </div>
   <div class="sc-return">
     <p class="sc-credit" data-sc="credit"></p>
+    <button
+      type="button"
+      class="sc-disclosure"
+      id="scDisclosure"
+      aria-expanded="false"
+      aria-controls="scPanel"
+    >
+      <span class="visually-hidden" data-sc="panel-label"></span>
+      <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
+  </div>
+  <div class="sc-panel" id="scPanel" hidden>
+    <p class="sc-info" data-sc="info"></p>
+    <ul class="sc-rows" role="list">
+      <li class="sc-row">
+        <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        <span data-sc="delivery"></span>
+      </li>
+      <li class="sc-row" data-sc-row="kit">
+        <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+        <span data-sc="kit"></span>
+      </li>
+      <li class="sc-row">
+        <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span data-sc="guarantee"></span>
+      </li>
+      <li class="sc-row" data-sc-row="stop">
+        <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><line x1="10" x2="10" y1="15" y2="9"/><line x1="14" x2="14" y1="15" y2="9"/></svg>
+        <span data-sc="stop"></span>
+      </li>
+      <li class="sc-row">
+        <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>
+        <span data-sc="brushing"></span>
+      </li>
+    </ul>
+    <button type="submit" form="scCtaForm" class="sc-cta sc-cta--panel" data-sc-cta>
+      <span data-sc="cta"></span>
+      {{- sc_spinner -}}
+    </button>
+    {%- comment -%} One time, straight to checkout, like the buybox's Try once (assets/kc-plan-select.js) {%- endcomment -%}
+    <button
+      type="button"
+      class="sc-try-once"
+      data-sc="try-once"
+      data-kc-plan-choose="once"
+      data-kc-plan-product="{{ product.id }}"
+    ></button>
   </div>
 
   <form method="post" action="{{ routes.cart_add_url }}" id="scCtaForm" class="sc-form">
@@ -110,7 +165,21 @@
         "price_once": "[price] one time",
         "credit": "+ [credit] Care Credit back",
         "credit_checkup": "+ [credit] Care Credit + €40 Check-up Reward",
-        "panel_label": "Delivery & what's included"
+        "credit_info": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
+        "checkup_info": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
+        "panel_label": "Delivery & what's included",
+        "cta_rhythm": "Begin your 60-Day Rhythm",
+        "cta_year": "Begin the Karmicare Year",
+        "cta_once": "Try once",
+        "delivery_free": "Free delivery · 1–3 working days in Benelux",
+        "delivery_once": "Shipping calculated at checkout",
+        "kit": "Welcome Kit: two toothbrushes + floss",
+        "guarantee_member": "60-day money-back guarantee",
+        "guarantee_once": "14-day money-back guarantee",
+        "stop_rhythm": "Pause or stop anytime",
+        "stop_year": "Renews yearly · stop anytime before renewal",
+        "per_brushing": "[per_brushing] per brushing",
+        "try_once": "Not ready for a membership? Try once for [price]"
       }
     }
   </script>
@@ -177,29 +246,56 @@
         ? cfg.prices.oneTime[variantId]
         : (cfg.prices.plans[variantId] || {})[planId];
       if (price == null) return null;
+      // Same sources as the buybox summary (assets/loop-widget.js): Return on Care %, else the plan's Care
+      // Credit %; per brushing = what the checkout charges / (Duos x brushings per Duo)
       var creditPercent = plan ? (plan.returnOnCare > 0 ? plan.returnOnCare : plan.careCreditPercent || 0) : 0;
+      var brushings = plan ? (plan.duos || 1) * (plan.brushings || 120) : 120;
       return {
         type: once ? 'once' : plan.type === 'year' ? 'year' : 'rhythm',
         planId: planId,
         variantId: variantId,
         price: price,
+        oneTimePrice: cfg.prices.oneTime[variantId],
         credit: Math.round((price * creditPercent) / 100),
+        perBrushing: Math.round(price / brushings),
         checkupReward: Boolean(plan && plan.checkupReward)
       };
     }
 
+    // Loop can settle before kc-plan-select has read its config: try again for a few seconds
+    var retries = 0;
     function render() {
       var state = readState();
-      if (!state) return false;
+      if (!state) {
+        if (retries++ < 40) setTimeout(queueRender, 300);
+        return false;
+      }
+      retries = 0;
       var copy = cfg.copy;
+      var once = state.type === 'once';
       var title = copy['title_' + state.type] || '';
-      setText('name', title.split(' · ')[0]);
+      var cut = title.indexOf(' · ');
+      setText('name', cut === -1 ? title : title.slice(0, cut));
+      setText('rest', cut === -1 ? '' : title.slice(cut));
       setText('price', fill(copy['price_' + state.type], { price: money(state.price) }));
       var credit =
-        state.type === 'once' || state.credit <= 0
+        once || state.credit <= 0
           ? copy.panel_label
           : fill(state.checkupReward ? copy.credit_checkup : copy.credit, { credit: money(state.credit) });
       setText('credit', credit);
+      setText('panel-label', copy.panel_label);
+      setText('info', once ? '' : copy.credit_info + (state.checkupReward ? ' ' + copy.checkup_info : ''));
+      field('info').hidden = once;
+      setText('delivery', once ? copy.delivery_once : copy.delivery_free);
+      setText('kit', copy.kit);
+      bar.querySelector('[data-sc-row="kit"]').hidden = once || !cfg.isBundle || cfg.kitReceived;
+      setText('guarantee', once ? copy.guarantee_once : copy.guarantee_member);
+      setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
+      bar.querySelector('[data-sc-row="stop"]').hidden = once;
+      setText('brushing', fill(copy.per_brushing, { per_brushing: money(state.perBrushing) }));
+      setText('cta', copy['cta_' + state.type]);
+      setText('try-once', once || state.oneTimePrice == null ? '' : fill(copy.try_once, { price: money(state.oneTimePrice) }));
+      field('try-once').hidden = once || state.oneTimePrice == null;
       if (variantInput.value !== state.variantId) variantInput.value = state.variantId;
       if (planInput.value !== state.planId) planInput.value = state.planId;
       ready = true;
@@ -207,14 +303,15 @@
       return true;
     }
 
+    // One render per burst of Loop mutations (a timer, not a frame: a background tab draws no frames)
     var renderQueued = false;
     function queueRender() {
       if (renderQueued) return;
       renderQueued = true;
-      requestAnimationFrame(function () {
+      setTimeout(function () {
         renderQueued = false;
         render();
-      });
+      }, 50);
     }
 
     // Follow the buybox: Loop rewrites its fieldset on every plan or variant change
@@ -246,6 +343,8 @@
        the bottom it covers (its height + its offset); the footer adds that much bottom padding and the
        cookie preferences panel (assets/kc-cookie-preferences.css) sits that much higher. */
     function reservePageEnd() {
+      // Measured on the collapsed card only, so opening the panel never moves the page behind it
+      if (open) return;
       if (shown) {
         var offset = parseFloat(getComputedStyle(bar).bottom) || 0;
         document.documentElement.style.setProperty('--sticky-cta-height', Math.ceil(bar.offsetHeight + offset) + 'px');
@@ -260,11 +359,56 @@
       var visible = ready && !buyboxCtaVisible;
       if (visible === shown) return;
       shown = visible;
+      if (!visible) setOpen(false);
       bar.classList.toggle('is-visible', visible);
       bar.inert = !visible;
       document.body.classList.toggle('has-sticky-cta', visible);
       reservePageEnd();
     }
+
+    /* Delivery & what's included: a disclosure. The card grows upwards; Esc and a tap outside close it. */
+    var disclosure = document.getElementById('scDisclosure');
+    var panel = document.getElementById('scPanel');
+    var open = false;
+    function setOpen(value, returnFocus) {
+      if (value === open) return;
+      open = value;
+      bar.classList.toggle('is-open', open);
+      // assets/kc-cookie-preferences.css drops its panel below the bar while this is set
+      bar.classList.toggle('sc-dd-active', open);
+      disclosure.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      if (!open) {
+        reservePageEnd();
+        if (returnFocus) disclosure.focus();
+      }
+    }
+
+    disclosure.addEventListener('click', function () {
+      setOpen(!open);
+    });
+    // The whole "what comes back" row opens it for pointer users; the chevron is the control
+    bar.querySelector('.sc-return').addEventListener('click', function (event) {
+      if (event.target.closest('button')) return;
+      setOpen(!open);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && open) setOpen(false, true);
+    });
+    document.addEventListener('pointerdown', function (event) {
+      if (open && !bar.contains(event.target)) setOpen(false);
+    });
+
+    // Change (P7): one place to choose, the buybox plan cards
+    bar.querySelector('[data-sc-change]').addEventListener('click', function () {
+      setOpen(false);
+      var plans = document.getElementById('loop-selling-plan-fieldset') || document.querySelector('.product__info-container');
+      if (!plans) return;
+      var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      plans.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' });
+      var checked = plans.querySelector('input[type="radio"]:checked');
+      if (checked) checked.focus({ preventScroll: true });
+    });
 
     function watchBuyboxCta() {
       var buyboxCta = document.querySelector('.product-form__submit');
