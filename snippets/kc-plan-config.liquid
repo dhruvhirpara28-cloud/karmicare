@@ -243,14 +243,11 @@
     {%- for kc_group in product.selling_plan_groups -%}
       {%- assign kc_needle = ',' | append: kc_group.id | append: ',' -%}
       {%- comment -%}
-        Scoped to this widget (and, from the buybox, the sticky bar), so a section reloaded in the theme
-        editor never leaves a stale rule on the other widget
+        Scoped to this widget, so a section reloaded in the theme editor never leaves a stale rule on
+        the other widget
       {%- endcomment -%}
       {%- unless kc_public_groups contains kc_needle %}
-        #ProductInfo-{{ section.id }} [id='loop-selling_plan_group-{{ kc_group.id }}']
-        {%- if role == 'buybox' %},
-          .sc-dd-option[data-selling-plan-group-id='{{ kc_group.id }}']
-        {%- endif %} {
+        #ProductInfo-{{ section.id }} [id='loop-selling_plan_group-{{ kc_group.id }}'] {
           display: none !important;
         }
       {%- endunless -%}
