@@ -13,7 +13,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
 | `batch-04-legal` | 974 | `83fed281915f22a5b0bb9ed70cf3e49c47241ccf` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
-| `batch-06-content-pages` | 21 | `f78c391aa267b82eb0c85af36edea6e4583651bf` |
+| `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `9597904c4ef875006a7d8a76bebbaa43d0faaca0` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
 
@@ -42,10 +42,10 @@ By resource type:
 | `batch-03-header-footer` | 0 | 6 | 24 | 1 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 41 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 357 | 474 | 0 | 0 | 0 | 974 |
 | `batch-05-products` | 16 | 0 | 0 | 18 | 43 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 77 |
-| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 21 |
+| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 | 0 | 22 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 698 | 1 | 9 | 709 |
 | `batch-08-system` | 3 | 0 | 36 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 46 |
-| **All** | **508** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **378** | **474** | **698** | **1** | **10** | **2570** |
+| **All** | **508** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2571** |
 
 By status:
 
@@ -56,7 +56,7 @@ By status:
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 15 | 0 | 1 | 0 | 61 | 0 |
-| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 21 | 0 |
+| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 22 | 0 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 708 | 0 |
 | `batch-08-system` | 39 | 0 | 0 | 0 | 7 | 0 |
 
@@ -250,7 +250,7 @@ Every URL in the live sitemap (19 Oct) outside batches 01–03, plus the seven S
 | `/pages/why-karmicare` | 06 | `page.json` | 4 | not linked |  |
 | `/pages/why-use-hydroxyapatite-toothpaste` | 06 | `page.json` | 4 | not linked |  |
 | `/pages/why-stop-using-fluoride-toothpaste` | 06 | `page.json` | 5 | body 1 (/search?q=awake) |  |
-| `/pages/nhap-technology` | 06 | `page.json` | 4 | not linked |  |
+| `/pages/nhap-technology` | 06 | `page.json` | 5 | not linked |  |
 | `/pages/articles` | 06 | `page.json` | 4 | not linked |  |
 | `/collections/biorhythmic-oral-hygiene-kit` | 07 | `collection.json` | 3 | body 1 (/collections) |  |
 | `/collections/vgbc2025` | 07 | `collection.json` | 3 | body 1 (/collections) |  |
@@ -287,7 +287,7 @@ Not inventoried as store text, because Shopify or an app supplies and translates
 - `/pages/articles` (a page) next to `/blogs/news` (the blog itself); `/pages/nhap-technology` and the article `/blogs/news/nano-hydroxyapatite` share the same headline.
 - `/collections/vgbc2025`: an event collection with a code-like title.
 
-Claims in batches 05–07: 407 entries carry a claim (261 needs-review, 113 unsupported, 33 approved); see CLAIMS-REVIEW.md.
+Claims in batches 05–07: 410 entries carry a claim (262 needs-review, 115 unsupported, 33 approved); see CLAIMS-REVIEW.md.
 
 ## Full inventory
 
@@ -2130,13 +2130,14 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 12 | `admin:page:why-stop-using-fluoride-toothpaste:seo.title` | page | Why stop using fluoride toothpaste – KARMICARE | admin-held |  |
 | 13 | `admin:page:why-stop-using-fluoride-toothpaste:seo.description` | page | There’s no fluoride in our Awake or Asleep toothpaste. Nor will there ever be Here’s why you should… | admin-held |  |
 | 14 | `admin:page:nhap-technology:title` | page | nHAp Technology | admin-held |  |
-| 15 | `admin:page:nhap-technology:body_html#b001` | page | Dive deep into the benefits of NASA’s favorite supplement for oral health | admin-held |  |
-| 16 | `admin:page:nhap-technology:seo.title` | page | nHAp Technology – KARMICARE | admin-held |  |
-| 17 | `admin:page:nhap-technology:seo.description` | page | Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Di… | admin-held |  |
-| 18 | `admin:page:articles:title` | page | Articles | admin-held |  |
-| 19 | `admin:page:articles:body_html#b001` | page | Discover our latest articles | admin-held |  |
-| 20 | `admin:page:articles:seo.title` | page | Articles – KARMICARE | admin-held |  |
-| 21 | `admin:page:articles:seo.description` | page | Discover our latest articles | admin-held |  |
+| 15 | `admin:page:nhap-technology:body_html#b000` | page | Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste | admin-held |  |
+| 16 | `admin:page:nhap-technology:body_html#b001` | page | Dive deep into the benefits of NASA’s favorite supplement for oral health | admin-held |  |
+| 17 | `admin:page:nhap-technology:seo.title` | page | nHAp Technology – KARMICARE | admin-held |  |
+| 18 | `admin:page:nhap-technology:seo.description` | page | Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Di… | admin-held |  |
+| 19 | `admin:page:articles:title` | page | Articles | admin-held |  |
+| 20 | `admin:page:articles:body_html#b001` | page | Discover our latest articles | admin-held |  |
+| 21 | `admin:page:articles:seo.title` | page | Articles – KARMICARE | admin-held |  |
+| 22 | `admin:page:articles:seo.description` | page | Discover our latest articles | admin-held |  |
 
 ### `batch-07-collections-blog`
 

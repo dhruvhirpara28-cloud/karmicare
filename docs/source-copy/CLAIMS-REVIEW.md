@@ -98,7 +98,7 @@ Not health claims, but customer-facing promises that the confirmed offer (5 Oct 
 
 ## Batches 05–07: other products, content pages, collections and blog (B2)
 
-Same three statuses and the same standard as above, applied to every block of batches 05–07 that a keyword scan flagged (541 blocks), each judged by hand. Blocks without a claim are left out. The per-entry status is also in `en-source.json` (`claim_status`, `claim_basis`).
+Same three statuses and the same standard as above, applied to every block of batches 05–07 that a keyword scan flagged (541 blocks), each judged by hand. Blocks without a claim are left out. The per-entry status is also in `en-source.json` (`claim_status`, `claim_basis`). After the R2 review (`docs/runtime-review/B2-NL-ASTRA.md`), 3 blocks that the scan missed were added; their basis ends with “(R2, review F*n*)”.
 
 The nine blog articles (2023–2024) predate the 2026 claim rules. They make disease, prevention and fluoride-harm statements throughout. **Unsupported** blocks are held in the NL and FR files (not translated); **needs-review** blocks are translated faithfully and marked `pending-claim-review`.
 
@@ -108,10 +108,10 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `/products/evening-toothbrush` | 0 | 3 | 0 |
 | `/products/whitening-charcoal-dental-floss` | 0 | 5 | 0 |
 | `/products/evening-toothbrush-2-0` | 0 | 3 | 0 |
-| `/products/asleep-evening-toothpaste-2-0` | 0 | 1 | 2 |
-| `/products/awake-morning-toothpaste-2-0` | 0 | 1 | 2 |
+| `/products/asleep-evening-toothpaste-2-0` | 0 | 1 | 3 |
+| `/products/awake-morning-toothpaste-2-0` | 0 | 1 | 3 |
 | `/pages/why-stop-using-fluoride-toothpaste` | 1 | 4 | 0 |
-| `/pages/nhap-technology` | 0 | 0 | 2 |
+| `/pages/nhap-technology` | 0 | 1 | 2 |
 | `/blogs/news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | 0 | 32 | 28 |
 | `/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | 2 | 30 | 8 |
 | `/blogs/news/5-reasons-you-should-avoid-fluoride-in-toothpaste` | 2 | 31 | 15 |
@@ -121,17 +121,19 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `/blogs/news/how-oral-health-impacts-your-overall-wellness` | 4 | 28 | 8 |
 | `/blogs/news/headaches-and-tooth-pain-understanding-the-connection` | 2 | 23 | 7 |
 | `/blogs/news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | 2 | 26 | 4 |
-| **All** | **33** | **261** | **113** |
+| **All** | **33** | **262** | **115** |
 
-### Unsupported (held in NL/FR): 113
+### Unsupported (held in NL/FR): 115
 
-<details><summary>Show all 113</summary>
+<details><summary>Show all 115</summary>
 
 | Page | Entry | Claim (verbatim excerpt) | Basis |
 |---|---|---|---|
 | `/products/asleep-evening-toothpaste-2-0` | `seo.description` | “A toothpaste that helps you fall asleep at night.” | Sleep-onset claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect. |
 | `/products/awake-morning-toothpaste-2-0` | `seo.description` | “Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles” | Wake-up claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect. |
+| `/products/asleep-evening-toothpaste-2-0` | `body_html#b002` | “A toothpaste that helps you fall asleep at night.” | Sleep-onset claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, revi… |
 | `/products/asleep-evening-toothpaste-2-0` | `body_html#b004` | “Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles” | States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims. |
+| `/products/awake-morning-toothpaste-2-0` | `body_html#b002` | “A toothpaste that helps you get up in the morning.” | Wake-up claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F… |
 | `/products/awake-morning-toothpaste-2-0` | `body_html#b004` | “Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles” | States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims. |
 | `/pages/nhap-technology` | `body_html#b001` | “NASA’s favorite supplement for oral health” | NASA-origin framing overstates the evidence; 'supplement for oral health' is a non-cosmetic framing. |
 | `/pages/nhap-technology` | `seo.description` | “NASA’s favorite supplement for oral health” | NASA-origin framing overstates the evidence; 'supplement' is a non-cosmetic framing. |
@@ -245,9 +247,9 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 
 </details>
 
-### Needs review (translated, pending-claim-review): 261
+### Needs review (translated, pending-claim-review): 262
 
-<details><summary>Show all 261</summary>
+<details><summary>Show all 262</summary>
 
 | Page | Entry | Claim (verbatim excerpt) | Basis |
 |---|---|---|---|
@@ -269,6 +271,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `/pages/why-stop-using-fluoride-toothpaste` | `body_html#b002` | “should stop using fluoride toothpaste” | Stop-fluoride call denigrates a legally used ingredient (EU 655/2013 fairness); FAQ-0202/0207. |
 | `/pages/why-stop-using-fluoride-toothpaste` | `seo.title` | “Why stop using fluoride toothpaste – KARMICARE” | Stop-fluoride call denigrates a legally used ingredient (EU 655/2013 fairness). |
 | `/pages/why-stop-using-fluoride-toothpaste` | `seo.description` | “should stop using fluoride toothpaste” | Fluoride-free fact is fine; the stop-fluoride call denigrates a legally used ingredient (EU 655/2013). |
+| `/pages/nhap-technology` | `body_html#b000` | “Why You Need it in Your Toothpaste” | Necessity framing ('Why You Need it in Your Toothpaste'), the same kind of assertion as 'saliva isn't enough on its own' (needs-review); kept pending the claim… |
 | `…/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | `title` | “Benefits of Nootropics: Ease Stress, Boost Focus and Improve Mood.” | Stress/focus/mood effects go beyond products.md Do say 'Nootropic extracts aligned with your body's rhythms' (C40). |
 | `…/top-natural-whitening-toothpaste-for-a-brighter-smile` | `title` | “Top Natural Whitening Toothpaste For a Brighter Smile.” | Superlative ('Top') on a whitening claim; products.md allows whitening only naturally through remineralisation. |
 | `…/5-reasons-you-should-avoid-fluoride-in-toothpaste` | `title` | “5 Reasons You Should Avoid Fluoride in Toothpaste” | Avoid-fluoride call denigrates a legally used ingredient (EU 655/2013 fairness); sourced framing is FAQ-0202/0207. |

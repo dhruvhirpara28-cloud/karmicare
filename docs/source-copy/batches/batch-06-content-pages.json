@@ -1,6 +1,6 @@
 {
  "batch": "batch-06-content-pages",
- "digest": "f78c391aa267b82eb0c85af36edea6e4583651bf",
+ "digest": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -195,6 +195,21 @@
    "status": "admin-held",
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page title"
+  },
+  {
+   "id": "admin:page:nhap-technology:body_html#b000",
+   "batch": "batch-06-content-pages",
+   "page": "/pages/nhap-technology",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "body_html#b000",
+   "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste<br><br>",
+   "sha1": "96c553f2ff62fc412e983b841516f4b10c442f5e",
+   "status": "admin-held",
+   "never_translate": false,
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 0 of the rendered body_html: the body heading (h1.kc_article_single-title inside .rte) before block 1, added in R2 (review F2), because the B2 builder skipped text equal to an article title (here /blogs/news/nano-hydroxyapatite); join the blocks back in order (b000, b001); claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
+   "claim_status": "needs-review",
+   "claim_basis": "Necessity framing ('Why You Need it in Your Toothpaste'), the same kind of assertion as 'saliva isn't enough on its own' (needs-review); kept pending the claims pass (R2, review F2)."
   },
   {
    "id": "admin:page:nhap-technology:body_html#b001",
