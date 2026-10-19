@@ -270,6 +270,8 @@ const setMode = (mode) => `(async () => {
   return document.body.className;
 })()`;
 
+// Screenshots only, added after the probe: every section shot from this runner lacks the
+// consent banner, its dialog and the PDP sticky bar. Label them so (REPORT.md §2, §9).
 const HIDE_OVERLAYS = `(() => {
   const s = document.createElement('style');
   s.id = 'utopia-shot-hide';
