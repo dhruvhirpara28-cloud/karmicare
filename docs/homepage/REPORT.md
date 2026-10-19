@@ -21,6 +21,7 @@
 - **Fixes (step 3).** I fixed 21 homepage-owned rows in 10 commits, one per section. That covers every homepage P0 that code can fix and every homepage P1 except TF-06.
 - **Not fixed here.** The remaining P0s are dead links that need URLs from Victor, plus the FAQ copy. Everything that changes what a section shows is a decision for Victor (D-1 to D-14).
 - **Evidence still pending.** Rendered after-shots wait for the orchestrator's browser route; Liquid render checks wait for the preview gate.
+- **A1b (follow-up, same day).** The dead CTAs PR-03 and RE-02 now use a shared "Coming soon" pattern. The after-evidence for the CSS fixes was captured in the approved Orca browser. See [the A1b section](#a1b--coming-soon-ctas-and-after-evidence) at the end.
 
 ## What changed
 
@@ -121,8 +122,8 @@ Chrome cannot start inside Claude Code's Seatbelt sandbox: `bind()` on its Proce
 | D-4 | Clock evening callout: the Day and Night V15 frames disagree (CL-02) | (a) keep live (= Night frame) and update the Day frame; (b) follow the Day frame (moves the PDP too) | (a) |
 | D-5 | "Drag the ring" hint is a full pill (CL-03) | keep · button radius · hide | Button radius, if the no-pill rule covers hint chips |
 | D-6 | Professionals: V15 desktop shows a featured quote and a 4×2 grid; live is a marquee (PR-02). At 2560 a card shows twice (PR-05) | (a) keep the marquee; (b) build carousel + grid (blocked: the featured quote is not approved copy); (c) grid only. For 2560: accept, or add an 8th approved professional | (a) for launch; accept the 2560 repeat until an 8th consented profile exists |
-| D-7 | "REQUEST A PRACTITIONER SAMPLE" links to `#` (PR-03, P0) | give a URL (brief §10: `/professionals`) and show it at all widths · hide the button until a link exists | Give the URL |
-| D-8 | "Explore the full evidence base" links to `#` (RE-02, P0) | link to `/our-science` (brief §7/§8) · render the CTA only when a link is set (small Liquid guard, ready) | Link it if the page is live; otherwise approve the guard |
+| D-7 | "REQUEST A PRACTITIONER SAMPLE" links to `#` (PR-03, P0) | **Decided by Victor, 19 Oct (rule H8):** the shared "Coming soon" state until the page exists. Built in A1b (`4f8024c`). | — |
+| D-8 | "Explore the full evidence base" links to `#` (RE-02, P0) | **Decided by Victor, 19 Oct (rule H8):** the shared "Coming soon" state until the page exists. Built in A1b (`4f8024c`). | — |
 | D-9 | Same dentine picture on 4 of 5 research cards (RE-05) | keep · study-specific images (AI images awaiting review) · text-only cards for Xylitol and SLS, as on the PDP | Text-only for those two until reviewed images exist |
 | D-10 | Care-comes-back desktop composition and CTA vs 4013:29078 (CC-02, CC-03) | layout: keep the centred loop · Figma columns on homepage desktop (new layout setting; PDP and mobile keep the loop) · both pages. CTA: none · "Begin now" without a price · Figma (with €0,49) | Columns on homepage desktop. CTA without the price line, because the band's fine print talks about treatment costs. |
 | D-11 | FAQ category chips are pills (FQ-04) | keep (chips exempt) · 8 px radius | 8 px unless chips are exempt |
@@ -141,3 +142,112 @@ Chrome cannot start inside Claude Code's Seatbelt sandbox: `bind()` on its Proce
   - FQ-03 colour setting: allowed.
   - CC-01 numbers: allowed, because the released Figma has none.
   - Orca browser: not allowed.
+
+## A1b · Coming-soon CTAs and after-evidence
+
+**Task**: `task_fd20c680bb52`, dispatch `ctx_44515663ba34`, brief `.coordinator/BRIEF-A1b.md`
+**Commits**: `09bb6e3`, `4f8024c`, plus this report commit, on top of `9f8939d`; none pushed
+
+### Preflight
+
+| Check | Result |
+|---|---|
+| `orca status --json` | runtime `ready`, `reachable: true` (runtime `dd11e98a…`) |
+| Branch and tree | `karmicare/soft-launch-homepage`, clean at `9f8939d` |
+| Model and mode | Claude Opus 5.5 (`claude-opus-5-5`), auto mode. Bash is sandboxed and unsandboxed retries are disabled. |
+| Browser | assigned Orca page via `.orca/mission-runtime/browser.py`. `status` OK. No Chrome, no unsandboxed command. |
+| Rules | `COMMON-RULES.md` and `BROWSER-WORKFLOW.md` re-read |
+
+### 1. "Coming soon" for links to pages that do not exist yet (Victor's rule H8)
+
+| Commit | Change |
+|---|---|
+| `09bb6e3` refactor(coming-soon) | The header's pattern is now shared: `snippets/kc-coming-soon.liquid`, `assets/kc-coming-soon.css` and `assets/kc-coming-soon.js`. `sections/header.liquid` and both header menu snippets render the shared version with the same ids, classes, look and behaviour. Locale key `kc.general.coming_soon` added. |
+| `4f8024c` fix(cta) | "REQUEST A PRACTITIONER SAMPLE" (PR-03) and "Explore the full evidence base" (RE-02) render the shared Coming-soon state when their link is blank or `#`, and a normal link once a URL is set. |
+
+**Snippet** (`kc-coming-soon`). Parameters:
+- `id`: the tooltip gets `id-soon`;
+- `label`;
+- `class`: the host's classes;
+- `icon` (optional): e.g. the CTA arrow;
+- `tip` (optional).
+
+It renders an `<a>` with `role="link"`, `aria-disabled="true"`, `tabindex="0"`, no `href`, and `aria-describedby` pointing at a `role="tooltip"` span. The tooltip shows on hover, `:focus-visible` and tap; Escape hides it (the header's script, now `kc-coming-soon.js`, which binds once).
+
+**CSS**:
+- Tokens only, taken from the header's rules.
+- The tooltip selector is `.kc-coming-soon .kc-coming-soon__tip`, so host rules such as `.research-behind-system__button span` cannot restyle it.
+- A disabled host does not lift or dim on hover.
+- The tooltip text is not uppercased inside the uppercase buttons, so it matches the header's sentence case.
+- The header loads the CSS render-blocking, before the menu, so the tooltip never flashes.
+
+**Label source** (orchestrator decision, option C):
+- The new storefront locale key `kc.general.coming_soon` is used: en `Coming soon`, nl `Binnenkort`, fr `Bientôt disponible`. The other 28 storefront locales carry the English text, so MatchingTranslations stays at 0.
+- The header's `coming_soon_label` setting still overrides it when filled; its schema default was removed, because it holds no stored value.
+- No English is hardcoded in Liquid.
+- **Note for B4 (localization):** the key already exists in all 31 storefront locale files; do not add it again. Only the 28 non-EN/NL/FR placeholders need translating if those languages go live.
+
+**Pages and checks:**
+- **PDP effect:** both sections also render on the PDP, where the same links are empty, so the PDP shows the same Coming-soon CTAs. The header changes everywhere, with no visible difference.
+- **Held items untouched:** 174997e (FAQ Night card colour) and 7ff0562 (care-comes-back markers). `git diff --stat 9f8939d..HEAD -- sections/km-faq-accordion.liquid sections/care-comes-back.liquid assets/section-care-comes-back.css templates/index.json` is empty.
+- **Not touched:** section surfaces, text values, type tokens, image references.
+- **Theme Check:** `--fail-level error` exits 0. 226 files, 21 warnings, 0 errors, no new ignores.
+- **Rendered check:** pending preview gate. The new markup does not exist on the live theme, so CSS injection cannot show it. To check on the preview:
+  - header Coming-soon items look and behave as before (hover, Tab, Escape, tap on the drawer);
+  - both CTAs show the button with its arrow, not clickable, with the tooltip;
+  - NL and FR show the translated label.
+
+### 2. After-evidence for the A1 CSS fixes (Orca browser)
+
+**Method**
+- The helper's `css` injection runs on the live homepage, matching each pair on viewport, mode and consent state.
+- **Before:** `docs/homepage/capture/orca-hygiene.css`. It hides the cookie panel and frames the shot.
+- **After:** `docs/homepage/capture/orca-after.css`. Same hygiene and framing, plus the branch's CSS fixes with `!important`, because the helper injects into `<head>`. It emulates the two homepage settings, benefits columns 3 and featured-product `benefits_layout` stacked. It also replicates the two Liquid inline-style changes: the stat-strip grid to 1199 and the footer gap.
+- **Framing:** the helper captures from the document top. The section named in the URL hash is isolated by hiding the main sections before and after it, and the footer. Every A1b shot is framed this way.
+- **Mode:** set through the store's own switch. The page was restored afterwards: no injection, `mode auto`, plain URL, 1920×1080.
+
+**Capture limit found** (infrastructure, reported to the orchestrator):
+- Orca page captures are only valid within about 941 × 1298 CSS px, the real pane size. Beyond that, both `screenshot` and `--full` repeat stale tiles.
+- At 393 and 768 the PNGs are valid.
+- At 1024 and 1440 a PNG is valid only left of x ≈ 941, so DOM measurements (`metrics`) are the evidence there.
+- 1920 and 2560 are measurements only.
+
+**Results.** Shots are in `docs/homepage/shots/a1b/`; PNGs are gitignored and committed JSON sidecars hold the URL, actual viewport, mode and injection flag.
+
+| Row | Viewport · mode | Evidence | Before | After | Verdict |
+|---|---|---|---|---|---|
+| SS-01 | 393 · day | `stat-strip-393-day-{before,after}.png` | two stats fill the screen, nothing peeks | third stat ("Clinically backed") peeks at the right edge | fixed |
+| FP-01 | 768 · day | `featured-product-768-day-{before,after}.png` | inline benefits row cut at the screen edge ("Free…") | three columns, icon above label, nothing clipped | fixed |
+| CL-01 | 768 · day | `clock-768-day-{before,after}.png`, metrics | morning card title at y 1256 | y 1216 (empty band 40 px shorter) | fixed |
+| BE-01 | 768 · day | `benefits-768-day-{before,after}.png`, metrics | 2-column grid, section 1984 px tall | 3×3 grid, 1401 px, longest label on one line | fixed |
+| BE-01 | 1024 · day | metrics (`benefits-1024-day-*.png` valid left of 941) | H2 three lines in a 288 px column beside a 2-column grid | H2 one line, 640 px, centred above a 3×3 grid | fixed |
+| CL-01 | 1024 · night | metrics (`clock-1024-night-*.png` valid left of 941) | title y 1251 | y 1211 | fixed |
+| FP-03 | 1024 · day | metrics (`featured-product-1024-day-*.png`) | picture 316 px, offer 564 px | 440 px / 440 px | fixed |
+| SS-02 | 1024 · day | `stat-strip-1024-day-after.png` (content inside 941), before PNG partial | five columns, wrapped labels | 3 + 2 grid, every label on one line | fixed |
+| TF-05 | 1024 · day | metrics (`two-formulas-1024-day-*.png` valid left of 941) | H3s three and two lines (y 640 / 660), buttons 275 px at y 873 / 853 | both H3s two lines at y 700.5, buttons 207 px at y 894 | fixed |
+| TF-02 size, TF-03, TF-04 | 1440 · day | metrics (`two-formulas-1440-day-*.png` valid left of 941) | columns x 190–515 / 925–1250, buttons 325 px, tubes 220 × 449 | 148–478 / 962–1292 (Figma 148–478 / 960–1290), buttons 207 px, tubes 260 × 531 | fixed |
+| FP-02 | 1440 · day | metrics | inline benefits row, items 225 / 125 / 114 px, 20 px tall | three equal 183 px columns, icon above label (56 px); column widths 701.8 / 564 unchanged | fixed |
+| FP-04 | 1920 and 2560 · day | metrics | gutters 252 / 322 (1920), 572 / 642 (2560) | 287 / 287, 607 / 607 | fixed |
+| FT-01 | 1440 · day | metrics (footer framed) | copyright to legal links gap 8 px | 64 px | fixed |
+
+**Not shown by CSS injection** (Liquid or template, pending preview gate):
+- RE-01: the research chip `<span>`; the CSS part is only a hover selector.
+- TF-01: the tube srcset. The after measurements use the live 220 px file scaled to 260 px, so it looks softer until the Liquid ships.
+- HE-02 and HE-04.
+- FQ-02.
+- CC-01 (held).
+- The A1b Coming-soon markup.
+
+**Caveats:**
+- Benefit cards in the after shots carry the live veil, not the merged hover state, so they are layout evidence only.
+- The CSS fixes change no colours, so Day captures stand for Night except the clock pair, which was taken in Night.
+
+**Still pending:**
+- **HD-01, header band when scrolled:** cannot be captured. The pane limit plus the capture from the document top block it.
+- **TF-06, Night ring opacity:** needs tuning on a rendered page wider than 990 px, past the pane limit.
+- **PR-01, blank name holders at 393:** still needs a device check. The Orca page is not touch-emulated.
+
+### Gap list
+
+- PR-03 and RE-02 are now "fixed `4f8024c`" (Coming soon).
+- D-7 and D-8 are decided by rule H8.
