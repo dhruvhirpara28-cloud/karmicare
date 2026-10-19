@@ -33,8 +33,8 @@
  "captured": "batches 01-03: 2026-10-19 19:15 CEST; batches 04-08: 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "batches": {
   "batch-01-homepage": {
-   "entries": 221,
-   "digest": "b685b73d4dcdfddd153d4f130c0aa6806b9715ed"
+   "entries": 225,
+   "digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586"
   },
   "batch-02-pdp": {
    "entries": 477,
@@ -1193,9 +1193,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; claims C35: unsupported (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C35"
+   ],
    "setting_type": "text",
    "section_type": "product-benefits-karmicare",
    "rendered": true
@@ -1748,9 +1751,12 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type richtext",
+   "notes": "type richtext; claims C68: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C68"
+   ],
    "setting_type": "richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -1847,9 +1853,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.result_text",
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C60: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C60"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -1994,9 +2003,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.result_text",
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C61: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C61"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2141,9 +2153,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.result_text",
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C62: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C62"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2288,9 +2303,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.result_text",
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C63: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C63"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2435,9 +2453,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.result_text",
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C64: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C64"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2787,11 +2808,12 @@
    "sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; source: 45 brief Q5, adapted to the question in Figma 3002:20280 (row 5); claims C13: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; source: 45 brief Q5, adapted to the question in Figma 3002:20280 (row 5); claims C13, C93: needs-review (CLAIMS-REVIEW.md)",
    "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
    "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
    "claims": [
-    "C13"
+    "C13",
+    "C93"
    ],
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
@@ -3374,7 +3396,20 @@
    "sha1": "0def64ad1cece36c2b73a8fd97a5b2444a3d3eea",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "aria-valuetext tail while dragging; '. Current local time.' at rest (same line)"
+   "notes": "aria-valuetext tail while dragging (preview branch); the live branch '. Current local time.' is its own entry, liquid:assets/chronobiology-clock-karmicare.js:91:live. Clock on the homepage and the Duo PDP"
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:91:live",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:91",
+   "en": ". Current local time.",
+   "sha1": "43352299fe60db1f716d39fb83c9c04056c7fc7f",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "aria-valuetext tail at rest (live branch, not dragging); the preview branch is liquid:assets/chronobiology-clock-karmicare.js:91. Clock on the homepage and the Duo PDP"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:11",
@@ -3572,7 +3607,46 @@
    "sha1": "1c2acc951ec213517c1a810dd251ce932f3453ad",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "plan card short label ('/ year' on the Year); off-limits Loop widget file"
+   "notes": "plan card short label on 60-day plans; the Year branch '/ year' is its own entry, liquid:assets/loop-widget.js:2452:annual. Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2452:annual",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2452",
+   "en": "/ year",
+   "sha1": "416b18b45426df89c6658468f95e3aa81e201a41",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "plan card short label on the Year (isAnnual branch); the 60-day branch is liquid:assets/loop-widget.js:2452. Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2463",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2463",
+   "en": "Renews",
+   "sha1": "78906379a6ef5b31bc338154955072b3b70867b9",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "replaces 'ships' in the selling-plan option text on non-annual plans ('ships every 60 days' → 'Renews every 60 days', regex /ships/i). Once the admin phrase is translated the English regex no longer matches, so key the whole line ('Renews every {{ days }} days') rather than the word. Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2464",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2464",
+   "en": "{{ amount }} / brushing",
+   "sha1": "14123a45c3bd41e10d495c475287c358365ae6cf",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "per-brushing line on every plan card; {{ amount }} is the plan price ÷ brushings, formatted by the store money format (EN shows €0,49, see B1a decision 5). Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
   },
   {
    "id": "liquid:assets/loop-widget.js:2468",
@@ -4902,9 +4976,12 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type richtext",
+   "notes": "type richtext; claims C68: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C68"
+   ],
    "setting_type": "richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5001,9 +5078,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.result_text",
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C60: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C60"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5148,9 +5228,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.result_text",
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C61: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C61"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5295,9 +5378,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.result_text",
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C62: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C62"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5442,9 +5528,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.result_text",
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C63: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C63"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5589,9 +5678,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.result_text",
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C64: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C64"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -7418,7 +7510,10 @@
    "sha1": "612d49c26e60a56f67b1cb2b58ba22d3a102f4ba",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); metafields custom.treatment_journey_one_heading, _list_one, _two_heading, _list_two"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); metafields custom.treatment_journey_one_heading, _list_one, _two_heading, _list_two; claims C94: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C94"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#12",
@@ -8392,7 +8487,10 @@
    "sha1": "c74ba958cf8064bc683fb665aa84ed01345a6fd1",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C93: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C93"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#57",
@@ -8905,7 +9003,10 @@
    "sha1": "691729765bebd9e0e7fa0fa77611d890167b991e",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C93: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C93"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96",
@@ -9028,7 +9129,7 @@
    "sha1": "fb3a87c4c5739e8d910b916432f6b92954580122",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C46: needs-review (CLAIMS-REVIEW.md)",
    "claims": [
     "C46"
    ]

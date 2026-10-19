@@ -2,21 +2,20 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "b685b73d4dcdfddd153d4f130c0aa6806b9715ed",
- "source_entries": 221,
+ "source_digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
+ "source_entries": 225,
  "counts": {
-  "translated": 147,
-  "held": 20,
-  "pending-claim-review": 24,
+  "translated": 140,
+  "held": 21,
+  "pending-claim-review": 30,
   "dawn-nl": 2,
-  "theme-key": 26,
+  "theme-key": 30,
   "admin": 2
  },
  "fit_risk": [
   "index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2",
   "index:stat_strip_karmicare/stat_5/heading",
   "index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/heading",
-  "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading",
   "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/heading",
   "index:trusted_professionals_HAqYth/card_HFdkaD/text",
   "index:research_behind_system_EkjATL/card_bDxUVT/result_label",
@@ -30,7 +29,8 @@
   "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1",
   "index:care_comes_back/step_next_order/title",
   "liquid:snippets/loop-widget-standard.liquid:123",
-  "liquid:snippets/loop-widget-standard.liquid:140"
+  "liquid:snippets/loop-widget-standard.liquid:140",
+  "liquid:assets/loop-widget.js:2463"
  ],
  "status_legend": {
   "translated": "ready to register",
@@ -867,12 +867,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "nl": "Kalm, stralend tandvlees",
-   "status": "translated",
-   "flags": [
-    "fit-risk"
-   ],
-   "notes": "24 vs 17 chars; 'tandvlees' is twice as long as 'gums', no shorter form keeps both 'radiant' and 'calm'"
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim (C35)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
@@ -1280,8 +1278,10 @@
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek checken en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
-   "status": "translated",
-   "flags": [],
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
    "notes": ""
   },
   {
@@ -1356,8 +1356,10 @@
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "nl": "98% afsluiting vs. 82% en 65% voor twee andere desensibiliserende technologieën",
-   "status": "translated",
-   "flags": [],
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
    "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 98% afsluiting vs. 82% en 65% bij twee andere desensibiliserende technologieën"
   },
   {
@@ -1468,8 +1470,10 @@
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "nl": "SMD 2,17 · p = 0,004 · 95%-BI 0,68–3,66&nbsp;",
-   "status": "translated",
-   "flags": [],
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
    "notes": ""
   },
   {
@@ -1580,8 +1584,10 @@
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "nl": "SMD −1,09 · p < 0,00001 · 95%-BI −1,34 tot −0,83",
-   "status": "translated",
-   "flags": [],
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
    "notes": "revised in assembly: approved Figma NL (3738:27474)"
   },
   {
@@ -1692,8 +1698,10 @@
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "nl": "Minder gevoeligheid voor koude lucht en aanraking vs. fluoride en placebo, p < 0,05",
-   "status": "translated",
-   "flags": [],
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
    "notes": "revised in assembly: approved Figma NL (3738:27474), same on homepage and PDP"
   },
   {
@@ -1804,8 +1812,10 @@
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "nl": "Minder aften, kortere duur, minder episodes, minder pijn",
-   "status": "translated",
-   "flags": [],
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
    "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Minder zweertjes, kortere duur, minder opstoten, minder pijn"
   },
   {
@@ -2551,6 +2561,20 @@
    "notes": ""
   },
   {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:91:live",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:91",
+   "en": ". Current local time.",
+   "en_sha1": "43352299fe60db1f716d39fb83c9c04056c7fc7f",
+   "nl": ". Huidige lokale tijd.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "Live branch of the clock's aria-valuetext; pairs with '. Laat los om terug te gaan naar nu.' (preview branch, same line). Added in R1 (F3)."
+  },
+  {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:11",
    "resource_type": "theme_locale",
    "file_or_handle": "assets/chronobiology-clock-karmicare.js",
@@ -2762,6 +2786,49 @@
     "theme-key"
    ],
    "notes": ""
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2452:annual",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2452",
+   "en": "/ year",
+   "en_sha1": "416b18b45426df89c6658468f95e3aa81e201a41",
+   "nl": "/ jaar",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "Year plan-card label; approved Figma NL '/ jaar' (3738:27474). Added in R1 (F3)."
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2463",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2463",
+   "en": "Renews",
+   "en_sha1": "78906379a6ef5b31bc338154955072b3b70867b9",
+   "nl": "Verlengd",
+   "status": "theme-key",
+   "flags": [
+    "theme-key",
+    "fit-risk"
+   ],
+   "notes": "The word that replaces 'ships' in the plan's option text. Dutch puts it at the end of the line, so the Loop owner should key the whole line: 'Renews every {{ days }} days' → 'Elke {{ days }} dagen verlengd' (approved Figma NL 'Elke 60 dagen verlengd'). Word-for-word substitution would give 'Verlengd elke 60 dagen'. Added in R1 (F3)."
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2464",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2464",
+   "en": "{{ amount }} / brushing",
+   "en_sha1": "14123a45c3bd41e10d495c475287c358365ae6cf",
+   "nl": "{{ amount }} / poetsbeurt",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "Per-brushing line on the plan cards; approved Figma NL '€0,49 / poetsbeurt'. {{ amount }} comes from the store money format. Added in R1 (F3)."
   },
   {
    "id": "liquid:assets/loop-widget.js:2468",
