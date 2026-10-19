@@ -295,9 +295,18 @@
             class="hero-karmicare__badge-wrapper hero-karmicare__badge-wrapper-{{ block.id }}"
             {{ block.shopify_attributes }}
           >
-            {%- if block.settings.link != blank -%}
+            {%- liquid
+              # A section anchor carries the template id, which differs per theme copy: point it at this template
+              assign badge_link = block.settings.link
+              if badge_link contains '#shopify-section-template--'
+                assign badge_template = section.id | split: '__' | first
+                assign badge_target = badge_link | split: '__' | last
+                assign badge_link = '#shopify-section-' | append: badge_template | append: '__' | append: badge_target
+              endif
+            -%}
+            {%- if badge_link != blank -%}
               <a
-                href="{{ block.settings.link }}"
+                href="{{ badge_link }}"
                 class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}"
                 aria-label="{{ block.settings.heading | default: 'Backed by health professionals' | escape }}"
               >
@@ -308,14 +317,16 @@
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
-                  | image_url: width: 140
+                  | image_url: width: 168
                   | image_tag:
                     class: 'hero-karmicare__badge-avatar',
                     loading: 'eager',
                     fetchpriority: 'high',
                     decoding: 'async',
                     width: 56,
-                    height: 56,
+                    height: 72,
+                    widths: '56, 112, 168',
+                    sizes: '56px',
                     alt: block.settings.heading
                   | default: 'Health professional'
                   | escape
@@ -366,7 +377,7 @@
                 </div>
               {%- endif -%}
             </div>
-            {%- if block.settings.link != blank -%}
+            {%- if badge_link != blank -%}
               </a>
             {%- else -%}
               </div>
