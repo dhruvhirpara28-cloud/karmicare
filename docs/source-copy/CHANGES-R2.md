@@ -90,3 +90,56 @@ The NL validator `docs/localization/nl/validate.py` now checks these invariants.
 - **H7**: every hold has a reason.
 - **S1**: EN addresses unchanged.
 - **S2**: `(*)` count kept.
+
+## R6 additions
+
+The R6 re-review `docs/runtime-review/B2-NL-R6-ASTRA.md` (20 Oct, pass with fixes) led to one more source change, R6-01. `en-source.json` was compared with the state before R6 (`2aa84e4`) entry by entry. The result is 30 entries reclassified to needs-review, and nothing else: no entry added, removed or newly held, and no EN text changed. Every digest is unchanged, so FR `source_digest` values stay valid. `python3 docs/source-copy/digest.py` exits 0.
+
+### Reclassified to needs-review: pending-claim-review in FR
+
+The first row is the reviewer's R6-01 entry, with its exact basis. The reviewer asked for the rest of that article to be rechecked semantically. That recheck gated 28 more of its blocks, and the copy check found one more missed "Bestselling" claim. Each entry's full basis is in `claim_basis` and CLAIMS-REVIEW.md. All rows share the prefix `admin:article:news/`; "W" stands for `how-oral-health-impacts-your-overall-wellness`.
+
+| Id | Before → now | Claim wording |
+|---|---|---|
+| W `:body_html#b081` | unclassified → needs-review | "The morning toothpaste, Awake, is suited to boost energy and mental clarity …" and "completely free from harmful chemicals" |
+| W `:seo.description` | unclassified → needs-review | "Did you know oral health directly impacts" |
+| W `:body_html#b007` | unclassified → needs-review | oral health directly impacts mental, physical and social well-being |
+| W `:body_html#b015` | unclassified → needs-review | "a critical component of our overall wellness" |
+| W `:body_html#b016` | unclassified → needs-review | "choosing the right toothpaste is crucial for complete wellness" |
+| W `:body_html#b020` | unclassified → needs-review | "Cognitive decline." (list item under b019) |
+| W `:body_html#b021` | unclassified → needs-review | "Reduced mental clarity." (list item under b019) |
+| W `:body_html#b022` | unclassified → needs-review | "Depression." (list item under b019) |
+| W `:body_html#b024` | none → needs-review | "Long-lasting inflammation leads to chronic gum disease." |
+| W `:body_html#b038` | none → needs-review | "This increases the risk of heart attack and stroke." |
+| W `:body_html#b047` | unclassified → needs-review | an attributed study finding on attractive smiles |
+| W `:body_html#b049` | unclassified → needs-review | "28% of young adults" (attributed statistic) |
+| W `:body_html#b051` | unclassified → needs-review | the pull quote of the b047 finding |
+| W `:body_html#b055` | unclassified → needs-review | "an essential instrument that enhances and preserves overall health" |
+| W `:body_html#b057` | unclassified → needs-review | "the right toothpaste should support your mental and psychological well-being" |
+| W `:body_html#b062` | unclassified → needs-review | "your toothpaste should support your physical health" |
+| W `:body_html#b066` | unclassified → needs-review | "without exposing your body to harmful chemicals" |
+| W `:body_html#b067` | unclassified → needs-review | "your toothpaste should also support your social well-being" |
+| W `:body_html#b068` | unclassified → needs-review | "ensure fresh breath, strengthen your teeth" |
+| W `:body_html#b073` | unclassified → needs-review | "improves bad breath" |
+| W `:body_html#b076` | unclassified → needs-review | "enhancing your overall well-being" |
+| W `:body_html#b082` | unclassified → needs-review | "supports your overall health in the most wholesome way possible" |
+| W `:body_html#b085` | unclassified → needs-review | "Improved mental performance" (benefit list) |
+| W `:body_html#b087` | unclassified → needs-review | "Energised mornings." (benefit list) |
+| W `:body_html#b090` | unclassified → needs-review | "Enhanced self-esteem and social interactions." (benefit list) |
+| W `:body_html#b091` | unclassified → needs-review | "Wellness while ensuring safety." (benefit list) |
+| W `:body_html#b092` | unclassified → needs-review | "The benefits are impressive!" |
+| W `:body_html#b094` | unclassified → needs-review | "can support your whole-body wellness" |
+| W `:body_html#b095` | unclassified → needs-review | "Order complete wellness in a tube" |
+| `top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b051` | none → needs-review | "Shop Our Bestselling Natural Toothpaste", the same claim as headaches `#b019` (R2 F5) |
+
+"Unclassified" means the claims pass never judged the block. "none" means it was judged to make no claim: `#b024` and `#b038` are links in the disease chain whose neighbours `#b025`, `#b036` and `#b037` are already gated. CLAIMS-REVIEW.md batches 05–07 now hold 30 approved, 304 needs-review and 115 unsupported blocks.
+
+### NL payload rules from R6 that apply to FR too
+
+These are not source changes. FR has already been told to gate `#b081` and to sweep its own blog bodies.
+
+| Finding | Rule | NL change, for comparison |
+|---|---|---|
+| R6-01 | The 30 entries above are pending-claim-review. Keep the assertions as written; only category words change. | `#b081`: *ochtendformule* / *avondformule*. Top-whitening `#b051`: *meest verkochte natuurlijke formule*. |
+| R6-02 | Commodity compounds count as commodity words: product(s) inside a word (*-producten*, FR *produits de …*). Category word: "toothpaste" stays only at first-contact moments, as tone-of-voice.md puts it: "a door, not a carpet", never negated. That means titles, SEO and alt texts, the opening self-reflection questions and one first prose mention per article. There is no blanket blog exemption. | 8 compounds as the reviewer gave them, and 120 later uses in the nine articles replaced by *formule(s)*, *mondverzorging* or *verzorging* (111 entries). Official names, legal titles, the footer compliance line and the approved Figma disclaimers stay. |
+| R6 W1 | The NL validator now rejects product, tube, use and buy stems anywhere in a word in non-legal copy, with link URLs left out. Its 5 listed exceptions name the official and approved terms. Run on the payloads before R6, it flags exactly the reviewer's 8 compounds. | `docs/localization/nl/validate.py` W1 |
