@@ -552,8 +552,19 @@ body.night-mode .pc-kit-poptitle {
   --pc-row-height: 6.4rem;
   --pc-cta-height: 7.2rem;
   --pc-rule: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
-  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
   color: var(--kc-mapped-text-default-heading);
+}
+
+/* Mobile header: the 16px plan names (body-md since 17 Oct) wrap "The
+   Karmicare Year" to two lines. 136px fits two name lines, price and cycle
+   in every column, with the title clear of the "Brushing & Beyond" badge
+   (Figma preview header 136). Shared by all columns, so rows stay aligned.
+   On screens the query is the exact complement of the tokens' min-width:
+   750px switch, so fractional widths such as 749.5px get it too. */
+@media not all and (min-width: 750px) {
+  .plan-compare--kc {
+    --pc-head-height: 13.6rem;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -655,7 +666,8 @@ body.night-mode .pc-kit-poptitle {
     position: sticky;
     inset-inline-start: 0;
     z-index: 30; /* Keep scrolling columns, including hovered ones, underneath. */
-    background: linear-gradient(180deg, var(--kc-mapped-surface-page), var(--kc-mapped-gradient-section-accent));
+    /* The two colours of the section surface (assets/kc-surface.css) */
+    background: linear-gradient(180deg, var(--kc-surface-top), var(--kc-surface-bottom));
     transition: none;
   }
 
@@ -938,6 +950,15 @@ body.night-mode .pc-kit-poptitle {
 .plan-compare--kc .pc-cta:focus-visible {
   outline: 2px solid var(--kc-mapped-border-focus-strong);
   outline-offset: 2px;
+}
+
+/* Mobile: the 13px labels (label-lg since 17 Oct) wrap "Begin 60-Day Rhythm"
+   to three lines in the 134px button with 16px sides; 8px sides, as the
+   tertiary already has, keep it on two. Same query as the header above. */
+@media not all and (min-width: 750px) {
+  .plan-compare--kc .pc-cta {
+    padding-inline: var(--kc-responsive-spacing-layout-xs);
+  }
 }
 
 @media screen and (min-width: 750px) {

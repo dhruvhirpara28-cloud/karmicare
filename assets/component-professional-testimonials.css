@@ -14,11 +14,8 @@
   text-align: start;
 }
 
-.kc-professional-testimonials .trusted-professionals__header h2 {
-  font-size: var(--kc-responsive-body-lg-text-size);
-  line-height: var(--kc-responsive-body-lg-line-height);
-  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
-}
+/* The heading keeps the section h2 from section-trusted-professionals.css,
+   the size of every other section heading (Victor, 18 Oct). */
 
 .kc-professional-testimonials .trusted-professionals__grid,
 .kc-professional-testimonials .trusted-professionals__grid.slider {

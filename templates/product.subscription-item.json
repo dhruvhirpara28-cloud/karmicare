@@ -208,13 +208,7 @@
         "sticky_cart_block": {
           "type": "sticky_cart",
           "settings": {
-            "default_to_subscription": true,
-            "button_text": "Begin Now",
-            "show_image": true,
-            "show_variants": true,
-            "show_subscriptions": true,
-            "color_scheme_day": "#ffffff",
-            "color_scheme_night": "#191f38"
+            "button_text": "Begin Now"
           }
         }
       },
@@ -253,11 +247,8 @@
         "remove_first_media_bg": true,
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
-        "bg_color_day": "",
-        "bg_gradient_day": "linear-gradient(180deg, #FFFBF6  0%, #F2F8FF  100%)",
+        "surface": "transition",
         "text_color_day": "",
-        "bg_color_night": "",
-        "bg_gradient_night": "linear-gradient(180deg, #191F38  0%, #2C3A60 100%);",
         "text_color_night": "",
         "padding_top": 16,
         "padding_bottom": 60,
@@ -287,17 +278,13 @@
         "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
         "footer_link_text": "Read the science",
         "footer_link": "",
-        "bg_color_day": "",
-        "bg_gradient_day": "",
+        "surface": "transition",
         "text_color_day": "",
-        "bg_color_night": "",
-        "bg_gradient_night": "",
         "text_color_night": "",
         "padding_top": 120,
         "padding_bottom": 120,
         "padding_top_mobile": 48,
         "padding_bottom_mobile": 48,
-        "gradient_direction": "accent_to_page",
         "time_label_size": "small"
       }
     },
@@ -381,10 +368,7 @@
       "settings": {
         "show_border_top": false,
         "show_border_bottom": false,
-        "bg_color_day": "",
-        "bg_gradient_day": "",
-        "bg_color_night": "",
-        "bg_gradient_night": "",
+        "surface": "transition",
         "subheading": "PROFESSIONAL PARTNERS",
         "heading": "Trusted by professionals <strong>who look beyond the teeth</strong>",
         "heading_bold_opacity": 100,
@@ -407,8 +391,7 @@
         "padding_top_desktop": 120,
         "padding_bottom_desktop": 160,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 64,
-        "background_style": "accent_gradient"
+        "padding_bottom_mobile": 64
       }
     },
     "how_it_works_steps_aAgVmF": {
@@ -492,10 +475,7 @@
         "padding_bottom_desktop": 120,
         "padding_top_mobile": 64,
         "padding_bottom_mobile": 64,
-        "bg_color_day": "",
-        "bg_gradient_day": "",
-        "bg_color_night": "",
-        "bg_gradient_night": "",
+        "surface": "accent",
         "media_text_color": "light"
       }
     },
@@ -503,13 +483,10 @@
       "type": "comparison-table",
       "name": "Comparison Table",
       "settings": {
+        "surface": "accent",
         "text_color_day": "",
-        "bg_color_day": "",
         "col_text_day": "",
-        "bg_gradient_day": "",
         "text_color_night": "",
-        "bg_color_night": "",
-        "bg_gradient_night": "",
         "padding_top": 160,
         "padding_bottom": 120,
         "padding_top_mobile": 64,
@@ -617,12 +594,9 @@
         "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
         "button_label": "Explore the full evidence base",
         "button_link": "",
-        "bg_color_day": "",
-        "bg_gradient_day": "linear-gradient(180deg, #F2F8FF 0%, #FFFBF6 100%)",
+        "surface": "transition",
         "text_color_day": "",
         "card_bg_color_day": "",
-        "bg_color_night": "",
-        "bg_gradient_night": "linear-gradient(180deg, #2C3A60  0%, #191F38 100%)",
         "text_color_night": "",
         "card_bg_color_night": "",
         "padding_top_desktop": 120,
@@ -651,10 +625,7 @@
         "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
         "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
         "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}",
-        "color_scheme_day": "",
-        "bg_gradient_day": "",
-        "color_scheme_night": "",
-        "bg_gradient_night": "",
+        "surface": "transition",
         "padding_top_desktop": 160,
         "padding_bottom_desktop": 120,
         "padding_top_mobile": 64,
@@ -741,10 +712,7 @@
         "padding_bottom": 120,
         "padding_top_mobile": 48,
         "padding_bottom_mobile": 48,
-        "bg_color_day": "",
-        "bg_gradient_day": "",
-        "bg_color_night": "#191f38",
-        "bg_gradient_night": "",
+        "surface": "transition",
         "show_hero_animation": true,
         "benefits_layout": "stacked"
       }
@@ -812,7 +780,7 @@
         "padding_bottom_desktop": 120,
         "padding_top_mobile": 64,
         "padding_bottom_mobile": 48,
-        "background": "page"
+        "surface": "page"
       }
     }
   },

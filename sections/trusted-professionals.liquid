@@ -24,7 +24,7 @@
   endfor
 -%}
 
-<div class="trusted-professionals section-{{ section.id }}{% if section.settings.background_style == 'accent_gradient' %} trusted-professionals--bg-accent{% endif %}">
+<div class="trusted-professionals section-{{ section.id }} kc-surface" data-kc-surface="{{ section.settings.surface }}">
   {%- style -%}
     .section-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_mobile }}px;
@@ -41,30 +41,6 @@
       .section-{{ section.id }} .trusted-professionals__header h2 strong,
       .section-{{ section.id }} .trusted-professionals__header h2 b {
         opacity: {{ section.settings.heading_bold_opacity | divided_by: 100.0 }};
-      }
-    {%- endif -%}
-
-    {%- if section.settings.bg_gradient_day != blank -%}
-      .section-{{ section.id }},
-      .border-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_day }};
-      }
-    {%- elsif section.settings.bg_color_day != blank -%}
-      .section-{{ section.id }},
-      .border-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_day }};
-      }
-    {%- endif -%}
-
-    {%- if section.settings.bg_gradient_night != blank -%}
-      body.night-mode .section-{{ section.id }},
-      body.night-mode .border-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-      }
-    {%- elsif section.settings.bg_color_night != blank -%}
-      body.night-mode .section-{{ section.id }},
-      body.night-mode .border-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_night }};
       }
     {%- endif -%}
 
@@ -318,34 +294,15 @@
     },
     {
       "type": "select",
-      "id": "background_style",
-      "label": "Background",
+      "id": "surface",
+      "label": "Section surface",
       "options": [
-        { "value": "none", "label": "Page background" },
-        { "value": "accent_gradient", "label": "Page to accent gradient" }
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
       ],
-      "default": "none",
-      "info": "KC tokens surface/page to gradient/section-accent, Day and Night. A colour or gradient below overrides it."
-    },
-    {
-      "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Color (Day)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Color (Night)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
+      "default": "page",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
     },
     {
       "type": "header",

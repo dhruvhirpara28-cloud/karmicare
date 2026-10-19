@@ -1,0 +1,72 @@
+{%- comment -%}
+  Section surface resolver; the rule and the paint are in assets/kc-surface.css.
+  Walks the Shopify section wrappers top to bottom and writes the colour each one starts and ends
+  on (data-kc-edge-top, data-kc-edge-bottom: page or accent):
+  - Transition fades from the colour it arrives on to the other one;
+  - Page and Accent hold their colour. A hold that arrives on the other colour still ends on its
+    own, so it is painted as a transition and the theme editor flags it (data-kc-seam);
+  - a section without the setting shows the page colour (a section that renders nothing is
+    skipped);
+  - the header sets the colour the first section arrives on (data-kc-surface-edge).
+  Rendered in the head: the observer's callback runs before the next frame, so each section is
+  resolved as the page is parsed, before it paints, and again whenever the theme editor or a
+  product swap adds, removes or re-renders a section.
+{%- endcomment -%}
+<script>
+  (function () {
+    var MARK = '[data-kc-surface], [data-kc-surface-edge]';
+    var ROLES = { page: 1, accent: 1, transition: 1 };
+
+    function resolve() {
+      var edge = 'page';
+      var wrappers = document.querySelectorAll('.shopify-section');
+      for (var i = 0; i < wrappers.length; i++) {
+        var wrapper = wrappers[i];
+        var anchor = wrapper.querySelector('[data-kc-surface-edge]');
+        if (anchor) {
+          edge = anchor.getAttribute('data-kc-surface-edge');
+          continue;
+        }
+        var el = wrapper.querySelector('[data-kc-surface]');
+        if (!el) {
+          if (wrapper.querySelector(':scope > :not(script, style, link, template, noscript)')) edge = 'page';
+          continue;
+        }
+        var role = el.getAttribute('data-kc-surface');
+        if (!ROLES[role]) role = 'page';
+        var bottom = role === 'transition' ? (edge === 'page' ? 'accent' : 'page') : role;
+        wrapper.setAttribute('data-kc-edge-top', edge);
+        wrapper.setAttribute('data-kc-edge-bottom', bottom);
+        if (role !== 'transition' && role !== edge) {
+          wrapper.setAttribute(
+            'data-kc-seam',
+            'Section surface ' + role + ' follows ' + edge + ': shown as ' + edge + ' → ' + role
+          );
+        } else {
+          wrapper.removeAttribute('data-kc-seam');
+        }
+        edge = bottom;
+      }
+    }
+
+    function touchesSurfaces(records) {
+      for (var i = 0; i < records.length; i++) {
+        var lists = [records[i].addedNodes, records[i].removedNodes];
+        for (var l = 0; l < lists.length; l++) {
+          for (var j = 0; j < lists[l].length; j++) {
+            var node = lists[l][j];
+            if (node.nodeType !== 1) continue;
+            if (node.matches('.shopify-section, ' + MARK) || node.querySelector(MARK)) return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    new MutationObserver(function (records) {
+      if (touchesSurfaces(records)) resolve();
+    }).observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', resolve);
+    window.KCSurface = { resolve: resolve };
+  })();
+</script>

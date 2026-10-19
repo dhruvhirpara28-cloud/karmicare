@@ -144,13 +144,7 @@
         "sticky_cart_block": {
           "type": "sticky_cart",
           "settings": {
-            "default_to_subscription": true,
-            "button_text": "Begin Now",
-            "show_image": true,
-            "show_variants": true,
-            "show_subscriptions": true,
-            "color_scheme_day": "#ffffff",
-            "color_scheme_night": "#191f38"
+            "button_text": "Begin Now"
           }
         }
       },
@@ -186,6 +180,7 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "remove_first_media_bg": true,
+        "surface": "page",
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -198,8 +193,7 @@
         "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
         "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
         "footer_text": "{{ product.metafields.custom.compare_table_header_footer.value.footer | metafield_tag }}",
-        "color_scheme_day": "",
-        "color_scheme_night": "",
+        "surface": "transition",
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80,
         "padding_top_mobile": 20,

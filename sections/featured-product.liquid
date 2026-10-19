@@ -77,28 +77,6 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
-
-    {%- if section.settings.bg_gradient_day != blank -%}
-      body:not(.night-mode) .featured-product-section-{{ section.id }},
-      body.day-mode .featured-product-section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_day }};
-      }
-    {%- elsif section.settings.bg_color_day != blank -%}
-      body:not(.night-mode) .featured-product-section-{{ section.id }},
-      body.day-mode .featured-product-section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_day }};
-      }
-    {%- endif -%}
-
-    {%- if section.settings.bg_gradient_night != blank -%}
-      body.night-mode .featured-product-section-{{ section.id }} {
-        background: {{ section.settings.bg_gradient_night }};
-      }
-    {%- elsif section.settings.bg_color_night != blank -%}
-      body.night-mode .featured-product-section-{{ section.id }} {
-        background-color: {{ section.settings.bg_color_night }};
-      }
-    {%- endif -%}
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -133,7 +111,10 @@
   {%- unless placeholder -%}
     <product-component view-event-payload="{{ product | standard_event_data: 'view' | escape }}">
   {%- endunless -%}
-  <section class="featured-product-section-{{ section.id }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
+  <section
+    class="featured-product-section-{{ section.id }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %} kc-surface"
+    data-kc-surface="{{ section.settings.surface }}"
+  >
     <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
       <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank or kc_hero %}grid--2-col-tablet{% else %}product--no-media{% endif %} featured-product--benefits-{{ section.settings.benefits_layout }}">
         <div class="grid__item product__media-wrapper">
@@ -2185,31 +2166,19 @@
     },
     {
       "type": "header",
-      "content": "Day Mode Colors"
+      "content": "Background"
     },
     {
-      "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Color (Day)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
-    },
-    {
-      "type": "header",
-      "content": "Night Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Color (Night)"
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "page",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
     }
   ],
   "presets": [

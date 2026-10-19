@@ -1,0 +1,87 @@
+/* kc-surface.css: section surfaces, as specified in Figma.
+   Source: DEV HANDOFF · Background and sections (KC | Shopify Store 3842:28190) and
+   BACKGROUND-AND-SECTIONS-SPEC.md section 5 (kc-ai-master, branch karmicare/spec-writing).
+
+   Every section picks one role in its "Section surface" setting (data-kc-surface):
+     page        holds the page colour: no fill, the page root (body) paints surface/page
+     accent      holds the accent colour: solid gradient/section/accent
+     transition  swaps: fades from the colour it arrives on to the other one
+   Nobody picks a direction. snippets/kc-surface.liquid walks the sections top to bottom and writes
+   the colour each one starts and ends on to its Shopify wrapper (data-kc-edge-top and
+   data-kc-edge-bottom, page or accent), so the bottom of a section always equals the top of the next.
+   A hold that arrives on the other colour is painted as a transition into its own colour, and the
+   theme editor flags it (data-kc-seam).
+
+   The paint reads the edges only. --kc-surface-top and --kc-surface-bottom carry the two colours to
+   everything inside the section (backdrops later); they are registered so a section can fade them
+   with the Day/Night switch. Tokens only, no hex. */
+
+@property --kc-surface-top {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --kc-surface-bottom {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+
+.shopify-section[data-kc-edge-top] {
+  --kc-surface-top: var(--kc-mapped-surface-page);
+  --kc-surface-bottom: var(--kc-mapped-surface-page);
+}
+
+.shopify-section[data-kc-edge-top='accent'] {
+  --kc-surface-top: var(--kc-mapped-gradient-section-accent);
+}
+
+.shopify-section[data-kc-edge-bottom='accent'] {
+  --kc-surface-bottom: var(--kc-mapped-gradient-section-accent);
+}
+
+/* Page hold */
+.shopify-section[data-kc-edge-top='page'][data-kc-edge-bottom='page'] {
+  background: none;
+}
+
+/* Accent hold */
+.shopify-section[data-kc-edge-top='accent'][data-kc-edge-bottom='accent'] {
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+/* Transition: Figma "Section transition/Top" (accent -> page) and "Section transition/Bottom"
+   (page -> accent), 0% at the section's top edge to 100% at its bottom edge */
+.shopify-section[data-kc-edge-top='accent'][data-kc-edge-bottom='page'],
+.shopify-section[data-kc-edge-top='page'][data-kc-edge-bottom='accent'] {
+  background: linear-gradient(180deg, var(--kc-surface-top) 0%, var(--kc-surface-bottom) 100%);
+}
+
+/* The element that declares the role paints nothing itself; this also clears Dawn's colour
+   scheme fill (.gradient) on product-info and the featured product */
+.kc-surface[data-kc-surface] {
+  background: none;
+}
+
+/* Theme editor only: a page or accent hold that arrives on the other colour */
+.shopify-design-mode .shopify-section[data-kc-seam] {
+  position: relative;
+  outline: 2px dashed var(--kc-mapped-border-focus-strong);
+  outline-offset: -2px;
+}
+
+.shopify-design-mode .shopify-section[data-kc-seam]::before {
+  content: attr(data-kc-seam);
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 10;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--kc-mapped-border-focus-strong);
+  border-radius: 0.4rem;
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+  font: 600 1.2rem/1.4 var(--kc-font-role-backbone);
+  pointer-events: none;
+}

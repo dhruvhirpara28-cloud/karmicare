@@ -12,29 +12,6 @@
 {{ 'section-how-it-works-steps.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  {%- if section.settings.bg_gradient_day != blank -%}
-      body:not(.night-mode) .section-{{ section.id }},
-      body.day-mode .section-{{ section.id }} {
-          background: {{ section.settings.bg_gradient_day }};
-      }
-  {%- elsif section.settings.bg_color_day != blank -%}
-      body:not(.night-mode) .section-{{ section.id }},
-      body.day-mode .section-{{ section.id }} {
-          background-color: {{ section.settings.bg_color_day }};
-      }
-  {%- endif -%}
-
-  {%- if section.settings.bg_gradient_night != blank -%}
-      body.night-mode .section-{{ section.id }} {
-          background: {{ section.settings.bg_gradient_night }};
-      }
-  {%- elsif section.settings.bg_color_night != blank -%}
-      body.night-mode .section-{{ section.id }} {
-          background-color: {{ section.settings.bg_color_night }};
-      }
-  {%- endif -%}
-
-
   .section-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
@@ -54,7 +31,10 @@
 {%- endstyle -%}
 
 {% if blocks.size != 0 %}
-  <section class="kc-how-it-steps section-{{ section.id }}{% if section.settings.media_text_color == 'light' %} kc-how-it-steps--media-text-light{% endif %}">
+  <section
+    class="kc-how-it-steps section-{{ section.id }}{% if section.settings.media_text_color == 'light' %} kc-how-it-steps--media-text-light{% endif %} kc-surface"
+    data-kc-surface="{{ section.settings.surface }}"
+  >
     <div class="page-width">
       {%- if section.settings.subtitle != blank
         or section.settings.title != blank
@@ -561,33 +541,19 @@
     },
     {
       "type": "header",
-      "content": "Day Mode Colors"
+      "content": "Background"
     },
     {
-      "type": "color",
-      "id": "bg_color_day",
-      "label": "Background Color (Day)",
-      "info": "Leave empty for the KC token gradient/section/accent."
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_day",
-      "label": "Background Gradient (Day)"
-    },
-    {
-      "type": "header",
-      "content": "Night Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Background Color (Night)",
-      "info": "Leave empty for the KC token gradient/section/accent."
-    },
-    {
-      "type": "text",
-      "id": "bg_gradient_night",
-      "label": "Background Gradient (Night)"
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "accent",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
     }
   ],
   "blocks": [

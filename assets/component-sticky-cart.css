@@ -1,36 +1,15 @@
+/* ============================================================
+   Sticky buy bar: glass card (snippets/sticky-cart-block.liquid)
+   Figma 3rOMJvQZTzyYjnCV6oggV3, section 4079:32306. KC tokens only;
+   Day and Night follow body.day-mode / body.night-mode.
+   ============================================================ */
+
+/* Read by base.css (.block__animate-button:hover::before). On the PDP this file loads after base.css, so
+   these two rules drive the rotating CTA border there; keep them while that hover exists. */
 @property --kc-plan-angle {
   syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
-}
-
-/* ============================================================
-   Sticky Cart Bar — component-sticky-cart.css
-   ============================================================ */
-
-/* ── Container ── */
-.day-mode .sticky-cta {
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  border-bottom: none;
-}
-
-@media (min-width: 1081px) {
-  .sticky-cta::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 3;
-    border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
-    padding: 1.5px;
-    background: conic-gradient(from var(--kc-plan-angle), var(--kc-mapped-surface-accent-default), #cfe2ff, var(--kc-mapped-surface-accent-default), #5a83b5, #9ec7ff, var(--kc-mapped-surface-accent-default));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: kc-plan-rotate 7s linear infinite;
-  }
 }
 
 @keyframes kc-plan-rotate {
@@ -43,357 +22,579 @@
   }
 }
 
-.kc__block-main-product {
-  position: relative;
-}
-
+/* ── Card ── */
 .sticky-cta {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  /* assets/kc-cookie-preferences.css stacks its panel against 200 */
   z-index: 200;
-  display: flex;
-  align-items: center;
-  border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
-  padding: 14px 14px;
-  transform: translateY(100%);
+  left: var(--kc-responsive-spacing-layout-md);
+  right: var(--kc-responsive-spacing-layout-md);
+  bottom: calc(var(--kc-responsive-spacing-layout-md) + env(safe-area-inset-bottom));
   box-sizing: border-box;
-  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  padding: var(--kc-responsive-spacing-layout-md);
+  background: var(--kc-mapped-surface-glass-default);
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
+  border-radius: var(--kc-shape-radius-lg);
+  box-shadow: var(--kc-elevation-lg);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-backbone);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(calc(100% + var(--kc-responsive-spacing-layout-lg)));
+  transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .sticky-cta.is-visible {
-  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s;
 }
 
-.sticky-cta-inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
+/* Open: the card grows upwards and scrolls inside when it outgrows the screen */
+.sticky-cta.is-open {
+  gap: var(--kc-responsive-spacing-layout-md);
+  max-height: calc(100dvh - var(--header-height, 0px) - 2 * var(--kc-responsive-spacing-layout-comfortable));
+  padding: var(--kc-responsive-spacing-layout-comfortable);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.sticky-cta [hidden] {
+  display: none !important;
+}
+
+/* 750–1080: centred, four grid columns wide; from 1081 the centred package (below) */
+@media screen and (min-width: 750px) {
+  .sticky-cta {
+    --sc-width: var(--kc-responsive-size-grid-columns-4);
+    right: auto;
+    left: calc(50% - var(--sc-width) / 2);
+    width: var(--sc-width);
+    bottom: calc(var(--kc-responsive-spacing-layout-comfortable) + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta,
+  .sticky-cta.is-visible {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* base.css sets line-height: normal on p and span */
+.sticky-cta p {
+  margin: 0;
+}
+
+.sticky-cta span {
+  line-height: inherit;
+}
+
+.sticky-cta :focus-visible {
+  outline: var(--kc-shape-stroke-thick) solid var(--kc-mapped-border-focus-default);
+  outline-offset: var(--kc-shape-stroke-thick);
+}
+
+/* ── Row 1: plan + price line, CTA ── */
+.sc-summary {
+  display: flex;
   align-items: center;
-  gap: 5px;
-  width: 100%;
+  gap: var(--kc-responsive-spacing-layout-md);
 }
 
-.sticky-cta-inner:has(.sc-product) {
-  grid-template-columns: auto 1fr auto;
-}
-
-.sticky-cta-inner .sc-cta-btn {
-  padding: 10px 22px;
-  border: none;
-  cursor: pointer;
-  font-family: var(--kc-font-family-Nunito);
-  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
-}
-
-/* ── Positioned variant (JS sets left/width for inline) ── */
-
-/* ── Product thumbnail ── */
-.sc-img {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--primary-border-radius);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(var(--color-foreground), 0.15);
-}
-
-.sc-product-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ── Dropdown wrapper (grows to fill space) ── */
-.sc-dropdown {
-  position: static;
+.sc-plan {
   flex: 1;
   min-width: 0;
 }
 
-/* ── Trigger button ── */
-.sc-do-trigger {
-  display: flex;
+.sc-title {
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  font-weight: var(--font-700-weight, 700);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.sc-price-line,
+.sc-credit {
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.sc-price-line {
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* Open: the full title (P1) and Change take the place of the bar CTA */
+.sc-title-rest,
+.sc-change,
+.sticky-cta.is-open .sc-cta--bar {
+  display: none;
+}
+
+.sticky-cta.is-open .sc-title-rest {
+  display: inline;
+}
+
+.sticky-cta.is-open .sc-change {
+  display: inline-flex;
+}
+
+.sc-change {
+  flex: none;
   align-items: center;
-  gap: 6px;
-  width: 100%;
+  min-height: var(--kc-responsive-size-control-min-height);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: var(--kc-responsive-spacing-layout-xxs);
   cursor: pointer;
-  text-align: left;
-  transition: background 0.2s ease, border-color 0.2s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  box-sizing: border-box;
-  border: none;
-  background-color: transparent;
 }
 
-.sc-plan-label {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: var(--font-700-weight);
-}
-
-.night-mode .sc-plan-label {
-  font-size: var(--font-body-size-desktop);
-}
-
-.sc-plan-price {
-  font-weight: var(--font-700-weight);
-  flex-shrink: 0;
-  font-size: var(--font-body-size-desktop);
-}
-
-.sc-plan-interval {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 11px;
-  font-weight: var(--font-400-weight);
-  flex-shrink: 0;
-}
-
-.sc-caret {
-  flex-shrink: 0;
+/* ── Row 2: what comes back + the disclosure ── */
+.sc-return {
   display: flex;
   align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  cursor: pointer;
+}
+
+.sc-credit {
+  flex: 1;
+  min-width: 0;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.sc-disclosure {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--kc-responsive-size-icon-md);
+  height: var(--kc-responsive-size-icon-md);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  background: none;
+  color: var(--kc-mapped-icon-primary-default);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* 44 px target around the 24 px chevron */
+.sc-disclosure::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--kc-responsive-size-icon-md) - var(--kc-responsive-size-control-min-height)) / 2);
+}
+
+.sc-disclosure .sc-icon {
   transition: transform 0.2s ease;
 }
 
-.sc-dd-active .sc-caret {
+.sticky-cta.is-open .sc-disclosure .sc-icon {
   transform: rotate(180deg);
 }
 
-/* ── Dropdown menu ── */
-.sc-dd-menu {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 0;
-  right: 0;
-  background: rgb(var(--color-background));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--primary-border-radius);
-  padding: 8px;
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0 -10px 28px -8px rgba(25, 31, 56, 0.18), 0 -2px 6px -2px rgba(25, 31, 56, 0.08);
-  z-index: 100;
-  transition: background 0.6s var(--ease), border-color 0.6s var(--ease);
+.sc-icon {
+  flex: none;
+  width: var(--kc-responsive-size-icon-md);
+  height: var(--kc-responsive-size-icon-md);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--kc-shape-stroke-medium);
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.sc-dd-menu.is-open {
+/* ── Panel: Delivery & what's included ── */
+.sc-panel {
   display: flex;
-  animation: scMenuSlide 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-md);
 }
 
-@keyframes scMenuSlide {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.sc-info,
+.sc-row,
+.sc-try-once {
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
 }
 
-/* ── Dropdown option ── */
-.sc-dd-option {
+.sc-info {
+  color: var(--kc-mapped-text-default-body);
+}
+
+.sc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin: 0;
+  padding: var(--kc-responsive-spacing-layout-md) 0;
+  border-top: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-bottom: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  list-style: none;
+}
+
+.sc-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px;
-  border-radius: var(--primary-border-radius);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  gap: var(--kc-responsive-spacing-layout-md);
+  color: var(--kc-mapped-text-default-heading);
 }
 
-.sc-dd-option.is-selected {
-  background: linear-gradient(180deg, rgba(127, 185, 255, 0.16) 0%, rgba(127, 185, 255, 0.06) 100%);
-  box-shadow: inset 0 0 0 1.5px var(--kc-mapped-surface-accent-default);
+.sc-row .sc-icon {
+  color: var(--kc-mapped-icon-primary-default);
 }
 
-/* ── Radio dot ── */
-.sc-dd-radio {
-  width: 16px;
-  height: 16px;
-  min-width: 16px;
-  border-radius: 50%;
-  position: relative;
-  margin-top: 2px;
-  border: 1.5px solid var(--kc-mapped-surface-accent-default);
-  transition: border-color .2s, background .2s;
-}
-
-.sc-dd-option.is-selected .sc-dd-radio {
-  border-color: var(--kc-mapped-surface-accent-default);
-  background: radial-gradient(circle, var(--kc-mapped-surface-accent-default) 0 4px, transparent 5px);
-}
-
-.sc-dd-option.is-selected .sc-dd-radio::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-/* ── Option Text Layout ── */
-.sc-dd-option-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-width: 0;
-  text-align: left;
-  gap: 4px;
-}
-
-.sc-dd-name {
-  font-weight: var(--font-700-weight);
-  color: rgb(var(--color-foreground));
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sc-dd-option.is-selected .sc-dd-radio+.sc-dd-option-text .sc-dd-name {
-  color: var(--kc-mapped-surface-accent-default);
-}
-
-.sc-dd-sub {
-  font-size: 11px;
-  font-weight: var(--font-400-weight);
-}
-
-/* ── Price group ── */
-.sc-dd-price-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  gap: 2px;
-  flex-shrink: 0;
-}
-
-.sc-dd-price {
-  font-weight: var(--font-600-weight);
-  line-height: 1;
-  color: var(--kc-mapped-surface-accent-default);
-}
-
-/* ── CTA form + button ── */
-.sc-cta {
-  flex-shrink: 0;
-}
-
-
-/* ── Mobile tweaks ── */
-@media (max-width: 749px) {
-  .sticky-cta {
-    padding: 10px 12px;
-    gap: 8px;
-  }
-
-  .sc-do-trigger {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-
-  .sc-cta-btn {
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-
-  .sc-plan-price {
-    font-size: 13px;
-  }
-
-  .night-mode .sc-plan-label {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .sc-plan-interval,
-  .sc-caret {
-    display: none;
-  }
-}
-
-/* ── Trigger inner layout (with subrow) ── */
-.sc-trigger-inner {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  text-align: left;
-  color: rgb(var(--color-foreground));
-}
-
-.sc-trigger-top {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.sc-trigger-sub {
-  min-height: 0;
-}
-
-.sc-trigger-top span#scPlanBadge {
-  display: none;
-}
-
-.sc-plan-price-wrap {
-  display: flex;
-  align-items: baseline;
-  gap: 3px;
-  flex-shrink: 0;
-}
-
-/* ── Dropdown option subrow (per-brushing cost line) ── */
-.sc-dd-subrow,
-.sc-dd-interval,
-.sc-plan-subrow {
-  display: block;
-  font-size: 13px;
-  font-weight: var(--font-500-weight);
-  margin-top: 2px;
-  white-space: normal;
-  line-height: 1.3;
-  color: var(--muted);
-}
-
-/* ── Name and Badge Wrap ── */
-.sc-dd-name-wrap {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.sc-cta--panel {
   width: 100%;
 }
 
-/* ── Pill style for badges ── */
-.sc-plan-badge,
-.sc-dd-badge {
-  font-size: 13px;
-  font-weight: var(--font-700-weight);
-  background: var(--surface-2);
-  padding: 3px 6px;
-  border-radius: var(--secondary-border-radius);
-  white-space: nowrap;
-  color: rgb(var(--color-foreground));
+.sc-try-once {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--kc-responsive-size-control-min-height);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kc-mapped-text-link-default);
+  font-family: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: var(--kc-responsive-spacing-layout-xxs);
+  cursor: pointer;
 }
 
-/* ── Caret Icon color ── */
-.sc-caret {
-  color: var(--kc-mapped-surface-accent-default);
+.sc-try-once:hover {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-disclosure .sc-icon {
+    transition: none;
+  }
+}
+
+/* ── CTA: the buybox button in token form (assets/kc-buybox.css) ── */
+.sc-cta {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--kc-responsive-size-button-lg-height);
+  margin: 0;
+  padding: 0 var(--kc-responsive-spacing-layout-comfortable);
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  background-color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sc-cta:hover {
+  background-color: var(--kc-mapped-surface-accent-default-hover);
+}
+
+.sc-cta:active {
+  background-color: var(--kc-mapped-surface-accent-default-pressed);
+}
+
+.sc-cta.loading > span:not(.loading__spinner) {
+  visibility: hidden;
+}
+
+.sc-cta .loading__spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-cta .loading__spinner.hidden {
+  display: none;
+}
+
+.sc-cta .spinner {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
+}
+
+.sc-form {
+  display: none;
+}
+
+/* ── Package (desktop only): the Duo + the Welcome Kit items ── */
+.sc-package,
+.sc-kit-line {
+  display: none;
+}
+
+.sc-package-duo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+/* Image boxes from Figma 4091:34227 (collapsed) and 4091:34246 (open) */
+.sc-package-img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.sc-package-name,
+.sc-kit-name,
+.sc-kit-value {
+  display: none;
+}
+
+.sc-package-plus {
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.sc-kit {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-kit-img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border: var(--kc-shape-stroke-thick) solid var(--kc-mapped-surface-glass-default);
+  border-radius: var(--kc-shape-radius-sm);
+}
+
+/* Collapsed: the kit items overlap, like a stack */
+.sc-kit-item + .sc-kit-item {
+  margin-left: calc(-1 * var(--kc-responsive-spacing-layout-md));
+}
+
+/* ── Desktop: centred, the package composition (Victor, 18 Oct) ── */
+@media screen and (min-width: 1081px) {
+  .sticky-cta {
+    --sc-width: min(var(--kc-responsive-size-grid-columns-9), 100vw - 2 * var(--kc-responsive-spacing-page-gutter));
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+    grid-template-areas:
+      'pack title price cta chev'
+      'pack kit credit cta chev';
+    align-items: center;
+    column-gap: var(--kc-responsive-spacing-layout-lg);
+    row-gap: 0;
+    padding: var(--kc-responsive-spacing-layout-comfortable);
+  }
+
+  /* The rows of the phone layout dissolve into the grid */
+  .sc-summary,
+  .sc-plan,
+  .sc-return {
+    display: contents;
+  }
+
+  .sc-package {
+    grid-area: pack;
+    display: flex;
+    align-items: center;
+    gap: var(--kc-responsive-spacing-layout-xs);
+  }
+
+  .sc-title {
+    grid-area: title;
+    align-self: end;
+  }
+
+  .sc-title-rest {
+    display: inline;
+  }
+
+  .sc-kit-line {
+    grid-area: kit;
+    display: block;
+    align-self: start;
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+    color: var(--kc-mapped-text-default-body);
+  }
+
+  .sc-price-line {
+    grid-area: price;
+    align-self: end;
+    font-size: var(--kc-responsive-body-lg-text-size);
+    line-height: var(--kc-responsive-body-lg-line-height);
+    letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+    font-weight: var(--font-700-weight, 700);
+    color: var(--kc-mapped-text-default-heading);
+    white-space: nowrap;
+  }
+
+  .sc-credit {
+    grid-area: credit;
+    align-self: start;
+    white-space: nowrap;
+  }
+
+  .sc-cta--bar {
+    grid-area: cta;
+  }
+
+  .sc-disclosure {
+    grid-area: chev;
+  }
+
+  /* Open: title + Change + chevron; the package as it arrives; details left, purchase right */
+  .sticky-cta.is-open {
+    grid-template-columns: minmax(0, 1fr) var(--kc-responsive-size-grid-columns-3) var(--kc-responsive-size-control-min-height);
+    grid-template-areas:
+      'title change chev'
+      'pack pack pack'
+      'rows price price'
+      'rows credit credit'
+      'rows info info'
+      'rows pcta pcta'
+      'rows try try';
+    align-items: start;
+    column-gap: var(--kc-responsive-spacing-layout-lg);
+    row-gap: var(--kc-responsive-spacing-layout-xs);
+    padding: var(--kc-responsive-spacing-layout-comfortable);
+  }
+
+  .sticky-cta.is-open .sc-panel {
+    display: contents;
+  }
+
+  .sticky-cta.is-open .sc-title {
+    align-self: center;
+  }
+
+  .sticky-cta.is-open .sc-change {
+    grid-area: change;
+    justify-self: end;
+  }
+
+  .sticky-cta.is-open .sc-disclosure {
+    align-self: center;
+    justify-self: center;
+  }
+
+  .sticky-cta.is-open .sc-package {
+    align-items: flex-start;
+    gap: var(--kc-responsive-spacing-layout-md);
+    margin: var(--kc-responsive-spacing-layout-xs) 0;
+    padding-bottom: var(--kc-responsive-spacing-layout-lg);
+    border-bottom: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  }
+
+  .sticky-cta.is-open .sc-package-duo {
+    width: 160px;
+  }
+
+  .sticky-cta.is-open .sc-package-img {
+    width: 160px;
+    height: 112px;
+  }
+
+  .sticky-cta.is-open .sc-package-name,
+  .sticky-cta.is-open .sc-kit-name,
+  .sticky-cta.is-open .sc-kit-value {
+    display: block;
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+    color: var(--kc-mapped-text-default-heading);
+  }
+
+  .sticky-cta.is-open .sc-kit-value {
+    color: var(--kc-mapped-text-default-body);
+  }
+
+  .sticky-cta.is-open .sc-kit {
+    align-items: flex-start;
+    gap: var(--kc-responsive-spacing-layout-md);
+  }
+
+  .sticky-cta.is-open .sc-kit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--kc-responsive-spacing-layout-xs);
+    width: 128px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .sticky-cta.is-open .sc-kit-line,
+  .sticky-cta.is-open .sc-row[data-sc-row='kit'] {
+    display: none;
+  }
+
+  .sticky-cta.is-open .sc-rows {
+    grid-area: rows;
+    padding: 0;
+    border: 0;
+  }
+
+  .sticky-cta.is-open .sc-price-line {
+    grid-area: price;
+  }
+
+  .sticky-cta.is-open .sc-credit {
+    grid-area: credit;
+    white-space: normal;
+  }
+
+  .sticky-cta.is-open .sc-info {
+    grid-area: info;
+  }
+
+  .sticky-cta.is-open .sc-cta--panel {
+    grid-area: pcta;
+  }
+
+  .sticky-cta.is-open .sc-try-once {
+    grid-area: try;
+  }
 }
