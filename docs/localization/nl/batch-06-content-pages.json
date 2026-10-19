@@ -1,0 +1,321 @@
+{
+ "lang": "nl",
+ "batch": "batch-06-content-pages",
+ "source": "docs/source-copy/batches/batch-06-content-pages.json",
+ "source_digest": "f78c391aa267b82eb0c85af36edea6e4583651bf",
+ "source_entries": 21,
+ "counts": {
+  "admin": 15,
+  "pending-claim-review": 4,
+  "held": 2
+ },
+ "fit_risk": [
+  "admin:page:why-karmicare:title"
+ ],
+ "status_legend": {
+  "translated": "ready to register",
+  "admin": "translated; registered through Shopify translation resources (product, metafield, metaobject, page, policy, article, menu, app)",
+  "theme-key": "translated; hardcoded EN in theme code, goes into locales/nl.json once the key exists",
+  "legal-review": "translated; needs Victor's or a lawyer's review before publishing",
+  "pending-claim-review": "translated faithfully; the EN claim waits for sign-off (CLAIMS-REVIEW.md)",
+  "dawn-nl": "Dawn's own key; NL already in locales/nl.json (verify only)",
+  "held": "not translated; reason in notes"
+ },
+ "entries": [
+  {
+   "id": "admin:page:why-karmicare:title",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "title",
+   "en": "Why Karmicare",
+   "en_sha1": "c52b2def440fe0cc30a8619e02255e549c1c08e2",
+   "nl": "Waarom Karmicare",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "fit-risk"
+   ],
+   "notes": "16 vs 13 chars; no shorter form"
+  },
+  {
+   "id": "admin:page:why-karmicare:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "body_html#b001",
+   "en": "The moments before you sleep and after you wake determine the quality of your life",
+   "en_sha1": "9f1d83cdc091bcabdd9f54d43520e174eee9887b",
+   "nl": "De momenten voordat je gaat slapen en nadat je wakker wordt, bepalen de kwaliteit van je leven",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "No final full stop, as in the EN"
+  },
+  {
+   "id": "admin:page:why-karmicare:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "seo.title",
+   "en": "Why Karmicare – KARMICARE",
+   "en_sha1": "dbecd8d3752ef888203a70061a80afe14345b61f",
+   "nl": "Waarom Karmicare – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-karmicare:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "seo.description",
+   "en": "The moments before you sleep and after you wake determine the quality of your life",
+   "en_sha1": "9f1d83cdc091bcabdd9f54d43520e174eee9887b",
+   "nl": "De momenten voordat je gaat slapen en nadat je wakker wordt, bepalen de kwaliteit van je leven",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:title",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "title",
+   "en": "Why use Hydroxyapatite Toothpaste",
+   "en_sha1": "bf7111a4e55a22ca0fbde59be9ad5605c78caf17",
+   "nl": "Waarom kiezen voor tandpasta met hydroxyapatiet",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "'use' → 'kiezen voor' (avoids 'gebruiken')"
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "body_html#b001",
+   "en": "Here’s why you should start using hydroxyapatite toothpaste",
+   "en_sha1": "c287bc1ec38e9594cf1d492533eff77d0e191e35",
+   "nl": "Hierom zou je moeten overstappen op tandpasta met hydroxyapatiet",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "'start using' → 'overstappen op' (avoids 'gebruiken')"
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "seo.title",
+   "en": "Why use Hydroxyapatite Toothpaste – KARMICARE",
+   "en_sha1": "a094127c6d3e075cd9aeb928a48662872970f1bd",
+   "nl": "Waarom kiezen voor tandpasta met hydroxyapatiet – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "seo.description",
+   "en": "Here’s why you should start using hydroxyapatite toothpaste",
+   "en_sha1": "c287bc1ec38e9594cf1d492533eff77d0e191e35",
+   "nl": "Hierom zou je moeten overstappen op tandpasta met hydroxyapatiet",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:title",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "title",
+   "en": "Why stop using fluoride toothpaste",
+   "en_sha1": "3cf6a03826094fc9555972cb192123c126d28cbe",
+   "nl": "Waarom stoppen met fluoridetandpasta",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "body_html#b001",
+   "en": "There’s no fluoride in our Awake or Asleep toothpaste. Nor will there ever be<br><br>",
+   "en_sha1": "1c5963636015f94d36a2b72c0934820c81248962",
+   "nl": "Er zit geen fluoride in onze Awake- of Asleep-tandpasta. En dat komt er ook nooit in<br><br>",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:body_html#b002",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "body_html#b002",
+   "en": "Here’s why you should stop using fluoride toothpaste",
+   "en_sha1": "733912432c0e858c7dbe799f58717c45d690a585",
+   "nl": "Hierom zou je moeten stoppen met fluoridetandpasta",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "seo.title",
+   "en": "Why stop using fluoride toothpaste – KARMICARE",
+   "en_sha1": "499f85d8db1c99e534c673748b49343f856224d7",
+   "nl": "Waarom stoppen met fluoridetandpasta – KARMICARE",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "seo.description",
+   "en": "There’s no fluoride in our Awake or Asleep toothpaste. Nor will there ever be Here’s why you should stop using fluoride toothpaste",
+   "en_sha1": "54b5d724d380330bd7d465ce29910f6f5638bd64",
+   "nl": "Er zit geen fluoride in onze Awake- of Asleep-tandpasta. En dat komt er ook nooit in. Hierom zou je moeten stoppen met fluoridetandpasta",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "Full stop added between the two joined body blocks (the EN runs them together)"
+  },
+  {
+   "id": "admin:page:nhap-technology:title",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "title",
+   "en": "nHAp Technology",
+   "en_sha1": "e2682400fb89254e574b2fc620232f6197c75057",
+   "nl": "nHAp-technologie",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:nhap-technology:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "body_html#b001",
+   "en": "Dive deep into the benefits of NASA’s favorite supplement for oral health",
+   "en_sha1": "74cd8126bb75f1998d034857092a4b69fadfcaa0",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim (batches 05-07 review)"
+  },
+  {
+   "id": "admin:page:nhap-technology:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "seo.title",
+   "en": "nHAp Technology – KARMICARE",
+   "en_sha1": "6f9db2e10aa69de8133d8812cd109754f5df6db0",
+   "nl": "nHAp-technologie – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:nhap-technology:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "seo.description",
+   "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Dive deep into the benefits of NASA’s favorite supplement for oral health",
+   "en_sha1": "518e171ea8390b669611c8f82b1e81fa2e4352a6",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim (batches 05-07 review)"
+  },
+  {
+   "id": "admin:page:articles:title",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "title",
+   "en": "Articles",
+   "en_sha1": "7c422841b7e3951946583038790545c4ed38481b",
+   "nl": "Artikelen",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:articles:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "body_html#b001",
+   "en": "Discover our latest articles",
+   "en_sha1": "7c931f90b7c07f41d8d80fbc2b6e7b6d0cd50867",
+   "nl": "Ontdek onze nieuwste artikelen",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:articles:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "seo.title",
+   "en": "Articles – KARMICARE",
+   "en_sha1": "60032fa807d49cdc468949d346fe6cef7ae2c97f",
+   "nl": "Artikelen – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:page:articles:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "seo.description",
+   "en": "Discover our latest articles",
+   "en_sha1": "7c931f90b7c07f41d8d80fbc2b6e7b6d0cd50867",
+   "nl": "Ontdek onze nieuwste artikelen",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  }
+ ]
+}

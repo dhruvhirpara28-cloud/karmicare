@@ -1,0 +1,572 @@
+{
+ "lang": "nl",
+ "batch": "batch-03-header-footer",
+ "source": "docs/source-copy/batches/batch-03-header-footer.json",
+ "source_digest": "e17cadb5e223dd62b25e30e901091d8a8634aaf3",
+ "source_entries": 41,
+ "counts": {
+  "translated": 5,
+  "pending-claim-review": 1,
+  "dawn-nl": 11,
+  "theme-key": 10,
+  "held": 3,
+  "admin": 11
+ },
+ "fit_risk": [
+  "liquid:sections/footer.liquid:679",
+  "liquid:sections/footer.liquid:1058",
+  "admin:navigation:new-main-menu:links[2].title",
+  "admin:navigation:company:links[3].title"
+ ],
+ "status_legend": {
+  "translated": "ready to register",
+  "admin": "translated; registered through Shopify translation resources (product, metafield, metaobject, page, policy, article, menu, app)",
+  "theme-key": "translated; hardcoded EN in theme code, goes into locales/nl.json once the key exists",
+  "legal-review": "translated; needs Victor's or a lawyer's review before publishing",
+  "pending-claim-review": "translated faithfully; the EN claim waits for sign-off (CLAIMS-REVIEW.md)",
+  "dawn-nl": "Dawn's own key; NL already in locales/nl.json (verify only)",
+  "held": "not translated; reason in notes"
+ },
+ "entries": [
+  {
+   "id": "header-group:announcement-bar/announcement-bar-0/text",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/header-group.json",
+   "key_path": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
+   "en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
+   "en_sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
+   "nl": "GRATIS VERZENDING · 60 DAGEN GELD TERUG · GEMAAKT IN BELGIË",
+   "status": "translated",
+   "flags": [],
+   "notes": "Shorter than the EN. Offer accuracy point from the inventory still applies to the NL: free shipping and the 60-day guarantee are memberships only"
+  },
+  {
+   "id": "header-group:header/cta_text",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/header-group.json",
+   "key_path": "sections.header.settings.cta_text",
+   "en": "BEGIN NOW",
+   "en_sha1": "3af682098c74f0572917a3032d55af4fd973a8de",
+   "nl": "BEGIN NU",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "footer-group:footer/slogan",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.slogan",
+   "en": "Your mouth has a rhythm So should your oral care",
+   "en_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
+   "nl": "Je mond heeft een ritme Je mondverzorging ook",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474)"
+  },
+  {
+   "id": "footer-group:footer/copyright_text",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.copyright_text",
+   "en": "<p>Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) is a Belgian product formulated by certified chemists and manufactured under GMP. Formulations are CPNP notified and comply with the EU Cosmetic Regulation (EC) No 1223/2009. Packaging (Awake, Asleep bottle and shipping envelope) are recyclable.</p><p>KARMICARE™ is a brand of KARMICA bv. Vizierstraat 28, 8000, Belgium. Company number 0676.972.896 and VAT number BE0676.972.896 - Belfius: BE73 0689 0664 2960.</p>",
+   "en_sha1": "b2d215640991f2039c2d1ca3b244c7f48b57a864",
+   "nl": "<p>Copyright © ∞ KARMICARE. Alle rechten voorbehouden. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) is een Belgisch product, geformuleerd door gecertificeerde chemici en geproduceerd volgens GMP. De formules zijn aangemeld bij het CPNP en voldoen aan de EU-cosmeticaverordening (EG) nr. 1223/2009. De verpakkingen (flessen van Awake en Asleep en de verzendenvelop) zijn recyclebaar.</p><p>KARMICARE™ is een merk van KARMICA bv. Vizierstraat 28, 8000, België. Ondernemingsnummer 0676.972.896 en btw-nummer BE0676.972.896 - Belfius: BE73 0689 0664 2960.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Compliance line: 'product' kept as in the EN (regulatory statement). EN address lacks the city (8000 Brugge); kept as EN"
+  },
+  {
+   "id": "footer-group:footer/newsletter_heading",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.newsletter_heading",
+   "en": "Newsletter",
+   "en_sha1": "6ed05e720ccc3ef269db1b38201da8b873acc895",
+   "nl": "Nieuwsbrief",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "footer-group:footer/link_list_Yna7wT/heading",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.blocks.link_list_Yna7wT.settings.heading",
+   "en": "Company",
+   "en_sha1": "7a1994999d181deea68e4304b3346e78f838ecb7",
+   "nl": "Bedrijf",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "locale:sections.announcements.announcement",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "sections.announcements.announcement",
+   "en": "Announcement",
+   "en_sha1": "cf84a98d6cf7f156862a08ba8236467b6f471004",
+   "nl": "Aankondiging",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:sections.header.menu",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "sections.header.menu",
+   "en": "Menu",
+   "en_sha1": "57f5f5efbc5990f5230aa95359042338b856707b",
+   "nl": "Menu",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (identical to EN in locales/nl.json); verify, do not re-translate"
+  },
+  {
+   "id": "locale:customer.log_in",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "customer.log_in",
+   "en": "Log in",
+   "en_sha1": "f7c400ed695f898b8ee9d21664aa17b5bb693828",
+   "nl": "Inloggen",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:localization.country_label",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "localization.country_label",
+   "en": "Country/region",
+   "en_sha1": "0525a677a3641d15e26c89eaa4832b793c655682",
+   "nl": "Land/regio",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:general.search.search",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "general.search.search",
+   "en": "Search",
+   "en_sha1": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
+   "nl": "Zoeken",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:general.search.reset",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "general.search.reset",
+   "en": "Clear search term",
+   "en_sha1": "6a247f4902161b4d4654287a33e708989b967750",
+   "nl": "Zoekterm wissen",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:accessibility.close",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "accessibility.close",
+   "en": "Close",
+   "en_sha1": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
+   "nl": "Sluiten",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:localization.language_label",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "localization.language_label",
+   "en": "Language",
+   "en_sha1": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
+   "nl": "Taal",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:general.social.links.facebook",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "general.social.links.facebook",
+   "en": "Facebook",
+   "en_sha1": "82da67b211249624f24f3c7db5642a5112c9446f",
+   "nl": "Facebook",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:general.social.links.instagram",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "general.social.links.instagram",
+   "en": "Instagram",
+   "en_sha1": "5721bbef40b22bbdb2e6a062b096d9b48735c2ff",
+   "nl": "Instagram",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:newsletter.label",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "newsletter.label",
+   "en": "Email",
+   "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+   "nl": "E‑mail",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "liquid:sections/header.liquid:1077",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/header.liquid",
+   "key_path": "sections/header.liquid:1077",
+   "en": "Coming soon",
+   "en_sha1": "e4115be258dbdd1661c5f1ff14670c19ef1048da",
+   "nl": "Binnenkort",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/footer.liquid:660",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:660",
+   "en": "Email",
+   "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+   "nl": "E-mail",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/footer.liquid:667",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:667",
+   "en": "you@example.com",
+   "en_sha1": "50e2b46ef8778549445c9610f4fea207d995c937",
+   "nl": "you@example.com",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "Placeholder address kept (the check treats e-mail addresses as fixed); 'jij@voorbeeld.be' if a Dutch placeholder is wanted"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:679",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:679",
+   "en": "Join",
+   "en_sha1": "e0d73143de80d17e82de2e017ac156ca3b9c4e01",
+   "nl": "Doe mee",
+   "status": "theme-key",
+   "flags": [
+    "theme-key",
+    "fit-risk"
+   ],
+   "notes": "7 vs 4 chars; no four-letter Dutch verb for 'Join' ('Aanmelden' 9)"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:694",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:694",
+   "en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
+   "en_sha1": "ae65e088e387580a0b88c8649f2853eacfec7cbd",
+   "nl": "Door je in te schrijven, ga je akkoord met de <a>Gebruiksvoorwaarden</a> en het <a>Privacybeleid</a>.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "TERM: Terms of Use → Gebruiksvoorwaarden; Privacy Policy → Privacybeleid (align with the titles the legal chunk uses)"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:850",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:850",
+   "en": "Language",
+   "en_sha1": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
+   "nl": "Taal",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/footer.liquid:868",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:868",
+   "en": "Country/Region",
+   "en_sha1": "0a69ccba2a82e643832e86cb15025cd0959b0ef2",
+   "nl": "Land/regio",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/footer.liquid:1034",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:1034",
+   "en": "Terms and Conditions",
+   "en_sha1": "894031ed8d341b5ecab5e23002585055f0b7ee4d",
+   "nl": "Algemene voorwaarden",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "TERM: Terms and Conditions → Algemene voorwaarden"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:1046",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:1046",
+   "en": "Privacy Policy",
+   "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+   "nl": "Privacybeleid",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/footer.liquid:1058",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:1058",
+   "en": "Consumer Rights",
+   "en_sha1": "9f47f00993a5fcda5324a69858ea073aed81070a",
+   "nl": "Consumentenrechten",
+   "status": "theme-key",
+   "flags": [
+    "theme-key",
+    "fit-risk"
+   ],
+   "notes": "18 vs 15 chars; standard term"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:706",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:706",
+   "en": "Instagram",
+   "en_sha1": "5721bbef40b22bbdb2e6a062b096d9b48735c2ff",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:733",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:733",
+   "en": "Facebook",
+   "en_sha1": "82da67b211249624f24f3c7db5642a5112c9446f",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "liquid:sections/footer.liquid:760",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "sections/footer.liquid:760",
+   "en": "LinkedIn",
+   "en_sha1": "6b6390a4416131f82b6ffb509f6e779e5dd9630f",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "admin:customer-privacy:footer.cookie_preferences",
+   "resource_type": "app",
+   "file_or_handle": "customer-privacy",
+   "key_path": "footer.cookie_preferences",
+   "en": "Cookie preferences",
+   "en_sha1": "e7d3061b5e104ad82c229272eb44579ac791875c",
+   "nl": "Cookievoorkeuren",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:navigation:new-main-menu:links[1].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:new-main-menu",
+   "key_path": "links[1].title",
+   "en": "Manifesto",
+   "en_sha1": "dcd7c00c82bfbbf1082c2abdfdcbe77cb9c12805",
+   "nl": "Manifest",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:navigation:new-main-menu:links[2].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:new-main-menu",
+   "key_path": "links[2].title",
+   "en": "Science",
+   "en_sha1": "d2d066371475dee7a2d496ca34a3ab08485cfaf6",
+   "nl": "Wetenschap",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "fit-risk"
+   ],
+   "notes": "10 vs 7 chars; no shorter Dutch word"
+  },
+  {
+   "id": "admin:navigation:new-main-menu:links[3].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:new-main-menu",
+   "key_path": "links[3].title",
+   "en": "Professionals",
+   "en_sha1": "34bb955943d97bd3c32fd5ff7c0b710c5222c3c4",
+   "nl": "Professionals",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "Dutch uses 'professionals' as is"
+  },
+  {
+   "id": "admin:navigation:new-main-menu:links[4].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:new-main-menu",
+   "key_path": "links[4].title",
+   "en": "Members",
+   "en_sha1": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
+   "nl": "Leden",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:navigation:company:links[1].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:company",
+   "key_path": "links[1].title",
+   "en": "Shop Karmicare",
+   "en_sha1": "f482360586d12d87ab1e8c6595c02c8c37769e1e",
+   "nl": "Ontdek Karmicare",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "'Shop' → 'Ontdek' (avoids buy wording)"
+  },
+  {
+   "id": "admin:navigation:company:links[2].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:company",
+   "key_path": "links[2].title",
+   "en": "Why use hydroxapatite",
+   "en_sha1": "03cf49872d62d8b2d56ff94c12ecb29d5fe7d603",
+   "nl": "Waarom hydroxyapatiet",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "EN typo 'hydroxapatite' fixed; banned 'use' dropped"
+  },
+  {
+   "id": "admin:navigation:company:links[3].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:company",
+   "key_path": "links[3].title",
+   "en": "Why Karmicare",
+   "en_sha1": "c52b2def440fe0cc30a8619e02255e549c1c08e2",
+   "nl": "Waarom Karmicare",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "fit-risk"
+   ],
+   "notes": "16 vs 13 chars; no shorter form"
+  },
+  {
+   "id": "admin:navigation:company:links[4].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:company",
+   "key_path": "links[4].title",
+   "en": "nHAp Technology",
+   "en_sha1": "e2682400fb89254e574b2fc620232f6197c75057",
+   "nl": "nHAp-technologie",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:navigation:company:links[5].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:company",
+   "key_path": "links[5].title",
+   "en": "Contact",
+   "en_sha1": "b37456c4530be810dc040f50da72eda09addfb0a",
+   "nl": "Contact",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:navigation:company:links[6].title",
+   "resource_type": "navigation",
+   "file_or_handle": "navigation:company",
+   "key_path": "links[6].title",
+   "en": "Articles",
+   "en_sha1": "7c422841b7e3951946583038790545c4ed38481b",
+   "nl": "Artikelen",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  }
+ ]
+}
