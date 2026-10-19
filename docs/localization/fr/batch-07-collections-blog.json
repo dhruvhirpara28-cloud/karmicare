@@ -13,7 +13,7 @@
   "translated": 1
  },
  "flag_counts": {
-  "pending-claim-review": 250
+  "pending-claim-review": 251
  },
  "entries": [
   {
@@ -6021,8 +6021,10 @@
    "en_sha1": "44e9efe2aa1d3b85ff3b1bc4728ea20fd0a00f75",
    "fr": "La formule du matin, Awake, est conçue pour stimuler l’énergie et la clarté mentale, tandis que la formule du soir, Asleep, vous aide à décompresser et à vous préparer au repos. Les deux formules sont entièrement exemptes de substances chimiques nocives.",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "From R6-01 (NL re-review): claim_status needs-review; the source gate follows on the source branch. Translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -9102,10 +9104,10 @@
    "key_path": "body_html#b015",
    "en": "Another place you’re likely to find SLS? Check out your household cleaning products. Yep, you read that right.",
    "en_sha1": "9ab7bf4c8772c7f5a7c45bf4b4c7a7e6ff90344e",
-   "fr": "Un autre endroit où vous trouverez probablement du SLS ? Regardez vos produits ménagers. Oui, vous avez bien lu.",
+   "fr": "Un autre endroit où vous trouverez probablement du SLS ? Regardez vos nettoyants ménagers. Oui, vous avez bien lu.",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "R6-02 (coordinator addendum): 'household cleaning products' rendered « nettoyants ménagers » (brand rule: no 'produits' in ordinary copy).",
    "source_status": "admin-held"
   },
   {
