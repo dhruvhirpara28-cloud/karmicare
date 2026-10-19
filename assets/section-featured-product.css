@@ -111,9 +111,19 @@
     flex: 0 1 701.79px;
   }
 
+  /* Below 1440 both columns give way in proportion, the offer down to 440 px,
+     so the picture keeps its Figma share instead of shrinking alone */
   .featured-product.grid:not(.product--no-media) > .product__info-wrapper {
-    flex: 0 0 564px;
+    flex: 0 1 564px;
+    min-width: 440px;
     padding: 0;
+  }
+}
+
+/* Wider than 1440 the 1346 px row (picture, gap, offer) sits centred in the page width */
+@media screen and (min-width: 1441px) {
+  .featured-product.grid:not(.product--no-media) {
+    justify-content: center;
   }
 }
 
