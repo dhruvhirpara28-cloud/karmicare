@@ -7,15 +7,13 @@
 **Method**: headless Chrome per viewport, per-section clips and layout metrics (content extent, overflow, clipped boxes, smallest text, tap targets, image pixels needed vs served). Five section reviews compared every capture with Figma and the code; I checked the high-impact rows myself (FP-01, PR-01, TF-01, FQ-05, the empty links).
 
 **Result**: 74 rows across all ten sections plus announcement, header and footer. There is no horizontal page overflow at any width, and the header nav pill is correct and centred at every width.
-- **P0: 5 rows.** Two clipped or dead elements have a homepage fix (FP-01, RE-01). Two dead CTA links need a URL from Victor (PR-03, RE-02). One is copy: the FAQ answers (FQ-01). A sixth row, PR-01, is a suspected P0 that needs a device check.
-- **P1: 35 rows.**
-- **P2: 33 rows.**
-- **13 decisions** for Victor.
-- **Handoffs** to assets, source-copy, utopia and the announcement-bar owner.
+- **Priorities**: 5 P0, 34 P1 (one of them, HD-01, still needs a scrolled capture) and 34 P2. A sixth P0 row, PR-01, is suspected and needs a device check.
+- **Status**: 21 rows fixed on this branch, 15 decision rows (14 decisions), 21 handoffs and 2 pending a check. 13 homepage rows are left open: 12 P2, plus TF-06 (P1), whose opacity has to be tuned on a rendered page.
+- **P0 detail**: FP-01 and RE-01 are fixed. PR-03 and RE-02 are dead CTA links waiting for a URL from Victor. FQ-01 (FAQ answers) is copy.
 
 Priority: **P0** broken, clipped, unreadable or unusable · **P1** visibly off-design · **P2** refinement.
 Owner: **homepage** (this task) · **utopia** (type tokens and type sizes) · **source-copy** (text) · **assets** (image files) · **Victor** (decision) · **handoff** (another code owner).
-Status column: *fix* = homepage fix in this branch (see REPORT.md for the commit) · *decision* · *handoff* · *pending* (needs a browser or device check first).
+Status column: *fixed `hash`* = homepage fix on this branch (rendered after-shots pending the browser route, Liquid parts pending the preview gate; see REPORT.md) · *open* = homepage P2 not done in this pass · *decision* · *handoff* · *pending* (needs a browser or device check first).
 
 ## Announcement bar and header
 
@@ -31,9 +29,9 @@ The nav pill itself matches Figma at every width: centred (gaps 162/370/610/930 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
 | HE-01 | hero | all · both | The hero shows the product still `KARMICARE_Hero-shot_001-p-1.png` (682 px wide, needs 1089-1364 px on phones and retina laptops). COMMON-RULES §3 says the homepage hero is the AM/PM animation; `hero-karmicare` only has an image block. Changing what the hero shows is a decision. | COMMON-RULES §3; `2928:19884` | P1 | Victor | decision D-1 | hero-1440-day-after.png |
-| HE-02 | hero | all · both | The "Backed by health professionals" badge links to `#shopify-section-template--27582179377533__trusted_professionals_HAqYth` (`templates/index.json` L58); the live section id is `…27120739549565__…`, so the click goes nowhere. | `2928:19884` | P1 | homepage | fix | hero-1440-day-after.png |
+| HE-02 | hero | all · both | The "Backed by health professionals" badge links to `#shopify-section-template--27582179377533__trusted_professionals_HAqYth` (`templates/index.json` L58); the live section id is `…27120739549565__…`, so the click goes nowhere. | `2928:19884` | P1 | homepage | fixed `1506cab` | hero-1440-day-after.png |
 | HE-03 | hero | all · both | "WHY TWO FORMULAS?" has an empty `button_link_2`: it renders `href="#"` with `aria-disabled` but looks like an active button. | `2928:19884`; brief §2 secondary CTA | P1 | Victor (destination) | decision D-2 | hero-1440-day-after.png |
-| HE-04 | hero | 393-1440 · both | The badge avatar is served as a 56 px file (`image_tag width: 56` caps the srcset) but shows at 56×72 and needs 112-168 px; the source is 332×479. Soft on every phone and retina screen. | `2928:19884` | P1 | homepage | fix | hero-393-day-after.png |
+| HE-04 | hero | 393-1440 · both | The badge avatar is served as a 56 px file (`image_tag width: 56` caps the srcset) but shows at 56×72 and needs 112-168 px; the source is 332×479. Soft on every phone and retina screen. | `2928:19884` | P1 | homepage | fixed `1506cab` | hero-393-day-after.png |
 | HE-05 | hero | all · both | Displayed image width follows the file's own width (682 px, no CSS width) while `sizes` says 840 px. A higher-resolution export would grow the picture and break the layout, so assets cannot swap it safely yet. | — | P2 | homepage | open (prerequisite for an assets swap) | hero-1440-day-after.png |
 | HE-06 | hero | ≥990 · both | The badge sits about 8 px high against the Day/Night switch (avatar top 14 px above it; Figma 6 px). | `2928:19884` | P2 | homepage | open | hero-1440-day-after.png |
 | HE-07 | hero | 768-1920 · both | The subtext breaks inside "24-/hour" because the text column is 640 px; the Figma line is about 668 px. | `2928:19884` | P2 | homepage | open | hero-1440-day-after.png |
@@ -46,8 +44,8 @@ Not a gap: the hero content extent (left 32 / right 270 at 1440) is the badge at
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| SS-01 | stat-strip | 393 · both | Fixed 180 px items show exactly two stats with no third peeking in, and the scroller stops at the 15 px gutter. Figma uses content-width items with "Clinically backed" peeking in at x≈306, running to the screen edge (`stat-strip-393-day-before.png` vs `stat-strip-393-day-figma.png`). | `3027:20817` | P1 | homepage | fix | stat-strip-393-day-after.png |
-| SS-02 | stat-strip | 990-1199 · both | Five 172 px columns: three labels wrap and, because items are centred vertically, the values sit at different heights (`stat-strip-1024-day-before.png`). | design intent | P1 | homepage | fix | stat-strip-1024-day-after.png |
+| SS-01 | stat-strip | 393 · both | Fixed 180 px items show exactly two stats with no third peeking in, and the scroller stops at the 15 px gutter. Figma uses content-width items with "Clinically backed" peeking in at x≈306, running to the screen edge (`stat-strip-393-day-before.png` vs `stat-strip-393-day-figma.png`). | `3027:20817` | P1 | homepage | fixed `37ab3bc` (swipe with peek; auto-scroll is decision D-14) | stat-strip-393-day-after.png |
+| SS-02 | stat-strip | 990-1199 · both | Five 172 px columns: three labels wrap and, because items are centred vertically, the values sit at different heights (`stat-strip-1024-day-before.png`). | design intent | P1 | homepage | fixed `37ab3bc` | stat-strip-1024-day-after.png |
 | SS-03 | stat-strip | ≥990 · both | Top and bottom hairlines run the full border box; Figma insets them to the content width (32-1408 at 1440). | `2928:19908` | P2 | homepage | open | stat-strip-1440-day-after.png |
 | SS-04 | stat-strip | all · both | Strip is 235 px tall against 216 px in Figma, from label line heights. | `2928:19908` | P2 | utopia | handoff | — |
 
@@ -55,7 +53,7 @@ Not a gap: the hero content extent (left 32 / right 270 at 1440) is the badge at
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| CL-01 | clock | 768, 1024 · both | When a callout badge fits on one line it keeps `min-height: 40px` plus a 40 px bottom margin: an empty band of about 64 px between badge and title (`clock-1024-day-before.png`, `clock-768-day-before.png`). Same on the PDP. | `3027:20840` (badge→title ≈24 px) | P1 | homepage | fix | clock-768-day-after.png, clock-1024-night-after.png |
+| CL-01 | clock | 768, 1024 · both | When a callout badge fits on one line it keeps `min-height: 40px` plus a 40 px bottom margin: an empty band of about 64 px between badge and title (`clock-1024-day-before.png`, `clock-768-day-before.png`). Same on the PDP. | `3027:20840` (badge→title ≈24 px) | P1 | homepage | fixed `b314fd8` | clock-768-day-after.png, clock-1024-night-after.png |
 | CL-02 | clock | 1440-2560 · day | Evening leader 120 px, callout at x=972; the Day V15 frame has a 58 px leader at x=895, while the Night frame matches live. | `2928:19943` vs `2590:9791` | P2 | Victor | decision D-4 | clock-1440-day-after.png |
 | CL-03 | clock | ≥750 · both | "Drag the ring" hint is a fully rounded pill; present in the Night frame, absent in the Day frame. Brand rule: no pill buttons. | COMMON-RULES §3 | P2 | Victor | decision D-5 | clock-1440-day-after.png |
 | CL-04 | clock | all · both | The readout uses label-lg (283 px wide); both 1440 frames are label-sm (249 px). The PDP already sets `time_label_size: small`. | `2928:19943`, `2590:9791` | P2 | homepage (setting) | open | clock-1440-night-after.png |
@@ -67,23 +65,23 @@ Not gaps: the `div.timeline` overflow at 393 is the planned crop of the rotated 
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| TF-01 | two-formulas | 393-1440 · both | The tubes are served as a 220 px file for a 220 px slot on DPR 2-3 screens: `image_url: width: 220` (L126) caps the srcset although the source is 518×1057 px. Soft on every phone and retina screen. | — | P1 | homepage | fix | two-formulas-393-day-after.png |
-| TF-02 | two-formulas | ≥990 · both | Tubes render 220×449; Figma 1440 ≈260×528. The file is cropped tight so its shadow ends in hard edges. | `2928:20020`, `2590:9868` | P1 | homepage (size) + assets (crop) | fix (size) / handoff (crop) | two-formulas-1440-day-after.png |
-| TF-03 | two-formulas | ≥990 · both | "SEE WHAT'S INSIDE" buttons stretch to the column (325 px); Figma buttons fit the label (≈204 px). | `2928:20020` | P1 | homepage | fix | two-formulas-1440-night-after.png |
-| TF-04 | two-formulas | ≥1200 · both | Text columns at x 190-515 and 925-1250; Figma 148-478 and 960-1290. | `2928:20020` | P1 | homepage | fix | two-formulas-1440-day-after.png |
-| TF-05 | two-formulas | 990-1199 · both | Left H3 wraps to 3 lines in a 275 px column; headings and buttons sit 20 px apart in height (`two-formulas-1024-day-before.png`). | design intent | P1 | homepage | fix | two-formulas-1024-day-after.png |
-| TF-06 | two-formulas | 1024-2560 · night | Clock-ring ticks are bright white; the Night frame shows them faint. | `2590:9868` | P1 | homepage | open (Liquid background-image needs a pseudo-element; listed, not in this pass) | two-formulas-1440-night-after.png |
-| TF-07 | two-formulas | 393, 768 · both | 15 px gutters; Figma and the clock above use 20 px. | `3027:20922` | P1 | homepage | fix | two-formulas-393-day-after.png |
+| TF-01 | two-formulas | 393-1440 · both | The tubes are served as a 220 px file for a 220 px slot on DPR 2-3 screens: `image_url: width: 220` (L126) caps the srcset although the source is 518×1057 px. Soft on every phone and retina screen. | — | P1 | homepage | fixed `39a00a8` | two-formulas-393-day-after.png |
+| TF-02 | two-formulas | ≥990 · both | Tubes render 220×449; Figma 1440 ≈260×528. The file is cropped tight so its shadow ends in hard edges. | `2928:20020`, `2590:9868` | P1 | homepage (size) + assets (crop) | fixed `39a00a8` (size); crop handoff | two-formulas-1440-day-after.png |
+| TF-03 | two-formulas | ≥990 · both | "SEE WHAT'S INSIDE" buttons stretch to the column (325 px); Figma buttons fit the label (≈204 px). | `2928:20020` | P1 | homepage | fixed `39a00a8` | two-formulas-1440-night-after.png |
+| TF-04 | two-formulas | ≥1200 · both | Text columns at x 190-515 and 925-1250; Figma 148-478 and 960-1290. | `2928:20020` | P1 | homepage | fixed `39a00a8` | two-formulas-1440-day-after.png |
+| TF-05 | two-formulas | 990-1199 · both | Left H3 wraps to 3 lines in a 275 px column; headings and buttons sit 20 px apart in height (`two-formulas-1024-day-before.png`). | design intent | P1 | homepage | fixed `39a00a8` | two-formulas-1024-day-after.png |
+| TF-06 | two-formulas | 1024-2560 · night | Clock-ring ticks are bright white; the Night frame shows them faint. | `2590:9868` | P1 | homepage | open: the setting-driven background image has to move to a `::before` with a Night opacity (~0.35). The value needs tuning against `2590:9868` on a rendered page, which waits for the browser route | two-formulas-1440-night-after.png |
+| TF-07 | two-formulas | 393, 768 · both | 15 px gutters; Figma and the clock above use 20 px. Not section-specific: Dawn's `--page-gutter` is 1.5rem on phones for most sections (hero, stat strip, benefits, FAQ, featured product all measure 15 px), while the clock and footer use the 20 px `--kc-responsive-spacing-page-gutter`. One global gutter value is a token decision. | `3027:20922` | P1 | utopia (global page gutter) | handoff (moved from homepage: global) | two-formulas-393-day-after.png |
 | TF-08 | two-formulas | <1200 · both | Ingredient chips are 10 px text; Figma mobile ≈12 px. Body text 15/22 against Figma 20/28 (body-lg) at 1440. | `3027:20922`, `2928:20020` | P1 | utopia | handoff | two-formulas-768-day-after.png |
 | TF-09 | two-formulas | ≥1200 · both | Chip row up to 750 px wide (3 rows); Figma ≈600 px. | `2928:20020` | P2 | homepage | open | two-formulas-1440-day-after.png |
-| TF-10 | two-formulas | all | `alt: section.settings.heading` probably carries `<strong>` markup into the alt text. | — | P2 | homepage | open | — |
+| TF-10 | two-formulas | all | `alt: section.settings.heading` probably carries `<strong>` markup into the alt text. | — | P2 | homepage | fixed `39a00a8` (with TF-01) | — |
 
 ## Benefits (`product-benefits-karmicare`, 9 cards, homepage only)
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| BE-01 | benefits | 768, 1024 · both | The grid drops to 2 columns, so 9 cards make 5 rows with card 09 alone; the section is 1984 px tall at 768 and 1642 px at 1024 (1066 at 1440). At 1024 the 30 % left column squeezes the H2 to 3 lines. Cause: `columns_tablet` and `columns_laptop` = 2 and the side-by-side row at 990-1199. | `2928:20061` (3×3 grid) | P1 | homepage | fix | benefits-768-day-after.png, benefits-1024-day-after.png |
-| BE-02 | benefits | 393 · both | Swipe cards are 276×280; Figma 280×320. The 1.3-card peek matches. | `3027:20981` | P1 | homepage | open (verify against KC/Benefit card State=Mobile first) | benefits-393-day-after.png |
+| BE-01 | benefits | 768, 1024 · both | The grid drops to 2 columns, so 9 cards make 5 rows with card 09 alone; the section is 1984 px tall at 768 and 1642 px at 1024 (1066 at 1440). At 1024 the 30 % left column squeezes the H2 to 3 lines. Cause: `columns_tablet` and `columns_laptop` = 2 and the side-by-side row at 990-1199. | `2928:20061` (3×3 grid) | P1 | homepage | fixed `6860d74` | benefits-768-day-after.png, benefits-1024-day-after.png |
+| BE-02 | benefits | 393 · both | Swipe cards are 276×280; the 393 frame draws 280×320, but the approved card component (KC/Benefit card State=Mobile, instance `2608:48221`) is 297×277, which live follows. The 1.3-card peek matches. | `3027:20981` vs `2608:48221` | P2 | homepage | no change (live follows the approved component) | benefits-393-day-after.png |
 | BE-03 | benefits | all | All 9 pictures are 297 px files (594-827 px needed). | — | P1 | assets | handoff | benefits-393-day-after.png |
 | BE-04 | benefits | all | Card picture `image_tag` has no `sizes`/`widths`, so the browser assumes 100vw. | — | P2 | homepage | open (no gain until BE-03) | — |
 | BE-05 | benefits | all | Card 07 heading contains U+2028: Chrome shows a double space and orphans "night" at 1440. Copy also differs from Figma ("Focus by day" vs "Bright by day", "one dose" vs "full dose"). | `2928:20061` | P1 | source-copy | handoff | benefits-1440-day-after.png |
@@ -106,7 +104,7 @@ Not a gap: the navy veil on the cards (approved component, 6aa0e71) although the
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| RE-01 | research | all · both | All five source chips render `href="#"` under an external-link icon (`link_url` empty on the homepage and the PDP; `snippets/research-card.liquid` fell back to `'#'`): a tap jumps to the top of the page. | broken | P0 | homepage | fix | research-393-day-after.png, research-1440-day-after.png |
+| RE-01 | research | all · both | All five source chips render `href="#"` under an external-link icon (`link_url` empty on the homepage and the PDP; `snippets/research-card.liquid` fell back to `'#'`): a tap jumps to the top of the page. | broken | P0 | homepage | fixed `bf5d314` | research-393-day-after.png, research-1440-day-after.png |
 | RE-02 | research | all · both | "Explore the full evidence base" links to `#` (`button_link` empty on both templates). | brief §7/§8 ("/our-science") | P0 (dead link) | Victor (URL) | decision D-8 | research-1440-day-after.png |
 | RE-03 | research | 393-1920 | `Sleep_airway.png` (232 px) fills a 400×482 box; `Picture_1.png` is 400 px where 757-960 px is needed. | image list §2 rows 13-14 | P1 | assets | handoff | research-1440-day-after.png |
 | RE-04 | research | all | Source logos are 95 px files shown at 1× only; the JCDR logo is a grey box with unreadable text. Logo `<img>` has no `widths`/`sizes`. | image list §2 row 18 | P2 | assets (+ homepage attributes) | handoff | research-1440-night-after.png |
@@ -120,7 +118,7 @@ Not a gap: the near edge-to-edge band at 2560 is the deliberate full-bleed marqu
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| CC-01 | care-comes-back | all · both | Step markers print "01", "02", "03" (`sections/care-comes-back.liquid` L63-65). COMMON-RULES §3 bans 01/02/03 step labels. | COMMON-RULES §3 | P1 | homepage | fix (markers keep their ring, no number) | care-comes-back-1440-day-after.png, care-comes-back-393-night-after.png |
+| CC-01 | care-comes-back | all · both | Step markers print "01", "02", "03" (`sections/care-comes-back.liquid` L63-65). COMMON-RULES §3 bans 01/02/03 step labels. | COMMON-RULES §3 | P1 | homepage | fixed `7ff0562` (orchestrator OK) | care-comes-back-1440-day-after.png, care-comes-back-393-night-after.png |
 | CC-02 | care-comes-back | 1024-2560 · both | Composition differs from `4013:29078`: Figma has the heading left in the page container, a CTA right and three equal columns with hairlines and icons; live centres everything in a 760 px column with a vertical loop. | `4013:29078` | P1 | Victor | decision D-10 | care-comes-back-1440-day-after.png |
 | CC-03 | care-comes-back | all | No CTA; Figma has "BEGIN NOW" plus a price line, and the schema has no button setting. | `4013:29078` | P1 | Victor | decision D-10 | care-comes-back-1440-day-after.png |
 | CC-04 | care-comes-back | all | Copy differs from Figma: eyebrow shows the placeholder "SUBTITLE", different step titles, intro and fine print not in Figma. | `4013:29078` | P1 | source-copy | handoff | care-comes-back-1440-day-after.png |
@@ -133,8 +131,8 @@ Not a gap: the Accent surface against Figma's Page colour is a deliberate hold c
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
 | FQ-01 | faq | all · both | All six answers are the same text (the "two formulas" answer); "Is Karmicare fluoride-free?" and the others answer a different question. Category mapping also looks arbitrary ("Should I rinse after brushing?" under "Plans & Return on Care"). | brief §14 | P0 | source-copy | handoff | faq-1440-day-after.png |
-| FQ-02 | faq | all · both | The filter chips are `<span>`s with click handlers: no focus, no Enter/Space, no pressed state (theme audit row 15). | a11y | P1 | homepage | fix | faq-1440-day-after.png + keyboard check |
-| FQ-03 | faq | all · night | Card colour is `#2c3a60` (`card_bg_color_night`); Figma cards are `#212a49` (sampled), so live cards read lighter than the section instead of darker. | `2995:23222` | P1 | homepage (colour setting) | fix pending orchestrator OK (colour, not layout) | faq-1440-night-after.png |
+| FQ-02 | faq | all · both | The filter chips are `<span>`s with click handlers: no focus, no Enter/Space, no pressed state (theme audit row 15). | a11y | P1 | homepage | fixed `174997e` | faq-1440-day-after.png + keyboard check |
+| FQ-03 | faq | all · night | Card colour is `#2c3a60` (`card_bg_color_night`); Figma cards are `#212a49` (sampled), so live cards read lighter than the section instead of darker. | `2995:23222` | P1 | homepage (colour setting) | fixed `174997e` (#2c3a60 → #212a49, orchestrator OK) | faq-1440-night-after.png |
 | FQ-04 | faq | all | Chips are 33 px tall against 28 in Figma (`line-height: normal`). They are pills; brand rule says no pill buttons. | `2995:23657` | P2 | Victor | decision D-11 | faq-1440-day-after.png |
 | FQ-05 | faq | all | Question text about 10 % larger and answer text smaller than Figma. | `2995:23657` | P2 | utopia | handoff | — |
 
@@ -144,10 +142,10 @@ Matches Figma: centred heading, 680 px accordion, card spacing, section padding,
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| FP-01 | featured-product | 768 · both | The homepage used the `inline` benefits row (~513 px) in a 353 px offer column: it spills over the picture (content starts at x=320) and "Free shipping" is cut to "Free" at the screen edge (`featured-product-768-day-before.png`). | `2928:20190` | P0 | homepage | fix | featured-product-768-day-after.png |
-| FP-02 | featured-product | 1024-2560 · both | V15 shows the three benefits as three columns with the icon above the label; live shows one inline row. | `2928:20190`, `2590:10048` | P1 | homepage | fix (same change as FP-01) | featured-product-1440-day-after.png |
-| FP-03 | featured-product | 990-1439 · both | The offer column is fixed at 564 px, so the picture column shrinks to 316 px (kit 369×328 at 1024) against Figma's 55:45 split. Same on the PDP. | `2928:20190` | P1 | homepage | fix | featured-product-1024-day-after.png |
-| FP-04 | featured-product | 1920, 2560 · both | The 1346 px row is left-aligned in the 1416 px container: gutters 196/322 (1920) and 516/642 (2560), 63 px left of centre. Same on the PDP. | 1440 Figma composition | P1 | homepage | fix | featured-product-1920-day-after.png, featured-product-2560-day-after.png |
+| FP-01 | featured-product | 768 · both | The homepage used the `inline` benefits row (~513 px) in a 353 px offer column: it spills over the picture (content starts at x=320) and "Free shipping" is cut to "Free" at the screen edge (`featured-product-768-day-before.png`). | `2928:20190` | P0 | homepage | fixed `2124ebb` | featured-product-768-day-after.png |
+| FP-02 | featured-product | 1024-2560 · both | V15 shows the three benefits as three columns with the icon above the label; live shows one inline row. | `2928:20190`, `2590:10048` | P1 | homepage | fixed `2124ebb` | featured-product-1440-day-after.png |
+| FP-03 | featured-product | 990-1439 · both | The offer column is fixed at 564 px, so the picture column shrinks to 316 px (kit 369×328 at 1024) against Figma's 55:45 split. Same on the PDP. | `2928:20190` | P1 | homepage | fixed `2124ebb` | featured-product-1024-day-after.png |
+| FP-04 | featured-product | 1920, 2560 · both | The 1346 px row is left-aligned in the 1416 px container: gutters 196/322 (1920) and 516/642 (2560), 63 px left of centre. Same on the PDP. | 1440 Figma composition | P1 | homepage | fixed `2124ebb` | featured-product-1920-day-after.png, featured-product-2560-day-after.png |
 | FP-05 | featured-product | 2560 · day | The animation frame paints a lighter rectangle than the section background around the kit (`featured-product-2560-day-before.png`). | `2928:20190` | P2 | assets (video/poster background) | handoff | featured-product-2560-day-after.png |
 | FP-06 | featured-product | 1440 · both | The kit renders about 18 % larger than Figma (toothbrush ≈515 px vs ≈435 px); shadow reaches x≈0. | `2928:20190` | P2 | Victor | decision D-13 | featured-product-1440-day-after.png |
 | FP-07 | featured-product | 393-1440 | Poster `kc-anim-am-hero-1080x960-poster-v1.webp` is 1080 px; 1273-1640 px needed. | — | P2 | assets | handoff | — |
@@ -159,7 +157,7 @@ Not gaps: the media column at 768 is present (353 px, vertically centred); 1440 
 
 | ID | Section | Viewport · mode | Observed problem (evidence) | Reference | Prio | Owner | Status | Acceptance shot |
 |---|---|---|---|---|---|---|---|---|
-| FT-01 | footer | 1200-1439 · both | Copyright and legal links are 8 px apart (`gap: layout-xs`, `sections/footer.liquid` L557) and read as one sentence ("…Belgium product Terms and Conditions"); Figma ≈80 px. | `2928:20208` | P1 | homepage | fix | footer-1440-day-after.png |
+| FT-01 | footer | 1200-1439 · both | Copyright and legal links are 8 px apart (`gap: layout-xs`, `sections/footer.liquid` L557) and read as one sentence ("…Belgium product Terms and Conditions"); Figma ≈80 px. | `2928:20208` | P1 | homepage | fixed `82a0a51` | footer-1440-day-after.png |
 | FT-02 | footer | 393, 768 · both | Menu links are 18-20 px tall inline anchors (15 small tap targets at 393); they pass WCAG 2.5.8 only by spacing. | — | P2 | homepage | open | footer-393-day-after.png |
 | FT-03 | footer | all | Payment icons: 13 colour icons live vs 5 monochrome in Figma. | `2928:20208` | P2 | Victor | decision D-13 | footer-1440-day-after.png |
 | FT-04 | footer | all | Currency flags load from `flagcdn.com`, a third-party request before cookie consent. | GDPR (theme audit row 2 context) | P1 | assets + Victor | handoff | — |
@@ -174,4 +172,4 @@ Not gaps: the media column at 768 is present (353 px, vertically centred); 1440 
 
 ## Decisions for Victor (summary; options and recommendations in REPORT.md)
 
-D-1 hero still vs AM/PM animation · D-2 "Why two formulas?" destination · D-3 hero badge on phones · D-4 clock evening callout (Day vs Night frame) · D-5 clock hint pill · D-6 professionals structure and the 2560 repeat · D-7 practitioner-sample link · D-8 evidence-base link · D-9 repeated research picture · D-10 care-comes-back desktop layout and CTA · D-11 FAQ pill chips · D-12 sticky header band · D-13 end CTA kit scale, surface and footer payment icons.
+D-1 hero still vs AM/PM animation · D-2 "Why two formulas?" destination · D-3 hero badge on phones · D-4 clock evening callout (Day vs Night frame) · D-5 clock hint pill · D-6 professionals structure and the 2560 repeat · D-7 practitioner-sample link · D-8 evidence-base link · D-9 repeated research picture · D-10 care-comes-back desktop layout and CTA · D-11 FAQ pill chips · D-12 sticky header band · D-13 end CTA kit scale, surface and footer payment icons · D-14 phone stat strip: swipe (built) or auto-scroll (Figma frame name).
