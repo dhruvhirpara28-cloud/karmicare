@@ -17,7 +17,8 @@ Errors (exit code 1):
   flag_counts that do not match the entries;
 - FR text: markup, Liquid, [tokens] or runtime price spans that differ from the EN, changed selling-plan
   IDs, French typography slips (plain or missing space before : ; ! ? € % », straight apostrophes,
-  €-before-amount).
+  €-before-amount), a postal address of the EN missing from the FR (S1) or a different number of (*)
+  markers (S2), the NL validator's invariants from CHANGES-R2 §6.
 Warnings: words the brand rules ban, forbidden claim verbs and tu-forms outside legal text, for a human."""
 import copy
 import glob
@@ -41,6 +42,9 @@ SKIP = re.compile(r"(<[^>]*>|\{\{.*?\}\}|\{%.*?%\}|&[a-zA-Z#0-9]+;|\[[a-z_]+\])"
 BANNED = re.compile(r"\b(produits?|tubes?|achats?|achet\w*|utilis\w*|emploi)\b", re.I)
 FORBIDDEN = re.compile(r"\b(prévien\w*|préven\w*|prévenir|guéri\w*|traite|traiter|traitent)\b", re.I)
 TU = re.compile(r"\b(tu|ton|ta|tes|toi)\b", re.I)
+# Street and number, optional box, postcode, optional city and country: "Vizierstraat 28, 8000 Bruges, Belgium".
+# The same pattern as docs/localization/nl/validate.py (S1).
+ADDRESS = re.compile(r"[A-Z][^,<>·().:;]{2,60}?\d+[a-z]?(?:, (?:box|bus) \d+)?, \d{4}(?: [A-Z][a-zé]+)?(?:, [A-Z][a-z]+)?")
 
 
 def sha1(text):
@@ -50,6 +54,10 @@ def sha1(text):
 def text_nodes(value):
     value = DYNAMIC.sub(" ", value)
     return [p for p in SKIP.split(value) if p and not SKIP.fullmatch(p)]
+
+
+def plain(value):
+    return " ".join(re.sub(r"<[^>]+>", " ", value or "").replace(" ", " ").replace(" ", " ").split())
 
 
 def structure(value):
@@ -204,6 +212,11 @@ def validate(docs, ctx):
                 continue
             if structure(e["en"]) != structure(e["fr"]):
                 errors.append(where + ": markup, Liquid, [tokens] or runtime spans differ from the EN")
+            for address in ADDRESS.findall(plain(e["en"])):
+                if address not in plain(e["fr"]):
+                    errors.append(where + ": S1 address not exactly as in the EN: " + address)
+            if e["en"].count("(*)") != e["fr"].count("(*)"):
+                errors.append("%s: S2 (*) markers %d in EN, %d in FR" % (where, e["en"].count("(*)"), e["fr"].count("(*)")))
             if e["key_path"].endswith("custom_button_text_by_plan"):
                 if re.findall(r"^(\d+): ", e["en"], re.M) != re.findall(r"^(\d+): ", e["fr"], re.M):
                     errors.append(where + ": selling-plan IDs changed")
@@ -270,6 +283,12 @@ def self_test(docs, ctx):
             del d[name]
         return run
 
+    def replace_fr(entry_id, old, new):
+        def run(d):
+            e = find(d, entry_id)[1]
+            e["fr"] = e["fr"].replace(old, new, 1)
+        return run
+
     def tamper_flag_counts(name):
         def run(d):
             d[name]["flag_counts"]["legal-review"] = d[name]["flag_counts"].get("legal-review", 0) - 1
@@ -291,6 +310,8 @@ def self_test(docs, ctx):
         ("change key_path", set_field("footer-group:footer/slogan", "key_path", "sections.footer.settings.other"), "key_path"),
         ("flag_counts out of step", tamper_flag_counts(LEGAL_BATCH), "flag_counts"),
         ("remove a batch file", remove_batch("batch-08-system"), "FR batch file missing"),
+        ("translate an address (R2 F8)", replace_fr("admin:policy:refund-policy:body#b103", "1000 Brussels, Belgium", "1000 Bruxelles, Belgique"), "S1 address"),
+        ("drop a (*) marker (R2 F9)", replace_fr("admin:policy:refund-policy:body#b114", " (*)", ""), "S2 (*) markers"),
     ]
     failures = 0
     for label, mutate, expected in cases:
