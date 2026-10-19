@@ -129,6 +129,10 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+    /* The scroller clips anything outside the chips: the focus ring sits inside the chip */
+    .km-faq__filter-btn:focus-visible {
+      outline-offset: -2px;
+    }
     details.km-faq__item {
         padding: 20px;
     }
