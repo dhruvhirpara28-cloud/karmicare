@@ -2,17 +2,17 @@
  "batch": "batch-06-content-pages",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-06-content-pages.json",
- "source_digest": "f78c391aa267b82eb0c85af36edea6e4583651bf",
- "source_entries": 21,
+ "source_digest": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
+ "source_entries": 22,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 19,
+  "admin": 20,
   "held": 2
  },
  "flag_counts": {
-  "pending-claim-review": 4,
+  "pending-claim-review": 5,
   "wording-adapted": 7
  },
  "entries": [
@@ -214,6 +214,21 @@
    "status": "admin",
    "flags": [],
    "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:nhap-technology:body_html#b000",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "body_html#b000",
+   "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste<br><br>",
+   "en_sha1": "96c553f2ff62fc412e983b841516f4b10c442f5e",
+   "fr": "Découvrez le monde fascinant de la nano-hydroxyapatite et pourquoi votre dentifrice en a besoin<br><br>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {

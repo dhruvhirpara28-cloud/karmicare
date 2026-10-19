@@ -15,7 +15,7 @@
  "flag_counts": {
   "fit-risk": 2,
   "not-rendered": 1,
-  "pending-claim-review": 14,
+  "pending-claim-review": 19,
   "pending-en-review": 1,
   "source-defect": 9,
   "wording-adapted": 3
@@ -31,10 +31,11 @@
    "fr": "Adopté par plus de 100 praticiens kPNI",
    "status": "translated",
    "flags": [
+    "pending-claim-review",
     "wording-adapted"
    ],
-   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); number as in EN.",
-   "source_status": "approved"
+   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); number as in EN. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "needs-review"
   },
   {
    "id": "product:main/highlights_slider_9wAjAb/text_2",
@@ -266,8 +267,10 @@
    "en_sha1": "ea8a3c780636756e532ad6f2949fd5676412f0c1",
    "fr": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -533,8 +536,10 @@
    "en_sha1": "e92ed45a2b78310dc7ca705e60b0fd01fcff0ae2",
    "fr": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon<br><br><br>",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -560,9 +565,10 @@
    "fr": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin.<br><br>Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec la formule Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/evening-toothbrush\">brosse à dents du soir</a> KARMICARE.<br><br>Commencez votre journée à la manière KARMICARE.",
    "status": "admin",
    "flags": [
+    "pending-claim-review",
     "source-defect"
    ],
-   "notes": "EN typos ('dispurge', 'nurished', 'Awake of Asleep') translated as intended. The link points at /en/product/evening-toothbrush (legacy brush); href kept.",
+   "notes": "EN typos ('dispurge', 'nurished', 'Awake of Asleep') translated as intended. The link points at /en/product/evening-toothbrush (legacy brush); href kept. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -811,8 +817,10 @@
    "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
    "fr": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin.<br><br>Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec la formule Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/evening-toothbrush\">brosse à dents du soir</a> KARMICARE.<br><br>Commencez votre journée à la manière KARMICARE.",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -903,7 +911,7 @@
    "fr": null,
    "status": "held",
    "flags": [],
-   "notes": "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description",
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1009,7 +1017,7 @@
    "fr": null,
    "status": "held",
    "flags": [],
-   "notes": "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description",
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {

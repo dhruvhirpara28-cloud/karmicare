@@ -19,7 +19,7 @@
   "gendered-title": 14,
   "legal-review": 1,
   "not-rendered": 6,
-  "pending-claim-review": 37,
+  "pending-claim-review": 41,
   "pending-en-review": 9,
   "source-defect": 7,
   "wording-adapted": 14
@@ -3182,9 +3182,14 @@
    "en_sha1": "f8468b42e71b8cbed23ea243de3a8277d5ba7e02",
    "fr": "Kit de soin bucco-dentaire biorythmique Karmicare : dentifrices Awake du matin et Asleep du soir, sans fluor, sans SLS et riches en nano-hydroxyapatite, brosses à dents du matin et du soir et fil dentaire blanchissant au charbon",
    "status": "admin",
-   "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C100 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C100"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:media.69248905085309.alt",
@@ -3290,9 +3295,14 @@
    "en_sha1": "b20b641627f279dc30947567da25191b95c597b2",
    "fr": "Vue animée du kit de soin bucco-dentaire biorythmique Karmicare : dentifrices Awake du matin et Asleep du soir, sans fluor, sans SLS et riches en nano-hydroxyapatite, brosses à dents du matin et du soir et fil dentaire blanchissant au charbon",
    "status": "admin",
-   "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C100 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C100"
+   ]
   },
   {
    "id": "admin:morning-toothbrush-2-0:title",
@@ -3329,9 +3339,14 @@
    "en_sha1": "a13ec532d1776acc6151cc4faffed46ced530676",
    "fr": "Fil dentaire blanchissant au charbon",
    "status": "admin",
-   "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C100 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C100"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#01",
@@ -6554,10 +6569,14 @@
    "fr": "Brosse à dents du matin · Brosse à dents du soir · Fil dentaire blanchissant au charbon",
    "status": "admin",
    "flags": [
+    "pending-claim-review",
     "source-defect"
    ],
-   "notes": "The row points at the old brushes (B1a handoff 2); titles translated as the 2.0 titles would be.",
-   "source_status": "admin-held"
+   "notes": "The row points at the old brushes (B1a handoff 2); titles translated as the 2.0 titles would be. Claims C100 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C100"
+   ]
   }
  ]
 }
