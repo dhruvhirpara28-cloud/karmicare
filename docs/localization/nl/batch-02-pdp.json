@@ -16,7 +16,10 @@
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/try_once_text",
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_welcome_kit_title",
+  "product.subscription-item:research_behind_system_EkjATL/button_label",
+  "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_value_html",
   "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1",
+  "product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_3",
   "product.subscription-item:care_comes_back/step_next_order/title",
   "liquid:sections/main-product.liquid:943",
   "liquid:sections/main-product.liquid:1030",
@@ -28,6 +31,8 @@
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#55",
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96",
   "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#13",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#18",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#23",
   "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#29",
   "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#34",
   "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#03",
@@ -1003,8 +1008,10 @@
    "en_sha1": "0fa1ec9d5064dcacc5914eb584d9f6410eaea971",
    "nl": "Ontdek de volledige wetenschappelijke basis",
    "status": "translated",
-   "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek de volledige onderbouwing"
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek de volledige onderbouwing; Button label, 30 → 43 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/subheading",
@@ -1623,8 +1630,10 @@
    "en_sha1": "53e38a37063f7c743818c12d0d5d185cd8c9dd12",
    "nl": "Variabel <strong>Gratis</strong>",
    "status": "translated",
-   "flags": [],
-   "notes": ""
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "Plan-card shipping value, 11 → 15 chars, like its homepage counterpart (already flagged); kept (R2, review F7)"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1",
@@ -1709,8 +1718,10 @@
    "en_sha1": "8a731a2195c016fe53a1a90a51f1891b4d6393c4",
    "nl": "Schenken, pauzeren of opzeggen",
    "status": "translated",
-   "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Pauzeren of opzeggen"
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Pauzeren of opzeggen; Trust-row chip, 21 → 30 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "product.subscription-item:care_comes_back/eyebrow",
@@ -3068,7 +3079,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN)"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN); Width (R2, review F7): 22 → 24 chars, and 'Ochtendtandenborstel' is one 20-letter word with no break point, where the EN can wrap between 'Morning' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow"
   },
   {
    "id": "admin:evening-toothbrush-2-0:title",
@@ -3083,7 +3094,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title; Width, not length (R2, review F7): 22 chars in both languages, but 'Avondtandenborstel' is one 18-letter word with no break point, where the EN can wrap between 'Evening' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow"
   },
   {
    "id": "admin:whitening-charcoal-dental-floss:title",
@@ -4277,7 +4288,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "16 → 22 chars; no shorter Dutch pair. Accordion title, probably full width."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): accordion title that wraps. 16 → 22 chars; no shorter Dutch pair. Accordion title, probably full width."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#56",
@@ -5258,9 +5269,10 @@
    "nl": "Weken voor je iets merkt",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Merkbaar na weken"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Merkbaar na weken; Comparison-table cell, 15 → 24 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#19",
@@ -5329,9 +5341,10 @@
    "nl": "Systemisch, niet in de mond",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systemisch, niet oraal"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systemisch, niet oraal; Comparison-table cell, 18 → 27 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#24",
@@ -5894,7 +5907,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "20 → 29 chars; heading line."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): section heading line that wraps. 20 → 29 chars; heading line."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#01",
@@ -6345,7 +6358,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "TERM: subscription → lidmaatschap (offer wording). Fragments #04–#06 join: 'Met elk lidmaatschap verdien je Care Credit: een rendement op de zorg die je volhoudt.' Word order needed the subject change; 24 → 31 chars."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): heading fragment that wraps with #05 and #06. TERM: subscription → lidmaatschap (offer wording). Fragments #04–#06 join: 'Met elk lidmaatschap verdien je Care Credit: een rendement op de zorg die je volhoudt.' Word order needed the subject change; 24 → 31 chars."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#05",
@@ -6374,7 +6387,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "'return' → 'rendement' (echoes Return on Care); 30 → 41 chars."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): heading fragment that wraps with #04 and #05. 'return' → 'rendement' (echoes Return on Care); 30 → 41 chars."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:try_once.cost_per_brushing",
