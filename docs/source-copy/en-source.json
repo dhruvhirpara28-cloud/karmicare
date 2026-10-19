@@ -1193,9 +1193,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; claims C35: unsupported (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C35"
+   ],
    "setting_type": "text",
    "section_type": "product-benefits-karmicare",
    "rendered": true
@@ -1748,9 +1751,12 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type richtext",
+   "notes": "type richtext; claims C68: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C68"
+   ],
    "setting_type": "richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -1847,9 +1853,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.result_text",
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C60: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C60"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -1994,9 +2003,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.result_text",
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C61: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C61"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2141,9 +2153,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.result_text",
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C62: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C62"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2288,9 +2303,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.result_text",
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C63: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C63"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2435,9 +2453,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.result_text",
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C64: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C64"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -2787,11 +2808,12 @@
    "sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; source: 45 brief Q5, adapted to the question in Figma 3002:20280 (row 5); claims C13: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; source: 45 brief Q5, adapted to the question in Figma 3002:20280 (row 5); claims C13, C93: needs-review (CLAIMS-REVIEW.md)",
    "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
    "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
    "claims": [
-    "C13"
+    "C13",
+    "C93"
    ],
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
@@ -4902,9 +4924,12 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type richtext",
+   "notes": "type richtext; claims C68: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C68"
+   ],
    "setting_type": "richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5001,9 +5026,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.result_text",
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C60: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C60"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5148,9 +5176,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.result_text",
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C61: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C61"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5295,9 +5326,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.result_text",
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C62: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C62"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5442,9 +5476,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.result_text",
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C63: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C63"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -5589,9 +5626,12 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.result_text",
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
-   "status": "approved",
+   "status": "needs-review",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; claims C64: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C64"
+   ],
    "setting_type": "inline_richtext",
    "section_type": "research-behind-system",
    "rendered": true
@@ -7418,7 +7458,10 @@
    "sha1": "612d49c26e60a56f67b1cb2b58ba22d3a102f4ba",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); metafields custom.treatment_journey_one_heading, _list_one, _two_heading, _list_two"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); metafields custom.treatment_journey_one_heading, _list_one, _two_heading, _list_two; claims C94: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C94"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#12",
@@ -8392,7 +8435,10 @@
    "sha1": "c74ba958cf8064bc683fb665aa84ed01345a6fd1",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C93: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C93"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#57",
@@ -8905,7 +8951,10 @@
    "sha1": "691729765bebd9e0e7fa0fa77611d890167b991e",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C93: needs-review (CLAIMS-REVIEW.md)",
+   "claims": [
+    "C93"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96",

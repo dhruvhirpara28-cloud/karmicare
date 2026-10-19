@@ -51,8 +51,8 @@ By status:
 
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 156 | 8 | 28 | 27 | 2 | 16 |
-| `batch-02-pdp` | 156 | 0 | 17 | 36 | 268 | 32 |
+| `batch-01-homepage` | 149 | 8 | 35 | 27 | 2 | 16 |
+| `batch-02-pdp` | 150 | 0 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 15 | 0 | 1 | 0 | 61 | 0 |
@@ -359,7 +359,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 64 | `index:product_benefits_karmicare_bcQ6tp/card_QdCWaE/heading` | template_setting | A mouth in balance | approved |  |
 | 65 | `index:product_benefits_karmicare_bcQ6tp/card_QdCWaE/text` | template_setting | Supports your mouth’s own balance. Less plaque, day and night. | approved | C C31 |
 | 66 | `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/label` | template_setting | 06 · No SLS | approved |  |
-| 67 | `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading` | template_setting | Radiant calm gums | approved |  |
+| 67 | `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading` | template_setting | Radiant calm gums | needs-review | C C35 |
 | 68 | `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text` | template_setting | No SLS. Gums settle, turn pinker and look radiant. | needs-review | C C35 |
 | 69 | `index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label` | template_setting | 07 · Guarana & valerian | approved |  |
 | 70 | `index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/heading` | template_setting | Focus by day, calm by night | needs-review | C C41 |
@@ -392,13 +392,13 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 97 | `index:trusted_professionals_HAqYth/card_qAPajg/text` | template_setting | Breathing Coach, Heart Coherence Specialist | approved |  |
 | 98 | `index:research_behind_system_EkjATL/subheading` | template_setting | CLINICALLY BACKED ORAL CARE | approved |  |
 | 99 | `index:research_behind_system_EkjATL/heading` | template_setting | The research behind the system | approved |  |
-| 100 | `index:research_behind_system_EkjATL/bottom_text` | template_setting | Built for people who read the label, check the research and want their daily care to hold up. Meta-… | approved |  |
+| 100 | `index:research_behind_system_EkjATL/bottom_text` | template_setting | Built for people who read the label, check the research and want their daily care to hold up. Meta-… | needs-review | C C68 |
 | 101 | `index:research_behind_system_EkjATL/button_label` | template_setting | Explore the full evidence base | approved |  |
 | 102 | `index:research_behind_system_EkjATL/card_bDxUVT/subheading` | template_setting | NANO-HYDROXYAPATITE | approved |  |
 | 103 | `index:research_behind_system_EkjATL/card_bDxUVT/heading` | template_setting | Nano-HAp sealed 98% of open dentine tubules. | needs-review | C C60 |
 | 104 | `index:research_behind_system_EkjATL/card_bDxUVT/subtext` | template_setting | Human dentine discs · 7 days | approved |  |
 | 105 | `index:research_behind_system_EkjATL/card_bDxUVT/result_label` | template_setting | RESULT | approved |  |
-| 106 | `index:research_behind_system_EkjATL/card_bDxUVT/result_text` | template_setting | 98% occlusion vs 82% and 65% for two other desensitising technologies | approved |  |
+| 106 | `index:research_behind_system_EkjATL/card_bDxUVT/result_text` | template_setting | 98% occlusion vs 82% and 65% for two other desensitising technologies | needs-review | C C60 |
 | 107 | `index:research_behind_system_EkjATL/card_bDxUVT/method_label` | template_setting | METHOD | approved |  |
 | 108 | `index:research_behind_system_EkjATL/card_bDxUVT/method_text` | template_setting | In vitro SEM comparison of three pastes, ~1% nHAp. | approved |  |
 | 109 | `index:research_behind_system_EkjATL/card_bDxUVT/link_label` | template_setting | Kulal et al. · 2016 · J Clin Diagn Res | approved | NT |
@@ -407,7 +407,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 112 | `index:research_behind_system_EkjATL/card_yMiD9D/heading` | template_setting | Poorer oral health was linked with poorer sleep. | needs-review | C C61 |
 | 113 | `index:research_behind_system_EkjATL/card_yMiD9D/subtext` | template_setting | 36,559 people · 8 studies | approved |  |
 | 114 | `index:research_behind_system_EkjATL/card_yMiD9D/result_label` | template_setting | RESULT | approved |  |
-| 115 | `index:research_behind_system_EkjATL/card_yMiD9D/result_text` | template_setting | SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp; | approved |  |
+| 115 | `index:research_behind_system_EkjATL/card_yMiD9D/result_text` | template_setting | SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp; | needs-review | C C61 |
 | 116 | `index:research_behind_system_EkjATL/card_yMiD9D/method_label` | template_setting | METHOD | approved |  |
 | 117 | `index:research_behind_system_EkjATL/card_yMiD9D/method_text` | template_setting | Meta-analysis of 8 studies, 2015–2023. | approved |  |
 | 118 | `index:research_behind_system_EkjATL/card_yMiD9D/link_label` | template_setting | Lei & Hu · 2025 · Biomedical Reports | approved | NT |
@@ -416,7 +416,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 121 | `index:research_behind_system_EkjATL/card_fmFMFd/heading` | template_setting | Xylitol lowered tooth decay compared with controls. | needs-review | C C62 |
 | 122 | `index:research_behind_system_EkjATL/card_fmFMFd/subtext` | template_setting | 1,478 people · 7 trials | approved |  |
 | 123 | `index:research_behind_system_EkjATL/card_fmFMFd/result_label` | template_setting | Result | approved |  |
-| 124 | `index:research_behind_system_EkjATL/card_fmFMFd/result_text` | template_setting | SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83 | approved |  |
+| 124 | `index:research_behind_system_EkjATL/card_fmFMFd/result_text` | template_setting | SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83 | needs-review | C C62 |
 | 125 | `index:research_behind_system_EkjATL/card_fmFMFd/method_label` | template_setting | Method | approved |  |
 | 126 | `index:research_behind_system_EkjATL/card_fmFMFd/method_text` | template_setting | Systematic review and meta-analysis of 7 clinical trials. | approved |  |
 | 127 | `index:research_behind_system_EkjATL/card_fmFMFd/link_label` | template_setting | Janakiram et al. · 2017 · J Nat Sci Biol Med | approved | NT |
@@ -425,7 +425,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 130 | `index:research_behind_system_EkjATL/card_Hi7YUD/heading` | template_setting | Nano-HAp beat fluoride on tooth sensitivity. | needs-review | C C63 |
 | 131 | `index:research_behind_system_EkjATL/card_Hi7YUD/subtext` | template_setting | 105 people · 4 weeks | approved |  |
 | 132 | `index:research_behind_system_EkjATL/card_Hi7YUD/result_label` | template_setting | RESULT | approved |  |
-| 133 | `index:research_behind_system_EkjATL/card_Hi7YUD/result_text` | template_setting | Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05 | approved |  |
+| 133 | `index:research_behind_system_EkjATL/card_Hi7YUD/result_text` | template_setting | Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05 | needs-review | C C63 |
 | 134 | `index:research_behind_system_EkjATL/card_Hi7YUD/method_label` | template_setting | METHOD | approved |  |
 | 135 | `index:research_behind_system_EkjATL/card_Hi7YUD/method_text` | template_setting | Double-blind randomised controlled trial, three arms. | approved |  |
 | 136 | `index:research_behind_system_EkjATL/card_Hi7YUD/link_label` | template_setting | Vano et al. · 2018 · Clin Oral Investig | approved | NT |
@@ -434,7 +434,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 139 | `index:research_behind_system_EkjATL/card_JeERX6/heading` | template_setting | No SLS meant fewer and shorter canker sores. | needs-review | C C64 |
 | 140 | `index:research_behind_system_EkjATL/card_JeERX6/subtext` | template_setting | 124 people · 4 crossover RCTs | approved |  |
 | 141 | `index:research_behind_system_EkjATL/card_JeERX6/result_label` | template_setting | RESULT | approved |  |
-| 142 | `index:research_behind_system_EkjATL/card_JeERX6/result_text` | template_setting | Fewer ulcers, shorter duration, fewer episodes, less pain | approved |  |
+| 142 | `index:research_behind_system_EkjATL/card_JeERX6/result_text` | template_setting | Fewer ulcers, shorter duration, fewer episodes, less pain | needs-review | C C64 |
 | 143 | `index:research_behind_system_EkjATL/card_JeERX6/method_label` | template_setting | METHOD | approved |  |
 | 144 | `index:research_behind_system_EkjATL/card_JeERX6/method_text` | template_setting | Systematic review and meta-analysis of 4 crossover RCTs. | approved |  |
 | 145 | `index:research_behind_system_EkjATL/card_JeERX6/link_label` | template_setting | Alli et al. · 2019 · J Oral Pathol Med | approved | NT |
@@ -455,7 +455,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 160 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` | template_setting | A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces… | corrected | C C23 |
 | 161 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category` | template_setting | Plans & Return on Care | needs-review |  |
 | 162 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question` | template_setting | Should I rinse after brushing? | approved |  |
-| 163 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer` | template_setting | No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp … | corrected | C C13 |
+| 163 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer` | template_setting | No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp … | corrected | C C13,C93 |
 | 164 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category` | template_setting | Shipping & guarantee | needs-review |  |
 | 165 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/question` | template_setting | How quickly will I notice a difference? | approved |  |
 | 166 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer` | template_setting | Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see … | corrected | C C24 |
@@ -595,13 +595,13 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 74 | `product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/description` | template_setting | Spit out the excess. Do not rinse afterwards. | approved |  |
 | 75 | `product.subscription-item:research_behind_system_EkjATL/subheading` | template_setting | CLINICALLY BACKED ORAL CARE | approved |  |
 | 76 | `product.subscription-item:research_behind_system_EkjATL/heading` | template_setting | The research behind the system | approved |  |
-| 77 | `product.subscription-item:research_behind_system_EkjATL/bottom_text` | template_setting | Built for people who read the label, check the research and want their daily care to hold up. Meta-… | approved |  |
+| 77 | `product.subscription-item:research_behind_system_EkjATL/bottom_text` | template_setting | Built for people who read the label, check the research and want their daily care to hold up. Meta-… | needs-review | C C68 |
 | 78 | `product.subscription-item:research_behind_system_EkjATL/button_label` | template_setting | Explore the full evidence base | approved |  |
 | 79 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/subheading` | template_setting | NANO-HYDROXYAPATITE | approved |  |
 | 80 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/heading` | template_setting | Nano-HAp sealed 98% of open dentine tubules. | needs-review | C C60 |
 | 81 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/subtext` | template_setting | Human dentine discs · 7 days | approved |  |
 | 82 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/result_label` | template_setting | RESULT | approved |  |
-| 83 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/result_text` | template_setting | 98% occlusion vs 82% and 65% for two other desensitising technologies | approved |  |
+| 83 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/result_text` | template_setting | 98% occlusion vs 82% and 65% for two other desensitising technologies | needs-review | C C60 |
 | 84 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/method_label` | template_setting | METHOD | approved |  |
 | 85 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/method_text` | template_setting | In vitro SEM comparison of three pastes, ~1% nHAp. | approved |  |
 | 86 | `product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/link_label` | template_setting | Kulal et al. · 2016 · J Clin Diagn Res | approved | NT |
@@ -610,7 +610,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 89 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/heading` | template_setting | Poorer oral health was linked with poorer sleep. | needs-review | C C61 |
 | 90 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/subtext` | template_setting | 36,559 people · 8 studies | approved |  |
 | 91 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/result_label` | template_setting | RESULT | approved |  |
-| 92 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/result_text` | template_setting | SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp; | approved |  |
+| 92 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/result_text` | template_setting | SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp; | needs-review | C C61 |
 | 93 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/method_label` | template_setting | METHOD | approved |  |
 | 94 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/method_text` | template_setting | Meta-analysis of 8 studies, 2015–2023. | approved |  |
 | 95 | `product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/link_label` | template_setting | Lei & Hu · 2025 · Biomedical Reports | approved | NT |
@@ -619,7 +619,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 98 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/heading` | template_setting | Xylitol lowered tooth decay compared with controls. | needs-review | C C62 |
 | 99 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/subtext` | template_setting | 1,478 people · 7 trials | approved |  |
 | 100 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/result_label` | template_setting | Result | approved |  |
-| 101 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/result_text` | template_setting | SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83 | approved |  |
+| 101 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/result_text` | template_setting | SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83 | needs-review | C C62 |
 | 102 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_label` | template_setting | Method | approved |  |
 | 103 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_text` | template_setting | Systematic review and meta-analysis of 7 clinical trials. | approved |  |
 | 104 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/link_label` | template_setting | Janakiram et al. · 2017 · J Nat Sci Biol Med | approved | NT |
@@ -628,7 +628,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 107 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/heading` | template_setting | Nano-HAp beat fluoride on tooth sensitivity. | needs-review | C C63 |
 | 108 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subtext` | template_setting | 105 people · 4 weeks | approved |  |
 | 109 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/result_label` | template_setting | RESULT | approved |  |
-| 110 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/result_text` | template_setting | Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05 | approved |  |
+| 110 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/result_text` | template_setting | Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05 | needs-review | C C63 |
 | 111 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_label` | template_setting | METHOD | approved |  |
 | 112 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_text` | template_setting | Double-blind randomised controlled trial, three arms. | approved |  |
 | 113 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/link_label` | template_setting | Vano et al. · 2018 · Clin Oral Investig | approved | NT |
@@ -637,7 +637,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 116 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/heading` | template_setting | No SLS meant fewer and shorter canker sores. | needs-review | C C64 |
 | 117 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subtext` | template_setting | 124 people · 4 crossover RCTs | approved |  |
 | 118 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/result_label` | template_setting | RESULT | approved |  |
-| 119 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/result_text` | template_setting | Fewer ulcers, shorter duration, fewer episodes, less pain | approved |  |
+| 119 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/result_text` | template_setting | Fewer ulcers, shorter duration, fewer episodes, less pain | needs-review | C C64 |
 | 120 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_label` | template_setting | METHOD | approved |  |
 | 121 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_text` | template_setting | Systematic review and meta-analysis of 4 crossover RCTs. | approved |  |
 | 122 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/link_label` | template_setting | Alli et al. · 2019 · J Oral Pathol Med | approved | NT |
@@ -768,7 +768,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 247 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#08` | metafield | Week 1 | admin-held |  |
 | 248 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#09` | metafield | — sensitivity starts to fade, the mineral layer builds | admin-held | C C95 |
 | 249 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#10` | metafield | Week 2 | admin-held |  |
-| 250 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#11` | metafield | — calmer gums, fresher breath, morning and night | admin-held |  |
+| 250 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#11` | metafield | — calmer gums, fresher breath, morning and night | admin-held | C C94 |
 | 251 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#12` | metafield | Week 4 | admin-held |  |
 | 252 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#13` | metafield | — less plaque, mouth bacteria back in balance (oral microbiome) | admin-held | C C96 |
 | 253 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#14` | metafield | Week 6 | admin-held |  |
@@ -842,7 +842,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 321 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#53` | metafield | The first week: | admin-held |  |
 | 322 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#54` | metafield | the velvety foam and the leave-on feel are what people notice first. By the fifth brush it’s the sm… | admin-held |  |
 | 323 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#55` | metafield | Quality & safety | admin-held |  |
-| 324 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#56` | metafield | Safety-assessed for leave-on use | admin-held |  |
+| 324 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#56` | metafield | Safety-assessed for leave-on use | admin-held | C C93 |
 | 325 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#57` | metafield | Independent EU-qualified assessor · Reg. 1223/2009 Annex I | admin-held |  |
 | 326 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#58` | metafield | CPSR · 2026 | admin-held |  |
 | 327 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#59` | metafield | VIEW ASSESSMENT SUMMARY | admin-held |  |
@@ -881,7 +881,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 360 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#92` | metafield | 100 nm · rod-shaped, per SCCS | admin-held |  |
 | 361 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#93` | metafield | Low–medium abrasivity | admin-held |  |
 | 362 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#94` | metafield | Mineral whitening | admin-held |  |
-| 363 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#95` | metafield | Leave-on safe | admin-held |  |
+| 363 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#95` | metafield | Leave-on safe | admin-held | C C93 |
 | 364 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96` | metafield | Safe to swallow | admin-held | C C91 |
 | 365 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#97` | metafield | EU CPNP-notified | admin-held |  |
 | 366 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#98` | metafield | Request the evidence pack, patient-ready materials, professional samples and technical documentatio… | admin-held |  |
