@@ -8,12 +8,13 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 61,
+  "admin": 57,
+  "held": 4,
   "translated": 16
  },
  "flag_counts": {
   "not-rendered": 1,
-  "pending-claim-review": 21,
+  "pending-claim-review": 14,
   "pending-en-review": 1,
   "source-defect": 9,
   "wording-adapted": 3
@@ -59,7 +60,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "needs-review"
   },
   {
@@ -84,11 +85,9 @@
    "en_sha1": "c8640920c1cfc947a893fe59b9e8d5277db778d2",
    "fr": "Satisfait ou remboursé 60 jours",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "The first-pass claims scan marked this 'unsupported' on the word 'guarantee'; it is offer wording, not a health claim, so it is translated (glossary trust-row form) and left for the claims review to confirm. Claims scan (first pass, batches 05-07): unsupported; translated faithfully, not softened.",
-   "source_status": "needs-review"
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
   },
   {
    "id": "product:main/icon_with_text_xhaDGB/heading_2",
@@ -262,10 +261,8 @@
    "en_sha1": "ea8a3c780636756e532ad6f2949fd5676412f0c1",
    "fr": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon",
    "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "",
    "source_status": "admin-held"
   },
   {
@@ -334,7 +331,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -350,7 +347,7 @@
     "pending-claim-review",
     "source-defect"
    ],
-   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -365,7 +362,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -381,7 +378,7 @@
     "pending-claim-review",
     "source-defect"
    ],
-   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -409,7 +406,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -424,7 +421,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -473,13 +470,12 @@
    "key_path": "seo.description",
    "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you fall asleep at night. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually har",
    "en_sha1": "2308852066a80c62e376ed89dc1acd124302bda4",
-   "fr": "Un soin pour votre esprit, votre bouche et votre âme. Un dentifrice qui vous aide à vous endormir le soir. Avec des minéraux de qualité supérieure comme la nano-HAp et des nootropiques actifs, Karmicare vous aide à atteindre un équilibre optimal entre esprit et bouche. Contrairement aux soins bucco-dentaires fluorés qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise avec les rythmes circadiens de votre corps.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [
-    "pending-claim-review",
     "source-defect"
    ],
-   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
    "source_status": "admin-held"
   },
   {
@@ -502,13 +498,12 @@
    "key_path": "seo.description",
    "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you get up in the morning. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually ha",
    "en_sha1": "70a6ebd2757ad3dee5ec8ae2f869f7124b0231a8",
-   "fr": "Un soin pour votre esprit, votre bouche et votre âme. Un dentifrice qui vous aide à vous lever le matin. Avec des minéraux de qualité supérieure comme la nano-HAp et des nootropiques actifs, Karmicare vous aide à atteindre un équilibre optimal entre esprit et bouche. Contrairement aux soins bucco-dentaires fluorés qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise avec les rythmes circadiens de votre corps.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [
-    "pending-claim-review",
     "source-defect"
    ],
-   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
    "source_status": "admin-held"
   },
   {
@@ -533,10 +528,8 @@
    "en_sha1": "e92ed45a2b78310dc7ca705e60b0fd01fcff0ae2",
    "fr": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon<br><br><br>",
    "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "",
    "source_status": "admin-held"
   },
   {
@@ -605,7 +598,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -635,7 +628,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -650,7 +643,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -665,7 +658,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -736,7 +729,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -920,7 +913,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -930,12 +923,10 @@
    "key_path": "body_html#b004",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
    "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
-   "fr": "Contrairement aux soins bucco-dentaires fluorés qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise véritablement avec les rythmes circadiens de votre corps.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1028,7 +1019,7 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
    "source_status": "admin-held"
   },
   {
@@ -1038,12 +1029,10 @@
    "key_path": "body_html#b004",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
    "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
-   "fr": "Contrairement aux soins bucco-dentaires fluorés qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise véritablement avec les rythmes circadiens de votre corps.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
