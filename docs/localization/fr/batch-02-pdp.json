@@ -15,7 +15,7 @@
   "translated": 141
  },
  "flag_counts": {
-  "fit-risk": 10,
+  "fit-risk": 19,
   "gendered-title": 14,
   "legal-review": 1,
   "not-rendered": 6,
@@ -147,7 +147,7 @@
    "flags": [
     "fit-risk"
    ],
-   "notes": "Shorter fallback if the line wraps: '0 € Care Credit · 0 € récompense contrôle'.",
+   "notes": "Shorter fallback if the line wraps: '0 € Care Credit · 0 € récompense contrôle'.",
    "source_status": "approved"
   },
   {
@@ -293,8 +293,10 @@
    "en_sha1": "8688b8a48f01c5ee1c89edcee982e6a3b39fbbe6",
    "fr": "Commencer maintenant",
    "status": "translated",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 20 chars vs EN 9; exact FR kept, fit checked at the integration preview.",
    "source_status": "approved"
   },
   {
@@ -453,8 +455,10 @@
    "en_sha1": "8688b8a48f01c5ee1c89edcee982e6a3b39fbbe6",
    "fr": "Commencer maintenant",
    "status": "translated",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 20 chars vs EN 9; exact FR kept, fit checked at the integration preview.",
    "source_status": "approved"
   },
   {
@@ -2127,7 +2131,7 @@
    "flags": [
     "fit-risk"
    ],
-   "notes": "Receipt line; 31 chars vs EN 20. Shortest fallback: '20 % reversés'.",
+   "notes": "Receipt line; 31 chars vs EN 20. Shortest fallback: '20 % reversés'.",
    "source_status": "approved"
   },
   {
@@ -2600,8 +2604,10 @@
    "en_sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
    "fr": "Commencer votre Rythme 60 jours",
    "status": "theme-key",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 31 chars vs EN 24; exact FR kept, fit checked at the integration preview.",
    "source_status": "needs-key"
   },
   {
@@ -2665,8 +2671,10 @@
    "en_sha1": "f640f4b30fa9f214a383567ee7c9175fff765a03",
    "fr": "Kit de bienvenue : deux brosses à dents + fil dentaire",
    "status": "theme-key",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 54 chars vs EN 37; exact FR kept, fit checked at the integration preview.",
    "source_status": "needs-key"
   },
   {
@@ -2704,8 +2712,10 @@
    "en_sha1": "3db357013821815cf32ef7e89089989882f0006f",
    "fr": "Suspendez ou arrêtez à tout moment",
    "status": "theme-key",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 34 chars vs EN 21; exact FR kept, fit checked at the integration preview.",
    "source_status": "needs-key"
   },
   {
@@ -2957,8 +2967,10 @@
    "en_sha1": "6f12eace9b7e8c1340626d9ac3283b6755e4ea50",
    "fr": "expédition tous les 60 jours",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 28 chars vs EN 19; exact FR kept, fit checked at the integration preview.",
    "source_status": "admin-held"
   },
   {
@@ -2983,8 +2995,10 @@
    "en_sha1": "6f12eace9b7e8c1340626d9ac3283b6755e4ea50",
    "fr": "expédition tous les 60 jours",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 28 chars vs EN 19; exact FR kept, fit checked at the integration preview.",
    "source_status": "admin-held"
   },
   {
@@ -6171,8 +6185,10 @@
    "en_sha1": "22ee81fbbeda76ec0ee6ee5f744ede023eb9cdd6",
    "fr": "Essayer une fois",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 16 chars vs EN 8; exact FR kept, fit checked at the integration preview.",
    "source_status": "admin-held"
   },
   {
@@ -6314,8 +6330,10 @@
    "en_sha1": "e3d380554eee2d5bde4889dc8de77e3cad4ec3af",
    "fr": "Commencer le Rythme 60 jours",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 28 chars vs EN 19; exact FR kept, fit checked at the integration preview.",
    "source_status": "admin-held"
   },
   {

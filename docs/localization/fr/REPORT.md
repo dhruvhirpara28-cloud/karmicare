@@ -222,21 +222,30 @@ No approved FR copy exists, so every FR term is proposed.
 | News (blog) | *Actualités* | |
 | Health Rewards (old product.json card) | kept in English, as written | |
 
-## Fit risks (11, batches 01–02 only)
+## Fit risks (25 entries; textual triage, not measured overflow)
 
 | Entry | EN chars | FR chars | Fallback |
 |---|---:|---:|---|
 | Hero, two-formulas and benefits button "BEGIN YOUR 60-DAY RITUAL" | 24 | 31 | COMMENCER LE RITUEL |
 | Buy box `welcome_kit_title` | 30 | 31 | Glossary long form (47) if there is room |
-| Buy box `try_once_note` | 42 | 56 | 0 € Care Credit · 0 € récompense contrôle |
-| Care receipt `line_year/note` | 20 | 31 | 20 % reversés |
+| Buy box `try_once_note` | 42 | 56 | 0 € Care Credit · 0 € récompense contrôle |
+| Care receipt `line_year/note` | 20 | 31 | 20 % reversés |
 | Sticky bar `credit_checkup` | 44 | 49 (short form) | Full form 63 |
 | Sticky bar `stop_year` | 43 | 51 | |
 | Sticky bar `try_once` | 48 | 53 | |
 | Treatment journey `#23` | 44 | 48 | Full form in notes |
 | Comparison `#18` "Weeks to notice" | 15 | 22 | |
+| Buy and sticky button "Begin Now" (PDP and `product.json`, 4 entries) | 9 | 20 | exact FR kept (R3 F8) |
+| Sticky bar `cta_rhythm` (`main-product.liquid:1018`) | 24 | 31 | exact FR kept (R3 F8) |
+| Sticky bar `kit` (`:1049`) | 37 | 54 | exact FR kept (R3 F8) |
+| Sticky bar `stop_rhythm` (`:1067`) | 21 | 34 | exact FR kept (R3 F8) |
+| Plan name "ships every 60 days" (2 selling plans) | 19 | 28 | exact FR kept (R3 F8) |
+| Compare table `#14` "Try Once" | 8 | 16 | exact FR kept (R3 F8) |
+| Compare table `#25` "Begin 60-Day Rhythm" | 19 | 28 | exact FR kept (R3 F8) |
+| Compare table `#11` "Skip, pause or cancel" | 21 | 43 | full meaning kept (R3 F3) |
+| Research card `card_JeERX6` heading (homepage and PDP) | 44 | 72 | full meaning kept (R3 F4) |
 
-Batches 04–08 have no tight UI strings beyond page and menu titles, which fit.
+Batch 05 also contains buy-button and sticky-button labels requiring fit review; legal navigation labels can expand too. Character counts identify risks, while rendered French fit remains pending integration and preview.
 
 ## Source defects and observations
 
