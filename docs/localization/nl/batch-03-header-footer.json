@@ -7,9 +7,9 @@
  "counts": {
   "translated": 5,
   "pending-claim-review": 1,
-  "dawn-nl": 11,
+  "dawn-nl": 9,
+  "held": 5,
   "theme-key": 10,
-  "held": 3,
   "admin": 11
  },
  "fit_risk": [
@@ -205,10 +205,10 @@
    "key_path": "general.social.links.facebook",
    "en": "Facebook",
    "en_sha1": "82da67b211249624f24f3c7db5642a5112c9446f",
-   "nl": "Facebook",
-   "status": "dawn-nl",
+   "nl": null,
+   "status": "held",
    "flags": [],
-   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+   "notes": "never-translate; existing Dawn locale value remains unchanged"
   },
   {
    "id": "locale:general.social.links.instagram",
@@ -217,10 +217,10 @@
    "key_path": "general.social.links.instagram",
    "en": "Instagram",
    "en_sha1": "5721bbef40b22bbdb2e6a062b096d9b48735c2ff",
-   "nl": "Instagram",
-   "status": "dawn-nl",
+   "nl": null,
+   "status": "held",
    "flags": [],
-   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+   "notes": "never-translate; existing Dawn locale value remains unchanged"
   },
   {
    "id": "locale:newsletter.label",
