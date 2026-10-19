@@ -1,0 +1,326 @@
+{
+ "batch": "batch-06-content-pages",
+ "lang": "fr",
+ "source_file": "docs/source-copy/batches/batch-06-content-pages.json",
+ "source_digest": "f78c391aa267b82eb0c85af36edea6e4583651bf",
+ "source_entries": 21,
+ "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
+ "translated": "2026-10-19",
+ "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
+ "counts": {
+  "admin": 19,
+  "held": 2
+ },
+ "flag_counts": {
+  "pending-claim-review": 13,
+  "wording-adapted": 7
+ },
+ "entries": [
+  {
+   "id": "admin:page:why-karmicare:title",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "title",
+   "en": "Why Karmicare",
+   "en_sha1": "c52b2def440fe0cc30a8619e02255e549c1c08e2",
+   "fr": "Pourquoi Karmicare",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-karmicare:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "body_html#b001",
+   "en": "The moments before you sleep and after you wake determine the quality of your life",
+   "en_sha1": "9f1d83cdc091bcabdd9f54d43520e174eee9887b",
+   "fr": "Les moments qui précèdent votre sommeil et ceux qui suivent votre réveil déterminent la qualité de votre vie",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-karmicare:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "seo.title",
+   "en": "Why Karmicare – KARMICARE",
+   "en_sha1": "dbecd8d3752ef888203a70061a80afe14345b61f",
+   "fr": "Pourquoi Karmicare – KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-karmicare:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "why-karmicare",
+   "key_path": "seo.description",
+   "en": "The moments before you sleep and after you wake determine the quality of your life",
+   "en_sha1": "9f1d83cdc091bcabdd9f54d43520e174eee9887b",
+   "fr": "Les moments qui précèdent votre sommeil et ceux qui suivent votre réveil déterminent la qualité de votre vie",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:title",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "title",
+   "en": "Why use Hydroxyapatite Toothpaste",
+   "en_sha1": "bf7111a4e55a22ca0fbde59be9ad5605c78caf17",
+   "fr": "Pourquoi choisir un dentifrice à l’hydroxyapatite",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "'use' rendered 'choisir' (banned word); the handle stays why-use-hydroxyapatite-toothpaste. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "body_html#b001",
+   "en": "Here’s why you should start using hydroxyapatite toothpaste",
+   "en_sha1": "c287bc1ec38e9594cf1d492533eff77d0e191e35",
+   "fr": "Voici pourquoi vous devriez passer au dentifrice à l’hydroxyapatite",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "seo.title",
+   "en": "Why use Hydroxyapatite Toothpaste – KARMICARE",
+   "en_sha1": "a094127c6d3e075cd9aeb928a48662872970f1bd",
+   "fr": "Pourquoi choisir un dentifrice à l’hydroxyapatite – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-use-hydroxyapatite-toothpaste:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "why-use-hydroxyapatite-toothpaste",
+   "key_path": "seo.description",
+   "en": "Here’s why you should start using hydroxyapatite toothpaste",
+   "en_sha1": "c287bc1ec38e9594cf1d492533eff77d0e191e35",
+   "fr": "Voici pourquoi vous devriez passer au dentifrice à l’hydroxyapatite",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:title",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "title",
+   "en": "Why stop using fluoride toothpaste",
+   "en_sha1": "3cf6a03826094fc9555972cb192123c126d28cbe",
+   "fr": "Pourquoi arrêter le dentifrice au fluor",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "'stop using' rendered 'arrêter' (banned word 'use'); the handle stays why-stop-using-fluoride-toothpaste. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "body_html#b001",
+   "en": "There’s no fluoride in our Awake or Asleep toothpaste. Nor will there ever be<br><br>",
+   "en_sha1": "1c5963636015f94d36a2b72c0934820c81248962",
+   "fr": "Il n’y a pas de fluor dans nos dentifrices Awake et Asleep. Et il n’y en aura jamais<br><br>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:body_html#b002",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "body_html#b002",
+   "en": "Here’s why you should stop using fluoride toothpaste",
+   "en_sha1": "733912432c0e858c7dbe799f58717c45d690a585",
+   "fr": "Voici pourquoi vous devriez arrêter le dentifrice au fluor",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "seo.title",
+   "en": "Why stop using fluoride toothpaste – KARMICARE",
+   "en_sha1": "499f85d8db1c99e534c673748b49343f856224d7",
+   "fr": "Pourquoi arrêter le dentifrice au fluor – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:why-stop-using-fluoride-toothpaste:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "why-stop-using-fluoride-toothpaste",
+   "key_path": "seo.description",
+   "en": "There’s no fluoride in our Awake or Asleep toothpaste. Nor will there ever be Here’s why you should stop using fluoride toothpaste",
+   "en_sha1": "54b5d724d380330bd7d465ce29910f6f5638bd64",
+   "fr": "Il n’y a pas de fluor dans nos dentifrices Awake et Asleep. Et il n’y en aura jamais Voici pourquoi vous devriez arrêter le dentifrice au fluor",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "The EN joins the two body lines without a stop ('Nor will there ever be Here's why …'); the FR keeps that as written. Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:nhap-technology:title",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "title",
+   "en": "nHAp Technology",
+   "en_sha1": "e2682400fb89254e574b2fc620232f6197c75057",
+   "fr": "Technologie nHAp",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:nhap-technology:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "body_html#b001",
+   "en": "Dive deep into the benefits of NASA’s favorite supplement for oral health",
+   "en_sha1": "74cd8126bb75f1998d034857092a4b69fadfcaa0",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: first-pass claims scan of batches 05-07 (automatic scan (keyword match: NASA); pending manual review); translate after the claims review",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:nhap-technology:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "seo.title",
+   "en": "nHAp Technology – KARMICARE",
+   "en_sha1": "6f9db2e10aa69de8133d8812cd109754f5df6db0",
+   "fr": "Technologie nHAp – KARMICARE",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims scan (first pass, batches 05-07): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:nhap-technology:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "seo.description",
+   "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Dive deep into the benefits of NASA’s favorite supplement for oral health",
+   "en_sha1": "518e171ea8390b669611c8f82b1e81fa2e4352a6",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: first-pass claims scan of batches 05-07 (automatic scan (keyword match: NASA); pending manual review); translate after the claims review",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:articles:title",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "title",
+   "en": "Articles",
+   "en_sha1": "7c422841b7e3951946583038790545c4ed38481b",
+   "fr": "Articles",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:articles:body_html#b001",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "body_html#b001",
+   "en": "Discover our latest articles",
+   "en_sha1": "7c931f90b7c07f41d8d80fbc2b6e7b6d0cd50867",
+   "fr": "Découvrez nos derniers articles",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:articles:seo.title",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "seo.title",
+   "en": "Articles – KARMICARE",
+   "en_sha1": "60032fa807d49cdc468949d346fe6cef7ae2c97f",
+   "fr": "Articles – KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:articles:seo.description",
+   "resource_type": "page",
+   "file_or_handle": "articles",
+   "key_path": "seo.description",
+   "en": "Discover our latest articles",
+   "en_sha1": "7c931f90b7c07f41d8d80fbc2b6e7b6d0cd50867",
+   "fr": "Découvrez nos derniers articles",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  }
+ ]
+}

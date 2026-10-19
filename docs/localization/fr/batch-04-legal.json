@@ -13,7 +13,9 @@
   "translated": 143
  },
  "flag_counts": {
-  "legal-review": 956
+  "legal-review": 956,
+  "pending-en-review": 3,
+  "source-defect": 3
  },
  "entries": [
   {
@@ -328,7 +330,7 @@
    "flags": [
     "legal-review"
    ],
-   "notes": "Legal text: Victor's or a lawyer's review before the FR page is published.",
+   "notes": "'WER/CDE' kept as in EN; elsewhere 'WER' (the Dutch abbreviation) is rendered 'CDE', the French abbreviation of the same code. Legal text: Victor's or a lawyer's review before the FR page is published.",
    "source_status": "approved"
   },
   {
@@ -643,7 +645,7 @@
    "flags": [
     "legal-review"
    ],
-   "notes": "Legal text: Victor's or a lawyer's review before the FR page is published.",
+   "notes": "Keeps 'Le service client répond en anglais et en néerlandais' as in EN (B1a decision 2). Addresses: street, number and postcode as in EN; city and country names in French; 'box' rendered 'boîte'. Links to consumerombudsman.be/en kept (a /fr version exists). Legal text: Victor's or a lawyer's review before the FR page is published.",
    "source_status": "approved"
   },
   {
@@ -1241,9 +1243,10 @@
    "fr": "<p><strong>Les cookies essentiels font fonctionner la boutique. Tout le reste attend votre consentement, et vous pouvez changer d’avis à tout moment.</strong></p><p>Notre site utilise des cookies et des technologies similaires (stockage local, jetons de session, balises pixel) pour fonctionner, mémoriser vos préférences et, avec votre consentement, mesurer le trafic et afficher des publicités pertinentes.</p><p><strong>9.1 Catégories de cookies</strong></p><ul><li><strong>Strictement nécessaires :</strong> fonctionnement de base de la boutique, sécurité, sessions, panier et paiement. Ils ne nécessitent aucun consentement et ne peuvent pas être désactivés (exemption de l’art. 5, par. 3 de la directive vie privée et communications électroniques).</li><li><strong>Fonctionnels :</strong> mémorisent votre langue (en, nl, fr), votre pays et votre préférence Jour/Nuit.</li><li><strong>Performance et statistiques :</strong> mesurent le trafic, les sites référents et la performance du site (par exemple Google Analytics 4, Hotjar). Actifs <strong>uniquement après votre consentement explicite</strong>.</li><li><strong>Marketing et publicité :</strong> déposés par des partenaires publicitaires (par exemple Meta Pixel, TriplePixel, Klaviyo) pour suivre les visites sur différents sites et établir des profils d’intérêts à des fins de publicité ciblée. Actifs <strong>uniquement après votre consentement explicite</strong>.</li></ul><p><strong>9.2 Vos choix de consentement</strong></p><p>Lors de votre première visite, notre bannière de consentement vous permet d’accepter tous les cookies, de refuser tous les cookies non essentiels ou de choisir par catégorie.</p><p>Aucun cookie non essentiel ni script de suivi ne s’exécute avant que vous n’y consentiez. Vous pouvez modifier ou retirer votre choix à tout moment via le lien « Préférences en matière de cookies » de notre pied de page.</p>",
    "status": "translated",
    "flags": [
-    "legal-review"
+    "legal-review",
+    "source-defect"
    ],
-   "notes": "Legal text: Victor's or a lawyer's review before the FR page is published.",
+   "notes": "The EN names the footer link 'Cookie settings' while the footer shows 'Cookie preferences'; the FR names the FR footer link ('Préférences en matière de cookies'). Legal text: Victor's or a lawyer's review before the FR page is published.",
    "source_status": "approved"
   },
   {
@@ -1511,9 +1514,10 @@
    "fr": "<p><strong>Ces conditions s’appliquent à chaque commande et à chaque adhésion que vous passez sur karmicare.com.</strong></p><ol><li>Les présentes conditions générales (les « Conditions ») s’appliquent à toutes les offres, commandes, contrats de vente et contrats d’adhésion conclus via notre site entre KARMICA BV (« nous », le « vendeur ») et tout acheteur (« vous », le « client »).</li><li>Est un <strong>« consommateur »</strong> toute personne physique qui agit à des fins qui n’entrent pas dans le cadre de son activité commerciale, industrielle, artisanale ou libérale (article I.1, 2° du Code de droit économique belge, CDE). Si vous commandez en tant que professionnel dentaire, cabinet ou revendeur, des conditions B2B spécifiques s’appliquent en plus des présentes Conditions.</li><li><strong>Champ d’application territorial :</strong> nous livrons les consommateurs dans les États membres de l’Union européenne. Nous ne livrons pas en dehors de l’Union européenne.</li><li><strong>Non-discrimination et blocage géographique (règlement (UE) 2018/302) :</strong> nous n’appliquons aucune condition discriminatoire ni aucun blocage géographique fondés sur la nationalité, le lieu de résidence ou le lieu d’établissement des clients de l’UE.</li><li><strong>Âge :</strong> en passant commande, vous confirmez avoir au moins 18 ans ou disposer du consentement d’un parent ou d’un tuteur légal.</li><li><strong>Accès aux présentes Conditions :</strong> les présentes Conditions sont disponibles à tout moment à l’adresse <a href=\"https://www.karmicare.com/en/pages/terms-and-conditions\" target=\"_blank\">karmicare.com/en/pages/terms-and-conditions</a> et vous sont fournies sur un support durable et imprimable avec votre confirmation de commande.</li></ol>",
    "status": "translated",
    "flags": [
-    "legal-review"
+    "legal-review",
+    "source-defect"
    ],
-   "notes": "Legal text: Victor's or a lawyer's review before the FR page is published.",
+   "notes": "The link still points at the legacy EN page /en/pages/terms-and-conditions (the 2.0 text lives at /pages/terms-and-conditions-1); href kept as in EN, the FR page should link /fr/pages/terms-and-conditions-1 once the redirect or link is fixed (Admin owner). Legal text: Victor's or a lawyer's review before the FR page is published.",
    "source_status": "approved"
   },
   {
@@ -2211,8 +2215,10 @@
    "en_sha1": "12f419f07b5b66f06c143feb1a40290934ed922b",
    "fr": "Nouveaux droits des consommateurs – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-en-review"
+   ],
+   "notes": "The SEO titles of the three 2.0 legal pages start with 'New'; translated as written (Victor may want to drop 'New' in EN).",
    "source_status": "admin-held"
   },
   {
@@ -2224,8 +2230,10 @@
    "en_sha1": "c9265b9ad7b3c4d605497a7f057d7156f3673fdb",
    "fr": "Nouvelle politique de confidentialité – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-en-review"
+   ],
+   "notes": "Starts with 'New' in EN; translated as written.",
    "source_status": "admin-held"
   },
   {
@@ -2252,8 +2260,10 @@
    "en_sha1": "f1b7a0098c167e08e3537071cbcf87511d82e38b",
    "fr": "Nouvelles conditions générales – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-en-review"
+   ],
+   "notes": "Starts with 'New' in EN; translated as written.",
    "source_status": "admin-held"
   },
   {
@@ -9842,9 +9852,10 @@
    "fr": "<strong>Accès aux présentes Conditions :</strong> les présentes Conditions sont disponibles à tout moment à l’adresse <a href=\"https://www.karmicare.com/en/pages/terms-and-conditions\">karmicare.com/en/pages/terms-and-conditions</a> et vous sont fournies sur un support durable et imprimable avec votre confirmation de commande.",
    "status": "admin",
    "flags": [
-    "legal-review"
+    "legal-review",
+    "source-defect"
    ],
-   "notes": "Legal text: Victor's or a lawyer's review before the FR page is published.",
+   "notes": "The link still points at the legacy EN page /en/pages/terms-and-conditions (the 2.0 text lives at /pages/terms-and-conditions-1); href kept as in EN, the FR page should link /fr/pages/terms-and-conditions-1 once the redirect or link is fixed (Admin owner). Legal text: Victor's or a lawyer's review before the FR page is published.",
    "source_status": "admin-held"
   },
   {
