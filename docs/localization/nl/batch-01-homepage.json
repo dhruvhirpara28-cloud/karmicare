@@ -1,0 +1,2837 @@
+{
+ "lang": "nl",
+ "batch": "batch-01-homepage",
+ "source": "docs/source-copy/batches/batch-01-homepage.json",
+ "source_digest": "b685b73d4dcdfddd153d4f130c0aa6806b9715ed",
+ "source_entries": 221,
+ "counts": {
+  "translated": 147,
+  "held": 20,
+  "pending-claim-review": 24,
+  "dawn-nl": 2,
+  "theme-key": 26,
+  "admin": 2
+ },
+ "fit_risk": [
+  "index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2",
+  "index:stat_strip_karmicare/stat_5/heading",
+  "index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/heading",
+  "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading",
+  "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/heading",
+  "index:trusted_professionals_HAqYth/card_HFdkaD/text",
+  "index:research_behind_system_EkjATL/card_bDxUVT/result_label",
+  "index:research_behind_system_EkjATL/card_yMiD9D/result_label",
+  "index:research_behind_system_EkjATL/card_fmFMFd/result_label",
+  "index:research_behind_system_EkjATL/card_Hi7YUD/result_label",
+  "index:research_behind_system_EkjATL/card_JeERX6/result_label",
+  "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
+  "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
+  "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html",
+  "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1",
+  "index:care_comes_back/step_next_order/title",
+  "liquid:snippets/loop-widget-standard.liquid:123",
+  "liquid:snippets/loop-widget-standard.liquid:140"
+ ],
+ "status_legend": {
+  "translated": "ready to register",
+  "admin": "translated; registered through Shopify translation resources (product, metafield, metaobject, page, policy, article, menu, app)",
+  "theme-key": "translated; hardcoded EN in theme code, goes into locales/nl.json once the key exists",
+  "legal-review": "translated; needs Victor's or a lawyer's review before publishing",
+  "pending-claim-review": "translated faithfully; the EN claim waits for sign-off (CLAIMS-REVIEW.md)",
+  "dawn-nl": "Dawn's own key; NL already in locales/nl.json (verify only)",
+  "held": "not translated; reason in notes"
+ },
+ "entries": [
+  {
+   "id": "index:hero_karmicare_XKKLDK/heading_RHmd8h/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.heading_RHmd8h.settings.heading",
+   "en": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
+   "en_sha1": "27396ef93a1b975c6c4d1ec7d270713d993a1caa",
+   "nl": "Je mond heeft een ritme <strong>Nu je mondzorg ook</strong>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/text_Y7L3hV/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.text_Y7L3hV.settings.text",
+   "en": "Karmicare is a day-and-night oral care system designed around your mouth’s 24-hour rhythm. Awake for activation. Asleep for restoration.",
+   "en_sha1": "1c9b9da1cffdaaf162e51bd94661750cc6fa934a",
+   "nl": "Karmicare is een mondzorgsysteem voor dag en nacht, ontworpen rond het 24-uursritme van je mond. Awake voor activatie. Asleep voor herstel.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.buttons_DpYxth.settings.button_label_1",
+   "en": "BEGIN YOUR 60-DAY RITUAL",
+   "en_sha1": "79b16af275133d0266d0ce1c2a6940e20d907526",
+   "nl": "BEGIN JE 60-DAGENRITUEEL",
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: 60-day ritual → 60-dagenritueel (built like the glossary's 60-dagenritme)"
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.buttons_DpYxth.settings.button_label_2",
+   "en": "WHY TWO FORMULAS?",
+   "en_sha1": "cf338d8c497d9797288b9469773fe3ae36f7bfd9",
+   "nl": "WAAROM TWEE FORMULES?",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "21 vs 17 chars; no shorter natural Dutch for 'why two formulas'"
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/awake_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.rhythm_toggle_ffWVXt.settings.awake_label",
+   "en": "AWAKE",
+   "en_sha1": "3558286538fe2bf00e7ae237d8fb55114e1f20d2",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/asleep_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.rhythm_toggle_ffWVXt.settings.asleep_label",
+   "en": "ASLEEP",
+   "en_sha1": "e0451ebec08c70bf5d5e20adf7e4986e3e4bce94",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/status_day_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.rhythm_toggle_ffWVXt.settings.status_day_text",
+   "en": "DAYTIME PROTECTION",
+   "en_sha1": "f7be7de3941ae4c777e3d96a8b30d74ce645d5b0",
+   "nl": "BESCHERMING OVERDAG",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/status_night_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.rhythm_toggle_ffWVXt.settings.status_night_text",
+   "en": "NIGHTTIME RESTORATION",
+   "en_sha1": "bccc8f06ce7dcc2f213e2d3089f321c6c45dc178",
+   "nl": "HERSTEL 'S NACHTS",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/testimonial_badge_h8d3WL/rating_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.rating_text",
+   "en": "4.8 (234)",
+   "en_sha1": "0b0daa0d40d9275488f9ceafd8dfaae471350a75",
+   "nl": "4,8 (234)",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:hero_karmicare_XKKLDK/testimonial_badge_h8d3WL/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.heading",
+   "en": "Backed by health professionals",
+   "en_sha1": "374eca1b99e0cc7ecd8eccd456238aaf2cc143bc",
+   "nl": "Gesteund door zorgprofessionals",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/tagline",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.settings.tagline",
+   "en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS",
+   "en_sha1": "1efa139722aaaea0bbfc7ce9db5640d2e955f5b1",
+   "nl": "GEKOZEN DOOR KPNI-THERAPEUTEN, FUNCTIONELE TANDARTSEN, GEZONDHEIDSBEWUSTE MENSEN",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "'health enthusiasts' → 'gezondheidsbewuste mensen' (neutral; 'gezondheidsfanaten' reads pejorative)"
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_1/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_1.settings.heading",
+   "en": "0%",
+   "en_sha1": "433bdb131b39ba99e3be2f0167024b2a56b4bf10",
+   "nl": "0%",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_1/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_1.settings.text",
+   "en": "fluoride, SLS",
+   "en_sha1": "d3dad630f3a7b19cca2a1a03ad61af4842367273",
+   "nl": "fluoride, SLS",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_2/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_2.settings.heading",
+   "en": "1 pump",
+   "en_sha1": "01d20bb68d9a907cf21d88389924b9adb823666d",
+   "nl": "1 pompje",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_2/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_2.settings.text",
+   "en": "the full dose",
+   "en_sha1": "98defb6f5b3077c636b902861fe5cb2e20ed5b3f",
+   "nl": "de hele dosis",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_3/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_3.settings.heading",
+   "en": "Clinically backed",
+   "en_sha1": "cbd4a4186dc817bd867a07f95b04c1ff996fdb50",
+   "nl": "Klinisch onderbouwd",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_3/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_3.settings.text",
+   "en": "Formulated on +36 studies",
+   "en_sha1": "9798dccf69dc813ba5f87e173683343e928265e1",
+   "nl": "Geformuleerd op +36 studies",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "EN says +36 studies here, 39 on the product page highlight and 'more than 38,000 people' in the research section; kept as EN, the numbers need one source"
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_4/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_4.settings.heading",
+   "en": "64 days",
+   "en_sha1": "31d59d51aaef7846a742f32941ccd20e073dace1",
+   "nl": "64 dagen",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_4/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_4.settings.text",
+   "en": "of AM/PM care per duo",
+   "en_sha1": "843612d02206f1110fc5292baf9f767f99e1eaee",
+   "nl": "AM/PM-zorg per duo",
+   "status": "translated",
+   "flags": [],
+   "notes": "AM/PM kept to fit (common in Dutch beauty copy); if space allows: 'ochtend- en avondzorg per duo'"
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_5/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_5.settings.heading",
+   "en": "No rinse",
+   "en_sha1": "0c9326cb3ae7b750146e40a8759c9b59fd095418",
+   "nl": "Niet spoelen",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "12 vs 8 chars; shortest natural form, matches the approved 'Spugen, niet spoelen'"
+  },
+  {
+   "id": "index:stat_strip_karmicare/stat_5/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.stat_strip_karmicare.blocks.stat_5.settings.text",
+   "en": "works after the brush",
+   "en_sha1": "70d8d769d343c3aff6cc6d9c2dc3d297b37bab4b",
+   "nl": "werkt na het poetsen",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/eyebrow",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.eyebrow",
+   "en": "CHRONOBIOLOGY",
+   "en_sha1": "5e370ea3873e30fc61105053e99883a2d9d4d0c3",
+   "nl": "CHRONOBIOLOGIE",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.title",
+   "en": "Your mouth runs on a 24-hour clock.",
+   "en_sha1": "6a076c3bc27f0f2268b68939509917bf9bbab008",
+   "nl": "Je mond loopt op een 24-uursklok.",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Je mond volgt een 24-uursklok."
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/description",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.description",
+   "en": "<p>Bacteria, saliva and acids each keep their own hours.&nbsp;</p><p>What it needs at 07:00 is not what it needs at 22:00.</p>",
+   "en_sha1": "3d299375c1bc970b32ae2d2685a9c18650ebdb46",
+   "nl": "<p>Bacteriën, speeksel en zuren houden er elk hun eigen uren op na.&nbsp;</p><p>Wat je mond om 07:00 nodig heeft, is niet wat hij om 22:00 nodig heeft.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/morning_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.morning_badge",
+   "en": "≈ 06:40 · Neisseria peaks",
+   "en_sha1": "a57b24415891f80488ddc9ad3c9a91023e2a3667",
+   "nl": "≈ 06:40 · Neisseria piekt",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/morning_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.morning_title",
+   "en": "Your mouth wakes up",
+   "en_sha1": "2252eebf3ce5afb7bf3a7cba6ba9854abda766dd",
+   "nl": "Je mond wordt wakker",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/morning_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.morning_text",
+   "en": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
+   "en_sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe",
+   "nl": "Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Je glazuur heeft eerst zijn schild nodig.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Glazuur heeft eerst zijn schild nodig."
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/night_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.night_badge",
+   "en": "≈ 22:00 · Fusobacterium peaks",
+   "en_sha1": "e0b425a0da5fd3f87ac5aa57ccb829a1f6d559d6",
+   "nl": "≈ 22:00 · Fusobacterium piekt",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/night_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.night_title",
+   "en": "Your mouth switches to repair",
+   "en_sha1": "02c410bf47096def4548a17be2bfa129ed8ec0d9",
+   "nl": "Je mond schakelt over op herstel",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/night_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.night_text",
+   "en": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
+   "en_sha1": "a7e571363ef9da44c32810243d3c785e41d0af88",
+   "nl": "Melatonine stijgt en je speekselstroom valt bijna stil. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Melatonine stijgt en je speeksel vloeit nog maar mondjesmaat. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog."
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/hint_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.hint_label",
+   "en": "DRAG THE RING · EXPLORE 24 HOURS",
+   "en_sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8",
+   "nl": "SLEEP AAN DE RING · VERKEN 24 UUR",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/footer_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.footer_text",
+   "en": "Formulated for both shifts: Awake by day, Asleep by night.",
+   "en_sha1": "61d06b63816484d100ca48ce1a77cad5d383ab1e",
+   "nl": "Geformuleerd voor beide diensten: Awake overdag, Asleep 's nachts.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:chronobiology_clock_karmicare/footer_link_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.chronobiology_clock_karmicare.settings.footer_link_text",
+   "en": "Read the science",
+   "en_sha1": "9d735e7e921227ea13fa840a0fc712c8b9748ee6",
+   "nl": "Lees het onderzoek",
+   "status": "translated",
+   "flags": [],
+   "notes": "Same link text as the approved Figma NL ('Lees het onderzoek')"
+  },
+  {
+   "id": "index:two_formulas_karmicare/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.subheading",
+   "en": "BIORHYTHMIC ORAL CARE",
+   "en_sha1": "9246ba66481b743bb3efa405e194f7b4961595ad",
+   "nl": "BIORITMISCHE MONDZORG",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.heading",
+   "en": "Two formulas. One system. <strong>Designed around you.</strong>",
+   "en_sha1": "937d227b7be59d066c5fc069631a970314e357d1",
+   "nl": "Twee formules. Eén systeem. <strong>Ontworpen rond jou.</strong>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/button_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.button_label",
+   "en": "BEGIN YOUR 60-DAY RITUAL",
+   "en_sha1": "79b16af275133d0266d0ce1c2a6940e20d907526",
+   "nl": "BEGIN JE 60-DAGENRITUEEL",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/button_subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.button_subtext",
+   "en": "€0.49 / brushing ritual",
+   "en_sha1": "108f6abba1c4bf98e74f239bc73661725990cad4",
+   "nl": "€0,49 / poetsritueel",
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: brushing ritual → poetsritueel"
+  },
+  {
+   "id": "index:two_formulas_karmicare/left_heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.left_heading",
+   "en": "Activated and strengthened by day",
+   "en_sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
+   "nl": "Overdag geactiveerd en versterkt",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/left_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.left_text",
+   "en": "Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated.",
+   "en_sha1": "c10d6776164399823a2ab386920bea7b08f3054b",
+   "nl": "Guarana, munt en limoen — een mineraal schild voor alles wat voor je ligt. Je ochtendritueel, geactiveerd.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/left_button_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.left_button_label",
+   "en": "SEE WHAT'S INSIDE",
+   "en_sha1": "9ed6ebf4f60ad579a416da1a52591fe23125846c",
+   "nl": "BEKIJK WAT ERIN ZIT",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/right_heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.right_heading",
+   "en": "Purified and restored by night",
+   "en_sha1": "9fa357b294b55bf318d29a9485744386026a7182",
+   "nl": "'s Nachts gezuiverd en hersteld",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/right_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.right_text",
+   "en": "Valerian, cinnamon and orange — a gentle reset for everything behind. Your evening ritual, complete.",
+   "en_sha1": "70d9e0e16909c395e86edee9b9cd0ff57c7a0f1d",
+   "nl": "Valeriaan, kaneel en sinaasappel — een zachte reset voor alles wat achter je ligt. Je avondritueel, compleet.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/right_button_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.right_button_label",
+   "en": "SEE WHAT'S INSIDE",
+   "en_sha1": "9ed6ebf4f60ad579a416da1a52591fe23125846c",
+   "nl": "BEKIJK WAT ERIN ZIT",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:two_formulas_karmicare/ingredients_list",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
+   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "en_sha1": "9b0de1e400cbe4cba706cac39339d2ec4852301d",
+   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>BIOFILMPREVENTIE</li><li>BELGISCHE FORMULERING</li><li>VEGAN & HALAL</li></ul>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.subheading",
+   "en": "the benefits",
+   "en_sha1": "22ceb96d69898589a8a513bdf95df318c84d6631",
+   "nl": "de voordelen",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.heading",
+   "en": "Clean is not the same as healthy.",
+   "en_sha1": "5cd146dde739a5e7ced2c63273ea0830cad56ec0",
+   "nl": "Schoon is niet hetzelfde als gezond.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.text",
+   "en": "<p>You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, keep your mouth in balance, morning and night. Not because you brush wrong. Because brushing cleans, and your mouth needs more than clean.</p>",
+   "en_sha1": "d56bd9f030f7c0c18df805dddcd62cf73021e9c5",
+   "nl": "<p>Je poetst elke dag. Karmicare laat die twee minuten meer doen: glazuur versterken, tandvlees tot rust brengen, je mond in balans houden, 's ochtends en 's avonds. Niet omdat je verkeerd poetst. Maar omdat poetsen reinigt, en je mond meer nodig heeft dan schoon.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "'settle gums' → 'tandvlees tot rust brengen' (not 'kalmeren' = soothe, to keep the claim as is)"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/button_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.button_label",
+   "en": "BEGIN YOUR 60-DAY RITUAL",
+   "en_sha1": "79b16af275133d0266d0ce1c2a6940e20d907526",
+   "nl": "BEGIN JE 60-DAGENRITUEEL",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/button_subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.button_subtext",
+   "en": "€0.49 / brushing ritual",
+   "en_sha1": "108f6abba1c4bf98e74f239bc73661725990cad4",
+   "nl": "€0,49 / poetsritueel",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/bottom_note",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.bottom_note",
+   "en": "*Reported outcomes vary. Mechanisms and published evidence are shown separately.",
+   "en_sha1": "9263b9be81c0ca28e6468183a3e75670348df822",
+   "nl": "*Gerapporteerde resultaten verschillen. Werkingsmechanismen en gepubliceerd bewijs worden apart getoond.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_qMHDBq.settings.label",
+   "en": "01 · NANO-HYDROXYAPATITE",
+   "en_sha1": "0c84e88ed0b1c46b357774e08dc0f0c28395897b",
+   "nl": "01 · NANO-HYDROXYAPATIET",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_qMHDBq.settings.heading",
+   "en": "Teeth that feel strong",
+   "en_sha1": "e7323cf3895d46f2707f6e70fe1ec1fc9bbed88d",
+   "nl": "Sterk aanvoelende tanden",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_qMHDBq.settings.text",
+   "en": "<p>New minerals with every brush. Cold or hot, no hesitation.</p>",
+   "en_sha1": "36f13619bd72bf4eede50c72f3aac21df29b1000",
+   "nl": "<p>Nieuwe mineralen bij elke poetsbeurt. Koud of warm, zonder aarzelen.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_pceBAE/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_pceBAE.settings.label",
+   "en": "02 · Essential oils",
+   "en_sha1": "f966b617dca3f8328ae4552cc6960b8c5be5fa60",
+   "nl": "02 · Essentiële oliën",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_pceBAE/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_pceBAE.settings.heading",
+   "en": "Fresh that lasts",
+   "en_sha1": "cd4e14c465c4486a2b54e9248c4919b0fe475687",
+   "nl": "Blijvend fris",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_pceBAE/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_pceBAE.settings.text",
+   "en": "<p>Mint and lime by day, cinnamon and orange by night.</p>",
+   "en_sha1": "f05582dcad569097ced15b48ecfee0ebc99a9257",
+   "nl": "<p>Munt en limoen overdag, kaneel en sinaasappel 's nachts.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_tM7UH3/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_tM7UH3.settings.label",
+   "en": "03 · Gentle foam",
+   "en_sha1": "5f429e15db6812498392f82aa9bd6fec78565044",
+   "nl": "03 · Zacht schuim",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_tM7UH3/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_tM7UH3.settings.heading",
+   "en": "A velvet mouthfeel",
+   "en_sha1": "1a10257ceba4c41c417ce97f5723ce60bf7cb41e",
+   "nl": "Fluwelen mondgevoel",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_tM7UH3/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_tM7UH3.settings.text",
+   "en": "<p>Soft foam and a smooth finish that stays. Two minutes you enjoy.</p>",
+   "en_sha1": "eda1bd49f6894c7507db44540403414312751ba5",
+   "nl": "<p>Zacht schuim en een glad gevoel dat blijft. Twee minuten om van te genieten.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_aXhzDi.settings.label",
+   "en": "04 · mineral whitening",
+   "en_sha1": "ff56b5506d3fee9621ef29bbba456bfb455073b7",
+   "nl": "04 · minerale whitening",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_aXhzDi.settings.heading",
+   "en": "Naturally brighter",
+   "en_sha1": "a3597870d1ecab36116d60f884a02fc73fa1c276",
+   "nl": "Natuurlijk stralender",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "21 vs 18 chars; 'stralender' is the idiom for teeth; shorter 'Natuurlijk witter' would turn 'brighter' into 'whiter'"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_aXhzDi.settings.text",
+   "en": "<p>Remineralisation lifts the surface. No bleach, no strips.</p>",
+   "en_sha1": "33072db0237910f7ff82e4ba3ae7dc7215a12325",
+   "nl": "<p>Remineralisatie frist het oppervlak op. Geen bleekmiddel, geen strips.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_QdCWaE/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_QdCWaE.settings.label",
+   "en": "05 · Xylitol",
+   "en_sha1": "c5fa9108d171c99083cd712b207eca731cbef009",
+   "nl": "05 · Xylitol",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_QdCWaE/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_QdCWaE.settings.heading",
+   "en": "A mouth in balance",
+   "en_sha1": "2fd760b53c333c2410565bceef4b0220c767f193",
+   "nl": "Een mond in balans",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_QdCWaE/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_QdCWaE.settings.text",
+   "en": "<p>Supports your mouth’s own balance. Less plaque, day and night.</p>",
+   "en_sha1": "0f7e84a549d7f63a18cf42cd0d2552ece9a6fc71",
+   "nl": "<p>Ondersteunt het eigen evenwicht van je mond. Minder tandplak, dag en nacht.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.label",
+   "en": "06 · No SLS",
+   "en_sha1": "7af9b2a7e84e90a1067cee38ab9b40b5b9f9af07",
+   "nl": "06 · Geen SLS",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
+   "en": "Radiant calm gums",
+   "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
+   "nl": "Kalm, stralend tandvlees",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "24 vs 17 chars; 'tandvlees' is twice as long as 'gums', no shorter form keeps both 'radiant' and 'calm'"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
+   "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
+   "en_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim (C35)"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.label",
+   "en": "07 · Guarana & valerian",
+   "en_sha1": "54dcdbe5d6f6857e20d3250877ca4f6fb6e59fe0",
+   "nl": "07 · Guarana & valeriaan",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.heading",
+   "en": "Focus by day,  calm by night",
+   "en_sha1": "ff8c1ad4808dc5c7c8de754fbbe00f11d1186cff",
+   "nl": "Focus overdag, rust 's nachts",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "EN has a double space after the comma; not carried over"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.text",
+   "en": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>",
+   "en_sha1": "3c85c496086b8e953e54cbf79577d74a8d930da0",
+   "nl": "<p>Guarana voor een heldere start, valeriaan voor een avond die je nacht niet tegenwerkt.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_AGFiEX/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.label",
+   "en": "08 · Leave-on",
+   "en_sha1": "200daf4698d40304dad57e6cd8ed2c06ab0471e3",
+   "nl": "08 · Leave-on",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_AGFiEX/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.heading",
+   "en": "Wake up smoother",
+   "en_sha1": "0983f6160de299969ba53cfe54ac8a99d28c1c98",
+   "nl": "Gladder ontwaken",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_AGFiEX/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.text",
+   "en": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>",
+   "en_sha1": "397401e5b27e3f6ab0d9279b35189988258918eb",
+   "nl": "<p>Spugen, niet spoelen. Het werkt de hele nacht. Voel het nog voor het ontbijt.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_jN7XcL.settings.label",
+   "en": "09 · One pump",
+   "en_sha1": "7b7437b7780ec200d15746fac7917d7f26b693e2",
+   "nl": "09 · Eén pompje",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_jN7XcL.settings.heading",
+   "en": "One pump, one dose",
+   "en_sha1": "f58ff4005b407ed7c35b477753ad00229a08abfd",
+   "nl": "Eén pompje, één dosis",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "21 vs 18 chars; 'Eén pomp, één dosis' (19) fits if 'pompje' may go"
+  },
+  {
+   "id": "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_jN7XcL.settings.text",
+   "en": "<p>All the minerals your mouth needs in one press. Hygienic, precise, nothing wasted.</p>",
+   "en_sha1": "0c8fa91a80d520f60e04c1a731c21df20fa8667e",
+   "nl": "<p>Alle mineralen die je mond nodig heeft in één pompje. Hygiënisch, nauwkeurig, niets verspild.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.settings.subheading",
+   "en": "PROFESSIONAL PARTNERS",
+   "en_sha1": "f2c3692dedeb4091d45d6b676a39beccef593443",
+   "nl": "PROFESSIONELE PARTNERS",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.settings.heading",
+   "en": "Trusted by professionals <strong>who look beyond the teeth</strong>",
+   "en_sha1": "bd60574c1ade21d60f2f755fcdb239cb92accdfd",
+   "nl": "Vertrouwd door professionals <strong>die verder kijken dan de tanden</strong>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/bottom_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.settings.bottom_text",
+   "en": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
+   "en_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
+   "nl": "<p>De beste uitkomst is de uitkomst die voorkomen wordt. Deze zorgverleners raden Karmicare aan voor de periode tussen twee bezoeken. Niet om hun zorg te vervangen, maar om de twaalfhonderd poetsbeurten per jaar tussen de afspraken door iets te laten betekenen.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "'prevented' rendered literally ('voorkomen') because the EN says it (C70); JEP/DETIC bans 'voorkomt' in claims, claims reviewer to check. TERM: practitioner → zorgverlener"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/button_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.settings.button_label",
+   "en": "REQUEST A PRACTITIONER SAMPLE",
+   "en_sha1": "b1ea710027514f599be71fdaf3c86b8080b7213b",
+   "nl": "PROEFPAKKET VOOR ZORGVERLENERS",
+   "status": "translated",
+   "flags": [],
+   "notes": "Noun form ('sample pack for practitioners') to fit; 'staal' (BE) / 'monster' (NL) avoided as regional"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.heading",
+   "en": "Dr. Stephanie Spreuwers",
+   "en_sha1": "dc30247d5a1a328e0670facde128830d5243cc87",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
+   "en": "Functional Dentist, kPNI Therapist",
+   "en_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
+   "nl": "Functioneel tandarts, kPNI-therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.heading",
+   "en": "Mariama Banjai",
+   "en_sha1": "f3401d9dd8abb2e29b9778af0428ffc1c1617d06",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.text",
+   "en": "Dental Hygienist, Oral Care Quality Manager",
+   "en_sha1": "32c05cc9843e7f773cfde88f8b588e40cfbe593d",
+   "nl": "Mondhygiënist, kwaliteitsmanager mondzorg",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_8dRing/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.heading",
+   "en": "Leen Ponet",
+   "en_sha1": "2c95183e6e62c32069244d87b4e1d94bf2c81cba",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_8dRing/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
+   "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+   "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
+   "nl": "Apotheker, orthomoleculair therapeut, kPNI-coördinator",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_8dRing/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.hover_text",
+   "en": "<p>“Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifically supported choice. By also taking biorhythm into account, the brand touches on the foundations on which true health is built. This vision aligns seamlessly with my professional conviction that only an integrated approach, bringing together science, biology, rhythm and nature, leads to lasting health.”</p>",
+   "en_sha1": "a303abfbd840f092c3eafa31a0ba6bd86613258c",
+   "nl": "<p>“Karmicare biedt fluoridevrije mondzorg op een doordachte manier, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door ook rekening te houden met het bioritme raakt het merk aan de fundamenten waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde aanpak, die wetenschap, biologie, ritme en natuur samenbrengt, tot duurzame gezondheid leidt.”</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Practitioner quote: if she gave it in Dutch originally, use her own wording instead of this back-translation"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_HFdkaD/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_HFdkaD.settings.heading",
+   "en": "Dr. Iveta Pleša Rutule",
+   "en_sha1": "53218ff3035050b436859adc45a36013f7554dba",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_HFdkaD/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_HFdkaD.settings.text",
+   "en": "Holistic Dentist",
+   "en_sha1": "a20679ada27623dffb5396cf97829e8a7093d8c1",
+   "nl": "Holistisch tandarts",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "19 vs 16 chars; no shorter Dutch title"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_Ah46TM/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.heading",
+   "en": "Dr. Kris Sienaert",
+   "en_sha1": "047b7a76f06a48d88033bf86f54389f4227e7837",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_Ah46TM/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
+   "en": "Former GP, Lifestyle Medicine",
+   "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
+   "nl": "Voormalig huisarts, leefstijlgeneeskunde",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_CtQgU9/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.heading",
+   "en": "Sietske Hamelink",
+   "en_sha1": "7d54e8706217749cd231ee783ebddc33262eccec",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_CtQgU9/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
+   "en": "Nutritional Therapist, Menstrual Cycle Expert",
+   "en_sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
+   "nl": "Voedingstherapeut, expert menstruatiecyclus",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
+   "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
+   "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim (C85)"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_qAPajg/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.heading",
+   "en": "Kim Verlot",
+   "en_sha1": "64ac17ec29ebe9cb2bc546910c1b8aeb97a5dc83",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_qAPajg/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.text",
+   "en": "Breathing Coach, Heart Coherence Specialist",
+   "en_sha1": "b4f59540f5b8b784fe01d51f0665ea265f0f431e",
+   "nl": "Ademcoach, specialist hartcoherentie",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.settings.subheading",
+   "en": "CLINICALLY BACKED ORAL CARE",
+   "en_sha1": "8908a4cd75f8ba06700046aba858a78f7c9253bb",
+   "nl": "KLINISCH ONDERBOUWDE MONDZORG",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.settings.heading",
+   "en": "The research behind the system",
+   "en_sha1": "4f42ad1ce068f1eb05d2cbc7682b8229ec442a07",
+   "nl": "Het onderzoek achter het systeem",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/bottom_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
+   "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
+   "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
+   "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek checken en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/button_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.settings.button_label",
+   "en": "Explore the full evidence base",
+   "en_sha1": "0fa1ec9d5064dcacc5914eb584d9f6410eaea971",
+   "nl": "Ontdek de volledige wetenschappelijke basis",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek het volledige bewijs"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.subheading",
+   "en": "NANO-HYDROXYAPATITE",
+   "en_sha1": "ce9ff7d54eb3dc3a855b596825a42b16444adedb",
+   "nl": "NANO-HYDROXYAPATIET",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.heading",
+   "en": "Nano-HAp sealed 98% of open dentine tubules.",
+   "en_sha1": "692b9ddb69b8f60e86a4dcc2f5e89adaf53fccfa",
+   "nl": "Nano-HAp dichtte 98% van de open dentinekanaaltjes.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Approved Figma NL wording (research card 1)"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.subtext",
+   "en": "Human dentine discs · 7 days",
+   "en_sha1": "92ff9f3fa0003805ccd765cfe31bdcdd7c9f9d07",
+   "nl": "Menselijke dentineschijfjes · 7 dagen",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/result_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.result_label",
+   "en": "RESULT",
+   "en_sha1": "da4b6b1d2a1e85f1aa85393752798f407edc0472",
+   "nl": "RESULTAAT",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "9 vs 6 chars; standard term, no shorter Dutch label"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/result_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.result_text",
+   "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
+   "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
+   "nl": "98% afsluiting vs. 82% en 65% voor twee andere desensibiliserende technologieën",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 98% afsluiting vs. 82% en 65% bij twee andere desensibiliserende technologieën"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/method_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.method_label",
+   "en": "METHOD",
+   "en_sha1": "098632eb27abf5bba7e9083b3f80cb5c30830597",
+   "nl": "METHODE",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/method_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.method_text",
+   "en": "In vitro SEM comparison of three pastes, ~1% nHAp.",
+   "en_sha1": "74e33fbe675d7b860cf054ee2c77581925f98015",
+   "nl": "In-vitro-SEM-vergelijking van drie pasta’s, ~1% nHAp.",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: SEM-vergelijking in vitro van drie pasta's, ~1% nHAp."
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.link_label",
+   "en": "Kulal et al. · 2016 · J Clin Diagn Res",
+   "en_sha1": "b1665b8a9070f5727be7ffa210899b11539654f1",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_bDxUVT/image_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_bDxUVT.settings.image_badge",
+   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
+   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
+   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.subheading",
+   "en": "ORAL–SLEEP CONNECTION",
+   "en_sha1": "c341ea95651430557bbacd1ee93b5d4dc8fbb1dc",
+   "nl": "VERBAND MOND–SLAAP",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.heading",
+   "en": "Poorer oral health was linked with poorer sleep.",
+   "en_sha1": "798f5232fa57d2eaffe13367f951fc5f913788a0",
+   "nl": "Een slechtere mondgezondheid hing samen met slechtere slaap.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Een slechtere mondgezondheid hing samen met slechter slapen."
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.subtext",
+   "en": "36,559 people · 8 studies",
+   "en_sha1": "895e539bf4af7cd6bde5e905423dc8efe640fa5c",
+   "nl": "36.559 mensen · 8 studies",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/result_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.result_label",
+   "en": "RESULT",
+   "en_sha1": "da4b6b1d2a1e85f1aa85393752798f407edc0472",
+   "nl": "RESULTAAT",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "9 vs 6 chars; standard term"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/result_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.result_text",
+   "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
+   "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
+   "nl": "SMD 2,17 · p = 0,004 · 95%-BI 0,68–3,66&nbsp;",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/method_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.method_label",
+   "en": "METHOD",
+   "en_sha1": "098632eb27abf5bba7e9083b3f80cb5c30830597",
+   "nl": "METHODE",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/method_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.method_text",
+   "en": "Meta-analysis of 8 studies, 2015–2023.",
+   "en_sha1": "5983805b6b23ddb7ca9f2df5ddcc0f9f92dca108",
+   "nl": "Meta-analyse van 8 studies, 2015–2023.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.link_label",
+   "en": "Lei & Hu · 2025 · Biomedical Reports",
+   "en_sha1": "f7d8d65c6e7a4523ab025525f938c07c350173b7",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_yMiD9D/image_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_yMiD9D.settings.image_badge",
+   "en": "SLEEP · AIRWAY AND ORAL CAVITY",
+   "en_sha1": "6964113baf8cb5585a52d93260b84f3e0c3f0171",
+   "nl": "SLAAP · LUCHTWEG EN MONDHOLTE",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: SLAAP · LUCHTWEGEN EN MONDHOLTE"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.subheading",
+   "en": "XYLITOL",
+   "en_sha1": "e64f31cc28f25e3c08beec5fbb72560fe6503483",
+   "nl": "XYLITOL",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.heading",
+   "en": "Xylitol lowered tooth decay compared with controls.",
+   "en_sha1": "21d0c73d004ce24a9e7bbe2d7a144f87f9263875",
+   "nl": "Xylitol verminderde tandbederf ten opzichte van controlegroepen.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.subtext",
+   "en": "1,478 people · 7 trials",
+   "en_sha1": "9761ad77051c62108346b486d8f95d91b67764ed",
+   "nl": "1.478 mensen · 7 trials",
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: trials → trials (klinische trials), kept apart from 'studies' as in the EN"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/result_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.result_label",
+   "en": "Result",
+   "en_sha1": "5faa59d4bc3756040b8ce9e673c09f929e6ee9ba",
+   "nl": "Resultaat",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "9 vs 6 chars; standard term"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/result_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.result_text",
+   "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
+   "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
+   "nl": "SMD −1,09 · p < 0,00001 · 95%-BI −1,34 tot −0,83",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474)"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/method_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.method_label",
+   "en": "Method",
+   "en_sha1": "88306943fea7e76f9cd57cae0ea6d8b32d2e8434",
+   "nl": "Methode",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/method_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.method_text",
+   "en": "Systematic review and meta-analysis of 7 clinical trials.",
+   "en_sha1": "c26c693e35d5431c2c818c1f83e86e6c60bd341e",
+   "nl": "Systematische review en meta-analyse van 7 klinische studies.",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systematische review en meta-analyse van 7 klinische trials."
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.link_label",
+   "en": "Janakiram et al. · 2017 · J Nat Sci Biol Med",
+   "en_sha1": "21c7373e33b16a979c0d417e4d869bd5b1a0cd45",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_fmFMFd/image_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
+   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
+   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
+   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
+   "status": "translated",
+   "flags": [],
+   "notes": "EN repeats the nHAp card's badge on the xylitol card (also on the SLS card); likely a placeholder in the EN"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.subheading",
+   "en": "NANO-HYDROXYAPATITE",
+   "en_sha1": "ce9ff7d54eb3dc3a855b596825a42b16444adedb",
+   "nl": "NANO-HYDROXYAPATIET",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.heading",
+   "en": "Nano-HAp beat fluoride on tooth sensitivity.",
+   "en_sha1": "bf8d54e6cedd70242cee250edeb8165b744a7169",
+   "nl": "Nano-HAp deed het beter dan fluoride bij gevoelige tanden.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Nano-HAp deed beter dan fluoride bij tandgevoeligheid."
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.subtext",
+   "en": "105 people · 4 weeks",
+   "en_sha1": "6530edfdf298def35d3b2dbf68a1356efd9ee9fe",
+   "nl": "105 mensen · 4 weken",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/result_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.result_label",
+   "en": "RESULT",
+   "en_sha1": "da4b6b1d2a1e85f1aa85393752798f407edc0472",
+   "nl": "RESULTAAT",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "9 vs 6 chars; standard term"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/result_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.result_text",
+   "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
+   "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
+   "nl": "Minder gevoeligheid voor koude lucht en aanraking vs. fluoride en placebo, p < 0,05",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474), same on homepage and PDP"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/method_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.method_label",
+   "en": "METHOD",
+   "en_sha1": "098632eb27abf5bba7e9083b3f80cb5c30830597",
+   "nl": "METHODE",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/method_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.method_text",
+   "en": "Double-blind randomised controlled trial, three arms.",
+   "en_sha1": "809ede503f35933b44310cd3dbcf68bfb2d213ca",
+   "nl": "Dubbelblinde gerandomiseerde gecontroleerde studie, drie armen.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.link_label",
+   "en": "Vano et al. · 2018 · Clin Oral Investig",
+   "en_sha1": "57903b0000ae39c346df139bca8a2b74ce1d45a4",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_Hi7YUD/image_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
+   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
+   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
+   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/subheading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.subheading",
+   "en": "SLS-FREE",
+   "en_sha1": "e842b116e499bff5749c822c76268b66326eec19",
+   "nl": "SLS-VRIJ",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.heading",
+   "en": "No SLS meant fewer and shorter canker sores.",
+   "en_sha1": "bcf10287f5014b3b7580a93b50f3de7a52848ce2",
+   "nl": "Zonder SLS: minder en kortere aften.",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Geen SLS betekende minder en kortere aften."
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.subtext",
+   "en": "124 people · 4 crossover RCTs",
+   "en_sha1": "0d443fce0127af7418e0e19feef4b4e272441492",
+   "nl": "124 mensen · 4 cross-over-RCT’s",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 124 mensen · 4 cross-over-RCT's"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/result_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.result_label",
+   "en": "RESULT",
+   "en_sha1": "da4b6b1d2a1e85f1aa85393752798f407edc0472",
+   "nl": "RESULTAAT",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "9 vs 6 chars; standard term"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/result_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.result_text",
+   "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
+   "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
+   "nl": "Minder aften, kortere duur, minder episodes, minder pijn",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Minder zweertjes, kortere duur, minder opstoten, minder pijn"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/method_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.method_label",
+   "en": "METHOD",
+   "en_sha1": "098632eb27abf5bba7e9083b3f80cb5c30830597",
+   "nl": "METHODE",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/method_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.method_text",
+   "en": "Systematic review and meta-analysis of 4 crossover RCTs.",
+   "en_sha1": "e7e710ff7c519d380f01c6ac9f993f04706dd435",
+   "nl": "Systematische review en meta-analyse van 4 cross-over-RCT’s.",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systematische review en meta-analyse van 4 cross-over-RCT's."
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.link_label",
+   "en": "Alli et al. · 2019 · J Oral Pathol Med",
+   "en_sha1": "5f6e2ada4c6b375d4fc451598628c947b258ddf9",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:research_behind_system_EkjATL/card_JeERX6/image_badge",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
+   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
+   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
+   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
+   "status": "translated",
+   "flags": [],
+   "notes": "Same placeholder badge as the nHAp card (see the xylitol card)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.settings.heading",
+   "en": "Before you start",
+   "en_sha1": "2c445dd5994fd48a7f879efa85cd15aa5394f95f",
+   "nl": "Voor je begint",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/subtext",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.settings.subtext",
+   "en": "Everything people usually ask before switching to a day-and-night oral care system.",
+   "en_sha1": "1a4b52746156fd00b023fa0f7826f5298e497c26",
+   "nl": "Alles wat mensen meestal vragen voor ze overstappen op een mondzorgsysteem voor dag en nacht.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_TNnqTQ.settings.category",
+   "en": "The system",
+   "en_sha1": "6ddda8c45a3cbfd9299413380e58d018cc68a586",
+   "nl": "Het systeem",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_TNnqTQ.settings.question",
+   "en": "Why two formulas instead of one?",
+   "en_sha1": "26e94f2a95eba2d4483610d48eac0f16d16ff90f",
+   "nl": "Waarom twee formules in plaats van één?",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_TNnqTQ.settings.answer",
+   "en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
+   "en_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
+   "nl": "<p>Omdat je mond niet de hele dag hetzelfde werk doet. De dag draait om blootstelling — zuren, suikers, koffie — dus Awake beschermt, activeert en maakt stralender. De nacht draait om herstel — je speeksel neemt af en je lichaam regenereert — dus Asleep kalmeert, herstelt het evenwicht en remineraliseert terwijl je slaapt.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.category",
+   "en": "Ingredients & safety",
+   "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
+   "nl": "Ingrediënten & veiligheid",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety'"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.question",
+   "en": "Is Karmicare fluoride-free?",
+   "en_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
+   "nl": "Is Karmicare fluoridevrij?",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
+   "en": "<p>[NEEDS APPROVED COPY]</p>",
+   "en_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "needs-approved-copy"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.category",
+   "en": "The ritual",
+   "en_sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
+   "nl": "Het ritueel",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.question",
+   "en": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
+   "en_sha1": "abdd0b7d15be897509a88669f6169c6bd804b82b",
+   "nl": "Zal Karmicare een bioritmische tandpasta met fluoride aanbieden?",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.answer",
+   "en": "<p>[NEEDS APPROVED COPY]</p>",
+   "en_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "needs-approved-copy"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.category",
+   "en": "Results",
+   "en_sha1": "612e12d29278b5519294bc25cdaddffec6d0f1c6",
+   "nl": "Resultaten",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "10 vs 7 chars (filter tab); no shorter equivalent"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.question",
+   "en": "What is nano-hydroxyapatite?",
+   "en_sha1": "0aeed18c4e6bd60691b49cfe53c782135bd3bb12",
+   "nl": "Wat is nano-hydroxyapatiet?",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.answer",
+   "en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
+   "en_sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
+   "nl": "<p>Een bio-identiek mineraal — dezelfde stof waaruit je glazuur bestaat. Het remineraliseert tanden, vermindert gevoeligheid en maakt op natuurlijke wijze witter. Het meest onderzochte remineraliserende middel op mineraalbasis ter wereld, in Japan gebruikt sinds de jaren tachtig.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Numbers warning: '1980s' → 'de jaren tachtig' (Dutch idiom, same period). 'gebruikt' refers to the mineral in Japan, not to the customer"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.category",
+   "en": "Plans & Return on Care",
+   "en_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
+   "nl": "Plannen & Return on Care",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.question",
+   "en": "Should I rinse after brushing?",
+   "en_sha1": "428bc937d0c86862ed3e4773017f44033510e7da",
+   "nl": "Moet ik spoelen na het poetsen?",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.answer",
+   "en": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>",
+   "en_sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
+   "nl": "<p>Nee — spuug uit en ga gewoon verder. De formules van Karmicare zijn gecertificeerd veilig om in je mond te blijven, wat nHAp en xylitol een langere contacttijd geeft. Uren actieve minerale zorg in plaats van seconden.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.category",
+   "en": "Shipping & guarantee",
+   "en_sha1": "bc09cdf16c860afefb56428d2fae8800222d82dd",
+   "nl": "Verzending & garantie",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.question",
+   "en": "How quickly will I notice a difference?",
+   "en_sha1": "08a546f547c9f31d33fd3955772f0f535fba27b4",
+   "nl": "Hoe snel merk ik verschil?",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.answer",
+   "en": "<p>Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see visible brightening in 4–6. The ritual shift happens faster: you notice the bookend effect within the first week — a morning moment that wakes you up, an evening moment that winds you down.</p>",
+   "en_sha1": "deb10e934dc4baa0532621dca4b6f314eabdf2d3",
+   "nl": "<p>Minerale remineralisatie vraagt tijd — de meeste leden voelen hun gevoeligheid veranderen binnen 2–4 weken en zien hun tanden binnen 4–6 weken zichtbaar stralender worden. De verandering in je ritueel gaat sneller: binnen de eerste week merk je het boekensteuneffect — een ochtendmoment dat je wakker maakt, een avondmoment dat je tot rust brengt.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "'in 4–6' made explicit as 'binnen 4–6 weken'. 'bookend effect' → 'boekensteuneffect' (image kept; uncommon in Dutch, alternative 'het effect van je twee vaste momenten')"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/title_4znD88/custom_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.title_4znD88.settings.custom_title",
+   "en": "Your welcome kit includes",
+   "en_sha1": "7d8b1a1059370f21609f856e753613eb4ec96c99",
+   "nl": "Je welkomstpakket bevat",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/pricing_summary_care_credit_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.pricing_summary_care_credit_title",
+   "en": "Care Credits back",
+   "en_sha1": "5ed851e5a9f222ddcabcffed35d594f67bf5503f",
+   "nl": "Care Credit terug",
+   "status": "translated",
+   "flags": [],
+   "notes": "EN plural 'Care Credits'; the program name stays singular"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.subscription_title",
+   "en": "Awake & Asleep AM/PM Oral Care System",
+   "en_sha1": "3db6b8f30849bad6d53cfabcfd379046583de830",
+   "nl": "Awake & Asleep AM/PM-mondzorgsysteem",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Awake & Asleep mondzorgsysteem voor ochtend en avond"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.shipping_text",
+   "en": "Shipping",
+   "en_sha1": "694e6062a66864cd5ffa7db33cf27b8818b0cf57",
+   "nl": "Verzending",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.shipping_value_html",
+   "en": "<del>Varies</del> <strong>Free</strong>",
+   "en_sha1": "7106ab6630375c2f21bc0ccf096a01c541c410d2",
+   "nl": "<del>Variabel</del> <strong>Gratis</strong>",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "15 vs 11 chars; 'Wisselt' (7) is shorter but reads less clearly"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.care_credit_text_1",
+   "en": "10% / order",
+   "en_sha1": "33ebbb281980639b601c30788d7abab49236ab73",
+   "nl": "10% / bestelling",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "16 vs 11 chars; '10% / order' fits exactly (Dutch 'order' is correct but less consumer-friendly)"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_2",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.care_credit_text_2",
+   "en": "10% each purchase",
+   "en_sha1": "2e28730d82c9657bca0df57e04c1261609e71512",
+   "nl": "10% per bestelling",
+   "status": "translated",
+   "flags": [],
+   "notes": "'purchase' → 'bestelling' (avoids aankoop/kopen)"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/per_brushing_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.per_brushing_text",
+   "en": "per brushing",
+   "en_sha1": "ad65bed04536e0203a15036c26c081b9dc7c7177",
+   "nl": "per poetsbeurt",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.buy_buttons_UQznij.settings.custom_button_text",
+   "en": "Begin your 60-day ritual",
+   "en_sha1": "0e711fcd7b9539d42934854b6fdc175309da558b",
+   "nl": "Begin je 60-dagenritueel",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_1",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.icon_with_text_wUdX3G.settings.heading_1",
+   "en": "60-day money-back guarantee",
+   "en_sha1": "83f419aac78de92b3616b4bd579c70cf76673b64",
+   "nl": "60 dagen geld terug",
+   "status": "translated",
+   "flags": [],
+   "notes": "Approved Figma NL short form"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_2",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.icon_with_text_wUdX3G.settings.heading_2",
+   "en": "Cancel anytime",
+   "en_sha1": "ceec8a134ce856617633a7b4efd566f243d1c391",
+   "nl": "Altijd opzegbaar",
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: Cancel anytime → Altijd opzegbaar"
+  },
+  {
+   "id": "index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_3",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.featured_product_3XpDKw.blocks.icon_with_text_wUdX3G.settings.heading_3",
+   "en": "Free shipping",
+   "en_sha1": "b6da5263ea361ec875fab0f88ca4d12a7ec638e5",
+   "nl": "Gratis verzending",
+   "status": "translated",
+   "flags": [],
+   "notes": "17 vs 13 chars, but this is the approved Figma NL short form, checked in the Figma trust row"
+  },
+  {
+   "id": "index:care_comes_back/eyebrow",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.settings.eyebrow",
+   "en": "Return on Care",
+   "en_sha1": "6f6ba4c5352728a68ae391cd4ec83df921c2c07c",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "index:care_comes_back/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.settings.heading",
+   "en": "The care you already do. <em>Now designed to give back.</em>",
+   "en_sha1": "b5ef431c0216216e73ac82fe1f15a63cb3e160b1",
+   "nl": "De zorg die je al geeft. <em>Nu ontworpen om terug te geven.</em>",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:care_comes_back/intro",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.settings.intro",
+   "en": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
+   "en_sha1": "a121a9321a9e14379d38a5f8511c4230b597a2a5",
+   "nl": "Karmicare is een zorgsysteem: het ritueel komt op jouw ritme bij je aan, en je zorg bouwt gaandeweg Care Credit op.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:care_comes_back/fine_print",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.settings.fine_print",
+   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: credit (store credit) → tegoed"
+  },
+  {
+   "id": "index:care_comes_back/terms_link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.settings.terms_link_label",
+   "en": "Terms, clauses 10 and 11",
+   "en_sha1": "2f9d96893104a2fe783baf3d55eded086b4fa7eb",
+   "nl": "Voorwaarden, art. 10 en 11",
+   "status": "translated",
+   "flags": [],
+   "notes": "clauses → artikelen (art.); align with the term the legal chunk uses for the Terms"
+  },
+  {
+   "id": "index:care_comes_back/step_ritual/title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.blocks.step_ritual.settings.title",
+   "en": "Your ritual",
+   "en_sha1": "d6b6947fc3b1de9c7b64400ec0af95cea9b2ecda",
+   "nl": "Je ritueel",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:care_comes_back/step_ritual/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.blocks.step_ritual.settings.text",
+   "en": "Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year.",
+   "en_sha1": "55ba93c966820d39da8bd84360c06c75e53307ca",
+   "nl": "Twee minuten, 's ochtends en 's avonds. Je lidmaatschap geeft Care Credit terug: 10% van elk 60-dagenritme, 20% van het Karmicare-jaar.",
+   "status": "translated",
+   "flags": [],
+   "notes": "'the Year' → 'het Karmicare-jaar' here: '20% van het jaar' would read as '20% of the year'"
+  },
+  {
+   "id": "index:care_comes_back/step_checkup/title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.blocks.step_checkup.settings.title",
+   "en": "Your check-up",
+   "en_sha1": "11e822a096a977fad27275d1333e7829de57c569",
+   "nl": "Je controle",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:care_comes_back/step_checkup/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.blocks.step_checkup.settings.text",
+   "en": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay.",
+   "en_sha1": "f365b1c15eab5e5c15cd9b0276d7a64a4b546e4f",
+   "nl": "Bij het Karmicare-jaar levert een controle na maand zes €40 aan Care Credit op, één keer per lidmaatschapsjaar. Je stapt binnen met iets te winnen, niet alleen met iets te betalen.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "index:care_comes_back/step_next_order/title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.blocks.step_next_order.settings.title",
+   "en": "Your next order",
+   "en_sha1": "2725cbb58da481bec9e9b159d4636e838864f42a",
+   "nl": "Je volgende bestelling",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "22 vs 15 chars; 'Je volgende order' (17) fits if space is tight"
+  },
+  {
+   "id": "index:care_comes_back/step_next_order/text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.care_comes_back.blocks.step_next_order.settings.text",
+   "en": "Spend Care Credit on any order. It stays valid while you are a member, and for 12 months after.",
+   "en_sha1": "59dcdf960ae77c0fe8a702ac4ffdbcefb7553087",
+   "nl": "Besteed Care Credit aan elke bestelling. Het blijft geldig zolang je lid bent, en nog 12 maanden daarna.",
+   "status": "translated",
+   "flags": [],
+   "notes": ""
+  },
+  {
+   "id": "locale:blogs.article.read_more_title",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "blogs.article.read_more_title",
+   "en": "Read more: {{ title }}",
+   "en_sha1": "ba4bf0bc6c4ce891b132b1df00b399e1406bb742",
+   "nl": "Lees verder: {{ title }}",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "locale:products.product.add_to_cart",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "products.product.add_to_cart",
+   "en": "Add to cart",
+   "en_sha1": "f8893b912459ec1ac659725f03d87492cdb707bc",
+   "nl": "Aan winkelwagen toevoegen",
+   "status": "dawn-nl",
+   "flags": [],
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "id": "liquid:sections/hero-karmicare.liquid:149",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/hero-karmicare.liquid",
+   "key_path": "sections/hero-karmicare.liquid:149",
+   "en": "Karmicare Oral Rhythm Hero",
+   "en_sha1": "77be4877b0c5b4184deb3919770b80863272e1c3",
+   "nl": "Karmicare: het ritme van je mond",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "aria-label; design jargon 'Hero' dropped"
+  },
+  {
+   "id": "liquid:sections/hero-karmicare.liquid:209",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/hero-karmicare.liquid",
+   "key_path": "sections/hero-karmicare.liquid:209",
+   "en": "Karmicare Oral Care System",
+   "en_sha1": "e86e218ec7b472f8377572343058aa5e133f600a",
+   "nl": "Karmicare-mondzorgsysteem",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/hero-karmicare.liquid:242",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/hero-karmicare.liquid",
+   "key_path": "sections/hero-karmicare.liquid:242",
+   "en": "Day and Night Oral Rhythm Switcher",
+   "en_sha1": "062a4a4ef7d63317ceda3bc2ac7caf2dac558fae",
+   "nl": "Schakelaar voor het dag- en nachtritme van je mond",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/hero-karmicare.liquid:251",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/hero-karmicare.liquid",
+   "key_path": "sections/hero-karmicare.liquid:251",
+   "en": "{{ label }} mode",
+   "en_sha1": "fe426cd57b6b8ce7e44620409a24cda5ff3508bb",
+   "nl": "{{ label }}-modus",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "Suffix becomes '-modus' (Dutch compound: 'AWAKE-modus'); the code appends ' mode' with a space, so the NL key needs the hyphen form"
+  },
+  {
+   "id": "liquid:sections/stat-strip-karmicare.liquid:84",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/stat-strip-karmicare.liquid",
+   "key_path": "sections/stat-strip-karmicare.liquid:84",
+   "en": "Karmicare Stats and Highlights",
+   "en_sha1": "427a92963316b2de65f6ab2679ae3e0336139c81",
+   "nl": "Karmicare in cijfers en hoogtepunten",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/chronobiology-clock-karmicare.liquid:88",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/chronobiology-clock-karmicare.liquid",
+   "key_path": "sections/chronobiology-clock-karmicare.liquid:88",
+   "en": "Awake",
+   "en_sha1": "2b453e3e926b3275b0260310e696420278283986",
+   "nl": null,
+   "status": "held",
+   "flags": [],
+   "notes": "never-translate"
+  },
+  {
+   "id": "liquid:sections/chronobiology-clock-karmicare.liquid:101",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/chronobiology-clock-karmicare.liquid",
+   "key_path": "sections/chronobiology-clock-karmicare.liquid:101",
+   "en": "Explore your mouth's 24-hour clock",
+   "en_sha1": "a6054cdc20fdc883cc7d445f6bb0d722c8319b21",
+   "nl": "Verken de 24-uursklok van je mond",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/chronobiology-clock-karmicare.liquid:153",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/chronobiology-clock-karmicare.liquid",
+   "key_path": "sections/chronobiology-clock-karmicare.liquid:153",
+   "en": "your mouth right now:",
+   "en_sha1": "9d60361993a650401dab3df90c63e848772a34fe",
+   "nl": "je mond op dit moment:",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:88",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:88",
+   "en": "your mouth at this hour:",
+   "en_sha1": "44e3803489fcdb97e9137ac31899b7e1efc47de3",
+   "nl": "je mond op dit uur:",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:91",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:91",
+   "en": ". Release to return to now.",
+   "en_sha1": "0def64ad1cece36c2b73a8fd97a5b2444a3d3eea",
+   "nl": ". Laat los om terug te gaan naar nu.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:11",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:11",
+   "en": "saliva is only now picking up after the night, and the enamel is least protected before your first drink",
+   "en_sha1": "c7bca695dfe2f7be9903a37adb79ecbf9d8531e2",
+   "nl": "het speeksel komt na de nacht nu pas op gang, en het glazuur is het minst beschermd vóór je eerste drankje",
+   "status": "pending-claim-review",
+   "flags": [
+    "theme-key",
+    "pending-claim-review"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:12",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:12",
+   "en": "breakfast and coffee dropped the pH within minutes — saliva spends the next half hour bringing it back",
+   "en_sha1": "58bd19a4b901828d294b250a39e10097c209bdf0",
+   "nl": "ontbijt en koffie deden de pH binnen enkele minuten dalen — het speeksel heeft het volgende halfuur nodig om hem weer op peil te brengen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:13",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:13",
+   "en": "lunch restarts the cycle: every eating occasion opens a fresh acid window, whatever its size",
+   "en_sha1": "f9936681dbd5df0d8bd3d615f77ac90ddad92c3a",
+   "nl": "de lunch start de cyclus opnieuw: elk eetmoment opent een nieuw zuurvenster, hoe klein of groot ook",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:14",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:14",
+   "en": "grazing hours — the most frequent acid challenge of the day, and it is how often, not how much",
+   "en_sha1": "7c6f20d1c457dd59d6945d4e1e6fa5d518a1f72a",
+   "nl": "snackuren — de zuuraanval die het vaakst terugkomt, en het gaat om hoe vaak, niet om hoeveel",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:15",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:15",
+   "en": "the last big acid window of the day; after this, saliva starts winding down",
+   "en_sha1": "482dc38832bc18f7cf09998958f1bd9ddcd17250",
+   "nl": "het laatste grote zuurvenster van de dag; daarna begint het speeksel af te nemen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:16",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:16",
+   "en": "melatonin is rising and salivary flow is dropping — what is left on the enamel now stays for hours",
+   "en_sha1": "d1308293ce564a28b29c6d1414437ca5c80dcf9b",
+   "nl": "melatonine stijgt en de speekselproductie daalt — wat nu op het glazuur achterblijft, blijft er urenlang zitten",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:17",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:17",
+   "en": "saliva is near its minimum and clearance has almost stopped: the longest unguarded stretch, and the repair window",
+   "en_sha1": "7d622f4e77e13c0fe3a0d145a72a84a7611bbe5e",
+   "nl": "het speeksel zit vlak bij zijn minimum en de zelfreiniging ligt bijna stil: de langste onbewaakte periode, en het herstelvenster",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "'clearance' (oral clearance) → 'zelfreiniging' (of the mouth)"
+  },
+  {
+   "id": "liquid:sections/km-faq-accordion.liquid:155",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/km-faq-accordion.liquid",
+   "key_path": "sections/km-faq-accordion.liquid:155",
+   "en": "ALL",
+   "en_sha1": "6b42874e3cd20771d93096ec5ce36307a1f2ba14",
+   "nl": "ALLE",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:sections/featured-product.liquid:627",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/featured-product.liquid",
+   "key_path": "sections/featured-product.liquid:627",
+   "en": "Free",
+   "en_sha1": "75f527181b574f84568f33f67adc3b267a6fef9c",
+   "nl": "Gratis",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:snippets/loop-widget-standard.liquid:101",
+   "resource_type": "app",
+   "file_or_handle": "snippets/loop-widget-standard.liquid",
+   "key_path": "snippets/loop-widget-standard.liquid:101",
+   "en": "Start here",
+   "en_sha1": "54acc2806d4d927486a2f4d9416567b6cb2ecc84",
+   "nl": "Begin hier",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:snippets/loop-widget-standard.liquid:103",
+   "resource_type": "app",
+   "file_or_handle": "snippets/loop-widget-standard.liquid",
+   "key_path": "snippets/loop-widget-standard.liquid:103",
+   "en": "Choose how to begin",
+   "en_sha1": "abe6f5950cb2e7304a38793aa31ef9f286aad415",
+   "nl": "Kies hoe je begint",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:snippets/loop-widget-standard.liquid:109",
+   "resource_type": "app",
+   "file_or_handle": "snippets/loop-widget-standard.liquid",
+   "key_path": "snippets/loop-widget-standard.liquid:109",
+   "en": "Selling Plans",
+   "en_sha1": "e4b9940615d0f04df133dfb61b82bc7eaccfa0a0",
+   "nl": "Plannen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "TERM: Selling Plans (fieldset legend) → Plannen"
+  },
+  {
+   "id": "liquid:snippets/loop-widget-standard.liquid:123",
+   "resource_type": "app",
+   "file_or_handle": "snippets/loop-widget-standard.liquid",
+   "key_path": "snippets/loop-widget-standard.liquid:123",
+   "en": "One time Purchase",
+   "en_sha1": "1da912a7ae41ae5c7bb965247a7118dbd1f84d43",
+   "nl": "Eenmalige bestelling",
+   "status": "theme-key",
+   "flags": [
+    "theme-key",
+    "fit-risk"
+   ],
+   "notes": "20 vs 17 chars; 'one-time order' per the glossary. If this label shows the Try Once plan, use the approved 'Eenmalig proberen' (17)"
+  },
+  {
+   "id": "liquid:snippets/loop-widget-standard.liquid:140",
+   "resource_type": "app",
+   "file_or_handle": "snippets/loop-widget-standard.liquid",
+   "key_path": "snippets/loop-widget-standard.liquid:140",
+   "en": "each",
+   "en_sha1": "b32f279e548b6fceef4343170778273bfe60658c",
+   "nl": "per stuk",
+   "status": "theme-key",
+   "flags": [
+    "theme-key",
+    "fit-risk"
+   ],
+   "notes": "8 vs 4 chars; Dawn's NL locale uses '/st' if space is tight"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2452",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2452",
+   "en": "/ {{ days }} days",
+   "en_sha1": "1c2acc951ec213517c1a810dd251ce932f3453ad",
+   "nl": "/ {{ days }} dagen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2468",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2468",
+   "en": "Renews every year",
+   "en_sha1": "dfa0437557a08f887f7aebd6b57f806a51f49db5",
+   "nl": "Elk jaar verlengd",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Jaarlijks verlengd"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2213",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2213",
+   "en": "{{ value }} value · free",
+   "en_sha1": "075b2c911efdca4d328a14d1b2d23369c948f0e4",
+   "nl": "t.w.v. {{ value }} · gratis",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "'t.w.v.' (ter waarde van) is the usual shop abbreviation in NL and BE"
+  },
+  {
+   "id": "liquid:snippets/loop-subscriptions.liquid:10",
+   "resource_type": "app",
+   "file_or_handle": "snippets/loop-subscriptions.liquid",
+   "key_path": "snippets/loop-subscriptions.liquid:10",
+   "en": "Rendering loop-subscriptions",
+   "en_sha1": "2d614aab2661a117cc5dd2ab4c6b6ec57db44a06",
+   "nl": "Rendering loop-subscriptions",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "Kept in English on purpose: featured-product.liquid:542 and main-product.liquid:616 test for this exact text, so translating it could break that check. Hidden placeholder"
+  },
+  {
+   "id": "admin:shop:online_store.preferences.homepage_title",
+   "resource_type": "shop",
+   "file_or_handle": "shop",
+   "key_path": "online_store.preferences.homepage_title",
+   "en": "KARMICARE - Biorhythmic Oral Health",
+   "en_sha1": "b04ccb30266af5344472d142778361e88922b676",
+   "nl": "KARMICARE - Bioritmische mondgezondheid",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "admin:shop:online_store.preferences.homepage_meta_description",
+   "resource_type": "shop",
+   "file_or_handle": "shop",
+   "key_path": "online_store.preferences.homepage_meta_description",
+   "en": "Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant extracts to elevate your morning and night. Nano Hydroxyapatite, fluoride free toothpaste.",
+   "en_sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4",
+   "nl": "Karmicare ontwerpt bioritmische tandpasta's, geformuleerd met zuivere ingrediënten, noötropica en plantenextracten die je ochtend en avond naar een hoger niveau tillen. Nano-hydroxyapatiet, fluoridevrije tandpasta.",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "TERM: nootropics → noötropica (as in products.md NL). 'tandpasta' twice as in the EN (SEO)"
+  }
+ ]
+}
