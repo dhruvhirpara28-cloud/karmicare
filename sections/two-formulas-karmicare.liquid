@@ -121,16 +121,18 @@
         <!-- Center Image -->
         <div class="two-formulas__image-wrap">
           {%- if section.settings.main_image != blank -%}
+            {%- comment -%} Displayed 220 px (260 px from 990) by the CSS; the srcset covers DPR 3 {%- endcomment -%}
+            {%- assign two_formulas_alt = section.settings.heading | strip_html -%}
             {{
               section.settings.main_image
-              | image_url: width: 220
+              | image_url: width: 780
               | image_tag:
                 loading: 'lazy',
                 decoding: 'async',
                 class: 'two-formulas__image',
-                widths: '160, 200, 220, 260, 320, 440',
-                sizes: '220px',
-                alt: section.settings.heading
+                widths: '220, 260, 330, 440, 520, 660, 780',
+                sizes: '(min-width: 990px) 260px, 220px',
+                alt: two_formulas_alt
             }}
           {%- else -%}
             <div class="two-formulas__image-placeholder">

@@ -133,10 +133,24 @@
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
           {%- comment -%} KC/Button, secondary, medium (Figma 3391:12659) {%- endcomment -%}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="research-behind-system__button">
-            <span>{{ section.settings.button_label }}</span>
-            {{- 'kc-icon-arrow-right.svg' | inline_asset_content -}}
-          </a>
+          {%- capture cta_icon -%}{{- 'kc-icon-arrow-right.svg' | inline_asset_content -}}{%- endcapture -%}
+          {%- if section.settings.button_link == blank or section.settings.button_link == '#' -%}
+            {%- comment -%} No page yet: the shared "Coming soon" state (Victor's rule H8) {%- endcomment -%}
+            {{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
+            <script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
+            {%- assign cta_id = 'ResearchCta-' | append: section.id -%}
+            {%- render 'kc-coming-soon',
+              id: cta_id,
+              label: section.settings.button_label,
+              class: 'research-behind-system__button',
+              icon: cta_icon
+            -%}
+          {%- else -%}
+            <a href="{{ section.settings.button_link }}" class="research-behind-system__button">
+              <span>{{ section.settings.button_label }}</span>
+              {{- cta_icon -}}
+            </a>
+          {%- endif -%}
         {%- endif -%}
       </div>
     {%- endif -%}

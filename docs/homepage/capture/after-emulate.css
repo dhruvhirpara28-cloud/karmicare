@@ -1,0 +1,29 @@
+/* A1 after-evidence: what the branch changes outside assets/*.css, emulated on the live page.
+   Changed asset files (section-*.css) are served in place of the live ones by the capture's
+   Fetch override; this file covers settings and inline <style> blocks in Liquid. */
+
+/* 206d83c (merge 6aa0e71), templates/index.json: benefit veil #212a49 at 58 % */
+.product-benefits__card-overlay { background-color: #212a49 !important; opacity: 0.58 !important; }
+
+/* 6860d74, templates/index.json: benefits columns_laptop and columns_tablet 2 -> 3
+   (the section writes them as inline custom properties on the grid) */
+.product-benefits__grid { --cols-tablet: 3 !important; --cols-laptop: 3 !important; }
+
+/* 174997e, templates/index.json: FAQ Night cards #2c3a60 -> #212a49 */
+body.night-mode details.km-faq__item { background-color: #212a49 !important; }
+
+/* 82a0a51, sections/footer.liquid (inline style): legal row gap */
+@media screen and (min-width: 1200px) {
+  .km-footer-legal { gap: var(--kc-responsive-spacing-layout-3xl) !important; }
+}
+
+/* 37ab3bc, sections/stat-strip-karmicare.liquid (inline style): tablet grid now up to 1199,
+   columns_tablet is 3 on the homepage */
+@media screen and (min-width: 990px) and (max-width: 1199px) {
+  .stat-strip-karmicare__grid { flex-wrap: wrap; justify-content: center; row-gap: 1.5rem; }
+  .stat-strip-karmicare__item { flex: 0 0 calc(100% / 3); }
+  .stat-strip-karmicare__item:nth-child(3n)::after { display: none; }
+}
+
+/* Capture hygiene: Shopify's privacy banner covers the hero */
+#shopify-pc__banner, #shopify-pc__prefs__dialog { display: none !important; }
