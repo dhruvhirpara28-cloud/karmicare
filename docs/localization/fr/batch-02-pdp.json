@@ -15,7 +15,7 @@
   "translated": 141
  },
  "flag_counts": {
-  "fit-risk": 9,
+  "fit-risk": 10,
   "gendered-title": 14,
   "legal-review": 1,
   "not-rendered": 6,
@@ -1642,12 +1642,13 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.heading",
    "en": "No SLS meant fewer and shorter canker sores.",
    "en_sha1": "bcf10287f5014b3b7580a93b50f3de7a52848ce2",
-   "fr": "Sans SLS, les aphtes étaient moins nombreux et plus courts.",
+   "fr": "Sans SLS, les aphtes étaient moins nombreux et duraient moins longtemps.",
    "status": "translated",
    "flags": [
-    "pending-claim-review"
+    "pending-claim-review",
+    "fit-risk"
    ],
-   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "R3 F4: 'shorter' is duration (the card's result line says 'shorter duration'): 'duraient moins longtemps'. Card heading, 72 chars vs EN 44: check at the integration preview. Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
    "source_status": "needs-review",
    "claims": [
     "C64"
