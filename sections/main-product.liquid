@@ -144,7 +144,7 @@
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <span class="ft-line">
-                      Or
+                      {{ 'kc.plans.or' | t }}
                       <button class="ft-link kc-try-once-btn" data-plan="once" type="button">
                         {{ loop_block.settings.try_once_text | escape }} · <span class="kc-try-once-price"></span>
                       </button>
