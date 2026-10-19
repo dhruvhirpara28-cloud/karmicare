@@ -10,8 +10,8 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 
 | Status | Claims |
 |---|---:|
-| approved | 18 |
-| needs-review | 45 |
+| approved | 17 |
+| needs-review | 46 |
 | unsupported | 3 |
 
 | Id | Topic | Claim (verbatim excerpt) | Status | Basis | Where |
@@ -50,7 +50,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | C43 | systemic | “What settles in the mouth is swallowed all night” | **needs-review** | Oral–gut–brain mechanism statement (admin product FAQ metafield). | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#106` |
 | C44 | systemic | “Formulated without fluoride and without known endocrine-active ingredients” | **needs-review** | 'Free from' claim on endocrine-active ingredients needs substantiation (admin product FAQ metafield). | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#102` |
 | C45 | systemic | “You feel it straight away” | **needs-review** | Immediate-effect claim (admin comparison metafield). | `admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#15` |
-| C46 | rhythm | “supporting the natural recovery process” | **approved** | regulatory.md 'supports'. | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#104` |
+| C46 | physiology | “Awake for the cortisol morning, Asleep for the repair night — supporting the natural recovery process instead of interrupting it.” | **needs-review** | The verb 'supporting' is allowed (regulatory.md), but the statement ties the formulas to cortisol and the body's overnight recovery and compares them with care that 'interrupts' it. That is a physiological and comparative scope beyond the cosmetic Do-say list in products.md, like C40 and C50–C54; it needs Clinical Research validation. | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#104` |
 | C50 | physiology | “Neisseria peaks” | **needs-review** | Study-derived timestamp (Chellappa 2022); 45 brief launch gate 4: Clinical Research sign-off on the science sections. | `index:chronobiology_clock_karmicare/morning_badge`, `product.subscription-item:chronobiology_clock_karmicare/morning_badge` |
 | C51 | physiology | “Fusobacterium peaks” | **needs-review** | As C50. | `index:chronobiology_clock_karmicare/night_badge`, `product.subscription-item:chronobiology_clock_karmicare/night_badge` |
 | C52 | physiology | “Melatonin rises and saliva slows to a trickle” | **needs-review** | Physiology statement; gate 4 sign-off. | `index:chronobiology_clock_karmicare/night_text`, `product.subscription-item:chronobiology_clock_karmicare/night_text` |
