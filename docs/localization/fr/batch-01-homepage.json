@@ -2,23 +2,23 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "b685b73d4dcdfddd153d4f130c0aa6806b9715ed",
- "source_entries": 221,
+ "source_digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
+ "source_entries": 225,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "admin": 2,
-  "held": 21,
+  "held": 22,
   "locale-present": 2,
-  "theme-key": 26,
-  "translated": 170
+  "theme-key": 30,
+  "translated": 169
  },
  "flag_counts": {
   "fit-risk": 4,
   "gendered-title": 7,
   "legal-review": 1,
-  "pending-claim-review": 30,
+  "pending-claim-review": 36,
   "pending-en-review": 7,
   "source-defect": 2,
   "wording-adapted": 3
@@ -971,11 +971,14 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "fr": "Des gencives calmes et éclatantes",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "The card text (C35) is held as unsupported; this heading is approved and translated, so the card would show a FR heading over EN text until C35 is resolved.",
-   "source_status": "approved"
+   "notes": "unsupported-claim: C35 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed Since source-copy R1 (2194ef3) C35 covers the heading too, so heading and text of card 06 are both held.",
+   "source_status": "needs-review",
+   "claims": [
+    "C35"
+   ]
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
@@ -1454,9 +1457,14 @@
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "fr": "<p>Pensé pour celles et ceux qui lisent l’étiquette, vérifient la recherche et veulent des soins quotidiens à la hauteur. Des méta-analyses et des essais contrôlés randomisés, au sommet de la hiérarchie des preuves, aux côtés d’études en laboratoire. Publiés dans des revues à comité de lecture et portant au total sur plus de 38 000 personnes.&nbsp;</p>",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C68 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C68"
+   ]
   },
   {
    "id": "index:research_behind_system_EkjATL/button_label",
@@ -1537,9 +1545,14 @@
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "fr": "98 % d’occlusion contre 82 % et 65 % pour deux autres technologies désensibilisantes",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C60"
+   ]
   },
   {
    "id": "index:research_behind_system_EkjATL/card_bDxUVT/method_label",
@@ -1659,9 +1672,14 @@
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "fr": "SMD 2,17 · p = 0,004 · IC à 95 % 0,68–3,66&nbsp;",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C61"
+   ]
   },
   {
    "id": "index:research_behind_system_EkjATL/card_yMiD9D/method_label",
@@ -1781,9 +1799,14 @@
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "fr": "SMD −1,09 · p < 0,00001 · IC à 95 % −1,34 à −0,83",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C62"
+   ]
   },
   {
    "id": "index:research_behind_system_EkjATL/card_fmFMFd/method_label",
@@ -1903,9 +1926,14 @@
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "fr": "Sensibilité à l’air froid et tactile plus faible qu’avec le fluor et le placebo, p < 0,05",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C63"
+   ]
   },
   {
    "id": "index:research_behind_system_EkjATL/card_Hi7YUD/method_label",
@@ -2026,9 +2054,14 @@
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "fr": "Moins d’ulcérations, durée plus courte, moins d’épisodes, moins de douleur",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C64"
+   ]
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/method_label",
@@ -2323,10 +2356,11 @@
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims C13 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "Claims C13, C93 need Clinical Research sign-off; translated faithfully, not softened.",
    "source_status": "corrected",
    "claims": [
-    "C13"
+    "C13",
+    "C93"
    ]
   },
   {
@@ -2835,6 +2869,19 @@
    "source_status": "needs-key"
   },
   {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:91:live",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:91",
+   "en": ". Current local time.",
+   "en_sha1": "43352299fe60db1f716d39fb83c9c04056c7fc7f",
+   "fr": ". Heure locale actuelle.",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "aria-valuetext tail at rest (live branch); pairs with '. Relâchez pour revenir à l'heure actuelle.' while dragging.",
+   "source_status": "needs-key"
+  },
+  {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:11",
    "resource_type": "theme_locale",
    "file_or_handle": "assets/chronobiology-clock-karmicare.js",
@@ -3046,6 +3093,45 @@
    "status": "theme-key",
    "flags": [],
    "notes": "Off-limits Loop file: Loop owner integrates.",
+   "source_status": "needs-key"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2452:annual",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2452",
+   "en": "/ year",
+   "en_sha1": "416b18b45426df89c6658468f95e3aa81e201a41",
+   "fr": "/ an",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "Year plan card short label, as '/ {{ days }} jours' on the 60-day card and '/an' in the compare table. Off-limits Loop file: Loop owner integrates.",
+   "source_status": "needs-key"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2463",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2463",
+   "en": "Renews",
+   "en_sha1": "78906379a6ef5b31bc338154955072b3b70867b9",
+   "fr": "Se renouvelle",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "The widget swaps 'ships' for this word by regex; in FR the admin plan name is 'expédition tous les 60 jours', so the regex will not match. Key the whole line instead: 'Se renouvelle tous les {{ days }} jours'. Off-limits Loop file: Loop owner integrates.",
+   "source_status": "needs-key"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2464",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2464",
+   "en": "{{ amount }} / brushing",
+   "en_sha1": "14123a45c3bd41e10d495c475287c358365ae6cf",
+   "fr": "{{ amount }} / brossage",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "Per-brushing line on every plan card; {{ amount }} comes from the store money format (FR renders 0,49 €). Off-limits Loop file: Loop owner integrates.",
    "source_status": "needs-key"
   },
   {

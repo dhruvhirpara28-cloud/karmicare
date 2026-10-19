@@ -19,7 +19,7 @@
   "gendered-title": 14,
   "legal-review": 1,
   "not-rendered": 6,
-  "pending-claim-review": 27,
+  "pending-claim-review": 37,
   "pending-en-review": 9,
   "source-defect": 7,
   "wording-adapted": 14
@@ -1121,9 +1121,14 @@
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "fr": "<p>Pensé pour celles et ceux qui lisent l’étiquette, vérifient la recherche et veulent des soins quotidiens à la hauteur. Des méta-analyses et des essais contrôlés randomisés, au sommet de la hiérarchie des preuves, aux côtés d’études en laboratoire. Publiés dans des revues à comité de lecture et portant au total sur plus de 38 000 personnes.&nbsp;</p>",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C68 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C68"
+   ]
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/button_label",
@@ -1204,9 +1209,14 @@
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "fr": "98 % d’occlusion contre 82 % et 65 % pour deux autres technologies désensibilisantes",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C60"
+   ]
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/method_label",
@@ -1326,9 +1336,14 @@
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "fr": "SMD 2,17 · p = 0,004 · IC à 95 % 0,68–3,66&nbsp;",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C61"
+   ]
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/method_label",
@@ -1448,9 +1463,14 @@
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "fr": "SMD −1,09 · p < 0,00001 · IC à 95 % −1,34 à −0,83",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C62"
+   ]
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_label",
@@ -1570,9 +1590,14 @@
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "fr": "Sensibilité à l’air froid et tactile plus faible qu’avec le fluor et le placebo, p < 0,05",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C63"
+   ]
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_label",
@@ -1693,9 +1718,14 @@
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "fr": "Moins d’ulcérations, durée plus courte, moins d’épisodes, moins de douleur",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "needs-review",
+   "claims": [
+    "C64"
+   ]
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_label",
@@ -3452,9 +3482,14 @@
    "en_sha1": "612d49c26e60a56f67b1cb2b58ba22d3a102f4ba",
    "fr": "— des gencives plus apaisées, une haleine plus fraîche, matin et soir",
    "status": "admin",
-   "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C94 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C94"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#12",
@@ -4442,10 +4477,14 @@
    "fr": "Sécurité évaluée pour une application leave-on",
    "status": "admin",
    "flags": [
+    "pending-claim-review",
     "wording-adapted"
    ],
-   "notes": "'leave-on use' rendered 'application leave-on'.",
-   "source_status": "admin-held"
+   "notes": "'leave-on use' rendered 'application leave-on'. Claims C93 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C93"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#57",
@@ -4962,9 +5001,14 @@
    "en_sha1": "691729765bebd9e0e7fa0fa77611d890167b991e",
    "fr": "Sûr en leave-on",
    "status": "admin",
-   "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C93 need Clinical Research sign-off; translated faithfully, not softened.",
+   "source_status": "admin-held",
+   "claims": [
+    "C93"
+   ]
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96",
@@ -5089,8 +5133,10 @@
    "en_sha1": "fb3a87c4c5739e8d910b916432f6b92954580122",
    "fr": "Awake pour le matin du cortisol, Asleep pour la nuit de réparation — en soutenant le processus naturel de récupération au lieu de l’interrompre.",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims C46 need Clinical Research sign-off; translated faithfully, not softened.",
    "source_status": "admin-held",
    "claims": [
     "C46"
