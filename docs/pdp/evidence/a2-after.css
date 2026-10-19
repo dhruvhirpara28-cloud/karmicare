@@ -1,7 +1,7 @@
 /* A2 evidence: only the rules this branch adds or changes, injected over the
    live theme (3bae259) to show the after state. Mirrors:
    assets/section-main-product.css (buybox minimum width, 990px and up)
-   assets/kc-buybox.css (Care Credit chips, Welcome Kit names) */
+   assets/kc-buybox.css (Care Credit chips and their popovers, Welcome Kit names) */
 
 @media screen and (min-width: 990px) {
   .product--large:not(.product--no-media):has(.kc-buybox) .product__media-wrapper {
@@ -29,6 +29,26 @@
 
 .kc-buybox .kc-return_care .info-tip {
   height: var(--kc-buybox-body-line-height);
+}
+
+/* R5: popovers right-aligned to the ⓘ */
+.kc-buybox .kc-return_care .info-tip .info-tip-popover {
+  bottom: calc(100% + 10px);
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.kc-buybox .kc-return_care .info-tip:hover .info-tip-popover,
+.kc-buybox .kc-return_care .info-tip.active-tip .info-tip-popover {
+  transform: translateY(-8px);
+}
+
+.kc-buybox .kc-return_care .info-tip .info-tip-popover::after {
+  left: auto;
+  right: calc(var(--kc-responsive-size-icon-sm) / 2 - 6px);
+  margin-left: 0;
+  transform: none;
 }
 
 .kc-buybox .loop-welcome-kit-product-link {
