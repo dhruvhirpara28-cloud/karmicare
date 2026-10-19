@@ -5,16 +5,16 @@
 (() => {
   'use strict';
 
-  // Exact seven source messages from specification:
-  // Start-inclusive/end-exclusive (in minutes from midnight), with the final window wrapping midnight.
+  // The seven windows of the specification, start-inclusive/end-exclusive (in minutes from midnight),
+  // with the final window wrapping midnight. Each message is the section's data-window-N (locale keys).
   const windows = [
-    [300, 480, 'saliva is only now picking up after the night, and the enamel is least protected before your first drink'],
-    [480, 660, 'breakfast and coffee dropped the pH within minutes — saliva spends the next half hour bringing it back'],
-    [660, 840, 'lunch restarts the cycle: every eating occasion opens a fresh acid window, whatever its size'],
-    [840, 1020, 'grazing hours — the most frequent acid challenge of the day, and it is how often, not how much'],
-    [1020, 1200, 'the last big acid window of the day; after this, saliva starts winding down'],
-    [1200, 1380, 'melatonin is rising and salivary flow is dropping — what is left on the enamel now stays for hours'],
-    [1380, 1740, 'saliva is near its minimum and clearance has almost stopped: the longest unguarded stretch, and the repair window']
+    [300, 480, 1],
+    [480, 660, 2],
+    [660, 840, 3],
+    [840, 1020, 4],
+    [1020, 1200, 5],
+    [1200, 1380, 6],
+    [1380, 1740, 7]
   ];
 
   function initClock(sectionEl) {
@@ -81,14 +81,14 @@
         (selected >= start && selected < end) ||
         (selected + 1440 >= start && selected + 1440 < end)
       );
-      const message = windowEntry ? windowEntry[2] : '';
+      const message = windowEntry ? readout.getAttribute('data-window-' + windowEntry[2]) || '' : '';
       timeOut.textContent = time;
       timeOut.dateTime = time;
       copyOut.textContent = message;
-      caption.textContent = preview ? 'your mouth at this hour:' : 'your mouth right now:';
+      caption.textContent = (preview ? readout.dataset.captionPreview : readout.dataset.captionLive) || '';
       readout.dataset.mode = preview ? 'preview' : 'live';
       knob.setAttribute('aria-valuenow', String(selected));
-      knob.setAttribute('aria-valuetext', time + ' — ' + (awake ? 'Awake' : 'Asleep') + ' — ' + message + (preview ? '. Release to return to now.' : '. Current local time.'));
+      knob.setAttribute('aria-valuetext', time + ' — ' + (awake ? 'Awake' : 'Asleep') + ' — ' + message + ((preview ? readout.dataset.valuetextPreview : readout.dataset.valuetextLive) || ''));
     }
 
     function live() {

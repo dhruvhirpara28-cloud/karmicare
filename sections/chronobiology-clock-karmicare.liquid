@@ -98,12 +98,12 @@
             id="clock-knob-{{ section.id }}"
             tabindex="0"
             role="slider"
-            aria-label="Explore your mouth's 24-hour clock"
+            aria-label="{{ 'kc.clock.aria_label' | t }}"
             aria-describedby="clock-help-{{ section.id }}"
             aria-valuemin="0"
             aria-valuemax="1439"
             aria-valuenow="0"
-            aria-valuetext="Loading current local time"
+            aria-valuetext="{{ 'kc.clock.loading' | t }}"
           >
             {%- comment -%} Figma "now-dot" icon, cropped to the 40px dot {%- endcomment -%}
             <svg viewBox="4 4 40 40" width="40" height="40" fill="none" aria-hidden="true" focusable="false">
@@ -140,7 +140,22 @@
       </div>
     </div>
 
-    <div class="readout" data-mode="live">
+    {%- comment -%} The script's copy, from the locale keys: captions, aria-valuetext tails, the seven hour windows {%- endcomment -%}
+    <div
+      class="readout"
+      data-mode="live"
+      data-caption-live="{{ 'kc.clock.caption_live' | t }}"
+      data-caption-preview="{{ 'kc.clock.caption_preview' | t }}"
+      data-valuetext-live="{{ 'kc.clock.valuetext_live' | t }}"
+      data-valuetext-preview="{{ 'kc.clock.valuetext_preview' | t }}"
+      data-window-1="{{ 'kc.clock.window_1' | t }}"
+      data-window-2="{{ 'kc.clock.window_2' | t }}"
+      data-window-3="{{ 'kc.clock.window_3' | t }}"
+      data-window-4="{{ 'kc.clock.window_4' | t }}"
+      data-window-5="{{ 'kc.clock.window_5' | t }}"
+      data-window-6="{{ 'kc.clock.window_6' | t }}"
+      data-window-7="{{ 'kc.clock.window_7' | t }}"
+    >
       <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
         {%- comment -%} Figma "interaction hint · drag the ring" icon {%- endcomment -%}
         <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false">
@@ -150,7 +165,7 @@
       </button>
       <p class="time-line">
         <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
-        <span id="clock-caption-{{ section.id }}" class="clock-caption">your mouth right now:</span>
+        <span id="clock-caption-{{ section.id }}" class="clock-caption">{{ 'kc.clock.caption_live' | t }}</span>
       </p>
       <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
     </div>
