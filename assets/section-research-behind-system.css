@@ -303,7 +303,7 @@
   gap: 1.2rem;
 }
 
-/* Source chip: authors · year · journal, links to the study */
+/* Source chip: authors · year · journal; a link to the study only when the card has a URL */
 .research-card__source {
   display: inline-flex;
   align-items: center;
@@ -323,7 +323,7 @@
   transition: background-color 0.2s ease;
 }
 
-.research-card__source:hover {
+a.research-card__source:hover {
   background-color: var(--kc-mapped-surface-tertiary-default-hover);
 }
 
