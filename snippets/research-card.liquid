@@ -38,8 +38,8 @@
     {%- if block.settings.link_label != blank or block.settings.logo != blank -%}
       <div class="research-card__footer">
         {%- if block.settings.link_label != blank -%}
-          {%- comment -%} Without a study URL the chip is a plain label: no dead "#" link, no external-link icon {%- endcomment -%}
-          {%- if block.settings.link_url != blank -%}
+          {%- comment -%} Without a study URL (blank or a bare "#") the chip is a plain label: no dead link, no external-link icon {%- endcomment -%}
+          {%- if block.settings.link_url != blank and block.settings.link_url != '#' -%}
             <a href="{{ block.settings.link_url }}" class="research-card__source">
               <span class="research-card__source-text">{{ block.settings.link_label }}</span>
               <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
