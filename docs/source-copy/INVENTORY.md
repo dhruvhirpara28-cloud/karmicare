@@ -19,7 +19,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 
 ## How to read an entry
 
-`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status`/`claim_basis` (batches 05–07), `blocked` (no approved copy), `legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
+`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status` (every entry that carries a claim: in batches 01–03 the strictest status of its `claims`, in batches 05–07 the hand review), `claim_basis` (batches 05–07), `blocked` (no approved copy: a placeholder, or EN that breaks a brand rule),`legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
 
 | status | Meaning for translators |
 |---|---|
