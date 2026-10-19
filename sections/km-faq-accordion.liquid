@@ -40,6 +40,12 @@
     }
 
     .km-faq__filter-btn {
+      /* Native buttons for keyboard use; reset what a <button> does not inherit */
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+      font: inherit;
+      letter-spacing: inherit;
       background: transparent;
       border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
       color: color-mix(in srgb, currentColor 76%, transparent);
@@ -55,6 +61,11 @@
       background-color: var(--kc-mapped-surface-accent-default);
       color: var(--kc-mapped-text-accent-default-on-accent);
       border-color: var(--kc-mapped-surface-accent-default);
+    }
+
+    .km-faq__filter-btn:focus-visible {
+      outline: 2px solid var(--kc-mapped-border-focus-default);
+      outline-offset: 2px;
     }
     details.km-faq__item {
         max-width: 680px;
@@ -152,11 +163,11 @@
 
     {%- if categories_array.size > 0 -%}
       <div class="km-faq__filters">
-        <span class="km-faq__filter-btn active" data-filter="all">ALL</span>
+        <button type="button" class="km-faq__filter-btn active" data-filter="all" aria-pressed="true">ALL</button>
 
         {%- for category in categories_array -%}
           {%- if category != blank -%}
-            <span class="km-faq__filter-btn" data-filter="{{ category | handleize }}">{{ category }}</span>
+            <button type="button" class="km-faq__filter-btn" data-filter="{{ category | handleize }}" aria-pressed="false">{{ category }}</button>
           {%- endif -%}
         {%- endfor -%}
       </div>
@@ -216,9 +227,13 @@
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', function () {
         // Remove active class from all buttons
-        filterBtns.forEach((b) => b.classList.remove('active'));
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         // Add active class to clicked button
         this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
 
         const filterValue = this.getAttribute('data-filter');
 
