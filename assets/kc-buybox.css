@@ -209,8 +209,13 @@
 
 /* Between shown plan cards only. Hidden groups ([hidden] from
    kc-plan-select.js, .loop-display-none from Loop) come first in the
-   list, and counting them put 8px above the first card: the label then
-   sat 24px from it instead of 16 (Victor, 18 Oct). */
+   list, and counting them put a margin above the first card: the label
+   then sat 24-28px from it instead of 16 (Victor, 18 Oct). Loop's widget
+   CSS sets 12px on every following group, so that is cleared first. */
+.kc-buybox [id^="loop-selling_plan_group-"] + [id^="loop-selling_plan_group-"] {
+  margin-top: 0;
+}
+
 .kc-buybox [id^="loop-selling_plan_group-"]:not([hidden], .loop-display-none) ~ [id^="loop-selling_plan_group-"]:not([hidden], .loop-display-none) {
   margin-top: var(--kc-responsive-spacing-layout-xs);
 }
