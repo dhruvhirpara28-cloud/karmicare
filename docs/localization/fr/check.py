@@ -45,7 +45,7 @@ def typography(value, key_path):
     for node in text_nodes(value):
         if re.search(r" [:;!?€%»]", node):
             problems.append("plain space before : ; ! ? € % or »")
-        if re.search(r"[^\s  \d][;!?»]", node):
+        if re.search(r"[^\s  \d;!?][;!?»]", node):
             problems.append("no space before ; ! ? or »")
         if re.search(r"[A-Za-zÀ-ÿ)][:](?!//)", node) and not key_path.endswith("custom_button_text_by_plan"):
             problems.append("no space before :")
