@@ -13,7 +13,7 @@
   "translated": 143
  },
  "flag_counts": {
-  "legal-review": 956,
+  "legal-review": 972,
   "pending-en-review": 3,
   "source-defect": 3
  },
@@ -2216,9 +2216,10 @@
    "fr": "Nouveaux droits des consommateurs – KARMICARE",
    "status": "admin",
    "flags": [
-    "pending-en-review"
+    "pending-en-review",
+    "legal-review"
    ],
-   "notes": "The SEO titles of the three 2.0 legal pages start with 'New'; translated as written (Victor may want to drop 'New' in EN).",
+   "notes": "The SEO titles of the three 2.0 legal pages start with 'New'; translated as written (Victor may want to drop 'New' in EN). R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -2231,9 +2232,10 @@
    "fr": "Nouvelle politique de confidentialité – KARMICARE",
    "status": "admin",
    "flags": [
-    "pending-en-review"
+    "pending-en-review",
+    "legal-review"
    ],
-   "notes": "Starts with 'New' in EN; translated as written.",
+   "notes": "Starts with 'New' in EN; translated as written. R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -2261,9 +2263,10 @@
    "fr": "Nouvelles conditions générales – KARMICARE",
    "status": "admin",
    "flags": [
-    "pending-en-review"
+    "pending-en-review",
+    "legal-review"
    ],
-   "notes": "Starts with 'New' in EN; translated as written.",
+   "notes": "Starts with 'New' in EN; translated as written. R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -2320,8 +2323,10 @@
    "en_sha1": "19c101f25bb63ada34c382966e771c7eab41d4a6",
    "fr": null,
    "status": "held",
-   "flags": [],
-   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -2333,8 +2338,10 @@
    "en_sha1": "48629a4ebfead28bcc0dcc5e8233065ad75e24aa",
    "fr": null,
    "status": "held",
-   "flags": [],
-   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -6351,8 +6358,10 @@
    "en_sha1": "654f83c1ebf72d6f7a3939f3a30826c53299fb98",
    "fr": null,
    "status": "held",
-   "flags": [],
-   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -6364,8 +6373,10 @@
    "en_sha1": "e01cc2c51f6e3e5801d2e19de6cb6d0907e4f123",
    "fr": null,
    "status": "held",
-   "flags": [],
-   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -7487,8 +7498,10 @@
    "en_sha1": "e4a28b45eec360d46c9a090af3386c253af651e6",
    "fr": null,
    "status": "held",
-   "flags": [],
-   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -7500,8 +7513,10 @@
    "en_sha1": "ba8cfcec2e66d8a5de19a3cb1fe431740e848a1d",
    "fr": null,
    "status": "held",
-   "flags": [],
-   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "legacy: pre-2.0 legal page, held in NL/FR (INVENTORY.md); the 2.0 page carries the current text R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -9613,8 +9628,10 @@
    "en_sha1": "c1e7a8ab3f942db2b53c4ac3dd603a54aa4785ee",
    "fr": "Politique de confidentialité – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -12117,8 +12134,10 @@
    "en_sha1": "cbc62d2bf0b0a2dc22e1bc07a88046d3c8f9c3e4",
    "fr": "Conditions générales – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -14005,8 +14024,10 @@
    "en_sha1": "af5b1cbc280a8b3bf44bc64ab727fa4d4ae0dcc3",
    "fr": "Politique de remboursement – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -14153,8 +14174,10 @@
    "en_sha1": "0b939ec29089396e336a6bb6bde4a401d66bfb2e",
    "fr": "Politique d’expédition – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -14271,8 +14294,10 @@
    "en_sha1": "b51057f25190696147140b6c01c8ca9faa80a2f4",
    "fr": "Coordonnées – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -14374,8 +14399,10 @@
    "en_sha1": "0034e103e7df2d4cb23a8f097c313d463713a63d",
    "fr": "Mentions légales – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   },
   {
@@ -14597,8 +14624,10 @@
    "en_sha1": "b106280d031bbb62ff141383fbf07cb6a8feca7a",
    "fr": "Politique de résiliation – KARMICARE",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
   }
  ]
