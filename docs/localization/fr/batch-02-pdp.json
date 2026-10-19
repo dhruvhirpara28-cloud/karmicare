@@ -15,7 +15,7 @@
   "translated": 141
  },
  "flag_counts": {
-  "fit-risk": 8,
+  "fit-risk": 9,
   "gendered-title": 14,
   "legal-review": 1,
   "not-rendered": 6,
@@ -6127,10 +6127,12 @@
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#11",
    "en": "Skip, pause or cancel",
    "en_sha1": "82060ea329b6e1f139b6b0682217122cd86d35b2",
-   "fr": "Reporter, suspendre ou résilier",
+   "fr": "Sauter une livraison, suspendre ou résilier",
    "status": "admin",
-   "flags": [],
-   "notes": "",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F3: 'Skip' is a skipped delivery, not a postponed one (the Terms distinguish skip from reschedule): 'Sauter une livraison, suspendre ou résilier' (43 chars vs EN 21).",
    "source_status": "admin-held"
   },
   {
