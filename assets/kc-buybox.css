@@ -290,17 +290,59 @@
   padding-left: calc(var(--kc-buybox-radio-size) + var(--kc-responsive-spacing-layout-xs));
 }
 
+/* Loop's chip is a wrapping flex row of three items (amount, label, ⓘ). It
+   broke between whole items: the ⓘ alone on a second line at 393 px, the
+   amount alone above the label from 750 to 1199 px. Without wrapping, the
+   label wraps inside its own item, between the amount and the ⓘ. The radius
+   is half the one-line height: one line stays a pill, two lines become a
+   rounded box that clears the text. */
 .kc-buybox .kc-return_care,
 .night-mode .kc-buybox .kc-return_care,
 .day-mode .kc-buybox .kc-return_care {
+  flex-wrap: nowrap;
+  align-items: flex-start;
   gap: var(--kc-responsive-spacing-layout-xs);
   padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-sm);
   background-color: var(--kc-buybox-surface-chip);
   border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
-  border-radius: var(--kc-shape-radius-full);
+  border-radius: calc(var(--kc-buybox-body-line-height) / 2 + var(--kc-responsive-spacing-layout-xs) + var(--kc-shape-stroke-thin, 1px));
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-return_care > * {
+  flex: none;
+}
+
+.kc-buybox .kc-return_care .info-tip {
+  height: var(--kc-buybox-body-line-height);
+}
+
+/* The ⓘ sits at the chip's right end, so its popover opens to the left of
+   it: right-aligned to the icon, no horizontal shift. Centred on the icon
+   (section-main-product.css, product-compare-plans.css), the 240 px popover
+   ran past the viewport at 1024 px. The vertical offsets stay as they were
+   (stated here because the two files above disagree and load in either
+   order): 10 px above the icon at rest, 8 px higher open. The arrow points
+   at the icon. */
+.kc-buybox .kc-return_care .info-tip .info-tip-popover {
+  bottom: calc(100% + 10px);
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.kc-buybox .kc-return_care .info-tip:hover .info-tip-popover,
+.kc-buybox .kc-return_care .info-tip.active-tip .info-tip-popover {
+  transform: translateY(-8px);
+}
+
+.kc-buybox .kc-return_care .info-tip .info-tip-popover::after {
+  left: auto;
+  right: calc(var(--kc-responsive-size-icon-sm) / 2 - 6px);
+  margin-left: 0;
+  transform: none;
 }
 
 .kc-buybox .info-tip .info-icon {
@@ -438,7 +480,12 @@
   display: none;
 }
 
+/* Full names, as in Figma KC/Kit_item (up to three lines on mobile).
+   Loop's two-line clamp cut "Toothbrush 2.0" to "Toothbrush…" where the
+   buybox is narrow (990 to 1199 px). */
 .kc-buybox .loop-welcome-kit-product-link {
+  display: block;
+  overflow: visible;
   margin: 0;
   font-size: var(--kc-responsive-label-lg-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);

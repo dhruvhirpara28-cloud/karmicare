@@ -95,6 +95,20 @@ product-info {
     max-width: 50%;
     width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
   }
+
+  /* PDP buybox: at least 44rem wide (40rem of content after the 4rem gap), so
+     from 990 to about 1160px it no longer drops to 34rem, narrower than on a
+     phone, where the Care Credit chips and kit names broke up. The gallery
+     takes what is left; from about 1160px the 60/40 split above applies. */
+  .product--large:not(.product--no-media):has(.kc-buybox) .product__media-wrapper {
+    max-width: min(60%, calc(100% - 44rem));
+    width: min(calc(60% - var(--grid-desktop-horizontal-spacing) / 2), calc(100% - 44rem - var(--grid-desktop-horizontal-spacing) / 2));
+  }
+
+  .product--large:not(.product--no-media):has(.kc-buybox) .product__info-wrapper {
+    max-width: max(40%, 44rem);
+    width: max(calc(40% - var(--grid-desktop-horizontal-spacing) / 2), calc(44rem - var(--grid-desktop-horizontal-spacing) / 2));
+  }
 }
 
 /* Dynamic checkout */
