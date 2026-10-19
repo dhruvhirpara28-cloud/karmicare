@@ -5,12 +5,12 @@
  "source_digest": "03dd18b9d41a21772da2e26b7060c42f6b2364d1",
  "source_entries": 477,
  "counts": {
-  "pending-claim-review": 37,
+  "pending-claim-review": 41,
   "translated": 122,
   "held": 33,
   "dawn-nl": 15,
   "theme-key": 36,
-  "admin": 234
+  "admin": 230
  },
  "fit_risk": [
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
@@ -2935,11 +2935,12 @@
    "en": "Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening toothpaste rich in nano-hydroxyapatite, morning and evening toothbrushes and whitening charcoal floss",
    "en_sha1": "f8468b42e71b8cbed23ea243de3a8277d5ba7e02",
    "nl": "Karmicare bioritmische mondzorgset: fluoridevrije, SLS-vrije Awake-ochtendtandpasta en Asleep-avondtandpasta, rijk aan nano-hydroxyapatiet, met ochtend- en avondtandenborstel en whitening-tandzijde met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:media.69248905085309.alt",
@@ -3047,11 +3048,12 @@
    "en": "Animated view of the Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening toothpaste rich in nano-hydroxyapatite, morning and evening toothbrushes and whitening charcoal floss",
    "en_sha1": "b20b641627f279dc30947567da25191b95c597b2",
    "nl": "Animatie van de Karmicare bioritmische mondzorgset: fluoridevrije, SLS-vrije Awake-ochtendtandpasta en Asleep-avondtandpasta, rijk aan nano-hydroxyapatiet, met ochtend- en avondtandenborstel en whitening-tandzijde met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
   },
   {
    "id": "admin:morning-toothbrush-2-0:title",
@@ -3091,12 +3093,13 @@
    "en": "Whitening Charcoal Floss",
    "en_sha1": "a13ec532d1776acc6151cc4faffed46ced530676",
    "nl": "Whitening floss met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
     "admin",
-    "fit-risk"
+    "fit-risk",
+    "pending-claim-review"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice (B1a kit item, B2 product page); Figma NL wording"
+   "notes": "revised in assembly: same Shopify product title inventoried twice (B1a kit item, B2 product page); Figma NL wording; R2 (review F5): pending-claim-review, same claim wording as a gated field"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#01",
@@ -6423,11 +6426,12 @@
    "en": "Morning Toothbrush · Evening Toothbrush · Whitening Charcoal Floss",
    "en_sha1": "aabaa8738ff8f5fced71ba69977e183118db9c8c",
    "nl": "Ultrazachte ochtendborstel · Dieptereinigende avondborstel · Whitening-tandzijde met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "pending-claim-review"
    ],
-   "notes": "Glossary (Figma NL) brush names, same as the product titles."
+   "notes": "Glossary (Figma NL) brush names, same as the product titles.; R2 (review F5): pending-claim-review, same claim wording as a gated field"
   }
  ]
 }

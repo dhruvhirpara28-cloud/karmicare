@@ -11,7 +11,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | Status | Claims |
 |---|---:|
 | approved | 17 |
-| needs-review | 46 |
+| needs-review | 47 |
 | unsupported | 3 |
 
 | Id | Topic | Claim (verbatim excerpt) | Status | Basis | Where |
@@ -82,6 +82,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | C97 | timeline | “— weak spots remineralised, enamel stronger” | **needs-review** | As C95. | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#15` |
 | C98 | timeline | “— feel the repair, it keeps working while you sleep” | **needs-review** | As C95. | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#07` |
 | C99 | environment | “are recyclable” | **needs-review** | Environmental claim in the footer; needs substantiation (EU green-claims rules). | `footer-group:footer/copyright_text` |
+| C100 | whitening | “Whitening Charcoal Floss” · “whitening charcoal floss” | **needs-review** | Whitening claim for floss with no source in products.md: the same wording as the floss product title, needs-review in batch 05 (R2, review F5). Kit item title, compare-table row and kit image alts. | `admin:whitening-charcoal-dental-floss:title`, `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products`, `admin:karmicare-biorhythmic-oral-care-system:media.69271648010621.alt`, `admin:karmicare-biorhythmic-oral-care-system:media.69884688236925.alt` |
 
 ## Offer statements that conflict with the offer source of truth
 
@@ -98,30 +99,33 @@ Not health claims, but customer-facing promises that the confirmed offer (5 Oct 
 
 ## Batches 05–07: other products, content pages, collections and blog (B2)
 
-Same three statuses and the same standard as above, applied to every block of batches 05–07 that a keyword scan flagged (541 blocks), each judged by hand. Blocks without a claim are left out. The per-entry status is also in `en-source.json` (`claim_status`, `claim_basis`). After the R2 review (`docs/runtime-review/B2-NL-ASTRA.md`), 3 blocks that the scan missed were added; their basis ends with “(R2, review F*n*)”.
+Same three statuses and the same standard as above, applied to every block of batches 05–07 that a keyword scan flagged (541 blocks), each judged by hand. Blocks without a claim are left out. The per-entry status is also in `en-source.json` (`claim_status`, `claim_basis`). After the R2 review (`docs/runtime-review/B2-NL-ASTRA.md`), 6 blocks that the scan missed were added and 9 blocks were reclassified; their basis ends with “(R2, review F*n*)”.
 
 The nine blog articles (2023–2024) predate the 2026 claim rules. They make disease, prevention and fluoride-harm statements throughout. **Unsupported** blocks are held in the NL and FR files (not translated); **needs-review** blocks are translated faithfully and marked `pending-claim-review`.
 
 | Page | approved | needs-review | unsupported |
 |---|---:|---:|---:|
-| `templates/product.json` | 0 | 1 | 0 |
+| `templates/product.json` | 0 | 2 | 0 |
+| `/products/complete-hygiene-kit` | 0 | 2 | 0 |
 | `/products/evening-toothbrush` | 0 | 3 | 0 |
 | `/products/whitening-charcoal-dental-floss` | 0 | 5 | 0 |
 | `/products/evening-toothbrush-2-0` | 0 | 3 | 0 |
 | `/products/asleep-evening-toothpaste-2-0` | 0 | 1 | 3 |
 | `/products/awake-morning-toothpaste-2-0` | 0 | 1 | 3 |
+| `/products/morning-toothbrush` | 0 | 1 | 0 |
+| `/products/morning-toothbrush-2-0` | 0 | 1 | 0 |
 | `/pages/why-stop-using-fluoride-toothpaste` | 1 | 4 | 0 |
 | `/pages/nhap-technology` | 0 | 1 | 2 |
 | `/blogs/news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | 0 | 32 | 28 |
+| `/blogs/news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | 6 | 29 | 13 |
 | `/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | 2 | 30 | 8 |
 | `/blogs/news/5-reasons-you-should-avoid-fluoride-in-toothpaste` | 2 | 31 | 15 |
-| `/blogs/news/nano-hydroxyapatite` | 8 | 37 | 21 |
+| `/blogs/news/nano-hydroxyapatite` | 7 | 40 | 21 |
 | `/blogs/news/morning-and-night-time-brushing-why-timing-matters` | 5 | 10 | 3 |
-| `/blogs/news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | 7 | 26 | 13 |
 | `/blogs/news/how-oral-health-impacts-your-overall-wellness` | 4 | 28 | 8 |
-| `/blogs/news/headaches-and-tooth-pain-understanding-the-connection` | 2 | 23 | 7 |
+| `/blogs/news/headaches-and-tooth-pain-understanding-the-connection` | 1 | 24 | 7 |
 | `/blogs/news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | 2 | 26 | 4 |
-| **All** | **33** | **262** | **115** |
+| **All** | **30** | **274** | **115** |
 
 ### Unsupported (held in NL/FR): 115
 
@@ -247,24 +251,29 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 
 </details>
 
-### Needs review (translated, pending-claim-review): 262
+### Needs review (translated, pending-claim-review): 274
 
-<details><summary>Show all 262</summary>
+<details><summary>Show all 274</summary>
 
 | Page | Entry | Claim (verbatim excerpt) | Basis |
 |---|---|---|---|
+| `templates/product.json` | `sections.main.blocks.highlights_slider_9wAjAb.settings.text_1` | “Used by +100 kPNI practitioners” | Endorsement count ('+100 kPNI practitioners'), the same claim as C81 on the Duo PDP (needs-review: number unsourced, the 45 brief says '30+ practitioners in BE… |
 | `templates/product.json` | `sections.main.blocks.highlights_slider_9wAjAb.settings.text_3` | “Backed by 39 peer-reviewed studies” | Study count conflicts across the site (+36 / 36 / 39 / 15), as CLAIMS-REVIEW C65. |
+| `/products/complete-hygiene-kit` | `seo.description` | “Whitening Charcoal Floss” | Floss-whitening wording ('Whitening Charcoal Floss'), the same claim as admin:product:whitening-charcoal-dental-floss:title (needs-review: whitening claim for … |
 | `/products/evening-toothbrush` | `seo.title` | “KARMICARE Ultra-soft Detoxifying Evening Toothbrush” | 'Detoxifying' applied to a brush; products.md 'Detoxifies' covers the Asleep paste only. |
 | `/products/evening-toothbrush` | `seo.description` | “This helps your teeth get back to their pearly white colour without polishing or bleaching.” | Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump). |
 | `/products/whitening-charcoal-dental-floss` | `seo.title` | “KARMICARE Whitening Charcoal Floss” | Whitening claim for floss; no source in products.md (paste whitening only via remineralisation). |
 | `/products/whitening-charcoal-dental-floss` | `seo.description` | “Helps remove tenacious plaque without damaging enamel.Whitening in between your teeth while flossing” | Plaque and stain-removal outcomes for floss; plausible mechanically but unsourced in products.md. |
 | `/products/evening-toothbrush-2-0` | `seo.title` | “KARMICARE Ultra-soft Detoxifying Evening Toothbrush” | 'Detoxifying' applied to a brush; products.md 'Detoxifies' covers the Asleep paste only. |
 | `/products/evening-toothbrush-2-0` | `seo.description` | “This helps your teeth get back to their pearly white colour without polishing or bleaching.” | Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump). |
+| `/products/complete-hygiene-kit` | `body_html#b001` | “Whitening Charcoal Floss” | Floss-whitening wording ('Whitening Charcoal Floss'), the same claim as admin:product:whitening-charcoal-dental-floss:title (needs-review: whitening claim for … |
+| `/products/morning-toothbrush` | `body_html#b001` | “Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.” | '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump), as on the evening brushes (needs-review); the EN owner resolves the dose before r… |
 | `/products/evening-toothbrush` | `body_html#b001` | “This helps your teeth get back to their pearly white colour without polishing or bleaching.” | Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump). |
 | `/products/whitening-charcoal-dental-floss` | `title` | “Whitening Charcoal Floss” | Whitening claim for floss; no source in products.md. |
 | `/products/whitening-charcoal-dental-floss` | `body_html#b001` | “Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.” | Plaque, stain and tartar removal by floss unsourced in products.md. |
 | `/products/whitening-charcoal-dental-floss` | `media.27295901876406.alt` | “Karmicare Whitening Charcoal Floss” | Product name carries an unsourced whitening claim. |
 | `/products/evening-toothbrush-2-0` | `body_html#b001` | “This helps your teeth get back to their pearly white colour without polishing or bleaching.” | Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump). |
+| `/products/morning-toothbrush-2-0` | `body_html#b001` | “Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.” | '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump), as on the evening brushes (needs-review); the EN owner resolves the dose before r… |
 | `/products/asleep-evening-toothpaste-2-0` | `body_html#b003` | “With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth.” | Superlatives ('superior', 'optimum'). |
 | `/products/awake-morning-toothpaste-2-0` | `body_html#b003` | “With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth.” | Superlatives ('superior', 'optimum'). |
 | `/pages/why-stop-using-fluoride-toothpaste` | `title` | “Why stop using fluoride toothpaste” | Stop-fluoride call denigrates a legally used ingredient (EU 655/2013 fairness); sourced framing is FAQ-0202/0207. |
@@ -273,8 +282,11 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `/pages/why-stop-using-fluoride-toothpaste` | `seo.description` | “should stop using fluoride toothpaste” | Fluoride-free fact is fine; the stop-fluoride call denigrates a legally used ingredient (EU 655/2013). |
 | `/pages/nhap-technology` | `body_html#b000` | “Why You Need it in Your Toothpaste” | Necessity framing ('Why You Need it in Your Toothpaste'), the same kind of assertion as 'saliva isn't enough on its own' (needs-review); kept pending the claim… |
 | `…/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | `title` | “Benefits of Nootropics: Ease Stress, Boost Focus and Improve Mood.” | Stress/focus/mood effects go beyond products.md Do say 'Nootropic extracts aligned with your body's rhythms' (C40). |
+| `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `title` | “Why You Need It In Your Toothpaste” | Necessity framing ('Why You Need It In Your Toothpaste'), the same wording as the nHAp page body heading and the same kind of assertion as 'saliva isn't enough… |
 | `…/top-natural-whitening-toothpaste-for-a-brighter-smile` | `title` | “Top Natural Whitening Toothpaste For a Brighter Smile.” | Superlative ('Top') on a whitening claim; products.md allows whitening only naturally through remineralisation. |
 | `…/5-reasons-you-should-avoid-fluoride-in-toothpaste` | `title` | “5 Reasons You Should Avoid Fluoride in Toothpaste” | Avoid-fluoride call denigrates a legally used ingredient (EU 655/2013 fairness); sourced framing is FAQ-0202/0207. |
+| `…/nano-hydroxyapatite` | `title` | “Why You Need it in Your Toothpaste” | Necessity framing ('Why You Need It In Your Toothpaste'), the same wording as the nHAp page body heading and the same kind of assertion as 'saliva isn't enough… |
+| `…/nano-hydroxyapatite` | `main#01` | “Why You Need it in Your Toothpaste” | Necessity framing ('Why You Need It In Your Toothpaste'), the same wording as the nHAp page body heading and the same kind of assertion as 'saliva isn't enough… |
 | `…/nano-hydroxyapatite` | `body_html#b006` | “powerful remineralizing effects on enamel lesions while being safe, nontoxic, and fluoride-free” | Safety statement and 'powerful' on enamel lesions; nontoxic basis is Pepla 2014 (FAQ-0206). |
 | `…/nano-hydroxyapatite` | `body_html#b007` | “effective remineralizing agent, and demonstrates impressive desensitizing properties” | Literature-review result with 'impressive' qualifier; Clinical Research sign-off. |
 | `…/nano-hydroxyapatite` | `body_html#b013` | “refills the lost minerals every time you brush your teeth” | Remineralisation is Do say, but 'every time you brush' is an absolute outcome. |
@@ -294,6 +306,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite` | `body_html#b065` | “Bleaching agents like hydrogen peroxide cause tooth sensitivity and chemical burns.” | Harm statement on a legally used ingredient (hydrogen peroxide); EU 655/2013 fairness. |
 | `…/nano-hydroxyapatite` | `body_html#b066` | “Other whitening toothpaste has minute particles that work like sandpaper” | Unsourced comparison denigrating other whitening pastes. |
 | `…/nano-hydroxyapatite` | `body_html#b067` | “Low-abrasive toothpastes (like Karmicare) that contain nano HAp are a far safer alternative” | Safety comparison and 600-subject study; 'low-abrasive' conflicts with Awake RDA 93 (C92). |
+| `…/nano-hydroxyapatite` | `body_html#b069` | “Nano HAp remineralizes teeth from the inside” | Adds an inside-out mechanism ('remineralizes teeth from the inside') beyond the Do say 'Remineralizes enamel naturally'; the same mechanism at b099 is needs-re… |
 | `…/nano-hydroxyapatite` | `body_html#b070` | “The whitening effect of nano HAp on teeth is not the result of a mechanical or chemical reaction.” | Whitening effect asserted; the remineralisation qualifier sits only in the next block (b071). |
 | `…/nano-hydroxyapatite` | `body_html#b072` | “can be used every day for whitening with no adverse side effects” | Absolute safety ('no adverse side effects') and duration ('all night'), as C12. |
 | `…/nano-hydroxyapatite` | `body_html#b073` | “you are fortifying the brightness even more” | Cumulative whitening outcome beyond products.md natural whitening via remineralisation. |
@@ -363,6 +376,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b022` | “Nano-hydroxyapatite (nano HAp) is a smaller, more effective form that naturally fuses with hydroxyapatite in your teeth.” | Comparison nano versus micro HA (more effective, deeper, more protection); needs a source. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b023` | “Recent studies show that nano HAp builds a stronger structure that resists acid attacks more effectively than other minerals.” | Study claim with comparison against other minerals; FAQ-0203 says do not claim superiority. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b028` | “nano HAp causes no harmful reactions or irritations” | Absolute safety statement; nontoxic basis Pepla 2014 (FAQ-0206). |
+| `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b041` | “However, saliva isn’t enough on its own.” | Necessity claim ('saliva isn't enough on its own'), the same assertion as b053 of the nano-hydroxyapatite article (needs-review) (R2, review F5). |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b042` | “Nano HAp penetrates the enamel’s surface area and directly restores the amount of calcium and phosphates” | Penetration and restoration mechanism goes beyond Do say 'Remineralizes enamel'. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b043` | “It also fills up microscopic cracks in the enamel.” | Filling 'cracks' is a repair claim beyond the Do-say list. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b045` | “Most whitening products available only give temporary results and leave behind a weak and demineralized enamel.” | Unsourced comparison denigrating other whitening products (EU 655/2013 fairness). |
@@ -378,6 +392,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b072` | “Some contain fluoride and other questionable ingredients.” | Comparison with other nHAp pastes and 'questionable ingredients' (EU 655/2013 fairness). |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b073` | “brush your teeth mindfully for at least 2 minutes twice daily” | Leave-on use matches products.md; '2 minutes' differs from products.md 'at least 1 to 2 minutes'. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b074` | “Note: Never, ever do this with fluoride toothpaste!” | Absolute fluoride warning goes beyond the products.md 'do not combine' line. |
+| `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `seo.title` | “Why You Need It In Your Toothpaste” | Necessity framing ('Why You Need It In Your Toothpaste'), the same wording as the nHAp page body heading and the same kind of assertion as 'saliva isn't enough… |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `seo.description` | “Nano hydroxyapatite has powerful remineralizing effects on tooth enamel lesions and is safe, non-toxic” | Safety statement and 'powerful' on enamel lesions; nontoxic basis Pepla 2014 (FAQ-0206). |
 | `…/how-oral-health-impacts-your-overall-wellness` | `body_html#b012` | “emerging research reveals that oral health has far-reaching implications” | Research claim on oral-systemic links; not product-specific (cf. C61). |
 | `…/how-oral-health-impacts-your-overall-wellness` | `body_html#b019` | “Studies have shown that poor oral health can significantly impact mental well-being.” | Study claim linking oral health to mental well-being and chronic conditions; not product-specific. |
@@ -475,6 +490,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b015` | “Sharp pain from hot, cold, or sweet foods might signal sensitivity or a cavity.” | Diagnostic symptom guidance; regulatory.md lists 'Diagnoses' as forbidden. |
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b016` | “Swelling suggests gum disease or a dental abscess.” | Diagnostic symptom guidance; regulatory.md lists 'Diagnoses' as forbidden. |
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b017` | “Persistent bad breath or taste could indicate an abscess or advanced gum disease.” | Diagnostic symptom guidance; regulatory.md lists 'Diagnoses' as forbidden. |
+| `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b019` | “Shop Our Bestselling Fluoride-Free Toothpaste” | 'Bestselling' is an unverified sales superlative; approved wording carries no superlatives (R2, review F5). |
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b021` | “dental problems can also be a trigger” | Dental problems as a headache trigger; medical association in brand copy. |
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b023` | “Jaw-related issues might trigger migraines.” | Jaw issues as a migraine trigger; medical association in brand copy. |
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b024` | “Dental problems in the upper teeth may worsen sinus headaches.” | Dental problems worsening sinus headaches; medical association in brand copy. |
@@ -518,16 +534,15 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 
 </details>
 
-### Approved wording: 33
+### Approved wording: 30
 
-<details><summary>Show all 33</summary>
+<details><summary>Show all 30</summary>
 
 | Page | Entry | Claim (verbatim excerpt) | Basis |
 |---|---|---|---|
 | `/pages/why-stop-using-fluoride-toothpaste` | `body_html#b001` | “no fluoride in our Awake or Asleep toothpaste. Nor will there ever be” | products.md: fluoride-free (as C01-C03). |
 | `…/nano-hydroxyapatite` | `body_html#b009` | “no fluoride in our Awake or Asleep toothpaste. Nor will there ever be.” | products.md: fluoride-free (composition fact in founder quote). |
 | `…/nano-hydroxyapatite` | `body_html#b015` | “It plugs exposed dentin tubules to effectively reduce tooth sensitivity” | products.md: nHAp 'reduces sensitivity by blocking dentinal tubules'; Do say 'Reduces sensitivity'. |
-| `…/nano-hydroxyapatite` | `body_html#b069` | “Nano HAp remineralizes teeth from the inside, which smooths the tooth’s surface and makes it glossier.” | Do say 'Remineralizes enamel naturally'; products.md 'smooths and cares for the tooth surface'. |
 | `…/nano-hydroxyapatite` | `body_html#b071` | “By restoring necessary minerals back into the enamel, it gives a much smoother tooth surface.” | products.md: natural whitening through remineralisation; smooths the tooth surface. |
 | `…/nano-hydroxyapatite` | `body_html#b074` | “Nano Hydroxyapatite Reduces Your Tooth Hypersensitivity by Blocking Dentinal Tubules” | products.md: nHAp 'reduces sensitivity by blocking dentinal tubules'. |
 | `…/nano-hydroxyapatite` | `body_html#b083` | “How Nano HAp Soothes Your Dental Hypersensitivity” | regulatory.md allows 'soothes'; Do say 'Reduces sensitivity'. |
@@ -542,7 +557,6 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b012` | “It plugs exposed dentin tubules, effectively reducing tooth sensitivity” | products.md: nHAp 'reduces sensitivity by blocking dentinal tubules'; Do say 'Reduces sensitivity'. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b032` | “tiny particles that actively remineralize your teeth” | Do say 'Remineralizes enamel naturally'. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b035` | “Nano Hap Strengthens and Remineralize the Tooth Enamel” | regulatory.md 'strengthens'; Do say 'Remineralizes enamel naturally'. |
-| `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b041` | “Toothpaste with nanoHAp helps strengthen and remineralize tooth enamel.” | regulatory.md 'helps', 'strengthens'; Do say 'Remineralizes enamel naturally'. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b049` | “Nano Hydroxyapatite Reduces Your Tooth Hypersensitivity by Blocking Dentinal Tubules” | products.md: nHAp 'reduces sensitivity by blocking dentinal tubules'. |
 | `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `body_html#b056` | “Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks” | products.md Asleep USP: protection against acids from food and drink. |
 | `…/how-oral-health-impacts-your-overall-wellness` | `body_html#b063` | “Ingredients such as nano-hydroxyapatite reduce tooth sensitivity, refill lost minerals in your enamel.” | Do say 'Reduces sensitivity', 'Remineralizes enamel naturally'. |
@@ -554,7 +568,6 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/5-reasons-you-should-avoid-fluoride-in-toothpaste` | `body_html#b063` | “Nano HAp forms a layer on the teeth' surface, which protects against harmful acid attacks.” | products.md: protective nHAp layer; protection against dietary acids (C26). |
 | `…/5-reasons-you-should-avoid-fluoride-in-toothpaste` | `body_html#b070` | “Shop Karmicare Fluoride-free Toothpaste.” | products.md: fluoride-free (as C01-C03). |
 | `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b007` | “using toothpaste designed for sensitive teeth can help” | General advice at cosmetic scope; Do say 'Reduces sensitivity'. |
-| `…/headaches-and-tooth-pain-understanding-the-connection` | `body_html#b019` | “Shop Our Bestselling Fluoride-Free Toothpaste” | products.md: fluoride-free; 'Bestselling' is a commercial claim to verify. |
 | `…/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | `body_html#b036` | “2. Support Your Oral Microbiome” | products.md Do say: 'Supports oral microbiome balance'. |
 | `…/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | `body_html#b043` | “Shop Karmicare SLS-Free Toothpaste Now” | products.md: SLS-free. |
 
