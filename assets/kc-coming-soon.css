@@ -1,0 +1,81 @@
+/* "Coming soon": a link to a page that does not exist yet (Victor, 19 Oct 2026). Shown, not
+   clickable (no href, aria-disabled), tooltip on hover, keyboard focus or tap; tap and Escape in
+   kc-coming-soon.js. Markup: snippets/kc-coming-soon.liquid. No KC tooltip component exists;
+   built from the inverse surface and body/sm. Hosts (header menu, buttons) add their own
+   placement overrides. */
+.kc-coming-soon {
+  position: relative;
+}
+
+.kc-coming-soon[aria-disabled='true'] {
+  cursor: default;
+}
+
+/* A disabled button does not lift or dim on hover */
+.kc-coming-soon[aria-disabled='true']:hover {
+  opacity: 1;
+  transform: none;
+}
+
+.kc-coming-soon .kc-coming-soon__tip {
+  position: absolute;
+  top: calc(100% + var(--kc-responsive-spacing-layout-xs));
+  left: 50%;
+  z-index: 2;
+  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
+  background-color: var(--kc-mapped-surface-inverse-default);
+  color: var(--kc-mapped-text-inverse-default);
+  border-radius: var(--kc-shape-radius-sm);
+  box-shadow: var(--kc-elevation-md);
+  font-family: var(--kc-font-role-backbone);
+  font-weight: var(--font-600-weight);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+  text-transform: none;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%);
+  translate: 0 -4px;
+  transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s linear 0.15s;
+}
+
+/* Bridges the gap to the item, so the pointer can move onto the tooltip without losing it */
+.kc-coming-soon .kc-coming-soon__tip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: calc(var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-spacing-layout-xxs));
+}
+
+@media (hover: hover) {
+  .kc-coming-soon:hover .kc-coming-soon__tip {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 0;
+    transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s;
+  }
+}
+
+.kc-coming-soon:focus-visible .kc-coming-soon__tip,
+.kc-coming-soon.is-open .kc-coming-soon__tip {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+  transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s;
+}
+
+.kc-coming-soon.is-dismissed .kc-coming-soon__tip {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-coming-soon .kc-coming-soon__tip {
+    transition: none !important;
+    translate: 0 0 !important;
+  }
+}
