@@ -309,6 +309,17 @@
     #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon__tip::before {
       content: none;
     }
+    /* Shown tooltip slides back to 0, above the -4px rest position (the shared shown-state
+       rules in kc-coming-soon.css carry no section id, so they cannot outrank it) */
+    #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon:focus-visible .kc-coming-soon__tip,
+    #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon.is-open .kc-coming-soon__tip {
+      translate: 0 0;
+    }
+    @media (hover: hover) {
+      #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon:hover .kc-coming-soon__tip {
+        translate: 0 0;
+      }
+    }
     #shopify-section-{{ section.id }} .menu-drawer__utility-links {
       display: none;
     }
