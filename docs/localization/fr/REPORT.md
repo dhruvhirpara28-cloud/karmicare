@@ -150,7 +150,7 @@ For entries that are not legal, it also flags banned words, claim verbs and *tu*
 - **Awake before Asleep**: the evening-first image alt is reordered in FR.
 - **Banned words**:
   - In customer copy, *produit, tube, acheter/achat, utiliser* are avoided ("Découvrir" for Shop, *soins*, *choisir*, *appliquer*).
-  - "toothpaste" becomes *dentifrice* only where the EN has it. Pre-2.0 blog articles and old product texts say it often, and the FR follows them.
+  - "toothpaste" (*dentifrice*) appears only at first-contact moments: titles, SEO titles, image alts, the first mention in an SEO description and the first mention in a page body. After that the FR says *formule*, *soin* or *soin bucco-dentaire*, even where the pre-2.0 blog and the old product texts repeat "toothpaste" (R3 F7; the earlier "FR follows the EN" exception is withdrawn).
   - **Legal text is the exception.** It is translated faithfully and completely, so *produits*, *utilisation*, *achat* and *traiter (des données)* stay where the law or the EN needs them.
 - **Claims**: EU cosmetic verbs in Karmicare copy. Needs-review claims are translated as written, and the reviewed unsupported ones are held.
 - **Legal FR (Belgian)**:
