@@ -528,6 +528,24 @@
       },
       {
         "type": "header",
+        "content": "Fluid type"
+      },
+      {
+        "type": "checkbox",
+        "id": "kc_fluid_type",
+        "label": "Fluid type (preview)",
+        "default": false,
+        "info": "Preview only, decision D8 open. Type and spacing scale smoothly from 393 to 1440 px instead of switching at 750 px. The font sizes above still set the mobile and desktop values."
+      },
+      {
+        "type": "checkbox",
+        "id": "kc_fluid_type_wide",
+        "label": "Fluid type: wide screens (preview)",
+        "default": false,
+        "info": "Needs Fluid type on. Text and section spacing keep growing from 1440 to 1920 px. A proposal, not in Figma."
+      },
+      {
+        "type": "header",
         "content": "Heading Font Weights"
       },
       {
