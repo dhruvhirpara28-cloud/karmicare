@@ -319,6 +319,32 @@
   height: var(--kc-buybox-body-line-height);
 }
 
+/* The ⓘ sits at the chip's right end, so its popover opens to the left of
+   it: right-aligned to the icon, no horizontal shift. Centred on the icon
+   (section-main-product.css, product-compare-plans.css), the 240 px popover
+   ran past the viewport at 1024 px. The vertical offsets stay as they were
+   (stated here because the two files above disagree and load in either
+   order): 10 px above the icon at rest, 8 px higher open. The arrow points
+   at the icon. */
+.kc-buybox .kc-return_care .info-tip .info-tip-popover {
+  bottom: calc(100% + 10px);
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.kc-buybox .kc-return_care .info-tip:hover .info-tip-popover,
+.kc-buybox .kc-return_care .info-tip.active-tip .info-tip-popover {
+  transform: translateY(-8px);
+}
+
+.kc-buybox .kc-return_care .info-tip .info-tip-popover::after {
+  left: auto;
+  right: calc(var(--kc-responsive-size-icon-sm) / 2 - 6px);
+  margin-left: 0;
+  transform: none;
+}
+
 .kc-buybox .info-tip .info-icon {
   width: var(--kc-responsive-size-icon-sm);
   height: var(--kc-responsive-size-icon-sm);
