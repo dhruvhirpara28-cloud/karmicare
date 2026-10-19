@@ -4,16 +4,11 @@
   gap: 3rem;
 }
 
+/* Text column beside the grid from 1200 (Figma 2928:20061); below that the text
+   sits centred above a full-width grid, so the nine cards keep three columns */
 @media screen and (min-width: 1200px) {
   .product-benefits__inner {
     flex-direction: row;
-  }
-}
-
-@media screen and (min-width: 990px) and (max-width: 1199px) {
-  .product-benefits__inner {
-    flex-direction: row;
-    gap: 3rem;
   }
 }
 
@@ -23,7 +18,7 @@
   max-width: 320px;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 1200px) {
   .product-benefits__left {
     flex: 0 0 30%;
     position: sticky;
@@ -32,11 +27,16 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 1199px) {
   .product-benefits__left {
     max-width: max-content;
     text-align: center;
     margin: auto;
+  }
+
+  .product-benefits__left > .text-xl {
+    max-width: 64rem;
+    margin-inline: auto;
   }
 }
 
@@ -260,6 +260,18 @@
 @media screen and (max-width: 989px) {
   .product-benefits__card-content {
     padding: 1.5rem;
+  }
+}
+
+/* Three tablet columns: 8 px gaps and 12 px card padding keep the longest label
+   ("01 · NANO-HYDROXYAPATITE") on one line at 768 */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product-benefits__grid {
+    gap: 8px;
+  }
+
+  .product-benefits__card-content {
+    padding: 1.2rem;
   }
 }
 
