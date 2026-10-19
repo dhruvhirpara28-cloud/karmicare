@@ -1,12 +1,14 @@
 /* GENERATED from KC | Brand Design Library (Figma gcWcgYxS1nmheciKYOjOGx), export 2026-10-12, responsive re-exported 2026-10-17, body-sm 2026-10-18. DO NOT EDIT.
    Source: docs/utopia/kc-tokens.json. Regenerate: python3 docs/utopia/generate.py
-   A3 prototype, docs/utopia/REPORT.md. Loads right after kc-tokens.css (layout/theme.liquid).
+   A3 prototype, docs/utopia/REPORT.md. layout/theme.liquid loads it right after kc-tokens.css,
+   only while the theme setting "Fluid type (preview)" (kc_fluid_type) is on. Off by default.
    1. Fluid ramp (Route A): every responsive pair whose mobile and desktop values differ,
       interpolated from the 393 px mobile frame to the 1440 px desktop frame and held
       outside it. Same names as kc-tokens.css, so this replaces its 750px step for them.
       rem = 10px (theme root 62.5% x body_scale 100), so browser text zoom still applies.
-   2. Wide step (proposal, not Figma): 1440 -> 1920 px, text and section spacing x1.1111.
-   3. Layout tokens for wide screens (--kc-fluid-*): nothing reads them yet; page owners adopt.
+   2. Layout tokens for wide screens (--kc-fluid-*): nothing reads them yet; page owners adopt.
+   3. Callers that switch type role at 750 px, made continuous (generate.py ROLE_SWAPS).
+   Dawn's settings-driven sizes: snippets/kc-fluid-bridge.liquid. Wide step: kc-fluid-wide.css.
    Not emitted: --kc-responsive-h1-letter-spacing (-1.25 -> -2 px): defined in the theme or held at its old value
    Not emitted: --kc-responsive-h2-letter-spacing (-1 -> -1.5 px): defined in the theme or held at its old value
    Not emitted: --kc-responsive-h3-letter-spacing (-0.5 -> -1 px): defined in the theme or held at its old value
@@ -62,35 +64,6 @@
   --kc-responsive-spacing-section-comfortable: clamp(4.8rem, 2.9983rem + 4.5845vw, 9.6rem); /* 48px @393 -> 96px @1440 */
 }
 
-@media screen and (min-width: 1440px) {
-  :root {
-    --kc-responsive-display-text-size: clamp(6.8rem, 4.4rem + 1.6667vw, 7.6rem); /* 68px -> 76px @1920 */
-    --kc-responsive-display-line-height: clamp(6rem, 3.6rem + 1.6667vw, 6.8rem); /* 60px -> 68px @1920 */
-    --kc-responsive-h1-text-size: clamp(5.2rem, 3.4rem + 1.25vw, 5.8rem); /* 52px -> 58px @1920 */
-    --kc-responsive-h1-line-height: clamp(5.2rem, 3.4rem + 1.25vw, 5.8rem); /* 52px -> 58px @1920 */
-    --kc-responsive-h2-text-size: clamp(4.4rem, 3.2rem + 0.8333vw, 4.8rem); /* 44px -> 48px @1920 */
-    --kc-responsive-h2-line-height: clamp(4.4rem, 3.2rem + 0.8333vw, 4.8rem); /* 44px -> 48px @1920 */
-    --kc-responsive-h3-text-size: clamp(3.6rem, 2.4rem + 0.8333vw, 4rem); /* 36px -> 40px @1920 */
-    --kc-responsive-h3-line-height: clamp(3.6rem, 2.4rem + 0.8333vw, 4rem); /* 36px -> 40px @1920 */
-    --kc-responsive-h4-text-size: clamp(2.8rem, 1.6rem + 0.8333vw, 3.2rem); /* 28px -> 32px @1920 */
-    --kc-responsive-h4-line-height: clamp(3.2rem, 2rem + 0.8333vw, 3.6rem); /* 32px -> 36px @1920 */
-    --kc-responsive-h5-text-size: clamp(2.4rem, 1.8rem + 0.4167vw, 2.6rem); /* 24px -> 26px @1920 */
-    --kc-responsive-h5-line-height: clamp(2.8rem, 2.2rem + 0.4167vw, 3rem); /* 28px -> 30px @1920 */
-    --kc-responsive-h6-text-size: clamp(1.8rem, 1.2rem + 0.4167vw, 2rem); /* 18px -> 20px @1920 */
-    --kc-responsive-h6-line-height: clamp(2rem, 1.4rem + 0.4167vw, 2.2rem); /* 20px -> 22px @1920 */
-    --kc-responsive-body-lg-text-size: clamp(2rem, 1.4rem + 0.4167vw, 2.2rem); /* 20px -> 22px @1920 */
-    --kc-responsive-body-lg-line-height: clamp(2.8rem, 2.2rem + 0.4167vw, 3rem); /* 28px -> 30px @1920 */
-    --kc-responsive-body-md-text-size: clamp(1.8rem, 1.2rem + 0.4167vw, 2rem); /* 18px -> 20px @1920 */
-    --kc-responsive-body-md-line-height: clamp(2.4rem, 1.8rem + 0.4167vw, 2.6rem); /* 24px -> 26px @1920 */
-    --kc-responsive-body-sm-text-size: clamp(1.5rem, 1.2rem + 0.2083vw, 1.6rem); /* 15px -> 16px @1920 */
-    --kc-responsive-body-sm-line-height: clamp(2rem, 1.4rem + 0.4167vw, 2.2rem); /* 20px -> 22px @1920 */
-    --kc-responsive-spacing-section-md: clamp(12rem, 7.2rem + 3.3333vw, 13.6rem); /* 120px -> 136px @1920 */
-    --kc-responsive-spacing-section-lg: clamp(16rem, 11.2rem + 3.3333vw, 17.6rem); /* 160px -> 176px @1920 */
-    --kc-responsive-spacing-section-xl: clamp(20rem, 12.8rem + 5vw, 22.4rem); /* 200px -> 224px @1920 */
-    --kc-responsive-spacing-section-comfortable: clamp(9.6rem, 7.2rem + 1.6667vw, 10.4rem); /* 96px -> 104px @1920 */
-  }
-}
-
 :root {
   /* Content column: the Figma container (1376px at 1440), page gutters below it. */
   --kc-fluid-container-max: 137.6rem;
@@ -104,8 +77,8 @@
   --kc-fluid-media-max: 192rem;
 }
 
-@media screen and (min-width: 1440px) {
-  :root {
-    --kc-fluid-container-max: clamp(137.6rem, 92rem + 31.6667vw, 152.8rem); /* 1376px -> 1528px @1920 */
-  }
+:root .kc-mission-card {
+  --kc-mission-card-motto-size: 2.8rem; /* h2 28px @393 -> h4 28px @1440; assets/mission-card.css:37/49 */
+  --kc-mission-card-text-size: clamp(1.5rem, 1.6375rem - 0.0955vw, 1.6rem); /* body-md 16px @393 -> body-sm 15px @1440; assets/mission-card.css:39/50 */
+  --kc-mission-card-text-line-height: clamp(2rem, 2.5501rem - 0.382vw, 2.4rem); /* body-md 24px @393 -> body-sm 20px @1440; assets/mission-card.css:40/51 */
 }

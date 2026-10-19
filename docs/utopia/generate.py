@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""Generate assets/kc-tokens.css and assets/kc-fluid.css from docs/utopia/kc-tokens.json.
+"""Generate assets/kc-tokens.css and the fluid type layer from docs/utopia/kc-tokens.json.
 
 A3 prototype (docs/utopia/REPORT.md): a copy of docs/design-tokens/generate.py as of
 98ef34f (18 Oct) with one addition, emit_fluid() at the end, which writes
-assets/kc-fluid.css. The kc-tokens.css part is unchanged and must reproduce the
-committed file byte for byte; kc-tokens.json is the 18 Oct export from 98ef34f.
+assets/kc-fluid.css, assets/kc-fluid-wide.css and snippets/kc-fluid-bridge.liquid. The
+kc-tokens.css part is unchanged and must reproduce the committed file byte for byte;
+kc-tokens.json is the 18 Oct export from 98ef34f. layout/theme.liquid loads the fluid
+layer only when the theme setting kc_fluid_type is on (A3b).
 
 Run from the repo root:  python3 docs/utopia/generate.py
-Never edit assets/kc-tokens.css or assets/kc-fluid.css by hand: fix the value in
-Figma, re-export kc-tokens.json (see export.md), run this script, commit the files.
+Never edit assets/kc-tokens.css, assets/kc-fluid*.css or snippets/kc-fluid-bridge.liquid
+by hand: fix the value in Figma, re-export kc-tokens.json (see export.md), run this
+script, commit the files.
 
 Additive rule: any --kc-* name the theme already defines (a `--kc-x:`
 declaration outside docs/ and this generated file) is NOT emitted. Those names
@@ -31,6 +34,8 @@ ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "docs/utopia/kc-tokens.json"
 OUT = ROOT / "assets/kc-tokens.css"
 FLUID_OUT = ROOT / "assets/kc-fluid.css"
+WIDE_OUT = ROOT / "assets/kc-fluid-wide.css"
+BRIDGE_OUT = ROOT / "snippets/kc-fluid-bridge.liquid"
 BREAKPOINT = "750px"  # Dawn's own breakpoint, mirrors Figma desktop/mobile (D8)
 
 FONT_STACKS = {
@@ -112,13 +117,14 @@ def rgb_triplet(color):
 def theme_defined_names():
     """Every --kc-* name declared (`--kc-x:`) in tracked theme files.
 
-    assets/kc-fluid.css is generated here too and redefines --kc-responsive-* names on
-    purpose, so it is excluded like kc-tokens.css. docs/design-tokens/generate.py needs
-    the same exclusion once kc-fluid.css lands, or it would hold those names back.
+    assets/kc-fluid.css and kc-fluid-wide.css are generated here too and redefine
+    --kc-responsive-* names on purpose, so they are excluded like kc-tokens.css.
+    docs/design-tokens/generate.py needs the same exclusion once they land, or it would
+    hold those names back.
     """
     out = subprocess.run(
         ["git", "grep", "-ohE", "-e", r"--kc-[a-zA-Z0-9_-]+\s*:", "--", ".",
-         ":!docs", ":!assets/kc-tokens.css", ":!assets/kc-fluid.css"],
+         ":!docs", ":!assets/kc-tokens.css", ":!assets/kc-fluid.css", ":!assets/kc-fluid-wide.css"],
         cwd=ROOT, capture_output=True, text=True, check=True).stdout
     return {n.rstrip(":").strip() for n in out.split() if n != ":"}
 
@@ -267,6 +273,43 @@ GUTTER_PATH = "spacing/page/gutter"
 # characters and 32ch near 44.
 MEASURE, MEASURE_NARROW = "50ch", "32ch"
 
+# Callers that switch type role at 750 px: one role's mobile value below, another role's
+# desktop value from 750 (docs/utopia/tools/roleswap.mjs). The stepped tokens met at 750;
+# fluid ones do not, so the text would jump there. Each becomes one ramp from the mobile
+# role at 393 to the desktop role at 1440, then follows the desktop role (wide step).
+# :root in the selector outranks the caller's own rule, which loads later in the page.
+# (selector, custom property the caller sets, mobile role, desktop role, caller file:lines)
+ROLE_SWAPS = [
+    (".kc-mission-card", "--kc-mission-card-motto-size", "h2/text size", "h4/text size",
+     "assets/mission-card.css:37/49"),
+    (".kc-mission-card", "--kc-mission-card-text-size", "body-md/text size", "body-sm/text size",
+     "assets/mission-card.css:39/50"),
+    (".kc-mission-card", "--kc-mission-card-text-line-height", "body-md/line height", "body-sm/line height",
+     "assets/mission-card.css:40/51"),
+]
+
+# Dawn's settings-driven sizes: rules that read the setting's mobile variable below 750 px
+# and its desktop variable from 750 (assets/base.css:340-501, layout/theme.liquid:372-385).
+# The bridge snippet restates each rule with one continuous size. A setting equal to its
+# Figma role at both ends uses that --kc-responsive token, so Dawn and token text of one
+# role share one ramp and the wide step. Any other setting keeps its own two values on the
+# same 393 -> 1440 ramp: no change at 393 or 1440, the editor stays in charge (coordinator,
+# 19 Oct: option A). The -mobile/-desktop variables themselves stay as they are: some
+# callers read one of them at every width (section-product-benefits-karmicare.css:58/275,
+# button-styles.liquid:16). body-small has no Figma twin; label-lg is the nearest.
+# (selector, property, settings id stem, Figma role, scaled by heading_scale)
+DAWN_BRIDGE = [
+    ("h1, .h1", "font-size", "h1_font_size", "h1", True),
+    ("h2, .h2", "font-size", "h2_font_size", "h2", True),
+    ("h3, .h3", "font-size", "h3_font_size", "h3", True),
+    ("h4, .h4", "font-size", "h4_font_size", "h4", True),
+    ("h5, .h5", "font-size", "h5_font_size", "h5", True),
+    ("h6, .h6", "font-size", "h6_font_size", "h6", True),
+    (".text-xl", "font-size", "xl_font_size", "body-lg", False),
+    ("body, .text-body", "font-size", "body_font_size", "body-md", False),
+    (":root", "--font-body-small-size", "body_small_font_size", "label-lg", False),
+]
+
 
 def rem(px_value):
     return f"{fmt(px_value / ROOT_PX)}rem"
@@ -331,21 +374,32 @@ def emit_fluid(data, taken):
     container_w = grid8(container_d * WIDE_FACTOR)
     gutter = f"--kc-responsive-{slug(GUTTER_PATH)}"
 
+    swaps, swaps_wide = {}, {}
+    for sel, prop, mobile_role, desktop_role, where in ROLE_SWAPS:
+        mb, dk = rows[mobile_role][1], rows[desktop_role][0]
+        value = rem(mb) if mb == dk else clamp(mb, dk, MOBILE_W, DESKTOP_W)
+        m_role, d_role = mobile_role.split("/")[0], desktop_role.split("/")[0]
+        swaps.setdefault(sel, []).append(
+            f"  {prop}: {value}; /* {m_role} {px(mb)} @{MOBILE_W} -> {d_role} {px(dk)} @{DESKTOP_W}; {where} */")
+        swaps_wide.setdefault(sel, []).append(f"    {prop}: var(--kc-responsive-{slug(desktop_role)});")
+
     src = data["source"]
+    generated = f"/* GENERATED from {src['file']} (Figma {src['fileKey']}), export {src['exported']}. DO NOT EDIT."
+    regenerate = "   Source: docs/utopia/kc-tokens.json. Regenerate: python3 docs/utopia/generate.py"
     lines = [
-        f"/* GENERATED from {src['file']} (Figma {src['fileKey']}), export {src['exported']}. DO NOT EDIT.",
-        "   Source: docs/utopia/kc-tokens.json. Regenerate: python3 docs/utopia/generate.py",
-        "   A3 prototype, docs/utopia/REPORT.md. Loads right after kc-tokens.css (layout/theme.liquid).",
+        generated, regenerate,
+        "   A3 prototype, docs/utopia/REPORT.md. layout/theme.liquid loads it right after kc-tokens.css,",
+        "   only while the theme setting \"Fluid type (preview)\" (kc_fluid_type) is on. Off by default.",
         f"   1. Fluid ramp (Route A): every responsive pair whose mobile and desktop values differ,",
         f"      interpolated from the {MOBILE_W} px mobile frame to the {DESKTOP_W} px desktop frame and held",
         "      outside it. Same names as kc-tokens.css, so this replaces its 750px step for them.",
         f"      rem = {ROOT_PX}px (theme root 62.5% x body_scale 100), so browser text zoom still applies.",
-        f"   2. Wide step (proposal, not Figma): {DESKTOP_W} -> {WIDE_W} px, text and section spacing x{fmt(WIDE_FACTOR)}.",
-        "   3. Layout tokens for wide screens (--kc-fluid-*): nothing reads them yet; page owners adopt.",
+        "   2. Layout tokens for wide screens (--kc-fluid-*): nothing reads them yet; page owners adopt.",
+        "   3. Callers that switch type role at 750 px, made continuous (generate.py ROLE_SWAPS).",
+        "   Dawn's settings-driven sizes: snippets/kc-fluid-bridge.liquid. Wide step: kc-fluid-wide.css.",
     ]
     lines += [f"   Not emitted: {n}" for n in notes]
-    lines += ["*/", "", ":root {"] + fluid + ["}", "",
-              f"@media screen and (min-width: {DESKTOP_W}px) {{", "  :root {"] + wide + ["  }", "}", ""]
+    lines += ["*/", "", ":root {"] + fluid + ["}", ""]
     lines += [
         ":root {",
         f"  /* Content column: the Figma container ({px(container_d)} at {DESKTOP_W}), page gutters below it. */",
@@ -360,18 +414,106 @@ def emit_fluid(data, taken):
         f"  --kc-fluid-media-max: {rem(WIDE_W)};",
         "}",
         "",
-        f"@media screen and (min-width: {DESKTOP_W}px) {{",
-        "  :root {",
-        f"    --kc-fluid-container-max: {clamp(container_d, container_w, DESKTOP_W, WIDE_W)}; /* {px(container_d)} -> {px(container_w)} @{WIDE_W} */",
-        "  }",
-        "}",
-        "",
     ]
+    for sel, decls in swaps.items():
+        lines += [f":root {sel} {{"] + decls + ["}", ""]
     FLUID_OUT.write_text("\n".join(lines))
-    print(f"wrote {FLUID_OUT.relative_to(ROOT)}: {len(fluid)} fluid, {len(wide)} wide-step, "
+    print(f"wrote {FLUID_OUT.relative_to(ROOT)}: {len(fluid)} fluid, {len(ROLE_SWAPS)} role-swap, "
           f"{len(notes)} not emitted, {FLUID_OUT.stat().st_size} bytes")
     for n in notes:
         print("  not emitted:", n)
+
+    lines = [
+        generated, regenerate,
+        "   A3 wide step: a proposal, not Figma (D8 option B, docs/utopia/REPORT.md). layout/theme.liquid",
+        "   loads it after kc-fluid.css, only while \"Fluid type: wide screens (preview)\"",
+        "   (kc_fluid_type_wide) is on as well. Off by default.",
+        f"   From {DESKTOP_W} to {WIDE_W} px text sizes, line heights and section spacing grow x{fmt(WIDE_FACTOR)}, the",
+        f"   content column {px(container_d)} -> {px(container_w)}. Labels, controls and component spacing keep",
+        "   their desktop value. Callers made continuous in kc-fluid.css follow their desktop role.",
+        "*/",
+        "",
+        f"@media screen and (min-width: {DESKTOP_W}px) {{",
+        "  :root {",
+    ]
+    lines += wide
+    lines += [
+        f"    --kc-fluid-container-max: {clamp(container_d, container_w, DESKTOP_W, WIDE_W)}; /* {px(container_d)} -> {px(container_w)} @{WIDE_W} */",
+        "  }",
+    ]
+    for sel, decls in swaps_wide.items():
+        lines += ["", f"  :root {sel} {{"] + decls + ["  }"]
+    lines += ["}", ""]
+    WIDE_OUT.write_text("\n".join(lines))
+    print(f"wrote {WIDE_OUT.relative_to(ROOT)}: {len(wide)} wide-step, {WIDE_OUT.stat().st_size} bytes")
+
+    emit_bridge(rows, src)
+
+
+def bridge_row(selector, prop, key, role, scaled, rows):
+    dk, mb = rows[f"{role}/text size"]
+    return f"{selector}|{prop}|{key}|{role}|{num(mb)}|{num(dk)}|{1 if scaled else 0}"
+
+
+def emit_bridge(rows, src):
+    """snippets/kc-fluid-bridge.liquid: Dawn's settings-driven sizes, continuous (DAWN_BRIDGE)."""
+    table = ";".join(bridge_row(*b, rows) for b in DAWN_BRIDGE)
+    start_rem, span = fmt(MOBILE_W / ROOT_PX), DESKTOP_W - MOBILE_W
+    ramp = (f"clamp({{{{ low }}}}rem, {{{{ start }}}}rem + {{{{ rise }}}} * (100vw - {start_rem}rem) / {span}, "
+            "{{ high }}rem)")
+    lines = [
+        "{%- comment -%}",
+        f"  GENERATED from {src['file']} (Figma {src['fileKey']}), export {src['exported']}. DO NOT EDIT.",
+        "  Source: docs/utopia/kc-tokens.json. Regenerate: python3 docs/utopia/generate.py",
+        "  Dawn bridge for fluid type (A3b, docs/utopia/REPORT.md). layout/theme.liquid renders it after",
+        "  base.css and kc-fluid.css, only while the theme setting kc_fluid_type is on.",
+        "  Dawn sizes headings, XL, body and body-small text from theme settings: a rule reads the mobile",
+        "  value below 750 px and the desktop value from 750 px (assets/base.css, layout/theme.liquid).",
+        "  Each rule is restated here with one continuous size, later in the page, so it wins at every width:",
+        "  - a setting equal to its Figma role at both ends (and heading_scale = body_scale) uses the",
+        "    --kc-responsive token itself, so Dawn and token text of one role share one ramp;",
+        f"  - any other setting keeps its own mobile and desktop values, interpolated {MOBILE_W} -> {DESKTOP_W} px",
+        "    like kc-fluid.css: no change at either end, and the theme editor values still apply.",
+        "  The --font-*-mobile/-desktop variables stay as set: some callers read one at every width.",
+        "  Row: selector|property|setting id|Figma role|Figma mobile px|Figma desktop px|heading scale",
+        "{%- endcomment -%}",
+        "{%- liquid",
+        f"  assign rows = '{table}' | split: ';'",
+        "-%}",
+        "{% style %}",
+        "  {%- for row in rows -%}",
+        "    {%- liquid",
+        "      assign f = row | split: '|'",
+        "      assign mobile_id = f[2] | append: '_mobile'",
+        "      assign desktop_id = f[2] | append: '_desktop'",
+        "      assign mobile = settings[mobile_id]",
+        "      assign desktop = settings[desktop_id]",
+        "      assign figma_mobile = f[4] | plus: 0",
+        "      assign figma_desktop = f[5] | plus: 0",
+        "      assign token = false",
+        "      if mobile == figma_mobile and desktop == figma_desktop",
+        "        if f[6] == '0' or settings.heading_scale == settings.body_scale",
+        "          assign token = true",
+        "        endif",
+        "      endif",
+        "      assign low = mobile | at_most: desktop | divided_by: 10.0",
+        "      assign high = mobile | at_least: desktop | divided_by: 10.0",
+        "      assign start = mobile | divided_by: 10.0",
+        "      assign rise = desktop | minus: mobile",
+        "    -%}",
+        "    {%- if token %}",
+        "  {{ f[0] }} { {{ f[1] }}: var(--kc-responsive-{{ f[3] }}-text-size); }",
+        "    {%- elsif f[6] == '1' %}",
+        f"  {{{{ f[0] }}}} {{ {{{{ f[1] }}}}: calc(var(--font-heading-scale) * {ramp}); }}",
+        "    {%- else %}",
+        f"  {{{{ f[0] }}}} {{ {{{{ f[1] }}}}: {ramp}; }}",
+        "    {%- endif %}",
+        "  {%- endfor %}",
+        "{% endstyle %}",
+        "",
+    ]
+    BRIDGE_OUT.write_text("\n".join(lines))
+    print(f"wrote {BRIDGE_OUT.relative_to(ROOT)}: {len(DAWN_BRIDGE)} Dawn rules, {BRIDGE_OUT.stat().st_size} bytes")
 
 
 if __name__ == "__main__":
