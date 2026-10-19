@@ -1,14 +1,14 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "43f115d9098a",
+  "en-source.json": "1f2a104240b1",
   "fr/batch-01-homepage.json": "09bb3614e2a3",
-  "fr/batch-02-pdp.json": "2aae14c8b14d",
+  "fr/batch-02-pdp.json": "647b4f7acce5",
   "fr/batch-03-header-footer.json": "d158e17ac9c1",
   "fr/batch-04-legal.json": "36cafc0558f1",
-  "fr/batch-05-products.json": "c6b01fc877c8",
-  "fr/batch-06-content-pages.json": "47e56ed087c6",
-  "fr/batch-07-collections-blog.json": "142aadebac3a",
+  "fr/batch-05-products.json": "44df8a58a748",
+  "fr/batch-06-content-pages.json": "f819fc6b5d3c",
+  "fr/batch-07-collections-blog.json": "56b5a30806cf",
   "fr/batch-08-system.json": "d8508a10e978"
  },
  "batches": {
@@ -6878,8 +6878,12 @@
      "en": "Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening toothpaste rich in nano-hydroxyapatite, morning and evening toothbrushes and whitening charcoal floss",
      "en_sha1": "f8468b42e71b8cbed23ea243de3a8277d5ba7e02",
      "value": "Kit de soin bucco-dentaire biorythmique Karmicare : dentifrices Awake du matin et Asleep du soir, sans fluor, sans SLS et riches en nano-hydroxyapatite, brosses à dents du matin et du soir et fil dentaire blanchissant au charbon",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -7070,8 +7074,12 @@
      "en": "Animated view of the Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening toothpaste rich in nano-hydroxyapatite, morning and evening toothbrushes and whitening charcoal floss",
      "en_sha1": "b20b641627f279dc30947567da25191b95c597b2",
      "value": "Vue animée du kit de soin bucco-dentaire biorythmique Karmicare : dentifrices Awake du matin et Asleep du soir, sans fluor, sans SLS et riches en nano-hydroxyapatite, brosses à dents du matin et du soir et fil dentaire blanchissant au charbon",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -7145,8 +7153,12 @@
      "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
      "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
      "value": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin.<br><br>Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec la formule Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/evening-toothbrush\">brosse à dents du soir</a> KARMICARE.<br><br>Commencez votre journée à la manière KARMICARE.",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "block replaced inside the live body_html value",
      "status": {
       "drafted": true,
@@ -7266,8 +7278,12 @@
      "en": "Whitening Charcoal Floss",
      "en_sha1": "a13ec532d1776acc6151cc4faffed46ced530676",
      "value": "Fil dentaire blanchissant au charbon",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
      "status": {
       "drafted": true,
@@ -10858,8 +10874,12 @@
      "en": "Morning Toothbrush · Evening Toothbrush · Whitening Charcoal Floss",
      "en_sha1": "aabaa8738ff8f5fced71ba69977e183118db9c8c",
      "value": "Brosse à dents du matin · Brosse à dents du soir · Fil dentaire blanchissant au charbon",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "metaobject field matched on the EN value (translatableResources(METAOBJECT))",
      "status": {
       "drafted": true,
@@ -24761,8 +24781,12 @@
      "en": "Used by +100 kPNI practitioners",
      "en_sha1": "2f927a00ef0e5f1e5f74420f6ab8f2b65a93abe1",
      "value": "Adopté par plus de 100 praticiens kPNI",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
      "status": {
       "drafted": true,
@@ -25123,8 +25147,12 @@
      "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss",
      "en_sha1": "ea8a3c780636756e532ad6f2949fd5676412f0c1",
      "value": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
      "status": {
       "drafted": true,
@@ -25155,8 +25183,12 @@
      "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss<br><br><br>",
      "en_sha1": "e92ed45a2b78310dc7ca705e60b0fd01fcff0ae2",
      "value": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon<br><br><br>",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "block replaced inside the live body_html value",
      "status": {
       "drafted": true,
@@ -25232,8 +25264,12 @@
      "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
      "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
      "value": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin.<br><br>Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec la formule Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/evening-toothbrush\">brosse à dents du soir</a> KARMICARE.<br><br>Commencez votre journée à la manière KARMICARE.",
-     "gates": [],
-     "hold": [],
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "block replaced inside the live body_html value",
      "status": {
       "drafted": true,
@@ -26046,6 +26082,28 @@
      }
     },
     {
+     "id": "admin:page:nhap-technology:body_html#b000",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b000",
+     "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste<br><br>",
+     "en_sha1": "96c553f2ff62fc412e983b841516f4b10c442f5e",
+     "value": "Découvrez le monde fascinant de la nano-hydroxyapatite et pourquoi votre dentifrice en a besoin<br><br>",
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review",
+      "content pages (batch 06), not in the first-wave list",
+      "partial field: 1 of 2 blocks held or untranslated"
+     ],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
      "id": "admin:page:nhap-technology:seo.title",
      "kind": "direct",
      "key": "meta_title",
@@ -26063,7 +26121,12 @@
       "registered": false
      }
     }
-   ]
+   ],
+   "assembled_field": {
+    "blocks": 2,
+    "drafted": 1,
+    "missing_or_held": 1
+   }
   },
   {
    "shopify_type": "PAGE",
@@ -28818,8 +28881,11 @@
      "en": "Nano-Hydroxyapatite and Why You Need It In Your Toothpaste.",
      "en_sha1": "03657e4c746016445891de0c032ab1c97caebfac",
      "value": "La nano-hydroxyapatite et pourquoi votre dentifrice en a besoin.",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)"
      ],
      "how": "owner GID from translatableResources(ARTICLE), matched on handle",
@@ -29511,8 +29577,11 @@
      "en": "Saliva helps by neutralizing acids and restoring calcium and phosphate to teeth. However, saliva isn’t enough on its own. Toothpaste with nanoHAp helps strengthen and remineralize tooth enamel.",
      "en_sha1": "e3e4b2d44407e0e639cbcc9b96bb685552c63fec",
      "value": "La salive aide en neutralisant les acides et en restituant du calcium et du phosphate aux dents. Mais la salive ne suffit pas à elle seule. Une formule à la nano-HAp aide à renforcer et à reminéraliser l’émail dentaire.",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)",
       "partial field: 13 of 74 blocks held or untranslated"
      ],
@@ -30088,8 +30157,11 @@
      "en": "Nano-Hydroxyapatite and Why You Need It In Your Toothpaste. – KARMICARE",
      "en_sha1": "f6767d8f9e84038c48fec1e4a6ba62907f261ae1",
      "value": "La nano-hydroxyapatite et pourquoi votre dentifrice en a besoin. – KARMICARE",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)"
      ],
      "how": "owner GID from translatableResources(ARTICLE), matched on handle",
@@ -35459,8 +35531,11 @@
      "en": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Shop Our Bestselling Fluoride-Free Toothpaste</a>",
      "en_sha1": "4226cc6ab74910e09186d0e3346de714e3e7558b",
      "value": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Découvrir notre formule sans fluor best-seller</a>",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)",
       "partial field: 8 of 46 blocks held or untranslated"
      ],
@@ -35949,8 +36024,11 @@
      "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste",
      "en_sha1": "b08a7c414e774d6548d9ac147325cdfa0c79fbd6",
      "value": "Découvrez le monde fascinant de la nano-hydroxyapatite et pourquoi votre dentifrice en a besoin",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)"
      ],
      "how": "owner GID from translatableResources(ARTICLE), matched on handle",
@@ -35967,8 +36045,11 @@
      "en": "[img alt] Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste - Karmicare",
      "en_sha1": "edee5c32b2bfc36937025446f283ea692fdd3b32",
      "value": "[img alt] Découvrez le monde fascinant de la nano-hydroxyapatite et pourquoi votre dentifrice en a besoin - Karmicare",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)"
      ],
      "how": "text inside 'main' (title, metafield or app data): matched on the EN value at run time",
@@ -37068,8 +37149,11 @@
      "en": "Nano HAp remineralizes teeth from the inside, which smooths the tooth’s surface and makes it glossier.",
      "en_sha1": "08972189f550014eb85da0b44624da0ee9bff0ee",
      "value": "La nano-HAp reminéralise les dents de l’intérieur, ce qui lisse la surface de la dent et la rend plus brillante.",
-     "gates": [],
+     "gates": [
+      "pending-claim-review"
+     ],
      "hold": [
+      "pending-claim-review",
       "collections and blog (batch 07)",
       "partial field: 20 of 117 blocks held or untranslated"
      ],
