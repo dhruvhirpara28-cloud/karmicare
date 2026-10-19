@@ -78,6 +78,21 @@
   grid-area: center;
 }
 
+/* The tubes: 220 px wide, 260 px from 990 (Figma 2928:20020); the file itself is larger
+   for DPR 2-3, so the box sets the size, not the width attribute */
+.two-formulas__image {
+  display: block;
+  width: 22rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 990px) {
+  .two-formulas__image {
+    width: 26rem;
+  }
+}
+
 @media screen and (max-width: 1079px) {
   .two-formulas__image-wrap {
     aspect-ratio: 1 / 1;
@@ -131,6 +146,32 @@
     justify-self: start;
     padding-left: 1.5rem;
   }
+
+  /* Buttons fit their label (Figma ≈204 px), not the column */
+  .two-formulas__btn-secondary {
+    align-self: flex-start;
+  }
+}
+
+/* From 1200: 330 px text columns 46 px inside the clock box (Figma 148-478 / 960-1290 at 1440) */
+@media screen and (min-width: 1200px) {
+  .two-formulas__stage {
+    padding-inline: 4.6rem;
+  }
+
+  .two-formulas__feature {
+    max-width: 33rem;
+  }
+
+  .two-formulas__feature--left {
+    justify-self: start;
+    padding-right: 0;
+  }
+
+  .two-formulas__feature--right {
+    justify-self: end;
+    padding-left: 0;
+  }
 }
 
 .two-formulas__feature-text {
@@ -152,13 +193,16 @@
   }
 }
 
-@media screen and (min-width: 1080px) and (max-width: 1199px) {
+/* 990-1199: a 300 px tube column and no gap, so each text column keeps 310+ px and
+   "strengthened by day" stays on two lines like its partner */
+@media screen and (min-width: 990px) and (max-width: 1199px) {
   .two-formulas__stage {
     grid-template-columns: 1fr minmax(300px, 300px) 1fr;
+    column-gap: 0;
   }
 
   .two-formulas__feature {
-    max-width: 280px;
+    max-width: 34rem;
     padding: 0;
   }
 }
