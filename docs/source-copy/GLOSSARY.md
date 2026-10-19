@@ -11,17 +11,18 @@ For the translators of batches 01–03 (`INVENTORY.md`). One row per term that r
 | | EN | NL | FR (proposed) |
 |---|---|---|---|
 | Register | you | *je / jouw*; neutral Dutch that reads naturally in Flanders and the Netherlands (Figma NL) | warm *vous* (working convention) |
-| Price per brushing | €0.49 | €0,49 | 0,49 € |
-| Decimals and thousands | €1,200 · 36,559 · SMD 2.17 · p = 0.004 | €1.200 · 36.559 · SMD 2,17 · p = 0,004 (Figma NL) | 1 200 € · 36 559 · SMD 2,17 · p = 0,004 (narrow no-break space U+202F as thousands separator) |
-| Confidence interval | 95% CI | 95%-BI (Figma NL) | IC à 95 % |
-| Percent | 20% | 20% | 20 % (no-break space) |
+| Price per brushing | €0.49 | €0,49 | 0,49 € |
+| Decimals and thousands | €1,200 · 36,559 · SMD 2.17 · p = 0.004 | €1.200 · 36.559 · SMD 2,17 · p = 0,004 (Figma NL) | 1 200 € · 36 559 · SMD 2,17 · p = 0,004 (narrow no-break space U+202F as thousands separator) |
+| Confidence interval | 95% CI | 95%-BI (Figma NL) | IC à 95 % |
+| Percent | 20% | 20% | 20 % (no-break space) |
 | Punctuation | — | as EN | no-break space (U+00A0) before `:` `;` `!` `?` and before `€` and `%` |
+| Encoding | — | — | the FR examples in this file contain the real characters (U+00A0, U+202F): copy them as they are. FR typography stays pending Victor |
 | Times | 06:40 · 22:00 | 06:40 · 22:00 | 06:40 · 22:00 (design element; keep the digits) |
 | Billing year | one full year | *volledig jaar*, never *volledig kalenderjaar* (offer, 2 Oct) | une année complète |
 | Plan interval | every 60 days (never eight weeks or two months) | om de 60 dagen | tous les 60 jours |
 | Capitals in names | Title Case in plan names | only the first word, brand + noun with a hyphen: *Het Karmicare-jaar* (Figma NL, decision 2 Oct) | only the first word: *L'année Karmicare* |
 
-**Open for Victor**: EN renders €0.49 and NL €0,49 (COMMON-RULES §3), while French typography puts the euro sign after the amount: 0,49 €. Confirm that FR follows the French convention and is not a copy of the NL €0,49. A related point for the store: the money format renders computed amounts with a comma in EN too (buy box "€0,49 per brushing", "€5,90"), so static EN text (€0.49) and computed amounts (€0,49) disagree on the same page. That is a store/Loop money-format setting, not template text (handoff in REPORT.md).
+**Open for Victor**: EN renders €0.49 and NL €0,49 (COMMON-RULES §3), while French typography puts the euro sign after the amount: 0,49 €. Confirm that FR follows the French convention and is not a copy of the NL €0,49. A related point for the store: the money format renders computed amounts with a comma in EN too (buy box "€0,49 per brushing", "€5,90"), so static EN text (€0.49) and computed amounts (€0,49) disagree on the same page. That is a store/Loop money-format setting, not template text (handoff in REPORT.md).
 
 ## Do not translate
 
@@ -49,7 +50,7 @@ The selling-plan group named "60-Day Supply" carries the same text as a Subscrip
 | membership / member | lidmaatschap / lid | offer | adhésion / membre | |
 | member price | ledenprijs | offer | prix membre | approved NL: "Je ledenprijs blijft gelijk zolang je lid blijft, ook als onze prijzen stijgen." |
 | duo (Awake + Asleep) | duo | FAQ | duo | |
-| Welcome Kit | welkomstpakket | Figma NL | kit de bienvenue | value €21 / €21 / 21 € |
+| Welcome Kit | welkomstpakket | Figma NL | kit de bienvenue | value €21 / €21 / 21 € |
 | Welcome Kit · with first order | Welkomstpakket · bij je eerste bestelling | **proposed** | Kit de bienvenue · avec votre première commande | |
 | Morning Toothbrush / Evening Toothbrush | Ultrazachte ochtendborstel / Dieptereinigende avondborstel (buy box, shortened) | Figma NL | brosse à dents du matin / du soir | product titles are admin-held |
 | Care Credit | Care Credit | Figma NL | Care Credit | always in €; never "discount", "cashback", "points" |
@@ -96,7 +97,7 @@ The selling-plan group named "60-Day Supply" carries the same text as a Subscrip
 | EN | NL | NL source | FR (proposed) |
 |---|---|---|---|
 | nano-hydroxyapatite (nHAp) | nano-hydroxyapatiet (nHAp) | products.md | nano-hydroxyapatite (nHAp) |
-| Nano-HAp sealed 98% of open dentine tubules. | Nano-HAp dichtte 98% van de open dentinekanaaltjes. | Figma NL (research card 1) | La nano-HAp a obturé 98 % des tubules dentinaires ouverts. |
+| Nano-HAp sealed 98% of open dentine tubules. | Nano-HAp dichtte 98% van de open dentinekanaaltjes. | Figma NL (research card 1) | La nano-HAp a obturé 98 % des tubules dentinaires ouverts. |
 | dentine tubules | dentinekanaaltjes | Figma NL | tubules dentinaires |
 | enamel | (tand)glazuur | products.md | émail |
 | remineralise / remineralisation | remineraliseren / remineralisatie | products.md | reminéraliser / reminéralisation |
