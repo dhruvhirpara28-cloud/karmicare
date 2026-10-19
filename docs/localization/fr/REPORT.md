@@ -29,6 +29,9 @@ Task `task_064a318d44e7`, Orca run `run_32dd5602b983`, branch `karmicare/soft-la
 | `a440834` | Batches 05–07 rebuilt on the reviewed claim statuses |
 | `ffbe9b4` | This report (reviewed by Astra) |
 | `f85fe81` … `5f8bf1f` | R3 fixes F1–F10, one commit per finding (section below) |
+| `71b3c5a`, `8bc3d96` | Merge of source-copy `2194ef3` (R1) and the FR that follows it |
+| `85ad0a7` | Merge of source-copy `fb46dd1` (R2 source changes, NL R2 payloads, B4 theme keys) |
+| `841e05b` … `7760231` | R2 mirror (section below) |
 
 ### File format
 
@@ -103,6 +106,42 @@ Astra review `docs/runtime-review/B3-FR-ASTRA.md` (verdict: pass with fixes) at 
 
 **Not changed:** the reviewer's source-owned issues and release limits stay with their owners. These are the €0.42 cell, the 2–4 applications in the brush texts, the Asleep 2.0 "helps you fall asleep" line, « les soulager » in the headaches article (do not release either version), the truncated EN SEO strings, the legacy T&C links and the URL manifest to expand before page-by-page QA.
 
+## R2 mirror
+
+Task `task_386825779698`, brief B3-R2, 20 Oct 2026. The NL review (R2, verdict FAIL) changed the EN source. `docs/source-copy/CHANGES-R2.md` at source-copy `fb46dd1` lists every source change since `2194ef3`, and FR now follows all of it. No held entry was translated and no hold was released: the held set is the same 538 ids as at `c7aed28`.
+
+| Preflight | Result |
+|---|---|
+| `orca status --json` | runtime `ready`, `reachable: true`, connection `connected` |
+| `git status --short` / branch | clean tree on `karmicare/soft-launch-fr`, HEAD `c7aed28` |
+| Model / permission mode | Claude Opus 5.5 (`claude-opus-5-5`), auto mode; every Bash command sandboxed; no subagents |
+
+| CHANGES-R2 | Commit | FR result |
+|---|---|---|
+| Merge | `85ad0a7` | `karmicare/soft-launch-source-copy` at `fb46dd1`, no conflicts. It also brings B4's theme-key map and the FR theme keys built from `c7aed28` (`locales/*.json`, keyed sections). I did not edit them. |
+| §1 new entry | `841e05b` | `admin:page:nhap-technology:body_html#b000`, before `#b001`: « Découvrez le monde fascinant de la nano-hydroxyapatite et pourquoi votre dentifrice en a besoin<br><br> ». This is the FR of the same EN article title, plus the block's `<br><br>`. `admin`, `pending-claim-review`. Batch 06 has 22 entries, digest `3dee3b56341f…`. It is the page's first body mention, so *dentifrice* stays (R3 F7 rule). |
+| §2 holds | `841e05b` | SLS `#b035` was already held in FR. Its note now gives NL's reason: "needs-approved-copy: competitor names prohibited … EN owner must supply compliant source". The two 2.0 sleep/wake lines (`58755f7`) are confirmed: the source now carries `claim_status: unsupported`, and the FR note cites the source basis. |
+| §3 reclassified | `841e05b` | All 16 are `pending-claim-review`, with the FR text unchanged. The 4 C100 entries carry `claims: ["C100"]`, and `product:main/highlights_slider_9wAjAb/text_1` has source status `needs-review`. |
+| §4 notes | `ea017a9`, `c435196` | Heading 4.1 already read « 4.1 Présomption de conformité de deux ans » in the consumer-rights template and refund `#b065`: a presumption of conformity, as written. The notes now say so, and `legal-review` stays. Nano-hydroxyapatite `#b036` keeps « biomatériau organique » and stays `pending-claim-review`. |
+| §5 metadata | `841e05b` | No FR action. The build now checks that each `claim_status` on a claim-bearing entry equals the strictest status of its claims. All 88 agree, so no second note or hold is added. |
+| §6 F4 hedges | `c435196` | SLS `#b056` now reads « pour que vous puissiez obtenir en toute sécurité … Le charbon vous aidera à enlever les taches … que votre brosse à dents peut manquer » ("can safely", "will help lift", "may miss"). SLS `#b028` already said « vous pourriez souhaiter éviter les soins » (R3 F2), and `#b036` keeps "organic". |
+| §6 F6 brand words | checked | No FR value names a competitor. The named NL fixes were already in FR: the morning-brush bodies say « notre formule » and « la formule Awake/Asleep », the three "Used by" lines say « Adopté par », nootropics `#b012`, `#b051`, `#b064` say « au quotidien », and fluoride `#b016` says « à leurs formules ». |
+| §6 F7 fit | `c435196` | `fit-risk` on the named strings that grow in FR: both research buttons (30 → 31), the PDP shipping value (11 → 16), the end-CTA chip (21 → 29) and comparison `#23` (18 → 22); `#18` was already flagged. Also on their same-EN twins (homepage shipping value, buy-box chip) and on the 7 trust-row chips in the same rows. That is 14 entries, 39 in total. The fit table has a Kind column now. |
+| §6 F8 addresses | `ea017a9` | 33 address spans in 29 entries used French forms (Bruxelles, Belgique, boîte 1). All are back to the EN form; legal labels stay French (Tél., TVA, « À l'attention de »). The FR build applies one table of six address strings, so the official French forms can return if Victor allows them (decision 7). |
+| §6 F9 harmonisation | checked | FR has one value per EN string (the build enforces it), so no identical-EN group differs. The model-form sentence is identical in terms `#b155`, refund `#b114` and consumer-rights `content_section_at3pLy`, with the EN's 4 `(*)` markers. The "unopened contract" sentence has one form in all four places. |
+| §6 F10 never-translate | checked | Every never-translate entry is held, Facebook and Instagram included (since B3). |
+| §6 H1–H7, S1, S2 | `987f6fb` | `check.py` already enforced H1–H7. It now also checks S1 (every EN postal address appears unchanged in the FR, with the NL pattern) and S2 (the `(*)` count). Two new self-test mutations prove them, and run on the `841e05b` files S1 reports the 33 spans. |
+| R6 addendum (coordinator) | `7760231` | From R6-01, source gate follows on the source branch: wellness `#b081` is `pending-claim-review`, translation kept. R6-02, one sweep of every FR body in batches 05–07: *dentifrice* appears once per page, at the first body mention. The only commodity word in ordinary copy was SLS `#b015` « produits ménagers », now « nettoyants ménagers ». Kept: the verb *produire* and *sous-produit* (nano-hydroxyapatite `#b094`, `#b101`, nootropics `#b054`, fluoride `#b049`), « produits chimiques » (a chemistry term, `#b048`) and the CPNP portal's official name (PDP FAQ `#60`). |
+
+**New totals:** 2,571 entries, 2,033 with FR, 538 held. `legal-review` 979, `pending-claim-review` 353, `fit-risk` 39, `pending-en-review` 22.
+
+**Not applied:** nothing in CHANGES-R2. The heading 4.1 and "organic" items need no FR change until their owners rule. Since `c7aed28`, 31 FR values changed and 1 entry was added; no `theme-key` value changed. 13 of the changed values are template settings (the footer compliance line and 12 legal template sections, all addresses), which the localization worker registers.
+
+**Verification:**
+- `python3 -I docs/source-copy/digest.py`: exit 0, all eight `ok` (batch 06: 22 entries, `3dee3b56341f67b113dcd59eb85d3a2e3f21d628`).
+- `python3 -I docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 16 warnings, 14/14 mutations caught.
+- `shopify theme check --fail-level error`: exit 0 (246 files, 21 warnings). The merge brought theme and locale files; my FR commits touch only `docs/localization/fr/`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
@@ -112,22 +151,22 @@ Astra review `docs/runtime-review/B3-FR-ASTRA.md` (verdict: pass with fixes) at 
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `83fed281…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
-| `batch-06-content-pages` | `f78c391a…` | 21 | 0 | 19 | 0 | 0 | 2 |
+| `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,570** | **479** | **1,415** | **76** | **62** | **538** |
+| **Total** | | **2,571** | **479** | **1,416** | **76** | **62** | **538** |
 
-Every source entry is covered: 2,032 carry FR and 538 are held (after the source-copy R1 merge, 2194ef3). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,033 carry FR and 538 are held (after the source-copy R2 merge, fb46dd1). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 36 | 37 | 1 | 0 | 14 | 4 | 243 | 0 | 335 |
+| pending-claim-review | 36 | 41 | 1 | 0 | 19 | 5 | 251 | 0 | 353 |
 | pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
 | source-defect | 2 | 7 | 1 | 3 | 9 | 0 | 0 | 0 | 22 |
 | wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
-| fit-risk | 4 | 19 | 0 | 0 | 2 | 0 | 0 | 0 | 25 |
+| fit-risk | 9 | 28 | 0 | 0 | 2 | 0 | 0 | 0 | 39 |
 | not-rendered | 0 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 7 |
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
@@ -140,18 +179,18 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 | 07 | unsupported claim (05–07 review) | 107 | Blog blocks such as "prevents tooth decay", "ingesting poison", fluoride and IQ, NASA history |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
-| 05 | unsupported claim | 6 | "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles…" in the Awake/Asleep 2.0 descriptions and meta descriptions, and the two sleep/wake body lines `body_html#b002` (NL review R2 F1) |
+| 05 | unsupported claim | 6 | "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles…" in the Awake/Asleep 2.0 descriptions and meta descriptions, and the two sleep/wake body lines `body_html#b002` (NL review R2 F1; source `claim_status` since R2) |
 | 01–02 | unsupported claim | 4 | C35 benefit card 06, text and heading; C84/C85 Sietske Hamelink quote on both templates |
 | 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
 | 06 | unsupported claim | 2 | "NASA's favorite supplement for oral health" (`/pages/nhap-technology`) |
 | 02 | source defect | 1 | Treatment journey `#29` stops mid-phrase |
 | 02 | gendered title | 1 | Mission card "founder" (decision 3) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
-| 07 | competitor names | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine |
+| 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 17 warnings, 12/12 bad payloads caught.** For every file it checks (R3 F6 added the gates):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 16 warnings, 14/14 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;
@@ -161,24 +200,25 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 - the status and flag vocabulary;
 - that EN and FR carry the same HTML tags, Liquid, `[tokens]`, `&nbsp;` count and runtime price spans;
 - that the selling-plan IDs are unchanged;
+- that every EN postal address appears unchanged in the FR (S1) and the `(*)` count matches (S2);
 - French spacing and apostrophes.
 
 For entries that are not legal, it also flags banned words, claim verbs and *tu* forms.
 
-**The 17 warnings, each checked by hand:**
+**The 16 warnings, each checked by hand:**
 
 - **Batches 01–02 (9):**
   - 8 × the noun *prévention*: the EN "Prevention" in the check-up and plan tooltips and the compare table, and C33.
   - 1 × *produits cosmétiques*: the official portal name.
-- **Batch 07 (8):**
-  - 6 × *produit* or *produits*: three forms of the verb *produire*, one *sous-produit* (by-product) and two *produits chimiques/ménagers* (chemicals, household products).
+- **Batch 07 (7):**
+  - 5 × *produit* or *produits*: three forms of the verb *produire*, one *sous-produit* (by-product) and one *produits chimiques* (chemicals). The household *produits ménagers* became « nettoyants ménagers » (R6-02).
   - *prévenir les caries*: a statement about fluoride, not a Karmicare claim.
   - *guérison*: the EN "healing cycles", a needs-review claim kept as written.
 
 **Other checks:**
 
 - `python3 docs/source-copy/digest.py`: all eight batches `ok`.
-- `shopify theme check --fail-level error`: **exit 0**. 244 files inspected, 21 offenses, all warnings. No theme file changed and `.theme-check.yml` is untouched.
+- `shopify theme check --fail-level error`: **exit 0**. 246 files inspected, 21 offenses, all warnings, after the R2 merge. FR commits change no theme file, and `.theme-check.yml` is untouched.
 - Rendered check: none possible yet. It waits for integration by the localization worker and the preview gate.
 
 ## Conventions applied
@@ -205,7 +245,7 @@ For entries that are not legal, it also flags banned words, claim verbs and *tu*
   - The *Service de Médiation pour le Consommateur*, the *Centre Européen des Consommateurs* and the *Autorité de protection des données* use their official French names.
   - "Clause N" becomes *Article N*, which matches "Conditions, articles 10 et 11" in batch 01/02.
   - The model withdrawal form uses the official French wording of Directive 2011/83/EU, Annex I(B).
-  - Company name, enterprise, VAT and EORI numbers, IBAN/BIC, emails, phones, periods and amounts are exactly as in EN. In addresses, street, number and postcode are kept, and city and country names are in French (Bruxelles, Belgique; Bruges is the same).
+  - Company name, enterprise, VAT and EORI numbers, IBAN/BIC, emails, phones, periods and amounts are exactly as in EN. Postal addresses are exactly as in EN too, city and country names and "box 1" included (R2 F8; the French forms wait for decision 7).
   - Link targets are kept as in EN, for example `consumerombudsman.be/en` (a `/fr` version exists).
 - **Policy pages**: 314 of the Shopify policy segments are the 2.0 page text cut into blocks. They reuse the page FR word for word, so the two copies of the legal text cannot drift.
 
@@ -268,28 +308,37 @@ No approved FR copy exists, so every FR term is proposed.
 | News (blog) | *Actualités* | |
 | Health Rewards (old product.json card) | kept in English, as written | |
 
-## Fit risks (25 entries; textual triage, not measured overflow)
+## Fit risks (39 entries; textual triage, not measured overflow)
 
-| Entry | EN chars | FR chars | Fallback |
-|---|---:|---:|---|
-| Hero, two-formulas and benefits button "BEGIN YOUR 60-DAY RITUAL" | 24 | 31 | COMMENCER LE RITUEL |
-| Buy box `welcome_kit_title` | 30 | 31 | Glossary long form (47) if there is room |
-| Buy box `try_once_note` | 42 | 56 | 0 € Care Credit · 0 € récompense contrôle |
-| Care receipt `line_year/note` | 20 | 31 | 20 % reversés |
-| Sticky bar `credit_checkup` | 44 | 49 (short form) | Full form 63 |
-| Sticky bar `stop_year` | 43 | 51 | |
-| Sticky bar `try_once` | 48 | 53 | |
-| Treatment journey `#23` | 44 | 48 | Full form in notes |
-| Comparison `#18` "Weeks to notice" | 15 | 22 | |
-| Buy and sticky button "Begin Now" (PDP and `product.json`, 4 entries) | 9 | 20 | exact FR kept (R3 F8) |
-| Sticky bar `cta_rhythm` (`main-product.liquid:1018`) | 24 | 31 | exact FR kept (R3 F8) |
-| Sticky bar `kit` (`:1049`) | 37 | 54 | exact FR kept (R3 F8) |
-| Sticky bar `stop_rhythm` (`:1067`) | 21 | 34 | exact FR kept (R3 F8) |
-| Plan name "ships every 60 days" (2 selling plans) | 19 | 28 | exact FR kept (R3 F8) |
-| Compare table `#14` "Try Once" | 8 | 16 | exact FR kept (R3 F8) |
-| Compare table `#25` "Begin 60-Day Rhythm" | 19 | 28 | exact FR kept (R3 F8) |
-| Compare table `#11` "Skip, pause or cancel" | 21 | 43 | full meaning kept (R3 F3) |
-| Research card `card_JeERX6` heading (homepage and PDP) | 44 | 72 | full meaning kept (R3 F4) |
+`Kind`, as in the NL report (R2 F7): **slot** is a button, chip, cell, plan card, sticky bar or label with a fixed width; **contextual QA** is a heading that can wrap, to look at in context rather than an established overflow.
+
+| Entry | Kind | EN chars | FR chars | Fallback |
+|---|---|---:|---:|---|
+| Hero, two-formulas and benefits button "BEGIN YOUR 60-DAY RITUAL" | slot | 24 | 31 | COMMENCER LE RITUEL |
+| Buy box `welcome_kit_title` | slot | 30 | 31 | Glossary long form (47) if there is room |
+| Buy box `try_once_note` | slot | 42 | 56 | 0 € Care Credit · 0 € récompense contrôle |
+| Care receipt `line_year/note` | slot | 20 | 31 | 20 % reversés |
+| Sticky bar `credit_checkup` | slot | 44 | 49 (short form) | Full form 63 |
+| Sticky bar `stop_year` | slot | 43 | 51 | |
+| Sticky bar `try_once` | slot | 48 | 53 | |
+| Treatment journey `#23` | slot | 44 | 48 | Full form in notes |
+| Comparison `#18` "Weeks to notice" | slot | 15 | 22 | |
+| Buy and sticky button "Begin Now" (PDP and `product.json`, 4 entries) | slot | 9 | 20 | exact FR kept (R3 F8) |
+| Sticky bar `cta_rhythm` (`main-product.liquid:1018`) | slot | 24 | 31 | exact FR kept (R3 F8) |
+| Sticky bar `kit` (`:1049`) | slot | 37 | 54 | exact FR kept (R3 F8) |
+| Sticky bar `stop_rhythm` (`:1067`) | slot | 21 | 34 | exact FR kept (R3 F8) |
+| Plan name "ships every 60 days" (2 selling plans) | slot | 19 | 28 | exact FR kept (R3 F8) |
+| Compare table `#14` "Try Once" | slot | 8 | 16 | exact FR kept (R3 F8) |
+| Compare table `#25` "Begin 60-Day Rhythm" | slot | 19 | 28 | exact FR kept (R3 F8) |
+| Compare table `#11` "Skip, pause or cancel" | slot | 21 | 43 | full meaning kept (R3 F3) |
+| Research card `card_JeERX6` heading (homepage and PDP) | contextual QA | 44 | 72 | full meaning kept (R3 F4) |
+| Research button "Explore the full evidence base" (homepage and PDP, 2 entries) | slot | 30 | 31 | exact FR kept (R2 F7) |
+| Plan-card shipping value "Varies Free" (homepage and PDP, 2 entries) | slot | 11 | 16 | exact FR kept (R2 F7) |
+| Trust-row chip "Gift, pause or cancel" (PDP buy box and end CTA, 2 entries) | slot | 21 | 29 | exact FR kept (R2 F7) |
+| Trust-row chip "60-day money-back guarantee" (homepage, PDP buy box, end CTA, 3 entries) | slot | 27 | 31 | same row (R2 F7) |
+| Trust-row chip "Cancel anytime" (homepage) | slot | 14 | 24 | same row (R2 F7) |
+| Trust-row chip "Free shipping" (homepage, PDP buy box, end CTA, 3 entries) | slot | 13 | 17 | same row (R2 F7) |
+| Comparison `#23` "Systemic, not oral" | slot | 18 | 22 | exact FR kept (R2 F7) |
 
 Batch 05 also contains buy-button and sticky-button labels requiring fit review; legal navigation labels can expand too. Character counts identify risks, while rendered French fit remains pending integration and preview.
 
@@ -315,11 +364,11 @@ The B1a defects (€0.42, the Welcome Kit row, legacy plan names, "dosep", the t
 
 ## Integration notes (for the localization worker)
 
-- **`theme-key` (72)**:
+- **`theme-key` (76)**:
   - The 26 sticky-bar defaults in `main-product.liquid` need the PDP owner to store them or make them keys.
   - The 8 Loop strings are in off-limits files, so the Loop owner integrates them.
 - **`locale-present` (62)**: nothing to do; `locales/fr.json` already has them.
-- **`admin` (1,417)**:
+- **`admin` (1,416)**:
   - Long bodies (pages, policies, articles, product descriptions) are block segments (`#bNNN`). Join them back in order.
   - The page and policy segments follow the 2.0 legal page text.
   - The runtime price spans in the plan descriptions stay EN-formatted unless the theme rewrites them, as in B1a decision 5.
@@ -348,7 +397,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 | Morning / Evening Toothbrush 2.0 | 05 | `/products/morning-toothbrush-2-0`, `/products/evening-toothbrush-2-0` | `/nl/products/…` | `/fr/products/…` | |
 | Whitening Charcoal Floss | 05 | `/products/whitening-charcoal-dental-floss` | `/nl/products/whitening-charcoal-dental-floss` | `/fr/products/whitening-charcoal-dental-floss` | |
 | Awake / Asleep 2.0 | 05 | `/products/awake-morning-toothpaste-2-0`, `/products/asleep-evening-toothpaste-2-0` | `/nl/products/…` | `/fr/products/…` | 4 blocks held |
-| Content pages | 06 | `/pages/why-karmicare`, `/pages/why-use-hydroxyapatite-toothpaste`, `/pages/why-stop-using-fluoride-toothpaste`, `/pages/nhap-technology`, `/pages/articles` | `/nl/pages/…` | `/fr/pages/…` | nhap body held |
+| Content pages | 06 | `/pages/why-karmicare`, `/pages/why-use-hydroxyapatite-toothpaste`, `/pages/why-stop-using-fluoride-toothpaste`, `/pages/nhap-technology`, `/pages/articles` | `/nl/pages/…` | `/fr/pages/…` | nhap: heading `b000` translated, `b001` and SEO description held |
 | Collections | 07 | `/collections/biorhythmic-oral-hygiene-kit`, `/collections/vgbc2025`, `/collections/karmicare-collection` | `/nl/collections/…` | `/fr/collections/…` | |
 | Blog and 9 articles | 07 | `/blogs/news`, `/blogs/news/<handle>` | `/nl/blogs/news/…` | `/fr/blogs/news/…` | 117 blocks held |
 | System pages | 08 | `/search`, `/pages/<missing>` (404), `/collections`, `/collections/all`, `/cart` | `/nl/…` | `/fr/…` | |
@@ -360,7 +409,8 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 |---|---|
 | Astra review of the FR payloads | coordinator, after `worker_done` |
 | Legal review of 979 legal entries | Victor or a lawyer, before any FR legal page is published |
-| Claims sign-off: 319 `pending-claim-review` entries; 116 held as unsupported (3 in 01–02, 113 in 05–07) | Victor / Clinical Research |
+| Claims sign-off: 353 `pending-claim-review` entries (the R2 reclassifications, C100 and R6-01 included); 119 held as unsupported (4 in 01–02, 115 in 05–07) | Victor / Clinical Research |
+| Heading 4.1 "presumption of conformity" (consumer-rights template, refund `#b065`) | legal owner approves or corrects the EN, then FR is regenerated |
 | EN wording fixes: 22 `pending-en-review` entries, plus the defects above | Victor and the Admin owner |
 | Native French read-through | Victor or a native reviewer, before publishing; customer care answers in EN and NL only (B1a decision 2) |
 | Rendered FR check | localization worker and preview gate |
@@ -375,8 +425,10 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
   - Remove or rewrite the blog block that names competitors.
   - The B1a admin handoffs still stand.
 - **Homepage / PDP owners**: the SLS card badge, plus the B1a items.
-- **Localization worker**: the integration notes above.
+- **Localization worker**: the integration notes above. After R2, refresh from this branch's tip: no `theme-key` value changed since `c7aed28`, but 13 template-setting values did (the footer compliance line and 12 legal template sections, addresses back to the EN form) and the nHAp page heading `b000` is new (Admin).
 - **Loop owner**: 8 Loop strings in batch 01 (`theme-key`).
+- **EN owner (R2)**: compliant copy for the SLS competitor block `b035`; the "Why You Need It" headings; the morning-brush "2 to 4 applications" dose; "organic biomaterial"; "Bestselling"; the two sleep/wake description lines. FR follows by digest.
+- **Source owner**: the R6-01 gate on wellness `#b081` (FR already flags it).
 
 ## Open decisions for Victor
 
@@ -385,7 +437,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 2. **Does FR ship, and which parts first?**
    - The PDP, homepage, header/footer, products and system pages are ready for a native read-through.
    - The legal pages need legal review.
-   - The pre-2.0 blog is heavy with claims: 243 needs-review blocks translated, 117 held.
+   - The pre-2.0 blog is heavy with claims: 251 needs-review blocks translated, 117 held.
    - *Recommendation*: publish FR in that order, and keep the FR blog unpublished until its claims are rewritten in EN.
 3. **Gendered titles.**
    - **Practitioner titles** are written in epicene forms.
@@ -397,6 +449,10 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
    - *Recommendation*: keep it, unless French customer care is added before FR ships.
 6. **Typographic apostrophe.** I used ’ throughout; Dawn's `fr.json` uses `'`.
    - *Recommendation*: keep ’.
+7. **Address forms in FR legal text** (R2 F8, as NL question 8).
+   - Today FR keeps every address exactly as in the EN: "Vizierstraat 28, 8000 Bruges, Belgium", "Boulevard du Roi Albert II 8, box 1, 1000 Brussels".
+   - The alternative is the official French forms ("Boulevard du Roi Albert II 8, boîte 1, 1000 Bruxelles, Belgique"), which FR used before R2.
+   - *Recommendation*: allow the official local forms in NL and FR, since "box 1, 1000 Brussels, Belgium" reads as unedited on a French legal page. Switching back is the FR build's six-string address table read backwards, then a rebuild; S1 in `check.py` would then need the same exception.
 
 ## Re-running
 
