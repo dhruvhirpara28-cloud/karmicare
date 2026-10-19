@@ -4,6 +4,8 @@ Task `task_25fdff87b2e8`, Orca run `run_32dd5602b983`, branch `karmicare/soft-la
 
 Dutch for every page of the live store, translated from the approved EN inventory. The files are payloads only. Nothing is in the theme, `locales/` or the Shopify admin yet; the localization worker registers them later.
 
+**R1 update (task `task_07508030e174`).** After the B1a review fixes, batch 01 has a new digest (`a09219ae1af8`, 225 entries). The four new runtime strings (F3) are translated as `theme-key`. Statuses are refreshed for the F1/F2 claim links: the research result lines, evidence counts and leave-on safety lines are now `pending-claim-review`, and the "Radiant calm gums" heading is held with the rest of benefit card 06. Counts below are current.
+
 ## What is here
 
 | File | Content |
@@ -55,8 +57,8 @@ Dutch for every page of the live store, translated from the approved EN inventor
 
 - **never-translate (51):** selling-plan IDs, the Subscription Name keys "60-Day Supply" / "Year Supply", INCI lists, practitioners' names, citations, Awake/Asleep labels and brand aria-labels. These keep their EN value.
 - **needs-approved-copy (2):** homepage FAQ rows 2 and 3 (`[NEEDS APPROVED COPY]` in EN).
-- **unsupported-claim (116):**
-  - the three from B1a: homepage benefit card 06 and the two health lines of Sietske Hamelink's quote, on both templates;
+- **unsupported-claim (117):**
+  - four from B1a: homepage benefit card 06 (heading and text) and Sietske Hamelink's quote on both templates;
   - 107 article blocks;
   - 4 product-page blocks;
   - 2 content-page blocks.
@@ -76,15 +78,15 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `03dd18b9d41a` | 128 | 238 | 36 | 0 | 27 | 15 | 33 | 22 |
-| `batch-01-homepage` | 221 | `b685b73d4dcd` | 147 | 2 | 26 | 0 | 24 | 2 | 20 | 18 |
+| `batch-02-pdp` | 477 | `03dd18b9d41a` | 122 | 234 | 36 | 0 | 37 | 15 | 33 | 22 |
+| `batch-01-homepage` | 225 | `a09219ae1af8` | 140 | 2 | 30 | 0 | 30 | 2 | 21 | 18 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 11 | 3 | 4 |
 | `batch-04-legal` | 974 | `83fed281915f` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 15 | 44 | 0 | 0 | 14 | 0 | 4 | 0 |
 | `batch-06-content-pages` | 21 | `f78c391aa267` | 0 | 15 | 0 | 0 | 4 | 0 | 2 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 349 | 0 | 0 | 243 | 0 | 116 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2566** | | **299** | **669** | **72** | **621** | **313** | **64** | **528** | **57** |
+| **All** | **2570** | | **286** | **665** | **76** | **621** | **329** | **64** | **529** | **57** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -94,7 +96,7 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 |---|---|---:|
 | `batch-01-homepage` | needs-approved-copy | 2 |
 | `batch-01-homepage` | never-translate | 16 |
-| `batch-01-homepage` | unsupported-claim | 2 |
+| `batch-01-homepage` | unsupported-claim | 3 |
 | `batch-02-pdp` | never-translate | 32 |
 | `batch-02-pdp` | unsupported-claim | 1 |
 | `batch-03-header-footer` | never-translate | 3 |
@@ -133,7 +135,6 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2` | WHY TWO FORMULAS? | WAAROM TWEE FORMULES? | 21 vs 17 chars; no shorter natural Dutch for 'why two formulas' |
 | `index:stat_strip_karmicare/stat_5/heading` | No rinse | Niet spoelen | 12 vs 8 chars; shortest natural form, matches the approved 'Spugen, niet spoelen' |
 | `index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/heading` | Naturally brighter | Natuurlijk stralender | 21 vs 18 chars; 'stralender' is the idiom for teeth; shorter 'Natuurlijk witter' would turn 'brighter' into 'whiter' |
-| `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading` | Radiant calm gums | Kalm, stralend tandvlees | 24 vs 17 chars; 'tandvlees' is twice as long as 'gums', no shorter form keeps both 'radiant' and 'calm' |
 | `index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/heading` | One pump, one dose | Eén pompje, één dosis | 21 vs 18 chars; 'Eén pomp, één dosis' (19) fits if 'pompje' may go |
 | `index:trusted_professionals_HAqYth/card_HFdkaD/text` | Holistic Dentist | Holistisch tandarts | 19 vs 16 chars; no shorter Dutch title |
 | `index:research_behind_system_EkjATL/card_bDxUVT/result_label` | RESULT | RESULTAAT | 9 vs 6 chars; standard term, no shorter Dutch label |
@@ -148,6 +149,7 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | `index:care_comes_back/step_next_order/title` | Your next order | Je volgende bestelling | 22 vs 15 chars; 'Je volgende order' (17) fits if space is tight |
 | `liquid:snippets/loop-widget-standard.liquid:123` | One time Purchase | Eenmalige bestelling | 20 vs 17 chars; 'one-time order' per the glossary. If this label shows the Try Once plan, use the approved 'Eenmalig pr… |
 | `liquid:snippets/loop-widget-standard.liquid:140` | each | per stuk | 8 vs 4 chars; Dawn's NL locale uses '/st' if space is tight |
+| `liquid:assets/loop-widget.js:2463` | Renews | Verlengd | The word that replaces 'ships' in the plan's option text. Dutch puts it at the end of the line, so the Loop owner shoul… |
 | `liquid:sections/footer.liquid:679` | Join | Doe mee | 7 vs 4 chars; no four-letter Dutch verb for 'Join' ('Aanmelden' 9) |
 | `liquid:sections/footer.liquid:1058` | Consumer Rights | Consumentenrechten | 18 vs 15 chars; standard term |
 | `admin:navigation:new-main-menu:links[2].title` | Science | Wetenschap | 10 vs 7 chars; no shorter Dutch word |
@@ -281,8 +283,8 @@ Handles stay English (Victor has not decided to translate them), so each page li
 
 | Page | EN | NL | FR | Batch | NL state |
 |---|---|---|---|---|---|
-| Homepage | `/` | `/nl` | `/fr` | 01 | translated; 2 blocks held (unsupported claims); 24 pending-claim-review |
-| Duo PDP | `/products/karmicare-biorhythmic-oral-care-system` | `/nl/products/karmicare-biorhythmic-oral-care-system` | `/fr/products/karmicare-biorhythmic-oral-care-system` | 02 | translated; 1 block held (unsupported claims); 27 pending-claim-review |
+| Homepage | `/` | `/nl` | `/fr` | 01 | translated; 3 blocks held (unsupported claims); 30 pending-claim-review |
+| Duo PDP | `/products/karmicare-biorhythmic-oral-care-system` | `/nl/products/karmicare-biorhythmic-oral-care-system` | `/fr/products/karmicare-biorhythmic-oral-care-system` | 02 | translated; 1 block held (unsupported claims); 37 pending-claim-review |
 | contact | `/pages/contact` | `/nl/pages/contact` | `/fr/pages/contact` | 04 | translated |
 | new-consumer-rights | `/pages/new-consumer-rights` | `/nl/pages/new-consumer-rights` | `/fr/pages/new-consumer-rights` | 04 | legal-review |
 | privacy-policy | `/pages/privacy-policy` | `/nl/pages/privacy-policy` | `/fr/pages/privacy-policy` | 04 | legal-review |
@@ -381,7 +383,7 @@ Handles stay English (Victor has not decided to translate them), so each page li
 | Item | Owner or gate |
 |---|---|
 | Legal review of 621 `legal-review` entries | Victor / lawyer |
-| Claim sign-off of 313 `pending-claim-review` entries | Victor / Clinical Research |
+| Claim sign-off of 329 `pending-claim-review` entries | Victor / Clinical Research |
 | Register `admin` entries, add `theme-key` strings to `locales/nl.json`, store the sticky-bar and footer schema defaults | localization worker |
 | Rendered check of every `/nl/` URL below | preview gate / localization check |
 | FR worker merges this branch for batches 04–08 | FR worker |
@@ -548,7 +550,6 @@ Handles stay English (Victor has not decided to translate them), so each page li
 | `index:two_formulas_karmicare/ingredients_list` | BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen' |
 | `index:product_benefits_karmicare_bcQ6tp/text` | 'settle gums' → 'tandvlees tot rust brengen' (not 'kalmeren' = soothe, to keep the claim as is) |
 | `index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/heading` | 21 vs 18 chars; 'stralender' is the idiom for teeth; shorter 'Natuurlijk witter' would turn 'brighter' into 'whiter' |
-| `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading` | 24 vs 17 chars; 'tandvlees' is twice as long as 'gums', no shorter form keeps both 'radiant' and 'calm' |
 | `index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/heading` | EN has a double space after the comma; not carried over |
 | `index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/heading` | 21 vs 18 chars; 'Eén pomp, één dosis' (19) fits if 'pompje' may go |
 | `index:trusted_professionals_HAqYth/bottom_text` | 'prevented' rendered literally ('voorkomen') because the EN says it (C70); JEP/DETIC bans 'voorkomt' in claims, claims reviewer to check. TERM: practitioner → zorgverlener |
@@ -592,9 +593,13 @@ Handles stay English (Victor has not decided to translate them), so each page li
 | `index:care_comes_back/step_next_order/title` | 22 vs 15 chars; 'Je volgende order' (17) fits if space is tight |
 | `liquid:sections/hero-karmicare.liquid:149` | aria-label; design jargon 'Hero' dropped |
 | `liquid:sections/hero-karmicare.liquid:251` | Suffix becomes '-modus' (Dutch compound: 'AWAKE-modus'); the code appends ' mode' with a space, so the NL key needs the hyphen form |
+| `liquid:assets/chronobiology-clock-karmicare.js:91:live` | Live branch of the clock's aria-valuetext; pairs with '. Laat los om terug te gaan naar nu.' (preview branch, same line). Added in R1 (F3). |
 | `liquid:assets/chronobiology-clock-karmicare.js:17` | 'clearance' (oral clearance) → 'zelfreiniging' (of the mouth) |
 | `liquid:snippets/loop-widget-standard.liquid:123` | 20 vs 17 chars; 'one-time order' per the glossary. If this label shows the Try Once plan, use the approved 'Eenmalig proberen' (17) |
 | `liquid:snippets/loop-widget-standard.liquid:140` | 8 vs 4 chars; Dawn's NL locale uses '/st' if space is tight |
+| `liquid:assets/loop-widget.js:2452:annual` | Year plan-card label; approved Figma NL '/ jaar' (3738:27474). Added in R1 (F3). |
+| `liquid:assets/loop-widget.js:2463` | The word that replaces 'ships' in the plan's option text. Dutch puts it at the end of the line, so the Loop owner should key the whole line: 'Renews every {{ days }} days' → 'Elke {{ days }} dagen verlengd' (approved Fi… |
+| `liquid:assets/loop-widget.js:2464` | Per-brushing line on the plan cards; approved Figma NL '€0,49 / poetsbeurt'. {{ amount }} comes from the store money format. Added in R1 (F3). |
 | `liquid:assets/loop-widget.js:2468` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Jaarlijks verlengd |
 | `liquid:assets/loop-widget.js:2213` | 't.w.v.' (ter waarde van) is the usual shop abbreviation in NL and BE |
 | `liquid:snippets/loop-subscriptions.liquid:10` | Kept in English on purpose: featured-product.liquid:542 and main-product.liquid:616 test for this exact text, so translating it could break that check. Hidden placeholder |
