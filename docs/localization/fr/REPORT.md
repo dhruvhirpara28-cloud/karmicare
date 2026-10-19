@@ -27,7 +27,8 @@ Task `task_064a318d44e7`, Orca run `run_32dd5602b983`, branch `karmicare/soft-la
 | `dfec9ed` | `batch-07-collections-blog.json` (709) |
 | `933c1fb` | Merge of the claims review for batches 05–07 (5e4f426) and the NL payloads |
 | `a440834` | Batches 05–07 rebuilt on the reviewed claim statuses |
-| this commit | This report |
+| `ffbe9b4` | This report (reviewed by Astra) |
+| `f85fe81` … `5f8bf1f` | R3 fixes F1–F10, one commit per finding (section below) |
 
 ### File format
 
@@ -60,6 +61,36 @@ Each `docs/localization/fr/<batch>.json` has a batch header and one entry per so
 
 **Mapping to the NL files.** The NL worker puts the review gates in `status` (`pending-claim-review`, `legal-review`) and calls the Dawn keys `dawn-nl`. FR keeps the channel in `status` and the gates in `flags`; FR `locale-present` matches NL `dawn-nl`. The localization worker can read both from the same fields (`status`, `flags`, `notes`).
 
+## R3 fixes
+
+Astra review `docs/runtime-review/B3-FR-ASTRA.md` (verdict: pass with fixes) at `ffbe9b4`. All ten findings are applied, one commit each, with the reviewer's exact FR where one was given. No held entry was translated and no hold was added or released (0 differences in the held set against `ffbe9b4`); 146 FR values changed.
+
+| Finding | Commit | What changed |
+|---|---|---|
+| F1 · evening brush whitening | `f85fe81` | Four batch-05 entries (evening brush and evening brush 2.0, SEO description and body): « Cela aide vos dents à retrouver leur blancheur nacrée, sans polissage ni blanchiment. » `pending-claim-review` kept. |
+| F2 · blog qualifiers | `45be545` | Nootropics `b062` « pour vous aider à améliorer… », nano-hydroxyapatite `b053` « susceptibles de provoquer », SLS `b012` and `b028` « pour lesquelles vous pourriez souhaiter… » (b028 also « les soins contenant du SLS »). Flags kept. |
+| F3 · skip, not postpone | `b19b89a` | `compare_value#11` « Sauter une livraison, suspendre ou résilier », plus `fit-risk`. |
+| F4 · canker-sore duration | `6c534cd` | Research card `card_JeERX6` heading on the homepage and the PDP: « Sans SLS, les aphtes étaient moins nombreux et duraient moins longtemps. », plus `fit-risk` (72 vs 44 chars). |
+| F5 · legal metadata | `668d3bf` | `legal-review` on the 16 legal SEO fields (ten translated, six held legacy). FR values unchanged. Batch 04 has 972 `legal-review` entries; the total is 979. Only the contact page's two fields stay outside. |
+| F6 · check.py gates | `d376bd3` | The checker enforces source holds, claim and legal gates, delivery channel, resource addressing, batch presence and `flag_counts` (see Evidence). `--self-test` runs 12 in-memory mutations, the reviewer's four plus eight more, and all fail as expected. The reviewer's four mutations written to scratch copies on disk each exit 1. |
+| F7 · first-mention rule | `23bf6b1` | The reviewer's exact fixes, plus about 120 blog and content-page edits. *dentifrice* now appears only in titles, SEO titles, image alts, the first SEO-description mention and the first body mention per page. Later mentions read *formule*, *soin* or *soin bucco-dentaire*, with agreement fixed. No non-legal string repeats it. The REPORT exception is withdrawn. Legal text, INCI headings and PDP titles/alts are untouched. |
+| F8 · fit coverage | `29d20e5` | `fit-risk` on the 11 listed entries, exact FR kept: four « Commencer maintenant » buttons, three sticky lines, two plan names, compare cells `#14` and `#25`. `fit-risk` now covers 25 entries. The fit table is extended and the batch 04–08 statement is replaced by the reviewer's wording. Note fallbacks use U+00A0. |
+| F9 · email placeholder | `85f60ce` | `footer.liquid:667` is `you@example.com` again. |
+| F10 · English labels in legal prose | `5f8bf1f` | Every lowercase *airless* in the 12 listed entries now reads « sans entrée d'air », and « soft opt-in » reads « exception applicable aux clients existants » in the two listed entries. Policy segments are regenerated from the page text, so both copies match. |
+
+**Where I departed from the exact wording:**
+
+- **F7**: I applied the reviewer's blog fix `b027` to « le dentifrice Awake » as well as « le dentifrice Asleep », because the article's first body mention is in `b014`.
+- **F10**: in the two headings, *hermétique* moves before the new words (« Protection hermétique sans entrée d'air », « Emballage hermétique sans entrée d'air »), so it qualifies the noun rather than *air*. Everywhere else the substitution is exact.
+
+**Verification after R3:**
+
+- `check.py --self-test`: exit 0, 0 errors, 17 warnings, 0 mutations uncaught.
+- `digest.py`: all eight batches `ok`.
+- `shopify theme check --fail-level error`: exit 0 (244 files, 21 warnings, no errors).
+
+**Not changed:** the reviewer's source-owned issues and release limits stay with their owners. These are the €0.42 cell, the 2–4 applications in the brush texts, the Asleep 2.0 "helps you fall asleep" line, « les soulager » in the headaches article (do not release either version), the truncated EN SEO strings, the legacy T&C links and the URL manifest to expand before page-by-page QA.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
@@ -78,13 +109,13 @@ Every source entry is covered: 2,031 carry FR and 535 are held. The full digests
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| legal-review | 1 | 1 | 5 | 956 | 0 | 0 | 0 | 0 | 963 |
+| legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
 | pending-claim-review | 30 | 27 | 1 | 0 | 14 | 4 | 243 | 0 | 319 |
 | pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
 | source-defect | 2 | 7 | 1 | 3 | 9 | 0 | 0 | 0 | 22 |
 | wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
-| fit-risk | 3 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 11 |
+| fit-risk | 4 | 19 | 0 | 0 | 2 | 0 | 0 | 0 | 25 |
 | not-rendered | 0 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 7 |
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
@@ -108,10 +139,13 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py`: exit 0, 0 errors, 17 warnings.** For every file it checks:
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 17 warnings, 12/12 bad payloads caught.** For every file it checks (R3 F6 added the gates):
 
-- the batch digest against the source, and `en_sha1` against `sha1(en)`;
-- one entry per source id, in order;
+- every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
+- one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;
+- the holds the source requires (never-translate, placeholder, unsupported claim in CLAIMS-REVIEW.md or the 05–07 `claim_status`, legacy page);
+- `pending-claim-review` on every translated needs-review claim, `legal-review` on every legal entry (source `legal`, and all of batch 04 outside the contact page);
+- the delivery channel per source status, Dawn values equal to `locales/fr.json`, and `counts` / `flag_counts` recomputed from the entries;
 - the status and flag vocabulary;
 - that EN and FR carry the same HTML tags, Liquid, `[tokens]`, `&nbsp;` count and runtime price spans;
 - that the selling-plan IDs are unchanged;
@@ -125,7 +159,7 @@ For entries that are not legal, it also flags banned words, claim verbs and *tu*
   - 8 × the noun *prévention*: the EN "Prevention" in the check-up and plan tooltips and the compare table, and C33.
   - 1 × *produits cosmétiques*: the official portal name.
 - **Batch 07 (8):**
-  - *produit* or *produits*, five of them the verb *produire* and three *produits chimiques/ménagers* (chemicals, household products).
+  - 6 × *produit* or *produits*: three forms of the verb *produire*, one *sous-produit* (by-product) and two *produits chimiques/ménagers* (chemicals, household products).
   - *prévenir les caries*: a statement about fluoride, not a Karmicare claim.
   - *guérison*: the EN "healing cycles", a needs-review claim kept as written.
 
@@ -313,7 +347,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 | Item | Gate or owner |
 |---|---|
 | Astra review of the FR payloads | coordinator, after `worker_done` |
-| Legal review of 963 legal entries | Victor or a lawyer, before any FR legal page is published |
+| Legal review of 979 legal entries | Victor or a lawyer, before any FR legal page is published |
 | Claims sign-off: 319 `pending-claim-review` entries; 116 held as unsupported (3 in 01–02, 113 in 05–07) | Victor / Clinical Research |
 | EN wording fixes: 22 `pending-en-review` entries, plus the defects above | Victor and the Admin owner |
 | Native French read-through | Victor or a native reviewer, before publishing; customer care answers in EN and NL only (B1a decision 2) |
