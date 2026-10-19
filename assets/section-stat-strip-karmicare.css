@@ -88,7 +88,13 @@
 
 /* Mobile Scroll Layout (Smooth Horizontal Swipe) */
 @media screen and (max-width: 749px) {
+  /* Figma 3027:20817: content-width items from the gutter, the row runs to the screen
+     edge so the third stat peeks in */
   .stat-strip-karmicare__grid--scroll {
+    width: auto;
+    margin-inline: calc(-1 * var(--page-gutter));
+    padding-inline: var(--page-gutter);
+    scroll-padding-inline: var(--page-gutter);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -103,9 +109,11 @@
   }
 
   .stat-strip-karmicare__grid--scroll .stat-strip-karmicare__item {
-    flex: 0 0 44%;
-    min-width: 180px;
-    scroll-snap-align: center;
+    flex: 0 0 auto;
+    min-width: 0;
+    padding-inline: 3.2rem;
+    white-space: nowrap;
+    scroll-snap-align: start;
   }
 
   /* Mobile Grid Layout (2-column wrap) */
