@@ -1,0 +1,20 @@
+/* R4 evidence, FAQ chip focus ring BEFORE 2aa89c0: the live chips are <span>s and cannot take
+   focus, so the ring is drawn on the active chip with the A1 focus-visible values
+   (2px solid border/focus, offset +2px) inside the real phone scroller. */
+#shopify-pc__prefs,
+#shopify-pc__prefs__dialog,
+#shopify-pc__banner {
+  display: none !important;
+}
+
+#MainContent > .shopify-section:has(~ .shopify-section:target),
+#MainContent > .shopify-section:target ~ .shopify-section,
+body:has(#MainContent > .shopify-section:target) .shopify-section-group-footer-group,
+body:has(.shopify-section-group-footer-group:target) #MainContent {
+  display: none !important;
+}
+
+.km-faq__filter-btn.active {
+  outline: 2px solid var(--kc-mapped-border-focus-default) !important;
+  outline-offset: 2px !important;
+}

@@ -251,3 +251,73 @@ It renders an `<a>` with `role="link"`, `aria-disabled="true"`, `tabindex="0"`, 
 
 - PR-03 and RE-02 are now "fixed `4f8024c`" (Coming soon).
 - D-7 and D-8 are decided by rule H8.
+
+## R4 fixes
+
+**Task**: `task_83a8d6dbcfd5`, dispatch `ctx_b0652d83ed60`
+**Source**: `docs/runtime-review/A1-ASTRA.md`, Astra review of `3bae259..e9ce5e4`: **PASS WITH FIXES**, no P0/P1 regression
+**Commits**: `2aa89c0`, `a2ea829`, `eefb0a9`, plus this report commit, on top of `e9ce5e4`; none pushed
+**Preflight**: clean tree on `karmicare/soft-launch-homepage` at `e9ce5e4`; Claude Opus 5.5, auto mode, Bash sandboxed
+
+### Fixes, with the reviewer's exact corrections
+
+| Finding | Commit | Change | Verification |
+|---|---|---|---|
+| 1 · P2: FAQ chip focus ring clipped on phones | `2aa89c0` | `sections/km-faq-accordion.liquid`, inside `@media (max-width: 750px)`: `.km-faq__filter-btn:focus-visible { outline-offset: -2px; }`. The ring sits inside the chip, as the header drawer does. Native buttons, `type="button"` and the `aria-pressed` sync are kept. Desktop keeps +2 px. | Theme Check exit 0. DOM evidence below. Keyboard check pending preview gate. |
+| 2 · P3: drawer tooltip stuck at −4 px after extraction | `a2ea829` | `sections/header.liquid`, inside the existing `max-width: 989px` block: section-scoped shown-state rules for `.menu-drawer .kc-coming-soon:focus-visible` and `.is-open`, plus `:hover` inside `@media (hover: hover)`. They set `translate: 0 0` on the tooltip at specificity (1,4,0), above the retained rest rule (1,2,0). Shared opacity, visibility, dismissal, the drawer's static position and the reduced-motion `!important` reset are unchanged. | Theme Check exit 0. Tap, Tab, Escape and hover pending preview gate. The live header still runs the pre-extraction inline rules, which behave correctly, so CSS injection cannot show this. |
+| 3 · P3: a `#` study URL still rendered a link | `eefb0a9` | `snippets/research-card.liquid` renders the source anchor only when `link_url` is nonblank **and** not `#`; otherwise the existing plain-label `<span>`. Real relative, absolute and nonempty fragment URLs stay links. | Theme Check exit 0. Empty, `#` and real-URL cases pending preview gate (Liquid). |
+
+- **Theme Check** (`shopify theme check --fail-level error`) exits **0**: 226 files, 21 warnings, 0 errors, no new ignores. This answers the reviewer's note that its sandbox could not reproduce the run.
+- **Line endings:** the FAQ file keeps its CRLF convention on the added lines (what `git diff --check` flags), with no line-ending churn.
+
+**Held items, unchanged.**
+- The FAQ Night card colour hunk of `174997e` (`templates/index.json`) and all of `7ff0562` (care-comes-back markers) are untouched.
+- `git diff --stat e9ce5e4..HEAD -- templates/index.json sections/care-comes-back.liquid assets/section-care-comes-back.css` is empty.
+- On "orchestrator OK" in the A1 report: that OK only allowed building the change on this branch. Victor's visual acceptance of both items is still open, and nothing should be read as approval.
+
+### After-evidence (browser helper)
+
+Only finding 1 is a CSS change that the live page can show; the live chips are still `<span>`s and cannot take focus. The plan was a before/after pair at 393 using `docs/homepage/capture/r4-faq-focus-before.css` and `r4-faq-focus-after.css`. Both draw the exact ring (2 px, `--kc-mapped-border-focus-default`) on the active chip inside the real phone scroller, with hygiene and framing as in A1b.
+
+- **Screenshots: not captured.** Three `screenshot` calls failed with `Screenshot timed out — the browser page did not draw a frame`, while `status`, `css`, `scroll` and `metrics` kept answering. That matches the workflow's note that a hidden or sleeping desktop blocks capture. No retry loop and no other route. The injection files are committed, so the pair is one command each once the pane draws again.
+- **DOM measurement (393, Day, live):**
+  - `.km-faq__filters` is at y 272.8, height 35.
+  - The active chip is at y 272.8, height 35, so the scroller has no vertical room around the chips.
+  - Before: a 2 px ring at +2 px offset reaches 4 px above and below the chip, into the scroller's clipped overflow (`overflow-x: auto` forces vertical clipping).
+  - After: −2 px offset puts the ring's outer edge on the chip's border box, so nothing is clipped.
+  - The same rule applies up to 750 px inclusive.
+- **Page restored:** no injection, `mode auto`, plain URL, 1920 × 1080.
+
+### Still open from the review (not in R4 scope)
+
+- **Evidence gap:** the A1b wide-screen numbers (1024 columns and heading, 1440 two-formulas and footer gap, 1920/2560 featured-product gutters) are in this report but not archived as raw `metrics` output. Recapture with `orca-hygiene.css` / `orca-after.css` and the selectors in the A1b section, saving each result, once the coordinator wants it.
+- **Shared PDP gate:** no PDP before/after exists yet (`capture/pdp-*.json` are recipes). Still to check:
+  - clock at 768 and 1024;
+  - featured-product at 990, 1024, 1440, 1920 and 2560;
+  - both Coming-soon CTA states;
+  - care-comes-back stays held.
+- **Preview gate:** none of these has been seen in rendered branch HTML yet:
+  - header Coming-soon look and interaction, including the R4 drawer fix;
+  - both CTAs;
+  - NL/FR labels and real configured URLs;
+  - FAQ keyboard behaviour, including the R4 ring;
+  - hero anchor and avatar;
+  - study labels, including the R4 `#` case;
+  - two-formulas srcset.
+
+  Check the breakpoint edges 749/750, 989/990, 1099/1100, 1199/1200 and 1440/1441. HD-01, TF-06 and PR-01 stay pending as before.
+
+### Integration: merge boundaries (from the review, updated for R4)
+
+| Exact file(s) | Risk and merge rule |
+|---|---|
+| `templates/index.json` | Direct overlap with the current source-copy branch. Merge by section/block ID and setting key. Keep source-copy's text and approved links, and this branch's `columns_tablet: 3`, `columns_laptop: 3`, `benefits_layout: "stacked"`, plus the approved benefit-overlay settings (6aa0e71). Keep section/block order and image references. **Exclude the held FAQ colour hunk** (`card_bg_color_night`). Never resolve by taking either whole JSON file. |
+| `sections/footer-group.json` | Changed by source-copy, untouched by A1/A1b/R4. Keep source-copy's settings and text; do not overwrite it with this branch's older blob while integrating the footer CSS change. |
+| `sections/footer.liquid` | A1 touches only the legal-row gap (64 px token, line ~558). Localization will touch visible literals (newsletter legal copy ~695–696, Language/Country labels ~851/869). Keep the gap; apply locale substitutions independently; recheck wrapping at 1200+ with NL/FR. |
+| `sections/km-faq-accordion.liquid` | Localization replaces `ALL` (line ~166) but must keep the button element, `type`, `data-filter`, `aria-pressed`, the focus style and the R4 phone offset (`2aa89c0`). Keep category handles matching item `data-category`; never revert to the older span. Source-copy's FAQ answers and categories belong in template settings. Integrate the button/ARIA part of `174997e` even while its JSON colour hunk stays held. |
+| `snippets/kc-coming-soon.liquid`, `sections/header.liquid`, `snippets/header-dropdown-menu.liquid`, `snippets/header-drawer.liquid` | Keep the shared locale fallback and the optional header-setting override. Do not restore an English schema default or the old duplicated tooltip script. Keep the R4 drawer shown-state rules (`a2ea829`) without changing navigation targets. |
+| `sections/trusted-professionals.liquid`, `sections/research-behind-system.liquid`, `snippets/research-card.liquid` | If localization or source-link integration touches CTA or source markup, keep the blank/`#` disabled-state logic (CTAs `4f8024c`, study chips `bf5d314` + `eefb0a9`) and the real-URL branches. Labels keep coming from their settings. Never resolve with the older unconditional `href="#"` markup. |
+| All 31 storefront locales (`locales/bg.json` … `locales/zh-TW.json`, listed in the review) | Merge the nested `kc` object by key. Keep `kc.general.coming_soon` exactly once and keep every other worker's keys; never replace the whole `kc` object or create duplicate root keys. Approved EN/NL/FR values; coordinate the 28 English placeholders if those languages go live. Rerun duplicate-key validation and Theme Check; add no ignores. |
+| `sections/care-comes-back.liquid`, `assets/section-care-comes-back.css` | **Hold all of `7ff0562`**, including its CSS cleanup, until Victor accepts the empty-ring markers (homepage and PDP both change). |
+
+As the review notes, source-copy really overlaps `templates/index.json` and owns `sections/footer-group.json` today; the Liquid and locale rows are expected localization integration points, not existing conflicts. Coordinate the shared featured-product and clock CSS with the PDP and Utopia owners before integrating, since later type sizes and translated labels change the measured fit.
