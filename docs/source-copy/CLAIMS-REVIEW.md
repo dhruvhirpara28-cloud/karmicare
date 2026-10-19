@@ -99,7 +99,9 @@ Not health claims, but customer-facing promises that the confirmed offer (5 Oct 
 
 ## Batches 05–07: other products, content pages, collections and blog (B2)
 
-Same three statuses and the same standard as above, applied to every block of batches 05–07 that a keyword scan flagged (541 blocks), each judged by hand. Blocks without a claim are left out. The per-entry status is also in `en-source.json` (`claim_status`, `claim_basis`). After the R2 review (`docs/runtime-review/B2-NL-ASTRA.md`), 6 blocks that the scan missed were added and 9 blocks were reclassified; their basis ends with “(R2, review F*n*)”.
+Same three statuses and the same standard as above, applied to every block of batches 05–07 that a keyword scan flagged (541 blocks), each judged by hand. Blocks without a claim are left out. The per-entry status is also in `en-source.json` (`claim_status`, `claim_basis`).
+
+After R2 (`fb46dd1`, review `docs/runtime-review/B2-NL-ASTRA.md`), batches 05–07 contained 30 approved, 274 needs-review and 115 unsupported blocks. Twelve blocks were newly entered in the claim register: eleven previously unclassified entries and the newly inventoried nHAp heading. Three previously approved blocks were reclassified to needs-review. Their basis ends with “(R2, review F*n*)”.
 
 The nine blog articles (2023–2024) predate the 2026 claim rules. They make disease, prevention and fluoride-harm statements throughout. **Unsupported** blocks are held in the NL and FR files (not translated); **needs-review** blocks are translated faithfully and marked `pending-claim-review`.
 

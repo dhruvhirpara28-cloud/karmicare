@@ -63,7 +63,7 @@ FR already holds the two sleep/wake lines (`58755f7`). Only the SLS block is new
 ## 5. Metadata only: no FR action
 
 - **`claim_status` on every claim-bearing entry.** 84 more entries in batches 01–03 have it now, as the strictest status of their `claims`. Together with the 4 C100 entries in section 3, that makes 88: 12 approved, 72 needs-review, 4 unsupported. Their gates are unchanged. A checker can now read every gate from the entry itself.
-- **CLAIMS-REVIEW.md.** The batch 01–03 register has 67 claims (17 approved, 47 needs-review, 3 unsupported). Batches 05–07 hold 30 approved, 274 needs-review and 115 unsupported blocks: 6 blocks were added and 9 reclassified.
+- **CLAIMS-REVIEW.md.** The batch 01–03 register has 67 claims (17 approved, 47 needs-review, 3 unsupported). After R2, batches 05–07 contain 30 approved, 274 needs-review and 115 unsupported blocks. Twelve blocks were newly entered in the claim register: eleven previously unclassified entries and the newly inventoried nHAp heading. Three previously approved blocks were reclassified to needs-review. (Wording from the R6 re-review, R6-03; "now" reads "after R2" because the R6 additions below change the totals again.)
 
 ## 6. NL payload rules from R2 that apply to FR too
 
