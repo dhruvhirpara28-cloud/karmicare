@@ -89,6 +89,18 @@ Astra review `docs/runtime-review/B3-FR-ASTRA.md` (verdict: pass with fixes) at 
 - `digest.py`: all eight batches `ok`.
 - `shopify theme check --fail-level error`: exit 0 (244 files, 21 warnings, no errors).
 
+**After R3 (coordinator follow-ups, 19 Oct):**
+
+- `58755f7` · NL review R2 F1: the Awake and Asleep 2.0 sleep/wake body lines (`body_html#b002`) are held. Note: "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description".
+- `71b3c5a` · merge of `karmicare/soft-launch-source-copy` at `2194ef3` (source-copy R1 fixes). `3129f1d` (the B4 theme-key map) is not merged.
+- `8bc3d96` · FR follows that merge:
+  - **Four new batch-01 runtime strings**: « . Heure locale actuelle. », « / an », « Se renouvelle » and « {{ amount }} / brossage ».
+    - For « Se renouvelle », the note says to key the whole line « Se renouvelle tous les {{ days }} jours », because the FR plan name defeats the widget's 'ships' regex.
+  - **Re-derived claim gates**: `pending-claim-review` added on the C60–C64 and C68 result lines (homepage and PDP) and on the C46, C93 and C94 metafields. The total is now 335.
+  - **Card 06**: the heading is now held with its text, because C35 covers it.
+- Batch-01 digest is now `a09219ae`. `check.py --self-test` exits 0 (0 errors, 12/12 caught), `digest.py` reports all eight `ok`, and Theme Check exits 0 (245 files, 21 warnings).
+- **For the B4 localization worker**: `docs/localization/theme-keys.json` was refreshed from FR at `d376bd3`. The FR theme-key values changed since then (R3 F7, F9 and the four new strings), so run `theme_keys.py refresh` before `write`.
+
 **Not changed:** the reviewer's source-owned issues and release limits stay with their owners. These are the €0.42 cell, the 2–4 applications in the brush texts, the Asleep 2.0 "helps you fall asleep" line, « les soulager » in the headaches article (do not release either version), the truncated EN SEO strings, the legacy T&C links and the URL manifest to expand before page-by-page QA.
 
 ## Counts
@@ -96,21 +108,21 @@ Astra review `docs/runtime-review/B3-FR-ASTRA.md` (verdict: pass with fixes) at 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
 | `batch-02-pdp` | `03dd18b9…` | 477 | 141 | 249 | 36 | 15 | 36 |
-| `batch-01-homepage` | `b685b73d…` | 221 | 170 | 2 | 26 | 2 | 21 |
+| `batch-01-homepage` | `a09219ae…` | 225 | 169 | 2 | 30 | 2 | 22 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `83fed281…` | 974 | 143 | 481 | 0 | 0 | 350 |
-| `batch-05-products` | `5ab678a9…` | 77 | 16 | 57 | 0 | 0 | 4 |
+| `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
 | `batch-06-content-pages` | `f78c391a…` | 21 | 0 | 19 | 0 | 0 | 2 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,566** | **480** | **1,417** | **72** | **62** | **535** |
+| **Total** | | **2,570** | **479** | **1,415** | **76** | **62** | **538** |
 
-Every source entry is covered: 2,031 carry FR and 535 are held. The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,032 carry FR and 538 are held (after the source-copy R1 merge, 2194ef3). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 30 | 27 | 1 | 0 | 14 | 4 | 243 | 0 | 319 |
+| pending-claim-review | 36 | 37 | 1 | 0 | 14 | 4 | 243 | 0 | 335 |
 | pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
 | source-defect | 2 | 7 | 1 | 3 | 9 | 0 | 0 | 0 | 22 |
 | wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
@@ -120,7 +132,7 @@ Every source entry is covered: 2,031 carry FR and 535 are held. The full digests
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (535)
+### Held (538)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
@@ -128,8 +140,8 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 | 07 | unsupported claim (05–07 review) | 107 | Blog blocks such as "prevents tooth decay", "ingesting poison", fluoride and IQ, NASA history |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
-| 05 | unsupported claim | 4 | "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles…" in the Awake/Asleep 2.0 descriptions and meta descriptions |
-| 01–02 | unsupported claim | 3 | C35 benefit card 06; C84/C85 Sietske Hamelink quote on both templates |
+| 05 | unsupported claim | 6 | "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles…" in the Awake/Asleep 2.0 descriptions and meta descriptions, and the two sleep/wake body lines `body_html#b002` (NL review R2 F1) |
+| 01–02 | unsupported claim | 4 | C35 benefit card 06, text and heading; C84/C85 Sietske Hamelink quote on both templates |
 | 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
 | 06 | unsupported claim | 2 | "NASA's favorite supplement for oral health" (`/pages/nhap-technology`) |
 | 02 | source defect | 1 | Treatment journey `#29` stops mid-phrase |
