@@ -8,8 +8,8 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 57,
-  "held": 4,
+  "admin": 55,
+  "held": 6,
   "translated": 16
  },
  "flag_counts": {
@@ -900,10 +900,10 @@
    "key_path": "body_html#b002",
    "en": "A toothpaste that helps you fall asleep at night.",
    "en_sha1": "77dfe576d894aedd93f53144bb91214468b5df2d",
-   "fr": "Un dentifrice qui vous aide à vous endormir le soir.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description",
    "source_status": "admin-held"
   },
   {
@@ -1006,10 +1006,10 @@
    "key_path": "body_html#b002",
    "en": "A toothpaste that helps you get up in the morning.",
    "en_sha1": "f4e9ca2c91352d24232d43428eb4fd8a51cb7de7",
-   "fr": "Un dentifrice qui vous aide à vous lever le matin.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description",
    "source_status": "admin-held"
   },
   {
