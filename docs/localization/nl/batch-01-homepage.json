@@ -18,6 +18,7 @@
   "index:product_benefits_karmicare_bcQ6tp/card_aXhzDi/heading",
   "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/heading",
   "index:trusted_professionals_HAqYth/card_HFdkaD/text",
+  "index:research_behind_system_EkjATL/button_label",
   "index:research_behind_system_EkjATL/card_bDxUVT/result_label",
   "index:research_behind_system_EkjATL/card_yMiD9D/result_label",
   "index:research_behind_system_EkjATL/card_fmFMFd/result_label",
@@ -1129,12 +1130,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.hover_text",
    "en": "<p>“Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifically supported choice. By also taking biorhythm into account, the brand touches on the foundations on which true health is built. This vision aligns seamlessly with my professional conviction that only an integrated approach, bringing together science, biology, rhythm and nature, leads to lasting health.”</p>",
    "en_sha1": "a303abfbd840f092c3eafa31a0ba6bd86613258c",
-   "nl": "<p>“Karmicare biedt fluoridevrije mondzorg op een doordachte manier, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door ook rekening te houden met het bioritme raakt het merk aan de fundamenten waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde aanpak, die wetenschap, biologie, ritme en natuur samenbrengt, tot duurzame gezondheid leidt.”</p>",
+   "nl": "<p>“Karmicare biedt op een doordachte manier fluoridevrije mondzorg, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door ook rekening te houden met het bioritme raakt het merk aan de fundamenten waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde aanpak, die wetenschap, biologie, ritme en natuur samenbrengt, tot blijvende gezondheid leidt.”</p>",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Practitioner quote: if she gave it in Dutch originally, use her own wording instead of this back-translation"
+   "notes": "Practitioner quote: if she gave it in Dutch originally, use her own wording instead of this back-translation; R2 (review F9): harmonised with product.subscription-item:trusted_professionals_HAqYth/card_8dRing/hover_text, the PDP form ('blijvende gezondheid' for 'lasting health'; 'duurzaam' also means sustainable)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_HFdkaD/heading",
@@ -1293,8 +1294,10 @@
    "en_sha1": "0fa1ec9d5064dcacc5914eb584d9f6410eaea971",
    "nl": "Ontdek de volledige wetenschappelijke basis",
    "status": "translated",
-   "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek het volledige bewijs"
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek het volledige bewijs; Button label, 30 → 43 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_bDxUVT/subheading",
@@ -2033,12 +2036,12 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.answer",
    "en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
    "en_sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
-   "nl": "<p>Een bio-identiek mineraal — dezelfde stof waaruit je glazuur bestaat. Het remineraliseert tanden, vermindert gevoeligheid en maakt op natuurlijke wijze witter. Het meest onderzochte remineraliserende middel op mineraalbasis ter wereld, in Japan gebruikt sinds de jaren tachtig.</p>",
+   "nl": "<p>Een bio-identiek mineraal — dezelfde stof waaruit je glazuur bestaat. Het remineraliseert tanden, vermindert gevoeligheid en maakt op natuurlijke wijze witter. Het meest onderzochte remineraliserende middel op mineraalbasis ter wereld, in Japan toegepast sinds de jaren tachtig.</p>",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Numbers warning: '1980s' → 'de jaren tachtig' (Dutch idiom, same period). 'gebruikt' refers to the mineral in Japan, not to the customer"
+   "notes": "Numbers warning: '1980s' → 'de jaren tachtig' (Dutch idiom, same period); R2 (review F6): 'gebruikt' → 'toegepast' (brand rule)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category",
@@ -2367,10 +2370,10 @@
    "key_path": "sections.care_comes_back.blocks.step_checkup.settings.text",
    "en": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay.",
    "en_sha1": "f365b1c15eab5e5c15cd9b0276d7a64a4b546e4f",
-   "nl": "Bij het Karmicare-jaar levert een controle na maand zes €40 aan Care Credit op, één keer per lidmaatschapsjaar. Je stapt binnen met iets te winnen, niet alleen met iets te betalen.",
+   "nl": "Met het Karmicare-jaar levert een controle na maand zes €40 Care Credit op, één keer per lidmaatschapsjaar. Je stapt binnen met iets te winnen, niet alleen met iets te betalen.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "R2 (review F9): harmonised with product.subscription-item:care_comes_back/step_checkup/text, the PDP form, which follows the TERM 'On the Year' → 'Met het Karmicare-jaar'"
   },
   {
    "id": "index:care_comes_back/step_next_order/title",

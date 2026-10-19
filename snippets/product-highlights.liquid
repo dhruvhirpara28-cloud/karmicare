@@ -157,7 +157,7 @@
     --marquee-speed: {{ marquee_speed }}s;
   "
 >
-  <div class="highlights-list" aria-label="Product highlights">
+  <div class="highlights-list" aria-label="{{ 'kc.pdp.highlights_label' | t }}">
     {{- pills_html -}}
     {%- unless block.settings.static_layout -%}
       {{- pills_html -}}

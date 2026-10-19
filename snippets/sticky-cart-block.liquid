@@ -39,6 +39,39 @@
 -%}
 
 {%- comment -%}
+  Copy defaults: a block setting overrides, blank uses the locale key (kc.sticky_cart.*). The keys end
+  in _html so t returns them unescaped: most go into the JSON config below and are set as textContent.
+{%- endcomment -%}
+{%- liquid
+  assign sc_copy_title_rhythm = 'kc.sticky_cart.title_rhythm_html' | t
+  assign sc_copy_title_year = 'kc.sticky_cart.title_year_html' | t
+  assign sc_copy_title_once = 'kc.sticky_cart.title_once_html' | t
+  assign sc_copy_price_rhythm = 'kc.sticky_cart.price_rhythm_html' | t
+  assign sc_copy_price_year = 'kc.sticky_cart.price_year_html' | t
+  assign sc_copy_price_once = 'kc.sticky_cart.price_once_html' | t
+  assign sc_copy_credit = 'kc.sticky_cart.credit_html' | t
+  assign sc_copy_credit_checkup = 'kc.sticky_cart.credit_checkup_html' | t
+  assign sc_copy_credit_info = 'kc.sticky_cart.credit_info_html' | t
+  assign sc_copy_checkup_info = 'kc.sticky_cart.checkup_info_html' | t
+  assign sc_copy_panel_label = 'kc.sticky_cart.panel_label_html' | t
+  assign sc_copy_change_label = 'kc.sticky_cart.change_label_html' | t
+  assign sc_copy_cta_rhythm = 'kc.sticky_cart.cta_rhythm_html' | t
+  assign sc_copy_cta_year = 'kc.sticky_cart.cta_year_html' | t
+  assign sc_copy_cta_once = 'kc.sticky_cart.cta_once_html' | t
+  assign sc_copy_delivery_free = 'kc.sticky_cart.delivery_free_html' | t
+  assign sc_copy_delivery_once = 'kc.sticky_cart.delivery_once_html' | t
+  assign sc_copy_kit = 'kc.sticky_cart.kit_html' | t
+  assign sc_copy_guarantee_member = 'kc.sticky_cart.guarantee_member_html' | t
+  assign sc_copy_guarantee_once = 'kc.sticky_cart.guarantee_once_html' | t
+  assign sc_copy_stop_rhythm = 'kc.sticky_cart.stop_rhythm_html' | t
+  assign sc_copy_stop_year = 'kc.sticky_cart.stop_year_html' | t
+  assign sc_copy_per_brushing = 'kc.sticky_cart.per_brushing_html' | t
+  assign sc_copy_try_once = 'kc.sticky_cart.try_once_html' | t
+  assign sc_copy_package_name = 'kc.sticky_cart.package_name_html' | t
+  assign sc_copy_kit_free = 'kc.sticky_cart.kit_free_html' | t
+-%}
+
+{%- comment -%}
   What the checkout charges, in cents, per variant: one time, and per selling plan Shopify's price per
   quantity x quantity, the quantity being the plan's Duos per delivery (snippets/kc-plan-type.liquid;
   a year plan's year total, never a per-Duo price)
@@ -87,7 +120,7 @@
     # The Duo's name on the Duo (the Welcome Kit bundle product); any other product shows its own title
     assign package_name = product.title
     if is_bundle_product
-      assign package_name = block.settings.package_name | default: product.title
+      assign package_name = block.settings.package_name | default: sc_copy_package_name
     endif
   -%}
   <div class="sc-package">
@@ -122,7 +155,7 @@
           {%- endif -%}
           <span class="sc-kit-name">{{ prod.title | escape }}</span>
           <span class="sc-kit-value">
-            {{- block.settings.kit_free | escape }} · <s>{{ kit_value | money_without_trailing_zeros }}</s>
+            {{- block.settings.kit_free | default: sc_copy_kit_free | escape }} · <s>{{ kit_value | money_without_trailing_zeros }}</s>
           </span>
         </li>
       {%- endfor -%}
@@ -135,8 +168,8 @@
       <p class="sc-kit-line" data-sc="kit-line" data-sc-kit></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
-    {%- comment -%} Control labels fall back to the schema defaults: a button never loses its name {%- endcomment -%}
-    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | default: 'Change' | escape }}</button>
+    {%- comment -%} Control labels fall back to the locale keys: a button never loses its name {%- endcomment -%}
+    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | default: sc_copy_change_label | escape }}</button>
     <button type="submit" form="scCtaForm" class="sc-cta sc-cta--bar" data-sc-cta>
       <span>{{ block.settings.button_text | default: 'Begin now' | escape }}</span>
       {{- sc_spinner -}}
@@ -212,31 +245,31 @@
       "buttonText": {{ block.settings.button_text | default: 'Begin now' | json }},
       {%- comment -%} Positions are CSS only: phones 12 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
       "prices": {{ sc_prices }},
-      {%- comment -%} Copy: the block settings (P1–P7 of the brief); [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
+      {%- comment -%} Copy: the block settings (P1–P7 of the brief), else the locale keys; [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
       "copy": {
-        "title_rhythm": {{ block.settings.title_rhythm | json }},
-        "title_year": {{ block.settings.title_year | json }},
-        "title_once": {{ block.settings.title_once | json }},
-        "price_rhythm": {{ block.settings.price_rhythm | json }},
-        "price_year": {{ block.settings.price_year | json }},
-        "price_once": {{ block.settings.price_once | json }},
-        "credit": {{ block.settings.credit | json }},
-        "credit_checkup": {{ block.settings.credit_checkup | json }},
-        "credit_info": {{ block.settings.credit_info | json }},
-        "checkup_info": {{ block.settings.checkup_info | json }},
-        "panel_label": {{ block.settings.panel_label | default: "Delivery & what's included" | json }},
-        "cta_rhythm": {{ block.settings.cta_rhythm | default: 'Begin your 60-Day Rhythm' | json }},
-        "cta_year": {{ block.settings.cta_year | default: 'Begin the Karmicare Year' | json }},
-        "cta_once": {{ block.settings.cta_once | default: 'Try once' | json }},
-        "delivery_free": {{ block.settings.delivery_free | json }},
-        "delivery_once": {{ block.settings.delivery_once | json }},
-        "kit": {{ block.settings.kit | json }},
-        "guarantee_member": {{ block.settings.guarantee_member | json }},
-        "guarantee_once": {{ block.settings.guarantee_once | json }},
-        "stop_rhythm": {{ block.settings.stop_rhythm | json }},
-        "stop_year": {{ block.settings.stop_year | json }},
-        "per_brushing": {{ block.settings.per_brushing | json }},
-        "try_once": {{ block.settings.try_once | json }}
+        "title_rhythm": {{ block.settings.title_rhythm | default: sc_copy_title_rhythm | json }},
+        "title_year": {{ block.settings.title_year | default: sc_copy_title_year | json }},
+        "title_once": {{ block.settings.title_once | default: sc_copy_title_once | json }},
+        "price_rhythm": {{ block.settings.price_rhythm | default: sc_copy_price_rhythm | json }},
+        "price_year": {{ block.settings.price_year | default: sc_copy_price_year | json }},
+        "price_once": {{ block.settings.price_once | default: sc_copy_price_once | json }},
+        "credit": {{ block.settings.credit | default: sc_copy_credit | json }},
+        "credit_checkup": {{ block.settings.credit_checkup | default: sc_copy_credit_checkup | json }},
+        "credit_info": {{ block.settings.credit_info | default: sc_copy_credit_info | json }},
+        "checkup_info": {{ block.settings.checkup_info | default: sc_copy_checkup_info | json }},
+        "panel_label": {{ block.settings.panel_label | default: sc_copy_panel_label | json }},
+        "cta_rhythm": {{ block.settings.cta_rhythm | default: sc_copy_cta_rhythm | json }},
+        "cta_year": {{ block.settings.cta_year | default: sc_copy_cta_year | json }},
+        "cta_once": {{ block.settings.cta_once | default: sc_copy_cta_once | json }},
+        "delivery_free": {{ block.settings.delivery_free | default: sc_copy_delivery_free | json }},
+        "delivery_once": {{ block.settings.delivery_once | default: sc_copy_delivery_once | json }},
+        "kit": {{ block.settings.kit | default: sc_copy_kit | json }},
+        "guarantee_member": {{ block.settings.guarantee_member | default: sc_copy_guarantee_member | json }},
+        "guarantee_once": {{ block.settings.guarantee_once | default: sc_copy_guarantee_once | json }},
+        "stop_rhythm": {{ block.settings.stop_rhythm | default: sc_copy_stop_rhythm | json }},
+        "stop_year": {{ block.settings.stop_year | default: sc_copy_stop_year | json }},
+        "per_brushing": {{ block.settings.per_brushing | default: sc_copy_per_brushing | json }},
+        "try_once": {{ block.settings.try_once | default: sc_copy_try_once | json }}
       }
     }
   </script>

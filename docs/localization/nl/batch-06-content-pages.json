@@ -2,11 +2,11 @@
  "lang": "nl",
  "batch": "batch-06-content-pages",
  "source": "docs/source-copy/batches/batch-06-content-pages.json",
- "source_digest": "f78c391aa267b82eb0c85af36edea6e4583651bf",
- "source_entries": 21,
+ "source_digest": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
+ "source_entries": 22,
  "counts": {
   "admin": 15,
-  "pending-claim-review": 4,
+  "pending-claim-review": 5,
   "held": 2
  },
  "fit_risk": [
@@ -35,7 +35,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "16 vs 13 chars; no shorter form"
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): page title that wraps. 16 vs 13 chars; no shorter form"
   },
   {
    "id": "admin:page:why-karmicare:body_html#b001",
@@ -222,6 +222,21 @@
     "admin"
    ],
    "notes": ""
+  },
+  {
+   "id": "admin:page:nhap-technology:body_html#b000",
+   "resource_type": "page",
+   "file_or_handle": "nhap-technology",
+   "key_path": "body_html#b000",
+   "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste<br><br>",
+   "en_sha1": "96c553f2ff62fc412e983b841516f4b10c442f5e",
+   "nl": "Ontdek de wonderlijke binnenwereld van nano-hydroxyapatiet en waarom je het in je tandpasta nodig hebt<br><br>",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "R2 (review F2): body heading added to the inventory; NL as admin:article:news/nano-hydroxyapatite:title (same EN), with the source's trailing <br><br>"
   },
   {
    "id": "admin:page:nhap-technology:body_html#b001",
