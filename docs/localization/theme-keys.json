@@ -3,7 +3,7 @@
  "sources": {
   "en": "docs/source-copy/en-source.json (batch-01 a09219ae1af8, batch-02 03dd18b9d41a, batch-03 e17cadb5e223)",
   "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review hold)",
-  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr d376bd3 (status theme-key; flags pending-claim-review and legal-review hold)"
+  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr c7aed28 (status theme-key; flags pending-claim-review and legal-review hold)"
  },
  "not_keyed_here": {
   "liquid:sections/header.liquid:1077": "kc.general.coming_soon, added on karmicare/soft-launch-homepage (09bb6e3)",
@@ -83,8 +83,8 @@
    "en": ". Current local time.",
    "nl": ". Huidige lokale tijd.",
    "nl_hold": null,
-   "fr": null,
-   "fr_hold": "no FR value for liquid:assets/chronobiology-clock-karmicare.js:91:live"
+   "fr": ". Heure locale actuelle.",
+   "fr_hold": null
   },
   {
    "key": "kc.clock.valuetext_preview",
@@ -244,7 +244,7 @@
    "en": "you@example.com",
    "nl": "you@example.com",
    "nl_hold": null,
-   "fr": "vous@exemple.com",
+   "fr": "you@example.com",
    "fr_hold": null
   },
   {
