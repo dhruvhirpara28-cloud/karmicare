@@ -8,7 +8,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 221 | `b685b73d4dcdfddd153d4f130c0aa6806b9715ed` |
+| `batch-01-homepage` | 225 | `a09219ae1af8e24bd4fbcc86ce50223656adb586` |
 | `batch-02-pdp` | 477 | `03dd18b9d41a21772da2e26b7060c42f6b2364d1` |
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
 | `batch-04-legal` | 974 | `83fed281915f22a5b0bb9ed70cf3e49c47241ccf` |
@@ -37,7 +37,7 @@ By resource type:
 
 | Batch | template_setting | section_group | theme_locale | app | product | metafield | metaobject | shop | navigation | page | policy | article | blog | collection | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 189 | 0 | 21 | 9 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 221 |
+| `batch-01-homepage` | 189 | 0 | 22 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 225 |
 | `batch-02-pdp` | 156 | 0 | 53 | 14 | 16 | 175 | 63 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 477 |
 | `batch-03-header-footer` | 0 | 6 | 24 | 1 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 41 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 357 | 474 | 0 | 0 | 0 | 974 |
@@ -45,13 +45,13 @@ By resource type:
 | `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 21 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 698 | 1 | 9 | 709 |
 | `batch-08-system` | 3 | 0 | 36 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 46 |
-| **All** | **508** | **6** | **134** | **42** | **59** | **175** | **63** | **8** | **10** | **378** | **474** | **698** | **1** | **10** | **2566** |
+| **All** | **508** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **378** | **474** | **698** | **1** | **10** | **2570** |
 
 By status:
 
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 149 | 8 | 35 | 27 | 2 | 16 |
+| `batch-01-homepage` | 149 | 8 | 35 | 31 | 2 | 16 |
 | `batch-02-pdp` | 150 | 0 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
@@ -107,7 +107,8 @@ Not changed, because no text setting in the allowed files carries it:
 | 01 | `sections/chronobiology-clock-karmicare.liquid:101` | Explore your mouth's 24-hour clock | aria-label of the clock slider; also on the PDP |
 | 01 | `sections/chronobiology-clock-karmicare.liquid:153` | your mouth right now: | clock caption; the JS sets the same text (assets/chronobiology-clock-karmicare.js:88); also on the PDP |
 | 01 | `assets/chronobiology-clock-karmicare.js:88` | your mouth at this hour: | clock caption while dragging (JS) |
-| 01 | `assets/chronobiology-clock-karmicare.js:91` | . Release to return to now. | aria-valuetext tail while dragging; '. Current local time.' at rest (same line) |
+| 01 | `assets/chronobiology-clock-karmicare.js:91` | . Release to return to now. | aria-valuetext tail while dragging (preview branch); the live branch '. Current local time.' is its own entry, liquid:assets/chronobiology-clock-karmicare.js:9… |
+| 01 | `assets/chronobiology-clock-karmicare.js:91` | . Current local time. | aria-valuetext tail at rest (live branch, not dragging); the preview branch is liquid:assets/chronobiology-clock-karmicare.js:91. Clock on the homepage and the… |
 | 01 | `assets/chronobiology-clock-karmicare.js:11` | saliva is only now picking up after the night, and the enamel is least protecte… | hourly clock message shown under the clock (JS array 'windows'); also on the PDP; claims C54: needs-review (CLAIMS-REVIEW.md) |
 | 01 | `assets/chronobiology-clock-karmicare.js:12` | breakfast and coffee dropped the pH within minutes — saliva spends the next hal… | hourly clock message shown under the clock (JS array 'windows'); also on the PDP |
 | 01 | `assets/chronobiology-clock-karmicare.js:13` | lunch restarts the cycle: every eating occasion opens a fresh acid window, what… | hourly clock message shown under the clock (JS array 'windows'); also on the PDP |
@@ -122,7 +123,10 @@ Not changed, because no text setting in the allowed files carries it:
 | 01 | `snippets/loop-widget-standard.liquid:109` | Selling Plans | fieldset legend; off-limits Loop widget file |
 | 01 | `snippets/loop-widget-standard.liquid:123` | One time Purchase | one-time option label (also assets/loop-widget.js:694 fallback); off-limits Loop widget file |
 | 01 | `snippets/loop-widget-standard.liquid:140` | each | price unit (also line 196); off-limits Loop widget file |
-| 01 | `assets/loop-widget.js:2452` | / {{ days }} days | plan card short label ('/ year' on the Year); off-limits Loop widget file |
+| 01 | `assets/loop-widget.js:2452` | / {{ days }} days | plan card short label on 60-day plans; the Year branch '/ year' is its own entry, liquid:assets/loop-widget.js:2452:annual. Plan cards in the homepage featured… |
+| 01 | `assets/loop-widget.js:2452` | / year | plan card short label on the Year (isAnnual branch); the 60-day branch is liquid:assets/loop-widget.js:2452. Plan cards in the homepage featured product and th… |
+| 01 | `assets/loop-widget.js:2463` | Renews | replaces 'ships' in the selling-plan option text on non-annual plans ('ships every 60 days' → 'Renews every 60 days', regex /ships/i). Once the admin phrase is… |
+| 01 | `assets/loop-widget.js:2464` | {{ amount }} / brushing | per-brushing line on every plan card; {{ amount }} is the plan price ÷ brushings, formatted by the store money format (EN shows €0,49, see B1a decision 5). Pla… |
 | 01 | `assets/loop-widget.js:2468` | Renews every year | Year plan card line; off-limits Loop widget file |
 | 01 | `assets/loop-widget.js:2213` | {{ value }} value · free | Welcome Kit badge; off-limits Loop widget file |
 | 01 | `snippets/loop-subscriptions.liquid:10` | Rendering loop-subscriptions | placeholder text in the markup (featured-product.liquid:542 and main-product.liquid:616 test for it); not meant to be read. Check it stays hidden |
@@ -494,26 +498,30 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 199 | `liquid:sections/chronobiology-clock-karmicare.liquid:153` | theme_locale | your mouth right now: | needs-key |  |
 | 200 | `liquid:assets/chronobiology-clock-karmicare.js:88` | theme_locale | your mouth at this hour: | needs-key |  |
 | 201 | `liquid:assets/chronobiology-clock-karmicare.js:91` | theme_locale | . Release to return to now. | needs-key |  |
-| 202 | `liquid:assets/chronobiology-clock-karmicare.js:11` | theme_locale | saliva is only now picking up after the night, and the enamel is least protected before your first … | needs-key | C C54 |
-| 203 | `liquid:assets/chronobiology-clock-karmicare.js:12` | theme_locale | breakfast and coffee dropped the pH within minutes — saliva spends the next half hour bringing it b… | needs-key |  |
-| 204 | `liquid:assets/chronobiology-clock-karmicare.js:13` | theme_locale | lunch restarts the cycle: every eating occasion opens a fresh acid window, whatever its size | needs-key |  |
-| 205 | `liquid:assets/chronobiology-clock-karmicare.js:14` | theme_locale | grazing hours — the most frequent acid challenge of the day, and it is how often, not how much | needs-key |  |
-| 206 | `liquid:assets/chronobiology-clock-karmicare.js:15` | theme_locale | the last big acid window of the day; after this, saliva starts winding down | needs-key |  |
-| 207 | `liquid:assets/chronobiology-clock-karmicare.js:16` | theme_locale | melatonin is rising and salivary flow is dropping — what is left on the enamel now stays for hours | needs-key |  |
-| 208 | `liquid:assets/chronobiology-clock-karmicare.js:17` | theme_locale | saliva is near its minimum and clearance has almost stopped: the longest unguarded stretch, and the… | needs-key |  |
-| 209 | `liquid:sections/km-faq-accordion.liquid:155` | theme_locale | ALL | needs-key |  |
-| 210 | `liquid:sections/featured-product.liquid:627` | theme_locale | Free | needs-key |  |
-| 211 | `liquid:snippets/loop-widget-standard.liquid:101` | app | Start here | needs-key |  |
-| 212 | `liquid:snippets/loop-widget-standard.liquid:103` | app | Choose how to begin | needs-key |  |
-| 213 | `liquid:snippets/loop-widget-standard.liquid:109` | app | Selling Plans | needs-key |  |
-| 214 | `liquid:snippets/loop-widget-standard.liquid:123` | app | One time Purchase | needs-key |  |
-| 215 | `liquid:snippets/loop-widget-standard.liquid:140` | app | each | needs-key |  |
-| 216 | `liquid:assets/loop-widget.js:2452` | app | / {{ days }} days | needs-key |  |
-| 217 | `liquid:assets/loop-widget.js:2468` | app | Renews every year | needs-key |  |
-| 218 | `liquid:assets/loop-widget.js:2213` | app | {{ value }} value · free | needs-key |  |
-| 219 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
-| 220 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Health | admin-held |  |
-| 221 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
+| 202 | `liquid:assets/chronobiology-clock-karmicare.js:91:live` | theme_locale | . Current local time. | needs-key |  |
+| 203 | `liquid:assets/chronobiology-clock-karmicare.js:11` | theme_locale | saliva is only now picking up after the night, and the enamel is least protected before your first … | needs-key | C C54 |
+| 204 | `liquid:assets/chronobiology-clock-karmicare.js:12` | theme_locale | breakfast and coffee dropped the pH within minutes — saliva spends the next half hour bringing it b… | needs-key |  |
+| 205 | `liquid:assets/chronobiology-clock-karmicare.js:13` | theme_locale | lunch restarts the cycle: every eating occasion opens a fresh acid window, whatever its size | needs-key |  |
+| 206 | `liquid:assets/chronobiology-clock-karmicare.js:14` | theme_locale | grazing hours — the most frequent acid challenge of the day, and it is how often, not how much | needs-key |  |
+| 207 | `liquid:assets/chronobiology-clock-karmicare.js:15` | theme_locale | the last big acid window of the day; after this, saliva starts winding down | needs-key |  |
+| 208 | `liquid:assets/chronobiology-clock-karmicare.js:16` | theme_locale | melatonin is rising and salivary flow is dropping — what is left on the enamel now stays for hours | needs-key |  |
+| 209 | `liquid:assets/chronobiology-clock-karmicare.js:17` | theme_locale | saliva is near its minimum and clearance has almost stopped: the longest unguarded stretch, and the… | needs-key |  |
+| 210 | `liquid:sections/km-faq-accordion.liquid:155` | theme_locale | ALL | needs-key |  |
+| 211 | `liquid:sections/featured-product.liquid:627` | theme_locale | Free | needs-key |  |
+| 212 | `liquid:snippets/loop-widget-standard.liquid:101` | app | Start here | needs-key |  |
+| 213 | `liquid:snippets/loop-widget-standard.liquid:103` | app | Choose how to begin | needs-key |  |
+| 214 | `liquid:snippets/loop-widget-standard.liquid:109` | app | Selling Plans | needs-key |  |
+| 215 | `liquid:snippets/loop-widget-standard.liquid:123` | app | One time Purchase | needs-key |  |
+| 216 | `liquid:snippets/loop-widget-standard.liquid:140` | app | each | needs-key |  |
+| 217 | `liquid:assets/loop-widget.js:2452` | app | / {{ days }} days | needs-key |  |
+| 218 | `liquid:assets/loop-widget.js:2452:annual` | app | / year | needs-key |  |
+| 219 | `liquid:assets/loop-widget.js:2463` | app | Renews | needs-key |  |
+| 220 | `liquid:assets/loop-widget.js:2464` | app | {{ amount }} / brushing | needs-key |  |
+| 221 | `liquid:assets/loop-widget.js:2468` | app | Renews every year | needs-key |  |
+| 222 | `liquid:assets/loop-widget.js:2213` | app | {{ value }} value · free | needs-key |  |
+| 223 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
+| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Health | admin-held |  |
+| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
 
 ### `batch-02-pdp`
 

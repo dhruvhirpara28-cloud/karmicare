@@ -1,6 +1,6 @@
 {
  "batch": "batch-01-homepage",
- "digest": "b685b73d4dcdfddd153d4f130c0aa6806b9715ed",
+ "digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -3334,7 +3334,20 @@
    "sha1": "0def64ad1cece36c2b73a8fd97a5b2444a3d3eea",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "aria-valuetext tail while dragging; '. Current local time.' at rest (same line)"
+   "notes": "aria-valuetext tail while dragging (preview branch); the live branch '. Current local time.' is its own entry, liquid:assets/chronobiology-clock-karmicare.js:91:live. Clock on the homepage and the Duo PDP"
+  },
+  {
+   "id": "liquid:assets/chronobiology-clock-karmicare.js:91:live",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "theme_locale",
+   "file_or_handle": "assets/chronobiology-clock-karmicare.js",
+   "key_path": "assets/chronobiology-clock-karmicare.js:91",
+   "en": ". Current local time.",
+   "sha1": "43352299fe60db1f716d39fb83c9c04056c7fc7f",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "aria-valuetext tail at rest (live branch, not dragging); the preview branch is liquid:assets/chronobiology-clock-karmicare.js:91. Clock on the homepage and the Duo PDP"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:11",
@@ -3532,7 +3545,46 @@
    "sha1": "1c2acc951ec213517c1a810dd251ce932f3453ad",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "plan card short label ('/ year' on the Year); off-limits Loop widget file"
+   "notes": "plan card short label on 60-day plans; the Year branch '/ year' is its own entry, liquid:assets/loop-widget.js:2452:annual. Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2452:annual",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2452",
+   "en": "/ year",
+   "sha1": "416b18b45426df89c6658468f95e3aa81e201a41",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "plan card short label on the Year (isAnnual branch); the 60-day branch is liquid:assets/loop-widget.js:2452. Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2463",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2463",
+   "en": "Renews",
+   "sha1": "78906379a6ef5b31bc338154955072b3b70867b9",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "replaces 'ships' in the selling-plan option text on non-annual plans ('ships every 60 days' → 'Renews every 60 days', regex /ships/i). Once the admin phrase is translated the English regex no longer matches, so key the whole line ('Renews every {{ days }} days') rather than the word. Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
+  },
+  {
+   "id": "liquid:assets/loop-widget.js:2464",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "app",
+   "file_or_handle": "assets/loop-widget.js",
+   "key_path": "assets/loop-widget.js:2464",
+   "en": "{{ amount }} / brushing",
+   "sha1": "14123a45c3bd41e10d495c475287c358365ae6cf",
+   "status": "needs-key",
+   "never_translate": false,
+   "notes": "per-brushing line on every plan card; {{ amount }} is the plan price ÷ brushings, formatted by the store money format (EN shows €0,49, see B1a decision 5). Plan cards in the homepage featured product and the Duo PDP buy box. Off-limits Loop widget file: the Loop owner adds the key; this inventory does not edit the widget"
   },
   {
    "id": "liquid:assets/loop-widget.js:2468",
