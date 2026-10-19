@@ -111,10 +111,13 @@ def main():
             for p in typography(e["fr"], e["key_path"]):
                 errors.append(where + ": " + p)
             nodes = " ".join(text_nodes(e["fr"]))
-            for m in BANNED.findall(nodes):
-                warnings.append(where + ": banned-word check: '" + m + "'")
-            for m in FORBIDDEN.findall(nodes):
-                warnings.append(where + ": claim-verb check: '" + m + "'")
+            # Legal text is translated faithfully and completely (BRIEF), so the brand-word and claim-verb scans
+            # skip it: there "produits", "utilisation" or "traiter (des données)" are the legal wording.
+            if "legal-review" not in e["flags"]:
+                for m in BANNED.findall(nodes):
+                    warnings.append(where + ": banned-word check: '" + m + "'")
+                for m in FORBIDDEN.findall(nodes):
+                    warnings.append(where + ": claim-verb check: '" + m + "'")
             for m in TU.findall(nodes):
                 warnings.append(where + ": tu-form check: '" + m + "'")
         if counts != doc["counts"]:
