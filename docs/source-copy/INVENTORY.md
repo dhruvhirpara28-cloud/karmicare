@@ -55,7 +55,7 @@ By status:
 | `batch-02-pdp` | 156 | 0 | 17 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
-| `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
+| `batch-05-products` | 15 | 0 | 1 | 0 | 61 | 0 |
 | `batch-06-content-pages` | 0 | 0 | 0 | 0 | 21 | 0 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 708 | 0 |
 | `batch-08-system` | 39 | 0 | 0 | 0 | 7 | 0 |
@@ -283,7 +283,7 @@ Not inventoried as store text, because Shopify or an app supplies and translates
 - `/pages/articles` (a page) next to `/blogs/news` (the blog itself); `/pages/nhap-technology` and the article `/blogs/news/nano-hydroxyapatite` share the same headline.
 - `/collections/vgbc2025`: an event collection with a code-like title.
 
-Claims in batches 05–07: 541 entries carry a claim (432 needs-review, 109 unsupported); see CLAIMS-REVIEW.md.
+Claims in batches 05–07: 407 entries carry a claim (261 needs-review, 113 unsupported, 33 approved); see CLAIMS-REVIEW.md.
 
 ## Full inventory
 
@@ -2030,7 +2030,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 2 | `product:main/highlights_slider_9wAjAb/text_2` | template_setting | Leave-on Technology | approved |  |
 | 3 | `product:main/highlights_slider_9wAjAb/text_3` | template_setting | Backed by 39 peer-reviewed studies | needs-review |  |
 | 4 | `product:main/buy_buttons/custom_button_text` | template_setting | Begin Now | approved |  |
-| 5 | `product:main/icon_with_text_xhaDGB/heading_1` | template_setting | 60 day money back guarantee | needs-review |  |
+| 5 | `product:main/icon_with_text_xhaDGB/heading_1` | template_setting | 60 day money back guarantee | approved |  |
 | 6 | `product:main/icon_with_text_xhaDGB/heading_2` | template_setting | Cancel anytime | approved |  |
 | 7 | `product:main/icon_with_text_xhaDGB/heading_3` | template_setting | Free shipping | approved |  |
 | 8 | `product:main/treatment_journey_block/read_more_text` | template_setting | Read more | approved |  |
