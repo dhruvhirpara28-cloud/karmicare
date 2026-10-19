@@ -287,7 +287,7 @@ Not inventoried as store text, because Shopify or an app supplies and translates
 - `/pages/articles` (a page) next to `/blogs/news` (the blog itself); `/pages/nhap-technology` and the article `/blogs/news/nano-hydroxyapatite` share the same headline.
 - `/collections/vgbc2025`: an event collection with a code-like title.
 
-Claims in batches 05–07: 419 entries carry a claim (274 needs-review, 115 unsupported, 30 approved); see CLAIMS-REVIEW.md.
+Claims in batches 05–07: 449 entries carry a claim (304 needs-review, 115 unsupported, 30 approved); see CLAIMS-REVIEW.md.
 
 ## Full inventory
 
