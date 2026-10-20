@@ -200,6 +200,7 @@
                     class="kc-pricing-summary"
                     style="display:none;"
                     data-section-id="{{ section.id }}"
+                    {% render 'kc-receipt-labels' %}
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <div class="kc-pricing-summary__rewards" style="display: none;">
@@ -572,9 +573,10 @@
                             {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id, field: 'care_credit_percent' -%}
                           {%- endcapture -%}
                           {%- assign kc_offer_duos = kc_offer_units | times: kc_offer_deliveries -%}
-                          {%- assign interval_text = '/ 60 days' -%}
+                          {%- comment -%} The receipt's interval texts (kc.receipt.*, snippets/kc-receipt-labels.liquid) {%- endcomment -%}
+                          {%- assign interval_text = 'kc.receipt.per_days' | t | replace: '[count]', '60' -%}
                           {%- if kc_offer_type == 'year' -%}
-                            {%- assign interval_text = '/ year' -%}
+                            {%- assign interval_text = 'kc.receipt.per_year' | t -%}
                           {%- endif -%}
                           {%- assign sub_price = sub_allocation.price
                             | default: product.selected_or_first_available_variant.price

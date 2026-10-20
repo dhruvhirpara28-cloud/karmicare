@@ -2586,6 +2586,13 @@ function updateKcPricingSummary(productId, variant) {
         totalFormatted = loopFormatMoney(sellingPlanPrice, true);
     }
 
+    // KC: the receipt's texts in the page language: kc.receipt.* keys as data attributes on the
+    // summary (snippets/kc-receipt-labels.liquid), [count] and [price] filled here. English where an
+    // attribute is missing.
+    const kcReceiptText = (key, english, values = {}) =>
+        String((key && summaryEl.dataset[key]) || english)
+            .replace(/\[(count|price)\]/g, (match, name) => (name in values ? values[name] : match));
+
     // Build billing interval label (e.g. "billed every 8 weeks", "billed yearly")
     let intervalLabel = '';
     let perBrushingLabel = '';
@@ -2611,12 +2618,14 @@ function updateKcPricingSummary(productId, variant) {
         if (interval) {
             const intervalMap = { day: 'day', week: 'week', month: 'month', year: 'year' };
             const base = intervalMap[interval] || interval;
+            // KC: the attribute per unit and number, e.g. kcPerDays / kcBilledDays (kc.receipt.per_days)
+            const kcUnit = intervalMap[interval] ? base.charAt(0).toUpperCase() + base.slice(1) + (intervalCount === 1 ? '' : 's') : '';
 
             // Interval label on right: "/ year", "/ 8 weeks", etc.
             if (intervalCount === 1) {
-                intervalLabel = `/ ${base}`;
+                intervalLabel = kcReceiptText(kcUnit && `kcPer${kcUnit}`, `/ ${base}`);
             } else {
-                intervalLabel = `/ ${intervalCount} ${base}s`;
+                intervalLabel = kcReceiptText(kcUnit && `kcPer${kcUnit}`, `/ ${intervalCount} ${base}s`, { count: intervalCount });
             }
 
             // Per-brushing calculation (dynamically driven by data-duos and data-brushings)
@@ -2645,14 +2654,14 @@ function updateKcPricingSummary(productId, variant) {
 
                 let billedLabel = '';
                 if (intervalCount === 1 && interval === 'year') {
-                    billedLabel = 'billed yearly';
+                    billedLabel = 'Billed yearly';
                 } else if (intervalCount === 1) {
-                    billedLabel = `billed every ${base}`;
+                    billedLabel = `Billed every ${base}`;
                 } else {
-                    billedLabel = `billed every ${intervalCount} ${base}s`;
+                    billedLabel = `Billed every ${intervalCount} ${base}s`;
                 }
                 // Figma receipt: "Billed every 60 days" (the per-brushing price is on the plan card)
-                perBrushingLabel = billedLabel.charAt(0).toUpperCase() + billedLabel.slice(1);
+                perBrushingLabel = kcReceiptText(kcUnit && `kcBilled${kcUnit}`, billedLabel, { count: intervalCount });
             }
         }
     } catch (e) {
@@ -2663,10 +2672,12 @@ function updateKcPricingSummary(productId, variant) {
         // One-time styling overrides
         const oneTimePriceCents = variant.price;
         totalFormatted = loopFormatMoney(oneTimePriceCents, true);
-        intervalLabel = 'one-time';
+        intervalLabel = kcReceiptText('kcOneTime', 'one-time');
         // Assume 120 brushings (60 days) for one-time standard size as fallback
         const perBrushingCents = Math.round(oneTimePriceCents / 120);
-        perBrushingLabel = `${loopFormatMoney(perBrushingCents, true)} per brushing · no Care Credit`;
+        perBrushingLabel = kcReceiptText('kcOneTimeNote', '[price] per brushing · no Care Credit', {
+            price: loopFormatMoney(perBrushingCents, true),
+        });
     }
 
     // Populate the summary element fields
@@ -2706,8 +2717,9 @@ function updateKcPricingSummary(productId, variant) {
         const creditPct = returnOnCarePct > 0 ? returnOnCarePct : (kcPlan?.careCreditPercent || 0);
         careCreditCents = Math.round(basePrice * creditPct / 100);
         if (kcPlan?.checkupReward) {
-            // Same wording as the Year card chip "€40 Dental Check-up Reward"
-            checkupRewardStr = '€40';
+            // Same wording as the Year card chip "€40 Dental Check-up Reward", in the page
+            // language's money format (€40, € 40, 40 €)
+            checkupRewardStr = loopFormatMoney(4000, true);
         }
 
         if (rewardsBlock) {
