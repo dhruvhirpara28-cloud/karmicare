@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- comment -%} Render-blocking: the "Coming soon" tooltips must be hidden before the menu paints {%- endcomment -%}
+{{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
 
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -71,7 +74,8 @@
       gap: 3px;
       width: fit-content;
       max-width: calc(100% - 2.4rem);
-      margin: {{ section.settings.padding_top }}px auto {{ section.settings.padding_bottom }}px;
+      /* 16px lower than the setting (Victor, 20 Oct) */
+      margin: calc({{ section.settings.padding_top }}px + 1.6rem) auto {{ section.settings.padding_bottom }}px;
       padding: var(--kc-responsive-spacing-layout-xxs);
       {%- if section.settings.enable_glass_blur %}
         -webkit-backdrop-filter: blur(10px);
@@ -122,75 +126,18 @@
     }
   }
 
-  /* Menu links that point to # (no page yet): not clickable, "Coming soon" tooltip on hover,
-     keyboard focus or tap (tap and Escape: the script at the end of this file). No KC tooltip
-     component exists; built from the inverse surface and body/sm. */
-  #shopify-section-{{ section.id }} .kc-coming-soon {
-    position: relative;
-    cursor: default;
-  }
-  #shopify-section-{{ section.id }} .kc-coming-soon__tip {
-    position: absolute;
-    top: calc(100% + var(--kc-responsive-spacing-layout-xs));
-    left: 50%;
-    z-index: 2;
-    padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
-    background-color: var(--kc-mapped-surface-inverse-default);
-    color: var(--kc-mapped-text-inverse-default);
-    border-radius: var(--kc-shape-radius-sm);
-    box-shadow: var(--kc-elevation-md);
-    font-family: var(--kc-font-role-backbone);
-    font-weight: var(--font-600-weight);
-    font-size: var(--kc-responsive-body-sm-text-size);
-    line-height: var(--kc-responsive-body-sm-line-height);
-    letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-50%);
-    translate: 0 -4px;
-    transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s linear 0.15s;
-  }
-  /* Bridges the gap to the item, so the pointer can move onto the tooltip without losing it */
-  #shopify-section-{{ section.id }} .kc-coming-soon__tip::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 100%;
-    height: calc(var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-spacing-layout-xxs));
-  }
-  @media (hover: hover) {
-    #shopify-section-{{ section.id }} .kc-coming-soon:hover .kc-coming-soon__tip {
-      opacity: 1;
-      visibility: visible;
-      translate: 0 0;
-      transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s;
-    }
-  }
-  #shopify-section-{{ section.id }} .kc-coming-soon:focus-visible .kc-coming-soon__tip,
-  #shopify-section-{{ section.id }} .kc-coming-soon.is-open .kc-coming-soon__tip {
-    opacity: 1;
-    visibility: visible;
-    translate: 0 0;
-    transition: opacity 0.15s ease-out, translate 0.15s ease-out, visibility 0s;
-  }
-  #shopify-section-{{ section.id }} .kc-coming-soon.is-dismissed .kc-coming-soon__tip {
-    opacity: 0;
-    visibility: hidden;
-  }
+  /* Menu links that point to # (no page yet) use the shared "Coming soon" pattern
+     (snippets/kc-coming-soon.liquid, assets/kc-coming-soon.css and .js); the drawer
+     placement overrides are further down */
   @media (prefers-reduced-motion: reduce) {
-    #shopify-section-{{ section.id }} .header__menu-item,
-    #shopify-section-{{ section.id }} .kc-coming-soon__tip {
+    #shopify-section-{{ section.id }} .header__menu-item {
       transition: none !important;
-    }
-    #shopify-section-{{ section.id }} .kc-coming-soon__tip {
-      translate: 0 0 !important;
     }
   }
 
   /* Mobile and tablet: glass bar per Figma "Navigation · Mobile" (2766:10918), 4px below the
-     announcement bar, 4px padding, logo cell 16/8, BEGIN NOW and the menu button 3px apart.
+     announcement bar plus 16px (Victor, 20 Oct), 4px padding, logo cell 16/8, BEGIN NOW and the
+     menu button 3px apart.
      The open menu drops down from the bar as one panel on the same surface. */
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .header__inline-menu {
@@ -199,7 +146,7 @@
     #shopify-section-{{ section.id }} .header {
       display: flex;
       align-items: center;
-      margin-top: 0.4rem;
+      margin-top: 2rem;
       padding: 0.4rem;
       position: relative;
       z-index: 100;
@@ -364,6 +311,17 @@
     #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon__tip::before {
       content: none;
     }
+    /* Shown tooltip slides back to 0, above the -4px rest position (the shared shown-state
+       rules in kc-coming-soon.css carry no section id, so they cannot outrank it) */
+    #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon:focus-visible .kc-coming-soon__tip,
+    #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon.is-open .kc-coming-soon__tip {
+      translate: 0 0;
+    }
+    @media (hover: hover) {
+      #shopify-section-{{ section.id }} .menu-drawer .kc-coming-soon:hover .kc-coming-soon__tip {
+        translate: 0 0;
+      }
+    }
     #shopify-section-{{ section.id }} .menu-drawer__utility-links {
       display: none;
     }
@@ -433,6 +391,27 @@
 
   /* ── PRODUCT PAGE OVERRIDES ── */
   {% render 'product-header-css', section: section %}
+
+  /* ── PRODUCT PAGES: HIDE ON SCROLL ──
+     The bar shows on landing, slides up out of view as the page scrolls down and slides back
+     after a short delay when the visitor scrolls up (or reaches the top). While it is away, the
+     sticky buy bar (snippets/sticky-cart-block.liquid) is the page's CTA. It stays while a menu
+     is open or keyboard focus is inside it. The script after the markup sets the classes;
+     without it the bar stays sticky as on every other page. */
+  {%- if template.name == 'product' or request.page_type == 'product' -%}
+    #shopify-section-{{ section.id }}.kc-header-autohide--ready {
+      transition: transform 0.3s ease 0.15s;
+    }
+    #shopify-section-{{ section.id }}.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
+      transform: translateY(-100%);
+      transition-delay: 0s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ section.id }}.kc-header-autohide--ready {
+        transition: none;
+      }
+    }
+  {%- endif -%}
 
   /* ── GLASS BACKGROUND (bar colour at reduced opacity, Figma surface/glass) ── */
   {%- liquid
@@ -513,6 +492,13 @@
       {%- endif %}
     }
   {%- endif %}
+  /* Interaction colours (KC/Button Primary, accent), above the setting colours */
+  body #shopify-section-{{ section.id }} .header__cta-btn:hover {
+    background-color: var(--kc-mapped-surface-accent-default-hover);
+  }
+  body #shopify-section-{{ section.id }} .header__cta-btn:active {
+    background-color: var(--kc-mapped-surface-accent-default-pressed);
+  }
 
   .header__heading-logo-wrapper--svg {
     display: inline-flex;
@@ -756,6 +742,55 @@
   </header>
 </{{ header_tag }}>
 
+{%- if template.name == 'product' or request.page_type == 'product' -%}
+  <script>
+    // Product pages: hide the bar on scroll down, bring it back on scroll up (see the HIDE ON SCROLL styles)
+    (function () {
+      var section = document.currentScript.closest('.section-header');
+      if (!section) return;
+      var TOP = 10; // always shown within this many px of the top
+      var CLIMB = 10; // px of scrolling up before it comes back
+      var lastY = Math.max(window.scrollY, 0);
+      var hidden = lastY > TOP;
+      var climbed = 0;
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        // Clamped so the overscroll bounce at either end reads as no movement
+        var maxY = document.documentElement.scrollHeight - window.innerHeight;
+        var y = Math.min(Math.max(window.scrollY, 0), Math.max(maxY, 0));
+        var delta = y - lastY;
+        lastY = y;
+        if (y <= TOP) {
+          hidden = false;
+        } else if (delta > 0) {
+          hidden = true;
+          climbed = 0;
+        } else if (delta < 0) {
+          climbed -= delta;
+          if (climbed >= CLIMB) hidden = false;
+        }
+        section.classList.toggle('kc-header-autohide--hidden', hidden);
+      }
+
+      section.classList.toggle('kc-header-autohide--hidden', hidden);
+      requestAnimationFrame(function () {
+        section.classList.add('kc-header-autohide--ready');
+      });
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        },
+        { passive: true }
+      );
+    })();
+  </script>
+{%- endif -%}
+
 {% javascript %}
   class StickyHeader extends HTMLElement {
     constructor() {
@@ -868,38 +903,6 @@
   }
 
   customElements.define('sticky-header', StickyHeader);
-
-  /* "Coming soon" menu links: a tap toggles the tooltip (touch has no hover), a tap elsewhere
-     closes it, Escape hides it until the pointer or focus leaves the link. */
-  (() => {
-    const items = () => document.querySelectorAll('.kc-coming-soon');
-
-    document.addEventListener('click', (event) => {
-      const item = event.target.closest('.kc-coming-soon');
-      items().forEach((other) => {
-        if (other !== item) other.classList.remove('is-open');
-      });
-      if (item) {
-        item.classList.remove('is-dismissed');
-        item.classList.toggle('is-open');
-      }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape') return;
-      items().forEach((item) => {
-        item.classList.remove('is-open');
-        if (item.matches(':hover, :focus-visible')) item.classList.add('is-dismissed');
-      });
-    });
-
-    const undismiss = (event) => {
-      const item = event.target.closest && event.target.closest('.kc-coming-soon');
-      if (item && !item.contains(event.relatedTarget)) item.classList.remove('is-dismissed');
-    };
-    document.addEventListener('pointerout', undismiss);
-    document.addEventListener('focusout', undismiss);
-  })();
 {% endjavascript %}
 
 <script type="application/ld+json">
@@ -1074,9 +1077,8 @@
     {
       "type": "text",
       "id": "coming_soon_label",
-      "default": "Coming soon",
       "label": "Tooltip text",
-      "info": "Menu links set to # are shown but not clickable, with this tooltip on hover, focus or tap. Point the link to a page to enable it."
+      "info": "Menu links set to # are shown but not clickable, with a tooltip on hover, focus or tap. Leave blank for the translated \"Coming soon\" (locale key kc.general.coming_soon). Point the link to a page to enable it."
     },
     {
       "type": "header",

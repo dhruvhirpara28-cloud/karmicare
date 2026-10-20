@@ -1,0 +1,28 @@
+{%- comment -%}
+  The receipt's interval and billing texts in the page language, as data attributes on
+  .kc-pricing-summary. updateKcPricingSummary in assets/loop-widget.js reads them and fills
+  [count] (the plan's interval count) and [price] (the one-time price per brushing). Values:
+  kc.receipt.* in locales/*.json (EN, NL, FR; Victor 20 Oct). Without an attribute the script
+  writes the English text.
+
+  Usage:
+  <div class="kc-pricing-summary" {% render 'kc-receipt-labels' %}>
+{%- endcomment -%}
+data-kc-per-day="{{ 'kc.receipt.per_day' | t }}"
+data-kc-per-days="{{ 'kc.receipt.per_days' | t }}"
+data-kc-per-week="{{ 'kc.receipt.per_week' | t }}"
+data-kc-per-weeks="{{ 'kc.receipt.per_weeks' | t }}"
+data-kc-per-month="{{ 'kc.receipt.per_month' | t }}"
+data-kc-per-months="{{ 'kc.receipt.per_months' | t }}"
+data-kc-per-year="{{ 'kc.receipt.per_year' | t }}"
+data-kc-per-years="{{ 'kc.receipt.per_years' | t }}"
+data-kc-billed-day="{{ 'kc.receipt.billed_day' | t }}"
+data-kc-billed-days="{{ 'kc.receipt.billed_days' | t }}"
+data-kc-billed-week="{{ 'kc.receipt.billed_week' | t }}"
+data-kc-billed-weeks="{{ 'kc.receipt.billed_weeks' | t }}"
+data-kc-billed-month="{{ 'kc.receipt.billed_month' | t }}"
+data-kc-billed-months="{{ 'kc.receipt.billed_months' | t }}"
+data-kc-billed-year="{{ 'kc.receipt.billed_year' | t }}"
+data-kc-billed-years="{{ 'kc.receipt.billed_years' | t }}"
+data-kc-one-time="{{ 'kc.receipt.one_time' | t }}"
+data-kc-one-time-note="{{ 'kc.receipt.one_time_note' | t }}"

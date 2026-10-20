@@ -450,7 +450,8 @@
 
   {%- for block in section.blocks -%}
     {%- if block.type == 'professional_testimonials' and block.settings.show_under_media -%}
-      <div class="small-hide" style="margin-top: 2rem;">
+      {%- comment -%} Desktop only (990 px and up), Victor 20 Oct (PDP D5) {%- endcomment -%}
+      <div class="small-hide medium-hide" style="margin-top: 2rem;">
         {% render 'professional-testimonials', block: block, product: product, instance: 'media' %}
       </div>
     {%- endif -%}
