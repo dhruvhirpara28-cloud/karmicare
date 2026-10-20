@@ -210,28 +210,50 @@ PDP `50ad819` removed the settings `subscription_title` and `package_name`; the 
 
 All three read « Système de soin matin/soir Awake & Asleep ». The naming source is `admin:karmicare-biorhythmic-oral-care-system:title`, already in FR as « Système de dentifrice matin et soir Awake & Asleep ». `check.py` now treats `retired` as a required hold, and its self-test has a 17th mutation for it. The next `build_payloads.py` run drops the two `subscription_title` items from `plan-fr.json`.
 
+## Claim holds waived (Victor, 20 Oct)
+
+Victor, through the landing desk (20 Oct): ignore the claim checks for now and translate everything that exists in English on the site, and leave the English unchanged. FR translates the 119 entries that were held on a claim, and they now carry `pending-claim-review`. They also carry the note "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication", followed by the old hold reason. The 119 entries are:
+
+- 107 blog blocks (batch 07)
+- 6 Awake/Asleep 2.0 product lines (batch 05)
+- 2 `/pages/nhap-technology` lines (batch 06)
+- C35 benefit card 06, heading and text (batch 01)
+- the C84/C85 practitioner quote on the homepage and the PDP
+
+The translations follow the EN faithfully, claims included. They keep the FR conventions: "formule du matin Awake" and "formule du soir Asleep", product links unchanged, and no commodity words. Where an SEO description is cut off at 320 characters, the FR ends at the last complete clause, as in the rest of batch 07. That is why 25 claim-verb warnings now show ("prévenir"), and they are expected.
+
+The treatment journey `#29` ("— from your gums to the") is translated exactly as it stands: "— de vos gencives jusqu’à". It keeps `source-defect`, and NL does the same.
+
+`check.py` now accepts an unsupported claim when the entry carries both `pending-claim-review` and the waiver note. Two self-test mutations take the place of the old "translate an unsupported claim": dropping the flag fails, and so does dropping the note.
+
+These stay held:
+- **The two `[NEEDS APPROVED COPY]` placeholders on the homepage FAQ:** there is no EN text to translate.
+- **"Rendering loop-subscriptions":** the theme tests for this exact text.
+- **SLS article `b035`:** the source has it `blocked` because it names four competitors, a brand rule rather than a claim. It can be released only if the source owner unblocks it.
+- **The 350 legacy legal entries:** they wait on the landing desk's answer, since F5 redirects those pages.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `666785ab…` | 477 | 140 | 250 | 35 | 15 | 37 |
-| `batch-01-homepage` | `a09219ae…` | 225 | 168 | 2 | 30 | 2 | 23 |
+| `batch-02-pdp` | `666785ab…` | 477 | 141 | 251 | 35 | 15 | 35 |
+| `batch-01-homepage` | `a09219ae…` | 225 | 171 | 2 | 30 | 2 | 20 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
-| `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
-| `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
-| `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
+| `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
+| `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
+| `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 698 | 0 | 0 | 10 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,571** | **477** | **1,417** | **75** | **62** | **540** |
+| **Total** | | **2,571** | **481** | **1,533** | **75** | **62** | **420** |
 
-Every source entry is covered: 2,031 carry FR and 540 are held (after the source-copy R6 merge, a0dee86, decision F4 and the three retired entries, 6643e16). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,151 carry FR and 420 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, and the claim holds Victor waived on 20 Oct). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 36 | 41 | 1 | 0 | 19 | 5 | 280 | 0 | 382 |
+| pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 387 | 0 | 501 |
 | pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
-| source-defect | 2 | 7 | 1 | 3 | 9 | 0 | 0 | 0 | 22 |
+| source-defect | 2 | 8 | 1 | 3 | 9 | 0 | 0 | 0 | 23 |
 | wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
 | fit-risk | 9 | 28 | 0 | 0 | 2 | 0 | 0 | 0 | 39 |
@@ -239,19 +261,14 @@ Every source entry is covered: 2,031 carry FR and 540 are held (after the source
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (540)
+### Held (420)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
 | 04 | legacy | 350 | `/pages/privacy` (269), `/pages/terms-and-conditions` (76), `/pages/consumer-rights` (5): pre-2.0 legal pages, held in NL/FR (INVENTORY.md) |
-| 07 | unsupported claim (05–07 review) | 107 | Blog blocks such as "prevents tooth decay", "ingesting poison", fluoride and IQ, NASA history |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
-| 05 | unsupported claim | 6 | "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles…" in the Awake/Asleep 2.0 descriptions and meta descriptions, and the two sleep/wake body lines `body_html#b002` (NL review R2 F1; source `claim_status` since R2) |
-| 01–02 | unsupported claim | 4 | C35 benefit card 06, text and heading; C84/C85 Sietske Hamelink quote on both templates |
 | 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
-| 06 | unsupported claim | 2 | "NASA's favorite supplement for oral health" (`/pages/nhap-technology`) |
-| 02 | source defect | 1 | Treatment journey `#29` stops mid-phrase |
 | 01–02 | retired | 3 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |

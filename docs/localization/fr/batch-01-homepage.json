@@ -9,16 +9,16 @@
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "admin": 2,
-  "held": 23,
+  "held": 20,
   "locale-present": 2,
   "theme-key": 30,
-  "translated": 168
+  "translated": 171
  },
  "flag_counts": {
   "fit-risk": 9,
   "gendered-title": 7,
   "legal-review": 1,
-  "pending-claim-review": 36,
+  "pending-claim-review": 39,
   "pending-en-review": 7,
   "source-defect": 2,
   "wording-adapted": 3
@@ -971,10 +971,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: C35 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed Since source-copy R1 (2194ef3) C35 covers the heading too, so heading and text of card 06 are both held.",
+   "fr": "Des gencives apaisées et éclatantes",
+   "status": "translated",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: C35 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed Since source-copy R1 (2194ef3) C35 covers the heading too, so heading and text of card 06 are both held.",
    "source_status": "needs-review",
    "claims": [
     "C35"
@@ -987,10 +989,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
    "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
    "en_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: C35 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed",
+   "fr": "<p>Sans SLS. Les gencives s’apaisent, deviennent plus roses et paraissent éclatantes.</p>",
+   "status": "translated",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: C35 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed",
    "source_status": "needs-review",
    "claims": [
     "C35"
@@ -1384,10 +1388,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: C84, C85 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed",
+   "fr": "<p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
+   "status": "translated",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: C84, C85 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed",
    "source_status": "needs-review",
    "claims": [
     "C84",
