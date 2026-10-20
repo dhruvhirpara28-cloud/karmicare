@@ -75,8 +75,11 @@ if (!customElements.get('sticky-header')) {
           announcementBottom = announcementBottom === null ? bottom : Math.max(announcementBottom, bottom);
         }
       });
+      // No announcement bar: the top of the page, which scrolls away like the bar would (0 when the
+      // navigation scrolls with the page itself)
+      if (announcementBottom === null) announcementBottom = scrollsWithPage ? 0 : -y;
       const root = document.documentElement.style;
-      root.setProperty('--kc-navigation-top', `${Math.ceil(announcementBottom || 0)}px`);
+      root.setProperty('--kc-navigation-top', `${Math.ceil(announcementBottom)}px`);
       const height = Math.ceil(this.section.offsetHeight);
       root.setProperty('--kc-navigation-clearance', `${height}px`);
       root.setProperty('--header-height', `${height}px`);
