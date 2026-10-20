@@ -176,8 +176,8 @@
             assign plan_title = plan.title.value | default: plan.title
 
             # handle_item 'once', 'one-time' or 'one time' (any case) is the Try Once card: one time,
-            # straight to checkout. Any other card selects its selling_plan_id in the buybox, by ID only;
-            # a missing or wrong ID selects nothing (it never falls back to one time).
+            # straight to checkout. Any other card buys its selling_plan_id straight to checkout, by ID
+            # only; a missing or wrong ID buys nothing (it never falls back to one time).
             # handle_item and selling_plan_id are keys and must not be translated. Should handle_item be
             # translated anyway, a card without a selling_plan_id whose own entry handle (never
             # translated, e.g. "try-onceonce") says once still counts as the Try Once card.
@@ -306,10 +306,11 @@
                 type="button"
               >
                 {{ plan.cta_button.value | default: plan.cta_button | default: 'Choose plan' }}
+                {%- render 'loading-spinner' -%}
               </button>
               {%- if request.design_mode -%}
                 {%- comment -%}
-                  Theme editor only: what this button selects, hung below the button so the table keeps
+                  Theme editor only: what this button buys, hung below the button so the table keeps
                   its row heights
                 {%- endcomment -%}
                 <div style="position: absolute; top: 100%; left: 0; right: 0; z-index: 2; padding: 0 0.8rem; font-size: 1.2rem; line-height: 1.4;">
@@ -331,7 +332,7 @@
                       {%- render 'kc-plan-loyalty', product: product, plan_id: plan_selling_plan_id -%}
                     {%- endcapture -%}
                     <p style="margin: 0;">
-                      Plan-ID {{ plan_selling_plan_id }} → {{ plan_group_name | escape }} ✓
+                      Plan-ID {{ plan_selling_plan_id }} → {{ plan_group_name | escape }}, straight to checkout ✓
                       {%- if plan_loyalty_key != blank %}
                         <br>Subscription Name "{{ plan_loyalty_key | escape }}" (Care Credit) ✓
                       {%- else %}
@@ -346,7 +347,7 @@
                       style="padding: 0.6rem 0.8rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; text-align: left;"
                     >
                       Plan-ID "{{ plan_raw_id | escape }}" is not a selling plan of this product: this button
-                      selects nothing. Set selling_plan_id to one of:
+                      buys nothing. Set selling_plan_id to one of:
                       {%- render 'kc-plan-editor-list', product: product, public_plans: plan_public_ids -%}
                     </div>
                   {%- endif -%}
@@ -364,8 +365,8 @@
   </div>
 
   {%- comment -%}
-    The plan buttons (data-kc-plan-choose) select their selling plan in the buybox, or buy one time
-    straight to checkout: assets/kc-plan-select.js, loaded in layout/theme.liquid.
+    The plan buttons (data-kc-plan-choose) buy their selling plan, or one time, straight to checkout
+    (Victor, 20 Oct): assets/kc-plan-select.js, loaded in layout/theme.liquid.
   {%- endcomment -%}
   <script>
     document.addEventListener('DOMContentLoaded', function () {

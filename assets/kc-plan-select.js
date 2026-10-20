@@ -35,8 +35,12 @@
  *   (€118 x 3 = €354): a year price, never a per-Duo price.
  * - Allowlist: the groups without a public plan stay hidden and unselectable in every Loop widget and
  *   the sticky bar; a non-public plan selected in the buybox is replaced by the first public one.
- * - Compare plan buttons (sections/product-compare-plans.liquid) carry data-kc-plan-choose: "plan"
- *   (with data-selling-plan-id, data-selling-plan-group-id) or "once".
+ * - KCPlanSelect.buy(productId, planId, title, groupId, button): that public plan straight to checkout,
+ *   through karmiAddToCart as a fixed offer with the buybox form; a plan the page cannot sell is chosen
+ *   in the buybox instead.
+ * - Comparison table buttons (sections/product-compare-plans.liquid, sections/comparison-table.liquid)
+ *   carry data-kc-plan-choose: "plan" (with data-selling-plan-id, data-selling-plan-group-id: buy) or
+ *   "once" (tryOnce).
  */
 (function () {
   'use strict';
@@ -483,6 +487,46 @@
     return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true })).then(
       () => true
     );
+  }
+
+  // A comparison table plan button buys its plan straight to checkout (Victor, 20 Oct): the buybox
+  // form's variant on that plan, through karmiAddToCart as a fixed offer (like the end CTA), so the add
+  // is the buybox's own: Duos per delivery, Welcome Kit nested under the plan line, "Subscription Name",
+  // one purchase choice. A plan this page cannot sell buys nothing: it is selected in the buybox instead.
+  function buy(productId, planId, title, groupId, button) {
+    readConfigs();
+    const label = '"' + (title || 'plan') + '"';
+    const id = String(planId == null ? '' : planId).trim();
+    const product = products[String(productId)];
+    const widget = product && buyboxOf(product);
+    const form = widget && formOf(widget);
+    const plan = product && /^\d+$/.test(id) ? product.plans[id] : null;
+    let problem = '';
+    if (!form) {
+      problem = 'no buybox form for product ' + productId;
+    } else if (typeof window.karmiAddToCart !== 'function') {
+      problem = 'karmiAddToCart is not loaded';
+    } else if (!plan) {
+      problem = '"' + id + '" is not a selling plan ID of this product';
+    } else if (enforced(product) && !plan.public) {
+      problem = 'selling plan ' + id + ' (' + plan.groupName + ') is not public';
+    } else if (groupId && groupId !== plan.groupId) {
+      problem = 'selling plan ' + id + ' belongs to group ' + plan.groupId + ', not ' + groupId;
+    } else if (allocated(product, currentVariantId(product, widget, containerOf(widget)), id) === false) {
+      problem = 'selling plan ' + id + ' (' + plan.groupName + ') is not offered for the selected variant';
+    }
+    if (problem) {
+      warn(label + ': ' + problem + '; nothing bought, choosing it in the buybox instead');
+      return choose(productId, id, title, groupId);
+    }
+    const kit = kitLines(productId);
+    return Promise.resolve(
+      window.karmiAddToCart(form, button || null, {
+        sellingPlanId: id,
+        isBundleProduct: kit.length > 0,
+        welcomeKitVariantIds: kit.map((line) => String(line.id)),
+      })
+    ).then(() => true);
   }
 
   function productOfPlan(id) {
@@ -1235,11 +1279,13 @@
     if (!button) return;
     event.preventDefault();
     const productId = button.dataset.kcPlanProduct;
+    // A click on a button already on its way to checkout does nothing (karmiAddToCart disables it)
+    if (button.disabled || button.classList.contains('loading')) return;
     if (button.dataset.kcPlanChoose === 'once') {
       tryOnce(productId, button);
       return;
     }
-    choose(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId);
+    buy(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId, button);
   });
 
   // Theme editor: a section added, replaced or removed brings its own config; re-read and re-apply
@@ -1254,6 +1300,7 @@
   window.KCPlanSelect = {
     choose: choose,
     tryOnce: tryOnce,
+    buy: buy,
     subscriptionName: subscriptionName,
     syncCartSubscriptionName: syncCartSubscriptionName,
     replaceChoice: replaceChoice,
