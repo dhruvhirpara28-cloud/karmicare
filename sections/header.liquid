@@ -414,17 +414,17 @@
   {%- endif -%}
 
   /* ── GLASS BACKGROUND ──
-     Figma mapped/surface/primary/default (Day #fffbf6, Night #191f38) at the bar opacity setting,
-     with the blur setting behind it (Victor, 20 Oct). The theme holds --kc-mapped-surface-primary-default
-     at its old navy for the Loop widget (assets/kc-tokens.css), so the bar reads --kc-mapped-surface-page,
-     which carries the same two values. */
+     Figma mapped/surface/secondary/default (Day #ffffff, Night #212a49) at the bar opacity setting,
+     with the blur setting behind it (Victor, 20 Oct). The theme holds --kc-mapped-surface-secondary-default
+     at its old navy for the Loop widget (assets/kc-tokens.css), so the bar reads
+     --kc-mapped-surface-page-secondary, which carries the same two values. */
   {%- liquid
     assign glass_alpha = section.settings.glass_opacity | divided_by: 100.0
   -%}
   @media screen and (min-width: 990px) {
     body.day-mode #shopify-section-{{ section.id }} .header,
     body.night-mode #shopify-section-{{ section.id }} .header {
-      background-color: rgba(var(--kc-mapped-surface-page-rgb), {{ glass_alpha }});
+      background-color: rgba(var(--kc-mapped-surface-page-secondary-rgb), {{ glass_alpha }});
     }
   }
   /* Mobile: ::before paints the bar (it sits above Dawn's menu overlay). Glass while closed;
@@ -441,13 +441,13 @@
     }
     body.day-mode #shopify-section-{{ section.id }} .header::before,
     body.night-mode #shopify-section-{{ section.id }} .header::before {
-      background-color: rgba(var(--kc-mapped-surface-page-rgb), {{ glass_alpha }});
+      background-color: rgba(var(--kc-mapped-surface-page-secondary-rgb), {{ glass_alpha }});
     }
     body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
     body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
     body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer,
     body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
-      background-color: rgb(var(--kc-mapped-surface-page-rgb));
+      background-color: rgb(var(--kc-mapped-surface-page-secondary-rgb));
     }
   }
 
