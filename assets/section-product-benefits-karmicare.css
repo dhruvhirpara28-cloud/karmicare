@@ -28,6 +28,11 @@
 }
 
 @media screen and (max-width: 1199px) {
+  /* Stacked: more air between the price line and the cards (Victor, 20 Oct) */
+  .product-benefits__inner {
+    gap: var(--kc-responsive-spacing-layout-3xl);
+  }
+
   .product-benefits__left {
     max-width: max-content;
     text-align: center;
@@ -174,10 +179,9 @@
   scroll-margin-left: 0;
 }
 
-/* Card Styling. At rest a card shows its copy on the card colour. On hover
-   the colour picture fades in under the brand veil and the copy turns light
-   (Figma KC/Benefit card, State=Mobile, approved by Victor 30 Sep 2026).
-   Nothing moves. */
+/* Card Styling. At rest a card shows its copy on the card colour. On hover the
+   picture eases in at its own colours, without the veil, and the copy fades out
+   (Victor, 20 Oct). Nothing moves. */
 .product-benefits__card {
   position: relative;
   border-radius: var(--extra-primary-border-radius);
@@ -185,7 +189,6 @@
   display: flex;
   flex-direction: column;
   min-height: 280px;
-  transition: color 0.18s ease-out;
 }
 
 .product-benefits__card-bg {
@@ -195,20 +198,22 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.18s ease-out;
+  transition: opacity 0.3s ease;
 }
 
-.product-benefits__card:hover .product-benefits__card-bg {
-  opacity: 1;
+@media (hover: hover) {
+  .product-benefits__card:hover .product-benefits__card-bg {
+    opacity: 1;
+  }
+
+  .product-benefits__card:hover .product-benefits__card-overlay,
+  .product-benefits__card:has(.product-benefits__card-bg):hover .product-benefits__card-content {
+    opacity: 0;
+  }
 }
 
-/* Dawn colours headings with --color-foreground, so set both */
-.product-benefits__card:has(.product-benefits__card-bg):hover {
-  --color-foreground: var(--kc-brand-original-off-white-rgb);
-  color: var(--kc-brand-original-off-white);
-}
-
-/* Touch screens have no hover: the picture state is the rest state */
+/* Touch screens have no hover: the picture under the veil, with light copy, is the rest
+   state. Dawn colours headings with --color-foreground, so set both */
 @media (hover: none) {
   .product-benefits__card-bg {
     opacity: 1;
@@ -235,6 +240,7 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  transition: opacity 0.3s ease;
 }
 
 .product-benefits__card-content {
@@ -243,6 +249,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  transition: opacity 0.3s ease;
 }
 
 @media screen and (min-width: 1200px) {
