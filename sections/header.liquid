@@ -42,10 +42,11 @@
 
   /* The navigation floats (assets/kc-navigation.css and .js): it owns only its bar, the page under it
      owns its background and gets the bar's height as clearance. Desktop clearance before the script
-     measures it: the bar (6rem) + its padding + its margins. */
+     measures it, equal to what it measures so nothing moves: the 44px row + the bar's padding + its
+     margins. */
   @media screen and (min-width: 990px) {
     :root {
-      --kc-navigation-clearance: calc(6rem + 2 * var(--kc-responsive-spacing-layout-xxs) + 1.2rem + {{ section.settings.padding_bottom }}px);
+      --kc-navigation-clearance: calc(4.4rem + 2 * var(--kc-responsive-spacing-layout-xxs) + 1.2rem + {{ section.settings.padding_bottom }}px);
     }
   }
 
