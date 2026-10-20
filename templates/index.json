@@ -43,7 +43,7 @@
         "image_8y77hE": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/KARMICARE_Hero-shot_001-p-1.png",
+            "image": "shopify://shop_images/kc-hero-kit.png",
             "blob_bg_day": "radial-gradient(50% 50% at 50% 50%, rgba(67, 121, 192, 0.3) 0%, rgba(67, 121, 192, 0.13) 42%, rgba(67, 121, 192, 0) 100%)",
             "blob_bg_night": "radial-gradient(50% 50% at 50% 50%, rgba(67, 121, 192, 0.35) 0%, rgba(67, 121, 192, 0.15) 42%, rgba(67, 121, 192, 0) 100%)"
           }
@@ -205,7 +205,7 @@
         "button_label": "BEGIN YOUR 60-DAY RITUAL",
         "button_link": "shopify://products/karmicare-biorhythmic-oral-care-system",
         "button_subtext": "€0.49 / brushing ritual",
-        "main_image": "shopify://shop_images/C-_Users_as_Downloads_KARMICARE_Productshot_Tubes-samen_002.png",
+        "main_image": "shopify://shop_images/kc-two-formulas-duo.png",
         "left_heading": "Activated and strengthened by day",
         "left_text": "Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated.",
         "left_button_label": "SEE WHAT'S INSIDE",
@@ -604,51 +604,53 @@
         "faq_item_kLMHax": {
           "type": "faq_item",
           "settings": {
-            "category": "Ingredients & safety",
-            "question": "Is Karmicare fluoride-free?",
-            "answer": "<p>[NEEDS APPROVED COPY]</p>"
+            "category": "The ritual",
+            "question": "How long does one duo last?",
+            "answer": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>"
           }
         },
         "faq_item_7jmEGi": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
-            "category": "The ritual",
-            "question": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
-            "answer": "<p>[NEEDS APPROVED COPY]</p>"
+            "category": "Ingredients & safety",
+            "question": "Can I combine Karmicare with fluoride toothpaste or rinses?",
+            "answer": "<p>Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both. If you switch, switch fully: Awake in the morning, Asleep at night. Your dentist can tell you if a fluoride treatment is needed for a specific reason.</p>"
           }
         },
         "faq_item_AL3DKF": {
           "type": "faq_item",
+          "disabled": true,
           "settings": {
-            "category": "Results",
-            "question": "What is nano-hydroxyapatite?",
-            "answer": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>"
+            "category": "Ingredients & safety",
+            "question": "Is Karmicare fluoride-free?",
+            "answer": "<p>Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawbacks.</p>"
+          }
+        },
+        "faq_item_Pz4mRk": {
+          "type": "faq_item",
+          "settings": {
+            "category": "Plans & Return on Care",
+            "question": "Can I pause, skip or cancel?",
+            "answer": "<p>Your membership is completely in your hands. Amend when desired.</p>"
           }
         },
         "faq_item_qUxYCn": {
           "type": "faq_item",
           "settings": {
-            "category": "Plans & Return on Care",
-            "question": "Should I rinse after brushing?",
-            "answer": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>"
-          }
-        },
-        "faq_item_4KMG6C": {
-          "type": "faq_item",
-          "settings": {
             "category": "Shipping & guarantee",
-            "question": "How quickly will I notice a difference?",
-            "answer": "<p>Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see visible brightening in 4–6. The ritual shift happens faster: you notice the bookend effect within the first week — a morning moment that wakes you up, an evening moment that winds you down.</p>"
+            "question": "What does the money-back guarantee cover?",
+            "answer": "<p>Every first order comes with a money-back guarantee: 14 days on Try Once, your first cycle on the 60-Day rhythm, 60 days on the Year. Your legal right to withdraw comes on top.</p>"
           }
         }
       },
       "block_order": [
         "faq_item_TNnqTQ",
+        "faq_item_AL3DKF",
         "faq_item_kLMHax",
         "faq_item_7jmEGi",
-        "faq_item_AL3DKF",
-        "faq_item_qUxYCn",
-        "faq_item_4KMG6C"
+        "faq_item_Pz4mRk",
+        "faq_item_qUxYCn"
       ],
       "name": "KM FAQ Accordion",
       "settings": {
@@ -685,7 +687,6 @@
               "whitening-charcoal-dental-floss"
             ],
             "pricing_summary_care_credit_title": "Care Credits back",
-            "subscription_title": "Awake & Asleep AM/PM Oral Care System",
             "shipping_text": "Shipping",
             "shipping_value_html": "<del>Varies</del> <strong>Free</strong>",
             "care_credit_text_1": "10% / order",

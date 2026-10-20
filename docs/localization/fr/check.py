@@ -140,6 +140,8 @@ def required_holds(s, claims):
         reasons.append("unsupported claim (claims review 05-07)")
     if s.get("legacy"):
         reasons.append("legacy page")
+    if s.get("retired"):
+        reasons.append("retired")
     return reasons
 
 
@@ -321,6 +323,7 @@ def self_test(docs, ctx):
         ("translate a legacy legal entry", release_held(legacy, "Texte", "admin"), "requires a hold (legacy"),
         ("translate an unsupported 05-07 claim", release_held(unsupported, "Texte", "admin"), "requires a hold (unsupported claim"),
         ("translate a [NEEDS APPROVED COPY] placeholder", release_held("index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer", "<p>Texte</p>", "translated"), "requires a hold (needs-approved-copy"),
+        ("translate a retired entry (Astra R12)", release_held("index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title", "Système", "translated"), "requires a hold (retired"),
         ("wrong delivery channel", set_field("admin:karmicare-biorhythmic-oral-care-system:title", "status", "translated"), "source channel"),
         ("change key_path", set_field("footer-group:footer/slogan", "key_path", "sections.footer.settings.other"), "key_path"),
         ("flag_counts out of step", tamper_flag_counts(LEGAL_BATCH), "flag_counts"),

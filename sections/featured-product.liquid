@@ -592,13 +592,8 @@
                             <div class="kc-custom-box">
                               <div class="kc-custom-row kc-custom-product-info">
                                 <div class="kc-custom-col-left">
-                                  <span class="kc-custom-title">
-                                    {%- if block.settings.subscription_title != blank -%}
-                                      {{ block.settings.subscription_title }}
-                                    {%- else -%}
-                                      {{ product.title }}
-                                    {%- endif -%}
-                                  </span>
+                                  {%- comment -%} The Duo's name is its Shopify product title (Victor, 20 Oct): one name, translated in Shopify {%- endcomment -%}
+                                  <span class="kc-custom-title">{{ product.title | escape }}</span>
                                   <div class="kc-custom-per-brushing">
                                     <span>{% render 'kc-money', cents: per_brushing_cents %}</span>
                                     {{ block.settings.per_brushing_text }}
@@ -1879,12 +1874,6 @@
           "type": "inline_richtext",
           "id": "pricing_summary_care_credit_title",
           "label": "Care Credit Title"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "subscription_title",
-          "label": "Subscription Title",
-          "info": "Overrides the default product title (e.g. 'Awake & Asleep AM/PM Oral Care System')"
         },
         {
           "type": "inline_richtext",

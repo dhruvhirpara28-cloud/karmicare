@@ -38,7 +38,7 @@
   },
   "batch-02-pdp": {
    "entries": 477,
-   "digest": "03dd18b9d41a21772da2e26b7060c42f6b2364d1"
+   "digest": "666785abd03e91b643e766a266ce800fe0df07b8"
   },
   "batch-03-header-footer": {
    "entries": 41,
@@ -46,7 +46,7 @@
   },
   "batch-04-legal": {
    "entries": 974,
-   "digest": "83fed281915f22a5b0bb9ed70cf3e49c47241ccf"
+   "digest": "98fda69496b9cbe0ad39d2b7099549341113349c"
   },
   "batch-05-products": {
    "entries": 77,
@@ -2959,7 +2959,8 @@
    "notes": "type inline_richtext",
    "setting_type": "inline_richtext",
    "section_type": "featured-product",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 20 Oct: PDP 50ad819 removes this setting; the Duo's name is the Shopify product title admin:karmicare-biorhythmic-oral-care-system:title (Victor)"
   },
   {
    "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_text",
@@ -5863,7 +5864,8 @@
    "notes": "type inline_richtext",
    "setting_type": "inline_richtext",
    "section_type": "featured-product",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 20 Oct: PDP 50ad819 removes this setting; the Duo's name is the Shopify product title admin:karmicare-biorhythmic-oral-care-system:title (Victor)"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_text",
@@ -6794,11 +6796,11 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:1036",
-   "en": "Free delivery · 1–3 working days in Benelux",
-   "sha1": "3dcb730d71124b0f3bf885cc16b5828cbe3adbd7",
+   "en": "Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe",
+   "sha1": "fcd0b2df2b6ea7e5451120ade40b9a7ba3e92556",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230) EN updated 20 Oct: mirrors the nav child's kc.sticky_cart.delivery_free_html (Victor's delivery times)."
   },
   {
    "id": "liquid:sections/main-product.liquid:1042",
@@ -6915,7 +6917,8 @@
    "sha1": "3db6b8f30849bad6d53cfabcfd379046583de830",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'package_name'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'package_name'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 20 Oct: PDP 50ad819 removes this setting; the Duo's name is the Shopify product title admin:karmicare-biorhythmic-oral-care-system:title (Victor)"
   },
   {
    "id": "liquid:sections/main-product.liquid:1104",
@@ -7253,7 +7256,7 @@
    "sha1": "50b5afce6abf866a5d9645d3d4b4a5f554cc9a6f",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); also the featured product on the homepage"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); also the featured product on the homepage; naming source for the Duo since PDP 50ad819: the end CTA (PDP and homepage) and the sticky bar print product.title; replaces the retired subscription_title and package_name entries"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:body_html",
@@ -11715,11 +11718,11 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/page.consumer-rights.json",
    "key_path": "sections.legal_toc_section_gYznx3.blocks.content_section_xKcNPj.settings.content",
-   "en": "<p><strong>Until your parcel is in your hands, it is our responsibility.</strong></p><ul><li><strong>Where we deliver:</strong> to every member state of the European Union.</li><li><strong>Shipping:</strong> memberships ship free. For Try Once, the shipping charge for your zone is shown at checkout before you pay.</li><li><strong>Risk in transit (Art. VI.44 WER).</strong> The risk of loss, damage or theft in transit stays with KARMICARE until the parcel is handed to you or to the recipient you name.</li><li><strong>Delayed deliveries.</strong> Unless we agreed another date, we deliver within 30 days. If we do not, you can give us an additional reasonable period; if we still fail to deliver, you can end the contract and receive a full refund within <strong>14 calendar days</strong>.</li></ul><p><strong>Delivery times (estimates)</strong></p><ul><li><strong>Belgium, the Netherlands and Luxembourg:</strong> 1–3 working days</li><li><strong>Rest of the European Union:</strong> 2–5 working days</li></ul>",
-   "sha1": "b9958f8b02dcb5b8e8feeca1e0f00eb517c74dcc",
+   "en": "<p><strong>Until your parcel is in your hands, it is our responsibility.</strong></p><ul><li><strong>Where we deliver:</strong> to every member state of the European Union.</li><li><strong>Shipping:</strong> memberships ship free. For Try Once, the shipping charge for your zone is shown at checkout before you pay.</li><li><strong>Risk in transit (Art. VI.44 WER).</strong> The risk of loss, damage or theft in transit stays with KARMICARE until the parcel is handed to you or to the recipient you name.</li><li><strong>Delayed deliveries.</strong> Unless we agreed another date, we deliver within 30 days. If we do not, you can give us an additional reasonable period; if we still fail to deliver, you can end the contract and receive a full refund within <strong>14 calendar days</strong>.</li></ul><p><strong>Delivery times (estimates)</strong></p><ul><li><strong>Belgium, the Netherlands and Luxembourg:</strong> within 24 hours</li><li><strong>Rest of the European Union:</strong> 2–3 working days</li></ul>",
+   "sha1": "865ebee13a4413a35047e94bce99d9a8126cf695",
    "status": "approved",
    "never_translate": false,
-   "notes": "type richtext; legal text: translate faithfully and completely, keep every defined term, number, period, address and identifier; legal-review",
+   "notes": "type richtext; legal text: translate faithfully and completely, keep every defined term, number, period, address and identifier; legal-review EN updated 20 Oct: Victor's delivery times (Benelux within 24 hours, rest of EU 2-3 working days).",
    "legal": true,
    "setting_type": "richtext",
    "section_type": "legal-toc-section",
@@ -13177,11 +13180,11 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/page.terms-and-conditions.json",
    "key_path": "sections.legal_toc_section_gYznx3.blocks.content_section_dGmgBJ.settings.content",
-   "en": "<p><strong>Until your parcel is in your hands, it is our responsibility.</strong></p><ol><li><strong>Transfer of risk (Art. VI.44 WER):</strong> the risk of loss, theft or damage in transit stays with KARMICA BV until you, or a third party you designate (other than the carrier), take physical possession.</li><li><strong>Delivery area:</strong> we deliver to addresses in the member states of the European Union. Please make sure your shipping address is complete and correct.</li><li><strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the European Union 2–5 working days.</li><li><strong>Delays:</strong> unless another date was agreed, we deliver within 30 days of the contract. If we do not, you can ask for delivery within an additional reasonable period. If we still fail to deliver, you can end the contract and receive a full refund of everything you paid within <strong>14 calendar days</strong> of termination.</li></ol>",
-   "sha1": "8d5046c98da1f5aeabb42ae3be0edc5dc061d642",
+   "en": "<p><strong>Until your parcel is in your hands, it is our responsibility.</strong></p><ol><li><strong>Transfer of risk (Art. VI.44 WER):</strong> the risk of loss, theft or damage in transit stays with KARMICA BV until you, or a third party you designate (other than the carrier), take physical possession.</li><li><strong>Delivery area:</strong> we deliver to addresses in the member states of the European Union. Please make sure your shipping address is complete and correct.</li><li><strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days.</li><li><strong>Delays:</strong> unless another date was agreed, we deliver within 30 days of the contract. If we do not, you can ask for delivery within an additional reasonable period. If we still fail to deliver, you can end the contract and receive a full refund of everything you paid within <strong>14 calendar days</strong> of termination.</li></ol>",
+   "sha1": "0ef4d5dbd3aba7d69bc1b3c3d9d6728ba58364cd",
    "status": "approved",
    "never_translate": false,
-   "notes": "type richtext; legal text: translate faithfully and completely, keep every defined term, number, period, address and identifier; legal-review",
+   "notes": "type richtext; legal text: translate faithfully and completely, keep every defined term, number, period, address and identifier; legal-review EN updated 20 Oct: Victor's delivery times (Benelux within 24 hours, rest of EU 2-3 working days).",
    "legal": true,
    "setting_type": "richtext",
    "section_type": "legal-toc-section",
@@ -22368,11 +22371,11 @@
    "resource_type": "policy",
    "file_or_handle": "terms-of-service",
    "key_path": "body#b104",
-   "en": "<strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the European Union 2–5 working days.",
-   "sha1": "36d77e1763ff8a12d8a1a83dd2d14058fd7eedf7",
+   "en": "<strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days.",
+   "sha1": "921bc391227a373a93cb15b794e36d4adfceb355",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 104 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR",
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 104 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR EN updated 20 Oct: Victor's delivery times (Benelux within 24 hours, rest of EU 2-3 working days).",
    "legal": true
   },
   {
@@ -24369,11 +24372,11 @@
    "resource_type": "policy",
    "file_or_handle": "refund-policy",
    "key_path": "body#b080",
-   "en": "<strong>Belgium, the Netherlands and Luxembourg:</strong> 1–3 working days",
-   "sha1": "a39a8d1bf394e4731dd3a818ee711d2678f59c20",
+   "en": "<strong>Belgium, the Netherlands and Luxembourg:</strong> within 24 hours",
+   "sha1": "717ff1db44fe309579681183fb1c29e1ab1fc5e9",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 80 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR",
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 80 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR EN updated 20 Oct: Victor's delivery times (Benelux within 24 hours, rest of EU 2-3 working days).",
    "legal": true
   },
   {
@@ -24383,11 +24386,11 @@
    "resource_type": "policy",
    "file_or_handle": "refund-policy",
    "key_path": "body#b081",
-   "en": "<strong>Rest of the European Union:</strong> 2–5 working days",
-   "sha1": "9580ff94a520dc164162775e1a95de051f97d3f1",
+   "en": "<strong>Rest of the European Union:</strong> 2–3 working days",
+   "sha1": "1cdd559cd40e09c4e1f359ef026a4965b7f0ac05",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 81 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR",
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 81 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR EN updated 20 Oct: Victor's delivery times (Benelux within 24 hours, rest of EU 2-3 working days).",
    "legal": true
   },
   {
@@ -25096,11 +25099,11 @@
    "resource_type": "policy",
    "file_or_handle": "shipping-policy",
    "key_path": "body#b006",
-   "en": "<strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the European Union 2–5 working days.",
-   "sha1": "36d77e1763ff8a12d8a1a83dd2d14058fd7eedf7",
+   "en": "<strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days.",
+   "sha1": "921bc391227a373a93cb15b794e36d4adfceb355",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 6 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR",
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); block 6 of the rendered body, in document order (join the blocks back in order); Shopify Settings → Policies; used by checkout and order emails; not in the sitemap; legal text: legal-review before publishing in NL/FR EN updated 20 Oct: Victor's delivery times (Benelux within 24 hours, rest of EU 2-3 working days).",
    "legal": true
   },
   {

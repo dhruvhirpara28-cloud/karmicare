@@ -1,7 +1,7 @@
 {
  "about": "Theme locale keys for the needs-key strings of the B1a inventory (docs/source-copy/en-source.json). docs/localization/theme_keys.py writes them into every storefront locale file: en.default gets en; nl and fr get their value unless *_hold is set, then en; every other locale gets en (MatchingTranslations).",
  "sources": {
-  "en": "docs/source-copy/en-source.json (batch-01 a09219ae1af8, batch-02 03dd18b9d41a, batch-03 e17cadb5e223)",
+  "en": "docs/source-copy/en-source.json (batch-01 a09219ae1af8, batch-02 666785abd03e, batch-03 e17cadb5e223)",
   "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review hold)",
   "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr c7aed28 (status theme-key; flags pending-claim-review and legal-review hold)"
  },
@@ -608,8 +608,8 @@
    "ids": [
     "liquid:sections/main-product.liquid:1036"
    ],
-   "en": "Free delivery · 1–3 working days in Benelux",
-   "nl": "Gratis levering · 1–3 werkdagen in de Benelux",
+   "en": "Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe",
+   "nl": "Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa",
    "nl_hold": null,
    "fr": "Livraison offerte · 1 à 3 jours ouvrables au Benelux",
    "fr_hold": null,
@@ -679,19 +679,6 @@
    "fr": "Kit de bienvenue : deux brosses à dents + fil dentaire",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting kit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
-  },
-  {
-   "key": "kc.sticky_cart.package_name_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:1098"
-   ],
-   "en": "Awake & Asleep AM/PM Oral Care System",
-   "nl": "Awake & Asleep AM/PM-mondzorgsysteem",
-   "nl_hold": null,
-   "fr": "Système de soin matin/soir Awake & Asleep",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting package_name. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
   },
   {
    "key": "kc.sticky_cart.panel_label_html",

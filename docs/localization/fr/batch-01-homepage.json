@@ -9,10 +9,10 @@
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "admin": 2,
-  "held": 22,
+  "held": 23,
   "locale-present": 2,
   "theme-key": 30,
-  "translated": 169
+  "translated": 168
  },
  "flag_counts": {
   "fit-risk": 9,
@@ -2444,10 +2444,10 @@
    "key_path": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.subscription_title",
    "en": "Awake & Asleep AM/PM Oral Care System",
    "en_sha1": "3db6b8f30849bad6d53cfabcfd379046583de830",
-   "fr": "Système de soin matin/soir Awake & Asleep",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 20 Oct: PDP 50ad819 removes this setting; the Duo's name is the Shopify product title admin:karmicare-biorhythmic-oral-care-system:title (Victor)",
    "source_status": "approved"
   },
   {
