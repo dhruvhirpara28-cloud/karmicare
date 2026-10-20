@@ -6,22 +6,6 @@
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
 
-  /* Tablet grid up to 1199: five columns only fit their labels from 1200 */
-  @media screen and (min-width: 750px) and (max-width: 1199px) {
-    #shopify-section-{{ section.id }} .stat-strip-karmicare__grid {
-      flex-wrap: wrap;
-      justify-content: center;
-      row-gap: 1.5rem;
-    }
-    #shopify-section-{{ section.id }} .stat-strip-karmicare__item {
-      flex: 0 0 calc(100% / {{ section.settings.columns_tablet }});
-    }
-    /* Hide right border for the last item in a row to avoid weird lines */
-    #shopify-section-{{ section.id }} .stat-strip-karmicare__item:nth-child({{ section.settings.columns_tablet }}n)::after {
-      display: none;
-    }
-  }
-
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .stat-strip-karmicare .page-width{
       padding-top: {{ section.settings.padding_top }}px;
@@ -48,7 +32,7 @@
     body.day-mode #shopify-section-{{ section.id }} .page-width { border-color: {{ section.settings.border_color_day | color_modify: 'alpha', h_border_alpha }}; }
   {%- endif -%}
   {%- if section.settings.divider_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__item:not(:last-child)::after { background-color: {{ section.settings.divider_color_day | color_modify: 'alpha', v_divider_alpha }}; }
+    body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__item::after { background-color: {{ section.settings.divider_color_day | color_modify: 'alpha', v_divider_alpha }}; }
   {%- endif -%}
   {%- if section.settings.heading_color_day != blank -%}
     body.day-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__heading { color: {{ section.settings.heading_color_day }}; }
@@ -65,7 +49,7 @@
     body.night-mode #shopify-section-{{ section.id }} .page-width { border-color: {{ section.settings.border_color_night | color_modify: 'alpha', h_border_alpha }}; }
   {%- endif -%}
   {%- if section.settings.divider_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__item:not(:last-child)::after { background-color: {{ section.settings.divider_color_night | color_modify: 'alpha', v_divider_alpha }}; }
+    body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__item::after { background-color: {{ section.settings.divider_color_night | color_modify: 'alpha', v_divider_alpha }}; }
   {%- endif -%}
   {%- if section.settings.heading_color_night != blank -%}
     body.night-mode #shopify-section-{{ section.id }} .stat-strip-karmicare__heading { color: {{ section.settings.heading_color_night }}; }
@@ -87,7 +71,9 @@
   <div class="page-width">
     {%- if section.blocks.size > 0 -%}
       {%- assign heading_tag = section.settings.heading_tag | default: 'h4' -%}
-      <div class="stat-strip-karmicare__grid stat-strip-karmicare__grid--{{ section.settings.mobile_layout | default: 'scroll' }}">
+      {%- comment -%} One row at every width that runs off the right edge, drifts and can be swiped (assets/kc-marquee.js) {%- endcomment -%}
+      <kc-marquee class="stat-strip-karmicare__marquee" data-speed="22" data-wheel data-align-start>
+      <div class="stat-strip-karmicare__grid" data-marquee-track>
         {%- for block in section.blocks -%}
           <div class="stat-strip-karmicare__item" {{ block.shopify_attributes }}>
             {%- if block.settings.heading != blank -%}
@@ -103,6 +89,8 @@
           </div>
         {%- endfor -%}
       </div>
+      </kc-marquee>
+      <script src="{{ 'kc-marquee.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {%- if section.settings.tagline != blank -%}
@@ -178,7 +166,7 @@
     },
     {
       "type": "header",
-      "content": "SEO & Mobile Layout"
+      "content": "SEO"
     },
     {
       "type": "select",
@@ -196,26 +184,6 @@
       ],
       "default": "h4",
       "info": "Choose the appropriate semantic tag for SEO structure"
-    },
-    {
-      "type": "select",
-      "id": "mobile_layout",
-      "label": "Mobile Layout (< 750px)",
-      "options": [
-        { "value": "scroll", "label": "Swipeable Scroll (Recommended)" },
-        { "value": "grid", "label": "2-Column Grid" }
-      ],
-      "default": "scroll",
-      "info": "Controls how the 5 items display on mobile devices"
-    },
-    {
-      "type": "range",
-      "id": "columns_tablet",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "default": 3,
-      "label": "Tablet Columns (750px - 1024px)"
     },
     {
       "type": "header",
