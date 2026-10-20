@@ -60,9 +60,8 @@
         <ol class="care-comes-back__loop" role="list">
           {%- for block in steps -%}
             <li class="care-comes-back__step" {{ block.shopify_attributes }}>
-              <span class="care-comes-back__marker" aria-hidden="true">
-                {{- forloop.index | prepend: '0' | slice: -2, 2 -}}
-              </span>
+              {%- comment -%} An empty ring: the brand rules ban 01/02/03 step labels (Victor 20 Oct, PDP D2) {%- endcomment -%}
+              <span class="care-comes-back__marker" aria-hidden="true"></span>
               <div class="care-comes-back__step-text">
                 {%- if block.settings.title != blank -%}
                   <h3 class="care-comes-back__step-title">{{ block.settings.title | escape }}</h3>
