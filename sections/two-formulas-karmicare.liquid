@@ -19,21 +19,16 @@
   }
 
   /* ── Background Clock Image ── */
+  {%- comment -%} The artwork is drawn by a ::before in the section CSS, so Night can dim it {%- endcomment -%}
   {%- if section.settings.show_bg_clock and section.settings.bg_clock_image != blank -%}
     @media screen and (min-width: 1080px) {
       #shopify-section-{{ section.id }} .two-formulas__bg-clock {
-        background-image: url('{{ section.settings.bg_clock_image | image_url: width: 1400 }}');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
+        --two-formulas-clock: url('{{ section.settings.bg_clock_image | image_url: width: 1400 }}');
       }
     }
     @media screen and (max-width: 1079px) {
       #shopify-section-{{ section.id }} .two-formulas__image-wrap {
-        background-image: url('{{ section.settings.bg_clock_image | image_url: width: 800 }}');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
+        --two-formulas-clock: url('{{ section.settings.bg_clock_image | image_url: width: 800 }}');
       }
     }
   {%- endif -%}
