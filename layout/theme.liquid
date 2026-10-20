@@ -437,6 +437,8 @@
       {%- endif -%}
       {%- render 'kc-fluid-bridge' -%}
     {%- endif %}
+    {{ 'kc-navigation.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'kc-navigation.js' | asset_url }}" defer="defer"></script>
     {{ 'kc-surface.css' | asset_url | stylesheet_tag }}
     {% render 'kc-surface' %}
     {{ 'kc-cookie-preferences.css' | asset_url | stylesheet_tag }}
@@ -503,6 +505,7 @@
       role="main"
       tabindex="-1"
       data-template="{{ template.name }}"
+      data-navigation-layout="inset"
     >
       {{ content_for_layout }}
     </main>
@@ -567,6 +570,5 @@
     <script src="{{ 'kc-anchor-scroll.js' | asset_url }}" defer="defer"></script>
 
     {% render 'welcome-kit' %}
-    {% render 'transparent-header' %}
   </body>
 </html>
