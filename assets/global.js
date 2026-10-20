@@ -590,16 +590,20 @@ class HeaderDrawer extends MenuDrawer {
 
   // The shared trapFocus counts every control in the drawer, including the utility links the header
   // hides on mobile, so a hidden one was its last stop and Tab never wrapped. Tab wraps between the
-  // first and last control actually shown instead.
+  // first and last control actually shown instead, measured on every Tab: the drawer can stay open
+  // while a resize shows or hides its utility links (desktop drawer menu), and an open submenu is a
+  // loop of its own.
   trapShownFocus() {
     if (!this.mainDetailsToggle.hasAttribute('open')) return;
     this.releaseShownFocus();
-    const shown = getFocusableElements(this.mainDetailsToggle).filter((element) => element.getClientRects().length);
-    if (!shown.length) return;
-    const first = shown[0];
-    const last = shown[shown.length - 1];
     this.onShownFocusKeydown = (event) => {
       if (event.key !== 'Tab') return;
+      const submenus = this.mainDetailsToggle.querySelectorAll(':scope details[open] > summary + *');
+      const scope = submenus.length ? submenus[submenus.length - 1] : this.mainDetailsToggle;
+      const shown = getFocusableElements(scope).filter((element) => element.getClientRects().length);
+      if (!shown.length) return;
+      const first = shown[0];
+      const last = shown[shown.length - 1];
       const wrapTo = event.shiftKey ? event.target === first && last : event.target === last && first;
       if (!wrapTo) return;
       event.preventDefault();
