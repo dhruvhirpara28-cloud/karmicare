@@ -67,7 +67,6 @@
   assign sc_copy_stop_year = 'kc.sticky_cart.stop_year_html' | t
   assign sc_copy_per_brushing = 'kc.sticky_cart.per_brushing_html' | t
   assign sc_copy_try_once = 'kc.sticky_cart.try_once_html' | t
-  assign sc_copy_package_name = 'kc.sticky_cart.package_name_html' | t
   assign sc_copy_kit_free = 'kc.sticky_cart.kit_free_html' | t
 -%}
 
@@ -117,11 +116,8 @@
     setting's products, as the buybox shows them: custom.kit_thumbnail, value struck through, Free)
   {%- endcomment -%}
   {%- liquid
-    # The Duo's name on the Duo (the Welcome Kit bundle product); any other product shows its own title
+    # Every product shows its Shopify title, the Duo too (Victor, 20 Oct: the Duo's name is its product title)
     assign package_name = product.title
-    if is_bundle_product
-      assign package_name = block.settings.package_name | default: sc_copy_package_name
-    endif
   -%}
   <div class="sc-package">
     <div class="sc-package-duo">
@@ -145,8 +141,10 @@
           if prod == blank
             continue
           endif
-          assign kit_variant = prod.selected_or_first_available_variant
-          assign kit_value = kit_variant.compare_at_price | default: kit_variant.price
+          capture kit_value
+            render 'kc-kit-value', kit_product: prod
+          endcapture
+          assign kit_value = kit_value | plus: 0
           assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
         -%}
         <li class="sc-kit-item">
@@ -155,7 +153,7 @@
           {%- endif -%}
           <span class="sc-kit-name">{{ prod.title | escape }}</span>
           <span class="sc-kit-value">
-            {{- block.settings.kit_free | default: sc_copy_kit_free | escape }} · <s>{{ kit_value | money_without_trailing_zeros }}</s>
+            {{- block.settings.kit_free | default: sc_copy_kit_free | escape }} · <s>{% render 'kc-money', cents: kit_value, trim: true %}</s>
           </span>
         </li>
       {%- endfor -%}
@@ -236,6 +234,8 @@
     {
       "productId": {{ product.id | json }},
       "moneyFormat": {{ shop.money_format | json }},
+      "currency": {{ cart.currency.iso_code | json }},
+      "language": {{ request.locale.iso_code | split: '-' | first | json }},
       "isBundle": {{ is_bundle_product | json }},
       "kitReceived": {{ kit_received | json }},
       "kitVariantIds": {{ welcome_kit_variant_ids | split: ',' | compact | json }},
@@ -325,13 +325,20 @@
       if (el && el.textContent !== value) el.textContent = value;
     }
 
-    // The shop's money format (Shopify's formatMoney placeholders), whole amounts without ".00" / ",00"
+    // Euros as the visitor's language writes them, as snippets/kc-money.liquid: EN €0.49, NL € 0,49,
+    // FR 0,49 € (no-break spaces). Another currency: the shop's money format (Shopify's formatMoney placeholders). Whole
+    // amounts without ".00" / ",00"
     function money(cents) {
       function amount(precision, thousands, decimal) {
         var parts = (cents / 100).toFixed(precision).split('.');
         return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands) + (parts[1] ? decimal + parts[1] : '');
       }
-      if (!cfg.moneyFormat) return '€' + (cents % 100 === 0 ? amount(0, ',', '.') : amount(2, ',', '.'));
+      if (cfg.currency === 'EUR' || !cfg.moneyFormat) {
+        var precision = cents % 100 === 0 ? 0 : 2;
+        if (cfg.language === 'fr') return amount(precision, ' ', ',') + ' €';
+        if (cfg.language === 'nl') return '€ ' + amount(precision, '.', ',');
+        return '€' + amount(precision, ',', '.');
+      }
       var out = String(cfg.moneyFormat).replace(/\{\{\s*(\w+)\s*\}\}/, function (match, key) {
         if (key === 'amount_no_decimals') return amount(0, ',', '.');
         if (key === 'amount_with_comma_separator') return amount(2, '.', ',');
@@ -529,9 +536,10 @@
     observers.push(ctaObserver);
 
     // Past the buybox = the bottom of its first plan card on screen (Loop's first shown selling plan
-    // group) above the screen; without plan cards, the bottom of the buybox CTA. Looked up on every check
-    // because Loop renders and re-renders the cards late. Read on scroll, not from an observer: a jump
-    // from below the screen to above it crosses no threshold.
+    // group) above the screen; without plan cards, the bottom of the buybox CTA. Measured afresh at every
+    // visibility decision (updateVisibility), because Loop renders and re-renders the cards late and the
+    // page can move without a scroll; read from geometry, not an observer threshold: a jump from below
+    // the screen to above it crosses no threshold.
     function firstPlanCard() {
       var cards = document.querySelectorAll('.product__info-container .loop-subscription-group');
       for (var i = 0; i < cards.length; i++) {
@@ -539,12 +547,9 @@
       }
       return null;
     }
-    function checkBuybox() {
+    function measureBuybox() {
       var edge = firstPlanCard() || buyboxCta;
-      var past = !edge || edge.getBoundingClientRect().bottom <= 0;
-      if (past === pastBuybox) return;
-      pastBuybox = past;
-      updateVisibility();
+      pastBuybox = !edge || edge.getBoundingClientRect().bottom <= 0;
     }
 
     function watchCtas() {
@@ -553,7 +558,7 @@
         buyboxCta =
           document.querySelector('.product__info-container .product-form__submit') ||
           document.querySelector('.product-form__submit');
-        checkBuybox();
+        updateVisibility();
       }
       var buyboxSection = buyboxCta && buyboxCta.closest('.shopify-section');
       Array.prototype.forEach.call(document.querySelectorAll(CTA_SELECTOR), function (cta) {
@@ -566,6 +571,7 @@
     }
 
     function updateVisibility() {
+      measureBuybox();
       var visible = ready && pastBuybox && sectionsOnScreen.size === 0;
       if (visible === shown) return;
       shown = visible;
@@ -667,10 +673,18 @@
         var barResize = new ResizeObserver(reservePageEnd);
         barResize.observe(bar);
         observers.push(barResize);
+        // The plan cards move without a scroll while Loop renders them and while media above them loads
+        var layoutResize = new ResizeObserver(function () {
+          updateVisibility();
+        });
+        layoutResize.observe(document.body);
+        var buybox = document.querySelector('.product__info-container');
+        if (buybox) layoutResize.observe(buybox);
+        observers.push(layoutResize);
       }
       watchCtas();
-      on(window, 'scroll', checkBuybox, { passive: true });
-      on(window, 'resize', checkBuybox);
+      on(window, 'scroll', updateVisibility, { passive: true });
+      on(window, 'resize', updateVisibility);
       // Sections that render late, and sections the theme editor adds
       setTimeout(watchCtas, 2000);
       on(document, 'shopify:section:load', watchCtas);

@@ -3,7 +3,36 @@
  * -------------------------------------------------------------------------- */
 
 /* ── Background Clock Wrapper ── */
+/* The clock artwork (--two-formulas-clock, set by the section: on the wrapper from 1080, behind
+   the tubes below that) sits on a ::before under the content. Its ticks are #dddbd9: quiet on
+   the Day page, bright on Night navy, so Night dims them to the same quiet contrast (Victor,
+   20 Oct; gap row TF-06). */
+.two-formulas__bg-clock,
+.two-formulas__image-wrap {
+  position: relative;
+  isolation: isolate;
+}
 
+/* Custom properties inherit: the tubes only draw a clock when the section sets one on them */
+.two-formulas__image-wrap {
+  --two-formulas-clock: none;
+}
+
+.two-formulas__bg-clock::before,
+.two-formulas__image-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--two-formulas-clock, none) center / contain no-repeat;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+body.night-mode .two-formulas__bg-clock::before,
+body.night-mode .two-formulas__image-wrap::before {
+  opacity: 0.2;
+}
 
 @media screen and (min-width: 1080px) {
   .two-formulas__bg-clock {
@@ -71,35 +100,49 @@
   }
 }
 
+/* Flex centring lets the wider picture overflow the column evenly on both sides */
 .two-formulas__image-wrap {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  text-align: center;
   grid-area: center;
 }
 
-/* The tubes: 220 px wide, 260 px from 990 (Figma 2928:20020); the file itself is larger
-   for DPR 2-3, so the box sets the size, not the width attribute */
+/* The duo uncut, with its shadow (Figma 2642:2055; Victor, 20 Oct: let it overflow). In the
+   file the tube pair is 49 % of the width, centred at 62.5 %, with transparent room above,
+   below and left for the shadow. The box keeps the pair 220 px wide, 260 px from 990
+   (Figma 2928:20020), centres the pair on the column, and the negative margins let the
+   transparent bands overflow instead of pushing the layout. */
 .two-formulas__image {
+  --two-formulas-pair: 22rem;
+  --two-formulas-file: calc(var(--two-formulas-pair) / 0.49);
   display: block;
-  width: 22rem;
+  flex: none;
+  width: var(--two-formulas-file);
+  max-width: none;
   height: auto;
-  margin-inline: auto;
+  margin-block: calc(var(--two-formulas-file) * -0.09) calc(var(--two-formulas-file) * -0.12);
+  transform: translateX(-12.5%);
+  pointer-events: none;
 }
 
 @media screen and (min-width: 990px) {
   .two-formulas__image {
-    width: 26rem;
+    --two-formulas-pair: 26rem;
+  }
+}
+
+/* Stacked, the feature headings sit right under the tubes: keep about 32 px under the base */
+@media screen and (max-width: 989px) {
+  .two-formulas__image {
+    margin-bottom: calc(var(--two-formulas-file) * -0.07);
   }
 }
 
 @media screen and (max-width: 1079px) {
   .two-formulas__image-wrap {
     aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
     max-width: 360px;
   }
 }

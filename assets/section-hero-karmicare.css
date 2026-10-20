@@ -1,7 +1,13 @@
 /* ── Hero Karmicare Section: Structural & Layout Styles ── */
+/* At least one screen tall below the announcement bar and header (--hero-offset, measured by
+   the section's script): the splash grows into the free height and the toggle and badge sit
+   at the bottom of the first screen. On short screens the hero simply runs longer (Victor,
+   20 Oct, option c). */
 .hero-karmicare {
   position: relative;
   width: 100%;
+  min-height: calc(100vh - var(--hero-offset, 11rem));
+  min-height: calc(100svh - var(--hero-offset, 11rem));
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -35,19 +41,6 @@
 .hero-karmicare__heading strong,
 .hero-karmicare__heading b {
   font-weight: inherit;
-}
-
-body.night-mode .hero-karmicare__btn-2,
-body.day-mode .hero-karmicare__btn-2 {
-  background-color: transparent;
-}
-
-@media screen and (min-width: 750px) {
-
-  .hero-karmicare__heading strong,
-  .hero-karmicare__heading b {
-    display: block;
-  }
 }
 
 /* Subtext */
@@ -101,11 +94,14 @@ body.day-mode .hero-karmicare__btn-2 {
   }
 }
 
-/* Image & Soft Blob */
+/* Image & Soft Blob: the wrapper takes the hero's free height (never less than the picture's
+   own 682 x 508 proportion) and the picture fills it, contained */
 .hero-karmicare__image-wrapper {
   position: relative;
+  flex: 1 1 auto;
   width: 100%;
   max-width: 900px;
+  min-height: min(74vw, 50.8rem);
   margin: 0 auto 2rem auto;
   padding: 0;
   display: flex;
@@ -131,8 +127,12 @@ body.day-mode .hero-karmicare__btn-2 {
 }
 
 .hero-karmicare__image {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .hero-karmicare__image-placeholder {
@@ -329,11 +329,19 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   vertical-align: middle;
 }
 
-/* Tablet & Desktop Layout */
+/* Phones: no badge, the toggle closes the hero (Victor, 20 Oct, D-3) */
+@media screen and (max-width: 749px) {
+  .hero-karmicare__badge-wrapper {
+    display: none;
+  }
+}
+
+/* Tablet & Desktop Layout: bottom-left of the first screen, on the page gutter of the window
+   (not of the centred container), scrolling away with the page */
 @media screen and (min-width: 990px) {
   .hero-karmicare__badge-wrapper {
     position: absolute;
-    left: var(--page-gutter, 3.2rem);
+    left: calc((100% - 100vw) / 2 + var(--page-gutter, 3.2rem));
     bottom: 0.8rem;
     width: auto;
     margin: 0;

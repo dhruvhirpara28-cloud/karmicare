@@ -84,10 +84,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
-  background-color: var(--kc-mapped-surface-accent-default);
-  -webkit-backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
-  backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  /* KC primary button colours (snippets/button-styles.liquid), colour-only states */
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
   font-family: var(--kc-font-role-identity);
   font-weight: 700;
   font-size: var(--kc-responsive-label-lg-text-size);
@@ -96,12 +95,15 @@
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .comparison-section__button:hover {
-  background-color: var(--kc-mapped-surface-accent-default-hover);
-  transform: translateY(-1px);
+  background-color: var(--button-kc-primary-bg-hover);
+}
+
+.comparison-section__button:active {
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .comparison-section__button:focus-visible {

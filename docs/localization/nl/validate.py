@@ -12,6 +12,7 @@ Hold and gate invariants: the source decides, the payload follows (a hold is alw
   H5  never_translate              -> held
   H6  blocked (needs approved copy) -> held
   H7  held                         -> a reason in notes
+  H8  retired (the theme no longer reads it) -> held
 Exact spans in translated entries:
   S1  every postal address in the EN appears unchanged in the NL
   S2  the NL has as many (*) markers as the EN
@@ -70,6 +71,8 @@ def gates(e, r):
         out.append("H6 blocked entry (needs approved copy) not held")
     if held and not (r.get("notes") or "").strip():
         out.append("H7 held entry without a reason")
+    if e.get("retired") and not held:
+        out.append("H8 retired entry not held")
     if not held and r["nl"]:
         en, nl = plain(r["en"]), plain(r["nl"])
         for m in ADDRESS.finditer(en):
@@ -143,7 +146,7 @@ def main():
                 err("%s: %s" % (g, r["id"]))
             for key, on in (("H1", e.get("claim_status") == "unsupported"), ("H2", e.get("claim_status") == "needs-review"),
                             ("H3", e.get("legal")), ("H4", e.get("legacy")), ("H5", e.get("never_translate")),
-                            ("H6", e.get("blocked")), ("H7", r["status"] == "held")):
+                            ("H6", e.get("blocked")), ("H7", r["status"] == "held"), ("H8", e.get("retired"))):
                 if on:
                     checked[key] += 1
             if r["status"] != "held" and r["nl"]:
@@ -160,7 +163,7 @@ def main():
             err("fit_risk does not match the fit-risk flags")
         n = len(errors) - before
         print("%-26s %4d entries  %s" % (batch, len(doc["entries"]), "ok" if not n else "%d errors" % n))
-    print("entries under each gate: " + ", ".join("%s %d" % (k, checked[k]) for k in ("H1", "H2", "H3", "H4", "H5", "H6", "H7"))
+    print("entries under each gate: " + ", ".join("%s %d" % (k, checked[k]) for k in ("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8"))
           + "; addresses checked S1 %d, (*) markers S2 %d; ordinary-copy entries checked W1 %d (%d listed exceptions)"
           % (checked["S1"], checked["S2"], checked["W1"], len(WORD_EXCEPTIONS)))
     for e in errors:

@@ -228,7 +228,12 @@
   box-shadow: var(--kc-elevation-xs);
 }
 
+/* Selected card: Figma surface/primary/default (Victor, 20 Oct). Read as
+   --kc-mapped-surface-page, the same Day | Night value (#fffbf6 | #191f38);
+   --kc-mapped-surface-primary-default is held at its old value for the Loop
+   widget (P2, docs/utopia/generate.py) and is navy in Day too. */
 .kc-buybox .loop-subscription-group:has(.loop-subscription-group-radio:checked) {
+  background: var(--kc-mapped-surface-page);
   border-color: var(--kc-mapped-border-focus-default);
   box-shadow: var(--kc-elevation-lg);
 }
@@ -597,8 +602,9 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  background-color: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  /* KC primary button colours (snippets/button-styles.liquid), colour-only states */
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;
@@ -608,7 +614,7 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   font-weight: var(--font-700-weight, 700);
   letter-spacing: var(--kc-buybox-label-tracking);
   text-transform: uppercase;
-  transition: opacity .4s ease, transform .2s ease;
+  transition: background-color .2s ease;
 }
 
 .kc-buybox .product-form__custom-submit.block__animate-button::before,
@@ -619,8 +625,11 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
 .kc-buybox .product-form__custom-submit.block__animate-button:hover {
   background-position: 0 0;
   box-shadow: none;
-  opacity: 0.88;
-  transform: translateY(-1px);
+  background-color: var(--button-kc-primary-bg-hover);
+}
+
+.kc-buybox .product-form__custom-submit.block__animate-button:active {
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .kc-buybox .product-form__custom-submit.block__animate-button:focus-visible {
