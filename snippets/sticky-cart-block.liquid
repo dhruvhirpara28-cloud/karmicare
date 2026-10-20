@@ -540,9 +540,10 @@
     observers.push(ctaObserver);
 
     // Past the buybox = the bottom of its first plan card on screen (Loop's first shown selling plan
-    // group) above the screen; without plan cards, the bottom of the buybox CTA. Looked up on every check
-    // because Loop renders and re-renders the cards late. Read on scroll, not from an observer: a jump
-    // from below the screen to above it crosses no threshold.
+    // group) above the screen; without plan cards, the bottom of the buybox CTA. Measured afresh at every
+    // visibility decision (updateVisibility), because Loop renders and re-renders the cards late and the
+    // page can move without a scroll; read from geometry, not an observer threshold: a jump from below
+    // the screen to above it crosses no threshold.
     function firstPlanCard() {
       var cards = document.querySelectorAll('.product__info-container .loop-subscription-group');
       for (var i = 0; i < cards.length; i++) {
@@ -550,12 +551,9 @@
       }
       return null;
     }
-    function checkBuybox() {
+    function measureBuybox() {
       var edge = firstPlanCard() || buyboxCta;
-      var past = !edge || edge.getBoundingClientRect().bottom <= 0;
-      if (past === pastBuybox) return;
-      pastBuybox = past;
-      updateVisibility();
+      pastBuybox = !edge || edge.getBoundingClientRect().bottom <= 0;
     }
 
     function watchCtas() {
@@ -564,7 +562,7 @@
         buyboxCta =
           document.querySelector('.product__info-container .product-form__submit') ||
           document.querySelector('.product-form__submit');
-        checkBuybox();
+        updateVisibility();
       }
       var buyboxSection = buyboxCta && buyboxCta.closest('.shopify-section');
       Array.prototype.forEach.call(document.querySelectorAll(CTA_SELECTOR), function (cta) {
@@ -577,6 +575,7 @@
     }
 
     function updateVisibility() {
+      measureBuybox();
       var visible = ready && pastBuybox && sectionsOnScreen.size === 0;
       if (visible === shown) return;
       shown = visible;
@@ -678,10 +677,18 @@
         var barResize = new ResizeObserver(reservePageEnd);
         barResize.observe(bar);
         observers.push(barResize);
+        // The plan cards move without a scroll while Loop renders them and while media above them loads
+        var layoutResize = new ResizeObserver(function () {
+          updateVisibility();
+        });
+        layoutResize.observe(document.body);
+        var buybox = document.querySelector('.product__info-container');
+        if (buybox) layoutResize.observe(buybox);
+        observers.push(layoutResize);
       }
       watchCtas();
-      on(window, 'scroll', checkBuybox, { passive: true });
-      on(window, 'resize', checkBuybox);
+      on(window, 'scroll', updateVisibility, { passive: true });
+      on(window, 'resize', updateVisibility);
       // Sections that render late, and sections the theme editor adds
       setTimeout(watchCtas, 2000);
       on(document, 'shopify:section:load', watchCtas);
