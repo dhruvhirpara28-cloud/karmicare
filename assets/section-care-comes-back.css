@@ -130,9 +130,9 @@
   }
 }
 
-/* The loop: markers 01–03 run down one line; the line turns at the bottom and runs back up to
-   01 with an arrow. Both are decoration (aria-hidden markers, pseudo-elements); the list
-   order carries the meaning. */
+/* The loop: the step markers (empty rings, no 01/02/03 labels) run down one line; the line
+   turns at the bottom and runs back up to the first marker with an arrow. Both are decoration
+   (aria-hidden markers, pseudo-elements); the list order carries the meaning. */
 .care-comes-back__loop {
   position: relative;
   display: flex;
@@ -155,7 +155,7 @@
   pointer-events: none;
 }
 
-/* Arrow head on the return line, pointing into marker 01 */
+/* Arrow head on the return line, pointing into the first marker */
 .care-comes-back__loop::after {
   content: '';
   position: absolute;
@@ -180,18 +180,12 @@
 .care-comes-back__marker {
   position: relative;
   z-index: 1;
-  display: grid;
   flex: none;
-  place-items: center;
   width: var(--ccb-marker);
   height: var(--ccb-marker);
   border: var(--ccb-line) solid var(--ccb-line-colour);
   border-radius: 50%;
   background: var(--ccb-surface);
-  font-weight: 600;
-  font-size: var(--kc-responsive-body-sm-text-size);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
 }
 
 .care-comes-back__step-text {

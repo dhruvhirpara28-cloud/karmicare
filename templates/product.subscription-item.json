@@ -401,7 +401,7 @@
           "type": "step",
           "repeater": "{{ product.metafields.custom.how_it_works_steps.value }}",
           "settings": {
-            "number": "{{ block.repeater.step_number.value }}",
+            "number": "",
             "video": "{{ block.repeater.shopify_video.value }}",
             "video_url": "",
             "loop": true,
@@ -417,7 +417,7 @@
           "type": "step",
           "disabled": true,
           "settings": {
-            "number": "02",
+            "number": "",
             "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
             "video_url": "",
             "loop": true,
@@ -433,7 +433,7 @@
           "type": "step",
           "disabled": true,
           "settings": {
-            "number": "03",
+            "number": "",
             "video": "shopify://files/videos/karmicare-animation-night-alpha-fullwidth-bottomcrop-1080x960_8ba5c3ba-a609-4d86-a266-38bd2952ba77.webm",
             "video_url": "",
             "loop": true,
