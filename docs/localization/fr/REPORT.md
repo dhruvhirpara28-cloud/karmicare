@@ -188,14 +188,26 @@ Answered on the review page `review/fr.html`: `F1=ja, F2=fr, F3=alles, F4=fondat
 
 Address forms in FR legal text (decision 7 below) was not on the review page and is still open.
 
+## Delivery times (20 Oct)
+
+Victor decided on delivery within 24 hours in the Benelux and in 2–3 working days in the rest of Europe. The NL lane changed seven EN entries in source-copy `b904fcd`, which this branch merged. `check.py` named the same seven entries as stale, and FR now follows them:
+
+| Entry | FR change |
+|---|---|
+| Consumer rights `content_section_xKcNPj`, T&C `content_section_dGmgBJ`, policies `terms-of-service#b104` and `shipping-policy#b006` | « 1 à 3 jours ouvrables » → « dans les 24 heures »; « 2 à 5 jours ouvrables » → « 2 à 3 jours ouvrables » |
+| `refund-policy#b080` / `#b081` | the same two changes, one per line |
+| PDP sticky line `main-product.liquid:1036` | « Livraison rapide offerte : 24 heures au Benelux. 2 à 3 jours dans le reste de l’Europe », the same as the nav child's `delivery_free_html` in `locales/fr.json` |
+
+The six legal entries keep `legal-review`. The legacy T&C entry ("8-14 working days") stays held. New digests: batch 02 `666785ab…`, batch 04 `98fda694…`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `03dd18b9…` | 477 | 141 | 250 | 36 | 15 | 35 |
+| `batch-02-pdp` | `666785ab…` | 477 | 141 | 250 | 36 | 15 | 35 |
 | `batch-01-homepage` | `a09219ae…` | 225 | 169 | 2 | 30 | 2 | 22 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
-| `batch-04-legal` | `83fed281…` | 974 | 143 | 481 | 0 | 0 | 350 |
+| `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
