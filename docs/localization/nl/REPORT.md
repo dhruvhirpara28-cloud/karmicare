@@ -13,6 +13,12 @@ Dutch for every page of the live store, translated from the approved EN inventor
 - legal meaning, claim strength, addresses and repeated strings follow the EN again;
 - `validate.py` now checks every hold and gate.
 
+**R6 update (task `task_e2db4c0f9717`).** The re-review `docs/runtime-review/B2-NL-R6-ASTRA.md` (PASS WITH FIXES) raised R6-01 to R6-03, and all three are fixed; the section "R6 fixes" below has the details.
+- 30 more blog blocks are pending-claim-review, among them wellness `#b081`.
+- Commodity compounds and the later uses of *tandpasta* are gone from the nine NL articles.
+- The R2 claim aggregate is corrected.
+- `validate.py` gains the W1 commodity-word check.
+
 Counts below are current.
 
 ## What is here
@@ -96,9 +102,9 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 | `batch-04-legal` | 974 | `83fed281915f` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 19 | 0 | 6 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 5 | 0 | 2 | 1 |
-| `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 342 | 0 | 0 | 249 | 0 | 117 | 0 |
+| `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 279 | 0 | 117 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2571** | | **285** | **648** | **76** | **621** | **345** | **62** | **534** | **63** |
+| **All** | **2571** | | **285** | **618** | **76** | **621** | **375** | **62** | **534** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -343,8 +349,8 @@ Handles stay English (Victor has not decided to translate them), so each page li
 | morning-and-night-time-brushing-why-timing-matters | `/blogs/news/morning-and-night-time-brushing-why-timing-matters` | `/nl/blogs/news/morning-and-night-time-brushing-why-timing-matters` | `/fr/blogs/news/morning-and-night-time-brushing-why-timing-matters` | 07 | translated; 3 blocks held (unsupported claims); 10 pending-claim-review |
 | benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood | `/blogs/news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | `/nl/blogs/news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | `/fr/blogs/news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood` | 07 | translated; 28 blocks held (unsupported claims); 32 pending-claim-review |
 | nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste | `/blogs/news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `/nl/blogs/news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | `/fr/blogs/news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` | 07 | translated; 13 blocks held (unsupported claims); 29 pending-claim-review |
-| how-oral-health-impacts-your-overall-wellness | `/blogs/news/how-oral-health-impacts-your-overall-wellness` | `/nl/blogs/news/how-oral-health-impacts-your-overall-wellness` | `/fr/blogs/news/how-oral-health-impacts-your-overall-wellness` | 07 | translated; 8 blocks held (unsupported claims); 28 pending-claim-review |
-| top-natural-whitening-toothpaste-for-a-brighter-smile | `/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | `/nl/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | `/fr/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | 07 | translated; 8 blocks held (unsupported claims); 30 pending-claim-review |
+| how-oral-health-impacts-your-overall-wellness | `/blogs/news/how-oral-health-impacts-your-overall-wellness` | `/nl/blogs/news/how-oral-health-impacts-your-overall-wellness` | `/fr/blogs/news/how-oral-health-impacts-your-overall-wellness` | 07 | translated; 8 blocks held (unsupported claims); 57 pending-claim-review |
+| top-natural-whitening-toothpaste-for-a-brighter-smile | `/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | `/nl/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | `/fr/blogs/news/top-natural-whitening-toothpaste-for-a-brighter-smile` | 07 | translated; 8 blocks held (unsupported claims); 31 pending-claim-review |
 | 5-reasons-you-should-avoid-fluoride-in-toothpaste | `/blogs/news/5-reasons-you-should-avoid-fluoride-in-toothpaste` | `/nl/blogs/news/5-reasons-you-should-avoid-fluoride-in-toothpaste` | `/fr/blogs/news/5-reasons-you-should-avoid-fluoride-in-toothpaste` | 07 | translated; 15 blocks held (unsupported claims); 31 pending-claim-review |
 | headaches-and-tooth-pain-understanding-the-connection | `/blogs/news/headaches-and-tooth-pain-understanding-the-connection` | `/nl/blogs/news/headaches-and-tooth-pain-understanding-the-connection` | `/fr/blogs/news/headaches-and-tooth-pain-understanding-the-connection` | 07 | translated; 7 blocks held (unsupported claims); 24 pending-claim-review |
 | 3-reasons-why-you-should-look-for-an-sls-free-toothpaste | `/blogs/news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | `/nl/blogs/news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | `/fr/blogs/news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste` | 07 | translated; 4 blocks held (unsupported claims); 25 pending-claim-review |
@@ -408,7 +414,7 @@ Task `task_7dc91e6a67f1`, Orca run `run_32dd5602b983`, 19–20 Oct 2026. The rev
   - the footer compliance line "is een Belgisch product": it mirrors the EN regulatory statement;
   - *Gebruiksvoorwaarden*: a legal document title.
 
-  Two more cases: the evening brushes keep "Awake/Asleep-tandpasta", their only and first mention. The blog bodies keep *tandpasta* where the EN article uses "toothpaste": rewriting every mention would change the articles, and their publication is open (question 1). *Productief* and *productiviteit* are not commodity words.
+  Also: the evening brushes keep "Awake/Asleep-tandpasta", their only and first mention. *Productief* and *productiviteit* are not commodity words. (R6 replaced the blog part of this sweep: see "R6 fixes".)
 - **F8: addresses.** The validator's S1 check finds 33 address spans in translated entries, all as in the EN. A city alone ("KARMICA BV, Brugge" in a product-FAQ chip), the court ("Ondernemingsrechtbank Gent, afdeling Brugge"), "Brussel I bis" and the country lists stay translated.
 - **F9: exceptions kept on purpose.**
 
@@ -443,7 +449,71 @@ The F9 sweep compared whole entries, plus the model form's sentences. Other lega
   - the "Why You Need It" headings;
   - the two sleep/wake description lines.
 - **Legal owner:** approve or correct the EN heading 4.1, then both languages are regenerated. Also question 8.
-- **Clinical Research:** the 345 pending-claim-review entries, the new C100 and the R2 reclassifications.
+- **Clinical Research:** the pending-claim-review entries (375 since R6), the new C100 and the R2 reclassifications.
+
+## R6 fixes
+
+Task `task_e2db4c0f9717`, Orca run `run_32dd5602b983`, 20 Oct 2026. The re-review `docs/runtime-review/B2-NL-R6-ASTRA.md` (Codex GPT-6 Astra, xhigh, verdict PASS WITH FIXES) found 8 of the 10 R2 findings fixed and F5/F6 partly fixed, and raised R6-01 to R6-03. All three are fixed, with the reviewer's exact corrections; I wrote no new claims and no new copy.
+
+| Preflight | Result |
+|---|---|
+| `orca status --json` | runtime `ready`, `reachable: true`, connection `connected` |
+| `git status --short` / branch | clean tree on `karmicare/soft-launch-source-copy`, HEAD `2aa84e4`. B4 has finished, so I am the only writer here. |
+| Model / permission mode | Claude Opus 5.5 (`claude-opus-5-5`) in Claude Code, auto mode, every Bash command sandboxed |
+
+| Item | Commit | Result |
+|---|---|---|
+| R6-03 aggregate count | `30c9062` | CLAIMS-REVIEW.md and CHANGES-R2.md carry the reviewer's text: after R2, 30 / 274 / 115, twelve blocks newly entered and three reclassified. "Now" reads "after R2", because R6-01 changes the totals again. |
+| R6-01 claim gate | `5642a49` | Wellness `#b081` is needs-review with the reviewer's basis. Its NL is pending-claim-review, with *ochtendformule* / *avondformule*. The semantic recheck of the same article gates 28 more blocks (below), and the copy check found top-whitening `#b051` ("Bestselling", the same claim as headaches `#b019`). That makes 30 entries; CLAIMS-REVIEW batches 05–07 now hold 30 / 304 / 115. Metadata only, digests unchanged. |
+| R6-02 category words | `b8eb917` | The reviewer's 8 compounds and SLS `#b057`, exact. Then a full pass over the nine NL articles: 120 later uses of *tandpasta* became *formule(s)*, *mondverzorging* or *verzorging*, in 111 entries in all. |
+| Validator W1 | `ed753b8` | `validate.py` rejects commodity words, compounds included, in non-legal copy, with 5 listed exceptions. The self-test has 17 cases. |
+| FR propagation | `a48bcbd` | "R6 additions" in `docs/source-copy/CHANGES-R2.md`: the 30 reclassified entries, generated by comparing `en-source.json` with `2aa84e4`, plus the payload rules for FR. |
+| Registration plan | `6c9db1f` | `plan-nl.json`, `plan-fr.json` and `DRY-RUN.md` rebuilt offline. |
+| Report | this commit | This section. The blanket blog exemption is removed from "Sweeps beyond the named entries". |
+
+**R6-01: the semantic recheck of `how-oral-health-impacts-your-overall-wellness`.** I read every block of the article. Blocks that make a health, wellness, efficacy, safety or study claim, and had no gate, are now needs-review, each with a basis that names its gated sibling:
+- **The opening fact:** `#b007`, and the SEO description that repeats it.
+- **Toothpaste framed as a wellness or health instrument:** `#b015`, `#b016`, `#b055`, `#b057`, `#b062`, `#b067`, `#b076`, `#b082`, `#b094` and `#b095`.
+- **List items that continue gated sentences:** `#b020`–`#b022` under `#b019`, and `#b085`, `#b087`, `#b090`, `#b091` and `#b092` under `#b083`.
+- **Attributed study results and numbers:** `#b047`, `#b049` and the `#b051` pull quote.
+- **Harmful-chemicals and efficacy wording:** `#b066`, `#b068` and `#b073`.
+- **Two links of the disease chain that the B2 pass had judged "none":** `#b024` (inflammation to gum disease) and `#b038` (plaque to heart attack and stroke). Their neighbours `#b025`, `#b036` and `#b037` are gated.
+
+These stay ungated: the questions, headings and calls to action, and general oral-health statements with no product, study or number (`#b010`, `#b011`, `#b013`, `#b043`, `#b045`, `#b050`, `#b053`, `#b054`, `#b070`, `#b079`). *Limit:* the other eight articles were checked only for copies of claims (that check found `#b051`), not re-read block by block in R6. They keep their R2 classification, and question 1 (do not publish the legacy articles) still stands.
+
+**R6-02: the category-word rule as applied.** The rule is from `tone-of-voice.md`: "toothpaste" at first-contact clarity moments only, "a door, not a carpet", and never negated.
+- **Kept:** per article, the title, the SEO title and description, the image alt, the opening self-reflection questions (the FAQ-question case) and one first prose mention. These are 29 entries.
+- **Replaced:** every later use, by *formule(s)*, or *mondverzorging* where the EN means the category ("fluoride in toothpaste").
+- **Unchanged:** claims, hedges, numbers, links and gates.
+- **Outside the blog,** *tandpasta* appears only in titles, SEO texts, alts, the product names in the Duo FAQ, the homepage FAQ question, the Duo description's opening line, the content-page headlines and the brush bodies' first mention. All of these are first contact or names.
+- **Still listed for the copy owner:** the official and approved exceptions (CPNP portal name, *Gebruiksvoorwaarden*, the footer compliance line, the two approved Figma disclaimers).
+
+**W1, and why "tandpasta" is not in it.**
+- **What W1 checks:** it flags product, tube, *gebruik* and buy stems anywhere in a word, in translated copy that is neither legal text nor a Dawn key, with tags and link URLs left out.
+- **Not matched, by design:** *productie*, *productief*, *productiviteit*, *verkoop* and *YouTube*.
+- **Exceptions:** the 5 listed in `WORD_EXCEPTIONS` are each used today.
+- **Evidence:** run on the payloads before R6 (`2aa84e4`), W1 flags exactly the reviewer's 8 compounds. On HEAD it passes all 1,354 ordinary-copy entries.
+- **Why "tandpasta" is not checked:** the word is allowed at first contact, which depends on context a pattern cannot see. The pass above is the check, and the scan in this report lists what remains.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `python3 docs/source-copy/digest.py` | exit 0, 8 batches, every digest unchanged by R6 |
+| `python3 docs/source-copy/digest_selftest.py` | exit 0 |
+| `python3 docs/localization/nl/validate.py` | exit 0. Entries under each gate: H1 119, H2 376 (346 + 30), H3 956, H4 350, H5 53, H6 3, H7 534. Checked: S1 33 addresses, S2 28 `(*)` markers, W1 1,354 entries. |
+| `python3 docs/localization/nl/validate_selftest.py` | exit 0, 17 cases: the control and the two W1 no-false-positive cases (legal text, a link URL) pass; the 14 defects each fail on their own check |
+| `python3 -I docs/localization/registration/build_payloads.py --fr-dir <export>` | NL: 1,827 items, 522 first wave (unchanged: the blog is a later wave), pending-claim-review hold 343 → 373. FR: 1,822 items, 520 first wave. |
+| `python3 -I docs/localization/theme_keys.py check --fr-dir <export>` | ok for all 64 keys. `write` was not run; `locales/` and theme files are untouched. |
+
+The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 merge). It was exported with `git archive` to my scratch folder and not merged; B4 had used `c7aed28`. The FR first-wave change (529 → 520) comes from FR's own R2 holds, not from this task.
+
+### Status after R6, and handoffs
+
+- **NL totals:** 375 pending-claim-review, 621 legal-review, 534 held, 63 fit-risk (the table above).
+- **Readiness:** R6-01, R6-02 and R6-03 are closed on this branch, and the reviewer's gating condition (fix, update FR propagation, rerun the checks) is met. A re-review, or the orchestrator, confirms before Victor's registration gate. The existing holds and the legal and claim gates still apply.
+- **FR worker:** "R6 additions" in `CHANGES-R2.md`: 30 entries newly pending-claim-review, and the compound and first-contact rule for its own blog bodies.
+- **Clinical Research:** 30 more blog blocks to sign off, all in batch 07, which registers after the first wave.
 
 ## Open questions for Victor
 
@@ -506,7 +576,7 @@ The F9 sweep compared whole entries, plus the model form's sentences. Other lega
 | Item | Owner or gate |
 |---|---|
 | Legal review of 621 `legal-review` entries | Victor / lawyer |
-| Claim sign-off of 345 `pending-claim-review` entries | Victor / Clinical Research |
+| Claim sign-off of 375 `pending-claim-review` entries | Victor / Clinical Research |
 | Register `admin` entries, add `theme-key` strings to `locales/nl.json`, store the sticky-bar and footer schema defaults; rebuild anything derived from the payloads after R2 | localization worker |
 | Rendered check of every `/nl/` URL below, including the 63 fit-risk strings | preview gate / localization check |
 | FR follows `docs/source-copy/CHANGES-R2.md` | FR worker |
@@ -932,54 +1002,174 @@ The F9 sweep compared whole entries, plus the model form's sentences. Other lega
 | `admin:collection:vgbc2025:text#02` | Collection title is a code; kept as is. |
 | `admin:article:news/nano-hydroxyapatite:text#01` | R2 (review F5): pending-claim-review, same claim wording as a gated field |
 | `admin:article:news/nano-hydroxyapatite:body_html#b005` | Article subheading, no UI length limit. |
+| `admin:article:news/nano-hydroxyapatite:body_html#b009` | R6 (review R6-02): category word after first contact: 'in onze Awake- of Asleep-tandpasta.' → 'in onze Awake- of Asleep-formule.' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite:body_html#b027` | EN 'phosphorous oxygen' read as 'phosphorus, oxygen'. |
 | `admin:article:news/nano-hydroxyapatite:body_html#b036` | 'voorkomt' here means 'occurs', not 'prevents'.; R2 (review F4): 'organic' restored as in the EN; hydroxyapatite is usually called inorganic, so the EN or clinical owner resolves the source term, the translation does not |
+| `admin:article:news/nano-hydroxyapatite:body_html#b042` | R6 (review R6-02): category word after first contact: 'toxines in hun tandpasta stoppen' → 'toxines in hun formules stoppen' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b053` | R6 (review R6-02): category word after first contact: 'door te poetsen met een tandpasta met nano-hydroxyapatiet' → 'door te poetsen met een formule op basis…', 'ook een natuurlijke tandpasta met andere' → 'ook een natu… |
+| `admin:article:news/nano-hydroxyapatite:body_html#b054` | R6 (review R6-02): category word after first contact: 'bij de keuze van je tandpasta' → 'bij de keuze van je formule', 'Overstappen op een fluoridevrije tandpasta' → 'Overstappen op een fluoridevrije formule' (brand rul… |
+| `admin:article:news/nano-hydroxyapatite:body_html#b056` | R6 (review R6-02): category word after first contact: 'poetst met een tandpasta met nano-HAp' → 'poetst met een formule met nano-HAp' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b057` | R6 (review R6-02): category word after first contact: 'Tandpastaformules (zoals tandpasta en re…' → 'Poetsformules (zoals pasta’s en reminera…' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite:body_html#b064` | R2 (review F6): 'producten' → 'formules' (brand rule) |
-| `admin:article:news/nano-hydroxyapatite:body_html#b066` | R2 (review F6): 'producten … gebruikt' → 'met zulke formules poetst' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b066` | R2 (review F6): 'producten … gebruikt' → 'met zulke formules poetst' (brand rule); R6 (review R6-02): category word after first contact: 'Andere whiteningtandpasta’s' → 'Andere whiteningformules' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b067` | R6 (review R6-02): the reviewer's compound replacement: 'whiteningproducten' → 'whiteningformules' (brand rule); R6 (review R6-02): category word after first contact: 'Weinig schurende tandpasta’s met nano-HAp' → 'Weini… |
 | `admin:article:news/nano-hydroxyapatite:body_html#b069` | R2 (review F5): pending-claim-review, same claim wording as a gated field |
+| `admin:article:news/nano-hydroxyapatite:body_html#b072` | R6 (review R6-02): category word after first contact: 'met Karmicare-tandpasta,' → 'met Karmicare,' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite:body_html#b074` | The EN article has no heading 2 between 1 and 3. |
+| `admin:article:news/nano-hydroxyapatite:body_html#b087` | R6 (review R6-02): category word after first contact: 'met de nano-hydroxyapatiettandpasta van Karmicare' → 'met de formule met nano-hydroxyapatiet van Karmicare' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b089` | R6 (review R6-02): category word after first contact: 'Poetsen met een tandpasta met nano-hydroxyapatiet' → 'Poetsen met een formule met nano-hydroxyapatiet' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b097` | R6 (review R6-02): category word after first contact: 'tandpasta’s of mondspoelingen met fluoride' → 'formules of mondspoelingen met fluoride' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b102` | R6 (review R6-02): category word after first contact: 'Je tandpasta doet er meer toe' → 'Je formule doet er meer toe' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b111` | R6 (review R6-02): category word after first contact: 'De biorhythmische nano-HAp-tandpasta van Karmicare' → 'De bioritmische nano-HAp-formule van Karmicare' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b113` | R6 (review R6-02): category word after first contact: 'Overstappen op een tandpasta met nano-HAp' → 'Overstappen op een formule met nano-HAp' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b115` | R6 (review R6-02): category word after first contact: 'in een speciaal geformuleerde tandpasta.' → 'in een speciaal ontwikkelde formule.' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b116` | R6 (review R6-02): category word after first contact: 'wel meer tandpasta’s met nano-hydroxyapatiet' → 'wel meer formules met nano-hydroxyapatiet' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite:body_html#b117` | R6 (review R6-02): category word after first contact: 'Laat de nano-HAp-tandpasta daarna' → 'Laat de nano-HAp-formule daarna', ' fluoridetandpasta ' → ' een formule met fluoride ' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite:seo.title` | EN typo 'Hydroxapatite' (SEO title); the NL uses the correct spelling. |
+| `admin:article:news/morning-and-night-time-brushing-why-timing-matters:body_html#b027` | R6 (review R6-02): category word after first contact: 'versterkt de Awake-tandpasta het glazuur' → 'versterkt de Awake-formule het glazuur', 'remineraliseert de Asleep-tandpasta en' → 'remineraliseert de Asleep-formule … |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b005` | Article subheading, no UI length limit. |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b012` | R2 (review F6): 'producten' → 'artikelen' (brand rule) |
+| `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b027` | R6 (review R6-02): category word after first contact: 'de Awake-ochtendtandpasta' → 'de Awake-ochtendformule' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b051` | Article subheading, no UI length limit.; R2 (review F6): 'producten' → 'artikelen' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b055` | R2 (review F6): 'gebruiken' → 'nemen' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b064` | R2 (review F6): 'producten' → 'artikelen' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b075` | R2 (review F6): 'gebruikt' → 'genomen' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b076` | R2 (review F6): 'producten met cafeïne' → 'alles wat cafeïne bevat' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b093` | R2 (review F6): 'producten' → 'middelen' (supplements) (brand rule) |
+| `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b096` | R6 (review R6-02): the reviewer's compound replacement: 'kwaliteitsproducten' → 'kwaliteitsmiddelen' (brand rule) |
+| `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b097` | R6 (review R6-02): category word after first contact: 'bevat de tandpastaset van Karmicare' → 'bevat de set van Karmicare' (brand rule) |
 | `admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:seo.description` | The EN meta description is cut off ('m…'); the NL stops at the same point. |
 | `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b005` | Article subheading, no UI length limit. |
-| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b041` | R2 (review F5): pending-claim-review, same claim wording as a gated field |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b019` | R6 (review R6-02): category word after first contact: 'alternatief voor fluoride in tandpasta.' → 'alternatief voor fluoride in mondverzorging.' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b020` | R6 (review R6-02): category word after first contact: 'de keuze voor een tandpasta met dit krachtige mineraal' → 'de keuze voor een formule met dit krachtige mineraal' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b033` | R6 (review R6-02): the reviewer's compound replacement: 'tandverzorgingsproducten' → 'mondzorgformules' (brand rule); R6 (review R6-02): category word after first contact: 'een vaste waarde in tandpasta en mondzorgformu… |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b041` | R2 (review F5): pending-claim-review, same claim wording as a gated field; R6 (review R6-02): category word after first contact: 'Tandpasta met nano-HAp helpt' → 'Een formule met nano-HAp helpt' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b045` | R6 (review R6-02): the reviewer's compound replacement: 'whiteningproducten' → 'whiteningformules' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b049` | The EN article has no heading 2 between 1 and 3. |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b061` | R6 (review R6-02): category word after first contact: 'Je tandpasta doet er meer toe' → 'Je formule doet er meer toe' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b066` | R6 (review R6-02): category word after first contact: 'Overstappen op een tandpasta met nano-HAp' → 'Overstappen op een formule met nano-HAp' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b067` | EN 'Shop Now' rendered with 'Begin' (no 'kopen' in customer copy). |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b069` | R6 (review R6-02): category word after first contact: 'in een speciaal geformuleerde tandpasta.' → 'in een speciaal ontwikkelde formule.' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b072` | R6 (review R6-02): category word after first contact: 'Niet elke tandpasta met nano-hydroxyapatiet is dezelfde.' → 'Niet elke formule met nano-hydroxyapatiet is hetzelfde.' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b073` | R6 (review R6-02): category word after first contact: 'Laat de nano-HAp-tandpasta daarna' → 'Laat de nano-HAp-formule daarna' (brand rule) |
+| `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:body_html#b074` | R6 (review R6-02): category word after first contact: 'nooit met fluoridetandpasta!' → 'nooit met een formule met fluoride!' (brand rule) |
 | `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:seo.title` | R2 (review F5): pending-claim-review, same claim wording as a gated field |
 | `admin:article:news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste:seo.description` | The EN meta description is cut off mid-word ('fl…'); the NL completes the last word. |
 | `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b005` | Article subheading, no UI length limit. |
-| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b015` | R2 (review F6): 'product' → 'middel' (brand rule) |
-| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b055` | R2 (review F6): 'een cosmetisch product' → 'iets puur cosmetisch' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b007` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b015` | R2 (review F6): 'product' → 'middel' (brand rule); R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'De tandpasta waarmee we poetsen' → 'De for… |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b016` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'waarom de juiste tandpasta kiezen' → 'waarom de juiste formule kiezen' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b020` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b021` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b022` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b024` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b027` | R6 (review R6-02): category word after first contact: 'in de meeste gangbare tandpasta’s' → 'in de meeste gangbare formules' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b031` | R6 (review R6-02): category word after first contact: '>tandpasta met natuurlijke noötropica ' → '>een formule met natuurlijke noötropica ' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b038` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b047` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b049` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b051` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b052` | R6 (review R6-02): category word after first contact: 'Waarom doet je tandpasta ertoe?' → 'Waarom doet je formule ertoe?' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b055` | R2 (review F6): 'een cosmetisch product' → 'iets puur cosmetisch' (brand rule); R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'Tandpasta mag… |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b057` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'hoort de juiste tandpasta ook' → 'hoort de juiste formule ook' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b058` | R6 (review R6-02): category word after first contact: 'Tandpasta met noötropica zoals guarana' → 'Een formule met noötropica zoals guarana' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b062` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'hoort je tandpasta je lichamelijke' → 'hoort je formule je lichamelijke' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b066` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b067` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'hoort je tandpasta ook je sociale' → 'hoort je formule ook je sociale' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b068` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'en munt in tandpasta zorgen' → 'en munt in een formule zorgen' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b070` | R6 (review R6-02): category word after first contact: 'van bioritmische tandpasta.' → 'van bioritmische formules.' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b071` | R6 (review R6-02): category word after first contact: '>Bioritmische tandpasta’s zijn geformuleerd' → '>Bioritmische formules zijn ontworpen' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b072` | R6 (review R6-02): category word after first contact: 'Onze ochtendtandpasta bevat' → 'Onze ochtendformule bevat' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b073` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'De Awake-tandpasta helpt ook' → 'De Awake-formule helpt ook' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b074` | R6 (review R6-02): category word after first contact: 'De avondtandpasta bevat' → 'De avondformule bevat' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b076` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
 | `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b078` | EN 'Shop Now' rendered as 'Begin nu' (no 'kopen' in customer copy). |
-| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b095` | EN 'in a tube': rendered 'in één flacon' (Karmicare comes in pump bottles; 'tube' is a banned word). |
-| `admin:article:news/how-oral-health-impacts-your-overall-wellness:seo.description` | The EN meta description is cut off; the NL stops at the same point. |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b079` | R6 (review R6-02): category word after first contact: 'De Awake- en Asleep-tandpasta’s van' → 'De Awake- en Asleep-formules van' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b081` | R6 (review R6-01): pending-claim-review, assertions kept for review; 'ochtendtandpasta'/'avondtandpasta' → 'ochtendformule'/'avondformule' (category word) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b082` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b083` | R6 (review R6-02): category word after first contact: 'Kies je een tandpasta die je glimlach' → 'Kies je een formule die je glimlach' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b085` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b087` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b090` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b091` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b092` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b093` | R6 (review R6-02): category word after first contact: 'De Awake- en Asleep-tandpasta van Karmic…' → 'De Awake- en Asleep-formules van Karmica…' (brand rule) |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b094` | R6 (review R6-01): pending-claim-review, the claim waits for sign-off; R6 (review R6-02): category word after first contact: 'hoe onze bioritmische tandpasta vandaag' → 'hoe onze bioritmische verzorging vandaag' (brand … |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:body_html#b095` | EN 'in a tube': rendered 'in één flacon' (Karmicare comes in pump bottles; 'tube' is a banned word).; R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
+| `admin:article:news/how-oral-health-impacts-your-overall-wellness:seo.description` | The EN meta description is cut off; the NL stops at the same point.; R6 (review R6-01): pending-claim-review, the claim waits for sign-off |
 | `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b002` | The EN sentence is incomplete ('With more people shifting…'); translated as a complete sentence. |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b003` | R6 (review R6-02): category word after first contact: 'traditionele whiteningtandpasta vol' → 'traditionele whiteningformules vol', 'bioritmische tandpasta van Karmicare ' → 'bioritmische formules van Karmicare ' (brand… |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b004` | R6 (review R6-02): category word after first contact: 'de voordelen van natuurlijke whiteningtandpasta' → 'de voordelen van natuurlijke whiteningformules' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b005` | R6 (review R6-02): category word after first contact: 'Natuurlijke whiteningtandpasta' → 'Natuurlijke whiteningformules' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b006` | R6 (review R6-02): category word after first contact: 'Natuurlijke whiteningtandpasta verwijdert' → 'Een natuurlijke whiteningformule verwijdert' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b007` | R6 (review R6-02): category word after first contact: 'Deze milde tandpasta’s zijn veilig' → 'Deze milde formules zijn veilig', 'ondersteunt natuurlijke tandpasta ook' → 'ondersteunt een natuurlijke formule ook' (brand … |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b008` | R6 (review R6-02): category word after first contact: 'Waarom kiezen voor natuurlijke whiteningtandpasta?' → 'Waarom kiezen voor een natuurlijke whiteningformule?' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b009` | R6 (review R6-02): category word after first contact: 'In tegenstelling tot gangbare tandpasta’s vol' → 'In tegenstelling tot gangbare formules vol', 'natuurlijke whiteningtandpasta veili…' → 'een natuurlijke whiteningf… |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b010` | R6 (review R6-02): category word after first contact: 'Met natuurlijke whiteningtandpasta kies …' → 'Met een natuurlijke whiteningformule kie…' (brand rule) |
 | `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b011` | EN 'Shop' rendered as 'Ontdek'. |
-| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b016` | R2 (review F6): 'gebruiken' → 'bevatten' (brand rule) |
-| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b051` | EN 'Shop Our Bestselling' rendered as 'Ontdek onze populairste'. |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b013` | R6 (review R6-02): category word after first contact: 'Gewone tandpasta’s bevatten vaak' → 'Gewone formules bevatten vaak' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b015` | R6 (review R6-02): category word after first contact: 'Natuurlijke whiteningtandpasta is niet-toxisch' → 'Een natuurlijke whiteningformule is niet-toxisch' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b016` | R2 (review F6): 'gebruiken' → 'bevatten' (brand rule); R6 (review R6-02): category word after first contact: 'Natuurlijke whiteningtandpasta’s bevatten' → 'Natuurlijke whiteningformules bevatten' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b021` | R6 (review R6-02): category word after first contact: 'Omdat onze tandpasta vrij is' → 'Omdat onze formule vrij is' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b030` | R6 (review R6-02): category word after first contact: 'toevoeging aan een ochtendtandpasta.' → 'toevoeging aan een ochtendformule.' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b038` | R6 (review R6-02): category word after first contact: '>Tandpasta met pepermuntolie ' → '>Een formule met pepermuntolie ' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b044` | R6 (review R6-02): category word after first contact: 'geeft je tandpasta een warme' → 'geeft je formule een warme' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b051` | EN 'Shop Our Bestselling' rendered as 'Ontdek onze populairste'.; R6 (review R6-01): 'Bestselling' kept as a sales claim (meest verkocht, as headaches b019) and pending review; 'formule' for the category word |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b052` | R6 (review R6-02): category word after first contact: 'de natuurlijke whiteningtandpasta die bij je past' → 'de natuurlijke whiteningformule die bij je past' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b057` | R6 (review R6-02): category word after first contact: 'Zorg dat de tandpasta die je kiest' → 'Zorg dat de formule die je kiest' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b059` | R6 (review R6-02): category word after first contact: 'Je wilt een doeltreffende tandpasta,' → 'Je wilt een doeltreffende formule,' (brand rule) |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b061` | R6 (review R6-02): category word after first contact: 'Natuurlijke whiteningtandpasta’s zijn een veiligere' → 'Natuurlijke whiteningformules zijn een veiligere', 'Kies de tandpasta die bij je past' → 'Kies de formule di… |
+| `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:body_html#b062` | R6 (review R6-02): category word after first contact: 'natuurlijke whiteningtandpasta’s die aansluiten' → 'natuurlijke whiteningformules die aansluiten' (brand rule) |
 | `admin:article:news/top-natural-whitening-toothpaste-for-a-brighter-smile:seo.description` | The EN meta description is cut off; the NL stops at the same point. |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b003` | R6 (review R6-02): category word after first contact: 'gezonder dan tandpasta met fluoride?' → 'gezonder dan een variant met fluoride?' (brand rule) |
 | `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b005` | Article subheading, no UI length limit. |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b006` | R6 (review R6-02): category word after first contact: 'vaak aan tandpasta toegevoegd' → 'vaak aan formules voor mondverzorging toegevoegd' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b009` | R6 (review R6-02): the reviewer's compound replacement: 'mondverzorgingsproducten' → 'mondzorgformules' (brand rule); R6 (review R6-02): category word after first contact: 'heel wat tandpastamerken bekeken' → 'heel wat … |
 | `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b012` | R2 (review F6): 'het gebruik' → 'de toepassing' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b014` | R6 (review R6-02): category word after first contact: 'Wat is fluoride in tandpasta?' → 'Wat is fluoride in mondverzorging?' (brand rule) |
 | `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b015` | 'voorkomt' here means 'occurs', not 'prevents'. |
-| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b016` | R2 (review F6): 'producten' → 'formules' |
-| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b070` | EN 'Shop' rendered as 'Ontdek' (no 'kopen' in customer copy). |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b016` | R2 (review F6): 'producten' → 'formules'; R6 (review R6-02): category word after first contact: 'Veel tandpastamerken voegen' → 'Veel mondzorgmerken voegen' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b019` | R6 (review R6-02): category word after first contact: 'Sommige tandpasta’s combineren' → 'Sommige formules combineren' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b021` | R6 (review R6-02): category word after first contact: 'nuttig zijn in tandpasta,' → 'nuttig zijn in mondverzorging,' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b022` | R6 (review R6-02): category word after first contact: 'fluoridevrije tandpasta’s aan.' → 'fluoridevrije formules aan.' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b024` | R6 (review R6-02): category word after first contact: 'van fluoride in tandpasta' → 'van fluoride in mondverzorging' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b047` | R6 (review R6-02): category word after first contact: 'fluoridevrije tandpasta.' → 'fluoridevrije formule.' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b056` | R6 (review R6-02): category word after first contact: 'Tandpasta met nano-HAp, zoals' → 'Een formule met nano-HAp, zoals' (brand rule) |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b070` | EN 'Shop' rendered as 'Ontdek' (no 'kopen' in customer copy).; R6 (review R6-02): category word after first contact: 'Ontdek de fluoridevrije tandpasta van Karmicare.' → 'Ontdek de fluoridevrije formules van Karmicare.'… |
+| `admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b074` | R6 (review R6-02): category word after first contact: 'de beste natuurlijke tandpasta ' → 'de beste natuurlijke formule ' (brand rule) |
 | `admin:article:news/headaches-and-tooth-pain-understanding-the-connection:body_html#b010` | EN 'Shop' rendered as 'Ontdek'. |
 | `admin:article:news/headaches-and-tooth-pain-understanding-the-connection:body_html#b019` | R2 (review F5): 'Bestselling' kept as a sales claim (meest verkocht, not populairst) and pending review; 'formule' avoids a second commodity mention |
 | `admin:article:news/headaches-and-tooth-pain-understanding-the-connection:body_html#b043` | EN 'Shop Now' rendered as 'Begin nu'. |
 | `admin:article:news/headaches-and-tooth-pain-understanding-the-connection:seo.description` | The EN meta description is cut off; the NL stops at the same point. |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b002` | R6 (review R6-02): the reviewer's compound replacement: 'verzorgingsproducten' → 'verzorgingsformules' (brand rule) |
 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b005` | Article subheading, no UI length limit. |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b006` | R6 (review R6-02): category word after first contact: 'Veel commerciële tandpasta’s' → 'Veel commerciële formules' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b007` | R6 (review R6-02): category word after first contact: 'verwerkt bijna niemand ze in tandpasta.' → 'verwerkt bijna niemand ze in mondverzorging.' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b008` | R6 (review R6-02): category word after first contact: 'Tandpasta met natriumlaurylsulfaat' → 'Een formule met natriumlaurylsulfaat' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b009` | R6 (review R6-02): category word after first contact: 'de ingrediëntenlijst van je tandpasta' → 'de ingrediëntenlijst van je formule' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b011` | R6 (review R6-02): category word after first contact: 'voor een fluoridevrije tandpasta kiezen' → 'voor een fluoridevrije formule kiezen' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b012` | R6 (review R6-02): category word after first contact: 'voor een SLS-vrije tandpasta kiest' → 'voor een SLS-vrije formule kiest', 'glycolipiden in onze tandpasta verwerken' → 'glycolipiden in onze formules verwerken' (br… |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b014` | R6 (review R6-02): the reviewer's compound replacement: 'verzorgingsproducten' → 'verzorgingsformules' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b016` | R6 (review R6-02): category word after first contact: 'in je whiteningtandpasta zitten' → 'in je whiteningformule zitten' (brand rule) |
 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b019` | R2 (review F6): 'product' → 'formule' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b022` | R6 (review R6-02): category word after first contact: 'het schuimende effect van tandpasta.' → 'het schuimende effect van een formule.' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b025` | R6 (review R6-02): category word after first contact: 'Kiezen voor een SLS-vrije tandpasta is' → 'Kiezen voor een SLS-vrije formule is' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b026` | R6 (review R6-02): category word after first contact: 'om voor een SLS-vrije tandpasta te kiezen' → 'om voor een SLS-vrije formule te kiezen' (brand rule) |
 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b028` | R2 (review F4): 'may want to avoid' kept as a suggestion, not an instruction; 'products' → 'formules' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b030` | R6 (review R6-02): category word after first contact: 'het echte werk doen in je tandpasta,' → 'het echte werk doen in je mondverzorging,' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b032` | R6 (review R6-02): category word after first contact: 'een must is in je tandpasta.' → 'een must is in je formule.' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b034` | R6 (review R6-02): category word after first contact: 'andere tandpasta’s met fluoride' → 'andere formules met fluoride' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b037` | R6 (review R6-02): category word after first contact: 'kies je voor een SLS-vrije tandpasta?' → 'kies je voor een SLS-vrije formule?' (brand rule) |
 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b038` | R2 (review F6): 'producten' → 'formules' (brand rule) |
-| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b043` | EN 'Shop … Now' rendered as 'Ontdek nu'. |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b039` | R6 (review R6-02): category word after first contact: 'en kies tandpasta met pure ingrediënten' → 'en kies een formule met pure ingrediënten', 'wat je in standaardtandpasta vindt' → 'wat je in standaardformules vindt' (… |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b041` | R6 (review R6-02): category word after first contact: 'vast te houden aan tandpasta met SLS' → 'vast te houden aan een formule met SLS' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b043` | EN 'Shop … Now' rendered as 'Ontdek nu'.; R6 (review R6-02): category word after first contact: 'Ontdek nu de SLS-vrije tandpasta van Karmicare' → 'Ontdek nu de SLS-vrije formules van Karmicare' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b045` | R6 (review R6-02): category word after first contact: '(zoals gewone tandpasta met SLS en fluoride)' → '(zoals gewone formules met SLS en fluoride)', 'heb je geen speciale kindertandpasta nodig' → 'heb je geen aparte fo… |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b046` | R6 (review R6-02): category word after first contact: 'Poetsen met SLS-vrije tandpasta helpt' → 'Poetsen met een SLS-vrije formule helpt' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b048` | R6 (review R6-02): category word after first contact: 'de verkeerde tandpastaformule' → 'de verkeerde formule' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b051` | R6 (review R6-02): category word after first contact: 'Tandpasta met SLS kan ook' → 'Een formule met SLS kan ook' (brand rule) |
 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b056` | R2 (review F4): as hedged as the EN ('can safely', 'will help', 'may miss'); the earlier NL stated outcomes as facts |
-| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:seo.description` | The EN meta description is cut off; the NL stops at the same word. |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b057` | R6 (review R6-02): category word after first contact: 'Niet elke tandpasta is hetzelfde. Sommig…' → 'Niet elke formule is hetzelfde. Sommige …' (brand rule) |
+| `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:seo.description` | The EN meta description is cut off; the NL stops at the same word.; R6 (review R6-02): the reviewer's compound replacement: 'verzorgingsproducten' → 'verzorgingsformules' (brand rule); R6 (review R6-02): category word a… |
 
 </details>

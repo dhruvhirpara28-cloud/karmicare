@@ -15,6 +15,12 @@ Hold and gate invariants: the source decides, the payload follows (a hold is alw
 Exact spans in translated entries:
   S1  every postal address in the EN appears unchanged in the NL
   S2  the NL has as many (*) markers as the EN
+Brand words in ordinary copy (translated entries that are not legal text and not Dawn keys):
+  W1  no commodity word, compounds included: product, tube, gebruik, (aan/in)koop, kopen, (ge)kocht. Not commodity words, and so
+      not matched: productie/productief/productiviteit, verkoop, YouTube. Official and approved exceptions are listed
+      in WORD_EXCEPTIONS with their reason. "tandpasta" is not checked here: it is allowed at first contact (titles,
+      SEO, opening questions, the first mention), which depends on context a pattern cannot see; REPORT.md records
+      the manual pass.
 Exit code 1 on any failure, so a later EN change shows up as a stale entry here, and a new gate in the source shows up
 as an entry the payload does not hold yet. `validate_selftest.py` proves each check with a planted defect."""
 import argparse
@@ -28,6 +34,15 @@ from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCE = os.path.join(HERE, "..", "..", "source-copy", "en-source.json")
 PRIORITY = ["legal-review", "pending-claim-review", "admin", "theme-key"]
+COMMODITY = re.compile(r"\w*(?:product(?!ie|iv)|(?<!you)tube|gebruik|\b(?:aan|in)?ko(?:op|pen)|\b(?:ge)?kocht)\w*", re.I)
+# official names, legal titles and approved copy that keep a commodity word on purpose: (entry id or "*", word) -> reason
+WORD_EXCEPTIONS = {
+    ("*", "gebruiksvoorwaarden"): "legal document title (Terms of Use)",
+    ("admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#60", "producten"): "official name: EU-portaal voor cosmetische producten (CPNP)",
+    ("footer-group:footer/copyright_text", "product"): "compliance statement mirroring the EN regulatory line; copy owner decides (REPORT.md)",
+    ("product.subscription-item:main/treatment_journey_block/disclaimer_text", "gebruik"): "approved Figma NL (3738:27474); conflict listed for the copy owner",
+    ("product:main/treatment_journey_block/disclaimer_text", "gebruik"): "approved Figma NL (3738:27474); conflict listed for the copy owner",
+}
 # street and number, optional box, postcode, optional city and country: "Vizierstraat 28, 8000 Bruges, Belgium"
 ADDRESS = re.compile(r"[A-Z][^,<>·().:;]{2,60}?\d+[a-z]?(?:, (?:box|bus) \d+)?, \d{4}(?: [A-Z][a-zé]+)?(?:, [A-Z][a-z]+)?")
 
@@ -62,7 +77,22 @@ def gates(e, r):
                 out.append("S1 address changed: " + m.group(0))
         if r["en"].count("(*)") != r["nl"].count("(*)"):
             out.append("S2 (*) markers %d in EN, %d in NL" % (r["en"].count("(*)"), r["nl"].count("(*)")))
+        if ordinary(e, r):
+            for word in commodity_words(r):
+                out.append("W1 commodity word in ordinary copy: " + word)
     return out
+
+
+def ordinary(e, r):
+    """Translated customer copy that is neither legal text nor a Dawn key."""
+    return (r["status"] not in ("held", "dawn-nl") and bool(r["nl"]) and not e.get("legal")
+            and "legal-review" not in (r.get("flags") or []))
+
+
+def commodity_words(r):
+    """Commodity words in the NL text (tags and link URLs left out), minus the listed exceptions."""
+    words = [m.group(0).lower() for m in COMMODITY.finditer(plain(r["nl"]))]
+    return [w for w in words if ("*", w) not in WORD_EXCEPTIONS and (r["id"], w) not in WORD_EXCEPTIONS]
 
 
 def main():
@@ -119,6 +149,8 @@ def main():
             if r["status"] != "held" and r["nl"]:
                 checked["S1"] += len(ADDRESS.findall(plain(r["en"])))
                 checked["S2"] += r["en"].count("(*)")
+            if ordinary(e, r):
+                checked["W1"] += 1
         missing = set(by_batch[batch]) - seen
         if missing:
             err("%d EN entries not covered" % len(missing))
@@ -129,7 +161,8 @@ def main():
         n = len(errors) - before
         print("%-26s %4d entries  %s" % (batch, len(doc["entries"]), "ok" if not n else "%d errors" % n))
     print("entries under each gate: " + ", ".join("%s %d" % (k, checked[k]) for k in ("H1", "H2", "H3", "H4", "H5", "H6", "H7"))
-          + "; addresses checked S1 %d, (*) markers S2 %d" % (checked["S1"], checked["S2"]))
+          + "; addresses checked S1 %d, (*) markers S2 %d; ordinary-copy entries checked W1 %d (%d listed exceptions)"
+          % (checked["S1"], checked["S2"], checked["W1"], len(WORD_EXCEPTIONS)))
     for e in errors:
         print("ERROR " + e)
     sys.exit(1 if errors else 0)

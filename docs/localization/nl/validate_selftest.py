@@ -2,8 +2,8 @@
 
 Usage, from the repo root:  python3 docs/localization/nl/validate_selftest.py
 Copies en-source.json and the NL batch files into a temporary folder once per case, plants one defect, and runs
-validate.py --source/--nl-dir on the copy. Expected: the unchanged control exits 0; every other case exits 1 and reports
-its own check. Counts and fit_risk are recomputed after each defect (except in the counts case), so a case fails on its
+validate.py --source/--nl-dir on the copy. Expected: the unchanged control exits 0; every defect case exits 1 and reports
+its own check; the two W1 no-false-positive cases (a commodity word in legal text, one inside a link URL) exit 0. Counts and fit_risk are recomputed after each defect (except in the counts case), so a case fails on its
 own check, not on bookkeeping. The self-test exits 1 if any outcome differs."""
 import glob
 import json
@@ -103,6 +103,24 @@ def counts(src, nl):
     pass  # the case below edits the counts after the recompute
 
 
+def w1(src, nl):
+    """A commodity compound in ordinary blog copy (the R6-02 defect)."""
+    e, r = first(src, nl, lambda e, r: r["status"] == "admin" and e["batch"] == "batch-07-collections-blog" and not e.get("legal"))
+    r["nl"] = r["nl"] + " De meeste whiteningproducten helpen niet."
+
+
+def w1_legal(src, nl):
+    """Legal text keeps its terms: no W1 error expected."""
+    e, r = first(src, nl, lambda e, r: e.get("legal") and r["status"] == "legal-review")
+    r["nl"] = r["nl"] + " Deze producten vallen onder de wettelijke garantie."
+
+
+def w1_url(src, nl):
+    """A commodity word inside a link URL is not copy: no W1 error expected."""
+    e, r = first(src, nl, lambda e, r: r["status"] == "admin" and e["batch"] == "batch-07-collections-blog" and not e.get("legal"))
+    r["nl"] = r["nl"] + ' <a href="https://karmicare.com/en/product/biorhythmic-oral-hygiene-set">Ontdek de set</a>'
+
+
 CASES = [
     ("control: unchanged copy", None, 0, None),
     ("H1 unsupported claim translated", h1, 1, "H1 "),
@@ -118,6 +136,9 @@ CASES = [
     ("status weaker than its flags", status, 1, "status admin, its flags make it legal-review"),
     ("stale EN in the payload", stale, 1, "stale entry"),
     ("counts edited", counts, 1, "counts do not match"),
+    ("W1 commodity compound in blog copy", w1, 1, "W1 commodity word in ordinary copy: whiteningproducten"),
+    ("W1 no error: the word in legal text", w1_legal, 0, None),
+    ("W1 no error: the word in a link URL", w1_url, 0, None),
 ]
 
 
