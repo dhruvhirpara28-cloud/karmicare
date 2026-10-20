@@ -9,14 +9,16 @@
   (sections/product-compare-plans.liquid).
 
   Accepts:
-  - product: {Product} one kit product (optional). Without it: the whole kit.
+  - kit_product: {Product} one kit product (optional). Without it: the whole kit.
+    Not named `product`: on a product page that is the page's own product, so an
+    argument-free call would value the page product instead of the kit.
 
   Outputs the value in cents: of that product, or of every kit product together.
 {%- endcomment -%}
 {%- liquid
   assign kc_total = 0
-  if product != blank
-    assign kc_variant = product.variants.first
+  if kit_product != blank
+    assign kc_variant = kit_product.variants.first
     assign kc_total = kc_variant.compare_at_price | default: kc_variant.price | default: 0
   else
     for kc_item in settings.welcome_kit_free_product

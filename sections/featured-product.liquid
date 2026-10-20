@@ -621,7 +621,7 @@
                                       </span>
                                       <span class="kc-custom-col-right">
                                         {%- capture wk_value -%}
-                                          {%- render 'kc-kit-value', product: wk_product -%}
+                                          {%- render 'kc-kit-value', kit_product: wk_product -%}
                                         {%- endcapture -%}
                                         <del>
                                           {%- render 'kc-money', cents: wk_value, trim: true -%}
@@ -722,7 +722,7 @@
                           <ul class="wk-contents-list">
                             {%- for wk_product in welcome_kit_products -%}
                               {%- capture wk_value -%}
-                                {%- render 'kc-kit-value', product: wk_product -%}
+                                {%- render 'kc-kit-value', kit_product: wk_product -%}
                               {%- endcapture -%}
                               <li>
                                 <span class="wk-item-name">
