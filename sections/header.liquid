@@ -342,14 +342,7 @@
     }
   {%- endif -%}
 
-  /* ── DAY MODE COLORS (from section schema settings) ── */
-  {%- if section.settings.bg_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header,
-    body.day-mode #shopify-section-{{ section.id }} .header::before,
-    body.day-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
-      background-color: {{ section.settings.bg_color_day }};
-    }
-  {%- endif -%}
+  /* ── DAY MODE COLORS (from section schema settings; the bar surface is in GLASS BACKGROUND) ── */
   {%- if section.settings.border_color_day != blank -%}
     body.day-mode #shopify-section-{{ section.id }} .header {
       border: 1px solid {{ section.settings.border_color_day }};
@@ -363,14 +356,7 @@
     }
   {%- endif -%}
 
-  /* ── NIGHT MODE COLORS (from section schema settings) ── */
-  {%- if section.settings.bg_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .header,
-    body.night-mode #shopify-section-{{ section.id }} .header::before,
-    body.night-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
-      background-color: {{ section.settings.bg_color_night }};
-    }
-  {%- endif -%}
+  /* ── NIGHT MODE COLORS (from section schema settings; the bar surface is in GLASS BACKGROUND) ── */
   {%- if section.settings.border_color_night != blank -%}
     body.night-mode #shopify-section-{{ section.id }} .header {
       border: 1px solid {{ section.settings.border_color_night }};
@@ -446,11 +432,14 @@
       background-color: rgba(var(--kc-mapped-surface-page-secondary-rgb), {{ glass_alpha }});
     }
     body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-    body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-    body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer,
-    body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
+    body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before {
       background-color: rgb(var(--kc-mapped-surface-page-secondary-rgb));
     }
+  }
+  /* The open menu panel, opaque at every width (a desktop drawer menu uses it too) */
+  body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer,
+  body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
+    background-color: rgb(var(--kc-mapped-surface-page-secondary-rgb));
   }
 
   /* ── CTA BUTTON COLORS (from section schema settings) ── */
@@ -1097,11 +1086,6 @@
     },
     {
       "type": "color",
-      "id": "bg_color_day",
-      "label": "Header background (Day)"
-    },
-    {
-      "type": "color",
       "id": "text_color_day",
       "label": "Header text (Day)"
     },
@@ -1123,11 +1107,6 @@
     {
       "type": "header",
       "content": "Night Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Header background (Night)"
     },
     {
       "type": "color",
@@ -1161,7 +1140,7 @@
       "step": 5,
       "unit": "%",
       "label": "Bar background opacity",
-      "info": "Applies to the bar background colour (Day and Night). On mobile the bar turns opaque while the menu is open.",
+      "info": "Applies to the bar background, the KC secondary surface (white by Day, middle blue by Night). On mobile the bar turns opaque while the menu is open.",
       "default": 90
     },
     {
@@ -1183,16 +1162,6 @@
       "type": "color",
       "id": "product_section_bg_color_night",
       "label": "Section background (Night) on Product Page"
-    },
-    {
-      "type": "color",
-      "id": "product_bg_color_day",
-      "label": "Header background (Day) on Product Page"
-    },
-    {
-      "type": "color",
-      "id": "product_bg_color_night",
-      "label": "Header background (Night) on Product Page"
     },
     {
       "type": "header",
