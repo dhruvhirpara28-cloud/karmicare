@@ -182,8 +182,17 @@
               </a>
             {%- endif -%}
             {%- if block.settings.button_label_2 != blank -%}
+              {%- liquid
+                # Same as the badge: a section anchor is rebuilt on this template's id
+                assign button_link_2 = block.settings.button_link_2
+                if button_link_2 contains '#shopify-section-template--'
+                  assign button_template = section.id | split: '__' | first
+                  assign button_target = button_link_2 | split: '__' | last
+                  assign button_link_2 = '#shopify-section-' | append: button_template | append: '__' | append: button_target
+                endif
+              -%}
               <a
-                href="{{ block.settings.button_link_2 | default: '#' }}"
+                href="{{ button_link_2 | default: '#' }}"
                 class="hero-karmicare__btn hero-karmicare__btn-2 karmicare__btn-secondary"
                 {% if block.settings.button_link_2 == blank %}
                   role="button" aria-disabled="true"
