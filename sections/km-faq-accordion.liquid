@@ -45,11 +45,14 @@
       appearance: none;
       margin: 0;
       font: inherit;
-      letter-spacing: inherit;
+      /* Filter pills, not buttons: full radius, Nunito Bold in capitals (Victor, 20 Oct) */
+      font-family: var(--kc-font-role-identity);
+      font-weight: 700;
+      letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
       background: transparent;
       border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
       color: color-mix(in srgb, currentColor 76%, transparent);
-      border-radius: var(--kc-shape-radius-sm);
+      border-radius: var(--kc-shape-radius-full);
       padding: 8px 15px;
       font-size: var(--kc-responsive-label-sm-text-size);
       cursor: pointer;
