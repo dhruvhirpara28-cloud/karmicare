@@ -88,45 +88,48 @@
    A3 wide step: a proposal, not Figma (D8 option B, docs/utopia/REPORT.md). layout/theme.liquid
    loads it after kc-fluid.css, only while "Fluid type: wide screens (preview)"
    (kc_fluid_type_wide) is on as well. Off by default.
-   From 1440 to 1920 px text sizes, line heights and section spacing grow x1.1111, the
-   content column 1376px -> 1528px. Labels, controls and component spacing keep
-   their desktop value. Callers made continuous in kc-fluid.css follow their desktop role.
+   At a 10 px root, from 1440 to 1920 px text sizes, line heights and section spacing grow
+   x1.1111, the content column 1376px -> 1528px. Labels, controls and component
+   spacing keep their desktop value.
+   No media query (R7-01): each value is its kc-fluid.css or kc-tokens.css value plus a second
+   clamp(), the step, which is 0 until the base ramp ends. The step is in rem and vw like that
+   ramp, so with a larger root it starts where the ramp ends (1440 x root/10 px) and
+   reaches its top at 1920 x root/10 px.
+   Callers made continuous in kc-fluid.css add their desktop role's step.
 */
 
-@media screen and (min-width: 1440px) {
-  :root {
-    --kc-responsive-display-text-size: clamp(6.8rem, 4.4rem + 1.6667vw, 7.6rem); /* 68px -> 76px @1920 */
-    --kc-responsive-display-line-height: clamp(6rem, 3.6rem + 1.6667vw, 6.8rem); /* 60px -> 68px @1920 */
-    --kc-responsive-h1-text-size: clamp(5.2rem, 3.4rem + 1.25vw, 5.8rem); /* 52px -> 58px @1920 */
-    --kc-responsive-h1-line-height: clamp(5.2rem, 3.4rem + 1.25vw, 5.8rem); /* 52px -> 58px @1920 */
-    --kc-responsive-h2-text-size: clamp(4.4rem, 3.2rem + 0.8333vw, 4.8rem); /* 44px -> 48px @1920 */
-    --kc-responsive-h2-line-height: clamp(4.4rem, 3.2rem + 0.8333vw, 4.8rem); /* 44px -> 48px @1920 */
-    --kc-responsive-h3-text-size: clamp(3.6rem, 2.4rem + 0.8333vw, 4rem); /* 36px -> 40px @1920 */
-    --kc-responsive-h3-line-height: clamp(3.6rem, 2.4rem + 0.8333vw, 4rem); /* 36px -> 40px @1920 */
-    --kc-responsive-h4-text-size: clamp(2.8rem, 1.6rem + 0.8333vw, 3.2rem); /* 28px -> 32px @1920 */
-    --kc-responsive-h4-line-height: clamp(3.2rem, 2rem + 0.8333vw, 3.6rem); /* 32px -> 36px @1920 */
-    --kc-responsive-h5-text-size: clamp(2.4rem, 1.8rem + 0.4167vw, 2.6rem); /* 24px -> 26px @1920 */
-    --kc-responsive-h5-line-height: clamp(2.8rem, 2.2rem + 0.4167vw, 3rem); /* 28px -> 30px @1920 */
-    --kc-responsive-h6-text-size: clamp(1.8rem, 1.2rem + 0.4167vw, 2rem); /* 18px -> 20px @1920 */
-    --kc-responsive-h6-line-height: clamp(2rem, 1.4rem + 0.4167vw, 2.2rem); /* 20px -> 22px @1920 */
-    --kc-responsive-body-lg-text-size: clamp(2rem, 1.4rem + 0.4167vw, 2.2rem); /* 20px -> 22px @1920 */
-    --kc-responsive-body-lg-line-height: clamp(2.8rem, 2.2rem + 0.4167vw, 3rem); /* 28px -> 30px @1920 */
-    --kc-responsive-body-md-text-size: clamp(1.8rem, 1.2rem + 0.4167vw, 2rem); /* 18px -> 20px @1920 */
-    --kc-responsive-body-md-line-height: clamp(2.4rem, 1.8rem + 0.4167vw, 2.6rem); /* 24px -> 26px @1920 */
-    --kc-responsive-body-sm-text-size: clamp(1.5rem, 1.2rem + 0.2083vw, 1.6rem); /* 15px -> 16px @1920 */
-    --kc-responsive-body-sm-line-height: clamp(2rem, 1.4rem + 0.4167vw, 2.2rem); /* 20px -> 22px @1920 */
-    --kc-responsive-spacing-section-md: clamp(12rem, 7.2rem + 3.3333vw, 13.6rem); /* 120px -> 136px @1920 */
-    --kc-responsive-spacing-section-lg: clamp(16rem, 11.2rem + 3.3333vw, 17.6rem); /* 160px -> 176px @1920 */
-    --kc-responsive-spacing-section-xl: clamp(20rem, 12.8rem + 5vw, 22.4rem); /* 200px -> 224px @1920 */
-    --kc-responsive-spacing-section-comfortable: clamp(9.6rem, 7.2rem + 1.6667vw, 10.4rem); /* 96px -> 104px @1920 */
-    --kc-fluid-container-max: clamp(137.6rem, 92rem + 31.6667vw, 152.8rem); /* 1376px -> 1528px @1920 */
-  }
+:root {
+  --kc-responsive-display-text-size: calc(clamp(4.8rem, 4.0493rem + 1.9102vw, 6.8rem) + clamp(0rem, 1.6667vw - 2.4rem, 0.8rem)); /* 68px @1440 -> 76px @1920 */
+  --kc-responsive-display-line-height: calc(clamp(5.6rem, 5.4499rem + 0.382vw, 6rem) + clamp(0rem, 1.6667vw - 2.4rem, 0.8rem)); /* 60px @1440 -> 68px @1920 */
+  --kc-responsive-h1-text-size: calc(clamp(3.2rem, 2.4493rem + 1.9102vw, 5.2rem) + clamp(0rem, 1.25vw - 1.8rem, 0.6rem)); /* 52px @1440 -> 58px @1920 */
+  --kc-responsive-h1-line-height: calc(clamp(3.6rem, 2.9994rem + 1.5282vw, 5.2rem) + clamp(0rem, 1.25vw - 1.8rem, 0.6rem)); /* 52px @1440 -> 58px @1920 */
+  --kc-responsive-h2-text-size: calc(clamp(2.8rem, 2.1994rem + 1.5282vw, 4.4rem) + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* 44px @1440 -> 48px @1920 */
+  --kc-responsive-h2-line-height: calc(clamp(3.2rem, 2.7496rem + 1.1461vw, 4.4rem) + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* 44px @1440 -> 48px @1920 */
+  --kc-responsive-h3-text-size: calc(clamp(2.4rem, 1.9496rem + 1.1461vw, 3.6rem) + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* 36px @1440 -> 40px @1920 */
+  --kc-responsive-h3-line-height: calc(clamp(2.8rem, 2.4997rem + 0.7641vw, 3.6rem) + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* 36px @1440 -> 40px @1920 */
+  --kc-responsive-h4-text-size: calc(clamp(2rem, 1.6997rem + 0.7641vw, 2.8rem) + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* 28px @1440 -> 32px @1920 */
+  --kc-responsive-h4-line-height: calc(clamp(2.4rem, 2.0997rem + 0.7641vw, 3.2rem) + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* 32px @1440 -> 36px @1920 */
+  --kc-responsive-h5-text-size: calc(clamp(2rem, 1.8499rem + 0.382vw, 2.4rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 24px @1440 -> 26px @1920 */
+  --kc-responsive-h5-line-height: calc(clamp(2.4rem, 2.2499rem + 0.382vw, 2.8rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 28px @1440 -> 30px @1920 */
+  --kc-responsive-h6-text-size: calc(clamp(1.4rem, 1.2499rem + 0.382vw, 1.8rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 18px @1440 -> 20px @1920 */
+  --kc-responsive-h6-line-height: calc(20px + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 20px @1440 -> 22px @1920 */
+  --kc-responsive-body-lg-text-size: calc(clamp(1.8rem, 1.7249rem + 0.191vw, 2rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 20px @1440 -> 22px @1920 */
+  --kc-responsive-body-lg-line-height: calc(clamp(2.6rem, 2.5249rem + 0.191vw, 2.8rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 28px @1440 -> 30px @1920 */
+  --kc-responsive-body-md-text-size: calc(clamp(1.6rem, 1.5249rem + 0.191vw, 1.8rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 18px @1440 -> 20px @1920 */
+  --kc-responsive-body-md-line-height: calc(24px + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 24px @1440 -> 26px @1920 */
+  --kc-responsive-body-sm-text-size: calc(15px + clamp(0rem, 0.2083vw - 0.3rem, 0.1rem)); /* 15px @1440 -> 16px @1920 */
+  --kc-responsive-body-sm-line-height: calc(clamp(2rem, 2.2751rem - 0.191vw, 2.2rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* 20px @1440 -> 22px @1920 */
+  --kc-responsive-spacing-section-md: calc(clamp(6.4rem, 4.298rem + 5.3486vw, 12rem) + clamp(0rem, 3.3333vw - 4.8rem, 1.6rem)); /* 120px @1440 -> 136px @1920 */
+  --kc-responsive-spacing-section-lg: calc(clamp(9.6rem, 7.1977rem + 6.1127vw, 16rem) + clamp(0rem, 3.3333vw - 4.8rem, 1.6rem)); /* 160px @1440 -> 176px @1920 */
+  --kc-responsive-spacing-section-xl: calc(clamp(12rem, 8.9971rem + 7.6409vw, 20rem) + clamp(0rem, 5vw - 7.2rem, 2.4rem)); /* 200px @1440 -> 224px @1920 */
+  --kc-responsive-spacing-section-comfortable: calc(clamp(4.8rem, 2.9983rem + 4.5845vw, 9.6rem) + clamp(0rem, 1.6667vw - 2.4rem, 0.8rem)); /* 96px @1440 -> 104px @1920 */
+  --kc-fluid-container-max: calc(137.6rem + clamp(0rem, 31.6667vw - 45.6rem, 15.2rem)); /* 1376px @1440 -> 1528px @1920 */
+}
 
-  :root .kc-mission-card {
-    --kc-mission-card-motto-size: var(--kc-responsive-h4-text-size);
-    --kc-mission-card-text-size: var(--kc-responsive-body-sm-text-size);
-    --kc-mission-card-text-line-height: var(--kc-responsive-body-sm-line-height);
-  }
+:root .kc-mission-card {
+  --kc-mission-card-motto-size: calc(2.8rem + clamp(0rem, 0.8333vw - 1.2rem, 0.4rem)); /* h4 28px @1440 -> 32px @1920 */
+  --kc-mission-card-text-size: calc(clamp(1.5rem, 1.6375rem - 0.0955vw, 1.6rem) + clamp(0rem, 0.2083vw - 0.3rem, 0.1rem)); /* body-sm 15px @1440 -> 16px @1920 */
+  --kc-mission-card-text-line-height: calc(clamp(2rem, 2.5501rem - 0.382vw, 2.4rem) + clamp(0rem, 0.4167vw - 0.6rem, 0.2rem)); /* body-sm 20px @1440 -> 22px @1920 */
 }
 
 /* snippets/kc-fluid-bridge.liquid, rendered for config/settings_data.json */
