@@ -6,6 +6,18 @@ media-gallery.kc-gallery-fit .product-media-container video {
   border-radius: var(--kc-shape-radius-lg);
 }
 
+/* First gallery item, the hero animation: poster and video 1.2x inside their unchanged frame, so the
+   animation fills it (Victor, 20 Oct). Thumbnails, the other items and the end CTA's hero stay as they are. */
+media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
+  overflow: hidden;
+}
+
+media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
+media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
+  transform: scale(1.2);
+  transform-origin: center;
+}
+
 media-gallery.kc-gallery-fit {
   --kc-gallery-thumb-size: clamp(var(--kc-responsive-size-control-min-width), 14vw, 64px);
   --kc-gallery-arrow-width: var(--kc-responsive-size-control-min-width);
