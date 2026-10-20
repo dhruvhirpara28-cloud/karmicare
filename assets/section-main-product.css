@@ -1885,7 +1885,8 @@ body.day-mode .loop-one-time-purchase-option-position {
 
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked),
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
-  background: var(--kc-white-surface-primary-default);
+  /* Selected card: Figma surface/primary/default, as in assets/kc-buybox.css (Victor, 20 Oct) */
+  background: var(--kc-mapped-surface-page);
   border-color: var(--kc-mapped-surface-accent-default);
   box-shadow: 0 0 0 1px var(--kc-mapped-surface-accent-default);
 }
