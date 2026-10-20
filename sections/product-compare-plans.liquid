@@ -95,7 +95,7 @@
                         {{- row.label.value | default: row.label -}}
                         <span class="value">
                           {%- if total_value > 0 -%}
-                            · {{ total_value | money_without_trailing_zeros }} Value
+                            · {% render 'kc-money', cents: total_value, trim: true %} Value
                           {%- endif -%}
                           · <b>Free</b>
                         </span>
@@ -114,9 +114,9 @@
                             <em
                               >Free
                               {%- if prod.compare_at_price > prod.price %}
-                                · <s>{{ prod.compare_at_price | money_without_trailing_zeros }}</s>
+                                · <s>{% render 'kc-money', cents: prod.compare_at_price, trim: true %}</s>
                               {%- elsif prod.price > 0 %}
-                                · <s>{{ prod.price | money_without_trailing_zeros }}</s>
+                                · <s>{% render 'kc-money', cents: prod.price, trim: true %}</s>
                               {%- endif -%}
                             </em>
                           </span>

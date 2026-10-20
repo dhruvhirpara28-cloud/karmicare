@@ -598,12 +598,12 @@
                                     {%- endif -%}
                                   </span>
                                   <div class="kc-custom-per-brushing">
-                                    <span>{{ per_brushing_cents | money }}</span>
+                                    <span>{% render 'kc-money', cents: per_brushing_cents %}</span>
                                     {{ block.settings.per_brushing_text }}
                                   </div>
                                 </div>
                                 <div class="kc-custom-col-right">
-                                  <strong>{{ sub_price | money_without_trailing_zeros }}</strong>
+                                  <strong>{% render 'kc-money', cents: sub_price, trim: true %}</strong>
                                   <div class="kc-custom-interval">{{ interval_text }}</div>
                                 </div>
                               </div>
@@ -619,10 +619,10 @@
                                       </span>
                                       <span class="kc-custom-col-right">
                                         <del>
-                                          {{-
-                                            wk_product.selected_or_first_available_variant.price
-                                            | money_without_trailing_zeros
-                                          -}}
+                                          {%- render 'kc-money',
+                                            cents: wk_product.selected_or_first_available_variant.price,
+                                            trim: true
+                                          -%}
                                         </del>
                                         <strong>Free</strong>
                                       </span>
@@ -654,7 +654,7 @@
                                   </span>
                                 </span>
                                 <div class="kc-custom-col-right">
-                                  <strong>{{ care_credit | money }}</strong>
+                                  <strong>{% render 'kc-money', cents: care_credit %}</strong>
                                   <div class="kc-custom-interval">
                                     {{ block.settings.care_credit_text_2 | replace: '[rate]', kc_offer_rate | replace: '10%', kc_offer_rate }}
                                   </div>
@@ -727,7 +727,7 @@
                                   <span class="check-icon">✓</span>
                                   {{ wk_product.title }}
                                 </span>
-                                <span class="price-strike">{{ wk_variant.price | money }}</span>
+                                <span class="price-strike">{% render 'kc-money', cents: wk_variant.price %}</span>
                               </li>
                             {%- endfor -%}
                           </ul>
