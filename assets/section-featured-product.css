@@ -346,8 +346,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  background-color: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  /* surface/primary/default (as .karmicare__btn-primary in snippets/button-styles.liquid) */
+  background-color: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;

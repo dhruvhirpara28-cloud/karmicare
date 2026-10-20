@@ -31,9 +31,17 @@
     border: 1px solid var(--kc-mapped-border-control-default);
   }
 
-  /* ── PRIMARY BUTTON (DAY MODE) ── */
-  body.day-mode .karmicare__btn-primary,
-  body:not(.night-mode) .karmicare__btn-primary {
+  /* Primary: Figma surface/primary/default (#fffbf6 Day, #191f38 Night) with the heading text
+     colour (Victor, 20 Oct). --kc-mapped-surface-primary-default is held at #191F38 in both
+     modes for the Loop widget (P2), so this reads surface/page, which has the Figma values. */
+  .karmicare__btn-primary {
+    background-color: var(--kc-mapped-surface-page);
+    color: var(--kc-mapped-text-default-heading);
+  }
+
+  /* ── HEADER BEGIN NOW (DAY MODE): keeps the theme-setting colours ── */
+  body.day-mode .header__cta-btn.karmicare__btn-primary,
+  body:not(.night-mode) .header__cta-btn.karmicare__btn-primary {
     {%- if settings.button_color_day != blank -%}
       background-color: {{ settings.button_color_day }};
     {%- endif -%}
@@ -55,8 +63,8 @@
     {%- endif -%}
   }
 
-  /* ── PRIMARY BUTTON (NIGHT MODE) ── */
-  body.night-mode .karmicare__btn-primary,body.night-mode header .karmicare__btn-primary {
+  /* ── HEADER BEGIN NOW (NIGHT MODE) ── */
+  body.night-mode .header__cta-btn.karmicare__btn-primary {
     {%- if settings.button_color_night != blank -%}
       background-color: {{ settings.button_color_night }};
     {%- endif -%}
