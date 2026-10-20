@@ -373,7 +373,9 @@
   border-bottom: none !important;
 }
 
-.pc-col:nth-child(2) .karmicare__btn-secondary {
+.pc-col:nth-child(2) .karmicare__btn-secondary,
+body .pc-col:nth-child(2) .karmicare__btn-secondary:hover,
+body .pc-col:nth-child(2) .karmicare__btn-secondary:active {
   border: none;
   background-color: transparent;
   text-decoration: underline;
@@ -906,29 +908,36 @@ body.night-mode .pc-kit-poptitle {
   text-transform: uppercase;
   max-width: 100%; /* long labels wrap inside narrow columns instead of overflowing */
   cursor: pointer;
-  -webkit-backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
-  backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
-  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
 
+/* Primary and secondary as .karmicare__btn-primary / -secondary (snippets/button-styles.liquid):
+   KC primary tokens on a navy hover/pressed ramp; secondary unfilled on the control border.
+   Colour only, no motion (Victor, 20 Oct). */
 .plan-compare--kc .pc-cta--primary {
-  background-color: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  background-color: var(--kc-mapped-surface-primary-default);
+  color: var(--kc-mapped-text-primary-default);
 }
 
 .plan-compare--kc .pc-cta--primary:hover {
-  background-color: var(--kc-mapped-surface-accent-default-hover);
-  transform: translateY(-1px);
+  background-color: var(--kc-mapped-surface-secondary-default);
+}
+
+.plan-compare--kc .pc-cta--primary:active {
+  background-color: var(--kc-mapped-bg-primary-default);
 }
 
 .plan-compare--kc .pc-cta--secondary {
   border-color: var(--kc-mapped-border-control-default);
-  background-color: var(--kc-mapped-surface-glass-default);
+  background-color: transparent;
 }
 
 .plan-compare--kc .pc-cta--secondary:hover {
-  border-color: var(--kc-mapped-border-primary-default-hover);
-  transform: translateY(-1px);
+  background-color: var(--kc-mapped-surface-primary-default-hover);
+}
+
+.plan-compare--kc .pc-cta--secondary:active {
+  background-color: var(--kc-mapped-surface-tertiary-default);
 }
 
 /* First plan column (after the labels): tertiary, an underlined label */
@@ -936,15 +945,14 @@ body.night-mode .pc-kit-poptitle {
   padding-inline: var(--kc-responsive-spacing-layout-xs);
   border-color: transparent;
   background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
   text-decoration: underline;
   text-underline-offset: 0.3rem;
 }
 
-.plan-compare--kc .pc-col:nth-child(2) .pc-cta--secondary:hover {
+.plan-compare--kc .pc-col:nth-child(2) .pc-cta--secondary:hover,
+.plan-compare--kc .pc-col:nth-child(2) .pc-cta--secondary:active {
+  background: transparent;
   opacity: 0.8;
-  transform: none;
 }
 
 .plan-compare--kc .pc-cta:focus-visible {
@@ -988,9 +996,5 @@ body.night-mode .pc-kit-poptitle {
 @media (prefers-reduced-motion: reduce) {
   .plan-compare--kc .pc-cta {
     transition: none;
-  }
-
-  .plan-compare--kc .pc-cta:hover {
-    transform: none;
   }
 }

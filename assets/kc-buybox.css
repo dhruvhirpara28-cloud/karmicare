@@ -550,8 +550,9 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  background-color: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  /* KC primary tokens and colour-only states (Victor, 20 Oct) */
+  background-color: var(--kc-mapped-surface-primary-default);
+  color: var(--kc-mapped-text-primary-default);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;
@@ -561,7 +562,7 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   font-weight: var(--font-700-weight, 700);
   letter-spacing: var(--kc-buybox-label-tracking);
   text-transform: uppercase;
-  transition: opacity .4s ease, transform .2s ease;
+  transition: background-color .2s ease;
 }
 
 .kc-buybox .product-form__custom-submit.block__animate-button::before,
@@ -572,8 +573,11 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
 .kc-buybox .product-form__custom-submit.block__animate-button:hover {
   background-position: 0 0;
   box-shadow: none;
-  opacity: 0.88;
-  transform: translateY(-1px);
+  background-color: var(--kc-mapped-surface-secondary-default);
+}
+
+.kc-buybox .product-form__custom-submit.block__animate-button:active {
+  background-color: var(--kc-mapped-bg-primary-default);
 }
 
 .kc-buybox .product-form__custom-submit.block__animate-button:focus-visible {

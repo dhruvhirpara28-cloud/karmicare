@@ -310,8 +310,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
-  background-color: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  /* KC primary tokens, as the buybox button (Victor, 20 Oct) */
+  background-color: var(--kc-mapped-surface-primary-default);
+  color: var(--kc-mapped-text-primary-default);
   font-family: var(--kc-font-role-identity);
   font-size: var(--kc-responsive-label-lg-text-size);
   line-height: var(--kc-responsive-label-lg-line-height);
@@ -324,11 +325,11 @@
 }
 
 .sc-cta:hover {
-  background-color: var(--kc-mapped-surface-accent-default-hover);
+  background-color: var(--kc-mapped-surface-secondary-default);
 }
 
 .sc-cta:active {
-  background-color: var(--kc-mapped-surface-accent-default-pressed);
+  background-color: var(--kc-mapped-bg-primary-default);
 }
 
 .sc-cta.loading > span:not(.loading__spinner) {
