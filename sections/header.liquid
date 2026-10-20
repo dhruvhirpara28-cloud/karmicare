@@ -45,21 +45,16 @@
      measures it: the bar (6rem) + its padding + its margins. */
   @media screen and (min-width: 990px) {
     :root {
-      --kc-navigation-clearance: calc(6rem + 2 * var(--kc-responsive-spacing-layout-xxs) + {{ section.settings.padding_top }}px + 1.6rem + {{ section.settings.padding_bottom }}px);
+      --kc-navigation-clearance: calc(6rem + 2 * var(--kc-responsive-spacing-layout-xxs) + 1.2rem + {{ section.settings.padding_bottom }}px);
     }
   }
 
   /* Every page but the PDP (which hides the bar on scroll): once the announcement bar has scrolled
      away, the bar floats 16px from the top edge (Victor, 20 Oct). The floor is 16px minus the bar's
-     own top margin (below: desktop the padding_top setting + 1.6rem, mobile 1.2rem). */
+     own 12px top margin. */
   {%- unless template.name == 'product' or request.page_type == 'product' -%}
     :root {
-      --kc-navigation-floor: calc(1.6rem - ({{ section.settings.padding_top }}px + 1.6rem));
-    }
-    @media screen and (max-width: 989px) {
-      :root {
-        --kc-navigation-floor: calc(1.6rem - 1.2rem);
-      }
+      --kc-navigation-floor: calc(1.6rem - 1.2rem);
     }
   {%- endunless -%}
 
@@ -91,8 +86,8 @@
       gap: 3px;
       width: fit-content;
       max-width: calc(100% - 2.4rem);
-      /* 16px lower than the setting (Victor, 20 Oct) */
-      margin: calc({{ section.settings.padding_top }}px + 1.6rem) auto {{ section.settings.padding_bottom }}px;
+      /* 12px below the announcement bar, as on mobile (Victor, 20 Oct; replaces the setting + 16px) */
+      margin: 1.2rem auto {{ section.settings.padding_bottom }}px;
       padding: var(--kc-responsive-spacing-layout-xxs);
       {%- if section.settings.enable_glass_blur %}
         -webkit-backdrop-filter: blur(10px);
@@ -981,17 +976,6 @@
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 36,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "info": "Space above the header bar on desktop.",
-      "default": 20
     },
     {
       "type": "range",
