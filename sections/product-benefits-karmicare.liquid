@@ -146,7 +146,7 @@
                   {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
                   <div
                     class="product-benefits__card-overlay"
-                    style="background-color: var(--card-overlay-color, {{ section.settings.overlay_color_day }}); opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+                    style="background-color: var(--card-overlay-color, {{ section.settings.overlay_color_day }}); --card-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
                   ></div>
                 </div>
               {%- endif -%}

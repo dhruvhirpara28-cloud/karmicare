@@ -1,0 +1,48 @@
+{%- comment -%}
+  GENERATED from KC | Brand Design Library (Figma gcWcgYxS1nmheciKYOjOGx), export 2026-10-12, responsive re-exported 2026-10-17, body-sm 2026-10-18. DO NOT EDIT.
+  Source: docs/utopia/kc-tokens.json. Regenerate: python3 docs/utopia/generate.py
+  Dawn bridge for fluid type (A3b, docs/utopia/REPORT.md). layout/theme.liquid renders it after
+  base.css and kc-fluid.css, only while the theme setting kc_fluid_type is on.
+  Dawn sizes headings, XL, body and body-small text from theme settings: a rule reads the mobile
+  value below 750 px and the desktop value from 750 px (assets/base.css, layout/theme.liquid).
+  Each rule is restated here with one continuous size, later in the page, so it wins at every width:
+  - a setting equal to its Figma role at both ends (and heading_scale = body_scale) uses the
+    --kc-responsive token itself, so Dawn and token text of one role share one ramp;
+  - any other setting keeps its own mobile and desktop values, interpolated 393 -> 1440 px
+    like kc-fluid.css: no change at either end, and the theme editor values still apply.
+  The --font-*-mobile/-desktop variables stay as set: some callers read one at every width.
+  Row: selector|property|setting id|Figma role|Figma mobile px|Figma desktop px|heading scale
+{%- endcomment -%}
+{%- liquid
+  assign rows = 'h1, .h1|font-size|h1_font_size|h1|32|52|1;h2, .h2|font-size|h2_font_size|h2|28|44|1;h3, .h3|font-size|h3_font_size|h3|24|36|1;h4, .h4|font-size|h4_font_size|h4|20|28|1;h5, .h5|font-size|h5_font_size|h5|20|24|1;h6, .h6|font-size|h6_font_size|h6|14|18|1;.text-xl|font-size|xl_font_size|body-lg|18|20|0;body, .text-body|font-size|body_font_size|body-md|16|18|0;:root|--font-body-small-size|body_small_font_size|label-lg|13|14|0' | split: ';'
+-%}
+{% style %}
+  {%- for row in rows -%}
+    {%- liquid
+      assign f = row | split: '|'
+      assign mobile_id = f[2] | append: '_mobile'
+      assign desktop_id = f[2] | append: '_desktop'
+      assign mobile = settings[mobile_id]
+      assign desktop = settings[desktop_id]
+      assign figma_mobile = f[4] | plus: 0
+      assign figma_desktop = f[5] | plus: 0
+      assign token = false
+      if mobile == figma_mobile and desktop == figma_desktop
+        if f[6] == '0' or settings.heading_scale == settings.body_scale
+          assign token = true
+        endif
+      endif
+      assign low = mobile | at_most: desktop | divided_by: 10.0
+      assign high = mobile | at_least: desktop | divided_by: 10.0
+      assign start = mobile | divided_by: 10.0
+      assign rise = desktop | minus: mobile
+    -%}
+    {%- if token %}
+  {{ f[0] }} { {{ f[1] }}: var(--kc-responsive-{{ f[3] }}-text-size); }
+    {%- elsif f[6] == '1' %}
+  {{ f[0] }} { {{ f[1] }}: calc(var(--font-heading-scale) * clamp({{ low }}rem, {{ start }}rem + {{ rise }} * (100vw - 39.3rem) / 1047, {{ high }}rem)); }
+    {%- else %}
+  {{ f[0] }} { {{ f[1] }}: clamp({{ low }}rem, {{ start }}rem + {{ rise }} * (100vw - 39.3rem) / 1047, {{ high }}rem); }
+    {%- endif %}
+  {%- endfor %}
+{% endstyle %}

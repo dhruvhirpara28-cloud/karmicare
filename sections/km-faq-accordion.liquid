@@ -40,10 +40,19 @@
     }
 
     .km-faq__filter-btn {
+      /* Native buttons for keyboard use; reset what a <button> does not inherit */
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+      font: inherit;
+      /* Filter pills, not buttons: full radius, Nunito Bold in capitals (Victor, 20 Oct) */
+      font-family: var(--kc-font-role-identity);
+      font-weight: 700;
+      letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
       background: transparent;
       border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
       color: color-mix(in srgb, currentColor 76%, transparent);
-      border-radius: 40px;
+      border-radius: var(--kc-shape-radius-full);
       padding: 8px 15px;
       font-size: var(--kc-responsive-label-sm-text-size);
       cursor: pointer;
@@ -56,13 +65,24 @@
       color: var(--kc-mapped-text-accent-default-on-accent);
       border-color: var(--kc-mapped-surface-accent-default);
     }
+
+    .km-faq__filter-btn:focus-visible {
+      outline: 2px solid var(--kc-mapped-border-focus-default);
+      outline-offset: 2px;
+    }
     details.km-faq__item {
         max-width: 680px;
         margin: 0 auto;
         padding:24px;
+        /* The same card surface as the research cards */
+        background-color: var(--kc-mapped-surface-page-secondary);
     }
+    {%- if section.settings.card_bg_color_day != blank %}
     body.day-mode .section-{{- section.id }} details.km-faq__item { background-color: {{ section.settings.card_bg_color_day }}; }
+    {%- endif %}
+    {%- if section.settings.card_bg_color_night != blank %}
     body.night-mode .section-{{ section.id }} details.km-faq__item { background-color: {{ section.settings.card_bg_color_night }}; }
+    {%- endif %}
 
   details.km-faq__item{ margin-top: 16px; }
 
@@ -118,6 +138,10 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+    /* The scroller clips anything outside the chips: the focus ring sits inside the chip */
+    .km-faq__filter-btn:focus-visible {
+      outline-offset: -2px;
+    }
     details.km-faq__item {
         padding: 20px;
     }
@@ -152,11 +176,11 @@
 
     {%- if categories_array.size > 0 -%}
       <div class="km-faq__filters">
-        <span class="km-faq__filter-btn active" data-filter="all">ALL</span>
+        <button type="button" class="km-faq__filter-btn active" data-filter="all" aria-pressed="true">{{ 'kc.faq.all' | t }}</button>
 
         {%- for category in categories_array -%}
           {%- if category != blank -%}
-            <span class="km-faq__filter-btn" data-filter="{{ category | handleize }}">{{ category }}</span>
+            <button type="button" class="km-faq__filter-btn" data-filter="{{ category | handleize }}" aria-pressed="false">{{ category }}</button>
           {%- endif -%}
         {%- endfor -%}
       </div>
@@ -216,9 +240,13 @@
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', function () {
         // Remove active class from all buttons
-        filterBtns.forEach((b) => b.classList.remove('active'));
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         // Add active class to clicked button
         this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
 
         const filterValue = this.getAttribute('data-filter');
 
@@ -335,7 +363,7 @@
       "type": "color",
       "id": "card_bg_color_day",
       "label": "Card Background Color (Day)",
-      "default": "#ffffff"
+      "info": "Leave empty for the KC card surface (white), as the research cards."
     },
     {
       "type": "header",
@@ -345,7 +373,7 @@
       "type": "color",
       "id": "card_bg_color_night",
       "label": "Card Background Color (Night)",
-      "default": "#191f38"
+      "info": "Leave empty for the KC card surface (#212A49), as the research cards."
     }
   ],
   "blocks": [

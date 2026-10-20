@@ -550,11 +550,12 @@
       flex: 0 0 215px;
     }
 
+    /* Copyright and legal links read as two blocks (Figma 2928:20208 keeps ~80 px between them) */
     .km-footer-legal {
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
-      gap: var(--kc-responsive-spacing-layout-xs);
+      gap: var(--kc-responsive-spacing-layout-3xl);
     }
 
     .km-footer-legal__copyright {
@@ -611,6 +612,11 @@
   if legal_consumer_rights == blank
     assign legal_consumer_rights = shop.refund_policy
   endif
+
+  # Link texts: a blank setting uses the translated default (t output is escaped, hence escape_once)
+  assign legal_terms_default = 'kc.footer.legal_terms' | t
+  assign legal_privacy_default = 'kc.footer.legal_privacy' | t
+  assign legal_consumer_rights_default = 'kc.footer.legal_consumer_rights' | t
 -%}
 
 <footer class="karmicare-footer kc-surface" data-kc-surface="{{ section.settings.surface }}">
@@ -657,14 +663,14 @@
             <div class="km-footer-newsletter__body">
               {%- form 'customer', id: 'FooterNewsletterForm', class: 'km-footer-field' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
-                <label class="km-footer-field__label" for="FooterNewsletterEmail">Email</label>
+                <label class="km-footer-field__label" for="FooterNewsletterEmail">{{ 'kc.footer.email' | t }}</label>
                 <div class="km-footer-field__target">
                   <input
                     id="FooterNewsletterEmail"
                     class="km-footer-field__input"
                     type="email"
                     name="contact[email]"
-                    placeholder="you@example.com"
+                    placeholder="{{ 'kc.footer.email_placeholder' | t }}"
                     autocomplete="email"
                     autocorrect="off"
                     autocapitalize="off"
@@ -676,7 +682,7 @@
                       aria-describedby="FooterNewsletterEmail-message"
                     {% endif %}
                   >
-                  <button type="submit" name="commit" class="km-footer-field__submit">Join</button>
+                  <button type="submit" name="commit" class="km-footer-field__submit">{{ 'kc.footer.join' | t }}</button>
                 </div>
                 {%- if form.errors -%}
                   <p class="km-footer-field__message" id="FooterNewsletterEmail-message" role="alert">
@@ -691,8 +697,7 @@
               {%- endform -%}
 
               <p class="km-footer-newsletter__note">
-                By subscribing you agree to the <a href="{{ legal_terms.url }}">Terms of Use</a> &
-                <a href="{{ legal_privacy.url }}">Privacy Policy</a>.
+                {{ 'kc.footer.consent_html' | t: terms_url: legal_terms.url, privacy_url: legal_privacy.url }}
               </p>
             </div>
           </div>
@@ -847,7 +852,7 @@
                   >
                     <div class="km-footer-locale__list">
                       {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-                        <p class="km-footer-locale__group-title">Language</p>
+                        <p class="km-footer-locale__group-title">{{ 'kc.footer.language' | t }}</p>
                         <ul role="list" class="km-footer-locale__group">
                           {%- for language in localization.available_languages -%}
                             <li>
@@ -865,7 +870,7 @@
                       {%- endif -%}
 
                       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-                        <p class="km-footer-locale__group-title">Country/Region</p>
+                        <p class="km-footer-locale__group-title">{{ 'kc.footer.country' | t }}</p>
                         <ul role="list" class="km-footer-locale__group">
                           {%- for country in localization.available_countries -%}
                             <li>
@@ -939,11 +944,11 @@
           <div class="km-footer-legal__side">
             {%- if section.settings.show_policy -%}
               <div class="km-footer-legal__links">
-                <a href="{{ legal_terms.url }}">{{ section.settings.legal_terms_label | escape }}</a>
+                <a href="{{ legal_terms.url }}">{{ section.settings.legal_terms_label | default: legal_terms_default | escape_once }}</a>
                 <span aria-hidden="true">·</span>
-                <a href="{{ legal_privacy.url }}">{{ section.settings.legal_privacy_label | escape }}</a>
+                <a href="{{ legal_privacy.url }}">{{ section.settings.legal_privacy_label | default: legal_privacy_default | escape_once }}</a>
                 <span aria-hidden="true">·</span>
-                <a href="{{ legal_consumer_rights.url }}">{{ section.settings.legal_consumer_rights_label | escape }}</a>
+                <a href="{{ legal_consumer_rights.url }}">{{ section.settings.legal_consumer_rights_label | default: legal_consumer_rights_default | escape_once }}</a>
                 {%- for policy in shop.policies -%}
                   {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
                   {%- assign policy_url_start = policy.url | slice: 0 -%}
@@ -1031,7 +1036,7 @@
       "type": "text",
       "id": "legal_terms_label",
       "label": "Terms and Conditions link text",
-      "default": "Terms and Conditions"
+      "info": "Blank uses the translated default (locale key kc.footer.legal_terms)"
     },
     {
       "type": "page",
@@ -1043,7 +1048,7 @@
       "type": "text",
       "id": "legal_privacy_label",
       "label": "Privacy Policy link text",
-      "default": "Privacy Policy"
+      "info": "Blank uses the translated default (locale key kc.footer.legal_privacy)"
     },
     {
       "type": "page",
@@ -1055,7 +1060,7 @@
       "type": "text",
       "id": "legal_consumer_rights_label",
       "label": "Consumer Rights link text",
-      "default": "Consumer Rights"
+      "info": "Blank uses the translated default (locale key kc.footer.legal_consumer_rights)"
     },
     {
       "type": "checkbox",
