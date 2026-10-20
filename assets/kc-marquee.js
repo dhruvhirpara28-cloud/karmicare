@@ -31,6 +31,8 @@ if (!customElements.get('kc-marquee')) {
           this.classList.add('is-static');
           return;
         }
+        // Sections may scroll natively until this class clips the row for the drift
+        this.classList.add('is-running');
 
         this.originals = Array.from(this.track.children);
         this.speed = Number(this.dataset.speed) || 24; // px per second
