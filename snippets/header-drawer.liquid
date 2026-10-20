@@ -21,6 +21,8 @@
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- comment -%} An empty menu link ('#') comes back as '/nl#' or '/fr#' on a translated storefront. {%- endcomment -%}
+              {%- assign kc_soon_url = routes.root_url | append: '#' -%}
               {%- for link in section.settings.menu.links -%}
                 <li>
                   {%- if link.links != blank -%}
@@ -119,7 +121,7 @@
                         </div>
                       </div>
                     </details>
-                  {%- elsif link.url == '#' -%}
+                  {%- elsif link.url == '#' or link.url == kc_soon_url -%}
                     {%- comment -%} No page yet: shown, not clickable, "Coming soon" on tap or focus {%- endcomment -%}
                     {%- assign soon_id = 'HeaderDrawer-' | append: link.handle -%}
                     {%- render 'kc-coming-soon',

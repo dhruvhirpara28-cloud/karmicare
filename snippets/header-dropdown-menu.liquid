@@ -7,6 +7,8 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
+    {%- comment -%} An empty menu link ('#') comes back as '/nl#' or '/fr#' on a translated storefront. {%- endcomment -%}
+    {%- assign kc_soon_url = routes.root_url | append: '#' -%}
     {%- for link in section.settings.menu.links -%}
       <li>
         {%- if link.links != blank -%}
@@ -79,7 +81,7 @@
               </ul>
             </details>
           </header-menu>
-        {%- elsif link.url == '#' -%}
+        {%- elsif link.url == '#' or link.url == kc_soon_url -%}
           {%- comment -%} No page yet: shown, not clickable, "Coming soon" on hover, focus or tap {%- endcomment -%}
           {%- assign soon_id = 'HeaderMenu-' | append: link.handle -%}
           {%- render 'kc-coming-soon',
