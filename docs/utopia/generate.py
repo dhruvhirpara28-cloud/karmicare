@@ -333,6 +333,13 @@ def clamp(a, b, lo_w, hi_w):
     return f"clamp({rem(min(a, b))}, {preferred}, {rem(max(a, b))})"
 
 
+def extend(base, dk, wd):
+    """base plus the wide step (R7-01): a second ramp that is 0 up to 1440 px and adds
+    wd - dk px by 1920 px at a 10 px root. It is in rem and vw like the base ramp, so at
+    any other root it starts where that ramp ends (1440 x root/10) and moves with it."""
+    return f"calc({base} + {clamp(0, wd - dk, DESKTOP_W, WIDE_W)})"
+
+
 def even(px_value):
     return 2 * round(px_value / 2)
 
@@ -364,11 +371,15 @@ def emit_fluid(data, taken):
             if dk != mb:
                 notes.append(f"{name} ({mb} -> {dk} px): defined in the theme or held at its old value")
             continue
+        # The value below the wide layer: this ramp, or kc-tokens.css's one value when the
+        # pair is equal. The wide layer adds to it, so it never steps away from it (R7-01).
+        base = px(dk)
         if dk != mb:
-            fluid.append(f"  {name}: {clamp(mb, dk, MOBILE_W, DESKTOP_W)}; /* {px(mb)} @{MOBILE_W} -> {px(dk)} @{DESKTOP_W} */")
+            base = clamp(mb, dk, MOBILE_W, DESKTOP_W)
+            fluid.append(f"  {name}: {base}; /* {px(mb)} @{MOBILE_W} -> {px(dk)} @{DESKTOP_W} */")
         wd = wide_value(path, dk)
         if wd is not None and wd != dk:
-            wide.append(f"    {name}: {clamp(dk, wd, DESKTOP_W, WIDE_W)}; /* {px(dk)} -> {px(wd)} @{WIDE_W} */")
+            wide.append(f"  {name}: {extend(base, dk, wd)}; /* {px(dk)} @{DESKTOP_W} -> {px(wd)} @{WIDE_W} */")
 
     container_d = rows[CONTAINER_PATH][0]
     container_w = grid8(container_d * WIDE_FACTOR)
@@ -381,7 +392,10 @@ def emit_fluid(data, taken):
         m_role, d_role = mobile_role.split("/")[0], desktop_role.split("/")[0]
         swaps.setdefault(sel, []).append(
             f"  {prop}: {value}; /* {m_role} {px(mb)} @{MOBILE_W} -> {d_role} {px(dk)} @{DESKTOP_W}; {where} */")
-        swaps_wide.setdefault(sel, []).append(f"    {prop}: var(--kc-responsive-{slug(desktop_role)});")
+        wd = wide_value(desktop_role, dk)
+        if wd is not None and wd != dk:
+            swaps_wide.setdefault(sel, []).append(
+                f"  {prop}: {extend(value, dk, wd)}; /* {d_role} {px(dk)} @{DESKTOP_W} -> {px(wd)} @{WIDE_W} */")
 
     src = data["source"]
     generated = f"/* GENERATED from {src['file']} (Figma {src['fileKey']}), export {src['exported']}. DO NOT EDIT."
@@ -428,22 +442,26 @@ def emit_fluid(data, taken):
         "   A3 wide step: a proposal, not Figma (D8 option B, docs/utopia/REPORT.md). layout/theme.liquid",
         "   loads it after kc-fluid.css, only while \"Fluid type: wide screens (preview)\"",
         "   (kc_fluid_type_wide) is on as well. Off by default.",
-        f"   From {DESKTOP_W} to {WIDE_W} px text sizes, line heights and section spacing grow x{fmt(WIDE_FACTOR)}, the",
-        f"   content column {px(container_d)} -> {px(container_w)}. Labels, controls and component spacing keep",
-        "   their desktop value. Callers made continuous in kc-fluid.css follow their desktop role.",
+        f"   At a 10 px root, from {DESKTOP_W} to {WIDE_W} px text sizes, line heights and section spacing grow",
+        f"   x{fmt(WIDE_FACTOR)}, the content column {px(container_d)} -> {px(container_w)}. Labels, controls and component",
+        "   spacing keep their desktop value.",
+        "   No media query (R7-01): each value is its kc-fluid.css or kc-tokens.css value plus a second",
+        "   clamp(), the step, which is 0 until the base ramp ends. The step is in rem and vw like that",
+        f"   ramp, so with a larger root it starts where the ramp ends ({DESKTOP_W} x root/{ROOT_PX} px) and",
+        f"   reaches its top at {WIDE_W} x root/{ROOT_PX} px.",
+        "   Callers made continuous in kc-fluid.css add their desktop role's step.",
         "*/",
         "",
-        f"@media screen and (min-width: {DESKTOP_W}px) {{",
-        "  :root {",
+        ":root {",
     ]
     lines += wide
     lines += [
-        f"    --kc-fluid-container-max: {clamp(container_d, container_w, DESKTOP_W, WIDE_W)}; /* {px(container_d)} -> {px(container_w)} @{WIDE_W} */",
-        "  }",
+        f"  --kc-fluid-container-max: {extend(rem(container_d), container_d, container_w)}; /* {px(container_d)} @{DESKTOP_W} -> {px(container_w)} @{WIDE_W} */",
+        "}",
     ]
     for sel, decls in swaps_wide.items():
-        lines += ["", f"  :root {sel} {{"] + decls + ["  }"]
-    lines += ["}", ""]
+        lines += ["", f":root {sel} {{"] + decls + ["}"]
+    lines += [""]
     WIDE_OUT.write_text("\n".join(lines))
     print(f"wrote {WIDE_OUT.relative_to(ROOT)}: {len(wide)} wide-step, {WIDE_OUT.stat().st_size} bytes")
 
