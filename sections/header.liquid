@@ -47,7 +47,10 @@
     margin-bottom: {{ section.settings.margin_bottom }}px;
   }
 
+  /* Glass border, as on the other glass surfaces (sticky bar, cookie panel); a border colour picked in
+     the section settings still wins (DAY/NIGHT MODE COLORS below) */
   #shopify-section-{{ section.id }} .header {
+    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
     border-radius: var(--kc-shape-radius-sm);
     max-width: 1200px;
     margin: 1.2rem auto;
@@ -254,6 +257,18 @@
       border-radius: 0 0 var(--kc-shape-radius-sm) var(--kc-shape-radius-sm);
       transform: none;
       visibility: visible;
+    }
+    /* The glass border runs around bar and panel as one box: none between them, the panel widened
+       over the bar's side borders */
+    #shopify-section-{{ section.id }}:has(details[open]) .header {
+      border-bottom-color: transparent;
+    }
+    #shopify-section-{{ section.id }} details[open] .menu-drawer,
+    #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
+      left: calc(-1 * var(--kc-shape-stroke-thin));
+      width: calc(100% + 2 * var(--kc-shape-stroke-thin));
+      border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
+      border-top: 0;
     }
     #shopify-section-{{ section.id }} .menu-drawer__inner-container,
     #shopify-section-{{ section.id }} .menu-drawer__navigation-container {
