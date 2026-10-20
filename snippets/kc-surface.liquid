@@ -7,26 +7,21 @@
     own, so it is painted as a transition and the theme editor flags it (data-kc-seam);
   - a section without the setting shows the page colour (a section that renders nothing is
     skipped);
-  - the header sets the colour the first section arrives on (data-kc-surface-edge).
+  - the first content section chooses its starting surface; navigation paints no page surface.
   Rendered in the head: the observer's callback runs before the next frame, so each section is
   resolved as the page is parsed, before it paints, and again whenever the theme editor or a
   product swap adds, removes or re-renders a section.
 {%- endcomment -%}
 <script>
   (function () {
-    var MARK = '[data-kc-surface], [data-kc-surface-edge]';
+    var MARK = '[data-kc-surface]';
     var ROLES = { page: 1, accent: 1, transition: 1 };
 
     function resolve() {
-      var edge = 'page';
-      var wrappers = document.querySelectorAll('.shopify-section');
+      var edge = null;
+      var wrappers = document.querySelectorAll('#MainContent > .shopify-section, .shopify-section-group-footer-group');
       for (var i = 0; i < wrappers.length; i++) {
         var wrapper = wrappers[i];
-        var anchor = wrapper.querySelector('[data-kc-surface-edge]');
-        if (anchor) {
-          edge = anchor.getAttribute('data-kc-surface-edge');
-          continue;
-        }
         var el = wrapper.querySelector('[data-kc-surface]');
         if (!el) {
           if (wrapper.querySelector(':scope > :not(script, style, link, template, noscript)')) edge = 'page';
@@ -34,6 +29,7 @@
         }
         var role = el.getAttribute('data-kc-surface');
         if (!ROLES[role]) role = 'page';
+        if (edge === null) edge = role === 'accent' ? 'accent' : 'page';
         var bottom = role === 'transition' ? (edge === 'page' ? 'accent' : 'page') : role;
         wrapper.setAttribute('data-kc-edge-top', edge);
         wrapper.setAttribute('data-kc-edge-bottom', bottom);

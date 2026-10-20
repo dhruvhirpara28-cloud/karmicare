@@ -58,9 +58,9 @@
     --kc-night-text-b:        {{ settings.night_mode_text_color.blue | default: 229 }};
 
     /* KC glass tokens — KC | Brand Design Library: mapped/surface/glass/default,
-       mapped/border/glass/border (Day values; Night below), shape/blur/md */
-    --kc-mapped-surface-glass-default: rgba(255, 251, 246, 0.8);
-    --kc-mapped-border-glass-border:   rgba(255, 255, 255, 0.4);
+       mapped/border/glass/border (Day values; Night below), shape/blur/md. Synced 2026-10-20. */
+    --kc-mapped-surface-glass-default: rgba(255, 251, 246, 0.93);
+    --kc-mapped-border-glass-border:   rgba(25, 31, 56, 0.15);
     --kc-shape-blur-md:                20px;
   }
 
@@ -114,7 +114,7 @@
   {%- endif %}
 
     /* KC glass tokens — Night mode values */
-    --kc-mapped-surface-glass-default: rgba(25, 31, 56, 0.8);
+    --kc-mapped-surface-glass-default: rgba(25, 31, 56, 0.93);
     --kc-mapped-border-glass-border:   rgba(255, 255, 255, 0.15);
   }
 </style>

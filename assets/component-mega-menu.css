@@ -16,12 +16,10 @@
   top: 100%;
 }
 
-.shopify-section-header-sticky .mega-menu__content {
+/* The navigation always floats (assets/kc-navigation.css): the panel stays within the screen below it;
+   assets/kc-navigation.js keeps --header-bottom-position-desktop current */
+.section-header .mega-menu__content {
   max-height: calc(100vh - var(--header-bottom-position-desktop, 20rem) - 4rem);
-}
-
-.header-wrapper--border-bottom .mega-menu__content {
-  border-top: 0;
 }
 
 .js .mega-menu__content {

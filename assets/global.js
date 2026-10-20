@@ -562,11 +562,9 @@ class HeaderDrawer extends MenuDrawer {
 
   openMenuDrawer(summaryElement) {
     this.header = this.header || document.querySelector('.section-header');
-    this.borderOffset =
-      this.borderOffset || this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
     document.documentElement.style.setProperty(
       '--header-bottom-position',
-      `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+      `${parseInt(this.header.getBoundingClientRect().bottom)}px`
     );
     this.header.classList.add('menu-open');
 
@@ -577,21 +575,71 @@ class HeaderDrawer extends MenuDrawer {
     summaryElement.setAttribute('aria-expanded', true);
     window.addEventListener('resize', this.onResize);
     trapFocus(this.mainDetailsToggle, summaryElement);
+    // After the native toggle has opened the panel, so its controls are measurable
+    setTimeout(() => this.trapShownFocus());
     document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
   }
 
   closeMenuDrawer(event, elementToFocus) {
     if (!elementToFocus) return;
+    this.releaseShownFocus();
     super.closeMenuDrawer(event, elementToFocus);
     this.header.classList.remove('menu-open');
     window.removeEventListener('resize', this.onResize);
   }
 
+  // The shared trapFocus counts every control in the drawer, including the utility links the header
+  // hides on mobile, so a hidden one was its last stop and Tab never wrapped. Tab wraps between the
+  // first and last control actually shown instead, measured on every Tab: the drawer can stay open
+  // while a resize shows or hides its utility links (desktop drawer menu), and an open submenu is a
+  // loop of its own.
+  trapShownFocus() {
+    if (!this.mainDetailsToggle.hasAttribute('open')) return;
+    this.releaseShownFocus();
+    this.onShownFocusKeydown = (event) => {
+      if (event.key !== 'Tab') return;
+      // Only submenus still opening or open: one being closed keeps [open] through its 400ms
+      // animation (closeAnimation) after focus has already returned to its parent
+      const submenus = this.mainDetailsToggle.querySelectorAll(':scope details[open].menu-opening > summary + *');
+      const scope = submenus.length ? submenus[submenus.length - 1] : this.mainDetailsToggle;
+      const shown = getFocusableElements(scope).filter(
+        (element) => element.getClientRects().length && getComputedStyle(element).visibility !== 'hidden'
+      );
+      if (!shown.length) return;
+      const first = shown[0];
+      const last = shown[shown.length - 1];
+      const wrapTo = event.shiftKey ? event.target === first && last : event.target === last && first;
+      if (!wrapTo) return;
+      event.preventDefault();
+      // Before the shared trap's document listener, which would send focus to the hidden control
+      event.stopPropagation();
+      wrapTo.focus();
+    };
+    this.mainDetailsToggle.addEventListener('keydown', this.onShownFocusKeydown, true);
+  }
+
+  releaseShownFocus() {
+    if (!this.onShownFocusKeydown) return;
+    this.mainDetailsToggle.removeEventListener('keydown', this.onShownFocusKeydown, true);
+    this.onShownFocusKeydown = null;
+  }
+
   onResize = () => {
+    // Past the drawer's breakpoint the drawer is no longer shown: close it completely; focus inside it
+    // moves to the logo rather than the hidden menu button
+    if (this.mainDetailsToggle.hasAttribute('open') && !this.getClientRects().length) {
+      const summary = this.mainDetailsToggle.querySelector('summary');
+      const focusTarget = this.contains(document.activeElement)
+        ? this.header.querySelector('.header__heading-link')
+        : document.activeElement;
+      this.closeMenuDrawer(new Event('resize'), focusTarget || document.body);
+      summary.setAttribute('aria-expanded', false);
+      return;
+    }
     this.header &&
       document.documentElement.style.setProperty(
         '--header-bottom-position',
-        `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+        `${parseInt(this.header.getBoundingClientRect().bottom)}px`
       );
     document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
   };
