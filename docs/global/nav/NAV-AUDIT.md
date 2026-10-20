@@ -16,6 +16,8 @@ The phase 1 audit of the brief (D-12 options, drawer, desktop menus, Coming soon
 | NV-08 | Mobile bar offset | 4px below the announcement bar (Figma 2766:10918) | 12px | Victor, 20 Oct | `de58e27` |
 | NV-09 | Stuck offset off the PDP | Sticky at the bar's own margin (12px mobile, 24px desktop) | 16px from the top edge after scrolling, every page but the PDP | Victor, 20 Oct | `60c91b6` |
 | NV-10 | Floating navigation | Header section in the page flow, sticky, painting a full-width band (`section_bg_color_*`, `product_section_bg_color_*`) | Fixed and transparent; only the compact bar paints and takes clicks; it starts at the announcement bar's bottom and floors at NV-09 (16px) or 0 on the PDP; the first `#MainContent` section owns its background under the bar and gets the measured bar height as top padding. One controller (`assets/kc-navigation.js`) replaces Dawn's StickyHeader and the inline PDP script with the same NV-01 thresholds. Band settings, `show_line_separator`, `margin_bottom`, `product-header-css` and `transparent-header` removed; `sticky_header_type` none → always. | Victor, 20 Oct (draft by the R10 review session, adapted) | `b0c9fd2` |
+| NV-11 | Desktop bar offset | `padding_top` + 16px (24px) under the announcement bar | 12px, as mobile | Victor, 20 Oct (R12 M1) | `a2c13e5` |
+| NV-12 | Astra R12-NAV F1–F6 | See REPORT.md | Pre-script geometry exact; no-announcement position; mega-menu cap; mobile menu Tab wrap; drawer closes past its breakpoint; fragment targets below the bar | Astra R12-NAV | `854348b` `70364f6` `310bf26` `63b03d7` `11a6237` |
 
 ## Still to audit (brief phase 1)
 
