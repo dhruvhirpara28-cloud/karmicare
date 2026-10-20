@@ -9,7 +9,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 225 | `a09219ae1af8e24bd4fbcc86ce50223656adb586` |
-| `batch-02-pdp` | 477 | `84f4fbeae770f3b98006117080d29f4b0e6f28a2` |
+| `batch-02-pdp` | 477 | `666785abd03e91b643e766a266ce800fe0df07b8` |
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
@@ -149,7 +149,7 @@ Not changed, because no text setting in the allowed files carries it:
 | 02 | `sections/main-product.liquid:1018` | Begin your 60-Day Rhythm | sticky bar: schema default of sticky_cart setting 'cta_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate… |
 | 02 | `sections/main-product.liquid:1024` | Begin the Karmicare Year | sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
 | 02 | `sections/main-product.liquid:1030` | Try once | sticky bar: schema default of sticky_cart setting 'cta_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
-| 02 | `sections/main-product.liquid:1036` | Free delivery · within 24 hours in Benelux | sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
+| 02 | `sections/main-product.liquid:1036` | Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe | sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
 | 02 | `sections/main-product.liquid:1042` | Shipping calculated at checkout | sticky bar: schema default of sticky_cart setting 'delivery_once'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
 | 02 | `sections/main-product.liquid:1049` | Welcome Kit: two toothbrushes + floss | sticky bar: schema default of sticky_cart setting 'kit'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adap… |
 | 02 | `sections/main-product.liquid:1055` | 60-day money-back guarantee | sticky bar: schema default of sticky_cart setting 'guarantee_member'. The PDP template stores only button_text, so this default renders and is invisible to Tra… |
@@ -717,7 +717,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 188 | `liquid:sections/main-product.liquid:1018` | theme_locale | Begin your 60-Day Rhythm | needs-key |  |
 | 189 | `liquid:sections/main-product.liquid:1024` | theme_locale | Begin the Karmicare Year | needs-key |  |
 | 190 | `liquid:sections/main-product.liquid:1030` | theme_locale | Try once | needs-key |  |
-| 191 | `liquid:sections/main-product.liquid:1036` | theme_locale | Free delivery · within 24 hours in Benelux | needs-key |  |
+| 191 | `liquid:sections/main-product.liquid:1036` | theme_locale | Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe | needs-key |  |
 | 192 | `liquid:sections/main-product.liquid:1042` | theme_locale | Shipping calculated at checkout | needs-key |  |
 | 193 | `liquid:sections/main-product.liquid:1049` | theme_locale | Welcome Kit: two toothbrushes + floss | needs-key |  |
 | 194 | `liquid:sections/main-product.liquid:1055` | theme_locale | 60-day money-back guarantee | needs-key |  |

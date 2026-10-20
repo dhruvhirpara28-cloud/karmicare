@@ -19,7 +19,7 @@ Dutch for every page of the live store, translated from the approved EN inventor
 - The R2 claim aggregate is corrected.
 - `validate.py` gains the W1 commodity-word check.
 
-**Delivery times (20 Oct, Victor).** Benelux is now *binnen 24 uur* and the rest of the EU *2–3 werkdagen*, in seven entries: the PDP sticky line, the delivery sections of consumer rights and the terms, and the policies terms-of-service `#b104`, shipping-policy `#b006`, refund-policy `#b080`/`#b081`. Statuses are unchanged.
+**Delivery times (20 Oct, Victor).** Benelux is now *binnen 24 uur* and the rest of the EU *2–3 werkdagen*, in six entries: the delivery sections of consumer rights and the terms, and the policies terms-of-service `#b104`, shipping-policy `#b006`, refund-policy `#b080`/`#b081`. The PDP sticky line mirrors the nav child's locale value: *Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa*. Statuses are unchanged.
 
 Counts below are current.
 
@@ -98,7 +98,7 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `84f4fbeae770` | 122 | 230 | 36 | 0 | 41 | 15 | 33 | 27 |
+| `batch-02-pdp` | 477 | `666785abd03e` | 122 | 230 | 36 | 0 | 41 | 15 | 33 | 27 |
 | `batch-01-homepage` | 225 | `a09219ae1af8` | 140 | 2 | 30 | 0 | 30 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
