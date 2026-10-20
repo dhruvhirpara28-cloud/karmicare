@@ -45,6 +45,10 @@
 
     assign button_text = comparison.table_button_text.value
     assign button_url = comparison.table_button_url.value
+    # No link in the metaobject ('#' or empty): the button goes to the buybox plan cards, not the page top
+    if button_url == blank or button_url == '#'
+      assign button_url = '#loop-selling-plan-fieldset'
+    endif
 
     assign table_headers = table_title | split: '|'
   %}
