@@ -230,7 +230,7 @@ These stay held:
 - **The two `[NEEDS APPROVED COPY]` placeholders on the homepage FAQ:** there is no EN text to translate.
 - **"Rendering loop-subscriptions":** the theme tests for this exact text.
 - **SLS article `b035`:** the source has it `blocked` because it names four competitors, a brand rule rather than a claim. It can be released only if the source owner unblocks it.
-- **The 350 legacy legal entries:** they wait on the landing desk's answer, since F5 redirects those pages.
+- **The 350 legacy legal entries:** the landing desk confirmed they stay held (20 Oct), because F5 redirects those pages to the 2.0 pages and translating outdated legal text would mislead. Each entry's note now gives that reason.
 
 ## Counts
 
