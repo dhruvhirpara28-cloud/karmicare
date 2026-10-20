@@ -35,8 +35,12 @@
  *   (€118 x 3 = €354): a year price, never a per-Duo price.
  * - Allowlist: the groups without a public plan stay hidden and unselectable in every Loop widget and
  *   the sticky bar; a non-public plan selected in the buybox is replaced by the first public one.
- * - Compare plan buttons (sections/product-compare-plans.liquid) carry data-kc-plan-choose: "plan"
- *   (with data-selling-plan-id, data-selling-plan-group-id) or "once".
+ * - KCPlanSelect.buy(productId, planId, title, groupId, button): that public plan straight to checkout,
+ *   through karmiAddToCart as a fixed offer with the buybox form; a plan the page cannot sell is chosen
+ *   in the buybox instead.
+ * - Comparison table buttons (sections/product-compare-plans.liquid, sections/comparison-table.liquid)
+ *   carry data-kc-plan-choose: "plan" (with data-selling-plan-id, data-selling-plan-group-id: buy) or
+ *   "once" (tryOnce).
  */
 (function () {
   'use strict';
@@ -483,6 +487,46 @@
     return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true })).then(
       () => true
     );
+  }
+
+  // A comparison table plan button buys its plan straight to checkout (Victor, 20 Oct): the buybox
+  // form's variant on that plan, through karmiAddToCart as a fixed offer (like the end CTA), so the add
+  // is the buybox's own: Duos per delivery, Welcome Kit nested under the plan line, "Subscription Name",
+  // one purchase choice. A plan this page cannot sell buys nothing: it is selected in the buybox instead.
+  function buy(productId, planId, title, groupId, button) {
+    readConfigs();
+    const label = '"' + (title || 'plan') + '"';
+    const id = String(planId == null ? '' : planId).trim();
+    const product = products[String(productId)];
+    const widget = product && buyboxOf(product);
+    const form = widget && formOf(widget);
+    const plan = product && /^\d+$/.test(id) ? product.plans[id] : null;
+    let problem = '';
+    if (!form) {
+      problem = 'no buybox form for product ' + productId;
+    } else if (typeof window.karmiAddToCart !== 'function') {
+      problem = 'karmiAddToCart is not loaded';
+    } else if (!plan) {
+      problem = '"' + id + '" is not a selling plan ID of this product';
+    } else if (enforced(product) && !plan.public) {
+      problem = 'selling plan ' + id + ' (' + plan.groupName + ') is not public';
+    } else if (groupId && groupId !== plan.groupId) {
+      problem = 'selling plan ' + id + ' belongs to group ' + plan.groupId + ', not ' + groupId;
+    } else if (allocated(product, currentVariantId(product, widget, containerOf(widget)), id) === false) {
+      problem = 'selling plan ' + id + ' (' + plan.groupName + ') is not offered for the selected variant';
+    }
+    if (problem) {
+      warn(label + ': ' + problem + '; nothing bought, choosing it in the buybox instead');
+      return choose(productId, id, title, groupId);
+    }
+    const kit = kitLines(productId);
+    return Promise.resolve(
+      window.karmiAddToCart(form, button || null, {
+        sellingPlanId: id,
+        isBundleProduct: kit.length > 0,
+        welcomeKitVariantIds: kit.map((line) => String(line.id)),
+      })
+    ).then(() => true);
   }
 
   function productOfPlan(id) {
@@ -1230,16 +1274,110 @@
   document.addEventListener('pointerdown', markPlanControl, true);
   document.addEventListener('keydown', markPlanControl, true);
 
+  // Comparison table buttons on their way to checkout (R14): aria-busy and a loading status while the
+  // attempt runs, a cart error shown at the table (its data-kc-plan-feedback), and the buttons usable
+  // again when Back restores the page from the bfcache. The cart and the redirect stay karmiAddToCart's.
+  const busyButtons = new Set();
+
+  function feedbackOf(button) {
+    const scope = button.closest('[data-kc-plan-feedback-scope]');
+    return scope ? scope.querySelector('[data-kc-plan-feedback]') : null;
+  }
+
+  function release(button) {
+    busyButtons.delete(button);
+    button.removeAttribute('aria-busy');
+    const feedback = feedbackOf(button);
+    const status = feedback && feedback.querySelector('[data-kc-plan-status]');
+    if (status) status.textContent = '';
+  }
+
+  // The error line karmiAddToCart writes for this product's form (the buybox's): hidden at the start of
+  // every attempt, shown only when the cart rejected it
+  function cartErrorOf(productId) {
+    readConfigs();
+    const product = products[String(productId)];
+    const widget = product && buyboxOf(product);
+    const form =
+      (widget && formOf(widget)) ||
+      document.querySelector('form[data-loop-product-id="' + String(productId).replace(/\D/g, '') + '"]');
+    if (!form) return null;
+    return (form.closest('product-form') || document).querySelector('.product-form__error-message-wrapper');
+  }
+
+  function attempt(button, run) {
+    const feedback = feedbackOf(button);
+    const error = feedback && feedback.querySelector('[data-kc-plan-error]');
+    const errorText = error && error.querySelector('[data-kc-plan-error-text]');
+    const status = feedback && feedback.querySelector('[data-kc-plan-status]');
+    if (error) error.hidden = true;
+    if (errorText) errorText.textContent = '';
+    busyButtons.add(button);
+    button.setAttribute('aria-busy', 'true');
+    if (status) status.textContent = status.dataset.loadingText || '';
+    // One announcement of a failure (R14c): during a table attempt the buybox error line is not live; its
+    // message is shown and announced at the table only, and the line is hidden again
+    const cartError = cartErrorOf(button.dataset.kcPlanProduct);
+    const cartErrorRole = cartError ? cartError.getAttribute('role') : null;
+    if (cartError) cartError.removeAttribute('role');
+    const done = () => {
+      const failed = Boolean(cartError && !cartError.hidden);
+      const message = failed ? cartError.querySelector('.product-form__error-message') : null;
+      if (cartError) {
+        if (failed && error && errorText) cartError.hidden = true;
+        if (cartErrorRole) cartError.setAttribute('role', cartErrorRole);
+      }
+      // karmiAddToCart leaves the button disabled only while the page goes to checkout
+      if (button.disabled) return;
+      release(button);
+      if (!failed || !error || !errorText) return;
+      errorText.textContent = message ? message.textContent : '';
+      if (errorText.textContent) error.hidden = false;
+    };
+    // run() starts in this turn (karmiAddToCart disables the button at once)
+    return new Promise((resolve) => resolve(run()))
+      .then(done, (err) => {
+        done();
+        warn('"' + (button.dataset.kcPlanTitle || 'plan') + '": ' + (err && err.message ? err.message : err));
+      });
+  }
+
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    busyButtons.forEach((button) => {
+      button.disabled = false;
+      button.removeAttribute('disabled');
+      button.removeAttribute('aria-disabled');
+      button.classList.remove('loading');
+      const spinner = button.querySelector('.loading__spinner');
+      if (spinner) spinner.classList.add('hidden');
+      release(button);
+    });
+  });
+
   document.addEventListener('click', (event) => {
     const button = event.target.closest && event.target.closest('[data-kc-plan-choose]');
     if (!button) return;
     event.preventDefault();
     const productId = button.dataset.kcPlanProduct;
-    if (button.dataset.kcPlanChoose === 'once') {
-      tryOnce(productId, button);
+    // Outside the comparison tables (the sticky bar's Try Once) as before: no busy state, no table feedback
+    if (!button.closest('[data-kc-plan-feedback-scope]')) {
+      if (button.dataset.kcPlanChoose === 'once') {
+        tryOnce(productId, button);
+        return;
+      }
+      choose(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId);
       return;
     }
-    choose(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId);
+    // A click on a button already on its way to checkout does nothing (karmiAddToCart disables it)
+    if (button.disabled || button.classList.contains('loading') || busyButtons.has(button)) return;
+    if (button.dataset.kcPlanChoose === 'once') {
+      attempt(button, () => tryOnce(productId, button));
+      return;
+    }
+    attempt(button, () =>
+      buy(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId, button)
+    );
   });
 
   // Theme editor: a section added, replaced or removed brings its own config; re-read and re-apply
@@ -1254,6 +1392,7 @@
   window.KCPlanSelect = {
     choose: choose,
     tryOnce: tryOnce,
+    buy: buy,
     subscriptionName: subscriptionName,
     syncCartSubscriptionName: syncCartSubscriptionName,
     replaceChoice: replaceChoice,
