@@ -47,6 +47,20 @@
     margin-bottom: {{ section.settings.margin_bottom }}px;
   }
 
+  /* Every page but the PDP (which hides the bar on scroll, see HIDE ON SCROLL): once the page scrolls,
+     the bar sticks 16px from the top edge (Victor, 20 Oct). The section sticks at 16px minus the bar's
+     own top margin (below: desktop the padding_top setting + 1.6rem, mobile 1.2rem). */
+  {%- unless template.name == 'product' or request.page_type == 'product' -%}
+    #shopify-section-{{ section.id }} {
+      top: calc(1.6rem - ({{ section.settings.padding_top }}px + 1.6rem));
+    }
+    @media screen and (max-width: 989px) {
+      #shopify-section-{{ section.id }} {
+        top: calc(1.6rem - 1.2rem);
+      }
+    }
+  {%- endunless -%}
+
   #shopify-section-{{ section.id }} .header {
     border-radius: var(--kc-shape-radius-sm);
     box-shadow: var(--kc-elevation-md);
