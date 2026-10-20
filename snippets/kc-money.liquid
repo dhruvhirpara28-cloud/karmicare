@@ -1,0 +1,55 @@
+{%- comment -%}
+  An amount in euros as the visitor's language writes it (Victor, D3, 20 Oct): EN €0.49, NL € 0,49
+  (a no-break space after the €), FR 0,49 € (a no-break space before the €), as the buybox writes
+  them. Shopify's money filters follow the shop money format
+  (amount_with_comma_separator) in every language, so the product page writes its computed amounts
+  through this snippet. The same rule in JavaScript: money() in snippets/sticky-cart-block.liquid. The
+  buybox amounts come from assets/loop-widget.js (Intl.NumberFormat by locale). Another currency than
+  the euro keeps the shop money format.
+
+  Accepts:
+  - cents: {Number} the amount in cents
+  - trim: {Boolean} whole amounts without ".00" / ",00" (default false)
+
+  Usage: render 'kc-money', cents: 590 -> €5.90, € 5,90 or 5,90 €;
+  render 'kc-money', cents: 5900, trim: true -> €59, € 59 or 59 €
+{%- endcomment -%}
+{%- liquid
+  assign kc_cents = cents | default: 0 | round
+  if cart.currency.iso_code != 'EUR'
+    if trim
+      echo kc_cents | money_without_trailing_zeros
+    else
+      echo kc_cents | money
+    endif
+  else
+    assign kc_lang = request.locale.iso_code | split: '-' | first
+    assign kc_decimal = '.'
+    assign kc_group = ','
+    if kc_lang == 'nl'
+      assign kc_decimal = ','
+      assign kc_group = '.'
+    elsif kc_lang == 'fr'
+      assign kc_decimal = ','
+      assign kc_group = '&nbsp;'
+    endif
+    assign kc_whole = kc_cents | divided_by: 100
+    assign kc_fraction = kc_cents | modulo: 100 | prepend: '0' | slice: -2, 2
+    assign kc_amount = kc_whole | append: ''
+    if kc_whole >= 1000
+      assign kc_thousands = kc_whole | divided_by: 1000
+      assign kc_rest = kc_whole | modulo: 1000 | prepend: '00' | slice: -3, 3
+      assign kc_amount = kc_thousands | append: kc_group | append: kc_rest
+    endif
+    unless trim and kc_fraction == '00'
+      assign kc_amount = kc_amount | append: kc_decimal | append: kc_fraction
+    endunless
+    if kc_lang == 'fr'
+      echo kc_amount | append: '&nbsp;€'
+    elsif kc_lang == 'nl'
+      echo kc_amount | prepend: '€&nbsp;'
+    else
+      echo kc_amount | prepend: '€'
+    endif
+  endif
+-%}

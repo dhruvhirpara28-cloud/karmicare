@@ -1,0 +1,265 @@
+{
+ "about": "kc.receipt.* keys from karmicare/soft-launch-pdp (c7819e1), in the entry format of docs/localization/theme-keys.json. When locales/*.json conflict on merge: take the integration side, append these entries to theme-keys.json \"keys\", run python3 docs/localization/theme_keys.py write. The ids are the baseline (3bae259) lines that held the English; they are not in the B1a inventory yet.",
+ "keys": [
+  {
+   "key": "kc.receipt.billed_day",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every day",
+   "nl": "Elke dag gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé chaque jour",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_days",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every [count] days",
+   "nl": "Elke [count] dagen gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé tous les [count] jours",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_month",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every month",
+   "nl": "Elke maand gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé chaque mois",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_months",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every [count] months",
+   "nl": "Elke [count] maanden gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé tous les [count] mois",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_week",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every week",
+   "nl": "Elke week gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé chaque semaine",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_weeks",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every [count] weeks",
+   "nl": "Elke [count] weken gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé toutes les [count] semaines",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_year",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed yearly",
+   "nl": "Jaarlijks gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé chaque année",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.billed_years",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2648",
+    "liquid:assets/loop-widget.js:2650",
+    "liquid:assets/loop-widget.js:2652"
+   ],
+   "en": "Billed every [count] years",
+   "nl": "Elke [count] jaar gefactureerd",
+   "nl_hold": null,
+   "fr": "Facturé tous les [count] ans",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.one_time",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2666"
+   ],
+   "en": "one-time",
+   "nl": "eenmalig",
+   "nl_hold": null,
+   "fr": "en une fois",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.one_time_note",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2669"
+   ],
+   "en": "[price] per brushing · no Care Credit",
+   "nl": "[price] per poetsbeurt · geen Care Credit",
+   "nl_hold": null,
+   "fr": "[price] par brossage · sans Care Credit",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_day",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619"
+   ],
+   "en": "/ day",
+   "nl": "/ dag",
+   "nl_hold": null,
+   "fr": "/ jour",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_days",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619",
+    "liquid:sections/featured-product.liquid:575"
+   ],
+   "en": "/ [count] days",
+   "nl": "/ [count] dagen",
+   "nl_hold": null,
+   "fr": "/ [count] jours",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_month",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619"
+   ],
+   "en": "/ month",
+   "nl": "/ maand",
+   "nl_hold": null,
+   "fr": "/ mois",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_months",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619"
+   ],
+   "en": "/ [count] months",
+   "nl": "/ [count] maanden",
+   "nl_hold": null,
+   "fr": "/ [count] mois",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_week",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619"
+   ],
+   "en": "/ week",
+   "nl": "/ week",
+   "nl_hold": null,
+   "fr": "/ semaine",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_weeks",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619"
+   ],
+   "en": "/ [count] weeks",
+   "nl": "/ [count] weken",
+   "nl_hold": null,
+   "fr": "/ [count] semaines",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_year",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619",
+    "liquid:sections/featured-product.liquid:577"
+   ],
+   "en": "/ year",
+   "nl": "/ jaar",
+   "nl_hold": null,
+   "fr": "/ an",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  },
+  {
+   "key": "kc.receipt.per_years",
+   "area": "receipt",
+   "ids": [
+    "liquid:assets/loop-widget.js:2617",
+    "liquid:assets/loop-widget.js:2619"
+   ],
+   "en": "/ [count] years",
+   "nl": "/ [count] jaar",
+   "nl_hold": null,
+   "fr": "/ [count] ans",
+   "fr_hold": null,
+   "note": "New 20 Oct (PDP lane, Victor: translate the receipt texts). Data attribute on .kc-pricing-summary via snippets/kc-receipt-labels.liquid; [count] and [price] are filled by assets/loop-widget.js. NL/FR to be confirmed by the NL and FR reviewers."
+  }
+ ]
+}

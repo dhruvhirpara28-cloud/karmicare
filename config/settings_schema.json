@@ -12,7 +12,8 @@
     "settings": [
       {
         "type": "header",
-        "content": "Primary Button (Day Colors)"
+        "content": "Primary Button (Day Colors)",
+        "info": "Only the header BEGIN NOW. Other primary buttons use --kc-mapped-surface-primary-default."
       },
       {
         "type": "color",
@@ -54,18 +55,9 @@
       },
       {
         "type": "color",
-        "id": "button_secondary_background_color_day",
-        "label": "Secondary Button Background Color"
-      },
-      {
-        "type": "color",
         "id": "button_secondary_text_color_day",
-        "label": "Secondary Button Text Color"
-      },
-      {
-        "type": "color",
-        "id": "button_secondary_border_color_day",
-        "label": "Secondary Button Border Color"
+        "label": "Secondary Button Text Color",
+        "info": "Secondary buttons have no fill and use the KC control border in both modes."
       },
       {
         "type": "header",
@@ -73,18 +65,8 @@
       },
       {
         "type": "color",
-        "id": "button_secondary_background_color_night",
-        "label": "Secondary Button Background Color"
-      },
-      {
-        "type": "color",
         "id": "button_secondary_text_color_night",
         "label": "Secondary Button Text Color"
-      },
-      {
-        "type": "color",
-        "id": "button_secondary_border_color_night",
-        "label": "Secondary Button Border Color"
       }
     ]
   },
@@ -525,6 +507,24 @@
         "default": 18,
         "unit": "px",
         "label": "XL Size (Desktop)"
+      },
+      {
+        "type": "header",
+        "content": "Fluid type"
+      },
+      {
+        "type": "checkbox",
+        "id": "kc_fluid_type",
+        "label": "Fluid type (preview)",
+        "default": false,
+        "info": "Preview only, decision D8 open. Type and spacing scale smoothly from 393 to 1440 px instead of switching at 750 px. The font sizes above still set the mobile and desktop values."
+      },
+      {
+        "type": "checkbox",
+        "id": "kc_fluid_type_wide",
+        "label": "Fluid type: wide screens (preview)",
+        "default": false,
+        "info": "Needs Fluid type on. Text and section spacing keep growing from 1440 to 1920 px. A proposal, not in Figma."
       },
       {
         "type": "header",
