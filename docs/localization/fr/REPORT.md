@@ -200,21 +200,31 @@ Victor decided on delivery within 24 hours in the Benelux and in 2–3 working d
 
 The six legal entries keep `legal-review`. The legacy T&C entry ("8-14 working days") stays held. New digests: batch 02 `666785ab…`, batch 04 `98fda694…`.
 
+## Retired Duo-name entries (Astra R12, 20 Oct)
+
+PDP `50ad819` removed the settings `subscription_title` and `package_name`; the Duo's name is now the Shopify product title (Victor). Source-copy `6643e16` keeps the three entries with their ids and digests but marks them `retired`, and FR holds them with that reason:
+
+- `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title` (was translated)
+- `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` (was translated)
+- `liquid:sections/main-product.liquid:1098`, the `package_name` default (was `theme-key`)
+
+All three read « Système de soin matin/soir Awake & Asleep ». The naming source is `admin:karmicare-biorhythmic-oral-care-system:title`, already in FR as « Système de dentifrice matin et soir Awake & Asleep ». `check.py` now treats `retired` as a required hold, and its self-test has a 17th mutation for it. The next `build_payloads.py` run drops the two `subscription_title` items from `plan-fr.json`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `666785ab…` | 477 | 141 | 250 | 36 | 15 | 35 |
-| `batch-01-homepage` | `a09219ae…` | 225 | 169 | 2 | 30 | 2 | 22 |
+| `batch-02-pdp` | `666785ab…` | 477 | 140 | 250 | 35 | 15 | 37 |
+| `batch-01-homepage` | `a09219ae…` | 225 | 168 | 2 | 30 | 2 | 23 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,571** | **479** | **1,417** | **76** | **62** | **537** |
+| **Total** | | **2,571** | **477** | **1,417** | **75** | **62** | **540** |
 
-Every source entry is covered: 2,034 carry FR and 537 are held (after the source-copy R6 merge, a0dee86, and decision F4). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,031 carry FR and 540 are held (after the source-copy R6 merge, a0dee86, decision F4 and the three retired entries, 6643e16). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -229,7 +239,7 @@ Every source entry is covered: 2,034 carry FR and 537 are held (after the source
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (537)
+### Held (540)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
@@ -242,12 +252,13 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 | 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
 | 06 | unsupported claim | 2 | "NASA's favorite supplement for oral health" (`/pages/nhap-technology`) |
 | 02 | source defect | 1 | Treatment journey `#29` stops mid-phrase |
+| 01–02 | retired | 3 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 16/16 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 17/17 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;
@@ -419,8 +430,8 @@ The B1a defects (€0.42, the Welcome Kit row, legacy plan names, "dosep", the t
 
 ## Integration notes (for the localization worker)
 
-- **`theme-key` (76)**:
-  - The 26 sticky-bar defaults in `main-product.liquid` need the PDP owner to store them or make them keys.
+- **`theme-key` (75)**:
+  - The 25 sticky-bar defaults (the retired `package_name` default `:1098` is held) in `main-product.liquid` need the PDP owner to store them or make them keys.
   - The 8 Loop strings are in off-limits files, so the Loop owner integrates them.
 - **`locale-present` (62)**: nothing to do; `locales/fr.json` already has them.
 - **`admin` (1,416)**:
@@ -483,7 +494,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 - **Localization worker**: the integration notes above. After R2, refresh from this branch's tip: no `theme-key` value changed since `c7aed28`, but 13 template-setting values did (the footer compliance line and 12 legal template sections, addresses back to the EN form) and the nHAp page heading `b000` is new (Admin). After R6, only 3 Admin article bodies changed (batch 07) and 29 entries gained `pending-claim-review`; no `theme-key` or template-setting value changed.
 - **Loop owner**: 8 Loop strings in batch 01 (`theme-key`).
 - **EN owner (R2, R6)**: compliant copy for the SLS competitor block `b035`; the "Why You Need It" headings; the morning-brush "2 to 4 applications" dose; "organic biomaterial"; "Bestselling" (headaches `#b019`, top-whitening `#b051`); the two sleep/wake description lines; the 29 wellness blocks R6-01 gated. FR follows by digest.
-- **Source owner (Astra R12, 20 Oct)**: retire the two `subscription_title` entries (`index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title`, `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title`) from `en-source.json` and the EN batches 01/02. PDP commit `50ad819` removed those settings; the Duo's name now comes from the product title. FR mirrors the source ids, and `check.py` fails on an id mismatch, so FR drops its two entries in the same step. The naming source is already in FR: `admin:karmicare-biorhythmic-oral-care-system:title`, « Système de dentifrice matin et soir Awake & Asleep » (`admin`). FR has no `package_name` entry.
+- **Source owner (Astra R12)**: rebuild `plan-fr.json` with `build_payloads.py` from this branch's tip, so the two retired `subscription_title` items leave the FR plan (section "Retired Duo-name entries").
 - **Source owner**: rebuild the offline registration plan (`docs/localization/registration/plan-fr.json`) from this branch's new tip. FR did not edit or rebuild it, and since `037706c` only `fr/batch-07-collections-blog.json` (3 values, 29 gates) and `fr/check.py` changed. The `#b081` source gate is in place (`a0dee86`), so that earlier handoff is closed.
 
 ## Open decisions for Victor
