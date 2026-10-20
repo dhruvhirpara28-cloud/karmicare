@@ -470,12 +470,6 @@ a.research-card__source:hover {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.research-behind-system__button:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
 }
 
 .research-behind-system__button:focus-visible {

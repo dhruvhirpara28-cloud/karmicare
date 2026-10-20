@@ -15,7 +15,7 @@
     letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
     font-size: var(--font-body-small-size-desktop);
     cursor: pointer;
-    transition: opacity .4s ease, transform .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     box-sizing: border-box;
     line-height: normal;
     text-decoration: none;
@@ -24,19 +24,11 @@
     font-family: var(--kc-font-family-Nunito);
   }
 
-  .karmicare__btn-secondary {
+  /* Secondary: no fill in either mode, the control border token (Victor, 20 Oct) */
+  .karmicare__btn-secondary,
+  body.night-mode .karmicare__btn-secondary {
     background: transparent;
-    border: 1px solid currentColor;
-  }
-
-  .karmicare__btn-primary:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-  }
-
-  .karmicare__btn-secondary:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
+    border: 1px solid var(--kc-mapped-border-control-default);
   }
 
   /* ── PRIMARY BUTTON (DAY MODE) ── */
@@ -56,20 +48,10 @@
   /* ── SECONDARY BUTTON (DAY MODE) ── */
   body.day-mode .karmicare__btn-secondary,
   body:not(.night-mode) .karmicare__btn-secondary {
-    {%- if settings.button_secondary_background_color_day != blank -%}
-      background: {{ settings.button_secondary_background_color_day }};
-    {%- endif -%}
     {%- if settings.button_secondary_text_color_day != blank -%}
       color: {{ settings.button_secondary_text_color_day }};
     {%- elsif settings.button_text_color_day != blank -%}
       color: {{ settings.button_text_color_day }};
-    {%- endif -%}
-    {%- if settings.button_secondary_border_color_day != blank -%}
-      border-color: {{ settings.button_secondary_border_color_day }};
-    {%- elsif settings.button_border_color_day != blank -%}
-      border-color: {{ settings.button_border_color_day }};
-    {%- else -%}
-      border-color: currentColor;
     {%- endif -%}
   }
 
@@ -88,20 +70,10 @@
 
   /* ── SECONDARY BUTTON (NIGHT MODE) ── */
   body.night-mode .karmicare__btn-secondary {
-    {%- if settings.button_secondary_background_color_night != blank -%}
-      background: {{ settings.button_secondary_background_color_night }};
-    {%- endif -%}
     {%- if settings.button_secondary_text_color_night != blank -%}
       color: {{ settings.button_secondary_text_color_night }};
     {%- elsif settings.button_text_color_night != blank -%}
       color: {{ settings.button_text_color_night }};
-    {%- endif -%}
-    {%- if settings.button_secondary_border_color_night != blank -%}
-      border-color: {{ settings.button_secondary_border_color_night }};
-    {%- elsif settings.button_border_color_night != blank -%}
-      border-color: {{ settings.button_border_color_night }};
-    {%- else -%}
-      border-color: currentColor;
     {%- endif -%}
   }
 
