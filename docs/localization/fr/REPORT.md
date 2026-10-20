@@ -32,6 +32,8 @@ Task `task_064a318d44e7`, Orca run `run_32dd5602b983`, branch `karmicare/soft-la
 | `71b3c5a`, `8bc3d96` | Merge of source-copy `2194ef3` (R1) and the FR that follows it |
 | `85ad0a7` | Merge of source-copy `fb46dd1` (R2 source changes, NL R2 payloads, B4 theme keys) |
 | `841e05b` … `7760231` | R2 mirror (section below) |
+| `2aeb6af` | Merge of source-copy `a0dee86` (R6 additions, NL R6 payloads, offline registration plan) |
+| `0a0a182`, `c12aed7` | R6 mirror (section below) |
 
 ### File format
 
@@ -131,7 +133,7 @@ Task `task_386825779698`, brief B3-R2, 20 Oct 2026. The NL review (R2, verdict F
 | §6 F9 harmonisation | checked | FR has one value per EN string (the build enforces it), so no identical-EN group differs. The model-form sentence is identical in terms `#b155`, refund `#b114` and consumer-rights `content_section_at3pLy`, with the EN's 4 `(*)` markers. The "unopened contract" sentence has one form in all four places. |
 | §6 F10 never-translate | checked | Every never-translate entry is held, Facebook and Instagram included (since B3). |
 | §6 H1–H7, S1, S2 | `987f6fb` | `check.py` already enforced H1–H7. It now also checks S1 (every EN postal address appears unchanged in the FR, with the NL pattern) and S2 (the `(*)` count). Two new self-test mutations prove them, and run on the `841e05b` files S1 reports the 33 spans. |
-| R6 addendum (coordinator) | `7760231` | From R6-01, source gate follows on the source branch: wellness `#b081` is `pending-claim-review`, translation kept. R6-02, one sweep of every FR body in batches 05–07: *dentifrice* appears once per page, at the first body mention. The only commodity word in ordinary copy was SLS `#b015` « produits ménagers », now « nettoyants ménagers ». Kept: the verb *produire* and *sous-produit* (nano-hydroxyapatite `#b094`, `#b101`, nootropics `#b054`, fluoride `#b049`), « produits chimiques » (a chemistry term, `#b048`) and the CPNP portal's official name (PDP FAQ `#60`). |
+| R6 addendum (coordinator) | `7760231` | From R6-01, source gate follows on the source branch: wellness `#b081` is `pending-claim-review`, translation kept. R6-02, one sweep of every FR body in batches 05–07: *dentifrice* appears once per page, at the first body mention. The only commodity word in ordinary copy was SLS `#b015` « produits ménagers », now « nettoyants ménagers ». Kept: the verb *produire* and *sous-produit* (nano-hydroxyapatite `#b094`, `#b101`, nootropics `#b054`, fluoride `#b049`), « produits chimiques » (a chemistry term, `#b048`) and the CPNP portal's official name (PDP FAQ `#60`). R6 W1 later replaced *sous-produit* and « produits chimiques » (R6 mirror). |
 
 **New totals:** 2,571 entries, 2,033 with FR, 538 held. `legal-review` 979, `pending-claim-review` 353, `fit-risk` 39, `pending-en-review` 22.
 
@@ -141,6 +143,34 @@ Task `task_386825779698`, brief B3-R2, 20 Oct 2026. The NL review (R2, verdict F
 - `python3 -I docs/source-copy/digest.py`: exit 0, all eight `ok` (batch 06: 22 entries, `3dee3b56341f67b113dcd59eb85d3a2e3f21d628`).
 - `python3 -I docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 16 warnings, 14/14 mutations caught.
 - `shopify theme check --fail-level error`: exit 0 (246 files, 21 warnings). The merge brought theme and locale files; my FR commits touch only `docs/localization/fr/`.
+
+## R6 mirror
+
+Task `task_2dcd85e98542`, brief B3-R6, 20 Oct 2026. The NL re-review R6 (`docs/runtime-review/B2-NL-R6-ASTRA.md`, pass with fixes) led to one more source change set: "R6 additions" at the end of `docs/source-copy/CHANGES-R2.md` (source-copy `a0dee86`). It reclassifies 30 entries to needs-review and changes no EN text and no digest. FR now follows it. No held entry was translated and no hold was added or released: the held set is the same 538 ids as at `037706c`.
+
+| Preflight | Result |
+|---|---|
+| `orca status --json` | runtime `ready`, `reachable: true`, connection `connected` |
+| `git status --short` / branch | clean tree on `karmicare/soft-launch-fr`, HEAD `037706c` |
+| Model / permission mode | Claude Opus 5.5 (`claude-opus-5-5`), auto mode; every Bash command sandboxed; no subagents |
+
+| R6 additions | Commit | FR result |
+|---|---|---|
+| Merge | `2aeb6af` | `karmicare/soft-launch-source-copy` at `a0dee86`, no conflicts. It brings the R6-01 source gate, the NL R6 payloads and validator W1, `docs/localization/B4-REPORT.md` and the offline registration plan in `docs/localization/registration/`. I did not edit or rebuild the plan. The merge leaves `docs/localization/fr/**` untouched. |
+| 30 reclassified | `0a0a182` | All 30 are `pending-claim-review`, with the FR text unchanged and not softened: 29 blocks of the wellness article (`seo.description` and `#b007` … `#b095`) and top-whitening `#b051` ("Bestselling"). The build reads the gate from the source `claim_status`, so each note reads "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review". |
+| `#b081` | `0a0a182` | Confirmed: `pending-claim-review` since the addendum (`7760231`). The hand-set flag in the FR build is gone, because the source gate now sets the same flag. |
+| R6-01 category words | checked | FR already uses the category word in both NL comparison entries. Wellness `#b081` reads « La formule du matin, Awake … la formule du soir, Asleep … Les deux formules » (NL *ochtendformule* / *avondformule*). Top-whitening `#b051` reads « Découvrir notre formule naturelle best-seller » (NL *meest verkochte natuurlijke formule*), and headaches `#b019` reads « notre formule sans fluor best-seller ». The assertions stay as written. |
+| R6-02 "toothpaste" | checked | Manual pass over every translated FR value outside legal text. Outside titles, SEO and alt texts, *dentifrice* appears 21 times, each at a first-contact moment: the first body mention in each of the 9 articles (mostly the opening questions), the headings of the three content pages that carry one (nHAp `#b000` included), the 4 brush bodies (one block each), the homepage FAQ question about a fluoride toothpaste, the homepage meta description, the PDP body « Deux dentifrices, un système » and the FAQ product names « Dentifrice du matin Awake (2.0) » and « Dentifrice du soir Asleep (2.0) ». None negates the category; the why-stop page heading rejects fluoride toothpaste, as its EN does. FR has followed this rule since R3 F7 (`23bf6b1`), so R6-02 changes nothing here. |
+| R6-02 compounds, R6 W1 | `c12aed7` | `check.py` now applies W1. The old banned-word warning is now an error and matches inside words too: *produit(s)* (so *sous-produit*), *tube*, *utilis-*, *emploi/employ-*, *(r)achat/(r)achet-*. It skips legal text and Dawn keys, as NL does. Four exceptions are listed with their reason: the CPNP portal name (as NL) and three uses of the verb *produire* (nano-hydroxyapatite `#b101`, nootropics `#b054`, fluoride `#b049`). It found 3 entries, now worded the way NL words them. Nano-hydroxyapatite `#b094`: « produisent des acides comme sous-produit, ce qui abîme » became « produisent au passage des acides qui abîment » (NL *daarbij*). Nano-HAp article `#b048`: « sans produits chimiques agressifs » became « sans substances chimiques agressives », as in wellness `#b081` (NL *chemicaliën*). Nano-hydroxyapatite `#b028`: « couramment employée en dentisterie » became « couramment appliquée en dentisterie » (NL *toegepast*). Two new self-test mutations prove W1. Run on the `0a0a182` files, it reports exactly these 3 entries and exits 1. |
+
+**New totals:** 2,571 entries, 2,033 with FR, 538 held. `legal-review` 979, `pending-claim-review` 382, `fit-risk` 39, `pending-en-review` 22.
+
+**Not applied:** nothing in "R6 additions". Since `037706c`, 3 FR values changed (Admin article bodies in batch 07) and 29 entries gained `pending-claim-review`. No entry was added, and no `theme-key` or template-setting value changed.
+
+**Verification:**
+- `python3 -I docs/source-copy/digest.py`: exit 0, all eight `ok` (digests unchanged by R6).
+- `python3 -I docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 16/16 mutations caught.
+- `shopify theme check --fail-level error`: exit 0 (248 files, 21 warnings) after the merge. My FR commits touch only `docs/localization/fr/`.
 
 ## Counts
 
@@ -156,12 +186,12 @@ Task `task_386825779698`, brief B3-R2, 20 Oct 2026. The NL review (R2, verdict F
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
 | **Total** | | **2,571** | **479** | **1,416** | **76** | **62** | **538** |
 
-Every source entry is covered: 2,033 carry FR and 538 are held (after the source-copy R2 merge, fb46dd1). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,033 carry FR and 538 are held (after the source-copy R6 merge, a0dee86). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 36 | 41 | 1 | 0 | 19 | 5 | 251 | 0 | 353 |
+| pending-claim-review | 36 | 41 | 1 | 0 | 19 | 5 | 280 | 0 | 382 |
 | pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
 | source-defect | 2 | 7 | 1 | 3 | 9 | 0 | 0 | 0 | 22 |
 | wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
@@ -190,7 +220,7 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 16 warnings, 14/14 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 16/16 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;
@@ -201,24 +231,22 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 - that EN and FR carry the same HTML tags, Liquid, `[tokens]`, `&nbsp;` count and runtime price spans;
 - that the selling-plan IDs are unchanged;
 - that every EN postal address appears unchanged in the FR (S1) and the `(*)` count matches (S2);
+- that ordinary copy (translated, not legal, not a Dawn key) has no commodity word, inside a word too (W1): *produit(s)*, *tube*, *utilis-*, *emploi/employ-*, *(r)achat/(r)achet-*, with 4 listed exceptions (the CPNP portal name and three uses of the verb *produire*);
 - French spacing and apostrophes.
 
-For entries that are not legal, it also flags banned words, claim verbs and *tu* forms.
+For entries that are not legal, it also warns on claim verbs and *tu* forms.
 
-**The 16 warnings, each checked by hand:**
+**The 10 warnings, each checked by hand:**
 
-- **Batches 01–02 (9):**
-  - 8 × the noun *prévention*: the EN "Prevention" in the check-up and plan tooltips and the compare table, and C33.
-  - 1 × *produits cosmétiques*: the official portal name.
-- **Batch 07 (7):**
-  - 5 × *produit* or *produits*: three forms of the verb *produire*, one *sous-produit* (by-product) and one *produits chimiques* (chemicals). The household *produits ménagers* became « nettoyants ménagers » (R6-02).
+- **Batches 01–02 (8):** the noun *prévention*: the EN "Prevention" in the check-up and plan tooltips and the compare table, and C33.
+- **Batch 07 (2):**
   - *prévenir les caries*: a statement about fluoride, not a Karmicare claim.
   - *guérison*: the EN "healing cycles", a needs-review claim kept as written.
 
 **Other checks:**
 
 - `python3 docs/source-copy/digest.py`: all eight batches `ok`.
-- `shopify theme check --fail-level error`: **exit 0**. 246 files inspected, 21 offenses, all warnings, after the R2 merge. FR commits change no theme file, and `.theme-check.yml` is untouched.
+- `shopify theme check --fail-level error`: **exit 0**. 248 files inspected, 21 offenses, all warnings, after the R6 merge. FR commits change no theme file, and `.theme-check.yml` is untouched.
 - Rendered check: none possible yet. It waits for integration by the localization worker and the preview gate.
 
 ## Conventions applied
@@ -409,7 +437,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 |---|---|
 | Astra review of the FR payloads | coordinator, after `worker_done` |
 | Legal review of 979 legal entries | Victor or a lawyer, before any FR legal page is published |
-| Claims sign-off: 353 `pending-claim-review` entries (the R2 reclassifications, C100 and R6-01 included); 119 held as unsupported (4 in 01–02, 115 in 05–07) | Victor / Clinical Research |
+| Claims sign-off: 382 `pending-claim-review` entries (the R2 and R6 reclassifications and C100 included); 119 held as unsupported (4 in 01–02, 115 in 05–07) | Victor / Clinical Research |
 | Heading 4.1 "presumption of conformity" (consumer-rights template, refund `#b065`) | legal owner approves or corrects the EN, then FR is regenerated |
 | EN wording fixes: 22 `pending-en-review` entries, plus the defects above | Victor and the Admin owner |
 | Native French read-through | Victor or a native reviewer, before publishing; customer care answers in EN and NL only (B1a decision 2) |
@@ -425,10 +453,10 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
   - Remove or rewrite the blog block that names competitors.
   - The B1a admin handoffs still stand.
 - **Homepage / PDP owners**: the SLS card badge, plus the B1a items.
-- **Localization worker**: the integration notes above. After R2, refresh from this branch's tip: no `theme-key` value changed since `c7aed28`, but 13 template-setting values did (the footer compliance line and 12 legal template sections, addresses back to the EN form) and the nHAp page heading `b000` is new (Admin).
+- **Localization worker**: the integration notes above. After R2, refresh from this branch's tip: no `theme-key` value changed since `c7aed28`, but 13 template-setting values did (the footer compliance line and 12 legal template sections, addresses back to the EN form) and the nHAp page heading `b000` is new (Admin). After R6, only 3 Admin article bodies changed (batch 07) and 29 entries gained `pending-claim-review`; no `theme-key` or template-setting value changed.
 - **Loop owner**: 8 Loop strings in batch 01 (`theme-key`).
-- **EN owner (R2)**: compliant copy for the SLS competitor block `b035`; the "Why You Need It" headings; the morning-brush "2 to 4 applications" dose; "organic biomaterial"; "Bestselling"; the two sleep/wake description lines. FR follows by digest.
-- **Source owner**: the R6-01 gate on wellness `#b081` (FR already flags it).
+- **EN owner (R2, R6)**: compliant copy for the SLS competitor block `b035`; the "Why You Need It" headings; the morning-brush "2 to 4 applications" dose; "organic biomaterial"; "Bestselling" (headaches `#b019`, top-whitening `#b051`); the two sleep/wake description lines; the 29 wellness blocks R6-01 gated. FR follows by digest.
+- **Source owner**: rebuild the offline registration plan (`docs/localization/registration/plan-fr.json`) from this branch's new tip. FR did not edit or rebuild it, and since `037706c` only `fr/batch-07-collections-blog.json` (3 values, 29 gates) and `fr/check.py` changed. The `#b081` source gate is in place (`a0dee86`), so that earlier handoff is closed.
 
 ## Open decisions for Victor
 
@@ -437,7 +465,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 2. **Does FR ship, and which parts first?**
    - The PDP, homepage, header/footer, products and system pages are ready for a native read-through.
    - The legal pages need legal review.
-   - The pre-2.0 blog is heavy with claims: 251 needs-review blocks translated, 117 held.
+   - The pre-2.0 blog is heavy with claims: 280 needs-review blocks translated, 117 held.
    - *Recommendation*: publish FR in that order, and keep the FR blog unpublished until its claims are rewritten in EN.
 3. **Gendered titles.**
    - **Practitioner titles** are written in epicene forms.
