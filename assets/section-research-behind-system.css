@@ -203,7 +203,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--card-bg, var(--kc-mapped-surface-page-secondary));
+  /* Figma surface/primary/default, via surface/page (the surface-primary token is held for the
+     Loop widget); the same card surface as the FAQ */
+  background-color: var(--card-bg, var(--kc-mapped-surface-page));
   border-radius: var(--kc-shape-radius-lg);
   overflow: hidden;
   color: var(--kc-mapped-text-default-heading);

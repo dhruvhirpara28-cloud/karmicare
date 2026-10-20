@@ -71,9 +71,16 @@
         max-width: 680px;
         margin: 0 auto;
         padding:24px;
+        /* Figma surface/primary/default: surface/page carries its Day/Night values (the
+           surface-primary token is held for the Loop widget) */
+        background-color: var(--kc-mapped-surface-page);
     }
+    {%- if section.settings.card_bg_color_day != blank %}
     body.day-mode .section-{{- section.id }} details.km-faq__item { background-color: {{ section.settings.card_bg_color_day }}; }
+    {%- endif %}
+    {%- if section.settings.card_bg_color_night != blank %}
     body.night-mode .section-{{ section.id }} details.km-faq__item { background-color: {{ section.settings.card_bg_color_night }}; }
+    {%- endif %}
 
   details.km-faq__item{ margin-top: 16px; }
 
@@ -354,7 +361,7 @@
       "type": "color",
       "id": "card_bg_color_day",
       "label": "Card Background Color (Day)",
-      "default": "#ffffff"
+      "info": "Leave empty for the KC surface/primary token (#FFFBF6)."
     },
     {
       "type": "header",
@@ -364,7 +371,7 @@
       "type": "color",
       "id": "card_bg_color_night",
       "label": "Card Background Color (Night)",
-      "default": "#191f38"
+      "info": "Leave empty for the KC surface/primary token (#191F38)."
     }
   ],
   "blocks": [
