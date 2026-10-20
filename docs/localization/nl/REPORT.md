@@ -21,6 +21,16 @@ Dutch for every page of the live store, translated from the approved EN inventor
 
 **Delivery times (20 Oct, Victor).** Benelux is now *binnen 24 uur* and the rest of the EU *2–3 werkdagen*, in six entries: the delivery sections of consumer rights and the terms, and the policies terms-of-service `#b104`, shipping-policy `#b006`, refund-policy `#b080`/`#b081`. The PDP sticky line mirrors the nav child's locale value: *Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa*. Statuses are unchanged.
 
+The theme templates are changed in `6414e4c`. The three Shopify policies are Admin text, so Victor edits the live EN (Settings > Policies), and the NL below is registered with the rest of batch 04:
+
+| Policy field | EN before | EN after | NL after |
+|---|---|---|---|
+| terms-of-service `#b104`, shipping-policy `#b006` | Delivery times (estimates): Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the European Union 2–5 working days. | Delivery times (estimates): Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days. | Levertijden (schattingen): België, Nederland en Luxemburg: binnen 24 uur; rest van de Europese Unie: 2–3 werkdagen. |
+| refund-policy `#b080` | Belgium, the Netherlands and Luxembourg: 1–3 working days | Belgium, the Netherlands and Luxembourg: within 24 hours | België, Nederland en Luxemburg: binnen 24 uur |
+| refund-policy `#b081` | Rest of the European Union: 2–5 working days | Rest of the European Union: 2–3 working days | Rest van de Europese Unie: 2–3 werkdagen |
+
+The NL before was the same text with *1–3 werkdagen* and *2–5 werkdagen*. The labels in bold (*Delivery times (estimates):*, the country names) stay bold.
+
 Counts below are current.
 
 ## What is here
