@@ -1,6 +1,7 @@
 {%- comment -%}
-  An amount in euros as the visitor's language writes it (Victor, D3, 20 Oct): EN €0.49, NL €0,49,
-  FR 0,49 € (a no-break space before the €). Shopify's money filters follow the shop money format
+  An amount in euros as the visitor's language writes it (Victor, D3, 20 Oct): EN €0.49, NL € 0,49
+  (a no-break space after the €), FR 0,49 € (a no-break space before the €), as the buybox writes
+  them. Shopify's money filters follow the shop money format
   (amount_with_comma_separator) in every language, so the product page writes its computed amounts
   through this snippet. The same rule in JavaScript: money() in snippets/sticky-cart-block.liquid. The
   buybox amounts come from assets/loop-widget.js (Intl.NumberFormat by locale). Another currency than
@@ -10,8 +11,8 @@
   - cents: {Number} the amount in cents
   - trim: {Boolean} whole amounts without ".00" / ",00" (default false)
 
-  Usage: render 'kc-money', cents: 590 -> €5.90, €5,90 or 5,90 €;
-  render 'kc-money', cents: 5900, trim: true -> €59 or 59 €
+  Usage: render 'kc-money', cents: 590 -> €5.90, € 5,90 or 5,90 €;
+  render 'kc-money', cents: 5900, trim: true -> €59, € 59 or 59 €
 {%- endcomment -%}
 {%- liquid
   assign kc_cents = cents | default: 0 | round
@@ -45,6 +46,8 @@
     endunless
     if kc_lang == 'fr'
       echo kc_amount | append: '&nbsp;€'
+    elsif kc_lang == 'nl'
+      echo kc_amount | prepend: '€&nbsp;'
     else
       echo kc_amount | prepend: '€'
     endif
