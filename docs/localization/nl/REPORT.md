@@ -19,6 +19,18 @@ Dutch for every page of the live store, translated from the approved EN inventor
 - The R2 claim aggregate is corrected.
 - `validate.py` gains the W1 commodity-word check.
 
+**Delivery times (20 Oct, Victor).** Benelux is now *binnen 24 uur* and the rest of the EU *2–3 werkdagen*, in six entries: the delivery sections of consumer rights and the terms, and the policies terms-of-service `#b104`, shipping-policy `#b006`, refund-policy `#b080`/`#b081`. The PDP sticky line mirrors the nav child's locale value: *Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa*. Statuses are unchanged.
+
+The theme templates are changed in `6414e4c`. The three Shopify policies are Admin text, so Victor edits the live EN (Settings > Policies), and the NL below is registered with the rest of batch 04:
+
+| Policy field | EN before | EN after | NL after |
+|---|---|---|---|
+| terms-of-service `#b104`, shipping-policy `#b006` | Delivery times (estimates): Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the European Union 2–5 working days. | Delivery times (estimates): Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days. | Levertijden (schattingen): België, Nederland en Luxemburg: binnen 24 uur; rest van de Europese Unie: 2–3 werkdagen. |
+| refund-policy `#b080` | Belgium, the Netherlands and Luxembourg: 1–3 working days | Belgium, the Netherlands and Luxembourg: within 24 hours | België, Nederland en Luxemburg: binnen 24 uur |
+| refund-policy `#b081` | Rest of the European Union: 2–5 working days | Rest of the European Union: 2–3 working days | Rest van de Europese Unie: 2–3 werkdagen |
+
+The NL before was the same text with *1–3 werkdagen* and *2–5 werkdagen*. The labels in bold (*Delivery times (estimates):*, the country names) stay bold.
+
 Counts below are current.
 
 ## What is here
@@ -96,10 +108,10 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `03dd18b9d41a` | 122 | 230 | 36 | 0 | 41 | 15 | 33 | 27 |
+| `batch-02-pdp` | 477 | `666785abd03e` | 122 | 230 | 36 | 0 | 41 | 15 | 33 | 27 |
 | `batch-01-homepage` | 225 | `a09219ae1af8` | 140 | 2 | 30 | 0 | 30 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
-| `batch-04-legal` | 974 | `83fed281915f` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
+| `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 19 | 0 | 6 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 5 | 0 | 2 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 279 | 0 | 117 | 0 |

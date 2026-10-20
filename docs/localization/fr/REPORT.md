@@ -188,14 +188,26 @@ Answered on the review page `review/fr.html`: `F1=ja, F2=fr, F3=alles, F4=fondat
 
 Address forms in FR legal text (decision 7 below) was not on the review page and is still open.
 
+## Delivery times (20 Oct)
+
+Victor decided on delivery within 24 hours in the Benelux and in 2–3 working days in the rest of Europe. The NL lane changed seven EN entries in source-copy `b904fcd`, which this branch merged. `check.py` named the same seven entries as stale, and FR now follows them:
+
+| Entry | FR change |
+|---|---|
+| Consumer rights `content_section_xKcNPj`, T&C `content_section_dGmgBJ`, policies `terms-of-service#b104` and `shipping-policy#b006` | « 1 à 3 jours ouvrables » → « dans les 24 heures »; « 2 à 5 jours ouvrables » → « 2 à 3 jours ouvrables » |
+| `refund-policy#b080` / `#b081` | the same two changes, one per line |
+| PDP sticky line `main-product.liquid:1036` | « Livraison rapide offerte : 24 heures au Benelux. 2 à 3 jours dans le reste de l’Europe », the same as the nav child's `delivery_free_html` in `locales/fr.json` |
+
+The six legal entries keep `legal-review`. The legacy T&C entry ("8-14 working days") stays held. New digests: batch 02 `666785ab…`, batch 04 `98fda694…`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `03dd18b9…` | 477 | 141 | 250 | 36 | 15 | 35 |
+| `batch-02-pdp` | `666785ab…` | 477 | 141 | 250 | 36 | 15 | 35 |
 | `batch-01-homepage` | `a09219ae…` | 225 | 169 | 2 | 30 | 2 | 22 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
-| `batch-04-legal` | `83fed281…` | 974 | 143 | 481 | 0 | 0 | 350 |
+| `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
@@ -471,6 +483,7 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 - **Localization worker**: the integration notes above. After R2, refresh from this branch's tip: no `theme-key` value changed since `c7aed28`, but 13 template-setting values did (the footer compliance line and 12 legal template sections, addresses back to the EN form) and the nHAp page heading `b000` is new (Admin). After R6, only 3 Admin article bodies changed (batch 07) and 29 entries gained `pending-claim-review`; no `theme-key` or template-setting value changed.
 - **Loop owner**: 8 Loop strings in batch 01 (`theme-key`).
 - **EN owner (R2, R6)**: compliant copy for the SLS competitor block `b035`; the "Why You Need It" headings; the morning-brush "2 to 4 applications" dose; "organic biomaterial"; "Bestselling" (headaches `#b019`, top-whitening `#b051`); the two sleep/wake description lines; the 29 wellness blocks R6-01 gated. FR follows by digest.
+- **Source owner (Astra R12, 20 Oct)**: retire the two `subscription_title` entries (`index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title`, `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title`) from `en-source.json` and the EN batches 01/02. PDP commit `50ad819` removed those settings; the Duo's name now comes from the product title. FR mirrors the source ids, and `check.py` fails on an id mismatch, so FR drops its two entries in the same step. The naming source is already in FR: `admin:karmicare-biorhythmic-oral-care-system:title`, « Système de dentifrice matin et soir Awake & Asleep » (`admin`). FR has no `package_name` entry.
 - **Source owner**: rebuild the offline registration plan (`docs/localization/registration/plan-fr.json`) from this branch's new tip. FR did not edit or rebuild it, and since `037706c` only `fr/batch-07-collections-blog.json` (3 values, 29 gates) and `fr/check.py` changed. The `#b081` source gate is in place (`a0dee86`), so that earlier handoff is closed.
 
 ## Open decisions for Victor

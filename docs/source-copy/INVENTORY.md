@@ -9,9 +9,9 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 225 | `a09219ae1af8e24bd4fbcc86ce50223656adb586` |
-| `batch-02-pdp` | 477 | `03dd18b9d41a21772da2e26b7060c42f6b2364d1` |
+| `batch-02-pdp` | 477 | `666785abd03e91b643e766a266ce800fe0df07b8` |
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
-| `batch-04-legal` | 974 | `83fed281915f22a5b0bb9ed70cf3e49c47241ccf` |
+| `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `9597904c4ef875006a7d8a76bebbaa43d0faaca0` |
@@ -149,7 +149,7 @@ Not changed, because no text setting in the allowed files carries it:
 | 02 | `sections/main-product.liquid:1018` | Begin your 60-Day Rhythm | sticky bar: schema default of sticky_cart setting 'cta_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate… |
 | 02 | `sections/main-product.liquid:1024` | Begin the Karmicare Year | sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
 | 02 | `sections/main-product.liquid:1030` | Try once | sticky bar: schema default of sticky_cart setting 'cta_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
-| 02 | `sections/main-product.liquid:1036` | Free delivery · 1–3 working days in Benelux | sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
+| 02 | `sections/main-product.liquid:1036` | Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe | sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
 | 02 | `sections/main-product.liquid:1042` | Shipping calculated at checkout | sticky bar: schema default of sticky_cart setting 'delivery_once'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
 | 02 | `sections/main-product.liquid:1049` | Welcome Kit: two toothbrushes + floss | sticky bar: schema default of sticky_cart setting 'kit'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adap… |
 | 02 | `sections/main-product.liquid:1055` | 60-day money-back guarantee | sticky bar: schema default of sticky_cart setting 'guarantee_member'. The PDP template stores only button_text, so this default renders and is invisible to Tra… |
@@ -717,7 +717,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 188 | `liquid:sections/main-product.liquid:1018` | theme_locale | Begin your 60-Day Rhythm | needs-key |  |
 | 189 | `liquid:sections/main-product.liquid:1024` | theme_locale | Begin the Karmicare Year | needs-key |  |
 | 190 | `liquid:sections/main-product.liquid:1030` | theme_locale | Try once | needs-key |  |
-| 191 | `liquid:sections/main-product.liquid:1036` | theme_locale | Free delivery · 1–3 working days in Benelux | needs-key |  |
+| 191 | `liquid:sections/main-product.liquid:1036` | theme_locale | Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe | needs-key |  |
 | 192 | `liquid:sections/main-product.liquid:1042` | theme_locale | Shipping calculated at checkout | needs-key |  |
 | 193 | `liquid:sections/main-product.liquid:1049` | theme_locale | Welcome Kit: two toothbrushes + floss | needs-key |  |
 | 194 | `liquid:sections/main-product.liquid:1055` | theme_locale | 60-day money-back guarantee | needs-key |  |
@@ -1800,7 +1800,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 743 | `admin:policy:terms-of-service:body#b101` | policy | Until your parcel is in your hands, it is our responsibility. | admin-held |  |
 | 744 | `admin:policy:terms-of-service:body#b102` | policy | Transfer of risk (Art. VI.44 WER): the risk of loss, theft or damage in transit stays with KARMICA … | admin-held |  |
 | 745 | `admin:policy:terms-of-service:body#b103` | policy | Delivery area: we deliver to addresses in the member states of the European Union. Please make sure… | admin-held |  |
-| 746 | `admin:policy:terms-of-service:body#b104` | policy | Delivery times (estimates): Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the E… | admin-held |  |
+| 746 | `admin:policy:terms-of-service:body#b104` | policy | Delivery times (estimates): Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the E… | admin-held |  |
 | 747 | `admin:policy:terms-of-service:body#b105` | policy | Delays: unless another date was agreed, we deliver within 30 days of the contract. If we do not, yo… | admin-held |  |
 | 748 | `admin:policy:terms-of-service:body#b106` | policy | Clause 9 – Memberships | admin-held |  |
 | 749 | `admin:policy:terms-of-service:body#b107` | policy | No lock-in, a protected price and a reminder before every renewal. Gift, pause, skip or stop whenev… | admin-held |  |
@@ -1943,8 +1943,8 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 886 | `admin:policy:refund-policy:body#b077` | policy | Risk in transit (Art. VI.44 WER). The risk of loss, damage or theft in transit stays with KARMICARE… | admin-held |  |
 | 887 | `admin:policy:refund-policy:body#b078` | policy | Delayed deliveries. Unless we agreed another date, we deliver within 30 days. If we do not, you can… | admin-held |  |
 | 888 | `admin:policy:refund-policy:body#b079` | policy | Delivery times (estimates) | admin-held |  |
-| 889 | `admin:policy:refund-policy:body#b080` | policy | Belgium, the Netherlands and Luxembourg: 1–3 working days | admin-held |  |
-| 890 | `admin:policy:refund-policy:body#b081` | policy | Rest of the European Union: 2–5 working days | admin-held |  |
+| 889 | `admin:policy:refund-policy:body#b080` | policy | Belgium, the Netherlands and Luxembourg: within 24 hours | admin-held |  |
+| 890 | `admin:policy:refund-policy:body#b081` | policy | Rest of the European Union: 2–3 working days | admin-held |  |
 | 891 | `admin:policy:refund-policy:body#b082` | policy | 6. Your membership: renewals, pauses and cancelling | admin-held |  |
 | 892 | `admin:policy:refund-policy:body#b083` | policy | No lock-in. Your member price stays the same, we remind you before every renewal, and you can gift,… | admin-held |  |
 | 893 | `admin:policy:refund-policy:body#b084` | policy | Billing: the 60-Day rhythm renews every 60 days. The Year renews once a year on its anniversary, wi… | admin-held |  |
@@ -1995,7 +1995,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 938 | `admin:policy:shipping-policy:body#b003` | policy | Until your parcel is in your hands, it is our responsibility. | admin-held |  |
 | 939 | `admin:policy:shipping-policy:body#b004` | policy | Transfer of risk (Art. VI.44 WER): the risk of loss, theft or damage in transit stays with KARMICA … | admin-held |  |
 | 940 | `admin:policy:shipping-policy:body#b005` | policy | Delivery area: we deliver to addresses in the member states of the European Union. Please make sure… | admin-held |  |
-| 941 | `admin:policy:shipping-policy:body#b006` | policy | Delivery times (estimates): Belgium, the Netherlands and Luxembourg 1–3 working days; rest of the E… | admin-held |  |
+| 941 | `admin:policy:shipping-policy:body#b006` | policy | Delivery times (estimates): Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the E… | admin-held |  |
 | 942 | `admin:policy:shipping-policy:body#b007` | policy | Delays: unless another date was agreed, we deliver within 30 days of the contract. If we do not, yo… | admin-held |  |
 | 943 | `admin:policy:shipping-policy:body#b008` | policy | Shipping charges (clause 5.4): memberships ship free within the European Union. For Try Once, the s… | admin-held |  |
 | 944 | `admin:policy:shipping-policy:seo.title` | policy | Shipping policy – KARMICARE | admin-held |  |

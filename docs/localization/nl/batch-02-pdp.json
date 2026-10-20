@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "03dd18b9d41a21772da2e26b7060c42f6b2364d1",
+ "source_digest": "666785abd03e91b643e766a266ce800fe0df07b8",
  "source_entries": 477,
  "counts": {
   "pending-claim-review": 41,
@@ -2430,14 +2430,14 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:1036",
-   "en": "Free delivery · 1–3 working days in Benelux",
-   "en_sha1": "3dcb730d71124b0f3bf885cc16b5828cbe3adbd7",
-   "nl": "Gratis levering · 1–3 werkdagen in de Benelux",
+   "en": "Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe",
+   "en_sha1": "fcd0b2df2b6ea7e5451120ade40b9a7ba3e92556",
+   "nl": "Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "EN updated 20 Oct: mirrors the nav child's kc.sticky_cart.delivery_free_html (Victor's delivery times)."
   },
   {
    "id": "liquid:sections/main-product.liquid:1042",
