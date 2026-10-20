@@ -83,6 +83,13 @@
   padding-block-start: var(--kc-navigation-clearance);
 }
 
+/* A #fragment link to a section or a heading (in the URL, from another page, or a plain in-page link)
+   lands below the bar with 16px to spare, as assets/kc-anchor-scroll.js does for the links it handles.
+   No specificity, so a target's own scroll-margin-top (legal TOC, customer pages) still wins. */
+:where(#MainContent > .shopify-section, #MainContent :is(h1, h2, h3, h4, h5, h6)[id]) {
+  scroll-margin-top: calc(var(--kc-navigation-clearance) + 1.6rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .section-header.kc-header-autohide--ready {
     transition: none;
