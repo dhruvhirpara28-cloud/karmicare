@@ -49,6 +49,7 @@
 
   #shopify-section-{{ section.id }} .header {
     border-radius: var(--kc-shape-radius-sm);
+    box-shadow: var(--kc-elevation-md);
     max-width: 1200px;
     margin: 1.2rem auto;
     align-items: center;
@@ -403,7 +404,8 @@
       transition: transform 0.3s ease 0.15s;
     }
     #shopify-section-{{ section.id }}.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
-      transform: translateY(-100%);
+      /* 1.6rem further: the bar's elevation-md shadow reaches 16px below it */
+      transform: translateY(calc(-100% - 1.6rem));
       transition-delay: 0s;
     }
     @media (prefers-reduced-motion: reduce) {
