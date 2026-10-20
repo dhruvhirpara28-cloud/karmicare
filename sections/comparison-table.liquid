@@ -44,10 +44,45 @@
     assign table_rows = comparison.table_list.value
 
     assign button_text = comparison.table_button_text.value
-    assign button_url = comparison.table_button_url.value
-    # No link in the metaobject ('#' or empty): the button goes to the buybox plan cards, not the page top
-    if button_url == blank or button_url == '#'
-      assign button_url = '#loop-selling-plan-fieldset'
+    assign button_url = comparison.table_button_url.value | strip
+    if button_url == '#'
+      assign button_url = ''
+    endif
+
+    # Without a real link in the metaobject the button buys the plan the plans table features
+    # (custom.compare_table, featured, not hidden) straight to checkout, by selling plan ID, the same
+    # way as that plan's own button (assets/kc-plan-select.js; Victor, 20 Oct). No featured plan, or
+    # one this product does not sell: the button goes to the buybox plan cards.
+    assign buy_choose = ''
+    assign buy_plan_id = ''
+    assign buy_group_id = ''
+    assign buy_title = ''
+    if button_url == blank
+      for buy_plan in product.metafields.custom.compare_table.value.compare_plans.value
+        if buy_plan.featured.value != true or buy_plan.hide_plan.value == true
+          continue
+        endif
+        assign buy_title = buy_plan.title.value | default: buy_plan.title
+        assign buy_kind = buy_plan.handle_item.value | default: buy_plan.handle_item | downcase | replace: '-', ' ' | strip
+        if buy_kind == 'once' or buy_kind == 'one time'
+          assign buy_choose = 'once'
+        else
+          assign buy_raw_id = buy_plan.selling_plan_id.value | default: buy_plan.selling_plan_id | append: '' | strip
+          capture buy_resolved
+            render 'kc-plan-resolve', product: product, plan_id: buy_raw_id
+          endcapture
+          if buy_resolved != blank
+            assign buy_parts = buy_resolved | split: '|'
+            assign buy_choose = 'plan'
+            assign buy_plan_id = buy_parts[0]
+            assign buy_group_id = buy_parts[1]
+          endif
+        endif
+        break
+      endfor
+      if buy_choose == blank
+        assign button_url = '#loop-selling-plan-fieldset'
+      endif
     endif
 
     assign table_headers = table_title | split: '|'
@@ -81,7 +116,20 @@
           {% if button_url != blank %}
             <a href="{{ button_url }}" class="comparison-section__button">{{ button_text }}</a>
           {% else %}
-            <button type="button" class="comparison-section__button">{{ button_text }}</button>
+            <button
+              type="button"
+              class="comparison-section__button"
+              data-kc-plan-product="{{ product.id }}"
+              data-kc-plan-title="{{ buy_title | escape }}"
+              data-kc-plan-choose="{{ buy_choose }}"
+              {%- if buy_choose == 'plan' %}
+                data-selling-plan-id="{{ buy_plan_id }}"
+                data-selling-plan-group-id="{{ buy_group_id }}"
+              {%- endif %}
+            >
+              {{ button_text }}
+              {%- render 'loading-spinner' -%}
+            </button>
           {% endif %}
         {% endif %}
       </div>

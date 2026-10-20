@@ -111,6 +111,29 @@
   outline-offset: 2px;
 }
 
+/* On its way to checkout (assets/karmi-add-to-cart.js sets .loading and disabled): the label stays,
+   the spinner beside it draws in the label colour (R13 F1) */
+.comparison-section__button.loading {
+  cursor: progress;
+}
+
+.comparison-section__button .loading__spinner {
+  position: static;
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.comparison-section__button .loading__spinner .spinner {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.comparison-section__button .loading__spinner .path {
+  stroke: currentColor;
+}
+
 @media screen and (min-width: 750px) {
   .comparison-section__button {
     min-height: 4.8rem;

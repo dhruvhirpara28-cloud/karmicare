@@ -187,7 +187,8 @@
 /* Loop dashboard: margin 10px 0 15px !important on the fieldset */
 .kc-buybox .loop-selling-plan-fieldset {
   margin: 0 !important;
-  /* Comparison table "Begin now" jumps here (#loop-selling-plan-fieldset): clear of the floating header */
+  /* Comparison table "Begin now" without a plan to buy jumps here (#loop-selling-plan-fieldset): clear of
+     the floating header */
   scroll-margin-top: calc(var(--header-height, 0px) + var(--kc-responsive-spacing-layout-comfortable));
 }
 
