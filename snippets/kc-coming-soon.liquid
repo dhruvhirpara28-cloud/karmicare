@@ -1,0 +1,36 @@
+{%- comment -%}
+  A link to a page that does not exist yet (Victor, 19 Oct 2026): shown, not clickable (no href,
+  aria-disabled), with a tooltip on hover, keyboard focus and tap; Escape hides it.
+  The calling section loads kc-coming-soon.css (render-blocking, before this markup) and
+  kc-coming-soon.js.
+
+  Accepts:
+  - id {String}: element id; the tooltip gets id + '-soon'
+  - label {String}: the link or button text (escaped here)
+  - class {String}: the host's own classes (menu item, button)
+  - icon {String}: optional markup after the label, e.g. a button's arrow
+  - tip {String}: optional tooltip text; blank uses the translated kc.general.coming_soon
+
+  Usage:
+  {% render 'kc-coming-soon', id: 'HeaderMenu-about', label: link.title, class: 'header__menu-item' %}
+{%- endcomment -%}
+{%- liquid
+  assign soon_tip = tip
+  if soon_tip == blank
+    assign soon_tip = 'kc.general.coming_soon' | t
+  endif
+-%}
+<a
+  id="{{ id }}"
+  class="{{ class }} kc-coming-soon"
+  role="link"
+  aria-disabled="true"
+  tabindex="0"
+  aria-describedby="{{ id }}-soon"
+>
+  <span>{{- label | escape -}}</span>
+  {{- icon -}}
+  <span id="{{ id }}-soon" class="kc-coming-soon__tip" role="tooltip">
+    {{- soon_tip | escape -}}
+  </span>
+</a>

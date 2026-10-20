@@ -200,6 +200,7 @@
                     class="kc-pricing-summary"
                     style="display:none;"
                     data-section-id="{{ section.id }}"
+                    {% render 'kc-receipt-labels' %}
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <div class="kc-pricing-summary__rewards" style="display: none;">
@@ -572,9 +573,10 @@
                             {%- render 'kc-plan-type', plan_id: sub_allocation.selling_plan.id, field: 'care_credit_percent' -%}
                           {%- endcapture -%}
                           {%- assign kc_offer_duos = kc_offer_units | times: kc_offer_deliveries -%}
-                          {%- assign interval_text = '/ 60 days' -%}
+                          {%- comment -%} The receipt's interval texts (kc.receipt.*, snippets/kc-receipt-labels.liquid) {%- endcomment -%}
+                          {%- assign interval_text = 'kc.receipt.per_days' | t | replace: '[count]', '60' -%}
                           {%- if kc_offer_type == 'year' -%}
-                            {%- assign interval_text = '/ year' -%}
+                            {%- assign interval_text = 'kc.receipt.per_year' | t -%}
                           {%- endif -%}
                           {%- assign sub_price = sub_allocation.price
                             | default: product.selected_or_first_available_variant.price
@@ -598,12 +600,12 @@
                                     {%- endif -%}
                                   </span>
                                   <div class="kc-custom-per-brushing">
-                                    <span>{{ per_brushing_cents | money }}</span>
+                                    <span>{% render 'kc-money', cents: per_brushing_cents %}</span>
                                     {{ block.settings.per_brushing_text }}
                                   </div>
                                 </div>
                                 <div class="kc-custom-col-right">
-                                  <strong>{{ sub_price | money_without_trailing_zeros }}</strong>
+                                  <strong>{% render 'kc-money', cents: sub_price, trim: true %}</strong>
                                   <div class="kc-custom-interval">{{ interval_text }}</div>
                                 </div>
                               </div>
@@ -618,13 +620,13 @@
                                         <span class="wk-item-name">{{ wk_product.title }}</span>
                                       </span>
                                       <span class="kc-custom-col-right">
+                                        {%- capture wk_value -%}
+                                          {%- render 'kc-kit-value', kit_product: wk_product -%}
+                                        {%- endcapture -%}
                                         <del>
-                                          {{-
-                                            wk_product.selected_or_first_available_variant.price
-                                            | money_without_trailing_zeros
-                                          -}}
+                                          {%- render 'kc-money', cents: wk_value, trim: true -%}
                                         </del>
-                                        <strong>Free</strong>
+                                        <strong>{{ 'kc.plans.free' | t }}</strong>
                                       </span>
                                     </div>
                                   {%- endfor -%}
@@ -654,7 +656,7 @@
                                   </span>
                                 </span>
                                 <div class="kc-custom-col-right">
-                                  <strong>{{ care_credit | money }}</strong>
+                                  <strong>{% render 'kc-money', cents: care_credit %}</strong>
                                   <div class="kc-custom-interval">
                                     {{ block.settings.care_credit_text_2 | replace: '[rate]', kc_offer_rate | replace: '10%', kc_offer_rate }}
                                   </div>
@@ -718,16 +720,16 @@
                       <div class="loop-featured-welcome-kit{% if block.settings.only_first_subscription %} hide-when-only-first-subscription{% endif %}">
                         <div class="loop-featured-wk-contents">
                           <ul class="wk-contents-list">
-                            {%- assign total_price = 0 -%}
                             {%- for wk_product in welcome_kit_products -%}
-                              {%- assign wk_variant = wk_product.selected_or_first_available_variant -%}
-                              {%- assign total_price = total_price | plus: wk_variant.price -%}
+                              {%- capture wk_value -%}
+                                {%- render 'kc-kit-value', kit_product: wk_product -%}
+                              {%- endcapture -%}
                               <li>
                                 <span class="wk-item-name">
                                   <span class="check-icon">✓</span>
                                   {{ wk_product.title }}
                                 </span>
-                                <span class="price-strike">{{ wk_variant.price | money }}</span>
+                                <span class="price-strike">{% render 'kc-money', cents: wk_value, trim: true %}</span>
                               </li>
                             {%- endfor -%}
                           </ul>

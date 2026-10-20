@@ -144,7 +144,7 @@
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <span class="ft-line">
-                      Or
+                      {{ 'kc.plans.or' | t }}
                       <button class="ft-link kc-try-once-btn" data-plan="once" type="button">
                         {{ loop_block.settings.try_once_text | escape }} · <span class="kc-try-once-price"></span>
                       </button>
@@ -158,6 +158,7 @@
                     class="kc-pricing-summary"
                     style="display:none;"
                     data-section-id="{{ section.id }}"
+                    {% render 'kc-receipt-labels' %}
                   >
                     {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <div class="kc-pricing-summary__rewards" style="display: none;">
@@ -920,6 +921,10 @@
           "default": "Begin Now"
         },
         {
+          "type": "paragraph",
+          "content": "The texts below are translated defaults (locale keys kc.sticky_cart.*). Leave a text blank to use its default; fill it in to override it."
+        },
+        {
           "type": "header",
           "content": "Plan titles",
           "info": "The bar shows the part before \" · \"; the open card shows the whole title."
@@ -927,20 +932,17 @@
         {
           "type": "text",
           "id": "title_rhythm",
-          "label": "60-Day Rhythm",
-          "default": "60-Day Rhythm · Awake + Asleep"
+          "label": "60-Day Rhythm"
         },
         {
           "type": "text",
           "id": "title_year",
-          "label": "The Karmicare Year",
-          "default": "The Karmicare Year · 6 Duos"
+          "label": "The Karmicare Year"
         },
         {
           "type": "text",
           "id": "title_once",
-          "label": "Try Once",
-          "default": "Try Once · 1 Duo"
+          "label": "Try Once"
         },
         {
           "type": "header",
@@ -950,20 +952,17 @@
         {
           "type": "text",
           "id": "price_rhythm",
-          "label": "60-Day Rhythm",
-          "default": "[price] every 60 days"
+          "label": "60-Day Rhythm"
         },
         {
           "type": "text",
           "id": "price_year",
-          "label": "The Karmicare Year",
-          "default": "[price] per year"
+          "label": "The Karmicare Year"
         },
         {
           "type": "text",
           "id": "price_once",
-          "label": "Try Once",
-          "default": "[price] one time"
+          "label": "Try Once"
         },
         {
           "type": "header",
@@ -973,26 +972,22 @@
         {
           "type": "text",
           "id": "credit",
-          "label": "Care Credit",
-          "default": "+ [credit] Care Credit back"
+          "label": "Care Credit"
         },
         {
           "type": "text",
           "id": "credit_checkup",
-          "label": "Care Credit + Check-up Reward (the Year)",
-          "default": "+ [credit] Care Credit + €40 Check-up Reward"
+          "label": "Care Credit + Check-up Reward (the Year)"
         },
         {
           "type": "text",
           "id": "credit_info",
-          "label": "Care Credit explained",
-          "default": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill."
+          "label": "Care Credit explained"
         },
         {
           "type": "text",
           "id": "checkup_info",
-          "label": "Check-up Reward explained (the Year)",
-          "default": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account."
+          "label": "Check-up Reward explained (the Year)"
         },
         {
           "type": "header",
@@ -1002,89 +997,75 @@
           "type": "text",
           "id": "panel_label",
           "label": "Details label",
-          "info": "Read out for the chevron; shown instead of what comes back on Try Once.",
-          "default": "Delivery & what's included"
+          "info": "Read out for the chevron; shown instead of what comes back on Try Once."
         },
         {
           "type": "text",
           "id": "change_label",
-          "label": "Change link",
-          "default": "Change"
+          "label": "Change link"
         },
         {
           "type": "text",
           "id": "cta_rhythm",
-          "label": "Button · 60-Day Rhythm",
-          "default": "Begin your 60-Day Rhythm"
+          "label": "Button · 60-Day Rhythm"
         },
         {
           "type": "text",
           "id": "cta_year",
-          "label": "Button · The Karmicare Year",
-          "default": "Begin the Karmicare Year"
+          "label": "Button · The Karmicare Year"
         },
         {
           "type": "text",
           "id": "cta_once",
-          "label": "Button · Try Once",
-          "default": "Try once"
+          "label": "Button · Try Once"
         },
         {
           "type": "text",
           "id": "delivery_free",
-          "label": "Delivery · memberships",
-          "default": "Free delivery · 1–3 working days in Benelux"
+          "label": "Delivery · memberships"
         },
         {
           "type": "text",
           "id": "delivery_once",
-          "label": "Delivery · Try Once",
-          "default": "Shipping calculated at checkout"
+          "label": "Delivery · Try Once"
         },
         {
           "type": "text",
           "id": "kit",
           "label": "Welcome Kit",
-          "info": "Shown on memberships until the customer has received the kit.",
-          "default": "Welcome Kit: two toothbrushes + floss"
+          "info": "Shown on memberships until the customer has received the kit."
         },
         {
           "type": "text",
           "id": "guarantee_member",
-          "label": "Guarantee · memberships",
-          "default": "60-day money-back guarantee"
+          "label": "Guarantee · memberships"
         },
         {
           "type": "text",
           "id": "guarantee_once",
-          "label": "Guarantee · Try Once",
-          "default": "14-day money-back guarantee"
+          "label": "Guarantee · Try Once"
         },
         {
           "type": "text",
           "id": "stop_rhythm",
-          "label": "Stopping · 60-Day Rhythm",
-          "default": "Pause or stop anytime"
+          "label": "Stopping · 60-Day Rhythm"
         },
         {
           "type": "text",
           "id": "stop_year",
-          "label": "Stopping · The Karmicare Year",
-          "default": "Renews yearly · stop anytime before renewal"
+          "label": "Stopping · The Karmicare Year"
         },
         {
           "type": "text",
           "id": "per_brushing",
           "label": "Per brushing",
-          "info": "[per_brushing] is the plan's price per brushing.",
-          "default": "[per_brushing] per brushing"
+          "info": "[per_brushing] is the plan's price per brushing."
         },
         {
           "type": "text",
           "id": "try_once",
           "label": "Try once link (memberships)",
-          "info": "[price] is the one-time price. Goes straight to checkout, like the buybox's Try once.",
-          "default": "Not ready for a membership? Try once for [price]"
+          "info": "[price] is the one-time price. Goes straight to checkout, like the buybox's Try once."
         },
         {
           "type": "header",
@@ -1094,14 +1075,12 @@
         {
           "type": "text",
           "id": "package_name",
-          "label": "Duo name",
-          "default": "Awake & Asleep AM/PM Oral Care System"
+          "label": "Duo name"
         },
         {
           "type": "text",
           "id": "kit_free",
-          "label": "Welcome Kit price label",
-          "default": "Free"
+          "label": "Welcome Kit price label"
         }
       ]
     },

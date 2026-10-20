@@ -1,0 +1,45 @@
+/* R5 evidence, BEFORE: the branch at a4e84bc (docs/pdp/evidence/a2-after.css
+   before R5) plus an evidence-only block that holds the chip popovers open.
+   Not theme code. The helper cannot hover or tap, so the open state is forced;
+   the popovers keep their resting transform (on hover the centred popover moves
+   another 2 % right from 768 px, 20 % left below 768 px). */
+
+@media screen and (min-width: 990px) {
+  .product--large:not(.product--no-media):has(.kc-buybox) .product__media-wrapper {
+    max-width: min(60%, calc(100% - 44rem));
+    width: min(calc(60% - var(--grid-desktop-horizontal-spacing) / 2), calc(100% - 44rem - var(--grid-desktop-horizontal-spacing) / 2));
+  }
+
+  .product--large:not(.product--no-media):has(.kc-buybox) .product__info-wrapper {
+    max-width: max(40%, 44rem);
+    width: max(calc(40% - var(--grid-desktop-horizontal-spacing) / 2), calc(44rem - var(--grid-desktop-horizontal-spacing) / 2));
+  }
+}
+
+.kc-buybox .kc-return_care,
+.night-mode .kc-buybox .kc-return_care,
+.day-mode .kc-buybox .kc-return_care {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  border-radius: calc(var(--kc-buybox-body-line-height) / 2 + var(--kc-responsive-spacing-layout-xs) + var(--kc-shape-stroke-thin, 1px));
+}
+
+.kc-buybox .kc-return_care > * {
+  flex: none;
+}
+
+.kc-buybox .kc-return_care .info-tip {
+  height: var(--kc-buybox-body-line-height);
+}
+
+.kc-buybox .loop-welcome-kit-product-link {
+  display: block;
+  overflow: visible;
+}
+
+/* EVIDENCE ONLY: hold the three chip popovers open. */
+.kc-buybox .kc-return_care .info-tip .info-tip-popover {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

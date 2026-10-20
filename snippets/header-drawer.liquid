@@ -21,6 +21,8 @@
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- comment -%} An empty menu link ('#') comes back as '/nl#' or '/fr#' on a translated storefront. {%- endcomment -%}
+              {%- assign kc_soon_url = routes.root_url | append: '#' -%}
               {%- for link in section.settings.menu.links -%}
                 <li>
                   {%- if link.links != blank -%}
@@ -119,25 +121,15 @@
                         </div>
                       </div>
                     </details>
-                  {%- elsif link.url == '#' -%}
+                  {%- elsif link.url == '#' or link.url == kc_soon_url -%}
                     {%- comment -%} No page yet: shown, not clickable, "Coming soon" on tap or focus {%- endcomment -%}
-                    <a
-                      id="HeaderDrawer-{{ link.handle }}"
-                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset kc-coming-soon"
-                      role="link"
-                      aria-disabled="true"
-                      tabindex="0"
-                      {% if section.settings.coming_soon_label != blank %}
-                        aria-describedby="HeaderDrawer-{{ link.handle }}-soon"
-                      {% endif %}
-                    >
-                      <span>{{- link.title | escape -}}</span>
-                      {%- if section.settings.coming_soon_label != blank -%}
-                        <span id="HeaderDrawer-{{ link.handle }}-soon" class="kc-coming-soon__tip" role="tooltip">
-                          {{- section.settings.coming_soon_label | escape -}}
-                        </span>
-                      {%- endif -%}
-                    </a>
+                    {%- assign soon_id = 'HeaderDrawer-' | append: link.handle -%}
+                    {%- render 'kc-coming-soon',
+                      id: soon_id,
+                      label: link.title,
+                      class: 'menu-drawer__menu-item list-menu__item link link--text focus-inset',
+                      tip: section.settings.coming_soon_label
+                    -%}
                   {%- else -%}
                     <a
                       id="HeaderDrawer-{{ link.handle }}"

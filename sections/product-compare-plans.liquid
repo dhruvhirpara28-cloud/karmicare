@@ -36,7 +36,7 @@
   {%- endcapture -%}
 
   <div
-    aria-label="Compare plans"
+    aria-label="{{ 'kc.plans.compare_label' | t }}"
     class="plan-compare{% if kc %} plan-compare--kc{% endif %} kc-surface"
     id="compare-plans-{{ section.id }}"
     data-kc-surface="{{ section.settings.surface }}"
@@ -52,7 +52,7 @@
         <!-- LABEL COLUMN -->
         <div class="pc-col pc-col-label">
           <div class="pc-lhead">
-            <span class="pc-lhead-tag">Compare</span>
+            <span class="pc-lhead-tag">{{ 'kc.plans.compare' | t }}</span>
           </div>
           {%- for row in rows -%}
             {%- if row.show_row.value == false -%}{%- continue -%}{%- endif -%}
@@ -70,9 +70,22 @@
               {%- if is_welcome_kit -%}
                 <span class="pc-kit">
                   <span>{{ row.label.value | default: row.label }}</span>
-                  {%- if row.welcome_kit.value != blank -%}
+                  {%- comment -%}
+                    The kit products and their value: the theme setting "Welcome Kit free products", what the
+                    cart adds, never the row's own product list (snippets/kc-kit-value.liquid)
+                  {%- endcomment -%}
+                  {%- if settings.welcome_kit_free_product != blank -%}
                     <span aria-hidden="true" class="pc-kit-thumbs">
-                      {%- for prod in row.welcome_kit.value -%}
+                      {%- for prod_item in settings.welcome_kit_free_product -%}
+                        {%- liquid
+                          assign prod = prod_item
+                          if prod_item.id == null
+                            assign prod = all_products[prod_item]
+                          endif
+                          if prod == blank
+                            continue
+                          endif
+                        -%}
                         <img
                           alt="{{ prod.title | escape }}"
                           decoding="async"
@@ -83,24 +96,32 @@
                       {%- endfor -%}
                     </span>
                     <span class="pc-kit-pop" role="tooltip">
-                      {%- assign total_value = 0 -%}
-                      {%- for prod in row.welcome_kit.value -%}
-                        {%- if prod.compare_at_price > 0 -%}
-                          {%- assign total_value = total_value | plus: prod.compare_at_price -%}
-                        {%- else -%}
-                          {%- assign total_value = total_value | plus: prod.price -%}
-                        {%- endif -%}
-                      {%- endfor -%}
+                      {%- capture total_value -%}{%- render 'kc-kit-value' -%}{%- endcapture -%}
+                      {%- assign total_value = total_value | plus: 0 -%}
                       <span class="pc-kit-poptitle">
                         {{- row.label.value | default: row.label -}}
                         <span class="value">
                           {%- if total_value > 0 -%}
-                            · {{ total_value | money_without_trailing_zeros }} Value
+                            {%- capture kit_total -%}{% render 'kc-money', cents: total_value, trim: true %}{%- endcapture -%}
+                            {{ 'kc.plans.kit_value' | t: total_value: kit_total }}
                           {%- endif -%}
-                          · <b>Free</b>
+                          · <b>{{ 'kc.plans.free' | t }}</b>
                         </span>
                       </span>
-                      {%- for prod in row.welcome_kit.value -%}
+                      {%- for prod_item in settings.welcome_kit_free_product -%}
+                        {%- liquid
+                          assign prod = prod_item
+                          if prod_item.id == null
+                            assign prod = all_products[prod_item]
+                          endif
+                          if prod == blank
+                            continue
+                          endif
+                          capture prod_value
+                            render 'kc-kit-value', kit_product: prod
+                          endcapture
+                          assign prod_value = prod_value | plus: 0
+                        -%}
                         <span class="pc-kit-item">
                           <img
                             alt="{{ prod.title | escape }}"
@@ -112,11 +133,9 @@
                           <span class="pc-kit-itxt">
                             <b>{{ prod.title }}</b>
                             <em
-                              >Free
-                              {%- if prod.compare_at_price > prod.price %}
-                                · <s>{{ prod.compare_at_price | money_without_trailing_zeros }}</s>
-                              {%- elsif prod.price > 0 %}
-                                · <s>{{ prod.price | money_without_trailing_zeros }}</s>
+                              >{{ 'kc.plans.free' | t }}
+                              {%- if prod_value > 0 %}
+                                · <s>{% render 'kc-money', cents: prod_value, trim: true %}</s>
                               {%- endif -%}
                             </em>
                           </span>
@@ -231,16 +250,16 @@
 
               <div class="pc-cell" data-label="{{ row.label.value | default: row.label | escape }}">
                 {%- if cell_value == blank or cell_value.hide_cell.value == true -%}
-                  <span aria-label="Not included" class="pc-no" role="img">—</span>
+                  <span aria-label="{{ 'kc.plans.not_included' | t }}" class="pc-no" role="img">—</span>
                 {%- else -%}
                   {%- assign display_type = cell_value.display_type.value
                     | default: cell_value.display_type
                     | downcase
                   -%}
                   {%- if display_type == 'checkmark' or display_type == 'yes' or display_type == 'true' -%}
-                    <span aria-label="Included" class="pc-yes" role="img">✓</span>
+                    <span aria-label="{{ 'kc.plans.included' | t }}" class="pc-yes" role="img">✓</span>
                   {%- elsif display_type == 'dash' or display_type == 'no' or display_type == 'false' -%}
-                    <span aria-label="Not included" class="pc-no" role="img">—</span>
+                    <span aria-label="{{ 'kc.plans.not_included' | t }}" class="pc-no" role="img">—</span>
                   {%- else -%}
                     {%- if cell_value.value.type == 'rich_text_field' -%}
                       {{ cell_value.value | metafield_tag }}

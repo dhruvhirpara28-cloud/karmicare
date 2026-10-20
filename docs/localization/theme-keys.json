@@ -1,0 +1,840 @@
+{
+ "about": "Theme locale keys for the needs-key strings of the B1a inventory (docs/source-copy/en-source.json). docs/localization/theme_keys.py writes them into every storefront locale file: en.default gets en; nl and fr get their value unless *_hold is set, then en; every other locale gets en (MatchingTranslations).",
+ "sources": {
+  "en": "docs/source-copy/en-source.json (batch-01 a09219ae1af8, batch-02 666785abd03e, batch-03 e17cadb5e223)",
+  "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review hold)",
+  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr c7aed28 (status theme-key; flags pending-claim-review and legal-review hold)"
+ },
+ "not_keyed_here": {
+  "liquid:sections/header.liquid:1077": "kc.general.coming_soon, added on karmicare/soft-launch-homepage (09bb6e3)",
+  "liquid:snippets/loop-subscriptions.liquid:10": "never translate: featured-product.liquid and main-product.liquid test for this text",
+  "loop": "Loop widget files are off limits: handoff in docs/localization/B4-REPORT.md"
+ },
+ "skipped_ids": [
+  "liquid:assets/loop-widget.js:2213",
+  "liquid:assets/loop-widget.js:2452",
+  "liquid:assets/loop-widget.js:2452:annual",
+  "liquid:assets/loop-widget.js:2463",
+  "liquid:assets/loop-widget.js:2464",
+  "liquid:assets/loop-widget.js:2468",
+  "liquid:sections/header.liquid:1077",
+  "liquid:snippets/loop-subscriptions.liquid:10",
+  "liquid:snippets/loop-widget-standard.liquid:101",
+  "liquid:snippets/loop-widget-standard.liquid:103",
+  "liquid:snippets/loop-widget-standard.liquid:109",
+  "liquid:snippets/loop-widget-standard.liquid:123",
+  "liquid:snippets/loop-widget-standard.liquid:140"
+ ],
+ "keys": [
+  {
+   "key": "kc.clock.aria_label",
+   "area": "clock",
+   "ids": [
+    "liquid:sections/chronobiology-clock-karmicare.liquid:101"
+   ],
+   "en": "Explore your mouth's 24-hour clock",
+   "nl": "Verken de 24-uursklok van je mond",
+   "nl_hold": null,
+   "fr": "Explorez l’horloge de 24 heures de votre bouche",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.clock.caption_live",
+   "area": "clock",
+   "ids": [
+    "liquid:sections/chronobiology-clock-karmicare.liquid:153"
+   ],
+   "en": "your mouth right now:",
+   "nl": "je mond op dit moment:",
+   "nl_hold": null,
+   "fr": "votre bouche en ce moment :",
+   "fr_hold": null,
+   "note": "Also the JS caption at rest (chronobiology-clock-karmicare.js:88)."
+  },
+  {
+   "key": "kc.clock.caption_preview",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:88"
+   ],
+   "en": "your mouth at this hour:",
+   "nl": "je mond op dit uur:",
+   "nl_hold": null,
+   "fr": "votre bouche à cette heure :",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.clock.loading",
+   "area": "clock",
+   "ids": [],
+   "en": "Loading current local time",
+   "nl": null,
+   "nl_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
+   "fr": null,
+   "fr_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
+   "note": "aria-valuetext before the script runs (chronobiology-clock-karmicare.liquid:106). Not in the B1a inventory: no reviewed NL/FR yet."
+  },
+  {
+   "key": "kc.clock.valuetext_live",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:91:live"
+   ],
+   "en": ". Current local time.",
+   "nl": ". Huidige lokale tijd.",
+   "nl_hold": null,
+   "fr": ". Heure locale actuelle.",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.clock.valuetext_preview",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:91"
+   ],
+   "en": ". Release to return to now.",
+   "nl": ". Laat los om terug te gaan naar nu.",
+   "nl_hold": null,
+   "fr": ". Relâchez pour revenir à l’heure actuelle.",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.clock.window_1",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:11"
+   ],
+   "en": "saliva is only now picking up after the night, and the enamel is least protected before your first drink",
+   "nl": "het speeksel komt na de nacht nu pas op gang, en het glazuur is het minst beschermd vóór je eerste drankje",
+   "nl_hold": "pending-claim-review (C54)",
+   "fr": "la salive reprend à peine après la nuit, et l’émail est le moins protégé avant votre première boisson",
+   "fr_hold": "pending-claim-review (C54)"
+  },
+  {
+   "key": "kc.clock.window_2",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:12"
+   ],
+   "en": "breakfast and coffee dropped the pH within minutes — saliva spends the next half hour bringing it back",
+   "nl": "ontbijt en koffie deden de pH binnen enkele minuten dalen — het speeksel heeft het volgende halfuur nodig om hem weer op peil te brengen",
+   "nl_hold": null,
+   "fr": "le petit-déjeuner et le café ont fait chuter le pH en quelques minutes — la salive passe la demi-heure suivante à le rétablir",
+   "fr_hold": "pending-claim-review"
+  },
+  {
+   "key": "kc.clock.window_3",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:13"
+   ],
+   "en": "lunch restarts the cycle: every eating occasion opens a fresh acid window, whatever its size",
+   "nl": "de lunch start de cyclus opnieuw: elk eetmoment opent een nieuw zuurvenster, hoe klein of groot ook",
+   "nl_hold": null,
+   "fr": "le déjeuner relance le cycle : chaque prise alimentaire ouvre une nouvelle fenêtre acide, quelle que soit sa taille",
+   "fr_hold": "pending-claim-review"
+  },
+  {
+   "key": "kc.clock.window_4",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:14"
+   ],
+   "en": "grazing hours — the most frequent acid challenge of the day, and it is how often, not how much",
+   "nl": "snackuren — de zuuraanval die het vaakst terugkomt, en het gaat om hoe vaak, niet om hoeveel",
+   "nl_hold": null,
+   "fr": "les heures de grignotage — l’agression acide la plus fréquente de la journée, et c’est la fréquence qui compte, pas la quantité",
+   "fr_hold": "pending-claim-review"
+  },
+  {
+   "key": "kc.clock.window_5",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:15"
+   ],
+   "en": "the last big acid window of the day; after this, saliva starts winding down",
+   "nl": "het laatste grote zuurvenster van de dag; daarna begint het speeksel af te nemen",
+   "nl_hold": null,
+   "fr": "la dernière grande fenêtre acide de la journée ; ensuite, la salive commence à ralentir",
+   "fr_hold": "pending-claim-review"
+  },
+  {
+   "key": "kc.clock.window_6",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:16"
+   ],
+   "en": "melatonin is rising and salivary flow is dropping — what is left on the enamel now stays for hours",
+   "nl": "melatonine stijgt en de speekselproductie daalt — wat nu op het glazuur achterblijft, blijft er urenlang zitten",
+   "nl_hold": null,
+   "fr": "la mélatonine monte et le débit salivaire baisse — ce qui reste sur l’émail maintenant y reste pendant des heures",
+   "fr_hold": "pending-claim-review"
+  },
+  {
+   "key": "kc.clock.window_7",
+   "area": "clock",
+   "ids": [
+    "liquid:assets/chronobiology-clock-karmicare.js:17"
+   ],
+   "en": "saliva is near its minimum and clearance has almost stopped: the longest unguarded stretch, and the repair window",
+   "nl": "het speeksel zit vlak bij zijn minimum en de zelfreiniging ligt bijna stil: de langste onbewaakte periode, en het herstelvenster",
+   "nl_hold": null,
+   "fr": "la salive est presque à son minimum et l’autonettoyage s’est presque arrêté : la plus longue période sans protection, et la fenêtre de réparation",
+   "fr_hold": "pending-claim-review"
+  },
+  {
+   "key": "kc.faq.all",
+   "area": "faq",
+   "ids": [
+    "liquid:sections/km-faq-accordion.liquid:155"
+   ],
+   "en": "ALL",
+   "nl": "ALLE",
+   "nl_hold": null,
+   "fr": "TOUT",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.footer.consent_html",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:694"
+   ],
+   "en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
+   "nl": "Door je in te schrijven, ga je akkoord met de <a>Gebruiksvoorwaarden</a> en het <a>Privacybeleid</a>.",
+   "nl_hold": null,
+   "fr": "En vous inscrivant, vous acceptez les <a>conditions d’utilisation</a> et la <a>politique de confidentialité</a>.",
+   "fr_hold": "legal-review",
+   "href": [
+    "terms_url",
+    "privacy_url"
+   ],
+   "note": "The payload's two <a> tags get href=\"{{ terms_url }}\" and href=\"{{ privacy_url }}\", in that order."
+  },
+  {
+   "key": "kc.footer.country",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:868"
+   ],
+   "en": "Country/Region",
+   "nl": "Land/regio",
+   "nl_hold": null,
+   "fr": "Pays/région",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.footer.email",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:660"
+   ],
+   "en": "Email",
+   "nl": "E-mail",
+   "nl_hold": null,
+   "fr": "E-mail",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.footer.email_placeholder",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:667"
+   ],
+   "en": "you@example.com",
+   "nl": "you@example.com",
+   "nl_hold": null,
+   "fr": "you@example.com",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.footer.join",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:679"
+   ],
+   "en": "Join",
+   "nl": "Doe mee",
+   "nl_hold": null,
+   "fr": "S’inscrire",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.footer.language",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:850"
+   ],
+   "en": "Language",
+   "nl": "Taal",
+   "nl_hold": null,
+   "fr": "Langue",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.footer.legal_consumer_rights",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:1058"
+   ],
+   "en": "Consumer Rights",
+   "nl": "Consumentenrechten",
+   "nl_hold": null,
+   "fr": "Droits des consommateurs",
+   "fr_hold": "legal-review",
+   "note": "Default of the setting legal_consumer_rights_label."
+  },
+  {
+   "key": "kc.footer.legal_privacy",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:1046"
+   ],
+   "en": "Privacy Policy",
+   "nl": "Privacybeleid",
+   "nl_hold": null,
+   "fr": "Politique de confidentialité",
+   "fr_hold": "legal-review",
+   "note": "Default of the setting legal_privacy_label."
+  },
+  {
+   "key": "kc.footer.legal_terms",
+   "area": "footer",
+   "ids": [
+    "liquid:sections/footer.liquid:1034"
+   ],
+   "en": "Terms and Conditions",
+   "nl": "Algemene voorwaarden",
+   "nl_hold": null,
+   "fr": "Conditions générales",
+   "fr_hold": "legal-review",
+   "note": "Default of the setting legal_terms_label."
+  },
+  {
+   "key": "kc.hero.aria_label",
+   "area": "hero",
+   "ids": [
+    "liquid:sections/hero-karmicare.liquid:149"
+   ],
+   "en": "Karmicare Oral Rhythm Hero",
+   "nl": "Karmicare: het ritme van je mond",
+   "nl_hold": null,
+   "fr": "Karmicare, le rythme bucco-dentaire",
+   "fr_hold": null,
+   "note": "Default of the setting accessibility_label."
+  },
+  {
+   "key": "kc.hero.image_alt",
+   "area": "hero",
+   "ids": [
+    "liquid:sections/hero-karmicare.liquid:209"
+   ],
+   "en": "Karmicare Oral Care System",
+   "nl": "Karmicare-mondzorgsysteem",
+   "nl_hold": null,
+   "fr": "Système de soin bucco-dentaire Karmicare",
+   "fr_hold": null,
+   "note": "Used when the hero image has no alt."
+  },
+  {
+   "key": "kc.hero.mode_label",
+   "area": "hero",
+   "ids": [
+    "liquid:sections/hero-karmicare.liquid:251"
+   ],
+   "en": "{{ label }} mode",
+   "nl": "{{ label }}-modus",
+   "nl_hold": null,
+   "fr": "Mode {{ label }}",
+   "fr_hold": null,
+   "note": "{{ label }} is the AWAKE / ASLEEP button label (never translated). Lines 251 and 261."
+  },
+  {
+   "key": "kc.hero.switcher_label",
+   "area": "hero",
+   "ids": [
+    "liquid:sections/hero-karmicare.liquid:242"
+   ],
+   "en": "Day and Night Oral Rhythm Switcher",
+   "nl": "Schakelaar voor het dag- en nachtritme van je mond",
+   "nl_hold": null,
+   "fr": "Sélecteur jour/nuit du rythme bucco-dentaire",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.pdp.category_strip_label",
+   "area": "pdp",
+   "ids": [
+    "liquid:snippets/product-category-strip.liquid:36"
+   ],
+   "en": "Karmicare, Biorhythmic Oral Care",
+   "nl": "Karmicare, bioritmische mondzorg",
+   "nl_hold": null,
+   "fr": "Karmicare, soin bucco-dentaire biorythmique",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.pdp.highlights_label",
+   "area": "pdp",
+   "ids": [
+    "liquid:snippets/product-highlights.liquid:160"
+   ],
+   "en": "Product highlights",
+   "nl": "Belangrijkste kenmerken",
+   "nl_hold": null,
+   "fr": "Points forts",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.pdp.professional_partners",
+   "area": "pdp",
+   "ids": [
+    "liquid:snippets/professional-testimonials.liquid:61"
+   ],
+   "en": "PROFESSIONAL PARTNERS",
+   "nl": "PROFESSIONELE PARTNERS",
+   "nl_hold": null,
+   "fr": "PARTENAIRES PROFESSIONNELS",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.plans.compare",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/product-compare-plans.liquid:55"
+   ],
+   "en": "Compare",
+   "nl": "Vergelijk",
+   "nl_hold": null,
+   "fr": "Comparer",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.plans.compare_label",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/product-compare-plans.liquid:39"
+   ],
+   "en": "Compare plans",
+   "nl": "Plannen vergelijken",
+   "nl_hold": null,
+   "fr": "Comparer les offres",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.plans.free",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/product-compare-plans.liquid:100",
+    "liquid:sections/featured-product.liquid:627"
+   ],
+   "en": "Free",
+   "nl": "Gratis",
+   "nl_hold": null,
+   "fr": "Gratuit",
+   "fr_hold": null,
+   "note": "Welcome Kit price label: compare plans (lines 100, 115) and the featured product."
+  },
+  {
+   "key": "kc.plans.included",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/product-compare-plans.liquid:241"
+   ],
+   "en": "Included",
+   "nl": "Inbegrepen",
+   "nl_hold": null,
+   "fr": "Inclus",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.plans.kit_value",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/product-compare-plans.liquid:98"
+   ],
+   "en": "· {{ total_value }} Value",
+   "nl": "· {{ total_value }} waarde",
+   "nl_hold": null,
+   "fr": "· valeur {{ total_value }}",
+   "fr_hold": null,
+   "note": "{{ total_value }} is the Welcome Kit total, money_without_trailing_zeros."
+  },
+  {
+   "key": "kc.plans.not_included",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/product-compare-plans.liquid:234"
+   ],
+   "en": "Not included",
+   "nl": "Niet inbegrepen",
+   "nl_hold": null,
+   "fr": "Non inclus",
+   "fr_hold": null,
+   "note": "Lines 234 and 243."
+  },
+  {
+   "key": "kc.plans.or",
+   "area": "plans",
+   "ids": [
+    "liquid:sections/main-product.liquid:147"
+   ],
+   "en": "Or",
+   "nl": "Of",
+   "nl_hold": null,
+   "fr": "Ou",
+   "fr_hold": null,
+   "note": "Joins the buy button and the Try once link."
+  },
+  {
+   "key": "kc.stat_strip.aria_label",
+   "area": "stat_strip",
+   "ids": [
+    "liquid:sections/stat-strip-karmicare.liquid:84"
+   ],
+   "en": "Karmicare Stats and Highlights",
+   "nl": "Karmicare in cijfers en hoogtepunten",
+   "nl_hold": null,
+   "fr": "Karmicare en chiffres et points forts",
+   "fr_hold": null
+  },
+  {
+   "key": "kc.sticky_cart.change_label_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1012"
+   ],
+   "en": "Change",
+   "nl": "Wijzigen",
+   "nl_hold": null,
+   "fr": "Modifier",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting change_label. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.checkup_info_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:995"
+   ],
+   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
+   "nl": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account.",
+   "nl_hold": null,
+   "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting checkup_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.credit_checkup_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:983"
+   ],
+   "en": "+ [credit] Care Credit + €40 Check-up Reward",
+   "nl": "+ [credit] Care Credit + €40 controlebeloning",
+   "nl_hold": null,
+   "fr": "+ [credit] Care Credit + 40 € récompense contrôle",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting credit_checkup. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.credit_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:977"
+   ],
+   "en": "+ [credit] Care Credit back",
+   "nl": "+ [credit] Care Credit terug",
+   "nl_hold": null,
+   "fr": "+ [credit] de Care Credit reversé",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting credit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.credit_info_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:989"
+   ],
+   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+   "nl_hold": null,
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting credit_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.cta_once_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1030"
+   ],
+   "en": "Try once",
+   "nl": "Eenmalig proberen",
+   "nl_hold": null,
+   "fr": "Essayer une fois",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting cta_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.cta_rhythm_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1018"
+   ],
+   "en": "Begin your 60-Day Rhythm",
+   "nl": "Begin je 60-dagenritme",
+   "nl_hold": null,
+   "fr": "Commencer votre Rythme 60 jours",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting cta_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.cta_year_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1024"
+   ],
+   "en": "Begin the Karmicare Year",
+   "nl": "Begin het Karmicare-jaar",
+   "nl_hold": null,
+   "fr": "Commencer l’année Karmicare",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting cta_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.delivery_free_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1036"
+   ],
+   "en": "Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe",
+   "nl": "Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa",
+   "nl_hold": null,
+   "fr": "Livraison offerte · 1 à 3 jours ouvrables au Benelux",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting delivery_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.delivery_once_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1042"
+   ],
+   "en": "Shipping calculated at checkout",
+   "nl": "Verzending berekend bij afrekenen",
+   "nl_hold": null,
+   "fr": "Frais de livraison calculés au paiement",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting delivery_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.guarantee_member_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1055"
+   ],
+   "en": "60-day money-back guarantee",
+   "nl": "60 dagen geld-terug-garantie",
+   "nl_hold": null,
+   "fr": "Satisfait ou remboursé 60 jours",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting guarantee_member. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.guarantee_once_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1061"
+   ],
+   "en": "14-day money-back guarantee",
+   "nl": "14 dagen geld terug",
+   "nl_hold": null,
+   "fr": "Satisfait ou remboursé 14 jours",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting guarantee_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.kit_free_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1104"
+   ],
+   "en": "Free",
+   "nl": "Gratis",
+   "nl_hold": null,
+   "fr": "Gratuit",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting kit_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.kit_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1049"
+   ],
+   "en": "Welcome Kit: two toothbrushes + floss",
+   "nl": "Welkomstpakket: twee borstels + tandzijde",
+   "nl_hold": null,
+   "fr": "Kit de bienvenue : deux brosses à dents + fil dentaire",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting kit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.package_name_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1098"
+   ],
+   "en": "Awake & Asleep AM/PM Oral Care System",
+   "nl": "Awake & Asleep AM/PM-mondzorgsysteem",
+   "nl_hold": null,
+   "fr": "Système de soin matin/soir Awake & Asleep",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting package_name. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.panel_label_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1006"
+   ],
+   "en": "Delivery & what's included",
+   "nl": "Levering & wat erin zit",
+   "nl_hold": null,
+   "fr": "Livraison et contenu",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting panel_label. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.per_brushing_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1080"
+   ],
+   "en": "[per_brushing] per brushing",
+   "nl": "[per_brushing] per poetsbeurt",
+   "nl_hold": null,
+   "fr": "[per_brushing] par brossage",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting per_brushing. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.price_once_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:966"
+   ],
+   "en": "[price] one time",
+   "nl": "[price] eenmalig",
+   "nl_hold": null,
+   "fr": "[price] en une fois",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting price_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.price_rhythm_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:954"
+   ],
+   "en": "[price] every 60 days",
+   "nl": "[price] om de 60 dagen",
+   "nl_hold": null,
+   "fr": "[price] tous les 60 jours",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting price_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.price_year_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:960"
+   ],
+   "en": "[price] per year",
+   "nl": "[price] per jaar",
+   "nl_hold": null,
+   "fr": "[price] par an",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting price_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.stop_rhythm_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1067"
+   ],
+   "en": "Pause or stop anytime",
+   "nl": "Altijd pauzeren of stoppen",
+   "nl_hold": null,
+   "fr": "Suspendez ou arrêtez à tout moment",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting stop_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.stop_year_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1073"
+   ],
+   "en": "Renews yearly · stop anytime before renewal",
+   "nl": "Jaarlijks verlengd · opzegbaar tot de verlenging",
+   "nl_hold": null,
+   "fr": "Renouvellement annuel · résiliable avant l’échéance",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting stop_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.title_once_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:943"
+   ],
+   "en": "Try Once · 1 Duo",
+   "nl": "Eenmalig proberen · 1 duo",
+   "nl_hold": null,
+   "fr": "Essayer une fois · 1 duo",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting title_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.title_rhythm_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:931"
+   ],
+   "en": "60-Day Rhythm · Awake + Asleep",
+   "nl": "60-dagenritme · Awake + Asleep",
+   "nl_hold": null,
+   "fr": "Rythme 60 jours · Awake + Asleep",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting title_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.title_year_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:937"
+   ],
+   "en": "The Karmicare Year · 6 Duos",
+   "nl": "Het Karmicare-jaar · 6 duo's",
+   "nl_hold": null,
+   "fr": "L’année Karmicare · 6 duos",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting title_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  },
+  {
+   "key": "kc.sticky_cart.try_once_html",
+   "area": "sticky_cart",
+   "ids": [
+    "liquid:sections/main-product.liquid:1087"
+   ],
+   "en": "Not ready for a membership? Try once for [price]",
+   "nl": "Nog geen lidmaatschap? Probeer eenmalig voor [price]",
+   "nl_hold": null,
+   "fr": "Pas encore d’adhésion ? Essayez une fois pour [price]",
+   "fr_hold": null,
+   "note": "Default of the sticky_cart setting try_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+  }
+ ]
+}

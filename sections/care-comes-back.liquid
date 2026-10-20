@@ -60,8 +60,9 @@
         <ol class="care-comes-back__loop" role="list">
           {%- for block in steps -%}
             <li class="care-comes-back__step" {{ block.shopify_attributes }}>
+              {%- comment -%} 01/02/03 on the homepage (Victor 20 Oct, H-2); empty rings where the setting is off: the PDP (D2) {%- endcomment -%}
               <span class="care-comes-back__marker" aria-hidden="true">
-                {{- forloop.index | prepend: '0' | slice: -2, 2 -}}
+                {%- if section.settings.show_step_numbers -%}{{- forloop.index | prepend: '0' | slice: -2, 2 -}}{%- endif -%}
               </span>
               <div class="care-comes-back__step-text">
                 {%- if block.settings.title != blank -%}
@@ -145,6 +146,13 @@
     {
       "type": "header",
       "content": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_step_numbers",
+      "label": "Show step numbers 01/02/03",
+      "info": "On for the homepage (H-2), off on the product page (D2).",
+      "default": true
     },
     {
       "type": "text",

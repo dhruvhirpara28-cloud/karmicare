@@ -1,0 +1,265 @@
+# B1a report · EN source inventory, corrections and glossary (homepage + Duo PDP)
+
+Task `task_dff189ea8e99`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy` (from 3bae259, the live baseline). 19 Oct 2026.
+
+## Preflight
+
+| Check | Result |
+|---|---|
+| `orca status --json` | runtime `ready`, `reachable: true`, connection `connected` |
+| `git status --short` / branch | clean tree on `karmicare/soft-launch-source-copy`, HEAD 3bae259 |
+| Model / permission mode | Claude Opus 5.5 (`claude-opus-5-5`) in Claude Code, bypass-permissions mode, every Bash command sandboxed |
+| `AGENTS.md` | read; the files it points to (README, `docs/pdp/RUNBOOK.md`, `docs/design-tokens/`) are not in this repo, so COMMON-RULES and BRIEF applied |
+
+**Network, disclosed.** Before the coordinator's message about the network arrived, I made read-only GET requests to six public URLs on `karmicares.myshopify.com`: the homepage, the Duo PDP and four `/products/<handle>.js` files (the Duo, both 2.0 brushes, the floss). They ran around 19:10–19:20, still inside the sandbox: curl failed, so I sent them through the sandbox's own proxy at `127.0.0.1` instead of `localhost`. After the message ("do not switch proxies … do not use another channel") I made no further requests. The admin-held entries come from those captures. The raw captures stay in my session scratch and are not committed. Nothing else went over the network apart from read-only Figma MCP calls on `3rOMJvQZTzyYjnCV6oggV3` (frame 3002:20280).
+
+## What changed
+
+| Commit | What |
+|---|---|
+| `f2e9506` content(homepage) | Text values only in `templates/index.json` and `sections/footer-group.json` (11 values, below). |
+| `ee3b1f4` docs(source-copy) | `en-source.json`, `batches/*.json`, `INVENTORY.md`, `digest.py`. |
+| `0b98382` docs(source-copy) | `GLOSSARY.md`, `CLAIMS-REVIEW.md`. |
+| this commit | `REPORT.md`. |
+
+Corrections (old → new in `INVENTORY.md` and in each entry's `old_en`):
+
+- **€0.49**: the two homepage CTA sub-lines read "€0,49 / brushing ritual" in EN; now "€0.49 / brushing ritual". No other template or group text states a per-brushing price.
+- **Homepage FAQ**: the six answers were all copies of the row 1 answer.
+  - Row 1 (two formulas) keeps its own answer.
+  - Rows 4, 5, 6 now carry the 45 brief's Q3, Q5 and Q10 as adapted in the Figma review frame 3002:20280, read verbatim from Figma.
+  - Row 2 (fluoride-free) gets `[NEEDS APPROVED COPY]`: FAQ-0202 is Draft with Regulatory "Needs review", so its status does not allow use.
+  - Row 3 (fluoride paste) gets `[NEEDS APPROVED COPY]`: no approved answer exists anywhere.
+- **Defects**:
+  - "HEALTH ENTHOUSIASTS" → "ENTHUSIASTS".
+  - "your mouth need" → "needs".
+  - "60 day money back guarantee" → "60-day money-back guarantee" (PDP and announcement-bar form).
+  - Footer "a Belgium product" → "a Belgian product".
+  - No duplicated words exist on these pages; the one Asleep-before-Awake string is admin-held (handoff).
+- **Not changed, by design**:
+  - **€0.42**: the Year's cost per brushing in the compare table is an admin metaobject cell.
+  - **Welcome Kit value**: the buy box and plan descriptions already show €21; only the admin compare table shows €18.
+  - **Year sub-line**: no text setting in the four allowed files presents the Year, so "3 now, 3 in month 6" goes to handoffs. It already appears in the Loop selling-plan name and description.
+
+## Inventory (acceptance counts)
+
+743 entries in three batches, current after R1. B1a delivered 739; R1 added 4 runtime strings to batch 01 (see "R1 fixes").
+
+| Batch | Entries | Digest |
+|---|---:|---|
+| `batch-01-homepage` | 225 | `a09219ae1af8e24bd4fbcc86ce50223656adb586` (B1a: 221, `b685b73d4dcd…`) |
+| `batch-02-pdp` | 477 | `03dd18b9d41a21772da2e26b7060c42f6b2364d1` |
+| `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
+
+| resource_type | Entries |
+|---|---:|
+| template_setting | 345 (homepage 189, PDP 156) |
+| section_group | 6 (header 2, footer 4) |
+| theme_locale | 99 (28 Dawn keys + 71 hardcoded theme strings) |
+| app | 27 (12 hardcoded Loop widget strings, 14 selling-plan names, groups and descriptions, 1 consent link) |
+| product | 16 |
+| metafield | 175 |
+| metaobject | 63 |
+| shop | 2 |
+| navigation | 10 |
+
+By status: 316 approved, 9 corrected, 60 needs-review (2 of them blocked placeholders), 77 needs-key, 281 admin-held. 53 entries are never-translate. (B1a: 329 approved, 47 needs-review, 73 needs-key; R1 moved 13 entries to needs-review and added 4 needs-key entries.)
+
+The text-setting counts (189 and 156) are higher than the brief's estimate (about 149 and 119). They take every non-empty text-like value, including the four sections both templates repeat and two disabled PDP blocks (marked `rendered: false`). Seven Liquid pointer settings and eleven technical text settings are left out; INVENTORY.md lists the types per file. No custom section reads `locales/en.default.json`. Every custom string is either a setting or hardcoded, so the custom-locale part of the target is empty, and the 77 needs-key strings (file:line in INVENTORY.md) are the localization worker's list.
+
+## Evidence
+
+- `shopify theme check --fail-level error`: **exit 0**. 224 files inspected, 21 offenses, all warnings, none in the four target files. No change to `.theme-check.yml`.
+- All four JSON files parse after the edits (comment header kept).
+- `python3 docs/source-copy/digest.py`: exit 0 (every sha1 and batch digest matches).
+- Figma: answers for rows 4–6 read from instances `I3002:20346`, `I3002:20354`, `I3002:20362` (`;3589:3637`) in file `3rOMJvQZTzyYjnCV6oggV3`.
+- Screenshots: none. The change is text in template JSON with no CSS or Liquid. Rendered verification of the homepage FAQ is **pending the preview gate**.
+
+## Pending
+
+| Item | Gate or owner |
+|---|---|
+| Rendered check of the six homepage FAQ rows (Day/Night, 393–2560) | preview gate |
+| Approved answers for FAQ rows 2 and 3 | Victor (decision 1) |
+| Clinical Research sign-off on 46 needs-review and 3 unsupported claims (after R1) | Victor / Clinical Research (decision 3) |
+| Live captures to be refreshed if admin text changes before translation | whoever runs the next batch (network now pending the owner's fix) |
+
+## Handoffs
+
+**Admin (Shopify, Loop): Victor or the admin owner, no theme change possible.**
+1. Compare table (`shop.metaobjects.compare_value`), Year column: **€0.42 → €0.49 per brushing**. €354 / 6 duos = €59 per duo, the same as the 60-Day Rhythm.
+2. Compare table (`custom.compare_table`), Welcome Kit row: it references the old Morning (€4) and Evening (€5) brushes, so the tooltip says **€18**. Point it at `morning-toothbrush-2-0` and `evening-toothbrush-2-0` (€6 + €6 + €9 = **€21**).
+3. Compare table Year cells ("2× a year", the delivery tooltip) do not carry the approved sub-line **"3 now, 3 in month 6"**.
+4. Product FAQ metafield: typo **"Full dosep"** → "dose".
+5. Treatment journey metafield: a line stops mid-phrase, "Peace of mouth, peace of mind* — from your gums to the".
+6. Image alt `media.69840178020733` puts the evening before the morning ("evening care at 22:00 and morning care at 06:40"): Awake before Asleep.
+7. Footer menu `company`: "Why use hydroxapatite" is misspelled (hydroxyapatite) and uses the banned word "use".
+8. Selling plans:
+   - The legacy plan name " Pay every 12 months, Deliver every 6 months_" has a leading space and a trailing underscore; the legacy groups (Subscribe and Save, 60-Day Supply, Yearly Plan) are in the plan markup, so check they stay hidden.
+   - The plan descriptions say "Inflation-proof member price" (no approved EN wording).
+   - The Year description says "verified by your dentist" (see decision 4).
+9. The lab name differs: "Midwest University" in the product FAQ, "Indiana University OHRI 2025" in the 45 brief.
+
+**PDP owner (`sections/main-product.liquid`, outside my files).**
+1. The sticky bar's 26 strings are schema defaults of the `sticky_cart` block. The PDP template stores only `button_text`, so Translate & Adapt cannot reach them. Either store them in the template or make them locale keys. Their file:line entries are in INVENTORY.md.
+2. That is also where the Year sub-line belongs: `title_year` "The Karmicare Year · 6 Duos" (line 937) is the theme text that presents the Year without "3 now, 3 in month 6".
+3. `checkup_info` (line 995) repeats "verified by your dentist".
+
+**Homepage owner.**
+1. FAQ category tabs: rows 3–6 sit under categories that do not fit their questions (rinsing under "Plans & Return on Care", results under "Shipping & guarantee").
+2. `sections/two-formulas-karmicare.liquid:133` uses the heading as the image alt, so the alt reads `Two formulas. One system. <strong>Designed around you.</strong>`. Strip the HTML.
+3. Two headings carry `<em>` accent words: the homepage "Care that comes back" heading and the PDP research heading. The design rule is "no italic accent words", so confirm they render upright.
+4. The homepage featured product's Loop block has no `plans_eyebrow` / `plans_heading`, so the Loop fallbacks "Start here" / "Choose how to begin" render there.
+
+**Localization worker.**
+1. The 77 needs-key strings: hardcoded Liquid and JS, including the seven hourly clock messages in `assets/chronobiology-clock-karmicare.js` and the clock's live-mode tail added in R1.
+2. The header's "Coming soon" and the footer's three legal link texts are schema defaults that the group JSON does not store.
+
+**Loop owner (off-limits files).** "One time Purchase", "Selling Plans", "each", "/ year", "/ 60 days", "Renews every year" and "value · free" are hardcoded in `snippets/loop-widget-standard.liquid` and `assets/loop-widget.js`.
+
+## Open decisions for Victor
+
+1. **The two missing FAQ answers.**
+   - **Row 2, "Is Karmicare fluoride-free?"**: the FAQ-0202 short answer is ready in EN and NL but is Draft and carries the "outperformed fluoride on sensitivity" claim.
+   - **Row 3, "Will Karmicare offer a biorhythmic toothpaste with fluoride?"**: no copy exists.
+   - Options: (a) approve FAQ-0202 after the claims check and write row 3; (b) hide rows 2 and 3 at integration until copy exists; (c) drop row 3's question.
+   - *Recommendation*: (b) now, so `[NEEDS APPROVED COPY]` can never ship, then (a) for row 2. Row 3 needs your answer on the product roadmap; that is not a copy decision.
+2. **FR conventions.** EN €0.49 and NL €0,49 are decided. The FR proposals:
+   - French typography: **0,49 €**, a no-break space before `: ; ! ?`, `€` and `%`.
+   - Warm *vous*.
+   - Care Credit, Return on Care, Awake, Asleep and Leave-on stay English.
+   - Plan names *Rythme 60 jours*, *L'année Karmicare*, *Essayer une fois*.
+   - *Recommendation*: accept the French typography rather than copying the NL "€0,49". Decide alongside it whether FR ships at all, because customer care answers in EN and NL only (offer, 5 Oct).
+3. **Claims.**
+   - Three are unsupported: homepage benefit card 06 ("Gums settle, turn pinker and look radiant" and, since R1, its heading "Radiant calm gums"), and the two health lines in Sietske Hamelink's quote, which appears on both templates.
+   - 46 need review (42 at B1a): the study cards with their result lines, the timelines, the "clinically proven" and "100+ practitioners" lines, the evidence counts, the leave-on safety lines, and others; CLAIMS-REVIEW.md has the full list.
+   - *Recommendation*: fix or remove the three unsupported ones before NL/FR translation starts. Let translation run on the rest now, since the batch digests show what changes after sign-off.
+4. **Offer wording that contradicts the offer source of truth.**
+   - The announcement bar promises complimentary shipping and a 60-day guarantee to everyone, but Try Once pays shipping and has 14 days.
+   - The check-up tooltip, the sticky bar, the info card and the Year plan description say the check-up is "verified/confirmed by your dentist", but the offer needs no dentist involvement.
+   - *Recommendation*: give the wording; I did not write new copy.
+5. **Money format.** Shopify formats money per currency, not per language, so computed amounts render "€0,49", "€5,90" and "€67,00 EUR" on the EN pages too, next to static "€0.49".
+   - *Recommendation*: decide whether EN computed amounts may keep the comma. Otherwise the PDP owner must format per locale in the theme. The store setting alone cannot give EN €0.49 and NL €0,49.
+6. **Facts to confirm.**
+   - "Dr. Kris Sienaert" (site and image file) or "Sinaert" (45 brief)?
+   - "Twelve hundred brushings a year" in the professionals section: twice a day is about 730.
+   - "100+" practitioners (PDP) or "30+" (45 brief)?
+   - 36 studies (site) or 39 (45 brief)?
+   - The footer slogan "Your mouth has a rhythm So should your oral care" has no stop between the sentences.
+   - *Recommendation*: confirm each. None was changed because each needs a fact, not a typo fix.
+
+## R1 fixes
+
+Task `task_07508030e174`, 19 Oct 2026. The independent review `docs/runtime-review/B1a-ASTRA.md` (verdict: pass with fixes) found five issues, F1–F5. All five are fixed here, one commit per finding:
+
+- No storefront claim was rewritten and no theme file was edited; the theme diff since 3bae259 is still B1a's 11 text corrections.
+- No off-limits Loop file was touched; the Loop strings are handed to its owner.
+
+| Finding | Commit | Result |
+|---|---|---|
+| F1: claims register coverage | `38c7c68` | 17 entries gain claim links; 13 template entries move approved → needs-review; 3 new claim rows |
+| F2: C46 scope | `c64dae9` | C46 quotes the full statement, needs-review |
+| F3: runtime branches | `155691f` | 4 new needs-key entries; batch 01: 225 entries, digest `a09219ae1af8` |
+| F4: digest verifier | `c9a3bbb` | `digest.py` checks every batch file entry by entry; `digest_selftest.py` proves three negative cases |
+| F5: FR typography | `a3c13c3` | real U+00A0 / U+202F in every French price, percentage and grouped-number example |
+| NL follow-up | `a5298b0` | Dutch for the 4 new strings; NL statuses refreshed for the new claim links |
+
+**Method.** The inventory is produced by the same builders as B1a and B2. They were rerun before any change, and git saw no difference: they reproduce the committed files byte for byte. After each fix, a diff of `en-source.json` against the previous commit listed exactly the intended entries. Every EN text and digest stayed unchanged in F1 and F2. F3 changed only batch 01.
+
+### F1: claims register coverage
+
+A claim row can now cover several wordings, and its `Where` column lists every entry that carries it, with no "+n more".
+
+| Claim | Now also covers | Entries | Inventory status |
+|---|---|---|---|
+| C60 | "98% occlusion vs 82% and 65% …" | `card_bDxUVT/result_text`, both templates | approved → needs-review |
+| C61 | "SMD 2.17 · p = 0.004 · 95% CI …" | `card_yMiD9D/result_text`, both | approved → needs-review |
+| C62 | "SMD −1.09 · p < 0.00001 · 95% CI …" | `card_fmFMFd/result_text`, both | approved → needs-review |
+| C63 | "Lower cold-air and tactile sensitivity vs fluoride and placebo …" | `card_Hi7YUD/result_text`, both | approved → needs-review |
+| C64 | "Fewer ulcers, shorter duration, fewer episodes, less pain" | `card_JeERX6/result_text`, both | approved → needs-review |
+| **C68** (new, needs-review) | "covering more than 38,000 people between them" | `research_behind_system_EkjATL/bottom_text`, both | approved → needs-review |
+| C35 (unsupported) | "Radiant calm gums" | `index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/heading` | approved → needs-review |
+| **C93** (new, needs-review) | "certified safe to remain in your mouth" | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer` | stays corrected; now claims C13 + C93 |
+| C93 | "Safety-assessed for leave-on use", "Leave-on safe" | `custom.product_faq#56`, `#95` | stays admin-held, claim note added |
+| **C94** (new, needs-review) | "— calmer gums, fresher breath, morning and night" | `custom.treatment_journey_*#11` | stays admin-held, claim note added |
+
+- Each linked entry carries the claim ids in `claims` and a note "claims …: needs-review/unsupported (CLAIMS-REVIEW.md)". `corrected` and `admin-held` keep their provenance status, as the review asked.
+- All three batch copies, INVENTORY.md and CLAIMS-REVIEW.md were regenerated.
+- 13 template entries changed status: 10 result lines, the 2 `bottom_text` entries and the gum heading. The F1 commit message says 14; that count is wrong, 13 is correct.
+
+### F2: C46
+
+C46 now quotes the whole statement: "Awake for the cortisol morning, Asleep for the repair night — supporting the natural recovery process instead of interrupting it." It is `needs-review`. The allowed verb "supporting" does not make it cosmetic: the statement ties the formulas to cortisol and overnight recovery, and compares them with care that "interrupts" it, which needs Clinical Research validation like C40 and C50–C54. Entry `custom.product_faq#104` stays `admin-held` and carries the review note.
+
+**Claim totals for batches 01–03:** 66 claims, of which 17 approved, 46 needs-review, 3 unsupported (B1a: 63, 18 / 42 / 3).
+
+### F3: runtime branches
+
+When two branches share a line, the new id adds a branch suffix; `key_path` keeps the exact file:line. The notes name both consumers (the homepage and the Duo PDP), and each sibling entry points to its new branch.
+
+| Id | key_path | EN | resource_type | Owner |
+|---|---|---|---|---|
+| `liquid:assets/chronobiology-clock-karmicare.js:91:live` | `assets/chronobiology-clock-karmicare.js:91` | `. Current local time.` | theme_locale | localization worker |
+| `liquid:assets/loop-widget.js:2452:annual` | `assets/loop-widget.js:2452` | `/ year` | app | Loop owner |
+| `liquid:assets/loop-widget.js:2463` | `assets/loop-widget.js:2463` | `Renews` (replaces "ships") | app | Loop owner |
+| `liquid:assets/loop-widget.js:2464` | `assets/loop-widget.js:2464` | `{{ amount }} / brushing` | app | Loop owner |
+
+For `Renews`, the note advises keying the whole line ("Renews every {{ days }} days"). Once the admin phrase is translated, the English regex `/ships/i` no longer matches, and Dutch word order needs the full line anyway (approved Figma NL: "Elke 60 dagen verlengd").
+
+Inventory totals after R1 are in "Inventory (acceptance counts)" above: 743 entries, 77 needs-key.
+
+### F4: digest verifier
+
+`digest.py` now checks each batch file independently:
+- each entry's `sha1` equals `sha1(en)` of that file;
+- the digest recomputed from the file's entries equals both the stored and the canonical digest;
+- ids are unique and match the canonical batch exactly, with none missing and none extra;
+- every entry equals its `en-source.json` entry field by field;
+- no stray batch file exists.
+
+It exits 1 on any mismatch, and `--dir` runs it on a copy. `python3 docs/source-copy/digest_selftest.py` reproduces the three negative cases on temporary copies:
+
+```
+control: unchanged copy                            exit 0 (expected 0)  pass
+altered EN value, sha1/count/digest unchanged      exit 1 (expected 1)  pass
+    ERROR batches/batch-01-homepage.json: sha1 does not match en for index:hero_karmicare_XKKLDK/heading_RHmd8h/heading
+    ERROR batches/batch-01-homepage.json: stored digest a09219ae…, recomputed from its entries d54c06d3…
+    ERROR batches/batch-01-homepage.json: digest of its entries d54c06d3… differs from the canonical a09219ae…
+    ERROR batches/batch-01-homepage.json: index:hero_karmicare_XKKLDK/heading_RHmd8h/heading differs from en-source.json in en
+substituted id at unchanged count                  exit 1 (expected 1)  pass
+    ERROR batches/batch-01-homepage.json: missing id index:hero_karmicare_XKKLDK/heading_RHmd8h/heading
+    ERROR batches/batch-01-homepage.json: extra id index:SUBSTITUTED/id
+metadata-only change (status)                      exit 1 (expected 1)  pass
+    ERROR batches/batch-02-pdp.json: product.subscription-item:main/highlights_slider_9wAjAb/text_1 differs from en-source.json in status
+```
+
+### F5: French typography
+
+The French examples in GLOSSARY.md now contain the real characters. In this report's notation: `0,49 €`, `1 200 €`, `36 559`, `IC à 95 %`, `20 %`, `21 €` and `98 %`, that is U+00A0 before € and % and U+202F as the thousands separator. The glossary itself holds the characters, not the escapes. A new "Encoding" row says to copy them as they are. A code-point scan finds no plain space left before €/% or inside a grouped number. The Edit tool normalised the characters to plain spaces, so they were written by a script with explicit ` ` / ` ` escapes. The FR typography decision stays with Victor.
+
+### NL follow-up
+
+`docs/localization/nl/` (B2 payloads) follows the changes in batch 01 and the new claim links:
+
+- **New Dutch:**
+  - `. Huidige lokale tijd.`
+  - `/ jaar` (approved Figma NL)
+  - `Verlengd`: fit-risk; the note asks the Loop owner to key the whole line "Elke {{ days }} dagen verlengd"
+  - `{{ amount }} / poetsbeurt` (approved Figma NL)
+- **Statuses:** the research result lines, evidence counts, leave-on safety lines and C46 are now `pending-claim-review` (329 in total). "Radiant calm gums" is held with the rest of benefit card 06 (117 unsupported held).
+- **Report:** the NL REPORT counts are refreshed.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `python3 docs/source-copy/digest.py` | exit 0, 8 batches |
+| `python3 docs/source-copy/digest_selftest.py` | exit 0 (control passes, the three defects fail) |
+| `python3 docs/localization/nl/validate.py` | exit 0, 8 batches |
+| `shopify theme check --fail-level error` | exit 0 (237 files, 21 warnings, no errors) |
+
+### Handoffs from R1
+
+- **Loop owner:** keys for `/ year`, `Renews` (better: the whole line) and `{{ amount }} / brushing` in `assets/loop-widget.js`, together with the B1a Loop strings.
+- **FR worker:** merge this branch. Batch 01 has a new digest and 4 new entries to translate; the new claim links change which FR entries are `pending-claim-review` or held.
+- **Clinical Research / Victor:** C68, C93, C94 and the reclassified C46 join the sign-off list.
