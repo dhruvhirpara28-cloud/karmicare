@@ -507,8 +507,8 @@
       }
     }
 
-    /* When the bar shows: only once the visitor has scrolled past the buybox CTA (never over the plan
-       cards while they choose), never while another way to begin is on screen (P8: the section of the
+    /* When the bar shows: only once the visitor has scrolled past the buybox's first plan card (Victor,
+       20 Oct), never while another way to begin is on screen (P8: the section of the
        comparison table, the plans table or the end CTA, whole, so the bar never covers their cards),
        and only once it knows the plan */
     var CTA_SELECTOR = '.product-form__submit, .comparison-section__button, [data-kc-plan-choose]';
@@ -528,13 +528,20 @@
     });
     observers.push(ctaObserver);
 
-    // Past the buybox CTA = its bottom above the screen; from 750 px (two columns, the gallery sticky
-    // beside the buybox) also past the gallery column, so the card never covers its thumbnails. Read on
-    // scroll, not from an observer: a jump from below the screen to above it crosses no threshold.
-    var gallery = document.querySelector('.product__media-wrapper');
+    // Past the buybox = the bottom of its first plan card on screen (Loop's first shown selling plan
+    // group) above the screen; without plan cards, the bottom of the buybox CTA. Looked up on every check
+    // because Loop renders and re-renders the cards late. Read on scroll, not from an observer: a jump
+    // from below the screen to above it crosses no threshold.
+    function firstPlanCard() {
+      var cards = document.querySelectorAll('.product__info-container .loop-subscription-group');
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].getClientRects().length) return cards[i];
+      }
+      return null;
+    }
     function checkBuybox() {
-      var past = !buyboxCta || buyboxCta.getBoundingClientRect().bottom <= 0;
-      if (past && gallery && window.innerWidth >= 750) past = gallery.getBoundingClientRect().bottom <= 0;
+      var edge = firstPlanCard() || buyboxCta;
+      var past = !edge || edge.getBoundingClientRect().bottom <= 0;
       if (past === pastBuybox) return;
       pastBuybox = past;
       updateVisibility();

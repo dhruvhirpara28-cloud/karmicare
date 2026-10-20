@@ -49,6 +49,7 @@
 
   #shopify-section-{{ section.id }} .header {
     border-radius: var(--kc-shape-radius-sm);
+    box-shadow: var(--kc-elevation-md);
     max-width: 1200px;
     margin: 1.2rem auto;
     align-items: center;
@@ -134,8 +135,8 @@
     }
   }
 
-  /* Mobile and tablet: glass bar per Figma "Navigation · Mobile" (2766:10918), 4px below the
-     announcement bar, 4px padding, logo cell 16/8, BEGIN NOW and the menu button 3px apart.
+  /* Mobile and tablet: glass bar per Figma "Navigation · Mobile" (2766:10918), 12px below the
+     announcement bar (Figma 4px; 8px lower at Victor's request, 20 Oct), 4px padding, logo cell 16/8, BEGIN NOW and the menu button 3px apart.
      The open menu drops down from the bar as one panel on the same surface. */
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .header__inline-menu {
@@ -144,7 +145,7 @@
     #shopify-section-{{ section.id }} .header {
       display: flex;
       align-items: center;
-      margin-top: 0.4rem;
+      margin-top: 1.2rem;
       padding: 0.4rem;
       position: relative;
       z-index: 100;
@@ -180,8 +181,10 @@
       margin: 0;
       padding: 0.8rem 1.6rem;
     }
+    /* Larger than the Figma 105 (Victor, 20 Oct): 140 from 390 px wide, narrower phones scale it
+       down so it keeps clear of BEGIN NOW */
     #shopify-section-{{ section.id }} .header__heading-logo-svg svg {
-      width: 105px;
+      width: clamp(105px, calc(100vw - 250px), 140px);
     }
     #shopify-section-{{ section.id }} .header__icons {
       order: 2;
@@ -339,14 +342,7 @@
     }
   {%- endif -%}
 
-  /* ── DAY MODE COLORS (from section schema settings) ── */
-  {%- if section.settings.bg_color_day != blank -%}
-    body.day-mode #shopify-section-{{ section.id }} .header,
-    body.day-mode #shopify-section-{{ section.id }} .header::before,
-    body.day-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
-      background-color: {{ section.settings.bg_color_day }};
-    }
-  {%- endif -%}
+  /* ── DAY MODE COLORS (from section schema settings; the bar surface is in GLASS BACKGROUND) ── */
   {%- if section.settings.border_color_day != blank -%}
     body.day-mode #shopify-section-{{ section.id }} .header {
       border: 1px solid {{ section.settings.border_color_day }};
@@ -360,14 +356,7 @@
     }
   {%- endif -%}
 
-  /* ── NIGHT MODE COLORS (from section schema settings) ── */
-  {%- if section.settings.bg_color_night != blank -%}
-    body.night-mode #shopify-section-{{ section.id }} .header,
-    body.night-mode #shopify-section-{{ section.id }} .header::before,
-    body.night-mode #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
-      background-color: {{ section.settings.bg_color_night }};
-    }
-  {%- endif -%}
+  /* ── NIGHT MODE COLORS (from section schema settings; the bar surface is in GLASS BACKGROUND) ── */
   {%- if section.settings.border_color_night != blank -%}
     body.night-mode #shopify-section-{{ section.id }} .header {
       border: 1px solid {{ section.settings.border_color_night }};
@@ -390,31 +379,41 @@
   /* ── PRODUCT PAGE OVERRIDES ── */
   {% render 'product-header-css', section: section %}
 
-  /* ── GLASS BACKGROUND (bar colour at reduced opacity, Figma surface/glass) ── */
+  /* ── PRODUCT PAGES: HIDE ON SCROLL ──
+     The bar shows on landing, slides up out of view as the page scrolls down and slides back
+     after a short delay when the visitor scrolls up (or reaches the top). While it is away, the
+     sticky buy bar (snippets/sticky-cart-block.liquid) is the page's CTA. It stays while a menu
+     is open or keyboard focus is inside it. The script after the markup sets the classes;
+     without it the bar stays sticky as on every other page. */
+  {%- if template.name == 'product' or request.page_type == 'product' -%}
+    #shopify-section-{{ section.id }}.kc-header-autohide--ready {
+      transition: transform 0.3s ease 0.15s;
+    }
+    #shopify-section-{{ section.id }}.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
+      /* 1.6rem further: the bar's elevation-md shadow reaches 16px below it */
+      transform: translateY(calc(-100% - 1.6rem));
+      transition-delay: 0s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ section.id }}.kc-header-autohide--ready {
+        transition: none;
+      }
+    }
+  {%- endif -%}
+
+  /* ── GLASS BACKGROUND ──
+     Figma mapped/surface/secondary/default (Day #ffffff, Night #212a49) at the bar opacity setting,
+     with the blur setting behind it (Victor, 20 Oct). The theme holds --kc-mapped-surface-secondary-default
+     at its old navy for the Loop widget (assets/kc-tokens.css), so the bar reads
+     --kc-mapped-surface-page-secondary, which carries the same two values. */
   {%- liquid
     assign glass_alpha = section.settings.glass_opacity | divided_by: 100.0
-    assign glass_bg_day = section.settings.bg_color_day
-    assign glass_bg_night = section.settings.bg_color_night
-    if template.name == 'product' or request.page_type == 'product'
-      if section.settings.product_bg_color_day != blank
-        assign glass_bg_day = section.settings.product_bg_color_day
-      endif
-      if section.settings.product_bg_color_night != blank
-        assign glass_bg_night = section.settings.product_bg_color_night
-      endif
-    endif
   -%}
   @media screen and (min-width: 990px) {
-    {%- if glass_bg_day != blank %}
-      body.day-mode #shopify-section-{{ section.id }} .header {
-        background-color: {{ glass_bg_day | color_modify: 'alpha', glass_alpha }};
-      }
-    {%- endif %}
-    {%- if glass_bg_night != blank %}
-      body.night-mode #shopify-section-{{ section.id }} .header {
-        background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
-      }
-    {%- endif %}
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body.night-mode #shopify-section-{{ section.id }} .header {
+      background-color: rgba(var(--kc-mapped-surface-page-secondary-rgb), {{ glass_alpha }});
+    }
   }
   /* Mobile: ::before paints the bar (it sits above Dawn's menu overlay). Glass while closed;
      opaque with the panel while the menu is open. The blur is dropped while open because a
@@ -428,24 +427,19 @@
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
     }
-    {%- if glass_bg_day != blank %}
-      body.day-mode #shopify-section-{{ section.id }} .header::before {
-        background-color: {{ glass_bg_day | color_modify: 'alpha', glass_alpha }};
-      }
-      body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-      body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
-        background-color: {{ glass_bg_day }};
-      }
-    {%- endif %}
-    {%- if glass_bg_night != blank %}
-      body.night-mode #shopify-section-{{ section.id }} .header::before {
-        background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
-      }
-      body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-      body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
-        background-color: {{ glass_bg_night }};
-      }
-    {%- endif %}
+    body.day-mode #shopify-section-{{ section.id }} .header::before,
+    body.night-mode #shopify-section-{{ section.id }} .header::before {
+      background-color: rgba(var(--kc-mapped-surface-page-secondary-rgb), {{ glass_alpha }});
+    }
+    body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
+    body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before {
+      background-color: rgb(var(--kc-mapped-surface-page-secondary-rgb));
+    }
+  }
+  /* The open menu panel, opaque at every width (a desktop drawer menu uses it too) */
+  body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer,
+  body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
+    background-color: rgb(var(--kc-mapped-surface-page-secondary-rgb));
   }
 
   /* ── CTA BUTTON COLORS (from section schema settings) ── */
@@ -711,6 +705,61 @@
     </div>
   </header>
 </{{ header_tag }}>
+
+{%- if template.name == 'product' or request.page_type == 'product' -%}
+  <script>
+    // Product pages: hide the bar on scroll down, bring it back on scroll up (see the HIDE ON SCROLL styles)
+    (function () {
+      var first = document.currentScript.closest('.section-header');
+      if (!first) return;
+      // Looked up by id on every update: the theme editor and theme dev's hot reload swap the section's
+      // element without running this script again
+      var sectionId = first.id;
+      var TOP = 10; // always shown within this many px of the top
+      var CLIMB = 10; // px of scrolling up before it comes back
+      var lastY = Math.max(window.scrollY, 0);
+      var hidden = lastY > TOP;
+      var climbed = 0;
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        // Clamped so the overscroll bounce at either end reads as no movement
+        var maxY = document.documentElement.scrollHeight - window.innerHeight;
+        var y = Math.min(Math.max(window.scrollY, 0), Math.max(maxY, 0));
+        var delta = y - lastY;
+        lastY = y;
+        if (y <= TOP) {
+          hidden = false;
+        } else if (delta > 0) {
+          hidden = true;
+          climbed = 0;
+        } else if (delta < 0) {
+          climbed -= delta;
+          if (climbed >= CLIMB) hidden = false;
+        }
+        var section = document.getElementById(sectionId);
+        if (!section) return;
+        section.classList.toggle('kc-header-autohide--hidden', hidden);
+        section.classList.add('kc-header-autohide--ready');
+      }
+
+      first.classList.toggle('kc-header-autohide--hidden', hidden);
+      requestAnimationFrame(function () {
+        first.classList.add('kc-header-autohide--ready');
+      });
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        },
+        { passive: true }
+      );
+    })();
+  </script>
+{%- endif -%}
 
 {% javascript %}
   class StickyHeader extends HTMLElement {
@@ -1037,11 +1086,6 @@
     },
     {
       "type": "color",
-      "id": "bg_color_day",
-      "label": "Header background (Day)"
-    },
-    {
-      "type": "color",
       "id": "text_color_day",
       "label": "Header text (Day)"
     },
@@ -1063,11 +1107,6 @@
     {
       "type": "header",
       "content": "Night Mode Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color_night",
-      "label": "Header background (Night)"
     },
     {
       "type": "color",
@@ -1101,7 +1140,7 @@
       "step": 5,
       "unit": "%",
       "label": "Bar background opacity",
-      "info": "Applies to the bar background colour (Day and Night). On mobile the bar turns opaque while the menu is open.",
+      "info": "Applies to the bar background, the KC secondary surface (white by Day, middle blue by Night). On mobile the bar turns opaque while the menu is open.",
       "default": 90
     },
     {
@@ -1123,16 +1162,6 @@
       "type": "color",
       "id": "product_section_bg_color_night",
       "label": "Section background (Night) on Product Page"
-    },
-    {
-      "type": "color",
-      "id": "product_bg_color_day",
-      "label": "Header background (Day) on Product Page"
-    },
-    {
-      "type": "color",
-      "id": "product_bg_color_night",
-      "label": "Header background (Night) on Product Page"
     },
     {
       "type": "header",
