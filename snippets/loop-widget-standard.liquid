@@ -222,11 +222,13 @@
                               {%- assign matched_duos = 1 -%}
                               {%- assign matched_brushings = 120 -%}
                               {%- assign matched_return_on_care = 0 -%}
+                              {%- assign matched_entry = false -%}
                               {%- if product.metafields.custom.duos_count.value != blank -%}
                                 {%- for entry in product.metafields.custom.duos_count.value -%}
                                   {%- if entry.selling_plan_name.value == selling_plan_group.name
                                     or selling_plan_group.name contains entry.selling_plan_name.value
                                   -%}
+                                    {%- assign matched_entry = true -%}
                                     {%- assign matched_duos = entry.duos_count.value -%}
                                     {%- if entry.free_duo_s_count != blank -%}
                                       {%- assign matched_duos = matched_duos | plus: entry.free_duo_s_count.value -%}
@@ -240,6 +242,20 @@
                                   {%- endif -%}
                                 {%- endfor -%}
                               {%- endif -%}
+                              {%- comment -%}
+                                KC (B-01): the entry is matched by group name, which Shopify translates (/nl, /fr),
+                                so without a match the plan's own values come by selling plan ID
+                                (snippets/kc-plan-type.liquid): Duos a billing = Duos per delivery x deliveries
+                                (60-day 1, year 6), Return on Care = Care Credit % (60-day 10, year 20)
+                              {%- endcomment -%}
+                              {%- unless matched_entry -%}
+                                {%- capture kc_type_units -%}{%- render 'kc-plan-type', plan_id: sp.id, field: 'units' -%}{%- endcapture -%}
+                                {%- capture kc_type_deliveries -%}{%- render 'kc-plan-type', plan_id: sp.id, field: 'deliveries' -%}{%- endcapture -%}
+                                {%- capture kc_type_credit -%}{%- render 'kc-plan-type', plan_id: sp.id, field: 'care_credit_percent' -%}{%- endcapture -%}
+                                {%- assign kc_type_deliveries = kc_type_deliveries | strip | plus: 0 -%}
+                                {%- assign matched_duos = kc_type_units | strip | plus: 0 | times: kc_type_deliveries -%}
+                                {%- assign matched_return_on_care = kc_type_credit | strip | plus: 0 -%}
+                              {%- endunless -%}
                               <option
                                 class="loop-selling-plan-selector-option"
                                 value="{{ sp.id }}"
