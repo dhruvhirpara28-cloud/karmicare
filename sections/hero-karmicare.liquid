@@ -413,6 +413,18 @@
     }
     updateHeroLiveTime();
     setInterval(updateHeroLiveTime, 30000);
+
+    // The hero fills the first screen below the announcement bar and header: pass their
+    // height (the hero's distance from the page top) to the CSS as --hero-offset
+    var hero = document.getElementById('HeroKarmicare-{{ section.id }}');
+    function updateHeroOffset() {
+      if (!hero) return;
+      var offset = Math.max(0, hero.getBoundingClientRect().top + window.scrollY);
+      hero.style.setProperty('--hero-offset', offset + 'px');
+    }
+    updateHeroOffset();
+    window.addEventListener('load', updateHeroOffset);
+    window.addEventListener('resize', updateHeroOffset, { passive: true });
   })();
 </script>
 
