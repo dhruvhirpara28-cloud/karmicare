@@ -37,6 +37,25 @@ The NL before was the same text with *1–3 werkdagen* and *2–5 werkdagen*. Th
 
 Their NL was *Awake & Asleep AM/PM-mondzorgsysteem*. The naming source is now `admin:karmicare-biorhythmic-oral-care-system:title`, NL *Awake & Asleep tandpastasysteem voor ochtend en avond* (`admin`, in the plan). `validate.py` H8 holds every retired entry. The NL plan drops two items (1825, first wave 520).
 
+**Homepage copy (21 Oct, integration `41ae772`, homepage lane merchant-edit `97ce2b7`).** The EN source follows the new homepage text, and the NL follows it (batch 01 digest `46f2753b65fd`, 228 entries; batch 02 digest `2846c75e4df9`):
+
+| Entry | EN now | NL now | Status |
+|---|---|---|---|
+| stat-strip tagline | CHOSEN BY KPNI PRACTITIONERS, FUNCTIONAL DENTISTS, HEALTH PROFESSIONALS | GEKOZEN DOOR KPNI-THERAPEUTEN, FUNCTIONELE TANDARTSEN, ZORGPROFESSIONALS | pending-claim-review (C80) |
+| practitioner titles, homepage and PDP (6) | *Therapist* → *Practitioner* | unchanged: *kPNI-therapeut*, *orthomoleculair therapeut*, *Voedingstherapeut* (the usual Dutch titles) | translated |
+| FAQ `kLMHax` | The ritual · How long does one duo last? · About 64 days — one full cycle… | Het ritueel · Hoe lang gaat één duo mee? · Ongeveer 64 dagen — één volledige cyclus… | translated (C07, approved) |
+| FAQ `7jmEGi` (disabled) | Ingredients & safety · Can I combine Karmicare with fluoride toothpaste or rinses? · Better not… | Ingrediënten & veiligheid · Kan ik Karmicare combineren met fluoridetandpasta of -mondspoelingen? · Liever niet… | pending-claim-review (C101) |
+| FAQ `AL3DKF` (disabled) | Ingredients & safety · Is Karmicare fluoride-free? · Karmicare is fluoride-free, and always will be… | Ingrediënten & veiligheid · Is Karmicare fluoridevrij? · Karmicare is fluoridevrij, en dat blijft zo… | pending-claim-review (C102) |
+| FAQ `Pz4mRk` (new) | Plans & Return on Care · Can I pause, skip or cancel? · Your membership is completely in your hands. Amend when desired. | Plannen & Return on Care · Kan ik pauzeren, overslaan of opzeggen? · Je lidmaatschap ligt volledig in jouw handen. Pas het aan wanneer je wilt. | translated |
+| FAQ `qUxYCn` | Shipping & guarantee · What does the money-back guarantee cover? · Every first order comes with a money-back guarantee… | Verzending & garantie · Wat dekt de geld-terug-garantie? · the same NL as the guarantee line in the legal texts | translated |
+| FAQ `4KMG6C` (removed) | — | held, `retired` | held |
+
+The two former `[NEEDS APPROVED COPY]` answers are filled, so decision S1 on the review page (two missing FAQ answers) no longer applies. The claims C13, C23, C24 and C93 have left the homepage FAQ (`docs/claims/REPORT.md`). Two PDP step numbers in a disabled section are empty at `41ae772` and are retired. Already translated before this update, and unchanged: `fluoride, SLS`, `05 · Xylitol`, `08 · Leave-on` (the same in Dutch). Still held or pending:
+- the ingredient list with *VEGAN & HALAL* (pending-claim-review, C30 and C33);
+- benefit card 06 *Radiant calm gums* (held, unsupported C35).
+
+The NL plan is now 1827 items, of which 523 are in the first wave.
+
 Counts below are current.
 
 ## What is here
@@ -44,8 +63,8 @@ Counts below are current.
 | File | Content |
 |---|---|
 | `batch-0{1..8}-*.json` | One file per EN batch: `source_digest` (the EN batch it was translated from), `counts`, `fit_risk` ids, and one entry per EN entry: `{id, resource_type, file_or_handle, key_path, en, en_sha1, nl, status, flags, notes}`. |
-| `validate.py` | `python3 docs/localization/nl/validate.py` checks every file against `docs/source-copy/en-source.json`. It checks digests, coverage, `en_sha1`, and Dutch present except on held entries. It checks that each status is the strongest of its flags and that counts and fit lists match. Since R2 it also enforces the hold and gate invariants H1–H7 (unsupported, needs-review, legal, legacy, never-translate, blocked, a reason for every hold) and the exact-span checks S1 (addresses) and S2 (`(*)` markers). It exits 0 today. |
-| `validate_selftest.py` | Plants one defect per check in a temporary copy and confirms that `validate.py` rejects it (14 cases, among them a new gate added in the source only). It exits 0 today. |
+| `validate.py` | `python3 docs/localization/nl/validate.py` checks every file against `docs/source-copy/en-source.json`. It checks digests, coverage, `en_sha1`, and Dutch present except on held entries. It checks that each status is the strongest of its flags and that counts and fit lists match. Since R2 it also enforces the hold and gate invariants H1–H8 (unsupported, needs-review, legal, legacy, never-translate, blocked, a reason for every hold, retired), the exact-span checks S1 (addresses) and S2 (`(*)` markers), and since R6 the commodity-word check W1. It exits 0 today. |
+| `validate_selftest.py` | Plants one defect per check in a temporary copy and confirms that `validate.py` rejects it (18 cases, among them a new gate added in the source only and two W1 cases that must pass). It exits 0 today. |
 | `REPORT.md` | This file. |
 
 **Statuses.** Each status names the strongest flag on the entry; `flags` lists all of them.
@@ -90,9 +109,7 @@ Counts below are current.
 ## Held entries, and why
 
 - **never-translate (53):** selling-plan IDs, the Subscription Name keys "60-Day Supply" / "Year Supply", INCI lists, practitioners' names, citations, Awake/Asleep labels, brand aria-labels and the two Dawn social keys (R2 F10). These keep their EN value.
-- **needs-approved-copy (3):**
-  - homepage FAQ rows 2 and 3 (`[NEEDS APPROVED COPY]` in EN);
-  - the SLS article block that names four competitors (R2 F6; `blocked` in the source).
+- **needs-approved-copy (1):** the SLS article block that names four competitors (R2 F6; `blocked` in the source). The two homepage FAQ placeholders got approved answers on 21 Oct (integration `41ae772`) and are translated.
 - **unsupported-claim (119):**
   - four from B1a: homepage benefit card 06 (heading and text) and Sietske Hamelink's quote on both templates;
   - 107 article blocks;
@@ -114,15 +131,15 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `666785abd03e` | 121 | 230 | 35 | 0 | 41 | 15 | 35 | 27 |
-| `batch-01-homepage` | 225 | `a09219ae1af8` | 139 | 2 | 30 | 0 | 30 | 2 | 22 | 19 |
+| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 41 | 15 | 37 | 27 |
+| `batch-01-homepage` | 228 | `46f2753b65fd` | 142 | 2 | 30 | 0 | 29 | 2 | 23 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 19 | 0 | 6 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 5 | 0 | 2 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 279 | 0 | 117 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2571** | | **283** | **618** | **75** | **621** | **375** | **62** | **537** | **63** |
+| **All** | **2574** | | **284** | **618** | **75** | **621** | **374** | **62** | **540** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -130,13 +147,14 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 
 | Batch | Reason | Entries |
 |---|---|---:|
-| `batch-01-homepage` | needs-approved-copy | 2 |
 | `batch-01-homepage` | never-translate | 16 |
 | `batch-01-homepage` | unsupported-claim | 3 |
 | `batch-01-homepage` | retired (Duo name is the product title) | 1 |
+| `batch-01-homepage` | retired (FAQ block `4KMG6C` removed, 21 Oct) | 3 |
 | `batch-02-pdp` | never-translate | 32 |
 | `batch-02-pdp` | unsupported-claim | 1 |
 | `batch-02-pdp` | retired (Duo name is the product title) | 2 |
+| `batch-02-pdp` | retired (step numbers emptied in a disabled section, 21 Oct) | 2 |
 | `batch-03-header-footer` | never-translate | 3 |
 | `batch-03-header-footer` | never-translate; existing Dawn locale value remains unchanged | 2 |
 | `batch-04-legal` | held-legacy | 350 |
@@ -191,8 +209,8 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | `index:research_behind_system_EkjATL/card_fmFMFd/result_label` | slot | Result | Resultaat | 9 vs 6 chars; standard term |
 | `index:research_behind_system_EkjATL/card_Hi7YUD/result_label` | slot | RESULT | RESULTAAT | 9 vs 6 chars; standard term |
 | `index:research_behind_system_EkjATL/card_JeERX6/result_label` | slot | RESULT | RESULTAAT | 9 vs 6 chars; standard term |
-| `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | slot | Ingredients & safety | Ingrediënten & veiligheid | 25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety' |
-| `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category` | slot | Results | Resultaten | 10 vs 7 chars (filter tab); no shorter equivalent |
+| `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | slot | Ingredients & safety | Ingrediënten & veiligheid | 25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety' (block disabled since 21 Oct) |
+| `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category` | slot | Ingredients & safety | Ingrediënten & veiligheid | 25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety' (block disabled since 21 Oct) |
 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html` | slot | Varies Free | Variabel Gratis | 15 vs 11 chars; 'Wisselt' (7) is shorter but reads less clearly |
 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1` | slot | 10% / order | 10% / bestelling | 16 vs 11 chars; '10% / order' fits exactly (Dutch 'order' is correct but less consumer-friendly) |
 | `index:care_comes_back/step_next_order/title` | slot | Your next order | Je volgende bestelling | 22 vs 15 chars; 'Je volgende order' (17) fits if space is tight |
@@ -596,7 +614,7 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 | Item | Owner or gate |
 |---|---|
 | Legal review of 621 `legal-review` entries | Victor / lawyer |
-| Claim sign-off of 375 `pending-claim-review` entries | Victor / Clinical Research |
+| Claim sign-off of 374 `pending-claim-review` entries | Victor / Clinical Research |
 | Register `admin` entries, add `theme-key` strings to `locales/nl.json`, store the sticky-bar and footer schema defaults; rebuild anything derived from the payloads after R2 | localization worker |
 | Rendered check of every `/nl/` URL below, including the 63 fit-risk strings | preview gate / localization check |
 | FR follows `docs/source-copy/CHANGES-R2.md` | FR worker |
@@ -648,7 +666,6 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_text` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systematische review en meta-analyse van 4 crossover-RCT's. |
 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge` | EN has '-' here and '·' on the other cards; NL uses '·' throughout. Also the dentine badge on the SLS card; check the image. |
 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/pricing_summary_care_credit_title` | EN plural 'Care Credits' corrected to the program name 'Care Credit'. |
-| `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` | AM/PM kept: common in Dutch beauty copy ('AM/PM-routine'). |
 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_value_html` | Plan-card shipping value, 11 → 15 chars, like its homepage counterpart (already flagged); kept (R2, review F7) |
 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1` | 11 → 16 chars; no shorter Dutch word for 'order' that reads well in Flanders. |
 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_2` | 'purchase' → 'bestelling' (no 'aankoop/koop', rule 26). |
@@ -759,7 +776,7 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 | `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing` | Wrong in the EN too: the Year is €0,49 per poetsbeurt (admin fix, handoff). Translated as is. |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products` | Glossary (Figma NL) brush names, same as the product titles.; R2 (review F5): pending-claim-review, same claim wording as a gated field |
 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2` | 21 vs 17 chars; no shorter natural Dutch for 'why two formulas' |
-| `index:stat_strip_karmicare/tagline` | 'health enthusiasts' → 'gezondheidsbewuste mensen' (neutral; 'gezondheidsfanaten' reads pejorative) |
+| `index:stat_strip_karmicare/tagline` | 'health professionals' → 'zorgprofessionals'; kPNI practitioners → kPNI-therapeuten (glossary); claim C80 pending; EN updated 21 Oct (41ae772) |
 | `index:stat_strip_karmicare/stat_3/text` | EN says +36 studies here, 39 on the product page highlight and 'more than 38,000 people' in the research section; kept as EN, the numbers need one source |
 | `index:stat_strip_karmicare/stat_4/text` | AM/PM kept to fit (common in Dutch beauty copy); if space allows: 'ochtend- en avondzorg per duo' |
 | `index:stat_strip_karmicare/stat_5/heading` | 12 vs 8 chars; shortest natural form, matches the approved 'Spugen, niet spoelen' |
@@ -797,12 +814,15 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 | `index:research_behind_system_EkjATL/card_JeERX6/result_text` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Minder zweertjes, kortere duur, minder opstoten, minder pijn |
 | `index:research_behind_system_EkjATL/card_JeERX6/method_text` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systematische review en meta-analyse van 4 cross-over-RCT's. |
 | `index:research_behind_system_EkjATL/card_JeERX6/image_badge` | Same placeholder badge as the nHAp card (see the xylitol card) |
-| `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | 25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety' |
-| `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category` | 10 vs 7 chars (filter tab); no shorter equivalent |
-| `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` | Numbers warning: '1980s' → 'de jaren tachtig' (Dutch idiom, same period); R2 (review F6): 'gebruikt' → 'toegepast' (brand rule) |
-| `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer` | 'in 4–6' made explicit as 'binnen 4–6 weken'. 'bookend effect' → 'boekensteuneffect' (image kept; uncommon in Dutch, alternative 'het effect van je twee vaste momenten') |
+| `index:km_faq_accordion_FYcArV/faq_item_kLMHax/question` | as the PDP line 'Eén duo gaat 64 dagen mee'; EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | one pump → één pompje (0,45 ml) (glossary); supply claim C07 (approved); EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | 25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety'; EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question` | 'toothpaste' at first contact (an opening question) → 'tandpasta', as the EN; EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` | claim C101 pending (mechanism: nHAp and fluoride compete for the enamel surface); EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category` | 25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety'; EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` | claim C102 pending (comparison: fluoride's benefits against its drawbacks); EN updated 21 Oct (41ae772) |
+| `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer` | same NL as the guarantee line in the terms, consumer rights and refund policy (legal-review there): keep them in step; EN updated 21 Oct (41ae772) |
 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/pricing_summary_care_credit_title` | EN plural 'Care Credits'; the program name stays singular |
-| `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Awake & Asleep mondzorgsysteem voor ochtend en avond |
 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html` | 15 vs 11 chars; 'Wisselt' (7) is shorter but reads less clearly |
 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1` | 16 vs 11 chars; '10% / order' fits exactly (Dutch 'order' is correct but less consumer-friendly) |
 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_2` | 'purchase' → 'bestelling' (avoids aankoop/kopen) |

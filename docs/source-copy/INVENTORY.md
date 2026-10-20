@@ -3,13 +3,18 @@
 The English that the live store renders, one entry per string. Batches 01–03 (homepage, Duo PDP, header and footer) come from B1a, with its corrections applied; batches 04–08 (legal, other products, content pages, collections and blog, system pages) come from B2 and are inventoried as they are, without corrections. NL and FR translators start from here.
 
 - **Captured**: batches 01-03: 2026-10-19 19:15 CEST; batches 04-08: 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259). Theme text comes from this branch (`karmicare/soft-launch-source-copy`); admin-held text comes from the public live pages and `/products/<handle>.js`.
+- **Updated 21 Oct** from the integration branch at `41ae772` (homepage lane, merchant-edit `97ce2b7`):
+  - the stat-strip tagline and the three practitioner titles (on both templates: *Therapist* → *Practitioner*) are `corrected`;
+  - the homepage FAQ rows `kLMHax`, `7jmEGi`, `AL3DKF` and `qUxYCn` carry new questions and answers (`corrected`, `old_en` kept), and the two former placeholders are no longer `blocked`;
+  - the new FAQ block `Pz4mRk` adds three entries at the end of batch 01 (#226–228), so the earlier numbers stay;
+  - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 225 | `a09219ae1af8e24bd4fbcc86ce50223656adb586` |
-| `batch-02-pdp` | 477 | `666785abd03e91b643e766a266ce800fe0df07b8` |
+| `batch-01-homepage` | 228 | `46f2753b65fd2c2e40789a16c4fb6c798b3bebbf` |
+| `batch-02-pdp` | 477 | `2846c75e4df9f09cca9026b613cfddc61f307f5d` |
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
@@ -37,7 +42,7 @@ By resource type:
 
 | Batch | template_setting | section_group | theme_locale | app | product | metafield | metaobject | shop | navigation | page | policy | article | blog | collection | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 189 | 0 | 22 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 225 |
+| `batch-01-homepage` | 192 | 0 | 22 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 228 |
 | `batch-02-pdp` | 156 | 0 | 53 | 14 | 16 | 175 | 63 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 477 |
 | `batch-03-header-footer` | 0 | 6 | 24 | 1 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 41 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 357 | 474 | 0 | 0 | 0 | 974 |
@@ -45,14 +50,14 @@ By resource type:
 | `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 | 0 | 22 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 698 | 1 | 9 | 709 |
 | `batch-08-system` | 3 | 0 | 36 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 46 |
-| **All** | **508** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2571** |
+| **All** | **511** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2574** |
 
 By status:
 
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 149 | 8 | 35 | 31 | 2 | 16 |
-| `batch-02-pdp` | 150 | 0 | 23 | 36 | 268 | 32 |
+| `batch-01-homepage` | 144 | 21 | 30 | 31 | 2 | 16 |
+| `batch-02-pdp` | 147 | 3 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
@@ -60,11 +65,11 @@ By status:
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 708 | 0 |
 | `batch-08-system` | 39 | 0 | 0 | 0 | 7 | 0 |
 
-Text settings: `templates/index.json` 189, `templates/product.subscription-item.json` 156, `sections/header-group.json` 2, `sections/footer-group.json` 4. The brief estimated about 149 and 119; these counts take every non-empty `text`, `textarea`, `richtext`, `inline_richtext` and non-SVG `html` value, including the sections that repeat on both templates and two disabled PDP blocks (marked `rendered: false`). Left out: 7 settings whose value is a Liquid pointer to a metafield (their text is inventoried as admin-held) and 11 technical text settings (CSS gradients, file names, a product handle, the empty Welcome Kit plan list).
+Text settings: `templates/index.json` 192 (189 at capture, plus the FAQ block added on 21 Oct), `templates/product.subscription-item.json` 156, `sections/header-group.json` 2, `sections/footer-group.json` 4. The brief estimated about 149 and 119; these counts take every non-empty `text`, `textarea`, `richtext`, `inline_richtext` and non-SVG `html` value, including the sections that repeat on both templates and two disabled PDP blocks (marked `rendered: false`). Left out: 7 settings whose value is a Liquid pointer to a metafield (their text is inventoried as admin-held) and 11 technical text settings (CSS gradients, file names, a product handle, the empty Welcome Kit plan list).
 
 | File | text | textarea | richtext | inline_richtext | html |
 |---|---:|---:|---:|---:|---:|
-| `templates/index.json` | 125 | 6 | 22 | 36 | 0 |
+| `templates/index.json` | 127 | 6 | 23 | 36 | 0 |
 | `templates/product.subscription-item.json` | 104 | 6 | 7 | 39 | 0 |
 | `sections/header-group.json` | 2 | 0 | 0 | 0 | 0 |
 | `sections/footer-group.json` | 0 | 0 | 1 | 3 | 0 |
@@ -291,7 +296,7 @@ Claims in batches 05–07: 449 entries carry a claim (304 needs-review, 115 unsu
 
 ## Full inventory
 
-Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blocked placeholder.
+Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blocked placeholder · **R** retired (the theme no longer reads it).
 
 ### `batch-01-homepage`
 
@@ -307,7 +312,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 8 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/status_night_text` | template_setting | NIGHTTIME RESTORATION | approved |  |
 | 9 | `index:hero_karmicare_XKKLDK/testimonial_badge_h8d3WL/rating_text` | template_setting | 4.8 (234) | needs-review | C C82 |
 | 10 | `index:hero_karmicare_XKKLDK/testimonial_badge_h8d3WL/heading` | template_setting | Backed by health professionals | approved |  |
-| 11 | `index:stat_strip_karmicare/tagline` | template_setting | CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS | corrected | C C80 |
+| 11 | `index:stat_strip_karmicare/tagline` | template_setting | CHOSEN BY KPNI PRACTITIONERS, FUNCTIONAL DENTISTS, HEALTH PROFESSIONALS | corrected | C C80 |
 | 12 | `index:stat_strip_karmicare/stat_1/heading` | template_setting | 0% | approved |  |
 | 13 | `index:stat_strip_karmicare/stat_1/text` | template_setting | fluoride, SLS | approved | C C01 |
 | 14 | `index:stat_strip_karmicare/stat_2/heading` | template_setting | 1 pump | approved |  |
@@ -379,18 +384,18 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 80 | `index:trusted_professionals_HAqYth/bottom_text` | template_setting | The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not … | needs-review | C C70 |
 | 81 | `index:trusted_professionals_HAqYth/button_label` | template_setting | REQUEST A PRACTITIONER SAMPLE | approved |  |
 | 82 | `index:trusted_professionals_HAqYth/card_h8d3WL/heading` | template_setting | Dr. Stephanie Spreuwers | approved | NT |
-| 83 | `index:trusted_professionals_HAqYth/card_h8d3WL/text` | template_setting | Functional Dentist, kPNI Therapist | approved |  |
+| 83 | `index:trusted_professionals_HAqYth/card_h8d3WL/text` | template_setting | Functional Dentist, kPNI Practitioner | corrected |  |
 | 84 | `index:trusted_professionals_HAqYth/card_jcnr7Q/heading` | template_setting | Mariama Banjai | approved | NT |
 | 85 | `index:trusted_professionals_HAqYth/card_jcnr7Q/text` | template_setting | Dental Hygienist, Oral Care Quality Manager | approved |  |
 | 86 | `index:trusted_professionals_HAqYth/card_8dRing/heading` | template_setting | Leen Ponet | approved | NT |
-| 87 | `index:trusted_professionals_HAqYth/card_8dRing/text` | template_setting | Pharmacist, Orthomolecular Therapist, kPNI Coordinator | approved |  |
+| 87 | `index:trusted_professionals_HAqYth/card_8dRing/text` | template_setting | Pharmacist, Orthomolecular Practitioner, kPNI Coordinator | corrected |  |
 | 88 | `index:trusted_professionals_HAqYth/card_8dRing/hover_text` | template_setting | “Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifica… | needs-review | C C83 |
 | 89 | `index:trusted_professionals_HAqYth/card_HFdkaD/heading` | template_setting | Dr. Iveta Pleša Rutule | approved | NT |
 | 90 | `index:trusted_professionals_HAqYth/card_HFdkaD/text` | template_setting | Holistic Dentist | approved |  |
 | 91 | `index:trusted_professionals_HAqYth/card_Ah46TM/heading` | template_setting | Dr. Kris Sienaert | needs-review | NT |
 | 92 | `index:trusted_professionals_HAqYth/card_Ah46TM/text` | template_setting | Former GP, Lifestyle Medicine | approved |  |
 | 93 | `index:trusted_professionals_HAqYth/card_CtQgU9/heading` | template_setting | Sietske Hamelink | approved | NT |
-| 94 | `index:trusted_professionals_HAqYth/card_CtQgU9/text` | template_setting | Nutritional Therapist, Menstrual Cycle Expert | approved |  |
+| 94 | `index:trusted_professionals_HAqYth/card_CtQgU9/text` | template_setting | Nutritional Practitioner, Menstrual Cycle Expert | corrected |  |
 | 95 | `index:trusted_professionals_HAqYth/card_CtQgU9/hover_text` | template_setting | “As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put … | needs-review | C C84,C85 |
 | 96 | `index:trusted_professionals_HAqYth/card_qAPajg/heading` | template_setting | Kim Verlot | approved | NT |
 | 97 | `index:trusted_professionals_HAqYth/card_qAPajg/text` | template_setting | Breathing Coach, Heart Coherence Specialist | approved |  |
@@ -448,24 +453,24 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 149 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/category` | template_setting | The system | approved |  |
 | 150 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/question` | template_setting | Why two formulas instead of one? | approved |  |
 | 151 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/answer` | template_setting | Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — s… | approved | C C25 |
-| 152 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | template_setting | Ingredients & safety | approved |  |
-| 153 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/question` | template_setting | Is Karmicare fluoride-free? | approved |  |
-| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | [NEEDS APPROVED COPY] | needs-review | B |
-| 155 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | template_setting | The ritual | needs-review |  |
-| 156 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question` | template_setting | Will Karmicare offer a biorhythmic toothpaste with fluoride? | approved |  |
-| 157 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` | template_setting | [NEEDS APPROVED COPY] | needs-review | B |
-| 158 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category` | template_setting | Results | needs-review |  |
-| 159 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question` | template_setting | What is nano-hydroxyapatite? | approved |  |
-| 160 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` | template_setting | A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces… | corrected | C C23 |
-| 161 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category` | template_setting | Plans & Return on Care | needs-review |  |
-| 162 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question` | template_setting | Should I rinse after brushing? | approved |  |
-| 163 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer` | template_setting | No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp … | corrected | C C13,C93 |
-| 164 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category` | template_setting | Shipping & guarantee | needs-review |  |
-| 165 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/question` | template_setting | How quickly will I notice a difference? | approved |  |
-| 166 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer` | template_setting | Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see … | corrected | C C24 |
+| 152 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | template_setting | The ritual | corrected |  |
+| 153 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/question` | template_setting | How long does one duo last? | corrected |  |
+| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
+| 155 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | template_setting | Ingredients & safety | corrected |  |
+| 156 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question` | template_setting | Can I combine Karmicare with fluoride toothpaste or rinses? | corrected |  |
+| 157 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` | template_setting | Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating di… | corrected | C C101 |
+| 158 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category` | template_setting | Ingredients & safety | corrected |  |
+| 159 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question` | template_setting | Is Karmicare fluoride-free? | corrected |  |
+| 160 | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` | template_setting | Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawba… | corrected | C C102 |
+| 161 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category` | template_setting | Shipping & guarantee | corrected |  |
+| 162 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question` | template_setting | What does the money-back guarantee cover? | corrected |  |
+| 163 | `index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer` | template_setting | Every first order comes with a money-back guarantee: 14 days on Try Once, your first cycle on the 6… | corrected |  |
+| 164 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category` | template_setting | Shipping & guarantee | needs-review | R |
+| 165 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/question` | template_setting | How quickly will I notice a difference? | approved | R |
+| 166 | `index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer` | template_setting | Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see … | corrected | C C24 R |
 | 167 | `index:featured_product_3XpDKw/title_4znD88/custom_title` | template_setting | Your welcome kit includes | approved |  |
 | 168 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/pricing_summary_care_credit_title` | template_setting | Care Credits back | approved |  |
-| 169 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title` | template_setting | Awake & Asleep AM/PM Oral Care System | approved |  |
+| 169 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title` | template_setting | Awake & Asleep AM/PM Oral Care System | approved | R |
 | 170 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_text` | template_setting | Shipping | approved |  |
 | 171 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html` | template_setting | Varies Free | approved |  |
 | 172 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1` | template_setting | 10% / order | approved |  |
@@ -522,6 +527,9 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 223 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
 | 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Health | admin-held |  |
 | 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
+| 226 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category` | template_setting | Plans & Return on Care | approved |  |
+| 227 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question` | template_setting | Can I pause, skip or cancel? | approved |  |
+| 228 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer` | template_setting | Your membership is completely in your hands. Amend when desired. | approved |  |
 
 ### `batch-02-pdp`
 
@@ -575,18 +583,18 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 46 | `product.subscription-item:trusted_professionals_HAqYth/bottom_text` | template_setting | The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not … | needs-review | C C70 |
 | 47 | `product.subscription-item:trusted_professionals_HAqYth/button_label` | template_setting | REQUEST A PRACTITIONER SAMPLE | approved |  |
 | 48 | `product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/heading` | template_setting | Dr. Stephanie Spreuwers | approved | NT |
-| 49 | `product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/text` | template_setting | Functional Dentist, kPNI Therapist | approved |  |
+| 49 | `product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/text` | template_setting | Functional Dentist, kPNI Practitioner | corrected |  |
 | 50 | `product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/heading` | template_setting | Mariama Banjai | approved | NT |
 | 51 | `product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/text` | template_setting | Dental Hygienist, Oral Care Quality Manager | approved |  |
 | 52 | `product.subscription-item:trusted_professionals_HAqYth/card_8dRing/heading` | template_setting | Leen Ponet | approved | NT |
-| 53 | `product.subscription-item:trusted_professionals_HAqYth/card_8dRing/text` | template_setting | Pharmacist, Orthomolecular Therapist, kPNI Coordinator | approved |  |
+| 53 | `product.subscription-item:trusted_professionals_HAqYth/card_8dRing/text` | template_setting | Pharmacist, Orthomolecular Practitioner, kPNI Coordinator | corrected |  |
 | 54 | `product.subscription-item:trusted_professionals_HAqYth/card_8dRing/hover_text` | template_setting | “Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifica… | needs-review | C C83 |
 | 55 | `product.subscription-item:trusted_professionals_HAqYth/card_HFdkaD/heading` | template_setting | Dr. Iveta Pleša Rutule | approved | NT |
 | 56 | `product.subscription-item:trusted_professionals_HAqYth/card_HFdkaD/text` | template_setting | Holistic Dentist | approved |  |
 | 57 | `product.subscription-item:trusted_professionals_HAqYth/card_Ah46TM/heading` | template_setting | Dr. Kris Sienaert | needs-review | NT |
 | 58 | `product.subscription-item:trusted_professionals_HAqYth/card_Ah46TM/text` | template_setting | Former GP, Lifestyle Medicine | approved |  |
 | 59 | `product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/heading` | template_setting | Sietske Hamelink | approved | NT |
-| 60 | `product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/text` | template_setting | Nutritional Therapist, Menstrual Cycle Expert | approved |  |
+| 60 | `product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/text` | template_setting | Nutritional Practitioner, Menstrual Cycle Expert | corrected |  |
 | 61 | `product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/hover_text` | template_setting | “As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put … | needs-review | C C84,C85 |
 | 62 | `product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/heading` | template_setting | Kim Verlot | approved | NT |
 | 63 | `product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/text` | template_setting | Breathing Coach, Heart Coherence Specialist | approved |  |
@@ -595,10 +603,10 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 66 | `product.subscription-item:how_it_works_steps_aAgVmF/description` | template_setting | Become a pro at brushing. Feel your teeth by sliding your tongue. | approved |  |
 | 67 | `product.subscription-item:how_it_works_steps_aAgVmF/hint_text` | template_setting | Preview · sound off | approved |  |
 | 68 | `product.subscription-item:how_it_works_steps_aAgVmF/bottom_text` | template_setting | Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day. | approved | C C07 |
-| 69 | `product.subscription-item:how_it_works_steps_aAgVmF/step_U7HiXT/number` | template_setting | 02 | approved |  |
+| 69 | `product.subscription-item:how_it_works_steps_aAgVmF/step_U7HiXT/number` | template_setting | 02 | approved | R |
 | 70 | `product.subscription-item:how_it_works_steps_aAgVmF/step_U7HiXT/title` | template_setting | Pump and brush | approved |  |
 | 71 | `product.subscription-item:how_it_works_steps_aAgVmF/step_U7HiXT/description` | template_setting | Apply one pump and brush gently for two minutes. | approved |  |
-| 72 | `product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/number` | template_setting | 03 | approved |  |
+| 72 | `product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/number` | template_setting | 03 | approved | R |
 | 73 | `product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/title` | template_setting | Spit, no rinse | approved |  |
 | 74 | `product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/description` | template_setting | Spit out the excess. Do not rinse afterwards. | approved |  |
 | 75 | `product.subscription-item:research_behind_system_EkjATL/subheading` | template_setting | CLINICALLY BACKED ORAL CARE | approved |  |
@@ -652,7 +660,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 123 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | DENTINE TUBULES - OPEN AND OCCLUDED | approved |  |
 | 124 | `product.subscription-item:featured_product_Eb93Xa/title_GDDYEK/custom_title` | template_setting | Your welcome kit includes | approved |  |
 | 125 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/pricing_summary_care_credit_title` | template_setting | Care Credits back | approved |  |
-| 126 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` | template_setting | Awake & Asleep AM/PM Oral Care System | approved |  |
+| 126 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` | template_setting | Awake & Asleep AM/PM Oral Care System | approved | R |
 | 127 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_text` | template_setting | Shipping | approved |  |
 | 128 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_value_html` | template_setting | Varies Free | approved |  |
 | 129 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1` | template_setting | 10% / order | approved |  |
@@ -726,7 +734,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 197 | `liquid:sections/main-product.liquid:1073` | theme_locale | Renews yearly · stop anytime before renewal | needs-key |  |
 | 198 | `liquid:sections/main-product.liquid:1080` | theme_locale | [per_brushing] per brushing | needs-key |  |
 | 199 | `liquid:sections/main-product.liquid:1087` | theme_locale | Not ready for a membership? Try once for [price] | needs-key |  |
-| 200 | `liquid:sections/main-product.liquid:1098` | theme_locale | Awake & Asleep AM/PM Oral Care System | needs-key |  |
+| 200 | `liquid:sections/main-product.liquid:1098` | theme_locale | Awake & Asleep AM/PM Oral Care System | needs-key | R |
 | 201 | `liquid:sections/main-product.liquid:1104` | theme_locale | Free | needs-key |  |
 | 202 | `liquid:sections/product-compare-plans.liquid:39` | theme_locale | Compare plans | needs-key |  |
 | 203 | `liquid:sections/product-compare-plans.liquid:55` | theme_locale | Compare | needs-key |  |
