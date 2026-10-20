@@ -1885,7 +1885,8 @@ body.day-mode .loop-one-time-purchase-option-position {
 
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked),
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
-  background: var(--kc-white-surface-primary-default);
+  /* Selected card: Figma surface/primary/default, as in assets/kc-buybox.css (Victor, 20 Oct) */
+  background: var(--kc-mapped-surface-page);
   border-color: var(--kc-mapped-surface-accent-default);
   box-shadow: 0 0 0 1px var(--kc-mapped-surface-accent-default);
 }
@@ -1905,7 +1906,11 @@ body.day-mode .loop-one-time-purchase-option-label {
   color: rgb(var(--color-foreground));
 }
 
+/* Selected card title and price in Day: heading colour on the surface-primary card. The accent blue
+   (#7fb9ff) on #fffbf6 is 1.98:1, below AA (R12-PDP F1); Night keeps Loop's blue (7.95:1). The price
+   selector outranks snippets/loop-widget.css.liquid's selected-price rule. */
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-label,
+body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-price-amount,
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option-label {
-  color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-default-heading);
 }

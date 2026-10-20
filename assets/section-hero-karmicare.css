@@ -329,6 +329,13 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   vertical-align: middle;
 }
 
+/* Phones: no badge, the toggle closes the hero (Victor, 20 Oct, D-3) */
+@media screen and (max-width: 749px) {
+  .hero-karmicare__badge-wrapper {
+    display: none;
+  }
+}
+
 /* Tablet & Desktop Layout: bottom-left of the first screen, on the page gutter of the window
    (not of the centred container), scrolling away with the page */
 @media screen and (min-width: 990px) {

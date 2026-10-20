@@ -116,17 +116,17 @@
         <!-- Center Image -->
         <div class="two-formulas__image-wrap">
           {%- if section.settings.main_image != blank -%}
-            {%- comment -%} Displayed 220 px (260 px from 990) by the CSS; the srcset covers DPR 3 {%- endcomment -%}
+            {%- comment -%} Displayed 449 px (531 px from 990) by the CSS, so the tube pair is 220 / 260 px; the srcset covers DPR 3 {%- endcomment -%}
             {%- assign two_formulas_alt = section.settings.heading | strip_html -%}
             {{
               section.settings.main_image
-              | image_url: width: 780
+              | image_url: width: 1600
               | image_tag:
                 loading: 'lazy',
                 decoding: 'async',
                 class: 'two-formulas__image',
-                widths: '220, 260, 330, 440, 520, 660, 780',
-                sizes: '(min-width: 990px) 260px, 220px',
+                widths: '450, 530, 900, 1060, 1350, 1600',
+                sizes: '(min-width: 990px) 531px, 449px',
                 alt: two_formulas_alt
             }}
           {%- else -%}
