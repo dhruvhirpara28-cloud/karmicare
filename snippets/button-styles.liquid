@@ -84,6 +84,34 @@
   }
 
 
+  /* ── INTERACTION STATES (Victor, 20 Oct): colour only, no motion; disabled
+     "Coming soon" buttons keep their rest state. Secondary and header BEGIN NOW follow
+     KC/Button Secondary and Primary (accent). The navy primary steps down the navy ramp:
+     its own -hover/-pressed tokens are light in Day and would hide the light label. ── */
+  body .karmicare__btn-primary:not([aria-disabled='true']):hover {
+    background-color: var(--kc-mapped-surface-secondary-default);
+  }
+  body .karmicare__btn-primary:not([aria-disabled='true']):active {
+    background-color: var(--kc-mapped-bg-primary-default);
+  }
+  body .karmicare__btn-secondary:not([aria-disabled='true']):hover {
+    background-color: var(--kc-mapped-surface-primary-default-hover);
+  }
+  body .karmicare__btn-secondary:not([aria-disabled='true']):active {
+    background-color: var(--kc-mapped-surface-tertiary-default);
+  }
+  body .header__cta-btn.karmicare__btn-primary:hover {
+    background-color: var(--kc-mapped-surface-accent-default-hover);
+  }
+  body .header__cta-btn.karmicare__btn-primary:active {
+    background-color: var(--kc-mapped-surface-accent-default-pressed);
+  }
+  .karmicare__btn-primary:focus-visible,
+  .karmicare__btn-secondary:focus-visible {
+    outline: 2px solid var(--kc-mapped-border-focus-strong);
+    outline-offset: 2px;
+  }
+
   .karmicare__btn-primary svg,.karmicare__btn-secondary svg{margin-left:10px;}
   /* KC/Button (medium): 20px side padding on desktop */
   @media screen and (min-width: 990px) {

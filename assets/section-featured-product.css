@@ -368,6 +368,12 @@
 .featured-product .product-form__custom-submit.block__animate-button:hover {
   background-position: 0 0;
   box-shadow: none;
+  background-color: var(--kc-mapped-surface-secondary-default);
+}
+
+/* Pressed, as .karmicare__btn-primary */
+.featured-product .product-form__custom-submit.block__animate-button:active {
+  background-color: var(--kc-mapped-bg-primary-default);
 }
 
 .featured-product .product-form__custom-submit.block__animate-button:focus-visible {
