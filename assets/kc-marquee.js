@@ -17,6 +17,8 @@
                       band the same way as a drag (professionals)
     data-align-start  start with the first card on the page content's left
                       edge, as in Figma (research)
+    data-keys         the focused band takes Left/Right (one card), Home and
+                      End, so every card can be reached by keyboard (stats)
 */
 if (!customElements.get('kc-marquee')) {
   customElements.define(
@@ -135,6 +137,9 @@ if (!customElements.get('kc-marquee')) {
         if (this.hasAttribute('data-wheel')) {
           this.addEventListener('wheel', (event) => this.onWheel(event), { passive: false });
         }
+        if (this.hasAttribute('data-keys')) {
+          this.addEventListener('keydown', (event) => this.onKeyDown(event));
+        }
         this.addEventListener('dragstart', (event) => event.preventDefault());
         this.addEventListener(
           'click',
@@ -232,6 +237,45 @@ if (!customElements.get('kc-marquee')) {
         const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? this.offsetWidth : 1;
         this.wheelPending += dx * unit;
         this.velocity = 0;
+      }
+
+      /* Focus already holds the band still. Left/Right line the previous or
+         next card up with the page content's left edge, Home brings the first
+         card there and End the last card to the right edge. The distance
+         glides in through the wheel path. */
+      onKeyDown(event) {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+
+        const inset = this.contentInset();
+        const position = this.offset + this.wheelPending; // where the band is heading
+        let target;
+        if (event.key === 'Home') {
+          target = -inset;
+        } else if (event.key === 'End') {
+          const last = this.originals[this.originals.length - 1];
+          target = last.offsetLeft + last.offsetWidth - (this.offsetWidth - inset);
+        } else {
+          const starts = Array.from(this.track.children, (card) => card.offsetLeft - inset);
+          if (event.key === 'ArrowRight') {
+            target = starts.find((start) => start > position + 1);
+          } else {
+            // Before the first card, look one set further on, where the clones repeat it
+            const base = starts.some((start) => start < position - 1) ? position : position + this.setWidth;
+            target = starts.filter((start) => start < base - 1).pop() - (base - position);
+          }
+          if (target === undefined || Number.isNaN(target)) return;
+        }
+
+        // Home and End take the shorter way round the loop
+        let delta = target - position;
+        if (event.key === 'Home' || event.key === 'End') {
+          delta = this.wrap(delta);
+          if (delta > this.setWidth / 2) delta -= this.setWidth;
+        }
+        this.velocity = 0;
+        this.wheelPending += delta;
       }
 
       start() {
