@@ -2112,7 +2112,8 @@
    "notes": "type inline_richtext",
    "setting_type": "inline_richtext",
    "section_type": "featured-product",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 20 Oct: PDP 50ad819 removes this setting; the Duo's name is the Shopify product title admin:karmicare-biorhythmic-oral-care-system:title (Victor)"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_text",
@@ -3164,7 +3165,8 @@
    "sha1": "3db6b8f30849bad6d53cfabcfd379046583de830",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'package_name'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'package_name'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 20 Oct: PDP 50ad819 removes this setting; the Duo's name is the Shopify product title admin:karmicare-biorhythmic-oral-care-system:title (Victor)"
   },
   {
    "id": "liquid:sections/main-product.liquid:1104",
@@ -3502,7 +3504,7 @@
    "sha1": "50b5afce6abf866a5d9645d3d4b4a5f554cc9a6f",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); also the featured product on the homepage"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); also the featured product on the homepage; naming source for the Duo since PDP 50ad819: the end CTA (PDP and homepage) and the sticky bar print product.title; replaces the retired subscription_title and package_name entries"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:body_html",

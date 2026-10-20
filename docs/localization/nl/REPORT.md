@@ -31,6 +31,12 @@ The theme templates are changed in `6414e4c`. The three Shopify policies are Adm
 
 The NL before was the same text with *1–3 werkdagen* and *2–5 werkdagen*. The labels in bold (*Delivery times (estimates):*, the country names) stay bold.
 
+**Duo name (20 Oct, Victor; PDP `50ad819`).** The Duo's name is the Shopify product title, so three entries are `retired` in the source and held here:
+- the two `subscription_title` settings (homepage and PDP featured product);
+- the sticky-bar `package_name` default `liquid:sections/main-product.liquid:1098`.
+
+Their NL was *Awake & Asleep AM/PM-mondzorgsysteem*. The naming source is now `admin:karmicare-biorhythmic-oral-care-system:title`, NL *Awake & Asleep tandpastasysteem voor ochtend en avond* (`admin`, in the plan). `validate.py` H8 holds every retired entry. The NL plan drops two items (1825, first wave 520).
+
 Counts below are current.
 
 ## What is here
@@ -108,15 +114,15 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `666785abd03e` | 122 | 230 | 36 | 0 | 41 | 15 | 33 | 27 |
-| `batch-01-homepage` | 225 | `a09219ae1af8` | 140 | 2 | 30 | 0 | 30 | 2 | 21 | 19 |
+| `batch-02-pdp` | 477 | `666785abd03e` | 121 | 230 | 35 | 0 | 41 | 15 | 35 | 27 |
+| `batch-01-homepage` | 225 | `a09219ae1af8` | 139 | 2 | 30 | 0 | 30 | 2 | 22 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 19 | 0 | 6 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 5 | 0 | 2 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 279 | 0 | 117 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2571** | | **285** | **618** | **76** | **621** | **375** | **62** | **534** | **63** |
+| **All** | **2571** | | **283** | **618** | **75** | **621** | **375** | **62** | **537** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -127,8 +133,10 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | `batch-01-homepage` | needs-approved-copy | 2 |
 | `batch-01-homepage` | never-translate | 16 |
 | `batch-01-homepage` | unsupported-claim | 3 |
+| `batch-01-homepage` | retired (Duo name is the product title) | 1 |
 | `batch-02-pdp` | never-translate | 32 |
 | `batch-02-pdp` | unsupported-claim | 1 |
+| `batch-02-pdp` | retired (Duo name is the product title) | 2 |
 | `batch-03-header-footer` | never-translate | 3 |
 | `batch-03-header-footer` | never-translate; existing Dawn locale value remains unchanged | 2 |
 | `batch-04-legal` | held-legacy | 350 |
