@@ -172,11 +172,27 @@ Task `task_2dcd85e98542`, brief B3-R6, 20 Oct 2026. The NL re-review R6 (`docs/r
 - `python3 -I docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 16/16 mutations caught.
 - `shopify theme check --fail-level error`: exit 0 (248 files, 21 warnings) after the merge. My FR commits touch only `docs/localization/fr/`.
 
+## Victor's decisions F1–F7 (20 Oct)
+
+Answered on the review page `review/fr.html`: `F1=ja, F2=fr, F3=alles, F4=fondateur, F5=ja, F6=houden, F7=ja`.
+
+| Decision | Answer | Effect on FR |
+|---|---|---|
+| F1 · FR terms as a set | accepted | No change; the "Proposed terms" table below is now approved. |
+| F2 · French notation | 0,49 € and U+00A0 before `: ; ! ?` | Already applied; `check.py` enforces it. |
+| F3 · publication order | everything at once | Not a payload change. Passed to the landing desk. The `legal-review` (979) and `pending-claim-review` (382) flags stay in the payloads until Victor clears those gates. |
+| F4 · mission card "founder" | *fondateur* | `custom.mission_card#06` released from held to `admin`, FR "fondateur". |
+| F5 · legacy legal pages | redirect to the 2.0 pages | Not a payload change: the redirect is an Admin action. The legacy pages stay held in FR. |
+| F6 · customer care languages | keep | No change: "répond en anglais et en néerlandais" stays. |
+| F7 · apostrophe | typographic ’ | Already applied; `check.py` flags straight apostrophes. |
+
+Address forms in FR legal text (decision 7 below) was not on the review page and is still open.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `03dd18b9…` | 477 | 141 | 249 | 36 | 15 | 36 |
+| `batch-02-pdp` | `03dd18b9…` | 477 | 141 | 250 | 36 | 15 | 35 |
 | `batch-01-homepage` | `a09219ae…` | 225 | 169 | 2 | 30 | 2 | 22 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `83fed281…` | 974 | 143 | 481 | 0 | 0 | 350 |
@@ -184,9 +200,9 @@ Task `task_2dcd85e98542`, brief B3-R6, 20 Oct 2026. The NL re-review R6 (`docs/r
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,571** | **479** | **1,416** | **76** | **62** | **538** |
+| **Total** | | **2,571** | **479** | **1,417** | **76** | **62** | **537** |
 
-Every source entry is covered: 2,033 carry FR and 538 are held (after the source-copy R6 merge, a0dee86). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,034 carry FR and 537 are held (after the source-copy R6 merge, a0dee86, and decision F4). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -201,7 +217,7 @@ Every source entry is covered: 2,033 carry FR and 538 are held (after the source
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (538)
+### Held (537)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
@@ -214,7 +230,6 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 | 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
 | 06 | unsupported claim | 2 | "NASA's favorite supplement for oral health" (`/pages/nhap-technology`) |
 | 02 | source defect | 1 | Treatment journey `#29` stops mid-phrase |
-| 02 | gendered title | 1 | Mission card "founder" (decision 3) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
 
@@ -459,6 +474,8 @@ Handles stay English (no decision to translate them). The NL and FR prefixes com
 - **Source owner**: rebuild the offline registration plan (`docs/localization/registration/plan-fr.json`) from this branch's new tip. FR did not edit or rebuild it, and since `037706c` only `fr/batch-07-collections-blog.json` (3 values, 29 gates) and `fr/check.py` changed. The `#b081` source gate is in place (`a0dee86`), so that earlier handoff is closed.
 
 ## Open decisions for Victor
+
+Decisions 1–6 were answered on 20 Oct as F1–F7 (section "Victor's decisions F1–F7"). Only decision 7 is still open. The text below is kept as the record of what was asked.
 
 1. **Confirm the proposed FR terms** (table above), above all the plan names, *offre* for "plan" and *matin/soir* for AM/PM.
    - *Recommendation*: accept them as a set, so NL and FR stay parallel.
