@@ -70,9 +70,22 @@
               {%- if is_welcome_kit -%}
                 <span class="pc-kit">
                   <span>{{ row.label.value | default: row.label }}</span>
-                  {%- if row.welcome_kit.value != blank -%}
+                  {%- comment -%}
+                    The kit products and their value: the theme setting "Welcome Kit free products", what the
+                    cart adds, never the row's own product list (snippets/kc-kit-value.liquid)
+                  {%- endcomment -%}
+                  {%- if settings.welcome_kit_free_product != blank -%}
                     <span aria-hidden="true" class="pc-kit-thumbs">
-                      {%- for prod in row.welcome_kit.value -%}
+                      {%- for prod_item in settings.welcome_kit_free_product -%}
+                        {%- liquid
+                          assign prod = prod_item
+                          if prod_item.id == null
+                            assign prod = all_products[prod_item]
+                          endif
+                          if prod == blank
+                            continue
+                          endif
+                        -%}
                         <img
                           alt="{{ prod.title | escape }}"
                           decoding="async"
@@ -83,14 +96,8 @@
                       {%- endfor -%}
                     </span>
                     <span class="pc-kit-pop" role="tooltip">
-                      {%- assign total_value = 0 -%}
-                      {%- for prod in row.welcome_kit.value -%}
-                        {%- if prod.compare_at_price > 0 -%}
-                          {%- assign total_value = total_value | plus: prod.compare_at_price -%}
-                        {%- else -%}
-                          {%- assign total_value = total_value | plus: prod.price -%}
-                        {%- endif -%}
-                      {%- endfor -%}
+                      {%- capture total_value -%}{%- render 'kc-kit-value' -%}{%- endcapture -%}
+                      {%- assign total_value = total_value | plus: 0 -%}
                       <span class="pc-kit-poptitle">
                         {{- row.label.value | default: row.label -}}
                         <span class="value">
@@ -100,7 +107,20 @@
                           · <b>Free</b>
                         </span>
                       </span>
-                      {%- for prod in row.welcome_kit.value -%}
+                      {%- for prod_item in settings.welcome_kit_free_product -%}
+                        {%- liquid
+                          assign prod = prod_item
+                          if prod_item.id == null
+                            assign prod = all_products[prod_item]
+                          endif
+                          if prod == blank
+                            continue
+                          endif
+                          capture prod_value
+                            render 'kc-kit-value', product: prod
+                          endcapture
+                          assign prod_value = prod_value | plus: 0
+                        -%}
                         <span class="pc-kit-item">
                           <img
                             alt="{{ prod.title | escape }}"
@@ -113,10 +133,8 @@
                             <b>{{ prod.title }}</b>
                             <em
                               >Free
-                              {%- if prod.compare_at_price > prod.price %}
-                                · <s>{% render 'kc-money', cents: prod.compare_at_price, trim: true %}</s>
-                              {%- elsif prod.price > 0 %}
-                                · <s>{% render 'kc-money', cents: prod.price, trim: true %}</s>
+                              {%- if prod_value > 0 %}
+                                · <s>{% render 'kc-money', cents: prod_value, trim: true %}</s>
                               {%- endif -%}
                             </em>
                           </span>

@@ -112,8 +112,10 @@
           if prod == blank
             continue
           endif
-          assign kit_variant = prod.selected_or_first_available_variant
-          assign kit_value = kit_variant.compare_at_price | default: kit_variant.price
+          capture kit_value
+            render 'kc-kit-value', product: prod
+          endcapture
+          assign kit_value = kit_value | plus: 0
           assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
         -%}
         <li class="sc-kit-item">

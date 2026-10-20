@@ -620,11 +620,11 @@
                                         <span class="wk-item-name">{{ wk_product.title }}</span>
                                       </span>
                                       <span class="kc-custom-col-right">
+                                        {%- capture wk_value -%}
+                                          {%- render 'kc-kit-value', product: wk_product -%}
+                                        {%- endcapture -%}
                                         <del>
-                                          {%- render 'kc-money',
-                                            cents: wk_product.selected_or_first_available_variant.price,
-                                            trim: true
-                                          -%}
+                                          {%- render 'kc-money', cents: wk_value, trim: true -%}
                                         </del>
                                         <strong>Free</strong>
                                       </span>
@@ -720,16 +720,16 @@
                       <div class="loop-featured-welcome-kit{% if block.settings.only_first_subscription %} hide-when-only-first-subscription{% endif %}">
                         <div class="loop-featured-wk-contents">
                           <ul class="wk-contents-list">
-                            {%- assign total_price = 0 -%}
                             {%- for wk_product in welcome_kit_products -%}
-                              {%- assign wk_variant = wk_product.selected_or_first_available_variant -%}
-                              {%- assign total_price = total_price | plus: wk_variant.price -%}
+                              {%- capture wk_value -%}
+                                {%- render 'kc-kit-value', product: wk_product -%}
+                              {%- endcapture -%}
                               <li>
                                 <span class="wk-item-name">
                                   <span class="check-icon">✓</span>
                                   {{ wk_product.title }}
                                 </span>
-                                <span class="price-strike">{% render 'kc-money', cents: wk_variant.price %}</span>
+                                <span class="price-strike">{% render 'kc-money', cents: wk_value, trim: true %}</span>
                               </li>
                             {%- endfor -%}
                           </ul>

@@ -1,0 +1,36 @@
+{%- comment -%}
+  The value of the free Welcome Kit, in cents, from the Shopify products themselves (Victor, 20 Oct:
+  one value everywhere, the total value of the free kit). The kit is the theme setting "Welcome Kit
+  free products" (settings.welcome_kit_free_product): the products every subscription add puts in the
+  cart (snippets/kc-plan-config.liquid, their first variant). A kit item is worth its variant's
+  compare-at price, else its price, the same rule as the buybox kit tiles (assets/loop-widget.js).
+  Shown by the end CTA (sections/featured-product.liquid), the sticky bar
+  (snippets/sticky-cart-block.liquid) and the plans table kit popover
+  (sections/product-compare-plans.liquid).
+
+  Accepts:
+  - product: {Product} one kit product (optional). Without it: the whole kit.
+
+  Outputs the value in cents: of that product, or of every kit product together.
+{%- endcomment -%}
+{%- liquid
+  assign kc_total = 0
+  if product != blank
+    assign kc_variant = product.variants.first
+    assign kc_total = kc_variant.compare_at_price | default: kc_variant.price | default: 0
+  else
+    for kc_item in settings.welcome_kit_free_product
+      assign kc_product = kc_item
+      if kc_item.id == null
+        assign kc_product = all_products[kc_item]
+      endif
+      if kc_product == blank or kc_product.variants.first == blank
+        continue
+      endif
+      assign kc_variant = kc_product.variants.first
+      assign kc_value = kc_variant.compare_at_price | default: kc_variant.price | default: 0
+      assign kc_total = kc_total | plus: kc_value
+    endfor
+  endif
+  echo kc_total
+-%}
