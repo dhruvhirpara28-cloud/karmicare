@@ -1315,13 +1315,22 @@
     busyButtons.add(button);
     button.setAttribute('aria-busy', 'true');
     if (status) status.textContent = status.dataset.loadingText || '';
+    // One announcement of a failure (R14c): during a table attempt the buybox error line is not live; its
+    // message is shown and announced at the table only, and the line is hidden again
+    const cartError = cartErrorOf(button.dataset.kcPlanProduct);
+    const cartErrorRole = cartError ? cartError.getAttribute('role') : null;
+    if (cartError) cartError.removeAttribute('role');
     const done = () => {
+      const failed = Boolean(cartError && !cartError.hidden);
+      const message = failed ? cartError.querySelector('.product-form__error-message') : null;
+      if (cartError) {
+        if (failed && error && errorText) cartError.hidden = true;
+        if (cartErrorRole) cartError.setAttribute('role', cartErrorRole);
+      }
       // karmiAddToCart leaves the button disabled only while the page goes to checkout
       if (button.disabled) return;
       release(button);
-      const cartError = cartErrorOf(button.dataset.kcPlanProduct);
-      if (!error || !errorText || !cartError || cartError.hidden) return;
-      const message = cartError.querySelector('.product-form__error-message');
+      if (!failed || !error || !errorText) return;
       errorText.textContent = message ? message.textContent : '';
       if (errorText.textContent) error.hidden = false;
     };
@@ -1351,6 +1360,15 @@
     if (!button) return;
     event.preventDefault();
     const productId = button.dataset.kcPlanProduct;
+    // Outside the comparison tables (the sticky bar's Try Once) as before: no busy state, no table feedback
+    if (!button.closest('[data-kc-plan-feedback-scope]')) {
+      if (button.dataset.kcPlanChoose === 'once') {
+        tryOnce(productId, button);
+        return;
+      }
+      choose(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId);
+      return;
+    }
     // A click on a button already on its way to checkout does nothing (karmiAddToCart disables it)
     if (button.disabled || button.classList.contains('loading') || busyButtons.has(button)) return;
     if (button.dataset.kcPlanChoose === 'once') {
