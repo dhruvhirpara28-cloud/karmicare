@@ -73,6 +73,11 @@ def h7(src, nl):
     r["notes"] = ""
 
 
+def h8(src, nl):
+    e, r = first(src, nl, lambda e, r: e.get("retired"))
+    unhold(r, "X", [])
+
+
 def s1(src, nl):
     e, r = first(src, nl, lambda e, r: r["status"] != "held" and "8000 Bruges" in (r["nl"] or ""))
     r["nl"] = r["nl"].replace("8000 Bruges", "8000 Brugge", 1)
@@ -130,6 +135,7 @@ CASES = [
     ("H5 never-translate entry translated", h5, 1, "H5 "),
     ("H6 blocked entry translated", h6, 1, "H6 "),
     ("H7 held entry without a reason", h7, 1, "H7 "),
+    ("H8 retired entry translated", h8, 1, "H8 "),
     ("S1 address in Dutch form", s1, 1, "S1 "),
     ("S2 extra (*) marker", s2, 1, "S2 "),
     ("new unsupported gate in the source", new_gate, 1, "H1 "),
