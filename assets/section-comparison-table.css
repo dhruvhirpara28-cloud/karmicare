@@ -84,9 +84,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
-  /* As .karmicare__btn-primary (snippets/button-styles.liquid): KC primary tokens, colour-only states */
-  background-color: var(--kc-mapped-surface-primary-default);
-  color: var(--kc-mapped-text-primary-default);
+  /* KC primary button colours (snippets/button-styles.liquid), colour-only states */
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
   font-family: var(--kc-font-role-identity);
   font-weight: 700;
   font-size: var(--kc-responsive-label-lg-text-size);
@@ -99,11 +99,11 @@
 }
 
 .comparison-section__button:hover {
-  background-color: var(--kc-mapped-surface-secondary-default);
+  background-color: var(--button-kc-primary-bg-hover);
 }
 
 .comparison-section__button:active {
-  background-color: var(--kc-mapped-bg-primary-default);
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .comparison-section__button:focus-visible {

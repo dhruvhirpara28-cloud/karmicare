@@ -1,8 +1,24 @@
 {%- comment -%}
-  Renders CSS for Karmicare Primary & Secondary buttons with dynamic Day & Night theme settings.
+  Renders CSS for Karmicare Primary & Secondary buttons with dynamic Day & Night theme settings,
+  and makes Dawn's standard buttons (.button) follow the same KC styling.
 {%- endcomment -%}
 
 <style id="karmicare-button-styles">
+  /* ── KC BUTTON COLOURS (Victor, 20 Oct), from assets/kc-tokens.css. Set on body, where the
+     Day/Night token values live; every KC button (sections and assets) reads these.
+     Primary: navy by Day, light by Night (surface/inverse). Pressed takes the next step on the
+     same ramp (border/primary/default-hover: #2c3a60 Day, #dddbd9 Night). Secondary: no fill,
+     the control border, KC/Button Secondary hover and pressed. ── */
+  body {
+    --button-kc-primary-bg: var(--kc-mapped-surface-inverse-default);
+    --button-kc-primary-text: var(--kc-mapped-text-inverse-default);
+    --button-kc-primary-bg-hover: var(--kc-mapped-surface-inverse-default-hover);
+    --button-kc-primary-bg-pressed: var(--kc-mapped-border-primary-default-hover);
+    --button-kc-secondary-border: var(--kc-mapped-border-control-default);
+    --button-kc-secondary-bg-hover: var(--kc-mapped-surface-primary-default-hover);
+    --button-kc-secondary-bg-pressed: var(--kc-mapped-surface-tertiary-default);
+  }
+
   .karmicare__btn-primary,
   .karmicare__btn-secondary {
     display: inline-flex;
@@ -24,17 +40,15 @@
     font-family: var(--kc-font-family-Nunito);
   }
 
-  /* Secondary: no fill in either mode, the control border token (Victor, 20 Oct) */
   .karmicare__btn-secondary,
   body.night-mode .karmicare__btn-secondary {
     background: transparent;
-    border: 1px solid var(--kc-mapped-border-control-default);
+    border: 1px solid var(--button-kc-secondary-border);
   }
 
-  /* Primary: the KC primary surface and text tokens from assets/kc-tokens.css (Victor, 20 Oct) */
   .karmicare__btn-primary {
-    background-color: var(--kc-mapped-surface-primary-default);
-    color: var(--kc-mapped-text-primary-default);
+    background-color: var(--button-kc-primary-bg);
+    color: var(--button-kc-primary-text);
   }
 
   /* ── HEADER BEGIN NOW (DAY MODE): keeps the theme-setting colours ── */
@@ -83,22 +97,19 @@
     {%- endif -%}
   }
 
-
-  /* ── INTERACTION STATES (Victor, 20 Oct): colour only, no motion, on every primary and
-     secondary button, "Coming soon" ones included. Secondary follows KC/Button Secondary.
-     The navy primary steps down the navy ramp: its own -hover/-pressed tokens are light
-     in Day and would hide the light label. Header BEGIN NOW: sections/header.liquid. ── */
+  /* ── INTERACTION STATES: colour only, no motion, on every primary and secondary button,
+     "Coming soon" ones included. Header BEGIN NOW: sections/header.liquid. ── */
   body .karmicare__btn-primary:hover {
-    background-color: var(--kc-mapped-surface-secondary-default);
+    background-color: var(--button-kc-primary-bg-hover);
   }
   body .karmicare__btn-primary:active {
-    background-color: var(--kc-mapped-bg-primary-default);
+    background-color: var(--button-kc-primary-bg-pressed);
   }
   body .karmicare__btn-secondary:hover {
-    background-color: var(--kc-mapped-surface-primary-default-hover);
+    background-color: var(--button-kc-secondary-bg-hover);
   }
   body .karmicare__btn-secondary:active {
-    background-color: var(--kc-mapped-surface-tertiary-default);
+    background-color: var(--button-kc-secondary-bg-pressed);
   }
   .karmicare__btn-primary:focus-visible,
   .karmicare__btn-secondary:focus-visible {
@@ -121,5 +132,52 @@
       font-size: var(--font-body-small-size-mobile);
       padding: 1.2rem 1.2rem;
     }
+  }
+
+  /* ── DAWN BUTTONS (.button) follow the KC buttons (Victor, 20 Oct): cart, account, search,
+     password, contact and other standard pages. Tertiary (icon and remove buttons) keeps
+     Dawn's look. Dawn draws its border and hover with ::before/::after shadows; those go. ── */
+  .button:not(.button--tertiary),
+  .shopify-challenge__button {
+    border-radius: var(--kc-shape-radius-sm);
+    background-color: var(--button-kc-primary-bg);
+    color: var(--button-kc-primary-text);
+    box-shadow: none;
+    font-family: var(--kc-font-role-identity);
+    font-weight: 700;
+    font-size: var(--kc-responsive-label-lg-text-size);
+    letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+    text-transform: uppercase;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .button:not(.button--tertiary)::before,
+  .button:not(.button--tertiary)::after,
+  .shopify-challenge__button::before,
+  .shopify-challenge__button::after {
+    box-shadow: none !important;
+  }
+  .button.button--secondary {
+    background-color: transparent;
+    color: var(--kc-mapped-text-default-heading);
+    border: 1px solid var(--button-kc-secondary-border);
+  }
+  .button:not(.button--tertiary):not(.button--secondary):not([disabled]):hover,
+  .shopify-challenge__button:hover {
+    background-color: var(--button-kc-primary-bg-hover);
+  }
+  .button:not(.button--tertiary):not(.button--secondary):not([disabled]):active,
+  .shopify-challenge__button:active {
+    background-color: var(--button-kc-primary-bg-pressed);
+  }
+  .button.button--secondary:not([disabled]):hover {
+    background-color: var(--button-kc-secondary-bg-hover);
+  }
+  .button.button--secondary:not([disabled]):active {
+    background-color: var(--button-kc-secondary-bg-pressed);
+  }
+  .button:not(.button--tertiary):focus-visible {
+    outline: 2px solid var(--kc-mapped-border-focus-strong);
+    outline-offset: 2px;
+    box-shadow: none;
   }
 </style>

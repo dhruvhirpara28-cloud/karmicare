@@ -458,7 +458,7 @@ a.research-card__source:hover {
   min-height: 4.4rem;
   padding: 0 var(--kc-responsive-spacing-layout-md);
   /* Secondary, as .karmicare__btn-secondary: no fill, control border, KC interaction colours */
-  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-control-default);
+  border: var(--kc-shape-stroke-thin) solid var(--button-kc-secondary-border);
   border-radius: var(--kc-shape-radius-sm);
   background-color: transparent;
   color: var(--kc-mapped-text-default-heading);
@@ -473,11 +473,11 @@ a.research-card__source:hover {
 }
 
 .research-behind-system__button:hover {
-  background-color: var(--kc-mapped-surface-primary-default-hover);
+  background-color: var(--button-kc-secondary-bg-hover);
 }
 
 .research-behind-system__button:active {
-  background-color: var(--kc-mapped-surface-tertiary-default);
+  background-color: var(--button-kc-secondary-bg-pressed);
 }
 
 .research-behind-system__button:focus-visible {

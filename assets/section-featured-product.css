@@ -346,9 +346,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  /* The primary tokens, as .karmicare__btn-primary in snippets/button-styles.liquid */
-  background-color: var(--kc-mapped-surface-primary-default);
-  color: var(--kc-mapped-text-primary-default);
+  /* KC primary button colours (snippets/button-styles.liquid) */
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;
@@ -369,12 +369,11 @@
 .featured-product .product-form__custom-submit.block__animate-button:hover {
   background-position: 0 0;
   box-shadow: none;
-  background-color: var(--kc-mapped-surface-secondary-default);
+  background-color: var(--button-kc-primary-bg-hover);
 }
 
-/* Pressed, as .karmicare__btn-primary */
 .featured-product .product-form__custom-submit.block__animate-button:active {
-  background-color: var(--kc-mapped-bg-primary-default);
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .featured-product .product-form__custom-submit.block__animate-button:focus-visible {

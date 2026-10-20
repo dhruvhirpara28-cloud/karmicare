@@ -911,33 +911,32 @@ body.night-mode .pc-kit-poptitle {
   transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
 
-/* Primary and secondary as .karmicare__btn-primary / -secondary (snippets/button-styles.liquid):
-   KC primary tokens on a navy hover/pressed ramp; secondary unfilled on the control border.
+/* Primary and secondary read the KC button colours (snippets/button-styles.liquid).
    Colour only, no motion (Victor, 20 Oct). */
 .plan-compare--kc .pc-cta--primary {
-  background-color: var(--kc-mapped-surface-primary-default);
-  color: var(--kc-mapped-text-primary-default);
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
 }
 
 .plan-compare--kc .pc-cta--primary:hover {
-  background-color: var(--kc-mapped-surface-secondary-default);
+  background-color: var(--button-kc-primary-bg-hover);
 }
 
 .plan-compare--kc .pc-cta--primary:active {
-  background-color: var(--kc-mapped-bg-primary-default);
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .plan-compare--kc .pc-cta--secondary {
-  border-color: var(--kc-mapped-border-control-default);
+  border-color: var(--button-kc-secondary-border);
   background-color: transparent;
 }
 
 .plan-compare--kc .pc-cta--secondary:hover {
-  background-color: var(--kc-mapped-surface-primary-default-hover);
+  background-color: var(--button-kc-secondary-bg-hover);
 }
 
 .plan-compare--kc .pc-cta--secondary:active {
-  background-color: var(--kc-mapped-surface-tertiary-default);
+  background-color: var(--button-kc-secondary-bg-pressed);
 }
 
 /* First plan column (after the labels): tertiary, an underlined label */

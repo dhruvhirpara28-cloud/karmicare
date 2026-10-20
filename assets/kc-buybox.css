@@ -550,9 +550,9 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  /* KC primary tokens and colour-only states (Victor, 20 Oct) */
-  background-color: var(--kc-mapped-surface-primary-default);
-  color: var(--kc-mapped-text-primary-default);
+  /* KC primary button colours (snippets/button-styles.liquid), colour-only states */
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;
@@ -573,11 +573,11 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
 .kc-buybox .product-form__custom-submit.block__animate-button:hover {
   background-position: 0 0;
   box-shadow: none;
-  background-color: var(--kc-mapped-surface-secondary-default);
+  background-color: var(--button-kc-primary-bg-hover);
 }
 
 .kc-buybox .product-form__custom-submit.block__animate-button:active {
-  background-color: var(--kc-mapped-bg-primary-default);
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .kc-buybox .product-form__custom-submit.block__animate-button:focus-visible {
