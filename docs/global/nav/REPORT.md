@@ -37,6 +37,9 @@ All rows were Victor's direct instructions in this terminal (see `NAV-AUDIT.md`,
 | `11a6237` | R12 F6: `#fragment` targets land below the nav |
 | `4102b4d` | R10 F2 decided: delivery line "2–3 days" rest of Europe, EN/NL/FR + 28 locales on EN |
 | `b69aa86` | R12b remaining P2 (F4): drawer Tab endpoints measured on every Tab (desktop drawer resized while open; submenu scope) |
+| `3441bac` | R12c regression (P2): scope only `details[open].menu-opening`, controls with `visibility: hidden` left out |
+
+R12c (Astra on `b69aa86`): resize cases pass; one regression, fixed in `3441bac`. Rendered with a temporary nested submenu injected into the drawer and reduced motion emulated (the test tab draws no frames, so Dawn's transitionend focus never runs otherwise): Back then immediate Tab → menu button while the closing panel is still `[open]`; Escape in the submenu then immediate Tab → menu button, `aria-expanded=false`; submenu loop Back ↔ Child B; settled states and root Escape correct; desktop-drawer 989 ↔ 990 and 393 flat cases unchanged.
 
 R12b (Astra fix check on `c8acab1`): M1, F1, F2, F3, F5, F6 resolved; F4 partly, fixed in `b69aa86`. Rendered: desktop drawer simulated with a temporary style (no settings changed), opened at 989 → 990: Tab Members → Facebook, Instagram → menu button, Shift+Tab button → Instagram; shrunk to 989 open: Shift+Tab → Members, Tab → button, Escape closes with `aria-expanded=false`; saved dropdown at 393 unchanged; 989 → 990 close still moves focus to the logo. Submenus: none in the current menu, not tested.
 
