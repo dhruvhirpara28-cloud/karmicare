@@ -2,7 +2,10 @@
    ease-in-out instead of jumping (Victor, 20 Oct). The landing spot clears the sticky header,
    the hash still updates, and the target takes focus for keyboard and screen reader users.
    A wheel, touch or key during the glide hands control back to the visitor. With
-   prefers-reduced-motion the page jumps, as before. Loaded once from layout/theme.liquid. */
+   prefers-reduced-motion the page jumps, as before. Loaded once from layout/theme.liquid.
+   Only links to a section wrapper (id="shopify-section-...") glide. Every other fragment link
+   (account #login/#recover, form error summaries, skip links) keeps native navigation, which
+   updates :target; pushState would not (R9 F2). */
 (() => {
   if (window.kcAnchorScrollBound) return;
   window.kcAnchorScrollBound = true;
@@ -65,7 +68,7 @@
     } catch (error) {
       return;
     }
-    if (!target) return;
+    if (!target || !target.id.startsWith('shopify-section-')) return;
 
     event.preventDefault();
     const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset());
