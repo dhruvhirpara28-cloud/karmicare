@@ -67,7 +67,6 @@
   assign sc_copy_stop_year = 'kc.sticky_cart.stop_year_html' | t
   assign sc_copy_per_brushing = 'kc.sticky_cart.per_brushing_html' | t
   assign sc_copy_try_once = 'kc.sticky_cart.try_once_html' | t
-  assign sc_copy_package_name = 'kc.sticky_cart.package_name_html' | t
   assign sc_copy_kit_free = 'kc.sticky_cart.kit_free_html' | t
 -%}
 
@@ -117,11 +116,8 @@
     setting's products, as the buybox shows them: custom.kit_thumbnail, value struck through, Free)
   {%- endcomment -%}
   {%- liquid
-    # The Duo's name on the Duo (the Welcome Kit bundle product); any other product shows its own title
+    # Every product shows its Shopify title, the Duo too (Victor, 20 Oct: the Duo's name is its product title)
     assign package_name = product.title
-    if is_bundle_product
-      assign package_name = block.settings.package_name | default: sc_copy_package_name
-    endif
   -%}
   <div class="sc-package">
     <div class="sc-package-duo">
