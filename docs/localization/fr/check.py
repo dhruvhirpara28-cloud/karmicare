@@ -18,8 +18,13 @@ Errors (exit code 1):
 - FR text: markup, Liquid, [tokens] or runtime price spans that differ from the EN, changed selling-plan
   IDs, French typography slips (plain or missing space before : ; ! ? € % », straight apostrophes,
   €-before-amount), a postal address of the EN missing from the FR (S1) or a different number of (*)
-  markers (S2), the NL validator's invariants from CHANGES-R2 §6.
-Warnings: words the brand rules ban, forbidden claim verbs and tu-forms outside legal text, for a human."""
+  markers (S2), the NL validator's invariants from CHANGES-R2 §6;
+- brand words in ordinary copy (translated, not legal text, not a Dawn key), CHANGES-R2 "R6 additions" W1: no
+  commodity word, inside a word included: produit(s) (sous-produit), tube, utilis-, emploi/employ-, (r)achat/(r)achet-.
+  Not matched: produire/produisent/production, YouTube, sachet. Official names and the verb produire are listed in
+  WORD_EXCEPTIONS with their reason. "dentifrice" is not checked here: it is allowed at first contact (titles, SEO,
+  alt texts, opening questions, the first mention), which a pattern cannot see; REPORT.md records the manual pass.
+Warnings: forbidden claim verbs and tu-forms outside legal text, for a human."""
 import copy
 import glob
 import hashlib
@@ -39,7 +44,14 @@ LEGAL_BATCH = "batch-04-legal"
 LEGAL_EXEMPT_PAGES = {"/pages/contact", "templates/page.contact.json"}
 DYNAMIC = re.compile(r'<span class="(?:kc-dynamic_price|dynamic_free_welcome_price)">[^<]*</span>')
 SKIP = re.compile(r"(<[^>]*>|\{\{.*?\}\}|\{%.*?%\}|&[a-zA-Z#0-9]+;|\[[a-z_]+\])", re.S)
-BANNED = re.compile(r"\b(produits?|tubes?|achats?|achet\w*|utilis\w*|emploi)\b", re.I)
+COMMODITY = re.compile(r"[\w-]*(?:produits?\b|(?<!you)tubes?\b|utilis|emploi|employ)[\w-]*|\br?ach[ae]t\w*", re.I)
+# Official names and verbs that keep a commodity stem on purpose: (entry id or "*", word) -> reason.
+WORD_EXCEPTIONS = {
+    ("admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#60", "produits"): "official name: portail européen des produits cosmétiques (CPNP), as NL",
+    ("admin:article:news/nano-hydroxyapatite:body_html#b101", "produits"): "verb produire: 'the harmful acids produced by bad bacteria'",
+    ("admin:article:news/benefits-of-nootropics-ease-stress-boost-focus-and-improve-mood:body_html#b054", "produit"): "verb produire: 'It produces fruits' (the guarana plant)",
+    ("admin:article:news/5-reasons-you-should-avoid-fluoride-in-toothpaste:body_html#b049", "produit"): "verb produire: 'It produces the thyroid hormones' (the gland)",
+}
 FORBIDDEN = re.compile(r"\b(prévien\w*|préven\w*|prévenir|guéri\w*|traite|traiter|traitent)\b", re.I)
 TU = re.compile(r"\b(tu|ton|ta|tes|toi)\b", re.I)
 # Street and number, optional box, postcode, optional city and country: "Vizierstraat 28, 8000 Bruges, Belgium".
@@ -226,8 +238,10 @@ def validate(docs, ctx):
             # Legal text is translated faithfully and completely (BRIEF), so the brand-word and claim-verb scans
             # skip it: there "produits", "utilisation" or "traiter (des données)" are the legal wording.
             if "legal-review" not in e["flags"]:
-                for m in BANNED.findall(nodes):
-                    warnings.append(where + ": banned-word check: '" + m + "'")
+                for m in COMMODITY.finditer(nodes):
+                    word = m.group(0).lower()
+                    if ("*", word) not in WORD_EXCEPTIONS and (e["id"], word) not in WORD_EXCEPTIONS:
+                        errors.append(where + ": W1 commodity word in ordinary copy: '" + m.group(0) + "'")
                 for m in FORBIDDEN.findall(nodes):
                     warnings.append(where + ": claim-verb check: '" + m + "'")
             for m in TU.findall(nodes):
@@ -297,6 +311,7 @@ def self_test(docs, ctx):
     legacy = next(e["id"] for e in docs[LEGAL_BATCH]["entries"] if e["status"] == "held" and e["notes"].startswith("legacy"))
     unsupported = next(e["id"] for e in docs["batch-07-collections-blog"]["entries"]
                        if e["status"] == "held" and e["notes"].startswith("unsupported-claim"))
+    SLS = "admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:"
     cases = [
         ("remove pending-claim-review (Astra F6)", drop_flag("product.subscription-item:main/highlights_slider_9wAjAb/text_1", "pending-claim-review"), "without pending-claim-review"),
         ("remove legal-review (Astra F6)", drop_flag("page.consumer-rights:policy_banner_Pgpxip/heading", "legal-review"), "without legal-review"),
@@ -312,6 +327,8 @@ def self_test(docs, ctx):
         ("remove a batch file", remove_batch("batch-08-system"), "FR batch file missing"),
         ("translate an address (R2 F8)", replace_fr("admin:policy:refund-policy:body#b103", "1000 Brussels, Belgium", "1000 Bruxelles, Belgique"), "S1 address"),
         ("drop a (*) marker (R2 F9)", replace_fr("admin:policy:refund-policy:body#b114", " (*)", ""), "S2 (*) markers"),
+        ("commodity compound in blog copy (R6-02)", replace_fr(SLS + "body_html#b015", "nettoyants ménagers", "produits ménagers"), "W1 commodity"),
+        ("product stem inside a word (R6 W1)", replace_fr("admin:article:news/nano-hydroxyapatite:body_html#b094", "au passage des acides qui", "des acides comme sous-produit, ce qui"), "W1 commodity"),
     ]
     failures = 0
     for label, mutate, expected in cases:
