@@ -142,11 +142,13 @@
   {%- endfor -%}
 {%- endstyle -%}
 
+{%- comment -%} Translated defaults; t output is escaped, so settings join them with escape_once {%- endcomment -%}
+{%- assign hero_label_default = 'kc.hero.aria_label' | t -%}
 <div
   id="HeroKarmicare-{{ section.id }}"
   class="hero-karmicare kc-surface"
   data-kc-surface="{{ section.settings.surface }}"
-  aria-label="{{ section.settings.accessibility_label | default: 'Karmicare Oral Rhythm Hero' | escape }}"
+  aria-label="{{ section.settings.accessibility_label | default: hero_label_default | escape_once }}"
 >
   <div class="page-width hero-karmicare__container">
     {%- for block in section.blocks -%}
@@ -206,7 +208,8 @@
             </div>
             {%- if block.settings.image != blank -%}
               {%- liquid
-                assign hero_alt = block.settings.image.alt | default: 'Karmicare Oral Care System' | escape
+                assign hero_alt_default = 'kc.hero.image_alt' | t
+                assign hero_alt = block.settings.image.alt | default: hero_alt_default | escape_once
                 assign hero_image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
               -%}
               {{
@@ -239,8 +242,12 @@
             <div
               class="hero-karmicare__pill-toggle hero-karmicare__pill-toggle-{{ block.id }}"
               role="group"
-              aria-label="Day and Night Oral Rhythm Switcher"
+              aria-label="{{ 'kc.hero.switcher_label' | t }}"
             >
+              {%- liquid
+                assign hero_awake_name = block.settings.awake_label | default: 'Awake'
+                assign hero_asleep_name = block.settings.asleep_label | default: 'Asleep'
+              -%}
               <button
                 type="button"
                 class="
@@ -248,7 +255,7 @@
                   kc_day
                 "
                 data-mode="day"
-                aria-label="{{ block.settings.awake_label | default: 'Awake' | escape }} mode"
+                aria-label="{{ 'kc.hero.mode_label' | t: label: hero_awake_name }}"
               >
                 {{ block.settings.awake_label | default: 'AWAKE' | escape }}
               </button>
@@ -256,10 +263,7 @@
                 type="button"
                 class="body-gl-nunito-xsm hero-karmicare__pill-btn kc_night"
                 data-mode="night"
-                aria-label="
-                  {{- block.settings.asleep_label | default: 'Asleep' | escape }}
-                  mode
-                "
+                aria-label="{{ 'kc.hero.mode_label' | t: label: hero_asleep_name }}"
               >
                 {{ block.settings.asleep_label | default: 'ASLEEP' | escape }}
               </button>

@@ -13,13 +13,13 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
 | `batch-04-legal` | 974 | `83fed281915f22a5b0bb9ed70cf3e49c47241ccf` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
-| `batch-06-content-pages` | 21 | `f78c391aa267b82eb0c85af36edea6e4583651bf` |
+| `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `9597904c4ef875006a7d8a76bebbaa43d0faaca0` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
 
 ## How to read an entry
 
-`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status`/`claim_basis` (batches 05–07), `blocked` (no approved copy), `legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
+`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status` (every entry that carries a claim: in batches 01–03 the strictest status of its `claims`, in batches 05–07 the hand review), `claim_basis` (batches 05–07), `blocked` (no approved copy: a placeholder, or EN that breaks a brand rule),`legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
 
 | status | Meaning for translators |
 |---|---|
@@ -42,10 +42,10 @@ By resource type:
 | `batch-03-header-footer` | 0 | 6 | 24 | 1 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 41 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 357 | 474 | 0 | 0 | 0 | 974 |
 | `batch-05-products` | 16 | 0 | 0 | 18 | 43 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 77 |
-| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 21 |
+| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 | 0 | 22 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 698 | 1 | 9 | 709 |
 | `batch-08-system` | 3 | 0 | 36 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 46 |
-| **All** | **508** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **378** | **474** | **698** | **1** | **10** | **2570** |
+| **All** | **508** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2571** |
 
 By status:
 
@@ -55,8 +55,8 @@ By status:
 | `batch-02-pdp` | 150 | 0 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
-| `batch-05-products` | 15 | 0 | 1 | 0 | 61 | 0 |
-| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 21 | 0 |
+| `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
+| `batch-06-content-pages` | 0 | 0 | 0 | 0 | 22 | 0 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 708 | 0 |
 | `batch-08-system` | 39 | 0 | 0 | 0 | 7 | 0 |
 
@@ -250,7 +250,7 @@ Every URL in the live sitemap (19 Oct) outside batches 01–03, plus the seven S
 | `/pages/why-karmicare` | 06 | `page.json` | 4 | not linked |  |
 | `/pages/why-use-hydroxyapatite-toothpaste` | 06 | `page.json` | 4 | not linked |  |
 | `/pages/why-stop-using-fluoride-toothpaste` | 06 | `page.json` | 5 | body 1 (/search?q=awake) |  |
-| `/pages/nhap-technology` | 06 | `page.json` | 4 | not linked |  |
+| `/pages/nhap-technology` | 06 | `page.json` | 5 | not linked |  |
 | `/pages/articles` | 06 | `page.json` | 4 | not linked |  |
 | `/collections/biorhythmic-oral-hygiene-kit` | 07 | `collection.json` | 3 | body 1 (/collections) |  |
 | `/collections/vgbc2025` | 07 | `collection.json` | 3 | body 1 (/collections) |  |
@@ -287,7 +287,7 @@ Not inventoried as store text, because Shopify or an app supplies and translates
 - `/pages/articles` (a page) next to `/blogs/news` (the blog itself); `/pages/nhap-technology` and the article `/blogs/news/nano-hydroxyapatite` share the same headline.
 - `/collections/vgbc2025`: an event collection with a code-like title.
 
-Claims in batches 05–07: 407 entries carry a claim (261 needs-review, 113 unsupported, 33 approved); see CLAIMS-REVIEW.md.
+Claims in batches 05–07: 449 entries carry a claim (304 needs-review, 115 unsupported, 30 approved); see CLAIMS-REVIEW.md.
 
 ## Full inventory
 
@@ -754,7 +754,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 225 | `admin:karmicare-biorhythmic-oral-care-system:seo.description` | product | Awake for the morning, Asleep for the night: two nano-hydroxyapatite toothpastes you don't rinse of… | admin-held |  |
 | 226 | `admin:karmicare-biorhythmic-oral-care-system:title` | product | Awake & Asleep Morning & Night Toothpaste System | admin-held |  |
 | 227 | `admin:karmicare-biorhythmic-oral-care-system:body_html` | product | Your mouth doesn’t stay the same from morning to night. Two toothpastes, one system. Formulated aro… | admin-held | C C14,C36 |
-| 228 | `admin:karmicare-biorhythmic-oral-care-system:media.69271648010621.alt` | product | Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening tooth… | admin-held |  |
+| 228 | `admin:karmicare-biorhythmic-oral-care-system:media.69271648010621.alt` | product | Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening tooth… | admin-held | C C100 |
 | 229 | `admin:karmicare-biorhythmic-oral-care-system:media.69248905085309.alt` | product | Karmicare Biorhythmic Oral Care Duo Set: Awake morning and Asleep evening toothpaste, fluoride-free… | admin-held |  |
 | 230 | `admin:karmicare-biorhythmic-oral-care-system:media.69840178282877.alt` | product | Karmicare Awake morning and Asleep evening toothpaste, fluoride-free, SLS-free and rich in nano-hyd… | admin-held |  |
 | 231 | `admin:karmicare-biorhythmic-oral-care-system:media.69840178020733.alt` | product | Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00… | admin-held |  |
@@ -762,10 +762,10 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 233 | `admin:karmicare-biorhythmic-oral-care-system:media.69840178315645.alt` | product | Karmicare Asleep evening toothpaste, fluoride-free, SLS-free and rich in nano-hydroxyapatite, with … | admin-held |  |
 | 234 | `admin:karmicare-biorhythmic-oral-care-system:media.69840177987965.alt` | product | How to use Karmicare: rinse first, use 1 pump, spit and don't rinse. Leave-on toothpaste, fluoride-… | admin-held |  |
 | 235 | `admin:karmicare-biorhythmic-oral-care-system:media.69840178381181.alt` | product | Karmicare nano-hydroxyapatite explainer showing nHAp crystals at the enamel surface | admin-held |  |
-| 236 | `admin:karmicare-biorhythmic-oral-care-system:media.69884688236925.alt` | product | Animated view of the Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and… | admin-held |  |
+| 236 | `admin:karmicare-biorhythmic-oral-care-system:media.69884688236925.alt` | product | Animated view of the Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and… | admin-held | C C100 |
 | 237 | `admin:morning-toothbrush-2-0:title` | product | Morning Toothbrush 2.0 | admin-held |  |
 | 238 | `admin:evening-toothbrush-2-0:title` | product | Evening Toothbrush 2.0 | admin-held |  |
-| 239 | `admin:whitening-charcoal-dental-floss:title` | product | Whitening Charcoal Floss | admin-held |  |
+| 239 | `admin:whitening-charcoal-dental-floss:title` | product | Whitening Charcoal Floss | admin-held | C C100 |
 | 240 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#01` | metafield | What you'll feel | admin-held |  |
 | 241 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#02` | metafield | (and your dentist notices) | admin-held |  |
 | 242 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#03` | metafield | First 60 days | admin-held |  |
@@ -1003,7 +1003,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 474 | `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:try_once.cost_per_brushing` | metaobject | €0.56 | admin-held |  |
 | 475 | `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:rhythm.cost_per_brushing` | metaobject | €0.49 | admin-held |  |
 | 476 | `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing` | metaobject | €0.42 | admin-held |  |
-| 477 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products` | metaobject | Morning Toothbrush · Evening Toothbrush · Whitening Charcoal Floss | admin-held |  |
+| 477 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products` | metaobject | Morning Toothbrush · Evening Toothbrush · Whitening Charcoal Floss | admin-held | C C100 |
 
 ### `batch-03-header-footer`
 
@@ -2034,7 +2034,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 
 | # | id | type | EN | status | flags |
 |---:|---|---|---|---|---|
-| 1 | `product:main/highlights_slider_9wAjAb/text_1` | template_setting | Used by +100 kPNI practitioners | approved |  |
+| 1 | `product:main/highlights_slider_9wAjAb/text_1` | template_setting | Used by +100 kPNI practitioners | needs-review |  |
 | 2 | `product:main/highlights_slider_9wAjAb/text_2` | template_setting | Leave-on Technology | approved |  |
 | 3 | `product:main/highlights_slider_9wAjAb/text_3` | template_setting | Backed by 39 peer-reviewed studies | needs-review |  |
 | 4 | `product:main/buy_buttons/custom_button_text` | template_setting | Begin Now | approved |  |
@@ -2130,13 +2130,14 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 12 | `admin:page:why-stop-using-fluoride-toothpaste:seo.title` | page | Why stop using fluoride toothpaste – KARMICARE | admin-held |  |
 | 13 | `admin:page:why-stop-using-fluoride-toothpaste:seo.description` | page | There’s no fluoride in our Awake or Asleep toothpaste. Nor will there ever be Here’s why you should… | admin-held |  |
 | 14 | `admin:page:nhap-technology:title` | page | nHAp Technology | admin-held |  |
-| 15 | `admin:page:nhap-technology:body_html#b001` | page | Dive deep into the benefits of NASA’s favorite supplement for oral health | admin-held |  |
-| 16 | `admin:page:nhap-technology:seo.title` | page | nHAp Technology – KARMICARE | admin-held |  |
-| 17 | `admin:page:nhap-technology:seo.description` | page | Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Di… | admin-held |  |
-| 18 | `admin:page:articles:title` | page | Articles | admin-held |  |
-| 19 | `admin:page:articles:body_html#b001` | page | Discover our latest articles | admin-held |  |
-| 20 | `admin:page:articles:seo.title` | page | Articles – KARMICARE | admin-held |  |
-| 21 | `admin:page:articles:seo.description` | page | Discover our latest articles | admin-held |  |
+| 15 | `admin:page:nhap-technology:body_html#b000` | page | Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste | admin-held |  |
+| 16 | `admin:page:nhap-technology:body_html#b001` | page | Dive deep into the benefits of NASA’s favorite supplement for oral health | admin-held |  |
+| 17 | `admin:page:nhap-technology:seo.title` | page | nHAp Technology – KARMICARE | admin-held |  |
+| 18 | `admin:page:nhap-technology:seo.description` | page | Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Di… | admin-held |  |
+| 19 | `admin:page:articles:title` | page | Articles | admin-held |  |
+| 20 | `admin:page:articles:body_html#b001` | page | Discover our latest articles | admin-held |  |
+| 21 | `admin:page:articles:seo.title` | page | Articles – KARMICARE | admin-held |  |
+| 22 | `admin:page:articles:seo.description` | page | Discover our latest articles | admin-held |  |
 
 ### `batch-07-collections-blog`
 
@@ -2825,7 +2826,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 681 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b032` | article | But don’t be fooled into thinking SLS is a must in your toothpaste. It isn’t. | admin-held |  |
 | 682 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b033` | article | Glycolipids are an excellent sulfate-free swap for the foaming action provided by sodium lauryl sul… | admin-held |  |
 | 683 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b034` | article | Made from fermented sugars, glycolipids are also biocompatible, so there’s no harm in swallowing (u… | admin-held |  |
-| 684 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b035` | article | FYI: SLS isn’t just lurking in big brands like Colgate and Biotene. Even if you do see a toothpaste… | admin-held |  |
+| 684 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b035` | article | FYI: SLS isn’t just lurking in big brands like Colgate and Biotene. Even if you do see a toothpaste… | admin-held | B |
 | 685 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b036` | article | 2. Support Your Oral Microbiome | admin-held |  |
 | 686 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b037` | article | Why not skip the chemical cocktail and choose an SLS-free toothpaste? Better yet, pick one with hig… | admin-held |  |
 | 687 | `admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:body_html#b038` | article | If you visit a natural dentist, they’re likely to recommend looking for products with more recogniz… | admin-held |  |

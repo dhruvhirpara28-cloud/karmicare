@@ -36,7 +36,7 @@
   {%- endcapture -%}
 
   <div
-    aria-label="Compare plans"
+    aria-label="{{ 'kc.plans.compare_label' | t }}"
     class="plan-compare{% if kc %} plan-compare--kc{% endif %} kc-surface"
     id="compare-plans-{{ section.id }}"
     data-kc-surface="{{ section.settings.surface }}"
@@ -52,7 +52,7 @@
         <!-- LABEL COLUMN -->
         <div class="pc-col pc-col-label">
           <div class="pc-lhead">
-            <span class="pc-lhead-tag">Compare</span>
+            <span class="pc-lhead-tag">{{ 'kc.plans.compare' | t }}</span>
           </div>
           {%- for row in rows -%}
             {%- if row.show_row.value == false -%}{%- continue -%}{%- endif -%}
@@ -95,9 +95,10 @@
                         {{- row.label.value | default: row.label -}}
                         <span class="value">
                           {%- if total_value > 0 -%}
-                            · {{ total_value | money_without_trailing_zeros }} Value
+                            {%- assign kit_total = total_value | money_without_trailing_zeros -%}
+                            {{ 'kc.plans.kit_value' | t: total_value: kit_total }}
                           {%- endif -%}
-                          · <b>Free</b>
+                          · <b>{{ 'kc.plans.free' | t }}</b>
                         </span>
                       </span>
                       {%- for prod in row.welcome_kit.value -%}
@@ -112,7 +113,7 @@
                           <span class="pc-kit-itxt">
                             <b>{{ prod.title }}</b>
                             <em
-                              >Free
+                              >{{ 'kc.plans.free' | t }}
                               {%- if prod.compare_at_price > prod.price %}
                                 · <s>{{ prod.compare_at_price | money_without_trailing_zeros }}</s>
                               {%- elsif prod.price > 0 %}
@@ -231,16 +232,16 @@
 
               <div class="pc-cell" data-label="{{ row.label.value | default: row.label | escape }}">
                 {%- if cell_value == blank or cell_value.hide_cell.value == true -%}
-                  <span aria-label="Not included" class="pc-no" role="img">—</span>
+                  <span aria-label="{{ 'kc.plans.not_included' | t }}" class="pc-no" role="img">—</span>
                 {%- else -%}
                   {%- assign display_type = cell_value.display_type.value
                     | default: cell_value.display_type
                     | downcase
                   -%}
                   {%- if display_type == 'checkmark' or display_type == 'yes' or display_type == 'true' -%}
-                    <span aria-label="Included" class="pc-yes" role="img">✓</span>
+                    <span aria-label="{{ 'kc.plans.included' | t }}" class="pc-yes" role="img">✓</span>
                   {%- elsif display_type == 'dash' or display_type == 'no' or display_type == 'false' -%}
-                    <span aria-label="Not included" class="pc-no" role="img">—</span>
+                    <span aria-label="{{ 'kc.plans.not_included' | t }}" class="pc-no" role="img">—</span>
                   {%- else -%}
                     {%- if cell_value.value.type == 'rich_text_field' -%}
                       {{ cell_value.value | metafield_tag }}

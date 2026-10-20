@@ -5,18 +5,21 @@
  "source_digest": "03dd18b9d41a21772da2e26b7060c42f6b2364d1",
  "source_entries": 477,
  "counts": {
-  "pending-claim-review": 37,
+  "pending-claim-review": 41,
   "translated": 122,
   "held": 33,
   "dawn-nl": 15,
   "theme-key": 36,
-  "admin": 234
+  "admin": 230
  },
  "fit_risk": [
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/try_once_text",
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_welcome_kit_title",
+  "product.subscription-item:research_behind_system_EkjATL/button_label",
+  "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/shipping_value_html",
   "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1",
+  "product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_3",
   "product.subscription-item:care_comes_back/step_next_order/title",
   "liquid:sections/main-product.liquid:943",
   "liquid:sections/main-product.liquid:1030",
@@ -28,6 +31,8 @@
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#55",
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96",
   "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#13",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#18",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#23",
   "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#29",
   "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#34",
   "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#03",
@@ -53,12 +58,12 @@
    "key_path": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_1",
    "en": "Used by 100+ kPNI practitioners & functional dentists",
    "en_sha1": "dc9175aacf9760fdfe7a7e847d7138a6aa850467",
-   "nl": "Gebruikt door 100+ kPNI-therapeuten & functionele tandartsen",
+   "nl": "In de praktijk bij 100+ kPNI-therapeuten & functionele tandartsen",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "TERM: kPNI practitioners → kPNI-therapeuten (products.md); practitioner(s) in general → zorgverlener(s). 'Gebruikt' kept because the EN says 'Used' (claim pending)."
+   "notes": "TERM: kPNI practitioners → kPNI-therapeuten (products.md); practitioner(s) in general → zorgverlener(s). R2 (review F6): 'Used by' → 'In de praktijk bij' (brand rule); the claim (C81) is still pending"
   },
   {
    "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_2",
@@ -459,10 +464,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.description",
    "en": "<p>Bacteria, saliva and acids each keep their own hours.&nbsp;</p><p>What it needs at 07:00 is not what it needs at 22:00.</p>",
    "en_sha1": "3d299375c1bc970b32ae2d2685a9c18650ebdb46",
-   "nl": "<p>Bacteriën, speeksel en zuren houden er elk hun eigen uren op na.&nbsp;</p><p>Wat hij om 07:00 nodig heeft, is niet wat hij om 22:00 nodig heeft.</p>",
+   "nl": "<p>Bacteriën, speeksel en zuren houden er elk hun eigen uren op na.&nbsp;</p><p>Wat je mond om 07:00 nodig heeft, is niet wat hij om 22:00 nodig heeft.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "'hij' = je mond (title above), as the EN 'it'."
+   "notes": "'hij' = je mond (title above), as the EN 'it'.; R2 (review F9): harmonised with index:chronobiology_clock_karmicare/description, the homepage's clearer 'je mond' (review F9)"
   },
   {
    "id": "product.subscription-item:chronobiology_clock_karmicare/morning_badge",
@@ -611,12 +616,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.settings.bottom_text",
    "en": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
    "en_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
-   "nl": "<p>De beste uitkomst is degene die je voorkomt. Deze zorgverleners raden Karmicare aan voor de tijd tussen de bezoeken. Niet om hun zorg te vervangen, maar om de twaalfhonderd poetsbeurten per jaar tussen de afspraken te laten tellen.</p>",
+   "nl": "<p>De beste uitkomst is de uitkomst die voorkomen wordt. Deze zorgverleners raden Karmicare aan voor de periode tussen twee bezoeken. Niet om hun zorg te vervangen, maar om de twaalfhonderd poetsbeurten per jaar tussen de afspraken door iets te laten betekenen.</p>",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "'prevented' → 'voorkomt', literal as the rules require; the glossary notes the JEP/DETIC objection to 'voorkomt', so the claims reviewer must decide (it is said of an outcome, not of Karmicare)."
+   "notes": "'prevented' → 'voorkomt', literal as the rules require; the glossary notes the JEP/DETIC objection to 'voorkomt', so the claims reviewer must decide (it is said of an outcome, not of Karmicare).; R2 (review F9): harmonised with index:trusted_professionals_HAqYth/bottom_text, the homepage form, closer to 'the one prevented' and 'count for something'"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/button_label",
@@ -987,12 +992,12 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
-   "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek nagaan en willen dat hun dagelijkse zorg standhoudt. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
+   "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek checken en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "R2 (review F9): harmonised with index:research_behind_system_EkjATL/bottom_text, the homepage form ('de toets doorstaat' for 'hold up')"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/button_label",
@@ -1003,8 +1008,10 @@
    "en_sha1": "0fa1ec9d5064dcacc5914eb584d9f6410eaea971",
    "nl": "Ontdek de volledige wetenschappelijke basis",
    "status": "translated",
-   "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek de volledige onderbouwing"
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek de volledige onderbouwing; Button label, 30 → 43 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/subheading",
@@ -1623,8 +1630,10 @@
    "en_sha1": "53e38a37063f7c743818c12d0d5d185cd8c9dd12",
    "nl": "Variabel <strong>Gratis</strong>",
    "status": "translated",
-   "flags": [],
-   "notes": ""
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "Plan-card shipping value, 11 → 15 chars, like its homepage counterpart (already flagged); kept (R2, review F7)"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1",
@@ -1709,8 +1718,10 @@
    "en_sha1": "8a731a2195c016fe53a1a90a51f1891b4d6393c4",
    "nl": "Schenken, pauzeren of opzeggen",
    "status": "translated",
-   "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Pauzeren of opzeggen"
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Pauzeren of opzeggen; Trust-row chip, 21 → 30 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "product.subscription-item:care_comes_back/eyebrow",
@@ -1743,10 +1754,10 @@
    "key_path": "sections.care_comes_back.settings.intro",
    "en": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
    "en_sha1": "a121a9321a9e14379d38a5f8511c4230b597a2a5",
-   "nl": "Karmicare is een zorgsysteem: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op.",
+   "nl": "Karmicare is een zorgsysteem: het ritueel komt op jouw ritme bij je aan, en je zorg bouwt gaandeweg Care Credit op.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "R2 (review F9): harmonised with index:care_comes_back/intro, the homepage form ('gaandeweg' for 'as you go')"
   },
   {
    "id": "product.subscription-item:care_comes_back/receipt_title",
@@ -2935,11 +2946,12 @@
    "en": "Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening toothpaste rich in nano-hydroxyapatite, morning and evening toothbrushes and whitening charcoal floss",
    "en_sha1": "f8468b42e71b8cbed23ea243de3a8277d5ba7e02",
    "nl": "Karmicare bioritmische mondzorgset: fluoridevrije, SLS-vrije Awake-ochtendtandpasta en Asleep-avondtandpasta, rijk aan nano-hydroxyapatiet, met ochtend- en avondtandenborstel en whitening-tandzijde met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:media.69248905085309.alt",
@@ -3047,11 +3059,12 @@
    "en": "Animated view of the Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening toothpaste rich in nano-hydroxyapatite, morning and evening toothbrushes and whitening charcoal floss",
    "en_sha1": "b20b641627f279dc30947567da25191b95c597b2",
    "nl": "Animatie van de Karmicare bioritmische mondzorgset: fluoridevrije, SLS-vrije Awake-ochtendtandpasta en Asleep-avondtandpasta, rijk aan nano-hydroxyapatiet, met ochtend- en avondtandenborstel en whitening-tandzijde met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
   },
   {
    "id": "admin:morning-toothbrush-2-0:title",
@@ -3066,7 +3079,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN)"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN); Width (R2, review F7): 22 → 24 chars, and 'Ochtendtandenborstel' is one 20-letter word with no break point, where the EN can wrap between 'Morning' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow"
   },
   {
    "id": "admin:evening-toothbrush-2-0:title",
@@ -3081,7 +3094,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title; Width, not length (R2, review F7): 22 chars in both languages, but 'Avondtandenborstel' is one 18-letter word with no break point, where the EN can wrap between 'Evening' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow"
   },
   {
    "id": "admin:whitening-charcoal-dental-floss:title",
@@ -3091,12 +3104,13 @@
    "en": "Whitening Charcoal Floss",
    "en_sha1": "a13ec532d1776acc6151cc4faffed46ced530676",
    "nl": "Whitening floss met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
     "admin",
-    "fit-risk"
+    "fit-risk",
+    "pending-claim-review"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice (B1a kit item, B2 product page); Figma NL wording"
+   "notes": "revised in assembly: same Shopify product title inventoried twice (B1a kit item, B2 product page); Figma NL wording; R2 (review F5): pending-claim-review, same claim wording as a gated field"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#01",
@@ -4274,7 +4288,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "16 → 22 chars; no shorter Dutch pair. Accordion title, probably full width."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): accordion title that wraps. 16 → 22 chars; no shorter Dutch pair. Accordion title, probably full width."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#56",
@@ -5255,9 +5269,10 @@
    "nl": "Weken voor je iets merkt",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Merkbaar na weken"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Merkbaar na weken; Comparison-table cell, 15 → 24 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#19",
@@ -5326,9 +5341,10 @@
    "nl": "Systemisch, niet in de mond",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systemisch, niet oraal"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systemisch, niet oraal; Comparison-table cell, 18 → 27 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#24",
@@ -5891,7 +5907,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "20 → 29 chars; heading line."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): section heading line that wraps. 20 → 29 chars; heading line."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#01",
@@ -6342,7 +6358,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "TERM: subscription → lidmaatschap (offer wording). Fragments #04–#06 join: 'Met elk lidmaatschap verdien je Care Credit: een rendement op de zorg die je volhoudt.' Word order needed the subject change; 24 → 31 chars."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): heading fragment that wraps with #05 and #06. TERM: subscription → lidmaatschap (offer wording). Fragments #04–#06 join: 'Met elk lidmaatschap verdien je Care Credit: een rendement op de zorg die je volhoudt.' Word order needed the subject change; 24 → 31 chars."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#05",
@@ -6371,7 +6387,7 @@
     "admin",
     "fit-risk"
    ],
-   "notes": "'return' → 'rendement' (echoes Return on Care); 30 → 41 chars."
+   "notes": "Contextual QA, not a fixed slot (R2, review F7): heading fragment that wraps with #04 and #05. 'return' → 'rendement' (echoes Return on Care); 30 → 41 chars."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:try_once.cost_per_brushing",
@@ -6423,11 +6439,12 @@
    "en": "Morning Toothbrush · Evening Toothbrush · Whitening Charcoal Floss",
    "en_sha1": "aabaa8738ff8f5fced71ba69977e183118db9c8c",
    "nl": "Ultrazachte ochtendborstel · Dieptereinigende avondborstel · Whitening-tandzijde met houtskool",
-   "status": "admin",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "pending-claim-review"
    ],
-   "notes": "Glossary (Figma NL) brush names, same as the product titles."
+   "notes": "Glossary (Figma NL) brush names, same as the product titles.; R2 (review F5): pending-claim-review, same claim wording as a gated field"
   }
  ]
 }

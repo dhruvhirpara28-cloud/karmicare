@@ -167,7 +167,7 @@
 
     {%- if categories_array.size > 0 -%}
       <div class="km-faq__filters">
-        <button type="button" class="km-faq__filter-btn active" data-filter="all" aria-pressed="true">ALL</button>
+        <button type="button" class="km-faq__filter-btn active" data-filter="all" aria-pressed="true">{{ 'kc.faq.all' | t }}</button>
 
         {%- for category in categories_array -%}
           {%- if category != blank -%}
