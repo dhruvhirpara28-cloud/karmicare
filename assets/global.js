@@ -598,9 +598,13 @@ class HeaderDrawer extends MenuDrawer {
     this.releaseShownFocus();
     this.onShownFocusKeydown = (event) => {
       if (event.key !== 'Tab') return;
-      const submenus = this.mainDetailsToggle.querySelectorAll(':scope details[open] > summary + *');
+      // Only submenus still opening or open: one being closed keeps [open] through its 400ms
+      // animation (closeAnimation) after focus has already returned to its parent
+      const submenus = this.mainDetailsToggle.querySelectorAll(':scope details[open].menu-opening > summary + *');
       const scope = submenus.length ? submenus[submenus.length - 1] : this.mainDetailsToggle;
-      const shown = getFocusableElements(scope).filter((element) => element.getClientRects().length);
+      const shown = getFocusableElements(scope).filter(
+        (element) => element.getClientRects().length && getComputedStyle(element).visibility !== 'hidden'
+      );
       if (!shown.length) return;
       const first = shown[0];
       const last = shown[shown.length - 1];
