@@ -14,6 +14,8 @@ The phase 1 audit of the brief (D-12 options, drawer, desktop menus, Coming soon
 | NV-06 | Nav shadow | none | `--kc-elevation-md` | Victor, 20 Oct | `1a475df` |
 | NV-07 | Mobile logo size | 105px (Figma PDP V15 node 4023:29024) | `clamp(105px, 100vw - 250px, 140px)`: 140 from 390px, 110 at 360 | Victor, 20 Oct | `1571898` |
 | NV-08 | Mobile bar offset | 4px below the announcement bar (Figma 2766:10918) | 12px | Victor, 20 Oct | `de58e27` |
+| NV-09 | Stuck offset off the PDP | Sticky at the bar's own margin (12px mobile, 24px desktop) | 16px from the top edge after scrolling, every page but the PDP | Victor, 20 Oct | `60c91b6` |
+| NV-10 | Floating navigation | Header section in the page flow, sticky, painting a full-width band (`section_bg_color_*`, `product_section_bg_color_*`) | Fixed and transparent; only the compact bar paints and takes clicks; it starts at the announcement bar's bottom and floors at NV-09 (16px) or 0 on the PDP; the first `#MainContent` section owns its background under the bar and gets the measured bar height as top padding. One controller (`assets/kc-navigation.js`) replaces Dawn's StickyHeader and the inline PDP script with the same NV-01 thresholds. Band settings, `show_line_separator`, `margin_bottom`, `product-header-css` and `transparent-header` removed; `sticky_header_type` none → always. | Victor, 20 Oct (draft by the R10 review session, adapted) | `b0c9fd2` |
 
 ## Still to audit (brief phase 1)
 

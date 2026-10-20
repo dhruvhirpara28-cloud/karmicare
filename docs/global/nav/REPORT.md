@@ -24,6 +24,10 @@ All rows were Victor's direct instructions in this terminal (see `NAV-AUDIT.md`,
 | `de58e27` | Mobile nav 8px lower (NV-08) |
 | `640ada3` | Unused bar colour settings removed: schema, CSS, `header-group.json` values (Victor: clean up unused code) |
 | `756a668` | NL and FR delivery line (Victor: translate right away) |
+| `25e2ca5` | Merge of `karmicare/soft-launch` (72a84ab): mobile 12px kept; integration desktop +1.6rem, CTA states, kit/money code, receipt keys kept |
+| `9a96945` | Astra R10 F1: sticky bar remeasures the first plan card at every decision (+ ResizeObserver) |
+| `60c91b6` | NV-09: nav 16px from the top after scrolling on every page but the PDP |
+| `b0c9fd2` | NV-10: floating navigation, independent of the page structure |
 
 Files: `sections/header.liquid`, `sections/header-group.json`, `snippets/product-header-css.liquid`, `snippets/sticky-cart-block.liquid`, `snippets/day-night-color-variables.liquid`, `locales/en.default.json`, `locales/nl.json`, `locales/fr.json`.
 
@@ -39,12 +43,25 @@ Files: `sections/header.liquid`, `sections/header-group.json`, `snippets/product
   - NV-08: 12px below the announcement bar at the top, 12px from the top when it returns mid-page.
 - Screenshots (gitignored): `docs/global/nav/shots/nav-393-day-top-after.png`, `nav-393-night-top-after.png`, `nav-393-day-top-shadow-after.png`, `nav-393-day-menu-open-after.png` (with the since-removed border), `nav-1440-day-top-after.png` (with the since-removed border).
 
+### Floating navigation (`b0c9fd2`), localhost 16197, Orca browser
+
+- Theme Check `--fail-level error`: exit 0 (459 files, 0 errors, 21 pre-existing warnings).
+- Homepage 393: nav fixed at the announcement bottom (30px), bar 42–90, no band (section background transparent), first section starts at 30 with 72px clearance, first content at 102; scrollY 15 → bar 27, 40/800/790 → 16. Hero background runs under the bar in Day and Night (`float-home-393-top.png`, `float-home-393-day-top.png`, `float-home-393-scrolled.png`).
+- PDP 393: hidden at 11, 600, 591; back at 590 (bar 12–60); hidden again at 591; 3000 hidden with the sticky bar shown; top restored. Hidden bar bottom −28 (shadow clear).
+- 750 / 990 / 1440, homepage and PDP: content starts where it did with the in-flow header (111 / 114 / 114); off the PDP the stuck bar is at 16; on the PDP hidden on scroll down, back at 12 (750) or 24 (990, 1440). No horizontal overflow.
+- Mobile menu opened mid-PDP: nav stays (hidden class set, transform none), panel opaque `rgb(33,42,73)` (Night), body locked; Escape closes it, focus returns to the menu button, lock released (`float-pdp-393-menu-open.png`).
+- Anchor (homepage, clock section): lands 24px under the bar.
+- Resize 393 → 1440 → 393 without reload: clearance 72 → 86 → 72, bar 42–90 → 52–102 → 42–90.
+- Collection, terms page and search at 393: first heading 33–39px under the bar.
+- Not checked in a browser: reduced motion (CSS only), real overscroll bounce (JS clamp, R10 probe), theme editor section reload, keyboard Tab order through the bar.
+
 ## Cleanup check
 
 - Removed in `a6000c4`: the `gallery` variable and its rule in `checkBuybox` (`git grep -n "gallery" snippets/sticky-cart-block.liquid`: no match).
 - Removed in `1571898`: the `glass_bg_day` / `glass_bg_night` Liquid variables (`git grep -n glass_bg_ -- sections snippets`: no match) and the border rules from `e21ee67`.
 - Removed in `640ada3` (Victor's go): header settings `bg_color_day`, `bg_color_night`, `product_bg_color_day`, `product_bg_color_night`, their CSS in `sections/header.liquid` and `snippets/product-header-css.liquid`, and their values in `sections/header-group.json`. `git grep -n "product_bg_color\|section.settings.bg_color_day\|section.settings.bg_color_night" -- sections snippets layout templates config assets`: only `sections/announcement-bar.liquid` (its own settings of the same name).
-- Left as found (predates this work): the `.scrolled-past-header` transparent rule in `snippets/product-header-css.liquid`; it only applies with a sticky header type other than `none`.
+- Removed in `b0c9fd2`: `snippets/product-header-css.liquid` (with its `.scrolled-past-header` rule), `snippets/transparent-header.liquid` (`body.is-scrolled`), Dawn's `StickyHeader` and the inline PDP script, the `header_tag` switch, header settings `section_bg_color_*`, `product_section_bg_color_*`, `show_line_separator`, `margin_bottom` (schema and `header-group.json`), and the `data-kc-surface-edge` reader in `snippets/kc-surface.liquid`. `git grep` for each in sections, snippets, layout, templates, config, assets: only other sections' own settings of the same name (announcement bar `show_line_separator`, product-benefits and `templates/index.json` `section_bg_color_*`).
+- Now unused, left for a follow-up: `assets/base.css` `.shopify-section-header-sticky`, `.shopify-section-header-hidden`, `.section-header.animate`, `.header-wrapper--border-bottom` (Dawn; nothing sets these classes any more; `component-mega-menu.css` still names two of them).
 
 ## Pending
 
