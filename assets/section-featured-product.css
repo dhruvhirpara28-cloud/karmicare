@@ -346,9 +346,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  /* surface/primary/default (as .karmicare__btn-primary in snippets/button-styles.liquid) */
-  background-color: var(--kc-mapped-surface-page);
-  color: var(--kc-mapped-text-default-heading);
+  /* The primary tokens, as .karmicare__btn-primary in snippets/button-styles.liquid */
+  background-color: var(--kc-mapped-surface-primary-default);
+  color: var(--kc-mapped-text-primary-default);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;
