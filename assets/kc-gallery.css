@@ -7,7 +7,9 @@ media-gallery.kc-gallery-fit .product-media-container video {
 }
 
 /* First gallery item, the hero animation: poster and video 1.2x inside their unchanged frame, so the
-   animation fills it (Victor, 20 Oct). Thumbnails, the other items and the end CTA's hero stay as they are. */
+   animation fills it (Victor, 20 Oct). Anchored at the top centre: the toothbrush heads rise close to the
+   top edge, the free space is below them (the floor shadow). Thumbnails, the other items and the end
+   CTA's hero stay as they are. */
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
   overflow: hidden;
 }
@@ -15,7 +17,7 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
   transform: scale(1.2);
-  transform-origin: center;
+  transform-origin: center top;
 }
 
 media-gallery.kc-gallery-fit {
