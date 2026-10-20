@@ -86,8 +86,8 @@ def typography(value, key_path):
             problems.append("no space before ; ! ? or »")
         if re.search(r"[A-Za-zÀ-ÿ)][:](?!//)", node) and not key_path.endswith("custom_button_text_by_plan"):
             problems.append("no space before :")
-        if "«" in node and not re.search("« ", node):
-            problems.append("no space after «")
+        if "«" in node or "»" in node:
+            problems.append("guillemets: use the quotes of the EN source (Victor, 20 Oct)")
         if "'" in node:
             problems.append("straight apostrophe")
         if re.search(r"€\s?\d", node):
