@@ -22,8 +22,10 @@ All rows were Victor's direct instructions in this terminal (see `NAV-AUDIT.md`,
 | `f46d511` | Nav on the secondary surface (NV-05) |
 | `1a475df` | Nav shadow `--kc-elevation-md`; hide offset covers the shadow (NV-06) |
 | `de58e27` | Mobile nav 8px lower (NV-08) |
+| `640ada3` | Unused bar colour settings removed: schema, CSS, `header-group.json` values (Victor: clean up unused code) |
+| `756a668` | NL and FR delivery line (Victor: translate right away) |
 
-Files: `sections/header.liquid`, `snippets/sticky-cart-block.liquid`, `snippets/day-night-color-variables.liquid`, `locales/en.default.json`.
+Files: `sections/header.liquid`, `sections/header-group.json`, `snippets/product-header-css.liquid`, `snippets/sticky-cart-block.liquid`, `snippets/day-night-color-variables.liquid`, `locales/en.default.json`, `locales/nl.json`, `locales/fr.json`.
 
 ## Evidence
 
@@ -41,13 +43,13 @@ Files: `sections/header.liquid`, `snippets/sticky-cart-block.liquid`, `snippets/
 
 - Removed in `a6000c4`: the `gallery` variable and its rule in `checkBuybox` (`git grep -n "gallery" snippets/sticky-cart-block.liquid`: no match).
 - Removed in `1571898`: the `glass_bg_day` / `glass_bg_night` Liquid variables (`git grep -n glass_bg_ -- sections snippets`: no match) and the border rules from `e21ee67`.
-- Now obsolete for the bar, kept and reported: the header settings `bg_color_day`, `bg_color_night`, `product_bg_color_day`, `product_bg_color_night` still feed `sections/header.liquid` L346-371 and `snippets/product-header-css.liquid` L19-30, but the glass background rules after them override every case. They sit in `sections/header-group.json` (Victor's editor values), which needs the coordinator's approval. Decision below.
+- Removed in `640ada3` (Victor's go): header settings `bg_color_day`, `bg_color_night`, `product_bg_color_day`, `product_bg_color_night`, their CSS in `sections/header.liquid` and `snippets/product-header-css.liquid`, and their values in `sections/header-group.json`. `git grep -n "product_bg_color\|section.settings.bg_color_day\|section.settings.bg_color_night" -- sections snippets layout templates config assets`: only `sections/announcement-bar.liquid` (its own settings of the same name).
+- Left as found (predates this work): the `.scrolled-past-header` transparent rule in `snippets/product-header-css.liquid`; it only applies with a sticky header type other than `none`.
 
 ## Pending
 
 - Astra review of this branch, requested from the coordinator (the orchestrator launches Astra).
 - Merge into `karmicare/soft-launch-global`: the coordinator's worktree holds that branch.
-- NL/FR delivery line: `[NEEDS APPROVED COPY]` for "Free Fast Delivery: 24 hours in Benelux. 3 days in rest of Europe"; NL/FR still show the old line.
 - Brief phase 1 audit (D-12, drawer, desktop menus, Coming soon, current page): not started.
 - Preview theme `189890265469` was created by this worker's first `shopify-preview.py dev` attempt (failed twice on "Premature close"); the landing desk now serves localhost 16197 from it.
 
@@ -60,5 +62,4 @@ Files: `sections/header.liquid`, `snippets/sticky-cart-block.liquid`, `snippets/
 
 ## Open decisions for Victor
 
-1. Remove the now-unused bar colour settings (`bg_color_*`, `product_bg_color_*`) from the header schema and `header-group.json`? Recommendation: yes, after the Astra review, so the editor stops offering knobs that do nothing.
-2. Delivery line copy for NL and FR.
+None open. Settled on 20 Oct: unused bar colour settings removed (`640ada3`); NL/FR delivery line translated by this worker at Victor's request (`756a668`), not by a translator.
