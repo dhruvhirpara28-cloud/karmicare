@@ -40,6 +40,7 @@
     class="plan-compare{% if kc %} plan-compare--kc{% endif %} kc-surface"
     id="compare-plans-{{ section.id }}"
     data-kc-surface="{{ section.settings.surface }}"
+    data-kc-plan-feedback-scope
   >
     <div class="page-width">
       <div class="pc-head">
@@ -225,7 +226,7 @@
             {%- endif -%}
 
             <div class="pc-hcell">
-              <span class="pc-name text-xl">{{ plan.title.value | default: plan.title }}</span>
+              <span class="pc-name text-xl" id="pc-name-{{ section.id }}-{{ forloop.index }}">{{ plan.title.value | default: plan.title }}</span>
               <span class="pc-price h4">{{ plan.price_override.value | default: plan.price_override }}</span>
               <span class="pc-cycle opacity-xl">{{ plan.cycle_text.value | default: plan.cycle_text }}</span>
             </div>
@@ -288,7 +289,18 @@
             {%- endfor -%}
 
             <div class="pc-ctacell center"{% if request.design_mode %} style="position: relative;"{% endif %}>
+              {%- liquid
+                # The button's accessible name: its visible label, plus the plan title when the label
+                # does not say it ("Begin" -> "Begin The Karmicare Year"), since it buys at once (R14 F3)
+                assign plan_cta_label = plan.cta_button.value | default: plan.cta_button | default: 'Choose plan'
+                assign plan_cta_label_id = 'pc-cta-' | append: section.id | append: '-' | append: forloop.index
+                assign plan_cta_named_by = plan_cta_label_id
+                unless plan_cta_label contains plan_title
+                  assign plan_cta_named_by = plan_cta_named_by | append: ' pc-name-' | append: section.id | append: '-' | append: forloop.index
+                endunless
+              -%}
               <button
+                aria-labelledby="{{ plan_cta_named_by }}"
                 {%- if kc %}
                   class="pc-cta{% if plan.featured.value == true %} pc-cta--primary{% else %} pc-cta--secondary{% endif %}"
                 {%- else %}
@@ -305,8 +317,8 @@
                 {%- endif %}
                 type="button"
               >
-                {{ plan.cta_button.value | default: plan.cta_button | default: 'Choose plan' }}
-                {%- render 'loading-spinner' -%}
+                <span id="{{ plan_cta_label_id }}">{{ plan_cta_label }}</span>
+                {%- render 'kc-plan-spinner' -%}
               </button>
               {%- if request.design_mode -%}
                 {%- comment -%}
@@ -357,6 +369,8 @@
           </div>
         {%- endfor -%}
       </div>
+
+      {%- render 'kc-plan-feedback' -%}
 
       {%- if footer_text != blank -%}
         <div class="pc-foot">{{ footer_text }}</div>

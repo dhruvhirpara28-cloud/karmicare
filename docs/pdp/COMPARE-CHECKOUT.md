@@ -51,6 +51,25 @@ onto the buttons (712192164221), there were 0 add calls and no redirect: the pla
 
 Not checked: the real checkout (agents never open it), Loop running on the page, mobile, the spinner on screen.
 
+## R14 fixes (docs/runtime-review/R14-PDP-ASTRA.md F1-F3)
+
+`attempt()` in `assets/kc-plan-select.js` wraps every table click. The cart and the redirect stay karmiAddToCart's.
+
+- **F1, Back from checkout:** the buttons this attempt made busy are tracked. A persisted `pageshow` makes them usable again: not disabled, not loading, spinner hidden, no `aria-busy`.
+- **F2, cart error:** after an attempt that did not go to checkout, the buybox error line is read (karmiAddToCart hides it at every start). When it is shown, its text goes into the table's own `role="alert"` line (`snippets/kc-plan-feedback.liquid`). A new click clears it.
+- **F3, accessibility:**
+  - Names via `aria-labelledby`: the visible label, plus the plan title when the label does not say it ("Begin The Karmicare Year", "Begin now 60-Day Rhythm").
+  - `aria-busy="true"` while the attempt runs, and a visually hidden `role="status"` line with `accessibility.loading` ("Loading...", "Bezig met laden...", "Chargement en cours...").
+  - The spinner is `aria-hidden` (`snippets/kc-plan-spinner.liquid`).
+
+Evidence: the same jsdom run, EN/NL/FR, all four buttons, all as expected:
+- During the attempt: busy, disabled, spinner shown, status text set.
+- After a persisted `pageshow`: everything reset, and a second click adds and redirects again.
+- A rejected `cart/add.js` ("Only 2 left"): the message shows at the table, the button is free again, and there is no redirect.
+- A new click hides the error line.
+
+Not checked: Back in a real browser (the helper cannot click, and the checkout may not be opened), and a screen reader.
+
 ## Steps for Victor (preview 189885940093)
 
 For each of `/`, `/nl/`, `/fr/`:
@@ -66,5 +85,6 @@ For each of `/`, `/nl/`, `/fr/`:
 3. Click **Begin** under The Karmicare Year: Year plan, quantity 3, €354, the same Welcome Kit, Subscription Name "Year Supply".
 4. Click **Try Once**: Duo one time, quantity 1, €67, no Welcome Kit.
 5. Double-click any plan button: one checkout, the Duo once.
+6. From a checkout, press the browser's Back button: the table button you clicked works again (no reload needed).
 
 Each new click replaces the earlier choice in the cart, so the steps can run one after another.

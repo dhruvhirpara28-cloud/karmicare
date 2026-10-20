@@ -92,6 +92,7 @@
     class="comparison-section section-{{ section.id }} section-{{ section.id }}-padding kc-surface"
     id="section-{{ section.id }}"
     data-kc-surface="{{ section.settings.surface }}"
+    data-kc-plan-feedback-scope
   >
     <div class="comparison-section__inner page-width">
       <div class="comparison-section__header">
@@ -116,9 +117,13 @@
           {% if button_url != blank %}
             <a href="{{ button_url }}" class="comparison-section__button">{{ button_text }}</a>
           {% else %}
+            {%- comment -%}
+              Accessible name: the visible label plus the plan it buys, "Begin now, 60-Day Rhythm" (R14 F3)
+            {%- endcomment -%}
             <button
               type="button"
               class="comparison-section__button"
+              aria-labelledby="comparison-buy-label-{{ section.id }}{% if buy_title != blank %} comparison-buy-plan-{{ section.id }}{% endif %}"
               data-kc-plan-product="{{ product.id }}"
               data-kc-plan-title="{{ buy_title | escape }}"
               data-kc-plan-choose="{{ buy_choose }}"
@@ -127,9 +132,13 @@
                 data-selling-plan-group-id="{{ buy_group_id }}"
               {%- endif %}
             >
-              {{ button_text }}
-              {%- render 'loading-spinner' -%}
+              <span id="comparison-buy-label-{{ section.id }}">{{ button_text }}</span>
+              {%- if buy_title != blank -%}
+                <span class="visually-hidden" id="comparison-buy-plan-{{ section.id }}">{{ buy_title }}</span>
+              {%- endif -%}
+              {%- render 'kc-plan-spinner' -%}
             </button>
+            {%- render 'kc-plan-feedback' -%}
           {% endif %}
         {% endif %}
       </div>

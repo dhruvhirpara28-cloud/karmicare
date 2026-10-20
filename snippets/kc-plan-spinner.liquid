@@ -1,0 +1,8 @@
+{%- comment -%}
+  The loading spinner inside a comparison table plan button (sections/product-compare-plans.liquid,
+  sections/comparison-table.liquid): hidden until assets/karmi-add-to-cart.js shows it, decorative only
+  (the busy state is aria-busy plus the table's status line, snippets/kc-plan-feedback.liquid).
+{%- endcomment -%}
+<span class="loading__spinner hidden" aria-hidden="true">
+  {{- 'loading-spinner.svg' | inline_asset_content -}}
+</span>

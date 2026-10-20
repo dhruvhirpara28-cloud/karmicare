@@ -1274,18 +1274,92 @@
   document.addEventListener('pointerdown', markPlanControl, true);
   document.addEventListener('keydown', markPlanControl, true);
 
+  // Comparison table buttons on their way to checkout (R14): aria-busy and a loading status while the
+  // attempt runs, a cart error shown at the table (its data-kc-plan-feedback), and the buttons usable
+  // again when Back restores the page from the bfcache. The cart and the redirect stay karmiAddToCart's.
+  const busyButtons = new Set();
+
+  function feedbackOf(button) {
+    const scope = button.closest('[data-kc-plan-feedback-scope]');
+    return scope ? scope.querySelector('[data-kc-plan-feedback]') : null;
+  }
+
+  function release(button) {
+    busyButtons.delete(button);
+    button.removeAttribute('aria-busy');
+    const feedback = feedbackOf(button);
+    const status = feedback && feedback.querySelector('[data-kc-plan-status]');
+    if (status) status.textContent = '';
+  }
+
+  // The error line karmiAddToCart writes for this product's form (the buybox's): hidden at the start of
+  // every attempt, shown only when the cart rejected it
+  function cartErrorOf(productId) {
+    readConfigs();
+    const product = products[String(productId)];
+    const widget = product && buyboxOf(product);
+    const form =
+      (widget && formOf(widget)) ||
+      document.querySelector('form[data-loop-product-id="' + String(productId).replace(/\D/g, '') + '"]');
+    if (!form) return null;
+    return (form.closest('product-form') || document).querySelector('.product-form__error-message-wrapper');
+  }
+
+  function attempt(button, run) {
+    const feedback = feedbackOf(button);
+    const error = feedback && feedback.querySelector('[data-kc-plan-error]');
+    const errorText = error && error.querySelector('[data-kc-plan-error-text]');
+    const status = feedback && feedback.querySelector('[data-kc-plan-status]');
+    if (error) error.hidden = true;
+    if (errorText) errorText.textContent = '';
+    busyButtons.add(button);
+    button.setAttribute('aria-busy', 'true');
+    if (status) status.textContent = status.dataset.loadingText || '';
+    const done = () => {
+      // karmiAddToCart leaves the button disabled only while the page goes to checkout
+      if (button.disabled) return;
+      release(button);
+      const cartError = cartErrorOf(button.dataset.kcPlanProduct);
+      if (!error || !errorText || !cartError || cartError.hidden) return;
+      const message = cartError.querySelector('.product-form__error-message');
+      errorText.textContent = message ? message.textContent : '';
+      if (errorText.textContent) error.hidden = false;
+    };
+    // run() starts in this turn (karmiAddToCart disables the button at once)
+    return new Promise((resolve) => resolve(run()))
+      .then(done, (err) => {
+        done();
+        warn('"' + (button.dataset.kcPlanTitle || 'plan') + '": ' + (err && err.message ? err.message : err));
+      });
+  }
+
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    busyButtons.forEach((button) => {
+      button.disabled = false;
+      button.removeAttribute('disabled');
+      button.removeAttribute('aria-disabled');
+      button.classList.remove('loading');
+      const spinner = button.querySelector('.loading__spinner');
+      if (spinner) spinner.classList.add('hidden');
+      release(button);
+    });
+  });
+
   document.addEventListener('click', (event) => {
     const button = event.target.closest && event.target.closest('[data-kc-plan-choose]');
     if (!button) return;
     event.preventDefault();
     const productId = button.dataset.kcPlanProduct;
     // A click on a button already on its way to checkout does nothing (karmiAddToCart disables it)
-    if (button.disabled || button.classList.contains('loading')) return;
+    if (button.disabled || button.classList.contains('loading') || busyButtons.has(button)) return;
     if (button.dataset.kcPlanChoose === 'once') {
-      tryOnce(productId, button);
+      attempt(button, () => tryOnce(productId, button));
       return;
     }
-    buy(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId, button);
+    attempt(button, () =>
+      buy(productId, button.dataset.sellingPlanId, button.dataset.kcPlanTitle, button.dataset.sellingPlanGroupId, button)
+    );
   });
 
   // Theme editor: a section added, replaced or removed brings its own config; re-read and re-apply
