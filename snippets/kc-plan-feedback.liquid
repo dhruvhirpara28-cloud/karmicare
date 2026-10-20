@@ -1,0 +1,47 @@
+{%- comment -%}
+  What a comparison table plan button reports while it goes to checkout (assets/kc-plan-select.js,
+  R14): a loading status for assistive technology, and the cart error at the table (Shopify's message or
+  the theme's cart error, copied from the buybox error line). Rendered inside the element that carries
+  data-kc-plan-feedback-scope (sections/product-compare-plans.liquid, sections/comparison-table.liquid).
+{%- endcomment -%}
+<div class="kc-plan-feedback" data-kc-plan-feedback>
+  <span
+    class="visually-hidden"
+    role="status"
+    data-kc-plan-status
+    data-loading-text="{{ 'accessibility.loading' | t | escape }}"
+  ></span>
+  <div class="kc-plan-feedback__error" role="alert" data-kc-plan-error hidden>
+    <span class="kc-plan-feedback__icon" aria-hidden="true">
+      {{- 'icon-error.svg' | inline_asset_content -}}
+    </span>
+    <span data-kc-plan-error-text></span>
+  </div>
+</div>
+
+{% stylesheet %}
+  .kc-plan-feedback__error:not([hidden]) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-top: var(--kc-responsive-spacing-layout-sm);
+    font-family: var(--kc-font-role-backbone);
+    font-size: var(--kc-responsive-body-sm-text-size);
+    line-height: var(--kc-responsive-body-sm-line-height);
+    color: var(--kc-mapped-text-default-heading);
+  }
+
+  .kc-plan-feedback__icon {
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .kc-plan-feedback__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+{% endstylesheet %}
