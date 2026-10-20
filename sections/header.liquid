@@ -47,10 +47,7 @@
     margin-bottom: {{ section.settings.margin_bottom }}px;
   }
 
-  /* Glass border, as on the other glass surfaces (sticky bar, cookie panel); a border colour picked in
-     the section settings still wins (DAY/NIGHT MODE COLORS below) */
   #shopify-section-{{ section.id }} .header {
-    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
     border-radius: var(--kc-shape-radius-sm);
     max-width: 1200px;
     margin: 1.2rem auto;
@@ -183,8 +180,10 @@
       margin: 0;
       padding: 0.8rem 1.6rem;
     }
+    /* Larger than the Figma 105 (Victor, 20 Oct): 140 from 390 px wide, narrower phones scale it
+       down so it keeps clear of BEGIN NOW */
     #shopify-section-{{ section.id }} .header__heading-logo-svg svg {
-      width: 105px;
+      width: clamp(105px, calc(100vw - 250px), 140px);
     }
     #shopify-section-{{ section.id }} .header__icons {
       order: 2;
@@ -257,18 +256,6 @@
       border-radius: 0 0 var(--kc-shape-radius-sm) var(--kc-shape-radius-sm);
       transform: none;
       visibility: visible;
-    }
-    /* The glass border runs around bar and panel as one box: none between them, the panel widened
-       over the bar's side borders */
-    #shopify-section-{{ section.id }}:has(details[open]) .header {
-      border-bottom-color: transparent;
-    }
-    #shopify-section-{{ section.id }} details[open] .menu-drawer,
-    #shopify-section-{{ section.id }} details[open].menu-opening .menu-drawer {
-      left: calc(-1 * var(--kc-shape-stroke-thin));
-      width: calc(100% + 2 * var(--kc-shape-stroke-thin));
-      border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-glass-border);
-      border-top: 0;
     }
     #shopify-section-{{ section.id }} .menu-drawer__inner-container,
     #shopify-section-{{ section.id }} .menu-drawer__navigation-container {
@@ -426,31 +413,19 @@
     }
   {%- endif -%}
 
-  /* ── GLASS BACKGROUND (bar colour at reduced opacity, Figma surface/glass) ── */
+  /* ── GLASS BACKGROUND ──
+     Figma mapped/surface/primary/default (Day #fffbf6, Night #191f38) at the bar opacity setting,
+     with the blur setting behind it (Victor, 20 Oct). The theme holds --kc-mapped-surface-primary-default
+     at its old navy for the Loop widget (assets/kc-tokens.css), so the bar reads --kc-mapped-surface-page,
+     which carries the same two values. */
   {%- liquid
     assign glass_alpha = section.settings.glass_opacity | divided_by: 100.0
-    assign glass_bg_day = section.settings.bg_color_day
-    assign glass_bg_night = section.settings.bg_color_night
-    if template.name == 'product' or request.page_type == 'product'
-      if section.settings.product_bg_color_day != blank
-        assign glass_bg_day = section.settings.product_bg_color_day
-      endif
-      if section.settings.product_bg_color_night != blank
-        assign glass_bg_night = section.settings.product_bg_color_night
-      endif
-    endif
   -%}
   @media screen and (min-width: 990px) {
-    {%- if glass_bg_day != blank %}
-      body.day-mode #shopify-section-{{ section.id }} .header {
-        background-color: {{ glass_bg_day | color_modify: 'alpha', glass_alpha }};
-      }
-    {%- endif %}
-    {%- if glass_bg_night != blank %}
-      body.night-mode #shopify-section-{{ section.id }} .header {
-        background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
-      }
-    {%- endif %}
+    body.day-mode #shopify-section-{{ section.id }} .header,
+    body.night-mode #shopify-section-{{ section.id }} .header {
+      background-color: rgba(var(--kc-mapped-surface-page-rgb), {{ glass_alpha }});
+    }
   }
   /* Mobile: ::before paints the bar (it sits above Dawn's menu overlay). Glass while closed;
      opaque with the panel while the menu is open. The blur is dropped while open because a
@@ -464,24 +439,16 @@
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
     }
-    {%- if glass_bg_day != blank %}
-      body.day-mode #shopify-section-{{ section.id }} .header::before {
-        background-color: {{ glass_bg_day | color_modify: 'alpha', glass_alpha }};
-      }
-      body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-      body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
-        background-color: {{ glass_bg_day }};
-      }
-    {%- endif %}
-    {%- if glass_bg_night != blank %}
-      body.night-mode #shopify-section-{{ section.id }} .header::before {
-        background-color: {{ glass_bg_night | color_modify: 'alpha', glass_alpha }};
-      }
-      body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
-      body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
-        background-color: {{ glass_bg_night }};
-      }
-    {%- endif %}
+    body.day-mode #shopify-section-{{ section.id }} .header::before,
+    body.night-mode #shopify-section-{{ section.id }} .header::before {
+      background-color: rgba(var(--kc-mapped-surface-page-rgb), {{ glass_alpha }});
+    }
+    body.day-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
+    body.night-mode #shopify-section-{{ section.id }}:has(details[open]) .header::before,
+    body.day-mode #shopify-section-{{ section.id }} details[open] .menu-drawer,
+    body.night-mode #shopify-section-{{ section.id }} details[open] .menu-drawer {
+      background-color: rgb(var(--kc-mapped-surface-page-rgb));
+    }
   }
 
   /* ── CTA BUTTON COLORS (from section schema settings) ── */
@@ -752,8 +719,11 @@
   <script>
     // Product pages: hide the bar on scroll down, bring it back on scroll up (see the HIDE ON SCROLL styles)
     (function () {
-      var section = document.currentScript.closest('.section-header');
-      if (!section) return;
+      var first = document.currentScript.closest('.section-header');
+      if (!first) return;
+      // Looked up by id on every update: the theme editor and theme dev's hot reload swap the section's
+      // element without running this script again
+      var sectionId = first.id;
       var TOP = 10; // always shown within this many px of the top
       var CLIMB = 10; // px of scrolling up before it comes back
       var lastY = Math.max(window.scrollY, 0);
@@ -777,12 +747,15 @@
           climbed -= delta;
           if (climbed >= CLIMB) hidden = false;
         }
+        var section = document.getElementById(sectionId);
+        if (!section) return;
         section.classList.toggle('kc-header-autohide--hidden', hidden);
+        section.classList.add('kc-header-autohide--ready');
       }
 
-      section.classList.toggle('kc-header-autohide--hidden', hidden);
+      first.classList.toggle('kc-header-autohide--hidden', hidden);
       requestAnimationFrame(function () {
-        section.classList.add('kc-header-autohide--ready');
+        first.classList.add('kc-header-autohide--ready');
       });
       window.addEventListener(
         'scroll',
