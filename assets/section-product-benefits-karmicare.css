@@ -240,6 +240,8 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  /* The section sets the veil's opacity as a variable, not inline, so hover can clear it */
+  opacity: var(--card-overlay-opacity, 0.58);
   transition: opacity 0.3s ease;
 }
 
