@@ -36,6 +36,9 @@ All rows were Victor's direct instructions in this terminal (see `NAV-AUDIT.md`,
 | `63b03d7` | R12 F4 + F5: mobile menu Tab wraps on shown controls; drawer closes past its breakpoint (one file, one commit) |
 | `11a6237` | R12 F6: `#fragment` targets land below the nav |
 | `4102b4d` | R10 F2 decided: delivery line "2–3 days" rest of Europe, EN/NL/FR + 28 locales on EN |
+| `b69aa86` | R12b remaining P2 (F4): drawer Tab endpoints measured on every Tab (desktop drawer resized while open; submenu scope) |
+
+R12b (Astra fix check on `c8acab1`): M1, F1, F2, F3, F5, F6 resolved; F4 partly, fixed in `b69aa86`. Rendered: desktop drawer simulated with a temporary style (no settings changed), opened at 989 → 990: Tab Members → Facebook, Instagram → menu button, Shift+Tab button → Instagram; shrunk to 989 open: Shift+Tab → Members, Tab → button, Escape closes with `aria-expanded=false`; saved dropdown at 393 unchanged; 989 → 990 close still moves focus to the logo. Submenus: none in the current menu, not tested.
 
 Files: `sections/header.liquid`, `sections/header-group.json`, `snippets/product-header-css.liquid`, `snippets/sticky-cart-block.liquid`, `snippets/day-night-color-variables.liquid`, `locales/en.default.json`, `locales/nl.json`, `locales/fr.json`.
 
