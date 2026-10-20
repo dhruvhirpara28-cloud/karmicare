@@ -146,7 +146,7 @@
             continue
           endif
           capture kit_value
-            render 'kc-kit-value', product: prod
+            render 'kc-kit-value', kit_product: prod
           endcapture
           assign kit_value = kit_value | plus: 0
           assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image

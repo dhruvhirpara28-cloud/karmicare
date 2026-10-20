@@ -118,7 +118,7 @@
                             continue
                           endif
                           capture prod_value
-                            render 'kc-kit-value', product: prod
+                            render 'kc-kit-value', kit_product: prod
                           endcapture
                           assign prod_value = prod_value | plus: 0
                         -%}
