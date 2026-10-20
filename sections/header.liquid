@@ -392,6 +392,27 @@
   /* ── PRODUCT PAGE OVERRIDES ── */
   {% render 'product-header-css', section: section %}
 
+  /* ── PRODUCT PAGES: HIDE ON SCROLL ──
+     The bar shows on landing, slides up out of view as the page scrolls down and slides back
+     after a short delay when the visitor scrolls up (or reaches the top). While it is away, the
+     sticky buy bar (snippets/sticky-cart-block.liquid) is the page's CTA. It stays while a menu
+     is open or keyboard focus is inside it. The script after the markup sets the classes;
+     without it the bar stays sticky as on every other page. */
+  {%- if template.name == 'product' or request.page_type == 'product' -%}
+    #shopify-section-{{ section.id }}.kc-header-autohide--ready {
+      transition: transform 0.3s ease 0.15s;
+    }
+    #shopify-section-{{ section.id }}.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
+      transform: translateY(-100%);
+      transition-delay: 0s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ section.id }}.kc-header-autohide--ready {
+        transition: none;
+      }
+    }
+  {%- endif -%}
+
   /* ── GLASS BACKGROUND (bar colour at reduced opacity, Figma surface/glass) ── */
   {%- liquid
     assign glass_alpha = section.settings.glass_opacity | divided_by: 100.0
@@ -720,6 +741,55 @@
     </div>
   </header>
 </{{ header_tag }}>
+
+{%- if template.name == 'product' or request.page_type == 'product' -%}
+  <script>
+    // Product pages: hide the bar on scroll down, bring it back on scroll up (see the HIDE ON SCROLL styles)
+    (function () {
+      var section = document.currentScript.closest('.section-header');
+      if (!section) return;
+      var TOP = 10; // always shown within this many px of the top
+      var CLIMB = 10; // px of scrolling up before it comes back
+      var lastY = Math.max(window.scrollY, 0);
+      var hidden = lastY > TOP;
+      var climbed = 0;
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        // Clamped so the overscroll bounce at either end reads as no movement
+        var maxY = document.documentElement.scrollHeight - window.innerHeight;
+        var y = Math.min(Math.max(window.scrollY, 0), Math.max(maxY, 0));
+        var delta = y - lastY;
+        lastY = y;
+        if (y <= TOP) {
+          hidden = false;
+        } else if (delta > 0) {
+          hidden = true;
+          climbed = 0;
+        } else if (delta < 0) {
+          climbed -= delta;
+          if (climbed >= CLIMB) hidden = false;
+        }
+        section.classList.toggle('kc-header-autohide--hidden', hidden);
+      }
+
+      section.classList.toggle('kc-header-autohide--hidden', hidden);
+      requestAnimationFrame(function () {
+        section.classList.add('kc-header-autohide--ready');
+      });
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        },
+        { passive: true }
+      );
+    })();
+  </script>
+{%- endif -%}
 
 {% javascript %}
   class StickyHeader extends HTMLElement {
