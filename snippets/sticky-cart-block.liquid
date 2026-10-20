@@ -145,8 +145,10 @@
           if prod == blank
             continue
           endif
-          assign kit_variant = prod.selected_or_first_available_variant
-          assign kit_value = kit_variant.compare_at_price | default: kit_variant.price
+          capture kit_value
+            render 'kc-kit-value', kit_product: prod
+          endcapture
+          assign kit_value = kit_value | plus: 0
           assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
         -%}
         <li class="sc-kit-item">
@@ -155,7 +157,7 @@
           {%- endif -%}
           <span class="sc-kit-name">{{ prod.title | escape }}</span>
           <span class="sc-kit-value">
-            {{- block.settings.kit_free | default: sc_copy_kit_free | escape }} · <s>{{ kit_value | money_without_trailing_zeros }}</s>
+            {{- block.settings.kit_free | default: sc_copy_kit_free | escape }} · <s>{% render 'kc-money', cents: kit_value, trim: true %}</s>
           </span>
         </li>
       {%- endfor -%}
@@ -236,6 +238,8 @@
     {
       "productId": {{ product.id | json }},
       "moneyFormat": {{ shop.money_format | json }},
+      "currency": {{ cart.currency.iso_code | json }},
+      "language": {{ request.locale.iso_code | split: '-' | first | json }},
       "isBundle": {{ is_bundle_product | json }},
       "kitReceived": {{ kit_received | json }},
       "kitVariantIds": {{ welcome_kit_variant_ids | split: ',' | compact | json }},
@@ -325,13 +329,20 @@
       if (el && el.textContent !== value) el.textContent = value;
     }
 
-    // The shop's money format (Shopify's formatMoney placeholders), whole amounts without ".00" / ",00"
+    // Euros as the visitor's language writes them, as snippets/kc-money.liquid: EN €0.49, NL € 0,49,
+    // FR 0,49 € (no-break spaces). Another currency: the shop's money format (Shopify's formatMoney placeholders). Whole
+    // amounts without ".00" / ",00"
     function money(cents) {
       function amount(precision, thousands, decimal) {
         var parts = (cents / 100).toFixed(precision).split('.');
         return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands) + (parts[1] ? decimal + parts[1] : '');
       }
-      if (!cfg.moneyFormat) return '€' + (cents % 100 === 0 ? amount(0, ',', '.') : amount(2, ',', '.'));
+      if (cfg.currency === 'EUR' || !cfg.moneyFormat) {
+        var precision = cents % 100 === 0 ? 0 : 2;
+        if (cfg.language === 'fr') return amount(precision, ' ', ',') + ' €';
+        if (cfg.language === 'nl') return '€ ' + amount(precision, '.', ',');
+        return '€' + amount(precision, ',', '.');
+      }
       var out = String(cfg.moneyFormat).replace(/\{\{\s*(\w+)\s*\}\}/, function (match, key) {
         if (key === 'amount_no_decimals') return amount(0, ',', '.');
         if (key === 'amount_with_comma_separator') return amount(2, '.', ',');

@@ -11,12 +11,6 @@
   cursor: default;
 }
 
-/* A disabled button does not lift or dim on hover */
-.kc-coming-soon[aria-disabled='true']:hover {
-  opacity: 1;
-  transform: none;
-}
-
 .kc-coming-soon .kc-coming-soon__tip {
   position: absolute;
   top: calc(100% + var(--kc-responsive-spacing-layout-xs));

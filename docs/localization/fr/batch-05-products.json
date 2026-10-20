@@ -1,0 +1,1091 @@
+{
+ "batch": "batch-05-products",
+ "lang": "fr",
+ "source_file": "docs/source-copy/batches/batch-05-products.json",
+ "source_digest": "5ab678a91ffc223be63e7f87a68783bacc62a744",
+ "source_entries": 77,
+ "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
+ "translated": "2026-10-19",
+ "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
+ "counts": {
+  "admin": 55,
+  "held": 6,
+  "translated": 16
+ },
+ "flag_counts": {
+  "fit-risk": 2,
+  "not-rendered": 1,
+  "pending-claim-review": 19,
+  "pending-en-review": 1,
+  "source-defect": 9,
+  "wording-adapted": 3
+ },
+ "entries": [
+  {
+   "id": "product:main/highlights_slider_9wAjAb/text_1",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_1",
+   "en": "Used by +100 kPNI practitioners",
+   "en_sha1": "2f927a00ef0e5f1e5f74420f6ab8f2b65a93abe1",
+   "fr": "Adopté par plus de 100 praticiens kPNI",
+   "status": "translated",
+   "flags": [
+    "pending-claim-review",
+    "wording-adapted"
+   ],
+   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); number as in EN. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "needs-review"
+  },
+  {
+   "id": "product:main/highlights_slider_9wAjAb/text_2",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_2",
+   "en": "Leave-on Technology",
+   "en_sha1": "57b1fc1fc045d361045cda27c4272d64c4dd1266",
+   "fr": "Technologie leave-on",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/highlights_slider_9wAjAb/text_3",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_3",
+   "en": "Backed by 39 peer-reviewed studies",
+   "en_sha1": "e40fbeb4869da746d01e200cd598c20d3764fcba",
+   "fr": "Fondé sur 39 études à comité de lecture",
+   "status": "translated",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "needs-review"
+  },
+  {
+   "id": "product:main/buy_buttons/custom_button_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.buy_buttons.settings.custom_button_text",
+   "en": "Begin Now",
+   "en_sha1": "8688b8a48f01c5ee1c89edcee982e6a3b39fbbe6",
+   "fr": "Commencer maintenant",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 20 chars vs EN 9; exact FR kept, fit checked at the integration preview.",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/icon_with_text_xhaDGB/heading_1",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.icon_with_text_xhaDGB.settings.heading_1",
+   "en": "60 day money back guarantee",
+   "en_sha1": "c8640920c1cfc947a893fe59b9e8d5277db778d2",
+   "fr": "Satisfait ou remboursé 60 jours",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/icon_with_text_xhaDGB/heading_2",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.icon_with_text_xhaDGB.settings.heading_2",
+   "en": "Cancel anytime",
+   "en_sha1": "ceec8a134ce856617633a7b4efd566f243d1c391",
+   "fr": "Résiliable à tout moment",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/icon_with_text_xhaDGB/heading_3",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.icon_with_text_xhaDGB.settings.heading_3",
+   "en": "Free shipping",
+   "en_sha1": "b6da5263ea361ec875fab0f88ca4d12a7ec638e5",
+   "fr": "Livraison offerte",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/treatment_journey_block/read_more_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.treatment_journey_block.settings.read_more_text",
+   "en": "Read more",
+   "en_sha1": "ad086cf55b834c375e209972840f1342401d8c41",
+   "fr": "Lire la suite",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/treatment_journey_block/read_less_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.treatment_journey_block.settings.read_less_text",
+   "en": "Read less",
+   "en_sha1": "32abdf99d470e368ff52f35bc0e2944650c9e6c1",
+   "fr": "Réduire",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/treatment_journey_block/disclaimer_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.treatment_journey_block.settings.disclaimer_text",
+   "en": "* What members report with continued use — individual experiences vary.",
+   "en_sha1": "3a7e93e6878a112220a0e6bed2470a55f6273a5e",
+   "fr": "* Ce que rapportent les membres avec une pratique régulière — les expériences individuelles varient.",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/professional_testimonials_block/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.professional_testimonials_block.settings.heading",
+   "en": "Approved by nature. Used by professionals",
+   "en_sha1": "035a6a51f36bbb7512d2489c26cdb9710329fd7a",
+   "fr": "Approuvé par la nature. Adopté par les professionnels",
+   "status": "translated",
+   "flags": [
+    "wording-adapted"
+   ],
+   "notes": "'Used by' rendered 'Adopté par' (banned word 'use').",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/info_card_FnBcaN/header_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.info_card_FnBcaN.settings.header_text",
+   "en": "OUR COMMITMENT TO YOU",
+   "en_sha1": "9746c13afde0404b6af08f9c636bcec2f45d7ad3",
+   "fr": "NOTRE ENGAGEMENT ENVERS VOUS",
+   "status": "translated",
+   "flags": [],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/info_card_FnBcaN/body_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
+   "en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
+   "en_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
+   "fr": "<p>À chaque commande, <strong>nous vous récompensons</strong>. Vous investissez dans votre santé. Nous réinvestissons en vous. La santé à long terme est notre <strong>engagement n° 1</strong>. Les Health Rewards s’échangent contre des accessoires et des soins réservés aux membres Karmicare.</p>",
+   "status": "translated",
+   "flags": [
+    "pending-en-review",
+    "wording-adapted"
+   ],
+   "notes": "Pre-2.0 card on product.json: 'Health Rewards' is the old name of what the Duo PDP calls Care Credit; kept in English as written. 'purchase' rendered 'commande', 'products' rendered 'soins', 'redeemable' rendered 's'échangent' (banned words).",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:main/sticky_cart_block/button_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.sticky_cart_block.settings.button_text",
+   "en": "Begin Now",
+   "en_sha1": "8688b8a48f01c5ee1c89edcee982e6a3b39fbbe6",
+   "fr": "Commencer maintenant",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "notes": "R3 F8: constrained UI text, 20 chars vs EN 9; exact FR kept, fit checked at the integration preview.",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:disclosures/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.disclosures.settings.heading",
+   "en": "Disclosures",
+   "en_sha1": "26dfc22b1abe6d5c3385c4db50edabde0457e720",
+   "fr": "Informations",
+   "status": "translated",
+   "flags": [],
+   "notes": "Collapsible heading on product.json.",
+   "source_status": "approved"
+  },
+  {
+   "id": "product:related-products/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.related-products.settings.heading",
+   "en": "You may also like",
+   "en_sha1": "47f47d44c36b3e58ba4a18f8cd6dce610d199fa0",
+   "fr": "Vous aimerez aussi",
+   "status": "translated",
+   "flags": [
+    "not-rendered"
+   ],
+   "notes": "",
+   "source_status": "approved"
+  },
+  {
+   "id": "admin:product:complete-hygiene-kit:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "complete-hygiene-kit",
+   "key_path": "seo.title",
+   "en": "Karmicare Complete Hygiene Kit – KARMICARE",
+   "en_sha1": "2b5a70e4e34c23a25453f29db060047fa696429d",
+   "fr": "Kit d’hygiène complet Karmicare – KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:complete-hygiene-kit:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "complete-hygiene-kit",
+   "key_path": "seo.description",
+   "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss",
+   "en_sha1": "ea8a3c780636756e532ad6f2949fd5676412f0c1",
+   "fr": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:judge-me:preview_badge.stars",
+   "resource_type": "app",
+   "file_or_handle": "judge-me",
+   "key_path": "preview_badge.stars",
+   "en": "[span aria-label] {{ rating }} stars",
+   "en_sha1": "d43af9ed3b7995dadc96170489d7ee7375c2aac4",
+   "fr": "[span aria-label] {{ rating }} étoiles",
+   "status": "admin",
+   "flags": [],
+   "notes": "Judge.me supplies and translates its own badge text; FR given for completeness only.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:judge-me:preview_badge.review_count",
+   "resource_type": "app",
+   "file_or_handle": "judge-me",
+   "key_path": "preview_badge.review_count",
+   "en": "{{ count }} review(s)",
+   "en_sha1": "e889917b066ae9ad6a91a79737721febf90969b4",
+   "fr": "{{ count }} avis",
+   "status": "admin",
+   "flags": [],
+   "notes": "Judge.me supplies and translates its own badge text; FR given for completeness only.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush",
+   "key_path": "seo.title",
+   "en": "KARMICARE Ultra Soft Morning Toothbrush",
+   "en_sha1": "3d739abc9959367e2eb70ba19b1ee2665ee3be98",
+   "fr": "Brosse à dents du matin ultra-douce KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush",
+   "key_path": "seo.description",
+   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by ea",
+   "en_sha1": "cba576cb9faaf5420d4b8e7a0d4ead12c813b0d8",
+   "fr": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin. Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.",
+   "status": "admin",
+   "flags": [
+    "source-defect"
+   ],
+   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. EN typos ('dispurge', 'nurished', 'Awake of Asleep') translated as intended (répartir, nourris, Awake ou Asleep).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush",
+   "key_path": "seo.title",
+   "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
+   "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
+   "fr": "Brosse à dents du soir détoxifiante ultra-douce KARMICARE",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush",
+   "key_path": "seo.description",
+   "en": "The bristles are extremely soft and coated with activated charcoal.The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.Head is not too big or too small. Perfectly fits 2 to 4 applicati",
+   "en_sha1": "9f96b288b484715fd2f51172558f3cc26ffdb85d",
+   "fr": "Les poils sont extrêmement doux et enrobés de charbon actif. Les poils ultrafins et légers comme une plume aident à éliminer facilement la plaque dentaire sans être abrasifs. Cela aide vos dents à retrouver leur blancheur nacrée, sans polissage ni blanchiment. La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec le dentifrice Awake/Asleep.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "source-defect"
+   ],
+   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:whitening-charcoal-dental-floss:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "seo.title",
+   "en": "KARMICARE Whitening Charcoal Floss",
+   "en_sha1": "29512413974b5cab2148a50fed4688ac9b425393",
+   "fr": "Fil dentaire blanchissant au charbon KARMICARE",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:whitening-charcoal-dental-floss:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "seo.description",
+   "en": "Ultrathin bamboo charcoal dental floss without flavour.Helps remove tenacious plaque without damaging enamel.Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.Remove food rests and other residue stuck between your teeth.*Coated charcoal thread aids in removi",
+   "en_sha1": "4ebcd40105b4fd72da0a469dfd60563435995336",
+   "fr": "Fil dentaire ultrafin au charbon de bambou, sans arôme. Aide à éliminer la plaque tenace sans abîmer l’émail. Blanchir entre vos dents en passant le fil aide à éliminer les taches jaunes de café près de la gencive. Élimine les restes alimentaires et autres résidus coincés entre vos dents.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "source-defect"
+   ],
+   "notes": "The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:judge-me:preview_badge.no_reviews",
+   "resource_type": "app",
+   "file_or_handle": "judge-me",
+   "key_path": "preview_badge.no_reviews",
+   "en": "No reviews",
+   "en_sha1": "6c41e0a40d568f824e657befa1c15eb0f4872491",
+   "fr": "Aucun avis",
+   "status": "admin",
+   "flags": [],
+   "notes": "Judge.me supplies and translates its own badge text; FR given for completeness only.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush-2-0:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "seo.title",
+   "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
+   "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
+   "fr": "Brosse à dents du soir détoxifiante ultra-douce KARMICARE",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush-2-0:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "seo.description",
+   "en": "The bristles are extremely soft and coated with activated charcoal.The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.Head is not too big or too small. Perfectly fits 2 to 4 applicati",
+   "en_sha1": "9f96b288b484715fd2f51172558f3cc26ffdb85d",
+   "fr": "Les poils sont extrêmement doux et enrobés de charbon actif. Les poils ultrafins et légers comme une plume aident à éliminer facilement la plaque dentaire sans être abrasifs. Cela aide vos dents à retrouver leur blancheur nacrée, sans polissage ni blanchiment. La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec le dentifrice Awake/Asleep.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush-2-0:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "seo.title",
+   "en": "KARMICARE Ultra Soft Morning Toothbrush",
+   "en_sha1": "3d739abc9959367e2eb70ba19b1ee2665ee3be98",
+   "fr": "Brosse à dents du matin ultra-douce KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush-2-0:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "seo.description",
+   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by ea",
+   "en_sha1": "cba576cb9faaf5420d4b8e7a0d4ead12c813b0d8",
+   "fr": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin. Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "seo.title",
+   "en": "Karmicare Asleep Evening Toothpaste – KARMICARE",
+   "en_sha1": "3044149ef06e70ef32c5af63450bbe896aed24c3",
+   "fr": "Dentifrice du soir Karmicare Asleep – KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "seo.description",
+   "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you fall asleep at night. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually har",
+   "en_sha1": "2308852066a80c62e376ed89dc1acd124302bda4",
+   "fr": null,
+   "status": "held",
+   "flags": [
+    "source-defect"
+   ],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:seo.title",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "seo.title",
+   "en": "Karmicare Awake Morning Toothpaste – KARMICARE",
+   "en_sha1": "35586ce5a7d7c92a3db37e20b4a770759731fb66",
+   "fr": "Dentifrice du matin Karmicare Awake – KARMICARE",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:seo.description",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "seo.description",
+   "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you get up in the morning. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually ha",
+   "en_sha1": "70a6ebd2757ad3dee5ec8ae2f869f7124b0231a8",
+   "fr": null,
+   "status": "held",
+   "flags": [
+    "source-defect"
+   ],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:complete-hygiene-kit:title",
+   "resource_type": "product",
+   "file_or_handle": "complete-hygiene-kit",
+   "key_path": "title",
+   "en": "Complete Hygiene Kit",
+   "en_sha1": "7c9bdc6a50f7375e296c9335847e262e8fda36ab",
+   "fr": "Kit d’hygiène complet",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:complete-hygiene-kit:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "complete-hygiene-kit",
+   "key_path": "body_html#b001",
+   "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss<br><br><br>",
+   "en_sha1": "e92ed45a2b78310dc7ca705e60b0fd01fcff0ae2",
+   "fr": "Obtenez le kit d’hygiène complet comprenant le set d’hygiène bucco-dentaire biorythmique, la brosse à dents du matin, la brosse à dents du soir et le fil dentaire blanchissant au charbon<br><br><br>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush:title",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush",
+   "key_path": "title",
+   "en": "Morning Toothbrush",
+   "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
+   "fr": "Brosse à dents du matin",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush",
+   "key_path": "body_html#b001",
+   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
+   "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
+   "fr": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin.<br><br>Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec la formule Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/evening-toothbrush\">brosse à dents du soir</a> KARMICARE.<br><br>Commencez votre journée à la manière KARMICARE.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review",
+    "source-defect"
+   ],
+   "notes": "EN typos ('dispurge', 'nurished', 'Awake of Asleep') translated as intended. The link points at /en/product/evening-toothbrush (legacy brush); href kept. Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush:media.27295901057206.alt",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush",
+   "key_path": "media.27295901057206.alt",
+   "en": "Karmicare Morning Toothbrush",
+   "en_sha1": "6e91bb9b99d34dc597da741c5d4f7007f1d631f1",
+   "fr": "Brosse à dents du matin Karmicare",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush:title",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush",
+   "key_path": "title",
+   "en": "Evening Toothbrush",
+   "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
+   "fr": "Brosse à dents du soir",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush",
+   "key_path": "body_html#b001",
+   "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
+   "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
+   "fr": "Les poils sont extrêmement doux et enrobés de charbon actif.<br><br>Les poils ultrafins et légers comme une plume aident à éliminer facilement la plaque dentaire sans être abrasifs. Cela aide vos dents à retrouver leur blancheur nacrée, sans polissage ni blanchiment.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec le dentifrice Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/morning-toothbrush\">brosse à dents du matin KARMICARE.</a><br><br>Terminez votre journée à la manière KARMICARE.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush:media.27295901221046.alt",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush",
+   "key_path": "media.27295901221046.alt",
+   "en": "Karmicare Avond Tandenborstel",
+   "en_sha1": "bd86191186eaff63d74b19524628df4560365a0e",
+   "fr": "Brosse à dents du soir Karmicare",
+   "status": "admin",
+   "flags": [
+    "source-defect"
+   ],
+   "notes": "The EN alt is Dutch ('Karmicare Avond Tandenborstel'); the FR translates its meaning. Admin owner: give the image an English alt.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:whitening-charcoal-dental-floss:title",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "title",
+   "en": "Whitening Charcoal Floss",
+   "en_sha1": "a13ec532d1776acc6151cc4faffed46ced530676",
+   "fr": "Fil dentaire blanchissant au charbon",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "body_html#b001",
+   "en": "Ultrathin bamboo charcoal dental floss without flavour.<br><br>Helps remove tenacious plaque without damaging enamel.<br><br>Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.<br><br>Remove food rests and other residue stuck between your teeth.<br><br>*Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.",
+   "en_sha1": "36e86a4fd6675dc28b89bb2e60087c19f5b59350",
+   "fr": "Fil dentaire ultrafin au charbon de bambou, sans arôme.<br><br>Aide à éliminer la plaque tenace sans abîmer l’émail.<br><br>Blanchir entre vos dents en passant le fil aide à éliminer les taches jaunes de café près de la gencive.<br><br>Élimine les restes alimentaires et autres résidus coincés entre vos dents.<br><br>*Le fil enrobé de charbon aide à éliminer le tartre et la plaque dentaire, et laisse vos gencives fraîches et propres.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:whitening-charcoal-dental-floss:media.27295901876406.alt",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "media.27295901876406.alt",
+   "en": "Karmicare Whitening Charcoal Floss",
+   "en_sha1": "8f27175fe394c45b8483598a82a4f43002145f87",
+   "fr": "Fil dentaire blanchissant au charbon Karmicare",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:whitening-charcoal-dental-floss:selling_plan_group:Subscribe and Save",
+   "resource_type": "app",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "selling_plan_group.Subscribe and Save.name",
+   "en": "Subscribe and Save",
+   "en_sha1": "e174438a1b997fc5d4c09446e4faa6a12a46e7d1",
+   "fr": "S’abonner et économiser",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:whitening-charcoal-dental-floss:selling_plan.712456601981.name",
+   "resource_type": "app",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "selling_plan.712456601981.name",
+   "en": "Deliver every 6 month",
+   "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
+   "fr": "Livraison tous les 6 mois",
+   "status": "admin",
+   "flags": [
+    "source-defect"
+   ],
+   "notes": "EN typo 'every 6 month'; FR 'tous les 6 mois'. Plan offered on the accessories and single formulas (Loop).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:whitening-charcoal-dental-floss:selling_plan.712460992893.name",
+   "resource_type": "app",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "key_path": "selling_plan.712460992893.name",
+   "en": " Deliver every 60 days",
+   "en_sha1": "6cd4d4318f17453dae8dcf10b44043f67bf27852",
+   "fr": "Livraison tous les 60 jours",
+   "status": "admin",
+   "flags": [
+    "source-defect"
+   ],
+   "notes": "The EN has a leading space; not carried over.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush-2-0:title",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "title",
+   "en": "Evening Toothbrush 2.0",
+   "en_sha1": "57257b08045994042e5eb82673a6313ed48189fd",
+   "fr": "Brosse à dents du soir 2.0",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "body_html#b001",
+   "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
+   "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
+   "fr": "Les poils sont extrêmement doux et enrobés de charbon actif.<br><br>Les poils ultrafins et légers comme une plume aident à éliminer facilement la plaque dentaire sans être abrasifs. Cela aide vos dents à retrouver leur blancheur nacrée, sans polissage ni blanchiment.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec le dentifrice Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/morning-toothbrush\">brosse à dents du matin KARMICARE.</a><br><br>Terminez votre journée à la manière KARMICARE.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:evening-toothbrush-2-0:media.27295901221046.alt",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "media.27295901221046.alt",
+   "en": "Karmicare Avond Tandenborstel",
+   "en_sha1": "bd86191186eaff63d74b19524628df4560365a0e",
+   "fr": "Brosse à dents du soir Karmicare",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:evening-toothbrush-2-0:selling_plan_group:Subscribe and Save",
+   "resource_type": "app",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "selling_plan_group.Subscribe and Save.name",
+   "en": "Subscribe and Save",
+   "en_sha1": "e174438a1b997fc5d4c09446e4faa6a12a46e7d1",
+   "fr": "S’abonner et économiser",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:evening-toothbrush-2-0:selling_plan.712456634749.name",
+   "resource_type": "app",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "selling_plan.712456634749.name",
+   "en": "Deliver every 6 month",
+   "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
+   "fr": "Livraison tous les 6 mois",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:evening-toothbrush-2-0:selling_plan.712460992893.name",
+   "resource_type": "app",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "key_path": "selling_plan.712460992893.name",
+   "en": " Deliver every 60 days",
+   "en_sha1": "6cd4d4318f17453dae8dcf10b44043f67bf27852",
+   "fr": "Livraison tous les 60 jours",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush-2-0:title",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "title",
+   "en": "Morning Toothbrush 2.0",
+   "en_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
+   "fr": "Brosse à dents du matin 2.0",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "body_html#b001",
+   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
+   "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
+   "fr": "Les poils sont extrêmement doux pour nettoyer délicatement les dents et les gencives avec le plus grand soin.<br><br>Les poils ultrafins et légers comme une plume aident à répartir le dentifrice et permettent à Awake ou Asleep d’atteindre les endroits les plus petits et les plus sombres entre les dents et le long de la gencive. Pour que vos dents et vos gencives profitent de chaque minéral de notre formule.<br><br>La tête n’est ni trop grande ni trop petite. Elle convient parfaitement pour 2 à 4 applications avec la formule Awake/Asleep.<br><br>Dure plus longtemps en association avec la <a href=\"https://karmicare.com/en/product/evening-toothbrush\">brosse à dents du soir</a> KARMICARE.<br><br>Commencez votre journée à la manière KARMICARE.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:morning-toothbrush-2-0:media.27295901057206.alt",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "media.27295901057206.alt",
+   "en": "Karmicare Morning Toothbrush",
+   "en_sha1": "6e91bb9b99d34dc597da741c5d4f7007f1d631f1",
+   "fr": "Brosse à dents du matin Karmicare",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:morning-toothbrush-2-0:selling_plan_group:Subscribe and Save",
+   "resource_type": "app",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "selling_plan_group.Subscribe and Save.name",
+   "en": "Subscribe and Save",
+   "en_sha1": "e174438a1b997fc5d4c09446e4faa6a12a46e7d1",
+   "fr": "S’abonner et économiser",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:morning-toothbrush-2-0:selling_plan.712456667517.name",
+   "resource_type": "app",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "selling_plan.712456667517.name",
+   "en": "Deliver every 6 month",
+   "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
+   "fr": "Livraison tous les 6 mois",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:morning-toothbrush-2-0:selling_plan.712460992893.name",
+   "resource_type": "app",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "key_path": "selling_plan.712460992893.name",
+   "en": " Deliver every 60 days",
+   "en_sha1": "6cd4d4318f17453dae8dcf10b44043f67bf27852",
+   "fr": "Livraison tous les 60 jours",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:title",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "title",
+   "en": "Asleep Evening Toothpaste 2.0",
+   "en_sha1": "3452e86673de47a289dd6f79fd7a6e427918f28e",
+   "fr": "Dentifrice du soir Asleep 2.0",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "body_html#b001",
+   "en": "Something for your mind, your mouth and your soul.",
+   "en_sha1": "c1a709bf22eb1063d5ca19a9f6585659c3183977",
+   "fr": "Un soin pour votre esprit, votre bouche et votre âme.",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b002",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "body_html#b002",
+   "en": "A toothpaste that helps you fall asleep at night.",
+   "en_sha1": "77dfe576d894aedd93f53144bb91214468b5df2d",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b003",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "body_html#b003",
+   "en": "With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth.",
+   "en_sha1": "2fb4e365e02eb28374c8d95b8ba9befb3231a1d7",
+   "fr": "Avec des minéraux de qualité supérieure comme la nano-HAp et des nootropiques actifs, Karmicare vous aide à atteindre un équilibre optimal entre esprit et bouche.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b004",
+   "resource_type": "product",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "body_html#b004",
+   "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
+   "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:asleep-evening-toothpaste-2-0:selling_plan_group:Subscribe and Save",
+   "resource_type": "app",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "selling_plan_group.Subscribe and Save.name",
+   "en": "Subscribe and Save",
+   "en_sha1": "e174438a1b997fc5d4c09446e4faa6a12a46e7d1",
+   "fr": "S’abonner et économiser",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:asleep-evening-toothpaste-2-0:selling_plan.712456700285.name",
+   "resource_type": "app",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "selling_plan.712456700285.name",
+   "en": "Deliver every 6 month",
+   "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
+   "fr": "Livraison tous les 6 mois",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:asleep-evening-toothpaste-2-0:selling_plan.712460992893.name",
+   "resource_type": "app",
+   "file_or_handle": "asleep-evening-toothpaste-2-0",
+   "key_path": "selling_plan.712460992893.name",
+   "en": " Deliver every 60 days",
+   "en_sha1": "6cd4d4318f17453dae8dcf10b44043f67bf27852",
+   "fr": "Livraison tous les 60 jours",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:title",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "title",
+   "en": "Awake Morning Toothpaste 2.0",
+   "en_sha1": "d1ad2e7225eace6463e4e74a68753960e4b89f32",
+   "fr": "Dentifrice du matin Awake 2.0",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b001",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "body_html#b001",
+   "en": "Something for your mind, your mouth and your soul.",
+   "en_sha1": "c1a709bf22eb1063d5ca19a9f6585659c3183977",
+   "fr": "Un soin pour votre esprit, votre bouche et votre âme.",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b002",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "body_html#b002",
+   "en": "A toothpaste that helps you get up in the morning.",
+   "en_sha1": "f4e9ca2c91352d24232d43428eb4fd8a51cb7de7",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b003",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "body_html#b003",
+   "en": "With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth.",
+   "en_sha1": "2fb4e365e02eb28374c8d95b8ba9befb3231a1d7",
+   "fr": "Avec des minéraux de qualité supérieure comme la nano-HAp et des nootropiques actifs, Karmicare vous aide à atteindre un équilibre optimal entre esprit et bouche.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b004",
+   "resource_type": "product",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "body_html#b004",
+   "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
+   "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:awake-morning-toothpaste-2-0:selling_plan_group:Subscribe and Save",
+   "resource_type": "app",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "selling_plan_group.Subscribe and Save.name",
+   "en": "Subscribe and Save",
+   "en_sha1": "e174438a1b997fc5d4c09446e4faa6a12a46e7d1",
+   "fr": "S’abonner et économiser",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:awake-morning-toothpaste-2-0:selling_plan.712456733053.name",
+   "resource_type": "app",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "selling_plan.712456733053.name",
+   "en": "Deliver every 6 month",
+   "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
+   "fr": "Livraison tous les 6 mois",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:app:awake-morning-toothpaste-2-0:selling_plan.712460992893.name",
+   "resource_type": "app",
+   "file_or_handle": "awake-morning-toothpaste-2-0",
+   "key_path": "selling_plan.712460992893.name",
+   "en": " Deliver every 60 days",
+   "en_sha1": "6cd4d4318f17453dae8dcf10b44043f67bf27852",
+   "fr": "Livraison tous les 60 jours",
+   "status": "admin",
+   "flags": [],
+   "notes": "",
+   "source_status": "admin-held"
+  }
+ ]
+}

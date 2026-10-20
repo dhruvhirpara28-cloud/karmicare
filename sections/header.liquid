@@ -75,7 +75,8 @@
       gap: 3px;
       width: fit-content;
       max-width: calc(100% - 2.4rem);
-      margin: {{ section.settings.padding_top }}px auto {{ section.settings.padding_bottom }}px;
+      /* 16px lower than the setting (Victor, 20 Oct) */
+      margin: calc({{ section.settings.padding_top }}px + 1.6rem) auto {{ section.settings.padding_bottom }}px;
       padding: var(--kc-responsive-spacing-layout-xxs);
       {%- if section.settings.enable_glass_blur %}
         -webkit-backdrop-filter: blur(10px);
@@ -136,7 +137,8 @@
   }
 
   /* Mobile and tablet: glass bar per Figma "Navigation · Mobile" (2766:10918), 12px below the
-     announcement bar (Figma 4px; 8px lower at Victor's request, 20 Oct), 4px padding, logo cell 16/8, BEGIN NOW and the menu button 3px apart.
+     announcement bar (Figma 4px; 8px lower at Victor's request, 20 Oct, which replaces the earlier
+     +16px of 902733a on mobile), 4px padding, logo cell 16/8, BEGIN NOW and the menu button 3px apart.
      The open menu drops down from the bar as one panel on the same surface. */
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .header__inline-menu {
@@ -463,6 +465,13 @@
       {%- endif %}
     }
   {%- endif %}
+  /* Interaction colours (KC/Button Primary, accent), above the setting colours */
+  body #shopify-section-{{ section.id }} .header__cta-btn:hover {
+    background-color: var(--kc-mapped-surface-accent-default-hover);
+  }
+  body #shopify-section-{{ section.id }} .header__cta-btn:active {
+    background-color: var(--kc-mapped-surface-accent-default-pressed);
+  }
 
   .header__heading-logo-wrapper--svg {
     display: inline-flex;

@@ -154,3 +154,83 @@ Popover horizontal bounds in px (viewport width in brackets). Vertical positions
 - Night and Day, stating which mode each capture was in. The PDP follows the visitor clock and has no toggle.
 
 **Not in this test**: payment, discount rules in Admin (Victor's list, theme audit row 4), Loop admin, translated NL/FR labels (remeasure once they render, per the review's integration notes).
+
+## Victor's decisions, 20 Oct
+
+Victor to this session, 20 Oct: "D2=A, D3=A, D5= (alleen op desktop, maar wil ze ook weg op tablet en mobile), D6= (behoud de brushing en beyond badge) | open: D1, D4 + je moet de receipt teksten ook controleren en vertalen".
+
+His follow-up answers:
+- D3: NL and FR follow the buybox's language convention.
+- Receipt texts: `kc.*` locale keys plus a small `loop-widget.js` edit, not metaobjects.
+
+**Lane note.** A second PDP session, `soft-launch-pdp-8d` (task `task_e778beafe9f2`), works in this worktree.
+- It committed `8a555de` (D3) and owns D1, D4, the preview push, S1–S8 and the reconcile with live.
+- This session owns D2, the receipt texts and the NL follow-up to D3.
+- Both commit by pathspec only.
+
+| Decision | Result | Commit |
+|---|---|---|
+| D2 = A | No 01/02/03 labels. The three how-it-works step blocks have `"number": ""` (the step metafield is untouched). The care-comes-back markers are empty rings; this section also runs on the homepage | `82f9549` |
+| D3 = A, language convention | Euros as Loop's buybox writes them (Intl): EN "€0.49", NL "€ 0,49", FR "0,49 €", with no-break spaces. `8a555de` covers the end CTA, sticky bar and compare-plans kit popover via `snippets/kc-money.liquid`; `e5814b6` adds the NL space | `8a555de`, `e5814b6` |
+| D5 | The professional cards under the gallery show from 990 px only. The Trusted Professionals section stays at every width. On the preview: hidden at 393 and 768, 520 × 509 px at 1024 | `629c591` |
+| D6 | "Brushing & Beyond" stays on mobile. The arrows and stacked chips stay, as recommended. No change | – |
+| D1, D4 | Open | – |
+
+### Receipt texts: check and translation
+
+**Scope**:
+- the buybox receipt (`.kc-pricing-summary`) and the Try once line above it
+- the care-comes-back receipt
+- the end CTA's price box
+
+**Where the texts come from**:
+1. **Section settings**: Total today, Care Credit back in your account, Dental Check-up Reward, the Welcome Kit line, FREE, both tooltips, the Try once line, and every care-comes-back line.
+   - They are translated in `docs/localization/nl/batch-02-pdp.json` (source-copy `2a7f809`) and `docs/localization/fr/batch-02-pdp.json` (fr `6cf9c20`).
+   - They render on `/nl` and `/fr` only after registration in Shopify (the B4 access-path decision). Until then they show in English there.
+2. **Hardcoded in `assets/loop-widget.js`**: "Billed every 60 days" / "Billed yearly", "/ 60 days" / "/ year", "one-time", "[price] per brushing · no Care Credit", and the check-up "€40".
+   - They were on no NL/FR list.
+   - `c7819e1` turns them into 18 `kc.receipt.*` keys (all units, singular and plural), shipped with the theme. EN goes in `en.default.json` and the 28 other locales, NL in `nl.json`, FR in `fr.json`.
+   - `snippets/kc-receipt-labels.liquid` writes them as data attributes on both receipts (main-product and featured-product). `loop-widget.js` reads them and fills `[count]` and `[price]`.
+   - English is the fallback. No plan, price or cart logic changed.
+   - The check-up "€40" now goes through `loopFormatMoney`, so it reads "€ 40" in NL and "40 €" in FR.
+3. **End CTA**: its hardcoded "/ 60 days" and "/ year" use the same keys. Its "Free" is B4's key on `karmicare/soft-launch`.
+
+**New translations** (for the NL and FR reviewers; the full list is in `docs/pdp/kc-receipt-keys.json`):
+
+| Key | EN | NL | FR |
+|---|---|---|---|
+| `billed_days` | Billed every [count] days | Elke [count] dagen gefactureerd | Facturé tous les [count] jours |
+| `billed_year` | Billed yearly | Jaarlijks gefactureerd | Facturé chaque année |
+| `per_days` | / [count] days | / [count] dagen | / [count] jours |
+| `per_year` | / year | / jaar | / an |
+| `one_time` | one-time | eenmalig | en une fois |
+| `one_time_note` | [price] per brushing · no Care Credit | [price] per poetsbeurt · geen Care Credit | [price] par brossage · sans Care Credit |
+
+The other twelve keys cover day, week, month and years in the same patterns (FR "toutes les [count] semaines"). They follow existing payload wording:
+- "one-time": NL "eenmalig", FR "en une fois" (the FR glossary note).
+- "per brushing": NL "per poetsbeurt", FR "par brossage".
+- Billing: the FR "Paiement tous les 12 mois" pattern.
+
+**Findings**:
+1. EN tooltip "spendable on member products and accessories" uses the banned word "products". NL and FR already adapt it. Owner: source-copy.
+2. The check-up tooltip "verified by your dentist" conflicts with the offer, which needs no dentist involvement. FR flags it `pending-en-review`; the NL version ("die je bezoek bevestigt") carries the conflict without the flag. Owner: source-copy NL.
+3. With D3's language convention, the NL payload amounts should change: "€0,49", "€40,00", "€70,80", "€110,80" and "€0 Care Credit" become "€ 0,49" and so on (no-break space), to match the buybox. The FR "0,49 €" already matches. Owner: source-copy NL.
+4. End CTA EN copy:
+   - "Care Credits back" should be "Care Credit" (gap row 28).
+   - "10% each purchase" uses a commodity word; NL and FR say "order".
+   - Owner: source-copy.
+5. The plan-card strings in `loop-widget.js` are still English on `/nl` and `/fr`. These are the B4 handoff: "/ {{ days }} days", "/ year", "Renews", "/ brushing", "Renews every year", "value · free", "One time Purchase", "each". The same key pattern fits them; they are not done here because they are outside the receipt.
+6. The local review copy (`127.0.0.1:8790`) never shows the receipt or the plan-card subrows, because Loop's script does not run there. Review those on the preview under `/nl` and `/fr`.
+
+**Verified** (preview theme 189885940093 with `c7819e1`, 1440 px Day; cookie banner untouched, no CSS injected; shots in `docs/pdp/shots/`):
+- **NL receipt**: "Elke 60 dagen gefactureerd" and "/ 60 dagen" (`receipt-nl-1440-day-after.png`).
+- **NL end CTA**: "€ 59", "€ 0,49", "€ 5,90" and "/ 60 dagen" (`end-cta-nl-1440-day-after.png`).
+- **FR receipt**: "Facturé tous les 60 jours" and "/ 60 jours" (`receipt-fr-1440-day-after.png`).
+- **EN unchanged**: "Billed every 60 days" at the same 133.7 px width as before, and "/ 60 days" in the receipt and the end CTA.
+- **D2**: no `.kc-number` on the page; the three care-comes-back markers are 40 px rings (`care-comes-back-1440-day-after.png`).
+- **Not verified**: the Year receipt ("Jaarlijks gefactureerd", check-up "€ 40") and the one-time receipt, because the helper cannot click a plan. They are part of S1–S8.
+- **Checks**: Theme Check exit 0, 21 warnings (baseline); `node --check assets/loop-widget.js` passes.
+
+**Merging**:
+- `locales/*.json` conflicts with `karmicare/soft-launch`, because both add a `kc` block at the top. Take the integration side, append the entries of `docs/pdp/kc-receipt-keys.json` to `docs/localization/theme-keys.json`, and run `theme_keys.py write`.
+- The care-comes-back change also reaches the homepage branch's section.

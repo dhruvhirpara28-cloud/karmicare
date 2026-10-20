@@ -346,8 +346,9 @@
   padding: 0 var(--kc-responsive-spacing-layout-comfortable);
   justify-content: center;
   background-image: none;
-  background-color: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
+  /* KC primary button colours (snippets/button-styles.liquid) */
+  background-color: var(--button-kc-primary-bg);
+  color: var(--button-kc-primary-text);
   border: 0;
   border-radius: var(--kc-shape-radius-sm);
   box-shadow: none;
@@ -357,7 +358,7 @@
   font-weight: var(--font-700-weight, 700);
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
-  transition: opacity .4s ease, transform .2s ease;
+  transition: background-color .2s ease;
 }
 
 .featured-product .product-form__custom-submit.block__animate-button::before,
@@ -368,8 +369,11 @@
 .featured-product .product-form__custom-submit.block__animate-button:hover {
   background-position: 0 0;
   box-shadow: none;
-  opacity: 0.88;
-  transform: translateY(-1px);
+  background-color: var(--button-kc-primary-bg-hover);
+}
+
+.featured-product .product-form__custom-submit.block__animate-button:active {
+  background-color: var(--button-kc-primary-bg-pressed);
 }
 
 .featured-product .product-form__custom-submit.block__animate-button:focus-visible {

@@ -50,9 +50,8 @@
   color: inherit;
 }
 
-/* Two-tone heading: italic text is the muted second line */
+/* Two-tone heading: italic text is the muted second line (the line break: base.css) */
 .research-behind-system__heading em {
-  display: block;
   font-style: normal;
   color: var(--kc-mapped-text-default-body);
 }
@@ -457,12 +456,12 @@ a.research-card__source:hover {
   gap: var(--kc-responsive-spacing-layout-xs);
   min-height: 4.4rem;
   padding: 0 var(--kc-responsive-spacing-layout-md);
-  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-control-default);
+  /* Secondary, as .karmicare__btn-secondary: no fill, control border, KC interaction colours */
+  border: var(--kc-shape-stroke-thin) solid var(--button-kc-secondary-border);
   border-radius: var(--kc-shape-radius-sm);
-  background-color: var(--kc-mapped-surface-glass-default);
-  -webkit-backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
-  backdrop-filter: blur(calc(var(--kc-shape-blur-md) / 2));
+  background-color: transparent;
   color: var(--kc-mapped-text-default-heading);
+  transition: background-color 0.2s ease;
   font-family: var(--kc-font-role-identity);
   font-weight: 700;
   font-size: var(--kc-responsive-label-sm-text-size);
@@ -470,16 +469,18 @@ a.research-card__source:hover {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .research-behind-system__button:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
+  background-color: var(--button-kc-secondary-bg-hover);
+}
+
+.research-behind-system__button:active {
+  background-color: var(--button-kc-secondary-bg-pressed);
 }
 
 .research-behind-system__button:focus-visible {
-  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
   outline-offset: 2px;
 }
 
@@ -499,12 +500,7 @@ a.research-card__source:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .research-behind-system__button,
   .research-card__source {
     transition: none;
-  }
-
-  .research-behind-system__button:hover {
-    transform: none;
   }
 }

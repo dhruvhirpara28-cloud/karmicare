@@ -3,7 +3,36 @@
  * -------------------------------------------------------------------------- */
 
 /* ── Background Clock Wrapper ── */
+/* The clock artwork (--two-formulas-clock, set by the section: on the wrapper from 1080, behind
+   the tubes below that) sits on a ::before under the content. Its ticks are #dddbd9: quiet on
+   the Day page, bright on Night navy, so Night dims them to the same quiet contrast (Victor,
+   20 Oct; gap row TF-06). */
+.two-formulas__bg-clock,
+.two-formulas__image-wrap {
+  position: relative;
+  isolation: isolate;
+}
 
+/* Custom properties inherit: the tubes only draw a clock when the section sets one on them */
+.two-formulas__image-wrap {
+  --two-formulas-clock: none;
+}
+
+.two-formulas__bg-clock::before,
+.two-formulas__image-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--two-formulas-clock, none) center / contain no-repeat;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+body.night-mode .two-formulas__bg-clock::before,
+body.night-mode .two-formulas__image-wrap::before {
+  opacity: 0.2;
+}
 
 @media screen and (min-width: 1080px) {
   .two-formulas__bg-clock {
