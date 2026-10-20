@@ -471,6 +471,13 @@
       {%- endif %}
     }
   {%- endif %}
+  /* Interaction colours (KC/Button Primary, accent), above the setting colours */
+  body #shopify-section-{{ section.id }} .header__cta-btn:hover {
+    background-color: var(--kc-mapped-surface-accent-default-hover);
+  }
+  body #shopify-section-{{ section.id }} .header__cta-btn:active {
+    background-color: var(--kc-mapped-surface-accent-default-pressed);
+  }
 
   .header__heading-logo-wrapper--svg {
     display: inline-flex;

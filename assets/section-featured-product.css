@@ -358,6 +358,7 @@
   font-weight: var(--font-700-weight, 700);
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
+  transition: background-color .2s ease;
 }
 
 .featured-product .product-form__custom-submit.block__animate-button::before,
