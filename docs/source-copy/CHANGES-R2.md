@@ -155,3 +155,11 @@ Victor (21 Oct): every CTA uses *Begin*, in the form *Begin your*. Three EN stri
 | `admin:…:custom.compare_table\|shop.metaobjects.compare_value#25` (Compare Plan "60-Day Rhythm", CTA Button) | Begin 60-Day Rhythm | Begin your 60-Day Rhythm (changed in the admin by Victor, 21 Oct) | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |
 
 The template setting and the metaobject reach `/nl` and `/fr` only once the payload is registered (`registration/DRY-RUN.md`: regenerate it first; nothing is registered yet); registration matches on the live EN, so these entries carry the new text. The locale key ships with the theme. Not changed: `compare_value#31`, the Year column's CTA "Begin" (live admin text on 21 Oct).
+
+## 21 Oct: announcement line "Biorhythmic oral care since 2017"
+
+Victor (21 Oct): the announcement line names the category as the PDP strip and the homepage subheading do, *Biorhythmic oral care*. One EN string in `batch-03-header-footer` changed. `old_en` / `old_sha1` stay on the live text (`COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE`), because the circadian line never went live. `batch-03-header-footer` digest `a853d438d503867882d711cd4fa5a4a93c29759f` → `a02de10a8ec26a61aec2801299c2ff1532cc9c17`; every other digest unchanged. NL and FR payloads follow (`source_digest` updated). `digest.py`, `nl/validate.py` and `fr/check.py` exit 0. Claim C103 stays `needs-review`: the date still has no source in the repo.
+
+| Id | Before | Now | NL | FR |
+|---|---|---|---|---|
+| `header-group:announcement-bar/announcement-bar-0/text` | … · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017 | … · BELGIAN-MADE · BIORHYTHMIC ORAL CARE SINCE 2017 | … · GEMAAKT IN BELGIË · BIORITMISCHE MONDZORG SINDS 2017 | … · FABRIQUÉ EN BELGIQUE · SOIN BUCCO-DENTAIRE BIORYTHMIQUE DEPUIS 2017 |
