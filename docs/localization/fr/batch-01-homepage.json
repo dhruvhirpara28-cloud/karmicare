@@ -2,26 +2,27 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
+ "source_digest": "46f2753b65fd2c2e40789a16c4fb6c798b3bebbf",
  "source_entries": 225,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "admin": 2,
-  "held": 20,
+  "held": 21,
   "locale-present": 2,
   "theme-key": 30,
-  "translated": 171
+  "translated": 173
  },
  "flag_counts": {
   "fit-risk": 9,
   "gendered-title": 7,
   "legal-review": 1,
+  "not-rendered": 6,
   "pending-claim-review": 39,
-  "pending-en-review": 7,
+  "pending-en-review": 2,
   "source-defect": 2,
-  "wording-adapted": 3
+  "wording-adapted": 2
  },
  "entries": [
   {
@@ -166,14 +167,14 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.stat_strip_karmicare.settings.tagline",
-   "en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS",
-   "en_sha1": "1efa139722aaaea0bbfc7ce9db5640d2e955f5b1",
-   "fr": "CHOISI PAR DES THÉRAPEUTES KPNI, DES DENTISTES FONCTIONNELS ET DES PASSIONNÉS DE SANTÉ",
+   "en": "CHOSEN BY KPNI PRACTITIONERS, FUNCTIONAL DENTISTS, HEALTH PROFESSIONALS",
+   "en_sha1": "2be450b68110721fbb4d9482dfb2c67874b35d49",
+   "fr": "CHOISI PAR DES PRATICIENS KPNI, DES DENTISTES FONCTIONNELS ET DES PROFESSIONNELS DE SANTÉ",
    "status": "translated",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Masculine plural used as the generic for mixed groups (standard French). Claims C80 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "'kPNI practitioners' as 'praticiens kPNI', as in the PDP stat line; masculine plural is the generic for mixed groups. Claims C80 need Clinical Research sign-off; translated faithfully, not softened. EN updated 21 Oct (41ae772), was: \"CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS\"",
    "source_status": "corrected",
    "claims": [
     "C80"
@@ -1211,15 +1212,15 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-   "en": "Functional Dentist, kPNI Therapist",
-   "en_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
+   "en": "Functional Dentist, kPNI Practitioner",
+   "en_sha1": "1a18061547498246ea046b86b0a1c2bc7389ca57",
    "fr": "Dentiste (approche fonctionnelle), thérapeute kPNI",
    "status": "translated",
    "flags": [
     "gendered-title"
    ],
-   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).",
-   "source_status": "approved"
+   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. EN Therapist became Practitioner (21 Oct, 41ae772); FR keeps the epicene 'thérapeute' (as NL keeps 'therapeut'), since 'praticien' would assume a gender. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3). EN updated 21 Oct (41ae772), was: \"Functional Dentist, kPNI Therapist\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/heading",
@@ -1267,15 +1268,15 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-   "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-   "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
+   "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
+   "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
    "fr": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
    "status": "translated",
    "flags": [
     "gendered-title"
    ],
-   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).",
-   "source_status": "approved"
+   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. EN Therapist became Practitioner (21 Oct, 41ae772); FR keeps the epicene 'thérapeute' (as NL keeps 'therapeut'), since 'praticien' would assume a gender. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3). EN updated 21 Oct (41ae772), was: \"Pharmacist, Orthomolecular Therapist, kPNI Coordinator\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_8dRing/hover_text",
@@ -1371,15 +1372,15 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-   "en": "Nutritional Therapist, Menstrual Cycle Expert",
-   "en_sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
+   "en": "Nutritional Practitioner, Menstrual Cycle Expert",
+   "en_sha1": "54d1fc3de6561c01d495b096b9c76c42c168c506",
    "fr": "Thérapeute en nutrition, spécialiste du cycle menstruel",
    "status": "translated",
    "flags": [
     "gendered-title"
    ],
-   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).",
-   "source_status": "approved"
+   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. EN Therapist became Practitioner (21 Oct, 41ae772); FR keeps the epicene 'thérapeute' (as NL keeps 'therapeut'), since 'praticien' would assume a gender. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3). EN updated 21 Oct (41ae772), was: \"Nutritional Therapist, Menstrual Cycle Expert\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
@@ -2198,130 +2199,139 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.category",
-   "en": "Ingredients & safety",
-   "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
-   "fr": "Ingrédients et sécurité",
+   "en": "The ritual",
+   "en_sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
+   "fr": "Le rituel",
    "status": "translated",
    "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "notes": "Same FR as the other 'The ritual' tabs. EN updated 21 Oct (41ae772), was: \"Ingredients & safety\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.question",
-   "en": "Is Karmicare fluoride-free?",
-   "en_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
-   "fr": "Karmicare est-il sans fluor ?",
+   "en": "How long does one duo last?",
+   "en_sha1": "5f0abdd95287193e2afea705090f7f025a22d77a",
+   "fr": "Combien de temps dure un duo ?",
    "status": "translated",
    "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "notes": "As the PDP line 'Un duo dure 64 jours'. EN updated 21 Oct (41ae772), was: \"Is Karmicare fluoride-free?\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
-   "en": "<p>[NEEDS APPROVED COPY]</p>",
-   "en_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
-   "fr": null,
-   "status": "held",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "needs-approved-copy: placeholder, wait for the approved EN EN under review: No approved answer: FAQ-0202 (fluoride-free) is Draft with Regulatory 'Needs review'. Do not translate the placeholder.",
-   "source_status": "needs-review"
+   "en": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
+   "en_sha1": "ee6d5e88422c0a37d1519a885b0eaee706545f60",
+   "fr": "<p>Environ 64 jours — un cycle complet. Une pression (0,45 ml) par rituel, Awake le matin et Asleep le soir, et chaque formule en contient un peu plus de deux mois. Avec une livraison tous les 60 jours, vous avez toujours quelques jours d’avance.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "One pump as 'une pression', as the PDP ritual line ('appliquez 1 pression'); supply claim C07 approved. EN updated 21 Oct (41ae772), was: \"<p>[NEEDS APPROVED COPY]</p>\"",
+   "source_status": "corrected",
+   "claims": [
+    "C07"
+   ]
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.category",
-   "en": "The ritual",
-   "en_sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
-   "fr": "Le rituel",
+   "en": "Ingredients & safety",
+   "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
+   "fr": "Ingrédients et sécurité",
    "status": "translated",
    "flags": [
-    "pending-en-review"
+    "not-rendered"
    ],
-   "notes": "EN under review: Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
-   "source_status": "needs-review"
+   "notes": "Same FR as the other 'Ingredients & safety' tabs; block disabled. EN updated 21 Oct (41ae772), was: \"The ritual\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.question",
-   "en": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
-   "en_sha1": "abdd0b7d15be897509a88669f6169c6bd804b82b",
-   "fr": "Karmicare proposera-t-il un dentifrice biorythmique avec fluor ?",
+   "en": "Can I combine Karmicare with fluoride toothpaste or rinses?",
+   "en_sha1": "a643dabd1a4aea9719383821b601d34fb7e37697",
+   "fr": "Puis-je associer Karmicare à un dentifrice ou à des bains de bouche au fluor ?",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "not-rendered"
+   ],
+   "notes": "'toothpaste' at first contact (an opening question) as 'dentifrice', as the EN; block disabled. EN updated 21 Oct (41ae772), was: \"Will Karmicare offer a biorhythmic toothpaste with fluoride?\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.answer",
-   "en": "<p>[NEEDS APPROVED COPY]</p>",
-   "en_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
-   "fr": null,
-   "status": "held",
+   "en": "<p>Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both. If you switch, switch fully: Awake in the morning, Asleep at night. Your dentist can tell you if a fluoride treatment is needed for a specific reason.</p>",
+   "en_sha1": "0406ac48a4e1ce7a7c8bd9f20ed09ef698e9f2af",
+   "fr": "<p>Mieux vaut éviter. Le fluor et la nano-hydroxyapatite se disputent la même surface d’émail, si bien que les alterner dilue l’effet des deux. Si vous changez, changez complètement : Awake le matin, Asleep le soir. Votre dentiste peut vous dire si un traitement au fluor est nécessaire pour une raison particulière.</p>",
+   "status": "translated",
    "flags": [
-    "pending-en-review"
+    "not-rendered",
+    "pending-claim-review"
    ],
-   "notes": "needs-approved-copy: placeholder, wait for the approved EN EN under review: No approved answer anywhere (homepage-faq-on-accordion-component.md row 3). Do not translate the placeholder.",
-   "source_status": "needs-review"
+   "notes": "'fluoride treatment' as 'traitement au fluor' (the dentist's treatment, not a Karmicare claim); block disabled. Claims C101 need Clinical Research sign-off; translated faithfully, not softened. EN updated 21 Oct (41ae772), was: \"<p>[NEEDS APPROVED COPY]</p>\"",
+   "source_status": "corrected",
+   "claims": [
+    "C101"
+   ]
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.category",
-   "en": "Results",
-   "en_sha1": "612e12d29278b5519294bc25cdaddffec6d0f1c6",
-   "fr": "Résultats",
+   "en": "Ingredients & safety",
+   "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
+   "fr": "Ingrédients et sécurité",
    "status": "translated",
    "flags": [
-    "pending-en-review"
+    "not-rendered"
    ],
-   "notes": "EN under review: Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
-   "source_status": "needs-review"
+   "notes": "Same FR as the other 'Ingredients & safety' tabs; block disabled. EN updated 21 Oct (41ae772), was: \"Results\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.question",
-   "en": "What is nano-hydroxyapatite?",
-   "en_sha1": "0aeed18c4e6bd60691b49cfe53c782135bd3bb12",
-   "fr": "Qu’est-ce que la nano-hydroxyapatite ?",
+   "en": "Is Karmicare fluoride-free?",
+   "en_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
+   "fr": "Karmicare est-il sans fluor ?",
    "status": "translated",
-   "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "flags": [
+    "not-rendered"
+   ],
+   "notes": "Same FR as this question had on faq_item_kLMHax; block disabled. EN updated 21 Oct (41ae772), was: \"What is nano-hydroxyapatite?\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.answer",
-   "en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
-   "en_sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
-   "fr": "<p>Un minéral bio-identique — la même substance que celle qui compose votre émail. Il reminéralise les dents, réduit la sensibilité et blanchit naturellement. L’agent de reminéralisation minéral le plus étudié au monde, adopté au Japon depuis les années 1980.</p>",
+   "en": "<p>Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawbacks.</p>",
+   "en_sha1": "0873f2ef70e93cac33d1cf03c9a877f094ceb830",
+   "fr": "<p>Karmicare est sans fluor, et le restera toujours. Les bénéfices du fluor ne compensent pas ses inconvénients connus.</p>",
    "status": "translated",
    "flags": [
-    "pending-claim-review",
-    "wording-adapted"
+    "not-rendered",
+    "pending-claim-review"
    ],
-   "notes": "'used in Japan' rendered 'adopté au Japon' (banned word 'use'). Claims C23 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "Block disabled. Claims C102 need Clinical Research sign-off; translated faithfully, not softened. EN updated 21 Oct (41ae772), was: \"<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>\"",
    "source_status": "corrected",
    "claims": [
-    "C23"
+    "C102"
    ]
   },
   {
@@ -2329,47 +2339,39 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.category",
-   "en": "Plans & Return on Care",
-   "en_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
-   "fr": "Offres et Return on Care",
+   "en": "Shipping & guarantee",
+   "en_sha1": "bc09cdf16c860afefb56428d2fae8800222d82dd",
+   "fr": "Livraison et garantie",
    "status": "translated",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "EN under review: Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
-   "source_status": "needs-review"
+   "flags": [],
+   "notes": "Same FR as the earlier 'Shipping & guarantee' tab. EN updated 21 Oct (41ae772), was: \"Plans & Return on Care\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.question",
-   "en": "Should I rinse after brushing?",
-   "en_sha1": "428bc937d0c86862ed3e4773017f44033510e7da",
-   "fr": "Faut-il rincer après le brossage ?",
+   "en": "What does the money-back guarantee cover?",
+   "en_sha1": "531f7c78f96f01aec3514fa65ca6a4865acdb6c3",
+   "fr": "Que couvre la garantie satisfait ou remboursé ?",
    "status": "translated",
    "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "notes": "money-back guarantee as 'garantie satisfait ou remboursé', as in the terms and the refund policy. EN updated 21 Oct (41ae772), was: \"Should I rinse after brushing?\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.answer",
-   "en": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>",
-   "en_sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
-   "fr": "<p>Non — crachez et passez à la suite. Les formules Karmicare sont certifiées sûres pour rester en bouche, ce qui offre à la nHAp et au xylitol un temps de contact prolongé. Des heures de soin minéral actif au lieu de quelques secondes.</p>",
+   "en": "<p>Every first order comes with a money-back guarantee: 14 days on Try Once, your first cycle on the 60-Day rhythm, 60 days on the Year. Your legal right to withdraw comes on top.</p>",
+   "en_sha1": "2e402a324373b49d66380e05bf7bdf1f315e4319",
+   "fr": "<p>Chaque première commande bénéficie d’une garantie satisfait ou remboursé : 14 jours avec Essayer une fois, votre premier cycle avec le Rythme 60 jours, 60 jours avec L’année Karmicare. Votre droit légal de rétractation s’y ajoute.</p>",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C13, C93 need Clinical Research sign-off; translated faithfully, not softened.",
-   "source_status": "corrected",
-   "claims": [
-    "C13",
-    "C93"
-   ]
+   "flags": [],
+   "notes": "Same FR as the guarantee line in the terms, consumer rights and refund policy (legal-review there): keep them in step. The source notes still name C13, C93 from the old answer; the source has no claims on this entry. EN updated 21 Oct (41ae772), was: \"<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>\"",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category",
@@ -2378,12 +2380,12 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.category",
    "en": "Shipping & guarantee",
    "en_sha1": "bc09cdf16c860afefb56428d2fae8800222d82dd",
-   "fr": "Livraison et garantie",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [
     "pending-en-review"
    ],
-   "notes": "EN under review: Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
+   "notes": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772)",
    "source_status": "needs-review"
   },
   {
@@ -2393,10 +2395,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.question",
    "en": "How quickly will I notice a difference?",
    "en_sha1": "08a546f547c9f31d33fd3955772f0f535fba27b4",
-   "fr": "En combien de temps vais-je remarquer une différence ?",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772)",
    "source_status": "approved"
   },
   {
@@ -2406,12 +2408,12 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.answer",
    "en": "<p>Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see visible brightening in 4–6. The ritual shift happens faster: you notice the bookend effect within the first week — a morning moment that wakes you up, an evening moment that winds you down.</p>",
    "en_sha1": "deb10e934dc4baa0532621dca4b6f314eabdf2d3",
-   "fr": "<p>La reminéralisation prend du temps — la plupart des membres sentent leur sensibilité évoluer en 2 à 4 semaines et voient un éclat visible en 4 à 6 semaines. Le changement de rituel est plus rapide : dès la première semaine, vous remarquez l’effet de ces deux rendez-vous — un moment le matin qui vous réveille, un moment le soir qui vous apaise.</p>",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "'the bookend effect' rendered 'l'effet de ces deux rendez-vous' (the literal 'serre-livres' does not read in French). Claims C24 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772)",
    "source_status": "corrected",
    "claims": [
     "C24"
@@ -3214,6 +3216,45 @@
    "flags": [],
    "notes": "",
    "source_status": "admin-held"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.category",
+   "en": "Plans & Return on Care",
+   "en_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
+   "fr": "Offres et Return on Care",
+   "status": "translated",
+   "flags": [],
+   "notes": "Same FR as the other 'Plans & Return on Care' tabs; new 21 Oct (41ae772).",
+   "source_status": "approved"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.question",
+   "en": "Can I pause, skip or cancel?",
+   "en_sha1": "54d79a461f0a7c2e7d091f0c77a79622f45fc823",
+   "fr": "Puis-je suspendre, sauter une livraison ou résilier ?",
+   "status": "translated",
+   "flags": [],
+   "notes": "pause/skip/cancel as on the PDP ('Sauter une livraison, suspendre ou résilier') and in the terms; new 21 Oct (41ae772).",
+   "source_status": "approved"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.answer",
+   "en": "<p>Your membership is completely in your hands. Amend when desired.</p>",
+   "en_sha1": "b4c11f3f81bcc5e0e700be6f1cd43d51bd7c35c6",
+   "fr": "<p>Votre adhésion est entièrement entre vos mains. Modifiez-la quand vous le souhaitez.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "membership as 'adhésion' (glossary); new 21 Oct (41ae772).",
+   "source_status": "approved"
   }
  ]
 }

@@ -227,55 +227,75 @@ The treatment journey `#29` ("— from your gums to the") is translated exactly 
 `check.py` now accepts an unsupported claim when the entry carries both `pending-claim-review` and the waiver note. Two self-test mutations take the place of the old "translate an unsupported claim": dropping the flag fails, and so does dropping the note.
 
 These stay held:
-- **The two `[NEEDS APPROVED COPY]` placeholders on the homepage FAQ:** there is no EN text to translate.
+- **The two `[NEEDS APPROVED COPY]` placeholders on the homepage FAQ:** there is no EN text to translate. (Since 21 Oct both have approved EN and are translated; see the next section.)
 - **"Rendering loop-subscriptions":** the theme tests for this exact text.
 - **SLS article `b035`:** the source has it `blocked` because it names four competitors, a brand rule rather than a claim. It can be released only if the source owner unblocks it.
 - **The 350 legacy legal entries:** the landing desk confirmed they stay held (20 Oct), because F5 redirects those pages to the 2.0 pages and translating outdated legal text would mislead. Each entry's note now gives that reason.
+
+## Homepage copy at 41ae772 (source-copy 0ba9de3, 21 Oct)
+
+The homepage lane rewrote part of the homepage (integration `41ae772`, merchant-edit `97ce2b7`). Source-copy `0ba9de3` brings the new EN into batches 01 and 02, and FR follows it. Victor's 20 Oct rule still applies: claims don't block translation, and names and quotes stay as they are.
+
+- **Stat strip tagline:** "CHOISI PAR DES PRATICIENS KPNI, DES DENTISTES FONCTIONNELS ET DES PROFESSIONNELS DE SANTÉ". "Praticiens kPNI" matches the PDP stat line. The entry keeps `pending-claim-review` (C80).
+- **Professional card titles (homepage and PDP, three each):** in the EN, "Therapist" became "Practitioner". The FR is unchanged. It keeps the epicene "thérapeute kPNI" and "Thérapeute en nutrition" and the field form "thérapie orthomoléculaire", because "praticien" would assume a gender (NL likewise keeps "therapeut"). The entries keep `gendered-title`.
+- **FAQ, rendered:**
+  - `kLMHax`, "Combien de temps dure un duo ?": the answer replaces the earlier placeholder. C07 is approved.
+  - `qUxYCn`, "Que couvre la garantie satisfait ou remboursé ?": the answer is the same FR as the guarantee line in the terms, consumer rights and refund policy.
+  - `Pz4mRk`, "Puis-je suspendre, sauter une livraison ou résilier ?": a new item.
+- **FAQ, disabled** (`not-rendered`):
+  - `7jmEGi`, "fluor + Karmicare": `pending-claim-review` (C101). The answer replaces the earlier placeholder.
+  - `AL3DKF`, "Karmicare est-il sans fluor ?": `pending-claim-review` (C102).
+  - Their category tabs now match their questions, so `pending-en-review` is gone from those tabs.
+- **Retired, now held:**
+  - FAQ `4KMG6C`, all three fields: the block was removed.
+  - The two empty `how_it_works` step numbers on the PDP.
+- **check.py:** no `[NEEDS APPROVED COPY]` placeholder remains in the source, so the placeholder self-test now releases the `blocked` SLS article `b035`. That fails for the same reason.
+
+The source note on `qUxYCn/answer` still names claims C13 and C93. Those belonged to the old answer, and the entry has no `claims` field, so FR sets no claim flag there.
 
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `666785ab…` | 477 | 141 | 251 | 35 | 15 | 35 |
-| `batch-01-homepage` | `a09219ae…` | 225 | 171 | 2 | 30 | 2 | 20 |
+| `batch-02-pdp` | `2846c75e…` | 477 | 139 | 251 | 35 | 15 | 37 |
+| `batch-01-homepage` | `46f2753b…` | 228 | 173 | 2 | 30 | 2 | 21 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 698 | 0 | 0 | 10 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,571** | **481** | **1,533** | **75** | **62** | **420** |
+| **Total** | | **2,574** | **481** | **1,533** | **75** | **62** | **423** |
 
-Every source entry is covered: 2,151 carry FR and 420 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, and the claim holds Victor waived on 20 Oct). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,151 carry FR and 423 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, and the homepage copy at 41ae772, 0ba9de3). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
 | pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 387 | 0 | 501 |
-| pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
+| pending-en-review | 2 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 17 |
 | source-defect | 2 | 8 | 1 | 3 | 9 | 0 | 0 | 0 | 23 |
-| wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
+| wording-adapted | 2 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 29 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
 | fit-risk | 9 | 28 | 0 | 0 | 2 | 0 | 0 | 0 | 39 |
-| not-rendered | 0 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 7 |
+| not-rendered | 6 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 13 |
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (420)
+### Held (423)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
 | 04 | legacy | 350 | `/pages/privacy` (269), `/pages/terms-and-conditions` (76), `/pages/consumer-rights` (5): pre-2.0 legal pages, held in NL/FR (INVENTORY.md) |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
-| 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
-| 01–02 | retired | 3 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`) |
+| 01–02 | retired | 8 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`); FAQ `4KMG6C` (3 fields) and the two empty PDP `how_it_works` step numbers (41ae772, source-copy `0ba9de3`) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 17/17 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 25 warnings, 18/18 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;

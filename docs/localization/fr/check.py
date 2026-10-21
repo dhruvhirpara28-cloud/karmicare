@@ -329,7 +329,7 @@ def self_test(docs, ctx):
         ("translate a legacy legal entry", release_held(legacy, "Texte", "admin"), "requires a hold (legacy"),
         ("unsupported 05-07 claim without pending-claim-review", drop_flag(unsupported, "pending-claim-review"), "requires a hold (unsupported claim"),
         ("unsupported 05-07 claim without the waiver note", set_field(unsupported, "notes", "translated"), "requires a hold (unsupported claim"),
-        ("translate a [NEEDS APPROVED COPY] placeholder", release_held("index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer", "<p>Texte</p>", "translated"), "requires a hold (needs-approved-copy"),
+        ("translate a blocked entry (needs approved copy)", release_held(SLS + "body_html#b035", "Texte", "admin"), "requires a hold (needs-approved-copy"),
         ("translate a retired entry (Astra R12)", release_held("index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title", "Système", "translated"), "requires a hold (retired"),
         ("wrong delivery channel", set_field("admin:karmicare-biorhythmic-oral-care-system:title", "status", "translated"), "source channel"),
         ("change key_path", set_field("footer-group:footer/slogan", "key_path", "sections.footer.settings.other"), "key_path"),
