@@ -67,7 +67,6 @@
   assign sc_copy_stop_year = 'kc.sticky_cart.stop_year_html' | t
   assign sc_copy_per_brushing = 'kc.sticky_cart.per_brushing_html' | t
   assign sc_copy_try_once = 'kc.sticky_cart.try_once_html' | t
-  assign sc_copy_kit_free = 'kc.sticky_cart.kit_free_html' | t
 -%}
 
 {%- comment -%}
@@ -111,59 +110,9 @@
     Line icons: Lucide (ISC), the "Interface" set of the KC Brand Design Library; stroke in .sc-icon
   {%- endcomment -%}
 
-  {%- comment -%}
-    Desktop (from 1081 px): the package as it will arrive, the Duo and the Welcome Kit items (the theme
-    setting's products, as the buybox shows them: custom.kit_thumbnail, value struck through, Free)
-  {%- endcomment -%}
-  {%- liquid
-    # Every product shows its Shopify title, the Duo too (Victor, 20 Oct: the Duo's name is its product title)
-    assign package_name = product.title
-  -%}
-  <div class="sc-package">
-    <div class="sc-package-duo">
-      {%- if product.featured_image -%}
-        {{
-          product.featured_image
-          | image_url: width: 320
-          | image_tag: loading: 'lazy', width: 160, height: 160, class: 'sc-package-img', alt: package_name
-        }}
-      {%- endif -%}
-      <p class="sc-package-name">{{ package_name | escape }}</p>
-    </div>
-    <span class="sc-package-plus" aria-hidden="true" data-sc-kit>+</span>
-    <ul class="sc-kit" role="list" data-sc-kit>
-      {%- for prod_item in settings.welcome_kit_free_product -%}
-        {%- liquid
-          assign prod = prod_item
-          if prod_item.id == null
-            assign prod = all_products[prod_item]
-          endif
-          if prod == blank
-            continue
-          endif
-          capture kit_value
-            render 'kc-kit-value', kit_product: prod
-          endcapture
-          assign kit_value = kit_value | plus: 0
-          assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
-        -%}
-        <li class="sc-kit-item">
-          {%- if kit_thumbnail -%}
-            {{ kit_thumbnail | image_url: width: 144 | image_tag: loading: 'lazy', width: 48, height: 48, class: 'sc-kit-img', alt: '' }}
-          {%- endif -%}
-          <span class="sc-kit-name">{{ prod.title | escape }}</span>
-          <span class="sc-kit-value">
-            {{- block.settings.kit_free | default: sc_copy_kit_free | escape }} · <s>{% render 'kc-money', cents: kit_value, trim: true %}</s>
-          </span>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
-
   <div class="sc-summary">
     <div class="sc-plan">
       <p class="sc-title"><span data-sc="name"></span><span class="sc-title-rest" data-sc="rest"></span></p>
-      <p class="sc-kit-line" data-sc="kit-line" data-sc-kit></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
     {%- comment -%} Control labels fall back to the locale keys: a button never loses its name {%- endcomment -%}
@@ -243,7 +192,7 @@
       "requiresPlan": {{ product.requires_selling_plan | json }},
       "productTitle": {{ product.title | json }},
       "buttonText": {{ block.settings.button_text | default: 'Begin now' | json }},
-      {%- comment -%} Positions are CSS only: phones 12 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
+      {%- comment -%} Positions are CSS only: phones 12 px from the edges, from 750 centred at 448 {%- endcomment -%}
       "prices": {{ sc_prices }},
       {%- comment -%} Copy: the block settings (P1–P7 of the brief), else the locale keys; [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
       "copy": {
@@ -446,11 +395,7 @@
       // The Welcome Kit comes with a first membership order, until the customer has received it
       var kitOffered = !once && cfg.isBundle && !cfg.kitReceived;
       setText('kit', copy.kit);
-      setText('kit-line', copy.kit ? '+ ' + copy.kit : '');
       bar.querySelector('[data-sc-row="kit"]').hidden = !kitOffered;
-      Array.prototype.forEach.call(bar.querySelectorAll('[data-sc-kit]'), function (el) {
-        el.hidden = !kitOffered;
-      });
       setText('guarantee', once ? copy.guarantee_once : copy.guarantee_member);
       bar.querySelector('[data-sc-row="guarantee"]').hidden = plain;
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
