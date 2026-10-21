@@ -61,11 +61,13 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 **Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
 - The 119 entries held on an unsupported claim now carry `claim_hold_waived: "2026-10-20 Victor, translation only"` in the EN source. The EN is unchanged.
 - In NL they are translated faithfully and flagged `pending-claim-review`. Each note starts with *claim hold waived by Victor 20 Oct for translation; claims review still pending for publication*.
-- The 119 are: benefit card 06 (C35), Sietske Hamelink's quote on both templates (C85), 6 product blocks, 2 content-page blocks and 107 article blocks.
+- The 119 are: benefit card 06 (C35), Sietske Hamelink's quote on both templates (C85, held again, see below), 6 product blocks, 2 content-page blocks and 107 article blocks.
 - `validate.py` H1 accepts a translated unsupported claim only with the waiver in the source and the `pending-claim-review` flag. Two self-test cases prove both.
 - The brand rules still apply: *formule* after the first *tandpasta*, no commodity words, *je*. The notes list each change.
 
-NL now covers 2,154 of the 2,155 translatable entries (99.95 %). Not translatable are 53 never-translate, 350 legacy legal, 8 retired and 9 empty entries. The one translatable entry still held is the SLS article block `#b035`: it names four competitors, which is a brand rule, not a claim, and the FR lane holds it too. It waits for Victor or for a compliant EN.
+NL now covers 2,152 of the 2,155 translatable entries (99.86 %). Not translatable are 53 never-translate, 350 legacy legal, 8 retired and 9 empty entries. Three translatable entries stay held:
+- **Sietske Hamelink's quote** (C85, homepage and PDP). The landing desk wrote that "the Sietske quote stays as it is" (msg_67b031a3a2dc), because they are her own words: an NL version needs her wording or her approval. The waiver covers claims, not a person's quote. The NL draft is in commit `986c1d9`; FR translated the quote in `3ec7a5e`.
+- **The SLS article block `#b035`.** It names four competitors, which is a brand rule, not a claim, and the FR lane holds it too. It waits for Victor or for a compliant EN.
 
 Counts below are current.
 
@@ -121,7 +123,8 @@ Counts below are current.
 
 - **never-translate (53):** selling-plan IDs, the Subscription Name keys "60-Day Supply" / "Year Supply", INCI lists, practitioners' names, citations, Awake/Asleep labels, brand aria-labels and the two Dawn social keys (R2 F10). These keep their EN value.
 - **needs-approved-copy (1):** the SLS article block that names four competitors (R2 F6; `blocked` in the source). The two homepage FAQ placeholders got approved answers on 21 Oct (integration `41ae772`) and are translated.
-- **unsupported-claim (0 since 20 Oct):** the 119 entries held here until then are translated under Victor's waiver and flagged `pending-claim-review` (see the update at the top):
+- **practitioner quote (2):** Sietske Hamelink's quote on both templates stays in her EN words (landing desk, 20 Oct).
+- **unsupported-claim (0 since 20 Oct):** the 119 entries held here until then are translated under Victor's waiver and flagged `pending-claim-review` (see the update at the top), except the quote above:
   - four from B1a: homepage benefit card 06 (heading and text) and Sietske Hamelink's quote on both templates;
   - 107 article blocks;
   - 6 product-page blocks, among them the two sleep/wake description lines (R2 F1);
@@ -142,15 +145,15 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 42 | 15 | 36 | 27 |
-| `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 32 | 2 | 20 | 19 |
+| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 41 | 15 | 37 | 27 |
+| `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 386 | 0 | 10 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2575** | | **284** | **618** | **76** | **621** | **493** | **62** | **421** | **63** |
+| **All** | **2575** | | **284** | **618** | **76** | **621** | **491** | **62** | **423** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -159,9 +162,11 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | Batch | Reason | Entries |
 |---|---|---:|
 | `batch-01-homepage` | never-translate | 16 |
+| `batch-01-homepage` | practitioner quote in her own words (C85, desk 20 Oct) | 1 |
 | `batch-01-homepage` | retired (Duo name is the product title) | 1 |
 | `batch-01-homepage` | retired (FAQ block `4KMG6C` removed, 21 Oct) | 3 |
 | `batch-02-pdp` | never-translate | 32 |
+| `batch-02-pdp` | practitioner quote in her own words (C85, desk 20 Oct) | 1 |
 | `batch-02-pdp` | retired (Duo name is the product title) | 2 |
 | `batch-02-pdp` | retired (step numbers emptied in a disabled section, 21 Oct) | 2 |
 | `batch-03-header-footer` | never-translate | 3 |
@@ -619,7 +624,7 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 | Item | Owner or gate |
 |---|---|
 | Legal review of 621 `legal-review` entries | Victor / lawyer |
-| Claim sign-off of 493 `pending-claim-review` entries (119 of them under Victor's translation waiver) | Victor / Clinical Research |
+| Claim sign-off of 491 `pending-claim-review` entries (117 of them under Victor's translation waiver) | Victor / Clinical Research |
 | Register `admin` entries, add `theme-key` strings to `locales/nl.json`, store the sticky-bar and footer schema defaults; rebuild anything derived from the payloads after R2 | localization worker |
 | Rendered check of every `/nl/` URL below, including the 63 fit-risk strings | preview gate / localization check |
 | FR follows `docs/source-copy/CHANGES-R2.md` | FR worker |
@@ -627,6 +632,8 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 
 
 ## Translator notes for the reviewer
+
+The 117 entries translated under Victor's waiver (20 Oct) are not repeated in this table. Their notes, in the payload, open with the waiver sentence, followed by the earlier hold reason and any wording change made for the brand rules.
 
 <details><summary>Every non-empty note on a translated entry</summary>
 
