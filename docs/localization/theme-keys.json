@@ -1,9 +1,9 @@
 {
- "about": "Theme locale keys for the needs-key strings of the B1a inventory (docs/source-copy/en-source.json). docs/localization/theme_keys.py writes them into every storefront locale file: en.default gets en; nl and fr get their value unless *_hold is set, then en; every other locale gets en (MatchingTranslations).",
+ "about": "Theme locale keys for the needs-key strings of the B1a inventory (docs/source-copy/en-source.json). docs/localization/theme_keys.py writes them into every storefront locale file: en.default gets en; nl and fr get their value unless *_hold is set, then en (open reviews in *_review do not hold); every other locale gets en (MatchingTranslations).",
  "sources": {
-  "en": "docs/source-copy/en-source.json (batch-01 a09219ae1af8, batch-02 666785abd03e, batch-03 e17cadb5e223)",
-  "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review hold)",
-  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr c7aed28 (status theme-key; flags pending-claim-review and legal-review hold)"
+  "en": "docs/source-copy/en-source.json (batch-01 7694e7acce33, batch-02 2846c75e4df9, batch-03 e17cadb5e223)",
+  "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review are recorded in nl_review, they do not hold)",
+  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr a518477 (status theme-key; pending-claim-review and legal-review are recorded in fr_review, they do not hold)"
  },
  "not_keyed_here": {
   "liquid:sections/header.liquid:1077": "kc.general.coming_soon, added on karmicare/soft-launch-homepage (09bb6e3)",
@@ -36,7 +36,9 @@
    "nl": "Verken de 24-uursklok van je mond",
    "nl_hold": null,
    "fr": "Explorez l’horloge de 24 heures de votre bouche",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.caption_live",
@@ -49,7 +51,9 @@
    "nl_hold": null,
    "fr": "votre bouche en ce moment :",
    "fr_hold": null,
-   "note": "Also the JS caption at rest (chronobiology-clock-karmicare.js:88)."
+   "note": "Also the JS caption at rest (chronobiology-clock-karmicare.js:88).",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.caption_preview",
@@ -61,18 +65,24 @@
    "nl": "je mond op dit uur:",
    "nl_hold": null,
    "fr": "votre bouche à cette heure :",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.loading",
    "area": "clock",
-   "ids": [],
+   "ids": [
+    "locale:kc.clock.loading"
+   ],
    "en": "Loading current local time",
-   "nl": null,
-   "nl_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
-   "fr": null,
-   "fr_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
-   "note": "aria-valuetext before the script runs (chronobiology-clock-karmicare.liquid:106). Not in the B1a inventory: no reviewed NL/FR yet."
+   "nl": "Huidige lokale tijd wordt geladen",
+   "nl_hold": null,
+   "fr": "Chargement de l’heure locale actuelle",
+   "fr_hold": null,
+   "note": "aria-valuetext before the script runs (chronobiology-clock-karmicare.liquid:106). Inventoried 21 Oct as locale:kc.clock.loading.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.valuetext_live",
@@ -84,7 +94,9 @@
    "nl": ". Huidige lokale tijd.",
    "nl_hold": null,
    "fr": ". Heure locale actuelle.",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.valuetext_preview",
@@ -96,7 +108,9 @@
    "nl": ". Laat los om terug te gaan naar nu.",
    "nl_hold": null,
    "fr": ". Relâchez pour revenir à l’heure actuelle.",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.window_1",
@@ -106,9 +120,11 @@
    ],
    "en": "saliva is only now picking up after the night, and the enamel is least protected before your first drink",
    "nl": "het speeksel komt na de nacht nu pas op gang, en het glazuur is het minst beschermd vóór je eerste drankje",
-   "nl_hold": "pending-claim-review (C54)",
+   "nl_hold": null,
    "fr": "la salive reprend à peine après la nuit, et l’émail est le moins protégé avant votre première boisson",
-   "fr_hold": "pending-claim-review (C54)"
+   "fr_hold": null,
+   "nl_review": "pending-claim-review (C54)",
+   "fr_review": "pending-claim-review (C54)"
   },
   {
    "key": "kc.clock.window_2",
@@ -120,7 +136,9 @@
    "nl": "ontbijt en koffie deden de pH binnen enkele minuten dalen — het speeksel heeft het volgende halfuur nodig om hem weer op peil te brengen",
    "nl_hold": null,
    "fr": "le petit-déjeuner et le café ont fait chuter le pH en quelques minutes — la salive passe la demi-heure suivante à le rétablir",
-   "fr_hold": "pending-claim-review"
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": "pending-claim-review"
   },
   {
    "key": "kc.clock.window_3",
@@ -132,7 +150,9 @@
    "nl": "de lunch start de cyclus opnieuw: elk eetmoment opent een nieuw zuurvenster, hoe klein of groot ook",
    "nl_hold": null,
    "fr": "le déjeuner relance le cycle : chaque prise alimentaire ouvre une nouvelle fenêtre acide, quelle que soit sa taille",
-   "fr_hold": "pending-claim-review"
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": "pending-claim-review"
   },
   {
    "key": "kc.clock.window_4",
@@ -144,7 +164,9 @@
    "nl": "snackuren — de zuuraanval die het vaakst terugkomt, en het gaat om hoe vaak, niet om hoeveel",
    "nl_hold": null,
    "fr": "les heures de grignotage — l’agression acide la plus fréquente de la journée, et c’est la fréquence qui compte, pas la quantité",
-   "fr_hold": "pending-claim-review"
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": "pending-claim-review"
   },
   {
    "key": "kc.clock.window_5",
@@ -156,7 +178,9 @@
    "nl": "het laatste grote zuurvenster van de dag; daarna begint het speeksel af te nemen",
    "nl_hold": null,
    "fr": "la dernière grande fenêtre acide de la journée ; ensuite, la salive commence à ralentir",
-   "fr_hold": "pending-claim-review"
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": "pending-claim-review"
   },
   {
    "key": "kc.clock.window_6",
@@ -168,7 +192,9 @@
    "nl": "melatonine stijgt en de speekselproductie daalt — wat nu op het glazuur achterblijft, blijft er urenlang zitten",
    "nl_hold": null,
    "fr": "la mélatonine monte et le débit salivaire baisse — ce qui reste sur l’émail maintenant y reste pendant des heures",
-   "fr_hold": "pending-claim-review"
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": "pending-claim-review"
   },
   {
    "key": "kc.clock.window_7",
@@ -180,7 +206,9 @@
    "nl": "het speeksel zit vlak bij zijn minimum en de zelfreiniging ligt bijna stil: de langste onbewaakte periode, en het herstelvenster",
    "nl_hold": null,
    "fr": "la salive est presque à son minimum et l’autonettoyage s’est presque arrêté : la plus longue période sans protection, et la fenêtre de réparation",
-   "fr_hold": "pending-claim-review"
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": "pending-claim-review"
   },
   {
    "key": "kc.faq.all",
@@ -192,7 +220,9 @@
    "nl": "ALLE",
    "nl_hold": null,
    "fr": "TOUT",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.consent_html",
@@ -204,12 +234,14 @@
    "nl": "Door je in te schrijven, ga je akkoord met de <a>Gebruiksvoorwaarden</a> en het <a>Privacybeleid</a>.",
    "nl_hold": null,
    "fr": "En vous inscrivant, vous acceptez les <a>conditions d’utilisation</a> et la <a>politique de confidentialité</a>.",
-   "fr_hold": "legal-review",
+   "fr_hold": null,
    "href": [
     "terms_url",
     "privacy_url"
    ],
-   "note": "The payload's two <a> tags get href=\"{{ terms_url }}\" and href=\"{{ privacy_url }}\", in that order."
+   "note": "The payload's two <a> tags get href=\"{{ terms_url }}\" and href=\"{{ privacy_url }}\", in that order.",
+   "nl_review": null,
+   "fr_review": "legal-review"
   },
   {
    "key": "kc.footer.country",
@@ -221,7 +253,9 @@
    "nl": "Land/regio",
    "nl_hold": null,
    "fr": "Pays/région",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.email",
@@ -233,7 +267,9 @@
    "nl": "E-mail",
    "nl_hold": null,
    "fr": "E-mail",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.email_placeholder",
@@ -245,7 +281,9 @@
    "nl": "you@example.com",
    "nl_hold": null,
    "fr": "you@example.com",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.join",
@@ -257,7 +295,9 @@
    "nl": "Doe mee",
    "nl_hold": null,
    "fr": "S’inscrire",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.language",
@@ -269,7 +309,9 @@
    "nl": "Taal",
    "nl_hold": null,
    "fr": "Langue",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.legal_consumer_rights",
@@ -281,8 +323,10 @@
    "nl": "Consumentenrechten",
    "nl_hold": null,
    "fr": "Droits des consommateurs",
-   "fr_hold": "legal-review",
-   "note": "Default of the setting legal_consumer_rights_label."
+   "fr_hold": null,
+   "note": "Default of the setting legal_consumer_rights_label.",
+   "nl_review": null,
+   "fr_review": "legal-review"
   },
   {
    "key": "kc.footer.legal_privacy",
@@ -294,8 +338,10 @@
    "nl": "Privacybeleid",
    "nl_hold": null,
    "fr": "Politique de confidentialité",
-   "fr_hold": "legal-review",
-   "note": "Default of the setting legal_privacy_label."
+   "fr_hold": null,
+   "note": "Default of the setting legal_privacy_label.",
+   "nl_review": null,
+   "fr_review": "legal-review"
   },
   {
    "key": "kc.footer.legal_terms",
@@ -307,8 +353,10 @@
    "nl": "Algemene voorwaarden",
    "nl_hold": null,
    "fr": "Conditions générales",
-   "fr_hold": "legal-review",
-   "note": "Default of the setting legal_terms_label."
+   "fr_hold": null,
+   "note": "Default of the setting legal_terms_label.",
+   "nl_review": null,
+   "fr_review": "legal-review"
   },
   {
    "key": "kc.hero.aria_label",
@@ -321,7 +369,9 @@
    "nl_hold": null,
    "fr": "Karmicare, le rythme bucco-dentaire",
    "fr_hold": null,
-   "note": "Default of the setting accessibility_label."
+   "note": "Default of the setting accessibility_label.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.hero.image_alt",
@@ -334,7 +384,9 @@
    "nl_hold": null,
    "fr": "Système de soin bucco-dentaire Karmicare",
    "fr_hold": null,
-   "note": "Used when the hero image has no alt."
+   "note": "Used when the hero image has no alt.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.hero.mode_label",
@@ -347,7 +399,9 @@
    "nl_hold": null,
    "fr": "Mode {{ label }}",
    "fr_hold": null,
-   "note": "{{ label }} is the AWAKE / ASLEEP button label (never translated). Lines 251 and 261."
+   "note": "{{ label }} is the AWAKE / ASLEEP button label (never translated). Lines 251 and 261.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.hero.switcher_label",
@@ -359,7 +413,9 @@
    "nl": "Schakelaar voor het dag- en nachtritme van je mond",
    "nl_hold": null,
    "fr": "Sélecteur jour/nuit du rythme bucco-dentaire",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.pdp.category_strip_label",
@@ -371,7 +427,9 @@
    "nl": "Karmicare, bioritmische mondzorg",
    "nl_hold": null,
    "fr": "Karmicare, soin bucco-dentaire biorythmique",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.pdp.highlights_label",
@@ -383,7 +441,9 @@
    "nl": "Belangrijkste kenmerken",
    "nl_hold": null,
    "fr": "Points forts",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.pdp.professional_partners",
@@ -395,7 +455,9 @@
    "nl": "PROFESSIONELE PARTNERS",
    "nl_hold": null,
    "fr": "PARTENAIRES PROFESSIONNELS",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.compare",
@@ -407,7 +469,9 @@
    "nl": "Vergelijk",
    "nl_hold": null,
    "fr": "Comparer",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.compare_label",
@@ -419,7 +483,9 @@
    "nl": "Plannen vergelijken",
    "nl_hold": null,
    "fr": "Comparer les offres",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.free",
@@ -433,7 +499,9 @@
    "nl_hold": null,
    "fr": "Gratuit",
    "fr_hold": null,
-   "note": "Welcome Kit price label: compare plans (lines 100, 115) and the featured product."
+   "note": "Welcome Kit price label: compare plans (lines 100, 115) and the featured product.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.included",
@@ -445,7 +513,9 @@
    "nl": "Inbegrepen",
    "nl_hold": null,
    "fr": "Inclus",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.kit_value",
@@ -458,7 +528,9 @@
    "nl_hold": null,
    "fr": "· valeur {{ total_value }}",
    "fr_hold": null,
-   "note": "{{ total_value }} is the Welcome Kit total, money_without_trailing_zeros."
+   "note": "{{ total_value }} is the Welcome Kit total, money_without_trailing_zeros.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.not_included",
@@ -471,7 +543,9 @@
    "nl_hold": null,
    "fr": "Non inclus",
    "fr_hold": null,
-   "note": "Lines 234 and 243."
+   "note": "Lines 234 and 243.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.plans.or",
@@ -484,7 +558,9 @@
    "nl_hold": null,
    "fr": "Ou",
    "fr_hold": null,
-   "note": "Joins the buy button and the Try once link."
+   "note": "Joins the buy button and the Try once link.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.stat_strip.aria_label",
@@ -496,7 +572,9 @@
    "nl": "Karmicare in cijfers en hoogtepunten",
    "nl_hold": null,
    "fr": "Karmicare en chiffres et points forts",
-   "fr_hold": null
+   "fr_hold": null,
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.change_label_html",
@@ -509,7 +587,9 @@
    "nl_hold": null,
    "fr": "Modifier",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting change_label. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting change_label. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.checkup_info_html",
@@ -522,7 +602,9 @@
    "nl_hold": null,
    "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting checkup_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting checkup_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.credit_checkup_html",
@@ -535,7 +617,9 @@
    "nl_hold": null,
    "fr": "+ [credit] Care Credit + 40 € récompense contrôle",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting credit_checkup. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting credit_checkup. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.credit_html",
@@ -548,7 +632,9 @@
    "nl_hold": null,
    "fr": "+ [credit] de Care Credit reversé",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting credit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting credit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.credit_info_html",
@@ -561,7 +647,9 @@
    "nl_hold": null,
    "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting credit_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting credit_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.cta_once_html",
@@ -574,7 +662,9 @@
    "nl_hold": null,
    "fr": "Essayer une fois",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting cta_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting cta_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.cta_rhythm_html",
@@ -587,7 +677,9 @@
    "nl_hold": null,
    "fr": "Commencer votre Rythme 60 jours",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting cta_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting cta_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.cta_year_html",
@@ -600,7 +692,9 @@
    "nl_hold": null,
    "fr": "Commencer l’année Karmicare",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting cta_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting cta_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.delivery_free_html",
@@ -611,9 +705,11 @@
    "en": "Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe",
    "nl": "Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa",
    "nl_hold": null,
-   "fr": "Livraison offerte · 1 à 3 jours ouvrables au Benelux",
+   "fr": "Livraison rapide offerte : 24 heures au Benelux. 2 à 3 jours dans le reste de l’Europe",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting delivery_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting delivery_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.delivery_once_html",
@@ -626,7 +722,9 @@
    "nl_hold": null,
    "fr": "Frais de livraison calculés au paiement",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting delivery_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting delivery_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.guarantee_member_html",
@@ -639,7 +737,9 @@
    "nl_hold": null,
    "fr": "Satisfait ou remboursé 60 jours",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting guarantee_member. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting guarantee_member. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.guarantee_once_html",
@@ -652,7 +752,9 @@
    "nl_hold": null,
    "fr": "Satisfait ou remboursé 14 jours",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting guarantee_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting guarantee_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.kit_free_html",
@@ -665,7 +767,9 @@
    "nl_hold": null,
    "fr": "Gratuit",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting kit_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting kit_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.kit_html",
@@ -678,7 +782,9 @@
    "nl_hold": null,
    "fr": "Kit de bienvenue : deux brosses à dents + fil dentaire",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting kit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting kit. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.panel_label_html",
@@ -691,7 +797,9 @@
    "nl_hold": null,
    "fr": "Livraison et contenu",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting panel_label. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting panel_label. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.per_brushing_html",
@@ -704,7 +812,9 @@
    "nl_hold": null,
    "fr": "[per_brushing] par brossage",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting per_brushing. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting per_brushing. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.price_once_html",
@@ -717,7 +827,9 @@
    "nl_hold": null,
    "fr": "[price] en une fois",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting price_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.price_rhythm_html",
@@ -730,7 +842,9 @@
    "nl_hold": null,
    "fr": "[price] tous les 60 jours",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting price_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.price_year_html",
@@ -743,7 +857,9 @@
    "nl_hold": null,
    "fr": "[price] par an",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting price_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.stop_rhythm_html",
@@ -756,7 +872,9 @@
    "nl_hold": null,
    "fr": "Suspendez ou arrêtez à tout moment",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting stop_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting stop_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.stop_year_html",
@@ -769,7 +887,9 @@
    "nl_hold": null,
    "fr": "Renouvellement annuel · résiliable avant l’échéance",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting stop_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting stop_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.title_once_html",
@@ -782,7 +902,9 @@
    "nl_hold": null,
    "fr": "Essayer une fois · 1 duo",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting title_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting title_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.title_rhythm_html",
@@ -795,7 +917,9 @@
    "nl_hold": null,
    "fr": "Rythme 60 jours · Awake + Asleep",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting title_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting title_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.title_year_html",
@@ -808,7 +932,9 @@
    "nl_hold": null,
    "fr": "L’année Karmicare · 6 duos",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting title_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting title_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.try_once_html",
@@ -821,7 +947,9 @@
    "nl_hold": null,
    "fr": "Pas encore d’adhésion ? Essayez une fois pour [price]",
    "fr_hold": null,
-   "note": "Default of the sticky_cart setting try_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
+   "note": "Default of the sticky_cart setting try_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
+   "nl_review": null,
+   "fr_review": null
   }
  ]
 }

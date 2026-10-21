@@ -2,14 +2,14 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
- "source_entries": 225,
+ "source_digest": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
+ "source_entries": 229,
  "counts": {
-  "translated": 139,
-  "held": 22,
-  "pending-claim-review": 30,
+  "translated": 142,
+  "held": 21,
+  "pending-claim-review": 31,
   "dawn-nl": 2,
-  "theme-key": 30,
+  "theme-key": 31,
   "admin": 2
  },
  "fit_risk": [
@@ -24,7 +24,7 @@
   "index:research_behind_system_EkjATL/card_fmFMFd/result_label",
   "index:research_behind_system_EkjATL/card_Hi7YUD/result_label",
   "index:research_behind_system_EkjATL/card_JeERX6/result_label",
-  "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
+  "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
   "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
   "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html",
   "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1",
@@ -172,14 +172,14 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.stat_strip_karmicare.settings.tagline",
-   "en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS",
-   "en_sha1": "1efa139722aaaea0bbfc7ce9db5640d2e955f5b1",
-   "nl": "GEKOZEN DOOR KPNI-THERAPEUTEN, FUNCTIONELE TANDARTSEN, GEZONDHEIDSBEWUSTE MENSEN",
+   "en": "CHOSEN BY KPNI PRACTITIONERS, FUNCTIONAL DENTISTS, HEALTH PROFESSIONALS",
+   "en_sha1": "2be450b68110721fbb4d9482dfb2c67874b35d49",
+   "nl": "GEKOZEN DOOR KPNI-THERAPEUTEN, FUNCTIONELE TANDARTSEN, ZORGPROFESSIONALS",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "'health enthusiasts' → 'gezondheidsbewuste mensen' (neutral; 'gezondheidsfanaten' reads pejorative)"
+   "notes": "'health professionals' → 'zorgprofessionals'; kPNI practitioners → kPNI-therapeuten (glossary); claim C80 pending; EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:stat_strip_karmicare/stat_1/heading",
@@ -868,10 +868,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C35)"
+   "nl": "Stralend, rustig tandvlees",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
@@ -880,10 +882,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
    "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
    "en_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C35)"
+   "nl": "<p>Geen SLS. Je tandvlees komt tot rust, wordt rozer en ziet er stralend uit.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35); 'settle' → 'komt tot rust', as 'tandvlees tot rust brengen' in the section text"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
@@ -1068,12 +1072,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-   "en": "Functional Dentist, kPNI Therapist",
-   "en_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
+   "en": "Functional Dentist, kPNI Practitioner",
+   "en_sha1": "1a18061547498246ea046b86b0a1c2bc7389ca57",
    "nl": "Functioneel tandarts, kPNI-therapeut",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN Therapist → Practitioner (21 Oct); NL keeps 'therapeut', the usual Dutch title (glossary: kPNI practitioners → kPNI-therapeuten); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/heading",
@@ -1116,12 +1120,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-   "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-   "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
+   "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
+   "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
    "nl": "Apotheker, orthomoleculair therapeut, kPNI-coördinator",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN Therapist → Practitioner (21 Oct); NL keeps 'therapeut', the usual Dutch title (glossary: kPNI practitioners → kPNI-therapeuten); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_8dRing/hover_text",
@@ -1204,12 +1208,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-   "en": "Nutritional Therapist, Menstrual Cycle Expert",
-   "en_sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
+   "en": "Nutritional Practitioner, Menstrual Cycle Expert",
+   "en_sha1": "54d1fc3de6561c01d495b096b9c76c42c168c506",
    "nl": "Voedingstherapeut, expert menstruatiecyclus",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN Therapist → Practitioner (21 Oct); NL keeps 'therapeut', the usual Dutch title (glossary: kPNI practitioners → kPNI-therapeuten); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
@@ -1218,10 +1222,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "nl": null,
+   "nl": "",
    "status": "held",
    "flags": [],
-   "notes": "unsupported-claim (C85)"
+   "notes": "held: practitioner quote stays in her own EN words (landing desk 20 Oct, msg_67b031a3a2dc: 'the Sietske quote stays as it is'); the claim waiver covers claims, not a person's quote; an NL version needs her own wording or approval. NL draft in commit 986c1d9"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -1934,6 +1938,42 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.category",
+   "en": "The ritual",
+   "en_sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
+   "nl": "Het ritueel",
+   "status": "translated",
+   "flags": [],
+   "notes": "same NL as the other 'The ritual' tabs; EN updated 21 Oct (41ae772)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.question",
+   "en": "How long does one duo last?",
+   "en_sha1": "5f0abdd95287193e2afea705090f7f025a22d77a",
+   "nl": "Hoe lang gaat één duo mee?",
+   "status": "translated",
+   "flags": [],
+   "notes": "as the PDP line 'Eén duo gaat 64 dagen mee'; EN updated 21 Oct (41ae772)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
+   "en": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
+   "en_sha1": "ee6d5e88422c0a37d1519a885b0eaee706545f60",
+   "nl": "<p>Ongeveer 64 dagen — één volledige cyclus. Eén pompje (0,45 ml) per ritueel, Awake 's ochtends en Asleep 's avonds, en elke formule bevat er iets meer dan twee maanden van. Met een levering om de 60 dagen loop je steeds een paar dagen voor.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "one pump → één pompje (0,45 ml) (glossary); supply claim C07 (approved); EN updated 21 Oct (41ae772)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.category",
    "en": "Ingredients & safety",
    "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
    "nl": "Ingrediënten & veiligheid",
@@ -1941,145 +1981,109 @@
    "flags": [
     "fit-risk"
    ],
-   "notes": "25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety'"
-  },
-  {
-   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/question",
-   "resource_type": "template_setting",
-   "file_or_handle": "templates/index.json",
-   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.question",
-   "en": "Is Karmicare fluoride-free?",
-   "en_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
-   "nl": "Is Karmicare fluoridevrij?",
-   "status": "translated",
-   "flags": [],
-   "notes": ""
-  },
-  {
-   "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer",
-   "resource_type": "template_setting",
-   "file_or_handle": "templates/index.json",
-   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
-   "en": "<p>[NEEDS APPROVED COPY]</p>",
-   "en_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "needs-approved-copy"
-  },
-  {
-   "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
-   "resource_type": "template_setting",
-   "file_or_handle": "templates/index.json",
-   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.category",
-   "en": "The ritual",
-   "en_sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
-   "nl": "Het ritueel",
-   "status": "translated",
-   "flags": [],
-   "notes": ""
+   "notes": "25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety'; EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.question",
-   "en": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
-   "en_sha1": "abdd0b7d15be897509a88669f6169c6bd804b82b",
-   "nl": "Zal Karmicare een bioritmische tandpasta met fluoride aanbieden?",
+   "en": "Can I combine Karmicare with fluoride toothpaste or rinses?",
+   "en_sha1": "a643dabd1a4aea9719383821b601d34fb7e37697",
+   "nl": "Kan ik Karmicare combineren met fluoridetandpasta of -mondspoelingen?",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "'toothpaste' at first contact (an opening question) → 'tandpasta', as the EN; EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.answer",
-   "en": "<p>[NEEDS APPROVED COPY]</p>",
-   "en_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "needs-approved-copy"
+   "en": "<p>Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both. If you switch, switch fully: Awake in the morning, Asleep at night. Your dentist can tell you if a fluoride treatment is needed for a specific reason.</p>",
+   "en_sha1": "0406ac48a4e1ce7a7c8bd9f20ed09ef698e9f2af",
+   "nl": "<p>Liever niet. Fluoride en nano-hydroxyapatiet concurreren om hetzelfde glazuuroppervlak, dus afwisselen verzwakt ze allebei. Stap je over, stap dan volledig over: Awake 's ochtends, Asleep 's avonds. Je tandarts kan je zeggen of je om een specifieke reden een fluoridebehandeling nodig hebt.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim C101 pending (mechanism: nHAp and fluoride compete for the enamel surface); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.category",
-   "en": "Results",
-   "en_sha1": "612e12d29278b5519294bc25cdaddffec6d0f1c6",
-   "nl": "Resultaten",
+   "en": "Ingredients & safety",
+   "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
+   "nl": "Ingrediënten & veiligheid",
    "status": "translated",
    "flags": [
     "fit-risk"
    ],
-   "notes": "10 vs 7 chars (filter tab); no shorter equivalent"
+   "notes": "25 vs 20 chars (filter tab); 'Ingrediënten' alone would drop 'safety'; EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.question",
-   "en": "What is nano-hydroxyapatite?",
-   "en_sha1": "0aeed18c4e6bd60691b49cfe53c782135bd3bb12",
-   "nl": "Wat is nano-hydroxyapatiet?",
+   "en": "Is Karmicare fluoride-free?",
+   "en_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
+   "nl": "Is Karmicare fluoridevrij?",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.answer",
-   "en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
-   "en_sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
-   "nl": "<p>Een bio-identiek mineraal — dezelfde stof waaruit je glazuur bestaat. Het remineraliseert tanden, vermindert gevoeligheid en maakt op natuurlijke wijze witter. Het meest onderzochte remineraliserende middel op mineraalbasis ter wereld, in Japan toegepast sinds de jaren tachtig.</p>",
+   "en": "<p>Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawbacks.</p>",
+   "en_sha1": "0873f2ef70e93cac33d1cf03c9a877f094ceb830",
+   "nl": "<p>Karmicare is fluoridevrij, en dat blijft zo. De voordelen van fluoride wegen niet op tegen de bekende nadelen.</p>",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Numbers warning: '1980s' → 'de jaren tachtig' (Dutch idiom, same period); R2 (review F6): 'gebruikt' → 'toegepast' (brand rule)"
+   "notes": "claim C102 pending (comparison: fluoride's benefits against its drawbacks); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.category",
-   "en": "Plans & Return on Care",
-   "en_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
-   "nl": "Plannen & Return on Care",
+   "en": "Shipping & guarantee",
+   "en_sha1": "bc09cdf16c860afefb56428d2fae8800222d82dd",
+   "nl": "Verzending & garantie",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "same NL as the earlier 'Shipping & guarantee' tab; EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.question",
-   "en": "Should I rinse after brushing?",
-   "en_sha1": "428bc937d0c86862ed3e4773017f44033510e7da",
-   "nl": "Moet ik spoelen na het poetsen?",
+   "en": "What does the money-back guarantee cover?",
+   "en_sha1": "531f7c78f96f01aec3514fa65ca6a4865acdb6c3",
+   "nl": "Wat dekt de geld-terug-garantie?",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "money-back guarantee → geld-terug-garantie (glossary); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.answer",
-   "en": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>",
-   "en_sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
-   "nl": "<p>Nee — spuug uit en ga gewoon verder. De formules van Karmicare zijn gecertificeerd veilig om in je mond te blijven, wat nHAp en xylitol een langere contacttijd geeft. Uren actieve minerale zorg in plaats van seconden.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "en": "<p>Every first order comes with a money-back guarantee: 14 days on Try Once, your first cycle on the 60-Day rhythm, 60 days on the Year. Your legal right to withdraw comes on top.</p>",
+   "en_sha1": "2e402a324373b49d66380e05bf7bdf1f315e4319",
+   "nl": "<p>Bij elke eerste bestelling hoort een geld-terug-garantie: 14 dagen bij Eenmalig proberen, je eerste cyclus bij het 60-dagenritme, 60 dagen bij het Karmicare-jaar. Je wettelijke herroepingsrecht komt daar nog bovenop.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "same NL as the guarantee line in the terms, consumer rights and refund policy (legal-review there): keep them in step; EN updated 21 Oct (41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category",
@@ -2088,10 +2092,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.category",
    "en": "Shipping & guarantee",
    "en_sha1": "bc09cdf16c860afefb56428d2fae8800222d82dd",
-   "nl": "Verzending & garantie",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772); was translated: Verzending & garantie"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/question",
@@ -2100,10 +2104,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.question",
    "en": "How quickly will I notice a difference?",
    "en_sha1": "08a546f547c9f31d33fd3955772f0f535fba27b4",
-   "nl": "Hoe snel merk ik verschil?",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772); was translated: Hoe snel merk ik verschil?"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer",
@@ -2112,12 +2116,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_4KMG6C.settings.answer",
    "en": "<p>Mineral remineralisation takes time — most members feel the sensitivity shift in 2–4 weeks and see visible brightening in 4–6. The ritual shift happens faster: you notice the bookend effect within the first week — a morning moment that wakes you up, an evening moment that winds you down.</p>",
    "en_sha1": "deb10e934dc4baa0532621dca4b6f314eabdf2d3",
-   "nl": "<p>Minerale remineralisatie vraagt tijd — de meeste leden voelen hun gevoeligheid veranderen binnen 2–4 weken en zien hun tanden binnen 4–6 weken zichtbaar stralender worden. De verandering in je ritueel gaat sneller: binnen de eerste week merk je het boekensteuneffect — een ochtendmoment dat je wakker maakt, een avondmoment dat je tot rust brengt.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'in 4–6' made explicit as 'binnen 4–6 weken'. 'bookend effect' → 'boekensteuneffect' (image kept; uncommon in Dutch, alternative 'het effect van je twee vaste momenten')"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772); was pending-claim-review: <p>Minerale remineralisatie vraagt tijd — de meeste leden voelen hun gevoeligheid veranderen binnen 2–4 weken en zien hun tanden binnen 4–6 weken zichtbaar stralender worden. De verandering in je ritueel gaat sneller: binnen de eerste week merk je het boekensteuneffect — een ochtendmoment dat je wakker maakt, een avondmoment dat je tot rust brengt.</p>"
   },
   {
    "id": "index:featured_product_3XpDKw/title_4znD88/custom_title",
@@ -2902,6 +2904,56 @@
     "admin"
    ],
    "notes": "TERM: nootropics → noötropica (as in products.md NL). 'tandpasta' twice as in the EN (SEO)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.category",
+   "en": "Plans & Return on Care",
+   "en_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
+   "nl": "Plannen & Return on Care",
+   "status": "translated",
+   "flags": [],
+   "notes": "same NL as the other 'Plans & Return on Care' tabs; new 21 Oct (41ae772)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.question",
+   "en": "Can I pause, skip or cancel?",
+   "en_sha1": "54d79a461f0a7c2e7d091f0c77a79622f45fc823",
+   "nl": "Kan ik pauzeren, overslaan of opzeggen?",
+   "status": "translated",
+   "flags": [],
+   "notes": "cancel (membership) → opzeggen (legal TERMs); new 21 Oct (41ae772)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.answer",
+   "en": "<p>Your membership is completely in your hands. Amend when desired.</p>",
+   "en_sha1": "b4c11f3f81bcc5e0e700be6f1cd43d51bd7c35c6",
+   "nl": "<p>Je lidmaatschap ligt volledig in jouw handen. Pas het aan wanneer je wilt.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 21 Oct (41ae772)"
+  },
+  {
+   "id": "locale:kc.clock.loading",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.loading",
+   "en": "Loading current local time",
+   "en_sha1": "ef5fdb2b7c50d37d993eac56e40b58cee99885df",
+   "nl": "Huidige lokale tijd wordt geladen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "aria-valuetext, not visible; as kc.clock.valuetext_live ('Huidige lokale tijd')"
   }
  ]
 }

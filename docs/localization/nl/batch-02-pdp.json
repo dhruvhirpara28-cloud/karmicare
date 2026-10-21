@@ -2,12 +2,12 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "666785abd03e91b643e766a266ce800fe0df07b8",
+ "source_digest": "2846c75e4df9f09cca9026b613cfddc61f307f5d",
  "source_entries": 477,
  "counts": {
   "pending-claim-review": 41,
-  "translated": 121,
-  "held": 35,
+  "translated": 119,
+  "held": 37,
   "dawn-nl": 15,
   "theme-key": 35,
   "admin": 230
@@ -652,12 +652,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-   "en": "Functional Dentist, kPNI Therapist",
-   "en_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
+   "en": "Functional Dentist, kPNI Practitioner",
+   "en_sha1": "1a18061547498246ea046b86b0a1c2bc7389ca57",
    "nl": "Functioneel tandarts, kPNI-therapeut",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN Therapist → Practitioner (21 Oct); NL keeps 'therapeut', the usual Dutch title (glossary: kPNI practitioners → kPNI-therapeuten); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/heading",
@@ -700,12 +700,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-   "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-   "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
+   "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
+   "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
    "nl": "Apotheker, orthomoleculair therapeut, kPNI-coördinator",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN Therapist → Practitioner (21 Oct); NL keeps 'therapeut', the usual Dutch title (glossary: kPNI practitioners → kPNI-therapeuten); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_8dRing/hover_text",
@@ -786,12 +786,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-   "en": "Nutritional Therapist, Menstrual Cycle Expert",
-   "en_sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
+   "en": "Nutritional Practitioner, Menstrual Cycle Expert",
+   "en_sha1": "54d1fc3de6561c01d495b096b9c76c42c168c506",
    "nl": "Voedingstherapeut, expert menstruatiecyclus",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN Therapist → Practitioner (21 Oct); NL keeps 'therapeut', the usual Dutch title (glossary: kPNI practitioners → kPNI-therapeuten); EN updated 21 Oct (41ae772)"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
@@ -800,10 +800,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "nl": null,
+   "nl": "",
    "status": "held",
    "flags": [],
-   "notes": "unsupported-claim (C85)"
+   "notes": "held: practitioner quote stays in her own EN words (landing desk 20 Oct, msg_67b031a3a2dc: 'the Sietske quote stays as it is'); the claim waiver covers claims, not a person's quote; an NL version needs her own wording or approval. NL draft in commit 986c1d9"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -896,10 +896,10 @@
    "key_path": "sections.how_it_works_steps_aAgVmF.blocks.step_U7HiXT.settings.number",
    "en": "02",
    "en_sha1": "bcac9d1d8eab3713ae489224d0130c9468e7a0e3",
-   "nl": "02",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 21 Oct: the setting is empty at 41ae772 (disabled section); was translated: 02"
   },
   {
    "id": "product.subscription-item:how_it_works_steps_aAgVmF/step_U7HiXT/title",
@@ -932,10 +932,10 @@
    "key_path": "sections.how_it_works_steps_aAgVmF.blocks.step_EBicgt.settings.number",
    "en": "03",
    "en_sha1": "3ea6c91e241f256e5e3a88ebd647372022323a53",
-   "nl": "03",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 21 Oct: the setting is empty at 41ae772 (disabled section); was translated: 03"
   },
   {
    "id": "product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/title",

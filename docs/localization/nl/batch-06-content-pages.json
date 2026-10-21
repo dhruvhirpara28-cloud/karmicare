@@ -6,8 +6,7 @@
  "source_entries": 22,
  "counts": {
   "admin": 15,
-  "pending-claim-review": 5,
-  "held": 2
+  "pending-claim-review": 7
  },
  "fit_risk": [
   "admin:page:why-karmicare:title"
@@ -245,10 +244,13 @@
    "key_path": "body_html#b001",
    "en": "Dive deep into the benefits of NASA’s favorite supplement for oral health",
    "en_sha1": "74cd8126bb75f1998d034857092a4b69fadfcaa0",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (batches 05-07 review)"
+   "nl": "Duik diep in de voordelen van het favoriete supplement van NASA voor de mondgezondheid",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (batches 05-07 review)"
   },
   {
    "id": "admin:page:nhap-technology:seo.title",
@@ -271,10 +273,13 @@
    "key_path": "seo.description",
    "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Dive deep into the benefits of NASA’s favorite supplement for oral health",
    "en_sha1": "518e171ea8390b669611c8f82b1e81fa2e4352a6",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (batches 05-07 review)"
+   "nl": "Ontdek de wonderlijke binnenwereld van nano-hydroxyapatiet en waarom je het in je tandpasta nodig hebt. Duik diep in de voordelen van het favoriete supplement van NASA voor de mondgezondheid",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (batches 05-07 review); Full stop added between the two joined blocks (the EN runs them together)"
   },
   {
    "id": "admin:page:articles:title",
