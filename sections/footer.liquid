@@ -529,14 +529,35 @@
   }
 
   /* The payment methods switched on in Shopify, in the Figma footer's monochrome style
-     (Victor, 21 Oct, G-5). Grayscale only: each identifying mark keeps at least 4.2:1 on
-     its own opaque chip, Day and Night alike (MobilePay lowest); softening it further drops
-     MobilePay below 3:1 (R15 F2). */
+     (Victor, 21 Oct, G-5). Grayscale only: each identifying mark keeps at least 3:1 on its
+     own opaque chip, Day and Night alike (Maestro lowest, 3.74:1); softening it further
+     drops MobilePay below 3:1 (R15 F2). */
   .km-footer-payments svg {
     display: block;
     width: 38px;
     height: 24px;
     filter: grayscale(1);
+  }
+
+  /* Mastercard's red circle turns 1.30:1 on its dark chip in grayscale (R15b F2): a light chip
+     like the others, with both circles and their overlap in greys that stay apart and each
+     clear 3:1 on white (#595959 7.0:1, #8c8c8c 3.4:1, #333 12.6:1). Its colours are inline
+     styles (display-p3 included), hence !important. Paths: outer chip, inner chip, left
+     circle, right circle, overlap. */
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(1) {
+    fill: #ededed !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(2) {
+    fill: #ffffff !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(3) {
+    fill: #595959 !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(4) {
+    fill: #8c8c8c !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(5) {
+    fill: #333333 !important;
   }
 
   @media screen and (min-width: 750px) {
