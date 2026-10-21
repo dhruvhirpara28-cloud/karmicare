@@ -16,9 +16,9 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 229 | `7694e7acce33a1e22a90de53273f2c90a8ddd70a` |
-| `batch-02-pdp` | 477 | `2846c75e4df9f09cca9026b613cfddc61f307f5d` |
-| `batch-03-header-footer` | 41 | `a853d438d503867882d711cd4fa5a4a93c29759f` |
+| `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
+| `batch-02-pdp` | 477 | `e3e79339215ffcf134b6813f1b46310a1c380fc8` |
+| `batch-03-header-footer` | 41 | `d5353b16cc57ea2181626f9f9cfa79dda0cb107d` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
@@ -27,7 +27,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 
 ## How to read an entry
 
-`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status` (every entry that carries a claim: in batches 01–03 the strictest status of its `claims`, in batches 05–07 the hand review), `claim_basis` (batches 05–07), `claim_hold_waived` (on the 119 unsupported-claim entries: "2026-10-20 Victor, translation only"; NL/FR translate them and flag pending-claim-review, the claims review still gates publication), `blocked` (no approved copy: a placeholder, or EN that breaks a brand rule),`legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `retired` (the theme no longer reads the setting or key; held in NL/FR and left out of registration, with the reason), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
+`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status` (every entry that carries a claim: in batches 01–03 the strictest status of its `claims`, in batches 05–07 the hand review; `confirmed` where Victor confirmed the claim), `claim_basis` (batches 05–07), `claim_hold_waived` (on the 119 unsupported-claim entries: "2026-10-20 Victor, translation only"; NL/FR translate them and flag pending-claim-review, the claims review still gates publication), `blocked` (no approved copy: a placeholder, or EN that breaks a brand rule),`legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `retired` (the theme no longer reads the setting or key; held in NL/FR and left out of registration, with the reason), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
 
 | status | Meaning for translators |
 |---|---|
