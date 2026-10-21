@@ -1305,13 +1305,35 @@
     return (form.closest('product-form') || document).querySelector('.product-form__error-message-wrapper');
   }
 
+  // Per table feedback (R14f): the number of its newest attempt and of the attempt its copy shows. Only the
+  // newest attempt may write the copy, a success clears it, and Back clears a copy an older attempt left.
+  const feedbackStates = new WeakMap();
+
+  function feedbackStateOf(feedback) {
+    let state = feedbackStates.get(feedback);
+    if (!state) {
+      state = { latest: 0, shown: 0 };
+      feedbackStates.set(feedback, state);
+    }
+    return state;
+  }
+
+  function clearCopy(feedback) {
+    const error = feedback.querySelector('[data-kc-plan-error]');
+    const errorText = error && error.querySelector('[data-kc-plan-error-text]');
+    if (error) error.hidden = true;
+    if (errorText) errorText.textContent = '';
+    feedbackStateOf(feedback).shown = 0;
+  }
+
   function attempt(button, run) {
     const feedback = feedbackOf(button);
     const error = feedback && feedback.querySelector('[data-kc-plan-error]');
     const errorText = error && error.querySelector('[data-kc-plan-error-text]');
     const status = feedback && feedback.querySelector('[data-kc-plan-status]');
-    if (error) error.hidden = true;
-    if (errorText) errorText.textContent = '';
+    const state = feedback ? feedbackStateOf(feedback) : null;
+    const token = state ? ++state.latest : 0;
+    if (feedback) clearCopy(feedback);
     busyButtons.add(button);
     button.setAttribute('aria-busy', 'true');
     if (status) status.textContent = status.dataset.loadingText || '';
@@ -1322,10 +1344,15 @@
       // karmiAddToCart leaves the button disabled only while the page goes to checkout
       if (button.disabled) return;
       release(button);
-      if (!cartError || cartError.hidden || !error || !errorText) return;
+      if (!state || token !== state.latest || !error || !errorText) return;
+      if (!cartError || cartError.hidden) {
+        clearCopy(feedback);
+        return;
+      }
       const line = cartError.querySelector('.product-form__error-message');
       errorText.textContent = line ? line.textContent : '';
-      if (errorText.textContent) error.hidden = false;
+      error.hidden = !errorText.textContent;
+      state.shown = errorText.textContent ? token : 0;
     };
     // run() starts in this turn (karmiAddToCart disables the button at once)
     return new Promise((resolve) => resolve(run()))
@@ -1345,6 +1372,10 @@
       const spinner = button.querySelector('.loading__spinner');
       if (spinner) spinner.classList.add('hidden');
       release(button);
+    });
+    document.querySelectorAll('[data-kc-plan-feedback]').forEach((feedback) => {
+      const state = feedbackStateOf(feedback);
+      if (state.shown && state.shown !== state.latest) clearCopy(feedback);
     });
   });
 
