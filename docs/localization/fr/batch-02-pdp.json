@@ -9,9 +9,9 @@
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "admin": 251,
-  "held": 38,
+  "held": 39,
   "locale-present": 15,
-  "theme-key": 35,
+  "theme-key": 34,
   "translated": 138
  },
  "flag_counts": {
@@ -2829,10 +2829,10 @@
    "key_path": "sections/main-product.liquid:1104",
    "en": "Free",
    "en_sha1": "75f527181b574f84568f33f67adc3b267a6fef9c",
-   "fr": "Gratuit",
-   "status": "theme-key",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "Price label: 'Gratuit' (agrees with 'prix'), used for every 'Free' price label.",
+   "notes": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (source-copy d72d791); was theme-key: Gratuit",
    "source_status": "needs-key"
   },
   {
