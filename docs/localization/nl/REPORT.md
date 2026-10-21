@@ -134,7 +134,7 @@ Counts below are current.
 | `/pages/privacy` | `/pages/privacy-policy` |
 | `/pages/terms-and-conditions` | `/pages/terms-and-conditions-1` |
 
-A 301 redirect from each old handle to its replacement is the one-line decision that makes the held set unnecessary.
+Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so the legacy set stays held after the translate-everything instruction, because outdated legal text would mislead. Each NL note reads *legacy page, redirects to the 2.0 page (F5, Victor)*, as in FR (`66f0c68`). The redirects themselves are an Admin step (Online Store > Navigation > URL redirects).
 
 - **empty EN (9):** article summaries that contain only an image.
 
@@ -166,7 +166,7 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | `batch-02-pdp` | retired (step numbers emptied in a disabled section, 21 Oct) | 2 |
 | `batch-03-header-footer` | never-translate | 3 |
 | `batch-03-header-footer` | never-translate; existing Dawn locale value remains unchanged | 2 |
-| `batch-04-legal` | held-legacy | 350 |
+| `batch-04-legal` | legacy page, redirects to the 2.0 page (F5, Victor) | 350 |
 | `batch-07-collections-blog` | empty EN | 9 |
 | `batch-07-collections-blog` | needs-approved-copy: competitor names prohibited; EN owner must supply compliant source | 1 |
 
