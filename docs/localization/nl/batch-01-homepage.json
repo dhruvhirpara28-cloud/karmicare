@@ -6,8 +6,8 @@
  "source_entries": 229,
  "counts": {
   "translated": 142,
-  "held": 23,
-  "pending-claim-review": 29,
+  "held": 20,
+  "pending-claim-review": 32,
   "dawn-nl": 2,
   "theme-key": 31,
   "admin": 2
@@ -868,10 +868,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C35)"
+   "nl": "Stralend, rustig tandvlees",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
@@ -880,10 +882,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
    "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
    "en_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C35)"
+   "nl": "<p>Geen SLS. Je tandvlees komt tot rust, wordt rozer en ziet er stralend uit.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35); 'settle' → 'komt tot rust', as 'tandvlees tot rust brengen' in the section text"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
@@ -1218,10 +1222,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C85)"
+   "nl": "<p>“Als voedingstherapeut gespecialiseerd in vrouwelijke hormonen let ik heel goed op wat ik in mijn lichaam stop. Hormonen zijn gevoelig. Stress, toxines, ingrediënten van slechte kwaliteit — het telt allemaal op. Daarom kijk ik niet alleen naar etiketten, maar naar wat iets in het lichaam doet.</p><p>Ik kies voor Karmicare omdat ik vertrouw op wat erin zit — en op wat er niet in zit. Geen overbodige vulstoffen, geen verborgen verstoorders. Alleen zuivere, doelgerichte ingrediënten die het zenuwstelsel en de hormonale balans ondersteunen in plaats van belasten. Wie begrijpt hoe kwetsbaar het vrouwelijke hormoonstelsel kan zijn, zeker bij chronische stress, weet dat kwaliteit geen keuze is.</p><p>En daarom pas ik het ook toe in mijn praktijk.</p><p>Ik werk met vrouwen met PMS, cyclusklachten, stressgerelateerde vermoeidheid, oestrogeendominantie en een ontregelde bijnierwerking. Ik heb middelen nodig die technisch kloppen — biobeschikbaar, goed geformuleerd en ondersteunend voor de ontgiftingsroutes en de regulatie van het zenuwstelsel.</p><p>Karmicare voldoet aan die standaard.”</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C85); practitioner quote: if she gave it in Dutch originally, use her own wording; 'I use it' → 'pas ik het toe', 'products' → 'middelen' (brand rule)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_qAPajg/heading",

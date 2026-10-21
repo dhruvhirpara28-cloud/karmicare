@@ -5,10 +5,9 @@
  "source_digest": "5ab678a91ffc223be63e7f87a68783bacc62a744",
  "source_entries": 77,
  "counts": {
-  "pending-claim-review": 19,
+  "pending-claim-review": 25,
   "translated": 14,
-  "admin": 38,
-  "held": 6
+  "admin": 38
  },
  "fit_risk": [],
  "status_legend": {
@@ -455,10 +454,13 @@
    "key_path": "seo.description",
    "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you fall asleep at night. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually har",
    "en_sha1": "2308852066a80c62e376ed89dc1acd124302bda4",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (batches 05-07 review)"
+   "nl": "Iets voor je geest, je mond en je ziel. Een tandpasta die je helpt om 's avonds in slaap te vallen. Met superieure mineralen zoals nano-HAp en actieve noötropica helpt Karmicare je naar een optimale geest en mond. Anders dan mondverzorgingsmiddelen op basis van fluoride, die je slaap-waakcyclus verstoren, harmonieert Karmicare",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (batches 05-07 review); The EN meta description is cut off; the NL stops at the same point. 'oral hygiene products' → 'mondverzorgingsmiddelen' (brand rule)"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:seo.title",
@@ -481,10 +483,13 @@
    "key_path": "seo.description",
    "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you get up in the morning. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually ha",
    "en_sha1": "70a6ebd2757ad3dee5ec8ae2f869f7124b0231a8",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (batches 05-07 review)"
+   "nl": "Iets voor je geest, je mond en je ziel. Een tandpasta die je helpt om 's ochtends op te staan. Met superieure mineralen zoals nano-HAp en actieve noötropica helpt Karmicare je naar een optimale geest en mond. Anders dan mondverzorgingsmiddelen op basis van fluoride, die je slaap-waakcyclus verstoren, harmonieert Karmicare",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (batches 05-07 review); The EN meta description is cut off; the NL stops at the same point. 'oral hygiene products' → 'mondverzorgingsmiddelen' (brand rule)"
   },
   {
    "id": "admin:product:complete-hygiene-kit:title",
@@ -893,10 +898,13 @@
    "key_path": "body_html#b002",
    "en": "A toothpaste that helps you fall asleep at night.",
    "en_sha1": "77dfe576d894aedd93f53144bb91214468b5df2d",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description"
+   "nl": "Een tandpasta die je helpt om 's avonds in slaap te vallen.",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim: sleep/wake effect; same hold as this resource's seo.description"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b003",
@@ -920,10 +928,13 @@
    "key_path": "body_html#b004",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
    "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (batches 05-07 review)"
+   "nl": "Anders dan mondverzorgingsmiddelen op basis van fluoride, die je slaap-waakcyclus verstoren, harmonieert Karmicare juist met de circadiaanse ritmes van je lichaam.",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (batches 05-07 review); 'oral hygiene products' → 'mondverzorgingsmiddelen' (brand rule)"
   },
   {
    "id": "admin:app:asleep-evening-toothpaste-2-0:selling_plan_group:Subscribe and Save",
@@ -1002,10 +1013,13 @@
    "key_path": "body_html#b002",
    "en": "A toothpaste that helps you get up in the morning.",
    "en_sha1": "f4e9ca2c91352d24232d43428eb4fd8a51cb7de7",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: sleep/wake effect; same hold as this resource's seo.description"
+   "nl": "Een tandpasta die je helpt om 's ochtends op te staan.",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim: sleep/wake effect; same hold as this resource's seo.description"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b003",
@@ -1029,10 +1043,13 @@
    "key_path": "body_html#b004",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
    "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (batches 05-07 review)"
+   "nl": "Anders dan mondverzorgingsmiddelen op basis van fluoride, die je slaap-waakcyclus verstoren, harmonieert Karmicare juist met de circadiaanse ritmes van je lichaam.",
+   "status": "pending-claim-review",
+   "flags": [
+    "admin",
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (batches 05-07 review); 'oral hygiene products' → 'mondverzorgingsmiddelen' (brand rule)"
   },
   {
    "id": "admin:app:awake-morning-toothpaste-2-0:selling_plan_group:Subscribe and Save",

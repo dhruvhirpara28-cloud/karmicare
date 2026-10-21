@@ -58,6 +58,15 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 
 **Theme keys (21 Oct, release QA B-03/B-04).** `theme_keys.py` no longer holds a key for pending-claim-review or legal-review: Victor waived those holds for translation, and the reviews gate publication and registration instead. They stay on the entries, and `theme-keys.json` lists them per key in `nl_review` / `fr_review`. `locales/nl.json` now carries the NL for `kc.clock.window_1` (C54) and for `kc.clock.loading`. That key is inventoried as `locale:kc.clock.loading` (*Huidige lokale tijd wordt geladen*, theme-key). `locales/fr.json` carries the FR of 66f0c68 for the seven clock windows and the four footer legal keys. `write` now keeps the key order of each locale file, so the 29 other locales are unchanged.
 
+**Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
+- The 119 entries held on an unsupported claim now carry `claim_hold_waived: "2026-10-20 Victor, translation only"` in the EN source. The EN is unchanged.
+- In NL they are translated faithfully and flagged `pending-claim-review`. Each note starts with *claim hold waived by Victor 20 Oct for translation; claims review still pending for publication*.
+- The 119 are: benefit card 06 (C35), Sietske Hamelink's quote on both templates (C85), 6 product blocks, 2 content-page blocks and 107 article blocks.
+- `validate.py` H1 accepts a translated unsupported claim only with the waiver in the source and the `pending-claim-review` flag. Two self-test cases prove both.
+- The brand rules still apply: *formule* after the first *tandpasta*, no commodity words, *je*. The notes list each change.
+
+NL now covers 2,154 of the 2,155 translatable entries (99.95 %). Not translatable are 53 never-translate, 350 legacy legal, 8 retired and 9 empty entries. The one translatable entry still held is the SLS article block `#b035`: it names four competitors, which is a brand rule, not a claim, and the FR lane holds it too. It waits for Victor or for a compliant EN.
+
 Counts below are current.
 
 ## What is here
@@ -65,8 +74,8 @@ Counts below are current.
 | File | Content |
 |---|---|
 | `batch-0{1..8}-*.json` | One file per EN batch: `source_digest` (the EN batch it was translated from), `counts`, `fit_risk` ids, and one entry per EN entry: `{id, resource_type, file_or_handle, key_path, en, en_sha1, nl, status, flags, notes}`. |
-| `validate.py` | `python3 docs/localization/nl/validate.py` checks every file against `docs/source-copy/en-source.json`. It checks digests, coverage, `en_sha1`, and Dutch present except on held entries. It checks that each status is the strongest of its flags and that counts and fit lists match. Since R2 it also enforces the hold and gate invariants H1–H8 (unsupported, needs-review, legal, legacy, never-translate, blocked, a reason for every hold, retired), the exact-span checks S1 (addresses) and S2 (`(*)` markers), and since R6 the commodity-word check W1. It exits 0 today. |
-| `validate_selftest.py` | Plants one defect per check in a temporary copy and confirms that `validate.py` rejects it (18 cases, among them a new gate added in the source only and two W1 cases that must pass). It exits 0 today. |
+| `validate.py` | `python3 docs/localization/nl/validate.py` checks every file against `docs/source-copy/en-source.json`. It checks digests, coverage, `en_sha1`, and Dutch present except on held entries. It checks that each status is the strongest of its flags and that counts and fit lists match. Since R2 it also enforces the hold and gate invariants H1–H8 (unsupported, unless waived and flagged; needs-review, legal, legacy, never-translate, blocked, a reason for every hold, retired), the exact-span checks S1 (addresses) and S2 (`(*)` markers), and since R6 the commodity-word check W1. It exits 0 today. |
+| `validate_selftest.py` | Plants one defect per check in a temporary copy and confirms that `validate.py` rejects it (19 cases, among them a new gate added in the source only, a waived claim without its flag and two W1 cases that must pass). It exits 0 today. |
 | `REPORT.md` | This file. |
 
 **Statuses.** Each status names the strongest flag on the entry; `flags` lists all of them.
@@ -105,14 +114,14 @@ Counts below are current.
    - repeated legal lines (the refund policy follows the terms).
 
    This report first said that only the two trust-row short forms still differed. R2 grouped every identical EN and found 17 groups with different Dutch. 14 are harmonised now, and 3 differ on purpose (see "R2 fixes", F9).
-6. **Claims.** A claims review of batches 05–07 judged 541 blocks by hand: 33 approved, 261 needs-review, 113 unsupported, 134 without a claim (`CLAIMS-REVIEW.md`). After R2 the totals are 30 approved, 274 needs-review and 115 unsupported: 6 blocks were added and 9 reclassified. Unsupported blocks are held; needs-review blocks are translated faithfully and flagged.
+6. **Claims.** A claims review of batches 05–07 judged 541 blocks by hand: 33 approved, 261 needs-review, 113 unsupported, 134 without a claim (`CLAIMS-REVIEW.md`). After R2 the totals are 30 approved, 274 needs-review and 115 unsupported: 6 blocks were added and 9 reclassified. Needs-review blocks are translated faithfully and flagged. Unsupported blocks were held until Victor's waiver of 20 Oct; since then they are translated and flagged in the same way.
 7. **Dawn keys.** 64 Dawn keys render on the inventoried pages. All 64 are present in `locales/nl.json`. The five that equal the EN (*Menu*, *Blog*, *Link*, *Filter*, *Filter:*) are correct Dutch. Since R2 the two brand keys (Facebook, Instagram) are held as never-translate; their locale values stay as they are.
 
 ## Held entries, and why
 
 - **never-translate (53):** selling-plan IDs, the Subscription Name keys "60-Day Supply" / "Year Supply", INCI lists, practitioners' names, citations, Awake/Asleep labels, brand aria-labels and the two Dawn social keys (R2 F10). These keep their EN value.
 - **needs-approved-copy (1):** the SLS article block that names four competitors (R2 F6; `blocked` in the source). The two homepage FAQ placeholders got approved answers on 21 Oct (integration `41ae772`) and are translated.
-- **unsupported-claim (119):**
+- **unsupported-claim (0 since 20 Oct):** the 119 entries held here until then are translated under Victor's waiver and flagged `pending-claim-review` (see the update at the top):
   - four from B1a: homepage benefit card 06 (heading and text) and Sietske Hamelink's quote on both templates;
   - 107 article blocks;
   - 6 product-page blocks, among them the two sleep/wake description lines (R2 F1);
@@ -133,15 +142,15 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 41 | 15 | 37 | 27 |
-| `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 29 | 2 | 23 | 19 |
+| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 42 | 15 | 36 | 27 |
+| `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 32 | 2 | 20 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
-| `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 19 | 0 | 6 | 0 |
-| `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 5 | 0 | 2 | 1 |
-| `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 279 | 0 | 117 | 0 |
+| `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
+| `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
+| `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 386 | 0 | 10 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2575** | | **284** | **618** | **76** | **621** | **374** | **62** | **540** | **63** |
+| **All** | **2575** | | **284** | **618** | **76** | **621** | **493** | **62** | **421** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -150,22 +159,16 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | Batch | Reason | Entries |
 |---|---|---:|
 | `batch-01-homepage` | never-translate | 16 |
-| `batch-01-homepage` | unsupported-claim | 3 |
 | `batch-01-homepage` | retired (Duo name is the product title) | 1 |
 | `batch-01-homepage` | retired (FAQ block `4KMG6C` removed, 21 Oct) | 3 |
 | `batch-02-pdp` | never-translate | 32 |
-| `batch-02-pdp` | unsupported-claim | 1 |
 | `batch-02-pdp` | retired (Duo name is the product title) | 2 |
 | `batch-02-pdp` | retired (step numbers emptied in a disabled section, 21 Oct) | 2 |
 | `batch-03-header-footer` | never-translate | 3 |
 | `batch-03-header-footer` | never-translate; existing Dawn locale value remains unchanged | 2 |
 | `batch-04-legal` | held-legacy | 350 |
-| `batch-05-products` | unsupported-claim | 4 |
-| `batch-05-products` | unsupported-claim: sleep/wake effect; same hold as this resource's seo.description | 2 |
-| `batch-06-content-pages` | unsupported-claim | 2 |
 | `batch-07-collections-blog` | empty EN | 9 |
 | `batch-07-collections-blog` | needs-approved-copy: competitor names prohibited; EN owner must supply compliant source | 1 |
-| `batch-07-collections-blog` | unsupported-claim | 107 |
 
 ## Fit risks
 
@@ -616,7 +619,7 @@ The FR input for both runs is `karmicare/soft-launch-fr` at `841e05b` (FR's R2 m
 | Item | Owner or gate |
 |---|---|
 | Legal review of 621 `legal-review` entries | Victor / lawyer |
-| Claim sign-off of 374 `pending-claim-review` entries | Victor / Clinical Research |
+| Claim sign-off of 493 `pending-claim-review` entries (119 of them under Victor's translation waiver) | Victor / Clinical Research |
 | Register `admin` entries, add `theme-key` strings to `locales/nl.json`, store the sticky-bar and footer schema defaults; rebuild anything derived from the payloads after R2 | localization worker |
 | Rendered check of every `/nl/` URL below, including the 63 fit-risk strings | preview gate / localization check |
 | FR follows `docs/source-copy/CHANGES-R2.md` | FR worker |
