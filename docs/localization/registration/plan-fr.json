@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "5f8c8e6d5bdd",
+  "en-source.json": "ad0d7d137c3d",
   "fr/batch-01-homepage.json": "91006fc51240",
   "fr/batch-02-pdp.json": "4c7dfc201f59",
   "fr/batch-03-header-footer.json": "d48df4212c5c",
@@ -13,7 +13,7 @@
  },
  "batches": {
   "batch-01-homepage": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
-  "batch-02-pdp": "2846c75e4df9f09cca9026b613cfddc61f307f5d",
+  "batch-02-pdp": "e4709cc6bbf22152ae64461abc1ea69bcca08839",
   "batch-03-header-footer": "a853d438d503867882d711cd4fa5a4a93c29759f",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
@@ -3659,27 +3659,6 @@
       "main",
       "buy_buttons",
       "custom_button_text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/buy_buttons/custom_button_text_by_plan",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.buy_buttons.settings.custom_button_text_by_plan",
-     "en": "712106115453: Start my 60-Day rhythm\n712155431293: Start my Karmicare Year",
-     "en_sha1": "b1628e43c0fe39a8b862484cea6b08c7ad54f3f1",
-     "value": "712106115453: Commencer mon Rythme 60 jours\n712155431293: Commencer mon année Karmicare",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "buy_buttons",
-      "custom_button_text_by_plan"
      ]
     },
     {

@@ -143,3 +143,14 @@ These are not source changes. FR has already been told to gate `#b081` and to sw
 | R6-01 | The 30 entries above are pending-claim-review. Keep the assertions as written; only category words change. | `#b081`: *ochtendformule* / *avondformule*. Top-whitening `#b051`: *meest verkochte natuurlijke formule*. |
 | R6-02 | Commodity compounds count as commodity words: product(s) inside a word (*-producten*, FR *produits de …*). Category word: "toothpaste" stays only at first-contact moments, as tone-of-voice.md puts it: "a door, not a carpet", never negated. That means titles, SEO and alt texts, the opening self-reflection questions and one first prose mention per article. There is no blanket blog exemption. | 8 compounds as the reviewer gave them, and 120 later uses in the nine articles replaced by *formule(s)*, *mondverzorging* or *verzorging* (111 entries). Official names, legal titles, the footer compliance line and the approved Figma disclaimers stay. |
 | R6 W1 | The NL validator now rejects product, tube, use and buy stems anywhere in a word in non-legal copy, with link URLs left out. Its 5 listed exceptions name the official and approved terms. Run on the payloads before R6, it flags exactly the reviewer's 8 compounds. | `docs/localization/nl/validate.py` W1 |
+
+## 21 Oct: CTA wording "Begin your"
+
+Victor (21 Oct, global-nav `6c07148`): every CTA uses *Begin*, in the form *Begin your*. Two EN strings in `batch-02-pdp` changed; each keeps the previous text in `old_en` / `old_sha1`. No entry added or removed; the buy-box text is now `corrected`. `batch-02-pdp` digest `2846c75e4df9f09cca9026b613cfddc61f307f5d` → `e4709cc6bbf22152ae64461abc1ea69bcca08839`; every other digest unchanged. (`6c07148` computed `2f2e292c…` from an older base, `666785ab…`; this digest replaces it.)
+
+| Id | Before | Now | NL | FR |
+|---|---|---|---|---|
+| `product.subscription-item:main/buy_buttons/custom_button_text_by_plan` | `712106115453: Start my 60-Day rhythm` / `712155431293: Start my Karmicare Year` | `712106115453: Begin your 60-Day Rhythm` / `712155431293: Begin your Karmicare Year` | Begin je 60-dagenritme / Begin je Karmicare-jaar | Commencer votre Rythme 60 jours / Commencer votre année Karmicare |
+| `liquid:sections/main-product.liquid:1024` (`kc.sticky_cart.cta_year_html`) | Begin the Karmicare Year | Begin your Karmicare Year | Begin je Karmicare-jaar | Commencer votre année Karmicare |
+
+The template setting reaches `/nl` and `/fr` only once the payload is registered (nothing is registered yet). The locale key ships with the theme.

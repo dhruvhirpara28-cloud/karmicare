@@ -64,6 +64,8 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 
 **Sticky-bar key retired (21 Oct, global-nav `27691cb`, NV-13).** The desktop sticky bar becomes the mobile card, and the setting `kit_free` and its markup are gone. `kc.sticky_cart.kit_free_html` (*Gratis*) leaves `theme-keys.json` and all 31 locales. `theme-keys.json` lists it under `retired_keys`: `write` removes a retired key and `check` fails while one is still in a locale. The entry `liquid:sections/main-product.liquid:1104` is `retired` in the source and held here. Until global-nav lands, `snippets/sticky-cart-block.liquid:70` on this branch still reads the key, so Theme Check on this branch alone reports one `TranslationKeyExists` error. On `27691cb` with these locales it reports 0 errors.
 
+**CTAs "Begin your" (21 Oct, Victor, global-nav `6c07148`).** The buy-box text per plan is now *Begin je 60-dagenritme* / *Begin je Karmicare-jaar* (was *Start mijn …*). `kc.sticky_cart.cta_year_html` is now *Begin je Karmicare-jaar* (was *Begin het Karmicare-jaar*), the same form as `cta_rhythm_html`. Batch 02 digest `e4709cc6bbf2`. The FR value *Commencer votre année Karmicare* is recorded under `decided` until the FR payload follows.
+
 **Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
 - The 119 entries held on an unsupported claim now carry `claim_hold_waived: "2026-10-20 Victor, translation only"` in the EN source. The EN is unchanged.
 - In NL they are translated faithfully and flagged `pending-claim-review`. Each note starts with *claim hold waived by Victor 20 Oct for translation; claims review still pending for publication*.
@@ -151,7 +153,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
+| `batch-02-pdp` | 477 | `e4709cc6bbf2` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `a853d438d503` | 4 | 11 | 10 | 0 | 2 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |

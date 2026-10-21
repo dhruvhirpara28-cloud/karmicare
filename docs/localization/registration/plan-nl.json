@@ -1,9 +1,9 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "5f8c8e6d5bdd",
+  "en-source.json": "ad0d7d137c3d",
   "nl/batch-01-homepage.json": "4d816c352332",
-  "nl/batch-02-pdp.json": "503e1181ed99",
+  "nl/batch-02-pdp.json": "1a9ab57e1eb5",
   "nl/batch-03-header-footer.json": "43d869220e6f",
   "nl/batch-04-legal.json": "103611b761f9",
   "nl/batch-05-products.json": "95589890b394",
@@ -13,7 +13,7 @@
  },
  "batches": {
   "batch-01-homepage": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
-  "batch-02-pdp": "2846c75e4df9f09cca9026b613cfddc61f307f5d",
+  "batch-02-pdp": "e4709cc6bbf22152ae64461abc1ea69bcca08839",
   "batch-03-header-footer": "a853d438d503867882d711cd4fa5a4a93c29759f",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
@@ -4076,9 +4076,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.main.blocks.buy_buttons.settings.custom_button_text_by_plan",
-     "en": "712106115453: Start my 60-Day rhythm\n712155431293: Start my Karmicare Year",
-     "en_sha1": "b1628e43c0fe39a8b862484cea6b08c7ad54f3f1",
-     "value": "712106115453: Start mijn 60-dagenritme\n712155431293: Start mijn Karmicare-jaar",
+     "en": "712106115453: Begin your 60-Day Rhythm\n712155431293: Begin your Karmicare Year",
+     "en_sha1": "2a742ee865e0bc9b240f5c97b86a27b533226b53",
+     "value": "712106115453: Begin je 60-dagenritme\n712155431293: Begin je Karmicare-jaar",
      "gates": [],
      "hold": [],
      "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
