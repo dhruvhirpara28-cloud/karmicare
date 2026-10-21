@@ -14,7 +14,8 @@ legal-review do not hold a key (Victor, 20 Oct: translate everything; the review
 and registration): they are listed in *_review as the record of the open review. Every other
 storefront locale gets en, so Theme Check MatchingTranslations finds the same keys everywhere.
 A row's "decided" ({lang: value, "by": who and where}) records a value Victor chose; it wins over the
-payload, so refresh keeps it whatever the payload says.
+payload, so refresh keeps it whatever the payload says. "retired_keys" ({key: reason}) lists keys the theme no
+longer reads: write removes them from every storefront locale, and check fails while one is still there.
 
 write merges into the existing "kc" object in its current key order (other kc keys, such as
 kc.general.coming_soon and kc.receipt, stay where they are; new keys go at the end of their area)
@@ -115,19 +116,24 @@ def split_locale(text):
     return text[:start], text[start:]
 
 
-def expected_kc(rows, lang, kc):
+def expected_kc(rows, lang, kc, retired):
     kc = json.loads(json.dumps(kc))
     for row in rows:
         _, area, name = row["key"].split(".", 2)
         kc.setdefault(area, {})[name] = value(row, lang)
+    for key in retired:
+        _, area, name = key.split(".", 2)
+        kc.get(area, {}).pop(name, None)
+        if area in kc and not kc[area]:
+            del kc[area]
     return kc
 
 
-def write_locale(path, rows):
+def write_locale(path, rows, retired):
     text = open(path, encoding="utf-8").read()
     header, body = split_locale(text)
     data = json.loads(body)
-    kc = expected_kc(rows, lang_of(path), data.get("kc", {}))
+    kc = expected_kc(rows, lang_of(path), data.get("kc", {}), retired)
     dumped = json.dumps(kc, ensure_ascii=False, indent=2).split("\n")
     block = ['  "kc": ' + dumped[0]] + ["  " + line for line in dumped[1:]]
     lines = body.split("\n")
@@ -175,7 +181,7 @@ def check(doc, fr_dir, rows):
         if "'%s'" % row["key"] not in code:
             problems.append("%s: no '%s' | t in the theme" % (row["key"], row["key"]))
     known = {r["key"] for r in doc["keys"]}
-    for key in sorted(set(re.findall(r"'(kc\.[a-z0-9_.]+)'\s*\|\s*t\b", code)) - known):
+    for key in sorted(set(re.findall(r"'(kc\.[a-z0-9_.]+)'\s*\|\s*t\b", code)) - known - set(doc.get("retired_keys", {}))):
         print("note: %s is used in the theme and not in %s" % (key, MAP))
     for path in storefront_locales():
         data = json.loads(split_locale(open(path, encoding="utf-8").read())[1])
@@ -184,6 +190,15 @@ def check(doc, fr_dir, rows):
             got = data.get("kc", {}).get(area, {}).get(name)
             if got != value(row, lang_of(path)):
                 problems.append("%s: %s is %r" % (path, row["key"], got))
+        for key in doc.get("retired_keys", {}):
+            _, area, name = key.split(".", 2)
+            if name in data.get("kc", {}).get(area, {}):
+                problems.append("%s: retired key %s is still there" % (path, key))
+    for key in doc.get("retired_keys", {}):
+        if key in {r["key"] for r in doc["keys"]}:
+            problems.append("%s is both a key and a retired key" % key)
+        if "'%s'" % key in code:
+            print("note: retired key %s is still read by the theme on this branch" % key)
     return problems
 
 
@@ -206,7 +221,7 @@ def main():
         held = [r["key"] for r in new["keys"] if r.get("nl_hold") or r.get("fr_hold")]
         print("%d keys refreshed (FR %s); %d with a hold" % (len(new["keys"]), args.fr_dir or "skipped", len(held)))
     elif args.command == "write":
-        changed = [p for p in storefront_locales() if write_locale(p, rows)]
+        changed = [p for p in storefront_locales() if write_locale(p, rows, doc.get("retired_keys", {}))]
         print("%d keys; %d of %d storefront locale files changed" % (len(rows), len(changed), len(storefront_locales())))
     else:
         problems = check(doc, args.fr_dir, rows)

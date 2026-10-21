@@ -3188,7 +3188,8 @@
    "sha1": "75f527181b574f84568f33f67adc3b267a6fef9c",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'kit_free'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'kit_free'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup"
   },
   {
    "id": "liquid:sections/product-compare-plans.liquid:39",
