@@ -7,13 +7,14 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the stat-strip tagline and the three practitioner titles (on both templates: *Therapist* → *Practitioner*) are `corrected`;
   - the homepage FAQ rows `kLMHax`, `7jmEGi`, `AL3DKF` and `qUxYCn` carry new questions and answers (`corrected`, `old_en` kept), and the two former placeholders are no longer `blocked`;
   - the new FAQ block `Pz4mRk` adds three entries at the end of batch 01 (#226–228), so the earlier numbers stay;
-  - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`.
+  - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`;
+  - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 228 | `46f2753b65fd2c2e40789a16c4fb6c798b3bebbf` |
+| `batch-01-homepage` | 229 | `7694e7acce33a1e22a90de53273f2c90a8ddd70a` |
 | `batch-02-pdp` | 477 | `2846c75e4df9f09cca9026b613cfddc61f307f5d` |
 | `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
@@ -42,7 +43,7 @@ By resource type:
 
 | Batch | template_setting | section_group | theme_locale | app | product | metafield | metaobject | shop | navigation | page | policy | article | blog | collection | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 192 | 0 | 22 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 228 |
+| `batch-01-homepage` | 192 | 0 | 23 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 229 |
 | `batch-02-pdp` | 156 | 0 | 53 | 14 | 16 | 175 | 63 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 477 |
 | `batch-03-header-footer` | 0 | 6 | 24 | 1 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 41 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 357 | 474 | 0 | 0 | 0 | 974 |
@@ -50,13 +51,13 @@ By resource type:
 | `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 | 0 | 22 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 698 | 1 | 9 | 709 |
 | `batch-08-system` | 3 | 0 | 36 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 46 |
-| **All** | **511** | **6** | **135** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2574** |
+| **All** | **511** | **6** | **136** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2575** |
 
 By status:
 
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 144 | 21 | 30 | 31 | 2 | 16 |
+| `batch-01-homepage` | 145 | 21 | 30 | 31 | 2 | 16 |
 | `batch-02-pdp` | 147 | 3 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
@@ -530,6 +531,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 226 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category` | template_setting | Plans & Return on Care | approved |  |
 | 227 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question` | template_setting | Can I pause, skip or cancel? | approved |  |
 | 228 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer` | template_setting | Your membership is completely in your hands. Amend when desired. | approved |  |
+| 229 | `locale:kc.clock.loading` | theme_locale | Loading current local time | approved |  |
 
 ### `batch-02-pdp`
 

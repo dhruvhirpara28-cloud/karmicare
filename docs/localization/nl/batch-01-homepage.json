@@ -2,14 +2,14 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "46f2753b65fd2c2e40789a16c4fb6c798b3bebbf",
- "source_entries": 228,
+ "source_digest": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
+ "source_entries": 229,
  "counts": {
   "translated": 142,
   "held": 23,
   "pending-claim-review": 29,
   "dawn-nl": 2,
-  "theme-key": 30,
+  "theme-key": 31,
   "admin": 2
  },
  "fit_risk": [
@@ -2936,6 +2936,20 @@
    "status": "translated",
    "flags": [],
    "notes": "new 21 Oct (41ae772)"
+  },
+  {
+   "id": "locale:kc.clock.loading",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.loading",
+   "en": "Loading current local time",
+   "en_sha1": "ef5fdb2b7c50d37d993eac56e40b58cee99885df",
+   "nl": "Huidige lokale tijd wordt geladen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "aria-valuetext, not visible; as kc.clock.valuetext_live ('Huidige lokale tijd')"
   }
  ]
 }

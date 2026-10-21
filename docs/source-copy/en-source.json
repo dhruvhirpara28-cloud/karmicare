@@ -33,8 +33,8 @@
  "captured": "batches 01-03: 2026-10-19 19:15 CEST; batches 04-08: 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "batches": {
   "batch-01-homepage": {
-   "entries": 228,
-   "digest": "46f2753b65fd2c2e40789a16c4fb6c798b3bebbf"
+   "entries": 229,
+   "digest": "7694e7acce33a1e22a90de53273f2c90a8ddd70a"
   },
   "batch-02-pdp": {
    "entries": 477,
@@ -3829,6 +3829,19 @@
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
    "rendered": true
+  },
+  {
+   "id": "locale:kc.clock.loading",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.loading",
+   "en": "Loading current local time",
+   "sha1": "ef5fdb2b7c50d37d993eac56e40b58cee99885df",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "theme key kc.clock.loading: aria-valuetext of the clock before its script runs (sections/chronobiology-clock-karmicare.liquid:106; homepage and PDP); inventoried 21 Oct (release QA B-03/B-04)"
   },
   {
    "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_1",

@@ -56,6 +56,8 @@ The two former `[NEEDS APPROVED COPY]` answers are filled, so decision S1 on the
 
 The NL plan is now 1827 items, of which 523 are in the first wave.
 
+**Theme keys (21 Oct, release QA B-03/B-04).** `theme_keys.py` no longer holds a key for pending-claim-review or legal-review: Victor waived those holds for translation, and the reviews gate publication and registration instead. They stay on the entries, and `theme-keys.json` lists them per key in `nl_review` / `fr_review`. `locales/nl.json` now carries the NL for `kc.clock.window_1` (C54) and for `kc.clock.loading`. That key is inventoried as `locale:kc.clock.loading` (*Huidige lokale tijd wordt geladen*, theme-key). `locales/fr.json` carries the FR of 66f0c68 for the seven clock windows and the four footer legal keys. `write` now keeps the key order of each locale file, so the 29 other locales are unchanged.
+
 Counts below are current.
 
 ## What is here
@@ -132,14 +134,14 @@ A 301 redirect from each old handle to its replacement is the one-line decision 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 41 | 15 | 37 | 27 |
-| `batch-01-homepage` | 228 | `46f2753b65fd` | 142 | 2 | 30 | 0 | 29 | 2 | 23 | 19 |
+| `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 29 | 2 | 23 | 19 |
 | `batch-03-header-footer` | 41 | `e17cadb5e223` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 19 | 0 | 6 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 5 | 0 | 2 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 279 | 0 | 117 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2574** | | **284** | **618** | **75** | **621** | **374** | **62** | **540** | **63** |
+| **All** | **2575** | | **284** | **618** | **76** | **621** | **374** | **62** | **540** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
