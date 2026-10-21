@@ -96,16 +96,15 @@ Keys per area: clock 13, faq 1, footer 9, hero 4, pdp 3, plans 7, stat_strip 1, 
   - `TranslationInput` has the fields `key`, `locale` (must be in `shopLocales`), `value`, `translatableContentDigest` and an optional `marketId` ([input](https://shopify.dev/docs/api/admin-graphql/latest/input-objects/TranslationInput)).
   - "Each translation requires a digest value from the resource's translatable content."
 - **Metafields in 2026-10.**
-  - `translatableResources(resourceType: METAFIELD)` is deprecated. Read `Metafield.translatable` instead ([release notes](https://shopify.dev/changelog/release-notes/2026-10)).
-  - Register on the metafield GID, with the digest from `Metafield.compareDigest`.
+  - Corrected 21 Oct (review R18): the bundled 2026-10 Admin schema has no `Metafield.translatable` field, keeps `METAFIELD` as a non-deprecated `TranslatableResourceType`, and registration uses the digest from the metafield's own `translatableContent`. `register.py` therefore reads the product's metafield GIDs (`product { metafields { id namespace key } }`) and fetches them with `translatableResourcesByIds` (key `value`). This is a schema snapshot, not proof of live behaviour: the first read-only dry run confirms it.
   - Text types only: single/multi-line text, rich text, html ([changelog](https://shopify.dev/changelog/metafield-translations-now-available-via-graphql-admin-api)).
 - **Theme content.**
   - `ONLINE_STORE_THEME_JSON_TEMPLATE`, `…_SECTION_GROUP`, `…_LOCALE_CONTENT`, `…_SETTINGS_CATEGORY`, `…_SETTINGS_DATA_SECTIONS` and `…_APP_EMBED` have "dynamic keys based on theme data" ([enum](https://shopify.dev/docs/api/admin-graphql/latest/enums/TranslatableResourceType)).
   - Shopify treats the exact key format as an implementation detail. The plan therefore stores the section, block and setting ids plus the EN sha1, and matches the live key at run time.
 - **Scopes.**
   - The docs list `read_translations` (queries) and `write_translations` (mutation).
-  - The translations guide also lists `read_products` and `write_locales` ([guide](https://shopify.dev/docs/apps/build/markets/manage-translated-content)). `read_products` is needed to read product metafields and their `compareDigest`. `write_locales` is only for enabling or publishing a language, and NL and FR are already published.
-  - The docs name no extra scope for theme resources. The live theme's ID can be given as a parameter, so no `read_themes` is needed.
+  - The translations guide also lists `read_products` and `write_locales` ([guide](https://shopify.dev/docs/apps/build/markets/manage-translated-content)). `read_products` is needed to read the product's metafields. `write_locales` is only for enabling or publishing a language, and NL and FR are already published.
+  - The docs name no extra scope for theme resources. Corrected 21 Oct (R18): `translatableResources` has no theme-ID argument. `register.py` takes the published theme's ID as `--theme-id` and accepts a theme resource only if its GID names that theme and the template; otherwise theme content is not written.
 - **Locales.**
   - `shopLocaleEnable` and `shopLocaleUpdate(published:)`; at most 20 published locales on non-Plus plans ([requirements](https://help.shopify.com/en/manual/international/languages/requirements)).
   - Market-specific theme content is stored as a theme override, not a translation ([guide](https://shopify.dev/docs/apps/build/markets/manage-translated-content)).
@@ -114,15 +113,15 @@ Keys per area: clock 13, faq 1, footer 9, hero 4, pdp 3, plans 7, stat_strip 1, 
 
 | Inventory `resource_type` | Shopify type | Key | How the GID and digest are found at run time |
 |---|---|---|---|
-| `template_setting` | `ONLINE_STORE_THEME_JSON_TEMPLATE` | dynamic | the template resource of the live theme; key matched on section/block/setting ids and the EN sha1 |
+| `template_setting` | `ONLINE_STORE_THEME_JSON_TEMPLATE` | dynamic | the template resource whose GID proves the published theme (`--theme-id`); every section/block/setting id a token of the key, then the EN sha1 |
 | `section_group` | `ONLINE_STORE_THEME_SECTION_GROUP` | dynamic | as above, header and footer groups |
 | `theme_locale` | (`ONLINE_STORE_THEME_LOCALE_CONTENT`) | – | not registered: Part 1 keys and Dawn's own keys ship in `locales/*.json` |
 | `product` | `PRODUCT` | `title`, `body_html`, `meta_title`, `meta_description` | `translatableResources(PRODUCT)`, matched on the `handle` content |
 | `product` `media.<id>.alt` | `MEDIA_IMAGE` | `alt` | GID from the inventory id |
-| `metafield` | Metafield | `value` | owner's `metafields { id translatable compareDigest value }` |
-| `metaobject` | `METAOBJECT` | field keys | `translatableResources(METAOBJECT)`, matched on the EN value |
-| `app` selling plans | `SELLING_PLAN` / `SELLING_PLAN_GROUP` | `name`, `description`, `option1-3` | plan GID from the inventory id; groups matched on their EN name |
-| `navigation` | `LINK` (and `MENU`) | `title` | matched on the EN title |
+| `metafield` | `METAFIELD` | `value` | the product's metafield GIDs by namespace and key, then `translatableResourcesByIds` |
+| `metaobject` | `METAOBJECT` | field keys | metaobjects referenced by the product's metafield (nested references need `read_metaobjects`); one field with the EN sha1 |
+| `app` selling plans | `SELLING_PLAN` / `SELLING_PLAN_GROUP` | `name`, `description`, `option1-3` | not registered here: Loop translates them (PDP lane, 21 Oct) |
+| `navigation` | `LINK` (and `MENU`) | `title` | not registered yet: no verified menu → link owner route |
 | `page` | `PAGE` | `title`, `body_html`, `meta_*` | matched on `handle` |
 | `article`, `blog` | `ARTICLE`, `BLOG` | `title`, `body_html`, `summary_html`, `meta_*` | matched on `handle` |
 | `collection` | `COLLECTION` | `title`, `body_html`, `meta_*` | matched on `handle`; `/collections/all` is virtual (not registered) |
@@ -137,9 +136,9 @@ Split fields (`body_html#bNNN`, `body#bNNN`) are rebuilt at run time: each block
 - **Token.** A Dev Dashboard app installed on a store of the same organization exchanges its client ID and secret for an Admin token: `POST https://{shop}.myshopify.com/admin/oauth/access_token` with `grant_type=client_credentials`. The token lasts 24 h (`expires_in` 86399). Scopes come from the app version ([access tokens](https://shopify.dev/docs/apps/build/dev-dashboard/get-api-access-tokens)).
 - **Proposed setup, Victor only:**
   1. App "Karmicare translations" in Karmicare's organization, with scopes `read_translations`, `write_translations` and `read_products`; installed on `karmicares.myshopify.com`.
-  2. Victor stores the client secret in the macOS Keychain himself (`security add-generic-password -s karmicare-translations -a <client id> -w`, which prompts for the value).
-  3. At run time the runner reads it with `security find-generic-password -s karmicare-translations -w` inside its own process, fetches the 24 h token and keeps it in memory. It prints no secret or token and writes none to files, briefs, commits or transcripts.
-- **The online runner is not written.** It cannot be tested without a token, and no Admin call is allowed in B4. It is the next task once the access path is chosen; `DRY-RUN.md` gives its order of work.
+  2. Victor stores the client secret in the macOS Keychain in a Terminal of their own (`security add-generic-password -s karmicare-translations -a <client id> -w`, which prompts for the value).
+  3. At run time the runner reads it with `security find-generic-password -s karmicare-translations -w` inside its own process, fetches the 24 h token and keeps it in memory.
+- **Runner (21 Oct).** `docs/localization/registration/register.py`, reworked after review R18 (`docs/runtime-review/R18-REGISTER-ASTRA.md` on the landing branch): identity before EN, protected targets, whole JSON fields, an approval checksum over a snapshot that includes the current translations, a re-read before every mutation, a journal, and a scrubber on every output. `register_selftest.py` covers each finding offline. No live run yet: a read-only contract run comes after the re-review.
 
 ### Fallback: Translate & Adapt CSV ([help](https://help.shopify.com/en/manual/international/languages/csv-translations))
 
@@ -203,7 +202,7 @@ By resource, NL: `templates/index.json` 135, `templates/product.subscription-ite
 - content pages: batch 06 (NL 20, FR 17);
 - partial body fields: a field with a held block (NL 690, FR 688; most are legal and blog).
 
-**Fetched at run time.** GIDs; the theme template keys and digests; `compareDigest` for metafields; and the existing NL/FR translations, so the run lists every value it would overwrite before writing. The full counts and per-resource table are in `docs/localization/registration/DRY-RUN.md`.
+**Fetched at run time.** GIDs; the theme template keys and digests; the metafields' translatable content (key `value` and its digest, by GID); and the existing NL/FR translations, which are part of the approval snapshot, so the run shows every value it would overwrite and stops if one changes before writing. The full counts and per-resource table are in `docs/localization/registration/DRY-RUN.md`.
 
 ## Part 4 · URL and selector baseline (H10)
 
