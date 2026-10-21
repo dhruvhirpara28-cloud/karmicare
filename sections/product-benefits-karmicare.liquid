@@ -157,7 +157,8 @@
                 {%- endif -%}
                 <div class="heading-desc-wrap">
                   {%- if block.settings.heading != blank -%}
-                    <h5>{{ block.settings.heading }}</h5>
+                    {%- comment -%} h3 under the section's h2, styled as h5 {%- endcomment -%}
+                    <h3 class="h5">{{ block.settings.heading }}</h3>
                   {%- endif -%}
 
                   {%- if block.settings.text != blank -%}
