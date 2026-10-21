@@ -146,6 +146,17 @@
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__copy {
       display: inline;
     }
+    /* Pause: pointer over the line, or keyboard focus on it (the region is focusable while
+       it moves, as the stat strip; no pause button, Victor, 20 Oct). Tab moves on and the
+       line resumes. */
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee:hover .announcement-bar__message,
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee:focus-within .announcement-bar__message {
+      animation-play-state: paused;
+    }
+    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee:focus-visible {
+      outline: 2px solid var(--kc-mapped-border-focus-default);
+      outline-offset: -2px;
+    }
   }
   @keyframes kc-announcement-marquee-{{ section.id }} {
     from {
@@ -188,6 +199,7 @@
         class="announcement-bar announcement-bar--marquee{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
         aria-label="{{ 'sections.header.announcement' | t }}"
+        {% if section.blocks.first.settings.link == blank %}data-kc-marquee-focus{% endif %}
         {{ section.blocks.first.shopify_attributes }}
       >
         {%- if section.blocks.first.settings.text != blank -%}
@@ -211,6 +223,26 @@
           {%- endif -%}
         {%- endif -%}
       </div>
+      {%- comment -%}
+        A tab stop only while the line moves (below 1200px, no reduced motion), so keyboard focus
+        can pause it; a linked announcement pauses through its link instead
+      {%- endcomment -%}
+      <script>
+        (function () {
+          var bar = document.querySelector('#AnnouncementBar-{{ section.id }} [data-kc-marquee-focus]');
+          if (!bar || !window.matchMedia) return;
+          var moving = window.matchMedia('(max-width: 1199px) and (prefers-reduced-motion: no-preference)');
+          var sync = function () {
+            if (moving.matches) {
+              bar.setAttribute('tabindex', '0');
+            } else {
+              bar.removeAttribute('tabindex');
+            }
+          };
+          sync();
+          if (moving.addEventListener) moving.addEventListener('change', sync);
+        })();
+      </script>
     {%- elsif section.blocks.size > 1 -%}
       <slideshow-component
         class="announcement-bar"

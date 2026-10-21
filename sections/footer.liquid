@@ -146,14 +146,15 @@
   }
 
   /* Coming soon (snippets/kc-coming-soon.liquid): the tip starts at the link's left edge, as
-     the links do, so it stays inside the page gutter on phones. From 750px it sits beside the
-     link, so it doesn't cover the next one. */
+     the links do, so it stays inside the page gutter. From 1200px, where the menu column has
+     room for it, it sits beside the link, so it doesn't cover the next one; beside a long FR
+     label on a tablet it would widen the page, even while hidden (R15 F1). */
   .km-footer-links .kc-coming-soon .kc-coming-soon__tip {
     left: 0;
     transform: none;
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 1200px) {
     .km-footer-links .kc-coming-soon .kc-coming-soon__tip {
       top: 50%;
       left: calc(100% + var(--kc-responsive-spacing-layout-xs));
@@ -528,12 +529,14 @@
   }
 
   /* The payment methods switched on in Shopify, in the Figma footer's monochrome style
-     (light chip, grey mark, Day and Night alike; Victor, 21 Oct, G-5) */
+     (Victor, 21 Oct, G-5). Grayscale only: each identifying mark keeps at least 4.2:1 on
+     its own opaque chip, Day and Night alike (MobilePay lowest); softening it further drops
+     MobilePay below 3:1 (R15 F2). */
   .km-footer-payments svg {
     display: block;
     width: 38px;
     height: 24px;
-    filter: grayscale(1) contrast(0.6) brightness(1.25);
+    filter: grayscale(1);
   }
 
   @media screen and (min-width: 750px) {
