@@ -33,6 +33,20 @@ Task `task_f75b35ea2400`, dispatch `ctx_fc1123304bbe`, run `run_32dd5602b983`. B
 - Accepting the supported verdicts with their wording and removing or replacing the not-supportable claims releases **63 of 76 entries (1,286 words) per language**. The remaining 13 entries wait on documents: C60, C80, C81, C82, C90, C91, C93, C99.
 - The five changes that clear the most held text, and every row, are in `CLINICAL-REVIEW.md` §1.
 
+**Homepage FAQ update (21 Oct, integration `41ae772`).** The homepage lane rewrote the FAQ, so three CR1 rows are no longer on the homepage:
+- C13 and C93: the row `faq_item_qUxYCn` now asks about the money-back guarantee;
+- C23: the row `faq_item_AL3DKF` now holds the fluoride-free answer;
+- C24: the block `faq_item_4KMG6C` is removed, and its entries are retired.
+
+The CR1 rewordings for C13, C23 and C24 therefore no longer change homepage text. C24's onboarding line and C93's admin FAQ fields remain. Two new claims, which CR1 has not reviewed, sit in disabled FAQ blocks: C101 (fluoride and nHAp compete for the enamel surface) and C102 (fluoride's benefits do not outweigh its drawbacks, close to don't #13).
+
+The NL claim hold for batches 01–03 is now 75 entries:
+- 61 that the K-decisions release;
+- 12 that wait on documents;
+- 2 waiting on a verdict for C101 and C102.
+
+FR follows once it re-translates the changed entries.
+
 ## 4. Method
 
 - **Verdicts.** *Supported as worded*: cosmetic scope, library evidence, allowed verbs. *Supported if reworded*: a rewording within the evidence exists, and it is given. *Needs a source we do not have*: a named kind of study or document would settle it. *Not supportable*: disease or medical framing, a nootropic or sleep effect, a systemic effect of a cosmetic, a felt outcome or timeline without data, or a claim the evidence contradicts.

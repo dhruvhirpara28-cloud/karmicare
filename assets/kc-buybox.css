@@ -187,6 +187,8 @@
 /* Loop dashboard: margin 10px 0 15px !important on the fieldset */
 .kc-buybox .loop-selling-plan-fieldset {
   margin: 0 !important;
+  /* Comparison table "Begin now" jumps here (#loop-selling-plan-fieldset): clear of the floating header */
+  scroll-margin-top: calc(var(--header-height, 0px) + var(--kc-responsive-spacing-layout-comfortable));
 }
 
 /* "Start here ——— Choose how to begin". Loop dashboard sets
@@ -228,7 +230,12 @@
   box-shadow: var(--kc-elevation-xs);
 }
 
+/* Selected card: Figma surface/primary/default (Victor, 20 Oct). Read as
+   --kc-mapped-surface-page, the same Day | Night value (#fffbf6 | #191f38);
+   --kc-mapped-surface-primary-default is held at its old value for the Loop
+   widget (P2, docs/utopia/generate.py) and is navy in Day too. */
 .kc-buybox .loop-subscription-group:has(.loop-subscription-group-radio:checked) {
+  background: var(--kc-mapped-surface-page);
   border-color: var(--kc-mapped-border-focus-default);
   box-shadow: var(--kc-elevation-lg);
 }
