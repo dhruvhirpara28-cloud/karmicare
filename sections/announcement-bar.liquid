@@ -50,8 +50,10 @@
     }
   {%- endif -%}
 
-  /* Figma: 28px bar (8px above a 12px line, the hairline closes it) */
-  @media screen and (min-width: 990px) {
+  /* Figma: 28px bar (8px above a 12px line, the hairline closes it). From 1200px, where the
+     line fits (about 1000px since the member offer, Victor, 21 Oct); below that the marquee
+     rule takes over, so tablets get one line too */
+  @media screen and (min-width: 1200px) {
     #AnnouncementBar-{{ section.id }} .announcement-bar__message {
       padding: 0.8rem 0 0.7rem;
       min-height: 0;
@@ -113,8 +115,9 @@
   /* Mobile: 30px bar, no hairline (Figma 2766:10306). The line starts at the page gutter and
      scrolls left; two copies with equal trailing space make the loop seamless at -50%.
      Type 10/14 as in Figma, under the 12px block setting; no token has that size. The loop
-     takes 20s, half the earlier speed (Victor, 18 Oct). */
-  @media screen and (max-width: 749px) {
+     takes 20s, half the earlier speed (Victor, 18 Oct). Up to 1199px: tablets and small
+     laptops can't fit the line either. */
+  @media screen and (max-width: 1199px) {
     #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
       border-bottom: none;
     }
@@ -153,7 +156,7 @@
     }
   }
   /* Reduced motion: the line stands still and wraps, centred */
-  @media screen and (max-width: 749px) and (prefers-reduced-motion: reduce) {
+  @media screen and (max-width: 1199px) and (prefers-reduced-motion: reduce) {
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee {
       padding-right: var(--kc-responsive-spacing-page-gutter);
       text-align: center;
