@@ -8,12 +8,15 @@ values. Run from the repo root:
   python3 docs/localization/theme_keys.py check [--fr-dir DIR] [--area A ...]
   python3 docs/localization/theme_keys.py write [--area A ...]     the kc block of every storefront locale
 
-Values: en.default.json gets en. nl.json and fr.json get their language unless *_hold is set
-(pending-claim-review, legal-review, no reviewed value), then en. Every other storefront locale gets
-en, so Theme Check MatchingTranslations finds the same keys everywhere.
+Values: en.default.json gets en. nl.json and fr.json get their language unless *_hold is set (no
+translated value, or an entry status that is not theme-key), then en. pending-claim-review and
+legal-review do not hold a key (Victor, 20 Oct: translate everything; the reviews gate publication
+and registration): they are listed in *_review as the record of the open review. Every other
+storefront locale gets en, so Theme Check MatchingTranslations finds the same keys everywhere.
 
-write merges into the existing "kc" object (other kc keys, such as kc.general.coming_soon, stay) and
-leaves the rest of each file as it is. FR payloads live in docs/localization/fr; until that folder is
+write merges into the existing "kc" object in its current key order (other kc keys, such as
+kc.general.coming_soon and kc.receipt, stay where they are; new keys go at the end of their area)
+and leaves the rest of each file as it is. FR payloads live in docs/localization/fr; until that folder is
 on this branch, pass --fr-dir (refresh and check skip FR without it).
 """
 import argparse
@@ -40,27 +43,27 @@ def load_payload(folder):
 
 
 def resolve(payload, ids, lang, src):
-    """The one value the ids share in this language, and what holds it back (None: it can ship)."""
-    values, holds = set(), []
+    """The one value the ids share in this language, what holds it back (None: it can ship), and the
+    open reviews that do not hold it (None: none)."""
+    values, holds, reviews = set(), [], []
     for i in ids:
         entry = payload.get(i)
         if not entry or not entry.get(lang):
             holds.append("no %s value for %s" % (lang.upper(), i))
             continue
         values.add(entry[lang])
-        gates = [g for g in GATES if entry.get("status") == g or g in (entry.get("flags") or [])]
         if entry.get("status") not in ("theme-key",) + GATES:
-            gates.append("status " + str(entry.get("status")))
-        for gate in gates:
-            claims = src.get(i, {}).get("claims") or []
-            if claims and gate == "pending-claim-review":
-                gate += " (" + ", ".join(claims) + ")"
-            holds.append(gate)
+            holds.append("status " + str(entry.get("status")))
+        for gate in GATES:
+            if entry.get("status") == gate or gate in (entry.get("flags") or []):
+                claims = src.get(i, {}).get("claims") or []
+                reviews.append(gate + (" (" + ", ".join(claims) + ")" if claims and gate == "pending-claim-review" else ""))
     if not ids:
         holds.append("not in the B1a inventory [NEEDS APPROVED COPY]")
     if len(values) > 1:
         sys.exit("%s ids disagree on %s: %s" % (lang, ids, sorted(values)))
-    return (values.pop() if values else None), ("; ".join(sorted(set(holds))) or None)
+    return ((values.pop() if values else None), ("; ".join(sorted(set(holds))) or None),
+            ("; ".join(sorted(set(reviews))) or None))
 
 
 def refreshed(doc, fr_dir):
@@ -77,7 +80,7 @@ def refreshed(doc, fr_dir):
         if ens:
             row["en"] = ens.pop()
         for lang, payload in payloads.items():
-            row[lang], row[lang + "_hold"] = resolve(payload, row["ids"], lang, src)
+            row[lang], row[lang + "_hold"], row[lang + "_review"] = resolve(payload, row["ids"], lang, src)
         rows.append(row)
     return dict(doc, keys=rows)
 
@@ -121,7 +124,7 @@ def write_locale(path, rows):
     header, body = split_locale(text)
     data = json.loads(body)
     kc = expected_kc(rows, lang_of(path), data.get("kc", {}))
-    dumped = json.dumps(kc, ensure_ascii=False, indent=2, sort_keys=True).split("\n")
+    dumped = json.dumps(kc, ensure_ascii=False, indent=2).split("\n")
     block = ['  "kc": ' + dumped[0]] + ["  " + line for line in dumped[1:]]
     lines = body.split("\n")
     if "kc" in data:
@@ -158,7 +161,7 @@ def check(doc, fr_dir, rows):
     problems = []
     fresh = {r["key"]: r for r in refreshed(doc, fr_dir)["keys"]}
     langs = ["en", "nl"] + (["fr"] if fr_dir else [])
-    fields = [f for lang in langs for f in ((lang, lang + "_hold") if lang != "en" else ("en",))]
+    fields = [f for lang in langs for f in ((lang, lang + "_hold", lang + "_review") if lang != "en" else ("en",))]
     for row in rows:
         for field in fields:
             if fresh[row["key"]].get(field) != row.get(field):

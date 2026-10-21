@@ -2,14 +2,14 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "46f2753b65fd2c2e40789a16c4fb6c798b3bebbf",
- "source_entries": 228,
+ "source_digest": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
+ "source_entries": 229,
  "counts": {
   "translated": 142,
-  "held": 23,
-  "pending-claim-review": 29,
+  "held": 21,
+  "pending-claim-review": 31,
   "dawn-nl": 2,
-  "theme-key": 30,
+  "theme-key": 31,
   "admin": 2
  },
  "fit_risk": [
@@ -868,10 +868,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.heading",
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C35)"
+   "nl": "Stralend, rustig tandvlees",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
@@ -880,10 +882,12 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
    "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
    "en_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
-   "nl": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim (C35)"
+   "nl": "<p>Geen SLS. Je tandvlees komt tot rust, wordt rozer en ziet er stralend uit.</p>",
+   "status": "pending-claim-review",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35); 'settle' → 'komt tot rust', as 'tandvlees tot rust brengen' in the section text"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
@@ -1218,10 +1222,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "nl": null,
+   "nl": "",
    "status": "held",
    "flags": [],
-   "notes": "unsupported-claim (C85)"
+   "notes": "held: practitioner quote stays in her own EN words (landing desk 20 Oct, msg_67b031a3a2dc: 'the Sietske quote stays as it is'); the claim waiver covers claims, not a person's quote; an NL version needs her own wording or approval. NL draft in commit 986c1d9"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -2936,6 +2940,20 @@
    "status": "translated",
    "flags": [],
    "notes": "new 21 Oct (41ae772)"
+  },
+  {
+   "id": "locale:kc.clock.loading",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.loading",
+   "en": "Loading current local time",
+   "en_sha1": "ef5fdb2b7c50d37d993eac56e40b58cee99885df",
+   "nl": "Huidige lokale tijd wordt geladen",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "aria-valuetext, not visible; as kc.clock.valuetext_live ('Huidige lokale tijd')"
   }
  ]
 }

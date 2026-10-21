@@ -39,8 +39,16 @@ def drop_flag(r, flag):
 
 
 def h1(src, nl):
+    """An unsupported claim translated without Victor's waiver in the source."""
     e, r = first(src, nl, lambda e, r: e.get("claim_status") == "unsupported")
+    e.pop("claim_hold_waived", None)
     unhold(r, "X", [])
+
+
+def h1_waived(src, nl):
+    """A waived unsupported claim translated without the pending-claim-review flag."""
+    e, r = first(src, nl, lambda e, r: e.get("claim_hold_waived") and r["status"] != "held")
+    drop_flag(r, "pending-claim-review")
 
 
 def h2(src, nl):
@@ -128,7 +136,8 @@ def w1_url(src, nl):
 
 CASES = [
     ("control: unchanged copy", None, 0, None),
-    ("H1 unsupported claim translated", h1, 1, "H1 "),
+    ("H1 unsupported claim translated", h1, 1, "H1 unsupported claim not held"),
+    ("H1 waived claim without the flag", h1_waived, 1, "H1 waived unsupported claim"),
     ("H2 needs-review claim without the flag", h2, 1, "H2 "),
     ("H3 legal entry without legal-review", h3, 1, "H3 "),
     ("H4 legacy legal page translated", h4, 1, "H4 "),

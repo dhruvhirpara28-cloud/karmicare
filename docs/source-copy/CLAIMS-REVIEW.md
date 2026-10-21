@@ -8,6 +8,8 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 
 `regulatory.md` requires the Clinical Research sign-off for **all** health claims before publication, `approved` ones included; `approved` here means only that the wording is inside the rules. The `Where` column lists every inventory entry that carries the claim (its `claims` field), on both templates; a row quotes each wording it covers. An entry keeps `corrected`, `needs-key` or `admin-held` where that describes its provenance; an uncorrected template entry with a needs-review or unsupported claim is `needs-review`.
 
+**Translation waiver (20 Oct, Victor).** Every entry with an `unsupported` claim, in batches 01–03 and 05–07 (119 entries), carries `claim_hold_waived: "2026-10-20 Victor, translation only"` in `en-source.json`. NL and FR translate them faithfully and flag them `pending-claim-review`. The statuses below are unchanged, and they still decide what may be published.
+
 | Status | Claims |
 |---|---:|
 | approved | 17 |
