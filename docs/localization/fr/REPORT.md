@@ -255,11 +255,11 @@ The homepage lane rewrote part of the homepage (integration `41ae772`, merchant-
 
 - **Waiver from the source:** en-source now marks the 119 waived entries with `claim_hold_waived: "2026-10-20 Victor, translation only"`. `check.py` releases an unsupported-claim hold only when the source has that field and the FR entry carries `pending-claim-review` and the waiver note. A waiver note on an entry the source did not waive is an error.
 - **Sietske Hamelink's quote, held again:** the C84/C85 quote is `card_CtQgU9/hover_text`, on the homepage and on the PDP. It is a person's own words. The waiver covers claims, not a quote, and a French version needs her own wording or her approval. NL holds it for the same reason (landing desk, `msg_a6d24f8ca48c`). The FR draft from `3ec7a5e` stays in the notes. 117 of the 119 waived entries now carry FR.
-- **`locale:kc.clock.loading`:** the source inventoried this key (B-03), and FR gives it "Chargement de l’heure locale actuelle". `kc.*` keys ship through `theme_keys.py`, so `check.py` expects `theme-key` for them, not `locale-present`, as NL does. The source owner's `theme_keys.py refresh --fr-dir` and `write` put the key into `locales/fr.json`. FR does not edit that file, so each key has one writer. `theme_keys.py check --fr-dir docs/localization/fr` reports only this key until that happens.
+- **`locale:kc.clock.loading`:** the source inventoried this key (B-03), and FR gives it "Chargement de l’heure locale actuelle". `kc.*` keys ship through `theme_keys.py`, so `check.py` expects `theme-key` for them, not `locale-present`, as NL does. The source owner's `theme_keys.py refresh --fr-dir` and `write` put the key into `locales/fr.json`. FR does not edit that file, so each key has one writer. Source-copy `61efa65` did that, merged into FR at `24adf44`, and `theme_keys.py check --fr-dir docs/localization/fr` now reports 63 keys ok.
 - **B-03:** the source owner's `c348c72` regenerated `locales/fr.json`, and `kc.clock.window_1..7` and the four footer keys are now French there.
 - **Self-test:** two new mutations, "waiver note without the source field" and "kc.* key as locale-present", bring it to 20/20.
 
-The source note on `qUxYCn/answer` still names claims C13 and C93. Those belonged to the old answer, and the entry has no `claims` field, so FR sets no claim flag there.
+The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there. The C13 and C93 claims belonged to the old answer, and source-copy `647df5f` removed them from the source note. The FR note follows.
 
 ## Counts
 
