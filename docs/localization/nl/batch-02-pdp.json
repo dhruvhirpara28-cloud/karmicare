@@ -7,9 +7,9 @@
  "counts": {
   "pending-claim-review": 41,
   "translated": 119,
-  "held": 37,
+  "held": 38,
   "dawn-nl": 15,
-  "theme-key": 35,
+  "theme-key": 34,
   "admin": 230
  },
  "fit_risk": [
@@ -2570,12 +2570,10 @@
    "key_path": "sections/main-product.liquid:1104",
    "en": "Free",
    "en_sha1": "75f527181b574f84568f33f67adc3b267a6fef9c",
-   "nl": "Gratis",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup; was theme-key: Gratis"
   },
   {
    "id": "liquid:sections/product-compare-plans.liquid:39",

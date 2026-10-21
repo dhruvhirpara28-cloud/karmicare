@@ -762,21 +762,6 @@
    "fr_review": null
   },
   {
-   "key": "kc.sticky_cart.kit_free_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:1104"
-   ],
-   "en": "Free",
-   "nl": "Gratis",
-   "nl_hold": null,
-   "fr": "Gratuit",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting kit_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
    "key": "kc.sticky_cart.kit_html",
    "area": "sticky_cart",
    "ids": [
@@ -956,5 +941,8 @@
    "nl_review": null,
    "fr_review": null
   }
- ]
+ ],
+ "retired_keys": {
+  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)"
+ }
 }

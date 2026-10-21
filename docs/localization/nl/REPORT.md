@@ -62,6 +62,8 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 - The announcement EN is now *COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017* (`3c03acb`, `corrected`, batch 03 digest `a853d438d503`). The NL is *GRATIS VERZENDING & 60 DAGEN GELD TERUG VOOR LEDEN · GEMAAKT IN BELGIË · CIRCADIAANSE MONDVERZORGING SINDS 2017*, `pending-claim-review` (C103: the date has no source in the repo). *Voor leden* solves the offer conflict the old line had.
 - The newsletter placeholder `kc.footer.email_placeholder` is *jij@voorbeeld.be* (NL) and *vous@exemple.be* (FR), as in `4954820`. `theme-keys.json` records both under `decided`, and `theme_keys.py refresh` keeps a decided value whatever the payload says, so `write` no longer returns to *you@example.com*.
 
+**Sticky-bar key retired (21 Oct, global-nav `27691cb`, NV-13).** The desktop sticky bar becomes the mobile card, and the setting `kit_free` and its markup are gone. `kc.sticky_cart.kit_free_html` (*Gratis*) leaves `theme-keys.json` and all 31 locales. `theme-keys.json` lists it under `retired_keys`: `write` removes a retired key and `check` fails while one is still in a locale. The entry `liquid:sections/main-product.liquid:1104` is `retired` in the source and held here. Until global-nav lands, `snippets/sticky-cart-block.liquid:70` on this branch still reads the key, so Theme Check on this branch alone reports one `TranslationKeyExists` error. On `27691cb` with these locales it reports 0 errors.
+
 **Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
 - The 119 entries held on an unsupported claim now carry `claim_hold_waived: "2026-10-20 Victor, translation only"` in the EN source. The EN is unchanged.
 - In NL they are translated faithfully and flagged `pending-claim-review`. Each note starts with *claim hold waived by Victor 20 Oct for translation; claims review still pending for publication*.
@@ -69,7 +71,7 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 - `validate.py` H1 accepts a translated unsupported claim only with the waiver in the source and the `pending-claim-review` flag. Two self-test cases prove both.
 - The brand rules still apply: *formule* after the first *tandpasta*, no commodity words, *je*. The notes list each change.
 
-NL now covers 2,152 of the 2,155 translatable entries (99.86 %). Not translatable are 53 never-translate, 350 legacy legal, 8 retired and 9 empty entries. Three translatable entries stay held:
+NL now covers 2,151 of the 2,154 translatable entries (99.86 %). Not translatable are 53 never-translate, 350 legacy legal, 9 retired and 9 empty entries. Three translatable entries stay held:
 - **Sietske Hamelink's quote** (C85, homepage and PDP). The landing desk wrote that "the Sietske quote stays as it is" (msg_67b031a3a2dc), because they are her own words: an NL version needs her wording or her approval. The waiver covers claims, not a person's quote. The NL draft is in commit `986c1d9`; FR translated the quote in `3ec7a5e`.
 - **The SLS article block `#b035`.** It names four competitors, which is a brand rule, not a claim, and the FR lane holds it too. It waits for Victor or for a compliant EN.
 
@@ -149,7 +151,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 35 | 0 | 41 | 15 | 37 | 27 |
+| `batch-02-pdp` | 477 | `2846c75e4df9` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 229 | `7694e7acce33` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `a853d438d503` | 4 | 11 | 10 | 0 | 2 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
@@ -157,7 +159,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
 | `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 386 | 0 | 10 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
-| **All** | **2575** | | **283** | **618** | **76** | **621** | **492** | **62** | **423** | **63** |
+| **All** | **2575** | | **283** | **618** | **75** | **621** | **492** | **62** | **424** | **63** |
 
 A status names the strongest flag; `flags` in each entry lists all of them (an `admin` entry can also be `pending-claim-review` and `fit-risk`).
 
@@ -173,6 +175,7 @@ A status names the strongest flag; `flags` in each entry lists all of them (an `
 | `batch-02-pdp` | practitioner quote in her own words (C85, desk 20 Oct) | 1 |
 | `batch-02-pdp` | retired (Duo name is the product title) | 2 |
 | `batch-02-pdp` | retired (step numbers emptied in a disabled section, 21 Oct) | 2 |
+| `batch-02-pdp` | retired (sticky-bar setting `kit_free` removed, NV-13, 21 Oct) | 1 |
 | `batch-03-header-footer` | never-translate | 3 |
 | `batch-03-header-footer` | never-translate; existing Dawn locale value remains unchanged | 2 |
 | `batch-04-legal` | legacy page, redirects to the 2.0 page (F5, Victor) | 350 |
