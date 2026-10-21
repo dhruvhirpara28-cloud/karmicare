@@ -49,6 +49,7 @@ import hashlib
 import json
 import os
 import re
+import shlex
 import subprocess
 import sys
 import time
@@ -421,9 +422,10 @@ def theme_proof(admin, theme_id, attested):
         if main != str(theme_id):
             raise RunnerError("--theme-id %s is not the published theme (Shopify reports %s)." % (theme_id, main))
         return "read: themes(roles: MAIN)"
-    if not attested or not attested.startswith(time.strftime("%Y-%m-%d")):
+    today = time.strftime("%Y-%m-%d")
+    if not attested or not re.match(r"^%s \S.*$" % today, attested):
         raise RunnerError("The token cannot read themes: confirm the published theme yourself and pass "
-                          "--theme-attested \"%s <name>\" (today's date)." % time.strftime("%Y-%m-%d"))
+                          "--theme-attested '%s <your name>' (today's date, a space, a name)." % today)
     return "operator: " + attested
 
 
@@ -553,21 +555,26 @@ def set_path(tree, path, value):
 
 
 def translate_json(value, by_en):
-    """The translated JSON text, or (None, blockers). by_en: EN -> list of plan items (any status).
+    """(translated JSON text, [], applied EN texts), or (None, blockers, set()). by_en: EN -> plan items (any status).
 
-    Order per leaf: an explicitly held or gated plan item vetoes the whole field, whatever the leaf's key;
-    then structural leaves stay; then the Subscription Name values stay; then the one approved translation
-    replaces the leaf; a leaf with no item that is not a URL, GID or number blocks the field."""
+    Order per leaf: an explicitly held or gated plan item vetoes the whole field, whatever the leaf's key; so do
+    plan items that propose different values for it; then structural leaves and the Subscription Name values
+    stay as they are (their plan items are not applied); then the one approved translation replaces the leaf;
+    a leaf with no item that is not a URL, GID or number blocks the field."""
     try:
         tree = json.loads(value)
     except ValueError:
-        return None, ["the live value is not valid JSON"]
-    blockers, mapped = [], 0
+        return None, ["the live value is not valid JSON"], set()
+    blockers, applied = [], set()
     new = json.loads(value)
     for path, text, parent, holder in leaves(tree):
         items = by_en.get(text, [])
         if any(i["hold"] or i["gates"] for i in items):
             blockers.append("held segment: %r (%s)" % (text, "; ".join(sorted(set(h for i in items for h in i["hold"] + i["gates"])))))
+            continue
+        values = set(i["value"] for i in items)
+        if len(values) > 1:
+            blockers.append("conflicting translations for %r: %s" % (text, sorted(values)))
             continue
         if structural(parent, holder) or text.strip() in NEVER_VALUES:
             continue
@@ -575,20 +582,16 @@ def translate_json(value, by_en):
             if not STRUCTURAL_VALUE.match(text):
                 blockers.append("text with no plan item: %r" % text)
             continue
-        values = set(i["value"] for i in items)
-        if len(values) > 1:
-            blockers.append("conflicting translations for %r: %s" % (text, sorted(values)))
-            continue
         new = set_path(new, path, values.pop())
-        mapped += 1
+        applied.add(text)
     if blockers:
-        return None, blockers
-    if not mapped:
-        return None, ["no text leaf maps to a plan item"]
+        return None, blockers, set()
+    if not applied:
+        return None, ["no text leaf maps to a plan item"], set()
     compact = ": " not in value and ", " not in value
     out = json.dumps(new, ensure_ascii=False, separators=(",", ":") if compact else None)
     json.loads(out)
-    return out, []
+    return out, [], applied
 
 
 def structure_changes(en_value, current_value):
@@ -677,7 +680,7 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None):
                             continue
                         if not (content["value"][:1] in "[{" or (content.get("type") or "").upper() == "JSON"):
                             continue
-                        new, blockers = translate_json(content["value"], by_en)
+                        new, blockers, applied = translate_json(content["value"], by_en)
                         try:
                             texts = set(leaf[1] for leaf in leaves(json.loads(content["value"])))
                         except ValueError:
@@ -691,8 +694,12 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None):
                             used.update(i["id"] for i in in_field)
                             continue
                         cur = current(node, content["key"])
-                        want(node, content, [i["id"] for i in in_field if i in wave], new, "JSON field, every text leaf mapped",
+                        want(node, content, [i["id"] for i in in_field if i in wave and i["en"] in applied], new,
+                             "JSON field, every text leaf mapped",
                              structure_changes(content["value"], cur["value"]) if cur["present"] else [])
+                        for i in in_field:
+                            if i in wave and i["en"] not in applied:
+                                row(i, res, "not written", "its text is a structural value in this field and stays as the EN", node, content)
                         used.update(i["id"] for i in in_field)
                 for i in wave:
                     if i["field"].startswith(family) and i["id"] not in used:
@@ -889,6 +896,22 @@ def contract(live, admin):
     return lines + [""]
 
 
+def write_argv(locale, theme_id, attested, remove_never, check):
+    argv = ["--lang", locale]
+    if theme_id:
+        argv += ["--theme-id", str(theme_id)]
+    if attested:
+        argv += ["--theme-attested", attested]
+    if remove_never:
+        argv.append("--remove-never")
+    return argv + ["--write", "--approve", check]
+
+
+def write_command(locale, theme_id, attested, remove_never, check):
+    """The write command, each argument shell-quoted, so copying it passes exactly the same options."""
+    return shlex.join(["python3", "docs/localization/registration/register.py"] + write_argv(locale, theme_id, attested, remove_never, check))
+
+
 def report(locale, theme_id, theme_proof_text, attested, remove_never, ops, removals, rows, check, notes, proposals=None, contract_lines=()):
     counts = {}
     for r in rows:
@@ -903,9 +926,7 @@ def report(locale, theme_id, theme_proof_text, attested, remove_never, ops, remo
         len(regs), sum(o["action"] == "remove" for o in ops),
         "" if remove_never or not removals else " (%d removals proposed, not approved: rerun with --remove-never)" % len(removals), check), "",
         "To write exactly this (an operator attestation must carry the date of the write):", "", "```sh",
-        "python3 docs/localization/registration/register.py --lang %s%s%s%s --write --approve %s" % (
-            locale, " --theme-id %s" % theme_id if theme_id else "", " --theme-attested \"%s\"" % attested if attested else "",
-            " --remove-never" if remove_never else "", check), "```", ""]
+        write_command(locale, theme_id, attested, remove_never, check), "```", ""]
     for note in sorted(set(notes)):
         lines += ["> %s" % note, ""]
     lines += ["## Mutations (%d)" % len(ops), ""]
@@ -1019,12 +1040,15 @@ def confirmation(state, data, action, keys, locale):
     if not isinstance(payload, dict) or not isinstance(payload.get("translations"), list) or not isinstance(payload.get("userErrors"), list):
         return "unknown", [], [{"code": None, "field": None, "message": "the mutation returned no %s payload" % action}]
     errors = safe_errors(payload["userErrors"])
-    done = sorted(t.get("key") for t in payload["translations"] if isinstance(t, dict) and t.get("locale") in (None, locale)
-                  and isinstance(t.get("key"), str))
+    entries = payload["translations"]
+    valid = all(isinstance(t, dict) and isinstance(t.get("key"), str) and t.get("locale") == locale for t in entries)
+    done = sorted(t["key"] for t in entries if isinstance(t, dict) and isinstance(t.get("key"), str)) if valid else []
     if errors:
         return "rejected", done, errors
-    if done != sorted(keys):
-        return "unknown", done, [{"code": None, "field": None, "message": "confirmed keys differ from the requested keys"}]
+    if not valid:
+        return "unknown", [], [{"code": None, "field": None, "message": "a returned entry lacks a string key or the exact locale %s" % locale}]
+    if done != sorted(keys) or len(set(done)) != len(done):
+        return "unknown", done, [{"code": None, "field": None, "message": "returned keys are not exactly the requested keys, once each"}]
     return "confirmed", done, []
 
 

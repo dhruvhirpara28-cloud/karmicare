@@ -119,7 +119,7 @@ Keys per area: clock 13, faq 1, footer 9, hero 4, pdp 3, plans 7, stat_strip 1, 
 | `product` | `PRODUCT` | `title`, `body_html`, `meta_title`, `meta_description` | `translatableResources(PRODUCT)`, matched on the `handle` content |
 | `product` `media.<id>.alt` | `MEDIA_IMAGE` | `alt` | GID from the inventory id |
 | `metafield` | `METAFIELD` | `value` | the product's metafield GIDs by namespace and key, then `translatableResourcesByIds` |
-| `metaobject` | `METAOBJECT` | field keys | metaobjects referenced by the product's metafield (nested references need `read_metaobjects`); one field with the EN sha1 |
+| `metaobject` | `METAOBJECT` | field keys | metaobjects referenced by the product's metafield (nested references need `read_metaobjects`); only the field the inventory names or a reviewed binding in `registration/bindings.json` binds (the dry run proposes them), then the EN sha1 |
 | `app` selling plans | `SELLING_PLAN` / `SELLING_PLAN_GROUP` | `name`, `description`, `option1-3` | not registered here: Loop translates them (PDP lane, 21 Oct) |
 | `navigation` | `LINK` (and `MENU`) | `title` | not registered yet: no verified menu → link owner route |
 | `page` | `PAGE` | `title`, `body_html`, `meta_*` | matched on `handle` |

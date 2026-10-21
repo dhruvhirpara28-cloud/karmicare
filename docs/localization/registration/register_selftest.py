@@ -12,7 +12,11 @@ error path, F8 full values and target identity in the report, F9 a journal that 
 F10 null content skipped; and per R18b finding: A a resource the re-read omits fails, B metaobject fields only
 through a reviewed binding, C a numeric, proven-published theme (read or same-day attestation) with the exact
 GID parameter, D held leaves veto before structural keys and structural differences are shown, N1 a null or
-incomplete mutation payload is unknown, N2 scalar and array JSON roots. Credentials are synthetic sentinels.
+incomplete mutation payload is unknown, N2 scalar and array JSON roots; and per R18c finding: 1 conflicting
+items on a structural leaf veto the field and a lone structural item is not counted as applied, 2 receipts
+with a missing, null or wrong locale, an extra or a duplicate entry are unknown (register and remove), 3 the
+generated write command round-trips through a shell and an attestation needs a name. Credentials are
+synthetic sentinels.
 """
 import contextlib
 import copy
@@ -447,6 +451,77 @@ def main():
             check("R18b-N1 %s payload: unknown, stops after one call, no end record" % mode,
                   code == 2 and len(fake.mutations) == 1 and journal[-1]["event"] == "result" and journal[-1]["state"] == "unknown"
                   and not any(j["event"] == "end" for j in journal), (code, len(fake.mutations), journal[-1]))
+
+        # R18c-2: every returned entry needs a string key and exactly the requested locale, once, nothing extra
+        class Receipt(Fake):
+            def __init__(self, store, action, mode):
+                super().__init__(store)
+                self.action, self.mode = action, mode
+
+            def post(self, path, body, headers):
+                q = body.get("query", "")
+                name = "translationsRegister" if self.action == "register" else "translationsRemove"
+                if name in q:
+                    v = body["variables"]
+                    keys = [t["key"] for t in v["translations"]] if self.action == "register" else v["keys"]
+                    self.mutations.append((self.action, v["id"], keys))
+                    entries = [{"key": k, "locale": "nl"} for k in keys]
+                    if self.mode == "no locale":
+                        entries = [{"key": k} for k in keys]
+                    elif self.mode == "null locale":
+                        entries = [{"key": k, "locale": None} for k in keys]
+                    elif self.mode == "extra entry":
+                        entries.append({"key": "unrequested", "locale": "fr"})
+                    elif self.mode == "duplicate":
+                        entries.append(dict(entries[0]))
+                    return 200, {"data": {name: {"translations": entries, "userErrors": []}}}, None
+                return super().post(path, body, headers)
+        for action, check_sum, extra in (("register", d["checksum"], []), ("remove", d4["checksum"], ["--remove-never"])):
+            for mode in ("no locale", "null locale", "extra entry", "duplicate"):
+                os.remove(os.path.join(folder, "journal-nl.jsonl")) if os.path.exists(os.path.join(folder, "journal-nl.jsonl")) else None
+                fake = Receipt(base_store(), action, mode)
+                code, text = run(["--lang", "nl", "--theme-id", THEME] + extra + ["--write", "--approve", check_sum], fake, folder)
+                journal = [json.loads(l) for l in open(os.path.join(folder, "journal-nl.jsonl"), encoding="utf-8")]
+                bad = [m for m in fake.mutations if m[0] == action]
+                check("R18c-2 %s receipt with %s: unknown, stop, no end record" % (action, mode),
+                      code == 2 and len(bad) == 1 and journal[-1]["state"] == "unknown" and not any(j["event"] == "end" for j in journal),
+                      (code, len(bad), journal[-1]))
+        check("R18c-2 confirmation() rejects an extra null entry",
+              register.confirmation("confirmed", {"translationsRegister": {"translations": [{"key": "a", "locale": "nl"}, None], "userErrors": []}},
+                                    "register", ["a"], "nl")[0] == "unknown")
+
+        # R18c-1: plan items that disagree on a structural leaf veto the field; a lone one is not counted as applied
+        p1 = base_plan()
+        meta = next(r for r in p1["resources"] if r["shopify_type"] == "METAFIELD")
+        meta["items"] += [item("u1", "https://karmicare.com/a", "https://karmicare.com/nl/a", key="value", field="custom.treatment_journey_*#05"),
+                          item("u2", "https://karmicare.com/a", "https://karmicare.com/nl/b", key="value", field="custom.treatment_journey_*#06")]
+        run(["--lang", "nl", "--theme-id", THEME], Fake(base_store()), folder, p1)
+        d5 = json.load(open(os.path.join(folder, "dry-run-nl.json"), encoding="utf-8"))
+        r5 = {r["id"]: r for r in d5["rows"]}
+        check("R18c-1 conflicting items on a structural URL keep the field whole",
+              not any(o["resource"] == "gid://shopify/Metafield/9" for o in d5["ops"]) and "conflicting" in r5["j1"].get("why", ""), r5.get("j1"))
+        p2 = base_plan()
+        meta = next(r for r in p2["resources"] if r["shopify_type"] == "METAFIELD")
+        meta["items"].append(item("u1", "https://karmicare.com/a", "https://karmicare.com/nl/a", key="value", field="custom.treatment_journey_*#05"))
+        run(["--lang", "nl", "--theme-id", THEME], Fake(base_store()), folder, p2)
+        d6 = json.load(open(os.path.join(folder, "dry-run-nl.json"), encoding="utf-8"))
+        op6 = next((o for o in d6["ops"] if o["resource"] == "gid://shopify/Metafield/9"), None)
+        r6 = {r["id"]: r for r in d6["rows"]}
+        check("R18c-1 a lone structural item is not credited as applied", op6 is not None and "u1" not in op6["items"]
+              and "https://karmicare.com/a" in op6["value"] and r6["u1"]["result"] == "not written", (op6 and op6["items"], r6.get("u1")))
+
+        # R18c-3: the generated command reproduces the exact arguments in a shell; the attestation needs a name
+        today = __import__("time").strftime("%Y-%m-%d")
+        nasty = today + " Reviewer $(printf R18C_SENTINEL) `echo tick` \"dq\" 'sq' \\back"
+        cmd = register.write_command("nl", THEME, nasty, True, "abc123")
+        argv = register.write_argv("nl", THEME, nasty, True, "abc123")
+        import shlex
+        import subprocess
+        prefix = shlex.join(["python3", "docs/localization/registration/register.py"])
+        captured = subprocess.run(["/bin/sh", "-c", "printf '%s\\0' " + cmd[len(prefix):]], capture_output=True, text=True).stdout.split("\0")[:-1]
+        check("R18c-3 the write command round-trips quotes, $() and backticks", cmd.startswith(prefix) and captured == argv, captured)
+        code_c, _, _, _ = dry(folder, argv=("--lang", "nl", "--theme-id", THEME, "--theme-attested", today), main_theme="denied")
+        check("R18c-3 an attestation without a name is refused", code_c == 2)
 
         # R18b-A: a resource the re-read omits fails the precondition, zero mutations
         fake = Fake(base_store())
