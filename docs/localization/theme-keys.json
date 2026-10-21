@@ -692,10 +692,10 @@
    "ids": [
     "liquid:sections/main-product.liquid:1024"
    ],
-   "en": "Begin the Karmicare Year",
-   "nl": "Begin het Karmicare-jaar",
+   "en": "Begin your Karmicare Year",
+   "nl": "Begin je Karmicare-jaar",
    "nl_hold": null,
-   "fr": "Commencer l’année Karmicare",
+   "fr": "Commencer votre année Karmicare",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting cta_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
@@ -758,21 +758,6 @@
    "fr": "Satisfait ou remboursé 14 jours",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting guarantee_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.kit_free_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:1104"
-   ],
-   "en": "Free",
-   "nl": "Gratis",
-   "nl_hold": null,
-   "fr": "Gratuit",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting kit_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
    "fr_review": null
   },
@@ -956,5 +941,8 @@
    "nl_review": null,
    "fr_review": null
   }
- ]
+ ],
+ "retired_keys": {
+  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)"
+ }
 }

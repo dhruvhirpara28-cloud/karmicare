@@ -9,33 +9,39 @@
 
 /* ── Stats Row ──
    One full-bleed row at every width: content-width items run off the right edge, the row
-   drifts and can be dragged or swiped (assets/kc-marquee.js, which clones the set) */
+   drifts and can be dragged or swiped (assets/kc-marquee.js, which clones the set). Until the
+   script runs, and with reduced motion, the row scrolls by hand; .is-running clips it for the
+   drift. */
 .stat-strip-karmicare__marquee {
   display: block;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.stat-strip-karmicare__marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.stat-strip-karmicare__marquee:not(.is-running) .stat-strip-karmicare__grid {
+  padding-inline: var(--page-gutter);
+}
+
+.stat-strip-karmicare__marquee.is-running {
   overflow: hidden;
   touch-action: pan-y;
+}
+
+/* Inset, because the full-bleed row is clipped by the section on both sides */
+.stat-strip-karmicare__marquee:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: -2px;
 }
 
 .stat-strip-karmicare__marquee.is-dragging {
   cursor: grabbing;
   user-select: none;
-}
-
-/* Reduced motion: no drift, the row scrolls by hand instead */
-.stat-strip-karmicare__marquee.is-static {
-  overflow-x: auto;
-  scrollbar-width: none;
-  touch-action: auto;
-}
-
-.stat-strip-karmicare__marquee.is-static::-webkit-scrollbar {
-  display: none;
-}
-
-.stat-strip-karmicare__marquee.is-static .stat-strip-karmicare__grid {
-  padding-inline: var(--page-gutter);
 }
 
 .stat-strip-karmicare__grid {

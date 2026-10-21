@@ -9,7 +9,8 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the new FAQ block `Pz4mRk` adds three entries at the end of batch 01 (#226–228), so the earlier numbers stay;
   - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`;
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
-  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“… FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017”, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands.
+  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“… FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017”, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
+  - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
@@ -738,7 +739,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 198 | `liquid:sections/main-product.liquid:1080` | theme_locale | [per_brushing] per brushing | needs-key |  |
 | 199 | `liquid:sections/main-product.liquid:1087` | theme_locale | Not ready for a membership? Try once for [price] | needs-key |  |
 | 200 | `liquid:sections/main-product.liquid:1098` | theme_locale | Awake & Asleep AM/PM Oral Care System | needs-key | R |
-| 201 | `liquid:sections/main-product.liquid:1104` | theme_locale | Free | needs-key |  |
+| 201 | `liquid:sections/main-product.liquid:1104` | theme_locale | Free | needs-key | R |
 | 202 | `liquid:sections/product-compare-plans.liquid:39` | theme_locale | Compare plans | needs-key |  |
 | 203 | `liquid:sections/product-compare-plans.liquid:55` | theme_locale | Compare | needs-key |  |
 | 204 | `liquid:sections/product-compare-plans.liquid:98` | theme_locale | · {{ total_value }} Value | needs-key |  |
