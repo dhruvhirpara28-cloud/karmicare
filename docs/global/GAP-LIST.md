@@ -7,6 +7,7 @@
 |------|--------|
 | 2026-10-20 | First version, for Victor's review. No code yet. |
 | 2026-10-21 | Victor's answers G-1..G-6; built AN-01, AN-02, FT-02, FT-03, FT-04, FT-06 (theme part), FT-07, FT-08 (`3c03acb`, `95b56d6`, `4954820`). G-2 target pages checked. |
+| 2026-10-21 | Added CK-03 (klaviyo.js before consent, from global-footer Phase 1), CK-04 and LY-03 (inherited sticky-card overlaps, Astra R16 on NV-13). |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
@@ -59,6 +60,9 @@ Priority: **P0** blocks the soft launch (wrong offer, dead link, privacy) · **P
 | CK-02 | Banner texts come from Shopify's privacy settings (Admin), not from the theme. | — | P2 | Victor | Check NL/FR in the capture; texts can only change in Admin. |
 | LY-01 | Day/Night: `day-night-sun.js` renders inline on preview and live (`KCDayNight` present). | — | — | — | Not a gap (the 17 Oct formatter bug isn't in this branch). |
 | LY-02 | Page gutter: Dawn's 15 px on phones vs the 20 px token in the footer/clock (homepage TF-07). | `3027:20922` | P1 | Utopia lane | Handoff, already with Utopia. |
+| CK-03 | klaviyo.js loads on every page through a Shopify ScriptTag (`asyncLoad`, `window.onload`) with no consent check; not theme code (global-footer `PLAN.md` §1.4). | — | P0 | Victor (Klaviyo/Shopify admin), then this lane | Victor runs the cookie check in `PLAN.md` §8 item 8. If klaviyo.js or `__kla_id` arrive before consent: move Klaviyo onsite to the consent-aware app embed or remove the ScriptTag. |
+| CK-04 | Open sticky card (PDP) and the consent panel overlap at 750/990/1200; the panel drops to z-index 199 below the card instead of moving (`assets/kc-cookie-preferences.css:281`). Inherited, not NV-13 (R16). | — | P2 | this lane | Follow-up: place or hide the panel against the open card's height instead of stacking only. |
+| LY-03 | `--header-height` is not set where the sticky card reads it (`assets/component-sticky-cart.css:62` falls back to 0): at 1200×500 the open card reaches y=20 under the floating header; at 1200×700 it overlaps the second Loop card. Inherited (R16). | — | P2 | this lane (header) | Follow-up: publish the floating nav's real clearance as `--header-height` and use it for the card's height cap; keep the first-card trigger. |
 
 ## Decisions for Victor
 
