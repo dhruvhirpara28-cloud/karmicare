@@ -1315,23 +1315,16 @@
     busyButtons.add(button);
     button.setAttribute('aria-busy', 'true');
     if (status) status.textContent = status.dataset.loadingText || '';
-    // One announcement of a failure (R14c): during a table attempt the buybox error line is not live; its
-    // message is shown and announced at the table only, and the line is hidden again
+    // One announcement of a failure (R14e): the buybox error line stays the only live region (role=alert,
+    // never changed or hidden here); the table line is a visual copy of its message, not live
     const cartError = cartErrorOf(button.dataset.kcPlanProduct);
-    const cartErrorRole = cartError ? cartError.getAttribute('role') : null;
-    if (cartError) cartError.removeAttribute('role');
     const done = () => {
-      const failed = Boolean(cartError && !cartError.hidden);
-      const message = failed ? cartError.querySelector('.product-form__error-message') : null;
-      if (cartError) {
-        if (failed && error && errorText) cartError.hidden = true;
-        if (cartErrorRole) cartError.setAttribute('role', cartErrorRole);
-      }
       // karmiAddToCart leaves the button disabled only while the page goes to checkout
       if (button.disabled) return;
       release(button);
-      if (!failed || !error || !errorText) return;
-      errorText.textContent = message ? message.textContent : '';
+      if (!cartError || cartError.hidden || !error || !errorText) return;
+      const line = cartError.querySelector('.product-form__error-message');
+      errorText.textContent = line ? line.textContent : '';
       if (errorText.textContent) error.hidden = false;
     };
     // run() starts in this turn (karmiAddToCart disables the button at once)
