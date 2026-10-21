@@ -42,7 +42,7 @@
   },
   "batch-03-header-footer": {
    "entries": 41,
-   "digest": "e17cadb5e223dd62b25e30e901091d8a8634aaf3"
+   "digest": "a853d438d503867882d711cd4fa5a4a93c29759f"
   },
   "batch-04-legal": {
    "entries": 974,
@@ -10716,14 +10716,20 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/header-group.json",
    "key_path": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
-   "en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
-   "sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
-   "status": "needs-review",
+   "en": "COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017",
+   "sha1": "81f33d2ca5fe1ec911faf015d1cf5d951e10538d",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text; Offer accuracy: 'complimentary shipping' and a 60-day guarantee apply to memberships only; Try Once pays shipping and has a 14-day guarantee (offer source of truth, 5 Oct).",
+   "notes": "type text; EN updated 21 Oct from sections/header-group.json on karmicare/soft-launch-global 3c03acb (Victor G-1): 'FOR MEMBERS' now matches the offer (memberships ship free and carry the 60-day guarantee; Try Once pays shipping, 14 days); claims C103: needs-review (CLAIMS-REVIEW.md); this branch's header-group.json keeps old_en until the global lane lands",
    "setting_type": "text",
    "section_type": "announcement-bar",
-   "rendered": true
+   "rendered": true,
+   "old_en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
+   "old_sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
+   "claims": [
+    "C103"
+   ],
+   "claim_status": "needs-review"
   },
   {
    "id": "header-group:header/cta_text",

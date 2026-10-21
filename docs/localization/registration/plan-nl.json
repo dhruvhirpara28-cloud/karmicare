@@ -1,10 +1,10 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "859e2927a53f",
+  "en-source.json": "f67603b46a32",
   "nl/batch-01-homepage.json": "4d816c352332",
   "nl/batch-02-pdp.json": "cda064be6b0d",
-  "nl/batch-03-header-footer.json": "92a53ade582e",
+  "nl/batch-03-header-footer.json": "43d869220e6f",
   "nl/batch-04-legal.json": "103611b761f9",
   "nl/batch-05-products.json": "95589890b394",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
@@ -14,7 +14,7 @@
  "batches": {
   "batch-01-homepage": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
   "batch-02-pdp": "2846c75e4df9f09cca9026b613cfddc61f307f5d",
-  "batch-03-header-footer": "e17cadb5e223dd62b25e30e901091d8a8634aaf3",
+  "batch-03-header-footer": "a853d438d503867882d711cd4fa5a4a93c29759f",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
@@ -10907,11 +10907,15 @@
      "kind": "match",
      "key": null,
      "field": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
-     "en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
-     "en_sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
-     "value": "GRATIS VERZENDING · 60 DAGEN GELD TERUG · GEMAAKT IN BELGIË",
-     "gates": [],
-     "hold": [],
+     "en": "COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017",
+     "en_sha1": "81f33d2ca5fe1ec911faf015d1cf5d951e10538d",
+     "value": "GRATIS VERZENDING & 60 DAGEN GELD TERUG VOOR LEDEN · GEMAAKT IN BELGIË · CIRCADIAANSE MONDVERZORGING SINDS 2017",
+     "gates": [
+      "pending-claim-review"
+     ],
+     "hold": [
+      "pending-claim-review"
+     ],
      "how": "key from translatableContent of the live theme's section group, matched on the EN sha1",
      "status": {
       "drafted": true,

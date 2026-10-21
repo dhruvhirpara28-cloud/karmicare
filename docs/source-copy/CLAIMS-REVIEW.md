@@ -13,7 +13,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | Status | Claims |
 |---|---:|
 | approved | 17 |
-| needs-review | 49 |
+| needs-review | 50 |
 | unsupported | 3 |
 
 | Id | Topic | Claim (verbatim excerpt) | Status | Basis | Where |
@@ -87,6 +87,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | C100 | whitening | “Whitening Charcoal Floss” · “whitening charcoal floss” | **needs-review** | Whitening claim for floss with no source in products.md: the same wording as the floss product title, needs-review in batch 05 (R2, review F5). Kit item title, compare-table row and kit image alts. | `admin:whitening-charcoal-dental-floss:title`, `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products`, `admin:karmicare-biorhythmic-oral-care-system:media.69271648010621.alt`, `admin:karmicare-biorhythmic-oral-care-system:media.69884688236925.alt` |
 | C101 | mechanism | “Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both.” | **needs-review** | New homepage FAQ answer of 21 Oct (41ae772), block disabled. products.md says do not combine with fluoride (as C07) but gives no mechanism; a comparison with fluoride needs Clinical Research sign-off (regulatory.md). | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` |
 | C102 | comparison | “Fluoride’s benefits don’t outweigh its known drawbacks.” | **needs-review** | New homepage FAQ answer of 21 Oct (41ae772), block disabled. “Karmicare is fluoride-free, and always will be” is composition (as C01–C03); the benefit-against-drawback judgement on fluoride is a health comparison with no source in products.md, close to brand don’t #13 (no superiority over fluoride). | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` |
+| C103 | provenance | “CIRCADIAN ORAL CARE SINCE 2017” | **needs-review** | New announcement line of 21 Oct (Victor G-1, global 3c03acb). “Circadian oral care” names the Awake/Asleep rhythm without a health effect; “since 2017” is a company date with no source in the repo. | `header-group:announcement-bar/announcement-bar-0/text` |
 
 ## Offer statements that conflict with the offer source of truth
 
@@ -94,7 +95,7 @@ Not health claims, but customer-facing promises that the confirmed offer (5 Oct 
 
 | Where | Text | Conflict |
 |---|---|---|
-| `header-group:announcement-bar/announcement-bar-0/text` | COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE | Memberships ship free and carry the 60-day guarantee; Try Once pays shipping and has a 14-day guarantee. |
+| `header-group:announcement-bar/announcement-bar-0/text` | COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE | Memberships ship free and carry the 60-day guarantee; Try Once pays shipping and has a 14-day guarantee. Solved 21 Oct (Victor G-1): the line now says “… FOR MEMBERS”. |
 | `product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip`, sticky bar `checkup_info`, compare-table tooltip, Year selling-plan description | “…verified by your dentist” | Proof is an appointment confirmation or invoice plus the questionnaire; no dentist involvement is required. |
 | `product.subscription-item:main/info_card_FnBcaN/body_text` | “…completing your dental check-up — confirmed by your dentist — adds €40…” | As above. |
 | Selling-plan descriptions (Loop, admin) | “Inflation-proof member price” | The approved wording is the price-protection line (NL: “Je ledenprijs blijft gelijk zolang je lid blijft, ook als onze prijzen stijgen.”); no EN equivalent is approved yet. |

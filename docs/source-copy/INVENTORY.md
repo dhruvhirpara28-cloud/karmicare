@@ -8,7 +8,8 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the homepage FAQ rows `kLMHax`, `7jmEGi`, `AL3DKF` and `qUxYCn` carry new questions and answers (`corrected`, `old_en` kept), and the two former placeholders are no longer `blocked`;
   - the new FAQ block `Pz4mRk` adds three entries at the end of batch 01 (#226–228), so the earlier numbers stay;
   - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`;
-  - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04.
+  - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
+  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“… FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017”, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
@@ -16,7 +17,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 |---|---:|---|
 | `batch-01-homepage` | 229 | `7694e7acce33a1e22a90de53273f2c90a8ddd70a` |
 | `batch-02-pdp` | 477 | `2846c75e4df9f09cca9026b613cfddc61f307f5d` |
-| `batch-03-header-footer` | 41 | `e17cadb5e223dd62b25e30e901091d8a8634aaf3` |
+| `batch-03-header-footer` | 41 | `a853d438d503867882d711cd4fa5a4a93c29759f` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
@@ -59,7 +60,7 @@ By status:
 |---|---:|---:|---:|---:|---:|---:|
 | `batch-01-homepage` | 145 | 21 | 30 | 31 | 2 | 16 |
 | `batch-02-pdp` | 147 | 3 | 23 | 36 | 268 | 32 |
-| `batch-03-header-footer` | 17 | 1 | 2 | 10 | 11 | 5 |
+| `batch-03-header-footer` | 17 | 2 | 1 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
 | `batch-06-content-pages` | 0 | 0 | 0 | 0 | 22 | 0 |
@@ -1019,7 +1020,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 
 | # | id | type | EN | status | flags |
 |---:|---|---|---|---|---|
-| 1 | `header-group:announcement-bar/announcement-bar-0/text` | section_group | COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE | needs-review |  |
+| 1 | `header-group:announcement-bar/announcement-bar-0/text` | section_group | COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017 | corrected | C C103 |
 | 2 | `header-group:header/cta_text` | section_group | BEGIN NOW | approved |  |
 | 3 | `footer-group:footer/slogan` | section_group | Your mouth has a rhythm So should your oral care | needs-review |  |
 | 4 | `footer-group:footer/copyright_text` | section_group | Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep… | corrected | C C99 |

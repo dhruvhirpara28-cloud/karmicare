@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "859e2927a53f",
+  "en-source.json": "f67603b46a32",
   "fr/batch-01-homepage.json": "91006fc51240",
   "fr/batch-02-pdp.json": "4c7dfc201f59",
   "fr/batch-03-header-footer.json": "d48df4212c5c",
@@ -14,7 +14,7 @@
  "batches": {
   "batch-01-homepage": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
   "batch-02-pdp": "2846c75e4df9f09cca9026b613cfddc61f307f5d",
-  "batch-03-header-footer": "e17cadb5e223dd62b25e30e901091d8a8634aaf3",
+  "batch-03-header-footer": "a853d438d503867882d711cd4fa5a4a93c29759f",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
@@ -10503,27 +10503,6 @@
    "batch": "batch-03-header-footer",
    "page": "all pages",
    "items": [
-    {
-     "id": "header-group:announcement-bar/announcement-bar-0/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
-     "en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
-     "en_sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
-     "value": "LIVRAISON OFFERTE · SATISFAIT OU REMBOURSÉ 60 JOURS · FABRIQUÉ EN BELGIQUE",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's section group, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "announcement-bar",
-      "announcement-bar-0",
-      "text"
-     ]
-    },
     {
      "id": "header-group:header/cta_text",
      "kind": "match",
