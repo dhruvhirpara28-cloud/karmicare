@@ -61,6 +61,22 @@ De namen van knoppen kunnen iets afwijken. De volgorde blijft: app maken, versie
 - Hij schrijft pas na jouw expliciete **ja** op dat rapport. NL en FR zijn al gepubliceerd, dus wat hij schrijft staat meteen live op `/nl` en `/fr`.
 - Loop-verkoopplannen blijven in Loop. Vertaalde `handle_item`- en `selling_plan_id`-waarden verwijdert hij alleen na jouw ja.
 
+## Zelf draaien (als Claude's sandbox Keychain of netwerk blokkeert)
+
+Vanuit de map van de repo, in je eigen Terminal of in de Claude-sessie met `!` ervoor (de runner print geen geheimen):
+
+```sh
+python3 docs/localization/registration/register.py
+```
+
+Dat is de dry-run voor NL en FR. Het rapport staat daarna in `docs/localization/registration/live/dry-run-nl.md` en `dry-run-fr.md`, met onderaan een controlesom en de opdracht om precies dat te schrijven. Schrijf pas als je het rapport hebt goedgekeurd:
+
+```sh
+python3 docs/localization/registration/register.py --lang nl --write --approve <controlesom>
+```
+
+Is de winkel intussen veranderd, dan stopt hij zonder te schrijven: draai dan eerst opnieuw de dry-run.
+
 ## Intrekken
 
 - **Geheim gelekt:** maak in **Settings** een nieuwe client secret aan en zet die met dezelfde opdracht in de Keychain (voeg `-U` toe om te overschrijven).
