@@ -6,6 +6,8 @@
 | Date | Change |
 |------|--------|
 | 2026-10-20 | First version, for Victor's review. No code yet. |
+| 2026-10-21 | Victor's answers G-1..G-6; built AN-01, AN-02, FT-02, FT-03, FT-04, FT-06 (theme part), FT-07, FT-08 (`3c03acb`, `95b56d6`, `4954820`). G-2 target pages checked. |
+| 2026-10-21 | Added CK-03 (klaviyo.js before consent, from global-footer Phase 1), CK-04 and LY-03 (inherited sticky-card overlaps, Astra R16 on NV-13). |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
@@ -58,6 +60,9 @@ Priority: **P0** blocks the soft launch (wrong offer, dead link, privacy) · **P
 | CK-02 | Banner texts come from Shopify's privacy settings (Admin), not from the theme. | — | P2 | Victor | Check NL/FR in the capture; texts can only change in Admin. |
 | LY-01 | Day/Night: `day-night-sun.js` renders inline on preview and live (`KCDayNight` present). | — | — | — | Not a gap (the 17 Oct formatter bug isn't in this branch). |
 | LY-02 | Page gutter: Dawn's 15 px on phones vs the 20 px token in the footer/clock (homepage TF-07). | `3027:20922` | P1 | Utopia lane | Handoff, already with Utopia. |
+| CK-03 | klaviyo.js loads on every page through a Shopify ScriptTag (`asyncLoad`, `window.onload`) with no consent check; not theme code (global-footer `PLAN.md` §1.4). | — | P0 | Victor (Klaviyo/Shopify admin), then this lane | Victor runs the cookie check in `PLAN.md` §8 item 8. If klaviyo.js or `__kla_id` arrive before consent: move Klaviyo onsite to the consent-aware app embed or remove the ScriptTag. |
+| CK-04 | Open sticky card (PDP) and the consent panel overlap at 750/990/1200; the panel drops to z-index 199 below the card instead of moving (`assets/kc-cookie-preferences.css:281`). Inherited, not NV-13 (R16). | — | P2 | this lane | Follow-up: place or hide the panel against the open card's height instead of stacking only. |
+| LY-03 | `--header-height` is not set where the sticky card reads it (`assets/component-sticky-cart.css:62` falls back to 0): at 1200×500 the open card reaches y=20 under the floating header; at 1200×700 it overlaps the second Loop card. Inherited (R16). | — | P2 | this lane (header) | Follow-up: publish the floating nav's real clearance as `--header-height` and use it for the card's height cap; keep the first-card trigger. |
 
 ## Decisions for Victor
 
@@ -69,6 +74,30 @@ Priority: **P0** blocks the soft launch (wrong offer, dead link, privacy) · **P
 | G-4 | FR legal labels + consent line | a release · b keep EN | a |
 | G-5 | Payment icons | a keep · b Figma 5 · c real list, mono style | c |
 | G-6 | Screenshots | a allow `orca browser` captures now · b wait for Codex to set up the browser helper | a |
+
+## Victor's answers (21 Oct) and what was built
+
+| Id | Answer | Result |
+|---|---|---|
+| G-1 | "complimentary shipping & 60 day.. for members", plus "Circadian oral care since 2017" | `3c03acb`: COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017. The line is ~1000px, so the marquee runs up to 1199px (AN-01 solved the same way: one line at 768). NL/FR text needs new translations and registration (landing desk). |
+| G-2 | Find the targets in Admin or on the live site | `95b56d6`: `#` links show Coming soon. Targets found on live (sitemap), see below; the menu itself is Admin (Victor). |
+| G-3 | a | `4954820`: `jij@voorbeeld.be` / `vous@exemple.be` |
+| G-4 | a | `4954820`: FR consent line and legal labels released |
+| G-5 | c | `95b56d6`: the 15 enabled methods with `grayscale(1) contrast(0.6) brightness(1.25)`. Visa, Mastercard, Shop Pay and Twint keep a grey chip (Shopify's icons have a coloured fill); an exact Figma match needs a KC icon set. |
+| G-6 | a | Captures with `orca` browser commands under `docs/global/shots/` (viewport emulation is unreliable in the tab: 393 and 768 worked, wider ones render at the pane's 2176px). |
+
+FT-02 (`95b56d6`): footer menu links are inline-block, each fills its 26/28px line. FT-04 (`95b56d6`): flags from `country | image_url` (cdn.shopify.com), no flagcdn request.
+
+### G-2: footer targets on the live site (Admin menu `company`)
+
+| Menu item | Page on live | What is there (21 Oct) | Advice |
+|---|---|---|---|
+| Shop Karmicare | `/products/karmicare-biorhythmic-oral-care-system` | the PDP | link it |
+| Why use hydroxapatite | `/pages/why-use-hydroxyapatite-toothpaste` | heading + one line (12 words) | keep `#` (Coming soon) until it has content |
+| Why Karmicare | `/pages/why-karmicare` | heading + one line (17 words) | keep `#` |
+| nHAp Technology | `/pages/nhap-technology` | heading + "NASA's favorite supplement" line (30 words) | keep `#`; that line is a claim to review |
+| Contact | `/pages/contact` | contact form (name, email, phone, comment) | link it |
+| Articles | `/blogs/news` (9 posts) or `/pages/articles` (heading only) | 2024 posts incl. nootropics, "avoid fluoride", whitening | keep `#` until the posts are reviewed against the brand rules |
 
 ## Before ready-to-land
 

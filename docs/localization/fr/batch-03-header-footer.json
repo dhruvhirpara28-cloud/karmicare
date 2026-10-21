@@ -2,7 +2,7 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "e17cadb5e223dd62b25e30e901091d8a8634aaf3",
+ "source_digest": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
  "source_entries": 41,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -16,8 +16,8 @@
  },
  "flag_counts": {
   "legal-review": 5,
-  "pending-claim-review": 1,
-  "pending-en-review": 2,
+  "pending-claim-review": 2,
+  "pending-en-review": 1,
   "source-defect": 1,
   "wording-adapted": 2
  },
@@ -27,15 +27,15 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/header-group.json",
    "key_path": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
-   "en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
-   "en_sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
-   "fr": "LIVRAISON OFFERTE · SATISFAIT OU REMBOURSÉ 60 JOURS · FABRIQUÉ EN BELGIQUE",
+   "en": "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017",
+   "en_sha1": "b4f5fb0b87d8d23a5dab8de173c2d065f017ef83",
+   "fr": "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017",
    "status": "translated",
    "flags": [
-    "pending-en-review"
+    "pending-claim-review"
    ],
-   "notes": "Offer conflict carried over (Try Once pays shipping and has 14 days); translated as written (B1a decision 4). EN under review: Offer accuracy: 'complimentary shipping' and a 60-day guarantee apply to memberships only; Try Once pays shipping and has a 14-day guarantee (offer source of truth, 5 Oct).",
-   "source_status": "needs-review"
+   "notes": "claim C103 pending (est. 2017: the date has no source in the repo); EN is Victor's short line of 21 Oct; 'SATISFAIT OU REMBOURSÉ 60 JOURS' kept for '60-DAY GUARANTEE' as elsewhere in FR, because a bare 'garantie' reads as the legal warranty; 'EST.' as 'DEPUIS'; 'membres' as elsewhere in FR",
+   "source_status": "corrected"
   },
   {
    "id": "header-group:header/cta_text",
@@ -287,10 +287,10 @@
    "key_path": "sections/footer.liquid:667",
    "en": "you@example.com",
    "en_sha1": "50e2b46ef8778549445c9610f4fea207d995c937",
-   "fr": "you@example.com",
+   "fr": "vous@exemple.be",
    "status": "theme-key",
    "flags": [],
-   "notes": "R3 F9: email placeholder kept exactly as the source (emails stay unchanged).",
+   "notes": "French placeholder, Victor G-3 (21 Oct, global 4954820); theme-keys.json records it as decided",
    "source_status": "needs-key"
   },
   {

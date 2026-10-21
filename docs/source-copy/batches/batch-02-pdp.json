@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "e4709cc6bbf22152ae64461abc1ea69bcca08839",
+ "digest": "e3e79339215ffcf134b6813f1b46310a1c380fc8",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -333,9 +333,9 @@
    "key_path": "sections.main.blocks.buy_buttons.settings.custom_button_text_by_plan",
    "en": "712106115453: Begin your 60-Day Rhythm\n712155431293: Begin your Karmicare Year",
    "sha1": "2a742ee865e0bc9b240f5c97b86a27b533226b53",
-   "status": "corrected",
+   "status": "approved",
    "never_translate": false,
-   "notes": "type textarea; keep each selling-plan ID before ':' unchanged; translate only the label after it; EN updated 21 Oct: Victor, every CTA says 'Begin your' (global-nav 6c07148); this branch's theme file keeps old_en until global-nav lands",
+   "notes": "type textarea; keep each selling-plan ID before ':' unchanged; translate only the label after it",
    "setting_type": "textarea",
    "section_type": "main-product",
    "rendered": true,
@@ -3033,7 +3033,7 @@
    "sha1": "1df9e52f263c6f98666ecd7dd02b044868b833a6",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230); EN updated 21 Oct: Victor, every CTA says 'Begin your' (global-nav 6c07148); this branch's theme file keeps old_en until global-nav lands",
+   "notes": "sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
    "old_en": "Begin the Karmicare Year",
    "old_sha1": "5df7579ab3c9841e4ee395fcde96baabbca927ae"
   },
@@ -6693,11 +6693,13 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#25",
-   "en": "Begin 60-Day Rhythm",
-   "sha1": "e3d380554eee2d5bde4889dc8de77e3cad4ec3af",
+   "en": "Begin your 60-Day Rhythm",
+   "sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries",
+   "old_en": "Begin 60-Day Rhythm",
+   "old_sha1": "e3d380554eee2d5bde4889dc8de77e3cad4ec3af"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#26",

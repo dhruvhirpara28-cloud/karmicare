@@ -210,55 +210,118 @@ PDP `50ad819` removed the settings `subscription_title` and `package_name`; the 
 
 All three read « Système de soin matin/soir Awake & Asleep ». The naming source is `admin:karmicare-biorhythmic-oral-care-system:title`, already in FR as « Système de dentifrice matin et soir Awake & Asleep ». `check.py` now treats `retired` as a required hold, and its self-test has a 17th mutation for it. The next `build_payloads.py` run drops the two `subscription_title` items from `plan-fr.json`.
 
+## Claim holds waived (Victor, 20 Oct)
+
+Victor, through the landing desk (20 Oct): ignore the claim checks for now and translate everything that exists in English on the site, and leave the English unchanged. FR translates the 119 entries that were held on a claim, and they now carry `pending-claim-review`. They also carry the note "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication", followed by the old hold reason. The 119 entries are:
+
+- 107 blog blocks (batch 07)
+- 6 Awake/Asleep 2.0 product lines (batch 05)
+- 2 `/pages/nhap-technology` lines (batch 06)
+- C35 benefit card 06, heading and text (batch 01)
+- the C84/C85 practitioner quote on the homepage and the PDP
+
+The translations follow the EN faithfully, claims included. They keep the FR conventions: "formule du matin Awake" and "formule du soir Asleep", product links unchanged, and no commodity words. Where an SEO description is cut off at 320 characters, the FR ends at the last complete clause, as in the rest of batch 07. That is why 25 claim-verb warnings now show ("prévenir"), and they are expected.
+
+The treatment journey `#29` ("— from your gums to the") is translated exactly as it stands: "— de vos gencives jusqu’à". It keeps `source-defect`, and NL does the same.
+
+`check.py` now accepts an unsupported claim when the entry carries both `pending-claim-review` and the waiver note. Two self-test mutations take the place of the old "translate an unsupported claim": dropping the flag fails, and so does dropping the note.
+
+These stay held:
+- **The two `[NEEDS APPROVED COPY]` placeholders on the homepage FAQ:** there is no EN text to translate. (Since 21 Oct both have approved EN and are translated; see the next section.)
+- **"Rendering loop-subscriptions":** the theme tests for this exact text.
+- **SLS article `b035`:** the source has it `blocked` because it names four competitors, a brand rule rather than a claim. It can be released only if the source owner unblocks it.
+- **The 350 legacy legal entries:** the landing desk confirmed they stay held (20 Oct), because F5 redirects those pages to the 2.0 pages and translating outdated legal text would mislead. Each entry's note now gives that reason.
+
+## Homepage copy at 41ae772 (source-copy 0ba9de3, 21 Oct)
+
+The homepage lane rewrote part of the homepage (integration `41ae772`, merchant-edit `97ce2b7`). Source-copy `0ba9de3` brings the new EN into batches 01 and 02, and FR follows it. Victor's 20 Oct rule still applies: claims don't block translation, and names and quotes stay as they are.
+
+- **Stat strip tagline:** "CHOISI PAR DES PRATICIENS KPNI, DES DENTISTES FONCTIONNELS ET DES PROFESSIONNELS DE SANTÉ". "Praticiens kPNI" matches the PDP stat line. The entry keeps `pending-claim-review` (C80).
+- **Professional card titles (homepage and PDP, three each):** in the EN, "Therapist" became "Practitioner". The FR is unchanged. It keeps the epicene "thérapeute kPNI" and "Thérapeute en nutrition" and the field form "thérapie orthomoléculaire", because "praticien" would assume a gender (NL likewise keeps "therapeut"). The entries keep `gendered-title`.
+- **FAQ, rendered:**
+  - `kLMHax`, "Combien de temps dure un duo ?": the answer replaces the earlier placeholder. C07 is approved.
+  - `qUxYCn`, "Que couvre la garantie satisfait ou remboursé ?": the answer is the same FR as the guarantee line in the terms, consumer rights and refund policy.
+  - `Pz4mRk`, "Puis-je suspendre, sauter une livraison ou résilier ?": a new item.
+- **FAQ, disabled** (`not-rendered`):
+  - `7jmEGi`, "fluor + Karmicare": `pending-claim-review` (C101). The answer replaces the earlier placeholder.
+  - `AL3DKF`, "Karmicare est-il sans fluor ?": `pending-claim-review` (C102).
+  - Their category tabs now match their questions, so `pending-en-review` is gone from those tabs.
+- **Retired, now held:**
+  - FAQ `4KMG6C`, all three fields: the block was removed.
+  - The two empty `how_it_works` step numbers on the PDP.
+- **check.py:** no `[NEEDS APPROVED COPY]` placeholder remains in the source, so the placeholder self-test now releases the `blocked` SLS article `b035`. That fails for the same reason.
+
+## Waiver field, clock key, Sietske's quote (source-copy 0c3a4cb, 21 Oct)
+
+- **Waiver from the source:** en-source now marks the 119 waived entries with `claim_hold_waived: "2026-10-20 Victor, translation only"`. `check.py` releases an unsupported-claim hold only when the source has that field and the FR entry carries `pending-claim-review` and the waiver note. A waiver note on an entry the source did not waive is an error.
+- **Sietske Hamelink's quote, held again:** the C84/C85 quote is `card_CtQgU9/hover_text`, on the homepage and on the PDP. It is a person's own words. The waiver covers claims, not a quote, and a French version needs her own wording or her approval. NL holds it for the same reason (landing desk, `msg_a6d24f8ca48c`). The FR draft from `3ec7a5e` stays in the notes. 117 of the 119 waived entries now carry FR.
+- **`locale:kc.clock.loading`:** the source inventoried this key (B-03), and FR gives it "Chargement de l’heure locale actuelle". `kc.*` keys ship through `theme_keys.py`, so `check.py` expects `theme-key` for them, not `locale-present`, as NL does. The source owner's `theme_keys.py refresh --fr-dir` and `write` put the key into `locales/fr.json`. FR does not edit that file, so each key has one writer. Source-copy `61efa65` did that, merged into FR at `24adf44`, and `theme_keys.py check --fr-dir docs/localization/fr` now reports 63 keys ok.
+- **B-03:** the source owner's `c348c72` regenerated `locales/fr.json`, and `kc.clock.window_1..7` and the four footer keys are now French there.
+- **Self-test:** two new mutations, "waiver note without the source field" and "kc.* key as locale-present", bring it to 20/20.
+
+The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there. The C13 and C93 claims belonged to the old answer, and source-copy `647df5f` removed them from the source note. The FR note follows.
+
+## Announcement line and email placeholder (source-copy 6112414, 21 Oct)
+
+- **Announcement bar (Victor G-1):** the EN is now "COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017". FR: "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · SOIN BUCCO-DENTAIRE CIRCADIEN DEPUIS 2017". "FOR MEMBERS" matches the offer (Try Once pays shipping and has 14 days), so the old `pending-en-review` on this line is gone. "Since 2017" is claim C103 (needs-review), so the line carries `pending-claim-review`, like the NL. "Membres", "satisfait ou remboursé" and "soin bucco-dentaire" are the terms used elsewhere in FR. Batch 03 digest `a853d438…`.
+- **Email placeholder (Victor G-3):** `footer.liquid:667` is now `vous@exemple.be`, replacing the R3 F9 `you@example.com`. `theme-keys.json` records it as `decided`, and the source owner's `locales/fr.json` already has it.
+
+## Sticky-bar "Free" label retired (source-copy d72d791, 21 Oct)
+
+- **`liquid:sections/main-product.liquid:1104`** ("Free", key `kc.sticky_cart.kit_free_html`) is now `held` with the retirement in its notes. The FR text "Gratuit" was not changed and stays in the notes. Global-nav `27691cb` (NV-13) makes the desktop sticky bar the mobile card and removes the `kit_free` setting and its markup. NL holds the entry too.
+- **Through the integration, not on its own:** `d72d791` removes the key from every storefront locale. On FR alone, `snippets/sticky-cart-block.liquid` still read it, so that merge added a Theme Check `TranslationKeyExists` error and was dropped. At the landing desk's request, FR merged integration `karmicare/soft-launch` at `223d140` instead (`80be4a1`). That brings NV-13 (the snippet no longer reads the key) and `d72d791` together. Theme Check reports 0 errors, and `theme_keys.py check --fr-dir` reports 62 keys ok.
+- **One merge conflict:** the hold note on 1104, which global-nav `d953353` had also written. FR's note was kept, with its `d72d791` reference.
+- **CTAs (Victor, 21 Oct: "Commencer votre" on every Karmicare CTA):** global-nav `6c07148` updated three entries, and FR takes them as they are:
+  - `custom_button_text_by_plan`: "Commencer votre Rythme 60 jours" / "Commencer votre année Karmicare".
+  - `main-product.liquid:1024`: "Commencer votre année Karmicare".
+  - compare table `#25`: "Commencer votre Rythme 60 jours".
+  
+  The theme-key value matches `locales/fr.json` (`kc.sticky_cart.cta_rhythm_html`, `cta_year_html`). Batch 02 digest `e3e79339…`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `666785ab…` | 477 | 140 | 250 | 35 | 15 | 37 |
-| `batch-01-homepage` | `a09219ae…` | 225 | 168 | 2 | 30 | 2 | 23 |
-| `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
+| `batch-02-pdp` | `e3e79339…` | 477 | 138 | 251 | 34 | 15 | 39 |
+| `batch-01-homepage` | `7694e7ac…` | 229 | 172 | 2 | 31 | 2 | 22 |
+| `batch-03-header-footer` | `a853d438…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
-| `batch-05-products` | `5ab678a9…` | 77 | 16 | 55 | 0 | 0 | 6 |
-| `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 20 | 0 | 0 | 2 |
-| `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 591 | 0 | 0 | 117 |
+| `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
+| `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
+| `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 698 | 0 | 0 | 10 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,571** | **477** | **1,417** | **75** | **62** | **540** |
+| **Total** | | **2,575** | **479** | **1,533** | **75** | **62** | **426** |
 
-Every source entry is covered: 2,031 carry FR and 540 are held (after the source-copy R6 merge, a0dee86, decision F4 and the three retired entries, 6643e16). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, and the sticky-bar retirement and CTAs, integration 223d140). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 36 | 41 | 1 | 0 | 19 | 5 | 280 | 0 | 382 |
-| pending-en-review | 7 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 22 |
-| source-defect | 2 | 7 | 1 | 3 | 9 | 0 | 0 | 0 | 22 |
-| wording-adapted | 3 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 30 |
+| pending-claim-review | 39 | 42 | 2 | 0 | 25 | 7 | 387 | 0 | 502 |
+| pending-en-review | 2 | 9 | 1 | 3 | 1 | 0 | 0 | 0 | 16 |
+| source-defect | 2 | 8 | 1 | 3 | 9 | 0 | 0 | 0 | 23 |
+| wording-adapted | 2 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 29 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
 | fit-risk | 9 | 28 | 0 | 0 | 2 | 0 | 0 | 0 | 39 |
-| not-rendered | 0 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 7 |
+| not-rendered | 6 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 13 |
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (540)
+### Held (426)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
 | 04 | legacy | 350 | `/pages/privacy` (269), `/pages/terms-and-conditions` (76), `/pages/consumer-rights` (5): pre-2.0 legal pages, held in NL/FR (INVENTORY.md) |
-| 07 | unsupported claim (05–07 review) | 107 | Blog blocks such as "prevents tooth decay", "ingesting poison", fluoride and IQ, NASA history |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
-| 05 | unsupported claim | 6 | "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles…" in the Awake/Asleep 2.0 descriptions and meta descriptions, and the two sleep/wake body lines `body_html#b002` (NL review R2 F1; source `claim_status` since R2) |
-| 01–02 | unsupported claim | 4 | C35 benefit card 06, text and heading; C84/C85 Sietske Hamelink quote on both templates |
-| 01 | needs approved copy | 2 | Homepage FAQ rows 2 and 3 |
-| 06 | unsupported claim | 2 | "NASA's favorite supplement for oral health" (`/pages/nhap-technology`) |
-| 02 | source defect | 1 | Treatment journey `#29` stops mid-phrase |
-| 01–02 | retired | 3 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`) |
+| 01–02 | retired | 9 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`); FAQ `4KMG6C` (3 fields) and the two empty PDP `how_it_works` step numbers (41ae772, source-copy `0ba9de3`); the sticky-bar "Free" label `main-product.liquid:1104`, `kc.sticky_cart.kit_free_html` (NV-13, source-copy `d72d791`) |
+| 01–02 | practitioner quote | 2 | Sietske Hamelink's quote (C84/C85, `card_CtQgU9/hover_text`, homepage and PDP): her own words; FR needs her wording or approval, as NL (landing desk 21 Oct) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 10 warnings, 17/17 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 25 warnings, 20/20 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;

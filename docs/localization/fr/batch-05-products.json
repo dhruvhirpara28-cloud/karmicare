@@ -8,14 +8,13 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 55,
-  "held": 6,
+  "admin": 61,
   "translated": 16
  },
  "flag_counts": {
   "fit-risk": 2,
   "not-rendered": 1,
-  "pending-claim-review": 19,
+  "pending-claim-review": 25,
   "pending-en-review": 1,
   "source-defect": 9,
   "wording-adapted": 3
@@ -478,12 +477,13 @@
    "key_path": "seo.description",
    "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you fall asleep at night. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually har",
    "en_sha1": "2308852066a80c62e376ed89dc1acd124302bda4",
-   "fr": null,
-   "status": "held",
+   "fr": "Un soin pour votre esprit, votre bouche et votre âme. Un dentifrice qui vous aide à vous endormir le soir. Avec des minéraux de qualité supérieure comme la nano-HAp et des nootropiques actifs, Karmicare vous aide à atteindre un équilibre optimal entre esprit et bouche. Contrairement aux soins bucco-dentaires au fluor qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise avec vos rythmes circadiens.",
+   "status": "admin",
    "flags": [
-    "source-defect"
+    "source-defect",
+    "pending-claim-review"
    ],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
    "source_status": "admin-held"
   },
   {
@@ -506,12 +506,13 @@
    "key_path": "seo.description",
    "en": "Something for your mind, your mouth and your soul. A toothpaste that helps you get up in the morning. With superior minerals like Nano-HAp, and active Nootropics, Karmicare helps you achieve an optimum mind and mouth. Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually ha",
    "en_sha1": "70a6ebd2757ad3dee5ec8ae2f869f7124b0231a8",
-   "fr": null,
-   "status": "held",
+   "fr": "Un soin pour votre esprit, votre bouche et votre âme. Un dentifrice qui vous aide à vous lever le matin. Avec des minéraux de qualité supérieure comme la nano-HAp et des nootropiques actifs, Karmicare vous aide à atteindre un équilibre optimal entre esprit et bouche. Contrairement aux soins bucco-dentaires au fluor qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise avec vos rythmes circadiens.",
+   "status": "admin",
    "flags": [
-    "source-defect"
+    "source-defect",
+    "pending-claim-review"
    ],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic and fluoride-disturbs-sleep claim; FAQ-0204 explicitly disclaims any sleep effect.); translate after the EN is fixed or removed The EN meta description is the description cut at about 320 characters; the FR translates the same text to the end of its sentence.",
    "source_status": "admin-held"
   },
   {
@@ -908,10 +909,12 @@
    "key_path": "body_html#b002",
    "en": "A toothpaste that helps you fall asleep at night.",
    "en_sha1": "77dfe576d894aedd93f53144bb91214468b5df2d",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
+   "fr": "Un dentifrice qui vous aide à vous endormir le soir.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -936,10 +939,12 @@
    "key_path": "body_html#b004",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
    "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
+   "fr": "Contrairement aux soins bucco-dentaires au fluor qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise réellement avec les rythmes circadiens de votre corps.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1014,10 +1019,12 @@
    "key_path": "body_html#b002",
    "en": "A toothpaste that helps you get up in the morning.",
    "en_sha1": "f4e9ca2c91352d24232d43428eb4fd8a51cb7de7",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
+   "fr": "Un dentifrice qui vous aide à vous lever le matin.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Wake-up claim for a cosmetic, the same assertion as this resource's seo.description (unsupported); FAQ-0204 explicitly disclaims any sleep effect (R2, review F1).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1042,10 +1049,12 @@
    "key_path": "body_html#b004",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonises with your body's circadian rhythms.",
    "en_sha1": "9c3831ff202be7dc390710770c0f6f5aedbebf73",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
+   "fr": "Contrairement aux soins bucco-dentaires au fluor qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise réellement avec les rythmes circadiens de votre corps.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data and disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {

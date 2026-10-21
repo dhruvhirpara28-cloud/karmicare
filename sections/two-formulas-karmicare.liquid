@@ -1,4 +1,23 @@
 {{ 'section-two-formulas-karmicare.css' | asset_url | stylesheet_tag: preload: true }}
+{%- liquid
+  # A feature button without a page yet shows the shared "Coming soon" state (Victor's rule H8)
+  assign left_soon = false
+  if section.settings.left_button_label != blank
+    if section.settings.left_button_link == blank or section.settings.left_button_link == '#'
+      assign left_soon = true
+    endif
+  endif
+  assign right_soon = false
+  if section.settings.right_button_label != blank
+    if section.settings.right_button_link == blank or section.settings.right_button_link == '#'
+      assign right_soon = true
+    endif
+  endif
+-%}
+{%- if left_soon or right_soon -%}
+  {{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {%- style -%}
   #shopify-section-{{ section.id }} .two-formulas-karmicare{
@@ -103,13 +122,21 @@
             </p>
           {%- endif -%}
           {%- if section.settings.left_button_label != blank -%}
-            <a
-              href="{{ section.settings.left_button_link | default: '#' }}"
-              class="karmicare__btn-secondary two-formulas__btn-secondary"
-              role="button"
-            >
-              {{ section.settings.left_button_label | escape }}
-            </a>
+            {%- if left_soon -%}
+              {%- assign soon_id = 'TwoFormulasLeft-' | append: section.id -%}
+              {%- render 'kc-coming-soon',
+                id: soon_id,
+                label: section.settings.left_button_label,
+                class: 'karmicare__btn-secondary two-formulas__btn-secondary'
+              -%}
+            {%- else -%}
+              <a
+                href="{{ section.settings.left_button_link }}"
+                class="karmicare__btn-secondary two-formulas__btn-secondary"
+              >
+                {{ section.settings.left_button_label | escape }}
+              </a>
+            {%- endif -%}
           {%- endif -%}
         </div>
 
@@ -149,13 +176,21 @@
             </p>
           {%- endif -%}
           {%- if section.settings.right_button_label != blank -%}
-            <a
-              href="{{ section.settings.right_button_link | default: '#' }}"
-              class="karmicare__btn-secondary two-formulas__btn-secondary"
-              role="button"
-            >
-              {{ section.settings.right_button_label | escape }}
-            </a>
+            {%- if right_soon -%}
+              {%- assign soon_id = 'TwoFormulasRight-' | append: section.id -%}
+              {%- render 'kc-coming-soon',
+                id: soon_id,
+                label: section.settings.right_button_label,
+                class: 'karmicare__btn-secondary two-formulas__btn-secondary'
+              -%}
+            {%- else -%}
+              <a
+                href="{{ section.settings.right_button_link }}"
+                class="karmicare__btn-secondary two-formulas__btn-secondary"
+              >
+                {{ section.settings.right_button_label | escape }}
+              </a>
+            {%- endif -%}
           {%- endif -%}
         </div>
       </div>
@@ -207,7 +242,7 @@
       "type": "text",
       "id": "button_label",
       "label": "Primary button label",
-      "default": "BEGIN YOUR 60-DAY RITUAL"
+      "default": "BEGIN YOUR 60-DAY RHYTHM"
     },
     {
       "type": "url",

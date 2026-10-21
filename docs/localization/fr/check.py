@@ -9,11 +9,14 @@ Errors (exit code 1):
   a missing or extra entry, an entry whose resource_type, file_or_handle, key_path or source_status
   differs from its source entry;
 - gates the source requires: a hold (never-translate, [NEEDS APPROVED COPY], unsupported claim in
-  CLAIMS-REVIEW.md or in the 05-07 claim_status, legacy page), pending-claim-review on a translated
+  CLAIMS-REVIEW.md or in the 05-07 claim_status unless the source has claim_hold_waived and the entry
+  carries pending-claim-review and the CLAIM_WAIVER note (Victor, 20 Oct), legacy page, retired), the
+  CLAIM_WAIVER note on an entry the source did not waive, pending-claim-review on a translated
   needs-review claim (claims table for 01-03, claim_status for 05-07), legal-review on every legal entry
   (source `legal` flag, and every batch-04 entry outside the contact page);
 - delivery: a status outside the vocabulary or not matching the source channel (admin-held -> admin,
-  needs-key -> theme-key, Dawn key -> locale-present with the value from locales/fr.json), counts or
+  needs-key -> theme-key, kc.* key -> theme-key (theme_keys.py writes it), Dawn key -> locale-present
+  with the value from locales/fr.json), counts or
   flag_counts that do not match the entries;
 - FR text: markup, Liquid, [tokens] or runtime price spans that differ from the EN, changed selling-plan
   IDs, French typography slips (plain or missing space before : ; ! ? € % », straight apostrophes,
@@ -41,6 +44,7 @@ STATUSES = {"translated", "admin", "theme-key", "locale-present", "held"}
 FLAGS = {"pending-claim-review", "pending-en-review", "fit-risk", "source-defect", "legal-review",
          "gendered-title", "wording-adapted", "not-rendered"}
 LEGAL_BATCH = "batch-04-legal"
+CLAIM_WAIVER = "claim hold waived by Victor 20 Oct for translation"
 LEGAL_EXEMPT_PAGES = {"/pages/contact", "templates/page.contact.json"}
 DYNAMIC = re.compile(r'<span class="(?:kc-dynamic_price|dynamic_free_welcome_price)">[^<]*</span>')
 SKIP = re.compile(r"(<[^>]*>|\{\{.*?\}\}|\{%.*?%\}|&[a-zA-Z#0-9]+;|\[[a-z_]+\])", re.S)
@@ -128,15 +132,21 @@ def load_fr():
     return docs
 
 
-def required_holds(s, claims):
+def claim_waived(s, e):
+    # Victor, 20 Oct: unsupported claims are translated; the claims review still gates publication.
+    # The source records the waiver (claim_hold_waived); FR mirrors it with the flag and the note.
+    return bool(s.get("claim_hold_waived")) and "pending-claim-review" in e["flags"] and e["notes"].startswith(CLAIM_WAIVER)
+
+
+def required_holds(s, claims, e):
     reasons = []
     if s["never_translate"]:
         reasons.append("never-translate")
     if s.get("blocked") or "[NEEDS APPROVED COPY]" in s["en"]:
         reasons.append("needs-approved-copy")
-    if any(claims.get(c) == "unsupported" for c in s.get("claims") or []):
+    if any(claims.get(c) == "unsupported" for c in s.get("claims") or []) and not claim_waived(s, e):
         reasons.append("unsupported claim (CLAIMS-REVIEW.md)")
-    if s.get("claim_status") == "unsupported":
+    if s.get("claim_status") == "unsupported" and not claim_waived(s, e):
         reasons.append("unsupported claim (claims review 05-07)")
     if s.get("legacy"):
         reasons.append("legacy page")
@@ -154,6 +164,8 @@ def needs_legal_gate(s, batch):
 
 
 def expected_channel(s):
+    if s["id"].startswith("locale:kc."):
+        return "theme-key"
     if s["id"].startswith("locale:"):
         return "locale-present"
     return {"admin-held": "admin", "needs-key": "theme-key"}.get(s["status"], "translated")
@@ -206,7 +218,9 @@ def validate(docs, ctx):
                 flag_counts[f] = flag_counts.get(f, 0) + 1
             if needs_legal_gate(s, name) and "legal-review" not in e["flags"]:
                 errors.append(where + ": legal entry without legal-review")
-            holds = required_holds(s, claims)
+            holds = required_holds(s, claims, e)
+            if e["notes"].startswith(CLAIM_WAIVER) and not s.get("claim_hold_waived"):
+                errors.append(where + ": waiver note, but the source has no claim_hold_waived")
             if e["status"] == "held":
                 if e["fr"] is not None or not e["notes"]:
                     errors.append(where + ": held entries carry fr = null and a reason in notes")
@@ -312,7 +326,7 @@ def self_test(docs, ctx):
 
     legacy = next(e["id"] for e in docs[LEGAL_BATCH]["entries"] if e["status"] == "held" and e["notes"].startswith("legacy"))
     unsupported = next(e["id"] for e in docs["batch-07-collections-blog"]["entries"]
-                       if e["status"] == "held" and e["notes"].startswith("unsupported-claim"))
+                       if e["status"] != "held" and e["notes"].startswith(CLAIM_WAIVER))
     SLS = "admin:article:news/3-reasons-why-you-should-look-for-an-sls-free-toothpaste:"
     cases = [
         ("remove pending-claim-review (Astra F6)", drop_flag("product.subscription-item:main/highlights_slider_9wAjAb/text_1", "pending-claim-review"), "without pending-claim-review"),
@@ -321,10 +335,13 @@ def self_test(docs, ctx):
         ("change file_or_handle (Astra F6)", set_field("product.subscription-item:main/highlights_slider_9wAjAb/text_1", "file_or_handle", "templates/index.json"), "file_or_handle"),
         ("remove legal-review from a held legacy SEO field (Astra F5)", drop_flag("admin:page:privacy:seo.title", "legal-review"), "without legal-review"),
         ("translate a legacy legal entry", release_held(legacy, "Texte", "admin"), "requires a hold (legacy"),
-        ("translate an unsupported 05-07 claim", release_held(unsupported, "Texte", "admin"), "requires a hold (unsupported claim"),
-        ("translate a [NEEDS APPROVED COPY] placeholder", release_held("index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer", "<p>Texte</p>", "translated"), "requires a hold (needs-approved-copy"),
+        ("unsupported 05-07 claim without pending-claim-review", drop_flag(unsupported, "pending-claim-review"), "requires a hold (unsupported claim"),
+        ("unsupported 05-07 claim without the waiver note", set_field(unsupported, "notes", "translated"), "requires a hold (unsupported claim"),
+        ("translate a blocked entry (needs approved copy)", release_held(SLS + "body_html#b035", "Texte", "admin"), "requires a hold (needs-approved-copy"),
         ("translate a retired entry (Astra R12)", release_held("index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title", "Système", "translated"), "requires a hold (retired"),
+        ("waiver note on an entry the source did not waive", set_field("index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer", "notes", CLAIM_WAIVER + "."), "no claim_hold_waived"),
         ("wrong delivery channel", set_field("admin:karmicare-biorhythmic-oral-care-system:title", "status", "translated"), "source channel"),
+        ("kc.* key as locale-present", set_field("locale:kc.clock.loading", "status", "locale-present"), "source channel"),
         ("change key_path", set_field("footer-group:footer/slogan", "key_path", "sections.footer.settings.other"), "key_path"),
         ("flag_counts out of step", tamper_flag_counts(LEGAL_BATCH), "flag_counts"),
         ("remove a batch file", remove_batch("batch-08-system"), "FR batch file missing"),

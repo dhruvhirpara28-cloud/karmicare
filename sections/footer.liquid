@@ -9,6 +9,8 @@
   component-localization-form.css runs on the country dropdown below.
 {% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   /* A global rule sets line-height: normal on p, span, li, label and headings; text in the
@@ -126,7 +128,10 @@
     list-style: none;
   }
 
+  /* inline-block: the link fills its 26/28px line, a tap target of at least 24px with the
+     same layout */
   .km-footer-links a {
+    display: inline-block;
     font-weight: var(--font-600-weight);
     font-size: var(--kc-responsive-body-lg-text-size);
     line-height: var(--kc-responsive-body-lg-line-height);
@@ -136,8 +141,35 @@
     transition: color 0.15s ease-out;
   }
 
-  .km-footer-links a:hover {
+  .km-footer-links a:not(.kc-coming-soon):hover {
     color: var(--kc-mapped-text-link-default-hover);
+  }
+
+  /* Coming soon (snippets/kc-coming-soon.liquid): the tip starts at the link's left edge, as
+     the links do, so it stays inside the page gutter. From 1200px, where the menu column has
+     room for it, it sits beside the link, so it doesn't cover the next one; beside a long FR
+     label on a tablet it would widen the page, even while hidden (R15 F1). */
+  .km-footer-links .kc-coming-soon .kc-coming-soon__tip {
+    left: 0;
+    transform: none;
+  }
+
+  @media screen and (min-width: 1200px) {
+    .km-footer-links .kc-coming-soon .kc-coming-soon__tip {
+      top: 50%;
+      left: calc(100% + var(--kc-responsive-spacing-layout-xs));
+      transform: translateY(-50%);
+      translate: 0 0;
+    }
+
+    .km-footer-links .kc-coming-soon .kc-coming-soon__tip::before {
+      top: 0;
+      bottom: 0;
+      left: auto;
+      right: 100%;
+      width: calc(var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-spacing-layout-xxs));
+      height: auto;
+    }
   }
 
   /* Newsletter: KC/Field (persistent label, 68px target from 750px and 60px below, 44px submit) */
@@ -496,10 +528,37 @@
     gap: 4px;
   }
 
+  /* The payment methods switched on in Shopify, in the Figma footer's monochrome style
+     (Victor, 21 Oct, G-5). Grayscale only: each identifying mark keeps at least 3:1 on its
+     own opaque chip, Day and Night alike (lowest: Mastercard's right circle 3.36:1 with the
+     rule below, then Maestro 3.74:1); softening it further drops MobilePay below 3:1
+     (R15 F2). */
   .km-footer-payments svg {
     display: block;
     width: 38px;
     height: 24px;
+    filter: grayscale(1);
+  }
+
+  /* Mastercard's red circle turns 1.30:1 on its dark chip in grayscale (R15b F2): a light chip
+     like the others, with both circles and their overlap in greys that stay apart and each
+     clear 3:1 on white (#595959 7.0:1, #8c8c8c 3.4:1, #333 12.6:1). Its colours are inline
+     styles (display-p3 included), hence !important. Paths: outer chip, inner chip, left
+     circle, right circle, overlap. */
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(1) {
+    fill: #ededed !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(2) {
+    fill: #ffffff !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(3) {
+    fill: #595959 !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(4) {
+    fill: #8c8c8c !important;
+  }
+  .km-footer-payments svg[aria-labelledby='pi-master'] path:nth-of-type(5) {
+    fill: #333333 !important;
   }
 
   @media screen and (min-width: 750px) {
@@ -617,6 +676,9 @@
   assign legal_terms_default = 'kc.footer.legal_terms' | t
   assign legal_privacy_default = 'kc.footer.legal_privacy' | t
   assign legal_consumer_rights_default = 'kc.footer.legal_consumer_rights' | t
+
+  # A menu item without a page yet links to '#' (the root URL plus '#' on /nl and /fr)
+  assign kc_soon_url = routes.root_url | append: '#'
 -%}
 
 <footer class="karmicare-footer kc-surface" data-kc-surface="{{ section.settings.surface }}">
@@ -647,7 +709,13 @@
                 <ul class="km-footer-links" role="list">
                   {%- for link in block.settings.menu.links -%}
                     <li>
-                      <a href="{{ link.url }}">{{ link.title }}</a>
+                      {%- if link.url == '#' or link.url == kc_soon_url -%}
+                        {%- comment -%} No page yet: shown, not clickable, "Coming soon" on hover, focus or tap (as the header) {%- endcomment -%}
+                        {%- assign soon_id = 'FooterMenu-' | append: block.id | append: '-' | append: link.handle -%}
+                        {%- render 'kc-coming-soon', id: soon_id, label: link.title -%}
+                      {%- else -%}
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      {%- endif -%}
                     </li>
                   {%- endfor -%}
                 </ul>
@@ -822,9 +890,10 @@
                   >
                     <span class="km-footer-locale__current">
                       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+                        {%- comment -%} Flags from Shopify's CDN: no third-party request before cookie consent {%- endcomment -%}
                         <img
                           class="km-footer-locale__flag"
-                          src="https://flagcdn.com/w40/{{ localization.country.iso_code | downcase }}.png"
+                          src="{{ localization.country | image_url: width: 48 }}"
                           alt=""
                           width="24"
                           height="24"
@@ -882,7 +951,7 @@
                               >
                                 <span class="km-footer-locale__country">
                                   <img
-                                    src="https://flagcdn.com/w40/{{ country.iso_code | downcase }}.png"
+                                    src="{{ country | image_url: width: 32 }}"
                                     alt=""
                                     width="16"
                                     height="16"

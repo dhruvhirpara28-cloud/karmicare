@@ -9,16 +9,15 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the new FAQ block `Pz4mRk` adds three entries at the end of batch 01 (#226–228), so the earlier numbers stay;
   - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`;
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
-  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“… FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017”, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
-  - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale;
-  - two PDP CTAs follow Victor's "Begin your" (global-nav `6c07148`): the buy-box text per plan (*Begin your 60-Day Rhythm* / *Begin your Karmicare Year*, `corrected`) and the sticky-bar default `main-product.liquid:1024` (*Begin your Karmicare Year*), both with `old_en`.
+  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017”, Victor's short line of 21 Oct, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
+  - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 229 | `7694e7acce33a1e22a90de53273f2c90a8ddd70a` |
-| `batch-02-pdp` | 477 | `e4709cc6bbf22152ae64461abc1ea69bcca08839` |
+| `batch-02-pdp` | 477 | `2846c75e4df9f09cca9026b613cfddc61f307f5d` |
 | `batch-03-header-footer` | 41 | `a853d438d503867882d711cd4fa5a4a93c29759f` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
@@ -61,7 +60,7 @@ By status:
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
 | `batch-01-homepage` | 145 | 21 | 30 | 31 | 2 | 16 |
-| `batch-02-pdp` | 146 | 4 | 23 | 36 | 268 | 32 |
+| `batch-02-pdp` | 147 | 3 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 2 | 1 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
@@ -156,7 +155,7 @@ Not changed, because no text setting in the allowed files carries it:
 | 02 | `sections/main-product.liquid:1006` | Delivery & what's included | sticky bar: schema default of sticky_cart setting 'panel_label'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:1012` | Change | sticky bar: schema default of sticky_cart setting 'change_label'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
 | 02 | `sections/main-product.liquid:1018` | Begin your 60-Day Rhythm | sticky bar: schema default of sticky_cart setting 'cta_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate… |
-| 02 | `sections/main-product.liquid:1024` | Begin your Karmicare Year | sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
+| 02 | `sections/main-product.liquid:1024` | Begin the Karmicare Year | sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
 | 02 | `sections/main-product.liquid:1030` | Try once | sticky bar: schema default of sticky_cart setting 'cta_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate &… |
 | 02 | `sections/main-product.liquid:1036` | Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe | sticky bar: schema default of sticky_cart setting 'delivery_free'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
 | 02 | `sections/main-product.liquid:1042` | Shipping calculated at checkout | sticky bar: schema default of sticky_cart setting 'delivery_once'. The PDP template stores only button_text, so this default renders and is invisible to Transl… |
@@ -308,7 +307,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 |---:|---|---|---|---|---|
 | 1 | `index:hero_karmicare_XKKLDK/heading_RHmd8h/heading` | template_setting | Your mouth has a rhythm Now your oral care too | approved |  |
 | 2 | `index:hero_karmicare_XKKLDK/text_Y7L3hV/text` | template_setting | Karmicare is a day-and-night oral care system designed around your mouth’s 24-hour rhythm. Awake fo… | approved |  |
-| 3 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 3 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 4 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2` | template_setting | WHY TWO FORMULAS? | approved |  |
 | 5 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/awake_label` | template_setting | AWAKE | approved | NT |
 | 6 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/asleep_label` | template_setting | ASLEEP | approved | NT |
@@ -341,7 +340,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 33 | `index:chronobiology_clock_karmicare/footer_link_text` | template_setting | Read the science | approved |  |
 | 34 | `index:two_formulas_karmicare/subheading` | template_setting | BIORHYTHMIC ORAL CARE | approved |  |
 | 35 | `index:two_formulas_karmicare/heading` | template_setting | Two formulas. One system. Designed around you. | approved |  |
-| 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 37 | `index:two_formulas_karmicare/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
 | 38 | `index:two_formulas_karmicare/left_heading` | template_setting | Activated and strengthened by day | approved |  |
 | 39 | `index:two_formulas_karmicare/left_text` | template_setting | Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated. | approved | C C26 |
@@ -353,7 +352,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 45 | `index:product_benefits_karmicare_bcQ6tp/subheading` | template_setting | the benefits | approved |  |
 | 46 | `index:product_benefits_karmicare_bcQ6tp/heading` | template_setting | Clean is not the same as healthy. | approved |  |
 | 47 | `index:product_benefits_karmicare_bcQ6tp/text` | template_setting | You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, kee… | needs-review | C C20,C32,C34 |
-| 48 | `index:product_benefits_karmicare_bcQ6tp/button_label` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 48 | `index:product_benefits_karmicare_bcQ6tp/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 49 | `index:product_benefits_karmicare_bcQ6tp/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
 | 50 | `index:product_benefits_karmicare_bcQ6tp/bottom_note` | template_setting | *Reported outcomes vary. Mechanisms and published evidence are shown separately. | approved |  |
 | 51 | `index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/label` | template_setting | 01 · NANO-HYDROXYAPATITE | approved |  |
@@ -480,7 +479,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 172 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1` | template_setting | 10% / order | approved |  |
 | 173 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_2` | template_setting | 10% each purchase | approved |  |
 | 174 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/per_brushing_text` | template_setting | per brushing | approved |  |
-| 175 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | template_setting | Begin your 60-day ritual | approved |  |
+| 175 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | template_setting | Begin your 60-Day Rhythm | approved |  |
 | 176 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_1` | template_setting | 60-day money-back guarantee | corrected |  |
 | 177 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_2` | template_setting | Cancel anytime | approved |  |
 | 178 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_3` | template_setting | Free shipping | approved |  |
@@ -559,7 +558,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 17 | `product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_welcome_kit_title` | template_setting | Welcome Kit on first order (value [value]) | approved |  |
 | 18 | `product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_welcome_kit_value` | template_setting | FREE | approved |  |
 | 19 | `product.subscription-item:main/buy_buttons/custom_button_text` | template_setting | Begin Now | approved |  |
-| 20 | `product.subscription-item:main/buy_buttons/custom_button_text_by_plan` | template_setting | 712106115453: Begin your 60-Day Rhythm 712155431293: Begin your Karmicare Year | corrected |  |
+| 20 | `product.subscription-item:main/buy_buttons/custom_button_text_by_plan` | template_setting | 712106115453: Start my 60-Day rhythm 712155431293: Start my Karmicare Year | approved |  |
 | 21 | `product.subscription-item:main/icon_with_text_xhaDGB/heading_1` | template_setting | 60-day money-back guarantee | approved |  |
 | 22 | `product.subscription-item:main/icon_with_text_xhaDGB/heading_2` | template_setting | Gift, pause or cancel | approved |  |
 | 23 | `product.subscription-item:main/icon_with_text_xhaDGB/heading_3` | template_setting | Free shipping | approved |  |
@@ -728,7 +727,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 186 | `liquid:sections/main-product.liquid:1006` | theme_locale | Delivery & what's included | needs-key |  |
 | 187 | `liquid:sections/main-product.liquid:1012` | theme_locale | Change | needs-key |  |
 | 188 | `liquid:sections/main-product.liquid:1018` | theme_locale | Begin your 60-Day Rhythm | needs-key |  |
-| 189 | `liquid:sections/main-product.liquid:1024` | theme_locale | Begin your Karmicare Year | needs-key |  |
+| 189 | `liquid:sections/main-product.liquid:1024` | theme_locale | Begin the Karmicare Year | needs-key |  |
 | 190 | `liquid:sections/main-product.liquid:1030` | theme_locale | Try once | needs-key |  |
 | 191 | `liquid:sections/main-product.liquid:1036` | theme_locale | Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe | needs-key |  |
 | 192 | `liquid:sections/main-product.liquid:1042` | theme_locale | Shipping calculated at checkout | needs-key |  |
@@ -1022,7 +1021,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 
 | # | id | type | EN | status | flags |
 |---:|---|---|---|---|---|
-| 1 | `header-group:announcement-bar/announcement-bar-0/text` | section_group | COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017 | corrected | C C103 |
+| 1 | `header-group:announcement-bar/announcement-bar-0/text` | section_group | FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017 | corrected | C C103 |
 | 2 | `header-group:header/cta_text` | section_group | BEGIN NOW | approved |  |
 | 3 | `footer-group:footer/slogan` | section_group | Your mouth has a rhythm So should your oral care | needs-review |  |
 | 4 | `footer-group:footer/copyright_text` | section_group | Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep… | corrected | C C99 |

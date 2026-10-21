@@ -146,11 +146,29 @@ These are not source changes. FR has already been told to gate `#b081` and to sw
 
 ## 21 Oct: CTA wording "Begin your"
 
-Victor (21 Oct, global-nav `6c07148`): every CTA uses *Begin*, in the form *Begin your*. Two EN strings in `batch-02-pdp` changed; each keeps the previous text in `old_en` / `old_sha1`. No entry added or removed; the buy-box text is now `corrected`. `batch-02-pdp` digest `2846c75e4df9f09cca9026b613cfddc61f307f5d` → `e4709cc6bbf22152ae64461abc1ea69bcca08839`; every other digest unchanged. (`6c07148` computed `2f2e292c…` from an older base, `666785ab…`; this digest replaces it.)
+Victor (21 Oct): every CTA uses *Begin*, in the form *Begin your*. Three EN strings in `batch-02-pdp` changed; each entry keeps the previous text in `old_en` / `old_sha1`. No entry added, removed or reclassified. On top of `karmicare/soft-launch` (with the NV-13 `kit_free` retirement, `d72d791`): `batch-02-pdp` digest `2846c75e4df9f09cca9026b613cfddc61f307f5d` → `e3e79339215ffcf134b6813f1b46310a1c380fc8`; every other digest unchanged. NL and FR payloads already follow (`source_digest` updated); FR now also holds the retired `liquid:sections/main-product.liquid:1104` as NL does. `digest.py`, `nl/validate.py` and `fr/check.py` exit 0.
 
 | Id | Before | Now | NL | FR |
 |---|---|---|---|---|
 | `product.subscription-item:main/buy_buttons/custom_button_text_by_plan` | `712106115453: Start my 60-Day rhythm` / `712155431293: Start my Karmicare Year` | `712106115453: Begin your 60-Day Rhythm` / `712155431293: Begin your Karmicare Year` | Begin je 60-dagenritme / Begin je Karmicare-jaar | Commencer votre Rythme 60 jours / Commencer votre année Karmicare |
 | `liquid:sections/main-product.liquid:1024` (`kc.sticky_cart.cta_year_html`) | Begin the Karmicare Year | Begin your Karmicare Year | Begin je Karmicare-jaar | Commencer votre année Karmicare |
+| `admin:…:custom.compare_table\|shop.metaobjects.compare_value#25` (Compare Plan "60-Day Rhythm", CTA Button) | Begin 60-Day Rhythm | Begin your 60-Day Rhythm (changed in the admin by Victor, 21 Oct) | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |
 
-The template setting reaches `/nl` and `/fr` only once the payload is registered (nothing is registered yet). The locale key ships with the theme.
+The template setting and the metaobject reach `/nl` and `/fr` only once the payload is registered (`registration/DRY-RUN.md`: regenerate it first; nothing is registered yet); registration matches on the live EN, so these entries carry the new text. The locale key ships with the theme. Not changed: `compare_value#31`, the Year column's CTA "Begin" (live admin text on 21 Oct).
+
+## 21 Oct: short announcement line
+
+Victor (21 Oct): first "Circadian" became "Biorhythmic" (global-nav `ac822db`), then he chose the short line, because the long one (114 characters) ran too long. One EN string in `batch-03-header-footer` changed. `old_en` / `old_sha1` stay on the live text (`COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE`), because neither long line went live. `batch-03-header-footer` digest `a853d438d503867882d711cd4fa5a4a93c29759f` → `d5353b16cc57ea2181626f9f9cfa79dda0cb107d` (`a02de10a…` in between); every other digest unchanged. NL and FR payloads follow (`source_digest` updated) and keep their established guarantee phrases, because a bare *garantie* reads as the legal warranty. `digest.py`, `nl/validate.py` and `fr/check.py` exit 0. Claim C103 stays `needs-review`: the year still has no source in the repo.
+
+| Id | Before | Now | NL | FR |
+|---|---|---|---|---|
+| `header-group:announcement-bar/announcement-bar-0/text` | COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017 | FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017 | GRATIS VERZENDING & 60 DAGEN GELD TERUG VOOR LEDEN · GEMAAKT IN BELGIË · SINDS 2017 | LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017 |
+
+## 21 Oct: homepage CTAs name the plan, "60-Day Rhythm"
+
+Victor (21 Oct): every CTA names the plan the PDP sells, *Rhythm*, not *Ritual*. Four EN strings in `batch-01-homepage` changed; each keeps the live Ritual text in `old_en` / `old_sha1`. No entry added, removed or reclassified. `batch-01-homepage` digest `7694e7acce33a1e22a90de53273f2c90a8ddd70a` → `5286628ff7c87962782903bc9e1ce3350dd61469`; every other digest unchanged. NL and FR payloads follow (`source_digest` updated) with the plan names the PDP already uses. The schema defaults in `hero-karmicare`, `product-benefits-karmicare` and `two-formulas-karmicare` follow too. `digest.py`, `nl/validate.py` and `fr/check.py` exit 0.
+
+| Id | Before | Now | NL | FR |
+|---|---|---|---|---|
+| `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1`, `index:two_formulas_karmicare/button_label`, `index:product_benefits_karmicare_bcQ6tp/button_label` | BEGIN YOUR 60-DAY RITUAL | BEGIN YOUR 60-DAY RHYTHM | BEGIN JE 60-DAGENRITME | COMMENCER VOTRE RYTHME 60 JOURS |
+| `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | Begin your 60-day ritual | Begin your 60-Day Rhythm | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |

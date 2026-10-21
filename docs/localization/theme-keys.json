@@ -1,9 +1,9 @@
 {
  "about": "Theme locale keys for the needs-key strings of the B1a inventory (docs/source-copy/en-source.json). docs/localization/theme_keys.py writes them into every storefront locale file: en.default gets en; nl and fr get their value unless *_hold is set, then en (open reviews in *_review do not hold); every other locale gets en (MatchingTranslations).",
  "sources": {
-  "en": "docs/source-copy/en-source.json (batch-01 7694e7acce33, batch-02 e4709cc6bbf2, batch-03 a853d438d503)",
+  "en": "docs/source-copy/en-source.json (batch-01 7694e7acce33, batch-02 2846c75e4df9, batch-03 a853d438d503)",
   "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review are recorded in nl_review, they do not hold)",
-  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr 7ada709 (status theme-key; pending-claim-review and legal-review are recorded in fr_review, they do not hold)"
+  "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr a518477 (status theme-key; pending-claim-review and legal-review are recorded in fr_review, they do not hold)"
  },
  "not_keyed_here": {
   "liquid:sections/header.liquid:1077": "kc.general.coming_soon, added on karmicare/soft-launch-homepage (09bb6e3)",
@@ -699,11 +699,7 @@
    "fr_hold": null,
    "note": "Default of the sticky_cart setting cta_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
-   "fr_review": null,
-   "decided": {
-    "fr": "Commencer votre année Karmicare",
-    "by": "Victor 21 Oct, every CTA 'Begin your' (global-nav 6c07148); FR as kc.sticky_cart.cta_rhythm_html, until the FR payload follows"
-   }
+   "fr_review": null
   },
   {
    "key": "kc.sticky_cart.delivery_free_html",

@@ -8,11 +8,10 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 20,
-  "held": 2
+  "admin": 22
  },
  "flag_counts": {
-  "pending-claim-review": 5,
+  "pending-claim-review": 7,
   "wording-adapted": 7
  },
  "entries": [
@@ -238,10 +237,12 @@
    "key_path": "body_html#b001",
    "en": "Dive deep into the benefits of NASA’s favorite supplement for oral health",
    "en_sha1": "74cd8126bb75f1998d034857092a4b69fadfcaa0",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin framing overstates the evidence; 'supplement for oral health' is a non-cosmetic framing.); translate after the EN is fixed or removed",
+   "fr": "Plongez au cœur des bienfaits du complément préféré de la NASA pour la santé bucco-dentaire",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin framing overstates the evidence; 'supplement for oral health' is a non-cosmetic framing.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -264,10 +265,12 @@
    "key_path": "seo.description",
    "en": "Discover the Wonderful Inner World of Nano Hydroxyapatite and Why You Need it in Your Toothpaste Dive deep into the benefits of NASA’s favorite supplement for oral health",
    "en_sha1": "518e171ea8390b669611c8f82b1e81fa2e4352a6",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin framing overstates the evidence; 'supplement' is a non-cosmetic framing.); translate after the EN is fixed or removed",
+   "fr": "Découvrez le monde fascinant de la nano-hydroxyapatite et pourquoi votre dentifrice en a besoin. Plongez au cœur des bienfaits du complément préféré de la NASA pour la santé bucco-dentaire",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin framing overstates the evidence; 'supplement' is a non-cosmetic framing.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
