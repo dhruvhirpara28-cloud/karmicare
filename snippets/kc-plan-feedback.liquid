@@ -1,7 +1,8 @@
 {%- comment -%}
   What a comparison table plan button reports while it goes to checkout (assets/kc-plan-select.js,
   R14): a loading status for assistive technology, and the cart error at the table (Shopify's message or
-  the theme's cart error, copied from the buybox error line). Rendered inside the element that carries
+  the theme's cart error, copied from the buybox error line). The copy is visual only, not live: the
+  buybox error line (role=alert) announces it, once (R14e). Rendered inside the element that carries
   data-kc-plan-feedback-scope (sections/product-compare-plans.liquid, sections/comparison-table.liquid).
 {%- endcomment -%}
 <div class="kc-plan-feedback" data-kc-plan-feedback>
@@ -11,7 +12,7 @@
     data-kc-plan-status
     data-loading-text="{{ 'accessibility.loading' | t | escape }}"
   ></span>
-  <div class="kc-plan-feedback__error" role="alert" data-kc-plan-error hidden>
+  <div class="kc-plan-feedback__error" data-kc-plan-error hidden>
     <span class="kc-plan-feedback__icon" aria-hidden="true">
       {{- 'icon-error.svg' | inline_asset_content -}}
     </span>
