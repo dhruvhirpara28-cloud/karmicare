@@ -163,3 +163,12 @@ Victor (21 Oct): first "Circadian" became "Biorhythmic" (global-nav `ac822db`), 
 | Id | Before | Now | NL | FR |
 |---|---|---|---|---|
 | `header-group:announcement-bar/announcement-bar-0/text` | COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017 | FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017 | GRATIS VERZENDING & 60 DAGEN GELD TERUG VOOR LEDEN · GEMAAKT IN BELGIË · SINDS 2017 | LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017 |
+
+## 21 Oct: homepage CTAs name the plan, "60-Day Rhythm"
+
+Victor (21 Oct): every CTA names the plan the PDP sells, *Rhythm*, not *Ritual*. Four EN strings in `batch-01-homepage` changed; each keeps the live Ritual text in `old_en` / `old_sha1`. No entry added, removed or reclassified. `batch-01-homepage` digest `7694e7acce33a1e22a90de53273f2c90a8ddd70a` → `5286628ff7c87962782903bc9e1ce3350dd61469`; every other digest unchanged. NL and FR payloads follow (`source_digest` updated) with the plan names the PDP already uses. The schema defaults in `hero-karmicare`, `product-benefits-karmicare` and `two-formulas-karmicare` follow too. `digest.py`, `nl/validate.py` and `fr/check.py` exit 0.
+
+| Id | Before | Now | NL | FR |
+|---|---|---|---|---|
+| `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1`, `index:two_formulas_karmicare/button_label`, `index:product_benefits_karmicare_bcQ6tp/button_label` | BEGIN YOUR 60-DAY RITUAL | BEGIN YOUR 60-DAY RHYTHM | BEGIN JE 60-DAGENRITME | COMMENCER VOTRE RYTHME 60 JOURS |
+| `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | Begin your 60-day ritual | Begin your 60-Day Rhythm | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |

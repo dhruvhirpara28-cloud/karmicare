@@ -307,7 +307,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 |---:|---|---|---|---|---|
 | 1 | `index:hero_karmicare_XKKLDK/heading_RHmd8h/heading` | template_setting | Your mouth has a rhythm Now your oral care too | approved |  |
 | 2 | `index:hero_karmicare_XKKLDK/text_Y7L3hV/text` | template_setting | Karmicare is a day-and-night oral care system designed around your mouth’s 24-hour rhythm. Awake fo… | approved |  |
-| 3 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 3 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 4 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2` | template_setting | WHY TWO FORMULAS? | approved |  |
 | 5 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/awake_label` | template_setting | AWAKE | approved | NT |
 | 6 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/asleep_label` | template_setting | ASLEEP | approved | NT |
@@ -340,7 +340,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 33 | `index:chronobiology_clock_karmicare/footer_link_text` | template_setting | Read the science | approved |  |
 | 34 | `index:two_formulas_karmicare/subheading` | template_setting | BIORHYTHMIC ORAL CARE | approved |  |
 | 35 | `index:two_formulas_karmicare/heading` | template_setting | Two formulas. One system. Designed around you. | approved |  |
-| 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 37 | `index:two_formulas_karmicare/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
 | 38 | `index:two_formulas_karmicare/left_heading` | template_setting | Activated and strengthened by day | approved |  |
 | 39 | `index:two_formulas_karmicare/left_text` | template_setting | Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated. | approved | C C26 |
@@ -352,7 +352,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 45 | `index:product_benefits_karmicare_bcQ6tp/subheading` | template_setting | the benefits | approved |  |
 | 46 | `index:product_benefits_karmicare_bcQ6tp/heading` | template_setting | Clean is not the same as healthy. | approved |  |
 | 47 | `index:product_benefits_karmicare_bcQ6tp/text` | template_setting | You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, kee… | needs-review | C C20,C32,C34 |
-| 48 | `index:product_benefits_karmicare_bcQ6tp/button_label` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 48 | `index:product_benefits_karmicare_bcQ6tp/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 49 | `index:product_benefits_karmicare_bcQ6tp/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
 | 50 | `index:product_benefits_karmicare_bcQ6tp/bottom_note` | template_setting | *Reported outcomes vary. Mechanisms and published evidence are shown separately. | approved |  |
 | 51 | `index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/label` | template_setting | 01 · NANO-HYDROXYAPATITE | approved |  |
@@ -479,7 +479,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 172 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1` | template_setting | 10% / order | approved |  |
 | 173 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_2` | template_setting | 10% each purchase | approved |  |
 | 174 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/per_brushing_text` | template_setting | per brushing | approved |  |
-| 175 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | template_setting | Begin your 60-day ritual | approved |  |
+| 175 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | template_setting | Begin your 60-Day Rhythm | approved |  |
 | 176 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_1` | template_setting | 60-day money-back guarantee | corrected |  |
 | 177 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_2` | template_setting | Cancel anytime | approved |  |
 | 178 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_3` | template_setting | Free shipping | approved |  |
