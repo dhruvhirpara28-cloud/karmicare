@@ -89,7 +89,8 @@
         {%- for block in section.blocks -%}
           <div class="stat-strip-karmicare__item" {{ block.shopify_attributes }}>
             {%- if block.settings.heading != blank -%}
-              <{{ heading_tag }} class="stat-strip-karmicare__heading">
+              {%- comment -%} The h4 class keeps the type when the tag is not h4 (the homepage uses p: a stat is not a heading) {%- endcomment -%}
+              <{{ heading_tag }} class="stat-strip-karmicare__heading h4">
                 {{ block.settings.heading }}
               </{{ heading_tag }}>
             {%- endif -%}
