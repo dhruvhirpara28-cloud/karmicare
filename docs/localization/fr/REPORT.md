@@ -251,23 +251,31 @@ The homepage lane rewrote part of the homepage (integration `41ae772`, merchant-
   - The two empty `how_it_works` step numbers on the PDP.
 - **check.py:** no `[NEEDS APPROVED COPY]` placeholder remains in the source, so the placeholder self-test now releases the `blocked` SLS article `b035`. That fails for the same reason.
 
+## Waiver field, clock key, Sietske's quote (source-copy 0c3a4cb, 21 Oct)
+
+- **Waiver from the source:** en-source now marks the 119 waived entries with `claim_hold_waived: "2026-10-20 Victor, translation only"`. `check.py` releases an unsupported-claim hold only when the source has that field and the FR entry carries `pending-claim-review` and the waiver note. A waiver note on an entry the source did not waive is an error.
+- **Sietske Hamelink's quote, held again:** the C84/C85 quote is `card_CtQgU9/hover_text`, on the homepage and on the PDP. It is a person's own words. The waiver covers claims, not a quote, and a French version needs her own wording or her approval. NL holds it for the same reason (landing desk, `msg_a6d24f8ca48c`). The FR draft from `3ec7a5e` stays in the notes. 117 of the 119 waived entries now carry FR.
+- **`locale:kc.clock.loading`:** the source inventoried this key (B-03), and FR gives it "Chargement de l’heure locale actuelle". `kc.*` keys ship through `theme_keys.py`, so `check.py` expects `theme-key` for them, not `locale-present`, as NL does. The source owner's `theme_keys.py refresh --fr-dir` and `write` put the key into `locales/fr.json`. FR does not edit that file, so each key has one writer. `theme_keys.py check --fr-dir docs/localization/fr` reports only this key until that happens.
+- **B-03:** the source owner's `c348c72` regenerated `locales/fr.json`, and `kc.clock.window_1..7` and the four footer keys are now French there.
+- **Self-test:** two new mutations, "waiver note without the source field" and "kc.* key as locale-present", bring it to 20/20.
+
 The source note on `qUxYCn/answer` still names claims C13 and C93. Those belonged to the old answer, and the entry has no `claims` field, so FR sets no claim flag there.
 
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `2846c75e…` | 477 | 139 | 251 | 35 | 15 | 37 |
-| `batch-01-homepage` | `46f2753b…` | 228 | 173 | 2 | 30 | 2 | 21 |
+| `batch-02-pdp` | `2846c75e…` | 477 | 138 | 251 | 35 | 15 | 38 |
+| `batch-01-homepage` | `7694e7ac…` | 229 | 172 | 2 | 31 | 2 | 22 |
 | `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 698 | 0 | 0 | 10 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,574** | **481** | **1,533** | **75** | **62** | **423** |
+| **Total** | | **2,575** | **479** | **1,533** | **76** | **62** | **425** |
 
-Every source entry is covered: 2,151 carry FR and 423 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, and the homepage copy at 41ae772, 0ba9de3). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,150 carry FR and 425 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, and the waiver field, clock key and Sietske hold, 0c3a4cb). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -282,7 +290,7 @@ Every source entry is covered: 2,151 carry FR and 423 are held (after the source
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (423)
+### Held (425)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
@@ -290,12 +298,13 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
 | 01–02 | retired | 8 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`); FAQ `4KMG6C` (3 fields) and the two empty PDP `how_it_works` step numbers (41ae772, source-copy `0ba9de3`) |
+| 01–02 | practitioner quote | 2 | Sietske Hamelink's quote (C84/C85, `card_CtQgU9/hover_text`, homepage and PDP): her own words; FR needs her wording or approval, as NL (landing desk 21 Oct) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 25 warnings, 18/18 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 25 warnings, 20/20 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;

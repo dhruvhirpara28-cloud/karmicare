@@ -2,17 +2,17 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "46f2753b65fd2c2e40789a16c4fb6c798b3bebbf",
+ "source_digest": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
  "source_entries": 225,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "admin": 2,
-  "held": 21,
+  "held": 22,
   "locale-present": 2,
-  "theme-key": 30,
-  "translated": 173
+  "theme-key": 31,
+  "translated": 172
  },
  "flag_counts": {
   "fit-risk": 9,
@@ -1389,12 +1389,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "fr": "<p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: C84, C85 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed",
+   "notes": "held: practitioner quote stays in her own EN words (landing desk 21 Oct, msg_a6d24f8ca48c, as NL); the claim waiver covers claims, not a person's quote; a FR version needs her own wording or approval. FR draft from 3ec7a5e: <p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
    "source_status": "needs-review",
    "claims": [
     "C84",
@@ -3254,6 +3254,19 @@
    "status": "translated",
    "flags": [],
    "notes": "membership as 'adhésion' (glossary); new 21 Oct (41ae772).",
+   "source_status": "approved"
+  },
+  {
+   "id": "locale:kc.clock.loading",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.loading",
+   "en": "Loading current local time",
+   "en_sha1": "ef5fdb2b7c50d37d993eac56e40b58cee99885df",
+   "fr": "Chargement de l’heure locale actuelle",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "aria-valuetext of the clock before its script runs, not visible; as kc.clock.valuetext_live ('Heure locale actuelle'). theme_keys.py writes it into locales/fr.json (source owner); inventoried 21 Oct (B-03).",
    "source_status": "approved"
   }
  ]
