@@ -13,21 +13,28 @@ Run from the repo root:
   python3 docs/localization/registration/register.py --lang nl [--theme-id N] [--remove-never] --write --approve <checksum>
 
 Dry run (the default) sends only queries. Targets are resolved by identity first and EN second:
-- theme content only in resources whose GID proves the published theme (--theme-id) and the template, with
-  every hint as an exact token of the key; without --theme-id, theme items are out of scope;
+- theme content only in resources whose GID names the template and carries the supplied --theme-id in a
+  THEME_PARAMS parameter, with every hint as an exact token of the key; without --theme-id it is out of scope.
+  The ID must be numeric and proven published: by themes(roles: MAIN) when the token may read themes, or by
+  --theme-attested "<today> <name>" from the operator; the proof is part of the approval and is checked again
+  when writing;
 - direct items only on their own key; product metafields only by namespace and key; metaobjects only
-  through the product's metafield references (nested references need read_metaobjects);
+  through the product's metafield references (nested references need read_metaobjects), and only on a field
+  the inventory names or that a reviewed bindings.json binds; the dry run proposes bindings, never writes them;
 - menu links and shop policies have no proven owner route yet and are never written.
+The report ends with the API contract the run saw (scopes, sample GIDs and keys, invalid content).
 Exactly one target is written. None is stale or missing, several are ambiguous, and two plan items that
 want different values on one target are a conflict: none of these is written. Protected targets
 (selling plans and groups, handle_item, selling_plan_id, the Subscription Name values) are never
 registered; existing translations on them are proposed for removal, which is part of the approval only
 with --remove-never. A JSON field is written only when every text leaf maps to an approved item.
 
-Approval binds a snapshot: store, API version, theme, plan file, removal choice, and per target the live
-EN digest, the current NL/FR (present, value, outdated) and the new value. Write rebuilds the snapshot
-and writes only if its checksum is the approved one, re-reads each resource right before its mutation,
-and stops at the first difference. A translation edited between that re-read and the mutation is not
+Approval binds a snapshot: store, API version, theme and its proof, plan file, bindings file, removal choice,
+and per target the live EN digest, the current NL/FR (present, value, outdated) and the new value. Write
+rebuilds the snapshot and writes only if its checksum is the approved one, re-reads each resource right
+before its mutation (a resource the re-read omits fails), and stops at the first difference. A mutation
+counts as confirmed only with its expected payload, no user errors and exactly the requested keys; anything
+else is unknown and stops the run. A translation edited between that re-read and the mutation is not
 detected: the API digest protects the EN only. NL and FR are published: a registered translation is
 live at once.
 
@@ -59,11 +66,15 @@ LOOP_GIDS = ("SellingPlan", "SellingPlanGroup")
 NEVER_KEYS = ("handle_item", "selling_plan_id")
 NEVER_VALUES = ("60-Day Supply", "Year Supply")
 THEME_TYPES = ("ONLINE_STORE_THEME_JSON_TEMPLATE", "ONLINE_STORE_THEME_SECTION_GROUP")
+# The GID query parameter that carries the theme ID; confirm against the first read-only run's contract section.
+THEME_PARAMS = ("theme_id",)
+BINDINGS = "docs/localization/registration/bindings.json"
 HANDLE_TYPES = ("PRODUCT", "PAGE", "ARTICLE", "BLOG", "COLLECTION")
 UNPROVEN_TYPES = {"LINK": "menu links: no verified owner route (menu -> link) yet",
                   "SHOP_POLICY": "shop policies: no verified owner route (policy type -> resource) yet"}
 BODY_KEYS = {"body_html": "body_html", "summary_html": "summary_html", "body": "body_html"}
-STRUCTURAL_KEYS = {"type", "url", "target", "listType", "level", "id", "handle", "href", "icon", "image", "link"} | set(NEVER_KEYS)
+RICH_TEXT_TYPES = {"root", "paragraph", "heading", "list", "list-item", "link", "text"}
+RICH_TEXT_FIELDS = {"type", "url", "target", "listType", "level"}
 STRUCTURAL_VALUE = re.compile(r"^(gid://|https?://|/|#|mailto:|tel:)|^[\d\s.,:;%€$+\-/()]*$")
 REGISTER_CHUNK = 50
 REMOVE_CHUNK = 50
@@ -78,6 +89,7 @@ Q_IDS = """query($ids: [ID!]!, $after: String, $locale: String!) {
     nodes { %s } pageInfo { hasNextPage endCursor } } }""" % CONTENT
 Q_METAFIELDS = """query($id: ID!, $after: String) {
   product(id: $id) { metafields(first: 250, after: $after) { nodes { id namespace key type value } pageInfo { hasNextPage endCursor } } } }"""
+Q_MAIN_THEME = """query { themes(first: 2, roles: [MAIN]) { nodes { id } } }"""
 Q_METAOBJECT = """query($id: ID!) { metaobject(id: $id) { id type handle fields { key type value } } }"""
 Q_METAOBJECT_HANDLE = """query($type: String!, $handle: String!) {
   metaobjectByHandle(handle: {type: $type, handle: $handle}) { id type handle fields { key type value } } }"""
@@ -315,14 +327,25 @@ class Live:
                 self.by_id[node["resourceId"]] = node
         return self.by_type[rtype]
 
-    def by_ids(self, ids, fresh=False):
-        missing = [i for i in ids if fresh or i not in self.by_id]
+    def by_ids(self, ids):
+        missing = [i for i in ids if i not in self.by_id]
         for start in range(0, len(missing), 100):
             for node in self.admin.pages(Q_IDS, {"ids": missing[start:start + 100], "locale": self.locale}, "translatableResourcesByIds"):
                 node = clean(node)
                 if isinstance(node["resourceId"], str):
                     self.by_id[node["resourceId"]] = node
         return [self.by_id[i] for i in ids if i in self.by_id]
+
+    def reread(self, ids):
+        """Fresh nodes for ids, from this request only: {id: node}; ids the API omits or repeats are absent."""
+        seen = {}
+        for start in range(0, len(ids), 100):
+            for node in self.admin.pages(Q_IDS, {"ids": ids[start:start + 100], "locale": self.locale}, "translatableResourcesByIds"):
+                node = clean(node)
+                rid = node["resourceId"]
+                if isinstance(rid, str) and rid in ids:
+                    seen.setdefault(rid, []).append(node)
+        return {rid: nodes[0] for rid, nodes in seen.items() if len(nodes) == 1}
 
     def by_handle(self, rtype, handle):
         handle = handle.split("/")[-1]
@@ -367,14 +390,41 @@ def gid_type(rid):
 
 
 def theme_owned(rid, theme_id, name):
-    """True only if the GID names this template or group and carries the published theme's ID."""
+    """True only if the GID names this template or group and one of THEME_PARAMS holds exactly the supplied theme ID."""
     if not theme_id:
         return False
     parsed = urllib.parse.urlparse(rid)
     if parsed.path.rstrip("/").split("/")[-1] != name:
         return False
     params = urllib.parse.parse_qs(parsed.query)
-    return any("theme" in k.lower() and str(theme_id) in v for k, v in params.items())
+    return any(params.get(p) == [str(theme_id)] for p in THEME_PARAMS)
+
+
+def published_theme(admin):
+    """The MAIN theme's numeric ID if the token may read themes, else None (then an operator attestation is needed)."""
+    data = admin.query(Q_MAIN_THEME, {}, allow_denied=True)
+    nodes = ((data or {}).get("themes") or {}).get("nodes") or []
+    if len(nodes) != 1 or not isinstance(nodes[0].get("id"), str):
+        return None
+    m = re.match(r"^gid://shopify/OnlineStoreTheme/(\d+)$", nodes[0]["id"])
+    return m.group(1) if m else None
+
+
+def theme_proof(admin, theme_id, attested):
+    """How the supplied theme ID is known to be published, or a RunnerError."""
+    if theme_id is None:
+        return None
+    if not re.match(r"^\d+$", str(theme_id)):
+        raise RunnerError("--theme-id must be the theme's numeric ID.")
+    main = published_theme(admin)
+    if main is not None:
+        if main != str(theme_id):
+            raise RunnerError("--theme-id %s is not the published theme (Shopify reports %s)." % (theme_id, main))
+        return "read: themes(roles: MAIN)"
+    if not attested or not attested.startswith(time.strftime("%Y-%m-%d")):
+        raise RunnerError("The token cannot read themes: confirm the published theme yourself and pass "
+                          "--theme-attested \"%s <name>\" (today's date)." % time.strftime("%Y-%m-%d"))
+    return "operator: " + attested
 
 
 def key_tokens(key):
@@ -472,48 +522,64 @@ def metaobject_nodes(live, owner, field):
     return live.by_ids(sorted(set(refs))), None, None
 
 
-def leaves(tree, path=(), parent=None):
-    """(path, string, parent key) for every string value in a JSON tree; object keys are never leaves."""
+def leaves(tree, path=(), parent=None, holder=None):
+    """(path, string, parent key, containing object) for every string value; object keys are never leaves."""
     if isinstance(tree, dict):
         for k, v in tree.items():
-            yield from leaves(v, path + (k,), k)
+            yield from leaves(v, path + (k,), k, tree)
     elif isinstance(tree, list):
         for i, v in enumerate(tree):
-            yield from leaves(v, path + (i,), parent)
+            yield from leaves(v, path + (i,), parent, None)
     elif isinstance(tree, str):
-        yield path, tree, parent
+        yield path, tree, parent, holder
+
+
+def structural(parent, holder):
+    """Never translated: never-translate keys anywhere, and the node fields of Shopify rich text."""
+    if parent in NEVER_KEYS:
+        return True
+    return isinstance(holder, dict) and holder.get("type") in RICH_TEXT_TYPES and parent in RICH_TEXT_FIELDS
 
 
 def set_path(tree, path, value):
+    """The tree with the value at path; an empty path replaces the root."""
+    if not path:
+        return value
+    node = tree
     for p in path[:-1]:
-        tree = tree[p]
-    tree[path[-1]] = value
+        node = node[p]
+    node[path[-1]] = value
+    return tree
 
 
 def translate_json(value, by_en):
-    """The translated JSON text, or (None, blockers). by_en: EN -> list of plan items (any status)."""
+    """The translated JSON text, or (None, blockers). by_en: EN -> list of plan items (any status).
+
+    Order per leaf: an explicitly held or gated plan item vetoes the whole field, whatever the leaf's key;
+    then structural leaves stay; then the Subscription Name values stay; then the one approved translation
+    replaces the leaf; a leaf with no item that is not a URL, GID or number blocks the field."""
     try:
         tree = json.loads(value)
     except ValueError:
         return None, ["the live value is not valid JSON"]
     blockers, mapped = [], 0
     new = json.loads(value)
-    for path, text, parent in leaves(tree):
-        if parent in STRUCTURAL_KEYS or text.strip() in NEVER_VALUES:
-            continue
+    for path, text, parent, holder in leaves(tree):
         items = by_en.get(text, [])
+        if any(i["hold"] or i["gates"] for i in items):
+            blockers.append("held segment: %r (%s)" % (text, "; ".join(sorted(set(h for i in items for h in i["hold"] + i["gates"])))))
+            continue
+        if structural(parent, holder) or text.strip() in NEVER_VALUES:
+            continue
         if not items:
             if not STRUCTURAL_VALUE.match(text):
                 blockers.append("text with no plan item: %r" % text)
-            continue
-        if any(i["hold"] or i["gates"] for i in items):
-            blockers.append("held segment: %r (%s)" % (text, "; ".join(sorted(set(h for i in items for h in i["hold"] + i["gates"])))))
             continue
         values = set(i["value"] for i in items)
         if len(values) > 1:
             blockers.append("conflicting translations for %r: %s" % (text, sorted(values)))
             continue
-        set_path(new, path, values.pop())
+        new = set_path(new, path, values.pop())
         mapped += 1
     if blockers:
         return None, blockers
@@ -525,16 +591,41 @@ def translate_json(value, by_en):
     return out, []
 
 
-def build(plan, live, theme_id, remove_never):
-    """The approval snapshot's targets, and a row for every first-wave item."""
-    targets, rows = {}, []
+def structure_changes(en_value, current_value):
+    """Paths whose untranslated (structural) value differs between the live EN and the current translation."""
+    try:
+        en, cur = json.loads(en_value), json.loads(current_value)
+    except (ValueError, TypeError):
+        return ["the current translation is not JSON: the whole field is replaced"] if current_value else []
 
-    def want(node, content, item_ids, value, how):
+    def get(tree, path):
+        for p in path:
+            try:
+                tree = tree[p]
+            except (KeyError, IndexError, TypeError):
+                return None
+        return tree
+    return ["%s: current %r, new %r" % ("/".join(map(str, path)), get(cur, path), text)
+            for path, text, parent, holder in leaves(en) if (structural(parent, holder) or STRUCTURAL_VALUE.match(text))
+            and get(cur, path) != text]
+
+
+def build(plan, live, theme_id, remove_never, bindings=None, proposals=None):
+    """The approval snapshot's targets, and a row for every first-wave item.
+
+    bindings: reviewed {item id: {resource, key, en_sha1}} for metaobject items whose field the inventory does not
+    name; proposals collects a binding for each unbound item that has exactly one EN match, for review."""
+    targets, rows = {}, []
+    bindings = bindings or {}
+    proposals = {} if proposals is None else proposals
+
+    def want(node, content, item_ids, value, how, notes=()):
         key = (node["resourceId"], content["key"])
         t = targets.setdefault(key, {"action": "register", "resource": node["resourceId"], "key": content["key"],
                                      "en": content["value"], "en_digest": content["digest"],
-                                     "current": current(node, content["key"]), "values": {}, "how": how})
+                                     "current": current(node, content["key"]), "values": {}, "how": how, "notes": []})
         t["values"].setdefault(value, []).extend(item_ids)
+        t["notes"].extend(notes)
 
     def row(item, res, result, why=None, node=None, content=None):
         r = {"id": item["id"], "type": res["shopify_type"], "result": result, "en": item["en"], "value": item["value"]}
@@ -588,7 +679,7 @@ def build(plan, live, theme_id, remove_never):
                             continue
                         new, blockers = translate_json(content["value"], by_en)
                         try:
-                            texts = set(t for _, t, _ in leaves(json.loads(content["value"])))
+                            texts = set(leaf[1] for leaf in leaves(json.loads(content["value"])))
                         except ValueError:
                             texts = set()
                         in_field = [i for i in items if i["en"] in texts]
@@ -599,7 +690,9 @@ def build(plan, live, theme_id, remove_never):
                                         (" (+%d more)" % (len(blockers) - 5) if len(blockers) > 5 else ""), node, content)
                             used.update(i["id"] for i in in_field)
                             continue
-                        want(node, content, [i["id"] for i in in_field if i in wave], new, "JSON field, every text leaf mapped")
+                        cur = current(node, content["key"])
+                        want(node, content, [i["id"] for i in in_field if i in wave], new, "JSON field, every text leaf mapped",
+                             structure_changes(content["value"], cur["value"]) if cur["present"] else [])
                         used.update(i["id"] for i in in_field)
                 for i in wave:
                     if i["field"].startswith(family) and i["id"] not in used:
@@ -616,11 +709,34 @@ def build(plan, live, theme_id, remove_never):
                         row(item, res, "not written", "owner not proven: " + reason)
                     continue
                 for item in items:
-                    cands = [(n, c) for n in nodes for c in n["translatableContent"]
-                             if (fixed_key is None or c["key"] == fixed_key) and not protected(n["resourceId"], c)]
-                    exact = [(n, c) for n, c in cands if hashlib.sha1(c["value"].encode("utf-8")).hexdigest() == item["en_sha1"]]
+                    sha = lambda c: hashlib.sha1(c["value"].encode("utf-8")).hexdigest()
+                    bound = bindings.get(item["id"]) if fixed_key is None else None
+                    if fixed_key is not None or bound:
+                        rid = bound["resource"] if bound else None
+                        key = bound["key"] if bound else fixed_key
+                        if bound and bound.get("en_sha1") != item["en_sha1"]:
+                            row(item, res, "not written", "the binding in bindings.json was made for another EN")
+                            continue
+                        cands = [(n, c) for n in nodes for c in n["translatableContent"]
+                                 if c["key"] == key and (rid is None or n["resourceId"] == rid)]
+                        if len(cands) != 1:
+                            row(item, res, "missing" if not cands else "ambiguous",
+                                "%d proven metaobject fields with key %s%s" % (len(cands), key, " on %s" % rid if rid else ""))
+                        elif protected(cands[0][0]["resourceId"], cands[0][1]):
+                            row(item, res, "not written", "the target is protected (never translate / Loop)")
+                        elif sha(cands[0][1]) != item["en_sha1"]:
+                            row(item, res, "stale", "the live EN of the bound field differs from the plan", cands[0][0], cands[0][1])
+                        else:
+                            want(cands[0][0], cands[0][1], [item["id"]], item["value"],
+                                 "metaobject field %s" % ("bound in bindings.json" if bound else "named in the inventory"))
+                        continue
+                    exact = [(n, c) for n in nodes for c in n["translatableContent"]
+                             if sha(c) == item["en_sha1"] and not protected(n["resourceId"], c)]
                     if len(exact) == 1:
-                        want(exact[0][0], exact[0][1], [item["id"]], item["value"], "metaobject field, owner proven")
+                        proposals[item["id"]] = {"resource": exact[0][0]["resourceId"], "key": exact[0][1]["key"],
+                                                 "en_sha1": item["en_sha1"], "en": item["en"]}
+                        row(item, res, "not written", "field identity not bound: proposed binding in the report (review it into "
+                            "bindings.json)", exact[0][0], exact[0][1])
                     elif not exact:
                         row(item, res, "stale", "EN in no field of the proven metaobjects")
                     else:
@@ -695,7 +811,7 @@ def build(plan, live, theme_id, remove_never):
                          "resource": rid, "key": key, "value": value})
         if not same:
             ops.append({"action": "register", "resource": rid, "key": key, "en": t["en"], "en_digest": t["en_digest"],
-                        "current": t["current"], "value": value, "items": sorted(ids), "how": t["how"]})
+                        "current": t["current"], "value": value, "items": sorted(ids), "how": t["how"], "notes": t["notes"]})
     removals = []
     scan = list(live.of_type("METAOBJECT"))
     if theme_id:
@@ -709,7 +825,7 @@ def build(plan, live, theme_id, remove_never):
             cur = current(node, content["key"])
             if cur["present"]:
                 removals.append({"action": "remove", "resource": node["resourceId"], "key": content["key"], "en": content["value"],
-                                 "en_digest": content["digest"], "current": cur, "value": None, "items": [], "how": "never translate"})
+                                 "en_digest": content["digest"], "current": cur, "value": None, "items": [], "how": "never translate", "notes": []})
     reg_targets = {(o["resource"], o["key"]) for o in ops}
     if reg_targets & {(o["resource"], o["key"]) for o in removals}:
         raise RunnerError("Internal check failed: a target is in both the register and the remove set.")
@@ -719,12 +835,23 @@ def build(plan, live, theme_id, remove_never):
 
 
 def plan_hash(path):
-    return hashlib.sha256(open(path, "rb").read()).hexdigest()
+    return hashlib.sha256(open(path, "rb").read()).hexdigest() if os.path.exists(path) else None
 
 
-def snapshot(locale, theme_id, plan_sha, remove_never, ops):
-    return {"store": SHOP, "api": API_VERSION, "locale": locale, "theme_id": theme_id, "plan_sha256": plan_sha,
-            "remove_never": remove_never, "ops": [{k: o[k] for k in ("action", "resource", "key", "en_digest", "current", "value")} for o in ops]}
+def load_bindings(path):
+    if not os.path.exists(path):
+        return {}
+    data = json.load(open(path, encoding="utf-8"))
+    out = data.get("bindings") if isinstance(data, dict) else None
+    if not isinstance(out, dict) or not all(isinstance(b, dict) and {"resource", "key", "en_sha1"} <= set(b) for b in out.values()):
+        raise RunnerError("%s is not {\"bindings\": {item id: {resource, key, en_sha1}}}." % path)
+    return out
+
+
+def snapshot(locale, theme_id, theme_proof_text, plan_sha, bindings_sha, remove_never, ops):
+    return {"store": SHOP, "api": API_VERSION, "locale": locale, "theme_id": theme_id, "theme_proof": theme_proof_text,
+            "plan_sha256": plan_sha, "bindings_sha256": bindings_sha, "remove_never": remove_never,
+            "ops": [{k: o[k] for k in ("action", "resource", "key", "en_digest", "current", "value")} for o in ops]}
 
 
 def checksum(snap):
@@ -745,22 +872,40 @@ def cell(text):
     return (text or "").replace("\\", "\\\\").replace("|", "\\|").replace("<", "&lt;").replace("\n", " ")
 
 
-def report(locale, theme_id, remove_never, ops, removals, rows, check, notes):
+def contract(live, admin):
+    """What the read-only run saw of the API's shapes: scopes, resource GIDs and key formats, invalid content."""
+    lines = ["## API contract seen in this run", "",
+             "For the review of key formats and ownership (R18b): samples only, no translations.", "",
+             "- Token scopes: %s" % (", ".join(sorted(admin.scopes)) if admin.scopes is not None else "not reported by Shopify"), ""]
+    lines += ["| Type | Resources | Sample GIDs | Sample keys | Invalid content entries |", "|---|---:|---|---|---:|"]
+    for rtype, nodes in sorted(live.by_type.items()):
+        gids = ", ".join("`%s`" % n["resourceId"] for n in nodes[:3])
+        keys = ", ".join("`%s`" % c["key"] for c in (nodes[0]["translatableContent"][:5] if nodes else []))
+        lines.append("| %s | %d | %s | %s | %d |" % (rtype, len(nodes), cell(gids), cell(keys), sum(n.get("invalid", 0) for n in nodes)))
+    by_id_only = [n for rid, n in live.by_id.items() if not any(n is m for ns in live.by_type.values() for m in ns)]
+    lines.append("| (by ID) | %d | %s | %s | %d |" % (len(by_id_only), cell(", ".join("`%s`" % n["resourceId"] for n in by_id_only[:3])),
+                                                  cell(", ".join("`%s`" % c["key"] for c in (by_id_only[0]["translatableContent"][:5] if by_id_only else []))),
+                                                  sum(n.get("invalid", 0) for n in by_id_only)))
+    return lines + [""]
+
+
+def report(locale, theme_id, theme_proof_text, attested, remove_never, ops, removals, rows, check, notes, proposals=None, contract_lines=()):
     counts = {}
     for r in rows:
         counts[r["result"]] = counts.get(r["result"], 0) + 1
     regs = [o for o in ops if o["action"] == "register"]
     lines = ["# Live dry run · %s" % locale.upper(), "",
-             "Read only: nothing was written. Store %s, API %s, theme %s, %s." % (SHOP, API_VERSION, theme_id or "not in scope (no --theme-id)",
-                                                                              time.strftime("%Y-%m-%d %H:%M %Z")),
+             "Read only: nothing was written. Store %s, API %s, %s." % (SHOP, API_VERSION, time.strftime("%Y-%m-%d %H:%M %Z")),
+             "Theme: %s." % ("supplied ID %s, published per %s" % (theme_id, theme_proof_text) if theme_id else "not in scope (no --theme-id)"),
              "NL and FR are published: an approved write is live at once.", "",
              "| Item result | Items |", "|---|---:|"] + ["| %s | %d |" % (k, v) for k, v in sorted(counts.items())]
     lines += ["", "**Mutations in this approval:** %d register, %d remove%s. **Checksum `%s`.**" % (
         len(regs), sum(o["action"] == "remove" for o in ops),
         "" if remove_never or not removals else " (%d removals proposed, not approved: rerun with --remove-never)" % len(removals), check), "",
-        "To write exactly this:", "", "```sh",
-        "python3 docs/localization/registration/register.py --lang %s%s%s --write --approve %s" % (
-            locale, " --theme-id %s" % theme_id if theme_id else "", " --remove-never" if remove_never else "", check), "```", ""]
+        "To write exactly this (an operator attestation must carry the date of the write):", "", "```sh",
+        "python3 docs/localization/registration/register.py --lang %s%s%s%s --write --approve %s" % (
+            locale, " --theme-id %s" % theme_id if theme_id else "", " --theme-attested \"%s\"" % attested if attested else "",
+            " --remove-never" if remove_never else "", check), "```", ""]
     for note in sorted(set(notes)):
         lines += ["> %s" % note, ""]
     lines += ["## Mutations (%d)" % len(ops), ""]
@@ -769,8 +914,11 @@ def report(locale, theme_id, remove_never, ops, removals, rows, check, notes):
         lines += ["### %d. %s `%s` · `%s`" % (n, o["action"], o["resource"], o["key"]), "",
                   "- Plan items: %s" % (", ".join("`%s`" % i for i in o["items"]) or "none (never-translate key)"),
                   "- How: %s; EN digest `%s`" % (o["how"], o["en_digest"]),
-                  "- Current %s: %s" % (locale.upper(), "none" if not cur["present"] else ("present, outdated" if cur["outdated"] else "present")), "",
-                  "<details><summary>EN</summary>", "", block(o["en"]), "", "</details>", ""]
+                  "- Current %s: %s" % (locale.upper(), "none" if not cur["present"] else ("present, outdated" if cur["outdated"] else "present")), ""]
+        if o.get("notes"):
+            lines += ["- **Whole-field change beyond the translated text:** the current %s differs in untranslated values, "
+                      "which return to the EN:" % locale.upper()] + ["  - %s" % cell(x) for x in o["notes"]] + [""]
+        lines += ["<details><summary>EN</summary>", "", block(o["en"]), "", "</details>", ""]
         if cur["present"]:
             lines += ["<details><summary>Current %s (replaced)</summary>" % locale.upper(), "", block(cur["value"]), "", "</details>", ""]
         lines += (["<details open><summary>New %s</summary>" % locale.upper(), "", block(o["value"]), "", "</details>", ""]
@@ -789,7 +937,15 @@ def report(locale, theme_id, remove_never, ops, removals, rows, check, notes):
         lines += ["| `%s` | %s | %s | %s | %s |" % (r["id"], r["result"], cell("%s · %s" % (r.get("resource") or "—", r.get("key") or "—")),
                                                   cell(r.get("en")), cell(r.get("why"))) for r in sel]
         lines.append("")
-    return "\n".join(lines)
+    if proposals:
+        lines += ["## Proposed metaobject bindings, not written (%d)" % len(proposals), "",
+                  "The inventory names the metaobject family, not the field. Each item below has exactly one field with its EN in the "
+                  "proven metaobjects. After review, copy the reviewed entries into `docs/localization/registration/bindings.json` "
+                  "(`live/bindings-proposed-<lang>.json` has them in that format); only bound items are written.", "",
+                  "| Item | Resource · key | EN |", "|---|---|---|"]
+        lines += ["| `%s` | %s | %s |" % (iid, cell("%s · %s" % (p["resource"], p["key"])), cell(p["en"])) for iid, p in sorted(proposals.items())]
+        lines.append("")
+    return "\n".join(lines + list(contract_lines))
 
 
 # ---- write ---------------------------------------------------------------------------------------
@@ -809,9 +965,11 @@ class Journal:
 
 def preconditions_hold(live, ops):
     """Re-read each resource and compare EN digest and current translation of every op."""
-    fresh = {n["resourceId"]: n for n in live.by_ids(sorted(set(o["resource"] for o in ops)), fresh=True)}
+    fresh = live.reread(sorted(set(o["resource"] for o in ops)))
     for o in ops:
         node = fresh.get(o["resource"])
+        if node is None:
+            return False, "%s was not returned (once) by the re-read" % o["resource"]
         content = next((c for c in node["translatableContent"] if c["key"] == o["key"]), None) if node else None
         if not content or content["digest"] != o["en_digest"] or current(node, o["key"]) != o["current"]:
             return False, "%s %s changed since the dry run" % (o["resource"], o["key"])
@@ -841,24 +999,41 @@ def write(admin, live, locale, ops, journal):
             if action == "register":
                 state, data = admin.mutate(M_REGISTER, {"id": resource, "translations": [
                     {"key": o["key"], "locale": locale, "value": o["value"], "translatableContentDigest": o["en_digest"]} for o in chunk]})
-                payload = (data.get("translationsRegister") or {}) if state == "confirmed" else {}
             else:
                 state, data = admin.mutate(M_REMOVE, {"id": resource, "keys": keys, "locales": [locale]})
-                payload = (data.get("translationsRemove") or {}) if state == "confirmed" else {}
-            done = sorted(t.get("key") for t in (payload.get("translations") or []) if isinstance(t, dict))
-            errors = safe_errors(payload.get("userErrors") or []) if state == "confirmed" else data.get("errors", [data.get("error")])
+            state, done, errors = confirmation(state, data, action, keys, locale)
             journal.log(event="result", action=action, resource=resource, state=state, requested=keys, confirmed=done, errors=errors)
             accepted += len(done)
-            if state != "confirmed" or errors:
+            if state != "confirmed":
                 raise RunnerError("%s on %s: %s (%d keys confirmed so far; see the journal). Run the dry run again before retrying."
                                   % (action, resource, "outcome unknown" if state == "unknown" else "rejected", accepted))
     return accepted
 
 
-def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN):
+def confirmation(state, data, action, keys, locale):
+    """(state, confirmed keys, errors). Confirmed only if the payload has its expected shape, no user errors, and
+    exactly the requested keys in this locale; user errors make it rejected; any other shape is unknown."""
+    if state != "confirmed":
+        return state, [], data.get("errors", [data.get("error")])
+    payload = data.get("translationsRegister" if action == "register" else "translationsRemove")
+    if not isinstance(payload, dict) or not isinstance(payload.get("translations"), list) or not isinstance(payload.get("userErrors"), list):
+        return "unknown", [], [{"code": None, "field": None, "message": "the mutation returned no %s payload" % action}]
+    errors = safe_errors(payload["userErrors"])
+    done = sorted(t.get("key") for t in payload["translations"] if isinstance(t, dict) and t.get("locale") in (None, locale)
+                  and isinstance(t.get("key"), str))
+    if errors:
+        return "rejected", done, errors
+    if done != sorted(keys):
+        return "unknown", done, [{"code": None, "field": None, "message": "confirmed keys differ from the requested keys"}]
+    return "confirmed", done, []
+
+
+def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN, bindings_path=BINDINGS):
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--lang", choices=("nl", "fr", "both"), default="both")
     parser.add_argument("--theme-id", help="the published theme's numeric ID; theme content is out of scope without it")
+    parser.add_argument("--theme-attested", help="'YYYY-MM-DD name': the operator checked today that --theme-id is the published "
+                                                 "theme (needed when the token cannot read themes)")
     parser.add_argument("--remove-never", action="store_true", help="include removals of never-translate translations")
     parser.add_argument("--write", action="store_true", help="write; needs --approve")
     parser.add_argument("--approve", help="the checksum of the dry run Victor approved")
@@ -870,17 +1045,23 @@ def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN):
         admin = Admin(transport or HttpTransport(), client_id, secret)
         if args.write and (admin.scopes is None or "write_translations" not in admin.scopes):
             raise RunnerError("The token does not show the write_translations scope (APP-SETUP.md step 2); nothing written.")
+        proof = theme_proof(admin, args.theme_id, args.theme_attested)
+        bindings = load_bindings(bindings_path)
         os.makedirs(out, exist_ok=True)
         for locale in (("nl", "fr") if args.lang == "both" else (args.lang,)):
             path = plans % locale
             plan = json.load(open(path, encoding="utf-8"))
             live = Live(admin, locale)
-            ops, removals, rows = build(plan, live, args.theme_id, args.remove_never)
-            snap = snapshot(locale, args.theme_id, plan_hash(path), args.remove_never, ops)
+            proposals = {}
+            ops, removals, rows = build(plan, live, args.theme_id, args.remove_never, bindings, proposals)
+            snap = snapshot(locale, args.theme_id, proof, plan_hash(path), plan_hash(bindings_path), args.remove_never, ops)
             check = checksum(snap)
             if not args.write:
-                write_text(os.path.join(out, "dry-run-%s.md" % locale), report(locale, args.theme_id, args.remove_never, ops, removals, rows, check, live.notes) + "\n")
+                write_text(os.path.join(out, "dry-run-%s.md" % locale),
+                           report(locale, args.theme_id, proof, args.theme_attested, args.remove_never, ops, removals, rows, check,
+                                  live.notes, proposals, contract(live, admin)) + "\n")
                 write_json(os.path.join(out, "dry-run-%s.json" % locale), {"checksum": check, "snapshot": snap, "ops": ops, "rows": rows})
+                write_json(os.path.join(out, "bindings-proposed-%s.json" % locale), {"bindings": proposals})
                 say("%s: %d register, %d remove in this approval; checksum %s; report %s/dry-run-%s.md" % (
                     locale, sum(o["action"] == "register" for o in ops), sum(o["action"] == "remove" for o in ops), check, out, locale))
                 continue

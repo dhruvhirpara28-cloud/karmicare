@@ -207,11 +207,11 @@ This file is an offline planning summary, not an approval. The approval is the l
 
 | Shopify type | Query | Identity rule |
 |---|---|---|
-| `ONLINE_STORE_THEME_JSON_TEMPLATE`, `ONLINE_STORE_THEME_SECTION_GROUP` | `translatableResources(resourceType: …)` | only resources whose GID names the template and the published theme (`--theme-id`); every hint a token of the key; then the EN sha1 |
+| `ONLINE_STORE_THEME_JSON_TEMPLATE`, `ONLINE_STORE_THEME_SECTION_GROUP` | `translatableResources(resourceType: …)` | only resources whose GID names the template and carries the supplied numeric `--theme-id` in the `theme_id` parameter, the theme proven published (`themes(roles: MAIN)` with read_themes, or a same-day `--theme-attested`); every hint a token of the key; then the EN sha1 |
 | `PRODUCT`, `PAGE`, `ARTICLE`, `BLOG`, `COLLECTION` | `translatableResources(resourceType: …)` | exactly one resource with the `handle`; the plan's key |
 | `MEDIA_IMAGE` | `translatableResourcesByIds(resourceIds: …)` | the GID in the plan; the plan's key |
 | Metafields | `product { metafields { id namespace key type value } }`, then `translatableResourcesByIds` on their GIDs (key `value`) | namespace and key of the field; a JSON field only when every text leaf maps to an approved item |
-| `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; one field with the EN sha1 |
+| `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; the field the inventory names, or a reviewed binding in `bindings.json` (the dry run proposes them); then the EN sha1 |
 | `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |
 | `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |
 | `SELLING_PLAN`, `SELLING_PLAN_GROUP` | none | held here: Loop owns their translations |

@@ -9,7 +9,10 @@ current translations, F2 identity before EN (failed hints, other templates, ambi
 the published theme, F4 protected targets never registered, F5 JSON fields kept whole, F6 JSON values
 matched as decoded strings by path, F7 no dummy secret or token in output, exceptions or files on any
 error path, F8 full values and target identity in the report, F9 a journal that keeps confirmed writes,
-F10 null content skipped. Credentials are synthetic sentinels.
+F10 null content skipped; and per R18b finding: A a resource the re-read omits fails, B metaobject fields only
+through a reviewed binding, C a numeric, proven-published theme (read or same-day attestation) with the exact
+GID parameter, D held leaves veto before structural keys and structural differences are shown, N1 a null or
+incomplete mutation payload is unknown, N2 scalar and array JSON roots. Credentials are synthetic sentinels.
 """
 import contextlib
 import copy
@@ -46,8 +49,12 @@ def tr(key, value, outdated=False):
 
 FAQ_JSON = json.dumps([{"question": "Hello", "answer": "Held claim"}])
 JOURNEY_JSON = json.dumps({"type": "root", "children": [{"type": "text", "value": "What you'll feel"}, {"type": "text", "value": "Free"},
-                                                        {"type": "text", "value": "€0.49"}]})
-TRICKY_JSON = '{"Free":"Free","list":["Hello","Hallo"],"name":"caf\\u00e9","url":"a\\/b"}'
+                                                        {"type": "text", "value": "€0.49"},
+                                                        {"type": "link", "url": "https://karmicare.com/a", "children": [{"type": "text", "value": "Free"}]}]})
+JOURNEY_NL = JOURNEY_JSON.replace("https://karmicare.com/a", "https://karmicare.com/nl/a").replace("Free", "Gratis")
+FAQ_LINK_JSON = json.dumps({"title": "Hello", "link": "Held claim"})
+ROOTS = {"14": json.dumps("Hello"), "15": "42", "16": "true", "17": "null", "18": json.dumps(["Hello", "Hello"])}
+TRICKY_JSON = '{"Free":"Free","list":["Hello","Hallo"],"name":"caf\\u00e9","url":"https:\\/\\/x.test\\/b"}'
 
 
 def base_store():
@@ -93,7 +100,11 @@ def base_store():
         },
         "ids": {
             "gid://shopify/Metafield/9": {"resourceId": "gid://shopify/Metafield/9", "translatableContent": [c("value", JOURNEY_JSON, "JSON")],
-                                          "translations": {}},
+                                          "translations": {"nl": [tr("value", JOURNEY_NL)]}},
+            "gid://shopify/Metafield/13": {"resourceId": "gid://shopify/Metafield/13", "translatableContent": [c("value", FAQ_LINK_JSON, "JSON")],
+                                           "translations": {"nl": [tr("value", json.dumps({"title": "Oud", "link": "Existing approved NL"}))]}},
+            **{"gid://shopify/Metafield/%s" % n: {"resourceId": "gid://shopify/Metafield/%s" % n,
+                                                 "translatableContent": [c("value", v, "JSON")], "translations": {}} for n, v in ROOTS.items()},
             "gid://shopify/Metafield/10": {"resourceId": "gid://shopify/Metafield/10", "translatableContent": [c("value", FAQ_JSON, "JSON")],
                                            "translations": {"nl": [tr("value", json.dumps([{"question": "Oud", "answer": "Existing approved NL"}]))]}},
             "gid://shopify/Metafield/11": {"resourceId": "gid://shopify/Metafield/11", "translatableContent": [c("value", TRICKY_JSON, "JSON")],
@@ -108,7 +119,9 @@ def base_store():
             {"id": "gid://shopify/Metafield/10", "namespace": "custom", "key": "product_faq", "type": "json", "value": FAQ_JSON},
             {"id": "gid://shopify/Metafield/11", "namespace": "custom", "key": "tricky", "type": "json", "value": TRICKY_JSON},
             {"id": "gid://shopify/Metafield/12", "namespace": "custom", "key": "professional_testimonials", "type": "list.metaobject_reference",
-             "value": json.dumps(["gid://shopify/Metaobject/700"])}]},
+             "value": json.dumps(["gid://shopify/Metaobject/700"])},
+            {"id": "gid://shopify/Metafield/13", "namespace": "custom", "key": "faq_link", "type": "json", "value": FAQ_LINK_JSON}] +
+            [{"id": "gid://shopify/Metafield/%s" % n, "namespace": "custom", "key": "root_%s" % n, "type": "json", "value": v} for n, v in ROOTS.items()]},
         "metaobjects": None,
     }
 
@@ -150,7 +163,10 @@ def base_plan():
             item("t1", "Free", "Gratis", key="value", field="custom.tricky#01"),
             item("t2", "Hello", "Hallo", key="value", field="custom.tricky#02"),
             item("t3", "Hallo", "Bonjour", key="value", field="custom.tricky#03"),
-            item("t4", "café", "koffiehuis", key="value", field="custom.tricky#04")]},
+            item("t4", "café", "koffiehuis", key="value", field="custom.tricky#04"),
+            item("fl1", "Hello", "Hallo", key="value", field="custom.faq_link#01"),
+            item("fl2", "Held claim", "Vastgehouden claim", key="value", field="custom.faq_link#02", hold=["pending-claim-review"]),
+            item("r1", "Hello", "Hallo", key="value", field="custom.root_*#01")]},
         {"shopify_type": "METAOBJECT", "owner": "duo", "items": [
             item("role", "Pharmacist", "Apotheker", field="custom.professional_testimonials#01")]},
         {"shopify_type": "PRODUCT", "owner": "duo", "items": [item("title", "Awake & Asleep", "Awake & Asleep", kind="direct", key="title")]},
@@ -205,20 +221,34 @@ class Fake:
             return 200, {"data": {"translatableResources": {"nodes": nodes, "pageInfo": page}}}, None
         if "metafields" in q:
             return 200, {"data": {"product": {"metafields": {"nodes": self.store["product_metafields"].get(v["id"], []), "pageInfo": page}}}}, None
+        if "themes(" in q:
+            main = self.hooks.get("main_theme", THEME)
+            if main == "denied":
+                return 200, {"errors": [{"message": "Access denied", "extensions": {"code": "ACCESS_DENIED"}}]}, None
+            return 200, {"data": {"themes": {"nodes": [{"id": "gid://shopify/OnlineStoreTheme/%s" % main}]}}}, None
         if "metaobject" in q:
             return 200, {"errors": [{"message": "Access denied", "extensions": {"code": "ACCESS_DENIED"}}]}, None
         raise AssertionError("unexpected query")
 
 
-def run(argv, fake, folder, plan=None):
+ROLE_BINDING = {"role": {"resource": "gid://shopify/Metaobject/700", "key": "role", "en_sha1": sha1("Pharmacist")}}
+
+
+def run(argv, fake, folder, plan=None, bindings=ROLE_BINDING):
     with open(os.path.join(folder, "plan-nl.json"), "w", encoding="utf-8") as f:
         json.dump(plan or base_plan(), f)
+    bpath = os.path.join(folder, "bindings.json")
+    if bindings is not None:
+        with open(bpath, "w", encoding="utf-8") as f:
+            json.dump({"bindings": bindings}, f)
+    elif os.path.exists(bpath):
+        os.remove(bpath)
     out, err = io.StringIO(), io.StringIO()
     code = 0
     with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
         try:
             register.main(argv, transport=fake, credentials=lambda: ("client-id", register.Secret(SECRET)),
-                          out=folder, plans=os.path.join(folder, "plan-%s.json"))
+                          out=folder, plans=os.path.join(folder, "plan-%s.json"), bindings_path=bpath)
         except SystemExit as e:
             code = e.code if isinstance(e.code, int) else 1
     return code, out.getvalue() + err.getvalue()
@@ -228,9 +258,9 @@ def files_text(folder):
     return "".join(open(os.path.join(folder, n), encoding="utf-8").read() for n in sorted(os.listdir(folder)))
 
 
-def dry(folder, store=None, argv=("--lang", "nl", "--theme-id", THEME)):
-    fake = Fake(store or base_store())
-    code, text = run(list(argv), fake, folder)
+def dry(folder, store=None, argv=("--lang", "nl", "--theme-id", THEME), bindings=ROLE_BINDING, **hooks):
+    fake = Fake(store or base_store(), **hooks)
+    code, text = run(list(argv), fake, folder, bindings=bindings)
     data = json.load(open(os.path.join(folder, "dry-run-nl.json"), encoding="utf-8")) if code == 0 else None
     return code, text, fake, data
 
@@ -262,8 +292,45 @@ def main():
         check("basic: Loop selling plan skipped", res("sp") == "skipped")
         check("basic: split body assembled in order",
               ops.get(("register", "gid://shopify/Page/7", "body_html"), {}).get("value") == "<p>Eerste blok.</p><p>Tweede blok.</p>")
-        check("basic: metaobject through the product's reference", ("register", "gid://shopify/Metaobject/700", "role") in ops
+        check("basic: bound metaobject field through the product's reference", ("register", "gid://shopify/Metaobject/700", "role") in ops
               and ("register", "gid://shopify/Metaobject/701", "role") not in ops)
+        code_b, _, _, db = dry(folder, bindings=None)
+        prop = json.load(open(os.path.join(folder, "bindings-proposed-nl.json"), encoding="utf-8"))["bindings"]
+        check("R18b-B an unbound metaobject item is proposed, not written", code_b == 0
+              and not any(o["resource"].startswith("gid://shopify/Metaobject/700") for o in db["ops"])
+              and prop.get("role", {}).get("key") == "role")
+        store = base_store()
+        mo = next(n for n in store["types"]["METAOBJECT"] if n["resourceId"] == "gid://shopify/Metaobject/700")
+        mo["translatableContent"] = [c("role", "Changed live role"), c("other_field", "Pharmacist"), c("name", "Sietske")]
+        _, _, _, dbb = dry(folder, store)
+        check("R18b-B a bound field with changed EN is stale, never another field",
+              not any(o["key"] == "other_field" for o in dbb["ops"]) and any(r["id"] == "role" and r["result"] == "stale" for r in dbb["rows"]))
+        stale_binding = {"role": dict(ROLE_BINDING["role"], en_sha1=sha1("older EN"))}
+        _, _, _, dsb = dry(folder, bindings=stale_binding)
+        check("R18b-B a binding made for another EN is not used", not any(o["resource"] == "gid://shopify/Metaobject/700" for o in dsb["ops"]))
+        code_c, text_c, _, _ = dry(folder, argv=("--lang", "nl", "--theme-id", "222"))
+        check("R18b-C a theme ID that is not the published one stops the run", code_c == 2 and "not the published theme" in text_c, text_c)
+        code_c, text_c, _, _ = dry(folder, argv=("--lang", "nl", "--theme-id", "111x"))
+        check("R18b-C a non-numeric theme ID stops the run", code_c == 2, text_c)
+        check("R18b-C only the exact theme parameter proves ownership",
+              not register.theme_owned("gid://shopify/OnlineStoreThemeJsonTemplate/index?previous_theme_id=111", "111", "index")
+              and register.theme_owned(IDX, "111", "index"))
+        code_c, text_c, _, _ = dry(folder, main_theme="denied")
+        check("R18b-C without read_themes an attestation is required", code_c == 2 and "--theme-attested" in text_c, text_c)
+        today = __import__("time").strftime("%Y-%m-%d")
+        code_c, _, _, dc = dry(folder, argv=("--lang", "nl", "--theme-id", THEME, "--theme-attested", today + " Victor"), main_theme="denied")
+        check("R18b-C a same-day attestation is accepted and bound to the approval", code_c == 0 and dc["snapshot"]["theme_proof"] == "operator: %s Victor" % today)
+        code_c, _, _, _ = dry(folder, argv=("--lang", "nl", "--theme-id", THEME, "--theme-attested", "2026-01-01 Victor"), main_theme="denied")
+        check("R18b-C an old attestation is refused", code_c == 2)
+        check("R18b-C the read proof is bound to the approval", d["snapshot"]["theme_proof"] == "read: themes(roles: MAIN)")
+        check("R18b-D a held leaf under a structural-looking key keeps the field whole",
+              ("register", "gid://shopify/Metafield/13", "value") not in ops and rows["fl1"][0]["result"] == "not written")
+        jop = ops.get(("register", "gid://shopify/Metafield/9", "value"), {})
+        check("R18b-D a structural value that differs from the current NL is shown", any("url" in n and "nl/a" in n for n in jop.get("notes", [])), jop.get("notes"))
+        check("R18b-N2 a string root is translated", ops.get(("register", "gid://shopify/Metafield/14", "value"), {}).get("value") == json.dumps("Hallo"))
+        check("R18b-N2 an array root is translated", ops.get(("register", "gid://shopify/Metafield/18", "value"), {}).get("value") == json.dumps(["Hallo", "Hallo"]))
+        check("R18b-N2 number, bool and null roots are left alone", not any(o["resource"] in ("gid://shopify/Metafield/15", "gid://shopify/Metafield/16",
+                                                                                            "gid://shopify/Metafield/17") for o in d["ops"]))
         check("basic: equal translation counts as same, no operation", res("alt") == "same"
               and not any(o["resource"] == "gid://shopify/MediaImage/3" for o in d["ops"]))
         check("F2 failed hints never fall back to equal EN elsewhere", res("cardX") == "missing")
@@ -300,12 +367,14 @@ def main():
               and rows["f1"][0]["result"] == "not written" and "held segment" in rows["f1"][0]["why"])
         journey = ops.get(("register", "gid://shopify/Metafield/9", "value"))
         check("F5/F6 every leaf mapped: JSON field written by path, price too", journey is not None and
-              [x["value"] for x in json.loads(journey["value"])["children"]] == ["Wat je voelt", "Gratis", "€0,49"], journey)
+              [x.get("value") for x in json.loads(journey["value"])["children"]] == ["Wat je voelt", "Gratis", "€0,49", None]
+              and json.loads(journey["value"])["children"][3] == {"type": "link", "url": "https://karmicare.com/a",
+                                                                  "children": [{"type": "text", "value": "Gratis"}]}, journey)
         tricky = ops.get(("register", "gid://shopify/Metafield/11", "value"))
         tv = json.loads(tricky["value"]) if tricky else {}
         check("F6 object keys stay, values translated in one pass", tv.get("Free") == "Gratis" and "Gratis" not in tv, tv)
         check("F6 no chained translation (Hello->Hallo, Hallo->Bonjour)", tv.get("list") == ["Hallo", "Bonjour"], tv)
-        check("F6 \\u-escaped EN matches as a decoded string", tv.get("name") == "koffiehuis" and tv.get("url") == "a/b", tv)
+        check("F6 \\u-escaped EN matches as a decoded string", tv.get("name") == "koffiehuis" and tv.get("url") == "https://x.test/b", tv)
         md = open(os.path.join(folder, "dry-run-nl.md"), encoding="utf-8").read()
         dry(folder)
         md = open(os.path.join(folder, "dry-run-nl.md"), encoding="utf-8").read()
@@ -357,6 +426,43 @@ def main():
         check("F9 a failure after a confirmed chunk stops the run", code == 2 and len(fake.mutations) == 2, text)
         check("F9 the journal keeps the confirmed chunk and marks the next unknown",
               len(results) == 2 and results[0]["state"] == "confirmed" and results[0]["confirmed"] and results[1]["state"] == "unknown", results)
+
+        # R18b-N1: a null or incomplete mutation payload is unknown, stops the run and writes no end record
+        class Hollow(Fake):
+            def __init__(self, store, mode):
+                super().__init__(store)
+                self.mode = mode
+
+            def post(self, path, body, headers):
+                if "translationsRegister" in body.get("query", ""):
+                    self.mutations.append(("register", body["variables"]["id"], body["variables"]["translations"]))
+                    payload = None if self.mode == "null" else {"translations": [], "userErrors": []}
+                    return 200, {"data": {"translationsRegister": payload}}, None
+                return super().post(path, body, headers)
+        for mode in ("null", "empty"):
+            os.remove(os.path.join(folder, "journal-nl.jsonl"))
+            fake = Hollow(base_store(), mode)
+            code, text = run(["--lang", "nl", "--theme-id", THEME, "--write", "--approve", d["checksum"]], fake, folder)
+            journal = [json.loads(l) for l in open(os.path.join(folder, "journal-nl.jsonl"), encoding="utf-8")]
+            check("R18b-N1 %s payload: unknown, stops after one call, no end record" % mode,
+                  code == 2 and len(fake.mutations) == 1 and journal[-1]["event"] == "result" and journal[-1]["state"] == "unknown"
+                  and not any(j["event"] == "end" for j in journal), (code, len(fake.mutations), journal[-1]))
+
+        # R18b-A: a resource the re-read omits fails the precondition, zero mutations
+        fake = Fake(base_store())
+        live = register.Live(register.Admin(fake, "client-id", register.Secret(SECRET)), "nl")
+        a_ops, _, _ = register.build(base_plan(), live, THEME, False, ROLE_BINDING)
+        hero = [o for o in a_ops if o["key"] == "section.hero.heading:ab"]
+        fake.store["types"]["ONLINE_STORE_THEME_JSON_TEMPLATE"] = [n for n in fake.store["types"]["ONLINE_STORE_THEME_JSON_TEMPLATE"] if n["resourceId"] != IDX]
+        ok, why = register.preconditions_hold(live, hero)
+        check("R18b-A a resource missing from the re-read fails the precondition", not ok and "not returned" in (why or ""), why)
+        try:
+            with tempfile.TemporaryDirectory() as sub:
+                register.write(live.admin, live, "nl", hero, register.Journal(os.path.join(sub, "j.jsonl"), "t"))
+            stopped = False
+        except register.RunnerError:
+            stopped = True
+        check("R18b-A write sends zero mutations for it", stopped and not fake.mutations)
 
         # F7: dummy secret and token never leave the process
         leaks = []

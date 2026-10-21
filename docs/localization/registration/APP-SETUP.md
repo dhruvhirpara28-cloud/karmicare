@@ -27,6 +27,8 @@ De namen van knoppen kunnen iets afwijken. De volgorde blijft: app maken, versie
 3. De app heeft geen eigen pagina's. Vraagt het formulier een App URL, laat dan de voorgestelde waarde staan.
 4. Klik **Release**.
 
+Optioneel: `read_themes` (alleen lezen). Daarmee controleert de runner zelf dat `--theme-id` het gepubliceerde thema is, bij de dry-run en opnieuw bij het schrijven. Zonder die scope moet jij dat op de dag zelf bevestigen met `--theme-attested` (zie „Zelf draaien”).
+
 `read_metaobjects` komt er alleen bij als het rapport van de dry-run dat met zoveel woorden vraagt („metaobject fields not readable: the token lacks read_metaobjects”). Shopify heeft die metaobjectvelden dan expliciet geweigerd. Zonder die scope schrijft de runner de geneste metaobjecten (zoals de compare-tabel) niet. Met die scope maak je een nieuwe versie met de vierde scope en keur je die op de winkel goed.
 
 ## 3. Installeren op de winkel
@@ -65,19 +67,25 @@ De namen van knoppen kunnen iets afwijken. De volgorde blijft: app maken, versie
 
 ## Zelf draaien
 
-Pas na de her-review van R18. Gebruik bij voorkeur je eigen Terminal, vanuit de map van de repo. `--theme-id` is de ID van het gepubliceerde thema (Online Store > Themes). Zonder die ID schrijft hij geen themateksten.
+Alleen de dry-run mag nu (R18b). Schrijven wacht op de her-review R18c en op jouw ja. Gebruik bij voorkeur je eigen Terminal, vanuit de map van de repo.
+
+`--theme-id` is het nummer van het gepubliceerde thema. Je vindt het in Online Store > Themes, in de link van **Customize** van het thema dat live staat. Zonder die ID schrijft hij geen themateksten. Heeft de app geen `read_themes`, bevestig dan zelf met de datum van vandaag dat het gepubliceerde thema dat nummer heeft:
 
 ```sh
-python3 docs/localization/registration/register.py --theme-id <thema-id>
+python3 docs/localization/registration/register.py --theme-id <thema-id> --theme-attested "<JJJJ-MM-DD> Victor"
 ```
 
-Dat is de dry-run voor NL en FR. Het rapport staat daarna in `docs/localization/registration/live/dry-run-nl.md` en `dry-run-fr.md`, met bovenaan een controlesom en de opdracht om precies dat te schrijven. Schrijf pas als je het rapport hebt goedgekeurd, met dezelfde opties als de dry-run:
+Dat is de dry-run voor NL en FR. Het rapport staat daarna in `docs/localization/registration/live/dry-run-nl.md` en `dry-run-fr.md`, met bovenaan een controlesom en de opdracht om precies dat te schrijven. Onderaan staat wat de run van de API zag (scopes, voorbeelden van GID's en sleutels). Daarmee controleert de reviewer de aannames.
+
+Metaobject-velden (zoals de professional-kaarten en de compare-tabel) schrijft hij alleen als hun veld vastligt. De dry-run stelt die bindingen voor in `live/bindings-proposed-<taal>.json`. Na review komen ze in `docs/localization/registration/bindings.json`, en pas daarna worden die velden geschreven.
+
+Na R18c en jouw ja op het rapport schrijf je met precies dezelfde opties als de dry-run. Een `--theme-attested` moet dan de datum van de schrijfdag dragen, dus dry-run en write horen op dezelfde dag:
 
 ```sh
-python3 docs/localization/registration/register.py --lang nl --theme-id <thema-id> --write --approve <controlesom>
+python3 docs/localization/registration/register.py --lang nl --theme-id <thema-id> --theme-attested "<JJJJ-MM-DD> Victor" --write --approve <controlesom>
 ```
 
-Is de winkel, het plan of een optie intussen veranderd, dan stopt hij zonder te schrijven: draai dan eerst opnieuw de dry-run.
+Is de winkel, het plan, de bindingen, het thema of een optie intussen veranderd, dan stopt hij zonder te schrijven: draai dan eerst opnieuw de dry-run.
 
 ## Intrekken
 
