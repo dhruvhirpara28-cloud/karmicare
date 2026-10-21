@@ -180,4 +180,26 @@
     outline-offset: 2px;
     box-shadow: none;
   }
+
+  /* ── LOADING (R13 F1): the label hides again and the spinner takes the button's text colour.
+     The colour rule above, and the buybox and end CTA ones (kc-buybox.css,
+     section-featured-product.css), outrank Dawn's .button.loading; Dawn's spinner reads the
+     saved scheme's --color-button-text. body lifts these above all of them. ── */
+  body .button.loading:not(.button--tertiary) {
+    color: transparent;
+  }
+  body .button.loading:not(.button--tertiary):not(.button--secondary) > .loading__spinner .path {
+    stroke: var(--button-kc-primary-text);
+  }
+  body .button.button--secondary.loading > .loading__spinner .path {
+    stroke: var(--kc-mapped-text-default-heading);
+  }
+  @media screen and (forced-colors: active) {
+    body .button.loading:not(.button--tertiary) {
+      color: ButtonText;
+    }
+    body .button.loading:not(.button--tertiary) > .loading__spinner .path {
+      stroke: ButtonText;
+    }
+  }
 </style>
