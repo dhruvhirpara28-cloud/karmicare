@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "666785abd03e91b643e766a266ce800fe0df07b8",
+ "digest": "2f2e292c089f4fce9f94f01b6c135cb4e38eff65",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -331,14 +331,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.buy_buttons.settings.custom_button_text_by_plan",
-   "en": "712106115453: Start my 60-Day rhythm\n712155431293: Start my Karmicare Year",
-   "sha1": "b1628e43c0fe39a8b862484cea6b08c7ad54f3f1",
+   "en": "712106115453: Begin your 60-Day Rhythm\n712155431293: Begin your Karmicare Year",
+   "sha1": "2a742ee865e0bc9b240f5c97b86a27b533226b53",
    "status": "approved",
    "never_translate": false,
    "notes": "type textarea; keep each selling-plan ID before ':' unchanged; translate only the label after it",
    "setting_type": "textarea",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "712106115453: Start my 60-Day rhythm\n712155431293: Start my Karmicare Year",
+   "old_sha1": "b1628e43c0fe39a8b862484cea6b08c7ad54f3f1"
   },
   {
    "id": "product.subscription-item:main/icon_with_text_xhaDGB/heading_1",
@@ -3018,11 +3020,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:1024",
-   "en": "Begin the Karmicare Year",
-   "sha1": "5df7579ab3c9841e4ee395fcde96baabbca927ae",
+   "en": "Begin your Karmicare Year",
+   "sha1": "1df9e52f263c6f98666ecd7dd02b044868b833a6",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'cta_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "old_en": "Begin the Karmicare Year",
+   "old_sha1": "5df7579ab3c9841e4ee395fcde96baabbca927ae"
   },
   {
    "id": "liquid:sections/main-product.liquid:1030",

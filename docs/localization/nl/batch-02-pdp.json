@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "666785abd03e91b643e766a266ce800fe0df07b8",
+ "source_digest": "2f2e292c089f4fce9f94f01b6c135cb4e38eff65",
  "source_entries": 477,
  "counts": {
   "pending-claim-review": 41,
@@ -294,12 +294,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.buy_buttons.settings.custom_button_text_by_plan",
-   "en": "712106115453: Start my 60-Day rhythm\n712155431293: Start my Karmicare Year",
-   "en_sha1": "b1628e43c0fe39a8b862484cea6b08c7ad54f3f1",
-   "nl": "712106115453: Start mijn 60-dagenritme\n712155431293: Start mijn Karmicare-jaar",
+   "en": "712106115453: Begin your 60-Day Rhythm\n712155431293: Begin your Karmicare Year",
+   "en_sha1": "2a742ee865e0bc9b240f5c97b86a27b533226b53",
+   "nl": "712106115453: Begin je 60-dagenritme\n712155431293: Begin je Karmicare-jaar",
    "status": "translated",
    "flags": [],
-   "notes": "Selling-plan IDs unchanged; first-person 'mijn' kept as in the EN."
+   "notes": "Selling-plan IDs unchanged; 'Begin je' as every Karmicare CTA (Victor, 21 Oct)."
   },
   {
    "id": "product.subscription-item:main/icon_with_text_xhaDGB/heading_1",
@@ -2401,9 +2401,9 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:1024",
-   "en": "Begin the Karmicare Year",
-   "en_sha1": "5df7579ab3c9841e4ee395fcde96baabbca927ae",
-   "nl": "Begin het Karmicare-jaar",
+   "en": "Begin your Karmicare Year",
+   "en_sha1": "1df9e52f263c6f98666ecd7dd02b044868b833a6",
+   "nl": "Begin je Karmicare-jaar",
    "status": "theme-key",
    "flags": [
     "theme-key"
