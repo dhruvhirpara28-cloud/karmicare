@@ -261,13 +261,18 @@ The homepage lane rewrote part of the homepage (integration `41ae772`, merchant-
 
 The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there. The C13 and C93 claims belonged to the old answer, and source-copy `647df5f` removed them from the source note. The FR note follows.
 
+## Announcement line and email placeholder (source-copy 6112414, 21 Oct)
+
+- **Announcement bar (Victor G-1):** the EN is now "COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017". FR: "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · SOIN BUCCO-DENTAIRE CIRCADIEN DEPUIS 2017". "FOR MEMBERS" matches the offer (Try Once pays shipping and has 14 days), so the old `pending-en-review` on this line is gone. "Since 2017" is claim C103 (needs-review), so the line carries `pending-claim-review`, like the NL. "Membres", "satisfait ou remboursé" and "soin bucco-dentaire" are the terms used elsewhere in FR. Batch 03 digest `a853d438…`.
+- **Email placeholder (Victor G-3):** `footer.liquid:667` is now `vous@exemple.be`, replacing the R3 F9 `you@example.com`. `theme-keys.json` records it as `decided`, and the source owner's `locales/fr.json` already has it.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
 | `batch-02-pdp` | `2846c75e…` | 477 | 138 | 251 | 35 | 15 | 38 |
 | `batch-01-homepage` | `7694e7ac…` | 229 | 172 | 2 | 31 | 2 | 22 |
-| `batch-03-header-footer` | `e17cadb5…` | 41 | 6 | 11 | 10 | 9 | 5 |
+| `batch-03-header-footer` | `a853d438…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
@@ -275,13 +280,13 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
 | **Total** | | **2,575** | **479** | **1,533** | **76** | **62** | **425** |
 
-Every source entry is covered: 2,150 carry FR and 425 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, and the waiver field, clock key and Sietske hold, 0c3a4cb). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,150 carry FR and 425 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, and the announcement line, 6112414). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 387 | 0 | 501 |
-| pending-en-review | 2 | 9 | 2 | 3 | 1 | 0 | 0 | 0 | 17 |
+| pending-claim-review | 39 | 42 | 2 | 0 | 25 | 7 | 387 | 0 | 502 |
+| pending-en-review | 2 | 9 | 1 | 3 | 1 | 0 | 0 | 0 | 16 |
 | source-defect | 2 | 8 | 1 | 3 | 9 | 0 | 0 | 0 | 23 |
 | wording-adapted | 2 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 29 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
