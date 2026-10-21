@@ -66,13 +66,25 @@
   id="StatStrip-{{ section.id }}"
   class="stat-strip-karmicare kc-surface"
   data-kc-surface="{{ section.settings.surface }}"
-  aria-label="{{ 'kc.stat_strip.aria_label' | t }}"
 >
   <div class="page-width">
     {%- if section.blocks.size > 0 -%}
       {%- assign heading_tag = section.settings.heading_tag | default: 'h4' -%}
-      {%- comment -%} One row at every width that runs off the right edge, drifts and can be swiped (assets/kc-marquee.js) {%- endcomment -%}
-      <kc-marquee class="stat-strip-karmicare__marquee" data-speed="22" data-wheel data-align-start>
+      {%- comment -%}
+        One row at every width that runs off the right edge, drifts and can be swiped (assets/kc-marquee.js).
+        The row is a focusable region: keyboard focus pauses the drift (no pause button, Victor, 20 Oct), and
+        without the script it scrolls natively.
+      {%- endcomment -%}
+      <kc-marquee
+        class="stat-strip-karmicare__marquee"
+        role="region"
+        tabindex="0"
+        aria-label="{{ 'kc.stat_strip.aria_label' | t }}"
+        data-speed="22"
+        data-wheel
+        data-keys
+        data-align-start
+      >
       <div class="stat-strip-karmicare__grid" data-marquee-track>
         {%- for block in section.blocks -%}
           <div class="stat-strip-karmicare__item" {{ block.shopify_attributes }}>
