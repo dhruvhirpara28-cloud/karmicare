@@ -119,7 +119,7 @@
             <p class="callout-badge">{{ section.settings.morning_badge | escape }}</p>
           {%- endif -%}
           {%- if section.settings.morning_title != blank -%}
-            <h4 id="morning-heading-{{ section.id }}" class="callout-title">{{ section.settings.morning_title | escape }}</h4>
+            <h3 id="morning-heading-{{ section.id }}" class="callout-title h4">{{ section.settings.morning_title | escape }}</h3>
           {%- endif -%}
           {%- if section.settings.morning_text != blank -%}
             <p class="callout-text">{{ section.settings.morning_text | escape }}</p>
@@ -131,7 +131,7 @@
             <p class="callout-badge">{{ section.settings.night_badge | escape }}</p>
           {%- endif -%}
           {%- if section.settings.night_title != blank -%}
-            <h4 id="evening-heading-{{ section.id }}" class="callout-title">{{ section.settings.night_title | escape }}</h4>
+            <h3 id="evening-heading-{{ section.id }}" class="callout-title h4">{{ section.settings.night_title | escape }}</h3>
           {%- endif -%}
           {%- if section.settings.night_text != blank -%}
             <p class="callout-text">{{ section.settings.night_text | escape }}</p>
