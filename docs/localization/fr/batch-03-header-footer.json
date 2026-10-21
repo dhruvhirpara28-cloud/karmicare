@@ -2,7 +2,7 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "a02de10a8ec26a61aec2801299c2ff1532cc9c17",
+ "source_digest": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
  "source_entries": 41,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -27,14 +27,14 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/header-group.json",
    "key_path": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
-   "en": "COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · BIORHYTHMIC ORAL CARE SINCE 2017",
-   "en_sha1": "717f2027909edb412fe24c6c3c50ccec04887e2b",
-   "fr": "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · SOIN BUCCO-DENTAIRE BIORYTHMIQUE DEPUIS 2017",
+   "en": "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017",
+   "en_sha1": "b4f5fb0b87d8d23a5dab8de173c2d065f017ef83",
+   "fr": "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017",
    "status": "translated",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "claim C103 pending (biorhythmic oral care since 2017: the date has no source in the repo); EN updated 21 Oct (Victor G-1, source-copy 6112414), was: \"COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE\"; 'FOR MEMBERS' now matches the offer, so the offer-accuracy EN review is closed; 'membres' and 'satisfait ou remboursé' as elsewhere in FR; 21 Oct (Victor): 'circadian' became 'biorhythmic', FR 'SOIN BUCCO-DENTAIRE BIORYTHMIQUE' as the homepage subheading and the PDP category strip",
+   "notes": "claim C103 pending (est. 2017: the date has no source in the repo); EN is Victor's short line of 21 Oct; 'SATISFAIT OU REMBOURSÉ 60 JOURS' kept for '60-DAY GUARANTEE' as elsewhere in FR, because a bare 'garantie' reads as the legal warranty; 'EST.' as 'DEPUIS'; 'membres' as elsewhere in FR",
    "source_status": "corrected"
   },
   {
