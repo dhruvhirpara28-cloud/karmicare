@@ -611,7 +611,7 @@
    "en": "Free Fast Delivery: 24 hours in Benelux. 2–3 days in rest of Europe",
    "nl": "Gratis snelle levering: 24 uur in de Benelux. 2–3 dagen in de rest van Europa",
    "nl_hold": null,
-   "fr": "Livraison offerte · 1 à 3 jours ouvrables au Benelux",
+   "fr": "Livraison rapide offerte : 24 heures au Benelux. 2 à 3 jours dans le reste de l’Europe",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting delivery_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
   },
@@ -653,19 +653,6 @@
    "fr": "Satisfait ou remboursé 14 jours",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting guarantee_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
-  },
-  {
-   "key": "kc.sticky_cart.kit_free_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:1104"
-   ],
-   "en": "Free",
-   "nl": "Gratis",
-   "nl_hold": null,
-   "fr": "Gratuit",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting kit_free. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape."
   },
   {
    "key": "kc.sticky_cart.kit_html",
