@@ -266,11 +266,23 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 - **Announcement bar (Victor G-1):** the EN is now "COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017". FR: "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · SOIN BUCCO-DENTAIRE CIRCADIEN DEPUIS 2017". "FOR MEMBERS" matches the offer (Try Once pays shipping and has 14 days), so the old `pending-en-review` on this line is gone. "Since 2017" is claim C103 (needs-review), so the line carries `pending-claim-review`, like the NL. "Membres", "satisfait ou remboursé" and "soin bucco-dentaire" are the terms used elsewhere in FR. Batch 03 digest `a853d438…`.
 - **Email placeholder (Victor G-3):** `footer.liquid:667` is now `vous@exemple.be`, replacing the R3 F9 `you@example.com`. `theme-keys.json` records it as `decided`, and the source owner's `locales/fr.json` already has it.
 
+## Sticky-bar "Free" label retired (source-copy d72d791, 21 Oct)
+
+- **`liquid:sections/main-product.liquid:1104`** ("Free", key `kc.sticky_cart.kit_free_html`) is now `held` with the retirement in its notes. The FR text "Gratuit" was not changed and stays in the notes. Global-nav `27691cb` (NV-13) makes the desktop sticky bar the mobile card and removes the `kit_free` setting and its markup. NL holds the entry too.
+- **Through the integration, not on its own:** `d72d791` removes the key from every storefront locale. On FR alone, `snippets/sticky-cart-block.liquid` still read it, so that merge added a Theme Check `TranslationKeyExists` error and was dropped. At the landing desk's request, FR merged integration `karmicare/soft-launch` at `223d140` instead (`80be4a1`). That brings NV-13 (the snippet no longer reads the key) and `d72d791` together. Theme Check reports 0 errors, and `theme_keys.py check --fr-dir` reports 62 keys ok.
+- **One merge conflict:** the hold note on 1104, which global-nav `d953353` had also written. FR's note was kept, with its `d72d791` reference.
+- **CTAs (Victor, 21 Oct: "Commencer votre" on every Karmicare CTA):** global-nav `6c07148` updated three entries, and FR takes them as they are:
+  - `custom_button_text_by_plan`: "Commencer votre Rythme 60 jours" / "Commencer votre année Karmicare".
+  - `main-product.liquid:1024`: "Commencer votre année Karmicare".
+  - compare table `#25`: "Commencer votre Rythme 60 jours".
+  
+  The theme-key value matches `locales/fr.json` (`kc.sticky_cart.cta_rhythm_html`, `cta_year_html`). Batch 02 digest `e3e79339…`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `2846c75e…` | 477 | 138 | 251 | 35 | 15 | 38 |
+| `batch-02-pdp` | `e3e79339…` | 477 | 138 | 251 | 34 | 15 | 39 |
 | `batch-01-homepage` | `7694e7ac…` | 229 | 172 | 2 | 31 | 2 | 22 |
 | `batch-03-header-footer` | `a853d438…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
@@ -278,9 +290,9 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
 | `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 698 | 0 | 0 | 10 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,575** | **479** | **1,533** | **76** | **62** | **425** |
+| **Total** | | **2,575** | **479** | **1,533** | **75** | **62** | **426** |
 
-Every source entry is covered: 2,150 carry FR and 425 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, and the announcement line, 6112414). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, and the sticky-bar retirement and CTAs, integration 223d140). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -295,14 +307,14 @@ Every source entry is covered: 2,150 carry FR and 425 are held (after the source
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (425)
+### Held (426)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
 | 04 | legacy | 350 | `/pages/privacy` (269), `/pages/terms-and-conditions` (76), `/pages/consumer-rights` (5): pre-2.0 legal pages, held in NL/FR (INVENTORY.md) |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
 | 07 | empty | 9 | Empty article excerpts (`summary_html`) |
-| 01–02 | retired | 8 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`); FAQ `4KMG6C` (3 fields) and the two empty PDP `how_it_works` step numbers (41ae772, source-copy `0ba9de3`) |
+| 01–02 | retired | 9 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`); FAQ `4KMG6C` (3 fields) and the two empty PDP `how_it_works` step numbers (41ae772, source-copy `0ba9de3`); the sticky-bar "Free" label `main-product.liquid:1104`, `kc.sticky_cart.kit_free_html` (NV-13, source-copy `d72d791`) |
 | 01–02 | practitioner quote | 2 | Sietske Hamelink's quote (C84/C85, `card_CtQgU9/hover_text`, homepage and PDP): her own words; FR needs her wording or approval, as NL (landing desk 21 Oct) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
 | 07 | needs approved copy (competitor names) | 1 | SLS article `b035` names Colgate, Biotene, Sensodyne Pronamel and Tom's of Maine; source `blocked` since R2 |
