@@ -152,7 +152,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `e3e79339215f` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
+| `batch-02-pdp` | 477 | `87edec28e25f` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 229 | `5286628ff7c8` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `d5353b16cc57` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |

@@ -17,7 +17,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
-| `batch-02-pdp` | 477 | `e3e79339215ffcf134b6813f1b46310a1c380fc8` |
+| `batch-02-pdp` | 477 | `87edec28e25fcae4bdef2adf127d761b0a725bc4` |
 | `batch-03-header-footer` | 41 | `d5353b16cc57ea2181626f9f9cfa79dda0cb107d` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
@@ -60,7 +60,7 @@ By status:
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
 | `batch-01-homepage` | 145 | 21 | 30 | 31 | 2 | 16 |
-| `batch-02-pdp` | 147 | 3 | 23 | 36 | 268 | 32 |
+| `batch-02-pdp` | 146 | 4 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 2 | 1 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
@@ -670,7 +670,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 129 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1` | template_setting | 10% / order | approved |  |
 | 130 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_2` | template_setting | 10% each purchase | approved |  |
 | 131 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/per_brushing_text` | template_setting | per brushing | approved |  |
-| 132 | `product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text` | template_setting | Begin your 60-Day rhythm | approved |  |
+| 132 | `product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text` | template_setting | Begin your 60-Day Rhythm | corrected |  |
 | 133 | `product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_1` | template_setting | 60-day money-back guarantee | approved |  |
 | 134 | `product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_2` | template_setting | Free shipping | approved |  |
 | 135 | `product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_3` | template_setting | Gift, pause or cancel | approved |  |

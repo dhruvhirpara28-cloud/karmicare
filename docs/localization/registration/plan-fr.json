@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "5ed5cb462331",
+  "en-source.json": "2cb61dd0e00f",
   "fr/batch-01-homepage.json": "e548111a26cb",
   "fr/batch-02-pdp.json": "c5f27b69323d",
   "fr/batch-03-header-footer.json": "a2226e0faeea",
@@ -13,7 +13,7 @@
  },
  "batches": {
   "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "e3e79339215ffcf134b6813f1b46310a1c380fc8",
+  "batch-02-pdp": "87edec28e25fcae4bdef2adf127d761b0a725bc4",
   "batch-03-header-footer": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
@@ -6048,27 +6048,6 @@
       "featured_product_Eb93Xa",
       "loop_subscriptions_gPKypi",
       "per_brushing_text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.featured_product_Eb93Xa.blocks.buy_buttons_Ffxhap.settings.custom_button_text",
-     "en": "Begin your 60-Day rhythm",
-     "en_sha1": "92ce2ede86d17f46472beb6c9f49ed3792ce0d73",
-     "value": "Commencer votre Rythme 60 jours",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "featured_product_Eb93Xa",
-      "buy_buttons_Ffxhap",
-      "custom_button_text"
      ]
     },
     {
