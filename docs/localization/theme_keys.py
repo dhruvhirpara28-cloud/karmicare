@@ -13,6 +13,8 @@ translated value, or an entry status that is not theme-key), then en. pending-cl
 legal-review do not hold a key (Victor, 20 Oct: translate everything; the reviews gate publication
 and registration): they are listed in *_review as the record of the open review. Every other
 storefront locale gets en, so Theme Check MatchingTranslations finds the same keys everywhere.
+A row's "decided" ({lang: value, "by": who and where}) records a value Victor chose; it wins over the
+payload, so refresh keeps it whatever the payload says.
 
 write merges into the existing "kc" object in its current key order (other kc keys, such as
 kc.general.coming_soon and kc.receipt, stay where they are; new keys go at the end of their area)
@@ -81,6 +83,8 @@ def refreshed(doc, fr_dir):
             row["en"] = ens.pop()
         for lang, payload in payloads.items():
             row[lang], row[lang + "_hold"], row[lang + "_review"] = resolve(payload, row["ids"], lang, src)
+            if lang in row.get("decided", {}):
+                row[lang], row[lang + "_hold"] = row["decided"][lang], None
         rows.append(row)
     return dict(doc, keys=rows)
 

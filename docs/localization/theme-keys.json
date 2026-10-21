@@ -1,7 +1,7 @@
 {
  "about": "Theme locale keys for the needs-key strings of the B1a inventory (docs/source-copy/en-source.json). docs/localization/theme_keys.py writes them into every storefront locale file: en.default gets en; nl and fr get their value unless *_hold is set, then en (open reviews in *_review do not hold); every other locale gets en (MatchingTranslations).",
  "sources": {
-  "en": "docs/source-copy/en-source.json (batch-01 7694e7acce33, batch-02 2846c75e4df9, batch-03 e17cadb5e223)",
+  "en": "docs/source-copy/en-source.json (batch-01 7694e7acce33, batch-02 2846c75e4df9, batch-03 a853d438d503)",
   "nl": "docs/localization/nl/batch-0{1,2,3}-*.json (status theme-key; pending-claim-review and legal-review are recorded in nl_review, they do not hold)",
   "fr": "docs/localization/fr/batch-0{1,2,3}-*.json on karmicare/soft-launch-fr a518477 (status theme-key; pending-claim-review and legal-review are recorded in fr_review, they do not hold)"
  },
@@ -278,12 +278,17 @@
     "liquid:sections/footer.liquid:667"
    ],
    "en": "you@example.com",
-   "nl": "you@example.com",
+   "nl": "jij@voorbeeld.be",
    "nl_hold": null,
-   "fr": "you@example.com",
+   "fr": "vous@exemple.be",
    "fr_hold": null,
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "nl": "jij@voorbeeld.be",
+    "fr": "vous@exemple.be",
+    "by": "Victor G-3, 21 Oct (karmicare/soft-launch-global 4954820)"
+   }
   },
   {
    "key": "kc.footer.join",
