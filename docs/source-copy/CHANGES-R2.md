@@ -146,11 +146,12 @@ These are not source changes. FR has already been told to gate `#b081` and to sw
 
 ## 21 Oct: CTA wording "Begin your"
 
-Victor (21 Oct): every CTA uses *Begin*, in the form *Begin your*. Two EN strings in `batch-02-pdp` changed; each entry keeps the previous text in `old_en` / `old_sha1`. No entry added, removed or reclassified. `batch-02-pdp` digest `666785abd03e91b643e766a266ce800fe0df07b8` → `2f2e292c089f4fce9f94f01b6c135cb4e38eff65`; every other digest unchanged. NL and FR payloads already follow (`source_digest` updated); `digest.py`, `nl/validate.py` and `fr/check.py` exit 0.
+Victor (21 Oct): every CTA uses *Begin*, in the form *Begin your*. Three EN strings in `batch-02-pdp` changed; each entry keeps the previous text in `old_en` / `old_sha1`. No entry added, removed or reclassified. On top of `karmicare/soft-launch` (with the NV-13 `kit_free` retirement, `d72d791`): `batch-02-pdp` digest `2846c75e4df9f09cca9026b613cfddc61f307f5d` → `e3e79339215ffcf134b6813f1b46310a1c380fc8`; every other digest unchanged. NL and FR payloads already follow (`source_digest` updated); FR now also holds the retired `liquid:sections/main-product.liquid:1104` as NL does. `digest.py`, `nl/validate.py` and `fr/check.py` exit 0.
 
 | Id | Before | Now | NL | FR |
 |---|---|---|---|---|
 | `product.subscription-item:main/buy_buttons/custom_button_text_by_plan` | `712106115453: Start my 60-Day rhythm` / `712155431293: Start my Karmicare Year` | `712106115453: Begin your 60-Day Rhythm` / `712155431293: Begin your Karmicare Year` | Begin je 60-dagenritme / Begin je Karmicare-jaar | Commencer votre Rythme 60 jours / Commencer votre année Karmicare |
 | `liquid:sections/main-product.liquid:1024` (`kc.sticky_cart.cta_year_html`) | Begin the Karmicare Year | Begin your Karmicare Year | Begin je Karmicare-jaar | Commencer votre année Karmicare |
+| `admin:…:custom.compare_table\|shop.metaobjects.compare_value#25` (Compare Plan "60-Day Rhythm", CTA Button) | Begin 60-Day Rhythm | Begin your 60-Day Rhythm (changed in the admin by Victor, 21 Oct) | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |
 
-The template setting reaches `/nl` and `/fr` only once the payload is registered (`registration/DRY-RUN.md`: regenerate it first; nothing is registered yet). The locale key ships with the theme.
+The template setting and the metaobject reach `/nl` and `/fr` only once the payload is registered (`registration/DRY-RUN.md`: regenerate it first; nothing is registered yet); registration matches on the live EN, so these entries carry the new text. The locale key ships with the theme. Not changed: `compare_value#31`, the Year column's CTA "Begin" (live admin text on 21 Oct).

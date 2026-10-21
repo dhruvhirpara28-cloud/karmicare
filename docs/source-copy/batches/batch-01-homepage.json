@@ -1,6 +1,6 @@
 {
  "batch": "batch-01-homepage",
- "digest": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
+ "digest": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -175,13 +175,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.stat_strip_karmicare.settings.tagline",
-   "en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS",
-   "sha1": "1efa139722aaaea0bbfc7ce9db5640d2e955f5b1",
+   "en": "CHOSEN BY KPNI PRACTITIONERS, FUNCTIONAL DENTISTS, HEALTH PROFESSIONALS",
+   "sha1": "2be450b68110721fbb4d9482dfb2c67874b35d49",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type text; claims C80: needs-review (CLAIMS-REVIEW.md)",
-   "old_en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHOUSIASTS",
-   "old_sha1": "359ae6ad06bfe4a28df8e846ed3f298c9ad7e660",
+   "notes": "type text; claims C80: needs-review (CLAIMS-REVIEW.md); EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
+   "old_en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS",
+   "old_sha1": "1efa139722aaaea0bbfc7ce9db5640d2e955f5b1",
    "claims": [
     "C80"
    ],
@@ -1157,7 +1157,8 @@
    "claim_status": "unsupported",
    "setting_type": "text",
    "section_type": "product-benefits-karmicare",
-   "rendered": true
+   "rendered": true,
+   "claim_hold_waived": "2026-10-20 Victor, translation only"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
@@ -1177,7 +1178,8 @@
    "claim_status": "unsupported",
    "setting_type": "richtext",
    "section_type": "product-benefits-karmicare",
-   "rendered": true
+   "rendered": true,
+   "claim_hold_waived": "2026-10-20 Victor, translation only"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
@@ -1432,14 +1434,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-   "en": "Functional Dentist, kPNI Therapist",
-   "sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
-   "status": "approved",
+   "en": "Functional Dentist, kPNI Practitioner",
+   "sha1": "1a18061547498246ea046b86b0a1c2bc7389ca57",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Functional Dentist, kPNI Therapist",
+   "old_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/heading",
@@ -1496,14 +1500,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-   "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-   "sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
-   "status": "approved",
+   "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
+   "sha1": "8599e937a96696800cc5f4a948b457a996931b25",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+   "old_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_8dRing/hover_text",
@@ -1612,14 +1618,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-   "en": "Nutritional Therapist, Menstrual Cycle Expert",
-   "sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
-   "status": "approved",
+   "en": "Nutritional Practitioner, Menstrual Cycle Expert",
+   "sha1": "54d1fc3de6561c01d495b096b9c76c42c168c506",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Nutritional Therapist, Menstrual Cycle Expert",
+   "old_sha1": "1304702cf605f09e12935e8a425a7f418bda4321"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
@@ -1640,7 +1648,8 @@
    "claim_status": "unsupported",
    "setting_type": "richtext",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "claim_hold_waived": "2026-10-20 Victor, translation only"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -2593,14 +2602,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.category",
-   "en": "Ingredients & safety",
-   "sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
-   "status": "approved",
+   "en": "The ritual",
+   "sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Ingredients & safety",
+   "old_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/question",
@@ -2609,14 +2620,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.question",
-   "en": "Is Karmicare fluoride-free?",
-   "sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
-   "status": "approved",
+   "en": "How long does one duo last?",
+   "sha1": "5f0abdd95287193e2afea705090f7f025a22d77a",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Is Karmicare fluoride-free?",
+   "old_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer",
@@ -2625,17 +2638,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
-   "en": "<p>[NEEDS APPROVED COPY]</p>",
-   "sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
-   "status": "needs-review",
+   "en": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
+   "sha1": "ee6d5e88422c0a37d1519a885b0eaee706545f60",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; No approved answer: FAQ-0202 (fluoride-free) is Draft with Regulatory 'Needs review'. Do not translate the placeholder.",
-   "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
-   "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
-   "blocked": "NEEDS APPROVED COPY",
+   "notes": "type richtext; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); approved answer replaces the placeholder",
+   "old_en": "<p>[NEEDS APPROVED COPY]</p>",
+   "old_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "claims": [
+    "C07"
+   ],
+   "claim_status": "approved"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
@@ -2644,14 +2660,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.category",
-   "en": "The ritual",
-   "sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
-   "status": "needs-review",
+   "en": "Ingredients & safety",
+   "sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text; Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); the category now matches its question; block disabled: not rendered",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": false,
+   "old_en": "The ritual",
+   "old_sha1": "9fcd5202aaedaba538285854704a00c17e197abb"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question",
@@ -2660,14 +2678,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.question",
-   "en": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
-   "sha1": "abdd0b7d15be897509a88669f6169c6bd804b82b",
-   "status": "approved",
+   "en": "Can I combine Karmicare with fluoride toothpaste or rinses?",
+   "sha1": "a643dabd1a4aea9719383821b601d34fb7e37697",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); block disabled: not rendered",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": false,
+   "old_en": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
+   "old_sha1": "abdd0b7d15be897509a88669f6169c6bd804b82b"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer",
@@ -2676,17 +2696,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.answer",
-   "en": "<p>[NEEDS APPROVED COPY]</p>",
-   "sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
-   "status": "needs-review",
+   "en": "<p>Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both. If you switch, switch fully: Awake in the morning, Asleep at night. Your dentist can tell you if a fluoride treatment is needed for a specific reason.</p>",
+   "sha1": "0406ac48a4e1ce7a7c8bd9f20ed09ef698e9f2af",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; No approved answer anywhere (homepage-faq-on-accordion-component.md row 3). Do not translate the placeholder.",
-   "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
-   "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
-   "blocked": "NEEDS APPROVED COPY",
+   "notes": "type richtext; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); approved answer replaces the placeholder; block disabled: not rendered",
+   "old_en": "<p>[NEEDS APPROVED COPY]</p>",
+   "old_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": false,
+   "claims": [
+    "C101"
+   ],
+   "claim_status": "needs-review"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
@@ -2695,14 +2718,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.category",
-   "en": "Results",
-   "sha1": "612e12d29278b5519294bc25cdaddffec6d0f1c6",
-   "status": "needs-review",
+   "en": "Ingredients & safety",
+   "sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text; Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); the category now matches its question; block disabled: not rendered",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": false,
+   "old_en": "Results",
+   "old_sha1": "612e12d29278b5519294bc25cdaddffec6d0f1c6"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question",
@@ -2711,14 +2736,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.question",
-   "en": "What is nano-hydroxyapatite?",
-   "sha1": "0aeed18c4e6bd60691b49cfe53c782135bd3bb12",
-   "status": "approved",
+   "en": "Is Karmicare fluoride-free?",
+   "sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); block disabled: not rendered",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": false,
+   "old_en": "What is nano-hydroxyapatite?",
+   "old_sha1": "0aeed18c4e6bd60691b49cfe53c782135bd3bb12"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer",
@@ -2727,20 +2754,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.answer",
-   "en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
-   "sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
+   "en": "<p>Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawbacks.</p>",
+   "sha1": "0873f2ef70e93cac33d1cf03c9a877f094ceb830",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; source: 45 brief Q3, British spelling as adapted in Figma 3002:20280 (row 4); claims C23: needs-review (CLAIMS-REVIEW.md)",
-   "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
-   "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
+   "notes": "type richtext; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); claims C102: needs-review (CLAIMS-REVIEW.md); block disabled: not rendered; old_en is the former nHAp answer (45 brief Q3), whose claim left the homepage",
+   "old_en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
+   "old_sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
    "claims": [
-    "C23"
+    "C102"
    ],
    "claim_status": "needs-review",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": false
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category",
@@ -2749,14 +2776,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.category",
-   "en": "Plans & Return on Care",
-   "sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
-   "status": "needs-review",
+   "en": "Shipping & guarantee",
+   "sha1": "bc09cdf16c860afefb56428d2fae8800222d82dd",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text; Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); the category now matches its question",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Plans & Return on Care",
+   "old_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question",
@@ -2765,14 +2794,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.question",
-   "en": "Should I rinse after brushing?",
-   "sha1": "428bc937d0c86862ed3e4773017f44033510e7da",
-   "status": "approved",
+   "en": "What does the money-back guarantee cover?",
+   "sha1": "531f7c78f96f01aec3514fa65ca6a4865acdb6c3",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Should I rinse after brushing?",
+   "old_sha1": "428bc937d0c86862ed3e4773017f44033510e7da"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer",
@@ -2781,18 +2812,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.answer",
-   "en": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>",
-   "sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
+   "en": "<p>Every first order comes with a money-back guarantee: 14 days on Try Once, your first cycle on the 60-Day rhythm, 60 days on the Year. Your legal right to withdraw comes on top.</p>",
+   "sha1": "2e402a324373b49d66380e05bf7bdf1f315e4319",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; source: 45 brief Q5, adapted to the question in Figma 3002:20280 (row 5); claims C13, C93: needs-review (CLAIMS-REVIEW.md)",
-   "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
-   "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
-   "claims": [
-    "C13",
-    "C93"
-   ],
-   "claim_status": "needs-review",
+   "notes": "type richtext; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); no claim: offer terms, the same sentence as the guarantee line in the legal texts; old_en is the former rinse answer (45 brief Q5), whose claims left the homepage",
+   "old_en": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>",
+   "old_sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
    "rendered": true
@@ -2811,7 +2837,8 @@
    "notes": "type text; Category label does not match its question (filter tabs pair one category per question in order); homepage owner to confirm the mapping.",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/question",
@@ -2827,7 +2854,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/answer",
@@ -2849,7 +2877,8 @@
    "claim_status": "needs-review",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 21 Oct: the homepage lane removed FAQ block faq_item_4KMG6C (integration 41ae772)"
   },
   {
    "id": "index:featured_product_3XpDKw/title_4znD88/custom_title",
@@ -3693,6 +3722,67 @@
    "status": "admin-held",
    "never_translate": false,
    "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description and og:description; 'toothpaste' twice (SEO context)"
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.category",
+   "en": "Plans & Return on Care",
+   "sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type text; new 21 Oct in templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
+   "setting_type": "text",
+   "section_type": "km-faq-accordion",
+   "rendered": true
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.question",
+   "en": "Can I pause, skip or cancel?",
+   "sha1": "54d79a461f0a7c2e7d091f0c77a79622f45fc823",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type text; new 21 Oct in templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
+   "setting_type": "text",
+   "section_type": "km-faq-accordion",
+   "rendered": true
+  },
+  {
+   "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.answer",
+   "en": "<p>Your membership is completely in your hands. Amend when desired.</p>",
+   "sha1": "b4c11f3f81bcc5e0e700be6f1cd43d51bd7c35c6",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type richtext; new 21 Oct in templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7)",
+   "setting_type": "richtext",
+   "section_type": "km-faq-accordion",
+   "rendered": true
+  },
+  {
+   "id": "locale:kc.clock.loading",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.loading",
+   "en": "Loading current local time",
+   "sha1": "ef5fdb2b7c50d37d993eac56e40b58cee99885df",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "theme key kc.clock.loading: aria-valuetext of the clock before its script runs (sections/chronobiology-clock-karmicare.liquid:106; homepage and PDP); inventoried 21 Oct (release QA B-03/B-04)"
   }
  ]
 }

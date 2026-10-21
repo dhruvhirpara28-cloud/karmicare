@@ -5,7 +5,8 @@ Integrity, for every batch: the file exists, its source_digest and source_entrie
 present once, each en_sha1 equals sha1(en) and the source entry's sha1, held entries carry no Dutch, and all others do.
 Bookkeeping: a status names the strongest of its flags, and counts and fit_risk match the entries.
 Hold and gate invariants: the source decides, the payload follows (a hold is always stricter than a flag).
-  H1  claim_status unsupported     -> held
+  H1  claim_status unsupported     -> held; with claim_hold_waived (Victor, 20 Oct: translate, the claims review
+                                      gates publication) -> held, or flagged pending-claim-review
   H2  claim_status needs-review    -> held, or flagged pending-claim-review
   H3  legal                        -> held, or flagged legal-review
   H4  legacy                       -> held
@@ -58,7 +59,10 @@ def gates(e, r):
     flags = r.get("flags") or []
     out = []
     if e.get("claim_status") == "unsupported" and not held:
-        out.append("H1 unsupported claim not held")
+        if not e.get("claim_hold_waived"):
+            out.append("H1 unsupported claim not held")
+        elif "pending-claim-review" not in flags:
+            out.append("H1 waived unsupported claim without pending-claim-review")
     if e.get("claim_status") == "needs-review" and not held and "pending-claim-review" not in flags:
         out.append("H2 needs-review claim neither held nor pending-claim-review")
     if e.get("legal") and not held and "legal-review" not in flags:
@@ -149,6 +153,8 @@ def main():
                             ("H6", e.get("blocked")), ("H7", r["status"] == "held"), ("H8", e.get("retired"))):
                 if on:
                     checked[key] += 1
+            if e.get("claim_hold_waived"):
+                checked["waived"] += 1
             if r["status"] != "held" and r["nl"]:
                 checked["S1"] += len(ADDRESS.findall(plain(r["en"])))
                 checked["S2"] += r["en"].count("(*)")
@@ -164,8 +170,8 @@ def main():
         n = len(errors) - before
         print("%-26s %4d entries  %s" % (batch, len(doc["entries"]), "ok" if not n else "%d errors" % n))
     print("entries under each gate: " + ", ".join("%s %d" % (k, checked[k]) for k in ("H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8"))
-          + "; addresses checked S1 %d, (*) markers S2 %d; ordinary-copy entries checked W1 %d (%d listed exceptions)"
-          % (checked["S1"], checked["S2"], checked["W1"], len(WORD_EXCEPTIONS)))
+          + " (claim hold waived %d); addresses checked S1 %d, (*) markers S2 %d; ordinary-copy entries checked W1 %d (%d listed exceptions)"
+          % (checked["waived"], checked["S1"], checked["S2"], checked["W1"], len(WORD_EXCEPTIONS)))
     for e in errors:
         print("ERROR " + e)
     sys.exit(1 if errors else 0)

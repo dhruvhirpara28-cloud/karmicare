@@ -353,6 +353,18 @@
   height: var(--kc-responsive-size-icon-sm);
 }
 
+/* Spinner in the button's text colour: Dawn's .path reads --color-foreground, which matches
+   the button surface Day and Night (R13 F1) */
+.sc-cta .loading__spinner .path {
+  stroke: var(--button-kc-primary-text);
+}
+
+@media screen and (forced-colors: active) {
+  .sc-cta .loading__spinner .path {
+    stroke: ButtonText;
+  }
+}
+
 .sc-form {
   display: none;
 }

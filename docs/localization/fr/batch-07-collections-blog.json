@@ -8,12 +8,12 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 591,
-  "held": 117,
+  "admin": 698,
+  "held": 10,
   "translated": 1
  },
  "flag_counts": {
-  "pending-claim-review": 280
+  "pending-claim-review": 387
  },
  "entries": [
   {
@@ -520,10 +520,12 @@
    "key_path": "body_html#b008",
    "en": "Choosing a natural toothpaste formulation with nano hydroxyapatite can help prevent tooth decay, whiten teeth without increasing tooth sensitivity, and improve overall oral hygiene.",
    "en_sha1": "cfefa115a3dddcfd9abee01a5a9a941f81e4a46e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (tooth decay); regulatory.md forbids prevents disease; FAQ-0203: cosmetic, does not treat disease.); translate after the EN is fixed or removed",
+   "fr": "Choisir une formule naturelle à la nano-hydroxyapatite peut aider à prévenir les caries, à blanchir les dents sans augmenter leur sensibilité et à améliorer l’hygiène bucco-dentaire en général.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (tooth decay); regulatory.md forbids prevents disease; FAQ-0203: cosmetic, does not treat disease.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -546,10 +548,12 @@
    "key_path": "body_html#b010",
    "en": "<i> <b>WHY?</b> Because as well as resisting negative self-talk, I avoid putting chemicals into my system. Especially chemicals that prevent natural healing and spiritual growth. And especially when there are far more powerful ingredients available.Ingredients such as hydroxyapatite. I know, I can hear you thinking hydroxy-what? You may not have heard of it but it makes up 97% of your tooth enamel. Its “nano” form (as first discovered by NASA) can fuse with your enamel, replace lost minerals, whiten teeth, reduce sensitivity and much, much more. In short, it could be the answer to your dental health problems. Want your teeth to constantly feel stronger, healthier, smoother, and resistant to the sudden jolt/pain of hot and cold drinks? Swap fluoride for nano HAp. I’ve experienced these benefits myself, which is why I call it the “wonder-mineral” and that’s why it’s one of the stars of Karmicare’s biorhythmic formulated toothpaste.</i>",
    "en_sha1": "ae0069a118986653525410fdb49fddb812296409",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin claim presented as fact; 'answer to your dental health problems' overstates.); translate after the EN is fixed or removed",
+   "fr": "<i> <b>POURQUOI ?</b> Parce qu’en plus de résister aux pensées négatives, j’évite de faire entrer des substances chimiques dans mon organisme. Surtout ceux qui freinent la guérison naturelle et la croissance spirituelle. Et surtout quand il existe des ingrédients bien plus puissants.Des ingrédients comme l’hydroxyapatite. Je sais, je vous entends penser : hydroxy-quoi ? Vous n’en avez peut-être jamais entendu parler, mais elle constitue 97 % de l’émail de vos dents. Sa forme “nano” (découverte d’abord par la NASA) peut fusionner avec votre émail, remplacer les minéraux perdus, blanchir les dents, réduire la sensibilité et bien plus encore. Bref, elle pourrait être la réponse à vos problèmes de santé dentaire. Vous voulez des dents qui paraissent toujours plus solides, plus saines, plus lisses, et qui résistent au choc soudain du chaud et du froid ? Remplacez le fluor par la nano-HAp. J’ai moi-même constaté ces bienfaits, c’est pourquoi je l’appelle le “minéral miracle”, et c’est pourquoi elle est l’une des stars du dentifrice à formule biorythmique de Karmicare.</i>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin claim presented as fact; 'answer to your dental health problems' overstates.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -559,10 +563,12 @@
    "key_path": "body_html#b011",
    "en": "Read on and discover everything you need to know about this medical marvel for better teeth, bones and overall health. It’s research-based and the claims are factual.",
    "en_sha1": "35af4a4e604d5fb7b8175f86e94d1fd88f58e98a",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and bone/overall-health benefit; 'claims are factual' overstates the evidence.); translate after the EN is fixed or removed",
+   "fr": "Lisez la suite et découvrez tout ce qu’il faut savoir sur cette merveille médicale pour de meilleures dents, de meilleurs os et une meilleure santé globale. C’est fondé sur la recherche et les affirmations sont factuelles.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and bone/overall-health benefit; 'claims are factual' overstates the evidence.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -628,10 +634,12 @@
    "key_path": "body_html#b016",
    "en": "It guards against tooth decay by providing total protection against harmful dietary acids",
    "en_sha1": "59532bef6e6cb72d18284d6059e5760362b3b173",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed",
+   "fr": "Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -641,10 +649,12 @@
    "key_path": "body_html#b017",
    "en": "It’s bioactive, osteoconductive, and nontoxic",
    "en_sha1": "bc5a14d684cf5df5b5cb43e20a1ca6779af44b15",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Osteoconductive' is a bone-graft (medical) property with no cosmetic basis; nontoxic needs Pepla 2014.); translate after the EN is fixed or removed",
+   "fr": "Elle est bioactive, ostéoconductrice et non toxique",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Osteoconductive' is a bone-graft (medical) property with no cosmetic basis; nontoxic needs Pepla 2014.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -825,10 +835,12 @@
    "key_path": "body_html#b031",
    "en": "“Hydroxy-WHAT?!” — we get it.<br>It’s a bit of a mouthful to speak and to spell.<br>But while it may seem strange to you, your body is highly familiar with this magic mineral.<br>Hydroxyapatite (HA) is a naturally occurring form of calcium phosphate (so no need for the synthesis of ingredients in a lab) that makes up 97% of your tooth enamel, 70% of dentin, and up to 70% of bone mass. It’s also found in your saliva. And because it’s a natural substance, hydroxyapatite is often used in biomimetic dentistry, which aims to protect the integrity of your teeth. The primary purpose of HA is to give bones and teeth their rigidity.<br><a href=\"https://karmicare.com/en/why-use-hydroxyapatite-toothpaste\">Nano hydroxyapatite</a> (nano HAp) is an altered version of HA that has the natural ability to fuse with the existing hydroxyapatite in teeth.",
    "en_sha1": "ee832611ad079381d2c2341bfbda83b0f3c4b19d",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Naturalness stated as fact overstates: cosmetic nano-HAp is manufactured; 'magic mineral' hyperbole.); translate after the EN is fixed or removed",
+   "fr": "“Hydroxy-QUOI ?!” — on vous comprend.<br>C’est un peu difficile à prononcer et à écrire.<br>Mais si elle vous semble étrange, votre corps connaît très bien ce minéral magique.<br>L’hydroxyapatite (HA) est une forme naturelle de phosphate de calcium (inutile donc de synthétiser des ingrédients en laboratoire) qui constitue 97 % de l’émail de vos dents, 70 % de la dentine et jusqu’à 70 % de la masse osseuse. On la trouve aussi dans votre salive. Et parce que c’est une substance naturelle, l’hydroxyapatite est souvent présente en dentisterie biomimétique, qui vise à protéger l’intégrité de vos dents. Le rôle premier de l’HA est de donner aux os et aux dents leur rigidité.<br>La <a href=\"https://karmicare.com/en/why-use-hydroxyapatite-toothpaste\">nano-hydroxyapatite</a> (nano-HAp) est une version modifiée de l’HA qui a la capacité naturelle de fusionner avec l’hydroxyapatite déjà présente dans les dents.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Naturalness stated as fact overstates: cosmetic nano-HAp is manufactured; 'magic mineral' hyperbole.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -881,10 +893,12 @@
    "key_path": "body_html#b035",
    "en": "<b>Osteoconductive </b>— Nano HAp serves as a scaffold for new bone growth.",
    "en_sha1": "0abd5ee3121ba02d961865cd8430cafb7782ce18",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Bone-growth scaffold is a medical-device property; no cosmetic basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "<b>Ostéoconductrice </b>— la nano-HAp sert de support à la formation de nouvel os.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Bone-growth scaffold is a medical-device property; no cosmetic basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -909,10 +923,12 @@
    "key_path": "body_html#b037",
    "en": "Formed By Nature. Refined By NASA. Utilized By Karmicare.",
    "en_sha1": "2f516a49ae0d3dacf531df18975702655c46425b",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin framing presented as fact.); translate after the EN is fixed or removed",
+   "fr": "Formée par la nature. Affinée par la NASA. Choisie par Karmicare.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin framing presented as fact.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -922,10 +938,12 @@
    "key_path": "body_html#b038",
    "en": "Nano hydroxyapatite has a colorful history that spans across four decades. Believe it or not, NASA was the inventor of the first version of nano hydroxyapatite in 1970.",
    "en_sha1": "602702be07642e0f4253b2b27179f8308e9c9d2e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-invention claim presented as fact; no source.); translate after the EN is fixed or removed",
+   "fr": "La nano-hydroxyapatite a une histoire riche qui s’étend sur quatre décennies. Aussi surprenant que cela puisse paraître, c’est la NASA qui a inventé la première version de la nano-hydroxyapatite en 1970.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-invention claim presented as fact; no source.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -935,10 +953,12 @@
    "key_path": "body_html#b039",
    "en": "Why would a space agency spend their time creating nano HAp?",
    "en_sha1": "e49387efd112d311baf5dc5b54948065cf553c04",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Question presupposes the NASA-origin story (b037-b038).); translate after the EN is fixed or removed",
+   "fr": "Pourquoi une agence spatiale consacrerait-elle son temps à créer la nano-HAp ?",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Question presupposes the NASA-origin story (b037-b038).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -948,10 +968,12 @@
    "key_path": "body_html#b040",
    "en": "The astronauts returning home from the space mission were experiencing mineral loss from teeth and bones as a result of staying in a zero-gravity environment. Nano HAp was created as a repairing material to restore what was lost. With the help of nanotechnology, scientists have discovered a way to turn hydroxyapatite into nanoparticles that go to work remineralizing your teeth.",
    "en_sha1": "21884cc22ce56d4128eece69697fc45c8b6a4741",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Continues the NASA-origin story as fact; restorative (repair) framing.); translate after the EN is fixed or removed",
+   "fr": "Les astronautes qui rentraient de mission spatiale subissaient une perte de minéraux au niveau des dents et des os, à cause de leur séjour en apesanteur. La nano-HAp a été créée comme matériau réparateur pour restaurer ce qui avait été perdu. Grâce aux nanotechnologies, les scientifiques ont trouvé le moyen de transformer l’hydroxyapatite en nanoparticules qui se mettent au travail pour reminéraliser vos dents.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Continues the NASA-origin story as fact; restorative (repair) framing.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -961,10 +983,12 @@
    "key_path": "body_html#b041",
    "en": "Since then, nano HAp has cemented itself as the hallmark in the medical field and in oral care globally, especially in Japan and Europe.",
    "en_sha1": "5c66a1cc46e2f026435acb726a928168c48e029d",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and superlative presented as fact.); translate after the EN is fixed or removed",
+   "fr": "Depuis, la nano-HAp s’est imposée comme une référence dans le domaine médical et dans le soin bucco-dentaire à travers le monde, en particulier au Japon et en Europe.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and superlative presented as fact.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1222,10 +1246,12 @@
    "key_path": "body_html#b060",
    "en": "2. Nano Hydroxyapatite Whitens Your Teeth Without Hurting Your Enamel",
    "en_sha1": "9cffae8a7ce024183f6c4b14b060fe74e1052d96",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
+   "fr": "2. La nano-hydroxyapatite blanchit vos dents sans abîmer votre émail",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1334,10 +1360,12 @@
    "key_path": "body_html#b068",
    "en": "<strong>How Nano HAp Whitens Your Teeth</strong>",
    "en_sha1": "f4fa49dd9f2396ecb2334b95f6523476ef3f70cf",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
+   "fr": "<strong>Comment la nano-HAp blanchit vos dents</strong>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1718,10 +1746,12 @@
    "key_path": "body_html#b096",
    "en": "Most oral care ingredients, like fluoride, chlorhexidine, stannous salts, and quaternary ammonium salts, are bactericidal. That means they kill all the bacteria in your mouth. What’s even worse is that these products leave you with stained teeth and altered taste buds.",
    "en_sha1": "f8f753d0ed60e2246b6499b9c6d0a6b55496dc38",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride and others kill all oral bacteria; overstated, denigrates legal ingredients.); translate after the EN is fixed or removed",
+   "fr": "La plupart des ingrédients de soin bucco-dentaire, comme le fluor, la chlorhexidine, les sels stanneux et les sels d’ammonium quaternaire, sont bactéricides. Autrement dit, ils tuent toutes les bactéries de votre bouche. Pire encore, ces formules laissent des dents tachées et un goût altéré.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride and others kill all oral bacteria; overstated, denigrates legal ingredients.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1776,10 +1806,12 @@
    "key_path": "body_html#b100",
    "en": "It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp protects your teeth against decay by grouping the disease-causing microbes together, which you can then spit out.",
    "en_sha1": "558e186b55d7c62c8b67f03fa66079f1c0aaf000",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed",
+   "fr": "Elle reminéralise l’émail en reconstituant les dépôts de calcium et de phosphate perdus, tout en protégeant la surface des dents des attaques acides quotidiennes. De plus, la nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1843,10 +1875,12 @@
    "key_path": "body_html#b105",
    "en": "Even a slight deviation from the normal puts you at a high risk for a myriad of medical disorders, such as cardiovascular disease, pneumonia, endocarditis, and even pregnancy complications.",
    "en_sha1": "09d1637f9051ed2148a7651590408599c8a3dd25",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic disease risk (cardiovascular, pneumonia, pregnancy) stated as fact in a product article.); translate after the EN is fixed or removed",
+   "fr": "Le moindre écart par rapport à la normale vous expose à un risque élevé de nombreux troubles médicaux, comme les maladies cardiovasculaires, la pneumonie, l’endocardite, et même des complications de grossesse.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic disease risk (cardiovascular, pneumonia, pregnancy) stated as fact in a product article.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1895,10 +1929,12 @@
    "key_path": "body_html#b109",
    "en": "The problem is made worse by the fact that most commercially available toothpaste does a poor job at actually protecting the integrity of your teeth. It’s abrasive to the structure, gets soaked into the body and causes more harm, like fluorosis. Fluorosis stains won’t go away on their own, so you’ll need to visit your dental hygienist or dentist for cosmetic treatment.",
    "en_sha1": "041c8bba816c62f86798ea31afe93b85fd97fdd0",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that most pastes soak into the body and cause harm; denigration, no basis.); translate after the EN is fixed or removed",
+   "fr": "Le problème est aggravé par le fait que la plupart des dentifrices du commerce protègent mal l’intégrité de vos dents. Ils sont abrasifs pour leur structure, sont absorbés par l’organisme et causent davantage de dégâts, comme la fluorose. Les taches de fluorose ne disparaissent pas d’elles-mêmes : vous devrez consulter votre hygiéniste dentaire ou votre dentiste pour un traitement esthétique.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that most pastes soak into the body and cause harm; denigration, no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1908,10 +1944,12 @@
    "key_path": "body_html#b110",
    "en": "And if your toothpaste contains fluoride, sodium laureth sulfate (SLS), saccharin, or triclosan, you are ingesting poison everyday.",
    "en_sha1": "e761760705397cc5079f1f6ae540113b2c94eeb6",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Calls legally used ingredients 'poison'; overstated, denigrating (EU 655/2013).); translate after the EN is fixed or removed",
+   "fr": "Et si votre dentifrice contient du fluor, du laureth sulfate de sodium (SLS), de la saccharine ou du triclosan, vous ingérez du poison tous les jours.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Calls legally used ingredients 'poison'; overstated, denigrating (EU 655/2013).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -1936,10 +1974,12 @@
    "key_path": "body_html#b112",
    "en": "It’s nontoxic, highly effective, and has zero side effects. In fact, your toddler could swallow it without you having to call poison control.",
    "en_sha1": "1f2154112163d3929cc05e98a046f648c5ba0864",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Absolute safety; toddler swallowing contradicts FAQ-0206 (from age 3 under supervision).); translate after the EN is fixed or removed",
+   "fr": "Elle est non toxique, très efficace et n’a aucun effet secondaire. En fait, votre tout-petit pourrait l’avaler sans que vous ayez à appeler le centre antipoison.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Absolute safety; toddler swallowing contradicts FAQ-0206 (from age 3 under supervision).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2035,10 +2075,12 @@
    "key_path": "seo.description",
    "en": "Here's everything you need to know about nano-hydroxyapatite, a medical marvel ingredient for better teeth, bones, and overall health.",
    "en_sha1": "7942d995565165cfc8e231a65a0969804bb12451",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and bone/overall-health benefit; overstates the evidence.); translate after the EN is fixed or removed",
+   "fr": "Voici tout ce qu’il faut savoir sur la nano-hydroxyapatite, un ingrédient qui est une merveille médicale pour de meilleures dents, de meilleurs os et une meilleure santé globale.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and bone/overall-health benefit; overstates the evidence.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2195,10 +2237,12 @@
    "key_path": "body_html#b011",
    "en": "Beyond simply cleaning your mouth, brushing in the morning protects your teeth throughout the day. Toothpaste containing nano-hydroxyapatite strengthens enamel and prevents cavities. Additionally, it creates a clean surface that makes it harder for bacteria and food particles to stick during the day.",
    "en_sha1": "a1a7641aaed7f477472d984049cee149758e6e4e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (cavities); regulatory.md forbids prevents disease; FAQ-0203.); translate after the EN is fixed or removed",
+   "fr": "Au-delà du simple nettoyage de la bouche, le brossage du matin protège vos dents tout au long de la journée. Un dentifrice à la nano-hydroxyapatite renforce l’émail et prévient les caries. Il crée aussi une surface propre sur laquelle les bactéries et les particules alimentaires ont plus de mal à adhérer pendant la journée.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (cavities); regulatory.md forbids prevents disease; FAQ-0203.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2342,10 +2386,12 @@
    "key_path": "body_html#b022",
    "en": "Reduces Tooth Decay and Gum Disease",
    "en_sha1": "cfdbc3a430f2e1cb9118dc432b272875c23f8679",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease-reduction heading (tooth decay, gum disease); regulatory.md forbids prevents/treats disease.); translate after the EN is fixed or removed",
+   "fr": "Réduit les caries et les maladies des gencives",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease-reduction heading (tooth decay, gum disease); regulatory.md forbids prevents/treats disease.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2400,10 +2446,12 @@
    "key_path": "body_html#b026",
    "en": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare's Asleep Toothpaste</a>, with valerian, hydroxyapatite, and medical-grade activated charcoal, soothes gums, strengthens enamel, and keeps your breath fresh by morning. Its nano-hydroxyapatite formula immediately repairs and remineralizes enamel. You do not need to wait after eating acidic food.",
    "en_sha1": "610b061bf9183f8583cfd3f375f948b16814458e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Medical-grade' is forbidden (regulatory.md); 'immediately repairs' and no-wait advice overstate.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">La formule Asleep de Karmicare</a>, à la valériane, à l’hydroxyapatite et au charbon actif de qualité médicale, apaise les gencives, renforce l’émail et garde votre haleine fraîche jusqu’au matin. Sa formule à la nano-hydroxyapatite répare et reminéralise immédiatement l’émail. Inutile d’attendre après avoir mangé des aliments acides.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Medical-grade' is forbidden (regulatory.md); 'immediately repairs' and no-wait advice overstate.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2577,10 +2625,12 @@
    "key_path": "body_html#b006",
    "en": "Nootropics are substances that optimize brain functioning, making you smarter, focused, motivated, and productive.",
    "en_sha1": "360d3920727bb123bd25f65b8aafdebf5dda27bd",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cognitive enhancement ('making you smarter') presented as fact; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Les nootropiques sont des substances qui optimisent le fonctionnement du cerveau et vous rendent plus intelligent, concentré, motivé et efficace.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cognitive enhancement ('making you smarter') presented as fact; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2696,10 +2746,12 @@
    "key_path": "body_html#b015",
    "en": "<a href=\"https://healthopenresearch.org/articles/6-2#ref-6\">Originally used to treat mental conditions </a>like Alzheimer’s disease, stroke, narcolepsy, schizophrenia, ADHD, and age-related cognitive decline, these substances have shown great success. Today, many people turn to them to enhance their brain function.",
    "en_sha1": "88efdb2082f3fd2070056c6302196ac7c58fa83e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease treatment (Alzheimer's, schizophrenia, ADHD) with 'great success' stated as fact.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://healthopenresearch.org/articles/6-2#ref-6\">Initialement destinées à traiter des troubles mentaux </a>comme la maladie d’Alzheimer, l’AVC, la narcolepsie, la schizophrénie, le TDAH et le déclin cognitif lié à l’âge, ces substances ont montré de grands succès. Aujourd’hui, beaucoup de personnes y ont recours pour améliorer leurs fonctions cérébrales.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease treatment (Alzheimer's, schizophrenia, ADHD) with 'great success' stated as fact.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2793,10 +2845,12 @@
    "key_path": "body_html#b022",
    "en": "Improve blood flow to the brain",
    "en_sha1": "c0f74b044ceed5b86293e5ef0745d60e93553648",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cerebral blood-flow claim; physiological, no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Améliorer la circulation sanguine vers le cerveau",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cerebral blood-flow claim; physiological, no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2819,10 +2873,12 @@
    "key_path": "body_html#b024",
    "en": "Suppress depressant neurotransmitters such as GABA (a chemical in your brain that helps you relax, otherwise known as Gamma-aminobutyric acid).",
    "en_sha1": "abef35ca0604ab0c111b4490444f8f5841eebe5a",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Neurotransmitter mechanism; physiological, no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Freiner les neurotransmetteurs inhibiteurs comme le GABA (une substance chimique de votre cerveau qui vous aide à vous détendre, aussi appelée acide gamma-aminobutyrique).",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Neurotransmitter mechanism; physiological, no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2832,10 +2888,12 @@
    "key_path": "body_html#b025",
    "en": "Apart from boosting mental performance, nootropics may also slow down <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6971896/\">age-related cognitive decline</a>. Older adults usually experience symptoms of cognitive decline such as memory loss. Nootropic supplements can come in handy in delaying these symptoms.",
    "en_sha1": "d203cd48547a441ac8e94965307361a8f2d46963",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Slowing age-related cognitive decline is a disease claim.); translate after the EN is fixed or removed",
+   "fr": "En plus de stimuler les performances mentales, les nootropiques pourraient aussi ralentir le <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6971896/\">déclin cognitif lié à l’âge</a>. Les personnes âgées présentent souvent des symptômes de déclin cognitif, comme des pertes de mémoire. Les compléments nootropiques peuvent être utiles pour retarder ces symptômes.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Slowing age-related cognitive decline is a disease claim.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2845,10 +2903,12 @@
    "key_path": "body_html#b026",
    "en": "An excellent, regular source of nootropics is <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare’s Awake Morning toothpaste</a>. Awake Morning toothpaste is rich in guarana, a nootropic that will spark your mind to life and keep you active throughout the day.",
    "en_sha1": "c1556e507f313fb534b217616f66aceec56cb88b",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Rich in guarana' contradicts INCI v2 (guarana listed after the preservatives); all-day effect overstates.); translate after the EN is fixed or removed",
+   "fr": "Une excellente source régulière de nootropiques est <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">la formule du matin Awake de Karmicare</a>. La formule du matin Awake est riche en guarana, un nootropique qui éveille votre esprit et vous garde actif toute la journée.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Rich in guarana' contradicts INCI v2 (guarana listed after the preservatives); all-day effect overstates.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2901,10 +2961,12 @@
    "key_path": "body_html#b030",
    "en": "Research published in the National<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8077445/\"> Library of Medicine</a> supports the use of nootropics like valerian to enhance sleep quality and reduce the symptoms of insomnia. Nootropics promote relaxation and help release anxiety.",
    "en_sha1": "c060277cab1ba5273767ad3dc9345f04c0cb61b9",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Insomnia and anxiety are conditions; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Des recherches publiées par la National<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8077445/\"> Library of Medicine</a> soutiennent le recours aux nootropiques comme la valériane pour améliorer la qualité du sommeil et réduire les symptômes de l’insomnie. Les nootropiques favorisent la détente et aident à libérer l’anxiété.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Insomnia and anxiety are conditions; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2929,10 +2991,12 @@
    "key_path": "body_html#b032",
    "en": "Again, with <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare’s Asleep evening toothpaste</a>, you can enjoy the best quality sleep just by brushing your teeth before bed. Asleep Evening toothpaste is enriched with valerian, orange essential oil, and cinnamon, three ingredients that help you relax and get in the right state of mind for quality sleep.",
    "en_sha1": "d8c5dd1493131b5af199050a88d9bab9725d0ef5",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Superlative sleep outcome from brushing; overstates products.md 'supports sleep quality'; FAQ-0204 disclaims sleep claims.); translate after the EN is fixed or removed",
+   "fr": "Là encore, avec <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">la formule du soir Asleep de Karmicare</a>, vous pouvez profiter du meilleur sommeil simplement en vous brossant les dents avant d’aller au lit. La formule du soir Asleep est enrichie en valériane, en huile essentielle d’orange et en cannelle, trois ingrédients qui vous aident à vous détendre et à trouver le bon état d’esprit pour un sommeil de qualité.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Superlative sleep outcome from brushing; overstates products.md 'supports sleep quality'; FAQ-0204 disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -2955,10 +3019,12 @@
    "key_path": "body_html#b034",
    "en": "Scientists have proven that nootropics can<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3353150/\"> enhance attention and concentration</a> in kids with attention deficit hyperactivity disorder (ADHD). ADHD is a mental condition that makes it difficult to sustain one’s attention on a task.",
    "en_sha1": "cc87385039615ef8b9ccbdf929cf3a38063567e0",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: ADHD is a condition; 'scientists have proven' overstates.); translate after the EN is fixed or removed",
+   "fr": "Les scientifiques ont prouvé que les nootropiques peuvent<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3353150/\"> améliorer l’attention et la concentration</a> chez les enfants atteints d’un trouble du déficit de l’attention avec hyperactivité (TDAH). Le TDAH est un trouble mental qui rend difficile le maintien de l’attention sur une tâche.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: ADHD is a condition; 'scientists have proven' overstates.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3028,10 +3094,12 @@
    "key_path": "body_html#b039",
    "en": "Natural nootropics are the safer alternative because they are free from toxic synthetic compounds and lack side effects associated with high dosages.",
    "en_sha1": "f363049c44bbc2f95b36d418043a1a10f28021e2",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Absolute safety; 'toxic synthetic compounds' stated as fact denigrates (EU 655/2013).); translate after the EN is fixed or removed",
+   "fr": "Les nootropiques naturels sont l’alternative la plus sûre, car ils sont exempts de composés synthétiques toxiques et n’ont pas les effets secondaires associés aux doses élevées.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Absolute safety; 'toxic synthetic compounds' stated as fact denigrates (EU 655/2013).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3056,10 +3124,12 @@
    "key_path": "body_html#b041",
    "en": "Nootropics can boost your mood and reduce the symptoms of mental anxiety and stress. This is mainly because nootropics<a href=\"https://www.hindawi.com/journals/ecam/2016/4391375/\"> increase the level of dopamine</a>, the mood-enhancing chemical in the brain.",
    "en_sha1": "d24b413c01902c1ae8c011af5f3ec8a1aa12692e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Anxiety symptoms and dopamine mechanism; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Les nootropiques peuvent améliorer votre humeur et réduire les symptômes d’anxiété et de stress. C’est principalement parce que les nootropiques<a href=\"https://www.hindawi.com/journals/ecam/2016/4391375/\"> augmentent le taux de dopamine</a>, la substance chimique du cerveau qui améliore l’humeur.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Anxiety symptoms and dopamine mechanism; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3138,10 +3208,12 @@
    "key_path": "body_html#b047",
    "en": "Nootropics improve blood flow to your brain.",
    "en_sha1": "6380cb4f7e6810f23466b3ffb9ebfc9b4a704e57",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cerebral blood-flow claim; physiological, no basis.); translate after the EN is fixed or removed",
+   "fr": "Les nootropiques améliorent la circulation sanguine vers votre cerveau.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cerebral blood-flow claim; physiological, no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3151,10 +3223,12 @@
    "key_path": "body_html#b048",
    "en": "Facilitate energy production by your brain cells.",
    "en_sha1": "da8fb44dcb088cdf2c138b34cdcd9fa8b7f4d06c",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Brain-cell energy metabolism; physiological, no basis.); translate after the EN is fixed or removed",
+   "fr": "Faciliter la production d’énergie par vos cellules cérébrales.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Brain-cell energy metabolism; physiological, no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3164,10 +3238,12 @@
    "key_path": "body_html#b049",
    "en": "Reduce stress hormones that cause fatigue.",
    "en_sha1": "7d37e43ffafb3fb4883a2e1fbbbf86598ffe575a",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Hormonal effect; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Réduire les hormones du stress qui causent la fatigue.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Hormonal effect; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3302,10 +3378,12 @@
    "key_path": "body_html#b059",
    "en": "<strong>Lowers the risk of heart disease:</strong> Similar to green tea, guarana contains antioxidants like tannins, saponins, and catechins. Antioxidants lower the risk of heart disease by <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2905473/\">reducing blood pressure</a> and possibly, by helping to control <a href=\"https://www.intechopen.com/chapters/77150\">blood sugar</a>.",
    "en_sha1": "cc1e15888155600a8835375883664959a7550f9a",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Heart disease, blood pressure, blood sugar: disease claims, no basis.); translate after the EN is fixed or removed",
+   "fr": "<strong>Réduit le risque de maladie cardiaque :</strong> comme le thé vert, le guarana contient des antioxydants tels que les tanins, les saponines et les catéchines. Les antioxydants réduisent le risque de maladie cardiaque en <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2905473/\">abaissant la tension artérielle</a> et peut-être en aidant à contrôler <a href=\"https://www.intechopen.com/chapters/77150\">la glycémie</a>.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Heart disease, blood pressure, blood sugar: disease claims, no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3315,10 +3393,12 @@
    "key_path": "body_html#b060",
    "en": "<strong>May promote weight loss:</strong> Guarana may help you lose weight and avoid obesity. Studies show that compounds in guarana may <a href=\"https://pubmed.ncbi.nlm.nih.gov/28632199/\">suppress genes that take part in fat production</a>.",
    "en_sha1": "6ea94d59873496f7fe6115dfeb02847b3dac753a",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Weight loss and obesity: systemic, no basis.); translate after the EN is fixed or removed",
+   "fr": "<strong>Pourrait favoriser la perte de poids :</strong> le guarana pourrait vous aider à perdre du poids et à éviter l’obésité. Des études montrent que des composés du guarana pourraient <a href=\"https://pubmed.ncbi.nlm.nih.gov/28632199/\">freiner les gènes qui participent à la production de graisse</a>.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Weight loss and obesity: systemic, no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3384,10 +3464,12 @@
    "key_path": "body_html#b065",
    "en": "Toothpaste is an easy and effective means to add guarana to your routine. <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare’s Awake Morning toothpaste</a> is rich in guarana to help you boost your energy levels as you gear up for the day.",
    "en_sha1": "823f03f243a218fc0d43a4aba3ec0bc1ac9f4681",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Paste as a guarana delivery route (ingestion framing); 'rich in guarana' contradicts INCI v2 order.); translate after the EN is fixed or removed",
+   "fr": "Le dentifrice est un moyen simple et efficace d’ajouter du guarana à votre routine. <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">La formule du matin Awake de Karmicare</a> est riche en guarana pour vous aider à booster votre énergie quand vous vous préparez pour la journée.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Paste as a guarana delivery route (ingestion framing); 'rich in guarana' contradicts INCI v2 order.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3397,10 +3479,12 @@
    "key_path": "body_html#b066",
    "en": "For a boost of guarana, choose Karmicare’s Awake Morning toothpaste to ensure you don’t miss out on the awesome benefits of this nootropic.",
    "en_sha1": "61d80085b2f4219e5d4e4f186d26235ac4ba21a4",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Transfers guarana's listed ingestion benefits (incl. heart disease, weight loss) to the paste.); translate after the EN is fixed or removed",
+   "fr": "Pour une dose de guarana, choisissez la formule du matin Awake de Karmicare et ne passez pas à côté des formidables bienfaits de ce nootropique.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Transfers guarana's listed ingestion benefits (incl. heart disease, weight loss) to the paste.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3423,10 +3507,12 @@
    "key_path": "body_html#b068",
    "en": "Valerian is an herb native to Europe and Northern Asia. It’s a common herbal nootropic used to induce sleep, especially in people with insomnia.",
    "en_sha1": "1ec8a18b70553784d2f0094e8a3d4d70bd375000",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-induction and insomnia framing (medicinal); products.md says only 'supports relaxation and sleep quality'.); translate after the EN is fixed or removed",
+   "fr": "La valériane est une plante originaire d’Europe et d’Asie du Nord. C’est un nootropique végétal courant pour induire le sommeil, en particulier chez les personnes souffrant d’insomnie.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-induction and insomnia framing (medicinal); products.md says only 'supports relaxation and sleep quality'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3436,10 +3522,12 @@
    "key_path": "body_html#b069",
    "en": "Research shows that <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4394901/\">taking valerian can help you fall asleep faster</a> and stay asleep longer. In addition, unlike other sleep aids, you can consume valerian without having to worry about side effects.",
    "en_sha1": "b33bf3bf05c9fc8f5d8966c49c9adaf8b188ea4a",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-aid outcome and absolute safety versus other sleep aids.); translate after the EN is fixed or removed",
+   "fr": "Les recherches montrent que <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4394901/\">la valériane peut vous aider à vous endormir plus vite</a> et à dormir plus longtemps. De plus, contrairement à d’autres somnifères, vous pouvez consommer de la valériane sans vous soucier des effets secondaires.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-aid outcome and absolute safety versus other sleep aids.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3449,10 +3537,12 @@
    "key_path": "body_html#b070",
    "en": "Apart from promoting healthy sleep, valerian helps to reduce stress and anxiety. We've all had those days where being tired, you can’t seem to fall asleep. Your thoughts are racing and you can't seem to recover from the pressure and anxiety of the day.",
    "en_sha1": "830dc39d7468cec08b9cc34cccb2a8aaa1dc07d7",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Anxiety is a condition; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "En plus de favoriser un sommeil sain, la valériane aide à réduire le stress et l’anxiété. Nous avons tous connu ces jours où, malgré la fatigue, on n’arrive pas à s’endormir. Les pensées s’emballent et on n’arrive pas à se remettre de la pression et de l’anxiété de la journée.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Anxiety is a condition; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3462,10 +3552,12 @@
    "key_path": "body_html#b071",
    "en": "Valerian-infused <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Asleep Evening toothpaste</a> from Karmicare will help you drift into slumberland in no time.",
    "en_sha1": "9375037f6fcc318d1025fcdc6e36de81677ae9f9",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset promise for a cosmetic; FAQ-0204 disclaims sleep claims.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">La formule du soir Asleep</a> de Karmicare, infusée à la valériane, vous aidera à glisser dans le sommeil en un rien de temps.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep-onset promise for a cosmetic; FAQ-0204 disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3490,10 +3582,12 @@
    "key_path": "body_html#b073",
    "en": "Unlike fluoride-based oral hygiene products that disturb your wake/sleep cycles, Karmicare actually harmonizes with your body's circadian rhythms.",
    "en_sha1": "b7d04a5d5c6a79aae6ee5af72c33f9807c1ec414",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data.); translate after the EN is fixed or removed",
+   "fr": "Contrairement aux soins bucco-dentaires au fluor qui perturbent vos cycles veille/sommeil, Karmicare s’harmonise réellement avec les rythmes circadiens de votre corps.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride products disturb sleep; FAQ-0204 cites only observational water data.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3570,10 +3664,12 @@
    "key_path": "body_html#b079",
    "en": "Creatine: Creatine supplements are mainly used by athletes because they enhance athletic performance, but they may also improve brain health, lower blood sugar, and reduce fatigue as cited <a href=\"https://www.healthline.com/nutrition/10-benefits-of-creatine\">here</a>.",
    "en_sha1": "63fea90aba14e7659e1c0fecd5ff44448f8d2bb2",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Blood sugar and brain health for creatine (not a Karmicare ingredient); systemic, no basis.); translate after the EN is fixed or removed",
+   "fr": "Créatine : les compléments de créatine sont surtout pris par les athlètes parce qu’ils améliorent les performances sportives, mais ils pourraient aussi améliorer la santé du cerveau, abaisser la glycémie et réduire la fatigue, comme indiqué <a href=\"https://www.healthline.com/nutrition/10-benefits-of-creatine\">ici</a>.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Blood sugar and brain health for creatine (not a Karmicare ingredient); systemic, no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3583,10 +3679,12 @@
    "key_path": "body_html#b080",
    "en": "Bacopa monnieri: This is an herb that may also boost brain function, reduce anxiety, and ease inflammation as highlighted in <a href=\"https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/bacopa-monnieri\">Neurocognitive Effects of Herbal Extracts.</a>",
    "en_sha1": "a4eb9f617d8ad417115ffa5d3866bc3794b8c699",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Anxiety and inflammation for bacopa (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
+   "fr": "Bacopa monnieri : cette plante pourrait aussi stimuler les fonctions cérébrales, réduire l’anxiété et apaiser l’inflammation, comme le souligne <a href=\"https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/bacopa-monnieri\">Neurocognitive Effects of Herbal Extracts.</a>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Anxiety and inflammation for bacopa (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3596,10 +3694,12 @@
    "key_path": "body_html#b081",
    "en": "Panax ginseng: <a href=\"https://www.webmd.com/vitamins/ai/ingredientmono-1000/panax-ginseng\">Panax ginseng</a> is considered an adaptogen. Adaptogens are substances that are believed to make your body more resistant to stressors. Panax ginseng may also enhance mental performance, reduce inflammation, and boost immunity and energy levels",
    "en_sha1": "70a88212d85e0cb57ab6ac57f32abf14072f2c67",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Inflammation and immunity for ginseng (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
+   "fr": "Panax ginseng : le <a href=\"https://www.webmd.com/vitamins/ai/ingredientmono-1000/panax-ginseng\">Panax ginseng</a> est considéré comme un adaptogène. Les adaptogènes sont des substances qui rendraient votre corps plus résistant aux facteurs de stress. Le Panax ginseng pourrait aussi améliorer les performances mentales, réduire l’inflammation et renforcer l’immunité et les niveaux d’énergie",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Inflammation and immunity for ginseng (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3609,10 +3709,12 @@
    "key_path": "body_html#b082",
    "en": "Ginkgo biloba: <a href=\"https://www.forbes.com/health/supplements/ginkgo-biloba-benefits/\">Ginkgo biloba </a>extract may improve cardiovascular health, reduce inflammation, enhance brain health, and lessen anxiety.",
    "en_sha1": "31159ed903027497f2d5f7c46059bbeb2b819019",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cardiovascular, inflammation, anxiety for ginkgo (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
+   "fr": "Ginkgo biloba : l’extrait de <a href=\"https://www.forbes.com/health/supplements/ginkgo-biloba-benefits/\">Ginkgo biloba </a>pourrait améliorer la santé cardiovasculaire, réduire l’inflammation, favoriser la santé du cerveau et atténuer l’anxiété.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cardiovascular, inflammation, anxiety for ginkgo (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3622,10 +3724,12 @@
    "key_path": "body_html#b083",
    "en": "Rhodiola rosea: Also an adaptogen, <a href=\"https://psychcentral.com/health/rhodiola-benefits\">rhodiola rosea</a> may help manage stress and anxiety, reduce the symptoms of depression, and improve brain function.",
    "en_sha1": "eb5f94c1e81121fa52372fe578beddae8e039e51",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Depression and anxiety for rhodiola (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
+   "fr": "Rhodiola rosea : également adaptogène, la <a href=\"https://psychcentral.com/health/rhodiola-benefits\">rhodiola rosea</a> pourrait aider à gérer le stress et l’anxiété, réduire les symptômes de la dépression et améliorer les fonctions cérébrales.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Depression and anxiety for rhodiola (not a Karmicare ingredient); no basis.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -3967,10 +4071,12 @@
    "key_path": "body_html#b008",
    "en": "Using natural toothpaste with nano-hydroxyapatite helps prevent tooth decay, whitens teeth without sensitivity, and improves oral hygiene.",
    "en_sha1": "3d4e05ad35c8b5477a2188cf59bdfff5633470ef",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (tooth decay); regulatory.md; FAQ-0203.); translate after the EN is fixed or removed",
+   "fr": "Un dentifrice naturel à la nano-hydroxyapatite aide à prévenir les caries, blanchit les dents sans sensibilité et améliore l’hygiène bucco-dentaire.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (tooth decay); regulatory.md; FAQ-0203.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4036,10 +4142,12 @@
    "key_path": "body_html#b013",
    "en": "It protects against tooth decay by providing total protection against harmful dietary acids.",
    "en_sha1": "f016b2c5d84e127439570658fea1ee06897e1c16",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed",
+   "fr": "Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4049,10 +4157,12 @@
    "key_path": "body_html#b014",
    "en": "It supports bone health and is completely non-toxic.",
    "en_sha1": "0577f04c26ad42ace90de0f675c673368cbd4352",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Bone health is systemic with no basis in products.md; 'completely non-toxic' is absolute.); translate after the EN is fixed or removed",
+   "fr": "Elle soutient la santé des os et est totalement non toxique.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Bone health is systemic with no basis in products.md; 'completely non-toxic' is absolute.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4215,10 +4325,12 @@
    "key_path": "body_html#b026",
    "en": "Bioactive — Your body can easily absorb and use nano HAp.",
    "en_sha1": "9be77f4a19cc0efe148174ecbdcb6218c8f014c0",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic absorption claim for a cosmetic; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Bioactive — votre corps peut facilement absorber et assimiler la nano-HAp.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic absorption claim for a cosmetic; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4256,10 +4368,12 @@
    "key_path": "body_html#b029",
    "en": "Nano hydroxyapatite has an interesting history that spans four decades. NASA <a href=\"https://www.todaysrdh.com/from-nasa-to-your-mouth-the-dental-benefits-of-nano-hydroxyapatite/#:~:text=NASA%20sought%20ways%20to%20replace%20lost%20minerals%20in,a%20gel%20solution%20to%20formulate%20hydroxyapatite%20in%201974.\">invented </a>the first version of nano-hydroxyapatite in 1970.",
    "en_sha1": "271bc59a20773524f78dc7af2192892c5886cfff",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-invention claim presented as fact; no source.); translate after the EN is fixed or removed",
+   "fr": "La nano-hydroxyapatite a une histoire passionnante qui s’étend sur quatre décennies. La NASA <a href=\"https://www.todaysrdh.com/from-nasa-to-your-mouth-the-dental-benefits-of-nano-hydroxyapatite/#:~:text=NASA%20sought%20ways%20to%20replace%20lost%20minerals%20in,a%20gel%20solution%20to%20formulate%20hydroxyapatite%20in%201974.\">a inventé </a>la première version de la nano-hydroxyapatite en 1970.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-invention claim presented as fact; no source.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4269,10 +4383,12 @@
    "key_path": "body_html#b030",
    "en": "<b>Why would a space agency spend time creating nano HAp?</b>",
    "en_sha1": "0f84d824f4b9957683a141e35644147b4b77bad7",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Question presupposes the NASA-origin story (b029, b031).); translate after the EN is fixed or removed",
+   "fr": "<b>Pourquoi une agence spatiale consacrerait-elle du temps à créer la nano-HAp ?</b>",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Question presupposes the NASA-origin story (b029, b031).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4282,10 +4398,12 @@
    "key_path": "body_html#b031",
    "en": "Astronauts returning home from space experienced mineral loss from teeth and bones due to prolonged time in zero gravity. To address this, NASA created nano-HAp to restore lost minerals.",
    "en_sha1": "a6d97405abcc71f88c057b3a9fdd8507e91090d7",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin story presented as fact.); translate after the EN is fixed or removed",
+   "fr": "Les astronautes qui rentraient de l’espace subissaient une perte de minéraux au niveau des dents et des os, à cause d’un séjour prolongé en apesanteur. Pour y remédier, la NASA a créé la nano-HAp afin de restaurer les minéraux perdus.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin story presented as fact.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4457,10 +4575,12 @@
    "key_path": "body_html#b044",
    "en": "2. Nano Hydroxyapatite Whitens Your Teeth Without Hurting Your Enamel",
    "en_sha1": "9cffae8a7ce024183f6c4b14b060fe74e1052d96",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
+   "fr": "2. La nano-hydroxyapatite blanchit vos dents sans abîmer votre émail",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4569,10 +4689,12 @@
    "key_path": "body_html#b052",
    "en": "According to<a href=\"https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2023.1199728/full\"> dental professionals,</a> nano HAp toothpaste is more effective in preventing cavities and reducing the discomfort of sensitive teeth than traditional treatment.",
    "en_sha1": "1c3649aebf53e81dacf9cc7748823d3a81a0f970",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity prevention, superiority over treatment and unnamed professional endorsement.); translate after the EN is fixed or removed",
+   "fr": "Selon des<a href=\"https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2023.1199728/full\"> professionnels dentaires,</a> un dentifrice à la nano-HAp est plus efficace pour prévenir les caries et réduire l’inconfort des dents sensibles que les traitements traditionnels.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity prevention, superiority over treatment and unnamed professional endorsement.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4666,10 +4788,12 @@
    "key_path": "body_html#b059",
    "en": "Nano hydroxyapatite forms a protective layer on your teeth. It also rebuilds lost calcium and phosphate deposits. It shields teeth from acids and bacteria, reducing the risk of decay. Nano HAp protects your teeth against decay by grouping the disease-causing microbes, which you can then spit out.",
    "en_sha1": "e92d2b012890273223ffe50dcdcdfa18cb32b461",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed",
+   "fr": "La nano-hydroxyapatite forme une couche protectrice sur vos dents. Elle reconstitue aussi les dépôts de calcium et de phosphate perdus. Elle protège les dents des acides et des bactéries, ce qui réduit le risque de caries. La nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4718,10 +4842,12 @@
    "key_path": "body_html#b063",
    "en": "Minor oral health issues can lead to serious health issues like heart disease, pneumonia, and even complications in pregnant women.",
    "en_sha1": "86c476231d1d51c48a540f162d51e65d4f5f3830",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic disease (heart disease, pneumonia, pregnancy) from minor oral issues, stated as fact.); translate after the EN is fixed or removed",
+   "fr": "De petits problèmes bucco-dentaires peuvent entraîner de graves problèmes de santé, comme des maladies cardiaques, une pneumonie et même des complications chez les femmes enceintes.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic disease (heart disease, pneumonia, pregnancy) from minor oral issues, stated as fact.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4731,10 +4857,12 @@
    "key_path": "body_html#b064",
    "en": "Most oral care products do little to protect your teeth. Many contain harmful ingredients like fluoride, sodium laureth sulfate (SLS), saccharin, or triclosan, which can be toxic over time.",
    "en_sha1": "b589ce5905bebfb0ec2c3485a5b2ae1f8bec26c8",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Calls legally used ingredients toxic, stated as fact; denigrates (EU 655/2013).); translate after the EN is fixed or removed",
+   "fr": "La plupart des soins bucco-dentaires protègent peu vos dents. Beaucoup contiennent des ingrédients nocifs comme le fluor, le laureth sulfate de sodium (SLS), la saccharine ou le triclosan, qui peuvent devenir toxiques avec le temps.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Calls legally used ingredients toxic, stated as fact; denigrates (EU 655/2013).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -4744,10 +4872,12 @@
    "key_path": "body_html#b065",
    "en": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare Biorhythmic nano HAp toothpaste</a> is your surest bet. It is safe for all ages, even your toddlers can swallow it without you having to call poison control.",
    "en_sha1": "2478ecaadbd132ca278bf61f351ff225d4596740",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Safe for all ages' and toddler swallowing contradict FAQ-0206 (from age 3 under supervision).); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Le dentifrice biorythmique à la nano-HAp de Karmicare</a> est votre valeur la plus sûre. Il convient à tous les âges : même vos tout-petits peuvent l’avaler sans que vous ayez à appeler le centre antipoison.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Safe for all ages' and toddler swallowing contradict FAQ-0206 (from age 3 under supervision).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5102,10 +5232,12 @@
    "key_path": "body_html#b014",
    "en": "Including oral care in your overall wellness strategy goes beyond preventing cavities and having fresh breath. It involves aligning oral hygiene practices with the body’s natural rhythms. You can achieve this through toothpaste and other oral care products that ensure white teeth and support overall well-being.",
    "en_sha1": "4e27d3139e08bf986e10011c30eae466ae7267e9",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Ensure white teeth' is a guaranteed whitening result without the remineralisation qualifier (Don't say).); translate after the EN is fixed or removed",
+   "fr": "Intégrer le soin bucco-dentaire à votre stratégie de bien-être global va au-delà de la prévention des caries et d’une haleine fraîche. Il s’agit d’accorder vos gestes d’hygiène bucco-dentaire aux rythmes naturels du corps. Vous pouvez y parvenir grâce à un dentifrice et à d’autres soins bucco-dentaires qui garantissent des dents blanches et soutiennent le bien-être global.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Ensure white teeth' is a guaranteed whitening result without the remineralisation qualifier (Don't say).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5306,10 +5438,12 @@
    "key_path": "body_html#b028",
    "en": "This simply implies a substance that is poisonous to the brain, spinal cord, and nervous system. It lowers the level of intelligence among children, especially during the most vulnerable stages of their lives - before birth and during early childhood.",
    "en_sha1": "8eea73fd1e81c0e2498ae841c46a0cf82328e089",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride lowers children's intelligence; FAQ-0206 only says reviews flag the developing brain as sensitive.); translate after the EN is fixed or removed",
+   "fr": "Cela désigne simplement une substance toxique pour le cerveau, la moelle épinière et le système nerveux. Elle abaisse le niveau d’intelligence chez les enfants, en particulier pendant les phases les plus vulnérables de leur vie : avant la naissance et pendant la petite enfance.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride lowers children's intelligence; FAQ-0206 only says reviews flag the developing brain as sensitive.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5781,10 +5915,12 @@
    "key_path": "body_html#b061",
    "en": "Given the adverse effects of fluoride on cognitive function and other vital systems, it is only logical to consider a healthier and more potent alternative such as <a href=\"https://www.karmicare.com/en/articles/nano-hydroxyapatite\">nano-hydroxyapatite</a>. This compound offers broader benefits for overall well-being.",
    "en_sha1": "97fd6f4a16f0f70b7d54853e655251f8262df94f",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride cognitive harm stated as settled; 'more potent' superiority (FAQ-0203: do not claim superiority).); translate after the EN is fixed or removed",
+   "fr": "Étant donné les effets néfastes du fluor sur les fonctions cognitives et d’autres systèmes vitaux, il est logique d’envisager une alternative plus saine et plus puissante comme la <a href=\"https://www.karmicare.com/en/articles/nano-hydroxyapatite\">nano-hydroxyapatite</a>. Ce composé offre des bienfaits plus larges pour le bien-être global.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride cognitive harm stated as settled; 'more potent' superiority (FAQ-0203: do not claim superiority).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5822,10 +5958,12 @@
    "key_path": "body_html#b064",
    "en": "Xylitol, a natural sweetener, reduces the risk of cavities by holding back the growth of harmful bacteria.",
    "en_sha1": "c9b7a79d81c5c93a4ff903ff5b2865269195dd34",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Caries risk reduction is disease prevention (regulatory.md); FAQ-0203 keeps xylitol at 'reduces the bacteria'.); translate after the EN is fixed or removed",
+   "fr": "Le xylitol, un édulcorant naturel, réduit le risque de caries en freinant la croissance des bactéries nocives.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Caries risk reduction is disease prevention (regulatory.md); FAQ-0203 keeps xylitol at 'reduces the bacteria'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5835,10 +5973,12 @@
    "key_path": "body_html#b065",
    "en": "Coconut oil has antimicrobial properties that can help <a href=\"https://www.medicalnewstoday.com/articles/323757#benefit\">protect against gum disease</a>.",
    "en_sha1": "c9ef41f7b88e12c79fdfe3e05d07b1246b329187",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Gum-disease protection; formula has coconut water, not coconut oil (INCI v2).); translate after the EN is fixed or removed",
+   "fr": "L’huile de coco a des propriétés antimicrobiennes qui peuvent aider à <a href=\"https://www.medicalnewstoday.com/articles/323757#benefit\">protéger contre les maladies des gencives</a>.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Gum-disease protection; formula has coconut water, not coconut oil (INCI v2).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5893,10 +6033,12 @@
    "key_path": "body_html#b069",
    "en": "Nano hydroxyapatite in toothpaste also whitens teeth. This is sure to significantly boost your confidence.",
    "en_sha1": "e9fd57c925ce87dde8b4b7da45f6116723547548",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: whitens without 'naturally through remineralization'; 'sure to' overstates.); translate after the EN is fixed or removed",
+   "fr": "La nano-hydroxyapatite dans le dentifrice blanchit aussi les dents. De quoi renforcer nettement votre confiance en vous.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: whitens without 'naturally through remineralization'; 'sure to' overstates.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -5977,10 +6119,12 @@
    "key_path": "body_html#b075",
    "en": "These ingredients help reduce stress, promote relaxation, prevent gum disease, and fight tooth decay, and bad breath.",
    "en_sha1": "07b26ec98c061391dd563ddf6538d13609def44e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Prevents gum disease and fights tooth decay: disease claims (regulatory.md).); translate after the EN is fixed or removed",
+   "fr": "Ces ingrédients aident à réduire le stress, à favoriser la détente, à prévenir les maladies des gencives et à lutter contre les caries et la mauvaise haleine.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Prevents gum disease and fights tooth decay: disease claims (regulatory.md).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6160,10 +6304,12 @@
    "key_path": "body_html#b088",
    "en": "Protection against cavities and gum disease",
    "en_sha1": "d323b0d2d633186f47f4554be9f4b341adfcf09c",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Protection against cavities and gum disease: disease claims (regulatory.md).); translate after the EN is fixed or removed",
+   "fr": "Protection contre les caries et les maladies des gencives",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Protection against cavities and gum disease: disease claims (regulatory.md).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6659,10 +6805,12 @@
    "key_path": "body_html#b025",
    "en": "Natural ingredients like peppermint oil, and <a href=\"https://pubmed.ncbi.nlm.nih.gov/23009985/\">valerian extract offer antimicrobial and anti-inflammatory benefits</a>. They fight bacteria, soothe gums, and support overall health.",
    "en_sha1": "2944cb08e60af058059d3d967e63f6507620c785",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Anti-inflammatory' is a pharmacological claim; no basis in products.md; 'overall health' systemic.); translate after the EN is fixed or removed",
+   "fr": "Des ingrédients naturels comme l’huile de menthe poivrée et <a href=\"https://pubmed.ncbi.nlm.nih.gov/23009985/\">l’extrait de valériane offrent des bienfaits antimicrobiens et anti-inflammatoires</a>. Ils combattent les bactéries, apaisent les gencives et soutiennent la santé globale.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Anti-inflammatory' is a pharmacological claim; no basis in products.md; 'overall health' systemic.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6685,10 +6833,12 @@
    "key_path": "body_html#b027",
    "en": "Nano Hydroxyapatite: Strengthening and Whitening",
    "en_sha1": "fc9b014d6d3e492f8ece8a82c3aeab977bcba15d",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: whitening without 'naturally through remineralization'.); translate after the EN is fixed or removed",
+   "fr": "Nano-hydroxyapatite : renforcer et blanchir",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: whitening without 'naturally through remineralization'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6698,10 +6848,12 @@
    "key_path": "body_html#b028",
    "en": "<a href=\"https://www.karmicare.com/en/articles/nano-hydroxyapatite\">Nano hydroxyapatite is a revolutionary ingredient</a> in natural whitening toothpaste. This mineral makes up most of your tooth enamel and is essential for maintaining strong and healthy teeth. It fills microscopic gaps in enamel, providing a smooth surface and preventing cavities and sensitivity.",
    "en_sha1": "83bd90ab351e578bb2ee7fa51141bc4aa204b8a3",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity prevention (regulatory.md); 'revolutionary' superlative.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://www.karmicare.com/en/articles/nano-hydroxyapatite\">La nano-hydroxyapatite est un ingrédient révolutionnaire</a> des dentifrices blanchissants naturels. Ce minéral constitue l’essentiel de l’émail de vos dents et il est essentiel pour garder des dents solides et saines. Il comble les micro-fissures de l’émail, ce qui offre une surface lisse et prévient les caries et la sensibilité.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity prevention (regulatory.md); 'revolutionary' superlative.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6739,10 +6891,12 @@
    "key_path": "body_html#b031",
    "en": "Xylitol: Fighting Cavities Naturally",
    "en_sha1": "a1f2cb1a08462cea4bb9c78c5966cf91a78fc797",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity-fighting is a disease claim (regulatory.md).); translate after the EN is fixed or removed",
+   "fr": "Xylitol : combattre les caries naturellement",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity-fighting is a disease claim (regulatory.md).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6752,10 +6906,12 @@
    "key_path": "body_html#b032",
    "en": "Xylitol prevents cavities by <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5320817/\">starving harmful bacteria</a> that feed on sugar, reducing plaque and cavities.",
    "en_sha1": "ef49d319b648175d8ddcfd139d8aa3d7be70f46f",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Prevents cavities' (regulatory.md); FAQ-0203 keeps xylitol at 'reduces the bacteria'.); translate after the EN is fixed or removed",
+   "fr": "Le xylitol prévient les caries en <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5320817/\">affamant les bactéries nocives</a> qui se nourrissent de sucre, ce qui réduit la plaque et les caries.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Prevents cavities' (regulatory.md); FAQ-0203 keeps xylitol at 'reduces the bacteria'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -6978,10 +7134,12 @@
    "key_path": "body_html#b048",
    "en": "Activated charcoal binds to stains, removing toxins and bacteria for a whiter, healthier mouth.",
    "en_sha1": "5b130a378a4876e2da6f57c196796886a0bd1aaf",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Charcoal whitening without the remineralisation qualifier (Don't say); 'removing toxins' detox claim.); translate after the EN is fixed or removed",
+   "fr": "Le charbon actif se lie aux taches et élimine toxines et bactéries pour une bouche plus blanche et plus saine.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Charcoal whitening without the remineralisation qualifier (Don't say); 'removing toxins' detox claim.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7004,10 +7162,12 @@
    "key_path": "body_html#b050",
    "en": "Aloe Vera calms inflamed gums, providing moisture and supporting minor healing.",
    "en_sha1": "00a6b17cde241e93633e13590b0527ed75f21cfe",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Aloe vera is not in INCI v2; calming inflamed gums and healing are medicinal.); translate after the EN is fixed or removed",
+   "fr": "L’aloe vera apaise les gencives enflammées, les hydrate et soutient la cicatrisation des petites lésions.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Aloe vera is not in INCI v2; calming inflamed gums and healing are medicinal.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7071,10 +7231,12 @@
    "key_path": "body_html#b055",
    "en": "If you have sensitive teeth, look for a toothpaste that contains hydroxyapatite or other enamel-strengthening ingredients. For gum disease, opt for a toothpaste with antibacterial properties like peppermint or coconut oil. Always check for allergies or sensitivities you may have to certain ingredients.",
    "en_sha1": "de5b4ce83b1e0155757f1d3982a8966bc41b536c",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Toothpaste choice for gum disease is treatment advice; coconut oil is not in INCI v2.); translate after the EN is fixed or removed",
+   "fr": "Si vous avez les dents sensibles, choisissez un dentifrice qui contient de l’hydroxyapatite ou d’autres ingrédients qui renforcent l’émail. En cas de maladie des gencives, optez pour un dentifrice aux propriétés antibactériennes, comme la menthe poivrée ou l’huile de coco. Vérifiez toujours si vous avez des allergies ou des sensibilités à certains ingrédients.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Toothpaste choice for gum disease is treatment advice; coconut oil is not in INCI v2.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7209,10 +7371,12 @@
    "key_path": "main#01",
    "en": "[img alt] Fluoride in Toothpaste Is More Harmful than It Is Beneficial",
    "en_sha1": "5c89a772f34867dac688419ede60361355b0d8dc",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride paste does more harm than good; FAQ-0202/0207 only report the EU review.); translate after the EN is fixed or removed",
+   "fr": "[img alt] Le fluor dans le dentifrice est plus nocif que bénéfique",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: States as fact that fluoride paste does more harm than good; FAQ-0202/0207 only report the EU review.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7300,10 +7464,12 @@
    "key_path": "body_html#b007",
    "en": "Fluoride in toothpaste leads to several detrimental health effects.",
    "en_sha1": "c6bc4e545d1b29a74e74c7e6ee16b383aecc7034",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Categorical harm from fluoride paste stated as fact; overstates FAQ-0204/0206/0207.); translate after the EN is fixed or removed",
+   "fr": "Le fluor dans le dentifrice a plusieurs effets néfastes sur la santé.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Categorical harm from fluoride paste stated as fact; overstates FAQ-0204/0206/0207.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7341,10 +7507,12 @@
    "key_path": "body_html#b010",
    "en": "While it's a common ingredient, most people are awakening to the fact that fluoride is a harmful substance.",
    "en_sha1": "7ed33dbffcf94054e24ed4155eef8b61e070d051",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride called harmful as established fact; overstates the evidence, denigrates (EU 655/2013).); translate after the EN is fixed or removed",
+   "fr": "Même s’il s’agit d’un ingrédient courant, de plus en plus de personnes prennent conscience que le fluor est une substance nocive.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride called harmful as established fact; overstates the evidence, denigrates (EU 655/2013).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7384,10 +7552,12 @@
    "key_path": "body_html#b013",
    "en": "We’ll also introduce you to Karmicare, the world’s only biorhythmic toothpaste. An excellent fluoride-free, whitening toothpaste designed with your health, wellness, and biorhythm (internal body clock) in mind.",
    "en_sha1": "aaaeae124fca3a7c534b46a1393d69deefb30b8d",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Whitening toothpaste' without 'naturally through remineralization' (Don't say); 'world's only' needs proof.); translate after the EN is fixed or removed",
+   "fr": "Nous vous présenterons aussi Karmicare, le seul dentifrice biorythmique au monde. Un excellent dentifrice blanchissant sans fluor, conçu en pensant à votre santé, à votre bien-être et à votre biorythme (votre horloge interne).",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Whitening toothpaste' without 'naturally through remineralization' (Don't say); 'world's only' needs proof.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7518,10 +7688,12 @@
    "key_path": "body_html#b023",
    "en": "Fluoride Affects Your Oral Health Negatively",
    "en_sha1": "6335129666aa506c205c43bff07d682f7890c629",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride harms oral health stated as fact; contradicts FAQ-0203 (fluoride is a route).); translate after the EN is fixed or removed",
+   "fr": "Le fluor nuit à votre santé bucco-dentaire",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride harms oral health stated as fact; contradicts FAQ-0203 (fluoride is a route).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7574,10 +7746,12 @@
    "key_path": "body_html#b027",
    "en": "1. Fluoride Impairs Sleep Quality",
    "en_sha1": "f0041e695eeeb513c6910af559236baba267c316",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep impairment stated as fact; FAQ-0204 has observational water data only and disclaims sleep claims.); translate after the EN is fixed or removed",
+   "fr": "1. Le fluor altère la qualité du sommeil",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Sleep impairment stated as fact; FAQ-0204 has observational water data only and disclaims sleep claims.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7615,10 +7789,12 @@
    "key_path": "body_html#b030",
    "en": "It disrupts your circadian rhythm, the body’s biological clock that governs your sleep-wake cycle. Fluoride may also calcify the <a href=\"https://www.mdpi.com/2076-3417/10/8/2885\">pineal gland</a> and reduce the production of <a href=\"https://www.nccih.nih.gov/health/melatonin-what-you-need-to-know#:~:text=Melatonin%20is%20a%20hormone%20that,in%20the%20body%20beyond%20sleep\">melatonin</a>, the sleep hormone.",
    "en_sha1": "34eb71cb8de73a635642b7fe1d8692e2831dad7d",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Circadian disruption stated as fact; FAQ-0204 only cites pineal accumulation and observational links.); translate after the EN is fixed or removed",
+   "fr": "Il perturbe votre rythme circadien, l’horloge biologique du corps qui régit votre cycle veille-sommeil. Le fluor pourrait aussi calcifier la <a href=\"https://www.mdpi.com/2076-3417/10/8/2885\">glande pinéale</a> et réduire la production de <a href=\"https://www.nccih.nih.gov/health/melatonin-what-you-need-to-know#:~:text=Melatonin%20is%20a%20hormone%20that,in%20the%20body%20beyond%20sleep\">mélatonine</a>, l’hormone du sommeil.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Circadian disruption stated as fact; FAQ-0204 only cites pineal accumulation and observational links.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7628,10 +7804,12 @@
    "key_path": "body_html#b031",
    "en": "If you find yourself wide awake after brushing at night, switching to a fluoride-free toothpaste could help.",
    "en_sha1": "f358dcd3d1fa4cf1b3480173f363ddd839242dd1",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride-free paste improving sleep; FAQ-0204: 'We don't claim a fluoride-free formula improves your sleep'.); translate after the EN is fixed or removed",
+   "fr": "Si vous vous sentez parfaitement réveillé après votre brossage du soir, passer à un dentifrice sans fluor pourrait vous aider.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Fluoride-free paste improving sleep; FAQ-0204: 'We don't claim a fluoride-free formula improves your sleep'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7641,10 +7819,12 @@
    "key_path": "body_html#b032",
    "en": "<a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare’s Asleep toothpaste</a> is the best fluoride-free toothpaste for this purpose. It contains valerian and orange essential oil, natural ingredients designed to improve sleep.",
    "en_sha1": "786e95eefb95b51b268bc4ef5fb9f3748abcef71",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Superlative sleep-aid claim; FAQ-0204 disclaimer; products.md valerian only 'supports sleep quality'.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">La formule Asleep de Karmicare</a> est le meilleur dentifrice sans fluor pour cela. Elle contient de la valériane et de l’huile essentielle d’orange, des ingrédients naturels conçus pour améliorer le sommeil.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Superlative sleep-aid claim; FAQ-0204 disclaimer; products.md valerian only 'supports sleep quality'.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7897,10 +8077,12 @@
    "key_path": "body_html#b050",
    "en": "<a href=\"https://pubmed.ncbi.nlm.nih.gov/29900922/\">Fluoride disrupts the production of thyroid hormones</a>. This may lead to hypothyroidism, which affects how the cells in the body process energy.",
    "en_sha1": "93a49076f06070127612e489f1867f3b1f17c78b",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Thyroid disruption stated as fact; FAQ-0207 reports only a 2025 ANSES proposal awaiting RAC opinion.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://pubmed.ncbi.nlm.nih.gov/29900922/\">Le fluor perturbe la production des hormones thyroïdiennes</a>. Cela peut entraîner une hypothyroïdie, qui affecte la façon dont les cellules du corps transforment l’énergie.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Thyroid disruption stated as fact; FAQ-0207 reports only a 2025 ANSES proposal awaiting RAC opinion.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -7994,10 +8176,12 @@
    "key_path": "body_html#b057",
    "en": "Tip: 3-year-olds can use 1 pump of Karmicare, and toddlers through 6-year-olds can use it as a regular toothpaste. Karmicare is safe to swallow. Parents can brush worry-free together with their kids 😊",
    "en_sha1": "ce3c359924d657b59b861244fd3e78051b5de3d4",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Toddler use contradicts FAQ-0206 (from age 3 under supervision); 'safe to swallow' needs leaflet match (C90-C91).); translate after the EN is fixed or removed",
+   "fr": "Astuce : les enfants de 3 ans peuvent prendre 1 pression de Karmicare, et de la petite enfance jusqu’à 6 ans, les enfants peuvent se brosser les dents avec comme avec un dentifrice classique. Karmicare peut être avalé sans danger. Les parents peuvent se brosser les dents sereinement avec leurs enfants 😊",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Toddler use contradicts FAQ-0206 (from age 3 under supervision); 'safe to swallow' needs leaflet match (C90-C91).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8022,10 +8206,12 @@
    "key_path": "body_html#b059",
    "en": "Nano HAp is superior to fluoride in tooth remineralization because it remineralizes teeth from within.",
    "en_sha1": "851324cc0f60f63920fb7bbdee48bdac69b0b431",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: FAQ-0203: Daas 2018 found nHAp equivalent to fluoride varnish, not superior; do not claim superiority.); translate after the EN is fixed or removed",
+   "fr": "La nano-HAp est supérieure au fluor pour la reminéralisation des dents, car elle reminéralise les dents de l’intérieur.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: FAQ-0203: Daas 2018 found nHAp equivalent to fluoride varnish, not superior; do not claim superiority.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8134,10 +8320,12 @@
    "key_path": "body_html#b067",
    "en": "Nano Hydroxyapatite is a superior and safer alternative to fluoride. Nano HAp whitens teeth, strengthens the enamel, and reduces sensitivity.",
    "en_sha1": "cf7b2fa5af4692d5c55b2addb9811a75ee589bea",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Superior' contradicts FAQ-0203; 'whitens teeth' lacks the remineralisation qualifier (Don't say).); translate after the EN is fixed or removed",
+   "fr": "La nano-hydroxyapatite est une alternative supérieure et plus sûre au fluor. La nano-HAp blanchit les dents, renforce l’émail et réduit la sensibilité.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Superior' contradicts FAQ-0203; 'whitens teeth' lacks the remineralisation qualifier (Don't say).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8160,10 +8348,12 @@
    "key_path": "body_html#b069",
    "en": "Most traditional brands of toothpaste contain fluoride, but Karmicare offers a better solution. Switch to a teeth-whitening fluoride-free toothpaste like Karmicare to enjoy all the <a href=\"https://karmicare.com/en/article/nano-hydroxyapatite\">superior benefits of nano HAp</a> without worrying about other aspects of your health.",
    "en_sha1": "22aee1be868c2db1d7b1cf01dcb402e97fa81db0",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Teeth-whitening' lacks the remineralisation qualifier (Don't say); 'superior benefits' contradicts FAQ-0203.); translate after the EN is fixed or removed",
+   "fr": "La plupart des marques de dentifrice traditionnelles contiennent du fluor, mais Karmicare propose une meilleure solution. Passez à un dentifrice blanchissant sans fluor comme Karmicare pour profiter de tous les <a href=\"https://karmicare.com/en/article/nano-hydroxyapatite\">bienfaits supérieurs de la nano-HAp</a> sans vous inquiéter pour d’autres aspects de votre santé.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Teeth-whitening' lacks the remineralisation qualifier (Don't say); 'superior benefits' contradicts FAQ-0203.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8257,10 +8447,12 @@
    "key_path": "seo.description",
    "en": "Self Reflection: How do the ingredients in my toothpaste affect my health? Is fluoride-free toothpaste healthier than fluoride toothpaste? What is the best alternative to fluoride in toothpaste? Key takeaways: Fluoride is commonly added to toothpaste to prevent tooth decay. Fluoride in toothpaste leads to several detri",
    "en_sha1": "8480e8498c8d1e30ddf037ab23bb7e6d2d3fdb44",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Repeats b007: categorical harm from fluoride paste stated as fact.); translate after the EN is fixed or removed",
+   "fr": "Réflexion personnelle : comment les ingrédients de mon dentifrice affectent-ils ma santé ? Un dentifrice sans fluor est-il plus sain qu’un dentifrice au fluor ? Quelle est la meilleure alternative au fluor dans le dentifrice ? À retenir : le fluor est couramment ajouté au dentifrice pour prévenir les caries. Le fluor dans le dentifrice a plusieurs effets néfastes sur la santé.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Repeats b007: categorical harm from fluoride paste stated as fact.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8522,10 +8714,12 @@
    "key_path": "body_html#b018",
    "en": "Good oral hygiene —regular brushing, <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">using fluoride-free toothpaste</a>, and flossing—can prevent many of these issues. If symptoms persist, consult your dentist promptly for dental treatment options.",
    "en_sha1": "d3d15eeb573bd145e002d9a15573ec60f366026c",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (cavities, abscess, gum disease) attributed to fluoride-free paste; regulatory.md.); translate after the EN is fixed or removed",
+   "fr": "Une bonne hygiène bucco-dentaire — se brosser les dents régulièrement, <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">avec un dentifrice sans fluor</a>, et passer le fil dentaire — peut prévenir bon nombre de ces problèmes. Si les symptômes persistent, consultez rapidement votre dentiste pour connaître les options de traitement.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (cavities, abscess, gum disease) attributed to fluoride-free paste; regulatory.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8634,10 +8828,12 @@
    "key_path": "body_html#b026",
    "en": "Identifying your headache type can determine if it’s related to dental issues. Improving your dental care routine —regular brushing, using <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">the right toothpaste</a>, and flossing—can sometimes make a huge difference.",
    "en_sha1": "99d9ee44475be2c7d7cf764746bf087e484127fa",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Implies the right toothpaste relieves headaches; systemic claim with no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Identifier votre type de mal de tête peut permettre de savoir s’il est lié à un problème dentaire. Améliorer votre routine de soin dentaire — vous brosser les dents régulièrement, avec <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">le bon dentifrice</a>, et passer le fil dentaire — peut parfois faire une énorme différence.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Implies the right toothpaste relieves headaches; systemic claim with no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8821,10 +9017,12 @@
    "key_path": "body_html#b039",
    "en": "<a href=\"https://www.karmicare.com/en\">Karmicare’s range of oral care products</a> effectively targets the underlying causes of tooth pain. Our fluoride-free toothpaste is infused with natural ingredients like xylitol, nano-hydroxyapatite, and peppermint oil.",
    "en_sha1": "c67786c583dbf545aa90b5c6af6df6d7049c7f21",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Product targets the causes of tooth pain (cavities, abscess): treatment claim, regulatory.md.); translate after the EN is fixed or removed",
+   "fr": "<a href=\"https://www.karmicare.com/en\">La gamme de soins bucco-dentaires de Karmicare</a> cible efficacement les causes profondes des douleurs dentaires. Notre dentifrice sans fluor est enrichi en ingrédients naturels comme le xylitol, la nano-hydroxyapatite et l’huile de menthe poivrée.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Product targets the causes of tooth pain (cavities, abscess): treatment claim, regulatory.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8834,10 +9032,12 @@
    "key_path": "body_html#b040",
    "en": "This helps remineralize enamel and protect against cavities, reducing the sensitivity that often leads to pain.",
    "en_sha1": "279a4c6c11da9ba8b84ed171071ca4abb3068285",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Protection against cavities is a disease claim (regulatory.md).); translate after the EN is fixed or removed",
+   "fr": "Cela aide à reminéraliser l’émail et à protéger contre les caries, en réduisant la sensibilité qui mène souvent à la douleur.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Protection against cavities is a disease claim (regulatory.md).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8847,10 +9047,12 @@
    "key_path": "body_html#b041",
    "en": "Essential oils like lime and cinnamon oil fight plaque to prevent gingivitis and periodontitis.",
    "en_sha1": "d38d5403a54d67c5fbb8e1f88e2410bbff5b2027",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Prevents gingivitis and periodontitis: disease claims (regulatory.md).); translate after the EN is fixed or removed",
+   "fr": "Les huiles essentielles comme l’huile de citron vert et de cannelle combattent la plaque pour prévenir la gingivite et la parodontite.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Prevents gingivitis and periodontitis: disease claims (regulatory.md).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8860,10 +9062,12 @@
    "key_path": "body_html#b042",
    "en": "Our <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">biorhythmic oral hygiene set</a> helps maintain oral hygiene. It prevents and manages dental abscesses.",
    "en_sha1": "8b8fa8077d1e18088670b19909c375452e53af92",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Prevents and manages dental abscesses: disease prevention and treatment (regulatory.md).); translate after the EN is fixed or removed",
+   "fr": "Notre <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">set d’hygiène bucco-dentaire biorythmique</a> aide à maintenir l’hygiène bucco-dentaire. Il prévient et aide à gérer les abcès dentaires.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Prevents and manages dental abscesses: disease prevention and treatment (regulatory.md).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -8899,10 +9103,12 @@
    "key_path": "body_html#b045",
    "en": "Headaches and tooth pain are closely connected. Good oral hygiene practices such as brushing regularly, flossing, and <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">using fluoride-free toothpaste</a> like Karmicare, can prevent many dental issues that lead to headaches.",
    "en_sha1": "68cd08c8566d675efe19970392e5ee6f5cd52415",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Karmicare preventing dental issues that lead to headaches; disease and systemic claim.); translate after the EN is fixed or removed",
+   "fr": "Les maux de tête et les douleurs dentaires sont étroitement liés. De bonnes habitudes d’hygiène bucco-dentaire, comme se brosser les dents régulièrement, passer le fil dentaire et <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">choisir un dentifrice sans fluor</a> comme Karmicare, peuvent prévenir de nombreux problèmes dentaires à l’origine de maux de tête.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Karmicare preventing dental issues that lead to headaches; disease and systemic claim.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -9320,10 +9526,12 @@
    "key_path": "body_html#b027",
    "en": "Staving off gum disease and maintaining healthy teeth (and a bright smile) doesn’t have to come at the cost of turning to harmful toothpaste brands. Aside from avoiding fluoride, an SLS-free toothpaste may make all the difference in your oral health.",
    "en_sha1": "12b8aa821a3d510151029df6800ee6c2d409bd74",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Gum-disease prevention via SLS-free paste; 'harmful toothpaste brands' denigrates.); translate after the EN is fixed or removed",
+   "fr": "Éloigner les maladies des gencives et garder des dents saines (et un sourire éclatant) ne doit pas se faire au prix de marques de dentifrice nocives. En plus d’éviter le fluor, un dentifrice sans SLS peut tout changer pour votre santé bucco-dentaire.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Gum-disease prevention via SLS-free paste; 'harmful toothpaste brands' denigrates.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -9537,10 +9745,12 @@
    "key_path": "body_html#b042",
    "en": "Karmicare’s <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Biorhythmic Oral Hygiene Set</a> is the most effective SLS-free toothpaste option for whole body health that extends beyond your mouth.",
    "en_sha1": "9842730af1f744eaaec4ef57bcd172c492b31140",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Superlative plus whole-body health claim; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": "Le <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">set d’hygiène bucco-dentaire biorythmique</a> de Karmicare est l’option de dentifrice sans SLS la plus efficace pour une santé globale qui va au-delà de votre bouche.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Superlative plus whole-body health claim; no basis in products.md.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -9651,10 +9861,12 @@
    "key_path": "body_html#b050",
    "en": "Using toothpaste with SLS leads to canker sores, dry mouth, bad breath, and sensitive teeth. Sodium lauryl sulfate dries out the tissues of your mouth. When those conditions change, so will the pH of your oral environment, which can lead to those uncomfortable (and downright unpleasant) experiences.",
    "en_sha1": "a7f9a07e99cf8413eac0a1a87b2dcb9ca249b22e",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Categorical 'leads to' canker sores, dry mouth, bad breath, sensitive teeth; FAQ-0208 says only 'linked to' canker sores.); translate after the EN is fixed or removed",
+   "fr": "Un dentifrice qui contient du SLS entraîne des aphtes, une bouche sèche, une mauvaise haleine et des dents sensibles. Le laurylsulfate de sodium assèche les tissus de votre bouche. Quand ces conditions changent, le pH de votre environnement buccal change aussi, ce qui peut entraîner ces sensations inconfortables (et franchement désagréables).",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Categorical 'leads to' canker sores, dry mouth, bad breath, sensitive teeth; FAQ-0208 says only 'linked to' canker sores.); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {
@@ -9692,10 +9904,12 @@
    "key_path": "body_html#b053",
    "en": "Consider switching from your old brand to an SLS-free toothpaste and say goodbye to persistent canker sores and bad breath.",
    "en_sha1": "1eeded20e20c862c8d0c67078a9ea87ba829db09",
-   "fr": null,
-   "status": "held",
-   "flags": [],
-   "notes": "unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Promises an end to canker sores (a condition); FAQ-0208 'linked to' only; condition outcomes dropped (C64).); translate after the EN is fixed or removed",
+   "fr": "Pensez à remplacer votre ancienne marque par un dentifrice sans SLS et dites adieu aux aphtes persistants et à la mauvaise haleine.",
+   "status": "admin",
+   "flags": [
+    "pending-claim-review"
+   ],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Promises an end to canker sores (a condition); FAQ-0208 'linked to' only; condition outcomes dropped (C64).); translate after the EN is fixed or removed",
    "source_status": "admin-held"
   },
   {

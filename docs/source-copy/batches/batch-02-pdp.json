@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "2f2e292c089f4fce9f94f01b6c135cb4e38eff65",
+ "digest": "e3e79339215ffcf134b6813f1b46310a1c380fc8",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -818,14 +818,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-   "en": "Functional Dentist, kPNI Therapist",
-   "sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
-   "status": "approved",
+   "en": "Functional Dentist, kPNI Practitioner",
+   "sha1": "1a18061547498246ea046b86b0a1c2bc7389ca57",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/product.subscription-item.json at 41ae772",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Functional Dentist, kPNI Therapist",
+   "old_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/heading",
@@ -882,14 +884,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-   "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-   "sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
-   "status": "approved",
+   "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
+   "sha1": "8599e937a96696800cc5f4a948b457a996931b25",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/product.subscription-item.json at 41ae772",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+   "old_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_8dRing/hover_text",
@@ -998,14 +1002,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-   "en": "Nutritional Therapist, Menstrual Cycle Expert",
-   "sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
-   "status": "approved",
+   "en": "Nutritional Practitioner, Menstrual Cycle Expert",
+   "sha1": "54d1fc3de6561c01d495b096b9c76c42c168c506",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct from templates/product.subscription-item.json at 41ae772",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Nutritional Therapist, Menstrual Cycle Expert",
+   "old_sha1": "1304702cf605f09e12935e8a425a7f418bda4321"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
@@ -1026,7 +1032,8 @@
    "claim_status": "unsupported",
    "setting_type": "richtext",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "claim_hold_waived": "2026-10-20 Victor, translation only"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -1158,7 +1165,8 @@
    "notes": "type text; block disabled: not rendered",
    "setting_type": "text",
    "section_type": "how-it-works-steps",
-   "rendered": false
+   "rendered": false,
+   "retired": "retired 21 Oct: the setting is empty at 41ae772 (disabled section)"
   },
   {
    "id": "product.subscription-item:how_it_works_steps_aAgVmF/step_U7HiXT/title",
@@ -1206,7 +1214,8 @@
    "notes": "type text; block disabled: not rendered",
    "setting_type": "text",
    "section_type": "how-it-works-steps",
-   "rendered": false
+   "rendered": false,
+   "retired": "retired 21 Oct: the setting is empty at 41ae772 (disabled section)"
   },
   {
    "id": "product.subscription-item:how_it_works_steps_aAgVmF/step_EBicgt/title",
@@ -3183,7 +3192,8 @@
    "sha1": "75f527181b574f84568f33f67adc3b267a6fef9c",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'kit_free'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'kit_free'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup"
   },
   {
    "id": "liquid:sections/product-compare-plans.liquid:39",
@@ -6683,11 +6693,13 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#25",
-   "en": "Begin 60-Day Rhythm",
-   "sha1": "e3d380554eee2d5bde4889dc8de77e3cad4ec3af",
+   "en": "Begin your 60-Day Rhythm",
+   "sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries",
+   "old_en": "Begin 60-Day Rhythm",
+   "old_sha1": "e3d380554eee2d5bde4889dc8de77e3cad4ec3af"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#26",
