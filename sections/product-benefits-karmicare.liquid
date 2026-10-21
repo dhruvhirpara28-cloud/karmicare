@@ -141,7 +141,7 @@
               class="product-benefits__card{% if show_slider %} slider__slide{% endif %}"
               {{ block.shopify_attributes }}
             >
-              {%- if block.settings.image != blank -%}
+              {%- if block.settings.image != blank and section.settings.show_card_images -%}
                 <div class="product-benefits__card-bg">
                   {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
                   <div
@@ -461,6 +461,13 @@
       "id": "show_card_bg_mobile",
       "label": "Show Card Background on Mobile",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_images",
+      "label": "Show card images",
+      "default": true,
+      "info": "Off: the cards show only their copy, on hover and on touch screens. The images stay set on the cards."
     },
     {
       "type": "header",
