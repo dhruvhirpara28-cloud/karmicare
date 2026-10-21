@@ -269,13 +269,20 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 ## Sticky-bar "Free" label retired (source-copy d72d791, 21 Oct)
 
 - **`liquid:sections/main-product.liquid:1104`** ("Free", key `kc.sticky_cart.kit_free_html`) is now `held` with the retirement in its notes. The FR text "Gratuit" was not changed and stays in the notes. Global-nav `27691cb` (NV-13) makes the desktop sticky bar the mobile card and removes the `kit_free` setting and its markup. NL holds the entry too.
-- **Not merged into FR:** `d72d791` removes the key from every storefront locale, but on this branch `snippets/sticky-cart-block.liquid:70` still reads it until NV-13 lands. The merge would add a Theme Check `TranslationKeyExists` error, so FR carries only the payload change. Here, `theme_keys.py check --fr-dir` reports the old `theme-keys.json` row for this key (fr "Gratuit"). That clears in integration, where `d72d791` moves the key to `retired_keys`.
+- **Through the integration, not on its own:** `d72d791` removes the key from every storefront locale. On FR alone, `snippets/sticky-cart-block.liquid` still read it, so that merge added a Theme Check `TranslationKeyExists` error and was dropped. At the landing desk's request, FR merged integration `karmicare/soft-launch` at `223d140` instead (`80be4a1`). That brings NV-13 (the snippet no longer reads the key) and `d72d791` together. Theme Check reports 0 errors, and `theme_keys.py check --fr-dir` reports 62 keys ok.
+- **One merge conflict:** the hold note on 1104, which global-nav `d953353` had also written. FR's note was kept, with its `d72d791` reference.
+- **CTAs (Victor, 21 Oct: "Commencer votre" on every Karmicare CTA):** global-nav `6c07148` updated three entries, and FR takes them as they are:
+  - `custom_button_text_by_plan`: "Commencer votre Rythme 60 jours" / "Commencer votre année Karmicare".
+  - `main-product.liquid:1024`: "Commencer votre année Karmicare".
+  - compare table `#25`: "Commencer votre Rythme 60 jours".
+  
+  The theme-key value matches `locales/fr.json` (`kc.sticky_cart.cta_rhythm_html`, `cta_year_html`). Batch 02 digest `e3e79339…`.
 
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `2846c75e…` | 477 | 138 | 251 | 34 | 15 | 39 |
+| `batch-02-pdp` | `e3e79339…` | 477 | 138 | 251 | 34 | 15 | 39 |
 | `batch-01-homepage` | `7694e7ac…` | 229 | 172 | 2 | 31 | 2 | 22 |
 | `batch-03-header-footer` | `a853d438…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
@@ -285,7 +292,7 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
 | **Total** | | **2,575** | **479** | **1,533** | **75** | **62** | **426** |
 
-Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, and the sticky-bar retirement, d72d791). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, and the sticky-bar retirement and CTAs, integration 223d140). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
