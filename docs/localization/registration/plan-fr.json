@@ -1,20 +1,20 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "cb973830a544",
-  "fr/batch-01-homepage.json": "e3eb619a8f64",
-  "fr/batch-02-pdp.json": "7671bd7c8c49",
+  "en-source.json": "5f8c8e6d5bdd",
+  "fr/batch-01-homepage.json": "91006fc51240",
+  "fr/batch-02-pdp.json": "4c7dfc201f59",
   "fr/batch-03-header-footer.json": "d48df4212c5c",
-  "fr/batch-04-legal.json": "31dfd80b5451",
+  "fr/batch-04-legal.json": "692927734eb2",
   "fr/batch-05-products.json": "44df8a58a748",
   "fr/batch-06-content-pages.json": "f819fc6b5d3c",
   "fr/batch-07-collections-blog.json": "a917c1b67255",
   "fr/batch-08-system.json": "d8508a10e978"
  },
  "batches": {
-  "batch-01-homepage": "a09219ae1af8e24bd4fbcc86ce50223656adb586",
-  "batch-02-pdp": "666785abd03e91b643e766a266ce800fe0df07b8",
-  "batch-03-header-footer": "e17cadb5e223dd62b25e30e901091d8a8634aaf3",
+  "batch-01-homepage": "7694e7acce33a1e22a90de53273f2c90a8ddd70a",
+  "batch-02-pdp": "2846c75e4df9f09cca9026b613cfddc61f307f5d",
+  "batch-03-header-footer": "a853d438d503867882d711cd4fa5a4a93c29759f",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
@@ -199,30 +199,6 @@
       "hero_karmicare_XKKLDK",
       "testimonial_badge_h8d3WL",
       "heading"
-     ]
-    },
-    {
-     "id": "index:stat_strip_karmicare/tagline",
-     "kind": "match",
-     "key": null,
-     "field": "sections.stat_strip_karmicare.settings.tagline",
-     "en": "CHOSEN BY KPNI THERAPISTS, FUNCTIONAL DENTISTS, HEALTH ENTHUSIASTS",
-     "en_sha1": "1efa139722aaaea0bbfc7ce9db5640d2e955f5b1",
-     "value": "CHOISI PAR DES THÉRAPEUTES KPNI, DES DENTISTES FONCTIONNELS ET DES PASSIONNÉS DE SANTÉ",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review"
-     ],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "stat_strip_karmicare",
-      "tagline"
      ]
     },
     {
@@ -1606,27 +1582,6 @@
      ]
     },
     {
-     "id": "index:trusted_professionals_HAqYth/card_h8d3WL/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-     "en": "Functional Dentist, kPNI Therapist",
-     "en_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
-     "value": "Dentiste (approche fonctionnelle), thérapeute kPNI",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "trusted_professionals_HAqYth",
-      "card_h8d3WL",
-      "text"
-     ]
-    },
-    {
      "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/text",
      "kind": "match",
      "key": null,
@@ -1644,27 +1599,6 @@
      "hint": [
       "trusted_professionals_HAqYth",
       "card_jcnr7Q",
-      "text"
-     ]
-    },
-    {
-     "id": "index:trusted_professionals_HAqYth/card_8dRing/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-     "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-     "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
-     "value": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "trusted_professionals_HAqYth",
-      "card_8dRing",
       "text"
      ]
     },
@@ -1732,27 +1666,6 @@
      "hint": [
       "trusted_professionals_HAqYth",
       "card_Ah46TM",
-      "text"
-     ]
-    },
-    {
-     "id": "index:trusted_professionals_HAqYth/card_CtQgU9/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-     "en": "Nutritional Therapist, Menstrual Cycle Expert",
-     "en_sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
-     "value": "Thérapeute en nutrition, spécialiste du cycle menstruel",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "trusted_professionals_HAqYth",
-      "card_CtQgU9",
       "text"
      ]
     },
@@ -2782,224 +2695,6 @@
      ]
     },
     {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.category",
-     "en": "Ingredients & safety",
-     "en_sha1": "f5562419a53b09f5896e98023d0bb3462d66d765",
-     "value": "Ingrédients et sécurité",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_kLMHax",
-      "category"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/question",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.question",
-     "en": "Is Karmicare fluoride-free?",
-     "en_sha1": "6221b37f9b02a1d8a4a9ac276d9f3fe19a9f3f15",
-     "value": "Karmicare est-il sans fluor ?",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_kLMHax",
-      "question"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.category",
-     "en": "The ritual",
-     "en_sha1": "9fcd5202aaedaba538285854704a00c17e197abb",
-     "value": "Le rituel",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_7jmEGi",
-      "category"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_7jmEGi.settings.question",
-     "en": "Will Karmicare offer a biorhythmic toothpaste with fluoride?",
-     "en_sha1": "abdd0b7d15be897509a88669f6169c6bd804b82b",
-     "value": "Karmicare proposera-t-il un dentifrice biorythmique avec fluor ?",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_7jmEGi",
-      "question"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/category",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.category",
-     "en": "Results",
-     "en_sha1": "612e12d29278b5519294bc25cdaddffec6d0f1c6",
-     "value": "Résultats",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_AL3DKF",
-      "category"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/question",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.question",
-     "en": "What is nano-hydroxyapatite?",
-     "en_sha1": "0aeed18c4e6bd60691b49cfe53c782135bd3bb12",
-     "value": "Qu’est-ce que la nano-hydroxyapatite ?",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_AL3DKF",
-      "question"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_AL3DKF.settings.answer",
-     "en": "<p>A bioidentical mineral — the same substance your enamel is made of. It remineralises teeth, reduces sensitivity, and whitens naturally. The most researched mineral-based remineralisation agent in the world, used in Japan since the 1980s.</p>",
-     "en_sha1": "ef1be7178b36c1dd73029cb0ec42d2df6154aacc",
-     "value": "<p>Un minéral bio-identique — la même substance que celle qui compose votre émail. Il reminéralise les dents, réduit la sensibilité et blanchit naturellement. L’agent de reminéralisation minéral le plus étudié au monde, adopté au Japon depuis les années 1980.</p>",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review"
-     ],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_AL3DKF",
-      "answer"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/category",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.category",
-     "en": "Plans & Return on Care",
-     "en_sha1": "03f3cde85b7e3311fa8b4497a260149b75cb769a",
-     "value": "Offres et Return on Care",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_qUxYCn",
-      "category"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/question",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.question",
-     "en": "Should I rinse after brushing?",
-     "en_sha1": "428bc937d0c86862ed3e4773017f44033510e7da",
-     "value": "Faut-il rincer après le brossage ?",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_qUxYCn",
-      "question"
-     ]
-    },
-    {
-     "id": "index:km_faq_accordion_FYcArV/faq_item_qUxYCn/answer",
-     "kind": "match",
-     "key": null,
-     "field": "sections.km_faq_accordion_FYcArV.blocks.faq_item_qUxYCn.settings.answer",
-     "en": "<p>No — spit and carry on. Karmicare formulas are certified safe to remain in your mouth, giving nHAp and xylitol extended contact time. Hours of active mineral care instead of seconds.</p>",
-     "en_sha1": "173e8160d291b33cf3e26634522a8d868a8163d7",
-     "value": "<p>Non — crachez et passez à la suite. Les formules Karmicare sont certifiées sûres pour rester en bouche, ce qui offre à la nHAp et au xylitol un temps de contact prolongé. Des heures de soin minéral actif au lieu de quelques secondes.</p>",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review"
-     ],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "km_faq_accordion_FYcArV",
-      "faq_item_qUxYCn",
-      "answer"
-     ]
-    },
-    {
      "id": "index:km_faq_accordion_FYcArV/faq_item_4KMG6C/category",
      "kind": "match",
      "key": null,
@@ -3106,27 +2801,6 @@
       "featured_product_3XpDKw",
       "loop_subscriptions_7dde8c",
       "pricing_summary_care_credit_title"
-     ]
-    },
-    {
-     "id": "index:featured_product_3XpDKw/loop_subscriptions_7dde8c/subscription_title",
-     "kind": "match",
-     "key": null,
-     "field": "sections.featured_product_3XpDKw.blocks.loop_subscriptions_7dde8c.settings.subscription_title",
-     "en": "Awake & Asleep AM/PM Oral Care System",
-     "en_sha1": "3db6b8f30849bad6d53cfabcfd379046583de830",
-     "value": "Système de soin matin/soir Awake & Asleep",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "featured_product_3XpDKw",
-      "loop_subscriptions_7dde8c",
-      "subscription_title"
      ]
     },
     {
@@ -4580,27 +4254,6 @@
      ]
     },
     {
-     "id": "product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.text",
-     "en": "Functional Dentist, kPNI Therapist",
-     "en_sha1": "f5097046bc8bc89e319f6b7a4eae51ce41f7a02d",
-     "value": "Dentiste (approche fonctionnelle), thérapeute kPNI",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "trusted_professionals_HAqYth",
-      "card_h8d3WL",
-      "text"
-     ]
-    },
-    {
      "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/text",
      "kind": "match",
      "key": null,
@@ -4618,27 +4271,6 @@
      "hint": [
       "trusted_professionals_HAqYth",
       "card_jcnr7Q",
-      "text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:trusted_professionals_HAqYth/card_8dRing/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
-     "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
-     "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
-     "value": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "trusted_professionals_HAqYth",
-      "card_8dRing",
       "text"
      ]
     },
@@ -4706,27 +4338,6 @@
      "hint": [
       "trusted_professionals_HAqYth",
       "card_Ah46TM",
-      "text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.text",
-     "en": "Nutritional Therapist, Menstrual Cycle Expert",
-     "en_sha1": "1304702cf605f09e12935e8a425a7f418bda4321",
-     "value": "Thérapeute en nutrition, spécialiste du cycle menstruel",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "trusted_professionals_HAqYth",
-      "card_CtQgU9",
       "text"
      ]
     },
@@ -5876,27 +5487,6 @@
       "featured_product_Eb93Xa",
       "loop_subscriptions_gPKypi",
       "pricing_summary_care_credit_title"
-     ]
-    },
-    {
-     "id": "product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title",
-     "kind": "match",
-     "key": null,
-     "field": "sections.featured_product_Eb93Xa.blocks.loop_subscriptions_gPKypi.settings.subscription_title",
-     "en": "Awake & Asleep AM/PM Oral Care System",
-     "en_sha1": "3db6b8f30849bad6d53cfabcfd379046583de830",
-     "value": "Système de soin matin/soir Awake & Asleep",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "featured_product_Eb93Xa",
-      "loop_subscriptions_gPKypi",
-      "subscription_title"
      ]
     },
     {
@@ -7169,7 +6759,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -7261,7 +6852,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -7357,7 +6949,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -10911,27 +10504,6 @@
    "page": "all pages",
    "items": [
     {
-     "id": "header-group:announcement-bar/announcement-bar-0/text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.announcement-bar.blocks.announcement-bar-0.settings.text",
-     "en": "COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE",
-     "en_sha1": "96395b9d6eb1aac8ee6e12f1e70f03b5a52b31ef",
-     "value": "LIVRAISON OFFERTE · SATISFAIT OU REMBOURSÉ 60 JOURS · FABRIQUÉ EN BELGIQUE",
-     "gates": [],
-     "hold": [],
-     "how": "key from translatableContent of the live theme's section group, matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "announcement-bar",
-      "announcement-bar-0",
-      "text"
-     ]
-    },
-    {
      "id": "header-group:header/cta_text",
      "kind": "match",
      "key": null,
@@ -11986,6 +11558,32 @@
       "legal_toc_section_gYznx3",
       "content_section_xKcNPj",
       "title"
+     ]
+    },
+    {
+     "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_xKcNPj/content",
+     "kind": "match",
+     "key": null,
+     "field": "sections.legal_toc_section_gYznx3.blocks.content_section_xKcNPj.settings.content",
+     "en": "<p><strong>Until your parcel is in your hands, it is our responsibility.</strong></p><ul><li><strong>Where we deliver:</strong> to every member state of the European Union.</li><li><strong>Shipping:</strong> memberships ship free. For Try Once, the shipping charge for your zone is shown at checkout before you pay.</li><li><strong>Risk in transit (Art. VI.44 WER).</strong> The risk of loss, damage or theft in transit stays with KARMICARE until the parcel is handed to you or to the recipient you name.</li><li><strong>Delayed deliveries.</strong> Unless we agreed another date, we deliver within 30 days. If we do not, you can give us an additional reasonable period; if we still fail to deliver, you can end the contract and receive a full refund within <strong>14 calendar days</strong>.</li></ul><p><strong>Delivery times (estimates)</strong></p><ul><li><strong>Belgium, the Netherlands and Luxembourg:</strong> within 24 hours</li><li><strong>Rest of the European Union:</strong> 2–3 working days</li></ul>",
+     "en_sha1": "865ebee13a4413a35047e94bce99d9a8126cf695",
+     "value": "<p><strong>Tant que votre colis n’est pas entre vos mains, il reste sous notre responsabilité.</strong></p><ul><li><strong>Où nous livrons :</strong> dans tous les États membres de l’Union européenne.</li><li><strong>Livraison :</strong> les adhésions sont livrées gratuitement. Pour Essayer une fois, les frais de livraison de votre zone sont indiqués lors du paiement, avant que vous ne payiez.</li><li><strong>Risques pendant le transport (art. VI.44 CDE).</strong> Le risque de perte, de dommage ou de vol pendant le transport reste à la charge de KARMICARE jusqu’à ce que le colis vous soit remis, à vous ou au destinataire que vous désignez.</li><li><strong>Retards de livraison.</strong> Sauf autre date convenue, nous livrons dans un délai de 30 jours. Si nous ne le faisons pas, vous pouvez nous accorder un délai supplémentaire raisonnable ; si nous ne livrons toujours pas, vous pouvez mettre fin au contrat et recevoir un remboursement intégral dans un délai de <strong>14 jours calendrier</strong>.</li></ul><p><strong>Délais de livraison (estimations)</strong></p><ul><li><strong>Belgique, Pays-Bas et Luxembourg :</strong> dans les 24 heures</li><li><strong>Reste de l’Union européenne :</strong> 2 à 3 jours ouvrables</li></ul>",
+     "gates": [
+      "legal-review"
+     ],
+     "hold": [
+      "legal-review",
+      "legal (batch 04)"
+     ],
+     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "legal_toc_section_gYznx3",
+      "content_section_xKcNPj",
+      "content"
      ]
     },
     {
@@ -14151,6 +13749,32 @@
      ]
     },
     {
+     "id": "page.terms-and-conditions:legal_toc_section_gYznx3/content_section_dGmgBJ/content",
+     "kind": "match",
+     "key": null,
+     "field": "sections.legal_toc_section_gYznx3.blocks.content_section_dGmgBJ.settings.content",
+     "en": "<p><strong>Until your parcel is in your hands, it is our responsibility.</strong></p><ol><li><strong>Transfer of risk (Art. VI.44 WER):</strong> the risk of loss, theft or damage in transit stays with KARMICA BV until you, or a third party you designate (other than the carrier), take physical possession.</li><li><strong>Delivery area:</strong> we deliver to addresses in the member states of the European Union. Please make sure your shipping address is complete and correct.</li><li><strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days.</li><li><strong>Delays:</strong> unless another date was agreed, we deliver within 30 days of the contract. If we do not, you can ask for delivery within an additional reasonable period. If we still fail to deliver, you can end the contract and receive a full refund of everything you paid within <strong>14 calendar days</strong> of termination.</li></ol>",
+     "en_sha1": "0ef4d5dbd3aba7d69bc1b3c3d9d6728ba58364cd",
+     "value": "<p><strong>Tant que votre colis n’est pas entre vos mains, il reste sous notre responsabilité.</strong></p><ol><li><strong>Transfert des risques (art. VI.44 CDE) :</strong> le risque de perte, de vol ou de dommage pendant le transport reste à la charge de KARMICA BV jusqu’à ce que vous, ou un tiers que vous désignez (autre que le transporteur), preniez physiquement possession des biens.</li><li><strong>Zone de livraison :</strong> nous livrons à des adresses situées dans les États membres de l’Union européenne. Veillez à ce que votre adresse de livraison soit complète et correcte.</li><li><strong>Délais de livraison (estimations) :</strong> Belgique, Pays-Bas et Luxembourg : dans les 24 heures ; reste de l’Union européenne : 2 à 3 jours ouvrables.</li><li><strong>Retards :</strong> sauf autre date convenue, nous livrons dans un délai de 30 jours à compter de la conclusion du contrat. Si nous ne le faisons pas, vous pouvez demander la livraison dans un délai supplémentaire raisonnable. Si nous ne livrons toujours pas, vous pouvez mettre fin au contrat et recevoir le remboursement intégral de tout ce que vous avez payé dans un délai de <strong>14 jours calendrier</strong> à compter de la résiliation.</li></ol>",
+     "gates": [
+      "legal-review"
+     ],
+     "hold": [
+      "legal-review",
+      "legal (batch 04)"
+     ],
+     "how": "key from translatableContent of the live theme's template, matched on the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "legal_toc_section_gYznx3",
+      "content_section_dGmgBJ",
+      "content"
+     ]
+    },
+    {
      "id": "page.terms-and-conditions:legal_toc_section_gYznx3/content_section_CDtWCV/nav_label",
      "kind": "match",
      "key": null,
@@ -14776,7 +14400,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -14860,7 +14485,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -17909,7 +17535,8 @@
    "assembled_field": {
     "blocks": 139,
     "drafted": 138,
-    "missing_or_held": 1
+    "missing_or_held": 1,
+    "gated": 138
    }
   },
   {
@@ -17931,8 +17558,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -17953,8 +17579,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -17975,8 +17600,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -17997,8 +17621,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18019,8 +17642,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18041,8 +17663,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18063,8 +17684,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18085,8 +17705,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18107,8 +17726,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18129,8 +17747,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18151,8 +17768,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18173,8 +17789,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18195,8 +17810,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18217,8 +17831,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18239,8 +17852,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18261,8 +17873,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18283,8 +17894,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18305,8 +17915,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18327,8 +17936,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18349,8 +17957,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18371,8 +17978,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18393,8 +17999,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18415,8 +18020,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18437,8 +18041,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18459,8 +18062,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18481,8 +18083,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18503,8 +18104,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18525,8 +18125,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18547,8 +18146,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18569,8 +18167,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18591,8 +18188,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18613,8 +18209,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18635,8 +18230,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18657,8 +18251,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18679,8 +18272,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18701,8 +18293,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18723,8 +18314,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18745,8 +18335,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18767,8 +18356,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18789,8 +18377,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18811,8 +18398,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18833,8 +18419,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18855,8 +18440,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18877,8 +18461,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18899,8 +18482,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18921,8 +18503,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18943,8 +18524,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18965,8 +18545,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -18987,8 +18566,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19009,8 +18587,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19031,8 +18608,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19053,8 +18629,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19075,8 +18650,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19097,8 +18671,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19119,8 +18692,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19141,8 +18713,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19163,8 +18734,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19185,8 +18755,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19207,8 +18776,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19229,8 +18797,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19251,8 +18818,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19273,8 +18839,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19295,8 +18860,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19317,8 +18881,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19339,8 +18902,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19361,8 +18923,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19383,8 +18944,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19405,8 +18965,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19427,8 +18986,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19449,8 +19007,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19471,8 +19028,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19493,8 +19049,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19515,8 +19070,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19537,8 +19091,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19559,8 +19112,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19581,8 +19133,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19603,8 +19154,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19625,8 +19175,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19647,8 +19196,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19669,8 +19217,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19691,8 +19238,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19713,8 +19259,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19735,8 +19280,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19757,8 +19301,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19779,8 +19322,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19801,8 +19343,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19823,8 +19364,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19845,8 +19385,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19867,8 +19406,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19889,8 +19427,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19911,8 +19448,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19933,8 +19469,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19955,8 +19490,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19977,8 +19511,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -19999,8 +19532,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20021,8 +19553,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20043,8 +19574,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20065,8 +19595,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20087,8 +19616,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20109,8 +19637,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20131,8 +19658,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20153,8 +19679,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20175,8 +19700,28 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
+     ],
+     "how": "block replaced inside the live body value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:policy:terms-of-service:body#b104",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body#b104",
+     "en": "<strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days.",
+     "en_sha1": "921bc391227a373a93cb15b794e36d4adfceb355",
+     "value": "<strong>Délais de livraison (estimations) :</strong> Belgique, Pays-Bas et Luxembourg : dans les 24 heures ; reste de l’Union européenne : 2 à 3 jours ouvrables.",
+     "gates": [
+      "legal-review"
+     ],
+     "hold": [
+      "legal-review",
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20197,8 +19742,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20219,8 +19763,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20241,8 +19784,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20263,8 +19805,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20285,8 +19826,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20307,8 +19847,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20329,8 +19868,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20351,8 +19889,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20373,8 +19910,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20395,8 +19931,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20417,8 +19952,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20439,8 +19973,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20461,8 +19994,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20483,8 +20015,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20505,8 +20036,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20527,8 +20057,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20549,8 +20078,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20571,8 +20099,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20593,8 +20120,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20615,8 +20141,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20637,8 +20162,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20659,8 +20183,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20681,8 +20204,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20703,8 +20225,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20725,8 +20246,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20747,8 +20267,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20769,8 +20288,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20791,8 +20309,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20813,8 +20330,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20835,8 +20351,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20857,8 +20372,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20879,8 +20393,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20901,8 +20414,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20923,8 +20435,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20945,8 +20456,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20967,8 +20477,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -20989,8 +20498,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21011,8 +20519,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21033,8 +20540,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21055,8 +20561,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21077,8 +20582,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21099,8 +20603,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21121,8 +20624,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21143,8 +20645,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21165,8 +20666,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21187,8 +20687,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21209,8 +20708,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21231,8 +20729,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21253,8 +20750,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21275,8 +20771,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21297,8 +20792,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21319,8 +20813,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21341,8 +20834,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21363,8 +20855,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21385,8 +20876,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21407,8 +20897,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21429,8 +20918,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21451,8 +20939,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21473,8 +20960,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21495,8 +20981,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21517,8 +21002,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 165 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21529,8 +21013,9 @@
    ],
    "assembled_field": {
     "blocks": 165,
-    "drafted": 164,
-    "missing_or_held": 1
+    "drafted": 165,
+    "missing_or_held": 0,
+    "gated": 165
    }
   },
   {
@@ -21552,8 +21037,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21574,8 +21058,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21596,8 +21079,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21618,8 +21100,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21640,8 +21121,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21662,8 +21142,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21684,8 +21163,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21706,8 +21184,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21728,8 +21205,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21750,8 +21226,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21772,8 +21247,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21794,8 +21268,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21816,8 +21289,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21838,8 +21310,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21860,8 +21331,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21882,8 +21352,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21904,8 +21373,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21926,8 +21394,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21948,8 +21415,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21970,8 +21436,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -21992,8 +21457,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22014,8 +21478,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22036,8 +21499,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22058,8 +21520,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22080,8 +21541,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22102,8 +21562,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22124,8 +21583,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22146,8 +21604,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22168,8 +21625,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22190,8 +21646,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22212,8 +21667,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22234,8 +21688,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22256,8 +21709,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22278,8 +21730,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22300,8 +21751,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22322,8 +21772,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22344,8 +21793,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22366,8 +21814,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22388,8 +21835,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22410,8 +21856,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22432,8 +21877,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22454,8 +21898,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22476,8 +21919,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22498,8 +21940,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22520,8 +21961,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22542,8 +21982,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22564,8 +22003,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22586,8 +22024,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22608,8 +22045,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22630,8 +22066,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22652,8 +22087,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22674,8 +22108,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22696,8 +22129,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22718,8 +22150,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22740,8 +22171,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22762,8 +22192,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22784,8 +22213,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22806,8 +22234,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22828,8 +22255,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22850,8 +22276,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22872,8 +22297,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22894,8 +22318,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22916,8 +22339,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22938,8 +22360,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22960,8 +22381,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -22982,8 +22402,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23004,8 +22423,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23026,8 +22444,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23048,8 +22465,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23070,8 +22486,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23092,8 +22507,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23114,8 +22528,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23136,8 +22549,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23158,8 +22570,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23180,8 +22591,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23202,8 +22612,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23224,8 +22633,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23246,8 +22654,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23268,8 +22675,49 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
+     ],
+     "how": "block replaced inside the live body value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:policy:refund-policy:body#b080",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body#b080",
+     "en": "<strong>Belgium, the Netherlands and Luxembourg:</strong> within 24 hours",
+     "en_sha1": "717ff1db44fe309579681183fb1c29e1ab1fc5e9",
+     "value": "<strong>Belgique, Pays-Bas et Luxembourg :</strong> dans les 24 heures",
+     "gates": [
+      "legal-review"
+     ],
+     "hold": [
+      "legal-review",
+      "legal (batch 04)"
+     ],
+     "how": "block replaced inside the live body value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:policy:refund-policy:body#b081",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body#b081",
+     "en": "<strong>Rest of the European Union:</strong> 2–3 working days",
+     "en_sha1": "1cdd559cd40e09c4e1f359ef026a4965b7f0ac05",
+     "value": "<strong>Reste de l’Union européenne :</strong> 2 à 3 jours ouvrables",
+     "gates": [
+      "legal-review"
+     ],
+     "hold": [
+      "legal-review",
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23290,8 +22738,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23312,8 +22759,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23334,8 +22780,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23356,8 +22801,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23378,8 +22822,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23400,8 +22843,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23422,8 +22864,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23444,8 +22885,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23466,8 +22906,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23488,8 +22927,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23510,8 +22948,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23532,8 +22969,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23554,8 +22990,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23576,8 +23011,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23598,8 +23032,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23620,8 +23053,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23642,8 +23074,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23664,8 +23095,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23686,8 +23116,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23708,8 +23137,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23730,8 +23158,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23752,8 +23179,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23774,8 +23200,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23796,8 +23221,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23818,8 +23242,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23840,8 +23263,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23862,8 +23284,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23884,8 +23305,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23906,8 +23326,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23928,8 +23347,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23950,8 +23368,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23972,8 +23389,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -23994,8 +23410,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24016,8 +23431,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24038,8 +23452,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24060,8 +23473,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24082,8 +23494,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24104,8 +23515,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24126,8 +23536,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24148,8 +23557,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24170,8 +23578,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24192,8 +23599,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24214,8 +23620,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 2 of 124 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24226,8 +23631,9 @@
    ],
    "assembled_field": {
     "blocks": 124,
-    "drafted": 122,
-    "missing_or_held": 2
+    "drafted": 124,
+    "missing_or_held": 0,
+    "gated": 124
    }
   },
   {
@@ -24249,8 +23655,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24271,8 +23676,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24293,8 +23697,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24315,8 +23718,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24337,8 +23739,28 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
+     ],
+     "how": "block replaced inside the live body value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:policy:shipping-policy:body#b006",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body#b006",
+     "en": "<strong>Delivery times (estimates):</strong> Belgium, the Netherlands and Luxembourg: within 24 hours; rest of the European Union: 2–3 working days.",
+     "en_sha1": "921bc391227a373a93cb15b794e36d4adfceb355",
+     "value": "<strong>Délais de livraison (estimations) :</strong> Belgique, Pays-Bas et Luxembourg : dans les 24 heures ; reste de l’Union européenne : 2 à 3 jours ouvrables.",
+     "gates": [
+      "legal-review"
+     ],
+     "hold": [
+      "legal-review",
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24359,8 +23781,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24381,8 +23802,7 @@
      ],
      "hold": [
       "legal-review",
-      "legal (batch 04)",
-      "partial field: 1 of 8 blocks held or untranslated"
+      "legal (batch 04)"
      ],
      "how": "block replaced inside the live body value",
      "status": {
@@ -24393,8 +23813,9 @@
    ],
    "assembled_field": {
     "blocks": 8,
-    "drafted": 7,
-    "missing_or_held": 1
+    "drafted": 8,
+    "missing_or_held": 0,
+    "gated": 8
    }
   },
   {
@@ -24533,7 +23954,8 @@
    "assembled_field": {
     "blocks": 6,
     "drafted": 6,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 6
    }
   },
   {
@@ -24651,7 +24073,8 @@
    "assembled_field": {
     "blocks": 5,
     "drafted": 5,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 5
    }
   },
   {
@@ -24937,7 +24360,8 @@
    "assembled_field": {
     "blocks": 13,
     "drafted": 13,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 13
    }
   },
   {
@@ -25372,7 +24796,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -25453,7 +24878,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -25542,7 +24968,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -25626,7 +25053,8 @@
    "assembled_field": {
     "blocks": 4,
     "drafted": 2,
-    "missing_or_held": 2
+    "missing_or_held": 2,
+    "gated": 1
    }
   },
   {
@@ -25710,7 +25138,8 @@
    "assembled_field": {
     "blocks": 4,
     "drafted": 2,
-    "missing_or_held": 2
+    "missing_or_held": 2,
+    "gated": 1
    }
   },
   {
@@ -26027,7 +25456,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 0
    }
   },
   {
@@ -26112,7 +25542,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 0
    }
   },
   {
@@ -26152,7 +25583,8 @@
      "value": "Il n’y a pas de fluor dans nos formules Awake et Asleep. Et il n’y en aura jamais<br><br>",
      "gates": [],
      "hold": [
-      "content pages (batch 06), not in the first-wave list"
+      "content pages (batch 06), not in the first-wave list",
+      "gated field: 1 of 2 blocks wait for a review"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -26227,7 +25659,8 @@
    "assembled_field": {
     "blocks": 2,
     "drafted": 2,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 1
    }
   },
   {
@@ -26298,7 +25731,8 @@
    "assembled_field": {
     "blocks": 2,
     "drafted": 1,
-    "missing_or_held": 1
+    "missing_or_held": 1,
+    "gated": 1
    }
   },
   {
@@ -26347,7 +25781,8 @@
    "assembled_field": {
     "blocks": 1,
     "drafted": 1,
-    "missing_or_held": 0
+    "missing_or_held": 0,
+    "gated": 0
    }
   },
   {
@@ -27870,7 +27305,8 @@
    "assembled_field": {
     "blocks": 97,
     "drafted": 69,
-    "missing_or_held": 28
+    "missing_or_held": 28,
+    "gated": 28
    }
   },
   {
@@ -29037,7 +28473,8 @@
    "assembled_field": {
     "blocks": 58,
     "drafted": 53,
-    "missing_or_held": 5
+    "missing_or_held": 5,
+    "gated": 23
    }
   },
   {
@@ -30368,7 +29805,8 @@
    "assembled_field": {
     "blocks": 74,
     "drafted": 61,
-    "missing_or_held": 13
+    "missing_or_held": 13,
+    "gated": 26
    }
   },
   {
@@ -31553,7 +30991,8 @@
    "assembled_field": {
     "blocks": 62,
     "drafted": 53,
-    "missing_or_held": 9
+    "missing_or_held": 9,
+    "gated": 28
    }
   },
   {
@@ -32181,7 +31620,8 @@
    "assembled_field": {
     "blocks": 30,
     "drafted": 27,
-    "missing_or_held": 3
+    "missing_or_held": 3,
+    "gated": 10
    }
   },
   {
@@ -33482,7 +32922,8 @@
    "assembled_field": {
     "blocks": 74,
     "drafted": 61,
-    "missing_or_held": 13
+    "missing_or_held": 13,
+    "gated": 29
    }
   },
   {
@@ -35391,7 +34832,8 @@
    "assembled_field": {
     "blocks": 95,
     "drafted": 87,
-    "missing_or_held": 8
+    "missing_or_held": 8,
+    "gated": 56
    }
   },
   {
@@ -36270,7 +35712,8 @@
    "assembled_field": {
     "blocks": 46,
     "drafted": 38,
-    "missing_or_held": 8
+    "missing_or_held": 8,
+    "gated": 22
    }
   },
   {
@@ -38300,7 +37743,8 @@
    "assembled_field": {
     "blocks": 117,
     "drafted": 97,
-    "missing_or_held": 20
+    "missing_or_held": 20,
+    "gated": 38
    }
   },
   {

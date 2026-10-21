@@ -188,7 +188,8 @@ def build(lang, payload, sources):
         res["items"].append(item)
     for res in resources.values():
         dedupe(res)
-    # Assembled fields: one translation per field, held when any of its blocks is held or missing
+    # Assembled fields: one translation per field, held when any of its blocks is held or missing, or carries a
+    # gate (pending-claim-review, legal-review): registering the field would publish the gated block with it
     for res in resources.values():
         blocks = [i for i in res["items"] if i["kind"] == "assemble"]
         if not blocks:
@@ -197,10 +198,16 @@ def build(lang, payload, sources):
                       and target(s)[0] == res["shopify_type"] and target(s)[2] == "assemble"]
         ready = {i["id"] for i in blocks}
         missing = [s["id"] for s in src_blocks if s["id"] not in ready]
-        res["assembled_field"] = OrderedDict(blocks=len(src_blocks), drafted=len(blocks), missing_or_held=len(missing))
+        gated = [i["id"] for i in blocks if i["gates"]]
+        res["assembled_field"] = OrderedDict(blocks=len(src_blocks), drafted=len(blocks), missing_or_held=len(missing),
+                                             gated=len(gated))
         if missing:
             for i in blocks:
                 i["hold"].append("partial field: %d of %d blocks held or untranslated" % (len(missing), len(src_blocks)))
+        elif gated:
+            for i in blocks:
+                if not i["gates"]:
+                    i["hold"].append("gated field: %d of %d blocks wait for a review" % (len(gated), len(src_blocks)))
     return resources, skipped
 
 
