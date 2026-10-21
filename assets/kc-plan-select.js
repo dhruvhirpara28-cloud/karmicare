@@ -890,8 +890,6 @@
 
   let purchaseQueue = Promise.resolve();
   let choicesRequested = 0;
-  // The comparison table attempt whose add call is starting (set by attempt() around its call)
-  let tableAttempt = null;
   // Set once a replacement sends the page to checkout: later replacements leave the cart as it is
   let navigating = false;
   window.addEventListener('pageshow', (event) => {
@@ -942,19 +940,6 @@
     };
     const result = purchaseQueue.then(run, run);
     purchaseQueue = result.catch(() => {});
-    // A comparison table attempt (attempt()) learns that its own add failed before karmiAddToCart, which
-    // awaits this result, writes the error: registered first, this runs first
-    const owner = tableAttempt;
-    if (owner) {
-      result.then(
-        (response) => {
-          if (!response.ok) owner.failed();
-        },
-        (error) => {
-          if (!(error && error.kcSkipped)) owner.failed();
-        }
-      );
-    }
     return result;
   }
 
@@ -1330,44 +1315,20 @@
     busyButtons.add(button);
     button.setAttribute('aria-busy', 'true');
     if (status) status.textContent = status.dataset.loadingText || '';
-    // One announcement of a failure (R14c, R14d): only when this attempt's own add failed (replaceChoice
-    // tells owner.failed() just before karmiAddToCart writes the buybox error line) is that line made
-    // non-live, for that one write; done() hides it again, shows the message in the table alert and gives
-    // the role back. Other paths' failures and other attempts keep the line as it is.
+    // One announcement of a failure (R14e): the buybox error line stays the only live region (role=alert,
+    // never changed or hidden here); the table line is a visual copy of its message, not live
     const cartError = cartErrorOf(button.dataset.kcPlanProduct);
-    const owner = { muted: false, role: null };
-    owner.failed = () => {
-      if (!cartError || !error || !errorText || owner.muted) return;
-      owner.muted = true;
-      owner.role = cartError.getAttribute('role');
-      cartError.removeAttribute('role');
-    };
     const done = () => {
-      let message = '';
-      if (owner.muted) {
-        const line = cartError.querySelector('.product-form__error-message');
-        message = !cartError.hidden && line ? line.textContent : '';
-        cartError.hidden = true;
-        if (owner.role) cartError.setAttribute('role', owner.role);
-        owner.muted = false;
-      }
       // karmiAddToCart leaves the button disabled only while the page goes to checkout
       if (button.disabled) return;
       release(button);
-      if (!message) return;
-      errorText.textContent = message;
-      error.hidden = false;
+      if (!cartError || cartError.hidden || !error || !errorText) return;
+      const line = cartError.querySelector('.product-form__error-message');
+      errorText.textContent = line ? line.textContent : '';
+      if (errorText.textContent) error.hidden = false;
     };
-    // run() starts in this turn (karmiAddToCart disables the button at once, and its replaceChoice call,
-    // made before its first await, takes this attempt as its owner)
-    tableAttempt = owner;
-    let started;
-    try {
-      started = new Promise((resolve) => resolve(run()));
-    } finally {
-      tableAttempt = null;
-    }
-    return started
+    // run() starts in this turn (karmiAddToCart disables the button at once)
+    return new Promise((resolve) => resolve(run()))
       .then(done, (err) => {
         done();
         warn('"' + (button.dataset.kcPlanTitle || 'plan') + '": ' + (err && err.message ? err.message : err));

@@ -56,7 +56,7 @@ Not checked: the real checkout (agents never open it), Loop running on the page,
 `attempt()` in `assets/kc-plan-select.js` wraps every table click. The cart and the redirect stay karmiAddToCart's.
 
 - **F1, Back from checkout:** the buttons this attempt made busy are tracked. A persisted `pageshow` makes them usable again: not disabled, not loading, spinner hidden, no `aria-busy`.
-- **F2, cart error:** after an attempt that did not go to checkout, the buybox error line is read (karmiAddToCart hides it at every start). When it is shown, its text goes into the table's own `role="alert"` line (`snippets/kc-plan-feedback.liquid`). A new click clears it.
+- **F2, cart error:** after an attempt that did not go to checkout, the buybox error line is read (karmiAddToCart hides it at every start). When it is shown, its text is copied into the table's error line (`snippets/kc-plan-feedback.liquid`), and a new click clears it. Since R14e the copy is visual only, not live. The buybox line (`role="alert"`, never changed or hidden by the tables) is the one announcer, so a failure is announced once, even with overlapping attempts or a late response body.
 - **F3, accessibility:**
   - Names via `aria-labelledby`: the visible label, plus the plan title when the label does not say it ("Begin The Karmicare Year", "Begin now 60-Day Rhythm").
   - `aria-busy="true"` while the attempt runs, and a visually hidden `role="status"` line with `accessibility.loading` ("Loading...", "Bezig met laden...", "Chargement en cours...").
