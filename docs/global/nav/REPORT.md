@@ -38,6 +38,7 @@ All rows were Victor's direct instructions in this terminal (see `NAV-AUDIT.md`,
 | `4102b4d` | R10 F2 decided: delivery line "2–3 days" rest of Europe, EN/NL/FR + 28 locales on EN |
 | `b69aa86` | R12b remaining P2 (F4): drawer Tab endpoints measured on every Tab (desktop drawer resized while open; submenu scope) |
 | `3441bac` | R12c regression (P2): scope only `details[open].menu-opening`, controls with `visibility: hidden` left out |
+| `27691cb` | NV-13 (21 Oct, after landing): desktop sticky bar is the centred mobile card; desktop package removed |
 
 R12c (Astra on `b69aa86`): resize cases pass; one regression, fixed in `3441bac`. Rendered with a temporary nested submenu injected into the drawer and reduced motion emulated (the test tab draws no frames, so Dawn's transitionend focus never runs otherwise): Back then immediate Tab → menu button while the closing panel is still `[open]`; Escape in the submenu then immediate Tab → menu button, `aria-expanded=false`; submenu loop Back ↔ Child B; settled states and root Escape correct; desktop-drawer 989 ↔ 990 and 393 flat cases unchanged.
 
@@ -82,6 +83,14 @@ Files: `sections/header.liquid`, `sections/header-group.json`, `snippets/product
 - Regression pass after all fixes, Night, homepage and PDP at 393/750/990/1440: top 42/51/40/40, content 102/111/102/102, no horizontal overflow; off the PDP stuck at 16; PDP hidden on scroll down with the sticky bar shown, revealed at 12. Day at 393/1440: bar `rgba(255,255,255,0.9)`, text `rgb(25,31,56)`, no band. Reduced motion emulated: nav transition none.
 - Delivery line rendered on `/`, `/nl`, `/fr`.
 
+### NV-13 desktop sticky bar (`27691cb`), localhost 16197, Orca browser, Day
+
+- Theme Check `--fail-level error`: exit 0. `theme_keys.py check --area sticky_cart`: 24 keys ok.
+- Collapsed card: 1000, 1440 and 1920 all 448×114, centred (centre 500/720/960), 20px from the bottom, flex layout, no package; 393 unchanged (369×106, 12px from the edges).
+- Trigger at 393/1000/1920: hidden with the first plan card 20px on screen, shown 5px past it.
+- Open at 1440: card 448×528, panel stacked as on mobile, Change shown, bar CTA hidden, kit row shown, delivery line read back; closes back to 114.
+- Screenshots: the Orca pane tiles its capture at this size, so none saved; geometry above read from the page.
+
 ## Cleanup check
 
 - Removed in `a6000c4`: the `gallery` variable and its rule in `checkBuybox` (`git grep -n "gallery" snippets/sticky-cart-block.liquid`: no match).
@@ -90,6 +99,7 @@ Files: `sections/header.liquid`, `sections/header-group.json`, `snippets/product
 - Removed in `b0c9fd2`: `snippets/product-header-css.liquid` (with its `.scrolled-past-header` rule), `snippets/transparent-header.liquid` (`body.is-scrolled`), Dawn's `StickyHeader` and the inline PDP script, the `header_tag` switch, header settings `section_bg_color_*`, `product_section_bg_color_*`, `show_line_separator`, `margin_bottom` (schema and `header-group.json`), and the `data-kc-surface-edge` reader in `snippets/kc-surface.liquid`. `git grep` for each in sections, snippets, layout, templates, config, assets: only other sections' own settings of the same name (announcement bar `show_line_separator`, product-benefits and `templates/index.json` `section_bg_color_*`).
 - Removed in `310bf26` once F2 replaced their last reader: `assets/base.css` `.shopify-section-header-sticky`, `.shopify-section-header-hidden(.menu-open)`, `.section-header.animate`, `.header-wrapper--border-bottom`; the `.header-wrapper--border-bottom` rule in `component-mega-menu.css`; `HeaderDrawer.borderOffset` in `assets/global.js`. `git grep` in assets, sections, snippets, layout: no match.
 - Removed in `a2c13e5`: header setting `padding_top` (schema and `header-group.json`); `git grep settings.padding_top` in the header: no match.
+- Removed in `27691cb`: the desktop package (`.sc-package*`, `.sc-kit*`, `.sc-kit-line`, the 1081px grid), the `data-sc-kit` / `kit-line` JS, block setting `kit_free` with its "Desktop package" header, `kc.sticky_cart.kit_free_html` in 31 locales and its `theme-keys.json` row. `git grep -e sc-package -e sc-kit -e kit_free_html -e '"kit_free"' -e data-sc-kit` outside `docs/`: no match. `snippets/kc-kit-value.liquid` stays (comparison table, featured product).
 
 ## Pending
 
