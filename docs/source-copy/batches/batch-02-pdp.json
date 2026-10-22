@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "87edec28e25fcae4bdef2adf127d761b0a725bc4",
+ "digest": "2468bab432715f0aea7f7b6aea815a8f65f70721",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -3490,11 +3490,13 @@
    "resource_type": "product",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "seo.title",
-   "en": "Fluoride-Free Morning & Night Toothpaste System | KARMICARE",
-   "sha1": "7b9e98ecd4b2f52758fe998f6252332899bd1282",
+   "en": "Fluoride-Free Nano-Hydroxyapatite Toothpaste | Awake & Asleep",
+   "sha1": "c02a503cac4f6667aae212d2919f497aa6bdaa09",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title> and og:title"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title> and og:title; EN changed in Admin by Victor 22 Oct (read back on the storefront 22 Oct); old_en kept: SEO title changed by Victor 22 Oct; NL entered by Victor in Translate & Adapt (live), registered (registration/registered.json)",
+   "old_en": "Fluoride-Free Morning & Night Toothpaste System | KARMICARE",
+   "old_sha1": "7b9e98ecd4b2f52758fe998f6252332899bd1282"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:seo.description",
@@ -3503,11 +3505,13 @@
    "resource_type": "product",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "seo.description",
-   "en": "Awake for the morning, Asleep for the night: two nano-hydroxyapatite toothpastes you don't rinse off. Fluoride-free, SLS-free. From €0.49 a brushing.",
-   "sha1": "21b863b05012cecc04b0ec53b7acd48fac906569",
+   "en": "Awake for the morning, Asleep for the night: two fluoride-free nano-hydroxyapatite toothpastes in one Day & Night System. You don't rinse them off.",
+   "sha1": "92ff5db906ac0aa791a3e83b81fc59667debb357",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description and og:description"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description and og:description; EN changed in Admin by Victor 22 Oct (read back on the storefront 22 Oct); old_en kept: meta description changed by Victor 22 Oct (the €0.49 line is gone); NL entered by Victor in Translate & Adapt (live), registered (registration/registered.json)",
+   "old_en": "Awake for the morning, Asleep for the night: two nano-hydroxyapatite toothpastes you don't rinse off. Fluoride-free, SLS-free. From €0.49 a brushing.",
+   "old_sha1": "21b863b05012cecc04b0ec53b7acd48fac906569"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:title",
@@ -3516,11 +3520,13 @@
    "resource_type": "product",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "title",
-   "en": "Awake & Asleep Morning & Night Toothpaste System",
-   "sha1": "50b5afce6abf866a5d9645d3d4b4a5f554cc9a6f",
+   "en": "Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System",
+   "sha1": "17ef6c2a67d3e47bb88e3e1d0dc4636ceb11df2a",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); also the featured product on the homepage; naming source for the Duo since PDP 50ad819: the end CTA (PDP and homepage) and the sticky bar print product.title; replaces the retired subscription_title and package_name entries"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); also the featured product on the homepage; naming source for the Duo since PDP 50ad819: the end CTA (PDP and homepage) and the sticky bar print product.title; replaces the retired subscription_title and package_name entries; EN changed in Admin by Victor 22 Oct (read back on the storefront 22 Oct); old_en kept: product title changed by Victor 22 Oct; NL entered by Victor in Translate & Adapt (live), so it is registered: registration/registered.json keeps the plan from writing it",
+   "old_en": "Awake & Asleep Morning & Night Toothpaste System",
+   "old_sha1": "50b5afce6abf866a5d9645d3d4b4a5f554cc9a6f"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:body_html",

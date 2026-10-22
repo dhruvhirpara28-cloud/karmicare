@@ -4,14 +4,14 @@
 
 The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
 
-"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
 
 | Status | Rows |
 |---|---:|
 | In merchant-edit | 3 |
-| Ready to land | 0 |
+| Ready to land | 1 |
 | In progress | 0 |
-| Waiting for Victor | 9 |
+| Waiting for Victor | 10 |
 | Parked / after launch | 0 |
 | Dropped | 0 |
 
@@ -29,6 +29,8 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 25 | Waiting for Victor | Leen Ponet's quote (K7) | C83, homepage and PDP |
 | 28 | Waiting for Victor | regulatory.md wins over products.md (S4) | the clinical sources |
 | 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article; its twin article is hidden and redirected, so its 79 entries are retired. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
 
 ### Waiting for Victor: the questions
 
@@ -79,11 +81,17 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Replace it with a quote of hers without the health claim (ties to K3).
 - *Advice*: (c): the claim is the problem in every language; with (a) it would still be there.
 
+**52. Releasing the nano-hydroxyapatite article in NL and FR.** You rewrote six fields of the article today and kept the rest of its EN as it is. Its claim blocks stay gated in NL and FR (pending-claim-review), so the article is not registered. Release them?
+- (a) Release the whole article: NL/FR then carry the same claims as the EN.
+- (b) Release only the fields you rewrote today and the blocks without a claim; keep the rest gated.
+- (c) Keep it gated until the claims review.
+- *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
+
 **Two research cards checked against the papers (22 Oct, at Victor's request).** No status changes until Victor decides.
 - **C63, Vano et al. 2018** (Clin Oral Investig, PMID 28361171). The authors' conclusion does not say nHAp is better than fluoride: *"The application of nano-hydroxyapatite in gel toothpaste fluoride free is an effective desensitizing agent providing relief from symptoms after 2 and 4 weeks."* The results do report lower sensitivity than the fluoride and placebo groups at 2 and 4 weeks (p < 0.05). A 2 % gel applied for 10 minutes twice a day, 105 adults, not Karmicare. "Beat fluoride" is a fair reading of the results, not the authors' conclusion; brand don't #13 is what holds the card. The library summary ("OUTPERFORMED", "superior") goes further than the authors.
 - **C60, Kulal et al. 2016** (J Clin Diagn Res 10(10):ZC51–ZC54, PMC5121804). Found and read. Table 2: 97.62 % of tubules completely occluded with nHAp, 81.9 % NovaMin, 65.42 % Pro-Argin; the site's 98 / 82 / 65 are these figures rounded, so they come from a peer-reviewed paper, not a whitepaper. In vitro, 10 dentine discs per group, a slurry for 2 minutes a day over 7 days. Only nHAp vs Pro-Argin is significant (p = 0.005); nHAp vs NovaMin is not (p = 0.235). The paper is inconsistent: its abstract gives 98.1 / 83.1 / 69.1 % and 15 % nHAp, Table 1 gives 1 % nHAp (Acclaim). Advice: keep the card as a lab study ("in a lab study"), and drop the 82 % comparison or say it was not significant.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
 
 Task `task_f75b35ea2400`, dispatch `ctx_fc1123304bbe`, run `run_32dd5602b983`. Brief: `.coordinator/BRIEF-CR1.md`. Deliverable: `docs/claims/CLINICAL-REVIEW.md` (per-claim verdicts, summary at the top). These verdicts are advice: Victor decides, and regulatory and legal sign-off is separate.
 

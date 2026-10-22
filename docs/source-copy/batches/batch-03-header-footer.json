@@ -1,6 +1,6 @@
 {
  "batch": "batch-03-header-footer",
- "digest": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
+ "digest": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -509,11 +509,13 @@
    "resource_type": "navigation",
    "file_or_handle": "navigation:company",
    "key_path": "links[2].title",
-   "en": "Why use hydroxapatite",
-   "sha1": "03cf49872d62d8b2d56ff94c12ecb29d5fe7d603",
+   "en": "Why hydroxyapatite",
+   "sha1": "3e38779dedb807ac256f03b385328b64cf0ceeff",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); footer 'Company' menu; spelling 'hydroxapatite' → 'hydroxyapatite', and 'use' is a banned word (handoff: admin navigation)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); footer 'Company' menu; spelling 'hydroxapatite' → 'hydroxyapatite', and 'use' is a banned word (handoff: admin navigation); EN changed in Admin by Victor 22 Oct (read back on the storefront 22 Oct); old_en kept: EN fixed by Victor 22 Oct (spelling, 'use' dropped); the link now goes to /blogs/news/nano-hydroxyapatite; the NL already had this form",
+   "old_en": "Why use hydroxapatite",
+   "old_sha1": "03cf49872d62d8b2d56ff94c12ecb29d5fe7d603"
   },
   {
    "id": "admin:navigation:company:links[3].title",
