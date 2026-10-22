@@ -2,14 +2,14 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "5286628ff7c87962782903bc9e1ce3350dd61469",
- "source_entries": 229,
+ "source_digest": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
+ "source_entries": 230,
  "counts": {
   "translated": 142,
   "held": 20,
   "pending-claim-review": 32,
   "dawn-nl": 2,
-  "theme-key": 31,
+  "theme-key": 32,
   "admin": 2
  },
  "fit_risk": [
@@ -2956,6 +2956,20 @@
     "theme-key"
    ],
    "notes": "aria-valuetext, not visible; as kc.clock.valuetext_live ('Huidige lokale tijd')"
+  },
+  {
+   "id": "locale:kc.clock.help",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.help",
+   "en": "Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.",
+   "en_sha1": "1e170dc337e7727a0fbb7d8b704b231a33800ad7",
+   "nl": "Sleep de knop rond de ring om een tijdstip te bekijken. Laat los om terug te keren naar de huidige tijd. Houd een pijltjestoets ingedrukt om per vijf minuten te verschuiven; Page Up en Page Down verschuiven een uur. Home kiest middernacht; End kiest 23:59. Laat de toets los, druk op Escape of verlaat de knop om terug te keren naar nu.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "NL as Victor approved it (homepage lane e1411e2, 22 Oct); theme key kc.clock.help"
   }
  ]
 }

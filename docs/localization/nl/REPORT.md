@@ -200,6 +200,8 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 
 **22 Oct, Victor: publication released, review later.** Victor chose to publish the NL/FR translations of the current EN claims now (“Huidige EN vrijgeven, review later”), so NL and FR say what the live EN says, and to do the claim review (K1–K7) later in EN, NL and FR at once. The practitioner quotes may be translated too (“citaten mag je ook vertalen, zij gaan niet goedkeuren”). `registration/releases.json` records it: the builder no longer holds an item on `pending-claim-review`; the statuses stay, so the review can still be done. Legal review stays a gate. Sietske Hamelink's quote is translated again from `986c1d9` (homepage and PDP, pending-claim-review).
 
+**Clock help key (22 Oct, homepage lane `e1411e2`).** `kc.clock.help`, the clock knob's screen-reader help, is a new theme key: NL *Sleep de knop rond de ring om een tijdstip te bekijken. …* as Victor approved it, `theme-key` (batch 01 digest `ab192236341d`). `theme-keys.json` carries it with the FR from `e1411e2` as `decided`; the locales come from `e1411e2` and are not rewritten here.
+
 **Dentist clause and slogan (22 Oct, Victor).** The check-up texts no longer say the dentist confirms the visit: the tooltip and the sticky-bar line read *Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account.*, and the Duo info card drops *— bevestigd door je tandarts —*. The footer slogan is *Je mond heeft een ritme Nu je mondverzorging ook* (EN *Your mouth has a rhythm Now your oral care too*), two sentences without a stop as in the EN. Batch 02 digest `55340f9dc6dd`, batch 03 `d8fb1b30ea2f`.
 
 **Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
@@ -290,7 +292,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `batch-02-pdp` | 477 | `af27d13827f4` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
-| `batch-01-homepage` | 229 | `5286628ff7c8` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
+| `batch-01-homepage` | 230 | `ab192236341d` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `d8fb1b30ea2f` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
