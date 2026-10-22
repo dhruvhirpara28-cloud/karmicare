@@ -3,6 +3,7 @@
  "inputs": {
   "en-source.json": "94921e35b98c",
   "registered.json": "7967afaaf3d3",
+  "holds.json": "519bdea40b98",
   "nl/batch-01-homepage.json": "5cccee39a4c7",
   "nl/batch-02-pdp.json": "1101f9feff35",
   "nl/batch-03-header-footer.json": "ddf994a11689",
@@ -3934,7 +3935,9 @@
      "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
      "value": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account. Preventie, beloond.",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): check-up tooltip says 'verified by your dentist'; the offer needs no dentist involvement (copy decision S2 open)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -4249,7 +4252,9 @@
      "en_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
      "value": "<p>Karmicare is een zorgsysteem, geen artikel uit het schap: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op. Met het Karmicare-jaar levert een afgeronde tandartscontrole — bevestigd door je tandarts — nog eens €40 op. Je stapt binnen met iets te winnen, niet alleen met iets te betalen. Zorg die terugkomt.</p>",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): Duo info card says the check-up is 'confirmed by your dentist'; the offer needs no dentist involvement (copy decision S2 open)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -10939,7 +10944,9 @@
      "en_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
      "value": "Je mond heeft een ritme Je mondverzorging ook",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): footer slogan has no stop between its two sentences; check the Figma footer first (decision S9 open)"
+     ],
      "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -25124,7 +25131,9 @@
      "en_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
      "value": "<p>Bij elke bestelling <strong>belonen we je</strong>. Jij investeert in je gezondheid. Wij herinvesteren in jou. Gezondheid op lange termijn is onze <strong>belofte nr. 1</strong>. Health Rewards zijn inwisselbaar voor accessoires en artikelen die alleen toegankelijk zijn voor Karmicare-leden.</p>",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): legacy product card still says 'Health Rewards' (old name of Care Credit); source owner to decide"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
