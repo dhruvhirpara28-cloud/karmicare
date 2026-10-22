@@ -2,10 +2,18 @@
 
 **Created**: 2026-10-21
 
+**Status 22 Oct: Waiting for Victor (G-8).** Nothing has been built. Every button renders in capitals except the footer Join button. Options:
+- a. Everything in capitals, with the source texts in normal case through source-copy.
+- b. Title Case.
+- c. Sentence case.
+
+Advice: **a**. The options are explained under "The choice for Victor" below.
+
 ### Changelog
 | Date | Change |
 |------|--------|
 | 2026-10-21 | First version, for Victor's choice (landing desk: "check ook dat alle knoppen capitalized zijn"). Measured on preview `189917069693` (karmicare/soft-launch-global `361a06c` = integration `1ca2168` + A11Y fixes), home, PDP and privacy, EN/NL/FR, at 1440 and 390 px. |
+| 2026-10-22 | Status block added; the choice is still open, now id G-8 on the gap list. |
 
 **How it was measured.** Every `button`, `.button`, `[role=button]`, `*cta*` and `*btn*` element with text, outside the Loop widget; `text-transform` read with `getComputedStyle` on the label. 1440 and 390 give the same result for every button.
 

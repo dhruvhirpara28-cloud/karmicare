@@ -2,6 +2,102 @@
 
 **Created**: 2026-10-20
 
+## Status 22 Oct
+
+merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
+
+**Counts (40 rows):** In merchant-edit 11 · Ready to land 4 · In progress 4 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
+
+| Id | Status | Proof / note |
+|---|---|---|
+| AN-01 | In merchant-edit | `3c03acb` |
+| AN-02 (G-1) | In merchant-edit | `3c03acb`. The NL/FR text is tracked under AN-03. |
+| AN-03 | In progress | Landing desk: translation registration |
+| AN-04 | Parked / after launch | P2: capture the phone marquee and check reduced motion |
+| HD-01 | In merchant-edit | global-nav floating nav `b0c9fd2`; NV-13 `27691cb` |
+| HD-02 | In merchant-edit | global-nav audit fixes; the last one is `3441bac` |
+| HD-03 | Waiting for Victor | Professionals or Atlas (question 7) |
+| HD-04 | Waiting for Victor | Phone logo position (question 8) |
+| HD-05 | Parked / after launch | Markets are set in Admin. Log in stays. |
+| HD-06 | In progress | Landing desk: registration |
+| FT-02 | In merchant-edit | `95b56d6` |
+| FT-03 (G-5) | In merchant-edit | `95b56d6` |
+| FT-04 | In merchant-edit | `95b56d6` |
+| FT-05 | Parked / after launch | Handed to the Utopia lane; its report has the status |
+| FT-06 (G-2), theme part | In merchant-edit | `95b56d6`: `#` links show Coming soon |
+| FT-06, Admin links | Waiting for Victor | Shop Karmicare and Contact targets (question 5) |
+| FT-07 (G-3) | In merchant-edit | `4954820` |
+| FT-08 (G-4) | In merchant-edit | `4954820` |
+| FT-09 | Waiting for Victor | Menu name (question 6) |
+| FT-10 | Parked / after launch | Legal text is kept for launch |
+| FT-11 | In merchant-edit | "Belgian product" is in merchant-edit `sections/footer-group.json` (source-copy) |
+| FT-12 | In progress | Landing desk: registration |
+| FT-13 | Dropped | Not a gap: the Cookie preferences link stays |
+| CK-01 | Parked / after launch | P2 capture. It needs a browser that hasn't given consent yet. |
+| CK-02 | Parked / after launch | The banner texts are set in Admin; check them with CK-01 |
+| CK-03 | Waiting for Victor | Klaviyo before consent (question 4) |
+| CK-04 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
+| LY-01 | Dropped | Not a gap |
+| LY-02 | Parked / after launch | Handed to the Utopia lane |
+| LY-03 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
+| TY-01 (G-7) | In progress | Child global-type is editing `assets/base.css`, `layout/theme.liquid` and `config/settings_schema.json` (not committed yet). Preview theme `189947838845`. |
+| A11Y-01, A11Y-02, A11Y-03 (3 rows) | Ready to land | `361a06c`, inside `466f1b9`, reported 21 Oct. The landing desk lands it with source-copy `6500a4a` after the FR follow-up. Astra R19: no regression. |
+| PDP end CTA "Begin your 60-Day Rhythm" | Ready to land | `361a06c`, as above |
+| LC-01, LC-02, LC-03, LC-04 (4 rows, G-9) | Waiting for Victor | Country selector bugs (question 2) |
+| Button capitals (G-8, `BUTTON-CASE.md`) | Waiting for Victor | Question 1 |
+
+**Children.**
+- **global-nav:** everything up to `1aab847` is in merchant-edit. Its own status is in `docs/global/nav/REPORT.md`.
+- **global-footer:** the Phase 1 plan `43351f9` is docs only. The newsletter build (Phase 2) waits for Victor's D1–D6 in `docs/global-footer/PLAN.md`.
+- **global-type:** see TY-01.
+
+### Waiting for Victor: the questions
+
+1. **Button capitals (G-8).** Buttons already render in capitals, except the footer Join button. The source texts are mixed (BEGIN NOW, Begin Now, Begin now).
+   - a. Everything in capitals. Join gets the same CSS capitals, and the source texts are written in normal case through source-copy, so screen readers read words instead of spelling letters.
+   - b. Title Case ("Begin Your 60-Day Rhythm"). Remove the CSS capitals and rewrite about 20 EN texts. NL and FR stay in sentence case, so the languages look different.
+   - c. Sentence case ("Begin your 60-Day Rhythm"). Remove the CSS capitals and rewrite the texts that are now in capitals. This differs from Figma.
+   - **Advice: a.**
+2. **Country selector bugs (G-9: LC-01..LC-04).** These are older bugs in the country and currency picker, and only keyboard and screen reader users notice them:
+   - Duplicate ids.
+   - Arrow keys stop working after filtering.
+   - A crash when 0 countries match.
+   - A wrong count ("2 countries found" for one).
+   - The footer picker doesn't close with Escape or respond to arrow keys.
+
+   Options:
+   - a. Fix all four now, as one small change in this lane.
+   - b. Fix them after launch.
+   - **Advice: a.**
+3. **Sticky card overlaps (G-10: CK-04, LY-03).** These problems were already there; they aren't new.
+   - On the PDP, the open sticky card and the cookie panel overlap at 750, 990 and 1200 px wide.
+   - At laptop heights (1200×700), the card runs under the floating nav and over the second plan card.
+
+   Options:
+   - a. Fix both before launch in this lane. The card reads the nav's real height, and the cookie panel moves above the card.
+   - b. Fix them after launch.
+   - **Advice: a**, because the card covers a plan card on common laptop screens.
+4. **Klaviyo before consent (CK-03).** klaviyo.js loads on every page through a Shopify ScriptTag, without waiting for cookie consent.
+   - a. You run the 5-minute check in `docs/global-footer/PLAN.md` §8 item 8: open a private window, don't accept cookies, and look for klaviyo.js and the `__kla_id` cookie. If they appear, switch Klaviyo's onsite script to the consent-aware app embed, or remove the ScriptTag in Admin.
+   - b. Accept it for launch.
+   - **Advice: a.** It's a privacy issue (P0).
+5. **Footer Admin links (FT-06, G-2).**
+   - a. In the Admin menu `company`, point Shop Karmicare to `/products/karmicare-biorhythmic-oral-care-system` and Contact to `/pages/contact`. The theme then shows them as links instead of Coming soon.
+   - b. Keep Coming soon.
+   - **Advice: a.**
+6. **Menu name (FT-09).** The footer item "Why use hydroxapatite" has a typo and contains the banned word "use".
+   - a. Rename it in Admin to "Why hydroxyapatite".
+   - b. Keep it.
+   - **Advice: a.** It stays Coming soon until its page has content.
+7. **Professionals or Atlas (HD-03).** The header menu says Professionals; Figma says Atlas.
+   - a. Keep Professionals. It matches the homepage section and "Request a practitioner sample".
+   - b. Rename it to Atlas in the Admin menu.
+   - **Advice: a**, unless Atlas is the newer name.
+8. **Phone logo (HD-04, G-11).** In Figma (393 px), the logo is on the left, with BEGIN NOW and the menu button on the right. The theme centres the logo (`mobile_logo_position: center`), and you tuned that nav on localhost (NV-07, NV-08).
+   - a. Keep it centred.
+   - b. Move the logo left with one setting in `header-group.json`. Dawn keeps the menu button on the left, so this only moves the logo.
+   - **Advice: a.**
+
 ### Changelog
 | Date | Change |
 |------|--------|
@@ -12,6 +108,7 @@
 | 2026-10-21 | Accessibility check of the global elements, Day and Night, 2176 and 393 px, EN/NL/FR (axe-core 4.10.2 + own contrast and static checks): text contrast passes everywhere (lowest 5.97:1 Night, 7.06:1 Day), input border and focus ring ≥ 10:1. Added A11Y-01, A11Y-02. |
 | 2026-10-21 | Built A11Y-01 (shop name as hidden link text, SVG `aria-hidden`), A11Y-02 (filter ids scoped per `localPosition`), A11Y-03 (legal TOC `main` → `div`); PDP end button "Begin your 60-Day Rhythm" (template; EN source row requested from source-copy). |
 | 2026-10-21 | Astra R19 on `361a06c`: no regression. Added LC-01..LC-04 (older country-selector keyboard and id bugs, R19-02..05) as G-9. Report: `global-nav/docs/runtime-review/R19-GLOBAL-A11Y-ASTRA.md`. |
+| 2026-10-22 | Added the "Status 22 Oct" block: one status per row against merchant-edit `31407fb`, the counts, and the 8 open questions for Victor in words. New ids: G-8 (button capitals), G-10 (CK-04 and LY-03), G-11 (HD-04). No theme change. |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
