@@ -61,10 +61,11 @@
 
 /* Rich text from metafields and Loop wraps lead phrases in <strong>/<b>.
    The browser default is font-weight: bolder, which steps a 600 or 700
-   parent up to 900 (Black). Bold is the strongest weight Figma uses. */
+   parent up to 900 (Black). The lead-ins follow the body text in Semibold
+   600 (--font-body-weight-bold, layout/theme.liquid), as TY-01 in base.css. */
 .kc-buybox strong,
 .kc-buybox b {
-  font-weight: var(--font-700-weight, 700);
+  font-weight: var(--font-body-weight-bold, 600);
 }
 
 /* featured-product.liquid loads section-main-product.css a second time,
