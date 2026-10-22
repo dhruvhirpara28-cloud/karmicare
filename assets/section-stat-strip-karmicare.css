@@ -7,32 +7,68 @@
   transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* ── Stats Row ── */
+/* ── Stats Row ──
+   One full-bleed row at every width: content-width items run off the right edge, the row
+   drifts and can be dragged or swiped (assets/kc-marquee.js, which clones the set). Until the
+   script runs, and with reduced motion, the row scrolls by hand; .is-running clips it for the
+   drift. */
+.stat-strip-karmicare__marquee {
+  display: block;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.stat-strip-karmicare__marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.stat-strip-karmicare__marquee:not(.is-running) .stat-strip-karmicare__grid {
+  padding-inline: var(--page-gutter);
+}
+
+.stat-strip-karmicare__marquee.is-running {
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+/* Inset, because the full-bleed row is clipped by the section on both sides */
+.stat-strip-karmicare__marquee:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: -2px;
+}
+
+.stat-strip-karmicare__marquee.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
 .stat-strip-karmicare__grid {
   display: flex;
-  width: 100%;
+  width: max-content;
   align-items: stretch;
-  justify-content: space-between;
   margin: 0;
   padding: 0;
   list-style: none;
+  will-change: transform;
 }
 
 .stat-strip-karmicare__item {
-  flex: 1 1 0;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0.8rem 0.8rem;
+  padding: 0.8rem 3.2rem;
   box-sizing: border-box;
   position: relative;
-  min-width: 0;
+  white-space: nowrap;
 }
 
-/* Vertical Dividers between items */
-.stat-strip-karmicare__item:not(:last-child)::after {
+/* Vertical dividers: every item, so the seam between the set and its clones has one too */
+.stat-strip-karmicare__item::after {
   content: '';
   position: absolute;
   top: 10%;
@@ -70,11 +106,11 @@
   font-weight: var(--font-500-weight);
 }
 
-/* Desktop per the Figma homepage: five 256px columns (80px in from the
-   edges), 8px between value and label, 52px from the labels to the tagline */
+/* Desktop per the Figma homepage: 8px between value and label, 52px from the labels to the
+   tagline */
 @media screen and (min-width: 990px) {
-  .stat-strip-karmicare__grid {
-    padding-inline: calc(8rem - var(--page-gutter));
+  .stat-strip-karmicare__item {
+    padding-inline: 4.8rem;
   }
 
   .stat-strip-karmicare__text {
@@ -86,48 +122,7 @@
   }
 }
 
-/* Mobile Scroll Layout (Smooth Horizontal Swipe) */
 @media screen and (max-width: 749px) {
-  .stat-strip-karmicare__grid--scroll {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    justify-content: flex-start;
-    padding-bottom: 0.5rem;
-  }
-
-  .stat-strip-karmicare__grid--scroll::-webkit-scrollbar {
-    display: none;
-  }
-
-  .stat-strip-karmicare__grid--scroll .stat-strip-karmicare__item {
-    flex: 0 0 44%;
-    min-width: 180px;
-    scroll-snap-align: center;
-  }
-
-  /* Mobile Grid Layout (2-column wrap) */
-  .stat-strip-karmicare__grid--grid {
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 2rem;
-  }
-
-  .stat-strip-karmicare__grid--grid .stat-strip-karmicare__item {
-    flex: 0 0 50%;
-    padding: 0.6rem 1rem;
-  }
-
-  .stat-strip-karmicare__grid--grid .stat-strip-karmicare__item:nth-child(2n)::after {
-    display: none;
-  }
-
-  .stat-strip-karmicare__grid--grid .stat-strip-karmicare__item:last-child {
-    flex: 0 0 100%;
-  }
-
   .stat-strip-karmicare__tagline-wrapper {
     margin-top: 2rem;
   }

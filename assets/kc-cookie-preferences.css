@@ -86,11 +86,12 @@ body :is(#shopify-pc__banner, #shopify-pc__prefs__dialog) :is(button, a):focus-v
   box-shadow: none;
 }
 
-/* --sticky-cta-height is the sticky purchase bar's height while it shows (snippets/sticky-cart-block.liquid).
+/* Bottom-left corner on every page, away from the chat and app widgets that gather bottom-right.
+   --sticky-cta-height is the sticky purchase bar's height while it shows (snippets/sticky-cart-block.liquid).
    The banner (only seen when the panel below cannot be built) and the panel sit that much higher, so Begin Now
    stays free; on pages without the bar it is unset and both keep 16px. */
 body #shopify-pc__banner {
-  inset: auto 16px calc(16px + var(--sticky-cta-height, 0px)) auto;
+  inset: auto auto calc(16px + var(--sticky-cta-height, 0px)) 16px;
   width: calc(100% - 32px);
   max-width: 440px;
   max-height: calc(100dvh - 32px - var(--sticky-cta-height, 0px));
@@ -267,9 +268,9 @@ body #shopify-pc__prefs__dialog .shopify-pc__prefs__option input:focus-visible ~
   box-shadow: none;
 }
 
-/* Above the sticky purchase bar while it shows, like the banner (--sticky-cta-height). */
+/* Bottom-left like the banner, above the sticky purchase bar while it shows (--sticky-cta-height). */
 body #shopify-pc__prefs__dialog.kc-cookie-panel {
-  inset: auto 16px calc(16px + var(--sticky-cta-height, 0px)) auto;
+  inset: auto auto calc(16px + var(--sticky-cta-height, 0px)) 16px;
   transform: none;
   max-width: 440px;
   max-height: calc(100dvh - 32px - var(--sticky-cta-height, 0px));

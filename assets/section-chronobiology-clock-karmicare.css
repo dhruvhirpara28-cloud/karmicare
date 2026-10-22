@@ -557,6 +557,15 @@ body.night-mode .chronobiology-clock {
   }
 }
 
+/* Tablet cards (750-1099): the badge fits one line, so no reserved second line and a
+   badge-to-title step close to the mobile frame's (3027:20840) */
+@media screen and (min-width: 750px) and (max-width: 1099px) {
+  .chronobiology-clock .callout-badge {
+    min-height: 0;
+    margin-bottom: var(--kc-responsive-spacing-layout-lg);
+  }
+}
+
 /* ── From 750px: the desktop frame ── */
 @media screen and (min-width: 750px) {
   .chronobiology-clock .heading {

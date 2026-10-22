@@ -1,0 +1,97 @@
+/* Floating navigation (Victor, 20 Oct): the announcement bar stays in the page flow; the navigation
+   owns only its compact bar, floating over the page; the first section of each page owns its
+   background and gets the bar's height as top clearance. assets/kc-navigation.js measures and
+   publishes the values below; these are the values before it runs. */
+:root {
+  --kc-navigation-clearance: 7.2rem;
+  /* Bottom of the announcement bar on screen (negative once it has scrolled away) */
+  --kc-navigation-top: 0px;
+  /* Lowest the section goes once the announcement bar is gone: 0 on product pages, set so the bar
+     sits 16px from the top everywhere else (sections/header.liquid) */
+  --kc-navigation-floor: 0px;
+}
+
+/* The announcement bar's height before the script measures it (30px, 39px from 750px, 28px from
+   990px), so the bar does not move when it does */
+:root:has(.announcement-bar-section) {
+  --kc-navigation-top: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  :root:has(.announcement-bar-section) {
+    --kc-navigation-top: 3.9rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  :root:has(.announcement-bar-section) {
+    --kc-navigation-top: 2.8rem;
+  }
+}
+
+.section-header.shopify-section-group-header-group {
+  --kc-navigation-y: max(var(--kc-navigation-top), var(--kc-navigation-floor));
+  position: fixed;
+  inset-inline: 0;
+  top: var(--kc-navigation-y);
+  z-index: 100;
+  margin: 0;
+  background: transparent;
+  /* The empty space around the compact bar lets clicks through to the page */
+  pointer-events: none;
+}
+
+/* sticky_header_type none: the bar scrolls away with the page */
+.section-header:has(sticky-header[data-sticky-type='none'][data-hide-on-scroll='false']) {
+  position: absolute;
+}
+
+.section-header > sticky-header.header-wrapper {
+  display: flow-root;
+  background: transparent;
+  pointer-events: none;
+}
+
+.section-header .header {
+  pointer-events: auto;
+}
+
+/* Hide on scroll (product pages, or sticky_header_type on-scroll-up): slides up at once, comes back
+   after 0.15s. It stays while a menu is open or keyboard focus is inside it. 1.6rem further: the
+   bar's elevation-md shadow reaches 16px below it. */
+.section-header.kc-header-autohide--ready {
+  transition: transform 0.3s ease 0.15s;
+}
+
+.section-header.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
+  transform: translateY(calc(-100% - var(--kc-navigation-y) - 1.6rem));
+  transition-delay: 0s;
+}
+
+.section-header.menu-open,
+.section-header:has(details[open]),
+.section-header:has(:focus-visible) {
+  transition: none;
+}
+
+#MainContent[data-navigation-layout='inset'] > .shopify-section:first-child {
+  padding-block-start: var(--kc-navigation-clearance);
+}
+
+/* A page without a section wrapper (an app page) gets the clearance on MainContent itself */
+#MainContent[data-navigation-layout='inset']:not(:has(> .shopify-section:first-child)) {
+  padding-block-start: var(--kc-navigation-clearance);
+}
+
+/* A #fragment link to a section or a heading (in the URL, from another page, or a plain in-page link)
+   lands below the bar with 16px to spare, as assets/kc-anchor-scroll.js does for the links it handles.
+   No specificity, so a target's own scroll-margin-top (legal TOC, customer pages) still wins. */
+:where(#MainContent > .shopify-section, #MainContent :is(h1, h2, h3, h4, h5, h6)[id]) {
+  scroll-margin-top: calc(var(--kc-navigation-clearance) + 1.6rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-header.kc-header-autohide--ready {
+    transition: none;
+  }
+}

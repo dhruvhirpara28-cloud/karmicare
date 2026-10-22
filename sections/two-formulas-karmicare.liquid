@@ -1,4 +1,23 @@
 {{ 'section-two-formulas-karmicare.css' | asset_url | stylesheet_tag: preload: true }}
+{%- liquid
+  # A feature button without a page yet shows the shared "Coming soon" state (Victor's rule H8)
+  assign left_soon = false
+  if section.settings.left_button_label != blank
+    if section.settings.left_button_link == blank or section.settings.left_button_link == '#'
+      assign left_soon = true
+    endif
+  endif
+  assign right_soon = false
+  if section.settings.right_button_label != blank
+    if section.settings.right_button_link == blank or section.settings.right_button_link == '#'
+      assign right_soon = true
+    endif
+  endif
+-%}
+{%- if left_soon or right_soon -%}
+  {{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {%- style -%}
   #shopify-section-{{ section.id }} .two-formulas-karmicare{
@@ -19,21 +38,16 @@
   }
 
   /* ── Background Clock Image ── */
+  {%- comment -%} The artwork is drawn by a ::before in the section CSS, so Night can dim it {%- endcomment -%}
   {%- if section.settings.show_bg_clock and section.settings.bg_clock_image != blank -%}
     @media screen and (min-width: 1080px) {
       #shopify-section-{{ section.id }} .two-formulas__bg-clock {
-        background-image: url('{{ section.settings.bg_clock_image | image_url: width: 1400 }}');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
+        --two-formulas-clock: url('{{ section.settings.bg_clock_image | image_url: width: 1400 }}');
       }
     }
     @media screen and (max-width: 1079px) {
       #shopify-section-{{ section.id }} .two-formulas__image-wrap {
-        background-image: url('{{ section.settings.bg_clock_image | image_url: width: 800 }}');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
+        --two-formulas-clock: url('{{ section.settings.bg_clock_image | image_url: width: 800 }}');
       }
     }
   {%- endif -%}
@@ -108,29 +122,39 @@
             </p>
           {%- endif -%}
           {%- if section.settings.left_button_label != blank -%}
-            <a
-              href="{{ section.settings.left_button_link | default: '#' }}"
-              class="karmicare__btn-secondary two-formulas__btn-secondary"
-              role="button"
-            >
-              {{ section.settings.left_button_label | escape }}
-            </a>
+            {%- if left_soon -%}
+              {%- assign soon_id = 'TwoFormulasLeft-' | append: section.id -%}
+              {%- render 'kc-coming-soon',
+                id: soon_id,
+                label: section.settings.left_button_label,
+                class: 'karmicare__btn-secondary two-formulas__btn-secondary'
+              -%}
+            {%- else -%}
+              <a
+                href="{{ section.settings.left_button_link }}"
+                class="karmicare__btn-secondary two-formulas__btn-secondary"
+              >
+                {{ section.settings.left_button_label | escape }}
+              </a>
+            {%- endif -%}
           {%- endif -%}
         </div>
 
         <!-- Center Image -->
         <div class="two-formulas__image-wrap">
           {%- if section.settings.main_image != blank -%}
+            {%- comment -%} Displayed 449 px (531 px from 990) by the CSS, so the tube pair is 220 / 260 px; the srcset covers DPR 3 {%- endcomment -%}
+            {%- assign two_formulas_alt = section.settings.heading | strip_html -%}
             {{
               section.settings.main_image
-              | image_url: width: 220
+              | image_url: width: 1600
               | image_tag:
                 loading: 'lazy',
                 decoding: 'async',
                 class: 'two-formulas__image',
-                widths: '160, 200, 220, 260, 320, 440',
-                sizes: '220px',
-                alt: section.settings.heading
+                widths: '450, 530, 900, 1060, 1350, 1600',
+                sizes: '(min-width: 990px) 531px, 449px',
+                alt: two_formulas_alt
             }}
           {%- else -%}
             <div class="two-formulas__image-placeholder">
@@ -152,13 +176,21 @@
             </p>
           {%- endif -%}
           {%- if section.settings.right_button_label != blank -%}
-            <a
-              href="{{ section.settings.right_button_link | default: '#' }}"
-              class="karmicare__btn-secondary two-formulas__btn-secondary"
-              role="button"
-            >
-              {{ section.settings.right_button_label | escape }}
-            </a>
+            {%- if right_soon -%}
+              {%- assign soon_id = 'TwoFormulasRight-' | append: section.id -%}
+              {%- render 'kc-coming-soon',
+                id: soon_id,
+                label: section.settings.right_button_label,
+                class: 'karmicare__btn-secondary two-formulas__btn-secondary'
+              -%}
+            {%- else -%}
+              <a
+                href="{{ section.settings.right_button_link }}"
+                class="karmicare__btn-secondary two-formulas__btn-secondary"
+              >
+                {{ section.settings.right_button_label | escape }}
+              </a>
+            {%- endif -%}
           {%- endif -%}
         </div>
       </div>
@@ -210,7 +242,7 @@
       "type": "text",
       "id": "button_label",
       "label": "Primary button label",
-      "default": "BEGIN YOUR 60-DAY RITUAL"
+      "default": "BEGIN YOUR 60-DAY RHYTHM"
     },
     {
       "type": "url",

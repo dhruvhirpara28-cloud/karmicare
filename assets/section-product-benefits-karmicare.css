@@ -4,16 +4,11 @@
   gap: 3rem;
 }
 
+/* Text column beside the grid from 1200 (Figma 2928:20061); below that the text
+   sits centred above a full-width grid, so the nine cards keep three columns */
 @media screen and (min-width: 1200px) {
   .product-benefits__inner {
     flex-direction: row;
-  }
-}
-
-@media screen and (min-width: 990px) and (max-width: 1199px) {
-  .product-benefits__inner {
-    flex-direction: row;
-    gap: 3rem;
   }
 }
 
@@ -23,7 +18,7 @@
   max-width: 320px;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 1200px) {
   .product-benefits__left {
     flex: 0 0 30%;
     position: sticky;
@@ -32,11 +27,21 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 1199px) {
+  /* Stacked: more air between the price line and the cards (Victor, 20 Oct) */
+  .product-benefits__inner {
+    gap: var(--kc-responsive-spacing-layout-3xl);
+  }
+
   .product-benefits__left {
     max-width: max-content;
     text-align: center;
     margin: auto;
+  }
+
+  .product-benefits__left > .text-xl {
+    max-width: 64rem;
+    margin-inline: auto;
   }
 }
 
@@ -174,7 +179,9 @@
   scroll-margin-left: 0;
 }
 
-/* Card Styling */
+/* Card Styling. At rest a card shows its copy on the card colour. On hover the
+   picture eases in at its own colours, without the veil, and the copy fades out
+   (Victor, 20 Oct). Nothing moves. */
 .product-benefits__card {
   position: relative;
   border-radius: var(--extra-primary-border-radius);
@@ -182,20 +189,6 @@
   display: flex;
   flex-direction: column;
   min-height: 280px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.product-benefits__card:hover {
-  transform: translateY(-5px);
-}
-
-body.day-mode .product-benefits__card:hover,
-body:not(.night-mode) .product-benefits__card:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
-}
-
-body.night-mode .product-benefits__card:hover {
-  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.04);
 }
 
 .product-benefits__card-bg {
@@ -204,6 +197,32 @@ body.night-mode .product-benefits__card:hover {
   left: 0;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (hover: hover) {
+  .product-benefits__card:hover .product-benefits__card-bg {
+    opacity: 1;
+  }
+
+  .product-benefits__card:hover .product-benefits__card-overlay,
+  .product-benefits__card:has(.product-benefits__card-bg):hover .product-benefits__card-content {
+    opacity: 0;
+  }
+}
+
+/* Touch screens have no hover: the picture under the veil, with light copy, is the rest
+   state. Dawn colours headings with --color-foreground, so set both */
+@media (hover: none) {
+  .product-benefits__card-bg {
+    opacity: 1;
+  }
+
+  .product-benefits__card:has(.product-benefits__card-bg) {
+    --color-foreground: var(--kc-brand-original-off-white-rgb);
+    color: var(--kc-brand-original-off-white);
+  }
 }
 
 .product-benefits__card-bg img {
@@ -211,11 +230,6 @@ body.night-mode .product-benefits__card:hover {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.8s ease;
-}
-
-.product-benefits__card:hover .product-benefits__card-bg img {
-  transform: scale(1.05);
 }
 
 .product-benefits__card-bg .product-benefits__card-overlay {
@@ -226,6 +240,9 @@ body.night-mode .product-benefits__card:hover {
   width: 100%;
   height: 100%;
   z-index: 1;
+  /* The section sets the veil's opacity as a variable, not inline, so hover can clear it */
+  opacity: var(--card-overlay-opacity, 0.58);
+  transition: opacity 0.3s ease;
 }
 
 .product-benefits__card-content {
@@ -234,6 +251,7 @@ body.night-mode .product-benefits__card:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
+  transition: opacity 0.3s ease;
 }
 
 @media screen and (min-width: 1200px) {
@@ -254,6 +272,18 @@ body.night-mode .product-benefits__card:hover {
   }
 }
 
+/* Three tablet columns: 8 px gaps and 12 px card padding keep the longest label
+   ("01 · NANO-HYDROXYAPATITE") on one line at 768 */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product-benefits__grid {
+    gap: 8px;
+  }
+
+  .product-benefits__card-content {
+    padding: 1.2rem;
+  }
+}
+
 .product-benefits__card-content>span {
   margin-bottom: 1rem;
 }
@@ -263,6 +293,12 @@ body.night-mode .product-benefits__card:hover {
   flex-direction: column;
   gap: 8px;
   margin-top: auto;
+}
+
+/* The title is an h3 for the outline but keeps the h5 look: h3 brings the h3 letter
+   spacing (-1px), which the old h5 never set, so it inherits as before (R19-01) */
+.product-benefits__card-title {
+  letter-spacing: inherit;
 }
 
 .product-benefits__card-content p {

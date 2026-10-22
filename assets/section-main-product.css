@@ -95,6 +95,20 @@ product-info {
     max-width: 50%;
     width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
   }
+
+  /* PDP buybox: at least 44rem wide (40rem of content after the 4rem gap), so
+     from 990 to about 1160px it no longer drops to 34rem, narrower than on a
+     phone, where the Care Credit chips and kit names broke up. The gallery
+     takes what is left; from about 1160px the 60/40 split above applies. */
+  .product--large:not(.product--no-media):has(.kc-buybox) .product__media-wrapper {
+    max-width: min(60%, calc(100% - 44rem));
+    width: min(calc(60% - var(--grid-desktop-horizontal-spacing) / 2), calc(100% - 44rem - var(--grid-desktop-horizontal-spacing) / 2));
+  }
+
+  .product--large:not(.product--no-media):has(.kc-buybox) .product__info-wrapper {
+    max-width: max(40%, 44rem);
+    width: max(calc(40% - var(--grid-desktop-horizontal-spacing) / 2), calc(44rem - var(--grid-desktop-horizontal-spacing) / 2));
+  }
 }
 
 /* Dynamic checkout */
@@ -1871,7 +1885,8 @@ body.day-mode .loop-one-time-purchase-option-position {
 
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked),
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
-  background: var(--kc-white-surface-primary-default);
+  /* Selected card: Figma surface/primary/default, as in assets/kc-buybox.css (Victor, 20 Oct) */
+  background: var(--kc-mapped-surface-page);
   border-color: var(--kc-mapped-surface-accent-default);
   box-shadow: 0 0 0 1px var(--kc-mapped-surface-accent-default);
 }
@@ -1891,7 +1906,11 @@ body.day-mode .loop-one-time-purchase-option-label {
   color: rgb(var(--color-foreground));
 }
 
+/* Selected card title and price in Day: heading colour on the surface-primary card. The accent blue
+   (#7fb9ff) on #fffbf6 is 1.98:1, below AA (R12-PDP F1); Night keeps Loop's blue (7.95:1). The price
+   selector outranks snippets/loop-widget.css.liquid's selected-price rule. */
 body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-label,
+body.day-mode .loop-subscription-group:has(.loop-subscription-group-radio:checked) .loop-subscription-group-price-amount,
 body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option-label {
-  color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-default-heading);
 }

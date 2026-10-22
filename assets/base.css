@@ -351,6 +351,27 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   }
 }
 
+/* Bold in body copy is Proxima Nova Semibold (--font-body-weight-bold = 600, layout/theme.liquid),
+   as the Figma Text/* (Strong) styles; the browser default "bolder" would give 700. Headings are
+   left out so they keep their own rules (h2 strong below, the two-tone .kc-surface rule, Marlide
+   at 300). Buttons are left out too: native buttons, role=button, Dawn's .button, the challenge
+   button, the KC button classes (snippets/button-styles.liquid) and the two section CTA links
+   (comparison table, research behind the system), the element itself and anything inside it.
+   The :where() lists keep the specificity at (0,0,1), so a rule that sets its own weight on
+   b/strong (buybox, compare table) still wins. */
+b:not(
+  :where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *,
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary, .comparison-section__button, .research-behind-system__button),
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary, .comparison-section__button, .research-behind-system__button) *
+),
+strong:not(
+  :where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *,
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary, .comparison-section__button, .research-behind-system__button),
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary, .comparison-section__button, .research-behind-system__button) *
+) {
+  font-weight: var(--font-body-weight-bold);
+}
+
 h1,
 h2,
 h3,
@@ -424,6 +445,12 @@ h2,
 h2 strong,
 .h2 strong {
   font-weight: var(--font-h2-weight);
+}
+
+/* KC two-tone headings (Victor, 20 Oct): the part in the second colour, a <strong> or <em> in a
+   KC section's h1/h2, always starts the second line, at every width */
+.kc-surface :is(h1, h2, .h1, .h2) :is(strong, em) {
+  display: block;
 }
 
 @media only screen and (min-width: 750px) {
@@ -2446,23 +2473,6 @@ input[type='checkbox'] {
   z-index: 3;
 }
 
-.shopify-section-header-sticky {
-  position: sticky;
-  top: 0;
-}
-
-.shopify-section-header-hidden {
-  top: calc(-1 * var(--header-height));
-}
-
-.shopify-section-header-hidden.menu-open {
-  top: 0;
-}
-
-.section-header.animate {
-  transition: top 0.15s ease-out;
-}
-
 .shopify-section-group-header-group {
   z-index: 4;
 }
@@ -2479,10 +2489,6 @@ input[type='checkbox'] {
   position: relative;
 }
 
-
-.header-wrapper--border-bottom {
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-}
 
 .header {
   display: grid;

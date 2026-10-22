@@ -142,11 +142,13 @@
   {%- endfor -%}
 {%- endstyle -%}
 
+{%- comment -%} Translated defaults; t output is escaped, so settings join them with escape_once {%- endcomment -%}
+{%- assign hero_label_default = 'kc.hero.aria_label' | t -%}
 <div
   id="HeroKarmicare-{{ section.id }}"
   class="hero-karmicare kc-surface"
   data-kc-surface="{{ section.settings.surface }}"
-  aria-label="{{ section.settings.accessibility_label | default: 'Karmicare Oral Rhythm Hero' | escape }}"
+  aria-label="{{ section.settings.accessibility_label | default: hero_label_default | escape_once }}"
 >
   <div class="page-width hero-karmicare__container">
     {%- for block in section.blocks -%}
@@ -182,8 +184,17 @@
               </a>
             {%- endif -%}
             {%- if block.settings.button_label_2 != blank -%}
+              {%- liquid
+                # Same as the badge: a section anchor is rebuilt on this template's id
+                assign button_link_2 = block.settings.button_link_2
+                if button_link_2 contains '#shopify-section-template--'
+                  assign button_template = section.id | split: '__' | first
+                  assign button_target = button_link_2 | split: '__' | last
+                  assign button_link_2 = '#shopify-section-' | append: button_template | append: '__' | append: button_target
+                endif
+              -%}
               <a
-                href="{{ block.settings.button_link_2 | default: '#' }}"
+                href="{{ button_link_2 | default: '#' }}"
                 class="hero-karmicare__btn hero-karmicare__btn-2 karmicare__btn-secondary"
                 {% if block.settings.button_link_2 == blank %}
                   role="button" aria-disabled="true"
@@ -206,7 +217,8 @@
             </div>
             {%- if block.settings.image != blank -%}
               {%- liquid
-                assign hero_alt = block.settings.image.alt | default: 'Karmicare Oral Care System' | escape
+                assign hero_alt_default = 'kc.hero.image_alt' | t
+                assign hero_alt = block.settings.image.alt | default: hero_alt_default | escape_once
                 assign hero_image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
               -%}
               {{
@@ -219,7 +231,7 @@
                   fetchpriority: 'high',
                   decoding: 'async',
                   preload: true,
-                  sizes: '(min-width: 900px) 840px, 92vw',
+                  sizes: '(min-width: 990px) 900px, 92vw',
                   widths: '375, 550, 750, 840, 1100, 1400, 1800',
                   class: 'hero-karmicare__image',
                   alt: hero_alt
@@ -239,8 +251,12 @@
             <div
               class="hero-karmicare__pill-toggle hero-karmicare__pill-toggle-{{ block.id }}"
               role="group"
-              aria-label="Day and Night Oral Rhythm Switcher"
+              aria-label="{{ 'kc.hero.switcher_label' | t }}"
             >
+              {%- liquid
+                assign hero_awake_name = block.settings.awake_label | default: 'Awake'
+                assign hero_asleep_name = block.settings.asleep_label | default: 'Asleep'
+              -%}
               <button
                 type="button"
                 class="
@@ -248,7 +264,7 @@
                   kc_day
                 "
                 data-mode="day"
-                aria-label="{{ block.settings.awake_label | default: 'Awake' | escape }} mode"
+                aria-label="{{ 'kc.hero.mode_label' | t: label: hero_awake_name }}"
               >
                 {{ block.settings.awake_label | default: 'AWAKE' | escape }}
               </button>
@@ -256,10 +272,7 @@
                 type="button"
                 class="body-gl-nunito-xsm hero-karmicare__pill-btn kc_night"
                 data-mode="night"
-                aria-label="
-                  {{- block.settings.asleep_label | default: 'Asleep' | escape }}
-                  mode
-                "
+                aria-label="{{ 'kc.hero.mode_label' | t: label: hero_asleep_name }}"
               >
                 {{ block.settings.asleep_label | default: 'ASLEEP' | escape }}
               </button>
@@ -295,9 +308,18 @@
             class="hero-karmicare__badge-wrapper hero-karmicare__badge-wrapper-{{ block.id }}"
             {{ block.shopify_attributes }}
           >
-            {%- if block.settings.link != blank -%}
+            {%- liquid
+              # A section anchor carries the template id, which differs per theme copy: point it at this template
+              assign badge_link = block.settings.link
+              if badge_link contains '#shopify-section-template--'
+                assign badge_template = section.id | split: '__' | first
+                assign badge_target = badge_link | split: '__' | last
+                assign badge_link = '#shopify-section-' | append: badge_template | append: '__' | append: badge_target
+              endif
+            -%}
+            {%- if badge_link != blank -%}
               <a
-                href="{{ block.settings.link }}"
+                href="{{ badge_link }}"
                 class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}"
                 aria-label="{{ block.settings.heading | default: 'Backed by health professionals' | escape }}"
               >
@@ -308,14 +330,16 @@
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
-                  | image_url: width: 140
+                  | image_url: width: 168
                   | image_tag:
                     class: 'hero-karmicare__badge-avatar',
                     loading: 'eager',
                     fetchpriority: 'high',
                     decoding: 'async',
                     width: 56,
-                    height: 56,
+                    height: 72,
+                    widths: '56, 112, 168',
+                    sizes: '56px',
                     alt: block.settings.heading
                   | default: 'Health professional'
                   | escape
@@ -366,7 +390,7 @@
                 </div>
               {%- endif -%}
             </div>
-            {%- if block.settings.link != blank -%}
+            {%- if badge_link != blank -%}
               </a>
             {%- else -%}
               </div>
@@ -393,6 +417,18 @@
     }
     updateHeroLiveTime();
     setInterval(updateHeroLiveTime, 30000);
+
+    // The hero fills the first screen below the announcement bar and header: pass their
+    // height (the hero's distance from the page top) to the CSS as --hero-offset
+    var hero = document.getElementById('HeroKarmicare-{{ section.id }}');
+    function updateHeroOffset() {
+      if (!hero) return;
+      var offset = Math.max(0, hero.getBoundingClientRect().top + window.scrollY);
+      hero.style.setProperty('--hero-offset', offset + 'px');
+    }
+    updateHeroOffset();
+    window.addEventListener('load', updateHeroOffset);
+    window.addEventListener('resize', updateHeroOffset, { passive: true });
   })();
 </script>
 
@@ -564,7 +600,7 @@
           "type": "text",
           "id": "button_label_1",
           "label": "Button 1 Text",
-          "default": "BEGIN YOUR 60-DAY RITUAL"
+          "default": "BEGIN YOUR 60-DAY RHYTHM"
         },
         {
           "type": "url",

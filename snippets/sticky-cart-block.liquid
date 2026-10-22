@@ -39,6 +39,37 @@
 -%}
 
 {%- comment -%}
+  Copy defaults: a block setting overrides, blank uses the locale key (kc.sticky_cart.*). The keys end
+  in _html so t returns them unescaped: most go into the JSON config below and are set as textContent.
+{%- endcomment -%}
+{%- liquid
+  assign sc_copy_title_rhythm = 'kc.sticky_cart.title_rhythm_html' | t
+  assign sc_copy_title_year = 'kc.sticky_cart.title_year_html' | t
+  assign sc_copy_title_once = 'kc.sticky_cart.title_once_html' | t
+  assign sc_copy_price_rhythm = 'kc.sticky_cart.price_rhythm_html' | t
+  assign sc_copy_price_year = 'kc.sticky_cart.price_year_html' | t
+  assign sc_copy_price_once = 'kc.sticky_cart.price_once_html' | t
+  assign sc_copy_credit = 'kc.sticky_cart.credit_html' | t
+  assign sc_copy_credit_checkup = 'kc.sticky_cart.credit_checkup_html' | t
+  assign sc_copy_credit_info = 'kc.sticky_cart.credit_info_html' | t
+  assign sc_copy_checkup_info = 'kc.sticky_cart.checkup_info_html' | t
+  assign sc_copy_panel_label = 'kc.sticky_cart.panel_label_html' | t
+  assign sc_copy_change_label = 'kc.sticky_cart.change_label_html' | t
+  assign sc_copy_cta_rhythm = 'kc.sticky_cart.cta_rhythm_html' | t
+  assign sc_copy_cta_year = 'kc.sticky_cart.cta_year_html' | t
+  assign sc_copy_cta_once = 'kc.sticky_cart.cta_once_html' | t
+  assign sc_copy_delivery_free = 'kc.sticky_cart.delivery_free_html' | t
+  assign sc_copy_delivery_once = 'kc.sticky_cart.delivery_once_html' | t
+  assign sc_copy_kit = 'kc.sticky_cart.kit_html' | t
+  assign sc_copy_guarantee_member = 'kc.sticky_cart.guarantee_member_html' | t
+  assign sc_copy_guarantee_once = 'kc.sticky_cart.guarantee_once_html' | t
+  assign sc_copy_stop_rhythm = 'kc.sticky_cart.stop_rhythm_html' | t
+  assign sc_copy_stop_year = 'kc.sticky_cart.stop_year_html' | t
+  assign sc_copy_per_brushing = 'kc.sticky_cart.per_brushing_html' | t
+  assign sc_copy_try_once = 'kc.sticky_cart.try_once_html' | t
+-%}
+
+{%- comment -%}
   What the checkout charges, in cents, per variant: one time, and per selling plan Shopify's price per
   quantity x quantity, the quantity being the plan's Duos per delivery (snippets/kc-plan-type.liquid;
   a year plan's year total, never a per-Duo price)
@@ -79,64 +110,13 @@
     Line icons: Lucide (ISC), the "Interface" set of the KC Brand Design Library; stroke in .sc-icon
   {%- endcomment -%}
 
-  {%- comment -%}
-    Desktop (from 1081 px): the package as it will arrive, the Duo and the Welcome Kit items (the theme
-    setting's products, as the buybox shows them: custom.kit_thumbnail, value struck through, Free)
-  {%- endcomment -%}
-  {%- liquid
-    # The Duo's name on the Duo (the Welcome Kit bundle product); any other product shows its own title
-    assign package_name = product.title
-    if is_bundle_product
-      assign package_name = block.settings.package_name | default: product.title
-    endif
-  -%}
-  <div class="sc-package">
-    <div class="sc-package-duo">
-      {%- if product.featured_image -%}
-        {{
-          product.featured_image
-          | image_url: width: 320
-          | image_tag: loading: 'lazy', width: 160, height: 160, class: 'sc-package-img', alt: package_name
-        }}
-      {%- endif -%}
-      <p class="sc-package-name">{{ package_name | escape }}</p>
-    </div>
-    <span class="sc-package-plus" aria-hidden="true" data-sc-kit>+</span>
-    <ul class="sc-kit" role="list" data-sc-kit>
-      {%- for prod_item in settings.welcome_kit_free_product -%}
-        {%- liquid
-          assign prod = prod_item
-          if prod_item.id == null
-            assign prod = all_products[prod_item]
-          endif
-          if prod == blank
-            continue
-          endif
-          assign kit_variant = prod.selected_or_first_available_variant
-          assign kit_value = kit_variant.compare_at_price | default: kit_variant.price
-          assign kit_thumbnail = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
-        -%}
-        <li class="sc-kit-item">
-          {%- if kit_thumbnail -%}
-            {{ kit_thumbnail | image_url: width: 144 | image_tag: loading: 'lazy', width: 48, height: 48, class: 'sc-kit-img', alt: '' }}
-          {%- endif -%}
-          <span class="sc-kit-name">{{ prod.title | escape }}</span>
-          <span class="sc-kit-value">
-            {{- block.settings.kit_free | escape }} · <s>{{ kit_value | money_without_trailing_zeros }}</s>
-          </span>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
-
   <div class="sc-summary">
     <div class="sc-plan">
       <p class="sc-title"><span data-sc="name"></span><span class="sc-title-rest" data-sc="rest"></span></p>
-      <p class="sc-kit-line" data-sc="kit-line" data-sc-kit></p>
       <p class="sc-price-line" data-sc="price"></p>
     </div>
-    {%- comment -%} Control labels fall back to the schema defaults: a button never loses its name {%- endcomment -%}
-    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | default: 'Change' | escape }}</button>
+    {%- comment -%} Control labels fall back to the locale keys: a button never loses its name {%- endcomment -%}
+    <button type="button" class="sc-change" data-sc-change>{{ block.settings.change_label | default: sc_copy_change_label | escape }}</button>
     <button type="submit" form="scCtaForm" class="sc-cta sc-cta--bar" data-sc-cta>
       <span>{{ block.settings.button_text | default: 'Begin now' | escape }}</span>
       {{- sc_spinner -}}
@@ -203,6 +183,8 @@
     {
       "productId": {{ product.id | json }},
       "moneyFormat": {{ shop.money_format | json }},
+      "currency": {{ cart.currency.iso_code | json }},
+      "language": {{ request.locale.iso_code | split: '-' | first | json }},
       "isBundle": {{ is_bundle_product | json }},
       "kitReceived": {{ kit_received | json }},
       "kitVariantIds": {{ welcome_kit_variant_ids | split: ',' | compact | json }},
@@ -210,33 +192,33 @@
       "requiresPlan": {{ product.requires_selling_plan | json }},
       "productTitle": {{ product.title | json }},
       "buttonText": {{ block.settings.button_text | default: 'Begin now' | json }},
-      {%- comment -%} Positions are CSS only: phones 12 px from the edges, 750–1080 centred at 448, from 1081 the centred package {%- endcomment -%}
+      {%- comment -%} Positions are CSS only: phones 12 px from the edges, from 750 centred at 448 {%- endcomment -%}
       "prices": {{ sc_prices }},
-      {%- comment -%} Copy: the block settings (P1–P7 of the brief); [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
+      {%- comment -%} Copy: the block settings (P1–P7 of the brief), else the locale keys; [price] [credit] [per_brushing] are filled per plan {%- endcomment -%}
       "copy": {
-        "title_rhythm": {{ block.settings.title_rhythm | json }},
-        "title_year": {{ block.settings.title_year | json }},
-        "title_once": {{ block.settings.title_once | json }},
-        "price_rhythm": {{ block.settings.price_rhythm | json }},
-        "price_year": {{ block.settings.price_year | json }},
-        "price_once": {{ block.settings.price_once | json }},
-        "credit": {{ block.settings.credit | json }},
-        "credit_checkup": {{ block.settings.credit_checkup | json }},
-        "credit_info": {{ block.settings.credit_info | json }},
-        "checkup_info": {{ block.settings.checkup_info | json }},
-        "panel_label": {{ block.settings.panel_label | default: "Delivery & what's included" | json }},
-        "cta_rhythm": {{ block.settings.cta_rhythm | default: 'Begin your 60-Day Rhythm' | json }},
-        "cta_year": {{ block.settings.cta_year | default: 'Begin the Karmicare Year' | json }},
-        "cta_once": {{ block.settings.cta_once | default: 'Try once' | json }},
-        "delivery_free": {{ block.settings.delivery_free | json }},
-        "delivery_once": {{ block.settings.delivery_once | json }},
-        "kit": {{ block.settings.kit | json }},
-        "guarantee_member": {{ block.settings.guarantee_member | json }},
-        "guarantee_once": {{ block.settings.guarantee_once | json }},
-        "stop_rhythm": {{ block.settings.stop_rhythm | json }},
-        "stop_year": {{ block.settings.stop_year | json }},
-        "per_brushing": {{ block.settings.per_brushing | json }},
-        "try_once": {{ block.settings.try_once | json }}
+        "title_rhythm": {{ block.settings.title_rhythm | default: sc_copy_title_rhythm | json }},
+        "title_year": {{ block.settings.title_year | default: sc_copy_title_year | json }},
+        "title_once": {{ block.settings.title_once | default: sc_copy_title_once | json }},
+        "price_rhythm": {{ block.settings.price_rhythm | default: sc_copy_price_rhythm | json }},
+        "price_year": {{ block.settings.price_year | default: sc_copy_price_year | json }},
+        "price_once": {{ block.settings.price_once | default: sc_copy_price_once | json }},
+        "credit": {{ block.settings.credit | default: sc_copy_credit | json }},
+        "credit_checkup": {{ block.settings.credit_checkup | default: sc_copy_credit_checkup | json }},
+        "credit_info": {{ block.settings.credit_info | default: sc_copy_credit_info | json }},
+        "checkup_info": {{ block.settings.checkup_info | default: sc_copy_checkup_info | json }},
+        "panel_label": {{ block.settings.panel_label | default: sc_copy_panel_label | json }},
+        "cta_rhythm": {{ block.settings.cta_rhythm | default: sc_copy_cta_rhythm | json }},
+        "cta_year": {{ block.settings.cta_year | default: sc_copy_cta_year | json }},
+        "cta_once": {{ block.settings.cta_once | default: sc_copy_cta_once | json }},
+        "delivery_free": {{ block.settings.delivery_free | default: sc_copy_delivery_free | json }},
+        "delivery_once": {{ block.settings.delivery_once | default: sc_copy_delivery_once | json }},
+        "kit": {{ block.settings.kit | default: sc_copy_kit | json }},
+        "guarantee_member": {{ block.settings.guarantee_member | default: sc_copy_guarantee_member | json }},
+        "guarantee_once": {{ block.settings.guarantee_once | default: sc_copy_guarantee_once | json }},
+        "stop_rhythm": {{ block.settings.stop_rhythm | default: sc_copy_stop_rhythm | json }},
+        "stop_year": {{ block.settings.stop_year | default: sc_copy_stop_year | json }},
+        "per_brushing": {{ block.settings.per_brushing | default: sc_copy_per_brushing | json }},
+        "try_once": {{ block.settings.try_once | default: sc_copy_try_once | json }}
       }
     }
   </script>
@@ -292,13 +274,20 @@
       if (el && el.textContent !== value) el.textContent = value;
     }
 
-    // The shop's money format (Shopify's formatMoney placeholders), whole amounts without ".00" / ",00"
+    // Euros as the visitor's language writes them, as snippets/kc-money.liquid: EN €0.49, NL € 0,49,
+    // FR 0,49 € (no-break spaces). Another currency: the shop's money format (Shopify's formatMoney placeholders). Whole
+    // amounts without ".00" / ",00"
     function money(cents) {
       function amount(precision, thousands, decimal) {
         var parts = (cents / 100).toFixed(precision).split('.');
         return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands) + (parts[1] ? decimal + parts[1] : '');
       }
-      if (!cfg.moneyFormat) return '€' + (cents % 100 === 0 ? amount(0, ',', '.') : amount(2, ',', '.'));
+      if (cfg.currency === 'EUR' || !cfg.moneyFormat) {
+        var precision = cents % 100 === 0 ? 0 : 2;
+        if (cfg.language === 'fr') return amount(precision, ' ', ',') + ' €';
+        if (cfg.language === 'nl') return '€ ' + amount(precision, '.', ',');
+        return '€' + amount(precision, ',', '.');
+      }
       var out = String(cfg.moneyFormat).replace(/\{\{\s*(\w+)\s*\}\}/, function (match, key) {
         if (key === 'amount_no_decimals') return amount(0, ',', '.');
         if (key === 'amount_with_comma_separator') return amount(2, '.', ',');
@@ -406,11 +395,7 @@
       // The Welcome Kit comes with a first membership order, until the customer has received it
       var kitOffered = !once && cfg.isBundle && !cfg.kitReceived;
       setText('kit', copy.kit);
-      setText('kit-line', copy.kit ? '+ ' + copy.kit : '');
       bar.querySelector('[data-sc-row="kit"]').hidden = !kitOffered;
-      Array.prototype.forEach.call(bar.querySelectorAll('[data-sc-kit]'), function (el) {
-        el.hidden = !kitOffered;
-      });
       setText('guarantee', once ? copy.guarantee_once : copy.guarantee_member);
       bar.querySelector('[data-sc-row="guarantee"]').hidden = plain;
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
@@ -474,8 +459,8 @@
       }
     }
 
-    /* When the bar shows: only once the visitor has scrolled past the buybox CTA (never over the plan
-       cards while they choose), never while another way to begin is on screen (P8: the section of the
+    /* When the bar shows: only once the visitor has scrolled past the buybox's first plan card (Victor,
+       20 Oct), never while another way to begin is on screen (P8: the section of the
        comparison table, the plans table or the end CTA, whole, so the bar never covers their cards),
        and only once it knows the plan */
     var CTA_SELECTOR = '.product-form__submit, .comparison-section__button, [data-kc-plan-choose]';
@@ -495,16 +480,21 @@
     });
     observers.push(ctaObserver);
 
-    // Past the buybox CTA = its bottom above the screen; from 750 px (two columns, the gallery sticky
-    // beside the buybox) also past the gallery column, so the card never covers its thumbnails. Read on
-    // scroll, not from an observer: a jump from below the screen to above it crosses no threshold.
-    var gallery = document.querySelector('.product__media-wrapper');
-    function checkBuybox() {
-      var past = !buyboxCta || buyboxCta.getBoundingClientRect().bottom <= 0;
-      if (past && gallery && window.innerWidth >= 750) past = gallery.getBoundingClientRect().bottom <= 0;
-      if (past === pastBuybox) return;
-      pastBuybox = past;
-      updateVisibility();
+    // Past the buybox = the bottom of its first plan card on screen (Loop's first shown selling plan
+    // group) above the screen; without plan cards, the bottom of the buybox CTA. Measured afresh at every
+    // visibility decision (updateVisibility), because Loop renders and re-renders the cards late and the
+    // page can move without a scroll; read from geometry, not an observer threshold: a jump from below
+    // the screen to above it crosses no threshold.
+    function firstPlanCard() {
+      var cards = document.querySelectorAll('.product__info-container .loop-subscription-group');
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].getClientRects().length) return cards[i];
+      }
+      return null;
+    }
+    function measureBuybox() {
+      var edge = firstPlanCard() || buyboxCta;
+      pastBuybox = !edge || edge.getBoundingClientRect().bottom <= 0;
     }
 
     function watchCtas() {
@@ -513,7 +503,7 @@
         buyboxCta =
           document.querySelector('.product__info-container .product-form__submit') ||
           document.querySelector('.product-form__submit');
-        checkBuybox();
+        updateVisibility();
       }
       var buyboxSection = buyboxCta && buyboxCta.closest('.shopify-section');
       Array.prototype.forEach.call(document.querySelectorAll(CTA_SELECTOR), function (cta) {
@@ -526,6 +516,7 @@
     }
 
     function updateVisibility() {
+      measureBuybox();
       var visible = ready && pastBuybox && sectionsOnScreen.size === 0;
       if (visible === shown) return;
       shown = visible;
@@ -627,10 +618,18 @@
         var barResize = new ResizeObserver(reservePageEnd);
         barResize.observe(bar);
         observers.push(barResize);
+        // The plan cards move without a scroll while Loop renders them and while media above them loads
+        var layoutResize = new ResizeObserver(function () {
+          updateVisibility();
+        });
+        layoutResize.observe(document.body);
+        var buybox = document.querySelector('.product__info-container');
+        if (buybox) layoutResize.observe(buybox);
+        observers.push(layoutResize);
       }
       watchCtas();
-      on(window, 'scroll', checkBuybox, { passive: true });
-      on(window, 'resize', checkBuybox);
+      on(window, 'scroll', updateVisibility, { passive: true });
+      on(window, 'resize', updateVisibility);
       // Sections that render late, and sections the theme editor adds
       setTimeout(watchCtas, 2000);
       on(document, 'shopify:section:load', watchCtas);
