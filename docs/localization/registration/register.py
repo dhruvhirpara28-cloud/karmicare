@@ -21,12 +21,16 @@ Dry run (the default) sends only queries. Targets are resolved by identity first
 - direct items only on their own key; product metafields only by namespace and key; metaobjects only
   through the product's metafield references (nested references need read_metaobjects), and only on a field
   the inventory names or that a reviewed bindings.json binds; the dry run proposes bindings, never writes them;
+- theme keys of the shape section.<template>.json.<ids>:<hash> match the inventory's section/block/setting ids
+  exactly (a section-level setting never matches its blocks' settings);
+- selling plans by their GID, selling-plan groups by their exact EN name (every group with that name, as groups are
+  shared by products), and on both only name, description and option1-3;
 - menu links and shop policies have no proven owner route yet and are never written.
 The report ends with the API contract the run saw (scopes, sample GIDs and keys, invalid content).
-Exactly one target is written. None is stale or missing, several are ambiguous, and two plan items that
-want different values on one target are a conflict: none of these is written. Protected targets
-(selling plans and groups, handle_item, selling_plan_id, the Subscription Name values) are never
-registered; existing translations on them are proposed for removal, which is part of the approval only
+Exactly one target is written (selling-plan groups: every group with the EN name). None is stale or missing,
+several are ambiguous, and two plan items that want different values on one target are a conflict: none of these
+is written. Protected targets (handle_item, selling_plan_id, the Subscription Name values '60-Day Supply' and
+'Year Supply', and selling-plan content other than name, description and options) are never registered; existing translations on them are proposed for removal, which is part of the approval only
 with --remove-never. A JSON field is written only when every text leaf maps to an approved item.
 
 Approval binds a snapshot: store, API version, theme and its proof, plan file, bindings file, removal choice,
@@ -65,6 +69,12 @@ PLAN = "docs/localization/registration/plan-%s.json"
 LIVE = "docs/localization/registration/live"
 LOOP_TYPES = ("SELLING_PLAN", "SELLING_PLAN_GROUP")
 LOOP_GIDS = ("SellingPlan", "SellingPlanGroup")
+# The only selling-plan content this runner may translate (wave 2a); Subscription Name values stay protected below.
+SELLING_PLAN_KEYS = ("name", "description", "option1", "option2", "option3")
+# The GID type a plan resource's owner must have (a selling-plan GID can never hide under another type).
+OWNER_GID_TYPES = {"MEDIA_IMAGE": "MediaImage", "SELLING_PLAN": "SellingPlan", "SELLING_PLAN_GROUP": "SellingPlanGroup",
+                   "METAFIELD": "Metafield", "METAOBJECT": "Metaobject", "PRODUCT": "Product", "PAGE": "Page",
+                   "ARTICLE": "Article", "BLOG": "Blog", "COLLECTION": "Collection", "SHOP": "Shop", "LINK": "Link"}
 NEVER_KEYS = ("handle_item", "selling_plan_id")
 NEVER_VALUES = ("60-Day Supply", "Year Supply")
 THEME_TYPES = ("ONLINE_STORE_THEME_JSON_TEMPLATE", "ONLINE_STORE_THEME_SECTION_GROUP")
@@ -523,14 +533,22 @@ def theme_proof(admin, theme_id, attested):
     return "operator: " + attested
 
 
+def theme_path(key):
+    """The section/block/setting ids of a theme content key ('section.<template>.json.<ids>:<hash>'), or None."""
+    m = re.match(r"^section\.(?:.+?)\.json\.(.+):[^:.]+$", key)
+    return m.group(1).split(".") if m else None
+
+
 def key_tokens(key):
     return set(t for t in re.split(r"[.:/\[\]]+", key) if t)
 
 
 def protected(rid, content):
-    """Targets that must never get a translation from this runner."""
+    """Targets that must never get a translation from this runner: never-translate keys and values, and on a selling
+    plan or group anything but its name, description and options (Loop reads the Subscription Name values, B-01)."""
     tokens = key_tokens(content["key"])
-    return (gid_type(rid) in LOOP_GIDS or any(k in tokens for k in NEVER_KEYS) or "selling_plan" in content["key"]
+    return ((gid_type(rid) in LOOP_GIDS and content["key"] not in SELLING_PLAN_KEYS)
+            or any(k in tokens for k in NEVER_KEYS) or "selling_plan" in content["key"]
             or content["value"].strip() in NEVER_VALUES)
 
 
@@ -561,8 +579,15 @@ def scope_for(live, res, theme_id):
         nodes = [n for n in live.of_type(rtype) if theme_owned(n["resourceId"], theme_id, name)]
         return Scope(nodes, None if nodes else "no %s resource proves theme %s and template %s" % (rtype, theme_id, name), "theme")
     if owner.startswith("gid://"):
+        if OWNER_GID_TYPES.get(rtype) and gid_type(owner) != OWNER_GID_TYPES[rtype]:
+            return Scope(reason="owner %s is not a %s" % (owner, OWNER_GID_TYPES[rtype]))
         nodes = live.by_ids([owner])
         return Scope(nodes, None if nodes else "no live resource %s" % owner, "key")
+    if rtype == "SELLING_PLAN_GROUP" and owner.startswith("name: "):
+        # Groups are shared by products: every group with this exact EN name gets the same translation.
+        nodes = [n for n in live.of_type("SELLING_PLAN_GROUP")
+                 if any(c["key"] == "name" and c["value"] == owner[len("name: "):] for c in n["translatableContent"])]
+        return Scope(nodes, None if nodes else "no selling-plan group named %r" % owner[len("name: "):], "every")
     if rtype in HANDLE_TYPES:
         hits = live.by_handle(rtype, owner)
         if len(hits) != 1:
@@ -734,10 +759,6 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None):
 
     for res in plan["resources"]:
         wave = [i for i in res["items"] if not i["hold"] and not i["gates"]]
-        if res["shopify_type"] in LOOP_TYPES:
-            for item in wave:
-                row(item, res, "skipped", "Loop owns selling-plan translations")
-            continue
         if not wave:
             continue
         scope = scope_for(live, res, theme_id)
@@ -850,7 +871,13 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None):
             for node in scope.nodes:
                 for content in node["translatableContent"]:
                     if scope.rule == "theme":
-                        if not all(h in key_tokens(content["key"]) for h in item.get("hint") or [None]):
+                        # Exact ids when the key has the documented shape (a section-level setting no longer matches
+                        # the same setting of its blocks); the token rule only for keys of another shape.
+                        path = theme_path(content["key"])
+                        if path is not None and item.get("hint") is not None:
+                            if path != item["hint"]:
+                                continue
+                        elif not all(h in key_tokens(content["key"]) for h in item.get("hint") or [None]):
                             continue
                     elif item.get("key") and content["key"] != item["key"]:
                         continue
@@ -863,6 +890,12 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None):
                 continue
             if not safe:
                 row(item, res, "missing", "no live key with this identity (%s)" % ("hints " + ", ".join(item.get("hint") or []) if scope.rule == "theme" else "key " + str(item.get("key"))))
+            elif scope.rule == "every":
+                fresh = [(n, c) for n, c in safe if hashlib.sha1(c["value"].encode("utf-8")).hexdigest() == item["en_sha1"]]
+                if not fresh:
+                    row(item, res, "stale", "the live EN of this key differs from the plan", safe[0][0], safe[0][1])
+                for n, c in fresh:
+                    want(n, c, [item["id"]], item["value"], "every selling-plan group with this EN name")
             elif len(safe) > 1:
                 row(item, res, "ambiguous", "%d live keys pass the identity check: not written" % len(safe))
             elif hashlib.sha1(safe[0][1]["value"].encode("utf-8")).hexdigest() != item["en_sha1"]:
@@ -1044,7 +1077,7 @@ def report(locale, theme_id, theme_proof_text, attested, remove_never, ops, remo
         lines += ["| `%s` | `%s` | %s | %s |" % (o["resource"], o["key"], cell(o["en"]), cell(o["current"]["value"])) for o in removals]
         lines.append("")
     for title, results in (("Not written: stale, missing, ambiguous, conflict or unproven", ("stale", "missing", "ambiguous", "conflict", "not written")),
-                           ("Already equal to the plan", ("same",)), ("Skipped: Loop", ("skipped",))):
+                           ("Already equal to the plan", ("same",)), ("Skipped", ("skipped",))):
         sel = [r for r in rows if r["result"] in results]
         if not sel:
             continue
