@@ -1,9 +1,9 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "0014eb24daa0",
+  "en-source.json": "e1a43728f7f9",
   "registered.json": "7967afaaf3d3",
-  "holds.json": "7e1947d1b3c4",
+  "holds.json": "da17e4d579fb",
   "releases.json": "356c3948eb85",
   "fr/batch-01-homepage.json": "e548111a26cb",
   "fr/batch-02-pdp.json": "d13b006a0949",
@@ -15,11 +15,11 @@
   "fr/batch-08-system.json": "d8508a10e978"
  },
  "batches": {
-  "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "af27d13827f435e009e7e24815fa510469f0c3ee",
-  "batch-03-header-footer": "d8fb1b30ea2f5be901b89205707d850a3f458452",
+  "batch-01-homepage": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
+  "batch-02-pdp": "8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4",
+  "batch-03-header-footer": "742351732dabbbff2eff9cadc6858ba87284393a",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
-  "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
+  "batch-05-products": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
@@ -6731,30 +6731,6 @@
   },
   {
    "shopify_type": "MEDIA_IMAGE",
-   "owner": "gid://shopify/MediaImage/69840178020733",
-   "batch": "batch-02-pdp",
-   "page": "pdp",
-   "items": [
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:media.69840178020733.alt",
-     "kind": "direct",
-     "key": "alt",
-     "field": "media.69840178020733.alt",
-     "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00 and morning care at 06:40",
-     "en_sha1": "9f2b7f909d3da1209b00aed971992b2c4b57c54b",
-     "value": "Infographie chronobiologique Karmicare : votre bouche vit au rythme d’une horloge de 24 heures, avec le soin du matin à 06:40 et le soin du soir à 22:00",
-     "gates": [],
-     "hold": [],
-     "how": "GID from the inventory id",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    }
-   ]
-  },
-  {
-   "shopify_type": "MEDIA_IMAGE",
    "owner": "gid://shopify/MediaImage/69840178250109",
    "batch": "batch-02-pdp",
    "page": "pdp",
@@ -8106,22 +8082,6 @@
      "en": "One pump",
      "en_sha1": "0476194e7e3144a97e673990b3948e919a0e24ae",
      "value": "Une pression",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#37",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.product_faq#37",
-     "en": "Full dosep",
-     "en_sha1": "6a358335df53b73655ce819dfffe1822efe98d5a",
-     "value": "La dose complète",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -24694,29 +24654,6 @@
       "main",
       "info_card_FnBcaN",
       "header_text"
-     ]
-    },
-    {
-     "id": "product:main/info_card_FnBcaN/body_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-     "en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
-     "en_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
-     "value": "<p>À chaque commande, <strong>nous vous récompensons</strong>. Vous investissez dans votre santé. Nous réinvestissons en vous. La santé à long terme est notre <strong>engagement n° 1</strong>. Les Health Rewards s’échangent contre des accessoires et des soins réservés aux membres Karmicare.</p>",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): legacy product card still says 'Health Rewards' (old name of Care Credit); source owner to decide"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "info_card_FnBcaN",
-      "body_text"
      ]
     },
     {
