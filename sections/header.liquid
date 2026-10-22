@@ -525,7 +525,9 @@
       <div class="header__heading">
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
           {%- if settings.logo_svg != blank -%}
-            <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg">
+            {%- comment -%} The inline SVG has no text: the shop name names the link (A11Y-01) {%- endcomment -%}
+            <span class="visually-hidden">{{ shop.name | escape }}</span>
+            <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg" aria-hidden="true">
               <div class="header__heading-logo-svg">
                 {{ settings.logo_svg }}
               </div>
@@ -569,7 +571,8 @@
       <div class="header__heading">
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
           {%- if settings.logo_svg != blank -%}
-            <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg">
+            <span class="visually-hidden">{{ shop.name | escape }}</span>
+            <div class="header__heading-logo-wrapper header__heading-logo-wrapper--svg" aria-hidden="true">
               <div class="header__heading-logo-svg">
                 {{ settings.logo_svg }}
               </div>
