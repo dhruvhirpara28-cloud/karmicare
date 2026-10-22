@@ -97,6 +97,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 - **Updated 22 Oct (clock help)**: the theme key `kc.clock.help` (screen-reader help for the clock knob, homepage lane `e1411e2`, Victor option a) is inventoried as `locale:kc.clock.help` (#230), `approved`; NL and FR as Victor approved them.
 - **Updated 22 Oct (admin fixes)**: Victor fixed the product FAQ typo "Full dosep" → "Full dose" and the infographic alt (morning before evening: "…with morning care at 06:40 and evening care at 22:00"); both read back on the storefront, `old_en` kept. The lab name "Midwest University" stays.
 - **Updated 22 Oct (legacy card)**: `product:main/info_card_FnBcaN/body_text` on `templates/product.json` no longer says "Health Rewards"; Victor approved three existing Care Credit sentences ("Karmicare is a care system: … Spend Care Credit on any order."). `corrected`, `old_en` kept.
+- **Updated 22 Oct (slogan marker, Astra R27)**: the footer slogan carries the explicit line-break marker `[[br]]` between its two sentences ("Your mouth has a rhythm[[br]]Now your oral care too"); `sections/footer.liquid` renders it as `<br>` (global lane). Words and the missing stop are Victor's and unchanged.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
@@ -104,7 +105,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 |---|---:|---|
 | `batch-01-homepage` | 230 | `ab192236341d9e063847ab0e1b7bff70a09c7bdd` |
 | `batch-02-pdp` | 477 | `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4` |
-| `batch-03-header-footer` | 41 | `d8fb1b30ea2f5be901b89205707d850a3f458452` |
+| `batch-03-header-footer` | 41 | `742351732dabbbff2eff9cadc6858ba87284393a` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
