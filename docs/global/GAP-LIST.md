@@ -28,7 +28,13 @@ merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so not
 | FT-06, Admin links | Done in Admin (live) | Victor, 22 Oct. Read back on the storefront: Shop Karmicare → `/products/karmicare-biorhythmic-oral-care-system`, Contact → `/pages/contact`, Articles → `/blogs/news`. Why Karmicare and nHAp Technology stay `#`. They show Coming soon only once `95b56d6` (in merchant-edit) is live. |
 | FT-07 (G-3) | In merchant-edit | `4954820` |
 | FT-08 (G-4) | In merchant-edit | `4954820` |
-| FT-09 | Done in Admin (live) | Victor, 22 Oct: renamed to "Why hydroxyapatite", linked to the article `/blogs/news/nano-hydroxyapatite`. That article (Dec 2023, ~3,000 words) needs a rewrite before it carries the footer link: "medical marvel for better teeth, bones and overall health", "prevent tooth decay", "the answer to your dental health problems", "first discovered by NASA", "chemicals that prevent natural healing", a typo in its SEO title ("Hydroxapatite"), and "product"/"use" (brand rule). Content owner: Victor or the content lane. |
+| FT-09 | Done in Admin (live) | Victor, 22 Oct: renamed to "Why hydroxyapatite", linked to the article `/blogs/news/nano-hydroxyapatite`. Victor edited the article the same day. Changed: the SEO title (typo fixed, keyword first), the meta description, and three decay/sensitivity sentences plus heading 4 (now "helps protect …"). Read back on the storefront. Victor approved it for publication as it is. The following were left in on his decision:
+- heading 3 "Reduces …"
+- in the intro: "medical marvel for better teeth, bones and overall health"
+- "chemicals that prevent natural healing"
+- "Swap fluoride for nano HAp"
+- "first discovered by NASA"
+- "nontoxic" |
 | LY-04 | Waiting for Victor | Page title suffix (question 9) |
 | FT-10 | Parked / after launch | Legal text is kept for launch |
 | FT-11 | In merchant-edit | "Belgian product" is in merchant-edit `sections/footer-group.json` (source-copy) |
