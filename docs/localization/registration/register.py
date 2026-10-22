@@ -59,6 +59,7 @@ import urllib.request
 
 SHOP = "karmicares.myshopify.com"
 API_VERSION = "2026-10"
+FORM = "application/x-www-form-urlencoded"
 KEYCHAIN_SERVICE = "karmicare-translations"
 PLAN = "docs/localization/registration/plan-%s.json"
 LIVE = "docs/localization/registration/live"
@@ -158,16 +159,60 @@ def write_json(path, data):
     write_text(path, json.dumps(scrub(data), ensure_ascii=False, indent=1) + "\n")
 
 
+# What Shopify may say in an error, by allowlist only (R18g: fail closed). A code, a field-path element or a
+# message outside these is shown as "withheld (n chars)"; nothing from a response is decoded or searched.
+ERROR_CODES = frozenset((
+    # TranslationErrorCode (translationsRegister / translationsRemove userErrors)
+    "BLANK", "INVALID", "INVALID_CODE", "INVALID_FORMAT", "INVALID_KEY_FOR_MODEL", "INVALID_LOCALE_FOR_SHOP",
+    "INVALID_TRANSLATABLE_CONTENT", "INVALID_VALUE_FOR_HANDLE_TRANSLATION", "RESOURCE_NOT_FOUND",
+    "RESOURCE_NOT_MARKET_CUSTOMIZABLE", "RESOURCE_NOT_TRANSLATABLE", "TOO_MANY_KEYS_FOR_RESOURCE",
+    "FAILS_RESOURCE_VALIDATION", "INVALID_MARKET_LOCALIZABLE_CONTENT", "MARKET_CUSTOM_CONTENT_NOT_ALLOWED",
+    "MARKET_DOES_NOT_EXIST", "MARKET_LOCALE_CREATION_FAILED",
+    # GraphQL top-level error extensions
+    "ACCESS_DENIED", "THROTTLED", "MAX_COST_EXCEEDED", "INTERNAL_SERVER_ERROR", "BAD_USER_INPUT",
+    "GRAPHQL_VALIDATION_FAILED", "SHOP_INACTIVE", "NOT_FOUND",
+))
+FIELD_PARTS = frozenset(("translations", "keys", "key", "value", "locale", "resourceId", "id", "marketId",
+                         "translatableContentDigest", "input", "translationKeys", "locales"))
+ERROR_MESSAGES = frozenset((
+    "Translation key is invalid", "Value can't be blank", "Key is invalid", "Locale is invalid",
+    "Locale is not enabled for this shop", "Translatable content hash is invalid", "Translatable content is invalid",
+    "Resource does not exist", "Resource is not translatable", "Too many keys for resource", "Access denied",
+    "Throttled", "Internal error", "Internal error. Looks like something went wrong on our end.",
+    "response is not JSON", "no data", "server error",
+))
+MAX_ERROR_TEXT = 300
+
+
+def _allowed(value, allowed):
+    """value itself when it is a short string in the allowlist; otherwise only its length."""
+    if isinstance(value, str) and len(value) <= MAX_ERROR_TEXT and value in allowed:
+        return value
+    size = len(value) if isinstance(value, str) else len(str(type(value).__name__))
+    return "withheld (%d chars)" % size
+
+
+def _field_part(part):
+    if isinstance(part, int) and not isinstance(part, bool) and 0 <= part < 100000:
+        return str(part)
+    if isinstance(part, str) and len(part) <= 5 and part.isdigit():
+        return part
+    return _allowed(part, FIELD_PARTS)
+
+
 def safe_errors(errors):
-    """Only code, field and a scrubbed, shortened message of each API error."""
+    """Code, field path and message of each API error, each shown only when it is in our allowlist (R18g)."""
     out = []
-    for e in errors if isinstance(errors, list) else [errors]:
+    for e in (errors if isinstance(errors, list) else [errors])[:20]:
         if isinstance(e, dict):
-            code = (e.get("extensions") or {}).get("code") or e.get("code")
-            out.append({"code": scrub(str(code)) if code else None, "field": scrub(e.get("field")) if isinstance(e.get("field"), list) else None,
-                        "message": scrub(str(e.get("message", "")))[:300]})
+            code = (e.get("extensions") or {}).get("code") if isinstance(e.get("extensions"), dict) else None
+            code = code or e.get("code")
+            field = e.get("field") if isinstance(e.get("field"), list) else None
+            out.append({"code": _allowed(code, ERROR_CODES) if code else None,
+                        "field": [_field_part(f) for f in field[:10]] if field is not None else None,
+                        "message": _allowed(e.get("message", ""), ERROR_MESSAGES)})
         else:
-            out.append({"code": None, "field": None, "message": scrub(str(e))[:300]})
+            out.append({"code": None, "field": None, "message": _allowed(e, ERROR_MESSAGES)})
     return out
 
 
@@ -196,13 +241,17 @@ class HttpTransport:
     """POSTs to the store over HTTPS; returns (status, json, retry_after). Never raises with request data."""
 
     def post(self, path, body, headers):
-        req = urllib.request.Request("https://%s%s" % (SHOP, path), data=json.dumps(body).encode("utf-8"),
-                                     headers=dict(headers, **{"Content-Type": "application/json"}), method="POST")
-        try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                return resp.status, self._json(resp.read()), resp.headers.get("Retry-After")
-        except urllib.error.HTTPError as err:
-            return err.code, self._json(err.read()), err.headers.get("Retry-After") if err.headers else None
+        headers = dict({"Content-Type": "application/json"}, **headers)
+        form = headers["Content-Type"] == FORM
+        data = urllib.parse.urlencode(body) if form else json.dumps(body)
+        req = urllib.request.Request("https://%s%s" % (SHOP, path), data=data.encode("utf-8"), headers=headers, method="POST")
+        try:  # one boundary for the request, both response reads and the parse (R18h-2)
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    status, raw, retry = resp.status, resp.read(), resp.headers.get("Retry-After")
+            except urllib.error.HTTPError as err:
+                status, raw, retry = err.code, err.read(), err.headers.get("Retry-After") if err.headers else None
+            return int(status), self._json(raw), retry
         except Exception as err:  # noqa: BLE001 - every transport failure becomes a fixed, data-free error
             raise TransportError(type(err).__name__) from None
 
@@ -211,20 +260,57 @@ class HttpTransport:
         try:
             return json.loads(raw.decode("utf-8"))
         except (ValueError, UnicodeDecodeError):
-            return {"errors": [{"message": "response is not JSON"}]}
+            # Never reflect a response body: an echoed credential can arrive encoded or cut (R18e-1). Only a known
+            # OAuth code is kept, as our own constant.
+            out = {"errors": [{"message": "response is not JSON"}]}
+            m = re.search(rb"oauth error ([a-z_]{1,64})", raw[:65536], re.I)  # bounded, linear
+            code = m.group(1).decode("ascii").lower() if m else None
+            if code in OAUTH_ERRORS:
+                out["oauth_error"] = code
+            return out
+
+
+# Known OAuth error codes and our own explanation. A refused token request shows nothing else from the response.
+OAUTH_ERRORS = {
+    "shop_not_permitted": "client credentials are not allowed on this store: the app and the store must belong to "
+                          "the same Shopify organization (Dev Dashboard > Stores)",
+    "application_cannot_be_found": "Shopify knows no app with this client ID: check the account of the Keychain item "
+                                   "(APP-SETUP.md step 4)",
+    "invalid_client": "client ID or client secret rejected: check the Keychain item (APP-SETUP.md step 4)",
+    "invalid_request": "Shopify could not read the token request",
+    "unauthorized_client": "this app may not use the client credentials grant",
+    "unsupported_grant_type": "the client credentials grant is not accepted for this app",
+    "invalid_scope": "the requested scopes are not granted to this app",
+}
+
+
+def oauth_error(data):
+    """A known OAuth error code with our own explanation, or a fixed line; never text from the response."""
+    code = None
+    if isinstance(data, dict):
+        for field in ("error", "oauth_error"):
+            value = data.get(field)
+            if isinstance(value, str) and value in OAUTH_ERRORS:
+                code = value
+                break
+    return ": %s (%s)" % (code, OAUTH_ERRORS[code]) if code else ": no known OAuth error code in the response"
 
 
 class Admin:
     def __init__(self, transport, client_id, secret):
         self.transport = transport
+        client_id = Secret(client_id)  # scrubbed from every output like the secret (R18e-2)
         try:
+            # The token endpoint takes a form-encoded body (Dev Dashboard docs); JSON gets a non-JSON 400.
             status, data, _ = transport.post("/admin/oauth/access_token", {
-                "client_id": client_id, "client_secret": secret.reveal(), "grant_type": "client_credentials"}, {})
+                "client_id": client_id.reveal(), "client_secret": secret.reveal(), "grant_type": "client_credentials"},
+                {"Content-Type": FORM})
         except TransportError as err:
             raise RunnerError("Token request failed: network error (%s)." % err) from None
         token = data.get("access_token") if isinstance(data, dict) else None
         if status != 200 or not isinstance(token, str) or not token:
-            raise RunnerError("Token request refused (HTTP %d). Check that the app is installed on %s." % (status, SHOP))
+            raise RunnerError("Token request refused (HTTP %d)%s. Check that the app is installed on %s." % (
+                status, oauth_error(data), SHOP))
         self._token = Secret(token)
         scope = data.get("scope")
         self.scopes = set(s.strip() for s in scope.split(",") if s.strip()) if isinstance(scope, str) else None
@@ -323,7 +409,7 @@ class Live:
     def of_type(self, rtype):
         if rtype not in self.by_type:
             nodes = [clean(n) for n in self.admin.pages(Q_LIST, {"type": rtype, "locale": self.locale}, "translatableResources")]
-            self.by_type[rtype] = [n for n in nodes if isinstance(n["resourceId"], str)]
+            self.by_type[rtype] = [n for n in nodes if valid_gid(n["resourceId"])]
             for node in self.by_type[rtype]:
                 self.by_id[node["resourceId"]] = node
         return self.by_type[rtype]
@@ -333,7 +419,7 @@ class Live:
         for start in range(0, len(missing), 100):
             for node in self.admin.pages(Q_IDS, {"ids": missing[start:start + 100], "locale": self.locale}, "translatableResourcesByIds"):
                 node = clean(node)
-                if isinstance(node["resourceId"], str):
+                if valid_gid(node["resourceId"]):
                     self.by_id[node["resourceId"]] = node
         return [self.by_id[i] for i in ids if i in self.by_id]
 
@@ -385,6 +471,14 @@ def gids_in(value):
     return re.findall(r"gid://shopify/Metaobject/\d+", value or "")
 
 
+GID = re.compile(r"gid://shopify/[A-Za-z]{1,64}/[A-Za-z0-9.\-]{1,128}(\?[a-z_]{1,32}=[0-9]{1,20})?")
+
+
+def valid_gid(rid):
+    """A Shopify GID of the shapes this runner uses: type, a plain ID or handle, at most one numeric parameter (R18h-2)."""
+    return isinstance(rid, str) and len(rid) <= 256 and GID.fullmatch(rid) is not None
+
+
 def gid_type(rid):
     m = re.match(r"gid://shopify/([A-Za-z]+)/", rid or "")
     return m.group(1) if m else ""
@@ -392,7 +486,7 @@ def gid_type(rid):
 
 def theme_owned(rid, theme_id, name):
     """True only if the GID names this template or group and one of THEME_PARAMS holds exactly the supplied theme ID."""
-    if not theme_id:
+    if not theme_id or not valid_gid(rid):
         return False
     parsed = urllib.parse.urlparse(rid)
     if parsed.path.rstrip("/").split("/")[-1] != name:
@@ -1042,14 +1136,16 @@ def confirmation(state, data, action, keys, locale):
     errors = safe_errors(payload["userErrors"])
     entries = payload["translations"]
     valid = all(isinstance(t, dict) and isinstance(t.get("key"), str) and t.get("locale") == locale for t in entries)
-    done = sorted(t["key"] for t in entries if isinstance(t, dict) and isinstance(t.get("key"), str)) if valid else []
+    returned = sorted(t["key"] for t in entries if isinstance(t, dict) and isinstance(t.get("key"), str)) if valid else []
+    # Returned keys are only compared, never kept: the confirmed list is our own requested keys, and only when the
+    # receipt matches them exactly; otherwise it is empty (R18h-1).
     if errors:
-        return "rejected", done, errors
+        return "rejected", [], errors
     if not valid:
         return "unknown", [], [{"code": None, "field": None, "message": "a returned entry lacks a string key or the exact locale %s" % locale}]
-    if done != sorted(keys) or len(set(done)) != len(done):
-        return "unknown", done, [{"code": None, "field": None, "message": "returned keys are not exactly the requested keys, once each"}]
-    return "confirmed", done, []
+    if returned != sorted(keys) or len(set(returned)) != len(returned):
+        return "unknown", [], [{"code": None, "field": None, "message": "returned keys are not exactly the requested keys, once each"}]
+    return "confirmed", sorted(keys), []
 
 
 def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN, bindings_path=BINDINGS):
@@ -1099,10 +1195,10 @@ def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN, bind
             say("%s: %d keys confirmed; journal %s/journal-%s.jsonl" % (locale, accepted, out, locale))
     except RunnerError as err:
         print(str(err), file=sys.stderr)
-        sys.exit(2)
-    except Exception as err:  # noqa: BLE001 - an unexpected failure prints only its scrubbed type and message
-        print(scrub("Internal error (%s): %s" % (type(err).__name__, err))[:500], file=sys.stderr)
-        sys.exit(3)
+        raise SystemExit(2) from None
+    except Exception as err:  # noqa: BLE001 - an unexpected failure prints only its type, never its text
+        print("Internal error (%s); no details are shown. Nothing after this point was written." % type(err).__name__, file=sys.stderr)
+        raise SystemExit(3) from None  # no implicit __context__ for a caller that formats the SystemExit (R18i-1)
 
 
 if __name__ == "__main__":
