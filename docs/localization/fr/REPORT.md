@@ -278,13 +278,19 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
   
   The theme-key value matches `locales/fr.json` (`kc.sticky_cart.cta_rhythm_html`, `cta_year_html`). Batch 02 digest `e3e79339…`.
 
+## Short announcement, "Rhythm" CTAs, C103 confirmed (source-copy 6500a4a, 22 Oct)
+
+- **Announcement bar:** Victor shortened the EN to "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017". The FR from integration `1ca2168` (global-nav) is "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017". "Satisfait ou remboursé" stays, because a bare "garantie" reads as the legal warranty. Victor confirmed C103 ("EST. 2017"), so the line no longer carries `pending-claim-review`. Its status stays `translated`. Batch 03 digest `d5353b16…`.
+- **Homepage CTAs (Victor 21 Oct: Rhythm, not Ritual):** the same integration sets the hero, two-formulas and benefits buttons to "COMMENCER VOTRE RYTHME 60 JOURS". The featured-product button becomes "Commencer votre Rythme 60 jours". "Rythme 60 jours" is the plan name, as on the PDP. Batch 01 digest `5286628f…`.
+- **PDP end button** (`featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text`): the EN gains a capital R, "Begin your 60-Day Rhythm". The FR stays "Commencer votre Rythme 60 jours". Only `en`, `en_sha1` and `source_status` follow. Batch 02 digest `87edec28…`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `e3e79339…` | 477 | 138 | 251 | 34 | 15 | 39 |
-| `batch-01-homepage` | `7694e7ac…` | 229 | 172 | 2 | 31 | 2 | 22 |
-| `batch-03-header-footer` | `a853d438…` | 41 | 6 | 11 | 10 | 9 | 5 |
+| `batch-02-pdp` | `87edec28…` | 477 | 138 | 251 | 34 | 15 | 39 |
+| `batch-01-homepage` | `5286628f…` | 229 | 172 | 2 | 31 | 2 | 22 |
+| `batch-03-header-footer` | `d5353b16…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
@@ -292,12 +298,12 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
 | **Total** | | **2,575** | **479** | **1,533** | **75** | **62** | **426** |
 
-Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, and the sticky-bar retirement and CTAs, integration 223d140). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, the sticky-bar retirement and CTAs, integration 223d140, and the short announcement and "Rhythm" CTAs, 6500a4a). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 39 | 42 | 2 | 0 | 25 | 7 | 387 | 0 | 502 |
+| pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 387 | 0 | 501 |
 | pending-en-review | 2 | 9 | 1 | 3 | 1 | 0 | 0 | 0 | 16 |
 | source-defect | 2 | 8 | 1 | 3 | 9 | 0 | 0 | 0 | 23 |
 | wording-adapted | 2 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 29 |
@@ -443,7 +449,7 @@ No approved FR copy exists, so every FR term is proposed.
 
 | Entry | Kind | EN chars | FR chars | Fallback |
 |---|---|---:|---:|---|
-| Hero, two-formulas and benefits button "BEGIN YOUR 60-DAY RITUAL" | slot | 24 | 31 | COMMENCER LE RITUEL |
+| Hero, two-formulas and benefits button "BEGIN YOUR 60-DAY RHYTHM" | slot | 24 | 31 | COMMENCER LE RYTHME |
 | Buy box `welcome_kit_title` | slot | 30 | 31 | Glossary long form (47) if there is room |
 | Buy box `try_once_note` | slot | 42 | 56 | 0 € Care Credit · 0 € récompense contrôle |
 | Care receipt `line_year/note` | slot | 20 | 31 | 20 % reversés |
