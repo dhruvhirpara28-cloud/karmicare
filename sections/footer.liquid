@@ -92,7 +92,7 @@
   }
 
   .km-footer-slogan {
-    max-width: 215px;
+    max-width: 286px;
     margin: 0;
     font-family: var(--kc-font-use-heading);
     font-weight: var(--font-500-weight);
@@ -577,7 +577,6 @@
     }
 
     .km-footer-slogan {
-      max-width: 286px;
       letter-spacing: var(--kc-responsive-h4-letter-spacing);
     }
 
@@ -696,30 +695,10 @@
 
           {%- if section.settings.slogan != blank -%}
             {%- liquid
-              # The slogan is two lines without punctuation ("Your mouth has a rhythm / Now your oral
-              # care too"), so the break must always show (R24-1). A newline in the saved value wins,
-              # and formatted text (bold, italic, links) is left as it is.
-              # Saved on one line (the editor and the translations keep inline_richtext on one line),
-              # the second line starts at the first capitalised word after the first word.
-              assign slogan = section.settings.slogan | newline_to_br
-              unless slogan contains '<'
-                assign slogan_words = slogan | split: ' '
-                assign slogan = ''
-                assign slogan_broken = false
-                for word in slogan_words
-                  assign first_letter = word | slice: 0
-                  assign first_upper = first_letter | upcase
-                  assign first_lower = first_letter | downcase
-                  if forloop.first
-                    assign slogan = word
-                  elsif slogan_broken == false and first_letter == first_upper and first_letter != first_lower
-                    assign slogan = slogan | append: '<br>' | append: word
-                    assign slogan_broken = true
-                  else
-                    assign slogan = slogan | append: ' ' | append: word
-                  endif
-                endfor
-              endunless
+              # The slogan is two lines without punctuation, so the break is marked in the text itself
+              # (R24-1, R27-1): "[[br]]" in the saved value or a translation becomes a line break, as
+              # does a saved newline or <br>. Without a marker there is no break.
+              assign slogan = section.settings.slogan | newline_to_br | replace: '[[br]]', '<br>'
             -%}
             <p class="km-footer-slogan">{{ slogan }}</p>
           {%- endif -%}
