@@ -49,7 +49,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 31 | Waiting for Victor | See below |
 | 32 | Parked / after launch | Victor, 22 Oct: "FAQ kunnen we even parkeren". The links keep `href="#"` for now; the options stay below for later |
 | 33 | In progress | The plan is ready, but nothing is built. It waits for the desk's go |
-| 34 | In progress | Still at `chronobiology-clock-karmicare.liquid:102` in merchant-edit. Waiting for the desk to say who changes it: homepage or pdp |
+| 34 | In merchant-edit | Via homepage `e1411e2` (merchant-edit `ca5228f`): `aria-describedby="clock-help-…"` now points to a visually hidden `kc.clock.help` line in the shared section, so the PDP is covered too. Closed |
 | 35a | In merchant-edit | Clock callouts are `h3.h4`, homepage `75de9a4` |
 | 35b | In progress | The buybox `h5` is still at `treatment-journey.liquid:19`, `:69`. The plan is ready and waits for the desk's go |
 | 36 | Parked / after launch | Info; recheck after 33–35 |
@@ -57,7 +57,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 38 | Parked / after launch | Amounts in other currencies than the euro. Victor decided the €40 reward on 22 Oct: A + C. It gets built later, together with the price per brushing. Nothing built yet |
 | 39 | Parked / after launch | NL Welcome Kit names break in the middle of a word (release QA, live). The proposal waits for a go or the next fix moment |
 
-**Counts (41 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 1 · parked / after launch 20 · dropped 8.
+**Counts (41 lines)**: in merchant-edit 10 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 20 · dropped 8.
 
 ### Waiting for Victor
 
@@ -149,7 +149,7 @@ Re-checked on this branch in the NL server HTML of the dev server (127.0.0.1:929
 |---|---|---|---|---|---|---|
 | 32 | 8 links with `href="#"` in the FAQ evidence content: VIEW ASSESSMENT SUMMARY, VIEW NOTIFICATION, READ THE OPINION, VIEW REPORT, READ OUR SCIENCE, "See every document →", "Request the evidence pack…" (`.rda-link`), "Practitioner evidence pack and samples available →". | The links are HTML in the product FAQ metaobjects (`custom.product_faq` → `section_content`, `snippets/product-faq.liquid:25`), not theme markup. Same source as B-06. | P1 | Victor | a) Victor fills in the real document URLs in admin; no theme change. b) Shared Coming soon state (`snippets/kc-coming-soon.liquid`, as in the header and research CTA): `product-faq.liquid` turns `href="#"` inside `section_content` into a non-clickable link with the `kc.general.coming_soon` tooltip; no new copy. c) Hide them: `product-faq.liquid` drops `href="#"` links from `section_content` until a URL is set. | Parked (Victor, 22 Oct) |
 | 33 | Gallery thumbnails 2–7: `aria-describedby="Thumbnail-…__main-N"` points to no id. | The id is built with `{%- capture thumbnail_id -%}` and renders with a trailing newline (`id="Thumbnail-…-2\n"`), so the reference never matches (`snippets/product-media-gallery.liquid:342`, `:404`). The hero thumbnail uses `assign` and is fine. | P2 | pdp | Build `thumbnail_id` with `assign` (or `\| strip`) in both places. | Open |
-| 34 | chronobiology-clock: the slider's `aria-describedby="clock-help-…"` has no target (home and PDP). | No element with that id, and no help-text key exists (`sections/chronobiology-clock-karmicare.liquid:102`). | P2 | homepage / pdp | Remove the attribute (no copy needed), or add a visually hidden help line, which needs approved copy. Shared section: agree with the homepage lane who changes it. | Open (coordinate): still present after homepage 419fbfc (merchant-edit 75de9a4, line 102) |
+| 34 | chronobiology-clock: the slider's `aria-describedby="clock-help-…"` has no target (home and PDP). | No element with that id, and no help-text key exists (`sections/chronobiology-clock-karmicare.liquid:102`). | P2 | homepage / pdp | Remove the attribute (no copy needed), or add a visually hidden help line, which needs approved copy. Shared section: agree with the homepage lane who changes it. | Fixed via homepage `e1411e2` (help text back, Victor's choice a), in merchant-edit `ca5228f` |
 | 35 | Heading jumps: h2 → h5 in the buybox (NL "Wat je zult voelen…", "Het Karmicare-effect", `snippets/treatment-journey.liquid:19`, `:69`); h2 → h4 in the clock callouts (`chronobiology-clock-karmicare.liquid`). | Tag chosen for size: `base.css` sizes the `h5` element itself. | P2 | pdp / homepage | `<h5 class="kc-journey-title">` → `<h3 class="kc-journey-title h5">` (Dawn's `.h5` class keeps the size); before/after shots to show nothing moves. | Clock part fixed by homepage 419fbfc (callouts `h3.h4`, merchant-edit 75de9a4). Buybox h2 → h5: open (pdp) |
 | 36 | Other heading order: h2 "Land/regio" and "Taal" (localization drawer) and h2 "Trusted by professionals" with seven h3 come before the h1; the h1 is followed by an h2 with the same product title. | Header drawers and the professionals block render before the product section. | P2 | pdp | Note only; check after rows 33–35. | Info |
 | 37 | Loop widget: duplicate ids. | `snippets/loop-widget*.liquid` / `assets/loop-widget.js`, off-limits. | P2 | Victor | Note only. | Off-limits |
@@ -177,7 +177,7 @@ The shop also sells in CHF, GBP, USD and SEK. Product and plan prices are conver
 **Decided by Victor, 22 Oct (via source-copy): A + C.** The Terms do not change.
 - **A, EU markets with another currency (today Sweden, SEK).** €40 stays the official amount. The theme writes "€40" and adds the local amount next to it as an approximation at the active rate, for example "€40 (ca. 451 kr)". The converted amount is 4000 cents × `Shopify.currency.rate` in JS, or the cart currency's rate in Liquid, written in the shop money format. The euro part goes through the euro branch of `kc-money` whatever the cart currency.
 - **C, markets outside the EU (today CH, GB and US).** The reward line is hidden: the check-up chip, the receipt row, the tooltip, the sticky bar's "+ €40 Check-up Reward" and the care-comes-back step. A market counts as EU by `localization.country.iso_code` (Liquid) or `Shopify.country` (JS), checked against a list of the 27 EU country codes in one snippet, so no copy is needed for it.
-- **New key for source-copy** (sent on 22 Oct): `kc.general.approx_amount`, EN "(approx. [amount])". `[amount]` is filled with the local amount, the same placeholder style as `kc.receipt.*`. NL and FR are source-copy's; Victor's NL example is "(ca. …)". The theme puts it after the euro amount with a no-break space. No new settings.
+- **New key for source-copy** (sent on 22 Oct): `kc.general.approx_amount`, EN "(approx. [amount])". `[amount]` is filled with the local amount, the same placeholder style as `kc.receipt.*`. Source-copy has agreed the wording: NL "(ca. [amount])", FR "(env. [amount])"; the FR lane still confirms the FR. `theme_keys.py check` fails on a key that no theme file reads. So the build commit is sent to source-copy, and they add the key to all 31 locales on top of it. The theme puts it after the euro amount with a no-break space. No new settings.
 - `loop-widget.js` (receipt chip, line 2722) is in scope of this decision, so the edit there is covered when it gets built.
 
 ## NL Welcome Kit names (release QA, live, 22 Oct; parked, nothing built)
@@ -205,3 +205,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 22 Oct: row 32 (FAQ evidence links) is parked at Victor's request ("FAQ kunnen we even parkeren").
 - 22 Oct: row 38 added and parked: the price per brushing and the €40 Dental Check-up Reward in other currencies (desk, for Victor; nothing built).
 - 22 Oct: row 38: Victor decided A + C for the €40 reward; the key `kc.general.approx_amount` went to source-copy. Row 39 added: NL Welcome Kit names, with a proposal (parked).
+- 22 Oct: row 34 (clock help text) is fixed through homepage `e1411e2`, which is now in merchant-edit `ca5228f`. Closed.

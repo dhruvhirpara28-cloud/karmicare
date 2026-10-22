@@ -1,6 +1,6 @@
 {
  "batch": "batch-01-homepage",
- "digest": "5286628ff7c87962782903bc9e1ce3350dd61469",
+ "digest": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -3791,6 +3791,19 @@
    "status": "approved",
    "never_translate": false,
    "notes": "theme key kc.clock.loading: aria-valuetext of the clock before its script runs (sections/chronobiology-clock-karmicare.liquid:106; homepage and PDP); inventoried 21 Oct (release QA B-03/B-04)"
+  },
+  {
+   "id": "locale:kc.clock.help",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.help",
+   "en": "Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.",
+   "sha1": "1e170dc337e7727a0fbb7d8b704b231a33800ad7",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "theme key kc.clock.help: screen-reader help for the clock knob (visually hidden <p>, the knob's aria-describedby; sections/chronobiology-clock-karmicare.liquid; homepage and PDP); homepage lane e1411e2, Victor option a, 22 Oct"
   }
  ]
 }
