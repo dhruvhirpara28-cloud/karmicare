@@ -168,6 +168,8 @@
         <span id="clock-caption-{{ section.id }}" class="clock-caption">{{ 'kc.clock.caption_live' | t }}</span>
       </p>
       <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
+      {%- comment -%} How the knob works, for screen readers only (the knob's aria-describedby) {%- endcomment -%}
+      <p class="visually-hidden" id="clock-help-{{ section.id }}">{{ 'kc.clock.help' | t }}</p>
     </div>
 
     {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}

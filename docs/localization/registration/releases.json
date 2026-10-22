@@ -1,0 +1,9 @@
+{
+ "about": "Review gates released for publication by Victor. build_payloads.py drops a released gate from every plan item, so items that waited only on it join the first wave. The statuses and flags in the payloads stay, so the review can still be done later; remove an entry here to gate again.",
+ "released": {
+  "pending-claim-review": {
+   "by": "Victor, 22 Oct 2026, in session: 'Huidige EN vrijgeven, review later' (publish the translations of the current EN claims; the claim review K1-K7 follows later in EN, NL and FR at once), and 'citaten mag je ook vertalen, zij gaan niet goedkeuren'",
+   "scope": "every entry flagged pending-claim-review; legal-review stays a gate"
+  }
+ }
+}

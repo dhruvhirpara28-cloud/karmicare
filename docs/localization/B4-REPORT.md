@@ -68,7 +68,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 4. A fresh dry run.
 5. Its checksum and Victor's explicit yes (row 15); only then `--write`.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day; rows 26 and 53 for his dentist and slogan decisions.
 
 Task `task_427cfe23005d` (dispatch `ctx_505619d6c8e5`), brief `.coordinator/BRIEF-B4.md`. Nothing was registered, pushed or changed in Shopify.
 
@@ -273,6 +273,12 @@ By resource, NL: `templates/index.json` 135, `templates/product.subscription-ite
 - partial body fields: a field with a held block (NL 690, FR 688; most are legal and blog).
 
 **Fetched at run time.** GIDs; the theme template keys and digests; the metafields' translatable content (key `value` and its digest, by GID); and the existing NL/FR translations, which are part of the approval snapshot, so the run shows every value it would overwrite and stops if one changes before writing. The full counts and per-resource table are in `docs/localization/registration/DRY-RUN.md`.
+
+**First wave registered (22 Oct 2026).** Victor ran both writes himself after Astra R23: NL 19:29 CEST, checksum `0622fa0b0947ab6f`, 284 keys confirmed in 28 chunks; FR 19:33 CEST, checksum `54845f48d52df704`, 219 keys confirmed in 25 chunks. Both journals have a start and an end record and only confirmed results (`live/journal-<lang>.jsonl`, untracked). Theme text, section groups, media alts, product titles and shop SEO only; no metaobject, metafield, menu, claim-gated, held or Victor-registered entry. The plans are rebuilt afterwards with the decisions of 22 Oct (dentist clause, slogan) for the second round.
+
+**Claims released for publication (22 Oct, Victor).** `registration/releases.json` releases the `pending-claim-review` gate (review later, in all three languages). Plan first wave after the rebuild: NL 600 (was 500), FR 581 (was 484); metaobject fields still need the routing fix.
+
+**Released claims registered (22 Oct 2026).** After Astra R26 Victor wrote the claim-release batch: NL 19:54 CEST, checksum `3eb0d1a95500b9c6`, 62 keys confirmed in 12 chunks; FR, checksum `17fb04ffe2dc0b54`, 58 keys confirmed. Both journals end cleanly. Registered today in total: NL 346, FR 277. Plans rebuilt afterwards with the admin edits of 22 Oct.
 
 ## Part 4 · URL and selector baseline (H10)
 

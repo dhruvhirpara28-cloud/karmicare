@@ -9,9 +9,9 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | Status | Rows |
 |---|---:|
 | In merchant-edit | 6 |
-| Ready to land | 1 |
+| Ready to land | 3 |
 | In progress | 0 |
-| Waiting for Victor | 8 |
+| Waiting for Victor | 7 |
 | Parked / after launch | 0 |
 | Dropped | 2 |
 
@@ -23,7 +23,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
 | 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
 | 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
-| 26 | Waiting for Victor | "Verified / confirmed by your dentist" in 5 entries (S2) | PDP pricing summary, info card, check-up tooltip, Year plan description |
+| 26 | Ready to land | No dentist confirmation (S2, Victor 22 Oct, choice a): the clause leaves the PDP check-up tooltip, the sticky-bar check-up line and the Duo info card, in EN, NL and the theme keys; the compare-table tooltip and the Year plan description are admin text, still to edit by Victor | reported 22 Oct (needs review: theme files) |
 | 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
 | 33 | Waiting for Victor | Facts to confirm (S9) | homepage and PDP |
 | 34 | Waiting for Victor | Treatment-journey line stops mid-phrase (#29) | admin metafield `custom.treatment_journey_*` |
@@ -32,23 +32,18 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 40 | Waiting for Victor | Money format on the EN pages | Shopify money format (B1a decision 5) |
 | 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article; its twin article is hidden and redirected, so its 79 entries are retired. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
 | 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+| 53 | Ready to land | Footer slogan "Your mouth has a rhythm Now your oral care too" (Victor 22 Oct), in the footer group and its schema default, EN and NL | reported 22 Oct (needs review: theme files) |
 | 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
 | 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
 
 ### Waiting for Victor: the questions
-
-**26. "Verified / confirmed by your dentist" in 5 entries (S2).** The Check-up Reward needs no dentist involvement, but five texts say the check-up is "verified/confirmed by your dentist". (The announcement-bar half of S2 is solved by "FOR MEMBERS".) What should they say?
-- (a) Delete the clause "— confirmed by your dentist" (a deletion, no new claim).
-- (b) You give new wording.
-- (c) Keep it.
-- *Advice*: (a): it removes the contradiction without new copy; two of the five are admin text (plan description), so those are your edit.
 
 **31. Brand-rule exceptions (S7).** The footer says "is a Belgian product", and the treatment-journey footnote "What members report with continued use" is NL *bij langdurig gebruik*: both use banned words (product, use). Rewrite or keep?
 - (a) Rewrite the EN and the Figma first; you give the wording.
 - (b) Keep them.
 - *Advice*: (a): the brand rule has no exceptions so far; I do not write new copy myself.
 
-**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? And should the footer slogan "Your mouth has a rhythm So should your oral care" get a full stop?
+**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? (The footer slogan is decided: row 53.)
 - Answer per fact.
 - *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
 
@@ -80,7 +75,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Keep it gated until the claims review.
 - *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day; rows 26 and 53 for his dentist and slogan decisions.
 
 The English that the live store renders, one entry per string. Batches 01–03 (homepage, Duo PDP, header and footer) come from B1a, with its corrections applied; batches 04–08 (legal, other products, content pages, collections and blog, system pages) come from B2 and are inventoried as they are, without corrections. NL and FR translators start from here.
 
@@ -97,14 +92,16 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the Duo product's title, SEO title and meta description (batch 02): "Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System";
   - the footer menu link "Why use hydroxapatite" → "Why hydroxyapatite" (batch 03), so it leaves the brand-rule scan;
   - six fields of the article `news/nano-hydroxyapatite` (batch 07): SEO title, meta description, and blocks `#b016`, `#b088`, `#b090`, `#b100` ("helps protect" instead of "guards", "total protection", "prevents", "protects"). The rest of the article stays as Victor approved it, and its claim statuses are unchanged: releasing the gated NL/FR blocks is still his decision. The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited; Victor then hid it and redirected it to `/blogs/news/nano-hydroxyapatite` (tested on EN, /nl, /fr), so its 79 entries are `retired` (held in NL/FR, never registered). EN and digests are unchanged.
+- **Updated 22 Oct (later)** with two decisions of Victor's: the dentist clause leaves the PDP check-up tooltip, the sticky-bar check-up line (`liquid:sections/main-product.liquid:995`) and the Duo info card (S2, choice a), and the footer slogan becomes "Your mouth has a rhythm Now your oral care too" (two sentences, no stop). The four entries are `corrected` with `old_en` kept; the theme files carry the same text. The compare-table tooltip and the Year selling-plan description are admin text and still say "verified by your dentist".
+- **Updated 22 Oct (admin)** with three admin edits Victor made after his decisions: the Year selling-plan description (Loop) and the Compare Row tooltip '€40 Check-up Reward' lose "verified by your dentist", and the Year cost per brushing is €0.49 (was €0.42). They stay `admin-held` with `old_en` kept. The tooltip lives on the Compare Row entry, not in a Compare Value cell as the entry id suggests.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
-| `batch-02-pdp` | 477 | `2468bab432715f0aea7f7b6aea815a8f65f70721` |
-| `batch-03-header-footer` | 41 | `18cdaec0fb18d1f00aa688c83d6bc0393b350319` |
+| `batch-02-pdp` | 477 | `af27d13827f435e009e7e24815fa510469f0c3ee` |
+| `batch-03-header-footer` | 41 | `d8fb1b30ea2f5be901b89205707d850a3f458452` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
