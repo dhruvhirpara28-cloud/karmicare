@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "e3e79339215ffcf134b6813f1b46310a1c380fc8",
+ "digest": "87edec28e25fcae4bdef2adf127d761b0a725bc4",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -2213,14 +2213,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.featured_product_Eb93Xa.blocks.buy_buttons_Ffxhap.settings.custom_button_text",
-   "en": "Begin your 60-Day rhythm",
-   "sha1": "92ce2ede86d17f46472beb6c9f49ed3792ce0d73",
-   "status": "approved",
+   "en": "Begin your 60-Day Rhythm",
+   "sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 21 Oct: Victor, 'Rhythm' with a capital R as every CTA (global coordinator; template on karmicare/soft-launch-global)",
    "setting_type": "text",
    "section_type": "featured-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Begin your 60-Day rhythm",
+   "old_sha1": "92ce2ede86d17f46472beb6c9f49ed3792ce0d73"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_1",
