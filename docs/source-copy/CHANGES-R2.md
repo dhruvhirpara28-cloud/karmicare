@@ -172,3 +172,11 @@ Victor (21 Oct): every CTA names the plan the PDP sells, *Rhythm*, not *Ritual*.
 |---|---|---|---|---|
 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1`, `index:two_formulas_karmicare/button_label`, `index:product_benefits_karmicare_bcQ6tp/button_label` | BEGIN YOUR 60-DAY RITUAL | BEGIN YOUR 60-DAY RHYTHM | BEGIN JE 60-DAGENRITME | COMMENCER VOTRE RYTHME 60 JOURS |
 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | Begin your 60-day ritual | Begin your 60-Day Rhythm | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |
+
+## 21 Oct: PDP end button "Rhythm"
+
+Victor (21 Oct, via the landing desk and the global coordinator): the button at the bottom of the PDP says *Rhythm* with a capital R, as every other CTA. One EN string in `batch-02-pdp` changed (`corrected`, `old_en` kept); NL and FR stay. `batch-02-pdp` digest `e3e79339215ffcf134b6813f1b46310a1c380fc8` → `87edec28e25fcae4bdef2adf127d761b0a725bc4`; every other digest unchanged. The template (`templates/product.subscription-item.json`) follows on `karmicare/soft-launch-global`.
+
+| Id | Before | Now | NL | FR |
+|---|---|---|---|---|
+| `product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text` | Begin your 60-Day rhythm | Begin your 60-Day Rhythm | Begin je 60-dagenritme | Commencer votre Rythme 60 jours |

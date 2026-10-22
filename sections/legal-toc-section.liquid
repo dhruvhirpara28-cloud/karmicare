@@ -161,8 +161,8 @@
           </div>
         </aside>
 
-        {%- comment -%} CONTENT {%- endcomment -%}
-        <main class="legal-toc__content">
+        {%- comment -%} CONTENT: a div, the layout's <main> already wraps the page (one main landmark) {%- endcomment -%}
+        <div class="legal-toc__content">
           {% for block in section.blocks %}
             {% assign target_id = 'LegalToc-' | append: section.id | append: '-section-' | append: block.id %}
 
@@ -198,7 +198,7 @@
               {% endif %}
             </article>
           {% endfor %}
-        </main>
+        </div>
       </div>
     {% else %}
       <div class="legal-toc__empty">Add a content section from the Theme Editor.</div>
