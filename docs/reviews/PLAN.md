@@ -6,6 +6,7 @@
 | Date | Change |
 |------|--------|
 | 2026-10-22 | Phase 1: theme inventory, live storefront read (two pages, one fetch each), Judge.me settings as the live page prints them, Figma frames on "Production Design 20.10.2026", claims list, decisions D-1 to D-5 for Victor. No theme code. |
+| 2026-10-22 | Second read-only storefront pass on the landing desk's request (Victor: "wij hebben toch in Judge.me al onze gezamenlijke reviews geupload?"): §1.5 and §7 items 2, 3 and 8. D-1 and D-2 unchanged. |
 
 Everything marked **verified** was read today from the repo at fe6367a, from the live storefront HTML (`karmicares.myshopify.com`, theme `karmicare/main` id 187295564157, Dawn 15.5.0; homepage and `/products/karmicare-biorhythmic-oral-care-system`, fetched once each, plus `/pages/reviews`), from Judge.me's loader script, or from Figma `3rOMJvQZTzyYjnCV6oggV3` read-only. Everything marked *unverified* needs the Judge.me admin or a rendered dev theme (§7), neither of which this lane may touch or had yet.
 
@@ -71,6 +72,22 @@ App block handles: `judgeme_core`, `cart_drawer_widget` and `preview_badge` are 
 | Homepage hero badge | (a) shop-wide Judge.me rating + count · (b) Duo product rating + count · (c) none |
 | PDP strip | (a) Duo product rating + count (as built) · (b) shop-wide, the same figure as the hero · (c) Judge.me preview badge block |
 | Review section | Judge.me review widget (one product's reviews) · Judge.me all-reviews widget (every product) |
+
+### 1.5 Second storefront pass (22 Oct, read-only, on the landing desk's request)
+
+Victor's question, verbatim: "wij hebben toch in Judge.me al onze gezamenlijke reviews geupload?" What the live storefront gives away without admin access or login (same two saved pages as §1.1, plus four route probes 3 s apart):
+
+| Check | Homepage | PDP (Duo) |
+|-------|----------|-----------|
+| Judge.me scripts | `loader.js` (defer), inline `jdgmSettings`, inline bootstrap | same |
+| Judge.me elements in the DOM (`jdgm-prev-badge`, `jdgm-preview-badge`, `jdgm-widget`, `jdgm-review-widget`, `jdgm-all-reviews-*`) | **none**; the class names occur only inside Judge.me's CSS and settings | same |
+| `data-number-of-reviews` / `data-average-rating` on an element | none; the only hit is Judge.me's CSS rule `.jdgm-prev-badge[data-average-rating='0.00']{display:none}` | none |
+| JSON-LD | Organization, WebSite, Product: no `aggregateRating`, `ratingValue`, `reviewCount` | Organization + Product (offer €67.00, SKU KC-DUO-002, GTIN 05419980169303): no `aggregateRating`. The theme's own JSON-LD (`sections/main-product.liquid` L893) never adds one, and Judge.me's rich-snippet injection is absent |
+| A review count anywhere in the HTML | only the hard-coded hero "4.8 (234)" | none; the strip prints the artwork without the rating span |
+| Judge.me settings carrying a count or an identifier | none. `widget_rating_metafield_value_type` is true (Judge.me writes Shopify's `reviews.rating` in the standard rating format for products that have reviews). No shop domain, shop id or token in the settings, so Judge.me's widget API cannot be queried from outside | same |
+| All-reviews routes | `/pages/reviews` 404 · `/pages/all-reviews` 404 · `/apps/judgeme` 404 (0 bytes: no app proxy at that path) · `/apps/judgeme/reviews` 404 · `judge.me/reviews/karmicares` unreachable from the sandbox (timeout) | — |
+
+Reading: the storefront shows **no review data at all**, from Judge.me or anyone else. For the Duo product that means one of three things, and the HTML cannot tell which: Judge.me holds no published reviews on that product (then it writes no `reviews.rating` metafield and no rich snippet), the metafield sync is off, or the live block's `show_rating` is off. For the shop total nothing is printed anywhere. So "all our reviews are in Judge.me" can neither be confirmed nor denied from outside; it is a Judge.me-admin question (§7, items 2, 3 and 8). What is known: 238 rows were imported on 11 Sep 2026 from bol.com; whether the Google Business Profile reviews (5.0 / 24) were imported as well is not visible from the storefront.
 
 ## 2. Hero badge (`sections/hero-karmicare.liquid`, block `testimonial_badge`)
 
@@ -171,12 +188,13 @@ Today the widget strings are English on every locale ("Verified", "Write a revie
 ## 7. Victor's checks and switches (Judge.me admin and theme editor; not for this lane)
 
 1. **Now, on the live theme**: blank the hero badge's "Rating Text" in the editor (Hero · Professionals Badge) so "4.8 (234)" stops showing before Phase 2 lands. Admin write, so Victor's.
-2. **Judge.me → Reviews**: on which product do the 238 imported bol.com reviews sit (Duo, Awake, Asleep, no product)? This decides (a) versus (b) in D-2 and D-3.
-3. **Judge.me → Settings**: are Shopify product metafields (`reviews.rating`) and the shop metafields (`judgeme.all_reviews_*`) being written? If the Phase 2 dev theme renders them empty while reviews exist, this is the switch to look at.
+2. **Judge.me → Reviews, filtered per product**: on which product do the published reviews sit (Duo, Awake, Asleep, no product), how many are published versus hidden or pending, and what is each review's source (bol.com import, Google, a Judge.me request email)? The storefront shows no review data at all (§1.5), so the assumption that all joint reviews are in Judge.me cannot be checked from outside. This decides (a) versus (b) in D-2 and D-3.
+3. **Judge.me → Settings, Shopify integration**: is the sync of reviews to Shopify's product metafields (`reviews.rating`, `reviews.rating_count`) on, and are the shop-wide `judgeme.all_reviews_rating` / `all_reviews_count` metafields being written? The live PDP prints no product rating and no rich snippet; the Phase 2 dev theme renders both metafields first and reports what comes back.
 4. **Judge.me → transparency badges**: turn on "Review collected from another provider" so imported reviews are labelled (off today).
 5. **Judge.me → translations**: NL and FR widget strings (D-5 b).
 6. **Claims owner**: §5 list; decide which reviews stay published.
 7. **Theme editor, after Phase 2**: add nothing; the app block arrives in the template JSON from this lane. Only the block handle has to be confirmed first (read it once under "Add block → Apps").
+8. **Google reviews**: are the Google Business Profile reviews (5.0 / 24) in Judge.me too (imported or collected through Judge.me's Google connection), or is only the bol.com import there? This decides whether the "Google" source word in the Figma cards can ever render, and whether the shop-wide number includes them.
 
 ## 8. Phase 2 build plan (after Victor's "ja")
 
