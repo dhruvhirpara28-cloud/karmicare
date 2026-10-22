@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "77ced0a63981",
+  "en-source.json": "0014eb24daa0",
   "registered.json": "7967afaaf3d3",
   "holds.json": "7e1947d1b3c4",
   "releases.json": "356c3948eb85",
@@ -16,7 +16,7 @@
  },
  "batches": {
   "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "55340f9dc6dd5f8865fc1093937c727c0f1a3045",
+  "batch-02-pdp": "af27d13827f435e009e7e24815fa510469f0c3ee",
   "batch-03-header-footer": "d8fb1b30ea2f5be901b89205707d850a3f458452",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
@@ -6578,24 +6578,6 @@
       "drafted": true,
       "registered": false
      }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description",
-     "kind": "direct",
-     "key": "description",
-     "field": "selling_plan.712155431293.description",
-     "en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
-     "en_sha1": "c3da84bc2ef4bf463784e81ad1d8a0d19185bcd4",
-     "value": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> de Care Credit reversé sur votre compte\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">L’année Karmicare rapporte 20 % de Return on Care — 2× le taux du Rythme 60 jours — en Care Credit, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      40 € de récompense contrôle dentaire\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos par an</strong> (3 maintenant, 3 au 6e mois)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> de Care Credit</strong> <span>reversés sur vos commandes</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Offrir, suspendre ou résilier</strong> à tout moment</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Satisfait ou remboursé 60 jours</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Prix membre à l’abri de l’inflation</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Kit de bienvenue offert</strong> (à la 1re commande) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> de valeur · offert</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
-     "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
-     "how": "GID from the inventory id",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
     }
    ]
   },
@@ -10157,22 +10139,6 @@
      }
     },
     {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10",
-     "kind": "match",
-     "key": null,
-     "field": "custom.compare_table|shop.metaobjects.compare_value#10",
-     "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-     "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-     "value": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
-     "gates": [],
-     "hold": [],
-     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#11",
      "kind": "match",
      "key": null,
@@ -10580,22 +10546,6 @@
      "en": "€0.49",
      "en_sha1": "b9ceb39480ce1b12b254e2b4310f7b03fbc1f6fb",
      "value": "0,49 €",
-     "gates": [],
-     "hold": [],
-     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing",
-     "kind": "match",
-     "key": null,
-     "field": "shop.metaobjects.compare_value:year.cost_per_brushing",
-     "en": "€0.42",
-     "en_sha1": "2f9086614ad1ee5b4fc8e07ec9db75e8ac201c42",
-     "value": "0,42 €",
      "gates": [],
      "hold": [],
      "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",

@@ -278,6 +278,8 @@ By resource, NL: `templates/index.json` 135, `templates/product.subscription-ite
 
 **Claims released for publication (22 Oct, Victor).** `registration/releases.json` releases the `pending-claim-review` gate (review later, in all three languages). Plan first wave after the rebuild: NL 600 (was 500), FR 581 (was 484); metaobject fields still need the routing fix.
 
+**Released claims registered (22 Oct 2026).** After Astra R26 Victor wrote the claim-release batch: NL 19:54 CEST, checksum `3eb0d1a95500b9c6`, 62 keys confirmed in 12 chunks; FR, checksum `17fb04ffe2dc0b54`, 58 keys confirmed. Both journals end cleanly. Registered today in total: NL 346, FR 277. Plans rebuilt afterwards with the admin edits of 22 Oct.
+
 ## Part 4 · URL and selector baseline (H10)
 
 **Method.** Captured 19 Oct 2026, 22:04 UTC (429 re-check 22:45 UTC), on `karmicares.myshopify.com`.
