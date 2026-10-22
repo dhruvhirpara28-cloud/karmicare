@@ -7,6 +7,7 @@
 |------|--------|
 | 2026-10-20 | First plan: card spots, claim status, candidates, rendered size, decisions B-0 to B-5. No code. |
 | 2026-10-21 | SCI-R2 fixes (F1–F6): eligibility per file, V3 08 no longer an interim, release gates G1–G4, claims dependencies C61/C63/C68, corrected crop and box sizes, decisions B-1 to B-7 with single-meaning tokens and owners, K4/K5 recorded as operative. |
+| 2026-10-22 | SCI-R2 recheck: B-6 applies only with B-5 = `noot`; staging on the branch preview separated from release, G4 checked after staging. |
 
 Branch `karmicare/science-imagery` from `origin/mearchant-edit` `61d59bc` (= live). Lane brief: `.coordinator/BRIEF-COORDINATOR.md`. Local review page with thumbnails: `.coordinator/out/review/index.html` (published copy: `http://127.0.0.1:8790/review/science/`).
 
@@ -91,14 +92,14 @@ Vano measured cold-air and tactile sensitivity, not deposits in tubules; any fut
 
 ## Release gates for any AI-generated image
 
-An eligible image goes into the templates only when all four hold. Until then the card stays without an image.
+Two steps. **Staging**: once Victor has picked an eligible image (B-1) and uploaded it to Files with the B-7 alt decision, this lane sets it in the branch templates and pushes the unpublished branch preview, so G4 can be checked on the real render. **Release**: the branch is ready to land only when G1–G4 all hold and the landing desk has confirmed the claims dependencies below on both templates. If G1 or G3 is still open at landing time, the image line goes back to empty (no image) before "Ready to land".
 
 | Gate | What | Owner | State |
 |---|---|---|---|
 | G1 | Visible disclosure: wording approved by Victor (B-4) and placed (B-5) | Wording: Victor. Placement and edit: claims lane | `[NEEDS APPROVED COPY]` |
 | G2 | Accessible image text decided (B-7). `image_tag` outputs the image's alt text from Shopify Files, so it is set on upload | Victor (in Files) | open |
 | G3 | Old 01 dental gate: written close-out by a dentist (B-3 `expert`), or Victor's recorded owner exception (B-3 `uitzondering`) with the expert verdict still open | Expert / Victor | open |
-| G4 | In-context check of the actual desktop and mobile crop with the final badge state, on the branch preview | This lane | after build |
+| G4 | In-context check of the actual desktop and mobile crop with the final badge state, on the staged branch preview (the crop arithmetic below does not satisfy it) | This lane | after staging |
 
 ## Claims dependencies before release
 
@@ -129,12 +130,12 @@ Each token has one meaning. Files marked held or rejected above are not options.
 
 | Id | Question | Tokens | Recommendation |
 |---|---|---|---|
-| B-1 | Lei card image (home + PDP) | `v3` = V3 01, goes on once G1–G4 are met (no image until then) · `geen` = no image | **v3** |
+| B-1 | Lei card image (home + PDP) | `v3` = V3 01: staged on the branch preview after upload, released only when G1–G4 are met (otherwise no image at landing) · `geen` = no image | **v3** |
 | B-2 | Vano card image (home + PDP) | `geen` = no image now, no further step · `geen+v4` = no image now, and ask the brand repo for a reference-grounded refinement of 07 for dental/histology review | **geen+v4** |
 | B-3 | Old 01 dental gate (G3) | `expert` = ask a dentist for a written close-out of V3 01 first · `uitzondering` = publish V3 01 with the approved label as an owner exception; the expert verdict stays open and is recorded in REPORT.md | **expert** (a face-only image is a short check) |
 | B-4 | Disclosure wording (G1) | `1okt` = approve the 1 Oct proposal "AI-generated scientific illustrations. Not study photographs or measured before-and-after results." · `anders` = you give other wording | **1okt** |
 | B-5 | Disclosure placement (G1) | `noot` = once in the section note (claims lane, with C68) · `badge` = on each image card's badge (claims lane) | **noot** |
-| B-6 | Lei badge `SLEEP · AIRWAY AND ORAL CAVITY` | `leeg` = claims lane empties it · `herschrijf` = claims lane proposes new wording for your approval (with B-5 = `badge` the badge carries the disclosure instead) | **leeg** |
+| B-6 | Lei badge `SLEEP · AIRWAY AND ORAL CAVITY`. **Only answered when B-5 = `noot`**; with B-5 = `badge` the Lei badge always carries the B-4 disclosure and B-6 does not apply | `leeg` = claims lane empties it · `herschrijf` = claims lane proposes new wording for your approval | **leeg** |
 | B-7 | Accessible image text (G2) | `leeg` = empty alt in Files: decorative, the card text carries the meaning · `tekst` = you give alt text per image | **leeg** |
 
 One-line answer, for example: `BEELDEN: B-1=v3, B-2=geen+v4, B-3=expert, B-4=1okt, B-5=noot, B-6=leeg, B-7=leeg`.
