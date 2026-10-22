@@ -351,6 +351,15 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   }
 }
 
+/* Bold in body copy is Proxima Nova Semibold (--font-body-weight-bold = 600, layout/theme.liquid),
+   as the Figma Text/* (Strong) styles; the browser default "bolder" would give 700. Headings are
+   left out so they keep their own rules (h2 strong below, the two-tone .kc-surface rule, Marlide
+   at 300). A rule that sets its own weight on b/strong (buybox, compare table) still wins. */
+b:not(:where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *),
+strong:not(:where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *) {
+  font-weight: var(--font-body-weight-bold);
+}
+
 h1,
 h2,
 h3,
