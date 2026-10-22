@@ -4,9 +4,9 @@
 
 ## Status 22 Oct
 
-merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
+merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
 
-**Counts (40 rows):** In merchant-edit 11 · Ready to land 4 · In progress 4 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
+**Counts (40 rows):** In merchant-edit 15 · Ready to land 0 · In progress 4 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
 
 | Id | Status | Proof / note |
 |---|---|---|
@@ -41,8 +41,8 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
 | LY-03 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
 | TY-01 (G-7) | In progress | Child global-type (status 22 Oct, not committed yet). Done: the `b`/`strong` rule in `assets/base.css` (headings excluded); `--font-body-weight-bold` = `var(--font-600-weight)` in `layout/theme.liquid`; the dead `body_font_weight` removed from `config/settings_schema.json`; Theme Check 0 errors. "Before" measured at 700. Open: the rendered "after" check on preview `189947838845` (390/1440, Day/Night, EN/NL/FR, cart drawer), then one commit and Ready to land. |
-| A11Y-01, A11Y-02, A11Y-03 (3 rows) | Ready to land | `361a06c`, inside `466f1b9`, reported 21 Oct. The landing desk lands it with source-copy `6500a4a` after the FR follow-up. Astra R19: no regression. |
-| PDP end CTA "Begin your 60-Day Rhythm" | Ready to land | `361a06c`, as above |
+| A11Y-01, A11Y-02, A11Y-03 (3 rows) | In merchant-edit | `361a06c`, landed with `a8f931d`, source-copy `59c281e` and FR `e883509` (integration `7b8d33c`, merchant-edit `2ef9b5c`). Astra R19: no regression. On :9298, EN, NL and FR return 200, the legal pages have one `main`, and the filter ids are scoped per position. |
+| PDP end CTA "Begin your 60-Day Rhythm" | In merchant-edit | `361a06c`, as above |
 | LC-01, LC-02, LC-03, LC-04 (4 rows, G-9) | Waiting for Victor | Country selector bugs (question 2) |
 | Button capitals (G-8, `BUTTON-CASE.md`) | Waiting for Victor | Question 1 |
 
@@ -109,6 +109,7 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | 2026-10-21 | Built A11Y-01 (shop name as hidden link text, SVG `aria-hidden`), A11Y-02 (filter ids scoped per `localPosition`), A11Y-03 (legal TOC `main` → `div`); PDP end button "Begin your 60-Day Rhythm" (template; EN source row requested from source-copy). |
 | 2026-10-21 | Astra R19 on `361a06c`: no regression. Added LC-01..LC-04 (older country-selector keyboard and id bugs, R19-02..05) as G-9. Report: `global-nav/docs/runtime-review/R19-GLOBAL-A11Y-ASTRA.md`. |
 | 2026-10-22 | Added the "Status 22 Oct" block: one status per row against merchant-edit `31407fb`, the counts, and the 8 open questions for Victor in words. New ids: G-8 (button capitals), G-10 (CK-04 and LY-03), G-11 (HD-04). No theme change. |
+| 2026-10-22 | A11Y-01..03 and the PDP end CTA moved to In merchant-edit (`361a06c` landed, merchant-edit `2ef9b5c`). Counts: In merchant-edit 15, Ready to land 0. |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
