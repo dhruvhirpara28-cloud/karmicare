@@ -30,7 +30,6 @@
     assign footer_text = section.settings.footer_text
   -%}
 
-  {%- comment -%} KC design (Figma 3391:12660): the info icon is Figma's 16px "Interface" glyph {%- endcomment -%}
   {%- capture kc_info_icon -%}
     <svg class="pc-info-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10.6667V8M8 5.33333H8.00667M14.6667 8C14.6667 11.6819 11.6819 14.6667 8 14.6667C4.3181 14.6667 1.33333 11.6819 1.33333 8C1.33333 4.3181 4.3181 1.33333 8 1.33333C11.6819 1.33333 14.6667 4.3181 14.6667 8Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
   {%- endcapture -%}
@@ -50,7 +49,6 @@
       </div>
 
       <div class="pc-table">
-        <!-- LABEL COLUMN -->
         <div class="pc-col pc-col-label">
           <div class="pc-lhead">
             <span class="pc-lhead-tag">{{ 'kc.plans.compare' | t }}</span>
@@ -71,10 +69,6 @@
               {%- if is_welcome_kit -%}
                 <span class="pc-kit">
                   <span>{{ row.label.value | default: row.label }}</span>
-                  {%- comment -%}
-                    The kit products and their value: the theme setting "Welcome Kit free products", what the
-                    cart adds, never the row's own product list (snippets/kc-kit-value.liquid)
-                  {%- endcomment -%}
                   {%- if settings.welcome_kit_free_product != blank -%}
                     <span aria-hidden="true" class="pc-kit-thumbs">
                       {%- for prod_item in settings.welcome_kit_free_product -%}
@@ -146,7 +140,30 @@
                   {%- endif -%}
                 </span>
               {%- else -%}
-                {{ row.label.value | default: row.label }}
+                {%- liquid
+                  assign row_display_label = row.label.value | default: row.label
+                  if row_display_label contains '€'
+                    assign euro_parts = row_display_label | split: '€'
+                    for ep in euro_parts
+                      if forloop.first
+                        continue
+                      endif
+                      assign ep_num = ep | strip | plus: 0
+                      if ep_num > 0
+                        assign ep_cents = ep_num | times: 100 | round
+                        capture ep_money
+                          echo '<span class="kc-currency-eur" data-kc-eur="' | append: ep_num | append: '">'
+                          render 'kc-money', cents: ep_cents, trim: true
+                          echo '</span>'
+                        endcapture
+                        assign ep_target_sp = '€ ' | append: ep_num
+                        assign ep_target_no = '€' | append: ep_num
+                        assign row_display_label = row_display_label | replace: ep_target_sp, ep_money | replace: ep_target_no, ep_money
+                      endif
+                    endfor
+                  endif
+                -%}
+                {{ row_display_label }}
                 {%- if row.tooltip.value != blank -%}
                   <span class="info-tip">
                     {%- if kc -%}
@@ -155,11 +172,34 @@
                       <span aria-hidden="true" class="info-icon">i</span>
                     {%- endif -%}
                     <span class="info-tip-popover" role="tooltip">
-                      {%- if row.tooltip.type == 'rich_text_field' -%}
-                        {{ row.tooltip | metafield_tag }}
-                      {%- else -%}
-                        {{ row.tooltip.value | default: row.tooltip }}
-                      {%- endif -%}
+                      {%- liquid
+                        if row.tooltip.type == 'rich_text_field'
+                          assign row_tip_text = row.tooltip | metafield_tag
+                        else
+                          assign row_tip_text = row.tooltip.value | default: row.tooltip
+                        endif
+                        if row_tip_text contains '€'
+                          assign euro_tip_parts = row_tip_text | split: '€'
+                          for ep in euro_tip_parts
+                            if forloop.first
+                              continue
+                            endif
+                            assign ep_num = ep | strip | plus: 0
+                            if ep_num > 0
+                              assign ep_cents = ep_num | times: 100 | round
+                              capture ep_money
+                                echo '<span class="kc-currency-eur" data-kc-eur="' | append: ep_num | append: '">'
+                                render 'kc-money', cents: ep_cents, trim: true
+                                echo '</span>'
+                              endcapture
+                              assign ep_target_sp = '€ ' | append: ep_num
+                              assign ep_target_no = '€' | append: ep_num
+                              assign row_tip_text = row_tip_text | replace: ep_target_sp, ep_money | replace: ep_target_no, ep_money
+                            endif
+                          endfor
+                        endif
+                      -%}
+                      {{ row_tip_text }}
                     </span>
                   </span>
                 {%- endif -%}
@@ -169,31 +209,20 @@
           <div class="pc-lcta"></div>
         </div>
 
-        <!-- PLAN COLUMNS -->
         {%- for plan in plans -%}
           {%- if plan.hide_plan.value == true -%}{%- continue -%}{%- endif -%}
           {%- liquid
             assign plan_handle = plan.handle_item.value | default: plan.handle_item
             assign plan_title = plan.title.value | default: plan.title
-
-            # handle_item 'once', 'one-time' or 'one time' (any case) is the Try Once card: one time,
-            # straight to checkout. Any other card buys its selling_plan_id straight to checkout, by ID
-            # only; a missing or wrong ID buys nothing (it never falls back to one time).
-            # handle_item and selling_plan_id are keys and must not be translated. Should handle_item be
-            # translated anyway, a card without a selling_plan_id whose own entry handle (never
-            # translated, e.g. "try-onceonce") says once still counts as the Try Once card.
-            # selling_plan_name is no longer read: plans are matched by ID, not by name.
             assign plan_raw_id = plan.selling_plan_id.value | default: plan.selling_plan_id | append: '' | strip
             assign plan_kind = plan_handle | downcase | replace: '-', ' ' | strip
             assign plan_entry_kind = plan.system.handle | downcase | replace: '-', ' '
             assign plan_is_once = false
-            assign plan_once_by_entry = false
             if plan_kind == 'once' or plan_kind == 'one time'
               assign plan_is_once = true
             elsif plan_raw_id == blank
               if plan_entry_kind contains 'once' or plan_entry_kind contains 'one time'
                 assign plan_is_once = true
-                assign plan_once_by_entry = true
               endif
             endif
 
@@ -205,13 +234,10 @@
             endunless
             assign plan_selling_plan_id = plan_raw_id
             assign plan_group_id = ''
-            assign plan_group_name = ''
             if plan_resolved != blank
               assign plan_resolved_parts = plan_resolved | split: '|'
               assign plan_selling_plan_id = plan_resolved_parts[0]
               assign plan_group_id = plan_resolved_parts[1]
-              assign plan_group_prefix = plan_selling_plan_id | append: '|' | append: plan_group_id | append: '|'
-              assign plan_group_name = plan_resolved | remove_first: plan_group_prefix
             endif
           -%}
           <div
@@ -301,7 +327,6 @@
             {%- for row in rows -%}
               {%- if row.show_row.value == false -%}{%- continue -%}{%- endif -%}
 
-              {%- comment -%} Find matching Compare Value cell {%- endcomment -%}
               {%- assign cell_value = null -%}
               {%- for val in shop.metaobjects.compare_value.values -%}
                 {%- assign val_plan = val.compare_plan.value -%}
@@ -367,15 +392,8 @@
               </div>
             {%- endfor -%}
 
-            <div
-              class="pc-ctacell center"
-              {% if request.design_mode %}
-                style="position: relative;"
-              {% endif %}
-            >
+            <div class="pc-ctacell center">
               {%- liquid
-                # The button's accessible name: its visible label, plus the plan title when the label
-                # does not say it ("Begin" -> "Begin The Karmicare Year"), since it buys at once (R14 F3)
                 assign plan_cta_label = plan.cta_button.value | default: plan.cta_button | default: 'Choose plan'
                 assign plan_cta_label_id = 'pc-cta-' | append: section.id | append: '-' | append: forloop.index
                 assign plan_cta_named_by = plan_cta_label_id
@@ -404,56 +422,6 @@
                 <span id="{{ plan_cta_label_id }}">{{ plan_cta_label }}</span>
                 {%- render 'kc-plan-spinner' -%}
               </button>
-              {%- if request.design_mode -%}
-                {%- comment -%}
-                  Theme editor only: what this button buys, hung below the button so the table keeps
-                  its row heights
-                {%- endcomment -%}
-                <div style="position: absolute; top: 100%; left: 0; right: 0; z-index: 2; padding: 0 0.8rem; font-size: 1.2rem; line-height: 1.4;">
-                  {%- if plan_is_once -%}
-                    <p style="margin: 0;">
-                      {%- if plan_once_by_entry %}
-                        <span style="color: #b42318;">
-                          handle_item "{{ plan_handle | escape }}" looks translated; read as once from the entry handle
-                          "{{ plan.system.handle | escape }}"
-                        </span>
-                        <br>
-                      {%- endif %}
-                      handle_item "{{ plan_handle | escape }}" → one time, no selling plan, straight to checkout ✓ <br>
-                      handle_item and selling_plan_id are keys: never translate them in Translate &amp; Adapt ("once"
-                      stays "once" in every language)
-                    </p>
-                  {%- elsif plan_group_id != blank -%}
-                    {%- capture plan_loyalty_key -%}
-                      {%- render 'kc-plan-loyalty', product: product, plan_id: plan_selling_plan_id -%}
-                    {%- endcapture -%}
-                    <p style="margin: 0;">
-                      Plan-ID {{ plan_selling_plan_id }} → {{ plan_group_name | escape }}, straight to checkout ✓
-                      {%- if plan_loyalty_key != blank %}
-                        <br>
-                        Subscription Name "{{ plan_loyalty_key | escape }}" (Care Credit) ✓
-                      {%- else %}
-                        <br>
-                        <span style="color: #b42318;"
-                          >no Subscription Name: orders on this plan earn no Care Credit</span
-                        >
-                      {%- endif %}
-                      <br>
-                      selling_plan_id and handle_item are keys: never translate them in Translate &amp; Adapt
-                    </p>
-                  {%- else -%}
-                    {%- capture plan_public_ids -%}{%- render 'kc-plan-public', product: product -%}{%- endcapture -%}
-                    <div
-                      role="note"
-                      style="padding: 0.6rem 0.8rem; border: 2px solid #b42318; border-radius: 8px; background: #fef3f2; color: #b42318; text-align: left;"
-                    >
-                      Plan-ID "{{ plan_raw_id | escape }}" is not a selling plan of this product: this button buys
-                      nothing. Set selling_plan_id to one of:
-                      {%- render 'kc-plan-editor-list', product: product, public_plans: plan_public_ids -%}
-                    </div>
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
             </div>
           </div>
         {%- endfor -%}
@@ -467,13 +435,8 @@
     </div>
   </div>
 
-  {%- comment -%}
-    The plan buttons (data-kc-plan-choose) buy their selling plan, or one time, straight to checkout
-    (Victor, 20 Oct): assets/kc-plan-select.js, loaded in layout/theme.liquid.
-  {%- endcomment -%}
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Tooltip handling to ensure only one shows at a time on mobile
       const tooltips = document.querySelectorAll('.info-tip, .pc-kit');
 
       tooltips.forEach((tooltip) => {
@@ -497,6 +460,31 @@
           }
         }
       });
+
+      // Update static EUR values by the live Shopify currency exchange rate
+      const rate = parseFloat(window.Shopify && window.Shopify.currency && window.Shopify.currency.rate);
+      if (rate && rate !== 1) {
+        document.querySelectorAll('.kc-currency-eur[data-kc-eur]').forEach(function (el) {
+          const eur = parseFloat(el.getAttribute('data-kc-eur'));
+          if (!isNaN(eur) && eur > 0) {
+            const converted = Math.round(eur * rate);
+            const currency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '{{ localization.country.currency.iso_code | default: cart.currency.iso_code }}';
+            const shopifyLang = (window.Shopify && window.Shopify.locale) || '{{ localization.language.iso_code | default: request.locale.iso_code }}';
+            const shopifyCountry = (window.Shopify && window.Shopify.country) || '{{ localization.country.iso_code }}';
+            const locale = shopifyCountry ? (shopifyLang + '-' + shopifyCountry) : (navigator.language || shopifyLang);
+            try {
+              const formatter = new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: currency,
+                maximumFractionDigits: 0
+              });
+              el.textContent = formatter.format(converted);
+            } catch (e) {
+              el.textContent = converted + ' ' + currency;
+            }
+          }
+        });
+      }
     });
   </script>
 {%- endif -%}
