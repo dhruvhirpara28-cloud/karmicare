@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "2468bab432715f0aea7f7b6aea815a8f65f70721",
+ "digest": "55340f9dc6dd5f8865fc1093937c727c0f1a3045",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -219,14 +219,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-   "sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-   "status": "needs-review",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type textarea; Offer conflict: check-up proof is an appointment confirmation or invoice plus questionnaire, 'no dentist involvement is required' (offer source of truth, 5 Oct); this says 'verified by your dentist'.",
+   "notes": "type textarea; Offer conflict: check-up proof is an appointment confirmation or invoice plus questionnaire, 'no dentist involvement is required' (offer source of truth, 5 Oct); this says 'verified by your dentist'.; corrected 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; old_en kept",
    "setting_type": "textarea",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "old_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e"
   },
   {
    "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/testimonial_button_text",
@@ -461,14 +463,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-   "sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
-   "status": "needs-review",
+   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+   "sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; Offer conflict: 'confirmed by your dentist' (see the check-up tooltip).",
+   "notes": "type richtext; Offer conflict: 'confirmed by your dentist' (see the check-up tooltip).; corrected 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; old_en kept",
    "setting_type": "richtext",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+   "old_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1"
   },
   {
    "id": "product.subscription-item:main/info_card_FnBcaN/footer_text",
@@ -2979,11 +2983,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:995",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-   "sha1": "a532b1fc8759b80a92cdea9d82ec55439bd2d245",
-   "status": "needs-key",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account.",
+   "sha1": "e287ca857dbef857b8b2813e33f5f67c0be492f1",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230). Wording conflicts with the offer: check-up proof needs no dentist involvement"
+   "notes": "sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230). Wording conflicts with the offer: check-up proof needs no dentist involvement; corrected 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; old_en kept",
+   "old_en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
+   "old_sha1": "a532b1fc8759b80a92cdea9d82ec55439bd2d245"
   },
   {
    "id": "liquid:sections/main-product.liquid:1006",

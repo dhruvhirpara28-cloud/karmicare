@@ -68,7 +68,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 4. A fresh dry run.
 5. Its checksum and Victor's explicit yes (row 15); only then `--write`.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day; rows 26 and 53 for his dentist and slogan decisions.
 
 Task `task_427cfe23005d` (dispatch `ctx_505619d6c8e5`), brief `.coordinator/BRIEF-B4.md`. Nothing was registered, pushed or changed in Shopify.
 

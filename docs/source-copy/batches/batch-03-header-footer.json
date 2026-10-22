@@ -1,6 +1,6 @@
 {
  "batch": "batch-03-header-footer",
- "digest": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
+ "digest": "d8fb1b30ea2f5be901b89205707d850a3f458452",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -49,14 +49,16 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/footer-group.json",
    "key_path": "sections.footer.settings.slogan",
-   "en": "Your mouth has a rhythm So should your oral care",
-   "sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
-   "status": "needs-review",
+   "en": "Your mouth has a rhythm Now your oral care too",
+   "sha1": "cf53c7c990120ca7fc3384ca46404284062d6b39",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type inline_richtext; Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.",
+   "notes": "type inline_richtext; Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.; corrected 22 Oct: Victor 22 Oct: the slogan is 'Your mouth has a rhythm Now your oral care too', two sentences without a stop; old_en kept",
    "setting_type": "inline_richtext",
    "section_type": "footer",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Your mouth has a rhythm So should your oral care",
+   "old_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100"
   },
   {
    "id": "footer-group:footer/copyright_text",

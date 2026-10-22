@@ -95,6 +95,8 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 
 Not health claims, but customer-facing promises that the confirmed offer (5 Oct 2026) contradicts. Listed so translators do not lock them in.
 
+**22 Oct, Victor (S2, choice a):** the dentist clause is deleted from the PDP check-up tooltip, the sticky-bar `checkup_info` key and the Duo info card (EN corrected, NL follows). The compare-table tooltip and the Year selling-plan description are admin text and still carry it: Victor edits them in the admin.
+
 | Where | Text | Conflict |
 |---|---|---|
 | `header-group:announcement-bar/announcement-bar-0/text` | COMPLIMENTARY SHIPPING · 60-DAY MONEY-BACK GUARANTEE · BELGIAN-MADE | Memberships ship free and carry the 60-day guarantee; Try Once pays shipping and has a 14-day guarantee. Solved 21 Oct (Victor G-1): the line now says “… FOR MEMBERS”. |

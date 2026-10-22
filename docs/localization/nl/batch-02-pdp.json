@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "2468bab432715f0aea7f7b6aea815a8f65f70721",
+ "source_digest": "55340f9dc6dd5f8865fc1093937c727c0f1a3045",
  "source_entries": 477,
  "counts": {
   "pending-claim-review": 41,
@@ -208,12 +208,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-   "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-   "nl": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account. Preventie, beloond.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "en_sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+   "nl": "Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond.",
    "status": "translated",
    "flags": [],
-   "notes": "Offer conflict carried over from the EN ('verified by your dentist'); translated as written. Same wording in every check-up tooltip."
+   "notes": "Offer conflict carried over from the EN ('verified by your dentist'); translated as written. Same wording in every check-up tooltip.; 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; NL follows"
   },
   {
    "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/testimonial_button_text",
@@ -390,12 +390,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-   "en_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
-   "nl": "<p>Karmicare is een zorgsysteem, geen artikel uit het schap: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op. Met het Karmicare-jaar levert een afgeronde tandartscontrole — bevestigd door je tandarts — nog eens €40 op. Je stapt binnen met iets te winnen, niet alleen met iets te betalen. Zorg die terugkomt.</p>",
+   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+   "en_sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
+   "nl": "<p>Karmicare is een zorgsysteem, geen artikel uit het schap: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op. Met het Karmicare-jaar levert een afgeronde tandartscontrole nog eens €40 op. Je stapt binnen met iets te winnen, niet alleen met iets te betalen. Zorg die terugkomt.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: 'On the Year' → 'Met het Karmicare-jaar' (bare 'het jaar' reads as 'the year'). Offer conflict 'confirmed by your dentist' kept as written."
+   "notes": "TERM: 'On the Year' → 'Met het Karmicare-jaar' (bare 'het jaar' reads as 'the year'). Offer conflict 'confirmed by your dentist' kept as written.; 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; NL follows"
   },
   {
    "id": "product.subscription-item:main/info_card_FnBcaN/footer_text",
@@ -2345,14 +2345,14 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:995",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-   "en_sha1": "a532b1fc8759b80a92cdea9d82ec55439bd2d245",
-   "nl": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account.",
+   "en_sha1": "e287ca857dbef857b8b2813e33f5f67c0be492f1",
+   "nl": "Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account.",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": "Offer conflict carried over from the EN ('verified by your dentist')."
+   "notes": "Offer conflict carried over from the EN ('verified by your dentist').; 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; NL follows"
   },
   {
    "id": "liquid:sections/main-product.liquid:1006",
