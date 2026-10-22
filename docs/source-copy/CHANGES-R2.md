@@ -187,7 +187,7 @@ Victor changed ten admin texts on 22 Oct; the global coordinator read them back 
 
 - **The three Duo texts are already registered in FR**: Victor entered the FR himself in Translate & Adapt (live). Take the FR in the table into the FR payload as it is. `registration/registered.json` keeps them out of `plan-fr.json` whatever the payload says.
 - **The article's gated blocks stay gated** in FR as in NL: releasing them is Victor's decision.
-- The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` (`#b013`, `#b056`, `#b059`) was not edited.
+- The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited: Victor hid it and redirected it to `/blogs/news/nano-hydroxyapatite`. All 79 of its entries are `retired` (EN and digest unchanged). Hold them in FR; the plan leaves them out either way.
 
 | Id | Before | Now | NL | FR |
 |---|---|---|---|---|

@@ -153,6 +153,9 @@ def build(lang, payload, sources, registered=None):
         if src is None:
             skipped["not in the EN source (stale payload id)"] += 1
             continue
+        if src.get("retired"):
+            skipped["retired in the EN source"] += 1
+            continue
         done = registered.get(eid)
         if done and done["en_sha1"] == src["sha1"]:
             skipped["already registered by hand (registered.json)"] += 1

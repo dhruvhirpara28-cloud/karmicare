@@ -29,7 +29,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 25 | Waiting for Victor | Leen Ponet's quote (K7) | C83, homepage and PDP |
 | 28 | Waiting for Victor | regulatory.md wins over products.md (S4) | the clinical sources |
 | 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
-| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article; its twin article is hidden and redirected, so its 79 entries are retired. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
 | 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
 
 ### Waiting for Victor: the questions
