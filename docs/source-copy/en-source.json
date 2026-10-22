@@ -42,7 +42,7 @@
   },
   "batch-03-header-footer": {
    "entries": 41,
-   "digest": "d8fb1b30ea2f5be901b89205707d850a3f458452"
+   "digest": "742351732dabbbff2eff9cadc6858ba87284393a"
   },
   "batch-04-legal": {
    "entries": 974,
@@ -10806,11 +10806,11 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/footer-group.json",
    "key_path": "sections.footer.settings.slogan",
-   "en": "Your mouth has a rhythm Now your oral care too",
-   "sha1": "cf53c7c990120ca7fc3384ca46404284062d6b39",
+   "en": "Your mouth has a rhythm[[br]]Now your oral care too",
+   "sha1": "2d16442b381544eaac8df6e3b9e0f89522c1f3d8",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type inline_richtext; Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.; corrected 22 Oct: Victor 22 Oct: the slogan is 'Your mouth has a rhythm Now your oral care too', two sentences without a stop; old_en kept",
+   "notes": "type inline_richtext; Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.; corrected 22 Oct: Victor 22 Oct: the slogan is 'Your mouth has a rhythm Now your oral care too', two sentences without a stop; old_en kept; 22 Oct (Astra R27): the line break is the explicit marker [[br]] between the two sentences, rendered as <br> by sections/footer.liquid (global lane); words and no stop unchanged",
    "setting_type": "inline_richtext",
    "section_type": "footer",
    "rendered": true,
