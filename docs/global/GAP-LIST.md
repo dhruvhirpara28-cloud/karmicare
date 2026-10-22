@@ -85,6 +85,7 @@ merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so not
    - a. In the Admin menu `company`, point Shop Karmicare to `/products/karmicare-biorhythmic-oral-care-system` and Contact to `/pages/contact`. The theme then shows them as links instead of Coming soon.
    - b. Keep Coming soon.
    - **Advice: a.**
+   - **Victor, 22 Oct:** Articles links to the blog (`/blogs/news`) too; Victor makes the change in Admin. Note: those 9 posts are from 2024, and some of them (nootropics, "avoid fluoride", whitening) haven't been checked against the brand and cosmetic-claim rules.
 6. **Menu name (FT-09).** The footer item "Why use hydroxapatite" has a typo and contains the banned word "use".
    - a. Rename it in Admin to "Why hydroxyapatite".
    - b. Keep it.
