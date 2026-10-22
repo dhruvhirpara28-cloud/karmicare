@@ -4,9 +4,9 @@
 
 ## Status 22 Oct
 
-merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
+merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
 
-**Counts (40 rows):** In merchant-edit 11 · Ready to land 4 · In progress 4 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
+**Counts (42 rows):** In merchant-edit 15 · Done in Admin (live) 2 · Ready to land 0 · In progress 4 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
 
 | Id | Status | Proof / note |
 |---|---|---|
@@ -25,10 +25,19 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | FT-04 | In merchant-edit | `95b56d6` |
 | FT-05 | Parked / after launch | Handed to the Utopia lane; its report has the status |
 | FT-06 (G-2), theme part | In merchant-edit | `95b56d6`: `#` links show Coming soon |
-| FT-06, Admin links | Waiting for Victor | Shop Karmicare and Contact targets (question 5) |
+| FT-06, Admin links | Done in Admin (live) | Victor, 22 Oct. Read back on the storefront: Shop Karmicare → `/products/karmicare-biorhythmic-oral-care-system`, Contact → `/pages/contact`, Articles → `/blogs/news`. Why Karmicare and nHAp Technology stay `#`. They show Coming soon only once `95b56d6` (in merchant-edit) is live. |
 | FT-07 (G-3) | In merchant-edit | `4954820` |
 | FT-08 (G-4) | In merchant-edit | `4954820` |
-| FT-09 | Waiting for Victor | Menu name (question 6) |
+| FT-09 | Done in Admin (live) | Victor, 22 Oct: renamed to "Why hydroxyapatite", linked to the article `/blogs/news/nano-hydroxyapatite`. Victor edited the article the same day. Changed: the SEO title (typo fixed, keyword first), the meta description, and three decay/sensitivity sentences plus heading 4 (now "helps protect …"). Read back on the storefront. Victor approved it for publication as it is. The following were left in on his decision:
+- heading 3 "Reduces …"
+- in the intro: "medical marvel for better teeth, bones and overall health"
+- "chemicals that prevent natural healing"
+- "Swap fluoride for nano HAp"
+- "first discovered by NASA"
+- "nontoxic"
+
+Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` and added a URL redirect to `/blogs/news/nano-hydroxyapatite`. The redirect was tested on EN, `/nl` and `/fr` (all three redirect and return 200). |
+| LY-04 | Waiting for Victor | Page title suffix (question 9) |
 | FT-10 | Parked / after launch | Legal text is kept for launch |
 | FT-11 | In merchant-edit | "Belgian product" is in merchant-edit `sections/footer-group.json` (source-copy) |
 | FT-12 | In progress | Landing desk: registration |
@@ -36,13 +45,14 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | CK-01 | Parked / after launch | P2 capture. It needs a browser that hasn't given consent yet. |
 | CK-02 | Parked / after launch | The banner texts are set in Admin; check them with CK-01 |
 | CK-03 | Waiting for Victor | Klaviyo before consent (question 4) |
+| CK-05 (QA B-11) | Waiting for Victor | Adobe Fonts and a DatoCMS image load before consent (question 10) |
 | CK-04 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
 | LY-01 | Dropped | Not a gap |
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
 | LY-03 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
 | TY-01 (G-7) | In progress | Child global-type (status 22 Oct, not committed yet). Done: the `b`/`strong` rule in `assets/base.css` (headings excluded); `--font-body-weight-bold` = `var(--font-600-weight)` in `layout/theme.liquid`; the dead `body_font_weight` removed from `config/settings_schema.json`; Theme Check 0 errors. "Before" measured at 700. Open: the rendered "after" check on preview `189947838845` (390/1440, Day/Night, EN/NL/FR, cart drawer), then one commit and Ready to land. |
-| A11Y-01, A11Y-02, A11Y-03 (3 rows) | Ready to land | `361a06c`, inside `466f1b9`, reported 21 Oct. The landing desk lands it with source-copy `6500a4a` after the FR follow-up. Astra R19: no regression. |
-| PDP end CTA "Begin your 60-Day Rhythm" | Ready to land | `361a06c`, as above |
+| A11Y-01, A11Y-02, A11Y-03 (3 rows) | In merchant-edit | `361a06c`, landed with `a8f931d`, source-copy `59c281e` and FR `e883509` (integration `7b8d33c`, merchant-edit `2ef9b5c`). Astra R19: no regression. On :9298, EN, NL and FR return 200, the legal pages have one `main`, and the filter ids are scoped per position. |
+| PDP end CTA "Begin your 60-Day Rhythm" | In merchant-edit | `361a06c`, as above |
 | LC-01, LC-02, LC-03, LC-04 (4 rows, G-9) | Waiting for Victor | Country selector bugs (question 2) |
 | Button capitals (G-8, `BUTTON-CASE.md`) | Waiting for Victor | Question 1 |
 
@@ -85,6 +95,7 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
    - a. In the Admin menu `company`, point Shop Karmicare to `/products/karmicare-biorhythmic-oral-care-system` and Contact to `/pages/contact`. The theme then shows them as links instead of Coming soon.
    - b. Keep Coming soon.
    - **Advice: a.**
+   - **Victor, 22 Oct:** Articles links to the blog (`/blogs/news`) too; Victor makes the change in Admin. Note: those 9 posts are from 2024, and some of them (nootropics, "avoid fluoride", whitening) haven't been checked against the brand and cosmetic-claim rules.
 6. **Menu name (FT-09).** The footer item "Why use hydroxapatite" has a typo and contains the banned word "use".
    - a. Rename it in Admin to "Why hydroxyapatite".
    - b. Keep it.
@@ -93,6 +104,22 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
    - a. Keep Professionals. It matches the homepage section and "Request a practitioner sample".
    - b. Rename it to Atlas in the Admin menu.
    - **Advice: a**, unless Atlas is the newer name.
+9. **Page title suffix (LY-04).** `layout/theme.liquid:25` adds " – KARMICARE" to every title that doesn't already contain the shop name. The PDP SEO title is "Fluoride-Free Nano-Hydroxyapatite Toothpaste | Awake & Asleep", so the browser title becomes 73 characters, and Google cuts it around 60. Google already shows "Karmicare" as the site name above the result.
+   - a. Skip the suffix when the SEO title already has its own " | " brand part. One condition, in this lane.
+   - b. Keep it.
+   - **Advice: a.**
+10. **Third-party requests before cookie consent (CK-05, release-QA B-11).** Two requests reach another company before the visitor has answered the cookie banner. Neither is a tracking script.
+
+    **Fonts.** The Adobe Fonts stylesheet (Typekit kit `kss0igj`) is loaded on every page, live too (`layout/theme.liquid:389`). Adobe receives the visitor's IP address and the page.
+    - a. Keep it for the launch.
+    - b. Load the stylesheet only after consent. Until then, visitors see a fallback font and the page shifts when Proxima Nova arrives.
+    - c. Switch to fonts that Shopify hosts. Proxima Nova isn't in Shopify's library, so this changes the brand font.
+    - **Advice (QA): a.**
+
+    **Image.** The article `/blogs/news/nano-hydroxyapatite` loads one image from DatoCMS (`datocms-assets.com`), a host left over from the old site.
+    - a. Upload it to Shopify Files and replace the link in the article (Victor in Admin).
+    - b. Keep it.
+    - **Advice (QA): a.**
 8. **Phone logo (HD-04, G-11).** In Figma (393 px), the logo is on the left, with BEGIN NOW and the menu button on the right. The theme centres the logo (`mobile_logo_position: center`), and you tuned that nav on localhost (NV-07, NV-08).
    - a. Keep it centred.
    - b. Move the logo left with one setting in `header-group.json`. Dawn keeps the menu button on the left, so this only moves the logo.
@@ -109,6 +136,9 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | 2026-10-21 | Built A11Y-01 (shop name as hidden link text, SVG `aria-hidden`), A11Y-02 (filter ids scoped per `localPosition`), A11Y-03 (legal TOC `main` → `div`); PDP end button "Begin your 60-Day Rhythm" (template; EN source row requested from source-copy). |
 | 2026-10-21 | Astra R19 on `361a06c`: no regression. Added LC-01..LC-04 (older country-selector keyboard and id bugs, R19-02..05) as G-9. Report: `global-nav/docs/runtime-review/R19-GLOBAL-A11Y-ASTRA.md`. |
 | 2026-10-22 | Added the "Status 22 Oct" block: one status per row against merchant-edit `31407fb`, the counts, and the 8 open questions for Victor in words. New ids: G-8 (button capitals), G-10 (CK-04 and LY-03), G-11 (HD-04). No theme change. |
+| 2026-10-22 | A11Y-01..03 and the PDP end CTA moved to In merchant-edit (`361a06c` landed, merchant-edit `2ef9b5c`). Counts: In merchant-edit 15, Ready to land 0. |
+| 2026-10-22 | Victor changed the Company menu in Admin: FT-06 Admin links and FT-09 are done, read back on the storefront. The new PDP title and SEO fields were checked on the storefront (title, meta description, og:title, H1, JSON-LD). Added LY-04 (title suffix, question 9) and the rewrite note for the hydroxyapatite article. |
+| 2026-10-22 | Added CK-05 / G-12 from release-QA B-11 (Adobe Fonts and a DatoCMS image before consent; question 10, with QA's options). `theme.liquid:389` checked in merchant-edit `2ef9b5c`. |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
@@ -162,6 +192,7 @@ Priority: **P0** blocks the soft launch (wrong offer, dead link, privacy) · **P
 | LY-01 | Day/Night: `day-night-sun.js` renders inline on preview and live (`KCDayNight` present). | — | — | — | Not a gap (the 17 Oct formatter bug isn't in this branch). |
 | LY-02 | Page gutter: Dawn's 15 px on phones vs the 20 px token in the footer/clock (homepage TF-07). | `3027:20922` | P1 | Utopia lane | Handoff, already with Utopia. |
 | CK-03 | klaviyo.js loads on every page through a Shopify ScriptTag (`asyncLoad`, `window.onload`) with no consent check; not theme code (global-footer `PLAN.md` §1.4). | — | P0 | Victor (Klaviyo/Shopify admin), then this lane | Victor runs the cookie check in `PLAN.md` §8 item 8. If klaviyo.js or `__kla_id` arrive before consent: move Klaviyo onsite to the consent-aware app embed or remove the ScriptTag. |
+| CK-05 | Release-QA B-11: two third-party requests load before cookie consent. (1) The Adobe Fonts stylesheet `use.typekit.net/kss0igj.css` (`layout/theme.liquid:389`) loads on every page, live too. (2) A DatoCMS image (`datocms-assets.com`) loads in `/blogs/news/nano-hydroxyapatite`. Neither is a tracking script, but both send the visitor's IP address to a third party. | — | P1 | Victor (G-12), fonts in this lane, image in Admin | Question 10. Fonts: a keep for launch (QA advice), b load after consent, c Shopify-hosted fonts. Image: a move to Shopify Files and replace it in the article (QA advice, Victor in Admin), b keep. |
 | CK-04 | Open sticky card (PDP) and the consent panel overlap at 750/990/1200; the panel drops to z-index 199 below the card instead of moving (`assets/kc-cookie-preferences.css:281`). Inherited, not NV-13 (R16). | — | P2 | this lane | Follow-up: place or hide the panel against the open card's height instead of stacking only. |
 | TY-01 | Bold in body copy renders 700; Figma "Text/* (Strong)" is Semibold 600 (Text/Medium (Strong) `038b709c…`, hero subtext V15 `2928:19894`). `assets/base.css` sets no weight for `b`/`strong` (browser "bolder" = 700; Typekit `kss0igj` serves 600 and 700), and `layout/theme.liquid:195` sets `--font-body-weight-bold` = body + 300 = 700 (read by `base.css:2960`, `component-cart-items.css:273/:319`, `component-disclosures.css:59/:130`). Setting `body_font_weight` (`settings_schema.json:245`) is read nowhere. From the homepage lane, verified here. | `2928:19894` | P1 | Victor (G-7), then a child | **G-7** (a) `b`/`strong` in body copy and `--font-body-weight-bold` → `var(--font-600-weight)`; headings keep their own rules (two-tone `strong` `base.css:424/:431`, Marlide stays 300); remove the dead `body_font_weight` setting · (b) 600 only, keep the setting · (c) keep 700. Recommend **a**. |
 | A11Y-01 | The header logo link (`.header__heading-link`, inline SVG logo) has no accessible name: screen readers announce an empty link on every page, EN/NL/FR, Day and Night (axe `link-name`, serious; WCAG 2.4.4 / 4.1.2). Accessibility check 21 Oct on merchant-edit preview `189891674493`. | — | P1 | this lane | Give the link `aria-label="{{ shop.name }}"` (or visually hidden text) in `sections/header.liquid`; SVG stays `aria-hidden`. No new copy. |
