@@ -40,7 +40,7 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | LY-01 | Dropped | Not a gap |
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
 | LY-03 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
-| TY-01 (G-7) | In progress | Child global-type is editing `assets/base.css`, `layout/theme.liquid` and `config/settings_schema.json` (not committed yet). Preview theme `189947838845`. |
+| TY-01 (G-7) | In progress | Child global-type (status 22 Oct, not committed yet). Done: the `b`/`strong` rule in `assets/base.css` (headings excluded); `--font-body-weight-bold` = `var(--font-600-weight)` in `layout/theme.liquid`; the dead `body_font_weight` removed from `config/settings_schema.json`; Theme Check 0 errors. "Before" measured at 700. Open: the rendered "after" check on preview `189947838845` (390/1440, Day/Night, EN/NL/FR, cart drawer), then one commit and Ready to land. |
 | A11Y-01, A11Y-02, A11Y-03 (3 rows) | Ready to land | `361a06c`, inside `466f1b9`, reported 21 Oct. The landing desk lands it with source-copy `6500a4a` after the FR follow-up. Astra R19: no regression. |
 | PDP end CTA "Begin your 60-Day Rhythm" | Ready to land | `361a06c`, as above |
 | LC-01, LC-02, LC-03, LC-04 (4 rows, G-9) | Waiting for Victor | Country selector bugs (question 2) |
