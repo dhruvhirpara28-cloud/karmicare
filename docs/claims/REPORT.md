@@ -1,5 +1,98 @@
 # CR1 report · Clinical Research advisory review
 
+## Status 22 Oct
+
+The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
+
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
+
+| Status | Rows |
+|---|---:|
+| In merchant-edit | 3 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 10 |
+| Parked / after launch | 0 |
+| Dropped | 0 |
+
+| # | Status | What | Commits / where |
+|---|---|---|---|
+| 3 | In merchant-edit | Claims register `CLAIMS-REVIEW.md`: 70 claims, 17 approved, 49 needs-review, 3 unsupported, 1 confirmed (C103) | `0b98382` … `1437fc5` |
+| 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
+| 10 | In merchant-edit | Clinical review CR1: advice on 50 claims and 9 onboarding lines | `3ebf113`, `2a7f809` |
+| 19 | Waiting for Victor | Live figures and claims a–p (K1 on the claims review page) | review page `claims.html`, Prioriteiten |
+| 20 | Waiting for Victor | 27 reworded claims from CR1 (K2) | `docs/claims/CLINICAL-REVIEW.md` §2, §4 |
+| 21 | Waiting for Victor | Claims that cannot be supported (K3) | C35, C40, C41, C42, C84, C85, C98 |
+| 22 | Waiting for Victor | Research cards on tooth decay (C62) and canker sores (C64) (K4) | research section, homepage and PDP |
+| 23 | Waiting for Victor | Missing sources (K5) | CPSR, SCCS opinion, practitioner consent, review figure, packaging |
+| 24 | Waiting for Victor | Week headings of the PDP treatment journey (K6) | C94–C98, admin metafield |
+| 25 | Waiting for Victor | Leen Ponet's quote (K7) | C83, homepage and PDP |
+| 28 | Waiting for Victor | regulatory.md wins over products.md (S4) | the clinical sources |
+| 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+
+### Waiting for Victor: the questions
+
+**19. Live figures and claims a–p (K1 on the claims review page).** The Prioriteiten page lists 16 live figures and claims with the exact text now and a proposed text. Who changes them, and when?
+- (a) You change them live in the theme editor and the admin (about 20 minutes).
+- (b) They go with the landing (theme text) and you change only the admin text.
+- (c) Per letter, with a note.
+- *Advice*: (b): theme text then goes through review and Theme Check like every other change, and you only touch the admin.
+
+**20. 27 reworded claims from CR1 (K2).** Accept the 27 rewordings that keep a claim within the evidence (leave-on duration, sensitivity, ingredients, clock texts, counts, the practitioner block, C63 and others)?
+- (a) Yes, all 27.
+- (b) One by one.
+- *Advice*: (a): I then apply the EN, the NL follows, and those entries leave pending-claim-review and join the registration.
+
+**21. Claims that cannot be supported (K3).** Remove or replace the gum card (C35), the focus/calm card (C40, C41), the oral-gut-brain row (C42), the nutritional therapist's quote (C84, C85) and "feel the repair" (C98), with the replacement lines from CR1?
+- (a) Yes, replace them with the CR1 lines.
+- (b) No, keep them.
+- *Advice*: (a): they make health effects a cosmetic may not claim (EU 655/2013); the CR1 replacements use existing site copy.
+
+**22. Research cards on tooth decay (C62) and canker sores (C64) (K4).** Both cards report a disease result. The figures match the studies, but next to a cosmetic they read as "prevents tooth decay" and "prevents ulcers". Keep them?
+- (a) Remove both cards.
+- (b) Keep them with the softened CR1 wording, after a legal check.
+- *Advice*: (a): the safest for launch; (b) needs the regulatory reviewer first.
+
+**23. Missing sources (K5).** Some lines need a document we do not have: the CPSR conclusion for leave-on use, the SCCS opinion SCCS/1677/25, the practitioners' consent and a dated count, the review-platform figure, the packaging specifications. Kulal 2016 (the 98% card) is now found and checked, see the claims report.
+- (a) You (Victor) provide the documents.
+- (b) Hide the lines until a source exists.
+- *Advice*: (b) now, (a) when the documents are at hand; each line comes back as soon as its source is in the library.
+
+**24. Week headings of the PDP treatment journey (K6).** The journey promises outcomes per week ("week 2: calmer gums …"). Timed member outcomes have no data. Remove the week headings?
+- (a) Remove the week headings, keep the untimed lines.
+- (b) Keep them.
+- *Advice*: (a): the lines themselves are supportable without the timeline.
+
+**25. Leen Ponet's quote (K7).** Her English quote is a draft translation she has not approved. Ask her to approve the EN, NL and FR?
+- (a) Yes, ask her.
+- (b) No.
+- *Advice*: (a): it is her name on the page; until she answers, the quote stays as it is in EN.
+
+**28. regulatory.md wins over products.md (S4).** Where products.md allows a claim that regulatory.md forbids (no prevention claims), which wins?
+- (a) regulatory.md wins, and products.md is corrected.
+- (b) No.
+- *Advice*: (a): the review already works that way; the source files should agree.
+
+**36. Sietske Hamelink's quote in NL and FR.** Her quote is her own words and carries an unsupported health claim (C85). The NL is held; FR translated it. What should NL/FR show?
+- (a) Ask Sietske to approve the NL/FR (NL draft in `986c1d9`).
+- (b) Show her English quote on NL/FR.
+- (c) Replace it with a quote of hers without the health claim (ties to K3).
+- *Advice*: (c): the claim is the problem in every language; with (a) it would still be there.
+
+**52. Releasing the nano-hydroxyapatite article in NL and FR.** You rewrote six fields of the article today and kept the rest of its EN as it is. Its claim blocks stay gated in NL and FR (pending-claim-review), so the article is not registered. Release them?
+- (a) Release the whole article: NL/FR then carry the same claims as the EN.
+- (b) Release only the fields you rewrote today and the blocks without a claim; keep the rest gated.
+- (c) Keep it gated until the claims review.
+- *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
+
+**Two research cards checked against the papers (22 Oct, at Victor's request).** No status changes until Victor decides.
+- **C63, Vano et al. 2018** (Clin Oral Investig, PMID 28361171). The authors' conclusion does not say nHAp is better than fluoride: *"The application of nano-hydroxyapatite in gel toothpaste fluoride free is an effective desensitizing agent providing relief from symptoms after 2 and 4 weeks."* The results do report lower sensitivity than the fluoride and placebo groups at 2 and 4 weeks (p < 0.05). A 2 % gel applied for 10 minutes twice a day, 105 adults, not Karmicare. "Beat fluoride" is a fair reading of the results, not the authors' conclusion; brand don't #13 is what holds the card. The library summary ("OUTPERFORMED", "superior") goes further than the authors.
+- **C60, Kulal et al. 2016** (J Clin Diagn Res 10(10):ZC51–ZC54, PMC5121804). Found and read. Table 2: 97.62 % of tubules completely occluded with nHAp, 81.9 % NovaMin, 65.42 % Pro-Argin; the site's 98 / 82 / 65 are these figures rounded, so they come from a peer-reviewed paper, not a whitepaper. In vitro, 10 dentine discs per group, a slurry for 2 minutes a day over 7 days. Only nHAp vs Pro-Argin is significant (p = 0.005); nHAp vs NovaMin is not (p = 0.235). The paper is inconsistent: its abstract gives 98.1 / 83.1 / 69.1 % and 15 % nHAp, Table 1 gives 1 % nHAp (Acclaim). Advice: keep the card as a lab study ("in a lab study"), and drop the 82 % comparison or say it was not significant.
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+
 Task `task_f75b35ea2400`, dispatch `ctx_fc1123304bbe`, run `run_32dd5602b983`. Brief: `.coordinator/BRIEF-CR1.md`. Deliverable: `docs/claims/CLINICAL-REVIEW.md` (per-claim verdicts, summary at the top). These verdicts are advice: Victor decides, and regulatory and legal sign-off is separate.
 
 ## 1. Preflight

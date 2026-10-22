@@ -1,5 +1,243 @@
 # B1a report · EN source inventory, corrections and glossary (homepage + Duo PDP)
 
+## Status 22 Oct
+
+The whole lane in one table: EN source copy, NL, claims and the registration in Shopify. The other four reports carry the rows that concern them.
+
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
+
+| Status | Rows |
+|---|---:|
+| In merchant-edit | 13 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 29 |
+| Parked / after launch | 3 |
+| Dropped | 6 |
+
+| # | Status | What | Commits / where |
+|---|---|---|---|
+| 1 | In merchant-edit | EN copy fixes on the homepage and footer: €0.49 per brushing, ENTHUSIASTS, "needs", 60-day money-back guarantee, a Belgian product | `f2e9506` |
+| 2 | In merchant-edit | EN source inventory: 8 batches, 2,575 entries, checked by `digest.py`; follows the homepage copy of 21 Oct, the delivery times, the Duo name, the announcement line and the CTAs | `ee3b1f4` … `1437fc5` |
+| 3 | In merchant-edit | Claims register `CLAIMS-REVIEW.md`: 70 claims, 17 approved, 49 needs-review, 3 unsupported, 1 confirmed (C103) | `0b98382` … `1437fc5` |
+| 4 | In merchant-edit | NL payloads: 2,151 of the 2,154 translatable entries in Dutch, `validate.py` exit 0. After Victor's waiver (20 Oct) the claim-held entries are translated and flagged pending-claim-review | `31b490f` … `1437fc5` |
+| 5 | In merchant-edit | 64 `kc.*` theme keys in all 31 locales: footer, plans, clock, FAQ "ALL", sticky bar, hero, stat strip, PDP labels; EN, NL and FR values | `16decc4` … `1630eef`, `c348c72`, `61efa65` |
+| 6 | In merchant-edit | Delivery times in the theme's legal pages and EN fallback locales: Benelux within 24 hours, rest of the EU 2–3 working days | `6414e4c`, `bc7a090`, `1596ecb` |
+| 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
+| 8 | In merchant-edit | Sticky-bar key `kc.sticky_cart.kit_free_html` removed from all 31 locales (NV-13) | `d72d791` |
+| 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
+| 10 | In merchant-edit | Clinical review CR1: advice on 50 claims and 9 onboarding lines | `3ebf113`, `2a7f809` |
+| 11 | In merchant-edit | Offline registration plan for NL and FR, the app set-up steps for Victor (`APP-SETUP.md`) and the first version of `register.py` | `8a7548d` … `060de0e`, `2f9a83f`, `0e21a1f` |
+| 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
+| 13 | In merchant-edit | `register.py` reworked after reviews R18, R18b and R18c; R18d (21 Oct): approve, no new findings, selftest 80/80 | `93e1850`, `44bb619`, `59c281e` |
+| 14 | Waiting for Victor | Translations app for the registration | `APP-SETUP.md` |
+| 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
+| 16 | Waiting for Victor | NL and FR stay published while the first wave is not in | B4 decision 3 |
+| 17 | Waiting for Victor | Legacy translated product handles (12 URLs, e.g. `/nl/products/compleet-hygiene-kit`) | B4 decision 4 |
+| 18 | Waiting for Victor | Browser-language redirect on product pages | B4 decision 5, manual check 3 |
+| 19 | Waiting for Victor | Live figures and claims a–p (K1 on the claims review page) | review page `claims.html`, Prioriteiten |
+| 20 | Waiting for Victor | 27 reworded claims from CR1 (K2) | `docs/claims/CLINICAL-REVIEW.md` §2, §4 |
+| 21 | Waiting for Victor | Claims that cannot be supported (K3) | C35, C40, C41, C42, C84, C85, C98 |
+| 22 | Waiting for Victor | Research cards on tooth decay (C62) and canker sores (C64) (K4) | research section, homepage and PDP |
+| 23 | Waiting for Victor | Missing sources (K5) | CPSR, SCCS opinion, practitioner consent, review figure, packaging |
+| 24 | Waiting for Victor | Week headings of the PDP treatment journey (K6) | C94–C98, admin metafield |
+| 25 | Waiting for Victor | Leen Ponet's quote (K7) | C83, homepage and PDP |
+| 26 | Waiting for Victor | "Verified / confirmed by your dentist" in 5 entries (S2) | PDP pricing summary, info card, check-up tooltip, Year plan description |
+| 27 | Waiting for Victor | Old blog articles in NL and FR (S3) | batch 07, 709 entries |
+| 28 | Waiting for Victor | regulatory.md wins over products.md (S4) | the clinical sources |
+| 29 | Waiting for Victor | Addresses in the NL/FR legal text (S5) | batch 04 |
+| 30 | Waiting for Victor | "Gift, pause or cancel" in the buy box (S6) | PDP trust row |
+| 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
+| 32 | Waiting for Victor | Dutch term for the check-up (S8) | glossary |
+| 33 | Waiting for Victor | Facts to confirm (S9) | homepage and PDP |
+| 34 | Waiting for Victor | Treatment-journey line stops mid-phrase (#29) | admin metafield `custom.treatment_journey_*` |
+| 35 | Waiting for Victor | SLS article block `#b035` names four competitor brands | blog, batch 07 |
+| 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
+| 37 | Waiting for Victor | Capitalisation of all buttons | inventory of all buttons (global coordinator) |
+| 38 | Waiting for Victor | Delivery times in the Shopify policies, and their wording | Settings > Policies; table in the NL report |
+| 39 | Waiting for Victor | Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51) | product, metafields, metaobjects, menu, selling plans |
+| 40 | Waiting for Victor | Money format on the EN pages | Shopify money format (B1a decision 5) |
+| 41 | Waiting for Victor | Legal review of the NL and FR legal texts | batch 04, legal-review gate (NL 605 items) |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+| 42 | Parked / after launch | Loop widget strings (off-limits files): the 11 strings of the B4 Loop table, handed to the Loop owner; NL and FR are in the payloads | B4 report, Loop handoff |
+| 43 | Parked / after launch | Navigation links and Shopify policies: no proven API route in the runner yet (LINK, SHOP_POLICY); after the first wave, or through Translate & Adapt | `register.py`, B4 Part 2 |
+| 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
+| 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
+| 46 | Dropped | Legacy legal pages (350 entries): not translated, they redirect | `08479cb` |
+| 47 | Dropped | Clock gates (B4 decision 6): review gates no longer hold theme keys, after Victor's waiver | `c348c72` |
+| 48 | Dropped | FR conventions (B1a decision 2): the FR lane owns them | FR lane |
+| 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
+| 50 | Dropped | Choice of access path (B4 decision 1): the Dev Dashboard app route was chosen | desk, 21 Oct |
+
+### Waiting for Victor: the questions
+
+**14. Translations app for the registration.** Will you create the Dev Dashboard app "Karmicare translations" as in `APP-SETUP.md`, install it on karmicares.myshopify.com, store the client secret in your Keychain, and then say "app klaar" with the published theme's ID?
+- (a) With the extra scope `read_themes`: the runner reads the published theme itself and proves the ID.
+- (b) Without it: you confirm the theme ID yourself on the day of each run (`--theme-attested "<date> Victor"`).
+- *Advice*: (a): one manual step less, and the runner checks the theme instead of trusting a typed ID.
+
+**15. Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review).** After the read-only dry run and the review of the metaobject bindings, may the runner write the first wave (NL 504, FR 502 items)?
+- (a) Yes, the whole first wave.
+- (b) Yes, but theme text (homepage, PDP, header, footer) first, products and metafields in a second run.
+- (c) No, not before launch.
+- *Advice*: Decide on the dry-run report, which shows every current value it would overwrite. NL and FR are already published, so each registered translation is live at once; (a) if the report is clean.
+
+**16. NL and FR stay published while the first wave is not in.** /nl and /fr are published today and show mostly English. Keep them published?
+- (a) Keep them published and register quickly.
+- (b) Unpublish NL and FR in the admin until the first wave is in.
+- *Advice*: (a): unpublishing is an admin change that takes /nl and /fr away from visitors who already use them, and the first wave is ready.
+
+**17. Legacy translated product handles (12 URLs, e.g. `/nl/products/compleet-hygiene-kit`).** The old NL/FR product URLs answer with a 301 to translated handles. Keep or remove them?
+- (a) Keep them: both URL forms work.
+- (b) Remove them, so handles stay English everywhere.
+- *Advice*: (a) for launch; nothing breaks, and removing them is an admin change that can wait.
+
+**18. Browser-language redirect on product pages.** A browser set to English is sent from `/nl/products/…` to the EN product. Will you run manual check 3 of the B4 report (2 minutes, a new English browser profile) to see whether the language selector still keeps a visitor on NL?
+- (a) Check it before launch; if it fails, change the setting in Markets or the app behind it.
+- (b) Leave it until after launch.
+- *Advice*: (a): Dutch customers with an English browser would otherwise land on the EN product.
+
+**19. Live figures and claims a–p (K1 on the claims review page).** The Prioriteiten page lists 16 live figures and claims with the exact text now and a proposed text. Who changes them, and when?
+- (a) You change them live in the theme editor and the admin (about 20 minutes).
+- (b) They go with the landing (theme text) and you change only the admin text.
+- (c) Per letter, with a note.
+- *Advice*: (b): theme text then goes through review and Theme Check like every other change, and you only touch the admin.
+
+**20. 27 reworded claims from CR1 (K2).** Accept the 27 rewordings that keep a claim within the evidence (leave-on duration, sensitivity, ingredients, clock texts, counts, the practitioner block, C63 and others)?
+- (a) Yes, all 27.
+- (b) One by one.
+- *Advice*: (a): I then apply the EN, the NL follows, and those entries leave pending-claim-review and join the registration.
+
+**21. Claims that cannot be supported (K3).** Remove or replace the gum card (C35), the focus/calm card (C40, C41), the oral-gut-brain row (C42), the nutritional therapist's quote (C84, C85) and "feel the repair" (C98), with the replacement lines from CR1?
+- (a) Yes, replace them with the CR1 lines.
+- (b) No, keep them.
+- *Advice*: (a): they make health effects a cosmetic may not claim (EU 655/2013); the CR1 replacements use existing site copy.
+
+**22. Research cards on tooth decay (C62) and canker sores (C64) (K4).** Both cards report a disease result. The figures match the studies, but next to a cosmetic they read as "prevents tooth decay" and "prevents ulcers". Keep them?
+- (a) Remove both cards.
+- (b) Keep them with the softened CR1 wording, after a legal check.
+- *Advice*: (a): the safest for launch; (b) needs the regulatory reviewer first.
+
+**23. Missing sources (K5).** Some lines need a document we do not have: the CPSR conclusion for leave-on use, the SCCS opinion SCCS/1677/25, the practitioners' consent and a dated count, the review-platform figure, the packaging specifications. Kulal 2016 (the 98% card) is now found and checked, see the claims report.
+- (a) You (Victor) provide the documents.
+- (b) Hide the lines until a source exists.
+- *Advice*: (b) now, (a) when the documents are at hand; each line comes back as soon as its source is in the library.
+
+**24. Week headings of the PDP treatment journey (K6).** The journey promises outcomes per week ("week 2: calmer gums …"). Timed member outcomes have no data. Remove the week headings?
+- (a) Remove the week headings, keep the untimed lines.
+- (b) Keep them.
+- *Advice*: (a): the lines themselves are supportable without the timeline.
+
+**25. Leen Ponet's quote (K7).** Her English quote is a draft translation she has not approved. Ask her to approve the EN, NL and FR?
+- (a) Yes, ask her.
+- (b) No.
+- *Advice*: (a): it is her name on the page; until she answers, the quote stays as it is in EN.
+
+**26. "Verified / confirmed by your dentist" in 5 entries (S2).** The Check-up Reward needs no dentist involvement, but five texts say the check-up is "verified/confirmed by your dentist". (The announcement-bar half of S2 is solved by "FOR MEMBERS".) What should they say?
+- (a) Delete the clause "— confirmed by your dentist" (a deletion, no new claim).
+- (b) You give new wording.
+- (c) Keep it.
+- *Advice*: (a): it removes the contradiction without new copy; two of the five are admin text (plan description), so those are your edit.
+
+**27. Old blog articles in NL and FR (S3).** The blog articles are translated but outside the first wave. 107 of their blocks carry unsupported claims. Publish the NL/FR versions?
+- (a) Not until the EN is rewritten.
+- (b) Publish them.
+- *Advice*: (a): the EN itself makes the claims; translating them spreads them to two more languages.
+
+**28. regulatory.md wins over products.md (S4).** Where products.md allows a claim that regulatory.md forbids (no prevention claims), which wins?
+- (a) regulatory.md wins, and products.md is corrected.
+- (b) No.
+- *Advice*: (a): the review already works that way; the source files should agree.
+
+**29. Addresses in the NL/FR legal text (S5).** Postal addresses are written exactly as in the EN; city and court names in running text use the local form (Brugge, Ondernemingsrechtbank Gent). Keep that?
+- (a) Official local forms in running text (as now).
+- (b) English forms everywhere.
+- *Advice*: (a): it is how Belgian legal Dutch names its courts and cities.
+
+**30. "Gift, pause or cancel" in the buy box (S6).** The NL trust row uses Figma's short form *Pauzeren of opzeggen*; elsewhere the full form. Keep that?
+- (a) Full form where it fits, short form in the trust row (as now).
+- (b) Short form everywhere.
+- *Advice*: (a): the trust row has no room, the other places do.
+
+**31. Brand-rule exceptions (S7).** The footer says "is a Belgian product", and the treatment-journey footnote "What members report with continued use" is NL *bij langdurig gebruik*: both use banned words (product, use). Rewrite or keep?
+- (a) Rewrite the EN and the Figma first; you give the wording.
+- (b) Keep them.
+- *Advice*: (a): the brand rule has no exceptions so far; I do not write new copy myself.
+
+**32. Dutch term for the check-up (S8).** The site uses *controlebeloning*; one Figma frame says *tandartscontrole-beloning*. Which one?
+- (a) *controlebeloning* (as now).
+- (b) *tandartscontrole-beloning*.
+- *Advice*: (a): shorter, and it does not suggest the dentist is involved.
+
+**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? And should the footer slogan "Your mouth has a rhythm So should your oral care" get a full stop?
+- Answer per fact.
+- *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
+
+**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end?
+- (a) You give the ending.
+- (b) Cut it after "peace of mind*".
+- (c) Remove the line.
+- *Advice*: (b): no new copy needed. It is admin text, so you edit it; NL and FR follow.
+
+**35. SLS article block `#b035` names four competitor brands.** The block breaks the no-competitor rule (a brand rule, not a claim), so NL and FR hold it. What should happen?
+- (a) Remove the brand names from the EN sentence.
+- (b) Delete the block.
+- (c) Leave the EN and never translate it.
+- *Advice*: (a) if the sentence reads without the names, otherwise (b); both are deletions, no new copy.
+
+**36. Sietske Hamelink's quote in NL and FR.** Her quote is her own words and carries an unsupported health claim (C85). The NL is held; FR translated it. What should NL/FR show?
+- (a) Ask Sietske to approve the NL/FR (NL draft in `986c1d9`).
+- (b) Show her English quote on NL/FR.
+- (c) Replace it with a quote of hers without the health claim (ties to K3).
+- *Advice*: (c): the claim is the problem in every language; with (a) it would still be there.
+
+**37. Capitalisation of all buttons.** Which style for every button?
+- (a) CAPS.
+- (b) Title Case.
+- (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
+- *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
+
+**38. Delivery times in the Shopify policies, and their wording.** The theme's legal pages say "within 24 hours" (Benelux). The three Shopify policies are admin text: will you edit their EN (the table in the NL report gives each old and new line)? And should the legal texts say "within 24 hours" or "1 working day"?
+- (a) "within 24 hours" everywhere (as now).
+- (b) "1 working day" in the legal texts, "24 uur" stays in the sticky bar.
+- *Advice*: (b): an order on Friday evening cannot arrive within 24 hours, and the rest of the EU is already given in working days. Either way the policies are your edit.
+
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+- (a) You or DH edit them before the first wave is registered.
+- (b) After launch.
+- *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
+
+**40. Money format on the EN pages.** Shopify formats money per currency, not per language, so computed amounts show "€0,49" and "€67,00 EUR" on EN pages next to the static "€0.49". Accept that?
+- (a) Accept the comma on EN for launch.
+- (b) The PDP lane formats amounts per locale in the theme.
+- *Advice*: (a) for launch, (b) after: it is theme work in the buy box, not a copy change.
+
+**41. Legal review of the NL and FR legal texts.** The legal pages are translated but held by the legal-review gate. Who reviews them?
+- (a) You review them.
+- (b) A Belgian lawyer reviews them.
+- (c) NL/FR legal pages stay English until reviewed.
+- *Advice*: (b) for NL first; until then (c).
+
+**52. Releasing the nano-hydroxyapatite article in NL and FR.** You rewrote six fields of the article today and kept the rest of its EN as it is. Its claim blocks stay gated in NL and FR (pending-claim-review), so the article is not registered. Release them?
+- (a) Release the whole article: NL/FR then carry the same claims as the EN.
+- (b) Release only the fields you rewrote today and the blocks without a claim; keep the rest gated.
+- (c) Keep it gated until the claims review.
+- *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
+
+**Translation script (`register.py`).** R18d (21 Oct) approved `59c281e`: no new findings, selftest 80/80. Nothing has run live. The order from here:
+1. Victor says "app klaar" and gives the published theme ID (row 14).
+2. A read-only dry run with theme proof; its report shows every current value and the API contract.
+3. Review of the binding proposals for the metaobject fields (48 NL, 50 FR) into `bindings.json`, with the full old and new translations.
+4. A fresh dry run.
+5. Its checksum and Victor's explicit yes (row 15); only then `--write`.
+
+**Two research cards checked against the papers (22 Oct, at Victor's request).** No status changes until Victor decides.
+- **C63, Vano et al. 2018** (Clin Oral Investig, PMID 28361171). The authors' conclusion does not say nHAp is better than fluoride: *"The application of nano-hydroxyapatite in gel toothpaste fluoride free is an effective desensitizing agent providing relief from symptoms after 2 and 4 weeks."* The results do report lower sensitivity than the fluoride and placebo groups at 2 and 4 weeks (p < 0.05). A 2 % gel applied for 10 minutes twice a day, 105 adults, not Karmicare. "Beat fluoride" is a fair reading of the results, not the authors' conclusion; brand don't #13 is what holds the card. The library summary ("OUTPERFORMED", "superior") goes further than the authors.
+- **C60, Kulal et al. 2016** (J Clin Diagn Res 10(10):ZC51–ZC54, PMC5121804). Found and read. Table 2: 97.62 % of tubules completely occluded with nHAp, 81.9 % NovaMin, 65.42 % Pro-Argin; the site's 98 / 82 / 65 are these figures rounded, so they come from a peer-reviewed paper, not a whitepaper. In vitro, 10 dentine discs per group, a slurry for 2 minutes a day over 7 days. Only nHAp vs Pro-Argin is significant (p = 0.005); nHAp vs NovaMin is not (p = 0.235). The paper is inconsistent: its abstract gives 98.1 / 83.1 / 69.1 % and 15 % nHAp, Table 1 gives 1 % nHAp (Acclaim). Advice: keep the card as a lab study ("in a lab study"), and drop the 82 % comparison or say it was not significant.
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+
 Task `task_dff189ea8e99`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy` (from 3bae259, the live baseline). 19 Oct 2026.
 
 ## Preflight

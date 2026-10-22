@@ -1,5 +1,117 @@
 # NL translation payloads · report (B2)
 
+## Status 22 Oct
+
+The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
+
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
+
+| Status | Rows |
+|---|---:|
+| In merchant-edit | 7 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 12 |
+| Parked / after launch | 1 |
+| Dropped | 3 |
+
+| # | Status | What | Commits / where |
+|---|---|---|---|
+| 4 | In merchant-edit | NL payloads: 2,151 of the 2,154 translatable entries in Dutch, `validate.py` exit 0. After Victor's waiver (20 Oct) the claim-held entries are translated and flagged pending-claim-review | `31b490f` … `1437fc5` |
+| 5 | In merchant-edit | 64 `kc.*` theme keys in all 31 locales: footer, plans, clock, FAQ "ALL", sticky bar, hero, stat strip, PDP labels; EN, NL and FR values | `16decc4` … `1630eef`, `c348c72`, `61efa65` |
+| 6 | In merchant-edit | Delivery times in the theme's legal pages and EN fallback locales: Benelux within 24 hours, rest of the EU 2–3 working days | `6414e4c`, `bc7a090`, `1596ecb` |
+| 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
+| 8 | In merchant-edit | Sticky-bar key `kc.sticky_cart.kit_free_html` removed from all 31 locales (NV-13) | `d72d791` |
+| 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
+| 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
+| 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
+| 27 | Waiting for Victor | Old blog articles in NL and FR (S3) | batch 07, 709 entries |
+| 29 | Waiting for Victor | Addresses in the NL/FR legal text (S5) | batch 04 |
+| 30 | Waiting for Victor | "Gift, pause or cancel" in the buy box (S6) | PDP trust row |
+| 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
+| 32 | Waiting for Victor | Dutch term for the check-up (S8) | glossary |
+| 35 | Waiting for Victor | SLS article block `#b035` names four competitor brands | blog, batch 07 |
+| 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
+| 37 | Waiting for Victor | Capitalisation of all buttons | inventory of all buttons (global coordinator) |
+| 38 | Waiting for Victor | Delivery times in the Shopify policies, and their wording | Settings > Policies; table in the NL report |
+| 41 | Waiting for Victor | Legal review of the NL and FR legal texts | batch 04, legal-review gate (NL 605 items) |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+| 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
+| 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
+| 46 | Dropped | Legacy legal pages (350 entries): not translated, they redirect | `08479cb` |
+| 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
+
+### Waiting for Victor: the questions
+
+**15. Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review).** After the read-only dry run and the review of the metaobject bindings, may the runner write the first wave (NL 504, FR 502 items)?
+- (a) Yes, the whole first wave.
+- (b) Yes, but theme text (homepage, PDP, header, footer) first, products and metafields in a second run.
+- (c) No, not before launch.
+- *Advice*: Decide on the dry-run report, which shows every current value it would overwrite. NL and FR are already published, so each registered translation is live at once; (a) if the report is clean.
+
+**27. Old blog articles in NL and FR (S3).** The blog articles are translated but outside the first wave. 107 of their blocks carry unsupported claims. Publish the NL/FR versions?
+- (a) Not until the EN is rewritten.
+- (b) Publish them.
+- *Advice*: (a): the EN itself makes the claims; translating them spreads them to two more languages.
+
+**29. Addresses in the NL/FR legal text (S5).** Postal addresses are written exactly as in the EN; city and court names in running text use the local form (Brugge, Ondernemingsrechtbank Gent). Keep that?
+- (a) Official local forms in running text (as now).
+- (b) English forms everywhere.
+- *Advice*: (a): it is how Belgian legal Dutch names its courts and cities.
+
+**30. "Gift, pause or cancel" in the buy box (S6).** The NL trust row uses Figma's short form *Pauzeren of opzeggen*; elsewhere the full form. Keep that?
+- (a) Full form where it fits, short form in the trust row (as now).
+- (b) Short form everywhere.
+- *Advice*: (a): the trust row has no room, the other places do.
+
+**31. Brand-rule exceptions (S7).** The footer says "is a Belgian product", and the treatment-journey footnote "What members report with continued use" is NL *bij langdurig gebruik*: both use banned words (product, use). Rewrite or keep?
+- (a) Rewrite the EN and the Figma first; you give the wording.
+- (b) Keep them.
+- *Advice*: (a): the brand rule has no exceptions so far; I do not write new copy myself.
+
+**32. Dutch term for the check-up (S8).** The site uses *controlebeloning*; one Figma frame says *tandartscontrole-beloning*. Which one?
+- (a) *controlebeloning* (as now).
+- (b) *tandartscontrole-beloning*.
+- *Advice*: (a): shorter, and it does not suggest the dentist is involved.
+
+**35. SLS article block `#b035` names four competitor brands.** The block breaks the no-competitor rule (a brand rule, not a claim), so NL and FR hold it. What should happen?
+- (a) Remove the brand names from the EN sentence.
+- (b) Delete the block.
+- (c) Leave the EN and never translate it.
+- *Advice*: (a) if the sentence reads without the names, otherwise (b); both are deletions, no new copy.
+
+**36. Sietske Hamelink's quote in NL and FR.** Her quote is her own words and carries an unsupported health claim (C85). The NL is held; FR translated it. What should NL/FR show?
+- (a) Ask Sietske to approve the NL/FR (NL draft in `986c1d9`).
+- (b) Show her English quote on NL/FR.
+- (c) Replace it with a quote of hers without the health claim (ties to K3).
+- *Advice*: (c): the claim is the problem in every language; with (a) it would still be there.
+
+**37. Capitalisation of all buttons.** Which style for every button?
+- (a) CAPS.
+- (b) Title Case.
+- (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
+- *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
+
+**38. Delivery times in the Shopify policies, and their wording.** The theme's legal pages say "within 24 hours" (Benelux). The three Shopify policies are admin text: will you edit their EN (the table in the NL report gives each old and new line)? And should the legal texts say "within 24 hours" or "1 working day"?
+- (a) "within 24 hours" everywhere (as now).
+- (b) "1 working day" in the legal texts, "24 uur" stays in the sticky bar.
+- *Advice*: (b): an order on Friday evening cannot arrive within 24 hours, and the rest of the EU is already given in working days. Either way the policies are your edit.
+
+**41. Legal review of the NL and FR legal texts.** The legal pages are translated but held by the legal-review gate. Who reviews them?
+- (a) You review them.
+- (b) A Belgian lawyer reviews them.
+- (c) NL/FR legal pages stay English until reviewed.
+- *Advice*: (b) for NL first; until then (c).
+
+**52. Releasing the nano-hydroxyapatite article in NL and FR.** You rewrote six fields of the article today and kept the rest of its EN as it is. Its claim blocks stay gated in NL and FR (pending-claim-review), so the article is not registered. Release them?
+- (a) Release the whole article: NL/FR then carry the same claims as the EN.
+- (b) Release only the fields you rewrote today and the blocks without a claim; keep the rest gated.
+- (c) Keep it gated until the claims review.
+- *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+
 Task `task_25fdff87b2e8`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy`. 19 Oct 2026. Ready for Astra's review.
 
 Dutch for every page of the live store, translated from the approved EN inventory. The files are payloads only. Nothing is in the theme, `locales/` or the Shopify admin yet; the localization worker registers them later.
@@ -64,6 +176,25 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 - The newsletter placeholder `kc.footer.email_placeholder` is *jij@voorbeeld.be* (NL) and *vous@exemple.be* (FR), as in `4954820`. `theme-keys.json` records both under `decided`, and `theme_keys.py refresh` keeps a decided value whatever the payload says, so `write` no longer returns to *you@example.com*.
 
 **Sticky-bar key retired (21 Oct, global-nav `27691cb`, NV-13).** The desktop sticky bar becomes the mobile card, and the setting `kit_free` and its markup are gone. `kc.sticky_cart.kit_free_html` (*Gratis*) leaves `theme-keys.json` and all 31 locales. `theme-keys.json` lists it under `retired_keys`: `write` removes a retired key and `check` fails while one is still in a locale. The entry `liquid:sections/main-product.liquid:1104` is `retired` in the source and held here. Until global-nav lands, `snippets/sticky-cart-block.liquid:70` on this branch still reads the key, so Theme Check on this branch alone reports one `TranslationKeyExists` error. On `27691cb` with these locales it reports 0 errors.
+
+**Admin EN edits (22 Oct, Victor; relayed by the global coordinator, read back on the storefront).** Ten entries follow the new EN (batch 02 digest `2468bab43271`, batch 03 `18cdaec0fb18`, batch 07 `c73c6f51bc70`); no status changed.
+
+| Entry | EN now | NL now |
+|---|---|---|
+| Duo product title | Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System | *Awake & Asleep fluoridevrije nano-hydroxyapatiet tandpasta, dag- en nachtsysteem* (Victor's own, live) |
+| Duo SEO title | Fluoride-Free Nano-Hydroxyapatite Toothpaste \| Awake & Asleep | *Fluoridevrije nano-hydroxyapatiet tandpasta \| Awake & Asleep* (Victor's own, live) |
+| Duo meta description | Awake for the morning, Asleep for the night: two fluoride-free nano-hydroxyapatite toothpastes in one Day & Night System. You don't rinse them off. | *Awake voor de ochtend, Asleep voor de nacht: twee fluoridevrije nano-hydroxyapatiet tandpasta's in één dag- en nachtsysteem. Je spoelt ze niet uit.* (Victor's own, live) |
+| Footer menu `company` link | Why hydroxyapatite | *Waarom hydroxyapatiet* (unchanged; it already had this form) |
+| Article SEO title | Nano-Hydroxyapatite Toothpaste: What It Is and How It Works \| KARMICARE | *Tandpasta met nano-hydroxyapatiet: wat het is en hoe het werkt \| KARMICARE* |
+| Article meta description | What nano-hydroxyapatite is, how it works on enamel, and why Karmicare uses it in Awake and Asleep, two fluoride-free toothpastes. | *Wat nano-hydroxyapatiet is, hoe het op je glazuur werkt en waarom Karmicare het in Awake en Asleep verwerkt, twee fluoridevrije tandpasta's.* |
+| Article `#b016` | It helps protect against tooth decay and harmful dietary acids | *Het helpt beschermen tegen tandbederf en schadelijke zuren uit je voeding* |
+| Article `#b088` | … This works as a protective shield that helps keep the nerve endings from being stimulated. | *… Dat werkt als een beschermend schild dat de zenuwuiteinden helpt afschermen tegen prikkels.* |
+| Article `#b090` | 4. Nano Hydroxyapatite Helps Protect Your Enamel From Acidic Food | *4. Nano-hydroxyapatiet helpt je glazuur beschermen tegen zure voeding* |
+| Article `#b100` | … Plus, nano HAp helps protect your teeth against decay by binding bacteria together, so you can spit them out. | *… Bovendien helpt nano-HAp je tanden beschermen tegen tandbederf door bacteriën aan elkaar te binden, zodat je ze kunt uitspugen.* |
+
+- **Already registered.** Victor entered the three Duo texts in NL and FR himself in Translate & Adapt, so they are live. `docs/localization/registration/registered.json` lists them with the EN sha1. `build_payloads.py` leaves them out of `plan-nl.json` and `plan-fr.json` while that sha1 matches, so the runner never writes the old *tandpastasysteem voor ochtend en avond* rows over them.
+- **Still open.** The article's other blocks stay as Victor approved them (EN), and its `pending-claim-review` blocks in NL stay gated. The meta description no longer carries the medical-marvel claim, but releasing it is Victor's decision too. The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited.
+- **Plan.** NL first wave 501 items (was 504: the three Duo texts). FR 500 (was 502: minus the three Duo texts and the menu link, whose FR payload EN is now out of date, plus two theme items from the FR merge `e883509`). The FR payload follows in the FR lane (`CHANGES-R2.md`).
 
 **Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
 - The 119 entries held on an unsupported claim now carry `claim_hold_waived: "2026-10-20 Victor, translation only"` in the EN source. The EN is unchanged.
@@ -152,13 +283,13 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `87edec28e25f` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
+| `batch-02-pdp` | 477 | `2468bab43271` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 229 | `5286628ff7c8` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
-| `batch-03-header-footer` | 41 | `d5353b16cc57` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
+| `batch-03-header-footer` | 41 | `18cdaec0fb18` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
-| `batch-07-collections-blog` | 709 | `9597904c4ef8` | 1 | 312 | 0 | 0 | 386 | 0 | 10 | 0 |
+| `batch-07-collections-blog` | 709 | `c73c6f51bc70` | 1 | 312 | 0 | 0 | 386 | 0 | 10 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
 | **All** | **2575** | | **284** | **618** | **75** | **621** | **491** | **62** | **424** | **63** |
 

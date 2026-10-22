@@ -9,9 +9,10 @@ Reads the EN source (docs/source-copy/en-source.json) and the payloads
   docs/localization/registration/DRY-RUN.md          counts, first wave, held back, run-time lookups
 
 Nothing here talks to Shopify. Resource GIDs, translatable content keys and digests are fetched at
-run time (translatableResources / translatableResourcesByIds, Metafield.compareDigest), by the
-owner, with read_translations. Every item carries the EN sha1 of the B1a capture: at run time the
-live value must have the same sha1, or the item is stale and is skipped.
+run time by register.py (translatableResources / translatableResourcesByIds, API 2026-10; product
+metafields by GID through translatableResourcesByIds), by the owner, with read_translations. Every item carries the EN sha1 of the B1a capture: at run time the
+live value must have the same sha1, or the item is stale and is skipped. Translations already registered by hand
+(registration/registered.json) are left out while their EN sha1 matches, so no run overwrites them.
 
 Run from the repo root:  python3 docs/localization/registration/build_payloads.py [--fr-dir DIR]
 """
@@ -25,6 +26,7 @@ from collections import Counter, OrderedDict
 
 SOURCE = "docs/source-copy/en-source.json"
 OUT = "docs/localization/registration"
+REGISTERED = os.path.join(OUT, "registered.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
 # The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
@@ -35,6 +37,9 @@ LATER = {
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
 GATES = ("legal-review", "pending-claim-review")
+# Loop translates selling plans and groups itself (Settings > Multilingual content, PDP lane 21 Oct): register.py skips them.
+LOOP_TYPES = ("SELLING_PLAN", "SELLING_PLAN_GROUP")
+LOOP_HOLD = "Loop owns selling-plan translations (register.py skips them)"
 
 # Inventory field -> Shopify translatable content key, per Shopify type (TranslatableResourceType, 2026-10)
 FIELD_KEYS = {
@@ -66,9 +71,9 @@ def target(src):
     rt, owner, kp = src["resource_type"], src["file_or_handle"], src["key_path"]
     split = re.match(r"^(body_html|body|main|banner|[a-z_]+\.[a-z_*]+(?:\|[a-z_.]+)?)#b?\d+$", kp)
     if rt == "template_setting":
-        return "ONLINE_STORE_THEME_JSON_TEMPLATE", owner, "match", None, "key from translatableContent of the live theme's template, matched on the EN sha1"
+        return "ONLINE_STORE_THEME_JSON_TEMPLATE", owner, "match", None, "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1"
     if rt == "section_group":
-        return "ONLINE_STORE_THEME_SECTION_GROUP", owner, "match", None, "key from translatableContent of the live theme's section group, matched on the EN sha1"
+        return "ONLINE_STORE_THEME_SECTION_GROUP", owner, "match", None, "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1"
     if rt == "theme_locale":
         return None, owner, "none", None, "locale file (Part 1 theme keys or Dawn's own key), not registered"
     if rt == "app":
@@ -100,9 +105,9 @@ def target(src):
             return stype, owner, "direct", key, "owner GID from translatableResources(%s), matched on handle" % stype
         return stype, owner, "match", None, "field %s matched on the EN value" % kp
     if rt == "metafield":
-        return "METAFIELD", owner, "match", "value", "Metafield.translatable/compareDigest on the owner (2026-10); EN matched or assembled"
+        return "METAFIELD", owner, "match", "value", "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped"
     if rt == "metaobject":
-        return "METAOBJECT", owner, "match", None, "metaobject field matched on the EN value (translatableResources(METAOBJECT))"
+        return "METAOBJECT", owner, "match", None, "metaobject reached through the product's metafield reference, field matched on the EN sha1"
     if rt == "navigation":
         return "LINK", owner, "match", "title", "menu link matched on its EN title"
     return None, owner, "none", None, "no Shopify target for resource_type " + str(rt)
@@ -139,13 +144,18 @@ def dedupe(res):
     res["items"] = list(seen.values())
 
 
-def build(lang, payload, sources):
+def build(lang, payload, sources, registered=None):
     skipped = Counter()
     resources = OrderedDict()
+    registered = registered or {}
     for eid, entry in payload.items():
         src = sources.get(eid)
         if src is None:
             skipped["not in the EN source (stale payload id)"] += 1
+            continue
+        done = registered.get(eid)
+        if done and done["en_sha1"] == src["sha1"]:
+            skipped["already registered by hand (registered.json)"] += 1
             continue
         value = entry.get(lang)
         status = entry.get("status")
@@ -176,6 +186,8 @@ def build(lang, payload, sources):
         hold = list(gates)
         if batch not in FIRST_WAVE_BATCHES:
             hold.append(LATER.get(batch, batch))
+        if stype in LOOP_TYPES:
+            hold.append(LOOP_HOLD)
         rid = "%s|%s" % (stype, owner)
         res = resources.setdefault(rid, OrderedDict(
             shopify_type=stype, owner=owner, batch=batch, page=src.get("page"), items=[]))
@@ -228,7 +240,8 @@ def markdown(results, sources, args):
              "Generated by `docs/localization/registration/build_payloads.py`. Offline: nothing was sent to Shopify, "
              "no IDs or digests are known yet. Status per item: **drafted** (payload exists) / **registered** "
              "(translationsRegister accepted it) / **published** (the locale is published in Settings > Languages). "
-             "Today every item is drafted and none is registered. **NL and FR are already published** (the live "
+             "Today every item is drafted and none is registered by the runner; entries already registered by hand "
+             "(`registered.json`) are left out of the plan. **NL and FR are already published** (the live "
              "`/nl` and `/fr` URLs serve 200 with `lang` and `hreflang`, B4-REPORT part 4), so a registered item is "
              "public at once: there is no separate publish step left to hold it back.", "",
              "Inputs (sha1 of each file, so a rerun can be compared): %s." % "; ".join(
@@ -272,19 +285,25 @@ def markdown(results, sources, args):
                 hows = sorted(set(i["kind"] for i in res["items"] if not i["hold"]))
                 lines.append("| `%s` | `%s` | %d | %s |" % (res["shopify_type"], res["owner"], n, ", ".join(hows)))
         lines.append("")
-    lines += ["## Fetched at run time (read_translations; nothing stored in files)", "",
-              "| Shopify type | Query | What it gives |", "|---|---|---|",
-              "| `ONLINE_STORE_THEME_JSON_TEMPLATE`, `ONLINE_STORE_THEME_SECTION_GROUP` | `translatableResources(resourceType: …)` | resource GIDs of the live theme's templates and section groups; each setting's key, value and digest (keys are dynamic: matched on the EN sha1) |",
-              "| `PRODUCT`, `PAGE`, `ARTICLE`, `BLOG`, `COLLECTION` | `translatableResources(resourceType: …)` | the resource GID (matched on the `handle` content), digests of title, body_html, meta_title, meta_description |",
-              "| `SELLING_PLAN`, `MEDIA_IMAGE` | `translatableResourcesByIds(resourceIds: …)` | digests of name/description and alt for the GIDs in the plan |",
-              "| `SELLING_PLAN_GROUP`, `LINK`, `METAOBJECT`, `SHOP`, `SHOP_POLICY` | `translatableResources(resourceType: …)` | GIDs and digests, matched on the EN value |",
-              "| Metafields | owner's `metafields { id translatable compareDigest value }` | in 2026-10 `translatableResources(METAFIELD)` is deprecated; `compareDigest` is the digest (needs read_products for product metafields) |",
-              "| Existing translations | `translations(locale: \"nl\" / \"fr\")` on each resource | what is there now: legacy NL/FR product titles and translated handles exist (B4-REPORT part 4); the run lists every value it would overwrite before writing |",
-              "", "Run order per resource: fetch, check each live EN against `en_sha1` (stale → skip and report), "
-              "read the existing translation, assemble split body fields, then one "
-              "`translationsRegister(resourceId, translations)` call with `{key, locale, value, translatableContentDigest}`; "
-              "mark `registered` only for keys Shopify returns. Handles are not in the payloads: the legacy translated "
-              "handles stay as they are unless the owner decides otherwise.", ""]
+    lines += ["## Fetched at run time by register.py (API 2026-10; nothing stored but the reports)", "",
+              "This file is an offline planning summary, not an approval. The approval is the live dry run of "
+              "`register.py` (`live/dry-run-<lang>.md`, review R18): it resolves every target by identity first and EN second "
+              "and writes only what one checksum covers.", "",
+              "| Shopify type | Query | Identity rule |", "|---|---|---|",
+              "| `ONLINE_STORE_THEME_JSON_TEMPLATE`, `ONLINE_STORE_THEME_SECTION_GROUP` | `translatableResources(resourceType: …)` | only resources whose GID names the template and carries the supplied numeric `--theme-id` in the `theme_id` parameter, the theme proven published (`themes(roles: MAIN)` with read_themes, or a same-day `--theme-attested`); every hint a token of the key; then the EN sha1 |",
+              "| `PRODUCT`, `PAGE`, `ARTICLE`, `BLOG`, `COLLECTION` | `translatableResources(resourceType: …)` | exactly one resource with the `handle`; the plan's key |",
+              "| `MEDIA_IMAGE` | `translatableResourcesByIds(resourceIds: …)` | the GID in the plan; the plan's key |",
+              "| Metafields | `product { metafields { id namespace key type value } }`, then `translatableResourcesByIds` on their GIDs (key `value`) | namespace and key of the field; a JSON field only when every text leaf maps to an approved item |",
+              "| `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; the field the inventory names, or a reviewed binding in `bindings.json` (the dry run proposes them); then the EN sha1 |",
+              "| `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |",
+              "| `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |",
+              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | none | held here: Loop owns their translations |",
+              "| Existing translations | `translations(locale: \"nl\" / \"fr\")` on each resource | part of the approval: a translation edited after the dry run stops the write |",
+              "", "Write: rebuild the snapshot and compare its checksum, re-read each resource right before its mutation, then "
+              "`translationsRegister(resourceId, translations)` with `{key, locale, value, translatableContentDigest}` in chunks of 50; "
+              "every attempt and result goes to `live/journal-<lang>.jsonl`. Never-translate translations (`handle_item`, "
+              "`selling_plan_id`, Subscription Name values) are removed only with `--remove-never` in both the dry run and the write. "
+              "Handles are not in the payloads.", ""]
     return "\n".join(lines)
 
 
@@ -295,6 +314,8 @@ def file_sha1(path):
 
 def input_digests(args):
     out = OrderedDict([("en-source.json", file_sha1(args.source))])
+    if os.path.exists(REGISTERED):
+        out["registered.json"] = file_sha1(REGISTERED)
     for lang, folder in (("nl", args.nl_dir), ("fr", args.fr_dir)):
         for path in sorted(glob.glob(os.path.join(folder or "", "batch-*.json"))) if folder else []:
             out["%s/%s" % (lang, os.path.basename(path))] = file_sha1(path)
@@ -312,9 +333,10 @@ def main():
     dirs = {"nl": args.nl_dir}
     if args.fr_dir:
         dirs["fr"] = args.fr_dir
+    registered = json.load(open(REGISTERED, encoding="utf-8"))["registered"] if os.path.exists(REGISTERED) else {}
     results = OrderedDict()
     for lang, folder in dirs.items():
-        resources, skipped = build(lang, load_payload(folder), sources)
+        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang))
         results[lang] = (resources, skipped)
         doc = OrderedDict(
             lang=lang,
