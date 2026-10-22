@@ -34,7 +34,9 @@ merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so not
 - "chemicals that prevent natural healing"
 - "Swap fluoride for nano HAp"
 - "first discovered by NASA"
-- "nontoxic" |
+- "nontoxic"
+
+Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` and added a URL redirect to `/blogs/news/nano-hydroxyapatite`. The redirect was tested on EN, `/nl` and `/fr` (all three redirect and return 200). |
 | LY-04 | Waiting for Victor | Page title suffix (question 9) |
 | FT-10 | Parked / after launch | Legal text is kept for launch |
 | FT-11 | In merchant-edit | "Belgian product" is in merchant-edit `sections/footer-group.json` (source-copy) |
