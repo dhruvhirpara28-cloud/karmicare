@@ -2,10 +2,73 @@
 
 **Created**: 2026-10-21 · worker global-footer, branch `karmicare/global-footer` (from `karmicare/soft-launch-global` 68dba1f)
 
+## Status 22 Oct
+
+Written by the global coordinator; the footer worker is released. merchant-edit is `65eb83b`. It isn't pushed yet, so nothing is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`. No theme code exists yet for the newsletter: the footer form still posts to Shopify as today.
+
+**Counts (12 rows):** In merchant-edit 1 · Ready to land 0 · In progress 0 · Waiting for Victor 9 · Parked / after launch 2 · Dropped 0.
+
+| Item | Status | Note |
+|---|---|---|
+| Phase 1 plan (this file) | In merchant-edit | `43351f9`, docs only |
+| D1 Route | Waiting for Victor | Question 1 |
+| D2 Footer lists | Waiting for Victor | Question 2 |
+| D3 Checkout list | Waiting for Victor | Question 3 |
+| D4 Notice text | Waiting for Victor | Question 4 |
+| D5 Klaviyo unreachable | Waiting for Victor | Question 5 |
+| D6 Where the key and list IDs live | Waiting for Victor | Question 6 |
+| Phase 2 build (§11) | Waiting for Victor | Starts after D1–D6, as a new dispatch |
+| §8 item 5: the "Free shipping banner" form | Waiting for Victor | Question 7 |
+| §8 item 7: account country | Waiting for Victor | Question 8 |
+| §8 items 1–4 and 9: Klaviyo/Shopify settings checks | Parked / after launch | Needed only for the Phase 2 test |
+| §8 items 6 and 10: Webflow list, Non-dutch speakers list | Parked / after launch | Clean-up, after launch |
+
+§8 item 8 (the cookie check, whether klaviyo.js loads before consent) is tracked once as CK-03 in `docs/global/GAP-LIST.md` and isn't counted here.
+
+### Waiting for Victor: the questions
+
+1. **D1. How does the footer form reach Klaviyo?**
+   - a. The native Shopify form plus Shopify's subscriber sync only. The language isn't guaranteed and there is no source. All languages go to one list, and people may get a second confirmation mail.
+   - b. A small theme script sends the address to Klaviyo's public signup endpoint. The native form stays as the fallback. No Klaviyo script is loaded and no cookie is set before submit.
+   - c. A form hosted by Klaviyo, through klaviyo.js. The copy, states and accessibility then live in Klaviyo, and the cookie behaviour before consent is unverified.
+   - **Advice: b.**
+2. **D2. Which lists receive footer signups?**
+   - a. Reuse Dutch Speakers (`UPaLXW`) and English Speakers (`YiN3Ba`), both double opt-in, and create a French Speakers list (double opt-in) in Klaviyo.
+   - b. Create three new "Footer · NL/FR/EN" lists. That gives cleaner provenance, but campaigns get extra audiences.
+   - **Advice: a.**
+3. **D3. Where do checkout opt-ins go?**
+   - a. Keep the Shopify list (`TNLGVv`) as the sync target. Renaming it is optional.
+   - b. Point the Shopify sync at one of the language lists.
+   - **Advice: a.**
+4. **D4. Which notice goes under the field?**
+   - a. The full proposal in §9: "Occasional emails from KARMICARE about Awake & Asleep, the Dental Check-up Reward and member offers. Unsubscribe any time with the link in every email. Privacy Policy."
+   - b. The short variant: "Occasional emails from KARMICARE: Awake & Asleep news, the Check-up Reward, member offers. Unsubscribe any time. Privacy Policy."
+   - c. Your own wording.
+   - Also choose between "member offers" and "member news".
+   - **Advice: a.**
+5. **D5. What happens when Klaviyo is unreachable (too many requests, server error, network error, timeout)?**
+   - a. The native Shopify form is submitted, so no signup is lost.
+   - b. Only an error is shown.
+   - A rejected address (4xx) always shows "Check the email address." and never falls back.
+   - **Advice: a.**
+6. **D6. Where do the public key and list IDs live after your dev-theme test?**
+   - a. You set them in the live theme editor after DH ships.
+   - b. They are committed in `sections/footer-group.json`, so a later theme push can't wipe them. These are public IDs; a private key never goes there.
+   - **Advice: b.**
+7. **Klaviyo form "Free shipping banner" (`WbGdHc`).** It is still live: a Webflow test with "$150", which can appear on `/en/pages/privacy-policy`.
+   - a. Unpublish or archive it in Klaviyo.
+   - b. Keep it.
+   - **Advice: a**, before launch.
+8. **Klaviyo account country.** The country says "United States"; the address is Bruges, and it appears in every email footer.
+   - a. Change it to Belgium in Klaviyo → Account → Contact information.
+   - b. Keep it.
+   - **Advice: a**, before launch.
+
 ### Changelog
 | Date | Change |
 |------|--------|
 | 2026-10-21 | Phase 1: theme inventory, read-only Klaviyo inventory via the `klaviyo` MCP (`?read-only=true`), route, payload, settings, notice proposal, decisions D1–D6 for Victor. No theme code. |
+| 2026-10-22 | Status 22 Oct block, written by the global coordinator (landing desk request; the worker is released): one status per item, counts, and D1–D6 plus §8 items 5 and 7 as questions in words. No theme change. |
 
 Everything marked **verified** was checked today (theme files, the live storefront HTML fetched once, the Klaviyo MCP, one CORS preflight with no data). Everything marked *open* is for Victor in Klaviyo's or Shopify's UI (§8).
 
