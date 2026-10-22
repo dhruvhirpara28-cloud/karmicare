@@ -6,7 +6,7 @@
 
 merchant-edit is `8fa9ad7` (updated from `31407fb`). It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
 
-**Counts (42 rows):** In merchant-edit 16 · Done in Admin (live) 2 · Ready to land 0 · In progress 3 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
+**Counts (42 rows):** In merchant-edit 16 · Done in Admin (live) 3 · Ready to land 0 · In progress 3 · Waiting for Victor 11 · Parked / after launch 7 · Dropped 2.
 
 | Id | Status | Proof / note |
 |---|---|---|
@@ -45,7 +45,7 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
 | CK-01 | Parked / after launch | P2 capture. It needs a browser that hasn't given consent yet. |
 | CK-02 | Parked / after launch | The banner texts are set in Admin; check them with CK-01 |
 | CK-03 | Waiting for Victor | Klaviyo before consent (question 4) |
-| CK-05 (QA B-11) | Waiting for Victor | Fonts part decided (Victor, 22 Oct, option a): Typekit stays and counts as strictly necessary. Open: the two DatoCMS icons in the hydroxyapatite article (question 10, Victor in Admin). |
+| CK-05 (QA B-11) | Done in Admin (live) | Closed 22 Oct. Fonts: decided a (Victor), Typekit stays and counts as strictly necessary. Images: Victor removed the two DatoCMS icons from `/blogs/news/nano-hydroxyapatite`. Release-QA checked EN, `/nl` and `/fr` (no datocms references, tip texts intact), and I re-checked: 0 `datocms` hits in all three, HTTP 200. |
 | CK-04 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
 | LY-01 | Dropped | Not a gap |
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
@@ -116,7 +116,7 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
     - c. Switch to fonts that Shopify hosts. Proxima Nova isn't in Shopify's library, so this changes the brand font.
     - **Decided, a (Victor, 22 Oct, via release-QA):** "Typekit mag zeker laden voor cookietoestemming, dat behoort tot vereiste website functionaliteit." Treat `use.typekit.net` as strictly necessary in every CK row and consent check.
 
-    **Images (still open).** The article `/blogs/news/nano-hydroxyapatite` loads two icons from DatoCMS (`datocms-assets.com`), a host left over from the old site.
+    **Images (done 22 Oct: Victor removed both icons in Admin).** The article `/blogs/news/nano-hydroxyapatite` loaded two icons from DatoCMS (`datocms-assets.com`), a host left over from the old site.
     - a. Upload it to Shopify Files and replace the link in the article (Victor in Admin).
     - b. Keep it.
     - **Advice (QA): a.**
@@ -140,6 +140,7 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
 | 2026-10-22 | Victor changed the Company menu in Admin: FT-06 Admin links and FT-09 are done, read back on the storefront. The new PDP title and SEO fields were checked on the storefront (title, meta description, og:title, H1, JSON-LD). Added LY-04 (title suffix, question 9) and the rewrite note for the hydroxyapatite article. |
 | 2026-10-22 | Added CK-05 / G-12 from release-QA B-11 (Adobe Fonts and a DatoCMS image before consent; question 10, with QA's options). `theme.liquid:389` checked in merchant-edit `2ef9b5c`. |
 | 2026-10-22 | CK-05 fonts part decided (Victor, option a: Typekit stays and is strictly necessary). The DatoCMS part stays open, now two icons, for Victor in Admin. |
+| 2026-10-22 | CK-05 closed: Victor removed both DatoCMS icons in Admin. Release-QA checked it and I re-checked it (0 `datocms` hits on EN, `/nl`, `/fr`). Counts: done in Admin 3, waiting for Victor 11. |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
