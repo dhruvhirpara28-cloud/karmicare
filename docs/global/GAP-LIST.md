@@ -47,8 +47,8 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | Button capitals (G-8, `BUTTON-CASE.md`) | Waiting for Victor | Question 1 |
 
 **Children.**
-- **global-nav:** everything up to `1aab847` is in merchant-edit. Its own status is in `docs/global/nav/REPORT.md`.
-- **global-footer:** the Phase 1 plan `43351f9` is docs only. The newsletter build (Phase 2) waits for Victor's D1–D6 in `docs/global-footer/PLAN.md`.
+- **global-nav:** everything up to `1aab847` is in merchant-edit (checked again against `65eb83b`), and nothing of it is open. It didn't answer the request to update its own `docs/global/nav/REPORT.md`, so this line is its status.
+- **global-footer:** the Phase 1 plan `43351f9` is docs only and in merchant-edit. The newsletter build (Phase 2) waits for Victor's D1–D6. Its status block is `0b45fad` on `karmicare/global-footer` (`docs/global-footer/PLAN.md`), with the questions in words.
 - **global-type:** see TY-01.
 
 ### Waiting for Victor: the questions
