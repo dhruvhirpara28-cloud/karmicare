@@ -45,7 +45,7 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
 | CK-01 | Parked / after launch | P2 capture. It needs a browser that hasn't given consent yet. |
 | CK-02 | Parked / after launch | The banner texts are set in Admin; check them with CK-01 |
 | CK-03 | Waiting for Victor | Klaviyo before consent (question 4) |
-| CK-05 (QA B-11) | Waiting for Victor | Adobe Fonts and a DatoCMS image load before consent (question 10) |
+| CK-05 (QA B-11) | Waiting for Victor | Fonts part decided (Victor, 22 Oct, option a): Typekit stays and counts as strictly necessary. Open: the two DatoCMS icons in the hydroxyapatite article (question 10, Victor in Admin). |
 | CK-04 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
 | LY-01 | Dropped | Not a gap |
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
@@ -114,9 +114,9 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
     - a. Keep it for the launch.
     - b. Load the stylesheet only after consent. Until then, visitors see a fallback font and the page shifts when Proxima Nova arrives.
     - c. Switch to fonts that Shopify hosts. Proxima Nova isn't in Shopify's library, so this changes the brand font.
-    - **Advice (QA): a.**
+    - **Decided, a (Victor, 22 Oct, via release-QA):** "Typekit mag zeker laden voor cookietoestemming, dat behoort tot vereiste website functionaliteit." Treat `use.typekit.net` as strictly necessary in every CK row and consent check.
 
-    **Image.** The article `/blogs/news/nano-hydroxyapatite` loads one image from DatoCMS (`datocms-assets.com`), a host left over from the old site.
+    **Images (still open).** The article `/blogs/news/nano-hydroxyapatite` loads two icons from DatoCMS (`datocms-assets.com`), a host left over from the old site.
     - a. Upload it to Shopify Files and replace the link in the article (Victor in Admin).
     - b. Keep it.
     - **Advice (QA): a.**
@@ -139,6 +139,7 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
 | 2026-10-22 | A11Y-01..03 and the PDP end CTA moved to In merchant-edit (`361a06c` landed, merchant-edit `2ef9b5c`). Counts: In merchant-edit 15, Ready to land 0. |
 | 2026-10-22 | Victor changed the Company menu in Admin: FT-06 Admin links and FT-09 are done, read back on the storefront. The new PDP title and SEO fields were checked on the storefront (title, meta description, og:title, H1, JSON-LD). Added LY-04 (title suffix, question 9) and the rewrite note for the hydroxyapatite article. |
 | 2026-10-22 | Added CK-05 / G-12 from release-QA B-11 (Adobe Fonts and a DatoCMS image before consent; question 10, with QA's options). `theme.liquid:389` checked in merchant-edit `2ef9b5c`. |
+| 2026-10-22 | CK-05 fonts part decided (Victor, option a: Typekit stays and is strictly necessary). The DatoCMS part stays open, now two icons, for Victor in Admin. |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
@@ -192,7 +193,7 @@ Priority: **P0** blocks the soft launch (wrong offer, dead link, privacy) · **P
 | LY-01 | Day/Night: `day-night-sun.js` renders inline on preview and live (`KCDayNight` present). | — | — | — | Not a gap (the 17 Oct formatter bug isn't in this branch). |
 | LY-02 | Page gutter: Dawn's 15 px on phones vs the 20 px token in the footer/clock (homepage TF-07). | `3027:20922` | P1 | Utopia lane | Handoff, already with Utopia. |
 | CK-03 | klaviyo.js loads on every page through a Shopify ScriptTag (`asyncLoad`, `window.onload`) with no consent check; not theme code (global-footer `PLAN.md` §1.4). | — | P0 | Victor (Klaviyo/Shopify admin), then this lane | Victor runs the cookie check in `PLAN.md` §8 item 8. If klaviyo.js or `__kla_id` arrive before consent: move Klaviyo onsite to the consent-aware app embed or remove the ScriptTag. |
-| CK-05 | Release-QA B-11: two third-party requests load before cookie consent. (1) The Adobe Fonts stylesheet `use.typekit.net/kss0igj.css` (`layout/theme.liquid:389`) loads on every page, live too. (2) A DatoCMS image (`datocms-assets.com`) loads in `/blogs/news/nano-hydroxyapatite`. Neither is a tracking script, but both send the visitor's IP address to a third party. | — | P1 | Victor (G-12), fonts in this lane, image in Admin | Question 10. Fonts: a keep for launch (QA advice), b load after consent, c Shopify-hosted fonts. Image: a move to Shopify Files and replace it in the article (QA advice, Victor in Admin), b keep. |
+| CK-05 | Release-QA B-11: two third-party requests load before cookie consent. (1) The Adobe Fonts stylesheet `use.typekit.net/kss0igj.css` (`layout/theme.liquid:389`) loads on every page, live too. (2) Two DatoCMS icons (`datocms-assets.com`) load in `/blogs/news/nano-hydroxyapatite`. Neither is a tracking script, but both send the visitor's IP address to a third party. | — | P1 | Victor (G-12), images in Admin | Question 10. Fonts: **decided a**. Victor (22 Oct): "Typekit mag zeker laden voor cookietoestemming, dat behoort tot vereiste website functionaliteit". `use.typekit.net` counts as strictly necessary in CK rows and consent checks. Images, open: a move both icons to Shopify Files and replace them in the article (QA advice, Victor in Admin), b keep. |
 | CK-04 | Open sticky card (PDP) and the consent panel overlap at 750/990/1200; the panel drops to z-index 199 below the card instead of moving (`assets/kc-cookie-preferences.css:281`). Inherited, not NV-13 (R16). | — | P2 | this lane | Follow-up: place or hide the panel against the open card's height instead of stacking only. |
 | TY-01 | Bold in body copy renders 700; Figma "Text/* (Strong)" is Semibold 600 (Text/Medium (Strong) `038b709c…`, hero subtext V15 `2928:19894`). `assets/base.css` sets no weight for `b`/`strong` (browser "bolder" = 700; Typekit `kss0igj` serves 600 and 700), and `layout/theme.liquid:195` sets `--font-body-weight-bold` = body + 300 = 700 (read by `base.css:2960`, `component-cart-items.css:273/:319`, `component-disclosures.css:59/:130`). Setting `body_font_weight` (`settings_schema.json:245`) is read nowhere. From the homepage lane, verified here. | `2928:19894` | P1 | Victor (G-7), then a child | **G-7** (a) `b`/`strong` in body copy and `--font-body-weight-bold` → `var(--font-600-weight)`; headings keep their own rules (two-tone `strong` `base.css:424/:431`, Marlide stays 300); remove the dead `body_font_weight` setting · (b) 600 only, keep the setting · (c) keep 700. Recommend **a**. |
 | A11Y-01 | The header logo link (`.header__heading-link`, inline SVG logo) has no accessible name: screen readers announce an empty link on every page, EN/NL/FR, Day and Night (axe `link-name`, serious; WCAG 2.4.4 / 4.1.2). Accessibility check 21 Oct on merchant-edit preview `189891674493`. | — | P1 | this lane | Give the link `aria-label="{{ shop.name }}"` (or visually hidden text) in `sections/header.liquid`; SVG stays `aria-hidden`. No new copy. |
