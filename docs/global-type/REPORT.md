@@ -122,6 +122,30 @@ overrides are identical in all three columns. `shopify theme check --fail-level 
 19 baseline warnings, 0 errors. `git diff --check` clean. Local dev servers answer 401, so no
 rendered re-check; the selector change cannot affect anything outside buttons.
 
+## R21b fix (Astra, approve with fixes): the two section CTA links
+
+Astra's R21b P2: `.comparison-section__button` (`sections/comparison-table.liquid:118`, KC primary,
+700 at `assets/section-comparison-table.css:91`) and `.research-behind-system__button`
+(`sections/research-behind-system.liquid:149-151` and the coming-soon path with `role="link"`, KC
+secondary, 700 at `assets/section-research-behind-system.css:466`) carry none of the excluded
+classes. Fix in `assets/base.css` only: both classes added to both button `:where(...)` lists of the
+`b` and the `strong` block, element and descendants. Nothing else changed.
+
+Same fixture, with `section-comparison-table.css` and `section-research-behind-system.css` added and
+eight new cases; measured against the `base.css` of 9c2fa98^ (A, before TY-01), 4920b8f (B, R21) and
+this fix (C). Computed `font-weight` of the bold element:
+
+| Case | A before | B 4920b8f | C fix |
+| --- | --- | --- | --- |
+| `a.comparison-section__button > b`, `… > span > em > strong` | 900 | 600 | **900** |
+| `a.research-behind-system__button > span > strong`, coming-soon `a[role=link] > span > em > b` | 900 | 600 | **900** |
+| `strong.comparison-section__button`, `b.research-behind-system__button` (the bold element is the CTA) | 700 | 700 | 700 |
+| plain labels of both CTAs (control) | 700 | 700 | 700 |
+| every R21 case (body copy, headings, two-tone, native/role/KC/Dawn/challenge buttons, buybox, RDA, journey, charcoal, compare footer, tooltip, token readers) | as in the R21 table | as in the R21 table, column C | unchanged from B |
+
+The 45-case fixture differs between B and C only in the four new CTA bold cases. Theme Check:
+exit 0, 19 baseline warnings, 0 errors. `git diff --check` clean.
+
 ## Notes
 
 - The Orca runtime restarted during the FR pass (22 Oct 13:43, new socket `o-71600-ed81.sock`); every
