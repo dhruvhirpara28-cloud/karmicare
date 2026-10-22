@@ -1,12 +1,12 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "94921e35b98c",
+  "en-source.json": "77ced0a63981",
   "registered.json": "7967afaaf3d3",
-  "holds.json": "519bdea40b98",
+  "holds.json": "7e1947d1b3c4",
   "nl/batch-01-homepage.json": "5cccee39a4c7",
-  "nl/batch-02-pdp.json": "1101f9feff35",
-  "nl/batch-03-header-footer.json": "ddf994a11689",
+  "nl/batch-02-pdp.json": "bbfddce5676c",
+  "nl/batch-03-header-footer.json": "13fad7efcb37",
   "nl/batch-04-legal.json": "103611b761f9",
   "nl/batch-05-products.json": "95589890b394",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
@@ -15,8 +15,8 @@
  },
  "batches": {
   "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "2468bab432715f0aea7f7b6aea815a8f65f70721",
-  "batch-03-header-footer": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
+  "batch-02-pdp": "55340f9dc6dd5f8865fc1093937c727c0f1a3045",
+  "batch-03-header-footer": "d8fb1b30ea2f5be901b89205707d850a3f458452",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
@@ -3931,13 +3931,11 @@
      "kind": "match",
      "key": null,
      "field": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
-     "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-     "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-     "value": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account. Preventie, beloond.",
+     "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+     "en_sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+     "value": "Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond.",
      "gates": [],
-     "hold": [
-      "review hold (holds.json): check-up tooltip says 'verified by your dentist'; the offer needs no dentist involvement (copy decision S2 open)"
-     ],
+     "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -4248,13 +4246,11 @@
      "kind": "match",
      "key": null,
      "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-     "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-     "en_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
-     "value": "<p>Karmicare is een zorgsysteem, geen artikel uit het schap: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op. Met het Karmicare-jaar levert een afgeronde tandartscontrole — bevestigd door je tandarts — nog eens €40 op. Je stapt binnen met iets te winnen, niet alleen met iets te betalen. Zorg die terugkomt.</p>",
+     "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+     "en_sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
+     "value": "<p>Karmicare is een zorgsysteem, geen artikel uit het schap: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op. Met het Karmicare-jaar levert een afgeronde tandartscontrole nog eens €40 op. Je stapt binnen met iets te winnen, niet alleen met iets te betalen. Zorg die terugkomt.</p>",
      "gates": [],
-     "hold": [
-      "review hold (holds.json): Duo info card says the check-up is 'confirmed by your dentist'; the offer needs no dentist involvement (copy decision S2 open)"
-     ],
+     "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -10940,13 +10936,11 @@
      "kind": "match",
      "key": null,
      "field": "sections.footer.settings.slogan",
-     "en": "Your mouth has a rhythm So should your oral care",
-     "en_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
-     "value": "Je mond heeft een ritme Je mondverzorging ook",
+     "en": "Your mouth has a rhythm Now your oral care too",
+     "en_sha1": "cf53c7c990120ca7fc3384ca46404284062d6b39",
+     "value": "Je mond heeft een ritme Nu je mondverzorging ook",
      "gates": [],
-     "hold": [
-      "review hold (holds.json): footer slogan has no stop between its two sentences; check the Figma footer first (decision S9 open)"
-     ],
+     "hold": [],
      "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,

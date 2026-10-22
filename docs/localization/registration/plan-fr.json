@@ -1,9 +1,9 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "94921e35b98c",
+  "en-source.json": "77ced0a63981",
   "registered.json": "7967afaaf3d3",
-  "holds.json": "519bdea40b98",
+  "holds.json": "7e1947d1b3c4",
   "fr/batch-01-homepage.json": "e548111a26cb",
   "fr/batch-02-pdp.json": "d13b006a0949",
   "fr/batch-03-header-footer.json": "453fda3163e5",
@@ -15,8 +15,8 @@
  },
  "batches": {
   "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "2468bab432715f0aea7f7b6aea815a8f65f70721",
-  "batch-03-header-footer": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
+  "batch-02-pdp": "55340f9dc6dd5f8865fc1093937c727c0f1a3045",
+  "batch-03-header-footer": "d8fb1b30ea2f5be901b89205707d850a3f458452",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
@@ -3924,29 +3924,6 @@
      ]
     },
     {
-     "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
-     "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-     "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-     "value": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): check-up tooltip says 'verified by your dentist'; the offer needs no dentist involvement (copy decision S2 open)"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "loop_subscriptions_WEk4XJ",
-      "pricing_summary_checkup_tooltip"
-     ]
-    },
-    {
      "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/testimonial_button_text",
      "kind": "match",
      "key": null,
@@ -4238,29 +4215,6 @@
       "main",
       "info_card_FnBcaN",
       "header_text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/info_card_FnBcaN/body_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-     "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-     "en_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
-     "value": "<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, votre contrôle dentaire effectué — confirmé par votre dentiste — en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): Duo info card says the check-up is 'confirmed by your dentist'; the offer needs no dentist involvement (copy decision S2 open)"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "info_card_FnBcaN",
-      "body_text"
      ]
     },
     {
@@ -11034,28 +10988,6 @@
    "batch": "batch-03-header-footer",
    "page": "all pages",
    "items": [
-    {
-     "id": "footer-group:footer/slogan",
-     "kind": "match",
-     "key": null,
-     "field": "sections.footer.settings.slogan",
-     "en": "Your mouth has a rhythm So should your oral care",
-     "en_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
-     "value": "Votre bouche a un rythme Vos soins bucco-dentaires devraient le suivre",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): footer slogan has no stop between its two sentences; check the Figma footer first (decision S9 open)"
-     ],
-     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "footer",
-      "slogan"
-     ]
-    },
     {
      "id": "footer-group:footer/copyright_text",
      "kind": "match",

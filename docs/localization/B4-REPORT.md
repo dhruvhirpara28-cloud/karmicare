@@ -274,6 +274,8 @@ By resource, NL: `templates/index.json` 135, `templates/product.subscription-ite
 
 **Fetched at run time.** GIDs; the theme template keys and digests; the metafields' translatable content (key `value` and its digest, by GID); and the existing NL/FR translations, which are part of the approval snapshot, so the run shows every value it would overwrite and stops if one changes before writing. The full counts and per-resource table are in `docs/localization/registration/DRY-RUN.md`.
 
+**First wave registered (22 Oct 2026).** Victor ran both writes himself after Astra R23: NL 19:29 CEST, checksum `0622fa0b0947ab6f`, 284 keys confirmed in 28 chunks; FR 19:33 CEST, checksum `54845f48d52df704`, 219 keys confirmed in 25 chunks. Both journals have a start and an end record and only confirmed results (`live/journal-<lang>.jsonl`, untracked). Theme text, section groups, media alts, product titles and shop SEO only; no metaobject, metafield, menu, claim-gated, held or Victor-registered entry. The plans are rebuilt afterwards with the decisions of 22 Oct (dentist clause, slogan) for the second round.
+
 ## Part 4 · URL and selector baseline (H10)
 
 **Method.** Captured 19 Oct 2026, 22:04 UTC (429 re-check 22:45 UTC), on `karmicares.myshopify.com`.
