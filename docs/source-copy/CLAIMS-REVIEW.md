@@ -91,9 +91,13 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | C102 | comparison | “Fluoride’s benefits don’t outweigh its known drawbacks.” | **needs-review** | New homepage FAQ answer of 21 Oct (41ae772), block disabled. “Karmicare is fluoride-free, and always will be” is composition (as C01–C03); the benefit-against-drawback judgement on fluoride is a health comparison with no source in products.md, close to brand don’t #13 (no superiority over fluoride). | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` |
 | C103 | provenance | “EST. 2017” | **confirmed** | New announcement line of 21 Oct (Victor G-1, global 3c03acb; the same day Victor shortened it to “… · BELGIAN-MADE · EST. 2017”, which drops “circadian oral care”); “est. 2017” is a company date with no source in the repo. Confirmed by Victor 21 Oct (“EST. 2017 is bevestigd”, via the landing desk). | `header-group:announcement-bar/announcement-bar-0/text` |
 
+**22 Oct, Victor: publication released, review later.** Victor chose to publish the NL/FR translations of the current EN claims now (“Huidige EN vrijgeven, review later”), so NL and FR say what the live EN says, and to do the claim review (K1–K7) later in EN, NL and FR at once. The practitioner quotes may be translated too (“citaten mag je ook vertalen, zij gaan niet goedkeuren”). `registration/releases.json` records it: the builder no longer holds an item on `pending-claim-review`; the statuses stay, so the review can still be done. Legal review stays a gate.
+
 ## Offer statements that conflict with the offer source of truth
 
 Not health claims, but customer-facing promises that the confirmed offer (5 Oct 2026) contradicts. Listed so translators do not lock them in.
+
+**22 Oct, Victor (S2, choice a):** the dentist clause is deleted from the PDP check-up tooltip, the sticky-bar `checkup_info` key and the Duo info card (EN corrected, NL follows). The compare-table tooltip and the Year selling-plan description are admin text and still carry it: Victor edits them in the admin.
 
 | Where | Text | Conflict |
 |---|---|---|

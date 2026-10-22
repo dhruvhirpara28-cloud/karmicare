@@ -54,9 +54,10 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 35b | In progress | The buybox `h5` is still at `treatment-journey.liquid:19`, `:69`. The plan is ready and waits for the desk's go |
 | 36 | Parked / after launch | Info; recheck after 33–35 |
 | 37 | Parked / after launch | Loop widget, off-limits |
-| 38 | Parked / after launch | Amounts in other currencies than the euro (Victor, 22 Oct, for later). Nothing built |
+| 38 | Parked / after launch | Amounts in other currencies than the euro. Victor decided the €40 reward on 22 Oct: A + C. It gets built later, together with the price per brushing. Nothing built yet |
+| 39 | Parked / after launch | NL Welcome Kit names break in the middle of a word (release QA, live). The proposal waits for a go or the next fix moment |
 
-**Counts (40 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 1 · parked / after launch 19 · dropped 8.
+**Counts (41 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 1 · parked / after launch 20 · dropped 8.
 
 ### Waiting for Victor
 
@@ -159,7 +160,7 @@ The shop also sells in CHF, GBP, USD and SEK. Product and plan prices are conver
 
 | # | Observed | Where | P | Owner | Approach | Status |
 |---|---|---|---|---|---|---|
-| 38 | **a) Price per brushing.** It stays in euro when the visitor pays in another currency. **b) The €40 Dental Check-up Reward.** It is printed as a fixed amount, and in the Loop widget it takes the visitor's currency without being converted: 4000 cents go through `loopFormatMoney`, so a CHF visitor would see "CHF 40". | a) `templates/index.json:207`, `:332` `button_subtext` "€0.49 / brushing ritual" (two-formulas-karmicare, product-benefits-karmicare, also their schema defaults), and the compare_value metaobjects "Cost per brushing". b) `assets/loop-widget.js:2722` (receipt chip), `sections/care-comes-back.liquid` ("€40.00" and the check-up text), the check-up tooltip in `main-product.liquid` | P2 | Victor (decision), pdp, source-copy (keys) | See below | Parked / after launch |
+| 38 | **a) Price per brushing.** It stays in euro when the visitor pays in another currency. **b) The €40 Dental Check-up Reward.** It is printed as a fixed amount, and in the Loop widget it takes the visitor's currency without being converted: 4000 cents go through `loopFormatMoney`, so a CHF visitor would see "CHF 40". | a) `templates/index.json:207`, `:332` `button_subtext` "€0.49 / brushing ritual" (two-formulas-karmicare, product-benefits-karmicare, also their schema defaults), and the compare_value metaobjects "Cost per brushing". b) `assets/loop-widget.js:2722` (receipt chip), `sections/care-comes-back.liquid` ("€40.00" and the check-up text), the check-up tooltip in `main-product.liquid`, and the sticky bar keys `kc.sticky_cart.credit_checkup_html` ("+ [credit] Care Credit + €40 Check-up Reward") and `checkup_info_html` | P2 | pdp, source-copy (keys) | b) decided A + C (below) | Parked / after launch: built later with a) |
 
 **Already correct**: the plan prices, the Loop plan cards ("{{ amount }} / brushing"), and the Care Credit you earn (10 % or 20 %), which follows the payment currency. The amounts computed in the end CTA, the sticky bar and the plans table go through `snippets/kc-money.liquid`. It writes the euro by language, and any other currency in the shop money format. That is right for converted amounts. It would be wrong for a fixed euro amount passed in cents.
 
@@ -173,7 +174,24 @@ The shop also sells in CHF, GBP, USD and SEK. Product and plan prices are conver
 - **Option b: fixed local amounts** (for example 400 kr), with the Terms changed for each currency. Approach: one amount per currency as a setting or metaobject, which the theme reads by `cart.currency`. This needs a legal change to the Terms first, plus new copy in every language.
 - **Option c: hide the reward line outside the EU.** Approach: the theme and the Loop widget skip the check-up chip, the receipt row, the tooltip and the care-comes-back step when the market's country is not in the EU (CHF, GBP, USD). The line stays for EU markets, including SEK, which then still needs a or b.
 
-Advice: **c for CHF, GBP and USD**, because the Terms do not offer the reward there, so showing it would promise something the Terms do not give. **a for SEK**. Leave b until there is a legal reason to change the Terms. The quickest route for the soft launch remains limiting the four markets.
+**Decided by Victor, 22 Oct (via source-copy): A + C.** The Terms do not change.
+- **A, EU markets with another currency (today Sweden, SEK).** €40 stays the official amount. The theme writes "€40" and adds the local amount next to it as an approximation at the active rate, for example "€40 (ca. 451 kr)". The converted amount is 4000 cents × `Shopify.currency.rate` in JS, or the cart currency's rate in Liquid, written in the shop money format. The euro part goes through the euro branch of `kc-money` whatever the cart currency.
+- **C, markets outside the EU (today CH, GB and US).** The reward line is hidden: the check-up chip, the receipt row, the tooltip, the sticky bar's "+ €40 Check-up Reward" and the care-comes-back step. A market counts as EU by `localization.country.iso_code` (Liquid) or `Shopify.country` (JS), checked against a list of the 27 EU country codes in one snippet, so no copy is needed for it.
+- **New key for source-copy** (sent on 22 Oct): `kc.general.approx_amount`, EN "(approx. [amount])". `[amount]` is filled with the local amount, the same placeholder style as `kc.receipt.*`. NL and FR are source-copy's; Victor's NL example is "(ca. …)". The theme puts it after the euro amount with a no-break space. No new settings.
+- `loop-widget.js` (receipt chip, line 2722) is in scope of this decision, so the edit there is covered when it gets built.
+
+## NL Welcome Kit names (release QA, live, 22 Oct; parked, nothing built)
+
+| # | Observed | Cause | P | Owner | Proposal | Status |
+|---|---|---|---|---|---|---|
+| 39 | NL Welcome Kit names break in the middle of a word in the buybox: "Ochtendtandenb\|orstel 2.0", "Avondtandenbor\|stel 2.0" at 390 (100 px name column) and at 1024 (111 px). At 1440 (147 px) they fit on one line. In the plans-table popover (260 px wide), all three names fit on one line at 390 and 1440 (24 px, one line, on the live theme with the popover held open). QA's plans-table case is not reproduced; it needs QA's width. | Loop's `.loop-welcome-kit-product-link { word-break: break-word }` (`snippets/loop-widget.css.liquid:594`, off-limits). A long Dutch compound has no space, so it is cut wherever the line ends. | P2 | pdp (CSS), source-copy (only for option 3) | See below | Parked / after launch |
+
+Tested on the live theme (karmicare/main, `/nl/`, Night) with CSS injected through the approved helper. Shots are in `docs/pdp/shots/kitnames-nl-*`.
+1. **`hyphens: auto` (proposal).** `kc-buybox.css` sets `word-break: normal; overflow-wrap: break-word; hyphens: auto` on `.kc-buybox .loop-welcome-kit-product-link`. The page already has `lang="nl"`. Result at 390 and 1024: "Ochtendtanden-/borstel 2.0" and "Avondtandenbor-/stel 2.0", with a hyphen at a syllable. At 1440 nothing changes. The heights stay the same (390: 44 px, 1024: 40 px), so nothing below moves. It is one theme rule with no copy, and it also covers FR and later names.
+2. **Wrap at spaces only** (`word-break: normal`, no hyphens). The full word does not fit: at 390, "Ochtendtandenborstel" and "Avondtandenborstel" run into each other. Rejected.
+3. **`&shy;` in the NL product titles** (source-copy, in Translate & Adapt): "Ochtend&shy;tanden&shy;borstel". The break then falls at the compound boundary ("Ochtend-/tandenborstel 2.0"). That is the neatest, but it changes store data that also shows in checkout and emails. It could be added on top of 1 later, because with `hyphens: auto` the soft hyphens are used first.
+
+Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the compound boundary.
 
 ## Checked with no gap
 
@@ -186,3 +204,4 @@ Advice: **c for CHF, GBP and USD**, because the Terms do not offer the reward th
 - 22 Oct: added "Status 22 Oct", with one status per row, counts and the questions for Victor. Every theme row was checked against merchant-edit `31407fb` with `git merge-base --is-ancestor`.
 - 22 Oct: row 32 (FAQ evidence links) is parked at Victor's request ("FAQ kunnen we even parkeren").
 - 22 Oct: row 38 added and parked: the price per brushing and the €40 Dental Check-up Reward in other currencies (desk, for Victor; nothing built).
+- 22 Oct: row 38: Victor decided A + C for the €40 reward; the key `kc.general.approx_amount` went to source-copy. Row 39 added: NL Welcome Kit names, with a proposal (parked).
