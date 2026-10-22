@@ -295,6 +295,12 @@
   margin-top: auto;
 }
 
+/* The title is an h3 for the outline but keeps the h5 look: h3 brings the h3 letter
+   spacing (-1px), which the old h5 never set, so it inherits as before (R19-01) */
+.product-benefits__card-title {
+  letter-spacing: inherit;
+}
+
 .product-benefits__card-content p {
   opacity: 0.76;
 }

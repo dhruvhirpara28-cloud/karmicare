@@ -1,5 +1,126 @@
 # Homepage gap list (soft launch, A1)
 
+## Status 22 Oct
+
+One status per row. **In merchant-edit**: the theme change is in local `merchant-edit` 31407fb (checked with `git merge-base --is-ancestor <sha> merchant-edit`); merchant-edit is not pushed, so none of it is live yet. **Ready to land**: committed on `karmicare/soft-launch-homepage` and reported to the landing desk. The original 19 Oct scan follows below this block, unchanged.
+
+| Status | Rows |
+|---|---|
+| In merchant-edit | 42 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 5 |
+| Parked / after launch | 30 |
+| Dropped | 10 |
+| **Total** | **88** (the 74 scan rows plus 14 later items) |
+
+### Waiting for Victor
+
+| Row | Question | Options | Advice |
+|---|---|---|---|
+| F1 · FAQ "Is Karmicare fluoride-free?" (hidden since 65ff2a8) | The answer reads "Karmicare is fluoride-free, and always will be. Fluoride's benefits don't outweigh its known drawbacks." Review R11 F1 calls the second sentence a blanket claim without support. | (a) keep only the first sentence and show the row; (b) keep both sentences and show the row; (c) keep the row hidden | (a): the first sentence is a fact about the formula and needs no evidence |
+| F3 · FAQ "Why two formulas instead of one?" (visible, also live) | The answer ends "…so Asleep soothes, rebalances and remineralises while you sleep." Review R11 F3 calls "while you sleep" an overnight action claim without support. | (a) drop "while you sleep"; (b) Victor's own wording; (c) hide the row | (a): the smallest change that removes the claim |
+| 0205 · FAQ "Can I combine Karmicare with fluoride toothpaste or rinses?" (hidden since 65ff2a8) | The answer is verbatim from the brand FAQ base (FAQ-0205): fluoride and nano-hydroxyapatite "compete for the same enamel surface". Has it been cleared clinically? | (a) cleared: show the row; (b) not yet: keep it hidden until checked | (b) until someone has checked the claim; (a) as soon as it is cleared |
+| Clock help text (a11y, axe) | The clock knob points `aria-describedby` at `clock-help-…`, an element that no longer exists (it was dropped in bb6d231 "pull to main"). Home and PDP share the section. | (a) put the old screen-reader-only sentence back ("Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key… Home selects midnight; End selects 23:59…"), with NL/FR translations; (b) drop the `aria-describedby`, so the slider keeps only its label and live value; (c) leave it (axe keeps flagging it) | (a): it is existing copy and tells keyboard users how the control works; agree with the PDP lane who builds it |
+| PR-01 · professionals name holders at 393 | Headless Chrome showed the glass name holders blank on phones; the text is in the DOM. Probably a capture artefact, never checked on a real phone. | (a) Victor opens the homepage on his phone and confirms the names show: row closed; (b) they are blank: the homepage moves the `backdrop-filter` onto a `::before` | (a): a two-minute check |
+
+### All rows
+
+| Row | Status | Detail |
+|---|---|---|
+| AN-01 | In merchant-edit | global lane `3c03acb` (announcement one line on tablets) |
+| HD-01 | In merchant-edit | global lane `3ea647a`, floating navigation (D-12) |
+| HE-01 | In merchant-edit | `81e2edb`: D-1, Victor kept the photo; HQ kit (3936×2960) from Files |
+| HE-02 | In merchant-edit | `1506cab` |
+| HE-03 | In merchant-edit | `6664a71`: D-2, "WHY TWO FORMULAS?" jumps to the clock |
+| HE-04 | In merchant-edit | `1506cab` |
+| HE-05 | In merchant-edit | `d0c1130` (picture fills its wrapper, contained) and `81e2edb` (`sizes` 900px / 92vw) |
+| HE-06 | Parked / after launch | P2; at 1440 the avatar still sits about 12 px above the switch |
+| HE-07 | Parked / after launch | P2, not rechecked since 19 Oct |
+| HE-08 | Parked / after launch | P2, not rechecked since 19 Oct |
+| HE-09 | In merchant-edit | `f3d2391`: D-3, no badge below 750 |
+| Hero/strip seams | In merchant-edit | `68527fc`: Victor 21 Oct; 120 px under the switch on desktop, 48-50 px on phones (Figma V15) |
+| SS-01 | In merchant-edit | `37ab3bc`, then `f2f65d0` (D-14: one drifting, swipeable row at every width) |
+| SS-02 | In merchant-edit | `37ab3bc`, superseded by `f2f65d0` |
+| SS-03 | Parked / after launch | P2: hairlines still run the full width |
+| SS-04 | Parked / after launch | utopia (type line heights) |
+| R13 F2 / B-13 | In merchant-edit | `8def726` and `55e9db2`: the marquee is a focusable region, keys move it, no-JS scroll |
+| R9 F3 | Dropped | Victor: no pause button on the stat strip |
+| CL-01 | In merchant-edit | `b314fd8` |
+| CL-02 | Dropped | D-4: keep as is |
+| CL-03 | Dropped | D-5: keep as is |
+| CL-04 | Parked / after launch | P2 setting |
+| CL-05 | Parked / after launch | assets (orb files) |
+| Clock callout headings | In merchant-edit | `419fbfc`: h4 → h3 (also on the PDP) |
+| TF-01 | In merchant-edit | `39a00a8`, srcset to 1600 in `aca9611` (R11 F2) |
+| TF-02 | In merchant-edit | `39a00a8` (size), `81e2edb` (the uncut duo with its shadow replaces the tight crop) |
+| TF-03 | In merchant-edit | `39a00a8` |
+| TF-04 | In merchant-edit | `39a00a8` |
+| TF-05 | In merchant-edit | `39a00a8` |
+| TF-06 | In merchant-edit | `42a913b`: Night dims the ring |
+| TF-07 | Parked / after launch | utopia / global gutter |
+| TF-08 | Parked / after launch | utopia |
+| TF-09 | Parked / after launch | P2 |
+| TF-10 | In merchant-edit | `39a00a8` |
+| B-08 | In merchant-edit | `92a6a4d`: "SEE WHAT'S INSIDE" shows Coming soon (rule H8) |
+| BE-01 | In merchant-edit | `6860d74` |
+| BE-02 | Dropped | live follows the approved card component |
+| BE-03 | Parked / after launch | the pictures are off since `59db4e2` until proper images exist |
+| BE-04 | Parked / after launch | no gain while the pictures are off |
+| BE-05 | Parked / after launch | source-copy: card 07 still has the U+2028 line separator |
+| BE-06 | Parked / after launch | utopia |
+| Benefit images off | In merchant-edit | `59db4e2`: Victor 21 Oct, section switch off, the nine images stay set |
+| Benefit card headings | In merchant-edit | `419fbfc`: h5 → h3 |
+| R19-01 | Ready to land | `add1429`: the card titles inherit their letter spacing again (reported 22 Oct) |
+| PR-01 | Waiting for Victor | phone check, see above |
+| PR-02 | Dropped | D-6: keep the marquee |
+| PR-03 | In merchant-edit | `4f8024c` |
+| PR-04 | Parked / after launch | P2 |
+| PR-05 | Dropped | D-6: accept the 2560 repeat |
+| PR-06 | Parked / after launch | assets (portraits) |
+| RE-01 | In merchant-edit | `bf5d314`, `eefb0a9` |
+| RE-02 | In merchant-edit | `4f8024c` |
+| RE-03 | Parked / after launch | assets |
+| RE-04 | Parked / after launch | assets |
+| RE-05 | Parked / after launch | D-9: Victor updates the research cards in his own branch |
+| RE-06 | Parked / after launch | P2 |
+| RE-07 | Parked / after launch | utopia |
+| CC-01 | In merchant-edit | `7ff0562`, reversed by `6dcf6aa` (H-2: 01/02/03 back, as in Figma) |
+| CC-02 | Dropped | D-10: keep as is |
+| CC-03 | Dropped | D-10: keep as is |
+| CC-04 | Parked / after launch | source-copy: the eyebrow reads "Return on Care" now; the step titles were not rechecked |
+| CC-05 | Parked / after launch | P2 |
+| FQ-01 | In merchant-edit | `17e5247`, `9dbafdf`, `6c5ae47`, `65ff2a8`: answers from the brand FAQ base; two rows held, see F1 and 0205 |
+| FQ-02 | In merchant-edit | `174997e`, `2aa89c0` |
+| FQ-03 | In merchant-edit | `706d597`: FAQ cards on the research card surface token (the colour setting is empty) |
+| FQ-04 | In merchant-edit | `d7232f7`: Victor wants pills in Nunito capitals (reverses `37ead46`) |
+| FQ-05 | Parked / after launch | utopia |
+| F1 | Waiting for Victor | see above |
+| F3 | Waiting for Victor | see above |
+| 0205 | Waiting for Victor | see above |
+| FP-01 | In merchant-edit | `2124ebb` |
+| FP-02 | In merchant-edit | `2124ebb` |
+| FP-03 | In merchant-edit | `2124ebb` |
+| FP-04 | In merchant-edit | `2124ebb` |
+| FP-05 | Parked / after launch | assets |
+| FP-06 | Dropped | D-13: keep |
+| FP-07 | Parked / after launch | assets |
+| FP-08 | Parked / after launch | source-copy |
+| End-CTA icon alt | In merchant-edit | `984ba8a`: decorative icons `alt=""` (also the PDP) |
+| FT-01 | In merchant-edit | `82a0a51` |
+| FT-02 | Parked / after launch | P2; the footer belongs to the global lane now |
+| FT-03 | In merchant-edit | global lane `95b56d6` (mono payment icons) |
+| FT-04 | In merchant-edit | global lane `95b56d6` (Shopify flags, no `flagcdn.com`) |
+| FT-05 | Parked / after launch | utopia |
+| GL-01 | Dropped | expected consent behaviour |
+| GL-02 | Parked / after launch | source-copy |
+| R9 F2 | In merchant-edit | `ab34477`: in-page glide only for section anchors |
+| Clock help text | Waiting for Victor | see above |
+
+Not counted (other owners): bold body text renders 700 against the library's Semibold 600, forwarded to the global lane on 21 Oct. The live `templates/index.json` reconcile is closed: `origin/main` has no index.json change after `8596548`, which this branch already contains, so there are no live editor edits to keep.
+
+**Changelog**: 22 Oct, status block added (42 in merchant-edit, 1 ready to land, 5 waiting for Victor, 30 parked, 10 dropped).
+
 **Scanned**: 19 October 2026, live homepage `https://karmicares.myshopify.com/` (theme `karmicare/main` 187295564157, assets equal to branch base `3bae259` after Shopify minification), with the merged benefit hover state (6aa0e71) served in place of the live file and its veil emulated.
 **Viewports**: 393 (phone, DPR 3, touch), 768 (tablet, DPR 2, touch), 1024 (DPR 2), 1440 (DPR 2), 1920 and 2560 (DPR 1). Day and Night forced through the theme's `.kc_day` / `.kc_night` switch.
 **References**: Figma KC | Shopify Store `3rOMJvQZTzyYjnCV6oggV3`, Homepage V15 Day `2928:19880` and Night `2590:9728` (1440), mobile `3027:20792` (393, Day). Care-comes-back has no V15 band; its reference is `4013:29078` (earlier Day frame). No Figma exists for 768, 1024, 1920 or 2560: those are judged against the 1440/393 intent (gutters, container, no clipping, balanced alignment, sensible max widths). Brief = `.coordinator/source/45-HOMEPAGE-LAUNCH.md` plus COMMON-RULES §3.
