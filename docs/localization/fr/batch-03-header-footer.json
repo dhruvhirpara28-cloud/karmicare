@@ -2,7 +2,7 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
+ "source_digest": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
  "source_entries": 41,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -18,8 +18,7 @@
   "legal-review": 5,
   "pending-claim-review": 1,
   "pending-en-review": 1,
-  "source-defect": 1,
-  "wording-adapted": 2
+  "wording-adapted": 1
  },
  "entries": [
   {
@@ -512,15 +511,12 @@
    "resource_type": "navigation",
    "file_or_handle": "navigation:company",
    "key_path": "links[2].title",
-   "en": "Why use hydroxapatite",
-   "en_sha1": "03cf49872d62d8b2d56ff94c12ecb29d5fe7d603",
-   "fr": "Pourquoi choisir l’hydroxyapatite",
+   "en": "Why hydroxyapatite",
+   "en_sha1": "3e38779dedb807ac256f03b385328b64cf0ceeff",
+   "fr": "Pourquoi l’hydroxyapatite",
    "status": "admin",
-   "flags": [
-    "source-defect",
-    "wording-adapted"
-   ],
-   "notes": "The EN misspells hydroxyapatite and uses the banned word 'use' (B1a handoff 7); the FR is 'Pourquoi choisir l'hydroxyapatite'.",
+   "flags": [],
+   "notes": "EN fixed by Victor 22 Oct (spelling, 'use' dropped); FR follows the EN and the NL. Was: \"Pourquoi choisir l’hydroxyapatite\"",
    "source_status": "admin-held"
   },
   {
