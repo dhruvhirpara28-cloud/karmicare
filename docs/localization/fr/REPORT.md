@@ -208,7 +208,7 @@ PDP `50ad819` removed the settings `subscription_title` and `package_name`; the 
 - `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` (was translated)
 - `liquid:sections/main-product.liquid:1098`, the `package_name` default (was `theme-key`)
 
-All three read « Système de soin matin/soir Awake & Asleep ». The naming source is `admin:karmicare-biorhythmic-oral-care-system:title`, already in FR as « Système de dentifrice matin et soir Awake & Asleep ». `check.py` now treats `retired` as a required hold, and its self-test has a 17th mutation for it. The next `build_payloads.py` run drops the two `subscription_title` items from `plan-fr.json`.
+All three read « Système de soin matin/soir Awake & Asleep ». The naming source is `admin:karmicare-biorhythmic-oral-care-system:title`. Its FR was « Système de dentifrice matin et soir Awake & Asleep ». Since 22 Oct it is Victor's own « Awake & Asleep dentifrice sans fluor à la nano-hydroxyapatite, système jour et nuit » (source-copy `15c576f`). `check.py` now treats `retired` as a required hold, and its self-test has a 17th mutation for it. The next `build_payloads.py` run drops the two `subscription_title` items from `plan-fr.json`.
 
 ## Claim holds waived (Victor, 20 Oct)
 
@@ -284,42 +284,63 @@ The `qUxYCn/answer` entry has no `claims` field, so FR sets no claim flag there.
 - **Homepage CTAs (Victor 21 Oct: Rhythm, not Ritual):** the same integration sets the hero, two-formulas and benefits buttons to "COMMENCER VOTRE RYTHME 60 JOURS". The featured-product button becomes "Commencer votre Rythme 60 jours". "Rythme 60 jours" is the plan name, as on the PDP. Batch 01 digest `5286628f…`.
 - **PDP end button** (`featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text`): the EN gains a capital R, "Begin your 60-Day Rhythm". The FR stays "Commencer votre Rythme 60 jours". Only `en`, `en_sha1` and `source_status` follow. Batch 02 digest `87edec28…`.
 
+## Victor's admin EN edits (source-copy 15c576f, 22 Oct)
+
+Victor changed ten admin texts in EN on 22 Oct. Each FR note keeps the previous FR.
+
+- **The Duo** (title, SEO title, meta description): FR takes Victor's own live FR from `registration/registered.json`, word for word. The en_sha1 matches, so `build_payloads.py` leaves these three out of `plan-fr.json`. This settles the open FR product title. It is now « Awake & Asleep dentifrice sans fluor à la nano-hydroxyapatite, système jour et nuit », and the SEO title is « Dentifrice sans fluor à la nano-hydroxyapatite | Awake & Asleep ».
+- **Footer link** `company:links[2]`: the EN is now "Why hydroxyapatite" (spelling fixed, "use" dropped). FR follows with « Pourquoi l’hydroxyapatite », as the NL does. `source-defect` and `wording-adapted` are gone.
+- **Nano-hydroxyapatite article** (`#b016`, `#b088`, `#b090`, `#b100`, SEO title and description): FR follows the softened EN with « aide à protéger », as the NL does. "Uses" becomes « intègre », never *utilise*. The claim flags and waiver notes stay where the source keeps the gate.
+  - These six FR texts follow Victor's EN but have had no French read yet.
+
+Digests: batch 02 `2468bab4…`, batch 03 `18cdaec0…`, batch 07 `c73c6f51…`.
+
+## Twin nano-hydroxyapatite article retired (source-copy 319eedd, 22 Oct)
+
+Victor hid `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` and redirected it to `/blogs/news/nano-hydroxyapatite`. The source retires all 79 of its entries: title, body, `seo.title`, `seo.description`, 74 body blocks and the empty `summary_html`. FR holds them as the NL does:
+- `fr` is null and the entry has no flags.
+- The notes give the source reason, then the previous FR.
+- 78 entries were Admin translations, 42 of them with `pending-claim-review`. The empty summary was already held.
+
+FR merged this through integration `a813b94` (`d9da237`). The batch 07 digest is unchanged.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `87edec28…` | 477 | 138 | 251 | 34 | 15 | 39 |
+| `batch-02-pdp` | `2468bab4…` | 477 | 138 | 251 | 34 | 15 | 39 |
 | `batch-01-homepage` | `5286628f…` | 229 | 172 | 2 | 31 | 2 | 22 |
-| `batch-03-header-footer` | `d5353b16…` | 41 | 6 | 11 | 10 | 9 | 5 |
+| `batch-03-header-footer` | `18cdaec0…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
 | `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
-| `batch-07-collections-blog` | `9597904c…` | 709 | 1 | 698 | 0 | 0 | 10 |
+| `batch-07-collections-blog` | `c73c6f51…` | 709 | 1 | 620 | 0 | 0 | 88 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,575** | **479** | **1,533** | **75** | **62** | **426** |
+| **Total** | | **2,575** | **479** | **1,455** | **75** | **62** | **504** |
 
-Every source entry is covered: 2,149 carry FR and 426 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, the sticky-bar retirement and CTAs, integration 223d140, and the short announcement and "Rhythm" CTAs, 6500a4a). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,071 carry FR and 504 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, the sticky-bar retirement and CTAs, integration 223d140, the short announcement and "Rhythm" CTAs, 6500a4a, Victor's admin EN edits, 15c576f, and the retired twin article, 319eedd). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
-| pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 387 | 0 | 501 |
+| pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 345 | 0 | 459 |
 | pending-en-review | 2 | 9 | 1 | 3 | 1 | 0 | 0 | 0 | 16 |
-| source-defect | 2 | 8 | 1 | 3 | 9 | 0 | 0 | 0 | 23 |
-| wording-adapted | 2 | 14 | 2 | 0 | 3 | 7 | 0 | 1 | 29 |
+| source-defect | 2 | 8 | 0 | 3 | 9 | 0 | 0 | 0 | 22 |
+| wording-adapted | 2 | 14 | 1 | 0 | 3 | 7 | 0 | 1 | 28 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
 | fit-risk | 9 | 28 | 0 | 0 | 2 | 0 | 0 | 0 | 39 |
 | not-rendered | 6 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 13 |
 
 The blog's `wording-adapted` changes are described in each entry's notes and in the batch-07 commit, but not flagged one by one.
 
-### Held (426)
+### Held (504)
 
 | Batch | Reason | Count | What |
 |---|---|---:|---|
 | 04 | legacy | 350 | `/pages/privacy` (269), `/pages/terms-and-conditions` (76), `/pages/consumer-rights` (5): pre-2.0 legal pages, held in NL/FR (INVENTORY.md) |
 | 01–03 | never-translate | 54 | Formula, practitioner and brand names, citations, INCI, `nHAp`, `SCCS/1677/25`, Subscription Names, Return on Care |
-| 07 | empty | 9 | Empty article excerpts (`summary_html`) |
+| 07 | empty | 8 | Empty article excerpts (`summary_html`) |
+| 07 | retired | 79 | The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste`, hidden and redirected to the main article by Victor (source-copy `319eedd`) |
 | 01–02 | retired | 9 | The Duo-name settings `subscription_title` (homepage, PDP) and the `package_name` default `main-product.liquid:1098` (Astra R12, source-copy `6643e16`); FAQ `4KMG6C` (3 fields) and the two empty PDP `how_it_works` step numbers (41ae772, source-copy `0ba9de3`); the sticky-bar "Free" label `main-product.liquid:1104`, `kc.sticky_cart.kit_free_html` (NV-13, source-copy `d72d791`) |
 | 01–02 | practitioner quote | 2 | Sietske Hamelink's quote (C84/C85, `card_CtQgU9/hover_text`, homepage and PDP): her own words; FR needs her wording or approval, as NL (landing desk 21 Oct) |
 | 01 | integration | 1 | "Rendering loop-subscriptions": the theme tests for this exact text |
@@ -327,7 +348,7 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 25 warnings, 20/20 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 23 warnings, 20/20 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;

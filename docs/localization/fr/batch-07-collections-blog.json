@@ -2,18 +2,18 @@
  "batch": "batch-07-collections-blog",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-07-collections-blog.json",
- "source_digest": "9597904c4ef875006a7d8a76bebbaa43d0faaca0",
+ "source_digest": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
  "source_entries": 709,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 698,
-  "held": 10,
+  "admin": 620,
+  "held": 88,
   "translated": 1
  },
  "flag_counts": {
-  "pending-claim-review": 387
+  "pending-claim-review": 345
  },
  "entries": [
   {
@@ -90,12 +90,10 @@
    "key_path": "title",
    "en": "Nano-Hydroxyapatite and Why You Need It In Your Toothpaste.",
    "en_sha1": "03657e4c746016445891de0c032ab1c97caebfac",
-   "fr": "La nano-hydroxyapatite et pourquoi votre dentifrice en a besoin.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-hydroxyapatite et pourquoi votre dentifrice en a besoin.",
    "source_status": "admin-held"
   },
   {
@@ -108,7 +106,7 @@
    "fr": null,
    "status": "held",
    "flags": [],
-   "notes": "empty: the EN value is empty, nothing to translate.",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was held: empty: the EN value is empty, nothing to translate.",
    "source_status": "admin-held"
   },
   {
@@ -632,14 +630,14 @@
    "resource_type": "article",
    "file_or_handle": "news/nano-hydroxyapatite",
    "key_path": "body_html#b016",
-   "en": "It guards against tooth decay by providing total protection against harmful dietary acids",
-   "en_sha1": "59532bef6e6cb72d18284d6059e5760362b3b173",
-   "fr": "Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs",
+   "en": "It helps protect against tooth decay and harmful dietary acids",
+   "en_sha1": "9a712a33c8a4dc4f8d97c394445f1c93956d2ecc",
+   "fr": "Elle aide à protéger contre les caries et les acides alimentaires nocifs",
    "status": "admin",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed",
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed; EN changed by Victor in Admin 22 Oct; FR follows, as the NL. Was: \"Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs\"",
    "source_status": "admin-held"
   },
   {
@@ -1636,14 +1634,14 @@
    "resource_type": "article",
    "file_or_handle": "news/nano-hydroxyapatite",
    "key_path": "body_html#b088",
-   "en": "Nano HAp plugs the exposed dentin with deposits of hydroxyapatite nanoparticles. This works as a protective shield that prevents the nerve endings from getting stimulated by elements.",
-   "en_sha1": "4663eaaf6f39bd6194bedb9d9e8036b748f5dd6a",
-   "fr": "La nano-HAp obture la dentine exposée avec des dépôts de nanoparticules d’hydroxyapatite. Elle agit comme un bouclier protecteur qui empêche les terminaisons nerveuses d’être stimulées par les agressions extérieures.",
+   "en": "Nano HAp plugs the exposed dentin with deposits of hydroxyapatite nanoparticles. This works as a protective shield that helps keep the nerve endings from being stimulated.",
+   "en_sha1": "7dc5acf34c5f7459f54798ab50cf7a745a12860b",
+   "fr": "La nano-HAp obture la dentine exposée avec des dépôts de nanoparticules d’hydroxyapatite. Elle agit comme un bouclier protecteur qui aide à protéger les terminaisons nerveuses des stimulations.",
    "status": "admin",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened. EN changed by Victor in Admin 22 Oct; FR follows, as the NL. Was: \"La nano-HAp obture la dentine exposée avec des dépôts de nanoparticules d’hydroxyapatite. Elle agit comme un bouclier protecteur qui empêche les terminaisons nerveuses d’être stimulées par les agressions extérieures.\"",
    "source_status": "admin-held"
   },
   {
@@ -1666,12 +1664,12 @@
    "resource_type": "article",
    "file_or_handle": "news/nano-hydroxyapatite",
    "key_path": "body_html#b090",
-   "en": "4. Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks",
-   "en_sha1": "906380ee3ddc35955789f1f37a8620e0a1cb66b7",
-   "fr": "4. La nano-hydroxyapatite protège votre émail des aliments et boissons acides",
+   "en": "4. Nano Hydroxyapatite Helps Protect Your Enamel From Acidic Food",
+   "en_sha1": "0fb3b2dfc06029aafa5b295b937d15aa00139c9a",
+   "fr": "4. La nano-hydroxyapatite aide à protéger votre émail des aliments acides",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "EN changed by Victor in Admin 22 Oct; FR follows, as the NL. Was: \"4. La nano-hydroxyapatite protège votre émail des aliments et boissons acides\"",
    "source_status": "admin-held"
   },
   {
@@ -1804,14 +1802,14 @@
    "resource_type": "article",
    "file_or_handle": "news/nano-hydroxyapatite",
    "key_path": "body_html#b100",
-   "en": "It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp protects your teeth against decay by grouping the disease-causing microbes together, which you can then spit out.",
-   "en_sha1": "558e186b55d7c62c8b67f03fa66079f1c0aaf000",
-   "fr": "Elle reminéralise l’émail en reconstituant les dépôts de calcium et de phosphate perdus, tout en protégeant la surface des dents des attaques acides quotidiennes. De plus, la nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.",
+   "en": "It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp helps protect your teeth against decay by binding bacteria together, so you can spit them out.",
+   "en_sha1": "e3ea6fb90a24faa62a7f9ef875b0010545a1150e",
+   "fr": "Elle reminéralise l’émail en reconstituant les dépôts de calcium et de phosphate perdus, tout en protégeant la surface des dents des attaques acides quotidiennes. De plus, la nano-HAp aide à protéger vos dents contre les caries en liant les bactéries entre elles, pour que vous puissiez les recracher.",
    "status": "admin",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed",
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed; EN changed by Victor in Admin 22 Oct; FR follows, as the NL. Was: \"Elle reminéralise l’émail en reconstituant les dépôts de calcium et de phosphate perdus, tout en protégeant la surface des dents des attaques acides quotidiennes. De plus, la nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.\"",
    "source_status": "admin-held"
   },
   {
@@ -2060,12 +2058,12 @@
    "resource_type": "article",
    "file_or_handle": "news/nano-hydroxyapatite",
    "key_path": "seo.title",
-   "en": "Why you need Nano Hydroxapatite in your toothpaste – KARMICARE",
-   "en_sha1": "ff84a89a6c8ecd62e51ed973b481b1c89b986c5e",
-   "fr": "Pourquoi votre dentifrice a besoin de nano-hydroxyapatite – KARMICARE",
+   "en": "Nano-Hydroxyapatite Toothpaste: What It Is and How It Works | KARMICARE",
+   "en_sha1": "d79f54f075b2c652b1ebc806d43781eccd0323c7",
+   "fr": "Dentifrice à la nano-hydroxyapatite : ce que c’est et comment elle agit | KARMICARE",
    "status": "admin",
    "flags": [],
-   "notes": "EN typo 'Hydroxapatite'; FR spelled correctly.",
+   "notes": "EN changed by Victor in Admin 22 Oct; FR follows, as the NL. Was: \"Pourquoi votre dentifrice a besoin de nano-hydroxyapatite – KARMICARE\"",
    "source_status": "admin-held"
   },
   {
@@ -2073,14 +2071,14 @@
    "resource_type": "article",
    "file_or_handle": "news/nano-hydroxyapatite",
    "key_path": "seo.description",
-   "en": "Here's everything you need to know about nano-hydroxyapatite, a medical marvel ingredient for better teeth, bones, and overall health.",
-   "en_sha1": "7942d995565165cfc8e231a65a0969804bb12451",
-   "fr": "Voici tout ce qu’il faut savoir sur la nano-hydroxyapatite, un ingrédient qui est une merveille médicale pour de meilleures dents, de meilleurs os et une meilleure santé globale.",
+   "en": "What nano-hydroxyapatite is, how it works on enamel, and why Karmicare uses it in Awake and Asleep, two fluoride-free toothpastes.",
+   "en_sha1": "11a95812de95b8a70fe3f204eb4b6c34c233e03e",
+   "fr": "Ce qu’est la nano-hydroxyapatite, comment elle agit sur l’émail et pourquoi Karmicare l’intègre dans Awake et Asleep, deux dentifrices sans fluor.",
    "status": "admin",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and bone/overall-health benefit; overstates the evidence.); translate after the EN is fixed or removed",
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Medical framing and bone/overall-health benefit; overstates the evidence.); translate after the EN is fixed or removed; EN changed by Victor in Admin 22 Oct; FR follows, as the NL. Was: \"Voici tout ce qu’il faut savoir sur la nano-hydroxyapatite, un ingrédient qui est une merveille médicale pour de meilleures dents, de meilleurs os et une meilleure santé globale.\"",
    "source_status": "admin-held"
   },
   {
@@ -3963,10 +3961,10 @@
    "key_path": "main#01",
    "en": "[img alt] Nano-Hydroxyapatite Is an Effective Remineralizing Agent",
    "en_sha1": "5ab78a9dbf9fb2c0972f6ea10cdfa948355c8617",
-   "fr": "[img alt] La nano-hydroxyapatite est un agent reminéralisant efficace",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: [img alt] La nano-hydroxyapatite est un agent reminéralisant efficace",
    "source_status": "admin-held"
   },
   {
@@ -3976,10 +3974,10 @@
    "key_path": "body_html#b001",
    "en": "Self-reflection:",
    "en_sha1": "e83da3040b4b8f2dde6f876b507c28d3a7426540",
-   "fr": "Réflexion personnelle :",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Réflexion personnelle :",
    "source_status": "admin-held"
   },
   {
@@ -3989,10 +3987,10 @@
    "key_path": "body_html#b002",
    "en": "Does my toothpaste support my oral health?",
    "en_sha1": "3f2349b85482a01eea9406f8e48419454826d2d6",
-   "fr": "Mon dentifrice soutient-il ma santé bucco-dentaire ?",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Mon dentifrice soutient-il ma santé bucco-dentaire ?",
    "source_status": "admin-held"
   },
   {
@@ -4002,10 +4000,10 @@
    "key_path": "body_html#b003",
    "en": "How can my morning and evening oral care routine nourish my body?",
    "en_sha1": "029be1dc3f87fc2ce71d17fbc9d931aed9ad00b1",
-   "fr": "Comment ma routine de soin bucco-dentaire du matin et du soir peut-elle nourrir mon corps ?",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Comment ma routine de soin bucco-dentaire du matin et du soir peut-elle nourrir mon corps ?",
    "source_status": "admin-held"
   },
   {
@@ -4015,10 +4013,10 @@
    "key_path": "body_html#b004",
    "en": "Is there a way to safely remineralize my teeth and enhance my smile?",
    "en_sha1": "ec4188b52a73de8daa8fc4f1c070d809be4a5789",
-   "fr": "Existe-t-il un moyen sûr de reminéraliser mes dents et d’embellir mon sourire ?",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Existe-t-il un moyen sûr de reminéraliser mes dents et d’embellir mon sourire ?",
    "source_status": "admin-held"
   },
   {
@@ -4028,10 +4026,10 @@
    "key_path": "body_html#b005",
    "en": "Key takeaways:",
    "en_sha1": "e6a63d973ce4fce07ea7910869aeaa58dcc486e5",
-   "fr": "À retenir :",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: À retenir :",
    "source_status": "admin-held"
   },
   {
@@ -4041,12 +4039,10 @@
    "key_path": "body_html#b006",
    "en": "Nano hydroxyapatite has powerful remineralizing effects on tooth enamel lesions and is safe, non-toxic, and fluoride-free.",
    "en_sha1": "b83717b50615831e79514ee501de367898110928",
-   "fr": "La nano-hydroxyapatite a de puissants effets reminéralisants sur les lésions de l’émail dentaire et elle est sûre, non toxique et sans fluor.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-hydroxyapatite a de puissants effets reminéralisants sur les lésions de l’émail dentaire et elle est sûre, non toxique et sans fluor.",
    "source_status": "admin-held"
   },
   {
@@ -4056,12 +4052,10 @@
    "key_path": "body_html#b007",
    "en": "Research shows that nano-hydroxyapatite is an effective remineralizing agent.",
    "en_sha1": "afd9ec4c48b47e6aa08c999ae2365545c64fb1b1",
-   "fr": "La recherche montre que la nano-hydroxyapatite est un agent reminéralisant efficace.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La recherche montre que la nano-hydroxyapatite est un agent reminéralisant efficace.",
    "source_status": "admin-held"
   },
   {
@@ -4071,12 +4065,10 @@
    "key_path": "body_html#b008",
    "en": "Using natural toothpaste with nano-hydroxyapatite helps prevent tooth decay, whitens teeth without sensitivity, and improves oral hygiene.",
    "en_sha1": "3d4e05ad35c8b5477a2188cf59bdfff5633470ef",
-   "fr": "Un dentifrice naturel à la nano-hydroxyapatite aide à prévenir les caries, blanchit les dents sans sensibilité et améliore l’hygiène bucco-dentaire.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease prevention (tooth decay); regulatory.md; FAQ-0203.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Un dentifrice naturel à la nano-hydroxyapatite aide à prévenir les caries, blanchit les dents sans sensibilité et améliore l’hygiène bucco-dentaire.",
    "source_status": "admin-held"
   },
   {
@@ -4086,10 +4078,10 @@
    "key_path": "body_html#b009",
    "en": "10-Second Nano HAp Need-to-Know Truths",
    "en_sha1": "f8939227ad0f0eb028108bed80a03fc68001254b",
-   "fr": "La nano-HAp en 10 secondes : l’essentiel à savoir",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-HAp en 10 secondes : l’essentiel à savoir",
    "source_status": "admin-held"
   },
   {
@@ -4099,12 +4091,10 @@
    "key_path": "body_html#b010",
    "en": "Nano HAp deeply penetrates your enamel to refill lost minerals every time you brush your teeth.",
    "en_sha1": "0bcf88784c504c7008deb4154d608d3e84d95e2e",
-   "fr": "La nano-HAp pénètre en profondeur dans votre émail pour remplacer les minéraux perdus à chaque brossage.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-HAp pénètre en profondeur dans votre émail pour remplacer les minéraux perdus à chaque brossage.",
    "source_status": "admin-held"
   },
   {
@@ -4114,12 +4104,10 @@
    "key_path": "body_html#b011",
    "en": "It smoothes and whitens teeth by gently repairing them with native minerals.",
    "en_sha1": "239db5291b24194e1a82e58cef8be4f89e971653",
-   "fr": "Elle lisse et blanchit les dents en les réparant en douceur avec des minéraux naturellement présents dans le corps.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Elle lisse et blanchit les dents en les réparant en douceur avec des minéraux naturellement présents dans le corps.",
    "source_status": "admin-held"
   },
   {
@@ -4129,10 +4117,10 @@
    "key_path": "body_html#b012",
    "en": "It plugs exposed dentin tubules, effectively reducing tooth sensitivity",
    "en_sha1": "b5a853268f4ac443d3416870d8d218a765c88a8d",
-   "fr": "Elle obture les tubules dentinaires exposés et réduit efficacement la sensibilité dentaire",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Elle obture les tubules dentinaires exposés et réduit efficacement la sensibilité dentaire",
    "source_status": "admin-held"
   },
   {
@@ -4142,12 +4130,10 @@
    "key_path": "body_html#b013",
    "en": "It protects against tooth decay by providing total protection against harmful dietary acids.",
    "en_sha1": "f016b2c5d84e127439570658fea1ee06897e1c16",
-   "fr": "Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs.",
    "source_status": "admin-held"
   },
   {
@@ -4157,12 +4143,10 @@
    "key_path": "body_html#b014",
    "en": "It supports bone health and is completely non-toxic.",
    "en_sha1": "0577f04c26ad42ace90de0f675c673368cbd4352",
-   "fr": "Elle soutient la santé des os et est totalement non toxique.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Bone health is systemic with no basis in products.md; 'completely non-toxic' is absolute.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Elle soutient la santé des os et est totalement non toxique.",
    "source_status": "admin-held"
   },
   {
@@ -4172,10 +4156,10 @@
    "key_path": "body_html#b015",
    "en": "What is Nano Hydroxyapatite?",
    "en_sha1": "6ebf20099a1be3a54658e240289c6425df85e4d5",
-   "fr": "Qu’est-ce que la nano-hydroxyapatite ?",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Qu’est-ce que la nano-hydroxyapatite ?",
    "source_status": "admin-held"
   },
   {
@@ -4185,10 +4169,10 @@
    "key_path": "body_html#b016",
    "en": "We get it. Nano-hydroxyapatite is a bit of a mouthful.",
    "en_sha1": "fd7356fd54cfba43123c7675175c0512df0ee75d",
-   "fr": "On vous comprend. Nano-hydroxyapatite, c’est un peu long à prononcer.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: On vous comprend. Nano-hydroxyapatite, c’est un peu long à prononcer.",
    "source_status": "admin-held"
   },
   {
@@ -4198,10 +4182,10 @@
    "key_path": "body_html#b017",
    "en": "But while it may seem strange to you, your body is familiar with this magic mineral.",
    "en_sha1": "244c3a1d5c82c0e65a0eb2c42bea05fd3391841f",
-   "fr": "Mais si ce nom vous semble étrange, votre corps connaît bien ce minéral magique.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Mais si ce nom vous semble étrange, votre corps connaît bien ce minéral magique.",
    "source_status": "admin-held"
   },
   {
@@ -4211,10 +4195,10 @@
    "key_path": "body_html#b018",
    "en": "Hydroxyapatite (HA) is a natural form of calcium that makes up 97% of your tooth enamel, 70% of dentin (the layer under the enamel), and about 70% of your bones. It's even present in your saliva!",
    "en_sha1": "38116f6fdda0d305d34f7bdf00d20f2f9f9b2920",
-   "fr": "L’hydroxyapatite (HA) est une forme naturelle de calcium qui constitue 97 % de votre émail dentaire, 70 % de la dentine (la couche située sous l’émail) et environ 70 % de vos os. Elle est même présente dans votre salive !",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: L’hydroxyapatite (HA) est une forme naturelle de calcium qui constitue 97 % de votre émail dentaire, 70 % de la dentine (la couche située sous l’émail) et environ 70 % de vos os. Elle est même présente dans votre salive !",
    "source_status": "admin-held"
   },
   {
@@ -4224,12 +4208,10 @@
    "key_path": "body_html#b019",
    "en": "It’s an excellent alternative to fluoride in toothpaste. In modern dentistry, HA keeps your bones and teeth strong and healthy.",
    "en_sha1": "c5f9495bebe7b2445dcb113e015a735dfe156757",
-   "fr": "C’est une excellente alternative au fluor dans les soins bucco-dentaires. Dans la dentisterie moderne, l’HA garde vos os et vos dents solides et en bonne santé.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: C’est une excellente alternative au fluor dans les soins bucco-dentaires. Dans la dentisterie moderne, l’HA garde vos os et vos dents solides et en bonne santé.",
    "source_status": "admin-held"
   },
   {
@@ -4239,12 +4221,10 @@
    "key_path": "body_html#b020",
    "en": "This article will give you an insight into nano-hydroxyapatite; what it is and why it is superior for oral care. We will also examine how choosing toothpaste with this powerful mineral will improve your oral hygiene.",
    "en_sha1": "d606e469ba64613dcc778082cadfb1bc39f4df66",
-   "fr": "Cet article vous éclaire sur la nano-hydroxyapatite : ce qu’elle est et pourquoi elle est supérieure pour le soin bucco-dentaire. Nous verrons aussi comment choisir une formule contenant ce minéral puissant améliorera votre hygiène bucco-dentaire.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Cet article vous éclaire sur la nano-hydroxyapatite : ce qu’elle est et pourquoi elle est supérieure pour le soin bucco-dentaire. Nous verrons aussi comment choisir une formule contenant ce minéral puissant améliorera votre hygiène bucco-dentaire.",
    "source_status": "admin-held"
   },
   {
@@ -4254,12 +4234,10 @@
    "key_path": "body_html#b021",
    "en": "<b>Why Nano-Hydroxyapatite is Better</b>",
    "en_sha1": "a061b0f6fbbaa88443f7a6f13ec75d216334a8ae",
-   "fr": "<b>Pourquoi la nano-hydroxyapatite est meilleure</b>",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <b>Pourquoi la nano-hydroxyapatite est meilleure</b>",
    "source_status": "admin-held"
   },
   {
@@ -4269,12 +4247,10 @@
    "key_path": "body_html#b022",
    "en": "<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10562112/\">Nano-hydroxyapatite </a>(nano HAp) is a smaller, more effective form that naturally fuses with hydroxyapatite in your teeth. Although chemically similar to HA, nano HAp has a smaller particle size. This allows it to cover more surface area and reach deeper into teeth. It’s also less abrasive and sticks better to the tooth's surface area, offering more protection.",
    "en_sha1": "128eef60b8ff141e9db488f057a6352cfee3e5ad",
-   "fr": "<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10562112/\">La nano-hydroxyapatite </a>(nano-HAp) est une forme plus petite et plus efficace qui fusionne naturellement avec l’hydroxyapatite de vos dents. Bien que chimiquement semblable à l’HA, la nano-HAp a une taille de particule plus petite. Elle peut ainsi couvrir une plus grande surface et pénétrer plus profondément dans les dents. Elle est aussi moins abrasive et adhère mieux à la surface de la dent, ce qui offre davantage de protection.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10562112/\">La nano-hydroxyapatite </a>(nano-HAp) est une forme plus petite et plus efficace qui fusionne naturellement avec l’hydroxyapatite de vos dents. Bien que chimiquement semblable à l’HA, la nano-HAp a une taille de particule plus petite. Elle peut ainsi couvrir une plus grande surface et pénétrer plus profondément dans les dents. Elle est aussi moins abrasive et adhère mieux à la surface de la dent, ce qui offre davantage de protection.",
    "source_status": "admin-held"
   },
   {
@@ -4284,12 +4260,10 @@
    "key_path": "body_html#b023",
    "en": "<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10562112/\">Recent </a>studies show that nano HAp builds a stronger structure that resists acid attacks more effectively than other minerals.",
    "en_sha1": "f331abb37c7d63feec4ffc749e8adf9f56ff901c",
-   "fr": "<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10562112/\">Des études </a>récentes montrent que la nano-HAp construit une structure plus solide, qui résiste mieux aux attaques acides que d’autres minéraux.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10562112/\">Des études </a>récentes montrent que la nano-HAp construit une structure plus solide, qui résiste mieux aux attaques acides que d’autres minéraux.",
    "source_status": "admin-held"
   },
   {
@@ -4299,10 +4273,10 @@
    "key_path": "body_html#b024",
    "en": "Key Benefits of Nano-Hydroxyapatite.",
    "en_sha1": "7f086e4943d7324985d39fbc1023f5d0dc32cb9e",
-   "fr": "Les principaux bienfaits de la nano-hydroxyapatite.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Les principaux bienfaits de la nano-hydroxyapatite.",
    "source_status": "admin-held"
   },
   {
@@ -4312,10 +4286,10 @@
    "key_path": "body_html#b025",
    "en": "Biocompatible — It works well with your body’s tissues.",
    "en_sha1": "e9226d0f07014e647b137419f4e303aa98246ae4",
-   "fr": "Biocompatible — elle s’accorde bien avec les tissus de votre corps.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Biocompatible — elle s’accorde bien avec les tissus de votre corps.",
    "source_status": "admin-held"
   },
   {
@@ -4325,12 +4299,10 @@
    "key_path": "body_html#b026",
    "en": "Bioactive — Your body can easily absorb and use nano HAp.",
    "en_sha1": "9be77f4a19cc0efe148174ecbdcb6218c8f014c0",
-   "fr": "Bioactive — votre corps peut facilement absorber et assimiler la nano-HAp.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic absorption claim for a cosmetic; no basis in products.md.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Bioactive — votre corps peut facilement absorber et assimiler la nano-HAp.",
    "source_status": "admin-held"
   },
   {
@@ -4340,10 +4312,10 @@
    "key_path": "body_html#b027",
    "en": "Osteoconductive — It supports and guides the growth of new bone.",
    "en_sha1": "58678eaeb665f8598e20f0432891f1958514cfe6",
-   "fr": "Ostéoconductrice — elle soutient et guide la formation de nouvel os.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Ostéoconductrice — elle soutient et guide la formation de nouvel os.",
    "source_status": "admin-held"
   },
   {
@@ -4353,12 +4325,10 @@
    "key_path": "body_html#b028",
    "en": "Nontoxic — Since your body naturally produces hydroxyapatite, nano HAp causes no harmful reactions or irritations.",
    "en_sha1": "16288e96abb952494d2508f4f0e7412dc8afc80d",
-   "fr": "Non toxique — votre corps produisant naturellement de l’hydroxyapatite, la nano-HAp ne provoque ni réaction nocive ni irritation.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Non toxique — votre corps produisant naturellement de l’hydroxyapatite, la nano-HAp ne provoque ni réaction nocive ni irritation.",
    "source_status": "admin-held"
   },
   {
@@ -4368,12 +4338,10 @@
    "key_path": "body_html#b029",
    "en": "Nano hydroxyapatite has an interesting history that spans four decades. NASA <a href=\"https://www.todaysrdh.com/from-nasa-to-your-mouth-the-dental-benefits-of-nano-hydroxyapatite/#:~:text=NASA%20sought%20ways%20to%20replace%20lost%20minerals%20in,a%20gel%20solution%20to%20formulate%20hydroxyapatite%20in%201974.\">invented </a>the first version of nano-hydroxyapatite in 1970.",
    "en_sha1": "271bc59a20773524f78dc7af2192892c5886cfff",
-   "fr": "La nano-hydroxyapatite a une histoire passionnante qui s’étend sur quatre décennies. La NASA <a href=\"https://www.todaysrdh.com/from-nasa-to-your-mouth-the-dental-benefits-of-nano-hydroxyapatite/#:~:text=NASA%20sought%20ways%20to%20replace%20lost%20minerals%20in,a%20gel%20solution%20to%20formulate%20hydroxyapatite%20in%201974.\">a inventé </a>la première version de la nano-hydroxyapatite en 1970.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-invention claim presented as fact; no source.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-hydroxyapatite a une histoire passionnante qui s’étend sur quatre décennies. La NASA <a href=\"https://www.todaysrdh.com/from-nasa-to-your-mouth-the-dental-benefits-of-nano-hydroxyapatite/#:~:text=NASA%20sought%20ways%20to%20replace%20lost%20minerals%20in,a%20gel%20solution%20to%20formulate%20hydroxyapatite%20in%201974.\">a inventé </a>la première version de la nano-hydroxyapatite en 1970.",
    "source_status": "admin-held"
   },
   {
@@ -4383,12 +4351,10 @@
    "key_path": "body_html#b030",
    "en": "<b>Why would a space agency spend time creating nano HAp?</b>",
    "en_sha1": "0f84d824f4b9957683a141e35644147b4b77bad7",
-   "fr": "<b>Pourquoi une agence spatiale consacrerait-elle du temps à créer la nano-HAp ?</b>",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Question presupposes the NASA-origin story (b029, b031).); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <b>Pourquoi une agence spatiale consacrerait-elle du temps à créer la nano-HAp ?</b>",
    "source_status": "admin-held"
   },
   {
@@ -4398,12 +4364,10 @@
    "key_path": "body_html#b031",
    "en": "Astronauts returning home from space experienced mineral loss from teeth and bones due to prolonged time in zero gravity. To address this, NASA created nano-HAp to restore lost minerals.",
    "en_sha1": "a6d97405abcc71f88c057b3a9fdd8507e91090d7",
-   "fr": "Les astronautes qui rentraient de l’espace subissaient une perte de minéraux au niveau des dents et des os, à cause d’un séjour prolongé en apesanteur. Pour y remédier, la NASA a créé la nano-HAp afin de restaurer les minéraux perdus.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: NASA-origin story presented as fact.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Les astronautes qui rentraient de l’espace subissaient une perte de minéraux au niveau des dents et des os, à cause d’un séjour prolongé en apesanteur. Pour y remédier, la NASA a créé la nano-HAp afin de restaurer les minéraux perdus.",
    "source_status": "admin-held"
   },
   {
@@ -4413,10 +4377,10 @@
    "key_path": "body_html#b032",
    "en": "With the help of nanotechnology, scientists turned hydroxyapatite into tiny particles that actively remineralize your teeth.",
    "en_sha1": "733230cabef4562afb1b1884bae55cc9e8ef59d1",
-   "fr": "Grâce aux nanotechnologies, les scientifiques ont transformé l’hydroxyapatite en minuscules particules qui reminéralisent activement vos dents.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Grâce aux nanotechnologies, les scientifiques ont transformé l’hydroxyapatite en minuscules particules qui reminéralisent activement vos dents.",
    "source_status": "admin-held"
   },
   {
@@ -4426,10 +4390,10 @@
    "key_path": "body_html#b033",
    "en": "Since then, nano HAp has become a staple in toothpaste and dental products, especially in Japan and Europe.",
    "en_sha1": "d05711bbfb9718a9895c1f99ac956bc7f54f9d06",
-   "fr": "Depuis, la nano-HAp est devenue un incontournable des soins bucco-dentaires, notamment au Japon et en Europe.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Depuis, la nano-HAp est devenue un incontournable des soins bucco-dentaires, notamment au Japon et en Europe.",
    "source_status": "admin-held"
   },
   {
@@ -4439,10 +4403,10 @@
    "key_path": "body_html#b034",
    "en": "<strong>4 Powerful Benefits of Nano Hydroxyapatite</strong>",
    "en_sha1": "ebe45aaff7951b964f1670b19b58c9f4b3c1c3bd",
-   "fr": "<strong>4 puissants bienfaits de la nano-hydroxyapatite</strong>",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <strong>4 puissants bienfaits de la nano-hydroxyapatite</strong>",
    "source_status": "admin-held"
   },
   {
@@ -4452,10 +4416,10 @@
    "key_path": "body_html#b035",
    "en": "<br>Nano Hap Strengthens and Remineralize the Tooth Enamel",
    "en_sha1": "122084a5ddd670f1f878fce92c81f727c0627105",
-   "fr": "<br>La nano-HAp renforce et reminéralise l’émail dentaire",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <br>La nano-HAp renforce et reminéralise l’émail dentaire",
    "source_status": "admin-held"
   },
   {
@@ -4465,10 +4429,10 @@
    "key_path": "body_html#b036",
    "en": "1. Repairs Teeth From the Inside",
    "en_sha1": "fad304330872c76783a03bffb378ac0de0fd2b36",
-   "fr": "1. Elle répare les dents de l’intérieur",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: 1. Elle répare les dents de l’intérieur",
    "source_status": "admin-held"
   },
   {
@@ -4478,10 +4442,10 @@
    "key_path": "body_html#b037",
    "en": "Your teeth have tiny holes called dentin tubules under your enamel. Minerals and other substances, like bacteria, use these tubules to travel in and out of your teeth.",
    "en_sha1": "0c39d7eabce72587c0d37cf2971bfc30d1667810",
-   "fr": "Vos dents comportent de minuscules trous appelés tubules dentinaires sous l’émail. Les minéraux et d’autres substances, comme les bactéries, empruntent ces tubules pour entrer dans vos dents et en sortir.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Vos dents comportent de minuscules trous appelés tubules dentinaires sous l’émail. Les minéraux et d’autres substances, comme les bactéries, empruntent ces tubules pour entrer dans vos dents et en sortir.",
    "source_status": "admin-held"
   },
   {
@@ -4491,10 +4455,10 @@
    "key_path": "body_html#b038",
    "en": "When you eat sugary foods, bacteria process the sugar and release acids as waste products. These acids lower your mouth's pH level to or below 5.5. This process called <a href=\"https://www.archerdental.ca/blog/how-everyday-acids-bases-affect-oral-health-human-homeostasis/\">demineralisation</a>, weakens the enamel.",
    "en_sha1": "d041f6d30445b2336944776b79217fc173c790eb",
-   "fr": "Lorsque vous mangez sucré, les bactéries transforment le sucre et rejettent des acides comme déchets. Ces acides font baisser le pH de votre bouche à 5,5 ou moins. Ce processus, appelé <a href=\"https://www.archerdental.ca/blog/how-everyday-acids-bases-affect-oral-health-human-homeostasis/\">déminéralisation</a>, affaiblit l’émail.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Lorsque vous mangez sucré, les bactéries transforment le sucre et rejettent des acides comme déchets. Ces acides font baisser le pH de votre bouche à 5,5 ou moins. Ce processus, appelé <a href=\"https://www.archerdental.ca/blog/how-everyday-acids-bases-affect-oral-health-human-homeostasis/\">déminéralisation</a>, affaiblit l’émail.",
    "source_status": "admin-held"
   },
   {
@@ -4504,10 +4468,10 @@
    "key_path": "body_html#b039",
    "en": "FYI: The pH level in <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare Biorhythmic Oral Health</a> (both the Awake and Asleep formulations) is between 6.5 and 7.5.",
    "en_sha1": "bab8e7ed22ba3d5b29d458d81acff16c303cb413",
-   "fr": "Bon à savoir : le pH de <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare Biorhythmic Oral Health</a> (formules Awake et Asleep) se situe entre 6,5 et 7,5.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Bon à savoir : le pH de <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare Biorhythmic Oral Health</a> (formules Awake et Asleep) se situe entre 6,5 et 7,5.",
    "source_status": "admin-held"
   },
   {
@@ -4517,10 +4481,10 @@
    "key_path": "body_html#b040",
    "en": "Since enamel isn’t a living tissue, it cannot regrow. However, slight damage can be repaired through remineralization - a natural process of restoring minerals such as calcium and phosphate to the teeth.",
    "en_sha1": "13505d3999fb7411423c1df51bb808470b2af311",
-   "fr": "L’émail n’étant pas un tissu vivant, il ne peut pas repousser. Toutefois, de légers dommages peuvent être réparés par la reminéralisation — un processus naturel qui restitue aux dents des minéraux comme le calcium et le phosphate.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: L’émail n’étant pas un tissu vivant, il ne peut pas repousser. Toutefois, de légers dommages peuvent être réparés par la reminéralisation — un processus naturel qui restitue aux dents des minéraux comme le calcium et le phosphate.",
    "source_status": "admin-held"
   },
   {
@@ -4530,12 +4494,10 @@
    "key_path": "body_html#b041",
    "en": "Saliva helps by neutralizing acids and restoring calcium and phosphate to teeth. However, saliva isn’t enough on its own. Toothpaste with nanoHAp helps strengthen and remineralize tooth enamel.",
    "en_sha1": "e3e4b2d44407e0e639cbcc9b96bb685552c63fec",
-   "fr": "La salive aide en neutralisant les acides et en restituant du calcium et du phosphate aux dents. Mais la salive ne suffit pas à elle seule. Une formule à la nano-HAp aide à renforcer et à reminéraliser l’émail dentaire.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La salive aide en neutralisant les acides et en restituant du calcium et du phosphate aux dents. Mais la salive ne suffit pas à elle seule. Une formule à la nano-HAp aide à renforcer et à reminéraliser l’émail dentaire.",
    "source_status": "admin-held"
   },
   {
@@ -4545,12 +4507,10 @@
    "key_path": "body_html#b042",
    "en": "It does this by bonding with your teeth, replacing lost minerals, and strengthening weak enamel. <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8930857/\">Nano HAp penetrates</a> the enamel’s surface area and directly restores the amount of calcium and phosphates in areas where they have dissolved.",
    "en_sha1": "50c961a4ed9f06bffdc4a00d8057da7c3e710013",
-   "fr": "Il le fait en se liant à vos dents, en remplaçant les minéraux perdus et en renforçant l’émail fragilisé. <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8930857/\">La nano-HAp pénètre</a> la surface de l’émail et restaure directement la quantité de calcium et de phosphates dans les zones où ils se sont dissous.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Il le fait en se liant à vos dents, en remplaçant les minéraux perdus et en renforçant l’émail fragilisé. <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8930857/\">La nano-HAp pénètre</a> la surface de l’émail et restaure directement la quantité de calcium et de phosphates dans les zones où ils se sont dissous.",
    "source_status": "admin-held"
   },
   {
@@ -4560,12 +4520,10 @@
    "key_path": "body_html#b043",
    "en": "It also fills up microscopic cracks in the enamel.",
    "en_sha1": "75b28600451729f2d62b0cedb01c5d9293718f05",
-   "fr": "Elle comble aussi les fissures microscopiques de l’émail.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Elle comble aussi les fissures microscopiques de l’émail.",
    "source_status": "admin-held"
   },
   {
@@ -4575,12 +4533,10 @@
    "key_path": "body_html#b044",
    "en": "2. Nano Hydroxyapatite Whitens Your Teeth Without Hurting Your Enamel",
    "en_sha1": "9cffae8a7ce024183f6c4b14b060fe74e1052d96",
-   "fr": "2. La nano-hydroxyapatite blanchit vos dents sans abîmer votre émail",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: 2. La nano-hydroxyapatite blanchit vos dents sans abîmer votre émail",
    "source_status": "admin-held"
   },
   {
@@ -4590,12 +4546,10 @@
    "key_path": "body_html#b045",
    "en": "Stained yellow teeth are embarrassing. Most whitening products available only give temporary results and leave behind a weak and demineralized enamel.",
    "en_sha1": "a12d6377e141aad3e46f711fe4c8a29477cf4079",
-   "fr": "Des dents jaunies et tachées, c’est gênant. La plupart des solutions de blanchiment disponibles ne donnent que des résultats temporaires et laissent derrière elles un émail affaibli et déminéralisé.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Des dents jaunies et tachées, c’est gênant. La plupart des solutions de blanchiment disponibles ne donnent que des résultats temporaires et laissent derrière elles un émail affaibli et déminéralisé.",
    "source_status": "admin-held"
   },
   {
@@ -4605,12 +4559,10 @@
    "key_path": "body_html#b046",
    "en": "Bleaching agents like hydrogen peroxide whiten teeth but often cause tooth <a href=\"https://www.nature.com/articles/sj.bdj.2013.629\">sensitivity and chemical burns.</a>",
    "en_sha1": "af16494f8a47d63702b303810887c36d154381c4",
-   "fr": "Les agents de blanchiment comme le peroxyde d’hydrogène blanchissent les dents mais provoquent souvent une <a href=\"https://www.nature.com/articles/sj.bdj.2013.629\">sensibilité dentaire et des brûlures chimiques.</a>",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Les agents de blanchiment comme le peroxyde d’hydrogène blanchissent les dents mais provoquent souvent une <a href=\"https://www.nature.com/articles/sj.bdj.2013.629\">sensibilité dentaire et des brûlures chimiques.</a>",
    "source_status": "admin-held"
   },
   {
@@ -4620,12 +4572,10 @@
    "key_path": "body_html#b047",
    "en": "So while you’ll have whiter teeth, they’ll become sensitive and cause pain when you’re eating or drinking.",
    "en_sha1": "504092810adb81741b7498650f1ad6dae3e782eb",
-   "fr": "Ainsi, vos dents seront plus blanches, mais elles deviendront sensibles et douloureuses quand vous mangerez ou boirez.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Ainsi, vos dents seront plus blanches, mais elles deviendront sensibles et douloureuses quand vous mangerez ou boirez.",
    "source_status": "admin-held"
   },
   {
@@ -4635,12 +4585,10 @@
    "key_path": "body_html#b048",
    "en": "Nano HAp offers a better solution, naturally whitening teeth without harsh chemicals. It fills the micropores in the enamel, creating a smoother tooth surface. This results in a glossy, whiter appearance without damaging the enamel.",
    "en_sha1": "eff8631acc04e4e8f6fb1ff9da6a4277a86999f1",
-   "fr": "La nano-HAp offre une meilleure solution, en blanchissant naturellement les dents sans substances chimiques agressives. Elle comble les micropores de l’émail et crée une surface dentaire plus lisse. Résultat : un aspect plus brillant et plus blanc, sans abîmer l’émail.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "R6 W1 (CHANGES-R2 R6 additions): 'harsh chemicals' « substances chimiques agressives », as wellness #b081 « substances chimiques nocives » (NL « chemicaliën »). Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-HAp offre une meilleure solution, en blanchissant naturellement les dents sans substances chimiques agressives. Elle comble les micropores de l’émail et crée une surface dentaire plus lisse. Résultat : un aspect plus brillant et plus blanc, sans abîmer l’émail.",
    "source_status": "admin-held"
   },
   {
@@ -4650,10 +4598,10 @@
    "key_path": "body_html#b049",
    "en": "3. Nano Hydroxyapatite Reduces Your Tooth Hypersensitivity by Blocking Dentinal Tubules",
    "en_sha1": "f1f9b5d5a263d9c28c4e6ecc8ad7422604affcd6",
-   "fr": "3. La nano-hydroxyapatite réduit l’hypersensibilité dentaire en obturant les tubules dentinaires",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: 3. La nano-hydroxyapatite réduit l’hypersensibilité dentaire en obturant les tubules dentinaires",
    "source_status": "admin-held"
   },
   {
@@ -4663,10 +4611,10 @@
    "key_path": "body_html#b050",
    "en": "Tooth sensitivity occurs when your gum pulls away and exposes your dentin. Dentin contains tubules that lead to the nerves. When dentin is exposed, it triggers pain from hot, cold, or acidic foods.",
    "en_sha1": "c743f37aa9616500b50996b9ab3bdee600d28ae9",
-   "fr": "La sensibilité dentaire survient lorsque la gencive se rétracte et expose la dentine. La dentine contient des tubules qui mènent aux nerfs. Lorsque la dentine est exposée, les aliments chauds, froids ou acides déclenchent la douleur.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La sensibilité dentaire survient lorsque la gencive se rétracte et expose la dentine. La dentine contient des tubules qui mènent aux nerfs. Lorsque la dentine est exposée, les aliments chauds, froids ou acides déclenchent la douleur.",
    "source_status": "admin-held"
   },
   {
@@ -4676,10 +4624,10 @@
    "key_path": "body_html#b051",
    "en": "Dental hypersensitivity is often triggered by brushing or flossing. This condition frustrates dentists due to the lack of a consistent and reliable remedy.",
    "en_sha1": "64836d3bf6436f0db3e4e785810dc2099c979bdd",
-   "fr": "L’hypersensibilité dentaire est souvent déclenchée par le brossage ou le passage du fil dentaire. C’est une affection frustrante pour les dentistes, faute de remède constant et fiable.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: L’hypersensibilité dentaire est souvent déclenchée par le brossage ou le passage du fil dentaire. C’est une affection frustrante pour les dentistes, faute de remède constant et fiable.",
    "source_status": "admin-held"
   },
   {
@@ -4689,12 +4637,10 @@
    "key_path": "body_html#b052",
    "en": "According to<a href=\"https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2023.1199728/full\"> dental professionals,</a> nano HAp toothpaste is more effective in preventing cavities and reducing the discomfort of sensitive teeth than traditional treatment.",
    "en_sha1": "1c3649aebf53e81dacf9cc7748823d3a81a0f970",
-   "fr": "Selon des<a href=\"https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2023.1199728/full\"> professionnels dentaires,</a> un dentifrice à la nano-HAp est plus efficace pour prévenir les caries et réduire l’inconfort des dents sensibles que les traitements traditionnels.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Cavity prevention, superiority over treatment and unnamed professional endorsement.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Selon des<a href=\"https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2023.1199728/full\"> professionnels dentaires,</a> un dentifrice à la nano-HAp est plus efficace pour prévenir les caries et réduire l’inconfort des dents sensibles que les traitements traditionnels.",
    "source_status": "admin-held"
   },
   {
@@ -4704,12 +4650,10 @@
    "key_path": "body_html#b053",
    "en": "<i>Nano HAp has shown promising results in alleviating tooth sensitivity — something I’ve experienced myself! Recently, my partner pointed out that I was enjoying ice cream with no trouble. An awesome reminder of the power of this wonder mineral.</i><i><br></i><i>— Victor Popov, Founder Karmicare </i>",
    "en_sha1": "54224601cdd209f1a31bb24147531f3379ab5f57",
-   "fr": "<i>La nano-HAp a donné des résultats prometteurs pour soulager la sensibilité dentaire — je l’ai moi-même constaté ! Récemment, la personne qui partage ma vie m’a fait remarquer que je savourais une glace sans aucune gêne. Un formidable rappel de la puissance de ce minéral extraordinaire.</i><i><br></i><i>— Victor Popov, à l’origine de Karmicare </i>",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'my partner' rendered 'la personne qui partage ma vie' and 'Founder' rendered 'à l'origine de Karmicare' (no gender assumed). Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <i>La nano-HAp a donné des résultats prometteurs pour soulager la sensibilité dentaire — je l’ai moi-même constaté ! Récemment, la personne qui partage ma vie m’a fait remarquer que je savourais une glace sans aucune gêne. Un formidable rappel de la puissance de ce minéral extraordinaire.</i><i><br></i><i>— Victor Popov, à l’origine de Karmicare </i>",
    "source_status": "admin-held"
   },
   {
@@ -4719,12 +4663,10 @@
    "key_path": "body_html#b054",
    "en": "<i><br></i><i>Nano Hap gets Rid of Teeth Sensitivity</i>",
    "en_sha1": "f162bd03d155cb54c4c23b6dce8f981d88fd131a",
-   "fr": "<i><br></i><i>La nano-HAp élimine la sensibilité dentaire</i>",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <i><br></i><i>La nano-HAp élimine la sensibilité dentaire</i>",
    "source_status": "admin-held"
   },
   {
@@ -4734,12 +4676,10 @@
    "key_path": "body_html#b055",
    "en": "Nano HAp reduces sensitivity by blocking the open dentinal tubules in teeth. The nanocrystals that make up nano-hydroxyapatite are hydrophilic. This means that they have hydrating properties. Instead of numbing your teeth with potassium nitrate, Nano HAp attaches itself to the crown of your teeth, protecting them and lowering the pain caused by sensitivity.",
    "en_sha1": "a2ce71023634db0c8f9f427d840c7608d83b0592",
-   "fr": "La nano-HAp réduit la sensibilité en obturant les tubules dentinaires ouverts. Les nanocristaux qui composent la nano-hydroxyapatite sont hydrophiles. Cela signifie qu’ils ont des propriétés hydratantes. Au lieu d’anesthésier vos dents avec du nitrate de potassium, la nano-HAp se fixe sur la couronne de vos dents, les protège et diminue la douleur liée à la sensibilité.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-HAp réduit la sensibilité en obturant les tubules dentinaires ouverts. Les nanocristaux qui composent la nano-hydroxyapatite sont hydrophiles. Cela signifie qu’ils ont des propriétés hydratantes. Au lieu d’anesthésier vos dents avec du nitrate de potassium, la nano-HAp se fixe sur la couronne de vos dents, les protège et diminue la douleur liée à la sensibilité.",
    "source_status": "admin-held"
   },
   {
@@ -4749,10 +4689,10 @@
    "key_path": "body_html#b056",
    "en": "4. Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks",
    "en_sha1": "906380ee3ddc35955789f1f37a8620e0a1cb66b7",
-   "fr": "4. La nano-hydroxyapatite protège votre émail des aliments et boissons acides",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: 4. La nano-hydroxyapatite protège votre émail des aliments et boissons acides",
    "source_status": "admin-held"
   },
   {
@@ -4762,10 +4702,10 @@
    "key_path": "body_html#b057",
    "en": "Foods like citrus, soda, lemon, tomatoes, and candy are highly acidic. They slowly chip away the enamel. This is called tooth erosion - a gateway to tooth abscesses, cavities, hypersensitivity, and tooth loss. Sugary foods hold the same fate for your teeth. The microbes in your mouth digest the carbohydrates and produce acid which ruins your enamel.",
    "en_sha1": "b876938070295fa6a05ed4d33e231b7951a36f31",
-   "fr": "Les agrumes, les sodas, le citron, les tomates et les bonbons sont très acides. Ils rongent lentement l’émail. C’est ce qu’on appelle l’érosion dentaire — une porte ouverte aux abcès dentaires, aux caries, à l’hypersensibilité et à la perte de dents. Les aliments sucrés réservent le même sort à vos dents. Les microbes de votre bouche digèrent les glucides et produisent de l’acide qui abîme votre émail.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Les agrumes, les sodas, le citron, les tomates et les bonbons sont très acides. Ils rongent lentement l’émail. C’est ce qu’on appelle l’érosion dentaire — une porte ouverte aux abcès dentaires, aux caries, à l’hypersensibilité et à la perte de dents. Les aliments sucrés réservent le même sort à vos dents. Les microbes de votre bouche digèrent les glucides et produisent de l’acide qui abîme votre émail.",
    "source_status": "admin-held"
   },
   {
@@ -4775,10 +4715,10 @@
    "key_path": "body_html#b058",
    "en": "Wiping out all bacteria isn't the solution because good bacteria are necessary to keep oral flora balanced.",
    "en_sha1": "7e8af5098e16fadfec48863589b981cceb9fdb7c",
-   "fr": "Éliminer toutes les bactéries n’est pas la solution, car les bonnes bactéries sont nécessaires à l’équilibre de la flore buccale.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Éliminer toutes les bactéries n’est pas la solution, car les bonnes bactéries sont nécessaires à l’équilibre de la flore buccale.",
    "source_status": "admin-held"
   },
   {
@@ -4788,12 +4728,10 @@
    "key_path": "body_html#b059",
    "en": "Nano hydroxyapatite forms a protective layer on your teeth. It also rebuilds lost calcium and phosphate deposits. It shields teeth from acids and bacteria, reducing the risk of decay. Nano HAp protects your teeth against decay by grouping the disease-causing microbes, which you can then spit out.",
    "en_sha1": "e92d2b012890273223ffe50dcdcdfa18cb32b461",
-   "fr": "La nano-hydroxyapatite forme une couche protectrice sur vos dents. Elle reconstitue aussi les dépôts de calcium et de phosphate perdus. Elle protège les dents des acides et des bactéries, ce qui réduit le risque de caries. La nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Disease protection (decay) via 'disease-causing microbes'; regulatory.md.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-hydroxyapatite forme une couche protectrice sur vos dents. Elle reconstitue aussi les dépôts de calcium et de phosphate perdus. Elle protège les dents des acides et des bactéries, ce qui réduit le risque de caries. La nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.",
    "source_status": "admin-held"
   },
   {
@@ -4803,10 +4741,10 @@
    "key_path": "body_html#b060",
    "en": "This reduces the likelihood of harmful acids attacking your teeth.",
    "en_sha1": "61fc0aaf25d92739842b5f64cbf1883c4a12ec45",
-   "fr": "Cela réduit le risque que des acides nocifs attaquent vos dents.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Cela réduit le risque que des acides nocifs attaquent vos dents.",
    "source_status": "admin-held"
   },
   {
@@ -4816,10 +4754,10 @@
    "key_path": "body_html#b061",
    "en": "Your Toothpaste Matters More Than You Think",
    "en_sha1": "2538ebb4c0392096beaca7a7351a77a6c012d607",
-   "fr": "Votre soin bucco-dentaire compte plus que vous ne le pensez",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Votre soin bucco-dentaire compte plus que vous ne le pensez",
    "source_status": "admin-held"
   },
   {
@@ -4829,10 +4767,10 @@
    "key_path": "body_html#b062",
    "en": "Your oral health is priceless to your overall well-being.",
    "en_sha1": "d8f922ab73342b66fc73fd0c0a81b218ef94ebf2",
-   "fr": "Votre santé bucco-dentaire est inestimable pour votre bien-être global.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Votre santé bucco-dentaire est inestimable pour votre bien-être global.",
    "source_status": "admin-held"
   },
   {
@@ -4842,12 +4780,10 @@
    "key_path": "body_html#b063",
    "en": "Minor oral health issues can lead to serious health issues like heart disease, pneumonia, and even complications in pregnant women.",
    "en_sha1": "86c476231d1d51c48a540f162d51e65d4f5f3830",
-   "fr": "De petits problèmes bucco-dentaires peuvent entraîner de graves problèmes de santé, comme des maladies cardiaques, une pneumonie et même des complications chez les femmes enceintes.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Systemic disease (heart disease, pneumonia, pregnancy) from minor oral issues, stated as fact.); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: De petits problèmes bucco-dentaires peuvent entraîner de graves problèmes de santé, comme des maladies cardiaques, une pneumonie et même des complications chez les femmes enceintes.",
    "source_status": "admin-held"
   },
   {
@@ -4857,12 +4793,10 @@
    "key_path": "body_html#b064",
    "en": "Most oral care products do little to protect your teeth. Many contain harmful ingredients like fluoride, sodium laureth sulfate (SLS), saccharin, or triclosan, which can be toxic over time.",
    "en_sha1": "b589ce5905bebfb0ec2c3485a5b2ae1f8bec26c8",
-   "fr": "La plupart des soins bucco-dentaires protègent peu vos dents. Beaucoup contiennent des ingrédients nocifs comme le fluor, le laureth sulfate de sodium (SLS), la saccharine ou le triclosan, qui peuvent devenir toxiques avec le temps.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: Calls legally used ingredients toxic, stated as fact; denigrates (EU 655/2013).); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La plupart des soins bucco-dentaires protègent peu vos dents. Beaucoup contiennent des ingrédients nocifs comme le fluor, le laureth sulfate de sodium (SLS), la saccharine ou le triclosan, qui peuvent devenir toxiques avec le temps.",
    "source_status": "admin-held"
   },
   {
@@ -4872,12 +4806,10 @@
    "key_path": "body_html#b065",
    "en": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Karmicare Biorhythmic nano HAp toothpaste</a> is your surest bet. It is safe for all ages, even your toddlers can swallow it without you having to call poison control.",
    "en_sha1": "2478ecaadbd132ca278bf61f351ff225d4596740",
-   "fr": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Le dentifrice biorythmique à la nano-HAp de Karmicare</a> est votre valeur la plus sûre. Il convient à tous les âges : même vos tout-petits peuvent l’avaler sans que vous ayez à appeler le centre antipoison.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: claims review of batches 05-07 (CLAIMS-REVIEW.md: 'Safe for all ages' and toddler swallowing contradict FAQ-0206 (from age 3 under supervision).); translate after the EN is fixed or removed",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Le dentifrice biorythmique à la nano-HAp de Karmicare</a> est votre valeur la plus sûre. Il convient à tous les âges : même vos tout-petits peuvent l’avaler sans que vous ayez à appeler le centre antipoison.",
    "source_status": "admin-held"
   },
   {
@@ -4887,12 +4819,10 @@
    "key_path": "body_html#b066",
    "en": "Did you know? Switching to a nano HAp toothpaste is the smartest decision you can make for your and your family’s oral and overall health.",
    "en_sha1": "b88562b88ca0d26dd4a8d2ae66eb3b1eab9d4b24",
-   "fr": "Le saviez-vous ? Passer à une formule à la nano-HAp est la décision la plus judicieuse que vous puissiez prendre pour votre santé bucco-dentaire et globale, et celle de votre famille.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Le saviez-vous ? Passer à une formule à la nano-HAp est la décision la plus judicieuse que vous puissiez prendre pour votre santé bucco-dentaire et globale, et celle de votre famille.",
    "source_status": "admin-held"
   },
   {
@@ -4902,10 +4832,10 @@
    "key_path": "body_html#b067",
    "en": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\"><strong>Shop Now to Transform Your Oral Health!</strong></a>",
    "en_sha1": "a2c58811deee71738b42661140ab91e9a311aca1",
-   "fr": "<a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\"><strong>Commencez dès maintenant à transformer votre santé bucco-dentaire !</strong></a>",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <a href=\"https://www.karmicare.com/en/product/biorhythmic-oral-hygiene-set\"><strong>Commencez dès maintenant à transformer votre santé bucco-dentaire !</strong></a>",
    "source_status": "admin-held"
   },
   {
@@ -4915,10 +4845,10 @@
    "key_path": "body_html#b068",
    "en": "How To Use Nano Hydroxyapatite",
    "en_sha1": "0a6755d53d2d347fb3f4b982dc2078ec6cde94a9",
-   "fr": "Comment profiter de la nano-hydroxyapatite",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Comment profiter de la nano-hydroxyapatite",
    "source_status": "admin-held"
   },
   {
@@ -4928,10 +4858,10 @@
    "key_path": "body_html#b069",
    "en": "The best way to use nano HAp is in a specially formulated toothpaste.",
    "en_sha1": "2ddfb1935f01e6ae2f161eebb043cc46e52c4f29",
-   "fr": "La meilleure façon de profiter de la nano-HAp, c’est dans une formule spécialement conçue.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La meilleure façon de profiter de la nano-HAp, c’est dans une formule spécialement conçue.",
    "source_status": "admin-held"
   },
   {
@@ -4941,12 +4871,10 @@
    "key_path": "body_html#b070",
    "en": "We suggest our <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">Biorhythmic Oral Hygiene Set</a>. It combines nano HAp with health-conscious, low-abrasive ingredients that work with your body’s natural detox and repair cycles.",
    "en_sha1": "ccce6bc01f9a777d4bdd8b1806289af9986e32a4",
-   "fr": "Nous vous suggérons notre <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">set d’hygiène bucco-dentaire biorythmique</a>. Il associe la nano-HAp à des ingrédients peu abrasifs et respectueux de la santé, qui agissent en accord avec les cycles naturels de détoxification et de réparation de votre corps.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Nous vous suggérons notre <a href=\"https://karmicare.com/en/product/biorhythmic-oral-hygiene-set\">set d’hygiène bucco-dentaire biorythmique</a>. Il associe la nano-HAp à des ingrédients peu abrasifs et respectueux de la santé, qui agissent en accord avec les cycles naturels de détoxification et de réparation de votre corps.",
    "source_status": "admin-held"
   },
   {
@@ -4956,12 +4884,10 @@
    "key_path": "body_html#b071",
    "en": "We also include herbs like guarana for energy in the morning and valerian to help you unwind at night.",
    "en_sha1": "dac2e11a448821649d93ce040c27a21fe391d102",
-   "fr": "Nous y ajoutons aussi des plantes comme le guarana pour l’énergie le matin et la valériane pour vous aider à décompresser le soir.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Nous y ajoutons aussi des plantes comme le guarana pour l’énergie le matin et la valériane pour vous aider à décompresser le soir.",
    "source_status": "admin-held"
   },
   {
@@ -4971,12 +4897,10 @@
    "key_path": "body_html#b072",
    "en": "Not all nano-hydroxyapatite toothpaste are the same. Some contain fluoride and other questionable ingredients.",
    "en_sha1": "8336266bebdb4e24d5f75e28c11bf81dc7d2ae73",
-   "fr": "Toutes les formules à la nano-hydroxyapatite ne se valent pas. Certains contiennent du fluor et d’autres ingrédients discutables.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Toutes les formules à la nano-hydroxyapatite ne se valent pas. Certains contiennent du fluor et d’autres ingrédients discutables.",
    "source_status": "admin-held"
   },
   {
@@ -4986,12 +4910,10 @@
    "key_path": "body_html#b073",
    "en": "For best results, brush your teeth mindfully for at least 2 minutes twice daily. Then, leave nano HAp toothpaste in your mouth (by not rinsing) for a while. This gives the mineral more time to nourish your teeth with its benefits.",
    "en_sha1": "a5ca907cfa78bf53dbd5dd60286a3d84f9fb178e",
-   "fr": "Pour de meilleurs résultats, brossez-vous les dents en pleine conscience pendant au moins 2 minutes, deux fois par jour. Ensuite, laissez la formule à la nano-HAp en bouche (sans rincer) un moment. Le minéral a ainsi plus de temps pour nourrir vos dents de ses bienfaits.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Pour de meilleurs résultats, brossez-vous les dents en pleine conscience pendant au moins 2 minutes, deux fois par jour. Ensuite, laissez la formule à la nano-HAp en bouche (sans rincer) un moment. Le minéral a ainsi plus de temps pour nourrir vos dents de ses bienfaits.",
    "source_status": "admin-held"
   },
   {
@@ -5001,12 +4923,10 @@
    "key_path": "body_html#b074",
    "en": "<em>Note: Never, ever do this with fluoride toothpaste!</em>",
    "en_sha1": "187cd223cb52949caf02b303c44088d3087385ca",
-   "fr": "<em>Remarque : ne faites jamais, au grand jamais, cela avec une formule au fluor !</em>",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: <em>Remarque : ne faites jamais, au grand jamais, cela avec une formule au fluor !</em>",
    "source_status": "admin-held"
   },
   {
@@ -5016,12 +4936,10 @@
    "key_path": "seo.title",
    "en": "Nano-Hydroxyapatite and Why You Need It In Your Toothpaste. – KARMICARE",
    "en_sha1": "f6767d8f9e84038c48fec1e4a6ba62907f261ae1",
-   "fr": "La nano-hydroxyapatite et pourquoi votre dentifrice en a besoin. – KARMICARE",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: La nano-hydroxyapatite et pourquoi votre dentifrice en a besoin. – KARMICARE",
    "source_status": "admin-held"
   },
   {
@@ -5031,12 +4949,10 @@
    "key_path": "seo.description",
    "en": "Self-reflection: Does my toothpaste support my oral health? How can my morning and evening oral care routine nourish my body? Is there a way to safely remineralize my teeth and enhance my smile? Key takeaways: Nano hydroxyapatite has powerful remineralizing effects on tooth enamel lesions and is safe, non-toxic, and fl",
    "en_sha1": "ecf25b6548034b0e295e2c9a61ff09fdac9e0873",
-   "fr": "Réflexion personnelle : mon dentifrice soutient-il ma santé bucco-dentaire ? Comment ma routine de soin bucco-dentaire du matin et du soir peut-elle nourrir mon corps ? Existe-t-il un moyen sûr de reminéraliser mes dents et d’embellir mon sourire ? À retenir : la nano-hydroxyapatite a de puissants effets reminéralisants sur les lésions de l’émail dentaire et elle est sûre, non toxique et sans fluor.",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims review of batches 05-07 (CLAIMS-REVIEW.md): needs-review; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "retired 22 Oct: Victor hid the article and redirected it to /blogs/news/nano-hydroxyapatite (global coordinator, tested on EN, /nl, /fr); was admin: Réflexion personnelle : mon dentifrice soutient-il ma santé bucco-dentaire ? Comment ma routine de soin bucco-dentaire du matin et du soir peut-elle nourrir mon corps ? Existe-t-il un moyen sûr de reminéraliser mes dents et d’embellir mon sourire ? À retenir : la nano-hydroxyapatite a de puissants effets reminéralisants sur les lésions de l’émail dentaire et elle est sûre, non toxique et sans fluor.",
    "source_status": "admin-held"
   },
   {
