@@ -295,7 +295,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 | `batch-01-homepage` | 230 | `ab192236341d` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `d8fb1b30ea2f` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
-| `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
+| `batch-05-products` | 77 | `3b9c8c4105d7` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc70` | 1 | 312 | 0 | 0 | 386 | 0 | 10 | 0 |
 | `batch-08-system` | 46 | `306f141fadf2` | 3 | 7 | 0 | 0 | 0 | 36 | 0 | 0 |
