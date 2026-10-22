@@ -354,9 +354,20 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 /* Bold in body copy is Proxima Nova Semibold (--font-body-weight-bold = 600, layout/theme.liquid),
    as the Figma Text/* (Strong) styles; the browser default "bolder" would give 700. Headings are
    left out so they keep their own rules (h2 strong below, the two-tone .kc-surface rule, Marlide
-   at 300). A rule that sets its own weight on b/strong (buybox, compare table) still wins. */
-b:not(:where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *),
-strong:not(:where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *) {
+   at 300). Buttons are left out too: native buttons, role=button, Dawn's .button, the challenge
+   button and the KC button classes (snippets/button-styles.liquid), the element itself and
+   anything inside it. The :where() lists keep the specificity at (0,0,1), so a rule that sets
+   its own weight on b/strong (buybox, compare table) still wins. */
+b:not(
+  :where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *,
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary),
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary) *
+),
+strong:not(
+  :where(h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6) *,
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary),
+  :where(button, [role=button], .button, .shopify-challenge__button, .karmicare__btn-primary, .karmicare__btn-secondary) *
+) {
   font-weight: var(--font-body-weight-bold);
 }
 
