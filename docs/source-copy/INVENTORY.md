@@ -93,13 +93,14 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the footer menu link "Why use hydroxapatite" → "Why hydroxyapatite" (batch 03), so it leaves the brand-rule scan;
   - six fields of the article `news/nano-hydroxyapatite` (batch 07): SEO title, meta description, and blocks `#b016`, `#b088`, `#b090`, `#b100` ("helps protect" instead of "guards", "total protection", "prevents", "protects"). The rest of the article stays as Victor approved it, and its claim statuses are unchanged: releasing the gated NL/FR blocks is still his decision. The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited; Victor then hid it and redirected it to `/blogs/news/nano-hydroxyapatite` (tested on EN, /nl, /fr), so its 79 entries are `retired` (held in NL/FR, never registered). EN and digests are unchanged.
 - **Updated 22 Oct (later)** with two decisions of Victor's: the dentist clause leaves the PDP check-up tooltip, the sticky-bar check-up line (`liquid:sections/main-product.liquid:995`) and the Duo info card (S2, choice a), and the footer slogan becomes "Your mouth has a rhythm Now your oral care too" (two sentences, no stop). The four entries are `corrected` with `old_en` kept; the theme files carry the same text. The compare-table tooltip and the Year selling-plan description are admin text and still say "verified by your dentist".
+- **Updated 22 Oct (admin)** with three admin edits Victor made after his decisions: the Year selling-plan description (Loop) and the Compare Row tooltip '€40 Check-up Reward' lose "verified by your dentist", and the Year cost per brushing is €0.49 (was €0.42). They stay `admin-held` with `old_en` kept. The tooltip lives on the Compare Row entry, not in a Compare Value cell as the entry id suggests.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
-| `batch-02-pdp` | 477 | `55340f9dc6dd5f8865fc1093937c727c0f1a3045` |
+| `batch-02-pdp` | 477 | `af27d13827f435e009e7e24815fa510469f0c3ee` |
 | `batch-03-header-footer` | 41 | `d8fb1b30ea2f5be901b89205707d850a3f458452` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |

@@ -212,3 +212,13 @@ Victor (22 Oct): the check-up reward needs no dentist, so the dentist clause is 
 | `product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded. | Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded. | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond. |
 | `liquid:sections/main-product.liquid:995` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. | Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. |
 | `footer-group:footer/slogan` | Your mouth has a rhythm So should your oral care | Your mouth has a rhythm Now your oral care too | Je mond heeft een ritme Nu je mondverzorging ook |
+
+## 22 Oct: three admin edits by Victor
+
+Victor edited three admin texts: the dentist clause leaves the Year selling-plan description (Loop) and the Compare Row tooltip "€40 Check-up Reward", and the Year cost per brushing is €0.49. Entries stay `admin-held`, `old_en` kept. `batch-02-pdp` digest `af27d13827f435e009e7e24815fa510469f0c3ee`. FR: delete ", vérifié par votre dentiste" in the two texts, and €0,42 → 0,49 €. The selling-plan description is translated in Loop, not by the runner.
+
+| Id | Change | NL now (excerpt) |
+|---|---|---|
+| `admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond.</span |
+| `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond. |
+| `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing` | €0.42 → €0.49 | €0,49 |
