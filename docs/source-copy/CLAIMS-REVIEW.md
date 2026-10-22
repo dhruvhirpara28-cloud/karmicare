@@ -114,6 +114,8 @@ The R6 re-review (`docs/runtime-review/B2-NL-R6-ASTRA.md`, R6-01) gated 30 more 
 
 The nine blog articles (2023–2024) predate the 2026 claim rules. They make disease, prevention and fluoride-harm statements throughout. **Unsupported** blocks are held in the NL and FR files (not translated); **needs-review** blocks are translated faithfully and marked `pending-claim-review`.
 
+**22 Oct, Victor's admin edits.** Victor rewrote six fields of `/blogs/news/nano-hydroxyapatite` in the admin (SEO title, meta description, `#b016`, `#b088`, `#b090`, `#b100`: “helps protect” instead of “guards”, “total protection”, “prevents” and “protects”) and kept the rest of the article as it is, including “medical marvel … bones and overall health”, “first discovered by NASA”, “Swap fluoride for nano HAp”, “chemicals that prevent natural healing” and “nontoxic”. The claim rows further down quote the new EN where it changed. **No status changed**: releasing the article's gated NL/FR blocks is still Victor's decision (open). The twin article `…/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited.
+
 | Page | approved | needs-review | unsupported |
 |---|---:|---:|---:|
 | `templates/product.json` | 0 | 2 | 0 |
@@ -155,7 +157,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite` | `body_html#b008` | “can help prevent tooth decay” | Disease prevention (tooth decay); regulatory.md forbids prevents disease; FAQ-0203: cosmetic, does not treat disease. |
 | `…/nano-hydroxyapatite` | `body_html#b010` | “(as first discovered by NASA)” | NASA-origin claim presented as fact; 'answer to your dental health problems' overstates. |
 | `…/nano-hydroxyapatite` | `body_html#b011` | “this medical marvel for better teeth, bones and overall health. It’s research-based and the claims are factual.” | Medical framing and bone/overall-health benefit; 'claims are factual' overstates the evidence. |
-| `…/nano-hydroxyapatite` | `body_html#b016` | “It guards against tooth decay by providing total protection against harmful dietary acids” | Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md. |
+| `…/nano-hydroxyapatite` | `body_html#b016` | “It helps protect against tooth decay and harmful dietary acids” (Victor's EN of 22 Oct; was “It guards against tooth decay by providing total protection against harmful dietary acids”) | Disease protection (tooth decay) with an absolute ('total protection'); regulatory.md. |
 | `…/nano-hydroxyapatite` | `body_html#b017` | “It’s bioactive, osteoconductive, and nontoxic” | 'Osteoconductive' is a bone-graft (medical) property with no cosmetic basis; nontoxic needs Pepla 2014. |
 | `…/nano-hydroxyapatite` | `body_html#b031` | “(so no need for the synthesis of ingredients in a lab)” | Naturalness stated as fact overstates: cosmetic nano-HAp is manufactured; 'magic mineral' hyperbole. |
 | `…/nano-hydroxyapatite` | `body_html#b035` | “Osteoconductive — Nano HAp serves as a scaffold for new bone growth.” | Bone-growth scaffold is a medical-device property; no cosmetic basis in products.md. |
@@ -167,12 +169,12 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite` | `body_html#b060` | “Nano Hydroxyapatite Whitens Your Teeth Without Hurting Your Enamel” | products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'. |
 | `…/nano-hydroxyapatite` | `body_html#b068` | “How Nano HAp Whitens Your Teeth” | products.md Don't say: 'Whitens teeth' without 'naturally through remineralization'. |
 | `…/nano-hydroxyapatite` | `body_html#b096` | “That means they kill all the bacteria in your mouth.” | States as fact that fluoride and others kill all oral bacteria; overstated, denigrates legal ingredients. |
-| `…/nano-hydroxyapatite` | `body_html#b100` | “nano HAp protects your teeth against decay by grouping the disease-causing microbes together” | Disease protection (decay) via 'disease-causing microbes'; regulatory.md. |
+| `…/nano-hydroxyapatite` | `body_html#b100` | “nano HAp helps protect your teeth against decay by binding bacteria together” (Victor's EN of 22 Oct; was “protects … by grouping the disease-causing microbes together”) | Disease protection (decay) via 'disease-causing microbes'; regulatory.md. |
 | `…/nano-hydroxyapatite` | `body_html#b105` | “puts you at a high risk for a myriad of medical disorders, such as cardiovascular disease, pneumonia, endocarditis” | Systemic disease risk (cardiovascular, pneumonia, pregnancy) stated as fact in a product article. |
 | `…/nano-hydroxyapatite` | `body_html#b109` | “It’s abrasive to the structure, gets soaked into the body and causes more harm, like fluorosis.” | States as fact that most pastes soak into the body and cause harm; denigration, no basis. |
 | `…/nano-hydroxyapatite` | `body_html#b110` | “you are ingesting poison everyday” | Calls legally used ingredients 'poison'; overstated, denigrating (EU 655/2013). |
 | `…/nano-hydroxyapatite` | `body_html#b112` | “has zero side effects. In fact, your toddler could swallow it without you having to call poison control” | Absolute safety; toddler swallowing contradicts FAQ-0206 (from age 3 under supervision). |
-| `…/nano-hydroxyapatite` | `seo.description` | “a medical marvel ingredient for better teeth, bones, and overall health” | Medical framing and bone/overall-health benefit; overstates the evidence. |
+| `…/nano-hydroxyapatite` | `seo.description` | was “a medical marvel ingredient for better teeth, bones, and overall health”; Victor's EN of 22 Oct (“What nano-hydroxyapatite is, how it works on enamel, and why Karmicare uses it …”) no longer carries the claim, release is his decision | Medical framing and bone/overall-health benefit; overstates the evidence. |
 | `…/morning-and-night-time-brushing-why-timing-matters` | `body_html#b011` | “Toothpaste containing nano-hydroxyapatite strengthens enamel and prevents cavities.” | Disease prevention (cavities); regulatory.md forbids prevents disease; FAQ-0203. |
 | `…/morning-and-night-time-brushing-why-timing-matters` | `body_html#b022` | “Reduces Tooth Decay and Gum Disease” | Disease-reduction heading (tooth decay, gum disease); regulatory.md forbids prevents/treats disease. |
 | `…/morning-and-night-time-brushing-why-timing-matters` | `body_html#b026` | “medical-grade activated charcoal” | 'Medical-grade' is forbidden (regulatory.md); 'immediately repairs' and no-wait advice overstate. |
@@ -325,7 +327,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite` | `body_html#b085` | “This means that it has hydrating properties.” | 'Hydrating properties' has no source in products.md. |
 | `…/nano-hydroxyapatite` | `body_html#b086` | “instead of numbing your nerves with potassium nitrate, nano HAp attaches itself to the crowns of your teeth” | Comparison with potassium nitrate and pain-lowering outcome. |
 | `…/nano-hydroxyapatite` | `body_html#b087` | “the toughness of your enamel will noticeably feel enhanced” | Promised perceptible outcome ('will noticeably') beyond 'strengthens'. |
-| `…/nano-hydroxyapatite` | `body_html#b088` | “This works as a protective shield that prevents the nerve endings from getting stimulated by elements.” | Absolute mechanism ('prevents ... stimulated') beyond 'reduces sensitivity'; not a disease claim. |
+| `…/nano-hydroxyapatite` | `body_html#b088` | “This works as a protective shield that helps keep the nerve endings from being stimulated.” (Victor's EN of 22 Oct; was “… that prevents the nerve endings from getting stimulated by elements.”) | Absolute mechanism ('prevents ... stimulated') beyond 'reduces sensitivity'; not a disease claim. |
 | `…/nano-hydroxyapatite` | `body_html#b089` | “can make a significant difference in dentin hypersensitivity” | Outcome magnitude ('significant difference') on dentin hypersensitivity. |
 | `…/nano-hydroxyapatite` | `body_html#b097` | “We suggest you avoid toothpaste or mouthwash formulations that contain fluoride” | Avoid-fluoride advice denigrates legally used ingredients (EU 655/2013 fairness). |
 | `…/nano-hydroxyapatite` | `body_html#b098` | “How Nano HAp Protects You Against Erosion” | Erosion protection beyond Do say; basis Pepla 2014 (FAQ-0203). |
@@ -588,7 +590,7 @@ The nine blog articles (2023–2024) predate the 2026 claim rules. They make dis
 | `…/nano-hydroxyapatite` | `body_html#b074` | “Nano Hydroxyapatite Reduces Your Tooth Hypersensitivity by Blocking Dentinal Tubules” | products.md: nHAp 'reduces sensitivity by blocking dentinal tubules'. |
 | `…/nano-hydroxyapatite` | `body_html#b083` | “How Nano HAp Soothes Your Dental Hypersensitivity” | regulatory.md allows 'soothes'; Do say 'Reduces sensitivity'. |
 | `…/nano-hydroxyapatite` | `body_html#b084` | “Nano HAp reduces sensitivity by occluding the open dentinal tubules.” | products.md: nHAp 'reduces sensitivity by blocking dentinal tubules'. |
-| `…/nano-hydroxyapatite` | `body_html#b090` | “Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks” | products.md Asleep USP: protection against acids from food and drink; shield layer (C26). |
+| `…/nano-hydroxyapatite` | `body_html#b090` | “Nano Hydroxyapatite Helps Protect Your Enamel From Acidic Food” (Victor's EN of 22 Oct; was “Protects Your Enamel From Acidic Food and Drinks”) | products.md Asleep USP: protection against acids from food and drink; shield layer (C26). |
 | `…/morning-and-night-time-brushing-why-timing-matters` | `body_html#b006` | “Freshens Breath After a Night's Sleep” | regulatory.md 'refreshes'; products.md Awake fresh breath. |
 | `…/morning-and-night-time-brushing-why-timing-matters` | `body_html#b008` | “Removes Plaque and Bacteria That Build-up Overnight” | Cleansing function at cosmetic scope; products.md 'actively reduces plaque'. |
 | `…/morning-and-night-time-brushing-why-timing-matters` | `body_html#b014` | “This protects your enamel from sugars and acids in your food.” | products.md Awake: protection against acids and sugars during the day. |

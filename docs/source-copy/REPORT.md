@@ -4,14 +4,14 @@
 
 The whole lane in one table: EN source copy, NL, claims and the registration in Shopify. The other four reports carry the rows that concern them.
 
-"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
 
 | Status | Rows |
 |---|---:|
-| In merchant-edit | 11 |
-| Ready to land | 2 |
+| In merchant-edit | 13 |
+| Ready to land | 1 |
 | In progress | 0 |
-| Waiting for Victor | 28 |
+| Waiting for Victor | 29 |
 | Parked / after launch | 3 |
 | Dropped | 6 |
 
@@ -28,8 +28,8 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
 | 10 | In merchant-edit | Clinical review CR1: advice on 50 claims and 9 onboarding lines | `3ebf113`, `2a7f809` |
 | 11 | In merchant-edit | Offline registration plan for NL and FR, the app set-up steps for Victor (`APP-SETUP.md`) and the first version of `register.py` | `8a7548d` … `060de0e`, `2f9a83f`, `0e21a1f` |
-| 12 | Ready to land | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source and the NL. The desk lands it together with the FR follow-up (FR updates its payload hash) | `6500a4a`, reported 21 Oct |
-| 13 | Ready to land | `register.py` reworked after reviews R18, R18b and R18c; R18d (21 Oct): approve, no new findings, selftest 80/80 | `93e1850`, `44bb619`, `59c281e`, reported 21 Oct |
+| 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
+| 13 | In merchant-edit | `register.py` reworked after reviews R18, R18b and R18c; R18d (21 Oct): approve, no new findings, selftest 80/80 | `93e1850`, `44bb619`, `59c281e` |
 | 14 | Waiting for Victor | Translations app for the registration | `APP-SETUP.md` |
 | 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
 | 16 | Waiting for Victor | NL and FR stay published while the first wave is not in | B4 decision 3 |
@@ -55,9 +55,11 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
 | 37 | Waiting for Victor | Capitalisation of all buttons | inventory of all buttons (global coordinator) |
 | 38 | Waiting for Victor | Delivery times in the Shopify policies, and their wording | Settings > Policies; table in the NL report |
-| 39 | Waiting for Victor | Admin text fixes from B1a (captured 19 Oct, not re-read since) | product, metafields, metaobjects, menu, selling plans |
+| 39 | Waiting for Victor | Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51) | product, metafields, metaobjects, menu, selling plans |
 | 40 | Waiting for Victor | Money format on the EN pages | Shopify money format (B1a decision 5) |
 | 41 | Waiting for Victor | Legal review of the NL and FR legal texts | batch 04, legal-review gate (NL 605 items) |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
 | 42 | Parked / after launch | Loop widget strings (off-limits files): the 11 strings of the B4 Loop table, handed to the Loop owner; NL and FR are in the payloads | B4 report, Loop handoff |
 | 43 | Parked / after launch | Navigation links and Shopify policies: no proven API route in the runner yet (LINK, SHOP_POLICY); after the first wave, or through Translate & Adapt | `register.py`, B4 Part 2 |
 | 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
@@ -201,7 +203,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - (b) "1 working day" in the legal texts, "24 uur" stays in the sticky bar.
 - *Advice*: (b): an order on Friday evening cannot arrive within 24 hours, and the rest of the EU is already given in working days. Either way the policies are your edit.
 
-**39. Admin text fixes from B1a (captured 19 Oct, not re-read since).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; footer menu "Why use hydroxapatite"; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
 - (a) You or DH edit them before the first wave is registered.
 - (b) After launch.
 - *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
@@ -217,6 +219,12 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - (c) NL/FR legal pages stay English until reviewed.
 - *Advice*: (b) for NL first; until then (c).
 
+**52. Releasing the nano-hydroxyapatite article in NL and FR.** You rewrote six fields of the article today and kept the rest of its EN as it is. Its claim blocks stay gated in NL and FR (pending-claim-review), so the article is not registered. Release them?
+- (a) Release the whole article: NL/FR then carry the same claims as the EN.
+- (b) Release only the fields you rewrote today and the blocks without a claim; keep the rest gated.
+- (c) Keep it gated until the claims review.
+- *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
+
 **Translation script (`register.py`).** R18d (21 Oct) approved `59c281e`: no new findings, selftest 80/80. Nothing has run live. The order from here:
 1. Victor says "app klaar" and gives the published theme ID (row 14).
 2. A read-only dry run with theme proof; its report shows every current value and the API contract.
@@ -228,7 +236,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - **C63, Vano et al. 2018** (Clin Oral Investig, PMID 28361171). The authors' conclusion does not say nHAp is better than fluoride: *"The application of nano-hydroxyapatite in gel toothpaste fluoride free is an effective desensitizing agent providing relief from symptoms after 2 and 4 weeks."* The results do report lower sensitivity than the fluoride and placebo groups at 2 and 4 weeks (p < 0.05). A 2 % gel applied for 10 minutes twice a day, 105 adults, not Karmicare. "Beat fluoride" is a fair reading of the results, not the authors' conclusion; brand don't #13 is what holds the card. The library summary ("OUTPERFORMED", "superior") goes further than the authors.
 - **C60, Kulal et al. 2016** (J Clin Diagn Res 10(10):ZC51–ZC54, PMC5121804). Found and read. Table 2: 97.62 % of tubules completely occluded with nHAp, 81.9 % NovaMin, 65.42 % Pro-Argin; the site's 98 / 82 / 65 are these figures rounded, so they come from a peer-reviewed paper, not a whitepaper. In vitro, 10 dentine discs per group, a slurry for 2 minutes a day over 7 days. Only nHAp vs Pro-Argin is significant (p = 0.005); nHAp vs NovaMin is not (p = 0.235). The paper is inconsistent: its abstract gives 98.1 / 83.1 / 69.1 % and 15 % nHAp, Table 1 gives 1 % nHAp (Acclaim). Advice: keep the card as a lab study ("in a lab study"), and drop the 82 % comparison or say it was not significant.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
 
 Task `task_dff189ea8e99`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy` (from 3bae259, the live baseline). 19 Oct 2026.
 

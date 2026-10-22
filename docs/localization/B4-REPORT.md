@@ -4,11 +4,11 @@
 
 The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
 
-"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
 
 | Status | Rows |
 |---|---:|
-| In merchant-edit | 3 |
+| In merchant-edit | 4 |
 | Ready to land | 1 |
 | In progress | 0 |
 | Waiting for Victor | 5 |
@@ -20,12 +20,13 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 5 | In merchant-edit | 64 `kc.*` theme keys in all 31 locales: footer, plans, clock, FAQ "ALL", sticky bar, hero, stat strip, PDP labels; EN, NL and FR values | `16decc4` … `1630eef`, `c348c72`, `61efa65` |
 | 8 | In merchant-edit | Sticky-bar key `kc.sticky_cart.kit_free_html` removed from all 31 locales (NV-13) | `d72d791` |
 | 11 | In merchant-edit | Offline registration plan for NL and FR, the app set-up steps for Victor (`APP-SETUP.md`) and the first version of `register.py` | `8a7548d` … `060de0e`, `2f9a83f`, `0e21a1f` |
-| 13 | Ready to land | `register.py` reworked after reviews R18, R18b and R18c; R18d (21 Oct): approve, no new findings, selftest 80/80 | `93e1850`, `44bb619`, `59c281e`, reported 21 Oct |
+| 13 | In merchant-edit | `register.py` reworked after reviews R18, R18b and R18c; R18d (21 Oct): approve, no new findings, selftest 80/80 | `93e1850`, `44bb619`, `59c281e` |
 | 14 | Waiting for Victor | Translations app for the registration | `APP-SETUP.md` |
 | 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
 | 16 | Waiting for Victor | NL and FR stay published while the first wave is not in | B4 decision 3 |
 | 17 | Waiting for Victor | Legacy translated product handles (12 URLs, e.g. `/nl/products/compleet-hygiene-kit`) | B4 decision 4 |
 | 18 | Waiting for Victor | Browser-language redirect on product pages | B4 decision 5, manual check 3 |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
 | 42 | Parked / after launch | Loop widget strings (off-limits files): the 11 strings of the B4 Loop table, handed to the Loop owner; NL and FR are in the payloads | B4 report, Loop handoff |
 | 43 | Parked / after launch | Navigation links and Shopify policies: no proven API route in the runner yet (LINK, SHOP_POLICY); after the first wave, or through Translate & Adapt | `register.py`, B4 Part 2 |
 | 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
@@ -67,7 +68,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 4. A fresh dry run.
 5. Its checksum and Victor's explicit yes (row 15); only then `--write`.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
 
 Task `task_427cfe23005d` (dispatch `ctx_505619d6c8e5`), brief `.coordinator/BRIEF-B4.md`. Nothing was registered, pushed or changed in Shopify.
 
@@ -239,7 +240,7 @@ Split fields (`body_html#bNNN`, `body#bNNN`) are rebuilt at run time: each block
 - **EN source and NL:** this branch after R2 (`fb46dd1`).
 - **FR:** `karmicare/soft-launch-fr` `c7aed28`, read with `git show`, not merged.
 
-**What it leaves out.** Entries with status `held`, `never_translate`, `theme-key`, `dawn-nl` or `locale-present` are left out, as are entries whose value equals the EN, entries with no value and entries with no API route. `legal-review` and `pending-claim-review` are kept but marked, so a run can filter them.
+**What it leaves out.** Entries with status `held`, `never_translate`, `theme-key`, `dawn-nl` or `locale-present` are left out, as are entries whose value equals the EN, entries with no value and entries with no API route. `legal-review` and `pending-claim-review` are kept but marked, so a run can filter them. Since 22 Oct it also leaves out translations already registered by hand, listed in `registration/registered.json` with their EN sha1: Victor's own NL and FR for the Duo's title, SEO title and meta description. A later EN change brings such an entry back into the plan.
 
 **Statuses.** Each item has `drafted` and `registered`. `published` is per locale; see Part 4.
 

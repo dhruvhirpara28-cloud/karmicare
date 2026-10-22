@@ -1,24 +1,25 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "2cb61dd0e00f",
+  "en-source.json": "ff51bac52c4f",
+  "registered.json": "7967afaaf3d3",
   "nl/batch-01-homepage.json": "5cccee39a4c7",
-  "nl/batch-02-pdp.json": "b9c8e245d651",
-  "nl/batch-03-header-footer.json": "ac168bd42575",
+  "nl/batch-02-pdp.json": "1101f9feff35",
+  "nl/batch-03-header-footer.json": "ddf994a11689",
   "nl/batch-04-legal.json": "103611b761f9",
   "nl/batch-05-products.json": "95589890b394",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
-  "nl/batch-07-collections-blog.json": "a66b72d5d0fc",
+  "nl/batch-07-collections-blog.json": "3dc7ed12e9fe",
   "nl/batch-08-system.json": "a46b443f6ed0"
  },
  "batches": {
   "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "87edec28e25fcae4bdef2adf127d761b0a725bc4",
-  "batch-03-header-footer": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
+  "batch-02-pdp": "2468bab432715f0aea7f7b6aea815a8f65f70721",
+  "batch-03-header-footer": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
-  "batch-07-collections-blog": "9597904c4ef875006a7d8a76bebbaa43d0faaca0",
+  "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
  },
  "published": "already published on the live store (observed 2026-10-19, B4-REPORT part 4)",
@@ -6922,54 +6923,6 @@
    "page": "pdp",
    "items": [
     {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:seo.title",
-     "kind": "direct",
-     "key": "meta_title",
-     "field": "seo.title",
-     "en": "Fluoride-Free Morning & Night Toothpaste System | KARMICARE",
-     "en_sha1": "7b9e98ecd4b2f52758fe998f6252332899bd1282",
-     "value": "Fluoridevrij tandpastasysteem voor ochtend en avond | KARMICARE",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(PRODUCT), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:seo.description",
-     "kind": "direct",
-     "key": "meta_description",
-     "field": "seo.description",
-     "en": "Awake for the morning, Asleep for the night: two nano-hydroxyapatite toothpastes you don't rinse off. Fluoride-free, SLS-free. From €0.49 a brushing.",
-     "en_sha1": "21b863b05012cecc04b0ec53b7acd48fac906569",
-     "value": "Awake voor de ochtend, Asleep voor de nacht: twee tandpasta's met nano-hydroxyapatiet die je niet wegspoelt. Fluoridevrij, SLS-vrij. Vanaf €0,49 per poetsbeurt.",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(PRODUCT), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:title",
-     "kind": "direct",
-     "key": "title",
-     "field": "title",
-     "en": "Awake & Asleep Morning & Night Toothpaste System",
-     "en_sha1": "50b5afce6abf866a5d9645d3d4b4a5f554cc9a6f",
-     "value": "Awake & Asleep tandpastasysteem voor ochtend en avond",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(PRODUCT), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:body_html",
      "kind": "direct",
      "key": "body_html",
@@ -11147,8 +11100,8 @@
      "kind": "match",
      "key": "title",
      "field": "links[2].title",
-     "en": "Why use hydroxapatite",
-     "en_sha1": "03cf49872d62d8b2d56ff94c12ecb29d5fe7d603",
+     "en": "Why hydroxyapatite",
+     "en_sha1": "3e38779dedb807ac256f03b385328b64cf0ceeff",
      "value": "Waarom hydroxyapatiet",
      "gates": [],
      "hold": [],
@@ -38493,9 +38446,9 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b016",
-     "en": "It guards against tooth decay by providing total protection against harmful dietary acids",
-     "en_sha1": "59532bef6e6cb72d18284d6059e5760362b3b173",
-     "value": "Het beschermt tegen tandbederf door volledige bescherming te bieden tegen schadelijke zuren uit je voeding",
+     "en": "It helps protect against tooth decay and harmful dietary acids",
+     "en_sha1": "9a712a33c8a4dc4f8d97c394445f1c93956d2ecc",
+     "value": "Het helpt beschermen tegen tandbederf en schadelijke zuren uit je voeding",
      "gates": [
       "pending-claim-review"
      ],
@@ -39929,9 +39882,9 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b088",
-     "en": "Nano HAp plugs the exposed dentin with deposits of hydroxyapatite nanoparticles. This works as a protective shield that prevents the nerve endings from getting stimulated by elements.",
-     "en_sha1": "4663eaaf6f39bd6194bedb9d9e8036b748f5dd6a",
-     "value": "Nano-HAp dicht het blootliggende dentine af met afzettingen van hydroxyapatiet-nanodeeltjes. Dat werkt als een beschermend schild dat verhindert dat de zenuwuiteinden door prikkels gestimuleerd worden.",
+     "en": "Nano HAp plugs the exposed dentin with deposits of hydroxyapatite nanoparticles. This works as a protective shield that helps keep the nerve endings from being stimulated.",
+     "en_sha1": "7dc5acf34c5f7459f54798ab50cf7a745a12860b",
+     "value": "Nano-HAp dicht het blootliggende dentine af met afzettingen van hydroxyapatiet-nanodeeltjes. Dat werkt als een beschermend schild dat de zenuwuiteinden helpt afschermen tegen prikkels.",
      "gates": [
       "pending-claim-review"
      ],
@@ -39971,9 +39924,9 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b090",
-     "en": "4. Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks",
-     "en_sha1": "906380ee3ddc35955789f1f37a8620e0a1cb66b7",
-     "value": "4. Nano-hydroxyapatiet beschermt je glazuur tegen zure voeding en dranken",
+     "en": "4. Nano Hydroxyapatite Helps Protect Your Enamel From Acidic Food",
+     "en_sha1": "0fb3b2dfc06029aafa5b295b937d15aa00139c9a",
+     "value": "4. Nano-hydroxyapatiet helpt je glazuur beschermen tegen zure voeding",
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
@@ -40169,9 +40122,9 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b100",
-     "en": "It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp protects your teeth against decay by grouping the disease-causing microbes together, which you can then spit out.",
-     "en_sha1": "558e186b55d7c62c8b67f03fa66079f1c0aaf000",
-     "value": "Het remineraliseert het glazuur door de verloren calcium- en fosfaatafzettingen weer op te bouwen, en schermt het tandoppervlak tegelijk af tegen de dagelijkse zuuraanvallen. Bovendien beschermt nano-HAp je tanden tegen tandbederf door ziekteverwekkende microben samen te klonteren, zodat je ze kunt uitspugen.",
+     "en": "It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp helps protect your teeth against decay by binding bacteria together, so you can spit them out.",
+     "en_sha1": "e3ea6fb90a24faa62a7f9ef875b0010545a1150e",
+     "value": "Het remineraliseert het glazuur door de verloren calcium- en fosfaatafzettingen weer op te bouwen, en schermt het tandoppervlak tegelijk af tegen de dagelijkse zuuraanvallen. Bovendien helpt nano-HAp je tanden beschermen tegen tandbederf door bacteriën aan elkaar te binden, zodat je ze kunt uitspugen.",
      "gates": [
       "pending-claim-review"
      ],
@@ -40533,9 +40486,9 @@
      "kind": "direct",
      "key": "meta_title",
      "field": "seo.title",
-     "en": "Why you need Nano Hydroxapatite in your toothpaste – KARMICARE",
-     "en_sha1": "ff84a89a6c8ecd62e51ed973b481b1c89b986c5e",
-     "value": "Waarom je nano-hydroxyapatiet in je tandpasta nodig hebt – KARMICARE",
+     "en": "Nano-Hydroxyapatite Toothpaste: What It Is and How It Works | KARMICARE",
+     "en_sha1": "d79f54f075b2c652b1ebc806d43781eccd0323c7",
+     "value": "Tandpasta met nano-hydroxyapatiet: wat het is en hoe het werkt | KARMICARE",
      "gates": [],
      "hold": [
       "collections and blog (batch 07)"
@@ -40551,9 +40504,9 @@
      "kind": "direct",
      "key": "meta_description",
      "field": "seo.description",
-     "en": "Here's everything you need to know about nano-hydroxyapatite, a medical marvel ingredient for better teeth, bones, and overall health.",
-     "en_sha1": "7942d995565165cfc8e231a65a0969804bb12451",
-     "value": "Hier lees je alles wat je moet weten over nano-hydroxyapatiet, een medisch wonderingrediënt voor betere tanden, botten en een betere algemene gezondheid.",
+     "en": "What nano-hydroxyapatite is, how it works on enamel, and why Karmicare uses it in Awake and Asleep, two fluoride-free toothpastes.",
+     "en_sha1": "11a95812de95b8a70fe3f204eb4b6c34c233e03e",
+     "value": "Wat nano-hydroxyapatiet is, hoe het op je glazuur werkt en waarom Karmicare het in Awake en Asleep verwerkt, twee fluoridevrije tandpasta's.",
      "gates": [
       "pending-claim-review"
      ],

@@ -1,10 +1,11 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "2cb61dd0e00f",
+  "en-source.json": "ff51bac52c4f",
+  "registered.json": "7967afaaf3d3",
   "fr/batch-01-homepage.json": "e548111a26cb",
-  "fr/batch-02-pdp.json": "c5f27b69323d",
-  "fr/batch-03-header-footer.json": "a2226e0faeea",
+  "fr/batch-02-pdp.json": "58733d5aa0d0",
+  "fr/batch-03-header-footer.json": "0a0fe4121a47",
   "fr/batch-04-legal.json": "bd6a7748a8dc",
   "fr/batch-05-products.json": "7dbfe43dbd59",
   "fr/batch-06-content-pages.json": "c301d04fd83b",
@@ -13,12 +14,12 @@
  },
  "batches": {
   "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "87edec28e25fcae4bdef2adf127d761b0a725bc4",
-  "batch-03-header-footer": "d5353b16cc57ea2181626f9f9cfa79dda0cb107d",
+  "batch-02-pdp": "2468bab432715f0aea7f7b6aea815a8f65f70721",
+  "batch-03-header-footer": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
-  "batch-07-collections-blog": "9597904c4ef875006a7d8a76bebbaa43d0faaca0",
+  "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
  },
  "published": "already published on the live store (observed 2026-10-19, B4-REPORT part 4)",
@@ -6051,6 +6052,27 @@
      ]
     },
     {
+     "id": "product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_Eb93Xa.blocks.buy_buttons_Ffxhap.settings.custom_button_text",
+     "en": "Begin your 60-Day Rhythm",
+     "en_sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
+     "value": "Commencer votre Rythme 60 jours",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_Eb93Xa",
+      "buy_buttons_Ffxhap",
+      "custom_button_text"
+     ]
+    },
+    {
      "id": "product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_1",
      "kind": "match",
      "key": null,
@@ -6845,54 +6867,6 @@
    "batch": "batch-02-pdp",
    "page": "pdp",
    "items": [
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:seo.title",
-     "kind": "direct",
-     "key": "meta_title",
-     "field": "seo.title",
-     "en": "Fluoride-Free Morning & Night Toothpaste System | KARMICARE",
-     "en_sha1": "7b9e98ecd4b2f52758fe998f6252332899bd1282",
-     "value": "Système de dentifrice matin et soir sans fluor | KARMICARE",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(PRODUCT), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:seo.description",
-     "kind": "direct",
-     "key": "meta_description",
-     "field": "seo.description",
-     "en": "Awake for the morning, Asleep for the night: two nano-hydroxyapatite toothpastes you don't rinse off. Fluoride-free, SLS-free. From €0.49 a brushing.",
-     "en_sha1": "21b863b05012cecc04b0ec53b7acd48fac906569",
-     "value": "Awake pour le matin, Asleep pour la nuit : deux dentifrices à la nano-hydroxyapatite qu’on ne rince pas. Sans fluor, sans SLS. À partir de 0,49 € par brossage.",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(PRODUCT), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:title",
-     "kind": "direct",
-     "key": "title",
-     "field": "title",
-     "en": "Awake & Asleep Morning & Night Toothpaste System",
-     "en_sha1": "50b5afce6abf866a5d9645d3d4b4a5f554cc9a6f",
-     "value": "Système de dentifrice matin et soir Awake & Asleep",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(PRODUCT), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
     {
      "id": "admin:karmicare-biorhythmic-oral-care-system:body_html",
      "kind": "direct",
@@ -10988,12 +10962,8 @@
      "en": "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017",
      "en_sha1": "b4f5fb0b87d8d23a5dab8de173c2d065f017ef83",
      "value": "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review"
-     ],
+     "gates": [],
+     "hold": [],
      "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -11172,22 +11142,6 @@
      "en": "Shop Karmicare",
      "en_sha1": "f482360586d12d87ab1e8c6595c02c8c37769e1e",
      "value": "Boutique Karmicare",
-     "gates": [],
-     "hold": [],
-     "how": "menu link matched on its EN title",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:navigation:company:links[2].title",
-     "kind": "match",
-     "key": "title",
-     "field": "links[2].title",
-     "en": "Why use hydroxapatite",
-     "en_sha1": "03cf49872d62d8b2d56ff94c12ecb29d5fe7d603",
-     "value": "Pourquoi choisir l’hydroxyapatite",
      "gates": [],
      "hold": [],
      "how": "menu link matched on its EN title",
@@ -38124,7 +38078,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38143,7 +38097,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38162,7 +38116,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38181,7 +38135,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38200,7 +38154,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38221,7 +38175,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38242,7 +38197,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38263,7 +38219,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38282,7 +38239,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38303,7 +38260,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38324,7 +38282,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38343,7 +38302,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38364,7 +38323,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38385,7 +38345,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38404,28 +38365,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
-     ],
-     "how": "block replaced inside the live body_html value",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:article:news/nano-hydroxyapatite:body_html#b016",
-     "kind": "assemble",
-     "key": "body",
-     "field": "body_html#b016",
-     "en": "It guards against tooth decay by providing total protection against harmful dietary acids",
-     "en_sha1": "59532bef6e6cb72d18284d6059e5760362b3b173",
-     "value": "Elle protège contre les caries en offrant une protection totale contre les acides alimentaires nocifs",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review",
-      "collections and blog (batch 07)"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38446,7 +38386,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38465,7 +38406,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38484,7 +38425,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38503,7 +38444,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38522,7 +38463,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38541,7 +38482,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38560,7 +38501,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38579,7 +38520,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38598,7 +38539,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38617,7 +38558,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38636,7 +38577,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38657,7 +38598,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38676,7 +38618,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38695,7 +38637,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38716,7 +38658,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38737,7 +38680,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38756,7 +38700,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38777,7 +38721,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38798,7 +38743,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38819,7 +38765,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38840,7 +38787,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38861,7 +38809,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38882,7 +38831,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38903,7 +38853,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38924,7 +38875,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38943,7 +38895,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38962,7 +38914,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -38981,7 +38933,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39000,7 +38952,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39019,7 +38971,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39038,7 +38990,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39057,7 +39009,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39076,7 +39028,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39095,7 +39047,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39114,7 +39066,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39133,7 +39085,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39154,7 +39106,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39175,7 +39128,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39196,7 +39150,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39217,7 +39172,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39238,7 +39194,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39259,7 +39216,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39280,7 +39238,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39301,7 +39260,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39320,7 +39280,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39339,7 +39299,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39358,7 +39318,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39379,7 +39339,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39400,7 +39361,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39421,7 +39383,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39442,7 +39405,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39463,7 +39427,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39484,7 +39449,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39505,7 +39471,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39524,7 +39491,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39545,7 +39512,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39566,7 +39534,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39585,7 +39554,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39604,7 +39573,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39623,7 +39592,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39642,7 +39611,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39661,7 +39630,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39680,7 +39649,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39699,7 +39668,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39718,7 +39687,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39739,7 +39708,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39758,7 +39728,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39777,7 +39747,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39798,7 +39768,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39819,7 +39790,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39840,28 +39812,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
-     ],
-     "how": "block replaced inside the live body_html value",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:article:news/nano-hydroxyapatite:body_html#b088",
-     "kind": "assemble",
-     "key": "body",
-     "field": "body_html#b088",
-     "en": "Nano HAp plugs the exposed dentin with deposits of hydroxyapatite nanoparticles. This works as a protective shield that prevents the nerve endings from getting stimulated by elements.",
-     "en_sha1": "4663eaaf6f39bd6194bedb9d9e8036b748f5dd6a",
-     "value": "La nano-HAp obture la dentine exposée avec des dépôts de nanoparticules d’hydroxyapatite. Elle agit comme un bouclier protecteur qui empêche les terminaisons nerveuses d’être stimulées par les agressions extérieures.",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39882,26 +39834,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
-     ],
-     "how": "block replaced inside the live body_html value",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:article:news/nano-hydroxyapatite:body_html#b090",
-     "kind": "assemble",
-     "key": "body",
-     "field": "body_html#b090",
-     "en": "4. Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks",
-     "en_sha1": "906380ee3ddc35955789f1f37a8620e0a1cb66b7",
-     "value": "4. La nano-hydroxyapatite protège votre émail des aliments et boissons acides",
-     "gates": [],
-     "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39920,7 +39854,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39939,7 +39873,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39958,7 +39892,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39977,7 +39911,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -39996,7 +39930,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40017,7 +39951,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40038,7 +39973,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40059,7 +39995,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40080,28 +40017,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
-     ],
-     "how": "block replaced inside the live body_html value",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:article:news/nano-hydroxyapatite:body_html#b100",
-     "kind": "assemble",
-     "key": "body",
-     "field": "body_html#b100",
-     "en": "It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp protects your teeth against decay by grouping the disease-causing microbes together, which you can then spit out.",
-     "en_sha1": "558e186b55d7c62c8b67f03fa66079f1c0aaf000",
-     "value": "Elle reminéralise l’émail en reconstituant les dépôts de calcium et de phosphate perdus, tout en protégeant la surface des dents des attaques acides quotidiennes. De plus, la nano-HAp protège vos dents contre les caries en regroupant les microbes responsables de maladies, que vous pouvez ensuite recracher.",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40122,7 +40039,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40141,7 +40059,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40160,7 +40078,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40179,7 +40097,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40200,7 +40118,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40219,7 +40138,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40238,7 +40157,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40257,7 +40176,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40278,7 +40197,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40299,7 +40219,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40320,7 +40241,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40341,7 +40263,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40362,7 +40285,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40381,7 +40305,7 @@
      "gates": [],
      "hold": [
       "collections and blog (batch 07)",
-      "gated field: 58 of 117 blocks wait for a review"
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40402,7 +40326,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40423,7 +40348,8 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
      "status": {
@@ -40444,48 +40370,10 @@
      ],
      "hold": [
       "pending-claim-review",
-      "collections and blog (batch 07)"
+      "collections and blog (batch 07)",
+      "partial field: 4 of 117 blocks held or untranslated"
      ],
      "how": "block replaced inside the live body_html value",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:article:news/nano-hydroxyapatite:seo.title",
-     "kind": "direct",
-     "key": "meta_title",
-     "field": "seo.title",
-     "en": "Why you need Nano Hydroxapatite in your toothpaste – KARMICARE",
-     "en_sha1": "ff84a89a6c8ecd62e51ed973b481b1c89b986c5e",
-     "value": "Pourquoi votre dentifrice a besoin de nano-hydroxyapatite – KARMICARE",
-     "gates": [],
-     "hold": [
-      "collections and blog (batch 07)"
-     ],
-     "how": "owner GID from translatableResources(ARTICLE), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:article:news/nano-hydroxyapatite:seo.description",
-     "kind": "direct",
-     "key": "meta_description",
-     "field": "seo.description",
-     "en": "Here's everything you need to know about nano-hydroxyapatite, a medical marvel ingredient for better teeth, bones, and overall health.",
-     "en_sha1": "7942d995565165cfc8e231a65a0969804bb12451",
-     "value": "Voici tout ce qu’il faut savoir sur la nano-hydroxyapatite, un ingrédient qui est une merveille médicale pour de meilleures dents, de meilleurs os et une meilleure santé globale.",
-     "gates": [
-      "pending-claim-review"
-     ],
-     "hold": [
-      "pending-claim-review",
-      "collections and blog (batch 07)"
-     ],
-     "how": "owner GID from translatableResources(ARTICLE), matched on handle",
      "status": {
       "drafted": true,
       "registered": false
@@ -40494,9 +40382,9 @@
    ],
    "assembled_field": {
     "blocks": 117,
-    "drafted": 117,
-    "missing_or_held": 0,
-    "gated": 58
+    "drafted": 113,
+    "missing_or_held": 4,
+    "gated": 55
    }
   },
   {

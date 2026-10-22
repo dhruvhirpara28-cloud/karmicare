@@ -4,14 +4,14 @@
 
 The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
 
-"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `2ef9b5c` (22 Oct). merchant-edit is not pushed yet, so none of it is live.
 
 | Status | Rows |
 |---|---:|
-| In merchant-edit | 5 |
+| In merchant-edit | 6 |
 | Ready to land | 1 |
 | In progress | 0 |
-| Waiting for Victor | 7 |
+| Waiting for Victor | 8 |
 | Parked / after launch | 0 |
 | Dropped | 2 |
 
@@ -22,14 +22,16 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 3 | In merchant-edit | Claims register `CLAIMS-REVIEW.md`: 70 claims, 17 approved, 49 needs-review, 3 unsupported, 1 confirmed (C103) | `0b98382` … `1437fc5` |
 | 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
 | 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
-| 12 | Ready to land | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source and the NL. The desk lands it together with the FR follow-up (FR updates its payload hash) | `6500a4a`, reported 21 Oct |
+| 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
 | 26 | Waiting for Victor | "Verified / confirmed by your dentist" in 5 entries (S2) | PDP pricing summary, info card, check-up tooltip, Year plan description |
 | 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
 | 33 | Waiting for Victor | Facts to confirm (S9) | homepage and PDP |
 | 34 | Waiting for Victor | Treatment-journey line stops mid-phrase (#29) | admin metafield `custom.treatment_journey_*` |
 | 37 | Waiting for Victor | Capitalisation of all buttons | inventory of all buttons (global coordinator) |
-| 39 | Waiting for Victor | Admin text fixes from B1a (captured 19 Oct, not re-read since) | product, metafields, metaobjects, menu, selling plans |
+| 39 | Waiting for Victor | Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51) | product, metafields, metaobjects, menu, selling plans |
 | 40 | Waiting for Victor | Money format on the EN pages | Shopify money format (B1a decision 5) |
+| 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
+| 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
 | 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
 | 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
 
@@ -62,7 +64,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
 - *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
 
-**39. Admin text fixes from B1a (captured 19 Oct, not re-read since).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; footer menu "Why use hydroxapatite"; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
 - (a) You or DH edit them before the first wave is registered.
 - (b) After launch.
 - *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
@@ -72,7 +74,13 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (b) The PDP lane formats amounts per locale in the theme.
 - *Advice*: (a) for launch, (b) after: it is theme work in the buy box, not a copy change.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+**52. Releasing the nano-hydroxyapatite article in NL and FR.** You rewrote six fields of the article today and kept the rest of its EN as it is. Its claim blocks stay gated in NL and FR (pending-claim-review), so the article is not registered. Release them?
+- (a) Release the whole article: NL/FR then carry the same claims as the EN.
+- (b) Release only the fields you rewrote today and the blocks without a claim; keep the rest gated.
+- (c) Keep it gated until the claims review.
+- *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
 
 The English that the live store renders, one entry per string. Batches 01–03 (homepage, Duo PDP, header and footer) come from B1a, with its corrections applied; batches 04–08 (legal, other products, content pages, collections and blog, system pages) come from B2 and are inventoried as they are, without corrections. NL and FR translators start from here.
 
@@ -85,18 +93,22 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
   - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017”, Victor's short line of 21 Oct, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
   - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
+- **Updated 22 Oct** with Victor's EN edits in the Shopify admin, read back on the storefront (global coordinator, and this lane for the article and the product title). Ten `admin-held` entries carry the new EN, with `old_en` / `old_sha1` kept and the reason in `notes`:
+  - the Duo product's title, SEO title and meta description (batch 02): "Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System";
+  - the footer menu link "Why use hydroxapatite" → "Why hydroxyapatite" (batch 03), so it leaves the brand-rule scan;
+  - six fields of the article `news/nano-hydroxyapatite` (batch 07): SEO title, meta description, and blocks `#b016`, `#b088`, `#b090`, `#b100` ("helps protect" instead of "guards", "total protection", "prevents", "protects"). The rest of the article stays as Victor approved it, and its claim statuses are unchanged: releasing the gated NL/FR blocks is still his decision. The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
-| `batch-02-pdp` | 477 | `87edec28e25fcae4bdef2adf127d761b0a725bc4` |
-| `batch-03-header-footer` | 41 | `d5353b16cc57ea2181626f9f9cfa79dda0cb107d` |
+| `batch-02-pdp` | 477 | `2468bab432715f0aea7f7b6aea815a8f65f70721` |
+| `batch-03-header-footer` | 41 | `18cdaec0fb18d1f00aa688c83d6bc0393b350319` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
-| `batch-07-collections-blog` | 709 | `9597904c4ef875006a7d8a76bebbaa43d0faaca0` |
+| `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
 
 ## How to read an entry
@@ -295,7 +307,6 @@ Fallbacks that exist in code but do not render today (the setting is filled): `s
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#08` | products | Care Credit is what Return on Care pays out — in euros, spendable on member products and accessories. We beli… |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#08` | prevention | Care Credit is what Return on Care pays out — in euros, spendable on member products and accessories. We beli… |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10` | prevention | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to … |
-| `admin:navigation:company:links[2].title` | use | Why use hydroxapatite |
 
 Quotes from practitioners keep their own words. 'toothpaste' in product titles, alt texts and meta tags is the first-contact clarity use that tone-of-voice.md allows; whether every alt text needs it is Victor's call.
 
@@ -836,9 +847,9 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 221 | `admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description` | app | 20% Care Credit back in your account i The year plan earns 20% Return on Care — 2× the bi-monthly r… | admin-held |  |
 | 222 | `admin:karmicare-biorhythmic-oral-care-system:selling_plan_group:Yearly Plan` | app | Yearly Plan | admin-held |  |
 | 223 | `admin:karmicare-biorhythmic-oral-care-system:selling_plan.712370356605.name` | app | 6 duos a year (3 now, 3 in month 6) | admin-held |  |
-| 224 | `admin:karmicare-biorhythmic-oral-care-system:seo.title` | product | Fluoride-Free Morning & Night Toothpaste System \| KARMICARE | admin-held |  |
-| 225 | `admin:karmicare-biorhythmic-oral-care-system:seo.description` | product | Awake for the morning, Asleep for the night: two nano-hydroxyapatite toothpastes you don't rinse of… | admin-held |  |
-| 226 | `admin:karmicare-biorhythmic-oral-care-system:title` | product | Awake & Asleep Morning & Night Toothpaste System | admin-held |  |
+| 224 | `admin:karmicare-biorhythmic-oral-care-system:seo.title` | product | Fluoride-Free Nano-Hydroxyapatite Toothpaste \| Awake & Asleep | admin-held |  |
+| 225 | `admin:karmicare-biorhythmic-oral-care-system:seo.description` | product | Awake for the morning, Asleep for the night: two fluoride-free nano-hydroxyapatite toothpastes in o… | admin-held |  |
+| 226 | `admin:karmicare-biorhythmic-oral-care-system:title` | product | Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System | admin-held |  |
 | 227 | `admin:karmicare-biorhythmic-oral-care-system:body_html` | product | Your mouth doesn’t stay the same from morning to night. Two toothpastes, one system. Formulated aro… | admin-held | C C14,C36 |
 | 228 | `admin:karmicare-biorhythmic-oral-care-system:media.69271648010621.alt` | product | Karmicare Biorhythmic Oral Care Kit: fluoride-free, SLS-free Awake morning and Asleep evening tooth… | admin-held | C C100 |
 | 229 | `admin:karmicare-biorhythmic-oral-care-system:media.69248905085309.alt` | product | Karmicare Biorhythmic Oral Care Duo Set: Awake morning and Asleep evening toothpaste, fluoride-free… | admin-held |  |
@@ -1131,7 +1142,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 34 | `admin:navigation:new-main-menu:links[3].title` | navigation | Professionals | admin-held |  |
 | 35 | `admin:navigation:new-main-menu:links[4].title` | navigation | Members | admin-held |  |
 | 36 | `admin:navigation:company:links[1].title` | navigation | Shop Karmicare | admin-held |  |
-| 37 | `admin:navigation:company:links[2].title` | navigation | Why use hydroxapatite | admin-held |  |
+| 37 | `admin:navigation:company:links[2].title` | navigation | Why hydroxyapatite | admin-held |  |
 | 38 | `admin:navigation:company:links[3].title` | navigation | Why Karmicare | admin-held |  |
 | 39 | `admin:navigation:company:links[4].title` | navigation | nHAp Technology | admin-held |  |
 | 40 | `admin:navigation:company:links[5].title` | navigation | Contact | admin-held |  |
@@ -2274,7 +2285,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 43 | `admin:article:news/nano-hydroxyapatite:body_html#b013` | article | Nano HAp dives into your enamel and refills the lost minerals every time you brush your teeth | admin-held |  |
 | 44 | `admin:article:news/nano-hydroxyapatite:body_html#b014` | article | It smoothes and whitens teeth by gently repairing your tooth surface with native minerals | admin-held |  |
 | 45 | `admin:article:news/nano-hydroxyapatite:body_html#b015` | article | It plugs exposed dentin tubules to effectively reduce tooth sensitivity | admin-held |  |
-| 46 | `admin:article:news/nano-hydroxyapatite:body_html#b016` | article | It guards against tooth decay by providing total protection against harmful dietary acids | admin-held |  |
+| 46 | `admin:article:news/nano-hydroxyapatite:body_html#b016` | article | It helps protect against tooth decay and harmful dietary acids | admin-held |  |
 | 47 | `admin:article:news/nano-hydroxyapatite:body_html#b017` | article | It’s bioactive, osteoconductive, and nontoxic | admin-held |  |
 | 48 | `admin:article:news/nano-hydroxyapatite:body_html#b018` | article | And much more — skip to our frequently asked questions to learn more little-known facts | admin-held |  |
 | 49 | `admin:article:news/nano-hydroxyapatite:body_html#b019` | article | Expand Your Dental Knowledge | admin-held |  |
@@ -2348,7 +2359,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 117 | `admin:article:news/nano-hydroxyapatite:body_html#b087` | article | After using Karmicare nano hydroxyapatite toothpaste, the toughness of your enamel will noticeably … | admin-held |  |
 | 118 | `admin:article:news/nano-hydroxyapatite:body_html#b088` | article | Nano HAp plugs the exposed dentin with deposits of hydroxyapatite nanoparticles. This works as a pr… | admin-held |  |
 | 119 | `admin:article:news/nano-hydroxyapatite:body_html#b089` | article | Using a toothpaste with nano hydroxyapatite can make a significant difference in dentin hypersensit… | admin-held |  |
-| 120 | `admin:article:news/nano-hydroxyapatite:body_html#b090` | article | 4. Nano Hydroxyapatite Protects Your Enamel From Acidic Food and Drinks | admin-held |  |
+| 120 | `admin:article:news/nano-hydroxyapatite:body_html#b090` | article | 4. Nano Hydroxyapatite Helps Protect Your Enamel From Acidic Food | admin-held |  |
 | 121 | `admin:article:news/nano-hydroxyapatite:body_html#b091` | article | Did you know that sour candies are as acidic as battery acid? | admin-held |  |
 | 122 | `admin:article:news/nano-hydroxyapatite:body_html#b092` | article | Their pH levels are very similar. And yet, many adults and kids alike love snacking on bags of Sour… | admin-held |  |
 | 123 | `admin:article:news/nano-hydroxyapatite:body_html#b093` | article | This is known as tooth erosion — it’s a gateway to a myriad of dental problems like developing an a… | admin-held |  |
@@ -2376,8 +2387,8 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 145 | `admin:article:news/nano-hydroxyapatite:body_html#b115` | article | The best way to use nano HAp is in a specially formulated toothpaste. We suggest our Biorhythmic Or… | admin-held |  |
 | 146 | `admin:article:news/nano-hydroxyapatite:body_html#b116` | article | Keep in mind that while there are several toothpastes made with nano hydroxyapatite, some of those … | admin-held |  |
 | 147 | `admin:article:news/nano-hydroxyapatite:body_html#b117` | article | Brush your teeth mindfully for at least 2 minutes twice a day. Then, leave nano HAp toothpaste in y… | admin-held |  |
-| 148 | `admin:article:news/nano-hydroxyapatite:seo.title` | article | Why you need Nano Hydroxapatite in your toothpaste – KARMICARE | admin-held |  |
-| 149 | `admin:article:news/nano-hydroxyapatite:seo.description` | article | Here's everything you need to know about nano-hydroxyapatite, a medical marvel ingredient for bette… | admin-held |  |
+| 148 | `admin:article:news/nano-hydroxyapatite:seo.title` | article | Nano-Hydroxyapatite Toothpaste: What It Is and How It Works \| KARMICARE | admin-held |  |
+| 149 | `admin:article:news/nano-hydroxyapatite:seo.description` | article | What nano-hydroxyapatite is, how it works on enamel, and why Karmicare uses it in Awake and Asleep,… | admin-held |  |
 | 150 | `admin:article:news/morning-and-night-time-brushing-why-timing-matters:text#01` | article | [img alt] Brushing Your Teeth Both Morning and Night Is Important For Your Oral Health. | admin-held |  |
 | 151 | `admin:article:news/morning-and-night-time-brushing-why-timing-matters:body_html#b001` | article | Oral hygiene is more than just a daily ritual. It is a vital aspect of your overall health and well… | admin-held |  |
 | 152 | `admin:article:news/morning-and-night-time-brushing-why-timing-matters:body_html#b002` | article | Does the timing of brushing matter? | admin-held |  |
