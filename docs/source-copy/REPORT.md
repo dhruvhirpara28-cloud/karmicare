@@ -198,7 +198,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - (b) "1 working day" in the legal texts, "24 uur" stays in the sticky bar.
 - *Advice*: (b): an order on Friday evening cannot arrive within 24 hours, and the rest of the EU is already given in working days. Either way the policies are your edit.
 
-**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" stays (Victor 22 Oct). Who edits them, and when?
 - (a) You or DH edit them before the first wave is registered.
 - (b) After launch.
 - *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
