@@ -222,3 +222,7 @@ Victor edited three admin texts: the dentist clause leaves the Year selling-plan
 | `admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond.</span |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond. |
 | `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing` | €0.42 → €0.49 | €0,49 |
+
+## 22 Oct: two more admin fixes
+
+Victor fixed `custom.product_faq#37` "Full dosep" → "Full dose" and `media.69840178020733.alt` (now "…with morning care at 06:40 and evening care at 22:00"). `batch-02-pdp` digest `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4`. NL already read this way; FR: check the alt puts the morning first.
