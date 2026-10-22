@@ -38,11 +38,11 @@
   },
   "batch-02-pdp": {
    "entries": 477,
-   "digest": "2468bab432715f0aea7f7b6aea815a8f65f70721"
+   "digest": "af27d13827f435e009e7e24815fa510469f0c3ee"
   },
   "batch-03-header-footer": {
    "entries": 41,
-   "digest": "18cdaec0fb18d1f00aa688c83d6bc0393b350319"
+   "digest": "d8fb1b30ea2f5be901b89205707d850a3f458452"
   },
   "batch-04-legal": {
    "entries": 974,
@@ -4069,14 +4069,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-   "sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-   "status": "needs-review",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type textarea; Offer conflict: check-up proof is an appointment confirmation or invoice plus questionnaire, 'no dentist involvement is required' (offer source of truth, 5 Oct); this says 'verified by your dentist'.",
+   "notes": "type textarea; Offer conflict: check-up proof is an appointment confirmation or invoice plus questionnaire, 'no dentist involvement is required' (offer source of truth, 5 Oct); this says 'verified by your dentist'.; corrected 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; old_en kept",
    "setting_type": "textarea",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "old_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e"
   },
   {
    "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/testimonial_button_text",
@@ -4311,14 +4313,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-   "sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
-   "status": "needs-review",
+   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+   "sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; Offer conflict: 'confirmed by your dentist' (see the check-up tooltip).",
+   "notes": "type richtext; Offer conflict: 'confirmed by your dentist' (see the check-up tooltip).; corrected 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; old_en kept",
    "setting_type": "richtext",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+   "old_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1"
   },
   {
    "id": "product.subscription-item:main/info_card_FnBcaN/footer_text",
@@ -6829,11 +6833,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:995",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-   "sha1": "a532b1fc8759b80a92cdea9d82ec55439bd2d245",
-   "status": "needs-key",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account.",
+   "sha1": "e287ca857dbef857b8b2813e33f5f67c0be492f1",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230). Wording conflicts with the offer: check-up proof needs no dentist involvement"
+   "notes": "sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230). Wording conflicts with the offer: check-up proof needs no dentist involvement; corrected 22 Oct: Victor 22 Oct (S2, choice a): the check-up reward needs no dentist, so the dentist clause is deleted; old_en kept",
+   "old_en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
+   "old_sha1": "a532b1fc8759b80a92cdea9d82ec55439bd2d245"
   },
   {
    "id": "liquid:sections/main-product.liquid:1006",
@@ -7301,11 +7307,13 @@
    "resource_type": "app",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "selling_plan.712155431293.description",
-   "en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
-   "sha1": "c3da84bc2ef4bf463784e81ad1d8a0d19185bcd4",
+   "en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
+   "sha1": "6840dbe45c9cb972429b7b0e801b2ed57eee11da",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); selling plan description (HTML, Loop); keep the markup and the kc-dynamic_price spans"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); selling plan description (HTML, Loop); keep the markup and the kc-dynamic_price spans; changed 22 Oct: Victor edited the admin text 22 Oct (S2, choice a: no dentist); read back in the admin; old_en kept",
+   "old_en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
+   "old_sha1": "c3da84bc2ef4bf463784e81ad1d8a0d19185bcd4"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:selling_plan_group:Yearly Plan",
@@ -10356,11 +10364,13 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#10",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-   "sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries; changed 22 Oct: Victor edited the admin text 22 Oct (S2, choice a: no dentist); read back in the admin; the text is the Tooltip of the Compare Row entry '€40 Check-up Reward', not a Compare Value cell; old_en kept",
+   "old_en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "old_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#11",
@@ -10709,11 +10719,13 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "shop.metaobjects.compare_value:year.cost_per_brushing",
-   "en": "€0.42",
-   "sha1": "2f9086614ad1ee5b4fc8e07ec9db75e8ac201c42",
+   "en": "€0.49",
+   "sha1": "b9ceb39480ce1b12b254e2b4310f7b03fbc1f6fb",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); WRONG: the Year costs €59 per duo like the 60-Day Rhythm (€354 / 6), so it is €0.49 per brushing (offer source of truth 2 Oct; COMMON-RULES §3). Admin metaobject: handoff, not editable from the theme"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); WRONG: the Year costs €59 per duo like the 60-Day Rhythm (€354 / 6), so it is €0.49 per brushing (offer source of truth 2 Oct; COMMON-RULES §3). Admin metaobject: handoff, not editable from the theme; changed 22 Oct: Victor set the Year cost per brushing to €0.49 in the admin 22 Oct (€354 / 6 duos = €59 per duo, as the 60-Day Rhythm); old_en kept",
+   "old_en": "€0.42",
+   "old_sha1": "2f9086614ad1ee5b4fc8e07ec9db75e8ac201c42"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products",
@@ -10777,14 +10789,16 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/footer-group.json",
    "key_path": "sections.footer.settings.slogan",
-   "en": "Your mouth has a rhythm So should your oral care",
-   "sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
-   "status": "needs-review",
+   "en": "Your mouth has a rhythm Now your oral care too",
+   "sha1": "cf53c7c990120ca7fc3384ca46404284062d6b39",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type inline_richtext; Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.",
+   "notes": "type inline_richtext; Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.; corrected 22 Oct: Victor 22 Oct: the slogan is 'Your mouth has a rhythm Now your oral care too', two sentences without a stop; old_en kept",
    "setting_type": "inline_richtext",
    "section_type": "footer",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Your mouth has a rhythm So should your oral care",
+   "old_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100"
   },
   {
    "id": "footer-group:footer/copyright_text",

@@ -14,6 +14,7 @@ metafields by GID through translatableResourcesByIds), by the owner, with read_t
 live value must have the same sha1, or the item is stale and is skipped. Translations already registered by hand
 (registration/registered.json) are left out while their EN sha1 matches, so no run overwrites them. Items held
 by a review decision (registration/holds.json) stay in the plan with the reason in 'hold' and are never written.
+Gates Victor released for publication (registration/releases.json) no longer hold an item.
 
 Run from the repo root:  python3 docs/localization/registration/build_payloads.py [--fr-dir DIR]
 """
@@ -29,6 +30,7 @@ SOURCE = "docs/source-copy/en-source.json"
 OUT = "docs/localization/registration"
 REGISTERED = os.path.join(OUT, "registered.json")
 HOLDS = os.path.join(OUT, "holds.json")
+RELEASES = os.path.join(OUT, "releases.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
 # The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
@@ -115,9 +117,10 @@ def target(src):
     return None, owner, "none", None, "no Shopify target for resource_type " + str(rt)
 
 
-def gates_of(entry, lang):
+def gates_of(entry, lang, released=()):
+    """The review gates on a payload entry, minus the ones Victor released for publication (releases.json)."""
     status, flags = entry.get("status"), entry.get("flags") or []
-    return [g for g in GATES if status == g or g in flags]
+    return [g for g in GATES if (status == g or g in flags) and g not in released]
 
 
 def match_hint(src):
@@ -146,7 +149,7 @@ def dedupe(res):
     res["items"] = list(seen.values())
 
 
-def build(lang, payload, sources, registered=None, holds=None):
+def build(lang, payload, sources, registered=None, holds=None, released=()):
     skipped = Counter()
     resources = OrderedDict()
     registered = registered or {}
@@ -187,7 +190,7 @@ def build(lang, payload, sources, registered=None, holds=None):
         if entry.get("en_sha1") and entry["en_sha1"] != src["sha1"]:
             skipped["payload EN differs from the source (re-translate)"] += 1
             continue
-        gates = gates_of(entry, lang)
+        gates = gates_of(entry, lang, released)
         batch = src["batch"]
         hold = list(gates)
         if batch not in FIRST_WAVE_BATCHES:
@@ -322,7 +325,7 @@ def file_sha1(path):
 
 def input_digests(args):
     out = OrderedDict([("en-source.json", file_sha1(args.source))])
-    for path in (REGISTERED, HOLDS):
+    for path in (REGISTERED, HOLDS, RELEASES):
         if os.path.exists(path):
             out[os.path.basename(path)] = file_sha1(path)
     for lang, folder in (("nl", args.nl_dir), ("fr", args.fr_dir)):
@@ -344,9 +347,10 @@ def main():
         dirs["fr"] = args.fr_dir
     registered = json.load(open(REGISTERED, encoding="utf-8"))["registered"] if os.path.exists(REGISTERED) else {}
     holds = json.load(open(HOLDS, encoding="utf-8"))["holds"] if os.path.exists(HOLDS) else {}
+    released = tuple(json.load(open(RELEASES, encoding="utf-8"))["released"]) if os.path.exists(RELEASES) else ()
     results = OrderedDict()
     for lang, folder in dirs.items():
-        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang))
+        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang), released)
         results[lang] = (resources, skipped)
         doc = OrderedDict(
             lang=lang,

@@ -9,7 +9,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | Status | Rows |
 |---|---:|
 | In merchant-edit | 7 |
-| Ready to land | 1 |
+| Ready to land | 3 |
 | In progress | 0 |
 | Waiting for Victor | 12 |
 | Parked / after launch | 1 |
@@ -25,6 +25,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
 | 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
 | 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
+| 26 | Ready to land | No dentist confirmation (S2, Victor 22 Oct, choice a): the clause leaves the PDP check-up tooltip, the sticky-bar check-up line and the Duo info card, in EN, NL and the theme keys; the compare-table tooltip and the Year plan description are admin text, still to edit by Victor | reported 22 Oct (needs review: theme files) |
 | 27 | Waiting for Victor | Old blog articles in NL and FR (S3) | batch 07, 709 entries |
 | 29 | Waiting for Victor | Addresses in the NL/FR legal text (S5) | batch 04 |
 | 30 | Waiting for Victor | "Gift, pause or cancel" in the buy box (S6) | PDP trust row |
@@ -37,6 +38,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 41 | Waiting for Victor | Legal review of the NL and FR legal texts | batch 04, legal-review gate (NL 605 items) |
 | 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article; its twin article is hidden and redirected, so its 79 entries are retired. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
 | 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+| 53 | Ready to land | Footer slogan "Your mouth has a rhythm Now your oral care too" (Victor 22 Oct), in the footer group and its schema default, EN and NL | reported 22 Oct (needs review: theme files) |
 | 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
 | 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
 | 46 | Dropped | Legacy legal pages (350 entries): not translated, they redirect | `08479cb` |
@@ -110,7 +112,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Keep it gated until the claims review.
 - *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day; rows 26 and 53 for his dentist and slogan decisions.
 
 Task `task_25fdff87b2e8`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy`. 19 Oct 2026. Ready for Astra's review.
 
@@ -195,6 +197,10 @@ The NL plan is now 1827 items, of which 523 are in the first wave.
 - **Already registered.** Victor entered the three Duo texts in NL and FR himself in Translate & Adapt, so they are live. `docs/localization/registration/registered.json` lists them with the EN sha1. `build_payloads.py` leaves them out of `plan-nl.json` and `plan-fr.json` while that sha1 matches, so the runner never writes the old *tandpastasysteem voor ochtend en avond* rows over them.
 - **Still open.** The article's other blocks stay as Victor approved them (EN), and its `pending-claim-review` blocks in NL stay gated. The meta description no longer carries the medical-marvel claim, but releasing it is Victor's decision too. The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited; Victor then hid it and redirected it to `/blogs/news/nano-hydroxyapatite`. Its 79 entries are `retired`, so the 78 that were translated are now held (H8), and `build_payloads.py` leaves every retired entry out of both plans, also when a payload still carries it.
 - **Plan.** NL first wave 501 items (was 504: the three Duo texts). FR 500 (was 502: minus the three Duo texts and the menu link, whose FR payload EN is now out of date, plus two theme items from the FR merge `e883509`). The FR payload follows in the FR lane (`CHANGES-R2.md`).
+
+**22 Oct, Victor: publication released, review later.** Victor chose to publish the NL/FR translations of the current EN claims now (“Huidige EN vrijgeven, review later”), so NL and FR say what the live EN says, and to do the claim review (K1–K7) later in EN, NL and FR at once. The practitioner quotes may be translated too (“citaten mag je ook vertalen, zij gaan niet goedkeuren”). `registration/releases.json` records it: the builder no longer holds an item on `pending-claim-review`; the statuses stay, so the review can still be done. Legal review stays a gate. Sietske Hamelink's quote is translated again from `986c1d9` (homepage and PDP, pending-claim-review).
+
+**Dentist clause and slogan (22 Oct, Victor).** The check-up texts no longer say the dentist confirms the visit: the tooltip and the sticky-bar line read *Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account.*, and the Duo info card drops *— bevestigd door je tandarts —*. The footer slogan is *Je mond heeft een ritme Nu je mondverzorging ook* (EN *Your mouth has a rhythm Now your oral care too*), two sentences without a stop as in the EN. Batch 02 digest `55340f9dc6dd`, batch 03 `d8fb1b30ea2f`.
 
 **Claim holds waived (20 Oct, Victor, via the landing desk).** Victor's instruction was to translate everything that exists in English and to ignore the claim checks for now. The claims review still gates publication. Accordingly:
 - The 119 entries held on an unsupported claim now carry `claim_hold_waived: "2026-10-20 Victor, translation only"` in the EN source. The EN is unchanged.
@@ -283,9 +289,9 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `2468bab43271` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
+| `batch-02-pdp` | 477 | `af27d13827f4` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 229 | `5286628ff7c8` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
-| `batch-03-header-footer` | 41 | `18cdaec0fb18` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
+| `batch-03-header-footer` | 41 | `d8fb1b30ea2f` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `5ab678a91ffc` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
