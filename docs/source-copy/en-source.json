@@ -38,7 +38,7 @@
   },
   "batch-02-pdp": {
    "entries": 477,
-   "digest": "af27d13827f435e009e7e24815fa510469f0c3ee"
+   "digest": "8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4"
   },
   "batch-03-header-footer": {
    "entries": 41,
@@ -50,7 +50,7 @@
   },
   "batch-05-products": {
    "entries": 77,
-   "digest": "5ab678a91ffc223be63e7f87a68783bacc62a744"
+   "digest": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d"
   },
   "batch-06-content-pages": {
    "entries": 22,
@@ -7467,11 +7467,13 @@
    "resource_type": "product",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "media.69840178020733.alt",
-   "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00 and morning care at 06:40",
-   "sha1": "9f2b7f909d3da1209b00aed971992b2c4b57c54b",
+   "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with morning care at 06:40 and evening care at 22:00",
+   "sha1": "ebac0e3660ff7b16ea1cdb4d1a4c35871fac2a8b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); image alt; also in the homepage featured product; Asleep before Awake: 'evening care at 22:00 and morning care at 06:40' (admin image alt; handoff)."
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); image alt; also in the homepage featured product; Asleep before Awake: 'evening care at 22:00 and morning care at 06:40' (admin image alt; handoff).; changed 22 Oct: Victor fixed it in the admin 22 Oct (read back on the storefront); old_en kept",
+   "old_en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00 and morning care at 06:40",
+   "old_sha1": "9f2b7f909d3da1209b00aed971992b2c4b57c54b"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:media.69840178250109.alt",
@@ -8461,11 +8463,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#37",
-   "en": "Full dosep",
-   "sha1": "6a358335df53b73655ce819dfffe1822efe98d5a",
+   "en": "Full dose",
+   "sha1": "5399d5a4b01e86bcc07584fc3943e4abe19e428e",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); DEFECT: typo 'dosep' → 'dose' (admin metafield; handoff)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); DEFECT: typo 'dosep' → 'dose' (admin metafield; handoff); changed 22 Oct: Victor fixed it in the admin 22 Oct (read back on the storefront); old_en kept",
+   "old_en": "Full dosep",
+   "old_sha1": "6a358335df53b73655ce819dfffe1822efe98d5a"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#38",
@@ -8889,7 +8893,7 @@
    "sha1": "e1a43344ac69bdad294141a4253fb85db0656da4",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C92: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C92: needs-review (CLAIMS-REVIEW.md); Victor 22 Oct: 'Midwest University' stays as it is (no change to the lab name)",
    "claims": [
     "C92"
    ],
@@ -25924,14 +25928,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
-   "sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
-   "status": "approved",
+   "en": "<p>Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year. Spend Care Credit on any order.</p>",
+   "sha1": "b82e6df5b61ff73497387040cc4b4061dd40c7a7",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext",
+   "notes": "type richtext; corrected 22 Oct: Victor 22 Oct ('ok kaartje'): the legacy Health Rewards card now says three approved Care Credit sentences (care_comes_back intro, step_ritual, step_next_order); no new copy; old_en kept",
    "setting_type": "richtext",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
+   "old_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c"
   },
   {
    "id": "product:main/sticky_cart_block/button_text",

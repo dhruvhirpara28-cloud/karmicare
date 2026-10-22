@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "af27d13827f435e009e7e24815fa510469f0c3ee",
+ "source_digest": "8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4",
  "source_entries": 477,
  "counts": {
   "pending-claim-review": 42,
@@ -2984,14 +2984,14 @@
    "resource_type": "product",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "media.69840178020733.alt",
-   "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00 and morning care at 06:40",
-   "en_sha1": "9f2b7f909d3da1209b00aed971992b2c4b57c54b",
+   "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with morning care at 06:40 and evening care at 22:00",
+   "en_sha1": "ebac0e3660ff7b16ea1cdb4d1a4c35871fac2a8b",
    "nl": "Karmicare-infographic over chronobiologie: je mond draait op een 24-uursklok, met ochtendzorg om 06:40 en avondzorg om 22:00",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "Reordered morning before evening (brand rule Awake before Asleep); the EN has evening first (handoff)."
+   "notes": "Reordered morning before evening (brand rule Awake before Asleep); the EN has evening first (handoff).; 22 Oct: EN fixed in the admin by Victor; the NL already read this way"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:media.69840178250109.alt",
@@ -4029,14 +4029,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#37",
-   "en": "Full dosep",
-   "en_sha1": "6a358335df53b73655ce819dfffe1822efe98d5a",
+   "en": "Full dose",
+   "en_sha1": "5399d5a4b01e86bcc07584fc3943e4abe19e428e",
    "nl": "Volle dosis",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "EN typo 'dosep' read as 'dose' (handoff)."
+   "notes": "EN typo 'dosep' read as 'dose' (handoff).; 22 Oct: EN fixed in the admin by Victor; the NL already read this way"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#38",

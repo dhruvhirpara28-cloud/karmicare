@@ -59,7 +59,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
 - *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
 
-**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" stays (Victor 22 Oct). Who edits them, and when?
 - (a) You or DH edit them before the first wave is registered.
 - (b) After launch.
 - *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
@@ -95,16 +95,18 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 - **Updated 22 Oct (later)** with two decisions of Victor's: the dentist clause leaves the PDP check-up tooltip, the sticky-bar check-up line (`liquid:sections/main-product.liquid:995`) and the Duo info card (S2, choice a), and the footer slogan becomes "Your mouth has a rhythm Now your oral care too" (two sentences, no stop). The four entries are `corrected` with `old_en` kept; the theme files carry the same text. The compare-table tooltip and the Year selling-plan description are admin text and still say "verified by your dentist".
 - **Updated 22 Oct (admin)** with three admin edits Victor made after his decisions: the Year selling-plan description (Loop) and the Compare Row tooltip '€40 Check-up Reward' lose "verified by your dentist", and the Year cost per brushing is €0.49 (was €0.42). They stay `admin-held` with `old_en` kept. The tooltip lives on the Compare Row entry, not in a Compare Value cell as the entry id suggests.
 - **Updated 22 Oct (clock help)**: the theme key `kc.clock.help` (screen-reader help for the clock knob, homepage lane `e1411e2`, Victor option a) is inventoried as `locale:kc.clock.help` (#230), `approved`; NL and FR as Victor approved them.
+- **Updated 22 Oct (admin fixes)**: Victor fixed the product FAQ typo "Full dosep" → "Full dose" and the infographic alt (morning before evening: "…with morning care at 06:40 and evening care at 22:00"); both read back on the storefront, `old_en` kept. The lab name "Midwest University" stays.
+- **Updated 22 Oct (legacy card)**: `product:main/info_card_FnBcaN/body_text` on `templates/product.json` no longer says "Health Rewards"; Victor approved three existing Care Credit sentences ("Karmicare is a care system: … Spend Care Credit on any order."). `corrected`, `old_en` kept.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
 | `batch-01-homepage` | 230 | `ab192236341d9e063847ab0e1b7bff70a09c7bdd` |
-| `batch-02-pdp` | 477 | `af27d13827f435e009e7e24815fa510469f0c3ee` |
+| `batch-02-pdp` | 477 | `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4` |
 | `batch-03-header-footer` | 41 | `d8fb1b30ea2f5be901b89205707d850a3f458452` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
-| `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
+| `batch-05-products` | 77 | `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
