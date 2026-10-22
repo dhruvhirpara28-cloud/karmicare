@@ -12,7 +12,8 @@ Nothing here talks to Shopify. Resource GIDs, translatable content keys and dige
 run time by register.py (translatableResources / translatableResourcesByIds, API 2026-10; product
 metafields by GID through translatableResourcesByIds), by the owner, with read_translations. Every item carries the EN sha1 of the B1a capture: at run time the
 live value must have the same sha1, or the item is stale and is skipped. Translations already registered by hand
-(registration/registered.json) are left out while their EN sha1 matches, so no run overwrites them.
+(registration/registered.json) are left out while their EN sha1 matches, so no run overwrites them. Items held
+by a review decision (registration/holds.json) stay in the plan with the reason in 'hold' and are never written.
 
 Run from the repo root:  python3 docs/localization/registration/build_payloads.py [--fr-dir DIR]
 """
@@ -27,6 +28,7 @@ from collections import Counter, OrderedDict
 SOURCE = "docs/source-copy/en-source.json"
 OUT = "docs/localization/registration"
 REGISTERED = os.path.join(OUT, "registered.json")
+HOLDS = os.path.join(OUT, "holds.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
 # The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
@@ -144,10 +146,11 @@ def dedupe(res):
     res["items"] = list(seen.values())
 
 
-def build(lang, payload, sources, registered=None):
+def build(lang, payload, sources, registered=None, holds=None):
     skipped = Counter()
     resources = OrderedDict()
     registered = registered or {}
+    holds = holds or {}
     for eid, entry in payload.items():
         src = sources.get(eid)
         if src is None:
@@ -191,6 +194,8 @@ def build(lang, payload, sources, registered=None):
             hold.append(LATER.get(batch, batch))
         if stype in LOOP_TYPES:
             hold.append(LOOP_HOLD)
+        if eid in holds:
+            hold.append("review hold (holds.json): " + holds[eid])
         rid = "%s|%s" % (stype, owner)
         res = resources.setdefault(rid, OrderedDict(
             shopify_type=stype, owner=owner, batch=batch, page=src.get("page"), items=[]))
@@ -317,8 +322,9 @@ def file_sha1(path):
 
 def input_digests(args):
     out = OrderedDict([("en-source.json", file_sha1(args.source))])
-    if os.path.exists(REGISTERED):
-        out["registered.json"] = file_sha1(REGISTERED)
+    for path in (REGISTERED, HOLDS):
+        if os.path.exists(path):
+            out[os.path.basename(path)] = file_sha1(path)
     for lang, folder in (("nl", args.nl_dir), ("fr", args.fr_dir)):
         for path in sorted(glob.glob(os.path.join(folder or "", "batch-*.json"))) if folder else []:
             out["%s/%s" % (lang, os.path.basename(path))] = file_sha1(path)
@@ -337,9 +343,10 @@ def main():
     if args.fr_dir:
         dirs["fr"] = args.fr_dir
     registered = json.load(open(REGISTERED, encoding="utf-8"))["registered"] if os.path.exists(REGISTERED) else {}
+    holds = json.load(open(HOLDS, encoding="utf-8"))["holds"] if os.path.exists(HOLDS) else {}
     results = OrderedDict()
     for lang, folder in dirs.items():
-        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang))
+        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang))
         results[lang] = (resources, skipped)
         doc = OrderedDict(
             lang=lang,

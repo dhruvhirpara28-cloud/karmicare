@@ -1,0 +1,25 @@
+{
+ "about": "Plan items held back from registration by a review decision, per language. build_payloads.py keeps them in plan-<lang>.json with the reason in 'hold', so register.py never writes them. Remove an entry when its decision falls.",
+ "source": "Astra R23 (docs/runtime-review/R23-DRYRUN-ASTRA.md), 22 Oct 2026, via the landing desk",
+ "holds": {
+  "nl": {
+   "product.subscription-item:main/info_card_FnBcaN/body_text": "Duo info card says the check-up is 'confirmed by your dentist'; the offer needs no dentist involvement (copy decision S2 open)",
+   "product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip": "check-up tooltip says 'verified by your dentist'; the offer needs no dentist involvement (copy decision S2 open)",
+   "product:main/info_card_FnBcaN/body_text": "legacy product card still says 'Health Rewards' (old name of Care Credit); source owner to decide",
+   "footer-group:footer/slogan": "footer slogan has no stop between its two sentences; check the Figma footer first (decision S9 open)"
+  },
+  "fr": {
+   "product.subscription-item:main/info_card_FnBcaN/body_text": "Duo info card says the check-up is 'confirmed by your dentist'; the offer needs no dentist involvement (copy decision S2 open)",
+   "product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip": "check-up tooltip says 'verified by your dentist'; the offer needs no dentist involvement (copy decision S2 open)",
+   "product:main/info_card_FnBcaN/body_text": "legacy product card still says 'Health Rewards' (old name of Care Credit); source owner to decide",
+   "footer-group:footer/slogan": "footer slogan has no stop between its two sentences; check the Figma footer first (decision S9 open)",
+   "index:product_benefits_karmicare_bcQ6tp/bottom_note": "keep the current FR ('données publiées') until the wording is reviewed",
+   "index:research_behind_system_EkjATL/button_label": "keep the current FR ('données probantes') until the wording is reviewed",
+   "index:research_behind_system_EkjATL/card_Hi7YUD/method_text": "keep the current FR ('à trois groupes') until the wording is reviewed",
+   "index:research_behind_system_EkjATL/card_JeERX6/method_text": "keep the current FR (study type spelled out, no 'ECR') until the wording is reviewed",
+   "index:research_behind_system_EkjATL/card_JeERX6/subtext": "keep the current FR (no 'ECR') until the wording is reviewed",
+   "index:trusted_professionals_HAqYth/button_label": "keep the current FR ('pour praticien') until the wording is reviewed",
+   "index:trusted_professionals_HAqYth/card_8dRing/text": "keep the current FR role titles until the person's approved title is checked"
+  }
+ }
+}
