@@ -85,6 +85,43 @@ Theme Check: `shopify theme check --fail-level error` exit 0, 19 baseline warnin
    `.plan-compare--kc .pc-kit-poptitle b, .plan-compare--kc .pc-kit-itxt b { font-weight: var(--font-700-weight, 700); }`.
 3. `header_font_weight` (`config/settings_schema.json:230`) is dead too but has a saved value.
 
+## R21 fix (Astra, approve with fixes): buttons left out of the selector
+
+Astra's P2: the `b`/`strong` rule still matched bold text inside buttons. Fix in `assets/base.css`
+only: the `:not()` list now also names `button`, `[role=button]`, `.button`,
+`.shopify-challenge__button`, `.karmicare__btn-primary`, `.karmicare__btn-secondary`
+(`snippets/button-styles.liquid:22-40` and `:140-147`), both the element itself and its descendants,
+inside `:where(...)`, so the specificity stays (0,0,1). Nothing else changed.
+
+Local fixture (`fixture-ty01.html` in the session scratchpad, Orca browser, `file://`): the worktree's
+`base.css`, `kc-tokens.css`, `kc-buybox.css`, `product-compare-plans.css`, `section-hero-karmicare.css`,
+`section-trusted-professionals.css`, `component-cart-items.css` plus the static part of the button
+snippet; `--font-body-weight-bold` set to 600 as `layout/theme.liquid` does. The same page was measured
+with the `base.css` of 9c2fa98^ (A, before TY-01), 9c2fa98 (B) and this fix (C). Computed
+`font-weight` of the bold element:
+
+| Case | A before | B 9c2fa98 | C fix |
+| --- | --- | --- | --- |
+| body `strong`, `b`, nested `span > em > strong` (400 copy) | 700 | 600 | 600 |
+| `b` in 600 copy | 900 | 600 | 600 |
+| `button` (native, 400) / `[role=button]` / `strong[role=button]` | 700 | 600 | **700** |
+| `.karmicare__btn-primary`, `.karmicare__btn-secondary`, `.button`, `.button--secondary`, `.shopify-challenge__button`, `.button > span > em > strong` (700 controls) | 900 | 600 | **900** |
+| `strong.button`, `b.karmicare__btn-primary` (the bold element is the button) | 700 | 700 | 700 |
+| plain `.karmicare__btn-primary` label (control) | 700 | 700 | 700 |
+| h1, h3, h4, h5, h6, `.h0`, `.h4` strong (500 headings) | 700 | 700 | 700 |
+| h2, `.h2`, `h2 > span > em > strong` | 500 | 500 | 500 |
+| `.kc-surface h2 strong` (two-tone), `.trusted-professionals__header h2 strong` | 500, display block | same | same |
+| `.hero-karmicare__heading strong` | 500 | 500 | 500 |
+| `.kc-buybox strong`, `.rda-tbl td b`, `.pc-foot b` | 700 | 700 | 700 |
+| `.kc-journey-item-title strong`, `.bf-charcoal-text strong` | 600 | 600 | 600 |
+| Welcome Kit tooltip `b` (600 label) | 900 | 600 | 600 (accepted in R21) |
+| `.font-body-bold`, `.cart-disclosure-modal__title` (token readers) | 600 | 600 | 600 (fixture token) |
+
+Every button case is back to its pre-TY-01 value; body copy stays 600; headings and component
+overrides are identical in all three columns. `shopify theme check --fail-level error`: exit 0,
+19 baseline warnings, 0 errors. `git diff --check` clean. Local dev servers answer 401, so no
+rendered re-check; the selector change cannot affect anything outside buttons.
+
 ## Notes
 
 - The Orca runtime restarted during the FR pass (22 Oct 13:43, new socket `o-71600-ed81.sock`); every
