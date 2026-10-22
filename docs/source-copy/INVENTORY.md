@@ -1,5 +1,79 @@
 # EN source inventory · every page of the live store
 
+## Status 22 Oct
+
+The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
+
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+
+| Status | Rows |
+|---|---:|
+| In merchant-edit | 5 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 7 |
+| Parked / after launch | 0 |
+| Dropped | 2 |
+
+| # | Status | What | Commits / where |
+|---|---|---|---|
+| 1 | In merchant-edit | EN copy fixes on the homepage and footer: €0.49 per brushing, ENTHUSIASTS, "needs", 60-day money-back guarantee, a Belgian product | `f2e9506` |
+| 2 | In merchant-edit | EN source inventory: 8 batches, 2,575 entries, checked by `digest.py`; follows the homepage copy of 21 Oct, the delivery times, the Duo name, the announcement line and the CTAs | `ee3b1f4` … `1437fc5` |
+| 3 | In merchant-edit | Claims register `CLAIMS-REVIEW.md`: 70 claims, 17 approved, 49 needs-review, 3 unsupported, 1 confirmed (C103) | `0b98382` … `1437fc5` |
+| 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
+| 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
+| 12 | Ready to land | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source and the NL. The desk lands it together with the FR follow-up (FR updates its payload hash) | `6500a4a`, reported 21 Oct |
+| 26 | Waiting for Victor | "Verified / confirmed by your dentist" in 5 entries (S2) | PDP pricing summary, info card, check-up tooltip, Year plan description |
+| 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
+| 33 | Waiting for Victor | Facts to confirm (S9) | homepage and PDP |
+| 34 | Waiting for Victor | Treatment-journey line stops mid-phrase (#29) | admin metafield `custom.treatment_journey_*` |
+| 37 | Waiting for Victor | Capitalisation of all buttons | inventory of all buttons (global coordinator) |
+| 39 | Waiting for Victor | Admin text fixes from B1a (captured 19 Oct, not re-read since) | product, metafields, metaobjects, menu, selling plans |
+| 40 | Waiting for Victor | Money format on the EN pages | Shopify money format (B1a decision 5) |
+| 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
+| 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
+
+### Waiting for Victor: the questions
+
+**26. "Verified / confirmed by your dentist" in 5 entries (S2).** The Check-up Reward needs no dentist involvement, but five texts say the check-up is "verified/confirmed by your dentist". (The announcement-bar half of S2 is solved by "FOR MEMBERS".) What should they say?
+- (a) Delete the clause "— confirmed by your dentist" (a deletion, no new claim).
+- (b) You give new wording.
+- (c) Keep it.
+- *Advice*: (a): it removes the contradiction without new copy; two of the five are admin text (plan description), so those are your edit.
+
+**31. Brand-rule exceptions (S7).** The footer says "is a Belgian product", and the treatment-journey footnote "What members report with continued use" is NL *bij langdurig gebruik*: both use banned words (product, use). Rewrite or keep?
+- (a) Rewrite the EN and the Figma first; you give the wording.
+- (b) Keep them.
+- *Advice*: (a): the brand rule has no exceptions so far; I do not write new copy myself.
+
+**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? And should the footer slogan "Your mouth has a rhythm So should your oral care" get a full stop?
+- Answer per fact.
+- *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
+
+**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end?
+- (a) You give the ending.
+- (b) Cut it after "peace of mind*".
+- (c) Remove the line.
+- *Advice*: (b): no new copy needed. It is admin text, so you edit it; NL and FR follow.
+
+**37. Capitalisation of all buttons.** Which style for every button?
+- (a) CAPS.
+- (b) Title Case.
+- (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
+- *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
+
+**39. Admin text fixes from B1a (captured 19 Oct, not re-read since).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; footer menu "Why use hydroxapatite"; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+- (a) You or DH edit them before the first wave is registered.
+- (b) After launch.
+- *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
+
+**40. Money format on the EN pages.** Shopify formats money per currency, not per language, so computed amounts show "€0,49" and "€67,00 EUR" on EN pages next to the static "€0.49". Accept that?
+- (a) Accept the comma on EN for launch.
+- (b) The PDP lane formats amounts per locale in the theme.
+- *Advice*: (a) for launch, (b) after: it is theme work in the buy box, not a copy change.
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+
 The English that the live store renders, one entry per string. Batches 01–03 (homepage, Duo PDP, header and footer) come from B1a, with its corrections applied; batches 04–08 (legal, other products, content pages, collections and blog, system pages) come from B2 and are inventoried as they are, without corrections. NL and FR translators start from here.
 
 - **Captured**: batches 01-03: 2026-10-19 19:15 CEST; batches 04-08: 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259). Theme text comes from this branch (`karmicare/soft-launch-source-copy`); admin-held text comes from the public live pages and `/products/<handle>.js`.
