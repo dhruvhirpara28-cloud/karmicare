@@ -1,6 +1,6 @@
 {
  "about": "Plan items held back from registration by a review decision, per language. build_payloads.py keeps them in plan-<lang>.json with the reason in 'hold', so register.py never writes them. Remove an entry when its decision falls.",
- "source": "Astra R23 (docs/runtime-review/R23-DRYRUN-ASTRA.md), 22 Oct 2026, via the landing desk",
+ "source": "Astra R23 (docs/runtime-review/R23-DRYRUN-ASTRA.md), 22 Oct 2026, via the landing desk; PDP twins of six FR rows added by the landing desk, 22 Oct 2026",
  "holds": {
   "nl": {
    "product.subscription-item:main/info_card_FnBcaN/body_text": "Duo info card says the check-up is 'confirmed by your dentist'; the offer needs no dentist involvement (copy decision S2 open)",
@@ -19,7 +19,13 @@
    "index:research_behind_system_EkjATL/card_JeERX6/method_text": "keep the current FR (study type spelled out, no 'ECR') until the wording is reviewed",
    "index:research_behind_system_EkjATL/card_JeERX6/subtext": "keep the current FR (no 'ECR') until the wording is reviewed",
    "index:trusted_professionals_HAqYth/button_label": "keep the current FR ('pour praticien') until the wording is reviewed",
-   "index:trusted_professionals_HAqYth/card_8dRing/text": "keep the current FR role titles until the person's approved title is checked"
+   "index:trusted_professionals_HAqYth/card_8dRing/text": "keep the current FR role titles until the person's approved title is checked",
+   "product.subscription-item:research_behind_system_EkjATL/button_label": "keep the current FR ('données probantes') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)",
+   "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_text": "keep the current FR ('à trois groupes') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)",
+   "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_text": "keep the current FR (study type spelled out, no 'ECR') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)",
+   "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subtext": "keep the current FR (no 'ECR') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)",
+   "product.subscription-item:trusted_professionals_HAqYth/button_label": "keep the current FR ('pour praticien') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)",
+   "product.subscription-item:trusted_professionals_HAqYth/card_8dRing/text": "keep the current FR role titles until the person's approved title is checked; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
   }
  }
 }

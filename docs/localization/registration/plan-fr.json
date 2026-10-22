@@ -3,7 +3,7 @@
  "inputs": {
   "en-source.json": "94921e35b98c",
   "registered.json": "7967afaaf3d3",
-  "holds.json": "1b085dda00d3",
+  "holds.json": "519bdea40b98",
   "fr/batch-01-homepage.json": "e548111a26cb",
   "fr/batch-02-pdp.json": "d13b006a0949",
   "fr/batch-03-header-footer.json": "453fda3163e5",
@@ -4655,7 +4655,9 @@
      "en_sha1": "b1ea710027514f599be71fdaf3c86b8080b7213b",
      "value": "DEMANDER UN ÉCHANTILLON PRATICIEN",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): keep the current FR ('pour praticien') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -4717,7 +4719,9 @@
      "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
      "value": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): keep the current FR role titles until the person's approved title is checked; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -5095,7 +5099,9 @@
      "en_sha1": "0fa1ec9d5064dcacc5914eb584d9f6410eaea971",
      "value": "Explorer l’ensemble des preuves",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): keep the current FR ('données probantes') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -5714,7 +5720,9 @@
      "en_sha1": "809ede503f35933b44310cd3dbcf68bfb2d213ca",
      "value": "Essai contrôlé randomisé en double aveugle, trois bras.",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): keep the current FR ('à trois groupes') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -5802,7 +5810,9 @@
      "en_sha1": "0d443fce0127af7418e0e19feef4b4e272441492",
      "value": "124 personnes · 4 ECR croisés",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): keep the current FR (no 'ECR') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -5890,7 +5900,9 @@
      "en_sha1": "e7e710ff7c519d380f01c6ac9f993f04706dd435",
      "value": "Revue systématique et méta-analyse de 4 ECR croisés.",
      "gates": [],
-     "hold": [],
+     "hold": [
+      "review hold (holds.json): keep the current FR (study type spelled out, no 'ECR') until the wording is reviewed; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
+     ],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
