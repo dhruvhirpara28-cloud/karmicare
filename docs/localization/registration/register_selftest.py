@@ -15,17 +15,35 @@ GID parameter, D held leaves veto before structural keys and structural differen
 incomplete mutation payload is unknown, N2 scalar and array JSON roots; and per R18c finding: 1 conflicting
 items on a structural leaf veto the field and a lone structural item is not counted as applied, 2 receipts
 with a missing, null or wrong locale, an extra or a duplicate entry are unknown (register and remove), 3 the
-generated write command round-trips through a shell and an attestation needs a name. Credentials are
-synthetic sentinels.
+generated write command round-trips through a shell and an attestation needs a name; and per R18e: the real
+HttpTransport sends a form-encoded token request and JSON GraphQL, refused token requests show only a fixed line
+whatever the body echoes (JSON, text, HTML, invalid UTF-8, cut; literal, percent, form, entity-encoded, split or cut
+credentials, Bearer), and no sink (stdout, stderr, exception chain, reports, journal) carries response text with
+credential material; and per R18f: credentials hidden in HTML attributes, comments or entity-encoded angle
+brackets, or spaced and form-encoded, are withheld in message, code and field, also through a read error and the
+writer's journal; and per R18g: errors show only allowlisted codes, field paths and messages (else their length), a
+token behind nested entities stays out of a read error and the journal, and long unclosed markup is handled in
+linear time; and per R18h: a receipt's own keys are never journaled (unrequested, duplicate, wrong locale), a
+malformed GID is dropped, an HTTPError body that fails to read stays a data-free transport error, and an unexpected
+exception prints its category only; and per R18i: the SystemExit carries no context. Credentials are synthetic
+sentinels.
 """
 import contextlib
 import copy
+import email.message
 import hashlib
+import html
 import io
 import json
 import os
+import re
 import sys
 import tempfile
+import time
+import traceback
+import urllib.error
+import urllib.parse
+import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import register  # noqa: E402
@@ -267,6 +285,434 @@ def dry(folder, store=None, argv=("--lang", "nl", "--theme-id", THEME), bindings
     code, text = run(list(argv), fake, folder, bindings=bindings)
     data = json.load(open(os.path.join(folder, "dry-run-nl.json"), encoding="utf-8")) if code == 0 else None
     return code, text, fake, data
+
+
+# ---- R18e: the real HTTP transport, refused token requests and every output sink ----------------------------
+
+CID = "cid-R18E-0123456789abcdef"
+SEC2 = "shpss_R18e/Sec+ret=V&al ue"
+
+
+def echoes(value):
+    """The spellings an echoed credential can arrive in."""
+    q = urllib.parse.quote(value, safe="")
+    return {"literal": value, "percent": q, "percent-lower": re.sub(r"%[0-9A-F]{2}", lambda m: m.group(0).lower(), q),
+            "form": urllib.parse.quote_plus(value), "entity": "&#%d;" % ord(value[0]) + value[1:],
+            "split": value[:6] + "<b></b>" + value[6:], "cut": value[:-3]}
+
+
+def leaked(text):
+    """Any 8 characters in a row of a credential, raw or percent/form-encoded, in the text or in any stage of
+    decoding it (percent and HTML entities, to a fixed point), or a credential header word."""
+    stages, x = [text], text
+    for _ in range(200):
+        y = html.unescape(urllib.parse.unquote(x))
+        if y == x:
+            break
+        stages.append(y)
+        x = y
+    low = "\n".join(stages).lower()
+    for cred in (CID, SEC2, TOKEN, SECRET):
+        for form in (cred, urllib.parse.quote(cred, safe=""), urllib.parse.quote_plus(cred)):
+            if any(form[i:i + 8].lower() in low for i in range(len(form) - 7)):
+                return cred[:4] + "… as " + ("raw" if form == cred else "encoded")
+    return "header word" if re.search(r"bearer|authori[sz]ation|x-shopify-access-token", low) else None
+
+
+class Resp:
+    def __init__(self, status, body):
+        self.status, self.body, self.headers = status, body, email.message.Message()
+
+    def read(self):
+        return self.body
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+@contextlib.contextmanager
+def wire(responder):
+    """Patch urlopen under the real HttpTransport; responder(request, n) gives (status, bytes) or an exception."""
+    calls, original = [], register.urllib.request.urlopen
+
+    def fake(req, timeout=60):
+        calls.append(req)
+        answer = responder(req, len(calls))
+        if isinstance(answer, Exception):
+            raise answer
+        status, body = answer
+        if status >= 400:
+            raise urllib.error.HTTPError(req.full_url, status, "error", email.message.Message(), io.BytesIO(body))
+        return Resp(status, body)
+    register.urllib.request.urlopen = fake
+    try:
+        yield calls
+    finally:
+        register.urllib.request.urlopen = original
+
+
+def refuse(body, status=400):
+    """main() against a token endpoint that refuses with body: (exit code, all output, token attempts, files)."""
+    with tempfile.TemporaryDirectory() as sub, wire(lambda req, n: (status, body)) as calls:
+        out = io.StringIO()
+        code = 0
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            try:
+                register.main(["--lang", "nl", "--theme-id", THEME], transport=register.HttpTransport(),
+                              credentials=lambda: (CID, register.Secret(SEC2)), out=os.path.join(sub, "live"),
+                              plans=os.path.join(sub, "plan-%s.json"), bindings_path=os.path.join(sub, "bindings.json"))
+            except SystemExit as e:
+                code = e.code if isinstance(e.code, int) else 1
+        files = [os.path.join(d, f) for d, _, fs in os.walk(sub) for f in fs]
+        attempts = len(calls)
+        try:
+            register.Admin(register.HttpTransport(), CID, register.Secret(SEC2))
+            chain = ""
+        except register.RunnerError as err:
+            chain, e = "", err  # every message in the exception chain (source paths left out: they name this file)
+            while e is not None:
+                chain += "".join(traceback.format_exception_only(type(e), e))
+                e = e.__cause__ or e.__context__
+    return code, out.getvalue(), attempts, files, chain
+
+
+def r18e(check):
+    # 1. Wire format through the real transport
+    ok_token = json.dumps({"access_token": TOKEN, "scope": "read_translations"}).encode()
+    with wire(lambda req, n: (200, ok_token) if n == 1 else (200, b'{"data": {}}')) as calls:
+        admin = register.Admin(register.HttpTransport(), CID, register.Secret(SEC2))
+        admin._post("query { shop { id } }", {"a": 1})
+    tok, gql = calls
+    sent = urllib.parse.parse_qs(tok.data.decode("ascii"), strict_parsing=True)
+    check("R18e wire: token POST to the fixed HTTPS endpoint, form-encoded",
+          tok.full_url == "https://karmicares.myshopify.com/admin/oauth/access_token" and tok.get_method() == "POST"
+          and tok.get_header("Content-type") == register.FORM, (tok.full_url, tok.get_header("Content-type")))
+    check("R18e wire: form body round-trips reserved characters",
+          sent == {"client_id": [CID], "client_secret": [SEC2], "grant_type": ["client_credentials"]}, sent)
+    check("R18e wire: no credential in the URL or an Authorization header",
+          not leaked(tok.full_url) and tok.get_header("Authorization") is None and gql.get_header("Authorization") is None)
+    check("R18e wire: GraphQL stays JSON with the token header only",
+          gql.get_header("Content-type") == "application/json" and json.loads(gql.data) == {"query": "query { shop { id } }", "variables": {"a": 1}}
+          and gql.get_header("X-shopify-access-token") == TOKEN and CID not in gql.full_url)
+    once = []
+    for label, answer in (("400", (400, b'{"error": "invalid_client"}')), ("429", (429, b"slow down")), ("500", (500, b"<h1>oops</h1>")),
+                          ("transport", urllib.error.URLError("down " + SEC2))):
+        with wire(lambda req, n, a=answer: a) as calls:
+            try:
+                register.Admin(register.HttpTransport(), CID, register.Secret(SEC2))
+            except register.RunnerError as e:
+                if len(calls) != 1 or leaked(str(e)):
+                    once.append(label)
+    check("R18e wire: one token attempt on 400, 429, 500 and a transport failure", not once, once)
+
+    # 2. Refusal matrix: every body shape x every credential x every spelling
+    lines = {"Token request refused (HTTP 400)%s. Check that the app is installed on %s." % (register.oauth_error({"error": c}), register.SHOP)
+             for c in list(register.OAUTH_ERRORS) + [None]}
+    bad, total = [], 0
+    for cred in (CID, SEC2, TOKEN):
+        for form, e in echoes(cred).items():
+            bodies = {
+                "JSON description": json.dumps({"error": "invalid_client", "error_description": "bad " + e}).encode(),
+                "JSON code": json.dumps({"error": e}).encode(),
+                "JSON key": json.dumps({e: 1}).encode(),
+                "plain text": ("bad " + e).encode(),
+                "HTML": ("<html><body><h1>Oauth error application_cannot_be_found: Could not find " + e + "</h1></body></html>").encode(),
+                "invalid UTF-8": b"\xff\xfe bad " + e.encode(),
+                "truncated JSON": ('{"error": "invalid_client", "client_secret": "' + e).encode(),
+                "Bearer": ("Authorization: Bearer " + urllib.parse.quote(e) + "\nX-Shopify-Access-Token: " + e).encode(),
+            }
+            for shape, body in bodies.items():
+                total += 1
+                code, text, attempts, files, chain = refuse(body)
+                why = leaked(text) or leaked(chain)
+                if code != 2 or attempts != 1 or files or text.strip() not in lines or why:
+                    bad.append("%s/%s/%s: %s" % (cred[:4], form, shape, why or text.strip()[:80]))
+    check("R18e refusals: %d bodies give a fixed line, exit 2, one attempt, no files, no leak" % total, not bad, bad[:3])
+    code, text, _, _, _ = refuse(b"<h1>Oauth error application_cannot_be_found: Could not find Shopify A</h1>")
+    check("R18e refusals: a known code in an HTML body is named with our own text",
+          code == 2 and "application_cannot_be_found (Shopify knows no app" in text, text)
+    code, text, _, _, _ = refuse(json.dumps({"error": "shop_not_permitted", "error_description": "whatever"}).encode())
+    check("R18e refusals: a known JSON code is named, its description is not",
+          "shop_not_permitted (client credentials" in text and "whatever" not in text, text)
+
+    # 3. Every sink: non-JSON and JSON echoes through the shared parser into the writer, journal and reports
+    sinks = []
+    for label, reply in (
+            ("non-JSON 500", lambda: (500, register.HttpTransport._json(("Authorization: Bearer " + urllib.parse.quote(TOKEN)).encode()), None)),
+            ("non-JSON 400", lambda: (400, register.HttpTransport._json(("<p>" + urllib.parse.quote_plus(SECRET) + "</p>").encode()), None)),
+            ("JSON error echo", lambda: (200, {"errors": [{"message": "bad " + urllib.parse.quote(TOKEN), "extensions": {"code": "X"}}]}, None)),
+            ("userErrors echo", None)):
+        class Echo(Fake):
+            def post(self, path, body, headers, reply=reply):
+                if reply and "translationsRegister" in body.get("query", ""):
+                    self.mutations.append(("register", body["variables"]["id"], body["variables"]["translations"]))
+                    return reply()
+                if reply is None and "translationsRegister" in body.get("query", ""):
+                    self.mutations.append(("register", body["variables"]["id"], body["variables"]["translations"]))
+                    errs = [{"field": ["translations", "&#%d;" % ord(TOKEN[0]) + TOKEN[1:]], "message": "x", "code": "INVALID"}]
+                    return 200, {"data": {"translationsRegister": {"translations": [], "userErrors": errs}}}, None
+                return super().post(path, body, headers)
+        with tempfile.TemporaryDirectory() as sub:
+            code, _, _, dd = dry(sub)
+            echo = Echo(base_store())
+            code, text = run(["--lang", "nl", "--theme-id", THEME, "--write", "--approve", dd["checksum"]], echo, sub)
+            journal = open(os.path.join(sub, "journal-nl.jsonl"), encoding="utf-8").read()
+            why = leaked(text) or leaked(files_text(sub))
+            if code == 0 or len(echo.mutations) != 1 or '"event": "end"' in journal or why:
+                sinks.append("%s: code %s, %d mutations, %s" % (label, code, len(echo.mutations), why))
+    check("R18e sinks: stdout, reports and journal stay clean, the write stops (4 cases)", not sinks, sinks)
+    with tempfile.TemporaryDirectory() as sub:
+        err_obj = register.HttpTransport._json(("<b>" + urllib.parse.quote(SECRET, safe="") + "</b>").encode())
+        safe = register.safe_errors([{"message": "echo " + urllib.parse.quote_plus(TOKEN)}, {"message": "Translation key is invalid"}])
+        register.write_text(os.path.join(sub, "r.md"), json.dumps(err_obj) + json.dumps(safe))
+        register.write_json(os.path.join(sub, "r.json"), {"e": err_obj, "s": safe})
+        check("R18e sinks: report writers get no response text, and credential-like messages are withheld",
+              not leaked(files_text(sub)) and safe[0]["message"].startswith("withheld (") and safe[1]["message"] == "Translation key is invalid",
+              safe)
+    check("R18e-2 the client ID is scrubbed once a token is requested", register.scrub("id " + CID) == "id [redacted]")
+    r18f(check)
+    r18g(check)
+    r18h(check)
+
+
+LONG_RUN = 400000  # characters per long-markup case (R18g-2)
+
+
+def nested_token():
+    """A once-encoded token behind enough nested entities to exhaust any bounded decoding search (R18g-1)."""
+    # 65 entity levels, then the token with every fourth character percent-encoded: under 300 characters, so a
+    # 300-character cut cannot hide it, and no 8 raw characters of it in a row
+    return "&" + "amp;" * 65 + "lt; " + "".join("%%%02X" % ord(ch) if i % 4 == 0 else ch for i, ch in enumerate(TOKEN))
+
+
+def r18g(check):
+    nested = nested_token()
+    got = register.safe_errors([{"message": nested, "extensions": {"code": nested}, "field": ["translations", nested]}])[0]
+    check("R18g a token behind nested entities is withheld in message, code and field",
+          all(str(v).startswith("withheld (") for v in (got["message"], got["code"], got["field"][1])) and not leaked(json.dumps(got)), got)
+
+    class NestedRead(Fake):
+        def post(self, path, body, headers):
+            if path != "/admin/oauth/access_token" and "translatableResources(" in body.get("query", ""):
+                return 200, {"errors": [{"message": nested, "extensions": {"code": "BAD_USER_INPUT"}}]}, None
+            return super().post(path, body, headers)
+    with tempfile.TemporaryDirectory() as sub:
+        code, text = run(["--lang", "nl", "--theme-id", THEME], NestedRead(base_store()), sub)
+        check("R18g read error with the nested-entity token: exit 2, code kept, no leak",
+              code == 2 and "BAD_USER_INPUT" in text and not leaked(text) and not leaked(files_text(sub)), (code, leaked(text)))
+
+    class NestedWrite(Fake):
+        def post(self, path, body, headers):
+            if "translationsRegister" in body.get("query", ""):
+                self.mutations.append(("register", body["variables"]["id"], body["variables"]["translations"]))
+                errs = [{"field": ["translations", "0", "value"], "message": nested, "code": "INVALID"}]
+                return 200, {"data": {"translationsRegister": {"translations": [], "userErrors": errs}}}, None
+            return super().post(path, body, headers)
+    with tempfile.TemporaryDirectory() as sub:
+        _, _, _, dd = dry(sub)
+        echo = NestedWrite(base_store())
+        code, text = run(["--lang", "nl", "--theme-id", THEME, "--write", "--approve", dd["checksum"]], echo, sub)
+        journal = open(os.path.join(sub, "journal-nl.jsonl"), encoding="utf-8").read()
+        check("R18g userErrors with the nested-entity token: write stops, journal keeps code and field, no leak",
+              code == 2 and len(echo.mutations) == 1 and '"event": "end"' not in journal and '"INVALID"' in journal
+              and '"value"' in journal and not leaked(text + files_text(sub)), (code, len(echo.mutations), leaked(text + files_text(sub))))
+
+    slow = []
+    n = LONG_RUN
+    for label, text in (("unclosed tag", "<" + "a" * n), ("many opening brackets", "<" * n),
+                        ("unclosed entity run", "&" * n), ("percent run", "%" * n)):
+        started = time.monotonic()
+        register.safe_errors([{"message": text, "extensions": {"code": text}, "field": [text, "translations"]}])
+        register.HttpTransport._json(text.encode() + b"\xff")
+        if time.monotonic() - started > 1.0:
+            slow.append(label)
+    check("R18g long unclosed markup and entity runs are handled in under a second each", not slow, slow)
+
+    ordinary = register.safe_errors([{"message": "Translation key is invalid", "code": "INVALID_KEY_FOR_MODEL",
+                                      "field": ["translations", 0, "key"]}, {"message": "Some new wording", "code": "NEW_CODE"}])
+    check("R18g allowlisted messages, codes and paths stay readable; anything else shows only its length",
+          ordinary[0] == {"code": "INVALID_KEY_FOR_MODEL", "field": ["translations", "0", "key"], "message": "Translation key is invalid"}
+          and ordinary[1] == {"code": "withheld (8 chars)", "field": None, "message": "withheld (16 chars)"}, ordinary)
+
+
+def encoded_token():
+    return "".join("%%%02X" % ord(ch) for ch in TOKEN)
+
+
+def r18h(check):
+    enc = encoded_token()
+
+    # R18h-1: a receipt's own keys never reach the journal
+    def receipt(kind):
+        def reply(keys):
+            if kind == "unrequested key":
+                return [{"key": enc, "locale": "nl"}], []
+            if kind == "unrequested key with userErrors":
+                return [{"key": enc, "locale": "nl"}], [{"field": ["translations", "0", "key"], "message": "x", "code": "INVALID"}]
+            if kind == "duplicate key":
+                return [{"key": k, "locale": "nl"} for k in keys + keys[:1]] + [{"key": enc, "locale": "nl"}], []
+            return [{"key": enc, "locale": "fr"}], []  # wrong locale
+        return reply
+    bad = []
+    for kind in ("unrequested key", "unrequested key with userErrors", "duplicate key", "wrong locale"):
+        class Receipt(Fake):
+            def post(self, path, body, headers, reply=receipt(kind)):
+                if "translationsRegister" in body.get("query", ""):
+                    v = body["variables"]
+                    self.mutations.append(("register", v["id"], v["translations"]))
+                    entries, errs = reply([t["key"] for t in v["translations"]])
+                    return 200, {"data": {"translationsRegister": {"translations": entries, "userErrors": errs}}}, None
+                return super().post(path, body, headers)
+        with tempfile.TemporaryDirectory() as sub:
+            _, _, _, dd = dry(sub)
+            fake = Receipt(base_store())
+            code, text = run(["--lang", "nl", "--theme-id", THEME, "--write", "--approve", dd["checksum"]], fake, sub)
+            journal = [json.loads(line) for line in open(os.path.join(sub, "journal-nl.jsonl"), encoding="utf-8")]
+            results = [j for j in journal if j.get("event") == "result"]
+            if (code != 2 or len(fake.mutations) != 1 or len(results) != 1 or results[0]["confirmed"] != []
+                    or any(j.get("event") == "end" for j in journal) or "0 keys confirmed so far" not in text
+                    or leaked(text + files_text(sub))):
+                bad.append("%s: code %s, confirmed %s, leak %s" % (kind, code, results[0]["confirmed"] if results else "-",
+                                                                   leaked(text + files_text(sub))))
+    check("R18h-1 receipts with unrequested, duplicate or wrong-locale keys journal nothing as confirmed (4)", not bad, bad)
+
+    # R18h-2: a malformed resource ID is dropped before anything parses or prints it
+    bad_gid = "gid://" + enc + "℀/OnlineStoreThemeJsonTemplate/index?theme_id=111"
+    store = base_store()
+    store["types"]["ONLINE_STORE_THEME_JSON_TEMPLATE"].append(dict(copy.deepcopy(store["types"]["ONLINE_STORE_THEME_JSON_TEMPLATE"][0]), resourceId=bad_gid))
+    with tempfile.TemporaryDirectory() as sub:
+        code, text, _, _ = dry(sub, store)
+        check("R18h-2 a malformed GID carrying an encoded token is ignored: no crash, no leak",
+              code == 0 and not register.valid_gid(bad_gid) and not register.theme_owned(bad_gid, THEME, "index")
+              and not leaked(text + files_text(sub)), (code, leaked(text + files_text(sub))))
+    check("R18h-2 real GIDs of every shape the runner reads stay valid",
+          all(register.valid_gid(g) for g in (IDX, PDP, "gid://shopify/OnlineStoreThemeSectionGroup/footer-group?theme_id=187295564157",
+                                                "gid://shopify/MediaImage/27295901057206", "gid://shopify/Metafield/1", "gid://shopify/Shop/64261423286")))
+
+    # R18h-2: an HTTPError whose body read fails stays inside the transport boundary
+    class FailingBody(io.BytesIO):
+        def read(self, *a):
+            raise OSError("read failed " + enc)
+
+    def http_error(req, n):
+        return urllib.error.HTTPError(req.full_url, 400, "error", email.message.Message(), FailingBody())
+    with wire(http_error) as calls:
+        try:
+            register.Admin(register.HttpTransport(), CID, register.Secret(SEC2))
+            tb, msg = "", ""
+        except register.RunnerError as err:
+            # formatted chain without source paths (they name this file, whose name looks like the test token)
+            tb, msg = "".join(traceback.format_exception(type(err), err, None)), str(err)
+    check("R18h-2 a failing HTTPError body read becomes a data-free transport error",
+          len(calls) == 1 and msg == "Token request failed: network error (OSError)." and not leaked(tb), (msg, leaked(tb)))
+    code, text, _, _, _ = refuse_with(http_error)
+    check("R18h-2 the same failure through main(): exit 2, fixed line, no leak", code == 2 and not leaked(text) and "OSError" in text, text)
+
+    # R18h-2: the outermost handler shows only a category
+    class Exploding(Fake):
+        def post(self, path, body, headers):
+            if path != "/admin/oauth/access_token":
+                raise ValueError("unexpected " + enc)
+            return super().post(path, body, headers)
+    with tempfile.TemporaryDirectory() as sub:
+        code, text = run(["--lang", "nl", "--theme-id", THEME], Exploding(base_store()), sub)
+        check("R18h-2 an unexpected exception prints its category only", code == 3 and "Internal error (ValueError)" in text
+              and not leaked(text) and not leaked(files_text(sub)), text)
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            try:
+                register.main(["--lang", "nl", "--theme-id", THEME], transport=Exploding(base_store()),
+                              credentials=lambda: ("client-id", register.Secret(SECRET)), out=sub,
+                              plans=os.path.join(sub, "plan-%s.json"), bindings_path=os.path.join(sub, "bindings.json"))
+                formatted = ""
+            except SystemExit as stop:
+                formatted = "".join(traceback.format_exception(type(stop), stop, None))
+        check("R18i-1 a formatted SystemExit carries no original exception or token",
+              formatted.startswith("SystemExit: 3") and "ValueError" not in formatted and not leaked(formatted), formatted[:200])
+
+
+def refuse_with(responder):
+    """main() against a patched urlopen: (exit code, output, attempts, files, '')."""
+    with tempfile.TemporaryDirectory() as sub, wire(responder) as calls:
+        out = io.StringIO()
+        code = 0
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            try:
+                register.main(["--lang", "nl", "--theme-id", THEME], transport=register.HttpTransport(),
+                              credentials=lambda: (CID, register.Secret(SEC2)), out=os.path.join(sub, "live"),
+                              plans=os.path.join(sub, "plan-%s.json"), bindings_path=os.path.join(sub, "bindings.json"))
+            except SystemExit as e:
+                code = e.code if isinstance(e.code, int) else 1
+        return code, out.getvalue(), len(calls), [f for _, _, fs in os.walk(sub) for f in fs], ""
+
+
+def entities(value):
+    return "".join("&#%d;" % ord(ch) for ch in value)
+
+
+def markup_echoes():
+    """Credentials hidden in HTML that is removed only after decoding (R18f-1)."""
+    spaced = "ab cd ef gh ij kl mn op"
+    register.Secret(spaced)
+    return {
+        "attribute, entity token": '<span data-value="&#115;' + TOKEN[1:] + '">text</span>',
+        "attribute, percent client ID": '<a title="' + urllib.parse.quote(CID, safe="").replace("-", "%2D") + '">x</a>',
+        "comment, entity secret": "ok <!-- " + entities(SECRET) + " --> done",
+        "encoded angle brackets": "&lt;" + entities(TOKEN) + "&gt;",
+        "spaced secret, form-encoded": "bad " + urllib.parse.quote_plus(spaced),
+    }
+
+
+def r18f(check):
+    hidden = markup_echoes()
+    bad = []
+    for label, echo in hidden.items():
+        for where in ("message", "code", "field"):
+            err = {"message": "Translation key is invalid", "extensions": {"code": "INVALID_KEY_FOR_MODEL"}, "field": ["translations", "0", "key"]}
+            if where == "message":
+                err["message"] = echo
+            elif where == "code":
+                err["extensions"]["code"] = echo
+            else:
+                err["field"] = ["translations", echo]
+            got = register.safe_errors([err])[0]
+            kept = {"message": got["message"], "code": got["code"], "field": got["field"]}
+            want_withheld = (kept[where] if where != "field" else got["field"][1]).startswith("withheld (")
+            others = [k for k in ("message", "code") if k != where]
+            useful = all(kept[k] in ("Translation key is invalid", "INVALID_KEY_FOR_MODEL") for k in others) and (
+                where == "field" or got["field"] == ["translations", "0", "key"])
+            if not want_withheld or not useful:
+                bad.append("%s in %s: %s" % (label, where, kept))
+    check("R18f markup-hidden credentials are withheld in message, code and field (%d)" % (len(hidden) * 3), not bad, bad[:2])
+
+    class AttrRead(Fake):
+        def post(self, path, body, headers):
+            if path != "/admin/oauth/access_token" and "translatableResources(" in body.get("query", ""):
+                return 200, {"errors": [{"message": hidden["attribute, entity token"], "extensions": {"code": "BAD_REQUEST"}}]}, None
+            return super().post(path, body, headers)
+    with tempfile.TemporaryDirectory() as sub:
+        code, text = run(["--lang", "nl", "--theme-id", THEME], AttrRead(base_store()), sub)
+        check("R18f read error with an attribute-hidden token: exit 2, no leak in output or files",
+              code == 2 and not leaked(text) and not leaked(files_text(sub)), (code, leaked(text), leaked(files_text(sub))))
+
+    class AttrWrite(Fake):
+        def post(self, path, body, headers):
+            if "translationsRegister" in body.get("query", ""):
+                self.mutations.append(("register", body["variables"]["id"], body["variables"]["translations"]))
+                errs = [{"field": ["translations", "0", "value"], "message": hidden["attribute, entity token"], "code": "INVALID"}]
+                return 200, {"data": {"translationsRegister": {"translations": [], "userErrors": errs}}}, None
+            return super().post(path, body, headers)
+    with tempfile.TemporaryDirectory() as sub:
+        _, _, _, dd = dry(sub)
+        echo = AttrWrite(base_store())
+        code, text = run(["--lang", "nl", "--theme-id", THEME, "--write", "--approve", dd["checksum"]], echo, sub)
+        journal = open(os.path.join(sub, "journal-nl.jsonl"), encoding="utf-8").read()
+        check("R18f userErrors with an attribute-hidden token: write stops, journal keeps code and field, no leak",
+              code == 2 and len(echo.mutations) == 1 and '"event": "end"' not in journal and not leaked(text + files_text(sub))
+              and '"INVALID"' in journal and '"value"' in journal, (code, len(echo.mutations), leaked(text + files_text(sub))))
 
 
 def main():
@@ -579,6 +1025,7 @@ def main():
             code, text = run(["--lang", "nl", "--theme-id", THEME], Broken(base_store()), sub)
             check("F10 a malformed page stops with a clean message", code == 2 and "malformed" in text, text)
 
+    r18e(check)
     print("%d failures" % len(failures))
     sys.exit(1 if failures else 0)
 
