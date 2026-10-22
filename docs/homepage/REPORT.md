@@ -5,6 +5,68 @@
 **Date**: 19 October 2026
 **Gap list**: [`GAP-LIST.md`](GAP-LIST.md), 74 rows, IDs used below
 
+## Status 22 Oct
+
+Branch `karmicare/soft-launch-homepage` at `add1429`. Everything up to `984ba8a` is in local `merchant-edit` 31407fb (not pushed, so not live). Per-row statuses for all 88 items are in [GAP-LIST.md › Status 22 Oct](GAP-LIST.md#status-22-oct).
+
+| Status | Rows |
+|---|---|
+| In merchant-edit | 42 |
+| Ready to land | 1 (`add1429`, R19-01) |
+| In progress | 0 |
+| Waiting for Victor | 5 |
+| Parked / after launch | 30 (P2 refinements and handoffs to utopia, assets and source-copy) |
+| Dropped | 10 (Victor chose "keep as is", or not a defect) |
+
+### Waiting for Victor
+
+1. **F1 · FAQ "Is Karmicare fluoride-free?"** (hidden since `65ff2a8`). The answer is "Karmicare is fluoride-free, and always will be. Fluoride's benefits don't outweigh its known drawbacks." Review R11 F1 calls the second sentence a blanket claim without support.
+   Options: (a) keep only the first sentence and show the row; (b) keep both sentences and show the row; (c) keep the row hidden.
+   Advice: (a). The first sentence is a fact about the formula.
+2. **F3 · FAQ "Why two formulas instead of one?"** (visible, also live). The answer ends "…so Asleep soothes, rebalances and remineralises while you sleep." Review R11 F3 calls "while you sleep" an overnight action claim without support.
+   Options: (a) drop "while you sleep"; (b) Victor's own wording; (c) hide the row.
+   Advice: (a), the smallest change that removes the claim.
+3. **0205 · FAQ "Can I combine Karmicare with fluoride toothpaste or rinses?"** (hidden since `65ff2a8`). The answer is verbatim from the brand FAQ base: fluoride and nano-hydroxyapatite "compete for the same enamel surface". Has it been cleared clinically?
+   Options: (a) cleared, show the row; (b) not yet, keep it hidden until checked.
+   Advice: (b) until someone has checked the claim, then (a).
+4. **Clock help text (a11y).** The clock knob points `aria-describedby` at `clock-help-…`, which no longer exists (dropped in `bb6d231` "pull to main"); home and PDP share the section.
+   Options: (a) restore the old screen-reader-only sentence ("Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now."), with NL/FR translations; (b) drop the `aria-describedby`, so the slider keeps only its label and live value; (c) leave it, and axe keeps flagging it.
+   Advice: (a). It is existing copy and tells keyboard users how the control works. Agree with the PDP lane who builds it. Victor answers on 22 Oct.
+5. **PR-01 · professionals names on phones.** Headless Chrome showed the glass name holders blank at 393; the text is in the DOM. Never checked on a real phone.
+   Options: (a) Victor opens the homepage on his phone and the names show: row closed; (b) they are blank: the homepage moves the `backdrop-filter` onto a `::before`.
+   Advice: (a), a two-minute check.
+
+### Commits since R4 (all in merchant-edit unless marked)
+
+| Commit | What |
+|---|---|
+| `6664a71` | D-2: "WHY TWO FORMULAS?" jumps to the clock |
+| `f2f65d0` | D-14: one drifting, swipeable stat row at every width |
+| `42a913b` | TF-06: Night dims the two-formulas clock ring |
+| `6dcf6aa` | H-2: care-comes-back steps show 01/02/03 again (reverses `7ff0562`) |
+| `37ead46`, `d7232f7` | D-11: FAQ chips first 8 px radius, then pills in Nunito capitals at Victor's request |
+| `706d597` | FAQ cards on the research card surface |
+| `d0c1130` | Hero at least one screen tall, splash grows |
+| `f3d2391` | D-3: no hero badge below 750 |
+| `81e2edb` | D-1: HQ hero kit; the duo uncut with its shadow |
+| `ab34477` | R9 F2: in-page glide only for section anchors |
+| `17e5247`, `9dbafdf`, `6c5ae47`, `65ff2a8` | FAQ answers from the brand base, fluoride-free and pause answers in Victor's words, two rows held |
+| `aca9611` | R11 F2: duo srcset to 1600 |
+| `8def726`, `55e9db2` | R13 F2: stat marquee focusable, keys, no-JS scroll |
+| `92a6a4d` | B-08: "SEE WHAT'S INSIDE" shows Coming soon |
+| `68527fc` | Hero and stat-strip seams on the section rhythm (Victor, 21 Oct) |
+| `419fbfc` | a11y: heading levels without skips |
+| `59db4e2` | Benefit card images parked behind a section switch (Victor, 21 Oct) |
+| `984ba8a` | a11y: decorative icon images `alt=""` |
+| `add1429` | **Ready to land**: R19-01, benefit titles keep their letter spacing as h3 |
+
+Global files this branch changed earlier and that landed with it: header `902733a`, `b6e76ee`; `layout/theme.liquid` `377a672`; button system `3f1591f`, `c8c2cf4`, `5cf782f`, `6ef623c`, `b6e76ee`, `df08968`; `base.css` `93aa469`; `kc-coming-soon.css` `6ef623c`. The global lane owns these files now.
+
+Closed without a theme change: the live `templates/index.json` reconcile (`origin/main` has no index.json change after `8596548`, which this branch contains). Forwarded to the global lane: bold body text renders 700 against the library's Semibold 600.
+
+**Changelog**
+- 22 Oct: Status 22 Oct block added to this report and to GAP-LIST.md.
+
 ## Preflight (COMMON-RULES §1)
 
 | Check | Result |

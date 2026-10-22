@@ -4,6 +4,67 @@
 **Branch**: `karmicare/soft-launch-pdp`, from `3bae259` (live baseline). Local commits only, nothing pushed.
 **Gap list**: [GAP-LIST.md](GAP-LIST.md).
 
+## Status 22 Oct
+
+The whole PDP lane (both sessions), on branch `karmicare/soft-launch-pdp`. Every gap row has its own status in [GAP-LIST.md › Status 22 Oct](GAP-LIST.md#status-22-oct): in merchant-edit 9, ready to land 0, in progress 3 (a11y rows 33, 34, 35b), waiting for Victor 1, parked / after launch 18 (with row 32, the FAQ evidence links, parked by Victor on 22 Oct), dropped 8. The table below covers the rest of the lane's work.
+
+**In merchant-edit** means it is in `merchant-edit` `31407fb`, checked with `git merge-base --is-ancestor <sha> merchant-edit`. That branch is not pushed yet, so none of it is live.
+
+| # | Item | Status | Commits or detail |
+|---|---|---|---|
+| L1 | Buybox chips, Welcome Kit names, buybox column, chip popovers (A2, R5) | In merchant-edit | `9dfef5a`, `4a2e1b3`, `051bb3b` |
+| L2 | D2: no 01/02/03 step labels | In merchant-edit | `82f9549` |
+| L3 | D3: euro amounts by language | In merchant-edit | `8a555de`, `e5814b6` |
+| L4 | D5: professional cards under the gallery from 990 px only | In merchant-edit | `629c591` |
+| L5 | Receipt texts in the page language (18 `kc.receipt.*` keys) | In merchant-edit | `c7819e1` |
+| L6 | Other PDP fixes: one Welcome Kit value, the plans-table kit total (R9), when the sticky bar shows, how-it-works hidden for the soft launch, Duo name from the product title, selected plan card readable in Day (R12), delivery line | In merchant-edit | `62664e5`, `f2fb36d`, `a6000c4`, `9a96945`, `60912f6`, `50ad819`, `4ea92f1`, `4102b4d` |
+| L7 | Plans-table and comparison-table buttons go straight to checkout with their plan, also when the plan name is translated | In merchant-edit | `59ece89`, `d6a8120`, `a00f7b9`; [COMPARE-CHECKOUT.md](COMPARE-CHECKOUT.md) |
+| L8 | R14 to R14f: table buttons after Back, errors at the table, one error announcement, a11y names | In merchant-edit | `1462a7b`, `79b1d8c`, `3ce1517`, `74c91d1`, `bbd9f9a` |
+| L9 | Hero animation at 1.2× inside its gallery frame | In merchant-edit | `374aaad`, `a0c2c83` |
+| L10 | Docs: a11y rows 32–37, Loop cancellation proposals, this status | Ready to land (docs only) | `a8a1570`, `c9fea67`, `2c4bde0` and this commit; reported to the desk with this update |
+| L11 | Loop plan texts NL/FR (names, dropdown labels, descriptions, group names) | Waiting for Victor | See below |
+| L12 | Loop cancellation flow NL/FR (42 empty fields per language) | Waiting for Victor | See below; [LOOP-CANCELLATION-NL-FR.md](LOOP-CANCELLATION-NL-FR.md) |
+| L13 | Plan cards: fixed English texts from `loop-widget.js` on `/nl` and `/fr` | Waiting for Victor | See below |
+| L14 | Checkout run: S1–S8 and the six steps in COMPARE-CHECKOUT.md, including Day | Waiting for Victor | See below |
+| L15 | Copy findings from the receipt check: "products" in the EN tooltip, "verified by your dentist", NL amounts with a space, end CTA wording | Parked / after launch | Handed to source-copy. Their report has the status; not checked here |
+| L16 | Claims check of the Loop cancellation reasons and membership benefits that are already translated | Parked / after launch | Handed to source-copy |
+| L17 | D1 (mobile tables), D4 (tablet), D6 (mobile proposals) | Dropped | Victor 20 Oct: D1 "je hoeft mobiele koopbox niet aan te raken", D4 "twee kolommen is ok", D6 keep the badge. No change |
+| L18 | API app and translation runner | Dropped | Moved to the source-copy lane by the desk on 21 Oct |
+
+**Counts (18 items)**: in merchant-edit 9 · ready to land 1 · in progress 0 · waiting for Victor 4 · parked / after launch 2 · dropped 2.
+**Lane total with the gap list**: in merchant-edit 18 · ready to land 1 · in progress 3 · waiting for Victor 5 · parked / after launch 20 · dropped 10.
+
+### Waiting for Victor
+
+**L11: will you enter the remaining Loop plan texts?** Agents may not write in Loop (AGENTS.md §1). I saved one field on 21 Oct, the NL group name "60-dagenritme", before I stopped. The rest comes from the approved plans `docs/localization/registration/plan-nl.json` and `plan-fr.json`. Where: Loop → Settings → Multilingual content → choose the language → "…" → Selling plans. Press **Update** on each tab before you switch.
+- NL: name and dropdown label "levering om de 60 dagen" for 60-Day Rhythm and 60-Day Supply. The 60-Day Rhythm description becomes the approved text with "je" in place of the machine translation with "u". The Subscribe and Save group name becomes "Abonneer en bespaar". The Subscribe and Save plans become "Betaling om de 12 maanden, levering om de 6 maanden", "Levering om de 60 dagen" and "Levering om de 6 maanden".
+- FR: name and label "expédition tous les 60 jours" for 60-Day Rhythm and 60-Day Supply. The 60-Day Rhythm and Year descriptions get the approved text in place of "Crédit soin". The Year group name becomes "L’année Karmicare", and the Year label "6 duos par an (3 maintenant, 3 au 6e mois)". The Yearly Plan group name becomes "Offre annuelle". The Subscribe and Save plans become "S’abonner et économiser", "Paiement tous les 12 mois, livraison tous les 6 mois" and "Livraison tous les 60 jours / 6 mois".
+- Left alone on purpose: the group name "60-Day Supply". Loop's Care Credit rules read that value, so it needs checking before anyone changes it.
+
+Options:
+- a) You enter the list yourself (about 15–20 minutes).
+- b) You give an agent explicit permission for Loop admin, which goes against AGENTS.md §1.
+
+Advice: **a**.
+
+**L12: do you approve the cancellation texts?** In Loop, 42 fields per language are empty, so a customer who cancels on `/nl` or `/fr` sees English. NL uses "je" and FR uses "vous". Once you approve, you enter them yourself as in L11.
+- Approve as written, or mark the lines you want changed.
+- Redeem-points button for Loop Loyalty. Option a) "Care Credit gebruiken" / "Utiliser mon Care Credit". Option b) "Punten inwisselen" / "Utiliser mes points". **Advice: a**, because the brand never says "points" for Care Credit. Option b only fits the other loyalty apps (Rivo and others), which only show if they are switched on.
+
+**L13: may the plan cards on `/nl` and `/fr` lose their fixed English texts?** "/ brushing", "/ year", "/ 60 days", "value · free", "One time Purchase", "each" and "Renews every year" come from `loop-widget.js`. Loop does not deliver these texts in other languages. The plan names and the 60-day line already come from your Loop translations.
+- a) I make them translatable the way the receipt texts were done (`c7819e1`). Loop's own plan text is used where it exists, and the rest uses wording you already approved ("waarde · gratis", "de valeur · gratuit", "per poetsbeurt", "par brossage"). This needs your permission for a small `loop-widget.js` edit, which is off-limits without it.
+- b) Leave them in English on `/nl` and `/fr` for the soft launch.
+
+For the Year line under a), the card either keeps "Renews every year" (made translatable, your choice of 16 Oct) or shows Loop's "6 duo's per jaar (3 nu, 3 in maand 6)".
+
+Advice: **a**, keeping "Renews every year". A Dutch or French page with English price lines looks unfinished.
+
+**L14: who runs the checkout check?** Agents never open checkout.
+- a) You do it on the merchant-edit preview, about 15 minutes. Steps: [COMPARE-CHECKOUT.md › Steps for Victor](COMPARE-CHECKOUT.md#steps-for-victor-preview-189885940093), then S1–S8 under R5 fixes. Stop on the checkout summary, and do not pay.
+- b) QA runs the checks on the page itself (S5 sticky bar, S8 popovers, Day captures) in an anonymous profile, and you only read the checkout summaries.
+
+Advice: **b**, then a for the checkout summaries only. That keeps your part short.
+
 ## Preflight (19 Oct 2026, 19:23)
 
 - `orca status --json`: runtime `ready`, `reachable: true`, graph `ready`.
@@ -174,7 +235,7 @@ His follow-up answers:
 | D3 = A, language convention | Euros as Loop's buybox writes them (Intl): EN "€0.49", NL "€ 0,49", FR "0,49 €", with no-break spaces. `8a555de` covers the end CTA, sticky bar and compare-plans kit popover via `snippets/kc-money.liquid`; `e5814b6` adds the NL space | `8a555de`, `e5814b6` |
 | D5 | The professional cards under the gallery show from 990 px only. The Trusted Professionals section stays at every width. On the preview: hidden at 393 and 768, 520 × 509 px at 1024 | `629c591` |
 | D6 | "Brushing & Beyond" stays on mobile. The arrows and stacked chips stay, as recommended. No change | – |
-| D1, D4 | Open | – |
+| D1, D4 | Decided later on 20 Oct: D1 "je hoeft mobiele koopbox niet aan te raken", D4 "twee kolommen is ok". No change | – |
 
 ### Receipt texts: check and translation
 
@@ -234,3 +295,8 @@ The other twelve keys cover day, week, month and years in the same patterns (FR 
 **Merging**:
 - `locales/*.json` conflicts with `karmicare/soft-launch`, because both add a `kc` block at the top. Take the integration side, append the entries of `docs/pdp/kc-receipt-keys.json` to `docs/localization/theme-keys.json`, and run `theme_keys.py write`.
 - The care-comes-back change also reaches the homepage branch's section.
+
+## Changelog
+
+- 22 Oct: added "Status 22 Oct", with one status per lane item, counts and the questions for Victor in full. Merchant-edit `31407fb` was checked with `git merge-base --is-ancestor`, and D1/D4 now show as decided.
+- 22 Oct: FAQ evidence links (gap row 32) parked by Victor; counts updated.

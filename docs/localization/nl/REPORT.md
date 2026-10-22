@@ -1,5 +1,109 @@
 # NL translation payloads · report (B2)
 
+## Status 22 Oct
+
+The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
+
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+
+| Status | Rows |
+|---|---:|
+| In merchant-edit | 6 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 11 |
+| Parked / after launch | 1 |
+| Dropped | 3 |
+
+| # | Status | What | Commits / where |
+|---|---|---|---|
+| 4 | In merchant-edit | NL payloads: 2,151 of the 2,154 translatable entries in Dutch, `validate.py` exit 0. After Victor's waiver (20 Oct) the claim-held entries are translated and flagged pending-claim-review | `31b490f` … `1437fc5` |
+| 5 | In merchant-edit | 64 `kc.*` theme keys in all 31 locales: footer, plans, clock, FAQ "ALL", sticky bar, hero, stat strip, PDP labels; EN, NL and FR values | `16decc4` … `1630eef`, `c348c72`, `61efa65` |
+| 6 | In merchant-edit | Delivery times in the theme's legal pages and EN fallback locales: Benelux within 24 hours, rest of the EU 2–3 working days | `6414e4c`, `bc7a090`, `1596ecb` |
+| 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
+| 8 | In merchant-edit | Sticky-bar key `kc.sticky_cart.kit_free_html` removed from all 31 locales (NV-13) | `d72d791` |
+| 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
+| 12 | Ready to land | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source and the NL. The desk lands it together with the FR follow-up (FR updates its payload hash) | `6500a4a`, reported 21 Oct |
+| 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
+| 27 | Waiting for Victor | Old blog articles in NL and FR (S3) | batch 07, 709 entries |
+| 29 | Waiting for Victor | Addresses in the NL/FR legal text (S5) | batch 04 |
+| 30 | Waiting for Victor | "Gift, pause or cancel" in the buy box (S6) | PDP trust row |
+| 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
+| 32 | Waiting for Victor | Dutch term for the check-up (S8) | glossary |
+| 35 | Waiting for Victor | SLS article block `#b035` names four competitor brands | blog, batch 07 |
+| 36 | Waiting for Victor | Sietske Hamelink's quote in NL and FR | C85, homepage and PDP |
+| 37 | Waiting for Victor | Capitalisation of all buttons | inventory of all buttons (global coordinator) |
+| 38 | Waiting for Victor | Delivery times in the Shopify policies, and their wording | Settings > Policies; table in the NL report |
+| 41 | Waiting for Victor | Legal review of the NL and FR legal texts | batch 04, legal-review gate (NL 605 items) |
+| 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
+| 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
+| 46 | Dropped | Legacy legal pages (350 entries): not translated, they redirect | `08479cb` |
+| 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
+
+### Waiting for Victor: the questions
+
+**15. Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review).** After the read-only dry run and the review of the metaobject bindings, may the runner write the first wave (NL 504, FR 502 items)?
+- (a) Yes, the whole first wave.
+- (b) Yes, but theme text (homepage, PDP, header, footer) first, products and metafields in a second run.
+- (c) No, not before launch.
+- *Advice*: Decide on the dry-run report, which shows every current value it would overwrite. NL and FR are already published, so each registered translation is live at once; (a) if the report is clean.
+
+**27. Old blog articles in NL and FR (S3).** The blog articles are translated but outside the first wave. 107 of their blocks carry unsupported claims. Publish the NL/FR versions?
+- (a) Not until the EN is rewritten.
+- (b) Publish them.
+- *Advice*: (a): the EN itself makes the claims; translating them spreads them to two more languages.
+
+**29. Addresses in the NL/FR legal text (S5).** Postal addresses are written exactly as in the EN; city and court names in running text use the local form (Brugge, Ondernemingsrechtbank Gent). Keep that?
+- (a) Official local forms in running text (as now).
+- (b) English forms everywhere.
+- *Advice*: (a): it is how Belgian legal Dutch names its courts and cities.
+
+**30. "Gift, pause or cancel" in the buy box (S6).** The NL trust row uses Figma's short form *Pauzeren of opzeggen*; elsewhere the full form. Keep that?
+- (a) Full form where it fits, short form in the trust row (as now).
+- (b) Short form everywhere.
+- *Advice*: (a): the trust row has no room, the other places do.
+
+**31. Brand-rule exceptions (S7).** The footer says "is a Belgian product", and the treatment-journey footnote "What members report with continued use" is NL *bij langdurig gebruik*: both use banned words (product, use). Rewrite or keep?
+- (a) Rewrite the EN and the Figma first; you give the wording.
+- (b) Keep them.
+- *Advice*: (a): the brand rule has no exceptions so far; I do not write new copy myself.
+
+**32. Dutch term for the check-up (S8).** The site uses *controlebeloning*; one Figma frame says *tandartscontrole-beloning*. Which one?
+- (a) *controlebeloning* (as now).
+- (b) *tandartscontrole-beloning*.
+- *Advice*: (a): shorter, and it does not suggest the dentist is involved.
+
+**35. SLS article block `#b035` names four competitor brands.** The block breaks the no-competitor rule (a brand rule, not a claim), so NL and FR hold it. What should happen?
+- (a) Remove the brand names from the EN sentence.
+- (b) Delete the block.
+- (c) Leave the EN and never translate it.
+- *Advice*: (a) if the sentence reads without the names, otherwise (b); both are deletions, no new copy.
+
+**36. Sietske Hamelink's quote in NL and FR.** Her quote is her own words and carries an unsupported health claim (C85). The NL is held; FR translated it. What should NL/FR show?
+- (a) Ask Sietske to approve the NL/FR (NL draft in `986c1d9`).
+- (b) Show her English quote on NL/FR.
+- (c) Replace it with a quote of hers without the health claim (ties to K3).
+- *Advice*: (c): the claim is the problem in every language; with (a) it would still be there.
+
+**37. Capitalisation of all buttons.** Which style for every button?
+- (a) CAPS.
+- (b) Title Case.
+- (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
+- *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
+
+**38. Delivery times in the Shopify policies, and their wording.** The theme's legal pages say "within 24 hours" (Benelux). The three Shopify policies are admin text: will you edit their EN (the table in the NL report gives each old and new line)? And should the legal texts say "within 24 hours" or "1 working day"?
+- (a) "within 24 hours" everywhere (as now).
+- (b) "1 working day" in the legal texts, "24 uur" stays in the sticky bar.
+- *Advice*: (b): an order on Friday evening cannot arrive within 24 hours, and the rest of the EU is already given in working days. Either way the policies are your edit.
+
+**41. Legal review of the NL and FR legal texts.** The legal pages are translated but held by the legal-review gate. Who reviews them?
+- (a) You review them.
+- (b) A Belgian lawyer reviews them.
+- (c) NL/FR legal pages stay English until reviewed.
+- *Advice*: (b) for NL first; until then (c).
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+
 Task `task_25fdff87b2e8`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy`. 19 Oct 2026. Ready for Astra's review.
 
 Dutch for every page of the live store, translated from the approved EN inventory. The files are payloads only. Nothing is in the theme, `locales/` or the Shopify admin yet; the localization worker registers them later.
@@ -152,7 +256,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 
 | Batch | Source entries | Source digest | translated | admin | theme-key | legal-review | pending-claim-review | dawn-nl | held | fit-risk |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | 477 | `e3e79339215f` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
+| `batch-02-pdp` | 477 | `87edec28e25f` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 229 | `5286628ff7c8` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
 | `batch-03-header-footer` | 41 | `d5353b16cc57` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
