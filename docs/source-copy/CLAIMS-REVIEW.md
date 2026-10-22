@@ -5,6 +5,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 - `approved`: wording sits inside the Do-say list or the allowed verbs, at cosmetic scope, without numbers, timelines, comparisons or superlatives.
 - `needs-review`: a number, timeline, comparison, study result, endorsement, safety statement or wording that goes beyond the Do-say list. Needs the Clinical Research sign-off before it ships.
 - `unsupported`: on the Don't-say side, or no basis in `products.md` at all.
+- `confirmed`: Victor confirmed the statement itself (a fact about Karmicare, not a health claim); it no longer gates translation or publication. The row names the date.
 
 `regulatory.md` requires the Clinical Research sign-off for **all** health claims before publication, `approved` ones included; `approved` here means only that the wording is inside the rules. The `Where` column lists every inventory entry that carries the claim (its `claims` field), on both templates; a row quotes each wording it covers. An entry keeps `corrected`, `needs-key` or `admin-held` where that describes its provenance; an uncorrected template entry with a needs-review or unsupported claim is `needs-review`.
 
@@ -13,8 +14,9 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | Status | Claims |
 |---|---:|
 | approved | 17 |
-| needs-review | 50 |
+| needs-review | 49 |
 | unsupported | 3 |
+| confirmed | 1 |
 
 | Id | Topic | Claim (verbatim excerpt) | Status | Basis | Where |
 |---|---|---|---|---|---|
@@ -87,7 +89,7 @@ Every health or cosmetic claim found in the homepage, Duo PDP, header and footer
 | C100 | whitening | “Whitening Charcoal Floss” · “whitening charcoal floss” | **needs-review** | Whitening claim for floss with no source in products.md: the same wording as the floss product title, needs-review in batch 05 (R2, review F5). Kit item title, compare-table row and kit image alts. | `admin:whitening-charcoal-dental-floss:title`, `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table:welcome_kit_row.products`, `admin:karmicare-biorhythmic-oral-care-system:media.69271648010621.alt`, `admin:karmicare-biorhythmic-oral-care-system:media.69884688236925.alt` |
 | C101 | mechanism | “Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both.” | **needs-review** | New homepage FAQ answer of 21 Oct (41ae772), block disabled. products.md says do not combine with fluoride (as C07) but gives no mechanism; a comparison with fluoride needs Clinical Research sign-off (regulatory.md). | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` |
 | C102 | comparison | “Fluoride’s benefits don’t outweigh its known drawbacks.” | **needs-review** | New homepage FAQ answer of 21 Oct (41ae772), block disabled. “Karmicare is fluoride-free, and always will be” is composition (as C01–C03); the benefit-against-drawback judgement on fluoride is a health comparison with no source in products.md, close to brand don’t #13 (no superiority over fluoride). | `index:km_faq_accordion_FYcArV/faq_item_AL3DKF/answer` |
-| C103 | provenance | “CIRCADIAN ORAL CARE SINCE 2017” | **needs-review** | New announcement line of 21 Oct (Victor G-1, global 3c03acb). “Circadian oral care” names the Awake/Asleep rhythm without a health effect; “since 2017” is a company date with no source in the repo. | `header-group:announcement-bar/announcement-bar-0/text` |
+| C103 | provenance | “EST. 2017” | **confirmed** | New announcement line of 21 Oct (Victor G-1, global 3c03acb; the same day Victor shortened it to “… · BELGIAN-MADE · EST. 2017”, which drops “circadian oral care”); “est. 2017” is a company date with no source in the repo. Confirmed by Victor 21 Oct (“EST. 2017 is bevestigd”, via the landing desk). | `header-group:announcement-bar/announcement-bar-0/text` |
 
 ## Offer statements that conflict with the offer source of truth
 

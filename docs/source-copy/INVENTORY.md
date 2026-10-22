@@ -9,16 +9,16 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the new FAQ block `Pz4mRk` adds three entries at the end of batch 01 (#226–228), so the earlier numbers stay;
   - the removed block `4KMG6C` and the two emptied PDP step numbers are `retired`;
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
-  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“… FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017”, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
+  - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017”, Victor's short line of 21 Oct, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
   - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 229 | `7694e7acce33a1e22a90de53273f2c90a8ddd70a` |
-| `batch-02-pdp` | 477 | `2846c75e4df9f09cca9026b613cfddc61f307f5d` |
-| `batch-03-header-footer` | 41 | `a853d438d503867882d711cd4fa5a4a93c29759f` |
+| `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
+| `batch-02-pdp` | 477 | `87edec28e25fcae4bdef2adf127d761b0a725bc4` |
+| `batch-03-header-footer` | 41 | `d5353b16cc57ea2181626f9f9cfa79dda0cb107d` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
 | `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
@@ -27,7 +27,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 
 ## How to read an entry
 
-`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status` (every entry that carries a claim: in batches 01–03 the strictest status of its `claims`, in batches 05–07 the hand review), `claim_basis` (batches 05–07), `claim_hold_waived` (on the 119 unsupported-claim entries: "2026-10-20 Victor, translation only"; NL/FR translate them and flag pending-claim-review, the claims review still gates publication), `blocked` (no approved copy: a placeholder, or EN that breaks a brand rule),`legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `retired` (the theme no longer reads the setting or key; held in NL/FR and left out of registration, with the reason), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
+`{id, batch, page, resource_type, file_or_handle, key_path, en, sha1, status, never_translate, notes}` as the brief asks, plus, where they apply: `old_en`/`old_sha1` (corrected strings), `claims` (claim ids in CLAIMS-REVIEW.md, batches 01–03), `claim_status` (every entry that carries a claim: in batches 01–03 the strictest status of its `claims`, in batches 05–07 the hand review; `confirmed` where Victor confirmed the claim), `claim_basis` (batches 05–07), `claim_hold_waived` (on the 119 unsupported-claim entries: "2026-10-20 Victor, translation only"; NL/FR translate them and flag pending-claim-review, the claims review still gates publication), `blocked` (no approved copy: a placeholder, or EN that breaks a brand rule),`legal` (legal text: legal-review before publishing), `legacy` (pre-2.0 page, held in NL/FR), `retired` (the theme no longer reads the setting or key; held in NL/FR and left out of registration, with the reason), `setting_type`, `section_type`, `rendered` (false for disabled blocks).
 
 | status | Meaning for translators |
 |---|---|
@@ -60,7 +60,7 @@ By status:
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
 | `batch-01-homepage` | 145 | 21 | 30 | 31 | 2 | 16 |
-| `batch-02-pdp` | 147 | 3 | 23 | 36 | 268 | 32 |
+| `batch-02-pdp` | 146 | 4 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 2 | 1 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
 | `batch-05-products` | 14 | 0 | 2 | 0 | 61 | 0 |
@@ -307,7 +307,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 |---:|---|---|---|---|---|
 | 1 | `index:hero_karmicare_XKKLDK/heading_RHmd8h/heading` | template_setting | Your mouth has a rhythm Now your oral care too | approved |  |
 | 2 | `index:hero_karmicare_XKKLDK/text_Y7L3hV/text` | template_setting | Karmicare is a day-and-night oral care system designed around your mouth’s 24-hour rhythm. Awake fo… | approved |  |
-| 3 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 3 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 4 | `index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_2` | template_setting | WHY TWO FORMULAS? | approved |  |
 | 5 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/awake_label` | template_setting | AWAKE | approved | NT |
 | 6 | `index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/asleep_label` | template_setting | ASLEEP | approved | NT |
@@ -340,7 +340,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 33 | `index:chronobiology_clock_karmicare/footer_link_text` | template_setting | Read the science | approved |  |
 | 34 | `index:two_formulas_karmicare/subheading` | template_setting | BIORHYTHMIC ORAL CARE | approved |  |
 | 35 | `index:two_formulas_karmicare/heading` | template_setting | Two formulas. One system. Designed around you. | approved |  |
-| 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 37 | `index:two_formulas_karmicare/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
 | 38 | `index:two_formulas_karmicare/left_heading` | template_setting | Activated and strengthened by day | approved |  |
 | 39 | `index:two_formulas_karmicare/left_text` | template_setting | Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated. | approved | C C26 |
@@ -352,7 +352,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 45 | `index:product_benefits_karmicare_bcQ6tp/subheading` | template_setting | the benefits | approved |  |
 | 46 | `index:product_benefits_karmicare_bcQ6tp/heading` | template_setting | Clean is not the same as healthy. | approved |  |
 | 47 | `index:product_benefits_karmicare_bcQ6tp/text` | template_setting | You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, kee… | needs-review | C C20,C32,C34 |
-| 48 | `index:product_benefits_karmicare_bcQ6tp/button_label` | template_setting | BEGIN YOUR 60-DAY RITUAL | approved |  |
+| 48 | `index:product_benefits_karmicare_bcQ6tp/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 49 | `index:product_benefits_karmicare_bcQ6tp/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
 | 50 | `index:product_benefits_karmicare_bcQ6tp/bottom_note` | template_setting | *Reported outcomes vary. Mechanisms and published evidence are shown separately. | approved |  |
 | 51 | `index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/label` | template_setting | 01 · NANO-HYDROXYAPATITE | approved |  |
@@ -479,7 +479,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 172 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1` | template_setting | 10% / order | approved |  |
 | 173 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_2` | template_setting | 10% each purchase | approved |  |
 | 174 | `index:featured_product_3XpDKw/loop_subscriptions_7dde8c/per_brushing_text` | template_setting | per brushing | approved |  |
-| 175 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | template_setting | Begin your 60-day ritual | approved |  |
+| 175 | `index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text` | template_setting | Begin your 60-Day Rhythm | approved |  |
 | 176 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_1` | template_setting | 60-day money-back guarantee | corrected |  |
 | 177 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_2` | template_setting | Cancel anytime | approved |  |
 | 178 | `index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_3` | template_setting | Free shipping | approved |  |
@@ -670,7 +670,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 129 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_1` | template_setting | 10% / order | approved |  |
 | 130 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/care_credit_text_2` | template_setting | 10% each purchase | approved |  |
 | 131 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/per_brushing_text` | template_setting | per brushing | approved |  |
-| 132 | `product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text` | template_setting | Begin your 60-Day rhythm | approved |  |
+| 132 | `product.subscription-item:featured_product_Eb93Xa/buy_buttons_Ffxhap/custom_button_text` | template_setting | Begin your 60-Day Rhythm | corrected |  |
 | 133 | `product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_1` | template_setting | 60-day money-back guarantee | approved |  |
 | 134 | `product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_2` | template_setting | Free shipping | approved |  |
 | 135 | `product.subscription-item:featured_product_Eb93Xa/icon_with_text_endcta/heading_3` | template_setting | Gift, pause or cancel | approved |  |
@@ -1021,7 +1021,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 
 | # | id | type | EN | status | flags |
 |---:|---|---|---|---|---|
-| 1 | `header-group:announcement-bar/announcement-bar-0/text` | section_group | COMPLIMENTARY SHIPPING & 60-DAY MONEY-BACK GUARANTEE FOR MEMBERS · BELGIAN-MADE · CIRCADIAN ORAL CARE SINCE 2017 | corrected | C C103 |
+| 1 | `header-group:announcement-bar/announcement-bar-0/text` | section_group | FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017 | corrected | C C103 |
 | 2 | `header-group:header/cta_text` | section_group | BEGIN NOW | approved |  |
 | 3 | `footer-group:footer/slogan` | section_group | Your mouth has a rhythm So should your oral care | needs-review |  |
 | 4 | `footer-group:footer/copyright_text` | section_group | Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep… | corrected | C C99 |
