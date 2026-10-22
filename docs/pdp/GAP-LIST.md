@@ -9,6 +9,69 @@ Priority: **P0** broken, clipped or unreadable · **P1** visibly off-design · *
 Owner: pdp · homepage · utopia · source-copy · assets · Victor.
 Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (local, gitignored). See REPORT.md for how each set was captured.
 
+## Status 22 Oct
+
+**In merchant-edit** means the theme change is in `merchant-edit` `31407fb`, checked with `git merge-base --is-ancestor <sha> merchant-edit`. That branch is not pushed yet, so none of it is live. Rows 28 and 35 have one part done and one part open, so each is split in two.
+
+| # | Status | Detail |
+|---|---|---|
+| 1 | In merchant-edit | `4a2e1b3`, popovers `051bb3b` |
+| 2 | In merchant-edit | `4a2e1b3` |
+| 3 | In merchant-edit | `9dfef5a` |
+| 4 | Dropped | D4: Victor, 20 Oct, "twee kolommen is ok" |
+| 5 | Dropped | D6: arrows stay |
+| 6 | Dropped | D6: stacked chips stay |
+| 7 | Dropped | D6: Victor keeps the "Brushing & Beyond" badge |
+| 8 | Parked / after launch | P2 title wrap, nothing built |
+| 9 | Parked / after launch | The cards show from 990 px only (D5). The cut fourth card at 1440+ is in `component-professional-testimonials.css` (22rem minimum), which the homepage lane owns |
+| 10 | In merchant-edit | D5, `629c591` |
+| 11 | Parked / after launch | Asset owner |
+| 12 | Parked / after launch | Theme-wide cookie banner, global lane |
+| 13 | Parked / after launch | Copy, source-copy. The title is the Shopify product title since `50ad819` |
+| 14 | In merchant-edit | D3, `8a555de`, `e5814b6` |
+| 15 | Dropped | No gap found |
+| 16 | In merchant-edit | D2, `82f9549`; the section is also hidden for the soft launch (`60912f6`) |
+| 17 | Parked / after launch | The section is hidden (`60912f6`); the step media matter again when it comes back |
+| 18 | Dropped | No gap found |
+| 19 | Parked / after launch | D1: Victor, 20 Oct, "je hoeft mobiele koopbox niet aan te raken". The tables keep their sideways scroll for the soft launch |
+| 20 | Parked / after launch | Follows D1 |
+| 21 | Parked / after launch | P2 |
+| 22 | Parked / after launch | Follows D1. The table buttons now go straight to checkout (`59ece89`, in merchant-edit) |
+| 23 | Parked / after launch | `transition: all 0.4s` is still in `product-compare-plans.css:63` |
+| 24 | Parked / after launch | P2 |
+| 25 | Dropped | No gap found |
+| 26 | Parked / after launch | Homepage and utopia own it. Its status is in their report, not checked here |
+| 27 | In merchant-edit | D2, `82f9549` |
+| 28a | In merchant-edit | Prices by language, `8a555de` |
+| 28b | Parked / after launch | The wording "Care Credits back" is still in `templates/index.json:690` and `product.subscription-item.json:657`. Source-copy owns the text |
+| 29 | Parked / after launch | Homepage and utopia own it |
+| 30 | Dropped | Cut at the viewport edges by design |
+| 31 | Waiting for Victor | See below |
+| 32 | Waiting for Victor | See below |
+| 33 | In progress | The plan is ready, but nothing is built. It waits for the desk's go |
+| 34 | In progress | Still at `chronobiology-clock-karmicare.liquid:102` in merchant-edit. Waiting for the desk to say who changes it: homepage or pdp |
+| 35a | In merchant-edit | Clock callouts are `h3.h4`, homepage `75de9a4` |
+| 35b | In progress | The buybox `h5` is still at `treatment-journey.liquid:19`, `:69`. The plan is ready and waits for the desk's go |
+| 36 | Parked / after launch | Info; recheck after 33–35 |
+| 37 | Parked / after launch | Loop widget, off-limits |
+
+**Counts (39 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 2 · parked / after launch 17 · dropped 8.
+
+### Waiting for Victor
+
+**Row 32: what should the 8 evidence links in the FAQ do while they have no document?** Today they point to `#`. Their text: View assessment summary, View notification, Read the opinion, View report, Read our science, See every document, Request the evidence pack, Practitioner evidence pack. The links sit in the FAQ content in Shopify admin, not in the theme.
+- a) You fill in the real document links in admin. No theme change.
+- b) The theme shows them as "Coming soon": visible but not clickable, with the same tooltip as in the header and the research section. No new copy.
+- c) The theme hides each link until it has a real address.
+
+Advice: **b** for the launch, because it uses the "Coming soon" state the site already has elsewhere. Switch to **a** as soon as the documents are online. The theme needs no change for a.
+
+**Row 31: should the PDP get Figma's sections 08 (testimonials) and 09 (cost of waiting)?** Today they are not on the page, and care-comes-back stands where 09 was.
+- a) Keep the page as it is for the soft launch.
+- b) Add both sections. That needs approved texts and real testimonials, and neither is in the repo yet.
+
+Advice: **a**, because building b needs content we do not have; revisit it after launch.
+
 ## Summary
 
 - No P0 on the PDP. Nothing overflows the page horizontally at any width from 393 to 2560, Day or Night. Text is clipped only at the edges of the marquee rows (trusted professionals, research), which is by design.
@@ -94,3 +157,7 @@ Re-checked on this branch in the NL server HTML of the dev server (127.0.0.1:929
 - Horizontal overflow: none at 393, 450, 768, 1024, 1440, 1920, 2560, Night and Day (`documentElement.scrollWidth` = viewport).
 - Wide screens: header, main-product, how-it-works, comparison, plans, care-comes-back and footer share the 1480 px page width and its 32 px gutter. Their left edges line up at 252 (1920) and 572 (2560).
 - Mission card (Marlide 300, "Strengthen your teeth. Strengthen yourself."): fits at every width, Day and Night.
+
+## Changelog
+
+- 22 Oct: added "Status 22 Oct", with one status per row, counts and the questions for Victor. Every theme row was checked against merchant-edit `31407fb` with `git merge-base --is-ancestor`.
