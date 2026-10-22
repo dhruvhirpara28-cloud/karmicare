@@ -6,8 +6,8 @@ One status per row. **In merchant-edit**: the theme change is in local `merchant
 
 | Status | Rows |
 |---|---|
-| In merchant-edit | 42 |
-| Ready to land | 1 |
+| In merchant-edit | 43 |
+| Ready to land | 0 |
 | In progress | 0 |
 | Waiting for Victor | 5 |
 | Parked / after launch | 30 |
@@ -71,7 +71,7 @@ One status per row. **In merchant-edit**: the theme change is in local `merchant
 | BE-06 | Parked / after launch | utopia |
 | Benefit images off | In merchant-edit | `59db4e2`: Victor 21 Oct, section switch off, the nine images stay set |
 | Benefit card headings | In merchant-edit | `419fbfc`: h5 → h3 |
-| R19-01 | Ready to land | `add1429`: the card titles inherit their letter spacing again (reported 22 Oct) |
+| R19-01 | In merchant-edit | `add1429`: the card titles inherit their letter spacing again (merchant-edit `2ef9b5c`) |
 | PR-01 | Waiting for Victor | phone check, see above |
 | PR-02 | Dropped | D-6: keep the marquee |
 | PR-03 | In merchant-edit | `4f8024c` |
@@ -119,7 +119,9 @@ One status per row. **In merchant-edit**: the theme change is in local `merchant
 
 Not counted (other owners): bold body text renders 700 against the library's Semibold 600, forwarded to the global lane on 21 Oct. The live `templates/index.json` reconcile is closed: `origin/main` has no index.json change after `8596548`, which this branch already contains, so there are no live editor edits to keep.
 
-**Changelog**: 22 Oct, status block added (42 in merchant-edit, 1 ready to land, 5 waiting for Victor, 30 parked, 10 dropped).
+**Changelog**
+- 22 Oct: status block added (42 in merchant-edit, 1 ready to land, 5 waiting for Victor, 30 parked, 10 dropped).
+- 22 Oct, later: R19-01 (`add1429`) is in merchant-edit `2ef9b5c`; now 43 in merchant-edit, 0 ready to land.
 
 **Scanned**: 19 October 2026, live homepage `https://karmicares.myshopify.com/` (theme `karmicare/main` 187295564157, assets equal to branch base `3bae259` after Shopify minification), with the merged benefit hover state (6aa0e71) served in place of the live file and its veil emulated.
 **Viewports**: 393 (phone, DPR 3, touch), 768 (tablet, DPR 2, touch), 1024 (DPR 2), 1440 (DPR 2), 1920 and 2560 (DPR 1). Day and Night forced through the theme's `.kc_day` / `.kc_night` switch.

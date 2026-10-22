@@ -7,12 +7,12 @@
 
 ## Status 22 Oct
 
-Branch `karmicare/soft-launch-homepage` at `add1429`. Everything up to `984ba8a` is in local `merchant-edit` 31407fb (not pushed, so not live). Per-row statuses for all 88 items are in [GAP-LIST.md › Status 22 Oct](GAP-LIST.md#status-22-oct).
+Every theme change of this branch, up to `add1429`, is in local `merchant-edit` `2ef9b5c` (not pushed, so not live). Per-row statuses for all 88 items are in [GAP-LIST.md › Status 22 Oct](GAP-LIST.md#status-22-oct).
 
 | Status | Rows |
 |---|---|
-| In merchant-edit | 42 |
-| Ready to land | 1 (`add1429`, R19-01) |
+| In merchant-edit | 43 |
+| Ready to land | 0 |
 | In progress | 0 |
 | Waiting for Victor | 5 |
 | Parked / after launch | 30 (P2 refinements and handoffs to utopia, assets and source-copy) |
@@ -58,7 +58,7 @@ Branch `karmicare/soft-launch-homepage` at `add1429`. Everything up to `984ba8a`
 | `419fbfc` | a11y: heading levels without skips |
 | `59db4e2` | Benefit card images parked behind a section switch (Victor, 21 Oct) |
 | `984ba8a` | a11y: decorative icon images `alt=""` |
-| `add1429` | **Ready to land**: R19-01, benefit titles keep their letter spacing as h3 |
+| `add1429` | R19-01: benefit titles keep their letter spacing as h3 |
 
 Global files this branch changed earlier and that landed with it: header `902733a`, `b6e76ee`; `layout/theme.liquid` `377a672`; button system `3f1591f`, `c8c2cf4`, `5cf782f`, `6ef623c`, `b6e76ee`, `df08968`; `base.css` `93aa469`; `kc-coming-soon.css` `6ef623c`. The global lane owns these files now.
 
@@ -66,6 +66,7 @@ Closed without a theme change: the live `templates/index.json` reconcile (`origi
 
 **Changelog**
 - 22 Oct: Status 22 Oct block added to this report and to GAP-LIST.md.
+- 22 Oct, later: `add1429` (R19-01) landed in merchant-edit `2ef9b5c`; nothing of this branch is waiting to land.
 
 ## Preflight (COMMON-RULES §1)
 
