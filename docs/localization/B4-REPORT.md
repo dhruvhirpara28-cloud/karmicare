@@ -1,5 +1,74 @@
 # B4 · Localization integration: theme keys, registration route, payloads, dry run
 
+## Status 22 Oct
+
+The rows of the lane that concern this report; the whole lane is in `docs/source-copy/REPORT.md` (same row numbers).
+
+"In merchant-edit" is checked with `git merge-base --is-ancestor <sha> merchant-edit` against `31407fb`. merchant-edit is not pushed yet, so none of it is live.
+
+| Status | Rows |
+|---|---:|
+| In merchant-edit | 3 |
+| Ready to land | 1 |
+| In progress | 0 |
+| Waiting for Victor | 5 |
+| Parked / after launch | 3 |
+| Dropped | 2 |
+
+| # | Status | What | Commits / where |
+|---|---|---|---|
+| 5 | In merchant-edit | 64 `kc.*` theme keys in all 31 locales: footer, plans, clock, FAQ "ALL", sticky bar, hero, stat strip, PDP labels; EN, NL and FR values | `16decc4` … `1630eef`, `c348c72`, `61efa65` |
+| 8 | In merchant-edit | Sticky-bar key `kc.sticky_cart.kit_free_html` removed from all 31 locales (NV-13) | `d72d791` |
+| 11 | In merchant-edit | Offline registration plan for NL and FR, the app set-up steps for Victor (`APP-SETUP.md`) and the first version of `register.py` | `8a7548d` … `060de0e`, `2f9a83f`, `0e21a1f` |
+| 13 | Ready to land | `register.py` reworked after reviews R18, R18b and R18c; R18d (21 Oct): approve, no new findings, selftest 80/80 | `93e1850`, `44bb619`, `59c281e`, reported 21 Oct |
+| 14 | Waiting for Victor | Translations app for the registration | `APP-SETUP.md` |
+| 15 | Waiting for Victor | Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review) | `register.py --write` |
+| 16 | Waiting for Victor | NL and FR stay published while the first wave is not in | B4 decision 3 |
+| 17 | Waiting for Victor | Legacy translated product handles (12 URLs, e.g. `/nl/products/compleet-hygiene-kit`) | B4 decision 4 |
+| 18 | Waiting for Victor | Browser-language redirect on product pages | B4 decision 5, manual check 3 |
+| 42 | Parked / after launch | Loop widget strings (off-limits files): the 11 strings of the B4 Loop table, handed to the Loop owner; NL and FR are in the payloads | B4 report, Loop handoff |
+| 43 | Parked / after launch | Navigation links and Shopify policies: no proven API route in the runner yet (LINK, SHOP_POLICY); after the first wave, or through Translate & Adapt | `register.py`, B4 Part 2 |
+| 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
+| 47 | Dropped | Clock gates (B4 decision 6): review gates no longer hold theme keys, after Victor's waiver | `c348c72` |
+| 50 | Dropped | Choice of access path (B4 decision 1): the Dev Dashboard app route was chosen | desk, 21 Oct |
+
+### Waiting for Victor: the questions
+
+**14. Translations app for the registration.** Will you create the Dev Dashboard app "Karmicare translations" as in `APP-SETUP.md`, install it on karmicares.myshopify.com, store the client secret in your Keychain, and then say "app klaar" with the published theme's ID?
+- (a) With the extra scope `read_themes`: the runner reads the published theme itself and proves the ID.
+- (b) Without it: you confirm the theme ID yourself on the day of each run (`--theme-attested "<date> Victor"`).
+- *Advice*: (a): one manual step less, and the runner checks the theme instead of trusting a typed ID.
+
+**15. Writing the first wave of translations to Shopify (not asked yet: it comes after the dry run and the bindings review).** After the read-only dry run and the review of the metaobject bindings, may the runner write the first wave (NL 504, FR 502 items)?
+- (a) Yes, the whole first wave.
+- (b) Yes, but theme text (homepage, PDP, header, footer) first, products and metafields in a second run.
+- (c) No, not before launch.
+- *Advice*: Decide on the dry-run report, which shows every current value it would overwrite. NL and FR are already published, so each registered translation is live at once; (a) if the report is clean.
+
+**16. NL and FR stay published while the first wave is not in.** /nl and /fr are published today and show mostly English. Keep them published?
+- (a) Keep them published and register quickly.
+- (b) Unpublish NL and FR in the admin until the first wave is in.
+- *Advice*: (a): unpublishing is an admin change that takes /nl and /fr away from visitors who already use them, and the first wave is ready.
+
+**17. Legacy translated product handles (12 URLs, e.g. `/nl/products/compleet-hygiene-kit`).** The old NL/FR product URLs answer with a 301 to translated handles. Keep or remove them?
+- (a) Keep them: both URL forms work.
+- (b) Remove them, so handles stay English everywhere.
+- *Advice*: (a) for launch; nothing breaks, and removing them is an admin change that can wait.
+
+**18. Browser-language redirect on product pages.** A browser set to English is sent from `/nl/products/…` to the EN product. Will you run manual check 3 of the B4 report (2 minutes, a new English browser profile) to see whether the language selector still keeps a visitor on NL?
+- (a) Check it before launch; if it fails, change the setting in Markets or the app behind it.
+- (b) Leave it until after launch.
+- *Advice*: (a): Dutch customers with an English browser would otherwise land on the EN product.
+
+**Translation script (`register.py`).** R18d (21 Oct) approved `59c281e`: no new findings, selftest 80/80. Nothing has run live. The order from here:
+1. Victor says "app klaar" and gives the published theme ID (row 14).
+2. A read-only dry run with theme proof; its report shows every current value and the API contract.
+3. Review of the binding proposals for the metaobject fields (48 NL, 50 FR) into `bindings.json`, with the full old and new translations.
+4. A fresh dry run.
+5. Its checksum and Victor's explicit yes (row 15); only then `--write`.
+
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk); the rest of the report is unchanged.
+
 Task `task_427cfe23005d` (dispatch `ctx_505619d6c8e5`), brief `.coordinator/BRIEF-B4.md`. Nothing was registered, pushed or changed in Shopify.
 
 ## Preflight
