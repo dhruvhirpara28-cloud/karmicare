@@ -54,8 +54,9 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 35b | In progress | The buybox `h5` is still at `treatment-journey.liquid:19`, `:69`. The plan is ready and waits for the desk's go |
 | 36 | Parked / after launch | Info; recheck after 33–35 |
 | 37 | Parked / after launch | Loop widget, off-limits |
+| 38 | Parked / after launch | Amounts in other currencies than the euro (Victor, 22 Oct, for later). Nothing built |
 
-**Counts (39 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 1 · parked / after launch 18 · dropped 8.
+**Counts (40 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 1 · parked / after launch 19 · dropped 8.
 
 ### Waiting for Victor
 
@@ -152,6 +153,28 @@ Re-checked on this branch in the NL server HTML of the dev server (127.0.0.1:929
 | 36 | Other heading order: h2 "Land/regio" and "Taal" (localization drawer) and h2 "Trusted by professionals" with seven h3 come before the h1; the h1 is followed by an h2 with the same product title. | Header drawers and the professionals block render before the product section. | P2 | pdp | Note only; check after rows 33–35. | Info |
 | 37 | Loop widget: duplicate ids. | `snippets/loop-widget*.liquid` / `assets/loop-widget.js`, off-limits. | P2 | Victor | Note only. | Off-limits |
 
+## Currency (Victor, 22 Oct, via the desk and source-copy; parked, nothing built)
+
+The shop also sells in CHF, GBP, USD and SEK. Product and plan prices are converted, but some amounts are fixed euro text or fixed euro cents.
+
+| # | Observed | Where | P | Owner | Approach | Status |
+|---|---|---|---|---|---|---|
+| 38 | **a) Price per brushing.** It stays in euro when the visitor pays in another currency. **b) The €40 Dental Check-up Reward.** It is printed as a fixed amount, and in the Loop widget it takes the visitor's currency without being converted: 4000 cents go through `loopFormatMoney`, so a CHF visitor would see "CHF 40". | a) `templates/index.json:207`, `:332` `button_subtext` "€0.49 / brushing ritual" (two-formulas-karmicare, product-benefits-karmicare, also their schema defaults), and the compare_value metaobjects "Cost per brushing". b) `assets/loop-widget.js:2722` (receipt chip), `sections/care-comes-back.liquid` ("€40.00" and the check-up text), the check-up tooltip in `main-product.liquid` | P2 | Victor (decision), pdp, source-copy (keys) | See below | Parked / after launch |
+
+**Already correct**: the plan prices, the Loop plan cards ("{{ amount }} / brushing"), and the Care Credit you earn (10 % or 20 %), which follows the payment currency. The amounts computed in the end CTA, the sticky bar and the plans table go through `snippets/kc-money.liquid`. It writes the euro by language, and any other currency in the shop money format. That is right for converted amounts. It would be wrong for a fixed euro amount passed in cents.
+
+**a) Price per brushing.** Approach: calculate it instead of writing it.
+- `button_subtext` gets an amount placeholder, for example "[price] / brushing ritual". Its two sections fill it with the plan price ÷ (Duos × 120 brushings) through the money filters, the same sum the Loop widget makes. The keys are new, so source-copy gets their names for NL and FR.
+- The "Cost per brushing" row in the plans table is calculated the same way in `product-compare-plans.liquid`, in place of the metaobject text.
+- Alternative: Victor limits the four non-EUR markets for the soft launch, and nothing changes in the theme.
+
+**b) €40 Dental Check-up Reward.** What is fixed: Terms art. 11 says "€40 in Care Credit, eenmaal per lidmaatschapsjaar", only for Year members in an EU member state. The €5 for the questionnaire and the €59 refund per Duo are also in euro. So the reward does not apply in CHF, GBP or USD, and SEK (EU) needs a converted display.
+- **Option a: €40 stays the legal amount, with the local equivalent next to it** (SEK: "€40 (≈ 4xx kr)"). Approach: the theme writes the €40 in euro and adds the amount converted at Shopify's rate, labelled as an approximation. The Loop widget stops passing 4000 as local cents. `loop-widget.js` is off-limits, so this needs Victor's OK for that file. No legal change.
+- **Option b: fixed local amounts** (for example 400 kr), with the Terms changed for each currency. Approach: one amount per currency as a setting or metaobject, which the theme reads by `cart.currency`. This needs a legal change to the Terms first, plus new copy in every language.
+- **Option c: hide the reward line outside the EU.** Approach: the theme and the Loop widget skip the check-up chip, the receipt row, the tooltip and the care-comes-back step when the market's country is not in the EU (CHF, GBP, USD). The line stays for EU markets, including SEK, which then still needs a or b.
+
+Advice: **c for CHF, GBP and USD**, because the Terms do not offer the reward there, so showing it would promise something the Terms do not give. **a for SEK**. Leave b until there is a legal reason to change the Terms. The quickest route for the soft launch remains limiting the four markets.
+
 ## Checked with no gap
 
 - Horizontal overflow: none at 393, 450, 768, 1024, 1440, 1920, 2560, Night and Day (`documentElement.scrollWidth` = viewport).
@@ -162,3 +185,4 @@ Re-checked on this branch in the NL server HTML of the dev server (127.0.0.1:929
 
 - 22 Oct: added "Status 22 Oct", with one status per row, counts and the questions for Victor. Every theme row was checked against merchant-edit `31407fb` with `git merge-base --is-ancestor`.
 - 22 Oct: row 32 (FAQ evidence links) is parked at Victor's request ("FAQ kunnen we even parkeren").
+- 22 Oct: row 38 added and parked: the price per brushing and the €40 Dental Check-up Reward in other currencies (desk, for Victor; nothing built).
