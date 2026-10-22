@@ -25,8 +25,9 @@ writer's journal; and per R18g: errors show only allowlisted codes, field paths 
 token behind nested entities stays out of a read error and the journal, and long unclosed markup is handled in
 linear time; and per R18h: a receipt's own keys are never journaled (unrequested, duplicate, wrong locale), a
 malformed GID is dropped, an HTTPError body that fails to read stays a data-free transport error, and an unexpected
-exception prints its category only; and per R18i: the SystemExit carries no context. Credentials are synthetic
-sentinels.
+exception prints its category only; and per R18i: the SystemExit carries no context; and for wave 2a: section-level settings match exact ids,
+selling-plan names, descriptions and shared groups are registered while the Subscription Name values and other
+selling-plan content stay protected (B-01), and an owner GID must match its type. Credentials are synthetic sentinels.
 """
 import contextlib
 import copy
@@ -538,6 +539,60 @@ def r18g(check):
           and ordinary[1] == {"code": "withheld (8 chars)", "field": None, "message": "withheld (16 chars)"}, ordinary)
 
 
+# ---- wave 2a: exact section ids and selling plans (metaobjects wait for the R30 rework) ------------------------
+
+def w2a_store():
+    store = base_store()
+    store["types"]["ONLINE_STORE_THEME_JSON_TEMPLATE"][0]["translatableContent"] += [
+        c("section.index.json.benefits.heading:k1", "Clean is not healthy"),
+        c("section.index.json.benefits.card_1.heading:k2", "Clean is not healthy")]
+    store["types"]["SELLING_PLAN_GROUP"] = [
+        {"resourceId": "gid://shopify/SellingPlanGroup/%s" % n, "translatableContent": [c("name", v)], "translations": {}}
+        for n, v in (("1", "60-Day Rhythm"), ("2", "60-Day Rhythm"), ("3", "60-Day Supply"))]
+    store["ids"]["gid://shopify/SellingPlan/6"] = {"resourceId": "gid://shopify/SellingPlan/6", "translatableContent": [
+        c("description", '<div class="kc-return_care">10% back</div>'), c("option1", "Year Supply"), c("billing_note", "Billed yearly")],
+        "translations": {}}
+    return store
+
+
+def w2a_plan():
+    return {"lang": "nl", "resources": [
+        {"shopify_type": "ONLINE_STORE_THEME_JSON_TEMPLATE", "owner": "templates/index.json", "items": [
+            item("w2sec", "Clean is not healthy", "Schoon is niet gezond", hint=["benefits", "heading"])]},
+        {"shopify_type": "SELLING_PLAN_GROUP", "owner": "name: 60-Day Rhythm", "items": [item("w2g", "60-Day Rhythm", "60-dagenritme", key="name")]},
+        {"shopify_type": "SELLING_PLAN_GROUP", "owner": "name: 60-Day Supply", "items": [item("w2gs", "60-Day Supply", "60-dagenvoorraad", key="name")]},
+        {"shopify_type": "SELLING_PLAN", "owner": "gid://shopify/SellingPlan/6", "items": [
+            item("w2d", '<div class="kc-return_care">10% back</div>', '<div class="kc-return_care">10% terug</div>', kind="direct", key="description"),
+            item("w2o", "Year Supply", "Jaarvoorraad", kind="direct", key="option1"),
+            item("w2b", "Billed yearly", "Jaarlijks gefactureerd", kind="direct", key="billing_note")]},
+        {"shopify_type": "SELLING_PLAN", "owner": "gid://shopify/MediaImage/3", "items": [item("w2x", "A duo", "Een duo", kind="direct", key="alt")]},
+    ]}
+
+
+def wave2a(check):
+    with tempfile.TemporaryDirectory() as sub:
+        code, text = run(["--lang", "nl", "--theme-id", THEME], Fake(w2a_store()), sub, w2a_plan(), bindings=None)
+        d = json.load(open(os.path.join(sub, "dry-run-nl.json"), encoding="utf-8")) if code == 0 else {"ops": [], "rows": []}
+    ops = {(o["resource"], o["key"]): o for o in d["ops"]}
+    res = {}
+    for r in d["rows"]:
+        res.setdefault(r["id"], r["result"])
+    check("wave 2a: dry run exits 0", code == 0, text)
+    check("wave 2a: a section-level setting matches its exact ids, not its blocks' settings",
+          (IDX, "section.index.json.benefits.heading:k1") in ops and (IDX, "section.index.json.benefits.card_1.heading:k2") not in ops)
+    check("wave 2a: every selling-plan group with the EN name gets the translation",
+          ("gid://shopify/SellingPlanGroup/1", "name") in ops and ("gid://shopify/SellingPlanGroup/2", "name") in ops)
+    check("wave 2a (B-01): the Subscription Name values stay untranslated",
+          ("gid://shopify/SellingPlanGroup/3", "name") not in ops and ("gid://shopify/SellingPlan/6", "option1") not in ops
+          and res.get("w2gs") == "not written" and res.get("w2o") == "not written", res)
+    check("wave 2a: a selling-plan description is registered whole",
+          ops.get(("gid://shopify/SellingPlan/6", "description"), {}).get("value") == '<div class="kc-return_care">10% terug</div>')
+    check("wave 2a: selling-plan content other than name, description and options is protected",
+          ("gid://shopify/SellingPlan/6", "billing_note") not in ops and res.get("w2b") == "not written")
+    check("wave 2a: an owner GID of another type is refused", res.get("w2x") == "not written"
+          and ("gid://shopify/MediaImage/3", "alt") not in ops)
+
+
 def encoded_token():
     return "".join("%%%02X" % ord(ch) for ch in TOKEN)
 
@@ -739,7 +794,8 @@ def main():
               res("hero") == "overwrite" and ops[("register", IDX, "section.hero.heading:ab")]["current"]["value"] == "Uw mond heeft een ritme")
         check("basic: card_2 by its hints", ("register", IDX, "section.cards.card_2.title:cc") in ops and ("register", IDX, "section.cards.card_1.title:bb") not in ops)
         check("basic: held item left out", "held" not in rows)
-        check("basic: Loop selling plan skipped", res("sp") == "skipped")
+        check("wave 2a: a selling plan's name is registered (no longer skipped for Loop)", res("sp") == "new"
+              and ("register", "gid://shopify/SellingPlan/5", "name") in ops)
         check("basic: split body assembled in order",
               ops.get(("register", "gid://shopify/Page/7", "body_html"), {}).get("value") == "<p>Eerste blok.</p><p>Tweede blok.</p>")
         check("basic: bound metaobject field through the product's reference", ("register", "gid://shopify/Metaobject/700", "role") in ops
@@ -1026,6 +1082,7 @@ def main():
             check("F10 a malformed page stops with a clean message", code == 2 and "malformed" in text, text)
 
     r18e(check)
+    wave2a(check)
     print("%d failures" % len(failures))
     sys.exit(1 if failures else 0)
 

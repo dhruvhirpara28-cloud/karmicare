@@ -41,9 +41,8 @@ LATER = {
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
 GATES = ("legal-review", "pending-claim-review")
-# Loop translates selling plans and groups itself (Settings > Multilingual content, PDP lane 21 Oct): register.py skips them.
-LOOP_TYPES = ("SELLING_PLAN", "SELLING_PLAN_GROUP")
-LOOP_HOLD = "Loop owns selling-plan translations (register.py skips them)"
+# Selling-plan names and descriptions are Shopify translations (Loop's Multilingual content has no field for them,
+# checked 22 Oct); since wave 2 register.py writes them, keeping the Subscription Name values protected (B-01).
 
 # Inventory field -> Shopify translatable content key, per Shopify type (TranslatableResourceType, 2026-10)
 FIELD_KEYS = {
@@ -195,8 +194,6 @@ def build(lang, payload, sources, registered=None, holds=None, released=()):
         hold = list(gates)
         if batch not in FIRST_WAVE_BATCHES:
             hold.append(LATER.get(batch, batch))
-        if stype in LOOP_TYPES:
-            hold.append(LOOP_HOLD)
         if eid in holds:
             hold.append("review hold (holds.json): " + holds[eid])
         rid = "%s|%s" % (stype, owner)
@@ -308,7 +305,7 @@ def markdown(results, sources, args):
               "| `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; the field the inventory names, or a reviewed binding in `bindings.json` (the dry run proposes them); then the EN sha1 |",
               "| `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |",
               "| `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |",
-              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | none | held here: Loop owns their translations |",
+              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | the plan's GID; every group with the EN name | name, description and options only; the Subscription Name values '60-Day Supply' / 'Year Supply' stay untranslated (B-01) |",
               "| Existing translations | `translations(locale: \"nl\" / \"fr\")` on each resource | part of the approval: a translation edited after the dry run stops the write |",
               "", "Write: rebuild the snapshot and compare its checksum, re-read each resource right before its mutation, then "
               "`translationsRegister(resourceId, translations)` with `{key, locale, value, translatableContentDigest}` in chunks of 50; "

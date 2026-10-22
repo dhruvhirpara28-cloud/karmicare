@@ -8,7 +8,7 @@ Regenerate right before a registration run: the plan is only as current as these
 
 ## NL
 
-2560 payload entries become 1865 registration items on 81 Shopify resources; 601 are first wave, 1264 held back.
+2560 payload entries become 1865 registration items on 81 Shopify resources; 620 are first wave, 1245 held back.
 
 ### Items per Shopify type
 
@@ -25,8 +25,8 @@ Regenerate right before a registration run: the plan is only as current as these
 | `ONLINE_STORE_THEME_SECTION_GROUP` | 2 | 6 | 6 | 0 |
 | `PAGE` | 8 | 27 | 0 | 27 |
 | `PRODUCT` | 9 | 39 | 39 | 0 |
-| `SELLING_PLAN` | 13 | 15 | 0 | 15 |
-| `SELLING_PLAN_GROUP` | 4 | 4 | 0 | 4 |
+| `SELLING_PLAN` | 13 | 15 | 15 | 0 |
+| `SELLING_PLAN_GROUP` | 4 | 4 | 4 | 0 |
 | `SHOP` | 1 | 2 | 2 | 0 |
 | `SHOP_POLICY` | 7 | 459 | 0 | 459 |
 
@@ -35,10 +35,10 @@ Regenerate right before a registration run: the plan is only as current as these
 | Batch | Items | First wave |
 |---|---:|---:|
 | `batch-01-homepage` | 170 | 170 |
-| `batch-02-pdp` | 373 | 360 |
+| `batch-02-pdp` | 373 | 373 |
 | `batch-03-header-footer` | 14 | 14 |
 | `batch-04-legal` | 605 | 0 |
-| `batch-05-products` | 60 | 54 |
+| `batch-05-products` | 60 | 60 |
 | `batch-06-content-pages` | 22 | 0 |
 | `batch-07-collections-blog` | 618 | 0 |
 | `batch-08-system` | 3 | 3 |
@@ -52,7 +52,6 @@ Regenerate right before a registration run: the plan is only as current as these
 | legal-review | 605 |
 | partial field: n of m blocks held or untranslated | 291 |
 | content pages (batch 06), not in the first-wave list | 22 |
-| Loop owns selling-plan translations (register.py skips them) | 19 |
 
 ### Not registered at all
 
@@ -77,6 +76,17 @@ Regenerate right before a registration run: the plan is only as current as these
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/index.json` | 168 | match |
 | `SHOP` | `shop` | 2 | direct |
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/product.subscription-item.json` | 138 | match |
+| `SELLING_PLAN_GROUP` | `name: Subscribe and Save` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712387363197` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712387330429` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712387297661` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712192164221` | 1 | direct |
+| `SELLING_PLAN_GROUP` | `name: 60-Day Rhythm` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712106115453` | 2 | direct |
+| `SELLING_PLAN_GROUP` | `name: The Karmicare Year` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712155431293` | 2 | direct |
+| `SELLING_PLAN_GROUP` | `name: Yearly Plan` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712370356605` | 1 | direct |
 | `PRODUCT` | `karmicare-biorhythmic-oral-care-system` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/69271648010621` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/69248905085309` | 1 | direct |
@@ -105,12 +115,18 @@ Regenerate right before a registration run: the plan is only as current as these
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/27295901057206` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/27295901221046` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/27295901876406` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456601981` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712460992893` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456634749` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456667517` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456700285` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456733053` | 1 | direct |
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/list-collections.json` | 1 | match |
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/password.json` | 2 | match |
 
 ## FR
 
-2559 payload entries become 1851 registration items on 79 Shopify resources; 577 are first wave, 1274 held back.
+2559 payload entries become 1851 registration items on 79 Shopify resources; 595 are first wave, 1256 held back.
 
 ### Items per Shopify type
 
@@ -127,8 +143,8 @@ Regenerate right before a registration run: the plan is only as current as these
 | `ONLINE_STORE_THEME_SECTION_GROUP` | 2 | 4 | 3 | 1 |
 | `PAGE` | 8 | 25 | 0 | 25 |
 | `PRODUCT` | 9 | 39 | 39 | 0 |
-| `SELLING_PLAN` | 13 | 14 | 0 | 14 |
-| `SELLING_PLAN_GROUP` | 4 | 4 | 0 | 4 |
+| `SELLING_PLAN` | 13 | 14 | 14 | 0 |
+| `SELLING_PLAN_GROUP` | 4 | 4 | 4 | 0 |
 | `SHOP` | 1 | 2 | 2 | 0 |
 | `SHOP_POLICY` | 7 | 459 | 0 | 459 |
 
@@ -137,10 +153,10 @@ Regenerate right before a registration run: the plan is only as current as these
 | Batch | Items | First wave |
 |---|---:|---:|
 | `batch-01-homepage` | 168 | 160 |
-| `batch-02-pdp` | 371 | 352 |
+| `batch-02-pdp` | 371 | 364 |
 | `batch-03-header-footer` | 11 | 10 |
 | `batch-04-legal` | 603 | 0 |
-| `batch-05-products` | 59 | 53 |
+| `batch-05-products` | 59 | 59 |
 | `batch-06-content-pages` | 20 | 0 |
 | `batch-07-collections-blog` | 617 | 0 |
 | `batch-08-system` | 2 | 2 |
@@ -154,7 +170,6 @@ Regenerate right before a registration run: the plan is only as current as these
 | legal (batch 04) | 603 |
 | partial field: n of m blocks held or untranslated | 301 |
 | content pages (batch 06), not in the first-wave list | 20 |
-| Loop owns selling-plan translations (register.py skips them) | 18 |
 | review hold (holds.json): keep the current FR ('données publiées') until the wording is reviewed | 1 |
 | review hold (holds.json): keep the current FR ('pour praticien') until the wording is reviewed | 1 |
 | review hold (holds.json): keep the current FR role titles until the person's approved title is checked | 1 |
@@ -192,6 +207,17 @@ Regenerate right before a registration run: the plan is only as current as these
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/index.json` | 158 | match |
 | `SHOP` | `shop` | 2 | direct |
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/product.subscription-item.json` | 126 | match |
+| `SELLING_PLAN_GROUP` | `name: Subscribe and Save` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712387363197` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712387330429` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712387297661` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712192164221` | 1 | direct |
+| `SELLING_PLAN_GROUP` | `name: 60-Day Rhythm` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712106115453` | 2 | direct |
+| `SELLING_PLAN_GROUP` | `name: The Karmicare Year` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712155431293` | 1 | direct |
+| `SELLING_PLAN_GROUP` | `name: Yearly Plan` | 1 | match |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712370356605` | 1 | direct |
 | `PRODUCT` | `karmicare-biorhythmic-oral-care-system` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/69271648010621` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/69248905085309` | 1 | direct |
@@ -219,6 +245,12 @@ Regenerate right before a registration run: the plan is only as current as these
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/27295901057206` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/27295901221046` | 1 | direct |
 | `MEDIA_IMAGE` | `gid://shopify/MediaImage/27295901876406` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456601981` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712460992893` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456634749` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456667517` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456700285` | 1 | direct |
+| `SELLING_PLAN` | `gid://shopify/SellingPlan/712456733053` | 1 | direct |
 | `ONLINE_STORE_THEME_JSON_TEMPLATE` | `templates/password.json` | 2 | match |
 
 ## Fetched at run time by register.py (API 2026-10; nothing stored but the reports)
@@ -234,7 +266,7 @@ This file is an offline planning summary, not an approval. The approval is the l
 | `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; the field the inventory names, or a reviewed binding in `bindings.json` (the dry run proposes them); then the EN sha1 |
 | `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |
 | `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |
-| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | none | held here: Loop owns their translations |
+| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | the plan's GID; every group with the EN name | name, description and options only; the Subscription Name values '60-Day Supply' / 'Year Supply' stay untranslated (B-01) |
 | Existing translations | `translations(locale: "nl" / "fr")` on each resource | part of the approval: a translation edited after the dry run stops the write |
 
 Write: rebuild the snapshot and compare its checksum, re-read each resource right before its mutation, then `translationsRegister(resourceId, translations)` with `{key, locale, value, translatableContentDigest}` in chunks of 50; every attempt and result goes to `live/journal-<lang>.jsonl`. Never-translate translations (`handle_item`, `selling_plan_id`, Subscription Name values) are removed only with `--remove-never` in both the dry run and the write. Handles are not in the payloads.
