@@ -96,6 +96,8 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 
 Task `task_f75b35ea2400`, dispatch `ctx_fc1123304bbe`, run `run_32dd5602b983`. Brief: `.coordinator/BRIEF-CR1.md`. Deliverable: `docs/claims/CLINICAL-REVIEW.md` (per-claim verdicts, summary at the top). These verdicts are advice: Victor decides, and regulatory and legal sign-off is separate.
 
+**22 Oct, Victor: publication released, review later.** Victor chose to publish the NL/FR translations of the current EN claims now (“Huidige EN vrijgeven, review later”), so NL and FR say what the live EN says, and to do the claim review (K1–K7) later in EN, NL and FR at once. The practitioner quotes may be translated too (“citaten mag je ook vertalen, zij gaan niet goedkeuren”). `registration/releases.json` records it: the builder no longer holds an item on `pending-claim-review`; the statuses stay, so the review can still be done. Legal review stays a gate.
+
 ## 1. Preflight
 
 | Check | Result |
