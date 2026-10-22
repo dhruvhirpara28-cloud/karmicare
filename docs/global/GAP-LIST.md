@@ -4,9 +4,9 @@
 
 ## Status 22 Oct
 
-merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
+merchant-edit is `8fa9ad7` (updated from `31407fb`). It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
 
-**Counts (42 rows):** In merchant-edit 15 · Done in Admin (live) 2 · Ready to land 1 · In progress 3 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
+**Counts (42 rows):** In merchant-edit 16 · Done in Admin (live) 2 · Ready to land 0 · In progress 3 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
 
 | Id | Status | Proof / note |
 |---|---|---|
@@ -50,7 +50,7 @@ Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need
 | LY-01 | Dropped | Not a gap |
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
 | LY-03 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
-| TY-01 (G-7) | Ready to land | `9c2fa98` (child global-type), merged into this branch, reported as needs review (Astra). Contents: the `b`/`strong` rule in `assets/base.css` (headings excluded), `--font-body-weight-bold` = `var(--font-600-weight)`, and the dead `body_font_weight` setting removed (`git grep` 0 hits). Measured on preview `189947838845`, EN/NL/FR, 390/1440, Day/Night: body bold goes from 700 to 600; headings, buttons and buybox are unchanged. One side effect: the Welcome Kit tooltip `<b>` goes from 900 to 600. Open for Victor: the PDP buybox lead-ins stay 700 (their own rule, `kc-buybox.css:65`); should the tooltip bolds stay 700? Report: `docs/global-type/REPORT.md`. |
+| TY-01 (G-7) | In merchant-edit | `9c2fa98` + `4920b8f` + `09b3622` (child global-type) landed as global `b134417`: integration `4ac2c58`, merchant-edit `8fa9ad7`, Astra R21–R21c approve, Theme Check 0 errors. Contents: the `b`/`strong` rule in `assets/base.css` (headings excluded), `--font-body-weight-bold` = `var(--font-600-weight)`, and the dead `body_font_weight` setting removed (`git grep` 0 hits). Measured on preview `189947838845`, EN/NL/FR, 390/1440, Day/Night: body bold goes from 700 to 600; headings, buttons and buybox are unchanged. One side effect: the Welcome Kit tooltip `<b>` goes from 900 to 600. R21 and R21b fixes merged (`4920b8f`, `09b3622`; branch `b134417`). Victor, 22 Oct: the buybox goes to 600 too ("ja graag ook in buybox naar 600"). That is a follow-up in `assets/kc-buybox.css:65-68` (PDP-lane file; the landing desk picks the writer). Victor, 22 Oct: the Welcome Kit tooltip, product titles included, stays at 600. Measured: 600 on the TY-01 preview `189947838845`; the live theme `187295564157` still shows 900 until merchant-edit ships. Report: `docs/global-type/REPORT.md`. |
 | A11Y-01, A11Y-02, A11Y-03 (3 rows) | In merchant-edit | `361a06c`, landed with `a8f931d`, source-copy `59c281e` and FR `e883509` (integration `7b8d33c`, merchant-edit `2ef9b5c`). Astra R19: no regression. On :9298, EN, NL and FR return 200, the legal pages have one `main`, and the filter ids are scoped per position. |
 | PDP end CTA "Begin your 60-Day Rhythm" | In merchant-edit | `361a06c`, as above |
 | LC-01, LC-02, LC-03, LC-04 (4 rows, G-9) | Waiting for Victor | Country selector bugs (question 2) |
