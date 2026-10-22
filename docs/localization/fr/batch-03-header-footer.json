@@ -16,7 +16,7 @@
  },
  "flag_counts": {
   "legal-review": 5,
-  "pending-claim-review": 2,
+  "pending-claim-review": 1,
   "pending-en-review": 1,
   "source-defect": 1,
   "wording-adapted": 2
@@ -31,10 +31,8 @@
    "en_sha1": "b4f5fb0b87d8d23a5dab8de173c2d065f017ef83",
    "fr": "LIVRAISON OFFERTE & SATISFAIT OU REMBOURSÉ 60 JOURS POUR LES MEMBRES · FABRIQUÉ EN BELGIQUE · DEPUIS 2017",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim C103 pending (est. 2017: the date has no source in the repo); EN is Victor's short line of 21 Oct; 'SATISFAIT OU REMBOURSÉ 60 JOURS' kept for '60-DAY GUARANTEE' as elsewhere in FR, because a bare 'garantie' reads as the legal warranty; 'EST.' as 'DEPUIS'; 'membres' as elsewhere in FR",
+   "flags": [],
+   "notes": "claim C103 confirmed by Victor 21 Oct ('EST. 2017 is bevestigd', CLAIMS-REVIEW.md), so no pending-claim-review; EN is Victor's short line of 21 Oct; 'SATISFAIT OU REMBOURSÉ 60 JOURS' kept for '60-DAY GUARANTEE' as elsewhere in FR, because a bare 'garantie' reads as the legal warranty; 'EST.' as 'DEPUIS'; 'membres' as elsewhere in FR",
    "source_status": "corrected"
   },
   {
