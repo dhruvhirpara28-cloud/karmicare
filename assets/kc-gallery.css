@@ -7,9 +7,14 @@ media-gallery.kc-gallery-fit .product-media-container video {
 }
 
 /* First gallery item, the hero animation: poster and video 1.2x inside their unchanged frame, so the
-   animation fills it (Victor, 20 Oct). Anchored at the top centre: the toothbrush heads rise close to the
-   top edge, the free space is below them (the floor shadow). Thumbnails, the other items and the end
-   CTA's hero stay as they are. */
+   animation fills it (Victor, 20 Oct). Across the whole animation its visible pixels span 5.8% to 87.1%
+   of the video height (the brush heads at the start, the floor shadow at the bottom).
+   - Below 750 the frame is square and the video sits at its top, so the free space is below: scaled
+     from the top, the animation lands at 6.2% to 92.9% of the frame.
+   - From 750 the video fills the frame's height. Scaled from 29%, it lands at 1.2% to 98.7%: nothing
+     is cut at the top or at the thumbnail strip. The top (a0c2c83) cut the tube bases there; the
+     centre (374aaad) cut the brush heads.
+   Thumbnails, the other items and the end CTA's hero stay as they are. */
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
   overflow: hidden;
 }
@@ -18,6 +23,13 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
   transform: scale(1.2);
   transform-origin: center top;
+}
+
+@media screen and (min-width: 750px) {
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
+    transform-origin: center 29%;
+  }
 }
 
 media-gallery.kc-gallery-fit {
