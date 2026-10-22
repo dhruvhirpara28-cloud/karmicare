@@ -47,7 +47,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 29 | Parked / after launch | Homepage and utopia own it |
 | 30 | Dropped | Cut at the viewport edges by design |
 | 31 | Waiting for Victor | See below |
-| 32 | Waiting for Victor | See below |
+| 32 | Parked / after launch | Victor, 22 Oct: "FAQ kunnen we even parkeren". The links keep `href="#"` for now; the options stay below for later |
 | 33 | In progress | The plan is ready, but nothing is built. It waits for the desk's go |
 | 34 | In progress | Still at `chronobiology-clock-karmicare.liquid:102` in merchant-edit. Waiting for the desk to say who changes it: homepage or pdp |
 | 35a | In merchant-edit | Clock callouts are `h3.h4`, homepage `75de9a4` |
@@ -55,11 +55,11 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 36 | Parked / after launch | Info; recheck after 33–35 |
 | 37 | Parked / after launch | Loop widget, off-limits |
 
-**Counts (39 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 2 · parked / after launch 17 · dropped 8.
+**Counts (39 lines)**: in merchant-edit 9 · ready to land 0 · in progress 3 · waiting for Victor 1 · parked / after launch 18 · dropped 8.
 
 ### Waiting for Victor
 
-**Row 32: what should the 8 evidence links in the FAQ do while they have no document?** Today they point to `#`. Their text: View assessment summary, View notification, Read the opinion, View report, Read our science, See every document, Request the evidence pack, Practitioner evidence pack. The links sit in the FAQ content in Shopify admin, not in the theme.
+**Row 32 (parked by Victor on 22 Oct; the options are kept for when it comes back): what should the 8 evidence links in the FAQ do while they have no document?** Today they point to `#`. Their text: View assessment summary, View notification, Read the opinion, View report, Read our science, See every document, Request the evidence pack, Practitioner evidence pack. The links sit in the FAQ content in Shopify admin, not in the theme.
 - a) You fill in the real document links in admin. No theme change.
 - b) The theme shows them as "Coming soon": visible but not clickable, with the same tooltip as in the header and the research section. No new copy.
 - c) The theme hides each link until it has a real address.
@@ -145,7 +145,7 @@ Re-checked on this branch in the NL server HTML of the dev server (127.0.0.1:929
 
 | # | Observed | Cause | P | Owner | Plan | Status |
 |---|---|---|---|---|---|---|
-| 32 | 8 links with `href="#"` in the FAQ evidence content: VIEW ASSESSMENT SUMMARY, VIEW NOTIFICATION, READ THE OPINION, VIEW REPORT, READ OUR SCIENCE, "See every document →", "Request the evidence pack…" (`.rda-link`), "Practitioner evidence pack and samples available →". | The links are HTML in the product FAQ metaobjects (`custom.product_faq` → `section_content`, `snippets/product-faq.liquid:25`), not theme markup. Same source as B-06. | P1 | Victor | a) Victor fills in the real document URLs in admin; no theme change. b) Shared Coming soon state (`snippets/kc-coming-soon.liquid`, as in the header and research CTA): `product-faq.liquid` turns `href="#"` inside `section_content` into a non-clickable link with the `kc.general.coming_soon` tooltip; no new copy. c) Hide them: `product-faq.liquid` drops `href="#"` links from `section_content` until a URL is set. | Decision |
+| 32 | 8 links with `href="#"` in the FAQ evidence content: VIEW ASSESSMENT SUMMARY, VIEW NOTIFICATION, READ THE OPINION, VIEW REPORT, READ OUR SCIENCE, "See every document →", "Request the evidence pack…" (`.rda-link`), "Practitioner evidence pack and samples available →". | The links are HTML in the product FAQ metaobjects (`custom.product_faq` → `section_content`, `snippets/product-faq.liquid:25`), not theme markup. Same source as B-06. | P1 | Victor | a) Victor fills in the real document URLs in admin; no theme change. b) Shared Coming soon state (`snippets/kc-coming-soon.liquid`, as in the header and research CTA): `product-faq.liquid` turns `href="#"` inside `section_content` into a non-clickable link with the `kc.general.coming_soon` tooltip; no new copy. c) Hide them: `product-faq.liquid` drops `href="#"` links from `section_content` until a URL is set. | Parked (Victor, 22 Oct) |
 | 33 | Gallery thumbnails 2–7: `aria-describedby="Thumbnail-…__main-N"` points to no id. | The id is built with `{%- capture thumbnail_id -%}` and renders with a trailing newline (`id="Thumbnail-…-2\n"`), so the reference never matches (`snippets/product-media-gallery.liquid:342`, `:404`). The hero thumbnail uses `assign` and is fine. | P2 | pdp | Build `thumbnail_id` with `assign` (or `\| strip`) in both places. | Open |
 | 34 | chronobiology-clock: the slider's `aria-describedby="clock-help-…"` has no target (home and PDP). | No element with that id, and no help-text key exists (`sections/chronobiology-clock-karmicare.liquid:102`). | P2 | homepage / pdp | Remove the attribute (no copy needed), or add a visually hidden help line, which needs approved copy. Shared section: agree with the homepage lane who changes it. | Open (coordinate): still present after homepage 419fbfc (merchant-edit 75de9a4, line 102) |
 | 35 | Heading jumps: h2 → h5 in the buybox (NL "Wat je zult voelen…", "Het Karmicare-effect", `snippets/treatment-journey.liquid:19`, `:69`); h2 → h4 in the clock callouts (`chronobiology-clock-karmicare.liquid`). | Tag chosen for size: `base.css` sizes the `h5` element itself. | P2 | pdp / homepage | `<h5 class="kc-journey-title">` → `<h3 class="kc-journey-title h5">` (Dawn's `.h5` class keeps the size); before/after shots to show nothing moves. | Clock part fixed by homepage 419fbfc (callouts `h3.h4`, merchant-edit 75de9a4). Buybox h2 → h5: open (pdp) |
@@ -161,3 +161,4 @@ Re-checked on this branch in the NL server HTML of the dev server (127.0.0.1:929
 ## Changelog
 
 - 22 Oct: added "Status 22 Oct", with one status per row, counts and the questions for Victor. Every theme row was checked against merchant-edit `31407fb` with `git merge-base --is-ancestor`.
+- 22 Oct: row 32 (FAQ evidence links) is parked at Victor's request ("FAQ kunnen we even parkeren").
