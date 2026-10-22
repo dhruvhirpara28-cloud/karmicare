@@ -4,9 +4,9 @@
 
 ## Status 22 Oct
 
-merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
+merchant-edit is `2ef9b5c` (updated from `31407fb`). It isn't pushed yet, so nothing below is live. "In merchant-edit" was checked with `git merge-base --is-ancestor <sha> merchant-edit`.
 
-**Counts (40 rows):** In merchant-edit 11 · Ready to land 4 · In progress 4 · Waiting for Victor 12 · Parked / after launch 7 · Dropped 2.
+**Counts (41 rows):** In merchant-edit 15 · Done in Admin (live) 2 · Ready to land 0 · In progress 4 · Waiting for Victor 11 · Parked / after launch 7 · Dropped 2.
 
 | Id | Status | Proof / note |
 |---|---|---|
@@ -25,10 +25,19 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | FT-04 | In merchant-edit | `95b56d6` |
 | FT-05 | Parked / after launch | Handed to the Utopia lane; its report has the status |
 | FT-06 (G-2), theme part | In merchant-edit | `95b56d6`: `#` links show Coming soon |
-| FT-06, Admin links | Waiting for Victor | Shop Karmicare and Contact targets (question 5) |
+| FT-06, Admin links | Done in Admin (live) | Victor, 22 Oct. Read back on the storefront: Shop Karmicare → `/products/karmicare-biorhythmic-oral-care-system`, Contact → `/pages/contact`, Articles → `/blogs/news`. Why Karmicare and nHAp Technology stay `#`. They show Coming soon only once `95b56d6` (in merchant-edit) is live. |
 | FT-07 (G-3) | In merchant-edit | `4954820` |
 | FT-08 (G-4) | In merchant-edit | `4954820` |
-| FT-09 | Waiting for Victor | Menu name (question 6) |
+| FT-09 | Done in Admin (live) | Victor, 22 Oct: renamed to "Why hydroxyapatite", linked to the article `/blogs/news/nano-hydroxyapatite`. Victor edited the article the same day. Changed: the SEO title (typo fixed, keyword first), the meta description, and three decay/sensitivity sentences plus heading 4 (now "helps protect …"). Read back on the storefront. Victor approved it for publication as it is. The following were left in on his decision:
+- heading 3 "Reduces …"
+- in the intro: "medical marvel for better teeth, bones and overall health"
+- "chemicals that prevent natural healing"
+- "Swap fluoride for nano HAp"
+- "first discovered by NASA"
+- "nontoxic"
+
+Victor hid the near-duplicate twin article `nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` and added a URL redirect to `/blogs/news/nano-hydroxyapatite`. The redirect was tested on EN, `/nl` and `/fr` (all three redirect and return 200). |
+| LY-04 | Waiting for Victor | Page title suffix (question 9) |
 | FT-10 | Parked / after launch | Legal text is kept for launch |
 | FT-11 | In merchant-edit | "Belgian product" is in merchant-edit `sections/footer-group.json` (source-copy) |
 | FT-12 | In progress | Landing desk: registration |
@@ -41,8 +50,8 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | LY-02 | Parked / after launch | Handed to the Utopia lane |
 | LY-03 | Waiting for Victor | Sticky card overlaps, G-10 (question 3) |
 | TY-01 (G-7) | In progress | Child global-type (status 22 Oct, not committed yet). Done: the `b`/`strong` rule in `assets/base.css` (headings excluded); `--font-body-weight-bold` = `var(--font-600-weight)` in `layout/theme.liquid`; the dead `body_font_weight` removed from `config/settings_schema.json`; Theme Check 0 errors. "Before" measured at 700. Open: the rendered "after" check on preview `189947838845` (390/1440, Day/Night, EN/NL/FR, cart drawer), then one commit and Ready to land. |
-| A11Y-01, A11Y-02, A11Y-03 (3 rows) | Ready to land | `361a06c`, inside `466f1b9`, reported 21 Oct. The landing desk lands it with source-copy `6500a4a` after the FR follow-up. Astra R19: no regression. |
-| PDP end CTA "Begin your 60-Day Rhythm" | Ready to land | `361a06c`, as above |
+| A11Y-01, A11Y-02, A11Y-03 (3 rows) | In merchant-edit | `361a06c`, landed with `a8f931d`, source-copy `59c281e` and FR `e883509` (integration `7b8d33c`, merchant-edit `2ef9b5c`). Astra R19: no regression. On :9298, EN, NL and FR return 200, the legal pages have one `main`, and the filter ids are scoped per position. |
+| PDP end CTA "Begin your 60-Day Rhythm" | In merchant-edit | `361a06c`, as above |
 | LC-01, LC-02, LC-03, LC-04 (4 rows, G-9) | Waiting for Victor | Country selector bugs (question 2) |
 | Button capitals (G-8, `BUTTON-CASE.md`) | Waiting for Victor | Question 1 |
 
@@ -85,6 +94,7 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
    - a. In the Admin menu `company`, point Shop Karmicare to `/products/karmicare-biorhythmic-oral-care-system` and Contact to `/pages/contact`. The theme then shows them as links instead of Coming soon.
    - b. Keep Coming soon.
    - **Advice: a.**
+   - **Victor, 22 Oct:** Articles links to the blog (`/blogs/news`) too; Victor makes the change in Admin. Note: those 9 posts are from 2024, and some of them (nootropics, "avoid fluoride", whitening) haven't been checked against the brand and cosmetic-claim rules.
 6. **Menu name (FT-09).** The footer item "Why use hydroxapatite" has a typo and contains the banned word "use".
    - a. Rename it in Admin to "Why hydroxyapatite".
    - b. Keep it.
@@ -93,6 +103,10 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
    - a. Keep Professionals. It matches the homepage section and "Request a practitioner sample".
    - b. Rename it to Atlas in the Admin menu.
    - **Advice: a**, unless Atlas is the newer name.
+9. **Page title suffix (LY-04).** `layout/theme.liquid:25` adds " – KARMICARE" to every title that doesn't already contain the shop name. The PDP SEO title is "Fluoride-Free Nano-Hydroxyapatite Toothpaste | Awake & Asleep", so the browser title becomes 73 characters, and Google cuts it around 60. Google already shows "Karmicare" as the site name above the result.
+   - a. Skip the suffix when the SEO title already has its own " | " brand part. One condition, in this lane.
+   - b. Keep it.
+   - **Advice: a.**
 8. **Phone logo (HD-04, G-11).** In Figma (393 px), the logo is on the left, with BEGIN NOW and the menu button on the right. The theme centres the logo (`mobile_logo_position: center`), and you tuned that nav on localhost (NV-07, NV-08).
    - a. Keep it centred.
    - b. Move the logo left with one setting in `header-group.json`. Dawn keeps the menu button on the left, so this only moves the logo.
@@ -109,6 +123,8 @@ merchant-edit is `31407fb`. It isn't pushed yet, so nothing below is live. "In m
 | 2026-10-21 | Built A11Y-01 (shop name as hidden link text, SVG `aria-hidden`), A11Y-02 (filter ids scoped per `localPosition`), A11Y-03 (legal TOC `main` → `div`); PDP end button "Begin your 60-Day Rhythm" (template; EN source row requested from source-copy). |
 | 2026-10-21 | Astra R19 on `361a06c`: no regression. Added LC-01..LC-04 (older country-selector keyboard and id bugs, R19-02..05) as G-9. Report: `global-nav/docs/runtime-review/R19-GLOBAL-A11Y-ASTRA.md`. |
 | 2026-10-22 | Added the "Status 22 Oct" block: one status per row against merchant-edit `31407fb`, the counts, and the 8 open questions for Victor in words. New ids: G-8 (button capitals), G-10 (CK-04 and LY-03), G-11 (HD-04). No theme change. |
+| 2026-10-22 | A11Y-01..03 and the PDP end CTA moved to In merchant-edit (`361a06c` landed, merchant-edit `2ef9b5c`). Counts: In merchant-edit 15, Ready to land 0. |
+| 2026-10-22 | Victor changed the Company menu in Admin: FT-06 Admin links and FT-09 are done, read back on the storefront. The new PDP title and SEO fields were checked on the storefront (title, meta description, og:title, H1, JSON-LD). Added LY-04 (title suffix, question 9) and the rewrite note for the hydroxyapatite article. |
 
 Branch `karmicare/soft-launch-global` @ `1c01dc5`. Compared: the integration preview `189882925437` (home, `/nl`, `/fr`, HTML checked for `Shopify.theme.id`) and the live theme, against Figma `3rOMJvQZTzyYjnCV6oggV3`: header `2928:19881` (1440) and `3027:21407` (393), announcement `2928:19882` / `3027:20793`, footer `2928:20208` (1440, Day) and `3027:21262` (393), and the footer on the Consumer Rights legal frames in `3664:39482` (`3718:25736`, 1440 Night). Figma references are under `docs/global/shots/figma/` (gitignored).
 
