@@ -572,42 +572,46 @@
         }
         return order;
       }
-      // The visitor's place in the order: { list, order, pos, last }. list names the cards, so a
-      // changed card list starts a new order; any storage failure means a random order per load.
+      // The visitor's place in the order: { list, order, pos, shown }. list names the cards, so a
+      // changed card list starts a new order; shown is the last photo that really showed, also on
+      // an earlier visit (R49e N2). Any storage failure means a random order per load.
       var storeKey = 'kc-badge-ambassadors';
       var list = paths.slice().sort().join('|');
       var state = null;
       try {
         var saved = JSON.parse(window.localStorage.getItem(storeKey));
         if (saved && saved.list === list && Array.isArray(saved.order) && saved.order.length === paths.length) {
-          state = saved;
+          state = { list: list, order: saved.order, pos: saved.pos, shown: saved.shown || null };
         }
       } catch (error) {
         state = null;
       }
-      if (!state) state = { list: list, order: shuffled(), pos: 0, last: null };
+      if (!state) state = { list: list, order: shuffled(), pos: 0, shown: null };
       // The next ambassador; a new round when this one is done
       function take() {
         if (state.pos >= state.order.length) {
-          state.order = shuffled(state.last);
+          state.order = shuffled(state.shown);
           state.pos = 0;
         }
         var path = state.order[state.pos];
         state.pos += 1;
-        state.last = path;
-        return { path: path, after: JSON.stringify(state) };
+        return path;
       }
-      var first = take();
-      var second = take();
-      // A photo counts as seen once it showed (a failed one is passed over, so it does not return
-      // every visit); the stored place moves past it
-      function remember(photo) {
+      // Stores the place past each photo that showed, failed or was skipped, so none returns every
+      // visit; a photo that never got its turn (hover, scroll away) comes first next visit
+      function save() {
         try {
-          window.localStorage.setItem(storeKey, photo.after);
+          window.localStorage.setItem(storeKey, JSON.stringify(state));
         } catch (error) {
           // Private window or blocked storage: the next load picks at random
         }
       }
+      // A failed photo does not count as shown
+      function settle(path, ok) {
+        if (ok) state.shown = path;
+        save();
+      }
+      var first = take();
       // Each photo loads once: true when it loaded, false when it failed
       var loads = {};
       function load(url) {
@@ -669,8 +673,9 @@
         active = 1 - active;
       }
 
-      // The one swap, 4s after the window opens; the window closes at 4.6s (the swap's 0.4s slide
-      // included), so a photo that loads later never comes in
+      // The one swap, 4s after the window opens; the window closes at 4.6s, so the swap's 0.4s
+      // slide ends within 5s. A photo that has not loaded by then is skipped: the first one stays
+      // and the place moves past it (R49e N1).
       function held() {
         return hovered || focused || !visible || document.hidden;
       }
@@ -683,40 +688,42 @@
         if (reducedMotion.matches || !swapTo || held()) return;
         started = true;
         var token = generation;
-        var photo = swapTo;
-        load(urlFor[photo.path]);
+        var path = swapTo;
+        load(urlFor[path]);
         timer = setTimeout(function () {
-          load(urlFor[photo.path]).then(function (ok) {
+          load(urlFor[path]).then(function (ok) {
             if (token !== generation) return;
-            if (ok) show(urlFor[photo.path]);
-            remember(photo);
+            if (ok) show(urlFor[path]);
+            settle(path, ok);
             stop();
           });
         }, 4000);
-        deadline = setTimeout(stop, 4600);
+        deadline = setTimeout(function () {
+          settle(path, false);
+          stop();
+        }, 4600);
       }
 
       // The first photo once it has loaded; after 1.5s the block's own image shows and the swap
       // brings the first ambassador in. A failed first photo is passed over for the second.
+      // The second is taken only now, so a new round avoids the photo that really showed.
       Promise.race([
-        load(urlFor[first.path]),
+        load(urlFor[first]),
         new Promise(function (resolve) {
           setTimeout(resolve, 1500, null);
         }),
       ]).then(function (ok) {
         if (stopped) return;
         if (ok) {
-          current.src = urlFor[first.path];
+          current.src = urlFor[first];
           current.classList.add('is-below');
-          remember(first);
-          swapTo = second;
-        } else if (ok === false) {
-          remember(first);
-          swapTo = second;
-        } else {
-          swapTo = first;
         }
-        if (paths.length < 2 && ok) swapTo = null;
+        if (ok === null) {
+          swapTo = first;
+        } else {
+          settle(first, ok);
+          swapTo = paths.length < 2 && ok ? null : take();
+        }
         wrap.classList.remove('is-picking');
         void current.offsetWidth;
         current.classList.remove('is-below');
