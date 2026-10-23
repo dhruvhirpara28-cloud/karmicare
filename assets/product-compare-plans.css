@@ -829,6 +829,12 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-accent-default);
 }
 
+/* Day: the light accent reaches 1.91:1 on the rows (#f2f8ff). The pressed accent, the darkest
+   blue in Day, reaches 3.67:1, above the 3:1 for a meaningful graphic (R34 B1). Night keeps it. */
+body:not(.night-mode) .plan-compare--kc .pc-yes {
+  color: var(--kc-mapped-icon-accent-default-pressed);
+}
+
 /* Info icon (16px glyph; the popover keeps its existing style) */
 .plan-compare--kc .info-tip {
   margin-left: 0;
@@ -898,6 +904,12 @@ body.night-mode .pc-kit-poptitle {
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
   background: var(--kc-mapped-text-inverse-default);
   color: var(--kc-mapped-surface-accent-default);
+}
+
+/* Day: the accent reaches 1.98:1 on the cream badge; no blue text token reaches 4.5:1 there,
+   so the heading text (15.75:1) carries it (R34 B1). Night keeps the accent. */
+body:not(.night-mode) .plan-compare--kc .pc-tag-top {
+  color: var(--kc-mapped-text-default-heading);
 }
 
 /* CTA row: KC/Button primary (featured), secondary, tertiary (first plan) */
