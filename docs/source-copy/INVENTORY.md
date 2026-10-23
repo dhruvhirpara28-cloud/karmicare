@@ -47,7 +47,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - Answer per fact.
 - *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
 
-**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end?
+**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end? **Answered 23 Oct:** Victor completed it in Admin as "— from your gums to the rest of you".
 - (a) You give the ending.
 - (b) Cut it after "peace of mind*".
 - (c) Remove the line.
@@ -892,7 +892,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 265 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#26` | metafield | You smile more* | admin-held |  |
 | 266 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#27` | metafield | — and think about it less | admin-held |  |
 | 267 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#28` | metafield | Peace of mouth, peace of mind* | admin-held |  |
-| 268 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29` | metafield | — from your gums to the | admin-held |  |
+| 268 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29` | metafield | — from your gums to the rest of you | admin-held |  |
 | 269 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#01` | metafield | Why Karmicare | admin-held |  |
 | 270 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#02` | metafield | Karmicare cares for both your mouth and your state of mind through two distinct brushing experience… | admin-held |  |
 | 271 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#03` | metafield | Ingredients | admin-held |  |
