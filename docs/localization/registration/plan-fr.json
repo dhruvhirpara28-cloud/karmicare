@@ -5,11 +5,11 @@
   "registered.json": "7967afaaf3d3",
   "holds.json": "da17e4d579fb",
   "releases.json": "1571d1e3719b",
-  "fr/batch-01-homepage.json": "bff11ee52be1",
-  "fr/batch-02-pdp.json": "7d4803d61747",
+  "fr/batch-01-homepage.json": "c403b292b6e6",
+  "fr/batch-02-pdp.json": "88a5f1686584",
   "fr/batch-03-header-footer.json": "69b845715549",
   "fr/batch-04-legal.json": "29982bddc666",
-  "fr/batch-05-products.json": "7dbfe43dbd59",
+  "fr/batch-05-products.json": "46b0822b37aa",
   "fr/batch-06-content-pages.json": "c301d04fd83b",
   "fr/batch-07-collections-blog.json": "d75c02b40ff0",
   "fr/batch-08-system.json": "d8508a10e978"
@@ -4114,7 +4114,7 @@
      "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
      "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
      "en_sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
-     "value": "<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, votre contrôle dentaire effectué en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>",
+     "value": "<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, un contrôle dentaire effectué en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -9154,38 +9154,6 @@
      }
     },
     {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.product_faq#116",
-     "en": "93.25",
-     "en_sha1": "e360baabc790f7e4765568954c4a678a6080b757",
-     "value": "93,25",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.product_faq#117",
-     "en": "72.32",
-     "en_sha1": "4409ccb6a18dbac0db7874572a31c4e5bbfd5511",
-     "value": "72,32",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#108",
      "kind": "match",
      "key": "value",
@@ -9311,6 +9279,38 @@
      "en": "· PM",
      "en_sha1": "034ea857ae30a7ef4217413eacff31b656015116",
      "value": "· soir",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#116",
+     "en": "93.25",
+     "en_sha1": "e360baabc790f7e4765568954c4a678a6080b757",
+     "value": "93,25",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#117",
+     "en": "72.32",
+     "en_sha1": "4409ccb6a18dbac0db7874572a31c4e5bbfd5511",
+     "value": "72,32",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -10111,7 +10111,7 @@
      "field": "custom.professional_testimonials#02",
      "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
      "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
-     "value": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
+     "value": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
      "gates": [],
      "hold": [],
      "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
@@ -21972,6 +21972,27 @@
       "main",
       "info_card_FnBcaN",
       "header_text"
+     ]
+    },
+    {
+     "id": "product:main/info_card_FnBcaN/body_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
+     "en": "<p>Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year. Spend Care Credit on any order.</p>",
+     "en_sha1": "b82e6df5b61ff73497387040cc4b4061dd40c7a7",
+     "value": "<p>Karmicare est un système de soin : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Votre adhésion vous reverse du Care Credit : 10 % de chaque Rythme 60 jours, 20 % de l’année Karmicare. Dépensez votre Care Credit sur n’importe quelle commande.</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "info_card_FnBcaN",
+      "body_text"
      ]
     },
     {

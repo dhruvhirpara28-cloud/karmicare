@@ -99,9 +99,6 @@
             </li>
           {%- endfor -%}
         </ul>
-        {%- if block.settings.disclaimer_text != blank -%}
-          <p class="kc-journey-disclaimer">{{ block.settings.disclaimer_text }}</p>
-        {%- endif -%}
         {%- if list_2_sorted.size > visible_items_count -%}
           <div class="kc-journey-toggle-container">
             <button class="kc-journey-toggle-btn" data-expanded="false">
@@ -111,6 +108,10 @@
               </span>
             </button>
           </div>
+        {%- endif -%}
+        {%- comment -%} The footnote closes the block, under "Read more" (Victor, 23 Oct) {%- endcomment -%}
+        {%- if block.settings.disclaimer_text != blank -%}
+          <p class="kc-journey-disclaimer">{{ block.settings.disclaimer_text }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
