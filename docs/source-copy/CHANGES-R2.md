@@ -222,3 +222,21 @@ Victor edited three admin texts: the dentist clause leaves the Year selling-plan
 | `admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond.</span |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond. |
 | `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing` | €0.42 → €0.49 | €0,49 |
+
+## 22 Oct: two more admin fixes
+
+Victor fixed `custom.product_faq#37` "Full dosep" → "Full dose" and `media.69840178020733.alt` (now "…with morning care at 06:40 and evening care at 22:00"). `batch-02-pdp` digest `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4`. NL already read this way; FR: check the alt puts the morning first.
+
+## 22 Oct: legacy product card
+
+Victor ("ok kaartje"): `product:main/info_card_FnBcaN/body_text` is now `<p>Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year. Spend Care Credit on any order.</p>`, three approved sentences (`care_comes_back` intro, `step_ritual/text` second sentence, `step_next_order/text` first sentence). FR: take the same three sentences from your existing payload. `batch-05-products` digest `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d`.
+
+## 22 Oct: slogan line-break marker (Astra R27)
+
+Contract for every language: the footer slogan is two sentences without a stop, joined by the literal marker `[[br]]` (no spaces around it, once). `sections/footer.liquid` turns it into `<br>`.
+
+| Id | EN | NL | FR |
+|---|---|---|---|
+| `footer-group:footer/slogan` | Your mouth has a rhythm[[br]]Now your oral care too | Je mond heeft een ritme[[br]]Nu je mondverzorging ook | your two sentences joined by `[[br]]` |
+
+`batch-03-header-footer` digest `742351732dabbbff2eff9cadc6858ba87284393a`. The NL/FR slogan in the admin (theme translation) is registered in the next write round.

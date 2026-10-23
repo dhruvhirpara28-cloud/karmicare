@@ -92,7 +92,7 @@
   }
 
   .km-footer-slogan {
-    max-width: 215px;
+    max-width: 286px;
     margin: 0;
     font-family: var(--kc-font-use-heading);
     font-weight: var(--font-500-weight);
@@ -577,7 +577,6 @@
     }
 
     .km-footer-slogan {
-      max-width: 286px;
       letter-spacing: var(--kc-responsive-h4-letter-spacing);
     }
 
@@ -695,7 +694,13 @@
           {%- endif -%}
 
           {%- if section.settings.slogan != blank -%}
-            <p class="km-footer-slogan">{{ section.settings.slogan }}</p>
+            {%- liquid
+              # The slogan is two lines without punctuation, so the break is marked in the text itself
+              # (R24-1, R27-1): "[[br]]" in the saved value or a translation becomes a line break, as
+              # does a saved newline or <br>. Without a marker there is no break.
+              assign slogan = section.settings.slogan | newline_to_br | replace: '[[br]]', '<br>'
+            -%}
+            <p class="km-footer-slogan">{{ slogan }}</p>
           {%- endif -%}
         </div>
 
@@ -1062,7 +1067,7 @@
       "type": "inline_richtext",
       "id": "slogan",
       "label": "Slogan Text",
-      "default": "Your mouth has a rhythm\nNow your oral care too"
+      "default": "Your mouth has a rhythm[[br]]Now your oral care too"
     },
     {
       "type": "richtext",
