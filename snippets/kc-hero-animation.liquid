@@ -88,9 +88,10 @@
               let video = panel.querySelector('video');
               if (this.motion.matches) {
                 // A panel with a still keeps it for good, also when reduced motion is switched off
-                // again (R49b B1); without one the poster stays and the video may come back
+                // again (R49b B1), and takes it over from the animated WebP of a refused autoplay
+                // (R49c B1); without one the poster stays and the video may come back
                 if (panel.dataset.still) {
-                  if (!panel.hasAttribute('data-refused')) this.fallBack(panel, panel.dataset.still);
+                  if (!panel.hasAttribute('data-still-active')) this.fallBack(panel, panel.dataset.still);
                   return;
                 }
                 video?.remove();
@@ -107,35 +108,44 @@
                 this.fallBack(panel, panel.dataset.still);
                 return;
               }
+              // A late 'playing' or refusal from a video that is no longer this panel's current one,
+              // or from a panel that has fallen back, changes nothing (R49c F2)
+              const isCurrent = (candidate) =>
+                panel.querySelector('video') === candidate && !panel.hasAttribute('data-refused');
               if (!video) {
                 panel.append(panel.querySelector('template').content.cloneNode(true));
-                video = panel.querySelector('video');
-                video.addEventListener(
+                const created = panel.querySelector('video');
+                created.addEventListener(
                   'playing',
                   () => {
+                    if (!isCurrent(created)) return;
                     clearTimeout(panel.slowTimer);
                     panel.slowTimer = null;
                     panel.classList.add('is-playing');
                   },
                   { once: true }
                 );
+                video = created;
               }
               if (panel.dataset.still && !panel.classList.contains('is-playing') && !panel.slowTimer) {
                 panel.slowTimer = setTimeout(() => this.fallBack(panel, panel.dataset.still), 3000);
               }
-              video.play()?.catch((error) => {
+              const playing = video;
+              playing.play()?.catch((error) => {
                 const fallback = panel.dataset.animated || panel.dataset.still;
-                if (error.name !== 'NotAllowedError' || !fallback) return;
+                if (error.name !== 'NotAllowedError' || !fallback || !isCurrent(playing)) return;
                 this.fallBack(panel, fallback);
               });
             });
           }
 
-          // The video stops for good for this panel and the image takes its place
+          // The video stops for good for this panel and the image takes its place; data-still-active
+          // marks that the image is the landed still (not the animated WebP of a refused autoplay)
           fallBack(panel, src) {
             clearTimeout(panel.slowTimer);
             panel.slowTimer = null;
             panel.setAttribute('data-refused', '');
+            if (src === panel.dataset.still) panel.setAttribute('data-still-active', '');
             panel.querySelector('video')?.remove();
             panel.classList.remove('is-playing');
             panel.querySelector('img').src = src;
