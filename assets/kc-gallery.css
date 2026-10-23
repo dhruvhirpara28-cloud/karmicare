@@ -6,13 +6,14 @@ media-gallery.kc-gallery-fit .product-media-container video {
   border-radius: var(--kc-shape-radius-lg);
 }
 
-/* First gallery item, the hero animation: poster and video 1.2x inside their unchanged frame, so the
-   animation fills it (Victor, 20 Oct). Across the whole animation its visible pixels span 5.8% to 87.1%
+/* First gallery item, the hero animation: poster and video scaled inside their unchanged frame, so the
+   animation fills it (Victor, 20 Oct): 1.2x below 750, 1.12x from 750. Across the whole animation its visible pixels span 5.8% to 87.1%
    of the video height (the brush heads at the start, the floor shadow at the bottom).
    - Below 750 the frame is square and the video sits at its top, so the free space is below: scaled
      from the top, the animation lands at 6.2% to 92.9% of the frame.
-   - From 750 the video fills the frame's height. Scaled from 29%, it lands at 1.2% to 98.7%: nothing
-     is cut at the top or at the thumbnail strip. The top (a0c2c83) cut the tube bases there; the
+   - From 750 the video fills the frame's height. 1.12x from 44.5% keeps the brush heads at 1.2% and
+     ends the floor shadow at 92.2%, about 40px above the thumbnail strip in a 632px frame (Victor,
+     23 Oct; 1.2x from 29% ended it at 98.7%). The top (a0c2c83) cut the tube bases there; the
      centre (374aaad) cut the brush heads.
    Thumbnails, the other items and the end CTA's hero stay as they are. */
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
@@ -28,7 +29,8 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video
 @media screen and (min-width: 750px) {
   media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
   media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
-    transform-origin: center 29%;
+    transform: scale(1.12);
+    transform-origin: center 44.5%;
   }
 }
 
