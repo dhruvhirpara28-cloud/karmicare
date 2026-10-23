@@ -430,43 +430,6 @@
             {%- else -%}
               </div>
             {%- endif -%}
-            {%- if block.settings.rotate_professionals -%}
-              {%- comment -%}
-                Pauses the ambassador rotation (WCAG 2.2.2), on the photo's corner; outside the link, as
-                a button may not sit inside one. Shown by the section script only while it rotates.
-              {%- endcomment -%}
-              <button
-                type="button"
-                class="hero-karmicare__badge-pause"
-                data-label-pause="{{ 'sections.slideshow.pause_slideshow' | t | escape }}"
-                data-label-play="{{ 'sections.slideshow.play_slideshow' | t | escape }}"
-                aria-label="{{ 'sections.slideshow.pause_slideshow' | t | escape }}"
-                hidden
-              >
-                <svg
-                  class="hero-karmicare__badge-pause-icon hero-karmicare__badge-pause-icon--pause"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 10 10"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M2.5 1.5v7M7.5 1.5v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-                <svg
-                  class="hero-karmicare__badge-pause-icon hero-karmicare__badge-pause-icon--play"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 10 10"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M3 1.6v6.8L8.6 5z" fill="currentColor"/>
-                </svg>
-              </button>
-            {%- endif -%}
           </div>
       {%- endcase -%}
     {%- endfor -%}
@@ -562,15 +525,16 @@
     window.addEventListener('load', updateHeroOffset);
     window.addEventListener('resize', updateHeroOffset, { passive: true });
 
-    // Ambassador rotation in the badge (Victor, 23 Oct): all ambassadors from the Trusted
-    // Professionals cards on this page in random order, a new photo 3s after the last one showed;
-    // after the last a new random round starts, never with the photo just shown. It runs past
-    // five seconds, so the pause button next to the photo stops it until the visitor plays it
-    // again (WCAG 2.2.2). It also waits while the badge is hovered or focused, off screen or in a
-    // hidden tab, and goes on when that ends. Reduced motion keeps the random
-    // first photo, without rotation or button. Below 750px the badge is hidden, and without cards
-    // the block's own image stays. One transition at a time: every reschedule or stop starts a
-    // new generation, so a photo that finishes loading for an older schedule changes nothing.
+    // Ambassador rotation in the badge (Victor, 23 Oct): two ambassadors per page visit from the
+    // Trusted Professionals cards on this page, the second 4s after the first showed, then it
+    // stops, so all motion ends within five seconds and needs no pause control (WCAG 2.2.2). The
+    // order is random and runs on across visits (localStorage), so every ambassador gets a turn;
+    // after the last a new random round starts, never with the photo just shown, and a changed
+    // card list starts a new order. Without storage each load picks at random. Hovered, focused,
+    // off screen or a hidden tab before the 4s window opens: it waits; inside it: it stops for
+    // good. Reduced motion keeps the first photo only. Below 750px the badge is hidden, and
+    // without cards the block's own image stays. A photo that loads after the window closed, or
+    // for an older generation, changes nothing (R49 B3).
     var wrap = hero && hero.querySelector('.hero-karmicare__badge-avatar-wrap[data-kc-rotate]');
     function startRotation() {
       var current = wrap.querySelector('.hero-karmicare__badge-avatar');
@@ -581,15 +545,20 @@
         wrap.classList.remove('is-picking');
         return;
       }
-      // The badge's 56px avatar at up to 3x: the card image's CDN URL at 168px wide
-      var urls = Array.prototype.map.call(cards, function (img) {
+      // The card photos by path (no query, so a new CDN version does not reset the order), each
+      // at 168px wide: the badge's 56px avatar at up to 3x
+      var paths = [];
+      var urlFor = {};
+      Array.prototype.forEach.call(cards, function (img) {
         var url = new URL(img.getAttribute('src'), window.location.href);
         url.searchParams.set('width', '168');
-        return url.href;
+        if (urlFor[url.pathname]) return;
+        paths.push(url.pathname);
+        urlFor[url.pathname] = url.href;
       });
       // A random order of all photos; a new round never starts with the photo just shown
       function shuffled(avoidFirst) {
-        var order = urls.slice();
+        var order = paths.slice();
         for (var i = order.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
           var swap = order[i];
@@ -603,21 +572,40 @@
         }
         return order;
       }
-      var round = shuffled();
-      var upcoming = null; // the next round, made once the current one is at its end
-      var position = -1; // the photo showing in this round; -1 while the block's own image shows
-      function peek() {
-        if (position + 1 < round.length) return round[position + 1];
-        if (!upcoming) upcoming = shuffled(round[round.length - 1]);
-        return upcoming[0];
+      // The visitor's place in the order: { list, order, pos, last }. list names the cards, so a
+      // changed card list starts a new order; any storage failure means a random order per load.
+      var storeKey = 'kc-badge-ambassadors';
+      var list = paths.slice().sort().join('|');
+      var state = null;
+      try {
+        var saved = JSON.parse(window.localStorage.getItem(storeKey));
+        if (saved && saved.list === list && Array.isArray(saved.order) && saved.order.length === paths.length) {
+          state = saved;
+        }
+      } catch (error) {
+        state = null;
       }
-      function advance() {
-        if (position + 1 < round.length) {
-          position += 1;
-        } else {
-          round = upcoming || shuffled(round[round.length - 1]);
-          upcoming = null;
-          position = 0;
+      if (!state) state = { list: list, order: shuffled(), pos: 0, last: null };
+      // The next ambassador; a new round when this one is done
+      function take() {
+        if (state.pos >= state.order.length) {
+          state.order = shuffled(state.last);
+          state.pos = 0;
+        }
+        var path = state.order[state.pos];
+        state.pos += 1;
+        state.last = path;
+        return { path: path, after: JSON.stringify(state) };
+      }
+      var first = take();
+      var second = take();
+      // A photo counts as seen once it showed (a failed one is passed over, so it does not return
+      // every visit); the stored place moves past it
+      function remember(photo) {
+        try {
+          window.localStorage.setItem(storeKey, photo.after);
+        } catch (error) {
+          // Private window or blocked storage: the next load picks at random
         }
       }
       // Each photo loads once: true when it loaded, false when it failed
@@ -652,26 +640,21 @@
       var active = 0;
       var generation = 0;
       var timer;
+      var deadline;
       var hovered = false;
       var focused = false;
-      var pausedByVisitor = false;
       var visible = false; // until the observer's first report
       var stopped = false;
       var picked = false; // the first photo (or the block's own image) is showing
+      var started = false; // the 4s window is open
+      var swapTo = null; // the photo the one swap brings in
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var badgeWrapper = wrap.closest('.hero-karmicare__badge-wrapper');
-      var pauseButton = badgeWrapper.querySelector('.hero-karmicare__badge-pause');
 
-      // The button shows only while there is something to pause: more than one photo and no
-      // reduced motion
-      function updateButton() {
-        if (!pauseButton) return;
-        pauseButton.hidden = stopped || reducedMotion.matches || urls.length < 2;
-        pauseButton.classList.toggle('is-paused', pausedByVisitor);
-        pauseButton.setAttribute(
-          'aria-label',
-          pausedByVisitor ? pauseButton.dataset.labelPlay : pauseButton.dataset.labelPause
-        );
+      function stop() {
+        stopped = true;
+        generation += 1;
+        clearTimeout(timer);
+        clearTimeout(deadline);
       }
 
       function show(url) {
@@ -686,42 +669,54 @@
         active = 1 - active;
       }
 
-      // The next photo 3s after the last one showed, loaded ahead; a failed one is skipped and the
-      // one after it gets its own 3s. Waiting (paused, off screen, hidden tab) clears the timer;
-      // going on starts a fresh 3s.
+      // The one swap, 4s after the window opens; the window closes at 4.6s (the swap's 0.4s slide
+      // included), so a photo that loads later never comes in
+      function held() {
+        return hovered || focused || !visible || document.hidden;
+      }
       function schedule() {
-        clearTimeout(timer);
-        generation += 1;
-        updateButton();
-        if (stopped || !picked || reducedMotion.matches || urls.length < 2) return;
-        if (pausedByVisitor || hovered || focused || !visible || document.hidden) return;
+        if (stopped || !picked) return;
+        if (started) {
+          if (held() || reducedMotion.matches) stop();
+          return;
+        }
+        if (reducedMotion.matches || !swapTo || held()) return;
+        started = true;
         var token = generation;
-        var target = peek();
-        load(target);
+        var photo = swapTo;
+        load(urlFor[photo.path]);
         timer = setTimeout(function () {
-          load(target).then(function (ok) {
-            if (token !== generation || target !== peek()) return;
-            advance();
-            if (ok) show(target);
-            schedule();
+          load(urlFor[photo.path]).then(function (ok) {
+            if (token !== generation) return;
+            if (ok) show(urlFor[photo.path]);
+            remember(photo);
+            stop();
           });
-        }, 3000);
+        }, 4000);
+        deadline = setTimeout(stop, 4600);
       }
 
-      // The first photo once it has loaded; after 1.5s, or if it failed, the block's own image
-      // shows and the first ambassador follows in the rotation
+      // The first photo once it has loaded; after 1.5s the block's own image shows and the swap
+      // brings the first ambassador in. A failed first photo is passed over for the second.
       Promise.race([
-        load(round[0]),
+        load(urlFor[first.path]),
         new Promise(function (resolve) {
-          setTimeout(resolve, 1500, false);
+          setTimeout(resolve, 1500, null);
         }),
       ]).then(function (ok) {
         if (stopped) return;
         if (ok) {
-          advance();
-          current.src = round[0];
+          current.src = urlFor[first.path];
           current.classList.add('is-below');
+          remember(first);
+          swapTo = second;
+        } else if (ok === false) {
+          remember(first);
+          swapTo = second;
+        } else {
+          swapTo = first;
         }
+        if (paths.length < 2 && ok) swapTo = null;
         wrap.classList.remove('is-picking');
         void current.offsetWidth;
         current.classList.remove('is-below');
@@ -729,8 +724,7 @@
         schedule();
       });
 
-      // Hover and focus on the badge itself hold the rotation; the pause button does not, so a
-      // click on play starts it at once (the WAI carousel pattern)
+      // Hover and focus on the badge hold the swap until the window opens
       var badge = wrap.closest('.hero-karmicare__badge');
       badge.addEventListener('mouseenter', function () {
         hovered = true;
@@ -748,12 +742,6 @@
         focused = badge.contains(event.relatedTarget);
         schedule();
       });
-      if (pauseButton) {
-        pauseButton.addEventListener('click', function () {
-          pausedByVisitor = !pausedByVisitor;
-          schedule();
-        });
-      }
       var observer = new IntersectionObserver(function (entries) {
         visible = entries[entries.length - 1].isIntersecting;
         schedule();
@@ -761,15 +749,12 @@
       observer.observe(wrap);
       document.addEventListener('visibilitychange', schedule);
       reducedMotion.addEventListener('change', schedule);
-      updateButton();
 
       // Theme editor: a re-rendered section runs its own copy of this script, so this one stops
-      // and lets go of its timer, observer and listeners (R49 N3)
+      // and lets go of its timers, observer and listeners (R49 N3)
       function dispose(event) {
         if (event.detail.sectionId !== '{{ section.id }}') return;
-        stopped = true;
-        clearTimeout(timer);
-        generation += 1;
+        stop();
         observer.disconnect();
         document.removeEventListener('visibilitychange', schedule);
         reducedMotion.removeEventListener('change', schedule);
@@ -1129,7 +1114,7 @@
           "type": "checkbox",
           "id": "rotate_professionals",
           "label": "Rotate ambassador photos",
-          "info": "Shows all ambassadors from the Trusted Professionals cards on this page in random order, a new one every 3 seconds, with a pause button. The image above stays as the fallback.",
+          "info": "Shows two ambassadors per visit from the Trusted Professionals cards on this page, 4 seconds apart; over visits every ambassador gets a turn, in random order. The image above stays as the fallback.",
           "default": true
         },
         {
