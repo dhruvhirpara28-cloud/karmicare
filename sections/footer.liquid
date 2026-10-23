@@ -271,8 +271,10 @@
   }
 
   /* The JS live regions exist from render so screen readers announce them; while empty they
-     leave the flex flow (no gap slot) but stay in the accessibility tree. */
+     leave the flex flow (no gap slot) but stay in the accessibility tree. display: block beats
+     the base.css p:empty { display: none }, which would drop them from that tree (R46-B2). */
   .km-footer-field__message:empty {
+    display: block;
     position: absolute;
     width: 1px;
     height: 1px;

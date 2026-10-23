@@ -44,11 +44,15 @@
     describe(status.id, noteId);
   };
 
+  // Focus first, fill the alert a frame later: the error is spoken once, by the alert, and not
+  // a second time as the description read out on focus (R46-B2).
   const showError = (text) => {
-    alert.textContent = text;
     input.setAttribute('aria-invalid', 'true');
-    describe(alert.id, noteId);
-    input.focus();
+    if (document.activeElement !== input) input.focus();
+    requestAnimationFrame(() => {
+      alert.textContent = text;
+      describe(alert.id, noteId);
+    });
   };
 
   // Klaviyo unreachable (429, 5xx, network, timeout): let Shopify take the signup.
@@ -60,16 +64,16 @@
     data: {
       type: 'subscription',
       attributes: {
-        custom_source: form.dataset.source || 'Footer newsletter',
+        custom_source: config.source || 'Footer newsletter',
         profile: {
           data: {
             type: 'profile',
             attributes: {
               email: input.value.trim(),
-              locale: form.dataset.locale || 'en',
+              locale: config.locale || 'en',
               properties: {
                 signup_path: window.location.pathname,
-                consent_text_version: form.dataset.consentVersion || '',
+                consent_text_version: config.consentVersion || '',
               },
               subscriptions: {
                 email: { marketing: { consent: 'SUBSCRIBED' } },
@@ -109,12 +113,12 @@
         if (response.status === 202) {
           input.value = '';
           setBusy(false);
-          showStatus(form.dataset.msgSuccess || '');
+          showStatus(config.msgSuccess || '');
           return;
         }
         if (response.status >= 400 && response.status < 500 && response.status !== 429) {
           setBusy(false);
-          showError(form.dataset.msgInvalid || '');
+          showError(config.msgInvalid || '');
           return;
         }
         fallback();
