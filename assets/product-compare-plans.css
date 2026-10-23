@@ -697,12 +697,24 @@ body.night-mode .pc-kit-poptitle {
   }
 }
 
-/* Header cells */
+/* Header cells: the header row sits inside the box on the surface of the comparison table's
+   header (assets/section-comparison-table.css), at its size (Victor, 23 Oct) */
 .plan-compare--kc .pc-lhead,
 .plan-compare--kc .pc-hcell {
   height: var(--pc-head-height);
   padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-sm);
   justify-content: center;
+}
+
+.plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-col:not(.pc-featured) .pc-hcell {
+  border-top: var(--pc-rule);
+  border-left: var(--pc-rule);
+  background: var(--kc-mapped-surface-page-secondary);
+}
+
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
+  border-right: var(--pc-rule);
 }
 
 .plan-compare--kc .pc-lhead {
@@ -711,8 +723,9 @@ body.night-mode .pc-kit-poptitle {
 
 .plan-compare--kc .pc-lhead-tag {
   font-weight: 600;
-  font-size: var(--kc-responsive-body-sm-text-size);
-  line-height: var(--kc-responsive-body-sm-line-height);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
 .plan-compare--kc .pc-hcell {
@@ -727,13 +740,14 @@ body.night-mode .pc-kit-poptitle {
   letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
+/* One step down the heading scale, h5 to h6 (Victor, 23 Oct) */
 .plan-compare--kc .pc-price {
   margin: 0;
   font-family: var(--kc-font-role-backbone);
   font-weight: 500;
-  font-size: var(--kc-responsive-h5-text-size);
-  line-height: var(--kc-responsive-h5-line-height);
-  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-size: var(--kc-responsive-h6-text-size);
+  line-height: var(--kc-responsive-h6-line-height);
+  letter-spacing: var(--kc-responsive-h6-letter-spacing);
   color: inherit;
 }
 
@@ -745,8 +759,8 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-default-body);
 }
 
-/* Rows. Grid lines: a box with 12px outer corners around the rows; the featured
-   column draws its own outline instead of side rules. */
+/* Rows. Grid lines: a box with 12px outer corners around the header row and the rows;
+   the featured column draws its own outline instead of side rules. */
 .plan-compare--kc .pc-col .pc-lcell,
 .plan-compare--kc .pc-col .pc-cell {
   height: var(--pc-row-height);
@@ -781,7 +795,7 @@ body.night-mode .pc-kit-poptitle {
   border-top: var(--pc-rule);
 }
 
-.plan-compare--kc .pc-lhead + .pc-lcell {
+.plan-compare--kc .pc-lhead {
   border-top-left-radius: var(--kc-shape-radius-md);
 }
 
@@ -789,7 +803,7 @@ body.night-mode .pc-kit-poptitle {
   border-bottom-left-radius: var(--kc-shape-radius-md);
 }
 
-.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell + .pc-cell {
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
   border-top-right-radius: var(--kc-shape-radius-md);
 }
 
@@ -845,12 +859,21 @@ body.night-mode .pc-kit-poptitle {
   margin-left: 0;
 }
 
-/* Featured column */
+/* Featured column: the light accent surface of the comparison table's Karmicare column, in Day
+   and Night, so its text is the fixed dark brand blue there too (Victor, 23 Oct) */
 .plan-compare--kc .pc-featured {
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-focus-default);
   border-radius: 1.6rem;
-  background: linear-gradient(180deg, rgba(var(--kc-mapped-border-focus-default-rgb), 0.1) 0%, rgba(var(--kc-mapped-border-focus-default-rgb), 0) 62%);
+  background: var(--kc-mapped-surface-accent-default-subtle);
   box-shadow: 0 1.8rem 4.4rem 0 rgba(var(--kc-mapped-border-focus-default-rgb), 0.55);
+  color: var(--kc-brand-original-dark-blue);
+}
+
+.plan-compare--kc .pc-featured .pc-cycle,
+.plan-compare--kc .pc-featured .pc-yes,
+.plan-compare--kc .pc-featured .pc-no,
+.plan-compare--kc .pc-featured .pc-info-icon {
+  color: var(--kc-brand-original-dark-blue);
 }
 
 /* Ribbon ("Most Picked") and top tag */
