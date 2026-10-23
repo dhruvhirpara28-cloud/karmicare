@@ -816,6 +816,36 @@
     {{ product | structured_data }}
   </script>
 
+  {%- if kc_hero -%}
+    <script>
+      // The landed kit stands on the line of the offer's CTA button (Victor, 23 Oct). From 750 px,
+      // where the columns sit side by side, the animation moves until the kit's base meets the
+      // button's bottom edge. The base is frame y 809 of 1080 × 960 (the tube bottoms in the last
+      // frame): 0.9605 of the hero box, 0.9812 once scale(1.045) works about the box's centre.
+      (() => {
+        const root = document.querySelector('.featured-product-section-{{ section.id }}');
+        const hero = root?.querySelector('.featured-product__hero');
+        const info = root?.querySelector('.product__info-wrapper');
+        if (!hero || !info) return;
+        const wide = window.matchMedia('(min-width: 750px)');
+        const align = () => {
+          const button = [...info.querySelectorAll('.product-form__submit')].find((el) => el.offsetHeight);
+          if (!wide.matches || !button) {
+            hero.style.removeProperty('--kc-hero-lift');
+            return;
+          }
+          const box = hero.getBoundingClientRect();
+          const lift = button.getBoundingClientRect().bottom - (box.top + box.height * 0.9812);
+          hero.style.setProperty('--kc-hero-lift', `${Math.round(lift)}px`);
+        };
+        const observer = new ResizeObserver(align);
+        observer.observe(hero);
+        observer.observe(info);
+        wide.addEventListener('change', align);
+      })();
+    </script>
+  {%- endif -%}
+
   {% if product.media.size > 0 and kc_hero == false %}
     <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
