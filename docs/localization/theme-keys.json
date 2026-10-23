@@ -263,6 +263,32 @@
    "fr_review": "legal-review"
   },
   {
+   "key": "kc.footer.check_inbox",
+   "area": "footer",
+   "ids": [],
+   "en": "Check your inbox to confirm your subscription.",
+   "nl": null,
+   "nl_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
+   "fr": null,
+   "fr_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
+   "note": "Klaviyo double opt-in: shown in the footer's role=status region after a 202, for every outcome (new, already subscribed, suppressed). Plain text in a data attribute. EN from docs/global-footer/PLAN.md section 9, Victor 23 Oct; to inventory as locale:kc.footer.check_inbox (see docs/global-footer/KEYS.md).",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.email_invalid",
+   "area": "footer",
+   "ids": [],
+   "en": "Check the email address.",
+   "nl": null,
+   "nl_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
+   "fr": null,
+   "fr_hold": "not in the B1a inventory [NEEDS APPROVED COPY]",
+   "note": "Shown in the footer's role=alert region when Klaviyo rejects the address (4xx). Plain text in a data attribute. EN from docs/global-footer/PLAN.md section 9, Victor 23 Oct; to inventory as locale:kc.footer.email_invalid (see docs/global-footer/KEYS.md).",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
    "key": "kc.footer.country",
    "area": "footer",
    "ids": [
