@@ -12,7 +12,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | Ready to land | 3 |
 | In progress | 0 |
 | Waiting for Victor | 28 |
-| Parked / after launch | 3 |
+| Parked / after launch | 5 |
 | Dropped | 6 |
 
 | # | Status | What | Commits / where |
@@ -64,6 +64,8 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | 42 | Parked / after launch | Loop widget strings (off-limits files): the 11 strings of the B4 Loop table, handed to the Loop owner; NL and FR are in the payloads | B4 report, Loop handoff |
 | 43 | Parked / after launch | Navigation links and Shopify policies: no proven API route in the runner yet (LINK, SHOP_POLICY); after the first wave, or through Translate & Adapt | `register.py`, B4 Part 2 |
 | 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
+| 54 | Parked / after launch | Move the 14 inline SVG icons out of the PDP FAQ content fields (Ingredients, How to brush, Quality & safety) into a theme snippet per step, so the fields hold text only and the icons keep `currentColor`. Theme lane plus an Admin edit of the EN fields, then a new source-copy capture and plan (Victor 23 Oct) | metaobjects 515150971261, 515151200637, 564919009661; R42/R42b |
+| 55 | Parked / after launch | Rich-text JSON fields re-register on every run: Shopify stores the JSON compact, the runner sends it with spaces, so the text is the same but the bytes differ (18 NL fields on 23 Oct). Compare parsed JSON, or send it compact; small runner change with its own review | `register.py`, dry run 23 Oct |
 | 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
 | 46 | Dropped | Legacy legal pages (350 entries): not translated, they redirect | `08479cb` |
 | 47 | Dropped | Clock gates (B4 decision 6): review gates no longer hold theme keys, after Victor's waiver | `c348c72` |
@@ -169,7 +171,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - Answer per fact.
 - *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
 
-**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end?
+**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end? **Answered 23 Oct:** Victor completed it in Admin as "— from your gums to the rest of you".
 - (a) You give the ending.
 - (b) Cut it after "peace of mind*".
 - (c) Remove the line.
@@ -324,7 +326,7 @@ The text-setting counts (189 and 156) are higher than the brief's estimate (abou
 2. Compare table (`custom.compare_table`), Welcome Kit row: it references the old Morning (€4) and Evening (€5) brushes, so the tooltip says **€18**. Point it at `morning-toothbrush-2-0` and `evening-toothbrush-2-0` (€6 + €6 + €9 = **€21**).
 3. Compare table Year cells ("2× a year", the delivery tooltip) do not carry the approved sub-line **"3 now, 3 in month 6"**.
 4. Product FAQ metafield: typo **"Full dosep"** → "dose".
-5. Treatment journey metafield: a line stops mid-phrase, "Peace of mouth, peace of mind* — from your gums to the".
+5. Treatment journey metafield: a line stops mid-phrase, "Peace of mouth, peace of mind* — from your gums to the". Fixed in Admin 23 Oct: "— from your gums to the rest of you".
 6. Image alt `media.69840178020733` puts the evening before the morning ("evening care at 22:00 and morning care at 06:40"): Awake before Asleep.
 7. Footer menu `company`: "Why use hydroxapatite" is misspelled (hydroxyapatite) and uses the banned word "use".
 8. Selling plans:

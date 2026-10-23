@@ -24,6 +24,7 @@ import hashlib
 import json
 import os
 import re
+import sys
 from collections import Counter, OrderedDict
 
 SOURCE = "docs/source-copy/en-source.json"
@@ -41,9 +42,8 @@ LATER = {
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
 GATES = ("legal-review", "pending-claim-review")
-# Loop translates selling plans and groups itself (Settings > Multilingual content, PDP lane 21 Oct): register.py skips them.
-LOOP_TYPES = ("SELLING_PLAN", "SELLING_PLAN_GROUP")
-LOOP_HOLD = "Loop owns selling-plan translations (register.py skips them)"
+# Selling-plan names and descriptions are Shopify translations (Loop's Multilingual content has no field for them,
+# checked 22 Oct); since wave 2 register.py writes them, keeping the Subscription Name values protected (B-01).
 
 # Inventory field -> Shopify translatable content key, per Shopify type (TranslatableResourceType, 2026-10)
 FIELD_KEYS = {
@@ -149,8 +149,13 @@ def dedupe(res):
     res["items"] = list(seen.values())
 
 
+class PlanError(Exception):
+    """A payload error that must stop plan generation: no plan file is written (R42-3)."""
+
+
 def build(lang, payload, sources, registered=None, holds=None, released=()):
     skipped = Counter()
+    bad_invariant = []
     resources = OrderedDict()
     registered = registered or {}
     holds = holds or {}
@@ -181,8 +186,15 @@ def build(lang, payload, sources, registered=None, holds=None, released=()):
         if not value:
             skipped["no %s value" % lang.upper()] += 1
             continue
-        if value.strip() == src["en"].strip():
+        # A reviewed 'invariant' row (brand, INCI, code, number, symbol) stays as in EN: kept only so the field
+        # route can map that span of a larger field; register.py never writes it on its own.
+        invariant = "invariant" in (entry.get("flags") or [])
+        if value.strip() == src["en"].strip() and not invariant:
             skipped["unchanged (same as EN)"] += 1
+            continue
+        if invariant and value != src["en"]:
+            # Never a silent skip: the row may carry a hold or gate that vetoes a sibling target (R42-3).
+            bad_invariant.append(eid)
             continue
         if kind == "none":
             skipped["no registration route: " + how.split(":")[0]] += 1
@@ -195,8 +207,6 @@ def build(lang, payload, sources, registered=None, holds=None, released=()):
         hold = list(gates)
         if batch not in FIRST_WAVE_BATCHES:
             hold.append(LATER.get(batch, batch))
-        if stype in LOOP_TYPES:
-            hold.append(LOOP_HOLD)
         if eid in holds:
             hold.append("review hold (holds.json): " + holds[eid])
         rid = "%s|%s" % (stype, owner)
@@ -208,7 +218,12 @@ def build(lang, payload, sources, registered=None, holds=None, released=()):
             status=OrderedDict(drafted=True, registered=False))
         if stype.startswith("ONLINE_STORE_THEME"):
             item["hint"] = match_hint(src)
+        if invariant:
+            item["invariant"] = True
         res["items"].append(item)
+    if bad_invariant:
+        raise PlanError("%s: %d row(s) flagged 'invariant' whose value differs from the EN (%s); fix the payload, no plan "
+                        "is written" % (lang, len(bad_invariant), ", ".join(bad_invariant[:5])))
     for res in resources.values():
         dedupe(res)
     # Assembled fields: one translation per field, held when any of its blocks is held or missing, or carries a
@@ -305,10 +320,10 @@ def markdown(results, sources, args):
               "| `PRODUCT`, `PAGE`, `ARTICLE`, `BLOG`, `COLLECTION` | `translatableResources(resourceType: …)` | exactly one resource with the `handle`; the plan's key |",
               "| `MEDIA_IMAGE` | `translatableResourcesByIds(resourceIds: …)` | the GID in the plan; the plan's key |",
               "| Metafields | `product { metafields { id namespace key type value } }`, then `translatableResourcesByIds` on their GIDs (key `value`) | namespace and key of the field; a JSON field only when every text leaf maps to an approved item |",
-              "| `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; the field the inventory names, or a reviewed binding in `bindings.json` (the dry run proposes them); then the EN sha1 |",
+              "| `METAOBJECT` (and the metaobjects behind reference metafields) | the product's reference-typed metafields, then reference-typed fields to depth 3 (`metaobject` reads, read_metaobjects); shop-level cells only from the reviewed `shop-objects.json`, pinned to GID and selected by the product's table | written only on a field the inventory names, an item a reviewed `bindings.json` binds, or a field a reviewed `bindings-fields.json` binds with unchanged evidence; otherwise the dry run proposes the field with its spans, path and translations (`live/fields-proposed-<lang>.json`); a changed bound field aborts the write before any mutation; Liquid, uncertain markup and split sentences are never proposed |",
               "| `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |",
               "| `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |",
-              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | none | held here: Loop owns their translations |",
+              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | the plan's GID; every group with the EN name | name, description and options only; the Subscription Name values '60-Day Supply' / 'Year Supply' stay untranslated (B-01) |",
               "| Existing translations | `translations(locale: \"nl\" / \"fr\")` on each resource | part of the approval: a translation edited after the dry run stops the write |",
               "", "Write: rebuild the snapshot and compare its checksum, re-read each resource right before its mutation, then "
               "`translationsRegister(resourceId, translations)` with `{key, locale, value, translatableContentDigest}` in chunks of 50; "
@@ -349,9 +364,13 @@ def main():
     holds = json.load(open(HOLDS, encoding="utf-8"))["holds"] if os.path.exists(HOLDS) else {}
     released = tuple(json.load(open(RELEASES, encoding="utf-8"))["released"]) if os.path.exists(RELEASES) else ()
     results = OrderedDict()
-    for lang, folder in dirs.items():
-        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang), released)
-        results[lang] = (resources, skipped)
+    try:  # every language is built before any file is written, so a payload error leaves all plans untouched
+        for lang, folder in dirs.items():
+            results[lang] = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang), released)
+    except PlanError as err:
+        print("Plan not written: %s" % err, file=sys.stderr)
+        raise SystemExit(2) from None
+    for lang, (resources, skipped) in results.items():
         doc = OrderedDict(
             lang=lang,
             inputs=OrderedDict((k, v) for k, v in input_digests(args).items() if not k[:3] in ("nl/", "fr/") or k.startswith(lang + "/")),

@@ -82,14 +82,14 @@ The selling-plan group named "60-Day Supply" carries the same text as a Subscrip
 | morning / evening | ochtend / avond | products.md | matin / soir | always Awake (morning) before Asleep (evening) |
 | by day / by night | overdag / 's nachts | products.md | le jour / la nuit | |
 | one pump | één pompje (0,45 ml) | products.md | une pression (0,45 ml) | |
-| Rinse first | Spoel je mond | products.md | Rincez-vous la bouche | |
+| Rinse first | Eerst spoelen | Victor 23 Oct | Rincez-vous la bouche | |
 | Spit, don't rinse | Spugen, niet spoelen | Figma NL (how-to step 3) | Crachez, ne rincez pas | |
 | leave-on | leave-on | Figma NL | leave-on | |
 | toothpaste (first mention only) | tandpasta | products.md | dentifrice | category word once, then formula / system / care / ritual |
 | Strengthen your teeth. Strengthen yourself. | Versterk je tanden. Versterk jezelf. | brief | Renforcez vos dents. Renforcez-vous. | brand promise |
 | The Karmicare effect | Het Karmicare-effect | Figma NL | L'effet Karmicare | |
 | Week 1 / Day 60 | Week 1 / Dag 60 | Figma NL | Semaine 1 / Jour 60 | |
-| Calmer check-ups — arrive resilient, you did the work at home | Rustigere controles — je deed het werk al thuis | Figma NL (shortened) | Des contrôles plus sereins — vous avez fait le travail à la maison | |
+| Calmer check-ups — arrive resilient, you did the work at home | Rustigere controles — je staat er sterk voor, je deed het werk al thuis | Victor 23 Oct (full form) | Des contrôles plus sereins — vous avez fait le travail à la maison | |
 | Evenings that wind down — no sting, nothing to rinse | Rustige avonden — niets dat prikt, niets na te spoelen | Figma NL (shortened) | Des soirées apaisées — rien qui pique, rien à rincer | |
 
 ## Ingredients and science

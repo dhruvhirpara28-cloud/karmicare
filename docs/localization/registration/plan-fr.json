@@ -1,9 +1,9 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "0014eb24daa0",
+  "en-source.json": "bd4edb4e1b4b",
   "registered.json": "7967afaaf3d3",
-  "holds.json": "7e1947d1b3c4",
+  "holds.json": "da17e4d579fb",
   "releases.json": "356c3948eb85",
   "fr/batch-01-homepage.json": "e548111a26cb",
   "fr/batch-02-pdp.json": "d13b006a0949",
@@ -15,11 +15,11 @@
   "fr/batch-08-system.json": "d8508a10e978"
  },
  "batches": {
-  "batch-01-homepage": "5286628ff7c87962782903bc9e1ce3350dd61469",
-  "batch-02-pdp": "af27d13827f435e009e7e24815fa510469f0c3ee",
-  "batch-03-header-footer": "d8fb1b30ea2f5be901b89205707d850a3f458452",
+  "batch-01-homepage": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
+  "batch-02-pdp": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
+  "batch-03-header-footer": "742351732dabbbff2eff9cadc6858ba87284393a",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
-  "batch-05-products": "5ab678a91ffc223be63e7f87a68783bacc62a744",
+  "batch-05-products": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
@@ -6337,9 +6337,7 @@
      "en_sha1": "e174438a1b997fc5d4c09446e4faa6a12a46e7d1",
      "value": "S’abonner et économiser",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "every group with this EN name (groups are shared by products)",
      "status": {
       "drafted": true,
@@ -6370,9 +6368,7 @@
      "en_sha1": "c4652407ca8b426ad2544c29a81b457c90dd44d6",
      "value": "Paiement tous les 12 mois, livraison tous les 6 mois",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6396,9 +6392,7 @@
      "en_sha1": "35d9ae78e23cfc93229a48ad541ad650e52a593c",
      "value": "6 duos par an (3 maintenant, 3 au 6e mois)",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6422,9 +6416,7 @@
      "en_sha1": "0348a09c1d7848f5b1fea32074583c69d2ec19dd",
      "value": "Livraison tous les 60 jours",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6448,9 +6440,7 @@
      "en_sha1": "6f12eace9b7e8c1340626d9ac3283b6755e4ea50",
      "value": "expédition tous les 60 jours",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6474,9 +6464,7 @@
      "en_sha1": "a32195343035dfd50a285174067b32812797fb5d",
      "value": "Rythme 60 jours",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "every group with this EN name (groups are shared by products)",
      "status": {
       "drafted": true,
@@ -6500,9 +6488,7 @@
      "en_sha1": "6f12eace9b7e8c1340626d9ac3283b6755e4ea50",
      "value": "expédition tous les 60 jours",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6518,9 +6504,7 @@
      "en_sha1": "e4fd466d93b4d004091f0d74f4131c9284a37c55",
      "value": "<div class=\"block__loop-description\">\n <div class=\"kc-return_care-tooltip\">\n     <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">10%</span> de Care Credit reversé sur votre compte\n       <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Le Return on Care, c’est notre façon de rendre : 10 % de chaque réserve de 60 jours vous revient en Care Credit — en euros, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.</span></span>\n      </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Duo Awake + Asleep</strong> un cycle complet de 60 jours</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€5.90</span> de Care Credit</strong> <span>reversés sur vos commandes</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Offrir, suspendre ou résilier</strong> à tout moment</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Satisfait ou remboursé 60 jours</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Prix membre à l’abri de l’inflation</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Kit de bienvenue offert</strong> (à la 1re commande) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> de valeur · offert</span>\n</div>\n  <div class=\"block__show-welcome-kit\"></div>\n</div>",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6544,9 +6528,7 @@
      "en_sha1": "c9a06bb51d7f9089f8b2c8339c4be46358b3170d",
      "value": "L’année Karmicare",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "every group with this EN name (groups are shared by products)",
      "status": {
       "drafted": true,
@@ -6570,9 +6552,7 @@
      "en_sha1": "35d9ae78e23cfc93229a48ad541ad650e52a593c",
      "value": "6 duos par an (3 maintenant, 3 au 6e mois)",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6596,9 +6576,7 @@
      "en_sha1": "842e9c5bcb01f5007b73d6abd0cb6133f98dc18f",
      "value": "Offre annuelle",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "every group with this EN name (groups are shared by products)",
      "status": {
       "drafted": true,
@@ -6622,9 +6600,7 @@
      "en_sha1": "35d9ae78e23cfc93229a48ad541ad650e52a593c",
      "value": "6 duos par an (3 maintenant, 3 au 6e mois)",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -6719,30 +6695,6 @@
      "en": "Karmicare Awake morning and Asleep evening toothpaste, fluoride-free, SLS-free and rich in nano-hydroxyapatite: protected by day, restored by night",
      "en_sha1": "394d8367b9fddeea920f2718e70ca9cbfce38f1a",
      "value": "Dentifrices Karmicare Awake du matin et Asleep du soir, sans fluor, sans SLS et riches en nano-hydroxyapatite : protection le jour, restauration la nuit",
-     "gates": [],
-     "hold": [],
-     "how": "GID from the inventory id",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    }
-   ]
-  },
-  {
-   "shopify_type": "MEDIA_IMAGE",
-   "owner": "gid://shopify/MediaImage/69840178020733",
-   "batch": "batch-02-pdp",
-   "page": "pdp",
-   "items": [
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:media.69840178020733.alt",
-     "kind": "direct",
-     "key": "alt",
-     "field": "media.69840178020733.alt",
-     "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00 and morning care at 06:40",
-     "en_sha1": "9f2b7f909d3da1209b00aed971992b2c4b57c54b",
-     "value": "Infographie chronobiologique Karmicare : votre bouche vit au rythme d’une horloge de 24 heures, avec le soin du matin à 06:40 et le soin du soir à 22:00",
      "gates": [],
      "hold": [],
      "how": "GID from the inventory id",
@@ -7571,22 +7523,6 @@
      }
     },
     {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.treatment_journey_*#29",
-     "en": "— from your gums to the",
-     "en_sha1": "e2182f94ebba7b1c7a533281a8ea232f3a8b0613",
-     "value": "— de vos gencives jusqu’à",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#01",
      "kind": "match",
      "key": "value",
@@ -8106,22 +8042,6 @@
      "en": "One pump",
      "en_sha1": "0476194e7e3144a97e673990b3948e919a0e24ae",
      "value": "Une pression",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#37",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.product_faq#37",
-     "en": "Full dosep",
-     "en_sha1": "6a358335df53b73655ce819dfffe1822efe98d5a",
-     "value": "La dose complète",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -8842,22 +8762,6 @@
      "en": "Pharmaceutical grade (Ph. Eur. “Charcoal, Activated”), steam-activated from a 100% natural, renewable raw material. Particle size D50 20 µm (D10 4 · D90 60 µm), BET surface ≈ 1,700 m²/g. It is in the formula for adsorption, not abrasion: at RDA 72, Asleep is the gentler of the two — this is not a charcoal-whitening paste.",
      "en_sha1": "9fc1593a258e0a6be1b287b050205bbeade9ad0c",
      "value": "Qualité pharmaceutique (Ph. Eur. “Charcoal, Activated”), activé à la vapeur à partir d’une matière première 100 % naturelle et renouvelable. Granulométrie D50 20 µm (D10 4 · D90 60 µm), surface BET ≈ 1 700 m²/g. Il est dans la formule pour l’adsorption, pas pour l’abrasion : avec un RDA de 72, Asleep est la plus douce des deux — ce n’est pas une pâte blanchissante au charbon.",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#92",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.product_faq#92",
-     "en": "100 nm · rod-shaped, per SCCS",
-     "en_sha1": "b9c9ce809adebd42cb5735f2b9863c1e25e9ce58",
-     "value": "100 nm · en bâtonnets, selon le SCCS",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -10066,22 +9970,6 @@
      "en": "Delivery rhythm",
      "en_sha1": "7a4794dbfd363b2c1675bd907740559e26b91236",
      "value": "Rythme de livraison",
-     "gates": [],
-     "hold": [],
-     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#06",
-     "kind": "match",
-     "key": null,
-     "field": "custom.compare_table|shop.metaobjects.compare_value#06",
-     "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe preven",
-     "en_sha1": "1c34eae6263ac15b8c4faa11edc23b498836373c",
-     "value": "Le Return on Care, c’est notre façon de rendre : une part de chaque livraison vous revient en Care Credit — en euros, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.",
      "gates": [],
      "hold": [],
      "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
@@ -24697,29 +24585,6 @@
      ]
     },
     {
-     "id": "product:main/info_card_FnBcaN/body_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-     "en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
-     "en_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
-     "value": "<p>À chaque commande, <strong>nous vous récompensons</strong>. Vous investissez dans votre santé. Nous réinvestissons en vous. La santé à long terme est notre <strong>engagement n° 1</strong>. Les Health Rewards s’échangent contre des accessoires et des soins réservés aux membres Karmicare.</p>",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): legacy product card still says 'Health Rewards' (old name of Care Credit); source owner to decide"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "info_card_FnBcaN",
-      "body_text"
-     ]
-    },
-    {
      "id": "product:main/sticky_cart_block/button_text",
      "kind": "match",
      "key": null,
@@ -25361,9 +25226,7 @@
      "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
      "value": "Livraison tous les 6 mois",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -25387,9 +25250,7 @@
      "en_sha1": "6cd4d4318f17453dae8dcf10b44043f67bf27852",
      "value": "Livraison tous les 60 jours",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -25419,9 +25280,7 @@
      "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
      "value": "Livraison tous les 6 mois",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -25445,9 +25304,7 @@
      "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
      "value": "Livraison tous les 6 mois",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -25471,9 +25328,7 @@
      "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
      "value": "Livraison tous les 6 mois",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,
@@ -25497,9 +25352,7 @@
      "en_sha1": "ac59d6c7f916af8a87950cc47a33fdfd4b7329e1",
      "value": "Livraison tous les 6 mois",
      "gates": [],
-     "hold": [
-      "Loop owns selling-plan translations (register.py skips them)"
-     ],
+     "hold": [],
      "how": "GID from the inventory id",
      "status": {
       "drafted": true,

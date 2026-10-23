@@ -56,8 +56,13 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 37 | Parked / after launch | Loop widget, off-limits |
 | 38 | Parked / after launch | Amounts in other currencies than the euro. Victor decided the €40 reward on 22 Oct: A + C. It gets built later, together with the price per brushing. Nothing built yet |
 | 39 | Parked / after launch | NL Welcome Kit names break in the middle of a word (release QA, live). The proposal waits for a go or the next fix moment |
+| 40 | In merchant-edit | Plans table follows the comparison table, `00aa2d6`, `8202c95`, `84a8101` (R34b), merchant-edit `9972921` (23 Oct) |
+| 41 | Parked / after launch | R34 N1: double seam beside the featured column |
+| 42 | Parked / after launch | R34 N2: info tips get no keyboard focus |
+| 43 | Parked / after launch | R34 N3: FR CTA "Commencer votre Rythme 60 jours" is 88 px high in a 72 px cell at 390 |
+| 44 | Waiting for Victor | Price at h6 is 14 px on mobile, below the 16 px plan name. Options with the desk |
 
-**Counts (41 lines)**: in merchant-edit 10 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 20 · dropped 8.
+**Counts (46 lines)**: in merchant-edit 11 · ready to land 0 · in progress 2 · waiting for Victor 2 · parked / after launch 23 · dropped 8.
 
 ### Waiting for Victor
 
@@ -129,6 +134,11 @@ Advice: **a**, because building b needs content we do not have; revisit it after
 | 23 | `.pc-col { transition: all 0.4s }` animates column widths whenever the layout reflows (rotation, resize, late font load). A capture caught the label column at 178 px mid-animation. | none | P2 | pdp | none | Open (P2) |
 | 24 | Welcome Kit thumbnails in the label cell are three 25 px dim circles, hard to read in Night. | `3182:38950` | P2 | pdp | `product-compare-plans-1440-night-before` | Open (P2) |
 | 25 | Desktop matches V15: 284 + 3 × 282 = 1130 px table. V15 shows Year "Duos in a year 7"; live shows 6, which matches the offer. | `3182:38945` | none | none | `product-compare-plans-1440-night-before` | No gap |
+| 40 | Victor, 23 Oct: line the table up with the comparison table. Header row inside the box on surface/page/secondary, label at body-md, rows on gradient/section/accent, prices h5 to h6; no accent column. Day checks and Year badge darkened for contrast (R34 B1). | comparison table | P1 | pdp | `plans-table-plans-{390,1440}-{day,night}-after3` | In merchant-edit |
+| 41 | Double seam beside the featured column (R34 N1). | none | P2 | pdp | none | Parked |
+| 42 | Info tips are not reachable with the keyboard (R34 N2). | none | P2 | pdp | none | Parked |
+| 43 | FR CTA "Commencer votre Rythme 60 jours" is 88 px in a 72 px cell at 390 (R34 N3). | none | P2 | pdp | none | Parked |
+| 44 | The h6 price is 14 px on mobile, smaller than the 16 px plan name. | none | P2 | Victor | `plans-table-plans-390-day-after3` | Waiting for Victor |
 
 ## Shared sections (owner: homepage, relayed by the orchestrator)
 
@@ -206,3 +216,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 22 Oct: row 38 added and parked: the price per brushing and the €40 Dental Check-up Reward in other currencies (desk, for Victor; nothing built).
 - 22 Oct: row 38: Victor decided A + C for the €40 reward; the key `kc.general.approx_amount` went to source-copy. Row 39 added: NL Welcome Kit names, with a proposal (parked).
 - 22 Oct: row 34 (clock help text) is fixed through homepage `e1411e2`, which is now in merchant-edit `ca5228f`. Closed.
+- 23 Oct: rows 40–44 added. Row 40 (plans table lined up with the comparison table, Victor) is in merchant-edit `9972921`; R34 follow-ups N1–N3 parked as rows 41–43; row 44 (mobile price size) waits for Victor. Counts updated.

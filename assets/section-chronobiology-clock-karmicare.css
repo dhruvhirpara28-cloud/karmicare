@@ -96,8 +96,10 @@ body.night-mode .chronobiology-clock {
   margin: 0;
 }
 
+/* 13em with balanced lines keeps every language on two lines at every width, the longer FR and
+   NL headings too (Victor, 23 Oct; was 8.6em, the English break alone) */
 .chronobiology-clock .clock-heading {
-  max-width: 8.6em;
+  max-width: min(100%, 13em);
   margin: 0;
   font-family: var(--kc-font-role-backbone);
   font-weight: 500;
@@ -105,6 +107,7 @@ body.night-mode .chronobiology-clock {
   line-height: var(--kc-responsive-h2-line-height);
   letter-spacing: var(--kc-responsive-h2-letter-spacing);
   color: var(--chrono-ink);
+  text-wrap: balance;
 }
 
 .chronobiology-clock .lede {
