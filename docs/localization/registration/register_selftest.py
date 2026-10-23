@@ -1196,6 +1196,207 @@ def r32d(check):
     check("R32d control: a proper two-page list without a duplicate still proposes the cell", cell in (f or {}).get("proposals", {}), text)
 
 
+def r39(check):
+    """Wave 2c: an <svg> without text is one opaque span, a '<' that opens no markup is text, and invariant rows map
+    spans that stay as in EN without ever being written on their own. Each fails on 4ded872 (controls excepted)."""
+    def body(value, extra=()):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        rows = [item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20")] + list(extra)
+        _, _, d, p, exc = proposed(objs=objs, plan=w2b_plan(extra_mf=rows))
+        return ("WRITTEN WITHOUT REVIEW" if MO(801) + "|body" in WROTE else p.get(MO(801) + "|body", {}).get("assembled")), exc, d
+    icon = '<svg fill="none" viewBox="0 0 64 64" aria-hidden="true"><g><path d="M2 2h60v60" stroke="#000"/><circle cx="3" cy="3" r="1"/></g></svg>'
+    out, _, _ = body('<div class="bf-step"><div class="bf-step-icon">%s</div><p>Free</p></div>' % icon)
+    check("R39: an svg without text stays byte for byte; the text beside it is translated",
+          out == '<div class="bf-step"><div class="bf-step-icon">%s</div><p>Gratis</p></div>' % icon, out)
+    out, _, _ = body('<p>Free</p><svg viewBox="0 0 1 1"><svg x="0"><path d="M0 0"/></svg><rect width="1"/></svg>')
+    check("R39: nested svg elements are counted and kept whole", out == '<p>Gratis</p><svg viewBox="0 0 1 1"><svg x="0"><path d="M0 0"/></svg><rect width="1"/></svg>', out)
+    out, _, _ = body('<p>Free</p><svg viewBox="0 0 1 1"/>')
+    check("R39: a self-closing svg is one opaque tag", out == '<p>Gratis</p><svg viewBox="0 0 1 1"/>', out)
+    out, _, _ = body('<p>Free</p><svg><path d="M0 0" id="a>b"/></svg>')
+    check("R39: a quoted '>' inside an svg tag stays inside it", out == '<p>Gratis</p><svg><path d="M0 0" id="a>b"/></svg>', out)
+    for value, why in (('<p>Free</p><svg><text x="1">Free</text></svg>', "svg text element"),
+                       ('<p>Free</p><svg><title>Free</title></svg>', "svg title"),
+                       ('<p>Free</p><svg><desc>d</desc></svg>', "svg desc"),
+                       ('<p>Free</p><svg><foreignObject><p>Free</p></foreignObject></svg>', "svg foreignObject"),
+                       ('<p>Free</p><svg><style>p{}</style></svg>', "svg style"),
+                       ('<p>Free</p><svg><a href="/x"><path/></a></svg>', "svg link"),
+                       ('<p>Free</p><svg>Free</svg>', "text inside svg"),
+                       ('<p>Free</p><svg><!-- c --><path/></svg>', "comment inside svg"),
+                       ('<p>Free</p><svg><path d="M0 0"/>', "unclosed svg"),
+                       ('<p>Free</p><svg><path d="M0/></svg>', "unclosed quote inside svg"),
+                       ('<p>Free</p></svg>', "stray svg end tag"),
+                       ('<p>Free</p><math><mi>x</mi></math>', "math (still refused)")):
+        out, exc, _ = body(value)
+        check("R39: %s is not proposed" % why, out is None and any("markup" in "; ".join(e["reasons"]) for e in exc), (out, exc))
+    out, _, _ = body("<p>nHAp <100 nm</p><p>Free</p>", [item("bn", "nHAp <100 nm", "nHAp <100 nm (nl)", key="value", field="custom.faq_items#21")])
+    check("R39: a '<' before a digit is text (as in the HTML tokenizer); the translation is escaped",
+          out == "<p>nHAp &lt;100 nm (nl)</p><p>Gratis</p>", out)
+    out, _, _ = body("<p>a < b</p><p>Free</p>", [item("bs", "a < b", "a < b (nl)", key="value", field="custom.faq_items#22")])
+    check("R39: a '<' before a space is text", out == "<p>a &lt; b (nl)</p><p>Gratis</p>", out)
+    for value, why in (("<p>Free</p><", "a '<' at the very end"), ("<p>Free</p><a", "an unclosed tag after the change")):
+        out, exc, _ = body(value)
+        check("R39: %s is not proposed" % why, out is None and any("markup" in "; ".join(e["reasons"]) for e in exc), (out, exc))
+    inv = lambda iid, en, n: dict(item(iid, en, en, key="value", field="custom.faq_items#%02d" % n), invariant=True)
+    out, _, _ = body("<p>Free</p><p>Guarana</p>", [inv("ig", "Guarana", 30)])
+    check("R39: an invariant row maps its span unchanged; the rest is translated", out == "<p>Gratis</p><p>Guarana</p>", out)
+    out, exc, d = body("<p>Guarana</p><p>CPSR · 2026</p>", [inv("ig", "Guarana", 30), inv("ic", "CPSR · 2026", 31)])
+    check("R39: a field of invariant spans only is neither proposed nor written", out is None and MO(801) + "|body" not in WROTE
+          and not any(e["field"] == MO(801) + "|body" for e in exc), (out, exc))
+    check("R39: invariant rows make no report rows", not any(r["id"] in ("ig", "ic") for r in (d or {"rows": []})["rows"]))
+    store = w2b_store(w2b_objects())
+    store["types"]["METAFIELD"] = store["types"].get("METAFIELD", []) + [{"resourceId": "gid://shopify/Metafield/77", "translatableContent": [c("value", "Guarana")], "translations": {}}]
+    store["product_metafields"]["gid://shopify/Product/1"].append({"id": "gid://shopify/Metafield/77", "namespace": "custom", "key": "faq_items_extra", "type": TXT, "value": "Guarana"})
+    plan = w2b_plan(extra_mf=[dict(item("ig", "Guarana", "Guarana", key="value", field="custom.faq_items_extra#01"), invariant=True)])
+    _, _, d, _, _ = run2b(store, plan)
+    check("R39: a whole-value metafield equal to an invariant row is never registered",
+          d is not None and not any(o["resource"] == "gid://shopify/Metafield/77" for o in d["ops"]), (d or {}).get("ops"))
+    try:
+        import build_payloads as bp
+    except ImportError:
+        bp = None
+    src = {"id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#900", "batch": "batch-02-pdp", "page": "pdp",
+           "resource_type": "metafield", "file_or_handle": "karmicare-biorhythmic-oral-care-system", "key_path": "custom.product_faq#900",
+           "en": "Guarana", "sha1": sha1("Guarana"), "status": "admin-held", "never_translate": False}
+    row_ = {"en": "Guarana", "en_sha1": sha1("Guarana"), "nl": "Guarana", "status": "admin", "flags": ["admin"]}
+    def built(entry):
+        res, skipped = bp.build("nl", {src["id"]: entry}, {src["id"]: src})
+        return [i for r in res.values() for i in r["items"]], skipped
+    items, skipped = built(row_) if bp else ([], {})
+    check("R39 builder control: a same-as-EN row without the flag is still skipped", bp is not None and not items, skipped)
+    items, _ = built(dict(row_, flags=["admin", "invariant"])) if bp else ([], {})
+    check("R39 builder: a flagged invariant row is kept and marked", len(items) == 1 and items[0].get("invariant") is True, items)
+    try:
+        items, skipped = built(dict(row_, nl="Guaraná", flags=["admin", "invariant"])) if bp else ([], {})
+        raised = False
+    except Exception as err:  # noqa: BLE001 - the builder's PlanError (R42-3)
+        raised, items = type(err).__name__ == "PlanError", []
+    check("R39/R42-3 builder: an invariant row whose value differs from the EN stops plan generation", raised, items)
+
+
+def r42(check):
+    """R42 regressions: each fails on wave2c-candidate (candidate 1) and passes here (controls excepted)."""
+    def body(value):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        _, _, d, p, exc = proposed(objs=objs, plan=w2b_plan(extra_mf=[item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20")]))
+        return ("WRITTEN WITHOUT REVIEW" if MO(801) + "|body" in WROTE else p.get(MO(801) + "|body", {}).get("assembled")), exc
+    icon = ('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 64 64" aria-hidden="true" width="64" height="64">'
+            '<g clip-path="url(#clip0_1)" id="Assets"><path d="M1 1" stroke="#7FB9FF" stroke-width="2" stroke-linecap="round" '
+            'stroke-linejoin="round" fill="currentColor"/><rect width="1" height="1" fill="white"/></g><defs><clipPath id="clip0_1">'
+            '<rect width="64" height="64" fill="white"/></clipPath></defs></svg>')
+    out, _ = body("<p>Free</p>" + icon)
+    check("R42-1 control: an icon in the shape of the live ones stays byte for byte", out == "<p>Gratis</p>" + icon, out)
+    for value, why in (('<p>Free</p><svg role="img" aria-label="Free shipping"><path/></svg>', "an aria-label on the svg root"),
+                       ('<p>Free</p><svg><g role="img" aria-label="Free shipping"><path/></g></svg>', "an aria-label on a child"),
+                       ('<p>Free</p><svg role="img" aria-label="Free shipping"/>', "a labelled self-closing svg"),
+                       ('<p>Free</p><svg aria-labelledby="english-label"><path/></svg>', "aria-labelledby"),
+                       ('<p>Free</p><svg aria-describedby="d"><path/></svg>', "aria-describedby"),
+                       ('<p>Free</p><svg aria-hidden="false"><path/></svg>', "aria-hidden other than true"),
+                       ('<p>Free</p><svg><use href="https://example.invalid/i.svg#x"/></svg>', "a use element with an external href"),
+                       ('<p>Free</p><svg><path xlink:href="javascript:alert(1)"/></svg>', "an xlink:href"),
+                       ('<p>Free</p><svg onload="x()"><path/></svg>', "an event attribute"),
+                       ('<p>Free</p><svg><path style="fill:red"/></svg>', "a style attribute"),
+                       ('<p>Free</p><svg><path fill="url(#p)"/></svg>', "paint from url(...)"),
+                       ('<p>Free</p><svg><g clip-path="url(https://x.test/c)"><path/></g></svg>', "a non-local clip-path"),
+                       ('<p>Free</p><svg><div><input value="Free shipping"></div></svg>', "a foreign tag inside svg"),
+                       ('<p>Free</p><svg><g><path/></svg>', "mismatched nesting"),
+                       ('<p>Free</p><svg><image href="a.png"/></svg>', "an image element"),
+                       ('<p>Free</p><svg xmlns="http://example.invalid/ns"><path/></svg>', "a foreign xmlns")):
+        out, exc = body(value)
+        check("R42-1: %s is not proposed" % why, out is None and any("markup" in "; ".join(e["reasons"]) for e in exc), (out, exc))
+
+    # R42-2: an invariant item alone never makes an operation, also through a legacy item binding
+    objs = w2b_objects(**{"801": {"body": (TXT, "Guarana")}})
+    ib = {"ig": {"resource": MO(801), "key": "body", "en_sha1": sha1("Guarana")}}
+    manual = set_nl(801, "body", "Victor manual text")
+    for invariant, label in ((True, "an invariant legacy-bound item"), (False, "control: an ordinary legacy-bound item")):
+        row_ = item("ig", "Guarana", "Guarana" if invariant else "Guarana NL", field="custom.faq_items#31")
+        if invariant:
+            row_["invariant"] = True
+        plan = w2b_plan(extra_mo=[row_])
+        store = w2b_store(copy.deepcopy(objs))
+        manual(store)
+        _, _, d, _, _ = run2b(store, plan, item_bindings=ib)
+        store = w2b_store(copy.deepcopy(objs))
+        manual(store)
+        code, text, _, _, fake = run2b(store, plan, item_bindings=ib, argv=WRITE + ((d or {}).get("checksum", "x"),))
+        wrote = any(m[1] == MO(801) for m in fake.mutations)
+        if invariant:
+            check("R42-2: %s never overwrites the manual NL (no op, no mutation)" % label, d is not None and not wrote
+                  and not any(o["resource"] == MO(801) for o in d["ops"]), (code, fake.mutations))
+        else:
+            check("R42-2 %s still writes" % label, wrote, (code, fake.mutations))
+    # an invariant row in a mixed bound field gets no result row of its own (R42 non-blocker 1)
+    objs = w2b_objects(**{"801": {"body": (MTXT, "<p>Free</p><p>Guarana</p>")}})
+    rows = [item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20"),
+            dict(item("ig", "Guarana", "Guarana", key="value", field="custom.faq_items#30"), invariant=True)]
+    _, _, _, f, _ = run2b(w2b_store(objs), w2b_plan(extra_mf=rows))
+    fb = bind((f or {}).get("proposals", {}), MO(801) + "|body")
+    _, _, d, _, _ = run2b(w2b_store(objs), w2b_plan(extra_mf=rows), field_bindings=fb)
+    check("R42 follow-up: a mixed bound field is written, without a result row for its invariant item",
+          d is not None and any(o["resource"] == MO(801) for o in d["ops"]) and not any(r["id"] == "ig" for r in d["rows"]),
+          (d or {}).get("rows"))
+
+
+def r42b(check):
+    """R42b regressions: each fails on wave2c-candidate-2 and passes here (controls excepted)."""
+    def body(value):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        _, _, d, p, exc = proposed(objs=objs, plan=w2b_plan(extra_mf=[item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20")]))
+        return ("WRITTEN WITHOUT REVIEW" if MO(801) + "|body" in WROTE else p.get(MO(801) + "|body", {}).get("assembled")), exc
+    for value, why in (('<p>Free</p><svg width="1"/>', "a quoted self-closing svg"),
+                       ('<p>Free</p><svg width=1 />', "an unquoted value with a separated '/>'"),
+                       ('<p>Free</p><svg><path d="M0 0"/><g><path d="M0 0" /></g></svg>', "quoted self-closing descendants"),
+                       ('<p>Free</p><svg><path fill="&#110;one"/></svg>', "an encoded paint keyword")):
+        out, _ = body(value)
+        check("R42b control: %s stays byte for byte" % why, out == value.replace("Free", "Gratis", 1), out)
+    labelled = '<p>Free</p><svg width=1/><g role="img" aria-label="Free shipping"><path d="M0 0h10v10z"/></g>'
+    hidden = '<p>Free</p><svg aria-hidden=true/>'
+    for value, why in ((labelled, "an svg whose unquoted width ends in '/' (not self-closing) before a labelled g"),
+                       (hidden, "aria-hidden=true/ (its value is 'true/')"),
+                       ('<p>Free</p><svg><path d=M0/><g role="img" aria-label="Free shipping"><path/></g></svg>', "a descendant whose unquoted value ends in '/'"),
+                       ('<p>Free</p><svg><path fill="u&#114;l(#g)"/></svg>', "an entity-encoded url() paint"),
+                       ('<p>Free</p><svg><path fill="&#117;rl(https://example.invalid/p.svg#x)"/></svg>', "an encoded external url() paint"),
+                       ('<p>Free</p><svg><path fill="u\\72l(#g)"/></svg>', "a CSS-escaped url() paint"),
+                       ('<p>Free</p><svg><path stroke="url(#g)"/></svg>', "url() stroke"),
+                       ('<p>Free</p><svg><path fill="&#x55;RL(#g)"/></svg>', "a hex-entity, upper-case url() paint")):
+        out, exc = body(value)
+        check("R42b: %s is not proposed" % why, out is None and any("markup" in "; ".join(e["reasons"]) for e in exc), (out, exc))
+
+    # R42b-1 through the writer: a binding made by the previous parser (self-closing read from the byte before '>')
+    # is stale under the lexical flag and aborts before any mutation.
+    def previous(value, i, scan=register.scan_tag):
+        tag, reason = scan(value, i)
+        if tag and len(tag) == 3:  # a two-field tag is already the previous parser's own (candidate 2)
+            tag = (tag[0], tag[1], value[i + 1] != "/" and value[tag[1] - 2] == "/")
+        return tag, reason
+    rows = [item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20")]
+    for value, label in ((labelled, "the labelled-g field"), (hidden, "the aria-hidden=true/ field")):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        register.scan_tag = previous
+        try:
+            _, _, _, f, _ = run2b(w2b_store(copy.deepcopy(objs)), w2b_plan(extra_mf=rows))
+        finally:
+            register.scan_tag = previous.__defaults__[0]
+        fb = bind((f or {}).get("proposals", {}), MO(801) + "|body")
+        _, _, d, _, _ = run2b(w2b_store(copy.deepcopy(objs)), w2b_plan(extra_mf=rows), field_bindings=fb)
+        code, _, _, _, fake = run2b(w2b_store(copy.deepcopy(objs)), w2b_plan(extra_mf=rows), field_bindings=fb,
+                                    argv=WRITE + ((d or {}).get("checksum", "x"),))
+        check("R42b-1: a previous-parser binding for %s aborts with no mutation" % label,
+              bool(fb) and code != 0 and not any(m[1] == MO(801) for m in fake.mutations), (bool(fb), code, fake.mutations))
+
+    # R42b-N2: an invariant item in a vetoed legacy target gets no result row (the veto itself still holds)
+    body_en = "<p>Free</p><p>Held claim</p>"
+    objs = w2b_objects(**{"840": {"body": (MTXT, body_en)}})
+    fam = "custom.ct|shop.metaobjects.compare_value#%02d"
+    held = item("h1", "Held claim", "Vastgehouden claim", field=fam % 31)
+    held["hold"] = ["legal-review"]
+    plan = w2b_plan(extra_mo=[dict(item("L", body_en, body_en, field=fam % 30), invariant=True), held])
+    _, _, d, _, _ = run2b(w2b_store(objs), plan, item_bindings={"L": {"resource": MO(840), "key": "body", "en_sha1": sha1(body_en)}})
+    check("R42b-N2: a vetoed invariant target makes no op and no result row for its invariant item",
+          d is not None and not any(o["resource"] == MO(840) for o in d["ops"]) and not any(r["id"] == "L" for r in d["rows"]),
+          (d or {}).get("rows"))
+
+
 def encoded_token():
     return "".join("%%%02X" % ord(ch) for ch in TOKEN)
 
@@ -1690,6 +1891,9 @@ def main():
     r32(check)
     r32c(check)
     r32d(check)
+    r39(check)
+    r42(check)
+    r42b(check)
     print("%d failures" % len(failures))
     sys.exit(1 if failures else 0)
 
