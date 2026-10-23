@@ -456,13 +456,22 @@
         });
       });
 
-      // A focused plan CTA comes fully into view in the scrolling strip, clear of the sticky
-      // labels (scroll-padding in the CSS). Focus alone scrolls only a CTA that is wholly out
-      // of view, so a CTA half under the labels or half off the edge stayed cut (R39b B2).
+      // A plan CTA focused from the keyboard comes fully into view in the scrolling strip, clear
+      // of the sticky labels (scroll-padding in the CSS). Focus alone scrolls only a CTA that is
+      // wholly out of view, so a CTA half under the labels or half off the edge stayed cut
+      // (R39b B2). Keyboard focus only: on a click the scroll moved the button between
+      // pointerdown and pointerup, and the click missed it (R39c B3).
       document.querySelectorAll('.plan-compare--kc .pc-table').forEach(function (strip) {
         strip.addEventListener('focusin', function (e) {
           const cta = e.target.closest('.pc-cta');
-          if (cta) cta.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+          if (!cta) return;
+          let fromKeyboard = false;
+          try {
+            fromKeyboard = cta.matches(':focus-visible');
+          } catch (err) {
+            fromKeyboard = false;
+          }
+          if (fromKeyboard) cta.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         });
       });
 
