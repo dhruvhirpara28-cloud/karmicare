@@ -430,14 +430,6 @@ body.night-mode .pc-cell {
 }
 
 
-
-body.night-mode .pc-kit-item img {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-}
-
-
-
 body.night-mode .info-tip-popover {
   background: var(--kc-mapped-bg-primary-default);
 }
@@ -547,7 +539,8 @@ body.night-mode .pc-kit-poptitle {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .plan-compare--kc {
-  --pc-block-gap: 4rem; /* header -> table -> footnote */
+  --pc-block-gap: 4rem;
+  /* header -> table -> footnote */
   --pc-label-col: 17rem;
   --pc-plan-col: 16rem;
   --pc-head-height: 9.6rem;
@@ -633,7 +626,8 @@ body.night-mode .pc-kit-poptitle {
 .plan-compare--kc .pc-foot p,
 .plan-compare--kc .pc-cell p {
   margin: 0;
-  line-height: inherit; /* base.css sets p to normal */
+  line-height: inherit;
+  /* base.css sets p to normal */
 }
 
 /* Table: scroll strip below 990px, centred columns from 990px */
@@ -667,7 +661,8 @@ body.night-mode .pc-kit-poptitle {
   .plan-compare--kc .pc-col-label {
     position: sticky;
     inset-inline-start: 0;
-    z-index: 30; /* Keep scrolling columns, including hovered ones, underneath. */
+    z-index: 30;
+    /* Keep scrolling columns, including hovered ones, underneath. */
     /* The two colours of the section surface (assets/kc-surface.css) */
     background: linear-gradient(180deg, var(--kc-surface-top), var(--kc-surface-bottom));
     transition: none;
@@ -801,8 +796,8 @@ body.night-mode .pc-kit-poptitle {
   border-right: var(--pc-rule);
 }
 
-.plan-compare--kc .pc-lhead + .pc-lcell,
-.plan-compare--kc .pc-hcell + .pc-cell {
+.plan-compare--kc .pc-lhead+.pc-lcell,
+.plan-compare--kc .pc-hcell+.pc-cell {
   border-top: var(--pc-rule);
 }
 
@@ -931,7 +926,8 @@ body.night-mode .pc-kit-poptitle {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-align: center;
   text-transform: uppercase;
-  max-width: 100%; /* long labels wrap inside narrow columns instead of overflowing */
+  max-width: 100%;
+  /* long labels wrap inside narrow columns instead of overflowing */
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
@@ -1017,6 +1013,7 @@ body.night-mode .pc-kit-poptitle {
 }
 
 @media screen and (min-width: 750px) {
+
   .plan-compare--kc .pc-cta--primary,
   .plan-compare--kc .pc-cta--secondary {
     min-height: 4.8rem;

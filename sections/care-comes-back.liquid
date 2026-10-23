@@ -69,7 +69,28 @@
                   <h3 class="care-comes-back__step-title">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
-                  <p class="care-comes-back__step-body">{%- render 'care-comes-back-text', text: block.settings.text -%}</p>
+                  {%- capture rendered_step_text -%}
+                    {%- render 'care-comes-back-text', text: block.settings.text -%}
+                  {%- endcapture -%}
+                  {%- if rendered_step_text contains '€' -%}
+                    {%- assign step_euro_parts = rendered_step_text | split: '€' -%}
+                    {%- for sep in step_euro_parts -%}
+                      {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                      {%- assign sep_num = sep | strip | plus: 0 -%}
+                      {%- if sep_num > 0 -%}
+                        {%- assign sep_cents = sep_num | times: 100 | round -%}
+                        {%- capture sep_money -%}
+                          <span class="kc-currency-eur" data-kc-eur="{{ sep_num }}">
+                            {%- render 'kc-money', cents: sep_cents, trim: true -%}
+                          </span>
+                        {%- endcapture -%}
+                        {%- assign sep_target_sp = '€ ' | append: sep_num -%}
+                        {%- assign sep_target_no = '€' | append: sep_num -%}
+                        {%- assign rendered_step_text = rendered_step_text | replace: sep_target_sp, sep_money | replace: sep_target_no, sep_money -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                  <p class="care-comes-back__step-body">{{ rendered_step_text }}</p>
                 {%- endif -%}
               </div>
             </li>
@@ -105,13 +126,37 @@
                     <span class="care-comes-back__line-note">{%- render 'care-comes-back-text', text: block.settings.note -%}</span>
                   {%- endif -%}
                 </dt>
-                <dd class="care-comes-back__line-amount">{{ block.settings.amount | escape }}</dd>
+                <dd class="care-comes-back__line-amount">
+                  {%- liquid
+                    assign line_amt = block.settings.amount | remove: '€' | strip | times: 1.0
+                  -%}
+                  {%- if block.settings.amount contains '€' and line_amt > 0 -%}
+                    <span class="kc-currency-eur" data-kc-eur="{{ line_amt }}">
+                      {%- assign line_cents = line_amt | times: 100 | round -%}
+                      {%- render 'kc-money', cents: line_cents, trim: false -%}
+                    </span>
+                  {%- else -%}
+                    {{ block.settings.amount | escape }}
+                  {%- endif -%}
+                </dd>
               </div>
             {%- endfor -%}
             {%- if section.settings.total != blank -%}
               <div class="care-comes-back__line care-comes-back__line--total">
                 <dt class="care-comes-back__line-label"><span>{{ section.settings.total_label | escape }}</span></dt>
-                <dd class="care-comes-back__line-amount">{{ section.settings.total | escape }}</dd>
+                <dd class="care-comes-back__line-amount">
+                  {%- liquid
+                    assign total_amt = section.settings.total | remove: '€' | strip | times: 1.0
+                  -%}
+                  {%- if section.settings.total contains '€' and total_amt > 0 -%}
+                    <span class="kc-currency-eur" data-kc-eur="{{ total_amt }}">
+                      {%- assign total_cents = total_amt | times: 100 | round -%}
+                      {%- render 'kc-money', cents: total_cents, trim: false -%}
+                    </span>
+                  {%- else -%}
+                    {{ section.settings.total | escape }}
+                  {%- endif -%}
+                </dd>
               </div>
             {%- endif -%}
           </dl>
@@ -133,6 +178,36 @@
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const rate = parseFloat(window.Shopify && window.Shopify.currency && window.Shopify.currency.rate);
+    if (rate && rate !== 1) {
+      const section = document.querySelector('.section-{{ section.id }}');
+      if (!section) return;
+      section.querySelectorAll('.kc-currency-eur[data-kc-eur]').forEach(function (el) {
+        const eur = parseFloat(el.getAttribute('data-kc-eur'));
+        if (!isNaN(eur) && eur > 0) {
+          const convertedCents = Math.round(eur * 100 * rate);
+          const currency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '{{ localization.country.currency.iso_code | default: cart.currency.iso_code }}';
+          const shopifyLang = (window.Shopify && window.Shopify.locale) || '{{ localization.language.iso_code | default: request.locale.iso_code }}';
+          const shopifyCountry = (window.Shopify && window.Shopify.country) || '{{ localization.country.iso_code }}';
+          const locale = shopifyCountry ? (shopifyLang + '-' + shopifyCountry) : (navigator.language || shopifyLang);
+          try {
+            const formatter = new Intl.NumberFormat(locale, {
+              style: 'currency',
+              currency: currency,
+              maximumFractionDigits: convertedCents % 100 === 0 ? 0 : 2
+            });
+            el.textContent = formatter.format(convertedCents / 100);
+          } catch (e) {
+            el.textContent = (convertedCents / 100).toFixed(2) + ' ' + currency;
+          }
+        }
+      });
+    }
+  });
+</script>
 
 {% schema %}
 {
