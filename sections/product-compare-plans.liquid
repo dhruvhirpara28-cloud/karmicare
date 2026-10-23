@@ -80,12 +80,15 @@
                           if prod == blank
                             continue
                           endif
+                          # The close-up tile of the buybox kit (custom.kit_thumbnail, snippets/loop-widget-standard.liquid),
+                          # falling back to the featured image (Victor, 23 Oct)
+                          assign prod_thumb = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
                         -%}
                         <img
                           alt="{{ prod.title | escape }}"
                           decoding="async"
                           height="22"
-                          src="{{ prod.featured_image | image_url: width: 44 }}"
+                          src="{{ prod_thumb | image_url: width: 66 }}"
                           width="22"
                         >
                       {%- endfor -%}

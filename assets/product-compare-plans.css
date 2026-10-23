@@ -546,6 +546,8 @@ body.night-mode .pc-kit-poptitle {
   --pc-head-height: 9.6rem;
   --pc-row-height: 6.4rem;
   --pc-cta-height: 7.2rem;
+  --pc-featured-lift: 1.6rem; /* the featured column stands above the box (Victor, 23 Oct) */
+  --pc-strip-top: calc(2rem + var(--pc-featured-lift)); /* room for the lifted ribbon */
   --pc-rule: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
   color: var(--kc-mapped-text-default-heading);
 }
@@ -634,9 +636,9 @@ body.night-mode .pc-kit-poptitle {
 .plan-compare--kc .pc-table {
   justify-content: flex-start;
   width: auto;
-  /* 2rem of the gap above sits inside the strip, so the ribbon is not clipped */
-  margin: calc(var(--kc-responsive-spacing-layout-xl) - 2rem) calc(-1 * var(--page-gutter)) 0;
-  padding: 2rem var(--page-gutter) 2.4rem;
+  /* Part of the gap above sits inside the strip, so the lifted ribbon is not clipped */
+  margin: calc(var(--kc-responsive-spacing-layout-xl) - var(--pc-strip-top)) calc(-1 * var(--page-gutter)) 0;
+  padding: var(--pc-strip-top) var(--page-gutter) 2.4rem;
   overflow-x: auto;
   scroll-snap-type: none;
   font-family: var(--kc-font-role-backbone);
@@ -671,7 +673,7 @@ body.night-mode .pc-kit-poptitle {
   .plan-compare--kc .pc-col-label::before {
     content: "";
     position: absolute;
-    inset: -2rem 0 -2.4rem calc(-1 * var(--page-gutter));
+    inset: calc(-1 * var(--pc-strip-top)) 0 -2.4rem calc(-1 * var(--page-gutter));
     z-index: -1;
     background: inherit;
     pointer-events: none;
@@ -715,6 +717,17 @@ body.night-mode .pc-kit-poptitle {
 /* Inside the featured outline: its top corners, less the 1px stroke */
 .plan-compare--kc .pc-featured .pc-hcell {
   border-radius: calc(1.6rem - var(--kc-shape-stroke-thin)) calc(1.6rem - var(--kc-shape-stroke-thin)) 0 0;
+}
+
+/* The featured column starts --pc-featured-lift above the box; its header cell grows by as
+   much at the top, so name, price and rows stay level with the other columns */
+.plan-compare--kc .pc-featured {
+  margin-top: calc(-1 * var(--pc-featured-lift));
+}
+
+.plan-compare--kc .pc-featured .pc-hcell {
+  height: calc(var(--pc-head-height) + var(--pc-featured-lift));
+  padding-top: calc(var(--kc-responsive-spacing-layout-md) + var(--pc-featured-lift));
 }
 
 .plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
@@ -850,21 +863,29 @@ body:not(.night-mode) .plan-compare--kc .pc-yes {
   color: var(--kc-mapped-icon-primary-default);
 }
 
-/* Welcome Kit thumbnails: 30px chips overlapping by 9.5px */
+/* Welcome Kit thumbnails: 30px tiles overlapping by 9.5px. The close-ups (custom.kit_thumbnail)
+   fill the tile with the corner radius of the buybox kit tiles (Victor, 23 Oct). */
 .plan-compare--kc .pc-kit-thumbs {
   margin-left: var(--kc-responsive-spacing-layout-xs);
 }
 
 .plan-compare--kc .pc-kit-thumbs img {
-  width: 2.2rem;
-  height: 2.2rem;
+  box-sizing: border-box;
+  width: 3rem;
+  height: 3rem;
   margin-left: -0.95rem;
-  padding: 0.4rem;
+  padding: 0;
   border: 0.1364rem solid var(--kc-mapped-border-primary-default-subtle);
-  border-radius: var(--kc-shape-radius-full);
+  border-radius: var(--kc-shape-radius-sm);
   background-color: var(--kc-mapped-surface-page-secondary);
   box-shadow: 0 0.1364rem var(--kc-shape-blur-xs) 0 rgba(var(--kc-brand-fixed-black-rgb), 0.16);
-  object-fit: contain;
+  object-fit: cover;
+}
+
+/* Night: a step lighter than the rows, the accent highlight laid over the row surface, so the
+   dark products stand out. Opaque, so an overlapped tile does not show through. */
+body.night-mode .plan-compare--kc .pc-kit-thumbs img {
+  background: linear-gradient(var(--kc-mapped-surface-accent-highlight), var(--kc-mapped-surface-accent-highlight)), var(--kc-mapped-gradient-section-accent);
 }
 
 .plan-compare--kc .pc-kit-thumbs img:first-child {
