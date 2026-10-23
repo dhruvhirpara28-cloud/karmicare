@@ -85,6 +85,25 @@
    "fr_review": null
   },
   {
+   "key": "kc.clock.help",
+   "area": "clock",
+   "ids": [
+    "locale:kc.clock.help"
+   ],
+   "en": "Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.",
+   "nl": "Sleep de knop rond de ring om een tijdstip te bekijken. Laat los om terug te keren naar de huidige tijd. Houd een pijltjestoets ingedrukt om per vijf minuten te verschuiven; Page Up en Page Down verschuiven een uur. Home kiest middernacht; End kiest 23:59. Laat de toets los, druk op Escape of verlaat de knop om terug te keren naar nu.",
+   "nl_hold": null,
+   "fr": "Faites glisser le bouton autour de l’anneau pour afficher une heure locale. Relâchez pour revenir à l’heure actuelle. Maintenez une touche fléchée pour avancer par pas de cinq minutes ; Page précédente et Page suivante changent d’une heure. Début sélectionne minuit ; Fin sélectionne 23:59. Relâchez la touche, appuyez sur Échap ou quittez la commande pour revenir à maintenant.",
+   "fr_hold": null,
+   "note": "Screen-reader help for the clock knob (visually hidden <p>, aria-describedby), homepage lane e1411e2. Inventoried 22 Oct as locale:kc.clock.help.",
+   "nl_review": null,
+   "fr_review": null,
+   "decided": {
+    "fr": "Faites glisser le bouton autour de l’anneau pour afficher une heure locale. Relâchez pour revenir à l’heure actuelle. Maintenez une touche fléchée pour avancer par pas de cinq minutes ; Page précédente et Page suivante changent d’une heure. Début sélectionne minuit ; Fin sélectionne 23:59. Relâchez la touche, appuyez sur Échap ou quittez la commande pour revenir à maintenant.",
+    "by": "Victor 22 Oct (option a), FR as approved in homepage lane e1411e2; FR lane to add it to the payload"
+   }
+  },
+  {
    "key": "kc.clock.valuetext_live",
    "area": "clock",
    "ids": [
@@ -602,14 +621,18 @@
    "ids": [
     "liquid:sections/main-product.liquid:995"
    ],
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-   "nl": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account.",
+   "nl": "Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account.",
    "nl_hold": null,
-   "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.",
+   "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte.",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting checkup_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte.",
+    "by": "Victor 22 Oct (S2, choice a): dentist clause deleted; FR lane to confirm"
+   }
   },
   {
    "key": "kc.sticky_cart.credit_checkup_html",

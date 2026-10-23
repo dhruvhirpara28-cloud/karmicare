@@ -9,10 +9,10 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | Status | Rows |
 |---|---:|
 | In merchant-edit | 13 |
-| Ready to land | 1 |
+| Ready to land | 3 |
 | In progress | 0 |
-| Waiting for Victor | 29 |
-| Parked / after launch | 3 |
+| Waiting for Victor | 28 |
+| Parked / after launch | 5 |
 | Dropped | 6 |
 
 | # | Status | What | Commits / where |
@@ -42,7 +42,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | 23 | Waiting for Victor | Missing sources (K5) | CPSR, SCCS opinion, practitioner consent, review figure, packaging |
 | 24 | Waiting for Victor | Week headings of the PDP treatment journey (K6) | C94–C98, admin metafield |
 | 25 | Waiting for Victor | Leen Ponet's quote (K7) | C83, homepage and PDP |
-| 26 | Waiting for Victor | "Verified / confirmed by your dentist" in 5 entries (S2) | PDP pricing summary, info card, check-up tooltip, Year plan description |
+| 26 | Ready to land | No dentist confirmation (S2, Victor 22 Oct, choice a): the clause leaves the PDP check-up tooltip, the sticky-bar check-up line and the Duo info card, in EN, NL and the theme keys; the compare-table tooltip and the Year plan description are admin text, still to edit by Victor | reported 22 Oct (needs review: theme files) |
 | 27 | Waiting for Victor | Old blog articles in NL and FR (S3) | batch 07, 709 entries |
 | 28 | Waiting for Victor | regulatory.md wins over products.md (S4) | the clinical sources |
 | 29 | Waiting for Victor | Addresses in the NL/FR legal text (S5) | batch 04 |
@@ -60,9 +60,12 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 | 41 | Waiting for Victor | Legal review of the NL and FR legal texts | batch 04, legal-review gate (NL 605 items) |
 | 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article; its twin article is hidden and redirected, so its 79 entries are retired. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
 | 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+| 53 | Ready to land | Footer slogan "Your mouth has a rhythm Now your oral care too" (Victor 22 Oct), in the footer group and its schema default, EN and NL | reported 22 Oct (needs review: theme files) |
 | 42 | Parked / after launch | Loop widget strings (off-limits files): the 11 strings of the B4 Loop table, handed to the Loop owner; NL and FR are in the payloads | B4 report, Loop handoff |
 | 43 | Parked / after launch | Navigation links and Shopify policies: no proven API route in the runner yet (LINK, SHOP_POLICY); after the first wave, or through Translate & Adapt | `register.py`, B4 Part 2 |
 | 44 | Parked / after launch | Rendered check of the keyed strings on /nl and /fr (B4 manual checks 1–5): after the theme ships | preview gate |
+| 54 | Parked / after launch | Move the 14 inline SVG icons out of the PDP FAQ content fields (Ingredients, How to brush, Quality & safety) into a theme snippet per step, so the fields hold text only and the icons keep `currentColor`. Theme lane plus an Admin edit of the EN fields, then a new source-copy capture and plan (Victor 23 Oct) | metaobjects 515150971261, 515151200637, 564919009661; R42/R42b |
+| 55 | Parked / after launch | Rich-text JSON fields re-register on every run: Shopify stores the JSON compact, the runner sends it with spaces, so the text is the same but the bytes differ (18 NL fields on 23 Oct). Compare parsed JSON, or send it compact; small runner change with its own review | `register.py`, dry run 23 Oct |
 | 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
 | 46 | Dropped | Legacy legal pages (350 entries): not translated, they redirect | `08479cb` |
 | 47 | Dropped | Clock gates (B4 decision 6): review gates no longer hold theme keys, after Victor's waiver | `c348c72` |
@@ -134,12 +137,6 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - (b) No.
 - *Advice*: (a): it is her name on the page; until she answers, the quote stays as it is in EN.
 
-**26. "Verified / confirmed by your dentist" in 5 entries (S2).** The Check-up Reward needs no dentist involvement, but five texts say the check-up is "verified/confirmed by your dentist". (The announcement-bar half of S2 is solved by "FOR MEMBERS".) What should they say?
-- (a) Delete the clause "— confirmed by your dentist" (a deletion, no new claim).
-- (b) You give new wording.
-- (c) Keep it.
-- *Advice*: (a): it removes the contradiction without new copy; two of the five are admin text (plan description), so those are your edit.
-
 **27. Old blog articles in NL and FR (S3).** The blog articles are translated but outside the first wave. 107 of their blocks carry unsupported claims. Publish the NL/FR versions?
 - (a) Not until the EN is rewritten.
 - (b) Publish them.
@@ -170,11 +167,11 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - (b) *tandartscontrole-beloning*.
 - *Advice*: (a): shorter, and it does not suggest the dentist is involved.
 
-**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? And should the footer slogan "Your mouth has a rhythm So should your oral care" get a full stop?
+**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? (The footer slogan is decided: row 53.)
 - Answer per fact.
 - *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
 
-**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end?
+**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end? **Answered 23 Oct:** Victor completed it in Admin as "— from your gums to the rest of you".
 - (a) You give the ending.
 - (b) Cut it after "peace of mind*".
 - (c) Remove the line.
@@ -203,7 +200,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - (b) "1 working day" in the legal texts, "24 uur" stays in the sticky bar.
 - *Advice*: (b): an order on Friday evening cannot arrive within 24 hours, and the rest of the EU is already given in working days. Either way the policies are your edit.
 
-**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" stays (Victor 22 Oct). Who edits them, and when?
 - (a) You or DH edit them before the first wave is registered.
 - (b) After launch.
 - *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
@@ -236,7 +233,7 @@ The whole lane in one table: EN source copy, NL, claims and the registration in 
 - **C63, Vano et al. 2018** (Clin Oral Investig, PMID 28361171). The authors' conclusion does not say nHAp is better than fluoride: *"The application of nano-hydroxyapatite in gel toothpaste fluoride free is an effective desensitizing agent providing relief from symptoms after 2 and 4 weeks."* The results do report lower sensitivity than the fluoride and placebo groups at 2 and 4 weeks (p < 0.05). A 2 % gel applied for 10 minutes twice a day, 105 adults, not Karmicare. "Beat fluoride" is a fair reading of the results, not the authors' conclusion; brand don't #13 is what holds the card. The library summary ("OUTPERFORMED", "superior") goes further than the authors.
 - **C60, Kulal et al. 2016** (J Clin Diagn Res 10(10):ZC51–ZC54, PMC5121804). Found and read. Table 2: 97.62 % of tubules completely occluded with nHAp, 81.9 % NovaMin, 65.42 % Pro-Argin; the site's 98 / 82 / 65 are these figures rounded, so they come from a peer-reviewed paper, not a whitepaper. In vitro, 10 dentine discs per group, a slurry for 2 minutes a day over 7 days. Only nHAp vs Pro-Argin is significant (p = 0.005); nHAp vs NovaMin is not (p = 0.235). The paper is inconsistent: its abstract gives 98.1 / 83.1 / 69.1 % and 15 % nHAp, Table 1 gives 1 % nHAp (Acclaim). Advice: keep the card as a lab study ("in a lab study"), and drop the 82 % comparison or say it was not significant.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day; rows 26 and 53 for his dentist and slogan decisions.
 
 Task `task_dff189ea8e99`, Orca run `run_32dd5602b983`, branch `karmicare/soft-launch-source-copy` (from 3bae259, the live baseline). 19 Oct 2026.
 
@@ -329,7 +326,7 @@ The text-setting counts (189 and 156) are higher than the brief's estimate (abou
 2. Compare table (`custom.compare_table`), Welcome Kit row: it references the old Morning (€4) and Evening (€5) brushes, so the tooltip says **€18**. Point it at `morning-toothbrush-2-0` and `evening-toothbrush-2-0` (€6 + €6 + €9 = **€21**).
 3. Compare table Year cells ("2× a year", the delivery tooltip) do not carry the approved sub-line **"3 now, 3 in month 6"**.
 4. Product FAQ metafield: typo **"Full dosep"** → "dose".
-5. Treatment journey metafield: a line stops mid-phrase, "Peace of mouth, peace of mind* — from your gums to the".
+5. Treatment journey metafield: a line stops mid-phrase, "Peace of mouth, peace of mind* — from your gums to the". Fixed in Admin 23 Oct: "— from your gums to the rest of you".
 6. Image alt `media.69840178020733` puts the evening before the morning ("evening care at 22:00 and morning care at 06:40"): Awake before Asleep.
 7. Footer menu `company`: "Why use hydroxapatite" is misspelled (hydroxyapatite) and uses the banned word "use".
 8. Selling plans:
