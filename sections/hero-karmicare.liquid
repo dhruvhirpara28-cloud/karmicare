@@ -525,16 +525,16 @@
     window.addEventListener('load', updateHeroOffset);
     window.addEventListener('resize', updateHeroOffset, { passive: true });
 
-    // Ambassador rotation in the badge (Victor, 23 Oct): two ambassadors per page visit from the
-    // Trusted Professionals cards on this page, the second 4s after the first showed, then it
-    // stops, so all motion ends within five seconds and needs no pause control (WCAG 2.2.2). The
-    // order is random and runs on across visits (localStorage), so every ambassador gets a turn;
-    // after the last a new random round starts, never with the photo just shown, and a changed
-    // card list starts a new order. Without storage each load picks at random. Hovered, focused,
-    // off screen or a hidden tab before the 4s window opens: it waits; inside it: it stops for
-    // good. Reduced motion keeps the first photo only. Below 750px the badge is hidden, and
-    // without cards the block's own image stays. A photo that loads after the window closed, or
-    // for an older generation, changes nothing (R49 B3).
+    // Ambassador rotation in the badge (Victor, 24 Oct): all ambassadors from the Trusted
+    // Professionals cards on this page, a new one every 4s, in a loop. Each round is a new random
+    // order, and a new round never starts with the photo last shown. Nothing is stored: each page
+    // load starts its own round. Hover or focus on the badge, a hidden tab or the badge off screen
+    // pause it; going on starts a full new 4s, with no catch-up swap. Reduced motion keeps the
+    // random first photo only, and the rotation resumes when it is turned off. Below 750px the
+    // badge is hidden, and without cards the block's own image stays. A photo that has not loaded
+    // by its turn is skipped (R49e N1), and a timer of an older generation changes nothing (R49 B3).
+    // Victor 24 Oct: no pause button by choice; WCAG 2.2.2 (pause for motion over 5 s) is
+    // knowingly not met.
     var wrap = hero && hero.querySelector('.hero-karmicare__badge-avatar-wrap[data-kc-rotate]');
     function startRotation() {
       var current = wrap.querySelector('.hero-karmicare__badge-avatar');
@@ -545,20 +545,18 @@
         wrap.classList.remove('is-picking');
         return;
       }
-      // The card photos by path (no query, so a new CDN version does not reset the order), each
-      // at 168px wide: the badge's 56px avatar at up to 3x
-      var paths = [];
-      var urlFor = {};
+      // The card photos, each at 168px wide: the badge's 56px avatar at up to 3x. A photo on two
+      // cards counts once.
+      var urls = [];
       Array.prototype.forEach.call(cards, function (img) {
         var url = new URL(img.getAttribute('src'), window.location.href);
         url.searchParams.set('width', '168');
-        if (urlFor[url.pathname]) return;
-        paths.push(url.pathname);
-        urlFor[url.pathname] = url.href;
+        if (urls.indexOf(url.href) === -1) urls.push(url.href);
       });
-      // A random order of all photos; a new round never starts with the photo just shown
+      // A random order of all photos (Fisher-Yates); a new round never starts with the photo last
+      // shown
       function shuffled(avoidFirst) {
-        var order = paths.slice();
+        var order = urls.slice();
         for (var i = order.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
           var swap = order[i];
@@ -572,56 +570,38 @@
         }
         return order;
       }
-      // The visitor's place in the order: { list, order, pos, shown }. list names the cards, so a
-      // changed card list starts a new order; shown is the last photo that really showed, also on
-      // an earlier visit (R49e N2). Any storage failure means a random order per load.
-      var storeKey = 'kc-badge-ambassadors';
-      var list = paths.slice().sort().join('|');
-      var state = null;
-      try {
-        var saved = JSON.parse(window.localStorage.getItem(storeKey));
-        if (saved && saved.list === list && Array.isArray(saved.order) && saved.order.length === paths.length) {
-          state = { list: list, order: saved.order, pos: saved.pos, shown: saved.shown || null };
-        }
-      } catch (error) {
-        state = null;
+      var round = shuffled();
+      var upcoming = null; // the next round, made once the current one is at its end
+      var position = -1; // this round's photo whose turn came last; -1 while the block's own image shows
+      var lastShown = null; // the last photo that really showed; a failed or skipped one never is (R49e N2)
+      function peek() {
+        if (position + 1 < round.length) return round[position + 1];
+        if (!upcoming) upcoming = shuffled(lastShown);
+        return upcoming[0];
       }
-      if (!state) state = { list: list, order: shuffled(), pos: 0, shown: null };
-      // The next ambassador; a new round when this one is done
-      function take() {
-        if (state.pos >= state.order.length) {
-          state.order = shuffled(state.shown);
-          state.pos = 0;
-        }
-        var path = state.order[state.pos];
-        state.pos += 1;
-        return path;
-      }
-      // Stores the place past each photo that showed, failed or was skipped, so none returns every
-      // visit; a photo that never got its turn (hover, scroll away) comes first next visit
-      function save() {
-        try {
-          window.localStorage.setItem(storeKey, JSON.stringify(state));
-        } catch (error) {
-          // Private window or blocked storage: the next load picks at random
+      function advance() {
+        if (position + 1 < round.length) {
+          position += 1;
+        } else {
+          round = upcoming || shuffled(lastShown);
+          upcoming = null;
+          position = 0;
         }
       }
-      // A failed photo does not count as shown
-      function settle(path, ok) {
-        if (ok) state.shown = path;
-        save();
-      }
-      var first = take();
-      // Each photo loads once: true when it loaded, false when it failed
+      // Each photo loads once, ahead of its turn: loaded[url] is true once it loaded, false once it
+      // failed
       var loads = {};
+      var loaded = {};
       function load(url) {
         if (!loads[url]) {
           loads[url] = new Promise(function (resolve) {
             var image = new Image();
             image.onload = function () {
+              loaded[url] = true;
               resolve(true);
             };
             image.onerror = function () {
+              loaded[url] = false;
               resolve(false);
             };
             image.src = url;
@@ -644,22 +624,12 @@
       var active = 0;
       var generation = 0;
       var timer;
-      var deadline;
       var hovered = false;
       var focused = false;
       var visible = false; // until the observer's first report
       var stopped = false;
       var picked = false; // the first photo (or the block's own image) is showing
-      var started = false; // the 4s window is open
-      var swapTo = null; // the photo the one swap brings in
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      function stop() {
-        stopped = true;
-        generation += 1;
-        clearTimeout(timer);
-        clearTimeout(deadline);
-      }
 
       function show(url) {
         var incoming = layers[1 - active];
@@ -671,58 +641,44 @@
         incoming.classList.remove('is-below');
         outgoing.classList.add('is-above');
         active = 1 - active;
+        lastShown = url;
       }
 
-      // The one swap, 4s after the window opens; the window closes at 4.6s, so the swap's 0.4s
-      // slide ends within 5s. A photo that has not loaded by then is skipped: the first one stays
-      // and the place moves past it (R49e N1).
-      function held() {
-        return hovered || focused || !visible || document.hidden;
-      }
+      // The next photo 4s after the last one showed, loaded ahead. At its turn, a photo that
+      // failed or has not loaded yet is skipped: the current one stays and the next gets its own
+      // 4s (R49e N1). Waiting (hover, focus, off screen, hidden tab, reduced motion) clears the
+      // timer; going on starts a full new 4s. With one card the only swap brings its photo in
+      // after the block's own image.
       function schedule() {
-        if (stopped || !picked) return;
-        if (started) {
-          if (held() || reducedMotion.matches) stop();
-          return;
-        }
-        if (reducedMotion.matches || !swapTo || held()) return;
-        started = true;
+        clearTimeout(timer);
+        generation += 1;
+        if (stopped || !picked || reducedMotion.matches || (urls.length < 2 && position >= 0)) return;
+        if (hovered || focused || !visible || document.hidden) return;
         var token = generation;
-        var path = swapTo;
-        load(urlFor[path]);
+        var target = peek();
+        load(target);
         timer = setTimeout(function () {
-          load(urlFor[path]).then(function (ok) {
-            if (token !== generation) return;
-            if (ok) show(urlFor[path]);
-            settle(path, ok);
-            stop();
-          });
+          if (token !== generation) return;
+          advance();
+          if (loaded[target]) show(target);
+          schedule();
         }, 4000);
-        deadline = setTimeout(function () {
-          settle(path, false);
-          stop();
-        }, 4600);
       }
 
-      // The first photo once it has loaded; after 1.5s the block's own image shows and the swap
-      // brings the first ambassador in. A failed first photo is passed over for the second.
-      // The second is taken only now, so a new round avoids the photo that really showed.
+      // The first photo once it has loaded; after 1.5s the block's own image shows and the first
+      // ambassador follows 4s later. A failed first photo is passed over for the next one.
       Promise.race([
-        load(urlFor[first]),
+        load(round[0]),
         new Promise(function (resolve) {
           setTimeout(resolve, 1500, null);
         }),
       ]).then(function (ok) {
         if (stopped) return;
+        if (ok !== null) advance();
         if (ok) {
-          current.src = urlFor[first];
+          current.src = round[0];
           current.classList.add('is-below');
-        }
-        if (ok === null) {
-          swapTo = first;
-        } else {
-          settle(first, ok);
-          swapTo = paths.length < 2 && ok ? null : take();
+          lastShown = round[0];
         }
         wrap.classList.remove('is-picking');
         void current.offsetWidth;
@@ -731,7 +687,7 @@
         schedule();
       });
 
-      // Hover and focus on the badge hold the swap until the window opens
+      // Hover and focus on the badge pause the rotation
       var badge = wrap.closest('.hero-karmicare__badge');
       badge.addEventListener('mouseenter', function () {
         hovered = true;
@@ -758,10 +714,12 @@
       reducedMotion.addEventListener('change', schedule);
 
       // Theme editor: a re-rendered section runs its own copy of this script, so this one stops
-      // and lets go of its timers, observer and listeners (R49 N3)
+      // and lets go of its timer, observer and listeners (R49 N3)
       function dispose(event) {
         if (event.detail.sectionId !== '{{ section.id }}') return;
-        stop();
+        stopped = true;
+        clearTimeout(timer);
+        generation += 1;
         observer.disconnect();
         document.removeEventListener('visibilitychange', schedule);
         reducedMotion.removeEventListener('change', schedule);
@@ -1121,7 +1079,7 @@
           "type": "checkbox",
           "id": "rotate_professionals",
           "label": "Rotate ambassador photos",
-          "info": "Shows two ambassadors per visit from the Trusted Professionals cards on this page, 4 seconds apart; over visits every ambassador gets a turn, in random order. The image above stays as the fallback.",
+          "info": "Shows all ambassadors from the Trusted Professionals cards on this page, a new one every 4 seconds in a loop, in random order; it pauses on hover and focus. No pause button by choice, so WCAG 2.2.2 (pause for motion over 5 s) is knowingly not met. The image above stays as the fallback.",
           "default": true
         },
         {
