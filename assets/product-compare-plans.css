@@ -663,14 +663,27 @@ body.night-mode .pc-kit-poptitle {
    above give every column z-index 1, 20 when hovered or open). An open info tip then layers
    against the table, above the sticky label column (z 30 below 750), while the columns' own
    cells stay under it (R39 B1: the Year tip at 390 sat 84px under the labels). The featured
-   column keeps z 2, so its glow still lies over its neighbours. */
+   column keeps z 2, so its glow still lies over its neighbours. The popover's z-index comes
+   from assets/section-main-product.css (30, a tie with the labels that tree order breaks);
+   40 here puts it above them outright. */
 .plan-compare--kc .pc-col[data-plan]:not(.pc-featured),
 .plan-compare--kc .pc-col[data-plan]:not(.pc-featured):hover,
 .plan-compare--kc .pc-col[data-plan]:not(.pc-featured):has(.active-tip) {
   z-index: auto;
 }
 
+.plan-compare--kc .pc-col[data-plan] .info-tip-popover {
+  z-index: 40;
+}
+
 @media screen and (max-width: 749px) {
+  /* Keyboard focus scrolls a plan CTA clear of the sticky label column, not under it, and a
+     gutter clear of the right edge with its focus ring (R39b B2). The labels stick at the
+     strip's padding edge, a gutter in; the focusin script in the section does the scroll. */
+  .plan-compare--kc .pc-table {
+    scroll-padding-inline: calc(var(--page-gutter) + var(--pc-label-col)) var(--page-gutter);
+  }
+
   .plan-compare--kc .pc-col-label {
     position: sticky;
     inset-inline-start: 0;
