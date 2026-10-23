@@ -61,10 +61,10 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 42 | Parked / after launch | R34 N2: info tips get no keyboard focus |
 | 43 | Parked / after launch | R34 N3: FR CTA "Commencer votre Rythme 60 jours" is 88 px high in a 72 px cell at 390 |
 | 44 | In merchant-edit | Victor option b: below 750 the price is body-md (16 px, as the plan name), h6 from 750; `8e8e26f`, merchant-edit `6a26258` |
-| 45 | Waiting for Victor | Professional cards under the gallery are 220 × 317 px, the section's are 332 × 479 px, desktop only since D5. Options: keep, same size, or remove under the gallery (advice) |
+| 45 | In merchant-edit | Victor, 23 Oct: removed under the gallery. The block is disabled in `product.subscription-item.json` (`5b724e8`, merchant-edit `3c52d73`); the Trusted Professionals section stays. Native check on :9292 by the homepage lane |
 | 46 | Parked / after launch | R41: the journey Read more toggle has no `aria-expanded` |
 
-**Counts (48 lines)**: in merchant-edit 12 · ready to land 0 · in progress 2 · waiting for Victor 2 · parked / after launch 24 · dropped 8.
+**Counts (48 lines)**: in merchant-edit 13 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 24 · dropped 8.
 
 ### Waiting for Victor
 
@@ -220,3 +220,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 22 Oct: row 34 (clock help text) is fixed through homepage `e1411e2`, which is now in merchant-edit `ca5228f`. Closed.
 - 23 Oct: rows 40–44 added. Row 40 (plans table lined up with the comparison table, Victor) is in merchant-edit `9972921`; R34 follow-ups N1–N3 parked as rows 41–43; row 44 (mobile price size) waits for Victor. Counts updated.
 - 23 Oct: row 40 second round and row 44 (option b) in merchant-edit `6a26258`; row 45 (professionals under the gallery, waiting for Victor) and row 46 (journey toggle aria-expanded, parked) added. Counts updated.
+- 23 Oct: row 45 (professionals under the gallery) removed by Victor, in merchant-edit `3c52d73`. Counts updated.
