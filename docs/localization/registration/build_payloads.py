@@ -24,6 +24,7 @@ import hashlib
 import json
 import os
 import re
+import sys
 from collections import Counter, OrderedDict
 
 SOURCE = "docs/source-copy/en-source.json"
@@ -33,10 +34,10 @@ HOLDS = os.path.join(OUT, "holds.json")
 RELEASES = os.path.join(OUT, "releases.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
-# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
-FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-05-products", "batch-08-system"}
+# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system; legal since Victor released
+# legal-review (releases.json, 23 Oct).
+FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-04-legal", "batch-05-products", "batch-08-system"}
 LATER = {
-    "batch-04-legal": "legal (batch 04)",
     "batch-06-content-pages": "content pages (batch 06), not in the first-wave list",
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
@@ -148,8 +149,13 @@ def dedupe(res):
     res["items"] = list(seen.values())
 
 
+class PlanError(Exception):
+    """A payload error that must stop plan generation: no plan file is written (R42-3)."""
+
+
 def build(lang, payload, sources, registered=None, holds=None, released=()):
     skipped = Counter()
+    bad_invariant = []
     resources = OrderedDict()
     registered = registered or {}
     holds = holds or {}
@@ -180,8 +186,15 @@ def build(lang, payload, sources, registered=None, holds=None, released=()):
         if not value:
             skipped["no %s value" % lang.upper()] += 1
             continue
-        if value.strip() == src["en"].strip():
+        # A reviewed 'invariant' row (brand, INCI, code, number, symbol) stays as in EN: kept only so the field
+        # route can map that span of a larger field; register.py never writes it on its own.
+        invariant = "invariant" in (entry.get("flags") or [])
+        if value.strip() == src["en"].strip() and not invariant:
             skipped["unchanged (same as EN)"] += 1
+            continue
+        if invariant and value != src["en"]:
+            # Never a silent skip: the row may carry a hold or gate that vetoes a sibling target (R42-3).
+            bad_invariant.append(eid)
             continue
         if kind == "none":
             skipped["no registration route: " + how.split(":")[0]] += 1
@@ -205,7 +218,12 @@ def build(lang, payload, sources, registered=None, holds=None, released=()):
             status=OrderedDict(drafted=True, registered=False))
         if stype.startswith("ONLINE_STORE_THEME"):
             item["hint"] = match_hint(src)
+        if invariant:
+            item["invariant"] = True
         res["items"].append(item)
+    if bad_invariant:
+        raise PlanError("%s: %d row(s) flagged 'invariant' whose value differs from the EN (%s); fix the payload, no plan "
+                        "is written" % (lang, len(bad_invariant), ", ".join(bad_invariant[:5])))
     for res in resources.values():
         dedupe(res)
     # Assembled fields: one translation per field, held when any of its blocks is held or missing, or carries a
@@ -346,9 +364,13 @@ def main():
     holds = json.load(open(HOLDS, encoding="utf-8"))["holds"] if os.path.exists(HOLDS) else {}
     released = tuple(json.load(open(RELEASES, encoding="utf-8"))["released"]) if os.path.exists(RELEASES) else ()
     results = OrderedDict()
-    for lang, folder in dirs.items():
-        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang), released)
-        results[lang] = (resources, skipped)
+    try:  # every language is built before any file is written, so a payload error leaves all plans untouched
+        for lang, folder in dirs.items():
+            results[lang] = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang), released)
+    except PlanError as err:
+        print("Plan not written: %s" % err, file=sys.stderr)
+        raise SystemExit(2) from None
+    for lang, (resources, skipped) in results.items():
         doc = OrderedDict(
             lang=lang,
             inputs=OrderedDict((k, v) for k, v in input_digests(args).items() if not k[:3] in ("nl/", "fr/") or k.startswith(lang + "/")),

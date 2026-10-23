@@ -2,15 +2,15 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "6f5015e4d5fe6fc31d3cb1f7c41d0036d1cb5d61",
- "source_entries": 477,
+ "source_digest": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
+ "source_entries": 496,
  "counts": {
   "pending-claim-review": 42,
   "translated": 119,
   "held": 37,
   "dawn-nl": 15,
   "theme-key": 34,
-  "admin": 230
+  "admin": 249
  },
  "fit_risk": [
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
@@ -3431,12 +3431,12 @@
    "key_path": "custom.treatment_journey_*#23",
    "en": "— arrive resilient, you did the work at home",
    "en_sha1": "eb3a8f4a24bbe8f3572e3186a4649fe360d3f367",
-   "nl": "— je deed het werk al thuis",
+   "nl": "— je staat er sterk voor, je deed het werk al thuis",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "Approved Figma NL short form; drops 'arrive resilient' to fit."
+   "notes": "Full form, 'arrive resilient' as 'je staat er sterk voor' (Victor 23 Oct); replaces the Figma NL short form."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#24",
@@ -3989,12 +3989,12 @@
    "key_path": "custom.product_faq#34",
    "en": "Rinse first",
    "en_sha1": "4e780d83b8ad67c9e7025d94b7a4c286c74471c0",
-   "nl": "Spoel je mond",
+   "nl": "Eerst spoelen",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "Glossary (products.md)."
+   "notes": "Victor 23 Oct: keeps 'first' (was 'Spoel je mond' from products.md)."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#35",
@@ -4792,14 +4792,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#92",
-   "en": "100 nm · rod-shaped, per SCCS",
-   "en_sha1": "b9c9ce809adebd42cb5735f2b9863c1e25e9ce58",
-   "nl": "100 nm · staafvormig, volgens SCCS",
+   "en": "nHAp <100 nm · rod-shaped, per SCCS",
+   "en_sha1": "3feb141fbb2000ce6d1f15dec405020611872c5f",
+   "nl": "nHAp <100 nm · staafvormig, volgens SCCS",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "EN corrected 23 Oct (the capture lost 'nHAp <')"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#93",
@@ -5016,6 +5016,289 @@
     "admin"
    ],
    "notes": ""
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#108",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#108",
+   "en": "Guarana",
+   "en_sha1": "eac174a26521b539885aff6f288e5f6d9a313b1e",
+   "nl": "Guarana",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (ingredient name)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#109",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#109",
+   "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+   "en_sha1": "b091863d40fc29c177e880fe39bd9d4c2d2c2436",
+   "nl": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (INCI list: international names)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#110",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#110",
+   "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+   "en_sha1": "7e66994334ddacf4f00b1cb07e5013a64d2c185f",
+   "nl": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (INCI list: international names)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#111",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#111",
+   "en": "RDA",
+   "en_sha1": "8adbd2307f5ede720af048b12e62ce9ba9fe41cd",
+   "nl": "RDA",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (abbreviation (relative dentin abrasivity))"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#112",
+   "en": "Awake",
+   "en_sha1": "2b453e3e926b3275b0260310e696420278283986",
+   "nl": "Awake",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (formula name (brand))"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#113",
+   "en": "Asleep",
+   "en_sha1": "b9692bbecea9d8f0a8224711aea48e53a2d42f40",
+   "nl": "Asleep",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (formula name (brand))"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#114",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#114",
+   "en": "· AM",
+   "en_sha1": "115ce3300e2da4045b9dad2cc2c96f67e67203f8",
+   "nl": "· AM",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (design label next to the formula name)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#115",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#115",
+   "en": "· PM",
+   "en_sha1": "034ea857ae30a7ef4217413eacff31b656015116",
+   "nl": "· PM",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (design label next to the formula name)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#116",
+   "en": "93.25",
+   "en_sha1": "e360baabc790f7e4765568954c4a678a6080b757",
+   "nl": "93,25",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "decimal comma (measured value; NL decimal comma)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#117",
+   "en": "72.32",
+   "en_sha1": "4409ccb6a18dbac0db7874572a31c4e5bbfd5511",
+   "nl": "72,32",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "decimal comma (measured value; NL decimal comma)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#118",
+   "en": "✓",
+   "en_sha1": "698a879938bf4d71b92190d2b8f19c0e1d4abeef",
+   "nl": "✓",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (symbol)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#119",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#119",
+   "en": "250",
+   "en_sha1": "ba30fd97b4127db56e9f4d3d9c030d71646fd2e7",
+   "nl": "250",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (number)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#120",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#120",
+   "en": "i",
+   "en_sha1": "042dc4512fa3d391c5170cf3aa61e6a638f84342",
+   "nl": "i",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (icon letter)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#121",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#121",
+   "en": "CPSR · 2026",
+   "en_sha1": "53085b5a21107a087218fb89108e83bde5ebad97",
+   "nl": "CPSR · 2026",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (document code and year)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#122",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#122",
+   "en": "CPNP · 2026",
+   "en_sha1": "9c7269b56112b0c3e6bfc35f890817cb2a547fff",
+   "nl": "CPNP · 2026",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (document code and year)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#123",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#123",
+   "en": "SCCS/1677/25",
+   "en_sha1": "d5da1836948f9f8b39b9be9b5d426d7e1463aef9",
+   "nl": "SCCS/1677/25",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (SCCS opinion number)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#124",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#124",
+   "en": "→",
+   "en_sha1": "213edd2539ed96e6900bb40abd588edba35566c5",
+   "nl": "→",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (arrow symbol)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#125",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#125",
+   "en": "Awake:",
+   "en_sha1": "f3f3c7c8d040cb18e2600ce76135201847e1ea89",
+   "nl": "Awake:",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (formula name (brand) as a label)"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#126",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#126",
+   "en": "Asleep:",
+   "en_sha1": "b84db316a641a2746cd885a78ab2b5277d6956ab",
+   "nl": "Asleep:",
+   "status": "admin",
+   "flags": [
+    "admin",
+    "invariant"
+   ],
+   "notes": "invariant: kept as in EN (formula name (brand) as a label)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#01",
