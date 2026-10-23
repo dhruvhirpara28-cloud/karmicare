@@ -593,6 +593,609 @@ def wave2a(check):
           and ("gid://shopify/MediaImage/3", "alt") not in ops)
 
 
+# ---- wave 2b: metaobject fields through typed references, field proposals and reviewed field bindings ----------
+
+REF = "list.metaobject_reference"
+ONE = "metaobject_reference"
+TXT = "single_line_text_field"
+MTXT = "multi_line_text_field"
+MO = lambda n: "gid://shopify/Metaobject/%s" % n
+
+
+def w2b_objects(**overrides):
+    objs = {
+        MO(800): ("faq_item", "how-to-use", {"title": (TXT, "How to use"), "steps": (REF, json.dumps([MO(802)])),
+                                              "section_content": (MTXT, '<div class="bf-step"><b>One pump</b> Full dose</div><p>Leave it on &amp; relax</p>')}),
+        MO(801): ("faq_item", "quality", {"title": (TXT, "Quality")}),
+        MO(802): ("faq_step", "step-1", {"text": (TXT, "Step one")}),
+        MO(810): ("table", "main-table", {"compare_plans": (REF, json.dumps([MO(830)])), "compare_rows": (REF, json.dumps([MO(840)]))}),
+        MO(830): ("plan", "rhythm", {"name": (TXT, "Rhythm plan")}),
+        MO(840): ("row", "shipping", {"label": (TXT, "Shipping")}),
+        MO(820): ("compare_value", "cell-rhythm-shipping", {"value": (TXT, "Free"), "compare_plan": (ONE, MO(830)), "compare_row": (ONE, MO(840))}),
+        MO(821): ("compare_value", "cell-other", {"value": (TXT, "Free"), "compare_plan": (ONE, MO(831)), "compare_row": (ONE, MO(840))}),
+    }
+    for gid, change in overrides.items():
+        typ, handle, fields = objs[MO(gid)]
+        objs[MO(gid)] = (typ, handle, dict(fields, **change))
+    return objs
+
+
+def w2b_store(objs, roots=None):
+    store = base_store()
+    store["types"]["METAOBJECT"] += [{"resourceId": g, "translatableContent": [c(k, v) for k, (ft, v) in f.items() if "reference" not in ft],
+                                      "translations": {}} for g, (_, _, f) in objs.items()]
+    store["product_metafields"]["gid://shopify/Product/1"] += roots if roots is not None else [
+        {"id": "gid://shopify/Metafield/30", "namespace": "custom", "key": "faq_items", "type": REF, "value": json.dumps([MO(800), MO(801)])},
+        {"id": "gid://shopify/Metafield/31", "namespace": "custom", "key": "ct", "type": ONE, "value": MO(810)}]
+    store["w2b"] = objs
+    return store
+
+
+class W2BFake(Fake):
+    def post(self, path, body, headers):
+        q, objs = body.get("query", ""), self.store.get("w2b", {})
+        page = {"hasNextPage": False, "endCursor": None}
+        shape = lambda g: None if g not in objs else {"id": g, "type": objs[g][0], "handle": objs[g][1],
+                                                      "fields": [{"key": k, "type": ft, "value": v} for k, (ft, v) in objs[g][2].items()]}
+        if path != "/admin/oauth/access_token" and "metaobjectByHandle" in q:
+            v = body["variables"]
+            g = next((g for g, (ty, h, _) in objs.items() if ty == v["type"] and h == v["handle"]), None)
+            return 200, {"data": {"metaobjectByHandle": shape(g) if g else None}}, None
+        if path != "/admin/oauth/access_token" and "metaobjects(" in q:
+            nodes = [{"id": g, "handle": h} for g, (ty, h, _) in objs.items() if ty == body["variables"]["type"]]
+            return 200, {"data": {"metaobjects": {"nodes": nodes, "pageInfo": page}}}, None
+        if path != "/admin/oauth/access_token" and "metaobject(" in q:
+            return 200, {"data": {"metaobject": shape(body["variables"]["id"])}}, None
+        return super().post(path, body, headers)
+
+
+def w2b_plan(extra_mf=(), extra_mo=(), hold=None):
+    mf = lambda n, en, nl, **kw: item("b%s" % n, en, nl, key="value", field="custom.faq_items#%02d" % n, **kw)
+    mfs = [mf(1, "How to use", "Gebruik"), mf(2, "One pump", "Eén pomp"), mf(3, "Full dose", "Volle dosis"),
+           mf(4, "Leave it on & relax", "Laat het zitten & ontspan"), mf(5, "Step one", "Stap één")] + list(extra_mf)
+    mos = [item("c1", "Free", "Gratis", field="custom.ct|shop.metaobjects.compare_value#01"),
+           item("c2", "Shipping", "Verzending", field="custom.ct|shop.metaobjects.compare_value#02")] + list(extra_mo)
+    return {"lang": "nl", "resources": [{"shopify_type": "METAFIELD", "owner": "duo", "items": mfs},
+                                        {"shopify_type": "METAOBJECT", "owner": "duo", "items": mos}]}
+
+
+SHOP_OK = {"objects": {"compare_value": [{"handle": "cell-rhythm-shipping", "gid": MO(820), "match": {"compare_plan": "compare_plans", "compare_row": "compare_rows"}},
+                                {"handle": "cell-other", "gid": MO(821), "match": {"compare_plan": "compare_plans", "compare_row": "compare_rows"}}]}}
+
+
+def run2b(store, plan, field_bindings=None, shop=None, item_bindings=None, argv=("--lang", "nl", "--theme-id", THEME), fake=None):
+    """main() on the wave 2b fixtures: (exit code, output, dry-run JSON or None, fields-proposed JSON or None, fake)."""
+    with tempfile.TemporaryDirectory() as sub:
+        fb, so = os.path.join(sub, "bindings-fields.json"), os.path.join(sub, "shop-objects.json")
+        if field_bindings is not None:
+            json.dump({"bindings": {"nl": field_bindings}}, open(fb, "w", encoding="utf-8"))
+        if shop is not None:
+            json.dump(shop, open(so, "w", encoding="utf-8"))
+        json.dump(plan, open(os.path.join(sub, "plan-nl.json"), "w", encoding="utf-8"))
+        bp = os.path.join(sub, "bindings.json")
+        if item_bindings:
+            json.dump({"bindings": item_bindings}, open(bp, "w", encoding="utf-8"))
+        fake = fake or W2BFake(store)
+        extra = {"field_bindings_path": fb, "shop_objects_path": so} if "field_bindings_path" in register.main.__code__.co_varnames else {}
+        out = io.StringIO()
+        code = 0
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            try:
+                register.main(list(argv), transport=fake, credentials=lambda: ("client-id", register.Secret(SECRET)), out=sub,
+                              plans=os.path.join(sub, "plan-%s.json"), bindings_path=bp, **extra)
+            except SystemExit as e:
+                code = e.code if isinstance(e.code, int) else 1
+        load = lambda n: json.load(open(os.path.join(sub, n), encoding="utf-8")) if os.path.exists(os.path.join(sub, n)) else None
+        return code, out.getvalue(), load("dry-run-nl.json"), load("fields-proposed-nl.json"), fake
+
+
+def bind(props, *fkeys):
+    """Reviewed field bindings made from proposals, as a reviewer would copy them."""
+    out = {}
+    for k in [k for k in fkeys if k in props]:
+        ev = {x: v for x, v in props[k].items() if x not in ("current", "proposal_hash")}
+        out[k] = {"proposal_hash": props[k]["proposal_hash"], "evidence": ev}
+    return out
+
+
+def proposed(objs=None, plan=None, roots=None, **kw):
+    code, text, d, f, _ = run2b(w2b_store(objs or w2b_objects(), roots), plan or w2b_plan(), **kw)
+    WROTE.clear()
+    WROTE.update("%s|%s" % (o["resource"], o["key"]) for o in (d or {}).get("ops", []))
+    return code, text, d, (f or {}).get("proposals", {}), (f or {}).get("exceptions", [])
+
+
+WROTE = set()  # resource|key of the operations of the last proposed() run: never a metaobject field without a binding
+
+
+def wave2b(check):
+    code, text, d, props, exc = proposed(shop=SHOP_OK)
+    check("2b: dry run exits 0 and writes no metaobject field without a binding", code == 0
+          and not any("Metaobject" in o["resource"] for o in d["ops"]), text)
+    sc = props.get(MO(800) + "|section_content", {})
+    check("2b: an HTML field is proposed span by span, tags and entities kept",
+          sc.get("assembled") == '<div class="bf-step"><b>Eén pomp</b> Volle dosis</div><p>Laat het zitten &amp; ontspan</p>', sc.get("assembled"))
+    check("2b: plain fields of referenced and nested objects are proposed", props.get(MO(800) + "|title", {}).get("assembled") == "Gebruik"
+          and props.get(MO(802) + "|text", {}).get("assembled") == "Stap één")
+    check("2b: a proposal carries its typed path, spans and proposal hash",
+          [e["via"] for e in (props.get(MO(802) + "|text", {}).get("paths") or [[]])[0]] == ["custom.faq_items", "steps"]
+          and (props.get(MO(800) + "|section_content", {}).get("spans") or [{}])[0].get("items") == ["b2"]
+          and len(props.get(MO(800) + "|title", {}).get("proposal_hash", "")) == 64)
+    check("2b: the reviewed shop object selected by the product's table is proposed; another plan's cell is not",
+          MO(820) + "|value" in props and MO(821) + "|value" not in props and MO(840) + "|label" in props, sorted(props))
+    _, _, _, props_noshop, _ = proposed()
+    check("2b: without the reviewed shop-object list no shop-level cell is proposed", MO(820) + "|value" not in props_noshop)
+
+    # Reviewed field bindings: written with the evidence hash; changed evidence aborts the whole write
+    fb = bind(props, MO(800) + "|section_content", MO(800) + "|title")
+    code, text, dbound, _, _ = run2b(w2b_store(w2b_objects()), w2b_plan(), field_bindings=fb, shop=SHOP_OK)
+    sec = next((o for o in (dbound or {"ops": []})["ops"] if o["resource"] == MO(800) and o["key"] == "section_content"), None)
+    check("2b: a bound field is written, its evidence hash in the approval", code == 0 and sec is not None
+          and sec["value"].startswith('<div class="bf-step"><b>Eén pomp</b>')
+          and any(o.get("evidence") == fb.get(MO(800) + "|section_content", {}).get("proposal_hash", "-") for o in dbound["snapshot"]["ops"]), text)
+    changed = w2b_objects(**{"800": {"title": (TXT, "How to use it")}})
+    code, text, dstale, fstale, _ = run2b(w2b_store(changed), w2b_plan(), field_bindings=fb, shop=SHOP_OK)
+    check("2b: a bound field whose EN changed is reported stale in the dry run", code == 0 and any(s["field"] == MO(800) + "|title" for s in (fstale or {}).get("stale", [])))
+    fake = W2BFake(w2b_store(changed))
+    code_w, text_w, _, _, fake = run2b(None, w2b_plan(), field_bindings=fb, shop=SHOP_OK, fake=fake,
+                                       argv=("--lang", "nl", "--theme-id", THEME, "--write", "--approve", (dstale or {}).get("checksum", "x")))
+    check("2b: a write with a stale field binding aborts before any mutation", code_w == 2 and not fake.mutations
+          and "no longer match" in text_w, text_w)
+    moved = w2b_objects(**{"800": {"steps": (REF, json.dumps([]))}})
+    fb2 = bind(props, MO(802) + "|text")
+    _, _, _, fmoved, _ = run2b(w2b_store(moved), w2b_plan(), field_bindings=fb2, shop=SHOP_OK)
+    check("2b: a bound field the product no longer reaches is stale", any(s["field"] == MO(802) + "|text" for s in (fmoved or {}).get("stale", [])))
+
+    # R30-1: escapes from the product family and retargeting
+    textroot = [{"id": "gid://shopify/Metafield/30", "namespace": "custom", "key": "faq_items", "type": TXT,
+                 "value": "see %s for more" % MO(800)}]
+    _, _, _, p, _ = proposed(roots=textroot)
+    check("R30-1: a GID inside a text metafield is no reference", not any(k.startswith(MO(800)) for k in p) and not any(k.startswith(MO(800)) for k in WROTE), sorted(p))
+    noroot = [{"id": "gid://shopify/Metafield/30", "namespace": "custom", "key": "faq_items", "type": REF, "value": json.dumps([MO(800)])}]
+    _, _, _, p, _ = proposed(roots=noroot, shop=SHOP_OK)
+    check("R30-1: without the table root no shop-level cell is reached", MO(820) + "|value" not in p and MO(800) + "|title" not in WROTE and MO(820) + "|value" not in WROTE, sorted(p))
+    bound_item = {"b1": {"resource": MO(800), "key": "reviewed_title", "en_sha1": sha1("How to use")}}
+    _, _, _, p, exc = proposed(item_bindings=bound_item)
+    check("R30-1: an item bound elsewhere vetoes the field the route would propose", MO(800) + "|title" not in p and MO(800) + "|title" not in WROTE and MO(820) + "|value" not in WROTE
+          and any("binding elsewhere" in "; ".join(e["reasons"]) for e in exc))
+    retarget = w2b_objects(**{"800": {"title": (TXT, "Changed title"), "other_title": (TXT, "How to use")}})
+    fbt = bind(props, MO(800) + "|title")
+    _, _, dret, fret, _ = run2b(w2b_store(retarget), w2b_plan(), field_bindings=fbt)
+    check("R30-1: a bound field never moves to a sibling with the same EN (stale, not written)",
+          not any(o["key"] in ("title", "other_title") and o["resource"] == MO(800) for o in (dret or {"ops": []})["ops"])
+          and any(s["field"] == MO(800) + "|title" for s in (fret or {}).get("stale", [])))
+
+    # R30-2: held and gated siblings veto
+    for label, extra in (("held", dict(hold=["legal-review"])), ("gated", {})):
+        it = item("b9", "One pump", "Pomp", key="value", field="custom.faq_items#09", **extra)
+        if label == "gated":
+            it["gates"] = ["legal-review"]
+        _, _, _, p, _ = proposed(plan=w2b_plan(extra_mf=[it]))
+        check("R30-2: a %s sibling with the same EN vetoes the field" % label, MO(800) + "|section_content" not in p
+              and MO(800) + "|section_content" not in WROTE)
+        mo = item("c9", "Shipping", "Levering", field="custom.ct|shop.metaobjects.compare_value#09", **extra)
+        if label == "gated":
+            mo["gates"] = ["legal-review"]
+        _, _, _, p, _ = proposed(plan=w2b_plan(extra_mo=[mo]), shop=SHOP_OK)
+        check("R30-2: a %s sibling vetoes the field in the metaobject route too" % label, MO(840) + "|label" not in p
+              and MO(840) + "|label" not in WROTE)
+
+    # R30-3 / R31: markup, attributes, comments, Liquid, entities, malformed markup, split sentences
+    def field_case(value, en="Free", nl="Gratis"):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        _, _, _, p, exc = proposed(objs=objs, plan=w2b_plan(extra_mf=[item("bx", en, nl, key="value", field="custom.faq_items#20")]))
+        if MO(801) + "|body" in WROTE:
+            return "WRITTEN WITHOUT REVIEW", exc
+        return p.get(MO(801) + "|body", {}).get("assembled"), exc
+    out, _ = field_case('<a href="/Free" class="Free" data-x="Free">Free</a>')
+    check("R30-3: href, class and data attributes stay byte for byte", out == '<a href="/Free" class="Free" data-x="Free">Gratis</a>', out)
+    out, _ = field_case('<!-- Free --><p>Free</p>')
+    check("R30-3: a comment stays byte for byte", out == '<!-- Free --><p>Gratis</p>', out)
+    for value in ('{{ "Free" }} Free', '<p>{% if x %}Free{% endif %}</p>', json.dumps({"type": "root", "children": [{"type": "text", "value": "{{ Free }}"}]})):
+        out, exc = field_case(value)
+        check("R31: a Liquid-bearing field is not proposed (%s)" % value[:18], out is None and any("Liquid" in "; ".join(e["reasons"]) for e in exc))
+    out, _ = field_case("<p>Free &amp; easy</p>", en="Free & easy", nl="Gratis & makkelijk")
+    check("R31: an entity is decoded for matching and the translation re-escaped", out == "<p>Gratis &amp; makkelijk</p>", out)
+    for value, why in (("<p>Free</p", "unclosed tag"), ("<p>Free></p>", "stray >"), ("<!-- Free <p>Free</p>", "unterminated comment"),
+                       ("<p>Free &bogus; </p>", "bad entity"), ("<script>Free</script>", "script")):
+        out, _ = field_case(value)
+        check("R31: malformed markup is not proposed (%s)" % why, out is None, out)
+    out, exc = field_case("<p>Leave it <b>on</b> &amp; relax</p>", en="Leave it on & relax", nl="Laat het zitten & ontspan")
+    check("R31: a sentence split by inline markup is reported, not proposed", out is None
+          and any("split sentence" in "; ".join(e["reasons"]) for e in exc))
+    for value, why in (("<p>Free 健康</p>", "CJK"), ("<p>Free υγεία</p>", "Greek"), ("<p>Free здоровье</p>", "Cyrillic"),
+                       ("<p>Free</p><p>Café</p>", "combining mark"), ("<p>Free</p><p>★</p>", "symbol"), ("<p>Free</p><p>🙂</p>", "emoji")):
+        out, _ = field_case(value)
+        check("R30-4: unmapped %s text keeps the field unproposed" % why, out is None, out)
+
+
+SHOP_820 = {"objects": {"compare_value": [SHOP_OK["objects"]["compare_value"][0]]}}
+WRITE = ("--lang", "nl", "--theme-id", THEME, "--write", "--approve")
+
+
+def bound_write(objs, plan, key, shop=None, item_bindings=None, change=None, plan_after=None, fake=None, prep=None, roots=None):
+    """A reviewer binds the clean proposal of key (a list binds several) and approves the bound dry run; then the
+    store changes (change(store)) or the plan does, and the write runs with the approved checksum:
+    (proposed, write exit, mutations, output, stale). prep(store) sets up every store, roots replaces the product's."""
+    def make():
+        store = w2b_store(copy.deepcopy(objs), copy.deepcopy(roots))
+        if prep:
+            prep(store)
+        return store
+    _, _, _, f, _ = run2b(make(), plan, shop=shop, item_bindings=item_bindings)
+    props = (f or {}).get("proposals", {})
+    keys = key if isinstance(key, list) else [key]
+    if not all(k in props for k in keys):
+        return False, None, None, "", []
+    fb = bind(props, *keys)
+    _, _, d, _, _ = run2b(make(), plan, shop=shop, item_bindings=item_bindings, field_bindings=fb)
+    store = make()
+    if change:
+        change(store)
+    _, _, _, fafter, _ = run2b(copy.deepcopy(store), plan_after or plan, shop=shop, item_bindings=item_bindings, field_bindings=fb)
+    fake = fake(store) if fake else W2BFake(store)
+    code, text, _, _, fake = run2b(None, plan_after or plan, shop=shop, item_bindings=item_bindings, field_bindings=fb, fake=fake,
+                                   argv=WRITE + ((d or {}).get("checksum", "x"),))
+    return True, code, len(fake.mutations), text, (fafter or {}).get("stale", [])
+
+
+def set_object(gid, _handle=None, **fields):
+    def change(store):
+        typ, handle, old = store["w2b"][MO(gid)]
+        store["w2b"][MO(gid)] = (typ, _handle or handle, dict(old, **fields))
+    return change
+
+
+def r32(check):
+    """R32 regressions: each one fails against the first wave 2b candidate (negative proof in the notes)."""
+    cell = MO(820) + "|value"
+    # 821's row is outside the table, so moving 820 to plan 831 tests the evidence, not the uniqueness check (C6)
+    two_plans = w2b_objects(**{"810": {"compare_plans": (REF, json.dumps([MO(830), MO(831)]))}, "821": {"compare_row": (ONE, MO(841))}})
+    two_plans[MO(831)] = ("plan", "year", {"name": (TXT, "Year plan")})
+
+    # R32-1: the storefront selection, root and intermediate identities are part of the evidence
+    ok, code, muts, text, stale = bound_write(two_plans, w2b_plan(), cell, shop=SHOP_820, change=set_object(820, compare_plan=(ONE, MO(831))))
+    check("R32-1: a cell moved to another valid plan of the table is stale; the old approval writes nothing",
+          ok and code == 2 and muts == 0 and any(s["field"] == cell and "evidence differs" in s["why"] for s in stale), (ok, code, muts, stale))
+    ok, code, muts, text, stale = bound_write(two_plans, w2b_plan(), cell, shop=SHOP_820, change=set_object(820, compare_plan=(TXT, MO(830))))
+    check("R32-1: a cell whose plan reference becomes plain text is no longer selected; nothing written",
+          ok and code == 2 and muts == 0 and any(s["field"] == cell for s in stale), (ok, code, muts, stale))
+    ok, code, muts, text, stale = bound_write(w2b_objects(), w2b_plan(), cell, shop=SHOP_820,
+                                              change=set_object(810, compare_plans=(REF, json.dumps([MO(830), MO(831)]))))
+    check("R32-1: a change to the table's plan list is stale for its cells", ok and code == 2 and muts == 0
+          and any(s["field"] == cell for s in stale), (ok, code, muts, stale))
+    out_row = w2b_objects(**{"820": {"compare_row": (ONE, MO(999))}})
+    _, _, _, p, _ = proposed(objs=out_row, shop=SHOP_OK)
+    check("R32-1: a cell whose row is not in the table is not selected", cell not in p and cell not in WROTE, sorted(p))
+    weak = {"objects": {"compare_value": [dict(SHOP_OK["objects"]["compare_value"][0], match={"compare_plan": "compare_plans"})]}}
+    code, text, _, _, fake = run2b(w2b_store(w2b_objects()), w2b_plan(), shop=weak)
+    check("R32-1: a shop-objects entry without the full storefront selector is refused", code == 2 and "storefront selector" in text
+          and not fake.mutations, text)
+    other = {"objects": {"compare_plan": [{"handle": "rhythm", "gid": MO(830), "match": {"compare_plan": "compare_plans"}}]}}
+    code, text, _, _, _ = run2b(w2b_store(w2b_objects()), w2b_plan(), shop=other)
+    check("R32-1: a shop-level type without a known storefront selector is refused", code == 2 and "storefront selector" in text, text)
+    twice = w2b_objects(**{"821": {"compare_plan": (ONE, MO(830))}})
+    _, _, _, p, exc = proposed(objs=twice, shop=SHOP_OK)
+    check("R32-1: two reviewed cells with the same selection are both blocked", cell not in p and MO(821) + "|value" not in p
+          and any("selected twice" in "; ".join(e["reasons"]) for e in exc), sorted(p))
+    ok, code, muts, text, stale = bound_write(w2b_objects(), w2b_plan(), MO(802) + "|text", change=set_object(800, _handle="renamed-faq"))
+    check("R32-1: a changed intermediate handle is stale; nothing written", ok and code == 2 and muts == 0
+          and any(s["field"] == MO(802) + "|text" for s in stale), (ok, code, muts, stale))
+
+    def new_root_gid(store):
+        next(m for m in store["product_metafields"]["gid://shopify/Product/1"] if m["key"] == "faq_items")["id"] = "gid://shopify/Metafield/999"
+    ok, code, muts, text, stale = bound_write(w2b_objects(), w2b_plan(), MO(802) + "|text", change=new_root_gid)
+    check("R32-1: a replaced root metafield (same key and value) is stale; nothing written", ok and code == 2 and muts == 0
+          and any(s["field"] == MO(802) + "|text" for s in stale), (ok, code, muts, stale))
+    shared = w2b_objects(**{"801": {"steps": (REF, json.dumps([MO(802)]))}})
+    _, _, _, p, _ = proposed(objs=shared)
+    paths = p.get(MO(802) + "|text", {}).get("paths") or []
+    check("R32-1: every path found to a shared object is kept, with each destination's type and handle",
+          len(paths) == 2 and all(e.get("to_handle") for path in paths for e in path) and paths[0][0].get("metafield") == "gid://shopify/Metafield/30",
+          paths)
+    _, _, _, p, _ = proposed(shop=SHOP_OK)
+    sel = next((e for path in p.get(cell, {}).get("paths") or [] for e in path if e["type"] == "selection"), {})
+    check("R32-1: the selection edge records the pinned entry, the resolved plan and row and the table members",
+          sel.get("pinned") == {"handle": "cell-rhythm-shipping", "gid": MO(820)}
+          and [(s["cell_field"], s["value"], s["table_members"]) for s in sel.get("selector", [])]
+          == [("compare_plan", MO(830), [MO(830)]), ("compare_row", MO(840), [MO(840)])], sel)
+
+    # R32-2: legacy-bound, held, gated and conflicting rows veto in both routes, structural JSON leaves included
+    label = MO(840) + "|label"
+    for status in ("hold", "gates", "conflict"):
+        sib = item("c9", "Shipping", "Anders", field="custom.ct|shop.metaobjects.compare_value#09")
+        if status != "conflict":
+            sib[status] = ["legal-review"]
+        ib = {"c9": {"resource": MO(999), "key": "elsewhere", "en_sha1": sha1("Shipping")}}
+        _, _, _, p, _ = proposed(plan=w2b_plan(extra_mo=[sib]), shop=SHOP_OK, item_bindings=ib)
+        ok, code, muts, text, stale = bound_write(w2b_objects(), w2b_plan(), label, shop=SHOP_OK, item_bindings=ib,
+                                                  plan_after=w2b_plan(extra_mo=[sib]))
+        check("R32-2: a legacy-bound %s sibling vetoes the field; a binding made before writes nothing" % status,
+              label not in p and ok and code == 2 and muts == 0, (sorted(p), ok, code, muts))
+    own = {"c2": {"resource": MO(840), "key": "label", "en_sha1": sha1("Shipping")}}
+    _, _, d, p, exc = proposed(item_bindings=own)
+    check("R32-2: a field a legacy item is bound to stays with that route (written once, not proposed again)",
+          label not in p and any(o["resource"] == MO(840) and o["key"] == "label" and "bindings.json" in o["how"] for o in d["ops"])
+          and not any(e["field"] == label for e in exc), (sorted(p), exc))
+    rich = json.dumps({"type": "root", "children": [{"type": "text", "value": "Free"}, {"type": "link", "url": "Held claim", "children": []}]})
+    free = item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20")
+    for status in ("hold", "gates"):
+        claim = item("hc", "Held claim", "Vastgehouden", key="value", field="custom.faq_items#21")
+        claim[status] = ["legal-review"]
+        objs = w2b_objects(**{"801": {"body": (MTXT, rich)}})
+        _, _, _, p, exc = proposed(objs=objs, plan=w2b_plan(extra_mf=[free, claim]))
+        ok, code, muts, text, stale = bound_write(objs, w2b_plan(extra_mf=[free]), MO(801) + "|body", plan_after=w2b_plan(extra_mf=[free, claim]))
+        check("R32-2: a %s row on a structural JSON leaf vetoes the field; a binding made before writes nothing" % status,
+              MO(801) + "|body" not in p and any("held segment" in "; ".join(e["reasons"]) for e in exc) and ok and code == 2 and muts == 0,
+              (sorted(p), ok, code, muts))
+
+    # R32-3: quote-aware tags; uncertain markup refuses
+    def body(value, en="Free", nl="Gratis"):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        _, _, _, p, exc = proposed(objs=objs, plan=w2b_plan(extra_mf=[item("bx", en, nl, key="value", field="custom.faq_items#20")]))
+        return ("WRITTEN WITHOUT REVIEW" if MO(801) + "|body" in WROTE else p.get(MO(801) + "|body", {}).get("assembled")), exc
+    for value, why in (('<a title="unclosed>Free</a>', "unclosed double quote"), ("<a title='unclosed>Free</a>", "unclosed single quote"),
+                       ('<a title="x"class="y">Free</a>', "attributes without whitespace"), ("<!-->Free<!-- x -->", "abrupt comment <!-->"),
+                       ("<!--->Free<!-- x -->", "abrupt comment <!--->"), ("<!-- a --!><p>Free</p> -->", "comment closed by --!>"),
+                       ("<textarea>Free</textarea>", "textarea"), ("<title>Free</title>", "title"), ("<svg><text>Free</text></svg>", "svg"),
+                       ("<!DOCTYPE html><p>Free</p>", "doctype"), ("<?php x ?><p>Free</p>", "processing instruction"),
+                       ('<a title=x"y>Free</a>', "stray quote in an unquoted value")):
+        out, exc = body(value)
+        check("R32-3: %s is not proposed" % why, out is None and any("markup" in "; ".join(e["reasons"]) for e in exc), (out, exc))
+    out, _ = body("<a title=\"a>b\" data-x='c>d' href=/x>Free</a>")
+    check("R32-3: a quoted '>' stays inside its tag, the attributes byte for byte", out == "<a title=\"a>b\" data-x='c>d' href=/x>Gratis</a>", out)
+
+    # R32-4: Liquid behind JSON escapes or entities refuses
+    esc = lambda tree: json.dumps(tree).replace("{{", "\\u007b\\u007b").replace("}}", "\\u007d\\u007d")
+    for value, why in ((esc({"type": "root", "children": [{"type": "text", "value": "Free"}, {"type": "link", "url": "https://x.test/{{ s }}", "children": []}]}), "an escaped structural URL"),
+                       (esc({"type": "root", "children": [{"type": "text", "value": "{{ Free }}"}]}), "an escaped text leaf"),
+                       (esc({"{{ k }}": "Free"}), "an escaped object key"),
+                       ("<p>&#123;&#123; x &#125;&#125;</p><p>Free</p>", "HTML entities")):
+        out, exc = body(value)
+        check("R32-4: Liquid in %s keeps the field unproposed" % why, out is None and any("Liquid" in "; ".join(e["reasons"]) for e in exc), (out, exc))
+
+    # R32-5: the writer re-reads provenance, uncached, before the first mutation and before each chunk
+    plan = w2b_plan()
+
+    class Detach(W2BFake):
+        """Detaches the product's FAQ root on the content re-read of `on` (the writer's last read before a mutation)."""
+        on = [MO(800)]
+
+        def post(self, path, body_, headers):
+            if "translatableResourcesByIds" in body_.get("query", "") and body_["variables"]["ids"] == self.on:
+                for mf in self.store["product_metafields"]["gid://shopify/Product/1"]:
+                    if mf["key"] == "faq_items":
+                        mf["value"] = "[]"
+            return super().post(path, body_, headers)
+    ok, code, muts, text, _ = bound_write(w2b_objects(), plan, MO(800) + "|title", fake=Detach)
+    check("R32-5: a reference detached at the writer's last re-read stops the chunk: nothing written",
+          ok and code == 2 and muts == 0 and "provenance" in text, (ok, code, muts, text))
+    _, _, _, f, _ = run2b(w2b_store(w2b_objects()), plan)
+    fb = bind(f["proposals"], MO(800) + "|title", MO(802) + "|text")
+    _, _, d, _, _ = run2b(w2b_store(w2b_objects()), plan, field_bindings=fb)
+
+    class Unlink(W2BFake):
+        """Unlinks step 802 from 800 when the second PRODUCT listing starts: the writer's first provenance read."""
+        def post(self, path, body_, headers):
+            if "translatableResources(" in body_.get("query", "") and body_["variables"].get("type") == "PRODUCT":
+                self.listings = getattr(self, "listings", 0) + 1
+                if self.listings == 2:
+                    typ, handle, old = self.store["w2b"][MO(800)]
+                    self.store["w2b"][MO(800)] = (typ, handle, dict(old, steps=(REF, "[]")))
+            return super().post(path, body_, headers)
+    fake = Unlink(w2b_store(w2b_objects()))
+    code, text, _, _, fake = run2b(None, plan, field_bindings=fb, fake=fake, argv=WRITE + (d["checksum"],))
+    check("R32-5: provenance of all bound fields is checked before the first mutation", code == 2 and not fake.mutations
+          and "before any write" in text, (code, fake.mutations, text))
+
+    class Later(W2BFake):
+        """Unlinks step 802 at 800's content re-read: 800's chunk is still right, 802's chunk must stop."""
+        def post(self, path, body_, headers):
+            if "translatableResourcesByIds" in body_.get("query", "") and body_["variables"]["ids"] == [MO(800)]:
+                typ, handle, old = self.store["w2b"][MO(800)]
+                self.store["w2b"][MO(800)] = (typ, handle, dict(old, steps=(REF, "[]")))
+            return super().post(path, body_, headers)
+    fake = Later(w2b_store(w2b_objects()))
+    code, text, _, _, fake = run2b(None, plan, field_bindings=fb, fake=fake, argv=WRITE + (d["checksum"],))
+    check("R32-5: a later chunk re-checks its own provenance (one write, then a stop)", code == 2 and len(fake.mutations) == 1
+          and fake.mutations[0][1] == MO(800), (code, fake.mutations, text))
+
+    # R32-6: whitespace spelled as entities stays as spelled
+    for value, want_ in (("<p>&nbsp;Free&nbsp;</p>", "<p>&nbsp;Gratis&nbsp;</p>"), ("<p>&#160; Free &#xA0;</p>", "<p>&#160; Gratis &#xA0;</p>"),
+                         ("<p>&nbsp;</p><p>Free</p>", "<p>&nbsp;</p><p>Gratis</p>"), ("<p> &NonBreakingSpace;Free</p>", "<p> &NonBreakingSpace;Gratis</p>")):
+        out, _ = body(value)
+        check("R32-6: entity whitespace kept as spelled (%s)" % value[:22], out == want_, out)
+
+
+class Listings(W2BFake):
+    """Runs hook(store) when the n-th PRODUCT listing starts. In a write the listings are: 1 the build, 2 the global
+    provenance check before the first mutation, 3 the first chunk's provenance check after its content re-read."""
+    n, hook = None, None
+
+    def post(self, path, body_, headers):
+        if "translatableResources(" in body_.get("query", "") and body_["variables"].get("type") == "PRODUCT":
+            self.listings = getattr(self, "listings", 0) + 1
+            if self.listings == self.n:
+                self.hook(self.store)
+        return super().post(path, body_, headers)
+
+
+def listing_fake(n, hook):
+    return lambda store: type("Hooked", (Listings,), {"n": n, "hook": staticmethod(hook)})(store)
+
+
+def set_nl(gid, key, value):
+    def prep(store):
+        node = next(x for x in store["types"]["METAOBJECT"] if x["resourceId"] == MO(gid))
+        node["translations"] = {"nl": [tr(key, value)]}
+    return prep
+
+
+def r32c(check):
+    """R32c regressions: each fails on candidate 2 and passes on candidate 3 (the two parser controls pass on both)."""
+    # C1: a current translation the provenance re-read returns as changed stops the write
+    ok, code, muts, text, _ = bound_write(w2b_objects(), w2b_plan(), MO(800) + "|title",
+                                          fake=listing_fake(3, set_nl(800, "title", "Victor edited this")))
+    check("R32c-C1: a manual NL edit seen by the chunk's provenance re-read is not overwritten",
+          ok and code == 2 and muts == 0 and "provenance re-read" in text, (ok, code, muts, text))
+
+    # C2: a legacy binding to the target itself still meets the family veto
+    own = {"c2": {"resource": MO(840), "key": "label", "en_sha1": sha1("Shipping")}}
+    for status in ("hold", "gates", "conflict"):
+        sib = item("c9", "Shipping", "Anders", field="custom.ct|shop.metaobjects.compare_value#09")
+        if status != "conflict":
+            sib[status] = ["legal-review"]
+        plan = w2b_plan(extra_mo=[sib])
+        _, _, d, _, _ = run2b(w2b_store(w2b_objects()), plan, item_bindings=own)
+        code, text, _, _, fake = run2b(w2b_store(w2b_objects()), plan, item_bindings=own, argv=WRITE + ((d or {}).get("checksum", "x"),))
+        check("R32c-C2: a %s sibling stops the legacy item bound to the same field" % status,
+              d is not None and not any(o["resource"] == MO(840) for o in d["ops"]) and not any(m[1] == MO(840) for m in fake.mutations)
+              and any(r["id"] == "c2" and r["result"] == "not written" for r in d["rows"]), (code, fake.mutations))
+
+    # C3: every known root edge to an unreadable object stays in the evidence
+    roots = [{"id": "gid://shopify/Metafield/30", "namespace": "custom", "key": "faq_items", "type": REF, "value": json.dumps([MO(800)])},
+             {"id": "gid://shopify/Metafield/32", "namespace": "custom", "key": "faq_other", "type": REF, "value": json.dumps([MO(800)])}]
+    star = {"lang": "nl", "resources": [{"shopify_type": "METAFIELD", "owner": "duo",
+                                         "items": [item("q1", "How to use", "Gebruik", key="value", field="custom.faq_*#01")]}]}
+    unreadable = lambda store: store["w2b"].pop(MO(800))
+
+    def second_root(store):
+        next(m for m in store["product_metafields"]["gid://shopify/Product/1"] if m["key"] == "faq_other")["id"] = "gid://shopify/Metafield/999"
+    ok, code, muts, text, stale = bound_write(w2b_objects(), star, MO(800) + "|title", roots=roots, prep=unreadable, change=second_root)
+    check("R32c-C3: a changed second root to an unreadable object is stale; nothing written",
+          ok and code == 2 and muts == 0 and any(s["field"] == MO(800) + "|title" for s in stale), (ok, code, muts, stale))
+
+    # C4: a JSON string scalar is decoded for the Liquid check
+    scalar = '"\\u007b\\u007b Free \\u007d\\u007d"'
+    objs = w2b_objects(**{"801": {"body": (MTXT, scalar)}})
+    plan = w2b_plan(extra_mf=[item("bx", scalar, "Gratis", key="value", field="custom.faq_items#20")])
+    _, _, _, p, exc = proposed(objs=objs, plan=plan)
+    ok, code, muts, _, _ = bound_write(objs, plan, MO(801) + "|body")
+    check("R32c-C4: escaped Liquid in a JSON string scalar keeps the field unproposed",
+          MO(801) + "|body" not in p and not ok and any("Liquid" in "; ".join(e["reasons"]) for e in exc), (sorted(p), exc))
+
+    # C5: the global check covers every reviewed binding, also one that needs no operation
+    plan = w2b_plan(extra_mf=[item("b6", "Quality", "Kwaliteit", key="value", field="custom.faq_items#06")])
+
+    def detach_801(store):
+        next(m for m in store["product_metafields"]["gid://shopify/Product/1"] if m["key"] == "faq_items")["value"] = json.dumps([MO(800)])
+    ok, code, muts, text, _ = bound_write(w2b_objects(), plan, [MO(800) + "|title", MO(801) + "|title"], prep=set_nl(801, "title", "Kwaliteit"),
+                                          fake=listing_fake(2, detach_801))
+    check("R32c-C5: a bound field already current that the product no longer reaches stops the whole write",
+          ok and code == 2 and muts == 0 and "before any write" in text, (ok, code, muts, text))
+
+    # C6: a reviewed cell counts only when no other object of the type has its selection
+    shadow = w2b_objects(**{"821": {"compare_plan": (ONE, MO(830))}})
+    cell = MO(820) + "|value"
+    _, _, _, p, exc = proposed(objs=shadow, shop=SHOP_820)
+    ok, _, _, _, _ = bound_write(shadow, w2b_plan(), cell, shop=SHOP_820)
+    check("R32c-C6: an unlisted cell with the same selection blocks the reviewed cell", cell not in p and not ok, sorted(p))
+
+    class NoList(W2BFake):
+        def post(self, path, body_, headers):
+            if "metaobjects(" in body_.get("query", ""):
+                return 200, {"errors": [{"message": "Access denied", "extensions": {"code": "ACCESS_DENIED"}}]}, None
+            return super().post(path, body_, headers)
+    code, text, _, f, _ = run2b(None, w2b_plan(), shop=SHOP_820, fake=NoList(w2b_store(w2b_objects())))
+    check("R32c-C6: without the full list of the type no cell is proposed", code == 0 and cell not in (f or {}).get("proposals", {}), text)
+
+    # Parser controls Astra asked to keep (they pass on candidate 2 as well)
+    for value, want_ in (("<p>Free", "<p>Gratis"), ('<a title="x > y">Free</a>', '<a title="x > y">Gratis</a>')):
+        objs = w2b_objects(**{"801": {"body": (MTXT, value)}})
+        _, _, _, p, _ = proposed(objs=objs, plan=w2b_plan(extra_mf=[item("bx", "Free", "Gratis", key="value", field="custom.faq_items#20")]))
+        check("R32c control: %s is proposed as %s" % (value, want_), p.get(MO(801) + "|body", {}).get("assembled") == want_)
+
+
+class Pager(W2BFake):
+    """Serves the compare_value list in pages: first(after) -> (nodes, pageInfo) or None for the normal answer."""
+    first = None
+
+    def post(self, path, body_, headers):
+        q = body_.get("query", "")
+        if "metaobjects(" in q and body_["variables"].get("type") == "compare_value" and self.first:
+            got = self.first(body_["variables"].get("after"))
+            if got is not None:
+                nodes, info = got
+                return 200, {"data": {"metaobjects": {"nodes": [{"id": g, "handle": self.store["w2b"][g][1]} for g in nodes], "pageInfo": info}}}, None
+        return super().post(path, body_, headers)
+
+
+def pager(first):
+    return lambda store: type("Paged", (Pager,), {"first": staticmethod(first)})(store)
+
+
+def r32d(check):
+    """R32d regressions: each fails on candidate 3 and passes on candidate 4 (the controls pass on both)."""
+    body_en = "<p>Free</p><p>Held claim</p>"
+    objs = w2b_objects(**{"840": {"body": (MTXT, body_en)}})
+    fam = "custom.ct|shop.metaobjects.compare_value#%02d"
+    legacy = item("L", body_en, "<p>Gratis</p><p>Vastgehouden claim</p>", field=fam % 30)
+    ib = {"L": {"resource": MO(840), "key": "body", "en_sha1": sha1(body_en)}}
+    body_written = lambda fake: any(m[1] == MO(840) and any(t["key"] == "body" for t in m[2]) for m in fake.mutations)
+
+    def legacy_write(plan, item_bindings):
+        _, _, d, _, _ = run2b(w2b_store(copy.deepcopy(objs)), plan, item_bindings=item_bindings)
+        code, text, _, _, fake = run2b(w2b_store(copy.deepcopy(objs)), plan, item_bindings=item_bindings,
+                                       argv=WRITE + ((d or {}).get("checksum", "x"),))
+        return d or {"ops": [], "rows": []}, code, fake
+
+    # D1: a veto inside the target's segments removes the legacy whole-field op
+    for status in ("hold", "gates", "conflict"):
+        extra = [legacy]
+        if status == "conflict":
+            extra += [item("h1", "Held claim", "Claim A", field=fam % 31), item("h2", "Held claim", "Claim B", field=fam % 32)]
+        else:
+            held = item("h1", "Held claim", "Vastgehouden claim", field=fam % 31)
+            held[status] = ["legal-review"]
+            extra.append(held)
+        d, code, fake = legacy_write(w2b_plan(extra_mo=extra), ib)
+        check("R32d-D1: a %s segment in the target stops the legacy whole-field write" % status,
+              not body_written(fake) and not any(o["resource"] == MO(840) and o["key"] == "body" for o in d["ops"])
+              and any(r["id"] == "L" and r["result"] == "not written" for r in d["rows"]), (code, fake.mutations))
+    d, code, fake = legacy_write(w2b_plan(extra_mo=[legacy, item("h1", "Held claim", "Vastgehouden claim", field=fam % 31)]), ib)
+    check("R32d control: without a veto the legacy whole-field item is still written", code == 0 and body_written(fake), (code, fake.mutations))
+    held_mf = item("bh", "How to use", "Gebruik", key="value", field="custom.faq_items#09", hold=["legal-review"])
+    plan = w2b_plan(extra_mf=[held_mf], extra_mo=[item("L2", "How to use", "Gebruik", field="custom.faq_items#99")])
+    ib2 = {"L2": {"resource": MO(800), "key": "title", "en_sha1": sha1("How to use")}}
+    _, _, d, _, _ = run2b(w2b_store(w2b_objects()), plan, item_bindings=ib2)
+    code, text, _, _, fake = run2b(w2b_store(w2b_objects()), plan, item_bindings=ib2, argv=WRITE + ((d or {}).get("checksum", "x"),))
+    check("R32d-D1: a hold in the METAFIELD group stops the same family's legacy item in the METAOBJECT group",
+          not any(m[1] == MO(800) for m in fake.mutations) and not any(o["resource"] == MO(800) for o in (d or {"ops": []})["ops"]),
+          (code, fake.mutations))
+
+    # D2 / N1: only an explicit hasNextPage false ends the list; repeated cursors and endless lists stop cleanly
+    cell, plan = MO(820) + "|value", w2b_plan()
+    _, _, _, f, _ = run2b(w2b_store(w2b_objects()), plan, shop=SHOP_820)
+    fb = bind(f["proposals"], cell)
+    _, _, approved, _, _ = run2b(w2b_store(w2b_objects()), plan, shop=SHOP_820, field_bindings=fb)
+    shadow = w2b_objects(**{"821": {"compare_plan": (ONE, MO(830))}})
+    for label, info in (("missing", {"endCursor": "p2"}), ("null", {"hasNextPage": None, "endCursor": "p2"}),
+                        ("invalid (0)", {"hasNextPage": 0, "endCursor": "p2"})):
+        paged = pager(lambda after, info=info: ([MO(820)], info) if after is None else ([MO(821)], {"hasNextPage": False, "endCursor": None}))
+        code, text, _, f, _ = run2b(None, plan, shop=SHOP_820, fake=paged(w2b_store(copy.deepcopy(shadow))))
+        cw, tw, _, _, fw = run2b(None, plan, shop=SHOP_820, field_bindings=fb, fake=paged(w2b_store(copy.deepcopy(shadow))),
+                                 argv=WRITE + (approved["checksum"],))
+        check("R32d-D2: a %s hasNextPage leaves the list unknown: no proposal, and a bound write stops" % label,
+              cell not in (f or {}).get("proposals", {}) and cw == 2 and not fw.mutations, (sorted((f or {}).get("proposals", {})), cw, fw.mutations))
+    calls = {"n": 0}
+
+    def same_cursor(after):
+        calls["n"] += 1
+        return ([MO(820)], {"hasNextPage": calls["n"] < 30, "endCursor": "same"})
+    code, text, _, f, _ = run2b(None, plan, shop=SHOP_820, fake=pager(same_cursor)(w2b_store(w2b_objects())))
+    check("R32d-N1: a repeated cursor stops the list read cleanly; the cell is not proposed", code == 0 and cell not in (f or {}).get("proposals", {}),
+          (code, sorted((f or {}).get("proposals", {}))))
+    bound_pages = getattr(register, "MAX_TYPE_PAGES", 200)
+    code, text, _, f, _ = run2b(None, plan, shop=SHOP_820, fake=pager(
+        lambda after: ([MO(820)] if after is None else [], {"hasNextPage": int((after or "p0")[1:]) < bound_pages + 5,
+                                                            "endCursor": "p%d" % (int((after or "p0")[1:]) + 1)}))(w2b_store(w2b_objects())))
+    check("R32d-N1: a list longer than the page bound counts as unknown; the cell is not proposed", code == 0
+          and cell not in (f or {}).get("proposals", {}), (code, sorted((f or {}).get("proposals", {}))))
+    two = pager(lambda after: ([MO(820)], {"hasNextPage": True, "endCursor": "p2"}) if after is None else ([MO(821)], {"hasNextPage": False, "endCursor": None}))
+    code, text, _, f, _ = run2b(None, plan, shop=SHOP_820, fake=two(w2b_store(w2b_objects())))
+    check("R32d control: a proper two-page list without a duplicate still proposes the cell", cell in (f or {}).get("proposals", {}), text)
+
+
 def encoded_token():
     return "".join("%%%02X" % ord(ch) for ch in TOKEN)
 
@@ -801,10 +1404,10 @@ def main():
         check("basic: bound metaobject field through the product's reference", ("register", "gid://shopify/Metaobject/700", "role") in ops
               and ("register", "gid://shopify/Metaobject/701", "role") not in ops)
         code_b, _, _, db = dry(folder, bindings=None)
-        prop = json.load(open(os.path.join(folder, "bindings-proposed-nl.json"), encoding="utf-8"))["bindings"]
-        check("R18b-B an unbound metaobject item is proposed, not written", code_b == 0
+        fprop = json.load(open(os.path.join(folder, "fields-proposed-nl.json"), encoding="utf-8"))["proposals"]
+        check("R18b-B / 2b: an unbound metaobject item is proposed as a field, not written", code_b == 0
               and not any(o["resource"].startswith("gid://shopify/Metaobject/700") for o in db["ops"])
-              and prop.get("role", {}).get("key") == "role")
+              and "gid://shopify/Metaobject/700|role" in fprop and "gid://shopify/Metaobject/701|role" not in fprop, sorted(fprop))
         store = base_store()
         mo = next(n for n in store["types"]["METAOBJECT"] if n["resourceId"] == "gid://shopify/Metaobject/700")
         mo["translatableContent"] = [c("role", "Changed live role"), c("other_field", "Pharmacist"), c("name", "Sietske")]
@@ -1083,6 +1686,10 @@ def main():
 
     r18e(check)
     wave2a(check)
+    wave2b(check)
+    r32(check)
+    r32c(check)
+    r32d(check)
     print("%d failures" % len(failures))
     sys.exit(1 if failures else 0)
 
