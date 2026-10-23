@@ -336,3 +336,22 @@ Options (D2 revisited, Victor decides):
 - **b. One list per language** (what is committed now). Confirmation mail in the person's language, but new signups land next to country-sorted legacy members, and a person who changes language stays in the old list.
 
 Either way: send campaigns from segments on `locale` + consent, never from a list alone, and exclude `NEVER_SUBSCRIBED` profiles (7 of 50 in Dutch Speakers would otherwise be mailed without a consent record).
+
+Follow-up (same day): with one list the confirmation mail has one button in the list's one language; only logo, heading and the text above the button are editable per list (Klaviyo community threads, linked in the worker's answer). So option **b** stays: one list per language, each with its own language setting and heading; campaigns from `locale` segments.
+
+### Slogan width (Victor, 23 Oct)
+
+Victor: "de slagzin onder Karmicare logo … moet iets breder worden zodat in alle talen de slagzin in 2 lijnen staat". Line widths measured on the live page (nowrap spans, Proxima Nova 500; desktop 28px with -1px letter-spacing, phone 20px with -0.25px):
+
+| Slogan, line 1 / line 2 | 28px | 20px |
+|-------------------------|------|------|
+| EN "Your mouth has a rhythm" / "Now your oral care too" | 285 / 260 | 214 / 196 |
+| NL "Je mond heeft een ritme" / "Nu je mondverzorging ook" (nl batch-03) | 280 / 305 | 211 / 229 |
+| FR hero wording "Votre bouche a son rythme" / "Désormais, vos soins aussi" (fr batch-01) | 310 / 305 | 233 / 230 |
+| FR footer in fr batch-03, written for the old EN: "Votre bouche a un rythme" / "Vos soins bucco-dentaires devraient le suivre" | 297 / 515 | 223 / 388 |
+
+At 286px the NL slogan took three lines on desktop and the FR hero wording four. Commit `fix(footer): slogan column 320px, EN value carries the [[br]] marker`:
+- `.km-footer-slogan` max-width and the ≥1200px brand column 286 → 320px. The newsletter column gives up the 34px: 555 → 521px at 1440 (field 437 → 403px), 315 → 281px at 1200. Phones unchanged in effect (lines are ≤233px there).
+- `sections/footer-group.json` slogan = `Your mouth has a rhythm[[br]]Now your oral care too`. R27 made the break depend on the marker and the saved value had none, so on phones the EN broke after "Now" ("…rhythm Now" is 259px, under 286). Natural wrapping cannot replace the marker: at 320px the NL text without one fills line 1 up to "…ritme Nu" (320px exactly).
+- Checked by simulation on the live DOM at 1440: brand 320, NL and FR two lines, no overflow; Theme Check 0 errors, 19 warnings (baseline).
+- For the copy lanes (routed through `KEYS.md`, last section): the inventory EN and its sha1 follow the saved value; the NL and FR translations get `[[br]]` at the same spot; a line stays ≤ ~25 characters (≤ 310px at 28px); the FR footer slogan in batch-03 is for the old EN and does not fit any column.

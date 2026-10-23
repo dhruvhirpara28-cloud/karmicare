@@ -65,3 +65,15 @@ Notes for the writer:
 ```
 
 NL and FR values are for the NL and FR lanes (the global coordinator routes this file). The `ids` line numbers are left out on purpose: the writer's `refresh` fills them from the source inventory.
+
+## Not a locale key: the footer slogan (section setting, 23 Oct)
+
+`footer-group:footer/slogan` (`sections/footer-group.json`, `sections.footer.settings.slogan`, inline_richtext). Victor, 23 Oct: the slogan must sit on two lines in every language. The theme now gives it 320px (was 286) and, since R27 (44b37c3), breaks the line only at a `[[br]]` marker in the text. The saved EN value carries it now; the inventory and the translations have to follow:
+
+| Lane | Value | Note |
+|------|-------|------|
+| source-copy | `Your mouth has a rhythm[[br]]Now your oral care too` | The saved value in `sections/footer-group.json` already reads so; update the EN and `sha1` in `docs/source-copy/en-source.json` and `batches/batch-03-header-footer.json` (and that batch's digest). Wording unchanged (Victor, 22 Oct). |
+| NL | `Je mond heeft een ritme[[br]]Nu je mondverzorging ook` | Same words as nl batch-03; marker added. Registration against the new EN digest. |
+| FR | FR lane's wording, with `[[br]]` between the two sentences | The fr batch-03 value was written for the old EN ("So should your oral care") and its second line is 515px at 28px, which no column fits. The hero's wording in fr batch-01, "Votre bouche a son rythme / Désormais, vos soins aussi", measures 310 / 305px and fits. |
+
+Budget per line: ≤ 310px in Proxima Nova 500 at 28px with -1px letter-spacing, in practice ≤ 25 characters. Measurements and the layout cost (newsletter column 34px narrower on desktop) are in `PLAN.md`, "Slogan width". The marker is literal text in the theme editor and in Translate & Adapt; a saved newline or `<br>` works too.
