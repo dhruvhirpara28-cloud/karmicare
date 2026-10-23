@@ -118,7 +118,19 @@ ATTR_NAME = re.compile(r"[^\s\"'<>/=`]+")
 ATTR_UNQUOTED = re.compile(r"[^\s\"'<>=`]+")
 HTML_SPACE = " \t\n\r\f"
 # Elements whose content the HTML tokenizer does not read as ordinary text and tags (raw text, RCDATA, foreign content).
+# An <svg> without any text is the one exception: scan_svg keeps it whole as an opaque span.
 RAW_ELEMENTS = ("script", "style", "textarea", "title", "xmp", "iframe", "noembed", "noframes", "noscript", "plaintext", "svg", "math")
+SVG_TEXT_ELEMENTS = ("text", "tspan", "textpath", "title", "desc", "foreignobject", "a", "script", "style")
+# The decorative SVG subset an opaque <svg> may use (R42-1): shapes, groups and local clipping only. Any other element
+# or attribute refuses: accessible names and descriptions (role, aria-* except aria-hidden="true"), references
+# (href, xlink:href, use, image), event handlers, style, and paint taken from url(...).
+SVG_ELEMENTS = ("svg", "g", "path", "rect", "circle", "ellipse", "line", "polyline", "polygon", "defs", "clippath")
+SVG_ATTRIBUTES = ("xmlns", "viewbox", "width", "height", "fill", "stroke", "stroke-width", "stroke-linecap", "stroke-linejoin",
+                  "stroke-miterlimit", "fill-rule", "clip-rule", "opacity", "fill-opacity", "stroke-opacity", "d", "x", "y", "cx",
+                  "cy", "r", "rx", "ry", "x1", "y1", "x2", "y2", "points", "transform", "id", "class", "clip-path", "aria-hidden")
+SVG_ATTRIBUTE = re.compile(r"""\s+([^\s"'<>/=`]+)(?:\s*=\s*("[^"]*"|'[^']*'|[^\s"'<>=`]+))?""")
+# Paint (fill, stroke) in the subset: none, currentColor, a hex colour or a colour keyword; never url(...) (R42b-N1).
+SVG_PAINT = re.compile(r"none|currentcolor|#[0-9a-f]{3,8}|[a-z]+", re.I)
 HANDLE_TYPES = ("PRODUCT", "PAGE", "ARTICLE", "BLOG", "COLLECTION")
 UNPROVEN_TYPES = {"LINK": "menu links: no verified owner route (menu -> link) yet",
                   "SHOP_POLICY": "shop policies: no verified owner route (policy type -> resource) yet"}
@@ -856,9 +868,11 @@ def reference_objects(live, owner, family, shop_objects):
 
 
 def scan_tag(value, i):
-    """((name, end), None) for the tag that starts at value[i] == '<', or (None, reason). Quote-aware: a '>' inside a
-    quoted attribute value belongs to the tag. Only `<name attr attr=v attr="v" attr='v'>` (optionally `/>`) and
-    `</name>` are accepted; an unclosed quote, attributes without whitespace between them or any other shape refuse."""
+    """((name, end, closes), None) for the tag that starts at value[i] == '<', or (None, reason). Quote-aware: a '>'
+    inside a quoted attribute value belongs to the tag. Only `<name attr attr=v attr="v" attr='v'>` (optionally `/>`)
+    and `</name>` are accepted; an unclosed quote, attributes without whitespace between them or any other shape
+    refuse. closes is True only for a self-closing token: a '/' the tokenizer reads at an attribute boundary, never
+    the last byte of an unquoted value (`width=1/>` keeps the value `1/` and the element open, R42b-1)."""
     n, j = len(value), i + 1
     closing = value.startswith("/", j)
     j += closing
@@ -869,7 +883,7 @@ def scan_tag(value, i):
     if closing:
         while j < n and value[j] in HTML_SPACE:
             j += 1
-        return ((name, j + 1), None) if j < n and value[j] == ">" else (None, "malformed end tag at offset %d" % i)
+        return ((name, j + 1, False), None) if j < n and value[j] == ">" else (None, "malformed end tag at offset %d" % i)
     while True:
         start = j
         while j < n and value[j] in HTML_SPACE:
@@ -877,9 +891,9 @@ def scan_tag(value, i):
         if j >= n:
             return None, "unclosed tag at offset %d" % i
         if value[j] == ">":
-            return (name, j + 1), None
+            return (name, j + 1, False), None
         if value.startswith("/>", j):
-            return (name, j + 2), None
+            return (name, j + 2, True), None
         a = ATTR_NAME.match(value, j) if j > start else None
         if not a:
             return None, "malformed attribute at offset %d" % j
@@ -902,11 +916,88 @@ def scan_tag(value, i):
                 j = u.end()
 
 
+def tag_opens(value, i):
+    """True when value[i] == '<' starts markup in the HTML tokenizer: '<' then an ASCII letter, '/', '!' or '?'.
+    Any other '<' (a digit, a space, '=' ...) is literal text there, as in 'nHAp <100 nm'."""
+    return value[i] == "<" and i + 1 < len(value) and ((value[i + 1].isascii() and value[i + 1].isalpha()) or value[i + 1] in "/!?")
+
+
+def svg_tag_ok(value, start, end, name, closes):
+    """None when the tag value[start:end] is in the decorative SVG subset, else the reason (R42-1). closes comes from
+    scan_tag; only a self-closing token loses its `/>`, so an attribute value keeps every byte it has (R42b-1).
+    Values are checked as the browser reads them (entities decoded) and raw; CSS escapes refuse (R42b-N1)."""
+    if name not in SVG_ELEMENTS:
+        return "%s element inside an svg element (not in the decorative subset)" % name
+    body = value[start + 1 + len(name):end - (2 if closes else 1)]
+    for m in SVG_ATTRIBUTE.finditer(body):
+        attr, raw = m.group(1).lower(), m.group(2) or ""
+        quoted = raw[:1] in "\"'"
+        val = html.unescape(raw[1:-1] if quoted else raw)
+        if attr not in SVG_ATTRIBUTES:
+            return "svg attribute %s at offset %d (not in the decorative subset)" % (attr, start)
+        if not quoted and raw.endswith("/"):
+            return "svg attribute %s with an unquoted value ending in '/' at offset %d (ambiguous self-closing)" % (attr, start)
+        if "\\" in raw or "\\" in val:
+            return "svg attribute %s with a backslash (CSS escape) at offset %d" % (attr, start)
+        if attr == "aria-hidden" and val != "true":
+            return "svg aria-hidden other than \"true\" at offset %d" % start
+        if attr == "xmlns" and val != "http://www.w3.org/2000/svg":
+            return "svg xmlns other than the SVG namespace at offset %d" % start
+        if attr == "clip-path":
+            if not re.fullmatch(r"url\(#[A-Za-z][\w.-]*\)", val):
+                return "svg clip-path that is not a local reference at offset %d" % start
+        elif "url(" in val.lower() or "url(" in raw.lower():
+            return "svg attribute %s with a url(...) value at offset %d" % (attr, start)
+        if attr in ("fill", "stroke") and not SVG_PAINT.fullmatch(val):
+            return "svg %s outside none, currentColor, a hex colour or a colour keyword at offset %d" % (attr, start)
+    return None
+
+
+def scan_svg(value, i, end, closes):
+    """(end, None) for an <svg> element that holds no text at all, opaque as a whole; or (None, reason). The root and
+    every element inside must be in the decorative subset (svg_tag_ok: shapes, groups, local clipping; no accessible
+    name, reference, event or style), properly nested, with only whitespace between tags. Anything else refuses:
+    text-bearing or unknown elements, comments, declarations, a stray '<', mismatched or missing end tags."""
+    reason = svg_tag_ok(value, i, end, "svg", closes)
+    if reason:
+        return None, reason
+    if closes:
+        return end, None
+    stack, k, n = ["svg"], end, len(value)
+    while stack:
+        j = value.find("<", k)
+        if j < 0:
+            return None, "unclosed svg element at offset %d" % i
+        if value[k:j].strip():
+            return None, "text inside an svg element at offset %d" % k
+        if value.startswith("<!", j) or value.startswith("<?", j) or not tag_opens(value, j):
+            return None, "comment, declaration or stray '<' inside an svg element at offset %d" % j
+        tag, reason = scan_tag(value, j)
+        if tag is None:
+            return None, reason
+        name, k, closes = tag
+        if name in SVG_TEXT_ELEMENTS:
+            return None, "%s element inside an svg element (it can carry text)" % name
+        if value[j + 1] == "/":
+            if stack[-1] != name:
+                return None, "mismatched </%s> inside an svg element at offset %d" % (name, j)
+            stack.pop()
+            continue
+        reason = svg_tag_ok(value, j, k, name, closes)
+        if reason:
+            return None, reason
+        if not closes:
+            stack.append(name)
+    return k, None
+
+
 def scan_html(value):
     """([(kind, start, end)] covering the value exactly once, None) or (None, reason). Tags and comments are opaque;
-    text runs between them must hold only well-formed entities. Raw-text, RCDATA and foreign elements (script, style,
-    textarea, title, svg ...), declarations, processing instructions, unclosed quotes or brackets, stray '>' and
-    comments the HTML tokenizer would close elsewhere (`<!-->`, `<!--->`, `--!>`) refuse."""
+    text runs between them must hold only well-formed entities. An <svg> element without any text is one opaque
+    span (scan_svg). A '<' that does not open markup (not followed by a letter, '/', '!' or '?') is text, as in the
+    HTML tokenizer. Raw-text, RCDATA and other foreign elements (script, style, textarea, title, math ...), an svg
+    element with text, declarations, processing instructions, unclosed quotes or brackets, a '<' at the very end,
+    stray '>' and comments the HTML tokenizer would close elsewhere (`<!-->`, `<!--->`, `--!>`) refuse."""
     spans, i, n = [], 0, len(value)
     while i < n:
         if value.startswith("<!--", i):
@@ -922,10 +1013,19 @@ def scan_html(value):
             continue
         if value.startswith("<!", i) or value.startswith("<?", i):
             return None, "declaration or processing instruction at offset %d" % i
-        if value[i] == "<":
+        if value[i] == "<" and i + 1 >= n:
+            return None, "'<' at the end of the value"
+        if tag_opens(value, i):
             tag, reason = scan_tag(value, i)
             if tag is None:
                 return None, reason
+            if tag[0] == "svg" and value[i + 1] != "/":
+                end, reason = scan_svg(value, i, tag[1], tag[2])  # self-closing roots are checked against the subset too
+                if end is None:
+                    return None, reason
+                spans.append(("svg", i, end))
+                i = end
+                continue
             if tag[0] in RAW_ELEMENTS:
                 return None, "%s element (its content is not ordinary text)" % tag[0]
             spans.append(("tag", i, tag[1]))
@@ -933,8 +1033,8 @@ def scan_html(value):
             continue
         if value[i] == ">":
             return None, "stray '>' at offset %d" % i
-        j = i
-        while j < n and value[j] not in "<>":
+        j = i + 1 if value[i] == "<" else i
+        while j < n and value[j] != ">" and not (value[j] == "<" and (j + 1 >= n or tag_opens(value, j))):
             j += 1
         k = i
         while True:
@@ -1230,6 +1330,7 @@ def field_records(live, plan, res, family, items, bindings, shop_objects):
     lookup = {}
     for i in items:
         lookup.setdefault(norm_text(i["en"]), []).append(i)
+    invariant = {i["id"] for i in items if i.get("invariant")}
     entries = []
     for node in live.by_ids(sorted(objects)):
         info = objects.get(node["resourceId"])
@@ -1241,6 +1342,9 @@ def field_records(live, plan, res, family, items, bindings, shop_objects):
             new, spans, blockers, touched = resolve_field(content["value"], lookup)
             if not touched:
                 continue
+            if not blockers and spans and all(set(s["items"]) <= invariant for s in spans):
+                continue  # every span is an invariant row: nothing in this field changes
+
             target = (node["resourceId"], content["key"])
             vetoes = [b for b in blockers if b.startswith(("held segment", "conflicting translations"))]
             if any((bindings[i].get("resource"), bindings[i].get("key")) == target for i in touched if i in bindings):
@@ -1342,6 +1446,8 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
             t["evidence"], t["provenance"] = evidence, provenance
 
     def row(item, res, result, why=None, node=None, content=None):
+        if item.get("invariant"):
+            return  # an invariant row (same text as EN) only maps a span inside a field; it is never a result itself
         r = {"id": item["id"], "type": res["shopify_type"], "result": result, "en": item["en"], "value": item["value"]}
         if why:
             r["why"] = why
@@ -1440,7 +1546,8 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
                                         row(i, res, "not written", "held or conflicting items share this value", node, content)
                                     used.add(i["id"])
                                 continue
-                            want(node, content, [i["id"] for i in exact], exact[0]["value"], "whole value")
+                            if not all(i.get("invariant") for i in exact):
+                                want(node, content, [i["id"] for i in exact], exact[0]["value"], "whole value")
                             used.update(i["id"] for i in exact)
                             continue
                         if not (content["value"][:1] in "[{" or (content.get("type") or "").upper() == "JSON"):
@@ -1459,6 +1566,9 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
                             used.update(i["id"] for i in in_field)
                             continue
                         cur = current(node, content["key"])
+                        if all(i.get("invariant") for i in in_field if i["en"] in applied):
+                            used.update(i["id"] for i in in_field)
+                            continue  # only invariant leaves: nothing to translate in this field
                         want(node, content, [i["id"] for i in in_field if i in wave and i["en"] in applied], new,
                              "JSON field, every text leaf mapped",
                              structure_changes(content["value"], cur["value"]) if cur["present"] else [])
@@ -1598,9 +1708,13 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
         fields_out["stale"].append({"field": fkey, "why": "the bound field was not reached in this run"})
     # R32d D1: a hold, gate or conflict the field route found in a target's segments vetoes that target in every
     # route (a legacy whole-field op included), before any op is final.
+    # The shared operation boundary (R42-2): a target whose every contributing item is invariant (same text as the
+    # EN) never becomes an operation, whatever route proposed it; invariant items still veto and map spans, but get
+    # no result rows of their own (R42b-N2).
+    invariant = {i["id"] for res in plan["resources"] for i in res["items"] if i.get("invariant")}
     for target, why in sorted(vetoed.items()):
         t = targets.pop(target, None)
-        for iid in sorted(set(i for ids in (t or {}).get("values", {}).values() for i in ids)):
+        for iid in sorted(set(i for ids in (t or {}).get("values", {}).values() for i in ids) - invariant):
             rows.append({"id": iid, "result": "not written", "resource": target[0], "key": target[1], "value": None,
                          "why": "the field's segments carry a veto: " + why})
     ops = []
@@ -1608,14 +1722,18 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
         if len(t["values"]) > 1:
             for value, ids in t["values"].items():
                 for iid in ids:
-                    rows.append({"id": iid, "result": "conflict", "resource": rid, "key": key, "value": value,
-                                 "why": "%d plan items want different values on this key: not written" % len(t["values"])})
+                    if iid not in invariant:
+                        rows.append({"id": iid, "result": "conflict", "resource": rid, "key": key, "value": value,
+                                     "why": "%d plan items want different values on this key: not written" % len(t["values"])})
             continue
         value, ids = next(iter(t["values"].items()))
+        if ids and all(iid in invariant for iid in ids):
+            continue
         same = t["current"]["present"] and t["current"]["value"] == value and not t["current"]["outdated"]
         for iid in ids:
-            rows.append({"id": iid, "result": "same" if same else ("overwrite" if t["current"]["present"] else "new"),
-                         "resource": rid, "key": key, "value": value})
+            if iid not in invariant:
+                rows.append({"id": iid, "result": "same" if same else ("overwrite" if t["current"]["present"] else "new"),
+                             "resource": rid, "key": key, "value": value})
         if not same:
             op = {"action": "register", "resource": rid, "key": key, "en": t["en"], "en_digest": t["en_digest"],
                   "current": t["current"], "value": value, "items": sorted(ids), "how": t["how"], "notes": t["notes"]}

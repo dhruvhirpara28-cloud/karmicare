@@ -1,12 +1,12 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "44adabe98abe",
+  "en-source.json": "bd4edb4e1b4b",
   "registered.json": "7967afaaf3d3",
   "holds.json": "da17e4d579fb",
   "releases.json": "356c3948eb85",
   "nl/batch-01-homepage.json": "6c57502ad140",
-  "nl/batch-02-pdp.json": "f97bca82e0db",
+  "nl/batch-02-pdp.json": "588854a52713",
   "nl/batch-03-header-footer.json": "c2d5cb9849cc",
   "nl/batch-04-legal.json": "103611b761f9",
   "nl/batch-05-products.json": "4f3cda01ad73",
@@ -16,7 +16,7 @@
  },
  "batches": {
   "batch-01-homepage": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
-  "batch-02-pdp": "6f5015e4d5fe6fc31d3cb1f7c41d0036d1cb5d61",
+  "batch-02-pdp": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
   "batch-03-header-footer": "742351732dabbbff2eff9cadc6858ba87284393a",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
@@ -8864,9 +8864,9 @@
      "kind": "match",
      "key": "value",
      "field": "custom.product_faq#92",
-     "en": "100 nm · rod-shaped, per SCCS",
-     "en_sha1": "b9c9ce809adebd42cb5735f2b9863c1e25e9ce58",
-     "value": "100 nm · staafvormig, volgens SCCS",
+     "en": "nHAp <100 nm · rod-shaped, per SCCS",
+     "en_sha1": "3feb141fbb2000ce6d1f15dec405020611872c5f",
+     "value": "nHAp <100 nm · staafvormig, volgens SCCS",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -9114,6 +9114,327 @@
       "drafted": true,
       "registered": false
      }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#108",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#108",
+     "en": "Guarana",
+     "en_sha1": "eac174a26521b539885aff6f288e5f6d9a313b1e",
+     "value": "Guarana",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#109",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#109",
+     "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+     "en_sha1": "b091863d40fc29c177e880fe39bd9d4c2d2c2436",
+     "value": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#110",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#110",
+     "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+     "en_sha1": "7e66994334ddacf4f00b1cb07e5013a64d2c185f",
+     "value": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#111",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#111",
+     "en": "RDA",
+     "en_sha1": "8adbd2307f5ede720af048b12e62ce9ba9fe41cd",
+     "value": "RDA",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#112",
+     "en": "Awake",
+     "en_sha1": "2b453e3e926b3275b0260310e696420278283986",
+     "value": "Awake",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#113",
+     "en": "Asleep",
+     "en_sha1": "b9692bbecea9d8f0a8224711aea48e53a2d42f40",
+     "value": "Asleep",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#114",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#114",
+     "en": "· AM",
+     "en_sha1": "115ce3300e2da4045b9dad2cc2c96f67e67203f8",
+     "value": "· AM",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#115",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#115",
+     "en": "· PM",
+     "en_sha1": "034ea857ae30a7ef4217413eacff31b656015116",
+     "value": "· PM",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#116",
+     "en": "93.25",
+     "en_sha1": "e360baabc790f7e4765568954c4a678a6080b757",
+     "value": "93,25",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#117",
+     "en": "72.32",
+     "en_sha1": "4409ccb6a18dbac0db7874572a31c4e5bbfd5511",
+     "value": "72,32",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#118",
+     "en": "✓",
+     "en_sha1": "698a879938bf4d71b92190d2b8f19c0e1d4abeef",
+     "value": "✓",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#119",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#119",
+     "en": "250",
+     "en_sha1": "ba30fd97b4127db56e9f4d3d9c030d71646fd2e7",
+     "value": "250",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#120",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#120",
+     "en": "i",
+     "en_sha1": "042dc4512fa3d391c5170cf3aa61e6a638f84342",
+     "value": "i",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#121",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#121",
+     "en": "CPSR · 2026",
+     "en_sha1": "53085b5a21107a087218fb89108e83bde5ebad97",
+     "value": "CPSR · 2026",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#122",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#122",
+     "en": "CPNP · 2026",
+     "en_sha1": "9c7269b56112b0c3e6bfc35f890817cb2a547fff",
+     "value": "CPNP · 2026",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#123",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#123",
+     "en": "SCCS/1677/25",
+     "en_sha1": "d5da1836948f9f8b39b9be9b5d426d7e1463aef9",
+     "value": "SCCS/1677/25",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#124",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#124",
+     "en": "→",
+     "en_sha1": "213edd2539ed96e6900bb40abd588edba35566c5",
+     "value": "→",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#125",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#125",
+     "en": "Awake:",
+     "en_sha1": "f3f3c7c8d040cb18e2600ce76135201847e1ea89",
+     "value": "Awake:",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#126",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#126",
+     "en": "Asleep:",
+     "en_sha1": "b84db316a641a2746cd885a78ab2b5277d6956ab",
+     "value": "Asleep:",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
     },
     {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#01",
