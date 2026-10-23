@@ -54,7 +54,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 35b | In progress | The buybox `h5` is still at `treatment-journey.liquid:19`, `:69`. The plan is ready and waits for the desk's go |
 | 36 | Parked / after launch | Info; recheck after 33–35 |
 | 37 | Parked / after launch | Loop widget, off-limits |
-| 38 | Parked / after launch | Amounts in other currencies than the euro. Victor decided the €40 reward on 22 Oct: A + C. It gets built later, together with the price per brushing. Nothing built yet |
+| 38 | In progress | Victor, 23 Oct: option 2, every fixed euro amount converted at the active rate, homepage included (replaces A + C). Plan below; waits for R35b and the desk |
 | 39 | Parked / after launch | NL Welcome Kit names break in the middle of a word (release QA, live). The proposal waits for a go or the next fix moment |
 | 40 | In merchant-edit | Plans table follows the comparison table, `00aa2d6`, `8202c95`, `84a8101` (R34b), merchant-edit `9972921` (23 Oct). Second round `04718ef`–`71a8694` (kit close-up tiles, featured columns 16px out in both tables, ribbon in CTA type, tips above the sticky labels, keyboard-only CTA reveal; R39–R39d), merchant-edit `6a26258`. Kit tiles under the label below 750 after the native check, `e0c0e1b` (R39e), merchant-edit `da63ae4` |
 | 41 | Parked / after launch | R34 N1: double seam beside the featured column |
@@ -66,7 +66,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 47 | In merchant-edit | Victor, 23 Oct: benefits lists show three rows and half of the fourth, faded (`visible_items` 3, one-line peek), `fb4c0c6`, merchant-edit `da63ae4` |
 | 48 | Parked / after launch | R39e: the journey and plans transitions do not honour reduced motion |
 
-**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 2 · waiting for Victor 0 · parked / after launch 25 · dropped 9.
+**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 3 · waiting for Victor 0 · parked / after launch 24 · dropped 9.
 
 ### Waiting for Victor
 
@@ -184,7 +184,15 @@ The shop also sells in CHF, GBP, USD and SEK. Product and plan prices are conver
 - **Option b: fixed local amounts** (for example 400 kr), with the Terms changed for each currency. Approach: one amount per currency as a setting or metaobject, which the theme reads by `cart.currency`. This needs a legal change to the Terms first, plus new copy in every language.
 - **Option c: hide the reward line outside the EU.** Approach: the theme and the Loop widget skip the check-up chip, the receipt row, the tooltip and the care-comes-back step when the market's country is not in the EU (CHF, GBP, USD). The line stays for EU markets, including SEK, which then still needs a or b.
 
-**Decided by Victor, 22 Oct (via source-copy): A + C.** The Terms do not change.
+**Changed by Victor, 23 Oct: option 2 (replaces A + C).** DH's PR #72/#73 (main `033fb37`, in integration as `c571919`) already derive the plans table prices, cost per brushing and Care Credit from the selling-plan allocations, so they follow the visitor's currency, and they convert the €40 in the care step text and the plans labels at the active rate. Victor keeps that approach and wants it everywhere, the homepage included. Plan:
+- **PDP lane, after R35b.**
+  - One bounded, locale-aware euro tagger in a snippet, in place of DH's split on "€": it reads €40, € 40 and 40 € (decimal comma in NL and FR). It is used for the care steps, the plans labels and tips (metaobject text), the check-up tooltip in `main-product.liquid` and the sticky bar strings. `kc-eur-convert` converts the tagged amounts.
+  - The receipt: Return on Care from the Year allocation × 20 %, as the plans table, so both show the same market-rounded credit. The check-up converted, and the total their sum. The lines get an optional source setting for this.
+  - `assets/loop-widget.js`: the check-up chip and the Year card chip convert 4000 cents at the rate before `loopFormatMoney` (Victor, 23 Oct, "pas aan waar nodig"; off-limits otherwise).
+- **Homepage lane.** `templates/index.json:207`, `:332` `button_subtext` "€0.49 / brushing ritual": the amount computed from the 60-Day Rhythm allocation, as the plans table. The text gets a [price] placeholder, via source-copy.
+- **Victor.** Terms art. 11 grants the €40 only to Year members in the EU. With amounts converted for CH, GB and US visitors, the Terms or the market setup have to match.
+
+**Superseded on 23 Oct. Decided by Victor, 22 Oct (via source-copy): A + C.** The Terms do not change.
 - **A, EU markets with another currency (today Sweden, SEK).** €40 stays the official amount. The theme writes "€40" and adds the local amount next to it as an approximation at the active rate, for example "€40 (ca. 451 kr)". The converted amount is 4000 cents × `Shopify.currency.rate` in JS, or the cart currency's rate in Liquid, written in the shop money format. The euro part goes through the euro branch of `kc-money` whatever the cart currency.
 - **C, markets outside the EU (today CH, GB and US).** The reward line is hidden: the check-up chip, the receipt row, the tooltip, the sticky bar's "+ €40 Check-up Reward" and the care-comes-back step. A market counts as EU by `localization.country.iso_code` (Liquid) or `Shopify.country` (JS), checked against a list of the 27 EU country codes in one snippet, so no copy is needed for it.
 - **New key for source-copy** (sent on 22 Oct): `kc.general.approx_amount`, EN "(approx. [amount])". `[amount]` is filled with the local amount, the same placeholder style as `kc.receipt.*`. Source-copy has agreed the wording: NL "(ca. [amount])", FR "(env. [amount])"; the FR lane still confirms the FR. `theme_keys.py check` fails on a key that no theme file reads. So the build commit is sent to source-copy, and they add the key to all 31 locales on top of it. The theme puts it after the euro amount with a no-break space. No new settings.
@@ -221,3 +229,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 23 Oct: row 45 (professionals under the gallery) removed by Victor, in merchant-edit `3c52d73`. Counts updated.
 - 23 Oct: kit tiles under the label (row 40) and the benefits peek (row 47) in merchant-edit `da63ae4`; row 46 widened, row 48 (reduced motion) parked. Counts updated.
 - 23 Oct: row 31 (Figma sections 08 and 09) dropped by Victor, "rij 31 laten we zo". Counts updated.
+- 23 Oct: row 38 changed to option 2 by Victor (convert every fixed euro amount, homepage included) and moved to in progress; plan added under Currency.
