@@ -269,14 +269,21 @@ body.night-mode .kc-hero-status-night {
 }
 
 /* ── Health Professionals Testimonial Badge ── */
+/* One grid cell, the badge's width, so the pause button can sit on the photo's corner without
+   being inside the badge's link */
 .hero-karmicare__badge-wrapper {
   position: relative;
   z-index: 3;
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content;
   justify-content: center;
   align-items: center;
   margin: 2.4rem 0 0 0;
   width: 100%;
+}
+
+.hero-karmicare__badge-wrapper > * {
+  grid-area: 1 / 1;
 }
 
 .hero-karmicare__badge {
@@ -305,9 +312,9 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   box-shadow: var(--kc-elevation-md);
 }
 
-/* Ambassador rotation (Victor, 23 Oct): the section's script shows a random ambassador from the
-   Trusted Professionals cards on each page load, then the next one every 2s until each has been
-   shown once. The photo hides while the script picks one (.is-picking, set only by script, so
+/* Ambassador rotation (Victor, 23 Oct): the section's script shows all ambassadors from the
+   Trusted Professionals cards in random order, a new one every 3s, with a pause button on the
+   photo's corner. The photo hides while the script picks one (.is-picking, set only by script, so
    without JavaScript the block image stays); the old photo slides up and out while the next one
    comes in from below, inside the avatar's frame. */
 .hero-karmicare__badge-avatar-wrap[data-kc-rotate] {
@@ -352,6 +359,53 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar {
     transition: none;
   }
+}
+
+/* Pause/play for the rotation (WCAG 2.2.2): a 24px glass disc on the photo's bottom-right
+   corner (56px photo, 72px high, centred in the badge), inside the badge's frame */
+.hero-karmicare__badge-pause {
+  position: relative;
+  z-index: 1;
+  justify-self: start;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-left: 3.8rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kc-shape-radius-full);
+  background: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
+  box-shadow: var(--kc-elevation-md);
+  color: var(--kc-mapped-text-default-heading);
+  transform: translateY(2.2rem);
+  cursor: pointer;
+}
+
+.hero-karmicare__badge-pause[hidden] {
+  display: none;
+}
+
+.hero-karmicare__badge-pause:focus-visible {
+  outline: var(--kc-shape-stroke-medium) solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.hero-karmicare__badge-pause-icon {
+  display: block;
+}
+
+.hero-karmicare__badge-pause-icon--play,
+.hero-karmicare__badge-pause.is-paused .hero-karmicare__badge-pause-icon--pause {
+  display: none;
+}
+
+.hero-karmicare__badge-pause.is-paused .hero-karmicare__badge-pause-icon--play {
+  display: block;
 }
 
 .hero-karmicare__badge-avatar {
