@@ -939,6 +939,29 @@ body.night-mode .plan-compare--kc .pc-kit-thumbs img {
   z-index: 1;
 }
 
+/* Below 750 the label column is 170px, and beside a long label ("Welkomstpakket",
+   "Kit de bienvenue") the tiles ran past it into Try Once (native check, 23 Oct: NL +29px).
+   The tiles go under the label at 24px: 20px label + 3px + 24px fit the 48px inside the
+   64px row, so the rows of all columns stay level. */
+@media not all and (min-width: 750px) {
+  .plan-compare--kc .pc-kit {
+    flex-wrap: wrap;
+    row-gap: var(--kc-responsive-spacing-layout-xxs);
+    white-space: normal;
+  }
+
+  .plan-compare--kc .pc-kit-thumbs {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .plan-compare--kc .pc-kit-thumbs img {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: -0.5rem;
+  }
+}
+
 /* Featured column */
 .plan-compare--kc .pc-featured {
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-focus-default);
