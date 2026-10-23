@@ -1084,67 +1084,6 @@
      }
     }
    },
-   "gid://shopify/Metaobject/515047915901|description": {
-    "proposal_hash": "2858e91d02fc7ae04e8f8c34fc6b5e768a555af8d2a23ac7d56b83c82304ac44",
-    "evidence": {
-     "locale": "nl",
-     "family": "custom.treatment_journey_*",
-     "product": "karmicare-biorhythmic-oral-care-system",
-     "en": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"— arrive resilient, you did the work at home\"}]}]}",
-     "paths": [
-      [
-       {
-        "from": "gid://shopify/Product/15977093923197",
-        "metafield": "gid://shopify/Metafield/200027918729597",
-        "via": "custom.treatment_journey_list_two",
-        "type": "list.metaobject_reference",
-        "to": "gid://shopify/Metaobject/515047915901",
-        "to_type": "karmicare_effect_item",
-        "to_handle": "karmicare-effect-item-6le0zlbk"
-       }
-      ]
-     ],
-     "destination": {
-      "gid": "gid://shopify/Metaobject/515047915901",
-      "type": "karmicare_effect_item",
-      "handle": "karmicare-effect-item-6le0zlbk"
-     },
-     "field": {
-      "key": "description",
-      "en_sha1": "708ad4044ef27785166651ddf1221bcfc5cef2a7",
-      "en_digest": "16f8441c1d88e2ae7f1b7cb25291eed23a40e896234781da69bbb5ca85ecc9ad"
-     },
-     "spans": [
-      {
-       "path": [
-        "children",
-        0,
-        "children",
-        0,
-        "value"
-       ],
-       "items": [
-        "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#23"
-       ],
-       "en": "— arrive resilient, you did the work at home",
-       "value": "— je deed het werk al thuis",
-       "statuses": [
-        "approved"
-       ]
-      }
-     ],
-     "assembled": "{\"type\": \"root\", \"children\": [{\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"— je deed het werk al thuis\"}]}]}",
-     "scope": {
-      "complete": false
-     },
-     "proposal_hash": "2858e91d02fc7ae04e8f8c34fc6b5e768a555af8d2a23ac7d56b83c82304ac44",
-     "current": {
-      "present": false,
-      "value": null,
-      "outdated": false
-     }
-    }
-   },
    "gid://shopify/Metaobject/515048112509|title": {
     "proposal_hash": "18d64bc0df536abc542a4f94e18cb577ffbd00352e5cd3f77e83b7fef0651761",
     "evidence": {
