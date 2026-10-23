@@ -65,8 +65,11 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 46 | Parked / after launch | R41, R39e: the journey Read more toggle has no `aria-expanded` or disclosure semantics for screen readers |
 | 47 | In merchant-edit | Victor, 23 Oct: benefits lists show three rows and half of the fourth, faded (`visible_items` 3, one-line peek), `fb4c0c6`, merchant-edit `da63ae4` |
 | 48 | Parked / after launch | R39e: the journey and plans transitions do not honour reduced motion |
+| 49 | Parked / after launch | USD native check: the converted amounts read NL "US$ 45,67" and FR "45,67 $US" (Intl nl-US/fr-US) beside Shopify's "$51.81"; option 2 should use the active market's money format. Parked by Victor until the US market is live |
+| 50 | Parked / after launch | USD native check: the Year Care Credit comes from the Shopify-rounded USD price, consistent with the prices; note for option 2's receipt. Parked by Victor until the US market is live |
+| 51 | Parked / after launch | USD native check: no kit tiles in the US market, `settings.welcome_kit_free_product` is empty there (kit product probably not published for the US, Admin). Parked by Victor until the US market is live |
 
-**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 3 · waiting for Victor 0 · parked / after launch 24 · dropped 9.
+**Counts (53 lines)**: in merchant-edit 14 · ready to land 0 · in progress 3 · waiting for Victor 0 · parked / after launch 27 · dropped 9.
 
 ### Waiting for Victor
 
@@ -230,3 +233,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 23 Oct: kit tiles under the label (row 40) and the benefits peek (row 47) in merchant-edit `da63ae4`; row 46 widened, row 48 (reduced motion) parked. Counts updated.
 - 23 Oct: row 31 (Figma sections 08 and 09) dropped by Victor, "rij 31 laten we zo". Counts updated.
 - 23 Oct: row 38 changed to option 2 by Victor (convert every fixed euro amount, homepage included) and moved to in progress; plan added under Currency.
+- 23 Oct: rows 49–51 added and parked by Victor until the US market is live (USD notation, Year credit from the USD price, no kit tiles in the US). Counts updated.
