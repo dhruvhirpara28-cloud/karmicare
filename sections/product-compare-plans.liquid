@@ -80,12 +80,15 @@
                           if prod == blank
                             continue
                           endif
+                          # The close-up tile of the buybox kit (custom.kit_thumbnail, snippets/loop-widget-standard.liquid),
+                          # falling back to the featured image (Victor, 23 Oct)
+                          assign prod_thumb = prod.metafields.custom.kit_thumbnail.value | default: prod.featured_image
                         -%}
                         <img
                           alt="{{ prod.title | escape }}"
                           decoding="async"
                           height="22"
-                          src="{{ prod.featured_image | image_url: width: 44 }}"
+                          src="{{ prod_thumb | image_url: width: 66 }}"
                           width="22"
                         >
                       {%- endfor -%}
@@ -153,7 +156,7 @@
                         assign ep_cents = ep_num | times: 100 | round
                         capture ep_money
                           echo '<span class="kc-currency-eur" data-kc-eur="' | append: ep_num | append: '">'
-                          render 'kc-money', cents: ep_cents, trim: true
+                          render 'kc-money', cents: ep_cents, trim: true, euro: true
                           echo '</span>'
                         endcapture
                         assign ep_target_sp = '€ ' | append: ep_num
@@ -189,7 +192,7 @@
                               assign ep_cents = ep_num | times: 100 | round
                               capture ep_money
                                 echo '<span class="kc-currency-eur" data-kc-eur="' | append: ep_num | append: '">'
-                                render 'kc-money', cents: ep_cents, trim: true
+                                render 'kc-money', cents: ep_cents, trim: true, euro: true
                                 echo '</span>'
                               endcapture
                               assign ep_target_sp = '€ ' | append: ep_num
@@ -453,6 +456,25 @@
         });
       });
 
+      // A plan CTA focused from the keyboard comes fully into view in the scrolling strip, clear
+      // of the sticky labels (scroll-padding in the CSS). Focus alone scrolls only a CTA that is
+      // wholly out of view, so a CTA half under the labels or half off the edge stayed cut
+      // (R39b B2). Keyboard focus only: on a click the scroll moved the button between
+      // pointerdown and pointerup, and the click missed it (R39c B3).
+      document.querySelectorAll('.plan-compare--kc .pc-table').forEach(function (strip) {
+        strip.addEventListener('focusin', function (e) {
+          const cta = e.target.closest('.pc-cta');
+          if (!cta) return;
+          let fromKeyboard = false;
+          try {
+            fromKeyboard = cta.matches(':focus-visible');
+          } catch (err) {
+            fromKeyboard = false;
+          }
+          if (fromKeyboard) cta.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        });
+      });
+
       document.addEventListener('click', function (e) {
         if (window.innerWidth <= 768) {
           if (!e.target.closest('.info-tip') && !e.target.closest('.pc-kit')) {
@@ -460,33 +482,11 @@
           }
         }
       });
-
-      // Update static EUR values by the live Shopify currency exchange rate
-      const rate = parseFloat(window.Shopify && window.Shopify.currency && window.Shopify.currency.rate);
-      if (rate && rate !== 1) {
-        document.querySelectorAll('.kc-currency-eur[data-kc-eur]').forEach(function (el) {
-          const eur = parseFloat(el.getAttribute('data-kc-eur'));
-          if (!isNaN(eur) && eur > 0) {
-            const converted = Math.round(eur * rate);
-            const currency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '{{ localization.country.currency.iso_code | default: cart.currency.iso_code }}';
-            const shopifyLang = (window.Shopify && window.Shopify.locale) || '{{ localization.language.iso_code | default: request.locale.iso_code }}';
-            const shopifyCountry = (window.Shopify && window.Shopify.country) || '{{ localization.country.iso_code }}';
-            const locale = shopifyCountry ? (shopifyLang + '-' + shopifyCountry) : (navigator.language || shopifyLang);
-            try {
-              const formatter = new Intl.NumberFormat(locale, {
-                style: 'currency',
-                currency: currency,
-                maximumFractionDigits: 0
-              });
-              el.textContent = formatter.format(converted);
-            } catch (e) {
-              el.textContent = converted + ' ' + currency;
-            }
-          }
-        });
-      }
     });
   </script>
+  {%- comment -%} The table's fixed euro amounts in the active currency, this section only (R35 B2) {%- endcomment -%}
+  {%- assign kc_eur_root = '#compare-plans-' | append: section.id -%}
+  {%- render 'kc-eur-convert', root: kc_eur_root -%}
 {%- endif -%}
 
 {% schema %}
