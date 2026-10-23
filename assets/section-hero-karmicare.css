@@ -1,13 +1,15 @@
 /* ── Hero Karmicare Section: Structural & Layout Styles ── */
-/* At least one screen tall below the announcement bar and header (--hero-offset, measured by
-   the section's script): the splash grows into the free height and the toggle and badge sit
-   at the bottom of the first screen. On short screens the hero simply runs longer (Victor,
+/* The content fills the first screen below the announcement bar and header (--hero-offset,
+   measured by the section's script): the splash grows into the free height and the toggle and
+   badge hang at the bottom of the screen, layout-xl above its edge. The bottom padding
+   (--hero-padding-bottom, from the section settings) runs on below the fold, so the stat strip
+   comes in on scroll (Victor, 23 Oct). On short screens the hero simply runs longer (Victor,
    20 Oct, option c). */
 .hero-karmicare {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - var(--hero-offset, 11rem));
-  min-height: calc(100svh - var(--hero-offset, 11rem));
+  min-height: calc(100vh - var(--hero-offset, 11rem) + var(--hero-padding-bottom, 0px) - var(--kc-responsive-spacing-layout-xl));
+  min-height: calc(100svh - var(--hero-offset, 11rem) + var(--hero-padding-bottom, 0px) - var(--kc-responsive-spacing-layout-xl));
   overflow: hidden;
   display: flex;
   justify-content: center;
