@@ -877,7 +877,7 @@ body:not(.night-mode) .plan-compare--kc .pc-yes {
   height: 3rem;
   margin-left: -0.6rem;
   padding: 0;
-  border: 0.1364rem solid var(--kc-mapped-border-primary-default-subtle);
+  border: 0; /* no ring around the tiles (Victor, 23 Oct) */
   border-radius: var(--kc-shape-radius-sm);
   background-color: var(--kc-mapped-surface-page-secondary);
   box-shadow: 0 0.1364rem var(--kc-shape-blur-xs) 0 rgba(var(--kc-brand-fixed-black-rgb), 0.16);
@@ -931,6 +931,13 @@ body.night-mode .plan-compare--kc .pc-kit-thumbs img {
   box-shadow: none;
   filter: drop-shadow(0 0.6rem 0.8rem rgba(var(--kc-mapped-surface-accent-default-rgb), 0.85));
   color: var(--kc-mapped-text-accent-default-on-accent);
+  /* The identity type of the CTAs below (.pc-cta), Victor 23 Oct */
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
 }
 
 .plan-compare--kc .pc-tag-top {
