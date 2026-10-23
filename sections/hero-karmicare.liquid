@@ -454,34 +454,7 @@
       if (window.KCDayNight && window.KCDayNight.state().mode !== shown) date.setHours(shown === 'day' ? 7 : 22, 0, 0, 0);
       return date;
     }
-    // The digits tick calmly (Victor, 23 Oct): each one steps a line at a time towards its value,
-    // the short way round, one tick every 0.45s. A tick past 9 or below 0 lands on the spare 0
-    // or 9 at the column's end, which the next tick swaps, unseen, for the same digit in the middle.
-    var heroTick = 450;
-    var heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    function place(char, pos, unseen) {
-      if (unseen) char.classList.add('is-still');
-      char.kcPos = pos;
-      char.style.setProperty('--kc-roll-pos', pos);
-      if (unseen) {
-        void char.offsetWidth;
-        char.classList.remove('is-still');
-      }
-    }
-    function tick(char) {
-      if (char.kcPos !== char.kcShown + 1) place(char, char.kcShown + 1, true);
-      var forward = (char.kcTarget - char.kcShown + 10) % 10;
-      if (!forward) {
-        char.kcTimer = null;
-        return;
-      }
-      var step = forward <= 5 ? 1 : -1;
-      char.kcShown = (char.kcShown + step + 10) % 10;
-      place(char, char.kcPos + step);
-      char.kcTimer = setTimeout(tick, heroTick, char);
-    }
     function rollTo(element, text, animate) {
-      animate = animate && !heroReducedMotion.matches;
       var roll = element.querySelector('.kc-roll');
       var label = element.querySelector('.visually-hidden');
       var previous = label ? label.textContent : '';
@@ -495,9 +468,6 @@
           return char.hasAttribute('data-digit') === /\d/.test(text[i]);
         });
       if (!same) {
-        Array.prototype.forEach.call(chars, function (char) {
-          clearTimeout(char.kcTimer);
-        });
         label = document.createElement('span');
         label.className = 'visually-hidden';
         roll = document.createElement('span');
@@ -509,9 +479,8 @@
           if (/\d/.test(character)) {
             var from = previous[i - text.length + previous.length];
             char.setAttribute('data-digit', '');
-            char.innerHTML = '<span class="kc-roll__strip">' + '901234567890'.split('').join('<br>') + '</span>';
-            char.kcShown = char.kcTarget = Number(/\d/.test(from) ? from : character);
-            place(char, char.kcShown + 1);
+            char.style.setProperty('--kc-roll-digit', /\d/.test(from) ? from : character);
+            char.innerHTML = '<span class="kc-roll__strip">' + '0123456789'.split('').join('<br>') + '</span>';
           }
           roll.append(char);
         });
@@ -521,21 +490,8 @@
       label.textContent = text;
       roll.classList.toggle('is-still', !animate);
       Array.prototype.forEach.call(roll.children, function (char, i) {
-        if (!char.hasAttribute('data-digit')) {
-          char.textContent = text[i];
-          return;
-        }
-        var digit = Number(text[i]);
-        if (animate) {
-          // A running tick picks up the new value at its next step
-          char.kcTarget = digit;
-          if (!char.kcTimer) tick(char);
-        } else {
-          clearTimeout(char.kcTimer);
-          char.kcTimer = null;
-          char.kcShown = char.kcTarget = digit;
-          place(char, digit + 1);
-        }
+        if (char.hasAttribute('data-digit')) char.style.setProperty('--kc-roll-digit', text[i]);
+        else char.textContent = text[i];
       });
     }
     function updateHeroLiveTime(animate) {
@@ -569,14 +525,16 @@
     window.addEventListener('load', updateHeroOffset);
     window.addEventListener('resize', updateHeroOffset, { passive: true });
 
-    // Ambassador rotation in the badge (Victor, 23 Oct): three random ambassadors from the Trusted
-    // Professionals cards on this page on each load, at 0, 2 and 4s once the badge is on screen,
-    // so the motion ends within five seconds and needs no pause control (WCAG 2.2.2; R49 B1,
-    // Victor's choice). Hovered, focused, off screen or a hidden tab before the window opens: it
-    // waits; once the window is open: it stops for good, as it does at its end. Reduced motion
-    // keeps the random first photo only. Below 750px the badge is hidden, and without cards the
-    // block's own image stays. One transition at a time: every reschedule or stop starts a new
-    // generation, so a photo that finishes loading for an older schedule changes nothing (R49 B3).
+    // Ambassador rotation in the badge (Victor, 24 Oct): all ambassadors from the Trusted
+    // Professionals cards on this page, a new one every 4s, in a loop. Each round is a new random
+    // order, and a new round never starts with the photo last shown. Nothing is stored: each page
+    // load starts its own round. Hover or focus on the badge, a hidden tab or the badge off screen
+    // pause it; going on starts a full new 4s, with no catch-up swap. Reduced motion keeps the
+    // random first photo only, and the rotation resumes when it is turned off. Below 750px the
+    // badge is hidden, and without cards the block's own image stays. A photo that has not loaded
+    // by its turn is skipped (R49e N1), and a timer of an older generation changes nothing (R49 B3).
+    // Victor 24 Oct: no pause button by choice; WCAG 2.2.2 (pause for motion over 5 s) is
+    // knowingly not met.
     var wrap = hero && hero.querySelector('.hero-karmicare__badge-avatar-wrap[data-kc-rotate]');
     function startRotation() {
       var current = wrap.querySelector('.hero-karmicare__badge-avatar');
@@ -587,35 +545,69 @@
         wrap.classList.remove('is-picking');
         return;
       }
-      // The badge's 56px avatar at up to 3x: the card image's CDN URL at 168px wide
-      var urls = Array.prototype.map.call(cards, function (img) {
+      // The card photos, each at 168px wide: the badge's 56px avatar at up to 3x. A photo on two
+      // cards counts once.
+      var urls = [];
+      Array.prototype.forEach.call(cards, function (img) {
         var url = new URL(img.getAttribute('src'), window.location.href);
         url.searchParams.set('width', '168');
-        return url.href;
+        if (urls.indexOf(url.href) === -1) urls.push(url.href);
       });
-      for (var i = urls.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var swap = urls[i];
-        urls[i] = urls[j];
-        urls[j] = swap;
+      // A random order of all photos (Fisher-Yates); a new round never starts with the photo last
+      // shown
+      function shuffled(avoidFirst) {
+        var order = urls.slice();
+        for (var i = order.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var swap = order[i];
+          order[i] = order[j];
+          order[j] = swap;
+        }
+        if (avoidFirst && order.length > 1 && order[0] === avoidFirst) {
+          var k = 1 + Math.floor(Math.random() * (order.length - 1));
+          order[0] = order[k];
+          order[k] = avoidFirst;
+        }
+        return order;
       }
-      urls = urls.slice(0, 3);
-      // Each photo loads once, when it is next: true when it loaded, false when it failed
-      var loads = [];
-      function load(i) {
-        if (!loads[i]) {
-          loads[i] = new Promise(function (resolve) {
+      var round = shuffled();
+      var upcoming = null; // the next round, made once the current one is at its end
+      var position = -1; // this round's photo whose turn came last; -1 while the block's own image shows
+      var lastShown = null; // the last photo that really showed; a failed or skipped one never is (R49e N2)
+      function peek() {
+        if (position + 1 < round.length) return round[position + 1];
+        if (!upcoming) upcoming = shuffled(lastShown);
+        return upcoming[0];
+      }
+      function advance() {
+        if (position + 1 < round.length) {
+          position += 1;
+        } else {
+          round = upcoming || shuffled(lastShown);
+          upcoming = null;
+          position = 0;
+        }
+      }
+      // Each photo loads once, ahead of its turn: loaded[url] is true once it loaded, false once it
+      // failed
+      var loads = {};
+      var loaded = {};
+      function load(url) {
+        if (!loads[url]) {
+          loads[url] = new Promise(function (resolve) {
             var image = new Image();
             image.onload = function () {
+              loaded[url] = true;
               resolve(true);
             };
             image.onerror = function () {
+              loaded[url] = false;
               resolve(false);
             };
-            image.src = urls[i];
+            image.src = url;
           });
         }
-        return loads[i];
+        return loads[url];
       }
       var next = current.cloneNode(false);
       [current, next].forEach(function (img) {
@@ -630,23 +622,14 @@
 
       var layers = [current, next];
       var active = 0;
-      var index = -1; // the last ambassador shown; -1 while the block's own image shows
       var generation = 0;
       var timer;
-      var paused = false;
+      var hovered = false;
+      var focused = false;
       var visible = false; // until the observer's first report
       var stopped = false;
       var picked = false; // the first photo (or the block's own image) is showing
-      var started = false;
-      var deadline;
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      function stop() {
-        stopped = true;
-        clearTimeout(timer);
-        clearTimeout(deadline);
-        generation += 1;
-      }
 
       function show(url) {
         var incoming = layers[1 - active];
@@ -658,48 +641,44 @@
         incoming.classList.remove('is-below');
         outgoing.classList.add('is-above');
         active = 1 - active;
+        lastShown = url;
       }
 
-      // A failed photo is skipped; the next one gets its full two seconds. The window opens when the
-      // badge is first on screen and closes 4.6s later (the last swap at 4s plus its 0.4s slide).
+      // The next photo 4s after the last one showed, loaded ahead. At its turn, a photo that
+      // failed or has not loaded yet is skipped: the current one stays and the next gets its own
+      // 4s (R49e N1). Waiting (hover, focus, off screen, hidden tab, reduced motion) clears the
+      // timer; going on starts a full new 4s. With one card the only swap brings its photo in
+      // after the block's own image.
       function schedule() {
         clearTimeout(timer);
         generation += 1;
-        var target = index + 1;
-        if (stopped || !picked || reducedMotion.matches || target >= urls.length) return;
-        if (paused || !visible || document.hidden) {
-          if (started) stop();
-          return;
-        }
-        if (!started) {
-          started = true;
-          deadline = setTimeout(stop, 4600);
-        }
+        if (stopped || !picked || reducedMotion.matches || (urls.length < 2 && position >= 0)) return;
+        if (hovered || focused || !visible || document.hidden) return;
         var token = generation;
+        var target = peek();
         load(target);
         timer = setTimeout(function () {
-          load(target).then(function (ok) {
-            if (token !== generation || target !== index + 1) return;
-            index = target;
-            if (ok) show(urls[target]);
-            schedule();
-          });
-        }, 2000);
+          if (token !== generation) return;
+          advance();
+          if (loaded[target]) show(target);
+          schedule();
+        }, 4000);
       }
 
-      // The first photo once it has loaded; after 1.5s, or if it failed, the block's own image
-      // shows and the first ambassador follows in the rotation
+      // The first photo once it has loaded; after 1.5s the block's own image shows and the first
+      // ambassador follows 4s later. A failed first photo is passed over for the next one.
       Promise.race([
-        load(0),
+        load(round[0]),
         new Promise(function (resolve) {
-          setTimeout(resolve, 1500, false);
+          setTimeout(resolve, 1500, null);
         }),
       ]).then(function (ok) {
         if (stopped) return;
+        if (ok !== null) advance();
         if (ok) {
-          index = 0;
-          current.src = urls[0];
+          current.src = round[0];
           current.classList.add('is-below');
+          lastShown = round[0];
         }
         wrap.classList.remove('is-picking');
         void current.offsetWidth;
@@ -708,26 +687,23 @@
         schedule();
       });
 
+      // Hover and focus on the badge pause the rotation
       var badge = wrap.closest('.hero-karmicare__badge');
-      var hovered = false;
-      var focused = false;
-      function hold(isHovered, isFocused) {
-        hovered = isHovered;
-        focused = isFocused;
-        paused = hovered || focused;
-        schedule();
-      }
       badge.addEventListener('mouseenter', function () {
-        hold(true, focused);
+        hovered = true;
+        schedule();
       });
       badge.addEventListener('mouseleave', function () {
-        hold(false, focused);
+        hovered = false;
+        schedule();
       });
       badge.addEventListener('focusin', function () {
-        hold(hovered, true);
+        focused = true;
+        schedule();
       });
       badge.addEventListener('focusout', function (event) {
-        hold(hovered, badge.contains(event.relatedTarget));
+        focused = badge.contains(event.relatedTarget);
+        schedule();
       });
       var observer = new IntersectionObserver(function (entries) {
         visible = entries[entries.length - 1].isIntersecting;
@@ -741,7 +717,9 @@
       // and lets go of its timer, observer and listeners (R49 N3)
       function dispose(event) {
         if (event.detail.sectionId !== '{{ section.id }}') return;
-        stop();
+        stopped = true;
+        clearTimeout(timer);
+        generation += 1;
         observer.disconnect();
         document.removeEventListener('visibilitychange', schedule);
         reducedMotion.removeEventListener('change', schedule);
@@ -1101,7 +1079,7 @@
           "type": "checkbox",
           "id": "rotate_professionals",
           "label": "Rotate ambassador photos",
-          "info": "Shows three random ambassadors from the Trusted Professionals cards on this page, 2 seconds apart, so the motion ends within 5 seconds. The image above stays as the fallback.",
+          "info": "Shows all ambassadors from the Trusted Professionals cards on this page, a new one every 4 seconds in a loop, in random order; it pauses on hover and focus. No pause button by choice, so WCAG 2.2.2 (pause for motion over 5 s) is knowingly not met. The image above stays as the fallback.",
           "default": true
         },
         {
