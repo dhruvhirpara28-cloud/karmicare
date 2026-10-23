@@ -36,7 +36,10 @@ Dry run (the default) sends only queries. Targets are resolved by identity first
   exactly (a section-level setting never matches its blocks' settings);
 - selling plans by their GID, selling-plan groups by their exact EN name (every group with that name, as groups are
   shared by products), and on both only name, description and option1-3;
-- menu links and shop policies have no proven owner route yet and are never written.
+- shop policies by the GID a reviewed shop-policies.json binds to the policy's handle, body only: the live body must
+  hold every approved block exactly once, on text boundaries (never inside a tag, attribute or comment), with no
+  other text outside them; any row of the policy, in any group, that is held, gated or conflicting vetoes it (R47);
+- menu links have no proven owner route yet and are never written.
 The report ends with the API contract the run saw (scopes, sample GIDs and keys, invalid content).
 Exactly one target is written (selling-plan groups: every group with the EN name). None is stale or missing,
 several are ambiguous, and two plan items that want different values on one target are a conflict: none of these
@@ -132,8 +135,11 @@ SVG_ATTRIBUTE = re.compile(r"""\s+([^\s"'<>/=`]+)(?:\s*=\s*("[^"]*"|'[^']*'|[^\s
 # Paint (fill, stroke) in the subset: none, currentColor, a hex colour or a colour keyword; never url(...) (R42b-N1).
 SVG_PAINT = re.compile(r"none|currentcolor|#[0-9a-f]{3,8}|[a-z]+", re.I)
 HANDLE_TYPES = ("PRODUCT", "PAGE", "ARTICLE", "BLOG", "COLLECTION")
-UNPROVEN_TYPES = {"LINK": "menu links: no verified owner route (menu -> link) yet",
-                  "SHOP_POLICY": "shop policies: no verified owner route (policy type -> resource) yet"}
+UNPROVEN_TYPES = {"LINK": "menu links: no verified owner route (menu -> link) yet"}
+# A shop policy is the GID the reviewed shop-policies.json binds to its handle (R47-1); only its "body" is written,
+# assembled block by block (assemble_policy). Its title is not translated here (Shopify supplies it).
+POLICY_BODY_KEY = "body"
+SHOP_POLICIES = "docs/localization/registration/shop-policies.json"
 BODY_KEYS = {"body_html": "body_html", "summary_html": "summary_html", "body": "body_html"}
 RICH_TEXT_TYPES = {"root", "paragraph", "heading", "list", "list-item", "link", "text"}
 RICH_TEXT_FIELDS = {"type", "url", "target", "listType", "level"}
@@ -657,7 +663,7 @@ class Scope:
         self.nodes, self.reason, self.rule = list(nodes), reason, rule
 
 
-def scope_for(live, res, theme_id):
+def scope_for(live, res, theme_id, shop_policies=None):
     rtype, owner = res["shopify_type"], res["owner"]
     if rtype in UNPROVEN_TYPES:
         return Scope(reason="owner not proven: " + UNPROVEN_TYPES[rtype])
@@ -682,6 +688,17 @@ def scope_for(live, res, theme_id):
         if len(hits) != 1:
             return Scope(reason="%d %s resources with handle %s" % (len(hits), rtype, owner))
         return Scope(hits, None, "key")
+    if rtype == "SHOP_POLICY":
+        gid = (shop_policies or {}).get(owner)
+        if not gid:
+            return Scope(reason="owner not proven: no reviewed GID for policy %s in shop-policies.json" % owner)
+        nodes = live.by_ids([gid])
+        if len(nodes) != 1:
+            return Scope(reason="no live resource %s" % gid)
+        bodies = sum(c["key"] == POLICY_BODY_KEY for c in nodes[0]["translatableContent"])
+        if bodies != 1:
+            return Scope(reason="%s has %d '%s' keys" % (gid, bodies, POLICY_BODY_KEY))
+        return Scope(nodes, None, "policy")
     if rtype == "SHOP":
         nodes = live.of_type("SHOP")
         return Scope(nodes, None if len(nodes) == 1 else "%d SHOP resources" % len(nodes), "key")
@@ -690,6 +707,64 @@ def scope_for(live, res, theme_id):
     if rtype == "METAOBJECT":
         return Scope(reason=None, rule="metaobject", nodes=[])
     return Scope(reason="type %s not supported" % rtype)
+
+
+def load_shop_policies(path):
+    """{policy handle: ShopPolicy GID} from the reviewed shop-policies.json (R47-1), or {} when it is absent."""
+    if not os.path.exists(path):
+        return {}
+    data = json.load(open(path, encoding="utf-8"))
+    out = data.get("policies") if isinstance(data, dict) else None
+    if (not isinstance(out, dict) or not all(isinstance(h, str) and valid_gid(g) and gid_type(g) == "ShopPolicy" for h, g in out.items())
+            or len(set(out.values())) != len(out)):
+        raise RunnerError("%s is not {\"policies\": {handle: unique ShopPolicy GID}}." % path)
+    return out
+
+
+def tag_runs(value, spans):
+    """The raw text of every tag and comment span, in order."""
+    return [value[s:e] for kind, s, e in spans if kind != "text"]
+
+
+def assemble_policy(value, blocks):
+    """(body, None) or (None, reason): every block's EN replaced by its translation in the live body (R47-1, R47-2).
+    Blocks are found in document order, each starting and ending on a span boundary of scan_html (never inside a
+    tag, attribute or comment); any other occurrence of a block's EN must lie inside another matched block (a short
+    block such as '<strong>14 days</strong>' inside a sentence block), never in a tag, attribute, comment or unmatched
+    text; all non-blank text lies inside a block; each translation keeps its EN's tags and comments byte for byte,
+    and the result scans as well-formed markup."""
+    spans, reason = scan_html(value)
+    if spans is None:
+        return None, "the live body: " + reason
+    edges = set(s for _, s, _ in spans) | set(e for _, _, e in spans)
+    ranges, pos = [], 0
+    for b in blocks:
+        at = value.find(b["en"], pos)
+        if at < 0:
+            return None, "block %s not in the live value" % b["id"]
+        if at not in edges or at + len(b["en"]) not in edges:
+            return None, "block %s does not start and end on text boundaries" % b["id"]
+        en_spans, value_spans = scan_html(b["en"])[0], scan_html(b["value"])[0]
+        if en_spans is None or value_spans is None or tag_runs(b["en"], en_spans) != tag_runs(b["value"], value_spans):
+            return None, "block %s: its translation changes the markup" % b["id"]
+        ranges.append((at, at + len(b["en"]), b))
+        pos = at + len(b["en"])
+    for en in set(b["en"] for b in blocks):
+        at = value.find(en)
+        while at >= 0:
+            if not any(a <= at and at + len(en) <= z for a, z, _ in ranges):
+                return None, "a block's EN also occurs outside the approved blocks at offset %d: %r" % (at, en[:60])
+            at = value.find(en, at + 1)
+    for kind, s, e in spans:
+        if kind == "text" and html.unescape(value[s:e]).strip() and not any(a <= s and e <= z for a, z, _ in ranges):
+            return None, "text outside the approved blocks at offset %d: %r" % (s, value[s:e].strip()[:60])
+    out, shift = value, 0
+    for a, z, b in ranges:
+        out = out[:a + shift] + b["value"] + out[z + shift:]
+        shift += len(b["value"]) - (z - a)
+    if scan_html(out)[0] is None:
+        return None, "the assembled body is not well-formed markup"
+    return out, None
 
 
 def metafield_nodes(live, owner, field):
@@ -1418,7 +1493,8 @@ def provenance_holds(admin, locale, plan, bindings, shop_objects, ops, field_bin
     return True, None
 
 
-def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, field_bindings=None, fields_out=None, shop_objects=None):
+def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, field_bindings=None, fields_out=None, shop_objects=None,
+          shop_policies=None):
     """The approval snapshot's targets, and a row for every first-wave item.
 
     bindings: reviewed {item id: {resource, key, en_sha1}} for metaobject items whose field the inventory does not
@@ -1517,7 +1593,13 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
         wave = [i for i in res["items"] if not i["hold"] and not i["gates"]]
         if not wave:
             continue
-        scope = scope_for(live, res, theme_id)
+        scope = scope_for(live, res, theme_id, shop_policies)
+        if scope.rule == "policy":
+            # R47-3: every row of the policy counts, in whatever group the plan puts it; the builder emits one group
+            # per policy, so a second group (held, gated or not) stops the policy instead of being skipped.
+            groups = sum(r["shopify_type"] == "SHOP_POLICY" and r["owner"] == res["owner"] for r in plan["resources"])
+            if groups != 1:
+                scope = Scope(reason="policy %s is split over %d plan groups" % (res["owner"], groups))
         if scope.reason:
             for item in wave:
                 row(item, res, "not written", scope.reason)
@@ -1641,6 +1723,9 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
         for item in wave:
             if item["kind"] == "assemble":
                 continue
+            if scope.rule == "policy":
+                row(item, res, "not written", "a shop policy is written as its body only")
+                continue
             cands = []
             for node in scope.nodes:
                 for content in node["translatableContent"]:
@@ -1682,13 +1767,18 @@ def build(plan, live, theme_id, remove_never, bindings=None, proposals=None, fie
                 fields.setdefault(item["field"].split("#")[0], []).append(item)
         for field, blocks in fields.items():
             info = res.get("assembled_field") or {}
-            ckey = BODY_KEYS.get(field)
+            ckey = POLICY_BODY_KEY if scope.rule == "policy" else BODY_KEYS.get(field)
             node = scope.nodes[0] if len(scope.nodes) == 1 else None
             content = next((c for c in node["translatableContent"] if c["key"] == ckey), None) if node and ckey else None
             if info.get("missing_or_held") or info.get("gated") or len(blocks) != info.get("blocks", len(blocks)):
                 why = "the field has held or missing blocks"
             elif content is None:
                 why = "no live key %s" % ckey
+            elif scope.rule == "policy":
+                out, why = assemble_policy(content["value"], blocks)
+                if not why:
+                    want(node, content, [b["id"] for b in blocks], out, "policy body assembled from %d blocks" % len(blocks))
+                    continue
             else:
                 out, pos, why = content["value"], 0, None
                 for b in blocks:
@@ -1776,10 +1866,11 @@ def load_bindings(path):
     return out
 
 
-def snapshot(locale, theme_id, theme_proof_text, plan_sha, bindings_sha, remove_never, ops, field_sha=None, shop_sha=None):
+def snapshot(locale, theme_id, theme_proof_text, plan_sha, bindings_sha, remove_never, ops, field_sha=None, shop_sha=None,
+             policies_sha=None):
     return {"store": SHOP, "api": API_VERSION, "locale": locale, "theme_id": theme_id, "theme_proof": theme_proof_text,
             "plan_sha256": plan_sha, "bindings_sha256": bindings_sha, "field_bindings_sha256": field_sha,
-            "shop_objects_sha256": shop_sha, "remove_never": remove_never,
+            "shop_objects_sha256": shop_sha, "shop_policies_sha256": policies_sha, "remove_never": remove_never,
             "ops": [dict({k: o[k] for k in ("action", "resource", "key", "en_digest", "current", "value")},
                          **({"evidence": o["evidence"]} if o.get("evidence") else {})) for o in ops]}
 
@@ -1974,7 +2065,10 @@ def preconditions_hold(live, ops):
         node = fresh.get(o["resource"])
         if node is None:
             return False, "%s was not returned (once) by the re-read" % o["resource"]
-        content = next((c for c in node["translatableContent"] if c["key"] == o["key"]), None) if node else None
+        same_key = [c for c in node["translatableContent"] if c["key"] == o["key"]]
+        if len(same_key) > 1:  # R47-4: a resource must offer the op's key once, as at discovery
+            return False, "%s offers %d '%s' keys" % (o["resource"], len(same_key), o["key"])
+        content = same_key[0] if same_key else None
         if not content or content["digest"] != o["en_digest"] or current(node, o["key"]) != o["current"]:
             return False, "%s %s changed since the dry run" % (o["resource"], o["key"])
         if o["action"] == "register" and protected(o["resource"], content):
@@ -2051,7 +2145,7 @@ def confirmation(state, data, action, keys, locale):
 
 
 def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN, bindings_path=BINDINGS,
-         field_bindings_path=FIELD_BINDINGS, shop_objects_path=SHOP_OBJECTS):
+         field_bindings_path=FIELD_BINDINGS, shop_objects_path=SHOP_OBJECTS, shop_policies_path=SHOP_POLICIES):
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--lang", choices=("nl", "fr", "both"), default="both")
     parser.add_argument("--theme-id", help="the published theme's numeric ID; theme content is out of scope without it")
@@ -2071,6 +2165,7 @@ def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN, bind
         proof = theme_proof(admin, args.theme_id, args.theme_attested)
         bindings = load_bindings(bindings_path)
         shop_objects = load_shop_objects(shop_objects_path)
+        shop_policies = load_shop_policies(shop_policies_path)
         os.makedirs(out, exist_ok=True)
         for locale in (("nl", "fr") if args.lang == "both" else (args.lang,)):
             path = plans % locale
@@ -2078,9 +2173,10 @@ def main(argv=None, transport=None, credentials=None, out=LIVE, plans=PLAN, bind
             live = Live(admin, locale)
             proposals, fields = {}, {}
             field_bindings = load_field_bindings(field_bindings_path, locale)
-            ops, removals, rows = build(plan, live, args.theme_id, args.remove_never, bindings, proposals, field_bindings, fields, shop_objects)
+            ops, removals, rows = build(plan, live, args.theme_id, args.remove_never, bindings, proposals, field_bindings, fields, shop_objects,
+                                        shop_policies)
             snap = snapshot(locale, args.theme_id, proof, plan_hash(path), plan_hash(bindings_path), args.remove_never, ops,
-                            plan_hash(field_bindings_path), plan_hash(shop_objects_path))
+                            plan_hash(field_bindings_path), plan_hash(shop_objects_path), plan_hash(shop_policies_path))
             check = checksum(snap)
             if not args.write:
                 write_text(os.path.join(out, "dry-run-%s.md" % locale),
