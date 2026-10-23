@@ -216,6 +216,41 @@
   transition: color 0.3s ease;
 }
 
+/* The time rolls like an odometer when it changes (sections/hero-karmicare.liquid): each digit
+   is a column of 0-9 moved to its value, one line per digit */
+.kc-roll {
+  --kc-roll-height: 1.25em;
+  display: inline-flex;
+  line-height: var(--kc-roll-height);
+}
+
+.kc-roll__char {
+  display: inline-block;
+  height: var(--kc-roll-height);
+  white-space: pre;
+}
+
+.kc-roll__char[data-digit] {
+  overflow: hidden;
+}
+
+.kc-roll__strip {
+  display: block;
+  line-height: var(--kc-roll-height); /* a theme rule sets spans to normal; the step must match */
+  transform: translateY(calc(var(--kc-roll-digit, 0) * -1 * var(--kc-roll-height)));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kc-roll.is-still .kc-roll__strip {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-roll__strip {
+    transition: none;
+  }
+}
+
 .kc-hero-status-night {
   display: none;
 }
