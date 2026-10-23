@@ -328,7 +328,19 @@
             {%- else -%}
               <div class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}">
             {%- endif -%}
-            <div class="hero-karmicare__badge-avatar-wrap">
+            <div
+              class="hero-karmicare__badge-avatar-wrap"
+              {% if block.settings.rotate_professionals %}
+                data-kc-rotate
+              {% endif %}
+            >
+              {%- if block.settings.rotate_professionals -%}
+                <noscript>
+                  <style>
+                    .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar { opacity: 1; }
+                  </style>
+                </noscript>
+              {%- endif -%}
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
@@ -374,8 +386,18 @@
 
               {%- if block.settings.heading != blank -%}
                 <div class="hero-karmicare__badge-heading-wrap">
+                  {%- liquid
+                    # The last word and the arrow stay on one line, so the arrow never wraps alone
+                    assign heading_words = block.settings.heading | escape | split: ' '
+                    assign heading_lead_count = heading_words.size | minus: 1
+                  -%}
                   <span class="hero-karmicare__badge-heading text-xl">
-                    {{- block.settings.heading | escape }}
+                    {%- for word in heading_words limit: heading_lead_count -%}
+                      {{ word }}{{ ' ' }}
+                    {%- endfor -%}
+                    <span class="hero-karmicare__badge-heading-end">
+                    {{- heading_words | last -}}
+                    {{ ' ' }}
                     <svg
                       class="hero-karmicare__badge-arrow"
                       xmlns="http://www.w3.org/2000/svg"
@@ -388,6 +410,7 @@
                     >
                       <path d="M3.33398 8.00004H12.6673M8.00065 12.6667L12.6673 8.00004L8.00065 3.33337" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                    </span>
                   </span>
                 </div>
               {%- endif -%}
@@ -431,6 +454,130 @@
     updateHeroOffset();
     window.addEventListener('load', updateHeroOffset);
     window.addEventListener('resize', updateHeroOffset, { passive: true });
+
+    // Ambassador rotation in the badge (Victor, 23 Oct): a random ambassador from the Trusted
+    // Professionals cards on this page on each load, then the next one every 2s until each has
+    // been shown once. It waits while the badge is hovered or focused, off screen or in a hidden
+    // tab. Reduced motion keeps the random first photo. Below 750px the badge is hidden, and
+    // without cards the block's own image stays.
+    var wrap = hero && hero.querySelector('.hero-karmicare__badge-avatar-wrap[data-kc-rotate]');
+    function startRotation() {
+      var current = wrap.querySelector('.hero-karmicare__badge-avatar');
+      var cards = document.querySelectorAll(
+        '.trusted-professionals__card:not([data-marquee-clone]) .trusted-professionals__card-image img'
+      );
+      if (!current || current.tagName !== 'IMG' || !cards.length || !window.matchMedia('(min-width: 750px)').matches) {
+        wrap.classList.add('is-ready');
+        return;
+      }
+      // The badge's 56px avatar at up to 3x: the card image's CDN URL at 168px wide
+      var urls = Array.prototype.map.call(cards, function (img) {
+        var url = new URL(img.getAttribute('src'), window.location.href);
+        url.searchParams.set('width', '168');
+        return url.href;
+      });
+      for (var i = urls.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var swap = urls[i];
+        urls[i] = urls[j];
+        urls[j] = swap;
+      }
+      var loaded = urls.map(function (url) {
+        return new Promise(function (resolve) {
+          var image = new Image();
+          image.onload = image.onerror = resolve;
+          image.src = url;
+        });
+      });
+      var next = current.cloneNode(false);
+      [current, next].forEach(function (img) {
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+      });
+      next.classList.add('hero-karmicare__badge-avatar--next', 'is-hidden');
+      next.alt = '';
+      next.setAttribute('aria-hidden', 'true');
+      wrap.append(next);
+
+      var layers = [current, next];
+      var active = 0;
+      var index = 0;
+      var timer;
+      var paused = false;
+      var visible = true;
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function show(url) {
+        var incoming = layers[1 - active];
+        var outgoing = layers[active];
+        incoming.src = url;
+        incoming.classList.remove('is-hidden', 'is-above');
+        incoming.classList.add('is-below');
+        void incoming.offsetWidth;
+        incoming.classList.remove('is-below');
+        outgoing.classList.add('is-above');
+        active = 1 - active;
+      }
+
+      function schedule() {
+        clearTimeout(timer);
+        if (reducedMotion || paused || !visible || document.hidden || index >= urls.length - 1) return;
+        timer = setTimeout(function () {
+          loaded[index + 1].then(function () {
+            if (paused || !visible || document.hidden) return;
+            index += 1;
+            show(urls[index]);
+            schedule();
+          });
+        }, 2000);
+      }
+
+      // The first photo: once it has loaded, or after 1.5s on a slow connection
+      Promise.race([
+        loaded[0],
+        new Promise(function (resolve) {
+          setTimeout(resolve, 1500);
+        }),
+      ]).then(function () {
+        current.src = urls[0];
+        current.classList.add('is-below');
+        wrap.classList.add('is-ready');
+        void current.offsetWidth;
+        current.classList.remove('is-below');
+        schedule();
+      });
+
+      var badge = wrap.closest('.hero-karmicare__badge');
+      var hovered = false;
+      var focused = false;
+      function hold(isHovered, isFocused) {
+        hovered = isHovered;
+        focused = isFocused;
+        paused = hovered || focused;
+        schedule();
+      }
+      badge.addEventListener('mouseenter', function () {
+        hold(true, focused);
+      });
+      badge.addEventListener('mouseleave', function () {
+        hold(false, focused);
+      });
+      badge.addEventListener('focusin', function () {
+        hold(hovered, true);
+      });
+      badge.addEventListener('focusout', function (event) {
+        hold(hovered, badge.contains(event.relatedTarget));
+      });
+      new IntersectionObserver(function (entries) {
+        visible = entries[entries.length - 1].isIntersecting;
+        schedule();
+      }).observe(wrap);
+      document.addEventListener('visibilitychange', schedule);
+    }
+    if (wrap) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startRotation);
+      else startRotation();
+    }
   })();
 </script>
 
@@ -774,6 +921,13 @@
           "type": "image_picker",
           "id": "image",
           "label": "Professional Avatar Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "rotate_professionals",
+          "label": "Rotate ambassador photos",
+          "info": "Shows a random ambassador from the Trusted Professionals cards on this page, then each of the others once, every 2 seconds. The image above stays as the fallback.",
+          "default": true
         },
         {
           "type": "text",

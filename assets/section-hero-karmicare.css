@@ -266,6 +266,48 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   justify-content: center;
 }
 
+/* Ambassador rotation (Victor, 23 Oct): the section's script shows a random ambassador from the
+   Trusted Professionals cards on each page load, then the next one every 2s until each has been
+   shown once. The photo hides until the script has picked one; the old photo slides up and out
+   while the next one comes in from below, inside the avatar's frame. */
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate]:not(.is-ready) .hero-karmicare__badge-avatar,
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-hidden {
+  opacity: 0;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar {
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar--next {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-below {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: none;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-above {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar {
+    transition: none;
+  }
+}
+
 .hero-karmicare__badge-avatar {
   width: 56px;
   height: 72px;
@@ -322,6 +364,10 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   font-weight: var(--font-600-weight);
 }
 
+.hero-karmicare__badge-heading-end {
+  white-space: nowrap;
+}
+
 .hero-karmicare__badge-arrow {
   width: 16px;
   height: 16px;
@@ -350,9 +396,10 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
     justify-content: flex-start;
   }
 
+  /* 200px keeps the longer FR heading on three lines at most (Victor, 23 Oct; was 170px) */
   .hero-karmicare__badge-heading-wrap .hero-karmicare__badge-heading {
     display: flow;
-    max-width: 170px;
+    max-width: 200px;
   }
 
   .hero-karmicare__badge-rating-text {
