@@ -334,13 +334,6 @@
                 data-kc-rotate
               {% endif %}
             >
-              {%- if block.settings.rotate_professionals -%}
-                <noscript>
-                  <style>
-                    .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar { opacity: 1; }
-                  </style>
-                </noscript>
-              {%- endif -%}
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
@@ -362,6 +355,19 @@
                 <div class="hero-karmicare__badge-avatar hero-karmicare__badge-avatar--placeholder">
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
+              {%- endif -%}
+              {%- if block.settings.rotate_professionals -%}
+                <script>
+                  // The photo hides until the section script has picked an ambassador, so the block
+                  // image does not flash first. Without JavaScript this never runs and the block image
+                  // stays; if the section script never picks, it shows again after 3s.
+                  (function (wrap) {
+                    wrap.classList.add('is-picking');
+                    setTimeout(function () {
+                      wrap.classList.remove('is-picking');
+                    }, 3000);
+                  })(document.currentScript.parentElement);
+                </script>
               {%- endif -%}
             </div>
 
@@ -458,8 +464,10 @@
     // Ambassador rotation in the badge (Victor, 23 Oct): a random ambassador from the Trusted
     // Professionals cards on this page on each load, then the next one every 2s until each has
     // been shown once. It waits while the badge is hovered or focused, off screen or in a hidden
-    // tab. Reduced motion keeps the random first photo. Below 750px the badge is hidden, and
-    // without cards the block's own image stays.
+    // tab. Reduced motion keeps the random first photo only, also when it is switched on later.
+    // Below 750px the badge is hidden, and without cards the
+    // block's own image stays. One transition at a time: every reschedule or stop starts a new
+    // generation, so a photo that finishes loading for an older schedule changes nothing (R49 B3).
     var wrap = hero && hero.querySelector('.hero-karmicare__badge-avatar-wrap[data-kc-rotate]');
     function startRotation() {
       var current = wrap.querySelector('.hero-karmicare__badge-avatar');
@@ -467,7 +475,7 @@
         '.trusted-professionals__card:not([data-marquee-clone]) .trusted-professionals__card-image img'
       );
       if (!current || current.tagName !== 'IMG' || !cards.length || !window.matchMedia('(min-width: 750px)').matches) {
-        wrap.classList.add('is-ready');
+        wrap.classList.remove('is-picking');
         return;
       }
       // The badge's 56px avatar at up to 3x: the card image's CDN URL at 168px wide
@@ -482,30 +490,43 @@
         urls[i] = urls[j];
         urls[j] = swap;
       }
-      var loaded = urls.map(function (url) {
-        return new Promise(function (resolve) {
-          var image = new Image();
-          image.onload = image.onerror = resolve;
-          image.src = url;
-        });
-      });
+      // Each photo loads once, when it is next: true when it loaded, false when it failed
+      var loads = [];
+      function load(i) {
+        if (!loads[i]) {
+          loads[i] = new Promise(function (resolve) {
+            var image = new Image();
+            image.onload = function () {
+              resolve(true);
+            };
+            image.onerror = function () {
+              resolve(false);
+            };
+            image.src = urls[i];
+          });
+        }
+        return loads[i];
+      }
       var next = current.cloneNode(false);
       [current, next].forEach(function (img) {
         img.removeAttribute('srcset');
         img.removeAttribute('sizes');
+        // Decorative: the badge's link and heading carry its name (R49 N2)
+        img.alt = '';
       });
       next.classList.add('hero-karmicare__badge-avatar--next', 'is-hidden');
-      next.alt = '';
-      next.setAttribute('aria-hidden', 'true');
       wrap.append(next);
+      wrap.setAttribute('aria-hidden', 'true');
 
       var layers = [current, next];
       var active = 0;
-      var index = 0;
+      var index = -1; // the last ambassador shown; -1 while the block's own image shows
+      var generation = 0;
       var timer;
       var paused = false;
       var visible = true;
-      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var stopped = false;
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
       function show(url) {
         var incoming = layers[1 - active];
@@ -519,29 +540,39 @@
         active = 1 - active;
       }
 
+      // A failed photo is skipped; the next one gets its full two seconds
       function schedule() {
         clearTimeout(timer);
-        if (reducedMotion || paused || !visible || document.hidden || index >= urls.length - 1) return;
+        generation += 1;
+        var target = index + 1;
+        if (stopped || reducedMotion.matches || paused || !visible || document.hidden || target >= urls.length) return;
+        var token = generation;
+        load(target);
         timer = setTimeout(function () {
-          loaded[index + 1].then(function () {
-            if (paused || !visible || document.hidden) return;
-            index += 1;
-            show(urls[index]);
+          load(target).then(function (ok) {
+            if (token !== generation || target !== index + 1) return;
+            index = target;
+            if (ok) show(urls[target]);
             schedule();
           });
         }, 2000);
       }
 
-      // The first photo: once it has loaded, or after 1.5s on a slow connection
+      // The first photo once it has loaded; after 1.5s, or if it failed, the block's own image
+      // shows and the first ambassador follows in the rotation
       Promise.race([
-        loaded[0],
+        load(0),
         new Promise(function (resolve) {
-          setTimeout(resolve, 1500);
+          setTimeout(resolve, 1500, false);
         }),
-      ]).then(function () {
-        current.src = urls[0];
-        current.classList.add('is-below');
-        wrap.classList.add('is-ready');
+      ]).then(function (ok) {
+        if (stopped) return;
+        if (ok) {
+          index = 0;
+          current.src = urls[0];
+          current.classList.add('is-below');
+        }
+        wrap.classList.remove('is-picking');
         void current.offsetWidth;
         current.classList.remove('is-below');
         schedule();
@@ -568,11 +599,27 @@
       badge.addEventListener('focusout', function (event) {
         hold(hovered, badge.contains(event.relatedTarget));
       });
-      new IntersectionObserver(function (entries) {
+      var observer = new IntersectionObserver(function (entries) {
         visible = entries[entries.length - 1].isIntersecting;
         schedule();
-      }).observe(wrap);
+      });
+      observer.observe(wrap);
       document.addEventListener('visibilitychange', schedule);
+      reducedMotion.addEventListener('change', schedule);
+
+      // Theme editor: a re-rendered section runs its own copy of this script, so this one stops
+      // and lets go of its timer, observer and listeners (R49 N3)
+      function dispose(event) {
+        if (event.detail.sectionId !== '{{ section.id }}') return;
+        stopped = true;
+        clearTimeout(timer);
+        generation += 1;
+        observer.disconnect();
+        document.removeEventListener('visibilitychange', schedule);
+        reducedMotion.removeEventListener('change', schedule);
+        document.removeEventListener('shopify:section:unload', dispose);
+      }
+      document.addEventListener('shopify:section:unload', dispose);
     }
     if (wrap) {
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startRotation);

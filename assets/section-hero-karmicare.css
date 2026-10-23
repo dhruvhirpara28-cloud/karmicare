@@ -268,15 +268,16 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
 
 /* Ambassador rotation (Victor, 23 Oct): the section's script shows a random ambassador from the
    Trusted Professionals cards on each page load, then the next one every 2s until each has been
-   shown once. The photo hides until the script has picked one; the old photo slides up and out
-   while the next one comes in from below, inside the avatar's frame. */
+   shown once. The photo hides while the script picks one (.is-picking, set only by script, so
+   without JavaScript the block image stays); the old photo slides up and out while the next one
+   comes in from below, inside the avatar's frame. */
 .hero-karmicare__badge-avatar-wrap[data-kc-rotate] {
   position: relative;
   overflow: hidden;
   border-radius: var(--kc-shape-radius-md);
 }
 
-.hero-karmicare__badge-avatar-wrap[data-kc-rotate]:not(.is-ready) .hero-karmicare__badge-avatar,
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate].is-picking .hero-karmicare__badge-avatar,
 .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-hidden {
   opacity: 0;
 }
