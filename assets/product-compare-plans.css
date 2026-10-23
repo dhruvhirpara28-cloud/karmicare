@@ -863,17 +863,19 @@ body:not(.night-mode) .plan-compare--kc .pc-yes {
   color: var(--kc-mapped-icon-primary-default);
 }
 
-/* Welcome Kit thumbnails: 30px tiles overlapping by 9.5px. The close-ups (custom.kit_thumbnail)
-   fill the tile with the corner radius of the buybox kit tiles (Victor, 23 Oct). */
+/* Welcome Kit thumbnails: 30px tiles overlapping by 6px, the first on top and each next one
+   under it. The close-ups (custom.kit_thumbnail) fill the tile with the corner radius of the
+   buybox kit tiles (Victor, 23 Oct). */
 .plan-compare--kc .pc-kit-thumbs {
   margin-left: var(--kc-responsive-spacing-layout-xs);
 }
 
 .plan-compare--kc .pc-kit-thumbs img {
   box-sizing: border-box;
+  position: relative;
   width: 3rem;
   height: 3rem;
-  margin-left: -0.95rem;
+  margin-left: -0.6rem;
   padding: 0;
   border: 0.1364rem solid var(--kc-mapped-border-primary-default-subtle);
   border-radius: var(--kc-shape-radius-sm);
@@ -890,6 +892,18 @@ body.night-mode .plan-compare--kc .pc-kit-thumbs img {
 
 .plan-compare--kc .pc-kit-thumbs img:first-child {
   margin-left: 0;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:nth-child(1) {
+  z-index: 3;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:nth-child(2) {
+  z-index: 2;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:nth-child(3) {
+  z-index: 1;
 }
 
 /* Featured column */
