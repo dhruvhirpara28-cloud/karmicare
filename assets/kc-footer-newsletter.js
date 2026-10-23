@@ -1,7 +1,9 @@
 /* Footer newsletter: progressive enhancement of Shopify's native customer form.
- * With a Klaviyo public key and list ID on the form, submit posts the address to
- * Klaviyo's client subscriptions endpoint (public key only, no cookie, no script).
- * Without them, or when Klaviyo cannot be reached, the native Shopify form submits.
+ * With a Klaviyo public key, list ID and retry message on the wrapper, submit posts the
+ * address to Klaviyo's client subscriptions endpoint (public key only, no cookie, no script).
+ * Without them, or with JS off, the native Shopify form submits. Once a request has gone out
+ * the native form is never submitted as well: an unclear outcome keeps the address and asks
+ * for a retry, so one signup never reaches both backends (R46-B4, Victor option a).
  * The only network call lives inside the submit handler. */
 (() => {
   const wrap = document.getElementById('FooterNewsletter');
@@ -10,7 +12,7 @@
   const config = wrap.dataset;
   const key = (config.klaviyoKey || '').trim();
   const list = (config.klaviyoList || '').trim();
-  if (!key || !list) return;
+  if (!key || !list || !config.msgRetry) return;
 
   const input = form.querySelector('input[type="email"]');
   const button = form.querySelector('button[type="submit"]');
@@ -37,6 +39,8 @@
     pending = value;
     form.setAttribute('aria-busy', String(value));
     button.disabled = value;
+    // Read-only while pending, so the address on screen is the one that was sent.
+    input.readOnly = value;
   };
 
   const showStatus = (text) => {
@@ -55,9 +59,12 @@
     });
   };
 
-  // Klaviyo unreachable (429, 5xx, network, timeout): let Shopify take the signup.
-  const fallback = () => {
-    form.submit();
+  // Unclear outcome (429, 5xx, network, timeout, any other answer): Klaviyo may have taken the
+  // signup, so nothing else is sent. The address stays in the field for a retry.
+  const showRetry = () => {
+    setBusy(false);
+    alert.textContent = config.msgRetry;
+    describe(alert.id, noteId);
   };
 
   const payload = () => ({
@@ -116,16 +123,18 @@
           showStatus(config.msgSuccess || '');
           return;
         }
-        if (response.status >= 400 && response.status < 500 && response.status !== 429) {
+        // 400 is Klaviyo's answer to an address it rejects; key, list or permission errors
+        // (401/403/404) are not the visitor's fault and get the retry message instead.
+        if (response.status === 400) {
           setBusy(false);
           showError(config.msgInvalid || '');
           return;
         }
-        fallback();
+        showRetry();
       })
       .catch(() => {
         clearTimeout(timer);
-        fallback();
+        showRetry();
       });
   });
 })();
