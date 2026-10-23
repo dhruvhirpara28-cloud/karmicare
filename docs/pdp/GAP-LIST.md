@@ -56,15 +56,17 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 37 | Parked / after launch | Loop widget, off-limits |
 | 38 | Parked / after launch | Amounts in other currencies than the euro. Victor decided the €40 reward on 22 Oct: A + C. It gets built later, together with the price per brushing. Nothing built yet |
 | 39 | Parked / after launch | NL Welcome Kit names break in the middle of a word (release QA, live). The proposal waits for a go or the next fix moment |
-| 40 | In merchant-edit | Plans table follows the comparison table, `00aa2d6`, `8202c95`, `84a8101` (R34b), merchant-edit `9972921` (23 Oct). Second round `04718ef`–`71a8694` (kit close-up tiles, featured columns 16px out in both tables, ribbon in CTA type, tips above the sticky labels, keyboard-only CTA reveal; R39–R39d), merchant-edit `6a26258` |
+| 40 | In merchant-edit | Plans table follows the comparison table, `00aa2d6`, `8202c95`, `84a8101` (R34b), merchant-edit `9972921` (23 Oct). Second round `04718ef`–`71a8694` (kit close-up tiles, featured columns 16px out in both tables, ribbon in CTA type, tips above the sticky labels, keyboard-only CTA reveal; R39–R39d), merchant-edit `6a26258`. Kit tiles under the label below 750 after the native check, `e0c0e1b` (R39e), merchant-edit `da63ae4` |
 | 41 | Parked / after launch | R34 N1: double seam beside the featured column |
 | 42 | Parked / after launch | R34 N2: info tips get no keyboard focus |
 | 43 | Parked / after launch | R34 N3: FR CTA "Commencer votre Rythme 60 jours" is 88 px high in a 72 px cell at 390 |
 | 44 | In merchant-edit | Victor option b: below 750 the price is body-md (16 px, as the plan name), h6 from 750; `8e8e26f`, merchant-edit `6a26258` |
 | 45 | In merchant-edit | Victor, 23 Oct: removed under the gallery. The block is disabled in `product.subscription-item.json` (`5b724e8`, merchant-edit `3c52d73`); the Trusted Professionals section stays. Native check on :9292 by the homepage lane |
-| 46 | Parked / after launch | R41: the journey Read more toggle has no `aria-expanded` |
+| 46 | Parked / after launch | R41, R39e: the journey Read more toggle has no `aria-expanded` or disclosure semantics for screen readers |
+| 47 | In merchant-edit | Victor, 23 Oct: benefits lists show three rows and half of the fourth, faded (`visible_items` 3, one-line peek), `fb4c0c6`, merchant-edit `da63ae4` |
+| 48 | Parked / after launch | R39e: the journey and plans transitions do not honour reduced motion |
 
-**Counts (48 lines)**: in merchant-edit 13 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 24 · dropped 8.
+**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 25 · dropped 8.
 
 ### Waiting for Victor
 
@@ -221,3 +223,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 23 Oct: rows 40–44 added. Row 40 (plans table lined up with the comparison table, Victor) is in merchant-edit `9972921`; R34 follow-ups N1–N3 parked as rows 41–43; row 44 (mobile price size) waits for Victor. Counts updated.
 - 23 Oct: row 40 second round and row 44 (option b) in merchant-edit `6a26258`; row 45 (professionals under the gallery, waiting for Victor) and row 46 (journey toggle aria-expanded, parked) added. Counts updated.
 - 23 Oct: row 45 (professionals under the gallery) removed by Victor, in merchant-edit `3c52d73`. Counts updated.
+- 23 Oct: kit tiles under the label (row 40) and the benefits peek (row 47) in merchant-edit `da63ae4`; row 46 widened, row 48 (reduced motion) parked. Counts updated.
