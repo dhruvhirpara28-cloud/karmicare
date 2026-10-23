@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4",
+ "source_digest": "6f5015e4d5fe6fc31d3cb1f7c41d0036d1cb5d61",
  "source_entries": 477,
  "counts": {
   "pending-claim-review": 42,
@@ -3513,14 +3513,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.treatment_journey_*#29",
-   "en": "— from your gums to the",
-   "en_sha1": "e2182f94ebba7b1c7a533281a8ea232f3a8b0613",
-   "nl": "— van je tandvlees tot de",
+   "en": "— from your gums to the rest of you",
+   "en_sha1": "cb65270625719eab397abf97f50940c4b90736fc",
+   "nl": "— van je tandvlees tot de rest van je lichaam",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "EN line is cut off ('…to the', handoff). Once the EN is complete, check 'de/het/je' against the missing word."
+   "notes": "EN completed by Victor 23 Oct ('…to the rest of you'); 'the rest of you' rendered 'de rest van je lichaam' (literal 'de rest van jou' reads off in NL)."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#01",
@@ -5982,14 +5982,14 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#06",
-   "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe preven",
-   "en_sha1": "1c34eae6263ac15b8c4faa11edc23b498836373c",
-   "nl": "Return on Care is hoe wij teruggeven: een deel van elke levering krijg je terug als Care Credit — in euro, te besteden aan formules en accessoires voor leden. Wij vinden dat preven",
+   "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe prevention should pay the person doing the caring.",
+   "en_sha1": "9f06fb7027a41c0c3d07d07e7e890f4cb3f8e142",
+   "nl": "Return on Care is hoe wij teruggeven: een deel van elke levering krijg je terug als Care Credit — in euro, te besteden aan formules en accessoires voor leden. Wij vinden dat preventie moet lonen voor wie zelf de zorg draagt.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "EN is cut off mid-word ('We believe preven'); NL cut at the same point. Full NL once the EN is fixed: '… Wij vinden dat preventie moet lonen voor wie zelf de zorg draagt.'"
+   "notes": "EN completed by Victor 23 Oct; the closing sentence is the one the other Return on Care tooltips use, NL as there."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#07",
