@@ -153,11 +153,12 @@
   transform: translate(-49.8%, -41.3%);
 }
 
-/* Hero animation (show_hero_animation): the kit fills 95 % of the media column width.
-   The box is the kit's motion range in the 1080 × 960 frame (every frame of both videos,
-   alpha > 8, shadows included): x 97-975, y 56-840. The poster, video and animated-WebP
-   fallback share the frame. Centre them with 5 % breathing room and let soft shadows
-   extend beyond the measured motion range. */
+/* Hero animation (show_hero_animation): the kit fills 104.5 % of the media column width
+   (95 % made 10 % larger, Victor 23 Oct). The box is the kit's motion range in the
+   1080 × 960 frame (every frame of both videos, alpha > 8, shadows included): x 97-975,
+   y 56-840. The poster, video and animated-WebP fallback share the frame. Soft shadows
+   extend beyond the measured motion range. --kc-hero-lift comes from the script in
+   sections/featured-product.liquid: it puts the landed kit on the line of the CTA button. */
 .section-featured-product {
   overflow-x: clip;
 }
@@ -172,7 +173,7 @@
   position: absolute;
   inset: 0;
   display: block;
-  transform: scale(0.95);
+  transform: translateY(var(--kc-hero-lift, 0px)) scale(1.045);
   transform-origin: center;
 }
 
