@@ -96,8 +96,9 @@ body.night-mode .chronobiology-clock {
   margin: 0;
 }
 
-/* 13em with balanced lines keeps every language on two lines at every width, the longer FR and
-   NL headings too (Victor, 23 Oct; was 8.6em, the English break alone) */
+/* 13em with balanced lines keeps every language on two lines, the longer FR and NL headings too;
+   only FR on the narrowest phones (360px) takes three (Victor, 23 Oct; was 8.6em, the English
+   break alone) */
 .chronobiology-clock .clock-heading {
   max-width: min(100%, 13em);
   margin: 0;
