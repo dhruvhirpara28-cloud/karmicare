@@ -34,10 +34,10 @@ HOLDS = os.path.join(OUT, "holds.json")
 RELEASES = os.path.join(OUT, "releases.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
-# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
-FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-05-products", "batch-08-system"}
+# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system; legal since Victor released
+# legal-review (releases.json, 23 Oct).
+FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-04-legal", "batch-05-products", "batch-08-system"}
 LATER = {
-    "batch-04-legal": "legal (batch 04)",
     "batch-06-content-pages": "content pages (batch 06), not in the first-wave list",
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
