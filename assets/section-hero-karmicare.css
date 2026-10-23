@@ -216,8 +216,8 @@
   transition: color 0.3s ease;
 }
 
-/* The time ticks like an odometer when it changes (sections/hero-karmicare.liquid): each digit
-   is a column 9, 0-9, 0 that the script moves one line per tick towards its value */
+/* The time rolls like an odometer when it changes (sections/hero-karmicare.liquid): each digit
+   is a column of 0-9 moved to its value, one line per digit */
 .kc-roll {
   --kc-roll-height: 1.25em;
   display: inline-flex;
@@ -237,12 +237,11 @@
 .kc-roll__strip {
   display: block;
   line-height: var(--kc-roll-height); /* a theme rule sets spans to normal; the step must match */
-  transform: translateY(calc(var(--kc-roll-pos, 1) * -1 * var(--kc-roll-height)));
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(calc(var(--kc-roll-digit, 0) * -1 * var(--kc-roll-height)));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.kc-roll.is-still .kc-roll__strip,
-.kc-roll__char.is-still .kc-roll__strip {
+.kc-roll.is-still .kc-roll__strip {
   transition: none;
 }
 

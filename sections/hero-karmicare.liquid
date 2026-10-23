@@ -491,34 +491,7 @@
       if (window.KCDayNight && window.KCDayNight.state().mode !== shown) date.setHours(shown === 'day' ? 7 : 22, 0, 0, 0);
       return date;
     }
-    // The digits tick calmly (Victor, 23 Oct): each one steps a line at a time towards its value,
-    // the short way round, one tick every 0.45s. A tick past 9 or below 0 lands on the spare 0
-    // or 9 at the column's end, which the next tick swaps, unseen, for the same digit in the middle.
-    var heroTick = 450;
-    var heroReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    function place(char, pos, unseen) {
-      if (unseen) char.classList.add('is-still');
-      char.kcPos = pos;
-      char.style.setProperty('--kc-roll-pos', pos);
-      if (unseen) {
-        void char.offsetWidth;
-        char.classList.remove('is-still');
-      }
-    }
-    function tick(char) {
-      if (char.kcPos !== char.kcShown + 1) place(char, char.kcShown + 1, true);
-      var forward = (char.kcTarget - char.kcShown + 10) % 10;
-      if (!forward) {
-        char.kcTimer = null;
-        return;
-      }
-      var step = forward <= 5 ? 1 : -1;
-      char.kcShown = (char.kcShown + step + 10) % 10;
-      place(char, char.kcPos + step);
-      char.kcTimer = setTimeout(tick, heroTick, char);
-    }
     function rollTo(element, text, animate) {
-      animate = animate && !heroReducedMotion.matches;
       var roll = element.querySelector('.kc-roll');
       var label = element.querySelector('.visually-hidden');
       var previous = label ? label.textContent : '';
@@ -532,9 +505,6 @@
           return char.hasAttribute('data-digit') === /\d/.test(text[i]);
         });
       if (!same) {
-        Array.prototype.forEach.call(chars, function (char) {
-          clearTimeout(char.kcTimer);
-        });
         label = document.createElement('span');
         label.className = 'visually-hidden';
         roll = document.createElement('span');
@@ -546,9 +516,8 @@
           if (/\d/.test(character)) {
             var from = previous[i - text.length + previous.length];
             char.setAttribute('data-digit', '');
-            char.innerHTML = '<span class="kc-roll__strip">' + '901234567890'.split('').join('<br>') + '</span>';
-            char.kcShown = char.kcTarget = Number(/\d/.test(from) ? from : character);
-            place(char, char.kcShown + 1);
+            char.style.setProperty('--kc-roll-digit', /\d/.test(from) ? from : character);
+            char.innerHTML = '<span class="kc-roll__strip">' + '0123456789'.split('').join('<br>') + '</span>';
           }
           roll.append(char);
         });
@@ -558,21 +527,8 @@
       label.textContent = text;
       roll.classList.toggle('is-still', !animate);
       Array.prototype.forEach.call(roll.children, function (char, i) {
-        if (!char.hasAttribute('data-digit')) {
-          char.textContent = text[i];
-          return;
-        }
-        var digit = Number(text[i]);
-        if (animate) {
-          // A running tick picks up the new value at its next step
-          char.kcTarget = digit;
-          if (!char.kcTimer) tick(char);
-        } else {
-          clearTimeout(char.kcTimer);
-          char.kcTimer = null;
-          char.kcShown = char.kcTarget = digit;
-          place(char, digit + 1);
-        }
+        if (char.hasAttribute('data-digit')) char.style.setProperty('--kc-roll-digit', text[i]);
+        else char.textContent = text[i];
       });
     }
     function updateHeroLiveTime(animate) {
