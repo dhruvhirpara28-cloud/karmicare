@@ -216,8 +216,8 @@
   transition: color 0.3s ease;
 }
 
-/* The time rolls like an odometer when it changes (sections/hero-karmicare.liquid): each digit
-   is a column of 0-9 moved to its value, one line per digit */
+/* The time ticks like an odometer when it changes (sections/hero-karmicare.liquid): each digit
+   is a column 9, 0-9, 0 that the script moves one line per tick towards its value */
 .kc-roll {
   --kc-roll-height: 1.25em;
   display: inline-flex;
@@ -237,11 +237,12 @@
 .kc-roll__strip {
   display: block;
   line-height: var(--kc-roll-height); /* a theme rule sets spans to normal; the step must match */
-  transform: translateY(calc(var(--kc-roll-digit, 0) * -1 * var(--kc-roll-height)));
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(calc(var(--kc-roll-pos, 1) * -1 * var(--kc-roll-height)));
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.kc-roll.is-still .kc-roll__strip {
+.kc-roll.is-still .kc-roll__strip,
+.kc-roll__char.is-still .kc-roll__strip {
   transition: none;
 }
 
@@ -294,11 +295,14 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   transform: translateX(4px);
 }
 
+/* A soft shadow under the photo (Victor, 23 Oct), on the frame so the rotation's clip keeps it */
 .hero-karmicare__badge-avatar-wrap {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--kc-shape-radius-md);
+  box-shadow: var(--kc-elevation-md);
 }
 
 /* Ambassador rotation (Victor, 23 Oct): the section's script shows a random ambassador from the
@@ -309,7 +313,12 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
 .hero-karmicare__badge-avatar-wrap[data-kc-rotate] {
   position: relative;
   overflow: hidden;
-  border-radius: var(--kc-shape-radius-md);
+  transition: box-shadow 0.4s ease;
+}
+
+/* No shadow around the empty frame while the script picks; it fades in with the photo */
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate].is-picking {
+  box-shadow: none;
 }
 
 .hero-karmicare__badge-avatar-wrap[data-kc-rotate].is-picking .hero-karmicare__badge-avatar,
@@ -339,6 +348,7 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-karmicare__badge-avatar-wrap[data-kc-rotate],
   .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar {
     transition: none;
   }
