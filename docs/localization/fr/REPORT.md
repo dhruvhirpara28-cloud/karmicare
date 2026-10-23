@@ -63,6 +63,7 @@ Each `docs/localization/fr/<batch>.json` has a batch header and one entry per so
 | `gendered-title` | French would need a gender. Written in an epicene form. |
 | `wording-adapted` | A literal translation would use a banned word. `notes` gives the wording used. |
 | `not-rendered` | Disabled block. |
+| `invariant` | A name, code, symbol or INCI list that stays as in the EN: `fr` equals `en` exactly (NL carries the same flag). |
 
 **Mapping to the NL files.** The NL worker puts the review gates in `status` (`pending-claim-review`, `legal-review`) and calls the Dawn keys `dawn-nl`. FR keeps the channel in `status` and the gates in `flags`; FR `locale-present` matches NL `dawn-nl`. The localization worker can read both from the same fields (`status`, `flags`, `notes`).
 
@@ -304,29 +305,64 @@ Victor hid `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` and
 
 FR merged this through integration `a813b94` (`d9da237`). The batch 07 digest is unchanged.
 
+## Wave 2c buybox rows and the EN fixes of 22–23 Oct (integration 62f500c, 23 Oct)
+
+The landing desk asked for this for wave 2c, so the FR buybox accordions go live with the launch. Integration `62f500c` brought the source; the PDP digest is `5e3054ed…`.
+
+- **19 new accordion segments** `custom.product_faq#108`–`#126` (Ingredients, For dentists, Quality & safety, Taste & feel):
+  - 17 are invariant and carry the new `invariant` flag: FR is exactly the EN. These are Guarana, the two INCI lists, RDA, Awake, Asleep, "· AM", "· PM", ✓, 250, i, "CPSR · 2026", "CPNP · 2026", "SCCS/1677/25", →, "Awake:" and "Asleep:".
+  - `#116` and `#117` are ordinary rows with a decimal comma: "93,25" and "72,32", as NL.
+- **Restored EN fields** (Victor in Admin, 23 Oct, R37):
+  - `#92` now reads "nHAp <100 nm · en bâtonnets, selon le SCCS".
+  - `treatment_journey_*#29` now reads "— de vos gencives au reste de votre corps", as NL.
+  - The Return on Care tooltip `compare_value#06` was already complete in FR, so only the EN and hash follow and `source-defect` is gone.
+- **`treatment_journey_*#23`**, a proposal for Victor: "— vous arrivez en position de force, le travail est fait à la maison".
+  - It is the French for NL "je staat er sterk voor": a strong position, not a feeling.
+  - "En confiance" is gone, because Victor rejected that kind of word, as he did "zelfzeker" in NL.
+  - `fit-risk` stays. The note offers a shorter form.
+- **No dentist clause** (Victor 22 Oct, S2 choice a). The clause is dropped in:
+  - the check-up tooltip;
+  - the PDP info card;
+  - `compare_value#10`;
+  - the Year description `selling_plan.712155431293.description`, which keeps `pending-en-review` for "Inflation-proof member price", as the 60-Day Rhythm plan does;
+  - the sticky-bar row `main-product.liquid:995`.
+
+  The FR lane confirms `kc.sticky_cart.checkup_info_html`. The row stays `theme-key`: `check.py` now treats any id keyed in `theme-keys.json` as theme-key, also after the source corrects it.
+- **Footer slogan** (Victor 22 Oct, Astra R27): "Votre bouche a un rythme[[br]]Désormais, vos soins bucco-dentaires aussi".
+- **Legacy Health Rewards card** (batch 05, "ok kaartje"): the FR reuses the approved FR of its three Care Credit sentences.
+- **Values Victor fixed in Admin** follow the EN:
+  - the Year cost per brushing is now "0,49 €";
+  - the alt text and "Full dose" FR were already right, so only `source-defect` goes.
+- **Two-formulas left heading** is now "Activation et renforcement le matin" (Victor's choice). The EN stays "by day".
+- **Leen's role** (`professional_testimonials#02`): "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI". These are occupations, not fields. The forms are feminine because the source refers to her as "her" (source-copy REPORT #25). The `card_8dRing/text` twins follow in the R23 round and stay held in `holds.json` until then.
+- **`kc.clock.help`** (new homepage key): the FR is the value in `locales/fr.json`.
+
+Digests: batch 01 `ab192236…`, batch 02 `5e3054ed…`, batch 03 `74235173…`, batch 05 `3b9c8c41…`.
+
 ## Counts
 
 | Batch | Source digest | Entries | translated | admin | theme-key | locale-present | held |
 |---|---|---:|---:|---:|---:|---:|---:|
-| `batch-02-pdp` | `2468bab4…` | 477 | 138 | 251 | 34 | 15 | 39 |
-| `batch-01-homepage` | `5286628f…` | 229 | 172 | 2 | 31 | 2 | 22 |
-| `batch-03-header-footer` | `18cdaec0…` | 41 | 6 | 11 | 10 | 9 | 5 |
+| `batch-02-pdp` | `5e3054ed…` | 496 | 138 | 270 | 34 | 15 | 39 |
+| `batch-01-homepage` | `ab192236…` | 230 | 172 | 2 | 32 | 2 | 22 |
+| `batch-03-header-footer` | `74235173…` | 41 | 6 | 11 | 10 | 9 | 5 |
 | `batch-04-legal` | `98fda694…` | 974 | 143 | 481 | 0 | 0 | 350 |
-| `batch-05-products` | `5ab678a9…` | 77 | 16 | 61 | 0 | 0 | 0 |
+| `batch-05-products` | `3b9c8c41…` | 77 | 16 | 61 | 0 | 0 | 0 |
 | `batch-06-content-pages` | `3dee3b56…` | 22 | 0 | 22 | 0 | 0 | 0 |
 | `batch-07-collections-blog` | `c73c6f51…` | 709 | 1 | 620 | 0 | 0 | 88 |
 | `batch-08-system` | `306f141f…` | 46 | 3 | 7 | 0 | 36 | 0 |
-| **Total** | | **2,575** | **479** | **1,455** | **75** | **62** | **504** |
+| **Total** | | **2,595** | **479** | **1,474** | **76** | **62** | **504** |
 
-Every source entry is covered: 2,071 carry FR and 504 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, the sticky-bar retirement and CTAs, integration 223d140, the short announcement and "Rhythm" CTAs, 6500a4a, Victor's admin EN edits, 15c576f, and the retired twin article, 319eedd). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
+Every source entry is covered: 2,091 carry FR and 504 are held (after the source-copy R6 merge, a0dee86, decision F4, the three retired entries, 6643e16, the claim holds Victor waived on 20 Oct, the homepage copy at 41ae772, 0ba9de3, the waiver field, clock key and Sietske hold, 0c3a4cb, the announcement line, 6112414, the sticky-bar retirement and CTAs, integration 223d140, the short announcement and "Rhythm" CTAs, 6500a4a, Victor's admin EN edits, 15c576f, the retired twin article, 319eedd, and wave 2c, integration 62f500c). The full digests are in each file's header and match `docs/source-copy/digest.py` (all eight `ok`).
 
 | Flag | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | legal-review | 1 | 1 | 5 | 972 | 0 | 0 | 0 | 0 | 979 |
 | pending-claim-review | 39 | 42 | 1 | 0 | 25 | 7 | 345 | 0 | 459 |
-| pending-en-review | 2 | 9 | 1 | 3 | 1 | 0 | 0 | 0 | 16 |
-| source-defect | 2 | 8 | 0 | 3 | 9 | 0 | 0 | 0 | 22 |
-| wording-adapted | 2 | 14 | 1 | 0 | 3 | 7 | 0 | 1 | 28 |
+| pending-en-review | 2 | 5 | 0 | 3 | 0 | 0 | 0 | 0 | 10 |
+| source-defect | 2 | 3 | 0 | 3 | 9 | 0 | 0 | 0 | 17 |
+| wording-adapted | 2 | 14 | 1 | 0 | 2 | 7 | 0 | 1 | 27 |
+| invariant | 0 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 17 |
 | gendered-title | 7 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 21 |
 | fit-risk | 9 | 28 | 0 | 0 | 2 | 0 | 0 | 0 | 39 |
 | not-rendered | 6 | 6 | 0 | 0 | 1 | 0 | 0 | 0 | 13 |
@@ -348,13 +384,14 @@ The blog's `wording-adapted` changes are described in each entry's notes and in 
 
 ## Evidence
 
-**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 23 warnings, 20/20 bad payloads caught.** For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
+**`python3 docs/localization/fr/check.py --self-test`: exit 0, 0 errors, 23 warnings, 22/22 bad payloads caught** (wave 2c added the keyed sticky-bar channel and the invariant rule). For every file it checks (R3 F6 added the gates, R2 the S1/S2 text checks, R6 the W1 brand words):
 
 - every source batch has an FR file; the batch digest against the source, and `en_sha1` against `sha1(en)`;
 - one entry per source id, in order, with the source `resource_type`, `file_or_handle`, `key_path` and status;
 - the holds the source requires (never-translate, placeholder, unsupported claim in CLAIMS-REVIEW.md or the 05–07 `claim_status`, legacy page);
 - `pending-claim-review` on every translated needs-review claim, `legal-review` on every legal entry (source `legal`, and all of batch 04 outside the contact page);
-- the delivery channel per source status, Dawn values equal to `locales/fr.json`, and `counts` / `flag_counts` recomputed from the entries;
+- the delivery channel per source status (an id keyed in `theme-keys.json` stays theme-key), Dawn values equal to `locales/fr.json`, and `counts` / `flag_counts` recomputed from the entries;
+- that an `invariant` entry's FR is exactly its EN;
 - the status and flag vocabulary;
 - that EN and FR carry the same HTML tags, Liquid, `[tokens]`, `&nbsp;` count and runtime price spans;
 - that the selling-plan IDs are unchanged;

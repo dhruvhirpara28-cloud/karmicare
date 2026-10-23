@@ -2,7 +2,7 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "5286628ff7c87962782903bc9e1ce3350dd61469",
+ "source_digest": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
  "source_entries": 225,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -11,7 +11,7 @@
   "admin": 2,
   "held": 22,
   "locale-present": 2,
-  "theme-key": 31,
+  "theme-key": 32,
   "translated": 172
  },
  "flag_counts": {
@@ -565,10 +565,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.left_heading",
    "en": "Activated and strengthened by day",
    "en_sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
-   "fr": "Activation et renforcement le jour",
+   "fr": "Activation et renforcement le matin",
    "status": "translated",
    "flags": [],
-   "notes": "Written as nouns ('Activation et renforcement') so no agreement with an unstated subject is needed.",
+   "notes": "Written as nouns ('Activation et renforcement') so no agreement with an unstated subject is needed. 'le matin' is Victor's choice (23 Oct); the EN stays 'by day' (sha1 52a11b9e, source-copy 497739c), only NL and FR say morning. Was: \"Activation et renforcement le jour\"",
    "source_status": "approved"
   },
   {
@@ -3267,6 +3267,19 @@
    "status": "theme-key",
    "flags": [],
    "notes": "aria-valuetext of the clock before its script runs, not visible; as kc.clock.valuetext_live ('Heure locale actuelle'). theme_keys.py writes it into locales/fr.json (source owner); inventoried 21 Oct (B-03).",
+   "source_status": "approved"
+  },
+  {
+   "id": "locale:kc.clock.help",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.help",
+   "en": "Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.",
+   "en_sha1": "1e170dc337e7727a0fbb7d8b704b231a33800ad7",
+   "fr": "Faites glisser le bouton autour de l’anneau pour afficher une heure locale. Relâchez pour revenir à l’heure actuelle. Maintenez une touche fléchée pour avancer par pas de cinq minutes ; Page précédente et Page suivante changent d’une heure. Début sélectionne minuit ; Fin sélectionne 23:59. Relâchez la touche, appuyez sur Échap ou quittez la commande pour revenir à maintenant.",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "Screen-reader help of the clock knob (visually hidden, aria-describedby). theme_keys.py writes it into locales/fr.json (source owner); the FR is the value there. Inventoried 22 Oct (homepage lane e1411e2).",
    "source_status": "approved"
   }
  ]
