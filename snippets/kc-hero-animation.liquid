@@ -52,6 +52,10 @@
   <script>
     // Plays only the visible mode (Awake in day-mode, Asleep in night-mode), only while on screen.
     // Reduced motion keeps the poster; a refused autoplay falls back to the animated WebP when set.
+    // A panel with a still (data-still, the end CTA's landed frame, Victor 23 Oct) shows it instead
+    // of the poster when the video cannot play: with reduced motion, when autoplay is refused and
+    // there is no animated WebP, and on a slow connection (save-data or 2G, or no playback after
+    // 3s on screen). Then the video is dropped, so the kit does not jump back into its flight.
     if (!customElements.get('kc-hero-animation')) {
       customElements.define(
         'kc-hero-animation',
@@ -78,29 +82,73 @@
 
           update() {
             const activeMode = document.body.classList.contains('night-mode') ? 'pm' : 'am';
+            const connection = navigator.connection;
+            const slowConnection = connection && (connection.saveData || /2g/.test(connection.effectiveType || ''));
             this.querySelectorAll('[data-kc-mode]').forEach((panel) => {
               let video = panel.querySelector('video');
               if (this.motion.matches) {
+                // A panel with a still keeps it for good, also when reduced motion is switched off
+                // again (R49b B1), and takes it over from the animated WebP of a refused autoplay
+                // (R49c B1); without one the poster stays and the video may come back
+                if (panel.dataset.still) {
+                  if (!panel.hasAttribute('data-still-active')) this.fallBack(panel, panel.dataset.still);
+                  return;
+                }
                 video?.remove();
                 panel.classList.remove('is-playing');
                 return;
               }
               if (panel.dataset.kcMode !== activeMode || !this.visible || panel.hasAttribute('data-refused')) {
+                clearTimeout(panel.slowTimer);
+                panel.slowTimer = null;
                 video?.pause();
                 return;
               }
+              if (panel.dataset.still && slowConnection) {
+                this.fallBack(panel, panel.dataset.still);
+                return;
+              }
+              // A late 'playing' or refusal from a video that is no longer this panel's current one,
+              // or from a panel that has fallen back, changes nothing (R49c F2)
+              const isCurrent = (candidate) =>
+                panel.querySelector('video') === candidate && !panel.hasAttribute('data-refused');
               if (!video) {
                 panel.append(panel.querySelector('template').content.cloneNode(true));
-                video = panel.querySelector('video');
-                video.addEventListener('playing', () => panel.classList.add('is-playing'), { once: true });
+                const created = panel.querySelector('video');
+                created.addEventListener(
+                  'playing',
+                  () => {
+                    if (!isCurrent(created)) return;
+                    clearTimeout(panel.slowTimer);
+                    panel.slowTimer = null;
+                    panel.classList.add('is-playing');
+                  },
+                  { once: true }
+                );
+                video = created;
               }
-              video.play()?.catch((error) => {
-                if (error.name !== 'NotAllowedError' || !panel.dataset.animated) return;
-                panel.setAttribute('data-refused', '');
-                video.remove();
-                panel.querySelector('img').src = panel.dataset.animated;
+              if (panel.dataset.still && !panel.classList.contains('is-playing') && !panel.slowTimer) {
+                panel.slowTimer = setTimeout(() => this.fallBack(panel, panel.dataset.still), 3000);
+              }
+              const playing = video;
+              playing.play()?.catch((error) => {
+                const fallback = panel.dataset.animated || panel.dataset.still;
+                if (error.name !== 'NotAllowedError' || !fallback || !isCurrent(playing)) return;
+                this.fallBack(panel, fallback);
               });
             });
+          }
+
+          // The video stops for good for this panel and the image takes its place; data-still-active
+          // marks that the image is the landed still (not the animated WebP of a refused autoplay)
+          fallBack(panel, src) {
+            clearTimeout(panel.slowTimer);
+            panel.slowTimer = null;
+            panel.setAttribute('data-refused', '');
+            if (src === panel.dataset.still) panel.setAttribute('data-still-active', '');
+            panel.querySelector('video')?.remove();
+            panel.classList.remove('is-playing');
+            panel.querySelector('img').src = src;
           }
         }
       );
@@ -116,6 +164,7 @@
         assign webm_key = key | append: '_webm'
         assign poster_key = key | append: '_poster'
         assign animated_key = key | append: '_animated'
+        assign still_key = key | append: '_still'
         assign poster_url = section.settings[poster_key] | file_url
         # file_url does not resolve .webm videos from Files, so the WebM setting also takes the file's CDN link
         assign webm_url = section.settings[webm_key] | strip
@@ -128,6 +177,9 @@
         data-kc-mode="{{ mode }}"
         {% if section.settings[animated_key] != blank %}
           data-animated="{{ section.settings[animated_key] | file_url }}"
+        {% endif %}
+        {% if section.settings[still_key] != blank %}
+          data-still="{{ section.settings[still_key] | file_url }}"
         {% endif %}
       >
         <img

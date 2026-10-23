@@ -216,6 +216,41 @@
   transition: color 0.3s ease;
 }
 
+/* The time rolls like an odometer when it changes (sections/hero-karmicare.liquid): each digit
+   is a column of 0-9 moved to its value, one line per digit */
+.kc-roll {
+  --kc-roll-height: 1.25em;
+  display: inline-flex;
+  line-height: var(--kc-roll-height);
+}
+
+.kc-roll__char {
+  display: inline-block;
+  height: var(--kc-roll-height);
+  white-space: pre;
+}
+
+.kc-roll__char[data-digit] {
+  overflow: hidden;
+}
+
+.kc-roll__strip {
+  display: block;
+  line-height: var(--kc-roll-height); /* a theme rule sets spans to normal; the step must match */
+  transform: translateY(calc(var(--kc-roll-digit, 0) * -1 * var(--kc-roll-height)));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kc-roll.is-still .kc-roll__strip {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-roll__strip {
+    transition: none;
+  }
+}
+
 .kc-hero-status-night {
   display: none;
 }
@@ -259,11 +294,63 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   transform: translateX(4px);
 }
 
+/* A soft shadow under the photo (Victor, 23 Oct), on the frame so the rotation's clip keeps it */
 .hero-karmicare__badge-avatar-wrap {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--kc-shape-radius-md);
+  box-shadow: var(--kc-elevation-md);
+}
+
+/* Ambassador rotation (Victor, 23 Oct): the section's script shows two ambassadors per visit from
+   the Trusted Professionals cards, 4s apart, in an order that runs on across visits. The photo
+   hides while the script picks one (.is-picking, set only by script, so
+   without JavaScript the block image stays); the old photo slides up and out while the next one
+   comes in from below, inside the avatar's frame. */
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
+}
+
+/* No shadow around the empty frame while the script picks; it fades in with the photo */
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate].is-picking {
+  box-shadow: none;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate].is-picking .hero-karmicare__badge-avatar,
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-hidden {
+  opacity: 0;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar {
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar--next {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-below {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: none;
+}
+
+.hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar.is-above {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-karmicare__badge-avatar-wrap[data-kc-rotate],
+  .hero-karmicare__badge-avatar-wrap[data-kc-rotate] .hero-karmicare__badge-avatar {
+    transition: none;
+  }
 }
 
 .hero-karmicare__badge-avatar {
@@ -322,6 +409,10 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   font-weight: var(--font-600-weight);
 }
 
+.hero-karmicare__badge-heading-end {
+  white-space: nowrap;
+}
+
 .hero-karmicare__badge-arrow {
   width: 16px;
   height: 16px;
@@ -350,9 +441,10 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
     justify-content: flex-start;
   }
 
+  /* 200px keeps the longer FR heading on three lines at most (Victor, 23 Oct; was 170px) */
   .hero-karmicare__badge-heading-wrap .hero-karmicare__badge-heading {
     display: flow;
-    max-width: 170px;
+    max-width: 200px;
   }
 
   .hero-karmicare__badge-rating-text {

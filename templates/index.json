@@ -94,9 +94,9 @@
       "settings": {
         "surface": "transition",
         "padding_top": 50,
-        "padding_bottom": 120,
+        "padding_bottom": 60,
         "padding_top_mobile": 45,
-        "padding_bottom_mobile": 50
+        "padding_bottom_mobile": 30
       }
     },
     "stat_strip_karmicare": {
@@ -164,9 +164,9 @@
         "heading_color_night": "",
         "text_color_night": "",
         "tagline_color_night": "",
-        "padding_top": 64,
+        "padding_top": 48,
         "padding_bottom": 32,
-        "padding_top_mobile": 40,
+        "padding_top_mobile": 32,
         "padding_bottom_mobile": 48
       }
     },
@@ -368,7 +368,7 @@
             "image": "shopify://shop_images/kc-professional-stephanie-spreuwers.jpg",
             "heading": "Dr. Stephanie Spreuwers",
             "text": "Functional Dentist, kPNI Practitioner",
-            "hover_text": ""
+            "hover_text": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>"
           }
         },
         "card_jcnr7Q": {
@@ -734,6 +734,8 @@
       "name": "t:sections.featured-product.presets.name",
       "settings": {
         "product": "karmicare-biorhythmic-oral-care-system",
+        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
+        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
         "secondary_background": false,
         "media_size": "medium",
         "constrain_to_viewport": true,
