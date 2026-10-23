@@ -1,0 +1,57 @@
+{%- comment -%}
+  Converts the fixed euro amounts of one section into the active currency in the browser. The
+  amounts are <span class="kc-currency-eur" data-kc-eur="40"> spans, written in euros on the
+  server (render 'kc-money', euro: true). Shared by care-comes-back and product-compare-plans, so
+  both convert the same way (R35, 23 Oct):
+  - only inside its own section (root), so one section never overwrites another;
+  - in cents: €0.49 at 1.1419206 is $0.56, not $1;
+  - only when the active currency is not the euro, whatever the rate;
+  - always from data-kc-eur, so running twice gives the same text;
+  - the locale built with Intl.Locale, so "en-US" does not become "en-US-US".
+
+  Accepts:
+  - root: {String} CSS selector of the section's root element
+
+  Usage: render 'kc-eur-convert', root: '#compare-plans-123'
+{%- endcomment -%}
+<script>
+  (function () {
+    function convert() {
+      const currency = window.Shopify && window.Shopify.currency;
+      const active = currency && currency.active;
+      const rate = currency && parseFloat(currency.rate);
+      if (!active || active === 'EUR' || !(rate > 0)) return;
+      const root = document.querySelector({{ root | json }});
+      if (!root) return;
+      const lang = (window.Shopify && window.Shopify.locale) || {{ request.locale.iso_code | json }};
+      const country = (window.Shopify && window.Shopify.country) || {{ localization.country.iso_code | json }};
+      let locale = lang;
+      try {
+        locale = new Intl.Locale(lang, country ? { region: country } : {}).toString();
+      } catch (e) {
+        locale = lang;
+      }
+      root.querySelectorAll('.kc-currency-eur[data-kc-eur]').forEach(function (el) {
+        const eur = parseFloat(el.getAttribute('data-kc-eur'));
+        if (isNaN(eur) || eur <= 0) return;
+        const cents = Math.round(eur * 100 * rate);
+        const whole = cents % 100 === 0;
+        try {
+          el.textContent = new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: active,
+            minimumFractionDigits: whole ? 0 : 2,
+            maximumFractionDigits: whole ? 0 : 2
+          }).format(cents / 100);
+        } catch (e) {
+          el.textContent = (cents / 100).toFixed(whole ? 0 : 2) + ' ' + active;
+        }
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', convert);
+    } else {
+      convert();
+    }
+  })();
+</script>
