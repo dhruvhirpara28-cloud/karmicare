@@ -659,6 +659,17 @@ body.night-mode .pc-kit-poptitle {
   flex-basis: var(--pc-label-col);
 }
 
+/* The plan columns other than the featured one make no stacking context (the classic rules
+   above give every column z-index 1, 20 when hovered or open). An open info tip then layers
+   against the table, above the sticky label column (z 30 below 750), while the columns' own
+   cells stay under it (R39 B1: the Year tip at 390 sat 84px under the labels). The featured
+   column keeps z 2, so its glow still lies over its neighbours. */
+.plan-compare--kc .pc-col[data-plan]:not(.pc-featured),
+.plan-compare--kc .pc-col[data-plan]:not(.pc-featured):hover,
+.plan-compare--kc .pc-col[data-plan]:not(.pc-featured):has(.active-tip) {
+  z-index: auto;
+}
+
 @media screen and (max-width: 749px) {
   .plan-compare--kc .pc-col-label {
     position: sticky;
@@ -766,6 +777,15 @@ body.night-mode .pc-kit-poptitle {
   line-height: var(--kc-responsive-h6-line-height);
   letter-spacing: var(--kc-responsive-h6-letter-spacing);
   color: inherit;
+}
+
+/* Below 750 the price matches the plan name, body-md (Victor, 23 Oct, gap row 44 option b) */
+@media not all and (min-width: 750px) {
+  .plan-compare--kc .pc-price {
+    font-size: var(--kc-responsive-body-md-text-size);
+    line-height: var(--kc-responsive-body-md-line-height);
+    letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  }
 }
 
 .plan-compare--kc .pc-cycle {
