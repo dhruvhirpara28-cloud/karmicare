@@ -310,3 +310,29 @@ Not decisions, just to do in the UI: checklist §8 items 1–9. Items 5, 7 and 8
 5. `shopify theme check --fail-level error` → 0 errors; commit by pathspec; commit body with the "no request before submit" proof and the Theme Check line.
 6. Preview on the dev theme: `/nl`, `/fr`, `/en` footer with settings filled in the dev theme's editor; JS off → native; invalid address → error state; Victor does the one live test with his own address and checks the DOI mail language.
 7. `worker_done` with the SHA → global coordinator → "Ready to land: global-footer" → landing desk (Astra review).
+
+## Status 23 Oct (worker, Phase 2 built)
+
+- Victor, 23 Oct, in the worker terminal: "ja op alles, start fase 2", plus "open klaviyo claude chrome en maak een franse lijst". Done in his Chrome: list **French Speakers** `Tp7DCb`, double opt-in (Klaviyo's default for a new list), sender = account default.
+- `karmicare/soft-launch-global` 6cd3e40 merged (fast-forward; it already held 43351f9 and 0b45fad). Build commit **de0a9db**: `sections/footer.liquid`, `assets/kc-footer-newsletter.js` (new), `sections/footer-group.json`, `docs/localization/theme-keys.json`, 31 `locales/*.json`, `docs/global-footer/KEYS.md` (new). Theme Check 0 errors / 19 warnings, `node --check` ok, `theme_keys.py check --area footer` ok. Correction to the commit body: the one `fetch` is on line 100 of the asset, not 93.
+- Settings committed (D6-b): key `XfYq2r`, NL `UPaLXW`, FR `Tp7DCb`, EN `YiN3Ba`; `klaviyo_list_id` (all languages) empty. One-list mode later = fill `klaviyo_list_id`, clear the three overrides.
+- Open: Victor's live test with his own address (needs a preview: no `theme push` without his ask, and the shared dev theme on :9292 serves the homepage lane); NL/FR values and the changed consent line via `KEYS.md`; the list question below; checklist §8.
+
+### List structure: Victor's question of 23 Oct
+
+Victor: "moeten we niet best 1 volle lijst en dan segmenten volgens taal?" Sample of the 50 most recently added members per list (MCP, read-only; locale, country and consent only, no addresses read):
+
+| List | `locale` | Country | Email consent | Reading |
+|------|----------|---------|---------------|---------|
+| Dutch Speakers `UPaLXW` | nl-BE 19 · nl-NL 16 · en-BE 10 · en 4 · en-NL 1 | Belgium 30 · Netherlands 19 | SUBSCRIBED 43 (method SHOPIFY, "Customer Webhook") · NEVER_SUBSCRIBED 7 | built by country (BE + NL): 30 % English locale; 14 % have no consent record yet sit in the list |
+| English Speakers `YiN3Ba` | en 50 | UK 31 · US 9 · Canada 5 · other 5 | SUBSCRIBED 50 (LIST_IMPORT by Victor) | rest of world; Mailchimp-era import (`MailChimp Rating` present), 31 of 50 flagged `Unengaged` |
+
+Both lists were filled in one go on 5 Jan 2026; `double_optin` is false for everyone sampled. French-speaking Belgians, if present, sit in Dutch Speakers (locale `fr-BE` did not appear in the sample of 50).
+
+Assessment: membership of these lists does not encode language. Klaviyo's multilingual guidance keys on the profile property `locale` (Smart Translations), not on lists. The one thing that is per list is the double-opt-in confirmation mail and the subscribe/preference pages: one language per list.
+
+Options (D2 revisited, Victor decides):
+- **a. One master list + locale segments.** Victor creates "Newsletter" (double opt-in) with one trilingual NL/FR/EN confirmation mail; the footer sends everyone there with `locale`; campaigns go to segments "can receive email marketing AND consent is subscribed AND locale starts with nl / fr / else". Theme: `klaviyo_list_id` = that list, the three overrides empty (settings only, no code). French Speakers `Tp7DCb` is empty and can be deleted. The legacy lists stay; the segments cover them too. Recommended if a trilingual confirmation mail is acceptable: one entry point, no misrouting, language switchers follow automatically.
+- **b. One list per language** (what is committed now). Confirmation mail in the person's language, but new signups land next to country-sorted legacy members, and a person who changes language stays in the old list.
+
+Either way: send campaigns from segments on `locale` + consent, never from a list alone, and exclude `NEVER_SUBSCRIBED` profiles (7 of 50 in Dutch Speakers would otherwise be mailed without a consent record).

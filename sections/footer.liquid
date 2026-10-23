@@ -11,6 +11,9 @@
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
+{%- if section.settings.newsletter_enable and section.settings.klaviyo_public_key != blank -%}
+  <script src="{{ 'kc-footer-newsletter.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {%- style -%}
   /* A global rule sets line-height: normal on p, span, li, label and headings; text in the
@@ -265,6 +268,17 @@
 
   .km-footer-field__message {
     color: var(--kc-mapped-text-default-heading);
+  }
+
+  /* The JS live regions exist from render so screen readers announce them; while empty they
+     leave the flex flow (no gap slot) but stay in the accessibility tree. */
+  .km-footer-field__message:empty {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
   }
 
   .km-footer-newsletter__note {
@@ -733,7 +747,40 @@
           <div class="km-footer-column km-footer-column--newsletter">
             <h3 class="km-footer-heading">{{ section.settings.newsletter_heading | default: 'NEWSLETTER' }}</h3>
 
-            <div class="km-footer-newsletter__body">
+            {%- liquid
+              # Klaviyo (kc-footer-newsletter.js): list per language, locale for Smart Translations.
+              # Empty key or list = plain Shopify form.
+              assign kc_nl_lang = request.locale.iso_code | split: '-' | first | downcase
+              assign kc_nl_key = section.settings.klaviyo_public_key | strip
+              assign kc_nl_list = section.settings.klaviyo_list_id | strip
+              case kc_nl_lang
+                when 'nl'
+                  assign kc_nl_locale = 'nl-BE'
+                  assign kc_nl_list_override = section.settings.klaviyo_list_id_nl | strip
+                when 'fr'
+                  assign kc_nl_locale = 'fr-BE'
+                  assign kc_nl_list_override = section.settings.klaviyo_list_id_fr | strip
+                else
+                  assign kc_nl_lang = 'en'
+                  assign kc_nl_locale = 'en'
+                  assign kc_nl_list_override = section.settings.klaviyo_list_id_en | strip
+              endcase
+              if kc_nl_list_override != blank
+                assign kc_nl_list = kc_nl_list_override
+              endif
+              assign kc_nl_source = 'Footer newsletter · ' | append: kc_nl_lang
+            -%}
+            <div
+              class="km-footer-newsletter__body"
+              id="FooterNewsletter"
+              data-klaviyo-key="{{ kc_nl_key | escape }}"
+              data-klaviyo-list="{{ kc_nl_list | escape }}"
+              data-locale="{{ kc_nl_locale }}"
+              data-source="{{ kc_nl_source | escape }}"
+              data-consent-version="footer-2026-10"
+              data-msg-success="{{ 'kc.footer.check_inbox' | t | escape }}"
+              data-msg-invalid="{{ 'kc.footer.email_invalid' | t | escape }}"
+            >
               {%- form 'customer', id: 'FooterNewsletterForm', class: 'km-footer-field' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <label class="km-footer-field__label" for="FooterNewsletterEmail">{{ 'kc.footer.email' | t }}</label>
@@ -750,10 +797,8 @@
                     required
                     {% if form.errors %}
                       aria-invalid="true"
-                      aria-describedby="FooterNewsletterEmail-message"
-                    {% elsif form.posted_successfully? %}
-                      aria-describedby="FooterNewsletterEmail-message"
                     {% endif %}
+                    aria-describedby="{% if form.errors or form.posted_successfully? %}FooterNewsletterEmail-message {% endif %}FooterNewsletterEmail-note"
                   >
                   <button type="submit" name="commit" class="km-footer-field__submit">{{ 'kc.footer.join' | t }}</button>
                 </div>
@@ -767,9 +812,12 @@
                     {{ 'newsletter.success' | t }}
                   </p>
                 {%- endif -%}
+                {%- comment -%} Live regions for kc-footer-newsletter.js: present from render, empty until used. {%- endcomment -%}
+                <p class="km-footer-field__message" id="FooterNewsletterEmail-error" role="alert"></p>
+                <p class="km-footer-field__message" id="FooterNewsletterEmail-status" role="status"></p>
               {%- endform -%}
 
-              <p class="km-footer-newsletter__note">
+              <p class="km-footer-newsletter__note" id="FooterNewsletterEmail-note">
                 {{ 'kc.footer.consent_html' | t: terms_url: legal_terms.url, privacy_url: legal_privacy.url }}
               </p>
             </div>
@@ -1089,6 +1137,37 @@
       "id": "newsletter_heading",
       "default": "NEWSLETTER",
       "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "Klaviyo: with a public key and a list ID the form subscribes through Klaviyo's client API (double opt-in list, locale per language). Empty = plain Shopify form. The native form stays the fallback."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_public_key",
+      "label": "Klaviyo public API key (Site ID)",
+      "info": "6 characters, e.g. XfYq2r. Never a private key."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Klaviyo list ID (all languages)",
+      "info": "Used unless a language below has its own list."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id_nl",
+      "label": "Klaviyo list ID for Dutch"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id_fr",
+      "label": "Klaviyo list ID for French"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id_en",
+      "label": "Klaviyo list ID for English"
     },
     {
       "type": "header",
