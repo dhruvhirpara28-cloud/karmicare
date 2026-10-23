@@ -2,7 +2,7 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
+ "source_digest": "742351732dabbbff2eff9cadc6858ba87284393a",
  "source_entries": 41,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -17,7 +17,6 @@
  "flag_counts": {
   "legal-review": 5,
   "pending-claim-review": 1,
-  "pending-en-review": 1,
   "wording-adapted": 1
  },
  "entries": [
@@ -52,15 +51,13 @@
    "resource_type": "section_group",
    "file_or_handle": "sections/footer-group.json",
    "key_path": "sections.footer.settings.slogan",
-   "en": "Your mouth has a rhythm So should your oral care",
-   "en_sha1": "f3d9860f3f50574710750bf15e07cfd21efb4100",
-   "fr": "Votre bouche a un rythme Vos soins bucco-dentaires devraient le suivre",
+   "en": "Your mouth has a rhythm[[br]]Now your oral care too",
+   "en_sha1": "2d16442b381544eaac8df6e3b9e0f89522c1f3d8",
+   "fr": "Votre bouche a un rythme[[br]]Désormais, vos soins bucco-dentaires aussi",
    "status": "translated",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "No stop between the sentences, as in the EN (B1a decision 6); 'So should your oral care' rendered 'Vos soins bucco-dentaires devraient le suivre'. EN under review: Reads as one run-on line ('…a rhythm So should…'); the hero splits the same idea with <strong>. Check the Figma footer before adding punctuation.",
-   "source_status": "needs-review"
+   "flags": [],
+   "notes": "Victor 22 Oct: 'Now your oral care too' ('nu ook', not 'should'); two sentences, no stop, the line break is the marker [[br]] (Astra R27, rendered as <br> by sections/footer.liquid). Was: \"Votre bouche a un rythme Vos soins bucco-dentaires devraient le suivre\"",
+   "source_status": "corrected"
   },
   {
    "id": "footer-group:footer/copyright_text",
