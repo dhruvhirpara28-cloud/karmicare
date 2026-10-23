@@ -34,10 +34,10 @@ HOLDS = os.path.join(OUT, "holds.json")
 RELEASES = os.path.join(OUT, "releases.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
-# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
-FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-05-products", "batch-08-system"}
+# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system; legal since Victor released
+# legal-review (releases.json, 23 Oct).
+FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-04-legal", "batch-05-products", "batch-08-system"}
 LATER = {
-    "batch-04-legal": "legal (batch 04)",
     "batch-06-content-pages": "content pages (batch 06), not in the first-wave list",
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
@@ -322,7 +322,8 @@ def markdown(results, sources, args):
               "| Metafields | `product { metafields { id namespace key type value } }`, then `translatableResourcesByIds` on their GIDs (key `value`) | namespace and key of the field; a JSON field only when every text leaf maps to an approved item |",
               "| `METAOBJECT` (and the metaobjects behind reference metafields) | the product's reference-typed metafields, then reference-typed fields to depth 3 (`metaobject` reads, read_metaobjects); shop-level cells only from the reviewed `shop-objects.json`, pinned to GID and selected by the product's table | written only on a field the inventory names, an item a reviewed `bindings.json` binds, or a field a reviewed `bindings-fields.json` binds with unchanged evidence; otherwise the dry run proposes the field with its spans, path and translations (`live/fields-proposed-<lang>.json`); a changed bound field aborts the write before any mutation; Liquid, uncertain markup and split sentences are never proposed |",
               "| `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |",
-              "| `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |",
+              "| `SHOP_POLICY` | `translatableResourcesByIds` on the GID the reviewed `shop-policies.json` binds to the handle | exactly one `body` key; every block on text boundaries, no text outside the blocks, markup kept; any second plan group of the policy stops it; body only (R47); titles come from Shopify |",
+              "| `LINK` | none yet | owner route not verified: never written |",
               "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | the plan's GID; every group with the EN name | name, description and options only; the Subscription Name values '60-Day Supply' / 'Year Supply' stay untranslated (B-01) |",
               "| Existing translations | `translations(locale: \"nl\" / \"fr\")` on each resource | part of the approval: a translation edited after the dry run stops the write |",
               "", "Write: rebuild the snapshot and compare its checksum, re-read each resource right before its mutation, then "

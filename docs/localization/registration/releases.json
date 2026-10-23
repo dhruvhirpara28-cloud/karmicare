@@ -3,7 +3,11 @@
  "released": {
   "pending-claim-review": {
    "by": "Victor, 22 Oct 2026, in session: 'Huidige EN vrijgeven, review later' (publish the translations of the current EN claims; the claim review K1-K7 follows later in EN, NL and FR at once), and 'citaten mag je ook vertalen, zij gaan niet goedkeuren'",
-   "scope": "every entry flagged pending-claim-review; legal-review stays a gate"
+   "scope": "every entry flagged pending-claim-review"
+  },
+  "legal-review": {
+   "by": "Victor, 23 Oct 2026, in session: 'Vrijgeven + Astra-check' (publish the current NL/FR legal texts; an Astra line-by-line check against the EN of amounts, periods and references comes before his yes to the write), then 'ja begin met de legal pages lets go'",
+   "scope": "every entry flagged legal-review; the legal batch joins the first wave in build_payloads.py; shop policies stay unwritten until their runner route is reviewed"
   }
  }
 }

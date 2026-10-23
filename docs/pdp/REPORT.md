@@ -32,7 +32,7 @@ The whole PDP lane (both sessions), on branch `karmicare/soft-launch-pdp`. Every
 | L18 | API app and translation runner | Dropped | Moved to the source-copy lane by the desk on 21 Oct |
 
 **Counts (18 items)**: in merchant-edit 9 · ready to land 1 · in progress 0 · waiting for Victor 4 · parked / after launch 2 · dropped 2.
-**Lane total with the gap list**: in merchant-edit 20 · ready to land 1 · in progress 2 · waiting for Victor 6 · parked / after launch 25 · dropped 10.
+**Lane total with the gap list**: in merchant-edit 23 · ready to land 1 · in progress 2 · waiting for Victor 5 · parked / after launch 27 · dropped 10.
 
 ### Waiting for Victor
 
@@ -304,3 +304,6 @@ The other twelve keys cover day, week, month and years in the same patterns (FR 
 - 22 Oct: row 38 (the €40 reward) decided A + C; row 39 (NL Welcome Kit names) added and parked; counts updated.
 - 22 Oct: gap row 34 closed (homepage `e1411e2` in merchant-edit `ca5228f`); counts updated.
 - 23 Oct: plans table work (gap rows 40–44) added; lane total updated.
+- 23 Oct: PDP package `04718ef`–`71a8694` landed (merchant-edit `6a26258`); gap rows 44–46 updated; lane total updated.
+- 23 Oct: gap row 45 closed (merchant-edit `3c52d73`); lane total updated.
+- 23 Oct: gap rows 40, 46–48 updated after merchant-edit `da63ae4`; lane total updated.

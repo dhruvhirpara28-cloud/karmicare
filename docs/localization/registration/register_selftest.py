@@ -1397,6 +1397,119 @@ def r42b(check):
           (d or {}).get("rows"))
 
 
+def r47(check):
+    """R47/R47b shop policies: the reviewed shop-policies.json pins each policy handle to its GID; the body is written
+    only when every non-blank text of the live body lies in exactly one approved block, matched on text boundaries,
+    with the markup kept byte for byte. Positive checks fail on ea323f8 (no route); the R47b regressions fail on
+    wave policy-candidate (body search by content)."""
+    REFUND = "<p><strong>Refunds</strong></p><p>Return within 30 days.</p><p>Refund within 14 days.</p>"
+    WANT = "<p><strong>Terugbetalingen</strong></p><p>Terugsturen binnen 30 dagen.</p><p>Terugbetaling binnen 14 dagen.</p>"
+    BLOCKS = [("b1", "<strong>Refunds</strong>", "<strong>Terugbetalingen</strong>"),
+              ("b2", "Return within 30 days.", "Terugsturen binnen 30 dagen."),
+              ("b3", "Refund within 14 days.", "Terugbetaling binnen 14 dagen.")]
+    PIN = {"refund-policy": "gid://shopify/ShopPolicy/2"}
+
+    def policies(*bodies):
+        return [{"resourceId": "gid://shopify/ShopPolicy/%d" % (n + 1), "translatableContent": [c("title", "Policy %d" % n), c("body", b, "HTML")],
+                 "translations": {}} for n, b in enumerate(bodies)]
+
+    def plan_for(blocks=BLOCKS, held=0, extra_groups=(), extra_items=()):
+        items = [item(i, en, nl, kind="assemble", key="body", field="body#%s" % i) for i, en, nl in blocks] + list(extra_items)
+        return {"lang": "nl", "resources": [{"shopify_type": "SHOP_POLICY", "owner": "refund-policy", "batch": "batch-04-legal",
+                                              "assembled_field": {"blocks": len(blocks), "drafted": len(blocks), "missing_or_held": held, "gated": 0},
+                                              "items": items}] + list(extra_groups)}
+
+    def main_run(fake, sub, plan, pins, argv):
+        with open(os.path.join(sub, "plan-nl.json"), "w", encoding="utf-8") as f:
+            json.dump(plan, f)
+        pp = os.path.join(sub, "shop-policies.json")
+        if pins is not None:
+            with open(pp, "w", encoding="utf-8") as f:
+                json.dump({"policies": pins}, f)
+        extra = {"shop_policies_path": pp} if "shop_policies_path" in register.main.__code__.co_varnames else {}
+        out, code = io.StringIO(), 0
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            try:
+                register.main(list(argv), transport=fake, credentials=lambda: ("client-id", register.Secret(SECRET)), out=sub,
+                              plans=os.path.join(sub, "plan-%s.json"), bindings_path=os.path.join(sub, "bindings.json"), **extra)
+            except SystemExit as e:
+                code = e.code if isinstance(e.code, int) else 1
+        return code
+
+    def policy_run(live, plan=None, pins=PIN, approve=False, fake_cls=None):
+        store = base_store()
+        store["types"]["SHOP_POLICY"] = live
+        argv = ("--lang", "nl", "--theme-id", THEME)
+        with tempfile.TemporaryDirectory() as sub:
+            fake = Fake(copy.deepcopy(store))
+            code = main_run(fake, sub, plan or plan_for(), pins, argv)
+            path = os.path.join(sub, "dry-run-nl.json")
+            d = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else None
+            if approve and d:
+                fake = (fake_cls or Fake)(copy.deepcopy(store))
+                code = main_run(fake, sub, plan or plan_for(), pins, argv + ("--write", "--approve", d["checksum"]))
+        return code, d or {"ops": [], "rows": []}, fake
+
+    no_op = lambda d: not any("ShopPolicy" in o["resource"] for o in d["ops"])
+    _, d, _ = policy_run(policies("<p>Shipping.</p>", REFUND))
+    ops = [(o["resource"], o["key"], o["value"]) for o in d["ops"]]
+    check("R47: the pinned policy's body is assembled on key 'body'", ops == [("gid://shopify/ShopPolicy/2", "body", WANT)], ops)
+    code, _, fake = policy_run(policies("<p>Shipping.</p>", REFUND), approve=True)
+    check("R47: the approved write registers that body only", code == 0 and [(m[1], [t["key"] for t in m[2]]) for m in fake.mutations]
+          == [("gid://shopify/ShopPolicy/2", ["body"])], (code, fake.mutations))
+    _, d, _ = policy_run(policies("<p>Shipping.</p>", "<p><strong>Refunds</strong></p><!-- note --><p>Return within 30 days.</p>\n<p>Refund within 14 days.</p>"))
+    check("R47b control: a comment and whitespace between blocks stay as they are",
+          [o["value"] for o in d["ops"]] == ["<p><strong>Terugbetalingen</strong></p><!-- note --><p>Terugsturen binnen 30 dagen.</p>\n<p>Terugbetaling binnen 14 dagen.</p>"],
+          [o["value"] for o in d["ops"]])
+    nested = [("n1", "Refund within <strong>14 days</strong>.", "Terugbetaling binnen <strong>14 dagen</strong>."),
+              ("n2", "<strong>14 days</strong>", "<strong>14 dagen</strong>")]
+    _, d, _ = policy_run(policies("<p>Shipping.</p>", "<p>Refund within <strong>14 days</strong>.</p><p><strong>14 days</strong></p>"),
+                         plan=plan_for(nested))
+    check("R47b control: a short block's EN may also sit inside another approved block (refund '14 days')",
+          [o["value"] for o in d["ops"]] == ["<p>Terugbetaling binnen <strong>14 dagen</strong>.</p><p><strong>14 dagen</strong></p>"],
+          [o["value"] for o in d["ops"]])
+    for live, why in ((policies("<p>Shipping.</p>", REFUND + "<p>UNREVIEWED LEGAL TEXT.</p>"), "R47-1: unreviewed text after the blocks"),
+                      (policies("<p>Shipping.</p>", REFUND.replace("<p>Return", "<p>UNREVIEWED. Return")), "R47-1: unreviewed text inside a block's paragraph"),
+                      (policies("<p>Shipping.</p>", REFUND.replace("30 days.</p>", "30 days. Return within 30 days.</p>")), "R47-1: a block's EN twice"),
+                      (policies(REFUND, "<p>Other.</p>"), "R47-1: the pinned GID holds another policy (the blocks live elsewhere)"),
+                      (policies("<p>Shipping.</p>", REFUND.replace('<p>Return', '<p data-copy="Return within 30 days.">Return')), "R47-2: the EN also in an attribute"),
+                      (policies("<p>Shipping.</p>", REFUND.replace('<p>Return', '<!--Return within 30 days.--><p>Return')), "R47-2: the EN also in a comment"),
+                      ([{"resourceId": "gid://shopify/ShopPolicy/2", "translatableContent": [c("body", REFUND, "HTML"), c("body", REFUND, "HTML")],
+                         "translations": {}}], "R47-4: the pinned policy offers two body keys")):
+        _, d, _ = policy_run(live)
+        check("%s: no operation" % why, no_op(d), d["ops"])
+    _, d, _ = policy_run(policies("<p>Shipping.</p>", REFUND), pins={})
+    check("R47-1: without a reviewed GID for the handle nothing is written", no_op(d), d["ops"])
+    marked = [BLOCKS[0], ("b2", "Return within 30 days.", "Terugsturen binnen <em>30</em> dagen."), BLOCKS[2]]
+    _, d, _ = policy_run(policies("<p>Shipping.</p>", REFUND), plan=plan_for(marked))
+    check("R47-2: a translation that changes the block's markup is not written", no_op(d), d["ops"])
+    for status in ("hold", "gates"):
+        dup = item("h1", "Return within 30 days.", "Vastgehouden", kind="assemble", key="body", field="body#b2")
+        dup[status] = ["legal-review"]
+        group = {"shopify_type": "SHOP_POLICY", "owner": "refund-policy", "batch": "batch-04-legal",
+                 "assembled_field": {"blocks": 1, "drafted": 1, "missing_or_held": 0, "gated": 0}, "items": [dup]}
+        _, d, _ = policy_run(policies("<p>Shipping.</p>", REFUND), plan=plan_for(extra_groups=[group]))
+        check("R47-3: a %s row of the policy in another plan group stops the policy" % status, no_op(d), d["ops"])
+    _, d, _ = policy_run(policies("<p>Shipping.</p>", REFUND), plan=plan_for(extra_items=[item("t1", "Policy 1", "Beleid", kind="direct", key="title")]))
+    check("R47 non-blocker: a direct title item on a policy is never written", not any(o["key"] == "title" for o in d["ops"])
+          and any(r["id"] == "t1" and r["result"] == "not written" for r in d["rows"]), d["ops"])
+
+    class SecondBody(Fake):
+        """Adds a second body key to the pinned policy once the writer re-reads it (R47-4)."""
+        reads = 0
+
+        def post(self, path, body, headers):
+            if "translatableResourcesByIds" in body.get("query", ""):
+                SecondBody.reads += 1
+                if SecondBody.reads >= 2:
+                    node = next(n for n in self.store["types"]["SHOP_POLICY"] if n["resourceId"] == "gid://shopify/ShopPolicy/2")
+                    if sum(x["key"] == "body" for x in node["translatableContent"]) == 1:
+                        node["translatableContent"].append(c("body", REFUND, "HTML"))
+            return super().post(path, body, headers)
+    code, _, fake = policy_run(policies("<p>Shipping.</p>", REFUND), approve=True, fake_cls=SecondBody)
+    check("R47-4: a second body key appearing before the mutation stops the write", code == 2 and not fake.mutations, (code, fake.mutations))
+
+
 def encoded_token():
     return "".join("%%%02X" % ord(ch) for ch in TOKEN)
 
@@ -1894,6 +2007,7 @@ def main():
     r39(check)
     r42(check)
     r42b(check)
+    r47(check)
     print("%d failures" % len(failures))
     sys.exit(1 if failures else 0)
 
