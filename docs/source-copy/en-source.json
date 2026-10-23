@@ -34,7 +34,7 @@
  "batches": {
   "batch-01-homepage": {
    "entries": 230,
-   "digest": "ab192236341d9e063847ab0e1b7bff70a09c7bdd"
+   "digest": "45d44da7791546551c445eb32d659b77b1b4d1ad"
   },
   "batch-02-pdp": {
    "entries": 477,
@@ -718,11 +718,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.two_formulas_karmicare.settings.left_heading",
-   "en": "Activated and strengthened by day",
-   "sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
-   "status": "approved",
+   "en": "Activated and strengthened in the morning",
+   "sha1": "2ac70a593c34204792816a47683da0bb690a17c7",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; morning, not day, mirrors the night heading and 'Your morning ritual' (Victor, 23 Oct)",
+   "old_en": "Activated and strengthened by day",
+   "old_sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
    "setting_type": "text",
    "section_type": "two-formulas-karmicare",
    "rendered": true

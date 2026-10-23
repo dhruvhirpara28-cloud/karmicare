@@ -428,7 +428,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 35 | `index:two_formulas_karmicare/heading` | template_setting | Two formulas. One system. Designed around you. | approved |  |
 | 36 | `index:two_formulas_karmicare/button_label` | template_setting | BEGIN YOUR 60-DAY RHYTHM | approved |  |
 | 37 | `index:two_formulas_karmicare/button_subtext` | template_setting | €0.49 / brushing ritual | corrected |  |
-| 38 | `index:two_formulas_karmicare/left_heading` | template_setting | Activated and strengthened by day | approved |  |
+| 38 | `index:two_formulas_karmicare/left_heading` | template_setting | Activated and strengthened in the morning | corrected |  |
 | 39 | `index:two_formulas_karmicare/left_text` | template_setting | Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated. | approved | C C26 |
 | 40 | `index:two_formulas_karmicare/left_button_label` | template_setting | SEE WHAT'S INSIDE | approved |  |
 | 41 | `index:two_formulas_karmicare/right_heading` | template_setting | Purified and restored by night | approved |  |
