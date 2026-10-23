@@ -707,10 +707,19 @@ body.night-mode .pc-kit-poptitle {
 }
 
 .plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-hcell {
+  background: var(--kc-mapped-surface-page-secondary);
+}
+
+.plan-compare--kc .pc-lhead,
 .plan-compare--kc .pc-col:not(.pc-featured) .pc-hcell {
   border-top: var(--pc-rule);
   border-left: var(--pc-rule);
-  background: var(--kc-mapped-surface-page-secondary);
+}
+
+/* Inside the featured outline: its top corners, less the 1px stroke */
+.plan-compare--kc .pc-featured .pc-hcell {
+  border-radius: calc(1.6rem - var(--kc-shape-stroke-thin)) calc(1.6rem - var(--kc-shape-stroke-thin)) 0 0;
 }
 
 .plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
@@ -760,12 +769,14 @@ body.night-mode .pc-kit-poptitle {
 }
 
 /* Rows. Grid lines: a box with 12px outer corners around the header row and the rows;
-   the featured column draws its own outline instead of side rules. */
+   the featured column draws its own outline instead of side rules. The rows sit on the
+   comparison table's surface, so the header reads darker as it does there (Victor, 23 Oct). */
 .plan-compare--kc .pc-col .pc-lcell,
 .plan-compare--kc .pc-col .pc-cell {
   height: var(--pc-row-height);
   padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md);
   border-bottom: var(--pc-rule);
+  background: var(--kc-mapped-gradient-section-accent);
   font-size: var(--kc-responsive-body-sm-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);
   letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
@@ -859,21 +870,12 @@ body.night-mode .pc-kit-poptitle {
   margin-left: 0;
 }
 
-/* Featured column: the light accent surface of the comparison table's Karmicare column, in Day
-   and Night, so its text is the fixed dark brand blue there too (Victor, 23 Oct) */
+/* Featured column */
 .plan-compare--kc .pc-featured {
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-focus-default);
   border-radius: 1.6rem;
-  background: var(--kc-mapped-surface-accent-default-subtle);
+  background: linear-gradient(180deg, rgba(var(--kc-mapped-border-focus-default-rgb), 0.1) 0%, rgba(var(--kc-mapped-border-focus-default-rgb), 0) 62%);
   box-shadow: 0 1.8rem 4.4rem 0 rgba(var(--kc-mapped-border-focus-default-rgb), 0.55);
-  color: var(--kc-brand-original-dark-blue);
-}
-
-.plan-compare--kc .pc-featured .pc-cycle,
-.plan-compare--kc .pc-featured .pc-yes,
-.plan-compare--kc .pc-featured .pc-no,
-.plan-compare--kc .pc-featured .pc-info-icon {
-  color: var(--kc-brand-original-dark-blue);
 }
 
 /* Ribbon ("Most Picked") and top tag */
