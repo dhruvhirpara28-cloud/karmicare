@@ -89,7 +89,7 @@ The selling-plan group named "60-Day Supply" carries the same text as a Subscrip
 | Strengthen your teeth. Strengthen yourself. | Versterk je tanden. Versterk jezelf. | brief | Renforcez vos dents. Renforcez-vous. | brand promise |
 | The Karmicare effect | Het Karmicare-effect | Figma NL | L'effet Karmicare | |
 | Week 1 / Day 60 | Week 1 / Dag 60 | Figma NL | Semaine 1 / Jour 60 | |
-| Calmer check-ups — arrive resilient, you did the work at home | Rustigere controles — je komt veerkrachtig aan, je deed het werk al thuis | Victor 23 Oct (full form) | Des contrôles plus sereins — vous avez fait le travail à la maison | |
+| Calmer check-ups — arrive resilient, you did the work at home | Rustigere controles — je staat er sterk voor, je deed het werk al thuis | Victor 23 Oct (full form) | Des contrôles plus sereins — vous avez fait le travail à la maison | |
 | Evenings that wind down — no sting, nothing to rinse | Rustige avonden — niets dat prikt, niets na te spoelen | Figma NL (shortened) | Des soirées apaisées — rien qui pique, rien à rincer | |
 
 ## Ingredients and science
