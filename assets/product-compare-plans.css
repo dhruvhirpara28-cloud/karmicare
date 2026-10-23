@@ -692,12 +692,33 @@ body.night-mode .pc-kit-poptitle {
   }
 }
 
-/* Header cells */
+/* Header cells: the header row sits inside the box on the surface of the comparison table's
+   header (assets/section-comparison-table.css), at its size (Victor, 23 Oct) */
 .plan-compare--kc .pc-lhead,
 .plan-compare--kc .pc-hcell {
   height: var(--pc-head-height);
   padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-sm);
   justify-content: center;
+}
+
+.plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-hcell {
+  background: var(--kc-mapped-surface-page-secondary);
+}
+
+.plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-col:not(.pc-featured) .pc-hcell {
+  border-top: var(--pc-rule);
+  border-left: var(--pc-rule);
+}
+
+/* Inside the featured outline: its top corners, less the 1px stroke */
+.plan-compare--kc .pc-featured .pc-hcell {
+  border-radius: calc(1.6rem - var(--kc-shape-stroke-thin)) calc(1.6rem - var(--kc-shape-stroke-thin)) 0 0;
+}
+
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
+  border-right: var(--pc-rule);
 }
 
 .plan-compare--kc .pc-lhead {
@@ -706,8 +727,9 @@ body.night-mode .pc-kit-poptitle {
 
 .plan-compare--kc .pc-lhead-tag {
   font-weight: 600;
-  font-size: var(--kc-responsive-body-sm-text-size);
-  line-height: var(--kc-responsive-body-sm-line-height);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
 .plan-compare--kc .pc-hcell {
@@ -722,13 +744,14 @@ body.night-mode .pc-kit-poptitle {
   letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
+/* One step down the heading scale, h5 to h6 (Victor, 23 Oct) */
 .plan-compare--kc .pc-price {
   margin: 0;
   font-family: var(--kc-font-role-backbone);
   font-weight: 500;
-  font-size: var(--kc-responsive-h5-text-size);
-  line-height: var(--kc-responsive-h5-line-height);
-  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-size: var(--kc-responsive-h6-text-size);
+  line-height: var(--kc-responsive-h6-line-height);
+  letter-spacing: var(--kc-responsive-h6-letter-spacing);
   color: inherit;
 }
 
@@ -740,13 +763,15 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-default-body);
 }
 
-/* Rows. Grid lines: a box with 12px outer corners around the rows; the featured
-   column draws its own outline instead of side rules. */
+/* Rows. Grid lines: a box with 12px outer corners around the header row and the rows;
+   the featured column draws its own outline instead of side rules. The rows sit on the
+   comparison table's surface, so the header reads darker as it does there (Victor, 23 Oct). */
 .plan-compare--kc .pc-col .pc-lcell,
 .plan-compare--kc .pc-col .pc-cell {
   height: var(--pc-row-height);
   padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md);
   border-bottom: var(--pc-rule);
+  background: var(--kc-mapped-gradient-section-accent);
   font-size: var(--kc-responsive-body-sm-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);
   letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
@@ -776,7 +801,7 @@ body.night-mode .pc-kit-poptitle {
   border-top: var(--pc-rule);
 }
 
-.plan-compare--kc .pc-lhead+.pc-lcell {
+.plan-compare--kc .pc-lhead {
   border-top-left-radius: var(--kc-shape-radius-md);
 }
 
@@ -784,7 +809,7 @@ body.night-mode .pc-kit-poptitle {
   border-bottom-left-radius: var(--kc-shape-radius-md);
 }
 
-.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell+.pc-cell {
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
   border-top-right-radius: var(--kc-shape-radius-md);
 }
 
@@ -802,6 +827,12 @@ body.night-mode .pc-kit-poptitle {
   font-size: var(--kc-responsive-body-lg-text-size);
   line-height: var(--kc-responsive-body-lg-line-height);
   color: var(--kc-mapped-text-accent-default);
+}
+
+/* Day: the light accent reaches 1.91:1 on the rows (#f2f8ff). The pressed accent, the darkest
+   blue in Day, reaches 3.67:1, above the 3:1 for a meaningful graphic (R34 B1). Night keeps it. */
+body:not(.night-mode) .plan-compare--kc .pc-yes {
+  color: var(--kc-mapped-icon-accent-default-pressed);
 }
 
 /* Info icon (16px glyph; the popover keeps its existing style) */
@@ -873,6 +904,12 @@ body.night-mode .pc-kit-poptitle {
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
   background: var(--kc-mapped-text-inverse-default);
   color: var(--kc-mapped-surface-accent-default);
+}
+
+/* Day: the accent reaches 1.98:1 on the cream badge; no blue text token reaches 4.5:1 there,
+   so the heading text (15.75:1) carries it (R34 B1). Night keeps the accent. */
+body:not(.night-mode) .plan-compare--kc .pc-tag-top {
+  color: var(--kc-mapped-text-default-heading);
 }
 
 /* CTA row: KC/Button primary (featured), secondary, tertiary (first plan) */
