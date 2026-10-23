@@ -87,9 +87,14 @@
             this.querySelectorAll('[data-kc-mode]').forEach((panel) => {
               let video = panel.querySelector('video');
               if (this.motion.matches) {
+                // A panel with a still keeps it for good, also when reduced motion is switched off
+                // again (R49b B1); without one the poster stays and the video may come back
+                if (panel.dataset.still) {
+                  if (!panel.hasAttribute('data-refused')) this.fallBack(panel, panel.dataset.still);
+                  return;
+                }
                 video?.remove();
                 panel.classList.remove('is-playing');
-                if (panel.dataset.still) panel.querySelector('img').src = panel.dataset.still;
                 return;
               }
               if (panel.dataset.kcMode !== activeMode || !this.visible || panel.hasAttribute('data-refused')) {
@@ -109,6 +114,7 @@
                   'playing',
                   () => {
                     clearTimeout(panel.slowTimer);
+                    panel.slowTimer = null;
                     panel.classList.add('is-playing');
                   },
                   { once: true }
@@ -128,6 +134,7 @@
           // The video stops for good for this panel and the image takes its place
           fallBack(panel, src) {
             clearTimeout(panel.slowTimer);
+            panel.slowTimer = null;
             panel.setAttribute('data-refused', '');
             panel.querySelector('video')?.remove();
             panel.classList.remove('is-playing');
