@@ -7,7 +7,7 @@
   "releases.json": "1571d1e3719b",
   "fr/batch-01-homepage.json": "e548111a26cb",
   "fr/batch-02-pdp.json": "d13b006a0949",
-  "fr/batch-03-header-footer.json": "453fda3163e5",
+  "fr/batch-03-header-footer.json": "69b845715549",
   "fr/batch-04-legal.json": "29982bddc666",
   "fr/batch-05-products.json": "7dbfe43dbd59",
   "fr/batch-06-content-pages.json": "c301d04fd83b",
@@ -10507,6 +10507,26 @@
    "batch": "batch-03-header-footer",
    "page": "all pages",
    "items": [
+    {
+     "id": "footer-group:footer/slogan",
+     "kind": "match",
+     "key": null,
+     "field": "sections.footer.settings.slogan",
+     "en": "Your mouth has a rhythm[[br]]Now your oral care too",
+     "en_sha1": "2d16442b381544eaac8df6e3b9e0f89522c1f3d8",
+     "value": "Votre bouche a son rythme[[br]]Désormais, vos soins aussi",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "footer",
+      "slogan"
+     ]
+    },
     {
      "id": "footer-group:footer/copyright_text",
      "kind": "match",
