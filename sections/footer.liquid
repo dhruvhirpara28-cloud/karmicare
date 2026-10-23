@@ -94,8 +94,12 @@
     line-height: var(--kc-responsive-h4-line-height);
   }
 
+  /* 320px, not the Figma 286px, so the slogan keeps to two lines in every language at the
+     desktop 28px (Victor, 23 Oct). Longest line measured in Proxima Nova 500 at 28px/-1px:
+     EN "Your mouth has a rhythm" 285px, NL "Nu je mondverzorging ook" 305px, FR "Votre bouche
+     a son rythme" 310px. The break itself comes from the [[br]] marker in the text (R27). */
   .km-footer-slogan {
-    max-width: 286px;
+    max-width: 320px;
     margin: 0;
     font-family: var(--kc-font-use-heading);
     font-weight: var(--font-500-weight);
@@ -609,7 +613,9 @@
     }
   }
 
-  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart */
+  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart. The brand column is
+     320px (not 286) since 23 Oct so the two-line slogan fits in NL and FR too; the newsletter
+     column gives up the 34px (at 1200px it is 281px wide, the field about 175px). */
   @media screen and (min-width: 1200px) {
     .km-footer-top {
       flex-wrap: nowrap;
@@ -617,7 +623,7 @@
     }
 
     .km-footer-brand {
-      flex: 0 0 286px;
+      flex: 0 0 320px;
     }
 
     .km-footer-column--menu {
