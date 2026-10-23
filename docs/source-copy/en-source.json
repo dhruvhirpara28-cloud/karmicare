@@ -38,7 +38,7 @@
   },
   "batch-02-pdp": {
    "entries": 477,
-   "digest": "8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4"
+   "digest": "6f5015e4d5fe6fc31d3cb1f7c41d0036d1cb5d61"
   },
   "batch-03-header-footer": {
    "entries": 41,
@@ -7978,11 +7978,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.treatment_journey_*#29",
-   "en": "— from your gums to the",
-   "sha1": "e2182f94ebba7b1c7a533281a8ea232f3a8b0613",
+   "en": "— from your gums to the rest of you",
+   "sha1": "cb65270625719eab397abf97f50940c4b90736fc",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); metafields custom.treatment_journey_one_heading, _list_one, _two_heading, _list_two; DEFECT: the line stops mid-phrase ('…to the'); check the metafield value (handoff)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); metafields custom.treatment_journey_one_heading, _list_one, _two_heading, _list_two; karmicare_effect_item 515048341885 description, EN completed in Admin by Victor 23 Oct (R37 hold; was cut off at '…to the')",
+   "old_en": "— from your gums to the",
+   "old_sha1": "e2182f94ebba7b1c7a533281a8ea232f3a8b0613"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#01",
@@ -10329,11 +10331,13 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#06",
-   "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe preven",
-   "sha1": "1c34eae6263ac15b8c4faa11edc23b498836373c",
+   "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe prevention should pay the person doing the caring.",
+   "sha1": "9f06fb7027a41c0c3d07d07e7e890f4cb3f8e142",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); rows from custom.compare_table, cells from shop.metaobjects.compare_value, plan columns from the plan entries; compare_row 515477307773 tooltip, EN completed in Admin by Victor 23 Oct with the closing sentence of the other Return on Care tooltips (R37 hold)",
+   "old_en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe preven",
+   "old_sha1": "1c34eae6263ac15b8c4faa11edc23b498836373c"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#07",

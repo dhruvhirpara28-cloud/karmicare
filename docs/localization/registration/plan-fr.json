@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "e1a43728f7f9",
+  "en-source.json": "44adabe98abe",
   "registered.json": "7967afaaf3d3",
   "holds.json": "da17e4d579fb",
   "releases.json": "356c3948eb85",
@@ -16,7 +16,7 @@
  },
  "batches": {
   "batch-01-homepage": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
-  "batch-02-pdp": "8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4",
+  "batch-02-pdp": "6f5015e4d5fe6fc31d3cb1f7c41d0036d1cb5d61",
   "batch-03-header-footer": "742351732dabbbff2eff9cadc6858ba87284393a",
   "batch-04-legal": "98fda69496b9cbe0ad39d2b7099549341113349c",
   "batch-05-products": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
@@ -7523,22 +7523,6 @@
      }
     },
     {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29",
-     "kind": "match",
-     "key": "value",
-     "field": "custom.treatment_journey_*#29",
-     "en": "— from your gums to the",
-     "en_sha1": "e2182f94ebba7b1c7a533281a8ea232f3a8b0613",
-     "value": "— de vos gencives jusqu’à",
-     "gates": [],
-     "hold": [],
-     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#01",
      "kind": "match",
      "key": "value",
@@ -10002,22 +9986,6 @@
      "en": "Delivery rhythm",
      "en_sha1": "7a4794dbfd363b2c1675bd907740559e26b91236",
      "value": "Rythme de livraison",
-     "gates": [],
-     "hold": [],
-     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#06",
-     "kind": "match",
-     "key": null,
-     "field": "custom.compare_table|shop.metaobjects.compare_value#06",
-     "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe preven",
-     "en_sha1": "1c34eae6263ac15b8c4faa11edc23b498836373c",
-     "value": "Le Return on Care, c’est notre façon de rendre : une part de chaque livraison vous revient en Care Credit — en euros, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.",
      "gates": [],
      "hold": [],
      "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
