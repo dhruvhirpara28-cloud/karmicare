@@ -46,7 +46,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 28b | Parked / after launch | The wording "Care Credits back" is still in `templates/index.json:690` and `product.subscription-item.json:657`. Source-copy owns the text |
 | 29 | Parked / after launch | Homepage and utopia own it |
 | 30 | Dropped | Cut at the viewport edges by design |
-| 31 | Waiting for Victor | See below |
+| 31 | Dropped | Victor, 23 Oct: "rij 31 laten we zo". Sections 08 and 09 stay off the PDP |
 | 32 | Parked / after launch | Victor, 22 Oct: "FAQ kunnen we even parkeren". The links keep `href="#"` for now; the options stay below for later |
 | 33 | In progress | The plan is ready, but nothing is built. It waits for the desk's go |
 | 34 | In merchant-edit | Via homepage `e1411e2` (merchant-edit `ca5228f`): `aria-describedby="clock-help-…"` now points to a visually hidden `kc.clock.help` line in the shared section, so the PDP is covered too. Closed |
@@ -66,7 +66,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 47 | In merchant-edit | Victor, 23 Oct: benefits lists show three rows and half of the fourth, faded (`visible_items` 3, one-line peek), `fb4c0c6`, merchant-edit `da63ae4` |
 | 48 | Parked / after launch | R39e: the journey and plans transitions do not honour reduced motion |
 
-**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 25 · dropped 8.
+**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 2 · waiting for Victor 0 · parked / after launch 25 · dropped 9.
 
 ### Waiting for Victor
 
@@ -77,11 +77,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 
 Advice: **b** for the launch, because it uses the "Coming soon" state the site already has elsewhere. Switch to **a** as soon as the documents are online. The theme needs no change for a.
 
-**Row 31: should the PDP get Figma's sections 08 (testimonials) and 09 (cost of waiting)?** Today they are not on the page, and care-comes-back stands where 09 was.
-- a) Keep the page as it is for the soft launch.
-- b) Add both sections. That needs approved texts and real testimonials, and neither is in the repo yet.
-
-Advice: **a**, because building b needs content we do not have; revisit it after launch.
+**Row 31** was decided on 23 Oct: the page stays as it is (option a).
 
 ## Summary
 
@@ -224,3 +220,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 23 Oct: row 40 second round and row 44 (option b) in merchant-edit `6a26258`; row 45 (professionals under the gallery, waiting for Victor) and row 46 (journey toggle aria-expanded, parked) added. Counts updated.
 - 23 Oct: row 45 (professionals under the gallery) removed by Victor, in merchant-edit `3c52d73`. Counts updated.
 - 23 Oct: kit tiles under the label (row 40) and the benefits peek (row 47) in merchant-edit `da63ae4`; row 46 widened, row 48 (reduced motion) parked. Counts updated.
+- 23 Oct: row 31 (Figma sections 08 and 09) dropped by Victor, "rij 31 laten we zo". Counts updated.
