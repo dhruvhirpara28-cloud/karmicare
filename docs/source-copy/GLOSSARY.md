@@ -82,7 +82,7 @@ The selling-plan group named "60-Day Supply" carries the same text as a Subscrip
 | morning / evening | ochtend / avond | products.md | matin / soir | always Awake (morning) before Asleep (evening) |
 | by day / by night | overdag / 's nachts | products.md | le jour / la nuit | |
 | one pump | één pompje (0,45 ml) | products.md | une pression (0,45 ml) | |
-| Rinse first | Eerst spoelen | Victor 23 Oct | Rincez-vous la bouche | |
+| Rinse first | Eerst spoelen | Victor 23 Oct | Rincez d’abord | |
 | Spit, don't rinse | Spugen, niet spoelen | Figma NL (how-to step 3) | Crachez, ne rincez pas | |
 | leave-on | leave-on | Figma NL | leave-on | |
 | toothpaste (first mention only) | tandpasta | products.md | dentifrice | category word once, then formula / system / care / ritual |
