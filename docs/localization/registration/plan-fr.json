@@ -5,8 +5,8 @@
   "registered.json": "7967afaaf3d3",
   "holds.json": "da17e4d579fb",
   "releases.json": "1571d1e3719b",
-  "fr/batch-01-homepage.json": "e548111a26cb",
-  "fr/batch-02-pdp.json": "d13b006a0949",
+  "fr/batch-01-homepage.json": "bff11ee52be1",
+  "fr/batch-02-pdp.json": "1ffc15174531",
   "fr/batch-03-header-footer.json": "69b845715549",
   "fr/batch-04-legal.json": "29982bddc666",
   "fr/batch-05-products.json": "7dbfe43dbd59",
@@ -757,7 +757,7 @@
      "field": "sections.two_formulas_karmicare.settings.left_heading",
      "en": "Activated and strengthened by day",
      "en_sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
-     "value": "Activation et renforcement le jour",
+     "value": "Activation et renforcement le matin",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -3793,6 +3793,27 @@
      ]
     },
     {
+     "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
+     "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+     "en_sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+     "value": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "loop_subscriptions_WEk4XJ",
+      "pricing_summary_checkup_tooltip"
+     ]
+    },
+    {
      "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/testimonial_button_text",
      "kind": "match",
      "key": null,
@@ -4084,6 +4105,27 @@
       "main",
       "info_card_FnBcaN",
       "header_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/info_card_FnBcaN/body_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
+     "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+     "en_sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
+     "value": "<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, votre contrôle dentaire effectué en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "info_card_FnBcaN",
+      "body_text"
      ]
     },
     {
@@ -4618,6 +4660,27 @@
       "trusted_professionals_HAqYth",
       "card_CtQgU9",
       "text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/hover_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
+     "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
+     "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
+     "value": "<p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais très attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne regarde pas seulement les étiquettes, je regarde ce qu’un produit fera à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients purs et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>Et c’est aussi pour cela que je l’utilise dans ma pratique.</p><p>J’accompagne des femmes qui souffrent de SPM, de troubles du cycle, de fatigue liée au stress, de dominance œstrogénique et de dérèglements surrénaliens. J’ai besoin de produits techniquement solides — biodisponibles, bien formulés, et qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "trusted_professionals_HAqYth",
+      "card_CtQgU9",
+      "hover_text"
      ]
     },
     {
@@ -6550,6 +6613,22 @@
       "drafted": true,
       "registered": false
      }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description",
+     "kind": "direct",
+     "key": "description",
+     "field": "selling_plan.712155431293.description",
+     "en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
+     "en_sha1": "6840dbe45c9cb972429b7b0e801b2ed57eee11da",
+     "value": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> de Care Credit reversé sur votre compte\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">L’année Karmicare rapporte 20 % de Return on Care — 2× le taux du Rythme 60 jours — en Care Credit, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      40 € de récompense contrôle dentaire\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos par an</strong> (3 maintenant, 3 au 6e mois)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> de Care Credit</strong> <span>reversés sur vos commandes</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Offrir, suspendre ou résilier</strong> à tout moment</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Satisfait ou remboursé 60 jours</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Prix membre à l’abri de l’inflation</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Kit de bienvenue offert</strong> (à la 1re commande) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> de valeur · offert</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
+     "gates": [],
+     "hold": [],
+     "how": "GID from the inventory id",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
     }
    ]
   },
@@ -6687,6 +6766,30 @@
      "en": "Karmicare Awake morning and Asleep evening toothpaste, fluoride-free, SLS-free and rich in nano-hydroxyapatite: protected by day, restored by night",
      "en_sha1": "394d8367b9fddeea920f2718e70ca9cbfce38f1a",
      "value": "Dentifrices Karmicare Awake du matin et Asleep du soir, sans fluor, sans SLS et riches en nano-hydroxyapatite : protection le jour, restauration la nuit",
+     "gates": [],
+     "hold": [],
+     "how": "GID from the inventory id",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    }
+   ]
+  },
+  {
+   "shopify_type": "MEDIA_IMAGE",
+   "owner": "gid://shopify/MediaImage/69840178020733",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "items": [
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:media.69840178020733.alt",
+     "kind": "direct",
+     "key": "alt",
+     "field": "media.69840178020733.alt",
+     "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with morning care at 06:40 and evening care at 22:00",
+     "en_sha1": "ebac0e3660ff7b16ea1cdb4d1a4c35871fac2a8b",
+     "value": "Infographie chronobiologique Karmicare : votre bouche vit au rythme d’une horloge de 24 heures, avec le soin du matin à 06:40 et le soin du soir à 22:00",
      "gates": [],
      "hold": [],
      "how": "GID from the inventory id",
@@ -7425,7 +7528,7 @@
      "field": "custom.treatment_journey_*#23",
      "en": "— arrive resilient, you did the work at home",
      "en_sha1": "eb3a8f4a24bbe8f3572e3186a4649fe360d3f367",
-     "value": "— en confiance : le travail est fait à la maison",
+     "value": "— solide au rendez-vous : le travail est fait à la maison",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -7506,6 +7609,22 @@
      "en": "Peace of mouth, peace of mind*",
      "en_sha1": "5bb0d2efa86caa012780e1cd94e762ce4b9bffb4",
      "value": "Bouche sereine, esprit serein*",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.treatment_journey_*#29",
+     "en": "— from your gums to the rest of you",
+     "en_sha1": "cb65270625719eab397abf97f50940c4b90736fc",
+     "value": "— de vos gencives jusqu’au reste de votre corps",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -8034,6 +8153,22 @@
      "en": "One pump",
      "en_sha1": "0476194e7e3144a97e673990b3948e919a0e24ae",
      "value": "Une pression",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#37",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#37",
+     "en": "Full dose",
+     "en_sha1": "5399d5a4b01e86bcc07584fc3943e4abe19e428e",
+     "value": "La dose complète",
      "gates": [],
      "hold": [],
      "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
@@ -8763,6 +8898,22 @@
      }
     },
     {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#92",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#92",
+     "en": "nHAp <100 nm · rod-shaped, per SCCS",
+     "en_sha1": "3feb141fbb2000ce6d1f15dec405020611872c5f",
+     "value": "nHAp <100 nm · en bâtonnets, selon le SCCS",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#93",
      "kind": "match",
      "key": "value",
@@ -9001,6 +9152,327 @@
       "drafted": true,
       "registered": false
      }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#116",
+     "en": "93.25",
+     "en_sha1": "e360baabc790f7e4765568954c4a678a6080b757",
+     "value": "93,25",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#117",
+     "en": "72.32",
+     "en_sha1": "4409ccb6a18dbac0db7874572a31c4e5bbfd5511",
+     "value": "72,32",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#108",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#108",
+     "en": "Guarana",
+     "en_sha1": "eac174a26521b539885aff6f288e5f6d9a313b1e",
+     "value": "Guarana",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#109",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#109",
+     "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+     "en_sha1": "b091863d40fc29c177e880fe39bd9d4c2d2c2436",
+     "value": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#110",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#110",
+     "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+     "en_sha1": "7e66994334ddacf4f00b1cb07e5013a64d2c185f",
+     "value": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#111",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#111",
+     "en": "RDA",
+     "en_sha1": "8adbd2307f5ede720af048b12e62ce9ba9fe41cd",
+     "value": "RDA",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#112",
+     "en": "Awake",
+     "en_sha1": "2b453e3e926b3275b0260310e696420278283986",
+     "value": "Awake",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#113",
+     "en": "Asleep",
+     "en_sha1": "b9692bbecea9d8f0a8224711aea48e53a2d42f40",
+     "value": "Asleep",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#114",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#114",
+     "en": "· AM",
+     "en_sha1": "115ce3300e2da4045b9dad2cc2c96f67e67203f8",
+     "value": "· AM",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#115",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#115",
+     "en": "· PM",
+     "en_sha1": "034ea857ae30a7ef4217413eacff31b656015116",
+     "value": "· PM",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#118",
+     "en": "✓",
+     "en_sha1": "698a879938bf4d71b92190d2b8f19c0e1d4abeef",
+     "value": "✓",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#119",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#119",
+     "en": "250",
+     "en_sha1": "ba30fd97b4127db56e9f4d3d9c030d71646fd2e7",
+     "value": "250",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#120",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#120",
+     "en": "i",
+     "en_sha1": "042dc4512fa3d391c5170cf3aa61e6a638f84342",
+     "value": "i",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#121",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#121",
+     "en": "CPSR · 2026",
+     "en_sha1": "53085b5a21107a087218fb89108e83bde5ebad97",
+     "value": "CPSR · 2026",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#122",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#122",
+     "en": "CPNP · 2026",
+     "en_sha1": "9c7269b56112b0c3e6bfc35f890817cb2a547fff",
+     "value": "CPNP · 2026",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#123",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#123",
+     "en": "SCCS/1677/25",
+     "en_sha1": "d5da1836948f9f8b39b9be9b5d426d7e1463aef9",
+     "value": "SCCS/1677/25",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#124",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#124",
+     "en": "→",
+     "en_sha1": "213edd2539ed96e6900bb40abd588edba35566c5",
+     "value": "→",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#125",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#125",
+     "en": "Awake:",
+     "en_sha1": "f3f3c7c8d040cb18e2600ce76135201847e1ea89",
+     "value": "Awake:",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#126",
+     "kind": "match",
+     "key": "value",
+     "field": "custom.product_faq#126",
+     "en": "Asleep:",
+     "en_sha1": "b84db316a641a2746cd885a78ab2b5277d6956ab",
+     "value": "Asleep:",
+     "gates": [],
+     "hold": [],
+     "how": "the product's metafield by namespace and key, translatableResourcesByIds (2026-10); whole value, or every JSON text leaf mapped",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
     },
     {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#01",
@@ -9971,6 +10443,22 @@
      }
     },
     {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#06",
+     "kind": "match",
+     "key": null,
+     "field": "custom.compare_table|shop.metaobjects.compare_value#06",
+     "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe prevention should pay the person doing the caring.",
+     "en_sha1": "9f06fb7027a41c0c3d07d07e7e890f4cb3f8e142",
+     "value": "Le Return on Care, c’est notre façon de rendre : une part de chaque livraison vous revient en Care Credit — en euros, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.",
+     "gates": [],
+     "hold": [],
+     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#07",
      "kind": "match",
      "key": null,
@@ -10010,6 +10498,22 @@
      "en": "Welcome Kit",
      "en_sha1": "d08ce9ffcc73523e4dd84f50ec4a91e0a553313e",
      "value": "Kit de bienvenue",
+     "gates": [],
+     "hold": [],
+     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10",
+     "kind": "match",
+     "key": null,
+     "field": "custom.compare_table|shop.metaobjects.compare_value#10",
+     "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+     "en_sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+     "value": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
      "gates": [],
      "hold": [],
      "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
@@ -10423,6 +10927,22 @@
      "kind": "match",
      "key": null,
      "field": "shop.metaobjects.compare_value:rhythm.cost_per_brushing",
+     "en": "€0.49",
+     "en_sha1": "b9ceb39480ce1b12b254e2b4310f7b03fbc1f6fb",
+     "value": "0,49 €",
+     "gates": [],
+     "hold": [],
+     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing",
+     "kind": "match",
+     "key": null,
+     "field": "shop.metaobjects.compare_value:year.cost_per_brushing",
      "en": "€0.49",
      "en_sha1": "b9ceb39480ce1b12b254e2b4310f7b03fbc1f6fb",
      "value": "0,49 €",
