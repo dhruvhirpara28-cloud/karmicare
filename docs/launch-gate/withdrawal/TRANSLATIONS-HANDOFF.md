@@ -7,7 +7,7 @@
 **Rules applied**: NL je-form, decimal comma, "Care Credit"/"Return on Care"/"Awake"/"Asleep" stay English (none occur here); FR uses *vous* and no-break spaces before ? ! : ; (they are real U+00A0 characters in this file: copy and paste the cell, do not retype it). The statutory words in each language are quoted from Art. VI.61/2 WER (Justel) and Art. 11a of Directive 2011/83/EU (EUR-Lex, NL and FR versions); do not reword them.
 
 
-English defaults live in the theme (`sections/kc-withdrawal.liquid`, `sections/main-product.liquid` block "Legal guarantee notice (EU)"). Translate & Adapt shows them under **Theme content → Sections → Withdrawal function** on the page template `page.withdrawal`, and under the product template for the block.
+English defaults live in the theme (`sections/kc-withdrawal.liquid`; `sections/legal-toc-section.liquid` for the notice's three labels). Translate & Adapt shows them under **Theme content → Sections → Withdrawal function** on the page template `page.withdrawal`, and under the page template `page.consumer-rights`, block "4. Two-year legal guarantee of conformity", for the notice's labels.
 
 
 ## 1. Section "Withdrawal function" (templates/page.withdrawal.json)
@@ -48,19 +48,17 @@ English defaults live in the theme (`sections/kc-withdrawal.liquid`, `sections/m
 | `aside_text` | <p>Prefer another route? Email <a href="mailto:care@karmicare.com">care@karmicare.com</a>, call <a href="tel:+32478572761">+32 (0) 478 57 27 61</a> or write to KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgium. The model withdrawal form is on the Consumer Rights page. Whichever way you choose, the day you tell us counts.</p> | <p>Liever een andere weg? Mail naar <a href="mailto:care@karmicare.com">care@karmicare.com</a>, bel <a href="tel:+32478572761">+32 (0) 478 57 27 61</a> of schrijf naar KARMICA BV, Vizierstraat 28, 8000 Brugge, België. Het modelformulier voor herroeping staat op de pagina Consumentenrechten. Welke weg je ook kiest: de dag waarop je het ons laat weten, telt.</p> | <p>Vous préférez une autre voie ? Écrivez à <a href="mailto:care@karmicare.com">care@karmicare.com</a>, appelez le <a href="tel:+32478572761">+32 (0) 478 57 27 61</a> ou écrivez à KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgique. Le formulaire type de rétractation se trouve sur la page Droits des consommateurs. Quelle que soit la voie choisie, c’est le jour où vous nous informez qui compte.</p> |  |
 | `klaviyo_metric` | Withdrawal statement submitted | (do not translate) | (do not translate) | Internal metric name; the same in every language, or the Klaviyo flow will not trigger. |
 
-## 2. Block "Legal guarantee notice (EU)" (product templates and the homepage featured product)
+## 2. The notice's labels on the Consumer Rights page (templates/page.consumer-rights.json, block `content_section_FcEDdA`, section 4)
 
 
-The notice itself is the Commission’s file per language (`assets/kc-legal-guarantee-notice-en/nl/fr.svg`) and switches with the storefront language on its own; nothing in it is translated by hand.
+The notice itself is the Commission’s file per language (`assets/kc-legal-guarantee-notice-en/nl/fr.svg`) and switches with the storefront language on its own; nothing in it is translated by hand. The block's "Anchor" (`two-year-guarantee`) and the banner card's link (`#two-year-guarantee`) are not translated either. The card text "2 years / Legal guarantee" is gate-legal's and already in its handoff.
 
 
 | Setting id | EN (default) | NL | FR | Note |
 |---|---|---|---|---|
-| `summary_label` | Your legal guarantee rights | Je wettelijke garantierechten | Vos droits à la garantie légale | The Commission’s own example line; the notice opens on the first click. |
-| `link_label` | More about the legal guarantee on europa.eu | Meer over de wettelijke garantie op europa.eu | En savoir plus sur la garantie légale sur europa.eu | Goes to the language page the QR code points to (chosen by the storefront language, not by this text). |
-| `full_size_label` | Open the notice full size | Open de kennisgeving op volledige grootte | Ouvrir l’avis en taille réelle |  |
-| `close_label` | Close the notice | Kennisgeving sluiten | Fermer l’avis | Name of the viewer’s close button (screen readers). |
-| `pan_hint` | Swipe or scroll sideways to read the whole notice. | Veeg of scrol zijwaarts om de hele kennisgeving te lezen. | Faites défiler latéralement pour lire tout l’avis. | Shown on phones only, above the notice in the viewer. |
+| `legal_guarantee_link_label` | More about the legal guarantee on europa.eu | Meer over de wettelijke garantie op europa.eu | En savoir plus sur la garantie légale sur europa.eu | Goes to the language page the QR code points to (chosen by the storefront language, not by this text). |
+| `legal_guarantee_full_size_label` | Open the notice full size | Open de kennisgeving op volledige grootte | Ouvrir l’avis en taille réelle |  |
+| `legal_guarantee_pan_hint` | Swipe or scroll sideways to read the whole notice. | Veeg of scrol zijwaarts om de hele kennisgeving te lezen. | Faites défiler latéralement pour lire tout l’avis. | Shown on phones only, above the notice. |
 
 ## 3. Admin-side text (Pages, Menus, notifications, Klaviyo)
 

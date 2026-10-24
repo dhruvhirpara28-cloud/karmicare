@@ -144,6 +144,9 @@
               <ul class="legal-toc__nav-list" role="list">
                 {% for block in section.blocks %}
                   {% assign target_id = 'LegalToc-' | append: section.id | append: '-section-' | append: block.id %}
+                  {% if block.settings.anchor != blank %}
+                    {% assign target_id = block.settings.anchor | handleize %}
+                  {% endif %}
 
                   <li class="legal-toc__nav-item" {{ block.shopify_attributes }}>
                     <a
@@ -165,6 +168,14 @@
         <div class="legal-toc__content">
           {% for block in section.blocks %}
             {% assign target_id = 'LegalToc-' | append: section.id | append: '-section-' | append: block.id %}
+            {%- comment -%}
+              A block's "Anchor" gives the article a stable id, so a link elsewhere (the banner's
+              "2 years / Legal guarantee" card, an email) can land on it: #two-year-guarantee.
+              The left menu and the scroll script use the same id.
+            {%- endcomment -%}
+            {% if block.settings.anchor != blank %}
+              {% assign target_id = block.settings.anchor | handleize %}
+            {% endif %}
 
             <article
               id="{{ target_id }}"
@@ -195,6 +206,21 @@
                 <div class="legal-toc__blockbody rte">
                   {{ block.settings.block_content }}
                 </div>
+              {% endif %}
+
+              {%- comment -%}
+                The EU harmonised notice on the legal guarantee of conformity (Regulation (EU)
+                2025/1960; Belgian Art. VI.45 §1, 12° WER since 27 Sep 2026): the Commission's own
+                file in the shop language, at the end of the "Two-year legal guarantee" section
+                (Victor, 24 Oct). See snippets/kc-legal-guarantee-notice.liquid.
+              {%- endcomment -%}
+              {% if block.settings.show_legal_guarantee_notice %}
+                {% render 'kc-legal-guarantee-notice',
+                  id: block.id,
+                  link_label: block.settings.legal_guarantee_link_label,
+                  full_size_label: block.settings.legal_guarantee_full_size_label,
+                  pan_hint: block.settings.legal_guarantee_pan_hint
+                %}
               {% endif %}
             </article>
           {% endfor %}
@@ -745,6 +771,48 @@
           "type": "richtext",
           "id": "block_content",
           "label": "Block Content"
+        },
+        {
+          "type": "header",
+          "content": "Anchor"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor (URL fragment)",
+          "info": "Optional. Letters, digits and hyphens, for example two-year-guarantee: a link to #two-year-guarantee then lands on this section."
+        },
+        {
+          "type": "header",
+          "content": "EU legal guarantee notice"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_legal_guarantee_notice",
+          "label": "Show the EU legal guarantee notice at the end of this section",
+          "info": "The Commission's harmonised notice (Regulation (EU) 2025/1960), its own file shown unchanged in the shop language, with a link to europa.eu and a full-size link. Required for goods sold to consumers since 27 September 2026.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "legal_guarantee_link_label",
+          "label": "Link to europa.eu (same destination as the QR code)",
+          "default": "More about the legal guarantee on europa.eu",
+          "visible_if": "{{ block.settings.show_legal_guarantee_notice }}"
+        },
+        {
+          "type": "text",
+          "id": "legal_guarantee_full_size_label",
+          "label": "Full-size link",
+          "default": "Open the notice full size",
+          "visible_if": "{{ block.settings.show_legal_guarantee_notice }}"
+        },
+        {
+          "type": "text",
+          "id": "legal_guarantee_pan_hint",
+          "label": "Hint on phones",
+          "default": "Swipe or scroll sideways to read the whole notice.",
+          "visible_if": "{{ block.settings.show_legal_guarantee_notice }}"
         }
       ]
     }

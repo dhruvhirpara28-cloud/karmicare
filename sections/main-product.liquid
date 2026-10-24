@@ -829,23 +829,6 @@
                   </product-recommendations>
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
-                {%- when 'legal_guarantee_notice' -%}
-                  {%- comment -%}
-                    The EU harmonised notice on the legal guarantee of conformity, a pre-contractual
-                    duty for goods since 27 Sep 2026 (Art. VI.45 §1, 5° via VI.2 and VI.2/2 WER).
-                    Placed after the trust row, under the plan card; the Loop widget keeps its place.
-                  {%- endcomment -%}
-                  {%- render 'kc-legal-guarantee-notice',
-                    id: block.id,
-                    layout: 'disclosure',
-                    summary_label: block.settings.summary_label,
-                    link_label: block.settings.link_label,
-                    full_size_label: block.settings.full_size_label,
-                    close_label: block.settings.close_label,
-                    pan_hint: block.settings.pan_hint,
-                    open: block.settings.open_by_default,
-                    block: block
-                  -%}
                 {%- when 'sticky_cart' -%}
                   {%- assign render_sticky_cart = true -%}
                   {%- assign sticky_cart_block = block -%}
@@ -2252,53 +2235,6 @@
           "id": "enable_quick_add",
           "label": "t:sections.main-product.blocks.complementary_products.settings.enable_quick_add.label",
           "default": false
-        }
-      ]
-    },
-    {
-      "type": "legal_guarantee_notice",
-      "name": "Legal guarantee notice (EU)",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "The EU harmonised notice on the legal guarantee of conformity (Regulation (EU) 2025/1960), the Commission's own file shown unchanged in the shop language. Required on the offer of goods to consumers since 27 September 2026. It opens on the first click in a readable viewer, as the Commission's example for product pages."
-        },
-        {
-          "type": "text",
-          "id": "summary_label",
-          "label": "Line that opens the notice",
-          "default": "Your legal guarantee rights"
-        },
-        {
-          "type": "checkbox",
-          "id": "open_by_default",
-          "label": "Show the notice open",
-          "default": false
-        },
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Link to europa.eu (same destination as the QR code)",
-          "default": "More about the legal guarantee on europa.eu"
-        },
-        {
-          "type": "text",
-          "id": "full_size_label",
-          "label": "Full-size link",
-          "default": "Open the notice full size"
-        },
-        {
-          "type": "text",
-          "id": "close_label",
-          "label": "Close button (screen readers)",
-          "default": "Close the notice"
-        },
-        {
-          "type": "text",
-          "id": "pan_hint",
-          "label": "Hint on phones",
-          "default": "Swipe or scroll sideways to read the whole notice."
         }
       ]
     },

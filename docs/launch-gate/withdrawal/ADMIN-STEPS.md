@@ -22,7 +22,7 @@ Preview: Online Store → Themes → the dev theme → Customize → open `/page
 
 ## 2. Translate the theme texts
 
-Apps → **Translate & Adapt** → Dutch → **Theme content** → filter on "Withdrawal function" (and on "Legal guarantee notice" for the product-page block). Paste the NL column from `TRANSLATIONS-HANDOFF.md` §1 and §2, then the same for French. Copy the cells, do not retype the French ones (they carry no-break spaces before `?` and `:`).
+Apps → **Translate & Adapt** → Dutch → **Theme content** → filter on "Withdrawal function" (and, under the page template Consumer Rights, the block "4. Two-year legal guarantee of conformity" for the notice's three labels). Paste the NL column from `TRANSLATIONS-HANDOFF.md` §1 and §2, then the same for French. Copy the cells, do not retype the French ones (they carry no-break spaces before `?` and `:`).
 
 ## 3. Put the function in the footer and the legal menu
 
@@ -35,7 +35,7 @@ Content → **Menus** (Online Store → Navigation on older admin) → the foote
 
 Save. Translate & Adapt → Navigation → that menu: NL `Hier de overeenkomst herroepen`, FR `Renoncer au contrat ici`. These are the statutory words; keep them exact.
 
-Optional, same menu: `Your legal guarantee rights` → Pages → Consumer Rights (section 4), the site-wide reminder of the notice.
+No extra menu item for the guarantee notice: the footer's existing **Consumer Rights** link is the route (Victor, 24 Oct), and on that page the card "2 years / Legal guarantee" jumps to section 4, where the notice sits.
 
 ## 4. The acknowledgement of receipt (Klaviyo transactional flow)
 

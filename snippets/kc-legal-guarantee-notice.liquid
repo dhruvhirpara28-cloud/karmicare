@@ -7,32 +7,30 @@
   https://commission.europa.eu/publications/high-resolution-vector-files-eu-notice-and-label-product-guarantees_en
   (Annex I, note 1: none of its elements may be edited; note 5: online sale shows the colour
   version). It therefore renders as an image from the theme's own assets, never a hotlink, in the
-  storefront language. The Commission's practical guidelines (1 April 2026, §2.3 digital display)
-  ask for the full notice, in colour, legible at default display size, and a clickable link to the
-  same destination as its QR code.
+  storefront language, with a clickable link to the same destination as its QR code (Commission
+  practical guidelines, 1 April 2026, §2.3).
 
-  Legibility (Astra R58 B2): the image is never shrunk to the column. It renders at a readable
-  width (assets/kc-legal-guarantee-notice.css, --kc-lgn-readable-width, 800px: body text about
-  13px) inside a region that scrolls or pans, so the whole unedited graphic stays available in
-  proportion. With JavaScript (assets/kc-legal-guarantee-notice.js) the line opens a modal viewer
-  (native dialog: focus trapped, Esc closes, focus returns) that holds the notice at that width,
-  full-screen on a phone with a swipe hint, centred on desktop. Without JavaScript the details
-  element opens the same scrolling region in place. The second link opens the file itself.
-  Screen readers get the notice's wording as the image's description.
-  Rules and sources: docs/launch-gate/withdrawal/REQUIREMENTS.md, part B.
+  Place (Victor, 24 Oct, R58c): inline at the end of Consumer Rights section 4 "Two-year legal
+  guarantee of conformity" (sections/legal-toc-section.liquid, block setting
+  show_legal_guarantee_notice), reached through the footer's Consumer Rights link and the page's
+  own "2 years / Legal guarantee" card. The line by the buy buttons and its viewer (R58, R58b)
+  came out on his decision; the residual risk is recorded in
+  docs/launch-gate/withdrawal/REQUIREMENTS.md, part E.
+
+  Legibility (guidelines §2.3: legible at default display size): the image is never shrunk to a
+  phone column. It renders at a readable width (assets/kc-legal-guarantee-notice.css,
+  --kc-lgn-readable-width, 800px: body text about 13px) inside a region that pans sideways, with a
+  hint on phones; from 750px it fits the text column, up to that width. The second link opens the
+  file itself. Screen readers get the notice's wording as the image's description.
 
   Accepts:
-  - id: unique suffix (block.id or section.id)
-  - layout: 'disclosure' (a line such as "Your legal guarantee rights" that opens the notice on the
-    first click, the Commission's own example for product and checkout pages) or 'inline'
-  - summary_label: the clickable line and the viewer's title (disclosure only)
-  - open: true renders the details open (without JavaScript)
-  - link_label: the europa.eu link; full_size_label: the full-size link
-  - close_label: the viewer's close button name; pan_hint: the hint shown on phones
-  - block: the block, for the theme editor's attributes (optional)
+  - id: unique suffix (block.id)
+  - link_label: the europa.eu link; the storefront language picks its destination
+  - full_size_label: the link that opens the file itself
+  - pan_hint: the hint shown on phones above the notice
 
   Usage:
-  {% render 'kc-legal-guarantee-notice', id: block.id, layout: 'disclosure', summary_label: block.settings.summary_label, link_label: block.settings.link_label, full_size_label: block.settings.full_size_label, close_label: block.settings.close_label, pan_hint: block.settings.pan_hint, open: block.settings.open_by_default, block: block %}
+  {% render 'kc-legal-guarantee-notice', id: block.id, link_label: block.settings.legal_guarantee_link_label, full_size_label: block.settings.legal_guarantee_full_size_label, pan_hint: block.settings.legal_guarantee_pan_hint %}
 {%- endcomment -%}
 
 {%- liquid
@@ -62,29 +60,20 @@
   endcase
   assign kc_lgn_id = 'KcLegalGuaranteeNotice-' | append: id
   assign kc_lgn_src = kc_lgn_asset | asset_url
-  assign kc_lgn_title = summary_label | default: kc_lgn_name
-  if layout == 'disclosure'
-    assign kc_lgn_layout = 'disclosure'
-  else
-    assign kc_lgn_layout = 'inline'
-  endif
 -%}
 
 {{ 'kc-legal-guarantee-notice.css' | asset_url | stylesheet_tag }}
-{%- if kc_lgn_layout == 'disclosure' -%}
-  <script src="{{ 'kc-legal-guarantee-notice.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
 
-{%- capture kc_lgn_figure -%}
-  <figure class="kc-lgn__figure" data-kc-lgn-figure>
+<div class="kc-lgn" id="{{ kc_lgn_id }}" data-kc-legal-guarantee-notice>
+  <figure class="kc-lgn__figure">
     {%- if pan_hint != blank -%}
       <p class="kc-lgn__hint">{{ pan_hint | escape }}</p>
     {%- endif -%}
     {%- comment -%}
-      The notice at a readable width in a region that scrolls or pans: the Commission's file, A4
-      proportions (595.28 x 841.89 user units), never fitted to the column.
+      The notice at a readable width in a region that pans: the Commission's file, A4 proportions
+      (595.28 x 841.89 user units), never shrunk to a phone column.
     {%- endcomment -%}
-    <div class="kc-lgn__scroller" data-kc-lgn-scroller tabindex="0" role="region" aria-label="{{ kc_lgn_name | escape }}">
+    <div class="kc-lgn__scroller" tabindex="0" role="region" aria-label="{{ kc_lgn_name | escape }}">
       <img
         class="kc-lgn__image"
         src="{{ kc_lgn_src }}"
@@ -106,38 +95,4 @@
       {%- endif -%}
     </figcaption>
   </figure>
-{%- endcapture -%}
-
-<div
-  class="kc-lgn kc-lgn--{{ kc_lgn_layout }}"
-  id="{{ kc_lgn_id }}"
-  data-kc-legal-guarantee-notice
-  {% if block %}{{ block.shopify_attributes }}{% endif %}
->
-  {%- if kc_lgn_layout == 'disclosure' -%}
-    <details class="kc-lgn__details" data-kc-lgn-details {% if open %}open{% endif %}>
-      <summary class="kc-lgn__summary" data-kc-lgn-open>
-        <span class="kc-lgn__summary-text">{{ kc_lgn_title | escape }}</span>
-        <span class="kc-lgn__chevron" aria-hidden="true"></span>
-      </summary>
-      <div class="kc-lgn__panel" data-kc-lgn-panel>
-        {{ kc_lgn_figure }}
-      </div>
-    </details>
-    {%- comment -%}
-      The viewer: assets/kc-legal-guarantee-notice.js moves the figure in here and opens it on the
-      line's first click. Closed and empty without JavaScript.
-    {%- endcomment -%}
-    <dialog class="kc-lgn__dialog" data-kc-lgn-dialog aria-labelledby="{{ kc_lgn_id }}-title">
-      <div class="kc-lgn__dialog-head">
-        <h2 class="kc-lgn__dialog-title" id="{{ kc_lgn_id }}-title">{{ kc_lgn_title | escape }}</h2>
-        <button type="button" class="kc-lgn__close" data-kc-lgn-close aria-label="{{ close_label | default: 'Close' | escape }}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-      <div class="kc-lgn__dialog-body" data-kc-lgn-dialog-body></div>
-    </dialog>
-  {%- else -%}
-    {{ kc_lgn_figure }}
-  {%- endif -%}
 </div>
