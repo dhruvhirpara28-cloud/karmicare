@@ -129,6 +129,10 @@
     #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:not(.kc-coming-soon):hover {
       background-color: var(--kc-mapped-surface-primary-default-hover);
     }
+    /* Night primary hover is #212a49, the bar's own surface; the hover for the secondary surface shows */
+    body.night-mode #shopify-section-{{ section.id }} .header__inline-menu .header__menu-item:not(.kc-coming-soon):hover {
+      background-color: var(--kc-mapped-surface-secondary-default-hover);
+    }
     #shopify-section-{{ section.id }} .header__icons {
       display: flex;
       align-items: center;
@@ -309,6 +313,10 @@
     #shopify-section-{{ section.id }} .menu-drawer__menu-item:hover,
     #shopify-section-{{ section.id }} .menu-drawer__menu-item:focus {
       background-color: var(--kc-mapped-surface-primary-default-hover);
+    }
+    body.night-mode #shopify-section-{{ section.id }} .menu-drawer__menu-item:not(.kc-coming-soon):hover,
+    body.night-mode #shopify-section-{{ section.id }} .menu-drawer__menu-item:not(.kc-coming-soon):focus {
+      background-color: var(--kc-mapped-surface-secondary-default-hover);
     }
     #shopify-section-{{ section.id }} .menu-drawer__menu-item.kc-coming-soon:hover,
     #shopify-section-{{ section.id }} .menu-drawer__menu-item.kc-coming-soon:focus {
