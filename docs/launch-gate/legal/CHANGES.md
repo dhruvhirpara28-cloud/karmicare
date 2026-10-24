@@ -1,6 +1,6 @@
-# R57 · Launch blocker 1: consumer-rights text (gate-legal)
+# R57 / R57b · Launch blocker 1: consumer-rights text (gate-legal)
 
-**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad
+**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = this rework, §3b and §8.
 **Scope**: LR1 blocker 1 (`docs/launch-gate/input/LR1-LAUNCH-READINESS.md`) = audit items P0-1, P0-5, P0-6, P0-8, P0-9, P0-14 (withdrawal information), P0-15 (the NL/FR of the changed strings) from `input/legal-offer/work/2026-10-05/legal-audit-terms-consumer-rights-privacy.md`.
 **Decisions applied**: D1 option A (Victor, 24 Oct: priming exemption dropped, loss-of-value rule), D7 and D8 (Consumer Rights is a plain-language summary that points to the Terms; the canonical texts are `input/legal-offer/legal/*`), D2 and D5 (unchanged, already in the text). D3 is discussed in §5 and not applied by this lane.
 
@@ -8,10 +8,10 @@
 
 | File | What |
 |---|---|
-| `CHANGES.md` (this file) | Where each text lives, the canonical place and redirects, every change with old → new, reason and legal source, what was verified, what is left |
+| `CHANGES.md` (this file) | Where each text lives, the canonical place and redirects, every change with old → new, reason and legal source (§3 R57, §3b R57b), what was verified, what is left, Astra's review items (§8) |
 | `POLICIES-PASTE.md` | Full corrected body of the two Shopify policies that change (Terms of service, Refund policy), EN first, then NL and FR for Translate & Adapt |
-| `TRANSLATIONS-HANDOFF.md` | The 14 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
-| `ADMIN-STEPS.md` | What Victor does in admin, in order: policy pastes, legacy pages to hide, redirects, titles, withdrawal PDFs, checks |
+| `TRANSLATIONS-HANDOFF.md` | The 15 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
+| `ADMIN-STEPS.md` | What Victor does in admin, in order, starting with the launch gate (durable-medium confirmation): policy pastes, legacy pages to hide, redirects, titles, legacy Terms links, withdrawal PDFs last, checks |
 
 Theme files changed: `templates/page.terms-and-conditions.json` and `templates/page.consumer-rights.json` (EN setting values only). `templates/page.privacy-policy.json` has no blocker-1 item and is unchanged. The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
 
@@ -48,9 +48,9 @@ The footer (`sections/footer.liquid`, not touched) links the page-picker setting
 Why not make the designed pages canonical and leave the slots as “copies”? The slots cannot be removed or redirected, and the law looks at what the customer is shown at checkout and in the confirmation: that is the slot. Why not drop the designed pages? They carry the translations, the menu and the key cards, and the footer falls back to the plain slots only when they are missing.
 
 
-## 3. The changes, one by one (EN old → new)
+## 3. R57, the changes reviewed by Astra (24 Oct): the changes, one by one (EN old → new)
 
-The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and `POLICIES-PASTE.md` (policies). Old text is quoted from the live policy body on 24 Oct 2026; tags are stripped here for readability.
+The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and `POLICIES-PASTE.md` (policies). Old text is quoted from the live policy body on 24 Oct 2026 (round B: from the R57 text); tags are stripped here for readability.
 
 
 ### T1 · Terms clause 2.2 (consumer definition)
@@ -511,6 +511,162 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > (*) Delete as appropriate. Complete and return this form only if you wish to withdraw from the contract. Online: Withdraw from contract here.
 
 
+## 3b. R57b, the rework after Astra's R57 review (24 Oct): the changes, one by one (EN old → new)
+
+
+### TB1 · Terms clause 4.1.4 (what a withdrawing member returns)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `terms-of-service`
+
+**Why**: Astra, open point 1 (non-blocker): say expressly that “the goods” of a membership withdrawal are everything delivered under it, Welcome Kit included; the permission to keep the kit belongs to the voluntary guarantees. No kit-value fee, no €59 deduction on the statutory route.
+
+**Legal basis**: Art. VI.51 §1 and §5 WER; Terms 9.3 (the kit is part of the first membership order).
+
+**Old**
+
+> the address and the cost are in clause 4.7 (Article VI.51 §1 WER). You may handle
+
+**New**
+
+> the address and the cost are in clause 4.7 (Article VI.51 §1 WER). For a membership, the goods are everything delivered under it, the Welcome Kit included. You may handle
+
+
+### TB2 · Terms clause 4.4.6 (Year guarantee, refund timing)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `terms-of-service`
+
+**Why**: Astra, observation 6 (non-blocker): “receiving and inspecting” could postpone the receipt-based deadline that Consumer Rights 3.6 promises for the Year refund. The two texts now say the same: 14 days from receipt of the returned duos.
+
+**Legal basis**: Art. VI.37 §2 WER (the consumer gets the more favourable reading); Art. 1649septies §1 old Civil Code.
+
+**Old**
+
+> Timing: the refund follows within 14 days of receiving and inspecting the returned duos, to your original payment method.
+
+**New**
+
+> Timing: the refund follows within 14 days of receiving the returned duos, to your original payment method.
+
+
+### TB3 · Terms clause 4.7.3 (which deductions on which refund route)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `terms-of-service`
+
+**Why**: Astra B1: 4.7.3 incorporated the deductions of 4.7.4 for every refund. It now names the only possible deduction per route: diminished value on a statutory withdrawal, none on a legal-guarantee refund, the stated ones under the voluntary guarantees.
+
+**Legal basis**: Art. VI.50 §1, VI.51 §2 and §5 WER; Art. 1649quinquies and 1649octies old Civil Code.
+
+**Old**
+
+> We never charge administrative fees on a refund. The only deductions are those set out in clauses 4.3, 4.4, 4.6 and 4.7.4.
+
+**New**
+
+> We never charge administrative fees on a refund. On a statutory withdrawal, the only possible deduction is for diminished value under clause 4.6 (Article VI.51 §2 WER); on a refund under the legal guarantee of conformity there is none. Under our voluntary guarantees, the deductions are those set out in clauses 4.3, 4.4 and 4.7.4.
+
+
+### TB4 · Terms clause 4.7.4 (Care Credit and refunds)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `terms-of-service`
+
+**Why**: Astra B1 (blocker; audit P1-2): spent Care Credit could be deducted from any refund, statutory withdrawal and legal-guarantee refunds included. The clause now keeps apart credit spent to pay for the order (restored), credit earned from the refunded payment (lapses from the balance, a change to the balance and never a deduction), the statutory routes (full refund, nothing deducted, spent credit not claimed back, because a consumer bears no liability for exercising the right of withdrawal and a term limiting the guarantee is void) and the voluntary routes (clauses 4.3, 4.4 and 9.9, where spent earned credit is deducted as those clauses state). Business note for Victor: releasing earned Care Credit only after the 14-day withdrawal period would remove the exposure; that is a Loop setting, not legal text.
+
+**Legal basis**: Art. VI.50 §1 WER (reimbursement of all payments); Art. VI.51 §5 WER (“kan de consument in geen enkel opzicht aansprakelijk worden gesteld ingevolge de uitoefening van zijn herroepingsrecht”); Art. VI.63 WER (waivers deemed unwritten); Art. 13 and 14(5) Directive 2011/83/EU; Art. 1649quinquies and 1649octies old Civil Code.
+
+**Old**
+
+> Orders paid partly with Care Credit: the money paid goes back to your original payment method and the Care Credit you used returns to your balance. Care Credit earned from the refunded order is removed, or deducted from the refund if you already spent it. Care Credit is never paid out in cash.
+
+**New**
+
+> Care Credit and refunds: if you paid part of an order with Care Credit, the money you paid goes back to your original payment method and the Care Credit you used returns to your balance. Care Credit earned from a payment that is refunded lapses from your balance, because the payment it rewarded no longer exists. Under your statutory right of withdrawal (clause 4.1) and under the legal guarantee of conformity (clause 7), you always receive the full refund the law requires: we never deduct Care Credit from it, and we do not claim back Care Credit you already spent (Articles VI.50 §1, VI.51 §5 and VI.63 WER; Articles 1649quinquies and 1649octies of the old Civil Code). Only under our voluntary money-back guarantees (clauses 4.3 and 4.4) and the renewal refunds in clause 9.9 is Care Credit that was earned from the refunded payment and already spent deducted from the refund, as those clauses say. Care Credit is never paid out in cash.
+
+
+### TB5 · Terms clause 7.6 (not a lack of conformity: PAO)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_EAKJLC/content` · policy `terms-of-service`
+
+**Why**: Astra, observation 6 (non-blocker): a conformity defect that appeared before the Period After Opening or expiry date passed must not be refused because that date later passed.
+
+**Legal basis**: Art. 1649quater §1 and §4 old Civil Code.
+
+**Old**
+
+> use after the PAO or the expiry date.
+
+**New**
+
+> use after the PAO or the expiry date, although a lack of conformity that appeared before that date stays covered.
+
+
+### TB6 · Terms clause 10.6 (Care Credit, refunds)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_nEOBgC/content` · policy `terms-of-service`
+
+**Why**: Astra B1: clause 10.6 repeated the blanket clawback for “an order that is refunded”. It now follows 4.7.4: credit used is restored, credit earned from the refunded payment lapses, nothing is deducted and nothing claimed back on the statutory routes, deduction only under the voluntary guarantees and clause 9.9.
+
+**Legal basis**: Same as TB4.
+
+**Old**
+
+> Refunds: if an order is refunded, the Care Credit you used on it returns to your balance; Care Credit earned from it is removed, or deducted from the refund if you already spent it (clause 4.7).
+
+**New**
+
+> Refunds: if an order is refunded, the Care Credit you used on it returns to your balance and the Care Credit earned from the refunded payment lapses. On a statutory withdrawal or a refund under the legal guarantee, nothing is deducted from your refund and spent Care Credit is not claimed back; only under our voluntary guarantees and clause 9.9 is spent Care Credit earned from the refunded payment deducted (clause 4.7.4).
+
+
+### CB1 · Consumer Rights section 3.1, third bullet (what a withdrawing member returns)
+
+**Setting**: `page.consumer-rights:legal_toc_section_gYznx3/content_section_iDEfUH/content` · policy `refund-policy`
+
+**Why**: Same as TB1, in the summary.
+
+**Legal basis**: Art. VI.51 §1 and §5 WER.
+
+**Old**
+
+> • Send the goods back within 14 days of telling us. You may check them
+
+**New**
+
+> • Send the goods back within 14 days of telling us; for a membership that is everything delivered under it, the Welcome Kit included. You may check them
+
+
+### CB2 · Consumer Rights section 3.6, step 3 (Care Credit and refunds)
+
+**Setting**: `page.consumer-rights:legal_toc_section_gYznx3/content_section_iDEfUH/content` · policy `refund-policy`
+
+**Why**: Astra B1, in the summary: the statutory routes refund in full with nothing deducted and spent credit not claimed back; only the money-back guarantees deduct spent credit.
+
+**Legal basis**: Same as TB4.
+
+**Old**
+
+> If you paid partly with Care Credit, that credit returns to your balance. Care Credit is never paid out in cash.
+
+**New**
+
+> If you paid partly with Care Credit, that credit returns to your balance, and the Care Credit earned from the refunded payment lapses. Under your legal rights, nothing is deducted from your refund and spent Care Credit is not claimed back; only under our money-back guarantees (3.3 and 3.4) is spent Care Credit deducted. Care Credit is never paid out in cash.
+
+
+### CB3 · Consumer Rights section 4.2.2 (serious defect)
+
+**Setting**: `page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `refund-policy`
+
+**Why**: Astra, observation 5 (non-blocker): the summary omitted the serious-defect trigger for price reduction or termination that Terms 7.4 states.
+
+**Legal basis**: Art. 1649quinquies §5, 3° old Civil Code.
+
+**Old**
+
+> or does not solve the problem, you can ask for a proportionate price reduction
+
+**New**
+
+> or does not solve the problem, or if the defect is serious enough to justify it at once, you can ask for a proportionate price reduction
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
@@ -518,45 +674,66 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 | 14-day period; start at physical possession; for a contract for regular delivery of goods, at the first delivery | Art. VI.47 §1 and §2 WER, consolidated Justel text | https://www.ejustice.just.fgov.be/eli/wet/2013/02/28/2013A11134/justel |
 | How to withdraw: model form or any other unambiguous statement; sending before the end of the period is enough | Art. VI.49 §1 and §2 WER (same text) | same |
 | Refund of all payments including delivery costs, without undue delay and within 14 days of the day the trader is informed; same payment means; may withhold until the goods are back or proof of sending is supplied, whichever first | Art. VI.50 §1 and §3 WER (same text); FPS Economy news page and ConsumerConnect (“binnen de 14 dagen nadat je … hebt laten weten”) | https://news.economie.fgov.be/270128-een-impulsieve-online-aankoop-er-is-een-weg-terug/ · https://consumerconnect.be/nl/themas/aankoop-product-of-dienst/herroepingsrecht/aankoop-op-afstand/geld-niet-terug |
-| Consumer returns within 14 days and pays the direct return cost; liable only for diminished value from handling beyond what is needed to establish nature, characteristics and functioning; never liable if the withdrawal information was missing | Art. VI.51 §1 and §2 WER (same text) | same as Justel |
+| Consumer returns within 14 days and pays the direct return cost; liable only for diminished value from handling beyond what is needed to establish nature, characteristics and functioning; never liable if the withdrawal information was missing; **no other liability whatsoever for exercising the right (§5)** | Art. VI.51 §1, §2 and §5 WER (same text: “kan de consument in geen enkel opzicht aansprakelijk worden gesteld ingevolge de uitoefening van zijn herroepingsrecht”) | same as Justel |
+| Terms by which the consumer waives the rights of this section are deemed unwritten | Art. VI.63 WER (same text) | same |
+| Confirmation of the contract on a durable medium within a reasonable time and at the latest at delivery, containing all the Art. VI.45 §1 information (withdrawal information and model form included) unless already given on a durable medium before the contract | Art. VI.46 §7 WER (same text); CJEU C-49/11 Content Services (a link to a website is not a durable medium) | same; https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A62011CJ0049 |
 | Hygiene exception needs sealed goods whose seal was broken after delivery | Art. VI.53, 5° WER (same text); CJEU C-681/17 (slewo) as cited in the audit | same |
 | Pre-contract information must say that the withdrawal function exists and where it is | Art. VI.45 §1, 8° WER as amended (“… en, in voorkomend geval, informatie over de beschikbaarheid en de plaats van de herroepingsfunctie bedoeld in artikel VI.61/2”) | same |
-| The online withdrawal function: label “hier de overeenkomst herroepen”, available during the whole period, name + contract data + e-mail, “herroeping bevestigen”, acknowledgement on a durable medium with content, date and time | Art. VI.61/2 WER, inserted by the Act of 19 July 2026 (W 2026-07-19/05, art. 23), in force 14 August 2026 (Justel annotation); FPS Economy: “Sinds 14 augustus 2026 zijn ondernemingen verplicht een herroepingsfunctie aan te bieden” | same; https://www.droitbelge.be/news_detail.asp?id=1199 (FR label “renoncer au contrat ici”) |
+| The online withdrawal function: label “hier de overeenkomst herroepen” / “renoncer au contrat ici”, available during the whole period, name + contract data + e-mail, “herroeping bevestigen” / “confirmer la rétractation”, acknowledgement on a durable medium with content, date and time | Art. VI.61/2 WER, inserted by the Act of 19 July 2026 (W 2026-07-19/05, art. 23), in force 14 August 2026 (Justel annotation); Astra verified both labels against the Moniteur of 4 August 2026, p. 56 | same; https://www.ejustice.just.fgov.be/mopdf/2026/08/04_1.pdf#page=56 |
 | EU basis of the above | Art. 13, 14 and 16(e) of Directive 2011/83/EU (text checked on the legislation.gov.uk mirror because EUR-Lex refuses automated reads); Art. 11a inserted by Directive (EU) 2023/2673, applicable 19 June 2026 | https://eur-lex.europa.eu/eli/dir/2011/83/oj · https://eur-lex.europa.eu/eli/dir/2023/2673/oj |
 | Conformity requirements (description, fitness, quality and durability normal for the goods, public statements) | Art. 1649ter old Civil Code, as replaced by the Law of 20 March 2022 (in force 1 June 2022) | https://www.kustcodex.be/kustcodex-consult/plainWettekstServlet?wettekstId=31650&lang=nl |
 | Two-year liability (§1), two-month notification (§2), two-year presumption “tot bewijs van het tegendeel”, unless incompatible with the nature of the goods or of the defect (§4) | Art. 1649quater old Civil Code | …wettekstId=31651 |
 | Consumer chooses repair or replacement unless impossible or disproportionate (§§1–2); price reduction or termination when not done, refused, persisting, serious (§5); no termination for a minor defect, seller proves it is minor | Art. 1649quinquies old Civil Code; FPS Economy and ConsumerConnect guarantee pages | …wettekstId=31652 · https://news.economie.fgov.be/214976-wettelijke-garantie-consument-is-beter-beschermd/ |
-| A commercial guarantee binds on its stated terms and advertising; must say the legal guarantee is unaffected | Art. 1649septies old Civil Code | …wettekstId=31654 |
+| A commercial guarantee binds on its stated terms and advertising; must be given on a durable medium at the latest at delivery and say the legal guarantee is unaffected | Art. 1649septies §1 and §2 old Civil Code | …wettekstId=31654 |
 | Terms that limit the consumer's rights are void | Art. 1649octies old Civil Code | …wettekstId=31655 |
 | EU basis of the above | Directive (EU) 2019/771, Art. 6, 7, 10, 11, 12, 13, 21 | https://eur-lex.europa.eu/eli/dir/2019/771/oj |
 | A cosmetic product is a substance or mixture; a toothbrush or floss is an article | Art. 2(1)(a) Regulation (EC) No 1223/2009 (mirror read); General Product Safety Regulation (EU) 2023/988 covers the articles | https://eur-lex.europa.eu/eli/reg/2009/1223/oj · https://eur-lex.europa.eu/eli/reg/2023/988/oj |
 | Compliance may not be presented as a benefit; free-from claims | Regulation (EU) No 655/2013, common criterion 1; Commission technical document 2017 (as cited in the audit) | https://eur-lex.europa.eu/eli/reg/2013/655/oj |
 
-Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were read on legislation.gov.uk (identical text of the original directives) and through the Belgian transposition. This is drafting against the published law by an AI, not a signed opinion; the five counsel points of the 5 Oct audit stay open, with the withdrawal function (point 4) now partly answered by the published Act.
+Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were read on legislation.gov.uk (identical text of the original directives) and through the Belgian transposition. This is drafting against the published law by an AI, not a signed opinion; the counsel points in §8 stay open.
 
 ## 5. Not changed, and why
 
-- **Territorial scope (EU only) and the UK.** The brief lists D3 as “all 27 EU states plus the UK”. The record in `input/legal-offer/work/2026-10-06/legal-proposals-countries-and-open-decisions.md` adds a 9 Oct revision by Victor: UK excluded for now; cover all EU member states in the Terms. The live Terms, Consumer Rights, shipping and subscription policies say “member states of the European Union”, and the Markets question is LR1 blocker 5. This lane changed nothing here. If Victor confirms the UK is in, Terms 2.3, 5.1, 8.2, 9.10, 11.1, 15.3 and 15.4, Consumer Rights 5 and 9 and the shipping policy change together with Markets, shipping zones and the UK items of the 6 Oct file.
-- **What a member sends back on a statutory withdrawal, and the Welcome Kit** (audit P0-5, open point). The corrected text says “send the goods back”, which under Art. VI.51 means everything delivered under the contract, the kit included, with the loss-of-value rule for anything used. If Victor prefers that a withdrawing member keeps the kit, one sentence in Terms 4.1.4 does it; his call.
-- **“For a membership, the period runs from your first delivery”** is kept (Art. VI.47 §2, 2° c). The audit's counsel point on the Year (two deliveries) stays open.
-- **The Year money-back guarantee keeps “unopened (pump never primed)”** and the €59 deduction. They are conditions of the voluntary 60-day guarantee, which may be narrower than the law as long as the statutory right is untouched; clauses 4.1.5 and 4.5 and section 3.5 say so.
-- **Clause 4.6.1 and section 3.7.1 (“without harsh chemical preservatives” / “without relying on harsh preservatives”)** are a free-from claim inside a legal text (audit P2-2). Not a blocker-1 item; recommended deletion in the next legal round (handoff to gate-claims).
+- **Territorial scope (EU only) and the UK.** The brief lists D3 as “all 27 EU states plus the UK”. The record in `input/legal-offer/work/2026-10-06/legal-proposals-countries-and-open-decisions.md` adds a 9 Oct revision by Victor: UK excluded for now; cover all EU member states in the Terms. The live Terms, Consumer Rights, shipping and subscription policies say “member states of the European Union”, Astra found no internal contradiction, and the Markets question is LR1 blocker 5. This lane changed nothing here. If Victor confirms the UK is in, Terms 2.3, 5.1, 8.2, 9.10, 11.1, 15.3 and 15.4, Consumer Rights 5 and 9 and the shipping policy change together with Markets, shipping zones and the UK items of the 6 Oct file.
+- **“For a membership, the period runs from your first delivery”** is kept (Art. VI.47 §2, 2° c). Whether the Year (two deliveries) is a regular-delivery contract or one order delivered in parts stays a counsel point.
+- **The Year money-back guarantee keeps “unopened (pump never primed)”** and the €59 deduction. They are conditions of the voluntary 60-day guarantee, which may be narrower than the law as long as the statutory right is untouched; clauses 4.1.5 and 4.5 and section 3.5 say so, and Astra confirmed they are confined to the voluntary route.
+- **Clause 9.9 (renewal refunds)** keeps “Care Credit earned on a refunded amount is removed, or deducted if you already spent it (clause 4.7)”. A renewal refund (cancellation before dispatch, or the one-month exit after a Year renews) is a contractual route, not statutory withdrawal, and the corrected 4.7.4 names clause 9.9 as one of the only two routes where spent earned credit is deducted, so the cross-reference can no longer reintroduce a blanket rule (Astra, observation 1). The subscription policy, which quotes clause 9 word for word, therefore needs no new paste.
+- **Clause 4.6.1 and section 3.7.1 (“without harsh chemical preservatives” / “without relying on harsh preservatives”)** are a free-from claim inside a legal text (audit P2-2). Not a blocker-1 item; routed to gate-claims.
 - **Privacy Policy**: no blocker-1 item. The cookie-law citation (audit P0-3 text fix) is gate-consent's.
-- **“Download the form (PDF)” still links `#`** on both pages and in both policies: the PDFs exist in `input/legal-offer/legal/forms/` and must be uploaded to Files and linked (ADMIN-STEPS step 7).
+- **“Download the form (PDF)” still links `#`** on both pages and is plain text in the policy bodies: the PDFs exist in `input/legal-offer/legal/forms/` and are linked as the **last** admin step, after every whole-body paste and translation registration (ADMIN-STEPS step 8; Astra, observation 3).
 - **“Last updated October 2026”** stays; a dated version line (audit P2-13) belongs to the legal-offer branch when it logs v4.5.
 
 ## 6. Handoffs
 
-- **gate-withdrawal**: the page handle `/pages/withdrawal` and the labels used in the links: EN “Withdraw from contract here”, NL “Hier de overeenkomst herroepen” (statutory wording, Art. VI.61/2 §1), FR “Renoncer au contrat ici” (wording quoted by Belgian counsel for the CDE; verify against the Moniteur text of the Act of 19 July 2026 before the FR page goes live). Terms 4.7.2 now says we acknowledge a withdrawal by email and confirm the return address; the function's acknowledgement (content, date, time, Art. VI.61/2 §4) must do that. The three model-form PDFs.
-- **source-copy**: register the 14 changed settings in `TRANSLATIONS-HANDOFF.md` (NL and FR given), refresh the EN digests of batch-04 for those settings, and keep the `legal-review` status on them. The policy bodies are admin (Translate & Adapt), `POLICIES-PASTE.md`.
-- **legal-offer branch (canonical files, D8)**: apply §3 to `legal/terms-and-conditions/en.md` and `legal/consumer-rights/en.md`, log v4.5 in `legal/CHANGELOG.md`, add the NL and FR files, and update the Figma legal frames. This lane did not edit the input copies.
+- **gate-withdrawal**: the page handle `/pages/withdrawal` and the link labels, now verified by Astra against the Moniteur: EN “Withdraw from contract here”, NL “Hier de overeenkomst herroepen”, FR “Renoncer au contrat ici”; confirm step “herroeping bevestigen” / “confirmer la rétractation”. Terms 4.7.2 says we acknowledge a withdrawal by email and confirm the return address; the function's acknowledgement (content, date, time, Art. VI.61/2 §4) must do that. The three model-form PDFs.
+- **source-copy**: register the 15 changed settings in `TRANSLATIONS-HANDOFF.md` (NL and FR given), refresh the EN digests of batch-04 for those settings, and keep the `legal-review` status on them. The policy bodies are admin (Translate & Adapt), `POLICIES-PASTE.md`.
+- **legal-offer branch (canonical files, D8)**: apply §3 and §3b to `legal/terms-and-conditions/en.md` and `legal/consumer-rights/en.md`, log v4.5 in `legal/CHANGELOG.md`, add the NL and FR files, and update the Figma legal frames. Until that is done, a republish from the canonical files would restore the defects (Astra, observation 7). This lane did not edit the input copies.
 - **gate-claims**: the free-from line in 4.6.1 / 3.7.1.
-- **Victor / notifications (audit P0-11)**: the order confirmation and Loop's first-membership email must carry the corrected Terms and withdrawal information on a durable medium; a link is not enough.
+- **Victor, launch gate G1 (audit P0-11, Astra B2)**: the order confirmation and Loop's first-membership email must carry the Terms with the withdrawal information, the model form and the commercial-guarantee conditions in a retainable form, in the customer's language, by delivery at the latest; evidence is a real received email. Steps and acceptance check in `ADMIN-STEPS.md` step 0. A link to a changeable page is not a durable medium (CJEU C-49/11).
+- **Victor, business setting (not legal text)**: releasing earned Care Credit only after the 14-day withdrawal period would remove the exposure that 4.7.4 now accepts (credit spent, then withdrawal, nothing claimed back). A Loop/Care Credit setting; counsel may also review alternatives (§8).
 
 ## 7. Files changed in this branch
 
-- `templates/page.terms-and-conditions.json`: EN values of six settings (clause 2, 3, 4, 7 content, 7 examples, Annex).
+- `templates/page.terms-and-conditions.json`: EN values of seven settings (clause 2, 3, 4, 7 content, 7 examples, 10, Annex).
 - `templates/page.consumer-rights.json`: EN values of eight settings (key card 3, sections 1, 2 content + title + menu label, 3, 4, 10).
-- `docs/launch-gate/legal/CHANGES.md`, `POLICIES-PASTE.md`, `TRANSLATIONS-HANDOFF.md`, `ADMIN-STEPS.md` (new).
+- `docs/launch-gate/legal/CHANGES.md`, `POLICIES-PASTE.md`, `TRANSLATIONS-HANDOFF.md`, `ADMIN-STEPS.md`.
 
-Checks: `shopify theme check --fail-level error` (0 errors, baseline warnings), the two templates still parse as JSON, every replacement anchored exactly once (or the stated count) in the template, in the live EN/NL/FR policy bodies and in the batch-04 NL/FR values; grep of the new templates and policy bodies for “unopened goods”, “of approval”, “return authorisation”, “notified as cosmetics”, “eligible, unopened”: none left in the statutory clauses.
+Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings), the two templates still parse as JSON, every replacement anchored exactly once (or the stated count) in the templates (from the 5bab3ad base, R57 then R57b), in the live EN/NL/FR policy bodies and in the batch-04 NL/FR values; grep of the new templates and policy bodies for “unopened goods”, “of approval”, “return authorisation”, “notified as cosmetics”, “eligible, unopened”, “deducted from the refund if you already spent it”: none left in the statutory clauses.
+
+## 8. R57b: Astra's R57 review, what was done
+
+| Astra item | Class | Done in R57b |
+|---|---|---|
+| B1 spent Care Credit could reduce a statutory refund (4.7.3, 4.7.4, 10.6) | blocker | TB3, TB4, TB6 in the Terms, CB2 in the charter, all three languages, all three Terms bodies; the credit spent to pay (restored) and the credit earned from the refunded payment (lapses) are kept apart; the statutory routes refund in full, nothing deducted, nothing claimed back (Art. VI.50 §1, VI.51 §5, VI.63 WER; 1649quinquies, 1649octies); deduction only under 4.3, 4.4 and 9.9 |
+| B2 durable-medium confirmation deferred beyond the release checks | launch gate | `ADMIN-STEPS.md` step 0 is now the first item and a go/no-go gate: which Shopify notification and which Loop email, what they carry, how, and the acceptance check (a real received email in each language shows the Terms, the withdrawal information, the model form and the links) |
+| Welcome Kit on a membership withdrawal | non-blocker | TB1, CB1: “the goods” of a membership are everything delivered under it, kit included; no fee, no €59 on the statutory route |
+| NL/FR withdrawal labels | verified, closed | unchanged; confirm-step labels added to the gate-withdrawal handoff |
+| 1 subscription policy keeps the 9.9 credit sentence and points to 4.7 | non-blocker | 4.7.4 scopes the deduction to 4.3, 4.4 and 9.9 by name; 9.9 unchanged (§5) |
+| 2 NL/FR shipping and subscription policies link the legacy `/en/pages/terms-and-conditions` | non-blocker, admin | `ADMIN-STEPS.md` step 7: localized `/policies/terms-of-service` links in the four short policies, EN/NL/FR |
+| 3 PDF links would be overwritten by later whole-body pastes | non-blocker, rollout | `ADMIN-STEPS.md`: PDF links are step 8, after every paste and translation registration, with EN/NL/FR checks on policies and designed pages, theme settings included |
+| 4 per-locale redirect checks; one release window | non-blocker, rollout | `ADMIN-STEPS.md` steps 5 and 9: `/nl/` and `/fr/` legacy paths checked one by one; release-window rule kept |
+| 5 charter 4.2 abbreviates the serious-defect trigger | non-blocker | CB3 adds it |
+| 6 actual diminished value, PAO carve-out, Year “receiving and inspecting” | non-blocker | 4.6.3 already says “the resulting loss of value” (actual, not fixed); TB5 adds the PAO carve-out; TB2 drops “and inspecting” |
+| 7 canonical files still old; harsh-preservatives claim | non-blocker, handoff | §6: legal-offer branch and gate-claims |
+
+Follow-ups, not in this lane: the migration redirect CSV (not in the input set; cannot be certified here); counsel on any alternative to removing the statutory clawback, on the Year as a regular-delivery contract, on actual loss-of-value and kit handling, and on the complete multilingual contract in its operational context; the NL model-form style differences between theme and policy (equivalent in meaning, left as they are); LR1 blockers 2 to 7.
