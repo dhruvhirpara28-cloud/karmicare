@@ -54,6 +54,10 @@
   var glows = {
     day: 'rgba(var(--kc-brand-original-off-white-rgb), 0.35), rgba(' + sky + ', 0.08) 45%, rgba(' + sky + ', 0)',
     night: 'rgba(' + sky + ', 0.2), rgba(' + sky + ', 0.07) 45%, rgba(' + sky + ', 0)',
+    // The sun's own Awake glow, from the top centre, lies over the hero heading: at 10% its core
+    // keeps the muted second line above 4.5:1 in every frame, even right under the core (R54d B1).
+    // Asleep keeps 5.4:1 there at 20%, so it stays as on a click.
+    sunDay: 'rgba(var(--kc-brand-original-off-white-rgb), 0.1), rgba(' + sky + ', 0.03) 45%, rgba(' + sky + ', 0)',
   };
   var shown = null; // the mode on the page
   var pending = null; // a request that waits for the gap: { mode, origin }
@@ -90,7 +94,7 @@
     circle.style.cssText =
       'display:block;position:absolute;border-radius:50%;opacity:0;' +
       'left:' + (x - radius) + 'px;top:' + (y - radius) + 'px;width:' + 2 * radius + 'px;height:' + 2 * radius + 'px;' +
-      'background:radial-gradient(closest-side, ' + glows[mode] + ');';
+      'background:radial-gradient(closest-side, ' + (origin === 'sun' && mode === 'day' ? glows.sunDay : glows[mode]) + ');';
     layer.append(circle);
     document.body.append(layer);
     var running = {
