@@ -1,0 +1,85 @@
+{%- comment -%}
+  Prints a metaobject text field the way an inline_richtext setting prints:
+  inline HTML only (strong, em, a), no wrapping <div> or <p>, so the result
+  can sit inside a heading. Shopify's own metafield_tag wraps rich text in
+  <div class="metafield-rich_text_field"><p>…</p></div>, which cannot.
+
+  A rich_text_field value is a JSON tree: root > paragraph | heading | list >
+  text (value, bold, italic) | link (url, title, target, children: text).
+  Paragraphs and headings are joined with <br>; list items are run together,
+  a list has no inline equivalent. Any other field type (for example a
+  multi_line_text_field used in place of rich text) prints escaped, with
+  its line breaks as <br>.
+
+  Accepts:
+  - field: {Object} The metaobject field (a metafield object), for example card.heading
+{%- endcomment -%}
+{%- liquid
+  if field.type == 'rich_text_field'
+    for node in field.value.children
+      unless forloop.first
+        echo '<br>'
+      endunless
+      assign inline_nodes = node.children
+      if node.type == 'list'
+        assign inline_nodes = '' | split: ''
+        for item in node.children
+          assign inline_nodes = inline_nodes | concat: item.children
+        endfor
+      endif
+      for child in inline_nodes
+        if child.type == 'link'
+          echo '<a href="'
+          echo child.url | escape
+          echo '"'
+          if child.title != blank
+            echo ' title="'
+            echo child.title | escape
+            echo '"'
+          endif
+          if child.target != blank
+            echo ' target="'
+            echo child.target | escape
+            echo '"'
+            if child.target == '_blank'
+              echo ' rel="noopener"'
+            endif
+          endif
+          echo '>'
+          for text in child.children
+            if text.bold
+              echo '<strong>'
+            endif
+            if text.italic
+              echo '<em>'
+            endif
+            echo text.value | escape
+            if text.italic
+              echo '</em>'
+            endif
+            if text.bold
+              echo '</strong>'
+            endif
+          endfor
+          echo '</a>'
+        else
+          if child.bold
+            echo '<strong>'
+          endif
+          if child.italic
+            echo '<em>'
+          endif
+          echo child.value | escape
+          if child.italic
+            echo '</em>'
+          endif
+          if child.bold
+            echo '</strong>'
+          endif
+        endif
+      endfor
+    endfor
+  else
+    echo field.value | escape | newline_to_br
+  endif
+-%}
