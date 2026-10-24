@@ -68,8 +68,9 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 49 | Parked / after launch | USD native check: the converted amounts read NL "US$ 45,67" and FR "45,67 $US" (Intl nl-US/fr-US) beside Shopify's "$51.81"; option 2 should use the active market's money format. Parked until a non-EUR market is active (Victor, 23 Oct: EU euro markets only) |
 | 50 | Parked / after launch | USD native check: the Year Care Credit comes from the Shopify-rounded USD price, consistent with the prices; note for option 2's receipt. Parked until a non-EUR market is active (Victor, 23 Oct: EU euro markets only) |
 | 51 | Parked / after launch | USD native check: no kit tiles in the US market, `settings.welcome_kit_free_product` is empty there (kit product probably not published for the US, Admin). Parked until a non-EUR market is active (Victor, 23 Oct: EU euro markets only) |
+| 52 | In merchant-edit | Victor, 24 Oct: the gallery hero as large as fits up to 1.5x, overflowing its frame with 16px clear of the viewport and the buybox text, scale held at the sticky pin, no load jump, the landed end image when the video cannot play or errors. `8048f99`, `d2e9d30`, `9be9ecb`–`e33c9d8` (R51–R52c), merchant-edit `9ce946b`. Not live yet: the live theme still has the clipped 1.2x pose of `b9f2e0e`, so the intro is cut at the frame's top there |
 
-**Counts (53 lines)**: in merchant-edit 14 · ready to land 0 · in progress 2 · waiting for Victor 0 · parked / after launch 28 · dropped 9.
+**Counts (54 lines)**: in merchant-edit 15 · ready to land 0 · in progress 2 · waiting for Victor 0 · parked / after launch 28 · dropped 9.
 
 ### Waiting for Victor
 
@@ -235,3 +236,4 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 23 Oct: row 38 changed to option 2 by Victor (convert every fixed euro amount, homepage included) and moved to in progress; plan added under Currency.
 - 23 Oct: rows 49–51 added and parked by Victor until the US market is live (USD notation, Year credit from the USD price, no kit tiles in the US). Counts updated.
 - 23 Oct: rows 38 and 49–51 parked until a non-EUR market is active (Victor: EU euro markets only; SEK, CHF, GBP and USD switched off in Admin → Markets). Counts updated.
+- 24 Oct: row 52 (gallery hero fit up to 1.5x, landed end image) added, in merchant-edit `9ce946b`. Counts updated.
