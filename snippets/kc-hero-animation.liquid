@@ -42,11 +42,28 @@
     .thumbnail .kc-hero-animation__thumb {
       object-fit: contain;
     }
-    body.night-mode .kc-hero-animation .kc-hero-animation__mode--am,
-    body:not(.night-mode) .kc-hero-animation .kc-hero-animation__mode--pm,
     body.night-mode .thumbnail .kc-hero-animation__thumb--am,
     body:not(.night-mode) .thumbnail .kc-hero-animation__thumb--pm {
       display: none;
+    }
+    /* Both panels stay in place, one over the other (their images and videos are positioned on
+       <kc-hero-animation>, so the layout does not change); the other mode's panel is hidden and
+       takes no clicks. On an Awake/Asleep switch the old one fades out and the new one in over
+       0.3s, with the clock's roll (Victor, 24 Oct); reduced motion switches at once. */
+    body.night-mode .kc-hero-animation .kc-hero-animation__mode--am,
+    body:not(.night-mode) .kc-hero-animation .kc-hero-animation__mode--pm {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .kc-hero-animation .kc-hero-animation__mode {
+        transition: opacity 0.3s ease, visibility 0s;
+      }
+      body.night-mode .kc-hero-animation .kc-hero-animation__mode--am,
+      body:not(.night-mode) .kc-hero-animation .kc-hero-animation__mode--pm {
+        transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+      }
     }
   </style>
   <script>
@@ -56,6 +73,10 @@
     // of the poster when the video cannot play: with reduced motion, when autoplay is refused and
     // there is no animated WebP, and on a slow connection (save-data or 2G, or no playback after
     // 3s on screen). Then the video is dropped, so the kit does not jump back into its flight.
+    // A media error, before or after playback starts, takes the same way out as a refusal.
+    // On an Awake/Asleep switch the new mode's video starts again from its first frame, so the
+    // brushes land again (Victor, 24 Oct); off screen it does so once it comes into view. The old
+    // mode's video pauses at once, so two never play together.
     if (!customElements.get('kc-hero-animation')) {
       customElements.define(
         'kc-hero-animation',
@@ -84,7 +105,15 @@
             const activeMode = document.body.classList.contains('night-mode') ? 'pm' : 'am';
             const connection = navigator.connection;
             const slowConnection = connection && (connection.saveData || /2g/.test(connection.effectiveType || ''));
+            // A real switch, not an update from scrolling, visibility or another body class
+            if (this.mode && this.mode !== activeMode) {
+              const incoming = this.querySelector(`[data-kc-mode="${activeMode}"]`);
+              if (incoming) incoming.restart = true;
+            }
+            this.mode = activeMode;
             this.querySelectorAll('[data-kc-mode]').forEach((panel) => {
+              if (panel.dataset.kcMode === activeMode) panel.removeAttribute('aria-hidden');
+              else panel.setAttribute('aria-hidden', 'true');
               let video = panel.querySelector('video');
               if (this.motion.matches) {
                 // A panel with a still keeps it for good, also when reduced motion is switched off
@@ -125,12 +154,39 @@
                   },
                   { once: true }
                 );
+                // A media error, also after playback has started (R52 B3: MediaError 4 kept is-playing
+                // and the image hidden), ends the video for good: the still, else the animated WebP,
+                // else the poster. A source error counts once the last source has failed.
+                const failed = () => {
+                  if (!isCurrent(created)) return;
+                  const fallback = panel.dataset.still || panel.dataset.animated;
+                  if (fallback) {
+                    this.fallBack(panel, fallback);
+                    return;
+                  }
+                  clearTimeout(panel.slowTimer);
+                  panel.slowTimer = null;
+                  panel.setAttribute('data-refused', '');
+                  created.remove();
+                  panel.classList.remove('is-playing');
+                };
+                created.addEventListener('error', failed);
+                const sources = [...created.querySelectorAll('source')];
+                sources.forEach((source) =>
+                  source.addEventListener('error', () => {
+                    if (source === sources[sources.length - 1] || created.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) failed();
+                  })
+                );
                 video = created;
               }
               if (panel.dataset.still && !panel.classList.contains('is-playing') && !panel.slowTimer) {
                 panel.slowTimer = setTimeout(() => this.fallBack(panel, panel.dataset.still), 3000);
               }
               const playing = video;
+              if (panel.restart) {
+                panel.restart = false;
+                playing.currentTime = 0;
+              }
               playing.play()?.catch((error) => {
                 const fallback = panel.dataset.animated || panel.dataset.still;
                 if (error.name !== 'NotAllowedError' || !fallback || !isCurrent(playing)) return;

@@ -216,8 +216,8 @@
   transition: color 0.3s ease;
 }
 
-/* The time ticks like an odometer when it changes (sections/hero-karmicare.liquid): each digit
-   is a column 9, 0-9, 0 that the script moves one line per tick towards its value */
+/* The time rolls like an odometer when it changes (sections/hero-karmicare.liquid): each digit
+   is a column of 0-9 moved to its value, one line per digit */
 .kc-roll {
   --kc-roll-height: 1.25em;
   display: inline-flex;
@@ -237,12 +237,11 @@
 .kc-roll__strip {
   display: block;
   line-height: var(--kc-roll-height); /* a theme rule sets spans to normal; the step must match */
-  transform: translateY(calc(var(--kc-roll-pos, 1) * -1 * var(--kc-roll-height)));
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(calc(var(--kc-roll-digit, 0) * -1 * var(--kc-roll-height)));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.kc-roll.is-still .kc-roll__strip,
-.kc-roll__char.is-still .kc-roll__strip {
+.kc-roll.is-still .kc-roll__strip {
   transition: none;
 }
 
@@ -305,9 +304,9 @@ a.hero-karmicare__badge:hover .hero-karmicare__badge-arrow {
   box-shadow: var(--kc-elevation-md);
 }
 
-/* Ambassador rotation (Victor, 23 Oct): the section's script shows a random ambassador from the
-   Trusted Professionals cards on each page load, then the next one every 2s until each has been
-   shown once. The photo hides while the script picks one (.is-picking, set only by script, so
+/* Ambassador rotation (Victor, 23 Oct): the section's script shows two ambassadors per visit from
+   the Trusted Professionals cards, 4s apart, in an order that runs on across visits. The photo
+   hides while the script picks one (.is-picking, set only by script, so
    without JavaScript the block image stays); the old photo slides up and out while the next one
    comes in from below, inside the avatar's frame. */
 .hero-karmicare__badge-avatar-wrap[data-kc-rotate] {
