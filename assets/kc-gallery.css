@@ -8,16 +8,19 @@ media-gallery.kc-gallery-fit .product-media-container video {
 
 /* First gallery item, the hero animation. Across the whole animation its visible pixels span 5.8% to
    87.1% of the video height (the brush heads at the start, the floor shadow at the bottom); in the
-   landed last frame the left brush head starts at 16.8%, the right one at 19.3%.
+   landed last frame the left brush head starts at 16.8%, the right one at 19.3%. Poster, video,
+   animated WebP and the landed still share one img/video transform, so a swap never moves it.
    - Below 750 the frame is square and the video sits at its top, so the free space is below: 1.2x
      from the top, the animation lands at 6.2% to 92.9% of the frame, inside it (Victor, 20 Oct).
-   - From 750 the video fills the frame's height and shows large: 1.5x (Victor, 23 Oct, "hij mag echt
-     groot tonen"), scaled from the bottom so the floor shadow ends 1rem below the frame, on the
-     thumbnail strip's top edge. Nothing is cut: the frame and its two wrappers let it overflow, above
-     the frame up to the header and sideways into the free space (measured in Chrome at 1512x798, a
-     566px frame: the landed left brush head at 97px, 21px above the frame and under the 102px header;
-     the intro's heads reach about 3px, behind the sticky header). The video is not hit-testable, so its
-     transparent overflow never takes a click from the buybox or the header.
+   - From 750, as large as it fits, up to 1.5x (Victor, 24 Oct, "zo groot als past, tot 1,5"):
+     assets/kc-gallery.js finds the largest scale at which the whole animation keeps 16px clear of the
+     viewport's sides, the buybox text, the header and the viewport's bottom (R51), and sets
+     --kc-hero-scale with data-kc-hero-fit. The animation then scales from the bottom, the floor shadow
+     1rem below the frame, and overflows the frame and its wrappers, untouchable so the transparent
+     overflow takes no click.
+   - From 750 without that (no JavaScript, or less than 1.2x fits): the R50 pose inside the frame,
+     1.2x from the top, moved so the landed left brush head lines up with the buybox title 4.5rem below
+     the frame's top (Victor, 23 Oct).
    Thumbnails, the other items and the end CTA's hero stay as they are. */
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
   overflow: hidden;
@@ -30,21 +33,26 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video
 }
 
 @media screen and (min-width: 750px) {
-  media-gallery.kc-gallery-fit .product__media-item .product-media-container:has(.kc-hero-animation),
-  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode {
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
+    transform: translateY(calc(4.5rem - 1.2 * 16.8%)) scale(1.2);
+  }
+
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .product-media-container:has(.kc-hero-animation),
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode {
     overflow: visible;
   }
 
   /* Dawn clips every product media with .js .product__media { overflow: hidden !important }
      (assets/section-main-product.css); only an !important lets the hero overflow */
-  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation {
     overflow: visible !important;
   }
 
-  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
-  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
-    /* 1.5 x the 12.9% under the shadow, plus 1rem, takes the shadow's end 1rem below the frame */
-    transform: translateY(calc(1rem + 1.5 * 12.9%)) scale(1.5);
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode img,
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode video {
+    /* scale x the 12.9% under the shadow, plus 1rem, takes the shadow's end 1rem below the frame */
+    transform: translateY(calc(1rem + var(--kc-hero-scale, 1.2) * 12.9%)) scale(var(--kc-hero-scale, 1.2));
     transform-origin: center bottom;
     pointer-events: none;
   }
