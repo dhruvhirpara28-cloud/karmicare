@@ -347,9 +347,14 @@ if (!customElements.get('kc-marquee')) {
         this.frame = requestAnimationFrame((t) => this.tick(t));
       }
 
+      /* Offsets live in [0, setWidth). An eased glide lands within a float
+         rounding error of its target, and -1e-13 would wrap to
+         setWidth - 1e-13: the same picture, but the originals, and with them
+         the focused card, a whole set off to the left. Snap that edge to 0. */
       wrap(value) {
         if (!this.setWidth) return 0;
-        return ((value % this.setWidth) + this.setWidth) % this.setWidth;
+        const wrapped = ((value % this.setWidth) + this.setWidth) % this.setWidth;
+        return wrapped < 0.001 || this.setWidth - wrapped < 0.001 ? 0 : wrapped;
       }
 
       render() {
