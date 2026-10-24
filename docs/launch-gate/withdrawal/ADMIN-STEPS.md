@@ -24,18 +24,17 @@ Preview: Online Store → Themes → the dev theme → Customize → open `/page
 
 Apps → **Translate & Adapt** → Dutch → **Theme content** → filter on "Withdrawal function" (and, under the page template Consumer Rights, the block "4. Two-year legal guarantee of conformity" for the notice's three labels). Paste the NL column from `TRANSLATIONS-HANDOFF.md` §1 and §2, then the same for French. Copy the cells, do not retype the French ones (they carry no-break spaces before `?` and `:`).
 
-## 3. Put the function in the footer and the legal menu
+## 3. The two links in the footer's legal row
 
-Content → **Menus** (Online Store → Navigation on older admin) → the footer's legal menu (the one with Terms, Privacy, Consumer Rights):
+The footer's legal row (Terms and Conditions · Privacy Policy · Consumer Rights · Cookie preferences) is theme code, not a menu: `sections/footer.liquid` renders three page links from the Footer section's settings. Two links are added there by the global lane with `docs/launch-gate/withdrawal/footer-legal-links.patch` (Victor, 24 Oct): **Your legal guarantee rights**, which lands on Consumer Rights section 4 where the EU notice sits (`#two-year-guarantee`, the Commission's own example sentence, one click from the notice on every page), and **Withdraw from contract here**, the statutory label of the withdrawal function, which appears by itself once the page from step 1 exists.
 
-| Field | Value |
-|---|---|
-| Add menu item → Name | `Withdraw from contract here` |
-| Link | Pages → Withdrawal |
+Nothing to add in Content → Menus. Once the patch is live:
 
-Save. Translate & Adapt → Navigation → that menu: NL `Hier de overeenkomst herroepen`, FR `Renoncer au contrat ici`. These are the statutory words; keep them exact.
+1. Online Store → Themes → Customize → **Footer** section: the two link texts are prefilled in English ("Your legal guarantee rights", "Withdraw from contract here"); leave the "Withdrawal page" picker empty (the handle `withdrawal` is used) and the anchor on `two-year-guarantee`.
+2. Translate & Adapt → Dutch and French → **Theme content** → Footer: NL `Je wettelijke garantierechten` and `Hier de overeenkomst herroepen`, FR `Vos droits à la garantie légale` and `Renoncer au contrat ici`. The withdrawal words are statutory; keep them exact.
+3. Check on `/`, `/nl` and `/fr`: the guarantee link opens the Consumer Rights page in that language with section 4 at the top under the header; the withdrawal link opens `/pages/withdrawal` in that language.
 
-No extra menu item for the guarantee notice: the footer's existing **Consumer Rights** link is the route (Victor, 24 Oct), and on that page the card "2 years / Legal guarantee" jumps to section 4, where the notice sits.
+The row then reads: Terms and Conditions · Privacy Policy · Consumer Rights · Your legal guarantee rights · Withdraw from contract here · Cookie preferences.
 
 ## 4. The acknowledgement of receipt (Klaviyo transactional flow)
 
