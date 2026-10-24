@@ -794,13 +794,25 @@
             "svg_3": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewbox=\"0 0 16 16\" fill=\"none\">\n  <path d=\"M9.9987 2H11.9987C12.3669 2 12.6654 2.29848 12.6654 2.66667V13.3333C12.6654 13.7015 12.3669 14 11.9987 14H9.9987C9.63051 14 9.33203 13.7015 9.33203 13.3333V2.66667C9.33203 2.29848 9.63051 2 9.9987 2ZM3.9987 2H5.9987C6.36689 2 6.66536 2.29848 6.66536 2.66667V13.3333C6.66536 13.7015 6.36689 14 5.9987 14H3.9987C3.63051 14 3.33203 13.7015 3.33203 13.3333V2.66667C3.33203 2.29848 3.63051 2 3.9987 2Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"></path>\n</svg>",
             "heading_3": "Gift, pause or cancel"
           }
+        },
+        "legal_guarantee_notice_endcta": {
+          "type": "legal_guarantee_notice",
+          "settings": {
+            "summary_label": "Your legal guarantee rights",
+            "open_by_default": false,
+            "link_label": "More about the legal guarantee on europa.eu",
+            "full_size_label": "Open the notice full size",
+            "close_label": "Close the notice",
+            "pan_hint": "Swipe or scroll sideways to read the whole notice."
+          }
         }
       },
       "block_order": [
         "title_GDDYEK",
         "loop_subscriptions_gPKypi",
         "buy_buttons_Ffxhap",
-        "icon_with_text_endcta"
+        "icon_with_text_endcta",
+        "legal_guarantee_notice_endcta"
       ],
       "name": "t:sections.featured-product.presets.name",
       "settings": {

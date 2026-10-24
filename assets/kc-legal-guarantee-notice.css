@@ -1,10 +1,16 @@
 /* kc-legal-guarantee-notice.css: the EU harmonised notice on the legal guarantee of conformity
    (snippets/kc-legal-guarantee-notice.liquid). The notice itself is the Commission's unedited file;
-   this only lays out the line that opens it, the image and the two links. Tokens only, Day and Night
-   come from the mapped tokens on body. The image keeps the white the Regulation prescribes for the
-   notice (Annex I, note 2 d: #FFFFFF) on both themes. */
+   this lays out the line that opens it, the viewer, the scrolling region and the two links.
+   Tokens only, Day and Night come from the mapped tokens on body. The image keeps the white the
+   Regulation prescribes for the notice (Annex I, note 2 d: #FFFFFF) on both themes.
+
+   Legibility (Astra R58 B2, Commission guidelines §2.3: legible at default display size): the
+   image is never fitted to the column. --kc-lgn-readable-width is 800px, 1.34 x the file's
+   595.28 user units, so the notice's body text renders at about 13px. Narrower than that the
+   region scrolls sideways (a phone pans; the hint says so); the viewer is full-screen there. */
 
 .kc-lgn {
+  --kc-lgn-readable-width: 800px;
   margin: var(--kc-responsive-spacing-layout-md) 0 var(--kc-responsive-spacing-layout-2xl);
   font-family: var(--kc-font-role-backbone);
   color: var(--kc-mapped-text-default-heading);
@@ -54,6 +60,11 @@
   transform: translateY(2px) rotate(225deg);
 }
 
+/* With the viewer the line opens a dialog: the chevron becomes an outward arrow */
+.kc-lgn--viewer .kc-lgn__chevron {
+  transform: translateY(0) rotate(-45deg);
+}
+
 .kc-lgn__panel {
   padding: 4px 0 16px;
 }
@@ -62,10 +73,33 @@
   margin: 0;
 }
 
+.kc-lgn__hint {
+  margin: 0 0 8px;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+/* The scrolling region: the notice at its readable width, panned when the region is narrower */
+.kc-lgn__scroller {
+  overflow: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kc-mapped-border-control-default) transparent;
+}
+
+.kc-lgn__scroller:focus-visible,
+.kc-lgn__dialog-body:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: -2px;
+}
+
 .kc-lgn__image {
   display: block;
-  width: 100%;
-  max-width: 595px;
+  width: var(--kc-lgn-readable-width);
+  max-width: none;
   height: auto;
   aspect-ratio: 595.28 / 841.89;
   border: 1px solid var(--kc-mapped-border-primary-hairline);
@@ -96,6 +130,125 @@
   outline: 2px solid var(--kc-mapped-border-focus-strong);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* The viewer: a native dialog, full-screen on a phone, a centred card from 750px */
+.kc-lgn__dialog {
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-backbone);
+}
+
+.kc-lgn__dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.kc-lgn__dialog::backdrop {
+  background: var(--kc-mapped-surface-overlay-scrim, rgba(0, 0, 0, 0.55));
+}
+
+.kc-lgn__dialog-head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-lgn__dialog-title {
+  margin: 0;
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  font-weight: var(--font-700-weight, 700);
+  text-transform: uppercase;
+}
+
+.kc-lgn__close {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--kc-responsive-size-control-min-width);
+  height: var(--kc-responsive-size-control-min-height);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--kc-mapped-border-control-default);
+  border-radius: var(--kc-shape-radius-full);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.kc-lgn__close:hover {
+  background: var(--kc-mapped-surface-primary-default-hover);
+}
+
+.kc-lgn__close:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+/* In the viewer one region scrolls both ways; the inner scroller steps aside */
+.kc-lgn__dialog-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 12px 16px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kc-mapped-border-control-default) transparent;
+}
+
+.kc-lgn__dialog-body .kc-lgn__scroller {
+  overflow: visible;
+  max-width: none;
+}
+
+.kc-lgn__dialog-body .kc-lgn__links {
+  position: sticky;
+  left: 0;
+}
+
+.kc-lgn__dialog-body .kc-lgn__hint {
+  position: sticky;
+  left: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .kc-lgn__hint {
+    display: none;
+  }
+
+  .kc-lgn__dialog {
+    width: min(100vw - 32px, calc(var(--kc-lgn-readable-width) + 34px));
+    max-width: calc(100vw - 32px);
+    height: auto;
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    border: 1px solid var(--kc-mapped-border-primary-hairline);
+    border-radius: var(--kc-shape-radius-md);
+    box-shadow: var(--kc-elevation-lg);
+  }
+
+  /* 800px plus the card's padding fits: no sideways scroll on desktop */
+  .kc-lgn__dialog-body .kc-lgn__image {
+    width: 100%;
+    max-width: var(--kc-lgn-readable-width);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

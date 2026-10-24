@@ -268,7 +268,7 @@
 
         {%- comment -%} For the store inbox copy: the kind of message, when, and in which language {%- endcomment -%}
         <input type="hidden" name="contact[Type]" value="Withdrawal statement (Art. VI.61/2 WER)">
-        <input type="hidden" name="contact[Submitted at]" value="" data-kc-wd-submitted-at>
+        <input type="hidden" name="contact[Submitted at]" value="not stamped (no JavaScript): the time this message was received counts" data-kc-wd-submitted-at>
         <input type="hidden" name="contact[Language]" value="{{ request.locale.iso_code }}">
         <input type="hidden" name="contact[Page]" value="{{ request.origin }}{{ request.path }}">
         <input type="hidden" name="contact[body]" value="{{ statement | escape }}" data-kc-wd-body>
@@ -492,8 +492,8 @@
       "type": "textarea",
       "id": "success_ack_sent",
       "label": "Acknowledgement sent",
-      "info": "Shown when the acknowledgement email went out automatically. [email] becomes the address given.",
-      "default": "We have sent an acknowledgement of receipt to [email], with the content, date and time of your statement. Keep that email: it is your proof."
+      "info": "Shown when the acknowledgement route accepted the statement. [email] becomes the address given. An accepted request is not yet a delivered email, so the text says on its way, not sent.",
+      "default": "An acknowledgement of receipt is on its way to [email], with the content, date and time of your statement. Keep that email: it is your proof."
     },
     {
       "type": "textarea",

@@ -783,6 +783,24 @@
                   {%- endif -%}
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
+                {%- when 'legal_guarantee_notice' -%}
+                  {%- comment -%}
+                    The EU harmonised notice on the legal guarantee of conformity, the same entry
+                    point as on the product page (sections/main-product.liquid): this section's buy
+                    button goes straight to checkout, so the notice must sit on this path too
+                    (Astra R58 B1). After the trust row; the Loop widget keeps its place.
+                  {%- endcomment -%}
+                  {%- render 'kc-legal-guarantee-notice',
+                    id: block.id,
+                    layout: 'disclosure',
+                    summary_label: block.settings.summary_label,
+                    link_label: block.settings.link_label,
+                    full_size_label: block.settings.full_size_label,
+                    close_label: block.settings.close_label,
+                    pan_hint: block.settings.pan_hint,
+                    open: block.settings.open_by_default,
+                    block: block
+                  -%}
               {%- endcase -%}
             {%- endfor -%}
           </section>
@@ -1243,6 +1261,54 @@
         {
           "type": "paragraph",
           "content": "t:sections.featured-product.blocks.rating.settings.paragraph.content"
+        }
+      ]
+    },
+    {
+      "type": "legal_guarantee_notice",
+      "name": "Legal guarantee notice (EU)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "The EU harmonised notice on the legal guarantee of conformity (Regulation (EU) 2025/1960), the Commission's own file shown unchanged in the shop language. Required wherever goods are offered to consumers since 27 September 2026; this section's buy button goes to checkout, so it belongs here too. It opens on the first click in a readable viewer."
+        },
+        {
+          "type": "text",
+          "id": "summary_label",
+          "label": "Line that opens the notice",
+          "default": "Your legal guarantee rights"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Show the notice open",
+          "info": "Only without JavaScript; with it the line opens the viewer.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link to europa.eu (same destination as the QR code)",
+          "default": "More about the legal guarantee on europa.eu"
+        },
+        {
+          "type": "text",
+          "id": "full_size_label",
+          "label": "Full-size link",
+          "default": "Open the notice full size"
+        },
+        {
+          "type": "text",
+          "id": "close_label",
+          "label": "Close button (screen readers)",
+          "default": "Close the notice"
+        },
+        {
+          "type": "text",
+          "id": "pan_hint",
+          "label": "Hint on phones",
+          "default": "Swipe or scroll sideways to read the whole notice."
         }
       ]
     },

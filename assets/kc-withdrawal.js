@@ -48,6 +48,14 @@
       sent.hidden = false;
       if (fallback) fallback.hidden = true;
     }
+    // Belt and braces for the autofocus attribute after Shopify's redirect
+    if (document.activeElement === document.body) {
+      try {
+        success.focus({ preventScroll: false });
+      } catch (error) {
+        /* nothing to do */
+      }
+    }
     return;
   }
 
@@ -91,7 +99,9 @@
     });
     if (first) {
       showStep(1, first);
-      if (live) live.textContent = first.dataset.errorRequired || first.dataset.errorFormat || '';
+      // The live region repeats the message that is actually shown for the focused field
+      const shown = document.getElementById(first.id + '-error');
+      if (live) live.textContent = shown ? shown.textContent : '';
     }
     return !first;
   };
@@ -218,8 +228,10 @@
   let sending = false;
 
   form.addEventListener('submit', (event) => {
-    if (sending) return;
+    // While the acknowledgement is on its way nothing else may post (the native submit below
+    // fires no submit event, so this never blocks it)
     event.preventDefault();
+    if (sending) return;
     if (!validateAll()) return;
     if (steps[2].hidden) {
       // Enter in a step 1 field: show the statement back first

@@ -841,6 +841,8 @@
                     summary_label: block.settings.summary_label,
                     link_label: block.settings.link_label,
                     full_size_label: block.settings.full_size_label,
+                    close_label: block.settings.close_label,
+                    pan_hint: block.settings.pan_hint,
                     open: block.settings.open_by_default,
                     block: block
                   -%}
@@ -2260,7 +2262,7 @@
       "settings": [
         {
           "type": "paragraph",
-          "content": "The EU harmonised notice on the legal guarantee of conformity (Regulation (EU) 2025/1960), the Commission's own file shown unchanged in the shop language. Required on the offer of goods to consumers since 27 September 2026. It opens on the first click, as the Commission's example for product pages."
+          "content": "The EU harmonised notice on the legal guarantee of conformity (Regulation (EU) 2025/1960), the Commission's own file shown unchanged in the shop language. Required on the offer of goods to consumers since 27 September 2026. It opens on the first click in a readable viewer, as the Commission's example for product pages."
         },
         {
           "type": "text",
@@ -2285,6 +2287,18 @@
           "id": "full_size_label",
           "label": "Full-size link",
           "default": "Open the notice full size"
+        },
+        {
+          "type": "text",
+          "id": "close_label",
+          "label": "Close button (screen readers)",
+          "default": "Close the notice"
+        },
+        {
+          "type": "text",
+          "id": "pan_hint",
+          "label": "Hint on phones",
+          "default": "Swipe or scroll sideways to read the whole notice."
         }
       ]
     },
