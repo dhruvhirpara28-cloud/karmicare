@@ -1,6 +1,6 @@
 # R57 / R57b · Launch blocker 1: consumer-rights text (gate-legal)
 
-**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = this rework, §3b and §8.
+**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8.
 **Scope**: LR1 blocker 1 (`docs/launch-gate/input/LR1-LAUNCH-READINESS.md`) = audit items P0-1, P0-5, P0-6, P0-8, P0-9, P0-14 (withdrawal information), P0-15 (the NL/FR of the changed strings) from `input/legal-offer/work/2026-10-05/legal-audit-terms-consumer-rights-privacy.md`.
 **Decisions applied**: D1 option A (Victor, 24 Oct: priming exemption dropped, loss-of-value rule), D7 and D8 (Consumer Rights is a plain-language summary that points to the Terms; the canonical texts are `input/legal-offer/legal/*`), D2 and D5 (unchanged, already in the text). D3 is discussed in §5 and not applied by this lane.
 
@@ -8,7 +8,7 @@
 
 | File | What |
 |---|---|
-| `CHANGES.md` (this file) | Where each text lives, the canonical place and redirects, every change with old → new, reason and legal source (§3 R57, §3b R57b), what was verified, what is left, Astra's review items (§8) |
+| `CHANGES.md` (this file) | Where each text lives, the canonical place and redirects, every change with old → new, reason and legal source (§3 R57, §3b and §3c R57b, §3d R57c), what was verified, what is left, Astra's review items and Victor's Care Credit decision (§8) |
 | `POLICIES-PASTE.md` | Full corrected body of the three Shopify policies that change (Terms of service, Refund policy, Privacy policy), EN first, then NL and FR for Translate & Adapt |
 | `TRANSLATIONS-HANDOFF.md` | The 17 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
 | `ADMIN-STEPS.md` | What Victor does in admin, in order, starting with the launch gate (durable-medium confirmation): policy pastes, legacy pages to hide, redirects, titles, legacy Terms links, checks |
@@ -742,6 +742,77 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > Communication data: records of your messages by email, contact form or the online withdrawal function (your name, the order reference and your email address), including product questions, after-sales questions and feedback.
 
 
+## 3d. R57c, Victor's Care Credit decision (24 Oct): the linked-order choice replaces “nothing claimed back”: the changes, one by one (EN old → new)
+
+
+### TD3 · Terms clause 4.7.3 (which deductions on which refund route)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `terms-of-service`
+
+**Why**: R57c: the statutory routes now carry one more possible item, the Care Credit set-off of clause 4.7.4 when the customer keeps the items bought with credit earned from the refunded payment.
+
+**Legal basis**: See TD4.
+
+**Old**
+
+> We never charge administrative fees on a refund. On a statutory withdrawal, the only possible deduction is for diminished value under clause 4.6 (Article VI.51 §2 WER); on a refund under the legal guarantee of conformity there is none. Under our voluntary guarantees, the deductions are those set out in clauses 4.3, 4.4 and 4.7.4.
+
+**New**
+
+> We never charge administrative fees on a refund. On a statutory withdrawal, the only possible deductions are for diminished value under clause 4.6 (Article VI.51 §2 WER) and the Care Credit set-off under clause 4.7.4, if you keep items you bought with Care Credit earned from the refunded payment; on a refund under the legal guarantee of conformity, only that set-off. Under our voluntary guarantees, the deductions are those set out in clauses 4.3, 4.4 and 4.7.4.
+
+
+### TD4 · Terms clause 4.7.4 (Care Credit and refunds: Victor's rule)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_FcEDdA/content` · policy `terms-of-service`
+
+**Why**: R57c replaces R57b's “nothing claimed back” with Victor's narrower rule in its most defensible form: credit spent to pay is restored; credit earned from the refunded payment lapses with nothing deducted for the unused part; where that credit had already paid for another order, that order is linked and the customer chooses, when giving notice, between returning the credit-funded items at no cost (prepaid label, their money refunded, nothing set off) and keeping them and paying the credit value, which is the only amount set off against the refund; silence means set-off; the refund confirmation names the linked order and the amount; the same choice applies on every refund route; apart from it the statutory refund of the price and the standard delivery charge stays complete.
+
+**Legal basis**: Victor's decision (landing desk, 24 Oct): “We do deduct the used credit, unless the customer also returns the product the credits were used for.” Legal basis relied on: Art. VI.50 §1 WER (we refund every payment received; the credit was never a payment received, so its lapse is not a deduction from one); Art. VI.52 §2 WER and Art. 15 CRD (withdrawal ends every linked contract at no cost to the consumer, hence the cost-free return of the credit-funded items, prepaid label included, with their money refunded); Art. VI.51 §2 WER (the set-off is not a diminished-value claim and is therefore kept on its own footing: the price reduction on the linked order was conditional on the payment that earned the credit, and when that payment is refunded the reduction falls away, so the credit value becomes due for the goods the consumer keeps and is set off against the refund, Art. 5.258 ff. new Civil Code); Art. VI.45 §1 8° WER (the conditions of withdrawal, this choice included, are stated before the contract); Art. 1649septies old Civil Code for the voluntary guarantees. Residual risk for counsel, one line: a set-off against the statutory refund of an amount that exists only because the consumer withdrew may be read as a cost imposed as a consequence of withdrawal (Art. VI.51 §5 and VI.52 §2 WER, Art. 14(5) CRD) or, on the legal guarantee, as a term limiting the remedy (Art. 1649octies); the defence is that the credit was a conditional price reduction on the linked order, the consumer keeps goods of that value or may return them at no cost, and the choice is stated before purchase (Art. VI.45 §1 8°) and on the refund confirmation.
+
+**Old**
+
+> Care Credit and refunds: if you paid part of an order with Care Credit, the money you paid goes back to your original payment method and the Care Credit you used returns to your balance. Care Credit earned from a payment that is refunded lapses from your balance, because the payment it rewarded no longer exists. Under your statutory right of withdrawal (clause 4.1) and under the legal guarantee of conformity (clause 7), you always receive the full refund the law requires: we never deduct Care Credit from it, and we do not claim back Care Credit you already spent (Articles VI.50 §1, VI.51 §5 and VI.63 WER; Articles 1649quinquies and 1649octies of the old Civil Code). Only under our voluntary money-back guarantees (clauses 4.3 and 4.4) and the renewal refunds in clause 9.9 is Care Credit that was earned from the refunded payment and already spent deducted from the refund, as those clauses say. Care Credit is never paid out in cash.
+
+**New**
+
+> Care Credit and refunds: if you paid part of an order with Care Credit, the money you paid goes back to your original payment method and the Care Credit you used returns to your balance. Care Credit earned from a payment that is refunded lapses from your balance, because the payment it rewarded no longer exists; nothing is deducted for credit you had not used. If you had already used Care Credit earned from the refunded payment to pay for another order, that order is linked to your refund and you choose, when you tell us you withdraw or ask for the refund: either you send the items you bought with that credit back to us within 14 days of telling us, with the prepaid return label we send you, and nothing is set off (we also refund any money you paid for them); or you keep them and pay the value of the Care Credit used for them, which is the only amount we set off against your refund. If you do not tell us, we apply the set-off. The refund confirmation names the linked order and the amount. This choice applies on every refund route: our voluntary guarantees (clauses 4.3 and 4.4), the renewal refunds in clause 9.9, a statutory withdrawal (clause 4.1) and a refund under the legal guarantee of conformity (clause 7). Apart from this set-off, your statutory refund of the price and the standard delivery charge is always complete (Articles VI.50 §1 and VI.51 WER; Articles 1649quinquies and 1649octies of the old Civil Code). Care Credit is never paid out in cash.
+
+
+### TD6 · Terms clause 10.6 (Care Credit, refunds)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_nEOBgC/content` · policy `terms-of-service`
+
+**Why**: R57c: clause 10.6 follows the new 4.7.4 (the linked-order choice on every refund route).
+
+**Legal basis**: See TD4.
+
+**Old**
+
+> Refunds: if an order is refunded, the Care Credit you used on it returns to your balance and the Care Credit earned from the refunded payment lapses. On a statutory withdrawal or a refund under the legal guarantee, nothing is deducted from your refund and spent Care Credit is not claimed back; only under our voluntary guarantees and clause 9.9 is spent Care Credit earned from the refunded payment deducted (clause 4.7.4).
+
+**New**
+
+> Refunds: if an order is refunded, the Care Credit you used on it returns to your balance and the Care Credit earned from the refunded payment lapses; nothing is deducted for credit you had not used. If you had already used that credit on another order, you choose between sending the items bought with it back (nothing is set off) and keeping them (the value of the credit used for them is set off against your refund). Clause 4.7.4 has the full rule; it applies on every refund route, statutory withdrawal and legal guarantee included.
+
+
+### CD2 · Consumer Rights section 3.6, step 3 (Care Credit and refunds)
+
+**Setting**: `page.consumer-rights:legal_toc_section_gYznx3/content_section_iDEfUH/content` · policy `refund-policy`
+
+**Why**: R57c, in the summary: the same choice, in plain words, pointing to Terms 4.7.4.
+
+**Legal basis**: See TD4.
+
+**Old**
+
+> If you paid partly with Care Credit, that credit returns to your balance, and the Care Credit earned from the refunded payment lapses. Under your legal rights, nothing is deducted from your refund and spent Care Credit is not claimed back; only under our money-back guarantees (3.3 and 3.4) is spent Care Credit deducted. Care Credit is never paid out in cash.
+
+**New**
+
+> If you paid partly with Care Credit, that credit returns to your balance, and the Care Credit earned from the refunded payment lapses; nothing is deducted for credit you had not used. If you had already used that credit on another order, you choose: send those items back within 14 days with our prepaid label and nothing is set off, or keep them and the value of the credit used for them is set off against your refund, shown on your refund confirmation. That is the only Care Credit set-off, on every refund route, your legal rights included; clause 4.7.4 of the Terms has the full rule. Care Credit is never paid out in cash.
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
@@ -785,7 +856,7 @@ Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were
 - **legal-offer branch (canonical files, D8)**: apply §3 and §3b to `legal/terms-and-conditions/en.md` and `legal/consumer-rights/en.md`, log v4.5 in `legal/CHANGELOG.md`, add the NL and FR files, and update the Figma legal frames. Until that is done, a republish from the canonical files would restore the defects (Astra, observation 7). This lane did not edit the input copies.
 - **gate-claims**: the free-from line in 4.6.1 / 3.7.1.
 - **Victor, launch gate G1 (audit P0-11, Astra B2)**: the order confirmation and Loop's first-membership email must carry the Terms with the withdrawal information, the model form and the commercial-guarantee conditions in a retainable form, in the customer's language, by delivery at the latest; evidence is a real received email. Steps and acceptance check in `ADMIN-STEPS.md` step 0. A link to a changeable page is not a durable medium (CJEU C-49/11).
-- **Victor, business setting (not legal text)**: releasing earned Care Credit only after the 14-day withdrawal period would remove the exposure that 4.7.4 now accepts (credit spent, then withdrawal, nothing claimed back). A Loop/Care Credit setting; counsel may also review alternatives (§8).
+- **Victor, customer care and Loop (R57c)**: the refund confirmation must name the linked order and the set-off amount, and customer care must ask the customer's choice (return the credit-funded items or keep them) when the withdrawal or refund request comes in; a prepaid return label for the linked items is part of the rule. Releasing earned Care Credit only after the 14-day withdrawal period (a Loop setting) would make linked-order cases rare.
 
 ## 7. Files changed in this branch
 
@@ -800,7 +871,7 @@ Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings
 
 | Astra item | Class | Done in R57b |
 |---|---|---|
-| B1 spent Care Credit could reduce a statutory refund (4.7.3, 4.7.4, 10.6) | blocker | TB3, TB4, TB6 in the Terms, CB2 in the charter, all three languages, all three Terms bodies; the credit spent to pay (restored) and the credit earned from the refunded payment (lapses) are kept apart; the statutory routes refund in full, nothing deducted, nothing claimed back (Art. VI.50 §1, VI.51 §5, VI.63 WER; 1649quinquies, 1649octies); deduction only under 4.3, 4.4 and 9.9 |
+| B1 spent Care Credit could reduce a statutory refund (4.7.3, 4.7.4, 10.6) | blocker | R57b (TB3, TB4, TB6, CB2): the credit spent to pay (restored) and the credit earned from the refunded payment (lapses) kept apart; statutory routes refunded in full, nothing claimed back. **Superseded by R57c (TD3, TD4, TD6, CD2)**: Victor's narrower rule, see “R57c” below |
 | B2 durable-medium confirmation deferred beyond the release checks | launch gate | `ADMIN-STEPS.md` step 0 is now the first item and a go/no-go gate: which Shopify notification and which Loop email, what they carry, how, and the acceptance check (a real received email in each language shows the Terms, the withdrawal information, the model form and the links) |
 | Welcome Kit on a membership withdrawal | non-blocker | TB1, CB1: “the goods” of a membership are everything delivered under it, kit included; no fee, no €59 on the statutory route |
 | NL/FR withdrawal labels | verified, closed | unchanged; confirm-step labels added to the gate-withdrawal handoff |
@@ -812,5 +883,7 @@ Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings
 | 5 charter 4.2 abbreviates the serious-defect trigger | non-blocker | CB3 adds it |
 | 6 actual diminished value, PAO carve-out, Year “receiving and inspecting” | non-blocker | 4.6.3 already says “the resulting loss of value” (actual, not fixed); TB5 adds the PAO carve-out; TB2 drops “and inspecting” |
 | 7 canonical files still old; harsh-preservatives claim | non-blocker, handoff | §6: legal-offer branch and gate-claims |
+
+**R57c, Victor's Care Credit decision (24 Oct).** Victor: “We do deduct the used credit, unless the customer also returns the product the credits were used for.” Applied in §3d as a linked-order choice: credit spent to pay for the refunded order is restored; credit earned from the refunded payment lapses, with nothing deducted for the unused part; where that credit had already paid for another order, the customer chooses, when giving notice, between returning the credit-funded items at no cost (prepaid label, their money refunded, nothing set off) and keeping them and paying the credit value, which is the only amount set off against the refund; silence means set-off; the refund confirmation names the linked order and the amount; the same choice applies on every refund route; apart from it the statutory refund of the price and the standard delivery charge stays complete. Legal basis relied on: Art. VI.50 §1 WER (every payment received is refunded; the credit was never a payment received), Art. VI.52 §2 WER and Art. 15 CRD (withdrawal ends a linked contract at no cost, hence the cost-free return branch), Art. VI.51 §2 WER (the set-off is not a diminished-value claim; it rests on the conditional price reduction of the linked order falling away when the payment that earned it is refunded, set off under Art. 5.258 ff. of the new Civil Code), Art. VI.45 §1 8° WER (stated before the contract), Art. 1649septies old Civil Code (voluntary guarantees). Residual risk for counsel, one line: a set-off against the statutory refund of an amount that exists only because the consumer withdrew may be read as a cost imposed as a consequence of withdrawal (Art. VI.51 §5 and VI.52 §2 WER, Art. 14(5) CRD) or, on the legal guarantee, as a term limiting the remedy (Art. 1649octies); the defence is that the credit was a conditional price reduction on the linked order, the consumer keeps goods of that value or may return them at no cost, and the choice is stated before purchase and on the refund confirmation.
 
 Follow-ups, not in this lane: the migration redirect CSV (not in the input set; cannot be certified here); counsel on any alternative to removing the statutory clawback, on the Year as a regular-delivery contract, on actual loss-of-value and kit handling, and on the complete multilingual contract in its operational context; the NL model-form style differences between theme and policy (equivalent in meaning, left as they are); LR1 blockers 2 to 7.

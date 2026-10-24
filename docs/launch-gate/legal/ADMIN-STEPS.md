@@ -117,7 +117,7 @@ Four policies × three languages = twelve link edits; the text of those policies
 
 Open in a private window, slowly (the store rate-limits; one request every two seconds):
 
-- `/policies/terms-of-service`, `/policies/refund-policy`, and the `/nl/…` and `/fr/…` versions: clause 4.1 says the refund runs from “the day we are informed”, 4.6.3 starts “Primed pumps and your right of withdrawal”, 4.7.4 starts “Care Credit and refunds” and says the statutory refund is never reduced, 10.6 says the same, 3.1 of the charter names the online withdrawal function, section 2 says the toothbrushes and the floss are not cosmetics, clause 7 says you choose between repair and replacement.
+- `/policies/terms-of-service`, `/policies/refund-policy`, and the `/nl/…` and `/fr/…` versions: clause 4.1 says the refund runs from “the day we are informed”, 4.6.3 starts “Primed pumps and your right of withdrawal”, 4.7.4 starts “Care Credit and refunds” and gives the linked-order choice (return the credit-funded items at no cost, or keep them and only the credit value is set off), 10.6 says the same, 3.1 of the charter names the online withdrawal function, section 2 says the toothbrushes and the floss are not cosmetics, clause 7 says you choose between repair and replacement.
 - `/pages/terms-and-conditions-1`, `/pages/new-consumer-rights`, `/pages/privacy-policy` (EN, NL, FR): the same text as the policies, including the NL and FR of the 17 settings; no “Download the form (PDF)” line remains anywhere, the model form is complete inline.
 - `/policies/privacy-policy` (EN, NL, FR): section 5 names Klaviyo for the withdrawal acknowledgement and section 3 lists the withdrawal-function data.
 - The links “Withdraw from contract here” / “Hier de overeenkomst herroepen” / “Renoncer au contrat ici” open `/pages/withdrawal`, `/nl/pages/withdrawal`, `/fr/pages/withdrawal` (gate-withdrawal).
@@ -128,4 +128,4 @@ Open in a private window, slowly (the store rate-limits; one request every two s
 
 - Legal-offer branch: log v4.5 in `legal/CHANGELOG.md`, update `legal/*/en.md` and the Figma legal frames from `CHANGES.md` §3 and §3b, add `nl.md` and `fr.md`.
 - The NL/FR legal review (counsel or Victor) of the whole legal text stays open.
-- Business setting: consider releasing earned Care Credit only after the 14-day withdrawal period (Loop), see `CHANGES.md` §6.
+- Customer care and Loop (R57c): when a withdrawal or refund request comes in, ask the customer's choice for any order paid with credit earned from the refunded payment (return the items with a prepaid label, or keep them and have the credit value set off); the refund confirmation names the linked order and the amount. Releasing earned Care Credit only after the 14-day withdrawal period (Loop) would make such cases rare, see `CHANGES.md` §6 and §8.
