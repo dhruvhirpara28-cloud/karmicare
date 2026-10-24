@@ -1,5 +1,58 @@
 {%- liquid
   assign faq_items = product.metafields.custom.product_faq.value
+
+  # Practitioner request form (R76): it goes into the first item whose answer text has a link
+  # whose href contains the URL trigger or, failing that, whose text contains the text trigger
+  assign request_index = 0
+  assign request_open = false
+  assign request_url = block.settings.request_trigger_url | strip
+  assign request_text = block.settings.request_trigger_text | strip | downcase
+  if faq_items != blank and block.settings.request_enabled
+    for pass in (1..2)
+      if pass == 1 and request_url == blank
+        continue
+      endif
+      if pass == 2 and request_text == blank
+        continue
+      endif
+      for item in faq_items
+        if item.description == blank
+          continue
+        endif
+        assign item_index = forloop.index
+        assign item_html = item.description | metafield_tag
+        assign anchors = item_html | split: '<a '
+        for anchor_chunk in anchors offset: 1
+          assign anchor = anchor_chunk | split: '</a>' | first
+          assign anchor_attrs = anchor | split: '>' | first
+          if pass == 1 and anchor_attrs contains request_url
+            assign request_index = item_index
+            break
+          endif
+          assign anchor_text = anchor | remove_first: anchor_attrs | strip_html | downcase
+          if pass == 2 and anchor_text contains request_text
+            assign request_index = item_index
+            break
+          endif
+        endfor
+        if request_index > 0
+          break
+        endif
+      endfor
+      if request_index > 0
+        break
+      endif
+    endfor
+  endif
+
+  if request_index > 0
+    capture request_form
+      render 'kc-practitioner-request', s: block.settings, trigger_url: request_url, trigger_text: request_text
+    endcapture
+    if request_form contains 'data-kc-pr-state='
+      assign request_open = true
+    endif
+  endif
 -%}
 {%- if faq_items != blank -%}
   {{ 'product-faq.css' | asset_url | stylesheet_tag }}
@@ -9,6 +62,9 @@
         <details
           class="kc-faq-item"
           name="faq-accordion"
+          {% if request_open and forloop.index == request_index %}
+            open
+          {% endif %}
         >
           <summary class="kc-faq-summary">
             <span>{{ item.title }}</span>
@@ -19,6 +75,9 @@
               <div class="kc-faq-description">
                 {{ item.description | metafield_tag }}
               </div>
+            {%- endif -%}
+            {%- if forloop.index == request_index -%}
+              {{ request_form }}
             {%- endif -%}
             {%- if item.section_content != blank -%}
               <div class="kc-faq-section-content">
