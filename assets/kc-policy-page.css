@@ -1,0 +1,294 @@
+/* kc-policy-page.css: Shopify's own policy pages (/policies/terms-of-service, refund-policy,
+   privacy-policy, subscription-policy, shipping-policy, contact-information, legal-notice, and
+   their /nl and /fr copies) in the legal-page style. layout/theme.liquid loads it only when
+   request.page_type == 'policy'.
+
+   Shopify prints the body saved under Settings → Policies inside our layout as
+
+     #MainContent > .shopify-policy__container
+       > .shopify-policy__title > h1
+       > .shopify-policy__body > .rte > p, h2, h3, h4, ol, ul, li, strong, a, table
+
+   so there is no template, section or block to configure (the text is Admin's, see
+   docs/launch-gate/legal/POLICIES-PASTE.md). Shopify also adds its own stylesheet to these pages
+   (cdn/shopifycloud/storefront/assets/storefront/policy-*.css): a 65ch container with 20px
+   gutters and a centred title. The first two rules below undo that; the rest make the markup
+   look like the
+   designed legal pages, sections/policy-banner.liquid + sections/legal-toc-section.liquid with
+   the settings of templates/page.terms-and-conditions.json, as measured on the live
+   /pages/terms-and-conditions-1 on 24 Oct 2026: a 720px column, the 52px title, the clause
+   titles at 24/28 with a 1px rule between clauses, 18px body copy at 68 % of the heading
+   colour, underlined links in the full colour. Colours and type come from assets/kc-tokens.css
+   and theme.liquid's font variables, so Day and Night follow body.day-mode / body.night-mode as
+   everywhere else. Numbers that are the legal page's own (not tokens) say so in a comment.
+
+   Left out on purpose: the "LEGAL" eyebrow, the "On this page" menu and the rights cards. They
+   need a template. The refund policy carries its four rights as a table instead; it is styled
+   as a list of rows. No JavaScript. */
+
+/* ---- Clearance under the floating bar --------------------------------------------------
+   kc-navigation.css gives #MainContent the bar's height when a page has no section wrapper.
+   Here the title block takes it instead, so the page → accent transition starts under the bar
+   exactly like the banner's does on the legal pages. The selector repeats the kc-navigation.css
+   chain and adds :has(), so it wins on specificity, not on order. */
+#MainContent[data-navigation-layout='inset']:not(:has(> .shopify-section:first-child)):has(> .shopify-policy__container) {
+  padding-block-start: 0;
+}
+
+/* Shopify's policy-*.css: .shopify-policy__container { max-width: 65ch; margin: 0 auto;
+   padding: 0 20px } and .shopify-policy__title { text-align: center }. The container goes full
+   width so the title block and the body can paint their surfaces edge to edge; the 720px column
+   moves to the h1 and the .rte below. "main >" only lifts the specificity above Shopify's. */
+main > .shopify-policy__container {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--kc-font-use-body);
+  color: var(--kc-mapped-text-default-heading);
+  /* the legal TOC clips sideways on phones too, so a long URL can never scroll the page */
+  overflow-x: clip;
+}
+
+main > .shopify-policy__container .shopify-policy__title {
+  text-align: start;
+}
+
+/* ---- Title block = the policy banner (Section surface "transition": page → accent) -------- */
+.shopify-policy__title {
+  /* bar clearance + the banner's mobile top padding (32px); bottom = the h1's 20px margin */
+  padding-block: calc(var(--kc-navigation-clearance) + 32px) 20px;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.shopify-policy__title h1 {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px; /* the banner's .page-width: 680px of text plus 20px either side */
+  margin: 0 auto;
+  padding: 0 20px;
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h1-text-size);
+  font-weight: var(--font-500-weight);
+  line-height: 1; /* the banner heading's own line-height */
+  letter-spacing: -2px; /* the banner heading's own letter-spacing */
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* ---- Body = the legal TOC's content column (Section surface "page" after accent: accent → page) */
+.shopify-policy__body {
+  padding-block: 0 32px; /* the TOC's mobile bottom padding */
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}
+
+.shopify-policy__body .rte {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px; /* the TOC content column is 680px wide; the banner's gutters centre it */
+  margin: 0 auto;
+  padding: 0 20px;
+  font-size: var(--font-body-size-mobile); /* the TOC body on phones: 14px */
+  line-height: normal; /* base.css gives p and li line-height: normal; the legal page shows that */
+  color: rgba(var(--kc-mapped-text-default-heading-rgb), 0.68); /* the TOC body: 68 % of the text colour */
+  overflow-wrap: anywhere; /* an email or URL breaks before the column does */
+}
+
+/* ---- The three lines before the first clause = the banner's description and company lines --
+   p 1: the description (.h5, 70 % opacity). p 2: the company line. p 3: email and "Last
+   updated" at 68 %. Only when a clause heading follows, so a policy that is one plain paragraph
+   keeps body style. */
+.shopify-policy__body .rte > p:first-child:has(~ :is(h2, h3)) {
+  margin: 0 0 20px;
+  font-size: var(--font-h5-size-mobile);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+  opacity: 0.7; /* .opacity-xl on the banner description */
+}
+
+.shopify-policy__body .rte > p:nth-child(2):has(~ :is(h2, h3)) {
+  margin: 0 0 3px;
+  font-size: var(--kc-responsive-label-sm-text-size);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.shopify-policy__body .rte > p:nth-child(3):has(~ :is(h2, h3)) {
+  margin: 0 0 20px;
+  font-size: var(--kc-responsive-label-sm-text-size);
+}
+
+/* ---- Clause titles (h2 in the subscription policy, h3 everywhere else) = .legal-toc__title,
+   with the TOC's rule and padding between two clauses */
+.shopify-policy__body .rte > :is(h2, h3) {
+  margin: 12px 0; /* 12 + the paragraph's 12 above the rule = the TOC's 24 on phones */
+  padding-top: 24px;
+  border-top: 1px solid var(--kc-mapped-border-primary-default);
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h5-text-size);
+  font-weight: var(--font-500-weight);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: -0.25px; /* the TOC title on phones */
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* The first clause: no rule, and the gap that the banner's bottom padding and the TOC's top
+   padding leave on the legal page (the rights cards sit in that gap there) */
+.shopify-policy__body .rte > :is(h2, h3):not(:is(h2, h3) ~ *) {
+  margin-top: 64px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* ---- Sub-headings (4.1, 9.1, "Examples") = the bold lines the legal page prints them as */
+.shopify-policy__body .rte h4 {
+  margin: 28px 0 12px; /* .legal-toc__body h3 margins */
+  font-family: var(--kc-font-use-heading);
+  font-size: 1em;
+  font-weight: var(--font-600-weight);
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.shopify-policy__body .rte > :is(h2, h3) + h4 {
+  margin-top: 0;
+}
+
+/* ---- Paragraphs, lists, bold and links = .legal-toc__body */
+.shopify-policy__body .rte p {
+  margin: 0 0 12px;
+}
+
+.shopify-policy__body .rte ol,
+.shopify-policy__body .rte ul {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  list-style-position: outside;
+}
+
+.shopify-policy__body .rte li + li {
+  margin-top: 8px;
+}
+
+.shopify-policy__body .rte > :last-child {
+  margin-bottom: 0;
+}
+
+.shopify-policy__body .rte strong {
+  font-weight: var(--font-600-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.shopify-policy__body .rte a {
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: auto;
+}
+
+.shopify-policy__body .rte a:hover {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+.shopify-policy__body .rte a:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---- The refund policy's rights table = the banner's four cards, as rows -------------------
+   td 1 the figure ("14 days"), td 2 what it is for, td 3 whose right it is. */
+.shopify-policy__body .rte table {
+  width: 100%;
+  margin: 0 0 12px;
+  border-collapse: collapse;
+  border-top: 1px solid var(--kc-mapped-border-primary-default); /* the cards' top rule */
+  table-layout: auto;
+  font-size: var(--kc-responsive-label-sm-text-size);
+}
+
+.shopify-policy__body .rte td {
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+  vertical-align: baseline;
+  color: rgba(var(--kc-mapped-text-default-heading-rgb), 0.68); /* .consumer-rights__card-bottom */
+}
+
+.shopify-policy__body .rte td:last-child {
+  padding-right: 0;
+}
+
+.shopify-policy__body .rte td:first-child {
+  width: 1%;
+  white-space: nowrap;
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h4-text-size);
+  line-height: var(--kc-responsive-h4-line-height);
+}
+
+.shopify-policy__body .rte td strong {
+  font-weight: var(--font-500-weight); /* the card title and description weight */
+}
+
+/* ---- From 750px: the legal page's desktop numbers ------------------------------------------ */
+@media screen and (min-width: 750px) {
+  .shopify-policy__title {
+    /* bar clearance + the banner's desktop top padding (90px); bottom = the h1's 24px margin */
+    padding-block: calc(var(--kc-navigation-clearance) + 90px) 24px;
+  }
+
+  .shopify-policy__body {
+    padding-block: 0 120px; /* the TOC's desktop bottom padding */
+  }
+
+  .shopify-policy__body .rte {
+    font-size: var(--size-xl-desktop); /* .legal-toc__body.text-xl: 18px */
+  }
+
+  .shopify-policy__body .rte > p:first-child:has(~ :is(h2, h3)) {
+    margin-bottom: 24px;
+    font-size: var(--font-h5-size-desktop);
+  }
+
+  .shopify-policy__body .rte > p:nth-child(2):has(~ :is(h2, h3)) {
+    font-size: var(--font-body-medium-size-desktop);
+  }
+
+  .shopify-policy__body .rte > p:nth-child(3):has(~ :is(h2, h3)) {
+    margin-bottom: 24px;
+    font-size: var(--font-body-medium-size-desktop);
+  }
+
+  .shopify-policy__body .rte > :is(h2, h3) {
+    margin: 16px 0; /* 16 + the paragraph's 16 above the rule = the TOC's 32 */
+    padding-top: 32px;
+    letter-spacing: normal;
+  }
+
+  .shopify-policy__body .rte > :is(h2, h3):not(:is(h2, h3) ~ *) {
+    /* 24 (last banner line) + 48 (banner bottom) + 48 (TOC top) = 120 on the legal page */
+    margin-top: 96px;
+    padding-top: 0;
+  }
+
+  .shopify-policy__body .rte p,
+  .shopify-policy__body .rte ol,
+  .shopify-policy__body .rte ul {
+    margin-bottom: 16px;
+  }
+
+  .shopify-policy__body .rte > :last-child {
+    margin-bottom: 0;
+  }
+
+  .shopify-policy__body .rte table {
+    margin-bottom: 16px;
+    font-size: var(--font-body-medium-size-desktop);
+  }
+
+  .shopify-policy__body .rte td {
+    padding: 16px 24px 16px 0; /* base.css pads td 1.2rem either side from 750px; rows, not cells */
+  }
+
+  .shopify-policy__body .rte td:last-child {
+    padding-right: 0;
+  }
+}
