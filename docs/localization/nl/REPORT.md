@@ -293,7 +293,7 @@ Decided 20 Oct (F5, Victor): each old handle redirects to its replacement, so th
 |---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | `batch-02-pdp` | 477 | `8d3ac5c29d88` | 119 | 230 | 34 | 0 | 41 | 15 | 38 | 27 |
 | `batch-01-homepage` | 230 | `ab192236341d` | 142 | 2 | 31 | 0 | 31 | 2 | 21 | 19 |
-| `batch-03-header-footer` | 41 | `d8fb1b30ea2f` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
+| `batch-03-header-footer` | 41 | `742351732dab` | 5 | 11 | 10 | 0 | 1 | 9 | 5 | 4 |
 | `batch-04-legal` | 974 | `98fda69496b9` | 0 | 3 | 0 | 621 | 0 | 0 | 350 | 12 |
 | `batch-05-products` | 77 | `3b9c8c4105d7` | 14 | 38 | 0 | 0 | 25 | 0 | 0 | 0 |
 | `batch-06-content-pages` | 22 | `3dee3b56341f` | 0 | 15 | 0 | 0 | 7 | 0 | 0 | 1 |
@@ -920,7 +920,7 @@ The 117 entries translated under Victor's waiver (20 Oct) are not repeated in th
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#01` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Begin met één set, vul aan om de 60 dagen of kies het volledige jaar — het ritueel blijft hetzelfde: Awake 's ochtends, |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#02` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Duo's per jaar |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#04` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Leverritme |
-| `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#06` | EN is cut off mid-word ('We believe preven'); NL cut at the same point. Full NL once the EN is fixed: '… Wij vinden dat preventie moet lonen voor wie zelf de zorg draagt.' |
+| `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#06` | EN completed by Victor 23 Oct ('…We believe prevention should pay the person doing the caring.'); NL now complete: '… Wij vinden dat preventie moet lonen voor wie zelf de zorg draagt.' |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#07` | revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Verdiende Care Credit per jaar |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10` | Offer conflict carried over from the EN ('verified by your dentist'). |
 | `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#11` | 21 → 31 chars; the trust-row short form 'Pauzeren of opzeggen' would drop 'skip'. |

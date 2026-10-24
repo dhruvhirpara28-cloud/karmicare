@@ -91,12 +91,12 @@
             "pricing_summary_care_credit_tooltip": "Care Credit is Return on Care in euros — spendable on member products and accessories. It lands in your account with your plan, so caring for your teeth pays you back.",
             "pricing_summary_checkup_title": "Dental Check-up Reward",
             "pricing_summary_checkup_tooltip": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
-            "show_testimonial_button": true,
-            "testimonial_button_text": "Brushing & Beyond",
+            "pricing_summary_welcome_kit_title": "Welcome Kit on first order (value [value])",
+            "pricing_summary_welcome_kit_value": "FREE",
             "plans_eyebrow": "Start here",
             "plans_heading": "Choose how to begin",
-            "pricing_summary_welcome_kit_title": "Welcome Kit on first order (value [value])",
-            "pricing_summary_welcome_kit_value": "FREE"
+            "show_testimonial_button": true,
+            "testimonial_button_text": "Brushing & Beyond"
           }
         },
         "price": {
@@ -143,7 +143,7 @@
             "read_more_color": "#7fb9ff",
             "read_more_text": "Read more",
             "read_less_text": "Read less",
-            "visible_items": 4,
+            "visible_items": 3,
             "disclaimer_text": "* What members report with continued use — individual experiences vary."
           }
         },
@@ -176,6 +176,7 @@
         },
         "professional_testimonials_block": {
           "type": "professional_testimonials",
+          "disabled": true,
           "settings": {
             "show_under_media": true,
             "show_border_top": false,
@@ -208,7 +209,31 @@
         "sticky_cart_block": {
           "type": "sticky_cart",
           "settings": {
-            "button_text": "Begin Now"
+            "button_text": "Begin Now",
+            "title_rhythm": "",
+            "title_year": "",
+            "title_once": "",
+            "price_rhythm": "",
+            "price_year": "",
+            "price_once": "",
+            "credit": "",
+            "credit_checkup": "",
+            "credit_info": "",
+            "checkup_info": "",
+            "panel_label": "",
+            "change_label": "",
+            "cta_rhythm": "",
+            "cta_year": "",
+            "cta_once": "",
+            "delivery_free": "",
+            "delivery_once": "",
+            "kit": "",
+            "guarantee_member": "",
+            "guarantee_once": "",
+            "stop_rhythm": "",
+            "stop_year": "",
+            "per_brushing": "",
+            "try_once": ""
           }
         }
       },
@@ -245,20 +270,20 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "remove_first_media_bg": true,
+        "kc_hero_product_handle": "karmicare-biorhythmic-oral-care-system",
+        "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
+        "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
+        "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
+        "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
         "surface": "transition",
         "text_color_day": "",
         "text_color_night": "",
         "padding_top": 16,
-        "padding_bottom": 60,
-        "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
-        "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
-        "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
-        "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
-        "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
-        "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
-        "kc_hero_product_handle": "karmicare-biorhythmic-oral-care-system"
+        "padding_bottom": 60
       }
     },
     "chronobiology_clock_karmicare": {
@@ -275,6 +300,7 @@
         "night_title": "Your mouth switches to repair",
         "night_text": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
         "hint_label": "DRAG THE RING · EXPLORE 24 HOURS",
+        "time_label_size": "small",
         "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
         "footer_link_text": "Read the science",
         "footer_link": "",
@@ -284,8 +310,7 @@
         "padding_top": 120,
         "padding_bottom": 120,
         "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48,
-        "time_label_size": "small"
+        "padding_bottom_mobile": 48
       }
     },
     "trusted_professionals_HAqYth": {
@@ -303,10 +328,10 @@
         "card_jcnr7Q": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Mariama_Banjai.png",
+            "image": "shopify://shop_images/kc-professional-mariama-seco-banjai.jpg",
             "heading": "Mariama Banjai",
             "text": "Dental Hygienist, Oral Care Quality Manager",
-            "hover_text": ""
+            "hover_text": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>"
           }
         },
         "card_8dRing": {
@@ -375,6 +400,7 @@
         "bottom_text": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
         "button_label": "REQUEST A PRACTITIONER SAMPLE",
         "button_link": "",
+        "footer_display": "mobile",
         "card_bg_color_day": "",
         "card_bg_color_night": "",
         "marquee": true,
@@ -396,7 +422,6 @@
     },
     "how_it_works_steps_aAgVmF": {
       "type": "how-it-works-steps",
-      "disabled": true,
       "blocks": {
         "step_iJdPLN": {
           "type": "step",
@@ -452,6 +477,7 @@
         "step_U7HiXT",
         "step_EBicgt"
       ],
+      "disabled": true,
       "name": "How it works (Steps)",
       "settings": {
         "subtitle": "The Ritual",
@@ -460,6 +486,7 @@
         "heading_tag": "h2",
         "description": "<p>Become a pro at brushing. Feel your teeth by sliding your tongue.</p>",
         "hint_text": "Preview · sound off",
+        "media_text_color": "light",
         "bottom_text": "Not to be combined with fluoride oral care. One duo lasts 64 days at two brushings a day.",
         "aspect_ratio": "4 / 3",
         "radius": 12,
@@ -476,8 +503,7 @@
         "padding_bottom_desktop": 120,
         "padding_top_mobile": 64,
         "padding_bottom_mobile": 64,
-        "surface": "accent",
-        "media_text_color": "light"
+        "surface": "accent"
       }
     },
     "comparison_table_r8CDbT": {
@@ -605,7 +631,10 @@
         "padding_top_mobile": 64,
         "padding_bottom_mobile": 48,
         "show_border_top": false,
+        "show_border_top_mobile": true,
         "show_border_bottom": false,
+        "marquee": true,
+        "marquee_speed": 22,
         "slider_desktop": true,
         "slider_laptop": false,
         "slider_tablet": false,
@@ -613,15 +642,81 @@
         "columns_desktop": "1.9",
         "columns_laptop": "2",
         "columns_tablet": "1",
-        "columns_mobile": "1.2",
-        "marquee": true,
-        "marquee_speed": 22
+        "columns_mobile": "1.2"
+      }
+    },
+    "care_comes_back": {
+      "type": "care-comes-back",
+      "blocks": {
+        "step_ritual": {
+          "type": "step",
+          "settings": {
+            "title": "Your ritual",
+            "text": "Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year."
+          }
+        },
+        "step_checkup": {
+          "type": "step",
+          "settings": {
+            "title": "Your check-up",
+            "text": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay."
+          }
+        },
+        "step_next_order": {
+          "type": "step",
+          "settings": {
+            "title": "Your next order",
+            "text": "Spend Care Credit on any order. It stays valid while you are a member, and for 12 months after."
+          }
+        },
+        "line_year": {
+          "type": "line",
+          "settings": {
+            "label": "Return on Care",
+            "note": "20% back on the Year",
+            "amount": "€70.80"
+          }
+        },
+        "line_checkup": {
+          "type": "line",
+          "settings": {
+            "label": "Dental Check-up Reward",
+            "note": "after month six",
+            "amount": "€40.00"
+          }
+        }
+      },
+      "block_order": [
+        "step_ritual",
+        "step_checkup",
+        "step_next_order",
+        "line_year",
+        "line_checkup"
+      ],
+      "settings": {
+        "show_step_numbers": true,
+        "eyebrow": "Return on Care",
+        "heading": "Care that comes back.",
+        "intro": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
+        "receipt_title": "Your first Year in Care Credit",
+        "receipt_column_label": "Received",
+        "total_label": "Up to",
+        "total": "€110.80",
+        "fine_print": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+        "terms_link": "shopify://pages/terms-and-conditions-1",
+        "terms_link_label": "Terms, clauses 10 and 11",
+        "surface": "page",
+        "padding_top_desktop": 120,
+        "padding_bottom_desktop": 120,
+        "padding_top_mobile": 64,
+        "padding_bottom_mobile": 48
       }
     },
     "product_compare_plans_gz9xxx": {
       "type": "product-compare-plans",
       "name": "Product Compare Plans",
       "settings": {
+        "design": "kc",
         "eyebrow": "{{ product.metafields.custom.compare_table_header_footer.value.small_heading.value }}",
         "title": "{{ product.metafields.custom.compare_table_header_footer.value.heading.value }}",
         "subtitle": "{{ product.metafields.custom.compare_table_header_footer.value.text | metafield_tag }}",
@@ -630,8 +725,7 @@
         "padding_top_desktop": 160,
         "padding_bottom_desktop": 120,
         "padding_top_mobile": 64,
-        "padding_bottom_mobile": 48,
-        "design": "kc"
+        "padding_bottom_mobile": 48
       }
     },
     "featured_product_Eb93Xa": {
@@ -708,80 +802,22 @@
         "hide_variants": false,
         "enable_video_looping": false,
         "remove_first_media_bg": false,
+        "show_hero_animation": true,
+        "kc_hero_product_handle": "karmicare-biorhythmic-oral-care-system",
+        "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
+        "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
+        "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
+        "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
+        "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
+        "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
+        "benefits_layout": "stacked",
         "padding_top": 120,
         "padding_bottom": 120,
         "padding_top_mobile": 48,
         "padding_bottom_mobile": 48,
-        "surface": "transition",
-        "show_hero_animation": true,
-        "benefits_layout": "stacked"
-      }
-    },
-    "care_comes_back": {
-      "type": "care-comes-back",
-      "blocks": {
-        "step_ritual": {
-          "type": "step",
-          "settings": {
-            "title": "Your ritual",
-            "text": "Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year."
-          }
-        },
-        "step_checkup": {
-          "type": "step",
-          "settings": {
-            "title": "Your check-up",
-            "text": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay."
-          }
-        },
-        "step_next_order": {
-          "type": "step",
-          "settings": {
-            "title": "Your next order",
-            "text": "Spend Care Credit on any order. It stays valid while you are a member, and for 12 months after."
-          }
-        },
-        "line_year": {
-          "type": "line",
-          "settings": {
-            "label": "Return on Care",
-            "note": "20% back on the Year",
-            "amount": "€70.80"
-          }
-        },
-        "line_checkup": {
-          "type": "line",
-          "settings": {
-            "label": "Dental Check-up Reward",
-            "note": "after month six",
-            "amount": "€40.00"
-          }
-        }
-      },
-      "block_order": [
-        "step_ritual",
-        "step_checkup",
-        "step_next_order",
-        "line_year",
-        "line_checkup"
-      ],
-      "settings": {
-        "eyebrow": "Return on Care",
-        "heading": "Care that comes back.",
-        "intro": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
-        "receipt_title": "Your first Year in Care Credit",
-        "receipt_column_label": "Received",
-        "total_label": "Up to",
-        "total": "€110.80",
-        "fine_print": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-        "terms_link": "shopify://pages/terms-and-conditions-1",
-        "terms_link_label": "Terms, clauses 10 and 11",
-        "padding_top_desktop": 120,
-        "padding_bottom_desktop": 120,
-        "padding_top_mobile": 64,
-        "padding_bottom_mobile": 48,
-        "surface": "page",
-        "show_step_numbers": false
+        "surface": "transition"
       }
     }
   },

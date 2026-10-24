@@ -15,9 +15,10 @@ Errors (exit code 1):
   needs-review claim (claims table for 01-03, claim_status for 05-07), legal-review on every legal entry
   (source `legal` flag, and every batch-04 entry outside the contact page);
 - delivery: a status outside the vocabulary or not matching the source channel (admin-held -> admin,
-  needs-key -> theme-key, kc.* key -> theme-key (theme_keys.py writes it), Dawn key -> locale-present
-  with the value from locales/fr.json), counts or
+  needs-key -> theme-key, kc.* key or an id keyed in theme-keys.json -> theme-key (theme_keys.py writes it),
+  Dawn key -> locale-present with the value from locales/fr.json), counts or
   flag_counts that do not match the entries;
+- invariant entries (names, codes, symbols, INCI lists; flag `invariant`): FR not exactly the EN;
 - FR text: markup, Liquid, [tokens] or runtime price spans that differ from the EN, changed selling-plan
   IDs, French typography slips (plain or missing space before : ; ! ? € % », straight apostrophes,
   €-before-amount), a postal address of the EN missing from the FR (S1) or a different number of (*)
@@ -39,10 +40,11 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCE = os.path.join(HERE, "..", "..", "source-copy")
 LOCALE = os.path.join(HERE, "..", "..", "..", "locales", "fr.json")
+THEME_KEYS = os.path.join(HERE, "..", "theme-keys.json")
 
 STATUSES = {"translated", "admin", "theme-key", "locale-present", "held"}
 FLAGS = {"pending-claim-review", "pending-en-review", "fit-risk", "source-defect", "legal-review",
-         "gendered-title", "wording-adapted", "not-rendered"}
+         "gendered-title", "wording-adapted", "not-rendered", "invariant"}
 LEGAL_BATCH = "batch-04-legal"
 CLAIM_WAIVER = "claim hold waived by Victor 20 Oct for translation"
 LEGAL_EXEMPT_PAGES = {"/pages/contact", "templates/page.contact.json"}
@@ -121,7 +123,9 @@ def load_sources():
             claims[m.group(1)] = m.group(2)
     text = open(LOCALE, encoding="utf-8").read()
     locale = json.loads(re.sub(r"^\s*/\*.*?\*/", "", text, flags=re.S))
-    return {"source": source, "batches": batches, "claims": claims, "locale": locale}
+    # A source row delivered through a kc.* locale key stays theme-key after the source corrects it (sticky bar :995).
+    keyed = {i for k in json.load(open(THEME_KEYS, encoding="utf-8"))["keys"] for i in k["ids"]}
+    return {"source": source, "batches": batches, "claims": claims, "locale": locale, "keyed": keyed}
 
 
 def load_fr():
@@ -163,8 +167,8 @@ def needs_legal_gate(s, batch):
     return bool(s.get("legal")) or (batch == LEGAL_BATCH and s.get("page") not in LEGAL_EXEMPT_PAGES)
 
 
-def expected_channel(s):
-    if s["id"].startswith("locale:kc."):
+def expected_channel(s, keyed):
+    if s["id"].startswith("locale:kc.") or s["id"] in keyed:
         return "theme-key"
     if s["id"].startswith("locale:"):
         return "locale-present"
@@ -227,8 +231,9 @@ def validate(docs, ctx):
                 continue
             if holds:
                 errors.append(where + ": the source requires a hold (" + ", ".join(holds) + ")")
-            if e["status"] != expected_channel(s):
-                errors.append("%s: status %s, the source channel is %s" % (where, e["status"], expected_channel(s)))
+            channel = expected_channel(s, ctx["keyed"])
+            if e["status"] != channel:
+                errors.append("%s: status %s, the source channel is %s" % (where, e["status"], channel))
             if needs_claim_gate(s, claims) and "pending-claim-review" not in e["flags"]:
                 errors.append(where + ": needs-review claim translated without pending-claim-review")
             if not e["fr"]:
@@ -237,6 +242,10 @@ def validate(docs, ctx):
             if e["status"] == "locale-present":
                 if e["fr"] != lookup(ctx["locale"], e["id"][len("locale:"):]):
                     errors.append(where + ": locale-present value differs from locales/fr.json")
+                continue
+            if "invariant" in e["flags"]:
+                if e["fr"] != e["en"]:
+                    errors.append(where + ": invariant entry, FR differs from the EN")
                 continue
             if structure(e["en"]) != structure(e["fr"]):
                 errors.append(where + ": markup, Liquid, [tokens] or runtime spans differ from the EN")
@@ -342,6 +351,8 @@ def self_test(docs, ctx):
         ("waiver note on an entry the source did not waive", set_field("index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer", "notes", CLAIM_WAIVER + "."), "no claim_hold_waived"),
         ("wrong delivery channel", set_field("admin:karmicare-biorhythmic-oral-care-system:title", "status", "translated"), "source channel"),
         ("kc.* key as locale-present", set_field("locale:kc.clock.loading", "status", "locale-present"), "source channel"),
+        ("keyed sticky-bar row as translated", set_field("liquid:sections/main-product.liquid:995", "status", "translated"), "source channel"),
+        ("invariant INCI list translated", set_field("admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#109", "fr", "Eau, glycérine"), "invariant entry"),
         ("change key_path", set_field("footer-group:footer/slogan", "key_path", "sections.footer.settings.other"), "key_path"),
         ("flag_counts out of step", tamper_flag_counts(LEGAL_BATCH), "flag_counts"),
         ("remove a batch file", remove_batch("batch-08-system"), "FR batch file missing"),

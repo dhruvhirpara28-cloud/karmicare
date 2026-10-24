@@ -275,8 +275,10 @@
   }
 
   /* The JS live regions exist from render so screen readers announce them; while empty they
-     leave the flex flow (no gap slot) but stay in the accessibility tree. */
+     leave the flex flow (no gap slot) but stay in the accessibility tree. display: block beats
+     the base.css p:empty { display: none }, which would drop them from that tree (R46-B2). */
   .km-footer-field__message:empty {
+    display: block;
     position: absolute;
     width: 1px;
     height: 1px;
@@ -752,7 +754,8 @@
 
             {%- liquid
               # Klaviyo (kc-footer-newsletter.js): list per language, locale for Smart Translations.
-              # Empty key or list = plain Shopify form.
+              # Empty key or list = plain Shopify form. The script also needs data-msg-retry (R46-B4),
+              # added with its key kc.footer.retry when source-copy delivers it; until then it stays off.
               assign kc_nl_lang = request.locale.iso_code | split: '-' | first | downcase
               assign kc_nl_key = section.settings.klaviyo_public_key | strip
               assign kc_nl_list = section.settings.klaviyo_list_id | strip
@@ -1118,7 +1121,7 @@
       "type": "inline_richtext",
       "id": "slogan",
       "label": "Slogan Text",
-      "default": "Your mouth has a rhythm\nNow your oral care too"
+      "default": "Your mouth has a rhythm[[br]]Now your oral care too"
     },
     {
       "type": "richtext",
