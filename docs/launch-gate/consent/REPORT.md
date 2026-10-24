@@ -6,7 +6,7 @@ Lane gate-consent, launch blocker 4 of LR1 (`docs/launch-gate/input/LR1-LAUNCH-R
 
 - **Shopify's consent machinery works.** The banner shows in Belgium in EN and NL, Reject sits next to Accept on the first layer, granular choices exist, the footer link reopens the panel, and `window.Shopify.customerPrivacy` carries the choice. Every pixel registered under Settings → Customer events (Google GA4 and Ads, Meta, TikTok, Judge.me, Klaviyo's pixel, the Triple Whale custom pixel) is silent before consent, fires after Accept and is silent again after withdrawal.
 - **Three scripts bypass it**, because they are injected by apps outside Customer events: the **Hotjar app embed** (script plus two cookies), **Klaviyo's onsite script** (legacy ScriptTag, analytics modules, local storage) and **UpPromote's affiliate script** (legacy ScriptTag). They load before any choice, after Reject and after withdrawal. This is the blocker LR1 saw, and it is wider than Hotjar.
-- **Our theme code loads no tracker.** `git grep` over `layout/`, `sections/`, `snippets/`, `assets/` finds no Hotjar, gtag, fbq, TikTok, Klaviyo or Triple Whale call, no `document.cookie` or storage write outside the Loop widget (off-limits) and no third-party script tag except Adobe Fonts (§6). The only Klaviyo code in the theme (`assets/kc-footer-newsletter.js`) sends one request on submit and is inactive on the live site (no key configured). **No theme change was needed, so no theme commit; this report and the admin steps are the deliverable.**
+- **Our theme code loads no tracker.** `git grep` over `layout/`, `sections/`, `snippets/`, `assets/` finds no Hotjar, gtag, fbq, TikTok, Klaviyo or Triple Whale call, no `document.cookie` or storage write outside the Loop widget (off-limits) and no third-party script tag except Adobe Fonts (§6). The only Klaviyo code in the theme (`assets/kc-footer-newsletter.js`) sends one request on submit and is inactive on the live site (no key configured). **R60 needed no theme change.** R61 (same day, on Victor's decision) added a consent-gated Hotjar loader to the theme so the app embed can go off: §4.2.
 - **Fastest lawful route**, as LR1 allowed: switch the Hotjar app embed off, switch Klaviyo onsite tracking off in Klaviyo, uninstall or silence UpPromote. Exact paths in `ADMIN-STEPS.md` §1. Victor's decisions (Hotjar yes/no, Klaviyo onsite yes/no, UpPromote keep/uninstall) were sent to the coordinator as one question with recommendation a/a/a; the report assumes a/a/a.
 
 ## 2. Matrix: tracker × state
@@ -47,14 +47,52 @@ Dutch homepage (`/nl`, separate fresh profile): same pre-consent set (Hotjar fun
 
 ## 4. What was fixed in the theme
 
-Nothing had to be. The theme contains no tracker to gate. Verified with:
+### 4.1 R60: nothing had to be
+
+The theme contained no tracker to gate. Verified with:
 
 ```sh
 git grep -nE 'hotjar|gtag\(|googletagmanager|fbq\(|ttq\.|_learnq|klaviyo\.com|triplewhale|TriplePixel' -- layout sections snippets assets ':!assets/loop-widget.js'
 git grep -nE 'document\.cookie|localStorage|sessionStorage' -- layout sections snippets assets ':!assets/loop-widget.js'
 ```
 
-The first returns one line, the footer newsletter's Klaviyo endpoint in `assets/kc-footer-newsletter.js` (used on submit only, inactive on the live theme); the second returns nothing. The one third-party request the theme makes on its own is Adobe Fonts (§6). Theme Check was not run because no theme file changed.
+The first returns one line, the footer newsletter's Klaviyo endpoint in `assets/kc-footer-newsletter.js` (used on submit only, inactive on the live theme); the second returns nothing. The one third-party request the theme makes on its own is Adobe Fonts (§6). Theme Check was not run for R60 because no theme file changed.
+
+### 4.2 R61: Hotjar only with consent, as a theme loader
+
+Victor (24 Oct, via the landing desk): "I want it to load for customers outside the EU region, following Shopify's recommendation. Otherwise, if they don't accept cookies, it is not loaded." Built as `snippets/kc-hotjar-consent.liquid`, rendered once from `layout/theme.liquid` right after `content_for_header` with `site_id: 1364127` (the only layout change). The Hotjar **app embed must be off** for this to be lawful; `ADMIN-STEPS.md` §1.1 and §2.3.
+
+What the snippet does:
+
+- Waits for `window.Shopify.customerPrivacy`. Shopify's banner and pixel scripts provide it asynchronously (on this store at API version 0.1); the snippet checks at `DOMContentLoaded`, at `load`, then every 500 ms for 8 s, and only then asks `Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }])` itself. Reason: asking for another version while Shopify's own copy is loading fails; measured on the live page: `Error: consent-tracking-api@0.2 has already been loaded at version 0.1`.
+- Injects the standard Hotjar snippet for site 1364127 only when `analyticsProcessingAllowed()` is true.
+- Listens for the document event `visitorConsentCollected` and runs the same check, so Hotjar starts the moment analytics consent is given (banner or footer link). The API, not `event.detail`, is the source of truth.
+- Loads nothing on the next page view after withdrawal. Limit: the page on which consent is withdrawn keeps the already running script until navigation; Hotjar publishes no stop call we could verify, so none is called.
+- Never loads twice: does nothing if `window.hj` is already a function (a forgotten app embed) or if it ran already on this page.
+- Not rendered in the theme editor (`request.design_mode`), and the script also returns on `Shopify.designMode`. No other tracker, no personal data, no cookie read or write of its own.
+
+Regions, per Shopify's documentation (quoted in `ADMIN-STEPS.md` §2.3): where the store's cookie banner is configured, "non-essential purposes are not allowed by default until consent is given"; "For other regions, the default behavior is to allow all processing purposes." With Shopify's automated banner regions (UK and EEA, Switzerland grouped with Europe) Hotjar therefore waits for consent in the EU/EEA, the UK and Switzerland and loads at once elsewhere, for example in the US, unless the visitor opted out ("Your privacy choices" / Global Privacy Control). The controlling setting is Settings → Customer privacy → Cookie banner → Regions.
+
+Verification, file:// harness (the snippet's script with the site id filled in, `Shopify.customerPrivacy` stubbed per state, run in a fresh isolated Orca profile; Hotjar's loader is a real request to `static.hotjar.com`):
+
+| State | Hotjar loader request | When |
+|---|---|---|
+| EU, no choice yet, Accept simulated at 1.5 s | yes, once | 0 ms after the consent event |
+| EU, no choice | **no** | — |
+| EU, declined earlier | **no** | — |
+| EU, accepted earlier | yes, once | at page start |
+| EU, accepted, withdrawn on this page at 1.5 s | once at start, nothing after | documented limit |
+| EU, withdrawn earlier, next page view | **no** | — |
+| Non-EU default (no banner region) | yes, once | at page start |
+| Non-EU, opted out | **no** | — |
+| API appears 2 s after load (Shopify's async scripts) | yes, once | 26 ms after the API appeared |
+| API never provided; `loadFeatures` fallback | yes, once | `loadFeatures` called at 8.0 s, Hotjar at 8.3 s |
+| Theme editor (`designMode`) | **no** | — |
+| `window.hj` already present (app embed on) | **no second load** | — |
+
+Verification, live homepage with the real Shopify banner (fresh isolated profile, the same gate logic injected with a recorder instead of the Hotjar snippet, because the live theme still carries the app embed): before any choice `analyticsProcessingAllowed()` = false (no load); Decline → event, false; footer link → Accept → event, true (would load immediately); reload → true at start; footer link → Decline → event, false; reload → false. On the live page `window.hj` already exists from the embed, so the real snippet would skip itself there until the embed is off.
+
+Theme Check after the change: 0 errors, 19 warnings, the same baseline as before (the two in `layout/theme.liquid`, RemoteAsset for Adobe Fonts and UndefinedObject `scheme_classes`, predate R61).
 
 ## 5. The footer newsletter form today (not changed; global lane owns it)
 
@@ -64,7 +102,7 @@ The first returns one line, the footer newsletter's Klaviyo endpoint in `assets/
 
 ## 6. Handoffs and decisions
 
-**Victor (decisions, sent as one question to the coordinator):** Hotjar keep/drop; Klaviyo onsite tracking off; UpPromote uninstall/keep. Recommendation: drop Hotjar for launch, Klaviyo onsite off, UpPromote uninstalled unless an affiliate programme runs. If Victor wants Hotjar back, the lane can build a theme-side loader gated on `analyticsProcessingAllowed()` with re-check on `visitorConsentCollected` (R61), with the Hotjar app embed kept off.
+**Victor (decisions, sent as one question to the coordinator):** Hotjar keep/drop; Klaviyo onsite tracking off; UpPromote uninstall/keep. Recommendation was: drop Hotjar for launch, Klaviyo onsite off, UpPromote uninstalled unless an affiliate programme runs. Victor chose to keep Hotjar with consent; R61 built the theme loader (§4.2). Still open for Victor: switch the Hotjar app embed off once R61 is live (§4.2, `ADMIN-STEPS.md` §1.1), Klaviyo onsite tracking, UpPromote.
 
 **Victor / design (fonts):** Adobe Fonts is loaded from Adobe's servers on every page view before any choice (IP to Adobe, licence beacon, no cookie). Adobe's web licence requires Adobe's loader, so moving to self-hosted fonts means a font licence decision. Low risk compared with the three trackers; decide after launch.
 

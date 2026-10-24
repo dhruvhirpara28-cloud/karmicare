@@ -33,6 +33,11 @@
 
     {% comment %}Required by Shopify — must appear before all scripts{% endcomment %}
     {{ content_for_header }}
+    {%- comment -%}
+      Hotjar only with analytics consent (R61). Replaces the Hotjar app embed, which must stay off:
+      docs/launch-gate/consent/ADMIN-STEPS.md §1.1 and §2.3.
+    {%- endcomment -%}
+    {% render 'kc-hotjar-consent', site_id: 1364127 %}
 
     {% render 'day-night-locations' %}
     <script>{{ 'day-night-sun.js' | inline_asset_content }}</script>

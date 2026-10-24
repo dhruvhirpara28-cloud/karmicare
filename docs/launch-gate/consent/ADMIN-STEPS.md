@@ -21,6 +21,8 @@ Shopify's own consent banner works, the footer link reopens it, and every pixel 
 
 Effect: the inline Hotjar snippet disappears from `content_for_header`; no more `static.hotjar.com`, `script.hotjar.com`, `content.hotjar.io` requests and no `_hjSession_1364127` / `_hjSessionUser_1364127` cookies. Existing Hotjar cookies in visitors' browsers expire by themselves (session 30 min, user 365 days); Shopify cannot delete them.
 
+**R61 (24 Oct, later):** Victor switched the embed back on in the live editor. The theme now carries its own consent-gated Hotjar loader (`snippets/kc-hotjar-consent.liquid`, see §2.3), so Hotjar keeps working for everyone who may be tracked. **The embed must go off again once the R61 release is live**; the loader skips itself while the embed is on (it sees `window.hj`), so there is no double load, but the embed itself still tracks EU visitors before consent until it is off. Switch it off right away if there should be no EU exposure in the meantime; EU recordings simply stop until the release ships.
+
 Note for the landing desk: this toggles `config/settings_data.json` → `current.blocks.8669066016853369741.disabled` from `false` to `true` on `main`. Bring it into merchant-edit before the next theme push, or the push switches Hotjar back on.
 
 ### 1.2 Klaviyo onsite tracking off (removes the ScriptTag)
@@ -86,12 +88,24 @@ Also note there: the second unidentified pixel (id `1979744637`, app client `275
 | App pixels | Expect: Judge.me, Klaviyo, Google & YouTube, Facebook & Instagram (Meta), TikTok, Loop Subscriptions (probably), and one more (1.4). Each shows the permission it declares; Shopify applies it. Disconnect what is not needed for launch; fewer processors is less to explain in the privacy page. |
 | Custom pixel | Open the Triple Whale (TriplePixel) custom pixel → **Settings** → **Permission** must be **Required** with **Analytics** and **Marketing** ticked (observed in the storefront config: yes), **Data sale** as appropriate (EU: "Does not qualify as data sale"). Do not paste Hotjar or Klaviyo into a custom pixel: custom pixels run in a sandbox and Hotjar cannot record from there. |
 
-### 2.3 Hotjar, if Victor wants to keep it
+### 2.3 Hotjar: the theme loader (R61, built) and what it needs from admin
 
-Hotjar's Shopify app has no consent setting; its snippet is unconditional (observed, `REPORT.md` §2). Two lawful ways:
+Hotjar's Shopify app has no consent setting; its snippet is unconditional (observed, `REPORT.md` §2). Since R61 the theme loads Hotjar itself, consent-gated: `snippets/kc-hotjar-consent.liquid`, rendered once from `layout/theme.liquid` with site id 1364127.
 
-- **Theme-gated loader (lane can build it as R61 on request):** keep the app embed **off** (1.1) and let the theme load the Hotjar snippet only once `Shopify.customerPrivacy.analyticsProcessingAllowed()` is true, re-checked on the `visitorConsentCollected` event, with `hj('consent')`-style stop on withdrawal. Victor's Hotjar site id stays 1364127 and lives in a theme setting, not in code.
-- **Hotjar's own consent flow:** Hotjar → Settings → Sites & Organizations → site 1364127 → **Privacy** / **Data suppression**: keep keystroke masking on (already promised in the privacy page), set IP anonymisation, and still gate the load as above; the Hotjar privacy settings alone do not stop the script from loading.
+What the loader does: waits for Shopify's Customer Privacy API (`window.Shopify.customerPrivacy`, loading it with `Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.2' }])` if the banner script has not), injects the standard Hotjar snippet only when `analyticsProcessingAllowed()` is true, listens for Shopify's `visitorConsentCollected` event so Hotjar starts the moment analytics consent is given, loads nothing on the next page view after withdrawal, never loads twice (it does nothing if `window.hj` already exists), and does not run in the theme editor.
+
+Who gets Hotjar, and which admin setting decides it:
+
+| Visitor | Behaviour | Why |
+|---|---|---|
+| EU/EEA, UK, Switzerland (regions where the banner is active) | Nothing until Accept, or Manage preferences with **Analytics** ticked. Decline or withdrawal: no Hotjar on the next page view. | Shopify: "non-essential purposes are not allowed by default until consent is given" in regions configured to require consent (shopify.dev, Customer Privacy API). |
+| Everyone else, for example the US | Hotjar loads at once, unless the visitor opted out through "Your privacy choices" or a Global Privacy Control browser signal. | Shopify: "For other regions, the default behavior is to allow all processing purposes" (same page). |
+
+The region list is **Settings → Customer privacy → Cookie banner → Regions**. Shopify's automated option "automatically configure[s] your cookie banner for visitors in the UK and EEA regions" when those markets are active; Switzerland is grouped with Europe by Shopify and should be in the list as long as the market selector offers CH. Adding regions manually (even "all regions") makes the loader wait for consent there too, so Victor's choice of regions is also the choice of where Hotjar waits. For US-state opt-outs, Shopify's **Data Sharing Opt-Out Page** setting on the same screen adds the "Your privacy choices" link and honours GPC; the loader follows whatever `analyticsProcessingAllowed()` then says.
+
+Admin prerequisites for the loader to be lawful: (1) the Hotjar **app embed off** (§1.1), otherwise the embed still tracks EU visitors before consent; (2) keep Hotjar's own privacy settings as advised: Hotjar → Settings → Sites & Organizations → site 1364127 → **Privacy** / **Data suppression**: keystroke masking on (promised in the privacy page), IP anonymisation on, suppress text where possible. Those settings reduce what Hotjar stores; they do not replace the consent gate.
+
+Known limit: when a visitor withdraws consent on a page where Hotjar is already running, the current page keeps recording until the next navigation; Hotjar publishes no stop call we could verify, so the loader does not call one. From the next page view on, nothing loads.
 
 ### 2.4 Klaviyo, proper state
 
