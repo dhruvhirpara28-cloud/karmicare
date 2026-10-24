@@ -73,6 +73,34 @@
     opacity: 0.68;
   }
 
+  /* A card with a link: the description is the link, the whole card its hit area */
+  .section-{{ section.id }} .consumer-rights__card:has(.consumer-rights__card-link) {
+    position: relative;
+  }
+
+  .section-{{ section.id }} .consumer-rights__card-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .section-{{ section.id }} .consumer-rights__card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .section-{{ section.id }} .consumer-rights__card-link:hover {
+    color: var(--kc-mapped-text-link-default-hover);
+  }
+
+  .section-{{ section.id }} .consumer-rights__card-link:focus-visible {
+    outline: 2px solid var(--kc-mapped-border-focus-strong);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
   /* Day Mode Colors */
   {%- if section.settings.box_color_day != blank -%}
     body:not(.night-mode) .section-{{ section.id }} .consumer-rights__card,
@@ -219,7 +247,16 @@
 
               {% if block.settings.card_description != blank %}
                 <div class="consumer-rights__card-description">
-                  {{ block.settings.card_description }}
+                  {%- comment -%}
+                    With a link the description carries it and the whole card is clickable
+                    (::after stretches over the card): "2 years / Legal guarantee" lands on the
+                    legal guarantee section further down, #two-year-guarantee (Victor, 24 Oct).
+                  {%- endcomment -%}
+                  {% if block.settings.card_link != blank %}
+                    <a class="consumer-rights__card-link" href="{{ block.settings.card_link | escape }}">{{ block.settings.card_description }}</a>
+                  {% else %}
+                    {{ block.settings.card_description }}
+                  {% endif %}
                 </div>
               {% endif %}
 
@@ -379,6 +416,12 @@
           "id": "card_bottom_text",
           "label": "Card Bottom Text",
           "default": "Legal right · one-time orders"
+        },
+        {
+          "type": "text",
+          "id": "card_link",
+          "label": "Link (URL or #anchor)",
+          "info": "Optional. The whole card becomes a link, for example #two-year-guarantee for the legal guarantee section further down the page."
         }
       ]
     }

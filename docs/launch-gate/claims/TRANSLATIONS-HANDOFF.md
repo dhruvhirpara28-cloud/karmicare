@@ -26,3 +26,18 @@ Note for registration: a registered NL or FR translation of a key whose EN chang
 |---|---|
 | `sections/stat-strip-karmicare.liquid` | stat `text` default and preset: "Formulated on +36 studies" → "Formulated on peer-reviewed studies" |
 | `sections/two-formulas-karmicare.liquid` | `ingredients_list` default: BIOFILM PREVENTION → HELPS REDUCE BIOFILM |
+
+## 3. R59b · Victor's choices of 24 Oct (homepage only)
+
+Astra's open R59 homepage items (landing desk, 24 Oct), shown to Victor on the localhost preview. He kept the clock's night text and the seven ring messages, kept "Cortisol rises" and added the morning line, and took the FAQ answer without dashes and colons. The PDP clock keeps its current texts. The same FAQ wording is the default in `sections/km-faq-accordion.liquid`.
+
+| # | Section · block · key | EN (new) | NL | FR |
+|---|---|---|---|---|
+| 10 | `chronobiology_clock_karmicare` · (section) · `morning_text` | Cortisol rises. Morning brings coffee, breakfast and the day's first acids. Enamel needs its shield on first. | Cortisol stijgt. De ochtend brengt koffie, ontbijt en de eerste zuren van de dag. Je glazuur heeft eerst zijn schild nodig. | Le cortisol monte. Le matin apporte le café, le petit-déjeuner et les premiers acides de la journée. L’émail a d’abord besoin de son bouclier. |
+| 11 | `km_faq_accordion_FYcArV` · `faq_item_TNnqTQ` · `answer` | `<p>Because your mouth doesn’t do the same job all day. Daytime is exposure to acids, sugars and coffee, so Awake protects, activates and brightens. Night is repair, when saliva drops and your body regenerates, so Asleep soothes, supports your mouth’s balance and helps remineralise. Spit, don’t rinse. Left on after the evening brush, it gets extended contact time.</p>` | `<p>Omdat je mond niet de hele dag hetzelfde werk doet. Overdag draait het om blootstelling aan zuren, suikers en koffie, dus Awake beschermt, activeert en maakt stralender. ’s Nachts draait het om herstel, je speeksel neemt af en je lichaam regenereert, dus Asleep verzacht, ondersteunt de balans van je mond en helpt remineraliseren. Spugen, niet spoelen. Blijft het na het avondpoetsen zitten, dan krijgt het een verlengde contacttijd.</p>` ("verzacht" for soothes, as on the valerian card; the registered NL had "kalmeert") | `<p>Parce que votre bouche ne fait pas le même travail toute la journée. Le jour, c’est l’exposition aux acides, aux sucres et au café, alors Awake protège, active et éclaircit. La nuit, c’est la réparation, la salive diminue et votre corps se régénère, alors Asleep apaise, soutient l’équilibre de votre bouche et aide à reminéraliser. Crachez, ne rincez pas. Laissé en place après le brossage du soir, il bénéficie d’un temps de contact prolongé.</p>` |
+
+Basis for row 11: CR1 C10/C11/C13 ("extended contact time", "after the brush"), C31 ("supports your mouth's own balance"), products.md "helps remineralise"; "rebalances" and "while you sleep" dropped; "soothes" is an allowed verb. Victor's style rule of 24 Oct: as few colons, semicolons and dashes as possible, so the copy reads as written by a person.
+
+## 4. Clock messages `kc.clock.window_1`–`7` · no change (Victor, 24 Oct)
+
+A trimmed EN set per CR1 C54 was shown on the localhost preview. Victor keeps the seven original messages: their point is the whole mouth across the day (enamel, teeth, gums, taste buds, saliva), and the trimmed set reduced them to saliva. Nothing for source-copy here. CR1 C54 stays an evidence item in the register (a cariology source for the pH and timing statements in messages 2–5).

@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "withdrawal": {
+      "type": "kc-withdrawal",
+      "settings": {
+        "eyebrow": "Legal",
+        "heading": "Withdraw from contract here",
+        "intro": "<p>Changed your mind? You can withdraw from an online order within 14 days of delivery, without giving a reason. Fill in the statement below, check it and confirm. We acknowledge receipt by email, with the content, date and time of your statement.</p>",
+        "steps_label": "Steps",
+        "step_1_label": "Your statement",
+        "label_name": "Your name",
+        "label_order": "Order number",
+        "help_order": "As on your order confirmation, for example #1234. For a membership: the number of the order you withdraw from.",
+        "label_email": "Email address",
+        "help_email": "We send the acknowledgement of receipt to this address.",
+        "label_items": "Which items (optional)",
+        "help_items": "Leave empty to withdraw from the whole order.",
+        "privacy_note": "<p>We process these details to handle your withdrawal, as described in our <a href=\"/pages/privacy-policy\">Privacy Policy</a>.</p>",
+        "button_review": "Check your statement",
+        "step_2_label": "Check and confirm",
+        "statement_text": "I hereby give notice that I withdraw from my contract of sale for the order below.",
+        "review_note": "Not right? Change your details before you confirm.",
+        "button_confirm": "Confirm withdrawal",
+        "button_edit": "Change details",
+        "confirm_note": "By confirming you send this statement to KARMICA BV. You receive an acknowledgement of receipt by email, with the date and time of submission.",
+        "error_required_name": "Please fill in your name.",
+        "error_required_order": "Please fill in your order number.",
+        "error_required_email": "Please fill in your email address.",
+        "error_format_email": "Please enter a valid email address.",
+        "error_generic": "Your statement was not sent. Please check the details below and try again, or email care@karmicare.com.",
+        "success_heading": "Your withdrawal has been received",
+        "success_ack_sent": "An acknowledgement of receipt is on its way to [email], with the content, date and time of your statement. Keep that email: it is your proof.",
+        "success_ack_default": "We acknowledge receipt by email, with the content, date and time of your statement. Keep that email: it is your proof.",
+        "success_next_steps": "<p><strong>What happens next.</strong> Send the goods back within 14 days to KARMICA BV, Returns, Vizierstraat 28, 8000 Bruges, Belgium. We refund everything you paid, including the standard delivery charge, within 14 days of the day you told us; we may wait until the goods are back or you have shown that you sent them. Questions? Write to <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>. A person reads every message.</p>",
+        "aside_heading": "Other ways to withdraw",
+        "aside_text": "<p>Prefer another route? Email <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>, call <a href=\"tel:+32478572761\">+32 (0) 478 57 27 61</a> or write to KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgium. The model withdrawal form is on the Consumer Rights page. Whichever way you choose, the day you tell us counts.</p>",
+        "surface": "page",
+        "padding_top": 90,
+        "padding_bottom": 120,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 64
+      }
+    }
+  },
+  "order": [
+    "main",
+    "withdrawal"
+  ]
+}
