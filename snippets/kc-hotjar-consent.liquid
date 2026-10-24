@@ -17,9 +17,10 @@
   purpose ("For other regions, the default behavior is to allow all processing purposes",
   shopify.dev/docs/api/customer-privacy), so Hotjar loads at once there unless the visitor opted
   out of data sale/sharing ("Your privacy choices" or a Global Privacy Control signal in an opt-out
-  region), which sets saleOfDataAllowed() to false. After withdrawal nothing loads on the next page
-  view; the page where consent was withdrawn keeps the already running script until it is left.
-  Never runs in the theme editor.
+  region), which sets saleOfDataAllowed() to false. Withdrawal takes effect at once: when this
+  loader started Hotjar on the current page view and consent is withdrawn, Hotjar's cookies for
+  this site (_hj…_<site_id>) are expired and the page reloads once (Hotjar has no documented stop
+  call); the reloaded page sees the refusal and loads nothing. Never runs in the theme editor.
 
   Usage: {% render 'kc-hotjar-consent', site_id: 1364127 %} once, from layout/theme.liquid.
   Accepts: site_id (number, required; 0 or blank renders nothing). No other tracker, no personal data.
@@ -64,8 +65,60 @@
         }
       }
 
+      // Withdrawal must take effect on the page the visitor is on (GDPR art. 7(3); Astra R57d B2).
+      // Hotjar documents no call that stops a running recorder (checked 24 Oct 2026), so when this
+      // loader started Hotjar on this page view and consent is withdrawn, its cookies for this site
+      // are expired and the page is reloaded once; the reloaded page sees the refusal and loads
+      // nothing. A sessionStorage stamp refuses a second reload within 5 s (loop guard); a reload
+      // can only recur after a new consent change by the visitor. Hotjar started by something else
+      // (an app embed) is not ours to stop and is left alone.
+      var RELOAD_KEY = 'kc-hotjar-withdrawal';
+      var stopping = false;
+
+      function expireHotjarCookies() {
+        var suffix = '_' + siteId;
+        var names = document.cookie.split('; ').map(function (pair) { return pair.split('=')[0]; })
+          .filter(function (name) { return name.indexOf('_hj') === 0 && name.slice(-suffix.length) === suffix; });
+        var host = window.location.hostname;
+        var parts = host.split('.');
+        var domains = ['', host, '.' + host];
+        if (parts.length > 2) domains.push(parts.slice(-2).join('.'), '.' + parts.slice(-2).join('.'));
+        names.forEach(function (name) {
+          domains.forEach(function (domain) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (domain ? '; domain=' + domain : '');
+          });
+        });
+      }
+
+      function stopHotjar() {
+        if (stopping) return;
+        stopping = true;
+        try {
+          var last = parseInt(window.sessionStorage.getItem(RELOAD_KEY), 10) || 0;
+          if (Date.now() - last < 5000) {
+            stopping = false;
+            return;
+          }
+          window.sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
+        } catch (error) {
+          // Storage blocked: reload anyway; a loop needs a new consent change by the visitor.
+        }
+        // Shopify has saved the new consent when the event fires; a short delay lets its cookie
+        // write settle before the reloaded page reads it.
+        window.setTimeout(function () {
+          stopping = false;
+          if (hotjarAllowed()) return;
+          expireHotjarCookies();
+          window.location.reload();
+        }, 300);
+      }
+
       function check() {
-        if (hotjarAllowed()) loadHotjar();
+        if (hotjarAllowed()) {
+          loadHotjar();
+        } else if (started) {
+          stopHotjar();
+        }
       }
 
       // Shopify's banner and pixel scripts load the API themselves (version 0.1 on this store, async),
