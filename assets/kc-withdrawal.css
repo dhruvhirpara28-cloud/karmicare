@@ -26,10 +26,16 @@
   margin: 0 0 24px;
 }
 
+/* Colours are set on every heading, label and value, not inherited: Dawn's base.css paints h1, h2
+   and label from its own scheme variables, which the Day/Night switch does not always follow */
 .kc-withdrawal__heading {
   margin: 0 0 20px;
-  line-height: 1;
-  letter-spacing: -2px;
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h1-text-size);
+  line-height: var(--kc-responsive-h1-line-height);
+  letter-spacing: var(--kc-responsive-h1-letter-spacing);
+  font-weight: var(--font-500-weight, 500);
 }
 
 .kc-withdrawal__intro {
@@ -102,6 +108,7 @@
 
 .kc-wd-step__title {
   margin: 0 0 20px;
+  color: var(--kc-mapped-text-default-heading);
   font-family: var(--kc-font-use-heading);
   font-size: var(--kc-responsive-h4-text-size);
   line-height: var(--kc-responsive-h4-line-height);
@@ -126,6 +133,7 @@
 .kc-wd-field__label {
   display: block;
   margin: 0 0 6px;
+  color: var(--kc-mapped-text-default-heading);
   font-size: var(--kc-responsive-label-lg-text-size);
   line-height: var(--kc-responsive-label-lg-line-height);
   letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
@@ -237,6 +245,7 @@
 /* Step 2: the statement shown back */
 .kc-wd-statement {
   margin: 0 0 16px;
+  color: var(--kc-mapped-text-default-heading);
   font-size: var(--kc-responsive-body-lg-text-size);
   line-height: var(--kc-responsive-body-lg-line-height);
   letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
@@ -268,6 +277,7 @@
 
 .kc-wd-review dd {
   margin: 0;
+  color: var(--kc-mapped-text-default-heading);
   overflow-wrap: anywhere;
   white-space: pre-line;
 }
@@ -277,6 +287,12 @@
   display: grid;
   gap: 12px;
   margin: 24px 0 0;
+}
+
+/* KC/Button large: the height comes from the token, not from Dawn's button variables */
+.kc-wd-actions .button {
+  min-height: var(--kc-responsive-size-button-lg-height);
+  padding: 0 20px;
 }
 
 .kc-wd-note {
@@ -413,10 +429,6 @@
     margin-bottom: 20px;
     font-size: var(--kc-responsive-label-sm-text-size);
     line-height: 12px;
-  }
-
-  .kc-withdrawal__heading {
-    letter-spacing: -1px;
   }
 
   .kc-wd-review__row {
