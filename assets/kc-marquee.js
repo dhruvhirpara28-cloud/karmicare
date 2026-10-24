@@ -6,7 +6,9 @@
   The track ([data-marquee-track]) drifts left at a slow, constant speed.
   Instead of stopping dead, the speed eases towards its target: hovering (or
   focusing) a card glides the band to a halt so the card can be read, leaving
-  lets it drift off again. Cards can be dragged; on release the band keeps
+  lets it drift off again. Keyboard focus on a card that has drifted out of
+  view first glides the band so the card sits at the page content's left
+  edge (see reveal). Cards can be dragged; on release the band keeps
   the drag momentum and settles back to its cruising speed. Off-screen, the
   loop sleeps. With prefers-reduced-motion the band does not move and
   scrolls natively.
@@ -121,9 +123,10 @@ if (!customElements.get('kc-marquee')) {
           this.hovered = false;
           this.updateTarget();
         });
-        this.addEventListener('focusin', () => {
+        this.addEventListener('focusin', (event) => {
           this.focused = true;
           this.updateTarget();
+          this.reveal(event.target);
         });
         this.addEventListener('focusout', () => {
           this.focused = false;
@@ -276,6 +279,38 @@ if (!customElements.get('kc-marquee')) {
         }
         this.velocity = 0;
         this.wheelPending += delta;
+      }
+
+      /* Keyboard focus can land on a card the band has drifted out of view:
+         with data-align-start the band even opens on the clone set, so the
+         originals (the only cards in the tab order) sit off to the left.
+         The band then glides so the card sits at the page content's left
+         edge, the way Home does, and holds there while focused. Nothing
+         moves for a card already fully in view, for a clone, during a drag,
+         or when no ring will show (a mouse click). The first card stops at
+         the band's own edge: nothing is cloned before it. */
+      reveal(target) {
+        if (this.drag?.moved) return;
+        let ringShown = true;
+        try {
+          ringShown = target.matches(':focus-visible');
+        } catch (error) {
+          // No :focus-visible support: reveal anyway
+        }
+        if (!ringShown) return;
+        const card = this.originals.find((original) => original.contains(target));
+        if (!card || !this.setWidth) return;
+
+        // Focusing may have scrolled the clipped band towards the card; the transform owns the position
+        if (this.scrollLeft) this.scrollLeft = 0;
+        const band = this.getBoundingClientRect();
+        const rect = card.getBoundingClientRect();
+        if (rect.left >= band.left - 1 && rect.right <= band.right + 1) return;
+
+        const position = this.offset + this.wheelPending; // where the band is heading
+        const start = Math.max(card.offsetLeft - this.contentInset(), 0);
+        this.velocity = 0;
+        this.wheelPending += start - position;
       }
 
       start() {
