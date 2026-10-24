@@ -51,10 +51,11 @@
   {%- endif -%}
 
   /* Figma: 28px bar (8px above a 12px line, the hairline closes it). From 750px the line stands
-     still and centred; it only moves when one copy plus the gutters is wider than the bar, which
-     the script under the markup measures with the real text and fonts (Victor, 24 Oct: no
-     animation unless on mobile or the text is longer than the viewport). Without the script a
-     long line wraps instead of being clipped. */
+     still and centred; it only moves when one copy is wider than the announcement's own slot
+     (between the page gutters, or the middle column when social icons or the country/language
+     selector take the sides), which the script under the markup measures with the real text
+     and fonts (Victor, 24 Oct: no animation unless on mobile or the text is longer than the
+     viewport). Without the script a long line wraps instead of being clipped. */
   @media screen and (min-width: 750px) {
     /* The still line sits between the page gutters (32px from 750px), not Dawn's utility padding
        (15px, then 50px from 990px); the script measures the room between them */
@@ -71,11 +72,6 @@
 
     #AnnouncementBar-{{ section.id }} .announcement-bar__message * {
       line-height: inherit;
-    }
-
-    /* One line while the script measures, whatever the state */
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee.is-measuring .announcement-bar__message {
-      white-space: nowrap;
     }
   }
 
@@ -166,10 +162,22 @@
     {%- else -%}
       {%- assign marquee = bar | append: ' .announcement-bar--marquee.is-moving' -%}
       @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
-        /* The moving line takes the whole bar, as on mobile. The gutters come back while the
-           script measures, so it reads the room the still line would have */
-        {{ bar }} .utility-bar__grid:has(> .announcement-bar--marquee.is-moving:not(.is-measuring)) {
+        /* Announcement alone: the moving line takes the whole bar, as on mobile. The gutters
+           come back while the script measures, so it reads the room the still line would have.
+           With social icons or the selector beside it, the line moves inside its own column
+           and the controls keep their place */
+        {{ bar }} .utility-bar__grid:not(.utility-bar__grid--3-col):has(> .announcement-bar--marquee.is-moving:not(.is-measuring)) {
           padding: 0;
+        }
+        {{ bar }} .utility-bar__grid--3-col > .announcement-bar--marquee.is-moving {
+          padding-left: 0;
+        }
+        /* With social icons Dawn sizes the bar to its content from 990px (fit-content); four
+           copies on one row would then run far past the screen, so the moving bar fills its
+           column instead */
+        {{ bar }} .announcement-bar--marquee.is-moving {
+          width: 100%;
+          margin: 0;
         }
     {%- endif -%}
       {{ marquee }} {
@@ -202,6 +210,23 @@
       }
     }
   {%- endfor -%}
+  /* While the script measures (one synchronous step, never painted): the bar fills its slot with
+     no padding, holds the line on one row, and clips it, so the long line cannot widen its
+     column while it is being measured. Written after the loop so it wins over .is-moving */
+  @media screen and (min-width: 750px) {
+    {{ bar }} .announcement-bar--marquee.is-measuring {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+      overflow: hidden;
+    }
+    {{ bar }} .announcement-bar--marquee.is-measuring .announcement-bar__message {
+      white-space: nowrap;
+    }
+  }
   @keyframes kc-announcement-marquee-{{ section.id }} {
     from {
       transform: translateX(0);
@@ -252,22 +277,32 @@
         {%- endif -%}
       </div>
       {%- comment -%}
-        From 750px the line only moves when one copy plus the gutters is wider than the bar. The
-        script measures that before first paint (so nothing flips on load), again on resize, once
-        the fonts are in and when the theme editor reloads the section, and holds .is-moving on
-        the bar. It leaves the moving state only once the line fits with 8px to spare, so a 1px
-        change of width never flips it back and forth. The region is a tab stop only while the
-        line moves (below 750px, or .is-moving; never with reduced motion), so keyboard focus can
-        pause it; a linked announcement pauses through its link instead
+        From 750px the line only moves when one copy is wider than the announcement's slot: the
+        bar itself, laid out in its grid column with no padding (between the page gutters, or the
+        middle column when social icons or the selector are on). The script measures that before
+        first paint (so nothing flips on load), again on resize, once the fonts are in and when
+        the theme editor reloads the section, and holds .is-moving on the bar. It leaves the
+        moving state only once the line fits with 8px to spare, so a 1px change of width never
+        flips it back and forth. It runs once per section: run again (a reload of the section or a
+        second render), it only re-binds, so there is one observer and one set of listeners. The
+        region is a tab stop only while the line moves (below 750px, or .is-moving; never with
+        reduced motion), so keyboard focus can pause it; a linked announcement pauses through its
+        link instead
       {%- endcomment -%}
       <script>
         (function () {
-          var id = 'AnnouncementBar-{{ section.id }}';
+          var key = '{{ section.id }}';
+          var bound = window.KCAnnouncementMarquee || (window.KCAnnouncementMarquee = {});
+          if (bound[key]) {
+            bound[key]();
+            return;
+          }
+          var id = 'AnnouncementBar-' + key;
           var wide = window.matchMedia('(min-width: 750px)');
           var still = window.matchMedia('(prefers-reduced-motion: reduce)');
           var slack = 8;
           var observer = window.ResizeObserver ? new ResizeObserver(sync) : null;
-          var section, grid, bar, text;
+          var section, bar, text;
 
           function fits(moving) {
             bar.classList.add('is-measuring');
@@ -276,8 +311,7 @@
             var line = range.getBoundingClientRect().width;
             var arrow = bar.querySelector('.icon-arrow');
             if (arrow) line += arrow.getBoundingClientRect().width + parseFloat(getComputedStyle(arrow).marginLeft);
-            var gutters = getComputedStyle(grid);
-            var room = grid.clientWidth - parseFloat(gutters.paddingLeft) - parseFloat(gutters.paddingRight);
+            var room = bar.getBoundingClientRect().width;
             bar.classList.remove('is-measuring');
             return Math.ceil(line) <= Math.floor(room) - (moving ? slack : 0);
           }
@@ -298,8 +332,7 @@
             section = document.getElementById(id);
             bar = section && section.querySelector('.announcement-bar--marquee');
             text = bar && bar.querySelector('.announcement-bar__message > span');
-            grid = text && bar.parentNode;
-            if (!grid) {
+            if (!text) {
               bar = null;
               return;
             }
@@ -310,6 +343,7 @@
             sync();
           }
 
+          bound[key] = bind;
           bind();
           if (!observer) window.addEventListener('resize', sync);
           if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
