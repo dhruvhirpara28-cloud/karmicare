@@ -544,7 +544,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 151 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/answer` | template_setting | Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — s… | approved | C C25 |
 | 152 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | template_setting | The ritual | corrected |  |
 | 153 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/question` | template_setting | How long does one duo last? | corrected |  |
-| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
+| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
 | 155 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | template_setting | Ingredients & safety | corrected |  |
 | 156 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question` | template_setting | Can I combine Karmicare with fluoride toothpaste or rinses? | corrected |  |
 | 157 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` | template_setting | Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating di… | corrected | C C101 |
