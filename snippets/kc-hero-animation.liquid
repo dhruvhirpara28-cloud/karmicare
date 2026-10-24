@@ -73,6 +73,7 @@
     // of the poster when the video cannot play: with reduced motion, when autoplay is refused and
     // there is no animated WebP, and on a slow connection (save-data or 2G, or no playback after
     // 3s on screen). Then the video is dropped, so the kit does not jump back into its flight.
+    // A media error, before or after playback starts, takes the same way out as a refusal.
     // On an Awake/Asleep switch the new mode's video starts again from its first frame, so the
     // brushes land again (Victor, 24 Oct); off screen it does so once it comes into view. The old
     // mode's video pauses at once, so two never play together.
@@ -152,6 +153,29 @@
                     panel.classList.add('is-playing');
                   },
                   { once: true }
+                );
+                // A media error, also after playback has started (R52 B3: MediaError 4 kept is-playing
+                // and the image hidden), ends the video for good: the still, else the animated WebP,
+                // else the poster. A source error counts once the last source has failed.
+                const failed = () => {
+                  if (!isCurrent(created)) return;
+                  const fallback = panel.dataset.still || panel.dataset.animated;
+                  if (fallback) {
+                    this.fallBack(panel, fallback);
+                    return;
+                  }
+                  clearTimeout(panel.slowTimer);
+                  panel.slowTimer = null;
+                  panel.setAttribute('data-refused', '');
+                  created.remove();
+                  panel.classList.remove('is-playing');
+                };
+                created.addEventListener('error', failed);
+                const sources = [...created.querySelectorAll('source')];
+                sources.forEach((source) =>
+                  source.addEventListener('error', () => {
+                    if (source === sources[sources.length - 1] || created.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) failed();
+                  })
                 );
                 video = created;
               }
