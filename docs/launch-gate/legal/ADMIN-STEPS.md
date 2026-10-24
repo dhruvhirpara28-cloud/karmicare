@@ -110,11 +110,11 @@ The first sentence of Shipping policy, Purchase options cancellation policy, Con
 
 | Language | Old link target | New link target |
 |---|---|---|
-| English | `https://www.karmicare.com/en/pages/terms-and-conditions` | `/policies/terms-of-service` |
-| Dutch (“Algemene Voorwaarden”) | same | `/nl/policies/terms-of-service` |
-| French (“Conditions générales”) | same | `/fr/policies/terms-of-service` |
+| English | `https://www.karmicare.com/en/pages/terms-and-conditions` | `/pages/terms-and-conditions-1` (the designed Terms page, relative, like the `/pages/withdrawal` links) |
+| Dutch (“Algemene Voorwaarden”) | same | `/nl/pages/terms-and-conditions-1` |
+| French (“Conditions générales”) | same | `/fr/pages/terms-and-conditions-1` |
 
-Four policies × three languages = twelve link edits; the text of those policies does not change.
+Target for all four policies decided by the landing desk on 24 Oct. The Purchase options cancellation policy already carries it through the paste of b417b33 (live in EN, NL and FR), so three policies × three languages = nine link edits remain; the text of those policies does not change.
 
 ## 8. Check, publicly, before the domain switch
 
