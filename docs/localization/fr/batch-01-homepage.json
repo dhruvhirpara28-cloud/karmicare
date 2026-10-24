@@ -2,13 +2,13 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "ce03e3b246159170fdc39a1241c85fe46bc1cb8d",
- "source_entries": 230,
+ "source_digest": "035821debb9f49e950a971c3d2fea45e22b846ee",
+ "source_entries": 232,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 170,
+  "translated": 172,
   "held": 24,
   "locale-present": 2,
   "theme-key": 32,
@@ -3231,6 +3231,32 @@
    "flags": [],
    "notes": "Screen-reader help of the clock knob (visually hidden, aria-describedby). theme_keys.py writes it into locales/fr.json (source owner); the FR is the value there. Inventoried 22 Oct (homepage lane e1411e2).",
    "source_status": "approved"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "en_sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "fr": "<p>“J’utilise Karmicare depuis longtemps et je me sens profondément en phase avec leur vision des soins bucco-dentaires. Notre bouche aussi suit le rythme naturel de notre corps : l’environnement buccal n’est pas le même le jour que la nuit. De plus, la santé bucco-dentaire ne se suffit pas à elle-même ; elle est étroitement liée à notre santé générale.</p><p>En tant que dentiste, je trouve la formule intéressante grâce à l’association, entre autres, de nano-hydroxyapatite et de xylitol dans une formule leave-on sans fluor. Comme il n’est pas nécessaire de rincer après le brossage, les ingrédients soignants restent plus longtemps en contact avec les dents et la bouche. Les deux formules s’inscrivent aussi joliment dans la vision de notre rythme naturel jour-nuit : fraîche et tonifiante le matin (avec du guarana pour l’énergie du matin), plus chaude et plus épicée le soir (avec de la valériane, qui contribue au calme et à la détente).</p><p>Mes patients qui utilisent Karmicare en sont très satisfaits et le considèrent comme un dentifrice agréable. Mes enfants, exigeants en matière de goûts, utilisent eux aussi Karmicare avec plaisir ! Je trouve cela au moins aussi important : de bons soins bucco-dentaires commencent par un dentifrice que l’on aime et que l’on continue à utiliser régulièrement. Merveilleusement frais, sans sensation agressive en bouche. Je suis fan !”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "practitioner quote; if Dr. Spreuwers wrote it in Dutch first, her own Dutch wins over this translation; claim-like phrases to check with Victor: 'valerian, which contributes to calm and relaxation' (cf. C40/C41 reworded on the benefit card), 'guarana for morning energy'; proposal 24 Oct, held until Victor's dated OK",
+   "source_status": "needs-review"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "en_sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "fr": "<p>“Hygiéniste dentaire et responsable qualité avec plus de 13 ans d’expérience dans les soins bucco-dentaires, je reste critique quant aux soins que je recommande. Ce que j’apprécie particulièrement chez Karmicare, c’est l’association d’une formule efficace et sûre, qui est aussi agréable à utiliser.</p><p>Par expérience personnelle, je remarque un goût agréable, une sensation plus lisse sur les dents et des dents qui paraissent plus blanches, et tout cela sans fluor. C’est une alternative intéressante et fiable, aussi bien pour un usage professionnel que quotidien.</p><p>Je vois Karmicare comme un complément précieux aux soins bucco-dentaires modernes, et j’y vois un bon potentiel pour un large public.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "practitioner quote; 'products' → 'middelen' / 'soins' (brand rule, as the other quotes); FR worded without gender agreement for the speaker ('je reste critique'); claim-like phrases to check with Victor: 'effective and safe formulation', 'teeth that look whiter'; proposal 24 Oct, held until Victor's dated OK",
+   "source_status": "needs-review"
   }
  ]
 }

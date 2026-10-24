@@ -2,13 +2,13 @@
  "batch": "batch-04-legal",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-04-legal.json",
- "source_digest": "fa3dfe929b6c2052f1e5dfd3ecffd8379fb0f391",
- "source_entries": 974,
+ "source_digest": "06fa1b05814b3c142415b5acd9fd100197cfb5b9",
+ "source_entries": 975,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 143,
+  "translated": 144,
   "admin": 481,
   "held": 350
  },
@@ -14631,6 +14631,19 @@
    ],
    "notes": "R3 F5: legal page/policy metadata, flagged legal-review like the page body.",
    "source_status": "admin-held"
+  },
+  {
+   "id": "admin:page:withdrawal:title",
+   "resource_type": "page",
+   "file_or_handle": "withdrawal",
+   "key_path": "title",
+   "en": "Withdrawal",
+   "en_sha1": "730e3730d072128d393f205de5b54d1bec41fb0a",
+   "fr": "Rétractation",
+   "status": "translated",
+   "flags": [],
+   "notes": "page title as registered by the landing desk in Translate & Adapt, 24 Oct (registered.json); handoff gate-withdrawal §3",
+   "source_status": "approved"
   }
  ]
 }

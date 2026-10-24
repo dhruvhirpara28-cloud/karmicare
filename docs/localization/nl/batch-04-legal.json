@@ -2,12 +2,13 @@
  "lang": "nl",
  "batch": "batch-04-legal",
  "source": "docs/source-copy/batches/batch-04-legal.json",
- "source_digest": "fa3dfe929b6c2052f1e5dfd3ecffd8379fb0f391",
- "source_entries": 974,
+ "source_digest": "06fa1b05814b3c142415b5acd9fd100197cfb5b9",
+ "source_entries": 975,
  "counts": {
   "legal-review": 621,
   "admin": 3,
-  "held": 350
+  "held": 350,
+  "translated": 1
  },
  "fit_risk": [
   "page.privacy-policy:policy_banner_Pgpxip/eyebrow",
@@ -13459,6 +13460,18 @@
     "legal-review"
    ],
    "notes": ""
+  },
+  {
+   "id": "admin:page:withdrawal:title",
+   "resource_type": "page",
+   "file_or_handle": "withdrawal",
+   "key_path": "title",
+   "en": "Withdrawal",
+   "en_sha1": "730e3730d072128d393f205de5b54d1bec41fb0a",
+   "nl": "Herroeping",
+   "status": "translated",
+   "flags": [],
+   "notes": "page title as registered by the landing desk in Translate & Adapt, 24 Oct (registered.json); handoff gate-withdrawal §3"
   }
  ]
 }

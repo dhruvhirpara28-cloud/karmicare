@@ -33,20 +33,20 @@
  "captured": "batches 01-03: 2026-10-19 19:15 CEST; batches 04-08: 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "batches": {
   "batch-01-homepage": {
-   "entries": 230,
-   "digest": "ce03e3b246159170fdc39a1241c85fe46bc1cb8d"
+   "entries": 232,
+   "digest": "035821debb9f49e950a971c3d2fea45e22b846ee"
   },
   "batch-02-pdp": {
-   "entries": 496,
-   "digest": "5e3054edb632f4b34e7893ac25c57593f21adbe5"
+   "entries": 498,
+   "digest": "40ad1a7a769a6ec777e38e3c26cc54518d29c3d3"
   },
   "batch-03-header-footer": {
    "entries": 44,
    "digest": "86a1ed1903574cc27ebdd396c86c5f98b4d95512"
   },
   "batch-04-legal": {
-   "entries": 974,
-   "digest": "fa3dfe929b6c2052f1e5dfd3ecffd8379fb0f391"
+   "entries": 975,
+   "digest": "06fa1b05814b3c142415b5acd9fd100197cfb5b9"
   },
   "batch-05-products": {
    "entries": 77,
@@ -3886,6 +3886,38 @@
    "status": "approved",
    "never_translate": false,
    "notes": "theme key kc.clock.help: screen-reader help for the clock knob (visually hidden <p>, the knob's aria-describedby; sections/chronobiology-clock-karmicare.liquid; homepage and PDP); homepage lane e1411e2, Victor option a, 22 Oct"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Dr. Stephanie Spreuwers (Functional Dentist, kPNI Practitioner), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Mariama Banjai (Dental Hygienist, Oral Care Quality Manager), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
   },
   {
    "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_1",
@@ -11035,6 +11067,38 @@
     "C100"
    ],
    "claim_status": "needs-review"
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Dr. Stephanie Spreuwers (Functional Dentist, kPNI Practitioner), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Mariama Banjai (Dental Hygienist, Oral Care Quality Manager), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
   },
   {
    "id": "header-group:announcement-bar/announcement-bar-0/text",
@@ -26078,6 +26142,20 @@
    "status": "admin-held",
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+  },
+  {
+   "id": "admin:page:withdrawal:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/withdrawal",
+   "resource_type": "page",
+   "file_or_handle": "withdrawal",
+   "key_path": "title",
+   "en": "Withdrawal",
+   "sha1": "730e3730d072128d393f205de5b54d1bec41fb0a",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; page created 24 Oct by Victor (handle withdrawal, gate-withdrawal lane); live EN read from /pages/withdrawal.json 24 Oct",
+   "legal": true
   },
   {
    "id": "product:main/highlights_slider_9wAjAb/text_1",

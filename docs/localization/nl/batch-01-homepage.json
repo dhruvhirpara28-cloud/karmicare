@@ -2,10 +2,10 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "ce03e3b246159170fdc39a1241c85fe46bc1cb8d",
- "source_entries": 230,
+ "source_digest": "035821debb9f49e950a971c3d2fea45e22b846ee",
+ "source_entries": 232,
  "counts": {
-  "translated": 164,
+  "translated": 166,
   "held": 22,
   "pending-claim-review": 7,
   "dawn-nl": 2,
@@ -2921,6 +2921,30 @@
     "theme-key"
    ],
    "notes": "NL as Victor approved it (homepage lane e1411e2, 22 Oct); theme key kc.clock.help"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "en_sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "nl": "<p>“Ik gebruik Karmicare al lang en voel me sterk aangetrokken tot hun visie op mondverzorging. Ook onze mond volgt het natuurlijke ritme van ons lichaam: het mondmilieu is overdag anders dan ’s nachts. Bovendien staat mondgezondheid niet op zichzelf; ze hangt nauw samen met onze algemene gezondheid.</p><p>Als tandarts vind ik de formulering interessant door de combinatie van onder meer nano-hydroxyapatiet en xylitol in een fluoridevrije leave-on formule. Omdat je na het poetsen niet hoeft te spoelen, blijven de verzorgende ingrediënten langer in contact met de tanden en de mond. Ook de twee verschillende formules passen mooi binnen de visie van ons natuurlijke dag-en-nachtritme: fris en verkwikkend ’s ochtends (met guarana voor ochtendenergie), en warmer en kruidiger ’s avonds (met valeriaan, dat bijdraagt aan rust en ontspanning).</p><p>Mijn patiënten die Karmicare gebruiken, zijn er erg tevreden over en vinden het een aangename tandpasta. Ook mijn kinderen, die kritisch zijn over smaken, gebruiken Karmicare met plezier! Dat vind ik minstens even belangrijk: goede mondverzorging begint bij een tandpasta die je lekker vindt en consequent blijft gebruiken. Heerlijk fris, zonder dat het agressief aanvoelt in de mond. Ik ben fan!”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "practitioner quote; if Dr. Spreuwers wrote it in Dutch first, her own Dutch wins over this translation; claim-like phrases to check with Victor: 'valerian, which contributes to calm and relaxation' (cf. C40/C41 reworded on the benefit card), 'guarana for morning energy'; proposal 24 Oct, held until Victor's dated OK"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "en_sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "nl": "<p>“Als mondhygiënist en kwaliteitsmanager met meer dan 13 jaar ervaring in de mondzorg ben ik kritisch over welke middelen ik aanraad. Wat ik vooral waardeer aan Karmicare is de combinatie van een effectieve en veilige formulering die ook aangenaam is in gebruik.</p><p>Uit eigen ervaring merk ik een aangename smaak, een gladder gevoel op de tanden en tanden die witter ogen, en dat allemaal zonder fluoride. Het is een interessant en betrouwbaar alternatief voor zowel professioneel als dagelijks gebruik.</p><p>Ik zie Karmicare als een waardevolle aanvulling op de moderne mondzorg en zie goede mogelijkheden voor gebruik door een breed publiek.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "practitioner quote; 'products' → 'middelen' / 'soins' (brand rule, as the other quotes); FR worded without gender agreement for the speaker ('je reste critique'); claim-like phrases to check with Victor: 'effective and safe formulation', 'teeth that look whiter'; proposal 24 Oct, held until Victor's dated OK"
   }
  ]
 }
