@@ -222,9 +222,12 @@
     box-shadow: 0 0 0 var(--kc-shape-stroke-thin) var(--kc-mapped-border-focus-default);
   }
 
-  /* Fills the 44px row, so the whole row height is the input's click target */
+  /* Fills the 44px row, so the whole row height is the input's click target. Width 0 + flex
+     basis 0: the input's own default width no longer counts toward the column's minimum, which
+     pushed FR 22px into the 1200px gutter (R46b N3); it takes whatever the button leaves. */
   .km-footer-field__input {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    width: 0;
     align-self: stretch;
     min-width: 0;
     padding: 0;
@@ -239,10 +242,13 @@
     opacity: 1;
   }
 
+  /* One line in every language: NL "Doe mee" wrapped at 1200px (R46b N3) */
   .km-footer-field__submit {
     display: inline-flex;
+    flex: none;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     min-width: 44px;
     min-height: 44px;
     padding: 0;
@@ -615,7 +621,7 @@
 
   /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart. The brand column is
      320px (not 286) since 23 Oct so the two-line slogan fits in NL and FR too; the newsletter
-     column gives up the 34px (at 1200px it is 281px wide, the field about 175px). */
+     column gives up the 34px (at 1200px it is 281px wide in every language). */
   @media screen and (min-width: 1200px) {
     .km-footer-top {
       flex-wrap: nowrap;
