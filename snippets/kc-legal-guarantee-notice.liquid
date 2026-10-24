@@ -1,0 +1,108 @@
+{%- comment -%}
+  EU harmonised notice on the legal guarantee of conformity, as prescribed by Commission
+  Implementing Regulation (EU) 2025/1960 (Annex I) and, in Belgium, Art. VI.2, 5° and VI.2/2 WER
+  (W 2026-07-22/06, in force 27 Sep 2026). The notice is the Commission's own colour file, byte for
+  byte: assets/kc-legal-guarantee-notice-{en,nl,fr}.svg from the SVG set published at
+  https://commission.europa.eu/publications/high-resolution-vector-files-eu-notice-and-label-product-guarantees_en
+  (Annex I, note 1: none of its elements may be edited; note 5: online sale shows the colour
+  version). It therefore renders as an image from the theme's own assets, never a hotlink, in the
+  storefront language. The Commission's practical guidelines (1 April 2026, §2.3 digital display)
+  ask for the full notice, in colour, legible at default size, and a clickable link to the same
+  destination as its QR code; the second link opens the file itself at full size, which matters at
+  phone width. Screen readers get the notice's wording as the image's description.
+  Rules and sources: docs/launch-gate/withdrawal/REQUIREMENTS.md, part B.
+
+  Accepts:
+  - id: unique suffix (block.id or section.id)
+  - layout: 'disclosure' (a line such as "Your legal guarantee rights" that opens the notice on the
+    first click, the Commission's own example for product and checkout pages) or 'inline'
+  - summary_label: the clickable line (disclosure only)
+  - open: true renders the disclosure open
+  - link_label: the europa.eu link; full_size_label: the full-size link
+  - block: the block, for the theme editor's attributes (optional)
+
+  Usage:
+  {% render 'kc-legal-guarantee-notice', id: block.id, layout: 'disclosure', summary_label: block.settings.summary_label, link_label: block.settings.link_label, full_size_label: block.settings.full_size_label, open: block.settings.open_by_default, block: block %}
+{%- endcomment -%}
+
+{%- liquid
+  assign kc_lgn_lang = request.locale.iso_code | slice: 0, 2 | downcase
+  case kc_lgn_lang
+    when 'nl'
+      assign kc_lgn_asset = 'kc-legal-guarantee-notice-nl.svg'
+      assign kc_lgn_url = 'https://europa.eu/youreurope/garantie'
+      assign kc_lgn_name = 'Wettelijke garantie'
+      capture kc_lgn_text
+        echo 'Minimaal twee jaar bescherming dankzij de wettelijke garantie voor goederen die in de Europese Unie worden verkocht. Consumenten kunnen hun rechten doen gelden op grond van de wettelijke conformiteitsgarantie, bijvoorbeeld als goederen niet met de beschrijving overeenstemmen of niet naar behoren functioneren. Verkopers zijn aansprakelijk voor elk conformiteitsgebrek dat bestond bij de levering van de goederen en dat binnen de wettelijke garantieperiode aan het licht komt. Verkopers moeten in een dergelijke situatie het volgende aanbieden: gratis reparatie of gratis vervanging; in sommige gevallen, gedeeltelijke of volledige terugbetaling. Sommige landen hebben een langere wettelijke garantieperiode. Voor tweedehandsartikelen kan de garantieperiode korter zijn, maar niet korter dan één jaar. Als u meer wilt weten over uw rechten in een bepaald land, kunt u de QR-code scannen of de verkoper om informatie vragen: europa.eu/youreurope/garantie. Wat moet u doen als u niet-conforme goederen ontvangt: 1. Neem zo spoedig mogelijk contact op met de verkoper om het probleem te melden. 2. Verstrek een aankoopbewijs, zoals een bon, een factuur of een rekeningafschrift. Verkopers en producenten kunnen ook commerciële garanties aanbieden, die los van de wettelijke garantie van toepassing zijn. Dit GARAN-label bijvoorbeeld staat voor een commerciële levensduurgarantie die kosteloos door de producent wordt aangeboden en het volledige goed dekt.'
+      endcapture
+    when 'fr'
+      assign kc_lgn_asset = 'kc-legal-guarantee-notice-fr.svg'
+      assign kc_lgn_url = 'https://europa.eu/youreurope/garanties'
+      assign kc_lgn_name = 'Garantie légale'
+      capture kc_lgn_text
+        echo 'Protection offerte par la garantie légale minimale de deux ans sur des biens vendus dans l’Union européenne. Les consommateurs peuvent faire valoir leurs droits au titre de la garantie légale de conformité, par exemple si les biens ne correspondent pas à la description ou ne fonctionnent pas comme prévu. Les vendeurs sont responsables de tout défaut de conformité qui existait au moment de la livraison des biens et qui apparaît pendant la période de garantie légale. Les vendeurs se trouvant dans une telle situation sont tenus de proposer une réparation gratuite ou un remplacement gratuit; dans certains cas, une réduction de prix ou un remboursement intégral. Dans certains pays, la période de garantie légale est plus longue. Pour les biens d’occasion, une période plus courte peut s’appliquer, mais elle ne peut être inférieure à un an. Pour en savoir plus sur vos droits dans un pays donné, scannez le code QR ou consultez le vendeur: europa.eu/youreurope/garanties. Que faire si vous recevez des biens non conformes: 1. contactez le vendeur dès que possible pour signaler le problème; 2. fournissez une preuve d’achat, telle qu’un reçu, une facture ou un relevé bancaire. Les vendeurs et les producteurs peuvent également offrir des garanties commerciales, qui s’appliquent indépendamment de la garantie légale. Par exemple, il se peut que votre bien affiche ce label GARAN, représentant une garantie commerciale de durabilité offerte par le producteur sans frais supplémentaires et s’appliquant à l’ensemble du bien.'
+      endcapture
+    else
+      assign kc_lgn_asset = 'kc-legal-guarantee-notice-en.svg'
+      assign kc_lgn_url = 'https://europa.eu/youreurope/guarantees'
+      assign kc_lgn_name = 'Legal guarantee'
+      capture kc_lgn_text
+        echo 'Minimum two-year legal guarantee protection for goods sold in the European Union. Consumers can claim their rights under the legal guarantee of conformity, for example if goods do not match the description or do not function as intended. Sellers are liable for any lack of conformity which existed when the goods were delivered, and which becomes apparent within the legal guarantee period. Sellers in such a situation are required to offer free repair or free replacement; in some cases, a price reduction or full reimbursement. Some countries have a longer legal guarantee period. For second-hand goods, a shorter period may apply, but not less than one year. For more information on your rights in a specific country, scan the QR code or ask the seller: europa.eu/youreurope/guarantees. What to do if you receive non-conforming goods: 1. Contact the seller as soon as possible to report the issue; 2. Provide proof of purchase, such as a receipt, invoice, or bank statement. Sellers and producers may also offer commercial guarantees, which apply independently from the legal guarantee. For example, you may see the GARAN label representing a commercial guarantee of durability offered by the producer at no additional cost and covering the entire good.'
+      endcapture
+  endcase
+  assign kc_lgn_id = 'KcLegalGuaranteeNotice-' | append: id
+  assign kc_lgn_src = kc_lgn_asset | asset_url
+  if layout == 'disclosure'
+    assign kc_lgn_layout = 'disclosure'
+  else
+    assign kc_lgn_layout = 'inline'
+  endif
+-%}
+
+{{ 'kc-legal-guarantee-notice.css' | asset_url | stylesheet_tag }}
+
+{%- capture kc_lgn_figure -%}
+  <figure class="kc-lgn__figure">
+    {%- comment -%} The Commission's file, A4 proportions (595.28 x 841.89 user units) {%- endcomment -%}
+    <img
+      class="kc-lgn__image"
+      src="{{ kc_lgn_src }}"
+      width="595"
+      height="842"
+      alt="{{ kc_lgn_name | escape }}"
+      aria-describedby="{{ kc_lgn_id }}-text"
+      loading="lazy"
+      decoding="async"
+    >
+    <p class="visually-hidden" id="{{ kc_lgn_id }}-text">{{ kc_lgn_text }}</p>
+    <figcaption class="kc-lgn__links">
+      {%- if link_label != blank -%}
+        <a class="kc-lgn__link" href="{{ kc_lgn_url }}" target="_blank" rel="noopener">{{ link_label | escape }}</a>
+      {%- endif -%}
+      {%- if full_size_label != blank -%}
+        <a class="kc-lgn__link" href="{{ kc_lgn_src }}" target="_blank" rel="noopener">{{ full_size_label | escape }}</a>
+      {%- endif -%}
+    </figcaption>
+  </figure>
+{%- endcapture -%}
+
+<div
+  class="kc-lgn kc-lgn--{{ kc_lgn_layout }}"
+  id="{{ kc_lgn_id }}"
+  data-kc-legal-guarantee-notice
+  {% if block %}{{ block.shopify_attributes }}{% endif %}
+>
+  {%- if kc_lgn_layout == 'disclosure' -%}
+    <details class="kc-lgn__details" {% if open %}open{% endif %}>
+      <summary class="kc-lgn__summary">
+        <span class="kc-lgn__summary-text">{{ summary_label | default: kc_lgn_name | escape }}</span>
+        <span class="kc-lgn__chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="kc-lgn__panel">
+        {{ kc_lgn_figure }}
+      </div>
+    </details>
+  {%- else -%}
+    {{ kc_lgn_figure }}
+  {%- endif -%}
+</div>

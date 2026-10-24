@@ -1,0 +1,105 @@
+/* kc-legal-guarantee-notice.css: the EU harmonised notice on the legal guarantee of conformity
+   (snippets/kc-legal-guarantee-notice.liquid). The notice itself is the Commission's unedited file;
+   this only lays out the line that opens it, the image and the two links. Tokens only, Day and Night
+   come from the mapped tokens on body. The image keeps the white the Regulation prescribes for the
+   notice (Annex I, note 2 d: #FFFFFF) on both themes. */
+
+.kc-lgn {
+  margin: var(--kc-responsive-spacing-layout-md) 0 var(--kc-responsive-spacing-layout-2xl);
+  font-family: var(--kc-font-role-backbone);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-lgn__details {
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-lgn__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: var(--kc-responsive-size-control-min-height);
+  padding: 12px 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  font-weight: var(--font-600-weight, 600);
+}
+
+.kc-lgn__summary::-webkit-details-marker {
+  display: none;
+}
+
+.kc-lgn__summary:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.kc-lgn__chevron {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.kc-lgn__details[open] .kc-lgn__chevron {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.kc-lgn__panel {
+  padding: 4px 0 16px;
+}
+
+.kc-lgn__figure {
+  margin: 0;
+}
+
+.kc-lgn__image {
+  display: block;
+  width: 100%;
+  max-width: 595px;
+  height: auto;
+  aspect-ratio: 595.28 / 841.89;
+  border: 1px solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-sm);
+  background: #ffffff;
+}
+
+.kc-lgn__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 12px 0 0;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-lgn__link {
+  color: var(--kc-mapped-text-link-default);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.kc-lgn__link:hover {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+.kc-lgn__link:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-lgn__chevron {
+    transition: none;
+  }
+}

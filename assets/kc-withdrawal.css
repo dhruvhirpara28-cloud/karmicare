@@ -1,0 +1,426 @@
+/* kc-withdrawal.css: the online withdrawal function page (sections/kc-withdrawal.liquid).
+   Tokens only, no hex: Day and Night come from the mapped tokens on body. Buttons are Dawn's
+   .button, which snippets/button-styles.liquid already paints as the KC primary and secondary.
+   The column is the legal pages' 720px (sections/policy-banner.liquid) with a 20px gutter, so at
+   390px wide the form is 350px, one column. */
+
+.kc-withdrawal {
+  font-family: var(--kc-font-role-backbone);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-withdrawal__inner {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Head, as the legal pages' banner */
+.kc-withdrawal__head {
+  margin: 0 0 32px;
+}
+
+.kc-withdrawal__eyebrow {
+  margin: 0 0 24px;
+}
+
+.kc-withdrawal__heading {
+  margin: 0 0 20px;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.kc-withdrawal__intro {
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+}
+
+.kc-withdrawal__intro p {
+  margin: 0 0 12px;
+}
+
+.kc-withdrawal__intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* Step markers (JavaScript only) */
+.kc-wd-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  color: var(--kc-mapped-text-default-body);
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  font-weight: var(--font-700-weight, 700);
+  text-transform: uppercase;
+}
+
+.kc-wd-steps__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kc-wd-steps__item[aria-current='step'] {
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-wd-steps__num {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid currentColor;
+  border-radius: var(--kc-shape-radius-full);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.kc-wd-steps__item[aria-current='step'] .kc-wd-steps__num {
+  border-color: transparent;
+  background: var(--kc-mapped-surface-inverse-default);
+  color: var(--kc-mapped-text-inverse-default);
+}
+
+/* Steps */
+.kc-wd-step {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.kc-wd-step__title {
+  margin: 0 0 20px;
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h4-text-size);
+  line-height: var(--kc-responsive-h4-line-height);
+  letter-spacing: var(--kc-responsive-h4-letter-spacing);
+  font-weight: var(--font-500-weight, 500);
+}
+
+.kc-wd-step__title:focus {
+  outline: none;
+}
+
+.kc-wd-step__title:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 4px;
+}
+
+/* Fields */
+.kc-wd-field {
+  margin: 0 0 20px;
+}
+
+.kc-wd-field__label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  font-weight: var(--font-600-weight, 600);
+}
+
+.kc-wd-field__help {
+  margin: 0 0 8px;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.kc-wd-field__input {
+  display: block;
+  width: 100%;
+  min-height: var(--kc-responsive-size-input-height);
+  margin: 0;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  border: 1px solid var(--kc-mapped-border-control-default);
+  border-radius: var(--kc-shape-radius-sm);
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: inherit;
+  /* never under 16px: iOS zooms the page into a smaller field */
+  font-size: max(16px, var(--kc-responsive-body-md-text-size));
+  line-height: 1.4;
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.kc-wd-field__input--area {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.kc-wd-field__input:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-color: var(--kc-mapped-border-focus-strong);
+}
+
+.kc-wd-field__input[aria-invalid='true'] {
+  border-color: var(--kc-mapped-border-status-error);
+  box-shadow: inset 0 0 0 1px var(--kc-mapped-border-status-error);
+}
+
+/* The message keeps the heading colour (contrast); the red mark is the second cue */
+.kc-wd-field__error {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 8px 0 0;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.kc-wd-field__error::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45em;
+  border-radius: var(--kc-shape-radius-full);
+  background: var(--kc-mapped-icon-status-error);
+}
+
+.kc-wd-field__error[hidden] {
+  display: none;
+}
+
+/* Shopify refused the post (an invalid email): one alert, then the fields again */
+.kc-wd-alert {
+  margin: 0 0 24px;
+  padding: 16px;
+  border: 1px solid var(--kc-mapped-border-status-error);
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-surface-status-default);
+  color: var(--kc-mapped-text-status-body);
+}
+
+.kc-wd-alert:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.kc-wd-alert__title {
+  margin: 0 0 8px;
+  font-weight: var(--font-600-weight, 600);
+}
+
+.kc-wd-alert__list {
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-wd-alert__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Step 2: the statement shown back */
+.kc-wd-statement {
+  margin: 0 0 16px;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+}
+
+.kc-wd-review {
+  margin: 0 0 20px;
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-wd-review__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr;
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-wd-review__row[hidden] {
+  display: none;
+}
+
+.kc-wd-review dt {
+  margin: 0;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-wd-review dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+/* Buttons and notes */
+.kc-wd-actions {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0 0;
+}
+
+.kc-wd-note {
+  margin: 16px 0 0;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.kc-wd-note.rte p,
+.kc-withdrawal__aside-text p {
+  margin: 0 0 8px;
+}
+
+.kc-wd-note.rte p:last-child,
+.kc-withdrawal__aside-text p:last-child {
+  margin-bottom: 0;
+}
+
+.kc-wd-note a,
+.kc-withdrawal__aside a,
+.kc-wd-success a {
+  color: var(--kc-mapped-text-link-default);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.kc-wd-note a:focus-visible,
+.kc-withdrawal__aside a:focus-visible,
+.kc-wd-success a:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Without JavaScript: one step, the fields and the confirmation function together */
+.kc-withdrawal__form:not(.kc-wd-js) .kc-wd-js-only {
+  display: none !important;
+}
+
+.kc-withdrawal__form:not(.kc-wd-js) .kc-wd-step[hidden] {
+  display: block;
+  margin-top: 8px;
+}
+
+/* After the redirect: the acknowledgement */
+.kc-wd-success {
+  padding: 24px;
+  border: 1px solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-surface-status-default);
+  color: var(--kc-mapped-text-status-body);
+}
+
+.kc-wd-success:focus {
+  outline: none;
+}
+
+.kc-wd-success:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.kc-wd-success__icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: 0 0 12px;
+  color: var(--kc-mapped-icon-status-success);
+}
+
+.kc-wd-success__title {
+  margin: 0 0 12px;
+  color: var(--kc-mapped-text-status-title);
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h4-text-size);
+  line-height: var(--kc-responsive-h4-line-height);
+  letter-spacing: var(--kc-responsive-h4-letter-spacing);
+  font-weight: var(--font-500-weight, 500);
+}
+
+.kc-wd-success__ack {
+  margin: 0 0 12px;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+}
+
+.kc-wd-success__ack[hidden] {
+  display: none;
+}
+
+.kc-wd-success__next {
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-wd-success__next p {
+  margin: 0 0 8px;
+}
+
+.kc-wd-success__next p:last-child {
+  margin-bottom: 0;
+}
+
+/* Other ways to withdraw */
+.kc-withdrawal__aside {
+  margin: 40px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
+}
+
+.kc-withdrawal__aside-title {
+  margin: 0 0 8px;
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-role-identity);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  font-weight: var(--font-700-weight, 700);
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 749px) {
+  .kc-withdrawal__head {
+    margin-bottom: 24px;
+  }
+
+  .kc-withdrawal__eyebrow {
+    margin-bottom: 20px;
+    font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: 12px;
+  }
+
+  .kc-withdrawal__heading {
+    letter-spacing: -1px;
+  }
+
+  .kc-wd-review__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
