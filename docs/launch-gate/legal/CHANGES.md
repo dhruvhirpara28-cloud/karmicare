@@ -1177,6 +1177,26 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > If you withdraw analytics consent while Hotjar is running, the analytics cookies Hotjar set on our site are deleted immediately, and the page refreshes within a few seconds to stop recording.
 
 
+## 3j. R57h, landing desk (24 Oct): the Terms link in the Purchase options cancellation policy points to the designed Terms page: the changes, one by one (EN old → new)
+
+
+### SJ1 · Purchase options cancellation policy, first sentence: the “Terms and Conditions” link target (EN/NL/FR)
+
+**Setting**: none (policy body only) · policy `subscription-policy`
+
+**Why**: Landing desk, 24 Oct, after pasting the four EN policies: the link pointed to https://www.karmicare.com/en/pages/terms-and-conditions, which today still serves the old Webflow terms, so the checkout policy sent customers to the outdated conditions. The link now goes to the designed Terms page, relative and per language, like the /pages/withdrawal links; 03-REDIRECTS.csv sends the old URL there after the cutover. No words change.
+
+**Legal basis**: Art. VI.45 §1 WER (the pre-contractual information must reach the current terms); LR1 standard “checkout links must reach the current terms”.
+
+**Old**
+
+> Terms and Conditions
+
+**New**
+
+> Terms and Conditions
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
