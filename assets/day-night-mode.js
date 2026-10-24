@@ -21,24 +21,23 @@
   // hero time rolls to 07:00 or 22:00 and the video starts again with it, while a soft see-through
   // glow grows as a circle from the centre of the pressed toggle and fades (Awake: warm light, like
   // a sunrise; Asleep: a soft indigo dusk); the page stays readable beneath it. The sun's own
-  // switch, also when it is noticed on return to the tab, crossfades the colours in 1s; reduced
-  // motion crossfades in 0.2s without a glow. The glow is a fixed layer without pointer events, so
-  // every click and key reaches the page and focus stays where it is (R54 B1), and it sets its own
-  // display, as Dawn hides empty divs (R54b B1).
+  // switch, also when it is noticed on return to the tab, changes at once too, with the same glow
+  // from the top centre of the screen, where the sun would be. Reduced motion changes at once
+  // without a glow. Text and its background always change together, never through a blend of the
+  // two (R54c B1: a crossfade made the hero text unreadable halfway). The glow is a fixed layer
+  // without pointer events, so every click and key reaches the page and focus stays where it is
+  // (R54 B1), and it sets its own display, as Dawn hides empty divs (R54b B1).
   // Quick clicks are merged (R54b N2, WCAG 2.3.1): the theme changes at most once every 0.4s, so
   // never more than three times in a second, the last request wins, and one glow runs at a time;
   // a switch during a glow lets it run out. While the theme changes the site's own colour
   // transitions are off, so nothing fades twice; the time roll and the hero video keep their own.
   // Without Web Animations the theme changes as before.
   var gap = 400;
-  var fade = { normal: 1000, reduced: 200 };
   var own = ':not(.kc-roll__strip):not(.kc-hero-animation__mode)';
   try {
     var sheet = new CSSStyleSheet();
     sheet.replaceSync(
-      'html.kc-theme-switching *' + own + ', html.kc-theme-switching *::before, html.kc-theme-switching *::after { transition: none !important; }\n' +
-        'html.kc-theme-fading *' + own + ', html.kc-theme-fading *::before, html.kc-theme-fading *::after { transition: color, background-color, border-color, outline-color, fill, stroke, box-shadow, opacity !important; transition-duration: ' + fade.normal + 'ms !important; }\n' +
-        '@media (prefers-reduced-motion: reduce) { html.kc-theme-fading *' + own + ', html.kc-theme-fading *::before, html.kc-theme-fading *::after { transition-duration: ' + fade.reduced + 'ms !important; } }'
+      'html.kc-theme-switching *' + own + ', html.kc-theme-switching *::before, html.kc-theme-switching *::after { transition: none !important; }'
     );
     document.adoptedStyleSheets = document.adoptedStyleSheets.concat(sheet);
   } catch (error) {
@@ -47,7 +46,7 @@
   var root = document.documentElement;
   var canAnimate = typeof root.animate === 'function';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  // Each mode's glow in brand colours: a core at the toggle, a halo halfway out, nothing at the
+  // Each mode's glow in brand colours: a core at its origin, a halo halfway out, nothing at the
   // edge. Awake: the warm off-white at 35% with a faint light-blue sky; Asleep: the light blue at
   // 20%. The layer fades in to that and out again, so the page's luminance under the glow moves
   // by less than 0.1 (no flash in WCAG terms).
@@ -61,7 +60,6 @@
   var pendingTimer;
   var lastSwitch = -Infinity;
   var glow = null; // the running glow: { layer, animations }
-  var fadeTimer;
   var generation = 0; // a callback of an older switch changes nothing (R54 N1)
 
   function removeGlow(running) {
@@ -72,11 +70,17 @@
     if (glow === running) glow = null;
   }
 
-  function glowFrom(control, mode) {
-    if (glow || !control.isConnected) return;
-    var box = control.getBoundingClientRect();
-    var x = box.left + box.width / 2;
-    var y = box.top + box.height / 2;
+  // origin: the pressed toggle, or 'sun' for the top centre of the screen
+  function glowFrom(origin, mode) {
+    if (glow) return;
+    var x = window.innerWidth / 2;
+    var y = 0;
+    if (origin !== 'sun') {
+      if (!origin.isConnected) return;
+      var box = origin.getBoundingClientRect();
+      x = box.left + box.width / 2;
+      y = box.top + box.height / 2;
+    }
     var radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
     var layer = document.createElement('div');
     layer.className = 'kc-theme-glow';
@@ -110,37 +114,25 @@
     );
   }
 
-  // Ends whatever is on its way: a waiting request, the crossfade, the glow
+  // Ends whatever is on its way: a waiting request, the glow
   function settle() {
     generation += 1;
     clearTimeout(pendingTimer);
     pending = null;
-    clearTimeout(fadeTimer);
-    root.classList.remove('kc-theme-switching', 'kc-theme-fading');
+    root.classList.remove('kc-theme-switching');
     if (glow) removeGlow(glow);
   }
 
   function switchTo(mode, origin) {
-    var token = (generation += 1);
+    generation += 1;
     lastSwitch = Date.now();
-    clearTimeout(fadeTimer);
-    root.classList.remove('kc-theme-fading');
-    if (origin !== 'sun' && !reducedMotion.matches) {
-      root.classList.add('kc-theme-switching');
-      applyMode(mode);
-      shown = mode;
-      // The new colours are in place before the transitions come back, so none of them runs
-      void document.body.offsetWidth;
-      root.classList.remove('kc-theme-switching');
-      glowFrom(origin, mode);
-      return;
-    }
-    root.classList.add('kc-theme-fading');
+    root.classList.add('kc-theme-switching');
     applyMode(mode);
     shown = mode;
-    fadeTimer = setTimeout(function () {
-      if (token === generation) root.classList.remove('kc-theme-fading');
-    }, (reducedMotion.matches ? fade.reduced : fade.normal) + 100);
+    // The new colours are in place before the transitions come back, so none of them runs
+    void document.body.offsetWidth;
+    root.classList.remove('kc-theme-switching');
+    if (!reducedMotion.matches) glowFrom(origin, mode);
   }
 
   // origin: the pressed toggle, 'sun' for a switch without a click, null for none (first paint,
