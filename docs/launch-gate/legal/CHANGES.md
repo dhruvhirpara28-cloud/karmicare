@@ -9,11 +9,11 @@
 | File | What |
 |---|---|
 | `CHANGES.md` (this file) | Where each text lives, the canonical place and redirects, every change with old → new, reason and legal source (§3 R57, §3b R57b), what was verified, what is left, Astra's review items (§8) |
-| `POLICIES-PASTE.md` | Full corrected body of the two Shopify policies that change (Terms of service, Refund policy), EN first, then NL and FR for Translate & Adapt |
-| `TRANSLATIONS-HANDOFF.md` | The 15 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
-| `ADMIN-STEPS.md` | What Victor does in admin, in order, starting with the launch gate (durable-medium confirmation): policy pastes, legacy pages to hide, redirects, titles, legacy Terms links, withdrawal PDFs last, checks |
+| `POLICIES-PASTE.md` | Full corrected body of the three Shopify policies that change (Terms of service, Refund policy, Privacy policy), EN first, then NL and FR for Translate & Adapt |
+| `TRANSLATIONS-HANDOFF.md` | The 17 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
+| `ADMIN-STEPS.md` | What Victor does in admin, in order, starting with the launch gate (durable-medium confirmation): policy pastes, legacy pages to hide, redirects, titles, legacy Terms links, checks |
 
-Theme files changed: `templates/page.terms-and-conditions.json` and `templates/page.consumer-rights.json` (EN setting values only). `templates/page.privacy-policy.json` has no blocker-1 item and is unchanged. The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
+Theme files changed: `templates/page.terms-and-conditions.json`, `templates/page.consumer-rights.json` and `templates/page.privacy-policy.json` (EN setting values only; the privacy change is two lines for the withdrawal acknowledgement, §3c). The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
 
 ---
 
@@ -667,6 +667,81 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > or does not solve the problem, or if the defect is serious enough to justify it at once, you can ask for a proportionate price reduction
 
 
+## 3c. R57b add-ons from the landing desk (24 Oct): PDF links removed on Victor's instruction, gate-withdrawal handoffs: the changes, one by one (EN old → new)
+
+
+### TC1 · Terms Annex (“Download the form (PDF)” placeholder)
+
+**Setting**: `page.terms-and-conditions:legal_toc_section_gYznx3/content_section_fz6KEQ/content` · policy `terms-of-service`
+
+**Why**: Victor's instruction (24 Oct, through gate-withdrawal): the placeholder PDF link is removed from the designed page; the plain line is removed from the policy body so both say the same. The model form stays inline, which is what the law requires; the PDFs remain available for the confirmation email.
+
+**Legal basis**: Art. VI.45 §1 8° and Annex 2 to Book VI WER (the model form must be provided; a download is not required).
+
+**Old**
+
+> Download the form (PDF)
+
+**New**
+
+> (removed)
+
+**Theme only** (left menu label): “<p><a href="#" title="#"><span style="text-decoration:underline">Download the form (PDF)</span></a></p>” → “”
+
+
+### CC1 · Consumer Rights section 10 (“Download the form (PDF)” placeholder)
+
+**Setting**: `page.consumer-rights:legal_toc_section_gYznx3/content_section_at3pLy/content` · policy `refund-policy`
+
+**Why**: Same as TC1.
+
+**Legal basis**: Same as TC1.
+
+**Old**
+
+> Download the form (PDF)
+
+**New**
+
+> (removed)
+
+**Theme only** (left menu label): “<p><a href="#" title="#"><span style="text-decoration:underline">Download the form (PDF)</span></a></p>” → “”
+
+
+### PC1 · Privacy Policy section 5 (service providers: Klaviyo)
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_xKcNPj/content` · policy `privacy-policy`
+
+**Why**: gate-withdrawal's handoff: the acknowledgement of an online withdrawal (Art. VI.61/2 §4 WER) is sent through Klaviyo, so Klaviyo is named as the processor of that transactional email.
+
+**Legal basis**: Art. 13(1)(e) GDPR (recipients of the personal data); Art. 28 GDPR (processor).
+
+**Old**
+
+> Email and marketing automation: Klaviyo, Inc. (US), transactional and promotional email, cart reminders (only if you opted in) and list management.
+
+**New**
+
+> Email and marketing automation: Klaviyo, Inc. (US), transactional email (order and membership confirmations, and the acknowledgement of a withdrawal sent through the online withdrawal function), promotional email, cart reminders (only if you opted in) and list management.
+
+
+### PC2 · Privacy Policy section 3 (communication data)
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_iDEfUH/content` · policy `privacy-policy`
+
+**Why**: The online withdrawal function collects a name, an order reference and an email address (Art. VI.61/2 §2 WER); the categories of data in section 3 now say so.
+
+**Legal basis**: Art. 13(1)(c) and 14 GDPR (categories and purposes); Art. VI.61/2 §2 WER.
+
+**Old**
+
+> Communication data: records of your messages by email or contact form, including product questions, after-sales questions and feedback.
+
+**New**
+
+> Communication data: records of your messages by email, contact form or the online withdrawal function (your name, the order reference and your email address), including product questions, after-sales questions and feedback.
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
@@ -700,13 +775,13 @@ Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were
 - **Clause 9.9 (renewal refunds)** keeps “Care Credit earned on a refunded amount is removed, or deducted if you already spent it (clause 4.7)”. A renewal refund (cancellation before dispatch, or the one-month exit after a Year renews) is a contractual route, not statutory withdrawal, and the corrected 4.7.4 names clause 9.9 as one of the only two routes where spent earned credit is deducted, so the cross-reference can no longer reintroduce a blanket rule (Astra, observation 1). The subscription policy, which quotes clause 9 word for word, therefore needs no new paste.
 - **Clause 4.6.1 and section 3.7.1 (“without harsh chemical preservatives” / “without relying on harsh preservatives”)** are a free-from claim inside a legal text (audit P2-2). Not a blocker-1 item; routed to gate-claims.
 - **Privacy Policy**: no blocker-1 item. The cookie-law citation (audit P0-3 text fix) is gate-consent's.
-- **“Download the form (PDF)” still links `#`** on both pages and is plain text in the policy bodies: the PDFs exist in `input/legal-offer/legal/forms/` and are linked as the **last** admin step, after every whole-body paste and translation registration (ADMIN-STEPS step 8; Astra, observation 3).
+- **“Download the form (PDF)”**: on Victor's instruction (24 Oct, through gate-withdrawal) the two placeholder links are removed from both pages and the plain line from both policy bodies (§3c); the model form stays inline, which is what Art. VI.45 §1 8° and Annex 2 to Book VI WER require. The three PDFs in `input/legal-offer/legal/forms/` remain available for the confirmation email (ADMIN-STEPS step 0), and Astra's point about pastes overwriting the links is moot.
 - **“Last updated October 2026”** stays; a dated version line (audit P2-13) belongs to the legal-offer branch when it logs v4.5.
 
 ## 6. Handoffs
 
-- **gate-withdrawal**: the page handle `/pages/withdrawal` and the link labels, now verified by Astra against the Moniteur: EN “Withdraw from contract here”, NL “Hier de overeenkomst herroepen”, FR “Renoncer au contrat ici”; confirm step “herroeping bevestigen” / “confirmer la rétractation”. Terms 4.7.2 says we acknowledge a withdrawal by email and confirm the return address; the function's acknowledgement (content, date, time, Art. VI.61/2 §4) must do that. The three model-form PDFs.
-- **source-copy**: register the 15 changed settings in `TRANSLATIONS-HANDOFF.md` (NL and FR given), refresh the EN digests of batch-04 for those settings, and keep the `legal-review` status on them. The policy bodies are admin (Translate & Adapt), `POLICIES-PASTE.md`.
+- **gate-withdrawal** (their handoffs to this lane, taken on 24 Oct, §3c): the withdrawal function is named with the verified labels in Terms 4.1.1 and the Annex and in Consumer Rights 3.1 and section 10 (EN “Withdraw from contract here”, NL “Hier de overeenkomst herroepen”, FR “Renoncer au contrat ici”; done in R57); Klaviyo is named in the Privacy Policy as the processor of the acknowledgement email and the withdrawal-function data is listed (PC1, PC2); the refund wording to keep in sync on the withdrawal page is Terms 4.1.2 and Consumer Rights 3.1 second bullet, verbatim (refund within 14 days of the day we are informed, standard delivery included, withholding until the goods are back or proof of sending arrives, same payment method). The harmonised legal-guarantee notice (Implementing Regulation (EU) 2025/1960) is pre-contractual information to show prominently at the point of sale, that is on the product page and in the ordering flow (Art. 6(1)(l) CRD as amended by Directive (EU) 2024/825, transposed by the Act of 22 July 2026); the law does not require it on the Consumer Rights page, which already states the two-year guarantee in words, and the prescribed design is an image this lane cannot reproduce in a richtext setting, so it stays with gate-withdrawal and is not added to section 4. The function's acknowledgement (content, date, time, Art. VI.61/2 §4) must also confirm the return address, as Terms 4.7.2 promises.
+- **source-copy**: register the 17 changed settings in `TRANSLATIONS-HANDOFF.md` (NL and FR given), refresh the EN digests of batch-04 for those settings, and keep the `legal-review` status on them. The policy bodies are admin (Translate & Adapt), `POLICIES-PASTE.md`.
 - **legal-offer branch (canonical files, D8)**: apply §3 and §3b to `legal/terms-and-conditions/en.md` and `legal/consumer-rights/en.md`, log v4.5 in `legal/CHANGELOG.md`, add the NL and FR files, and update the Figma legal frames. Until that is done, a republish from the canonical files would restore the defects (Astra, observation 7). This lane did not edit the input copies.
 - **gate-claims**: the free-from line in 4.6.1 / 3.7.1.
 - **Victor, launch gate G1 (audit P0-11, Astra B2)**: the order confirmation and Loop's first-membership email must carry the Terms with the withdrawal information, the model form and the commercial-guarantee conditions in a retainable form, in the customer's language, by delivery at the latest; evidence is a real received email. Steps and acceptance check in `ADMIN-STEPS.md` step 0. A link to a changeable page is not a durable medium (CJEU C-49/11).
@@ -716,9 +791,10 @@ Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were
 
 - `templates/page.terms-and-conditions.json`: EN values of seven settings (clause 2, 3, 4, 7 content, 7 examples, 10, Annex).
 - `templates/page.consumer-rights.json`: EN values of eight settings (key card 3, sections 1, 2 content + title + menu label, 3, 4, 10).
+- `templates/page.privacy-policy.json`: EN values of two settings (section 3 communication data, section 5 Klaviyo).
 - `docs/launch-gate/legal/CHANGES.md`, `POLICIES-PASTE.md`, `TRANSLATIONS-HANDOFF.md`, `ADMIN-STEPS.md`.
 
-Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings), the two templates still parse as JSON, every replacement anchored exactly once (or the stated count) in the templates (from the 5bab3ad base, R57 then R57b), in the live EN/NL/FR policy bodies and in the batch-04 NL/FR values; grep of the new templates and policy bodies for “unopened goods”, “of approval”, “return authorisation”, “notified as cosmetics”, “eligible, unopened”, “deducted from the refund if you already spent it”: none left in the statutory clauses.
+Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings), the three templates still parse as JSON, every replacement anchored exactly once (or the stated count) in the templates (from the 5bab3ad base, R57, then R57b, then the add-ons), in the live EN/NL/FR policy bodies and in the batch-04 NL/FR values; grep of the new templates and policy bodies for “unopened goods”, “of approval”, “return authorisation”, “notified as cosmetics”, “eligible, unopened”, “deducted from the refund if you already spent it”, “Download the form”: none left.
 
 ## 8. R57b: Astra's R57 review, what was done
 
@@ -730,7 +806,8 @@ Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings
 | NL/FR withdrawal labels | verified, closed | unchanged; confirm-step labels added to the gate-withdrawal handoff |
 | 1 subscription policy keeps the 9.9 credit sentence and points to 4.7 | non-blocker | 4.7.4 scopes the deduction to 4.3, 4.4 and 9.9 by name; 9.9 unchanged (§5) |
 | 2 NL/FR shipping and subscription policies link the legacy `/en/pages/terms-and-conditions` | non-blocker, admin | `ADMIN-STEPS.md` step 7: localized `/policies/terms-of-service` links in the four short policies, EN/NL/FR |
-| 3 PDF links would be overwritten by later whole-body pastes | non-blocker, rollout | `ADMIN-STEPS.md`: PDF links are step 8, after every paste and translation registration, with EN/NL/FR checks on policies and designed pages, theme settings included |
+| 3 PDF links would be overwritten by later whole-body pastes | non-blocker, rollout | moot: Victor had the placeholder links removed (24 Oct); TC1 and CC1 remove them from the templates and the policy bodies; no PDF step remains |
+| Landing desk (24 Oct): mirror the PDF-link removal; take gate-withdrawal's handoffs | add-on | §3c: TC1, CC1 (links removed), PC1, PC2 (Klaviyo and the withdrawal-function data in the Privacy Policy); labels already in place; refund-wording sync and the guarantee notice answered in §6 |
 | 4 per-locale redirect checks; one release window | non-blocker, rollout | `ADMIN-STEPS.md` steps 5 and 9: `/nl/` and `/fr/` legacy paths checked one by one; release-window rule kept |
 | 5 charter 4.2 abbreviates the serious-defect trigger | non-blocker | CB3 adds it |
 | 6 actual diminished value, PAO carve-out, Year “receiving and inspecting” | non-blocker | 4.6.3 already says “the resulting loss of value” (actual, not fixed); TB5 adds the PAO carve-out; TB2 drops “and inspecting” |

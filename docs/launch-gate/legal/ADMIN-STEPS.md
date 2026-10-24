@@ -7,8 +7,8 @@
 | Gate | What must be true | Evidence |
 |---|---|---|
 | G1 | Step 0 is done: the order confirmation and Loop's first-membership email carry the Terms, the withdrawal information, the model form and the guarantee conditions in a retainable form, in the customer's language | a real received email per plan and per language, saved as `.eml` or PDF |
-| G2 | `/pages/withdrawal` is live in EN, NL and FR (gate-withdrawal) and the links in the new text open it | step 9 |
-| G3 | The theme release with the R57b templates, the policy pastes (steps 1 and 2), the NL/FR theme translations (step 3) and the withdrawal page go live in the same window | step 9 |
+| G2 | `/pages/withdrawal` is live in EN, NL and FR (gate-withdrawal) and the links in the new text open it | step 8 |
+| G3 | The theme release with the R57b templates, the policy pastes (steps 1 and 2), the NL/FR theme translations (step 3) and the withdrawal page go live in the same window | step 8 |
 
 **Before you start**: keep a copy of the current policy bodies (Settings → Policies → each policy → `<>` → select all → copy into a text file). The live bodies of 24 Oct are also the “Old” text in `CHANGES.md`.
 
@@ -20,7 +20,7 @@
 
 | Field | Old value | New value |
 |---|---|---|
-| Email body, below the order summary and above the footer | no legal text (verify in Preview) | a block headed “Your contract and your rights” containing, in this order: (a) the line “Terms and Conditions, version 4.5 of [paste date], KARMICA BV”; (b) the **full Terms text** (paste the EN HTML from `POLICIES-PASTE.md`, “English · Terms of service”; it includes clause 4 with the withdrawal information and the Annex with the model form); (c) the links `https://[store]/policies/terms-of-service`, `https://[store]/pages/withdrawal` (“Withdraw from contract here”) and the model-form PDF (step 8), as additional conveniences, not as the only carrier |
+| Email body, below the order summary and above the footer | no legal text (verify in Preview) | a block headed “Your contract and your rights” containing, in this order: (a) the line “Terms and Conditions, version 4.5 of [paste date], KARMICA BV”; (b) the **full Terms text** (paste the EN HTML from `POLICIES-PASTE.md`, “English · Terms of service”; it includes clause 4 with the withdrawal information and the Annex with the model form); (c) the links `https://[store]/policies/terms-of-service` and `https://[store]/pages/withdrawal` (“Withdraw from contract here”) as additional conveniences, not as the only carrier. Optional: upload `docs/launch-gate/input/legal-offer/legal/forms/karmicare-withdrawal-form-en.pdf` (and `-nl`, `-fr`) to Content → Files and link it here too; the pages and policies no longer carry a PDF link (Victor, 24 Oct) |
 | Same, Dutch | — | Translate & Adapt → Notifications → Order confirmation → Dutch: the same block with the NL body from `POLICIES-PASTE.md` and the `/nl/` links |
 | Same, French | — | Translate & Adapt → Notifications → Order confirmation → French: the FR body and the `/fr/` links |
 
@@ -42,8 +42,9 @@ Path: **Settings → Policies**.
 |---|---|---|---|
 | Terms of service | body (rich text; click `<>` “Show HTML” in the toolbar, select all, paste) | the body published on 24 Oct (v4.3 + 24-hour delivery times) | `POLICIES-PASTE.md` → “English · Terms of service” block |
 | Refund policy | same | the body published on 24 Oct | `POLICIES-PASTE.md` → “English · Refund policy” block |
+| Privacy policy | same | the body published on 24 Oct (v4.4) | `POLICIES-PASTE.md` → “English · Privacy policy” block (two lines change: section 3 communication data and section 5 Klaviyo, for the withdrawal acknowledgement) |
 
-Save each. Leave Privacy policy, Shipping policy, Purchase options cancellation policy, Contact information and Legal notice as they are (their intro link is step 7). Do not switch Privacy policy to “Automated”.
+Save each. Leave Shipping policy, Purchase options cancellation policy, Contact information and Legal notice as they are (their intro link is step 7). Do not switch Privacy policy to “Automated”.
 
 ## 2. Paste the Dutch and French policies
 
@@ -55,12 +56,14 @@ Path: **Apps → Translate & Adapt → Store policies** (or Settings → Languag
 | Terms of service | French | same | “Français · Terms of service” |
 | Refund policy | Dutch | same | “Nederlands · Refund policy” |
 | Refund policy | French | same | “Français · Refund policy” |
+| Privacy policy | Dutch | same | “Nederlands · Privacy policy” |
+| Privacy policy | French | same | “Français · Privacy policy” |
 
 The NL and FR blocks are the live 24 Oct translations (batch-04, legal-review status) with exactly the R57 and R57b corrections applied, so the legal review of the NL/FR text (`docs/localization/*/REPORT.md` item 41) is still open after this paste.
 
 ## 3. Theme-page translations (NL and FR of the designed pages)
 
-Source-copy registers the 15 settings in `TRANSLATIONS-HANDOFF.md`. If you do it by hand: Translate & Adapt → Online store → Theme (the live theme) → Templates → `page.terms-and-conditions` and `page.consumer-rights` → the settings listed in `TRANSLATIONS-HANDOFF.md` → paste the NL and FR values. The EN values arrive with the theme release. A handoff file or a registration log is not proof: open `/nl/pages/terms-and-conditions-1` and `/fr/pages/new-consumer-rights` afterwards (step 9).
+Source-copy registers the 17 settings in `TRANSLATIONS-HANDOFF.md`. If you do it by hand: Translate & Adapt → Online store → Theme (the live theme) → Templates → `page.terms-and-conditions`, `page.consumer-rights` and `page.privacy-policy` → the settings listed in `TRANSLATIONS-HANDOFF.md` → paste the NL and FR values. The EN values arrive with the theme release. A handoff file or a registration log is not proof: open `/nl/pages/terms-and-conditions-1` and `/fr/pages/new-consumer-rights` afterwards (step 9).
 
 ## 4. Hide the three legacy pages
 
@@ -110,32 +113,18 @@ The first sentence of Shipping policy, Purchase options cancellation policy, Con
 
 Four policies × three languages = twelve link edits; the text of those policies does not change.
 
-## 8. Withdrawal form PDFs, last
-
-Do this only after steps 1, 2 and 3 are complete and verified, because a whole-body paste or a translation registration overwrites these links (Astra, observation 3). Path: **Content → Files → Upload files**: `docs/launch-gate/input/legal-offer/legal/forms/karmicare-withdrawal-form-en.pdf`, `-nl.pdf`, `-fr.pdf`. Copy each file's URL. Then:
-
-| Where | Field | Old value | New value |
-|---|---|---|---|
-| Settings → Policies → Terms of service, Annex | the words “Download the form (PDF)” | plain text, no link | link to the EN file URL |
-| Settings → Policies → Refund policy, section 10 | same | plain text | link to the EN file URL |
-| Translate & Adapt → Store policies → both policies → Dutch / French | “Download het formulier (PDF)” / “Télécharger le formulaire (PDF)” | plain text | link to the NL / FR file URL |
-| Theme, EN: Customize → page “New Terms and Conditions” → block “Annex – Model withdrawal form” → content; page “New Consumer Rights” → block “10. Model withdrawal form” → content | the link “Download the form (PDF)” | `href="#"` | the EN file URL (or send the three URLs to the theme lane for a one-line commit on `content_section_fz6KEQ/content` and `content_section_at3pLy/content`) |
-| Translate & Adapt → Theme → Templates → the same two settings → Dutch / French | the same link | `href="#"` | the NL / FR file URL |
-
-Then open all twelve places (two policies and two designed pages, three languages) and click each PDF link. The inline model form is complete on every page, so the PDF is a convenience, not the only statutory form.
-
-## 9. Check, publicly, before the domain switch
+## 8. Check, publicly, before the domain switch
 
 Open in a private window, slowly (the store rate-limits; one request every two seconds):
 
 - `/policies/terms-of-service`, `/policies/refund-policy`, and the `/nl/…` and `/fr/…` versions: clause 4.1 says the refund runs from “the day we are informed”, 4.6.3 starts “Primed pumps and your right of withdrawal”, 4.7.4 starts “Care Credit and refunds” and says the statutory refund is never reduced, 10.6 says the same, 3.1 of the charter names the online withdrawal function, section 2 says the toothbrushes and the floss are not cosmetics, clause 7 says you choose between repair and replacement.
-- `/pages/terms-and-conditions-1`, `/pages/new-consumer-rights` (EN, NL, FR): the same text as the policies, including the NL and FR of the 15 settings.
+- `/pages/terms-and-conditions-1`, `/pages/new-consumer-rights`, `/pages/privacy-policy` (EN, NL, FR): the same text as the policies, including the NL and FR of the 17 settings; no “Download the form (PDF)” line remains anywhere, the model form is complete inline.
+- `/policies/privacy-policy` (EN, NL, FR): section 5 names Klaviyo for the withdrawal acknowledgement and section 3 lists the withdrawal-function data.
 - The links “Withdraw from contract here” / “Hier de overeenkomst herroepen” / “Renoncer au contrat ici” open `/pages/withdrawal`, `/nl/pages/withdrawal`, `/fr/pages/withdrawal` (gate-withdrawal).
 - Each of `/pages/consumer-rights`, `/pages/privacy`, `/pages/terms-and-conditions` and their `/nl/` and `/fr/` paths (nine URLs) returns a 301 to the designed page; `sitemap_pages_1.xml` no longer lists the three legacy handles.
 - Checkout footer links (Refund policy, Terms of service, Privacy policy) open the corrected policies; the four short policies' first link opens the Terms in the page's language (step 7).
-- The PDF links of step 8 work in all twelve places.
 
-## 10. Then (not this lane)
+## 9. Then (not this lane)
 
 - Legal-offer branch: log v4.5 in `legal/CHANGELOG.md`, update `legal/*/en.md` and the Figma legal frames from `CHANGES.md` §3 and §3b, add `nl.md` and `fr.md`.
 - The NL/FR legal review (counsel or Victor) of the whole legal text stays open.
