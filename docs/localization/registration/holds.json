@@ -1,6 +1,6 @@
 {
  "about": "Plan items held back from registration by a review decision, per language. build_payloads.py keeps them in plan-<lang>.json with the reason in 'hold', so register.py never writes them. Remove an entry when its decision falls.",
- "source": "Astra R23 (docs/runtime-review/R23-DRYRUN-ASTRA.md), 22 Oct 2026, via the landing desk; PDP twins of six FR rows added by the landing desk, 22 Oct 2026; dentist rows and slogan released 22 Oct after Victor's decisions (EN corrected; they register once the new EN is live); legacy Health Rewards card released 22 Oct after Victor's 'ok kaartje' (EN corrected); every SHOP_POLICY row held 24 Oct (landing desk, R71): the desk pastes the policies from POLICIES-PASTE.md, Victor's decision 2g",
+ "source": "Astra R23 (docs/runtime-review/R23-DRYRUN-ASTRA.md), 22 Oct 2026, via the landing desk; PDP twins of six FR rows added by the landing desk, 22 Oct 2026; dentist rows and slogan released 22 Oct after Victor's decisions (EN corrected; they register once the new EN is live); legacy Health Rewards card released 22 Oct after Victor's 'ok kaartje' (EN corrected); every SHOP_POLICY row held 24 Oct (landing desk, R71): the desk pastes the policies from POLICIES-PASTE.md, Victor's decision 2g; practitioner hover quotes h8d3WL/jcnr7Q (homepage, PDP) held 24 Oct until Victor's dated OK (landing desk rule); 24 Oct: Spreuwers NL and Banjai NL/FR released (own Dutch originals; Banjai FR approved 23 Oct), Spreuwers FR held for Victor's OK",
  "holds": {
   "nl": {
    "admin:policy:privacy-policy:title": "SHOP_POLICY: the landing desk pastes EN, NL and FR from docs/launch-gate/legal/POLICIES-PASTE.md via Chrome (Victor's decision 2g, 24 Oct); the runner never overwrites that paste",
@@ -965,7 +965,9 @@
    "admin:policy:subscription-policy:body#b011": "SHOP_POLICY: the landing desk pastes EN, NL and FR from docs/launch-gate/legal/POLICIES-PASTE.md via Chrome (Victor's decision 2g, 24 Oct); the runner never overwrites that paste",
    "admin:policy:subscription-policy:body#b012": "SHOP_POLICY: the landing desk pastes EN, NL and FR from docs/launch-gate/legal/POLICIES-PASTE.md via Chrome (Victor's decision 2g, 24 Oct); the runner never overwrites that paste",
    "admin:policy:subscription-policy:body#b013": "SHOP_POLICY: the landing desk pastes EN, NL and FR from docs/launch-gate/legal/POLICIES-PASTE.md via Chrome (Victor's decision 2g, 24 Oct); the runner never overwrites that paste",
-   "admin:policy:subscription-policy:seo.title": "SHOP_POLICY: the landing desk pastes EN, NL and FR from docs/launch-gate/legal/POLICIES-PASTE.md via Chrome (Victor's decision 2g, 24 Oct); the runner never overwrites that paste"
+   "admin:policy:subscription-policy:seo.title": "SHOP_POLICY: the landing desk pastes EN, NL and FR from docs/launch-gate/legal/POLICIES-PASTE.md via Chrome (Victor's decision 2g, 24 Oct); the runner never overwrites that paste",
+   "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text": "testimonial translation: needs Victor's dated OK before it is registered (landing desk rule, 24 Oct)",
+   "product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/hover_text": "testimonial translation: needs Victor's dated OK before it is registered (landing desk rule, 24 Oct)"
   }
  }
 }

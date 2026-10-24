@@ -1,6 +1,6 @@
 {
  "batch": "batch-04-legal",
- "digest": "fa3dfe929b6c2052f1e5dfd3ecffd8379fb0f391",
+ "digest": "06fa1b05814b3c142415b5acd9fd100197cfb5b9",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -14438,6 +14438,20 @@
    "status": "admin-held",
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+  },
+  {
+   "id": "admin:page:withdrawal:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/withdrawal",
+   "resource_type": "page",
+   "file_or_handle": "withdrawal",
+   "key_path": "title",
+   "en": "Withdrawal",
+   "sha1": "730e3730d072128d393f205de5b54d1bec41fb0a",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; page created 24 Oct by Victor (handle withdrawal, gate-withdrawal lane); live EN read from /pages/withdrawal.json 24 Oct",
+   "legal": true
   }
  ]
 }
