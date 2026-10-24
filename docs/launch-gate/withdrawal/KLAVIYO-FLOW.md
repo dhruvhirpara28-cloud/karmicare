@@ -35,7 +35,7 @@ Endpoint `POST https://a.klaviyo.com/client/events/?company_id=<public key>`, he
 | `properties.language` | `en`, `nl` or `fr` | `data-kc-locale` = `request.locale.iso_code` |
 | `properties.page` | origin plus path, for example `https://karmicares.myshopify.com/nl/pages/withdrawal` | `window.location` |
 | `data.attributes.time` | the ISO UTC instant above | stamped on Confirm |
-| `data.attributes.unique_id` | a UUID (`crypto.randomUUID()`), so a retry never makes a second event | generated on Confirm |
+| `data.attributes.unique_id` | a new ID for every confirmed submission: a UUID (`crypto.randomUUID()`), or where that is missing the timestamp plus a random hex string | generated on each Confirm; it is not kept across a reload, so a consumer who submits again after reloading the page creates a second event (and a second acknowledgement) |
 
 In the Klaviyo template every property is reachable as `{{ event.<name> }}` (no spaces in the names, so no `lookup` filter is needed). `submitted_at_local` is already in the consumer's language and in Brussels time; `submitted_at_utc` is the machine-readable proof.
 
