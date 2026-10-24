@@ -10,7 +10,7 @@ Victor reviewed the first pass in the session on 24 Oct and kept seven items as 
 - **Kept on Victor's instruction (24 Oct):** "Nano-HAp beat fluoride on tooth sensitivity" with its result line, the research intro ("Meta-analyses … more than 38,000 people"), "Cold or hot, no hesitation", "settle gums" in the benefits intro, Sietske Hamelink's practitioner card, "Midwest University" on the PDP.
 - **Admin (paste-ready in `ADMIN-STEPS.md`):** j (oral-gut-brain row) and k (First night line) still live; a and b already right on the live page; c kept by Victor. Four blog posts to unpublish now, four to rewrite or unpublish at the switch.
 - **Checks:** Theme Check 0 errors, 19 baseline warnings; both templates parse as JSON; the two-card research marquee checked at 1440 and 390, Day and Night (screens in `screens/`).
-- **Open:** one question to Victor on Dr. Spreuwers' quote (guarana energy, valerian calm), sent through the coordinator; the v2-formula question on the RDA report.
+- **Decided in session:** Dr. Spreuwers' quote (guarana energy, valerian calm) stays as her own experience, approved by Victor on 24 Oct; listed as an accepted risk in §3 R1. **Open:** the v2-formula question on the RDA report (`ADMIN-STEPS.md`, item c).
 
 ## 1. Items a–p
 
@@ -56,7 +56,7 @@ Both templates and every `sections/*` default were read for disease words, fluor
 
 | # | Where | Text | Why it is listed | Proposed |
 |---|---|---|---|---|
-| R1 | Dr. Stephanie Spreuwers quote, `trusted_professionals_HAqYth/card_h8d3WL/hover_text`, both templates | "(with guarana for morning energy)" and "(with valerian, which contributes to calm and relaxation)" | Guarana energy and valerian calm effects in a testimonial (brand don't #16; testimonials do not bypass the cosmetic claims criteria, LR1) | **Question sent to Victor:** a) ask her to approve dropping the two parentheses; b) hide her hover text until she does; c) leave it. Recommendation a, b as the interim. |
+| R1 | Dr. Stephanie Spreuwers quote, `trusted_professionals_HAqYth/card_h8d3WL/hover_text`, both templates | "(with guarana for morning energy)" and "(with valerian, which contributes to calm and relaxation)" | Guarana energy and valerian calm effects in a testimonial (brand don't #16; the cosmetic claims criteria say a testimonial does not bypass substantiation, LR1) | **Accepted risk, Victor 24 Oct:** he approved her full quote including these lines ("het is haar ervaring"); the quote stays as it is, not hidden, not edited. Listed here so the decision stays visible to the regulatory reviewer. The lane's reasoning for flagging it: it is the one place on the site that still attributes an energy and a calm effect to guarana and valerian after card e was reworded. |
 | R2 | Chronobiology clock `morning_text`, both templates | "Cortisol rises; coffee, breakfast and the day's first acids follow…" | Hormone named with no primary source (CR1 C53, supported if reworded) | "Morning brings coffee, breakfast and the day's first acids. Enamel needs its shield on first." |
 | R3 | Chronobiology clock `night_text`, both | "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00." | Second sentence has no source and the overnight biofilm changes (CR1 C52) | "Melatonin rises and saliva slows while you sleep." |
 | R4 | Chronobiology clock `night_title`, both, and the section default | "Your mouth switches to repair" | "repair" is the body's own; not a product claim. Reviewed, kept. | Keep. |
@@ -112,7 +112,7 @@ The unpublish list, and the rule "rewrite before the switch or unpublish at the 
 | reviews lane | "4.8 (234)" in the hero badge (R8). |
 | study-links (R55) | Nothing changed in `link_url`; the three hidden cards keep their settings, so their links can still be filled. |
 | gate-consent | The anonymous homepage load showed the Shopify cookie banner (Accept / Decline / Manage preferences) over the research section; no consent was given. For their record only. |
-| Victor | `ADMIN-STEPS.md` steps a (low), j, k; the four unpublishes; the Spreuwers question; the v2-formula question on the RDA report. |
+| Victor | `ADMIN-STEPS.md` steps a (low), j, k; the four unpublishes; the v2-formula question on the RDA report. |
 
 ## 9. Input files
 
