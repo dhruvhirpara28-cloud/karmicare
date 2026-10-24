@@ -44,10 +44,16 @@ if (!customElements.get('kc-gallery-sizing')) {
       this.observer.disconnect();
       window.removeEventListener('resize', this.schedule);
       cancelAnimationFrame(this.frame);
+      clearTimeout(this.swapTimer);
+      this.swapTimer = null;
+      this.gallery?.removeAttribute('data-kc-hero-swap'); // never leave the hero hidden
     }
 
     measure() {
       if (!this.desktop.matches) {
+        clearTimeout(this.swapTimer);
+        this.swapTimer = null;
+        this.gallery.removeAttribute('data-kc-hero-swap');
         this.write('--kc-hero-scale', null);
         this.gallery.toggleAttribute('data-kc-hero-fit', false);
         this.gallery.toggleAttribute('data-kc-hero-ready', true);
@@ -66,23 +72,27 @@ if (!customElements.get('kc-gallery-sizing')) {
       this.write('--kc-gallery-media-height', `${viewerHeight}px`);
       // Then the fit, on the viewer those values give, in the same pass: no second correction (R52 B1)
       const scale = this.hero ? this.heroScale(this.viewer.getBoundingClientRect(), anchorTop, stickyTop) : null;
-      // A script later than the CSS's 1s reveal finds the hero shown in the R50 pose: it fades out,
-      // takes the fit while hidden and fades back, rather than jumping
+      // A script later than the CSS's 1s reveal finds the hero shown in the R50 pose: it goes hidden at
+      // once (the opacity the reveal animation held does not transition, so this is a cut), and after
+      // 260ms a fresh measurement applies the fit then current and fades it in, rather than jumping.
+      // While that wait runs nothing is applied; a resize then is picked up by the fresh measurement,
+      // never by a value kept from before it (R52b B1).
       const late = !this.gallery.hasAttribute('data-kc-hero-ready') && scale !== null && this.hero &&
         parseFloat(getComputedStyle(this.hero).opacity) > 0.5;
       this.gallery.toggleAttribute('data-kc-hero-ready', true);
       if (late) {
         this.gallery.setAttribute('data-kc-hero-swap', '');
-        setTimeout(() => {
-          this.write('--kc-hero-scale', scale);
-          this.gallery.toggleAttribute('data-kc-hero-fit', true);
-          this.gallery.removeAttribute('data-kc-hero-swap');
+        clearTimeout(this.swapTimer);
+        this.swapTimer = setTimeout(() => {
+          this.swapTimer = null;
+          this.measure();
         }, 260);
         return;
       }
-      if (this.gallery.hasAttribute('data-kc-hero-swap')) return;
+      if (this.swapTimer) return;
       this.write('--kc-hero-scale', scale);
       this.gallery.toggleAttribute('data-kc-hero-fit', scale !== null);
+      this.gallery.removeAttribute('data-kc-hero-swap');
     }
 
     // The largest scale up to 1.5 at which the whole animation keeps 16px clear of the viewport's four
