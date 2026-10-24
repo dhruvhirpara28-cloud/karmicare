@@ -159,6 +159,7 @@
         },
         "info_card_FnBcaN": {
           "type": "info_card",
+          "disabled": true,
           "settings": {
             "default_to_subscription": true,
             "header_text": "More than two formulas",
@@ -274,10 +275,12 @@
         "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
         "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
         "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
         "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
         "surface": "transition",
         "text_color_day": "",
@@ -302,7 +305,7 @@
         "hint_label": "DRAG THE RING · EXPLORE 24 HOURS",
         "time_label_size": "small",
         "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
-        "footer_link_text": "Read the science",
+        "footer_link_text": "",
         "footer_link": "",
         "surface": "transition",
         "text_color_day": "",
@@ -322,7 +325,7 @@
             "image": "shopify://shop_images/kc-professional-stephanie-spreuwers.jpg",
             "heading": "Dr. Stephanie Spreuwers",
             "text": "Functional Dentist, kPNI Practitioner",
-            "hover_text": ""
+            "hover_text": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>"
           }
         },
         "card_jcnr7Q": {
@@ -534,7 +537,7 @@
             "method_label": "METHOD",
             "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
             "link_label": "Kulal et al. · 2016 · J Clin Diagn Res",
-            "link_url": "",
+            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5121804/",
             "logo": "shopify://shop_images/Logo.png",
             "image": "shopify://shop_images/Picture_1.png",
             "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
@@ -551,7 +554,7 @@
             "method_label": "METHOD",
             "method_text": "Meta-analysis of 8 studies, 2015–2023.",
             "link_label": "Lei & Hu · 2025 · Biomedical Reports",
-            "link_url": "",
+            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11704870/",
             "logo": "shopify://shop_images/Logo-2.png",
             "image": "shopify://shop_images/Sleep_airway.png",
             "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
@@ -568,9 +571,10 @@
             "method_label": "Method",
             "method_text": "Systematic review and meta-analysis of 7 clinical trials.",
             "link_label": "Janakiram et al. · 2017 · J Nat Sci Biol Med",
-            "link_url": "",
+            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5320817/",
             "logo": "shopify://shop_images/Logo_1.png",
-            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+            "image": "shopify://shop_images/kc-research-xylitol-specimen-1122x1402-v1.jpg",
+            "image_badge": ""
           }
         },
         "card_Hi7YUD": {
@@ -584,7 +588,7 @@
             "method_label": "METHOD",
             "method_text": "Double-blind randomised controlled trial, three arms.",
             "link_label": "Vano et al. · 2018 · Clin Oral Investig",
-            "link_url": "",
+            "link_url": "https://doi.org/10.1007/s00784-017-2113-3",
             "logo": "shopify://shop_images/Logo_2.png",
             "image": "shopify://shop_images/Picture_1.png",
             "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
@@ -601,7 +605,7 @@
             "method_label": "METHOD",
             "method_text": "Systematic review and meta-analysis of 4 crossover RCTs.",
             "link_label": "Alli et al. · 2019 · J Oral Pathol Med",
-            "link_url": "",
+            "link_url": "https://doi.org/10.1111/jop.12845",
             "logo": "shopify://shop_images/Logo_3.png",
             "image_badge": "DENTINE TUBULES - OPEN AND OCCLUDED"
           }
@@ -807,10 +811,12 @@
         "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
         "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
         "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
         "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
         "benefits_layout": "stacked",
         "padding_top": 120,

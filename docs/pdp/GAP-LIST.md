@@ -46,7 +46,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 28b | Parked / after launch | The wording "Care Credits back" is still in `templates/index.json:690` and `product.subscription-item.json:657`. Source-copy owns the text |
 | 29 | Parked / after launch | Homepage and utopia own it |
 | 30 | Dropped | Cut at the viewport edges by design |
-| 31 | Waiting for Victor | See below |
+| 31 | Dropped | Victor, 23 Oct: "rij 31 laten we zo". Sections 08 and 09 stay off the PDP |
 | 32 | Parked / after launch | Victor, 22 Oct: "FAQ kunnen we even parkeren". The links keep `href="#"` for now; the options stay below for later |
 | 33 | In progress | The plan is ready, but nothing is built. It waits for the desk's go |
 | 34 | In merchant-edit | Via homepage `e1411e2` (merchant-edit `ca5228f`): `aria-describedby="clock-help-…"` now points to a visually hidden `kc.clock.help` line in the shared section, so the PDP is covered too. Closed |
@@ -54,7 +54,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 35b | In progress | The buybox `h5` is still at `treatment-journey.liquid:19`, `:69`. The plan is ready and waits for the desk's go |
 | 36 | Parked / after launch | Info; recheck after 33–35 |
 | 37 | Parked / after launch | Loop widget, off-limits |
-| 38 | Parked / after launch | Amounts in other currencies than the euro. Victor decided the €40 reward on 22 Oct: A + C. It gets built later, together with the price per brushing. Nothing built yet |
+| 38 | Parked / after launch | Option 2 (convert every fixed euro amount, homepage included) is planned below, parked until a non-EUR market is active: Victor, 23 Oct, "Enkel EU-euromarkten momenteel"; he switches SEK, CHF, GBP and USD off in Admin → Markets. The loop-widget.js and Terms art. 11 questions wait with it |
 | 39 | Parked / after launch | NL Welcome Kit names break in the middle of a word (release QA, live). The proposal waits for a go or the next fix moment |
 | 40 | In merchant-edit | Plans table follows the comparison table, `00aa2d6`, `8202c95`, `84a8101` (R34b), merchant-edit `9972921` (23 Oct). Second round `04718ef`–`71a8694` (kit close-up tiles, featured columns 16px out in both tables, ribbon in CTA type, tips above the sticky labels, keyboard-only CTA reveal; R39–R39d), merchant-edit `6a26258`. Kit tiles under the label below 750 after the native check, `e0c0e1b` (R39e), merchant-edit `da63ae4` |
 | 41 | Parked / after launch | R34 N1: double seam beside the featured column |
@@ -65,8 +65,12 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 | 46 | Parked / after launch | R41, R39e: the journey Read more toggle has no `aria-expanded` or disclosure semantics for screen readers |
 | 47 | In merchant-edit | Victor, 23 Oct: benefits lists show three rows and half of the fourth, faded (`visible_items` 3, one-line peek), `fb4c0c6`, merchant-edit `da63ae4` |
 | 48 | Parked / after launch | R39e: the journey and plans transitions do not honour reduced motion |
+| 49 | Parked / after launch | USD native check: the converted amounts read NL "US$ 45,67" and FR "45,67 $US" (Intl nl-US/fr-US) beside Shopify's "$51.81"; option 2 should use the active market's money format. Parked until a non-EUR market is active (Victor, 23 Oct: EU euro markets only) |
+| 50 | Parked / after launch | USD native check: the Year Care Credit comes from the Shopify-rounded USD price, consistent with the prices; note for option 2's receipt. Parked until a non-EUR market is active (Victor, 23 Oct: EU euro markets only) |
+| 51 | Parked / after launch | USD native check: no kit tiles in the US market, `settings.welcome_kit_free_product` is empty there (kit product probably not published for the US, Admin). Parked until a non-EUR market is active (Victor, 23 Oct: EU euro markets only) |
+| 52 | In merchant-edit | Victor, 24 Oct: the gallery hero as large as fits up to 1.5x, overflowing its frame with 16px clear of the viewport and the buybox text, scale held at the sticky pin, no load jump, the landed end image when the video cannot play or errors. `8048f99`, `d2e9d30`, `9be9ecb`–`e33c9d8` (R51–R52c), merchant-edit `9ce946b`. Not live yet: the live theme still has the clipped 1.2x pose of `b9f2e0e`, so the intro is cut at the frame's top there |
 
-**Counts (50 lines)**: in merchant-edit 14 · ready to land 0 · in progress 2 · waiting for Victor 1 · parked / after launch 25 · dropped 8.
+**Counts (54 lines)**: in merchant-edit 15 · ready to land 0 · in progress 2 · waiting for Victor 0 · parked / after launch 28 · dropped 9.
 
 ### Waiting for Victor
 
@@ -77,11 +81,7 @@ Screenshots: `docs/pdp/shots/<section>-<viewport>-<mode>-<before|after>.png` (lo
 
 Advice: **b** for the launch, because it uses the "Coming soon" state the site already has elsewhere. Switch to **a** as soon as the documents are online. The theme needs no change for a.
 
-**Row 31: should the PDP get Figma's sections 08 (testimonials) and 09 (cost of waiting)?** Today they are not on the page, and care-comes-back stands where 09 was.
-- a) Keep the page as it is for the soft launch.
-- b) Add both sections. That needs approved texts and real testimonials, and neither is in the repo yet.
-
-Advice: **a**, because building b needs content we do not have; revisit it after launch.
+**Row 31** was decided on 23 Oct: the page stays as it is (option a).
 
 ## Summary
 
@@ -188,7 +188,15 @@ The shop also sells in CHF, GBP, USD and SEK. Product and plan prices are conver
 - **Option b: fixed local amounts** (for example 400 kr), with the Terms changed for each currency. Approach: one amount per currency as a setting or metaobject, which the theme reads by `cart.currency`. This needs a legal change to the Terms first, plus new copy in every language.
 - **Option c: hide the reward line outside the EU.** Approach: the theme and the Loop widget skip the check-up chip, the receipt row, the tooltip and the care-comes-back step when the market's country is not in the EU (CHF, GBP, USD). The line stays for EU markets, including SEK, which then still needs a or b.
 
-**Decided by Victor, 22 Oct (via source-copy): A + C.** The Terms do not change.
+**Changed by Victor, 23 Oct: option 2 (replaces A + C), parked the same evening: only EU euro markets are active, and Victor switches the others off in Admin → Markets.** DH's PR #72/#73 (main `033fb37`, in integration as `c571919`) already derive the plans table prices, cost per brushing and Care Credit from the selling-plan allocations, so they follow the visitor's currency, and they convert the €40 in the care step text and the plans labels at the active rate. Victor keeps that approach and wants it everywhere, the homepage included. Plan:
+- **PDP lane, after R35b.**
+  - One bounded, locale-aware euro tagger in a snippet, in place of DH's split on "€": it reads €40, € 40 and 40 € (decimal comma in NL and FR). It is used for the care steps, the plans labels and tips (metaobject text), the check-up tooltip in `main-product.liquid` and the sticky bar strings. `kc-eur-convert` converts the tagged amounts.
+  - The receipt: Return on Care from the Year allocation × 20 %, as the plans table, so both show the same market-rounded credit. The check-up converted, and the total their sum. The lines get an optional source setting for this.
+  - `assets/loop-widget.js`: the check-up chip and the Year card chip convert 4000 cents at the rate before `loopFormatMoney` (Victor, 23 Oct, "pas aan waar nodig"; off-limits otherwise).
+- **Homepage lane.** `templates/index.json:207`, `:332` `button_subtext` "€0.49 / brushing ritual": the amount computed from the 60-Day Rhythm allocation, as the plans table. The text gets a [price] placeholder, via source-copy.
+- **Victor.** Terms art. 11 grants the €40 only to Year members in the EU. With amounts converted for CH, GB and US visitors, the Terms or the market setup have to match.
+
+**Superseded on 23 Oct. Decided by Victor, 22 Oct (via source-copy): A + C.** The Terms do not change.
 - **A, EU markets with another currency (today Sweden, SEK).** €40 stays the official amount. The theme writes "€40" and adds the local amount next to it as an approximation at the active rate, for example "€40 (ca. 451 kr)". The converted amount is 4000 cents × `Shopify.currency.rate` in JS, or the cart currency's rate in Liquid, written in the shop money format. The euro part goes through the euro branch of `kc-money` whatever the cart currency.
 - **C, markets outside the EU (today CH, GB and US).** The reward line is hidden: the check-up chip, the receipt row, the tooltip, the sticky bar's "+ €40 Check-up Reward" and the care-comes-back step. A market counts as EU by `localization.country.iso_code` (Liquid) or `Shopify.country` (JS), checked against a list of the 27 EU country codes in one snippet, so no copy is needed for it.
 - **New key for source-copy** (sent on 22 Oct): `kc.general.approx_amount`, EN "(approx. [amount])". `[amount]` is filled with the local amount, the same placeholder style as `kc.receipt.*`. Source-copy has agreed the wording: NL "(ca. [amount])", FR "(env. [amount])"; the FR lane still confirms the FR. `theme_keys.py check` fails on a key that no theme file reads. So the build commit is sent to source-copy, and they add the key to all 31 locales on top of it. The theme puts it after the euro amount with a no-break space. No new settings.
@@ -224,3 +232,8 @@ Proposal: **1** at the next fix moment; 3 only if Victor wants the breaks at the
 - 23 Oct: row 40 second round and row 44 (option b) in merchant-edit `6a26258`; row 45 (professionals under the gallery, waiting for Victor) and row 46 (journey toggle aria-expanded, parked) added. Counts updated.
 - 23 Oct: row 45 (professionals under the gallery) removed by Victor, in merchant-edit `3c52d73`. Counts updated.
 - 23 Oct: kit tiles under the label (row 40) and the benefits peek (row 47) in merchant-edit `da63ae4`; row 46 widened, row 48 (reduced motion) parked. Counts updated.
+- 23 Oct: row 31 (Figma sections 08 and 09) dropped by Victor, "rij 31 laten we zo". Counts updated.
+- 23 Oct: row 38 changed to option 2 by Victor (convert every fixed euro amount, homepage included) and moved to in progress; plan added under Currency.
+- 23 Oct: rows 49–51 added and parked by Victor until the US market is live (USD notation, Year credit from the USD price, no kit tiles in the US). Counts updated.
+- 23 Oct: rows 38 and 49–51 parked until a non-EUR market is active (Victor: EU euro markets only; SEK, CHF, GBP and USD switched off in Admin → Markets). Counts updated.
+- 24 Oct: row 52 (gallery hero fit up to 1.5x, landed end image) added, in merchant-edit `9ce946b`. Counts updated.

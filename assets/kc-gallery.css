@@ -6,15 +6,21 @@ media-gallery.kc-gallery-fit .product-media-container video {
   border-radius: var(--kc-shape-radius-lg);
 }
 
-/* First gallery item, the hero animation: poster and video scaled inside their unchanged frame, so the
-   animation fills it (Victor, 20 Oct): 1.2x below 750, 1.12x from 750. Across the whole animation its visible pixels span 5.8% to 87.1%
-   of the video height (the brush heads at the start, the floor shadow at the bottom).
-   - Below 750 the frame is square and the video sits at its top, so the free space is below: scaled
-     from the top, the animation lands at 6.2% to 92.9% of the frame.
-   - From 750 the video fills the frame's height. 1.12x from 44.5% keeps the brush heads at 1.2% and
-     ends the floor shadow at 92.2%, about 40px above the thumbnail strip in a 632px frame (Victor,
-     23 Oct; 1.2x from 29% ended it at 98.7%). The top (a0c2c83) cut the tube bases there; the
-     centre (374aaad) cut the brush heads.
+/* First gallery item, the hero animation. Across the whole animation its visible pixels span 5.8% to
+   87.1% of the video height (the brush heads at the start, the floor shadow at the bottom); in the
+   landed last frame the left brush head starts at 16.8%, the right one at 19.3%. Poster, video,
+   animated WebP and the landed still share one img/video transform, so a swap never moves it.
+   - Below 750 the frame is square and the video sits at its top, so the free space is below: 1.2x
+     from the top, the animation lands at 6.2% to 92.9% of the frame, inside it (Victor, 20 Oct).
+   - From 750, as large as it fits, up to 1.5x (Victor, 24 Oct, "zo groot als past, tot 1,5"):
+     assets/kc-gallery.js finds the largest scale at which the whole animation keeps 16px clear of the
+     viewport's edges and the buybox text (R51; the intro may pass briefly behind the header), and sets
+     --kc-hero-scale with data-kc-hero-fit. The animation then scales from the bottom, the floor shadow
+     1rem below the frame, and overflows the frame and its wrappers, untouchable so the transparent
+     overflow takes no click.
+   - From 750 without that (no JavaScript, or less than 1.2x fits): the R50 pose inside the frame,
+     1.2x from the top, moved so the landed left brush head lines up with the buybox title 4.5rem below
+     the frame's top (Victor, 23 Oct).
    Thumbnails, the other items and the end CTA's hero stay as they are. */
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
   overflow: hidden;
@@ -29,8 +35,58 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video
 @media screen and (min-width: 750px) {
   media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
   media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
-    transform: scale(1.12);
-    transform-origin: center 44.5%;
+    transform: translateY(calc(4.5rem - 1.2 * 16.8%)) scale(1.2);
+  }
+
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .product-media-container:has(.kc-hero-animation),
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode {
+    overflow: visible;
+  }
+
+  /* Dawn clips every product media with .js .product__media { overflow: hidden !important }
+     (assets/section-main-product.css); only an !important lets the hero overflow */
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation {
+    overflow: visible !important;
+  }
+
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode img,
+  media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode video {
+    /* scale x the 12.9% under the shadow, plus 1rem, takes the shadow's end 1rem below the frame */
+    transform: translateY(calc(1rem + var(--kc-hero-scale, 1.2) * 12.9%)) scale(var(--kc-hero-scale, 1.2));
+    transform-origin: center bottom;
+    pointer-events: none;
+  }
+}
+
+/* From 750 the hero waits, hidden (opacity only, no layout change), until assets/kc-gallery.js has set
+   its pose (data-kc-hero-ready), then fades in: no visible jump from the R50 pose to the fit while the
+   deferred script loads (R52 B1). If the script never comes, it shows after 1s in the R50 pose; with
+   scripting off it never hides. */
+@media screen and (min-width: 750px) and (scripting: enabled) {
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
+    transition: opacity 0.25s ease;
+  }
+
+  media-gallery.kc-gallery-fit:not([data-kc-hero-ready]) .product__media-item .kc-hero-animation {
+    opacity: 0;
+    animation: kc-hero-reveal 0s linear 1s forwards;
+  }
+
+  /* A script later than that 1s: out, the fit while hidden, back in */
+  media-gallery.kc-gallery-fit[data-kc-hero-swap] .product__media-item .kc-hero-animation {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
+    transition: none;
+  }
+}
+
+@keyframes kc-hero-reveal {
+  to {
+    opacity: 1;
   }
 }
 
