@@ -1,6 +1,6 @@
 # R57 / R57b · Launch blocker 1: consumer-rights text (gate-legal)
 
-**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f; R57e = the final privacy round (gate-consent commit 938811c after Astra's R57d B1 and B2), §3g and §8.
+**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f; R57e = the final privacy round (gate-consent commit 938811c after Astra's R57d B1 and B2), §3g and §8; R57f = the rework after Astra's R57e review (`docs/runtime-review/R57E-PRIVACY-FINAL-ASTRA.md`: controller framing in section 5, conditional-reload withdrawal sentence), §3h and §8.
 **Scope**: LR1 blocker 1 (`docs/launch-gate/input/LR1-LAUNCH-READINESS.md`) = audit items P0-1, P0-5, P0-6, P0-8, P0-9, P0-14 (withdrawal information), P0-15 (the NL/FR of the changed strings) from `input/legal-offer/work/2026-10-05/legal-audit-terms-consumer-rights-privacy.md`.
 **Decisions applied**: D1 option A (Victor, 24 Oct: priming exemption dropped, loss-of-value rule), D7 and D8 (Consumer Rights is a plain-language summary that points to the Terms; the canonical texts are `input/legal-offer/legal/*`), D2 and D5 (unchanged, already in the text). D3 is discussed in §5 and not applied by this lane.
 
@@ -1104,6 +1104,59 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > Shopify Network Intelligence. Our shop runs on Shopify. We have enabled Shopify Network Intelligence, which means Shopify uses customer and device data from our shop together with data from other Shopify shops to generate insights that power Shopify's enhanced services: improved products and personalisation, shop performance, and advertising and discovery tools such as Shopify Audiences, the Shop app, Shopify Email, Shopify Collabs and Search & Discovery. No other merchant can access our customer data. If you decline non-essential cookies on our site, the device data from your visit to our shop is not used for these non-essential purposes, advertising included. Shopify describes this processing in the Shopify Consumer Privacy Policy and offers its own opt-out for marketing based on your interactions with Shopify shops at privacy.shopify.com.
 
 
+## 3h. R57f, after Astra's R57e review (24 Oct): controller framing in privacy section 5, conditional-reload withdrawal sentence in 9.2: the changes, one by one (EN old → new)
+
+
+### PH1 · Privacy Policy section 5: lead, the recipients sentence, and the role sentence in the Network Intelligence paragraph
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_xKcNPj/content` · policy `privacy-policy`
+
+**Why**: Astra R57e B2 (controller framing): the blanket “processors who act on our written instructions” description contradicted the Network Intelligence disclosure that follows it. Astra's wording, mirrored in EN/NL/FR.
+
+**Legal basis**: Astra's R57e review (`docs/runtime-review/R57E-PRIVACY-FINAL-ASTRA.md`), exact wording. B2: section 5 described every recipient as a processor acting on our written instructions, while Shopify's Data Processing Addendum of 7 July 2026 (Purpose and Appendix E, Enhanced Services) makes Shopify a controller for Network Intelligence; the instructions/DPA statement is now confined to processing on our behalf and Shopify's documented role is stated. Art. 13(1)(e) GDPR (recipients); Art. 4(7) and (8) GDPR (controller, processor). B1: the loader could drop a repeat withdrawal inside its five-second guard; gate-consent corrects it (R61e) and the sentence now describes the actual trigger (a reload only when Hotjar is running and analytics consent is withdrawn). Belgian DPA, withdrawal of consent and cookie checklist p. 3; Art. 7(3) GDPR. Counsel still confirms the governing agreement version, the roles, the lawful basis and consents for Network Intelligence, the disclosure duties under Shopify's Terms §9.2.5, and the lawful basis for default analytics outside the banner regions.
+
+**Old**
+
+> We never sell your data. A small set of service providers helps us run the shop, each under a written data processing agreement.
+
+**New**
+
+> We never sell your data. The service providers and other recipients below help us run the shop.
+
+**Old**
+
+> We share data strictly on a need-to-know basis with vetted service providers (processors) who act on our written instructions under data processing agreements (DPAs):
+
+**New**
+
+> Where a service provider processes personal data on our behalf, it acts on our written instructions under a data processing agreement. Recipients include:
+
+**Old**
+
+> Shopify Collabs and Search & Discovery. No other merchant
+
+**New**
+
+> Shopify Collabs and Search & Discovery. For these enhanced services, Shopify acts as a data controller under its Data Processing Addendum. No other merchant
+
+
+### PH2 · Privacy Policy section 9.2, the withdrawal sentence (conditional reload)
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_CDtWCV/content` · policy `privacy-policy`
+
+**Why**: Astra R57e B1: the sentence now describes the actual trigger, a single reload only when analytics consent is withdrawn while Hotjar is running, in Astra's wording; the corrected loader (gate-consent R61e, a repeat withdrawal within the guard window is never dropped) deploys with it.
+
+**Legal basis**: Astra's R57e review (`docs/runtime-review/R57E-PRIVACY-FINAL-ASTRA.md`), exact wording. B2: section 5 described every recipient as a processor acting on our written instructions, while Shopify's Data Processing Addendum of 7 July 2026 (Purpose and Appendix E, Enhanced Services) makes Shopify a controller for Network Intelligence; the instructions/DPA statement is now confined to processing on our behalf and Shopify's documented role is stated. Art. 13(1)(e) GDPR (recipients); Art. 4(7) and (8) GDPR (controller, processor). B1: the loader could drop a repeat withdrawal inside its five-second guard; gate-consent corrects it (R61e) and the sentence now describes the actual trigger (a reload only when Hotjar is running and analytics consent is withdrawn). Belgian DPA, withdrawal of consent and cookie checklist p. 3; Art. 7(3) GDPR. Counsel still confirms the governing agreement version, the roles, the lawful basis and consents for Network Intelligence, the disclosure duties under Shopify's Terms §9.2.5, and the lawful basis for default analytics outside the banner regions.
+
+**Old**
+
+> A withdrawal takes effect immediately: the page refreshes once.
+
+**New**
+
+> A withdrawal takes effect immediately. If you withdraw analytics consent while Hotjar is running, the page refreshes once to stop it.
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
@@ -1182,6 +1235,8 @@ Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings
 **R61b privacy handoff from gate-consent (24 Oct), applied in R57d (§3f).** Since R61 the theme loads Hotjar by region, following Shopify's Customer Privacy defaults; the Privacy Policy promised everyone that nothing non-essential runs before opt-in. Section 9.2 now states the regional rule (EEA, UK and Switzerland: only after Accept; elsewhere by default, with the “Your privacy choices” link and Global Privacy Control honoured), the real footer label “Cookie preferences” / “Cookievoorkeuren”, and that a withdrawal takes effect from the next page; the Hotjar entry in section 5 says the same; the section lead and the two 9.1 bullets are qualified so they no longer contradict 9.2. Three conditions for Victor before the privacy paste (ADMIN-STEPS step 1): the Customer-privacy region list contains EU/EEA, UK and Switzerland (else drop “Switzerland”); the Data Sharing Opt-Out Page is on for the opt-out regions (else drop the “Your privacy choices” clause); keystroke masking is on in Hotjar for site 1364127 (else drop “with keystroke masking”). Verify the FR footer label before publishing FR.
 
 **R57e, the final privacy round (24 Oct, gate-consent commit 938811c; Astra R57d B1 and B2; §3g).** Astra's R57d found two privacy blockers: B1, the text promised a “Your privacy choices” link and Global Privacy Control handling while the Data Sharing Opt-Out Page is inactive (Victor's admin, 24 Oct: “will be active when you add markets that require it”; the US market is off), and B2, a withdrawal that only took effect on the next page. gate-consent fixed the loader (R61d: a withdrawal expires Hotjar's site cookies and reloads the page once) and wrote the final wording. §3g applies the page-off texts: 9.2 ends its second sentence after “may run by default”, names the real “Cookie preferences” label and says a withdrawal takes effect immediately, the page refreshing once (this lane stops there and does not promise cookie deletion, as the handoff allows); the two 9.1 bullets carry the same regional ending without an opt-out clause; the Hotjar entry in section 5 loses “unless you opt out”; and a new paragraph in section 5 covers Shopify Network Intelligence, which Victor keeps enabled (24 Oct): what Shopify does with customer and device data from the shop, that no other merchant can access it, that declining non-essential cookies keeps the device data of the visit out of the non-essential uses, advertising included, with the Shopify Consumer Privacy Policy link Shopify requires and Shopify's own opt-out at privacy.shopify.com. The fuller texts (opt-out link, GPC, “unless you opt out”, the sale/sharing sentence for Network Intelligence) stay in the handoff for the day the opt-out page is active and verified. For counsel, from the handoff: the controller roles under Shopify's Data Processing Addendum of 7 July 2026 and its Appendix E, our lawful basis for enabling Network Intelligence and any consent it requires, the disclosures the DPA and the Additional Services Terms require, the lawful basis for default analytics outside the banner regions, and the withdrawal mechanics. Residual risk, one line: the regional rule relies on Shopify's region list and on Victor's three conditions (Switzerland in the list, keystroke masking on, the opt-out page kept off until verified); if any of them changes without the text, the policy over-promises again.
+
+**R57f, after Astra's R57e review (24 Oct; §3h).** Astra closed R57d B1 in every version and language and found two new blockers. B1: the loader at 938811c could ignore a second withdrawal given within its five-second guard after a fresh acceptance, so “the page refreshes once” over-promised; gate-consent is fixing the loader (R61e: a repeat withdrawal within the guard window is never dropped) and the 9.2 sentence now describes the actual trigger with Astra's wording: “A withdrawal takes effect immediately. If you withdraw analytics consent while Hotjar is running, the page refreshes once to stop it.” (PH2, EN/NL/FR). The corrected loader and this text deploy together (ADMIN-STEPS step 1, condition e); if Astra's R61e review changes the wording, the delta is applied the same way. B2: section 5 described every recipient as a processor acting on our written instructions, while Shopify's Data Processing Addendum of 7 July 2026 (Appendix E, Enhanced Services) makes Shopify a controller for Network Intelligence; the lead now says the service providers and other recipients below help us run the shop, the instructions/DPA sentence is confined to processing on our behalf (“Where a service provider processes personal data on our behalf, it acts on our written instructions under a data processing agreement. Recipients include:”), and the Network Intelligence paragraph says that for these enhanced services Shopify acts as a data controller under its Data Processing Addendum (PH1, EN/NL/FR). Basis: Art. 13(1)(e) GDPR (recipients) and Art. 4(7) and (8) GDPR (controller, processor); Shopify DPA, Purpose and Appendix E. Counsel still confirms the governing agreement version, the parties' actual roles, the lawful basis and consents for Network Intelligence, the disclosure duties under Shopify's Terms §9.2.5 (Terms and privacy policy), and the lawful basis for default analytics outside the banner regions. Publication gate kept hard (Astra): verify every EU/EEA country, the UK and Switzerland in the consent-region list before release; deleting “Switzerland” from the text cures only a missing Switzerland, never missing EU/EEA or UK coverage; the Hotjar app embed stays off. Terms, Consumer Rights and the subscription policy are untouched and keep their R57d approval.
 
 **Decided by Victor, 24 Oct (R57e): territorial scope stays EU only.** No text change; the UK and Switzerland leave the market selector in admin. Recorded here so the open question under LR1 blocker 5 is closed for the legal text (§5 has the clause list).
 
