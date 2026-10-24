@@ -42,7 +42,7 @@ Path: **Settings → Policies**.
 |---|---|---|---|
 | Terms of service | body (rich text; click `<>` “Show HTML” in the toolbar, select all, paste) | the body published on 24 Oct (v4.3 + 24-hour delivery times) | `POLICIES-PASTE.md` → “English · Terms of service” block |
 | Refund policy | same | the body published on 24 Oct | `POLICIES-PASTE.md` → “English · Refund policy” block |
-| Privacy policy | same | the body published on 24 Oct (v4.4) | `POLICIES-PASTE.md` → “English · Privacy policy” block (two lines change: section 3 communication data and section 5 Klaviyo, for the withdrawal acknowledgement) |
+| Privacy policy | same | the body published on 24 Oct (v4.4) | `POLICIES-PASTE.md` → “English · Privacy policy” block (section 3 communication data and section 5 Klaviyo for the withdrawal acknowledgement; section 5 Hotjar and section 9 regional consent wording from gate-consent). **Before this paste, confirm in Settings → Customer privacy** that the region list contains EU/EEA, UK and Switzerland (else delete “Switzerland” / “Zwitserland” / “Suisse” in 9.2 and 5), that the Data Sharing Opt-Out Page is on (else delete the “Your privacy choices” clause in 9.2 and keep the GPC clause), and in Hotjar for site 1364127 that keystroke masking is on (else delete “with keystroke masking” in 5); gate-consent's `docs/launch-gate/consent/PRIVACY-HANDOFF.md` has the detail |
 | Purchase options cancellation policy | same | the body published on 24 Oct (Terms clause 9) | `POLICIES-PASTE.md` → “English · Purchase options cancellation policy” block (one sentence changes in 9.9) |
 
 Save each. Leave Shipping policy, Contact information and Legal notice as they are (their intro link is step 7). Do not switch Privacy policy to “Automated”.
@@ -66,7 +66,7 @@ The NL and FR blocks are the live 24 Oct translations (batch-04, legal-review st
 
 ## 3. Theme-page translations (NL and FR of the designed pages)
 
-Source-copy registers the 18 settings in `TRANSLATIONS-HANDOFF.md`. If you do it by hand: Translate & Adapt → Online store → Theme (the live theme) → Templates → `page.terms-and-conditions`, `page.consumer-rights` and `page.privacy-policy` → the settings listed in `TRANSLATIONS-HANDOFF.md` → paste the NL and FR values. The EN values arrive with the theme release. A handoff file or a registration log is not proof: open `/nl/pages/terms-and-conditions-1` and `/fr/pages/new-consumer-rights` afterwards (step 9).
+Source-copy registers the 19 settings in `TRANSLATIONS-HANDOFF.md`. If you do it by hand: Translate & Adapt → Online store → Theme (the live theme) → Templates → `page.terms-and-conditions`, `page.consumer-rights` and `page.privacy-policy` → the settings listed in `TRANSLATIONS-HANDOFF.md` → paste the NL and FR values. The EN values arrive with the theme release. A handoff file or a registration log is not proof: open `/nl/pages/terms-and-conditions-1` and `/fr/pages/new-consumer-rights` afterwards (step 9).
 
 ## 4. Hide the three legacy pages
 
@@ -121,7 +121,7 @@ Four policies × three languages = twelve link edits; the text of those policies
 Open in a private window, slowly (the store rate-limits; one request every two seconds):
 
 - `/policies/terms-of-service`, `/policies/refund-policy`, and the `/nl/…` and `/fr/…` versions: clause 4.1 says the refund runs from “the day we are informed”, 4.6.3 starts “Primed pumps and your right of withdrawal”, 4.7.4 starts “Care Credit and refunds” and is followed by 4.7.5 (statutory routes: refund in full, express agreement, no silence) and 4.7.6 (voluntary routes: return or keep), 10.6 and 9.9 point to them, 3.1 of the charter names the online withdrawal function, section 2 says the toothbrushes and the floss are not cosmetics, clause 7 says you choose between repair and replacement.
-- `/pages/terms-and-conditions-1`, `/pages/new-consumer-rights`, `/pages/privacy-policy` (EN, NL, FR): the same text as the policies, including the NL and FR of the 18 settings; no “Download the form (PDF)” line remains anywhere, the model form is complete inline.
+- `/pages/terms-and-conditions-1`, `/pages/new-consumer-rights`, `/pages/privacy-policy` (EN, NL, FR): the same text as the policies, including the NL and FR of the 19 settings; no “Download the form (PDF)” line remains anywhere, the model form is complete inline.
 - `/policies/privacy-policy` (EN, NL, FR): section 5 names Klaviyo for the withdrawal acknowledgement and section 3 lists the withdrawal-function data.
 - The links “Withdraw from contract here” / “Hier de overeenkomst herroepen” / “Renoncer au contrat ici” open `/pages/withdrawal`, `/nl/pages/withdrawal`, `/fr/pages/withdrawal` (gate-withdrawal).
 - Each of `/pages/consumer-rights`, `/pages/privacy`, `/pages/terms-and-conditions` and their `/nl/` and `/fr/` paths (nine URLs) returns a 301 to the designed page; `sitemap_pages_1.xml` no longer lists the three legacy handles.

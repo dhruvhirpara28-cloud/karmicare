@@ -1,6 +1,6 @@
 # R57 / R57b · Launch blocker 1: consumer-rights text (gate-legal)
 
-**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8.
+**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f.
 **Scope**: LR1 blocker 1 (`docs/launch-gate/input/LR1-LAUNCH-READINESS.md`) = audit items P0-1, P0-5, P0-6, P0-8, P0-9, P0-14 (withdrawal information), P0-15 (the NL/FR of the changed strings) from `input/legal-offer/work/2026-10-05/legal-audit-terms-consumer-rights-privacy.md`.
 **Decisions applied**: D1 option A (Victor, 24 Oct: priming exemption dropped, loss-of-value rule), D7 and D8 (Consumer Rights is a plain-language summary that points to the Terms; the canonical texts are `input/legal-offer/legal/*`), D2 and D5 (unchanged, already in the text). D3 is discussed in §5 and not applied by this lane.
 
@@ -10,10 +10,10 @@
 |---|---|
 | `CHANGES.md` (this file) | Where each text lives, the canonical place and redirects, every change with old → new, reason and legal source (§3 R57, §3b and §3c R57b, §3d R57c), what was verified, what is left, Astra's review items and Victor's Care Credit decision (§8) |
 | `POLICIES-PASTE.md` | Full corrected body of the four Shopify policies that change (Terms of service, Refund policy, Privacy policy, Purchase options cancellation policy), EN first, then NL and FR for Translate & Adapt |
-| `TRANSLATIONS-HANDOFF.md` | The 18 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
+| `TRANSLATIONS-HANDOFF.md` | The 19 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
 | `ADMIN-STEPS.md` | What Victor does in admin, in order, starting with the launch gate (durable-medium confirmation): policy pastes, legacy pages to hide, redirects, titles, legacy Terms links, checks |
 
-Theme files changed: `templates/page.terms-and-conditions.json`, `templates/page.consumer-rights.json` and `templates/page.privacy-policy.json` (EN setting values only; the privacy change is two lines for the withdrawal acknowledgement, §3c). The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
+Theme files changed: `templates/page.terms-and-conditions.json`, `templates/page.consumer-rights.json` and `templates/page.privacy-policy.json` (EN setting values only; the privacy changes are two lines for the withdrawal acknowledgement, §3c, and the regional consent wording from gate-consent, §3f). The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
 
 ---
 
@@ -988,6 +988,59 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > If you paid partly with Care Credit, that credit returns to your balance, and the Care Credit earned on the refunded amount lapses in proportion; nothing is deducted for credit you had not used. If you had already used that credit on articles of another order, we tell you which order, which articles and which amount before you choose. You may return those articles with our prepaid label within 14 days of receiving it: nothing is deducted for them and we refund the money you paid for them. Under your legal rights, keeping them and paying that credit needs your express agreement, given after that information; we never treat silence as agreement and never delay or reduce your legal refund while asking. Under our money-back guarantees (3.3 and 3.4), that credit is deducted if you keep them. Clauses 4.7.4 to 4.7.6 of the Terms have the full rule. Care Credit is never paid out in cash.
 
 
+## 3f. R61b privacy handoff from gate-consent (24 Oct, commit 857c500), applied in R57d: regional consent wording for Hotjar and the cookie section: the changes, one by one (EN old → new)
+
+
+### PF1 · Privacy Policy section 9 (cookies): lead, 9.1 analytics and marketing bullets, 9.2 second paragraph
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_CDtWCV/content` · policy `privacy-policy`
+
+**Why**: The page promised everyone that nothing non-essential runs before opt-in; the loader is regional since R61. 9.2 now states the regional rule, the opt-out link and GPC, the real footer label (“Cookie preferences”) and the effect of a withdrawal from the next page; the lead and the two 9.1 bullets are qualified so they no longer contradict 9.2 (handoff item 3, gate-legal's call).
+
+**Legal basis**: gate-consent's `docs/launch-gate/consent/PRIVACY-HANDOFF.md` (commit 857c500, after Astra's R61 review, N1): since R61 the theme loads Hotjar by region, following Shopify's Customer Privacy defaults (banner regions EU/EEA, UK and Switzerland: only after Accept; elsewhere by default unless “Your privacy choices” or a Global Privacy Control signal); the universal promise had to become regional. Art. 13(1)(c) and (e) GDPR (purposes, recipients); Art. 5(3) ePrivacy Directive and Art. 10/2 of the Belgian Data Protection Act of 30 July 2018 (prior consent in the EEA). Conditions for Victor before the paste: the Customer-privacy region list contains EU/EEA, UK and Switzerland (else drop “Switzerland”); the Data Sharing Opt-Out Page is on for the opt-out regions (else drop the “Your privacy choices” clause); keystroke masking is on in Hotjar for site 1364127 (else drop “with keystroke masking”).
+
+**Old**
+
+> Everything else waits for your consent, and you can change your mind at any time.
+
+**New**
+
+> Everything else waits for your consent where the law requires it, and you can change your mind at any time.
+
+**Old**
+
+> Active only after your explicit consent.
+
+**New**
+
+> Active only after your explicit consent in the regions named in 9.2.
+
+**Old**
+
+> No non-essential cookies or tracking scripts run before you opt in. You can change or withdraw your choice at any time through the “Cookie settings” link in our footer.
+
+**New**
+
+> In the European Economic Area, the United Kingdom and Switzerland, no non-essential cookies or tracking scripts run before you opt in. Elsewhere, analytics and advertising technologies may run by default; where the law gives you a right to opt out of the sale or sharing of your data, you can use the “Your privacy choices” link in our footer or a Global Privacy Control signal in your browser, and we honour it. You can change or withdraw your choice at any time through the “Cookie preferences” link in our footer. A withdrawal takes effect from the next page you open; the page you are on keeps running until you leave it.
+
+
+### PF2 · Privacy Policy section 5, “Analytics and optimisation”, the Hotjar clause
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_xKcNPj/content` · policy `privacy-policy`
+
+**Why**: Same regional rule for the Hotjar recipient entry (handoff item 2); “with keystroke masking” stays only if Victor confirms it in Hotjar.
+
+**Legal basis**: gate-consent's `docs/launch-gate/consent/PRIVACY-HANDOFF.md` (commit 857c500, after Astra's R61 review, N1): since R61 the theme loads Hotjar by region, following Shopify's Customer Privacy defaults (banner regions EU/EEA, UK and Switzerland: only after Accept; elsewhere by default unless “Your privacy choices” or a Global Privacy Control signal); the universal promise had to become regional. Art. 13(1)(c) and (e) GDPR (purposes, recipients); Art. 5(3) ePrivacy Directive and Art. 10/2 of the Belgian Data Protection Act of 30 July 2018 (prior consent in the EEA). Conditions for Victor before the paste: the Customer-privacy region list contains EU/EEA, UK and Switzerland (else drop “Switzerland”); the Data Sharing Opt-Out Page is on for the opt-out regions (else drop the “Your privacy choices” clause); keystroke masking is on in Hotjar for site 1364127 (else drop “with keystroke masking”).
+
+**Old**
+
+> Hotjar Ltd. (Malta), heatmaps and session analysis, with your consent and keystroke masking
+
+**New**
+
+> Hotjar Ltd. (Malta), heatmaps and session analysis, with keystroke masking; in the EEA, the UK and Switzerland only with your consent, elsewhere by default unless you opt out
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
@@ -1020,7 +1073,7 @@ Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were
 - **The Year money-back guarantee keeps “unopened (pump never primed)”** and the €59 deduction. They are conditions of the voluntary 60-day guarantee, which may be narrower than the law as long as the statutory right is untouched; clauses 4.1.5 and 4.5 and section 3.5 say so, and Astra confirmed they are confined to the voluntary route.
 - **Clause 9.9 (renewal refunds)** now reads “Care Credit earned on the refunded amount lapses; if you had already used it to pay for articles on another order, you may return those articles instead of having that credit deducted (clause 4.7.6)” (R57d, TE5). A renewal refund is a contractual route, so the deduction stays its default, with the return alternative explicit. The subscription policy quotes clause 9 word for word and carries the same sentence (SE1), so it is now in `POLICIES-PASTE.md`.
 - **Clause 4.6.1 and section 3.7.1 (“without harsh chemical preservatives” / “without relying on harsh preservatives”)** are a free-from claim inside a legal text (audit P2-2). Not a blocker-1 item; routed to gate-claims.
-- **Privacy Policy**: no blocker-1 item. The cookie-law citation (audit P0-3 text fix) is gate-consent's.
+- **Privacy Policy**: no blocker-1 item of its own. It carries two handoffs: Klaviyo and the withdrawal-function data (§3c) and gate-consent's regional consent wording (§3f). The cookie-law citation in section 1 (audit P0-3 text fix: the Electronic Communications Act of 2005 → the Data Protection Act of 30 July 2018) and the processor-list completeness from R60 (TikTok, Klaviyo web pixel, Judge.me, Loop Subscriptions, UpPromote) stay with gate-consent.
 - **“Download the form (PDF)”**: on Victor's instruction (24 Oct, through gate-withdrawal) the two placeholder links are removed from both pages and the plain line from both policy bodies (§3c); the model form stays inline, which is what Art. VI.45 §1 8° and Annex 2 to Book VI WER require. The three PDFs in `input/legal-offer/legal/forms/` remain available for the confirmation email (ADMIN-STEPS step 0), and Astra's point about pastes overwriting the links is moot.
 - **“Last updated October 2026”** stays; a dated version line (audit P2-13) belongs to the legal-offer branch when it logs v4.5.
 
@@ -1037,7 +1090,7 @@ Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were
 
 - `templates/page.terms-and-conditions.json`: EN values of eight settings (clause 2, 3, 4, 7 content, 7 examples, 9, 10, Annex).
 - `templates/page.consumer-rights.json`: EN values of eight settings (key card 3, sections 1, 2 content + title + menu label, 3, 4, 10).
-- `templates/page.privacy-policy.json`: EN values of two settings (section 3 communication data, section 5 Klaviyo).
+- `templates/page.privacy-policy.json`: EN values of three settings (section 3 communication data; section 5 Klaviyo and Hotjar; section 9 cookies).
 - `docs/launch-gate/legal/CHANGES.md`, `POLICIES-PASTE.md`, `TRANSLATIONS-HANDOFF.md`, `ADMIN-STEPS.md`.
 
 Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings), the three templates still parse as JSON, every replacement anchored exactly once (or the stated count) in the templates (from the 5bab3ad base, R57, then R57b, then the add-ons), in the live EN/NL/FR policy bodies and in the batch-04 NL/FR values; grep of the new templates and policy bodies for “unopened goods”, “of approval”, “return authorisation”, “notified as cosmetics”, “eligible, unopened”, “deducted from the refund if you already spent it”, “Download the form”: none left.
@@ -1062,5 +1115,7 @@ Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings
 **R57c, Victor's Care Credit decision (24 Oct).** Victor: “We do deduct the used credit, unless the customer also returns the product the credits were used for.” Applied in §3d as a linked-order choice: credit spent to pay for the refunded order is restored; credit earned from the refunded payment lapses, with nothing deducted for the unused part; where that credit had already paid for another order, the customer chooses, when giving notice, between returning the credit-funded items at no cost (prepaid label, their money refunded, nothing set off) and keeping them and paying the credit value, which is the only amount set off against the refund; silence means set-off; the refund confirmation names the linked order and the amount; the same choice applies on every refund route; apart from it the statutory refund of the price and the standard delivery charge stays complete. Legal basis relied on: Art. VI.50 §1 WER (every payment received is refunded; the credit was never a payment received), Art. VI.52 §2 WER and Art. 15 CRD (withdrawal ends a linked contract at no cost, hence the cost-free return branch), Art. VI.51 §2 WER (the set-off is not a diminished-value claim; it rests on the conditional price reduction of the linked order falling away when the payment that earned it is refunded, set off under Art. 5.258 ff. of the new Civil Code), Art. VI.45 §1 8° WER (stated before the contract), Art. 1649septies old Civil Code (voluntary guarantees). Residual risk for counsel, one line: a set-off against the statutory refund of an amount that exists only because the consumer withdrew may be read as a cost imposed as a consequence of withdrawal (Art. VI.51 §5 and VI.52 §2 WER, Art. 14(5) CRD) or, on the legal guarantee, as a term limiting the remedy (Art. 1649octies); the defence is that the credit was a conditional price reduction on the linked order, the consumer keeps goods of that value or may return them at no cost, and the choice is stated before purchase and on the refund confirmation.
 
 **R57d, the retained-benefit model (24 Oct, after Astra's R57c review, B4).** Astra: the R57c rule made a Care Credit amount due and set off on every statutory refund, by silence, without an enforceable retained-goods obligation; the cited bases (VI.50 §1, VI.52 §2, VI.51 §2, VI.63) do not create one, and the Civil Code set-off reference was wrong (5.258 concerns sureties). R57d keeps Victor's intent and narrows the rule to what Astra's favourable authority supports (§3e: TE1–TE6, SE1, CE1–CE3). Statutory routes (withdrawal 4.1, legal guarantee 7): the refund is paid in full and within the legal period whatever the customer decides; a deduction exists only for the Care Credit attributable to the refunded amount that the customer actually used on articles they keep, after we have identified the other order, the articles and the amount, and only with the customer's express agreement given after that information; silence is never agreement; no answer means refund in full and ask again. Proportional allocation: credit earned on the amount actually refunded lapses, not the whole payment's reward. Return reconciliation: the prepaid label, 14 days from its receipt, nothing deducted for returned articles, their money refunded, any provisional set-off reversed, partial returns counted per article, no double counting, the attributable credit as ceiling, unused credit never recovered in cash. Voluntary routes (4.3, 4.4, 9.9): the return-or-keep choice is explicit (4.7.6) and the older unconditional deduction sentences in 4.3.3, 4.4.2, 9.9, charter 3.3 and 3.4 are qualified by it. Civil Code references corrected to 5.254–5.255 (legal set-off), 5.263 (contractual set-off) and 5.20 (silence). Basis relied on: Art. VI.50 §1 and VI.51 §5 WER; CJEU C-583/18 (Verbraucherzentrale Berlin v DB Vertrieb, paras 35–37) as an analogy for recovering a conditional price benefit on a retained, legally distinct transaction; Art. 5.20, 5.254–5.255 and 5.263 new Civil Code; Art. 1649quinquies and 1649octies old Civil Code; Art. VI.45 §1 8° WER; Art. 1649septies for the voluntary guarantees. Residual risk for counsel, one line: whether a loyalty credit spent on a later order creates an enforceable restitution debt for the retained articles is undecided in Belgian law and C-583/18 is an analogy, so even an expressly agreed set-off on a statutory refund can be challenged under Art. VI.51 §5 and VI.63 WER or Art. 1649octies; the conservative alternative remains the b8d5ef3 statutory exclusion with Victor's return option kept for the contractual routes.
+
+**R61b privacy handoff from gate-consent (24 Oct), applied in R57d (§3f).** Since R61 the theme loads Hotjar by region, following Shopify's Customer Privacy defaults; the Privacy Policy promised everyone that nothing non-essential runs before opt-in. Section 9.2 now states the regional rule (EEA, UK and Switzerland: only after Accept; elsewhere by default, with the “Your privacy choices” link and Global Privacy Control honoured), the real footer label “Cookie preferences” / “Cookievoorkeuren”, and that a withdrawal takes effect from the next page; the Hotjar entry in section 5 says the same; the section lead and the two 9.1 bullets are qualified so they no longer contradict 9.2. Three conditions for Victor before the privacy paste (ADMIN-STEPS step 1): the Customer-privacy region list contains EU/EEA, UK and Switzerland (else drop “Switzerland”); the Data Sharing Opt-Out Page is on for the opt-out regions (else drop the “Your privacy choices” clause); keystroke masking is on in Hotjar for site 1364127 (else drop “with keystroke masking”). Verify the FR footer label before publishing FR.
 
 Follow-ups, not in this lane: the migration redirect CSV (not in the input set; cannot be certified here); counsel on any alternative to removing the statutory clawback, on the Year as a regular-delivery contract, on actual loss-of-value and kit handling, and on the complete multilingual contract in its operational context; the NL model-form style differences between theme and policy (equivalent in meaning, left as they are); LR1 blockers 2 to 7.
