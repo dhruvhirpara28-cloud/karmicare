@@ -1,6 +1,6 @@
 # R57 / R57b · Launch blocker 1: consumer-rights text (gate-legal)
 
-**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f; R57e = the final privacy round (gate-consent commit 938811c after Astra's R57d B1 and B2), §3g and §8; R57f = the rework after Astra's R57e review (`docs/runtime-review/R57E-PRIVACY-FINAL-ASTRA.md`: controller framing in section 5, conditional-reload withdrawal sentence), §3h and §8.
+**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f; R57e = the final privacy round (gate-consent commit 938811c after Astra's R57d B1 and B2), §3g and §8; R57f = the rework after Astra's R57e review (`docs/runtime-review/R57E-PRIVACY-FINAL-ASTRA.md`: controller framing in section 5, conditional-reload withdrawal sentence), §3h and §8; R57g = wording only, the single withdrawal sentence of 9.2 from Astra's combined R61e/R57f report, §3i.
 **Scope**: LR1 blocker 1 (`docs/launch-gate/input/LR1-LAUNCH-READINESS.md`) = audit items P0-1, P0-5, P0-6, P0-8, P0-9, P0-14 (withdrawal information), P0-15 (the NL/FR of the changed strings) from `input/legal-offer/work/2026-10-05/legal-audit-terms-consumer-rights-privacy.md`.
 **Decisions applied**: D1 option A (Victor, 24 Oct: priming exemption dropped, loss-of-value rule), D7 and D8 (Consumer Rights is a plain-language summary that points to the Terms; the canonical texts are `input/legal-offer/legal/*`), D2 and D5 (unchanged, already in the text). D3 is discussed in §5 and not applied by this lane.
 
@@ -1155,6 +1155,26 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 **New**
 
 > A withdrawal takes effect immediately. If you withdraw analytics consent while Hotjar is running, the page refreshes once to stop it.
+
+
+## 3i. R57g, wording only (24 Oct, Astra's combined R61e/R57f report): the single withdrawal sentence in 9.2: the changes, one by one (EN old → new)
+
+
+### PI1 · Privacy Policy section 9.2, the withdrawal sentence (one sentence, Astra's exact text)
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_CDtWCV/content` · policy `privacy-policy`
+
+**Why**: Astra's combined R61e/R57f report (gate-consent `docs/runtime-review/R61E-R57F-WITHDRAWAL-PRIVACY-FINAL-ASTRA.md`, lines 34–42): one sentence that keeps the Hotjar condition and states the measured timing (cookies deleted at once, reload within a few seconds), dropping the separate blanket “A withdrawal takes effect immediately”; the footer-choice sentence before it stays.
+
+**Legal basis**: Art. 7(3) GDPR; Belgian DPA, withdrawal of consent. The condition assumes the deployment configuration (this loader owns Hotjar, the app embed is off); counsel keeps the assessment of the short teardown interval.
+
+**Old**
+
+> A withdrawal takes effect immediately. If you withdraw analytics consent while Hotjar is running, the page refreshes once to stop it.
+
+**New**
+
+> If you withdraw analytics consent while Hotjar is running, the analytics cookies Hotjar set on our site are deleted immediately, and the page refreshes within a few seconds to stop recording.
 
 
 ## 4. What was verified, and where (24 Oct 2026)
