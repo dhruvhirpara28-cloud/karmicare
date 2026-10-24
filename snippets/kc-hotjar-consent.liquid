@@ -68,12 +68,17 @@
       // Withdrawal must take effect on the page the visitor is on (GDPR art. 7(3); Astra R57d B2).
       // Hotjar documents no call that stops a running recorder (checked 24 Oct 2026), so when this
       // loader started Hotjar on this page view and consent is withdrawn, its cookies for this site
-      // are expired and the page is reloaded once; the reloaded page sees the refusal and loads
-      // nothing. A sessionStorage stamp refuses a second reload within 5 s (loop guard); a reload
-      // can only recur after a new consent change by the visitor. Hotjar started by something else
-      // (an app embed) is not ours to stop and is left alone.
+      // are expired at once and the page is reloaded; the reloaded page sees the refusal and loads
+      // nothing. Loop guard (R61e, Astra R61d B1): a sessionStorage stamp is written only when a
+      // reload actually happens, and a new withdrawal inside the 5 s window is not dropped but
+      // scheduled for the end of the window, re-checking consent at that moment. A reload that was
+      // cancelled (consent granted again before it fired) consumes nothing. If the browser does not
+      // reload (a blocked unload), one retry follows a second later. Hotjar started by something
+      // else (an app embed) is not ours to stop and is left alone.
       var RELOAD_KEY = 'kc-hotjar-withdrawal';
-      var stopping = false;
+      var GUARD_MS = 5000;
+      var SETTLE_MS = 300;
+      var stopTimer = null;
 
       function expireHotjarCookies() {
         var suffix = '_' + siteId;
@@ -90,27 +95,44 @@
         });
       }
 
-      function stopHotjar() {
-        if (stopping) return;
-        stopping = true;
+      function lastReloadAt() {
         try {
-          var last = parseInt(window.sessionStorage.getItem(RELOAD_KEY), 10) || 0;
-          if (Date.now() - last < 5000) {
-            stopping = false;
-            return;
-          }
+          return parseInt(window.sessionStorage.getItem(RELOAD_KEY), 10) || 0;
+        } catch (error) {
+          return 0;
+        }
+      }
+
+      function reloadNow() {
+        try {
           window.sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
         } catch (error) {
-          // Storage blocked: reload anyway; a loop needs a new consent change by the visitor.
+          // Storage blocked: reload without a stamp; a loop would need a new consent change.
         }
-        // Shopify has saved the new consent when the event fires; a short delay lets its cookie
-        // write settle before the reloaded page reads it.
+        window.location.reload();
+        // Still here after a second: the unload was blocked. Retry once if still refused.
         window.setTimeout(function () {
-          stopping = false;
-          if (hotjarAllowed()) return;
+          if (!hotjarAllowed()) {
+            expireHotjarCookies();
+            window.location.reload();
+          }
+        }, 1000);
+      }
+
+      function stopHotjar() {
+        // Every refusal while this loader's Hotjar runs expires the site cookies at once.
+        expireHotjarCookies();
+        if (stopTimer) return; // a stop is pending; it re-checks consent when it fires
+        // Shopify has saved the new consent when the event fires; SETTLE_MS lets its cookie write
+        // settle. Inside the loop-guard window the reload waits for the window to end, never drops.
+        var sinceLast = Date.now() - lastReloadAt();
+        var delay = sinceLast < GUARD_MS ? Math.max(SETTLE_MS, GUARD_MS - sinceLast) : SETTLE_MS;
+        stopTimer = window.setTimeout(function () {
+          stopTimer = null;
+          if (hotjarAllowed()) return; // consent granted again meanwhile: nothing to stop now
           expireHotjarCookies();
-          window.location.reload();
-        }, 300);
+          reloadNow();
+        }, delay);
       }
 
       function check() {
