@@ -14,7 +14,7 @@ media-gallery.kc-gallery-fit .product-media-container video {
      from the top, the animation lands at 6.2% to 92.9% of the frame, inside it (Victor, 20 Oct).
    - From 750, as large as it fits, up to 1.5x (Victor, 24 Oct, "zo groot als past, tot 1,5"):
      assets/kc-gallery.js finds the largest scale at which the whole animation keeps 16px clear of the
-     viewport's sides, the buybox text, the header and the viewport's bottom (R51), and sets
+     viewport's edges and the buybox text (R51; the intro may pass briefly behind the header), and sets
      --kc-hero-scale with data-kc-hero-fit. The animation then scales from the bottom, the floor shadow
      1rem below the frame, and overflows the frame and its wrappers, untouchable so the transparent
      overflow takes no click.

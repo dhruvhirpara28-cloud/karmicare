@@ -6,7 +6,8 @@ const KC_HERO_UNION = {
   left: (0.5 - 51 / 540) * 1.125, // 0.45625
   right: (485 / 540 - 0.5) * 1.125, // 215/480
   top: 0.871 - 28 / 480,
-  bottom: 420 / 480 - 0.871
+  bottom: 420 / 480 - 0.871,
+  landedTop: 0.871 - 80 / 480 // the last frame's top, which must stay below the header
 };
 const KC_HERO_CLEARANCE = 16;
 const KC_HERO_MIN = 1.2;
@@ -65,10 +66,11 @@ if (!customElements.get('kc-gallery-sizing')) {
       this.gallery.toggleAttribute('data-kc-hero-fit', scale !== null);
     }
 
-    // The largest scale up to 1.5 at which the whole animation keeps 16px clear of the viewport's left
-    // and right edges, the buybox content box, the header's bottom at scroll 0 and the viewport's
-    // bottom. Measured on the static layout at scroll 0: page positions, not the sticky pin. Below 1.2
-    // there is no scale, and the CSS keeps the R50 pose inside the frame.
+    // The largest scale up to 1.5 at which the whole animation keeps 16px clear of the viewport's four
+    // edges and the buybox content box. The top is the viewport's, not the header's: the intro may
+    // pass briefly behind the header, the landed frame stays below it (Victor, 24 Oct). Measured on the
+    // static layout at scroll 0: page positions, not the sticky pin. Below 1.2 there is no scale, and
+    // the CSS keeps the R50 pose inside the frame.
     heroScale(viewerRect, anchorTop) {
       const m = KC_HERO_CLEARANCE;
       const H = viewerRect.height;
@@ -88,7 +90,8 @@ if (!customElements.get('kc-gallery-sizing')) {
       const fit = Math.min(
         (C - m) / (KC_HERO_UNION.left * H),
         (Math.min(buyboxLeft, viewportWidth) - m - C) / (KC_HERO_UNION.right * H),
-        (B - m - headerBottom) / (KC_HERO_UNION.top * H),
+        (B - m) / (KC_HERO_UNION.top * H),
+        (B - headerBottom) / (KC_HERO_UNION.landedTop * H),
         (viewportHeight - m - B) / (KC_HERO_UNION.bottom * H)
       );
       // A small margin under the mathematical maximum, on a 0.01 step so subpixel resizes write nothing
