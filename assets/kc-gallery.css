@@ -58,6 +58,38 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video
   }
 }
 
+/* From 750 the hero waits, hidden (opacity only, no layout change), until assets/kc-gallery.js has set
+   its pose (data-kc-hero-ready), then fades in: no visible jump from the R50 pose to the fit while the
+   deferred script loads (R52 B1). If the script never comes, it shows after 1s in the R50 pose; with
+   scripting off it never hides. */
+@media screen and (min-width: 750px) and (scripting: enabled) {
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
+    transition: opacity 0.25s ease;
+  }
+
+  media-gallery.kc-gallery-fit:not([data-kc-hero-ready]) .product__media-item .kc-hero-animation {
+    opacity: 0;
+    animation: kc-hero-reveal 0s linear 1s forwards;
+  }
+
+  /* A script later than that 1s: out, the fit while hidden, back in */
+  media-gallery.kc-gallery-fit[data-kc-hero-swap] .product__media-item .kc-hero-animation {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
+    transition: none;
+  }
+}
+
+@keyframes kc-hero-reveal {
+  to {
+    opacity: 1;
+  }
+}
+
 media-gallery.kc-gallery-fit {
   --kc-gallery-thumb-size: clamp(var(--kc-responsive-size-control-min-width), 14vw, 64px);
   --kc-gallery-arrow-width: var(--kc-responsive-size-control-min-width);

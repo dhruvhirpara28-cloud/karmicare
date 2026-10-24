@@ -9,7 +9,8 @@ const KC_HERO_UNION = {
   bottom: 420 / 480 - 0.871,
   landedTop: 0.871 - 80 / 480 // the last frame's top, which must stay below the header
 };
-const KC_HERO_CLEARANCE = 16;
+const KC_HERO_CLEARANCE = 16; // sides, buybox and bottom
+const KC_HERO_TOP_CLEARANCE = 16; // the intro's distance from the viewport's top edge
 const KC_HERO_MIN = 1.2;
 const KC_HERO_MAX = 1.5;
 
@@ -34,7 +35,9 @@ if (!customElements.get('kc-gallery-sizing')) {
         .filter(Boolean).forEach((element) => this.observer.observe(element));
       window.addEventListener('resize', this.schedule);
       document.fonts?.ready.then(this.schedule);
-      this.schedule();
+      // At once, not in a frame: the CSS keeps the hero hidden from 750 until data-kc-hero-ready,
+      // so the first pose it shows is the final one (R52 B1)
+      this.measure();
     }
 
     disconnectedCallback() {
@@ -47,41 +50,60 @@ if (!customElements.get('kc-gallery-sizing')) {
       if (!this.desktop.matches) {
         this.write('--kc-hero-scale', null);
         this.gallery.toggleAttribute('data-kc-hero-fit', false);
+        this.gallery.toggleAttribute('data-kc-hero-ready', true);
         return;
       }
-      // Read everything first, then write only what changed
+      // Sizing first: read, then write only what changed
       const gap = parseFloat(getComputedStyle(this.gallery).getPropertyValue('--kc-gallery-gap')) || 16;
       const stickyTop = (this.header?.getBoundingClientRect().height || 0) + gap;
       const anchorTop = this.anchor.getBoundingClientRect().top + window.scrollY;
       const start = Math.max(anchorTop, stickyTop);
       const thumbnailsHeight = this.thumbnails?.getBoundingClientRect().height || 0;
-      const viewerRect = this.viewer.getBoundingClientRect();
-      const scale = this.hero ? this.heroScale(viewerRect, anchorTop) : null;
-
+      const viewerHeight = this.viewer.getBoundingClientRect().height;
       this.write('--kc-gallery-start', `${Math.ceil(start)}px`);
       this.write('--kc-gallery-sticky-top', `${Math.ceil(stickyTop)}px`);
       this.write('--kc-gallery-thumbnails-height', `${Math.ceil(thumbnailsHeight)}px`);
-      this.write('--kc-gallery-media-height', `${viewerRect.height}px`);
+      this.write('--kc-gallery-media-height', `${viewerHeight}px`);
+      // Then the fit, on the viewer those values give, in the same pass: no second correction (R52 B1)
+      const scale = this.hero ? this.heroScale(this.viewer.getBoundingClientRect(), anchorTop, stickyTop) : null;
+      // A script later than the CSS's 1s reveal finds the hero shown in the R50 pose: it fades out,
+      // takes the fit while hidden and fades back, rather than jumping
+      const late = !this.gallery.hasAttribute('data-kc-hero-ready') && scale !== null && this.hero &&
+        parseFloat(getComputedStyle(this.hero).opacity) > 0.5;
+      this.gallery.toggleAttribute('data-kc-hero-ready', true);
+      if (late) {
+        this.gallery.setAttribute('data-kc-hero-swap', '');
+        setTimeout(() => {
+          this.write('--kc-hero-scale', scale);
+          this.gallery.toggleAttribute('data-kc-hero-fit', true);
+          this.gallery.removeAttribute('data-kc-hero-swap');
+        }, 260);
+        return;
+      }
+      if (this.gallery.hasAttribute('data-kc-hero-swap')) return;
       this.write('--kc-hero-scale', scale);
       this.gallery.toggleAttribute('data-kc-hero-fit', scale !== null);
     }
 
     // The largest scale up to 1.5 at which the whole animation keeps 16px clear of the viewport's four
     // edges and the buybox content box. The top is the viewport's, not the header's: the intro may
-    // pass briefly behind the header, the landed frame stays below it (Victor, 24 Oct). Measured on the
-    // static layout at scroll 0: page positions, not the sticky pin. Below 1.2 there is no scale, and
-    // the CSS keeps the R50 pose inside the frame.
-    heroScale(viewerRect, anchorTop) {
+    // pass briefly behind the header, the landed frame stays below it (Victor, 24 Oct). Measured on
+    // page positions, not the current scroll, for both the gallery's place at scroll 0 and its sticky
+    // pin, whichever sits higher, so the scale holds while scrolling (R52 B2). Below 1.2 there is no
+    // scale, and the CSS keeps the R50 pose inside the frame.
+    heroScale(viewerRect, anchorTop, stickyTop) {
       const m = KC_HERO_CLEARANCE;
       const H = viewerRect.height;
       if (!(H > 0)) return null;
-      const galleryTop = this.gallery.getBoundingClientRect().top;
-      const frameTop = anchorTop + (viewerRect.top - galleryTop);
-      const B = frameTop + H + 10;
+      const viewerOffset = viewerRect.top - this.gallery.getBoundingClientRect().top;
+      const B = anchorTop + viewerOffset + H + 10; // the shadow reference at scroll 0
+      const pinnedB = stickyTop + viewerOffset + H + 10; // the same, pinned
+      const highestB = Math.min(B, pinnedB);
       const C = viewerRect.left + viewerRect.width / 2;
       const viewportWidth = document.documentElement.clientWidth;
       const viewportHeight = document.documentElement.clientHeight;
-      const headerBottom = this.headerGroup.reduce((sum, section) => sum + section.getBoundingClientRect().height, 0);
+      const headerGroupBottom = this.headerGroup.reduce((sum, section) => sum + section.getBoundingClientRect().height, 0);
+      const headerBottom = this.header?.getBoundingClientRect().height || 0; // the sticky header alone, when pinned
       let buyboxLeft = viewportWidth;
       if (this.info) {
         const style = getComputedStyle(this.info);
@@ -90,9 +112,10 @@ if (!customElements.get('kc-gallery-sizing')) {
       const fit = Math.min(
         (C - m) / (KC_HERO_UNION.left * H),
         (Math.min(buyboxLeft, viewportWidth) - m - C) / (KC_HERO_UNION.right * H),
-        (B - m) / (KC_HERO_UNION.top * H),
-        (B - headerBottom) / (KC_HERO_UNION.landedTop * H),
-        (viewportHeight - m - B) / (KC_HERO_UNION.bottom * H)
+        (highestB - KC_HERO_TOP_CLEARANCE) / (KC_HERO_UNION.top * H),
+        (B - headerGroupBottom) / (KC_HERO_UNION.landedTop * H),
+        (pinnedB - headerBottom) / (KC_HERO_UNION.landedTop * H),
+        (viewportHeight - m - Math.max(B, pinnedB)) / (KC_HERO_UNION.bottom * H)
       );
       // A small margin under the mathematical maximum, on a 0.01 step so subpixel resizes write nothing
       const scale = Math.min(KC_HERO_MAX, Math.floor((fit - 0.005) * 100) / 100);
