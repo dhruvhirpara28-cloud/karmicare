@@ -1,0 +1,78 @@
+diff --git a/sections/footer.liquid b/sections/footer.liquid
+index a3993fd..45fe50c 100644
+--- a/sections/footer.liquid
++++ b/sections/footer.liquid
+@@ -699,6 +699,15 @@
+     assign legal_consumer_rights = shop.refund_policy
+   endif
+ 
++  # The withdrawal page (Art. VI.61/2 WER): the picker, else the handle; no link until it exists
++  assign legal_withdrawal = section.settings.legal_withdrawal_page
++  if legal_withdrawal == blank
++    assign legal_withdrawal = pages['withdrawal']
++  endif
++
++  # The EU legal guarantee notice sits on the Consumer Rights page at this anchor (Victor, 24 Oct)
++  assign legal_guarantee_anchor = section.settings.legal_guarantee_anchor | default: 'two-year-guarantee' | handleize
++
+   # Link texts: a blank setting uses the translated default (t output is escaped, hence escape_once)
+   assign legal_terms_default = 'kc.footer.legal_terms' | t
+   assign legal_privacy_default = 'kc.footer.legal_privacy' | t
+@@ -1086,6 +1095,23 @@
+                 <a href="{{ legal_privacy.url }}">{{ section.settings.legal_privacy_label | default: legal_privacy_default | escape_once }}</a>
+                 <span aria-hidden="true">·</span>
+                 <a href="{{ legal_consumer_rights.url }}">{{ section.settings.legal_consumer_rights_label | default: legal_consumer_rights_default | escape_once }}</a>
++                {%- comment -%}
++                  "Your legal guarantee rights": the Commission's example sentence, one click from the
++                  harmonised notice at the end of Consumer Rights section 4. Built from the page
++                  object, so /nl and /fr keep their locale. Blank label hides it.
++                {%- endcomment -%}
++                {%- if section.settings.legal_guarantee_label != blank and legal_consumer_rights != blank -%}
++                  <span aria-hidden="true">·</span>
++                  <a href="{{ legal_consumer_rights.url }}#{{ legal_guarantee_anchor }}">{{ section.settings.legal_guarantee_label | escape_once }}</a>
++                {%- endif -%}
++                {%- comment -%}
++                  "Withdraw from contract here": the statutory label of the online withdrawal
++                  function (Art. VI.61/2 WER), shown once the withdrawal page exists.
++                {%- endcomment -%}
++                {%- if section.settings.legal_withdrawal_label != blank and legal_withdrawal != blank -%}
++                  <span aria-hidden="true">·</span>
++                  <a href="{{ legal_withdrawal.url }}">{{ section.settings.legal_withdrawal_label | escape_once }}</a>
++                {%- endif -%}
+                 {%- for policy in shop.policies -%}
+                   {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
+                   {%- assign policy_url_start = policy.url | slice: 0 -%}
+@@ -1230,6 +1256,33 @@
+       "label": "Consumer Rights link text",
+       "info": "Blank uses the translated default (locale key kc.footer.legal_consumer_rights)"
+     },
++    {
++      "type": "text",
++      "id": "legal_guarantee_label",
++      "label": "Legal guarantee link text",
++      "default": "Your legal guarantee rights",
++      "info": "Goes to the Consumer Rights page at the anchor below, where the EU legal guarantee notice sits. Blank hides the link. NL and FR via Translate & Adapt."
++    },
++    {
++      "type": "text",
++      "id": "legal_guarantee_anchor",
++      "label": "Legal guarantee anchor on the Consumer Rights page",
++      "default": "two-year-guarantee",
++      "info": "The Anchor set on the page's 'Two-year legal guarantee' block."
++    },
++    {
++      "type": "page",
++      "id": "legal_withdrawal_page",
++      "label": "Withdrawal page",
++      "info": "Empty uses the page withdrawal; the link only shows once that page exists"
++    },
++    {
++      "type": "text",
++      "id": "legal_withdrawal_label",
++      "label": "Withdrawal link text",
++      "default": "Withdraw from contract here",
++      "info": "Statutory words (Art. VI.61/2 WER); NL 'Hier de overeenkomst herroepen', FR 'Renoncer au contrat ici' via Translate & Adapt. Blank hides the link."
++    },
+     {
+       "type": "checkbox",
+       "id": "payment_enable",
