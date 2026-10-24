@@ -1,6 +1,6 @@
 # R57 / R57b · Launch blocker 1: consumer-rights text (gate-legal)
 
-**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f.
+**Created**: 2026-10-24 · lane gate-legal · base `karmicare/soft-launch` @ 5bab3ad · R57 = commit 31306f8, reviewed by Astra (`docs/runtime-review/R57-CONSUMER-RIGHTS-TEXT-ASTRA.md`, verdict REWORK); R57b = the rework, §3b, §3c and §8; R57c = Victor's Care Credit decision, §3d and §8; R57d = the retained-benefit rework after Astra's R57c review (`docs/runtime-review/R57C-CARE-CREDIT-RULE-ASTRA.md`, verdict REWORK, B4), §3e and §8, plus gate-consent's privacy handoff (R61b, commit 857c500), §3f; R57e = the final privacy round (gate-consent commit 938811c after Astra's R57d B1 and B2), §3g and §8.
 **Scope**: LR1 blocker 1 (`docs/launch-gate/input/LR1-LAUNCH-READINESS.md`) = audit items P0-1, P0-5, P0-6, P0-8, P0-9, P0-14 (withdrawal information), P0-15 (the NL/FR of the changed strings) from `input/legal-offer/work/2026-10-05/legal-audit-terms-consumer-rights-privacy.md`.
 **Decisions applied**: D1 option A (Victor, 24 Oct: priming exemption dropped, loss-of-value rule), D7 and D8 (Consumer Rights is a plain-language summary that points to the Terms; the canonical texts are `input/legal-offer/legal/*`), D2 and D5 (unchanged, already in the text). D3 is discussed in §5 and not applied by this lane.
 
@@ -13,7 +13,7 @@
 | `TRANSLATIONS-HANDOFF.md` | The 19 changed theme-page settings with template, block id, key path and the full EN, NL and FR value, for source-copy |
 | `ADMIN-STEPS.md` | What Victor does in admin, in order, starting with the launch gate (durable-medium confirmation): policy pastes, legacy pages to hide, redirects, titles, legacy Terms links, checks |
 
-Theme files changed: `templates/page.terms-and-conditions.json`, `templates/page.consumer-rights.json` and `templates/page.privacy-policy.json` (EN setting values only; the privacy changes are two lines for the withdrawal acknowledgement, §3c, and the regional consent wording from gate-consent, §3f). The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
+Theme files changed: `templates/page.terms-and-conditions.json`, `templates/page.consumer-rights.json` and `templates/page.privacy-policy.json` (EN setting values only; the privacy changes are two lines for the withdrawal acknowledgement, §3c, and the regional consent wording from gate-consent, §3f, finalised in §3g: no opt-out promise while the Data Sharing Opt-Out Page is inactive, immediate withdrawal, Shopify Network Intelligence). The three legacy pages, the policies and all NL/FR are admin work (`ADMIN-STEPS.md`).
 
 ---
 
@@ -1041,6 +1041,69 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > Hotjar Ltd. (Malta), heatmaps and session analysis, with keystroke masking; in the EEA, the UK and Switzerland only with your consent, elsewhere by default unless you opt out
 
 
+## 3g. R57e, final privacy round (24 Oct, gate-consent commit 938811c, Astra R57d B1 and B2): page-off text without an opt-out promise, immediate withdrawal, Shopify Network Intelligence: the changes, one by one (EN old → new)
+
+
+### PG1 · Privacy Policy section 9: the two 9.1 bullets and the 9.2 second paragraph (page-off text, immediate withdrawal)
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_CDtWCV/content` · policy `privacy-policy`
+
+**Why**: Astra R57d B1 and B2: the published text may not promise the opt-out link or GPC handling while the Data Sharing Opt-Out Page is inactive, and a withdrawal must take effect at once. The 9.1 bullets carry the regional ending without an opt-out clause; 9.2 ends its second sentence after “may run by default”, keeps the real “Cookie preferences” label and says the withdrawal takes effect immediately, the page refreshing once (this lane stops there and does not promise cookie deletion, as the handoff allows).
+
+**Legal basis**: gate-consent's `docs/launch-gate/consent/PRIVACY-HANDOFF.md` at commit 938811c (R61b, R61c, R61d), after Astra's R57d review: B1, the Data Sharing Opt-Out Page is inactive (Victor's admin, 24 Oct), so the text may promise neither a “Your privacy choices” link nor Global Privacy Control handling (the loader only reads the permission Shopify derives, and Shopify derives it only where that page is active); B2, the loader now expires Hotjar's site cookies and reloads the page once, so a withdrawal takes effect immediately. Art. 13(1)(c) and (e) GDPR; Art. 7(3) GDPR (withdrawal as easy as consent); Art. 5(3) ePrivacy Directive and Art. 10/2 Belgian Data Protection Act. Shopify Network Intelligence: enabled (Victor, 24 Oct); Shopify requires the cookie banner to name Shopify and the privacy policy to link the Shopify Consumer Privacy Policy; roles under Shopify's Data Processing Addendum of 7 July 2026 and the lawful basis for enabling the feature are for counsel.
+
+**Old**
+
+> Active only after your explicit consent in the regions named in 9.2.
+
+**New**
+
+> In the European Economic Area, the United Kingdom and Switzerland active only after your explicit consent; elsewhere by default (see 9.2).
+
+**Old**
+
+> In the European Economic Area, the United Kingdom and Switzerland, no non-essential cookies or tracking scripts run before you opt in. Elsewhere, analytics and advertising technologies may run by default; where the law gives you a right to opt out of the sale or sharing of your data, you can use the “Your privacy choices” link in our footer or a Global Privacy Control signal in your browser, and we honour it. You can change or withdraw your choice at any time through the “Cookie preferences” link in our footer. A withdrawal takes effect from the next page you open; the page you are on keeps running until you leave it.
+
+**New**
+
+> In the European Economic Area, the United Kingdom and Switzerland, no non-essential cookies or tracking scripts run before you opt in. Elsewhere, analytics and advertising technologies may run by default. You can change or withdraw your choice at any time through the “Cookie preferences” link in our footer. A withdrawal takes effect immediately: the page refreshes once.
+
+
+### PG2 · Privacy Policy section 5, the Hotjar clause (page-off)
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_xKcNPj/content` · policy `privacy-policy`
+
+**Why**: Same as PG1: no “unless you opt out” while the opt-out page is inactive (Astra R61c N2).
+
+**Legal basis**: gate-consent's `docs/launch-gate/consent/PRIVACY-HANDOFF.md` at commit 938811c (R61b, R61c, R61d), after Astra's R57d review: B1, the Data Sharing Opt-Out Page is inactive (Victor's admin, 24 Oct), so the text may promise neither a “Your privacy choices” link nor Global Privacy Control handling (the loader only reads the permission Shopify derives, and Shopify derives it only where that page is active); B2, the loader now expires Hotjar's site cookies and reloads the page once, so a withdrawal takes effect immediately. Art. 13(1)(c) and (e) GDPR; Art. 7(3) GDPR (withdrawal as easy as consent); Art. 5(3) ePrivacy Directive and Art. 10/2 Belgian Data Protection Act. Shopify Network Intelligence: enabled (Victor, 24 Oct); Shopify requires the cookie banner to name Shopify and the privacy policy to link the Shopify Consumer Privacy Policy; roles under Shopify's Data Processing Addendum of 7 July 2026 and the lawful basis for enabling the feature are for counsel.
+
+**Old**
+
+> , elsewhere by default unless you opt out
+
+**New**
+
+> , elsewhere by default
+
+
+### PG3 · Privacy Policy section 5, new paragraph after the processor list: Shopify Network Intelligence
+
+**Setting**: `page.privacy-policy:legal_toc_section_gYznx3/content_section_xKcNPj/content` · policy `privacy-policy`
+
+**Why**: Victor keeps Shopify Network Intelligence enabled (24 Oct) and wants the privacy policy to say so; Shopify requires the link to its Consumer Privacy Policy when the feature is on. The paragraph states what Shopify does with customer and device data from the shop, that no other merchant can access it, the effect of declining non-essential cookies, and Shopify's own opt-out. The sale/sharing sentence waits for the opt-out page.
+
+**Legal basis**: gate-consent's `docs/launch-gate/consent/PRIVACY-HANDOFF.md` at commit 938811c (R61b, R61c, R61d), after Astra's R57d review: B1, the Data Sharing Opt-Out Page is inactive (Victor's admin, 24 Oct), so the text may promise neither a “Your privacy choices” link nor Global Privacy Control handling (the loader only reads the permission Shopify derives, and Shopify derives it only where that page is active); B2, the loader now expires Hotjar's site cookies and reloads the page once, so a withdrawal takes effect immediately. Art. 13(1)(c) and (e) GDPR; Art. 7(3) GDPR (withdrawal as easy as consent); Art. 5(3) ePrivacy Directive and Art. 10/2 Belgian Data Protection Act. Shopify Network Intelligence: enabled (Victor, 24 Oct); Shopify requires the cookie banner to name Shopify and the privacy policy to link the Shopify Consumer Privacy Policy; roles under Shopify's Data Processing Addendum of 7 July 2026 and the lawful basis for enabling the feature are for counsel.
+
+**Old**
+
+> only where the law strictly requires it.
+
+**New**
+
+> only where the law strictly requires it.
+> Shopify Network Intelligence. Our shop runs on Shopify. We have enabled Shopify Network Intelligence, which means Shopify uses customer and device data from our shop together with data from other Shopify shops to generate insights that power Shopify's enhanced services: improved products and personalisation, shop performance, and advertising and discovery tools such as Shopify Audiences, the Shop app, Shopify Email, Shopify Collabs and Search & Discovery. No other merchant can access our customer data. If you decline non-essential cookies on our site, the device data from your visit to our shop is not used for these non-essential purposes, advertising included. Shopify describes this processing in the Shopify Consumer Privacy Policy and offers its own opt-out for marketing based on your interactions with Shopify shops at privacy.shopify.com.
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
@@ -1068,12 +1131,12 @@ Limits: EUR-Lex returned empty pages to automated reads, so the EU articles were
 
 ## 5. Not changed, and why
 
-- **Territorial scope (EU only) and the UK.** The brief lists D3 as “all 27 EU states plus the UK”. The record in `input/legal-offer/work/2026-10-06/legal-proposals-countries-and-open-decisions.md` adds a 9 Oct revision by Victor: UK excluded for now; cover all EU member states in the Terms. The live Terms, Consumer Rights, shipping and subscription policies say “member states of the European Union”, Astra found no internal contradiction, and the Markets question is LR1 blocker 5. This lane changed nothing here. If Victor confirms the UK is in, Terms 2.3, 5.1, 8.2, 9.10, 11.1, 15.3 and 15.4, Consumer Rights 5 and 9 and the shipping policy change together with Markets, shipping zones and the UK items of the 6 Oct file.
+- **Territorial scope: EU only, decided.** Victor decided on 24 Oct (landing desk, R57e): EU only for now. The Terms (2.3, 5.1, 8.2, 9.10, 11.1, 15.3, 15.4), Consumer Rights (5, 9), the shipping and subscription policies all say “member states of the European Union” and stay as they are; Victor removes the UK and Switzerland from the market selector in admin. This closes the UK question under LR1 blocker 5 for this text. The privacy policy's “European Economic Area, the United Kingdom and Switzerland” refers to Shopify's consent-banner region list (Settings → Customer privacy), not to the markets we sell to, so it stays while that list contains them (ADMIN-STEPS step 1, condition a).
 - **“For a membership, the period runs from your first delivery”** is kept (Art. VI.47 §2, 2° c). Whether the Year (two deliveries) is a regular-delivery contract or one order delivered in parts stays a counsel point.
 - **The Year money-back guarantee keeps “unopened (pump never primed)”** and the €59 deduction. They are conditions of the voluntary 60-day guarantee, which may be narrower than the law as long as the statutory right is untouched; clauses 4.1.5 and 4.5 and section 3.5 say so, and Astra confirmed they are confined to the voluntary route.
 - **Clause 9.9 (renewal refunds)** now reads “Care Credit earned on the refunded amount lapses; if you had already used it to pay for articles on another order, you may return those articles instead of having that credit deducted (clause 4.7.6)” (R57d, TE5). A renewal refund is a contractual route, so the deduction stays its default, with the return alternative explicit. The subscription policy quotes clause 9 word for word and carries the same sentence (SE1), so it is now in `POLICIES-PASTE.md`.
 - **Clause 4.6.1 and section 3.7.1 (“without harsh chemical preservatives” / “without relying on harsh preservatives”)** are a free-from claim inside a legal text (audit P2-2). Not a blocker-1 item; routed to gate-claims.
-- **Privacy Policy**: no blocker-1 item of its own. It carries two handoffs: Klaviyo and the withdrawal-function data (§3c) and gate-consent's regional consent wording (§3f). The cookie-law citation in section 1 (audit P0-3 text fix: the Electronic Communications Act of 2005 → the Data Protection Act of 30 July 2018) and the processor-list completeness from R60 (TikTok, Klaviyo web pixel, Judge.me, Loop Subscriptions, UpPromote) stay with gate-consent.
+- **Privacy Policy**: no blocker-1 item of its own. It carries gate-consent's handoffs: Klaviyo and the withdrawal-function data (§3c), the regional consent wording (§3f) and its final form (§3g: no “Your privacy choices” or Global Privacy Control promise while the Data Sharing Opt-Out Page is inactive, withdrawal effective at once, the Shopify Network Intelligence paragraph with the Shopify Consumer Privacy Policy link). The cookie-law citation in section 1 (audit P0-3 text fix: the Electronic Communications Act of 2005 → the Data Protection Act of 30 July 2018) and the processor-list completeness from R60 (TikTok, Klaviyo web pixel, Judge.me, Loop Subscriptions, UpPromote) stay with gate-consent.
 - **“Download the form (PDF)”**: on Victor's instruction (24 Oct, through gate-withdrawal) the two placeholder links are removed from both pages and the plain line from both policy bodies (§3c); the model form stays inline, which is what Art. VI.45 §1 8° and Annex 2 to Book VI WER require. The three PDFs in `input/legal-offer/legal/forms/` remain available for the confirmation email (ADMIN-STEPS step 0), and Astra's point about pastes overwriting the links is moot.
 - **“Last updated October 2026”** stays; a dated version line (audit P2-13) belongs to the legal-offer branch when it logs v4.5.
 
@@ -1117,5 +1180,9 @@ Checks: `shopify theme check --fail-level error` (0 errors, 19 baseline warnings
 **R57d, the retained-benefit model (24 Oct, after Astra's R57c review, B4).** Astra: the R57c rule made a Care Credit amount due and set off on every statutory refund, by silence, without an enforceable retained-goods obligation; the cited bases (VI.50 §1, VI.52 §2, VI.51 §2, VI.63) do not create one, and the Civil Code set-off reference was wrong (5.258 concerns sureties). R57d keeps Victor's intent and narrows the rule to what Astra's favourable authority supports (§3e: TE1–TE6, SE1, CE1–CE3). Statutory routes (withdrawal 4.1, legal guarantee 7): the refund is paid in full and within the legal period whatever the customer decides; a deduction exists only for the Care Credit attributable to the refunded amount that the customer actually used on articles they keep, after we have identified the other order, the articles and the amount, and only with the customer's express agreement given after that information; silence is never agreement; no answer means refund in full and ask again. Proportional allocation: credit earned on the amount actually refunded lapses, not the whole payment's reward. Return reconciliation: the prepaid label, 14 days from its receipt, nothing deducted for returned articles, their money refunded, any provisional set-off reversed, partial returns counted per article, no double counting, the attributable credit as ceiling, unused credit never recovered in cash. Voluntary routes (4.3, 4.4, 9.9): the return-or-keep choice is explicit (4.7.6) and the older unconditional deduction sentences in 4.3.3, 4.4.2, 9.9, charter 3.3 and 3.4 are qualified by it. Civil Code references corrected to 5.254–5.255 (legal set-off), 5.263 (contractual set-off) and 5.20 (silence). Basis relied on: Art. VI.50 §1 and VI.51 §5 WER; CJEU C-583/18 (Verbraucherzentrale Berlin v DB Vertrieb, paras 35–37) as an analogy for recovering a conditional price benefit on a retained, legally distinct transaction; Art. 5.20, 5.254–5.255 and 5.263 new Civil Code; Art. 1649quinquies and 1649octies old Civil Code; Art. VI.45 §1 8° WER; Art. 1649septies for the voluntary guarantees. Residual risk for counsel, one line: whether a loyalty credit spent on a later order creates an enforceable restitution debt for the retained articles is undecided in Belgian law and C-583/18 is an analogy, so even an expressly agreed set-off on a statutory refund can be challenged under Art. VI.51 §5 and VI.63 WER or Art. 1649octies; the conservative alternative remains the b8d5ef3 statutory exclusion with Victor's return option kept for the contractual routes.
 
 **R61b privacy handoff from gate-consent (24 Oct), applied in R57d (§3f).** Since R61 the theme loads Hotjar by region, following Shopify's Customer Privacy defaults; the Privacy Policy promised everyone that nothing non-essential runs before opt-in. Section 9.2 now states the regional rule (EEA, UK and Switzerland: only after Accept; elsewhere by default, with the “Your privacy choices” link and Global Privacy Control honoured), the real footer label “Cookie preferences” / “Cookievoorkeuren”, and that a withdrawal takes effect from the next page; the Hotjar entry in section 5 says the same; the section lead and the two 9.1 bullets are qualified so they no longer contradict 9.2. Three conditions for Victor before the privacy paste (ADMIN-STEPS step 1): the Customer-privacy region list contains EU/EEA, UK and Switzerland (else drop “Switzerland”); the Data Sharing Opt-Out Page is on for the opt-out regions (else drop the “Your privacy choices” clause); keystroke masking is on in Hotjar for site 1364127 (else drop “with keystroke masking”). Verify the FR footer label before publishing FR.
+
+**R57e, the final privacy round (24 Oct, gate-consent commit 938811c; Astra R57d B1 and B2; §3g).** Astra's R57d found two privacy blockers: B1, the text promised a “Your privacy choices” link and Global Privacy Control handling while the Data Sharing Opt-Out Page is inactive (Victor's admin, 24 Oct: “will be active when you add markets that require it”; the US market is off), and B2, a withdrawal that only took effect on the next page. gate-consent fixed the loader (R61d: a withdrawal expires Hotjar's site cookies and reloads the page once) and wrote the final wording. §3g applies the page-off texts: 9.2 ends its second sentence after “may run by default”, names the real “Cookie preferences” label and says a withdrawal takes effect immediately, the page refreshing once (this lane stops there and does not promise cookie deletion, as the handoff allows); the two 9.1 bullets carry the same regional ending without an opt-out clause; the Hotjar entry in section 5 loses “unless you opt out”; and a new paragraph in section 5 covers Shopify Network Intelligence, which Victor keeps enabled (24 Oct): what Shopify does with customer and device data from the shop, that no other merchant can access it, that declining non-essential cookies keeps the device data of the visit out of the non-essential uses, advertising included, with the Shopify Consumer Privacy Policy link Shopify requires and Shopify's own opt-out at privacy.shopify.com. The fuller texts (opt-out link, GPC, “unless you opt out”, the sale/sharing sentence for Network Intelligence) stay in the handoff for the day the opt-out page is active and verified. For counsel, from the handoff: the controller roles under Shopify's Data Processing Addendum of 7 July 2026 and its Appendix E, our lawful basis for enabling Network Intelligence and any consent it requires, the disclosures the DPA and the Additional Services Terms require, the lawful basis for default analytics outside the banner regions, and the withdrawal mechanics. Residual risk, one line: the regional rule relies on Shopify's region list and on Victor's three conditions (Switzerland in the list, keystroke masking on, the opt-out page kept off until verified); if any of them changes without the text, the policy over-promises again.
+
+**Decided by Victor, 24 Oct (R57e): territorial scope stays EU only.** No text change; the UK and Switzerland leave the market selector in admin. Recorded here so the open question under LR1 blocker 5 is closed for the legal text (§5 has the clause list).
 
 Follow-ups, not in this lane: the migration redirect CSV (not in the input set; cannot be certified here); counsel on any alternative to removing the statutory clawback, on the Year as a regular-delivery contract, on actual loss-of-value and kit handling, and on the complete multilingual contract in its operational context; the NL model-form style differences between theme and policy (equivalent in meaning, left as they are); LR1 blockers 2 to 7.
