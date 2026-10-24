@@ -9,14 +9,17 @@
   How: waits for Shopify's Customer Privacy API (window.Shopify.customerPrivacy, provided async by
   Shopify's banner and pixel scripts; only if it is still missing 8 s after load is it requested
   with Shopify.loadFeatures 'consent-tracking-api'), loads the standard Hotjar snippet when
-  analyticsProcessingAllowed() is true, and listens for the
+  analyticsProcessingAllowed() is true and saleOfDataAllowed() is not false, and listens for the
   document event 'visitorConsentCollected' so Hotjar starts the moment analytics consent is given.
-  Where the store's Customer privacy settings require consent (EU/EEA, UK and Switzerland with the
-  automated banner regions) analytics is not allowed until the visitor accepts. Elsewhere Shopify's
-  default allows every purpose ("For other regions, the default behavior is to allow all processing
-  purposes", shopify.dev/docs/api/customer-privacy), so Hotjar loads at once there unless the
-  visitor opted out. After withdrawal nothing loads on the next page view; the page where consent
-  was withdrawn keeps the already running script until navigation. Never runs in the theme editor.
+  Where the store's Customer privacy settings show the banner (EU/EEA and UK with Shopify's
+  automated regions; add Switzerland in Settings → Customer privacy → Cookie banner → Regions)
+  analytics is not allowed until the visitor accepts. Elsewhere Shopify's default allows every
+  purpose ("For other regions, the default behavior is to allow all processing purposes",
+  shopify.dev/docs/api/customer-privacy), so Hotjar loads at once there unless the visitor opted
+  out of data sale/sharing ("Your privacy choices" or a Global Privacy Control signal in an opt-out
+  region), which sets saleOfDataAllowed() to false. After withdrawal nothing loads on the next page
+  view; the page where consent was withdrawn keeps the already running script until it is left.
+  Never runs in the theme editor.
 
   Usage: {% render 'kc-hotjar-consent', site_id: 1364127 %} once, from layout/theme.liquid.
   Accepts: site_id (number, required; 0 or blank renders nothing). No other tracker, no personal data.
@@ -45,18 +48,24 @@
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
       }
 
-      function analyticsAllowed() {
+      // Two independent permissions (Shopify Customer Privacy API): analytics must be granted, and
+      // the visitor must not have opted out of data sale/sharing ("Your privacy choices" link or a
+      // Global Privacy Control signal in an opt-out region). A missing saleOfDataAllowed method
+      // counts as allowed, so an EU Accept still loads Hotjar.
+      function hotjarAllowed() {
         var privacy = window.Shopify && window.Shopify.customerPrivacy;
         if (!privacy || typeof privacy.analyticsProcessingAllowed !== 'function') return false;
         try {
-          return privacy.analyticsProcessingAllowed() === true;
+          if (privacy.analyticsProcessingAllowed() !== true) return false;
+          if (typeof privacy.saleOfDataAllowed === 'function' && privacy.saleOfDataAllowed() === false) return false;
+          return true;
         } catch (error) {
           return false;
         }
       }
 
       function check() {
-        if (analyticsAllowed()) loadHotjar();
+        if (hotjarAllowed()) loadHotjar();
       }
 
       // Shopify's banner and pixel scripts load the API themselves (version 0.1 on this store, async),

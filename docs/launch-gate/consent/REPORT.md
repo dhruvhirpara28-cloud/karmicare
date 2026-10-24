@@ -65,13 +65,21 @@ Victor (24 Oct, via the landing desk): "I want it to load for customers outside 
 What the snippet does:
 
 - Waits for `window.Shopify.customerPrivacy`. Shopify's banner and pixel scripts provide it asynchronously (on this store at API version 0.1); the snippet checks at `DOMContentLoaded`, at `load`, then every 500 ms for 8 s, and only then asks `Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }])` itself. Reason: asking for another version while Shopify's own copy is loading fails; measured on the live page: `Error: consent-tracking-api@0.2 has already been loaded at version 0.1`.
-- Injects the standard Hotjar snippet for site 1364127 only when `analyticsProcessingAllowed()` is true.
+- Injects the standard Hotjar snippet for site 1364127 only when **both** `analyticsProcessingAllowed() === true` and `saleOfDataAllowed()` is not `false` (R61b, after Astra B1; a missing `saleOfDataAllowed` method counts as allowed, so an EU Accept still loads). Shopify treats analytics consent and the sale/sharing opt-out as independent permissions; the loader requires both.
 - Listens for the document event `visitorConsentCollected` and runs the same check, so Hotjar starts the moment analytics consent is given (banner or footer link). The API, not `event.detail`, is the source of truth.
-- Loads nothing on the next page view after withdrawal. Limit: the page on which consent is withdrawn keeps the already running script until navigation; Hotjar publishes no stop call we could verify, so none is called.
+- Loads nothing on the next page view after withdrawal or after a sale/sharing opt-out. Limit (Astra N2): the page on which consent is withdrawn keeps the already running script until the visitor leaves it; Hotjar publishes no stop call we could verify, so none is called.
 - Never loads twice: does nothing if `window.hj` is already a function (a forgotten app embed) or if it ran already on this page.
 - Not rendered in the theme editor (`request.design_mode`), and the script also returns on `Shopify.designMode`. No other tracker, no personal data, no cookie read or write of its own.
 
-Regions, per Shopify's documentation (quoted in `ADMIN-STEPS.md` §2.3): where the store's cookie banner is configured, "non-essential purposes are not allowed by default until consent is given"; "For other regions, the default behavior is to allow all processing purposes." With Shopify's automated banner regions (UK and EEA, Switzerland grouped with Europe) Hotjar therefore waits for consent in the EU/EEA, the UK and Switzerland and loads at once elsewhere, for example in the US, unless the visitor opted out ("Your privacy choices" / Global Privacy Control). The controlling setting is Settings → Customer privacy → Cookie banner → Regions.
+What this gives per visitor, exactly as the code behaves (Shopify quotes in `ADMIN-STEPS.md` §2.3):
+
+| Visitor | Hotjar |
+|---|---|
+| In a banner region (EU/EEA and UK with Shopify's automated regions; Switzerland once Victor adds it to the list) | Only after Accept, or Analytics ticked in Manage preferences. Nothing before a choice, nothing after Decline. Shopify: "non-essential purposes are not allowed by default until consent is given". |
+| Elsewhere, for example the US | By default on the first page view ("For other regions, the default behavior is to allow all processing purposes"), unless the visitor opted out of data sale/sharing through the "Your privacy choices" link or a Global Privacy Control signal in a configured opt-out region; Shopify then sets `sale_of_data` to `false` and the loader stays closed. |
+| Withdrawal (footer link → Decline, or the sale/sharing opt-out) | Stops loading from the next page view. The page already open keeps recording until it is left. |
+
+Two admin settings decide this, both under Settings → Customer privacy: Cookie banner → Regions and content → Regions (which regions wait for consent), and the Data Sharing Opt-Out Page (whether "Your privacy choices" and GPC exist outside banner regions). Shopify's help page promises automated UK and EEA coverage; it does not promise Switzerland, so CH must be verified in the list (Astra N4).
 
 Verification, file:// harness (the snippet's script with the site id filled in, `Shopify.customerPrivacy` stubbed per state, run in a fresh isolated Orca profile; Hotjar's loader is a real request to `static.hotjar.com`):
 
@@ -83,16 +91,23 @@ Verification, file:// harness (the snippet's script with the site id filled in, 
 | EU, accepted earlier | yes, once | at page start |
 | EU, accepted, withdrawn on this page at 1.5 s | once at start, nothing after | documented limit |
 | EU, withdrawn earlier, next page view | **no** | — |
-| Non-EU default (no banner region) | yes, once | at page start |
-| Non-EU, opted out | **no** | — |
-| API appears 2 s after load (Shopify's async scripts) | yes, once | 26 ms after the API appeared |
+| Non-EU default (no banner region, analytics allowed, sale/sharing allowed) | yes, once | at page start |
+| Non-EU, analytics denied | **no** | — |
+| Non-EU, analytics allowed, sale/sharing opted out via "Your privacy choices" (R61b) | **no** | — |
+| Opt-out region with a GPC browser signal: analytics allowed, `sale_of_data` false (R61b) | **no** | — |
+| Analytics allowed, `saleOfDataAllowed` method absent from the API (R61b) | yes, once | at page start |
+| API appears 2 s after load (Shopify's async scripts) | yes, once | 18 ms after the API appeared |
 | API never provided; `loadFeatures` fallback | yes, once | `loadFeatures` called at 8.0 s, Hotjar at 8.3 s |
 | Theme editor (`designMode`) | **no** | — |
 | `window.hj` already present (app embed on) | **no second load** | — |
 
+R61b re-ran all fifteen states after the sale/sharing gate was added; the twelve earlier states behave as before, the three new ones as expected (0, 0, 1). "Once" means one loader insertion (`static.hotjar.com/c/hotjar-1364127.js`); the modules Hotjar then loads itself are not counted.
+
 Verification, live homepage with the real Shopify banner (fresh isolated profile, the same gate logic injected with a recorder instead of the Hotjar snippet, because the live theme still carries the app embed): before any choice `analyticsProcessingAllowed()` = false (no load); Decline → event, false; footer link → Accept → event, true (would load immediately); reload → true at start; footer link → Decline → event, false; reload → false. On the live page `window.hj` already exists from the embed, so the real snippet would skip itself there until the embed is off.
 
-Theme Check after the change: 0 errors, 19 warnings, the same baseline as before (the two in `layout/theme.liquid`, RemoteAsset for Adobe Fonts and UndefinedObject `scheme_classes`, predate R61).
+Theme Check after the change (R61 and again after R61b): 0 errors, 19 warnings, the same baseline as before (the two in `layout/theme.liquid`, RemoteAsset for Adobe Fonts and UndefinedObject `scheme_classes`, predate R61).
+
+Astra's R61 review (`docs/runtime-review/R61-HOTJAR-CONSENT-LOADER-ASTRA.md` in the homepage worktree) and what R61b did with it: B1 (docs promised that "Your privacy choices"/GPC stop Hotjar while the code checked analytics only) → the landing desk chose to honour the sale/sharing opt-out in code; gate added, three states added to the harness, docs corrected. N1 (privacy page's universal promise) → replacement wording for sections 9.2 and 5 in EN/NL/FR in `PRIVACY-HANDOFF.md`, for gate-legal to apply. N2 (withdrawal keeps the open page recording) → stated in both documents. N4 (ADMIN-STEPS said fallback 0.2; Switzerland assumed) → corrected to 0.1 and "verify CH in the region list". Status: Victor switched the Hotjar app embed off on 24 Oct ~15:40 UTC, verified in the live HTML; Hotjar's own masking and IP anonymisation for site 1364127 remain for Victor to check.
 
 ## 5. The footer newsletter form today (not changed; global lane owns it)
 
@@ -102,7 +117,7 @@ Theme Check after the change: 0 errors, 19 warnings, the same baseline as before
 
 ## 6. Handoffs and decisions
 
-**Victor (decisions, sent as one question to the coordinator):** Hotjar keep/drop; Klaviyo onsite tracking off; UpPromote uninstall/keep. Recommendation was: drop Hotjar for launch, Klaviyo onsite off, UpPromote uninstalled unless an affiliate programme runs. Victor chose to keep Hotjar with consent; R61 built the theme loader (§4.2). Still open for Victor: switch the Hotjar app embed off once R61 is live (§4.2, `ADMIN-STEPS.md` §1.1), Klaviyo onsite tracking, UpPromote.
+**Victor (decisions, sent as one question to the coordinator):** Hotjar keep/drop; Klaviyo onsite tracking off; UpPromote uninstall/keep. Recommendation was: drop Hotjar for launch, Klaviyo onsite off, UpPromote uninstalled unless an affiliate programme runs. Victor chose to keep Hotjar with consent; R61 built the theme loader, R61b added the sale/sharing opt-out gate (§4.2). The Hotjar app embed is off since 24 Oct ~15:40 UTC (verified). Still open for Victor: Hotjar's masking and IP anonymisation for site 1364127, Switzerland and the Data Sharing Opt-Out Page in Settings → Customer privacy (`ADMIN-STEPS.md` §2.3), Klaviyo onsite tracking, UpPromote. **gate-legal:** apply `PRIVACY-HANDOFF.md`.
 
 **Victor / design (fonts):** Adobe Fonts is loaded from Adobe's servers on every page view before any choice (IP to Adobe, licence beacon, no cookie). Adobe's web licence requires Adobe's loader, so moving to self-hosted fonts means a font licence decision. Low risk compared with the three trackers; decide after launch.
 
