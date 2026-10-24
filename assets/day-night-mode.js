@@ -17,130 +17,158 @@
     });
   }
 
-  // The theme switch (Victor, 24 Oct, "sun out of the toggle"): on a click the new theme's colour
-  // grows as a circle from the centre of the pressed toggle (Awake rises like a sunrise, Asleep
-  // settles like dusk); once it covers the screen the theme changes beneath it, the hero time
-  // rolls to 07:00 or 22:00, and the layer fades away. The sun's own switch, also when it is
-  // noticed on return to the tab, dips through the new colour in 1s; reduced motion in 0.3s.
-  // The layer is one fixed element without pointer events, so every click and key reaches the
-  // page, and focus stays where it is (R54 B1: a root View Transition swallowed real clicks).
-  // While the theme changes the site's own colour transitions are off, so nothing fades twice;
-  // the time roll keeps its own. A new request replaces a running one, and the last one wins.
+  // The theme switch (Victor, 24 Oct, "soft sun glow"): a click changes the theme at once, so the
+  // hero time rolls to 07:00 or 22:00 and the video starts again with it, while a soft see-through
+  // glow grows as a circle from the centre of the pressed toggle and fades (Awake: warm light, like
+  // a sunrise; Asleep: a soft indigo dusk); the page stays readable beneath it. The sun's own
+  // switch, also when it is noticed on return to the tab, crossfades the colours in 1s; reduced
+  // motion crossfades in 0.2s without a glow. The glow is a fixed layer without pointer events, so
+  // every click and key reaches the page and focus stays where it is (R54 B1), and it sets its own
+  // display, as Dawn hides empty divs (R54b B1).
+  // Quick clicks are merged (R54b N2, WCAG 2.3.1): the theme changes at most once every 0.4s, so
+  // never more than three times in a second, the last request wins, and one glow runs at a time;
+  // a switch during a glow lets it run out. While the theme changes the site's own colour
+  // transitions are off, so nothing fades twice; the time roll and the hero video keep their own.
   // Without Web Animations the theme changes as before.
+  var gap = 400;
+  var fade = { normal: 1000, reduced: 200 };
+  var own = ':not(.kc-roll__strip):not(.kc-hero-animation__mode)';
   try {
     var sheet = new CSSStyleSheet();
     sheet.replaceSync(
-      'html.kc-theme-switching *:not(.kc-roll__strip), html.kc-theme-switching *::before, html.kc-theme-switching *::after { transition: none !important; }'
+      'html.kc-theme-switching *' + own + ', html.kc-theme-switching *::before, html.kc-theme-switching *::after { transition: none !important; }\n' +
+        'html.kc-theme-fading *' + own + ', html.kc-theme-fading *::before, html.kc-theme-fading *::after { transition: color, background-color, border-color, outline-color, fill, stroke, box-shadow, opacity !important; transition-duration: ' + fade.normal + 'ms !important; }\n' +
+        '@media (prefers-reduced-motion: reduce) { html.kc-theme-fading *' + own + ', html.kc-theme-fading *::before, html.kc-theme-fading *::after { transition-duration: ' + fade.reduced + 'ms !important; } }'
     );
     document.adoptedStyleSheets = document.adoptedStyleSheets.concat(sheet);
   } catch (error) {
-    // Without constructed stylesheets the site's colour transitions run beneath the layer
+    // Without constructed stylesheets the site's own colour transitions run
   }
   var root = document.documentElement;
   var canAnimate = typeof root.animate === 'function';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  // Each mode's page colour and the glow at the circle's centre (brand colours, the same in
-  // both modes, so the layer can show the new theme before the page has it)
-  var colours = {
-    day: {
-      page: 'var(--kc-brand-original-off-white)',
-      glow: 'color-mix(in srgb, var(--kc-brand-original-light-blue-accent) 20%, var(--kc-brand-original-off-white))',
-    },
-    night: { page: 'var(--kc-brand-original-dark-blue)', glow: 'var(--kc-brand-original-middle-blue-1)' },
+  // Each mode's glow in brand colours: a core at the toggle, a halo halfway out, nothing at the
+  // edge. Awake: the warm off-white at 35% with a faint light-blue sky; Asleep: the light blue at
+  // 20%. The layer fades in to that and out again, so the page's luminance under the glow moves
+  // by less than 0.1 (no flash in WCAG terms).
+  var sky = 'var(--kc-brand-original-light-blue-accent-rgb)';
+  var glows = {
+    day: 'rgba(var(--kc-brand-original-off-white-rgb), 0.35), rgba(' + sky + ', 0.08) 45%, rgba(' + sky + ', 0)',
+    night: 'rgba(' + sky + ', 0.2), rgba(' + sky + ', 0.07) 45%, rgba(' + sky + ', 0)',
   };
   var shown = null; // the mode on the page
-  var effect = null; // the running switch: { layer, mode, switched }
+  var pending = null; // a request that waits for the gap: { mode, origin }
+  var pendingTimer;
+  var lastSwitch = -Infinity;
+  var glow = null; // the running glow: { layer, animations }
+  var fadeTimer;
   var generation = 0; // a callback of an older switch changes nothing (R54 N1)
 
-  function fadeAway(layer, duration) {
-    layer.animate({ opacity: [getComputedStyle(layer).opacity, 0] }, { duration: duration, fill: 'forwards' }).finished.then(
+  function removeGlow(running) {
+    running.animations.forEach(function (animation) {
+      animation.cancel();
+    });
+    running.layer.remove();
+    if (glow === running) glow = null;
+  }
+
+  function glowFrom(control, mode) {
+    if (glow || !control.isConnected) return;
+    var box = control.getBoundingClientRect();
+    var x = box.left + box.width / 2;
+    var y = box.top + box.height / 2;
+    var radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    var layer = document.createElement('div');
+    layer.className = 'kc-theme-glow';
+    layer.setAttribute('aria-hidden', 'true');
+    layer.style.cssText = 'display:block;position:fixed;inset:0;overflow:hidden;z-index:2147483647;pointer-events:none;';
+    var circle = document.createElement('div');
+    circle.style.cssText =
+      'display:block;position:absolute;border-radius:50%;opacity:0;' +
+      'left:' + (x - radius) + 'px;top:' + (y - radius) + 'px;width:' + 2 * radius + 'px;height:' + 2 * radius + 'px;' +
+      'background:radial-gradient(closest-side, ' + glows[mode] + ');';
+    layer.append(circle);
+    document.body.append(layer);
+    var running = {
+      layer: layer,
+      animations: [
+        circle.animate(
+          { transform: ['scale(0.08)', 'scale(1)'] },
+          { duration: 850, easing: mode === 'day' ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'forwards' }
+        ),
+        circle.animate([{ opacity: 0 }, { opacity: 1, offset: 0.25 }, { opacity: 0 }], { duration: 850, fill: 'forwards' }),
+      ],
+    };
+    glow = running;
+    running.animations[1].finished.then(
       function () {
-        layer.remove();
+        removeGlow(running);
       },
       function () {
-        layer.remove();
+        removeGlow(running);
       }
     );
   }
 
-  // Stops a running switch: its layer fades in 0.15s and switches nothing more
-  function cancel() {
+  // Ends whatever is on its way: a waiting request, the crossfade, the glow
+  function settle() {
     generation += 1;
-    if (effect) {
-      fadeAway(effect.layer, 150);
-      effect = null;
-    }
-    root.classList.remove('kc-theme-switching');
+    clearTimeout(pendingTimer);
+    pending = null;
+    clearTimeout(fadeTimer);
+    root.classList.remove('kc-theme-switching', 'kc-theme-fading');
+    if (glow) removeGlow(glow);
   }
 
-  function start(mode, origin) {
+  function switchTo(mode, origin) {
     var token = (generation += 1);
-    var circle = origin !== 'sun' && !reducedMotion.matches;
-    var dip = reducedMotion.matches ? 150 : 500;
-    var layer = document.createElement('div');
-    layer.className = 'kc-theme-sun';
-    layer.setAttribute('aria-hidden', 'true');
-    var style = layer.style;
-    style.position = 'fixed';
-    style.inset = '0';
-    style.zIndex = '2147483647';
-    style.pointerEvents = 'none';
-    style.background = colours[mode].page;
-    var cover;
-    effect = { layer: layer, mode: mode, switched: false };
-    if (circle) {
-      var box = origin.getBoundingClientRect();
-      var x = box.left + box.width / 2;
-      var y = box.top + box.height / 2;
-      var radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
-      var at = ' at ' + x + 'px ' + y + 'px';
-      style.backgroundImage = 'radial-gradient(circle' + at + ', ' + colours[mode].glow + ', ' + colours[mode].page + ' ' + radius * 0.6 + 'px)';
-      style.clipPath = 'circle(0px' + at + ')';
-      document.body.append(layer);
-      cover = layer.animate(
-        { clipPath: ['circle(0px' + at + ')', 'circle(' + radius + 'px' + at + ')'] },
-        {
-          duration: 500,
-          easing: mode === 'day' ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'cubic-bezier(0.65, 0, 0.35, 1)',
-          fill: 'forwards',
-        }
-      );
-    } else {
-      style.opacity = '0';
-      document.body.append(layer);
-      cover = layer.animate({ opacity: [0, 1] }, { duration: dip, easing: 'ease-in', fill: 'forwards' });
-    }
-    cover.finished.then(function () {
-      if (token !== generation) return;
+    lastSwitch = Date.now();
+    clearTimeout(fadeTimer);
+    root.classList.remove('kc-theme-fading');
+    if (origin !== 'sun' && !reducedMotion.matches) {
       root.classList.add('kc-theme-switching');
       applyMode(mode);
       shown = mode;
-      effect.switched = true;
-      layer
-        .animate({ opacity: [1, 0] }, { duration: circle ? 350 : dip, easing: 'ease-out', fill: 'forwards' })
-        .finished.then(function () {
-          if (token !== generation) return;
-          layer.remove();
-          effect = null;
-          root.classList.remove('kc-theme-switching');
-        }, stopped);
-    }, stopped);
-    function stopped() {
-      if (token === generation) cancel();
+      // The new colours are in place before the transitions come back, so none of them runs
+      void document.body.offsetWidth;
+      root.classList.remove('kc-theme-switching');
+      glowFrom(origin, mode);
+      return;
     }
+    root.classList.add('kc-theme-fading');
+    applyMode(mode);
+    shown = mode;
+    fadeTimer = setTimeout(function () {
+      if (token === generation) root.classList.remove('kc-theme-fading');
+    }, (reducedMotion.matches ? fade.reduced : fade.normal) + 100);
   }
 
   // origin: the pressed toggle, 'sun' for a switch without a click, null for none (first paint,
   // leaving the page, a hidden tab)
   function show(mode, origin) {
-    if (effect && origin && effect.mode === mode) return; // already on its way
-    if (effect) cancel();
-    if (shown === null || !origin || !canAnimate || document.hidden || mode === shown) {
+    if (shown === null || !origin || !canAnimate || document.hidden) {
+      settle();
       applyMode(mode);
       shown = mode;
       return;
     }
-    start(mode, origin);
+    if (pending && pending.mode === mode) return; // already on its way
+    clearTimeout(pendingTimer);
+    pending = null;
+    if (mode === shown) return; // back to the mode on the page before the wait was over
+    var wait = lastSwitch + gap - Date.now();
+    if (wait <= 0) {
+      switchTo(mode, origin);
+      return;
+    }
+    var token = generation;
+    pending = { mode: mode, origin: origin };
+    pendingTimer = setTimeout(function () {
+      if (token !== generation || !pending) return;
+      var request = pending;
+      pending = null;
+      switchTo(request.mode, request.origin);
+    }, wait);
   }
 
   function refresh(origin) {
@@ -174,7 +202,7 @@
     if (document.hidden) {
       clearTimeout(timer);
       // A switch on its way finishes at once, out of sight
-      if (effect) show(effect.mode, null);
+      if (shown !== null) show(pending ? pending.mode : shown, null);
     } else {
       refresh('sun');
     }
