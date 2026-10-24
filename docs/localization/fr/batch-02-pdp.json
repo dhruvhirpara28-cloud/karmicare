@@ -3,27 +3,28 @@
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
  "source_digest": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
- "source_entries": 477,
+ "source_entries": 496,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 270,
+  "translated": 137,
   "held": 39,
   "locale-present": 15,
   "theme-key": 34,
-  "translated": 138
+  "admin": 271
  },
  "flag_counts": {
+  "wording-adapted": 14,
   "fit-risk": 28,
+  "pending-claim-review": 24,
   "gendered-title": 14,
-  "invariant": 17,
-  "legal-review": 1,
-  "not-rendered": 6,
-  "pending-claim-review": 42,
   "pending-en-review": 5,
-  "source-defect": 3,
-  "wording-adapted": 14
+  "not-rendered": 6,
+  "source-defect": 4,
+  "legal-review": 1,
+  "invariant": 15,
+  "admin": 2
  },
  "entries": [
   {
@@ -36,10 +37,9 @@
    "fr": "Adopté par plus de 100 praticiens kPNI et dentistes fonctionnels",
    "status": "translated",
    "flags": [
-    "pending-claim-review",
     "wording-adapted"
    ],
-   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); the number stays as in EN pending C81. Claims C81 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); the number stays as in EN pending C81. Claims C81 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C81 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C81"
@@ -54,10 +54,8 @@
    "en_sha1": "7b5cbc7d9e87f0e2003f27f65db4bfa0be9e478a",
    "fr": "Ingrédients cliniquement prouvés · 36 études à comité de lecture",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C66 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C66 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C66 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C66"
@@ -543,10 +541,8 @@
    "en_sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe",
    "fr": "Le cortisol monte ; café, petit-déjeuner et premiers acides de la journée suivent. L’émail a d’abord besoin de son bouclier.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C53 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C53 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C27 approved, C53 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C27",
@@ -593,10 +589,8 @@
    "en_sha1": "a7e571363ef9da44c32810243d3c785e41d0af88",
    "fr": "La mélatonine monte et la salive se réduit à un filet. Ce qui se trouve sur votre émail à 22:00 y est encore à 07:00.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C52 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C52 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C52 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C52"
@@ -635,10 +629,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_link_text",
    "en": "Read the science",
    "en_sha1": "9d735e7e921227ea13fa840a0fc712c8b9748ee6",
-   "fr": "Découvrir la science",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; PDP lane 785e9de, landing 42); was 'Read the science'; was translated: Découvrir la science",
    "source_status": "approved"
   },
   {
@@ -676,10 +670,8 @@
    "en_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
    "fr": "<p>Le meilleur résultat est celui qu’on a su éviter. Ces praticiens recommandent Karmicare entre deux visites. Non pas pour remplacer leurs soins, mais pour que les mille deux cents brossages par an entre deux rendez-vous comptent vraiment.</p>",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'the one prevented' rendered 'celui qu'on a su éviter' to keep the forbidden verb 'prévenir' out; meaning unchanged. 'twelve hundred brushings' kept as in EN (B1a decision 6: twice a day is about 730). Claims C70 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "'the one prevented' rendered 'celui qu'on a su éviter' to keep the forbidden verb 'prévenir' out; meaning unchanged. 'twelve hundred brushings' kept as in EN (B1a decision 6: twice a day is about 730). Claims C70 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C70 reworded decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C70"
@@ -894,11 +886,9 @@
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
    "fr": "<p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais très attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne regarde pas seulement les étiquettes, je regarde ce qu’un produit fera à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients purs et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>Et c’est aussi pour cela que je l’utilise dans ma pratique.</p><p>J’accompagne des femmes qui souffrent de SPM, de troubles du cycle, de fatigue liée au stress, de dominance œstrogénique et de dérèglements surrénaliens. J’ai besoin de produits techniquement solides — biodisponibles, bien formulés, et qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "held: practitioner quote stays in her own EN words (landing desk 21 Oct, msg_a6d24f8ca48c, as NL); the claim waiver covers claims, not a person's quote; a FR version needs her own wording or approval. FR draft from 3ec7a5e: <p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p> Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c).",
+   "status": "translated",
+   "flags": [],
+   "notes": "held: practitioner quote stays in her own EN words (landing desk 21 Oct, msg_a6d24f8ca48c, as NL); the claim waiver covers claims, not a person's quote; a FR version needs her own wording or approval. FR draft from 3ec7a5e: <p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p> Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c).; claims gate cleared 24 Oct: C84 kept, C85 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C84",
@@ -1126,10 +1116,8 @@
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "fr": "<p>Pensé pour celles et ceux qui lisent l’étiquette, vérifient la recherche et veulent des soins quotidiens à la hauteur. Des méta-analyses et des essais contrôlés randomisés, au sommet de la hiérarchie des preuves, aux côtés d’études en laboratoire. Publiés dans des revues à comité de lecture et portant au total sur plus de 38 000 personnes.&nbsp;</p>",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C68 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C68 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C68 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C68"
@@ -1172,10 +1160,8 @@
    "en_sha1": "692b9ddb69b8f60e86a4dcc2f5e89adaf53fccfa",
    "fr": "La nano-HAp a obturé 98 % des tubules dentinaires ouverts.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C60"
@@ -1216,10 +1202,8 @@
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "fr": "98 % d’occlusion contre 82 % et 65 % pour deux autres technologies désensibilisantes",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C60"
@@ -1299,10 +1283,8 @@
    "en_sha1": "798f5232fa57d2eaffe13367f951fc5f913788a0",
    "fr": "Une moins bonne santé bucco-dentaire était associée à un moins bon sommeil.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C61"
@@ -1343,10 +1325,8 @@
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "fr": "SMD 2,17 · p = 0,004 · IC à 95 % 0,68–3,66&nbsp;",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C61"
@@ -1426,10 +1406,8 @@
    "en_sha1": "21d0c73d004ce24a9e7bbe2d7a144f87f9263875",
    "fr": "Le xylitol a réduit les caries par rapport aux groupes témoins.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C62"
@@ -1470,10 +1448,8 @@
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "fr": "SMD −1,09 · p < 0,00001 · IC à 95 % −1,34 à −0,83",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C62"
@@ -1525,10 +1501,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -1553,10 +1529,8 @@
    "en_sha1": "bf8d54e6cedd70242cee250edeb8165b744a7169",
    "fr": "La nano-HAp a surpassé le fluor sur la sensibilité dentaire.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C63"
@@ -1597,10 +1571,8 @@
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "fr": "Sensibilité à l’air froid et tactile plus faible qu’avec le fluor et le placebo, p < 0,05",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C63"
@@ -1681,10 +1653,9 @@
    "fr": "Sans SLS, les aphtes étaient moins nombreux et duraient moins longtemps.",
    "status": "translated",
    "flags": [
-    "pending-claim-review",
     "fit-risk"
    ],
-   "notes": "R3 F4: 'shorter' is duration (the card's result line says 'shorter duration'): 'duraient moins longtemps'. Card heading, 72 chars vs EN 44: check at the integration preview. Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "R3 F4: 'shorter' is duration (the card's result line says 'shorter duration'): 'duraient moins longtemps'. Card heading, 72 chars vs EN 44: check at the integration preview. Claims C64 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C64"
@@ -1725,10 +1696,8 @@
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "fr": "Moins d’ulcérations, durée plus courte, moins d’épisodes, moins de douleur",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C64"
@@ -4679,10 +4648,8 @@
    "en_sha1": "e1a43344ac69bdad294141a4253fb85db0656da4",
    "fr": "Midwest University · RDA 93 Awake, 72 Asleep · limite ISO 11609 : 250",
    "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C92 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C92 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C92 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "admin-held",
    "claims": [
     "C92"

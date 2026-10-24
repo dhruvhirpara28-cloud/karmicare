@@ -5,9 +5,9 @@
  "source_digest": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
  "source_entries": 496,
  "counts": {
-  "pending-claim-review": 42,
-  "translated": 119,
-  "held": 37,
+  "translated": 135,
+  "pending-claim-review": 24,
+  "held": 39,
   "dawn-nl": 15,
   "theme-key": 34,
   "admin": 249
@@ -59,11 +59,9 @@
    "en": "Used by 100+ kPNI practitioners & functional dentists",
    "en_sha1": "dc9175aacf9760fdfe7a7e847d7138a6aa850467",
    "nl": "In de praktijk bij 100+ kPNI-therapeuten & functionele tandartsen",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "TERM: kPNI practitioners → kPNI-therapeuten (products.md); practitioner(s) in general → zorgverlener(s). R2 (review F6): 'Used by' → 'In de praktijk bij' (brand rule); the claim (C81) is still pending"
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: kPNI practitioners → kPNI-therapeuten (products.md); practitioner(s) in general → zorgverlener(s). R2 (review F6): 'Used by' → 'In de praktijk bij' (brand rule); the claim (C81) is still pending; claims gate cleared 24 Oct: C81 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_2",
@@ -73,11 +71,9 @@
    "en": "Clinically proven ingredients · 36 peer-reviewed studies",
    "en_sha1": "7b5cbc7d9e87f0e2003f27f65db4bfa0be9e478a",
    "nl": "Klinisch bewezen ingrediënten · 36 peer-reviewed studies",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "TERM: peer-reviewed stays peer-reviewed (usual in Dutch science copy)."
+   "status": "translated",
+   "flags": [],
+   "notes": "TERM: peer-reviewed stays peer-reviewed (usual in Dutch science copy).; claims gate cleared 24 Oct: C66 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_3",
@@ -503,11 +499,9 @@
    "en": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
    "en_sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe",
    "nl": "Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Je glazuur heeft eerst zijn schild nodig.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C27 approved, C53 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:chronobiology_clock_karmicare/night_badge",
@@ -543,11 +537,9 @@
    "en": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
    "en_sha1": "a7e571363ef9da44c32810243d3c785e41d0af88",
    "nl": "Melatonine stijgt en je speekselstroom valt bijna stil. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Melatonine stijgt en speeksel komt nog maar mondjesmaat. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Melatonine stijgt en speeksel komt nog maar mondjesmaat. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog.; claims gate cleared 24 Oct: C52 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:chronobiology_clock_karmicare/hint_label",
@@ -580,10 +572,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_link_text",
    "en": "Read the science",
    "en_sha1": "9d735e7e921227ea13fa840a0fc712c8b9748ee6",
-   "nl": "Lees het onderzoek",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "As the approved Figma NL link 'Lees het onderzoek'."
+   "notes": "As the approved Figma NL link 'Lees het onderzoek'.; retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; PDP lane 785e9de, landing 42); was 'Read the science'; was translated: Lees het onderzoek"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/subheading",
@@ -617,11 +609,9 @@
    "en": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
    "en_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
    "nl": "<p>De beste uitkomst is de uitkomst die voorkomen wordt. Deze zorgverleners raden Karmicare aan voor de periode tussen twee bezoeken. Niet om hun zorg te vervangen, maar om de twaalfhonderd poetsbeurten per jaar tussen de afspraken door iets te laten betekenen.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'prevented' → 'voorkomt', literal as the rules require; the glossary notes the JEP/DETIC objection to 'voorkomt', so the claims reviewer must decide (it is said of an outcome, not of Karmicare).; R2 (review F9): harmonised with index:trusted_professionals_HAqYth/bottom_text, the homepage form, closer to 'the one prevented' and 'count for something'"
+   "status": "translated",
+   "flags": [],
+   "notes": "'prevented' → 'voorkomt', literal as the rules require; the glossary notes the JEP/DETIC objection to 'voorkomt', so the claims reviewer must decide (it is said of an outcome, not of Karmicare).; R2 (review F9): harmonised with index:trusted_professionals_HAqYth/bottom_text, the homepage form, closer to 'the one prevented' and 'count for something'; claims gate cleared 24 Oct: C70 reworded decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/button_label",
@@ -801,11 +791,9 @@
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
    "nl": "<p>“Als voedingstherapeut gespecialiseerd in vrouwelijke hormonen let ik heel goed op wat ik in mijn lichaam stop. Hormonen zijn gevoelig. Stress, toxines, ingrediënten van slechte kwaliteit — het telt allemaal op. Daarom kijk ik niet alleen naar etiketten, maar naar wat iets in het lichaam doet.</p><p>Ik kies voor Karmicare omdat ik vertrouw op wat erin zit — en op wat er niet in zit. Geen overbodige vulstoffen, geen verborgen verstoorders. Alleen zuivere, doelgerichte ingrediënten die het zenuwstelsel en de hormonale balans ondersteunen in plaats van belasten. Wie begrijpt hoe kwetsbaar het vrouwelijke hormoonstelsel kan zijn, zeker bij chronische stress, weet dat kwaliteit geen keuze is.</p><p>En daarom pas ik het ook toe in mijn praktijk.</p><p>Ik werk met vrouwen met PMS, cyclusklachten, stressgerelateerde vermoeidheid, oestrogeendominantie en een ontregelde bijnierwerking. Ik heb middelen nodig die technisch kloppen — biobeschikbaar, goed geformuleerd en ondersteunend voor de ontgiftingsroutes en de regulatie van het zenuwstelsel.</p><p>Karmicare voldoet aan die standaard.”</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C85); practitioner quote: if she gave it in Dutch originally, use her own wording; 'I use it' → 'pas ik het toe', 'products' → 'middelen' (brand rule); same NL as the homepage card; 22 Oct: Victor released the quote for translation ('citaten mag je ook vertalen, zij gaan niet goedkeuren'); NL restored from 986c1d9"
+   "status": "translated",
+   "flags": [],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C85); practitioner quote: if she gave it in Dutch originally, use her own wording; 'I use it' → 'pas ik het toe', 'products' → 'middelen' (brand rule); same NL as the homepage card; 22 Oct: Victor released the quote for translation ('citaten mag je ook vertalen, zij gaan niet goedkeuren'); NL restored from 986c1d9; claims gate cleared 24 Oct: C84 kept, C85 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -995,11 +983,9 @@
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek checken en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "R2 (review F9): harmonised with index:research_behind_system_EkjATL/bottom_text, the homepage form ('de toets doorstaat' for 'hold up')"
+   "status": "translated",
+   "flags": [],
+   "notes": "R2 (review F9): harmonised with index:research_behind_system_EkjATL/bottom_text, the homepage form ('de toets doorstaat' for 'hold up'); claims gate cleared 24 Oct: C68 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/button_label",
@@ -1035,11 +1021,9 @@
    "en": "Nano-HAp sealed 98% of open dentine tubules.",
    "en_sha1": "692b9ddb69b8f60e86a4dcc2f5e89adaf53fccfa",
    "nl": "Nano-HAp dichtte 98% van de open dentinekanaaltjes.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Approved research card 1 (Figma NL)."
+   "status": "translated",
+   "flags": [],
+   "notes": "Approved research card 1 (Figma NL).; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/subtext",
@@ -1073,11 +1057,9 @@
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "nl": "98% afsluiting vs. 82% en 65% voor twee andere desensibiliserende technologieën",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 98% afsluiting tegenover 82% en 65% bij twee andere desensibiliserende technologieën"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 98% afsluiting tegenover 82% en 65% bij twee andere desensibiliserende technologieën; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_bDxUVT/method_label",
@@ -1147,11 +1129,9 @@
    "en": "Poorer oral health was linked with poorer sleep.",
    "en_sha1": "798f5232fa57d2eaffe13367f951fc5f913788a0",
    "nl": "Een slechtere mondgezondheid hing samen met slechtere slaap.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Slechtere mondgezondheid hing samen met slechtere slaap."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Slechtere mondgezondheid hing samen met slechtere slaap.; claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/subtext",
@@ -1185,11 +1165,9 @@
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "nl": "SMD 2,17 · p = 0,004 · 95%-BI 0,68–3,66&nbsp;",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_yMiD9D/method_label",
@@ -1259,11 +1237,9 @@
    "en": "Xylitol lowered tooth decay compared with controls.",
    "en_sha1": "21d0c73d004ce24a9e7bbe2d7a144f87f9263875",
    "nl": "Xylitol verminderde tandbederf ten opzichte van controlegroepen.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Xylitol verminderde tandbederf in vergelijking met controlegroepen."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Xylitol verminderde tandbederf in vergelijking met controlegroepen.; claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/subtext",
@@ -1297,11 +1273,9 @@
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "nl": "SMD −1,09 · p < 0,00001 · 95%-BI −1,34 tot −0,83",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved Figma NL (3738:27474)"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474); claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_label",
@@ -1346,10 +1320,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "EN repeats the dentine badge on the xylitol card; check the image."
+   "notes": "EN repeats the dentine badge on the xylitol card; check the image.; retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subheading",
@@ -1371,11 +1345,9 @@
    "en": "Nano-HAp beat fluoride on tooth sensitivity.",
    "en_sha1": "bf8d54e6cedd70242cee250edeb8165b744a7169",
    "nl": "Nano-HAp deed het beter dan fluoride bij gevoelige tanden.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Nano-HAp deed het beter dan fluoride bij tandgevoeligheid."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Nano-HAp deed het beter dan fluoride bij tandgevoeligheid.; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subtext",
@@ -1409,11 +1381,9 @@
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "nl": "Minder gevoeligheid voor koude lucht en aanraking vs. fluoride en placebo, p < 0,05",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved Figma NL (3738:27474), same on homepage and PDP"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474), same on homepage and PDP; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_label",
@@ -1483,11 +1453,9 @@
    "en": "No SLS meant fewer and shorter canker sores.",
    "en_sha1": "bcf10287f5014b3b7580a93b50f3de7a52848ce2",
    "nl": "Zonder SLS: minder en kortere aften.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Geen SLS betekende minder en kortere aften."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Geen SLS betekende minder en kortere aften.; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subtext",
@@ -1521,11 +1489,9 @@
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "nl": "Minder aften, kortere duur, minder episodes, minder pijn",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_label",
@@ -4477,12 +4443,11 @@
    "en": "Midwest University · RDA 93 Awake, 72 Asleep · ISO 11609 limit 250",
    "en_sha1": "e1a43344ac69bdad294141a4253fb85db0656da4",
    "nl": "Midwest University · RDA 93 Awake, 72 Asleep · ISO 11609-limiet 250",
-   "status": "pending-claim-review",
+   "status": "translated",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": ""
+   "notes": "claims gate cleared 24 Oct: C92 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#70",
