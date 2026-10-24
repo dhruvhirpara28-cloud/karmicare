@@ -22,6 +22,11 @@
    and theme.liquid's font variables, so Day and Night follow body.day-mode / body.night-mode as
    everywhere else. Numbers that are the legal page's own (not tokens) say so in a comment.
 
+   No font-family here (R70b): the legal page inherits --font-body-family / --font-heading-family
+   ("proxima-nova", Typekit), so this page does too. --kc-font-use-body starts with "Proxima Nova",
+   which matches a desktop install of the font where there is one; that copy has no line gap, so
+   the paragraphs' line-height: normal (base.css) drew 18px lines instead of Typekit's 25.5px.
+
    Left out on purpose: the "LEGAL" eyebrow, the "On this page" menu and the rights cards. They
    need a template. The refund policy carries its four rights as a table instead; it is styled
    as a list of rows. No JavaScript. */
@@ -43,7 +48,6 @@ main > .shopify-policy__container {
   max-width: none;
   margin: 0;
   padding: 0;
-  font-family: var(--kc-font-use-body);
   color: var(--kc-mapped-text-default-heading);
   /* the legal TOC clips sideways on phones too, so a long URL can never scroll the page */
   overflow-x: clip;
@@ -66,7 +70,6 @@ main > .shopify-policy__container .shopify-policy__title {
   max-width: 720px; /* the banner's .page-width: 680px of text plus 20px either side */
   margin: 0 auto;
   padding: 0 20px;
-  font-family: var(--kc-font-use-heading);
   font-size: var(--kc-responsive-h1-text-size);
   font-weight: var(--font-500-weight);
   line-height: 1; /* the banner heading's own line-height */
@@ -118,10 +121,11 @@ main > .shopify-policy__container .shopify-policy__title {
 /* ---- Clause titles (h2 in the subscription policy, h3 everywhere else) = .legal-toc__title,
    with the TOC's rule and padding between two clauses */
 .shopify-policy__body .rte > :is(h2, h3) {
-  margin: 12px 0; /* 12 + the paragraph's 12 above the rule = the TOC's 24 on phones */
+  /* 24 above the rule: collapses with the 12 under the paragraph before it, as the TOC's 24
+     section padding on phones; 12 under the title, the TOC title's margin */
+  margin: 24px 0 12px;
   padding-top: 24px;
   border-top: 1px solid var(--kc-mapped-border-primary-default);
-  font-family: var(--kc-font-use-heading);
   font-size: var(--kc-responsive-h5-text-size);
   font-weight: var(--font-500-weight);
   line-height: var(--kc-responsive-h5-line-height);
@@ -130,9 +134,11 @@ main > .shopify-policy__container .shopify-policy__title {
 }
 
 /* The first clause: no rule, and the gap that the banner's bottom padding and the TOC's top
-   padding leave on the legal page (the rights cards sit in that gap there) */
+   padding leave on the legal page (the rights cards sit in that gap there). The margin collapses
+   with the paragraph's above it, so this is the whole gap: 84 on phones, where the legal page's
+   136 holds the cards and would read as a hole here. */
 .shopify-policy__body .rte > :is(h2, h3):not(:is(h2, h3) ~ *) {
-  margin-top: 64px;
+  margin-top: 84px;
   padding-top: 0;
   border-top: 0;
 }
@@ -140,7 +146,6 @@ main > .shopify-policy__container .shopify-policy__title {
 /* ---- Sub-headings (4.1, 9.1, "Examples") = the bold lines the legal page prints them as */
 .shopify-policy__body .rte h4 {
   margin: 28px 0 12px; /* .legal-toc__body h3 margins */
-  font-family: var(--kc-font-use-heading);
   font-size: 1em;
   font-weight: var(--font-600-weight);
   line-height: normal;
@@ -219,7 +224,6 @@ main > .shopify-policy__container .shopify-policy__title {
 .shopify-policy__body .rte td:first-child {
   width: 1%;
   white-space: nowrap;
-  font-family: var(--kc-font-use-heading);
   font-size: var(--kc-responsive-h4-text-size);
   line-height: var(--kc-responsive-h4-line-height);
 }
@@ -258,14 +262,15 @@ main > .shopify-policy__container .shopify-policy__title {
   }
 
   .shopify-policy__body .rte > :is(h2, h3) {
-    margin: 16px 0; /* 16 + the paragraph's 16 above the rule = the TOC's 32 */
+    margin: 32px 0 16px; /* 32 above the rule (collapses with the paragraph's 16), as the TOC */
     padding-top: 32px;
     letter-spacing: normal;
   }
 
   .shopify-policy__body .rte > :is(h2, h3):not(:is(h2, h3) ~ *) {
-    /* 24 (last banner line) + 48 (banner bottom) + 48 (TOC top) = 120 on the legal page */
-    margin-top: 96px;
+    /* 24 (last banner line) + 48 (banner bottom) + 48 (TOC top) = 120 on the legal page; the
+       margin collapses with the 24 under the last banner line, so it carries all 120 */
+    margin-top: 120px;
     padding-top: 0;
   }
 
@@ -290,5 +295,34 @@ main > .shopify-policy__container .shopify-policy__title {
 
   .shopify-policy__body .rte td:last-child {
     padding-right: 0;
+  }
+}
+
+/* ---- Print (R70b, Astra R70 B1) ----------------------------------------------------------------
+   A printed policy is dark ink on white paper in Day and in Night. Night's light text (68 % of
+   #fffbf6) printed with background graphics off measured about 1.75:1 on white. The container
+   paints white and its two surfaces drop their gradients, so the page is white whether the
+   printer keeps backgrounds or not (with them on, Night's navy body would sit behind dark text),
+   and every text colour, opacity and rule switches to the mode-independent brand primitives.
+   #MainContent lifts the specificity above the screen rules (up to 0,3,2) without !important. */
+@media print {
+  #MainContent > .shopify-policy__container {
+    background: var(--kc-brand-fixed-white);
+  }
+
+  #MainContent > .shopify-policy__container .shopify-policy__title,
+  #MainContent > .shopify-policy__container .shopify-policy__body {
+    background: none;
+  }
+
+  #MainContent > .shopify-policy__container,
+  #MainContent > .shopify-policy__container * {
+    color: var(--kc-brand-original-dark-blue);
+    opacity: 1;
+  }
+
+  #MainContent > .shopify-policy__container .rte > :is(h2, h3),
+  #MainContent > .shopify-policy__container .rte :is(table, td) {
+    border-color: var(--kc-brand-original-stone);
   }
 }
