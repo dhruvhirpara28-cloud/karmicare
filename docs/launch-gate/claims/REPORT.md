@@ -2,7 +2,7 @@
 
 Launch blocker 3 of `docs/launch-gate/input/LR1-LAUNCH-READINESS.md`: the claims on the cleanup list (`input/claims/02-PRIORITEITEN-VICTOR.md` §2, items a–p; reasoning in `input/claims/CLINICAL-REVIEW.md`, CR1). Branch `karmicare/gate-claims` over `karmicare/soft-launch` @ `5bab3ad`.
 
-Victor reviewed the first pass in the session on 24 Oct and decided three times: he kept seven items as they were, then asked for the product page to be restored entirely (it was already approved) and for all five research cards to come back on the homepage. §1 shows the result per item. His keeps are decisions, not oversights.
+Victor reviewed the first pass in the session on 24 Oct and decided three times: he kept seven items as they were, then asked for the product page to be restored entirely (it was already approved) and for all five research cards to come back on the homepage, and finally extended the gum card line to "A velvety foam nurturing your gums through fermentation." §1 shows the result per item. His keeps are decisions, not oversights.
 
 ## Summary
 
@@ -19,7 +19,7 @@ Victor reviewed the first pass in the session on 24 Oct and decided three times:
 | a | Year cost per brushing €0.42 → €0.49 (metaobject) | Live already shows €0.49 (the theme computes it from the price). Stored value: `ADMIN-STEPS.md` step a, low priority. |
 | b | Welcome Kit €18 → €21 (compare_table) | Live already shows "€21 Value". Verify only. |
 | c | "Midwest University" → "Indiana University (OHRI)" | **Kept** (Victor, 24 Oct: the lab does not want to be named in marketing). Note in `ADMIN-STEPS.md`. |
-| d | Gum card "Radiant calm gums" | Heading kept; text now **"A velvety foam nurturing your gums."** (Victor's line, replaces "No SLS. Gums settle, turn pinker and look radiant."). `index.json` `card_VP8KGi`. |
+| d | Gum card "Radiant calm gums" | Heading kept; text now **"A velvety foam nurturing your gums through fermentation."** (Victor's line, replaces "No SLS. Gums settle, turn pinker and look radiant."). `index.json` `card_VP8KGi`. |
 | e | "Focus by day, calm by night" card | Done as advised: "Guarana by day, valerian by night" · "Guarana helps keep plaque bacteria from sticking (in vitro). Valerian root, chosen for the evening formula." `card_KRCrBY`. |
 | f | Xylitol research card | **Kept visible** (Victor, 24 Oct: all five research cards back), both templates. |
 | g | SLS research card | **Kept visible** (same). |
