@@ -1,6 +1,6 @@
 {
  "batch": "batch-03-header-footer",
- "digest": "742351732dabbbff2eff9cadc6858ba87284393a",
+ "digest": "86a1ed1903574cc27ebdd396c86c5f98b4d95512",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -316,11 +316,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/footer.liquid",
    "key_path": "sections/footer.liquid:694",
-   "en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
-   "sha1": "ae65e088e387580a0b88c8649f2853eacfec7cbd",
-   "status": "needs-key",
+   "en": "Occasional emails from KARMICARE about Awake & Asleep, the Dental Check-up Reward and member offers. Unsubscribe any time with the link in every email. <a>Privacy Policy</a>.",
+   "sha1": "3f4c4ab4c2a31be027440e56fa687f59eb4f9db1",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "consent line, two links (lines 694-695)"
+   "notes": "consent line, two links (lines 694-695); EN replaced 24 Oct by Victor's D4 notice (23 Oct, docs/global-footer/PLAN.md §9-10): one link, the privacy policy; read at sections/footer.liquid:836 as kc.footer.consent_html",
+   "old_en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
+   "old_sha1": "ae65e088e387580a0b88c8649f2853eacfec7cbd"
   },
   {
    "id": "liquid:sections/footer.liquid:850",
@@ -570,6 +572,45 @@
    "status": "admin-held",
    "never_translate": false,
    "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); footer 'Company' menu"
+  },
+  {
+   "id": "locale:kc.footer.check_inbox",
+   "batch": "batch-03-header-footer",
+   "page": "all pages",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.check_inbox",
+   "en": "Check your inbox to confirm your subscription.",
+   "sha1": "59b23556d161f22a533faba6fd9a7ef547629e19",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "footer newsletter, data-msg-success on #FooterNewsletter, role=status after Klaviyo answers 202; plain text in a data attribute; EN Victor 23 Oct (docs/global-footer/PLAN.md §9)"
+  },
+  {
+   "id": "locale:kc.footer.email_invalid",
+   "batch": "batch-03-header-footer",
+   "page": "all pages",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.email_invalid",
+   "en": "Check the email address.",
+   "sha1": "e90affa9f52d11c1377975dead3a40624c8ada85",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "footer newsletter, data-msg-invalid on #FooterNewsletter, role=alert when Klaviyo rejects the address (400); plain text in a data attribute; EN Victor 23 Oct (docs/global-footer/PLAN.md §9)"
+  },
+  {
+   "id": "locale:kc.footer.retry",
+   "batch": "batch-03-header-footer",
+   "page": "all pages",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.retry",
+   "en": "We could not confirm your subscription. Please try again in a moment.",
+   "sha1": "52b7cf179057a25c07723bbfe715c37560f04f43",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "footer newsletter, data-msg-retry on #FooterNewsletter (R46-B4): timeout, 401/403/404/429/5xx or network error; the signup may have gone through, so it does not say it failed; plain text in a data attribute; EN, NL and FR Victor 24 Oct (in session, option 'Niet bevestigd')"
   }
  ]
 }

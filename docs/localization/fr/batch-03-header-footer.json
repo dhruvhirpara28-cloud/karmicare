@@ -2,22 +2,21 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "18cdaec0fb18d1f00aa688c83d6bc0393b350319",
- "source_entries": 41,
+ "source_digest": "86a1ed1903574cc27ebdd396c86c5f98b4d95512",
+ "source_entries": 44,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 11,
-  "held": 5,
+  "translated": 6,
   "locale-present": 9,
-  "theme-key": 10,
-  "translated": 6
+  "held": 5,
+  "theme-key": 13,
+  "admin": 11
  },
  "flag_counts": {
-  "legal-review": 5,
   "pending-claim-review": 1,
-  "pending-en-review": 1,
+  "legal-review": 5,
   "wording-adapted": 1
  },
  "entries": [
@@ -306,14 +305,14 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/footer.liquid",
    "key_path": "sections/footer.liquid:694",
-   "en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
-   "en_sha1": "ae65e088e387580a0b88c8649f2853eacfec7cbd",
-   "fr": "En vous inscrivant, vous acceptez les <a>conditions d’utilisation</a> et la <a>politique de confidentialité</a>.",
+   "en": "Occasional emails from KARMICARE about Awake & Asleep, the Dental Check-up Reward and member offers. Unsubscribe any time with the link in every email. <a>Privacy Policy</a>.",
+   "en_sha1": "3f4c4ab4c2a31be027440e56fa687f59eb4f9db1",
+   "fr": "Des e-mails occasionnels de KARMICARE sur Awake & Asleep, la récompense contrôle dentaire et les offres réservées aux membres. Désinscription possible à tout moment via le lien présent dans chaque e-mail. <a>Politique de confidentialité</a>.",
    "status": "theme-key",
    "flags": [
     "legal-review"
    ],
-   "notes": "Consent line; link texts must match the French titles of the legal pages (batch 04). 'conditions d'utilisation' is the document name, not the banned word.",
+   "notes": "D4 notice (Victor 23 Oct EN, FR 24 Oct in session); 'Dental Check-up Reward' → 'récompense contrôle dentaire' (glossary); the single <a> is the privacy policy",
    "source_status": "needs-key"
   },
   {
@@ -568,6 +567,45 @@
    "flags": [],
    "notes": "",
    "source_status": "admin-held"
+  },
+  {
+   "id": "locale:kc.footer.check_inbox",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.check_inbox",
+   "en": "Check your inbox to confirm your subscription.",
+   "en_sha1": "59b23556d161f22a533faba6fd9a7ef547629e19",
+   "fr": "Consultez votre boîte de réception pour confirmer votre inscription.",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "footer newsletter (kc.footer.check_inbox); EN Victor 23 Oct, FR 24 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "locale:kc.footer.email_invalid",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.email_invalid",
+   "en": "Check the email address.",
+   "en_sha1": "e90affa9f52d11c1377975dead3a40624c8ada85",
+   "fr": "Vérifiez l’adresse e-mail.",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "footer newsletter (kc.footer.email_invalid); EN Victor 23 Oct, FR 24 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "locale:kc.footer.retry",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.retry",
+   "en": "We could not confirm your subscription. Please try again in a moment.",
+   "en_sha1": "52b7cf179057a25c07723bbfe715c37560f04f43",
+   "fr": "Nous n’avons pas pu confirmer votre inscription. Veuillez réessayer dans un instant.",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "footer newsletter (kc.footer.retry); Victor 24 Oct",
+   "source_status": "approved"
   }
  ]
 }
