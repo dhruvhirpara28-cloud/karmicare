@@ -81,7 +81,7 @@ The selling-plan group named "60-Day Supply" carries the same text as a Subscrip
 | biorhythmic | bioritmisch | products.md | biorythmique | |
 | morning / evening | ochtend / avond | products.md | matin / soir | always Awake (morning) before Asleep (evening) |
 | by day / by night | overdag / 's nachts | products.md | le jour / la nuit | |
-| one pump | één pompje (0,45 ml) | products.md | une pression (0,45 ml) | |
+| one pump | één pompje | products.md | une pression | no dosage (0,45 ml) in customer copy (Victor, 24 Oct) |
 | Rinse first | Eerst spoelen | Victor 23 Oct | Rincez d’abord | |
 | Spit, don't rinse | Spugen, niet spoelen | Figma NL (how-to step 3) | Crachez, ne rincez pas | |
 | leave-on | leave-on | Figma NL | leave-on | |
