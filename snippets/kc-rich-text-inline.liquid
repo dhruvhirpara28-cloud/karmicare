@@ -11,6 +11,13 @@
   multi_line_text_field used in place of rich text) prints escaped, with
   its line breaks as <br>.
 
+  Links: only http, https, mailto and tel URLs, and relative, query or anchor
+  URLs (no scheme), become an <a>; anything else, such as javascript: or
+  data:, prints its text without a link. The check reads the URL trimmed and
+  lowercased, so case and surrounding whitespace do not get a scheme past
+  it, and a tab or newline inside the scheme name fails the match. Every
+  attribute is escaped; target is printed only as _blank, with rel=noopener.
+
   Accepts:
   - field: {Object} The metaobject field (a metafield object), for example card.heading
 {%- endcomment -%}
@@ -29,23 +36,35 @@
       endif
       for child in inline_nodes
         if child.type == 'link'
-          echo '<a href="'
-          echo child.url | escape
-          echo '"'
-          if child.title != blank
-            echo ' title="'
-            echo child.title | escape
-            echo '"'
-          endif
-          if child.target != blank
-            echo ' target="'
-            echo child.target | escape
-            echo '"'
-            if child.target == '_blank'
-              echo ' rel="noopener"'
+          assign link_url = child.url | strip
+          assign link_start = link_url | slice: 0, 1
+          assign link_scheme = link_url | downcase | split: ':' | first
+          assign link_ok = false
+          if link_url == blank
+            assign link_ok = false
+          elsif link_start == '/' or link_start == '#' or link_start == '?' or link_start == '.'
+            assign link_ok = true
+          elsif link_url contains ':'
+            if link_scheme == 'http' or link_scheme == 'https' or link_scheme == 'mailto' or link_scheme == 'tel'
+              assign link_ok = true
             endif
+          else
+            assign link_ok = true
           endif
-          echo '>'
+          if link_ok
+            echo '<a href="'
+            echo link_url | escape
+            echo '"'
+            if child.title != blank
+              echo ' title="'
+              echo child.title | escape
+              echo '"'
+            endif
+            if child.target == '_blank'
+              echo ' target="_blank" rel="noopener"'
+            endif
+            echo '>'
+          endif
           for text in child.children
             if text.bold
               echo '<strong>'
@@ -61,7 +80,9 @@
               echo '</strong>'
             endif
           endfor
-          echo '</a>'
+          if link_ok
+            echo '</a>'
+          endif
         else
           if child.bold
             echo '<strong>'

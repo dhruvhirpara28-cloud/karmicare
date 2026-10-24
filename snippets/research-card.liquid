@@ -1,10 +1,9 @@
 {%- comment -%}
-  Research card: KC/Research_card (Figma 2642:2211, component 3374:8313), the
-  whole <li>. Shared by the grid/slider and the marquee in
-  sections/research-behind-system.liquid. With an image the card is the
-  "Image=Right" variant (desktop 780 wide, picture on the right; mobile picture
-  under the body) and the <li> carries research-card--media. Without one it is
-  "Image=None" (380 wide).
+  Research card body: KC/Research_card (Figma 2642:2211, component 3374:8313).
+  Shared by the grid/slider and the marquee in sections/research-behind-system.liquid.
+  With an image the card is the "Image=Right" variant (desktop 780 wide, picture on
+  the right; mobile picture under the body). Without one it is "Image=None" (380 wide).
+  The caller adds research-card--media on the <li> when the card has an image.
 
   The copy comes from one of two sources, which print the same HTML:
   - block: a Research Card block of the section (the five cards duplicated per
@@ -19,7 +18,6 @@
   Accepts:
   - block: {Object} The section's card block, or
   - card: {Object} A research_card metaobject entry
-  - item_class: {String} Extra classes for the <li>, for example ' slider__slide' (optional)
 {%- endcomment -%}
 {%- liquid
   if card
@@ -34,7 +32,6 @@
     assign card_logo = card.logo.value
     assign card_image = card.image.value
     assign card_image_badge = card.image_badge.value | escape
-    assign card_attributes = ''
   else
     assign card_subheading = block.settings.subheading
     assign card_subtext = block.settings.subtext
@@ -47,7 +44,6 @@
     assign card_logo = block.settings.logo
     assign card_image = block.settings.image
     assign card_image_badge = block.settings.image_badge
-    assign card_attributes = block.shopify_attributes
   endif
 -%}
 {%- capture card_heading -%}
@@ -57,7 +53,6 @@
     {{- block.settings.heading -}}
   {%- endif -%}
 {%- endcapture -%}
-<li class="research-card{% if card_image != blank %} research-card--media{% endif %}{{ item_class }}" {{ card_attributes }}>
 <div class="research-card__content">
   <div class="research-card__top">
     {%- if card_subheading != blank -%}
@@ -120,4 +115,3 @@
     {%- endif -%}
   </div>
 {%- endif -%}
-</li>

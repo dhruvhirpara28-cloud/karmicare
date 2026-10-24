@@ -78,15 +78,20 @@
       The cards, once, for the marquee or the grid. With the Research cards
       setting filled they are the research_card metaobject entries (one copy
       shared by every page); without it, the section's own blocks, as before.
+      An image makes the card the wide variant (research-card--media).
     {%- endcomment -%}
     {%- capture card_items -%}
       {%- if section.settings.cards != blank -%}
         {%- for card in section.settings.cards -%}
-          {%- render 'research-card', card: card, item_class: item_class -%}
+          <li class="research-card{% if card.image.value != blank %} research-card--media{% endif %}{{ item_class }}">
+            {%- render 'research-card', card: card -%}
+          </li>
         {%- endfor -%}
       {%- else -%}
         {%- for block in section.blocks -%}
-          {%- render 'research-card', block: block, item_class: item_class -%}
+          <li class="research-card{% if block.settings.image != blank %} research-card--media{% endif %}{{ item_class }}" {{ block.shopify_attributes }}>
+            {%- render 'research-card', block: block -%}
+          </li>
         {%- endfor -%}
       {%- endif -%}
     {%- endcapture -%}

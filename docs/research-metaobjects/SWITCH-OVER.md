@@ -15,8 +15,8 @@ section renders its blocks exactly as at b0bb4fb (proven in §9).
 | File | Change |
 |---|---|
 | `sections/research-behind-system.liquid` | New setting **Research cards** (`cards`, type `metaobject_list`, `metaobject_type: "research_card"`) under a "Cards" header. When set, the entries render in the picker's order; when empty, the section's Research Card blocks render as before. The card list is built once (`card_items`) and placed in the marquee or the grid/slider, so the three layouts cannot drift apart. |
-| `snippets/research-card.liquid` | Now prints the whole `<li>` and accepts either `block:` (a section block) or `card:` (a `research_card` entry), plus `item_class:` (the grid's ` slider__slide`). Same HTML, classes and behaviour: the study link opens in a new tab with the screen-reader text, a blank or `#` URL prints a plain label, an image switches the `<li>` to `research-card--media` (the wide variant), the marquee's keyboard focus and clones work unchanged. |
-| `snippets/kc-rich-text-inline.liquid` | New. Prints a `rich_text_field` as inline HTML (`strong`, `em`, `a`, `<br>` between paragraphs) so it can sit inside the card's `<h3>`; Shopify's `metafield_tag` would wrap it in `<div><p>`. Falls back to escaped text with `<br>` for a multi-line field. Reusable for any metaobject heading. |
+| `snippets/research-card.liquid` | Accepts either `block:` (a section block) or `card:` (a `research_card` entry) and prints the card body as before; the section keeps the `<li>` wrapper, so the block path is byte-identical to b0bb4fb. Same HTML, classes and behaviour: the study link opens in a new tab with the screen-reader text, a blank or `#` URL prints a plain label, an image switches the `<li>` to `research-card--media` (the wide variant), the marquee's keyboard focus and clones work unchanged. |
+| `snippets/kc-rich-text-inline.liquid` | New. Prints a `rich_text_field` as inline HTML (`strong`, `em`, `a`, `<br>` between paragraphs) so it can sit inside the card's `<h3>`; Shopify's `metafield_tag` would wrap it in `<div><p>`. Falls back to escaped text with `<br>` for a multi-line field. Links become an `<a>` only for `http`, `https`, `mailto`, `tel` and scheme-less relative, query or anchor URLs; `javascript:`, `data:`, `vbscript:` and every other scheme print their text without a link, whatever the case or surrounding whitespace. Every attribute is escaped; `target` is printed only as `_blank`, with `rel="noopener"`. Reusable for any metaobject heading. |
 
 Field mapping (the shared contract, type handle `research_card`):
 
@@ -170,10 +170,15 @@ What moves, per entry (`TRANSLATIONS.md` has every value with its status, genera
 | `link_label` | **no** | authors · year · journal; `held` / never-translate in both batches |
 | `link_url`, `logo`, `image` | n/a | URL and files are not translatable resources |
 
-Statuses to carry over unchanged: NL `pending-claim-review` on the five headings and the
-five result texts (the EN claims wait for CLAIMS-REVIEW sign-off), NL `fit-risk` on
-RESULTAAT, FR all `translated`. The PDP batch carried one different FR value (Alli's
-`image_badge` with a hyphen); the homepage value is the one to use.
+Statuses to carry over unchanged (per language: 30 `translated`, 10 `pending-claim-review`
+in NL on the five headings and the five result texts, where the EN claims wait for
+CLAIMS-REVIEW sign-off, 5 `held` link labels; FR 40 `translated`, 5 `held`). The NL
+RESULTAAT row also carries the batch flag `fit-risk` (9 characters against 6). The PDP batch
+carried one different FR value (Alli's `image_badge` with a hyphen); the homepage value is
+the one to use. Entities in the batch values are content, not spelling: the entry fields
+are plain text that the theme escapes, so a `&nbsp;` copied literally would show as
+`&nbsp;` on screen. Type the character (or drop the trailing one, as the entry already does)
+and write `&` as `&`.
 
 The handoff, in order:
 
@@ -211,7 +216,7 @@ gap for a release. Recommended: before.
 
 | Situation | Rollback |
 |---|---|
-| Cards look wrong after the switch, blocks still in the templates | Set `"cards": []` (or delete the key) in the template, or clear the picker in the theme editor. The blocks render again, byte-identical to today (§9, "an empty cards setting renders the blocks"). |
+| Cards look wrong after the switch, blocks still in the templates | Set `"cards": []` (or delete the key) in the template, or clear the picker in the theme editor. The blocks render again, byte-identical to b0bb4fb (§9, the raw-byte gate: absent, null, empty string and empty list all proven). |
 | After the blocks were removed (§5.1) | `git revert` the removal commit (the blocks return), then clear `cards`. |
 | One card must disappear | Edit the `cards` array (or the picker). Setting the entry to Draft also removes it from the storefront, but the behaviour of a list with a hidden member was not tested; prefer the array. |
 | The theme code itself | `git revert` the R67 commit. A `cards` key left in a template is then an unknown setting and is ignored. |
@@ -222,11 +227,16 @@ Theme Check: `shopify theme check --fail-level error` exit 0, 0 errors, 19 warni
 baseline; none in the changed files).
 
 **Liquid identity** (`docs/research-metaobjects/fixture/render.mjs`, liquidjs with the
-Shopify filters stubbed; `out/liquid-results.txt`): 14 PASS, 0 FAIL.
+Shopify filters stubbed; `out/liquid-results.txt`): 63 PASS, 0 FAIL (R67b rerun).
 
-- new section + snippet with blocks == old section + snippet at b0bb4fb, for the homepage
-  marquee, the PDP marquee and a grid/slider variant (whitespace-normalised, otherwise
-  byte-identical);
+- **Raw bytes, the R67-B1 gate**: the real five-card homepage and PDP sections, rendered by
+  the new section and snippet with the setting absent, null, an empty string and an empty
+  list, equal the b0bb4fb render byte for byte, no decoding and no whitespace normalisation
+  (homepage 13,231 bytes, SHA-256 `8e6a08d5…`; PDP 12,871 bytes, SHA-256 `9ee3f82d…`, the
+  same hashes Astra's review measured for the baseline). The same holds for the grid/slider
+  and the plain-grid layouts. Astra's own reproduction script reports `equal: true` for both;
+- new section + snippet with the six-card fixture set == old section + snippet at b0bb4fb,
+  for the homepage marquee, the PDP marquee and a grid/slider variant;
 - cards from stubbed `research_card` entries == cards from blocks, same three variants,
   after decoding entities (the only difference is `&amp;` for `&` and the like);
 - an empty `cards` setting renders the blocks;
@@ -234,7 +244,16 @@ Shopify filters stubbed; `out/liquid-results.txt`): 14 PASS, 0 FAIL.
   wrapper; five `target="_blank" rel="noopener"` study links; a multi-line entry field prints
   `<br>` between its lines; an empty entry field prints no element;
 - the rich text walker: bold, italic, link with `&` in the URL and title, two paragraphs
-  joined with `<br>`, a list, the multi-line fallback, a missing field.
+  joined with `<br>`, a list, the multi-line fallback, a missing field;
+- **Rich text links, the R67-B2 gate**: an `<a>` for `https`, upper-case `HTTP`, a URL with
+  surrounding whitespace, `mailto`, `tel`, root-relative (also with a colon in the query),
+  anchor, query, dot-relative and bare relative URLs; escaped `href` and `title`, `target`
+  only as `_blank` with `rel="noopener"` (another target value is dropped). Text without a
+  link for `javascript:` plain, mixed case, with leading whitespace, with a tab, a newline or
+  a null byte inside the scheme name, with a leading control character, for `data:` (two
+  spellings), `vbscript:`, `file:`, `ftp:`, an empty, whitespace-only or missing URL. An
+  entity-spelled `javascript&colon;` stays a harmless relative path because the `&` is
+  escaped.
 
 **Browser** (`out/frame-1440.html` and `out/frame-390.html`, Day and `?mode=night`, in
 Orca's isolated browser profile; the blocks and the entries side by side for the marquee
@@ -260,3 +279,12 @@ the band where it is, by design in `assets/kc-marquee.js`.)
 
 Screenshots of the four runs, scrolled to the marquee pair and to the grid pair, are in the
 lane's scratchpad (`shots/<width>-<mode>-<pair>.png`), not in the repo.
+
+R67b re-run (same four frames, after the rework): every DOM, size, colour, wide-card,
+study-link, plain-label, `slider__slide` and clone/tab-order check PASS again. The one
+check that could not execute was the marquee drift: the browser pane had stopped painting
+(0 `requestAnimationFrame` frames in 500 ms, the display asleep or the pane occluded), so
+no band moved and the IntersectionObserver never started the loop. `assets/kc-marquee.js`
+is untouched by R67 and R67b, the card DOM is unchanged since the passing run above, and
+the block path is byte-identical to b0bb4fb, so the earlier drift and keyboard results
+stand; re-run `out/frame-1440.html` on a lit screen to see it move.
