@@ -879,51 +879,6 @@
    "fr_review": null
   },
   {
-   "key": "kc.sticky_cart.price_once_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:966"
-   ],
-   "en": "[price] one time",
-   "nl": "[price] eenmalig",
-   "nl_hold": null,
-   "fr": "[price] en une fois",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.price_rhythm_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:954"
-   ],
-   "en": "[price] every 60 days",
-   "nl": "[price] om de 60 dagen",
-   "nl_hold": null,
-   "fr": "[price] tous les 60 jours",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.price_year_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:960"
-   ],
-   "en": "[price] per year",
-   "nl": "[price] per jaar",
-   "nl_hold": null,
-   "fr": "[price] par an",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
    "key": "kc.sticky_cart.stop_rhythm_html",
    "area": "sticky_cart",
    "ids": [
@@ -1015,6 +970,9 @@
   }
  ],
  "retired_keys": {
-  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)"
+  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)",
+  "kc.sticky_cart.price_rhythm_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup (liquid:sections/main-product.liquid:954)",
+  "kc.sticky_cart.price_year_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup (liquid:sections/main-product.liquid:960)",
+  "kc.sticky_cart.price_once_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup (liquid:sections/main-product.liquid:966)"
  }
 }
