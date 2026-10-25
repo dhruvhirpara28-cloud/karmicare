@@ -1,16 +1,21 @@
 /* kc-practitioner-request.js: the practitioner request form in the PDP FAQ
-   (snippets/kc-practitioner-request.liquid, R76).
+   (snippets/kc-practitioner-request.liquid, R76; popup R76b).
 
    - Finds the trigger link in the answer text of the FAQ item that holds the form (href contains
      data-trigger-url, else text contains data-trigger-text) and swaps it for a button with the same
-     content that shows and hides the form. No link found: the form stays visible, as without
+     content. The form panel moves into a modal <dialog> on body (a dialog inside a closed <details>
+     would not render), which that button opens. No link found: the form stays inline, as without
      JavaScript.
+   - The dialog, as the professionals quote panel: showModal, scrim, close button, Escape and a
+     click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
+     (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
+     the button.
    - Checks the fields before the post: name, profession, email, at least one of evidence pack and
      samples, and the practice address when samples is ticked. Messages come from the settings.
-   - Shopify reloads the page after the post. Success: the item is already open (Liquid), the
-     thank-you is announced, focused and scrolled into view. Shopify refused it: the alert is
-     focused and the fields Shopify does not give back are restored from this tab's sessionStorage,
-     which is cleared again at once. */
+   - Shopify reloads the page after the post. The item is already open (Liquid); the dialog opens
+     again with the thank-you (announced) or the alert, and focus goes there. On an error the fields
+     Shopify does not give back are restored from this tab's sessionStorage, which is cleared again
+     at once. */
 
 (function () {
   'use strict';
@@ -57,25 +62,49 @@
     var state = root.querySelector('[data-kc-pr-state]');
     var stateName = state ? state.getAttribute('data-kc-pr-state') : '';
     var link = findTrigger(root);
+    var dialog = null;
+    var button = null;
 
-    if (link) {
-      var button = document.createElement('button');
+    if (link && typeof document.createElement('dialog').showModal === 'function') {
+      button = document.createElement('button');
       button.type = 'button';
       button.className = 'kc-pr-trigger';
       button.innerHTML = link.innerHTML;
-      button.setAttribute('aria-controls', root.id);
+      dialog = buildDialog(root, stateName, afterClose);
+      button.setAttribute('aria-haspopup', 'dialog');
+      button.setAttribute('aria-controls', dialog.id);
       link.replaceWith(button);
-      root.classList.add('kc-pr--js');
-      setOpen(!!stateName);
       button.addEventListener('click', function () {
-        setOpen(root.hidden);
+        show(null);
       });
     }
 
-    function setOpen(open) {
-      root.hidden = !open;
-      if (button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    /* Opens the dialog (or, inline, scrolls to the form) and focuses the target: the thank-you or
+       the alert after a reload, else the form title */
+    function show(target) {
+      if (!dialog) {
+        if (target) reveal(target);
+        return;
+      }
+      document.body.classList.add('overflow-hidden');
+      dialog.scrollTop = 0;
+      if (!dialog.open) dialog.showModal();
+      var focus = target || root.querySelector('.kc-pr__title') || form.querySelector('input:not([type=hidden])');
+      if (focus && !focus.hasAttribute('tabindex') && !/^(INPUT|TEXTAREA|BUTTON|A)$/.test(focus.tagName)) {
+        focus.setAttribute('tabindex', '-1');
+      }
+      if (focus) focus.focus();
     }
+
+    /* The close button and the scrim call this at once; Escape reaches it through the close event,
+       which the browser fires a task later */
+    function afterClose() {
+      if (!document.body.classList.contains('overflow-hidden')) return;
+      document.body.classList.remove('overflow-hidden');
+      button.focus();
+    }
+
+    if (dialog) dialog.addEventListener('close', afterClose);
 
     if (stateName === 'success') {
       store('clear');
@@ -88,7 +117,7 @@
           live.textContent = message;
         }, 150);
       }
-      reveal(state);
+      show(state);
       return;
     }
 
@@ -110,7 +139,7 @@
           else if (!el.value) el.value = saved[key];
         });
       }
-      reveal(state);
+      show(state);
     } else {
       store('clear');
     }
@@ -213,6 +242,71 @@
     if (!el) return;
     el.focus({ preventScroll: true });
     el.scrollIntoView({ block: 'center' });
+  }
+
+  function buildDialog(root, stateName, onClose) {
+    var dialog = document.createElement('dialog');
+    dialog.className = 'kc-pr-dialog';
+    dialog.id = 'KcPractitionerRequest-dialog';
+    var success = stateName === 'success';
+    var label = document.getElementById(success ? 'KcPr-success-title' : 'KcPr-title');
+    var description = document.getElementById(success ? 'KcPr-success-text' : 'KcPr-intro');
+    if (label) dialog.setAttribute('aria-labelledby', label.id);
+    if (description) dialog.setAttribute('aria-describedby', description.id);
+
+    var bar = document.createElement('div');
+    bar.className = 'kc-pr-dialog__bar';
+    var closeTemplate = root.querySelector('template[data-kc-pr-dialog-close]');
+    if (closeTemplate) bar.appendChild(closeTemplate.content.cloneNode(true));
+    dialog.appendChild(bar);
+    dialog.appendChild(root);
+    document.body.appendChild(dialog);
+
+    function closeNow() {
+      dialog.close();
+      onClose();
+    }
+
+    var close = dialog.querySelector('[data-kc-pr-close]');
+    if (close) close.addEventListener('click', closeNow);
+
+    /* The panel is the dialog box, so a press that starts and ends on the dialog itself, outside
+       its box, is a click on the scrim (a text selection dragged out of a field is not) */
+    var pressedOnScrim = false;
+    function onScrim(event) {
+      if (event.target !== dialog) return false;
+      var box = dialog.getBoundingClientRect();
+      return event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+    }
+    dialog.addEventListener('pointerdown', function (event) {
+      pressedOnScrim = onScrim(event);
+    });
+    dialog.addEventListener('click', function (event) {
+      if (pressedOnScrim && onScrim(event)) closeNow();
+      pressedOnScrim = false;
+    });
+
+    /* Tab and Shift+Tab wrap inside the dialog instead of leaving for the browser bar */
+    dialog.addEventListener('keydown', function (event) {
+      if (event.key !== 'Tab') return;
+      var focusable = Array.prototype.filter.call(
+        dialog.querySelectorAll('button, [href], input:not([type=hidden]), textarea, select, [tabindex]:not([tabindex="-1"])'),
+        function (el) {
+          return !el.disabled && el.getClientRects().length > 0;
+        }
+      );
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+    return dialog;
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-kc-pr]'), init);
