@@ -2,11 +2,11 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "035821debb9f49e950a971c3d2fea45e22b846ee",
+ "source_digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
  "source_entries": 232,
  "counts": {
-  "translated": 166,
-  "held": 22,
+  "translated": 164,
+  "held": 24,
   "pending-claim-review": 7,
   "dawn-nl": 2,
   "theme-key": 33,
@@ -1712,10 +1712,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/subheading",
@@ -1822,10 +1822,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "Same placeholder badge as the nHAp card (see the xylitol card)"
+   "notes": "Same placeholder badge as the nHAp card (see the xylitol card); retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/heading",
@@ -2264,12 +2264,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: credit (store credit) → tegoed"
+   "notes": "TERM: credit (store credit) → tegoed; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "index:care_comes_back/terms_link_label",

@@ -1,24 +1,24 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "041560cefd52",
-  "registered.json": "7967afaaf3d3",
-  "holds.json": "e8e9a89e1aed",
+  "en-source.json": "26996672af00",
+  "registered.json": "a11f055e5675",
+  "holds.json": "0d5a673cb328",
   "releases.json": "1571d1e3719b",
-  "nl/batch-01-homepage.json": "efe81d293d6d",
-  "nl/batch-02-pdp.json": "d33124c186cf",
-  "nl/batch-03-header-footer.json": "d29923f7409a",
-  "nl/batch-04-legal.json": "e73dee86971e",
+  "nl/batch-01-homepage.json": "00abd8092798",
+  "nl/batch-02-pdp.json": "a77900e461ec",
+  "nl/batch-03-header-footer.json": "ac56614a27d6",
+  "nl/batch-04-legal.json": "bbe33f1b6645",
   "nl/batch-05-products.json": "4f3cda01ad73",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
   "nl/batch-07-collections-blog.json": "e0944b1775df",
   "nl/batch-08-system.json": "a46b443f6ed0"
  },
  "batches": {
-  "batch-01-homepage": "ce03e3b246159170fdc39a1241c85fe46bc1cb8d",
-  "batch-02-pdp": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
-  "batch-03-header-footer": "86a1ed1903574cc27ebdd396c86c5f98b4d95512",
-  "batch-04-legal": "fa3dfe929b6c2052f1e5dfd3ecffd8379fb0f391",
+  "batch-01-homepage": "035821debb9f49e950a971c3d2fea45e22b846ee",
+  "batch-02-pdp": "40ad1a7a769a6ec777e38e3c26cc54518d29c3d3",
+  "batch-03-header-footer": "f1ed7dedf4ba6efa48a45403ff07c786e786192f",
+  "batch-04-legal": "25d0f0553a6dd9314e8d5edde47f8b3ef13ef264",
   "batch-05-products": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
@@ -1623,7 +1623,7 @@
      "field": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.hover_text",
      "en": "<p>“Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifically supported choice. By also taking biorhythm into account, the brand touches on the foundations on which true health is built. This vision aligns seamlessly with my professional conviction that only an integrated approach, bringing together science, biology, rhythm and nature, leads to lasting health.”</p>",
      "en_sha1": "a303abfbd840f092c3eafa31a0ba6bd86613258c",
-     "value": "<p>“Karmicare biedt op een doordachte manier fluoridevrije mondzorg, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door ook rekening te houden met het bioritme raakt het merk aan de fundamenten waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde aanpak, die wetenschap, biologie, ritme en natuur samenbrengt, tot blijvende gezondheid leidt.”</p>",
+     "value": "<p>“Karmicare brengt fluorvrije mondzorg op een doordachte manier, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door tegelijk rekening te houden met het bioritme, raakt het merk aan de basis waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde benadering, waarin wetenschap, biologie, ritme en natuur samenkomen, leidt tot duurzame gezondheid.”</p>",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -2432,27 +2432,6 @@
      ]
     },
     {
-     "id": "index:research_behind_system_EkjATL/card_Hi7YUD/image_badge",
-     "kind": "match",
-     "key": null,
-     "field": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
-     "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-     "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-     "value": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "research_behind_system_EkjATL",
-      "card_Hi7YUD",
-      "image_badge"
-     ]
-    },
-    {
      "id": "index:research_behind_system_EkjATL/card_JeERX6/subheading",
      "kind": "match",
      "key": null,
@@ -2597,27 +2576,6 @@
       "research_behind_system_EkjATL",
       "card_JeERX6",
       "method_text"
-     ]
-    },
-    {
-     "id": "index:research_behind_system_EkjATL/card_JeERX6/image_badge",
-     "kind": "match",
-     "key": null,
-     "field": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
-     "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-     "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-     "value": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "research_behind_system_EkjATL",
-      "card_JeERX6",
-      "image_badge"
      ]
     },
     {
@@ -3473,6 +3431,48 @@
       "km_faq_accordion_FYcArV",
       "faq_item_Pz4mRk",
       "answer"
+     ]
+    },
+    {
+     "id": "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+     "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+     "en_sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+     "value": "<p>“Ik gebruik Karmicare al lange tijd en voel me sterk aangesproken door hun visie op mondverzorging. Ook onze mond volgt het natuurlijke ritme van ons lichaam: het mondmilieu is overdag anders dan ’s nachts. Bovendien staat mondgezondheid niet op zichzelf, maar is ze nauw verbonden met onze algemene gezondheid.</p><p>Als tandarts vind ik de formulatie interessant door de combinatie van onder andere nano-hydroxyapatiet en xylitol in een fluoridevrije leave-onformule. Doordat je na het poetsen niet hoeft na te spoelen, blijven de verzorgende bestanddelen langer in contact met de tanden en de mond. Ook de twee verschillende formules passen mooi binnen de visie op ons natuurlijke dag- en nachtritme: fris en verkwikkend in de ochtend (met guarana voor de ochtendenergie), en warmer en kruidiger in de avond (met valeriaan die bijdraagt aan rust en ontspanning).</p><p>Mijn patiënten die Karmicare gebruiken, zijn er erg tevreden over en vinden het een aangename tandpasta. Ook mijn kinderen, die kritisch zijn op smaken, gebruiken Karmicare met plezier! Dat vind ik minstens zo belangrijk: een goede mondverzorging begint bij een tandpasta die je graag en consequent blijft gebruiken. Heerlijk fris, zonder agressief aan te voelen in de mond. Ik ben fan!”</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "trusted_professionals_HAqYth",
+      "card_h8d3WL",
+      "hover_text"
+     ]
+    },
+    {
+     "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+     "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+     "en_sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+     "value": "<p>“Als mondhygiënist en kwaliteitsmanager met meer dan 13 jaar ervaring in de mondzorg ben ik kritisch in het adviseren van producten. Wat ik vooral waardeer aan Karmicare is de combinatie van een effectieve en veilige samenstelling die ook prettig is in gebruik.</p><p>In mijn eigen ervaring merk ik een prettige smaak, een gladder gevoel op de tanden en dat tanden witter ogen, en dat zonder fluoride. Het biedt een interessant en betrouwbaar alternatief voor zowel professioneel als dagelijks gebruik.</p><p>Ik zie Karmicare als een waardevolle aanvulling binnen de moderne mondzorg en zie goede mogelijkheden voor gebruik binnen een breed publiek.”</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "trusted_professionals_HAqYth",
+      "card_jcnr7Q",
+      "hover_text"
      ]
     }
    ]
@@ -4548,7 +4548,7 @@
      "field": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.hover_text",
      "en": "<p>“Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifically supported choice. By also taking biorhythm into account, the brand touches on the foundations on which true health is built. This vision aligns seamlessly with my professional conviction that only an integrated approach, bringing together science, biology, rhythm and nature, leads to lasting health.”</p>",
      "en_sha1": "a303abfbd840f092c3eafa31a0ba6bd86613258c",
-     "value": "<p>“Karmicare biedt op een doordachte manier fluoridevrije mondzorg, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door ook rekening te houden met het bioritme raakt het merk aan de fundamenten waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde aanpak, die wetenschap, biologie, ritme en natuur samenbrengt, tot blijvende gezondheid leidt.”</p>",
+     "value": "<p>“Karmicare brengt fluorvrije mondzorg op een doordachte manier, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door tegelijk rekening te houden met het bioritme, raakt het merk aan de basis waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde benadering, waarin wetenschap, biologie, ritme en natuur samenkomen, leidt tot duurzame gezondheid.”</p>",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -5541,27 +5541,6 @@
      ]
     },
     {
-     "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/image_badge",
-     "kind": "match",
-     "key": null,
-     "field": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
-     "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-     "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-     "value": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "research_behind_system_EkjATL",
-      "card_Hi7YUD",
-      "image_badge"
-     ]
-    },
-    {
      "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subheading",
      "kind": "match",
      "key": null,
@@ -5706,27 +5685,6 @@
       "research_behind_system_EkjATL",
       "card_JeERX6",
       "method_text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge",
-     "kind": "match",
-     "key": null,
-     "field": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
-     "en": "DENTINE TUBULES - OPEN AND OCCLUDED",
-     "en_sha1": "866529fd08a4206843f62ae1064b6a9f30c558a7",
-     "value": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "research_behind_system_EkjATL",
-      "card_JeERX6",
-      "image_badge"
      ]
     },
     {
@@ -6349,6 +6307,48 @@
       "care_comes_back",
       "line_checkup",
       "amount"
+     ]
+    },
+    {
+     "id": "product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+     "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+     "en_sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+     "value": "<p>“Ik gebruik Karmicare al lange tijd en voel me sterk aangesproken door hun visie op mondverzorging. Ook onze mond volgt het natuurlijke ritme van ons lichaam: het mondmilieu is overdag anders dan ’s nachts. Bovendien staat mondgezondheid niet op zichzelf, maar is ze nauw verbonden met onze algemene gezondheid.</p><p>Als tandarts vind ik de formulatie interessant door de combinatie van onder andere nano-hydroxyapatiet en xylitol in een fluoridevrije leave-onformule. Doordat je na het poetsen niet hoeft na te spoelen, blijven de verzorgende bestanddelen langer in contact met de tanden en de mond. Ook de twee verschillende formules passen mooi binnen de visie op ons natuurlijke dag- en nachtritme: fris en verkwikkend in de ochtend (met guarana voor de ochtendenergie), en warmer en kruidiger in de avond (met valeriaan die bijdraagt aan rust en ontspanning).</p><p>Mijn patiënten die Karmicare gebruiken, zijn er erg tevreden over en vinden het een aangename tandpasta. Ook mijn kinderen, die kritisch zijn op smaken, gebruiken Karmicare met plezier! Dat vind ik minstens zo belangrijk: een goede mondverzorging begint bij een tandpasta die je graag en consequent blijft gebruiken. Heerlijk fris, zonder agressief aan te voelen in de mond. Ik ben fan!”</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "trusted_professionals_HAqYth",
+      "card_h8d3WL",
+      "hover_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+     "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+     "en_sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+     "value": "<p>“Als mondhygiënist en kwaliteitsmanager met meer dan 13 jaar ervaring in de mondzorg ben ik kritisch in het adviseren van producten. Wat ik vooral waardeer aan Karmicare is de combinatie van een effectieve en veilige samenstelling die ook prettig is in gebruik.</p><p>In mijn eigen ervaring merk ik een prettige smaak, een gladder gevoel op de tanden en dat tanden witter ogen, en dat zonder fluoride. Het biedt een interessant en betrouwbaar alternatief voor zowel professioneel als dagelijks gebruik.</p><p>Ik zie Karmicare als een waardevolle aanvulling binnen de moderne mondzorg en zie goede mogelijkheden voor gebruik binnen een breed publiek.”</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "trusted_professionals_HAqYth",
+      "card_jcnr7Q",
+      "hover_text"
      ]
     }
    ]
@@ -10955,6 +10955,46 @@
       "link_list_Yna7wT",
       "heading"
      ]
+    },
+    {
+     "id": "footer-group:footer/legal_guarantee_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.footer.settings.legal_guarantee_label",
+     "en": "Your legal guarantee rights",
+     "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
+     "value": "Je wettelijke garantierechten",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "footer",
+      "legal_guarantee_label"
+     ]
+    },
+    {
+     "id": "footer-group:footer/legal_withdrawal_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.footer.settings.legal_withdrawal_label",
+     "en": "Withdraw from contract here",
+     "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+     "value": "Hier de overeenkomst herroepen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "footer",
+      "legal_withdrawal_label"
+     ]
     }
    ]
   },
@@ -12108,6 +12148,69 @@
       "legal_toc_section_gYznx3",
       "content_section_at3pLy",
       "content"
+     ]
+    },
+    {
+     "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/legal_guarantee_link_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.legal_toc_section_gYznx3.blocks.content_section_FcEDdA.settings.legal_guarantee_link_label",
+     "en": "More about the legal guarantee on europa.eu",
+     "en_sha1": "9f9bad7e203fe6dc34a9cef337379770b9a03770",
+     "value": "Meer over de wettelijke garantie op europa.eu",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "legal_toc_section_gYznx3",
+      "content_section_FcEDdA",
+      "legal_guarantee_link_label"
+     ]
+    },
+    {
+     "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/legal_guarantee_full_size_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.legal_toc_section_gYznx3.blocks.content_section_FcEDdA.settings.legal_guarantee_full_size_label",
+     "en": "Open the notice full size",
+     "en_sha1": "808ff5bca7e67b412d34c484f55e1bab90877f36",
+     "value": "Open de kennisgeving op volledige grootte",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "legal_toc_section_gYznx3",
+      "content_section_FcEDdA",
+      "legal_guarantee_full_size_label"
+     ]
+    },
+    {
+     "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/legal_guarantee_pan_hint",
+     "kind": "match",
+     "key": null,
+     "field": "sections.legal_toc_section_gYznx3.blocks.content_section_FcEDdA.settings.legal_guarantee_pan_hint",
+     "en": "Swipe or scroll sideways to read the whole notice.",
+     "en_sha1": "ca547a0749e0ba9a03f65523dd6dbcb27030d5bc",
+     "value": "Veeg of scrol zijwaarts om de hele kennisgeving te lezen.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "legal_toc_section_gYznx3",
+      "content_section_FcEDdA",
+      "legal_guarantee_pan_hint"
      ]
     }
    ]
@@ -22563,6 +22666,634 @@
     "missing_or_held": 0,
     "gated": 0
    }
+  },
+  {
+   "shopify_type": "ONLINE_STORE_THEME_JSON_TEMPLATE",
+   "owner": "templates/page.withdrawal.json",
+   "batch": "batch-04-legal",
+   "page": "/pages/withdrawal",
+   "items": [
+    {
+     "id": "page.withdrawal:withdrawal/eyebrow",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.eyebrow",
+     "en": "Legal",
+     "en_sha1": "902c91d94e0fd512d0a7f41cf7f018ee6f01bf85",
+     "value": "Juridisch",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "eyebrow"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/heading",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.heading",
+     "en": "Withdraw from contract here",
+     "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+     "value": "Hier de overeenkomst herroepen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "heading"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/intro",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.intro",
+     "en": "<p>Changed your mind? You can withdraw from an online order within 14 days of delivery, without giving a reason. Fill in the statement below, check it and confirm. We acknowledge receipt by email, with the content, date and time of your statement.</p>",
+     "en_sha1": "f08f87a5bcbff57ddf7322e3c642c3ad3156914c",
+     "value": "<p>Van gedachten veranderd? Je kunt een online bestelling binnen 14 dagen na levering herroepen, zonder opgave van reden. Vul de verklaring hieronder in, controleer ze en bevestig. We bevestigen de ontvangst per e-mail, met de inhoud, de datum en het tijdstip van je verklaring.</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "intro"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/steps_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.steps_label",
+     "en": "Steps",
+     "en_sha1": "cdde4f20ba31a24db2cc7ae71135c8353631907b",
+     "value": "Stappen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "steps_label"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/step_1_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.step_1_label",
+     "en": "Your statement",
+     "en_sha1": "ad34f92548209ba410e8e92661a51893aa1b3642",
+     "value": "Je verklaring",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "step_1_label"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/label_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.label_name",
+     "en": "Your name",
+     "en_sha1": "ab42293e29e1ffb306c1403dd95144d664853a60",
+     "value": "Je naam",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "label_name"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/label_order",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.label_order",
+     "en": "Order number",
+     "en_sha1": "1c14bf1ec23a92fb47ae8e8eb6fe436230adbcfe",
+     "value": "Bestelnummer",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "label_order"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/help_order",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.help_order",
+     "en": "As on your order confirmation, for example #1234. For a membership: the number of the order you withdraw from.",
+     "en_sha1": "2b2f057b90b8edc5504899a64464a95ebea5c1a7",
+     "value": "Zoals op je orderbevestiging, bijvoorbeeld #1234. Bij een lidmaatschap: het nummer van de bestelling die je herroept.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "help_order"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/label_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.label_email",
+     "en": "Email address",
+     "en_sha1": "c94d3175a6560565410511df2cebab9cda96027e",
+     "value": "E-mailadres",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "label_email"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/help_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.help_email",
+     "en": "We send the acknowledgement of receipt to this address.",
+     "en_sha1": "4636da90027470edbbe4e358e45181b6d3ef3e8d",
+     "value": "Naar dit adres sturen we de ontvangstbevestiging.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "help_email"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/label_items",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.label_items",
+     "en": "Which items (optional)",
+     "en_sha1": "5d70004b65cf0156e67923145983edd78346ecf7",
+     "value": "Welke artikelen (optioneel)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "label_items"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/help_items",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.help_items",
+     "en": "Leave empty to withdraw from the whole order.",
+     "en_sha1": "3dabf4def1e32ed150f26559f5c7c32e6a15eef8",
+     "value": "Laat leeg om de volledige bestelling te herroepen.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "help_items"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/privacy_note",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.privacy_note",
+     "en": "<p>We process these details to handle your withdrawal, as described in our <a href=\"/pages/privacy-policy\">Privacy Policy</a>.</p>",
+     "en_sha1": "df02057ef3e5c64fed0fcfff0c41391b9e607ce4",
+     "value": "<p>We verwerken deze gegevens om je herroeping af te handelen, zoals beschreven in ons <a href=\"/nl/pages/privacy-policy\">privacybeleid</a>.</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "privacy_note"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/button_review",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.button_review",
+     "en": "Check your statement",
+     "en_sha1": "422dd93527e84e1ce87f77b60cc047df7cc26dc2",
+     "value": "Controleer je verklaring",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "button_review"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/step_2_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.step_2_label",
+     "en": "Check and confirm",
+     "en_sha1": "90b0e09c83f16fd0f5904b0b7fc64f707baf3291",
+     "value": "Controleren en bevestigen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "step_2_label"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/statement_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.statement_text",
+     "en": "I hereby give notice that I withdraw from my contract of sale for the order below.",
+     "en_sha1": "ec46c258d9ebfdb4691d05943eaa7b13231874ab",
+     "value": "Hierbij deel ik u mede dat ik onze overeenkomst betreffende de verkoop van de onderstaande bestelling herroep.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "statement_text"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/review_note",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.review_note",
+     "en": "Not right? Change your details before you confirm.",
+     "en_sha1": "a002076163d6a2654616f8267646ef26d95b77a6",
+     "value": "Klopt er iets niet? Pas je gegevens aan voordat je bevestigt.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "review_note"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/button_confirm",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.button_confirm",
+     "en": "Confirm withdrawal",
+     "en_sha1": "854c34b9e2c5529095ec54b53b73c86784123032",
+     "value": "Herroeping bevestigen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "button_confirm"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/button_edit",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.button_edit",
+     "en": "Change details",
+     "en_sha1": "377205202adefc9e5288df1d628cf047bcba7855",
+     "value": "Gegevens aanpassen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "button_edit"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/confirm_note",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.confirm_note",
+     "en": "By confirming you send this statement to KARMICA BV. You receive an acknowledgement of receipt by email, with the date and time of submission.",
+     "en_sha1": "e494fe55af942120788e1cdf5aa448b8a318a385",
+     "value": "Door te bevestigen stuur je deze verklaring naar KARMICA BV. Je ontvangt een ontvangstbevestiging per e-mail, met de datum en het tijdstip van indiening.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "confirm_note"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/error_required_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.error_required_name",
+     "en": "Please fill in your name.",
+     "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+     "value": "Vul je naam in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "error_required_name"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/error_required_order",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.error_required_order",
+     "en": "Please fill in your order number.",
+     "en_sha1": "6eb9423a108f844c661b93e0aa93d34dcbd04f9f",
+     "value": "Vul je bestelnummer in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "error_required_order"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/error_required_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.error_required_email",
+     "en": "Please fill in your email address.",
+     "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+     "value": "Vul je e-mailadres in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "error_required_email"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/error_format_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.error_format_email",
+     "en": "Please enter a valid email address.",
+     "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+     "value": "Vul een geldig e-mailadres in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "error_format_email"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/error_generic",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.error_generic",
+     "en": "Your statement was not sent. Please check the details below and try again, or email care@karmicare.com.",
+     "en_sha1": "ecec447ac395f35baf3644d76c893dacd1dd3f4e",
+     "value": "Je verklaring is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw, of mail naar care@karmicare.com.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "error_generic"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/success_heading",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.success_heading",
+     "en": "Your withdrawal has been received",
+     "en_sha1": "62cd6f8cde28d3bcd22276c26ba4361c4a691399",
+     "value": "Je herroeping is ontvangen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "success_heading"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/success_ack_sent",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.success_ack_sent",
+     "en": "An acknowledgement of receipt is on its way to [email], with the content, date and time of your statement. Keep that email: it is your proof.",
+     "en_sha1": "6cc01e353dee27be84b2f67831e7cfc635cb3cf4",
+     "value": "Er is een ontvangstbevestiging onderweg naar [email], met de inhoud, de datum en het tijdstip van je verklaring. Bewaar die e-mail: het is je bewijs.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "success_ack_sent"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/success_ack_default",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.success_ack_default",
+     "en": "We acknowledge receipt by email, with the content, date and time of your statement. Keep that email: it is your proof.",
+     "en_sha1": "07dfad83aaf52c5431f2014ca38bb8f039462ad1",
+     "value": "We bevestigen de ontvangst per e-mail, met de inhoud, de datum en het tijdstip van je verklaring. Bewaar die e-mail: het is je bewijs.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "success_ack_default"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/success_next_steps",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.success_next_steps",
+     "en": "<p><strong>What happens next.</strong> Send the goods back within 14 days to KARMICA BV, Returns, Vizierstraat 28, 8000 Bruges, Belgium. We refund everything you paid, including the standard delivery charge, within 14 days of the day you told us; we may wait until the goods are back or you have shown that you sent them. Questions? Write to <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>. A person reads every message.</p>",
+     "en_sha1": "5a80b154f1df669f9f2a91831cbdfe5ea8d7ed4f",
+     "value": "<p><strong>Wat er nu gebeurt.</strong> Stuur de goederen binnen 14 dagen terug naar KARMICA BV, Retouren, Vizierstraat 28, 8000 Brugge, België. We betalen alles wat je betaalde terug, inclusief de standaard leveringskosten, binnen 14 dagen na de dag waarop je het ons liet weten; we mogen wachten tot de goederen terug zijn of tot je hebt aangetoond dat je ze hebt verzonden. Vragen? Schrijf naar <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>. Een mens leest elk bericht.</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "success_next_steps"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/aside_heading",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.aside_heading",
+     "en": "Other ways to withdraw",
+     "en_sha1": "75e7f582666430278c1ca73bad4d3f6e42f8385a",
+     "value": "Andere manieren om te herroepen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "aside_heading"
+     ]
+    },
+    {
+     "id": "page.withdrawal:withdrawal/aside_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.withdrawal.settings.aside_text",
+     "en": "<p>Prefer another route? Email <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>, call <a href=\"tel:+32478572761\">+32 (0) 478 57 27 61</a> or write to KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgium. The model withdrawal form is on the Consumer Rights page. Whichever way you choose, the day you tell us counts.</p>",
+     "en_sha1": "aa0afe17b6dfe5ab615b2a0ec8ade5cbd84b6167",
+     "value": "<p>Liever een andere weg? Mail naar <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>, bel <a href=\"tel:+32478572761\">+32 (0) 478 57 27 61</a> of schrijf naar KARMICA BV, Vizierstraat 28, 8000 Brugge, België. Het modelformulier voor herroeping staat op de pagina Consumentenrechten. Welke weg je ook kiest: de dag waarop je het ons laat weten, telt.</p>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "withdrawal",
+      "aside_text"
+     ]
+    }
+   ]
   },
   {
    "shopify_type": "ONLINE_STORE_THEME_JSON_TEMPLATE",

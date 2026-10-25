@@ -2,18 +2,18 @@
  "batch": "batch-04-legal",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-04-legal.json",
- "source_digest": "06fa1b05814b3c142415b5acd9fd100197cfb5b9",
- "source_entries": 975,
+ "source_digest": "25d0f0553a6dd9314e8d5edde47f8b3ef13ef264",
+ "source_entries": 1009,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 144,
+  "translated": 178,
   "admin": 481,
   "held": 350
  },
  "flag_counts": {
-  "legal-review": 972,
+  "legal-review": 1006,
   "source-defect": 3,
   "pending-en-review": 3,
   "invariant": 1
@@ -14643,6 +14643,516 @@
    "status": "translated",
    "flags": [],
    "notes": "page title as registered by the landing desk in Translate & Adapt, 24 Oct (registered.json); handoff gate-withdrawal §3",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/eyebrow",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.eyebrow",
+   "en": "Legal",
+   "en_sha1": "902c91d94e0fd512d0a7f41cf7f018ee6f01bf85",
+   "fr": "Juridique",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.heading",
+   "en": "Withdraw from contract here",
+   "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+   "fr": "Renoncer au contrat ici",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label words of Art. VI.61/2 §1 WER / Art. 11a(1) CRD in each language. Keep verbatim.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/intro",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.intro",
+   "en": "<p>Changed your mind? You can withdraw from an online order within 14 days of delivery, without giving a reason. Fill in the statement below, check it and confirm. We acknowledge receipt by email, with the content, date and time of your statement.</p>",
+   "en_sha1": "f08f87a5bcbff57ddf7322e3c642c3ad3156914c",
+   "fr": "<p>Vous avez changé d’avis ? Vous pouvez vous rétracter d’une commande en ligne dans les 14 jours suivant la livraison, sans donner de motif. Remplissez la déclaration ci-dessous, vérifiez-la et confirmez. Nous accusons réception par e-mail, avec le contenu, la date et l’heure de votre déclaration.</p>",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/steps_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.steps_label",
+   "en": "Steps",
+   "en_sha1": "cdde4f20ba31a24db2cc7ae71135c8353631907b",
+   "fr": "Étapes",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Screen readers only.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/step_1_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.step_1_label",
+   "en": "Your statement",
+   "en_sha1": "ad34f92548209ba410e8e92661a51893aa1b3642",
+   "fr": "Votre déclaration",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/label_name",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.label_name",
+   "en": "Your name",
+   "en_sha1": "ab42293e29e1ffb306c1403dd95144d664853a60",
+   "fr": "Votre nom",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/label_order",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.label_order",
+   "en": "Order number",
+   "en_sha1": "1c14bf1ec23a92fb47ae8e8eb6fe436230adbcfe",
+   "fr": "Numéro de commande",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/help_order",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.help_order",
+   "en": "As on your order confirmation, for example #1234. For a membership: the number of the order you withdraw from.",
+   "en_sha1": "2b2f057b90b8edc5504899a64464a95ebea5c1a7",
+   "fr": "Tel qu’il figure sur votre confirmation de commande, par exemple #1234. Pour un abonnement : le numéro de la commande dont vous vous rétractez.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: FR \"abonnement\" follows Loop’s own FR wording; change to \"adhésion\" if the FR site says so.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/label_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.label_email",
+   "en": "Email address",
+   "en_sha1": "c94d3175a6560565410511df2cebab9cda96027e",
+   "fr": "Adresse e-mail",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/help_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.help_email",
+   "en": "We send the acknowledgement of receipt to this address.",
+   "en_sha1": "4636da90027470edbbe4e358e45181b6d3ef3e8d",
+   "fr": "Nous envoyons l’accusé de réception à cette adresse.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/label_items",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.label_items",
+   "en": "Which items (optional)",
+   "en_sha1": "5d70004b65cf0156e67923145983edd78346ecf7",
+   "fr": "Quels articles (facultatif)",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/help_items",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.help_items",
+   "en": "Leave empty to withdraw from the whole order.",
+   "en_sha1": "3dabf4def1e32ed150f26559f5c7c32e6a15eef8",
+   "fr": "Laissez vide pour vous rétracter de toute la commande.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/privacy_note",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.privacy_note",
+   "en": "<p>We process these details to handle your withdrawal, as described in our <a href=\"/pages/privacy-policy\">Privacy Policy</a>.</p>",
+   "en_sha1": "df02057ef3e5c64fed0fcfff0c41391b9e607ce4",
+   "fr": "<p>Nous traitons ces données pour gérer votre rétractation, comme décrit dans notre <a href=\"/fr/pages/privacy-policy\">politique de confidentialité</a>.</p>",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The link keeps the language prefix (/nl/, /fr/); check the privacy page handle per language.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/button_review",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.button_review",
+   "en": "Check your statement",
+   "en_sha1": "422dd93527e84e1ce87f77b60cc047df7cc26dc2",
+   "fr": "Vérifier votre déclaration",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/step_2_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.step_2_label",
+   "en": "Check and confirm",
+   "en_sha1": "90b0e09c83f16fd0f5904b0b7fc64f707baf3291",
+   "fr": "Vérifier et confirmer",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/statement_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.statement_text",
+   "en": "I hereby give notice that I withdraw from my contract of sale for the order below.",
+   "en_sha1": "ec46c258d9ebfdb4691d05943eaa7b13231874ab",
+   "fr": "Je vous notifie par la présente ma rétractation du contrat portant sur la vente des biens de la commande ci-dessous.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Singular form of the statutory model form (Annex 2 to Book VI WER) in each language.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/review_note",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.review_note",
+   "en": "Not right? Change your details before you confirm.",
+   "en_sha1": "a002076163d6a2654616f8267646ef26d95b77a6",
+   "fr": "Une erreur ? Modifiez vos données avant de confirmer.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/button_confirm",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.button_confirm",
+   "en": "Confirm withdrawal",
+   "en_sha1": "854c34b9e2c5529095ec54b53b73c86784123032",
+   "fr": "Confirmer la rétractation",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label words of Art. VI.61/2 §3 WER / Art. 11a(3) CRD. Nothing else on the button.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/button_edit",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.button_edit",
+   "en": "Change details",
+   "en_sha1": "377205202adefc9e5288df1d628cf047bcba7855",
+   "fr": "Modifier les données",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/confirm_note",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.confirm_note",
+   "en": "By confirming you send this statement to KARMICA BV. You receive an acknowledgement of receipt by email, with the date and time of submission.",
+   "en_sha1": "e494fe55af942120788e1cdf5aa448b8a318a385",
+   "fr": "En confirmant, vous envoyez cette déclaration à KARMICA BV. Vous recevez un accusé de réception par e-mail, avec la date et l’heure de la soumission.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/error_required_name",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.error_required_name",
+   "en": "Please fill in your name.",
+   "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+   "fr": "Veuillez indiquer votre nom.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/error_required_order",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.error_required_order",
+   "en": "Please fill in your order number.",
+   "en_sha1": "6eb9423a108f844c661b93e0aa93d34dcbd04f9f",
+   "fr": "Veuillez indiquer votre numéro de commande.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/error_required_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.error_required_email",
+   "en": "Please fill in your email address.",
+   "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+   "fr": "Veuillez indiquer votre adresse e-mail.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/error_format_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.error_format_email",
+   "en": "Please enter a valid email address.",
+   "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+   "fr": "Veuillez saisir une adresse e-mail valide.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/error_generic",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.error_generic",
+   "en": "Your statement was not sent. Please check the details below and try again, or email care@karmicare.com.",
+   "en_sha1": "ecec447ac395f35baf3644d76c893dacd1dd3f4e",
+   "fr": "Votre déclaration n’a pas été envoyée. Vérifiez les données ci-dessous et réessayez, ou écrivez à care@karmicare.com.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/success_heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.success_heading",
+   "en": "Your withdrawal has been received",
+   "en_sha1": "62cd6f8cde28d3bcd22276c26ba4361c4a691399",
+   "fr": "Votre rétractation a bien été reçue",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/success_ack_sent",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.success_ack_sent",
+   "en": "An acknowledgement of receipt is on its way to [email], with the content, date and time of your statement. Keep that email: it is your proof.",
+   "en_sha1": "6cc01e353dee27be84b2f67831e7cfc635cb3cf4",
+   "fr": "Un accusé de réception est en route vers [email], avec le contenu, la date et l’heure de votre déclaration. Conservez cet e-mail : c’est votre preuve.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Keep the [email] placeholder. Reworded on Astra R58 N3: an accepted request is not yet a delivered email.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/success_ack_default",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.success_ack_default",
+   "en": "We acknowledge receipt by email, with the content, date and time of your statement. Keep that email: it is your proof.",
+   "en_sha1": "07dfad83aaf52c5431f2014ca38bb8f039462ad1",
+   "fr": "Nous accusons réception par e-mail, avec le contenu, la date et l’heure de votre déclaration. Conservez cet e-mail : c’est votre preuve.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/success_next_steps",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.success_next_steps",
+   "en": "<p><strong>What happens next.</strong> Send the goods back within 14 days to KARMICA BV, Returns, Vizierstraat 28, 8000 Bruges, Belgium. We refund everything you paid, including the standard delivery charge, within 14 days of the day you told us; we may wait until the goods are back or you have shown that you sent them. Questions? Write to <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>. A person reads every message.</p>",
+   "en_sha1": "5a80b154f1df669f9f2a91831cbdfe5ea8d7ed4f",
+   "fr": "<p><strong>La suite.</strong> Renvoyez les biens dans les 14 jours à KARMICA BV, Retours, Vizierstraat 28, 8000 Bruges, Belgique. Nous remboursons tout ce que vous avez payé, frais de livraison standard compris, dans les 14 jours suivant le jour où vous nous avez informés ; nous pouvons attendre d’avoir récupéré les biens ou que vous ayez prouvé leur renvoi. Des questions ? Écrivez à <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>. Une personne lit chaque message.</p>",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Refund wording follows the corrected clause (Art. VI.50 WER); gate-legal keeps it in sync with the Terms.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/aside_heading",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.aside_heading",
+   "en": "Other ways to withdraw",
+   "en_sha1": "75e7f582666430278c1ca73bad4d3f6e42f8385a",
+   "fr": "Autres moyens de vous rétracter",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.withdrawal:withdrawal/aside_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.withdrawal.json",
+   "key_path": "sections.withdrawal.settings.aside_text",
+   "en": "<p>Prefer another route? Email <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>, call <a href=\"tel:+32478572761\">+32 (0) 478 57 27 61</a> or write to KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgium. The model withdrawal form is on the Consumer Rights page. Whichever way you choose, the day you tell us counts.</p>",
+   "en_sha1": "aa0afe17b6dfe5ab615b2a0ec8ade5cbd84b6167",
+   "fr": "<p>Vous préférez une autre voie ? Écrivez à <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>, appelez le <a href=\"tel:+32478572761\">+32 (0) 478 57 27 61</a> ou écrivez à KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgique. Le formulaire type de rétractation se trouve sur la page Droits des consommateurs. Quelle que soit la voie choisie, c’est le jour où vous nous informez qui compte.</p>",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/legal_guarantee_link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.consumer-rights.json",
+   "key_path": "sections.legal_toc_section_gYznx3.blocks.content_section_FcEDdA.settings.legal_guarantee_link_label",
+   "en": "More about the legal guarantee on europa.eu",
+   "en_sha1": "9f9bad7e203fe6dc34a9cef337379770b9a03770",
+   "fr": "En savoir plus sur la garantie légale sur europa.eu",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Goes to the language page the QR code points to (chosen by the storefront language, not by this text).; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/legal_guarantee_full_size_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.consumer-rights.json",
+   "key_path": "sections.legal_toc_section_gYznx3.blocks.content_section_FcEDdA.settings.legal_guarantee_full_size_label",
+   "en": "Open the notice full size",
+   "en_sha1": "808ff5bca7e67b412d34c484f55e1bab90877f36",
+   "fr": "Ouvrir l’avis en taille réelle",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "page.consumer-rights:legal_toc_section_gYznx3/content_section_FcEDdA/legal_guarantee_pan_hint",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/page.consumer-rights.json",
+   "key_path": "sections.legal_toc_section_gYznx3.blocks.content_section_FcEDdA.settings.legal_guarantee_pan_hint",
+   "en": "Swipe or scroll sideways to read the whole notice.",
+   "en_sha1": "ca547a0749e0ba9a03f65523dd6dbcb27030d5bc",
+   "fr": "Faites défiler latéralement pour lire tout l’avis.",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Shown on phones only, above the notice.; new 25 Oct",
    "source_status": "approved"
   }
  ]

@@ -2,14 +2,14 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "035821debb9f49e950a971c3d2fea45e22b846ee",
+ "source_digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
  "source_entries": 232,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 173,
-  "held": 23,
+  "translated": 171,
+  "held": 25,
   "locale-present": 2,
   "theme-key": 32,
   "admin": 2
@@ -19,7 +19,6 @@
   "pending-claim-review": 14,
   "gendered-title": 7,
   "pending-en-review": 2,
-  "source-defect": 1,
   "not-rendered": 6,
   "wording-adapted": 2,
   "legal-review": 1
@@ -1945,10 +1944,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -2070,12 +2069,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge; translated as written, homepage owner to confirm the badge.",
+   "fr": "",
+   "status": "held",
+   "flags": [],
+   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge; translated as written, homepage owner to confirm the badge.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -2581,12 +2578,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
    "status": "translated",
    "flags": [],
-   "notes": "",
+   "notes": "; 25 Oct: 'jamais pour votre facture dentaire' removed with the EN (Victor, 25 Oct)",
    "source_status": "approved"
   },
   {

@@ -572,7 +572,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 179 | `index:care_comes_back/eyebrow` | template_setting | Return on Care | approved | NT |
 | 180 | `index:care_comes_back/heading` | template_setting | The care you already do. Now designed to give back. | approved |  |
 | 181 | `index:care_comes_back/intro` | template_setting | Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as … | approved |  |
-| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 183 | `index:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 184 | `index:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 185 | `index:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -653,7 +653,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 26 | `product.subscription-item:main/treatment_journey_block/disclaimer_text` | template_setting | * What members report with continued use — individual experiences vary. | approved |  |
 | 27 | `product.subscription-item:main/info_card_FnBcaN/header_text` | template_setting | More than two formulas | approved |  |
 | 28 | `product.subscription-item:main/info_card_FnBcaN/body_text` | template_setting | Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care buil… | needs-review |  |
-| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 30 | `product.subscription-item:main/professional_testimonials_block/heading` | template_setting | Trusted by professionals | approved |  |
 | 31 | `product.subscription-item:main/sticky_cart_block/button_text` | template_setting | Begin Now | approved |  |
 | 32 | `product.subscription-item:chronobiology_clock_karmicare/eyebrow` | template_setting | CHRONOBIOLOGY | approved |  |
@@ -767,7 +767,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 140 | `product.subscription-item:care_comes_back/receipt_column_label` | template_setting | Received | approved |  |
 | 141 | `product.subscription-item:care_comes_back/total_label` | template_setting | Up to | approved |  |
 | 142 | `product.subscription-item:care_comes_back/total` | template_setting | €110.80 | approved |  |
-| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 144 | `product.subscription-item:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 145 | `product.subscription-item:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 146 | `product.subscription-item:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -808,7 +808,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 181 | `liquid:sections/main-product.liquid:966` | theme_locale | [price] one time | needs-key |  |
 | 182 | `liquid:sections/main-product.liquid:977` | theme_locale | + [credit] Care Credit back | needs-key |  |
 | 183 | `liquid:sections/main-product.liquid:983` | theme_locale | + [credit] Care Credit + €40 Check-up Reward | needs-key |  |
-| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. | needs-key |  |
+| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care. | needs-key |  |
 | 185 | `liquid:sections/main-product.liquid:995` | theme_locale | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is… | needs-key |  |
 | 186 | `liquid:sections/main-product.liquid:1006` | theme_locale | Delivery & what's included | needs-key |  |
 | 187 | `liquid:sections/main-product.liquid:1012` | theme_locale | Change | needs-key |  |
