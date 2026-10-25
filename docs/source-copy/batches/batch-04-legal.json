@@ -1,6 +1,6 @@
 {
  "batch": "batch-04-legal",
- "digest": "410637613fa88bed1db45ce446d2f0fd60be8907",
+ "digest": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -15041,12 +15041,14 @@
    "resource_type": "page",
    "file_or_handle": "terms-and-conditions-1",
    "key_path": "title",
-   "en": "New Terms and Conditions",
-   "sha1": "c2ae06318f3066d33edfbfa4f036e788f065adb0",
+   "en": "Terms and Conditions",
+   "sha1": "894031ed8d341b5ecab5e23002585055f0b7ee4d",
    "status": "approved",
    "never_translate": false,
-   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row",
-   "legal": true
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Terms and Conditions",
+   "old_sha1": "c2ae06318f3066d33edfbfa4f036e788f065adb0"
   },
   {
    "id": "admin:page:new-consumer-rights:title",
@@ -15055,12 +15057,14 @@
    "resource_type": "page",
    "file_or_handle": "new-consumer-rights",
    "key_path": "title",
-   "en": "New Consumer Rights",
-   "sha1": "62b7e69d30b42fc5bf9d983a512e78b036e19965",
+   "en": "Consumer Rights",
+   "sha1": "9f47f00993a5fcda5324a69858ea073aed81070a",
    "status": "approved",
    "never_translate": false,
-   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row",
-   "legal": true
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Consumer Rights",
+   "old_sha1": "62b7e69d30b42fc5bf9d983a512e78b036e19965"
   },
   {
    "id": "admin:page:privacy-policy:title",
@@ -15069,12 +15073,14 @@
    "resource_type": "page",
    "file_or_handle": "privacy-policy",
    "key_path": "title",
-   "en": "New Privacy Policy",
-   "sha1": "e9a1abe2d7afd711c654d57c551678d5ce5d1e47",
+   "en": "Privacy Policy",
+   "sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
    "status": "approved",
    "never_translate": false,
-   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row",
-   "legal": true
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Privacy Policy",
+   "old_sha1": "e9a1abe2d7afd711c654d57c551678d5ce5d1e47"
   }
  ]
 }

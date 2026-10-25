@@ -20,12 +20,15 @@ The three designed legal pages have no SEO title in the Admin, so their `<title>
 
 | Page | EN | NL | FR |
 |---|---|---|---|
-| `terms-and-conditions-1` | New Terms and Conditions | Nieuwe algemene voorwaarden | Nouvelles conditions générales |
-| `new-consumer-rights` | New Consumer Rights | Nieuwe consumentenrechten | Nouveaux droits des consommateurs (already live) |
-| `privacy-policy` | New Privacy Policy | Nieuw privacybeleid | Nouvelle politique de confidentialité |
+| `terms-and-conditions-1` | Terms and Conditions | Algemene voorwaarden | Conditions générales |
+| `new-consumer-rights` | Consumer Rights | Consumentenrechten | Droits des consommateurs |
+| `privacy-policy` | Privacy Policy | Privacybeleid | Politique de confidentialité |
 
-The EN titles start with "New", left over from when the pages were made. Dropping it, in the Admin and then in NL/FR, is Victor's choice.
+**Admin, 25 Oct (source-copy in the Orca browser, at Victor's request: "ja wil new schrappen"):**
+- "New" is dropped from the three page titles. The handles are unchanged, read back from `/pages/<handle>.json`.
+- The legacy pages *Terms and Conditions*, *Privacy Policy* and *Consumer Rights* (28 Feb 2024; handles `terms-and-conditions`, `privacy`, `consumer-rights`) are Hidden.
+- The existing URL redirects send their URLs to `terms-and-conditions-1`, `privacy-policy` and `new-consumer-rights` (301, checked by curl). The page sitemap now lists only the designed pages.
 
-**Expected:** NL 5 and FR 6 new or changed keys. FR consumer rights already has its title live, so it will show as "same". The dry run can add byte-only re-registers.
+**Expected:** NL 5 and FR 6 new or changed keys. The dry run can add byte-only re-registers.
 
 FR `check.py`: 73 errors (75 before). The retired legal rows (the three `seo.title` rows, the two footer-group labels) keep the flag `legal-review`. NL `validate.py`: 62, unchanged.

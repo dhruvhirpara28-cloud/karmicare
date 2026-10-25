@@ -105,7 +105,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the homepage SEO title is *KARMICARE - Biorhythmic Oral Care* live (was *… Oral Health*), still `admin-held`, `old_en` kept;
   - Leen Ponet's FR role title on the cards is released with *Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI* (Victor 24 and 25 Oct); the EN is unchanged.
 - **Updated 25 Oct (round 4)**: *Complete Hygiene Kit*, *Morning Toothbrush* and *Evening Toothbrush* (without 2.0) are Draft in the Admin (Victor: only the 2.0 products, the floss and the Awake & Asleep system stay sellable), so their 14 rows are `retired`; the SEO titles of Awake and Asleep toothpaste 2.0 lose the " – KARMICARE" that only the page `<title>` adds (`old_en` kept). NL/FR write postal addresses in their local form (`docs/localization/registration/ROUND4.md`); the EN is unchanged.
-- **Updated 25 Oct (round 5)**: the page titles of `terms-and-conditions-1`, `new-consumer-rights` and `privacy-policy` are inventoried as `admin:page:<handle>:title` (*New Terms and Conditions*, *New Consumer Rights*, *New Privacy Policy*); the `seo.title` rows captured from the page `<title>` are `retired`, because the pages have no SEO title. NL/FR department names follow gate-legal (`docs/localization/registration/ROUND5.md`).
+- **Updated 25 Oct (round 5)**: the page titles of `terms-and-conditions-1`, `new-consumer-rights` and `privacy-policy` are inventoried as `admin:page:<handle>:title` (*Terms and Conditions*, *Consumer Rights*, *Privacy Policy*; Victor had "New" dropped in the Admin, 25 Oct); the `seo.title` rows captured from the page `<title>` are `retired`, because the pages have no SEO title. NL/FR department names follow gate-legal (`docs/localization/registration/ROUND5.md`).
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
@@ -114,7 +114,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | `batch-01-homepage` | 232 | `003612b5dcb6abd012b4c38ac0b05d4133412883` |
 | `batch-02-pdp` | 524 | `fb09c0f8bbcf87c736751088cc518158ddf3d658` |
 | `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
-| `batch-04-legal` | 1012 | `410637613fa88bed1db45ce446d2f0fd60be8907` |
+| `batch-04-legal` | 1012 | `4ead9703b4cfc2fc346b6e25843f38afec1124e7` |
 | `batch-05-products` | 103 | `e5164dca3745c2b94f13b29668c50df58d4754f3` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
