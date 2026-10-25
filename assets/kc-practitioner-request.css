@@ -1,0 +1,252 @@
+/* kc-practitioner-request.css: the practitioner request form in the PDP FAQ
+   (snippets/kc-practitioner-request.liquid, R76). Tokens only, no hex: Day and Night come from the
+   mapped tokens on body. Fields, alert and success panel follow the withdrawal form
+   (assets/kc-withdrawal.css) at the FAQ answer's smaller scale; the button is Dawn's .button, which
+   snippets/button-styles.liquid paints as the KC primary. */
+
+.kc-pr {
+  margin: var(--kc-responsive-spacing-layout-md) 0 0;
+  padding: var(--kc-responsive-spacing-layout-md) 0 0;
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+  font-family: var(--kc-font-role-backbone);
+  color: var(--kc-mapped-text-default-heading);
+  letter-spacing: normal;
+}
+
+.kc-pr[hidden] {
+  display: none;
+}
+
+/* The trigger link, once the script has made it a button: it keeps the answer link's look */
+.kc-pr-trigger {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: var(--kc-responsive-spacing-layout-xxs, 3px);
+  cursor: pointer;
+}
+
+.kc-pr-trigger:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Paragraph rules carry .kc-pr in front: product-faq.css spaces every .kc-faq-body p */
+.kc-pr .kc-pr__title {
+  margin: 0 0 6px;
+  color: var(--kc-mapped-text-default-heading);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  font-weight: var(--font-600-weight, 600);
+}
+
+.kc-pr .kc-pr__intro {
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+/* Fields */
+.kc-pr__field {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.kc-pr__label {
+  display: block;
+  margin: 0 0 6px;
+  padding: 0;
+  color: var(--kc-mapped-text-default-heading);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-label-lg-letter-spacing);
+  font-weight: var(--font-600-weight, 600);
+}
+
+.kc-pr .kc-pr__help {
+  margin: -2px 0 8px;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-pr__input {
+  display: block;
+  width: 100%;
+  min-height: var(--kc-responsive-size-input-height);
+  margin: 0;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--kc-mapped-border-control-default);
+  border-radius: var(--kc-shape-radius-sm);
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: inherit;
+  /* never under 16px: iOS zooms the page into a smaller field */
+  font-size: max(16px, var(--kc-responsive-body-md-text-size));
+  line-height: 1.4;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.kc-pr__input--area {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.kc-pr__input:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-color: var(--kc-mapped-border-focus-strong);
+}
+
+.kc-pr__input[aria-invalid='true'] {
+  border-color: var(--kc-mapped-border-status-error);
+  box-shadow: inset 0 0 0 1px var(--kc-mapped-border-status-error);
+}
+
+/* Evidence pack / samples */
+.kc-pr__check {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: var(--kc-responsive-size-control-min-height, 44px);
+  color: var(--kc-mapped-text-default-heading);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  cursor: pointer;
+}
+
+.kc-pr__check input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--kc-mapped-surface-inverse-default);
+  cursor: pointer;
+}
+
+.kc-pr__check input:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.kc-pr__choices[aria-invalid='true'] .kc-pr__check input {
+  outline: 2px solid var(--kc-mapped-border-status-error);
+  outline-offset: 1px;
+}
+
+/* The message keeps the heading colour (contrast); the red mark is the second cue */
+.kc-pr .kc-pr__error {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 8px 0 0;
+  color: var(--kc-mapped-text-default-heading);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-pr__error::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45em;
+  border-radius: var(--kc-shape-radius-full);
+  background: var(--kc-mapped-icon-status-error);
+}
+
+.kc-pr .kc-pr__error[hidden] {
+  display: none;
+}
+
+.kc-pr .kc-pr__note {
+  margin: 0;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-pr__note a,
+.kc-pr__alert a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.kc-pr__note a:focus-visible,
+.kc-pr__alert a:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.kc-pr__actions {
+  margin: var(--kc-responsive-spacing-layout-md) 0 0;
+}
+
+/* KC/Button large: the height comes from the token, not from Dawn's button variables */
+.kc-pr__actions .button {
+  min-height: var(--kc-responsive-size-button-lg-height);
+  padding: 0 20px;
+}
+
+/* Shopify refused the post, and the thank-you after it */
+.kc-pr__alert,
+.kc-pr__success {
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  padding: 16px;
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-surface-status-default);
+  color: var(--kc-mapped-text-status-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-pr__alert {
+  border: 1px solid var(--kc-mapped-border-status-error);
+}
+
+.kc-pr__success {
+  margin-bottom: 0;
+  border: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-pr__alert:focus,
+.kc-pr__success:focus {
+  outline: none;
+}
+
+.kc-pr__alert:focus-visible,
+.kc-pr__success:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+}
+
+.kc-pr .kc-pr__alert-title,
+.kc-pr .kc-pr__success-title {
+  margin: 0 0 6px;
+  color: var(--kc-mapped-text-status-title);
+  font-weight: var(--font-600-weight, 600);
+}
+
+.kc-pr__alert-list {
+  margin: 0;
+  padding: 0 0 0 18px;
+}
+
+.kc-pr .kc-pr__success-text {
+  margin: 0;
+}
