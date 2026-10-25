@@ -52,8 +52,14 @@ Flow `UAY2YB`, "Practitioner request: confirmation and alert", in **Draft**:
     centred, alt "KARMICARE") with no header bar. Below it are three text blocks:
     1. the greeting and thank-you;
     2. "Your request" with everything the requester sent, on a primary-surface panel (Victor, 25
-       Oct): text-area background `#FFFBF6` (Surface/Primary Day, the site's cream), a 1 px
-       `#DDDBD9` edge and 20 px padding;
+       Oct):
+       - background `#FFFBF6` (Surface/Primary Day, the site's cream), a 1 px `#DDDBD9` edge,
+         20 px padding and rounded corners of 12 px (`--kc-shape-radius-md`, as on the site).
+       - It is an HTML block, because Klaviyo's text block has no corner radius. The source is
+         a table cell with inline styles; it is kept in the lane scratchpad as
+         `email/request-panel.html`.
+       - Classic Outlook for Windows shows the corners square; Gmail, Apple Mail and Outlook on
+         the web round them.
     3. the company line and a small grey unsubscribe line (`{% unsubscribe %}`).
 
     White background, text and links `#222222`, font Helvetica.
