@@ -181,8 +181,13 @@
    2. Plan cards (Loop widget)
    ============================================================ */
 
+/* Loop clips the container (overflow: hidden), which cut off the top of the
+   first plan's Care Credit popover where it opens above the card (Victor,
+   25 Oct). Clip sideways only, so popovers can rise above the cards. */
 .kc-buybox .loop-subscription-container {
   margin-top: var(--kc-responsive-spacing-layout-comfortable);
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* Loop dashboard: margin 10px 0 15px !important on the fieldset */
