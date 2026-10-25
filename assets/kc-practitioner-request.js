@@ -1,11 +1,12 @@
 /* kc-practitioner-request.js: the practitioner request form in the PDP FAQ
-   (snippets/kc-practitioner-request.liquid, R76; popup R76b).
+   (snippets/kc-practitioner-request.liquid, R76; popup R76b; fallback R76c).
 
    - Finds the trigger link in the answer text of the FAQ item that holds the form (href contains
      data-trigger-url, else text contains data-trigger-text) and swaps it for a button with the same
      content. The form panel moves into a modal <dialog> on body (a dialog inside a closed <details>
-     would not render), which that button opens. No link found: the form stays inline, as without
-     JavaScript.
+     would not render), which that button opens. No link found, or no showModal(): the form stays
+     inline, as without JavaScript. If showModal() throws when it is called, the panel, the link
+     and the inline form come back in the FAQ item and the page is not locked.
    - The dialog, as the professionals quote panel: showModal, scrim, close button, Escape and a
      click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
      (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
@@ -64,12 +65,16 @@
     var link = findTrigger(root);
     var dialog = null;
     var button = null;
+    var home = null;
 
     if (link && typeof document.createElement('dialog').showModal === 'function') {
       button = document.createElement('button');
       button.type = 'button';
       button.className = 'kc-pr-trigger';
       button.innerHTML = link.innerHTML;
+      /* marks the panel's place in the FAQ item, for the inline fallback */
+      home = document.createComment('kc-practitioner-request');
+      root.parentNode.insertBefore(home, root);
       dialog = buildDialog(root, stateName, afterClose);
       button.setAttribute('aria-haspopup', 'dialog');
       button.setAttribute('aria-controls', dialog.id);
@@ -77,34 +82,54 @@
       button.addEventListener('click', function () {
         show(null);
       });
+      dialog.addEventListener('close', afterClose);
     }
 
-    /* Opens the dialog (or, inline, scrolls to the form) and focuses the target: the thank-you or
-       the alert after a reload, else the form title */
+    /* Opens the dialog and focuses the target: the thank-you or the alert after a reload, else the
+       form title. The page is locked only once showModal() has worked. If it throws, the form goes
+       back inline into the FAQ item, as without JavaScript. An open dialog is not opened twice. */
     function show(target) {
-      if (!dialog) {
-        if (target) reveal(target);
-        return;
+      if (dialog && !dialog.open) {
+        try {
+          dialog.showModal();
+        } catch (error) {
+          backInline();
+        }
       }
-      document.body.classList.add('overflow-hidden');
-      dialog.scrollTop = 0;
-      if (!dialog.open) dialog.showModal();
       var focus = target || root.querySelector('.kc-pr__title') || form.querySelector('input:not([type=hidden])');
       if (focus && !focus.hasAttribute('tabindex') && !/^(INPUT|TEXTAREA|BUTTON|A)$/.test(focus.tagName)) {
         focus.setAttribute('tabindex', '-1');
       }
+      if (!dialog) {
+        reveal(focus);
+        return;
+      }
+      document.body.classList.add('overflow-hidden');
+      dialog.scrollTop = 0;
       if (focus) focus.focus();
+    }
+
+    /* The inline form of R76: the panel back in its place under the answer, the original link
+       back, the dialog gone, the item open */
+    function backInline() {
+      home.parentNode.insertBefore(root, home);
+      home.remove();
+      button.replaceWith(link);
+      dialog.removeEventListener('close', afterClose);
+      dialog.remove();
+      dialog = null;
+      button = null;
+      var item = root.closest('.kc-faq-item');
+      if (item) item.open = true;
     }
 
     /* The close button and the scrim call this at once; Escape reaches it through the close event,
        which the browser fires a task later */
     function afterClose() {
-      if (!document.body.classList.contains('overflow-hidden')) return;
+      if (!button || !document.body.classList.contains('overflow-hidden')) return;
       document.body.classList.remove('overflow-hidden');
       button.focus();
     }
-
-    if (dialog) dialog.addEventListener('close', afterClose);
 
     if (stateName === 'success') {
       store('clear');
@@ -139,7 +164,6 @@
           else if (!el.value) el.value = saved[key];
         });
       }
-      show(state);
     } else {
       store('clear');
     }
@@ -236,6 +260,9 @@
       });
       store('set', snapshot);
     });
+
+    /* last, so the checks above are in place whatever happens when the dialog opens */
+    if (stateName === 'error') show(state);
   }
 
   function reveal(el) {

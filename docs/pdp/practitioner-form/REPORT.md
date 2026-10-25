@@ -1,6 +1,55 @@
 # R76: practitioner request form in the kPNI FAQ item
 
-## R76b: the form opens in a popup (Victor, 25 Oct)
+## R76c: inline fallback when showModal() fails (Astra R76b B1)
+
+Blocker B1 (`docs/runtime-review/R76-PRACTITIONER-FORM-ASTRA.md`, R76b recheck): if
+`showModal()` threw, the form or the message disappeared (moved into a closed dialog) and the
+page stayed scroll-locked. On the error path it also stopped the setup before the field checks
+were attached. Only `assets/kc-practitioner-request.js` changed. Copy, fields, markup and CSS are
+unchanged.
+
+- `show()` calls `showModal()` inside `try` and adds `body.overflow-hidden` only after it
+  succeeded. A dialog that is already open is not opened again (the existing `!dialog.open`
+  guard), it only gets focus.
+- If `showModal()` throws, `backInline()` restores R76's inline form:
+  - the panel goes back to its place in the FAQ item, marked by a comment node when the dialog
+    was built;
+  - the original link replaces the button;
+  - the dialog and its close listener are removed;
+  - the item is opened.
+  Then the form title, the thank-you or the alert is focused and scrolled into view. Nothing was
+  locked, so nothing needs releasing.
+- After a reload with errors, the dialog now opens as the last step of setup, after every field
+  listener is attached. Whatever happens when it opens, the checks and the restored values are in
+  place.
+- No `showModal()` at all: as in R76b, no dialog is built and the form stays inline.
+
+### R76c checks
+
+The fixture gained `?modal=throw` and `?modal=missing`. An inline script replaces
+`HTMLDialogElement.prototype.showModal` before the deferred theme script runs: with a function
+that throws `InvalidStateError`, or with `undefined`. Uncaught errors are collected. The live
+page's cross-origin CDN scripts report only an anonymous "Script error.", so those are counted
+apart. An error from the theme script is same-origin and reports its message and file.
+
+| showModal | First open (click) | Reopen after success | Reopen after error |
+| --- | --- | --- | --- |
+| throws | pass: no uncaught error; no dialog left; page not locked; original `href="#"` link back, no button; panel inline after the answer in the open kPNI item; focus on the form title; a second click causes no error; the full validation suite passes inline | pass: thank-you inline in the open item, focused; not locked; link back | pass: alert inline, focused; values kept; email marked invalid with its message; `novalidate` set and an emptied name is blocked with its message (the checks are attached) |
+| missing | pass: no dialog, no button, link as is; inline form (visitor opens the item); full validation suite | pass: thank-you inline, focused, not locked | pass: alert inline, focused, values kept, checks attached |
+| works | pass: all R76b dialog checks, plus a second open while open keeps one modal and throws nothing | pass | pass |
+
+- **Where it ran:** 390 and 1440 Day for every cell; throws at 390 Night and 750 Night; missing at
+  750 Night.
+- **Real keys** at 390 with a working dialog are unchanged: Enter and Space open with focus on the
+  title, Tab and Shift+Tab wrap, Escape closes, focus returns, the scroll lock lifts.
+- **Negative control:** the R76b script (`0911f94`) with a throwing `showModal()` fails the same
+  checks in all three states, as Astra reported. There is an uncaught `InvalidStateError`, the
+  dialog is left behind, the page stays locked, and the form or message is not visible. On the
+  error state the checks are missing. So the fixture detects B1, and the fix removes it.
+- **Theme Check:** exit 0, 19 warnings (baseline), none in these files.
+- **N4** (physical touch, virtual keyboard, spoken output) is a verification limit of this setup and
+  stays open as Astra noted.
+
 
 "The practitioner capture form needs to come in a popup, not inline." Built on a3e8789 (merge of
 `karmicare/soft-launch` a8406f5, where R76 landed). Copy, fields and settings are unchanged. The
