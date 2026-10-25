@@ -41,16 +41,31 @@ Flow `UAY2YB`, "Practitioner request: confirmation and alert", in **Draft**:
   - subject "Request received", preview text "Thank you. We reply by email to the address you gave.";
   - from `KARMICARE <we@karmicare.com>`, reply-to `victor@karmicare.com`;
   - Smart Sending off, UTM off, transactional not applied for yet;
-  - template: Klaviyo's blank drag-and-drop template, with its default footer.
+  - template: plain. The KARMICARE logo from the Klaviyo image library sits on top (160 px,
+    centred, alt "KARMICARE") with no header bar. Below it is one text block with the §4 body,
+    then a small grey unsubscribe line (`{% unsubscribe %}`). White background, text and links
+    `#222222`, font Helvetica.
+  - The default template's purple header bar, white body text, social icons and grey footer
+    were removed.
+  - Preview with the test event renders every field: the empty phone is skipped, and pack and
+    samples join with "and".
+- **Internal alert #1** (`send-internal-alert`):
+  - to `victor@karmicare.com`, from `KARMICARE <we@karmicare.com>`;
+  - subject `Practitioner request from {{ event.name }} ({{ event.language }})`;
+  - message: the §4 alert fields.
+  - Klaviyo first emails each recipient an opt-in for internal alerts, which Victor confirms once.
 - **Left for Victor**:
-  - drag one Text block into the email and paste the §4 body (drag-and-drop does not work from browser automation);
-  - add the Internal alert;
   - approve the copy;
-  - apply for transactional status (§5).
+  - apply for transactional status (§5);
+  - then set the flow Live and delete the test profile.
 
-Template decision, Victor, 25 Oct: for now use something simple that already exists; the branded
-transactional template comes later with the marketing nurture work, and both transactional flows
-(withdrawal and practitioner) can move to it then.
+Template decision, Victor, 25 Oct:
+- For now, use something simple that already exists, with no branding except the logo on top.
+- Use the website's font. The body font is Proxima Nova, from the Adobe Fonts kit `kss0igj`, and
+  that kit is served only to the shop's own domains, so it cannot load in an inbox. The email
+  therefore uses Helvetica, the closest web-safe face.
+- The branded transactional template comes later, with the marketing nurture work. Both
+  transactional flows (withdrawal and practitioner) can move to it then.
 
 Steps:
 
