@@ -150,7 +150,33 @@
         "product_faq_block": {
           "type": "product_faq",
           "settings": {
-            "default_to_subscription": true
+            "default_to_subscription": true,
+            "request_trigger_text": "evidence pack",
+            "request_title": "Request the practitioner pack",
+            "request_intro": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+            "request_label_name": "Name",
+            "request_label_profession": "Profession and practice",
+            "request_help_profession": "For example kPNI therapist, practice name",
+            "request_label_email": "Email",
+            "request_label_phone": "Phone (optional)",
+            "request_legend_wants": "What would you like?",
+            "request_help_wants": "Choose one or both.",
+            "request_label_pack": "Evidence pack",
+            "request_label_samples": "Samples for my practice",
+            "request_label_address": "Practice address (needed for samples)",
+            "request_label_message": "Message (optional)",
+            "request_privacy_text": "We only process these details to answer your request. More in our [privacy].",
+            "request_privacy_link_label": "Privacy Policy",
+            "request_button": "Send request",
+            "request_error_name": "Please fill in your name.",
+            "request_error_profession": "Please fill in your profession and practice.",
+            "request_error_email": "Please fill in your email address.",
+            "request_error_email_format": "Please enter a valid email address.",
+            "request_error_wants": "Choose the evidence pack, samples or both.",
+            "request_error_address": "Please fill in the practice address for the samples.",
+            "request_error_generic": "Your request was not sent. Please check the details below and try again.",
+            "request_success_title": "Request received",
+            "request_success_text": "Thank you. We reply by email to the address you gave."
           }
         },
         "mission_card_block": {
@@ -164,7 +190,7 @@
             "default_to_subscription": true,
             "header_text": "More than two formulas",
             "body_text": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-            "footer_text": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+            "footer_text": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
             "background_color_day": "#f2f8ff",
             "background_color_night": "#191f38",
             "header_color_day": "#7fb9ff",
@@ -214,9 +240,6 @@
             "title_rhythm": "",
             "title_year": "",
             "title_once": "",
-            "price_rhythm": "",
-            "price_year": "",
-            "price_once": "",
             "credit": "",
             "credit_checkup": "",
             "credit_info": "",
@@ -574,7 +597,7 @@
             "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5320817/",
             "logo": "shopify://shop_images/Logo_1.png",
             "image": "shopify://shop_images/kc-research-xylitol-specimen-1122x1402-v1.jpg",
-            "image_badge": ""
+            "image_badge": "XYLITOL CRYSTALS"
           }
         },
         "card_Hi7YUD": {
@@ -591,7 +614,7 @@
             "link_url": "https://doi.org/10.1007/s00784-017-2113-3",
             "logo": "shopify://shop_images/Logo_2.png",
             "image": "shopify://shop_images/kc-research-nhap-tubules-2000x2400-v1.jpg",
-            "image_badge": ""
+            "image_badge": "DENTINE TUBULES"
           }
         },
         "card_JeERX6": {
@@ -608,7 +631,7 @@
             "link_url": "https://doi.org/10.1111/jop.12845",
             "logo": "shopify://shop_images/Logo_3.png",
             "image": "shopify://shop_images/kc-research-sls-mucosa-2000x2400-v1.jpg",
-            "image_badge": ""
+            "image_badge": "ORAL MUCOSA"
           }
         }
       },
@@ -707,7 +730,7 @@
         "receipt_column_label": "Received",
         "total_label": "Up to",
         "total": "€110.80",
-        "fine_print": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+        "fine_print": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
         "terms_link": "shopify://pages/terms-and-conditions-1",
         "terms_link_label": "Terms, clauses 10 and 11",
         "surface": "page",
