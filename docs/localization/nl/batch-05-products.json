@@ -2,12 +2,13 @@
  "lang": "nl",
  "batch": "batch-05-products",
  "source": "docs/source-copy/batches/batch-05-products.json",
- "source_digest": "957142a8cbebcd9e96afcf5508a1d3056f804234",
+ "source_digest": "e5164dca3745c2b94f13b29668c50df58d4754f3",
  "source_entries": 103,
  "counts": {
-  "pending-claim-review": 25,
+  "pending-claim-review": 19,
   "translated": 40,
-  "admin": 38
+  "held": 14,
+  "admin": 30
  },
  "fit_risk": [],
  "status_legend": {
@@ -223,12 +224,10 @@
    "key_path": "seo.title",
    "en": "Karmicare Complete Hygiene Kit – KARMICARE",
    "en_sha1": "2b5a70e4e34c23a25453f29db060047fa696429d",
-   "nl": "Karmicare compleet hygiënepakket – KARMICARE",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Karmicare compleet hygiënepakket – KARMICARE"
   },
   {
    "id": "admin:product:complete-hygiene-kit:seo.description",
@@ -237,13 +236,10 @@
    "key_path": "seo.description",
    "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss",
    "en_sha1": "ea8a3c780636756e532ad6f2949fd5676412f0c1",
-   "nl": "Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field; retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss"
   },
   {
    "id": "admin:app:judge-me:preview_badge.stars",
@@ -280,12 +276,10 @@
    "key_path": "seo.title",
    "en": "KARMICARE Ultra Soft Morning Toothbrush",
    "en_sha1": "3d739abc9959367e2eb70ba19b1ee2665ee3be98",
-   "nl": "KARMICARE ultrazachte ochtendtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: KARMICARE ultrazachte ochtendtandenborstel"
   },
   {
    "id": "admin:product:morning-toothbrush:seo.description",
@@ -294,12 +288,10 @@
    "key_path": "seo.description",
    "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by ea",
    "en_sha1": "cba576cb9faaf5420d4b8e7a0d4ead12c813b0d8",
-   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt. De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "EN meta is the body cut mid-word ('by ea'); NL completes the sentence from the body. EN typos read as intended: 'dispurge' = disperse, 'of' = or, 'nurished' = nourished; R2 (review F6): 'onze tandpasta' → 'onze formule', as in the body (brand rule)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN meta is the body cut mid-word ('by ea'); NL completes the sentence from the body. EN typos read as intended: 'dispurge' = disperse, 'of' = or, 'nurished' = nourished; R2 (review F6): 'onze tandpasta' → 'onze formule', as in the body (brand rule); retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt. De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule."
   },
   {
    "id": "admin:product:evening-toothbrush:seo.title",
@@ -308,13 +300,10 @@
    "key_path": "seo.title",
    "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
    "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
-   "nl": "KARMICARE ultrazachte ontgiftende avondtandenborstel",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: KARMICARE ultrazachte ontgiftende avondtandenborstel"
   },
   {
    "id": "admin:product:evening-toothbrush:seo.description",
@@ -323,13 +312,10 @@
    "key_path": "seo.description",
    "en": "The bristles are extremely soft and coated with activated charcoal.The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.Head is not too big or too small. Perfectly fits 2 to 4 applicati",
    "en_sha1": "9f96b288b484715fd2f51172558f3cc26ffdb85d",
-   "nl": "De borstelharen zijn extreem zacht en bedekt met actieve kool. De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken. De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake of Asleep.",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "EN meta cut mid-word ('applicati'); NL completes the sentence. '2 to 4 applications' predates the 1-pump dose (products.md, 4 Aug)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN meta cut mid-word ('applicati'); NL completes the sentence. '2 to 4 applications' predates the 1-pump dose (products.md, 4 Aug); retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: De borstelharen zijn extreem zacht en bedekt met actieve kool. De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken. De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake of Asleep."
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:seo.title",
@@ -438,14 +424,14 @@
    "resource_type": "product",
    "file_or_handle": "asleep-evening-toothpaste-2-0",
    "key_path": "seo.title",
-   "en": "Karmicare Asleep Evening Toothpaste – KARMICARE",
-   "en_sha1": "3044149ef06e70ef32c5af63450bbe896aed24c3",
-   "nl": "Karmicare Asleep-avondtandpasta – KARMICARE",
+   "en": "Karmicare Asleep Evening Toothpaste",
+   "en_sha1": "e6ccd55ad08ff1c48d0d287914ddb0e91fd03309",
+   "nl": "Karmicare Asleep-avondtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: ' – KARMICARE' dropped with the EN (Admin search engine listing)"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:seo.description",
@@ -467,14 +453,14 @@
    "resource_type": "product",
    "file_or_handle": "awake-morning-toothpaste-2-0",
    "key_path": "seo.title",
-   "en": "Karmicare Awake Morning Toothpaste – KARMICARE",
-   "en_sha1": "35586ce5a7d7c92a3db37e20b4a770759731fb66",
-   "nl": "Karmicare Awake-ochtendtandpasta – KARMICARE",
+   "en": "Karmicare Awake Morning Toothpaste",
+   "en_sha1": "0319a56dfd6fa949e6de0442680e016c713d6f6c",
+   "nl": "Karmicare Awake-ochtendtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: ' – KARMICARE' dropped with the EN (Admin search engine listing)"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:seo.description",
@@ -498,12 +484,10 @@
    "key_path": "title",
    "en": "Complete Hygiene Kit",
    "en_sha1": "7c9bdc6a50f7375e296c9335847e262e8fda36ab",
-   "nl": "Compleet hygiënepakket",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "TERM: Kit → pakket (as welkomstpakket); Set → set"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "TERM: Kit → pakket (as welkomstpakket); Set → set; retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Compleet hygiënepakket"
   },
   {
    "id": "admin:product:complete-hygiene-kit:body_html#b001",
@@ -512,13 +496,10 @@
    "key_path": "body_html#b001",
    "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss<br><br><br>",
    "en_sha1": "e92ed45a2b78310dc7ca705e60b0fd01fcff0ae2",
-   "nl": "Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss<br><br><br>",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field; retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss<br><br><br>"
   },
   {
    "id": "admin:product:morning-toothbrush:title",
@@ -527,12 +508,10 @@
    "key_path": "title",
    "en": "Morning Toothbrush",
    "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
-   "nl": "Ochtendtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "TERM: Morning Toothbrush (product title) → Ochtendtandenborstel; the buy-box short form stays 'Ultrazachte ochtendborstel'"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "TERM: Morning Toothbrush (product title) → Ochtendtandenborstel; the buy-box short form stays 'Ultrazachte ochtendborstel'; retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Ochtendtandenborstel"
   },
   {
    "id": "admin:product:morning-toothbrush:body_html#b001",
@@ -541,13 +520,10 @@
    "key_path": "body_html#b001",
    "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
    "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
-   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier.",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "EN typos read as intended ('dispurge' = disperse, 'of' = or, 'nurished' = nourished). '2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN typos read as intended ('dispurge' = disperse, 'of' = or, 'nurished' = nourished). '2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule); retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier."
   },
   {
    "id": "admin:product:morning-toothbrush:media.27295901057206.alt",
@@ -556,12 +532,10 @@
    "key_path": "media.27295901057206.alt",
    "en": "Karmicare Morning Toothbrush",
    "en_sha1": "6e91bb9b99d34dc597da741c5d4f7007f1d631f1",
-   "nl": "Karmicare-ochtendtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Karmicare-ochtendtandenborstel"
   },
   {
    "id": "admin:product:evening-toothbrush:title",
@@ -570,12 +544,10 @@
    "key_path": "title",
    "en": "Evening Toothbrush",
    "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
-   "nl": "Avondtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "TERM: Evening Toothbrush (product title) → Avondtandenborstel"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "TERM: Evening Toothbrush (product title) → Avondtandenborstel; retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Avondtandenborstel"
   },
   {
    "id": "admin:product:evening-toothbrush:body_html#b001",
@@ -584,13 +556,10 @@
    "key_path": "body_html#b001",
    "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
    "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
-   "nl": "De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier.",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "'2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "'2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept); retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier."
   },
   {
    "id": "admin:product:evening-toothbrush:media.27295901221046.alt",
@@ -599,12 +568,10 @@
    "key_path": "media.27295901221046.alt",
    "en": "Karmicare Avond Tandenborstel",
    "en_sha1": "bd86191186eaff63d74b19524628df4560365a0e",
-   "nl": "Karmicare-avondtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "EN alt is already Dutch ('Karmicare Avond Tandenborstel'); the EN source should read 'Karmicare Evening Toothbrush'"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN alt is already Dutch ('Karmicare Avond Tandenborstel'); the EN source should read 'Karmicare Evening Toothbrush'; retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Karmicare-avondtandenborstel"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:title",

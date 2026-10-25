@@ -1,6 +1,6 @@
 {
  "batch": "batch-05-products",
- "digest": "957142a8cbebcd9e96afcf5508a1d3056f804234",
+ "digest": "e5164dca3745c2b94f13b29668c50df58d4754f3",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -277,7 +277,8 @@
    "sha1": "2b5a70e4e34c23a25453f29db060047fa696429d",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:complete-hygiene-kit:seo.description",
@@ -292,7 +293,8 @@
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
    "claim_status": "needs-review",
-   "claim_basis": "Floss-whitening wording ('Whitening Charcoal Floss'), the same claim as admin:product:whitening-charcoal-dental-floss:title (needs-review: whitening claim for floss, no source in products.md) (R2, review F5)."
+   "claim_basis": "Floss-whitening wording ('Whitening Charcoal Floss'), the same claim as admin:product:whitening-charcoal-dental-floss:title (needs-review: whitening claim for floss, no source in products.md) (R2, review F5).",
+   "retired": "retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:app:judge-me:preview_badge.stars",
@@ -331,7 +333,8 @@
    "sha1": "3d739abc9959367e2eb70ba19b1ee2665ee3be98",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:morning-toothbrush:seo.description",
@@ -344,7 +347,8 @@
    "sha1": "cba576cb9faaf5420d4b8e7a0d4ead12c813b0d8",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description",
+   "retired": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:evening-toothbrush:seo.title",
@@ -359,7 +363,8 @@
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
    "claim_status": "needs-review",
-   "claim_basis": "'Detoxifying' applied to a brush; products.md 'Detoxifies' covers the Asleep paste only."
+   "claim_basis": "'Detoxifying' applied to a brush; products.md 'Detoxifies' covers the Asleep paste only.",
+   "retired": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:evening-toothbrush:seo.description",
@@ -374,7 +379,8 @@
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
    "claim_status": "needs-review",
-   "claim_basis": "Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump)."
+   "claim_basis": "Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump).",
+   "retired": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:seo.title",
@@ -482,11 +488,13 @@
    "resource_type": "product",
    "file_or_handle": "asleep-evening-toothpaste-2-0",
    "key_path": "seo.title",
-   "en": "Karmicare Asleep Evening Toothpaste – KARMICARE",
-   "sha1": "3044149ef06e70ef32c5af63450bbe896aed24c3",
+   "en": "Karmicare Asleep Evening Toothpaste",
+   "sha1": "e6ccd55ad08ff1c48d0d287914ddb0e91fd03309",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>; EN updated 25 Oct: the Admin's search engine listing reads 'Karmicare Asleep Evening Toothpaste'; the ' – KARMICARE' came from the page <title>",
+   "old_en": "Karmicare Asleep Evening Toothpaste – KARMICARE",
+   "old_sha1": "3044149ef06e70ef32c5af63450bbe896aed24c3"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:seo.description",
@@ -511,11 +519,13 @@
    "resource_type": "product",
    "file_or_handle": "awake-morning-toothpaste-2-0",
    "key_path": "seo.title",
-   "en": "Karmicare Awake Morning Toothpaste – KARMICARE",
-   "sha1": "35586ce5a7d7c92a3db37e20b4a770759731fb66",
+   "en": "Karmicare Awake Morning Toothpaste",
+   "sha1": "0319a56dfd6fa949e6de0442680e016c713d6f6c",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>; EN updated 25 Oct: the Admin's search engine listing reads 'Karmicare Awake Morning Toothpaste'; the ' – KARMICARE' came from the page <title>",
+   "old_en": "Karmicare Awake Morning Toothpaste – KARMICARE",
+   "old_sha1": "35586ce5a7d7c92a3db37e20b4a770759731fb66"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:seo.description",
@@ -544,7 +554,8 @@
    "sha1": "7c9bdc6a50f7375e296c9335847e262e8fda36ab",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/complete-hygiene-kit.js"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/complete-hygiene-kit.js",
+   "retired": "retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:complete-hygiene-kit:body_html#b001",
@@ -559,7 +570,8 @@
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/complete-hygiene-kit.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
    "claim_status": "needs-review",
-   "claim_basis": "Floss-whitening wording ('Whitening Charcoal Floss'), the same claim as admin:product:whitening-charcoal-dental-floss:title (needs-review: whitening claim for floss, no source in products.md) (R2, review F5)."
+   "claim_basis": "Floss-whitening wording ('Whitening Charcoal Floss'), the same claim as admin:product:whitening-charcoal-dental-floss:title (needs-review: whitening claim for floss, no source in products.md) (R2, review F5).",
+   "retired": "retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:morning-toothbrush:title",
@@ -572,7 +584,8 @@
    "sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush.js; LEGACY: older brush, replaced by morning-toothbrush-2-0 (the compare table still references it)"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush.js; LEGACY: older brush, replaced by morning-toothbrush-2-0 (the compare table still references it)",
+   "retired": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:morning-toothbrush:body_html#b001",
@@ -587,7 +600,8 @@
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush.js; LEGACY: older brush, replaced by morning-toothbrush-2-0 (the compare table still references it); description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
    "claim_status": "needs-review",
-   "claim_basis": "'2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump), as on the evening brushes (needs-review); the EN owner resolves the dose before release (R2, review F5)."
+   "claim_basis": "'2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump), as on the evening brushes (needs-review); the EN owner resolves the dose before release (R2, review F5).",
+   "retired": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:morning-toothbrush:media.27295901057206.alt",
@@ -600,7 +614,8 @@
    "sha1": "6e91bb9b99d34dc597da741c5d4f7007f1d631f1",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush.js; LEGACY: older brush, replaced by morning-toothbrush-2-0 (the compare table still references it); image alt"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush.js; LEGACY: older brush, replaced by morning-toothbrush-2-0 (the compare table still references it); image alt",
+   "retired": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:evening-toothbrush:title",
@@ -613,7 +628,8 @@
    "sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush.js; LEGACY: older brush, replaced by evening-toothbrush-2-0 (the compare table still references it)"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush.js; LEGACY: older brush, replaced by evening-toothbrush-2-0 (the compare table still references it)",
+   "retired": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:evening-toothbrush:body_html#b001",
@@ -628,7 +644,8 @@
    "never_translate": false,
    "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush.js; LEGACY: older brush, replaced by evening-toothbrush-2-0 (the compare table still references it); description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
    "claim_status": "needs-review",
-   "claim_basis": "Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump)."
+   "claim_basis": "Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump).",
+   "retired": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:evening-toothbrush:media.27295901221046.alt",
@@ -641,7 +658,8 @@
    "sha1": "bd86191186eaff63d74b19524628df4560365a0e",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush.js; LEGACY: older brush, replaced by evening-toothbrush-2-0 (the compare table still references it); image alt"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush.js; LEGACY: older brush, replaced by evening-toothbrush-2-0 (the compare table still references it); image alt",
+   "retired": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:title",
