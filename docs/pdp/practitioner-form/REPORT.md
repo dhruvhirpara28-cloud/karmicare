@@ -1,5 +1,165 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76c: inline fallback when showModal() fails (Astra R76b B1)
+
+Blocker B1 (`docs/runtime-review/R76-PRACTITIONER-FORM-ASTRA.md`, R76b recheck): if
+`showModal()` threw, the form or the message disappeared (moved into a closed dialog) and the
+page stayed scroll-locked. On the error path it also stopped the setup before the field checks
+were attached. Only `assets/kc-practitioner-request.js` changed. Copy, fields, markup and CSS are
+unchanged.
+
+- `show()` calls `showModal()` inside `try` and adds `body.overflow-hidden` only after it
+  succeeded. A dialog that is already open is not opened again (the existing `!dialog.open`
+  guard), it only gets focus.
+- If `showModal()` throws, `backInline()` restores R76's inline form:
+  - the panel goes back to its place in the FAQ item, marked by a comment node when the dialog
+    was built;
+  - the original link replaces the button;
+  - the dialog and its close listener are removed;
+  - the item is opened.
+  Then the form title, the thank-you or the alert is focused and scrolled into view. Nothing was
+  locked, so nothing needs releasing.
+- After a reload with errors, the dialog now opens as the last step of setup, after every field
+  listener is attached. Whatever happens when it opens, the checks and the restored values are in
+  place.
+- No `showModal()` at all: as in R76b, no dialog is built and the form stays inline.
+
+### R76c checks
+
+The fixture gained `?modal=throw` and `?modal=missing`. An inline script replaces
+`HTMLDialogElement.prototype.showModal` before the deferred theme script runs: with a function
+that throws `InvalidStateError`, or with `undefined`. Uncaught errors are collected. The live
+page's cross-origin CDN scripts report only an anonymous "Script error.", so those are counted
+apart. An error from the theme script is same-origin and reports its message and file.
+
+| showModal | First open (click) | Reopen after success | Reopen after error |
+| --- | --- | --- | --- |
+| throws | pass: no uncaught error; no dialog left; page not locked; original `href="#"` link back, no button; panel inline after the answer in the open kPNI item; focus on the form title; a second click causes no error; the full validation suite passes inline | pass: thank-you inline in the open item, focused; not locked; link back | pass: alert inline, focused; values kept; email marked invalid with its message; `novalidate` set and an emptied name is blocked with its message (the checks are attached) |
+| missing | pass: no dialog, no button, link as is; inline form (visitor opens the item); full validation suite | pass: thank-you inline, focused, not locked | pass: alert inline, focused, values kept, checks attached |
+| works | pass: all R76b dialog checks, plus a second open while open keeps one modal and throws nothing | pass | pass |
+
+- **Where it ran:** 390 and 1440 Day for every cell; throws at 390 Night and 750 Night; missing at
+  750 Night.
+- **Real keys** at 390 with a working dialog are unchanged: Enter and Space open with focus on the
+  title, Tab and Shift+Tab wrap, Escape closes, focus returns, the scroll lock lifts.
+- **Negative control:** the R76b script (`0911f94`) with a throwing `showModal()` fails the same
+  checks in all three states, as Astra reported. There is an uncaught `InvalidStateError`, the
+  dialog is left behind, the page stays locked, and the form or message is not visible. On the
+  error state the checks are missing. So the fixture detects B1, and the fix removes it.
+- **Theme Check:** exit 0, 19 warnings (baseline), none in these files.
+- **N4** (physical touch, virtual keyboard, spoken output) is a verification limit of this setup and
+  stays open as Astra noted.
+
+
+"The practitioner capture form needs to come in a popup, not inline." Built on a3e8789 (merge of
+`karmicare/soft-launch` a8406f5, where R76 landed). Copy, fields and settings are unchanged. The
+R76 notes below still hold, except where this section says otherwise.
+
+**How it works.** The pattern is the professionals quote panel's (`assets/trusted-professionals-quote-panel.js`):
+
+- native `<dialog>` + `showModal()`;
+- the page's scrim token `--kc-mapped-surface-overlay-scrim`;
+- `body.overflow-hidden` for the scroll lock;
+- the KC/Button close (40 × 40 on surface/accent, `kc-icon-close.svg`), labelled with the existing
+  locale key `accessibility.close` (Close / Sluiten / Fermer). That is why no new setting was needed.
+
+What the script does (`assets/kc-practitioner-request.js`):
+
+- builds the dialog on `body` and moves the form panel into it. A dialog inside a closed `<details>`
+  would not render.
+- swaps the link for a button with `aria-haspopup="dialog"` and `aria-controls` pointing to the
+  dialog. The dialog has `aria-labelledby` (the form title) and `aria-describedby` (the intro).
+  After a success they point to the thank-you title and text instead.
+- on open, focus goes to the form title (`tabindex="-1"`). On phones that also keeps the keyboard
+  from popping up before the visitor taps a field.
+- Tab and Shift+Tab wrap inside the dialog. Escape, the close button and a click on the scrim close
+  it. A press that starts in a field and ends outside it (a dragged text selection) does not.
+- on close, focus returns to the button and the scroll lock lifts. For the close button and the
+  scrim this happens at once; Escape goes through the browser's `close` event.
+- after the reload that follows a post, the FAQ item is already open behind (Liquid, as R76) and
+  the dialog opens again by itself:
+  - success: the thank-you (`role="status"`, announced) is focused;
+  - Shopify refused it: the alert is focused, the values are kept (from Shopify plus this tab's
+    sessionStorage, as R76).
+
+**Layout** (`assets/kc-practitioner-request.css`):
+
+- 750px and up: a centred panel, `min(560px, 100vw − 32px)` wide, up to `100dvh − 48px` tall,
+  scrolling inside, radius md, page surface.
+- under 750px: a full-width sheet from the bottom edge, radius on top. The form is taller than a
+  phone screen, so it fills the full height. The short thank-you stays a small sheet over the scrim
+  instead of a mostly empty screen.
+- the close button sits on a zero-height sticky bar beside the title, so it floats top right and
+  stays in reach while the panel scrolls.
+- fields keep the R76 styling. Inside the popup the thank-you drops its box, since the panel is
+  the box.
+- opening fades and rises 16px over 0.3s, only under `prefers-reduced-motion: no-preference`.
+  Closing has no animation.
+
+**Without JavaScript** nothing changes from R76: the form shows inline under the answer and the link
+stays `href="#"`. The `<template>` holding the close button is inert, so it shows nothing. Browsers
+without `<dialog>` support also keep the inline form.
+
+**Files:**
+
+- `snippets/kc-practitioner-request.liquid`: the close-button `<template>`, plus ids on the intro
+  and the thank-you title and text.
+- `assets/kc-practitioner-request.js` and `assets/kc-practitioner-request.css`: the dialog.
+- `snippets/product-faq.liquid` needed no change.
+
+**Removed by this change:**
+
+- the inline toggle in the script: `setOpen`, `aria-expanded` and the `kc-pr--js` class on the
+  trigger;
+- the CSS rule `.kc-pr[hidden]`. Nothing sets `hidden` on the panel any more.
+
+Proof: `git grep -n "aria-expanded\|kc-pr--js\|setOpen\|kc-pr\[hidden\]" -- sections snippets layout templates config assets`
+finds only `snippets/sticky-cart-block.liquid`'s own `setOpen` and other components'
+`aria-expanded`. Nothing in the practitioner snippet, CSS or JS, or in `product-faq.liquid`.
+
+### R76b checks
+
+Same fixture as R76, updated: `t` and `inline_asset_content` are stubbed, so the close label and
+icon render. Every variant ran in Day and Night at 390, 750 and 1440.
+
+| Check | Result |
+| --- | --- |
+| Trigger: `aria-haspopup="dialog"`, `aria-controls` → the dialog; starts shut, form not inline | pass |
+| Click opens a modal dialog (`:modal`), focus on the title, scroll locked, labelledby/describedby targets exist, close button labelled | pass |
+| Close button: closes, focus back on the trigger, scroll unlocked | pass |
+| Scrim click closes (750 and 1440); a click on the panel padding or a drag out of a field keeps it open; the 390 form fills the screen, so there is no scrim to click | pass |
+| Size: centred, ≤ 560px, inside the viewport (750, 1440); 390: full width on the bottom edge, full height for the form, content height for the thank-you | pass |
+| Close button still visible and on top when the panel is scrolled to the end | pass |
+| Validation, samples → address, valid Send (all R76 checks) inside the dialog | pass |
+| Success reload: item open behind, dialog open, thank-you focused, labelledby the thank-you title | pass |
+| Error reload: item open behind, dialog open, alert focused, values kept, email message next to the field | pass |
+| No-JS: no dialog, link `href="#"`, form inline, native `required` | pass |
+| No element wider than the panel, no horizontal scroll, EN/NL/FR | pass |
+| Contrast Day/Night (close button included) | AA pass |
+| Real keys: see below | pass |
+
+Real keys (`orca keypress` at 1440, focus started on the trigger), with focus and state after
+each key:
+
+| Key | Focus | Dialog | Page scroll |
+| --- | --- | --- | --- |
+| Enter | form title | open | locked |
+| Tab, Tab | name, then profession | open | locked |
+| Escape | trigger | shut | free |
+| Space | form title | open | locked |
+| Shift+Tab | close button | open | locked |
+| Shift+Tab | Send (wrapped to the end) | open | locked |
+| Tab | close button (wrapped to the start) | open | locked |
+| Tab | name | open | locked |
+| Escape | trigger | shut | free |
+
+As in R76, `:focus-visible` is not observable because the Orca window has no OS focus. The rings
+are in the CSS. The matrix ran 24 variant × mode × width runs, plus NL/FR at 390 and FR Night at
+750: all pass. Theme Check: exit 0, 19 warnings (baseline), none in these files.
+
+The fixture finishes CSS animations before measuring and screenshotting. The Orca tab
+renders no frames between screenshots, so the open animation would otherwise sit on its first frame.
+
 Victor, 24 Oct: "the Practitioner evidence pack and samples available → inside the kpni accordion
 needs a form capture … now it can sent a request straight to victor@karmicare.com".
 

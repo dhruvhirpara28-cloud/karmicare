@@ -1,9 +1,11 @@
 {%- comment -%}
-  Practitioner request form (R76): the evidence pack and samples request inside the kPNI FAQ item.
-  snippets/product-faq.liquid renders it once, inside the FAQ item whose answer holds the trigger
-  link, and opens that item after a post. assets/kc-practitioner-request.js turns the link into a
-  button that shows and hides this form, and checks the fields before Shopify takes the post.
-  Without JavaScript the form shows under the answer and the link stays as it is.
+  Practitioner request form (R76, popup R76b): the evidence pack and samples request of the kPNI
+  FAQ item. snippets/product-faq.liquid renders it once, inside the FAQ item whose answer holds the
+  trigger link, and opens that item after a post. assets/kc-practitioner-request.js moves this
+  panel into a modal <dialog> (the close button comes from the <template> below), turns the link
+  into the button that opens it, reopens it after a post with the thank-you or the errors, and
+  checks the fields before Shopify takes the post. Without JavaScript the form shows under the
+  answer and the link stays as it is.
 
   The post is Shopify's own contact form, as on the withdrawal page: it goes to the store's contact
   email (Settings > General > Store details). The inbox keys are fixed English words, so every
@@ -38,16 +40,21 @@
   data-trigger-url="{{ trigger_url | escape }}"
   data-trigger-text="{{ trigger_text | escape }}"
 >
+  <template data-kc-pr-dialog-close>
+    <button type="button" class="kc-pr-dialog__close" data-kc-pr-close aria-label="{{ 'accessibility.close' | t | escape }}">
+      {{- 'kc-icon-close.svg' | inline_asset_content -}}
+    </button>
+  </template>
   {%- form 'contact', id: 'KcPractitionerRequest', class: 'kc-pr__form', data-kc-pr-form: 'true' -%}
     {%- if form.posted_successfully? -%}
       <div class="kc-pr__success" role="status" aria-live="polite" tabindex="-1" data-kc-pr-state="success">
-        <p class="kc-pr__success-title">{{ s.request_success_title | escape }}</p>
-        <p class="kc-pr__success-text" data-kc-pr-live>{{ s.request_success_text | escape }}</p>
+        <p class="kc-pr__success-title" id="KcPr-success-title">{{ s.request_success_title | escape }}</p>
+        <p class="kc-pr__success-text" id="KcPr-success-text" data-kc-pr-live>{{ s.request_success_text | escape }}</p>
       </div>
     {%- else -%}
       <p class="kc-pr__title" id="KcPr-title">{{ s.request_title | escape }}</p>
       {%- if s.request_intro != blank -%}
-        <p class="kc-pr__intro">{{ s.request_intro | escape }}</p>
+        <p class="kc-pr__intro" id="KcPr-intro">{{ s.request_intro | escape }}</p>
       {%- endif -%}
 
       {%- if form.errors -%}
