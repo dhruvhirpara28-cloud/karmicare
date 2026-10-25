@@ -1,6 +1,6 @@
 {
  "batch": "batch-04-legal",
- "digest": "25d0f0553a6dd9314e8d5edde47f8b3ef13ef264",
+ "digest": "410637613fa88bed1db45ce446d2f0fd60be8907",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -2524,7 +2524,8 @@
    "sha1": "12f419f07b5b66f06c143feb1a40290934ed922b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:new-consumer-rights:title"
   },
   {
    "id": "admin:page:privacy-policy:seo.title",
@@ -2537,7 +2538,8 @@
    "sha1": "c9265b9ad7b3c4d605497a7f057d7156f3673fdb",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:privacy-policy:title"
   },
   {
    "id": "admin:page:terms-and-conditions-1:body_html#b001",
@@ -2564,7 +2566,8 @@
    "sha1": "f1b7a0098c167e08e3537071cbcf87511d82e38b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:terms-and-conditions-1:title"
   },
   {
    "id": "admin:page:consumer-rights:title",
@@ -15030,6 +15033,48 @@
    "setting_type": "text",
    "section_type": "legal-toc-section",
    "rendered": true
+  },
+  {
+   "id": "admin:page:terms-and-conditions-1:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/terms-and-conditions-1",
+   "resource_type": "page",
+   "file_or_handle": "terms-and-conditions-1",
+   "key_path": "title",
+   "en": "New Terms and Conditions",
+   "sha1": "c2ae06318f3066d33edfbfa4f036e788f065adb0",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row",
+   "legal": true
+  },
+  {
+   "id": "admin:page:new-consumer-rights:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/new-consumer-rights",
+   "resource_type": "page",
+   "file_or_handle": "new-consumer-rights",
+   "key_path": "title",
+   "en": "New Consumer Rights",
+   "sha1": "62b7e69d30b42fc5bf9d983a512e78b036e19965",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row",
+   "legal": true
+  },
+  {
+   "id": "admin:page:privacy-policy:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/privacy-policy",
+   "resource_type": "page",
+   "file_or_handle": "privacy-policy",
+   "key_path": "title",
+   "en": "New Privacy Policy",
+   "sha1": "e9a1abe2d7afd711c654d57c551678d5ce5d1e47",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row",
+   "legal": true
   }
  ]
 }

@@ -16,7 +16,7 @@
  },
  "flag_counts": {
   "pending-claim-review": 1,
-  "legal-review": 5,
+  "legal-review": 7,
   "wording-adapted": 1
  },
  "entries": [
@@ -616,7 +616,9 @@
    "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
    "fr": null,
    "status": "held",
-   "flags": [],
+   "flags": [
+    "legal-review"
+   ],
    "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct; retired 25 Oct: the label is a schema default the live footer-group never stores, so registration cannot reach it; the footer now falls back to the locale key kc.footer.legal_guarantee (global-footer lane, landing desk brief msg_69df45814299; Victor 'ja codefix voor labels'), so this row leaves the registration; was translated: Vos droits à la garantie légale",
    "source_status": "approved"
   },
@@ -629,7 +631,9 @@
    "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
    "fr": null,
    "status": "held",
-   "flags": [],
+   "flags": [
+    "legal-review"
+   ],
    "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct; retired 25 Oct: the label is a schema default the live footer-group never stores, so registration cannot reach it; the footer now falls back to the locale key kc.footer.legal_withdrawal (global-footer lane, landing desk brief msg_69df45814299; Victor 'ja codefix voor labels'), so this row leaves the registration; was translated: Renoncer au contrat ici",
    "source_status": "approved"
   },
