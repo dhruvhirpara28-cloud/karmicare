@@ -616,12 +616,13 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-default-body);
 }
 
+/* The body-lg deck in the muted body colour, like the other descriptions under an h2 (Victor, 25 Oct) */
 .plan-compare--kc .pc-sub {
   font-family: var(--kc-font-role-backbone);
-  font-weight: 500;
-  font-size: var(--kc-responsive-body-md-text-size);
-  line-height: var(--kc-responsive-body-md-line-height);
-  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
 }
 
 .plan-compare--kc .pc-sub p,
