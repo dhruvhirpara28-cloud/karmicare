@@ -152,6 +152,8 @@
           "type": "product_faq",
           "settings": {
             "default_to_subscription": true,
+            "request_enabled": true,
+            "request_trigger_url": "mailto:victor@karmicare.com",
             "request_trigger_text": "evidence pack",
             "request_klaviyo_company_id": "XfYq2r",
             "request_klaviyo_metric": "Practitioner Request Submitted",
@@ -559,6 +561,35 @@
         "padding_bottom_mobile": 48
       }
     },
+    "kc_review_widget_NUEtim": {
+      "type": "kc-review-widget",
+      "blocks": {
+        "judge_me_reviews_review_widget_FYQUMG": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_FYQUMG"
+      ],
+      "name": "Judge.me Reviews",
+      "settings": {
+        "surface": "transition",
+        "subheading": "Customer experience",
+        "heading": "What they noticed, <strong>and their dentist did too</strong>",
+        "heading_bold_opacity": 70,
+        "include_margins": true,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
     "research_behind_system_EkjATL": {
       "type": "research-behind-system",
       "blocks": {
@@ -659,6 +690,7 @@
       "settings": {
         "subheading": "CLINICALLY BACKED ORAL CARE",
         "heading": "The research <em>behind the system</em>",
+        "cards": [],
         "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
         "button_label": "Explore the full evidence base",
         "button_link": "",
@@ -870,6 +902,7 @@
     "trusted_professionals_HAqYth",
     "how_it_works_steps_aAgVmF",
     "comparison_table_r8CDbT",
+    "kc_review_widget_NUEtim",
     "research_behind_system_EkjATL",
     "care_comes_back",
     "product_compare_plans_gz9xxx",

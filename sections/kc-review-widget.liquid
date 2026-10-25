@@ -1,0 +1,178 @@
+{{ 'kc-review-widget.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+
+  {%- if section.settings.heading_bold_opacity < 100 -%}
+    .section-{{ section.id }} .kc-review-section__header h2 strong,
+    .section-{{ section.id }} .kc-review-section__header h2 b {
+      opacity: {{ section.settings.heading_bold_opacity | divided_by: 100.0 }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div
+  class="kc-review-section section-{{ section.id }} kc-surface{% if section.settings.include_margins %} page-width{% endif %}"
+  data-kc-surface="{{ section.settings.surface }}"
+>
+  {%- if section.settings.subheading != blank or section.settings.heading != blank -%}
+    <div class="kc-review-section__header center">
+      {%- if section.settings.subheading != blank -%}
+        <span class="kc-caption-subheading subtitle-item">{{ section.settings.subheading }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="kc-review-section__content">
+    {%- liquid
+      assign has_app_block = false
+      for block in section.blocks
+        if block.type == '@app'
+          assign has_app_block = true
+          break
+        endif
+      endfor
+    -%}
+
+    {%- for block in section.blocks -%}
+      {% render block %}
+    {%- endfor -%}
+
+    {%- unless has_app_block -%}
+      <div
+        id="judgeme_product_reviews"
+        class="jdgm-widget jdgm-review-widget"
+        data-product-title="{{ product.title | escape }}"
+        data-id="{{ product.id }}"
+      >
+        {{ product.metafields.judgeme.widget }}
+      </div>
+    {%- endunless -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Judge.me Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "page",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one. A hold that follows the other colour is shown as a transition and flagged here."
+    },
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "REVIEWS"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What our members <strong>say about their care</strong>"
+    },
+    {
+      "type": "range",
+      "id": "heading_bold_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Heading Bold Text Opacity",
+      "info": "The bold part is the second heading line in the KC text/default/body colour. 100% keeps that colour as designed; lower values fade it further.",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "include_margins",
+      "default": true,
+      "label": "Include margins"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Judge.me Reviews"
+    }
+  ]
+}
+{% endschema %}
