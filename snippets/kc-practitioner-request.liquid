@@ -9,7 +9,9 @@
 
   The post is Shopify's own contact form, as on the withdrawal page: it goes to the store's contact
   email (Settings > General > Store details). The inbox keys are fixed English words, so every
-  language arrives the same way; contact[Language] says which page it came from.
+  language arrives the same way; contact[Language] says which page it came from. With the Klaviyo
+  key setting filled, the script also sends one event to Klaviyo once Shopify has accepted the post;
+  Klaviyo's flow emails the practitioner a confirmation and the team an alert, from karmicare.com.
 
   Accepts:
   - s: the product_faq block settings (every visible string is a setting)
@@ -39,6 +41,8 @@
   data-kc-pr
   data-trigger-url="{{ trigger_url | escape }}"
   data-trigger-text="{{ trigger_text | escape }}"
+  data-klaviyo-company="{{ s.request_klaviyo_company_id | strip | escape }}"
+  data-klaviyo-metric="{{ s.request_klaviyo_metric | strip | escape }}"
 >
   <template data-kc-pr-dialog-close>
     <button type="button" class="kc-pr-dialog__close" data-kc-pr-close aria-label="{{ 'accessibility.close' | t | escape }}">
@@ -90,23 +94,64 @@
         <p class="kc-pr__error" id="KcPr-name-error" hidden></p>
       </div>
 
+      {%- comment -%}
+        The posted values are fixed English words, so every language arrives the same way in the
+        inbox and in Klaviyo; the labels are settings. "Other" shows a text field for the profession.
+      {%- endcomment -%}
+      {%- liquid
+        assign profession_values = 'Dentist|Dental hygienist|kPNI therapist|Orthomolecular or naturopathic practitioner|General practitioner|Pharmacist|Other' | split: '|'
+        assign profession_labels = s.request_profession_dentist | append: '|' | append: s.request_profession_hygienist | append: '|' | append: s.request_profession_kpni | append: '|' | append: s.request_profession_natural | append: '|' | append: s.request_profession_gp | append: '|' | append: s.request_profession_pharmacist | append: '|' | append: s.request_profession_other | split: '|'
+      -%}
+      <fieldset
+        class="kc-pr__field kc-pr__choices"
+        aria-describedby="KcPr-profession-error"
+        data-kc-pr-group="profession"
+        data-error-required="{{ s.request_error_profession_choice | escape }}"
+      >
+        <legend class="kc-pr__label">{{ s.request_legend_profession | escape }}</legend>
+        {%- for value in profession_values -%}
+          <label class="kc-pr__check" for="KcPr-profession-{{ forloop.index }}">
+            <input
+              type="radio"
+              id="KcPr-profession-{{ forloop.index }}"
+              name="contact[Profession]"
+              value="{{ value | escape }}"
+              required
+              data-kc-pr-profession
+            >
+            <span>{{ profession_labels[forloop.index0] | escape }}</span>
+          </label>
+        {%- endfor -%}
+        <div class="kc-pr__sub" data-kc-pr-other>
+          <label class="kc-pr__label" for="KcPr-profession-other">{{ s.request_label_profession_other | escape }}</label>
+          <input
+            class="kc-pr__input"
+            type="text"
+            id="KcPr-profession-other"
+            name="contact[Profession (other)]"
+            aria-describedby="KcPr-profession-other-error"
+            data-kc-pr-field="profession_other"
+            data-error-required="{{ s.request_error_profession_other | escape }}"
+          >
+          <p class="kc-pr__error" id="KcPr-profession-other-error" hidden></p>
+        </div>
+        <p class="kc-pr__error" id="KcPr-profession-error" hidden></p>
+      </fieldset>
+
       <div class="kc-pr__field">
-        <label class="kc-pr__label" for="KcPr-profession">{{ s.request_label_profession | escape }}</label>
-        {%- if s.request_help_profession != blank -%}
-          <p class="kc-pr__help" id="KcPr-profession-help">{{ s.request_help_profession | escape }}</p>
-        {%- endif -%}
+        <label class="kc-pr__label" for="KcPr-practice">{{ s.request_label_practice | escape }}</label>
         <input
           class="kc-pr__input"
           type="text"
-          id="KcPr-profession"
-          name="contact[Profession and practice]"
+          id="KcPr-practice"
+          name="contact[Practice name]"
           autocomplete="organization"
           required
-          aria-describedby="KcPr-profession-help KcPr-profession-error"
-          data-kc-pr-field="profession"
-          data-error-required="{{ s.request_error_profession | escape }}"
+          aria-describedby="KcPr-practice-error"
+          data-kc-pr-field="practice"
+          data-error-required="{{ s.request_error_practice | escape }}"
         >
-        <p class="kc-pr__error" id="KcPr-profession-error" hidden></p>
+        <p class="kc-pr__error" id="KcPr-practice-error" hidden></p>
       </div>
 
       <div class="kc-pr__field">

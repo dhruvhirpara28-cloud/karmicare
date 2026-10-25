@@ -1,5 +1,153 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76f: the Klaviyo call is aborted after 8 s (Astra R76d B1)
+
+Blocker B1 (`docs/runtime-review/R76D-PRACTITIONER-KLAVIYO-ASTRA.md`): the Klaviyo fetch had
+`keepalive` but no bounded request. `assets/kc-practitioner-request.js` `sendEvent()` now follows
+`assets/kc-withdrawal.js`:
+- an `AbortController` aborts the call after 8,000 ms (`KLAVIYO_TIMEOUT`), and its signal goes to
+  `fetch` next to `keepalive`;
+- the timer is cleared as soon as the call settles, whether it is answered, refused or aborted;
+- on a refusal or abort there is no retry and no uncaught rejection. The sessionStorage snapshot
+  was already consumed before the call, and is cleared again;
+- the thank-you is shown and focused by the same synchronous setup as before and never waits
+  for the call.
+
+Also, Astra N3: the stale statements in this report (R76d, "no flow") and in KLAVIYO-FLOW §2
+("in every case") were corrected. N1 (privacy copy naming Klaviyo) stays with gate-legal; N2
+(data minimisation) is for when the emails are final.
+
+### R76f checks
+
+The fixture `fx.js` gained `?klaviyo=hang|reject`. The stub records the signal, the abort time,
+the 8-second timer and whether it is cleared, the state 100 ms after the call, and unhandled
+rejections (`scratchpad/fx/timeout.sh`, `results/r76f-timeout.txt`).
+
+| Case | Result |
+|---|---|
+| Hanging fetch | pass: 100 ms after the call, while it is still pending, the thank-you is shown in the open dialog and focused. The call has a signal and `keepalive`, is aborted after **8,002 ms**, and its timer is cleared. 0 unhandled rejections, 0 page errors, snapshot gone; afterwards close returns focus to the button and reopening works |
+| Refused fetch | pass: one call, timer cleared, 0 unhandled, 0 errors, snapshot gone, the page works |
+| Answered (202) | pass: one call, timer cleared, 0 errors |
+| Regression | pass: en-default Day 390, en-success Night 750, en-error Day 1440, en-nojs; Klaviyo cases 1–8 unchanged |
+
+Theme Check: exit 0, 19 baseline warnings.
+
+## R76e: profession as radio buttons, with Other
+
+Victor, 25 Oct: "make radiobuttons of the profession and add Other also". The combined free-text
+field "Profession and practice" becomes two fields:
+
+- **Profession** (required): seven radio buttons, Dentist, Dental hygienist, kPNI therapist,
+  Orthomolecular or naturopathic practitioner, General practitioner, Pharmacist, Other.
+  - With "Other", a text field "Your profession" shows and becomes required.
+  - Without JavaScript that field is always visible; the radios carry native `required`.
+- **Practice name** (required): its own text field.
+
+What is sent and stored:
+- **Posted values** are fixed English words (`contact[Profession]`), so every language arrives
+  the same way. `contact[Profession (other)]` and `contact[Practice name]` carry the two text
+  fields. The labels the visitor reads are settings.
+- **Klaviyo event**: gains `profession` (English value), `profession_other`, `profession_label`
+  (what the visitor read, for the confirmation) and `practice_name`.
+- **Klaviyo emails**: both flow emails were updated in Klaviyo. The confirmation shows
+  "Profession" and "Practice name"; the alert shows the English value with the Other text.
+- **After an error reload**, the chosen radio, the Other text and the practice name are
+  restored from the tab's snapshot.
+
+Settings (`product_faq` schema, EN values in both product templates):
+- **New**: `request_legend_profession`, seven `request_profession_*` labels,
+  `request_label_profession_other`, `request_label_practice`, `request_error_profession_choice`,
+  `request_error_profession_other`, `request_error_practice`.
+- **Removed**: `request_label_profession`, `request_help_profession` and
+  `request_error_profession`, from the schema and both templates. Cleanup proof:
+  `git grep -n -E 'request_label_profession[^_]|request_help_profession|request_error_profession[^_]|Profession and practice' -- ':!docs'`
+  finds nothing.
+- **Copy**: the option labels, "Your profession", "Practice name" and the three messages are new
+  EN copy (Victor's request; the option list is the one proposed to him on 25 Oct). NL/FR go
+  through source-copy.
+
+### R76e checks
+
+The fixture validation suite runs on the dialog, plus the no-JS page:
+- **All variants pass**: en-default at 390 and 1440, en-nojs, en-error and en-success.
+- **New profession checks**:
+  - the empty submit shows the profession and practice errors;
+  - with no radio chosen, focus goes to the first radio;
+  - "Other" shows its field and makes it required, and its empty text is blocked;
+  - picking another radio hides the field again;
+  - the posted value is English;
+  - the snapshot holds the value, the label and the practice;
+  - without JavaScript, `required` sits on the radios and the practice field, and the Other field
+    is visible.
+- **Klaviyo event and error-restore cases** (`results/r76e-klaviyo.txt`, fetch stubbed): pass.
+  - R76d cases 1–7 still pass, now with the new properties: `profession: "Dentist"`,
+    `profession_label: "Dentist"`, `practice_name` filled.
+  - Case 8, Other: `profession: "Other"`, with `profession_other` and `profession_label` both
+    `"Osteopath"`.
+  - Case 9, error reload: the Other radio is checked again, its field shows with "Osteopath", the
+    practice name is restored, and no event is sent.
+  - No page errors.
+- **Theme Check**: exit 0, 19 baseline warnings.
+
+## R76d: Klaviyo confirmation and team alert from karmicare.com
+
+Victor, 25 Oct: "we need this to be sent from karmicare domain, and the confirmation to the
+customer via Klaviyo". He chose three things: a Klaviyo alert to the team on top of Shopify's
+copy, the event only after Shopify accepted the post, and one test event to create the metric.
+Everything else (the event, the flow, the texts, the approval) is in
+`docs/pdp/practitioner-form/KLAVIYO-FLOW.md`.
+
+Facts, checked 25 Oct (read-only in Shopify admin, public DNS and Gmail):
+
+- **Sender email.** Shopify's Sender email is `info@karmicare.com`, so requests reach info@.
+  This answers the open point under "Where the requests go" below.
+- **Contact-form sender.** Contact-form mail arrives from `mailer@shopify.com`, whatever domain
+  authentication is set. Shopify sets that sender, so no setting can make it karmicare.com.
+- **Klaviyo sender.** Klaviyo already sends from `we@karmicare.com` over `send.karmicare.com`
+  (active).
+
+Theme change:
+
+- **`assets/kc-practitioner-request.js`:**
+  - On a valid Send, the sessionStorage snapshot now also holds the email, the language, the
+    page, the time and a UUID.
+  - On the thank-you reload, `sendEvent()` sends one event to Klaviyo's client endpoint and
+    clears the snapshot. It uses the same endpoint, revision and key as the withdrawal page.
+  - The profile gets the email only; everything else goes in event properties.
+  - Nothing is sent without a key, without a snapshot, or on the error reload.
+- **`sections/main-product.liquid`** (`product_faq` schema only): two new settings,
+  `request_klaviyo_company_id` and `request_klaviyo_metric`.
+- **`snippets/kc-practitioner-request.liquid`:** passes both settings as `data-klaviyo-*`
+  attributes.
+- **`templates/product.json` and `templates/product.subscription-item.json`:**
+  `request_klaviyo_company_id` = `XfYq2r` (the public key, already exposed by every Klaviyo
+  snippet) and the metric name.
+- **No change** to visible copy or fields. The thank-you text ("We reply by email to the address
+  you gave") promises no confirmation email, so it stays true while the flow waits for approval.
+
+Klaviyo: one test event (`victor+practitioner-test@karmicare.com`, unique_id
+`kc-pr-test-20261025-1`) answered `202` and created the metric `Practitioner Request Submitted`
+(`UaYZem`). At the time no flow existed, so no email went out. The same day the draft flow
+`UAY2YB` was built (KLAVIYO-FLOW §3); it is still in draft, so still nothing is sent.
+
+### R76d checks
+
+The fixture stubs every `klaviyo.com` fetch and records it, so nothing reaches Klaviyo
+(`scratchpad/fx/klaviyo.sh`, results in `results/r76d-klaviyo.txt`).
+
+| Case | Result |
+|---|---|
+| Valid Send | pass: no event at Send; the snapshot holds the email, language `en`, page, time and UUID |
+| Thank-you reload | pass: 1 call to `…/client/events/?company_id=XfYq2r`, revision `2026-10-15`, `keepalive`, profile `{email}` only, all properties as in KLAVIYO-FLOW §2, the UUID from Send; snapshot cleared |
+| Thank-you reloaded again | pass: no second call |
+| Thank-you without a snapshot | pass: no call |
+| Key empty (`en-success-nokey`) | pass: no call, snapshot cleared |
+| Error reload | pass: no call, snapshot used for the fields and cleared |
+| Samples not ticked | pass: `samples: false`, `practice_address` empty |
+| NL page | pass: `language: nl`, page `/nl/products/…` |
+
+No page errors in any case. Theme Check: exit 0, 19 baseline warnings.
+
 ## R76c: inline fallback when showModal() fails (Astra R76b B1)
 
 Blocker B1 (`docs/runtime-review/R76-PRACTITIONER-FORM-ASTRA.md`, R76b recheck): if
@@ -251,6 +399,8 @@ General → Store details**, shown as "Sender email" in the current admin (older
 "New customer message" with the fields above. `Type: Practitioner request: evidence pack / samples`
 tells it apart.
 
+- R76d (25 Oct): the address is `info@karmicare.com`, and the mail comes from
+  `mailer@shopify.com`. The Klaviyo alert of KLAVIYO-FLOW.md adds a copy from karmicare.com.
 - If that address is victor@karmicare.com, nothing to do.
 - If it is care@ (or another inbox), changing it also changes the From address of every order
   email. The lighter route is a Gmail filter on that inbox: messages containing "Practitioner

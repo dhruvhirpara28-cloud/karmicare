@@ -3310,6 +3310,18 @@
         },
         {
           "type": "text",
+          "id": "request_klaviyo_company_id",
+          "label": "Klaviyo public API key (company ID)",
+          "info": "Filled: after Shopify accepts a request, one event goes to Klaviyo, whose flow emails the practitioner a confirmation and the team an alert. Empty: Shopify's contact email only."
+        },
+        {
+          "type": "text",
+          "id": "request_klaviyo_metric",
+          "label": "Klaviyo metric name",
+          "default": "Practitioner Request Submitted"
+        },
+        {
+          "type": "text",
           "id": "request_title",
           "label": "Title",
           "default": "Request the practitioner pack"
@@ -3328,15 +3340,65 @@
         },
         {
           "type": "text",
-          "id": "request_label_profession",
-          "label": "Profession field",
-          "default": "Profession and practice"
+          "id": "request_legend_profession",
+          "label": "Profession question",
+          "default": "Profession"
         },
         {
           "type": "text",
-          "id": "request_help_profession",
-          "label": "Profession help",
-          "default": "For example kPNI therapist, practice name"
+          "id": "request_profession_dentist",
+          "label": "Profession: dentist",
+          "info": "The inbox and Klaviyo always receive the English value; these are the labels the visitor reads. Do not use |.",
+          "default": "Dentist"
+        },
+        {
+          "type": "text",
+          "id": "request_profession_hygienist",
+          "label": "Profession: dental hygienist",
+          "default": "Dental hygienist"
+        },
+        {
+          "type": "text",
+          "id": "request_profession_kpni",
+          "label": "Profession: kPNI therapist",
+          "default": "kPNI therapist"
+        },
+        {
+          "type": "text",
+          "id": "request_profession_natural",
+          "label": "Profession: orthomolecular or naturopathic",
+          "default": "Orthomolecular or naturopathic practitioner"
+        },
+        {
+          "type": "text",
+          "id": "request_profession_gp",
+          "label": "Profession: general practitioner",
+          "default": "General practitioner"
+        },
+        {
+          "type": "text",
+          "id": "request_profession_pharmacist",
+          "label": "Profession: pharmacist",
+          "default": "Pharmacist"
+        },
+        {
+          "type": "text",
+          "id": "request_profession_other",
+          "label": "Profession: other",
+          "default": "Other"
+        },
+        {
+          "type": "text",
+          "id": "request_label_profession_other",
+          "label": "Other profession field",
+          "info": "Shows when Other is chosen.",
+          "default": "Your profession"
+        },
+        {
+          "type": "text",
+          "id": "request_label_practice",
+          "label": "Practice name field",
+          "default": "Practice name"
         },
         {
           "type": "text",
@@ -3414,9 +3476,21 @@
         },
         {
           "type": "text",
-          "id": "request_error_profession",
-          "label": "Profession missing",
-          "default": "Please fill in your profession and practice."
+          "id": "request_error_profession_choice",
+          "label": "Profession not chosen",
+          "default": "Choose your profession."
+        },
+        {
+          "type": "text",
+          "id": "request_error_profession_other",
+          "label": "Other profession missing",
+          "default": "Please fill in your profession."
+        },
+        {
+          "type": "text",
+          "id": "request_error_practice",
+          "label": "Practice name missing",
+          "default": "Please fill in your practice name."
         },
         {
           "type": "text",
