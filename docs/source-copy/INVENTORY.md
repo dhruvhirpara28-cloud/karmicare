@@ -104,6 +104,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the practitioner request form (landings 58–59) adds 26 `product_faq_block` text settings `request_*` on each product template: `product.subscription-item:main/product_faq_block/request_*` in batch 02 and `product:main/product_faq_block/request_*` in batch 05 (`request_trigger_url` is a mailto, not copy). Their table rows follow at the next full regeneration;
   - the homepage SEO title is *KARMICARE - Biorhythmic Oral Care* live (was *… Oral Health*), still `admin-held`, `old_en` kept;
   - Leen Ponet's FR role title on the cards is released with *Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI* (Victor 24 and 25 Oct); the EN is unchanged.
+- **Updated 25 Oct (round 4)**: *Complete Hygiene Kit*, *Morning Toothbrush* and *Evening Toothbrush* (without 2.0) are Draft in the Admin (Victor: only the 2.0 products, the floss and the Awake & Asleep system stay sellable), so their 14 rows are `retired`; the SEO titles of Awake and Asleep toothpaste 2.0 lose the " – KARMICARE" that only the page `<title>` adds (`old_en` kept). NL/FR write postal addresses in their local form (`docs/localization/registration/ROUND4.md`); the EN is unchanged.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
@@ -113,7 +114,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 | `batch-02-pdp` | 524 | `fb09c0f8bbcf87c736751088cc518158ddf3d658` |
 | `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
 | `batch-04-legal` | 1009 | `25d0f0553a6dd9314e8d5edde47f8b3ef13ef264` |
-| `batch-05-products` | 103 | `957142a8cbebcd9e96afcf5508a1d3056f804234` |
+| `batch-05-products` | 103 | `e5164dca3745c2b94f13b29668c50df58d4754f3` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
@@ -2169,9 +2170,9 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 29 | `admin:product:evening-toothbrush-2-0:seo.description` | product | The bristles are extremely soft and coated with activated charcoal.The ultra thin, featherlight bri… | admin-held |  |
 | 30 | `admin:product:morning-toothbrush-2-0:seo.title` | product | KARMICARE Ultra Soft Morning Toothbrush | admin-held |  |
 | 31 | `admin:product:morning-toothbrush-2-0:seo.description` | product | The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.The ultra… | admin-held |  |
-| 32 | `admin:product:asleep-evening-toothpaste-2-0:seo.title` | product | Karmicare Asleep Evening Toothpaste – KARMICARE | admin-held |  |
+| 32 | `admin:product:asleep-evening-toothpaste-2-0:seo.title` | product | Karmicare Asleep Evening Toothpaste | admin-held |  |
 | 33 | `admin:product:asleep-evening-toothpaste-2-0:seo.description` | product | Something for your mind, your mouth and your soul. A toothpaste that helps you fall asleep at night… | admin-held |  |
-| 34 | `admin:product:awake-morning-toothpaste-2-0:seo.title` | product | Karmicare Awake Morning Toothpaste – KARMICARE | admin-held |  |
+| 34 | `admin:product:awake-morning-toothpaste-2-0:seo.title` | product | Karmicare Awake Morning Toothpaste | admin-held |  |
 | 35 | `admin:product:awake-morning-toothpaste-2-0:seo.description` | product | Something for your mind, your mouth and your soul. A toothpaste that helps you get up in the mornin… | admin-held |  |
 | 36 | `admin:product:complete-hygiene-kit:title` | product | Complete Hygiene Kit | admin-held |  |
 | 37 | `admin:product:complete-hygiene-kit:body_html#b001` | product | Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening To… | admin-held |  |
