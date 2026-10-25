@@ -322,11 +322,6 @@
   color: var(--kc-buybox-text);
 }
 
-/* The space after the amount in Loop's markup, plus this, gives the 8 px gap the row had */
-.kc-buybox .kc-return_care .kc-dynamic_price {
-  margin-inline-end: 0.25em;
-}
-
 .kc-buybox .kc-return_care .info-tip {
   position: absolute;
   top: var(--kc-responsive-spacing-layout-xs);
