@@ -268,7 +268,7 @@
   box-shadow: inset 0 0 0 1px var(--kc-mapped-border-status-error);
 }
 
-/* Evidence pack / samples */
+/* Profession radios, evidence pack / samples */
 .kc-pr__check {
   display: flex;
   gap: 10px;
@@ -292,6 +292,15 @@
 .kc-pr__check input:focus-visible {
   outline: 2px solid var(--kc-mapped-border-focus-strong);
   outline-offset: 2px;
+}
+
+/* The "Other" profession field, under its radio */
+.kc-pr__sub {
+  margin: 4px 0 0 30px;
+}
+
+.kc-pr__sub[hidden] {
+  display: none;
 }
 
 .kc-pr__choices[aria-invalid='true'] .kc-pr__check input {
