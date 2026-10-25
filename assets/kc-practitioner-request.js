@@ -11,8 +11,9 @@
      click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
      (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
      the button.
-   - Checks the fields before the post: name, profession, email, at least one of evidence pack and
-     samples, and the practice address when samples is ticked. Messages come from the settings.
+   - Checks the fields before the post: name, a profession (and its text when "Other" is chosen;
+     that field shows only then), practice name, email, at least one of evidence pack and samples,
+     and the practice address when samples is ticked. Messages come from the settings.
    - Shopify reloads the page after the post. The item is already open (Liquid); the dialog opens
      again with the thank-you (announced) or the alert, and focus goes there. On an error the fields
      Shopify does not give back are restored from this tab's sessionStorage, which is cleared again
@@ -28,7 +29,8 @@
 
   var STORE_KEY = 'kc-practitioner-request';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var RESTORED = ['profession', 'pack', 'samples', 'address', 'name', 'phone', 'body'];
+  var RESTORED = ['profession_other', 'practice', 'pack', 'samples', 'address', 'name', 'phone', 'body'];
+  var OTHER = 'Other';
   var KLAVIYO_EVENTS = 'https://a.klaviyo.com/client/events/';
   var KLAVIYO_REVISION = '2026-10-15';
   var KLAVIYO_METRIC = 'Practitioner Request Submitted';
@@ -162,6 +164,16 @@
       fields[el.getAttribute('data-kc-pr-field')] = el;
     });
     var group = form.querySelector('[data-kc-pr-group="wants"]');
+    var professionGroup = form.querySelector('[data-kc-pr-group="profession"]');
+    var professions = Array.prototype.slice.call(form.querySelectorAll('[data-kc-pr-profession]'));
+    var otherBox = form.querySelector('[data-kc-pr-other]');
+
+    function profession() {
+      var checked = professions.filter(function (el) {
+        return el.checked;
+      })[0];
+      return checked || null;
+    }
 
     if (stateName === 'error') {
       var saved = store('get');
@@ -172,6 +184,9 @@
           if (!el || !(key in saved)) return;
           if (el.type === 'checkbox') el.checked = !!saved[key];
           else if (!el.value) el.value = saved[key];
+        });
+        professions.forEach(function (el) {
+          el.checked = el.value === saved.profession;
         });
       }
     } else {
@@ -184,6 +199,17 @@
       fields.address.required = !!needed;
       fields.address.setAttribute('aria-required', needed ? 'true' : 'false');
       if (!needed) showError(fields.address, '');
+    }
+
+    /* The text field for another profession shows only with "Other" (without JavaScript it stays) */
+    function syncOther() {
+      var chosen = profession();
+      var needed = !!chosen && chosen.value === OTHER;
+      if (otherBox) otherBox.hidden = !needed;
+      if (!fields.profession_other) return;
+      fields.profession_other.required = needed;
+      fields.profession_other.setAttribute('aria-required', needed ? 'true' : 'false');
+      if (!needed) showError(fields.profession_other, '');
     }
 
     function errorFor(el) {
@@ -213,6 +239,7 @@
         return '';
       }
       if (key === 'address' && !(fields.samples && fields.samples.checked)) return '';
+      if (key === 'profession_other' && !(profession() && profession().value === OTHER)) return '';
       return value ? '' : el.getAttribute('data-error-required');
     }
 
@@ -221,13 +248,23 @@
       return ok ? '' : group.getAttribute('data-error-required');
     }
 
+    function checkProfession() {
+      if (!professionGroup || profession()) return '';
+      return professionGroup.getAttribute('data-error-required');
+    }
+
     function validate() {
       var firstBad = null;
-      ['name', 'profession', 'email'].forEach(function (key) {
+      function note(key) {
         var message = check(key);
         showError(fields[key], message);
         if (message && !firstBad) firstBad = fields[key];
-      });
+      }
+      note('name');
+      var professionMessage = checkProfession();
+      if (professionGroup) showError(professionGroup, professionMessage);
+      if (professionMessage && !firstBad) firstBad = professions[0];
+      ['profession_other', 'practice', 'email'].forEach(note);
       var groupMessage = checkGroup();
       showError(group, groupMessage);
       if (groupMessage && !firstBad) firstBad = fields.pack;
@@ -239,9 +276,16 @@
 
     if (fields.samples) fields.samples.addEventListener('change', syncAddress);
     syncAddress();
+    professions.forEach(function (el) {
+      el.addEventListener('change', function () {
+        syncOther();
+        if (professionGroup.getAttribute('aria-invalid') === 'true') showError(professionGroup, checkProfession());
+      });
+    });
+    syncOther();
 
     /* once a message shows, it updates as the visitor fixes the field */
-    ['name', 'profession', 'email', 'address'].forEach(function (key) {
+    ['name', 'profession_other', 'practice', 'email', 'address'].forEach(function (key) {
       var el = fields[key];
       if (!el) return;
       el.addEventListener('input', function () {
@@ -268,7 +312,10 @@
         if (!el) return;
         snapshot[key] = el.type === 'checkbox' ? el.checked : el.value;
       });
-      /* for the Klaviyo event on the thank-you reload */
+      var chosen = profession();
+      snapshot.profession = chosen ? chosen.value : '';
+      /* for the Klaviyo event on the thank-you reload: the profession as the visitor read it */
+      snapshot.profession_label = chosen ? chosen.parentNode.textContent.trim() : '';
       snapshot.email = fields.email ? fields.email.value.trim() : '';
       snapshot.language = hiddenValue(form, 'Language');
       snapshot.page = hiddenValue(form, 'Page');
@@ -308,6 +355,10 @@
           properties: {
             name: (saved.name || '').trim(),
             profession: saved.profession || '',
+            profession_other: saved.profession === OTHER ? (saved.profession_other || '').trim() : '',
+            profession_label:
+              saved.profession === OTHER ? (saved.profession_other || '').trim() : saved.profession_label || '',
+            practice_name: (saved.practice || '').trim(),
             email: saved.email,
             phone: saved.phone || '',
             evidence_pack: !!saved.pack,

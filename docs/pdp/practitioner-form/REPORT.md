@@ -1,5 +1,62 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76e: profession as radio buttons, with Other
+
+Victor, 25 Oct: "make radiobuttons of the profession and add Other also". The combined free-text
+field "Profession and practice" becomes two fields:
+
+- **Profession** (required): seven radio buttons, Dentist, Dental hygienist, kPNI therapist,
+  Orthomolecular or naturopathic practitioner, General practitioner, Pharmacist, Other.
+  - With "Other", a text field "Your profession" shows and becomes required.
+  - Without JavaScript that field is always visible; the radios carry native `required`.
+- **Practice name** (required): its own text field.
+
+What is sent and stored:
+- **Posted values** are fixed English words (`contact[Profession]`), so every language arrives
+  the same way. `contact[Profession (other)]` and `contact[Practice name]` carry the two text
+  fields. The labels the visitor reads are settings.
+- **Klaviyo event**: gains `profession` (English value), `profession_other`, `profession_label`
+  (what the visitor read, for the confirmation) and `practice_name`.
+- **Klaviyo emails**: both flow emails were updated in Klaviyo. The confirmation shows
+  "Profession" and "Practice name"; the alert shows the English value with the Other text.
+- **After an error reload**, the chosen radio, the Other text and the practice name are
+  restored from the tab's snapshot.
+
+Settings (`product_faq` schema, EN values in both product templates):
+- **New**: `request_legend_profession`, seven `request_profession_*` labels,
+  `request_label_profession_other`, `request_label_practice`, `request_error_profession_choice`,
+  `request_error_profession_other`, `request_error_practice`.
+- **Removed**: `request_label_profession`, `request_help_profession` and
+  `request_error_profession`, from the schema and both templates. Cleanup proof:
+  `git grep -n -E 'request_label_profession[^_]|request_help_profession|request_error_profession[^_]|Profession and practice' -- ':!docs'`
+  finds nothing.
+- **Copy**: the option labels, "Your profession", "Practice name" and the three messages are new
+  EN copy (Victor's request; the option list is the one proposed to him on 25 Oct). NL/FR go
+  through source-copy.
+
+### R76e checks
+
+The fixture validation suite runs on the dialog, plus the no-JS page:
+- **All variants pass**: en-default at 390 and 1440, en-nojs, en-error and en-success.
+- **New profession checks**:
+  - the empty submit shows the profession and practice errors;
+  - with no radio chosen, focus goes to the first radio;
+  - "Other" shows its field and makes it required, and its empty text is blocked;
+  - picking another radio hides the field again;
+  - the posted value is English;
+  - the snapshot holds the value, the label and the practice;
+  - without JavaScript, `required` sits on the radios and the practice field, and the Other field
+    is visible.
+- **Klaviyo event and error-restore cases** (`results/r76e-klaviyo.txt`, fetch stubbed): pass.
+  - R76d cases 1–7 still pass, now with the new properties: `profession: "Dentist"`,
+    `profession_label: "Dentist"`, `practice_name` filled.
+  - Case 8, Other: `profession: "Other"`, with `profession_other` and `profession_label` both
+    `"Osteopath"`.
+  - Case 9, error reload: the Other radio is checked again, its field shows with "Osteopath", the
+    practice name is restored, and no event is sent.
+  - No page errors.
+- **Theme Check**: exit 0, 19 baseline warnings.
+
 ## R76d: Klaviyo confirmation and team alert from karmicare.com
 
 Victor, 25 Oct: "we need this to be sent from karmicare domain, and the confirmation to the

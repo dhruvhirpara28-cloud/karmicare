@@ -19,7 +19,10 @@ Nothing is sent when the key is empty, when the post fails, when hCaptcha stops 
 | `metric…name` | `Practitioner Request Submitted` (Klaviyo metric id `UaYZem`, created by the test event of 25 Oct) |
 | `profile…email` | the email typed. The profile gets nothing else: practitioners type titles ("Dr. An Peeters"), so a split first name would be wrong. |
 | `properties.name` | name as typed |
-| `properties.profession` | profession and practice |
+| `properties.profession` | the radio chosen, always the English value: `Dentist`, `Dental hygienist`, `kPNI therapist`, `Orthomolecular or naturopathic practitioner`, `General practitioner`, `Pharmacist` or `Other` (R76e) |
+| `properties.profession_other` | the text typed under Other, else empty |
+| `properties.profession_label` | the profession as the visitor read it (the radio label in the page language, or the typed text for Other), for the confirmation email |
+| `properties.practice_name` | practice name |
 | `properties.email` | email |
 | `properties.phone` | phone, or empty |
 | `properties.evidence_pack` / `properties.samples` | `true` / `false` |
@@ -95,8 +98,11 @@ Your request
 Name
 {{ event.name }}
 
-Profession and practice
-{{ event.profession }}
+Profession
+{{ event.profession_label }}
+
+Practice name
+{{ event.practice_name }}
 
 Email
 {{ event.email }}
@@ -122,7 +128,8 @@ KARMICA BV · Vizierstraat 28, 8000 Bruges, Belgium
 
 ```
 Name: {{ event.name }}
-Profession and practice: {{ event.profession }}
+Profession: {{ event.profession }}{% if event.profession_other %} ({{ event.profession_other }}){% endif %}
+Practice name: {{ event.practice_name }}
 Email: {{ event.email }}
 Phone: {{ event.phone|default:"-" }}
 Evidence pack: {% if event.evidence_pack %}yes{% else %}no{% endif %}
