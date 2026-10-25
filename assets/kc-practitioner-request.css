@@ -268,12 +268,19 @@
   box-shadow: inset 0 0 0 1px var(--kc-mapped-border-status-error);
 }
 
-/* Profession radios, evidence pack / samples */
+/* Profession radios, evidence pack / samples: two columns, 8px between the rows, so the form
+   stays short; a long label wraps under itself next to its control */
+.kc-pr__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
 .kc-pr__check {
   display: flex;
   gap: 10px;
-  align-items: center;
-  min-height: var(--kc-responsive-size-control-min-height, 44px);
+  align-items: flex-start;
+  min-height: 24px;
   color: var(--kc-mapped-text-default-heading);
   font-size: var(--kc-responsive-body-sm-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);
@@ -284,7 +291,8 @@
   flex: none;
   width: 20px;
   height: 20px;
-  margin: 0;
+  /* centred on the first line of the label (22px phone, 20px from 750px) */
+  margin: calc((var(--kc-responsive-body-sm-line-height) - 20px) / 2) 0 0;
   accent-color: var(--kc-mapped-surface-inverse-default);
   cursor: pointer;
 }
@@ -294,9 +302,9 @@
   outline-offset: 2px;
 }
 
-/* The "Other" profession field, under its radio */
+/* The "Other" profession field, full width under the options */
 .kc-pr__sub {
-  margin: 4px 0 0 30px;
+  margin: 12px 0 0;
 }
 
 .kc-pr__sub[hidden] {
