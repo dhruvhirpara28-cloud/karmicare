@@ -150,7 +150,33 @@
         "product_faq_block": {
           "type": "product_faq",
           "settings": {
-            "default_to_subscription": true
+            "default_to_subscription": true,
+            "request_trigger_text": "evidence pack",
+            "request_title": "Request the practitioner pack",
+            "request_intro": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+            "request_label_name": "Name",
+            "request_label_profession": "Profession and practice",
+            "request_help_profession": "For example kPNI therapist, practice name",
+            "request_label_email": "Email",
+            "request_label_phone": "Phone (optional)",
+            "request_legend_wants": "What would you like?",
+            "request_help_wants": "Choose one or both.",
+            "request_label_pack": "Evidence pack",
+            "request_label_samples": "Samples for my practice",
+            "request_label_address": "Practice address (needed for samples)",
+            "request_label_message": "Message (optional)",
+            "request_privacy_text": "We only process these details to answer your request. More in our [privacy].",
+            "request_privacy_link_label": "Privacy Policy",
+            "request_button": "Send request",
+            "request_error_name": "Please fill in your name.",
+            "request_error_profession": "Please fill in your profession and practice.",
+            "request_error_email": "Please fill in your email address.",
+            "request_error_email_format": "Please enter a valid email address.",
+            "request_error_wants": "Choose the evidence pack, samples or both.",
+            "request_error_address": "Please fill in the practice address for the samples.",
+            "request_error_generic": "Your request was not sent. Please check the details below and try again.",
+            "request_success_title": "Request received",
+            "request_success_text": "Thank you. We reply by email to the address you gave."
           }
         },
         "mission_card_block": {
@@ -159,11 +185,12 @@
         },
         "info_card_FnBcaN": {
           "type": "info_card",
+          "disabled": true,
           "settings": {
             "default_to_subscription": true,
             "header_text": "More than two formulas",
             "body_text": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-            "footer_text": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+            "footer_text": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
             "background_color_day": "#f2f8ff",
             "background_color_night": "#191f38",
             "header_color_day": "#7fb9ff",
@@ -213,9 +240,6 @@
             "title_rhythm": "",
             "title_year": "",
             "title_once": "",
-            "price_rhythm": "",
-            "price_year": "",
-            "price_once": "",
             "credit": "",
             "credit_checkup": "",
             "credit_info": "",
@@ -274,10 +298,12 @@
         "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
         "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
         "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
         "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
         "surface": "transition",
         "text_color_day": "",
@@ -302,7 +328,7 @@
         "hint_label": "DRAG THE RING · EXPLORE 24 HOURS",
         "time_label_size": "small",
         "footer_text": "Formulated for both shifts: Awake by day, Asleep by night.",
-        "footer_link_text": "Read the science",
+        "footer_link_text": "",
         "footer_link": "",
         "surface": "transition",
         "text_color_day": "",
@@ -322,7 +348,7 @@
             "image": "shopify://shop_images/kc-professional-stephanie-spreuwers.jpg",
             "heading": "Dr. Stephanie Spreuwers",
             "text": "Functional Dentist, kPNI Practitioner",
-            "hover_text": ""
+            "hover_text": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>"
           }
         },
         "card_jcnr7Q": {
@@ -534,7 +560,7 @@
             "method_label": "METHOD",
             "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
             "link_label": "Kulal et al. · 2016 · J Clin Diagn Res",
-            "link_url": "",
+            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5121804/",
             "logo": "shopify://shop_images/Logo.png",
             "image": "shopify://shop_images/Picture_1.png",
             "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
@@ -551,7 +577,7 @@
             "method_label": "METHOD",
             "method_text": "Meta-analysis of 8 studies, 2015–2023.",
             "link_label": "Lei & Hu · 2025 · Biomedical Reports",
-            "link_url": "",
+            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11704870/",
             "logo": "shopify://shop_images/Logo-2.png",
             "image": "shopify://shop_images/Sleep_airway.png",
             "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
@@ -568,9 +594,10 @@
             "method_label": "Method",
             "method_text": "Systematic review and meta-analysis of 7 clinical trials.",
             "link_label": "Janakiram et al. · 2017 · J Nat Sci Biol Med",
-            "link_url": "",
+            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5320817/",
             "logo": "shopify://shop_images/Logo_1.png",
-            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+            "image": "shopify://shop_images/kc-research-xylitol-specimen-1122x1402-v1.jpg",
+            "image_badge": "XYLITOL CRYSTALS"
           }
         },
         "card_Hi7YUD": {
@@ -584,10 +611,10 @@
             "method_label": "METHOD",
             "method_text": "Double-blind randomised controlled trial, three arms.",
             "link_label": "Vano et al. · 2018 · Clin Oral Investig",
-            "link_url": "",
+            "link_url": "https://doi.org/10.1007/s00784-017-2113-3",
             "logo": "shopify://shop_images/Logo_2.png",
-            "image": "shopify://shop_images/Picture_1.png",
-            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+            "image": "shopify://shop_images/kc-research-nhap-tubules-2000x2400-v1.jpg",
+            "image_badge": "DENTINE TUBULES"
           }
         },
         "card_JeERX6": {
@@ -601,9 +628,10 @@
             "method_label": "METHOD",
             "method_text": "Systematic review and meta-analysis of 4 crossover RCTs.",
             "link_label": "Alli et al. · 2019 · J Oral Pathol Med",
-            "link_url": "",
+            "link_url": "https://doi.org/10.1111/jop.12845",
             "logo": "shopify://shop_images/Logo_3.png",
-            "image_badge": "DENTINE TUBULES - OPEN AND OCCLUDED"
+            "image": "shopify://shop_images/kc-research-sls-mucosa-2000x2400-v1.jpg",
+            "image_badge": "ORAL MUCOSA"
           }
         }
       },
@@ -702,7 +730,7 @@
         "receipt_column_label": "Received",
         "total_label": "Up to",
         "total": "€110.80",
-        "fine_print": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+        "fine_print": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
         "terms_link": "shopify://pages/terms-and-conditions-1",
         "terms_link_label": "Terms, clauses 10 and 11",
         "surface": "page",
@@ -807,10 +835,12 @@
         "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
         "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
         "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
         "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
         "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
         "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
         "benefits_layout": "stacked",
         "padding_top": 120,

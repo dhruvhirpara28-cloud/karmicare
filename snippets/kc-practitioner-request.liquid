@@ -1,0 +1,228 @@
+{%- comment -%}
+  Practitioner request form (R76, popup R76b): the evidence pack and samples request of the kPNI
+  FAQ item. snippets/product-faq.liquid renders it once, inside the FAQ item whose answer holds the
+  trigger link, and opens that item after a post. assets/kc-practitioner-request.js moves this
+  panel into a modal <dialog> (the close button comes from the <template> below), turns the link
+  into the button that opens it, reopens it after a post with the thank-you or the errors, and
+  checks the fields before Shopify takes the post. Without JavaScript the form shows under the
+  answer and the link stays as it is.
+
+  The post is Shopify's own contact form, as on the withdrawal page: it goes to the store's contact
+  email (Settings > General > Store details). The inbox keys are fixed English words, so every
+  language arrives the same way; contact[Language] says which page it came from.
+
+  Accepts:
+  - s: the product_faq block settings (every visible string is a setting)
+  - trigger_url / trigger_text: how the script finds the link (block settings, already resolved)
+
+  Usage:
+  {% render 'kc-practitioner-request', s: block.settings, trigger_url: url, trigger_text: text %}
+{%- endcomment -%}
+
+{{ 'kc-practitioner-request.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'kc-practitioner-request.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign privacy_page = pages['privacy-policy']
+  if privacy_page == blank
+    assign privacy_page = shop.privacy_policy
+  endif
+  assign privacy_link = s.request_privacy_link_label | escape
+  if privacy_page != blank
+    assign privacy_link = '<a href="' | append: privacy_page.url | append: '">' | append: privacy_link | append: '</a>'
+  endif
+-%}
+
+<div
+  class="kc-pr"
+  id="KcPractitionerRequest-panel"
+  data-kc-pr
+  data-trigger-url="{{ trigger_url | escape }}"
+  data-trigger-text="{{ trigger_text | escape }}"
+>
+  <template data-kc-pr-dialog-close>
+    <button type="button" class="kc-pr-dialog__close" data-kc-pr-close aria-label="{{ 'accessibility.close' | t | escape }}">
+      {{- 'kc-icon-close.svg' | inline_asset_content -}}
+    </button>
+  </template>
+  {%- form 'contact', id: 'KcPractitionerRequest', class: 'kc-pr__form', data-kc-pr-form: 'true' -%}
+    {%- if form.posted_successfully? -%}
+      <div class="kc-pr__success" role="status" aria-live="polite" tabindex="-1" data-kc-pr-state="success">
+        <p class="kc-pr__success-title" id="KcPr-success-title">{{ s.request_success_title | escape }}</p>
+        <p class="kc-pr__success-text" id="KcPr-success-text" data-kc-pr-live>{{ s.request_success_text | escape }}</p>
+      </div>
+    {%- else -%}
+      <p class="kc-pr__title" id="KcPr-title">{{ s.request_title | escape }}</p>
+      {%- if s.request_intro != blank -%}
+        <p class="kc-pr__intro" id="KcPr-intro">{{ s.request_intro | escape }}</p>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="kc-pr__alert" role="alert" tabindex="-1" data-kc-pr-state="error">
+          <p class="kc-pr__alert-title">{{ s.request_error_generic | escape }}</p>
+          <ul class="kc-pr__alert-list" role="list">
+            {%- for field in form.errors -%}
+              <li>
+                <a href="#KcPr-{{ field }}">
+                  {{- form.errors.translated_fields[field] | capitalize }}
+                  {{ form.errors.messages[field] -}}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="kc-pr__field">
+        <label class="kc-pr__label" for="KcPr-name">{{ s.request_label_name | escape }}</label>
+        <input
+          class="kc-pr__input"
+          type="text"
+          id="KcPr-name"
+          name="contact[name]"
+          autocomplete="name"
+          required
+          value="{{ form.name | escape }}"
+          aria-describedby="KcPr-name-error"
+          data-kc-pr-field="name"
+          data-error-required="{{ s.request_error_name | escape }}"
+        >
+        <p class="kc-pr__error" id="KcPr-name-error" hidden></p>
+      </div>
+
+      <div class="kc-pr__field">
+        <label class="kc-pr__label" for="KcPr-profession">{{ s.request_label_profession | escape }}</label>
+        {%- if s.request_help_profession != blank -%}
+          <p class="kc-pr__help" id="KcPr-profession-help">{{ s.request_help_profession | escape }}</p>
+        {%- endif -%}
+        <input
+          class="kc-pr__input"
+          type="text"
+          id="KcPr-profession"
+          name="contact[Profession and practice]"
+          autocomplete="organization"
+          required
+          aria-describedby="KcPr-profession-help KcPr-profession-error"
+          data-kc-pr-field="profession"
+          data-error-required="{{ s.request_error_profession | escape }}"
+        >
+        <p class="kc-pr__error" id="KcPr-profession-error" hidden></p>
+      </div>
+
+      <div class="kc-pr__field">
+        <label class="kc-pr__label" for="KcPr-email">{{ s.request_label_email | escape }}</label>
+        <input
+          class="kc-pr__input"
+          type="email"
+          id="KcPr-email"
+          name="contact[email]"
+          autocomplete="email"
+          spellcheck="false"
+          autocapitalize="off"
+          required
+          value="{{ form.email | escape }}"
+          aria-describedby="KcPr-email-error"
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+          {% endif %}
+          data-kc-pr-field="email"
+          data-error-required="{{ s.request_error_email | escape }}"
+          data-error-format="{{ s.request_error_email_format | escape }}"
+        >
+        <p
+          class="kc-pr__error"
+          id="KcPr-email-error"
+          {% unless form.errors contains 'email' %}
+            hidden
+          {% endunless %}
+        >
+          {%- if form.errors contains 'email' -%}{{ s.request_error_email_format | escape }}{%- endif -%}
+        </p>
+      </div>
+
+      <div class="kc-pr__field">
+        <label class="kc-pr__label" for="KcPr-phone">{{ s.request_label_phone | escape }}</label>
+        <input
+          class="kc-pr__input"
+          type="tel"
+          id="KcPr-phone"
+          name="contact[phone]"
+          autocomplete="tel"
+          value="{{ form.phone | escape }}"
+          data-kc-pr-field="phone"
+        >
+      </div>
+
+      <fieldset
+        class="kc-pr__field kc-pr__choices"
+        aria-describedby="{% if s.request_help_wants != blank %}KcPr-wants-help {% endif %}KcPr-wants-error"
+        data-kc-pr-group="wants"
+        data-error-required="{{ s.request_error_wants | escape }}"
+      >
+        <legend class="kc-pr__label">{{ s.request_legend_wants | escape }}</legend>
+        {%- if s.request_help_wants != blank -%}
+          <p class="kc-pr__help" id="KcPr-wants-help">{{ s.request_help_wants | escape }}</p>
+        {%- endif -%}
+        <label class="kc-pr__check" for="KcPr-pack">
+          <input
+            type="checkbox"
+            id="KcPr-pack"
+            name="contact[Evidence pack]"
+            value="Yes"
+            data-kc-pr-field="pack"
+          >
+          <span>{{ s.request_label_pack | escape }}</span>
+        </label>
+        <label class="kc-pr__check" for="KcPr-samples">
+          <input
+            type="checkbox"
+            id="KcPr-samples"
+            name="contact[Samples for my practice]"
+            value="Yes"
+            data-kc-pr-field="samples"
+          >
+          <span>{{ s.request_label_samples | escape }}</span>
+        </label>
+        <p class="kc-pr__error" id="KcPr-wants-error" hidden></p>
+      </fieldset>
+
+      <div class="kc-pr__field">
+        <label class="kc-pr__label" for="KcPr-address">{{ s.request_label_address | escape }}</label>
+        <textarea
+          class="kc-pr__input kc-pr__input--area"
+          id="KcPr-address"
+          name="contact[Practice address for samples]"
+          rows="3"
+          autocomplete="street-address"
+          aria-describedby="KcPr-address-error"
+          data-kc-pr-field="address"
+          data-error-required="{{ s.request_error_address | escape }}"
+        ></textarea>
+        <p class="kc-pr__error" id="KcPr-address-error" hidden></p>
+      </div>
+
+      <div class="kc-pr__field">
+        <label class="kc-pr__label" for="KcPr-body">{{ s.request_label_message | escape }}</label>
+        <textarea
+          class="kc-pr__input kc-pr__input--area"
+          id="KcPr-body"
+          name="contact[body]"
+          rows="3"
+          data-kc-pr-field="body"
+        >{{ form.body | escape }}</textarea>
+      </div>
+
+      {%- if s.request_privacy_text != blank -%}
+        <p class="kc-pr__note">{{ s.request_privacy_text | escape | replace: '[privacy]', privacy_link }}</p>
+      {%- endif -%}
+
+      <input type="hidden" name="contact[Type]" value="Practitioner request: evidence pack / samples">
+      <input type="hidden" name="contact[Language]" value="{{ request.locale.iso_code }}">
+      <input type="hidden" name="contact[Page]" value="{{ request.origin }}{{ request.path }}">
+
+      <div class="kc-pr__actions">
+        <button type="submit" class="button button--full-width">{{ s.request_button | escape }}</button>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</div>

@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "5e3054edb632f4b34e7893ac25c57593f21adbe5",
+ "digest": "4f62482641c8eb60a8d2fd0452b1083d3bdbdfbb",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -481,14 +481,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.footer_text",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-   "sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "sha1": "86c9b2142fafd96ab8a000cab28cf29223d40c65",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "inline_richtext",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "old_sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166"
   },
   {
    "id": "product.subscription-item:main/professional_testimonials_block/heading",
@@ -729,7 +731,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "chronobiology-clock-karmicare",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; PDP lane 785e9de, landing 42); was 'Read the science'"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/subheading",
@@ -1775,7 +1778,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "research-behind-system",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subheading",
@@ -1927,7 +1931,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "research-behind-system",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subheading",
@@ -2079,7 +2084,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "research-behind-system",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES - OPEN AND OCCLUDED'"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/title_GDDYEK/custom_title",
@@ -2395,14 +2401,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "text",
    "section_type": "care-comes-back",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "old_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f"
   },
   {
    "id": "product.subscription-item:care_comes_back/terms_link_label",
@@ -2909,7 +2917,8 @@
    "sha1": "f9a8cf8682a68e8baf3193dcddadab28534783ca",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'price_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'price_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup"
   },
   {
    "id": "liquid:sections/main-product.liquid:960",
@@ -2922,7 +2931,8 @@
    "sha1": "22efce5598d283c7ff4dbdbda9817a76b50b161b",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'price_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'price_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup"
   },
   {
    "id": "liquid:sections/main-product.liquid:966",
@@ -2935,7 +2945,8 @@
    "sha1": "5d23613e7853930b9b53fe2b92d75ac326234895",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup"
   },
   {
    "id": "liquid:sections/main-product.liquid:977",
@@ -2970,11 +2981,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:989",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928",
-   "status": "needs-key",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "sha1": "0e3375079a41a1fd5d559989a0c6e957bfa00297",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230); EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
+   "old_sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928"
   },
   {
    "id": "liquid:sections/main-product.liquid:995",
@@ -7150,6 +7163,38 @@
     "C100"
    ],
    "claim_status": "needs-review"
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Dr. Stephanie Spreuwers (Functional Dentist, kPNI Practitioner), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Mariama Banjai (Dental Hygienist, Oral Care Quality Manager), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
   }
  ]
 }

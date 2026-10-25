@@ -1,0 +1,615 @@
+{%- comment -%}
+  Online withdrawal function: Art. VI.61/2 WER (W 2026-07-19/05, in force 14 Aug 2026), which
+  copies Art. 11a of Directive 2011/83/EU as inserted by Directive (EU) 2023/2673. What the law
+  fixes (docs/launch-gate/withdrawal/REQUIREMENTS.md, part A): the function is labelled "withdraw
+  from contract here" (NL "hier de overeenkomst herroepen", FR "renoncer au contrat ici") or an
+  unambiguous equivalent; it is prominently displayed, easily accessible and available for the whole
+  withdrawal period; the consumer gives or confirms a name, what identifies the contract and the
+  electronic address for the confirmation; the statement is submitted with a confirmation function
+  labelled only "confirm withdrawal" (NL "herroeping bevestigen", FR "confirmer la rétractation");
+  the trader then sends, without undue delay, an acknowledgement of receipt on a durable medium with
+  the statement's content and the date and time of submission.
+
+  How this section meets it:
+  - one public page, /pages/withdrawal (templates/page.withdrawal.json), linked from the footer and
+    the legal pages (ADMIN-STEPS.md); no login, no app;
+  - step 1 is the statement (name, order number, email, optional items); step 2 shows it back and
+    carries the single "Confirm withdrawal" button. Without JavaScript the fields and that button
+    show at once, which is still the statement plus the confirmation function the law asks for;
+  - the statement travels two ways: Shopify's own contact form posts it to the store inbox (a
+    time-stamped record for KARMICA BV), and on confirm assets/kc-withdrawal.js sends one event to
+    Klaviyo's client endpoint, whose transactional flow emails the consumer the acknowledgement with
+    the content, date and time (ADMIN-STEPS.md, step 4). With "Klaviyo public API key" empty only
+    the inbox copy is sent and the success text says the acknowledgement follows by email;
+  - no analytics, pixels or cookies of its own: the only request the page makes itself is that one
+    event, after the consumer confirms.
+  Every visible string is a setting with an English default; NL and FR are in
+  docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md (Translate & Adapt, theme content).
+{%- endcomment -%}
+
+{{ 'kc-withdrawal.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'kc-withdrawal.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign s = section.settings
+  assign statement = s.statement_text | default: 'I hereby give notice that I withdraw from my contract of sale for the order below.'
+-%}
+
+<div
+  class="kc-withdrawal section-{{ section.id }} kc-surface"
+  data-kc-surface="{{ s.surface }}"
+>
+  <div class="kc-withdrawal__inner">
+    <header class="kc-withdrawal__head">
+      {%- if s.eyebrow != blank -%}
+        <p class="kc-withdrawal__eyebrow subtitle-item opacity-xl">{{ s.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="kc-withdrawal__heading h1">{{ s.heading | escape }}</h1>
+      {%- if s.intro != blank -%}
+        <div class="kc-withdrawal__intro rte">{{ s.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- comment -%}
+      An app's withdrawal block (for example Revoq, the alternative route in REQUIREMENTS.md A4) can
+      take the form's place: untick "Show the theme form" and add the app block here.
+    {%- endcomment -%}
+    {%- for block in section.blocks -%}
+      {%- render block -%}
+    {%- endfor -%}
+
+    {%- if s.show_theme_form -%}
+    {%- form 'contact',
+      id: 'KcWithdrawalForm',
+      class: 'kc-withdrawal__form',
+      data-kc-withdrawal: 'true',
+      data-kc-klaviyo-company: s.klaviyo_company_id,
+      data-kc-klaviyo-metric: s.klaviyo_metric,
+      data-kc-timezone: 'Europe/Brussels',
+      data-kc-locale: request.locale.iso_code,
+      data-kc-statement: statement
+    -%}
+      {%- if form.posted_successfully? -%}
+        <div class="kc-wd-success" role="status" tabindex="-1" autofocus data-kc-wd-success>
+          <span class="kc-wd-success__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 14.5l3.6 3.5 7.4-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h2 class="kc-wd-success__title">{{ s.success_heading | escape }}</h2>
+          <p
+            class="kc-wd-success__ack"
+            data-kc-wd-ack-sent
+            data-template="{{ s.success_ack_sent | escape }}"
+            hidden
+          ></p>
+          <p class="kc-wd-success__ack" data-kc-wd-ack-default>{{ s.success_ack_default | escape }}</p>
+          {%- if s.success_next_steps != blank -%}
+            <div class="kc-wd-success__next rte">{{ s.success_next_steps }}</div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        {%- if form.errors -%}
+          <div class="kc-wd-alert" role="alert" tabindex="-1" autofocus>
+            <p class="kc-wd-alert__title">{{ s.error_generic | escape }}</p>
+            <ul class="kc-wd-alert__list" role="list">
+              {%- for field in form.errors -%}
+                <li>
+                  <a class="kc-wd-alert__link" href="#KcWithdrawal-{{ field }}">
+                    {{- form.errors.translated_fields[field] | capitalize }}
+                    {{ form.errors.messages[field] -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Step markers: only with JavaScript, which is what makes it two steps {%- endcomment -%}
+        <ol class="kc-wd-steps kc-wd-js-only" aria-label="{{ s.steps_label | escape }}">
+          <li class="kc-wd-steps__item" data-kc-wd-step-marker="1" aria-current="step">
+            <span class="kc-wd-steps__num" aria-hidden="true">1</span>
+            <span>{{ s.step_1_label | escape }}</span>
+          </li>
+          <li class="kc-wd-steps__item" data-kc-wd-step-marker="2">
+            <span class="kc-wd-steps__num" aria-hidden="true">2</span>
+            <span>{{ s.step_2_label | escape }}</span>
+          </li>
+        </ol>
+
+        {%- comment -%} Step 1: the online withdrawal statement (Art. VI.61/2 §2 a, b, c) {%- endcomment -%}
+        <div class="kc-wd-step" data-kc-wd-step="1" role="group" aria-labelledby="KcWithdrawalStep1">
+          <h2 class="kc-wd-step__title" id="KcWithdrawalStep1" tabindex="-1" data-kc-wd-step-title>
+            {{- s.step_1_label | escape -}}
+          </h2>
+
+          <div class="kc-wd-field">
+            <label class="kc-wd-field__label" for="KcWithdrawal-name">{{ s.label_name | escape }}</label>
+            <input
+              class="kc-wd-field__input"
+              type="text"
+              id="KcWithdrawal-name"
+              name="contact[{{ s.label_name | escape }}]"
+              autocomplete="name"
+              required
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              aria-describedby="KcWithdrawal-name-error"
+              data-kc-wd-field="name"
+              data-error-required="{{ s.error_required_name | escape }}"
+            >
+            <p class="kc-wd-field__error" id="KcWithdrawal-name-error" hidden></p>
+          </div>
+
+          <div class="kc-wd-field">
+            <label class="kc-wd-field__label" for="KcWithdrawal-order">{{ s.label_order | escape }}</label>
+            {%- if s.help_order != blank -%}
+              <p class="kc-wd-field__help" id="KcWithdrawal-order-help">{{ s.help_order | escape }}</p>
+            {%- endif -%}
+            <input
+              class="kc-wd-field__input"
+              type="text"
+              id="KcWithdrawal-order"
+              name="contact[{{ s.label_order | escape }}]"
+              autocomplete="off"
+              required
+              aria-describedby="KcWithdrawal-order-help KcWithdrawal-order-error"
+              data-kc-wd-field="order"
+              data-error-required="{{ s.error_required_order | escape }}"
+            >
+            <p class="kc-wd-field__error" id="KcWithdrawal-order-error" hidden></p>
+          </div>
+
+          <div class="kc-wd-field">
+            <label class="kc-wd-field__label" for="KcWithdrawal-email">{{ s.label_email | escape }}</label>
+            {%- if s.help_email != blank -%}
+              <p class="kc-wd-field__help" id="KcWithdrawal-email-help">{{ s.help_email | escape }}</p>
+            {%- endif -%}
+            <input
+              class="kc-wd-field__input"
+              type="email"
+              id="KcWithdrawal-email"
+              name="contact[email]"
+              autocomplete="email"
+              spellcheck="false"
+              autocapitalize="off"
+              required
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-describedby="KcWithdrawal-email-help KcWithdrawal-email-error"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+              {% endif %}
+              data-kc-wd-field="email"
+              data-error-required="{{ s.error_required_email | escape }}"
+              data-error-format="{{ s.error_format_email | escape }}"
+            >
+            <p class="kc-wd-field__error" id="KcWithdrawal-email-error" hidden></p>
+          </div>
+
+          <div class="kc-wd-field">
+            <label class="kc-wd-field__label" for="KcWithdrawal-items">{{ s.label_items | escape }}</label>
+            {%- if s.help_items != blank -%}
+              <p class="kc-wd-field__help" id="KcWithdrawal-items-help">{{ s.help_items | escape }}</p>
+            {%- endif -%}
+            <textarea
+              class="kc-wd-field__input kc-wd-field__input--area"
+              id="KcWithdrawal-items"
+              name="contact[{{ s.label_items | escape }}]"
+              rows="3"
+              aria-describedby="KcWithdrawal-items-help"
+              data-kc-wd-field="items"
+            ></textarea>
+          </div>
+
+          {%- if s.privacy_note != blank -%}
+            <div class="kc-wd-note rte">{{ s.privacy_note }}</div>
+          {%- endif -%}
+
+          <div class="kc-wd-actions kc-wd-js-only">
+            <button type="button" class="button button--full-width" data-kc-wd-next>
+              {{- s.button_review | escape -}}
+            </button>
+          </div>
+        </div>
+
+        {%- comment -%}
+          Step 2: the statement shown back, then the confirmation function (Art. VI.61/2 §3). Without
+          JavaScript this block shows at once below the fields (assets/kc-withdrawal.css).
+        {%- endcomment -%}
+        <div class="kc-wd-step" data-kc-wd-step="2" role="group" aria-labelledby="KcWithdrawalStep2" hidden>
+          <h2 class="kc-wd-step__title kc-wd-js-only" id="KcWithdrawalStep2" tabindex="-1" data-kc-wd-step-title>
+            {{- s.step_2_label | escape -}}
+          </h2>
+          <p class="kc-wd-statement">{{ statement | escape }}</p>
+          <dl class="kc-wd-review kc-wd-js-only">
+            <div class="kc-wd-review__row" data-kc-wd-review-row>
+              <dt>{{ s.label_name | escape }}</dt>
+              <dd data-kc-wd-review="name"></dd>
+            </div>
+            <div class="kc-wd-review__row" data-kc-wd-review-row>
+              <dt>{{ s.label_order | escape }}</dt>
+              <dd data-kc-wd-review="order"></dd>
+            </div>
+            <div class="kc-wd-review__row" data-kc-wd-review-row>
+              <dt>{{ s.label_email | escape }}</dt>
+              <dd data-kc-wd-review="email"></dd>
+            </div>
+            <div class="kc-wd-review__row" data-kc-wd-review-row>
+              <dt>{{ s.label_items | escape }}</dt>
+              <dd data-kc-wd-review="items"></dd>
+            </div>
+          </dl>
+          {%- if s.review_note != blank -%}
+            <p class="kc-wd-note kc-wd-js-only">{{ s.review_note | escape }}</p>
+          {%- endif -%}
+          <div class="kc-wd-actions">
+            <button type="submit" class="button button--full-width" data-kc-wd-confirm>
+              <span class="kc-wd-confirm__label">{{ s.button_confirm | escape }}</span>
+              {%- render 'loading-spinner' -%}
+            </button>
+            <button type="button" class="button button--secondary button--full-width kc-wd-js-only" data-kc-wd-edit>
+              {{- s.button_edit | escape -}}
+            </button>
+          </div>
+          {%- if s.confirm_note != blank -%}
+            <p class="kc-wd-note kc-wd-note--small">{{ s.confirm_note | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} For the store inbox copy: the kind of message, when, and in which language {%- endcomment -%}
+        <input type="hidden" name="contact[Type]" value="Withdrawal statement (Art. VI.61/2 WER)">
+        <input type="hidden" name="contact[Submitted at]" value="not stamped (no JavaScript): the time this message was received counts" data-kc-wd-submitted-at>
+        <input type="hidden" name="contact[Language]" value="{{ request.locale.iso_code }}">
+        <input type="hidden" name="contact[Page]" value="{{ request.origin }}{{ request.path }}">
+        <input type="hidden" name="contact[body]" value="{{ statement | escape }}" data-kc-wd-body>
+        <p class="visually-hidden" aria-live="polite" data-kc-wd-live></p>
+      {%- endif -%}
+    {%- endform -%}
+    {%- endif -%}
+
+    {%- if s.aside_heading != blank or s.aside_text != blank -%}
+      <aside class="kc-withdrawal__aside" aria-labelledby="KcWithdrawalAside-{{ section.id }}">
+        {%- if s.aside_heading != blank -%}
+          <h2 class="kc-withdrawal__aside-title" id="KcWithdrawalAside-{{ section.id }}">{{ s.aside_heading | escape }}</h2>
+        {%- endif -%}
+        {%- if s.aside_text != blank -%}
+          <div class="kc-withdrawal__aside-text rte">{{ s.aside_text }}</div>
+        {%- endif -%}
+      </aside>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Withdrawal function",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The online withdrawal function (Art. VI.61/2 WER). Keep the heading and the confirm button on the statutory wording: \"Withdraw from contract here\" and \"Confirm withdrawal\" (NL \"Hier de overeenkomst herroepen\" / \"Herroeping bevestigen\", FR \"Renoncer au contrat ici\" / \"Confirmer la rétractation\")."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_theme_form",
+      "label": "Show the theme form",
+      "info": "Untick only when an app's withdrawal block (added below as a block) replaces it.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Legal"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Withdraw from contract here"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>Changed your mind? You can withdraw from an online order within 14 days of delivery, without giving a reason. Fill in the statement below, check it and confirm. We acknowledge receipt by email, with the content, date and time of your statement.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Step 1: the statement"
+    },
+    {
+      "type": "text",
+      "id": "steps_label",
+      "label": "Steps list label (screen readers)",
+      "default": "Steps"
+    },
+    {
+      "type": "text",
+      "id": "step_1_label",
+      "label": "Step 1 title",
+      "default": "Your statement"
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Name field",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "label_order",
+      "label": "Order number field",
+      "default": "Order number"
+    },
+    {
+      "type": "textarea",
+      "id": "help_order",
+      "label": "Order number help",
+      "default": "As on your order confirmation, for example #1234. For a membership: the number of the order you withdraw from."
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "Email field",
+      "default": "Email address"
+    },
+    {
+      "type": "textarea",
+      "id": "help_email",
+      "label": "Email help",
+      "default": "We send the acknowledgement of receipt to this address."
+    },
+    {
+      "type": "text",
+      "id": "label_items",
+      "label": "Items field (optional field)",
+      "default": "Which items (optional)"
+    },
+    {
+      "type": "textarea",
+      "id": "help_items",
+      "label": "Items help",
+      "default": "Leave empty to withdraw from the whole order."
+    },
+    {
+      "type": "richtext",
+      "id": "privacy_note",
+      "label": "Privacy note",
+      "default": "<p>We process these details to handle your withdrawal, as described in our <a href=\"/pages/privacy-policy\">Privacy Policy</a>.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_review",
+      "label": "Button to step 2",
+      "default": "Check your statement"
+    },
+    {
+      "type": "header",
+      "content": "Step 2: check and confirm"
+    },
+    {
+      "type": "text",
+      "id": "step_2_label",
+      "label": "Step 2 title",
+      "default": "Check and confirm"
+    },
+    {
+      "type": "textarea",
+      "id": "statement_text",
+      "label": "Statement",
+      "info": "The declaration the consumer confirms; it also opens the copy in the store inbox.",
+      "default": "I hereby give notice that I withdraw from my contract of sale for the order below."
+    },
+    {
+      "type": "text",
+      "id": "review_note",
+      "label": "Note above the buttons",
+      "default": "Not right? Change your details before you confirm."
+    },
+    {
+      "type": "text",
+      "id": "button_confirm",
+      "label": "Confirm button",
+      "info": "Statutory wording, nothing else on the button.",
+      "default": "Confirm withdrawal"
+    },
+    {
+      "type": "text",
+      "id": "button_edit",
+      "label": "Back button",
+      "default": "Change details"
+    },
+    {
+      "type": "textarea",
+      "id": "confirm_note",
+      "label": "Note under the confirm button",
+      "default": "By confirming you send this statement to KARMICA BV. You receive an acknowledgement of receipt by email, with the date and time of submission."
+    },
+    {
+      "type": "header",
+      "content": "Messages"
+    },
+    {
+      "type": "text",
+      "id": "error_required_name",
+      "label": "Name missing",
+      "default": "Please fill in your name."
+    },
+    {
+      "type": "text",
+      "id": "error_required_order",
+      "label": "Order number missing",
+      "default": "Please fill in your order number."
+    },
+    {
+      "type": "text",
+      "id": "error_required_email",
+      "label": "Email missing",
+      "default": "Please fill in your email address."
+    },
+    {
+      "type": "text",
+      "id": "error_format_email",
+      "label": "Email not valid",
+      "default": "Please enter a valid email address."
+    },
+    {
+      "type": "textarea",
+      "id": "error_generic",
+      "label": "Submission refused by Shopify",
+      "default": "Your statement was not sent. Please check the details below and try again, or email care@karmicare.com."
+    },
+    {
+      "type": "header",
+      "content": "After confirming"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Heading",
+      "default": "Your withdrawal has been received"
+    },
+    {
+      "type": "textarea",
+      "id": "success_ack_sent",
+      "label": "Acknowledgement sent",
+      "info": "Shown when the acknowledgement route accepted the statement. [email] becomes the address given. An accepted request is not yet a delivered email, so the text says on its way, not sent.",
+      "default": "An acknowledgement of receipt is on its way to [email], with the content, date and time of your statement. Keep that email: it is your proof."
+    },
+    {
+      "type": "textarea",
+      "id": "success_ack_default",
+      "label": "Acknowledgement follows",
+      "info": "Shown otherwise (no JavaScript, no Klaviyo key, or the event was refused): care@ then sends it by hand.",
+      "default": "We acknowledge receipt by email, with the content, date and time of your statement. Keep that email: it is your proof."
+    },
+    {
+      "type": "richtext",
+      "id": "success_next_steps",
+      "label": "What happens next",
+      "default": "<p><strong>What happens next.</strong> Send the goods back within 14 days to KARMICA BV, Returns, Vizierstraat 28, 8000 Bruges, Belgium. We refund everything you paid, including the standard delivery charge, within 14 days of the day you told us; we may wait until the goods are back or you have shown that you sent them. Questions? Write to <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>. A person reads every message.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Other ways to withdraw"
+    },
+    {
+      "type": "text",
+      "id": "aside_heading",
+      "label": "Heading",
+      "default": "Other ways to withdraw"
+    },
+    {
+      "type": "richtext",
+      "id": "aside_text",
+      "label": "Text",
+      "default": "<p>Prefer another route? Email <a href=\"mailto:care@karmicare.com\">care@karmicare.com</a>, call <a href=\"tel:+32478572761\">+32 (0) 478 57 27 61</a> or write to KARMICA BV, Vizierstraat 28, 8000 Bruges, Belgium. The model withdrawal form is on the Consumer Rights page. Whichever way you choose, the day you tell us counts.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Acknowledgement of receipt (Klaviyo)",
+      "info": "Set up the transactional flow first (docs/launch-gate/withdrawal/ADMIN-STEPS.md, step 4), then fill in the key. Empty: only the store inbox receives the statement."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_company_id",
+      "label": "Klaviyo public API key (company ID)"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_metric",
+      "label": "Klaviyo metric name",
+      "default": "Withdrawal statement submitted"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "surface",
+      "label": "Section surface",
+      "options": [
+        { "value": "page", "label": "Page" },
+        { "value": "accent", "label": "Accent" },
+        { "value": "transition", "label": "Transition" }
+      ],
+      "default": "page",
+      "info": "Page and Accent hold their colour. Transition fades from the colour of the section above to the other one."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Desktop top padding",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Desktop bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Withdrawal function"
+    }
+  ]
+}
+{% endschema %}

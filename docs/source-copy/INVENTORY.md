@@ -88,6 +88,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
   - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017”, Victor's short line of 21 Oct, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
   - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
+  - the sticky-bar defaults `liquid:sections/main-product.liquid:954`, `:960` and `:966` (*[price] every 60 days*, *[price] per year*, *[price] one time*; settings `price_rhythm`, `price_year`, `price_once`) are `retired` (25 Oct): pdp R77d `a290153` and R77f `cd4db79` show the price per brushing for every plan, and the keys `kc.sticky_cart.price_rhythm_html`, `price_year_html` and `price_once_html` leave every locale.
 - **Updated 22 Oct** with Victor's EN edits in the Shopify admin, read back on the storefront (global coordinator, and this lane for the article and the product title). Ten `admin-held` entries carry the new EN, with `old_en` / `old_sha1` kept and the reason in `notes`:
   - the Duo product's title, SEO title and meta description (batch 02): "Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System";
   - the footer menu link "Why use hydroxapatite" → "Why hydroxyapatite" (batch 03), so it leaves the brand-rule scan;
@@ -237,7 +238,7 @@ Not changed, because no text setting in the allowed files carries it:
 | 02 | `sections/main-product.liquid:966` | [price] one time | sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate… |
 | 02 | `sections/main-product.liquid:977` | + [credit] Care Credit back | sticky bar: schema default of sticky_cart setting 'credit'. The PDP template stores only button_text, so this default renders and is invisible to Translate & A… |
 | 02 | `sections/main-product.liquid:983` | + [credit] Care Credit + €40 Check-up Reward | sticky bar: schema default of sticky_cart setting 'credit_checkup'. The PDP template stores only button_text, so this default renders and is invisible to Trans… |
-| 02 | `sections/main-product.liquid:989` | Care Credit is Karmicare credit: spend it on more care, never on your dental bi… | sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
+| 02 | `sections/main-product.liquid:989` | Care Credit is Karmicare credit: spend it on more care. | sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:995` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €… | sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
 | 02 | `sections/main-product.liquid:1006` | Delivery & what's included | sticky bar: schema default of sticky_cart setting 'panel_label'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:1012` | Change | sticky bar: schema default of sticky_cart setting 'change_label'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
@@ -544,7 +545,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 151 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/answer` | template_setting | Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — s… | approved | C C25 |
 | 152 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | template_setting | The ritual | corrected |  |
 | 153 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/question` | template_setting | How long does one duo last? | corrected |  |
-| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
+| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
 | 155 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | template_setting | Ingredients & safety | corrected |  |
 | 156 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question` | template_setting | Can I combine Karmicare with fluoride toothpaste or rinses? | corrected |  |
 | 157 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` | template_setting | Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating di… | corrected | C C101 |
@@ -572,7 +573,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 179 | `index:care_comes_back/eyebrow` | template_setting | Return on Care | approved | NT |
 | 180 | `index:care_comes_back/heading` | template_setting | The care you already do. Now designed to give back. | approved |  |
 | 181 | `index:care_comes_back/intro` | template_setting | Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as … | approved |  |
-| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 183 | `index:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 184 | `index:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 185 | `index:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -653,7 +654,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 26 | `product.subscription-item:main/treatment_journey_block/disclaimer_text` | template_setting | * What members report with continued use — individual experiences vary. | approved |  |
 | 27 | `product.subscription-item:main/info_card_FnBcaN/header_text` | template_setting | More than two formulas | approved |  |
 | 28 | `product.subscription-item:main/info_card_FnBcaN/body_text` | template_setting | Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care buil… | needs-review |  |
-| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 30 | `product.subscription-item:main/professional_testimonials_block/heading` | template_setting | Trusted by professionals | approved |  |
 | 31 | `product.subscription-item:main/sticky_cart_block/button_text` | template_setting | Begin Now | approved |  |
 | 32 | `product.subscription-item:chronobiology_clock_karmicare/eyebrow` | template_setting | CHRONOBIOLOGY | approved |  |
@@ -767,7 +768,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 140 | `product.subscription-item:care_comes_back/receipt_column_label` | template_setting | Received | approved |  |
 | 141 | `product.subscription-item:care_comes_back/total_label` | template_setting | Up to | approved |  |
 | 142 | `product.subscription-item:care_comes_back/total` | template_setting | €110.80 | approved |  |
-| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 144 | `product.subscription-item:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 145 | `product.subscription-item:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 146 | `product.subscription-item:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -808,7 +809,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 181 | `liquid:sections/main-product.liquid:966` | theme_locale | [price] one time | needs-key |  |
 | 182 | `liquid:sections/main-product.liquid:977` | theme_locale | + [credit] Care Credit back | needs-key |  |
 | 183 | `liquid:sections/main-product.liquid:983` | theme_locale | + [credit] Care Credit + €40 Check-up Reward | needs-key |  |
-| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. | needs-key |  |
+| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care. | needs-key |  |
 | 185 | `liquid:sections/main-product.liquid:995` | theme_locale | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is… | needs-key |  |
 | 186 | `liquid:sections/main-product.liquid:1006` | theme_locale | Delivery & what's included | needs-key |  |
 | 187 | `liquid:sections/main-product.liquid:1012` | theme_locale | Change | needs-key |  |

@@ -1,6 +1,6 @@
 {
  "batch": "batch-01-homepage",
- "digest": "ab192236341d9e063847ab0e1b7bff70a09c7bdd",
+ "digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -287,18 +287,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.stat_strip_karmicare.blocks.stat_3.settings.text",
-   "en": "Formulated on +36 studies",
-   "sha1": "9798dccf69dc813ba5f87e173683343e928265e1",
-   "status": "needs-review",
+   "en": "Formulated on peer-reviewed studies",
+   "sha1": "afb08ae4f6ad59d0f94704a9237bfe51c6c174e4",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text; claims C65: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type text; claims C65: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 1",
    "claims": [
     "C65"
    ],
    "claim_status": "needs-review",
    "setting_type": "text",
    "section_type": "stat-strip-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Formulated on +36 studies",
+   "old_sha1": "9798dccf69dc813ba5f87e173683343e928265e1"
   },
   {
    "id": "index:stat_strip_karmicare/stat_4/heading",
@@ -463,11 +465,11 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.chronobiology_clock_karmicare.settings.morning_text",
-   "en": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
-   "sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe",
-   "status": "needs-review",
+   "en": "Cortisol rises. Morning brings coffee, breakfast and the day's first acids. Enamel needs its shield on first.",
+   "sha1": "1ba693b22fcc97e236687835d3bdc6462be0453b",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type textarea; claims C27, C53: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type textarea; claims C27, C53: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 10",
    "claims": [
     "C27",
     "C53"
@@ -475,7 +477,9 @@
    "claim_status": "needs-review",
    "setting_type": "textarea",
    "section_type": "chronobiology-clock-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
+   "old_sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe"
   },
   {
    "id": "index:chronobiology_clock_karmicare/night_badge",
@@ -579,7 +583,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "chronobiology-clock-karmicare",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; homepage lane 1a65780, landing 42); was 'Read the science'"
   },
   {
    "id": "index:two_formulas_karmicare/subheading",
@@ -756,11 +761,11 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
-   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
-   "sha1": "9b0de1e400cbe4cba706cac39339d2ec4852301d",
-   "status": "needs-review",
+   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; claims C02, C30, C33: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; claims C02, C30, C33: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2",
    "claims": [
     "C02",
     "C30",
@@ -769,7 +774,9 @@
    "claim_status": "needs-review",
    "setting_type": "richtext",
    "section_type": "two-formulas-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "old_sha1": "9b0de1e400cbe4cba706cac39339d2ec4852301d"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/subheading",
@@ -1173,11 +1180,11 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
-   "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
-   "sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
-   "status": "needs-review",
+   "en": "<p>A velvety foam nurturing your gums through fermentation.</p>",
+   "sha1": "1248c588f12f20b56c527e3f186c77e95368c0e4",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; claims C35: unsupported (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; claims C35: unsupported (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 3",
    "claims": [
     "C35"
    ],
@@ -1185,7 +1192,9 @@
    "setting_type": "richtext",
    "section_type": "product-benefits-karmicare",
    "rendered": true,
-   "claim_hold_waived": "2026-10-20 Victor, translation only"
+   "claim_hold_waived": "2026-10-20 Victor, translation only",
+   "old_en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
+   "old_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
@@ -1210,18 +1219,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.heading",
-   "en": "Focus by day,  calm by night",
-   "sha1": "ff8c1ad4808dc5c7c8de754fbbe00f11d1186cff",
-   "status": "needs-review",
+   "en": "Guarana by day, valerian by night",
+   "sha1": "92faa350dcc22dc09cee7ed541d7e07bf5f5b8af",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text; claims C41: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type text; claims C41: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 4",
    "claims": [
     "C41"
    ],
    "claim_status": "needs-review",
    "setting_type": "text",
    "section_type": "product-benefits-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Focus by day,  calm by night",
+   "old_sha1": "ff8c1ad4808dc5c7c8de754fbbe00f11d1186cff"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/text",
@@ -1230,18 +1241,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.text",
-   "en": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>",
-   "sha1": "3c85c496086b8e953e54cbf79577d74a8d930da0",
-   "status": "needs-review",
+   "en": "<p>Guarana helps keep plaque from sticking (in vitro). Valerian soothes the mouth by night.</p>",
+   "sha1": "1311bb43f03be2545d957ba540db787189991a08",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; claims C40: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; claims C40: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 5",
    "claims": [
     "C40"
    ],
    "claim_status": "needs-review",
    "setting_type": "richtext",
    "section_type": "product-benefits-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>",
+   "old_sha1": "3c85c496086b8e953e54cbf79577d74a8d930da0"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_AGFiEX/label",
@@ -1282,18 +1295,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.text",
-   "en": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>",
-   "sha1": "397401e5b27e3f6ab0d9279b35189988258918eb",
-   "status": "needs-review",
+   "en": "<p>Spit, don’t rinse. With you all night. Feel it before breakfast.</p>",
+   "sha1": "de7bf03ee0818fced8de342d17539c832f496e49",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; claims C12: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; claims C12: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 6",
    "claims": [
     "C12"
    ],
    "claim_status": "needs-review",
    "setting_type": "richtext",
    "section_type": "product-benefits-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>",
+   "old_sha1": "397401e5b27e3f6ab0d9279b35189988258918eb"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/label",
@@ -1388,18 +1403,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.settings.bottom_text",
-   "en": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
-   "sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
-   "status": "needs-review",
+   "en": "<p>These practitioners recommend Karmicare between visits. Not to replace their care, but to make the brushings between appointments count for something.</p>",
+   "sha1": "72f44811074d851bc8c7f398aa632735e542afc9",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; claims C70: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type richtext; claims C70: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 7",
    "claims": [
     "C70"
    ],
    "claim_status": "needs-review",
    "setting_type": "richtext",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
+   "old_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d"
   },
   {
    "id": "index:trusted_professionals_HAqYth/button_label",
@@ -2211,7 +2228,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "research-behind-system",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_Hi7YUD/subheading",
@@ -2363,7 +2381,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "research-behind-system",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/subheading",
@@ -2515,7 +2534,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "research-behind-system",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/heading",
@@ -2588,18 +2608,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_TNnqTQ.settings.answer",
-   "en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
-   "sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
-   "status": "approved",
+   "en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure to acids, sugars and coffee, so Awake protects, activates and brightens. Night is repair, when saliva drops and your body regenerates, so Asleep soothes, supports your mouth’s balance and helps remineralise. Spit, don’t rinse. Left on after the evening brush, it gets extended contact time.</p>",
+   "sha1": "bcbc6adc230c2b6b6abbab80717b52522abc967b",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext",
+   "notes": "type richtext; EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 11",
    "claims": [
     "C25"
    ],
    "claim_status": "approved",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
-   "rendered": true
+   "rendered": true,
+   "old_en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
+   "old_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
@@ -2644,13 +2666,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
-   "en": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
-   "sha1": "ee6d5e88422c0a37d1519a885b0eaee706545f60",
+   "en": "<p>About 64 days — one full cycle. One pump per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
+   "sha1": "7f5374924b4b5a3da5b502d0c49748566724f7d3",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; EN updated 21 Oct from templates/index.json at 41ae772 (homepage lane, merchant-edit 97ce2b7); approved answer replaces the placeholder",
-   "old_en": "<p>[NEEDS APPROVED COPY]</p>",
-   "old_sha1": "6a978875d8b2d8e3bec617e5c609f9fe2ee78c99",
+   "notes": "type richtext; EN updated 24 Oct: pump dosage (0.45 ml) dropped from customer copy (Victor); before that 21 Oct from templates/index.json at 41ae772 (homepage lane), replacing the placeholder",
+   "old_en": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
+   "old_sha1": "ee6d5e88422c0a37d1519a885b0eaee706545f60",
    "setting_type": "richtext",
    "section_type": "km-faq-accordion",
    "rendered": true,
@@ -3138,14 +3160,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "text",
    "section_type": "care-comes-back",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "old_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f"
   },
   {
    "id": "index:care_comes_back/terms_link_label",
@@ -3804,6 +3828,38 @@
    "status": "approved",
    "never_translate": false,
    "notes": "theme key kc.clock.help: screen-reader help for the clock knob (visually hidden <p>, the knob's aria-describedby; sections/chronobiology-clock-karmicare.liquid; homepage and PDP); homepage lane e1411e2, Victor option a, 22 Oct"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Dr. Stephanie Spreuwers (Functional Dentist, kPNI Practitioner), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "status": "needs-review",
+   "never_translate": false,
+   "notes": "type richtext; practitioner quote of Mariama Banjai (Dental Hygienist, Oral Care Quality Manager), shown on desktop hover; inventoried 24 Oct from live main 85cdb59 (landing desk R71 c)",
+   "setting_type": "richtext",
+   "section_type": "trusted-professionals",
+   "rendered": true
   }
  ]
 }

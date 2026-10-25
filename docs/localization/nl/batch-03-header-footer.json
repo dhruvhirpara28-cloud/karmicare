@@ -2,15 +2,16 @@
  "lang": "nl",
  "batch": "batch-03-header-footer",
  "source": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "742351732dabbbff2eff9cadc6858ba87284393a",
- "source_entries": 41,
+ "source_digest": "43c6e4e01271f6d0a3973509a47a306199641854",
+ "source_entries": 46,
  "counts": {
   "translated": 5,
   "pending-claim-review": 1,
   "dawn-nl": 9,
   "held": 5,
-  "theme-key": 10,
-  "admin": 11
+  "theme-key": 13,
+  "admin": 11,
+  "legal-review": 2
  },
  "fit_risk": [
   "liquid:sections/footer.liquid:679",
@@ -281,29 +282,29 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/footer.liquid",
    "key_path": "sections/footer.liquid:679",
-   "en": "Join",
-   "en_sha1": "e0d73143de80d17e82de2e017ac156ca3b9c4e01",
-   "nl": "Doe mee",
+   "en": "Sign up",
+   "en_sha1": "0b81497c8589af2714a1ddbeb62b3a4be679c318",
+   "nl": "Inschrijven",
    "status": "theme-key",
    "flags": [
     "theme-key",
     "fit-risk"
    ],
-   "notes": "7 vs 4 chars; no four-letter Dutch verb for 'Join' ('Aanmelden' 9)"
+   "notes": "7 vs 4 chars; no four-letter Dutch verb for 'Join' ('Aanmelden' 9); 25 Oct: button Inschrijven (Victor, 25 Oct)"
   },
   {
    "id": "liquid:sections/footer.liquid:694",
    "resource_type": "theme_locale",
    "file_or_handle": "sections/footer.liquid",
    "key_path": "sections/footer.liquid:694",
-   "en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
-   "en_sha1": "ae65e088e387580a0b88c8649f2853eacfec7cbd",
-   "nl": "Door je in te schrijven, ga je akkoord met de <a>Gebruiksvoorwaarden</a> en het <a>Privacybeleid</a>.",
+   "en": "Occasional emails from KARMICARE about Awake & Asleep, the Dental Check-up Reward and member offers. Unsubscribe any time with the link in every email. <a>Privacy Policy</a>.",
+   "en_sha1": "3f4c4ab4c2a31be027440e56fa687f59eb4f9db1",
+   "nl": "Af en toe e-mails van KARMICARE over Awake & Asleep, de controlebeloning en aanbiedingen voor leden. Uitschrijven kan altijd via de link in elke e-mail. <a>Privacybeleid</a>.",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": "TERM: Terms of Use → Gebruiksvoorwaarden; Privacy Policy → Privacybeleid (align with the titles the legal chunk uses)"
+   "notes": "D4 notice (Victor 23 Oct EN, NL 24 Oct in session); 'Dental Check-up Reward' → 'controlebeloning' (glossary); the single <a> is the privacy policy"
   },
   {
    "id": "liquid:sections/footer.liquid:850",
@@ -567,6 +568,76 @@
     "admin"
    ],
    "notes": ""
+  },
+  {
+   "id": "locale:kc.footer.check_inbox",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.check_inbox",
+   "en": "Check your inbox to confirm your subscription.",
+   "en_sha1": "59b23556d161f22a533faba6fd9a7ef547629e19",
+   "nl": "Kijk in je inbox om je inschrijving te bevestigen.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "footer newsletter (kc.footer.check_inbox); EN Victor 23 Oct, NL 24 Oct"
+  },
+  {
+   "id": "locale:kc.footer.email_invalid",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.email_invalid",
+   "en": "Check the email address.",
+   "en_sha1": "e90affa9f52d11c1377975dead3a40624c8ada85",
+   "nl": "Controleer het e-mailadres.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "footer newsletter (kc.footer.email_invalid); EN Victor 23 Oct, NL 24 Oct"
+  },
+  {
+   "id": "locale:kc.footer.retry",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.retry",
+   "en": "We could not confirm your subscription. Please try again in a moment.",
+   "en_sha1": "52b7cf179057a25c07723bbfe715c37560f04f43",
+   "nl": "We konden je inschrijving niet bevestigen. Probeer het zo meteen opnieuw.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "footer newsletter (kc.footer.retry); Victor 24 Oct"
+  },
+  {
+   "id": "footer-group:footer/legal_guarantee_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_guarantee_label",
+   "en": "Your legal guarantee rights",
+   "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
+   "nl": "Je wettelijke garantierechten",
+   "status": "legal-review",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct"
+  },
+  {
+   "id": "footer-group:footer/legal_withdrawal_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_withdrawal_label",
+   "en": "Withdraw from contract here",
+   "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+   "nl": "Hier de overeenkomst herroepen",
+   "status": "legal-review",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct"
   }
  ]
 }

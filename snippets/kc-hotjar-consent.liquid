@@ -1,0 +1,183 @@
+{%- comment -%}
+  kc-hotjar-consent: Hotjar only with analytics consent (R61, 24 Oct 2026).
+
+  Why: the Hotjar Shopify app embed injects its snippet unconditionally, before any cookie choice
+  (docs/launch-gate/consent/REPORT.md). The app embed must stay OFF (theme editor → App embeds →
+  Hotjar); this snippet replaces it. If the embed is still on, window.hj already exists and this
+  snippet does nothing, so Hotjar never loads twice.
+
+  How: waits for Shopify's Customer Privacy API (window.Shopify.customerPrivacy, provided async by
+  Shopify's banner and pixel scripts; only if it is still missing 8 s after load is it requested
+  with Shopify.loadFeatures 'consent-tracking-api'), loads the standard Hotjar snippet when
+  analyticsProcessingAllowed() is true and saleOfDataAllowed() is not false, and listens for the
+  document event 'visitorConsentCollected' so Hotjar starts the moment analytics consent is given.
+  Where the store's Customer privacy settings show the banner (EU/EEA and UK with Shopify's
+  automated regions; add Switzerland in Settings → Customer privacy → Cookie banner → Regions)
+  analytics is not allowed until the visitor accepts. Elsewhere Shopify's default allows every
+  purpose ("For other regions, the default behavior is to allow all processing purposes",
+  shopify.dev/docs/api/customer-privacy), so Hotjar loads at once there unless the visitor opted
+  out of data sale/sharing ("Your privacy choices" or a Global Privacy Control signal in an opt-out
+  region), which sets saleOfDataAllowed() to false. Withdrawal takes effect at once: when this
+  loader started Hotjar on the current page view and consent is withdrawn, Hotjar's cookies for
+  this site (_hj…_<site_id>) are expired and the page reloads once (Hotjar has no documented stop
+  call); the reloaded page sees the refusal and loads nothing. Never runs in the theme editor.
+
+  Usage: {% render 'kc-hotjar-consent', site_id: 1364127 %} once, from layout/theme.liquid.
+  Accepts: site_id (number, required; 0 or blank renders nothing). No other tracker, no personal data.
+{%- endcomment -%}
+{%- liquid
+  assign kc_hotjar_site_id = site_id | default: 0 | plus: 0
+-%}
+{%- if kc_hotjar_site_id > 0 and request.design_mode == false -%}
+  <script>
+    (function (siteId) {
+      'use strict';
+      if (!siteId || (window.Shopify && window.Shopify.designMode)) return;
+      var started = false;
+
+      function loadHotjar() {
+        if (started || typeof window.hj === 'function') return;
+        started = true;
+        (function (h, o, t, j, a, r) {
+          h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments); };
+          h._hjSettings = { hjid: siteId, hjsv: 6 };
+          a = o.getElementsByTagName('head')[0];
+          r = o.createElement('script');
+          r.async = 1;
+          r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+          a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+      }
+
+      // Two independent permissions (Shopify Customer Privacy API): analytics must be granted, and
+      // the visitor must not have opted out of data sale/sharing ("Your privacy choices" link or a
+      // Global Privacy Control signal in an opt-out region). A missing saleOfDataAllowed method
+      // counts as allowed, so an EU Accept still loads Hotjar.
+      function hotjarAllowed() {
+        var privacy = window.Shopify && window.Shopify.customerPrivacy;
+        if (!privacy || typeof privacy.analyticsProcessingAllowed !== 'function') return false;
+        try {
+          if (privacy.analyticsProcessingAllowed() !== true) return false;
+          if (typeof privacy.saleOfDataAllowed === 'function' && privacy.saleOfDataAllowed() === false) return false;
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      // Withdrawal must take effect on the page the visitor is on (GDPR art. 7(3); Astra R57d B2).
+      // Hotjar documents no call that stops a running recorder (checked 24 Oct 2026), so when this
+      // loader started Hotjar on this page view and consent is withdrawn, its cookies for this site
+      // are expired at once and the page is reloaded; the reloaded page sees the refusal and loads
+      // nothing. Loop guard (R61e, Astra R61d B1): a sessionStorage stamp is written only when a
+      // reload actually happens, and a new withdrawal inside the 5 s window is not dropped but
+      // scheduled for the end of the window, re-checking consent at that moment. A reload that was
+      // cancelled (consent granted again before it fired) consumes nothing. If the browser does not
+      // reload (a blocked unload), one retry follows a second later. Hotjar started by something
+      // else (an app embed) is not ours to stop and is left alone.
+      var RELOAD_KEY = 'kc-hotjar-withdrawal';
+      var GUARD_MS = 5000;
+      var SETTLE_MS = 300;
+      var stopTimer = null;
+
+      function expireHotjarCookies() {
+        var suffix = '_' + siteId;
+        var names = document.cookie.split('; ').map(function (pair) { return pair.split('=')[0]; })
+          .filter(function (name) { return name.indexOf('_hj') === 0 && name.slice(-suffix.length) === suffix; });
+        var host = window.location.hostname;
+        var parts = host.split('.');
+        var domains = ['', host, '.' + host];
+        if (parts.length > 2) domains.push(parts.slice(-2).join('.'), '.' + parts.slice(-2).join('.'));
+        names.forEach(function (name) {
+          domains.forEach(function (domain) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (domain ? '; domain=' + domain : '');
+          });
+        });
+      }
+
+      function lastReloadAt() {
+        try {
+          return parseInt(window.sessionStorage.getItem(RELOAD_KEY), 10) || 0;
+        } catch (error) {
+          return 0;
+        }
+      }
+
+      function reloadNow() {
+        try {
+          window.sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
+        } catch (error) {
+          // Storage blocked: reload without a stamp; a loop would need a new consent change.
+        }
+        window.location.reload();
+        // Still here after a second: the unload was blocked. Retry once if still refused.
+        window.setTimeout(function () {
+          if (!hotjarAllowed()) {
+            expireHotjarCookies();
+            window.location.reload();
+          }
+        }, 1000);
+      }
+
+      function stopHotjar() {
+        // Every refusal while this loader's Hotjar runs expires the site cookies at once.
+        expireHotjarCookies();
+        if (stopTimer) return; // a stop is pending; it re-checks consent when it fires
+        // Shopify has saved the new consent when the event fires; SETTLE_MS lets its cookie write
+        // settle. Inside the loop-guard window the reload waits for the window to end, never drops.
+        var sinceLast = Date.now() - lastReloadAt();
+        var delay = sinceLast < GUARD_MS ? Math.max(SETTLE_MS, GUARD_MS - sinceLast) : SETTLE_MS;
+        stopTimer = window.setTimeout(function () {
+          stopTimer = null;
+          if (hotjarAllowed()) return; // consent granted again meanwhile: nothing to stop now
+          expireHotjarCookies();
+          reloadNow();
+        }, delay);
+      }
+
+      function check() {
+        if (hotjarAllowed()) {
+          loadHotjar();
+        } else if (started) {
+          stopHotjar();
+        }
+      }
+
+      // Shopify's banner and pixel scripts load the API themselves (version 0.1 on this store, async),
+      // so wait for window.Shopify.customerPrivacy first; asking loadFeatures for another version
+      // while theirs is loading fails with "consent-tracking-api@x has already been loaded" (measured
+      // 24 Oct 2026). Only when the API is still missing well after load, load it ourselves.
+      var attempts = 0;
+      function start() {
+        if (window.Shopify && window.Shopify.customerPrivacy) {
+          check();
+          return;
+        }
+        if (document.readyState !== 'complete') {
+          window.addEventListener('load', start, { once: true });
+          return;
+        }
+        attempts += 1;
+        if (attempts <= 16) {
+          window.setTimeout(start, 500);
+          return;
+        }
+        if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+          window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function (error) {
+            if (!error || (window.Shopify && window.Shopify.customerPrivacy)) check();
+          });
+        }
+      }
+
+      // Fired by Shopify when the visitor accepts, declines or changes consent (banner or footer link).
+      // The API, not event.detail, is the source of truth, so the same check runs.
+      document.addEventListener('visitorConsentCollected', check);
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start, { once: true });
+      } else {
+        start();
+      }
+    })({{ kc_hotjar_site_id }});
+  </script>
+{%- endif -%}

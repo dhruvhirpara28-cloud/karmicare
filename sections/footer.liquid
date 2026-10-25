@@ -222,9 +222,12 @@
     box-shadow: 0 0 0 var(--kc-shape-stroke-thin) var(--kc-mapped-border-focus-default);
   }
 
-  /* Fills the 44px row, so the whole row height is the input's click target */
+  /* Fills the 44px row, so the whole row height is the input's click target. Width 0 + flex
+     basis 0: the input's own default width no longer counts toward the column's minimum, which
+     pushed FR 22px into the 1200px gutter (R46b N3); it takes whatever the button leaves. */
   .km-footer-field__input {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    width: 0;
     align-self: stretch;
     min-width: 0;
     padding: 0;
@@ -239,10 +242,13 @@
     opacity: 1;
   }
 
+  /* One line in every language: NL "Doe mee" wrapped at 1200px (R46b N3) */
   .km-footer-field__submit {
     display: inline-flex;
+    flex: none;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     min-width: 44px;
     min-height: 44px;
     padding: 0;
@@ -612,7 +618,7 @@
 
   /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart. The brand column is
      320px (not 286) since 23 Oct so the two-line slogan fits in NL and FR too; the newsletter
-     column gives up the 34px (at 1200px it is 281px wide, the field about 175px). */
+     column gives up the 34px (at 1200px it is 281px wide in every language). */
   @media screen and (min-width: 1200px) {
     .km-footer-top {
       flex-wrap: nowrap;
@@ -646,8 +652,13 @@
       gap: var(--kc-responsive-spacing-layout-lg);
     }
 
+    /* Six links (guarantee + withdrawal, 24 Oct) on one line squeezed the copyright to 111-152px
+       at 1200; the row wraps right-aligned instead, each link stays whole */
     .km-footer-legal__links {
-      flex-wrap: nowrap;
+      justify-content: flex-end;
+    }
+
+    .km-footer-legal__links a {
       white-space: nowrap;
     }
   }
@@ -689,6 +700,15 @@
   if legal_consumer_rights == blank
     assign legal_consumer_rights = shop.refund_policy
   endif
+
+  # The withdrawal page (Art. VI.61/2 WER): the picker, else the handle; no link until it exists
+  assign legal_withdrawal = section.settings.legal_withdrawal_page
+  if legal_withdrawal == blank
+    assign legal_withdrawal = pages['withdrawal']
+  endif
+
+  # The EU legal guarantee notice sits on the Consumer Rights page at this anchor (Victor, 24 Oct)
+  assign legal_guarantee_anchor = section.settings.legal_guarantee_anchor | default: 'two-year-guarantee' | handleize
 
   # Link texts: a blank setting uses the translated default (t output is escaped, hence escape_once)
   assign legal_terms_default = 'kc.footer.legal_terms' | t
@@ -754,8 +774,8 @@
 
             {%- liquid
               # Klaviyo (kc-footer-newsletter.js): list per language, locale for Smart Translations.
-              # Empty key or list = plain Shopify form. The script also needs data-msg-retry (R46-B4),
-              # added with its key kc.footer.retry when source-copy delivers it; until then it stays off.
+              # Empty key or list = plain Shopify form. The script also needs data-msg-retry (R46-B4).
+              # data-consent-version names the notice text below (D4); bump it when that text changes.
               assign kc_nl_lang = request.locale.iso_code | split: '-' | first | downcase
               assign kc_nl_key = section.settings.klaviyo_public_key | strip
               assign kc_nl_list = section.settings.klaviyo_list_id | strip
@@ -783,9 +803,10 @@
               data-klaviyo-list="{{ kc_nl_list | escape }}"
               data-locale="{{ kc_nl_locale }}"
               data-source="{{ kc_nl_source | escape }}"
-              data-consent-version="footer-2026-10"
+              data-consent-version="footer-2026-10-24"
               data-msg-success="{{ 'kc.footer.check_inbox' | t | escape }}"
               data-msg-invalid="{{ 'kc.footer.email_invalid' | t | escape }}"
+              data-msg-retry="{{ 'kc.footer.retry' | t | escape }}"
             >
               {%- form 'customer', id: 'FooterNewsletterForm', class: 'km-footer-field' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
@@ -824,7 +845,7 @@
               {%- endform -%}
 
               <p class="km-footer-newsletter__note" id="FooterNewsletterEmail-note">
-                {{ 'kc.footer.consent_html' | t: terms_url: legal_terms.url, privacy_url: legal_privacy.url }}
+                {{ 'kc.footer.consent_html' | t: privacy_url: legal_privacy.url }}
               </p>
             </div>
           </div>
@@ -1077,6 +1098,23 @@
                 <a href="{{ legal_privacy.url }}">{{ section.settings.legal_privacy_label | default: legal_privacy_default | escape_once }}</a>
                 <span aria-hidden="true">·</span>
                 <a href="{{ legal_consumer_rights.url }}">{{ section.settings.legal_consumer_rights_label | default: legal_consumer_rights_default | escape_once }}</a>
+                {%- comment -%}
+                  "Your legal guarantee rights": the Commission's example sentence, one click from the
+                  harmonised notice at the end of Consumer Rights section 4. Built from the page
+                  object, so /nl and /fr keep their locale. Blank label hides it.
+                {%- endcomment -%}
+                {%- if section.settings.legal_guarantee_label != blank and legal_consumer_rights != blank -%}
+                  <span aria-hidden="true">·</span>
+                  <a href="{{ legal_consumer_rights.url }}#{{ legal_guarantee_anchor }}">{{ section.settings.legal_guarantee_label | escape_once }}</a>
+                {%- endif -%}
+                {%- comment -%}
+                  "Withdraw from contract here": the statutory label of the online withdrawal
+                  function (Art. VI.61/2 WER), shown once the withdrawal page exists.
+                {%- endcomment -%}
+                {%- if section.settings.legal_withdrawal_label != blank and legal_withdrawal != blank -%}
+                  <span aria-hidden="true">·</span>
+                  <a href="{{ legal_withdrawal.url }}">{{ section.settings.legal_withdrawal_label | escape_once }}</a>
+                {%- endif -%}
                 {%- for policy in shop.policies -%}
                   {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
                   {%- assign policy_url_start = policy.url | slice: 0 -%}
@@ -1220,6 +1258,33 @@
       "id": "legal_consumer_rights_label",
       "label": "Consumer Rights link text",
       "info": "Blank uses the translated default (locale key kc.footer.legal_consumer_rights)"
+    },
+    {
+      "type": "text",
+      "id": "legal_guarantee_label",
+      "label": "Legal guarantee link text",
+      "default": "Your legal guarantee rights",
+      "info": "Goes to the Consumer Rights page at the anchor below, where the EU legal guarantee notice sits. Blank hides the link. NL and FR via Translate & Adapt."
+    },
+    {
+      "type": "text",
+      "id": "legal_guarantee_anchor",
+      "label": "Legal guarantee anchor on the Consumer Rights page",
+      "default": "two-year-guarantee",
+      "info": "The Anchor set on the page's 'Two-year legal guarantee' block."
+    },
+    {
+      "type": "page",
+      "id": "legal_withdrawal_page",
+      "label": "Withdrawal page",
+      "info": "Empty uses the page withdrawal; the link only shows once that page exists"
+    },
+    {
+      "type": "text",
+      "id": "legal_withdrawal_label",
+      "label": "Withdrawal link text",
+      "default": "Withdraw from contract here",
+      "info": "Statutory words (Art. VI.61/2 WER); NL 'Hier de overeenkomst herroepen', FR 'Renoncer au contrat ici' via Translate & Adapt. Blank hides the link."
     },
     {
       "type": "checkbox",

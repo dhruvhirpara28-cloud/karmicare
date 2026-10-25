@@ -156,7 +156,7 @@
                         assign ep_cents = ep_num | times: 100 | round
                         capture ep_money
                           echo '<span class="kc-currency-eur" data-kc-eur="' | append: ep_num | append: '">'
-                          render 'kc-money', cents: ep_cents, trim: true
+                          render 'kc-money', cents: ep_cents, trim: true, euro: true
                           echo '</span>'
                         endcapture
                         assign ep_target_sp = '€ ' | append: ep_num
@@ -192,7 +192,7 @@
                               assign ep_cents = ep_num | times: 100 | round
                               capture ep_money
                                 echo '<span class="kc-currency-eur" data-kc-eur="' | append: ep_num | append: '">'
-                                render 'kc-money', cents: ep_cents, trim: true
+                                render 'kc-money', cents: ep_cents, trim: true, euro: true
                                 echo '</span>'
                               endcapture
                               assign ep_target_sp = '€ ' | append: ep_num
@@ -248,7 +248,8 @@
             data-plan="{{ plan_handle | escape }}"
           >
             {%- if plan.ribbon_text.value != blank -%}
-              <span class="pc-ribbon">{{ plan.ribbon_text.value }}</span>
+              {%- comment -%} Without the star the metaobject text starts with (Victor, 24 Oct) {%- endcomment -%}
+              <span class="pc-ribbon">{{ plan.ribbon_text.value | remove: '★' | strip }}</span>
             {%- endif -%}
             {%- if plan.top_badge.value != blank -%}
               <span class="pc-tag pc-tag-top">{{ plan.top_badge.value }}</span>
@@ -482,33 +483,11 @@
           }
         }
       });
-
-      // Update static EUR values by the live Shopify currency exchange rate
-      const rate = parseFloat(window.Shopify && window.Shopify.currency && window.Shopify.currency.rate);
-      if (rate && rate !== 1) {
-        document.querySelectorAll('.kc-currency-eur[data-kc-eur]').forEach(function (el) {
-          const eur = parseFloat(el.getAttribute('data-kc-eur'));
-          if (!isNaN(eur) && eur > 0) {
-            const converted = Math.round(eur * rate);
-            const currency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '{{ localization.country.currency.iso_code | default: cart.currency.iso_code }}';
-            const shopifyLang = (window.Shopify && window.Shopify.locale) || '{{ localization.language.iso_code | default: request.locale.iso_code }}';
-            const shopifyCountry = (window.Shopify && window.Shopify.country) || '{{ localization.country.iso_code }}';
-            const locale = shopifyCountry ? (shopifyLang + '-' + shopifyCountry) : (navigator.language || shopifyLang);
-            try {
-              const formatter = new Intl.NumberFormat(locale, {
-                style: 'currency',
-                currency: currency,
-                maximumFractionDigits: 0
-              });
-              el.textContent = formatter.format(converted);
-            } catch (e) {
-              el.textContent = converted + ' ' + currency;
-            }
-          }
-        });
-      }
     });
   </script>
+  {%- comment -%} The table's fixed euro amounts in the active currency, this section only (R35 B2) {%- endcomment -%}
+  {%- assign kc_eur_root = '#compare-plans-' | append: section.id -%}
+  {%- render 'kc-eur-convert', root: kc_eur_root -%}
 {%- endif -%}
 
 {% schema %}
