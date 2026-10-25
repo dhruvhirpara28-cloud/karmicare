@@ -34,6 +34,7 @@
   var KLAVIYO_EVENTS = 'https://a.klaviyo.com/client/events/';
   var KLAVIYO_REVISION = '2026-10-15';
   var KLAVIYO_METRIC = 'Practitioner Request Submitted';
+  var KLAVIYO_TIMEOUT = 8000;
 
   function store(action, value) {
     try {
@@ -373,15 +374,29 @@
         },
       },
     };
+    /* as the withdrawal page: the call is aborted after 8 s, and the timer goes when it settles */
+    var controller = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = controller
+      ? window.setTimeout(function () {
+          controller.abort();
+        }, KLAVIYO_TIMEOUT)
+      : null;
+    var done = function () {
+      if (timer) window.clearTimeout(timer);
+    };
     window
       .fetch(KLAVIYO_EVENTS + '?company_id=' + encodeURIComponent(company), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', revision: KLAVIYO_REVISION },
         body: JSON.stringify(payload),
+        signal: controller ? controller.signal : undefined,
         keepalive: true,
       })
-      .catch(function () {
-        /* offline or blocked: the request is in the store inbox all the same */
+      .then(done, function () {
+        /* offline, blocked, refused or aborted: no retry, and nothing of the request stays in the
+           tab (the snapshot was consumed before the call; cleared again in case) */
+        done();
+        store('clear');
       });
   }
 

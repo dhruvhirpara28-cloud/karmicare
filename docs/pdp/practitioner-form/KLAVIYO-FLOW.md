@@ -12,7 +12,11 @@
 
 `assets/kc-practitioner-request.js` builds the event; the block settings `request_klaviyo_company_id` (`XfYq2r` in both product templates) and `request_klaviyo_metric` (`Practitioner Request Submitted`) say where it goes. On a valid Send, the script saves the request in this tab's sessionStorage. Shopify then posts as before. On the thank-you reload (`form.posted_successfully?`), the script sends one `POST https://a.klaviyo.com/client/events/?company_id=XfYq2r` (headers `Content-Type: application/json`, `revision: 2026-10-15`, `keepalive`) and clears the snapshot. The endpoint, revision and key are the same ones the withdrawal page uses.
 
-Nothing is sent when the key is empty, when the post fails, when hCaptcha stops it, or when storage is blocked. In every case the request still arrives at info@ through Shopify. Reloading the thank-you page does not send the event again.
+Nothing is sent to Klaviyo in these cases:
+- The key is empty or storage is blocked. Shopify accepted the post, so the request still arrives at info@.
+- The post fails or hCaptcha stops it. Shopify did not accept the post, so nothing arrives anywhere and the visitor sees the errors.
+
+Reloading the thank-you page does not send the event again. The call is aborted after 8 s (R76f), with no retry, and the thank-you never waits for it.
 
 | Path | Value |
 |---|---|

@@ -1,5 +1,37 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76f: the Klaviyo call is aborted after 8 s (Astra R76d B1)
+
+Blocker B1 (`docs/runtime-review/R76D-PRACTITIONER-KLAVIYO-ASTRA.md`): the Klaviyo fetch had
+`keepalive` but no bounded request. `assets/kc-practitioner-request.js` `sendEvent()` now follows
+`assets/kc-withdrawal.js`:
+- an `AbortController` aborts the call after 8,000 ms (`KLAVIYO_TIMEOUT`), and its signal goes to
+  `fetch` next to `keepalive`;
+- the timer is cleared as soon as the call settles, whether it is answered, refused or aborted;
+- on a refusal or abort there is no retry and no uncaught rejection. The sessionStorage snapshot
+  was already consumed before the call, and is cleared again;
+- the thank-you is shown and focused by the same synchronous setup as before and never waits
+  for the call.
+
+Also, Astra N3: the stale statements in this report (R76d, "no flow") and in KLAVIYO-FLOW §2
+("in every case") were corrected. N1 (privacy copy naming Klaviyo) stays with gate-legal; N2
+(data minimisation) is for when the emails are final.
+
+### R76f checks
+
+The fixture `fx.js` gained `?klaviyo=hang|reject`. The stub records the signal, the abort time,
+the 8-second timer and whether it is cleared, the state 100 ms after the call, and unhandled
+rejections (`scratchpad/fx/timeout.sh`, `results/r76f-timeout.txt`).
+
+| Case | Result |
+|---|---|
+| Hanging fetch | pass: 100 ms after the call, while it is still pending, the thank-you is shown in the open dialog and focused. The call has a signal and `keepalive`, is aborted after **8,002 ms**, and its timer is cleared. 0 unhandled rejections, 0 page errors, snapshot gone; afterwards close returns focus to the button and reopening works |
+| Refused fetch | pass: one call, timer cleared, 0 unhandled, 0 errors, snapshot gone, the page works |
+| Answered (202) | pass: one call, timer cleared, 0 errors |
+| Regression | pass: en-default Day 390, en-success Night 750, en-error Day 1440, en-nojs; Klaviyo cases 1–8 unchanged |
+
+Theme Check: exit 0, 19 baseline warnings.
+
 ## R76e: profession as radio buttons, with Other
 
 Victor, 25 Oct: "make radiobuttons of the profession and add Other also". The combined free-text
@@ -95,7 +127,8 @@ Theme change:
 
 Klaviyo: one test event (`victor+practitioner-test@karmicare.com`, unique_id
 `kc-pr-test-20261025-1`) answered `202` and created the metric `Practitioner Request Submitted`
-(`UaYZem`). No flow exists yet, so no email went out. The flow is Victor's step (KLAVIYO-FLOW §3).
+(`UaYZem`). At the time no flow existed, so no email went out. The same day the draft flow
+`UAY2YB` was built (KLAVIYO-FLOW §3); it is still in draft, so still nothing is sent.
 
 ### R76d checks
 
