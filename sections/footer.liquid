@@ -538,6 +538,7 @@
     gap: var(--kc-responsive-spacing-layout-xs);
   }
 
+  /* Underlined at every width (Victor, 24 Oct); the Figma desktop footer shows them plain. */
   .km-footer-legal__links a {
     color: inherit;
     text-decoration: underline;
@@ -608,10 +609,6 @@
 
     .km-footer-column--newsletter {
       flex: 1 1 320px;
-    }
-
-    .km-footer-legal__links a {
-      text-decoration: none;
     }
 
     .km-footer-payments {
@@ -777,8 +774,8 @@
 
             {%- liquid
               # Klaviyo (kc-footer-newsletter.js): list per language, locale for Smart Translations.
-              # Empty key or list = plain Shopify form. The script also needs data-msg-retry (R46-B4),
-              # added with its key kc.footer.retry when source-copy delivers it; until then it stays off.
+              # Empty key or list = plain Shopify form. The script also needs data-msg-retry (R46-B4).
+              # data-consent-version names the notice text below (D4); bump it when that text changes.
               assign kc_nl_lang = request.locale.iso_code | split: '-' | first | downcase
               assign kc_nl_key = section.settings.klaviyo_public_key | strip
               assign kc_nl_list = section.settings.klaviyo_list_id | strip
@@ -806,9 +803,10 @@
               data-klaviyo-list="{{ kc_nl_list | escape }}"
               data-locale="{{ kc_nl_locale }}"
               data-source="{{ kc_nl_source | escape }}"
-              data-consent-version="footer-2026-10"
+              data-consent-version="footer-2026-10-24"
               data-msg-success="{{ 'kc.footer.check_inbox' | t | escape }}"
               data-msg-invalid="{{ 'kc.footer.email_invalid' | t | escape }}"
+              data-msg-retry="{{ 'kc.footer.retry' | t | escape }}"
             >
               {%- form 'customer', id: 'FooterNewsletterForm', class: 'km-footer-field' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
@@ -847,7 +845,7 @@
               {%- endform -%}
 
               <p class="km-footer-newsletter__note" id="FooterNewsletterEmail-note">
-                {{ 'kc.footer.consent_html' | t: terms_url: legal_terms.url, privacy_url: legal_privacy.url }}
+                {{ 'kc.footer.consent_html' | t: privacy_url: legal_privacy.url }}
               </p>
             </div>
           </div>
