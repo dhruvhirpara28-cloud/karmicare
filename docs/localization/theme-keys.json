@@ -341,13 +341,19 @@
    "ids": [
     "liquid:sections/footer.liquid:679"
    ],
-   "en": "Join",
-   "nl": "Doe mee",
+   "en": "Sign up",
+   "nl": "Inschrijven",
    "nl_hold": null,
    "fr": "S’inscrire",
    "fr_hold": null,
+   "note": "Newsletter submit button. Victor, 25 Oct (worker terminal): 'de knop moet zeggen: Sign up, Inschrijven, en het equivalent in frans'. EN is his decision too: check reports it against the inventory's 'Join' until source-copy updates liquid:sections/footer.liquid:679 (see docs/global-footer/KEYS.md).",
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "nl": "Inschrijven",
+    "fr": "S’inscrire",
+    "by": "Victor, 25 Oct, worker terminal; EN 'Sign up' the same way (inventory to follow)"
+   }
   },
   {
    "key": "kc.footer.language",

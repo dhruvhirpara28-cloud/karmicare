@@ -77,3 +77,15 @@ NL and FR values are for the NL and FR lanes (the global coordinator routes this
 | FR | FR lane's wording, with `[[br]]` between the two sentences | The fr batch-03 value was written for the old EN ("So should your oral care") and its second line is 515px at 28px, which no column fits. The hero's wording in fr batch-01, "Votre bouche a son rythme / Désormais, vos soins aussi", measures 310 / 305px and fits. |
 
 Budget per line: ≤ 310px in Proxima Nova 500 at 28px with -1px letter-spacing, in practice ≤ 25 characters. Measurements and the layout cost (newsletter column 34px narrower on desktop) are in `PLAN.md`, "Slogan width". The marker is literal text in the theme editor and in Translate & Adapt; a saved newline or `<br>` works too.
+
+## Newsletter button `kc.footer.join` (Victor, 25 Oct)
+
+Victor, 25 Oct (worker terminal): "de cta knop van de email input heeft rare vertalingen. de knop moet zeggen: Sign up, Inschrijven, en het equivalent in frans". Written to the 31 storefront locales with `theme_keys.py write --area footer` (row has `decided` for NL and FR):
+
+| Lang | Was | Now | Source to update |
+|------|-----|-----|------------------|
+| EN | Join | Sign up | source-copy: `liquid:sections/footer.liquid:679` in `en-source.json` and `batches/batch-03-header-footer.json` (en, sha1, batch digest). Until then `theme_keys.py check --area footer` reports one line for this key: "en is 'Sign up', the sources give 'Join'". |
+| NL | Doe mee | Inschrijven | NL lane: payload entry `liquid:sections/footer.liquid:679` in `docs/localization/nl/batch-03-header-footer.json` (nl, en, en_sha1). |
+| FR | S’inscrire | S’inscrire | unchanged; the FR payload already has it. |
+
+The other 28 locales carry the EN, as the writer always does.
