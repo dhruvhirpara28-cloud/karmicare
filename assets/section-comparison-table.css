@@ -75,6 +75,23 @@
   letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
+/* From 990 the heading is wider than the rest of the header, one tone per line, so it takes two
+   lines (Victor, 24 Oct); the eyebrow, deck and button keep the 604px column */
+@media screen and (min-width: 990px) {
+  .comparison-section__header {
+    max-width: 96rem;
+  }
+
+  .comparison-section__header > :not(.comparison-section__title) {
+    max-width: 60.4rem;
+  }
+
+  .comparison-section__title em,
+  .comparison-section__title i {
+    display: block;
+  }
+}
+
 /* KC/Button, primary, large */
 .comparison-section__button {
   display: inline-flex;
