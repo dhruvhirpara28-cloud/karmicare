@@ -33,6 +33,27 @@ In Klaviyo templates every property is `{{ event.<name> }}`.
 
 ## 3. The flow (Victor, in Klaviyo)
 
+**State on 25 Oct, 14:30 Brussels time** (built in the Orca browser, checked with the Klaviyo API).
+Flow `UAY2YB`, "Practitioner request: confirmation and alert", in **Draft**:
+
+- **Trigger**: metric `Practitioner Request Submitted`, re-entry allowed, no filters.
+- **Email #1**, "Confirmation to practitioner":
+  - subject "Request received", preview text "Thank you. We reply by email to the address you gave.";
+  - from `KARMICARE <we@karmicare.com>`, reply-to `victor@karmicare.com`;
+  - Smart Sending off, UTM off, transactional not applied for yet;
+  - template: Klaviyo's blank drag-and-drop template, with its default footer.
+- **Left for Victor**:
+  - drag one Text block into the email and paste the §4 body (drag-and-drop does not work from browser automation);
+  - add the Internal alert;
+  - approve the copy;
+  - apply for transactional status (§5).
+
+Template decision, Victor, 25 Oct: for now use something simple that already exists; the branded
+transactional template comes later with the marketing nurture work, and both transactional flows
+(withdrawal and practitioner) can move to it then.
+
+Steps:
+
 1. Flows → Create flow → Build your own. Name it `Practitioner request: confirmation and alert`. Trigger: Metric → `Practitioner Request Submitted`, with no filters.
 2. Add an **Email**, the confirmation to the practitioner: from `we@karmicare.com` "KARMICARE", reply-to `victor@karmicare.com` (or info@). Turn Smart Sending off and UTM tracking off. The texts are in §4.
 3. Add an **Internal alert** (email), the team copy, to `victor@karmicare.com`. It is the message from karmicare.com that replaces reading Shopify's `mailer@shopify.com` copy. The texts are in §4.
