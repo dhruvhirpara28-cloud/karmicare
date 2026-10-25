@@ -1,25 +1,25 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "26996672af00",
+  "en-source.json": "9eff86366f39",
   "registered.json": "a11f055e5675",
-  "holds.json": "0d5a673cb328",
+  "holds.json": "009046a09618",
   "releases.json": "1571d1e3719b",
-  "fr/batch-01-homepage.json": "e04998693b95",
-  "fr/batch-02-pdp.json": "59fa8dbb3cdf",
-  "fr/batch-03-header-footer.json": "75d79dc09dee",
-  "fr/batch-04-legal.json": "bb4d84910165",
-  "fr/batch-05-products.json": "46b0822b37aa",
+  "fr/batch-01-homepage.json": "91831631f726",
+  "fr/batch-02-pdp.json": "cb8ef0a166a8",
+  "fr/batch-03-header-footer.json": "25c253b9a937",
+  "fr/batch-04-legal.json": "24fc1406039e",
+  "fr/batch-05-products.json": "df7c0d74d216",
   "fr/batch-06-content-pages.json": "c301d04fd83b",
   "fr/batch-07-collections-blog.json": "d75c02b40ff0",
   "fr/batch-08-system.json": "d8508a10e978"
  },
  "batches": {
-  "batch-01-homepage": "035821debb9f49e950a971c3d2fea45e22b846ee",
-  "batch-02-pdp": "40ad1a7a769a6ec777e38e3c26cc54518d29c3d3",
-  "batch-03-header-footer": "f1ed7dedf4ba6efa48a45403ff07c786e786192f",
+  "batch-01-homepage": "003612b5dcb6abd012b4c38ac0b05d4133412883",
+  "batch-02-pdp": "fb09c0f8bbcf87c736751088cc518158ddf3d658",
+  "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "25d0f0553a6dd9314e8d5edde47f8b3ef13ef264",
-  "batch-05-products": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
+  "batch-05-products": "957142a8cbebcd9e96afcf5508a1d3056f804234",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
@@ -1627,11 +1627,9 @@
      "field": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
      "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
      "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
-     "value": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
+     "value": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
      "gates": [],
-     "hold": [
-      "review hold (holds.json): keep the current FR role titles until the person's approved title is checked"
-     ],
+     "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -2293,6 +2291,27 @@
      ]
     },
     {
+     "id": "index:research_behind_system_EkjATL/card_fmFMFd/image_badge",
+     "kind": "match",
+     "key": null,
+     "field": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
+     "en": "XYLITOL CRYSTALS",
+     "en_sha1": "050e880a66c51bc59d0a1e98be90179219ae5f9c",
+     "value": "CRISTAUX DE XYLITOL",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "research_behind_system_EkjATL",
+      "card_fmFMFd",
+      "image_badge"
+     ]
+    },
+    {
      "id": "index:research_behind_system_EkjATL/card_Hi7YUD/heading",
      "kind": "match",
      "key": null,
@@ -2418,6 +2437,27 @@
       "research_behind_system_EkjATL",
       "card_Hi7YUD",
       "method_text"
+     ]
+    },
+    {
+     "id": "index:research_behind_system_EkjATL/card_Hi7YUD/image_badge",
+     "kind": "match",
+     "key": null,
+     "field": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
+     "en": "DENTINE TUBULES",
+     "en_sha1": "526bbfe73690770dfb63072c6a7b369415a71169",
+     "value": "TUBULES DENTINAIRES",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "research_behind_system_EkjATL",
+      "card_Hi7YUD",
+      "image_badge"
      ]
     },
     {
@@ -2569,6 +2609,27 @@
       "research_behind_system_EkjATL",
       "card_JeERX6",
       "method_text"
+     ]
+    },
+    {
+     "id": "index:research_behind_system_EkjATL/card_JeERX6/image_badge",
+     "kind": "match",
+     "key": null,
+     "field": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
+     "en": "ORAL MUCOSA",
+     "en_sha1": "cfa35cc727bab180a785fb9db82f0439d6a6e365",
+     "value": "MUQUEUSE BUCCALE",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "research_behind_system_EkjATL",
+      "card_JeERX6",
+      "image_badge"
      ]
     },
     {
@@ -3202,9 +3263,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.care_comes_back.settings.fine_print",
-     "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-     "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-     "value": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
+     "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+     "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+     "value": "Le Care Credit est un crédit Karmicare : dépensez-le en soins. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -3481,9 +3542,9 @@
      "kind": "direct",
      "key": "meta_title",
      "field": "online_store.preferences.homepage_title",
-     "en": "KARMICARE - Biorhythmic Oral Health",
-     "en_sha1": "b04ccb30266af5344472d142778361e88922b676",
-     "value": "KARMICARE - Santé bucco-dentaire biorythmique",
+     "en": "KARMICARE - Biorhythmic Oral Care",
+     "en_sha1": "09375ea76187b6f0ac40a1b73d0c48075b6ee452",
+     "value": "KARMICARE - Soin bucco-dentaire biorythmique",
      "gates": [],
      "hold": [],
      "how": "owner GID from translatableResources(SHOP), matched on handle",
@@ -4113,9 +4174,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.main.blocks.info_card_FnBcaN.settings.footer_text",
-     "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-     "en_sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166",
-     "value": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.&nbsp;",
+     "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+     "en_sha1": "86c9b2142fafd96ab8a000cab28cf29223d40c65",
+     "value": "Le Care Credit est un crédit Karmicare : dépensez-le en soins. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.&nbsp;",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -4522,11 +4583,9 @@
      "field": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
      "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
      "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
-     "value": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
+     "value": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
      "gates": [],
-     "hold": [
-      "review hold (holds.json): keep the current FR role titles until the person's approved title is checked; PDP twin held with the homepage row for one FR wording (landing desk, 22 Oct)"
-     ],
+     "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
      "status": {
       "drafted": true,
@@ -5372,6 +5431,27 @@
      ]
     },
     {
+     "id": "product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/image_badge",
+     "kind": "match",
+     "key": null,
+     "field": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
+     "en": "XYLITOL CRYSTALS",
+     "en_sha1": "050e880a66c51bc59d0a1e98be90179219ae5f9c",
+     "value": "CRISTAUX DE XYLITOL",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "research_behind_system_EkjATL",
+      "card_fmFMFd",
+      "image_badge"
+     ]
+    },
+    {
      "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/heading",
      "kind": "match",
      "key": null,
@@ -5497,6 +5577,27 @@
       "research_behind_system_EkjATL",
       "card_Hi7YUD",
       "method_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/image_badge",
+     "kind": "match",
+     "key": null,
+     "field": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
+     "en": "DENTINE TUBULES",
+     "en_sha1": "526bbfe73690770dfb63072c6a7b369415a71169",
+     "value": "TUBULES DENTINAIRES",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "research_behind_system_EkjATL",
+      "card_Hi7YUD",
+      "image_badge"
      ]
     },
     {
@@ -5648,6 +5749,27 @@
       "research_behind_system_EkjATL",
       "card_JeERX6",
       "method_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge",
+     "kind": "match",
+     "key": null,
+     "field": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
+     "en": "ORAL MUCOSA",
+     "en_sha1": "cfa35cc727bab180a785fb9db82f0439d6a6e365",
+     "value": "MUQUEUSE BUCCALE",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "research_behind_system_EkjATL",
+      "card_JeERX6",
+      "image_badge"
      ]
     },
     {
@@ -6006,9 +6128,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.care_comes_back.settings.fine_print",
-     "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-     "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-     "value": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
+     "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+     "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+     "value": "Le Care Credit est un crédit Karmicare : dépensez-le en soins. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -6312,6 +6434,552 @@
       "trusted_professionals_HAqYth",
       "card_jcnr7Q",
       "hover_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_trigger_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_trigger_text",
+     "en": "evidence pack",
+     "en_sha1": "e6a3562addd7d50b4ac6bb8f3f4f4e9475455ac2",
+     "value": "dossier scientifique",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_trigger_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_title",
+     "en": "Request the practitioner pack",
+     "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
+     "value": "Demandez le dossier pour praticiens",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_title"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_intro",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_intro",
+     "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+     "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
+     "value": "Parlez-nous de votre cabinet et de vos besoins. Le dossier scientifique réunit les études citées ci-dessus. Chaque demande est lue par une personne, qui vous répond par e-mail.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_intro"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_name",
+     "en": "Name",
+     "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
+     "value": "Nom",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_name"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession",
+     "en": "Profession and practice",
+     "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
+     "value": "Profession et cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_profession"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_help_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_help_profession",
+     "en": "For example kPNI therapist, practice name",
+     "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
+     "value": "Par exemple thérapeute kPNI, nom du cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_help_profession"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_email",
+     "en": "Email",
+     "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+     "value": "Adresse e-mail",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_email"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_phone",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_phone",
+     "en": "Phone (optional)",
+     "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
+     "value": "Téléphone (facultatif)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_phone"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_legend_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
+     "en": "What would you like?",
+     "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
+     "value": "Que souhaitez-vous recevoir ?",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_legend_wants"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_help_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_help_wants",
+     "en": "Choose one or both.",
+     "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
+     "value": "Choisissez l’un ou les deux.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_help_wants"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_pack",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_pack",
+     "en": "Evidence pack",
+     "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
+     "value": "Dossier scientifique",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_pack"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_samples",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_samples",
+     "en": "Samples for my practice",
+     "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
+     "value": "Échantillons pour mon cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_samples"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_address",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_address",
+     "en": "Practice address (needed for samples)",
+     "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
+     "value": "Adresse du cabinet (nécessaire pour les échantillons)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_address"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_message",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_message",
+     "en": "Message (optional)",
+     "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
+     "value": "Message (facultatif)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_message"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_privacy_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
+     "en": "We only process these details to answer your request. More in our [privacy].",
+     "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
+     "value": "Nous traitons ces données uniquement pour répondre à votre demande. Plus d’informations dans notre [privacy].",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_privacy_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_privacy_link_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
+     "en": "Privacy Policy",
+     "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+     "value": "politique de confidentialité",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_privacy_link_label"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_button",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_button",
+     "en": "Send request",
+     "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
+     "value": "Envoyer la demande",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_button"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_name",
+     "en": "Please fill in your name.",
+     "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+     "value": "Veuillez indiquer votre nom.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_name"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession",
+     "en": "Please fill in your profession and practice.",
+     "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
+     "value": "Veuillez indiquer votre profession et votre cabinet.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_profession"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_email",
+     "en": "Please fill in your email address.",
+     "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+     "value": "Veuillez indiquer votre adresse e-mail.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_email"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_email_format",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
+     "en": "Please enter a valid email address.",
+     "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+     "value": "Veuillez saisir une adresse e-mail valide.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_email_format"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_wants",
+     "en": "Choose the evidence pack, samples or both.",
+     "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
+     "value": "Choisissez le dossier scientifique, les échantillons ou les deux.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_wants"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_address",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_address",
+     "en": "Please fill in the practice address for the samples.",
+     "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
+     "value": "Veuillez indiquer l’adresse du cabinet pour les échantillons.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_address"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_generic",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_generic",
+     "en": "Your request was not sent. Please check the details below and try again.",
+     "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
+     "value": "Votre demande n’a pas été envoyée. Vérifiez les données ci-dessous et réessayez.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_generic"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_success_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_success_title",
+     "en": "Request received",
+     "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
+     "value": "Demande reçue",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_success_title"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_success_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_success_text",
+     "en": "Thank you. We reply by email to the address you gave.",
+     "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
+     "value": "Merci. Nous vous répondons par e-mail à l’adresse indiquée.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_success_text"
      ]
     }
    ]
@@ -11023,46 +11691,6 @@
       "footer",
       "link_list_Yna7wT",
       "heading"
-     ]
-    },
-    {
-     "id": "footer-group:footer/legal_guarantee_label",
-     "kind": "match",
-     "key": null,
-     "field": "sections.footer.settings.legal_guarantee_label",
-     "en": "Your legal guarantee rights",
-     "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
-     "value": "Vos droits à la garantie légale",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "footer",
-      "legal_guarantee_label"
-     ]
-    },
-    {
-     "id": "footer-group:footer/legal_withdrawal_label",
-     "kind": "match",
-     "key": null,
-     "field": "sections.footer.settings.legal_withdrawal_label",
-     "en": "Withdraw from contract here",
-     "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
-     "value": "Renoncer au contrat ici",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "footer",
-      "legal_withdrawal_label"
      ]
     }
    ]
@@ -23623,6 +24251,552 @@
      "hint": [
       "related-products",
       "heading"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_trigger_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_trigger_text",
+     "en": "evidence pack",
+     "en_sha1": "e6a3562addd7d50b4ac6bb8f3f4f4e9475455ac2",
+     "value": "dossier scientifique",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_trigger_text"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_title",
+     "en": "Request the practitioner pack",
+     "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
+     "value": "Demandez le dossier pour praticiens",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_title"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_intro",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_intro",
+     "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+     "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
+     "value": "Parlez-nous de votre cabinet et de vos besoins. Le dossier scientifique réunit les études citées ci-dessus. Chaque demande est lue par une personne, qui vous répond par e-mail.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_intro"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_name",
+     "en": "Name",
+     "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
+     "value": "Nom",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_name"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession",
+     "en": "Profession and practice",
+     "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
+     "value": "Profession et cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_profession"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_help_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_help_profession",
+     "en": "For example kPNI therapist, practice name",
+     "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
+     "value": "Par exemple thérapeute kPNI, nom du cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_help_profession"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_email",
+     "en": "Email",
+     "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+     "value": "Adresse e-mail",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_email"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_phone",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_phone",
+     "en": "Phone (optional)",
+     "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
+     "value": "Téléphone (facultatif)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_phone"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_legend_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
+     "en": "What would you like?",
+     "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
+     "value": "Que souhaitez-vous recevoir ?",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_legend_wants"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_help_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_help_wants",
+     "en": "Choose one or both.",
+     "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
+     "value": "Choisissez l’un ou les deux.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_help_wants"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_pack",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_pack",
+     "en": "Evidence pack",
+     "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
+     "value": "Dossier scientifique",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_pack"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_samples",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_samples",
+     "en": "Samples for my practice",
+     "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
+     "value": "Échantillons pour mon cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_samples"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_address",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_address",
+     "en": "Practice address (needed for samples)",
+     "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
+     "value": "Adresse du cabinet (nécessaire pour les échantillons)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_address"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_message",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_message",
+     "en": "Message (optional)",
+     "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
+     "value": "Message (facultatif)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_message"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_privacy_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
+     "en": "We only process these details to answer your request. More in our [privacy].",
+     "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
+     "value": "Nous traitons ces données uniquement pour répondre à votre demande. Plus d’informations dans notre [privacy].",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_privacy_text"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_privacy_link_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
+     "en": "Privacy Policy",
+     "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+     "value": "politique de confidentialité",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_privacy_link_label"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_button",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_button",
+     "en": "Send request",
+     "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
+     "value": "Envoyer la demande",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_button"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_name",
+     "en": "Please fill in your name.",
+     "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+     "value": "Veuillez indiquer votre nom.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_name"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession",
+     "en": "Please fill in your profession and practice.",
+     "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
+     "value": "Veuillez indiquer votre profession et votre cabinet.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_profession"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_email",
+     "en": "Please fill in your email address.",
+     "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+     "value": "Veuillez indiquer votre adresse e-mail.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_email"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_email_format",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
+     "en": "Please enter a valid email address.",
+     "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+     "value": "Veuillez saisir une adresse e-mail valide.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_email_format"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_wants",
+     "en": "Choose the evidence pack, samples or both.",
+     "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
+     "value": "Choisissez le dossier scientifique, les échantillons ou les deux.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_wants"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_address",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_address",
+     "en": "Please fill in the practice address for the samples.",
+     "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
+     "value": "Veuillez indiquer l’adresse du cabinet pour les échantillons.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_address"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_generic",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_generic",
+     "en": "Your request was not sent. Please check the details below and try again.",
+     "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
+     "value": "Votre demande n’a pas été envoyée. Vérifiez les données ci-dessous et réessayez.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_generic"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_success_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_success_title",
+     "en": "Request received",
+     "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
+     "value": "Demande reçue",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_success_title"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_success_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_success_text",
+     "en": "Thank you. We reply by email to the address you gave.",
+     "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
+     "value": "Merci. Nous vous répondons par e-mail à l’adresse indiquée.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_success_text"
      ]
     }
    ]

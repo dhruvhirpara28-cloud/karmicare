@@ -99,16 +99,21 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 - **Updated 22 Oct (admin fixes)**: Victor fixed the product FAQ typo "Full dosep" → "Full dose" and the infographic alt (morning before evening: "…with morning care at 06:40 and evening care at 22:00"); both read back on the storefront, `old_en` kept. The lab name "Midwest University" stays.
 - **Updated 22 Oct (legacy card)**: `product:main/info_card_FnBcaN/body_text` on `templates/product.json` no longer says "Health Rewards"; Victor approved three existing Care Credit sentences ("Karmicare is a care system: … Spend Care Credit on any order."). `corrected`, `old_en` kept.
 - **Updated 22 Oct (slogan marker, Astra R27)**: the footer slogan carries the explicit line-break marker `[[br]]` between its two sentences ("Your mouth has a rhythm[[br]]Now your oral care too"); `sections/footer.liquid` renders it as `<br>` (global lane). Words and the missing stop are Victor's and unchanged.
+- **Updated 25 Oct (round 3)** against live main `d5b514d` (merchant-edit `02d73c4`, integration `5922b8b`):
+  - the six research image badges of the xylitol, Vano and Alli cards (homepage and PDP, landing 55) carry new EN live (*XYLITOL CRYSTALS*, *DENTINE TUBULES*, *ORAL MUCOSA*): no longer `retired`, now `corrected` with `old_en` kept;
+  - the practitioner request form (landings 58–59) adds 26 `product_faq_block` text settings `request_*` on each product template: `product.subscription-item:main/product_faq_block/request_*` in batch 02 and `product:main/product_faq_block/request_*` in batch 05 (`request_trigger_url` is a mailto, not copy). Their table rows follow at the next full regeneration;
+  - the homepage SEO title is *KARMICARE - Biorhythmic Oral Care* live (was *… Oral Health*), still `admin-held`, `old_en` kept;
+  - Leen Ponet's FR role title on the cards is released with *Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI* (Victor 24 and 25 Oct); the EN is unchanged.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 230 | `ab192236341d9e063847ab0e1b7bff70a09c7bdd` |
-| `batch-02-pdp` | 477 | `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4` |
-| `batch-03-header-footer` | 41 | `742351732dabbbff2eff9cadc6858ba87284393a` |
-| `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
-| `batch-05-products` | 77 | `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d` |
+| `batch-01-homepage` | 232 | `003612b5dcb6abd012b4c38ac0b05d4133412883` |
+| `batch-02-pdp` | 524 | `fb09c0f8bbcf87c736751088cc518158ddf3d658` |
+| `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
+| `batch-04-legal` | 1009 | `25d0f0553a6dd9314e8d5edde47f8b3ef13ef264` |
+| `batch-05-products` | 103 | `957142a8cbebcd9e96afcf5508a1d3056f804234` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
@@ -519,7 +524,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 125 | `index:research_behind_system_EkjATL/card_fmFMFd/method_label` | template_setting | Method | approved |  |
 | 126 | `index:research_behind_system_EkjATL/card_fmFMFd/method_text` | template_setting | Systematic review and meta-analysis of 7 clinical trials. | approved |  |
 | 127 | `index:research_behind_system_EkjATL/card_fmFMFd/link_label` | template_setting | Janakiram et al. · 2017 · J Nat Sci Biol Med | approved | NT |
-| 128 | `index:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 128 | `index:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | XYLITOL CRYSTALS | corrected |  |
 | 129 | `index:research_behind_system_EkjATL/card_Hi7YUD/subheading` | template_setting | NANO-HYDROXYAPATITE | approved |  |
 | 130 | `index:research_behind_system_EkjATL/card_Hi7YUD/heading` | template_setting | Nano-HAp beat fluoride on tooth sensitivity. | needs-review | C C63 |
 | 131 | `index:research_behind_system_EkjATL/card_Hi7YUD/subtext` | template_setting | 105 people · 4 weeks | approved |  |
@@ -528,7 +533,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 134 | `index:research_behind_system_EkjATL/card_Hi7YUD/method_label` | template_setting | METHOD | approved |  |
 | 135 | `index:research_behind_system_EkjATL/card_Hi7YUD/method_text` | template_setting | Double-blind randomised controlled trial, three arms. | approved |  |
 | 136 | `index:research_behind_system_EkjATL/card_Hi7YUD/link_label` | template_setting | Vano et al. · 2018 · Clin Oral Investig | approved | NT |
-| 137 | `index:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 137 | `index:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES | corrected |  |
 | 138 | `index:research_behind_system_EkjATL/card_JeERX6/subheading` | template_setting | SLS-FREE | approved |  |
 | 139 | `index:research_behind_system_EkjATL/card_JeERX6/heading` | template_setting | No SLS meant fewer and shorter canker sores. | needs-review | C C64 |
 | 140 | `index:research_behind_system_EkjATL/card_JeERX6/subtext` | template_setting | 124 people · 4 crossover RCTs | approved |  |
@@ -537,7 +542,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 143 | `index:research_behind_system_EkjATL/card_JeERX6/method_label` | template_setting | METHOD | approved |  |
 | 144 | `index:research_behind_system_EkjATL/card_JeERX6/method_text` | template_setting | Systematic review and meta-analysis of 4 crossover RCTs. | approved |  |
 | 145 | `index:research_behind_system_EkjATL/card_JeERX6/link_label` | template_setting | Alli et al. · 2019 · J Oral Pathol Med | approved | NT |
-| 146 | `index:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 146 | `index:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | ORAL MUCOSA | corrected |  |
 | 147 | `index:km_faq_accordion_FYcArV/heading` | template_setting | Before you start | approved |  |
 | 148 | `index:km_faq_accordion_FYcArV/subtext` | template_setting | Everything people usually ask before switching to a day-and-night oral care system. | approved |  |
 | 149 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/category` | template_setting | The system | approved |  |
@@ -615,7 +620,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 221 | `liquid:assets/loop-widget.js:2468` | app | Renews every year | needs-key |  |
 | 222 | `liquid:assets/loop-widget.js:2213` | app | {{ value }} value · free | needs-key |  |
 | 223 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
-| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Health | admin-held |  |
+| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Care | admin-held |  |
 | 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
 | 226 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category` | template_setting | Plans & Return on Care | approved |  |
 | 227 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question` | template_setting | Can I pause, skip or cancel? | approved |  |
@@ -730,7 +735,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 102 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_label` | template_setting | Method | approved |  |
 | 103 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_text` | template_setting | Systematic review and meta-analysis of 7 clinical trials. | approved |  |
 | 104 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/link_label` | template_setting | Janakiram et al. · 2017 · J Nat Sci Biol Med | approved | NT |
-| 105 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 105 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | XYLITOL CRYSTALS | corrected |  |
 | 106 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subheading` | template_setting | NANO-HYDROXYAPATITE | approved |  |
 | 107 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/heading` | template_setting | Nano-HAp beat fluoride on tooth sensitivity. | needs-review | C C63 |
 | 108 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subtext` | template_setting | 105 people · 4 weeks | approved |  |
@@ -739,7 +744,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 111 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_label` | template_setting | METHOD | approved |  |
 | 112 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_text` | template_setting | Double-blind randomised controlled trial, three arms. | approved |  |
 | 113 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/link_label` | template_setting | Vano et al. · 2018 · Clin Oral Investig | approved | NT |
-| 114 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 114 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES | corrected |  |
 | 115 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subheading` | template_setting | SLS-FREE | approved |  |
 | 116 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/heading` | template_setting | No SLS meant fewer and shorter canker sores. | needs-review | C C64 |
 | 117 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subtext` | template_setting | 124 people · 4 crossover RCTs | approved |  |
@@ -748,7 +753,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 120 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_label` | template_setting | METHOD | approved |  |
 | 121 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_text` | template_setting | Systematic review and meta-analysis of 4 crossover RCTs. | approved |  |
 | 122 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/link_label` | template_setting | Alli et al. · 2019 · J Oral Pathol Med | approved | NT |
-| 123 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | DENTINE TUBULES - OPEN AND OCCLUDED | approved |  |
+| 123 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | ORAL MUCOSA | corrected |  |
 | 124 | `product.subscription-item:featured_product_Eb93Xa/title_GDDYEK/custom_title` | template_setting | Your welcome kit includes | approved |  |
 | 125 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/pricing_summary_care_credit_title` | template_setting | Care Credits back | approved |  |
 | 126 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` | template_setting | Awake & Asleep AM/PM Oral Care System | approved | R |
