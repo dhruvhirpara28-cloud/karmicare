@@ -49,9 +49,14 @@ Flow `UAY2YB`, "Practitioner request: confirmation and alert", in **Draft**:
   - from `KARMICARE <we@karmicare.com>`, reply-to `victor@karmicare.com`;
   - Smart Sending off, UTM off, transactional not applied for yet;
   - template: plain. The KARMICARE logo from the Klaviyo image library sits on top (160 px,
-    centred, alt "KARMICARE") with no header bar. Below it is one text block with the §4 body,
-    then a small grey unsubscribe line (`{% unsubscribe %}`). White background, text and links
-    `#222222`, font Helvetica.
+    centred, alt "KARMICARE") with no header bar. Below it are three text blocks:
+    1. the greeting and thank-you;
+    2. "Your request" with everything the requester sent, on a primary-surface panel (Victor, 25
+       Oct): text-area background `#FFFBF6` (Surface/Primary Day, the site's cream), a 1 px
+       `#DDDBD9` edge and 20 px padding;
+    3. the company line and a small grey unsubscribe line (`{% unsubscribe %}`).
+
+    White background, text and links `#222222`, font Helvetica.
   - The default template's purple header bar, white body text, social icons and grey footer
     were removed.
   - Preview with the test event renders every field: the empty phone is skipped, and pack and
