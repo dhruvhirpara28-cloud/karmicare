@@ -2,21 +2,21 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "43c6e4e01271f6d0a3973509a47a306199641854",
- "source_entries": 46,
+ "source_digest": "2bf838600269a9c831c92132ba41ccab674eda67",
+ "source_entries": 48,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 8,
+  "translated": 6,
   "locale-present": 9,
-  "held": 5,
-  "theme-key": 13,
+  "held": 7,
+  "theme-key": 15,
   "admin": 11
  },
  "flag_counts": {
   "pending-claim-review": 1,
-  "legal-review": 7,
+  "legal-review": 5,
   "wording-adapted": 1
  },
  "entries": [
@@ -614,12 +614,10 @@
    "key_path": "sections.footer.settings.legal_guarantee_label",
    "en": "Your legal guarantee rights",
    "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
-   "fr": "Vos droits à la garantie légale",
-   "status": "translated",
-   "flags": [
-    "legal-review"
-   ],
-   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct",
+   "fr": "",
+   "status": "held",
+   "flags": [],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct; retired 25 Oct: the label is a schema default the live footer-group never stores, so registration cannot reach it; the footer now falls back to the locale key kc.footer.legal_guarantee (global-footer lane, landing desk brief msg_69df45814299; Victor 'ja codefix voor labels'), so this row leaves the registration; was translated: Vos droits à la garantie légale",
    "source_status": "approved"
   },
   {
@@ -629,12 +627,36 @@
    "key_path": "sections.footer.settings.legal_withdrawal_label",
    "en": "Withdraw from contract here",
    "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+   "fr": "",
+   "status": "held",
+   "flags": [],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct; retired 25 Oct: the label is a schema default the live footer-group never stores, so registration cannot reach it; the footer now falls back to the locale key kc.footer.legal_withdrawal (global-footer lane, landing desk brief msg_69df45814299; Victor 'ja codefix voor labels'), so this row leaves the registration; was translated: Renoncer au contrat ici",
+   "source_status": "approved"
+  },
+  {
+   "id": "locale:kc.footer.legal_guarantee",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.legal_guarantee",
+   "en": "Your legal guarantee rights",
+   "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
+   "fr": "Vos droits à la garantie légale",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md §3; was the setting row footer-group:footer/legal_guarantee_label (25 Oct)",
+   "source_status": "approved"
+  },
+  {
+   "id": "locale:kc.footer.legal_withdrawal",
+   "resource_type": "theme_locale",
+   "file_or_handle": "sections/footer.liquid",
+   "key_path": "kc.footer.legal_withdrawal",
+   "en": "Withdraw from contract here",
+   "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
    "fr": "Renoncer au contrat ici",
-   "status": "translated",
-   "flags": [
-    "legal-review"
-   ],
-   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct",
+   "status": "theme-key",
+   "flags": [],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md §3; was the setting row footer-group:footer/legal_withdrawal_label (25 Oct)",
    "source_status": "approved"
   }
  ]
