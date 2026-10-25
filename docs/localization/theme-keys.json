@@ -432,6 +432,36 @@
    "fr_review": null
   },
   {
+   "key": "kc.footer.legal_guarantee",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.legal_guarantee"
+   ],
+   "en": "Your legal guarantee rights",
+   "nl": "Je wettelijke garantierechten",
+   "nl_hold": null,
+   "fr": "Vos droits à la garantie légale",
+   "fr_hold": null,
+   "note": "Footer legal row link text; sections/footer.liquid uses it when the setting legal_guarantee_label is blank (global-footer lane, 25 Oct). Replaces the registration of footer-group:footer/legal_guarantee_label, which the live footer-group never stores.",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.legal_withdrawal",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.legal_withdrawal"
+   ],
+   "en": "Withdraw from contract here",
+   "nl": "Hier de overeenkomst herroepen",
+   "nl_hold": null,
+   "fr": "Renoncer au contrat ici",
+   "fr_hold": null,
+   "note": "Footer legal row link text; sections/footer.liquid uses it when the setting legal_withdrawal_label is blank (global-footer lane, 25 Oct). Replaces the registration of footer-group:footer/legal_withdrawal_label, which the live footer-group never stores.",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
    "key": "kc.hero.aria_label",
    "area": "hero",
    "ids": [
