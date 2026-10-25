@@ -6836,7 +6836,8 @@
    "sha1": "f9a8cf8682a68e8baf3193dcddadab28534783ca",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'price_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'price_rhythm'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup"
   },
   {
    "id": "liquid:sections/main-product.liquid:960",
@@ -6849,7 +6850,8 @@
    "sha1": "22efce5598d283c7ff4dbdbda9817a76b50b161b",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'price_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'price_year'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup"
   },
   {
    "id": "liquid:sections/main-product.liquid:966",
@@ -6862,7 +6864,8 @@
    "sha1": "5d23613e7853930b9b53fe2b92d75ac326234895",
    "status": "needs-key",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)",
+   "retired": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup"
   },
   {
    "id": "liquid:sections/main-product.liquid:977",

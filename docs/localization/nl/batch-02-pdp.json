@@ -7,9 +7,9 @@
  "counts": {
   "translated": 134,
   "pending-claim-review": 24,
-  "held": 41,
+  "held": 44,
   "dawn-nl": 15,
-  "theme-key": 34,
+  "theme-key": 31,
   "admin": 250
  },
  "fit_risk": [
@@ -2231,12 +2231,10 @@
    "key_path": "sections/main-product.liquid:954",
    "en": "[price] every 60 days",
    "en_sha1": "f9a8cf8682a68e8baf3193dcddadab28534783ca",
-   "nl": "[price] om de 60 dagen",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup; was theme-key: [price] om de 60 dagen"
   },
   {
    "id": "liquid:sections/main-product.liquid:960",
@@ -2245,12 +2243,10 @@
    "key_path": "sections/main-product.liquid:960",
    "en": "[price] per year",
    "en_sha1": "22efce5598d283c7ff4dbdbda9817a76b50b161b",
-   "nl": "[price] per jaar",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup; was theme-key: [price] per jaar"
   },
   {
    "id": "liquid:sections/main-product.liquid:966",
@@ -2259,12 +2255,10 @@
    "key_path": "sections/main-product.liquid:966",
    "en": "[price] one time",
    "en_sha1": "5d23613e7853930b9b53fe2b92d75ac326234895",
-   "nl": "[price] eenmalig",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup; was theme-key: [price] eenmalig"
   },
   {
    "id": "liquid:sections/main-product.liquid:977",
