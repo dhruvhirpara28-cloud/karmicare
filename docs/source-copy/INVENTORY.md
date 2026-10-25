@@ -111,7 +111,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 232 | `003612b5dcb6abd012b4c38ac0b05d4133412883` |
+| `batch-01-homepage` | 232 | `2637293ba890353bcf3d8871bf418e9318c36a3c` |
 | `batch-02-pdp` | 524 | `fb09c0f8bbcf87c736751088cc518158ddf3d658` |
 | `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
 | `batch-04-legal` | 1012 | `4ead9703b4cfc2fc346b6e25843f38afec1124e7` |
@@ -622,8 +622,8 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 221 | `liquid:assets/loop-widget.js:2468` | app | Renews every year | needs-key |  |
 | 222 | `liquid:assets/loop-widget.js:2213` | app | {{ value }} value · free | needs-key |  |
 | 223 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
-| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Care | admin-held |  |
-| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
+| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE \| Fluoride-Free Nano-Hydroxyapatite Toothpaste | admin-held |  |
+| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Awake for the morning, Asleep for the evening. Fluoride-free, SLS-free formulas with nano-hydroxyapa… | admin-held |  |
 | 226 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category` | template_setting | Plans & Return on Care | approved |  |
 | 227 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question` | template_setting | Can I pause, skip or cancel? | approved |  |
 | 228 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer` | template_setting | Your membership is completely in your hands. Amend when desired. | approved |  |
