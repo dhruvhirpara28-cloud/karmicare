@@ -2,15 +2,16 @@
  "lang": "nl",
  "batch": "batch-03-header-footer",
  "source": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "86a1ed1903574cc27ebdd396c86c5f98b4d95512",
- "source_entries": 44,
+ "source_digest": "f1ed7dedf4ba6efa48a45403ff07c786e786192f",
+ "source_entries": 46,
  "counts": {
   "translated": 5,
   "pending-claim-review": 1,
   "dawn-nl": 9,
   "held": 5,
   "theme-key": 13,
-  "admin": 11
+  "admin": 11,
+  "legal-review": 2
  },
  "fit_risk": [
   "liquid:sections/footer.liquid:679",
@@ -609,6 +610,34 @@
     "theme-key"
    ],
    "notes": "footer newsletter (kc.footer.retry); Victor 24 Oct"
+  },
+  {
+   "id": "footer-group:footer/legal_guarantee_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_guarantee_label",
+   "en": "Your legal guarantee rights",
+   "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
+   "nl": "Je wettelijke garantierechten",
+   "status": "legal-review",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct"
+  },
+  {
+   "id": "footer-group:footer/legal_withdrawal_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_withdrawal_label",
+   "en": "Withdraw from contract here",
+   "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+   "nl": "Hier de overeenkomst herroepen",
+   "status": "legal-review",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct"
   }
  ]
 }

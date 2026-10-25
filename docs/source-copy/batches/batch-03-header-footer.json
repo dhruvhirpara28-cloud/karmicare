@@ -1,6 +1,6 @@
 {
  "batch": "batch-03-header-footer",
- "digest": "86a1ed1903574cc27ebdd396c86c5f98b4d95512",
+ "digest": "f1ed7dedf4ba6efa48a45403ff07c786e786192f",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -611,6 +611,40 @@
    "status": "approved",
    "never_translate": false,
    "notes": "footer newsletter, data-msg-retry on #FooterNewsletter (R46-B4): timeout, 401/403/404/429/5xx or network error; the signup may have gone through, so it does not say it failed; plain text in a data attribute; EN, NL and FR Victor 24 Oct (in session, option 'Niet bevestigd')"
+  },
+  {
+   "id": "footer-group:footer/legal_guarantee_label",
+   "batch": "batch-03-header-footer",
+   "page": "all pages",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_guarantee_label",
+   "en": "Your legal guarantee rights",
+   "sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type text; new 25 Oct from live main 70d4316 (merchant-edit 9a0594b); NL/FR from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md (§3 footer legal row, landing 52)",
+   "legal": true,
+   "setting_type": "text",
+   "section_type": "footer",
+   "rendered": true
+  },
+  {
+   "id": "footer-group:footer/legal_withdrawal_label",
+   "batch": "batch-03-header-footer",
+   "page": "all pages",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_withdrawal_label",
+   "en": "Withdraw from contract here",
+   "sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type text; new 25 Oct from live main 70d4316 (merchant-edit 9a0594b); NL/FR from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md (§3 footer legal row, landing 52)",
+   "legal": true,
+   "setting_type": "text",
+   "section_type": "footer",
+   "rendered": true
   }
  ]
 }

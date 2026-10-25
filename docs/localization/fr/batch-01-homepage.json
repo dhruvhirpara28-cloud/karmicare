@@ -8,8 +8,8 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 173,
-  "held": 23,
+  "translated": 171,
+  "held": 25,
   "locale-present": 2,
   "theme-key": 32,
   "admin": 2
@@ -19,7 +19,6 @@
   "pending-claim-review": 14,
   "gendered-title": 7,
   "pending-en-review": 2,
-  "source-defect": 1,
   "not-rendered": 6,
   "wording-adapted": 2,
   "legal-review": 1
@@ -1945,10 +1944,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -2070,12 +2069,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge; translated as written, homepage owner to confirm the badge.",
+   "fr": "",
+   "status": "held",
+   "flags": [],
+   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge; translated as written, homepage owner to confirm the badge.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {

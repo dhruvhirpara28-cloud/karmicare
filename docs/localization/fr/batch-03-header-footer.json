@@ -2,13 +2,13 @@
  "batch": "batch-03-header-footer",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-03-header-footer.json",
- "source_digest": "86a1ed1903574cc27ebdd396c86c5f98b4d95512",
- "source_entries": 44,
+ "source_digest": "f1ed7dedf4ba6efa48a45403ff07c786e786192f",
+ "source_entries": 46,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 6,
+  "translated": 8,
   "locale-present": 9,
   "held": 5,
   "theme-key": 13,
@@ -16,7 +16,7 @@
  },
  "flag_counts": {
   "pending-claim-review": 1,
-  "legal-review": 5,
+  "legal-review": 7,
   "wording-adapted": 1
  },
  "entries": [
@@ -605,6 +605,36 @@
    "status": "theme-key",
    "flags": [],
    "notes": "footer newsletter (kc.footer.retry); Victor 24 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "footer-group:footer/legal_guarantee_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_guarantee_label",
+   "en": "Your legal guarantee rights",
+   "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
+   "fr": "Vos droits à la garantie légale",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct",
+   "source_status": "approved"
+  },
+  {
+   "id": "footer-group:footer/legal_withdrawal_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/footer-group.json",
+   "key_path": "sections.footer.settings.legal_withdrawal_label",
+   "en": "Withdraw from contract here",
+   "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
+   "fr": "Renoncer au contrat ici",
+   "status": "translated",
+   "flags": [
+    "legal-review"
+   ],
+   "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct",
    "source_status": "approved"
   }
  ]

@@ -8,8 +8,8 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 139,
-  "held": 39,
+  "translated": 137,
+  "held": 41,
   "locale-present": 15,
   "theme-key": 34,
   "admin": 271
@@ -21,8 +21,8 @@
   "gendered-title": 14,
   "pending-en-review": 5,
   "not-rendered": 6,
-  "source-defect": 4,
   "legal-review": 1,
+  "source-defect": 3,
   "invariant": 15,
   "admin": 2
  },
@@ -1624,10 +1624,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -1749,12 +1749,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
    "en": "DENTINE TUBULES - OPEN AND OCCLUDED",
    "en_sha1": "866529fd08a4206843f62ae1064b6a9f30c558a7",
-   "fr": "TUBULES DENTINAIRES - OUVERTS ET OBTURÉS",
-   "status": "translated",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge (here with a hyphen instead of '·'); translated as written, PDP owner to confirm the badge.",
+   "fr": "",
+   "status": "held",
+   "flags": [],
+   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge (here with a hyphen instead of '·'); translated as written, PDP owner to confirm the badge.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES - OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES - OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
