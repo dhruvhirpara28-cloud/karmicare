@@ -109,19 +109,21 @@
         data-error-required="{{ s.request_error_profession_choice | escape }}"
       >
         <legend class="kc-pr__label">{{ s.request_legend_profession | escape }}</legend>
-        {%- for value in profession_values -%}
-          <label class="kc-pr__check" for="KcPr-profession-{{ forloop.index }}">
-            <input
-              type="radio"
-              id="KcPr-profession-{{ forloop.index }}"
-              name="contact[Profession]"
-              value="{{ value | escape }}"
-              required
-              data-kc-pr-profession
-            >
-            <span>{{ profession_labels[forloop.index0] | escape }}</span>
-          </label>
-        {%- endfor -%}
+        <div class="kc-pr__options">
+          {%- for value in profession_values -%}
+            <label class="kc-pr__check" for="KcPr-profession-{{ forloop.index }}">
+              <input
+                type="radio"
+                id="KcPr-profession-{{ forloop.index }}"
+                name="contact[Profession]"
+                value="{{ value | escape }}"
+                required
+                data-kc-pr-profession
+              >
+              <span>{{ profession_labels[forloop.index0] | escape }}</span>
+            </label>
+          {%- endfor -%}
+        </div>
         <div class="kc-pr__sub" data-kc-pr-other>
           <label class="kc-pr__label" for="KcPr-profession-other">{{ s.request_label_profession_other | escape }}</label>
           <input
@@ -208,26 +210,28 @@
         {%- if s.request_help_wants != blank -%}
           <p class="kc-pr__help" id="KcPr-wants-help">{{ s.request_help_wants | escape }}</p>
         {%- endif -%}
-        <label class="kc-pr__check" for="KcPr-pack">
-          <input
-            type="checkbox"
-            id="KcPr-pack"
-            name="contact[Evidence pack]"
-            value="Yes"
-            data-kc-pr-field="pack"
-          >
-          <span>{{ s.request_label_pack | escape }}</span>
-        </label>
-        <label class="kc-pr__check" for="KcPr-samples">
-          <input
-            type="checkbox"
-            id="KcPr-samples"
-            name="contact[Samples for my practice]"
-            value="Yes"
-            data-kc-pr-field="samples"
-          >
-          <span>{{ s.request_label_samples | escape }}</span>
-        </label>
+        <div class="kc-pr__options">
+          <label class="kc-pr__check" for="KcPr-pack">
+            <input
+              type="checkbox"
+              id="KcPr-pack"
+              name="contact[Evidence pack]"
+              value="Yes"
+              data-kc-pr-field="pack"
+            >
+            <span>{{ s.request_label_pack | escape }}</span>
+          </label>
+          <label class="kc-pr__check" for="KcPr-samples">
+            <input
+              type="checkbox"
+              id="KcPr-samples"
+              name="contact[Samples for my practice]"
+              value="Yes"
+              data-kc-pr-field="samples"
+            >
+            <span>{{ s.request_label_samples | escape }}</span>
+          </label>
+        </div>
         <p class="kc-pr__error" id="KcPr-wants-error" hidden></p>
       </fieldset>
 
@@ -264,6 +268,8 @@
       <input type="hidden" name="contact[Type]" value="Practitioner request: evidence pack / samples">
       <input type="hidden" name="contact[Language]" value="{{ request.locale.iso_code }}">
       <input type="hidden" name="contact[Page]" value="{{ request.origin }}{{ request.path }}">
+      {%- comment -%} The FAQ question above the link the form was opened with (set by the script) {%- endcomment -%}
+      <input type="hidden" name="contact[Opened from]" value="">
 
       <div class="kc-pr__actions">
         <button type="submit" class="button button--full-width">{{ s.request_button | escape }}</button>

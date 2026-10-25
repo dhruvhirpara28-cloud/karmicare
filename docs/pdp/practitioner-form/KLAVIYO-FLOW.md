@@ -27,6 +27,7 @@ Reloading the thank-you page does not send the event again. The call is aborted 
 | `properties.profession_other` | the text typed under Other, else empty |
 | `properties.profession_label` | the profession as the visitor read it (the radio label in the page language, or the typed text for Other), for the confirmation email |
 | `properties.practice_name` | practice name |
+| `properties.opened_from` | the FAQ question above the link the form was opened with, for example `For dentists` or `For kPNI / Orthomolecular practitioners` (R76g); also posted to Shopify as `contact[Opened from]` |
 | `properties.email` | email |
 | `properties.phone` | phone, or empty |
 | `properties.evidence_pack` / `properties.samples` | `true` / `false` |
@@ -72,10 +73,19 @@ Flow `UAY2YB`, "Practitioner request: confirmation and alert", in **Draft**:
   - subject `Practitioner request from {{ event.name }} ({{ event.language }})`;
   - message: the §4 alert fields.
   - Klaviyo first emails each recipient an opt-in for internal alerts, which Victor confirms once.
-- **Left for Victor**:
-  - approve the copy;
-  - apply for transactional status (§5);
-  - then set the flow Live and delete the test profile.
+- **25 Oct, Victor's decisions**:
+  - subject `We received your request for {% if event.evidence_pack and event.samples %}the evidence pack and samples{% elif event.samples %}samples{% else %}the evidence pack{% endif %}`;
+  - keep "Samples for my practice";
+  - the unsubscribe line removed;
+  - **transactional status applied for** with Klaviyo's "Submit for review". The email shows
+    "Under review", and the review can take up to 24 hours.
+- **Not set live yet.** Klaviyo says a message set live before approval goes out as
+  marketing, and this one no longer has an unsubscribe link. Set the flow Live once Klaviyo
+  reports the approval, then delete the test profile.
+- **Translations later** (Victor, 25 Oct): one fitting NL (je) and FR (vous) version of the
+  confirmation, with subject and preview text, wrapped in `event.language` branches. Use the
+  same terms as the NL/FR form labels from source-copy. An edit after approval sends the email
+  back to review.
 
 Template decision, Victor, 25 Oct:
 - For now, use something simple that already exists, with no branding except the logo on top.
@@ -152,6 +162,7 @@ Samples: {% if event.samples %}yes{% else %}no{% endif %}
 Practice address: {{ event.practice_address|default:"-" }}
 Message: {{ event.message|default:"-" }}
 Language: {{ event.language }}
+Opened from: {{ event.opened_from|default:"-" }}
 Page: {{ event.page }}
 ```
 
