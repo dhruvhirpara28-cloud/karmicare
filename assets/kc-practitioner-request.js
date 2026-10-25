@@ -1,12 +1,14 @@
 /* kc-practitioner-request.js: the practitioner request form in the PDP FAQ
    (snippets/kc-practitioner-request.liquid, R76; popup R76b; fallback R76c).
 
-   - Finds the trigger link in the answer text of the FAQ item that holds the form (href contains
-     data-trigger-url, else text contains data-trigger-text) and swaps it for a button with the same
-     content. The form panel moves into a modal <dialog> on body (a dialog inside a closed <details>
-     would not render), which that button opens. No link found, or no showModal(): the form stays
-     inline, as without JavaScript. If showModal() throws when it is called, the panel, the link
-     and the inline form come back in the FAQ item and the page is not locked.
+   - Finds the trigger links in the FAQ (answers and section content of every item, so also the
+     "For dentists" note; href contains data-trigger-url, else text contains data-trigger-text) and
+     swaps each for a button with the same content and classes. The form panel moves into a modal
+     <dialog> on body (a dialog inside a closed <details> would not render), which every button
+     opens; contact[Opened from] gets the FAQ question above the button used. No link found, or no
+     showModal(): the form stays inline, as without JavaScript. If showModal() throws when it is
+     called, the panel, the links and the inline form come back in the FAQ item and the page is
+     not locked.
    - The dialog, as the professionals quote panel: showModal, scrim, close button, Escape and a
      click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
      (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
@@ -47,25 +49,35 @@
     return null;
   }
 
-  function findTrigger(root) {
-    var item = root.closest('.kc-faq-item');
-    var answer = item && item.querySelector('.kc-faq-description');
-    if (!answer) return null;
-    var links = Array.prototype.slice.call(answer.querySelectorAll('a'));
+  /* Every trigger link in the FAQ: the answers and the section content of all items (the kPNI
+     answer, the "For dentists" note), by URL first, else by text. They all open the one form. */
+  function findTriggers(root) {
+    var faq = root.closest('.kc-faq-block') || root.closest('.kc-faq-item');
+    if (!faq) return [];
+    var links = Array.prototype.slice.call(
+      faq.querySelectorAll('.kc-faq-description a, .kc-faq-section-content a')
+    );
     var url = root.getAttribute('data-trigger-url') || '';
     var text = (root.getAttribute('data-trigger-text') || '').toLowerCase();
-    var found = null;
+    var found = [];
     if (url) {
       found = links.filter(function (a) {
         return (a.getAttribute('href') || '').indexOf(url) !== -1;
-      })[0];
+      });
     }
-    if (!found && text) {
+    if (!found.length && text) {
       found = links.filter(function (a) {
         return a.textContent.toLowerCase().indexOf(text) !== -1;
-      })[0];
+      });
     }
-    return found || null;
+    return found;
+  }
+
+  /* The FAQ question above a trigger, for "Opened from" in the inbox and in Klaviyo */
+  function itemTitle(el) {
+    var item = el && el.closest('.kc-faq-item');
+    var summary = item && item.querySelector('.kc-faq-summary');
+    return summary ? summary.textContent.trim() : '';
   }
 
   function init(root) {
@@ -73,27 +85,48 @@
     if (!form) return;
     var state = root.querySelector('[data-kc-pr-state]');
     var stateName = state ? state.getAttribute('data-kc-pr-state') : '';
-    var link = findTrigger(root);
+    var links = findTriggers(root);
     var dialog = null;
+    var buttons = [];
+    /* the button the visitor opened the form with; focus returns there */
     var button = null;
     var home = null;
+    var openedFrom = form.querySelector('input[type=hidden][name="contact[Opened from]"]');
+    var pending = stateName ? store('get') : null;
 
-    if (link && typeof document.createElement('dialog').showModal === 'function') {
-      button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'kc-pr-trigger';
-      button.innerHTML = link.innerHTML;
+    if (links.length && typeof document.createElement('dialog').showModal === 'function') {
       /* marks the panel's place in the FAQ item, for the inline fallback */
       home = document.createComment('kc-practitioner-request');
       root.parentNode.insertBefore(home, root);
       dialog = buildDialog(root, stateName, afterClose);
-      button.setAttribute('aria-haspopup', 'dialog');
-      button.setAttribute('aria-controls', dialog.id);
-      link.replaceWith(button);
-      button.addEventListener('click', function () {
-        show(null);
+      buttons = links.map(function (link) {
+        var trigger = document.createElement('button');
+        trigger.type = 'button';
+        /* the link's own classes keep its look (the dentists note styles .rda-link) */
+        trigger.className = (link.className ? link.className + ' ' : '') + 'kc-pr-trigger';
+        trigger.innerHTML = link.innerHTML;
+        trigger.setAttribute('aria-haspopup', 'dialog');
+        trigger.setAttribute('aria-controls', dialog.id);
+        link.replaceWith(trigger);
+        trigger.addEventListener('click', function () {
+          use(trigger);
+          show(null);
+        });
+        return trigger;
       });
+      /* after a post: the button the request was opened with, and its item open behind */
+      var before = pending && buttons[pending.opener];
+      use(before || buttons[0]);
+      if (before) {
+        var beforeItem = before.closest('.kc-faq-item');
+        if (beforeItem) beforeItem.open = true;
+      }
       dialog.addEventListener('close', afterClose);
+    }
+
+    function use(trigger) {
+      button = trigger;
+      if (openedFrom) openedFrom.value = itemTitle(trigger);
     }
 
     /* Opens the dialog and focuses the target: the thank-you or the alert after a reload, else the
@@ -125,11 +158,15 @@
     function backInline() {
       home.parentNode.insertBefore(root, home);
       home.remove();
-      button.replaceWith(link);
+      buttons.forEach(function (trigger, i) {
+        trigger.replaceWith(links[i]);
+      });
       dialog.removeEventListener('close', afterClose);
       dialog.remove();
       dialog = null;
+      buttons = [];
       button = null;
+      if (openedFrom) openedFrom.value = '';
       var item = root.closest('.kc-faq-item');
       if (item) item.open = true;
     }
@@ -318,6 +355,8 @@
       /* for the Klaviyo event on the thank-you reload: the profession as the visitor read it */
       snapshot.profession_label = chosen ? chosen.parentNode.textContent.trim() : '';
       snapshot.email = fields.email ? fields.email.value.trim() : '';
+      snapshot.opener = buttons.indexOf(button);
+      snapshot.opened_from = openedFrom ? openedFrom.value : '';
       snapshot.language = hiddenValue(form, 'Language');
       snapshot.page = hiddenValue(form, 'Page');
       snapshot.at = new Date().toISOString();
@@ -368,6 +407,7 @@
             message: saved.body || '',
             language: saved.language || '',
             page: saved.page || '',
+            opened_from: saved.opened_from || '',
           },
           time: saved.at,
           unique_id: saved.id || uid(),
