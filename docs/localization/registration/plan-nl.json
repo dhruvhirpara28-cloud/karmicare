@@ -1,25 +1,25 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "c7aad8e7aba8",
-  "registered.json": "a11f055e5675",
+  "en-source.json": "1eec11620593",
+  "registered.json": "de2a5be381ce",
   "holds.json": "009046a09618",
   "releases.json": "1571d1e3719b",
-  "nl/batch-01-homepage.json": "308d1ded221d",
-  "nl/batch-02-pdp.json": "f83740794320",
+  "nl/batch-01-homepage.json": "2d525fbab5ee",
+  "nl/batch-02-pdp.json": "48f25f7325f3",
   "nl/batch-03-header-footer.json": "9a44141ef8bc",
   "nl/batch-04-legal.json": "515999d1889d",
-  "nl/batch-05-products.json": "f295e2201669",
+  "nl/batch-05-products.json": "1575da34ae08",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
   "nl/batch-07-collections-blog.json": "e0944b1775df",
-  "nl/batch-08-system.json": "a46b443f6ed0"
+  "nl/batch-08-system.json": "6d3a7c5fbd8b"
  },
  "batches": {
-  "batch-01-homepage": "003612b5dcb6abd012b4c38ac0b05d4133412883",
-  "batch-02-pdp": "fb09c0f8bbcf87c736751088cc518158ddf3d658",
+  "batch-01-homepage": "2637293ba890353bcf3d8871bf418e9318c36a3c",
+  "batch-02-pdp": "e4d806146e401d40a2befeeabdcb7d1eef6a1ad5",
   "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
-  "batch-05-products": "e5164dca3745c2b94f13b29668c50df58d4754f3",
+  "batch-05-products": "d81030279c92a9b2f558528ffafeb4112fb71a78",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
@@ -3536,50 +3536,6 @@
       "trusted_professionals_HAqYth",
       "card_jcnr7Q",
       "hover_text"
-     ]
-    }
-   ]
-  },
-  {
-   "shopify_type": "SHOP",
-   "owner": "shop",
-   "batch": "batch-01-homepage",
-   "page": "home",
-   "items": [
-    {
-     "id": "admin:shop:online_store.preferences.homepage_title",
-     "kind": "direct",
-     "key": "meta_title",
-     "field": "online_store.preferences.homepage_title",
-     "en": "KARMICARE - Biorhythmic Oral Care",
-     "en_sha1": "09375ea76187b6f0ac40a1b73d0c48075b6ee452",
-     "value": "KARMICARE - Bioritmische mondzorg",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(SHOP), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:shop:online_store.preferences.homepage_meta_description",
-     "kind": "direct",
-     "key": "meta_description",
-     "field": "online_store.preferences.homepage_meta_description",
-     "en": "Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant extracts to elevate your morning and night. Nano Hydroxyapatite, fluoride free toothpaste.",
-     "en_sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4",
-     "value": "Karmicare ontwerpt bioritmische tandpasta's, geformuleerd met zuivere ingrediënten, noötropica en plantenextracten die je ochtend en avond naar een hoger niveau tillen. Nano-hydroxyapatiet, fluoridevrije tandpasta.",
-     "gates": [],
-     "hold": [],
-     "how": "owner GID from translatableResources(SHOP), matched on handle",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "same_as": [
-      "admin:system:search:seo.description",
-      "admin:system:collections:seo.description"
      ]
     }
    ]
@@ -7579,9 +7535,9 @@
      "kind": "direct",
      "key": "title",
      "field": "title",
-     "en": "Morning Toothbrush 2.0",
-     "en_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
-     "value": "Ochtendtandenborstel 2.0",
+     "en": "Morning Toothbrush",
+     "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
+     "value": "Ochtendtandenborstel",
      "gates": [],
      "hold": [],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
@@ -7630,9 +7586,73 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b001",
-     "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
-     "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
-     "value": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier.",
+     "en": "The bristles are extremely soft, so you can gently clean teeth and gums with ultimate care.",
+     "en_sha1": "1f3f2366eb50cd1a5d273534eeed83426ed1b3f7",
+     "value": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:morning-toothbrush-2-0:body_html#b002",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b002",
+     "en": "The ultra-thin, featherlight bristles help spread Awake or Asleep to the smallest, darkest places between your teeth and along your gumline.",
+     "en_sha1": "8d7bd63228e5bd523e79c43ad2e99ce4f3115252",
+     "value": "De ultradunne, vederlichte borstelhaartjes helpen Awake of Asleep te verspreiden tot in de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:morning-toothbrush-2-0:body_html#b003",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b003",
+     "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+     "en_sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+     "value": "De kop is niet te groot en niet te klein. Hij is perfect voor één pompje Awake of Asleep.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:morning-toothbrush-2-0:body_html#b004",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b004",
+     "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/evening-toothbrush-2-0\" title=\"KARMICARE Evening Toothbrush\">Evening Toothbrush</a>.",
+     "en_sha1": "ae79bc192307f85e18b12770c05a5e3274bddea0",
+     "value": "Gaat langer mee in combinatie met de <a href=\"/nl/products/evening-toothbrush-2-0\" title=\"KARMICARE avondtandenborstel\">avondtandenborstel</a> van KARMICARE.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:morning-toothbrush-2-0:body_html#b005",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b005",
+     "en": "Kickstart your day the KARMICARE way.",
+     "en_sha1": "729f4f13b41da5043e75ce6d03db54d630821b24",
+     "value": "Start je dag op de KARMICARE-manier.",
      "gates": [],
      "hold": [],
      "how": "block replaced inside the live body_html value",
@@ -7643,8 +7663,8 @@
     }
    ],
    "assembled_field": {
-    "blocks": 1,
-    "drafted": 1,
+    "blocks": 5,
+    "drafted": 5,
     "missing_or_held": 0,
     "gated": 0
    }
@@ -7660,9 +7680,9 @@
      "kind": "direct",
      "key": "title",
      "field": "title",
-     "en": "Evening Toothbrush 2.0",
-     "en_sha1": "57257b08045994042e5eb82673a6313ed48189fd",
-     "value": "Avondtandenborstel 2.0",
+     "en": "Evening Toothbrush",
+     "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
+     "value": "Avondtandenborstel",
      "gates": [],
      "hold": [],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
@@ -7679,9 +7699,9 @@
      "kind": "direct",
      "key": "meta_title",
      "field": "seo.title",
-     "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
-     "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
-     "value": "KARMICARE ultrazachte ontgiftende avondtandenborstel",
+     "en": "KARMICARE Ultra-soft Evening Toothbrush",
+     "en_sha1": "0647fdc97160188cec8bcd35bbe45f6e80e1ec9a",
+     "value": "KARMICARE ultrazachte avondtandenborstel",
      "gates": [],
      "hold": [],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
@@ -7711,9 +7731,73 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b001",
-     "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
-     "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
-     "value": "De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier.",
+     "en": "The bristles are extremely soft.",
+     "en_sha1": "f15f37461f85a92972f6373309523a1cdbc47dc6",
+     "value": "De borstelharen zijn extreem zacht.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:evening-toothbrush-2-0:body_html#b002",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b002",
+     "en": "The ultra-thin, featherlight bristles help remove plaque easily without being abrasive.",
+     "en_sha1": "d7c4483ac2cef6c5fbd3a0958120dffe851e95b8",
+     "value": "De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:evening-toothbrush-2-0:body_html#b003",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b003",
+     "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+     "en_sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+     "value": "De kop is niet te groot en niet te klein. Hij is perfect voor één pompje Awake of Asleep.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:evening-toothbrush-2-0:body_html#b004",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b004",
+     "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/morning-toothbrush-2-0\" title=\"KARMICARE Morning Toothbrush\">Morning Toothbrush</a>.",
+     "en_sha1": "a19c170754d13863501d4caf42bfaef30259710c",
+     "value": "Gaat langer mee in combinatie met de <a href=\"/nl/products/morning-toothbrush-2-0\" title=\"KARMICARE ochtendtandenborstel\">ochtendtandenborstel</a> van KARMICARE.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:evening-toothbrush-2-0:body_html#b005",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b005",
+     "en": "End your day the KARMICARE way.",
+     "en_sha1": "b9ebf1fb40fa30d6748c87540568ae67ab8643cb",
+     "value": "Sluit je dag af op de KARMICARE-manier.",
      "gates": [],
      "hold": [],
      "how": "block replaced inside the live body_html value",
@@ -7724,8 +7808,8 @@
     }
    ],
    "assembled_field": {
-    "blocks": 1,
-    "drafted": 1,
+    "blocks": 5,
+    "drafted": 5,
     "missing_or_held": 0,
     "gated": 0
    }
@@ -7792,9 +7876,41 @@
      "kind": "assemble",
      "key": "body",
      "field": "body_html#b001",
-     "en": "Ultrathin bamboo charcoal dental floss without flavour.<br><br>Helps remove tenacious plaque without damaging enamel.<br><br>Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.<br><br>Remove food rests and other residue stuck between your teeth.<br><br>*Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.",
-     "en_sha1": "36e86a4fd6675dc28b89bb2e60087c19f5b59350",
-     "value": "Ultradunne floss van bamboehoutskool, zonder smaak.<br><br>Helpt hardnekkige tandplak te verwijderen zonder het glazuur te beschadigen.<br><br>Witmaken tussen je tanden tijdens het flossen helpt de gele koffievlekken laag bij de tandvleesrand weg te werken.<br><br>Verwijder etensresten en ander vuil dat tussen je tanden vastzit.<br><br>*De gecoate houtskooldraad helpt tandsteen en tandplak te verwijderen en laat je tandvlees fris en schoon achter.",
+     "en": "Ultra-thin bamboo charcoal dental floss, without flavour.",
+     "en_sha1": "0c91e345ec458e7e46aa3764be3f22f9f9ef6972",
+     "value": "Ultradunne floss van bamboehoutskool, zonder smaak.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:whitening-charcoal-dental-floss:body_html#b002",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b002",
+     "en": "Helps remove stubborn plaque without damaging enamel.",
+     "en_sha1": "8a32dd2684f2cc0bbe62495dde28234370bf101e",
+     "value": "Helpt hardnekkige tandplak te verwijderen zonder het glazuur te beschadigen.",
+     "gates": [],
+     "hold": [],
+     "how": "block replaced inside the live body_html value",
+     "status": {
+      "drafted": true,
+      "registered": false
+     }
+    },
+    {
+     "id": "admin:product:whitening-charcoal-dental-floss:body_html#b003",
+     "kind": "assemble",
+     "key": "body",
+     "field": "body_html#b003",
+     "en": "Helps remove food remains and other residue stuck between your teeth.",
+     "en_sha1": "6276cc826a0812c4e567438556be76e917f2e2f7",
+     "value": "Helpt etensresten en ander vuil tussen je tanden te verwijderen.",
      "gates": [],
      "hold": [],
      "how": "block replaced inside the live body_html value",
@@ -7805,8 +7921,8 @@
     }
    ],
    "assembled_field": {
-    "blocks": 1,
-    "drafted": 1,
+    "blocks": 3,
+    "drafted": 3,
     "missing_or_held": 0,
     "gated": 0
    }
@@ -24858,9 +24974,9 @@
      "kind": "direct",
      "key": "title",
      "field": "title",
-     "en": "Asleep Evening Toothpaste 2.0",
-     "en_sha1": "3452e86673de47a289dd6f79fd7a6e427918f28e",
-     "value": "Asleep-avondtandpasta 2.0",
+     "en": "Asleep Evening Toothpaste",
+     "en_sha1": "9ba9a5aa6572bbb96900d4258b57de559ca634f4",
+     "value": "Asleep-avondtandpasta",
      "gates": [],
      "hold": [],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
@@ -24984,9 +25100,9 @@
      "kind": "direct",
      "key": "title",
      "field": "title",
-     "en": "Awake Morning Toothpaste 2.0",
-     "en_sha1": "d1ad2e7225eace6463e4e74a68753960e4b89f32",
-     "value": "Awake-ochtendtandpasta 2.0",
+     "en": "Awake Morning Toothpaste",
+     "en_sha1": "c4e67f1a8668319b7b239040d3f674b16ad5b57a",
+     "value": "Awake-ochtendtandpasta",
      "gates": [],
      "hold": [],
      "how": "owner GID from translatableResources(PRODUCT), matched on handle",
