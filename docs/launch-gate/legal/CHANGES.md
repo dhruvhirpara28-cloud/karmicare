@@ -1197,6 +1197,36 @@ The NL and FR of every change are in `TRANSLATIONS-HANDOFF.md` (theme pages) and
 > Terms and Conditions
 
 
+## 3k. R57i, NL/FR addresses in local form (Victor 25 Oct, source-copy round 4): the changes, one by one (EN old → new)
+
+
+### AK1 · Terms of service (NL/FR): header, clause 1, clause 4.7.2 return address, clause 15.2 mediation and ECC, Annex
+
+**Setting**: `page.terms-and-conditions:(policy only)` · policy `terms-of-service`
+
+**Why**: Victor (25 Oct, landing desk “2a, ga je gang”): NL and FR write postal addresses in their local form, as source-copy round 4 (0baa6f4, ROUND4.md) does in the legal template rows: NL Belgium → België, Bruges → Brugge, Brussels → Brussel, box → bus; FR Belgium → Belgique, Brussels → Bruxelles, box → boîte. Street names stay as in the EN (Vizierstraat, Boulevard du Roi Albert II, Koning Albert II-laan, Drukpersstraat); EN stays “Bruges, Belgium”. Only address spans change; “Brussel I bis” / “Bruxelles I bis”, the court seat “afdeling Brugge” / “division Bruges” and running text are untouched. Policy bodies only: the theme NL/FR values are source-copy's.
+
+**Legal basis**: Victor's decision of 25 Oct; source-copy `docs/localization/registration/ROUND4.md` at 0baa6f4 (decision 1) and its NL/FR batch-04 rows, read only.
+
+
+### AK2 · Refund policy (NL/FR): header, 3.6.4 return address, 8.1 mediation, 8.2 ECC, section 10
+
+**Setting**: `page.consumer-rights:(policy only)` · policy `refund-policy`
+
+**Why**: Victor (25 Oct, landing desk “2a, ga je gang”): NL and FR write postal addresses in their local form, as source-copy round 4 (0baa6f4, ROUND4.md) does in the legal template rows: NL Belgium → België, Bruges → Brugge, Brussels → Brussel, box → bus; FR Belgium → Belgique, Brussels → Bruxelles, box → boîte. Street names stay as in the EN (Vizierstraat, Boulevard du Roi Albert II, Koning Albert II-laan, Drukpersstraat); EN stays “Bruges, Belgium”. Only address spans change; “Brussel I bis” / “Bruxelles I bis”, the court seat “afdeling Brugge” / “division Bruges” and running text are untouched. Policy bodies only: the theme NL/FR values are source-copy's.
+
+**Legal basis**: Victor's decision of 25 Oct; source-copy `docs/localization/registration/ROUND4.md` at 0baa6f4 (decision 1) and its NL/FR batch-04 rows, read only.
+
+
+### AK3 · Privacy policy (NL/FR): header, section 2 controller, section 8 postal address and Data Protection Authority
+
+**Setting**: `page.privacy-policy:(policy only)` · policy `privacy-policy`
+
+**Why**: Victor (25 Oct, landing desk “2a, ga je gang”): NL and FR write postal addresses in their local form, as source-copy round 4 (0baa6f4, ROUND4.md) does in the legal template rows: NL Belgium → België, Bruges → Brugge, Brussels → Brussel, box → bus; FR Belgium → Belgique, Brussels → Bruxelles, box → boîte. Street names stay as in the EN (Vizierstraat, Boulevard du Roi Albert II, Koning Albert II-laan, Drukpersstraat); EN stays “Bruges, Belgium”. Only address spans change; “Brussel I bis” / “Bruxelles I bis”, the court seat “afdeling Brugge” / “division Bruges” and running text are untouched. Policy bodies only: the theme NL/FR values are source-copy's.
+
+**Legal basis**: Victor's decision of 25 Oct; source-copy `docs/localization/registration/ROUND4.md` at 0baa6f4 (decision 1) and its NL/FR batch-04 rows, read only.
+
+
 ## 4. What was verified, and where (24 Oct 2026)
 
 | Rule used in the text | Source read today | Link |
