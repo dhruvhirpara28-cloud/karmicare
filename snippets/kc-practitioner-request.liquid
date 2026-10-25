@@ -9,7 +9,9 @@
 
   The post is Shopify's own contact form, as on the withdrawal page: it goes to the store's contact
   email (Settings > General > Store details). The inbox keys are fixed English words, so every
-  language arrives the same way; contact[Language] says which page it came from.
+  language arrives the same way; contact[Language] says which page it came from. With the Klaviyo
+  key setting filled, the script also sends one event to Klaviyo once Shopify has accepted the post;
+  Klaviyo's flow emails the practitioner a confirmation and the team an alert, from karmicare.com.
 
   Accepts:
   - s: the product_faq block settings (every visible string is a setting)
@@ -39,6 +41,8 @@
   data-kc-pr
   data-trigger-url="{{ trigger_url | escape }}"
   data-trigger-text="{{ trigger_text | escape }}"
+  data-klaviyo-company="{{ s.request_klaviyo_company_id | strip | escape }}"
+  data-klaviyo-metric="{{ s.request_klaviyo_metric | strip | escape }}"
 >
   <template data-kc-pr-dialog-close>
     <button type="button" class="kc-pr-dialog__close" data-kc-pr-close aria-label="{{ 'accessibility.close' | t | escape }}">

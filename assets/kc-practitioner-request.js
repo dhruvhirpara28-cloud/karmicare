@@ -16,7 +16,12 @@
    - Shopify reloads the page after the post. The item is already open (Liquid); the dialog opens
      again with the thank-you (announced) or the alert, and focus goes there. On an error the fields
      Shopify does not give back are restored from this tab's sessionStorage, which is cleared again
-     at once. */
+     at once.
+   - With the Klaviyo key set (data-klaviyo-company), the thank-you reload sends one event with the
+     request from that same sessionStorage snapshot to Klaviyo's public endpoint; Klaviyo's flow
+     emails the confirmation and the team alert. Only after Shopify accepted the post, so a refused
+     or stopped post confirms nothing. No snapshot (storage blocked): no event, the request itself
+     still arrives in the store inbox. */
 
 (function () {
   'use strict';
@@ -24,6 +29,9 @@
   var STORE_KEY = 'kc-practitioner-request';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var RESTORED = ['profession', 'pack', 'samples', 'address', 'name', 'phone', 'body'];
+  var KLAVIYO_EVENTS = 'https://a.klaviyo.com/client/events/';
+  var KLAVIYO_REVISION = '2026-10-15';
+  var KLAVIYO_METRIC = 'Practitioner Request Submitted';
 
   function store(action, value) {
     try {
@@ -132,7 +140,9 @@
     }
 
     if (stateName === 'success') {
+      var sent = store('get');
       store('clear');
+      sendEvent(root, sent);
       var live = root.querySelector('[data-kc-pr-live]');
       if (live) {
         /* re-set the text so screen readers announce the live region after the reload */
@@ -258,11 +268,70 @@
         if (!el) return;
         snapshot[key] = el.type === 'checkbox' ? el.checked : el.value;
       });
+      /* for the Klaviyo event on the thank-you reload */
+      snapshot.email = fields.email ? fields.email.value.trim() : '';
+      snapshot.language = hiddenValue(form, 'Language');
+      snapshot.page = hiddenValue(form, 'Page');
+      snapshot.at = new Date().toISOString();
+      snapshot.id = uid();
       store('set', snapshot);
     });
 
     /* last, so the checks above are in place whatever happens when the dialog opens */
     if (stateName === 'error') show(state);
+  }
+
+  function hiddenValue(form, key) {
+    var input = form.querySelector('input[type=hidden][name="contact[' + key + ']"]');
+    return input ? input.value : '';
+  }
+
+  function uid() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    return String(Date.now()) + '-' + Math.random().toString(16).slice(2);
+  }
+
+  /* One event to Klaviyo's public endpoint (the same call as the withdrawal page). The profile gets
+     the email only: practitioners often type a title ("Dr. An Peeters"), so the flow emails greet
+     with event.name as typed instead of a split first name. The request itself travels as event
+     properties. Fire and forget: the thank-you is already on screen and does not depend on it. */
+  function sendEvent(root, saved) {
+    var company = (root.getAttribute('data-klaviyo-company') || '').trim();
+    if (!company || !saved || !saved.email || typeof window.fetch !== 'function') return;
+    var metric = (root.getAttribute('data-klaviyo-metric') || '').trim() || KLAVIYO_METRIC;
+    var payload = {
+      data: {
+        type: 'event',
+        attributes: {
+          metric: { data: { type: 'metric', attributes: { name: metric } } },
+          profile: { data: { type: 'profile', attributes: { email: saved.email } } },
+          properties: {
+            name: (saved.name || '').trim(),
+            profession: saved.profession || '',
+            email: saved.email,
+            phone: saved.phone || '',
+            evidence_pack: !!saved.pack,
+            samples: !!saved.samples,
+            practice_address: saved.samples ? saved.address || '' : '',
+            message: saved.body || '',
+            language: saved.language || '',
+            page: saved.page || '',
+          },
+          time: saved.at,
+          unique_id: saved.id || uid(),
+        },
+      },
+    };
+    window
+      .fetch(KLAVIYO_EVENTS + '?company_id=' + encodeURIComponent(company), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', revision: KLAVIYO_REVISION },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      })
+      .catch(function () {
+        /* offline or blocked: the request is in the store inbox all the same */
+      });
   }
 
   function reveal(el) {

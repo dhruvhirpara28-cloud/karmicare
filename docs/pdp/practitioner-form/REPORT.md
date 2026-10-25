@@ -1,5 +1,63 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76d: Klaviyo confirmation and team alert from karmicare.com
+
+Victor, 25 Oct: "we need this to be sent from karmicare domain, and the confirmation to the
+customer via Klaviyo". He chose three things: a Klaviyo alert to the team on top of Shopify's
+copy, the event only after Shopify accepted the post, and one test event to create the metric.
+Everything else (the event, the flow, the texts, the approval) is in
+`docs/pdp/practitioner-form/KLAVIYO-FLOW.md`.
+
+Facts, checked 25 Oct (read-only in Shopify admin, public DNS and Gmail):
+
+- **Sender email.** Shopify's Sender email is `info@karmicare.com`, so requests reach info@.
+  This answers the open point under "Where the requests go" below.
+- **Contact-form sender.** Contact-form mail arrives from `mailer@shopify.com`, whatever domain
+  authentication is set. Shopify sets that sender, so no setting can make it karmicare.com.
+- **Klaviyo sender.** Klaviyo already sends from `we@karmicare.com` over `send.karmicare.com`
+  (active).
+
+Theme change:
+
+- **`assets/kc-practitioner-request.js`:**
+  - On a valid Send, the sessionStorage snapshot now also holds the email, the language, the
+    page, the time and a UUID.
+  - On the thank-you reload, `sendEvent()` sends one event to Klaviyo's client endpoint and
+    clears the snapshot. It uses the same endpoint, revision and key as the withdrawal page.
+  - The profile gets the email only; everything else goes in event properties.
+  - Nothing is sent without a key, without a snapshot, or on the error reload.
+- **`sections/main-product.liquid`** (`product_faq` schema only): two new settings,
+  `request_klaviyo_company_id` and `request_klaviyo_metric`.
+- **`snippets/kc-practitioner-request.liquid`:** passes both settings as `data-klaviyo-*`
+  attributes.
+- **`templates/product.json` and `templates/product.subscription-item.json`:**
+  `request_klaviyo_company_id` = `XfYq2r` (the public key, already exposed by every Klaviyo
+  snippet) and the metric name.
+- **No change** to visible copy or fields. The thank-you text ("We reply by email to the address
+  you gave") promises no confirmation email, so it stays true while the flow waits for approval.
+
+Klaviyo: one test event (`victor+practitioner-test@karmicare.com`, unique_id
+`kc-pr-test-20261025-1`) answered `202` and created the metric `Practitioner Request Submitted`
+(`UaYZem`). No flow exists yet, so no email went out. The flow is Victor's step (KLAVIYO-FLOW §3).
+
+### R76d checks
+
+The fixture stubs every `klaviyo.com` fetch and records it, so nothing reaches Klaviyo
+(`scratchpad/fx/klaviyo.sh`, results in `results/r76d-klaviyo.txt`).
+
+| Case | Result |
+|---|---|
+| Valid Send | pass: no event at Send; the snapshot holds the email, language `en`, page, time and UUID |
+| Thank-you reload | pass: 1 call to `…/client/events/?company_id=XfYq2r`, revision `2026-10-15`, `keepalive`, profile `{email}` only, all properties as in KLAVIYO-FLOW §2, the UUID from Send; snapshot cleared |
+| Thank-you reloaded again | pass: no second call |
+| Thank-you without a snapshot | pass: no call |
+| Key empty (`en-success-nokey`) | pass: no call, snapshot cleared |
+| Error reload | pass: no call, snapshot used for the fields and cleared |
+| Samples not ticked | pass: `samples: false`, `practice_address` empty |
+| NL page | pass: `language: nl`, page `/nl/products/…` |
+
+No page errors in any case. Theme Check: exit 0, 19 baseline warnings.
+
 ## R76c: inline fallback when showModal() fails (Astra R76b B1)
 
 Blocker B1 (`docs/runtime-review/R76-PRACTITIONER-FORM-ASTRA.md`, R76b recheck): if
@@ -251,6 +309,8 @@ General → Store details**, shown as "Sender email" in the current admin (older
 "New customer message" with the fields above. `Type: Practitioner request: evidence pack / samples`
 tells it apart.
 
+- R76d (25 Oct): the address is `info@karmicare.com`, and the mail comes from
+  `mailer@shopify.com`. The Klaviyo alert of KLAVIYO-FLOW.md adds a copy from karmicare.com.
 - If that address is victor@karmicare.com, nothing to do.
 - If it is care@ (or another inbox), changing it also changes the From address of every order
   email. The lighter route is a Gmail filter on that inbox: messages containing "Practitioner
