@@ -2,13 +2,13 @@
  "lang": "nl",
  "batch": "batch-05-products",
  "source": "docs/source-copy/batches/batch-05-products.json",
- "source_digest": "e5164dca3745c2b94f13b29668c50df58d4754f3",
- "source_entries": 103,
+ "source_digest": "d81030279c92a9b2f558528ffafeb4112fb71a78",
+ "source_entries": 113,
  "counts": {
-  "pending-claim-review": 19,
+  "pending-claim-review": 15,
   "translated": 40,
   "held": 14,
-  "admin": 30
+  "admin": 44
  },
  "fit_risk": [],
  "status_legend": {
@@ -366,15 +366,14 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "seo.title",
-   "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
-   "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
-   "nl": "KARMICARE ultrazachte ontgiftende avondtandenborstel",
-   "status": "pending-claim-review",
+   "en": "KARMICARE Ultra-soft Evening Toothbrush",
+   "en_sha1": "0647fdc97160188cec8bcd35bbe45f6e80e1ec9a",
+   "nl": "KARMICARE ultrazachte avondtandenborstel",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: 'Detoxifying' / 'ontgiftende' / 'détoxifiante' dropped with the EN (no activated charcoal)"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:seo.description",
@@ -593,15 +592,42 @@
    "resource_type": "product",
    "file_or_handle": "whitening-charcoal-dental-floss",
    "key_path": "body_html#b001",
-   "en": "Ultrathin bamboo charcoal dental floss without flavour.<br><br>Helps remove tenacious plaque without damaging enamel.<br><br>Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.<br><br>Remove food rests and other residue stuck between your teeth.<br><br>*Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.",
-   "en_sha1": "36e86a4fd6675dc28b89bb2e60087c19f5b59350",
-   "nl": "Ultradunne floss van bamboehoutskool, zonder smaak.<br><br>Helpt hardnekkige tandplak te verwijderen zonder het glazuur te beschadigen.<br><br>Witmaken tussen je tanden tijdens het flossen helpt de gele koffievlekken laag bij de tandvleesrand weg te werken.<br><br>Verwijder etensresten en ander vuil dat tussen je tanden vastzit.<br><br>*De gecoate houtskooldraad helpt tandsteen en tandplak te verwijderen en laat je tandvlees fris en schoon achter.",
-   "status": "pending-claim-review",
+   "en": "Ultra-thin bamboo charcoal dental floss, without flavour.",
+   "en_sha1": "0c91e345ec458e7e46aa3764be3f22f9f9ef6972",
+   "nl": "Ultradunne floss van bamboehoutskool, zonder smaak.",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": "The '*' has no footnote in the EN either"
+   "notes": "The '*' has no footnote in the EN either; 25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b002",
+   "key_path": "body_html#b002",
+   "nl": "Helpt hardnekkige tandplak te verwijderen zonder het glazuur te beschadigen.",
+   "en": "Helps remove stubborn plaque without damaging enamel.",
+   "en_sha1": "8a32dd2684f2cc0bbe62495dde28234370bf101e",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b003",
+   "key_path": "body_html#b003",
+   "nl": "Helpt etensresten en ander vuil tussen je tanden te verwijderen.",
+   "en": "Helps remove food remains and other residue stuck between your teeth.",
+   "en_sha1": "6276cc826a0812c4e567438556be76e917f2e2f7",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:media.27295901876406.alt",
@@ -665,29 +691,84 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "title",
-   "en": "Evening Toothbrush 2.0",
-   "en_sha1": "57257b08045994042e5eb82673a6313ed48189fd",
-   "nl": "Avondtandenborstel 2.0",
+   "en": "Evening Toothbrush",
+   "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
+   "nl": "Avondtandenborstel",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title; 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:body_html#b001",
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "body_html#b001",
-   "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
-   "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
-   "nl": "De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier.",
-   "status": "pending-claim-review",
+   "en": "The bristles are extremely soft.",
+   "en_sha1": "f15f37461f85a92972f6373309523a1cdbc47dc6",
+   "nl": "De borstelharen zijn extreem zacht.",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": "'2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL and to the legacy brush (kept)"
+   "notes": "'2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL and to the legacy brush (kept); 25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b002",
+   "key_path": "body_html#b002",
+   "nl": "De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren.",
+   "en": "The ultra-thin, featherlight bristles help remove plaque easily without being abrasive.",
+   "en_sha1": "d7c4483ac2cef6c5fbd3a0958120dffe851e95b8",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b003",
+   "key_path": "body_html#b003",
+   "nl": "De kop is niet te groot en niet te klein. Hij is perfect voor één pompje Awake of Asleep.",
+   "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+   "en_sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b004",
+   "key_path": "body_html#b004",
+   "nl": "Gaat langer mee in combinatie met de <a href=\"/nl/products/morning-toothbrush-2-0\" title=\"KARMICARE ochtendtandenborstel\">ochtendtandenborstel</a> van KARMICARE.",
+   "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/morning-toothbrush-2-0\" title=\"KARMICARE Morning Toothbrush\">Morning Toothbrush</a>.",
+   "en_sha1": "a19c170754d13863501d4caf42bfaef30259710c",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b005",
+   "key_path": "body_html#b005",
+   "nl": "Sluit je dag af op de KARMICARE-manier.",
+   "en": "End your day the KARMICARE way.",
+   "en_sha1": "b9ebf1fb40fa30d6748c87540568ae67ab8643cb",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:media.27295901221046.alt",
@@ -750,29 +831,84 @@
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "title",
-   "en": "Morning Toothbrush 2.0",
-   "en_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
-   "nl": "Ochtendtandenborstel 2.0",
+   "en": "Morning Toothbrush",
+   "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
+   "nl": "Ochtendtandenborstel",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN)"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN); 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:morning-toothbrush-2-0:body_html#b001",
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "body_html#b001",
-   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
-   "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
-   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier.",
-   "status": "pending-claim-review",
+   "en": "The bristles are extremely soft, so you can gently clean teeth and gums with ultimate care.",
+   "en_sha1": "1f3f2366eb50cd1a5d273534eeed83426ed1b3f7",
+   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": "EN typos read as intended ('dispurge', 'of', 'nurished'). '2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule)"
+   "notes": "EN typos read as intended ('dispurge', 'of', 'nurished'). '2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule); 25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b002",
+   "key_path": "body_html#b002",
+   "nl": "De ultradunne, vederlichte borstelhaartjes helpen Awake of Asleep te verspreiden tot in de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand.",
+   "en": "The ultra-thin, featherlight bristles help spread Awake or Asleep to the smallest, darkest places between your teeth and along your gumline.",
+   "en_sha1": "8d7bd63228e5bd523e79c43ad2e99ce4f3115252",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b003",
+   "key_path": "body_html#b003",
+   "nl": "De kop is niet te groot en niet te klein. Hij is perfect voor één pompje Awake of Asleep.",
+   "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+   "en_sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b004",
+   "key_path": "body_html#b004",
+   "nl": "Gaat langer mee in combinatie met de <a href=\"/nl/products/evening-toothbrush-2-0\" title=\"KARMICARE avondtandenborstel\">avondtandenborstel</a> van KARMICARE.",
+   "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/evening-toothbrush-2-0\" title=\"KARMICARE Evening Toothbrush\">Evening Toothbrush</a>.",
+   "en_sha1": "ae79bc192307f85e18b12770c05a5e3274bddea0",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b005",
+   "key_path": "body_html#b005",
+   "nl": "Start je dag op de KARMICARE-manier.",
+   "en": "Kickstart your day the KARMICARE way.",
+   "en_sha1": "729f4f13b41da5043e75ce6d03db54d630821b24",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
   },
   {
    "id": "admin:product:morning-toothbrush-2-0:media.27295901057206.alt",
@@ -835,14 +971,14 @@
    "resource_type": "product",
    "file_or_handle": "asleep-evening-toothpaste-2-0",
    "key_path": "title",
-   "en": "Asleep Evening Toothpaste 2.0",
-   "en_sha1": "3452e86673de47a289dd6f79fd7a6e427918f28e",
-   "nl": "Asleep-avondtandpasta 2.0",
+   "en": "Asleep Evening Toothpaste",
+   "en_sha1": "9ba9a5aa6572bbb96900d4258b57de559ca634f4",
+   "nl": "Asleep-avondtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "TERM: Asleep Evening Toothpaste → Asleep-avondtandpasta (brand + noun with a hyphen, as Het Karmicare-jaar)"
+   "notes": "TERM: Asleep Evening Toothpaste → Asleep-avondtandpasta (brand + noun with a hyphen, as Het Karmicare-jaar); 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b001",
@@ -950,14 +1086,14 @@
    "resource_type": "product",
    "file_or_handle": "awake-morning-toothpaste-2-0",
    "key_path": "title",
-   "en": "Awake Morning Toothpaste 2.0",
-   "en_sha1": "d1ad2e7225eace6463e4e74a68753960e4b89f32",
-   "nl": "Awake-ochtendtandpasta 2.0",
+   "en": "Awake Morning Toothpaste",
+   "en_sha1": "c4e67f1a8668319b7b239040d3f674b16ad5b57a",
+   "nl": "Awake-ochtendtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b001",

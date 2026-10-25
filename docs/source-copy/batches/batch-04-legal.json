@@ -1,6 +1,6 @@
 {
  "batch": "batch-04-legal",
- "digest": "25d0f0553a6dd9314e8d5edde47f8b3ef13ef264",
+ "digest": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -2524,7 +2524,8 @@
    "sha1": "12f419f07b5b66f06c143feb1a40290934ed922b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:new-consumer-rights:title"
   },
   {
    "id": "admin:page:privacy-policy:seo.title",
@@ -2537,7 +2538,8 @@
    "sha1": "c9265b9ad7b3c4d605497a7f057d7156f3673fdb",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:privacy-policy:title"
   },
   {
    "id": "admin:page:terms-and-conditions-1:body_html#b001",
@@ -2564,7 +2566,8 @@
    "sha1": "f1b7a0098c167e08e3537071cbcf87511d82e38b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:terms-and-conditions-1:title"
   },
   {
    "id": "admin:page:consumer-rights:title",
@@ -15030,6 +15033,54 @@
    "setting_type": "text",
    "section_type": "legal-toc-section",
    "rendered": true
+  },
+  {
+   "id": "admin:page:terms-and-conditions-1:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/terms-and-conditions-1",
+   "resource_type": "page",
+   "file_or_handle": "terms-and-conditions-1",
+   "key_path": "title",
+   "en": "Terms and Conditions",
+   "sha1": "894031ed8d341b5ecab5e23002585055f0b7ee4d",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Terms and Conditions",
+   "old_sha1": "c2ae06318f3066d33edfbfa4f036e788f065adb0"
+  },
+  {
+   "id": "admin:page:new-consumer-rights:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/new-consumer-rights",
+   "resource_type": "page",
+   "file_or_handle": "new-consumer-rights",
+   "key_path": "title",
+   "en": "Consumer Rights",
+   "sha1": "9f47f00993a5fcda5324a69858ea073aed81070a",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Consumer Rights",
+   "old_sha1": "62b7e69d30b42fc5bf9d983a512e78b036e19965"
+  },
+  {
+   "id": "admin:page:privacy-policy:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/privacy-policy",
+   "resource_type": "page",
+   "file_or_handle": "privacy-policy",
+   "key_path": "title",
+   "en": "Privacy Policy",
+   "sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Privacy Policy",
+   "old_sha1": "e9a1abe2d7afd711c654d57c551678d5ce5d1e47"
   }
  ]
 }

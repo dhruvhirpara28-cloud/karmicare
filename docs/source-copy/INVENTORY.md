@@ -105,16 +105,18 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the homepage SEO title is *KARMICARE - Biorhythmic Oral Care* live (was *… Oral Health*), still `admin-held`, `old_en` kept;
   - Leen Ponet's FR role title on the cards is released with *Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI* (Victor 24 and 25 Oct); the EN is unchanged.
 - **Updated 25 Oct (round 4)**: *Complete Hygiene Kit*, *Morning Toothbrush* and *Evening Toothbrush* (without 2.0) are Draft in the Admin (Victor: only the 2.0 products, the floss and the Awake & Asleep system stay sellable), so their 14 rows are `retired`; the SEO titles of Awake and Asleep toothpaste 2.0 lose the " – KARMICARE" that only the page `<title>` adds (`old_en` kept). NL/FR write postal addresses in their local form (`docs/localization/registration/ROUND4.md`); the EN is unchanged.
+- **Updated 25 Oct (round 5)**: the page titles of `terms-and-conditions-1`, `new-consumer-rights` and `privacy-policy` are inventoried as `admin:page:<handle>:title` (*Terms and Conditions*, *Consumer Rights*, *Privacy Policy*; Victor had "New" dropped in the Admin, 25 Oct); the `seo.title` rows captured from the page `<title>` are `retired`, because the pages have no SEO title. NL/FR department names follow gate-legal (`docs/localization/registration/ROUND5.md`).
+- **Updated 25 Oct (round 6)**: product names without "2.0", the cleaned descriptions of Morning/Evening Toothbrush and the floss (one row per paragraph; 10 new rows), the Evening Toothbrush SEO title without "Detoxifying" (`docs/localization/registration/ROUND6.md`); the two `admin:system:*:seo.description` rows are `retired` (same key as the homepage description Victor set by hand).
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 232 | `003612b5dcb6abd012b4c38ac0b05d4133412883` |
-| `batch-02-pdp` | 524 | `fb09c0f8bbcf87c736751088cc518158ddf3d658` |
+| `batch-01-homepage` | 232 | `2637293ba890353bcf3d8871bf418e9318c36a3c` |
+| `batch-02-pdp` | 524 | `e4d806146e401d40a2befeeabdcb7d1eef6a1ad5` |
 | `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
-| `batch-04-legal` | 1009 | `25d0f0553a6dd9314e8d5edde47f8b3ef13ef264` |
-| `batch-05-products` | 103 | `e5164dca3745c2b94f13b29668c50df58d4754f3` |
+| `batch-04-legal` | 1012 | `4ead9703b4cfc2fc346b6e25843f38afec1124e7` |
+| `batch-05-products` | 113 | `d81030279c92a9b2f558528ffafeb4112fb71a78` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
@@ -621,8 +623,8 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 221 | `liquid:assets/loop-widget.js:2468` | app | Renews every year | needs-key |  |
 | 222 | `liquid:assets/loop-widget.js:2213` | app | {{ value }} value · free | needs-key |  |
 | 223 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
-| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Care | admin-held |  |
-| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
+| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE \| Fluoride-Free Nano-Hydroxyapatite Toothpaste | admin-held |  |
+| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Awake for the morning, Asleep for the evening. Fluoride-free, SLS-free formulas with nano-hydroxyapa… | admin-held |  |
 | 226 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category` | template_setting | Plans & Return on Care | approved |  |
 | 227 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question` | template_setting | Can I pause, skip or cancel? | approved |  |
 | 228 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer` | template_setting | Your membership is completely in your hands. Amend when desired. | approved |  |

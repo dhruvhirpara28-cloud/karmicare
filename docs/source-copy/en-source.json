@@ -34,23 +34,23 @@
  "batches": {
   "batch-01-homepage": {
    "entries": 232,
-   "digest": "003612b5dcb6abd012b4c38ac0b05d4133412883"
+   "digest": "2637293ba890353bcf3d8871bf418e9318c36a3c"
   },
   "batch-02-pdp": {
    "entries": 524,
-   "digest": "fb09c0f8bbcf87c736751088cc518158ddf3d658"
+   "digest": "e4d806146e401d40a2befeeabdcb7d1eef6a1ad5"
   },
   "batch-03-header-footer": {
    "entries": 48,
    "digest": "2bf838600269a9c831c92132ba41ccab674eda67"
   },
   "batch-04-legal": {
-   "entries": 1009,
-   "digest": "25d0f0553a6dd9314e8d5edde47f8b3ef13ef264"
+   "entries": 1012,
+   "digest": "4ead9703b4cfc2fc346b6e25843f38afec1124e7"
   },
   "batch-05-products": {
-   "entries": 103,
-   "digest": "e5164dca3745c2b94f13b29668c50df58d4754f3"
+   "entries": 113,
+   "digest": "d81030279c92a9b2f558528ffafeb4112fb71a78"
   },
   "batch-06-content-pages": {
    "entries": 22,
@@ -3801,13 +3801,13 @@
    "resource_type": "shop",
    "file_or_handle": "shop",
    "key_path": "online_store.preferences.homepage_title",
-   "en": "KARMICARE - Biorhythmic Oral Care",
-   "sha1": "09375ea76187b6f0ac40a1b73d0c48075b6ee452",
+   "en": "KARMICARE | Fluoride-Free Nano-Hydroxyapatite Toothpaste",
+   "sha1": "03a76f246e4562fc419597bb1357c21082c47ff1",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title> and og:title; EN updated 25 Oct: live homepage <title> and og:title read by curl on live main d5b514d (merchant-edit 02d73c4) (the round 2 dry run marked it stale)",
-   "old_en": "KARMICARE - Biorhythmic Oral Health",
-   "old_sha1": "b04ccb30266af5344472d142778361e88922b676"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title> and og:title; EN updated 25 Oct: live homepage <title> and og:title read by curl on live main d5b514d (merchant-edit 02d73c4) (the round 2 dry run marked it stale); EN updated 25 Oct: set by Victor in Online Store > Preferences (HOMEPAGE-SEO.md)",
+   "old_en": "KARMICARE - Biorhythmic Oral Care",
+   "old_sha1": "09375ea76187b6f0ac40a1b73d0c48075b6ee452"
   },
   {
    "id": "admin:shop:online_store.preferences.homepage_meta_description",
@@ -3816,11 +3816,13 @@
    "resource_type": "shop",
    "file_or_handle": "shop",
    "key_path": "online_store.preferences.homepage_meta_description",
-   "en": "Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant extracts to elevate your morning and night. Nano Hydroxyapatite, fluoride free toothpaste.",
-   "sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4",
+   "en": "Awake for the morning, Asleep for the evening. Fluoride-free, SLS-free formulas with nano-hydroxyapatite for your daily care ritual.",
+   "sha1": "5bd4c337ca8baf2c8bc5a34c07657a5500816a46",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description and og:description; 'toothpaste' twice (SEO context)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description and og:description; 'toothpaste' twice (SEO context); EN updated 25 Oct: set by Victor in Online Store > Preferences (HOMEPAGE-SEO.md)",
+   "old_en": "Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant extracts to elevate your morning and night. Nano Hydroxyapatite, fluoride free toothpaste.",
+   "old_sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category",
@@ -7628,11 +7630,13 @@
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "title",
-   "en": "Morning Toothbrush 2.0",
-   "sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
+   "en": "Morning Toothbrush",
+   "sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); Welcome Kit item (price €6); shown in the buy box, sticky bar and featured product"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); Welcome Kit item (price €6); shown in the buy box, sticky bar and featured product; EN updated 25 Oct: '2.0' dropped from the product name in the Admin (Victor; source-copy, read back live)",
+   "old_en": "Morning Toothbrush 2.0",
+   "old_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30"
   },
   {
    "id": "admin:evening-toothbrush-2-0:title",
@@ -7641,11 +7645,13 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "title",
-   "en": "Evening Toothbrush 2.0",
-   "sha1": "57257b08045994042e5eb82673a6313ed48189fd",
+   "en": "Evening Toothbrush",
+   "sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); Welcome Kit item (price €6); shown in the buy box, sticky bar and featured product"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); Welcome Kit item (price €6); shown in the buy box, sticky bar and featured product; EN updated 25 Oct: '2.0' dropped from the product name in the Admin (Victor; source-copy, read back live)",
+   "old_en": "Evening Toothbrush 2.0",
+   "old_sha1": "57257b08045994042e5eb82673a6313ed48189fd"
   },
   {
    "id": "admin:whitening-charcoal-dental-floss:title",
@@ -14733,7 +14739,8 @@
    "sha1": "12f419f07b5b66f06c143feb1a40290934ed922b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:new-consumer-rights:title"
   },
   {
    "id": "admin:page:privacy-policy:seo.title",
@@ -14746,7 +14753,8 @@
    "sha1": "c9265b9ad7b3c4d605497a7f057d7156f3673fdb",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:privacy-policy:title"
   },
   {
    "id": "admin:page:terms-and-conditions-1:body_html#b001",
@@ -14773,7 +14781,8 @@
    "sha1": "f1b7a0098c167e08e3537071cbcf87511d82e38b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>",
+   "retired": "retired 25 Oct: the page has no SEO title in the Admin (the round 2-4 dry runs: no live key meta_title); its <title> is the page title, now admin:page:terms-and-conditions-1:title"
   },
   {
    "id": "admin:page:consumer-rights:title",
@@ -27241,6 +27250,54 @@
    "rendered": true
   },
   {
+   "id": "admin:page:terms-and-conditions-1:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/terms-and-conditions-1",
+   "resource_type": "page",
+   "file_or_handle": "terms-and-conditions-1",
+   "key_path": "title",
+   "en": "Terms and Conditions",
+   "sha1": "894031ed8d341b5ecab5e23002585055f0b7ee4d",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Terms and Conditions",
+   "old_sha1": "c2ae06318f3066d33edfbfa4f036e788f065adb0"
+  },
+  {
+   "id": "admin:page:new-consumer-rights:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/new-consumer-rights",
+   "resource_type": "page",
+   "file_or_handle": "new-consumer-rights",
+   "key_path": "title",
+   "en": "Consumer Rights",
+   "sha1": "9f47f00993a5fcda5324a69858ea073aed81070a",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Consumer Rights",
+   "old_sha1": "62b7e69d30b42fc5bf9d983a512e78b036e19965"
+  },
+  {
+   "id": "admin:page:privacy-policy:title",
+   "batch": "batch-04-legal",
+   "page": "/pages/privacy-policy",
+   "resource_type": "page",
+   "file_or_handle": "privacy-policy",
+   "key_path": "title",
+   "en": "Privacy Policy",
+   "sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "page title; live EN read from the page <title> by curl 25 Oct (EN, /nl and /fr); replaces the seo.title row; EN updated 25 Oct: 'New' dropped from the page title in the Admin by source-copy at Victor's request ('ja wil new schrappen'); handle unchanged",
+   "legal": true,
+   "old_en": "New Privacy Policy",
+   "old_sha1": "e9a1abe2d7afd711c654d57c551678d5ce5d1e47"
+  },
+  {
    "id": "product:main/highlights_slider_9wAjAb/text_1",
    "batch": "batch-05-products",
    "page": "templates/product.json",
@@ -27668,13 +27725,13 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "seo.title",
-   "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
-   "sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
+   "en": "KARMICARE Ultra-soft Evening Toothbrush",
+   "sha1": "0647fdc97160188cec8bcd35bbe45f6e80e1ec9a",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
-   "claim_status": "needs-review",
-   "claim_basis": "'Detoxifying' applied to a brush; products.md 'Detoxifies' covers the Asleep paste only."
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); page <title>; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07); EN updated 25 Oct: 'Detoxifying' dropped (no activated charcoal any more; Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy)",
+   "old_en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
+   "old_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:seo.description",
@@ -27919,13 +27976,39 @@
    "resource_type": "product",
    "file_or_handle": "whitening-charcoal-dental-floss",
    "key_path": "body_html#b001",
-   "en": "Ultrathin bamboo charcoal dental floss without flavour.<br><br>Helps remove tenacious plaque without damaging enamel.<br><br>Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.<br><br>Remove food rests and other residue stuck between your teeth.<br><br>*Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.",
-   "sha1": "36e86a4fd6675dc28b89bb2e60087c19f5b59350",
+   "en": "Ultra-thin bamboo charcoal dental floss, without flavour.",
+   "sha1": "0c91e345ec458e7e46aa3764be3f22f9f9ef6972",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/whitening-charcoal-dental-floss.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
-   "claim_status": "needs-review",
-   "claim_basis": "Plaque, stain and tartar removal by floss unsourced in products.md."
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/whitening-charcoal-dental-floss.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07); EN updated description paragraph 1 of 3, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy; the unsourced claims (whitening, nourished, tartar, coffee stains) and the retired '2 to 4 applications' are gone",
+   "old_en": "Ultrathin bamboo charcoal dental floss without flavour.<br><br>Helps remove tenacious plaque without damaging enamel.<br><br>Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.<br><br>Remove food rests and other residue stuck between your teeth.<br><br>*Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.",
+   "old_sha1": "36e86a4fd6675dc28b89bb2e60087c19f5b59350"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/whitening-charcoal-dental-floss",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b002",
+   "key_path": "body_html#b002",
+   "en": "Helps remove stubborn plaque without damaging enamel.",
+   "sha1": "8a32dd2684f2cc0bbe62495dde28234370bf101e",
+   "notes": "new description paragraph 2 of 3, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/whitening-charcoal-dental-floss",
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b003",
+   "key_path": "body_html#b003",
+   "en": "Helps remove food remains and other residue stuck between your teeth.",
+   "sha1": "6276cc826a0812c4e567438556be76e917f2e2f7",
+   "notes": "new description paragraph 3 of 3, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:media.27295901876406.alt",
@@ -27988,11 +28071,13 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "title",
-   "en": "Evening Toothbrush 2.0",
-   "sha1": "57257b08045994042e5eb82673a6313ed48189fd",
+   "en": "Evening Toothbrush",
+   "sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush-2-0.js"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush-2-0.js; EN updated 25 Oct: '2.0' dropped from the product name in the Admin (Victor; source-copy, read back live)",
+   "old_en": "Evening Toothbrush 2.0",
+   "old_sha1": "57257b08045994042e5eb82673a6313ed48189fd"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:body_html#b001",
@@ -28001,13 +28086,65 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "body_html#b001",
-   "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
-   "sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
+   "en": "The bristles are extremely soft.",
+   "sha1": "f15f37461f85a92972f6373309523a1cdbc47dc6",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush-2-0.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
-   "claim_status": "needs-review",
-   "claim_basis": "Brush whitening outcome unsourced; '2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump)."
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/evening-toothbrush-2-0.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07); EN updated description paragraph 1 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy; the unsourced claims (whitening, nourished, tartar, coffee stains) and the retired '2 to 4 applications' are gone",
+   "old_en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
+   "old_sha1": "332e36805eb8100b960cecd4a166729fb220e45f"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/evening-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b002",
+   "key_path": "body_html#b002",
+   "en": "The ultra-thin, featherlight bristles help remove plaque easily without being abrasive.",
+   "sha1": "d7c4483ac2cef6c5fbd3a0958120dffe851e95b8",
+   "notes": "new description paragraph 2 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/evening-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b003",
+   "key_path": "body_html#b003",
+   "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+   "sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+   "notes": "new description paragraph 3 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/evening-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b004",
+   "key_path": "body_html#b004",
+   "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/morning-toothbrush-2-0\" title=\"KARMICARE Morning Toothbrush\">Morning Toothbrush</a>.",
+   "sha1": "a19c170754d13863501d4caf42bfaef30259710c",
+   "notes": "new description paragraph 4 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/evening-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b005",
+   "key_path": "body_html#b005",
+   "en": "End your day the KARMICARE way.",
+   "sha1": "b9ebf1fb40fa30d6748c87540568ae67ab8643cb",
+   "notes": "new description paragraph 5 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:media.27295901221046.alt",
@@ -28068,11 +28205,13 @@
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "title",
-   "en": "Morning Toothbrush 2.0",
-   "sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
+   "en": "Morning Toothbrush",
+   "sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush-2-0.js"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush-2-0.js; EN updated 25 Oct: '2.0' dropped from the product name in the Admin (Victor; source-copy, read back live)",
+   "old_en": "Morning Toothbrush 2.0",
+   "old_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30"
   },
   {
    "id": "admin:product:morning-toothbrush-2-0:body_html#b001",
@@ -28081,13 +28220,65 @@
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "body_html#b001",
-   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
-   "sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
+   "en": "The bristles are extremely soft, so you can gently clean teeth and gums with ultimate care.",
+   "sha1": "1f3f2366eb50cd1a5d273534eeed83426ed1b3f7",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush-2-0.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07)",
-   "claim_status": "needs-review",
-   "claim_basis": "'2 to 4 applications' is the retired dosing (products.md 2026-08-04: 1 pump), as on the evening brushes (needs-review); the EN owner resolves the dose before release (R2, review F5)."
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/morning-toothbrush-2-0.js; description block 1 in order; claim: needs-review (CLAIMS-REVIEW.md, batches 05-07); EN updated description paragraph 1 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy; the unsourced claims (whitening, nourished, tartar, coffee stains) and the retired '2 to 4 applications' are gone",
+   "old_en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
+   "old_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/morning-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b002",
+   "key_path": "body_html#b002",
+   "en": "The ultra-thin, featherlight bristles help spread Awake or Asleep to the smallest, darkest places between your teeth and along your gumline.",
+   "sha1": "8d7bd63228e5bd523e79c43ad2e99ce4f3115252",
+   "notes": "new description paragraph 2 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/morning-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b003",
+   "key_path": "body_html#b003",
+   "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+   "sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+   "notes": "new description paragraph 3 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/morning-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b004",
+   "key_path": "body_html#b004",
+   "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/evening-toothbrush-2-0\" title=\"KARMICARE Evening Toothbrush\">Evening Toothbrush</a>.",
+   "sha1": "ae79bc192307f85e18b12770c05a5e3274bddea0",
+   "notes": "new description paragraph 4 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
+  },
+  {
+   "batch": "batch-05-products",
+   "page": "/products/morning-toothbrush-2-0",
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin-held",
+   "never_translate": false,
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b005",
+   "key_path": "body_html#b005",
+   "en": "Kickstart your day the KARMICARE way.",
+   "sha1": "729f4f13b41da5043e75ce6d03db54d630821b24",
+   "notes": "new description paragraph 5 of 5, 25 Oct: Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy"
   },
   {
    "id": "admin:product:morning-toothbrush-2-0:media.27295901057206.alt",
@@ -28148,11 +28339,13 @@
    "resource_type": "product",
    "file_or_handle": "asleep-evening-toothpaste-2-0",
    "key_path": "title",
-   "en": "Asleep Evening Toothpaste 2.0",
-   "sha1": "3452e86673de47a289dd6f79fd7a6e427918f28e",
+   "en": "Asleep Evening Toothpaste",
+   "sha1": "9ba9a5aa6572bbb96900d4258b57de559ca634f4",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/asleep-evening-toothpaste-2-0.js"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/asleep-evening-toothpaste-2-0.js; EN updated 25 Oct: '2.0' dropped from the product name in the Admin (Victor; source-copy, read back live)",
+   "old_en": "Asleep Evening Toothpaste 2.0",
+   "old_sha1": "3452e86673de47a289dd6f79fd7a6e427918f28e"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b001",
@@ -28260,11 +28453,13 @@
    "resource_type": "product",
    "file_or_handle": "awake-morning-toothpaste-2-0",
    "key_path": "title",
-   "en": "Awake Morning Toothpaste 2.0",
-   "sha1": "d1ad2e7225eace6463e4e74a68753960e4b89f32",
+   "en": "Awake Morning Toothpaste",
+   "sha1": "c4e67f1a8668319b7b239040d3f674b16ad5b57a",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/awake-morning-toothpaste-2-0.js"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259) from /products/awake-morning-toothpaste-2-0.js; EN updated 25 Oct: '2.0' dropped from the product name in the Admin (Victor; source-copy, read back live)",
+   "old_en": "Awake Morning Toothpaste 2.0",
+   "old_sha1": "d1ad2e7225eace6463e4e74a68753960e4b89f32"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b001",
@@ -39408,7 +39603,8 @@
    "sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description",
+   "retired": "retired 25 Oct: same Shopify key (shop meta_description) as admin:shop:online_store.preferences.homepage_meta_description, which Victor set by hand (registered.json, HOMEPAGE-SEO.md)"
   },
   {
    "id": "admin:system:404:seo.title",
@@ -39447,7 +39643,8 @@
    "sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description"
+   "notes": "captured 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259); meta description",
+   "retired": "retired 25 Oct: same Shopify key (shop meta_description) as admin:shop:online_store.preferences.homepage_meta_description, which Victor set by hand (registered.json, HOMEPAGE-SEO.md)"
   },
   {
    "id": "admin:collection:all:seo.title",
