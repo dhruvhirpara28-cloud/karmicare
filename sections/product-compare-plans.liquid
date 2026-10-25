@@ -248,7 +248,8 @@
             data-plan="{{ plan_handle | escape }}"
           >
             {%- if plan.ribbon_text.value != blank -%}
-              <span class="pc-ribbon">{{ plan.ribbon_text.value }}</span>
+              {%- comment -%} Without the star the metaobject text starts with (Victor, 24 Oct) {%- endcomment -%}
+              <span class="pc-ribbon">{{ plan.ribbon_text.value | remove: '★' | strip }}</span>
             {%- endif -%}
             {%- if plan.top_badge.value != blank -%}
               <span class="pc-tag pc-tag-top">{{ plan.top_badge.value }}</span>
