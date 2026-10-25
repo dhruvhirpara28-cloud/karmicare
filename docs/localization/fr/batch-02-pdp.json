@@ -2,27 +2,29 @@
  "batch": "batch-02-pdp",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "2468bab432715f0aea7f7b6aea815a8f65f70721",
- "source_entries": 477,
+ "source_digest": "4f62482641c8eb60a8d2fd0452b1083d3bdbdfbb",
+ "source_entries": 498,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "admin": 251,
-  "held": 39,
+  "translated": 137,
+  "held": 44,
   "locale-present": 15,
-  "theme-key": 34,
-  "translated": 138
+  "theme-key": 31,
+  "admin": 271
  },
  "flag_counts": {
+  "wording-adapted": 14,
   "fit-risk": 28,
+  "pending-claim-review": 24,
   "gendered-title": 14,
-  "legal-review": 1,
+  "pending-en-review": 5,
   "not-rendered": 6,
-  "pending-claim-review": 42,
-  "pending-en-review": 9,
-  "source-defect": 8,
-  "wording-adapted": 14
+  "legal-review": 1,
+  "source-defect": 3,
+  "invariant": 15,
+  "admin": 2
  },
  "entries": [
   {
@@ -35,10 +37,9 @@
    "fr": "Adopté par plus de 100 praticiens kPNI et dentistes fonctionnels",
    "status": "translated",
    "flags": [
-    "pending-claim-review",
     "wording-adapted"
    ],
-   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); the number stays as in EN pending C81. Claims C81 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "'Used by' rendered 'Adopté par' (banned word 'use'); the number stays as in EN pending C81. Claims C81 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C81 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C81"
@@ -53,10 +54,8 @@
    "en_sha1": "7b5cbc7d9e87f0e2003f27f65db4bfa0be9e478a",
    "fr": "Ingrédients cliniquement prouvés · 36 études à comité de lecture",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C66 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C66 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C66 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C66"
@@ -209,15 +208,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.loop_subscriptions_WEk4XJ.settings.pricing_summary_checkup_tooltip",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-   "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-   "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "en_sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+   "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
    "status": "translated",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "Offer conflict carried over: the offer needs no dentist involvement for the check-up; translated as written ('vérifié/confirmé par votre dentiste'). Re-translate when the EN changes (B1a decision 4). EN under review: Offer conflict: check-up proof is an appointment confirmation or invoice plus questionnaire, 'no dentist involvement is required' (offer source of truth, 5 Oct); this says 'verified by your dentist'.",
-   "source_status": "needs-review"
+   "flags": [],
+   "notes": "EN corrected 22 Oct (Victor, S2 choice a: the check-up reward needs no dentist); FR drops 'vérifié/confirmé par votre dentiste' and follows. Was: \"Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.\"",
+   "source_status": "corrected"
   },
   {
    "id": "product.subscription-item:main/loop_subscriptions_WEk4XJ/testimonial_button_text",
@@ -416,27 +413,25 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
-   "en_sha1": "8a2c3c824512694e95212aa3592b373f1309bde1",
-   "fr": "<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, votre contrôle dentaire effectué — confirmé par votre dentiste — en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>",
+   "en": "<p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p>",
+   "en_sha1": "e63888d0583eba020bb0b89cffa3e32f32c81ff8",
+   "fr": "<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, un contrôle dentaire effectué en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>",
    "status": "translated",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "Offer conflict carried over: the offer needs no dentist involvement for the check-up; translated as written ('vérifié/confirmé par votre dentiste'). Re-translate when the EN changes (B1a decision 4). 'On the Year' rendered 'Avec l'année Karmicare' for clarity. EN under review: Offer conflict: 'confirmed by your dentist' (see the check-up tooltip).",
-   "source_status": "needs-review"
+   "flags": [],
+   "notes": "'On the Year' rendered 'Avec l’année Karmicare' for clarity. EN corrected 22 Oct (Victor, S2 choice a: the check-up reward needs no dentist); FR drops 'vérifié/confirmé par votre dentiste' and follows. Was: \"<p>Karmicare est un système de soin, pas un article de rayon : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Avec l’année Karmicare, votre contrôle dentaire effectué — confirmé par votre dentiste — en ajoute 40 €. Vous y allez avec quelque chose à gagner, pas seulement quelque chose à payer. Le soin qui vous revient.</p>\"",
+   "source_status": "corrected"
   },
   {
    "id": "product.subscription-item:main/info_card_FnBcaN/footer_text",
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.footer_text",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-   "en_sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166",
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.&nbsp;",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "en_sha1": "86c9b2142fafd96ab8a000cab28cf29223d40c65",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.&nbsp;",
    "status": "translated",
    "flags": [],
-   "notes": "'spend it on' rendered 'dépensez-le en soins' (no 'utiliser').",
+   "notes": "'spend it on' rendered 'dépensez-le en soins' (no 'utiliser').; 25 Oct: 'jamais pour votre facture dentaire' removed with the EN (Victor, 25 Oct)",
    "source_status": "approved"
   },
   {
@@ -546,10 +541,8 @@
    "en_sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe",
    "fr": "Le cortisol monte ; café, petit-déjeuner et premiers acides de la journée suivent. L’émail a d’abord besoin de son bouclier.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C53 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C53 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C27 approved, C53 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C27",
@@ -596,10 +589,8 @@
    "en_sha1": "a7e571363ef9da44c32810243d3c785e41d0af88",
    "fr": "La mélatonine monte et la salive se réduit à un filet. Ce qui se trouve sur votre émail à 22:00 y est encore à 07:00.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C52 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C52 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C52 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C52"
@@ -638,10 +629,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_link_text",
    "en": "Read the science",
    "en_sha1": "9d735e7e921227ea13fa840a0fc712c8b9748ee6",
-   "fr": "Découvrir la science",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; PDP lane 785e9de, landing 42); was 'Read the science'; was translated: Découvrir la science",
    "source_status": "approved"
   },
   {
@@ -679,10 +670,8 @@
    "en_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
    "fr": "<p>Le meilleur résultat est celui qu’on a su éviter. Ces praticiens recommandent Karmicare entre deux visites. Non pas pour remplacer leurs soins, mais pour que les mille deux cents brossages par an entre deux rendez-vous comptent vraiment.</p>",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'the one prevented' rendered 'celui qu'on a su éviter' to keep the forbidden verb 'prévenir' out; meaning unchanged. 'twelve hundred brushings' kept as in EN (B1a decision 6: twice a day is about 730). Claims C70 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "'the one prevented' rendered 'celui qu'on a su éviter' to keep the forbidden verb 'prévenir' out; meaning unchanged. 'twelve hundred brushings' kept as in EN (B1a decision 6: twice a day is about 730). Claims C70 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C70 reworded decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C70"
@@ -896,12 +885,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "fr": null,
-   "status": "held",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "held: practitioner quote stays in her own EN words (landing desk 21 Oct, msg_a6d24f8ca48c, as NL); the claim waiver covers claims, not a person's quote; a FR version needs her own wording or approval. FR draft from 3ec7a5e: <p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
+   "fr": "<p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais très attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne regarde pas seulement les étiquettes, je regarde ce qu’un produit fera à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients purs et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>Et c’est aussi pour cela que je l’utilise dans ma pratique.</p><p>J’accompagne des femmes qui souffrent de SPM, de troubles du cycle, de fatigue liée au stress, de dominance œstrogénique et de dérèglements surrénaliens. J’ai besoin de produits techniquement solides — biodisponibles, bien formulés, et qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "held: practitioner quote stays in her own EN words (landing desk 21 Oct, msg_a6d24f8ca48c, as NL); the claim waiver covers claims, not a person's quote; a FR version needs her own wording or approval. FR draft from 3ec7a5e: <p>“En tant que thérapeute nutritionnelle spécialisée dans les hormones féminines, je fais extrêmement attention à ce que je fais entrer dans mon corps. Les hormones sont sensibles. Le stress, les toxines, les ingrédients de mauvaise qualité — tout s’additionne. Alors je ne me contente pas de lire les étiquettes : je regarde ce que cela va faire à l’intérieur du corps.</p><p>Je choisis Karmicare parce que j’ai confiance en ce qu’il contient — et en ce qu’il ne contient pas. Pas de charges inutiles, pas de perturbateurs cachés. Seulement des ingrédients propres et choisis avec soin, qui soutiennent le système nerveux et l’équilibre hormonal au lieu de les surcharger. Quand on comprend à quel point le système endocrinien féminin peut être délicat, surtout en cas de stress chronique, la qualité n’est pas une option.</p><p>C’est aussi pour cela que je le recommande dans ma pratique.</p><p>J’accompagne des femmes confrontées au SPM, à des troubles du cycle, à une fatigue liée au stress, à une dominance œstrogénique et à un dérèglement surrénalien. J’ai besoin de soins techniquement irréprochables — biodisponibles, bien formulés, qui soutiennent les voies de détoxification et la régulation du système nerveux.</p><p>Karmicare répond à cette exigence.”</p> Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c).; claims gate cleared 24 Oct: C84 kept, C85 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C84",
@@ -1129,10 +1116,8 @@
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "fr": "<p>Pensé pour celles et ceux qui lisent l’étiquette, vérifient la recherche et veulent des soins quotidiens à la hauteur. Des méta-analyses et des essais contrôlés randomisés, au sommet de la hiérarchie des preuves, aux côtés d’études en laboratoire. Publiés dans des revues à comité de lecture et portant au total sur plus de 38 000 personnes.&nbsp;</p>",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C68 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C68 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C68 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C68"
@@ -1175,10 +1160,8 @@
    "en_sha1": "692b9ddb69b8f60e86a4dcc2f5e89adaf53fccfa",
    "fr": "La nano-HAp a obturé 98 % des tubules dentinaires ouverts.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C60"
@@ -1219,10 +1202,8 @@
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "fr": "98 % d’occlusion contre 82 % et 65 % pour deux autres technologies désensibilisantes",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C60 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C60"
@@ -1302,10 +1283,8 @@
    "en_sha1": "798f5232fa57d2eaffe13367f951fc5f913788a0",
    "fr": "Une moins bonne santé bucco-dentaire était associée à un moins bon sommeil.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C61"
@@ -1346,10 +1325,8 @@
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "fr": "SMD 2,17 · p = 0,004 · IC à 95 % 0,68–3,66&nbsp;",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C61 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C61"
@@ -1429,10 +1406,8 @@
    "en_sha1": "21d0c73d004ce24a9e7bbe2d7a144f87f9263875",
    "fr": "Le xylitol a réduit les caries par rapport aux groupes témoins.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C62"
@@ -1473,10 +1448,8 @@
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "fr": "SMD −1,09 · p < 0,00001 · IC à 95 % −1,34 à −0,83",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C62 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C62"
@@ -1528,10 +1501,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -1556,10 +1529,8 @@
    "en_sha1": "bf8d54e6cedd70242cee250edeb8165b744a7169",
    "fr": "La nano-HAp a surpassé le fluor sur la sensibilité dentaire.",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C63"
@@ -1600,10 +1571,8 @@
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "fr": "Sensibilité à l’air froid et tactile plus faible qu’avec le fluor et le placebo, p < 0,05",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C63 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C63"
@@ -1655,10 +1624,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "status": "translated",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -1684,10 +1653,9 @@
    "fr": "Sans SLS, les aphtes étaient moins nombreux et duraient moins longtemps.",
    "status": "translated",
    "flags": [
-    "pending-claim-review",
     "fit-risk"
    ],
-   "notes": "R3 F4: 'shorter' is duration (the card's result line says 'shorter duration'): 'duraient moins longtemps'. Card heading, 72 chars vs EN 44: check at the integration preview. Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "R3 F4: 'shorter' is duration (the card's result line says 'shorter duration'): 'duraient moins longtemps'. Card heading, 72 chars vs EN 44: check at the integration preview. Claims C64 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C64"
@@ -1728,10 +1696,8 @@
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "fr": "Moins d’ulcérations, durée plus courte, moins d’épisodes, moins de douleur",
    "status": "translated",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C64 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "needs-review",
    "claims": [
     "C64"
@@ -1783,12 +1749,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
    "en": "DENTINE TUBULES - OPEN AND OCCLUDED",
    "en_sha1": "866529fd08a4206843f62ae1064b6a9f30c558a7",
-   "fr": "TUBULES DENTINAIRES - OUVERTS ET OBTURÉS",
-   "status": "translated",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge (here with a hyphen instead of '·'); translated as written, PDP owner to confirm the badge.",
+   "fr": "",
+   "status": "held",
+   "flags": [],
+   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge (here with a hyphen instead of '·'); translated as written, PDP owner to confirm the badge.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES - OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES - OUVERTS ET OBTURÉS",
    "source_status": "approved"
   },
   {
@@ -2053,12 +2017,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins. Il récompense la visite, pas le verdict. Ce n’est ni une assurance, ni un paiement destiné à un traitement.",
    "status": "translated",
    "flags": [],
-   "notes": "",
+   "notes": "; 25 Oct: 'jamais pour votre facture dentaire' removed with the EN (Victor, 25 Oct)",
    "source_status": "approved"
   },
   {
@@ -2529,10 +2493,10 @@
    "key_path": "sections/main-product.liquid:954",
    "en": "[price] every 60 days",
    "en_sha1": "f9a8cf8682a68e8baf3193dcddadab28534783ca",
-   "fr": "[price] tous les 60 jours",
-   "status": "theme-key",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup; was theme-key: [price] tous les 60 jours",
    "source_status": "needs-key"
   },
   {
@@ -2542,10 +2506,10 @@
    "key_path": "sections/main-product.liquid:960",
    "en": "[price] per year",
    "en_sha1": "22efce5598d283c7ff4dbdbda9817a76b50b161b",
-   "fr": "[price] par an",
-   "status": "theme-key",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup; was theme-key: [price] par an",
    "source_status": "needs-key"
   },
   {
@@ -2555,10 +2519,10 @@
    "key_path": "sections/main-product.liquid:966",
    "en": "[price] one time",
    "en_sha1": "5d23613e7853930b9b53fe2b92d75ac326234895",
-   "fr": "[price] en une fois",
-   "status": "theme-key",
+   "fr": "",
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup; was theme-key: [price] en une fois",
    "source_status": "needs-key"
   },
   {
@@ -2594,12 +2558,12 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:989",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "en_sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928",
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "en_sha1": "0e3375079a41a1fd5d559989a0c6e957bfa00297",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins.",
    "status": "theme-key",
    "flags": [],
-   "notes": "",
+   "notes": "; 25 Oct: 'jamais pour votre facture dentaire' removed with the EN (Victor, 25 Oct)",
    "source_status": "needs-key"
   },
   {
@@ -2607,15 +2571,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:995",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-   "en_sha1": "a532b1fc8759b80a92cdea9d82ec55439bd2d245",
-   "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account.",
+   "en_sha1": "e287ca857dbef857b8b2813e33f5f67c0be492f1",
+   "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte.",
    "status": "theme-key",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "Offer conflict carried over: the offer needs no dentist involvement for the check-up; translated as written ('vérifié/confirmé par votre dentiste'). Re-translate when the EN changes (B1a decision 4).",
-   "source_status": "needs-key"
+   "flags": [],
+   "notes": "FR lane confirms Victor's decision (22 Oct, S2 choice a): the dentist clause is dropped; the FR is the value of kc.sticky_cart.checkup_info_html in theme-keys.json and locales/fr.json, still delivered through that key (source row needs-key -> corrected). Was: \"Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.\"",
+   "source_status": "corrected"
   },
   {
    "id": "liquid:sections/main-product.liquid:1006",
@@ -3096,15 +3058,15 @@
    "resource_type": "app",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "selling_plan.712155431293.description",
-   "en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
-   "en_sha1": "c3da84bc2ef4bf463784e81ad1d8a0d19185bcd4",
-   "fr": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> de Care Credit reversé sur votre compte\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">L’année Karmicare rapporte 20 % de Return on Care — 2× le taux du Rythme 60 jours — en Care Credit, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      40 € de récompense contrôle dentaire\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos par an</strong> (3 maintenant, 3 au 6e mois)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> de Care Credit</strong> <span>reversés sur vos commandes</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Offrir, suspendre ou résilier</strong> à tout moment</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Satisfait ou remboursé 60 jours</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Prix membre à l’abri de l’inflation</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Kit de bienvenue offert</strong> (à la 1re commande) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> de valeur · offert</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
+   "en": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> Care Credit back in your account\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">The year plan earns 20% Return on Care — 2× the bi-monthly rate — in Care Credit, spendable on member products and accessories. We believe prevention should pay the person doing the caring.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      €40 Dental Check-up Reward\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos a year</strong> (3 now, 3 in month 6)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> Care Credit</strong> <span>back on orders</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Gift, pause or cancel</strong> anytime</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>60-day money-back guarantee</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Inflation-proof member price</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Free Welcome Kit</strong> (on first order) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> value · free</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
+   "en_sha1": "6840dbe45c9cb972429b7b0e801b2ed57eee11da",
+   "fr": "<div class=\"block__loop-description\">\n  <div class=\"kc-return_care-tooltip\">\n    <div class=\"kc-return_care\">\n      <span class=\"kc-dynamic_price\">20%</span> de Care Credit reversé sur votre compte\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">L’année Karmicare rapporte 20 % de Return on Care — 2× le taux du Rythme 60 jours — en Care Credit, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.</span></span>\n    </div>\n    <div class=\"kc-return_care\">\n      40 € de récompense contrôle dentaire\n      <span class=\"info-tip\"><span class=\"info-icon\">i</span><span class=\"info-tip-popover\">Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.</span></span>\n    </div>\n  </div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>6 duos par an</strong> (3 maintenant, 3 au 6e mois)</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong><span class=\"kc-dynamic_price\">€70.80</span> de Care Credit</strong> <span>reversés sur vos commandes</span>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Offrir, suspendre ou résilier</strong> à tout moment</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Satisfait ou remboursé 60 jours</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Prix membre à l’abri de l’inflation</strong>\n</div>\n  <div class=\"kc-description-list\">\n<span class=\"arrow\">✓</span> <strong>Kit de bienvenue offert</strong> (à la 1re commande) <span class=\"kc-welcome-kit-parent\"><span class=\"dynamic_free_welcome_price\">€21</span> de valeur · offert</span>\n</div>\n  <div class=\"block__show-welcome-kit kc-wel-kit-bottom\"></div>\n  <div class=\"kc-bottom_label\"></div>\n</div>",
    "status": "admin",
    "flags": [
     "pending-en-review",
     "wording-adapted"
    ],
-   "notes": "Markup kept; kc-dynamic_price and dynamic_free_welcome_price spans kept verbatim. 'bi-monthly rate' rendered 'le taux du Rythme 60 jours' (glossary: every 60 days, never two months). Offer conflict carried over: the offer needs no dentist involvement for the check-up; translated as written ('vérifié/confirmé par votre dentiste'). Re-translate when the EN changes (B1a decision 4). 'Inflation-proof member price' has no approved EN wording. 'member products and accessories' rendered as 'soins et accessoires réservés aux membres': 'produits' is a banned commodity word in customer copy.",
+   "notes": "Markup kept; kc-dynamic_price and dynamic_free_welcome_price spans kept verbatim. 'bi-monthly rate' rendered 'le taux du Rythme 60 jours' (glossary: every 60 days, never two months). 'Inflation-proof member price' has no approved EN wording (pending-en-review stays, as on the 60-Day Rhythm plan). 'member products and accessories' rendered as 'soins et accessoires réservés aux membres': 'produits' is a banned commodity word in customer copy; Care Credit and Return on Care stay English. EN corrected 22 Oct (Victor, S2 choice a: the check-up reward needs no dentist); FR drops 'vérifié/confirmé par votre dentiste' and follows. Was: \"<div class=\\\"block__loop-description\\\">\\n  <div class=\\\"kc-return_care-tooltip\\\">\\n    <div class=\\\"kc-return_care\\\">\\n      <span class=\\\"kc-dynamic_price\\\">20%</span> de Care Credit reversé sur votre compte\\n      <span class=\\\"info-tip\\\"><span class=\\\"info-icon\\\">i</span><span class=\\\"info-tip-popover\\\">L’année Karmicare rapporte 20 % de Return on Care — 2× le taux du Rythme 60 jours — en Care Credit, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.</span></span>\\n    </div>\\n    <div class=\\\"kc-return_care\\\">\\n      40 € de récompense contrôle dentaire\\n      <span class=\\\"info-tip\\\"><span class=\\\"info-icon\\\">i</span><span class=\\\"info-tip-popover\\\">Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.</span></span>\\n    </div>\\n  </div>\\n  <div class=\\\"kc-description-list\\\">\\n<span class=\\\"arrow\\\">✓</span> <strong>6 duos par an</strong> (3 maintenant, 3 au 6e mois)</div>\\n  <div class=\\\"kc-description-list\\\">\\n<span class=\\\"arrow\\\">✓</span> <strong><span class=\\\"kc-dynamic_price\\\">€70.80</span> de Care Credit</strong> <span>reversés sur vos commandes</span>\\n</div>\\n  <div class=\\\"kc-description-list\\\">\\n<span class=\\\"arrow\\\">✓</span> <strong>Offrir, suspendre ou résilier</strong> à tout moment</div>\\n  <div class=\\\"kc-description-list\\\">\\n<span class=\\\"arrow\\\">✓</span> <strong>Satisfait ou remboursé 60 jours</strong>\\n</div>\\n  <div class=\\\"kc-description-list\\\">\\n<span class=\\\"arrow\\\">✓</span> <strong>Prix membre à l’abri de l’inflation</strong>\\n</div>\\n  <div class=\\\"kc-description-list\\\">\\n<span class=\\\"arrow\\\">✓</span> <strong>Kit de bienvenue offert</strong> (à la 1re commande) <span class=\\\"kc-welcome-kit-parent\\\"><span class=\\\"dynamic_free_welcome_price\\\">€21</span> de valeur · offert</span>\\n</div>\\n  <div class=\\\"block__show-welcome-kit kc-wel-kit-bottom\\\"></div>\\n  <div class=\\\"kc-bottom_label\\\"></div>\\n</div>\"",
    "source_status": "admin-held"
   },
   {
@@ -3240,14 +3202,12 @@
    "resource_type": "product",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "media.69840178020733.alt",
-   "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with evening care at 22:00 and morning care at 06:40",
-   "en_sha1": "9f2b7f909d3da1209b00aed971992b2c4b57c54b",
+   "en": "Karmicare chronobiology infographic: your mouth runs on a 24-hour clock, with morning care at 06:40 and evening care at 22:00",
+   "en_sha1": "ebac0e3660ff7b16ea1cdb4d1a4c35871fac2a8b",
    "fr": "Infographie chronobiologique Karmicare : votre bouche vit au rythme d’une horloge de 24 heures, avec le soin du matin à 06:40 et le soin du soir à 22:00",
    "status": "admin",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "The EN names the evening first; the FR puts the morning (06:40) before the evening (22:00): Awake before Asleep (B1a handoff 6).",
+   "flags": [],
+   "notes": "EN fixed by Victor in Admin 22 Oct (morning 06:40 before evening 22:00); the FR already had that order. Unchanged.",
    "source_status": "admin-held"
   },
   {
@@ -3684,12 +3644,12 @@
    "key_path": "custom.treatment_journey_*#23",
    "en": "— arrive resilient, you did the work at home",
    "en_sha1": "eb3a8f4a24bbe8f3572e3186a4649fe360d3f367",
-   "fr": "— en confiance : le travail est fait à la maison",
+   "fr": "— solide au rendez-vous : le travail est fait à la maison",
    "status": "admin",
    "flags": [
     "fit-risk"
    ],
-   "notes": "Timeline row. Full form: '— vous arrivez en confiance, le travail est déjà fait à la maison'; 'arrive resilient' written without a gendered adjective.",
+   "notes": "Timeline row. Full form: '— vous arrivez en confiance, le travail est déjà fait à la maison'; 'arrive resilient' written without a gendered adjective. Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c).",
    "source_status": "admin-held"
   },
   {
@@ -3762,14 +3722,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.treatment_journey_*#29",
-   "en": "— from your gums to the",
-   "en_sha1": "e2182f94ebba7b1c7a533281a8ea232f3a8b0613",
-   "fr": "— de vos gencives jusqu’à",
+   "en": "— from your gums to the rest of you",
+   "en_sha1": "cb65270625719eab397abf97f50940c4b90736fc",
+   "fr": "— de vos gencives jusqu’au reste de votre corps",
    "status": "admin",
    "flags": [
     "source-defect"
    ],
-   "notes": "translated as it stands (Victor 20 Oct: translate everything that exists in English); the EN stops mid-phrase, NL does the same. Hold reason was: source-defect: the EN stops mid-phrase ('— from your gums to the'); translate once the admin metafield is fixed (B1a handoff 5).",
+   "notes": "translated as it stands (Victor 20 Oct: translate everything that exists in English); the EN stops mid-phrase, NL does the same. Hold reason was: source-defect: the EN stops mid-phrase ('— from your gums to the'); translate once the admin metafield is fixed (B1a handoff 5). Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c).",
    "source_status": "admin-held"
   },
   {
@@ -4252,14 +4212,12 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#37",
-   "en": "Full dosep",
-   "en_sha1": "6a358335df53b73655ce819dfffe1822efe98d5a",
+   "en": "Full dose",
+   "en_sha1": "5399d5a4b01e86bcc07584fc3943e4abe19e428e",
    "fr": "La dose complète",
    "status": "admin",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "The EN has the typo 'dosep' (B1a handoff 4); the FR translates the intended 'Full dose'.",
+   "flags": [],
+   "notes": "EN typo 'dosep' fixed by Victor in Admin 22 Oct; the FR already translated 'Full dose'. Unchanged.",
    "source_status": "admin-held"
   },
   {
@@ -4688,10 +4646,8 @@
    "en_sha1": "e1a43344ac69bdad294141a4253fb85db0656da4",
    "fr": "Midwest University · RDA 93 Awake, 72 Asleep · limite ISO 11609 : 250",
    "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C92 need Clinical Research sign-off; translated faithfully, not softened.",
+   "flags": [],
+   "notes": "Claims C92 need Clinical Research sign-off; translated faithfully, not softened.; claims gate cleared 24 Oct: C92 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)",
    "source_status": "admin-held",
    "claims": [
     "C92"
@@ -4993,12 +4949,12 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#92",
-   "en": "100 nm · rod-shaped, per SCCS",
-   "en_sha1": "b9c9ce809adebd42cb5735f2b9863c1e25e9ce58",
-   "fr": "100 nm · en bâtonnets, selon le SCCS",
+   "en": "nHAp <100 nm · rod-shaped, per SCCS",
+   "en_sha1": "3feb141fbb2000ce6d1f15dec405020611872c5f",
+   "fr": "nHAp <100 nm · en bâtonnets, selon le SCCS",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "EN corrected 23 Oct (the capture lost 'nHAp <', a bare '<' in the live HTML); FR takes the prefix, as NL. Was: \"100 nm · en bâtonnets, selon le SCCS\"",
    "source_status": "admin-held"
   },
   {
@@ -5219,6 +5175,285 @@
    "status": "admin",
    "flags": [],
    "notes": "",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#108",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#108",
+   "en": "Guarana",
+   "en_sha1": "eac174a26521b539885aff6f288e5f6d9a313b1e",
+   "fr": "Guarana",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#109",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#109",
+   "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+   "en_sha1": "b091863d40fc29c177e880fe39bd9d4c2d2c2436",
+   "fr": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Mentha Piperita Oil, Citrus Aurantifolia Oil, Triethyl Citrate, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Paullinia Cupana Seed Extract, Menthol, Limonene, Pinene, Terpineol, Terpinolene, Beta-Caryophyllene, Alpha-Terpinene, Carvone, Linalool, Citral, Geraniol, Camphor, Eugenol.",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#110",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#110",
+   "en": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+   "en_sha1": "7e66994334ddacf4f00b1cb07e5013a64d2c185f",
+   "fr": "Aqua, Glycerin, Xylitol, Sorbitol, Calcium Carbonate, Hydroxyapatite [Nano], Hydrated Silica, Bentonite, Perlite, Glycolipids, Potassium Chloride, Cocos Nucifera Water, Xanthan Gum, Citrus Sinensis Peel Oil Expressed, Charcoal Powder, Cinnamomum Cassia Bark Extract, Triethyl Citrate, Valeriana Officinalis Rhizome/Root Extract, Maltodextrin, Leuconostoc/Radish Root Ferment Filtrate, P-Anisic Acid, Silica, Citrus Aurantium Peel Oil, Limonene, Cinnamomum Cassia Leaf/Bark Oil, Cinnamal, Cinnamyl Alcohol, Coumarin, Linalool, Beta-Caryophyllene, Citral, Citronellol, Pinene, Geraniol.",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#111",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#111",
+   "en": "RDA",
+   "en_sha1": "8adbd2307f5ede720af048b12e62ce9ba9fe41cd",
+   "fr": "RDA",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#112",
+   "en": "Awake",
+   "en_sha1": "2b453e3e926b3275b0260310e696420278283986",
+   "fr": "Awake",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#113",
+   "en": "Asleep",
+   "en_sha1": "b9692bbecea9d8f0a8224711aea48e53a2d42f40",
+   "fr": "Asleep",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#114",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#114",
+   "en": "· AM",
+   "en_sha1": "115ce3300e2da4045b9dad2cc2c96f67e67203f8",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "invariant: kept as in EN (design label next to the formula name) Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c). FR as #82 (the FR lane's '· matin'), one translation per segment in the field.",
+   "fr": "· matin"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#115",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#115",
+   "en": "· PM",
+   "en_sha1": "034ea857ae30a7ef4217413eacff31b656015116",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "invariant: kept as in EN (design label next to the formula name) Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c). FR as #85 (the FR lane's '· soir'), one translation per segment in the field.",
+   "fr": "· soir"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#116",
+   "en": "93.25",
+   "en_sha1": "e360baabc790f7e4765568954c4a678a6080b757",
+   "fr": "93,25",
+   "status": "admin",
+   "flags": [],
+   "notes": "RDA value (For dentists accordion): decimal comma, as NL; not invariant (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#117",
+   "en": "72.32",
+   "en_sha1": "4409ccb6a18dbac0db7874572a31c4e5bbfd5511",
+   "fr": "72,32",
+   "status": "admin",
+   "flags": [],
+   "notes": "RDA value (For dentists accordion): decimal comma, as NL; not invariant (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#118",
+   "en": "✓",
+   "en_sha1": "698a879938bf4d71b92190d2b8f19c0e1d4abeef",
+   "fr": "✓",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#119",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#119",
+   "en": "250",
+   "en_sha1": "ba30fd97b4127db56e9f4d3d9c030d71646fd2e7",
+   "fr": "250",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#120",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#120",
+   "en": "i",
+   "en_sha1": "042dc4512fa3d391c5170cf3aa61e6a638f84342",
+   "fr": "i",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#121",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#121",
+   "en": "CPSR · 2026",
+   "en_sha1": "53085b5a21107a087218fb89108e83bde5ebad97",
+   "fr": "CPSR · 2026",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#122",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#122",
+   "en": "CPNP · 2026",
+   "en_sha1": "9c7269b56112b0c3e6bfc35f890817cb2a547fff",
+   "fr": "CPNP · 2026",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#123",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#123",
+   "en": "SCCS/1677/25",
+   "en_sha1": "d5da1836948f9f8b39b9be9b5d426d7e1463aef9",
+   "fr": "SCCS/1677/25",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#124",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#124",
+   "en": "→",
+   "en_sha1": "213edd2539ed96e6900bb40abd588edba35566c5",
+   "fr": "→",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#125",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#125",
+   "en": "Awake:",
+   "en_sha1": "f3f3c7c8d040cb18e2600ce76135201847e1ea89",
+   "fr": "Awake:",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#126",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#126",
+   "en": "Asleep:",
+   "en_sha1": "b84db316a641a2746cd885a78ab2b5277d6956ab",
+   "fr": "Asleep:",
+   "status": "admin",
+   "flags": [
+    "invariant"
+   ],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
    "source_status": "admin-held"
   },
   {
@@ -5762,12 +5997,12 @@
    "key_path": "custom.professional_testimonials#02",
    "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
    "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
-   "fr": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
+   "fr": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
    "status": "admin",
    "flags": [
     "gendered-title"
    ],
-   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).",
+   "notes": "Occupations, not fields (landing desk 23 Oct, R23/R37). Feminine forms: the source speaks of her ('Her English quote', docs/source-copy/REPORT.md #25). Confirm with the practitioner together with the current title (45 brief launch gate 3). The homepage and PDP card_8dRing/text twins (EN 'Practitioner') follow in the R23 round, held in holds.json until then. Was: \"Pharmacie, thérapie orthomoléculaire, coordination kPNI\"",
    "source_status": "admin-held"
   },
   {
@@ -6140,10 +6375,10 @@
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#05",
    "en": "Return on Care",
    "en_sha1": "6f6ba4c5352728a68ae391cd4ec83df921c2c07c",
-   "fr": null,
-   "status": "held",
+   "fr": "Return on Care",
+   "status": "admin",
    "flags": [],
-   "notes": "never-translate: program name, stays English (glossary); the source entry lacks the never_translate flag that the same text carries on care_comes_back/eyebrow.",
+   "notes": "never-translate: program name, stays English (glossary); the source entry lacks the never_translate flag that the same text carries on care_comes_back/eyebrow. Victor 23 Oct ('Akkoord 1-4'): FR catch-up with the current EN (wave 2c).",
    "source_status": "admin-held"
   },
   {
@@ -6151,15 +6386,14 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#06",
-   "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe preven",
-   "en_sha1": "1c34eae6263ac15b8c4faa11edc23b498836373c",
+   "en": "Return on Care is our give-back: a share of every delivery comes back to you as Care Credit — in euros, spendable on member products and accessories. We believe prevention should pay the person doing the caring.",
+   "en_sha1": "9f06fb7027a41c0c3d07d07e7e890f4cb3f8e142",
    "fr": "Le Return on Care, c’est notre façon de rendre : une part de chaque livraison vous revient en Care Credit — en euros, à dépenser en soins et accessoires réservés aux membres. Nous pensons que la prévention doit rapporter à la personne qui prend soin.",
    "status": "admin",
    "flags": [
-    "source-defect",
     "wording-adapted"
    ],
-   "notes": "The EN is cut off ('We believe preven'). The FR completes it with the sentence the plan tooltips and compare_value#08 carry ('We believe prevention should pay the person doing the caring'). Admin owner to check the EN value. 'member products and accessories' rendered as 'soins et accessoires réservés aux membres': 'produits' is a banned commodity word in customer copy.",
+   "notes": "'member products and accessories' rendered as 'soins et accessoires réservés aux membres': 'produits' is a banned commodity word in customer copy. Return on Care and Care Credit stay English. EN completed in Admin by Victor 23 Oct with the closing sentence of the other Return on Care tooltips (R37 hold); the FR already carried that sentence. Unchanged.",
    "source_status": "admin-held"
   },
   {
@@ -6208,14 +6442,12 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.compare_table|shop.metaobjects.compare_value#10",
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded.",
-   "en_sha1": "b47f1032ffb5f617423fe52f9627dda609b9fc2e",
-   "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded.",
+   "en_sha1": "be6c3f1a644c2b2988bf291831209c438f62365f",
+   "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.",
    "status": "admin",
-   "flags": [
-    "pending-en-review"
-   ],
-   "notes": "Offer conflict carried over: the offer needs no dentist involvement for the check-up; translated as written ('vérifié/confirmé par votre dentiste'). Re-translate when the EN changes (B1a decision 4).",
+   "flags": [],
+   "notes": "EN corrected 22 Oct (Victor, S2 choice a: the check-up reward needs no dentist); FR drops 'vérifié/confirmé par votre dentiste' and follows. Was: \"Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte. La prévention, récompensée.\"",
    "source_status": "admin-held"
   },
   {
@@ -6571,14 +6803,12 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "shop.metaobjects.compare_value:year.cost_per_brushing",
-   "en": "€0.42",
-   "en_sha1": "2f9086614ad1ee5b4fc8e07ec9db75e8ac201c42",
-   "fr": "0,42 €",
+   "en": "€0.49",
+   "en_sha1": "b9ceb39480ce1b12b254e2b4310f7b03fbc1f6fb",
+   "fr": "0,49 €",
    "status": "admin",
-   "flags": [
-    "source-defect"
-   ],
-   "notes": "Wrong in EN: the Year is €0.49 per brushing (B1a handoff 1). Translated as written; becomes '0,49 €' when the admin value is fixed.",
+   "flags": [],
+   "notes": "EN set to €0.49 by Victor in Admin 22 Oct (€354 / 6 duos = €59 per duo); FR follows. Was: \"0,42 €\"",
    "source_status": "admin-held"
   },
   {
@@ -6599,6 +6829,32 @@
    "claims": [
     "C100"
    ]
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "en_sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "fr": "<p>“J’utilise Karmicare depuis longtemps et je me reconnais pleinement dans leur vision des soins bucco-dentaires. Notre bouche aussi suit le rythme naturel de notre corps : le milieu buccal n’est pas le même le jour que la nuit. De plus, la santé bucco-dentaire n’existe pas isolément : elle est étroitement liée à notre santé générale.</p><p>En tant que dentiste, je trouve la formulation intéressante grâce à la combinaison, entre autres, de nano-hydroxyapatite et de xylitol dans une formule leave-on sans fluor. Comme il n’est pas nécessaire de se rincer la bouche après le brossage, les ingrédients de soin restent plus longtemps en contact avec les dents et la bouche. Les deux formules différentes s’inscrivent elles aussi parfaitement dans la vision de notre rythme naturel jour-nuit : fraîche et vivifiante le matin (avec du guarana pour l’énergie matinale), plus chaude et plus épicée le soir (avec de la valériane, qui contribue au calme et à la détente).</p><p>Mes patients qui utilisent Karmicare en sont très satisfaits et trouvent que c’est un dentifrice agréable. Mes enfants, pourtant exigeants en matière de goûts, utilisent eux aussi Karmicare avec plaisir ! Je trouve cela au moins aussi important : une bonne hygiène bucco-dentaire commence par un dentifrice qu’on aime et qu’on continue à utiliser régulièrement. Délicieusement frais, sans agresser la bouche. Je suis fan !”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "FR = the 23 Oct draft translated from her Dutch original (Figma KC | Brand Design Library, Ambassadors page 3947:17082 4076:24), quote marks as the other FR quotes; approved by Victor 24 Oct 2026 ('ik keur FR voor stephanie', via the landing desk)",
+   "source_status": "needs-review"
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "en_sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "fr": "<p>“En tant qu’hygiéniste bucco-dentaire et responsable qualité avec plus de 13 ans d’expérience dans les soins bucco-dentaires, je suis critique lorsqu’il s’agit de recommander des produits. Ce que j’apprécie particulièrement chez Karmicare, c’est la combinaison d’une composition efficace et sûre, qui est en plus agréable à utiliser.</p><p>D’après ma propre expérience, je constate un goût agréable, une sensation plus lisse sur les dents et des dents qui paraissent plus blanches, et cela sans fluor. Il offre une alternative intéressante et fiable, tant pour un usage professionnel que quotidien.</p><p>Je considère Karmicare comme un complément précieux au sein des soins bucco-dentaires modernes et j’y vois de belles possibilités d’utilisation auprès d’un large public.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "FR approved by Victor 23 Oct 2026 (karmicare-direct-feedback.md rule 5; Figma KC | Brand Design Library, Ambassadors page 3947:17082 4063:14), translated from her Dutch original; quote marks as the other FR quotes",
+   "source_status": "needs-review"
   }
  ]
 }

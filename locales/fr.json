@@ -16,6 +16,7 @@
       "loading": "Chargement de l’heure locale actuelle",
       "valuetext_live": ". Heure locale actuelle.",
       "valuetext_preview": ". Relâchez pour revenir à l’heure actuelle.",
+      "help": "Faites glisser le bouton autour de l’anneau pour afficher une heure locale. Relâchez pour revenir à l’heure actuelle. Maintenez une touche fléchée pour avancer par pas de cinq minutes ; Page précédente et Page suivante changent d’une heure. Début sélectionne minuit ; Fin sélectionne 23:59. Relâchez la touche, appuyez sur Échap ou quittez la commande pour revenir à maintenant.",
       "window_1": "la salive reprend à peine après la nuit, et l’émail est le moins protégé avant votre première boisson",
       "window_2": "le petit-déjeuner et le café ont fait chuter le pH en quelques minutes — la salive passe la demi-heure suivante à le rétablir",
       "window_3": "le déjeuner relance le cycle : chaque prise alimentaire ouvre une nouvelle fenêtre acide, quelle que soit sa taille",
@@ -28,7 +29,7 @@
       "all": "TOUT"
     },
     "footer": {
-      "consent_html": "En vous inscrivant, vous acceptez les <a href=\"{{ terms_url }}\">conditions d’utilisation</a> et la <a href=\"{{ privacy_url }}\">politique de confidentialité</a>.",
+      "consent_html": "Des e-mails occasionnels de KARMICARE sur Awake & Asleep, la récompense contrôle dentaire et les offres réservées aux membres. Désinscription possible à tout moment via le lien présent dans chaque e-mail. <a href=\"{{ privacy_url }}\">Politique de confidentialité</a>.",
       "country": "Pays/région",
       "email": "E-mail",
       "email_placeholder": "vous@exemple.be",
@@ -36,7 +37,12 @@
       "language": "Langue",
       "legal_consumer_rights": "Droits des consommateurs",
       "legal_privacy": "Politique de confidentialité",
-      "legal_terms": "Conditions générales"
+      "legal_terms": "Conditions générales",
+      "check_inbox": "Consultez votre boîte de réception pour confirmer votre inscription.",
+      "email_invalid": "Vérifiez l’adresse e-mail.",
+      "retry": "Nous n’avons pas pu confirmer votre inscription. Veuillez réessayer dans un instant.",
+      "legal_guarantee": "Vos droits à la garantie légale",
+      "legal_withdrawal": "Renoncer au contrat ici"
     },
     "general": {
       "coming_soon": "Bientôt disponible"
@@ -66,10 +72,10 @@
     },
     "sticky_cart": {
       "change_label_html": "Modifier",
-      "checkup_info_html": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.",
+      "checkup_info_html": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte.",
       "credit_checkup_html": "+ [credit] Care Credit + 40 € récompense contrôle",
       "credit_html": "+ [credit] de Care Credit reversé",
-      "credit_info_html": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
+      "credit_info_html": "Le Care Credit est un crédit Karmicare : dépensez-le en soins.",
       "cta_once_html": "Essayer une fois",
       "cta_rhythm_html": "Commencer votre Rythme 60 jours",
       "cta_year_html": "Commencer votre année Karmicare",
@@ -80,9 +86,6 @@
       "kit_html": "Kit de bienvenue : deux brosses à dents + fil dentaire",
       "panel_label_html": "Livraison et contenu",
       "per_brushing_html": "[per_brushing] par brossage",
-      "price_once_html": "[price] en une fois",
-      "price_rhythm_html": "[price] tous les 60 jours",
-      "price_year_html": "[price] par an",
       "stop_rhythm_html": "Suspendez ou arrêtez à tout moment",
       "stop_year_html": "Renouvellement annuel · résiliable avant l’échéance",
       "title_once_html": "Essayer une fois · 1 duo",

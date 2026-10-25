@@ -2,7 +2,7 @@
  "batch": "batch-05-products",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-05-products.json",
- "source_digest": "5ab678a91ffc223be63e7f87a68783bacc62a744",
+ "source_digest": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
  "source_entries": 77,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -15,9 +15,8 @@
   "fit-risk": 2,
   "not-rendered": 1,
   "pending-claim-review": 25,
-  "pending-en-review": 1,
   "source-defect": 9,
-  "wording-adapted": 3
+  "wording-adapted": 2
  },
  "entries": [
   {
@@ -190,16 +189,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
-   "en_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
-   "fr": "<p>À chaque commande, <strong>nous vous récompensons</strong>. Vous investissez dans votre santé. Nous réinvestissons en vous. La santé à long terme est notre <strong>engagement n° 1</strong>. Les Health Rewards s’échangent contre des accessoires et des soins réservés aux membres Karmicare.</p>",
+   "en": "<p>Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year. Spend Care Credit on any order.</p>",
+   "en_sha1": "b82e6df5b61ff73497387040cc4b4061dd40c7a7",
+   "fr": "<p>Karmicare est un système de soin : le rituel arrive à votre rythme, et vos soins accumulent du Care Credit au fil du temps. Votre adhésion vous reverse du Care Credit : 10 % de chaque Rythme 60 jours, 20 % de l’année Karmicare. Dépensez votre Care Credit sur n’importe quelle commande.</p>",
    "status": "translated",
-   "flags": [
-    "pending-en-review",
-    "wording-adapted"
-   ],
-   "notes": "Pre-2.0 card on product.json: 'Health Rewards' is the old name of what the Duo PDP calls Care Credit; kept in English as written. 'purchase' rendered 'commande', 'products' rendered 'soins', 'redeemable' rendered 's'échangent' (banned words).",
-   "source_status": "approved"
+   "flags": [],
+   "notes": "Legacy Health Rewards card, EN corrected 22 Oct (Victor, 'ok kaartje') to three approved sentences (care_comes_back intro, step_ritual, step_next_order); the FR reuses their approved FR. Was: \"<p>À chaque commande, <strong>nous vous récompensons</strong>. Vous investissez dans votre santé. Nous réinvestissons en vous. La santé à long terme est notre <strong>engagement n° 1</strong>. Les Health Rewards s’échangent contre des accessoires et des soins réservés aux membres Karmicare.</p>\"",
+   "source_status": "corrected"
   },
   {
    "id": "product:main/sticky_cart_block/button_text",

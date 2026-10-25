@@ -9,9 +9,9 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | Status | Rows |
 |---|---:|
 | In merchant-edit | 6 |
-| Ready to land | 1 |
+| Ready to land | 3 |
 | In progress | 0 |
-| Waiting for Victor | 8 |
+| Waiting for Victor | 7 |
 | Parked / after launch | 0 |
 | Dropped | 2 |
 
@@ -23,7 +23,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 7 | In merchant-edit | Announcement line "FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017" (C103 confirmed by Victor) and the newsletter placeholder *jij@voorbeeld.be* / *vous@exemple.be* | `6112414`, `1437fc5` |
 | 9 | In merchant-edit | CTAs say "Begin your …" in the EN source, the NL ("Begin je …") and the theme keys | `0a49ab2` |
 | 12 | In merchant-edit | PDP end button "Begin your 60-Day Rhythm" (capital R) in the EN source, the NL and the template; landed 22 Oct with the FR follow-up | `6500a4a` |
-| 26 | Waiting for Victor | "Verified / confirmed by your dentist" in 5 entries (S2) | PDP pricing summary, info card, check-up tooltip, Year plan description |
+| 26 | Ready to land | No dentist confirmation (S2, Victor 22 Oct, choice a): the clause leaves the PDP check-up tooltip, the sticky-bar check-up line and the Duo info card, in EN, NL and the theme keys; the compare-table tooltip and the Year plan description are admin text, still to edit by Victor | reported 22 Oct (needs review: theme files) |
 | 31 | Waiting for Victor | Brand-rule exceptions (S7) | footer, NL copy |
 | 33 | Waiting for Victor | Facts to confirm (S9) | homepage and PDP |
 | 34 | Waiting for Victor | Treatment-journey line stops mid-phrase (#29) | admin metafield `custom.treatment_journey_*` |
@@ -32,27 +32,22 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 | 40 | Waiting for Victor | Money format on the EN pages | Shopify money format (B1a decision 5) |
 | 51 | Ready to land | Victor's admin EN edits of 22 Oct in the EN source and the NL: the Duo's title, SEO title and meta description, the footer menu link "Why hydroxyapatite", six fields of the nano-hydroxyapatite article; its twin article is hidden and redirected, so its 79 entries are retired. His own NL/FR Duo texts are recorded as registered (`registration/registered.json`), so the plan never overwrites them. The FR payload follows in the FR lane | reported 22 Oct to the global coordinator |
 | 52 | Waiting for Victor | Releasing the nano-hydroxyapatite article in NL and FR | `/blogs/news/nano-hydroxyapatite`, batch 07 |
+| 53 | Ready to land | Footer slogan "Your mouth has a rhythm Now your oral care too" (Victor 22 Oct), in the footer group and its schema default, EN and NL | reported 22 Oct (needs review: theme files) |
 | 45 | Dropped | The two missing homepage FAQ answers (S1): the homepage lane filled both on 21 Oct | integration `41ae772` |
 | 49 | Dropped | Duo-name settings (3 entries): the product title names the Duo | `6643e16` |
 
 ### Waiting for Victor: the questions
-
-**26. "Verified / confirmed by your dentist" in 5 entries (S2).** The Check-up Reward needs no dentist involvement, but five texts say the check-up is "verified/confirmed by your dentist". (The announcement-bar half of S2 is solved by "FOR MEMBERS".) What should they say?
-- (a) Delete the clause "— confirmed by your dentist" (a deletion, no new claim).
-- (b) You give new wording.
-- (c) Keep it.
-- *Advice*: (a): it removes the contradiction without new copy; two of the five are admin text (plan description), so those are your edit.
 
 **31. Brand-rule exceptions (S7).** The footer says "is a Belgian product", and the treatment-journey footnote "What members report with continued use" is NL *bij langdurig gebruik*: both use banned words (product, use). Rewrite or keep?
 - (a) Rewrite the EN and the Figma first; you give the wording.
 - (b) Keep them.
 - *Advice*: (a): the brand rule has no exceptions so far; I do not write new copy myself.
 
-**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? And should the footer slogan "Your mouth has a rhythm So should your oral care" get a full stop?
+**33. Facts to confirm (S9).** Which is right: "Dr. Kris Sienaert" (site) or "Sinaert" (45 brief)? "100+" practitioners (PDP) or "30+" (45 brief)? 36 studies (site) or 39 (45 brief)? "Twelve hundred brushings a year" (twice a day is about 730)? (The footer slogan is decided: row 53.)
 - Answer per fact.
 - *Advice*: Confirm each; nothing is changed without the fact, because each one needs a fact and not a typo fix.
 
-**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end?
+**34. Treatment-journey line stops mid-phrase (#29).** The line reads "Peace of mouth, peace of mind* — from your gums to the". How should it end? **Answered 23 Oct:** Victor completed it in Admin as "— from your gums to the rest of you".
 - (a) You give the ending.
 - (b) Cut it after "peace of mind*".
 - (c) Remove the line.
@@ -64,7 +59,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Sentence case, with plan names as names ("Begin your 60-Day Rhythm").
 - *Advice*: (c): it matches the CTAs that are already in place and reads calmest; I apply it to EN and NL in one commit.
 
-**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" → Indiana University OHRI. Who edits them, and when?
+**39. Admin text fixes from B1a (captured 19 Oct; the footer menu link "Why use hydroxapatite" is fixed since 22 Oct, row 51).** These are admin texts the theme cannot change: compare table Year €0.42 → €0.49 per brushing; Welcome Kit row €18 → €21 (point it at the 2.0 brushes); the Year cells lack "3 now, 3 in month 6"; product FAQ "Full dosep" → "dose"; an image alt puts evening before morning; the legacy plan name " Pay every 12 months, Deliver every 6 months_"; the lab name "Midwest University" stays (Victor 22 Oct). Who edits them, and when?
 - (a) You or DH edit them before the first wave is registered.
 - (b) After launch.
 - *Advice*: (a): the registration translates the admin text as it is, so a fix after it means translating twice.
@@ -80,7 +75,7 @@ The rows of the lane that concern this report; the whole lane is in `docs/source
 - (c) Keep it gated until the claims review.
 - *Advice*: (b): "medical marvel … bones and overall health", "first discovered by NASA" and "chemicals that prevent natural healing" are the kind of claims EU 655/2013 does not allow a cosmetic; translating them spreads them to two more languages. The article is in batch 07, outside the first wave, so nothing waits on it for launch.
 
-**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day.
+**Changelog.** 22 Oct: this status block added at Victor's request (via the landing desk). 22 Oct, later: rows 12 and 13 landed in merchant-edit `2ef9b5c`; rows 39, 51 and 52 for Victor's admin edits of that day; rows 26 and 53 for his dentist and slogan decisions.
 
 The English that the live store renders, one entry per string. Batches 01–03 (homepage, Duo PDP, header and footer) come from B1a, with its corrections applied; batches 04–08 (legal, other products, content pages, collections and blog, system pages) come from B2 and are inventoried as they are, without corrections. NL and FR translators start from here.
 
@@ -93,20 +88,27 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
   - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017”, Victor's short line of 21 Oct, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
   - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
+  - the sticky-bar defaults `liquid:sections/main-product.liquid:954`, `:960` and `:966` (*[price] every 60 days*, *[price] per year*, *[price] one time*; settings `price_rhythm`, `price_year`, `price_once`) are `retired` (25 Oct): pdp R77d `a290153` and R77f `cd4db79` show the price per brushing for every plan, and the keys `kc.sticky_cart.price_rhythm_html`, `price_year_html` and `price_once_html` leave every locale.
 - **Updated 22 Oct** with Victor's EN edits in the Shopify admin, read back on the storefront (global coordinator, and this lane for the article and the product title). Ten `admin-held` entries carry the new EN, with `old_en` / `old_sha1` kept and the reason in `notes`:
   - the Duo product's title, SEO title and meta description (batch 02): "Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System";
   - the footer menu link "Why use hydroxapatite" → "Why hydroxyapatite" (batch 03), so it leaves the brand-rule scan;
   - six fields of the article `news/nano-hydroxyapatite` (batch 07): SEO title, meta description, and blocks `#b016`, `#b088`, `#b090`, `#b100` ("helps protect" instead of "guards", "total protection", "prevents", "protects"). The rest of the article stays as Victor approved it, and its claim statuses are unchanged: releasing the gated NL/FR blocks is still his decision. The twin article `news/nano-hydroxyapatite-and-why-you-need-it-in-your-toothpaste` was not edited; Victor then hid it and redirected it to `/blogs/news/nano-hydroxyapatite` (tested on EN, /nl, /fr), so its 79 entries are `retired` (held in NL/FR, never registered). EN and digests are unchanged.
+- **Updated 22 Oct (later)** with two decisions of Victor's: the dentist clause leaves the PDP check-up tooltip, the sticky-bar check-up line (`liquid:sections/main-product.liquid:995`) and the Duo info card (S2, choice a), and the footer slogan becomes "Your mouth has a rhythm Now your oral care too" (two sentences, no stop). The four entries are `corrected` with `old_en` kept; the theme files carry the same text. The compare-table tooltip and the Year selling-plan description are admin text and still say "verified by your dentist".
+- **Updated 22 Oct (admin)** with three admin edits Victor made after his decisions: the Year selling-plan description (Loop) and the Compare Row tooltip '€40 Check-up Reward' lose "verified by your dentist", and the Year cost per brushing is €0.49 (was €0.42). They stay `admin-held` with `old_en` kept. The tooltip lives on the Compare Row entry, not in a Compare Value cell as the entry id suggests.
+- **Updated 22 Oct (clock help)**: the theme key `kc.clock.help` (screen-reader help for the clock knob, homepage lane `e1411e2`, Victor option a) is inventoried as `locale:kc.clock.help` (#230), `approved`; NL and FR as Victor approved them.
+- **Updated 22 Oct (admin fixes)**: Victor fixed the product FAQ typo "Full dosep" → "Full dose" and the infographic alt (morning before evening: "…with morning care at 06:40 and evening care at 22:00"); both read back on the storefront, `old_en` kept. The lab name "Midwest University" stays.
+- **Updated 22 Oct (legacy card)**: `product:main/info_card_FnBcaN/body_text` on `templates/product.json` no longer says "Health Rewards"; Victor approved three existing Care Credit sentences ("Karmicare is a care system: … Spend Care Credit on any order."). `corrected`, `old_en` kept.
+- **Updated 22 Oct (slogan marker, Astra R27)**: the footer slogan carries the explicit line-break marker `[[br]]` between its two sentences ("Your mouth has a rhythm[[br]]Now your oral care too"); `sections/footer.liquid` renders it as `<br>` (global lane). Words and the missing stop are Victor's and unchanged.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 229 | `5286628ff7c87962782903bc9e1ce3350dd61469` |
-| `batch-02-pdp` | 477 | `2468bab432715f0aea7f7b6aea815a8f65f70721` |
-| `batch-03-header-footer` | 41 | `18cdaec0fb18d1f00aa688c83d6bc0393b350319` |
+| `batch-01-homepage` | 230 | `ab192236341d9e063847ab0e1b7bff70a09c7bdd` |
+| `batch-02-pdp` | 477 | `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4` |
+| `batch-03-header-footer` | 41 | `742351732dabbbff2eff9cadc6858ba87284393a` |
 | `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
-| `batch-05-products` | 77 | `5ab678a91ffc223be63e7f87a68783bacc62a744` |
+| `batch-05-products` | 77 | `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
@@ -131,7 +133,7 @@ By resource type:
 
 | Batch | template_setting | section_group | theme_locale | app | product | metafield | metaobject | shop | navigation | page | policy | article | blog | collection | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 192 | 0 | 23 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 229 |
+| `batch-01-homepage` | 192 | 0 | 24 | 12 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 230 |
 | `batch-02-pdp` | 156 | 0 | 53 | 14 | 16 | 175 | 63 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 477 |
 | `batch-03-header-footer` | 0 | 6 | 24 | 1 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 41 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 357 | 474 | 0 | 0 | 0 | 974 |
@@ -139,13 +141,13 @@ By resource type:
 | `batch-06-content-pages` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 0 | 0 | 0 | 22 |
 | `batch-07-collections-blog` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 698 | 1 | 9 | 709 |
 | `batch-08-system` | 3 | 0 | 36 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 46 |
-| **All** | **511** | **6** | **136** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2575** |
+| **All** | **511** | **6** | **137** | **45** | **59** | **175** | **63** | **8** | **10** | **379** | **474** | **698** | **1** | **10** | **2576** |
 
 By status:
 
 | Batch | approved | corrected | needs-review | needs-key | admin-held | never_translate |
 |---|---:|---:|---:|---:|---:|---:|
-| `batch-01-homepage` | 145 | 21 | 30 | 31 | 2 | 16 |
+| `batch-01-homepage` | 146 | 21 | 30 | 31 | 2 | 16 |
 | `batch-02-pdp` | 146 | 4 | 23 | 36 | 268 | 32 |
 | `batch-03-header-footer` | 17 | 2 | 1 | 10 | 11 | 5 |
 | `batch-04-legal` | 143 | 0 | 0 | 0 | 831 | 0 |
@@ -236,7 +238,7 @@ Not changed, because no text setting in the allowed files carries it:
 | 02 | `sections/main-product.liquid:966` | [price] one time | sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate… |
 | 02 | `sections/main-product.liquid:977` | + [credit] Care Credit back | sticky bar: schema default of sticky_cart setting 'credit'. The PDP template stores only button_text, so this default renders and is invisible to Translate & A… |
 | 02 | `sections/main-product.liquid:983` | + [credit] Care Credit + €40 Check-up Reward | sticky bar: schema default of sticky_cart setting 'credit_checkup'. The PDP template stores only button_text, so this default renders and is invisible to Trans… |
-| 02 | `sections/main-product.liquid:989` | Care Credit is Karmicare credit: spend it on more care, never on your dental bi… | sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
+| 02 | `sections/main-product.liquid:989` | Care Credit is Karmicare credit: spend it on more care. | sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:995` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €… | sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
 | 02 | `sections/main-product.liquid:1006` | Delivery & what's included | sticky bar: schema default of sticky_cart setting 'panel_label'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:1012` | Change | sticky bar: schema default of sticky_cart setting 'change_label'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
@@ -543,7 +545,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 151 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/answer` | template_setting | Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — s… | approved | C C25 |
 | 152 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/category` | template_setting | The ritual | corrected |  |
 | 153 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/question` | template_setting | How long does one duo last? | corrected |  |
-| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
+| 154 | `index:km_faq_accordion_FYcArV/faq_item_kLMHax/answer` | template_setting | About 64 days — one full cycle. One pump per ritual, Awake in the morning and Asleep at n… | corrected | C C07 |
 | 155 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category` | template_setting | Ingredients & safety | corrected |  |
 | 156 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/question` | template_setting | Can I combine Karmicare with fluoride toothpaste or rinses? | corrected |  |
 | 157 | `index:km_faq_accordion_FYcArV/faq_item_7jmEGi/answer` | template_setting | Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating di… | corrected | C C101 |
@@ -571,7 +573,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 179 | `index:care_comes_back/eyebrow` | template_setting | Return on Care | approved | NT |
 | 180 | `index:care_comes_back/heading` | template_setting | The care you already do. Now designed to give back. | approved |  |
 | 181 | `index:care_comes_back/intro` | template_setting | Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as … | approved |  |
-| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 183 | `index:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 184 | `index:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 185 | `index:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -652,7 +654,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 26 | `product.subscription-item:main/treatment_journey_block/disclaimer_text` | template_setting | * What members report with continued use — individual experiences vary. | approved |  |
 | 27 | `product.subscription-item:main/info_card_FnBcaN/header_text` | template_setting | More than two formulas | approved |  |
 | 28 | `product.subscription-item:main/info_card_FnBcaN/body_text` | template_setting | Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care buil… | needs-review |  |
-| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 30 | `product.subscription-item:main/professional_testimonials_block/heading` | template_setting | Trusted by professionals | approved |  |
 | 31 | `product.subscription-item:main/sticky_cart_block/button_text` | template_setting | Begin Now | approved |  |
 | 32 | `product.subscription-item:chronobiology_clock_karmicare/eyebrow` | template_setting | CHRONOBIOLOGY | approved |  |
@@ -766,7 +768,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 140 | `product.subscription-item:care_comes_back/receipt_column_label` | template_setting | Received | approved |  |
 | 141 | `product.subscription-item:care_comes_back/total_label` | template_setting | Up to | approved |  |
 | 142 | `product.subscription-item:care_comes_back/total` | template_setting | €110.80 | approved |  |
-| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 144 | `product.subscription-item:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 145 | `product.subscription-item:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 146 | `product.subscription-item:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -807,7 +809,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 181 | `liquid:sections/main-product.liquid:966` | theme_locale | [price] one time | needs-key |  |
 | 182 | `liquid:sections/main-product.liquid:977` | theme_locale | + [credit] Care Credit back | needs-key |  |
 | 183 | `liquid:sections/main-product.liquid:983` | theme_locale | + [credit] Care Credit + €40 Check-up Reward | needs-key |  |
-| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. | needs-key |  |
+| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care. | needs-key |  |
 | 185 | `liquid:sections/main-product.liquid:995` | theme_locale | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is… | needs-key |  |
 | 186 | `liquid:sections/main-product.liquid:1006` | theme_locale | Delivery & what's included | needs-key |  |
 | 187 | `liquid:sections/main-product.liquid:1012` | theme_locale | Change | needs-key |  |
@@ -891,7 +893,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 265 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#26` | metafield | You smile more* | admin-held |  |
 | 266 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#27` | metafield | — and think about it less | admin-held |  |
 | 267 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#28` | metafield | Peace of mouth, peace of mind* | admin-held |  |
-| 268 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29` | metafield | — from your gums to the | admin-held |  |
+| 268 | `admin:karmicare-biorhythmic-oral-care-system:custom.treatment_journey_*#29` | metafield | — from your gums to the rest of you | admin-held |  |
 | 269 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#01` | metafield | Why Karmicare | admin-held |  |
 | 270 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#02` | metafield | Karmicare cares for both your mouth and your state of mind through two distinct brushing experience… | admin-held |  |
 | 271 | `admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#03` | metafield | Ingredients | admin-held |  |

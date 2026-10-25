@@ -11,6 +11,9 @@
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
+{%- if section.settings.newsletter_enable and section.settings.klaviyo_public_key != blank -%}
+  <script src="{{ 'kc-footer-newsletter.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 {%- style -%}
   /* A global rule sets line-height: normal on p, span, li, label and headings; text in the
@@ -91,8 +94,12 @@
     line-height: var(--kc-responsive-h4-line-height);
   }
 
+  /* 320px, not the Figma 286px, so the slogan keeps to two lines in every language at the
+     desktop 28px (Victor, 23 Oct). Longest line measured in Proxima Nova 500 at 28px/-1px:
+     EN "Your mouth has a rhythm" 285px, NL "Nu je mondverzorging ook" 305px, FR "Votre bouche
+     a son rythme" 310px. The break itself comes from the [[br]] marker in the text (R27). */
   .km-footer-slogan {
-    max-width: 215px;
+    max-width: 320px;
     margin: 0;
     font-family: var(--kc-font-use-heading);
     font-weight: var(--font-500-weight);
@@ -215,9 +222,12 @@
     box-shadow: 0 0 0 var(--kc-shape-stroke-thin) var(--kc-mapped-border-focus-default);
   }
 
-  /* Fills the 44px row, so the whole row height is the input's click target */
+  /* Fills the 44px row, so the whole row height is the input's click target. Width 0 + flex
+     basis 0: the input's own default width no longer counts toward the column's minimum, which
+     pushed FR 22px into the 1200px gutter (R46b N3); it takes whatever the button leaves. */
   .km-footer-field__input {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    width: 0;
     align-self: stretch;
     min-width: 0;
     padding: 0;
@@ -232,10 +242,13 @@
     opacity: 1;
   }
 
+  /* One line in every language: NL "Doe mee" wrapped at 1200px (R46b N3) */
   .km-footer-field__submit {
     display: inline-flex;
+    flex: none;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     min-width: 44px;
     min-height: 44px;
     padding: 0;
@@ -265,6 +278,19 @@
 
   .km-footer-field__message {
     color: var(--kc-mapped-text-default-heading);
+  }
+
+  /* The JS live regions exist from render so screen readers announce them; while empty they
+     leave the flex flow (no gap slot) but stay in the accessibility tree. display: block beats
+     the base.css p:empty { display: none }, which would drop them from that tree (R46-B2). */
+  .km-footer-field__message:empty {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
   }
 
   .km-footer-newsletter__note {
@@ -512,6 +538,7 @@
     gap: var(--kc-responsive-spacing-layout-xs);
   }
 
+  /* Underlined at every width (Victor, 24 Oct); the Figma desktop footer shows them plain. */
   .km-footer-legal__links a {
     color: inherit;
     text-decoration: underline;
@@ -577,7 +604,6 @@
     }
 
     .km-footer-slogan {
-      max-width: 286px;
       letter-spacing: var(--kc-responsive-h4-letter-spacing);
     }
 
@@ -585,16 +611,14 @@
       flex: 1 1 320px;
     }
 
-    .km-footer-legal__links a {
-      text-decoration: none;
-    }
-
     .km-footer-payments {
       gap: var(--kc-responsive-spacing-layout-xxs);
     }
   }
 
-  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart */
+  /* Desktop per the Figma homepage: 286 / 215 / fill columns 160px apart. The brand column is
+     320px (not 286) since 23 Oct so the two-line slogan fits in NL and FR too; the newsletter
+     column gives up the 34px (at 1200px it is 281px wide in every language). */
   @media screen and (min-width: 1200px) {
     .km-footer-top {
       flex-wrap: nowrap;
@@ -602,7 +626,7 @@
     }
 
     .km-footer-brand {
-      flex: 0 0 286px;
+      flex: 0 0 320px;
     }
 
     .km-footer-column--menu {
@@ -628,8 +652,13 @@
       gap: var(--kc-responsive-spacing-layout-lg);
     }
 
+    /* Six links (guarantee + withdrawal, 24 Oct) on one line squeezed the copyright to 111-152px
+       at 1200; the row wraps right-aligned instead, each link stays whole */
     .km-footer-legal__links {
-      flex-wrap: nowrap;
+      justify-content: flex-end;
+    }
+
+    .km-footer-legal__links a {
       white-space: nowrap;
     }
   }
@@ -672,10 +701,24 @@
     assign legal_consumer_rights = shop.refund_policy
   endif
 
+  # The withdrawal page (Art. VI.61/2 WER): the picker, else the handle; no link until it exists
+  assign legal_withdrawal = section.settings.legal_withdrawal_page
+  if legal_withdrawal == blank
+    assign legal_withdrawal = pages['withdrawal']
+  endif
+
+  # The EU legal guarantee notice sits on the Consumer Rights page at this anchor (Victor, 24 Oct)
+  assign legal_guarantee_anchor = section.settings.legal_guarantee_anchor | default: 'two-year-guarantee' | handleize
+
   # Link texts: a blank setting uses the translated default (t output is escaped, hence escape_once)
   assign legal_terms_default = 'kc.footer.legal_terms' | t
   assign legal_privacy_default = 'kc.footer.legal_privacy' | t
   assign legal_consumer_rights_default = 'kc.footer.legal_consumer_rights' | t
+  # The guarantee and withdrawal links follow the same pattern (Victor, 25 Oct): the editor does not
+  # save a label equal to its schema default, so an English default never reached the translation
+  # registration and /nl and /fr showed English. Blank default, locale key, visibility by checkbox.
+  assign legal_guarantee_default = 'kc.footer.legal_guarantee' | t
+  assign legal_withdrawal_default = 'kc.footer.legal_withdrawal' | t
 
   # A menu item without a page yet links to '#' (the root URL plus '#' on /nl and /fr)
   assign kc_soon_url = routes.root_url | append: '#'
@@ -695,7 +738,13 @@
           {%- endif -%}
 
           {%- if section.settings.slogan != blank -%}
-            <p class="km-footer-slogan">{{ section.settings.slogan }}</p>
+            {%- liquid
+              # The slogan is two lines without punctuation, so the break is marked in the text itself
+              # (R24-1, R27-1): "[[br]]" in the saved value or a translation becomes a line break, as
+              # does a saved newline or <br>. Without a marker there is no break.
+              assign slogan = section.settings.slogan | newline_to_br | replace: '[[br]]', '<br>'
+            -%}
+            <p class="km-footer-slogan">{{ slogan }}</p>
           {%- endif -%}
         </div>
 
@@ -728,7 +777,42 @@
           <div class="km-footer-column km-footer-column--newsletter">
             <h3 class="km-footer-heading">{{ section.settings.newsletter_heading | default: 'NEWSLETTER' }}</h3>
 
-            <div class="km-footer-newsletter__body">
+            {%- liquid
+              # Klaviyo (kc-footer-newsletter.js): list per language, locale for Smart Translations.
+              # Empty key or list = plain Shopify form. The script also needs data-msg-retry (R46-B4).
+              # data-consent-version names the notice text below (D4); bump it when that text changes.
+              assign kc_nl_lang = request.locale.iso_code | split: '-' | first | downcase
+              assign kc_nl_key = section.settings.klaviyo_public_key | strip
+              assign kc_nl_list = section.settings.klaviyo_list_id | strip
+              case kc_nl_lang
+                when 'nl'
+                  assign kc_nl_locale = 'nl-BE'
+                  assign kc_nl_list_override = section.settings.klaviyo_list_id_nl | strip
+                when 'fr'
+                  assign kc_nl_locale = 'fr-BE'
+                  assign kc_nl_list_override = section.settings.klaviyo_list_id_fr | strip
+                else
+                  assign kc_nl_lang = 'en'
+                  assign kc_nl_locale = 'en'
+                  assign kc_nl_list_override = section.settings.klaviyo_list_id_en | strip
+              endcase
+              if kc_nl_list_override != blank
+                assign kc_nl_list = kc_nl_list_override
+              endif
+              assign kc_nl_source = 'Footer newsletter · ' | append: kc_nl_lang
+            -%}
+            <div
+              class="km-footer-newsletter__body"
+              id="FooterNewsletter"
+              data-klaviyo-key="{{ kc_nl_key | escape }}"
+              data-klaviyo-list="{{ kc_nl_list | escape }}"
+              data-locale="{{ kc_nl_locale }}"
+              data-source="{{ kc_nl_source | escape }}"
+              data-consent-version="footer-2026-10-24"
+              data-msg-success="{{ 'kc.footer.check_inbox' | t | escape }}"
+              data-msg-invalid="{{ 'kc.footer.email_invalid' | t | escape }}"
+              data-msg-retry="{{ 'kc.footer.retry' | t | escape }}"
+            >
               {%- form 'customer', id: 'FooterNewsletterForm', class: 'km-footer-field' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <label class="km-footer-field__label" for="FooterNewsletterEmail">{{ 'kc.footer.email' | t }}</label>
@@ -745,10 +829,8 @@
                     required
                     {% if form.errors %}
                       aria-invalid="true"
-                      aria-describedby="FooterNewsletterEmail-message"
-                    {% elsif form.posted_successfully? %}
-                      aria-describedby="FooterNewsletterEmail-message"
                     {% endif %}
+                    aria-describedby="{% if form.errors or form.posted_successfully? %}FooterNewsletterEmail-message {% endif %}FooterNewsletterEmail-note"
                   >
                   <button type="submit" name="commit" class="km-footer-field__submit">{{ 'kc.footer.join' | t }}</button>
                 </div>
@@ -762,10 +844,13 @@
                     {{ 'newsletter.success' | t }}
                   </p>
                 {%- endif -%}
+                {%- comment -%} Live regions for kc-footer-newsletter.js: present from render, empty until used. {%- endcomment -%}
+                <p class="km-footer-field__message" id="FooterNewsletterEmail-error" role="alert"></p>
+                <p class="km-footer-field__message" id="FooterNewsletterEmail-status" role="status"></p>
               {%- endform -%}
 
-              <p class="km-footer-newsletter__note">
-                {{ 'kc.footer.consent_html' | t: terms_url: legal_terms.url, privacy_url: legal_privacy.url }}
+              <p class="km-footer-newsletter__note" id="FooterNewsletterEmail-note">
+                {{ 'kc.footer.consent_html' | t: privacy_url: legal_privacy.url }}
               </p>
             </div>
           </div>
@@ -1018,6 +1103,24 @@
                 <a href="{{ legal_privacy.url }}">{{ section.settings.legal_privacy_label | default: legal_privacy_default | escape_once }}</a>
                 <span aria-hidden="true">·</span>
                 <a href="{{ legal_consumer_rights.url }}">{{ section.settings.legal_consumer_rights_label | default: legal_consumer_rights_default | escape_once }}</a>
+                {%- comment -%}
+                  "Your legal guarantee rights": the Commission's example sentence, one click from the
+                  harmonised notice at the end of Consumer Rights section 4. Built from the page
+                  object, so /nl and /fr keep their locale. The checkbox hides it; a blank label
+                  uses the translated default.
+                {%- endcomment -%}
+                {%- if section.settings.show_legal_guarantee and legal_consumer_rights != blank -%}
+                  <span aria-hidden="true">·</span>
+                  <a href="{{ legal_consumer_rights.url }}#{{ legal_guarantee_anchor }}">{{ section.settings.legal_guarantee_label | default: legal_guarantee_default | escape_once }}</a>
+                {%- endif -%}
+                {%- comment -%}
+                  "Withdraw from contract here": the statutory label of the online withdrawal
+                  function (Art. VI.61/2 WER), shown once the withdrawal page exists.
+                {%- endcomment -%}
+                {%- if section.settings.show_legal_withdrawal and legal_withdrawal != blank -%}
+                  <span aria-hidden="true">·</span>
+                  <a href="{{ legal_withdrawal.url }}">{{ section.settings.legal_withdrawal_label | default: legal_withdrawal_default | escape_once }}</a>
+                {%- endif -%}
                 {%- for policy in shop.policies -%}
                   {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
                   {%- assign policy_url_start = policy.url | slice: 0 -%}
@@ -1062,7 +1165,7 @@
       "type": "inline_richtext",
       "id": "slogan",
       "label": "Slogan Text",
-      "default": "Your mouth has a rhythm\nSo should your oral care"
+      "default": "Your mouth has a rhythm[[br]]Now your oral care too"
     },
     {
       "type": "richtext",
@@ -1084,6 +1187,37 @@
       "id": "newsletter_heading",
       "default": "NEWSLETTER",
       "label": "t:sections.footer.settings.newsletter_heading.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "Klaviyo: with a public key and a list ID the form subscribes through Klaviyo's client API (double opt-in list, locale per language). Empty = plain Shopify form. The native form stays the fallback."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_public_key",
+      "label": "Klaviyo public API key (Site ID)",
+      "info": "6 characters, e.g. XfYq2r. Never a private key."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Klaviyo list ID (all languages)",
+      "info": "Used unless a language below has its own list."
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id_nl",
+      "label": "Klaviyo list ID for Dutch"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id_fr",
+      "label": "Klaviyo list ID for French"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id_en",
+      "label": "Klaviyo list ID for English"
     },
     {
       "type": "header",
@@ -1130,6 +1264,45 @@
       "id": "legal_consumer_rights_label",
       "label": "Consumer Rights link text",
       "info": "Blank uses the translated default (locale key kc.footer.legal_consumer_rights)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_legal_guarantee",
+      "default": true,
+      "label": "Show the legal guarantee link",
+      "info": "Goes to the Consumer Rights page at the anchor below, where the EU legal guarantee notice sits."
+    },
+    {
+      "type": "text",
+      "id": "legal_guarantee_label",
+      "label": "Legal guarantee link text",
+      "info": "Blank uses the translated default (locale key kc.footer.legal_guarantee)"
+    },
+    {
+      "type": "text",
+      "id": "legal_guarantee_anchor",
+      "label": "Legal guarantee anchor on the Consumer Rights page",
+      "default": "two-year-guarantee",
+      "info": "The Anchor set on the page's 'Two-year legal guarantee' block."
+    },
+    {
+      "type": "page",
+      "id": "legal_withdrawal_page",
+      "label": "Withdrawal page",
+      "info": "Empty uses the page withdrawal; the link only shows once that page exists"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_legal_withdrawal",
+      "default": true,
+      "label": "Show the withdrawal link",
+      "info": "The statutory withdrawal link (Art. VI.61/2 WER); it appears once the withdrawal page exists."
+    },
+    {
+      "type": "text",
+      "id": "legal_withdrawal_label",
+      "label": "Withdrawal link text",
+      "info": "Blank uses the translated default (locale key kc.footer.legal_withdrawal)"
     },
     {
       "type": "checkbox",

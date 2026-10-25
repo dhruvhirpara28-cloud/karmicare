@@ -4,6 +4,7 @@
   #shopify-section-{{ section.id }} .hero-karmicare {
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    --hero-padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     transition: color 0.4s ease;
   }
 
@@ -11,6 +12,7 @@
     #shopify-section-{{ section.id }} .hero-karmicare {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+      --hero-padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 
@@ -290,7 +292,11 @@
                   class="kc-hero-live-time"
                   datetime="          {{- 'now' | date: '%Y-%m-%dT%H:%M' -}}"
                 >
-                  {{- 'now' | date: '%I:%M %p' -}}
+                  {%- if request.locale.iso_code == 'en' -%}
+                    {{- 'now' | date: '%-I:%M %p' -}}
+                  {%- else -%}
+                    {{- 'now' | date: '%H:%M' -}}
+                  {%- endif -%}
                 </time>
                 ·
                 <span class="kc-hero-status-day">
@@ -326,7 +332,12 @@
             {%- else -%}
               <div class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}">
             {%- endif -%}
-            <div class="hero-karmicare__badge-avatar-wrap">
+            <div
+              class="hero-karmicare__badge-avatar-wrap"
+              {% if block.settings.rotate_professionals %}
+                data-kc-rotate
+              {% endif %}
+            >
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
@@ -348,6 +359,19 @@
                 <div class="hero-karmicare__badge-avatar hero-karmicare__badge-avatar--placeholder">
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
+              {%- endif -%}
+              {%- if block.settings.rotate_professionals -%}
+                <script>
+                  // The photo hides until the section script has picked an ambassador, so the block
+                  // image does not flash first. Without JavaScript this never runs and the block image
+                  // stays; if the section script never picks, it shows again after 3s.
+                  (function (wrap) {
+                    wrap.classList.add('is-picking');
+                    setTimeout(function () {
+                      wrap.classList.remove('is-picking');
+                    }, 3000);
+                  })(document.currentScript.parentElement);
+                </script>
               {%- endif -%}
             </div>
 
@@ -372,8 +396,18 @@
 
               {%- if block.settings.heading != blank -%}
                 <div class="hero-karmicare__badge-heading-wrap">
+                  {%- liquid
+                    # The last word and the arrow stay on one line, so the arrow never wraps alone
+                    assign heading_words = block.settings.heading | escape | split: ' '
+                    assign heading_lead_count = heading_words.size | minus: 1
+                  -%}
                   <span class="hero-karmicare__badge-heading text-xl">
-                    {{- block.settings.heading | escape }}
+                    {%- for word in heading_words limit: heading_lead_count -%}
+                      {{ word }}{{ ' ' }}
+                    {%- endfor -%}
+                    <span class="hero-karmicare__badge-heading-end">
+                    {{- heading_words | last -}}
+                    {{ ' ' }}
                     <svg
                       class="hero-karmicare__badge-arrow"
                       xmlns="http://www.w3.org/2000/svg"
@@ -386,6 +420,7 @@
                     >
                       <path d="M3.33398 8.00004H12.6673M8.00065 12.6667L12.6673 8.00004L8.00065 3.33337" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                    </span>
                   </span>
                 </div>
               {%- endif -%}
@@ -403,20 +438,80 @@
 
 <script>
   (function () {
-    function updateHeroLiveTime() {
-      var timeElements = document.querySelectorAll('#HeroKarmicare-{{ section.id }} .kc-hero-live-time');
-      if (!timeElements.length) return;
-      var now = new Date();
-      var hours = now.getHours();
-      var ampm = hours >= 12 ? 'PM' : 'AM';
-      var minutes = String(now.getMinutes()).padStart(2, '0');
-      var time = (hours % 12 || 12) + ':' + minutes + ' ' + ampm;
-      timeElements.forEach(function (element) {
-        if (element.textContent !== time) element.textContent = time;
+    // The time under the toggle (Victor, 23 Oct): the live time while the page follows the sun.
+    // Switched by hand to the other mode, it rolls to that ritual's hour, 07:00 for Awake and
+    // 22:00 for Asleep (the clock section's hours), and back to the live time once the mode
+    // matches the sun again. Each language writes time its own way: 7:00 AM in EN, 07:00 in NL
+    // and FR. Screen readers get the plain time; the rolling digits are hidden from them.
+    var heroLocale = '{{ request.locale.iso_code }}';
+    var heroTimeFormat = new Intl.DateTimeFormat(heroLocale, {
+      hour: heroLocale === 'en' ? 'numeric' : '2-digit',
+      minute: '2-digit',
+    });
+    function heroTime() {
+      var date = new Date();
+      var shown = document.body.classList.contains('night-mode') ? 'night' : 'day';
+      if (window.KCDayNight && window.KCDayNight.state().mode !== shown) date.setHours(shown === 'day' ? 7 : 22, 0, 0, 0);
+      return date;
+    }
+    function rollTo(element, text, animate) {
+      var roll = element.querySelector('.kc-roll');
+      var label = element.querySelector('.visually-hidden');
+      var previous = label ? label.textContent : '';
+      var chars = roll ? roll.children : [];
+      // A new shape (length or digit places changed, 9:59 to 10:00): rebuild, with each digit
+      // starting from the previous time's digit in the same place from the right, so it still rolls
+      var same =
+        roll &&
+        chars.length === text.length &&
+        Array.prototype.every.call(chars, function (char, i) {
+          return char.hasAttribute('data-digit') === /\d/.test(text[i]);
+        });
+      if (!same) {
+        label = document.createElement('span');
+        label.className = 'visually-hidden';
+        roll = document.createElement('span');
+        roll.className = 'kc-roll is-still';
+        roll.setAttribute('aria-hidden', 'true');
+        text.split('').forEach(function (character, i) {
+          var char = document.createElement('span');
+          char.className = 'kc-roll__char';
+          if (/\d/.test(character)) {
+            var from = previous[i - text.length + previous.length];
+            char.setAttribute('data-digit', '');
+            char.style.setProperty('--kc-roll-digit', /\d/.test(from) ? from : character);
+            char.innerHTML = '<span class="kc-roll__strip">' + '0123456789'.split('').join('<br>') + '</span>';
+          }
+          roll.append(char);
+        });
+        element.replaceChildren(label, roll);
+        void roll.offsetWidth;
+      }
+      label.textContent = text;
+      roll.classList.toggle('is-still', !animate);
+      Array.prototype.forEach.call(roll.children, function (char, i) {
+        if (char.hasAttribute('data-digit')) char.style.setProperty('--kc-roll-digit', text[i]);
+        else char.textContent = text[i];
       });
     }
-    updateHeroLiveTime();
-    setInterval(updateHeroLiveTime, 30000);
+    function updateHeroLiveTime(animate) {
+      var timeElements = document.querySelectorAll('#HeroKarmicare-{{ section.id }} .kc-hero-live-time');
+      if (!timeElements.length) return;
+      var date = heroTime();
+      var text = heroTimeFormat.format(date);
+      var stamp = String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
+      timeElements.forEach(function (element) {
+        element.setAttribute('datetime', stamp);
+        rollTo(element, text, animate === true);
+      });
+    }
+    updateHeroLiveTime(false);
+    setInterval(function () {
+      updateHeroLiveTime(true);
+    }, 30000);
+    new MutationObserver(function () {
+      updateHeroLiveTime(true);
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
     // The hero fills the first screen below the announcement bar and header: pass their
     // height (the hero's distance from the page top) to the CSS as --hero-offset
@@ -429,6 +524,213 @@
     updateHeroOffset();
     window.addEventListener('load', updateHeroOffset);
     window.addEventListener('resize', updateHeroOffset, { passive: true });
+
+    // Ambassador rotation in the badge (Victor, 24 Oct): all ambassadors from the Trusted
+    // Professionals cards on this page, a new one every 4s, in a loop. Each round is a new random
+    // order, and a new round never starts with the photo last shown. Nothing is stored: each page
+    // load starts its own round. Hover or focus on the badge, a hidden tab or the badge off screen
+    // pause it; going on starts a full new 4s, with no catch-up swap. Reduced motion keeps the
+    // random first photo only, and the rotation resumes when it is turned off. Below 750px the
+    // badge is hidden, and without cards the block's own image stays. A photo that has not loaded
+    // by its turn is skipped (R49e N1), and a timer of an older generation changes nothing (R49 B3).
+    // Victor 24 Oct: no pause button by choice; WCAG 2.2.2 (pause for motion over 5 s) is
+    // knowingly not met.
+    var wrap = hero && hero.querySelector('.hero-karmicare__badge-avatar-wrap[data-kc-rotate]');
+    function startRotation() {
+      var current = wrap.querySelector('.hero-karmicare__badge-avatar');
+      var cards = document.querySelectorAll(
+        '.trusted-professionals__card:not([data-marquee-clone]) .trusted-professionals__card-image img'
+      );
+      if (!current || current.tagName !== 'IMG' || !cards.length || !window.matchMedia('(min-width: 750px)').matches) {
+        wrap.classList.remove('is-picking');
+        return;
+      }
+      // The card photos, each at 168px wide: the badge's 56px avatar at up to 3x. A photo on two
+      // cards counts once.
+      var urls = [];
+      Array.prototype.forEach.call(cards, function (img) {
+        var url = new URL(img.getAttribute('src'), window.location.href);
+        url.searchParams.set('width', '168');
+        if (urls.indexOf(url.href) === -1) urls.push(url.href);
+      });
+      // A random order of all photos (Fisher-Yates); a new round never starts with the photo last
+      // shown
+      function shuffled(avoidFirst) {
+        var order = urls.slice();
+        for (var i = order.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var swap = order[i];
+          order[i] = order[j];
+          order[j] = swap;
+        }
+        if (avoidFirst && order.length > 1 && order[0] === avoidFirst) {
+          var k = 1 + Math.floor(Math.random() * (order.length - 1));
+          order[0] = order[k];
+          order[k] = avoidFirst;
+        }
+        return order;
+      }
+      var round = shuffled();
+      var upcoming = null; // the next round, made once the current one is at its end
+      var position = -1; // this round's photo whose turn came last; -1 while the block's own image shows
+      var lastShown = null; // the last photo that really showed; a failed or skipped one never is (R49e N2)
+      function peek() {
+        if (position + 1 < round.length) return round[position + 1];
+        if (!upcoming) upcoming = shuffled(lastShown);
+        return upcoming[0];
+      }
+      function advance() {
+        if (position + 1 < round.length) {
+          position += 1;
+        } else {
+          round = upcoming || shuffled(lastShown);
+          upcoming = null;
+          position = 0;
+        }
+      }
+      // Each photo loads once, ahead of its turn: loaded[url] is true once it loaded, false once it
+      // failed
+      var loads = {};
+      var loaded = {};
+      function load(url) {
+        if (!loads[url]) {
+          loads[url] = new Promise(function (resolve) {
+            var image = new Image();
+            image.onload = function () {
+              loaded[url] = true;
+              resolve(true);
+            };
+            image.onerror = function () {
+              loaded[url] = false;
+              resolve(false);
+            };
+            image.src = url;
+          });
+        }
+        return loads[url];
+      }
+      var next = current.cloneNode(false);
+      [current, next].forEach(function (img) {
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+        // Decorative: the badge's link and heading carry its name (R49 N2)
+        img.alt = '';
+      });
+      next.classList.add('hero-karmicare__badge-avatar--next', 'is-hidden');
+      wrap.append(next);
+      wrap.setAttribute('aria-hidden', 'true');
+
+      var layers = [current, next];
+      var active = 0;
+      var generation = 0;
+      var timer;
+      var hovered = false;
+      var focused = false;
+      var visible = false; // until the observer's first report
+      var stopped = false;
+      var picked = false; // the first photo (or the block's own image) is showing
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      function show(url) {
+        var incoming = layers[1 - active];
+        var outgoing = layers[active];
+        incoming.src = url;
+        incoming.classList.remove('is-hidden', 'is-above');
+        incoming.classList.add('is-below');
+        void incoming.offsetWidth;
+        incoming.classList.remove('is-below');
+        outgoing.classList.add('is-above');
+        active = 1 - active;
+        lastShown = url;
+      }
+
+      // The next photo 4s after the last one showed, loaded ahead. At its turn, a photo that
+      // failed or has not loaded yet is skipped: the current one stays and the next gets its own
+      // 4s (R49e N1). Waiting (hover, focus, off screen, hidden tab, reduced motion) clears the
+      // timer; going on starts a full new 4s. With one card the only swap brings its photo in
+      // after the block's own image.
+      function schedule() {
+        clearTimeout(timer);
+        generation += 1;
+        if (stopped || !picked || reducedMotion.matches || (urls.length < 2 && position >= 0)) return;
+        if (hovered || focused || !visible || document.hidden) return;
+        var token = generation;
+        var target = peek();
+        load(target);
+        timer = setTimeout(function () {
+          if (token !== generation) return;
+          advance();
+          if (loaded[target]) show(target);
+          schedule();
+        }, 4000);
+      }
+
+      // The first photo once it has loaded; after 1.5s the block's own image shows and the first
+      // ambassador follows 4s later. A failed first photo is passed over for the next one.
+      Promise.race([
+        load(round[0]),
+        new Promise(function (resolve) {
+          setTimeout(resolve, 1500, null);
+        }),
+      ]).then(function (ok) {
+        if (stopped) return;
+        if (ok !== null) advance();
+        if (ok) {
+          current.src = round[0];
+          current.classList.add('is-below');
+          lastShown = round[0];
+        }
+        wrap.classList.remove('is-picking');
+        void current.offsetWidth;
+        current.classList.remove('is-below');
+        picked = true;
+        schedule();
+      });
+
+      // Hover and focus on the badge pause the rotation
+      var badge = wrap.closest('.hero-karmicare__badge');
+      badge.addEventListener('mouseenter', function () {
+        hovered = true;
+        schedule();
+      });
+      badge.addEventListener('mouseleave', function () {
+        hovered = false;
+        schedule();
+      });
+      badge.addEventListener('focusin', function () {
+        focused = true;
+        schedule();
+      });
+      badge.addEventListener('focusout', function (event) {
+        focused = badge.contains(event.relatedTarget);
+        schedule();
+      });
+      var observer = new IntersectionObserver(function (entries) {
+        visible = entries[entries.length - 1].isIntersecting;
+        schedule();
+      });
+      observer.observe(wrap);
+      document.addEventListener('visibilitychange', schedule);
+      reducedMotion.addEventListener('change', schedule);
+
+      // Theme editor: a re-rendered section runs its own copy of this script, so this one stops
+      // and lets go of its timer, observer and listeners (R49 N3)
+      function dispose(event) {
+        if (event.detail.sectionId !== '{{ section.id }}') return;
+        stopped = true;
+        clearTimeout(timer);
+        generation += 1;
+        observer.disconnect();
+        document.removeEventListener('visibilitychange', schedule);
+        reducedMotion.removeEventListener('change', schedule);
+        document.removeEventListener('shopify:section:unload', dispose);
+      }
+      document.addEventListener('shopify:section:unload', dispose);
+    }
+    if (wrap) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startRotation);
+      else startRotation();
+    }
   })();
 </script>
 
@@ -772,6 +1074,13 @@
           "type": "image_picker",
           "id": "image",
           "label": "Professional Avatar Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "rotate_professionals",
+          "label": "Rotate ambassador photos",
+          "info": "Shows all ambassadors from the Trusted Professionals cards on this page, a new one every 4 seconds in a loop, in random order; it pauses on hover and focus. No pause button by choice, so WCAG 2.2.2 (pause for motion over 5 s) is knowingly not met. The image above stays as the fallback.",
+          "default": true
         },
         {
           "type": "text",

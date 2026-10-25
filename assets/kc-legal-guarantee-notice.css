@@ -1,0 +1,92 @@
+/* kc-legal-guarantee-notice.css: the EU harmonised notice on the legal guarantee of conformity
+   (snippets/kc-legal-guarantee-notice.liquid), shown inline at the end of Consumer Rights
+   section 4. The notice itself is the Commission's unedited file; this lays out the figure, the
+   region it sits in and the two links under it. Tokens only, Day and Night come from the mapped
+   tokens on body. The image keeps the white the Regulation prescribes for the notice (Annex I,
+   note 2 d: #FFFFFF) on both themes.
+
+   Legibility (Commission guidelines §2.3: legible at default display size): the image is never
+   shrunk to a phone column. --kc-lgn-readable-width is 800px, 1.34 x the file's 595.28 user units,
+   so the notice's body text renders at about 13px. Narrower than that the region pans sideways
+   (the hint says so). From 750px the notice fits the text column, up to that width. */
+
+.kc-lgn {
+  --kc-lgn-readable-width: 800px;
+  margin: var(--kc-responsive-spacing-layout-md) 0 0;
+  font-family: var(--kc-font-role-backbone);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-lgn__figure {
+  margin: 0;
+}
+
+.kc-lgn__hint {
+  margin: 0 0 8px;
+  color: var(--kc-mapped-text-default-body);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+/* The region: the notice at its readable width, panned when the column is narrower */
+.kc-lgn__scroller {
+  overflow: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--kc-mapped-border-control-default) transparent;
+}
+
+.kc-lgn__scroller:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: -2px;
+}
+
+.kc-lgn__image {
+  display: block;
+  width: var(--kc-lgn-readable-width);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 595.28 / 841.89;
+  border: 1px solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-sm);
+  background: #ffffff;
+}
+
+.kc-lgn__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 12px 0 0;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-lgn__link {
+  color: var(--kc-mapped-text-link-default);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.kc-lgn__link:hover {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+.kc-lgn__link:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media screen and (min-width: 750px) {
+  .kc-lgn__hint {
+    display: none;
+  }
+
+  /* The notice fits the text column, never wider than its readable width */
+  .kc-lgn__image {
+    width: 100%;
+    max-width: var(--kc-lgn-readable-width);
+  }
+}

@@ -5,6 +5,7 @@
 
 .comparison-section {
   --ct-block-gap: 4rem; /* header -> table */
+  --ct-brand-lift: 1.6rem; /* the Karmicare column stands above and below the box (Victor, 23 Oct) */
   --ct-label-col: 14rem;
   --ct-col: 16rem;
   --ct-row-height: 6.4rem;
@@ -66,12 +67,30 @@
   color: var(--kc-mapped-text-default-body);
 }
 
+/* The body-lg deck in the muted body colour, like the other descriptions under an h2 (Victor, 25 Oct) */
 .comparison-section__description {
   font-family: var(--kc-font-role-backbone);
-  font-weight: 500;
-  font-size: var(--kc-responsive-body-md-text-size);
-  line-height: var(--kc-responsive-body-md-line-height);
-  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* From 990 the heading is wider than the rest of the header, one tone per line, so it takes two
+   lines (Victor, 24 Oct); the eyebrow, deck and button keep the 604px column */
+@media screen and (min-width: 990px) {
+  .comparison-section__header {
+    max-width: 96rem;
+  }
+
+  .comparison-section__header > :not(.comparison-section__title) {
+    max-width: 60.4rem;
+  }
+
+  .comparison-section__title em,
+  .comparison-section__title i {
+    display: block;
+  }
 }
 
 /* KC/Button, primary, large */
@@ -140,11 +159,14 @@
   }
 }
 
-/* Table: a full-bleed strip that scrolls sideways below 990px, centred from 990px */
+/* Table: a full-bleed strip that scrolls sideways below 990px, centred from 990px. The strip
+   has room above and below for the lifted Karmicare column, taken back from the gaps around it. */
 .comparison-table-wrapper {
   width: calc(100% + 2 * var(--page-gutter));
   margin-inline: calc(-1 * var(--page-gutter));
+  margin-block: calc(-1 * var(--ct-brand-lift));
   padding-inline: var(--page-gutter);
+  padding-block: var(--ct-brand-lift);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
@@ -165,7 +187,9 @@
   min-width: max-content;
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
   border-radius: var(--kc-shape-radius-lg);
-  overflow: hidden;
+  /* Clipped at the sides only, so the Karmicare column stands out above and below; the corner
+     cells round themselves. clip-path, not overflow, keeps the sticky label column working. */
+  clip-path: inset(calc(-1 * var(--ct-brand-lift)) 0);
   background: var(--kc-mapped-gradient-section-accent);
   font-family: var(--kc-font-role-backbone);
   font-weight: 600;
@@ -227,6 +251,37 @@
   color: var(--kc-brand-original-dark-blue);
 }
 
+/* The Karmicare column stands --ct-brand-lift above and below the box, with the corners of the
+   plans table's featured column; the extra padding keeps the logo and text level */
+.comparison-table__header--brand {
+  margin-top: calc(-1 * var(--ct-brand-lift));
+  padding-top: calc(var(--kc-responsive-spacing-layout-md) + var(--ct-brand-lift));
+  border-radius: 1.6rem 1.6rem 0 0;
+}
+
+.comparison-table__cell--brand:nth-last-child(4) {
+  margin-bottom: calc(-1 * var(--ct-brand-lift));
+  padding-bottom: calc(var(--kc-responsive-spacing-layout-md) + var(--ct-brand-lift));
+  border-radius: 0 0 1.6rem 1.6rem;
+}
+
+/* Corners of the box (the table no longer clips them) */
+.comparison-table__header--first {
+  border-top-left-radius: calc(var(--kc-shape-radius-lg) - var(--kc-shape-stroke-thin));
+}
+
+.comparison-table__header:nth-child(5) {
+  border-top-right-radius: calc(var(--kc-shape-radius-lg) - var(--kc-shape-stroke-thin));
+}
+
+.comparison-table__cell:nth-last-child(5) {
+  border-bottom-left-radius: calc(var(--kc-shape-radius-lg) - var(--kc-shape-stroke-thin));
+}
+
+.comparison-table__cell:last-child {
+  border-bottom-right-radius: calc(var(--kc-shape-radius-lg) - var(--kc-shape-stroke-thin));
+}
+
 .comparison-table__brand-logo svg {
   display: block;
   width: 10rem;
@@ -234,23 +289,24 @@
 }
 
 @media screen and (max-width: 749px) {
-  .comparison-table {
-    /* Clip the corners without trapping sticky cells in a scroll container. */
-    overflow: clip;
-  }
-
   .comparison-table__header--first,
   .comparison-table__cell--first {
     position: sticky;
     inset-inline-start: var(--kc-shape-stroke-thin);
     z-index: 2;
     background: var(--kc-mapped-gradient-section-accent);
-    box-shadow: calc(-1 * var(--page-gutter)) 0 var(--kc-mapped-gradient-section-accent);
+    /* The first shadow redraws the table's left rule, which the gutter fill would cover now
+       that the table clips with clip-path at its border edge instead of overflow inside it */
+    box-shadow:
+      calc(-1 * var(--kc-shape-stroke-thin)) 0 var(--kc-mapped-border-primary-hairline),
+      calc(-1 * var(--page-gutter)) 0 var(--kc-mapped-gradient-section-accent);
   }
 
   .comparison-table__header--first {
     background: var(--kc-mapped-surface-page-secondary);
-    box-shadow: calc(-1 * var(--page-gutter)) 0 var(--kc-mapped-surface-page-secondary);
+    box-shadow:
+      calc(-1 * var(--kc-shape-stroke-thin)) 0 var(--kc-mapped-border-primary-hairline),
+      calc(-1 * var(--page-gutter)) 0 var(--kc-mapped-surface-page-secondary);
   }
 }
 

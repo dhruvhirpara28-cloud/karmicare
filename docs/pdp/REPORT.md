@@ -6,7 +6,7 @@
 
 ## Status 22 Oct
 
-The whole PDP lane (both sessions), on branch `karmicare/soft-launch-pdp`. Every gap row has its own status in [GAP-LIST.md › Status 22 Oct](GAP-LIST.md#status-22-oct): in merchant-edit 9, ready to land 0, in progress 3 (a11y rows 33, 34, 35b), waiting for Victor 1, parked / after launch 18 (with row 32, the FAQ evidence links, parked by Victor on 22 Oct), dropped 8. The table below covers the rest of the lane's work.
+The whole PDP lane (both sessions), on branch `karmicare/soft-launch-pdp`. Every gap row has its own status in [GAP-LIST.md › Status 22 Oct](GAP-LIST.md#status-22-oct): in merchant-edit 10, ready to land 0, in progress 2 (a11y rows 33, 35b; row 34 fixed via homepage `e1411e2`), waiting for Victor 1, parked / after launch 20 (with row 32, the FAQ evidence links, parked by Victor on 22 Oct; row 38, amounts in other currencies, €40 reward decided A + C; row 39, NL Welcome Kit names), dropped 8. The table below covers the rest of the lane's work.
 
 **In merchant-edit** means it is in `merchant-edit` `31407fb`, checked with `git merge-base --is-ancestor <sha> merchant-edit`. That branch is not pushed yet, so none of it is live.
 
@@ -32,7 +32,7 @@ The whole PDP lane (both sessions), on branch `karmicare/soft-launch-pdp`. Every
 | L18 | API app and translation runner | Dropped | Moved to the source-copy lane by the desk on 21 Oct |
 
 **Counts (18 items)**: in merchant-edit 9 · ready to land 1 · in progress 0 · waiting for Victor 4 · parked / after launch 2 · dropped 2.
-**Lane total with the gap list**: in merchant-edit 18 · ready to land 1 · in progress 3 · waiting for Victor 5 · parked / after launch 20 · dropped 10.
+**Lane total with the gap list**: in merchant-edit 24 · ready to land 1 · in progress 2 · waiting for Victor 4 · parked / after launch 30 · dropped 11.
 
 ### Waiting for Victor
 
@@ -300,3 +300,15 @@ The other twelve keys cover day, week, month and years in the same patterns (FR 
 
 - 22 Oct: added "Status 22 Oct", with one status per lane item, counts and the questions for Victor in full. Merchant-edit `31407fb` was checked with `git merge-base --is-ancestor`, and D1/D4 now show as decided.
 - 22 Oct: FAQ evidence links (gap row 32) parked by Victor; counts updated.
+- 22 Oct: gap row 38 (amounts in other currencies, parked) added; counts updated.
+- 22 Oct: row 38 (the €40 reward) decided A + C; row 39 (NL Welcome Kit names) added and parked; counts updated.
+- 22 Oct: gap row 34 closed (homepage `e1411e2` in merchant-edit `ca5228f`); counts updated.
+- 23 Oct: plans table work (gap rows 40–44) added; lane total updated.
+- 23 Oct: PDP package `04718ef`–`71a8694` landed (merchant-edit `6a26258`); gap rows 44–46 updated; lane total updated.
+- 23 Oct: gap row 45 closed (merchant-edit `3c52d73`); lane total updated.
+- 23 Oct: gap rows 40, 46–48 updated after merchant-edit `da63ae4`; lane total updated.
+- 23 Oct: gap row 31 dropped by Victor; lane total updated.
+- 23 Oct: gap row 38 to in progress (Victor: option 2); lane total updated.
+- 23 Oct: gap rows 49–51 (USD findings) parked; lane total updated.
+- 23 Oct: gap rows 38 and 49–51 parked until a non-EUR market is active; lane total updated.
+- 24 Oct: gap row 52 (gallery hero fit, merchant-edit `9ce946b`) added; lane total updated.

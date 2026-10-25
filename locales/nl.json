@@ -16,6 +16,7 @@
       "loading": "Huidige lokale tijd wordt geladen",
       "valuetext_live": ". Huidige lokale tijd.",
       "valuetext_preview": ". Laat los om terug te gaan naar nu.",
+      "help": "Sleep de knop rond de ring om een tijdstip te bekijken. Laat los om terug te keren naar de huidige tijd. Houd een pijltjestoets ingedrukt om per vijf minuten te verschuiven; Page Up en Page Down verschuiven een uur. Home kiest middernacht; End kiest 23:59. Laat de toets los, druk op Escape of verlaat de knop om terug te keren naar nu.",
       "window_1": "het speeksel komt na de nacht nu pas op gang, en het glazuur is het minst beschermd vóór je eerste drankje",
       "window_2": "ontbijt en koffie deden de pH binnen enkele minuten dalen — het speeksel heeft het volgende halfuur nodig om hem weer op peil te brengen",
       "window_3": "de lunch start de cyclus opnieuw: elk eetmoment opent een nieuw zuurvenster, hoe klein of groot ook",
@@ -28,15 +29,20 @@
       "all": "ALLE"
     },
     "footer": {
-      "consent_html": "Door je in te schrijven, ga je akkoord met de <a href=\"{{ terms_url }}\">Gebruiksvoorwaarden</a> en het <a href=\"{{ privacy_url }}\">Privacybeleid</a>.",
+      "consent_html": "Af en toe e-mails van KARMICARE over Awake & Asleep, de controlebeloning en aanbiedingen voor leden. Uitschrijven kan altijd via de link in elke e-mail. <a href=\"{{ privacy_url }}\">Privacybeleid</a>.",
       "country": "Land/regio",
       "email": "E-mail",
       "email_placeholder": "jij@voorbeeld.be",
-      "join": "Doe mee",
+      "join": "Inschrijven",
       "language": "Taal",
       "legal_consumer_rights": "Consumentenrechten",
       "legal_privacy": "Privacybeleid",
-      "legal_terms": "Algemene voorwaarden"
+      "legal_terms": "Algemene voorwaarden",
+      "check_inbox": "Kijk in je inbox om je inschrijving te bevestigen.",
+      "email_invalid": "Controleer het e-mailadres.",
+      "retry": "We konden je inschrijving niet bevestigen. Probeer het zo meteen opnieuw.",
+      "legal_guarantee": "Je wettelijke garantierechten",
+      "legal_withdrawal": "Hier de overeenkomst herroepen"
     },
     "general": {
       "coming_soon": "Binnenkort"
@@ -66,10 +72,10 @@
     },
     "sticky_cart": {
       "change_label_html": "Wijzigen",
-      "checkup_info_html": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account.",
+      "checkup_info_html": "Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account.",
       "credit_checkup_html": "+ [credit] Care Credit + €40 controlebeloning",
       "credit_html": "+ [credit] Care Credit terug",
-      "credit_info_html": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+      "credit_info_html": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg.",
       "cta_once_html": "Eenmalig proberen",
       "cta_rhythm_html": "Begin je 60-dagenritme",
       "cta_year_html": "Begin je Karmicare-jaar",
@@ -80,9 +86,6 @@
       "kit_html": "Welkomstpakket: twee borstels + tandzijde",
       "panel_label_html": "Levering & wat erin zit",
       "per_brushing_html": "[per_brushing] per poetsbeurt",
-      "price_once_html": "[price] eenmalig",
-      "price_rhythm_html": "[price] om de 60 dagen",
-      "price_year_html": "[price] per jaar",
       "stop_rhythm_html": "Altijd pauzeren of stoppen",
       "stop_year_html": "Jaarlijks verlengd · opzegbaar tot de verlenging",
       "title_once_html": "Eenmalig proberen · 1 duo",
@@ -218,7 +221,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Aan winkelwagen toevoegen",
+      "add_to_cart": "Toevoegen aan winkelwagen",
       "description": "Beschrijving",
       "on_sale": "Aanbieding",
       "quantity": {

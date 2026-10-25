@@ -10,13 +10,16 @@
   Accepts:
   - cents: {Number} the amount in cents
   - trim: {Boolean} whole amounts without ".00" / ",00" (default false)
+  - euro: {Boolean} a fixed euro amount: always written in euros, also when another currency is
+    active (default false). snippets/kc-eur-convert.liquid converts it in the browser; without
+    JavaScript it stays an honest euro amount instead of euro cents in another currency's format.
 
   Usage: render 'kc-money', cents: 590 -> €5.90, € 5,90 or 5,90 €;
   render 'kc-money', cents: 5900, trim: true -> €59, € 59 or 59 €
 {%- endcomment -%}
 {%- liquid
   assign kc_cents = cents | default: 0 | round
-  if cart.currency.iso_code != 'EUR'
+  if cart.currency.iso_code != 'EUR' and euro != true
     if trim
       echo kc_cents | money_without_trailing_zeros
     else

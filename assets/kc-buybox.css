@@ -299,19 +299,21 @@
   padding-left: calc(var(--kc-buybox-radio-size) + var(--kc-responsive-spacing-layout-xs));
 }
 
-/* Loop's chip is a wrapping flex row of three items (amount, label, ⓘ). It
-   broke between whole items: the ⓘ alone on a second line at 393 px, the
-   amount alone above the label from 750 to 1199 px. Without wrapping, the
-   label wraps inside its own item, between the amount and the ⓘ. The radius
-   is half the one-line height: one line stays a pill, two lines become a
-   rounded box that clears the text. */
+/* Loop's chip holds an amount, the label as a bare text node, and the ⓘ. As a
+   flex row it broke between whole items (the ⓘ alone on a second line at
+   393 px, the amount alone above the label from 750 to 1199 px), and without
+   wrapping the label wrapped in its own column beside the amount ("account"
+   under "Care Credit", Victor 25 Oct). So the chip is one run of text: amount
+   and label wrap as a sentence, the next line starting under the amount, and
+   the ⓘ sits apart at the top right in a reserved gutter. The radius is half
+   the one-line height: one line stays a pill, two lines become a rounded box
+   that clears the text. */
 .kc-buybox .kc-return_care,
 .night-mode .kc-buybox .kc-return_care,
 .day-mode .kc-buybox .kc-return_care {
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: var(--kc-responsive-spacing-layout-xs);
-  padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-sm);
+  position: relative;
+  display: block;
+  padding: var(--kc-responsive-spacing-layout-xs) calc(2 * var(--kc-responsive-spacing-layout-xs) + var(--kc-responsive-size-icon-sm)) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-sm);
   background-color: var(--kc-buybox-surface-chip);
   border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
   border-radius: calc(var(--kc-buybox-body-line-height) / 2 + var(--kc-responsive-spacing-layout-xs) + var(--kc-shape-stroke-thin, 1px));
@@ -320,12 +322,12 @@
   color: var(--kc-buybox-text);
 }
 
-.kc-buybox .kc-return_care > * {
-  flex: none;
-}
-
 .kc-buybox .kc-return_care .info-tip {
+  position: absolute;
+  top: var(--kc-responsive-spacing-layout-xs);
+  right: var(--kc-responsive-spacing-layout-xs);
   height: var(--kc-buybox-body-line-height);
+  margin: 0;
 }
 
 /* The ⓘ sits at the chip's right end, so its popover opens to the left of
@@ -645,10 +647,12 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   column-gap: var(--kc-responsive-spacing-layout-comfortable);
 }
 
+/* The benefit icons are currentColor SVGs in the primary icon colour, like the homepage's (Victor, 24 Oct) */
 .kc-buybox .icon-with-text__item svg {
   width: var(--kc-responsive-size-icon-sm);
   height: var(--kc-responsive-size-icon-sm);
   margin-bottom: var(--kc-responsive-spacing-layout-xs);
+  color: var(--kc-mapped-icon-primary-default);
 }
 
 .kc-buybox .icon-with-text .h6 {
@@ -750,18 +754,19 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   display: none;
 }
 
-/* Collapsed list (Figma KC/Timeline benefits, State=Collapsed): the first
-   hidden row peeks out for ~32px and fades away under "Read more", so it
-   is clear there is more to read. A mask, not a colour overlay, so it
+/* Collapsed list: three rows in full (visible_items in the template), then
+   the first hidden row shows one line that fades out from its top, so it
+   reads half and invites "Read more" (Victor, 23 Oct; it was ~32px with the
+   fade from 30%, after four rows). A mask, not a colour overlay, so it
    works on any surface in Day and Night. The toggle script writes an
    inline max-height of 0 on collapse, hence the !important. */
 .kc-buybox .kc-journey-item:not(.kc-journey-item-collapsible) + .kc-journey-item-collapsible:not(.expanded) {
-  max-height: var(--kc-responsive-spacing-layout-xl) !important;
+  max-height: var(--kc-buybox-body-line-height) !important;
   opacity: 1;
   margin-bottom: 0;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(#000 30%, transparent);
-  mask-image: linear-gradient(#000 30%, transparent);
+  -webkit-mask-image: linear-gradient(#000, transparent);
+  mask-image: linear-gradient(#000, transparent);
 }
 
 /* Collapsed rows are max-height 0; without this their margin and

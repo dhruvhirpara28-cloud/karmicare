@@ -430,14 +430,6 @@ body.night-mode .pc-cell {
 }
 
 
-
-body.night-mode .pc-kit-item img {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-}
-
-
-
 body.night-mode .info-tip-popover {
   background: var(--kc-mapped-bg-primary-default);
 }
@@ -547,12 +539,15 @@ body.night-mode .pc-kit-poptitle {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .plan-compare--kc {
-  --pc-block-gap: 4rem; /* header -> table -> footnote */
+  --pc-block-gap: 4rem;
+  /* header -> table -> footnote */
   --pc-label-col: 17rem;
   --pc-plan-col: 16rem;
   --pc-head-height: 9.6rem;
   --pc-row-height: 6.4rem;
   --pc-cta-height: 7.2rem;
+  --pc-featured-lift: 1.6rem; /* the featured column stands above the box (Victor, 23 Oct) */
+  --pc-strip-top: calc(2rem + var(--pc-featured-lift)); /* room for the lifted ribbon */
   --pc-rule: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
   color: var(--kc-mapped-text-default-heading);
 }
@@ -621,28 +616,30 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-default-body);
 }
 
+/* The body-lg deck in the muted body colour, like the other descriptions under an h2 (Victor, 25 Oct) */
 .plan-compare--kc .pc-sub {
   font-family: var(--kc-font-role-backbone);
-  font-weight: 500;
-  font-size: var(--kc-responsive-body-md-text-size);
-  line-height: var(--kc-responsive-body-md-line-height);
-  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  color: var(--kc-mapped-text-default-body);
 }
 
 .plan-compare--kc .pc-sub p,
 .plan-compare--kc .pc-foot p,
 .plan-compare--kc .pc-cell p {
   margin: 0;
-  line-height: inherit; /* base.css sets p to normal */
+  line-height: inherit;
+  /* base.css sets p to normal */
 }
 
 /* Table: scroll strip below 990px, centred columns from 990px */
 .plan-compare--kc .pc-table {
   justify-content: flex-start;
   width: auto;
-  /* 2rem of the gap above sits inside the strip, so the ribbon is not clipped */
-  margin: calc(var(--kc-responsive-spacing-layout-xl) - 2rem) calc(-1 * var(--page-gutter)) 0;
-  padding: 2rem var(--page-gutter) 2.4rem;
+  /* Part of the gap above sits inside the strip, so the lifted ribbon is not clipped */
+  margin: calc(var(--kc-responsive-spacing-layout-xl) - var(--pc-strip-top)) calc(-1 * var(--page-gutter)) 0;
+  padding: var(--pc-strip-top) var(--page-gutter) 2.4rem;
   overflow-x: auto;
   scroll-snap-type: none;
   font-family: var(--kc-font-role-backbone);
@@ -663,11 +660,36 @@ body.night-mode .pc-kit-poptitle {
   flex-basis: var(--pc-label-col);
 }
 
+/* The plan columns other than the featured one make no stacking context (the classic rules
+   above give every column z-index 1, 20 when hovered or open). An open info tip then layers
+   against the table, above the sticky label column (z 30 below 750), while the columns' own
+   cells stay under it (R39 B1: the Year tip at 390 sat 84px under the labels). The featured
+   column keeps z 2, so its glow still lies over its neighbours. The popover's z-index comes
+   from assets/section-main-product.css (30, a tie with the labels that tree order breaks);
+   40 here puts it above them outright. */
+.plan-compare--kc .pc-col[data-plan]:not(.pc-featured),
+.plan-compare--kc .pc-col[data-plan]:not(.pc-featured):hover,
+.plan-compare--kc .pc-col[data-plan]:not(.pc-featured):has(.active-tip) {
+  z-index: auto;
+}
+
+.plan-compare--kc .pc-col[data-plan] .info-tip-popover {
+  z-index: 40;
+}
+
 @media screen and (max-width: 749px) {
+  /* Keyboard focus scrolls a plan CTA clear of the sticky label column, not under it, and a
+     gutter clear of the right edge with its focus ring (R39b B2). The labels stick at the
+     strip's padding edge, a gutter in; the focusin script in the section does the scroll. */
+  .plan-compare--kc .pc-table {
+    scroll-padding-inline: calc(var(--page-gutter) + var(--pc-label-col)) var(--page-gutter);
+  }
+
   .plan-compare--kc .pc-col-label {
     position: sticky;
     inset-inline-start: 0;
-    z-index: 30; /* Keep scrolling columns, including hovered ones, underneath. */
+    z-index: 30;
+    /* Keep scrolling columns, including hovered ones, underneath. */
     /* The two colours of the section surface (assets/kc-surface.css) */
     background: linear-gradient(180deg, var(--kc-surface-top), var(--kc-surface-bottom));
     transition: none;
@@ -676,7 +698,7 @@ body.night-mode .pc-kit-poptitle {
   .plan-compare--kc .pc-col-label::before {
     content: "";
     position: absolute;
-    inset: -2rem 0 -2.4rem calc(-1 * var(--page-gutter));
+    inset: calc(-1 * var(--pc-strip-top)) 0 -2.4rem calc(-1 * var(--page-gutter));
     z-index: -1;
     background: inherit;
     pointer-events: none;
@@ -697,12 +719,44 @@ body.night-mode .pc-kit-poptitle {
   }
 }
 
-/* Header cells */
+/* Header cells: the header row sits inside the box on the surface of the comparison table's
+   header (assets/section-comparison-table.css), at its size (Victor, 23 Oct) */
 .plan-compare--kc .pc-lhead,
 .plan-compare--kc .pc-hcell {
   height: var(--pc-head-height);
   padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-sm);
   justify-content: center;
+}
+
+.plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-hcell {
+  background: var(--kc-mapped-surface-page-secondary);
+}
+
+.plan-compare--kc .pc-lhead,
+.plan-compare--kc .pc-col:not(.pc-featured) .pc-hcell {
+  border-top: var(--pc-rule);
+  border-left: var(--pc-rule);
+}
+
+/* Inside the featured outline: its top corners, less the 1px stroke */
+.plan-compare--kc .pc-featured .pc-hcell {
+  border-radius: calc(1.6rem - var(--kc-shape-stroke-thin)) calc(1.6rem - var(--kc-shape-stroke-thin)) 0 0;
+}
+
+/* The featured column starts --pc-featured-lift above the box; its header cell grows by as
+   much at the top, so name, price and rows stay level with the other columns */
+.plan-compare--kc .pc-featured {
+  margin-top: calc(-1 * var(--pc-featured-lift));
+}
+
+.plan-compare--kc .pc-featured .pc-hcell {
+  height: calc(var(--pc-head-height) + var(--pc-featured-lift));
+  padding-top: calc(var(--kc-responsive-spacing-layout-md) + var(--pc-featured-lift));
+}
+
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
+  border-right: var(--pc-rule);
 }
 
 .plan-compare--kc .pc-lhead {
@@ -711,8 +765,9 @@ body.night-mode .pc-kit-poptitle {
 
 .plan-compare--kc .pc-lhead-tag {
   font-weight: 600;
-  font-size: var(--kc-responsive-body-sm-text-size);
-  line-height: var(--kc-responsive-body-sm-line-height);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
 .plan-compare--kc .pc-hcell {
@@ -727,14 +782,24 @@ body.night-mode .pc-kit-poptitle {
   letter-spacing: var(--kc-responsive-body-md-letter-spacing);
 }
 
+/* One step down the heading scale, h5 to h6 (Victor, 23 Oct) */
 .plan-compare--kc .pc-price {
   margin: 0;
   font-family: var(--kc-font-role-backbone);
   font-weight: 500;
-  font-size: var(--kc-responsive-h5-text-size);
-  line-height: var(--kc-responsive-h5-line-height);
-  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-size: var(--kc-responsive-h6-text-size);
+  line-height: var(--kc-responsive-h6-line-height);
+  letter-spacing: var(--kc-responsive-h6-letter-spacing);
   color: inherit;
+}
+
+/* Below 750 the price matches the plan name, body-md (Victor, 23 Oct, gap row 44 option b) */
+@media not all and (min-width: 750px) {
+  .plan-compare--kc .pc-price {
+    font-size: var(--kc-responsive-body-md-text-size);
+    line-height: var(--kc-responsive-body-md-line-height);
+    letter-spacing: var(--kc-responsive-body-md-letter-spacing);
+  }
 }
 
 .plan-compare--kc .pc-cycle {
@@ -745,13 +810,15 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-default-body);
 }
 
-/* Rows. Grid lines: a box with 12px outer corners around the rows; the featured
-   column draws its own outline instead of side rules. */
+/* Rows. Grid lines: a box with 12px outer corners around the header row and the rows;
+   the featured column draws its own outline instead of side rules. The rows sit on the
+   comparison table's surface, so the header reads darker as it does there (Victor, 23 Oct). */
 .plan-compare--kc .pc-col .pc-lcell,
 .plan-compare--kc .pc-col .pc-cell {
   height: var(--pc-row-height);
   padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md);
   border-bottom: var(--pc-rule);
+  background: var(--kc-mapped-gradient-section-accent);
   font-size: var(--kc-responsive-body-sm-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);
   letter-spacing: var(--kc-responsive-body-sm-letter-spacing);
@@ -776,12 +843,12 @@ body.night-mode .pc-kit-poptitle {
   border-right: var(--pc-rule);
 }
 
-.plan-compare--kc .pc-lhead + .pc-lcell,
-.plan-compare--kc .pc-hcell + .pc-cell {
+.plan-compare--kc .pc-lhead+.pc-lcell,
+.plan-compare--kc .pc-hcell+.pc-cell {
   border-top: var(--pc-rule);
 }
 
-.plan-compare--kc .pc-lhead + .pc-lcell {
+.plan-compare--kc .pc-lhead {
   border-top-left-radius: var(--kc-shape-radius-md);
 }
 
@@ -789,7 +856,7 @@ body.night-mode .pc-kit-poptitle {
   border-bottom-left-radius: var(--kc-shape-radius-md);
 }
 
-.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell + .pc-cell {
+.plan-compare--kc .pc-col:last-child:not(.pc-featured) .pc-hcell {
   border-top-right-radius: var(--kc-shape-radius-md);
 }
 
@@ -809,6 +876,12 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-text-accent-default);
 }
 
+/* Day: the light accent reaches 1.91:1 on the rows (#f2f8ff). The pressed accent, the darkest
+   blue in Day, reaches 3.67:1, above the 3:1 for a meaningful graphic (R34 B1). Night keeps it. */
+body:not(.night-mode) .plan-compare--kc .pc-yes {
+  color: var(--kc-mapped-icon-accent-default-pressed);
+}
+
 /* Info icon (16px glyph; the popover keeps its existing style) */
 .plan-compare--kc .info-tip {
   margin-left: 0;
@@ -824,25 +897,70 @@ body.night-mode .pc-kit-poptitle {
   color: var(--kc-mapped-icon-primary-default);
 }
 
-/* Welcome Kit thumbnails: 30px chips overlapping by 9.5px */
+/* Welcome Kit thumbnails: 30px tiles overlapping by 6px, the first on top and each next one
+   under it. The close-ups (custom.kit_thumbnail) fill the tile with the corner radius of the
+   buybox kit tiles (Victor, 23 Oct). */
 .plan-compare--kc .pc-kit-thumbs {
   margin-left: var(--kc-responsive-spacing-layout-xs);
 }
 
 .plan-compare--kc .pc-kit-thumbs img {
-  width: 2.2rem;
-  height: 2.2rem;
-  margin-left: -0.95rem;
-  padding: 0.4rem;
-  border: 0.1364rem solid var(--kc-mapped-border-primary-default-subtle);
-  border-radius: var(--kc-shape-radius-full);
+  box-sizing: border-box;
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  margin-left: -0.6rem;
+  padding: 0;
+  border: 0; /* no ring around the tiles (Victor, 23 Oct) */
+  border-radius: var(--kc-shape-radius-sm);
   background-color: var(--kc-mapped-surface-page-secondary);
   box-shadow: 0 0.1364rem var(--kc-shape-blur-xs) 0 rgba(var(--kc-brand-fixed-black-rgb), 0.16);
-  object-fit: contain;
+  object-fit: cover;
+}
+
+/* Night: a step lighter than the rows, the accent highlight laid over the row surface, so the
+   dark products stand out. Opaque, so an overlapped tile does not show through. */
+body.night-mode .plan-compare--kc .pc-kit-thumbs img {
+  background: linear-gradient(var(--kc-mapped-surface-accent-highlight), var(--kc-mapped-surface-accent-highlight)), var(--kc-mapped-gradient-section-accent);
 }
 
 .plan-compare--kc .pc-kit-thumbs img:first-child {
   margin-left: 0;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:nth-child(1) {
+  z-index: 3;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:nth-child(2) {
+  z-index: 2;
+}
+
+.plan-compare--kc .pc-kit-thumbs img:nth-child(3) {
+  z-index: 1;
+}
+
+/* Below 750 the label column is 170px, and beside a long label ("Welkomstpakket",
+   "Kit de bienvenue") the tiles ran past it into Try Once (native check, 23 Oct: NL +29px).
+   The tiles go under the label at 24px: 20px label + 3px + 24px fit the 48px inside the
+   64px row, so the rows of all columns stay level. */
+@media not all and (min-width: 750px) {
+  .plan-compare--kc .pc-kit {
+    flex-wrap: wrap;
+    row-gap: var(--kc-responsive-spacing-layout-xxs);
+    white-space: normal;
+  }
+
+  .plan-compare--kc .pc-kit-thumbs {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .plan-compare--kc .pc-kit-thumbs img {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: -0.5rem;
+  }
 }
 
 /* Featured column */
@@ -870,6 +988,13 @@ body.night-mode .pc-kit-poptitle {
   box-shadow: none;
   filter: drop-shadow(0 0.6rem 0.8rem rgba(var(--kc-mapped-surface-accent-default-rgb), 0.85));
   color: var(--kc-mapped-text-accent-default-on-accent);
+  /* The identity type of the CTAs below (.pc-cta), Victor 23 Oct */
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
 }
 
 .plan-compare--kc .pc-tag-top {
@@ -878,6 +1003,12 @@ body.night-mode .pc-kit-poptitle {
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
   background: var(--kc-mapped-text-inverse-default);
   color: var(--kc-mapped-surface-accent-default);
+}
+
+/* Day: the accent reaches 1.98:1 on the cream badge; no blue text token reaches 4.5:1 there,
+   so the heading text (15.75:1) carries it (R34 B1). Night keeps the accent. */
+body:not(.night-mode) .plan-compare--kc .pc-tag-top {
+  color: var(--kc-mapped-text-default-heading);
 }
 
 /* CTA row: KC/Button primary (featured), secondary, tertiary (first plan) */
@@ -906,7 +1037,8 @@ body.night-mode .pc-kit-poptitle {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-align: center;
   text-transform: uppercase;
-  max-width: 100%; /* long labels wrap inside narrow columns instead of overflowing */
+  max-width: 100%;
+  /* long labels wrap inside narrow columns instead of overflowing */
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
@@ -992,6 +1124,7 @@ body.night-mode .pc-kit-poptitle {
 }
 
 @media screen and (min-width: 750px) {
+
   .plan-compare--kc .pc-cta--primary,
   .plan-compare--kc .pc-cta--secondary {
     min-height: 4.8rem;

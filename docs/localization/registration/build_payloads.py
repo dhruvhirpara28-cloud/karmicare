@@ -12,7 +12,9 @@ Nothing here talks to Shopify. Resource GIDs, translatable content keys and dige
 run time by register.py (translatableResources / translatableResourcesByIds, API 2026-10; product
 metafields by GID through translatableResourcesByIds), by the owner, with read_translations. Every item carries the EN sha1 of the B1a capture: at run time the
 live value must have the same sha1, or the item is stale and is skipped. Translations already registered by hand
-(registration/registered.json) are left out while their EN sha1 matches, so no run overwrites them.
+(registration/registered.json) are left out while their EN sha1 matches, so no run overwrites them. Items held
+by a review decision (registration/holds.json) stay in the plan with the reason in 'hold' and are never written.
+Gates Victor released for publication (registration/releases.json) no longer hold an item.
 
 Run from the repo root:  python3 docs/localization/registration/build_payloads.py [--fr-dir DIR]
 """
@@ -22,24 +24,26 @@ import hashlib
 import json
 import os
 import re
+import sys
 from collections import Counter, OrderedDict
 
 SOURCE = "docs/source-copy/en-source.json"
 OUT = "docs/localization/registration"
 REGISTERED = os.path.join(OUT, "registered.json")
+HOLDS = os.path.join(OUT, "holds.json")
+RELEASES = os.path.join(OUT, "releases.json")
 LANG_DIRS = {"nl": "docs/localization/nl", "fr": "docs/localization/fr"}
 
-# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system.
-FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-05-products", "batch-08-system"}
+# The first wave (brief B4 part 3): PDP, homepage, header/footer, products, system; legal since Victor released
+# legal-review (releases.json, 23 Oct).
+FIRST_WAVE_BATCHES = {"batch-01-homepage", "batch-02-pdp", "batch-03-header-footer", "batch-04-legal", "batch-05-products", "batch-08-system"}
 LATER = {
-    "batch-04-legal": "legal (batch 04)",
     "batch-06-content-pages": "content pages (batch 06), not in the first-wave list",
     "batch-07-collections-blog": "collections and blog (batch 07)",
 }
 GATES = ("legal-review", "pending-claim-review")
-# Loop translates selling plans and groups itself (Settings > Multilingual content, PDP lane 21 Oct): register.py skips them.
-LOOP_TYPES = ("SELLING_PLAN", "SELLING_PLAN_GROUP")
-LOOP_HOLD = "Loop owns selling-plan translations (register.py skips them)"
+# Selling-plan names and descriptions are Shopify translations (Loop's Multilingual content has no field for them,
+# checked 22 Oct); since wave 2 register.py writes them, keeping the Subscription Name values protected (B-01).
 
 # Inventory field -> Shopify translatable content key, per Shopify type (TranslatableResourceType, 2026-10)
 FIELD_KEYS = {
@@ -113,9 +117,10 @@ def target(src):
     return None, owner, "none", None, "no Shopify target for resource_type " + str(rt)
 
 
-def gates_of(entry, lang):
+def gates_of(entry, lang, released=()):
+    """The review gates on a payload entry, minus the ones Victor released for publication (releases.json)."""
     status, flags = entry.get("status"), entry.get("flags") or []
-    return [g for g in GATES if status == g or g in flags]
+    return [g for g in GATES if (status == g or g in flags) and g not in released]
 
 
 def match_hint(src):
@@ -144,10 +149,16 @@ def dedupe(res):
     res["items"] = list(seen.values())
 
 
-def build(lang, payload, sources, registered=None):
+class PlanError(Exception):
+    """A payload error that must stop plan generation: no plan file is written (R42-3)."""
+
+
+def build(lang, payload, sources, registered=None, holds=None, released=()):
     skipped = Counter()
+    bad_invariant = []
     resources = OrderedDict()
     registered = registered or {}
+    holds = holds or {}
     for eid, entry in payload.items():
         src = sources.get(eid)
         if src is None:
@@ -175,8 +186,15 @@ def build(lang, payload, sources, registered=None):
         if not value:
             skipped["no %s value" % lang.upper()] += 1
             continue
-        if value.strip() == src["en"].strip():
+        # A reviewed 'invariant' row (brand, INCI, code, number, symbol) stays as in EN: kept only so the field
+        # route can map that span of a larger field; register.py never writes it on its own.
+        invariant = "invariant" in (entry.get("flags") or [])
+        if value.strip() == src["en"].strip() and not invariant:
             skipped["unchanged (same as EN)"] += 1
+            continue
+        if invariant and value != src["en"]:
+            # Never a silent skip: the row may carry a hold or gate that vetoes a sibling target (R42-3).
+            bad_invariant.append(eid)
             continue
         if kind == "none":
             skipped["no registration route: " + how.split(":")[0]] += 1
@@ -184,13 +202,13 @@ def build(lang, payload, sources, registered=None):
         if entry.get("en_sha1") and entry["en_sha1"] != src["sha1"]:
             skipped["payload EN differs from the source (re-translate)"] += 1
             continue
-        gates = gates_of(entry, lang)
+        gates = gates_of(entry, lang, released)
         batch = src["batch"]
         hold = list(gates)
         if batch not in FIRST_WAVE_BATCHES:
             hold.append(LATER.get(batch, batch))
-        if stype in LOOP_TYPES:
-            hold.append(LOOP_HOLD)
+        if eid in holds:
+            hold.append("review hold (holds.json): " + holds[eid])
         rid = "%s|%s" % (stype, owner)
         res = resources.setdefault(rid, OrderedDict(
             shopify_type=stype, owner=owner, batch=batch, page=src.get("page"), items=[]))
@@ -200,7 +218,12 @@ def build(lang, payload, sources, registered=None):
             status=OrderedDict(drafted=True, registered=False))
         if stype.startswith("ONLINE_STORE_THEME"):
             item["hint"] = match_hint(src)
+        if invariant:
+            item["invariant"] = True
         res["items"].append(item)
+    if bad_invariant:
+        raise PlanError("%s: %d row(s) flagged 'invariant' whose value differs from the EN (%s); fix the payload, no plan "
+                        "is written" % (lang, len(bad_invariant), ", ".join(bad_invariant[:5])))
     for res in resources.values():
         dedupe(res)
     # Assembled fields: one translation per field, held when any of its blocks is held or missing, or carries a
@@ -297,10 +320,11 @@ def markdown(results, sources, args):
               "| `PRODUCT`, `PAGE`, `ARTICLE`, `BLOG`, `COLLECTION` | `translatableResources(resourceType: …)` | exactly one resource with the `handle`; the plan's key |",
               "| `MEDIA_IMAGE` | `translatableResourcesByIds(resourceIds: …)` | the GID in the plan; the plan's key |",
               "| Metafields | `product { metafields { id namespace key type value } }`, then `translatableResourcesByIds` on their GIDs (key `value`) | namespace and key of the field; a JSON field only when every text leaf maps to an approved item |",
-              "| `METAOBJECT` | the product metafield's reference; nested references and shop metaobjects need `metaobject` reads (read_metaobjects) | proven owner chain; the field the inventory names, or a reviewed binding in `bindings.json` (the dry run proposes them); then the EN sha1 |",
+              "| `METAOBJECT` (and the metaobjects behind reference metafields) | the product's reference-typed metafields, then reference-typed fields to depth 3 (`metaobject` reads, read_metaobjects); shop-level cells only from the reviewed `shop-objects.json`, pinned to GID and selected by the product's table | written only on a field the inventory names, an item a reviewed `bindings.json` binds, or a field a reviewed `bindings-fields.json` binds with unchanged evidence; otherwise the dry run proposes the field with its spans, path and translations (`live/fields-proposed-<lang>.json`); a changed bound field aborts the write before any mutation; Liquid, uncertain markup and split sentences are never proposed |",
               "| `SHOP` | `translatableResources(resourceType: SHOP)` | the single shop resource; the plan's key |",
-              "| `LINK`, `SHOP_POLICY` | none yet | owner route not verified: never written |",
-              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | none | held here: Loop owns their translations |",
+              "| `SHOP_POLICY` | `translatableResourcesByIds` on the GID the reviewed `shop-policies.json` binds to the handle | exactly one `body` key; every block on text boundaries, no text outside the blocks, markup kept; any second plan group of the policy stops it; body only (R47); titles come from Shopify |",
+              "| `LINK` | none yet | owner route not verified: never written |",
+              "| `SELLING_PLAN`, `SELLING_PLAN_GROUP` | the plan's GID; every group with the EN name | name, description and options only; the Subscription Name values '60-Day Supply' / 'Year Supply' stay untranslated (B-01) |",
               "| Existing translations | `translations(locale: \"nl\" / \"fr\")` on each resource | part of the approval: a translation edited after the dry run stops the write |",
               "", "Write: rebuild the snapshot and compare its checksum, re-read each resource right before its mutation, then "
               "`translationsRegister(resourceId, translations)` with `{key, locale, value, translatableContentDigest}` in chunks of 50; "
@@ -317,8 +341,9 @@ def file_sha1(path):
 
 def input_digests(args):
     out = OrderedDict([("en-source.json", file_sha1(args.source))])
-    if os.path.exists(REGISTERED):
-        out["registered.json"] = file_sha1(REGISTERED)
+    for path in (REGISTERED, HOLDS, RELEASES):
+        if os.path.exists(path):
+            out[os.path.basename(path)] = file_sha1(path)
     for lang, folder in (("nl", args.nl_dir), ("fr", args.fr_dir)):
         for path in sorted(glob.glob(os.path.join(folder or "", "batch-*.json"))) if folder else []:
             out["%s/%s" % (lang, os.path.basename(path))] = file_sha1(path)
@@ -337,10 +362,16 @@ def main():
     if args.fr_dir:
         dirs["fr"] = args.fr_dir
     registered = json.load(open(REGISTERED, encoding="utf-8"))["registered"] if os.path.exists(REGISTERED) else {}
+    holds = json.load(open(HOLDS, encoding="utf-8"))["holds"] if os.path.exists(HOLDS) else {}
+    released = tuple(json.load(open(RELEASES, encoding="utf-8"))["released"]) if os.path.exists(RELEASES) else ()
     results = OrderedDict()
-    for lang, folder in dirs.items():
-        resources, skipped = build(lang, load_payload(folder), sources, registered.get(lang))
-        results[lang] = (resources, skipped)
+    try:  # every language is built before any file is written, so a payload error leaves all plans untouched
+        for lang, folder in dirs.items():
+            results[lang] = build(lang, load_payload(folder), sources, registered.get(lang), holds.get(lang), released)
+    except PlanError as err:
+        print("Plan not written: %s" % err, file=sys.stderr)
+        raise SystemExit(2) from None
+    for lang, (resources, skipped) in results.items():
         doc = OrderedDict(
             lang=lang,
             inputs=OrderedDict((k, v) for k, v in input_digests(args).items() if not k[:3] in ("nl/", "fr/") or k.startswith(lang + "/")),

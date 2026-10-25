@@ -2,14 +2,14 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "5286628ff7c87962782903bc9e1ce3350dd61469",
- "source_entries": 229,
+ "source_digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
+ "source_entries": 232,
  "counts": {
-  "translated": 142,
-  "held": 21,
-  "pending-claim-review": 31,
+  "translated": 164,
+  "held": 24,
+  "pending-claim-review": 7,
   "dawn-nl": 2,
-  "theme-key": 31,
+  "theme-key": 33,
   "admin": 2
  },
  "fit_risk": [
@@ -246,14 +246,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.stat_strip_karmicare.blocks.stat_3.settings.text",
-   "en": "Formulated on +36 studies",
-   "en_sha1": "9798dccf69dc813ba5f87e173683343e928265e1",
-   "nl": "Geformuleerd op +36 studies",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "EN says +36 studies here, 39 on the product page highlight and 'more than 38,000 people' in the research section; kept as EN, the numbers need one source"
+   "en": "Formulated on peer-reviewed studies",
+   "en_sha1": "afb08ae4f6ad59d0f94704a9237bfe51c6c174e4",
+   "nl": "Geformuleerd op basis van peer-reviewed studies",
+   "status": "translated",
+   "flags": [],
+   "notes": "EN says +36 studies here, 39 on the product page highlight and 'more than 38,000 people' in the research section; kept as EN, the numbers need one source; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 1"
   },
   {
    "id": "index:stat_strip_karmicare/stat_4/heading",
@@ -372,14 +370,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.chronobiology_clock_karmicare.settings.morning_text",
-   "en": "Cortisol rises; coffee, breakfast and the day's first acids follow. Enamel needs its shield on first.",
-   "en_sha1": "5c60fd944b16dbef56a7f94dca11f983ec0276fe",
-   "nl": "Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Je glazuur heeft eerst zijn schild nodig.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Glazuur heeft eerst zijn schild nodig."
+   "en": "Cortisol rises. Morning brings coffee, breakfast and the day's first acids. Enamel needs its shield on first.",
+   "en_sha1": "1ba693b22fcc97e236687835d3bdc6462be0453b",
+   "nl": "Cortisol stijgt. De ochtend brengt koffie, ontbijt en de eerste zuren van de dag. Je glazuur heeft eerst zijn schild nodig.",
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Glazuur heeft eerst zijn schild nodig.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 10"
   },
   {
    "id": "index:chronobiology_clock_karmicare/night_badge",
@@ -415,11 +411,9 @@
    "en": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
    "en_sha1": "a7e571363ef9da44c32810243d3c785e41d0af88",
    "nl": "Melatonine stijgt en je speekselstroom valt bijna stil. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Melatonine stijgt en je speeksel vloeit nog maar mondjesmaat. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Melatonine stijgt en je speeksel vloeit nog maar mondjesmaat. Wat om 22:00 op je glazuur zit, zit er om 07:00 nog.; claims gate cleared 24 Oct: C52 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:chronobiology_clock_karmicare/hint_label",
@@ -452,10 +446,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_link_text",
    "en": "Read the science",
    "en_sha1": "9d735e7e921227ea13fa840a0fc712c8b9748ee6",
-   "nl": "Lees het onderzoek",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "Same link text as the approved Figma NL ('Lees het onderzoek')"
+   "notes": "Same link text as the approved Figma NL ('Lees het onderzoek'); retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; homepage lane 1a65780, landing 42); was 'Read the science'; was translated: Lees het onderzoek"
   },
   {
    "id": "index:two_formulas_karmicare/subheading",
@@ -512,10 +506,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.left_heading",
    "en": "Activated and strengthened by day",
    "en_sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
-   "nl": "Overdag geactiveerd en versterkt",
+   "nl": "'s Morgens geactiveerd en versterkt",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "morning, not day: mirrors ''s Nachts gezuiverd en hersteld' and 'Je ochtendritueel'; EN keeps 'by day' (Victor, 23 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/left_text",
@@ -582,14 +576,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
-   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
-   "en_sha1": "9b0de1e400cbe4cba706cac39339d2ec4852301d",
-   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>BIOFILMPREVENTIE</li><li>BELGISCHE FORMULERING</li><li>VEGAN & HALAL</li></ul>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'"
+   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "en_sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467",
+   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>HELPT BIOFILM VERMINDEREN</li><li>BELGISCHE FORMULERING</li><li>VEGAN & HALAL</li></ul>",
+   "status": "translated",
+   "flags": [],
+   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/subheading",
@@ -623,11 +615,9 @@
    "en": "<p>You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, keep your mouth in balance, morning and night. Not because you brush wrong. Because brushing cleans, and your mouth needs more than clean.</p>",
    "en_sha1": "d56bd9f030f7c0c18df805dddcd62cf73021e9c5",
    "nl": "<p>Je poetst elke dag. Karmicare laat die twee minuten meer doen: glazuur versterken, tandvlees tot rust brengen, je mond in balans houden, 's ochtends en 's avonds. Niet omdat je verkeerd poetst. Maar omdat poetsen reinigt, en je mond meer nodig heeft dan schoon.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'settle gums' → 'tandvlees tot rust brengen' (not 'kalmeren' = soothe, to keep the claim as is)"
+   "status": "translated",
+   "flags": [],
+   "notes": "'settle gums' → 'tandvlees tot rust brengen' (not 'kalmeren' = soothe, to keep the claim as is); claims gate cleared 24 Oct: C20 approved, C32 approved, C34 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/button_label",
@@ -697,11 +687,9 @@
    "en": "<p>New minerals with every brush. Cold or hot, no hesitation.</p>",
    "en_sha1": "36f13619bd72bf4eede50c72f3aac21df29b1000",
    "nl": "<p>Nieuwe mineralen bij elke poetsbeurt. Koud of warm, zonder aarzelen.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C21 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_pceBAE/label",
@@ -869,25 +857,21 @@
    "en": "Radiant calm gums",
    "en_sha1": "afaddec82fd05079c0dba2b9a4e7107db4c4b69e",
    "nl": "Stralend, rustig tandvlees",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35)"
+   "status": "translated",
+   "flags": [],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35); claims gate cleared 24 Oct: C35 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/text",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_VP8KGi.settings.text",
-   "en": "<p>No SLS. Gums settle, turn pinker and look radiant.</p>",
-   "en_sha1": "9fe240b0c02565172f4a4e6cb01a1400c64324a0",
-   "nl": "<p>Geen SLS. Je tandvlees komt tot rust, wordt rozer en ziet er stralend uit.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35); 'settle' → 'komt tot rust', as 'tandvlees tot rust brengen' in the section text"
+   "en": "<p>A velvety foam nurturing your gums through fermentation.</p>",
+   "en_sha1": "1248c588f12f20b56c527e3f186c77e95368c0e4",
+   "nl": "<p>Een fluweelzacht schuim uit fermentatie dat je tandvlees verzorgt.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C35); 'settle' → 'komt tot rust', as 'tandvlees tot rust brengen' in the section text; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 3"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/label",
@@ -906,28 +890,24 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.heading",
-   "en": "Focus by day,  calm by night",
-   "en_sha1": "ff8c1ad4808dc5c7c8de754fbbe00f11d1186cff",
-   "nl": "Focus overdag, rust 's nachts",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "EN has a double space after the comma; not carried over"
+   "en": "Guarana by day, valerian by night",
+   "en_sha1": "92faa350dcc22dc09cee7ed541d7e07bf5f5b8af",
+   "nl": "Guarana overdag, valeriaan ’s nachts",
+   "status": "translated",
+   "flags": [],
+   "notes": "EN has a double space after the comma; not carried over; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 4"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_KRCrBY/text",
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_KRCrBY.settings.text",
-   "en": "<p>Guarana for a bright start, valerian for an evening that doesn't fight your night.</p>",
-   "en_sha1": "3c85c496086b8e953e54cbf79577d74a8d930da0",
-   "nl": "<p>Guarana voor een heldere start, valeriaan voor een avond die je nacht niet tegenwerkt.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "en": "<p>Guarana helps keep plaque from sticking (in vitro). Valerian soothes the mouth by night.</p>",
+   "en_sha1": "1311bb43f03be2545d957ba540db787189991a08",
+   "nl": "<p>Guarana remt het hechten van plaque (in vitro). Valeriaan verzacht de mond ’s nachts.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 5"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_AGFiEX/label",
@@ -958,14 +938,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.text",
-   "en": "<p>Spit, don’t rinse. It works all night. Feel it before breakfast.</p>",
-   "en_sha1": "397401e5b27e3f6ab0d9279b35189988258918eb",
-   "nl": "<p>Spugen, niet spoelen. Het werkt de hele nacht. Voel het nog voor het ontbijt.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "en": "<p>Spit, don’t rinse. With you all night. Feel it before breakfast.</p>",
+   "en_sha1": "de7bf03ee0818fced8de342d17539c832f496e49",
+   "nl": "<p>Spugen, niet spoelen. De hele nacht bij je. Voel het nog voor het ontbijt.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 6"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/label",
@@ -1034,14 +1012,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.settings.bottom_text",
-   "en": "<p>The best outcome is the one prevented. These practitioners recommend Karmicare between visits. Not to replace their care, but to make the twelve hundred brushings a year between appointments count for something.</p>",
-   "en_sha1": "ded0bd1ca714981dd9219c54a4392035f91a206d",
-   "nl": "<p>De beste uitkomst is de uitkomst die voorkomen wordt. Deze zorgverleners raden Karmicare aan voor de periode tussen twee bezoeken. Niet om hun zorg te vervangen, maar om de twaalfhonderd poetsbeurten per jaar tussen de afspraken door iets te laten betekenen.</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "'prevented' rendered literally ('voorkomen') because the EN says it (C70); JEP/DETIC bans 'voorkomt' in claims, claims reviewer to check. TERM: practitioner → zorgverlener"
+   "en": "<p>These practitioners recommend Karmicare between visits. Not to replace their care, but to make the brushings between appointments count for something.</p>",
+   "en_sha1": "72f44811074d851bc8c7f398aa632735e542afc9",
+   "nl": "<p>Deze zorgverleners raden Karmicare aan voor de periode tussen twee bezoeken. Niet om hun zorg te vervangen, maar om de poetsbeurten tussen de afspraken door iets te laten betekenen.</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "'prevented' rendered literally ('voorkomen') because the EN says it (C70); JEP/DETIC bans 'voorkomt' in claims, claims reviewer to check. TERM: practitioner → zorgverlener; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 7"
   },
   {
    "id": "index:trusted_professionals_HAqYth/button_label",
@@ -1134,12 +1110,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.hover_text",
    "en": "<p>“Karmicare offers fluoride-free oral care in a thoughtful way, with hydroxyapatite as a scientifically supported choice. By also taking biorhythm into account, the brand touches on the foundations on which true health is built. This vision aligns seamlessly with my professional conviction that only an integrated approach, bringing together science, biology, rhythm and nature, leads to lasting health.”</p>",
    "en_sha1": "a303abfbd840f092c3eafa31a0ba6bd86613258c",
-   "nl": "<p>“Karmicare biedt op een doordachte manier fluoridevrije mondzorg, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door ook rekening te houden met het bioritme raakt het merk aan de fundamenten waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde aanpak, die wetenschap, biologie, ritme en natuur samenbrengt, tot blijvende gezondheid leidt.”</p>",
+   "nl": "<p>“Karmicare brengt fluorvrije mondzorg op een doordachte manier, met hydroxyapatiet als wetenschappelijk onderbouwde keuze. Door tegelijk rekening te houden met het bioritme, raakt het merk aan de basis waarop echte gezondheid gebouwd is. Deze visie sluit naadloos aan bij mijn professionele overtuiging dat alleen een geïntegreerde benadering, waarin wetenschap, biologie, ritme en natuur samenkomen, leidt tot duurzame gezondheid.”</p>",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Practitioner quote: if she gave it in Dutch originally, use her own wording instead of this back-translation; R2 (review F9): harmonised with product.subscription-item:trusted_professionals_HAqYth/card_8dRing/hover_text, the PDP form ('blijvende gezondheid' for 'lasting health'; 'duurzaam' also means sustainable)"
+   "notes": "Practitioner quote: if she gave it in Dutch originally, use her own wording instead of this back-translation; R2 (review F9): harmonised with product.subscription-item:trusted_professionals_HAqYth/card_8dRing/hover_text, the PDP form ('blijvende gezondheid' for 'lasting health'; 'duurzaam' also means sustainable); 24 Oct: NL replaced by Leen Ponet's own Dutch original (Figma KC | Brand Design Library, Ambassadors page 3947:17082 3959:10; the EN is its translation, Victor 24 Oct)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_HFdkaD/heading",
@@ -1222,10 +1198,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_CtQgU9.settings.hover_text",
    "en": "<p>“As a nutritional therapist specialized in female hormones, I’m extremely careful about what I put into my body. Hormones are sensitive. Stress, toxins, poor-quality ingredients — they all add up. So I don’t just look at labels, I look at what something will do inside the body.</p><p>I choose Karmicare because I trust what’s in it — and what’s not. No unnecessary fillers, no hidden disruptors. Just clean, purposeful ingredients that support rather than burden the nervous system and hormonal balance. When you understand how delicate the female endocrine system can be, especially under chronic stress, quality isn’t optional.</p><p>And that’s also why I use it in my practice.</p><p>I work with women dealing with PMS, cycle issues, stress-related fatigue, estrogen dominance and adrenal dysregulation. I need products that are technically sound — bioavailable, well-formulated, and supportive of detox pathways and nervous system regulation.</p><p>Karmicare fits that standard.”</p>",
    "en_sha1": "affad89b136f78ad41eb82dc7e9936c6c6cb6dea",
-   "nl": "",
-   "status": "held",
+   "nl": "<p>“Als voedingstherapeut gespecialiseerd in vrouwelijke hormonen let ik heel goed op wat ik in mijn lichaam stop. Hormonen zijn gevoelig. Stress, toxines, ingrediënten van slechte kwaliteit — het telt allemaal op. Daarom kijk ik niet alleen naar etiketten, maar naar wat iets in het lichaam doet.</p><p>Ik kies voor Karmicare omdat ik vertrouw op wat erin zit — en op wat er niet in zit. Geen overbodige vulstoffen, geen verborgen verstoorders. Alleen zuivere, doelgerichte ingrediënten die het zenuwstelsel en de hormonale balans ondersteunen in plaats van belasten. Wie begrijpt hoe kwetsbaar het vrouwelijke hormoonstelsel kan zijn, zeker bij chronische stress, weet dat kwaliteit geen keuze is.</p><p>En daarom pas ik het ook toe in mijn praktijk.</p><p>Ik werk met vrouwen met PMS, cyclusklachten, stressgerelateerde vermoeidheid, oestrogeendominantie en een ontregelde bijnierwerking. Ik heb middelen nodig die technisch kloppen — biobeschikbaar, goed geformuleerd en ondersteunend voor de ontgiftingsroutes en de regulatie van het zenuwstelsel.</p><p>Karmicare voldoet aan die standaard.”</p>",
+   "status": "translated",
    "flags": [],
-   "notes": "held: practitioner quote stays in her own EN words (landing desk 20 Oct, msg_67b031a3a2dc: 'the Sietske quote stays as it is'); the claim waiver covers claims, not a person's quote; an NL version needs her own wording or approval. NL draft in commit 986c1d9"
+   "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication; was held: unsupported-claim (C85); practitioner quote: if she gave it in Dutch originally, use her own wording; 'I use it' → 'pas ik het toe', 'products' → 'middelen' (brand rule); 22 Oct: Victor released the quote for translation ('citaten mag je ook vertalen, zij gaan niet goedkeuren'); NL restored from 986c1d9; claims gate cleared 24 Oct: C84 kept, C85 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_qAPajg/heading",
@@ -1283,11 +1259,9 @@
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
    "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek checken en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C68 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/button_label",
@@ -1323,11 +1297,9 @@
    "en": "Nano-HAp sealed 98% of open dentine tubules.",
    "en_sha1": "692b9ddb69b8f60e86a4dcc2f5e89adaf53fccfa",
    "nl": "Nano-HAp dichtte 98% van de open dentinekanaaltjes.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Approved Figma NL wording (research card 1)"
+   "status": "translated",
+   "flags": [],
+   "notes": "Approved Figma NL wording (research card 1); claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_bDxUVT/subtext",
@@ -1363,11 +1335,9 @@
    "en": "98% occlusion vs 82% and 65% for two other desensitising technologies",
    "en_sha1": "3660fb0a9386c44071e767bf5e342f006a732413",
    "nl": "98% afsluiting vs. 82% en 65% voor twee andere desensibiliserende technologieën",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 98% afsluiting vs. 82% en 65% bij twee andere desensibiliserende technologieën"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: 98% afsluiting vs. 82% en 65% bij twee andere desensibiliserende technologieën; claims gate cleared 24 Oct: C60 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_bDxUVT/method_label",
@@ -1437,11 +1407,9 @@
    "en": "Poorer oral health was linked with poorer sleep.",
    "en_sha1": "798f5232fa57d2eaffe13367f951fc5f913788a0",
    "nl": "Een slechtere mondgezondheid hing samen met slechtere slaap.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Een slechtere mondgezondheid hing samen met slechter slapen."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Een slechtere mondgezondheid hing samen met slechter slapen.; claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_yMiD9D/subtext",
@@ -1477,11 +1445,9 @@
    "en": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
    "en_sha1": "bc5e6091c9c389b40fbdf8a95e15d5f3a8eb2c7f",
    "nl": "SMD 2,17 · p = 0,004 · 95%-BI 0,68–3,66&nbsp;",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C61 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_yMiD9D/method_label",
@@ -1551,11 +1517,9 @@
    "en": "Xylitol lowered tooth decay compared with controls.",
    "en_sha1": "21d0c73d004ce24a9e7bbe2d7a144f87f9263875",
    "nl": "Xylitol verminderde tandbederf ten opzichte van controlegroepen.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "status": "translated",
+   "flags": [],
+   "notes": "claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_fmFMFd/subtext",
@@ -1591,11 +1555,9 @@
    "en": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
    "en_sha1": "4d38df7e758cacb9609b28dfce4169827dc13e1b",
    "nl": "SMD −1,09 · p < 0,00001 · 95%-BI −1,34 tot −0,83",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved Figma NL (3738:27474)"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474); claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_fmFMFd/method_label",
@@ -1640,10 +1602,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "EN repeats the nHAp card's badge on the xylitol card (also on the SLS card); likely a placeholder in the EN"
+   "notes": "EN repeats the nHAp card's badge on the xylitol card (also on the SLS card); likely a placeholder in the EN; retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_Hi7YUD/subheading",
@@ -1665,11 +1627,9 @@
    "en": "Nano-HAp beat fluoride on tooth sensitivity.",
    "en_sha1": "bf8d54e6cedd70242cee250edeb8165b744a7169",
    "nl": "Nano-HAp deed het beter dan fluoride bij gevoelige tanden.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Nano-HAp deed beter dan fluoride bij tandgevoeligheid."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Nano-HAp deed beter dan fluoride bij tandgevoeligheid.; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_Hi7YUD/subtext",
@@ -1705,11 +1665,9 @@
    "en": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
    "en_sha1": "f160d0fcda563374c7662cef939b5b7d3ea6e429",
    "nl": "Minder gevoeligheid voor koude lucht en aanraking vs. fluoride en placebo, p < 0,05",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved Figma NL (3738:27474), same on homepage and PDP"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved Figma NL (3738:27474), same on homepage and PDP; claims gate cleared 24 Oct: C63 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_Hi7YUD/method_label",
@@ -1754,10 +1712,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/subheading",
@@ -1779,11 +1737,9 @@
    "en": "No SLS meant fewer and shorter canker sores.",
    "en_sha1": "bcf10287f5014b3b7580a93b50f3de7a52848ce2",
    "nl": "Zonder SLS: minder en kortere aften.",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Geen SLS betekende minder en kortere aften."
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Geen SLS betekende minder en kortere aften.; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/subtext",
@@ -1819,11 +1775,9 @@
    "en": "Fewer ulcers, shorter duration, fewer episodes, less pain",
    "en_sha1": "b79a4f67fe585ca32dda56a2f636a80c93fb2467",
    "nl": "Minder aften, kortere duur, minder episodes, minder pijn",
-   "status": "pending-claim-review",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Minder zweertjes, kortere duur, minder opstoten, minder pijn"
+   "status": "translated",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Minder zweertjes, kortere duur, minder opstoten, minder pijn; claims gate cleared 24 Oct: C64 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/method_label",
@@ -1868,10 +1822,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
    "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
    "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "Same placeholder badge as the nHAp card (see the xylitol card)"
+   "notes": "Same placeholder badge as the nHAp card (see the xylitol card); retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/heading",
@@ -1926,12 +1880,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_TNnqTQ.settings.answer",
-   "en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure — acids, sugars, coffee — so Awake protects, activates and brightens. Night is repair — saliva drops and your body regenerates — so Asleep soothes, rebalances and remineralises while you sleep.</p>",
-   "en_sha1": "f204bb50efc2e680e6c1915a888cb3a0e9db5f20",
-   "nl": "<p>Omdat je mond niet de hele dag hetzelfde werk doet. De dag draait om blootstelling — zuren, suikers, koffie — dus Awake beschermt, activeert en maakt stralender. De nacht draait om herstel — je speeksel neemt af en je lichaam regenereert — dus Asleep kalmeert, herstelt het evenwicht en remineraliseert terwijl je slaapt.</p>",
+   "en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure to acids, sugars and coffee, so Awake protects, activates and brightens. Night is repair, when saliva drops and your body regenerates, so Asleep soothes, supports your mouth’s balance and helps remineralise. Spit, don’t rinse. Left on after the evening brush, it gets extended contact time.</p>",
+   "en_sha1": "bcbc6adc230c2b6b6abbab80717b52522abc967b",
+   "nl": "<p>Omdat je mond niet de hele dag hetzelfde werk doet. Overdag draait het om blootstelling aan zuren, suikers en koffie, dus Awake beschermt, activeert en maakt stralender. ’s Nachts draait het om herstel, je speeksel neemt af en je lichaam regenereert, dus Asleep verzacht, ondersteunt de balans van je mond en helpt remineraliseren. Spugen, niet spoelen. Blijft het na het avondpoetsen zitten, dan krijgt het een verlengde contacttijd.</p>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 11"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
@@ -1962,12 +1916,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
-   "en": "<p>About 64 days — one full cycle. One pump (0.45 ml) per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
-   "en_sha1": "ee6d5e88422c0a37d1519a885b0eaee706545f60",
-   "nl": "<p>Ongeveer 64 dagen — één volledige cyclus. Eén pompje (0,45 ml) per ritueel, Awake 's ochtends en Asleep 's avonds, en elke formule bevat er iets meer dan twee maanden van. Met een levering om de 60 dagen loop je steeds een paar dagen voor.</p>",
+   "en": "<p>About 64 days — one full cycle. One pump per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
+   "en_sha1": "7f5374924b4b5a3da5b502d0c49748566724f7d3",
+   "nl": "<p>Ongeveer 64 dagen — één volledige cyclus. Eén pompje per ritueel, Awake 's ochtends en Asleep 's avonds, en elke formule bevat er iets meer dan twee maanden van. Met een levering om de 60 dagen loop je steeds een paar dagen voor.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "one pump → één pompje (0,45 ml) (glossary); supply claim C07 (approved); EN updated 21 Oct (41ae772)"
+   "notes": "one pump → één pompje (glossary); supply claim C07 (approved); EN updated 21 Oct (41ae772); 24 Oct: dosage (0,45 ml) dropped in EN and NL (Victor)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
@@ -2310,12 +2264,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: credit (store credit) → tegoed"
+   "notes": "TERM: credit (store credit) → tegoed; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "index:care_comes_back/terms_link_label",
@@ -2422,10 +2376,10 @@
    "key_path": "products.product.add_to_cart",
    "en": "Add to cart",
    "en_sha1": "f8893b912459ec1ac659725f03d87492cdb707bc",
-   "nl": "Aan winkelwagen toevoegen",
+   "nl": "Toevoegen aan winkelwagen",
    "status": "dawn-nl",
    "flags": [],
-   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+   "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate; 22 Oct: Victor wants buttons short and direct, so locales/nl.json now says 'Toevoegen aan winkelwagen' (was 'Aan winkelwagen toevoegen'), the same as the Loop widget"
   },
   {
    "id": "liquid:sections/hero-karmicare.liquid:149",
@@ -2587,12 +2541,11 @@
    "en": "saliva is only now picking up after the night, and the enamel is least protected before your first drink",
    "en_sha1": "c7bca695dfe2f7be9903a37adb79ecbf9d8531e2",
    "nl": "het speeksel komt na de nacht nu pas op gang, en het glazuur is het minst beschermd vóór je eerste drankje",
-   "status": "pending-claim-review",
+   "status": "theme-key",
    "flags": [
-    "theme-key",
-    "pending-claim-review"
+    "theme-key"
    ],
-   "notes": ""
+   "notes": "claims gate cleared 24 Oct: C54 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:12",
@@ -2954,6 +2907,44 @@
     "theme-key"
    ],
    "notes": "aria-valuetext, not visible; as kc.clock.valuetext_live ('Huidige lokale tijd')"
+  },
+  {
+   "id": "locale:kc.clock.help",
+   "resource_type": "theme_locale",
+   "file_or_handle": "locales/en.default.json",
+   "key_path": "kc.clock.help",
+   "en": "Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.",
+   "en_sha1": "1e170dc337e7727a0fbb7d8b704b231a33800ad7",
+   "nl": "Sleep de knop rond de ring om een tijdstip te bekijken. Laat los om terug te keren naar de huidige tijd. Houd een pijltjestoets ingedrukt om per vijf minuten te verschuiven; Page Up en Page Down verschuiven een uur. Home kiest middernacht; End kiest 23:59. Laat de toets los, druk op Escape of verlaat de knop om terug te keren naar nu.",
+   "status": "theme-key",
+   "flags": [
+    "theme-key"
+   ],
+   "notes": "NL as Victor approved it (homepage lane e1411e2, 22 Oct); theme key kc.clock.help"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_h8d3WL/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_h8d3WL.settings.hover_text",
+   "en": "<p>“I have been using Karmicare for a long time and feel strongly drawn to their vision of oral care. Our mouth, too, follows the natural rhythm of our body: the oral environment is different during the day than at night. What’s more, oral health does not stand on its own; it is closely connected to our general health.</p><p>As a dentist, I find the formulation interesting because of the combination of, among other things, nano-hydroxyapatite and xylitol in a fluoride-free leave-on formula. Because you don’t need to rinse after brushing, the caring ingredients stay in contact with the teeth and the mouth for longer. The two different formulas also fit nicely within the vision of our natural day-and-night rhythm: fresh and invigorating in the morning (with guarana for morning energy), and warmer and spicier in the evening (with valerian, which contributes to calm and relaxation).</p><p>My patients who use Karmicare are very happy with it and find it a pleasant toothpaste. My children, who are critical about flavours, also use Karmicare with pleasure! I find that at least as important: good oral care starts with a toothpaste you enjoy and keep using consistently. Wonderfully fresh, without feeling aggressive in the mouth. I’m a fan!”</p>",
+   "en_sha1": "83ff867e920b0845b4c7ee4e1312341db47e9801",
+   "nl": "<p>“Ik gebruik Karmicare al lange tijd en voel me sterk aangesproken door hun visie op mondverzorging. Ook onze mond volgt het natuurlijke ritme van ons lichaam: het mondmilieu is overdag anders dan ’s nachts. Bovendien staat mondgezondheid niet op zichzelf, maar is ze nauw verbonden met onze algemene gezondheid.</p><p>Als tandarts vind ik de formulatie interessant door de combinatie van onder andere nano-hydroxyapatiet en xylitol in een fluoridevrije leave-onformule. Doordat je na het poetsen niet hoeft na te spoelen, blijven de verzorgende bestanddelen langer in contact met de tanden en de mond. Ook de twee verschillende formules passen mooi binnen de visie op ons natuurlijke dag- en nachtritme: fris en verkwikkend in de ochtend (met guarana voor de ochtendenergie), en warmer en kruidiger in de avond (met valeriaan die bijdraagt aan rust en ontspanning).</p><p>Mijn patiënten die Karmicare gebruiken, zijn er erg tevreden over en vinden het een aangename tandpasta. Ook mijn kinderen, die kritisch zijn op smaken, gebruiken Karmicare met plezier! Dat vind ik minstens zo belangrijk: een goede mondverzorging begint bij een tandpasta die je graag en consequent blijft gebruiken. Heerlijk fris, zonder agressief aan te voelen in de mond. Ik ben fan!”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "NL = Dr. Spreuwers' own Dutch original (e-mail 19 Oct, verbatim; Figma KC | Brand Design Library, Ambassadors page 3947:17082 4076:13; karmicare-direct-feedback.md); the EN is the translation of it (Victor 24 Oct)"
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_jcnr7Q/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_jcnr7Q.settings.hover_text",
+   "en": "<p>“As a dental hygienist and quality manager with more than 13 years of experience in oral healthcare, I am critical about which products I recommend. What I particularly value about Karmicare is the combination of an effective and safe formulation that is also pleasant to use.</p><p>In my own experience I notice a pleasant taste, a smoother feel on the teeth and teeth that look whiter, and all that without fluoride. It offers an interesting and reliable alternative for both professional and everyday use.</p><p>I see Karmicare as a valuable addition to modern oral care and see good potential for use by a broad audience.”</p>",
+   "en_sha1": "5ba92d36111135d3a4e8269d1bd575f90c266e18",
+   "nl": "<p>“Als mondhygiënist en kwaliteitsmanager met meer dan 13 jaar ervaring in de mondzorg ben ik kritisch in het adviseren van producten. Wat ik vooral waardeer aan Karmicare is de combinatie van een effectieve en veilige samenstelling die ook prettig is in gebruik.</p><p>In mijn eigen ervaring merk ik een prettige smaak, een gladder gevoel op de tanden en dat tanden witter ogen, en dat zonder fluoride. Het biedt een interessant en betrouwbaar alternatief voor zowel professioneel als dagelijks gebruik.</p><p>Ik zie Karmicare als een waardevolle aanvulling binnen de moderne mondzorg en zie goede mogelijkheden voor gebruik binnen een breed publiek.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "NL = Mariama Seco Banjai's own Dutch original (17 Sep and 23 Oct, verbatim; Figma KC | Brand Design Library, Ambassadors page 3947:17082 4063:10)"
   }
  ]
 }

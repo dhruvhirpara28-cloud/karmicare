@@ -85,6 +85,25 @@
    "fr_review": null
   },
   {
+   "key": "kc.clock.help",
+   "area": "clock",
+   "ids": [
+    "locale:kc.clock.help"
+   ],
+   "en": "Drag the knob around the ring to preview a local time. Release to return to the current time. Hold an arrow key to preview in five-minute steps; Page Up and Page Down change one hour. Home selects midnight; End selects 23:59. Release the key, press Escape, or leave the control to return to now.",
+   "nl": "Sleep de knop rond de ring om een tijdstip te bekijken. Laat los om terug te keren naar de huidige tijd. Houd een pijltjestoets ingedrukt om per vijf minuten te verschuiven; Page Up en Page Down verschuiven een uur. Home kiest middernacht; End kiest 23:59. Laat de toets los, druk op Escape of verlaat de knop om terug te keren naar nu.",
+   "nl_hold": null,
+   "fr": "Faites glisser le bouton autour de l’anneau pour afficher une heure locale. Relâchez pour revenir à l’heure actuelle. Maintenez une touche fléchée pour avancer par pas de cinq minutes ; Page précédente et Page suivante changent d’une heure. Début sélectionne minuit ; Fin sélectionne 23:59. Relâchez la touche, appuyez sur Échap ou quittez la commande pour revenir à maintenant.",
+   "fr_hold": null,
+   "note": "Screen-reader help for the clock knob (visually hidden <p>, aria-describedby), homepage lane e1411e2. Inventoried 22 Oct as locale:kc.clock.help.",
+   "nl_review": null,
+   "fr_review": null,
+   "decided": {
+    "fr": "Faites glisser le bouton autour de l’anneau pour afficher une heure locale. Relâchez pour revenir à l’heure actuelle. Maintenez une touche fléchée pour avancer par pas de cinq minutes ; Page précédente et Page suivante changent d’une heure. Début sélectionne minuit ; Fin sélectionne 23:59. Relâchez la touche, appuyez sur Échap ou quittez la commande pour revenir à maintenant.",
+    "by": "Victor 22 Oct (option a), FR as approved in homepage lane e1411e2; FR lane to add it to the payload"
+   }
+  },
+  {
    "key": "kc.clock.valuetext_live",
    "area": "clock",
    "ids": [
@@ -123,8 +142,8 @@
    "nl_hold": null,
    "fr": "la salive reprend à peine après la nuit, et l’émail est le moins protégé avant votre première boisson",
    "fr_hold": null,
-   "nl_review": "pending-claim-review (C54)",
-   "fr_review": "pending-claim-review (C54)"
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.clock.window_2",
@@ -230,18 +249,47 @@
    "ids": [
     "liquid:sections/footer.liquid:694"
    ],
-   "en": "By subscribing you agree to the <a>Terms of Use</a> & <a>Privacy Policy</a>.",
-   "nl": "Door je in te schrijven, ga je akkoord met de <a>Gebruiksvoorwaarden</a> en het <a>Privacybeleid</a>.",
+   "en": "Occasional emails from KARMICARE about Awake & Asleep, the Dental Check-up Reward and member offers. Unsubscribe any time with the link in every email. <a>Privacy Policy</a>.",
+   "nl": "Af en toe e-mails van KARMICARE over Awake & Asleep, de controlebeloning en aanbiedingen voor leden. Uitschrijven kan altijd via de link in elke e-mail. <a>Privacybeleid</a>.",
    "nl_hold": null,
-   "fr": "En vous inscrivant, vous acceptez les <a>conditions d’utilisation</a> et la <a>politique de confidentialité</a>.",
+   "fr": "Des e-mails occasionnels de KARMICARE sur Awake & Asleep, la récompense contrôle dentaire et les offres réservées aux membres. Désinscription possible à tout moment via le lien présent dans chaque e-mail. <a>Politique de confidentialité</a>.",
    "fr_hold": null,
    "href": [
-    "terms_url",
     "privacy_url"
    ],
-   "note": "The payload's two <a> tags get href=\"{{ terms_url }}\" and href=\"{{ privacy_url }}\", in that order.",
+   "note": "The payload's single <a> tag gets href=\"{{ privacy_url }}\". Victor's D4 notice (23 Oct) replaces the 'you agree to the Terms' line; the theme still passes terms_url, unused.",
    "nl_review": null,
    "fr_review": "legal-review"
+  },
+  {
+   "key": "kc.footer.check_inbox",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.check_inbox"
+   ],
+   "en": "Check your inbox to confirm your subscription.",
+   "nl": "Kijk in je inbox om je inschrijving te bevestigen.",
+   "nl_hold": null,
+   "fr": "Consultez votre boîte de réception pour confirmer votre inscription.",
+   "fr_hold": null,
+   "note": "Klaviyo double opt-in: shown in the footer's role=status region after a 202, for every outcome (new, already subscribed, suppressed). Plain text in a data attribute. EN from docs/global-footer/PLAN.md section 9, Victor 23 Oct; to inventory as locale:kc.footer.check_inbox (see docs/global-footer/KEYS.md).",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.email_invalid",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.email_invalid"
+   ],
+   "en": "Check the email address.",
+   "nl": "Controleer het e-mailadres.",
+   "nl_hold": null,
+   "fr": "Vérifiez l’adresse e-mail.",
+   "fr_hold": null,
+   "note": "Shown in the footer's role=alert region when Klaviyo rejects the address (4xx). Plain text in a data attribute. EN from docs/global-footer/PLAN.md section 9, Victor 23 Oct; to inventory as locale:kc.footer.email_invalid (see docs/global-footer/KEYS.md).",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.footer.country",
@@ -296,13 +344,18 @@
    "ids": [
     "liquid:sections/footer.liquid:679"
    ],
-   "en": "Join",
-   "nl": "Doe mee",
+   "en": "Sign up",
+   "nl": "Inschrijven",
    "nl_hold": null,
    "fr": "S’inscrire",
    "fr_hold": null,
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "nl": "Inschrijven",
+    "fr": "S’inscrire",
+    "by": "Victor, 25 Oct (worker terminal, relayed by the landing desk): 'de knop moet zeggen: Sign up, Inschrijven, en het equivalent in frans'"
+   }
   },
   {
    "key": "kc.footer.language",
@@ -362,6 +415,51 @@
    "note": "Default of the setting legal_terms_label.",
    "nl_review": null,
    "fr_review": "legal-review"
+  },
+  {
+   "key": "kc.footer.retry",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.retry"
+   ],
+   "en": "We could not confirm your subscription. Please try again in a moment.",
+   "nl": "We konden je inschrijving niet bevestigen. Probeer het zo meteen opnieuw.",
+   "nl_hold": null,
+   "fr": "Nous n’avons pas pu confirmer votre inscription. Veuillez réessayer dans un instant.",
+   "fr_hold": null,
+   "note": "Shown in the footer's role=alert region when the Klaviyo answer is unclear (timeout, 401/403/404/429/5xx, network): the address stays, no native submit (R46-B4). Plain text in a data-msg-retry attribute, which the global lane adds with the activation (R46c). Victor 24 Oct.",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.legal_guarantee",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.legal_guarantee"
+   ],
+   "en": "Your legal guarantee rights",
+   "nl": "Je wettelijke garantierechten",
+   "nl_hold": null,
+   "fr": "Vos droits à la garantie légale",
+   "fr_hold": null,
+   "note": "Footer legal row link text; sections/footer.liquid uses it when the setting legal_guarantee_label is blank (global-footer lane, 25 Oct). Replaces the registration of footer-group:footer/legal_guarantee_label, which the live footer-group never stores.",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.legal_withdrawal",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.legal_withdrawal"
+   ],
+   "en": "Withdraw from contract here",
+   "nl": "Hier de overeenkomst herroepen",
+   "nl_hold": null,
+   "fr": "Renoncer au contrat ici",
+   "fr_hold": null,
+   "note": "Footer legal row link text; sections/footer.liquid uses it when the setting legal_withdrawal_label is blank (global-footer lane, 25 Oct). Replaces the registration of footer-group:footer/legal_withdrawal_label, which the live footer-group never stores.",
+   "nl_review": null,
+   "fr_review": null
   },
   {
    "key": "kc.hero.aria_label",
@@ -602,14 +700,18 @@
    "ids": [
     "liquid:sections/main-product.liquid:995"
    ],
-   "en": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account.",
-   "nl": "Ga vanaf maand 6 op controle bij je tandarts, die je bezoek bevestigt. Er komt €40 Care Credit op je account.",
+   "en": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account.",
+   "nl": "Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account.",
    "nl_hold": null,
-   "fr": "Effectuez un contrôle dentaire à partir du 6e mois, vérifié par votre dentiste. 40 € de Care Credit sont ajoutés à votre compte.",
+   "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte.",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting checkup_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "fr": "Effectuez un contrôle dentaire à partir du 6e mois. 40 € de Care Credit sont ajoutés à votre compte.",
+    "by": "Victor 22 Oct (S2, choice a): dentist clause deleted; FR lane to confirm"
+   }
   },
   {
    "key": "kc.sticky_cart.credit_checkup_html",
@@ -647,10 +749,10 @@
    "ids": [
     "liquid:sections/main-product.liquid:989"
    ],
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg.",
    "nl_hold": null,
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins.",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting credit_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
@@ -807,51 +909,6 @@
    "fr_review": null
   },
   {
-   "key": "kc.sticky_cart.price_once_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:966"
-   ],
-   "en": "[price] one time",
-   "nl": "[price] eenmalig",
-   "nl_hold": null,
-   "fr": "[price] en une fois",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.price_rhythm_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:954"
-   ],
-   "en": "[price] every 60 days",
-   "nl": "[price] om de 60 dagen",
-   "nl_hold": null,
-   "fr": "[price] tous les 60 jours",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.price_year_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:960"
-   ],
-   "en": "[price] per year",
-   "nl": "[price] per jaar",
-   "nl_hold": null,
-   "fr": "[price] par an",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
    "key": "kc.sticky_cart.stop_rhythm_html",
    "area": "sticky_cart",
    "ids": [
@@ -943,6 +1000,9 @@
   }
  ],
  "retired_keys": {
-  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)"
+  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)",
+  "kc.sticky_cart.price_rhythm_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup (liquid:sections/main-product.liquid:954)",
+  "kc.sticky_cart.price_year_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup (liquid:sections/main-product.liquid:960)",
+  "kc.sticky_cart.price_once_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup (liquid:sections/main-product.liquid:966)"
  }
 }

@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-05-products",
  "source": "docs/source-copy/batches/batch-05-products.json",
- "source_digest": "5ab678a91ffc223be63e7f87a68783bacc62a744",
+ "source_digest": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
  "source_entries": 77,
  "counts": {
   "pending-claim-review": 25,
@@ -173,12 +173,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.body_text",
-   "en": "<p>With each purchase, <strong>we reward you</strong>. You invest in your health. We reinvest in you. Long-term health is our <strong>#1 commitment</strong>. Health Rewards are redeemable on accessories and products only accessible to Karmicare members.</p>",
-   "en_sha1": "be856db5c6a4138fd9e5312dacced4865ee7069c",
-   "nl": "<p>Bij elke bestelling <strong>belonen we je</strong>. Jij investeert in je gezondheid. Wij herinvesteren in jou. Gezondheid op lange termijn is onze <strong>belofte nr. 1</strong>. Health Rewards zijn inwisselbaar voor accessoires en artikelen die alleen toegankelijk zijn voor Karmicare-leden.</p>",
+   "en": "<p>Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year. Spend Care Credit on any order.</p>",
+   "en_sha1": "b82e6df5b61ff73497387040cc4b4061dd40c7a7",
+   "nl": "<p>Karmicare is een zorgsysteem: het ritueel komt op jouw ritme bij je aan, en je zorg bouwt gaandeweg Care Credit op. Je lidmaatschap geeft Care Credit terug: 10% van elk 60-dagenritme, 20% van het Karmicare-jaar. Besteed Care Credit aan elke bestelling.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "'Health Rewards' kept as a name: legacy program name next to Care Credit, EN needs a decision. 'purchase' → 'bestelling', 'products' → 'artikelen'"
+   "notes": "'Health Rewards' kept as a name: legacy program name next to Care Credit, EN needs a decision. 'purchase' → 'bestelling', 'products' → 'artikelen'; 22 Oct: Victor 22 Oct ('ok kaartje'): the legacy Health Rewards card now says three approved Care Credit sentences (care_comes_back intro, step_ritual, step_next_order); no new copy; NL from the same approved sentences"
   },
   {
    "id": "product:main/sticky_cart_block/button_text",

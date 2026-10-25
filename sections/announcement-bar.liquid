@@ -50,10 +50,20 @@
     }
   {%- endif -%}
 
-  /* Figma: 28px bar (8px above a 12px line, the hairline closes it). From 1200px, where the
-     line fits in every language (FR, the longest, is about 900px at 12px); below that the
-     marquee rule takes over, so tablets get one line too */
-  @media screen and (min-width: 1200px) {
+  /* Figma: 28px bar (8px above a 12px line, the hairline closes it). From 750px the line stands
+     still and centred; it only moves when one copy is wider than the announcement's own slot
+     (between the page gutters, or the middle column when social icons or the country/language
+     selector take the sides), which the script under the markup measures with the real text
+     and fonts (Victor, 24 Oct: no animation unless on mobile or the text is longer than the
+     viewport). Without the script a long line wraps instead of being clipped. */
+  @media screen and (min-width: 750px) {
+    /* The still line sits between the page gutters (32px from 750px), not Dawn's utility padding
+       (15px, then 50px from 990px); the script measures the room between them */
+    #AnnouncementBar-{{ section.id }} .utility-bar__grid {
+      padding-left: var(--kc-responsive-spacing-page-gutter);
+      padding-right: var(--kc-responsive-spacing-page-gutter);
+    }
+
     #AnnouncementBar-{{ section.id }} .announcement-bar__message {
       padding: 0.8rem 0 0.7rem;
       min-height: 0;
@@ -107,20 +117,15 @@
     {%- endif -%}
   {%- endfor -%}
 
-  /* The copies of the text only exist for the mobile loop */
+  /* The copies of the text only exist for the loop */
   #AnnouncementBar-{{ section.id }} .announcement-bar__copy {
     display: none;
   }
 
   /* Mobile: 30px bar, no hairline (Figma 2766:10306). The line starts at the page gutter and
-     scrolls left; four copies with equal trailing space make the loop seamless at -25%, one
-     copy per loop. Two copies left a blank at the right end of every loop once the bar was
-     wider than one copy (the short EN line is about 530px a copy, so from about 560px).
-     The three copies still in view cover the widest marquee bar. Type 10/14 as in Figma,
-     under the 12px block setting; no token has that size. One copy takes 20s, half the
-     earlier speed (Victor, 18 Oct). Up to 1199px: tablets and small laptops can't fit the
-     line in every language. */
-  @media screen and (max-width: 1199px) {
+     scrolls left. Type 10/14 as in Figma, under the 12px block setting; no token has that
+     size. With reduced motion the line stands still and wraps, centred between the gutters. */
+  @media screen and (max-width: 749px) {
     #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
       border-bottom: none;
     }
@@ -128,37 +133,98 @@
       padding: 0;
     }
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee {
-      display: block;
-      overflow: hidden;
-      padding-left: var(--kc-responsive-spacing-page-gutter);
+      padding: 0 var(--kc-responsive-spacing-page-gutter);
     }
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message {
-      display: inline-flex;
       min-height: 0;
       padding: 0.8rem 0;
       font-size: 1rem;
       line-height: 1.4rem;
       letter-spacing: var(--kc-responsive-caption-letter-spacing);
-      white-space: nowrap;
-      animation: kc-announcement-marquee-{{ section.id }} 20s linear infinite;
     }
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message > span {
-      padding-right: 4rem;
       line-height: inherit;
     }
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__copy {
-      display: inline;
+  }
+
+  /* The loop, written once and printed twice: below 750px always, from 750px only while the
+     script holds .is-moving on the bar, never with reduced motion. Four copies with equal
+     trailing space make the loop seamless at -25%, one copy per loop. Two copies left a blank
+     at the right end of every loop once the bar was wider than one copy (the short EN line is
+     about 530px a copy, so from about 560px). The three copies still in view cover the widest
+     marquee bar. One copy takes 20s, half the earlier speed (Victor, 18 Oct). From 750px the
+     moving line keeps the desktop type and the hairline, so the bar is 28px either way. */
+  {%- assign bar = '#AnnouncementBar-' | append: section.id -%}
+  {%- for state in (1..2) -%}
+    {%- if state == 1 -%}
+      {%- assign marquee = bar | append: ' .announcement-bar--marquee' -%}
+      @media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+    {%- else -%}
+      {%- assign marquee = bar | append: ' .announcement-bar--marquee.is-moving' -%}
+      @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
+        /* Announcement alone: the moving line takes the whole bar, as on mobile. The gutters
+           come back while the script measures, so it reads the room the still line would have.
+           With social icons or the selector beside it, the line moves inside its own column
+           and the controls keep their place */
+        {{ bar }} .utility-bar__grid:not(.utility-bar__grid--3-col):has(> .announcement-bar--marquee.is-moving:not(.is-measuring)) {
+          padding: 0;
+        }
+        {{ bar }} .utility-bar__grid--3-col > .announcement-bar--marquee.is-moving {
+          padding-left: 0;
+        }
+        /* With social icons Dawn sizes the bar to its content from 990px (fit-content); four
+           copies on one row would then run far past the screen, so the moving bar fills its
+           column instead */
+        {{ bar }} .announcement-bar--marquee.is-moving {
+          width: 100%;
+          margin: 0;
+        }
+    {%- endif -%}
+      {{ marquee }} {
+        display: flex;
+        justify-content: flex-start;
+        overflow: hidden;
+        padding-left: var(--kc-responsive-spacing-page-gutter);
+      }
+      {{ marquee }} .announcement-bar__message {
+        display: flex;
+        white-space: nowrap;
+        animation: kc-announcement-marquee-{{ section.id }} 20s linear infinite;
+      }
+      {{ marquee }} .announcement-bar__message > span {
+        padding-right: 4rem;
+      }
+      {{ marquee }} .announcement-bar__copy {
+        display: inline;
+      }
+      /* Pause: pointer over the line, or keyboard focus on it (the region is focusable while
+         it moves, as the stat strip; no pause button, Victor, 20 Oct). Tab moves on and the
+         line resumes. */
+      {{ marquee }}:hover .announcement-bar__message,
+      {{ marquee }}:focus-within .announcement-bar__message {
+        animation-play-state: paused;
+      }
+      {{ marquee }}:focus-visible {
+        outline: 2px solid var(--kc-mapped-border-focus-default);
+        outline-offset: -2px;
+      }
     }
-    /* Pause: pointer over the line, or keyboard focus on it (the region is focusable while
-       it moves, as the stat strip; no pause button, Victor, 20 Oct). Tab moves on and the
-       line resumes. */
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee:hover .announcement-bar__message,
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee:focus-within .announcement-bar__message {
-      animation-play-state: paused;
+  {%- endfor -%}
+  /* While the script measures (one synchronous step, never painted): the bar fills its slot with
+     no padding, holds the line on one row, and clips it, so the long line cannot widen its
+     column while it is being measured. Written after the loop so it wins over .is-moving */
+  @media screen and (min-width: 750px) {
+    {{ bar }} .announcement-bar--marquee.is-measuring {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+      overflow: hidden;
     }
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee:focus-visible {
-      outline: 2px solid var(--kc-mapped-border-focus-default);
-      outline-offset: -2px;
+    {{ bar }} .announcement-bar--marquee.is-measuring .announcement-bar__message {
+      white-space: nowrap;
     }
   }
   @keyframes kc-announcement-marquee-{{ section.id }} {
@@ -167,24 +233,6 @@
     }
     to {
       transform: translateX(-25%);
-    }
-  }
-  /* Reduced motion: the line stands still and wraps, centred */
-  @media screen and (max-width: 1199px) and (prefers-reduced-motion: reduce) {
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee {
-      padding-right: var(--kc-responsive-spacing-page-gutter);
-      text-align: center;
-    }
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message {
-      display: block;
-      white-space: normal;
-      animation: none;
-    }
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message > span {
-      padding-right: 0;
-    }
-    #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__copy {
-      display: none;
     }
   }
 {%- endstyle -%}
@@ -229,23 +277,80 @@
         {%- endif -%}
       </div>
       {%- comment -%}
-        A tab stop only while the line moves (below 1200px, no reduced motion), so keyboard focus
-        can pause it; a linked announcement pauses through its link instead
+        From 750px the line only moves when one copy is wider than the announcement's slot: the
+        bar itself, laid out in its grid column with no padding (between the page gutters, or the
+        middle column when social icons or the selector are on). The script measures that before
+        first paint (so nothing flips on load), again on resize, once the fonts are in and when
+        the theme editor reloads the section, and holds .is-moving on the bar. It leaves the
+        moving state only once the line fits with 8px to spare, so a 1px change of width never
+        flips it back and forth. It runs once per section: run again (a reload of the section or a
+        second render), it only re-binds, so there is one observer and one set of listeners. The
+        region is a tab stop only while the line moves (below 750px, or .is-moving; never with
+        reduced motion), so keyboard focus can pause it; a linked announcement pauses through its
+        link instead
       {%- endcomment -%}
       <script>
         (function () {
-          var bar = document.querySelector('#AnnouncementBar-{{ section.id }} [data-kc-marquee-focus]');
-          if (!bar || !window.matchMedia) return;
-          var moving = window.matchMedia('(max-width: 1199px) and (prefers-reduced-motion: no-preference)');
-          var sync = function () {
-            if (moving.matches) {
+          var key = '{{ section.id }}';
+          var bound = window.KCAnnouncementMarquee || (window.KCAnnouncementMarquee = {});
+          if (bound[key]) {
+            bound[key]();
+            return;
+          }
+          var id = 'AnnouncementBar-' + key;
+          var wide = window.matchMedia('(min-width: 750px)');
+          var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+          var slack = 8;
+          var observer = window.ResizeObserver ? new ResizeObserver(sync) : null;
+          var section, bar, text;
+
+          function fits(moving) {
+            bar.classList.add('is-measuring');
+            var range = document.createRange();
+            range.selectNodeContents(text);
+            var line = range.getBoundingClientRect().width;
+            var arrow = bar.querySelector('.icon-arrow');
+            if (arrow) line += arrow.getBoundingClientRect().width + parseFloat(getComputedStyle(arrow).marginLeft);
+            var room = bar.getBoundingClientRect().width;
+            bar.classList.remove('is-measuring');
+            return Math.ceil(line) <= Math.floor(room) - (moving ? slack : 0);
+          }
+
+          function sync() {
+            if (!bar) return;
+            var moving = wide.matches && !still.matches && !fits(bar.classList.contains('is-moving'));
+            bar.classList.toggle('is-moving', moving);
+            if (!bar.hasAttribute('data-kc-marquee-focus')) return;
+            if (!still.matches && (moving || !wide.matches)) {
               bar.setAttribute('tabindex', '0');
             } else {
               bar.removeAttribute('tabindex');
             }
-          };
-          sync();
-          if (moving.addEventListener) moving.addEventListener('change', sync);
+          }
+
+          function bind() {
+            section = document.getElementById(id);
+            bar = section && section.querySelector('.announcement-bar--marquee');
+            text = bar && bar.querySelector('.announcement-bar__message > span');
+            if (!text) {
+              bar = null;
+              return;
+            }
+            if (observer) {
+              observer.disconnect();
+              observer.observe(section);
+            }
+            sync();
+          }
+
+          bound[key] = bind;
+          bind();
+          if (!observer) window.addEventListener('resize', sync);
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+          if (still.addEventListener) still.addEventListener('change', sync);
+          document.addEventListener('shopify:section:load', function (event) {
+            if (event.detail && event.detail.sectionId === '{{ section.id }}') bind();
+          });
         })();
       </script>
     {%- elsif section.blocks.size > 1 -%}

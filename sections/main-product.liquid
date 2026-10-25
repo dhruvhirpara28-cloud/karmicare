@@ -946,26 +946,6 @@
         },
         {
           "type": "header",
-          "content": "Price line",
-          "info": "[price] is the plan's price, the same as in the buybox."
-        },
-        {
-          "type": "text",
-          "id": "price_rhythm",
-          "label": "60-Day Rhythm"
-        },
-        {
-          "type": "text",
-          "id": "price_year",
-          "label": "The Karmicare Year"
-        },
-        {
-          "type": "text",
-          "id": "price_once",
-          "label": "Try Once"
-        },
-        {
-          "type": "header",
           "content": "What comes back",
           "info": "[credit] is the Care Credit of the plan's price. Hidden on Try Once."
         },
@@ -1059,7 +1039,7 @@
           "type": "text",
           "id": "per_brushing",
           "label": "Per brushing",
-          "info": "[per_brushing] is the plan's price per brushing."
+          "info": "The price line under the title, on every plan. [per_brushing] is the plan's price per brushing."
         },
         {
           "type": "text",
@@ -2966,7 +2946,7 @@
           "type": "textarea",
           "id": "pricing_summary_checkup_tooltip",
           "label": "Check-up Reward Tooltip",
-          "default": "Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded."
+          "default": "Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded."
         },
         {
           "type": "text",
@@ -3303,6 +3283,182 @@
           "id": "default_to_subscription",
           "label": "Default to first subscription",
           "default": true
+        },
+        {
+          "type": "header",
+          "content": "Practitioner request form",
+          "info": "Shows inside the FAQ item whose answer text has the trigger link. The link opens the form; without JavaScript the form shows under the answer. Requests go to the store contact email (Settings > General > Store details)."
+        },
+        {
+          "type": "checkbox",
+          "id": "request_enabled",
+          "label": "Show the request form",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "request_trigger_url",
+          "label": "Request-form trigger: link URL contains",
+          "default": "mailto:victor@karmicare.com"
+        },
+        {
+          "type": "text",
+          "id": "request_trigger_text",
+          "label": "Fallback: link text contains",
+          "info": "Used when no link URL matches. Translate it along with the FAQ answer.",
+          "default": "evidence pack"
+        },
+        {
+          "type": "text",
+          "id": "request_title",
+          "label": "Title",
+          "default": "Request the practitioner pack"
+        },
+        {
+          "type": "textarea",
+          "id": "request_intro",
+          "label": "Intro",
+          "default": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email."
+        },
+        {
+          "type": "text",
+          "id": "request_label_name",
+          "label": "Name field",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "request_label_profession",
+          "label": "Profession field",
+          "default": "Profession and practice"
+        },
+        {
+          "type": "text",
+          "id": "request_help_profession",
+          "label": "Profession help",
+          "default": "For example kPNI therapist, practice name"
+        },
+        {
+          "type": "text",
+          "id": "request_label_email",
+          "label": "Email field",
+          "default": "Email"
+        },
+        {
+          "type": "text",
+          "id": "request_label_phone",
+          "label": "Phone field",
+          "default": "Phone (optional)"
+        },
+        {
+          "type": "text",
+          "id": "request_legend_wants",
+          "label": "Choice question",
+          "default": "What would you like?"
+        },
+        {
+          "type": "text",
+          "id": "request_help_wants",
+          "label": "Choice help",
+          "default": "Choose one or both."
+        },
+        {
+          "type": "text",
+          "id": "request_label_pack",
+          "label": "Evidence pack choice",
+          "default": "Evidence pack"
+        },
+        {
+          "type": "text",
+          "id": "request_label_samples",
+          "label": "Samples choice",
+          "default": "Samples for my practice"
+        },
+        {
+          "type": "text",
+          "id": "request_label_address",
+          "label": "Address field",
+          "info": "Required only when samples is ticked; the label says so.",
+          "default": "Practice address (needed for samples)"
+        },
+        {
+          "type": "text",
+          "id": "request_label_message",
+          "label": "Message field",
+          "default": "Message (optional)"
+        },
+        {
+          "type": "text",
+          "id": "request_privacy_text",
+          "label": "Privacy note",
+          "info": "[privacy] becomes the link to the Privacy Policy page in the page language.",
+          "default": "We only process these details to answer your request. More in our [privacy]."
+        },
+        {
+          "type": "text",
+          "id": "request_privacy_link_label",
+          "label": "Privacy link text",
+          "default": "Privacy Policy"
+        },
+        {
+          "type": "text",
+          "id": "request_button",
+          "label": "Send button",
+          "default": "Send request"
+        },
+        {
+          "type": "text",
+          "id": "request_error_name",
+          "label": "Name missing",
+          "default": "Please fill in your name."
+        },
+        {
+          "type": "text",
+          "id": "request_error_profession",
+          "label": "Profession missing",
+          "default": "Please fill in your profession and practice."
+        },
+        {
+          "type": "text",
+          "id": "request_error_email",
+          "label": "Email missing",
+          "default": "Please fill in your email address."
+        },
+        {
+          "type": "text",
+          "id": "request_error_email_format",
+          "label": "Email not valid",
+          "default": "Please enter a valid email address."
+        },
+        {
+          "type": "text",
+          "id": "request_error_wants",
+          "label": "No choice ticked",
+          "default": "Choose the evidence pack, samples or both."
+        },
+        {
+          "type": "text",
+          "id": "request_error_address",
+          "label": "Address missing",
+          "default": "Please fill in the practice address for the samples."
+        },
+        {
+          "type": "textarea",
+          "id": "request_error_generic",
+          "label": "Request refused by Shopify",
+          "default": "Your request was not sent. Please check the details below and try again."
+        },
+        {
+          "type": "text",
+          "id": "request_success_title",
+          "label": "Thank-you title",
+          "default": "Request received"
+        },
+        {
+          "type": "textarea",
+          "id": "request_success_text",
+          "label": "Thank-you text",
+          "default": "Thank you. We reply by email to the address you gave."
         }
       ]
     }
@@ -3506,6 +3662,12 @@
     },
     {
       "type": "text",
+      "id": "kc_hero_am_still",
+      "label": "Awake: still when the video cannot play (.webp)",
+      "info": "Shown with reduced motion, on a slow connection and when autoplay is refused without an animated WebP. Empty: the poster stays."
+    },
+    {
+      "type": "text",
       "id": "kc_hero_am_animated",
       "label": "Awake: animated WebP (autoplay refused)",
       "default": "kc-anim-am-hero-540x480-animated-v1.webp"
@@ -3528,6 +3690,12 @@
       "id": "kc_hero_pm_poster",
       "label": "Asleep: poster (.webp)",
       "default": "kc-anim-pm-hero-1080x960-poster-v1.webp"
+    },
+    {
+      "type": "text",
+      "id": "kc_hero_pm_still",
+      "label": "Asleep: still when the video cannot play (.webp)",
+      "info": "Shown with reduced motion, on a slow connection and when autoplay is refused without an animated WebP. Empty: the poster stays."
     },
     {
       "type": "text",

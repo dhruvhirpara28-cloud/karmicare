@@ -201,3 +201,42 @@ Victor changed ten admin texts on 22 Oct; the global coordinator read them back 
 | `admin:article:news/nano-hydroxyapatite:body_html#b100` | It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp protects your teeth against decay by grouping the disease-causing microbes together, which you can then spit out. | It remineralizes the enamel by reconstructing the lost deposits of calcium and phosphate, while also shielding the tooth surface from daily acid attacks. Plus, nano HAp helps protect your teeth against decay by binding bacteria together, so you can spit them out. | Het remineraliseert het glazuur door de verloren calcium- en fosfaatafzettingen weer op te bouwen, en schermt het tandoppervlak tegelijk af tegen de dagelijkse zuuraanvallen. Bovendien helpt nano-HAp je tanden beschermen tegen tandbederf door bacteriën aan elkaar te binden, zodat je ze kunt uitspugen. | re-translate |
 | `admin:article:news/nano-hydroxyapatite:seo.title` | Why you need Nano Hydroxapatite in your toothpaste – KARMICARE | Nano-Hydroxyapatite Toothpaste: What It Is and How It Works \| KARMICARE | Tandpasta met nano-hydroxyapatiet: wat het is en hoe het werkt \| KARMICARE | re-translate |
 | `admin:article:news/nano-hydroxyapatite:seo.description` | Here's everything you need to know about nano-hydroxyapatite, a medical marvel ingredient for better teeth, bones, and overall health. | What nano-hydroxyapatite is, how it works on enamel, and why Karmicare uses it in Awake and Asleep, two fluoride-free toothpastes. | Wat nano-hydroxyapatiet is, hoe het op je glazuur werkt en waarom Karmicare het in Awake en Asleep verwerkt, twee fluoridevrije tandpasta's. | re-translate |
+
+## 22 Oct: no dentist confirmation, new footer slogan
+
+Victor (22 Oct): the check-up reward needs no dentist, so the dentist clause is deleted (S2, choice a); the footer slogan is "Your mouth has a rhythm Now your oral care too", two sentences without a stop. Four EN strings changed (`corrected`, `old_en` kept): batch-02 digest `55340f9dc6dd5f8865fc1093937c727c0f1a3045`, batch-03 `d8fb1b30ea2f5be901b89205707d850a3f458452`. The theme key `kc.sticky_cart.checkup_info_html` already carries the FR with the clause deleted (`decided` in `theme-keys.json`); please confirm it in the payload.
+
+| Id | Before | Now | NL |
+|---|---|---|---|
+| `product.subscription-item:main/info_card_FnBcaN/body_text` | <p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up — confirmed by your dentist — adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p> | <p>Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care builds Care Credit as you go. On the Year, completing your dental check-up adds €40 of it. You walk in with something to gain, not only something to pay. Care that comes back.</p> | <p>Karmicare is een zorgsysteem, geen artikel uit het schap: het ritueel komt aan op jouw ritme, en je zorg bouwt onderweg Care Credit op. Met het Karmicare-jaar levert een afgeronde tandartscontrole nog eens €40 op. Je stapt binnen met iets te winnen, niet alleen met iets te betalen. Zorg die terugkomt.</p> |
+| `product.subscription-item:main/loop_subscriptions_WEk4XJ/pricing_summary_checkup_tooltip` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. Prevention, rewarded. | Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. Prevention, rewarded. | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond. |
+| `liquid:sections/main-product.liquid:995` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is added to your account. | Complete a dental check-up from month 6 or onwards. €40 in Care Credit is added to your account. | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. |
+| `footer-group:footer/slogan` | Your mouth has a rhythm So should your oral care | Your mouth has a rhythm Now your oral care too | Je mond heeft een ritme Nu je mondverzorging ook |
+
+## 22 Oct: three admin edits by Victor
+
+Victor edited three admin texts: the dentist clause leaves the Year selling-plan description (Loop) and the Compare Row tooltip "€40 Check-up Reward", and the Year cost per brushing is €0.49. Entries stay `admin-held`, `old_en` kept. `batch-02-pdp` digest `af27d13827f435e009e7e24815fa510469f0c3ee`. FR: delete ", vérifié par votre dentiste" in the two texts, and €0,42 → 0,49 €. The selling-plan description is translated in Loop, not by the runner.
+
+| Id | Change | NL now (excerpt) |
+|---|---|---|
+| `admin:karmicare-biorhythmic-oral-care-system:selling_plan.712155431293.description` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond.</span |
+| `admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#10` | ", verified by your dentist" deleted | Ga vanaf maand 6 op controle bij je tandarts. Er komt €40 Care Credit op je account. Preventie, beloond. |
+| `admin:karmicare-biorhythmic-oral-care-system:shop.metaobjects.compare_value:year.cost_per_brushing` | €0.42 → €0.49 | €0,49 |
+
+## 22 Oct: two more admin fixes
+
+Victor fixed `custom.product_faq#37` "Full dosep" → "Full dose" and `media.69840178020733.alt` (now "…with morning care at 06:40 and evening care at 22:00"). `batch-02-pdp` digest `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4`. NL already read this way; FR: check the alt puts the morning first.
+
+## 22 Oct: legacy product card
+
+Victor ("ok kaartje"): `product:main/info_card_FnBcaN/body_text` is now `<p>Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year. Spend Care Credit on any order.</p>`, three approved sentences (`care_comes_back` intro, `step_ritual/text` second sentence, `step_next_order/text` first sentence). FR: take the same three sentences from your existing payload. `batch-05-products` digest `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d`.
+
+## 22 Oct: slogan line-break marker (Astra R27)
+
+Contract for every language: the footer slogan is two sentences without a stop, joined by the literal marker `[[br]]` (no spaces around it, once). `sections/footer.liquid` turns it into `<br>`.
+
+| Id | EN | NL | FR |
+|---|---|---|---|
+| `footer-group:footer/slogan` | Your mouth has a rhythm[[br]]Now your oral care too | Je mond heeft een ritme[[br]]Nu je mondverzorging ook | your two sentences joined by `[[br]]` |
+
+`batch-03-header-footer` digest `742351732dabbbff2eff9cadc6858ba87284393a`. The NL/FR slogan in the admin (theme translation) is registered in the next write round.

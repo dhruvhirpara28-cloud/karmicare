@@ -69,7 +69,28 @@
                   <h3 class="care-comes-back__step-title">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
-                  <p class="care-comes-back__step-body">{%- render 'care-comes-back-text', text: block.settings.text -%}</p>
+                  {%- capture rendered_step_text -%}
+                    {%- render 'care-comes-back-text', text: block.settings.text -%}
+                  {%- endcapture -%}
+                  {%- if rendered_step_text contains '€' -%}
+                    {%- assign step_euro_parts = rendered_step_text | split: '€' -%}
+                    {%- for sep in step_euro_parts -%}
+                      {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                      {%- assign sep_num = sep | strip | plus: 0 -%}
+                      {%- if sep_num > 0 -%}
+                        {%- assign sep_cents = sep_num | times: 100 | round -%}
+                        {%- capture sep_money -%}
+                          <span class="kc-currency-eur" data-kc-eur="{{ sep_num }}">
+                            {%- render 'kc-money', cents: sep_cents, trim: true, euro: true -%}
+                          </span>
+                        {%- endcapture -%}
+                        {%- assign sep_target_sp = '€ ' | append: sep_num -%}
+                        {%- assign sep_target_no = '€' | append: sep_num -%}
+                        {%- assign rendered_step_text = rendered_step_text | replace: sep_target_sp, sep_money | replace: sep_target_no, sep_money -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                  <p class="care-comes-back__step-body">{{ rendered_step_text }}</p>
                 {%- endif -%}
               </div>
             </li>
@@ -105,6 +126,11 @@
                     <span class="care-comes-back__line-note">{%- render 'care-comes-back-text', text: block.settings.note -%}</span>
                   {%- endif -%}
                 </dt>
+                {%- comment -%}
+                  The receipt amounts are the setting's own text, as translated ("€ 70,80", "70,80 €").
+                  Reading a number out of that text lost the cents in NL/FR (R35 B1: € 70,00), so they
+                  are not parsed or converted; Care Credit is in euros.
+                {%- endcomment -%}
                 <dd class="care-comes-back__line-amount">{{ block.settings.amount | escape }}</dd>
               </div>
             {%- endfor -%}
@@ -133,6 +159,10 @@
     </div>
   {%- endif -%}
 </div>
+
+{%- comment -%} The step texts' fixed euro amounts in the active currency, this section only (R35) {%- endcomment -%}
+{%- assign kc_eur_root = '.section-' | append: section.id -%}
+{%- render 'kc-eur-convert', root: kc_eur_root -%}
 
 {% schema %}
 {
@@ -211,7 +241,7 @@
       "type": "text",
       "id": "fine_print",
       "label": "Fine print",
-      "default": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment."
+      "default": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment."
     },
     {
       "type": "url",
