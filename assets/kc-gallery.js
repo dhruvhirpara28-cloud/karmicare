@@ -1,14 +1,17 @@
 // Hero animation fit (Victor, 24 Oct: "zo groot als past, tot 1,5"; R51 formula). The whole-animation
 // alpha union on the 540x480 canvas, as fractions of the fitted media height H (the 9:8 media fills the
-// frame's height from 750 px, centred): x 51 to 485 and y 28 to 420, with the floor shadow reference at
-// 87.1% landing 1rem (10px) below the frame (B).
+// frame's height from 750 px, centred): x 51 to 485 and y 28 to 420. The reference is the landed floss's
+// bottom, the kit's lowest point (833 of 960 in the landed still), which lands 80px above the thumbnails
+// (B; Victor, 24 Oct: "de flos minstens 80 px van de galerij als ze landen").
+const KC_HERO_FLOSS = 833 / 960;
 const KC_HERO_UNION = {
   left: (0.5 - 51 / 540) * 1.125, // 0.45625
   right: (485 / 540 - 0.5) * 1.125, // 215/480
-  top: 0.871 - 28 / 480,
-  bottom: 420 / 480 - 0.871,
-  landedTop: 0.871 - 80 / 480 // the last frame's top, which must stay below the header
+  top: KC_HERO_FLOSS - 28 / 480,
+  bottom: 420 / 480 - KC_HERO_FLOSS, // the floor shadow under it
+  landedTop: KC_HERO_FLOSS - 80 / 480 // the last frame's top, which must stay below the header
 };
+const KC_HERO_THUMBNAILS_CLEARANCE = 80; // the landed floss above the thumbnails
 const KC_HERO_CLEARANCE = 16; // sides, buybox and bottom
 const KC_HERO_TOP_CLEARANCE = 16; // the intro's distance from the viewport's top edge
 const KC_HERO_MIN = 1.2;
@@ -71,7 +74,7 @@ if (!customElements.get('kc-gallery-sizing')) {
       this.write('--kc-gallery-thumbnails-height', `${Math.ceil(thumbnailsHeight)}px`);
       this.write('--kc-gallery-media-height', `${viewerHeight}px`);
       // Then the fit, on the viewer those values give, in the same pass: no second correction (R52 B1)
-      const scale = this.hero ? this.heroScale(this.viewer.getBoundingClientRect(), anchorTop, stickyTop) : null;
+      const scale = this.hero ? this.heroScale(this.viewer.getBoundingClientRect(), anchorTop, stickyTop, gap) : null;
       // A script later than the CSS's 1s reveal finds the hero shown in the R50 pose: it goes hidden at
       // once (the opacity the reveal animation held does not transition, so this is a cut), and after
       // 260ms a fresh measurement applies the fit then current and fades it in, rather than jumping.
@@ -101,13 +104,15 @@ if (!customElements.get('kc-gallery-sizing')) {
     // page positions, not the current scroll, for both the gallery's place at scroll 0 and its sticky
     // pin, whichever sits higher, so the scale holds while scrolling (R52 B2). Below 1.2 there is no
     // scale, and the CSS keeps the R50 pose inside the frame.
-    heroScale(viewerRect, anchorTop, stickyTop) {
+    heroScale(viewerRect, anchorTop, stickyTop, gap) {
       const m = KC_HERO_CLEARANCE;
       const H = viewerRect.height;
       if (!(H > 0)) return null;
       const viewerOffset = viewerRect.top - this.gallery.getBoundingClientRect().top;
-      const B = anchorTop + viewerOffset + H + 10; // the shadow reference at scroll 0
-      const pinnedB = stickyTop + viewerOffset + H + 10; // the same, pinned
+      // The thumbnails start one gallery gap below the frame (assets/kc-gallery.css)
+      const lift = gap - KC_HERO_THUMBNAILS_CLEARANCE;
+      const B = anchorTop + viewerOffset + H + lift; // the floss reference at scroll 0
+      const pinnedB = stickyTop + viewerOffset + H + lift; // the same, pinned
       const highestB = Math.min(B, pinnedB);
       const C = viewerRect.left + viewerRect.width / 2;
       const viewportWidth = document.documentElement.clientWidth;
