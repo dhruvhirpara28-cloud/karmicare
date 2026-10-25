@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "035821debb9f49e950a971c3d2fea45e22b846ee",
+ "source_digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
  "source_entries": 232,
  "counts": {
   "translated": 164,
@@ -2264,12 +2264,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: credit (store credit) → tegoed"
+   "notes": "TERM: credit (store credit) → tegoed; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "index:care_comes_back/terms_link_label",

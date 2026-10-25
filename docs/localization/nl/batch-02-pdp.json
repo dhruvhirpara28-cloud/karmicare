@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "40ad1a7a769a6ec777e38e3c26cc54518d29c3d3",
+ "source_digest": "4f62482641c8eb60a8d2fd0452b1083d3bdbdfbb",
  "source_entries": 498,
  "counts": {
   "translated": 134,
@@ -398,12 +398,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.footer_text",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-   "en_sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.&nbsp;",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "en_sha1": "86c9b2142fafd96ab8a000cab28cf29223d40c65",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.&nbsp;",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: Karmicare credit → Karmicare-tegoed (never 'korting')."
+   "notes": "TERM: Karmicare credit → Karmicare-tegoed (never 'korting').; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "product.subscription-item:main/professional_testimonials_block/heading",
@@ -1780,12 +1780,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "product.subscription-item:care_comes_back/terms_link_label",
@@ -2299,14 +2299,14 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:989",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "en_sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "en_sha1": "0e3375079a41a1fd5d559989a0c6e957bfa00297",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg.",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "liquid:sections/main-product.liquid:995",

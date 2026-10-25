@@ -344,13 +344,18 @@
    "ids": [
     "liquid:sections/footer.liquid:679"
    ],
-   "en": "Join",
-   "nl": "Doe mee",
+   "en": "Sign up",
+   "nl": "Inschrijven",
    "nl_hold": null,
    "fr": "S’inscrire",
    "fr_hold": null,
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "nl": "Inschrijven",
+    "fr": "S’inscrire",
+    "by": "Victor, 25 Oct (worker terminal, relayed by the landing desk): 'de knop moet zeggen: Sign up, Inschrijven, en het equivalent in frans'"
+   }
   },
   {
    "key": "kc.footer.language",
@@ -714,10 +719,10 @@
    "ids": [
     "liquid:sections/main-product.liquid:989"
    ],
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg.",
    "nl_hold": null,
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins.",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting credit_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,

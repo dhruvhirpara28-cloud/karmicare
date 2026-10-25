@@ -34,15 +34,15 @@
  "batches": {
   "batch-01-homepage": {
    "entries": 232,
-   "digest": "035821debb9f49e950a971c3d2fea45e22b846ee"
+   "digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34"
   },
   "batch-02-pdp": {
    "entries": 498,
-   "digest": "40ad1a7a769a6ec777e38e3c26cc54518d29c3d3"
+   "digest": "4f62482641c8eb60a8d2fd0452b1083d3bdbdfbb"
   },
   "batch-03-header-footer": {
    "entries": 46,
-   "digest": "f1ed7dedf4ba6efa48a45403ff07c786e786192f"
+   "digest": "43c6e4e01271f6d0a3973509a47a306199641854"
   },
   "batch-04-legal": {
    "entries": 1009,
@@ -3222,14 +3222,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "text",
    "section_type": "care-comes-back",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "old_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f"
   },
   {
    "id": "index:care_comes_back/terms_link_label",
@@ -4398,14 +4400,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.footer_text",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-   "sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "sha1": "86c9b2142fafd96ab8a000cab28cf29223d40c65",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "inline_richtext",
    "section_type": "main-product",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "old_sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166"
   },
   {
    "id": "product.subscription-item:main/professional_testimonials_block/heading",
@@ -6316,14 +6320,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "text",
    "section_type": "care-comes-back",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "old_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f"
   },
   {
    "id": "product.subscription-item:care_comes_back/terms_link_label",
@@ -6891,11 +6897,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:989",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928",
-   "status": "needs-key",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "sha1": "0e3375079a41a1fd5d559989a0c6e957bfa00297",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230)"
+   "notes": "sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translate & Adapt. Fix: store the value in the template (PDP owner) or move it to a locale key. snippets/sticky-cart-block.liquid repeats some as JS fallbacks (lines 139-141, 212, 228-230); EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
+   "old_sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928"
   },
   {
    "id": "liquid:sections/main-product.liquid:995",
@@ -11403,11 +11411,13 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/footer.liquid",
    "key_path": "sections/footer.liquid:679",
-   "en": "Join",
-   "sha1": "e0d73143de80d17e82de2e017ac156ca3b9c4e01",
-   "status": "needs-key",
+   "en": "Sign up",
+   "sha1": "0b81497c8589af2714a1ddbeb62b3a4be679c318",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "newsletter submit button"
+   "notes": "newsletter submit button; EN updated 25 Oct: newsletter button 'Join' → 'Sign up' (moved from the global-footer lane, d6b9c6c reverted), Victor, 25 Oct",
+   "old_en": "Join",
+   "old_sha1": "e0d73143de80d17e82de2e017ac156ca3b9c4e01"
   },
   {
    "id": "liquid:sections/footer.liquid:694",

@@ -1,6 +1,6 @@
 {
  "batch": "batch-01-homepage",
- "digest": "035821debb9f49e950a971c3d2fea45e22b846ee",
+ "digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -3160,14 +3160,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "status": "approved",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 25 Oct: 'never on your dental bill' removed from all Care Credit text (PDP lane 2e3275a, R77c), Victor, 25 Oct",
    "setting_type": "text",
    "section_type": "care-comes-back",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "old_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f"
   },
   {
    "id": "index:care_comes_back/terms_link_label",
