@@ -647,10 +647,12 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   column-gap: var(--kc-responsive-spacing-layout-comfortable);
 }
 
+/* The benefit icons are currentColor SVGs in the primary icon colour, like the homepage's (Victor, 24 Oct) */
 .kc-buybox .icon-with-text__item svg {
   width: var(--kc-responsive-size-icon-sm);
   height: var(--kc-responsive-size-icon-sm);
   margin-bottom: var(--kc-responsive-spacing-layout-xs);
+  color: var(--kc-mapped-icon-primary-default);
 }
 
 .kc-buybox .icon-with-text .h6 {
