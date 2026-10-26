@@ -215,7 +215,7 @@ predictive-search[loading] .predictive-search__results-groups-wrapper ~ .predict
   height: calc(var(--font-heading-scale) * 1.4rem);
   flex-shrink: 0;
   margin-left: calc(var(--font-heading-scale) * 2rem);
-  color: rgb(var(--color-link));
+  color: var(--kc-mapped-text-link-default);
 }
 
 .predictive-search__image {

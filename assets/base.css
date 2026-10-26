@@ -68,7 +68,6 @@ span,
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
-  --alpha-link: 1; /* was 0.85: link text is never translucent (Victor, 26 Oct) */
   --alpha-badge-border: 0.1;
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
@@ -662,7 +661,7 @@ h6:empty {
   box-shadow: none;
   text-decoration: underline;
   text-underline-offset: 0.3rem;
-  color: rgb(var(--color-link));
+  color: var(--kc-mapped-text-link-default);
   background-color: transparent;
   font-family: inherit;
 }
@@ -772,7 +771,7 @@ details>* {
 
 .underlined-link,
 .customer a {
-  color: rgba(var(--color-link), var(--alpha-link));
+  color: var(--kc-mapped-text-link-default);
 }
 
 .inline-richtext a,
@@ -783,7 +782,7 @@ details>* {
 .underlined-link:hover,
 .customer a:hover,
 .inline-richtext a:hover {
-  color: rgb(var(--color-link));
+  color: var(--kc-mapped-text-link-default-hover);
   text-decoration-thickness: 0.2rem;
 }
 
@@ -1562,7 +1561,7 @@ shopify-accelerated-checkout-cart {
   font-size: var(--font-body-small-size);
   display: flex;
   align-items: center;
-  color: rgb(var(--color-link));
+  color: var(--kc-mapped-text-link-default);
   margin-left: 0;
   padding-left: 0;
   min-height: 4.4rem;
@@ -3060,14 +3059,14 @@ details-disclosure>details {
 }
 
 .rte a {
-  color: rgba(var(--color-link), var(--alpha-link));
+  color: var(--kc-mapped-text-link-default);
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 0.1rem;
   transition: text-decoration-thickness var(--duration-short) ease;
 }
 
 .rte a:hover {
-  color: rgb(var(--color-link));
+  color: var(--kc-mapped-text-link-default-hover);
   text-decoration-thickness: 0.2rem;
 }
 
