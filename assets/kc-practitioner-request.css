@@ -299,6 +299,13 @@
   cursor: pointer;
 }
 
+/* The label text keeps the label's line height: something upstream gives a bare span
+   line-height: normal (about 18px), and the control below is centred on a 22px / 20px line, so
+   it sat 2.5-3.5px low */
+.kc-pr__check span {
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
 .kc-pr__check input {
   flex: none;
   width: 20px;
