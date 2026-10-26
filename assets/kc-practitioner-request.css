@@ -268,12 +268,31 @@
   box-shadow: inset 0 0 0 1px var(--kc-mapped-border-status-error);
 }
 
-/* Evidence pack / samples */
+/* Profession radios, evidence pack / samples: two columns, 8px between the rows, so the form
+   stays short; a long label wraps under itself next to its control */
+.kc-pr__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+/* Long NL/FR labels ("Orthomoleculair of natuurgeneeskundig therapeut") stay inside their column
+   at 360px: hyphenate in the page language, break anywhere as a last resort */
+.kc-pr__options .kc-pr__check {
+  min-width: 0;
+}
+
+.kc-pr__options .kc-pr__check span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
 .kc-pr__check {
   display: flex;
   gap: 10px;
-  align-items: center;
-  min-height: var(--kc-responsive-size-control-min-height, 44px);
+  align-items: flex-start;
+  min-height: 24px;
   color: var(--kc-mapped-text-default-heading);
   font-size: var(--kc-responsive-body-sm-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);
@@ -284,7 +303,8 @@
   flex: none;
   width: 20px;
   height: 20px;
-  margin: 0;
+  /* centred on the first line of the label (22px phone, 20px from 750px) */
+  margin: calc((var(--kc-responsive-body-sm-line-height) - 20px) / 2) 0 0;
   accent-color: var(--kc-mapped-surface-inverse-default);
   cursor: pointer;
 }
@@ -292,6 +312,15 @@
 .kc-pr__check input:focus-visible {
   outline: 2px solid var(--kc-mapped-border-focus-strong);
   outline-offset: 2px;
+}
+
+/* The "Other" profession field, full width under the options */
+.kc-pr__sub {
+  margin: 12px 0 0;
+}
+
+.kc-pr__sub[hidden] {
+  display: none;
 }
 
 .kc-pr__choices[aria-invalid='true'] .kc-pr__check input {
