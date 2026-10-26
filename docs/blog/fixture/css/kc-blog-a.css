@@ -1,0 +1,132 @@
+/* Direction A · Quiet column (the legal family).
+   The article reads like the legal pages (assets/kc-policy-page.css): a title block that fades page
+   -> accent, the body accent -> page in one 680px column, the featured image small under the title
+   at no more than its own width. One memorable element: the Sources card at the end.
+   Index: a quiet list of rows with hairlines, no pictures. */
+
+/* ---- Article: title block (page -> accent) ---------------------------------------------------- */
+.kc-blog-a__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-layout-2xl);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-a__head .kc-blog__meta {
+  margin-top: var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-blog-a__figure {
+  margin: var(--kc-responsive-spacing-layout-2xl) 0 0;
+}
+
+/* never wider than the file itself (the nano image is 520px) */
+.kc-blog-a__figure .kc-blog__media {
+  max-width: min(100%, var(--kc-media-natural-width, 100%));
+}
+
+/* ---- Article: body (accent -> page) ----------------------------------------------------------- */
+.kc-blog-a__body {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-section-xs);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
+}
+
+/* ---- Sources + CTA ---------------------------------------------------------------------------- */
+.kc-blog-a__end {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-3xl);
+  padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-a__cta {
+  padding-top: var(--kc-responsive-spacing-layout-2xl);
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+}
+
+/* ---- Related + index rows --------------------------------------------------------------------- */
+.kc-blog-a__related {
+  padding-block: var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-a-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+}
+
+.kc-blog-a-row {
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-a-row__link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-lg);
+  padding-block: var(--kc-responsive-spacing-layout-lg);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+.kc-blog-a-row__link .kc-blog__meta {
+  grid-column: 1;
+}
+
+.kc-blog-a-row__title {
+  grid-column: 1;
+  margin: 0;
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-weight: var(--font-500-weight);
+  text-wrap: balance;
+  transition: color 0.2s ease;
+}
+
+.kc-blog-a-row__excerpt {
+  grid-column: 1;
+  margin: 0;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  color: var(--kc-mapped-text-default-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.kc-blog-a-row__arrow {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  color: var(--kc-mapped-icon-primary-default-subtle);
+  transition: transform 0.2s ease;
+}
+
+.kc-blog-a-row__link:hover .kc-blog-a-row__title {
+  color: var(--kc-mapped-text-link-default-hover);
+}
+
+.kc-blog-a-row__link:hover .kc-blog-a-row__arrow {
+  transform: translateX(0.4rem);
+}
+
+/* ---- Index ------------------------------------------------------------------------------------ */
+.kc-blog-a-index__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-a-index__list {
+  padding-block: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}
+
+@media screen and (min-width: 750px) {
+  .kc-blog-a__head,
+  .kc-blog-a-index__head {
+    padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-layout-2xl);
+  }
+
+  .kc-blog-sources {
+    padding: var(--kc-responsive-spacing-layout-xl);
+  }
+}
