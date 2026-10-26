@@ -1,5 +1,14 @@
 # Professionals page v1: audit and proposal (phase 1)
 
+> **Status: PARKED** (Victor, 26 Oct): "ok laten we het formulier toch op PDP via de popup bij
+> beide links onder dentists en kpni, we gaan voorlopig the professional page hiden via shopify".
+>
+> - The form stays on the PDP as R76g built it: both FAQ links (kPNI and "For dentists") open the
+>   popup.
+> - The professionals page is hidden in Shopify for now.
+> - Phase 2 does not start. This audit and the fixture stay for when the page comes back.
+> - R76i (radio/checkbox alignment) applies to the popup as well.
+
 **Created**: 26 Oct 2026, lane practitioner-form. **Brief**: `BRIEF-PROFESSIONALS-PAGE-V1.md`.
 
 **Victor's ask, 26 Oct**: "I think we should direct all entry links to the professional page and
