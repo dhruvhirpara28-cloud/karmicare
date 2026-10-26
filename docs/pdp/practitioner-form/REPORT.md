@@ -1,5 +1,42 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76h: option labels wrap safely (Astra R76g N1)
+
+The landing desk relayed Astra's R76g non-blocker N1: at 360px a long Dutch label such as
+"Orthomoleculair of natuurgeneeskundig therapeut" overflows its 152px column. Fix in
+`assets/kc-practitioner-request.css`, scoped to `.kc-pr__options`:
+- the option label (the grid item) gets `min-width: 0`;
+- its text span gets `min-width: 0`, `overflow-wrap: anywhere` and `hyphens: auto`.
+
+`hyphens: auto` follows the page language, which Shopify sets on `<html lang>`.
+`overflow-wrap: anywhere` is the last resort for a word that cannot be hyphenated. N2
+(URL-first matching across the whole FAQ) stays as it is, per the landing desk.
+
+### R76h checks
+
+Fixture changes for this check:
+- the pages now carry `lang="nl"` and `lang="fr"`;
+- the NL/FR stand-ins have long profession labels. These are length tests, not proposed copy;
+  the real NL/FR text comes from source-copy.
+
+The script `scratchpad/fx/wrap.sh` measures each option's label box and the right edge of its
+text lines against its grid column. Results are in `results/r76h-wrap.txt`.
+
+| Case | Column | Result |
+|---|---|---|
+| NL at 360, "Orthomoleculair of natuurgeneeskundig therapeut" | 152px | pass: 3 lines, 0px overflow; "Mondhygiënist" 1 line |
+| NL at 390 | 167px | pass: 3 lines, 0px overflow |
+| FR at 360, "Praticien en orthomoléculaire ou naturopathie", "Hygiéniste bucco-dentaire" | 152px | pass: 3 and 2 lines, 0px overflow |
+| FR at 390 | 167px | pass |
+| NL at 360, 43-character word without a break ("Orthomoleculairnatuurgeneeskundigtherapeut") | 152px | pass: broken over 3 lines, 0px overflow, no horizontal scroll in the dialog |
+| Negative control: the same pages with the R76h rule switched off | 152px | fails as Astra reported: the real NL label overflows by 14px; the 43-character word overflows by 183px and gives the dialog a horizontal scroll |
+
+**Regression**: pass. The suites ran at en-default Day 390 and Night 1440, nl-default 390,
+fr-error 390 and en-nojs. The fixture's `fxShow` now tolerates the page's infinite marquee
+animation.
+
+**Theme Check**: exit 0, 19 baseline warnings.
+
 ## R76g: compact options in two columns; the "For dentists" link opens the same form
 
 Victor, 25 Oct:

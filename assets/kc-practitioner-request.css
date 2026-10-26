@@ -276,6 +276,18 @@
   gap: 8px 16px;
 }
 
+/* Long NL/FR labels ("Orthomoleculair of natuurgeneeskundig therapeut") stay inside their column
+   at 360px: hyphenate in the page language, break anywhere as a last resort */
+.kc-pr__options .kc-pr__check {
+  min-width: 0;
+}
+
+.kc-pr__options .kc-pr__check span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
 .kc-pr__check {
   display: flex;
   gap: 10px;
