@@ -152,7 +152,10 @@
      trailing space make the loop seamless at -25%, one copy per loop. Two copies left a blank
      at the right end of every loop once the bar was wider than one copy (the short EN line is
      about 530px a copy, so from about 560px). The three copies still in view cover the widest
-     marquee bar. One copy takes 20s, half the earlier speed (Victor, 18 Oct). From 750px the
+     marquee bar. Below 750px the line moves at 14px a second in every language: the script
+     sets --kc-marquee-duration from the width of one copy (Victor, 26 Oct: slower, and the long
+     FR line no longer runs faster than EN; at 20s a copy it was 27 / 31 / 38 px/s for
+     EN / NL / FR). From 750px one copy still takes 20s (the fallback). From 750px the
      moving line keeps the desktop type and the hairline, so the bar is 28px either way. */
   {%- assign bar = '#AnnouncementBar-' | append: section.id -%}
   {%- for state in (1..2) -%}
@@ -189,7 +192,7 @@
       {{ marquee }} .announcement-bar__message {
         display: flex;
         white-space: nowrap;
-        animation: kc-announcement-marquee-{{ section.id }} 20s linear infinite;
+        animation: kc-announcement-marquee-{{ section.id }} var(--kc-marquee-duration, 20s) linear infinite;
       }
       {{ marquee }} .announcement-bar__message > span {
         padding-right: 4rem;
@@ -283,7 +286,9 @@
         first paint (so nothing flips on load), again on resize, once the fonts are in and when
         the theme editor reloads the section, and holds .is-moving on the bar. It leaves the
         moving state only once the line fits with 8px to spare, so a 1px change of width never
-        flips it back and forth. It runs once per section: run again (a reload of the section or a
+        flips it back and forth. Below 750px it sets the loop's duration from the width of one
+        copy, so the line moves at the same 14px a second in every language; from 750px and with
+        reduced motion it leaves the CSS fallback. It runs once per section: run again (a reload of the section or a
         second render), it only re-binds, so there is one observer and one set of listeners. The
         region is a tab stop only while the line moves (below 750px, or .is-moving; never with
         reduced motion), so keyboard focus can pause it; a linked announcement pauses through its
@@ -301,6 +306,7 @@
           var wide = window.matchMedia('(min-width: 750px)');
           var still = window.matchMedia('(prefers-reduced-motion: reduce)');
           var slack = 8;
+          var speed = 14; // px a second below 750px, the same in every language
           var observer = window.ResizeObserver ? new ResizeObserver(sync) : null;
           var section, bar, text;
 
@@ -320,6 +326,14 @@
             if (!bar) return;
             var moving = wide.matches && !still.matches && !fits(bar.classList.contains('is-moving'));
             bar.classList.toggle('is-moving', moving);
+            // Below 750px one copy (a quarter of the four-copy row) takes its width / speed seconds
+            var message = text.parentElement;
+            var copy = message.getBoundingClientRect().width / 4;
+            if (!wide.matches && !still.matches && copy > 0) {
+              message.style.setProperty('--kc-marquee-duration', (copy / speed).toFixed(2) + 's');
+            } else {
+              message.style.removeProperty('--kc-marquee-duration');
+            }
             if (!bar.hasAttribute('data-kc-marquee-focus')) return;
             if (!still.matches && (moving || !wide.matches)) {
               bar.setAttribute('tabindex', '0');

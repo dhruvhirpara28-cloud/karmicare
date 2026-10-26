@@ -1,0 +1,199 @@
+/* Direction C · Research notebook.
+   The article sits on one "paper" card (the research-card surface: surface/page-secondary, radius
+   lg, hairline) that floats over the section gradient. Title, picture, body, sources and the CTA
+   are all on that card; quotes are accent panels inside it. The paper card is the one memorable
+   element. Related and index use the Figma WEB/Article card (KC | Shopify Store 3592:128276):
+   white card, hairline, picture on the accent tint, small label, title, meta, arrow. */
+
+.kc-blog-c__stage {
+  padding-block: var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 40rem, var(--kc-mapped-gradient-section-accent) calc(100% - 60rem), var(--kc-mapped-surface-page) 100%);
+}
+
+/* Phones: the card runs to 8px from the screen edge so the text keeps its width */
+.kc-blog-c__paper {
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 2 * var(--kc-responsive-spacing-layout-xs));
+  max-width: calc(var(--kc-blog-measure) + 2 * var(--kc-responsive-spacing-layout-3xl));
+  margin-inline: auto;
+  padding: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-layout-md);
+  border-radius: var(--kc-shape-radius-lg);
+  background: var(--kc-mapped-surface-page-secondary);
+  box-shadow: var(--kc-elevation-md);
+}
+
+.kc-blog-c__paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.kc-blog-c__paper .kc-blog__meta {
+  margin-top: var(--kc-responsive-spacing-layout-lg);
+  padding-bottom: var(--kc-responsive-spacing-layout-lg);
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-c__figure {
+  margin: var(--kc-responsive-spacing-layout-xl) 0 0;
+}
+
+.kc-blog-c__figure .kc-blog__media {
+  max-width: min(100%, var(--kc-media-natural-width, 100%));
+  margin-inline: auto;
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.kc-blog-c__paper .kc-blog__body {
+  margin-top: var(--kc-responsive-spacing-layout-2xl);
+}
+
+/* Quotes as accent panels */
+.kc-blog-c__paper .kc-blog__body blockquote {
+  padding: var(--kc-responsive-spacing-layout-lg);
+  border: 0;
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+/* Sources: on the paper, so the card loses its own fill and keeps the hairline list */
+.kc-blog-c__paper .kc-blog-sources {
+  margin-top: var(--kc-responsive-spacing-layout-3xl);
+  padding: var(--kc-responsive-spacing-layout-lg) 0 0;
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+  border-radius: 0;
+  background: none;
+}
+
+.kc-blog-c__paper .kc-blog-sources::after {
+  content: none;
+}
+
+.kc-blog-c__cta {
+  margin-top: var(--kc-responsive-spacing-layout-2xl);
+  padding: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-layout-lg);
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+/* ---- WEB/Article card ------------------------------------------------------------------------- */
+.kc-blog-c__related {
+  padding-block: 0 var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-c-grid {
+  display: grid;
+  gap: var(--kc-responsive-spacing-grid-gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-blog-c-card {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-surface-page-secondary);
+}
+
+.kc-blog-c-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+.kc-blog-c-card:hover::after {
+  border-color: var(--kc-mapped-border-primary-default-hover);
+}
+
+.kc-blog-c-card__link {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+.kc-blog-c-card .kc-blog__media {
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+}
+
+.kc-blog-c-card .kc-blog__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.kc-blog-c-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  padding: var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-blog-c-card__title {
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-weight: var(--font-500-weight);
+  text-wrap: balance;
+}
+
+.kc-blog-c-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+  margin-top: auto;
+}
+
+.kc-blog-c-card__foot svg {
+  flex: 0 0 auto;
+  color: var(--kc-mapped-icon-primary-default-subtle);
+}
+
+.kc-blog-c-index__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-c-index__body {
+  padding-block: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}
+
+@media screen and (min-width: 750px) {
+  .kc-blog-c__stage {
+    padding-top: var(--kc-responsive-spacing-layout-2xl);
+  }
+
+  .kc-blog-c__paper {
+    width: calc(100% - 2 * var(--kc-blog-gutter));
+    padding: var(--kc-responsive-spacing-layout-3xl);
+  }
+
+  .kc-blog-c-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kc-blog-c-index__head {
+    padding-block: var(--kc-responsive-spacing-layout-3xl);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .kc-blog-c-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

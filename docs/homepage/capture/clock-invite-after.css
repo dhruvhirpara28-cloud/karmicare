@@ -1,0 +1,18 @@
+/* Injected on the live homepage for the clock "after" shots: the branch rules for the knob halo,
+   the 48px target and the explore pill at every width (Victor, 26 Oct). The section stylesheet
+   loads after this injection, so the two overridden values carry !important here only. */
+.chronobiology-clock .dial { touch-action: auto !important; }
+.chronobiology-clock .knob::before { content: ''; position: absolute; inset: -4px; border-radius: 50%; }
+.chronobiology-clock .knob::after { content: ''; position: absolute; inset: -4px; border: 2px solid var(--chrono-accent); border-radius: 50%; opacity: 0; pointer-events: none; }
+.chronobiology-clock.is-inviting .knob::after { animation: knob-invite 2.4s cubic-bezier(.22, 1, .36, 1) infinite; }
+@keyframes knob-invite { 0% { opacity: .8; transform: scale(1); } 60%, 100% { opacity: 0; transform: scale(1.9); } }
+.chronobiology-clock .hint {
+  display: inline-flex !important; align-items: center; justify-content: center; gap: var(--kc-responsive-spacing-layout-xs);
+  height: 36px; margin: 0 0 calc(var(--kc-responsive-spacing-layout-md) - var(--kc-responsive-spacing-layout-xxs));
+  padding: 0 var(--kc-responsive-spacing-layout-sm); border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-full); background: transparent;
+  filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
+  font-family: 'Gotham Rounded', var(--kc-font-role-identity); font-weight: 500; font-size: 11px; line-height: 12px;
+  letter-spacing: 1.1px; text-transform: uppercase; color: var(--chrono-ink);
+}
+.chronobiology-clock .hint svg { flex-shrink: 0; color: var(--chrono-icon); }

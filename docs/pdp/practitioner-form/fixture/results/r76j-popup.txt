@@ -1,0 +1,36 @@
+######## width 390
+== 1 PDP: the button is a third opener of the one popup
+FAQ buttons 2 | button href pdp-current.html#KcPractitionerRequest-panel | aria dialog/KcPractitionerRequest-dialog | coming soon left false | errors 0
+== 2 click the button: popup, focus, Opened from; close returns focus
+open true | url hash "" | focus kc-pr__title | opened from: Trusted Professionals button | after close: focus on the button, locked false
+== 3 the FAQ links still work
+dentists: open true from For dentists | kPNI: open true from For kPNI / Orthomolecular practitioners | focus back on kPNI true
+== 4 submit from the button, then the thank-you reload
+posted Opened from: Trusted Professionals button | snapshot opener 2 from Trusted Professionals button
+thank-you dialog open true | klaviyo opened_from: Trusted Professionals button | close: focus on the button true | errors 0
+== 5 homepage: the button links to the product at the form
+href pdp-current.html?from=home-trusted#KcPractitionerRequest-panel | coming soon left false | form on homepage false
+== 6 arriving from the homepage: the popup opens on load
+open on arrival true | focus kc-pr__title | opened from: Homepage: Trusted Professionals button | hash after "" | locked true | close: focus on the button true, unlocked true | errors 0
+== 7 arriving with an unknown ?from: the button's own label, not the free text
+open true | opened from: Trusted Professionals button
+== 8 showModal throws: arriving and clicking fall back to the inline form
+dialog false | form inline in the FAQ true | item open true | button still a link A pdp-current.html#KcPractitionerRequest-panel | locked false | errors 0
+######## width 1440
+== 1 PDP: the button is a third opener of the one popup
+FAQ buttons 2 | button href pdp-current.html#KcPractitionerRequest-panel | aria dialog/KcPractitionerRequest-dialog | coming soon left false | errors 0
+== 2 click the button: popup, focus, Opened from; close returns focus
+open true | url hash "" | focus kc-pr__title | opened from: Trusted Professionals button | after close: focus on BODY, locked false
+== 3 the FAQ links still work
+dentists: open true from For dentists | kPNI: open true from For kPNI / Orthomolecular practitioners | focus back on kPNI true
+== 4 submit from the button, then the thank-you reload
+posted Opened from: Trusted Professionals button | snapshot opener 2 from Trusted Professionals button
+thank-you dialog open true | klaviyo opened_from: Trusted Professionals button | close: focus on the button false | errors 0
+== 5 homepage: the button links to the product at the form
+href pdp-current.html?from=home-trusted#KcPractitionerRequest-panel | coming soon left false | form on homepage false
+== 6 arriving from the homepage: the popup opens on load
+open on arrival true | focus kc-pr__title | opened from: Homepage: Trusted Professionals button | hash after "" | locked true | close: focus on the button false, unlocked true | errors 0
+== 7 arriving with an unknown ?from: the button's own label, not the free text
+open true | opened from: Trusted Professionals button
+== 8 showModal throws: arriving and clicking fall back to the inline form
+dialog false | form inline in the FAQ true | item open true | button still a link A pdp-current.html#KcPractitionerRequest-panel | locked false | errors 0
