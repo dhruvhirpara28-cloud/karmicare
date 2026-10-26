@@ -25,13 +25,25 @@
   });
   window.__fxKlaviyo = [];
   var realFetch = window.fetch;
-  window.fetch = function (url) {
+  window.fetch = function (url, init) {
     if (String(url).indexOf('klaviyo.com') !== -1) {
-      window.__fxKlaviyo.push(String(url));
+      window.__fxKlaviyo.push({ url: String(url), body: init && init.body });
       return Promise.resolve(new Response('', { status: 202 }));
     }
     return realFetch.apply(this, arguments);
   };
+  // ?modal=throw|missing replaces showModal before the theme script (deferred) runs
+  if (params.get('modal') === 'throw') HTMLDialogElement.prototype.showModal = function () { throw new DOMException('fixture: showModal throws', 'InvalidStateError'); };
+  if (params.get('modal') === 'missing') HTMLDialogElement.prototype.showModal = undefined;
+  // page errors of the theme and inline code; cross-origin scripts only report "Script error."
+  window.__fxErrors = [];
+  window.addEventListener('error', function (e) {
+    if (e.message === 'Script error.' && !e.filename) return;
+    // a browser notice, not an error: the page's own ResizeObservers (kc-marquee, kc-navigation,
+    // kc-gallery, global.js) see the layout move when the inline form unfolds in the FAQ
+    if (/^ResizeObserver loop/.test(e.message)) return;
+    window.__fxErrors.push(e.message + ' @ ' + (e.filename || 'inline').split('/').pop() + ':' + e.lineno);
+  });
 
   var FROM = ['pdp-faq-kpni', 'pdp-faq-dentists', 'pdp-trusted', 'home-trusted', 'header'];
   var from = params.get('from');
