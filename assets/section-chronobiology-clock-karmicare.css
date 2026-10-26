@@ -367,8 +367,8 @@ body.night-mode .chronobiology-clock {
   border-radius: 50%;
 }
 
-/* Until the visitor first moves the knob (the script sets .is-inviting once per visit), an
-   accent ring swells out of the dot to show it can be picked up (Victor, 26 Oct) */
+/* After the preview swing (the script sets .is-inviting once per visit, until the first drag),
+   a short accent halo pulses out of the dot three times and fades (Victor, 26 Oct) */
 .chronobiology-clock .knob::after {
   content: '';
   position: absolute;
@@ -380,19 +380,19 @@ body.night-mode .chronobiology-clock {
 }
 
 .chronobiology-clock.is-inviting .knob::after {
-  animation: knob-invite 2.4s cubic-bezier(.22, 1, .36, 1) infinite;
+  animation: knob-invite 1.4s ease-out 3;
 }
 
 @keyframes knob-invite {
   0% {
-    opacity: .8;
+    opacity: .7;
     transform: scale(1);
   }
 
-  60%,
+  70%,
   100% {
     opacity: 0;
-    transform: scale(1.9);
+    transform: scale(1.35);
   }
 }
 

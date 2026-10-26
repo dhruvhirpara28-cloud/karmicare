@@ -46,11 +46,11 @@
     });
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // The knob invites a drag (a swelling ring) until the visitor first moves it, once per visit
+    // Until the visitor first moves the knob (once per visit), the dial coming into view plays a
+    // preview: the knob swings along the ring and back, then its ring pulses (.is-inviting)
     const exploredKey = 'kc-clock-explored';
     let explored = false;
     try { explored = sessionStorage.getItem(exploredKey) === '1'; } catch (_) { }
-    sectionEl.classList.toggle('is-inviting', !explored);
 
     function markExplored() {
       if (explored) return;
@@ -67,8 +67,7 @@
     let timer = null;
 
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    let introPending = false; // Disabled: intro animation unreliable in Shopify (observer may not fire)
-    let introObserver = null;
+    let previewObserver = null;
 
     const normalize = minutes => ((minutes % 1440) + 1440) % 1440;
     const format = minutes => String(Math.floor(minutes / 60)).padStart(2, '0') + ':' + String(minutes % 60).padStart(2, '0');
@@ -107,19 +106,16 @@
     function live() {
       const now = minutesNow();
       draw(now, false);
-      if (introPending) positionKnob(now - 180);
     }
 
-    function finishIntro() {
-      introPending = false;
-      if (introObserver) introObserver.disconnect();
-      introObserver = null;
+    function stopPreview() {
+      if (previewObserver) previewObserver.disconnect();
+      previewObserver = null;
     }
 
     function stopReturn() {
       if (returnFrame !== null) cancelAnimationFrame(returnFrame);
       returnFrame = null;
-      knob.classList.remove('is-introducing');
     }
 
     function reset(animate = true, duration = 800) {
@@ -131,7 +127,6 @@
       if (previousPointer !== null && knob.hasPointerCapture(previousPointer)) {
         try { knob.releasePointerCapture(previousPointer); } catch (_) { }
       }
-      finishIntro();
       stopReturn();
       const from = displayedMinutes;
       // Interpolate time around the shortest arc, including across midnight
@@ -154,18 +149,33 @@
       returnFrame = requestAnimationFrame(step);
     }
 
-    function introduceClock() {
-      if (!introPending) return;
-      // One clockwise sweep teaches circular path
-      reset(true, 1600);
-      if (returnFrame !== null) knob.classList.add('is-introducing');
+    // The knob runs 90 minutes ahead along the ring and eases back to now, readout unchanged
+    function previewSwing() {
+      if (explored || pointerId !== null || heldKey || returnFrame !== null) return;
+      if (reducedMotion.matches) return;
+      const base = displayedMinutes;
+      const started = performance.now();
+      const duration = 1600;
+      function step(now) {
+        const progress = Math.min(1, (now - started) / duration);
+        const eased = progress < .5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        positionKnob(base + 90 * Math.sin(Math.PI * eased));
+        if (progress < 1) {
+          returnFrame = requestAnimationFrame(step);
+        } else {
+          stopReturn();
+          live();
+          if (!explored) sectionEl.classList.add('is-inviting');
+        }
+      }
+      returnFrame = requestAnimationFrame(step);
     }
 
     knob.addEventListener('pointerdown', event => {
       if (!event.isPrimary || event.button !== 0 || pointerId !== null) return;
       event.preventDefault();
       markExplored();
-      finishIntro();
+      stopPreview();
       stopReturn();
       knob.focus({ preventScroll: true });
       heldKey = null;
@@ -210,7 +220,7 @@
       if (pointerId !== null) return;
       markExplored();
       const wasReturning = returnFrame !== null;
-      finishIntro();
+      stopPreview();
       stopReturn();
       if (wasReturning) selected = normalize(Math.round(displayedMinutes));
       if (!heldKey && !wasReturning) selected = Math.min(1435, Math.round(minutesNow() / 5) * 5);
@@ -231,7 +241,7 @@
     });
 
     window.addEventListener('blur', () => {
-      if (!introPending) reset();
+      reset();
     });
 
     if (hint) {
@@ -247,7 +257,7 @@
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (!introPending) reset(false);
+        reset(false);
       } else if (pointerId === null && !heldKey && returnFrame === null) {
         live();
       }
@@ -259,7 +269,7 @@
     });
 
     window.addEventListener('pageshow', event => {
-      if (event.persisted && !introPending) reset(false);
+      if (event.persisted) reset(false);
       startTimer();
     });
 
@@ -270,15 +280,20 @@
     live();
     startTimer();
 
-    if (introPending && 'IntersectionObserver' in window) {
-      introObserver = new IntersectionObserver(entries => {
-        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.1)) {
-          introduceClock();
-        }
-      }, { threshold: 0.1 });
-      introObserver.observe(orbit);
-    } else if (introPending) {
-      reset(false);
+    // The preview starts once half the dial is in view (on phones the clipped dial shows about two
+    // thirds at most). Not the empty .orbit: base.css hides div:empty, so it never intersects.
+    // Without an observer only the pulse runs.
+    if (!explored) {
+      if ('IntersectionObserver' in window) {
+        previewObserver = new IntersectionObserver(entries => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          stopPreview();
+          setTimeout(previewSwing, 300);
+        }, { threshold: 0.5 });
+        previewObserver.observe(orbit.parentElement);
+      } else {
+        sectionEl.classList.add('is-inviting');
+      }
     }
   }
 
