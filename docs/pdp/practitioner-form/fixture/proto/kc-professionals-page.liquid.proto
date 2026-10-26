@@ -1,0 +1,22 @@
+{%- comment -%}
+  PROTOTYPE for the phase 1 preview only (docs/pdp/practitioner-form/PROFESSIONALS-V1-PROPOSAL.md).
+  Not a theme file: phase 2 turns it into sections/kc-professionals-request.liquid.
+
+  Professionals page v1: the legal-page column (720px, as sections/kc-withdrawal.liquid) with the
+  page title as the H1 and the existing request form under it, inline. The form is the unchanged
+  snippet; it gets this section's settings as `s`, so every request_* key keeps its name. No
+  trigger link is passed, so the script leaves the form inline (no dialog).
+{%- endcomment -%}
+<link href="proto/kc-professionals-page.css?v={{ stamp }}" rel="stylesheet" type="text/css" media="all" />
+{%- assign s = section.settings -%}
+<div class="kc-professionals section-{{ section.id }} kc-surface" data-kc-surface="page">
+  <div class="kc-professionals__inner">
+    <header class="kc-professionals__head">
+      {%- if s.eyebrow != blank -%}
+        <p class="kc-professionals__eyebrow subtitle-item opacity-xl">{{ s.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="kc-professionals__heading h1">{{ page.title | escape }}</h1>
+    </header>
+    {%- render 'kc-practitioner-request', s: s, trigger_url: '', trigger_text: '' -%}
+  </div>
+</div>
