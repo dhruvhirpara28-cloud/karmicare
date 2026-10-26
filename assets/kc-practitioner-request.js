@@ -1,12 +1,17 @@
 /* kc-practitioner-request.js: the practitioner request form in the PDP FAQ
    (snippets/kc-practitioner-request.liquid, R76; popup R76b; fallback R76c).
 
-   - Finds the trigger link in the answer text of the FAQ item that holds the form (href contains
-     data-trigger-url, else text contains data-trigger-text) and swaps it for a button with the same
-     content. The form panel moves into a modal <dialog> on body (a dialog inside a closed <details>
-     would not render), which that button opens. No link found, or no showModal(): the form stays
-     inline, as without JavaScript. If showModal() throws when it is called, the panel, the link
-     and the inline form come back in the FAQ item and the page is not locked.
+   - Finds the trigger links in the FAQ (answers and section content of every item, so also the
+     "For dentists" note; href contains data-trigger-url, else text contains data-trigger-text) and
+     swaps each for a button with the same content and classes. The form panel moves into a modal
+     <dialog> on body (a dialog inside a closed <details> would not render), which every button
+     opens; contact[Opened from] gets the FAQ question above the button used. Links elsewhere with
+     data-kc-pr-open (the Trusted Professionals button, sections/trusted-professionals.liquid) open
+     it too, with their data-kc-pr-from; arriving with #KcPractitionerRequest-panel (that button on
+     the homepage links to the product so) opens it on load. No link found, or no
+     showModal(): the form stays inline, as without JavaScript. If showModal() throws when it is
+     called, the panel, the links and the inline form come back in the FAQ item and the page is
+     not locked.
    - The dialog, as the professionals quote panel: showModal, scrim, close button, Escape and a
      click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
      (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
@@ -35,6 +40,8 @@
   var KLAVIYO_REVISION = '2026-10-15';
   var KLAVIYO_METRIC = 'Practitioner Request Submitted';
   var KLAVIYO_TIMEOUT = 8000;
+  /* ?from= on a link to the form: a fixed list, so no free text reaches the inbox */
+  var FROM = { 'home-trusted': 'Homepage: Trusted Professionals button' };
 
   function store(action, value) {
     try {
@@ -47,25 +54,35 @@
     return null;
   }
 
-  function findTrigger(root) {
-    var item = root.closest('.kc-faq-item');
-    var answer = item && item.querySelector('.kc-faq-description');
-    if (!answer) return null;
-    var links = Array.prototype.slice.call(answer.querySelectorAll('a'));
+  /* Every trigger link in the FAQ: the answers and the section content of all items (the kPNI
+     answer, the "For dentists" note), by URL first, else by text. They all open the one form. */
+  function findTriggers(root) {
+    var faq = root.closest('.kc-faq-block') || root.closest('.kc-faq-item');
+    if (!faq) return [];
+    var links = Array.prototype.slice.call(
+      faq.querySelectorAll('.kc-faq-description a, .kc-faq-section-content a')
+    );
     var url = root.getAttribute('data-trigger-url') || '';
     var text = (root.getAttribute('data-trigger-text') || '').toLowerCase();
-    var found = null;
+    var found = [];
     if (url) {
       found = links.filter(function (a) {
         return (a.getAttribute('href') || '').indexOf(url) !== -1;
-      })[0];
+      });
     }
-    if (!found && text) {
+    if (!found.length && text) {
       found = links.filter(function (a) {
         return a.textContent.toLowerCase().indexOf(text) !== -1;
-      })[0];
+      });
     }
-    return found || null;
+    return found;
+  }
+
+  /* The FAQ question above a trigger, for "Opened from" in the inbox and in Klaviyo */
+  function itemTitle(el) {
+    var item = el && el.closest('.kc-faq-item');
+    var summary = item && item.querySelector('.kc-faq-summary');
+    return summary ? summary.textContent.trim() : '';
   }
 
   function init(root) {
@@ -73,27 +90,63 @@
     if (!form) return;
     var state = root.querySelector('[data-kc-pr-state]');
     var stateName = state ? state.getAttribute('data-kc-pr-state') : '';
-    var link = findTrigger(root);
+    var links = findTriggers(root);
+    /* links elsewhere on the page that open the form too (the Trusted Professionals button); they
+       stay links to #KcPractitionerRequest-panel, so without the popup they still reach the form */
+    var openers = Array.prototype.slice.call(document.querySelectorAll('a[data-kc-pr-open]'));
     var dialog = null;
+    var buttons = [];
+    /* every control that can open the dialog, for the snapshot after a post */
+    var all = [];
+    /* the button the visitor opened the form with; focus returns there */
     var button = null;
     var home = null;
+    var openedFrom = form.querySelector('input[type=hidden][name="contact[Opened from]"]');
+    var pending = stateName ? store('get') : null;
 
-    if (link && typeof document.createElement('dialog').showModal === 'function') {
-      button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'kc-pr-trigger';
-      button.innerHTML = link.innerHTML;
+    if (links.length && typeof document.createElement('dialog').showModal === 'function') {
       /* marks the panel's place in the FAQ item, for the inline fallback */
       home = document.createComment('kc-practitioner-request');
       root.parentNode.insertBefore(home, root);
       dialog = buildDialog(root, stateName, afterClose);
-      button.setAttribute('aria-haspopup', 'dialog');
-      button.setAttribute('aria-controls', dialog.id);
-      link.replaceWith(button);
-      button.addEventListener('click', function () {
-        show(null);
+      buttons = links.map(function (link) {
+        var trigger = document.createElement('button');
+        trigger.type = 'button';
+        /* the link's own classes keep its look (the dentists note styles .rda-link) */
+        trigger.className = (link.className ? link.className + ' ' : '') + 'kc-pr-trigger';
+        trigger.innerHTML = link.innerHTML;
+        trigger.setAttribute('aria-haspopup', 'dialog');
+        trigger.setAttribute('aria-controls', dialog.id);
+        link.replaceWith(trigger);
+        trigger.addEventListener('click', function () {
+          use(trigger);
+          show(null);
+        });
+        return trigger;
       });
+      openers.forEach(function (opener) {
+        opener.setAttribute('aria-haspopup', 'dialog');
+        opener.setAttribute('aria-controls', dialog.id);
+        opener.addEventListener('click', function (event) {
+          event.preventDefault();
+          use(opener);
+          show(null);
+        });
+      });
+      all = buttons.concat(openers);
+      /* after a post: the control the request was opened with, and its item open behind */
+      var before = pending && all[pending.opener];
+      use(before || buttons[0]);
+      if (before) {
+        var beforeItem = before.closest('.kc-faq-item');
+        if (beforeItem) beforeItem.open = true;
+      }
       dialog.addEventListener('close', afterClose);
+    }
+
+    function use(trigger) {
+      button = trigger;
+      if (openedFrom) openedFrom.value = trigger.getAttribute('data-kc-pr-from') || itemTitle(trigger);
     }
 
     /* Opens the dialog and focuses the target: the thank-you or the alert after a reload, else the
@@ -125,11 +178,15 @@
     function backInline() {
       home.parentNode.insertBefore(root, home);
       home.remove();
-      button.replaceWith(link);
+      buttons.forEach(function (trigger, i) {
+        trigger.replaceWith(links[i]);
+      });
       dialog.removeEventListener('close', afterClose);
       dialog.remove();
       dialog = null;
+      buttons = [];
       button = null;
+      if (openedFrom) openedFrom.value = '';
       var item = root.closest('.kc-faq-item');
       if (item) item.open = true;
     }
@@ -139,7 +196,20 @@
     function afterClose() {
       if (!button || !document.body.classList.contains('overflow-hidden')) return;
       document.body.classList.remove('overflow-hidden');
-      button.focus();
+      /* the Trusted Professionals button may be hidden at this width (it is mobile-only on the
+         PDP): then the first visible FAQ link takes focus, without moving the page; with none
+         visible, focus leaves the closed dialog instead of staying in it */
+      var target = [button].concat(buttons).filter(shown)[0];
+      if (target) target.focus(target === button ? undefined : { preventScroll: true });
+      if (dialog && dialog.contains(document.activeElement)) document.activeElement.blur();
+    }
+
+    /* can take focus: not hidden by display, nor inside a closed <details> (whose content still
+       has boxes, so getClientRects alone says yes) */
+    function shown(el) {
+      if (typeof el.checkVisibility === 'function') return el.checkVisibility();
+      var item = el.closest('details');
+      return el.getClientRects().length > 0 && !(item && !item.open && !el.closest('summary'));
     }
 
     if (stateName === 'success') {
@@ -318,6 +388,8 @@
       /* for the Klaviyo event on the thank-you reload: the profession as the visitor read it */
       snapshot.profession_label = chosen ? chosen.parentNode.textContent.trim() : '';
       snapshot.email = fields.email ? fields.email.value.trim() : '';
+      snapshot.opener = all.indexOf(button);
+      snapshot.opened_from = openedFrom ? openedFrom.value : '';
       snapshot.language = hiddenValue(form, 'Language');
       snapshot.page = hiddenValue(form, 'Page');
       snapshot.at = new Date().toISOString();
@@ -326,7 +398,21 @@
     });
 
     /* last, so the checks above are in place whatever happens when the dialog opens */
-    if (stateName === 'error') show(state);
+    if (stateName === 'error') {
+      show(state);
+    } else if (!stateName && dialog && window.location.hash === '#' + root.id) {
+      /* arriving through a link to the form (the homepage's Trusted Professionals button): open
+         it, say where the visitor came from, and drop the hash so a reload does not reopen it */
+      use(openers[0] || buttons[0]);
+      var from = FROM[new URLSearchParams(window.location.search).get('from')];
+      if (from && openedFrom) openedFrom.value = from;
+      try {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      } catch (e) {
+        /* no history API: the hash stays */
+      }
+      show(null);
+    }
   }
 
   function hiddenValue(form, key) {
@@ -368,6 +454,7 @@
             message: saved.body || '',
             language: saved.language || '',
             page: saved.page || '',
+            opened_from: saved.opened_from || '',
           },
           time: saved.at,
           unique_id: saved.id || uid(),

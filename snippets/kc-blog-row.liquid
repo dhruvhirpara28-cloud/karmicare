@@ -1,0 +1,42 @@
+{%- comment -%}
+  One article as a row: thumbnail, date and reading time, title, excerpt, arrow. Used by Keep reading
+  (sections/main-article.liquid) and the blog index (sections/main-blog.liquid). Styles: assets/kc-blog.css.
+
+  Accepts:
+  - article: {Object} The article
+  - heading: {String} 'h2' or 'h3' (default 'h3')
+  - show_excerpt: {Boolean} Show the article's excerpt (default true)
+  - lazy: {Boolean} Lazy-load the thumbnail (default true)
+{%- endcomment -%}
+{%- liquid
+  assign kc_heading = heading | default: 'h3'
+  assign kc_words = article.content | replace: '>', '> ' | strip_html | split: ' ' | size
+  assign kc_minutes = kc_words | divided_by: 200.0 | ceil | at_least: 1
+  assign kc_loading = 'lazy'
+  if lazy == false
+    assign kc_loading = 'eager'
+  endif
+-%}
+<li class="kc-blog-row">
+  <a class="kc-blog-row__link{% if article.image == blank %} kc-blog-row__link--no-thumb{% endif %}" href="{{ article.url }}">
+    {%- if article.image -%}
+      <div class="kc-blog-row__thumb">
+        {%- comment -%} The title next to it names the article, so the thumbnail is decorative {%- endcomment -%}
+        {{- article.image | image_url: width: 480 | image_tag: widths: '200, 320, 480', sizes: '(min-width: 750px) 160px, 96px', loading: kc_loading, alt: '' -}}
+      </div>
+    {%- endif -%}
+    <div class="kc-blog-row__text">
+      <ul class="kc-blog__meta" role="list">
+        <li>{{ article.published_at | time_tag: format: 'date' }}</li>
+        <li>{{ 'blogs.article.reading_time' | t: minutes: kc_minutes }}</li>
+      </ul>
+      <{{ kc_heading }} class="kc-blog-row__title">{{ article.title | escape }}</{{ kc_heading }}>
+      {%- if show_excerpt != false and article.excerpt != blank -%}
+        <p class="kc-blog-row__excerpt">{{ article.excerpt | strip_html | escape }}</p>
+      {%- endif -%}
+    </div>
+    <span class="kc-blog-row__arrow" aria-hidden="true">
+      <svg focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</li>

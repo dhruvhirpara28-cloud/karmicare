@@ -1,0 +1,764 @@
+/* kc-blog.css: the blog's article page and index (sections/main-article.liquid, sections/main-blog.liquid,
+   snippets/kc-blog-row.liquid). Direction D of docs/blog/02-PROPOSAL.md, approved by Victor on 26 Oct:
+   the layout of the reference article he gave (openai.com/index/scaling-storage-one-billion-users-part-two)
+   in our tokens, with the legal pages' contents menu, wide pictures, the homepage eyebrow, Keep reading
+   with thumbnails and the homepage end CTA after it (that section brings its own CSS).
+
+   Everything is scoped to .kc-blog, so nothing outside the blog changes. Colours, type, spacing and font
+   families read assets/kc-tokens.css; Day and Night follow body.day-mode / body.night-mode. Type follows
+   docs/blog/03-TYPE-AUDIT.md as Victor decided it (T1 body-md, T2 h3 section headings, T3 token line
+   heights for title and headings and 1.6 for running text, T4 the line height on p/li). A px or rem
+   literal says why in a comment. */
+
+.kc-blog {
+  --kc-blog-measure: 68rem; /* the legal pages' text column (kc-policy-page.css, legal-toc-section) */
+  --kc-blog-gutter: var(--kc-responsive-spacing-page-gutter);
+  /* Running text line height: the reference's long-form 1.6. No token has it yet; Victor asked for it to
+     be added to the KC library (02-PROPOSAL D22, T3), then this literal becomes that token. */
+  --kc-blog-long-line-height: 1.6;
+  /* Secondary text (date, reading time, publisher, list markers): the caption token (D23) */
+  --kc-blog-soft-text: var(--kc-mapped-text-default-caption);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-use-body);
+}
+
+.kc-blog__wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--kc-blog-measure) + 2 * var(--kc-blog-gutter));
+  margin-inline: auto;
+  padding-inline: var(--kc-blog-gutter);
+}
+
+/* ---- Header (page -> accent): eyebrow, title, standfirst, the rule with date, reading time, Share ---- */
+.kc-blog__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-layout-xl);
+  text-align: center;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+/* The eyebrow is the homepage's section eyebrow (.kc-caption-subheading .subtitle-item); only the link look */
+a.kc-blog__eyebrow {
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+a.kc-blog__eyebrow:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.kc-blog__title {
+  max-width: 80rem; /* the reference's title box */
+  margin: 0 auto;
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h1-text-size);
+  line-height: var(--kc-responsive-h1-line-height);
+  letter-spacing: var(--kc-responsive-h1-letter-spacing);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+  text-wrap: balance;
+}
+
+.kc-blog__standfirst {
+  max-width: 56rem; /* two or three lines under the title, as the reference */
+  margin: var(--kc-responsive-spacing-layout-lg) auto 0;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-blog-long-line-height);
+  color: var(--kc-mapped-text-default-body);
+  text-wrap: pretty;
+}
+
+.kc-blog__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+  max-width: var(--kc-blog-measure);
+  margin: var(--kc-responsive-spacing-layout-2xl) auto 0;
+  padding-top: var(--kc-responsive-spacing-layout-md);
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+  text-align: start;
+}
+
+.kc-blog__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--kc-responsive-spacing-layout-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-blog-soft-text);
+}
+
+.kc-blog__meta > li + li::before {
+  content: '·' / '';
+  margin-inline-end: var(--kc-responsive-spacing-layout-xs);
+}
+
+/* Share: Dawn's share button (snippets/share-button.liquid: the device's share sheet, or a copy-link
+   field), set in the bar's type and colour */
+.kc-blog__share-wrap {
+  margin: 0;
+  padding: 0;
+}
+
+.kc-blog__share-wrap .share-button__button {
+  min-height: var(--kc-responsive-size-control-min-height);
+  font-family: var(--kc-font-use-ui);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+/* The copy-link field opens under the button, aligned to its right edge, so it stays on screen */
+.kc-blog__share-wrap .share-button__fallback {
+  left: auto;
+  right: 0;
+}
+
+.kc-blog__share-wrap .share-button__button:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* ---- Featured picture: a wide 16:9 frame, never wider than the file ----------------------------- */
+.kc-blog__figure {
+  margin: 0;
+  padding-block: var(--kc-responsive-spacing-layout-xl) 0;
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+.kc-blog__media {
+  display: block;
+  overflow: hidden;
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+.kc-blog__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kc-blog__figure .kc-blog__media {
+  max-width: min(100%, 128rem, var(--kc-media-natural-width, 128rem)); /* the reference's wide figure */
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+}
+
+/* ---- Body (accent -> page) and the legal pages' grid -------------------------------------------
+   A 1416px page width with 20px sides, the sidebar, 16px, then the 680px text (legal-toc-section).
+   --kc-blog-colstart is where the text starts from the left edge of the page; wide pictures use it to
+   centre themselves on the page. Widths are in cqw of .kc-blog__main (a size container), so they are
+   the page's width without a scrollbar, where 100vw would include it. */
+.kc-blog__main,
+.kc-blog-related {
+  --kc-blog-pad: 2rem; /* the legal page-width's side padding */
+  --kc-blog-side: 0px;
+  --kc-blog-gap: 0px;
+  --kc-blog-colstart: var(--kc-blog-gutter);
+  --kc-blog-wide: 100cqw;
+}
+
+.kc-blog__main {
+  padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-xs);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
+  container-type: inline-size;
+}
+
+.kc-blog__layout {
+  box-sizing: border-box;
+  max-width: 141.6rem; /* the legal page-width */
+  margin-inline: auto;
+  padding-inline: var(--kc-blog-gutter);
+}
+
+.kc-blog__text {
+  min-width: 0;
+  max-width: var(--kc-blog-measure);
+}
+
+/* ---- The article body ------------------------------------------------------------------------
+   The 2024 articles carry editor inline styles (font sizes, link colours #004aad / #333399, a margin
+   on every line, a 90% div). Inline styles beat any rule, so the properties they set are reset here
+   with !important, inside .kc-blog__body only (docs/blog/01-INVENTORY.md §4). */
+.kc-blog__body {
+  --kc-blog-para: var(--kc-responsive-spacing-layout-lg);
+  font-size: var(--kc-responsive-body-md-text-size); /* T1: 16 / 18 */
+  line-height: var(--kc-blog-long-line-height);
+  color: var(--kc-mapped-text-default-body);
+  overflow-wrap: break-word;
+}
+
+/* T4: base.css sets p and li to line-height: normal; the running text takes the body's */
+.kc-blog__body :is(p, li, blockquote) {
+  line-height: inherit;
+}
+
+.kc-blog__body [style] {
+  font-family: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+}
+
+.kc-blog__body :is(p, li, ul, ol, div, span, a, strong, b, em, i)[style] {
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+.kc-blog__body div[style] {
+  width: auto !important;
+}
+
+.kc-blog__body span[style] {
+  font-weight: inherit !important;
+}
+
+/* :where() keeps this reset at 0,1,0: !important already beats the inline styles, and the picture
+   breakout below (p:has(img), 0,1,2) must win its margins (R90 B1) */
+.kc-blog__body :where(p, ul, ol, blockquote, table, div[style]) {
+  margin: 0 0 var(--kc-blog-para) !important;
+}
+
+.kc-blog__body > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.kc-blog__body p:empty {
+  display: none;
+}
+
+/* Headings: sections/main-article.liquid moves an h1-based body down one level (R90 B3), so h2 is a
+   section and h3 to h6 are subsections (the wellness article's h5 too). Sections: the h3 token (T2),
+   subsections: h5, both with their token line height (T3). They fill the line (only the title is
+   balanced), as on the reference. */
+.kc-blog__body :is(h1, h2, h3, h4, h5, h6) {
+  margin: var(--kc-responsive-spacing-layout-3xl) 0 var(--kc-responsive-spacing-layout-lg) !important;
+  font-family: var(--kc-font-use-heading) !important;
+  font-weight: var(--font-500-weight) !important;
+  color: var(--kc-mapped-text-default-heading) !important;
+  text-wrap: pretty;
+}
+
+.kc-blog__body :is(h1, h2) {
+  font-size: var(--kc-responsive-h3-text-size) !important;
+  line-height: var(--kc-responsive-h3-line-height) !important;
+  letter-spacing: var(--kc-responsive-h3-letter-spacing) !important;
+}
+
+.kc-blog__body :is(h3, h4, h5, h6) {
+  font-size: var(--kc-responsive-h5-text-size) !important;
+  line-height: var(--kc-responsive-h5-line-height) !important;
+  letter-spacing: 0 !important;
+}
+
+.kc-blog__body > :is(h1, h2, h3, h4, h5, h6):first-child,
+.kc-blog__body :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0 !important;
+}
+
+.kc-blog__body :is(strong, b) {
+  font-weight: var(--font-600-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog__body a {
+  color: var(--kc-mapped-text-default-heading) !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Hover keeps the text colour and thickens the underline in the accent: link-default-hover (#7fb9ff)
+   is 2:1 on Day's cream, below 4.5:1 for text (02-PROPOSAL §2a) */
+.kc-blog__body a:hover {
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+}
+
+.kc-blog__body [tabindex='-1']:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.kc-blog a:focus-visible,
+.kc-blog__body [tabindex='-1']:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.kc-blog__body :is(ul, ol) {
+  padding-inline-start: 2.2rem !important; /* the legal page's list indent */
+}
+
+.kc-blog__body li {
+  margin: 0 !important;
+}
+
+.kc-blog__body li + li {
+  margin-top: var(--kc-responsive-spacing-layout-xs) !important;
+}
+
+.kc-blog__body li::marker {
+  color: var(--kc-blog-soft-text);
+}
+
+/* Dawn's base.css makes .rte blockquote inline-flex (its paragraphs sit side by side) and italic; here a
+   quote is a block with an accent rule, upright: the rule marks it, not the slant */
+.kc-blog__body blockquote {
+  display: block;
+  margin-inline: 0 !important;
+  padding: 0 0 0 var(--kc-responsive-spacing-layout-lg);
+  border-inline-start: var(--kc-shape-stroke-thick) solid var(--kc-mapped-surface-accent-default);
+  font-style: normal;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog__body blockquote :is(i, em) {
+  font-style: normal;
+}
+
+.kc-blog__body blockquote > :last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Tables scroll inside their own box on phones; the page never scrolls sideways */
+.kc-blog__body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+}
+
+.kc-blog__body :is(th, td) {
+  min-width: 12rem; /* a column never collapses to one word per line */
+  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-sm) 0;
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+  text-align: start;
+  vertical-align: top;
+}
+
+.kc-blog__body th {
+  color: var(--kc-mapped-text-default-heading);
+  font-weight: var(--font-600-weight);
+  border-bottom-color: var(--kc-mapped-border-primary-rule);
+}
+
+/* Body pictures: as wide as the reference's interactive figure (1280px), centred on the page whatever
+   the sidebar does; edge to edge on phones. Every picture in the articles sits alone in its paragraph
+   (docs/blog/fixture/tools/image_paras.py): a picture written in a paragraph with text would take the
+   text along, so pictures go in a paragraph of their own. The width and height that image_tag prints
+   reserve the space before the file loads (R90 B2); a picture is never wider than its file (N1). */
+/* No width here: the width attribute sets it (a file is never stretched, N1) and max-width caps it at
+   the frame; with height: auto the browser takes the ratio from width/height before the file loads.
+   width: auto would drop the attribute and size the box only once the file is in. */
+.kc-blog__body img {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  margin: 0 auto;
+}
+
+/* Embeds (N1): a video or map keeps its ratio and never runs past the column */
+.kc-blog__body :is(iframe, video, embed, object) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.kc-blog__body p:has(img) {
+  width: var(--kc-blog-wide);
+  max-width: none;
+  margin-block: var(--kc-responsive-spacing-layout-3xl) !important;
+  margin-inline: calc((100cqw - var(--kc-blog-wide)) / 2 - var(--kc-blog-colstart)) 0 !important;
+}
+
+/* ---- Sources: the study links the body already has, as a research card ------------------------- */
+.kc-blog__end {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-3xl);
+  margin-top: var(--kc-responsive-spacing-layout-3xl);
+}
+
+.kc-blog-sources {
+  position: relative;
+  padding: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-layout-lg);
+  border-radius: var(--kc-shape-radius-lg);
+  background: var(--kc-mapped-surface-page-secondary);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-sources::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.kc-blog-sources__heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xs);
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  font-weight: var(--font-500-weight);
+}
+
+.kc-blog-sources__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-sources__item {
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-sources__link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem var(--kc-responsive-spacing-layout-md);
+  align-items: center;
+  padding-block: var(--kc-responsive-spacing-layout-md);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+.kc-blog-sources__title {
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+}
+
+.kc-blog-sources__title::first-letter {
+  text-transform: uppercase;
+}
+
+.kc-blog-sources__host {
+  grid-column: 1;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-blog-soft-text);
+}
+
+.kc-blog-sources__link .svg-wrapper,
+.kc-blog-sources__link > svg {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.kc-blog-sources__link:hover .kc-blog-sources__title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
+}
+
+/* ---- Contents: the legal pages' menu (legal-toc-section.liquid) ----------------------------------
+   Phones (640px and below, as the legal page): "On this page" and a two-column list above the text.
+   Wider: a sticky sidebar left of the text. The eyebrow and links carry the theme's .subtitle-item and
+   .opacity-xl, as the legal links do. The section being read: full colour, 2px rule. While a wide
+   picture passes the sidebar, it hides (.is-covered, assets/kc-blog-contents.js). */
+.kc-blog__toc {
+  margin: 0 0 var(--kc-responsive-spacing-layout-3xl);
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.kc-blog-toc__eyebrow {
+  display: block;
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: 1.2rem; /* the legal eyebrow on phones */
+}
+
+.kc-blog-toc__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 var(--kc-responsive-spacing-layout-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-blog-toc__link {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 1.6rem 0 1.6rem 1.2rem; /* the legal links on phones */
+  border-left: var(--kc-shape-stroke-thin) solid;
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kc-blog-toc__link:hover,
+.kc-blog-toc__link[aria-current='true'] {
+  opacity: 1;
+}
+
+.kc-blog-toc__link[aria-current='true'] {
+  box-shadow: inset 1px 0 0 currentColor;
+}
+
+.kc-blog__toc.is-covered {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Until the script has filled the list (or without JavaScript) the menu takes no room */
+.kc-blog__toc:not(:has(li)) {
+  display: none;
+}
+
+/* ---- Keep reading and the index: rows with a thumbnail ------------------------------------------ */
+.kc-blog-related {
+  padding-block: var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog__section-heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xl);
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h3-text-size);
+  line-height: var(--kc-responsive-h3-line-height);
+  letter-spacing: var(--kc-responsive-h3-letter-spacing);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+}
+
+.kc-blog-row {
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-row__link {
+  display: grid;
+  grid-template-columns: 9.6rem minmax(0, 1fr) auto; /* thumbnail 96px on phones */
+  gap: var(--kc-responsive-spacing-layout-lg);
+  align-items: center;
+  padding-block: var(--kc-responsive-spacing-layout-lg);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+.kc-blog-row__link--no-thumb {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.kc-blog-row__thumb {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--kc-shape-radius-md);
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+.kc-blog-row__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.kc-blog-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  min-width: 0;
+}
+
+.kc-blog-row__title {
+  margin: 0;
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-weight: var(--font-500-weight);
+  text-wrap: balance;
+}
+
+.kc-blog-row__excerpt {
+  margin: 0;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  color: var(--kc-mapped-text-default-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.kc-blog-row__arrow {
+  display: flex;
+  color: var(--kc-mapped-icon-primary-default-subtle);
+  transition: transform 0.2s ease;
+}
+
+.kc-blog-row__link:hover .kc-blog-row__title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
+}
+
+.kc-blog-row__link:hover .kc-blog-row__thumb img {
+  transform: scale(1.04);
+}
+
+.kc-blog-row__link:hover .kc-blog-row__arrow {
+  transform: translateX(0.4rem);
+}
+
+.kc-blog-index__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl);
+  text-align: center;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-index__list {
+  padding-block: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}
+
+.kc-blog-index__list .pagination-wrapper {
+  margin-top: var(--kc-responsive-spacing-layout-2xl);
+}
+
+/* ---- From 641px: the legal sidebar grid ------------------------------------------------------- */
+@media screen and (min-width: 641px) {
+  .kc-blog__main,
+  .kc-blog-related {
+    --kc-blog-side: 25rem; /* the legal sidebar below 990px */
+    --kc-blog-gap: 1.6rem; /* the legal column gap */
+    --kc-blog-colstart: calc(max(var(--kc-blog-pad), (100cqw - 141.6rem) / 2 + var(--kc-blog-pad)) + var(--kc-blog-side) + var(--kc-blog-gap));
+    --kc-blog-wide: min(128rem, 100cqw - 2 * var(--kc-blog-gutter)); /* the reference's wide figure */
+  }
+
+  .kc-blog__layout {
+    display: grid;
+    grid-template-columns: var(--kc-blog-side) minmax(0, 1fr);
+    column-gap: var(--kc-blog-gap);
+    align-items: start;
+    padding-inline: var(--kc-blog-pad);
+  }
+
+  /* Fixed columns: the text keeps its place when there is no contents menu (short articles, Keep
+     reading), and Dawn hides an empty placeholder div (base.css div:empty) */
+  .kc-blog__text {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .kc-blog__toc {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--kc-navigation-clearance) + 2.8rem); /* the legal sidebar sits 100px from the top */
+    max-height: calc(100vh - var(--kc-navigation-clearance) - 5.6rem);
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .kc-blog-toc__eyebrow {
+    margin-bottom: 2.4rem; /* the legal eyebrow */
+    font-size: var(--font-body-small-size);
+    line-height: normal;
+  }
+
+  .kc-blog-toc__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kc-blog-toc__link {
+    display: block;
+    height: auto;
+    padding: 0.8rem 0 0.8rem 1.6rem; /* the legal links */
+  }
+
+  .kc-blog__figure {
+    padding-inline: var(--kc-blog-gutter);
+  }
+
+  .kc-blog__figure .kc-blog__media,
+  .kc-blog__body p:has(img) img {
+    border-radius: var(--kc-shape-radius-md);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .kc-blog-row__link {
+    grid-template-columns: 16rem minmax(0, 1fr) auto; /* thumbnail 160px */
+  }
+
+  .kc-blog-row__link--no-thumb {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .kc-blog-row__thumb {
+    aspect-ratio: 16 / 9;
+  }
+
+  .kc-blog-sources {
+    padding: var(--kc-responsive-spacing-layout-xl);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .kc-blog__main,
+  .kc-blog-related {
+    --kc-blog-side: 33.2rem; /* the legal sidebar from 990px: at 1440 the text starts at 380px */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-blog *,
+  .kc-blog *::before,
+  .kc-blog *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---- Print: dark ink on white, no gradients, no menu (as kc-policy-page.css) --------------------- */
+@media print {
+  .kc-blog__head,
+  .kc-blog__figure,
+  .kc-blog__main,
+  .kc-blog-related {
+    background: none;
+  }
+
+  .kc-blog__toc,
+  .kc-blog__share-wrap {
+    display: none;
+  }
+
+  .kc-blog,
+  .kc-blog * {
+    color: var(--kc-brand-original-dark-blue) !important;
+  }
+}
