@@ -321,10 +321,11 @@ def d_article(handle):
         fig = (f'<figure class="kc-blog-d__figure" data-kc-featured>'
                f'{picture(a["image"], "(min-width: 1344px) 1280px, (min-width: 750px) calc(100vw - 64px), 100vw", widths=(550, 750, 1100, 1500, 1920), lazy=False, cap=True)}</figure>')
     standfirst = f'<p class="kc-blog__standfirst">{esc(excerpts.get(handle))}</p>' if excerpts.get(handle) else ""
-    toc = (f'<div class="kc-blog-d__toc" data-kc-blog-contents-box><details class="kc-blog-d-toc">'
-           f'<summary><span data-kc-blog-toc-current>{T["on_this_page"]}</span>{CHEVRON}</summary>'
-           f'<nav aria-label="{T["on_this_page"]}"><ol class="kc-blog-d-toc__list" role="list" data-kc-blog-contents></ol></nav>'
-           f'</details></div>')
+    # the legal pages' menu (sections/legal-toc-section.liquid), with its theme classes
+    toc = (f'<aside class="kc-blog-d__toc" data-kc-blog-contents-box>'
+           f'<p class="kc-blog-d-toc__eyebrow subtitle-item opacity-xl" aria-hidden="true">{T["on_this_page"]}</p>'
+           f'<nav aria-label="{T["on_this_page"]}"><ul class="kc-blog-d-toc__list" role="list" data-kc-blog-contents></ul></nav>'
+           f'</aside>')
     s1 = (f'<article class="kc-blog kc-blog-d">'
           f'<header class="kc-blog-d__head"><div class="kc-blog__wrap kc-blog__wrap--wide">'
           f'<p class="kc-blog-d__kicker"><time datetime="{a["published_at"]}">{date_label(a["published_at"])}</time>'

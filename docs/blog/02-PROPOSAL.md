@@ -90,6 +90,19 @@ Victor: "design the exact layout of this blog for ours while staying in our bran
 | End | related articles | **Sources** card (the studies the body links to), then the **homepage end CTA**: the `featured-product` section exactly as the homepage prints it ("Your welcome kit includes", the Loop plan picker, "Begin your 60-Day Rhythm", the three promises). Then **Keep reading** as before, with thumbnails |
 | Index | — | the same rows as Keep reading (thumbnail, date · reading time, title, excerpt), under a centred "News" |
 
+**Round 2 (Victor, 26 Oct): "use our table of content layout from legal pages", "images should have the width like the interaction section from openAI … the table of content disappears while it's on that large section".**
+- **Contents = the legal pages' menu**, `sections/legal-toc-section.liquid`:
+  - the same grid: a 1416 px page width with 20 px sides, a 250 px sidebar below 990 px and 332 px from 990 px, 16 px, then the text. At 1440 the text starts at 380 px, exactly as on the legal pages;
+  - "On this page" and the links in the theme's own `.subtitle-item` and `.opacity-xl` (Nunito, uppercase, as on the legal pages);
+  - a 1 px rule left of each link; the section being read in full colour with the 2 px rule;
+  - sticky 100 px from the top;
+  - top-level sections only, then "Sources";
+  - at 640 px and below, the legal two-column list above the text.
+
+  This replaces the reference's contents list and the phone bar (`d-article-body-1440-day.png`, `d-article-toc-390-day.png`).
+- **Body pictures as wide as the reference's interactive figure:** 1280 px, centred on the page whatever the sidebar does (80 px from each edge at 1440), corners `radius-md`, edge to edge on phones. While a wide picture passes the sticky sidebar, the sidebar fades out and comes back after it (`d-article-image-1440-day.png`, `d-article-image-1100-day.png`).
+- **Fonts: none changed.** Measured on the fixture and the live article (`fixture/tools/probe-fonts.js`). Both load the same Proxima Nova (kit `kss0igj`, 400/500/600) and Nunito Bold. The blog sets text in Proxima Nova like the site: title 52 px, body 18 px (live 16 px), body headings 28 px (live 44 px, Dawn's h2). The contents labels and the end CTA button are Nunito uppercase, as on the legal pages and the homepage. The only label style that differs from the site is the date row above the title: Proxima sentence case, 14 px, where the live article prints a 10 px uppercase date (D2).
+
 **Screens:** `d-article-top-{390,750,1100,1440}-{day,night}.png`, `d-article-body-1440-day.png` (contents in the margin), `d-article-body-390-day.png` (the phone bar), `d-article-image-*.png`, `d-article-cta-1440-day.png` (homepage end CTA), `d-article-related-*.png`, `d-article-short-1440-day.png` (a wide 16:9 featured picture, no contents with two sections), `d-blog-top-*.png`.
 
 **In the fixture the end CTA is static.** The live scripts are removed, so the Loop plan picker shows its Liquid state and the button does nothing. In Phase 2 it is the real section with its scripts. One theme change goes with it: `layout/theme.liquid` prints Loop's widget styles only on product, index and collection templates, so `article` joins that condition (D21; the Loop widget files themselves stay untouched).
