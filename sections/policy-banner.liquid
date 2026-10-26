@@ -70,7 +70,6 @@
 
   .section-{{ section.id }} .consumer-rights__card-bottom {
     font-size: var(--font-body-medium-size-desktop);
-    opacity: 0.68;
   }
 
   /* A card with a link: the description is the link, the whole card its hit area */
@@ -110,18 +109,10 @@
   {%- endif -%}
 
   {%- if section.settings.text_color_day != blank -%}
+    /* Every text in the section at full colour, the company line included (Victor, 26 Oct:
+       body text is never translucent; it was 68%, with the links kept full on top) */
     body:not(.night-mode) .section-{{ section.id }} *,
     body.day-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_day }};
-    }
-
-    body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner p,
-    body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner p {
-      color: rgb(from {{ section.settings.text_color_day }} r g b / 68%);
-    }
-
-    body:not(.night-mode) .section-{{ section.id }} .consumer-rights__company-info-inner a,
-    body.day-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
       color: {{ section.settings.text_color_day }};
     }
   {%- endif -%}
@@ -135,14 +126,6 @@
 
   {%- if section.settings.text_color_night != blank -%}
     body.night-mode .section-{{ section.id }} * {
-      color: {{ section.settings.text_color_night }};
-    }
-
-    body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner p {
-      color: rgb(from {{ section.settings.text_color_night }} r g b / 68%);
-    }
-
-    body.night-mode .section-{{ section.id }} .consumer-rights__company-info-inner a {
       color: {{ section.settings.text_color_night }};
     }
   {%- endif -%}

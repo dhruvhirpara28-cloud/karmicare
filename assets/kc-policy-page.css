@@ -91,20 +91,19 @@ main > .shopify-policy__container .shopify-policy__title {
   padding: 0 20px;
   font-size: var(--font-body-size-mobile); /* the TOC body on phones: 14px */
   line-height: normal; /* base.css gives p and li line-height: normal; the legal page shows that */
-  color: rgba(var(--kc-mapped-text-default-heading-rgb), 0.68); /* the TOC body: 68 % of the text colour */
+  color: var(--kc-mapped-text-default-heading); /* the TOC body, at full colour (Victor, 26 Oct; was 68 %) */
   overflow-wrap: anywhere; /* an email or URL breaks before the column does */
 }
 
 /* ---- The three lines before the first clause = the banner's description and company lines --
-   p 1: the description (.h5, 70 % opacity). p 2: the company line. p 3: email and "Last
-   updated" at 68 %. Only when a clause heading follows, so a policy that is one plain paragraph
-   keeps body style. */
+   p 1: the description (.h5). p 2: the company line. p 3: email and "Last updated". All at full
+   colour like the banner (Victor, 26 Oct). Only when a clause heading follows, so a policy that
+   is one plain paragraph keeps body style. */
 .shopify-policy__body .rte > p:first-child:has(~ :is(h2, h3)) {
   margin: 0 0 20px;
   font-size: var(--font-h5-size-mobile);
   font-weight: var(--font-500-weight);
   color: var(--kc-mapped-text-default-heading);
-  opacity: 0.7; /* .opacity-xl on the banner description */
 }
 
 .shopify-policy__body .rte > p:nth-child(2):has(~ :is(h2, h3)) {
@@ -214,7 +213,7 @@ main > .shopify-policy__container .shopify-policy__title {
   padding: 12px 12px 12px 0;
   border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
   vertical-align: baseline;
-  color: rgba(var(--kc-mapped-text-default-heading-rgb), 0.68); /* .consumer-rights__card-bottom */
+  color: var(--kc-mapped-text-default-heading); /* like .consumer-rights__card-bottom, full colour (26 Oct) */
 }
 
 .shopify-policy__body .rte td:last-child {
