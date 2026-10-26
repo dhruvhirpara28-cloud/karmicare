@@ -33,7 +33,8 @@ FONT_STACKS = {
     # docs/global-type/CRISPNESS-REPORT.md, Astra R88 B2)
     "Proxima Nova": '"proxima-nova", sans-serif',
     "Nunito": '"Nunito", sans-serif',
-    "Marlide Display": '"Marlide Display", "marlide-display-variable", serif',
+    # Same rule as Proxima: only the kit family, so a desktop install never takes over (R88 B2)
+    "Marlide Display": '"marlide-display-variable", serif',
     "Space Grotesk": '"Space Grotesk", sans-serif',
     "Geist Mono": '"Geist Mono", monospace',
     "Noto Serif": '"Noto Serif", serif',
