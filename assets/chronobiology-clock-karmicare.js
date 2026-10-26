@@ -46,6 +46,19 @@
     });
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
+    // The knob invites a drag (a swelling ring) until the visitor first moves it, once per visit
+    const exploredKey = 'kc-clock-explored';
+    let explored = false;
+    try { explored = sessionStorage.getItem(exploredKey) === '1'; } catch (_) { }
+    sectionEl.classList.toggle('is-inviting', !explored);
+
+    function markExplored() {
+      if (explored) return;
+      explored = true;
+      sectionEl.classList.remove('is-inviting');
+      try { sessionStorage.setItem(exploredKey, '1'); } catch (_) { }
+    }
+
     let pointerId = null;
     let heldKey = null;
     let selected = 0;
@@ -151,6 +164,7 @@
     knob.addEventListener('pointerdown', event => {
       if (!event.isPrimary || event.button !== 0 || pointerId !== null) return;
       event.preventDefault();
+      markExplored();
       finishIntro();
       stopReturn();
       knob.focus({ preventScroll: true });
@@ -194,6 +208,7 @@
       if (!(event.key in deltas) && event.key !== 'Home' && event.key !== 'End') return;
       event.preventDefault();
       if (pointerId !== null) return;
+      markExplored();
       const wasReturning = returnFrame !== null;
       finishIntro();
       stopReturn();
