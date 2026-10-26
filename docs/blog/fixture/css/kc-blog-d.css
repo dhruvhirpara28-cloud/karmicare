@@ -1,0 +1,358 @@
+/* Direction D · Editorial, after the reference Victor gave (26 Oct): openai.com/index/scaling-
+   storage-one-billion-users-part-two, measured at 1440 and 390 (02-PROPOSAL.md §3 D). Its layout,
+   our tokens. Round 2 (Victor, 26 Oct):
+   - the contents are the legal pages' menu (sections/legal-toc-section.liquid), same grid and
+     look: a 180-332px sidebar left of the 680px text, "On this page" and the links in the theme's
+     .subtitle-item / .opacity-xl, a 1px rule left of each link, 2px and full colour for the section
+     being read; at 640px and below a two-column list above the text;
+   - body pictures as wide as the reference's interactive figure: 1280px, centred on the page
+     (80px from each edge at 1440); the contents hide while a wide picture passes them;
+   - header centred with a rule (reading time, Share); featured picture wide; body 18px at 1.6;
+     headings at 1.3 with 64px above and 24px below.
+   Raw values say why in a comment; the line heights are decision D22. */
+
+/* ---- Header (page -> accent) ----------------------------------------------------------------- */
+.kc-blog-d__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-layout-xl);
+  text-align: center;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+/* The eyebrow is the homepage's section eyebrow: the theme's .kc-caption-subheading .subtitle-item
+   (Nunito 700, uppercase, 1.7px tracking, 24px to the heading from 990px). Only the link look is
+   added here: the heading colour, no underline until hover. */
+a.kc-blog-d__eyebrow {
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+a.kc-blog-d__eyebrow:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.kc-blog-d__head .kc-blog__title {
+  max-width: 80rem; /* the reference's title box */
+  margin-inline: auto;
+  line-height: 1.16; /* the reference title: 48/55.7 */
+}
+
+.kc-blog-d__head .kc-blog__standfirst {
+  max-width: 56rem; /* two or three lines under the title, as the reference */
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* The rule row: date and reading time left, Share right */
+.kc-blog-d__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+  max-width: var(--kc-blog-measure);
+  margin: var(--kc-responsive-spacing-layout-2xl) auto 0;
+  padding-top: var(--kc-responsive-spacing-layout-md);
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+  text-align: start;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-blog-soft-text);
+}
+
+.kc-blog-d__share {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  min-height: var(--kc-responsive-size-control-min-height);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kc-mapped-text-default-heading);
+  font: inherit;
+  font-weight: var(--font-500-weight);
+  cursor: pointer;
+}
+
+.kc-blog-d__share:hover span {
+  text-decoration: underline;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* ---- Featured picture: wide ------------------------------------------------------------------ */
+.kc-blog-d__figure {
+  margin: 0;
+  padding-block: var(--kc-responsive-spacing-layout-xl) 0;
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+/* Always a wide 16:9 frame (the 2024 pictures are 16:9 already); a portrait or square file is
+   cropped to it from the centre, a transparent packshot ([data-fit=contain]) sits whole on the
+   accent tint instead */
+.kc-blog-d__figure .kc-blog__media {
+  max-width: min(100%, 128rem, var(--kc-media-natural-width, 128rem)); /* the reference's wide figure */
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+  border-radius: 0;
+}
+
+.kc-blog-d__figure .kc-blog__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.kc-blog-d__figure[data-fit='contain'] .kc-blog__media img {
+  object-fit: contain;
+  padding: var(--kc-responsive-spacing-layout-xl);
+  box-sizing: border-box;
+}
+
+/* ---- Body (accent -> page) -------------------------------------------------------------------
+   The legal pages' grid (legal-toc-section.liquid): a 1416px page width with 20px sides, the
+   sidebar, 16px, then the 680px text. --kc-blog-d-colstart is where the text starts, measured
+   from the left of the screen; wide pictures use it to centre themselves on the page. */
+.kc-blog-d__main,
+.kc-blog-d-related {
+  --kc-blog-d-pad: 2rem; /* the legal page-width's side padding */
+  --kc-blog-d-side: 0px;
+  --kc-blog-d-gap: 0px;
+  --kc-blog-d-colstart: var(--kc-blog-gutter);
+  --kc-blog-d-wide: 100vw;
+}
+
+/* Keep reading sits in the same grid, so it starts where the article text starts */
+.kc-blog-d-related {
+  padding-block: var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-d__main {
+  padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-xs);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
+  overflow-x: clip;
+}
+
+.kc-blog-d__layout {
+  box-sizing: border-box;
+  max-width: 141.6rem; /* the legal page-width */
+  margin-inline: auto;
+  padding-inline: var(--kc-blog-gutter);
+}
+
+.kc-blog-d__text {
+  min-width: 0;
+  max-width: var(--kc-blog-measure);
+}
+
+/* Long-form type: 18px, line height 1.6 (the reference 17/28; no long-form line-height token, D22) */
+.kc-blog-d .kc-blog__body {
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: 1.6;
+  --kc-blog-para: var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-blog-d .kc-blog__body :is(h1, h2, h3, h4, h5, h6) {
+  margin: var(--kc-responsive-spacing-layout-3xl) 0 var(--kc-responsive-spacing-layout-lg) !important;
+}
+
+/* Sections: 24px on phones (h3 token), 28px from 750px (h4 token), line height 1.3 (the reference 30/39.6) */
+.kc-blog-d .kc-blog__body :is(h1, h2),
+.kc-blog-d .kc-blog__body:has(h1) h1 {
+  font-size: var(--kc-responsive-h3-text-size) !important;
+  line-height: 1.3 !important;
+  letter-spacing: var(--kc-responsive-h4-letter-spacing-sm) !important;
+  font-weight: var(--font-500-weight) !important;
+}
+
+/* Sub-sections: h5 token (20 -> 24), the reference 22/27.7 */
+.kc-blog-d .kc-blog__body :is(h3, h4, h5, h6),
+.kc-blog-d .kc-blog__body:has(h1) h2 {
+  font-size: var(--kc-responsive-h5-text-size) !important;
+  line-height: var(--kc-responsive-h5-line-height) !important;
+  letter-spacing: 0 !important;
+  font-weight: var(--font-500-weight) !important;
+}
+
+.kc-blog-d .kc-blog__body > :is(h1, h2, h3, h4, h5, h6):first-child,
+.kc-blog-d .kc-blog__body :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0 !important;
+}
+
+.kc-blog-d .kc-blog__body li + li {
+  margin-top: var(--kc-responsive-spacing-layout-xs) !important;
+}
+
+/* Body pictures: as wide as the reference's interactive figure, centred on the page, whatever the
+   sidebar does. Every picture sits alone in its paragraph (fixture/tools/image_paras.py).
+   Phones: edge to edge. */
+.kc-blog-d .kc-blog__body p:has(img) {
+  width: var(--kc-blog-d-wide);
+  max-width: none;
+  margin-block: var(--kc-responsive-spacing-layout-3xl) !important;
+  margin-inline: calc((100vw - var(--kc-blog-d-wide)) / 2 - var(--kc-blog-d-colstart)) 0 !important;
+}
+
+.kc-blog-d .kc-blog__body p:has(img) img {
+  width: 100%;
+  border-radius: 0;
+}
+
+.kc-blog-d__end {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-3xl);
+  margin-top: var(--kc-responsive-spacing-layout-3xl);
+}
+
+/* ---- Contents: the legal pages' menu ----------------------------------------------------------
+   Phones (640px and below, as the legal page): "On this page" and a two-column list above the
+   text. Wider: a sticky sidebar left of the text. The section being read: full colour, 2px rule.
+   The eyebrow and links carry the theme's .subtitle-item and .opacity-xl, as the legal links do. */
+.kc-blog-d__toc {
+  margin: 0 0 var(--kc-responsive-spacing-layout-3xl);
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.kc-blog-d-toc__eyebrow {
+  display: block;
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: 1.2rem; /* the legal eyebrow on phones */
+}
+
+.kc-blog-d-toc__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 var(--kc-responsive-spacing-layout-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-blog-d-toc__link {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 1.6rem 0 1.6rem 1.2rem; /* the legal links on phones */
+  border-left: var(--kc-shape-stroke-thin) solid;
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kc-blog-d-toc__link:hover,
+.kc-blog-d-toc__link[aria-current='true'] {
+  opacity: 1;
+}
+
+.kc-blog-d-toc__link[aria-current='true'] {
+  box-shadow: inset 1px 0 0 currentColor;
+}
+
+/* Hidden while a wide picture passes the sidebar (as the reference does) */
+.kc-blog-d__toc.is-covered {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media screen and (min-width: 641px) {
+  .kc-blog-d__main,
+  .kc-blog-d-related {
+    --kc-blog-d-pad: 2rem;
+    --kc-blog-d-side: 25rem; /* the legal sidebar below 990px */
+    --kc-blog-d-gap: 1.6rem; /* the legal column gap */
+    --kc-blog-d-colstart: calc(max(var(--kc-blog-d-pad), (100vw - 141.6rem) / 2 + var(--kc-blog-d-pad)) + var(--kc-blog-d-side) + var(--kc-blog-d-gap));
+    --kc-blog-d-wide: min(128rem, 100vw - 2 * var(--kc-blog-gutter)); /* the reference's wide figure */
+  }
+
+  .kc-blog-d__layout {
+    display: grid;
+    grid-template-columns: var(--kc-blog-d-side) minmax(0, 1fr);
+    column-gap: var(--kc-blog-d-gap);
+    align-items: start;
+    padding-inline: var(--kc-blog-d-pad);
+  }
+
+  /* Fixed columns: the text keeps its place when there is no contents list (short articles,
+     Keep reading), and Dawn hides an empty placeholder div (base.css div:empty) */
+  .kc-blog-d__text {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .kc-blog-d__toc {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--kc-navigation-clearance) + 2.8rem); /* the legal sidebar sits 100px from the top */
+    max-height: calc(100vh - var(--kc-navigation-clearance) - 5.6rem);
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .kc-blog-d-toc__eyebrow {
+    margin-bottom: 2.4rem; /* the legal eyebrow */
+    font-size: var(--font-body-small-size);
+    line-height: normal;
+  }
+
+  .kc-blog-d-toc__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kc-blog-d-toc__link {
+    display: block;
+    height: auto;
+    padding: 0.8rem 0 0.8rem 1.6rem; /* the legal links */
+  }
+
+  .kc-blog-d__figure .kc-blog__media,
+  .kc-blog-d .kc-blog__body p:has(img) img {
+    border-radius: var(--kc-shape-radius-md);
+  }
+
+  .kc-blog-d__figure {
+    padding-inline: var(--kc-blog-gutter);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .kc-blog-d .kc-blog__body {
+    font-size: var(--kc-responsive-body-md-text-size); /* 18px from 750px too: the reference keeps one size */
+  }
+
+  .kc-blog-d .kc-blog__body :is(h1, h2),
+  .kc-blog-d .kc-blog__body:has(h1) h1 {
+    font-size: var(--kc-responsive-h4-text-size) !important;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .kc-blog-d__main,
+  .kc-blog-d-related {
+    --kc-blog-d-side: 33.2rem; /* the legal sidebar from 990px: at 1440 the text starts at 380px, as on the legal pages */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-blog-d__toc,
+  .kc-blog-d-toc__link {
+    transition: none;
+  }
+}
+
+/* ---- Index ------------------------------------------------------------------------------------ */
+.kc-blog-d-index__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl);
+  text-align: center;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-d-index__list {
+  padding-block: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}
