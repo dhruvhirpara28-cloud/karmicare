@@ -1,5 +1,101 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76h: option labels wrap safely (Astra R76g N1)
+
+The landing desk relayed Astra's R76g non-blocker N1: at 360px a long Dutch label such as
+"Orthomoleculair of natuurgeneeskundig therapeut" overflows its 152px column. Fix in
+`assets/kc-practitioner-request.css`, scoped to `.kc-pr__options`:
+- the option label (the grid item) gets `min-width: 0`;
+- its text span gets `min-width: 0`, `overflow-wrap: anywhere` and `hyphens: auto`.
+
+`hyphens: auto` follows the page language, which Shopify sets on `<html lang>`.
+`overflow-wrap: anywhere` is the last resort for a word that cannot be hyphenated. N2
+(URL-first matching across the whole FAQ) stays as it is, per the landing desk.
+
+### R76h checks
+
+Fixture changes for this check:
+- the pages now carry `lang="nl"` and `lang="fr"`;
+- the NL/FR stand-ins have long profession labels. These are length tests, not proposed copy;
+  the real NL/FR text comes from source-copy.
+
+The script `scratchpad/fx/wrap.sh` measures each option's label box and the right edge of its
+text lines against its grid column. Results are in `results/r76h-wrap.txt`.
+
+| Case | Column | Result |
+|---|---|---|
+| NL at 360, "Orthomoleculair of natuurgeneeskundig therapeut" | 152px | pass: 3 lines, 0px overflow; "Mondhygiënist" 1 line |
+| NL at 390 | 167px | pass: 3 lines, 0px overflow |
+| FR at 360, "Praticien en orthomoléculaire ou naturopathie", "Hygiéniste bucco-dentaire" | 152px | pass: 3 and 2 lines, 0px overflow |
+| FR at 390 | 167px | pass |
+| NL at 360, 43-character word without a break ("Orthomoleculairnatuurgeneeskundigtherapeut") | 152px | pass: broken over 3 lines, 0px overflow, no horizontal scroll in the dialog |
+| Negative control: the same pages with the R76h rule switched off | 152px | fails as Astra reported: the real NL label overflows by 14px; the 43-character word overflows by 183px and gives the dialog a horizontal scroll |
+
+**Regression**: pass. The suites ran at en-default Day 390 and Night 1440, nl-default 390,
+fr-error 390 and en-nojs. The fixture's `fxShow` now tolerates the page's infinite marquee
+animation.
+
+**Theme Check**: exit 0, 19 baseline warnings.
+
+## R76g: compact options in two columns; the "For dentists" link opens the same form
+
+Victor, 25 Oct:
+- "kan je bullets en checkboxes dichter bij elkaar zetten 8px tussen, en ook in twee kolommen
+  zodat het formulier niet te lang word"
+- "deze link bij dentists moet eigenlijk hetzelfde formulier krijgen" (the link "Request the
+  evidence pack, patient-ready materials, professional samples and technical documentation →"
+  in the "For dentists" item).
+
+**Options** (`snippets/kc-practitioner-request.liquid`, `assets/kc-practitioner-request.css`):
+- The radios and the two checkboxes sit in a `.kc-pr__options` grid of two columns, 8 px
+  between the rows and 16 px between the columns.
+- An option's minimum height is now 24 px (the WCAG 2.2 AA target size; it was 44 px). The
+  control is centred on the first line of its label, and a long label wraps under itself.
+- The "Other" field now runs full width under the options.
+
+**Dentists link** (`assets/kc-practitioner-request.js`):
+- `findTriggers()` now returns every matching link in the FAQ, in the answers and in the
+  section content of all items. The dentists link sits in the section content and matches on
+  "evidence pack".
+- Each link becomes a button with its own classes, so the dentists one keeps `.rda-link` and
+  its look. All buttons open the one dialog.
+- Focus returns to the button that opened the form.
+- A new hidden field, `contact[Opened from]`, gets the FAQ question above that button. It is
+  posted to the inbox and sent to Klaviyo as `opened_from`; the internal alert shows it.
+- After a post, the snapshot remembers the button. The reload opens its FAQ item behind the
+  dialog, and closing returns focus there.
+- If `showModal()` throws, every link comes back as it was. Without JavaScript the dentists
+  link stays unchanged.
+- No new settings and no copy change.
+
+### R76g checks
+
+The fixture now stamps asset URLs per render, because the browser had served a cached script.
+The earlier R76e/f runs did use the current code (signal and radios were present).
+
+| Case (`results/r76g-dentists.txt`) | Result |
+|---|---|
+| Two triggers | pass: the dentists button keeps `rda-link` (inline-block, underlined), has `aria-haspopup=dialog` and `aria-controls`, and no old link is left |
+| Open from dentists | pass: the dialog opens with focus on the title and "Opened from: For dentists"; closing returns focus to the dentists button and unlocks the page |
+| Open from kPNI | pass: "Opened from" follows; focus returns to the kPNI button |
+| Submit from dentists, thank-you reload | pass: posted `contact[Opened from]` = For dentists; the dialog reopens with the dentists item open behind; Klaviyo `opened_from` = For dentists; closing focuses the dentists button |
+| `showModal()` throws | pass: no buttons left, the dentists link is back with `href="#"`, the form is inline, nothing is locked, no errors |
+| No JavaScript | pass: the dentists link is unchanged |
+| Two-column layout (390 and 1440) | pass: 2 columns, 4 rows, 8 px between rows, the checkboxes on one row, no horizontal overflow; the dialog content is about 1,190 px tall |
+
+**Regression** (`results/r76g-regression-2.txt`): all pass.
+- The fixture suites run at en-default Day 390 and Night 1440, en-success Day 390, en-error
+  Night 750 and Day 1440, en-nojs, nl-default and fr-error.
+- `showModal()` throwing or missing passes too.
+- The R76f timeout cases pass: the hanging call is aborted after 8,003 ms and its timer
+  cleared.
+- Klaviyo cases 1–8 pass.
+- The old R76 check "dentists item has no form or trigger" was rewritten for the new
+  requirement. The dentists link is now a trigger, the form stays in the kPNI item, and
+  without JavaScript or `showModal()` the link stays.
+
+**Theme Check**: exit 0, 19 baseline warnings.
+
 ## R76f: the Klaviyo call is aborted after 8 s (Astra R76d B1)
 
 Blocker B1 (`docs/runtime-review/R76D-PRACTITIONER-KLAVIYO-ASTRA.md`): the Klaviyo fetch had

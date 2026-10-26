@@ -1,25 +1,25 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "1eec11620593",
+  "en-source.json": "12ed15da6f97",
   "registered.json": "de2a5be381ce",
-  "holds.json": "009046a09618",
+  "holds.json": "fd6a6da9ea5e",
   "releases.json": "1571d1e3719b",
   "fr/batch-01-homepage.json": "cd5c830cffac",
-  "fr/batch-02-pdp.json": "85d3177b9b1c",
+  "fr/batch-02-pdp.json": "f14b031fce4c",
   "fr/batch-03-header-footer.json": "91a25a38e027",
   "fr/batch-04-legal.json": "e48e5cb67caa",
-  "fr/batch-05-products.json": "b02bd500667d",
+  "fr/batch-05-products.json": "74b6cc09446e",
   "fr/batch-06-content-pages.json": "c301d04fd83b",
   "fr/batch-07-collections-blog.json": "d75c02b40ff0",
   "fr/batch-08-system.json": "462b3723d7b9"
  },
  "batches": {
   "batch-01-homepage": "2637293ba890353bcf3d8871bf418e9318c36a3c",
-  "batch-02-pdp": "e4d806146e401d40a2befeeabdcb7d1eef6a1ad5",
+  "batch-02-pdp": "e09fc93cd094813ea0e21a773e2f6c90e33483d4",
   "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
-  "batch-05-products": "d81030279c92a9b2f558528ffafeb4112fb71a78",
+  "batch-05-products": "78d85b206273a06783ba5531a6bbdfd56f5c9ba9",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
   "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
@@ -3542,9 +3542,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_1",
-     "en": "Used by 100+ kPNI practitioners & functional dentists",
-     "en_sha1": "dc9175aacf9760fdfe7a7e847d7138a6aa850467",
-     "value": "Adopté par plus de 100 praticiens kPNI et dentistes fonctionnels",
+     "en": "Used and recommended by 100+ kPNI practitioners",
+     "en_sha1": "2b27f9a40af33c0ce713197eb5c61ea1e6b7a698",
+     "value": "Adopté et recommandé par plus de 100 praticiens kPNI",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -3556,6 +3556,27 @@
       "main",
       "highlights_slider_9wAjAb",
       "text_1"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_5",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_5",
+     "en": "Recommended by functional dentists",
+     "en_sha1": "868786743ac598ab0c5cf5b33504914fdfa3a4bd",
+     "value": "Recommandé par des dentistes fonctionnels",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "highlights_slider_9wAjAb",
+      "text_5"
      ]
     },
     {
@@ -6477,48 +6498,6 @@
      ]
     },
     {
-     "id": "product.subscription-item:main/product_faq_block/request_label_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession",
-     "en": "Profession and practice",
-     "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
-     "value": "Profession et cabinet",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_profession"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_help_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_help_profession",
-     "en": "For example kPNI therapist, practice name",
-     "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
-     "value": "Par exemple thérapeute kPNI, nom du cabinet",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_help_profession"
-     ]
-    },
-    {
      "id": "product.subscription-item:main/product_faq_block/request_label_email",
      "kind": "match",
      "key": null,
@@ -6771,27 +6750,6 @@
      ]
     },
     {
-     "id": "product.subscription-item:main/product_faq_block/request_error_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession",
-     "en": "Please fill in your profession and practice.",
-     "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
-     "value": "Veuillez indiquer votre profession et votre cabinet.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_profession"
-     ]
-    },
-    {
      "id": "product.subscription-item:main/product_faq_block/request_error_email",
      "kind": "match",
      "key": null,
@@ -6936,6 +6894,258 @@
       "main",
       "product_faq_block",
       "request_success_text"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_dentist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
+     "en": "Dentist",
+     "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
+     "value": "Dentiste",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_dentist"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_hygienist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
+     "en": "Dental hygienist",
+     "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
+     "value": "Hygiéniste dentaire",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_hygienist"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_kpni",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
+     "en": "kPNI therapist",
+     "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
+     "value": "Thérapeute kPNI",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_kpni"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_natural",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
+     "en": "Orthomolecular or naturopathic practitioner",
+     "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
+     "value": "Praticien orthomoléculaire ou naturopathe",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_natural"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_gp",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
+     "en": "General practitioner",
+     "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
+     "value": "Médecin généraliste",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_gp"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_pharmacist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
+     "en": "Pharmacist",
+     "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
+     "value": "Pharmacien",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_pharmacist"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_other",
+     "en": "Other",
+     "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
+     "value": "Autre",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_other"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
+     "en": "Your profession",
+     "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
+     "value": "Votre profession",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_profession_other"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_label_practice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_practice",
+     "en": "Practice name",
+     "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
+     "value": "Nom du cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_practice"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_profession_choice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
+     "en": "Choose your profession.",
+     "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
+     "value": "Choisissez votre profession.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_profession_choice"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
+     "en": "Please fill in your profession.",
+     "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
+     "value": "Veuillez indiquer votre profession.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_profession_other"
+     ]
+    },
+    {
+     "id": "product.subscription-item:main/product_faq_block/request_error_practice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_practice",
+     "en": "Please fill in your practice name.",
+     "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
+     "value": "Veuillez indiquer le nom de votre cabinet.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_practice"
      ]
     }
    ]
@@ -24454,48 +24664,6 @@
      ]
     },
     {
-     "id": "product:main/product_faq_block/request_label_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession",
-     "en": "Profession and practice",
-     "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
-     "value": "Profession et cabinet",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_profession"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_help_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_help_profession",
-     "en": "For example kPNI therapist, practice name",
-     "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
-     "value": "Par exemple thérapeute kPNI, nom du cabinet",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_help_profession"
-     ]
-    },
-    {
      "id": "product:main/product_faq_block/request_label_email",
      "kind": "match",
      "key": null,
@@ -24748,27 +24916,6 @@
      ]
     },
     {
-     "id": "product:main/product_faq_block/request_error_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession",
-     "en": "Please fill in your profession and practice.",
-     "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
-     "value": "Veuillez indiquer votre profession et votre cabinet.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_profession"
-     ]
-    },
-    {
      "id": "product:main/product_faq_block/request_error_email",
      "kind": "match",
      "key": null,
@@ -24913,6 +25060,258 @@
       "main",
       "product_faq_block",
       "request_success_text"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_dentist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
+     "en": "Dentist",
+     "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
+     "value": "Dentiste",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_dentist"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_hygienist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
+     "en": "Dental hygienist",
+     "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
+     "value": "Hygiéniste dentaire",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_hygienist"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_kpni",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
+     "en": "kPNI therapist",
+     "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
+     "value": "Thérapeute kPNI",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_kpni"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_natural",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
+     "en": "Orthomolecular or naturopathic practitioner",
+     "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
+     "value": "Praticien orthomoléculaire ou naturopathe",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_natural"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_gp",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
+     "en": "General practitioner",
+     "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
+     "value": "Médecin généraliste",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_gp"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_pharmacist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
+     "en": "Pharmacist",
+     "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
+     "value": "Pharmacien",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_pharmacist"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_profession_other",
+     "en": "Other",
+     "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
+     "value": "Autre",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_profession_other"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
+     "en": "Your profession",
+     "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
+     "value": "Votre profession",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_profession_other"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_label_practice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_label_practice",
+     "en": "Practice name",
+     "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
+     "value": "Nom du cabinet",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_label_practice"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_profession_choice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
+     "en": "Choose your profession.",
+     "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
+     "value": "Choisissez votre profession.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_profession_choice"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
+     "en": "Please fill in your profession.",
+     "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
+     "value": "Veuillez indiquer votre profession.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_profession_other"
+     ]
+    },
+    {
+     "id": "product:main/product_faq_block/request_error_practice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.main.blocks.product_faq_block.settings.request_error_practice",
+     "en": "Please fill in your practice name.",
+     "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
+     "value": "Veuillez indiquer le nom de votre cabinet.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "main",
+      "product_faq_block",
+      "request_error_practice"
      ]
     }
    ]
