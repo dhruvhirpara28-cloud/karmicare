@@ -371,6 +371,12 @@
       text-underline-offset: 2px;
     }
 
+    /* Hover: the links keep the section's text colour, so the underline shows it (R88b B3) */
+    #LegalToc-{{ section.id }} .legal-toc__body a:hover {
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.25em;
+    }
+
     #LegalToc-{{ section.id }} .legal-toc__empty {
       padding: 40px 0;
     }

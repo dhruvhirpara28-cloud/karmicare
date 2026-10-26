@@ -841,12 +841,12 @@ a.active-facets__button.focused .active-facets__button-inner {
 }
 
 .mobile-facets__open:hover {
-  color: var(--kc-mapped-text-link-default-hover);
+  color: var(--kc-link-hover-color);
 }
 
 .mobile-facets__open:hover line,
 .mobile-facets__open:hover circle {
-  stroke: var(--kc-mapped-text-link-default-hover);
+  stroke: var(--kc-link-hover-color);
 }
 
 .mobile-facets__open-label {
