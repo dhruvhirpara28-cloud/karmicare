@@ -1,5 +1,11 @@
 # Round 7 · PDP trust pills, practitioner form
 
+**Parked 26 Oct (landing desk, Victor: "translations come last"):** the plans stay as committed at `1aaae63`, and no dry run has been made. Round 7 restarts against the new live text once the font/token change and the blog have landed. At the restart:
+1. merge `karmicare/soft-launch`;
+2. compare the source with the new live main;
+3. rebuild the plans;
+4. re-check the trigger text in the live NL/FR FAQ.
+
 **Change reversed 26 Oct (landing desk, Victor):** the form stays on the PDP as the popup, opened from both FAQ links; the professionals page is parked. The 52 holds are lifted, and the plans are again identical to `1ec484d`: pills 1 and 5 plus the 13 new `request_*` settings on both product templates. The Klaviyo ID settings stay out. Expected again: NL 28 keys, FR 26. The trigger text was re-checked live the same day: both NL links contain *studiedossier*, both FR links *dossier scientifique*.
 
 **Earlier the same day, pills only (landing desk, Victor):** the practitioner form moves off the PDP to a new professionals page, so its `request_*` settings will leave the product templates. The 13 new `request_*` settings of this round are held in `holds.json` on both templates in NL and FR (52 holds). Their translations below stay in the payloads for the new page. The round 3 `request_*` keys were registered earlier and are left as they are. The plans now register only the two pills. Expected: **2 keys per language** (`text_1` changed, `text_5` new), plus the byte-only re-registers.
