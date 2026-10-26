@@ -1,12 +1,12 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "c364c5d8ad96",
+  "en-source.json": "7c3ad6a39458",
   "registered.json": "de2a5be381ce",
   "holds.json": "fd6a6da9ea5e",
   "releases.json": "1571d1e3719b",
   "nl/batch-01-homepage.json": "dc76fed58ce7",
-  "nl/batch-02-pdp.json": "283b03bab41b",
+  "nl/batch-02-pdp.json": "0727cdbeac9a",
   "nl/batch-03-header-footer.json": "9a44141ef8bc",
   "nl/batch-04-legal.json": "515999d1889d",
   "nl/batch-05-products.json": "15d55ffa0a80",
@@ -4396,26 +4396,6 @@
      "hint": [
       "chronobiology_clock_karmicare",
       "hint_label"
-     ]
-    },
-    {
-     "id": "product.subscription-item:chronobiology_clock_karmicare/footer_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.chronobiology_clock_karmicare.settings.footer_text",
-     "en": "Formulated for both shifts: Awake by day, Asleep by night.",
-     "en_sha1": "61d06b63816484d100ca48ce1a77cad5d383ab1e",
-     "value": "Geformuleerd voor beide diensten: Awake overdag, Asleep 's nachts.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "chronobiology_clock_karmicare",
-      "footer_text"
      ]
     },
     {

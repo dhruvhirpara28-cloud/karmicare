@@ -22,7 +22,7 @@ The trigger text was re-checked live on release 12 in the Orca browser, read onl
 
 FR `check.py`: 75, NL `validate.py`: 62, both unchanged. `digest.py` passes.
 
-**Clock footer text on the homepage out (landing desk 26 Oct, Victor: "may go for now").** `index:chronobiology_clock_karmicare/footer_text` ("Formulated for both shifts: Awake by day, Asleep by night.") is empty on the homepage branch, so it is `retired` in the EN source and held in NL/FR, as `footer_link_text` was. It was already registered, so the expected keys do not change: still NL 41, FR 39. The PDP row `product.subscription-item:…/footer_text` stays in the plan until the desk confirms.
+**Clock footer text on the homepage out (landing desk 26 Oct, Victor: "may go for now").** `index:chronobiology_clock_karmicare/footer_text` ("Formulated for both shifts: Awake by day, Asleep by night.") is empty on the homepage branch, so it is `retired` in the EN source and held in NL/FR, as `footer_link_text` was. It was already registered, so the expected keys do not change: still NL 41, FR 39. The PDP row `product.subscription-item:…/footer_text` goes as well (Victor, 26 Oct, via the desk): `retired` and held the same way. It was registered already too, so the expected keys stay NL 41, FR 39.
 
 **Parked 26 Oct (landing desk, Victor: "translations come last"):** the plans stay as committed at `1aaae63`, and no dry run has been made. Round 7 restarts against the new live text once the font/token change and the blog have landed. At the restart:
 1. merge `karmicare/soft-launch`;
