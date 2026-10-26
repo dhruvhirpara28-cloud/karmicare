@@ -616,7 +616,7 @@ body.night-mode .chronobiology-clock {
     font-weight: 500;
     font-size: 11px;
     line-height: 12px;
-    letter-spacing: 1.1px;
+    letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
     text-transform: uppercase;
     color: var(--chrono-ink);
     transition: border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);

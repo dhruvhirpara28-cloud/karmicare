@@ -384,6 +384,10 @@
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
+        /* Grayscale smoothing in Day and Night: thinner, calmer text on macOS and iOS; with the
+           text at full navy / cream it no longer greys out in Night (Victor, 26 Oct) */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       @media screen and (min-width: 750px) {

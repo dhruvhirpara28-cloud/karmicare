@@ -66,8 +66,10 @@ HELD_AT_OLD_VALUE = {
     "--kc-responsive-h3-letter-spacing": ("-1px", "P9"),  # -1px | -0.5px
     "--kc-responsive-h4-letter-spacing": ("-1px", "P10"),  # -1px | -0.25px
     "--kc-responsive-h5-letter-spacing": ("-0.5px", "P11"),  # -0.5px | -0.25px; nothing reads it
-    "--kc-responsive-caption-letter-spacing": ("1.25px", "P12"),  # 1.7px | 1.2px
-    "--kc-responsive-Nunito-letter-spacing": ("1.7px", "P13"),  # no Figma path; caption is 1.7px | 1.2px
+    # P12/P13: capitals in Nunito read calmer with about 0.08em of tracking (was 1.25px / 1.7px;
+    # Victor, 26 Oct, docs/global-type/CRISPNESS-REPORT.md)
+    "--kc-responsive-caption-letter-spacing": ("0.8px", "P12"),  # Figma 1.7px | 1.2px
+    "--kc-responsive-Nunito-letter-spacing": ("1px", "P13"),  # no Figma path; caption is 1.7px | 1.2px
     "--kc-responsive-h4-letter-spacing-sm": ("-0.25px", "P14"),  # no Figma path; h4 is -1px | -0.25px
     "--kc-responsive-caption-sm-letter-spacing": ("1px", "P15"),  # no Figma path; nothing reads it
     "--kc-responsive-all-letter-spacing": ("0.5px", "P16"),  # no Figma path
