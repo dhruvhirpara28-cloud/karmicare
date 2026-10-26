@@ -340,6 +340,8 @@ HERO_OPTIONS = {
 
 def d_article(handle, image=None, fit=None):
     a = dict(articles[handle])
+    if image is None and handle == "nano-hydroxyapatite":
+        image, fit = HERO_OPTIONS["4"][0], HERO_OPTIONS["4"][1]  # D18 = 4, Victor 26 Oct ("die afbeelding is goed")
     if image:
         a["image"] = image  # a featured-picture alternative (02-PROPOSAL D18)
     fig = ""
