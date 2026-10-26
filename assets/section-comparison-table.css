@@ -60,14 +60,14 @@
   line-height: inherit; /* base.css sets p to normal */
 }
 
-/* Italic text in the metafield heading is the muted second tone */
+/* Italic text in the metafield heading is the second tone (base.css --kc-heading-second-tone) */
 .comparison-section__title em,
 .comparison-section__title i {
   font-style: normal;
-  color: var(--kc-mapped-text-default-body);
+  color: var(--kc-heading-second-tone);
 }
 
-/* The body-lg deck in the muted body colour, like the other descriptions under an h2 (Victor, 25 Oct) */
+/* The body-lg deck in the body colour, like the other descriptions under an h2 (Victor, 25 Oct) */
 .comparison-section__description {
   font-family: var(--kc-font-role-backbone);
   font-size: var(--kc-responsive-body-lg-text-size);

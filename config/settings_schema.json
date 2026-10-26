@@ -226,15 +226,6 @@
         "info": "Enter the font name that will be used in the styling. Example:- 'Roboto', sans-serif"
       },
       {
-        "type": "range",
-        "id": "header_font_weight",
-        "min": 100,
-        "max": 900,
-        "step": 100,
-        "default": 400,
-        "label": "Header Font Weight"
-      },
-      {
         "type": "text",
         "id": "body_font_name",
         "label": "Body Font Name",
@@ -1856,40 +1847,6 @@
         "id": "sold_out_badge_color_scheme",
         "label": "t:settings_schema.badges.settings.sold_out_badge_color_scheme.label",
         "default": "scheme-3"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.brand_information.name",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "t:settings_schema.brand_information.settings.paragraph.content"
-      },
-      {
-        "type": "inline_richtext",
-        "id": "brand_headline",
-        "label": "t:settings_schema.brand_information.settings.brand_headline.label"
-      },
-      {
-        "type": "richtext",
-        "id": "brand_description",
-        "label": "t:settings_schema.brand_information.settings.brand_description.label"
-      },
-      {
-        "type": "image_picker",
-        "id": "brand_image",
-        "label": "t:settings_schema.brand_information.settings.brand_image.label"
-      },
-      {
-        "type": "range",
-        "id": "brand_image_width",
-        "min": 50,
-        "max": 550,
-        "step": 5,
-        "default": 100,
-        "unit": "px",
-        "label": "t:settings_schema.brand_information.settings.brand_image_width.label"
       }
     ]
   },

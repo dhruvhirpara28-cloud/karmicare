@@ -64,12 +64,12 @@ trusted-professionals-quotes {
   color: var(--kc-mapped-text-default-heading);
 }
 
-/* The bold part is the second line, in text/default/body, same weight */
+/* The bold part is the second line, in the second tone (base.css), same weight */
 .trusted-professionals__header h2 strong,
 .trusted-professionals__header h2 b {
   display: block;
   font-weight: inherit;
-  color: var(--kc-mapped-text-default-body);
+  color: var(--kc-heading-second-tone);
 }
 
 /* Grid System */

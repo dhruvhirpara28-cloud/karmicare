@@ -50,10 +50,10 @@
   color: inherit;
 }
 
-/* Two-tone heading: italic text is the muted second line (the line break: base.css) */
+/* Two-tone heading: italic text is the second line in the second tone (both in base.css) */
 .research-behind-system__heading em {
   font-style: normal;
-  color: var(--kc-mapped-text-default-body);
+  color: var(--kc-heading-second-tone);
 }
 
 @media screen and (min-width: 750px) {
