@@ -367,8 +367,8 @@ body.night-mode .chronobiology-clock {
   border-radius: 50%;
 }
 
-/* After the preview swing (the script sets .is-inviting once per visit, until the first drag),
-   a short accent halo pulses out of the dot three times and fades (Victor, 26 Oct) */
+/* Once the knob has run to the current time (the script sets .is-inviting once per visit), a
+   short accent halo pulses out of the dot and fades, until the knob is taken (Victor, 26 Oct) */
 .chronobiology-clock .knob::after {
   content: '';
   position: absolute;
@@ -380,7 +380,7 @@ body.night-mode .chronobiology-clock {
 }
 
 .chronobiology-clock.is-inviting .knob::after {
-  animation: knob-invite 1.4s ease-out 3;
+  animation: knob-invite 1.4s ease-out infinite;
 }
 
 @keyframes knob-invite {

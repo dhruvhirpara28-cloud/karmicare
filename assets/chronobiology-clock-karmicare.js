@@ -46,8 +46,9 @@
     });
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // Until the visitor first moves the knob (once per visit), the dial coming into view plays a
-    // preview: the knob swings along the ring and back, then its ring pulses (.is-inviting)
+    // Until the visitor first takes the knob (once per visit), the knob waits two hours early and
+    // runs to the current time when the dial comes into view; then its halo pulses (.is-inviting)
+    // until the knob is taken (Victor, 26 Oct)
     const exploredKey = 'kc-clock-explored';
     let explored = false;
     try { explored = sessionStorage.getItem(exploredKey) === '1'; } catch (_) { }
@@ -67,6 +68,8 @@
     let timer = null;
 
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const previewOffset = -120;
+    let previewPending = false;
     let previewObserver = null;
 
     const normalize = minutes => ((minutes % 1440) + 1440) % 1440;
@@ -106,9 +109,11 @@
     function live() {
       const now = minutesNow();
       draw(now, false);
+      if (previewPending) positionKnob(now + previewOffset);
     }
 
     function stopPreview() {
+      previewPending = false;
       if (previewObserver) previewObserver.disconnect();
       previewObserver = null;
     }
@@ -127,6 +132,7 @@
       if (previousPointer !== null && knob.hasPointerCapture(previousPointer)) {
         try { knob.releasePointerCapture(previousPointer); } catch (_) { }
       }
+      stopPreview();
       stopReturn();
       const from = displayedMinutes;
       // Interpolate time around the shortest arc, including across midnight
@@ -149,17 +155,18 @@
       returnFrame = requestAnimationFrame(step);
     }
 
-    // The knob runs 90 minutes ahead along the ring and eases back to now, readout unchanged
-    function previewSwing() {
-      if (explored || pointerId !== null || heldKey || returnFrame !== null) return;
-      if (reducedMotion.matches) return;
-      const base = displayedMinutes;
+    // The knob runs from two hours early to now, easing in and out; the readout stays live
+    function arrive() {
+      if (!previewPending) return;
+      stopPreview();
+      const from = displayedMinutes;
+      const distance = normalize(minutesNow() - from + 720) - 720;
       const started = performance.now();
-      const duration = 1600;
+      const duration = 1800;
       function step(now) {
         const progress = Math.min(1, (now - started) / duration);
-        const eased = progress < .5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-        positionKnob(base + 90 * Math.sin(Math.PI * eased));
+        const eased = progress < .5 ? 4 * Math.pow(progress, 3) : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        positionKnob(from + distance * eased);
         if (progress < 1) {
           returnFrame = requestAnimationFrame(step);
         } else {
@@ -241,7 +248,7 @@
     });
 
     window.addEventListener('blur', () => {
-      reset();
+      if (!previewPending) reset();
     });
 
     if (hint) {
@@ -257,7 +264,7 @@
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        reset(false);
+        if (!previewPending) reset(false);
       } else if (pointerId === null && !heldKey && returnFrame === null) {
         live();
       }
@@ -269,7 +276,7 @@
     });
 
     window.addEventListener('pageshow', event => {
-      if (event.persisted) reset(false);
+      if (event.persisted && !previewPending) reset(false);
       startTimer();
     });
 
@@ -277,24 +284,23 @@
       if (event.matches) reset(false);
     });
 
+    // The run starts once half the dial is in view (on phones the clipped dial shows about two
+    // thirds at most). Not the empty .orbit: base.css hides div:empty, so it never intersects.
+    // With reduced motion or without an observer the knob stays on now and only the halo is set.
+    if (!explored && !reducedMotion.matches && 'IntersectionObserver' in window) {
+      previewPending = true;
+      previewObserver = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        previewObserver.disconnect();
+        setTimeout(arrive, 250);
+      }, { threshold: 0.5 });
+      previewObserver.observe(orbit.parentElement);
+    } else if (!explored) {
+      sectionEl.classList.add('is-inviting');
+    }
+
     live();
     startTimer();
-
-    // The preview starts once half the dial is in view (on phones the clipped dial shows about two
-    // thirds at most). Not the empty .orbit: base.css hides div:empty, so it never intersects.
-    // Without an observer only the pulse runs.
-    if (!explored) {
-      if ('IntersectionObserver' in window) {
-        previewObserver = new IntersectionObserver(entries => {
-          if (!entries.some(entry => entry.isIntersecting)) return;
-          stopPreview();
-          setTimeout(previewSwing, 300);
-        }, { threshold: 0.5 });
-        previewObserver.observe(orbit.parentElement);
-      } else {
-        sectionEl.classList.add('is-inviting');
-      }
-    }
   }
 
   function setupAllClocks() {

@@ -25,7 +25,7 @@ CSS = '''
 #shopify-pc__banner,.shopify-pc__banner__dialog{display:none!important}
 .chronobiology-clock .dial{touch-action:auto!important}
 .chronobiology-clock .knob::after{inset:-4px;opacity:0}
-.chronobiology-clock.is-inviting .knob::after{animation:kc-qa-invite 1.4s ease-out 3!important}
+.chronobiology-clock.is-inviting .knob::after{animation:kc-qa-invite 1.4s ease-out infinite!important}
 @keyframes kc-qa-invite{0%{opacity:.7;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.35)}}
 '''
 
