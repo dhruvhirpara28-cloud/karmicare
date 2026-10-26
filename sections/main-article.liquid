@@ -1,97 +1,180 @@
-{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  The blog article (direction D of docs/blog/02-PROPOSAL.md, Victor 26 Oct): a centred header with the
+  homepage eyebrow, the title, the standfirst and a rule with date, reading time and Share; the
+  featured picture wide; the legal pages' contents menu beside a 680px text column; the study links
+  of the body as a Sources card; Keep reading with thumbnails. The homepage end CTA is its own section
+  after this one (templates/article.json). Styles: assets/kc-blog.css. Menu: assets/kc-blog-contents.js.
 
-<article class="article-template">
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-      {%- when '@app' -%}
-        <div class="page-width page-width--narrow">
-          {% render block %}
-        </div>
-      {%- when 'featured_image' -%}
-        {%- if article.image -%}
-          <div
-            class="article-template__hero-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-            {{ block.shopify_attributes }}
-          >
-            <div
-              class="article-template__hero-{{ block.settings.image_height }} media"
-              {% if block.settings.image_height == 'adapt' and article.image %}
-                style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
-              {% endif %}
-            >
-              <img
-                srcset="
-                  {% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
-                  {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
-                  {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
-                  {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
-                  {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}
-                  {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
-                  {{ article.image | image_url }} {{ article.image.width }}w
-                "
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                src="{{ article.image | image_url: width: 1100 }}"
-                loading="eager"
-                fetchpriority="high"
-                width="{{ article.image.width }}"
-                height="{{ article.image.height }}"
-                alt="{{ article.image.alt | escape }}"
-              >
-            </div>
+  The blocks keep their job in the theme editor: featured_image shows or hides the picture, title the
+  date, share the Share button, content the body; their order no longer moves the parts, because the
+  layout is fixed. App blocks print after the body.
+{%- endcomment -%}
+{{ 'kc-blog.css' | asset_url | stylesheet_tag }}
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'kc-blog-contents.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign kc_image_block = section.blocks | where: 'type', 'featured_image' | first
+  assign kc_title_block = section.blocks | where: 'type', 'title' | first
+  assign kc_share_block = section.blocks | where: 'type', 'share' | first
+  assign kc_content_block = section.blocks | where: 'type', 'content' | first
+
+  # Reading time: words at 200 a minute, rounded up. Every tag end gets a space first, so words in
+  # two paragraphs are never counted as one.
+  assign kc_words = article.content | replace: '>', '> ' | strip_html | split: ' ' | size
+  assign kc_minutes = kc_words | divided_by: 200.0 | ceil | at_least: 1
+
+  # The pictures in the body are the files' 480/600px thumbnails; the theme asks for the originals
+  # instead, at most 1600px wide, lazy (docs/blog/01-INVENTORY.md §4.3)
+  assign kc_body = article.content | replace: '_480x480.', '.' | replace: '_600x600.', '.' | replace: '.jpg?v=', '.jpg?width=1600&v=' | replace: '.png?v=', '.png?width=1600&v=' | replace: '<img ', '<img loading="lazy" decoding="async" '
+-%}
+
+{%- capture kc_sources -%}
+  {%- comment -%}
+    Sources: the links in the body that point to a study publisher, in the order they appear, each once.
+    The link text is the article's own anchor text; the publisher name comes from the link's host.
+    Consumer sites (Healthline, Forbes, WebMD …) are not on the list and stay inline only.
+  {%- endcomment -%}
+  {%- assign kc_hosts = 'pmc.ncbi.nlm.nih.gov|PubMed Central,ncbi.nlm.nih.gov/pmc|PubMed Central,pubmed.ncbi.nlm.nih.gov|PubMed,sciencedirect.com|ScienceDirect,mdpi.com|MDPI,researchgate.net|ResearchGate,diabetesjournals.org|Diabetes Care,jech.bmj.com|Journal of Epidemiology & Community Health,biomedcentral.com|BMC Public Health,healthopenresearch.org|Health Open Research,jebms.org|JEBMS,hindawi.com|Hindawi,intechopen.com|IntechOpen,biointerfaceresearch.com|Biointerface Research,doi.org|DOI' | split: ',' -%}
+  {%- assign kc_seen = '|' -%}
+  {%- assign kc_parts = article.content | split: '<a ' -%}
+  {%- for kc_part in kc_parts offset: 1 -%}
+    {%- unless kc_part contains 'href="' -%}{%- continue -%}{%- endunless -%}
+    {%- assign kc_tag = kc_part | split: '>' | first -%}
+    {%- assign kc_href = kc_tag | split: 'href="' | last | split: '"' | first -%}
+    {%- assign kc_label = '' -%}
+    {%- for kc_pair in kc_hosts -%}
+      {%- assign kc_host = kc_pair | split: '|' | first -%}
+      {%- if kc_href contains kc_host -%}
+        {%- assign kc_label = kc_pair | split: '|' | last -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if kc_label == blank -%}{%- continue -%}{%- endif -%}
+    {%- assign kc_key = kc_href | split: '#' | first | append: '|' -%}
+    {%- if kc_seen contains kc_key -%}{%- continue -%}{%- endif -%}
+    {%- assign kc_seen = kc_seen | append: kc_key -%}
+    {%- assign kc_text = kc_part | split: '</a>' | first | remove_first: kc_tag | remove_first: '>' | strip_html | strip -%}
+    {%- if kc_text.size < 4 -%}{%- assign kc_text = kc_label | escape -%}{%- endif -%}
+    <li class="kc-blog-sources__item">
+      <a class="kc-blog-sources__link" href="{{ kc_href }}" target="_blank" rel="noopener">
+        <span class="kc-blog-sources__title">{{ kc_text }}</span>
+        <span class="kc-blog-sources__host">{{ kc_label | escape }}</span>
+        <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 6V2H10M14 2L6.66667 9.33334M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39053C2.64057 4.14048 2.97971 4 3.33333 4H7.33333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="visually-hidden">{{ 'accessibility.link_messages.new_window' | t }}</span>
+      </a>
+    </li>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<article class="kc-blog">
+  <header class="kc-blog__head">
+    <div class="kc-blog__wrap">
+      <a class="kc-blog__eyebrow kc-caption-subheading subtitle-item" href="{{ blog.url }}">{{ blog.title | escape }}</a>
+      <h1 class="kc-blog__title"{% if kc_title_block %} {{ kc_title_block.shopify_attributes }}{% endif %}>{{ article.title | escape }}</h1>
+      {%- if article.excerpt != blank -%}
+        <p class="kc-blog__standfirst">{{ article.excerpt | strip_html | escape }}</p>
+      {%- endif -%}
+      <div class="kc-blog__bar">
+        <ul class="kc-blog__meta" role="list">
+          {%- if kc_title_block == blank or kc_title_block.settings.blog_show_date -%}
+            <li>{{ article.published_at | time_tag: format: 'date' }}</li>
+          {%- endif -%}
+          {%- if kc_title_block.settings.blog_show_author -%}
+            <li>{{ article.author | escape }}</li>
+          {%- endif -%}
+          <li>{{ 'blogs.article.reading_time' | t: minutes: kc_minutes }}</li>
+        </ul>
+        {%- if kc_share_block -%}
+          {%- assign kc_share_url = request.origin | append: article.url -%}
+          <div class="kc-blog__share-wrap">
+            {%- render 'share-button', block: kc_share_block, share_link: kc_share_url -%}
           </div>
         {%- endif -%}
+      </div>
+    </div>
+  </header>
 
-      {%- when 'title' -%}
-        <header
-          class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          <h1
-            class="article-template__title"
-          >
-            {{ article.title | escape }}
-          </h1>
-          {%- if block.settings.blog_show_date -%}
-            <span class="circle-divider caption-with-letter-spacing">
-              {{- article.published_at | time_tag: format: 'date' -}}
-            </span>
-          {%- endif -%}
-          {%- if block.settings.blog_show_author -%}
-            <span class="caption-with-letter-spacing">
-              <span>{{ article.author }}</span>
-            </span>
-          {%- endif -%}
-        </header>
+  {%- if kc_image_block and article.image -%}
+    <figure class="kc-blog__figure" {{ kc_image_block.shopify_attributes }}>
+      <div class="kc-blog__media" style="--kc-media-natural-width: {{ article.image.width | divided_by: 10.0 }}rem;">
+        {{-
+          article.image
+          | image_url: width: 2560
+          | image_tag:
+            widths: '550, 750, 1100, 1500, 1920, 2560',
+            sizes: '(min-width: 1344px) 1280px, (min-width: 641px) calc(100vw - 64px), 100vw',
+            loading: 'eager',
+            fetchpriority: 'high'
+        -}}
+      </div>
+    </figure>
+  {%- endif -%}
 
-      {%- when 'content' -%}
-        <div
-          class="article-template__content page-width page-width--narrow rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          {{ article.content }}
+  <div class="kc-blog__main">
+    <div class="kc-blog__layout">
+      <aside class="kc-blog__toc" data-kc-blog-contents-box>
+        <p class="kc-blog-toc__eyebrow subtitle-item opacity-xl" aria-hidden="true">{{ 'blogs.article.on_this_page' | t }}</p>
+        <nav aria-label="{{ 'blogs.article.on_this_page' | t | escape }}">
+          <ul class="kc-blog-toc__list" role="list" data-kc-blog-contents></ul>
+        </nav>
+      </aside>
+
+      <div class="kc-blog__text">
+        <div class="kc-blog__body rte"{% if kc_content_block %} {{ kc_content_block.shopify_attributes }}{% endif %}>
+          {{- kc_body -}}
         </div>
 
-      {%- when 'share' -%}
-        <div
-          class="article-template__social-sharing page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          {% assign share_url = request.origin | append: article.url %}
-          {% render 'share-button', block: block, share_link: share_url %}
-        </div>
-    {%- endcase -%}
-  {%- endfor -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            {% render block %}
+          {%- endif -%}
+        {%- endfor -%}
 
-  <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
-      <span class="icon-wrap">
-        <span class="svg-wrapper">
-          {{- 'icon-arrow.svg' | inline_asset_content -}}
-        </span>
-      </span>
-      {{ 'blogs.article.back_to_blog' | t: title: blog.title | escape }}
-    </a>
+        {%- if kc_sources != blank -%}
+          <div class="kc-blog__end">
+            <aside class="kc-blog-sources" aria-labelledby="KcBlogSources-{{ section.id }}">
+              <h2 class="kc-blog-sources__heading" id="KcBlogSources-{{ section.id }}" data-kc-blog-toc-extra>
+                {{- 'blogs.article.sources' | t -}}
+              </h2>
+              <ul class="kc-blog-sources__list" role="list">
+                {{- kc_sources -}}
+              </ul>
+            </aside>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
   </div>
+
+  {%- liquid
+    assign kc_related_count = 0
+    capture kc_related
+      for kc_other in blog.articles
+        if kc_other.id == article.id
+          continue
+        endif
+        render 'kc-blog-row', article: kc_other, heading: 'h3', show_excerpt: false
+        assign kc_related_count = kc_related_count | plus: 1
+        if kc_related_count == 3
+          break
+        endif
+      endfor
+    endcapture
+  -%}
+  {%- if kc_related_count > 0 -%}
+    <div class="kc-blog-related">
+      <div class="kc-blog__layout">
+        <div class="kc-blog__text">
+          <h2 class="kc-blog__section-heading">{{ 'blogs.article.keep_reading' | t }}</h2>
+          <ul class="kc-blog-list" role="list">
+            {{- kc_related -}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
   {%- if blog.comments_enabled? -%}
     <div class="article-template__comment-wrapper background-secondary">
       <div

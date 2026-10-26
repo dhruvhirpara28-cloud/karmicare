@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
 OUT = os.path.join(ROOT, "docs", "blog", "shots")
 BASE = "http://127.0.0.1:9390/docs/blog/fixture/site/"
-HEIGHT = {390: 844, 750: 900, 1100: 900, 1440: 900}  # taller than Orca's pane (~940) tiles the frame
+HEIGHT = {360: 780, 390: 844, 750: 900, 990: 900, 1100: 900, 1440: 900}  # taller than Orca's pane (~940) tiles the frame
 
 PARTS = {
     "body": ".kc-blog__body blockquote",
@@ -47,6 +47,17 @@ def plan():
                 for w in (390, 1440):
                     for part, sel in PARTS.items():
                         shots.append((f"{d}-article-{part}-{w}-{mode}", f"{d}-article.html", w, f"mode={mode}&at={sel}"))
+    elif which == "theme":
+        # Phase 2: the theme's real Liquid (site/theme-*.html), with the global lane's tokens (the blog
+        # lands after them), at the brief's widths, Day and Night
+        for mode in ("day", "night"):
+            for w in (360, 390, 750, 990, 1440):
+                for page in ("article-nano", "article-short", "article-noimage", "blog-many", "blog-one", "blog-two"):
+                    shots.append((f"theme-{page}-top-{w}-{mode}", f"theme-{page}.html", w, f"tokens=next&mode={mode}"))
+            for w in (390, 990, 1440):
+                for part in ("body", "image", "sources", "related", "cta"):
+                    sel = {"related": ".kc-blog__section-heading", "cta": "[id*=featured_product]"}.get(part, PARTS.get(part))
+                    shots.append((f"theme-article-nano-{part}-{w}-{mode}", "theme-article-nano.html", w, f"tokens=next&mode={mode}&at={sel}"))
     elif which == "tokens":
         # D in the three token states: today, the global lane's solid text, and solid + muted secondary
         for state, q0 in (("now", ""), ("next", "tokens=next"), ("next-muted", "tokens=next&soft=muted")):

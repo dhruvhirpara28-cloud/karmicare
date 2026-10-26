@@ -408,8 +408,10 @@ def shell(kind, title, main, direction):
     css = ["kc-blog-base.css", f"kc-blog-{direction}.css"]
     if direction == "d":
         css.insert(1, "kc-blog-a.css")  # the Keep reading and index rows
+    if direction == "theme":
+        css = []  # the rendered theme sections link assets/kc-blog.css themselves
     head_add = f'<script>{SURFACE_JS}</script>' + "".join(f'<link rel="stylesheet" href="{FIX}/css/{c}">' for c in css)
-    if direction == "d" and home:
+    if direction in ("d", "theme") and home:
         # what the homepage head adds for its end CTA: Loop's widget styles (theme.liquid prints
         # them for product, index and collection only; Phase 2 adds article)
         head_add += '<link rel="stylesheet" href="/assets/loop-widget.css">' + (home["loopStyle"] or "")
@@ -439,6 +441,19 @@ for d, (art, blog) in builders.items():
     for handle in order:
         write(link(handle, d), shell("article", f"Blog {d.upper()} · {names[d]} · {articles[handle]['title'][:40]}", art(handle), d))
     write(f"{d}-blog.html", shell("blog", f"Blog {d.upper()} · {names[d]} · index", blog(order[:6]), d))
+
+# Phase 2: the theme's real Liquid, rendered by render-liquid.mjs into data/rendered/, in the same shell.
+# Article pages get the end CTA after them, as templates/article.json orders the sections.
+RENDERED = os.path.join(HERE, "data", "rendered")
+if os.path.isdir(RENDERED):
+    for f in sorted(x for x in os.listdir(RENDERED) if x.endswith(".html")):
+        name = f[:-5]
+        inner = open(os.path.join(RENDERED, f)).read()
+        main = f'<div class="shopify-section" id="shopify-section-template--kc-blog__main">{inner}</div>'
+        kind = "article" if name.startswith("article") else "blog"
+        if kind == "article":
+            main += end_cta()
+        write(f"theme-{name}.html", shell(kind, f"Blog · theme render · {name}", main, "theme"))
 
 for k, (img, fit, label) in HERO_OPTIONS.items():
     write(f"d-article-hero-{k}.html", shell("article", f"Blog D · featured picture option {k}", d_article("nano-hydroxyapatite", img, fit), "d"))

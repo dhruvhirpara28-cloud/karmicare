@@ -76,7 +76,8 @@
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
-    {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' -%}
+    {%- comment -%} article: the blog's end CTA is the homepage's featured-product section with Loop's plan picker (templates/article.json) {%- endcomment -%}
+    {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' or template.name == 'article' -%}
       <link rel="stylesheet" href="{{ 'loop-widget.css' | asset_url }}">
       <script
         type="text/javascript"
@@ -456,7 +457,7 @@
     {%- if request.page_type == 'policy' %}{{ 'kc-policy-page.css' | asset_url | stylesheet_tag }}{% endif -%}
     {% render 'button-styles' %}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
-    {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' -%}
+    {%- if template.name == 'product' or template.name == 'index' or template.name == 'collection' or template.name == 'article' -%}
       <style class="loop-style">
         {% render 'loop-widget.css.liquid' %}
       </style>
