@@ -8,8 +8,8 @@
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 174,
-  "held": 22,
+  "translated": 173,
+  "held": 23,
   "locale-present": 2,
   "theme-key": 32,
   "admin": 2
@@ -478,10 +478,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_text",
    "en": "Formulated for both shifts: Awake by day, Asleep by night.",
    "en_sha1": "61d06b63816484d100ca48ce1a77cad5d383ab1e",
-   "fr": "Formulé pour les deux temps de la journée : Awake le jour, Asleep la nuit.",
-   "status": "translated",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "retired 26 Oct: the clock footer text is empty on the homepage branch (Victor: 'may go for now', via the landing desk); left out of the registration as footer_link_text; was translated: Formulé pour les deux temps de la journée : Awake le jour, Asleep la nuit.",
    "source_status": "approved"
   },
   {
