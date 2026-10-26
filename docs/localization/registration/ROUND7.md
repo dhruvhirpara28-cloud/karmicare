@@ -12,7 +12,7 @@
 |---|---|---|
 | EN | DRAG THE RING · EXPLORE 24 HOURS | DRAG THE DOT · EXPLORE 24 HOURS |
 | NL | SLEEP AAN DE RING · VERKEN 24 UUR | SLEEP DE BOL · VERKEN 24 UUR |
-| FR | GLISSEZ L’ANNEAU · EXPLOREZ 24 HEURES | GLISSEZ LE POINT · EXPLOREZ 24 HEURES |
+| FR | GLISSEZ L’ANNEAU · EXPLOREZ 24 HEURES | GLISSEZ LE POINT · 24 HEURES (Victor 26 Oct, shortened to fit one line at 360; replaces "GLISSEZ LE POINT · EXPLOREZ 24 HEURES") |
 
 At the restart, take the EN from the live template. It must read exactly as above. Then the row becomes `corrected` (`old_en` kept), and NL/FR get the approved text. The registration overwrites the earlier NL/FR value.
 
