@@ -385,6 +385,10 @@
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
+        /* Grayscale smoothing in Day and Night: thinner, calmer text on macOS and iOS; with the
+           text at full navy / cream it no longer greys out in Night (Victor, 26 Oct) */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       @media screen and (min-width: 750px) {
@@ -406,33 +410,10 @@
           --font-body-family: {{ settings.body_font_name }};
         }
 
-        @font-face {
-          font-family: 'Gotham Rounded';
-          src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Gotham-Rounded-Light.ttf?v=1791177639') format('truetype');
-          font-weight: 300;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family: 'Gotham Rounded';
-          src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Gotham-Rounded-Regular.ttf?v=1791177639') format('truetype');
-          font-weight: 400;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family:'Gotham Rounded';
-          src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Gotham-Rounded-Medium.ttf?v=1791177640') format('truetype');
-          font-weight: 500;
-          font-display: swap;
-        }
-
-        @font-face {
-          font-family: 'Gotham Rounded';
-          src: url('https://cdn.shopify.com/s/files/1/0642/6142/3286/files/Gotham-Rounded-Bold.ttf?v=1791177640') format('truetype');
-          font-weight: 700;
-          font-display: swap;
-        }
+        {%- comment -%}
+          Gotham Rounded is gone: Nunito replaced it for licensing (Victor, 26 Oct). The four TTF
+          files in Shopify Files are deleted in the admin, not here.
+        {%- endcomment -%}
       {% endstyle %}
     {% endif %}
     {% comment %}Day/Night mode — overrides Shopify color scheme variables{% endcomment %}

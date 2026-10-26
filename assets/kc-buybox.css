@@ -121,8 +121,6 @@
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-mapped-text-default-body);
-  /* .opacity-xl dims it to 0.7; the body colour already carries the 68% / 76% */
-  opacity: 1;
 }
 
 .kc-buybox .product__description p {
@@ -270,14 +268,13 @@
   color: var(--kc-buybox-text);
 }
 
-/* "Renews every 60 days" / "€0.49 / brushing" (base.css dims it to 0.7) */
+/* "Renews every 60 days" / "€0.49 / brushing", in the body colour */
 .kc-buybox .kc-plan-subrow {
   margin-top: 0;
   gap: 0;
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-mapped-text-default-body);
-  opacity: 1;
 }
 
 .kc-buybox .loop-subscription-group-price-amount {

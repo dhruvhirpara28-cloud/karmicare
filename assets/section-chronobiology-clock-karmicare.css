@@ -146,7 +146,6 @@ body.night-mode .chronobiology-clock {
   margin-top: calc(var(--dial-size) * -41 / 422.8);
   margin-left: calc((100% - var(--dial-size)) / 2);
   isolation: isolate;
-  touch-action: none;
 }
 
 .chronobiology-clock .artwork {
@@ -331,7 +330,9 @@ body.night-mode .chronobiology-clock {
   pointer-events: none;
 }
 
-/* Figma "now-dot": 40px accent dot with a 4px accent ring at 40% */
+/* Figma "now-dot": 40px accent dot with a 4px accent ring at 40%. Only the knob holds the touch:
+   on phones the dial is wider than the screen, so a swipe over the orb scrolls the page
+   (Victor, 26 Oct). */
 .chronobiology-clock .knob {
   position: absolute;
   z-index: 10;
@@ -356,6 +357,43 @@ body.night-mode .chronobiology-clock {
 .chronobiology-clock .knob svg {
   display: block;
   pointer-events: none;
+}
+
+/* A 48px touch target around the 40px dot */
+.chronobiology-clock .knob::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+}
+
+/* Once the knob has run to the current time (the script sets .is-inviting once per visit), a
+   short accent halo pulses out of the dot and fades, until the knob is taken (Victor, 26 Oct) */
+.chronobiology-clock .knob::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--chrono-accent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chronobiology-clock.is-inviting .knob::after {
+  animation: knob-invite 1.4s ease-out infinite;
+}
+
+@keyframes knob-invite {
+  0% {
+    opacity: .7;
+    transform: scale(1);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
 }
 
 @media (hover: hover) {
@@ -426,7 +464,8 @@ body.night-mode .chronobiology-clock {
   color: var(--chrono-body);
 }
 
-/* ── Current time readout ── */
+/* ── Current time readout, above the dial (Victor, 26 Oct; was under it) ──
+   The dial keeps the gap the readout had under it, now on the readout's other side */
 .chronobiology-clock .readout {
   position: relative;
   z-index: 1;
@@ -436,12 +475,37 @@ body.night-mode .chronobiology-clock {
   gap: var(--kc-responsive-spacing-layout-xxs);
   width: 100%;
   max-width: 604px;
-  margin: var(--kc-responsive-spacing-layout-xl) auto 0;
+  margin: 0 auto var(--kc-responsive-spacing-layout-xl);
   text-align: center;
 }
 
+/* The explore pill under the time copy, at every width: phones had no cue that the knob moves
+   (Victor, 26 Oct). Its step from the copy is the one it had to the time line above it. */
 .chronobiology-clock .hint {
-  display: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  height: 36px;
+  margin: calc(var(--kc-responsive-spacing-layout-md) - var(--kc-responsive-spacing-layout-xxs)) 0 0;
+  padding: 0 var(--kc-responsive-spacing-layout-sm);
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: var(--kc-shape-radius-full);
+  background: transparent;
+  filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
+  font-family: var(--kc-font-role-identity);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 12px;
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  color: var(--chrono-ink);
+  transition: border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
+}
+
+.chronobiology-clock .hint svg {
+  flex-shrink: 0;
+  color: var(--chrono-icon);
 }
 
 .chronobiology-clock .time-line,
@@ -533,11 +597,11 @@ body.night-mode .chronobiology-clock {
     order: 0;
   }
 
-  .chronobiology-clock .timeline {
+  .chronobiology-clock .readout {
     order: 1;
   }
 
-  .chronobiology-clock .readout {
+  .chronobiology-clock .timeline {
     order: 2;
   }
 
@@ -572,10 +636,6 @@ body.night-mode .chronobiology-clock {
 
 /* ── From 750px: the desktop frame ── */
 @media screen and (min-width: 750px) {
-  .chronobiology-clock .heading {
-    margin-bottom: var(--kc-responsive-spacing-grid-gutter-tight);
-  }
-
   .chronobiology-clock .lede p {
     display: block;
   }
@@ -596,35 +656,10 @@ body.night-mode .chronobiology-clock {
     letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   }
 
+  /* The 604px dial has 58px of air above the sun, as the readout had 28px under the moon before;
+     the heading now steps to the readout with its mobile gap (layout-2xl) */
   .chronobiology-clock .readout {
-    margin-top: 0;
-  }
-
-  .chronobiology-clock .hint {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--kc-responsive-spacing-layout-xs);
-    height: 36px;
-    margin: 0 0 calc(var(--kc-responsive-spacing-layout-md) - var(--kc-responsive-spacing-layout-xxs));
-    padding: 0 var(--kc-responsive-spacing-layout-sm);
-    border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
-    border-radius: var(--kc-shape-radius-full);
-    background: transparent;
-    filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
-    font-family: 'Gotham Rounded', var(--kc-font-role-identity);
-    font-weight: 500;
-    font-size: 11px;
-    line-height: 12px;
-    letter-spacing: 1.1px;
-    text-transform: uppercase;
-    color: var(--chrono-ink);
-    transition: border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
-  }
-
-  .chronobiology-clock .hint svg {
-    flex-shrink: 0;
-    color: var(--chrono-icon);
+    margin-bottom: 0;
   }
 
   .chronobiology-clock .state-copy {
