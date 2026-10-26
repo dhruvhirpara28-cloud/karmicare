@@ -307,18 +307,41 @@ home = json.load(open(HOME_PATH)) if os.path.exists(HOME_PATH) else None
 def end_cta():
     """The homepage's end CTA: the featured-product section exactly as the live homepage prints it
     (Phase 2: the same section in templates/article.json). Its scripts are removed like the shell's,
-    so the Loop plan picker shows its Liquid state only."""
+    so the Loop plan picker shows its Liquid state only, except the two that run the kit animation:
+    the kc-hero-animation element and the script that lands the kit on the button line."""
     if not home or not home["section"]:
         return ""
+    keep = [m.group(0) for m in re.finditer(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", home["section"], re.S)
+            if "kc-hero-animation" in m.group(1) or "--kc-hero-lift" in m.group(1)]
     s = rewrite(home["section"])
-    return s.replace('id="shopify-section-template--', 'id="shopify-section-kc-blog-endcta-template--', 1)
+    s = s.replace('id="shopify-section-template--', 'id="shopify-section-kc-blog-endcta-template--', 1)
+    return s + "".join(keep)
 
 
-def d_article(handle):
-    a = articles[handle]
+# Featured-picture alternatives for the nano article (Victor, 26 Oct: the 520px picture is small and
+# shows an outdated pump bottle). All three are live in Files today.
+CDN = "https://www.karmicare.com/cdn/shop/files/"
+HERO_OPTIONS = {
+    "1": ({"src": CDN + "kc-research-nhap-tubules-2000x2400-v1.jpg", "width": 2000, "height": 2400,
+           "alt": "Illustration of dentine tubules"}, None,
+          "The Nano-HAp research card's picture (Victor picked it 24 Oct, live on the homepage and PDP card)"),
+    "2": ({"src": CDN + "kc-hero-kit.png", "width": 3936, "height": 2960,
+           "alt": "The Karmicare kit: Awake and Asleep toothpaste, two toothbrushes and floss"}, "contain",
+          "The homepage hero kit (kc-hero-kit.png), whole on the accent tint"),
+    "3": ({"src": CDN + "karmicare-duo-pack-transparent.png", "width": 2048, "height": 2048,
+           "alt": "Awake and Asleep toothpaste with their box"}, "contain",
+          "The Duo packshot (the product's first picture), whole on the accent tint"),
+}
+
+
+def d_article(handle, image=None, fit=None):
+    a = dict(articles[handle])
+    if image:
+        a["image"] = image  # a featured-picture alternative (02-PROPOSAL D18)
     fig = ""
     if a["image"]:
-        fig = (f'<figure class="kc-blog-d__figure" data-kc-featured>'
+        fit_attr = f' data-fit="{fit}"' if fit else ""
+        fig = (f'<figure class="kc-blog-d__figure"{fit_attr} data-kc-featured>'
                f'{picture(a["image"], "(min-width: 1344px) 1280px, (min-width: 750px) calc(100vw - 64px), 100vw", widths=(550, 750, 1100, 1500, 1920), lazy=False, cap=True)}</figure>')
     standfirst = f'<p class="kc-blog__standfirst">{esc(excerpts.get(handle))}</p>' if excerpts.get(handle) else ""
     # the legal pages' menu (sections/legal-toc-section.liquid), with its theme classes
@@ -410,6 +433,9 @@ for d, (art, blog) in builders.items():
     for handle in order:
         write(link(handle, d), shell("article", f"Blog {d.upper()} · {names[d]} · {articles[handle]['title'][:40]}", art(handle), d))
     write(f"{d}-blog.html", shell("blog", f"Blog {d.upper()} · {names[d]} · index", blog(order[:6]), d))
+
+for k, (img, fit, label) in HERO_OPTIONS.items():
+    write(f"d-article-hero-{k}.html", shell("article", f"Blog D · featured picture option {k}", d_article("nano-hydroxyapatite", img, fit), "d"))
 
 idx = ["<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Blog fixture</title>",
        "<style>body{font:16px/1.5 system-ui;margin:24px;max-width:760px}a{color:#191f38}li{margin:4px 0}</style>",

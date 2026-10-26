@@ -170,7 +170,9 @@ html[data-kc-labels='site'] .kc-blog__button {
   font-family: var(--font-heading-family) !important;
   font-weight: var(--font-500-weight) !important;
   color: var(--kc-mapped-text-default-heading) !important;
-  text-wrap: balance;
+  /* Body headings fill the line, as on the reference; only the title is balanced. "pretty" just
+     keeps a single word from ending up alone on the last line (Victor, 26 Oct: headings looked cut) */
+  text-wrap: pretty;
 }
 
 .kc-blog__body :is(h1, h2),

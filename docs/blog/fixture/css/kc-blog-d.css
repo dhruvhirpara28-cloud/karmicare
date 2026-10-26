@@ -89,10 +89,25 @@ a.kc-blog-d__eyebrow:hover {
   background: var(--kc-mapped-gradient-section-accent);
 }
 
+/* Always a wide 16:9 frame (the 2024 pictures are 16:9 already); a portrait or square file is
+   cropped to it from the centre, a transparent packshot ([data-fit=contain]) sits whole on the
+   accent tint instead */
 .kc-blog-d__figure .kc-blog__media {
   max-width: min(100%, 128rem, var(--kc-media-natural-width, 128rem)); /* the reference's wide figure */
+  aspect-ratio: 16 / 9;
   margin-inline: auto;
   border-radius: 0;
+}
+
+.kc-blog-d__figure .kc-blog__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.kc-blog-d__figure[data-fit='contain'] .kc-blog__media img {
+  object-fit: contain;
+  padding: var(--kc-responsive-spacing-layout-xl);
+  box-sizing: border-box;
 }
 
 /* ---- Body (accent -> page) -------------------------------------------------------------------
