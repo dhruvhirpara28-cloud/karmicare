@@ -346,7 +346,8 @@ body.night-mode .chronobiology-clock {
   border-radius: 50%;
   background: var(--chrono-accent);
   box-shadow: 0 0 0 4px rgba(var(--kc-mapped-surface-accent-default-rgb), .4);
-  color: var(--chrono-icon);
+  /* The icon sits on the accent dot: the on-accent icon token, navy in Day and Night (Victor, 26 Oct) */
+  color: var(--kc-mapped-icon-accent-default-on-accent);
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -464,30 +465,30 @@ body.night-mode .chronobiology-clock {
   color: var(--chrono-body);
 }
 
-/* ── Current time readout, above the dial (Victor, 26 Oct; was under it) ──
-   The dial keeps the gap the readout had under it, now on the readout's other side */
+/* ── Readout: the explore pill above the dial (option E, Victor, 26 Oct) ──
+   It keeps the gap the readout had above the dial; the time rides on the knob (.knob-time) and
+   the caption and copy sit in the orb (.orb-text) */
 .chronobiology-clock .readout {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--kc-responsive-spacing-layout-xxs);
   width: 100%;
   max-width: 604px;
   margin: 0 auto var(--kc-responsive-spacing-layout-xl);
   text-align: center;
 }
 
-/* The explore pill under the time copy, at every width: phones had no cue that the knob moves
-   (Victor, 26 Oct). Its step from the copy is the one it had to the time line above it. */
+/* The explore pill, at every width: phones had no cue that the knob moves (Victor, 26 Oct).
+   One type step up from its first 11px (label-lg, Victor, 26 Oct). */
 .chronobiology-clock .hint {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--kc-responsive-spacing-layout-xs);
   height: 36px;
-  margin: calc(var(--kc-responsive-spacing-layout-md) - var(--kc-responsive-spacing-layout-xxs)) 0 0;
+  margin: 0;
   padding: 0 var(--kc-responsive-spacing-layout-sm);
   border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
   border-radius: var(--kc-shape-radius-full);
@@ -495,8 +496,8 @@ body.night-mode .chronobiology-clock {
   filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
   font-family: var(--kc-font-role-identity);
   font-weight: 500;
-  font-size: 11px;
-  line-height: 12px;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
   color: var(--chrono-ink);
@@ -508,9 +509,42 @@ body.night-mode .chronobiology-clock {
   color: var(--chrono-icon);
 }
 
+/* ── Caption and copy: under the orb on phones, inside it from 750 ── */
+.chronobiology-clock .orb-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xxs);
+  width: 100%;
+  max-width: 380px;
+  margin: var(--kc-responsive-spacing-layout-xl) auto 0;
+  text-align: center;
+}
+
 .chronobiology-clock .time-line,
 .chronobiology-clock .state-copy {
   margin: 0;
+}
+
+/* The time badge: page-coloured, it rides inside the ring next to the knob */
+.chronobiology-clock .knob-time {
+  position: absolute;
+  z-index: 11;
+  left: 50%;
+  top: 50%;
+  padding: 4px 10px;
+  border-radius: var(--kc-shape-radius-full);
+  background: var(--kc-mapped-surface-page);
+  box-shadow: 0 4px 12px rgba(var(--kc-brand-original-dark-blue-rgb), .18);
+  color: var(--chrono-ink);
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .chronobiology-clock--time-small .time-line {
@@ -567,6 +601,8 @@ body.night-mode .chronobiology-clock {
 .chronobiology-clock .callout,
 .chronobiology-clock .callout *,
 .chronobiology-clock .readout *,
+.chronobiology-clock .orb-text *,
+.chronobiology-clock .knob-time,
 .chronobiology-clock__footer,
 .chronobiology-clock__footer *,
 .chronobiology-clock .time-label {
@@ -589,8 +625,10 @@ body.night-mode .chronobiology-clock {
     align-items: center;
   }
 
+  /* The stage holds the dial, the caption and copy, and the cards, in that order */
   .chronobiology-clock .stage {
-    display: contents;
+    position: relative;
+    width: 100%;
   }
 
   .chronobiology-clock .heading {
@@ -601,12 +639,8 @@ body.night-mode .chronobiology-clock {
     order: 1;
   }
 
-  .chronobiology-clock .timeline {
+  .chronobiology-clock .stage {
     order: 2;
-  }
-
-  .chronobiology-clock .callouts {
-    order: 3;
   }
 
   .chronobiology-clock__footer {
@@ -662,9 +696,39 @@ body.night-mode .chronobiology-clock {
     margin-bottom: 0;
   }
 
-  .chronobiology-clock .state-copy {
-    font-size: var(--kc-responsive-label-lg-text-size);
-    line-height: var(--kc-responsive-body-sm-line-height);
+  /* In the orb: centred on it (the dial sits at the top of the stage), the Awake and Asleep words
+     give way, and the text keeps the dark brand blue in Day and Night, as the orb artwork is the
+     same light-top, dark-base sphere in both (Victor, 26 Oct) */
+  .chronobiology-clock .orb-text {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: calc(var(--dial-size) / 2);
+    width: calc(var(--dial-size) * .46);
+    max-width: none;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    color: var(--kc-brand-original-dark-blue);
+    pointer-events: none;
+  }
+
+  .chronobiology-clock .shift-label {
+    display: none;
+  }
+
+  .chronobiology-clock .orb-text .time-line {
+    color: inherit;
+    font-size: calc(var(--dial-size) * 13 / 604);
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  /* One type step up from the earlier in-orb copy (Victor, 26 Oct) */
+  .chronobiology-clock .orb-text .state-copy {
+    max-width: none;
+    color: inherit;
+    font-size: calc(var(--dial-size) * 16 / 604);
+    line-height: 1.3;
   }
 
   .chronobiology-clock__footer {
