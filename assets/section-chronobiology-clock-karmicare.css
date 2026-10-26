@@ -612,11 +612,11 @@ body.night-mode .chronobiology-clock {
     border-radius: var(--kc-shape-radius-full);
     background: transparent;
     filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
-    font-family: 'Gotham Rounded', var(--kc-font-role-identity);
+    font-family: var(--kc-font-role-identity);
     font-weight: 500;
     font-size: 11px;
     line-height: 12px;
-    letter-spacing: 1.1px;
+    letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
     text-transform: uppercase;
     color: var(--chrono-ink);
     transition: border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
