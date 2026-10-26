@@ -65,6 +65,8 @@ The bodies link to paths from the old Webflow site. Checked on the live store on
 
 Seven of the eleven old paths are dead. The fix is either URL redirects in Admin (Online Store → Navigation → URL redirects) or relinking in the bodies. Both are outside this lane, so this goes to the landing desk.
 
+**Fixed 26 Oct:** Victor imported `docs/blog/REDIRECTS.csv` in Admin (Content → Menus → URL redirects). Checked on the live store the same day with `fixture/tools/probe-redirects.js`: all seven paths answer 200 at their target (the Duo, and the nano, fluoride, nootropics and SLS articles).
+
 ## 6. Claim and brand notes for the evidence track
 
 I do not edit article bodies. These are what I found while reading them, against the EU cosmetic claim rules and Victor's brand rules in the lane brief. A word search plus reading the hits, not a full legal review.
