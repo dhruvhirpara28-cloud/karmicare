@@ -112,6 +112,20 @@
       if (previewPending) positionKnob(now + previewOffset);
     }
 
+    // The copy sits above the dial, so it keeps the height of its longest window message in this
+    // language and width: dragging through the hours must not move the dial under the finger
+    function reserveCopyHeight() {
+      const shown = copyOut.textContent;
+      copyOut.style.minHeight = '';
+      let tallest = 0;
+      windows.forEach(([, , n]) => {
+        copyOut.textContent = readout.getAttribute('data-window-' + n) || '';
+        tallest = Math.max(tallest, copyOut.getBoundingClientRect().height);
+      });
+      copyOut.textContent = shown;
+      copyOut.style.minHeight = Math.ceil(tallest) + 'px';
+    }
+
     function stopPreview() {
       previewPending = false;
       if (previewObserver) previewObserver.disconnect();
@@ -301,6 +315,15 @@
 
     live();
     startTimer();
+
+    reserveCopyHeight();
+    if (document.fonts) document.fonts.ready.then(reserveCopyHeight);
+    let lastWidth = copyOut.clientWidth;
+    window.addEventListener('resize', () => {
+      if (copyOut.clientWidth === lastWidth) return;
+      lastWidth = copyOut.clientWidth;
+      reserveCopyHeight();
+    });
   }
 
   function setupAllClocks() {
