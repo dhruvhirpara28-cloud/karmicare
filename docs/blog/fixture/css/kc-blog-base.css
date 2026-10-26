@@ -12,7 +12,12 @@
   --kc-blog-gutter: var(--kc-responsive-spacing-page-gutter);
   --kc-blog-wide: 137.6rem; /* --kc-responsive-spacing-page-container at 1440 */
   --kc-blog-para: var(--kc-responsive-spacing-layout-lg);
+  /* Secondary text (date, reading time, publisher, list markers). Today the caption token, which
+     the global lane makes solid (docs/blog/NOTE-GLOBAL-TOKEN-CHANGES.md); decision D23 asks
+     whether it should then move to the solid, softer --kc-mapped-text-primary-default-muted. */
+  --kc-blog-soft-text: var(--kc-mapped-text-default-caption);
   color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-use-body);
 }
 
 .kc-blog__wrap {
@@ -33,7 +38,7 @@
 .kc-blog__eyebrow {
   display: block;
   margin: 0 0 var(--kc-responsive-spacing-layout-md);
-  font-family: var(--kc-font-family-Nunito);
+  font-family: var(--kc-font-use-brand);
   font-size: var(--font-body-small-size);
   line-height: normal;
   font-weight: var(--font-700-weight);
@@ -59,7 +64,7 @@ a.kc-blog__eyebrow:hover {
   list-style: none;
   font-size: var(--kc-responsive-label-lg-text-size);
   line-height: var(--kc-responsive-label-lg-line-height);
-  color: var(--kc-mapped-text-default-caption);
+  color: var(--kc-blog-soft-text);
 }
 
 .kc-blog__meta > li + li::before {
@@ -72,7 +77,7 @@ a.kc-blog__eyebrow:hover {
 .kc-blog__button {
   min-height: var(--kc-responsive-size-control-min-height);
   border-radius: var(--kc-shape-radius-sm);
-  font-family: var(--font-body-family);
+  font-family: var(--kc-font-use-ui);
   font-weight: var(--font-600-weight);
   font-size: var(--kc-responsive-body-md-text-size);
   letter-spacing: 0;
@@ -80,7 +85,7 @@ a.kc-blog__eyebrow:hover {
 }
 
 html[data-kc-labels='site'] .kc-blog__button {
-  font-family: var(--kc-font-family-Nunito);
+  font-family: var(--kc-font-use-brand);
   font-weight: var(--font-700-weight);
   font-size: var(--font-body-small-size-desktop);
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
@@ -90,7 +95,7 @@ html[data-kc-labels='site'] .kc-blog__button {
 /* ---- Title ------------------------------------------------------------------------------------ */
 .kc-blog__title {
   margin: 0;
-  font-family: var(--font-heading-family);
+  font-family: var(--kc-font-use-heading);
   font-size: var(--kc-responsive-h1-text-size);
   line-height: var(--kc-responsive-h1-line-height);
   letter-spacing: var(--kc-responsive-h1-letter-spacing);
@@ -167,7 +172,7 @@ html[data-kc-labels='site'] .kc-blog__button {
    article an h5. Section = h4 size, sub = body-lg semibold. */
 .kc-blog__body :is(h1, h2, h3, h4, h5, h6) {
   margin: var(--kc-responsive-spacing-layout-3xl) 0 var(--kc-responsive-spacing-layout-md) !important;
-  font-family: var(--font-heading-family) !important;
+  font-family: var(--kc-font-use-heading) !important;
   font-weight: var(--font-500-weight) !important;
   color: var(--kc-mapped-text-default-heading) !important;
   /* Body headings fill the line, as on the reference; only the title is balanced. "pretty" just
@@ -241,7 +246,7 @@ html[data-kc-labels='site'] .kc-blog__button {
 }
 
 .kc-blog__body li::marker {
-  color: var(--kc-mapped-text-default-caption);
+  color: var(--kc-blog-soft-text);
 }
 
 /* Body images are 480-600px thumbnails without width and height (01-INVENTORY §4.3): never wider
@@ -364,7 +369,7 @@ html[data-kc-labels='site'] .kc-blog__button {
   grid-column: 1;
   font-size: var(--kc-responsive-label-lg-text-size);
   line-height: var(--kc-responsive-label-lg-line-height);
-  color: var(--kc-mapped-text-default-caption);
+  color: var(--kc-blog-soft-text);
 }
 
 .kc-blog-sources__link svg {

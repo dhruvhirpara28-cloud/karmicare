@@ -71,6 +71,19 @@ Computed from the token values (`fixture/tools/contrast.py`). Translucent text i
 
 Night passes everywhere. Its weakest pair is body text on the accent end of the gradient, at 6.0:1. By Day only the site's link-hover colour fails, at 2:1, and the legal pages use it too. The blog CSS therefore does not change link colour on hover: the text stays navy or cream and the underline thickens in the accent blue (`shots/a-blog-hover-1440-day.png`). The quote rule and hairlines are decorative and carry no meaning. Whether the site-wide hover colour should change too is decision D15.
 
+## 2b. The global lane's token change (landing desk note, 26 Oct)
+
+`docs/blog/NOTE-GLOBAL-TOKEN-CHANGES.md`: the global lane (worktree `global-klaviyo-on`, not landed) makes `--kc-mapped-text-default-body` and `-caption` solid (Day `#191f38`, Night `#fffbf6`, new `-rgb` companions) and puts `proxima-nova` first in `--kc-font-role-backbone` and `--kc-font-use-heading/body/ui`. What the blog did about it:
+
+- **Colours.** The blog CSS had no literal colour, alpha or "68 % / 76 % of the heading" value (checked with grep). Every text colour reads `--kc-mapped-text-default-heading`, `-body` or `-caption`, so the solid values arrive by themselves. Secondary text (date, reading time, publisher, list markers) now goes through one hook, `--kc-blog-soft-text`, which is the caption token.
+- **Fonts.** Font families now come from the tokens: body `--kc-font-use-body`, title and body headings `--kc-font-use-heading`, the brief's button label `--kc-font-use-ui`, and eyebrows `--kc-font-use-brand` (Nunito). Before, they came from the theme variables `--font-body-family`, `--font-heading-family` and `--kc-font-family-Nunito`. The contents menu keeps the theme's own `.subtitle-item`, as the legal pages do.
+- **Both states in the fixture.** `?tokens=next` applies the global lane's values exactly as in its diff, and `?soft=muted` additionally puts secondary text on the solid, softer `--kc-mapped-text-primary-default-muted` (`#2c3a60` / `#dddbd9`). Screens: `shots/d-tokens-{now,next,next-muted}-{top,body,sources,related}-{390,1440}-{day,night}.png`. Measured with `fixture/tools/probe-tokens.js`: now body/meta `rgba(25,31,56,0.76)` with "Proxima Nova" first; next `rgb(25,31,56)` with `proxima-nova` first; next-muted meta `rgb(44,58,96)`.
+- **Findings.**
+  1. **The token font stack in today's order breaks the line spacing on a machine with a desktop Proxima Nova.** That is the R70b problem, and the reason `kc-policy-page.css` stayed off the font tokens. In `d-tokens-now-body-1440-day.png` the nano article's paragraphs and quote close up: their line height is `normal` (T4) and the desktop font has no line gap. With `proxima-nova` first (`d-tokens-next-*`) the Typekit font wins and the lines open up again. So the blog must not land before the token change, or T4 must be fixed first. Both, preferably.
+  2. **Solid text changes the hierarchy very little.** Date, reading time, publisher and the Keep reading meta stay lighter through size (13/14 against 18) and weight, and the standfirst through size. The muted variant is barely different by Day (`#191f38` against `#2c3a60`) and a little softer by Night. No new token is needed (D23).
+  3. **Contrast (§2a) goes up.** Body and caption on page are 15.8:1 Day and Night. The contents links keep their 70 % (`.opacity-xl`, as on the legal pages), which is about 7:1 by Day.
+- **Landing order.** If the token change lands first, the blog inherits it. If the blog lands first, nothing locks in the old alpha (there is no literal), but the font stack needs the token change for finding 1. So the blog lands **after or together with** the token change.
+
 ## 3. The directions
 
 ### D · Editorial, after Victor's reference (26 Oct, now the recommendation)
@@ -187,6 +200,7 @@ Two things I'd take from the others, each as its own yes or no:
 | D20 | Contents side | left margin, as the reference and the legal pages' own menu (as built) · right | **Left** |
 | D21 | End CTA | the homepage's `featured-product` section in `templates/article.json`, plus `article` in theme.liquid's Loop-styles condition · A's text CTA | **The homepage section** |
 | D22 | Line heights the tokens do not have | body 1.6, headings 1.3, title 1.16, as measured on the reference (as built) · the tokens' own (body-lg 1.44, h4 1.14) | **As built**, and add long-form line-height tokens to the KC library (with D16) |
+| D23 | Secondary text once body and caption are solid | keep the caption token (solid, as built) · `--kc-mapped-text-primary-default-muted` (`?soft=muted`) | **Keep the caption token.** Size already carries the hierarchy, and muted is barely different by Day |
 | D1b | Index cards | A text rows · C Figma cards with pictures | **A rows now**, C cards once the pictures are replaced |
 | D2 | Labels and buttons | the brief: Proxima Nova, sentence case (default in the previews) · the site today: Nunito, uppercase, letter-spaced (`?labels=site`, `shots/a-article-cta-390-day-labels-site.png`) | **The brief's style** on the blog, with a separate yes for the rest of the site. Otherwise the blog's buttons differ from the header's "BEGIN NOW" |
 | D3 | Standfirst under the title (`article.excerpt`) | show when the article has one · never | **Show**, but only after the nano excerpt is fixed ("Dive deep into the benefits of NASA's favorite supplement…", D11) |

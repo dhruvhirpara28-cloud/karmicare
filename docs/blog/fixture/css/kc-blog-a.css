@@ -104,7 +104,7 @@
   border-inline-start: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-rule);
   font-size: var(--kc-responsive-body-sm-text-size);
   line-height: var(--kc-responsive-body-sm-line-height);
-  color: var(--kc-mapped-text-default-caption);
+  color: var(--kc-blog-soft-text);
   text-decoration: none;
   overflow-wrap: anywhere;
   transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -123,7 +123,7 @@
 }
 
 html[data-kc-labels='site'] .kc-blog-a__nav .kc-blog-toc__link {
-  font-family: var(--kc-font-family-Nunito);
+  font-family: var(--kc-font-use-brand);
   font-weight: var(--font-700-weight);
   font-size: var(--kc-responsive-label-sm-text-size);
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);

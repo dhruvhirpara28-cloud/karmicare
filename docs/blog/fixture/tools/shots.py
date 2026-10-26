@@ -47,6 +47,13 @@ def plan():
                 for w in (390, 1440):
                     for part, sel in PARTS.items():
                         shots.append((f"{d}-article-{part}-{w}-{mode}", f"{d}-article.html", w, f"mode={mode}&at={sel}"))
+    elif which == "tokens":
+        # D in the three token states: today, the global lane's solid text, and solid + muted secondary
+        for state, q0 in (("now", ""), ("next", "tokens=next"), ("next-muted", "tokens=next&soft=muted")):
+            for mode in ("day", "night"):
+                for w, part in ((390, "top"), (1440, "top"), (1440, "body"), (1440, "sources"), (1440, "related")):
+                    q = "&".join(x for x in (q0, f"mode={mode}", "" if part == "top" else "at=" + PARTS[part]) if x)
+                    shots.append((f"d-tokens-{state}-{part}-{w}-{mode}", "d-article.html", w, q))
     return [s for s in shots if flt in s[0]]
 
 
