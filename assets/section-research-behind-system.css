@@ -50,7 +50,8 @@
   color: inherit;
 }
 
-/* Two-tone heading: italic text is the muted second line (the line break: base.css) */
+/* Italic text in the heading is its second line in the body colour (the line break: base.css);
+   since 26 Oct that is the same full navy / cream as the heading */
 .research-behind-system__heading em {
   font-style: normal;
   color: var(--kc-mapped-text-default-body);
