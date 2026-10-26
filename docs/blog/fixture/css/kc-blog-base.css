@@ -27,15 +27,19 @@
   max-width: calc(var(--kc-blog-wide) + 2 * var(--kc-blog-gutter));
 }
 
-/* ---- Labels: eyebrow, meta row --------------------------------------------------------------- */
+/* ---- Labels: eyebrow, meta row ---------------------------------------------------------------
+   Eyebrows look like the homepage's section eyebrows (.kc-caption-subheading .subtitle-item:
+   Nunito 700, uppercase, 1.7px tracking, the heading colour), Victor 26 Oct (D2 for eyebrows). */
 .kc-blog__eyebrow {
   display: block;
   margin: 0 0 var(--kc-responsive-spacing-layout-md);
-  font-family: var(--font-body-family);
-  font-size: var(--kc-responsive-label-lg-text-size);
-  line-height: var(--kc-responsive-label-lg-line-height);
-  font-weight: var(--font-600-weight);
-  color: var(--kc-mapped-text-default-caption);
+  font-family: var(--kc-font-family-Nunito);
+  font-size: var(--font-body-small-size);
+  line-height: normal;
+  font-weight: var(--font-700-weight);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kc-mapped-text-default-heading);
   text-decoration: none;
 }
 
@@ -44,13 +48,6 @@ a.kc-blog__eyebrow:hover {
   text-decoration-thickness: 2px;
   text-decoration-color: var(--kc-mapped-surface-accent-default);
   text-underline-offset: 0.2em;
-}
-
-html[data-kc-labels='site'] .kc-blog__eyebrow {
-  font-family: var(--kc-font-role-identity);
-  font-weight: var(--font-700-weight);
-  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
-  text-transform: uppercase;
 }
 
 .kc-blog__meta {

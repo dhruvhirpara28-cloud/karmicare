@@ -4,8 +4,8 @@
    the headings marked [data-kc-blog-toc-extra] (Sources). The link of the section being read gets
    aria-current (full colour and the 2px rule, as on the legal pages). While a wide body picture
    passes the sticky sidebar, the sidebar gets .is-covered and fades out, as on the reference.
-   Fewer than three sections: the contents remove themselves. Links are plain #fragments:
-   kc-navigation.css gives the headings their scroll margin, and nothing forces smooth scrolling. */
+   Fewer than three sections: the contents remove themselves. A click eases to the section as on
+   the legal pages (smooth scroll, a jump with reduced motion, #fragment in the address bar). */
 (function () {
   var body = document.querySelector('.kc-blog__body');
   var box = document.querySelector('[data-kc-blog-contents-box]');
@@ -69,6 +69,43 @@
     }
     box.classList.toggle('is-covered', covered);
   }
+
+  // A click scrolls as on the legal pages (legal-toc-section.liquid): the link is marked at once,
+  // the page eases there with the browser's smooth scroll (a jump with reduced motion), and the
+  // #fragment goes into the address bar. The landing line is the scroll margin kc-navigation.css
+  // gives headings with an id: under the floating bar with 16px to spare (resolved in px).
+  // The body pictures have no width and height in the article HTML (02-PROPOSAL D7), so pictures
+  // that load during the scroll push the heading down. When the scroll ends (scrollend, or 1s for
+  // browsers without it) the heading is checked and aimed at again, at most three times.
+  function aim(target, tries) {
+    var margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - margin, behavior: reduce ? 'auto' : 'smooth' });
+    if (tries >= 3) return;
+    var done = false;
+    function check() {
+      if (done) return;
+      done = true;
+      window.removeEventListener('scrollend', check);
+      if (Math.abs(target.getBoundingClientRect().top - margin) > 2) aim(target, tries + 1);
+    }
+    window.addEventListener('scrollend', check);
+    if (!('onscrollend' in window)) setTimeout(check, 1000);
+  }
+
+  links.forEach(function (a, i) {
+    a.addEventListener('click', function (e) {
+      var target = heads[i];
+      if (!target) return;
+      e.preventDefault();
+      links.forEach(function (l) {
+        if (l === a) l.setAttribute('aria-current', 'true');
+        else l.removeAttribute('aria-current');
+      });
+      aim(target, 0);
+      if (history.pushState) history.pushState(null, '', '#' + target.id);
+    });
+  });
 
   var ticking = false;
   function onScroll() {

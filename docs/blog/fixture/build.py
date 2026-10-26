@@ -328,19 +328,20 @@ def d_article(handle):
            f'</aside>')
     s1 = (f'<article class="kc-blog kc-blog-d">'
           f'<header class="kc-blog-d__head"><div class="kc-blog__wrap kc-blog__wrap--wide">'
-          f'<p class="kc-blog-d__kicker"><time datetime="{a["published_at"]}">{date_label(a["published_at"])}</time>'
-          f'<a href="d-blog.html" data-fixture-link>{BLOG_TITLE}</a></p>'
+          # the homepage's section eyebrow (kc-caption-subheading subtitle-item), Victor 26 Oct
+          f'<a class="kc-blog-d__eyebrow kc-caption-subheading subtitle-item" href="d-blog.html" data-fixture-link>{BLOG_TITLE}</a>'
           f'<h1 class="kc-blog__title">{esc(a["title"])}</h1>{standfirst}'
-          f'<div class="kc-blog-d__bar"><span>{T["min_read"].format(n=minutes(a))}</span>'
+          f'<div class="kc-blog-d__bar">{meta(a)}'
           f'<button type="button" class="kc-blog-d__share">{SHARE}<span>{T["share"]}</span></button></div>'
           f'</div></header>{fig}'
           f'<div class="kc-blog-d__main"><div class="kc-blog-d__layout">{toc}<div class="kc-blog-d__text">'
           f'<div class="kc-blog__body rte">{body(a)}</div>'
           f'<div class="kc-blog-d__end">{sources(a)}</div></div></div></div></article>')
     rows = "".join(a_row(h, "d", excerpt=False) for h in related_for(handle))
-    s3 = (f'<div class="kc-blog kc-blog-a kc-blog-a__related"><div class="kc-blog-a__grid"><div class="kc-blog-a__text">'
+    s3 = (f'<div class="kc-blog kc-blog-d-related"><div class="kc-blog-d__layout"><div class="kc-blog-d__text">'
           f'<h2 class="kc-blog__section-heading">{T["related"]}</h2><ul class="kc-blog-a-list" role="list">{rows}</ul></div></div></div>')
-    return section(s1, "page", 1) + end_cta() + section(s3, "transition", 3)
+    # Victor (26 Oct): Keep reading first, the homepage end CTA last
+    return section(s1, "page", 1) + section(s3, "transition", 3) + end_cta()
 
 
 def d_blog(page):

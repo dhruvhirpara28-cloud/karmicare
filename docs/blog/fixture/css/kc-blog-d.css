@@ -18,27 +18,15 @@
   background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
 }
 
-.kc-blog-d__kicker {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0 var(--kc-responsive-spacing-layout-md);
-  margin: 0 0 var(--kc-responsive-spacing-layout-lg);
-  font-size: var(--kc-responsive-label-lg-text-size);
-  line-height: var(--kc-responsive-label-lg-line-height);
-  font-weight: var(--font-500-weight);
-}
-
-.kc-blog-d__kicker time {
+/* The eyebrow is the homepage's section eyebrow: the theme's .kc-caption-subheading .subtitle-item
+   (Nunito 700, uppercase, 1.7px tracking, 24px to the heading from 990px). Only the link look is
+   added here: the heading colour, no underline until hover. */
+a.kc-blog-d__eyebrow {
   color: var(--kc-mapped-text-default-heading);
-}
-
-.kc-blog-d__kicker a {
-  color: var(--kc-mapped-text-default-caption);
   text-decoration: none;
 }
 
-.kc-blog-d__kicker a:hover {
+a.kc-blog-d__eyebrow:hover {
   text-decoration: underline;
   text-decoration-color: var(--kc-mapped-surface-accent-default);
   text-decoration-thickness: 2px;
@@ -57,7 +45,7 @@
   line-height: 1.6;
 }
 
-/* The rule row: reading time left, Share right */
+/* The rule row: date and reading time left, Share right */
 .kc-blog-d__bar {
   display: flex;
   align-items: center;
@@ -111,12 +99,21 @@
    The legal pages' grid (legal-toc-section.liquid): a 1416px page width with 20px sides, the
    sidebar, 16px, then the 680px text. --kc-blog-d-colstart is where the text starts, measured
    from the left of the screen; wide pictures use it to centre themselves on the page. */
-.kc-blog-d__main {
+.kc-blog-d__main,
+.kc-blog-d-related {
   --kc-blog-d-pad: 2rem; /* the legal page-width's side padding */
   --kc-blog-d-side: 0px;
   --kc-blog-d-gap: 0px;
   --kc-blog-d-colstart: var(--kc-blog-gutter);
   --kc-blog-d-wide: 100vw;
+}
+
+/* Keep reading sits in the same grid, so it starts where the article text starts */
+.kc-blog-d-related {
+  padding-block: var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-d__main {
   padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-xs);
   background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
   overflow-x: clip;
@@ -247,7 +244,8 @@
 }
 
 @media screen and (min-width: 641px) {
-  .kc-blog-d__main {
+  .kc-blog-d__main,
+  .kc-blog-d-related {
     --kc-blog-d-pad: 2rem;
     --kc-blog-d-side: 25rem; /* the legal sidebar below 990px */
     --kc-blog-d-gap: 1.6rem; /* the legal column gap */
@@ -263,7 +261,16 @@
     padding-inline: var(--kc-blog-d-pad);
   }
 
+  /* Fixed columns: the text keeps its place when there is no contents list (short articles,
+     Keep reading), and Dawn hides an empty placeholder div (base.css div:empty) */
+  .kc-blog-d__text {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
   .kc-blog-d__toc {
+    grid-column: 1;
+    grid-row: 1;
     position: sticky;
     top: calc(var(--kc-navigation-clearance) + 2.8rem); /* the legal sidebar sits 100px from the top */
     max-height: calc(100vh - var(--kc-navigation-clearance) - 5.6rem);
@@ -310,7 +317,8 @@
 }
 
 @media screen and (min-width: 990px) {
-  .kc-blog-d__main {
+  .kc-blog-d__main,
+  .kc-blog-d-related {
     --kc-blog-d-side: 33.2rem; /* the legal sidebar from 990px: at 1440 the text starts at 380px, as on the legal pages */
   }
 }
