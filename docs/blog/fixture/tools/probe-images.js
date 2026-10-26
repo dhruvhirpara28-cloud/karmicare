@@ -11,7 +11,7 @@ location.protocol !== 'https:' ? 'BLANK' : (async () => {
     'Benefit_image_1.png',
     'Benefit_image_2.png',
     'Benefit_image_3.png',
-    'kc-research-nhap-tubules-2000x2400-v1.jpg',
+    'kc-research-nhap-tubules-2000x2400-v1.jpg', 'Picture_1.png',
   ];
   const size = (src) => new Promise((res) => {
     const i = new Image();
