@@ -60,7 +60,8 @@ The footer has no professional or evidence link.
   can give the page its own URL handle, for example `professionnels`. That is optional; the
   English handle works on `/fr/` too.
 - **`templates/page.professionals.json`**: one section, `kc-professionals-request`, as in the
-  preview (`fixture/proto/kc-professionals-page.liquid`):
+  preview (`fixture/proto/kc-professionals-page.liquid.proto`; the extension keeps Theme Check
+  from scanning it):
   - the eyebrow (a setting);
   - `page.title` as the H1 (Admin, translatable under Pages);
   - the snippet `kc-practitioner-request`, with `s: section.settings`, no trigger and inline.

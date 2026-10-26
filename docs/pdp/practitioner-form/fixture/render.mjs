@@ -1,5 +1,5 @@
 // Professionals page v1, phase 1 preview (docs/pdp/practitioner-form/PROFESSIONALS-V1-PROPOSAL.md).
-// Renders the prototype page section (proto/kc-professionals-page.liquid) with the theme's own
+// Renders the prototype page section (proto/kc-professionals-page.liquid.proto) with the theme's own
 // request-form snippet through liquidjs, into a saved live page of the legal family
 // (live/withdrawal-*.html), and builds the PDP "before" (live as is) and "after" (form gone, the
 // entry links pointing at the page) from live/pdp-en.html. Nothing posts to the store: every form
@@ -117,7 +117,9 @@ function engine(formState, globals) {
       readFile: async (f) => read(f),
       existsSync,
       exists: async (f) => existsSync(f),
-      resolve: (root, file, ext) => join(root, file.endsWith(ext) ? file : file + ext),
+      // the prototype is kc-professionals-page.liquid.proto, so Theme Check (which scans every
+      // .liquid file, docs/ too) leaves it alone; snippet names get .liquid as usual
+      resolve: (root, file, ext) => join(root, /\.(liquid|proto)$/.test(file) ? file : file + ext),
       contains: () => true,
       sep: '/',
       dirname,
@@ -174,7 +176,7 @@ for (const [name, lang, state] of [
     stamp: STAMP,
     request: { locale: { iso_code: lang }, origin: STORE, path: `${prefix}/pages/professionals` },
   });
-  const html = await liquid.renderFile('kc-professionals-page', { section: { id: 'professionals', settings: SETTINGS[lang] } });
+  const html = await liquid.renderFile('kc-professionals-page.liquid.proto', { section: { id: 'professionals', settings: SETTINGS[lang] } });
   let dom = absolute(readFileSync(join(LIVE, `withdrawal-${lang}.html`), 'utf8'));
   // the page's one template section (a <section class="shopify-section">, no nested sections)
   const at = dom.search(/<section id="shopify-section-template--[^"]*__withdrawal"/);

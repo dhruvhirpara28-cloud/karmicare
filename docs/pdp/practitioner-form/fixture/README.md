@@ -8,7 +8,8 @@ It replaces the scratchpad harness that the 26 Oct reboot wiped, and it lives in
 |---|---|
 | `fetch-live.sh` | Anonymous snapshots of the live homepage, PDP and withdrawal page (EN/NL/FR) into `live/` (gitignored) |
 | `live/form-texts-live.json` | The live EN/NL/FR texts of today's PDP form, side by side (kept: the source for carrying translations over) |
-| `proto/kc-professionals-page.liquid` + `.css` | PROTOTYPE of the page section (phase 2 turns it into `sections/kc-professionals-request.liquid`) |
+| `proto/kc-professionals-page.liquid.proto` + `.css` | PROTOTYPE of the page section (phase 2 turns it into `sections/kc-professionals-request.liquid`). Not `.liquid`, because Theme Check scans every `.liquid` file, docs/ included |
+| `align.sh <pageId>` | Radios and checkboxes: the offset between each control's centre and its label's first line, at 390 and 1440 |
 | `render.mjs` | liquidjs render of the prototype with the theme's own `snippets/kc-practitioner-request.liquid` into the live withdrawal page; PDP before and after |
 | `fx.js` | Day/Night (`?mode=`), submit stop, the `?from=` prototype, `fxRun()` checks, `fxShow()` |
 | `checks.sh <pageId>` | Every variant at 390 and 1440, Day and Night, through an Orca tab; results in `results/` |
