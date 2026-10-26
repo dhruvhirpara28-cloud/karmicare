@@ -147,6 +147,15 @@ body.night-mode .two-formulas__image-wrap::before {
   }
 }
 
+/* The duo file is taller than wide (1600 x 1956), so a square box is about 117 px shorter than
+   the picture and the tubes spilled over the feature headings (Victor, 25 Oct). Stacked, below
+   990, the box takes the picture's height; the clock stays centred on the tubes. */
+@media screen and (max-width: 989px) {
+  .two-formulas__image-wrap {
+    aspect-ratio: auto;
+  }
+}
+
 @media screen and (max-width: 989px) {
   .two-formulas__stage {
     grid-template-columns: 1fr 1fr;
