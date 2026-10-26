@@ -35,7 +35,12 @@ BAR = '''
 <div id="kc-preview-bar" style="position:fixed;z-index:2147483647;left:50%;bottom:16px;transform:translateX(-50%);
   display:flex;gap:8px;align-items:center;padding:8px 10px 8px 16px;border-radius:999px;background:#191f38;color:#fffbf6;
   font:500 13px/1.2 system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.25)">
-  <span>Preview klok (homepage 8ea081b)</span>
+  <span>Klok</span>
+  <a href="?#klok" style="color:#fffbf6">Nu</a>
+  <a href="?variant=a#klok" style="color:#fffbf6">A</a>
+  <a href="?variant=c#klok" style="color:#fffbf6">C</a>
+  <a href="?variant=d&amp;veil#klok" style="color:#fffbf6">D</a>
+  <a href="?variant=d#klok" style="color:#fffbf6">D zonder waas</a>
   <button type="button" onclick="try{sessionStorage.removeItem('kc-clock-explored')}catch(e){};location.hash='klok';location.reload()"
     style="border:0;border-radius:999px;padding:8px 14px;background:#7fb5ff;color:#191f38;font:inherit;cursor:pointer">Opnieuw afspelen</button>
 </div>
@@ -51,6 +56,10 @@ BAR = '''
     stage.before(readout);
     copy.after(hint);
   })();
+</script>
+<link rel="stylesheet" href="variants.css">
+<script src="variants.js"></script>
+<script>
   // Land a little above the clock, so the swing starts when the dial scrolls into view
   addEventListener('load', () => {
     if (location.hash !== '#klok') return;

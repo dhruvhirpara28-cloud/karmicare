@@ -1,0 +1,232 @@
+/* Clock readout options for Victor (26 Oct, BRIEF-CLOCK-READOUT-UX.md). Preview only: loaded by
+   index*.html when the URL has ?variant=a|b|c. The branch CSS and clock script stay as they are.
+   html[data-kc-variant] scopes every rule to one variant. */
+
+/* ── Shared by A, B and C: the readout goes back under the dial ── */
+html[data-kc-variant] .chronobiology-clock .readout {
+  margin: var(--kc-responsive-spacing-layout-xl) auto 0;
+}
+
+@media (max-width: 1099px) {
+  html[data-kc-variant] .chronobiology-clock .timeline { order: 1; }
+  html[data-kc-variant] .chronobiology-clock .readout { order: 2; }
+  html[data-kc-variant] .chronobiology-clock .callouts { order: 3; }
+}
+
+@media screen and (min-width: 750px) {
+  html[data-kc-variant] .chronobiology-clock .readout { margin-top: 0; }
+}
+
+/* The pill now opens the readout, right under the dial */
+html[data-kc-variant] .chronobiology-clock .hint {
+  margin: 0 0 calc(var(--kc-responsive-spacing-layout-md) - var(--kc-responsive-spacing-layout-xxs));
+  transition: opacity .4s ease, border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
+}
+
+/* ── A · watch face inside the orb ── */
+html[data-kc-variant="a"] .chronobiology-clock .time-line { display: none; }
+
+.kc-face {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 31%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* A frosted page-colour disc keeps the text legible over both the light top and the dark base */
+  background: rgba(var(--kc-mapped-surface-page-rgb), .82);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(var(--kc-brand-original-dark-blue-rgb), .14);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--chrono-ink);
+  pointer-events: none;
+}
+
+.kc-face__time {
+  font-family: var(--kc-font-role-backbone);
+  font-weight: 500;
+  font-size: calc(var(--dial-size) * 34 / 604);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.kc-face__caption {
+  max-width: 84%;
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: max(11px, calc(var(--dial-size) * 12 / 604));
+  line-height: 1.2;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* The pill fades once the visitor has taken the knob */
+html[data-kc-variant="a"] .chronobiology-clock.kc-taken .hint {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── D · time and copy inside the orb, no panel (Victor, 26 Oct) ──
+   The block is centred on the orb and kept inside its inscribed square; the copy's min-height
+   (set by the clock script) is measured at this width, so dragging never moves anything. */
+.kc-orb-text {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--dial-size) * 6 / 604);
+  width: 36%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--kc-brand-original-dark-blue);
+  pointer-events: none;
+}
+
+/* ?veil: a soft radial light behind the text that fades into the orb, no edge (contrast test) */
+html[data-kc-veil] .kc-orb-text::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -22% -18%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 251, 246, .78) 55%, rgba(255, 251, 246, 0));
+}
+
+/* The orb is the same light-top, dark-base artwork in Day and Night, so the text keeps the dark
+   brand blue in both modes, with a soft light halo for the lines that reach the darker base */
+.kc-orb-text .time-line,
+.kc-orb-text .state-copy {
+  color: var(--kc-brand-original-dark-blue);
+  text-shadow: 0 0 2px rgba(255, 251, 246, 1), 0 0 4px rgba(255, 251, 246, 1), 0 0 10px rgba(255, 251, 246, .9);
+}
+
+.kc-orb-text .time-line {
+  font-size: max(11px, calc(var(--dial-size) * 13 / 604));
+  line-height: 1.25;
+}
+
+.kc-orb-text .clock-time {
+  display: block;
+  font-family: var(--kc-font-role-backbone);
+  font-size: max(22px, calc(var(--dial-size) * 34 / 604));
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The separator dot belongs to the one-line readout; stacked it is not needed */
+.kc-orb-text .time-line {
+  font-size: 0;
+}
+
+.kc-orb-text .clock-caption {
+  display: block;
+  font-size: max(10px, calc(var(--dial-size) * 11 / 604));
+  line-height: 1.25;
+}
+
+.kc-orb-text .state-copy {
+  max-width: none;
+  padding: 0;
+  font-size: max(11px, calc(var(--dial-size) * 13 / 604));
+  line-height: 1.35;
+}
+
+html[data-kc-variant="d"] .chronobiology-clock .readout {
+  gap: 0;
+}
+
+/* The Awake and Asleep words on the orb would sit on the time and the copy */
+html[data-kc-variant="d"] .chronobiology-clock .shift-label {
+  display: none;
+}
+
+/* ── B · a time badge that travels with the dot ── */
+.kc-badge {
+  position: absolute;
+  z-index: 11;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--kc-mapped-surface-page);
+  box-shadow: 0 4px 12px rgba(var(--kc-brand-original-dark-blue-rgb), .18);
+  color: var(--chrono-ink);
+  font-family: var(--kc-font-role-identity);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+
+.chronobiology-clock.kc-dragging .kc-badge { opacity: 1; }
+
+/* ── C · the readout tied to the dot: a connector, an accent dot on the time, a flash on change ── */
+html[data-kc-variant="c"] .chronobiology-clock .readout::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: var(--kc-responsive-spacing-layout-lg);
+  margin-bottom: var(--kc-responsive-spacing-layout-xs);
+  background: var(--chrono-accent);
+  opacity: .5;
+  transition: opacity .2s ease;
+}
+
+html[data-kc-variant="c"] .chronobiology-clock.kc-dragging .readout::before { opacity: 1; }
+
+html[data-kc-variant="c"] .chronobiology-clock .time-line::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--chrono-accent);
+  box-shadow: 0 0 0 3px rgba(var(--kc-mapped-surface-accent-default-rgb), .4);
+  vertical-align: 1px;
+}
+
+html[data-kc-variant="c"] .chronobiology-clock .state-copy {
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+/* A and C: the copy eases in when its window changes */
+.chronobiology-clock .state-copy.kc-changed {
+  animation: kc-copy-in .35s ease-out;
+}
+
+html[data-kc-variant="c"] .chronobiology-clock .state-copy.kc-changed {
+  animation: kc-copy-flash .6s ease-out;
+}
+
+@keyframes kc-copy-in {
+  from { opacity: .25; }
+  to { opacity: 1; }
+}
+
+@keyframes kc-copy-flash {
+  from { background: rgba(var(--kc-mapped-surface-accent-default-rgb), .28); }
+  to { background: rgba(var(--kc-mapped-surface-accent-default-rgb), 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chronobiology-clock .state-copy.kc-changed,
+  html[data-kc-variant="c"] .chronobiology-clock .state-copy.kc-changed {
+    animation: none;
+  }
+}
