@@ -1,0 +1,994 @@
+{
+  "source": {
+    "file": "KC | Brand Design Library",
+    "fileKey": "gcWcgYxS1nmheciKYOjOGx",
+    "exported": "2026-10-12, responsive re-exported 2026-10-17, body-sm 2026-10-18",
+    "note2026-10-18": "Victor: mobile body-sm 14/20 to 15/22 (library responsive/body-sm, mobile mode). Only those two values changed; desktop stays 15/20.",
+    "note2026-10-17": "Only the responsive collection was re-exported (mobile type ramp to common mobile standards, extra-small pair added). Mapped, shape, font, brand and effects are the 12 Oct export. The 17 Oct read also found glass alphas at 0.93 (mapped/surface/glass/default, brand/glass/bg-light and bg-dark) and a different elevation/selection-inset; not merged, pending a separate decision.",
+    "method": "Figma MCP use_figma, read-only Plugin API: getLocalVariableCollectionsAsync + getVariableByIdAsync, every VARIABLE_ALIAS resolved for the same mode (or the target collection's default mode), getLocalEffectStylesAsync",
+    "collectionsInFile": [
+      "brand(127)",
+      "Primitives [unpublished](20)",
+      "mapped(72)",
+      "alias(92)",
+      "alias-tone(26)",
+      "backdrop(83)",
+      "responsive(98)",
+      "font(29)",
+      "shape(80)"
+    ],
+    "notExported": "alias, alias-tone and Primitives are resolved away; backdrop waits for the hero backdrop feature; brand ramps (110), shape/elevation (34 raw parameters, composed effect styles used instead) and shape/artwork (30) were not read",
+    "note2026-10-26": "text/default/body and text/default/caption set to the heading colour at 100% (#191f38 Day, #fffbf6 Night) instead of 76% / 68% navy and cream (Victor, 26 Oct: text crispness, docs/global-type/CRISPNESS-REPORT.md). Placeholder stays at 76% / 68%. The Figma library still has to get the same values."
+  },
+  "collections": {
+    "mapped": {
+      "modes": [
+        "Day",
+        "Night"
+      ],
+      "total": 72,
+      "vars": {
+        "surface/primary/default": [
+          "#fffbf6",
+          "#191f38"
+        ],
+        "surface/primary/default-hover": [
+          "#efece8",
+          "#212a49"
+        ],
+        "surface/primary/default-pressed": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "surface/secondary/default": [
+          "#ffffff",
+          "#212a49"
+        ],
+        "surface/secondary/default-hover": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "surface/tertiary/default": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "surface/tertiary/default-hover": [
+          "#efece8",
+          "#212a49"
+        ],
+        "surface/inverse/default": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "surface/inverse/default-hover": [
+          "#212a49",
+          "#efece8"
+        ],
+        "surface/disabled/default": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "surface/accent/default": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "surface/accent/default-subtle": [
+          "#c4dfff",
+          "#c4dfff"
+        ],
+        "surface/accent/default-hover": [
+          "#74a8e8",
+          "#74a8e8"
+        ],
+        "surface/status/default": [
+          "#efece8",
+          "#212a49"
+        ],
+        "surface/glass/default": [
+          "rgba(255,251,246,0.9)",
+          "rgba(25,31,56,0.85)"
+        ],
+        "surface/status/default-hover": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "text/primary/default": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "text/primary/default-stone": [
+          "#c9c7c5",
+          "#efece8"
+        ],
+        "text/primary/default-subtle": [
+          "#212a49",
+          "#efece8"
+        ],
+        "text/primary/default-muted": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "text/inverse/default": [
+          "#fffbf6",
+          "#191f38"
+        ],
+        "text/inverse/default-subtle": [
+          "#efece8",
+          "#212a49"
+        ],
+        "text/disabled/default": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "text/accent/default": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "text/accent/default-subtle": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "text/accent/default-hover": [
+          "#74a8e8",
+          "#74a8e8"
+        ],
+        "text/status/title": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "text/accent/default-on-accent": [
+          "#0a1628",
+          "#0a1628"
+        ],
+        "text/status/body": [
+          "#212a49",
+          "#efece8"
+        ],
+        "text/status/muted": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "border/primary/default": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "border/primary/default-subtle": [
+          "#efece8",
+          "#212a49"
+        ],
+        "border/inverse/default": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "border/inverse/on-color": [
+          "rgba(255,251,246,0.08)",
+          "rgba(25,31,56,0.12)"
+        ],
+        "border/disabled/default": [
+          "#dddbd9",
+          "#2c3a60"
+        ],
+        "border/disabled/on-color": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "border/focus/default": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "border/status/success": [
+          "#22c55e",
+          "#22c55e"
+        ],
+        "border/glass/border": [
+          "rgba(255,255,255,0.4)",
+          "rgba(255,255,255,0.15)"
+        ],
+        "border/status/warning": [
+          "#f59e0b",
+          "#f59e0b"
+        ],
+        "border/status/error": [
+          "#ef4444",
+          "#ef4444"
+        ],
+        "border/status/info": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "icon/primary/default": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "icon/primary/default-subtle": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "icon/inverse/default": [
+          "#fffbf6",
+          "#191f38"
+        ],
+        "icon/disabled/default": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "icon/accent/default": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "icon/accent/default-hover": [
+          "#74a8e8",
+          "#74a8e8"
+        ],
+        "icon/accent/default-pressed": [
+          "#5a83b5",
+          "#5a83b5"
+        ],
+        "icon/accent/default-on-accent": [
+          "#0a1628",
+          "#0a1628"
+        ],
+        "icon/status/success": [
+          "#22c55e",
+          "#22c55e"
+        ],
+        "icon/status/warning": [
+          "#f59e0b",
+          "#f59e0b"
+        ],
+        "icon/status/error": [
+          "#ef4444",
+          "#ef4444"
+        ],
+        "icon/status/info": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "surface/page": [
+          "#fffbf6",
+          "#191f38"
+        ],
+        "surface/page-secondary": [
+          "#ffffff",
+          "#212a49"
+        ],
+        "surface/overlay/veil": [
+          "rgba(255,251,246,0.8)",
+          "rgba(25,31,56,0.64)"
+        ],
+        "surface/overlay/scrim": [
+          "rgba(25,31,56,0.48)",
+          "rgba(10,12,21,0.64)"
+        ],
+        "text/default/heading": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "text/default/body": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "text/default/caption": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "text/default/placeholder": [
+          "rgba(25,31,56,0.76)",
+          "rgba(255,251,246,0.68)"
+        ],
+        "text/link/default": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "text/link/default-hover": [
+          "#7fb9ff",
+          "#7fb9ff"
+        ],
+        "border/primary/hairline": [
+          "rgba(25,31,56,0.12)",
+          "rgba(255,251,246,0.08)"
+        ],
+        "border/primary/default-hover": [
+          "#2c3a60",
+          "#dddbd9"
+        ],
+        "border/focus/strong": [
+          "#191f38",
+          "#fffbf6"
+        ],
+        "border/control/default": [
+          "rgba(25,31,56,0.76)",
+          "rgba(255,251,246,0.68)"
+        ],
+        "surface/accent/default-pressed": [
+          "#5a83b5",
+          "#5a83b5"
+        ],
+        "gradient/section/accent": [
+          "#f2f8ff",
+          "#2c3a60"
+        ],
+        "border/primary/rule": [
+          "rgba(25,31,56,0.16)",
+          "rgba(255,251,246,0.16)"
+        ],
+        "surface/accent/highlight": [
+          "rgba(127,185,255,0.35)",
+          "rgba(127,185,255,0.28)"
+        ]
+      }
+    },
+    "responsive": {
+      "modes": [
+        "desktop",
+        "mobile"
+      ],
+      "total": 98,
+      "vars": {
+        "display/text size": [
+          68,
+          48
+        ],
+        "display/line height": [
+          60,
+          56
+        ],
+        "display/letter spacing": [
+          0,
+          -1
+        ],
+        "display/paragraph spacing": [
+          32,
+          24
+        ],
+        "h1/text size": [
+          52,
+          32
+        ],
+        "h1/line height": [
+          52,
+          36
+        ],
+        "h1/letter spacing": [
+          -2,
+          -1.25
+        ],
+        "h1/paragraph spacing": [
+          24,
+          16
+        ],
+        "h2/text size": [
+          44,
+          28
+        ],
+        "h2/line height": [
+          44,
+          32
+        ],
+        "h2/letter spacing": [
+          -1.5,
+          -1
+        ],
+        "h2/paragraph spacing": [
+          24,
+          16
+        ],
+        "h3/text size": [
+          36,
+          24
+        ],
+        "h3/line height": [
+          36,
+          28
+        ],
+        "h3/letter spacing": [
+          -1,
+          -0.5
+        ],
+        "h3/paragraph spacing": [
+          16,
+          12
+        ],
+        "h4/text size": [
+          28,
+          20
+        ],
+        "h4/line height": [
+          32,
+          24
+        ],
+        "h4/letter spacing": [
+          -1,
+          -0.25
+        ],
+        "h4/paragraph spacing": [
+          16,
+          12
+        ],
+        "h5/text size": [
+          24,
+          20
+        ],
+        "h5/line height": [
+          28,
+          24
+        ],
+        "h5/letter spacing": [
+          -0.5,
+          -0.25
+        ],
+        "h5/paragraph spacing": [
+          16,
+          12
+        ],
+        "h6/text size": [
+          18,
+          14
+        ],
+        "h6/line height": [
+          20,
+          20
+        ],
+        "h6/letter spacing": [
+          1,
+          1
+        ],
+        "h6/paragraph spacing": [
+          8,
+          8
+        ],
+        "body-lg/text size": [
+          20,
+          18
+        ],
+        "body-lg/line height": [
+          28,
+          26
+        ],
+        "body-lg/letter spacing": [
+          0,
+          0
+        ],
+        "body-lg/paragraph spacing": [
+          16,
+          12
+        ],
+        "body-md/text size": [
+          18,
+          16
+        ],
+        "body-md/line height": [
+          24,
+          24
+        ],
+        "body-md/letter spacing": [
+          0,
+          0
+        ],
+        "body-md/paragraph spacing": [
+          12,
+          8
+        ],
+        "body-sm/text size": [
+          15,
+          15
+        ],
+        "body-sm/line height": [
+          20,
+          22
+        ],
+        "body-sm/letter spacing": [
+          0,
+          0
+        ],
+        "body-sm/paragraph spacing": [
+          8,
+          8
+        ],
+        "label-lg/text size": [
+          14,
+          13
+        ],
+        "label-lg/line height": [
+          16,
+          16
+        ],
+        "label-lg/letter spacing": [
+          0,
+          0
+        ],
+        "label-lg/paragraph spacing": [
+          8,
+          4
+        ],
+        "label-sm/text size": [
+          12,
+          12
+        ],
+        "label-sm/line height": [
+          12,
+          16
+        ],
+        "label-sm/letter spacing": [
+          0,
+          0
+        ],
+        "label-sm/paragraph spacing": [
+          4,
+          4
+        ],
+        "spacing/layout/xxs": [
+          3,
+          3
+        ],
+        "spacing/layout/xs": [
+          8,
+          8
+        ],
+        "spacing/layout/sm": [
+          12,
+          8
+        ],
+        "spacing/layout/md": [
+          16,
+          12
+        ],
+        "spacing/layout/lg": [
+          24,
+          20
+        ],
+        "spacing/layout/xl": [
+          32,
+          24
+        ],
+        "spacing/layout/2xl": [
+          48,
+          32
+        ],
+        "spacing/layout/3xl": [
+          64,
+          40
+        ],
+        "spacing/section/xs": [
+          32,
+          20
+        ],
+        "spacing/section/sm": [
+          80,
+          48
+        ],
+        "spacing/section/md": [
+          120,
+          64
+        ],
+        "spacing/section/lg": [
+          160,
+          96
+        ],
+        "spacing/section/xl": [
+          200,
+          120
+        ],
+        "spacing/page/gutter": [
+          32,
+          20
+        ],
+        "spacing/grid/gutter": [
+          16,
+          16
+        ],
+        "spacing/grid/gutter-tight": [
+          8,
+          8
+        ],
+        "spacing/page/container": [
+          1376,
+          353
+        ],
+        "spacing/layout/comfortable": [
+          20,
+          16
+        ],
+        "spacing/layout/spacious": [
+          40,
+          24
+        ],
+        "size/control/min-height": [
+          44,
+          44
+        ],
+        "size/control/min-width": [
+          44,
+          44
+        ],
+        "size/input/height": [
+          56,
+          56
+        ],
+        "size/icon/sm": [
+          16,
+          16
+        ],
+        "size/icon/md": [
+          24,
+          24
+        ],
+        "size/testimonial/card-width": [
+          332,
+          280
+        ],
+        "caption/letter spacing": [
+          1.7,
+          1.2
+        ],
+        "spacing/section/comfortable": [
+          96,
+          48
+        ],
+        "size/table/row-min-height": [
+          52,
+          52
+        ],
+        "size/button/sm-height": [
+          40,
+          40
+        ],
+        "size/button/lg-height": [
+          48,
+          48
+        ],
+        "size/grid/columns-3": [
+          332,
+          361
+        ],
+        "size/grid/columns-4": [
+          448,
+          361
+        ],
+        "size/grid/columns-6": [
+          680,
+          361
+        ],
+        "size/grid/columns-7": [
+          796,
+          361
+        ],
+        "size/grid/columns-9": [
+          1028,
+          361
+        ],
+        "size/testimonial/card-height": [
+          479,
+          404
+        ],
+        "visibility/touch-hint": [
+          false,
+          true
+        ],
+        "size/testimonial/wide-height": [
+          640,
+          404
+        ],
+        "size/testimonial/card-width-sm": [
+          216,
+          216
+        ],
+        "size/testimonial/card-height-sm": [
+          312,
+          312
+        ],
+        "size/testimonial/card-width-lg": [
+          448,
+          361
+        ],
+        "size/testimonial/card-height-lg": [
+          640,
+          540
+        ],
+        "size/testimonial/card-width-xl": [
+          680,
+          361
+        ],
+        "size/testimonial/card-height-xl": [
+          640,
+          540
+        ],
+        "size/grid/columns-8": [
+          912,
+          361
+        ],
+        "size/testimonial/face-strip": [
+          160,
+          120
+        ],
+        "size/testimonial/quote-media-width": [
+          448,
+          337
+        ],
+        "size/testimonial/quote-content-min-height": [
+          640,
+          0
+        ],
+        "extra-small/text size": [
+          13,
+          13
+        ],
+        "extra-small/line height": [
+          16,
+          16
+        ]
+      }
+    },
+    "shape": {
+      "modes": [
+        "default"
+      ],
+      "total": 80,
+      "exportedNote": "radius, stroke, opacity, blur only",
+      "vars": {
+        "radius/none": 0,
+        "radius/sm": 8,
+        "radius/md": 12,
+        "radius/lg": 20,
+        "radius/full": 999,
+        "stroke/thin": 1,
+        "stroke/medium": 1.5,
+        "stroke/thick": 2,
+        "opacity/30": 30,
+        "opacity/50": 50,
+        "opacity/60": 60,
+        "opacity/70": 70,
+        "opacity/80": 80,
+        "blur/xs": 3,
+        "blur/md": 20,
+        "blur/lg": 32
+      }
+    },
+    "font": {
+      "modes": [
+        "default"
+      ],
+      "total": 29,
+      "vars": {
+        "role/identity": "Nunito",
+        "role/soul": "Marlide Display",
+        "role/backbone": "Proxima Nova",
+        "role/science": "Space Grotesk",
+        "role/data": "Geist Mono",
+        "role/long-form": "Noto Serif",
+        "use/lifestyle-display": "Marlide Display",
+        "use/heading": "Proxima Nova",
+        "use/body": "Proxima Nova",
+        "use/ui": "Proxima Nova",
+        "use/science-heading": "Space Grotesk",
+        "use/mono": "Geist Mono",
+        "use/brand": "Nunito",
+        "weight/identity/bold": "Bold",
+        "weight/identity/semibold": "Semibold",
+        "weight/identity/regular": "Regular",
+        "weight/identity/light": "Light",
+        "weight/soul/light": "Light",
+        "weight/backbone/regular": "Regular",
+        "weight/backbone/medium": "Medium",
+        "weight/backbone/semibold": "Semibold",
+        "weight/backbone/bold": "Bold",
+        "weight/science/medium": "Medium",
+        "weight/science/semibold": "SemiBold",
+        "weight/science/bold": "Bold",
+        "weight/data/regular": "Regular",
+        "weight/long-form/regular": "Regular",
+        "weight/science/regular": "Regular",
+        "weight/soul/regular": "Regular"
+      }
+    },
+    "brand": {
+      "modes": [
+        "Mode 1"
+      ],
+      "total": 127,
+      "exportedNote": "original, fixed, glass only; the 110 ramp steps are not exported",
+      "vars": {
+        "original/off-white": "#fffbf6",
+        "fixed/white": "#ffffff",
+        "glass/bg-light": "rgba(255,251,246,0.9)",
+        "glass/bg-dark": "rgba(25,31,56,0.85)",
+        "glass/border-light": "rgba(255,255,255,0.4)",
+        "glass/border-dark": "rgba(255,255,255,0.15)",
+        "fixed/black": "#000000",
+        "fixed/accent-text": "#0a1628",
+        "fixed/transparent": "rgba(170,170,170,0)",
+        "original/grey": "#efece8",
+        "original/stone": "#dddbd9",
+        "original/light blue (accent)": "#7fb9ff",
+        "original/middle blue 1": "#2c3a60",
+        "original/middle blue 2": "#212a49",
+        "glass/blur": 20,
+        "original/dark blue": "#191f38",
+        "glass/shadow": "rgba(0,0,0,0.1)"
+      }
+    }
+  },
+  "effects": [
+    {
+      "name": "elevation/xs",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(0,0,0,0.03)",
+          0,
+          1,
+          2,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "elevation/sm",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(0,0,0,0.04)",
+          0,
+          1,
+          3,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "elevation/md",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(0,0,0,0.05)",
+          0,
+          4,
+          12,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "elevation/lg",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(0,0,0,0.06)",
+          0,
+          12,
+          24,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "elevation/xl",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(0,0,0,0.08)",
+          0,
+          20,
+          40,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "elevation/focus-visible",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "#191f38",
+          0,
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "artwork/ambient-haze",
+      "e": [
+        [
+          "LAYER_BLUR",
+          null,
+          null,
+          null,
+          24,
+          null
+        ]
+      ]
+    },
+    {
+      "name": "elevation/selection-inset",
+      "e": [
+        [
+          "BACKGROUND_BLUR",
+          null,
+          null,
+          null,
+          20,
+          null
+        ],
+        [
+          "DROP_SHADOW",
+          "rgba(127,185,255,0.3)",
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "artwork/gold-foil",
+      "e": [
+        [
+          "INNER_SHADOW",
+          "rgba(120,80,20,0.35)",
+          0,
+          -1,
+          0,
+          0
+        ],
+        [
+          "INNER_SHADOW",
+          "rgba(255,247,220,0.7)",
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          "DROP_SHADOW",
+          "rgba(196,152,50,0.55)",
+          0,
+          4,
+          14,
+          -2
+        ]
+      ]
+    },
+    {
+      "name": "artwork/image-shadow",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(0,0,0,0.16)",
+          0,
+          1,
+          3,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "artwork/comparison-glow",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(127,185,255,0.55)",
+          0,
+          18,
+          44,
+          -22
+        ]
+      ]
+    },
+    {
+      "name": "artwork/comparison-core",
+      "e": [
+        [
+          "DROP_SHADOW",
+          "rgba(127,185,255,0.85)",
+          0,
+          6,
+          16,
+          -6
+        ]
+      ]
+    }
+  ],
+  "effectsFormat": "[type, color, offsetX, offsetY, radius, spread]"
+}
