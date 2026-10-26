@@ -108,7 +108,7 @@ function engine(formState, globals) {
   const read = (f) => readFileSync(f, 'utf8').replace(/posted_successfully\?/g, 'posted_successfully_q');
   const liquid = new Liquid({
     globals,
-    root: [join(THEME, 'snippets'), join(HERE, 'proto')],
+    root: [join(THEME, 'snippets'), join(THEME, 'sections'), join(HERE, 'proto')],
     extname: '.liquid',
     strictFilters: true,
     jsTruthy: false,
@@ -125,6 +125,35 @@ function engine(formState, globals) {
       dirname,
     },
   });
+  // section files: {% schema %} renders nothing, {% style %} a <style> element
+  liquid.registerTag('schema', {
+    parse(tagToken, remainTokens) {
+      const stream = this.liquid.parser.parseStream(remainTokens);
+      stream.on('tag:endschema', () => stream.stop()).on('template', () => {}).on('end', () => {
+        throw new Error('endschema not found');
+      });
+      stream.start();
+    },
+    *render() {},
+  });
+  liquid.registerTag('style', {
+    parse(tagToken, remainTokens) {
+      this.templates = [];
+      const stream = this.liquid.parser.parseStream(remainTokens);
+      stream.on('template', (t) => this.templates.push(t)).on('tag:endstyle', () => stream.stop()).on('end', () => {
+        throw new Error('endstyle not found');
+      });
+      stream.start();
+    },
+    *render(ctx, emitter) {
+      emitter.write('<style>');
+      yield this.liquid.renderer.renderTemplates(this.templates, ctx, emitter);
+      emitter.write('</style>');
+    },
+  });
+  liquid.registerFilter('image_url', (src) => String(src || ''));
+  liquid.registerFilter('image_tag', (src) => `<img src="${STORE}/cdn/shop/files/placeholder.png" alt="" data-fixture-src="${src}">`);
+  liquid.registerFilter('placeholder_svg_tag', () => '<svg aria-hidden="true"></svg>');
   liquid.registerFilter('asset_url', (name) => `assets/${name}?v=${STAMP}`);
   liquid.registerFilter('stylesheet_tag', (url) => `<link href="${url}" rel="stylesheet" type="text/css" media="all" />`);
   liquid.registerFilter('inline_asset_content', (name) => readFileSync(join(THEME, 'assets', name), 'utf8').trim());
@@ -215,6 +244,82 @@ if (cta >= 0) {
 }
 writeFileSync(join(OUT, 'pdp-after.html'), after.replace('</body>', fxTag('pdp-after') + '</body>'));
 results.push(`pdp-after: panel removed ${!after.includes('KcPractitionerRequest')}, CTA link ${cta >= 0}`);
+
+// ---- the PDP as this branch builds it (R76g popup + the Trusted button, 26 Oct), and the homepage
+// with the real trusted-professionals section. The FAQ items come from the live PDP's DOM; the
+// product_faq block and trusted section settings from the branch's templates.
+function innerOf(html, openTag, from) {
+  const start = html.indexOf(openTag, from);
+  if (start < 0) return null;
+  const box = balanced(html, start);
+  return { inner: html.slice(start + openTag.length, box.end - 6), start, end: box.end };
+}
+const subTpl = JSON.parse(stripComment(readFileSync(join(THEME, 'templates/product.subscription-item.json'), 'utf8')));
+const homeTpl = JSON.parse(stripComment(readFileSync(join(THEME, 'templates/index.json'), 'utf8')));
+const subFaq = Object.values(subTpl.sections.main.blocks).find((b) => b.type === 'product_faq');
+const FAQ_SETTINGS = { ...defaults, ...subFaq.settings };
+const sectionOf = (tplJson, type) => {
+  const [id, s] = Object.entries(tplJson.sections).find(([, v]) => v.type === type);
+  const order = s.block_order || Object.keys(s.blocks || {});
+  return { id, settings: { ...s.settings }, blocks: order.map((bid) => ({ id: bid, ...s.blocks[bid], shopify_attributes: '' })) };
+};
+const liveItems = (dom) => {
+  const faq = innerOf(dom, '<div class="kc-faq-block pdp">', 0);
+  const items = [];
+  for (const chunk of faq.inner.split(/<details\s+class="kc-faq-item"/).slice(1)) {
+    const html = '<details' + chunk;
+    const title = (html.match(/<summary class="kc-faq-summary">\s*<span>([\s\S]*?)<\/span>/) || [])[1];
+    const d = innerOf(html, '<div class="kc-faq-description">', 0);
+    const c = innerOf(html, '<div class="kc-faq-section-content">', 0);
+    items.push({ title, description: d ? { html: d.inner.trim() } : null, section_content: c ? c.inner.trim() : '' });
+  }
+  return { faq, items };
+};
+const replaceSection = (dom, idPart, html) => {
+  const at = dom.search(new RegExp(`<section id="shopify-section-template--[^"]*__${idPart}"`));
+  if (at < 0) throw new Error('section not found: ' + idPart);
+  const open = dom.slice(at, dom.indexOf('>', at) + 1);
+  const end = dom.indexOf('</section>', at) + '</section>'.length;
+  return dom.slice(0, at) + open + html + '</section>' + dom.slice(end);
+};
+const pdpSrc = absolute(readFileSync(join(LIVE, 'pdp-en.html'), 'utf8'));
+const { faq: liveFaq, items: ITEMS } = liveItems(pdpSrc);
+const faqScriptEnd = pdpSrc.indexOf('</script>', liveFaq.end) + '</script>'.length;
+for (const [name, state] of [
+  ['pdp-current', 'default'],
+  ['pdp-current-success', 'success'],
+]) {
+  const globals = {
+    pages: { 'privacy-policy': { url: `${STORE}/pages/privacy-policy` } },
+    shop: {},
+    stamp: STAMP,
+    request: { locale: { iso_code: 'en' }, origin: STORE, path: '/products/karmicare-biorhythmic-oral-care-system', page_type: 'product' },
+    product: { url: 'pdp-current.html', metafields: { custom: { product_faq: { value: ITEMS } } } },
+  };
+  const liquid = engine(FORMS[state], globals);
+  liquid.registerFilter('metafield_tag', (m) => (m && m.html) || '');
+  const faqHtml = await liquid.renderFile('product-faq', { block: { settings: FAQ_SETTINGS }, product: globals.product });
+  const trusted = await liquid.renderFile('trusted-professionals', { section: sectionOf(subTpl, 'trusted-professionals'), product: globals.product });
+  let dom = pdpSrc.slice(0, liveFaq.start) + faqHtml + pdpSrc.slice(faqScriptEnd);
+  dom = replaceSection(dom, 'trusted_professionals_HAqYth', trusted);
+  writeFileSync(join(OUT, `${name}.html`), dom.replace('</body>', fxTag(name) + '</body>'));
+  results.push(`${name}: triggers by text ${FAQ_SETTINGS.request_trigger_text}, trusted CTA ${/data-kc-pr-open/.test(trusted) ? 'opens the form' : 'no opener'}`);
+}
+{
+  const liquid = engine(FORMS.default, {
+    pages: {},
+    shop: {},
+    stamp: STAMP,
+    request: { locale: { iso_code: 'en' }, origin: STORE, path: '/', page_type: 'index' },
+  });
+  const section = sectionOf(homeTpl, 'trusted-professionals');
+  // the product picker resolves to a product object; here the local PDP fixture
+  if (section.settings.request_product) section.settings.request_product = { url: 'pdp-current.html' };
+  const trusted = await liquid.renderFile('trusted-professionals', { section });
+  let dom = replaceSection(absolute(readFileSync(join(LIVE, 'home-en.html'), 'utf8')), 'trusted_professionals_HAqYth', trusted);
+  writeFileSync(join(OUT, 'home-current.html'), dom.replace('</body>', fxTag('home-current') + '</body>'));
+  results.push(`home-current: trusted CTA href ${(trusted.match(/href="([^"]*)"[^>]*data-kc-pr-open/) || [])[1]}`);
+}
 
 // ---- the frame page: loads a variant in an iframe of a given size (scrolled captures stay drawn)
 writeFileSync(
