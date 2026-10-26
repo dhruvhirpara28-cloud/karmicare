@@ -28,9 +28,10 @@ OUT = ROOT / "assets/kc-tokens.css"
 BREAKPOINT = "750px"  # Dawn's own breakpoint, mirrors Figma desktop/mobile (D8)
 
 FONT_STACKS = {
-    # The Adobe Fonts kit family first, so a locally installed "Proxima Nova" (another build)
-    # never takes over from the web font (Victor, 26 Oct; docs/global-type/CRISPNESS-REPORT.md)
-    "Proxima Nova": '"proxima-nova", "Proxima Nova", sans-serif',
+    # Only the Adobe Fonts kit family: a locally installed "Proxima Nova" (another build) must
+    # never take over or fill in glyphs, so no machine mixes two faces (Victor, 26 Oct;
+    # docs/global-type/CRISPNESS-REPORT.md, Astra R88 B2)
+    "Proxima Nova": '"proxima-nova", sans-serif',
     "Nunito": '"Nunito", sans-serif',
     "Marlide Display": '"Marlide Display", "marlide-display-variable", serif',
     "Space Grotesk": '"Space Grotesk", sans-serif',

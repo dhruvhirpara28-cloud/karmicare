@@ -17,15 +17,16 @@
    designed legal pages, sections/policy-banner.liquid + sections/legal-toc-section.liquid with
    the settings of templates/page.terms-and-conditions.json, as measured on the live
    /pages/terms-and-conditions-1 on 24 Oct 2026: a 720px column, the 52px title, the clause
-   titles at 24/28 with a 1px rule between clauses, 18px body copy at 68 % of the heading
-   colour, underlined links in the full colour. Colours and type come from assets/kc-tokens.css
+   titles at 24/28 with a 1px rule between clauses, 18px body copy and underlined links in the
+   full heading colour (no translucent text since 26 Oct). Colours and type come from assets/kc-tokens.css
    and theme.liquid's font variables, so Day and Night follow body.day-mode / body.night-mode as
    everywhere else. Numbers that are the legal page's own (not tokens) say so in a comment.
 
    No font-family here (R70b): the legal page inherits --font-body-family / --font-heading-family
-   ("proxima-nova", Typekit), so this page does too. --kc-font-use-body starts with "Proxima Nova",
-   which matches a desktop install of the font where there is one; that copy has no line gap, so
-   the paragraphs' line-height: normal (base.css) drew 18px lines instead of Typekit's 25.5px.
+   ("proxima-nova", Typekit), so this page does too. --kc-font-use-body used to start with
+   "Proxima Nova", which matched a desktop install of the font where there was one; that copy has
+   no line gap, so line-height: normal (base.css) drew 18px lines instead of Typekit's 25.5px.
+   Since 26 Oct the token names only "proxima-nova" (Astra R88 B2).
 
    Left out on purpose: the "LEGAL" eyebrow, the "On this page" menu and the rights cards. They
    need a template. The refund policy carries its four rights as a table instead; it is styled
