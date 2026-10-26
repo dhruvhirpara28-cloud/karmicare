@@ -25,6 +25,12 @@ const locale = readJson(join(THEME, `locales/${LANG || 'en.default'}.json`));
 const PENDING = { on_this_page: 'On this page', sources: 'Sources', keep_reading: 'Keep reading', reading_time: '{{ minutes }} min read' };
 for (const [k, v] of Object.entries(PENDING)) locale.blogs.article[k] ??= v;
 
+// Shopify's images['name'] (files in this store's Files): the sizes measured by tools/probe-bodyimgs.js
+const bodyImgs = readJson(join(HERE, 'data/bodyimgs.json'));
+const images = Object.fromEntries(Object.entries(bodyImgs).filter(([, v]) => v.ownFiles).map(([n, v]) => [n, {
+  src: `https://www.karmicare.com/cdn/shop/files/${n}`, width: v.ownFiles[0], height: v.ownFiles[1], alt: '',
+}]));
+
 const MONTHS = 'January February March April May June July August September October November December'.split(' ');
 const named = (args) => Object.fromEntries((args || []).filter(Array.isArray));
 
@@ -66,6 +72,7 @@ liquid.registerFilter('image_tag', (img, ...args) => {
   attrs.push(`width="${img.width}"`, `height="${img.height}"`, `alt="${a.alt ?? img.alt ?? ''}"`);
   if (a.loading) attrs.push(`loading="${a.loading}"`);
   if (a.fetchpriority) attrs.push(`fetchpriority="${a.fetchpriority}"`);
+  if (a.decoding) attrs.push(`decoding="${a.decoding}"`);
   return `<img ${attrs.join(' ')}>`;
 });
 liquid.registerTag('schema', {
@@ -129,10 +136,11 @@ const pages = [
   ['article-nano', article('nano-hydroxyapatite', 7, DECIDED)],
   ['article-short', article('morning-and-night-time-brushing-why-timing-matters', 3)],
   ['article-noimage', article('headaches-and-tooth-pain-understanding-the-connection', 6, null)],
+  ['article-wellness', article('how-oral-health-impacts-your-overall-wellness', 5)], // opens with an h5 (R90 B3)
 ];
 for (const [name, a] of pages) {
   const section = { id: 'template--kc-blog__main', blocks, settings: tpl.settings };
-  const html = liquid.renderFileSync('main-article', { article: a, blog, section, request: { origin: 'https://www.karmicare.com' } }, { globals: { section } });
+  const html = liquid.renderFileSync('main-article', { article: a, blog, section, images, request: { origin: 'https://www.karmicare.com' } }, { globals: { section, images } });
   writeFileSync(join(OUT, `${name}${LANG ? '-' + LANG : ''}.html`), html);
   console.log('rendered', name, LANG, html.length);
 }

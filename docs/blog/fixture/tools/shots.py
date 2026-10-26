@@ -54,7 +54,7 @@ def plan():
             for w in (360, 390, 750, 990, 1440):
                 for page in ("article-nano", "article-short", "article-noimage", "blog-many", "blog-one", "blog-two"):
                     shots.append((f"theme-{page}-top-{w}-{mode}", f"theme-{page}.html", w, f"tokens=next&mode={mode}"))
-            for w in (390, 990, 1440):
+            for w in (360, 390, 750, 990, 1440):
                 for part in ("body", "image", "sources", "related", "cta"):
                     sel = {"related": ".kc-blog__section-heading", "cta": "[id*=featured_product]"}.get(part, PARTS.get(part))
                     shots.append((f"theme-article-nano-{part}-{w}-{mode}", "theme-article-nano.html", w, f"tokens=next&mode={mode}&at={sel}"))

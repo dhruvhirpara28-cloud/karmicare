@@ -158,21 +158,22 @@ a.kc-blog__eyebrow:hover {
 
 /* ---- Body (accent -> page) and the legal pages' grid -------------------------------------------
    A 1416px page width with 20px sides, the sidebar, 16px, then the 680px text (legal-toc-section).
-   --kc-blog-colstart is where the text starts from the left of the screen; wide pictures use it to
-   centre themselves on the page. */
+   --kc-blog-colstart is where the text starts from the left edge of the page; wide pictures use it to
+   centre themselves on the page. Widths are in cqw of .kc-blog__main (a size container), so they are
+   the page's width without a scrollbar, where 100vw would include it. */
 .kc-blog__main,
 .kc-blog-related {
   --kc-blog-pad: 2rem; /* the legal page-width's side padding */
   --kc-blog-side: 0px;
   --kc-blog-gap: 0px;
   --kc-blog-colstart: var(--kc-blog-gutter);
-  --kc-blog-wide: 100vw;
+  --kc-blog-wide: 100cqw;
 }
 
 .kc-blog__main {
   padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-xs);
   background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
-  overflow-x: clip;
+  container-type: inline-size;
 }
 
 .kc-blog__layout {
@@ -223,7 +224,9 @@ a.kc-blog__eyebrow:hover {
   font-weight: inherit !important;
 }
 
-.kc-blog__body :is(p, ul, ol, blockquote, table, div[style]) {
+/* :where() keeps this reset at 0,1,0: !important already beats the inline styles, and the picture
+   breakout below (p:has(img), 0,1,2) must win its margins (R90 B1) */
+.kc-blog__body :where(p, ul, ol, blockquote, table, div[style]) {
   margin: 0 0 var(--kc-blog-para) !important;
 }
 
@@ -235,9 +238,10 @@ a.kc-blog__eyebrow:hover {
   display: none;
 }
 
-/* Headings by their place, not their tag: the nano article uses h1 for its sections, the wellness
-   article an h5. Sections: the h3 token (T2), subsections: h5, both with their token line height (T3).
-   They fill the line (only the title is balanced), as on the reference. */
+/* Headings: sections/main-article.liquid moves an h1-based body down one level (R90 B3), so h2 is a
+   section and h3 to h6 are subsections (the wellness article's h5 too). Sections: the h3 token (T2),
+   subsections: h5, both with their token line height (T3). They fill the line (only the title is
+   balanced), as on the reference. */
 .kc-blog__body :is(h1, h2, h3, h4, h5, h6) {
   margin: var(--kc-responsive-spacing-layout-3xl) 0 var(--kc-responsive-spacing-layout-lg) !important;
   font-family: var(--kc-font-use-heading) !important;
@@ -246,15 +250,13 @@ a.kc-blog__eyebrow:hover {
   text-wrap: pretty;
 }
 
-.kc-blog__body :is(h1, h2),
-.kc-blog__body:has(h1) h1 {
+.kc-blog__body :is(h1, h2) {
   font-size: var(--kc-responsive-h3-text-size) !important;
   line-height: var(--kc-responsive-h3-line-height) !important;
   letter-spacing: var(--kc-responsive-h3-letter-spacing) !important;
 }
 
-.kc-blog__body :is(h3, h4, h5, h6),
-.kc-blog__body:has(h1) h2 {
+.kc-blog__body :is(h3, h4, h5, h6) {
   font-size: var(--kc-responsive-h5-text-size) !important;
   line-height: var(--kc-responsive-h5-line-height) !important;
   letter-spacing: 0 !important;
@@ -284,7 +286,12 @@ a.kc-blog__eyebrow:hover {
   text-decoration-color: var(--kc-mapped-surface-accent-default);
 }
 
-.kc-blog a:focus-visible {
+.kc-blog__body [tabindex='-1']:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.kc-blog a:focus-visible,
+.kc-blog__body [tabindex='-1']:focus-visible {
   outline: 2px solid var(--kc-mapped-border-focus-strong);
   outline-offset: 2px;
   border-radius: 2px;
@@ -352,7 +359,11 @@ a.kc-blog__eyebrow:hover {
 /* Body pictures: as wide as the reference's interactive figure (1280px), centred on the page whatever
    the sidebar does; edge to edge on phones. Every picture in the articles sits alone in its paragraph
    (docs/blog/fixture/tools/image_paras.py): a picture written in a paragraph with text would take the
-   text along, so pictures go in a paragraph of their own. */
+   text along, so pictures go in a paragraph of their own. The width and height that image_tag prints
+   reserve the space before the file loads (R90 B2); a picture is never wider than its file (N1). */
+/* No width here: the width attribute sets it (a file is never stretched, N1) and max-width caps it at
+   the frame; with height: auto the browser takes the ratio from width/height before the file loads.
+   width: auto would drop the attribute and size the box only once the file is in. */
 .kc-blog__body img {
   display: block;
   max-width: 100%;
@@ -360,15 +371,21 @@ a.kc-blog__eyebrow:hover {
   margin: 0 auto;
 }
 
+/* Embeds (N1): a video or map keeps its ratio and never runs past the column */
+.kc-blog__body :is(iframe, video, embed, object) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
 .kc-blog__body p:has(img) {
   width: var(--kc-blog-wide);
   max-width: none;
   margin-block: var(--kc-responsive-spacing-layout-3xl) !important;
-  margin-inline: calc((100vw - var(--kc-blog-wide)) / 2 - var(--kc-blog-colstart)) 0 !important;
-}
-
-.kc-blog__body p:has(img) img {
-  width: 100%;
+  margin-inline: calc((100cqw - var(--kc-blog-wide)) / 2 - var(--kc-blog-colstart)) 0 !important;
 }
 
 /* ---- Sources: the study links the body already has, as a research card ------------------------- */
@@ -636,8 +653,8 @@ a.kc-blog__eyebrow:hover {
   .kc-blog-related {
     --kc-blog-side: 25rem; /* the legal sidebar below 990px */
     --kc-blog-gap: 1.6rem; /* the legal column gap */
-    --kc-blog-colstart: calc(max(var(--kc-blog-pad), (100vw - 141.6rem) / 2 + var(--kc-blog-pad)) + var(--kc-blog-side) + var(--kc-blog-gap));
-    --kc-blog-wide: min(128rem, 100vw - 2 * var(--kc-blog-gutter)); /* the reference's wide figure */
+    --kc-blog-colstart: calc(max(var(--kc-blog-pad), (100cqw - 141.6rem) / 2 + var(--kc-blog-pad)) + var(--kc-blog-side) + var(--kc-blog-gap));
+    --kc-blog-wide: min(128rem, 100cqw - 2 * var(--kc-blog-gutter)); /* the reference's wide figure */
   }
 
   .kc-blog__layout {

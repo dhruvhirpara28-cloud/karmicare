@@ -24,10 +24,102 @@
   assign kc_words = article.content | replace: '>', '> ' | strip_html | split: ' ' | size
   assign kc_minutes = kc_words | divided_by: 200.0 | ceil | at_least: 1
 
-  # The pictures in the body are the files' 480/600px thumbnails; the theme asks for the originals
-  # instead, at most 1600px wide, lazy (docs/blog/01-INVENTORY.md §4.3)
-  assign kc_body = article.content | replace: '_480x480.', '.' | replace: '_600x600.', '.' | replace: '.jpg?v=', '.jpg?width=1600&v=' | replace: '.png?v=', '.png?width=1600&v=' | replace: '<img ', '<img loading="lazy" decoding="async" '
+  assign kc_body = article.content
 -%}
+
+{%- capture kc_body -%}
+  {%- comment -%}
+    Headings (R90 B3). The title is the page's only h1 and the body's headings never skip a level, so
+    the outline is h1 title, h2 sections, h3 and h4 below them. A body that uses h1 for its sections
+    (the nano article) moves down one level. Then each heading is at most one level below the one
+    before it (the title counts as h1), and at most h4: the wellness article's opening h5 becomes h2,
+    the nano article's h3 under an h1 becomes h3. Wording and order are untouched; only the tag
+    changes. '<h' also starts <hr> and <header>; those parts do not start with a digit and pass through.
+  {%- endcomment -%}
+  {%- liquid
+    assign kc_shift = 0
+    if kc_body contains '<h1'
+      assign kc_shift = 1
+    endif
+    assign kc_prev = 1
+    assign kc_h_parts = kc_body | split: '<h'
+  -%}
+  {%- for kc_part in kc_h_parts -%}
+    {%- liquid
+      assign kc_first = kc_part | slice: 0
+      assign kc_is_heading = false
+      unless forloop.first
+        case kc_first
+          when '1', '2', '3', '4', '5', '6'
+            assign kc_is_heading = true
+        endcase
+      endunless
+    -%}
+    {%- unless kc_is_heading -%}
+      {%- unless forloop.first -%}<h{%- endunless -%}{{- kc_part -}}
+      {%- continue -%}
+    {%- endunless -%}
+    {%- liquid
+      # A heading with no text (the wellness article opens with an h5 holding only &nbsp;) prints as a
+      # paragraph: a screen reader would announce an empty heading, and it takes no part in the levels
+      assign kc_old_close = '</h' | append: kc_first | append: '>'
+      assign kc_heading_text = kc_part | split: kc_old_close | first | split: '>' | slice: 1, 999 | join: '>' | strip_html | replace: '&nbsp;', '' | strip
+    -%}
+    {%- if kc_heading_text == blank -%}
+      <p{{- kc_part | slice: 1, kc_part.size | replace_first: kc_old_close, '</p>' -}}
+      {%- continue -%}
+    {%- endif -%}
+    {%- liquid
+      assign kc_old = kc_first | plus: 0
+      assign kc_level = kc_old | plus: kc_shift
+      assign kc_max = kc_prev | plus: 1
+      if kc_level > kc_max
+        assign kc_level = kc_max
+      endif
+      if kc_level > 4
+        assign kc_level = 4
+      endif
+      if kc_level < 2
+        assign kc_level = 2
+      endif
+      assign kc_prev = kc_level
+      assign kc_close_old = '</h' | append: kc_old | append: '>'
+      assign kc_close_new = '</h' | append: kc_level | append: '>'
+      assign kc_rest = kc_part | slice: 1, kc_part.size | replace_first: kc_close_old, kc_close_new
+    -%}
+    <h{{- kc_level -}}{{- kc_rest -}}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture kc_body_html -%}
+  {%- comment -%}
+    Body pictures (R90 B2). The bodies link the files' 480/600px thumbnails without width and height.
+    Every picture is also in this store's Files at full size (checked 26 Oct), so the theme looks the
+    file up by name (images['name.jpg']) and prints it with image_tag: the file's own width and height
+    reserve the space before it loads, a srcset of up to 1920px, lazy, the body's alt text kept. A
+    picture that is not in Files keeps its tag, gets the original instead of the thumbnail, and loads
+    lazily (it can then still shift the text).
+  {%- endcomment -%}
+  {%- assign kc_img_parts = kc_body | split: '<img ' -%}
+  {%- for kc_part in kc_img_parts -%}
+    {%- if forloop.first -%}{{ kc_part }}{%- continue -%}{%- endif -%}
+    {%- assign kc_tag = kc_part | split: '>' | first -%}
+    {%- assign kc_after = kc_part | remove_first: kc_tag | remove_first: '>' -%}
+    {%- assign kc_src = kc_tag | split: 'src="' | last | split: '"' | first -%}
+    {%- assign kc_name = kc_src | split: '?' | first | split: '/' | last | replace: '_480x480.', '.' | replace: '_600x600.', '.' -%}
+    {%- assign kc_alt = '' -%}
+    {%- if kc_tag contains 'alt="' -%}
+      {%- assign kc_alt = kc_tag | split: 'alt="' | last | split: '"' | first -%}
+    {%- endif -%}
+    {%- assign kc_file = images[kc_name] -%}
+    {%- if kc_file.width -%}
+      {{- kc_file | image_url: width: 1920 | image_tag: widths: '480, 750, 1100, 1500, 1920', sizes: '(min-width: 1344px) 1280px, (min-width: 641px) calc(100vw - 64px), 100vw', loading: 'lazy', decoding: 'async', alt: kc_alt -}}
+    {%- else -%}
+      <img loading="lazy" decoding="async" {{ kc_tag | replace: '_480x480.', '.' | replace: '_600x600.', '.' }}>
+    {%- endif -%}
+    {{- kc_after -}}
+  {%- endfor -%}
+{%- endcapture -%}
 
 {%- capture kc_sources -%}
   {%- comment -%}
@@ -122,7 +214,7 @@
 
       <div class="kc-blog__text">
         <div class="kc-blog__body rte"{% if kc_content_block %} {{ kc_content_block.shopify_attributes }}{% endif %}>
-          {{- kc_body -}}
+          {{- kc_body_html -}}
         </div>
 
         {%- for block in section.blocks -%}

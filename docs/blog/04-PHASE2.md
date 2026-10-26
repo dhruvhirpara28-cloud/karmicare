@@ -48,3 +48,79 @@ Victor approved direction D and T1–T4 on 26 Oct (02-PROPOSAL.md, 03-TYPE-AUDIT
 - **Evidence track:** the claims in the article bodies (01-INVENTORY §6, 02-PROPOSAL §7).
 - **KC library:** add a long-form line-height token (1.6) and point `--kc-blog-long-line-height` at it (D22).
 - **D17 glossary:** waits for Victor's reference.
+
+## R90b: Astra's REWORK fixed (26 Oct)
+
+Report: `docs/runtime-review/R90-BLOG-LAYOUT-ASTRA.md`. Note: `docs/blog/REWORK-R90.md`.
+
+### B1: wide body pictures were clipped
+
+**Cause:** the paragraph reset `:is(p, …, div[style])` had specificity 0,2,1 and beat the breakout.
+
+**Fix in `assets/kc-blog.css`:**
+- The reset is now `:where(…)`, at 0,1,0. `!important` still beats the inline styles.
+- The breakout is measured in `cqw` of `.kc-blog__main`, now a size container: the page width without a scrollbar, where `100vw` included it.
+- `overflow-x: clip` is gone, so nothing is hidden any more.
+
+**Measured** (`fixture/tools/r90_check.py`): real picture edges in the nano (EN/NL/FR), short and headaches articles. Each picture is centred at its expected width, and the page never scrolls sideways (`scrollWidth` = viewport):
+
+| Viewport | Picture left → right |
+|---|---|
+| 360 | 0 → 360 |
+| 390 | 0 → 390 |
+| 750 | 32 → 718 |
+| 990 | 32 → 958 |
+| 1440, 1920 px files | 80 → 1360 |
+| 1440, 1200 px nano files (not stretched) | 120 → 1320 |
+
+### B2: body pictures shifted the layout
+
+**Fix in `sections/main-article.liquid`:**
+- All 16 body pictures of the 8 articles are also in this store's Files at full size (`fixture/tools/probe-bodyimgs.js`).
+- The section looks each one up with `images['name.jpg']` and prints it with `image_tag`: the file's width and height, a srcset up to 1920, lazy, the body's alt kept.
+- A picture not in Files keeps its tag, gets the original file instead of the thumbnail, and loads lazily.
+- The CSS sets no `width`, so the attribute sizes the box before the file loads.
+
+**Measured** (picture not yet loaded, box against the file ratio):
+
+| Viewport | File | Box | Ratio check |
+|---|---|---|---|
+| 390 | 1200×802 | 390×261 | equal |
+| 1440 | 1200×802 | 1200×803 | ±1 px |
+| 1440 | 1920×1080 | 1280×721 | ±1 px |
+
+**Contents jump:** one smooth scroll now lands exactly on the 90 px scroll margin (before: 944 px off without re-aiming). The corrective re-aiming is removed from `kc-blog-contents.js`.
+
+### B3: six h1s in the nano article
+
+**Fix in `sections/main-article.liquid`:**
+- The title is the only h1.
+- A body that uses h1 for its sections moves down one level.
+- Each heading is at most one level below the one before it (the title counts as h1), and at most h4.
+- A heading with no text becomes a paragraph. The wellness article opens with an h5 holding only `&nbsp;`.
+- Wording and order are unchanged: the nano headings' text equals the source, 11 of 11.
+
+**Rendered body levels:**
+
+| Article | Levels |
+|---|---|
+| nano | 23232333322 |
+| headaches | 232322332 |
+| morning | 2333332333 |
+| wellness | 22222 |
+
+No skips, no empty headings, tags balanced, one h1 in EN/NL/FR. The contents still list the 5 nano sections plus Sources. Without JS the server HTML has the same headings and the empty menu is hidden.
+
+### N1: embeds and small pictures
+
+- A legacy 560×315 iframe stays inside the column: 350×197 at 390 and 680×383 at 1440.
+- An 80×40 picture stays 80 px wide.
+
+### N2: focus after a contents jump
+
+Focus moves to the target heading (`tabindex="-1"`, `focus({preventScroll: true})`), with no ring for a mouse click and the focus ring for keyboard.
+
+### Verification
+
+- **Theme Check:** exit 0, 0 errors, 19 warnings (baseline).
+- **Shots:** 110 `theme-*` shots at 360, 390, 750, 990 and 1440, Day and Night. The nano body, picture, Sources, Keep reading and end CTA are shot at all five widths.
