@@ -55,15 +55,15 @@
   --kc-shape-blur-xs: 3px;
   --kc-shape-blur-lg: 32px;
   --kc-font-role-identity: "Nunito", sans-serif;
-  --kc-font-role-soul: "Marlide Display", "marlide-display-variable", serif;
-  --kc-font-role-backbone: "Proxima Nova", "proxima-nova", sans-serif;
+  --kc-font-role-soul: "marlide-display-variable", serif;
+  --kc-font-role-backbone: "proxima-nova", sans-serif;
   --kc-font-role-science: "Space Grotesk", sans-serif;
   --kc-font-role-data: "Geist Mono", monospace;
   --kc-font-role-long-form: "Noto Serif", serif;
-  --kc-font-use-lifestyle-display: "Marlide Display", "marlide-display-variable", serif;
-  --kc-font-use-heading: "Proxima Nova", "proxima-nova", sans-serif;
-  --kc-font-use-body: "Proxima Nova", "proxima-nova", sans-serif;
-  --kc-font-use-ui: "Proxima Nova", "proxima-nova", sans-serif;
+  --kc-font-use-lifestyle-display: "marlide-display-variable", serif;
+  --kc-font-use-heading: "proxima-nova", sans-serif;
+  --kc-font-use-body: "proxima-nova", sans-serif;
+  --kc-font-use-ui: "proxima-nova", sans-serif;
   --kc-font-use-science-heading: "Space Grotesk", sans-serif;
   --kc-font-use-mono: "Geist Mono", monospace;
   --kc-font-use-brand: "Nunito", sans-serif;
@@ -261,13 +261,15 @@ body.day-mode {
   --kc-mapped-surface-overlay-scrim: rgba(25,31,56,0.48);
   --kc-mapped-text-default-heading: #191f38;
   --kc-mapped-text-default-heading-rgb: 25,31,56;
-  --kc-mapped-text-default-body: rgba(25,31,56,0.76);
-  --kc-mapped-text-default-caption: rgba(25,31,56,0.76);
+  --kc-mapped-text-default-body: #191f38;
+  --kc-mapped-text-default-body-rgb: 25,31,56;
+  --kc-mapped-text-default-caption: #191f38;
+  --kc-mapped-text-default-caption-rgb: 25,31,56;
   --kc-mapped-text-default-placeholder: rgba(25,31,56,0.76);
   --kc-mapped-text-link-default: #191f38;
   --kc-mapped-text-link-default-rgb: 25,31,56;
-  --kc-mapped-text-link-default-hover: #7fb9ff;
-  --kc-mapped-text-link-default-hover-rgb: 127,185,255;
+  --kc-mapped-text-link-default-hover: #0061d6;
+  --kc-mapped-text-link-default-hover-rgb: 0,97,214;
   --kc-mapped-border-primary-hairline: rgba(25,31,56,0.12);
   --kc-mapped-border-primary-default-hover: #2c3a60;
   --kc-mapped-border-primary-default-hover-rgb: 44,58,96;
@@ -388,8 +390,10 @@ body.night-mode {
   --kc-mapped-surface-overlay-scrim: rgba(10,12,21,0.64);
   --kc-mapped-text-default-heading: #fffbf6;
   --kc-mapped-text-default-heading-rgb: 255,251,246;
-  --kc-mapped-text-default-body: rgba(255,251,246,0.68);
-  --kc-mapped-text-default-caption: rgba(255,251,246,0.68);
+  --kc-mapped-text-default-body: #fffbf6;
+  --kc-mapped-text-default-body-rgb: 255,251,246;
+  --kc-mapped-text-default-caption: #fffbf6;
+  --kc-mapped-text-default-caption-rgb: 255,251,246;
   --kc-mapped-text-default-placeholder: rgba(255,251,246,0.68);
   --kc-mapped-text-link-default: #fffbf6;
   --kc-mapped-text-link-default-rgb: 255,251,246;
@@ -484,8 +488,8 @@ body.night-mode {
   --kc-responsive-h3-letter-spacing: -1px; /* held at old value (P9) */
   --kc-responsive-h4-letter-spacing: -1px; /* held at old value (P10) */
   --kc-responsive-h5-letter-spacing: -0.5px; /* held at old value (P11) */
-  --kc-responsive-caption-letter-spacing: 1.25px; /* held at old value (P12) */
-  --kc-responsive-Nunito-letter-spacing: 1.7px; /* held at old value (P13) */
+  --kc-responsive-caption-letter-spacing: 0.8px; /* held at old value (P12) */
+  --kc-responsive-Nunito-letter-spacing: 1px; /* held at old value (P13) */
   --kc-responsive-h4-letter-spacing-sm: -0.25px; /* held at old value (P14) */
   --kc-responsive-caption-sm-letter-spacing: 1px; /* held at old value (P15) */
   --kc-responsive-all-letter-spacing: 0.5px; /* held at old value (P16) */
