@@ -331,9 +331,10 @@ HERO_OPTIONS = {
     "3": ({"src": CDN + "karmicare-duo-pack-transparent.png", "width": 2048, "height": 2048,
            "alt": "Awake and Asleep toothpaste with their box"}, "contain",
           "The Duo packshot (the product's first picture), whole on the accent tint"),
-    "4": ({"src": CDN + "Picture_1.png", "width": 400, "height": 480,
+    # Victor uploaded the 2000px master to Files on 26 Oct (Shopify turned " copy" into "_copy")
+    "4": ({"src": CDN + "kc-research-nhap-dentinal-tubule-occlusion-2000_copy.png", "width": 2000, "height": 2000,
            "alt": "Illustration of open and filled dentine tubules"}, None,
-          "The Kulal card's tubule picture (Picture_1.png, 400×480; IMAGE-PLAN.md: rejected, reads as a measured before/after)"),
+          "The master of the Kulal card's tubule picture (IMAGE-PLAN.md: rejected, reads as a measured before/after)"),
 }
 
 
