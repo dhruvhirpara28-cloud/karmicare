@@ -466,7 +466,7 @@ body.night-mode {
 
 /* Day: every link that turns --kc-mapped-text-link-default-hover (#0061d6 in Day, Victor 26 Oct)
    also shows hover as a heavier, lower underline, so the hover never rests on colour alone */
-body:not(.night-mode) :is(.link, .underlined-link, .customer a, .inline-richtext a, .rte a, .mobile-facets__open, .sc-try-once, .kc-lgn__link, .care-comes-back__terms, .km-footer-links a, .km-footer-field__submit, .km-footer-locale__link, .km-footer-legal__links a, .consumer-rights__card-link):hover {
+body:not(.night-mode) :is(.link, .underlined-link, .customer a, .inline-richtext a, .rte a, .mobile-facets__open, .sc-try-once, .kc-try-once-btn, .kc-lgn__link, .care-comes-back__terms, .km-footer-links a, .km-footer-field__submit, .km-footer-locale__link, .km-footer-legal__links a, .consumer-rights__card-link):hover {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.25em;
