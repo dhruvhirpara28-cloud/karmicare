@@ -607,10 +607,10 @@ body.night-mode .pc-kit-poptitle {
   color: inherit;
 }
 
-/* The span in the heading is its second line, in the body colour */
+/* The span in the heading is its second line, in the second tone (base.css) */
 .plan-compare--kc .pc-head .pc-title span {
   display: block;
-  color: var(--kc-mapped-text-default-body);
+  color: var(--kc-heading-second-tone);
 }
 
 /* The body-lg deck in the body colour, like the other descriptions under an h2 (Victor, 25 Oct) */

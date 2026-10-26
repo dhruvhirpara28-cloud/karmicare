@@ -452,6 +452,18 @@ h2 strong,
   display: block;
 }
 
+/* The second tone of a two-tone heading. It used to be the body colour, which was translucent;
+   body text is full colour since 26 Oct, so the second tone is its own solid colour: the
+   heading colour mixed into the page colour as the old 76% (Day) / 68% (Night) looked, Day
+   #505466, Night #b5b5b9 (Victor, 26 Oct: keep the two tones) */
+body,
+body.day-mode {
+  --kc-heading-second-tone: color-mix(in srgb, var(--kc-mapped-text-default-heading) 76%, var(--kc-mapped-surface-page));
+}
+body.night-mode {
+  --kc-heading-second-tone: color-mix(in srgb, var(--kc-mapped-text-default-heading) 68%, var(--kc-mapped-surface-page));
+}
+
 @media only screen and (min-width: 750px) {
 
   h2,

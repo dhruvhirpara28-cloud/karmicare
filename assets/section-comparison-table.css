@@ -60,12 +60,11 @@
   line-height: inherit; /* base.css sets p to normal */
 }
 
-/* Italic text in the metafield heading takes the body colour (since 26 Oct the same full
-   navy / cream as the heading, so the heading reads in one tone) */
+/* Italic text in the metafield heading is the second tone (base.css --kc-heading-second-tone) */
 .comparison-section__title em,
 .comparison-section__title i {
   font-style: normal;
-  color: var(--kc-mapped-text-default-body);
+  color: var(--kc-heading-second-tone);
 }
 
 /* The body-lg deck in the body colour, like the other descriptions under an h2 (Victor, 25 Oct) */
