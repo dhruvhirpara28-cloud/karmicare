@@ -318,11 +318,15 @@
 
     reserveCopyHeight();
     if (document.fonts) document.fonts.ready.then(reserveCopyHeight);
-    let lastWidth = copyOut.clientWidth;
+    // Remeasure on every resize, once per frame: a breakpoint can change the copy's type size while
+    // its width stays the same (380px on both sides of 750, Astra R92)
+    let measureFrame = null;
     window.addEventListener('resize', () => {
-      if (copyOut.clientWidth === lastWidth) return;
-      lastWidth = copyOut.clientWidth;
-      reserveCopyHeight();
+      if (measureFrame !== null) return;
+      measureFrame = requestAnimationFrame(() => {
+        measureFrame = null;
+        reserveCopyHeight();
+      });
     });
   }
 

@@ -3,18 +3,23 @@
 script and stylesheet swapped in. Serve this folder with http.server and open /index.html.
 
 Usage: curl -sSL -o docs/homepage/preview-clock/live.html https://www.karmicare.com/
-       python3 -I docs/homepage/preview-clock/build.py
+       python3 -I docs/homepage/preview-clock/build.py            (writes index.html)
+       curl -sSL -o docs/homepage/preview-clock/live-nl.html https://www.karmicare.com/nl
+       python3 -I docs/homepage/preview-clock/build.py nl         (writes index-nl.html)
 """
 import re
 import shutil
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 LIVE = 'https://www.karmicare.com'
+LANG = sys.argv[1] if len(sys.argv) > 1 else 'en'
+SUFFIX = '' if LANG == 'en' else '-' + LANG
 
 # Shopify answers 429 to Python's urllib, so the page comes from curl
-html = (HERE / 'live.html').read_text(encoding='utf-8')
+html = (HERE / f'live{SUFFIX}.html').read_text(encoding='utf-8')
 html = html.replace('//www.karmicare.com/', LIVE + '/').replace('https:' + LIVE, LIVE)
 html = re.sub(r'(href|src|action)="/(?!/)', r'\1="' + LIVE + '/', html)
 
@@ -56,5 +61,5 @@ BAR = '''
 </script>
 '''
 html = html.replace('</body>', BAR + '</body>', 1)
-(HERE / 'index.html').write_text(html, encoding='utf-8')
+(HERE / f'index{SUFFIX}.html').write_text(html, encoding='utf-8')
 print('ok', len(html))
