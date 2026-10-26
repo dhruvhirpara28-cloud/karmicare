@@ -108,19 +108,20 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 - **Updated 25 Oct (round 5)**: the page titles of `terms-and-conditions-1`, `new-consumer-rights` and `privacy-policy` are inventoried as `admin:page:<handle>:title` (*Terms and Conditions*, *Consumer Rights*, *Privacy Policy*; Victor had "New" dropped in the Admin, 25 Oct); the `seo.title` rows captured from the page `<title>` are `retired`, because the pages have no SEO title. NL/FR department names follow gate-legal (`docs/localization/registration/ROUND5.md`).
 - **Updated 25 Oct (round 6)**: product names without "2.0", the cleaned descriptions of Morning/Evening Toothbrush and the floss (one row per paragraph; 10 new rows), the Evening Toothbrush SEO title without "Detoxifying" (`docs/localization/registration/ROUND6.md`); the two `admin:system:*:seo.description` rows are `retired` (same key as the homepage description Victor set by hand).
 - **Updated 26 Oct (round 7)** against live main `57e6588`: the PDP pill `text_1` is *Used and recommended by 100+ kPNI practitioners* (`corrected`), `text_5` *Recommended by functional dentists* is new; the practitioner form adds 13 `request_*` settings per product template, the two Klaviyo ID settings are `never_translate`, and three removed settings are `retired` (`docs/localization/registration/ROUND7.md`).
+- **Updated 26 Oct (round 7 restart, release 12, main `2f58500`)**: the clock hint on both templates is *DRAG THE DOT · EXPLORE 24 HOURS* (`corrected`); the blog template `templates/article.json` adds 11 rows for its featured product block (`article:featured_product_kc_blog/…`, batch 08), the same EN as the homepage buy box.
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 232 | `2637293ba890353bcf3d8871bf418e9318c36a3c` |
-| `batch-02-pdp` | 540 | `e09fc93cd094813ea0e21a773e2f6c90e33483d4` |
+| `batch-01-homepage` | 232 | `4570fe98e3ba0bada3a1f5c4b295e6adbefe10a0` |
+| `batch-02-pdp` | 540 | `ff022eabd54e38feee96a35de34b2dc724aedf5e` |
 | `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
 | `batch-04-legal` | 1012 | `4ead9703b4cfc2fc346b6e25843f38afec1124e7` |
 | `batch-05-products` | 128 | `78d85b206273a06783ba5531a6bbdfd56f5c9ba9` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
-| `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
+| `batch-08-system` | 57 | `a11927a67a3c19b36853fa2042ff4ab3f73ef04c` |
 
 ## How to read an entry
 
@@ -431,7 +432,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 28 | `index:chronobiology_clock_karmicare/night_badge` | template_setting | ≈ 22:00 · Fusobacterium peaks | needs-review | C C51 |
 | 29 | `index:chronobiology_clock_karmicare/night_title` | template_setting | Your mouth switches to repair | approved |  |
 | 30 | `index:chronobiology_clock_karmicare/night_text` | template_setting | Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:… | needs-review | C C52 |
-| 31 | `index:chronobiology_clock_karmicare/hint_label` | template_setting | DRAG THE RING · EXPLORE 24 HOURS | approved |  |
+| 31 | `index:chronobiology_clock_karmicare/hint_label` | template_setting | DRAG THE DOT · EXPLORE 24 HOURS | corrected |  |
 | 32 | `index:chronobiology_clock_karmicare/footer_text` | template_setting | Formulated for both shifts: Awake by day, Asleep by night. | approved |  |
 | 33 | `index:chronobiology_clock_karmicare/footer_link_text` | template_setting | Read the science | approved |  |
 | 34 | `index:two_formulas_karmicare/subheading` | template_setting | BIORHYTHMIC ORAL CARE | approved |  |
@@ -675,7 +676,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 38 | `product.subscription-item:chronobiology_clock_karmicare/night_badge` | template_setting | ≈ 22:00 · Fusobacterium peaks | needs-review | C C51 |
 | 39 | `product.subscription-item:chronobiology_clock_karmicare/night_title` | template_setting | Your mouth switches to repair | approved |  |
 | 40 | `product.subscription-item:chronobiology_clock_karmicare/night_text` | template_setting | Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:… | needs-review | C C52 |
-| 41 | `product.subscription-item:chronobiology_clock_karmicare/hint_label` | template_setting | DRAG THE RING · EXPLORE 24 HOURS | approved |  |
+| 41 | `product.subscription-item:chronobiology_clock_karmicare/hint_label` | template_setting | DRAG THE DOT · EXPLORE 24 HOURS | corrected |  |
 | 42 | `product.subscription-item:chronobiology_clock_karmicare/footer_text` | template_setting | Formulated for both shifts: Awake by day, Asleep by night. | approved |  |
 | 43 | `product.subscription-item:chronobiology_clock_karmicare/footer_link_text` | template_setting | Read the science | approved |  |
 | 44 | `product.subscription-item:trusted_professionals_HAqYth/subheading` | template_setting | PROFESSIONAL PARTNERS | approved |  |

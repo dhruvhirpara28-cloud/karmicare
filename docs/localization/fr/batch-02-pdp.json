@@ -2,7 +2,7 @@
  "batch": "batch-02-pdp",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "e09fc93cd094813ea0e21a773e2f6c90e33483d4",
+ "source_digest": "ff022eabd54e38feee96a35de34b2dc724aedf5e",
  "source_entries": 540,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -616,13 +616,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.chronobiology_clock_karmicare.settings.hint_label",
-   "en": "DRAG THE RING · EXPLORE 24 HOURS",
-   "en_sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8",
-   "fr": "GLISSEZ L’ANNEAU · EXPLOREZ 24 HEURES",
+   "en": "DRAG THE DOT · EXPLORE 24 HOURS",
+   "en_sha1": "d146b9c379fc398f50270b495c5a1c7c3250a62b",
+   "fr": "GLISSEZ LE POINT · 24 HEURES",
    "status": "translated",
    "flags": [],
-   "notes": "",
-   "source_status": "approved"
+   "notes": "26 Oct: clock hint approved by Victor (FR shortened to fit one line at 360)",
+   "source_status": "corrected"
   },
   {
    "id": "product.subscription-item:chronobiology_clock_karmicare/footer_text",

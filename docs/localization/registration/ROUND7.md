@@ -1,5 +1,27 @@
 # Round 7 · PDP trust pills, practitioner form
 
+**Restarted 26 Oct against release 12 (live main `2f58500` = merchant-edit `be375ba`: fonts/colours, blog, practitioner form, clock).** Integration merged; the lane's theme files equal `2f58500`. `live/tools/live_vs_source.py` against `2f58500` finds two changes:
+- the clock `hint_label` on `index` and `product.subscription-item` now reads *DRAG THE DOT · EXPLORE 24 HOURS*;
+- the new blog template `templates/article.json` has a featured product block that repeats the homepage buy box.
+
+The other text settings without a source row are not copy: Klaviyo IDs, colours, file names and Liquid references. The plans now hold:
+
+| Item | NL | FR |
+|---|---:|---:|
+| PDP pills `text_1` (changed), `text_5` (new) | 2 | 2 |
+| Practitioner form, 13 new `request_*` settings on both product templates (Klaviyo IDs out) | 26 | 24 (FR *Profession* equals the EN) |
+| Clock hint, NL *SLEEP DE BOL · VERKEN 24 UUR*, FR *GLISSEZ LE POINT · 24 HEURES* | 2 | 2 |
+| Blog featured product block, 11 copy settings (`article:featured_product_kc_blog/…`, batch 08 because batch 07 is held as blog content), NL/FR from their exact homepage twins, which are already registered | 11 | 11 |
+| **Expected** | **41** | **39** |
+
+The dry run can add byte-only re-registers. The blog keys of direction D are already in the locales (`b8b0331`).
+
+The trigger text was re-checked live on release 12 in the Orca browser, read only. curl now gets a 403 from www, probably Shopify's bot protection after the day's checks.
+- **NL:** the theme renders `data-trigger-text` "studiedossier", and both links contain it: "Vraag het studiedossier, …" and "Studiedossier en proefpakketten voor zorgverleners beschikbaar →".
+- **FR:** "dossier scientifique", in "Demandez le dossier scientifique, …" and "Dossier scientifique et échantillons disponibles pour les praticiens →".
+
+FR `check.py`: 75, NL `validate.py`: 62, both unchanged. `digest.py` passes.
+
 **Parked 26 Oct (landing desk, Victor: "translations come last"):** the plans stay as committed at `1aaae63`, and no dry run has been made. Round 7 restarts against the new live text once the font/token change and the blog have landed. At the restart:
 1. merge `karmicare/soft-launch`;
 2. compare the source with the new live main;

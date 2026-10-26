@@ -2,15 +2,18 @@
  "lang": "nl",
  "batch": "batch-08-system",
  "source": "docs/source-copy/batches/batch-08-system.json",
- "source_digest": "306f141fadf2231629b14eff578e01fc228ff7a3",
- "source_entries": 46,
+ "source_digest": "a11927a67a3c19b36853fa2042ff4ab3f73ef04c",
+ "source_entries": 57,
  "counts": {
-  "translated": 3,
+  "translated": 14,
   "admin": 5,
   "held": 2,
   "dawn-nl": 36
  },
- "fit_risk": [],
+ "fit_risk": [
+  "article:featured_product_kc_blog/loop_subscriptions_7dde8c/shipping_value_html",
+  "article:featured_product_kc_blog/loop_subscriptions_7dde8c/care_credit_text_1"
+ ],
  "status_legend": {
   "translated": "ready to register",
   "admin": "translated; registered through Shopify translation resources (product, metafield, metaobject, page, policy, article, menu, app)",
@@ -582,6 +585,142 @@
    "status": "dawn-nl",
    "flags": [],
    "notes": "Dawn key: NL from locales/nl.json (present); verify, do not re-translate"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "Your welcome kit includes",
+   "en_sha1": "7d8b1a1059370f21609f856e753613eb4ec96c99",
+   "nl": "Je welkomstpakket bevat",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/title_4znD88/custom_title",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.title_4znD88.settings.custom_title",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/title_4znD88/custom_title (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "Care Credits back",
+   "en_sha1": "5ed851e5a9f222ddcabcffed35d594f67bf5503f",
+   "nl": "Care Credit terug",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/pricing_summary_care_credit_title",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.pricing_summary_care_credit_title",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/loop_subscriptions_7dde8c/pricing_summary_care_credit_title (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "Shipping",
+   "en_sha1": "694e6062a66864cd5ffa7db33cf27b8818b0cf57",
+   "nl": "Verzending",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/shipping_text",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.shipping_text",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_text (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "<del>Varies</del> <strong>Free</strong>",
+   "en_sha1": "7106ab6630375c2f21bc0ccf096a01c541c410d2",
+   "nl": "<del>Variabel</del> <strong>Gratis</strong>",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/shipping_value_html",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.shipping_value_html",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/loop_subscriptions_7dde8c/shipping_value_html (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "10% / order",
+   "en_sha1": "33ebbb281980639b601c30788d7abab49236ab73",
+   "nl": "10% / bestelling",
+   "status": "translated",
+   "flags": [
+    "fit-risk"
+   ],
+   "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/care_credit_text_1",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.care_credit_text_1",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_1 (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "10% each purchase",
+   "en_sha1": "2e28730d82c9657bca0df57e04c1261609e71512",
+   "nl": "10% per bestelling",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/care_credit_text_2",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.care_credit_text_2",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/loop_subscriptions_7dde8c/care_credit_text_2 (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "per brushing",
+   "en_sha1": "ad65bed04536e0203a15036c26c081b9dc7c7177",
+   "nl": "per poetsbeurt",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/per_brushing_text",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.per_brushing_text",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/loop_subscriptions_7dde8c/per_brushing_text (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "Begin your 60-Day Rhythm",
+   "en_sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
+   "nl": "Begin je 60-dagenritme",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/buy_buttons_UQznij/custom_button_text",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.buy_buttons_UQznij.settings.custom_button_text",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/buy_buttons_UQznij/custom_button_text (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "60-day money-back guarantee",
+   "en_sha1": "83f419aac78de92b3616b4bd579c70cf76673b64",
+   "nl": "60 dagen geld terug",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/icon_with_text_wUdX3G/heading_1",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.icon_with_text_wUdX3G.settings.heading_1",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_1 (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "Cancel anytime",
+   "en_sha1": "ceec8a134ce856617633a7b4efd566f243d1c391",
+   "nl": "Altijd opzegbaar",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/icon_with_text_wUdX3G/heading_2",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.icon_with_text_wUdX3G.settings.heading_2",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_2 (registered)"
+  },
+  {
+   "resource_type": "template_setting",
+   "en": "Free shipping",
+   "en_sha1": "b6da5263ea361ec875fab0f88ca4d12a7ec638e5",
+   "nl": "Gratis verzending",
+   "status": "translated",
+   "flags": [],
+   "id": "article:featured_product_kc_blog/icon_with_text_wUdX3G/heading_3",
+   "file_or_handle": "templates/article.json",
+   "key_path": "sections.featured_product_kc_blog.blocks.icon_with_text_wUdX3G.settings.heading_3",
+   "notes": "new 26 Oct; as the homepage twin index:featured_product_3XpDKw/icon_with_text_wUdX3G/heading_3 (registered)"
   }
  ]
 }

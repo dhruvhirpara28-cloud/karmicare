@@ -1,28 +1,28 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "12ed15da6f97",
+  "en-source.json": "70f4c2fde38f",
   "registered.json": "de2a5be381ce",
   "holds.json": "fd6a6da9ea5e",
   "releases.json": "1571d1e3719b",
-  "nl/batch-01-homepage.json": "2d525fbab5ee",
-  "nl/batch-02-pdp.json": "74b17b67ac84",
+  "nl/batch-01-homepage.json": "99c1a9a68e55",
+  "nl/batch-02-pdp.json": "283b03bab41b",
   "nl/batch-03-header-footer.json": "9a44141ef8bc",
   "nl/batch-04-legal.json": "515999d1889d",
   "nl/batch-05-products.json": "15d55ffa0a80",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
   "nl/batch-07-collections-blog.json": "e0944b1775df",
-  "nl/batch-08-system.json": "6d3a7c5fbd8b"
+  "nl/batch-08-system.json": "e7c57f5501d4"
  },
  "batches": {
-  "batch-01-homepage": "2637293ba890353bcf3d8871bf418e9318c36a3c",
-  "batch-02-pdp": "e09fc93cd094813ea0e21a773e2f6c90e33483d4",
+  "batch-01-homepage": "4570fe98e3ba0bada3a1f5c4b295e6adbefe10a0",
+  "batch-02-pdp": "ff022eabd54e38feee96a35de34b2dc724aedf5e",
   "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
   "batch-05-products": "78d85b206273a06783ba5531a6bbdfd56f5c9ba9",
   "batch-06-content-pages": "3dee3b56341f67b113dcd59eb85d3a2e3f21d628",
   "batch-07-collections-blog": "c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa",
-  "batch-08-system": "306f141fadf2231629b14eff578e01fc228ff7a3"
+  "batch-08-system": "a11927a67a3c19b36853fa2042ff4ab3f73ef04c"
  },
  "published": "already published on the live store (observed 2026-10-19, B4-REPORT part 4)",
  "resources": [
@@ -573,9 +573,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.chronobiology_clock_karmicare.settings.hint_label",
-     "en": "DRAG THE RING · EXPLORE 24 HOURS",
-     "en_sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8",
-     "value": "SLEEP AAN DE RING · VERKEN 24 UUR",
+     "en": "DRAG THE DOT · EXPLORE 24 HOURS",
+     "en_sha1": "d146b9c379fc398f50270b495c5a1c7c3250a62b",
+     "value": "SLEEP DE BOL · VERKEN 24 UUR",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -4403,9 +4403,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.chronobiology_clock_karmicare.settings.hint_label",
-     "en": "DRAG THE RING · EXPLORE 24 HOURS",
-     "en_sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8",
-     "value": "SLEEP AAN DE RING · VERKEN 24 UUR",
+     "en": "DRAG THE DOT · EXPLORE 24 HOURS",
+     "en_sha1": "d146b9c379fc398f50270b495c5a1c7c3250a62b",
+     "value": "SLEEP DE BOL · VERKEN 24 UUR",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
@@ -26339,6 +26339,237 @@
       "main",
       "share",
       "share_label"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/title_4znD88/custom_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.title_4znD88.settings.custom_title",
+     "en": "Your welcome kit includes",
+     "en_sha1": "7d8b1a1059370f21609f856e753613eb4ec96c99",
+     "value": "Je welkomstpakket bevat",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "title_4znD88",
+      "custom_title"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/pricing_summary_care_credit_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.pricing_summary_care_credit_title",
+     "en": "Care Credits back",
+     "en_sha1": "5ed851e5a9f222ddcabcffed35d594f67bf5503f",
+     "value": "Care Credit terug",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "loop_subscriptions_7dde8c",
+      "pricing_summary_care_credit_title"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/shipping_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.shipping_text",
+     "en": "Shipping",
+     "en_sha1": "694e6062a66864cd5ffa7db33cf27b8818b0cf57",
+     "value": "Verzending",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "loop_subscriptions_7dde8c",
+      "shipping_text"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/shipping_value_html",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.shipping_value_html",
+     "en": "<del>Varies</del> <strong>Free</strong>",
+     "en_sha1": "7106ab6630375c2f21bc0ccf096a01c541c410d2",
+     "value": "<del>Variabel</del> <strong>Gratis</strong>",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "loop_subscriptions_7dde8c",
+      "shipping_value_html"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/care_credit_text_1",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.care_credit_text_1",
+     "en": "10% / order",
+     "en_sha1": "33ebbb281980639b601c30788d7abab49236ab73",
+     "value": "10% / bestelling",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "loop_subscriptions_7dde8c",
+      "care_credit_text_1"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/care_credit_text_2",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.care_credit_text_2",
+     "en": "10% each purchase",
+     "en_sha1": "2e28730d82c9657bca0df57e04c1261609e71512",
+     "value": "10% per bestelling",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "loop_subscriptions_7dde8c",
+      "care_credit_text_2"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/loop_subscriptions_7dde8c/per_brushing_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.loop_subscriptions_7dde8c.settings.per_brushing_text",
+     "en": "per brushing",
+     "en_sha1": "ad65bed04536e0203a15036c26c081b9dc7c7177",
+     "value": "per poetsbeurt",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "loop_subscriptions_7dde8c",
+      "per_brushing_text"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/buy_buttons_UQznij/custom_button_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.buy_buttons_UQznij.settings.custom_button_text",
+     "en": "Begin your 60-Day Rhythm",
+     "en_sha1": "1f6c13c1120b0dc97581e6f5204f2e0850bdff6c",
+     "value": "Begin je 60-dagenritme",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "buy_buttons_UQznij",
+      "custom_button_text"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/icon_with_text_wUdX3G/heading_1",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.icon_with_text_wUdX3G.settings.heading_1",
+     "en": "60-day money-back guarantee",
+     "en_sha1": "83f419aac78de92b3616b4bd579c70cf76673b64",
+     "value": "60 dagen geld terug",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "icon_with_text_wUdX3G",
+      "heading_1"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/icon_with_text_wUdX3G/heading_2",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.icon_with_text_wUdX3G.settings.heading_2",
+     "en": "Cancel anytime",
+     "en_sha1": "ceec8a134ce856617633a7b4efd566f243d1c391",
+     "value": "Altijd opzegbaar",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "icon_with_text_wUdX3G",
+      "heading_2"
+     ]
+    },
+    {
+     "id": "article:featured_product_kc_blog/icon_with_text_wUdX3G/heading_3",
+     "kind": "match",
+     "key": null,
+     "field": "sections.featured_product_kc_blog.blocks.icon_with_text_wUdX3G.settings.heading_3",
+     "en": "Free shipping",
+     "en_sha1": "b6da5263ea361ec875fab0f88ca4d12a7ec638e5",
+     "value": "Gratis verzending",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "featured_product_kc_blog",
+      "icon_with_text_wUdX3G",
+      "heading_3"
      ]
     }
    ]
