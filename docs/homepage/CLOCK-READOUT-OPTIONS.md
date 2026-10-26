@@ -67,7 +67,32 @@ Measured at 390, 16:27 → 18:27:
 
 On a phone, 15% of this tall section shows before the dial does. A visitor who stops at the heading misses most of the run; one who keeps scrolling meets the dial while the knob is moving. Starting on the dial itself (for example 10% of `.dial`) would guarantee it is seen.
 
-## Recommendation
+## E: Victor's choice (26 Oct), built
+
+E combines B's time badge with D's text in the orb.
+
+- **Pill:** above the orb, one type step up (label-lg: 13 px on phones, 14 px from 750).
+- **Time:** a page-coloured badge that rides inside the ring next to the knob, at 144/604 of the dial.
+- **From 750:** the caption ("Your mouth right now:", on one line) and the copy (16 px) sit centred in the orb. There is no veil or glow, and the Awake/Asleep words are hidden there.
+- **Phones:** the caption and copy sit right under the orb on the page colour, and Awake/Asleep stay in the orb.
+- **Knob icon:** `--kc-mapped-icon-accent-default-on-accent`, which is #0a1628 in Day and Night.
+- **Arrival:** the knob waits 2 h early. Once 15% of the section is in view it runs to now in 2.4 s, easing in and out, and its icon turns 360°. There is no fade.
+
+**Checks on the local preview** (`preview-clock/build.py` rebuilds the live markup as the branch renders it):
+
+- **No dial shift:** the dial stays put while dragging through all 7 windows, in EN/NL/FR × 390/1440 × Day/Night.
+- **Pill fit:** the FR pill fits on one line at 360 (320 px wide).
+- **In-orb fit and overlap:** measured at 780 px, because the Orca pane tiles wider frames. The dial is 604 px from 750, so the result holds for wider screens. The text stays within 0.87 of the orb radius and overlaps nothing.
+- **In-orb contrast** of the smallest text against #191f38, without a glow, needs 4.5:1. Only EN in Day passes.
+
+| Mode | EN | FR | NL |
+|---|---|---|---|
+| Day | 4.70 | 3.97 | 3.62 |
+| Night | 3.23 | 2.97 | 3.01 |
+
+The fix that keeps E's look is to set the block about 4% higher on the lighter part of the orb, or to bring back a small halo on the glyphs. Victor has to decide.
+
+## Recommendation (before E)
 
 - **Layout:** D with the soft veil. It is Victor's choice, and it is the only form of D that meets 4.5:1 for the explanation.
 - **Arrival:** 2.4 s, with the start tied to the dial rather than the section on phones.

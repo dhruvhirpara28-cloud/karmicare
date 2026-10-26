@@ -108,21 +108,26 @@ def contrast(a, b):
 LONGEST = '''(()=>{const r=document.querySelector(".chronobiology-clock .readout"),c=document.querySelector(".chronobiology-clock .state-copy");
   let best=1;for(let i=1;i<=7;i++){if((r.getAttribute("data-window-"+i)||"").length>(r.getAttribute("data-window-"+best)||"").length)best=i}
   c.textContent=r.getAttribute("data-window-"+best);return best})()'''
-LINES = '''(()=>{const box=document.querySelector(".kc-orb-text"),out=[];
+LINES = '''(()=>{const box=document.querySelector(".orb-text"),out=[];
   const walker=document.createTreeWalker(box,NodeFilter.SHOW_TEXT);let n;
   while((n=walker.nextNode())){if(!n.textContent.trim())continue;const el=n.parentElement,size=parseFloat(getComputedStyle(el).fontSize);
     if(size<1)continue;const range=document.createRange();range.selectNodeContents(n);
     for(const r of range.getClientRects())out.push({x:r.left,y:r.top,w:r.width,h:r.height,size,large:size>=22,cls:el.className})}
   const d=document.querySelector(".chronobiology-clock .dial").getBoundingClientRect(),b=box.getBoundingClientRect(),
     orbR=d.width*0.27;const cx=d.left+d.width/2,cy=d.top+d.height/2;
-  const corners=[[b.left,b.top],[b.right,b.top],[b.left,b.bottom],[b.right,b.bottom]].map(([x,y])=>Math.hypot(x-cx,y-cy)/orbR);
-  return {lines:out,boxCornerToOrbRadius:Math.max(...corners),boxH:b.height,boxW:b.width}})()'''
+  const corners=out.flatMap(r=>[[r.x,r.y],[r.x+r.w,r.y],[r.x,r.y+r.h],[r.x+r.w,r.y+r.h]]).map(([x,y])=>Math.hypot(x-cx,y-cy)/orbR);
+  const hit=(a,r)=>a.left<r.x+r.w&&a.right>r.x&&a.top<r.y+r.h&&a.bottom>r.y;
+  const overlaps=[".shift-awake",".shift-asleep",".knob-time"].filter(s=>{const e=document.querySelector(".chronobiology-clock "+s);
+    if(!e||getComputedStyle(e).display==="none"||+getComputedStyle(e).opacity===0)return false;const a=e.getBoundingClientRect();return out.some(r=>hit(a,r))});
+  return {lines:out,boxCornerToOrbRadius:Math.max(...corners),boxH:b.height,boxW:b.width,overlaps}})()'''
 HIDE = ('(()=>{let s=document.getElementById("kc-qa-hide");if(!s){s=document.createElement("style");s.id="kc-qa-hide";document.head.append(s)}'
-        's.textContent=".kc-orb-text,.kc-orb-text *{color:transparent!important;text-shadow:none!important}";return 1})()')
+        's.textContent=".orb-text,.orb-text *{color:transparent!important;text-shadow:none!important}'
+        '.knob-time,.chronobiology-clock .shift-label,.chronobiology-clock .knob{visibility:hidden!important}";return 1})()')
 SHOW = '(()=>{document.getElementById("kc-qa-hide")?.remove();return 1})()'
 
 for lang in LANGS:
-    orca('goto', '--url', f'http://127.0.0.1:9360/{PAGES[lang]}?variant=d{EXTRA}&t={time.time()}')
+    query = EXTRA.lstrip('&') if 'variant=' in EXTRA else 'variant=d' + EXTRA
+    orca('goto', '--url', f'http://127.0.0.1:9360/{PAGES[lang]}?{query}&t={time.time()}')
     time.sleep(2)
     for width in WIDTHS:
         for mode in ('day', 'night'):
@@ -138,7 +143,7 @@ for lang in LANGS:
             shot(width)
             geo = evaluate(LINES)
             result = {'lang': lang, 'width': width, 'mode': mode, 'longestWindow': window,
-                      'boxCornerToOrbRadius': round(geo['boxCornerToOrbRadius'], 2),
+                      'boxCornerToOrbRadius': round(geo['boxCornerToOrbRadius'], 2), 'overlaps': geo['overlaps'],
                       'box': [round(geo['boxW']), round(geo['boxH'])]}
             # Bare: text and shadow hidden. Halo: text hidden, its light shadow kept, which is the
             # background the glyphs actually sit on

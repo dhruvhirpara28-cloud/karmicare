@@ -81,7 +81,7 @@ html[data-kc-variant="a"] .chronobiology-clock.kc-taken .hint {
   position: absolute;
   z-index: 5;
   left: 50%;
-  top: 50%;
+  top: 53%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,9 +98,9 @@ html[data-kc-veil] .kc-orb-text::before {
   content: '';
   position: absolute;
   z-index: -1;
-  inset: -22% -18%;
+  inset: -26% -20%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 251, 246, .78) 55%, rgba(255, 251, 246, 0));
+  background: radial-gradient(closest-side, rgba(255, 251, 246, .86) 58%, rgba(255, 251, 246, 0));
 }
 
 /* The orb is the same light-top, dark-base artwork in Day and Night, so the text keeps the dark
@@ -111,28 +111,17 @@ html[data-kc-veil] .kc-orb-text::before {
   text-shadow: 0 0 2px rgba(255, 251, 246, 1), 0 0 4px rgba(255, 251, 246, 1), 0 0 10px rgba(255, 251, 246, .9);
 }
 
-.kc-orb-text .time-line {
-  font-size: max(11px, calc(var(--dial-size) * 13 / 604));
-  line-height: 1.25;
-}
-
-.kc-orb-text .clock-time {
-  display: block;
-  font-family: var(--kc-font-role-backbone);
-  font-size: max(22px, calc(var(--dial-size) * 34 / 604));
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-}
-
-/* The separator dot belongs to the one-line readout; stacked it is not needed */
+/* Victor (26 Oct): the time and its label at the same size, stacked */
 .kc-orb-text .time-line {
   font-size: 0;
 }
 
+.kc-orb-text .clock-time,
 .kc-orb-text .clock-caption {
   display: block;
-  font-size: max(10px, calc(var(--dial-size) * 11 / 604));
+  font-size: max(12px, calc(var(--dial-size) * 15 / 604));
   line-height: 1.25;
+  font-variant-numeric: tabular-nums;
 }
 
 .kc-orb-text .state-copy {
@@ -142,13 +131,103 @@ html[data-kc-veil] .kc-orb-text::before {
   line-height: 1.35;
 }
 
-html[data-kc-variant="d"] .chronobiology-clock .readout {
+/* The pill sits above the orb with the gap the readout had above the dial in 097a6e2 */
+html:is([data-kc-variant="d"], [data-kc-variant="e"]) .chronobiology-clock .readout {
   gap: 0;
+  margin: 0 auto var(--kc-responsive-spacing-layout-xl);
+}
+
+html:is([data-kc-variant="d"], [data-kc-variant="e"]) .chronobiology-clock .hint {
+  margin: 0;
+}
+
+@media (max-width: 1099px) {
+  html:is([data-kc-variant="d"], [data-kc-variant="e"]) .chronobiology-clock .readout { order: 1; }
+  html:is([data-kc-variant="d"], [data-kc-variant="e"]) .chronobiology-clock .timeline { order: 2; }
+}
+
+@media screen and (min-width: 750px) {
+  html:is([data-kc-variant="d"], [data-kc-variant="e"]) .chronobiology-clock .readout { margin-bottom: 0; }
 }
 
 /* The Awake and Asleep words on the orb would sit on the time and the copy */
 html[data-kc-variant="d"] .chronobiology-clock .shift-label {
   display: none;
+}
+
+/* ── E · B's badge on the knob + the label and copy inside the orb (Victor, 26 Oct) ──
+   No veil, the Awake and Asleep words stay, the time lives in the badge only, and the copy is
+   one type step larger than in D. */
+/* Centred on the orb; Awake and Asleep keep their original places; no halo on the text */
+html[data-kc-variant="e"] .kc-orb-text {
+  top: 50%;
+  width: 46%;
+}
+
+/* The label stays on one line in every language (FR "Votre bouche en ce moment :") */
+html[data-kc-variant="e"] .kc-orb-text .clock-caption {
+  white-space: nowrap;
+}
+
+/* From 750 the orb carries the label and copy, so the Awake and Asleep words leave it; on phones
+   they stay and the label and copy move under the orb (Victor, 26 Oct) */
+@media screen and (min-width: 750px) {
+  html[data-kc-variant="e"] .chronobiology-clock .shift-label {
+    display: none;
+  }
+}
+
+@media (max-width: 749px) {
+  html[data-kc-variant="e"] .kc-orb-text {
+    position: static;
+    order: 2;
+    width: 100%;
+    max-width: 340px;
+    margin: var(--kc-responsive-spacing-layout-xl) auto 0;
+    transform: none;
+    color: var(--chrono-ink);
+  }
+
+  html[data-kc-variant="e"] .kc-orb-text .time-line,
+  html[data-kc-variant="e"] .kc-orb-text .state-copy {
+    color: var(--chrono-ink);
+  }
+
+  html[data-kc-variant="e"] .kc-orb-text .clock-caption {
+    font-size: var(--kc-responsive-label-lg-text-size);
+  }
+
+  html[data-kc-variant="e"] .kc-orb-text .state-copy {
+    font-size: var(--kc-responsive-body-md-text-size);
+    line-height: var(--kc-responsive-body-md-line-height);
+  }
+}
+
+/* ?nolabels: the orb without the Awake and Asleep words (test) */
+html[data-kc-nolabels] .chronobiology-clock .shift-label {
+  display: none;
+}
+
+html[data-kc-variant="e"] .kc-orb-text .time-line,
+html[data-kc-variant="e"] .kc-orb-text .state-copy {
+  text-shadow: none;
+}
+
+html[data-kc-variant="e"] .kc-orb-text .clock-time {
+  display: none;
+}
+
+html[data-kc-variant="e"] .kc-orb-text .clock-caption {
+  font-size: max(11px, calc(var(--dial-size) * 13 / 604));
+}
+
+html[data-kc-variant="e"] .kc-orb-text .state-copy {
+  font-size: max(13px, calc(var(--dial-size) * 16 / 604));
+  line-height: 1.3;
+}
+
+html[data-kc-variant="e"] .kc-badge {
+  opacity: 1;
 }
 
 /* ── B · a time badge that travels with the dot ── */

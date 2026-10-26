@@ -3,9 +3,10 @@
 // follows the clock script's output (time, copy, knob position) with MutationObservers.
 (() => {
   const variant = new URLSearchParams(location.search).get('variant');
-  if (!['a', 'b', 'c', 'd'].includes(variant)) return;
+  if (!['a', 'b', 'c', 'd', 'e'].includes(variant)) return;
   document.documentElement.dataset.kcVariant = variant;
   if (new URLSearchParams(location.search).has('veil')) document.documentElement.dataset.kcVeil = '';
+  if (new URLSearchParams(location.search).has('nolabels')) document.documentElement.dataset.kcNolabels = '';
 
   const section = document.querySelector('.chronobiology-clock');
   if (!section) return;
@@ -42,11 +43,24 @@
 
   // D (Victor's pick, 26 Oct): the time line and the copy themselves move into the orb, no panel;
   // the pill stays under the dial. The clock script keeps updating and measuring them in place.
-  if (variant === 'd') {
+  if (variant === 'd' || variant === 'e') {
     const face = document.createElement('div');
     face.className = 'kc-orb-text';
     face.append(section.querySelector('.time-line'), copy);
     dial.append(face);
+    // Victor (26 Oct): the pill goes above the orb
+    stage.before(readout);
+    // E on phones: the label and copy sit right under the orb instead of inside it
+    if (variant === 'e') {
+      const phone = matchMedia('(max-width: 749px)');
+      const timeline = section.querySelector('.timeline');
+      const place = () => {
+        if (phone.matches) timeline.after(face);
+        else dial.append(face);
+      };
+      place();
+      phone.addEventListener('change', place);
+    }
   }
 
   if (variant === 'a') {
@@ -65,13 +79,16 @@
     watch.observe(caption, { childList: true, characterData: true, subtree: true });
   }
 
-  if (variant === 'b') {
+  // E (Victor, 26 Oct): D's text in the orb without the time, and B's time badge on the knob,
+  // shown at all times
+  if (variant === 'b' || variant === 'e') {
     const badge = document.createElement('div');
     badge.className = 'kc-badge';
     badge.setAttribute('aria-hidden', 'true');
     dial.append(badge);
-    // Inside the ring, towards the centre, so it never clips at the dial edge on phones
-    const inner = (178 - 46) / 604 * 100;
+    // Inside the ring, towards the centre, so it never clips at the dial edge on phones. E keeps it
+    // close to the knob, clear of the centred copy.
+    const inner = (variant === 'e' ? 178 - 34 : 178 - 46) / 604 * 100;
     const place = () => {
       const angle = +(knob.dataset.angle || 0) * Math.PI / 180;
       badge.style.left = (50 + inner * Math.sin(angle)) + '%';
