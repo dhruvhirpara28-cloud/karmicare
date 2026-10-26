@@ -88,6 +88,7 @@ The English that the live store renders, one entry per string. Batches 01–03 (
   - the theme key `kc.clock.loading` (the clock's aria-valuetext before its script runs) is inventoried as `locale:kc.clock.loading` (#229), for release QA B-03/B-04;
   - the announcement line is `corrected` to Victor's G-1 text from `karmicare/soft-launch-global` `3c03acb` (“FREE SHIPPING & 60-DAY GUARANTEE FOR MEMBERS · BELGIAN-MADE · EST. 2017”, Victor's short line of 21 Oct, claim C103). `sections/header-group.json` on this branch keeps the old text until the global lane lands;
   - the sticky-bar default `liquid:sections/main-product.liquid:1104` (*Free*, setting `kit_free`) is `retired`: global-nav `27691cb` (NV-13) removes the setting and its markup, and the key `kc.sticky_cart.kit_free_html` leaves every locale.
+  - the sticky-bar defaults `liquid:sections/main-product.liquid:954`, `:960` and `:966` (*[price] every 60 days*, *[price] per year*, *[price] one time*; settings `price_rhythm`, `price_year`, `price_once`) are `retired` (25 Oct): pdp R77d `a290153` and R77f `cd4db79` show the price per brushing for every plan, and the keys `kc.sticky_cart.price_rhythm_html`, `price_year_html` and `price_once_html` leave every locale.
 - **Updated 22 Oct** with Victor's EN edits in the Shopify admin, read back on the storefront (global coordinator, and this lane for the article and the product title). Ten `admin-held` entries carry the new EN, with `old_en` / `old_sha1` kept and the reason in `notes`:
   - the Duo product's title, SEO title and meta description (batch 02): "Awake & Asleep Fluoride-Free Nano-Hydroxyapatite Toothpaste, Day & Night System";
   - the footer menu link "Why use hydroxapatite" → "Why hydroxyapatite" (batch 03), so it leaves the brand-rule scan;
@@ -98,16 +99,24 @@ The English that the live store renders, one entry per string. Batches 01–03 (
 - **Updated 22 Oct (admin fixes)**: Victor fixed the product FAQ typo "Full dosep" → "Full dose" and the infographic alt (morning before evening: "…with morning care at 06:40 and evening care at 22:00"); both read back on the storefront, `old_en` kept. The lab name "Midwest University" stays.
 - **Updated 22 Oct (legacy card)**: `product:main/info_card_FnBcaN/body_text` on `templates/product.json` no longer says "Health Rewards"; Victor approved three existing Care Credit sentences ("Karmicare is a care system: … Spend Care Credit on any order."). `corrected`, `old_en` kept.
 - **Updated 22 Oct (slogan marker, Astra R27)**: the footer slogan carries the explicit line-break marker `[[br]]` between its two sentences ("Your mouth has a rhythm[[br]]Now your oral care too"); `sections/footer.liquid` renders it as `<br>` (global lane). Words and the missing stop are Victor's and unchanged.
+- **Updated 25 Oct (round 3)** against live main `d5b514d` (merchant-edit `02d73c4`, integration `5922b8b`):
+  - the six research image badges of the xylitol, Vano and Alli cards (homepage and PDP, landing 55) carry new EN live (*XYLITOL CRYSTALS*, *DENTINE TUBULES*, *ORAL MUCOSA*): no longer `retired`, now `corrected` with `old_en` kept;
+  - the practitioner request form (landings 58–59) adds 26 `product_faq_block` text settings `request_*` on each product template: `product.subscription-item:main/product_faq_block/request_*` in batch 02 and `product:main/product_faq_block/request_*` in batch 05 (`request_trigger_url` is a mailto, not copy). Their table rows follow at the next full regeneration;
+  - the homepage SEO title is *KARMICARE - Biorhythmic Oral Care* live (was *… Oral Health*), still `admin-held`, `old_en` kept;
+  - Leen Ponet's FR role title on the cards is released with *Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI* (Victor 24 and 25 Oct); the EN is unchanged.
+- **Updated 25 Oct (round 4)**: *Complete Hygiene Kit*, *Morning Toothbrush* and *Evening Toothbrush* (without 2.0) are Draft in the Admin (Victor: only the 2.0 products, the floss and the Awake & Asleep system stay sellable), so their 14 rows are `retired`; the SEO titles of Awake and Asleep toothpaste 2.0 lose the " – KARMICARE" that only the page `<title>` adds (`old_en` kept). NL/FR write postal addresses in their local form (`docs/localization/registration/ROUND4.md`); the EN is unchanged.
+- **Updated 25 Oct (round 5)**: the page titles of `terms-and-conditions-1`, `new-consumer-rights` and `privacy-policy` are inventoried as `admin:page:<handle>:title` (*Terms and Conditions*, *Consumer Rights*, *Privacy Policy*; Victor had "New" dropped in the Admin, 25 Oct); the `seo.title` rows captured from the page `<title>` are `retired`, because the pages have no SEO title. NL/FR department names follow gate-legal (`docs/localization/registration/ROUND5.md`).
+- **Updated 25 Oct (round 6)**: product names without "2.0", the cleaned descriptions of Morning/Evening Toothbrush and the floss (one row per paragraph; 10 new rows), the Evening Toothbrush SEO title without "Detoxifying" (`docs/localization/registration/ROUND6.md`); the two `admin:system:*:seo.description` rows are `retired` (same key as the homepage description Victor set by hand).
 - **Machine-readable**: `en-source.json` (all entries) and `batches/<batch>.json` (one file per batch, with its digest).
 - **Digest rule**: a batch digest is the sha1 over its entries' `sha1(en)` values, sorted and joined with `\n`. A later EN change alters only the digest of the batch that holds the string. `python3 docs/source-copy/digest.py` recomputes and checks every value, in `en-source.json` and independently in each batch file (entry hashes, file digest, ids and metadata against the canonical entries), and exits 1 on any mismatch; `python3 docs/source-copy/digest_selftest.py` proves that it rejects an altered EN value, a substituted id and a metadata-only change.
 
 | Batch | Entries | Digest |
 |---|---:|---|
-| `batch-01-homepage` | 230 | `ab192236341d9e063847ab0e1b7bff70a09c7bdd` |
-| `batch-02-pdp` | 477 | `8d3ac5c29d884752e9b11a6490f7bca9e7f71bc4` |
-| `batch-03-header-footer` | 41 | `742351732dabbbff2eff9cadc6858ba87284393a` |
-| `batch-04-legal` | 974 | `98fda69496b9cbe0ad39d2b7099549341113349c` |
-| `batch-05-products` | 77 | `3b9c8c4105d708ab6e1762ba185f5ecc8891e96d` |
+| `batch-01-homepage` | 232 | `2637293ba890353bcf3d8871bf418e9318c36a3c` |
+| `batch-02-pdp` | 524 | `e4d806146e401d40a2befeeabdcb7d1eef6a1ad5` |
+| `batch-03-header-footer` | 48 | `2bf838600269a9c831c92132ba41ccab674eda67` |
+| `batch-04-legal` | 1012 | `4ead9703b4cfc2fc346b6e25843f38afec1124e7` |
+| `batch-05-products` | 113 | `d81030279c92a9b2f558528ffafeb4112fb71a78` |
 | `batch-06-content-pages` | 22 | `3dee3b56341f67b113dcd59eb85d3a2e3f21d628` |
 | `batch-07-collections-blog` | 709 | `c73c6f51bc707ba7944e4a30a465b2e5d17b9bfa` |
 | `batch-08-system` | 46 | `306f141fadf2231629b14eff578e01fc228ff7a3` |
@@ -237,7 +246,7 @@ Not changed, because no text setting in the allowed files carries it:
 | 02 | `sections/main-product.liquid:966` | [price] one time | sticky bar: schema default of sticky_cart setting 'price_once'. The PDP template stores only button_text, so this default renders and is invisible to Translate… |
 | 02 | `sections/main-product.liquid:977` | + [credit] Care Credit back | sticky bar: schema default of sticky_cart setting 'credit'. The PDP template stores only button_text, so this default renders and is invisible to Translate & A… |
 | 02 | `sections/main-product.liquid:983` | + [credit] Care Credit + €40 Check-up Reward | sticky bar: schema default of sticky_cart setting 'credit_checkup'. The PDP template stores only button_text, so this default renders and is invisible to Trans… |
-| 02 | `sections/main-product.liquid:989` | Care Credit is Karmicare credit: spend it on more care, never on your dental bi… | sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
+| 02 | `sections/main-product.liquid:989` | Care Credit is Karmicare credit: spend it on more care. | sticky bar: schema default of sticky_cart setting 'credit_info'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:995` | Complete a dental check-up from month 6 or onwards, verified by your dentist. €… | sticky bar: schema default of sticky_cart setting 'checkup_info'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
 | 02 | `sections/main-product.liquid:1006` | Delivery & what's included | sticky bar: schema default of sticky_cart setting 'panel_label'. The PDP template stores only button_text, so this default renders and is invisible to Translat… |
 | 02 | `sections/main-product.liquid:1012` | Change | sticky bar: schema default of sticky_cart setting 'change_label'. The PDP template stores only button_text, so this default renders and is invisible to Transla… |
@@ -518,7 +527,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 125 | `index:research_behind_system_EkjATL/card_fmFMFd/method_label` | template_setting | Method | approved |  |
 | 126 | `index:research_behind_system_EkjATL/card_fmFMFd/method_text` | template_setting | Systematic review and meta-analysis of 7 clinical trials. | approved |  |
 | 127 | `index:research_behind_system_EkjATL/card_fmFMFd/link_label` | template_setting | Janakiram et al. · 2017 · J Nat Sci Biol Med | approved | NT |
-| 128 | `index:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 128 | `index:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | XYLITOL CRYSTALS | corrected |  |
 | 129 | `index:research_behind_system_EkjATL/card_Hi7YUD/subheading` | template_setting | NANO-HYDROXYAPATITE | approved |  |
 | 130 | `index:research_behind_system_EkjATL/card_Hi7YUD/heading` | template_setting | Nano-HAp beat fluoride on tooth sensitivity. | needs-review | C C63 |
 | 131 | `index:research_behind_system_EkjATL/card_Hi7YUD/subtext` | template_setting | 105 people · 4 weeks | approved |  |
@@ -527,7 +536,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 134 | `index:research_behind_system_EkjATL/card_Hi7YUD/method_label` | template_setting | METHOD | approved |  |
 | 135 | `index:research_behind_system_EkjATL/card_Hi7YUD/method_text` | template_setting | Double-blind randomised controlled trial, three arms. | approved |  |
 | 136 | `index:research_behind_system_EkjATL/card_Hi7YUD/link_label` | template_setting | Vano et al. · 2018 · Clin Oral Investig | approved | NT |
-| 137 | `index:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 137 | `index:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES | corrected |  |
 | 138 | `index:research_behind_system_EkjATL/card_JeERX6/subheading` | template_setting | SLS-FREE | approved |  |
 | 139 | `index:research_behind_system_EkjATL/card_JeERX6/heading` | template_setting | No SLS meant fewer and shorter canker sores. | needs-review | C C64 |
 | 140 | `index:research_behind_system_EkjATL/card_JeERX6/subtext` | template_setting | 124 people · 4 crossover RCTs | approved |  |
@@ -536,7 +545,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 143 | `index:research_behind_system_EkjATL/card_JeERX6/method_label` | template_setting | METHOD | approved |  |
 | 144 | `index:research_behind_system_EkjATL/card_JeERX6/method_text` | template_setting | Systematic review and meta-analysis of 4 crossover RCTs. | approved |  |
 | 145 | `index:research_behind_system_EkjATL/card_JeERX6/link_label` | template_setting | Alli et al. · 2019 · J Oral Pathol Med | approved | NT |
-| 146 | `index:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 146 | `index:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | ORAL MUCOSA | corrected |  |
 | 147 | `index:km_faq_accordion_FYcArV/heading` | template_setting | Before you start | approved |  |
 | 148 | `index:km_faq_accordion_FYcArV/subtext` | template_setting | Everything people usually ask before switching to a day-and-night oral care system. | approved |  |
 | 149 | `index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/category` | template_setting | The system | approved |  |
@@ -572,7 +581,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 179 | `index:care_comes_back/eyebrow` | template_setting | Return on Care | approved | NT |
 | 180 | `index:care_comes_back/heading` | template_setting | The care you already do. Now designed to give back. | approved |  |
 | 181 | `index:care_comes_back/intro` | template_setting | Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as … | approved |  |
-| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 182 | `index:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 183 | `index:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 184 | `index:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 185 | `index:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -614,8 +623,8 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 221 | `liquid:assets/loop-widget.js:2468` | app | Renews every year | needs-key |  |
 | 222 | `liquid:assets/loop-widget.js:2213` | app | {{ value }} value · free | needs-key |  |
 | 223 | `liquid:snippets/loop-subscriptions.liquid:10` | app | Rendering loop-subscriptions | needs-key |  |
-| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE - Biorhythmic Oral Health | admin-held |  |
-| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant e… | admin-held |  |
+| 224 | `admin:shop:online_store.preferences.homepage_title` | shop | KARMICARE \| Fluoride-Free Nano-Hydroxyapatite Toothpaste | admin-held |  |
+| 225 | `admin:shop:online_store.preferences.homepage_meta_description` | shop | Awake for the morning, Asleep for the evening. Fluoride-free, SLS-free formulas with nano-hydroxyapa… | admin-held |  |
 | 226 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/category` | template_setting | Plans & Return on Care | approved |  |
 | 227 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/question` | template_setting | Can I pause, skip or cancel? | approved |  |
 | 228 | `index:km_faq_accordion_FYcArV/faq_item_Pz4mRk/answer` | template_setting | Your membership is completely in your hands. Amend when desired. | approved |  |
@@ -653,7 +662,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 26 | `product.subscription-item:main/treatment_journey_block/disclaimer_text` | template_setting | * What members report with continued use — individual experiences vary. | approved |  |
 | 27 | `product.subscription-item:main/info_card_FnBcaN/header_text` | template_setting | More than two formulas | approved |  |
 | 28 | `product.subscription-item:main/info_card_FnBcaN/body_text` | template_setting | Karmicare is a care system, not a shelf item: the ritual arrives on your rhythm, and your care buil… | needs-review |  |
-| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 29 | `product.subscription-item:main/info_card_FnBcaN/footer_text` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 30 | `product.subscription-item:main/professional_testimonials_block/heading` | template_setting | Trusted by professionals | approved |  |
 | 31 | `product.subscription-item:main/sticky_cart_block/button_text` | template_setting | Begin Now | approved |  |
 | 32 | `product.subscription-item:chronobiology_clock_karmicare/eyebrow` | template_setting | CHRONOBIOLOGY | approved |  |
@@ -729,7 +738,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 102 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_label` | template_setting | Method | approved |  |
 | 103 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/method_text` | template_setting | Systematic review and meta-analysis of 7 clinical trials. | approved |  |
 | 104 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/link_label` | template_setting | Janakiram et al. · 2017 · J Nat Sci Biol Med | approved | NT |
-| 105 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 105 | `product.subscription-item:research_behind_system_EkjATL/card_fmFMFd/image_badge` | template_setting | XYLITOL CRYSTALS | corrected |  |
 | 106 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subheading` | template_setting | NANO-HYDROXYAPATITE | approved |  |
 | 107 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/heading` | template_setting | Nano-HAp beat fluoride on tooth sensitivity. | needs-review | C C63 |
 | 108 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subtext` | template_setting | 105 people · 4 weeks | approved |  |
@@ -738,7 +747,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 111 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_label` | template_setting | METHOD | approved |  |
 | 112 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/method_text` | template_setting | Double-blind randomised controlled trial, three arms. | approved |  |
 | 113 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/link_label` | template_setting | Vano et al. · 2018 · Clin Oral Investig | approved | NT |
-| 114 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES · OPEN AND OCCLUDED | approved |  |
+| 114 | `product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/image_badge` | template_setting | DENTINE TUBULES | corrected |  |
 | 115 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subheading` | template_setting | SLS-FREE | approved |  |
 | 116 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/heading` | template_setting | No SLS meant fewer and shorter canker sores. | needs-review | C C64 |
 | 117 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subtext` | template_setting | 124 people · 4 crossover RCTs | approved |  |
@@ -747,7 +756,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 120 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_label` | template_setting | METHOD | approved |  |
 | 121 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/method_text` | template_setting | Systematic review and meta-analysis of 4 crossover RCTs. | approved |  |
 | 122 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/link_label` | template_setting | Alli et al. · 2019 · J Oral Pathol Med | approved | NT |
-| 123 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | DENTINE TUBULES - OPEN AND OCCLUDED | approved |  |
+| 123 | `product.subscription-item:research_behind_system_EkjATL/card_JeERX6/image_badge` | template_setting | ORAL MUCOSA | corrected |  |
 | 124 | `product.subscription-item:featured_product_Eb93Xa/title_GDDYEK/custom_title` | template_setting | Your welcome kit includes | approved |  |
 | 125 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/pricing_summary_care_credit_title` | template_setting | Care Credits back | approved |  |
 | 126 | `product.subscription-item:featured_product_Eb93Xa/loop_subscriptions_gPKypi/subscription_title` | template_setting | Awake & Asleep AM/PM Oral Care System | approved | R |
@@ -767,7 +776,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 140 | `product.subscription-item:care_comes_back/receipt_column_label` | template_setting | Received | approved |  |
 | 141 | `product.subscription-item:care_comes_back/total_label` | template_setting | Up to | approved |  |
 | 142 | `product.subscription-item:care_comes_back/total` | template_setting | €110.80 | approved |  |
-| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the v… | approved |  |
+| 143 | `product.subscription-item:care_comes_back/fine_print` | template_setting | Care Credit is Karmicare credit: spend it on more care. It rewards the v… | approved |  |
 | 144 | `product.subscription-item:care_comes_back/terms_link_label` | template_setting | Terms, clauses 10 and 11 | approved |  |
 | 145 | `product.subscription-item:care_comes_back/step_ritual/title` | template_setting | Your ritual | approved |  |
 | 146 | `product.subscription-item:care_comes_back/step_ritual/text` | template_setting | Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20… | approved |  |
@@ -808,7 +817,7 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 181 | `liquid:sections/main-product.liquid:966` | theme_locale | [price] one time | needs-key |  |
 | 182 | `liquid:sections/main-product.liquid:977` | theme_locale | + [credit] Care Credit back | needs-key |  |
 | 183 | `liquid:sections/main-product.liquid:983` | theme_locale | + [credit] Care Credit + €40 Check-up Reward | needs-key |  |
-| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care, never on your dental bill. | needs-key |  |
+| 184 | `liquid:sections/main-product.liquid:989` | theme_locale | Care Credit is Karmicare credit: spend it on more care. | needs-key |  |
 | 185 | `liquid:sections/main-product.liquid:995` | theme_locale | Complete a dental check-up from month 6 or onwards, verified by your dentist. €40 in Care Credit is… | needs-key |  |
 | 186 | `liquid:sections/main-product.liquid:1006` | theme_locale | Delivery & what's included | needs-key |  |
 | 187 | `liquid:sections/main-product.liquid:1012` | theme_locale | Change | needs-key |  |
@@ -2163,9 +2172,9 @@ Flags: **NT** never translate · **C** claim ids (CLAIMS-REVIEW.md) · **B** blo
 | 29 | `admin:product:evening-toothbrush-2-0:seo.description` | product | The bristles are extremely soft and coated with activated charcoal.The ultra thin, featherlight bri… | admin-held |  |
 | 30 | `admin:product:morning-toothbrush-2-0:seo.title` | product | KARMICARE Ultra Soft Morning Toothbrush | admin-held |  |
 | 31 | `admin:product:morning-toothbrush-2-0:seo.description` | product | The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.The ultra… | admin-held |  |
-| 32 | `admin:product:asleep-evening-toothpaste-2-0:seo.title` | product | Karmicare Asleep Evening Toothpaste – KARMICARE | admin-held |  |
+| 32 | `admin:product:asleep-evening-toothpaste-2-0:seo.title` | product | Karmicare Asleep Evening Toothpaste | admin-held |  |
 | 33 | `admin:product:asleep-evening-toothpaste-2-0:seo.description` | product | Something for your mind, your mouth and your soul. A toothpaste that helps you fall asleep at night… | admin-held |  |
-| 34 | `admin:product:awake-morning-toothpaste-2-0:seo.title` | product | Karmicare Awake Morning Toothpaste – KARMICARE | admin-held |  |
+| 34 | `admin:product:awake-morning-toothpaste-2-0:seo.title` | product | Karmicare Awake Morning Toothpaste | admin-held |  |
 | 35 | `admin:product:awake-morning-toothpaste-2-0:seo.description` | product | Something for your mind, your mouth and your soul. A toothpaste that helps you get up in the mornin… | admin-held |  |
 | 36 | `admin:product:complete-hygiene-kit:title` | product | Complete Hygiene Kit | admin-held |  |
 | 37 | `admin:product:complete-hygiene-kit:body_html#b001` | product | Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening To… | admin-held |  |

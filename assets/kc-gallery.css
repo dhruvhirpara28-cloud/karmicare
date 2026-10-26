@@ -15,9 +15,9 @@ media-gallery.kc-gallery-fit .product-media-container video {
    - From 750, as large as it fits, up to 1.5x (Victor, 24 Oct, "zo groot als past, tot 1,5"):
      assets/kc-gallery.js finds the largest scale at which the whole animation keeps 16px clear of the
      viewport's edges and the buybox text (R51; the intro may pass briefly behind the header), and sets
-     --kc-hero-scale with data-kc-hero-fit. The animation then scales from the bottom, the floor shadow
-     1rem below the frame, and overflows the frame and its wrappers, untouchable so the transparent
-     overflow takes no click.
+     --kc-hero-scale with data-kc-hero-fit. The animation then scales from the bottom, the landed
+     floss's bottom (86.77%, the kit's lowest point) 80px above the thumbnails (Victor, 24 Oct), and
+     overflows the frame and its wrappers, untouchable so the transparent overflow takes no click.
    - From 750 without that (no JavaScript, or less than 1.2x fits): the R50 pose inside the frame,
      1.2x from the top, moved so the landed left brush head lines up with the buybox title 4.5rem below
      the frame's top (Victor, 23 Oct).
@@ -51,8 +51,9 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video
 
   media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode img,
   media-gallery.kc-gallery-fit[data-kc-hero-fit] .product__media-item .kc-hero-animation__mode video {
-    /* scale x the 12.9% under the shadow, plus 1rem, takes the shadow's end 1rem below the frame */
-    transform: translateY(calc(1rem + var(--kc-hero-scale, 1.2) * 12.9%)) scale(var(--kc-hero-scale, 1.2));
+    /* scale x the 13.23% under the floss's bottom takes it to the frame's bottom; the thumbnails start
+       one gallery gap lower, and the floss stays 80px above them (KC_HERO_THUMBNAILS_CLEARANCE) */
+    transform: translateY(calc(var(--kc-gallery-gap) - 80px + var(--kc-hero-scale, 1.2) * 13.23%)) scale(var(--kc-hero-scale, 1.2));
     transform-origin: center bottom;
     pointer-events: none;
   }

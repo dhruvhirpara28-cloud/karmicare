@@ -21,7 +21,7 @@ Errors (exit code 1):
 - invariant entries (names, codes, symbols, INCI lists; flag `invariant`): FR not exactly the EN;
 - FR text: markup, Liquid, [tokens] or runtime price spans that differ from the EN, changed selling-plan
   IDs, French typography slips (plain or missing space before : ; ! ? € % », straight apostrophes,
-  €-before-amount), a postal address of the EN missing from the FR (S1) or a different number of (*)
+  €-before-amount), a postal address of the EN missing from the FR in its French form (S1) or a different number of (*)
   markers (S2), the NL validator's invariants from CHANGES-R2 §6;
 - brand words in ordinary copy (translated, not legal text, not a Dawn key), CHANGES-R2 "R6 additions" W1: no
   commodity word, inside a word included: produit(s) (sous-produit), tube, utilis-, emploi/employ-, (r)achat/(r)achet-.
@@ -63,6 +63,14 @@ TU = re.compile(r"\b(tu|ton|ta|tes|toi)\b", re.I)
 # Street and number, optional box, postcode, optional city and country: "Vizierstraat 28, 8000 Bruges, Belgium".
 # The same pattern as docs/localization/nl/validate.py (S1).
 ADDRESS = re.compile(r"[A-Z][^,<>·().:;]{2,60}?\d+[a-z]?(?:, (?:box|bus) \d+)?, \d{4}(?: [A-Z][a-zé]+)?(?:, [A-Z][a-z]+)?")
+# Victor, 25 Oct ("Belgique"): the FR writes the address in its official French form (R2 F8 decision 7 reversed).
+LOCAL = [("Belgium", "Belgique"), ("Brussels", "Bruxelles"), ("box", "boîte")]
+
+
+def localize(address):
+    for en, fr in LOCAL:
+        address = re.sub(r"\b%s\b" % en, fr, address)
+    return address
 
 
 def sha1(text):
@@ -250,8 +258,8 @@ def validate(docs, ctx):
             if structure(e["en"]) != structure(e["fr"]):
                 errors.append(where + ": markup, Liquid, [tokens] or runtime spans differ from the EN")
             for address in ADDRESS.findall(plain(e["en"])):
-                if address not in plain(e["fr"]):
-                    errors.append(where + ": S1 address not exactly as in the EN: " + address)
+                if localize(address) not in plain(e["fr"]):
+                    errors.append(where + ": S1 address not as in the EN in its French form: " + localize(address))
             if e["en"].count("(*)") != e["fr"].count("(*)"):
                 errors.append("%s: S2 (*) markers %d in EN, %d in FR" % (where, e["en"].count("(*)"), e["fr"].count("(*)")))
             if e["key_path"].endswith("custom_button_text_by_plan"):
@@ -356,7 +364,8 @@ def self_test(docs, ctx):
         ("change key_path", set_field("footer-group:footer/slogan", "key_path", "sections.footer.settings.other"), "key_path"),
         ("flag_counts out of step", tamper_flag_counts(LEGAL_BATCH), "flag_counts"),
         ("remove a batch file", remove_batch("batch-08-system"), "FR batch file missing"),
-        ("translate an address (R2 F8)", replace_fr("admin:policy:refund-policy:body#b103", "1000 Brussels, Belgium", "1000 Bruxelles, Belgique"), "S1 address"),
+        ("change an address (R2 F8, French form since 25 Oct)", replace_fr("admin:policy:refund-policy:body#b103", "1000 Bruxelles, Belgique", "1010 Bruxelles, Belgique"), "S1 address"),
+        ("an address in the EN form (25 Oct)", replace_fr("admin:policy:refund-policy:body#b103", "1000 Bruxelles, Belgique", "1000 Brussels, Belgium"), "S1 address"),
         ("drop a (*) marker (R2 F9)", replace_fr("admin:policy:refund-policy:body#b114", " (*)", ""), "S2 (*) markers"),
         ("commodity compound in blog copy (R6-02)", replace_fr(SLS + "body_html#b015", "nettoyants ménagers", "produits ménagers"), "W1 commodity"),
         ("product stem inside a word (R6 W1)", replace_fr("admin:article:news/nano-hydroxyapatite:body_html#b094", "au passage des acides qui", "des acides comme sous-produit, ce qui"), "W1 commodity"),

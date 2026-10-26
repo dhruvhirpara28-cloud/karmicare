@@ -714,6 +714,11 @@
   assign legal_terms_default = 'kc.footer.legal_terms' | t
   assign legal_privacy_default = 'kc.footer.legal_privacy' | t
   assign legal_consumer_rights_default = 'kc.footer.legal_consumer_rights' | t
+  # The guarantee and withdrawal links follow the same pattern (Victor, 25 Oct): the editor does not
+  # save a label equal to its schema default, so an English default never reached the translation
+  # registration and /nl and /fr showed English. Blank default, locale key, visibility by checkbox.
+  assign legal_guarantee_default = 'kc.footer.legal_guarantee' | t
+  assign legal_withdrawal_default = 'kc.footer.legal_withdrawal' | t
 
   # A menu item without a page yet links to '#' (the root URL plus '#' on /nl and /fr)
   assign kc_soon_url = routes.root_url | append: '#'
@@ -1101,19 +1106,20 @@
                 {%- comment -%}
                   "Your legal guarantee rights": the Commission's example sentence, one click from the
                   harmonised notice at the end of Consumer Rights section 4. Built from the page
-                  object, so /nl and /fr keep their locale. Blank label hides it.
+                  object, so /nl and /fr keep their locale. The checkbox hides it; a blank label
+                  uses the translated default.
                 {%- endcomment -%}
-                {%- if section.settings.legal_guarantee_label != blank and legal_consumer_rights != blank -%}
+                {%- if section.settings.show_legal_guarantee and legal_consumer_rights != blank -%}
                   <span aria-hidden="true">·</span>
-                  <a href="{{ legal_consumer_rights.url }}#{{ legal_guarantee_anchor }}">{{ section.settings.legal_guarantee_label | escape_once }}</a>
+                  <a href="{{ legal_consumer_rights.url }}#{{ legal_guarantee_anchor }}">{{ section.settings.legal_guarantee_label | default: legal_guarantee_default | escape_once }}</a>
                 {%- endif -%}
                 {%- comment -%}
                   "Withdraw from contract here": the statutory label of the online withdrawal
                   function (Art. VI.61/2 WER), shown once the withdrawal page exists.
                 {%- endcomment -%}
-                {%- if section.settings.legal_withdrawal_label != blank and legal_withdrawal != blank -%}
+                {%- if section.settings.show_legal_withdrawal and legal_withdrawal != blank -%}
                   <span aria-hidden="true">·</span>
-                  <a href="{{ legal_withdrawal.url }}">{{ section.settings.legal_withdrawal_label | escape_once }}</a>
+                  <a href="{{ legal_withdrawal.url }}">{{ section.settings.legal_withdrawal_label | default: legal_withdrawal_default | escape_once }}</a>
                 {%- endif -%}
                 {%- for policy in shop.policies -%}
                   {%- comment -%} Shopify lists its cookie preferences link here as a '#' anchor, not a policy page. {%- endcomment -%}
@@ -1260,11 +1266,17 @@
       "info": "Blank uses the translated default (locale key kc.footer.legal_consumer_rights)"
     },
     {
+      "type": "checkbox",
+      "id": "show_legal_guarantee",
+      "default": true,
+      "label": "Show the legal guarantee link",
+      "info": "Goes to the Consumer Rights page at the anchor below, where the EU legal guarantee notice sits."
+    },
+    {
       "type": "text",
       "id": "legal_guarantee_label",
       "label": "Legal guarantee link text",
-      "default": "Your legal guarantee rights",
-      "info": "Goes to the Consumer Rights page at the anchor below, where the EU legal guarantee notice sits. Blank hides the link. NL and FR via Translate & Adapt."
+      "info": "Blank uses the translated default (locale key kc.footer.legal_guarantee)"
     },
     {
       "type": "text",
@@ -1280,11 +1292,17 @@
       "info": "Empty uses the page withdrawal; the link only shows once that page exists"
     },
     {
+      "type": "checkbox",
+      "id": "show_legal_withdrawal",
+      "default": true,
+      "label": "Show the withdrawal link",
+      "info": "The statutory withdrawal link (Art. VI.61/2 WER); it appears once the withdrawal page exists."
+    },
+    {
       "type": "text",
       "id": "legal_withdrawal_label",
       "label": "Withdrawal link text",
-      "default": "Withdraw from contract here",
-      "info": "Statutory words (Art. VI.61/2 WER); NL 'Hier de overeenkomst herroepen', FR 'Renoncer au contrat ici' via Translate & Adapt. Blank hides the link."
+      "info": "Blank uses the translated default (locale key kc.footer.legal_withdrawal)"
     },
     {
       "type": "checkbox",
