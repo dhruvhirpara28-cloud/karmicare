@@ -137,6 +137,13 @@ const pages = [
   ['article-short', article('morning-and-night-time-brushing-why-timing-matters', 3)],
   ['article-noimage', article('headaches-and-tooth-pain-understanding-the-connection', 6, null)],
   ['article-wellness', article('how-oral-health-impacts-your-overall-wellness', 5)], // opens with an h5 (R90 B3)
+  // R90b B4: three body pictures. 1 a valid external URL ending in _480x480 that is not in Files (must
+  // stay untouched and load), 2 a thumbnail that is in Files (resolved, width/height), 3 an external
+  // tag with its own loading attribute (no duplicate attribute)
+  ['article-b4', { ...article('morning-and-night-time-brushing-why-timing-matters', 9), content:
+    '<h2>Fallback test</h2><p><img src="/docs/blog/fixture/data/kc-b4-external_480x480.png" alt="External"></p>' +
+    '<p><img src="https://cdn.shopify.com/s/files/1/0765/7586/7189/files/charcoal-toothbrushes_600x600.jpg?v=1697123947" alt="Files"></p>' +
+    '<p><img loading="eager" src="/docs/blog/fixture/data/kc-b4-external_480x480.png" alt="Own loading"></p>' }],
 ];
 for (const [name, a] of pages) {
   const section = { id: 'template--kc-blog__main', blocks, settings: tpl.settings };

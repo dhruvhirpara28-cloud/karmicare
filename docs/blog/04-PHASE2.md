@@ -124,3 +124,24 @@ Focus moves to the target heading (`tabindex="-1"`, `focus({preventScroll: true}
 
 - **Theme Check:** exit 0, 0 errors, 19 warnings (baseline).
 - **Shots:** 110 `theme-*` shots at 360, 390, 750, 990 and 1440, Day and Night. The nano body, picture, Sources, Keep reading and end CTA are shot at all five widths.
+
+## R90c: B4, the fallback for pictures not in Files (26 Oct)
+
+Report: `docs/runtime-review/R90B-BLOG-LAYOUT-ASTRA.md`.
+
+**Problem:** for a picture not found in Files, the fallback also stripped `_480x480` and `_600x600` from the tag, so a valid external URL ending in `_480x480.jpg` became a missing file.
+
+**Fix in `sections/main-article.liquid`:**
+- The lookup tries the file's own name first, then the name without the thumbnail suffix.
+- A picture that is still not found keeps its tag exactly as written.
+- It only gets `loading="lazy"` and `decoding="async"`, and only when the tag has neither.
+
+**Retested** with `fixture/tools/probe-b4.js` on `site/theme-article-b4.html`, a test article rendered by `render-liquid.mjs`. All three pictures load and decode:
+
+| Picture | Result |
+|---|---|
+| A valid local URL `kc-b4-external_480x480.png`, not in Files | src untouched, loads at 1440×900 |
+| The nano thumbnail `charcoal-toothbrushes_600x600.jpg`, in Files | resolved to the Files file with width/height 1200×802, loads |
+| An external tag with its own `loading="eager"` | src untouched, no duplicate attribute, loads |
+
+**Regression:** `r90_check.py` ran 25 cases (nano EN/NL/FR, short, headaches × 360/390/750/990/1440). Picture edges, reserved heights, one h1 and no sideways scroll are unchanged. Theme Check: exit 0, 0 errors, 19 warnings in the theme. Astra's untracked `docs/runtime-review/r90b-tmp` export adds lint noise in this worktree only.
