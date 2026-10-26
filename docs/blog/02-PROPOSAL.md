@@ -77,12 +77,12 @@ Night passes everywhere. Its weakest pair is body text on the accent end of the 
 
 | | |
 |---|---|
-| **What it is** | The article reads like the legal pages. A title block fades page → accent, then the body fades accent → page in one centred 680 px column. The featured image sits under the title at no more than its own width (the nano image stays 520 px, the others fill the column). The one memorable element is the **Sources card** at the end: a white research card with the studies as rows. The CTA follows behind a rule, then "Keep reading" as text rows with an arrow. |
-| **Index** | Text rows on hairlines: date · reading time, title, a two-line excerpt, an arrow. No pictures. |
-| **Has** | Hero image (small, under the title) · meta row · headings, lists, quotes, tables · Sources card · end CTA · related rows · no table of contents |
-| **Pros** | Calmest of the three, and the same family as the legal pages, so the long-form pages read as one system. The weak legacy pictures (480 px thumbnails, stock photos) take the least room, and the nano article's small hero stops looking broken. Fewest new parts: one new CSS file and the Sources card. Works the same with or without a featured image. |
-| **Cons** | The index has no pictures, so it looks more like a list of documents than a magazine. At 1440 a lot of the page is empty margin around the column. The 16-minute nano article has no way to jump to a section. |
-| **Screens** | `a-article-top-*.png`, `a-article-sources-1440-day.png`, `a-blog-top-1440-day.png` |
+| **What it is** | The article reads like the legal pages: a title block fades page → accent, then the body fades accent → page in a 680 px text column. **Round 2 (Victor, 26 Oct):** (1) **Pictures leave the text column.** On phones they run edge to edge. From 990 px they fill the column with large rounded corners, and from 1200 px they reach 160 px further to the left, so a picture is 840 px wide next to 680 px of text. They load the original files (1920×1080 and 1200×802), not the 480/600 px thumbnails, so they stay sharp. (2) **"On this page" on the right**, as the legal pages' menu: an eyebrow, one link per section with a rule on its left, the section being read in full colour with a 2 px rule, "Sources" as the last item, sticky under the floating bar. On phones it is the legal pages' two-column list above the text. Articles with fewer than three sections get no menu. (3) **"Keep reading" stays a list**, with a thumbnail on each row (96 px on phones, 160 px from 750 px). The one memorable element is still the **Sources card** at the end; the CTA follows behind a rule. |
+| **Index** | The same rows as "Keep reading": thumbnail, date · reading time, title, a two-line excerpt, an arrow. |
+| **Has** | Featured picture (wide, out of the column) · body pictures out of the column · meta row · headings, lists, quotes, tables · "On this page" menu (right, legal style) · Sources card · end CTA · related rows with thumbnails |
+| **Pros** | The same family as the legal pages (column, menu, rules), so the long-form pages read as one system. Pictures now carry the page without taking over the text. The menu helps the 16-minute nano article. Works the same with or without a featured picture. |
+| **Cons** | The nano article's featured picture is a 520×416 file, so it cannot go wide and stays at its own size (D18). Body pictures have no width and height in the body HTML, so they still push the text down as they load (D7). |
+| **Screens** | `a-article-top-*.png`, `a-article-image-{390,1100,1440}-*.png`, `a-article-body-1440-day.png` (menu), `a-article-nav-390-day.png` (phone menu), `a-article-related-1440-night.png`, `a-blog-top-1440-*.png` |
 
 ### B · Editorial with a reading rail
 
@@ -154,7 +154,7 @@ Two things I'd take from the others, each as its own yes or no:
 | D4 | Sources card | yes, collected from the study links in the body (13 publisher hosts, consumer sites left out) · no | **Yes**, label "Sources" |
 | D5 | End CTA | reuse the homepage copy above with "Begin your 60-Day Rhythm" · no CTA · different copy (needs Figma or your text) | **Reuse** |
 | D6 | Related | "Keep reading" with the three newest other articles · none | **Yes** |
-| D7 | Body images | layout as built (never stretched, they still shift on load) · plus a source-copy request to re-insert the images at full size with width and height | **Both** |
+| D7 | Body images | as built in A round 2: the theme prints the original file instead of the thumbnail (`article.content \| replace: '_480x480.', '.' \| replace: '_600x600.', '.'`, served at most 1600 px wide, lazy), out of the column · plus a source-copy request to re-insert the pictures with width and height, so they stop shifting the text | **Both** |
 | D8 | Editor inline styles | neutralise in CSS inside the body (as built) · clean the bodies in Admin (source-copy) | **CSS now**, cleanup when the articles are rewritten |
 | D9 | Reading time | 200 words a minute, rounded up · leave out | **200 wpm** |
 | D10 | Quotes | upright with an accent rule (A, B) · accent panel (C) · italic like today | **Upright with the rule** |
@@ -163,6 +163,8 @@ Two things I'd take from the others, each as its own yes or no:
 | D13 | `lang` on untranslated bodies | add `lang="en"` on the body wrapper on `/nl` and `/fr` until source-copy translates · leave | **Leave** for now: Liquid cannot tell whether an article body is translated. Better to translate |
 | D14 | Day/Night | follows the clock with the manual override, as everywhere (no change) | no decision needed |
 | D15 | Link hover by Day | blog: text keeps its colour, underline thickens in the accent (as built) · site's `link-default-hover` #7fb9ff (2:1 on cream) · also fix the site-wide hover (legal pages and others, another lane) | **As built for the blog**, and a separate item for the site-wide token |
+| D17 | Glossary of terms used in an article | build a glossary block (definitions per article, shown under the menu or at the end) · leave out | **Waiting for Victor's reference page.** No article or theme file has glossary text today, and the lane writes no new copy |
+| D18 | The nano featured picture (520×416) | keep at its own size · upload a larger picture in Admin (not this lane) | **Upload a larger one**; the layout takes it without changes |
 | D16 | Values without a token (§3) | keep as commented literals · add tokens to the KC library first | **Literals now**, and add a long-form line-height token to the library when it is next exported |
 
 ## 6. New UI strings

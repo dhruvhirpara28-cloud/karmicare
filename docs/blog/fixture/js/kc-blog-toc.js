@@ -1,9 +1,10 @@
-/* kc-blog-toc.js: the "On this page" list for Direction B (docs/blog/02-PROPOSAL.md).
-   Reads the article's section headings (the highest level the body uses: h1 in the nano article,
-   h2 elsewhere), gives each an id, and fills every [data-kc-blog-toc] list. The heading being
-   read gets aria-current. Fewer than three sections: the list removes itself. No scrolling of its
-   own: links are plain #fragments, so kc-navigation.css's scroll-margin and the reader's
-   reduced-motion setting apply. */
+/* kc-blog-toc.js: the "On this page" list (docs/blog/02-PROPOSAL.md): A's legal-style menu on the
+   right, B's rail. Reads the article's section headings (the highest level the body uses: h1 in
+   the nano article, h2 elsewhere), gives each an id, and fills every [data-kc-blog-toc] list.
+   Headings outside the body marked [data-kc-blog-toc-extra] (the Sources card) follow at the end.
+   The heading being read gets aria-current. Fewer than three body sections: the list removes
+   itself. No scrolling of its own: links are plain #fragments, so kc-navigation.css's
+   scroll-margin and the reader's reduced-motion setting apply. */
 (function () {
   var body = document.querySelector('.kc-blog__body');
   var tocs = document.querySelectorAll('[data-kc-blog-toc]');
@@ -24,6 +25,8 @@
     });
     return;
   }
+
+  headings = headings.concat(Array.prototype.slice.call(document.querySelectorAll('[data-kc-blog-toc-extra]')));
 
   var used = {};
   headings.forEach(function (h) {

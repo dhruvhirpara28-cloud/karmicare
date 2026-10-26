@@ -129,8 +129,19 @@ def sources(a):
             f'{EXTERNAL}<span class="kc-visually-hidden">{T["opens_new"]}</span></a></li>')
     if not items:
         return ""
-    return (f'<aside class="kc-blog-sources" aria-labelledby="kc-blog-sources-title"><h2 class="kc-blog-sources__heading" id="kc-blog-sources-title">{T["sources"]}</h2>'
+    return (f'<aside class="kc-blog-sources" aria-labelledby="kc-blog-sources-title"><h2 class="kc-blog-sources__heading" id="kc-blog-sources-title" data-kc-blog-toc-extra>{T["sources"]}</h2>'
             f'<ul class="kc-blog-sources__list" role="list">{"".join(items)}</ul></aside>')
+
+
+def body(a):
+    """The body as Phase 2 prints it: the legacy size suffix dropped from the file URLs (the files
+    exist at full size: 1920x1080 and 1200x802 checked), served at most 1600px wide, lazy. In Liquid:
+    article.content | replace: '_480x480.', '.' | replace: '_600x600.', '.'
+                    | replace: '.jpg?v=', '.jpg?width=1600&v=' | replace: '<img ', '<img loading="lazy" decoding="async" '"""
+    c = a["content"]
+    c = c.replace("_480x480.", ".").replace("_600x600.", ".")
+    c = c.replace(".jpg?v=", ".jpg?width=1600&v=")
+    return c.replace("<img ", '<img loading="lazy" decoding="async" ')
 
 
 def cta_copy(heading_tag="h2"):
@@ -156,8 +167,13 @@ def section(inner, surface, n):
 def a_row(handle, d, heading="h3", excerpt=True):
     a = articles[handle]
     ex = f'<p class="kc-blog-a-row__excerpt">{esc(excerpts.get(handle))}</p>' if excerpt and excerpts.get(handle) else ""
+    thumb = ""
+    if a["image"]:
+        # decorative: the title next to it names the article
+        img = dict(a["image"], alt="")
+        thumb = f'<div class="kc-blog-a-row__thumb">{picture(img, "(min-width: 750px) 160px, 96px", widths=(200, 320, 480))}</div>'
     return (f'<li class="kc-blog-a-row"><a class="kc-blog-a-row__link" href="{link(handle, d)}" data-fixture-link>'
-            f'{meta(a, "ul")}<{heading} class="kc-blog-a-row__title">{esc(a["title"])}</{heading}>{ex}'
+            f'{thumb}<div class="kc-blog-a-row__text">{meta(a, "ul")}<{heading} class="kc-blog-a-row__title">{esc(a["title"])}</{heading}>{ex}</div>'
             f'<span class="kc-blog-a-row__arrow">{ARROW}</span></a></li>')
 
 
@@ -165,20 +181,23 @@ def a_article(handle):
     a = articles[handle]
     fig = ""
     if a["image"]:
-        fig = f'<figure class="kc-blog-a__figure" data-kc-featured>{picture(a["image"], "(min-width: 750px) 680px, calc(100vw - 40px)", lazy=False, cap=True)}</figure>'
+        fig = f'<figure class="kc-blog-a__figure" data-kc-featured>{picture(a["image"], "(min-width: 1200px) 840px, (min-width: 990px) 680px, 100vw", lazy=False, cap=True)}</figure>'
     standfirst = f'<p class="kc-blog__standfirst">{esc(excerpts.get(handle))}</p>' if excerpts.get(handle) else ""
+    nav = (f'<nav class="kc-blog-a__nav" aria-labelledby="kc-blog-toc-title" data-kc-blog-toc-box>'
+           f'<p class="kc-blog__eyebrow" id="kc-blog-toc-title">{T["on_this_page"]}</p>'
+           f'<ol class="kc-blog-a__nav-list" role="list" data-kc-blog-toc></ol></nav>')
     s1 = (f'<article class="kc-blog kc-blog-a">'
-          f'<header class="kc-blog-a__head"><div class="kc-blog__wrap">'
+          f'<header class="kc-blog-a__head"><div class="kc-blog-a__grid"><div class="kc-blog-a__text">'
           f'<a class="kc-blog__eyebrow" href="a-blog.html" data-fixture-link>{BLOG_TITLE}</a>'
-          f'<h1 class="kc-blog__title">{esc(a["title"])}</h1>{standfirst}{meta(a)}{fig}</div></header>'
-          f'<div class="kc-blog-a__body"><div class="kc-blog__wrap"><div class="kc-blog__body rte">{a["content"]}</div></div></div>'
-          f'</article>')
-    s2 = (f'<div class="kc-blog"><div class="kc-blog__wrap kc-blog-a__end">{sources(a)}'
-          f'<div class="kc-blog-a__cta">{cta_copy()}</div></div></div>')
+          f'<h1 class="kc-blog__title">{esc(a["title"])}</h1>{standfirst}{meta(a)}</div>{fig}</div></header>'
+          f'<div class="kc-blog-a__body"><div class="kc-blog-a__grid">{nav}<div class="kc-blog-a__text">'
+          f'<div class="kc-blog__body rte">{body(a)}</div>'
+          f'<div class="kc-blog-a__end">{sources(a)}<div class="kc-blog-a__cta">{cta_copy()}</div></div>'
+          f'</div></div></div></article>')
     rows = "".join(a_row(h, "a", excerpt=False) for h in related_for(handle))
-    s3 = (f'<div class="kc-blog kc-blog-a__related"><div class="kc-blog__wrap">'
-          f'<h2 class="kc-blog__section-heading">{T["related"]}</h2><ul class="kc-blog-a-list" role="list">{rows}</ul></div></div>')
-    return section(s1, "page", 1) + section(s2, "page", 2) + section(s3, "transition", 3)
+    s2 = (f'<div class="kc-blog kc-blog-a kc-blog-a__related"><div class="kc-blog-a__grid"><div class="kc-blog-a__text">'
+          f'<h2 class="kc-blog__section-heading">{T["related"]}</h2><ul class="kc-blog-a-list" role="list">{rows}</ul></div></div></div>')
+    return section(s1, "page", 1) + section(s2, "transition", 2)
 
 
 def pagination(d):
@@ -303,7 +322,7 @@ def shell(kind, title, main, direction):
     s = s.replace("</head>", head_add + "</head>", 1)
     s = re.sub(r"(<main\b[^>]*>).*?(</main>)", lambda m: m.group(1) + main + m.group(2), s, count=1, flags=re.S)
     tail = f'<script src="{FIX}/js/fixture.js"></script>'
-    if direction == "b":
+    if direction in ("a", "b"):
         tail += f'<script src="{FIX}/js/kc-blog-toc.js"></script>'
     s = s.replace("</body>", tail + "</body>", 1)
     return s

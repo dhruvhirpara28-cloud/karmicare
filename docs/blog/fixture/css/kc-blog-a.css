@@ -1,10 +1,33 @@
-/* Direction A · Quiet column (the legal family).
-   The article reads like the legal pages (assets/kc-policy-page.css): a title block that fades page
-   -> accent, the body accent -> page in one 680px column, the featured image small under the title
-   at no more than its own width. One memorable element: the Sources card at the end.
-   Index: a quiet list of rows with hairlines, no pictures. */
+/* Direction A · Quiet column (the legal family), round 2 (Victor, 26 Oct).
+   The article reads like the legal pages (assets/kc-policy-page.css, sections/legal-toc-section.liquid):
+   a title block that fades page -> accent, the body accent -> page. Round 2:
+   - pictures stand out: the featured picture and the body pictures leave the text column. Phones:
+     edge to edge. From 1200px: 160px further out on the left, so a picture is 840px wide.
+   - "On this page" on the right, as the legal pages' menu (a rule on each link's left, the current
+     section's rule and text in full colour). Phones: the legal pages' two-column list above the text.
+   - "Keep reading" and the index rows carry a thumbnail.
+   One grid (.kc-blog-a__grid) for every section of the page, so title, text, sources, CTA and
+   related all start on the same line. */
 
-/* ---- Article: title block (page -> accent) ---------------------------------------------------- */
+.kc-blog-a {
+  --kc-blog-a-outset: var(--kc-blog-gutter); /* how far a picture leaves the text column on the left */
+}
+
+.kc-blog-a__grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] var(--kc-blog-gutter)
+    [wide-start text-start] minmax(0, 1fr)
+    [text-end wide-end] var(--kc-blog-gutter)
+    [full-end];
+}
+
+.kc-blog-a__text {
+  grid-column: text;
+  min-width: 0;
+}
+
+/* ---- Title block (page -> accent) ------------------------------------------------------------- */
 .kc-blog-a__head {
   padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-layout-2xl);
   background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
@@ -14,26 +37,42 @@
   margin-top: var(--kc-responsive-spacing-layout-lg);
 }
 
+/* Featured picture: edge to edge on phones, never wider than the file (the nano image is 520px) */
 .kc-blog-a__figure {
+  grid-column: full;
   margin: var(--kc-responsive-spacing-layout-2xl) 0 0;
 }
 
-/* never wider than the file itself (the nano image is 520px) */
 .kc-blog-a__figure .kc-blog__media {
   max-width: min(100%, var(--kc-media-natural-width, 100%));
+  margin-inline: auto;
+  border-radius: 0;
 }
 
-/* ---- Article: body (accent -> page) ----------------------------------------------------------- */
+/* ---- Body (accent -> page) -------------------------------------------------------------------- */
 .kc-blog-a__body {
-  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-section-xs);
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-section-comfortable);
   background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
 }
 
-/* ---- Sources + CTA ---------------------------------------------------------------------------- */
+/* Body pictures: every one sits alone in its paragraph, sometimes wrapped in <i><span> (all 15
+   checked, fixture/tools/image_paras.py), so the paragraph leaves the column. A future article
+   that puts text and a picture in one paragraph would take the text along: write pictures in a
+   paragraph of their own. Margin-inline overrides the base rule's margin for the sides only. */
+.kc-blog-a .kc-blog__body p:has(img) {
+  margin-block: var(--kc-responsive-spacing-layout-2xl) !important;
+  margin-inline: calc(-1 * var(--kc-blog-gutter)) !important;
+}
+
+.kc-blog-a .kc-blog__body p:has(img) img {
+  width: 100%;
+  border-radius: 0;
+}
+
 .kc-blog-a__end {
   display: grid;
   gap: var(--kc-responsive-spacing-layout-3xl);
-  padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-comfortable);
+  margin-top: var(--kc-responsive-spacing-layout-3xl);
 }
 
 .kc-blog-a__cta {
@@ -41,7 +80,57 @@
   border-top: 1px solid var(--kc-mapped-border-primary-rule);
 }
 
-/* ---- Related + index rows --------------------------------------------------------------------- */
+/* ---- On this page (the legal pages' menu) ----------------------------------------------------- */
+.kc-blog-a__nav {
+  grid-column: text;
+  margin-bottom: var(--kc-responsive-spacing-layout-2xl);
+}
+
+.kc-blog-a__nav-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 var(--kc-responsive-spacing-layout-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-blog-a__nav .kc-blog-toc__link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--kc-responsive-spacing-layout-sm) 0 var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md);
+  border-inline-start: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-rule);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  color: var(--kc-mapped-text-default-caption);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kc-blog-a__nav .kc-blog-toc__link:hover {
+  color: var(--kc-mapped-text-default-heading);
+  border-color: var(--kc-mapped-border-primary-default-hover);
+}
+
+/* The section being read: rule and text in full colour, the rule 2px as on the legal pages */
+.kc-blog-a__nav .kc-blog-toc__link[aria-current='true'] {
+  color: var(--kc-mapped-text-default-heading);
+  border-color: var(--kc-mapped-text-default-heading);
+  box-shadow: inset 1px 0 0 var(--kc-mapped-text-default-heading);
+}
+
+html[data-kc-labels='site'] .kc-blog-a__nav .kc-blog-toc__link {
+  font-family: var(--kc-font-family-Nunito);
+  font-weight: var(--font-700-weight);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+}
+
+/* ---- Related + index rows, with a thumbnail ---------------------------------------------------- */
 .kc-blog-a__related {
   padding-block: var(--kc-responsive-spacing-section-comfortable);
 }
@@ -59,30 +148,42 @@
 
 .kc-blog-a-row__link {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-lg);
+  grid-template-columns: 9.6rem minmax(0, 1fr) auto; /* thumbnail 96px on phones */
+  gap: var(--kc-responsive-spacing-layout-lg);
+  align-items: center;
   padding-block: var(--kc-responsive-spacing-layout-lg);
   color: var(--kc-mapped-text-default-heading);
   text-decoration: none;
 }
 
-.kc-blog-a-row__link .kc-blog__meta {
-  grid-column: 1;
+.kc-blog-a-row__thumb .kc-blog__media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.kc-blog-a-row__thumb .kc-blog__media img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.kc-blog-a-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  min-width: 0;
 }
 
 .kc-blog-a-row__title {
-  grid-column: 1;
   margin: 0;
   font-size: var(--kc-responsive-h5-text-size);
   line-height: var(--kc-responsive-h5-line-height);
   letter-spacing: var(--kc-responsive-h5-letter-spacing);
   font-weight: var(--font-500-weight);
   text-wrap: balance;
-  transition: color 0.2s ease;
 }
 
 .kc-blog-a-row__excerpt {
-  grid-column: 1;
   margin: 0;
   font-size: var(--kc-responsive-body-md-text-size);
   line-height: var(--kc-responsive-body-md-line-height);
@@ -94,9 +195,6 @@
 }
 
 .kc-blog-a-row__arrow {
-  grid-column: 2;
-  grid-row: 1 / span 3;
-  align-self: center;
   color: var(--kc-mapped-icon-primary-default-subtle);
   transition: transform 0.2s ease;
 }
@@ -106,6 +204,10 @@
   text-decoration-thickness: 2px;
   text-decoration-color: var(--kc-mapped-surface-accent-default);
   text-underline-offset: 0.2em;
+}
+
+.kc-blog-a-row__link:hover .kc-blog-a-row__thumb img {
+  transform: scale(1.04);
 }
 
 .kc-blog-a-row__link:hover .kc-blog-a-row__arrow {
@@ -131,5 +233,80 @@
 
   .kc-blog-sources {
     padding: var(--kc-responsive-spacing-layout-xl);
+  }
+
+  .kc-blog-a-row__link {
+    grid-template-columns: 16rem minmax(0, 1fr) auto; /* thumbnail 160px */
+  }
+
+  .kc-blog-a-row__thumb .kc-blog__media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* From 990px: the menu moves to the right of the text; pictures keep to the text column */
+@media screen and (min-width: 990px) {
+  .kc-blog-a__grid {
+    grid-template-columns:
+      [full-start] minmax(var(--kc-blog-gutter), 1fr)
+      [wide-start text-start] minmax(0, var(--kc-blog-measure))
+      [text-end wide-end] var(--kc-responsive-spacing-layout-3xl)
+      [nav-start] 22rem /* the legal menu's narrow column (legal-toc-section.liquid: 180-250px below 990) */
+      [nav-end] minmax(var(--kc-blog-gutter), 1fr)
+      [full-end];
+  }
+
+  .kc-blog-a {
+    --kc-blog-a-outset: 0px;
+  }
+
+  .kc-blog-a__text {
+    grid-row: 1;
+  }
+
+  .kc-blog-a__figure {
+    grid-column: wide;
+  }
+
+  .kc-blog-a__figure .kc-blog__media,
+  .kc-blog-a .kc-blog__body p:has(img) img {
+    border-radius: var(--kc-shape-radius-lg);
+  }
+
+  .kc-blog-a .kc-blog__body p:has(img) {
+    margin-inline: calc(-1 * var(--kc-blog-a-outset)) 0 !important;
+  }
+
+  .kc-blog-a__nav {
+    grid-column: nav;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--kc-navigation-clearance) + 1.6rem);
+    align-self: start;
+    max-height: calc(100vh - var(--kc-navigation-clearance) - 3.2rem);
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .kc-blog-a__nav-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* From 1200px: pictures 160px further out on the left (840px wide), the menu at the legal width */
+@media screen and (min-width: 1200px) {
+  .kc-blog-a__grid {
+    grid-template-columns:
+      [full-start] minmax(var(--kc-blog-gutter), 1fr)
+      [wide-start] 16rem
+      [text-start] minmax(0, var(--kc-blog-measure))
+      [text-end wide-end] var(--kc-responsive-spacing-layout-3xl)
+      [nav-start] 28rem
+      [nav-end] minmax(var(--kc-blog-gutter), 1fr)
+      [full-end];
+  }
+
+  .kc-blog-a {
+    --kc-blog-a-outset: 16rem;
   }
 }

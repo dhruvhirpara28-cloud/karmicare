@@ -10,6 +10,7 @@ filter: only shots whose file name contains it.
 Names: <direction>-<page>-<part>-<width>-<mode>.png
 """
 import os, subprocess, sys
+from urllib.parse import quote
 
 page, which = sys.argv[1], sys.argv[2]
 flt = sys.argv[3] if len(sys.argv) > 3 else ""
@@ -21,6 +22,7 @@ HEIGHT = {390: 844, 750: 900, 1100: 900, 1440: 900}  # taller than Orca's pane (
 
 PARTS = {
     "body": ".kc-blog__body blockquote",
+    "image": ".kc-blog__body img",
     "sources": ".kc-blog-sources",
     "cta": ".kc-blog-cta__heading",
     "related": ".kc-blog__section-heading",
@@ -50,6 +52,9 @@ def plan():
 
 for name, path, w, q in plan():
     url = BASE + path + ("?" + q if q else "")
+    if "at=" in q or "y=" in q:
+        # scrolled views go through frame.html: Orca paints a scrolled page only inside an iframe
+        url = "http://127.0.0.1:9390/docs/blog/fixture/frame.html?src=" + quote(url, safe="")
     out = os.path.join(OUT, name + ".png")
     r = subprocess.run(["python3", "-I", os.path.join(HERE, "shoot.py"), page, out, url, str(w), str(HEIGHT[w]), "--settle", "2"],
                        capture_output=True, text=True)

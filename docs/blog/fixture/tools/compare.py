@@ -12,6 +12,7 @@ names = {"a": "A · Quiet column", "b": "B · Editorial with a reading rail", "c
 rows = [
     ("Article · top", "article-top"),
     ("Article · body and quote", "article-body"),
+    ("Article · body image", "article-image"),
     ("Article · sources", "article-sources"),
     ("Article · CTA", "article-cta"),
     ("Article · related", "article-related"),
