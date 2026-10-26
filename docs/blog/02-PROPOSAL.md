@@ -71,7 +71,28 @@ Computed from the token values (`fixture/tools/contrast.py`). Translucent text i
 
 Night passes everywhere. Its weakest pair is body text on the accent end of the gradient, at 6.0:1. By Day only the site's link-hover colour fails, at 2:1, and the legal pages use it too. The blog CSS therefore does not change link colour on hover: the text stays navy or cream and the underline thickens in the accent blue (`shots/a-blog-hover-1440-day.png`). The quote rule and hairlines are decorative and carry no meaning. Whether the site-wide hover colour should change too is decision D15.
 
-## 3. The three directions
+## 3. The directions
+
+### D · Editorial, after Victor's reference (26 Oct, now the recommendation)
+
+Victor: "design the exact layout of this blog for ours while staying in our branding. Pay attention to the image size, behaviour of content table and line height and styling of headers", with openai.com/index/scaling-storage-one-billion-users-part-two as the reference. Also: keep "Keep reading" and replace the "Two formulas" CTA with the homepage's end CTA. The reference was measured in an isolated Orca profile at 1440 and 390 (`fixture/tools/probe-ref*.js`, `shots/ref-openai-*.png`). Its cookie banner was left alone.
+
+| | Reference (measured) | Ours (D) |
+|---|---|---|
+| Header | centred: date + category, title 48/55.7 (1.16) weight 500, standfirst, byline, a rule with "Listen" left and Share right | centred: date + "News", title on the h1 token (32 → 52) at line height 1.16, standfirst, a rule with the reading time left and **Share** right (the article template's existing share block). No byline: author stays off |
+| Featured picture | wide figure 1280 px (80 px from each edge at 1440), 4 px corners | wide, up to 1280 px, never wider than the file (the nano file stays 520 px, D18), `radius-md`. On phones edge to edge |
+| Body pictures | in the text column (676 px), about 88 px of air | in the 680 px column, `layout-3xl` (40 → 64) of air. On phones edge to edge. The original files, not the thumbnails (D7) |
+| Text column | 676 px, centred on the page | 680 px, centred on the page |
+| Body type | 17/28 (1.65), 24 px between paragraphs | 18 px (body-lg on phones, body-md from 750: both 18), **line height 1.6**, `layout-lg` (20 → 24) between paragraphs |
+| Section heading | 30/39.6 (1.32) weight 500, 64 above, 24 below | 24 on phones (h3 token), 28 from 750 (h4 token), **line height 1.3**, weight 500, `layout-3xl` above, `layout-lg` below |
+| Sub-heading | 22/27.7 weight 500 | h5 token (20 → 24) with its line height, weight 500, the same spacing |
+| Contents | sticky list in the left margin (sticky 112 px from the top, about 210 px wide). Sections plus sub-sections indented 14 px, 12/15 type, the one being read in full colour, the rest at 60 %. No rules. Phones: a bar under the header naming the current section, which opens the list | the same behaviour. From 1200 px the list is sticky in the left margin (220 px), sections plus indented sub-sections, label-lg type (13/16), the current one in full colour and semibold, the rest at 70 % (the theme's `.opacity-xl`). "Sources" is the last item. Below 1200 px it is a bar that sticks under our floating navigation (veil and glass blur), names the section being read, opens the list, and closes after a choice. Fewer than three sections: no contents (`js/kc-blog-contents.js`) |
+| End | related articles | **Sources** card (the studies the body links to), then the **homepage end CTA**: the `featured-product` section exactly as the homepage prints it ("Your welcome kit includes", the Loop plan picker, "Begin your 60-Day Rhythm", the three promises). Then **Keep reading** as before, with thumbnails |
+| Index | — | the same rows as Keep reading (thumbnail, date · reading time, title, excerpt), under a centred "News" |
+
+**Screens:** `d-article-top-{390,750,1100,1440}-{day,night}.png`, `d-article-body-1440-day.png` (contents in the margin), `d-article-body-390-day.png` (the phone bar), `d-article-image-*.png`, `d-article-cta-1440-day.png` (homepage end CTA), `d-article-related-*.png`, `d-article-short-1440-day.png` (a wide 16:9 featured picture, no contents with two sections), `d-blog-top-*.png`.
+
+**In the fixture the end CTA is static.** The live scripts are removed, so the Loop plan picker shows its Liquid state and the button does nothing. In Phase 2 it is the real section with its scripts. One theme change goes with it: `layout/theme.liquid` prints Loop's widget styles only on product, index and collection templates, so `article` joins that condition (D21; the Loop widget files themselves stay untouched).
 
 ### A · Quiet column (the legal family)
 
@@ -136,7 +157,9 @@ Night passes everywhere. Its weakest pair is body text on the accent end of the 
 
 ## 4. Recommendation
 
-**Direction A for the articles and the index.** The content decides it more than taste. The eight articles are legacy texts with small pictures, inline-style debris and many claims that need the evidence track (01-INVENTORY §6). A layout that puts their stock photos and titles big on the page (B, C) makes them louder before they are fixed. A is calm, joins the legal pages as one long-form family, gives the nano article's small image a natural place, and its one memorable element (the Sources card) points at the thing Karmicare wants to be known for: the studies.
+**Update 26 Oct: Direction D**, the layout of Victor's reference in our tokens, with A's Sources card and Keep reading rows and the homepage end CTA. The reasoning below was written for A before the reference came in. It still explains why D keeps A's quiet type, the Sources card and the list-style related rows.
+
+Earlier recommendation: **Direction A for the articles and the index.** The content decides it more than taste. The eight articles are legacy texts with small pictures, inline-style debris and many claims that need the evidence track (01-INVENTORY §6). A layout that puts their stock photos and titles big on the page (B, C) makes them louder before they are fixed. A is calm, joins the legal pages as one long-form family, gives the nano article's small image a natural place, and its one memorable element (the Sources card) points at the thing Karmicare wants to be known for: the studies.
 
 Two things I'd take from the others, each as its own yes or no:
 - **B's "On this page" disclosure** for long articles only (three or more sections), as a quiet list under the meta row and not as a rail. That helps the 16-minute nano article without a second memorable element (D3b).
@@ -146,7 +169,11 @@ Two things I'd take from the others, each as its own yes or no:
 
 | # | Decision | Options | My recommendation |
 |---|---|---|---|
-| D1 | Direction for article and index | A · B · C (or a mix) | **A** |
+| D1 | Direction for article and index | D (reference) · A · B · C | **D** |
+| D19 | Body pictures in D | the text column, as the reference (as built) · 160 px further out on the left, as A round 2 | **The column**, as the reference. The featured picture is the wide one |
+| D20 | Contents side | left margin, as the reference and the legal pages' own menu (as built) · right | **Left** |
+| D21 | End CTA | the homepage's `featured-product` section in `templates/article.json`, plus `article` in theme.liquid's Loop-styles condition · A's text CTA | **The homepage section** |
+| D22 | Line heights the tokens do not have | body 1.6, headings 1.3, title 1.16, as measured on the reference (as built) · the tokens' own (body-lg 1.44, h4 1.14) | **As built**, and add long-form line-height tokens to the KC library (with D16) |
 | D1b | Index cards | A text rows · C Figma cards with pictures | **A rows now**, C cards once the pictures are replaced |
 | D2 | Labels and buttons | the brief: Proxima Nova, sentence case (default in the previews) · the site today: Nunito, uppercase, letter-spaced (`?labels=site`, `shots/a-article-cta-390-day-labels-site.png`) | **The brief's style** on the blog, with a separate yes for the rest of the site. Otherwise the blog's buttons differ from the header's "BEGIN NOW" |
 | D3 | Standfirst under the title (`article.excerpt`) | show when the article has one · never | **Show**, but only after the nano excerpt is fixed ("Dive deep into the benefits of NASA's favorite supplement…", D11) |

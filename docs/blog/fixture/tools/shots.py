@@ -24,7 +24,7 @@ PARTS = {
     "body": ".kc-blog__body blockquote",
     "image": ".kc-blog__body img",
     "sources": ".kc-blog-sources",
-    "cta": ".kc-blog-cta__heading",
+    "cta": ".kc-blog-cta__heading, .featured-product, [id*=featured_product]",
     "related": ".kc-blog__section-heading",
 }
 
@@ -39,7 +39,7 @@ def plan():
                 for part, sel in PARTS.items():
                     shots.append((f"{d}-article-{part}-{w}-day", f"{d}-article.html", w, "at=" + sel))
     elif which == "matrix":
-        for d in "abc":
+        for d in "dabc":
             for mode in ("day", "night"):
                 for w in (390, 750, 1100, 1440):
                     shots.append((f"{d}-article-top-{w}-{mode}", f"{d}-article.html", w, f"mode={mode}"))

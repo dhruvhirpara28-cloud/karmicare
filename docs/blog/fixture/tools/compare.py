@@ -8,7 +8,7 @@ import html, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 SHOTS = os.path.abspath(os.path.join(HERE, "..", "..", "shots"))
 OUT = os.path.abspath(os.path.join(HERE, "..", "site", "compare.html"))
-names = {"a": "A · Quiet column", "b": "B · Editorial with a reading rail", "c": "C · Research notebook"}
+names = {"d": "D · Editorial (reference)", "a": "A · Quiet column", "b": "B · Editorial with a reading rail", "c": "C · Research notebook"}
 rows = [
     ("Article · top", "article-top"),
     ("Article · body and quote", "article-body"),
@@ -32,7 +32,7 @@ legend{float:left;margin-right:6px;color:var(--muted)}
 label{display:inline-flex;gap:4px;align-items:center;cursor:pointer}
 section{padding:16px;border-bottom:1px solid var(--rule)}
 h2{font-size:16px;margin:0 0 12px;font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .cell h3{font-size:13px;font-weight:600;color:var(--muted);margin:0 0 6px}
 .cell img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:8px;background:#fff}
 .cell a{color:inherit}
@@ -47,7 +47,7 @@ for w in (390, 750, 1100, 1440):
 out.append('</fieldset><a href="index.html">Live fixture pages</a></header>')
 for title, key in rows:
     out.append(f"<section><h2>{html.escape(title)}</h2><div class='grid'>")
-    for d in "abc":
+    for d in "dabc":
         out.append(f"<div class='cell'><h3>{names[d]}</h3>")
         for mode in ("day", "night"):
             for w in (390, 750, 1100, 1440):

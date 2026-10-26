@@ -1,0 +1,352 @@
+/* Direction D · Editorial, after the reference Victor gave (26 Oct): openai.com/index/scaling-
+   storage-one-billion-users-part-two, measured at 1440 and 390 (02-PROPOSAL.md §3 D). Its layout,
+   our tokens:
+   - header centred: date and blog above the title, title, standfirst, then a rule with the reading
+     time on the left and Share on the right;
+   - the featured picture wide (the reference's wide figure, 1280px), body pictures in the text
+     column (its column figures), edge to edge on phones;
+   - a 680px text column in the middle of the page; body 18px with a 1.6 line height (the
+     reference: 17/28); 24px between paragraphs; headings with 64px above and 24px below;
+   - contents: a sticky list in the left margin from 1200px (sections, sub-sections indented, the
+     one being read in full colour); below 1200px a sticky bar under the navigation that names the
+     section being read and opens the list.
+   Raw values say why in a comment; the line heights are decision D16. */
+
+/* ---- Header (page -> accent) ----------------------------------------------------------------- */
+.kc-blog-d__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-layout-xl);
+  text-align: center;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-d__kicker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--kc-responsive-spacing-layout-md);
+  margin: 0 0 var(--kc-responsive-spacing-layout-lg);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-500-weight);
+}
+
+.kc-blog-d__kicker time {
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-d__kicker a {
+  color: var(--kc-mapped-text-default-caption);
+  text-decoration: none;
+}
+
+.kc-blog-d__kicker a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.kc-blog-d__head .kc-blog__title {
+  max-width: 80rem; /* the reference's title box */
+  margin-inline: auto;
+  line-height: 1.16; /* the reference title: 48/55.7 */
+}
+
+.kc-blog-d__head .kc-blog__standfirst {
+  max-width: 56rem; /* two or three lines under the title, as the reference */
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* The rule row: reading time left, Share right */
+.kc-blog-d__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+  max-width: var(--kc-blog-measure);
+  margin: var(--kc-responsive-spacing-layout-2xl) auto 0;
+  padding-top: var(--kc-responsive-spacing-layout-md);
+  border-top: 1px solid var(--kc-mapped-border-primary-rule);
+  text-align: start;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-mapped-text-default-caption);
+}
+
+.kc-blog-d__share {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  min-height: var(--kc-responsive-size-control-min-height);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--kc-mapped-text-default-heading);
+  font: inherit;
+  font-weight: var(--font-500-weight);
+  cursor: pointer;
+}
+
+.kc-blog-d__share:hover span {
+  text-decoration: underline;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* ---- Featured picture: wide ------------------------------------------------------------------ */
+.kc-blog-d__figure {
+  margin: 0;
+  padding-block: var(--kc-responsive-spacing-layout-xl) 0;
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+.kc-blog-d__figure .kc-blog__media {
+  max-width: min(100%, 128rem, var(--kc-media-natural-width, 128rem)); /* the reference's wide figure */
+  margin-inline: auto;
+  border-radius: 0;
+}
+
+/* ---- Body (accent -> page) ------------------------------------------------------------------- */
+.kc-blog-d__main {
+  padding-block: var(--kc-responsive-spacing-layout-3xl) var(--kc-responsive-spacing-section-xs);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
+}
+
+.kc-blog-d__layout {
+  display: grid;
+  grid-template-columns: [full-start] var(--kc-blog-gutter) [text-start] minmax(0, 1fr) [text-end] var(--kc-blog-gutter) [full-end];
+}
+
+.kc-blog-d__text {
+  grid-column: text;
+  min-width: 0;
+}
+
+/* Long-form type: 18px, line height 1.6 (the reference 17/28; no long-form line-height token, D16) */
+.kc-blog-d .kc-blog__body {
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: 1.6;
+  --kc-blog-para: var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-blog-d .kc-blog__body :is(h1, h2, h3, h4, h5, h6) {
+  margin: var(--kc-responsive-spacing-layout-3xl) 0 var(--kc-responsive-spacing-layout-lg) !important;
+}
+
+/* Sections: 24px on phones (h3 token), 28px from 750px (h4 token), line height 1.3 (the reference 30/39.6) */
+.kc-blog-d .kc-blog__body :is(h1, h2),
+.kc-blog-d .kc-blog__body:has(h1) h1 {
+  font-size: var(--kc-responsive-h3-text-size) !important;
+  line-height: 1.3 !important;
+  letter-spacing: var(--kc-responsive-h4-letter-spacing-sm) !important;
+  font-weight: var(--font-500-weight) !important;
+}
+
+/* Sub-sections: h5 token (20 -> 24), the reference 22/27.7 */
+.kc-blog-d .kc-blog__body :is(h3, h4, h5, h6),
+.kc-blog-d .kc-blog__body:has(h1) h2 {
+  font-size: var(--kc-responsive-h5-text-size) !important;
+  line-height: var(--kc-responsive-h5-line-height) !important;
+  letter-spacing: 0 !important;
+  font-weight: var(--font-500-weight) !important;
+}
+
+.kc-blog-d .kc-blog__body > :is(h1, h2, h3, h4, h5, h6):first-child,
+.kc-blog-d .kc-blog__body :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0 !important;
+}
+
+.kc-blog-d .kc-blog__body li + li {
+  margin-top: var(--kc-responsive-spacing-layout-xs) !important;
+}
+
+/* Body pictures: in the text column, more air around them (the reference: 88px); edge to edge on
+   phones. Every picture sits alone in its paragraph (fixture/tools/image_paras.py). */
+.kc-blog-d .kc-blog__body p:has(img) {
+  margin-block: var(--kc-responsive-spacing-layout-3xl) !important;
+  margin-inline: calc(-1 * var(--kc-blog-gutter)) !important;
+}
+
+.kc-blog-d .kc-blog__body p:has(img) img {
+  width: 100%;
+  border-radius: 0;
+}
+
+.kc-blog-d__end {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-3xl);
+  margin-top: var(--kc-responsive-spacing-layout-3xl);
+}
+
+/* ---- Contents --------------------------------------------------------------------------------
+   Phones and tablets: a bar that sticks under the floating navigation, names the section being
+   read, and opens the list. From 1200px: the list itself, sticky in the left margin. */
+.kc-blog-d__toc {
+  grid-column: full;
+  position: sticky;
+  top: var(--kc-navigation-clearance);
+  z-index: 2;
+  margin: 0 0 var(--kc-responsive-spacing-layout-xl);
+}
+
+.kc-blog-d-toc {
+  background: var(--kc-mapped-surface-overlay-veil);
+  -webkit-backdrop-filter: blur(var(--kc-brand-glass-blur));
+  backdrop-filter: blur(var(--kc-brand-glass-blur));
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-d-toc > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-md);
+  min-height: var(--kc-responsive-size-control-min-height);
+  padding-inline: var(--kc-blog-gutter);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-d-toc > summary::-webkit-details-marker {
+  display: none;
+}
+
+.kc-blog-d-toc > summary [data-kc-blog-toc-current] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kc-blog-d-toc > summary svg {
+  flex: 0 0 auto;
+  transition: transform 0.2s ease;
+}
+
+.kc-blog-d-toc[open] > summary svg {
+  transform: rotate(180deg);
+}
+
+.kc-blog-d-toc__list {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 var(--kc-blog-gutter) var(--kc-responsive-spacing-layout-md);
+  list-style: none;
+}
+
+.kc-blog-d-toc__link {
+  display: block;
+  padding-block: var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-mapped-text-default-heading);
+  opacity: 0.7; /* the theme's .opacity-xl, which the legal menu uses for links not being read */
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.kc-blog-d-toc__item--sub .kc-blog-d-toc__link {
+  padding-inline-start: var(--kc-responsive-spacing-layout-md);
+}
+
+.kc-blog-d-toc__link:hover,
+.kc-blog-d-toc__link[aria-current='true'] {
+  opacity: 1;
+}
+
+.kc-blog-d-toc__link[aria-current='true'] {
+  font-weight: var(--font-600-weight);
+}
+
+@media screen and (min-width: 750px) {
+  .kc-blog-d .kc-blog__body {
+    font-size: var(--kc-responsive-body-md-text-size); /* 18px from 750px too: the reference keeps one size */
+  }
+
+  .kc-blog-d .kc-blog__body :is(h1, h2),
+  .kc-blog-d .kc-blog__body:has(h1) h1 {
+    font-size: var(--kc-responsive-h4-text-size) !important;
+  }
+
+  .kc-blog-d__figure .kc-blog__media,
+  .kc-blog-d .kc-blog__body p:has(img) img {
+    border-radius: var(--kc-shape-radius-md);
+  }
+
+  .kc-blog-d__figure {
+    padding-inline: var(--kc-blog-gutter);
+  }
+
+  .kc-blog-d__layout {
+    grid-template-columns: [full-start] minmax(var(--kc-blog-gutter), 1fr) [text-start] minmax(0, var(--kc-blog-measure)) [text-end] minmax(var(--kc-blog-gutter), 1fr) [full-end];
+  }
+
+  .kc-blog-d .kc-blog__body p:has(img) {
+    margin-inline: 0 !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  /* The text stays in the middle of the page; the contents take the left margin */
+  .kc-blog-d__layout {
+    grid-template-columns:
+      [full-start] var(--kc-blog-gutter)
+      [toc-start] 22rem /* the reference's contents column (about 210px) */
+      [toc-end] minmax(var(--kc-responsive-spacing-layout-3xl), 1fr)
+      [text-start] minmax(0, var(--kc-blog-measure))
+      [text-end] minmax(var(--kc-responsive-spacing-layout-3xl), 1fr)
+      22rem var(--kc-blog-gutter) [full-end];
+  }
+
+  .kc-blog-d__text {
+    grid-row: 1;
+  }
+
+  .kc-blog-d__toc {
+    grid-column: toc;
+    grid-row: 1;
+    top: calc(var(--kc-navigation-clearance) + var(--kc-responsive-spacing-layout-lg));
+    align-self: start;
+    max-height: calc(100vh - var(--kc-navigation-clearance) - 4.8rem);
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .kc-blog-d-toc {
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+  }
+
+  .kc-blog-d-toc > summary {
+    display: none;
+  }
+
+  .kc-blog-d-toc__list {
+    max-height: none;
+    padding: 0;
+  }
+
+  .kc-blog-d-toc__link {
+    padding-block: var(--kc-responsive-spacing-layout-sm);
+  }
+}
+
+/* ---- Index ------------------------------------------------------------------------------------ */
+.kc-blog-d-index__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl);
+  text-align: center;
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-d-index__list {
+  padding-block: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}

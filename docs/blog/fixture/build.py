@@ -47,6 +47,7 @@ T = {
     "page": "Page {n}",
     "next": "Next page",
     "opens_new": "Opens in a new window.",
+    "share": "Share",  # existing: the article template's share block label
 }
 
 STUDY_HOSTS = [
@@ -297,6 +298,58 @@ def c_blog(page):
     return section(s1, "page", 1)
 
 
+# ---- Direction D ---------------------------------------------------------------------------------
+SHARE = '<svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.67 8.67a3.33 3.33 0 0 0 5.02.36l2-2a3.33 3.33 0 0 0-4.71-4.71l-1.15 1.14M9.33 7.33a3.33 3.33 0 0 0-5.02-.36l-2 2a3.33 3.33 0 0 0 4.71 4.71l1.14-1.14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+HOME_PATH = os.path.join(HERE, "data", "home-cta.json")
+home = json.load(open(HOME_PATH)) if os.path.exists(HOME_PATH) else None
+
+
+def end_cta():
+    """The homepage's end CTA: the featured-product section exactly as the live homepage prints it
+    (Phase 2: the same section in templates/article.json). Its scripts are removed like the shell's,
+    so the Loop plan picker shows its Liquid state only."""
+    if not home or not home["section"]:
+        return ""
+    s = rewrite(home["section"])
+    return s.replace('id="shopify-section-template--', 'id="shopify-section-kc-blog-endcta-template--', 1)
+
+
+def d_article(handle):
+    a = articles[handle]
+    fig = ""
+    if a["image"]:
+        fig = (f'<figure class="kc-blog-d__figure" data-kc-featured>'
+               f'{picture(a["image"], "(min-width: 1344px) 1280px, (min-width: 750px) calc(100vw - 64px), 100vw", widths=(550, 750, 1100, 1500, 1920), lazy=False, cap=True)}</figure>')
+    standfirst = f'<p class="kc-blog__standfirst">{esc(excerpts.get(handle))}</p>' if excerpts.get(handle) else ""
+    toc = (f'<div class="kc-blog-d__toc" data-kc-blog-contents-box><details class="kc-blog-d-toc">'
+           f'<summary><span data-kc-blog-toc-current>{T["on_this_page"]}</span>{CHEVRON}</summary>'
+           f'<nav aria-label="{T["on_this_page"]}"><ol class="kc-blog-d-toc__list" role="list" data-kc-blog-contents></ol></nav>'
+           f'</details></div>')
+    s1 = (f'<article class="kc-blog kc-blog-d">'
+          f'<header class="kc-blog-d__head"><div class="kc-blog__wrap kc-blog__wrap--wide">'
+          f'<p class="kc-blog-d__kicker"><time datetime="{a["published_at"]}">{date_label(a["published_at"])}</time>'
+          f'<a href="d-blog.html" data-fixture-link>{BLOG_TITLE}</a></p>'
+          f'<h1 class="kc-blog__title">{esc(a["title"])}</h1>{standfirst}'
+          f'<div class="kc-blog-d__bar"><span>{T["min_read"].format(n=minutes(a))}</span>'
+          f'<button type="button" class="kc-blog-d__share">{SHARE}<span>{T["share"]}</span></button></div>'
+          f'</div></header>{fig}'
+          f'<div class="kc-blog-d__main"><div class="kc-blog-d__layout">{toc}<div class="kc-blog-d__text">'
+          f'<div class="kc-blog__body rte">{body(a)}</div>'
+          f'<div class="kc-blog-d__end">{sources(a)}</div></div></div></div></article>')
+    rows = "".join(a_row(h, "d", excerpt=False) for h in related_for(handle))
+    s3 = (f'<div class="kc-blog kc-blog-a kc-blog-a__related"><div class="kc-blog-a__grid"><div class="kc-blog-a__text">'
+          f'<h2 class="kc-blog__section-heading">{T["related"]}</h2><ul class="kc-blog-a-list" role="list">{rows}</ul></div></div></div>')
+    return section(s1, "page", 1) + end_cta() + section(s3, "transition", 3)
+
+
+def d_blog(page):
+    rows = "".join(a_row(h, "d", heading="h2") for h in page)
+    s1 = (f'<div class="kc-blog kc-blog-d-index"><header class="kc-blog-d-index__head"><div class="kc-blog__wrap">'
+          f'<h1 class="kc-blog__title">{BLOG_TITLE}</h1></div></header>'
+          f'<div class="kc-blog-d-index__list"><div class="kc-blog__wrap"><ul class="kc-blog-a-list" role="list">{rows}</ul>{pagination("d")}</div></div></div>')
+    return section(s1, "page", 1)
+
+
 # ---- Shell ---------------------------------------------------------------------------------------
 SURFACE_JS = re.search(r"<script>(.*?)</script>", open(os.path.join(ROOT, "snippets", "kc-surface.liquid")).read(), re.S).group(1)
 
@@ -308,22 +361,36 @@ def asset(m):
     return "https:" + m.group(0) if m.group(0).startswith("//") else m.group(0)
 
 
-def shell(kind, title, main, direction):
-    s = data["shell"][kind]
+def rewrite(s):
+    """Live HTML -> fixture HTML: no scripts, root-relative URLs to the live store, theme CSS that
+    exists in this worktree from assets/."""
     s = re.sub(r"<script\b[^>]*>.*?</script>", "", s, flags=re.S | re.I)
     s = re.sub(r'<link[^>]+rel="(?:modulepreload|preload)"[^>]*as="script"[^>]*>', "", s)
     s = re.sub(r'(href|action|src)="/(?!/)', rf'\1="{LIVE}/', s)
     s = re.sub(r"(?:https?:)?//www\.karmicare\.com/cdn/shop/t/\d+/assets/([^\"'?\s)]+)(?:\?v=\d+)?", asset, s)
-    s = re.sub(r'(?<=[\s,"(=])//(?=[a-z0-9.-]+\.[a-z]{2,}/)', "https://", s)
+    return re.sub(r'(?<=[\s,"(=])//(?=[a-z0-9.-]+\.[a-z]{2,}/)', "https://", s)
+
+
+def shell(kind, title, main, direction):
+    s = rewrite(data["shell"][kind])
     s = re.sub(r"<title>.*?</title>", f"<title>{esc(title)}</title>", s, flags=re.S)
-    head_add = (f'<script>{SURFACE_JS}</script>'
-                f'<link rel="stylesheet" href="{FIX}/css/kc-blog-base.css"><link rel="stylesheet" href="{FIX}/css/kc-blog-{direction}.css">'
-                f'<link rel="stylesheet" href="{FIX}/css/fixture.css">')
+    css = ["kc-blog-base.css", f"kc-blog-{direction}.css"]
+    if direction == "d":
+        css.insert(1, "kc-blog-a.css")  # the Keep reading and index rows
+    head_add = f'<script>{SURFACE_JS}</script>' + "".join(f'<link rel="stylesheet" href="{FIX}/css/{c}">' for c in css)
+    if direction == "d" and home:
+        # what the homepage head adds for its end CTA: Loop's widget styles (theme.liquid prints
+        # them for product, index and collection only; Phase 2 adds article)
+        head_add += '<link rel="stylesheet" href="/assets/loop-widget.css">' + (home["loopStyle"] or "")
+    head_add += f'<link rel="stylesheet" href="{FIX}/css/fixture.css">'
     s = s.replace("</head>", head_add + "</head>", 1)
     s = re.sub(r"(<main\b[^>]*>).*?(</main>)", lambda m: m.group(1) + main + m.group(2), s, count=1, flags=re.S)
-    tail = f'<script src="{FIX}/js/fixture.js"></script>'
+    # the theme's own navigation script: it publishes the floating bar's position and clearance
+    tail = f'<script src="{FIX}/js/fixture.js"></script><script src="/assets/kc-navigation.js"></script>'
     if direction in ("a", "b"):
         tail += f'<script src="{FIX}/js/kc-blog-toc.js"></script>'
+    if direction == "d":
+        tail += f'<script src="{FIX}/js/kc-blog-contents.js"></script>'
     s = s.replace("</body>", tail + "</body>", 1)
     return s
 
@@ -335,8 +402,8 @@ def write(name, text):
     print("wrote", os.path.relpath(out, ROOT), len(text))
 
 
-builders = {"a": (a_article, a_blog), "b": (b_article, b_blog), "c": (c_article, c_blog)}
-names = {"a": "Quiet column", "b": "Editorial with a reading rail", "c": "Research notebook"}
+builders = {"a": (a_article, a_blog), "b": (b_article, b_blog), "c": (c_article, c_blog), "d": (d_article, d_blog)}
+names = {"a": "Quiet column", "b": "Editorial with a reading rail", "c": "Research notebook", "d": "Editorial (reference)"}
 for d, (art, blog) in builders.items():
     for handle in order:
         write(link(handle, d), shell("article", f"Blog {d.upper()} · {names[d]} · {articles[handle]['title'][:40]}", art(handle), d))
@@ -345,7 +412,7 @@ for d, (art, blog) in builders.items():
 idx = ["<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Blog fixture</title>",
        "<style>body{font:16px/1.5 system-ui;margin:24px;max-width:760px}a{color:#191f38}li{margin:4px 0}</style>",
        "<h1>Blog layout fixture</h1><p>Add <code>?mode=night</code>, <code>?labels=site</code>, <code>?noimage=1</code> or <code>?fluid=1</code> to any page.</p>"]
-for d in "abc":
+for d in "dabc":
     idx.append(f"<h2>{d.upper()} · {names[d]}</h2><ul>")
     idx.append(f'<li><a href="{d}-article.html">Article: nano-hydroxyapatite (long, small featured image)</a> · <a href="{d}-article.html?mode=night">night</a></li>')
     idx.append(f'<li><a href="{link("morning-and-night-time-brushing-why-timing-matters", d)}">Article: morning and night brushing (short)</a></li>')
