@@ -464,18 +464,8 @@ body.night-mode {
   --kc-heading-second-tone: color-mix(in srgb, var(--kc-mapped-text-default-heading) 68%, var(--kc-mapped-surface-page));
 }
 
-/* Link hover colour (Astra R88b B3). The hover token is #7fb9ff in both modes: on the cream Day
-   page that is 1.9-2.0:1. In Day a hovered link keeps its navy text and shows the hover with its
-   underline (the rule below); in Night it turns #7fb9ff as before (5.5-8:1). No new colour. */
-body,
-body.day-mode {
-  --kc-link-hover-color: var(--kc-mapped-text-link-default);
-}
-body.night-mode {
-  --kc-link-hover-color: var(--kc-mapped-text-link-default-hover);
-}
-
-/* Day: every link that reads --kc-link-hover-color shows hover as a heavier, lower underline */
+/* Day: every link that turns --kc-mapped-text-link-default-hover (#0061d6 in Day, Victor 26 Oct)
+   also shows hover as a heavier, lower underline, so the hover never rests on colour alone */
 body:not(.night-mode) :is(.link, .underlined-link, .customer a, .inline-richtext a, .rte a, .mobile-facets__open, .sc-try-once, .kc-lgn__link, .care-comes-back__terms, .km-footer-links a, .km-footer-field__submit, .km-footer-locale__link, .km-footer-legal__links a, .consumer-rights__card-link):hover {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
@@ -812,7 +802,7 @@ details>* {
 .underlined-link:hover,
 .customer a:hover,
 .inline-richtext a:hover {
-  color: var(--kc-link-hover-color);
+  color: var(--kc-mapped-text-link-default-hover);
   text-decoration-thickness: 0.2rem;
 }
 
@@ -3096,7 +3086,7 @@ details-disclosure>details {
 }
 
 .rte a:hover {
-  color: var(--kc-link-hover-color);
+  color: var(--kc-mapped-text-link-default-hover);
   text-decoration-thickness: 0.2rem;
 }
 
