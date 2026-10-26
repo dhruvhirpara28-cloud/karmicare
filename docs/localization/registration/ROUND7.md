@@ -1,5 +1,7 @@
 # Round 7 · PDP trust pills, practitioner form
 
+**Change 26 Oct, pills only (landing desk, Victor):** the practitioner form moves off the PDP to a new professionals page, so its `request_*` settings will leave the product templates. The 13 new `request_*` settings of this round are held in `holds.json` on both templates in NL and FR (52 holds). Their translations below stay in the payloads for the new page. The round 3 `request_*` keys were registered earlier and are left as they are. The plans now register only the two pills. Expected: **2 keys per language** (`text_1` changed, `text_5` new), plus the byte-only re-registers.
+
 **Built** 26 Oct 2026 against live main `57e6588` (release 11; merchant-edit `6486f4b`, landings 68–69), theme `187295564157`. Brief from the landing desk, 26 Oct. Victor runs the dry runs; the desk checks them before the write. No Admin edits between dry run and write.
 
 ## PDP trust pills (`product.subscription-item`, highlights slider)
