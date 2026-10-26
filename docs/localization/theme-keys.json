@@ -344,13 +344,18 @@
    "ids": [
     "liquid:sections/footer.liquid:679"
    ],
-   "en": "Join",
-   "nl": "Doe mee",
+   "en": "Sign up",
+   "nl": "Inschrijven",
    "nl_hold": null,
    "fr": "S’inscrire",
    "fr_hold": null,
    "nl_review": null,
-   "fr_review": null
+   "fr_review": null,
+   "decided": {
+    "nl": "Inschrijven",
+    "fr": "S’inscrire",
+    "by": "Victor, 25 Oct (worker terminal, relayed by the landing desk): 'de knop moet zeggen: Sign up, Inschrijven, en het equivalent in frans'"
+   }
   },
   {
    "key": "kc.footer.language",
@@ -423,6 +428,36 @@
    "fr": "Nous n’avons pas pu confirmer votre inscription. Veuillez réessayer dans un instant.",
    "fr_hold": null,
    "note": "Shown in the footer's role=alert region when the Klaviyo answer is unclear (timeout, 401/403/404/429/5xx, network): the address stays, no native submit (R46-B4). Plain text in a data-msg-retry attribute, which the global lane adds with the activation (R46c). Victor 24 Oct.",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.legal_guarantee",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.legal_guarantee"
+   ],
+   "en": "Your legal guarantee rights",
+   "nl": "Je wettelijke garantierechten",
+   "nl_hold": null,
+   "fr": "Vos droits à la garantie légale",
+   "fr_hold": null,
+   "note": "Footer legal row link text; sections/footer.liquid uses it when the setting legal_guarantee_label is blank (global-footer lane, 25 Oct). Replaces the registration of footer-group:footer/legal_guarantee_label, which the live footer-group never stores.",
+   "nl_review": null,
+   "fr_review": null
+  },
+  {
+   "key": "kc.footer.legal_withdrawal",
+   "area": "footer",
+   "ids": [
+    "locale:kc.footer.legal_withdrawal"
+   ],
+   "en": "Withdraw from contract here",
+   "nl": "Hier de overeenkomst herroepen",
+   "nl_hold": null,
+   "fr": "Renoncer au contrat ici",
+   "fr_hold": null,
+   "note": "Footer legal row link text; sections/footer.liquid uses it when the setting legal_withdrawal_label is blank (global-footer lane, 25 Oct). Replaces the registration of footer-group:footer/legal_withdrawal_label, which the live footer-group never stores.",
    "nl_review": null,
    "fr_review": null
   },
@@ -714,10 +749,10 @@
    "ids": [
     "liquid:sections/main-product.liquid:989"
    ],
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg.",
    "nl_hold": null,
-   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins, jamais pour votre facture dentaire.",
+   "fr": "Le Care Credit est un crédit Karmicare : dépensez-le en soins.",
    "fr_hold": null,
    "note": "Default of the sticky_cart setting credit_info. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
    "nl_review": null,
@@ -874,51 +909,6 @@
    "fr_review": null
   },
   {
-   "key": "kc.sticky_cart.price_once_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:966"
-   ],
-   "en": "[price] one time",
-   "nl": "[price] eenmalig",
-   "nl_hold": null,
-   "fr": "[price] en une fois",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_once. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.price_rhythm_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:954"
-   ],
-   "en": "[price] every 60 days",
-   "nl": "[price] om de 60 dagen",
-   "nl_hold": null,
-   "fr": "[price] tous les 60 jours",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_rhythm. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
-   "key": "kc.sticky_cart.price_year_html",
-   "area": "sticky_cart",
-   "ids": [
-    "liquid:sections/main-product.liquid:960"
-   ],
-   "en": "[price] per year",
-   "nl": "[price] per jaar",
-   "nl_hold": null,
-   "fr": "[price] par an",
-   "fr_hold": null,
-   "note": "Default of the sticky_cart setting price_year. _html: t returns it unescaped for the JSON config (read as textContent); HTML uses escape.",
-   "nl_review": null,
-   "fr_review": null
-  },
-  {
    "key": "kc.sticky_cart.stop_rhythm_html",
    "area": "sticky_cart",
    "ids": [
@@ -1010,6 +1000,9 @@
   }
  ],
  "retired_keys": {
-  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)"
+  "kc.sticky_cart.kit_free_html": "retired 21 Oct: global-nav 27691cb (NV-13) makes the desktop sticky bar the mobile card and removes the setting kit_free and its markup (liquid:sections/main-product.liquid:1104)",
+  "kc.sticky_cart.price_rhythm_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup (liquid:sections/main-product.liquid:954)",
+  "kc.sticky_cart.price_year_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup (liquid:sections/main-product.liquid:960)",
+  "kc.sticky_cart.price_once_html": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup (liquid:sections/main-product.liquid:966)"
  }
 }

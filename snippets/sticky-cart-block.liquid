@@ -46,9 +46,6 @@
   assign sc_copy_title_rhythm = 'kc.sticky_cart.title_rhythm_html' | t
   assign sc_copy_title_year = 'kc.sticky_cart.title_year_html' | t
   assign sc_copy_title_once = 'kc.sticky_cart.title_once_html' | t
-  assign sc_copy_price_rhythm = 'kc.sticky_cart.price_rhythm_html' | t
-  assign sc_copy_price_year = 'kc.sticky_cart.price_year_html' | t
-  assign sc_copy_price_once = 'kc.sticky_cart.price_once_html' | t
   assign sc_copy_credit = 'kc.sticky_cart.credit_html' | t
   assign sc_copy_credit_checkup = 'kc.sticky_cart.credit_checkup_html' | t
   assign sc_copy_credit_info = 'kc.sticky_cart.credit_info_html' | t
@@ -154,10 +151,6 @@
         <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><line x1="10" x2="10" y1="15" y2="9"/><line x1="14" x2="14" y1="15" y2="9"/></svg>
         <span data-sc="stop"></span>
       </li>
-      <li class="sc-row" data-sc-row="brushing">
-        <svg class="sc-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>
-        <span data-sc="brushing"></span>
-      </li>
     </ul>
     <button type="submit" form="scCtaForm" class="sc-cta sc-cta--panel" data-sc-cta>
       <span data-sc="cta"></span>
@@ -199,9 +192,6 @@
         "title_rhythm": {{ block.settings.title_rhythm | default: sc_copy_title_rhythm | json }},
         "title_year": {{ block.settings.title_year | default: sc_copy_title_year | json }},
         "title_once": {{ block.settings.title_once | default: sc_copy_title_once | json }},
-        "price_rhythm": {{ block.settings.price_rhythm | default: sc_copy_price_rhythm | json }},
-        "price_year": {{ block.settings.price_year | default: sc_copy_price_year | json }},
-        "price_once": {{ block.settings.price_once | default: sc_copy_price_once | json }},
         "credit": {{ block.settings.credit | default: sc_copy_credit | json }},
         "credit_checkup": {{ block.settings.credit_checkup | default: sc_copy_credit_checkup | json }},
         "credit_info": {{ block.settings.credit_info | default: sc_copy_credit_info | json }},
@@ -381,7 +371,8 @@
       var cut = plain ? -1 : title.indexOf(' · ');
       setText('name', cut === -1 ? title : title.slice(0, cut));
       setText('rest', cut === -1 ? '' : title.slice(cut));
-      setText('price', plain ? money(state.price) : fill(copy['price_' + state.type], { price: money(state.price) }));
+      // Every plan's price line is its price per brushing (Victor, 25 Oct)
+      setText('price', plain ? money(state.price) : fill(copy.per_brushing, { per_brushing: money(state.perBrushing) }));
       var credit =
         once || state.credit <= 0
           ? copy.panel_label
@@ -400,8 +391,6 @@
       bar.querySelector('[data-sc-row="guarantee"]').hidden = plain;
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
       bar.querySelector('[data-sc-row="stop"]').hidden = once;
-      setText('brushing', fill(copy.per_brushing, { per_brushing: money(state.perBrushing) }));
-      bar.querySelector('[data-sc-row="brushing"]').hidden = plain;
       setText('cta', plain ? cfg.buttonText || '' : copy['cta_' + state.type]);
       // Try once only where one time can be bought: not on subscription-only products
       var tryOnceText = !once && !cfg.requiresPlan && state.oneTimePrice != null ? fill(copy.try_once, { price: money(state.oneTimePrice) }) : '';

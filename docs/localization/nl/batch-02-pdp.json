@@ -2,14 +2,14 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "40ad1a7a769a6ec777e38e3c26cc54518d29c3d3",
- "source_entries": 498,
+ "source_digest": "e4d806146e401d40a2befeeabdcb7d1eef6a1ad5",
+ "source_entries": 524,
  "counts": {
-  "translated": 136,
+  "translated": 163,
   "pending-claim-review": 24,
-  "held": 39,
+  "held": 41,
   "dawn-nl": 15,
-  "theme-key": 34,
+  "theme-key": 31,
   "admin": 250
  },
  "fit_risk": [
@@ -398,12 +398,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.info_card_FnBcaN.settings.footer_text",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
-   "en_sha1": "dd4d7b081aca9baad049ac6cbfe719cec1aa1166",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.&nbsp;",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.&nbsp;",
+   "en_sha1": "86c9b2142fafd96ab8a000cab28cf29223d40c65",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.&nbsp;",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: Karmicare credit → Karmicare-tegoed (never 'korting')."
+   "notes": "TERM: Karmicare credit → Karmicare-tegoed (never 'korting').; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "product.subscription-item:main/professional_testimonials_block/heading",
@@ -1318,12 +1318,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
-   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "",
-   "status": "held",
+   "en": "XYLITOL CRYSTALS",
+   "en_sha1": "050e880a66c51bc59d0a1e98be90179219ae5f9c",
+   "nl": "XYLITOLKRISTALLEN",
+   "status": "translated",
    "flags": [],
-   "notes": "EN repeats the dentine badge on the xylitol card; check the image.; retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN"
+   "notes": "EN repeats the dentine badge on the xylitol card; check the image.; retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN; un-retired 25 Oct with the new EN 'XYLITOL CRYSTALS' (landing 55); NL from the glossary"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_Hi7YUD/subheading",
@@ -1426,12 +1426,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
-   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
+   "en": "DENTINE TUBULES",
+   "en_sha1": "526bbfe73690770dfb63072c6a7b369415a71169",
+   "nl": "DENTINEKANAALTJES",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN; un-retired 25 Oct with the new EN 'DENTINE TUBULES' (landing 55); NL from the glossary"
   },
   {
    "id": "product.subscription-item:research_behind_system_EkjATL/card_JeERX6/subheading",
@@ -1534,12 +1534,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
-   "en": "DENTINE TUBULES - OPEN AND OCCLUDED",
-   "en_sha1": "866529fd08a4206843f62ae1064b6a9f30c558a7",
-   "nl": "DENTINEKANAALTJES · OPEN EN AFGESLOTEN",
+   "en": "ORAL MUCOSA",
+   "en_sha1": "cfa35cc727bab180a785fb9db82f0439d6a6e365",
+   "nl": "MONDSLIJMVLIES",
    "status": "translated",
    "flags": [],
-   "notes": "EN has '-' here and '·' on the other cards; NL uses '·' throughout. Also the dentine badge on the SLS card; check the image."
+   "notes": "EN has '-' here and '·' on the other cards; NL uses '·' throughout. Also the dentine badge on the SLS card; check the image.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES - OPEN AND OCCLUDED'; was translated: DENTINEKANAALTJES · OPEN EN AFGESLOTEN; un-retired 25 Oct with the new EN 'ORAL MUCOSA' (landing 55); NL from the glossary"
   },
   {
    "id": "product.subscription-item:featured_product_Eb93Xa/title_GDDYEK/custom_title",
@@ -1780,12 +1780,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.care_comes_back.settings.fine_print",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-   "en_sha1": "3457ca8e4385e92fab539b3c1d66dbd02a9af54f",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
+   "en": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+   "en_sha1": "b0e949c2f320f778f831039ef5397ead8265e67e",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg. Het beloont het bezoek, niet de uitslag. Geen verzekering, en geen betaling voor een behandeling.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "product.subscription-item:care_comes_back/terms_link_label",
@@ -2231,12 +2231,10 @@
    "key_path": "sections/main-product.liquid:954",
    "en": "[price] every 60 days",
    "en_sha1": "f9a8cf8682a68e8baf3193dcddadab28534783ca",
-   "nl": "[price] om de 60 dagen",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_rhythm and its markup; was theme-key: [price] om de 60 dagen"
   },
   {
    "id": "liquid:sections/main-product.liquid:960",
@@ -2245,12 +2243,10 @@
    "key_path": "sections/main-product.liquid:960",
    "en": "[price] per year",
    "en_sha1": "22efce5598d283c7ff4dbdbda9817a76b50b161b",
-   "nl": "[price] per jaar",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_year and its markup; was theme-key: [price] per jaar"
   },
   {
    "id": "liquid:sections/main-product.liquid:966",
@@ -2259,12 +2255,10 @@
    "key_path": "sections/main-product.liquid:966",
    "en": "[price] one time",
    "en_sha1": "5d23613e7853930b9b53fe2b92d75ac326234895",
-   "nl": "[price] eenmalig",
-   "status": "theme-key",
-   "flags": [
-    "theme-key"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: pdp R77d a290153 and R77f cd4db79 (integration 0899fb9, landings 63 and 65) show the price per brushing for every plan and remove the setting price_once and its markup; was theme-key: [price] eenmalig"
   },
   {
    "id": "liquid:sections/main-product.liquid:977",
@@ -2299,14 +2293,14 @@
    "resource_type": "theme_locale",
    "file_or_handle": "sections/main-product.liquid",
    "key_path": "sections/main-product.liquid:989",
-   "en": "Care Credit is Karmicare credit: spend it on more care, never on your dental bill.",
-   "en_sha1": "df8aa43d134f27aadd9ed60070d77ef9ceb16928",
-   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg, nooit aan je tandartsrekening.",
+   "en": "Care Credit is Karmicare credit: spend it on more care.",
+   "en_sha1": "0e3375079a41a1fd5d559989a0c6e957bfa00297",
+   "nl": "Care Credit is Karmicare-tegoed: besteed het aan meer zorg.",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "; 25 Oct: 'nooit aan je tandartsrekening' removed with the EN (Victor, 25 Oct)"
   },
   {
    "id": "liquid:sections/main-product.liquid:995",
@@ -3035,30 +3029,30 @@
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "title",
-   "en": "Morning Toothbrush 2.0",
-   "en_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
-   "nl": "Ochtendtandenborstel 2.0",
+   "en": "Morning Toothbrush",
+   "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
+   "nl": "Ochtendtandenborstel",
    "status": "admin",
    "flags": [
     "admin",
     "fit-risk"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN); Width (R2, review F7): 22 → 24 chars, and 'Ochtendtandenborstel' is one 20-letter word with no break point, where the EN can wrap between 'Morning' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN); Width (R2, review F7): 22 → 24 chars, and 'Ochtendtandenborstel' is one 20-letter word with no break point, where the EN can wrap between 'Morning' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow; 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:evening-toothbrush-2-0:title",
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "title",
-   "en": "Evening Toothbrush 2.0",
-   "en_sha1": "57257b08045994042e5eb82673a6313ed48189fd",
-   "nl": "Avondtandenborstel 2.0",
+   "en": "Evening Toothbrush",
+   "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
+   "nl": "Avondtandenborstel",
    "status": "admin",
    "flags": [
     "admin",
     "fit-risk"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title; Width, not length (R2, review F7): 22 chars in both languages, but 'Avondtandenborstel' is one 18-letter word with no break point, where the EN can wrap between 'Evening' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title; Width, not length (R2, review F7): 22 chars in both languages, but 'Avondtandenborstel' is one 18-letter word with no break point, where the EN can wrap between 'Evening' and 'Toothbrush'; in the narrow Welcome Kit rows of the buy box and sticky bar it can overflow; 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:whitening-charcoal-dental-floss:title",
@@ -6715,6 +6709,318 @@
    "status": "translated",
    "flags": [],
    "notes": "NL = Mariama Seco Banjai's own Dutch original (17 Sep and 23 Oct, verbatim; Figma KC | Brand Design Library, Ambassadors page 3947:17082 4063:10)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_trigger_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_trigger_text",
+   "en": "evidence pack",
+   "en_sha1": "e6a3562addd7d50b4ac6bb8f3f4f4e9475455ac2",
+   "nl": "studiedossier",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_title",
+   "en": "Request the practitioner pack",
+   "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
+   "nl": "Vraag het pakket voor zorgverleners aan",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_intro",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_intro",
+   "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+   "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
+   "nl": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_name",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_name",
+   "en": "Name",
+   "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
+   "nl": "Naam",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_profession",
+   "en": "Profession and practice",
+   "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
+   "nl": "Beroep en praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_help_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_help_profession",
+   "en": "For example kPNI therapist, practice name",
+   "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
+   "nl": "Bijvoorbeeld kPNI-therapeut, naam van de praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_email",
+   "en": "Email",
+   "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+   "nl": "E-mailadres",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_phone",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_phone",
+   "en": "Phone (optional)",
+   "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
+   "nl": "Telefoon (optioneel)",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_legend_wants",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
+   "en": "What would you like?",
+   "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
+   "nl": "Wat wil je ontvangen?",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_help_wants",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_help_wants",
+   "en": "Choose one or both.",
+   "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
+   "nl": "Kies er één of beide.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_pack",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_pack",
+   "en": "Evidence pack",
+   "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
+   "nl": "Studiedossier",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_samples",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_samples",
+   "en": "Samples for my practice",
+   "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
+   "nl": "Proefpakketten voor mijn praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_address",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_address",
+   "en": "Practice address (needed for samples)",
+   "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
+   "nl": "Praktijkadres (nodig voor de proefpakketten)",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_message",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_message",
+   "en": "Message (optional)",
+   "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
+   "nl": "Bericht (optioneel)",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_privacy_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
+   "en": "We only process these details to answer your request. More in our [privacy].",
+   "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
+   "nl": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_privacy_link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
+   "en": "Privacy Policy",
+   "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+   "nl": "privacybeleid",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_button",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_button",
+   "en": "Send request",
+   "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
+   "nl": "Aanvraag versturen",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_name",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_name",
+   "en": "Please fill in your name.",
+   "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+   "nl": "Vul je naam in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession",
+   "en": "Please fill in your profession and practice.",
+   "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
+   "nl": "Vul je beroep en praktijk in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_email",
+   "en": "Please fill in your email address.",
+   "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+   "nl": "Vul je e-mailadres in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_email_format",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
+   "en": "Please enter a valid email address.",
+   "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+   "nl": "Vul een geldig e-mailadres in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_wants",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_wants",
+   "en": "Choose the evidence pack, samples or both.",
+   "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
+   "nl": "Kies het studiedossier, proefpakketten of beide.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_address",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_address",
+   "en": "Please fill in the practice address for the samples.",
+   "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
+   "nl": "Vul het praktijkadres in voor de proefpakketten.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_generic",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_generic",
+   "en": "Your request was not sent. Please check the details below and try again.",
+   "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
+   "nl": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_success_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_success_title",
+   "en": "Request received",
+   "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
+   "nl": "Aanvraag ontvangen",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_success_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_success_text",
+   "en": "Thank you. We reply by email to the address you gave.",
+   "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
+   "nl": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
   }
  ]
 }

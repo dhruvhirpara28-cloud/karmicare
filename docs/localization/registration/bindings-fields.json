@@ -17065,6 +17065,58 @@
       "complete": false
      }
     }
+   },
+   "gid://shopify/Metaobject/565000274301|designation": {
+    "proposal_hash": "aad5da809e6036126101d834cbbf51a641019d708aeb0df310d0e1703578457e",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.professional_testimonials",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203251815711101",
+        "via": "custom.professional_testimonials",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/565000274301",
+        "to_type": "professional_testimonial",
+        "to_handle": "leen-ponet"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/565000274301",
+      "type": "professional_testimonial",
+      "handle": "leen-ponet"
+     },
+     "field": {
+      "key": "designation",
+      "en_sha1": "1f28a427ed0b2bb948f984062dbbbefb2ebc587a",
+      "en_digest": "089220774e23f46f77295526d2c74cac745509755907d577022ab80131c5168c"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        54
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#02"
+       ],
+       "en": "Pharmacist, Orthomolecular Therapist, kPNI Coordinator",
+       "value": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
+     "scope": {
+      "complete": false
+     }
+    }
    }
   }
  }

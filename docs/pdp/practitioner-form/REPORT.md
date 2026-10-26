@@ -1,0 +1,595 @@
+# R76: practitioner request form in the kPNI FAQ item
+
+## R76h: option labels wrap safely (Astra R76g N1)
+
+The landing desk relayed Astra's R76g non-blocker N1: at 360px a long Dutch label such as
+"Orthomoleculair of natuurgeneeskundig therapeut" overflows its 152px column. Fix in
+`assets/kc-practitioner-request.css`, scoped to `.kc-pr__options`:
+- the option label (the grid item) gets `min-width: 0`;
+- its text span gets `min-width: 0`, `overflow-wrap: anywhere` and `hyphens: auto`.
+
+`hyphens: auto` follows the page language, which Shopify sets on `<html lang>`.
+`overflow-wrap: anywhere` is the last resort for a word that cannot be hyphenated. N2
+(URL-first matching across the whole FAQ) stays as it is, per the landing desk.
+
+### R76h checks
+
+Fixture changes for this check:
+- the pages now carry `lang="nl"` and `lang="fr"`;
+- the NL/FR stand-ins have long profession labels. These are length tests, not proposed copy;
+  the real NL/FR text comes from source-copy.
+
+The script `scratchpad/fx/wrap.sh` measures each option's label box and the right edge of its
+text lines against its grid column. Results are in `results/r76h-wrap.txt`.
+
+| Case | Column | Result |
+|---|---|---|
+| NL at 360, "Orthomoleculair of natuurgeneeskundig therapeut" | 152px | pass: 3 lines, 0px overflow; "Mondhygiënist" 1 line |
+| NL at 390 | 167px | pass: 3 lines, 0px overflow |
+| FR at 360, "Praticien en orthomoléculaire ou naturopathie", "Hygiéniste bucco-dentaire" | 152px | pass: 3 and 2 lines, 0px overflow |
+| FR at 390 | 167px | pass |
+| NL at 360, 43-character word without a break ("Orthomoleculairnatuurgeneeskundigtherapeut") | 152px | pass: broken over 3 lines, 0px overflow, no horizontal scroll in the dialog |
+| Negative control: the same pages with the R76h rule switched off | 152px | fails as Astra reported: the real NL label overflows by 14px; the 43-character word overflows by 183px and gives the dialog a horizontal scroll |
+
+**Regression**: pass. The suites ran at en-default Day 390 and Night 1440, nl-default 390,
+fr-error 390 and en-nojs. The fixture's `fxShow` now tolerates the page's infinite marquee
+animation.
+
+**Theme Check**: exit 0, 19 baseline warnings.
+
+## R76g: compact options in two columns; the "For dentists" link opens the same form
+
+Victor, 25 Oct:
+- "kan je bullets en checkboxes dichter bij elkaar zetten 8px tussen, en ook in twee kolommen
+  zodat het formulier niet te lang word"
+- "deze link bij dentists moet eigenlijk hetzelfde formulier krijgen" (the link "Request the
+  evidence pack, patient-ready materials, professional samples and technical documentation →"
+  in the "For dentists" item).
+
+**Options** (`snippets/kc-practitioner-request.liquid`, `assets/kc-practitioner-request.css`):
+- The radios and the two checkboxes sit in a `.kc-pr__options` grid of two columns, 8 px
+  between the rows and 16 px between the columns.
+- An option's minimum height is now 24 px (the WCAG 2.2 AA target size; it was 44 px). The
+  control is centred on the first line of its label, and a long label wraps under itself.
+- The "Other" field now runs full width under the options.
+
+**Dentists link** (`assets/kc-practitioner-request.js`):
+- `findTriggers()` now returns every matching link in the FAQ, in the answers and in the
+  section content of all items. The dentists link sits in the section content and matches on
+  "evidence pack".
+- Each link becomes a button with its own classes, so the dentists one keeps `.rda-link` and
+  its look. All buttons open the one dialog.
+- Focus returns to the button that opened the form.
+- A new hidden field, `contact[Opened from]`, gets the FAQ question above that button. It is
+  posted to the inbox and sent to Klaviyo as `opened_from`; the internal alert shows it.
+- After a post, the snapshot remembers the button. The reload opens its FAQ item behind the
+  dialog, and closing returns focus there.
+- If `showModal()` throws, every link comes back as it was. Without JavaScript the dentists
+  link stays unchanged.
+- No new settings and no copy change.
+
+### R76g checks
+
+The fixture now stamps asset URLs per render, because the browser had served a cached script.
+The earlier R76e/f runs did use the current code (signal and radios were present).
+
+| Case (`results/r76g-dentists.txt`) | Result |
+|---|---|
+| Two triggers | pass: the dentists button keeps `rda-link` (inline-block, underlined), has `aria-haspopup=dialog` and `aria-controls`, and no old link is left |
+| Open from dentists | pass: the dialog opens with focus on the title and "Opened from: For dentists"; closing returns focus to the dentists button and unlocks the page |
+| Open from kPNI | pass: "Opened from" follows; focus returns to the kPNI button |
+| Submit from dentists, thank-you reload | pass: posted `contact[Opened from]` = For dentists; the dialog reopens with the dentists item open behind; Klaviyo `opened_from` = For dentists; closing focuses the dentists button |
+| `showModal()` throws | pass: no buttons left, the dentists link is back with `href="#"`, the form is inline, nothing is locked, no errors |
+| No JavaScript | pass: the dentists link is unchanged |
+| Two-column layout (390 and 1440) | pass: 2 columns, 4 rows, 8 px between rows, the checkboxes on one row, no horizontal overflow; the dialog content is about 1,190 px tall |
+
+**Regression** (`results/r76g-regression-2.txt`): all pass.
+- The fixture suites run at en-default Day 390 and Night 1440, en-success Day 390, en-error
+  Night 750 and Day 1440, en-nojs, nl-default and fr-error.
+- `showModal()` throwing or missing passes too.
+- The R76f timeout cases pass: the hanging call is aborted after 8,003 ms and its timer
+  cleared.
+- Klaviyo cases 1–8 pass.
+- The old R76 check "dentists item has no form or trigger" was rewritten for the new
+  requirement. The dentists link is now a trigger, the form stays in the kPNI item, and
+  without JavaScript or `showModal()` the link stays.
+
+**Theme Check**: exit 0, 19 baseline warnings.
+
+## R76f: the Klaviyo call is aborted after 8 s (Astra R76d B1)
+
+Blocker B1 (`docs/runtime-review/R76D-PRACTITIONER-KLAVIYO-ASTRA.md`): the Klaviyo fetch had
+`keepalive` but no bounded request. `assets/kc-practitioner-request.js` `sendEvent()` now follows
+`assets/kc-withdrawal.js`:
+- an `AbortController` aborts the call after 8,000 ms (`KLAVIYO_TIMEOUT`), and its signal goes to
+  `fetch` next to `keepalive`;
+- the timer is cleared as soon as the call settles, whether it is answered, refused or aborted;
+- on a refusal or abort there is no retry and no uncaught rejection. The sessionStorage snapshot
+  was already consumed before the call, and is cleared again;
+- the thank-you is shown and focused by the same synchronous setup as before and never waits
+  for the call.
+
+Also, Astra N3: the stale statements in this report (R76d, "no flow") and in KLAVIYO-FLOW §2
+("in every case") were corrected. N1 (privacy copy naming Klaviyo) stays with gate-legal; N2
+(data minimisation) is for when the emails are final.
+
+### R76f checks
+
+The fixture `fx.js` gained `?klaviyo=hang|reject`. The stub records the signal, the abort time,
+the 8-second timer and whether it is cleared, the state 100 ms after the call, and unhandled
+rejections (`scratchpad/fx/timeout.sh`, `results/r76f-timeout.txt`).
+
+| Case | Result |
+|---|---|
+| Hanging fetch | pass: 100 ms after the call, while it is still pending, the thank-you is shown in the open dialog and focused. The call has a signal and `keepalive`, is aborted after **8,002 ms**, and its timer is cleared. 0 unhandled rejections, 0 page errors, snapshot gone; afterwards close returns focus to the button and reopening works |
+| Refused fetch | pass: one call, timer cleared, 0 unhandled, 0 errors, snapshot gone, the page works |
+| Answered (202) | pass: one call, timer cleared, 0 errors |
+| Regression | pass: en-default Day 390, en-success Night 750, en-error Day 1440, en-nojs; Klaviyo cases 1–8 unchanged |
+
+Theme Check: exit 0, 19 baseline warnings.
+
+## R76e: profession as radio buttons, with Other
+
+Victor, 25 Oct: "make radiobuttons of the profession and add Other also". The combined free-text
+field "Profession and practice" becomes two fields:
+
+- **Profession** (required): seven radio buttons, Dentist, Dental hygienist, kPNI therapist,
+  Orthomolecular or naturopathic practitioner, General practitioner, Pharmacist, Other.
+  - With "Other", a text field "Your profession" shows and becomes required.
+  - Without JavaScript that field is always visible; the radios carry native `required`.
+- **Practice name** (required): its own text field.
+
+What is sent and stored:
+- **Posted values** are fixed English words (`contact[Profession]`), so every language arrives
+  the same way. `contact[Profession (other)]` and `contact[Practice name]` carry the two text
+  fields. The labels the visitor reads are settings.
+- **Klaviyo event**: gains `profession` (English value), `profession_other`, `profession_label`
+  (what the visitor read, for the confirmation) and `practice_name`.
+- **Klaviyo emails**: both flow emails were updated in Klaviyo. The confirmation shows
+  "Profession" and "Practice name"; the alert shows the English value with the Other text.
+- **After an error reload**, the chosen radio, the Other text and the practice name are
+  restored from the tab's snapshot.
+
+Settings (`product_faq` schema, EN values in both product templates):
+- **New**: `request_legend_profession`, seven `request_profession_*` labels,
+  `request_label_profession_other`, `request_label_practice`, `request_error_profession_choice`,
+  `request_error_profession_other`, `request_error_practice`.
+- **Removed**: `request_label_profession`, `request_help_profession` and
+  `request_error_profession`, from the schema and both templates. Cleanup proof:
+  `git grep -n -E 'request_label_profession[^_]|request_help_profession|request_error_profession[^_]|Profession and practice' -- ':!docs'`
+  finds nothing.
+- **Copy**: the option labels, "Your profession", "Practice name" and the three messages are new
+  EN copy (Victor's request; the option list is the one proposed to him on 25 Oct). NL/FR go
+  through source-copy.
+
+### R76e checks
+
+The fixture validation suite runs on the dialog, plus the no-JS page:
+- **All variants pass**: en-default at 390 and 1440, en-nojs, en-error and en-success.
+- **New profession checks**:
+  - the empty submit shows the profession and practice errors;
+  - with no radio chosen, focus goes to the first radio;
+  - "Other" shows its field and makes it required, and its empty text is blocked;
+  - picking another radio hides the field again;
+  - the posted value is English;
+  - the snapshot holds the value, the label and the practice;
+  - without JavaScript, `required` sits on the radios and the practice field, and the Other field
+    is visible.
+- **Klaviyo event and error-restore cases** (`results/r76e-klaviyo.txt`, fetch stubbed): pass.
+  - R76d cases 1–7 still pass, now with the new properties: `profession: "Dentist"`,
+    `profession_label: "Dentist"`, `practice_name` filled.
+  - Case 8, Other: `profession: "Other"`, with `profession_other` and `profession_label` both
+    `"Osteopath"`.
+  - Case 9, error reload: the Other radio is checked again, its field shows with "Osteopath", the
+    practice name is restored, and no event is sent.
+  - No page errors.
+- **Theme Check**: exit 0, 19 baseline warnings.
+
+## R76d: Klaviyo confirmation and team alert from karmicare.com
+
+Victor, 25 Oct: "we need this to be sent from karmicare domain, and the confirmation to the
+customer via Klaviyo". He chose three things: a Klaviyo alert to the team on top of Shopify's
+copy, the event only after Shopify accepted the post, and one test event to create the metric.
+Everything else (the event, the flow, the texts, the approval) is in
+`docs/pdp/practitioner-form/KLAVIYO-FLOW.md`.
+
+Facts, checked 25 Oct (read-only in Shopify admin, public DNS and Gmail):
+
+- **Sender email.** Shopify's Sender email is `info@karmicare.com`, so requests reach info@.
+  This answers the open point under "Where the requests go" below.
+- **Contact-form sender.** Contact-form mail arrives from `mailer@shopify.com`, whatever domain
+  authentication is set. Shopify sets that sender, so no setting can make it karmicare.com.
+- **Klaviyo sender.** Klaviyo already sends from `we@karmicare.com` over `send.karmicare.com`
+  (active).
+
+Theme change:
+
+- **`assets/kc-practitioner-request.js`:**
+  - On a valid Send, the sessionStorage snapshot now also holds the email, the language, the
+    page, the time and a UUID.
+  - On the thank-you reload, `sendEvent()` sends one event to Klaviyo's client endpoint and
+    clears the snapshot. It uses the same endpoint, revision and key as the withdrawal page.
+  - The profile gets the email only; everything else goes in event properties.
+  - Nothing is sent without a key, without a snapshot, or on the error reload.
+- **`sections/main-product.liquid`** (`product_faq` schema only): two new settings,
+  `request_klaviyo_company_id` and `request_klaviyo_metric`.
+- **`snippets/kc-practitioner-request.liquid`:** passes both settings as `data-klaviyo-*`
+  attributes.
+- **`templates/product.json` and `templates/product.subscription-item.json`:**
+  `request_klaviyo_company_id` = `XfYq2r` (the public key, already exposed by every Klaviyo
+  snippet) and the metric name.
+- **No change** to visible copy or fields. The thank-you text ("We reply by email to the address
+  you gave") promises no confirmation email, so it stays true while the flow waits for approval.
+
+Klaviyo: one test event (`victor+practitioner-test@karmicare.com`, unique_id
+`kc-pr-test-20261025-1`) answered `202` and created the metric `Practitioner Request Submitted`
+(`UaYZem`). At the time no flow existed, so no email went out. The same day the draft flow
+`UAY2YB` was built (KLAVIYO-FLOW §3); it is still in draft, so still nothing is sent.
+
+### R76d checks
+
+The fixture stubs every `klaviyo.com` fetch and records it, so nothing reaches Klaviyo
+(`scratchpad/fx/klaviyo.sh`, results in `results/r76d-klaviyo.txt`).
+
+| Case | Result |
+|---|---|
+| Valid Send | pass: no event at Send; the snapshot holds the email, language `en`, page, time and UUID |
+| Thank-you reload | pass: 1 call to `…/client/events/?company_id=XfYq2r`, revision `2026-10-15`, `keepalive`, profile `{email}` only, all properties as in KLAVIYO-FLOW §2, the UUID from Send; snapshot cleared |
+| Thank-you reloaded again | pass: no second call |
+| Thank-you without a snapshot | pass: no call |
+| Key empty (`en-success-nokey`) | pass: no call, snapshot cleared |
+| Error reload | pass: no call, snapshot used for the fields and cleared |
+| Samples not ticked | pass: `samples: false`, `practice_address` empty |
+| NL page | pass: `language: nl`, page `/nl/products/…` |
+
+No page errors in any case. Theme Check: exit 0, 19 baseline warnings.
+
+## R76c: inline fallback when showModal() fails (Astra R76b B1)
+
+Blocker B1 (`docs/runtime-review/R76-PRACTITIONER-FORM-ASTRA.md`, R76b recheck): if
+`showModal()` threw, the form or the message disappeared (moved into a closed dialog) and the
+page stayed scroll-locked. On the error path it also stopped the setup before the field checks
+were attached. Only `assets/kc-practitioner-request.js` changed. Copy, fields, markup and CSS are
+unchanged.
+
+- `show()` calls `showModal()` inside `try` and adds `body.overflow-hidden` only after it
+  succeeded. A dialog that is already open is not opened again (the existing `!dialog.open`
+  guard), it only gets focus.
+- If `showModal()` throws, `backInline()` restores R76's inline form:
+  - the panel goes back to its place in the FAQ item, marked by a comment node when the dialog
+    was built;
+  - the original link replaces the button;
+  - the dialog and its close listener are removed;
+  - the item is opened.
+  Then the form title, the thank-you or the alert is focused and scrolled into view. Nothing was
+  locked, so nothing needs releasing.
+- After a reload with errors, the dialog now opens as the last step of setup, after every field
+  listener is attached. Whatever happens when it opens, the checks and the restored values are in
+  place.
+- No `showModal()` at all: as in R76b, no dialog is built and the form stays inline.
+
+### R76c checks
+
+The fixture gained `?modal=throw` and `?modal=missing`. An inline script replaces
+`HTMLDialogElement.prototype.showModal` before the deferred theme script runs: with a function
+that throws `InvalidStateError`, or with `undefined`. Uncaught errors are collected. The live
+page's cross-origin CDN scripts report only an anonymous "Script error.", so those are counted
+apart. An error from the theme script is same-origin and reports its message and file.
+
+| showModal | First open (click) | Reopen after success | Reopen after error |
+| --- | --- | --- | --- |
+| throws | pass: no uncaught error; no dialog left; page not locked; original `href="#"` link back, no button; panel inline after the answer in the open kPNI item; focus on the form title; a second click causes no error; the full validation suite passes inline | pass: thank-you inline in the open item, focused; not locked; link back | pass: alert inline, focused; values kept; email marked invalid with its message; `novalidate` set and an emptied name is blocked with its message (the checks are attached) |
+| missing | pass: no dialog, no button, link as is; inline form (visitor opens the item); full validation suite | pass: thank-you inline, focused, not locked | pass: alert inline, focused, values kept, checks attached |
+| works | pass: all R76b dialog checks, plus a second open while open keeps one modal and throws nothing | pass | pass |
+
+- **Where it ran:** 390 and 1440 Day for every cell; throws at 390 Night and 750 Night; missing at
+  750 Night.
+- **Real keys** at 390 with a working dialog are unchanged: Enter and Space open with focus on the
+  title, Tab and Shift+Tab wrap, Escape closes, focus returns, the scroll lock lifts.
+- **Negative control:** the R76b script (`0911f94`) with a throwing `showModal()` fails the same
+  checks in all three states, as Astra reported. There is an uncaught `InvalidStateError`, the
+  dialog is left behind, the page stays locked, and the form or message is not visible. On the
+  error state the checks are missing. So the fixture detects B1, and the fix removes it.
+- **Theme Check:** exit 0, 19 warnings (baseline), none in these files.
+- **N4** (physical touch, virtual keyboard, spoken output) is a verification limit of this setup and
+  stays open as Astra noted.
+
+
+"The practitioner capture form needs to come in a popup, not inline." Built on a3e8789 (merge of
+`karmicare/soft-launch` a8406f5, where R76 landed). Copy, fields and settings are unchanged. The
+R76 notes below still hold, except where this section says otherwise.
+
+**How it works.** The pattern is the professionals quote panel's (`assets/trusted-professionals-quote-panel.js`):
+
+- native `<dialog>` + `showModal()`;
+- the page's scrim token `--kc-mapped-surface-overlay-scrim`;
+- `body.overflow-hidden` for the scroll lock;
+- the KC/Button close (40 × 40 on surface/accent, `kc-icon-close.svg`), labelled with the existing
+  locale key `accessibility.close` (Close / Sluiten / Fermer). That is why no new setting was needed.
+
+What the script does (`assets/kc-practitioner-request.js`):
+
+- builds the dialog on `body` and moves the form panel into it. A dialog inside a closed `<details>`
+  would not render.
+- swaps the link for a button with `aria-haspopup="dialog"` and `aria-controls` pointing to the
+  dialog. The dialog has `aria-labelledby` (the form title) and `aria-describedby` (the intro).
+  After a success they point to the thank-you title and text instead.
+- on open, focus goes to the form title (`tabindex="-1"`). On phones that also keeps the keyboard
+  from popping up before the visitor taps a field.
+- Tab and Shift+Tab wrap inside the dialog. Escape, the close button and a click on the scrim close
+  it. A press that starts in a field and ends outside it (a dragged text selection) does not.
+- on close, focus returns to the button and the scroll lock lifts. For the close button and the
+  scrim this happens at once; Escape goes through the browser's `close` event.
+- after the reload that follows a post, the FAQ item is already open behind (Liquid, as R76) and
+  the dialog opens again by itself:
+  - success: the thank-you (`role="status"`, announced) is focused;
+  - Shopify refused it: the alert is focused, the values are kept (from Shopify plus this tab's
+    sessionStorage, as R76).
+
+**Layout** (`assets/kc-practitioner-request.css`):
+
+- 750px and up: a centred panel, `min(560px, 100vw − 32px)` wide, up to `100dvh − 48px` tall,
+  scrolling inside, radius md, page surface.
+- under 750px: a full-width sheet from the bottom edge, radius on top. The form is taller than a
+  phone screen, so it fills the full height. The short thank-you stays a small sheet over the scrim
+  instead of a mostly empty screen.
+- the close button sits on a zero-height sticky bar beside the title, so it floats top right and
+  stays in reach while the panel scrolls.
+- fields keep the R76 styling. Inside the popup the thank-you drops its box, since the panel is
+  the box.
+- opening fades and rises 16px over 0.3s, only under `prefers-reduced-motion: no-preference`.
+  Closing has no animation.
+
+**Without JavaScript** nothing changes from R76: the form shows inline under the answer and the link
+stays `href="#"`. The `<template>` holding the close button is inert, so it shows nothing. Browsers
+without `<dialog>` support also keep the inline form.
+
+**Files:**
+
+- `snippets/kc-practitioner-request.liquid`: the close-button `<template>`, plus ids on the intro
+  and the thank-you title and text.
+- `assets/kc-practitioner-request.js` and `assets/kc-practitioner-request.css`: the dialog.
+- `snippets/product-faq.liquid` needed no change.
+
+**Removed by this change:**
+
+- the inline toggle in the script: `setOpen`, `aria-expanded` and the `kc-pr--js` class on the
+  trigger;
+- the CSS rule `.kc-pr[hidden]`. Nothing sets `hidden` on the panel any more.
+
+Proof: `git grep -n "aria-expanded\|kc-pr--js\|setOpen\|kc-pr\[hidden\]" -- sections snippets layout templates config assets`
+finds only `snippets/sticky-cart-block.liquid`'s own `setOpen` and other components'
+`aria-expanded`. Nothing in the practitioner snippet, CSS or JS, or in `product-faq.liquid`.
+
+### R76b checks
+
+Same fixture as R76, updated: `t` and `inline_asset_content` are stubbed, so the close label and
+icon render. Every variant ran in Day and Night at 390, 750 and 1440.
+
+| Check | Result |
+| --- | --- |
+| Trigger: `aria-haspopup="dialog"`, `aria-controls` → the dialog; starts shut, form not inline | pass |
+| Click opens a modal dialog (`:modal`), focus on the title, scroll locked, labelledby/describedby targets exist, close button labelled | pass |
+| Close button: closes, focus back on the trigger, scroll unlocked | pass |
+| Scrim click closes (750 and 1440); a click on the panel padding or a drag out of a field keeps it open; the 390 form fills the screen, so there is no scrim to click | pass |
+| Size: centred, ≤ 560px, inside the viewport (750, 1440); 390: full width on the bottom edge, full height for the form, content height for the thank-you | pass |
+| Close button still visible and on top when the panel is scrolled to the end | pass |
+| Validation, samples → address, valid Send (all R76 checks) inside the dialog | pass |
+| Success reload: item open behind, dialog open, thank-you focused, labelledby the thank-you title | pass |
+| Error reload: item open behind, dialog open, alert focused, values kept, email message next to the field | pass |
+| No-JS: no dialog, link `href="#"`, form inline, native `required` | pass |
+| No element wider than the panel, no horizontal scroll, EN/NL/FR | pass |
+| Contrast Day/Night (close button included) | AA pass |
+| Real keys: see below | pass |
+
+Real keys (`orca keypress` at 1440, focus started on the trigger), with focus and state after
+each key:
+
+| Key | Focus | Dialog | Page scroll |
+| --- | --- | --- | --- |
+| Enter | form title | open | locked |
+| Tab, Tab | name, then profession | open | locked |
+| Escape | trigger | shut | free |
+| Space | form title | open | locked |
+| Shift+Tab | close button | open | locked |
+| Shift+Tab | Send (wrapped to the end) | open | locked |
+| Tab | close button (wrapped to the start) | open | locked |
+| Tab | name | open | locked |
+| Escape | trigger | shut | free |
+
+As in R76, `:focus-visible` is not observable because the Orca window has no OS focus. The rings
+are in the CSS. The matrix ran 24 variant × mode × width runs, plus NL/FR at 390 and FR Night at
+750: all pass. Theme Check: exit 0, 19 warnings (baseline), none in these files.
+
+The fixture finishes CSS animations before measuring and screenshotting. The Orca tab
+renders no frames between screenshots, so the open animation would otherwise sit on its first frame.
+
+Victor, 24 Oct: "the Practitioner evidence pack and samples available → inside the kpni accordion
+needs a form capture … now it can sent a request straight to victor@karmicare.com".
+
+Branch `karmicare/practitioner-form`, base f4dce75. Theme files only, nothing in Admin.
+
+## What changed
+
+| File | Change |
+| --- | --- |
+| `snippets/kc-practitioner-request.liquid` (new) | The form: Shopify's native `{% form 'contact' %}`, as on the withdrawal page. Success and error states. |
+| `assets/kc-practitioner-request.js` (new) | Turns the trigger link into a toggle button and checks the fields before the post. After the reload it moves focus and scroll to the thank-you or the alert. |
+| `assets/kc-practitioner-request.css` (new) | KC tokens only, Proxima Nova (`--kc-font-role-backbone`). Fields follow `assets/kc-withdrawal.css` at the FAQ answer's scale. |
+| `snippets/product-faq.liquid` | Finds the FAQ item whose answer has the trigger link and renders the form inside it, once. Opens that item after a post. Nothing else changed. |
+| `sections/main-product.liquid` | `product_faq` block schema only (one hunk at line 3306): an on/off checkbox, the two trigger settings and 25 copy settings. |
+| `templates/product.subscription-item.json`, `templates/product.json` | The EN value of every visible string written into `product_faq_block.settings`, so Translate & Adapt gets a key for each (R73). |
+
+## What the live link is today
+
+The brief expected `mailto:victor@karmicare.com`. It is `href="#"`, a link that goes nowhere:
+
+```html
+<a href="#">Practitioner evidence pack and samples available →</a>
+```
+
+The store answered HTTP 429 to both anonymous fetches I made (more than 5 s apart). So the evidence
+is the saved live captures in the other lanes, every one from 22 Oct to 24 Oct 20:30 CEST: EN, NL and
+FR all show `href="#"`. The NL and FR pages still show the English answer text.
+
+What that means here:
+
+- **Matching.** The URL trigger keeps the brief's default `mailto:victor@karmicare.com`, but today
+  no link matches it. The fallback "link text contains `evidence pack`" is what finds the link. The
+  search covers only the answer text (`item.description`) and takes the first item with a match, so
+  the "For dentists" item's link ("Request the evidence pack, patient-ready materials…") cannot catch
+  it, because that link sits in `section_content`. The fixture checks this.
+- **Without JavaScript.** Keeping the link "as it works today" would leave a dead `#`. So the
+  form is not hidden without JavaScript: it shows under the answer text, with native `required`
+  checks on name, profession and email. The link itself stays exactly as it is. With JavaScript the
+  form starts hidden and the link becomes the toggle.
+- **NL and FR.** `request_trigger_text` is written into both templates. If source-copy later
+  translates the answer text in Admin, it should translate this setting too (for example
+  "bewijsdossier"). Otherwise the form still renders, but it stays open under the answer.
+
+## How it behaves
+
+- The theme renders the form once, inside the matching item, right after the answer text. The
+  script swaps the link for a `<button type="button">` with the same content, `aria-expanded` and
+  `aria-controls`. Enter and Space toggle it. The accordion opens and closes as before
+  (`name="faq-accordion"`, the existing click handler unchanged).
+- **Fields.**
+  - Required: name, profession and practice, email.
+  - Optional: phone, message.
+  - "What would you like?" (Evidence pack / Samples for my practice) needs at least one ticked.
+  - Practice address is required only when Samples is ticked. The label says so and the script
+    sets `required`/`aria-required`.
+  - Errors show under each field, `aria-invalid` is set and focus goes to the first problem.
+  - No newsletter or marketing box.
+- **Inbox keys** are fixed English, so every language arrives the same way:
+  - `contact[name]`, `contact[email]`, `contact[phone]`, `contact[body]` (message);
+  - `contact[Profession and practice]`, `contact[Evidence pack]` = Yes,
+    `contact[Samples for my practice]` = Yes, `contact[Practice address for samples]`;
+  - hidden: `contact[Type]` = "Practitioner request: evidence pack / samples",
+    `contact[Language]` (`request.locale.iso_code`), `contact[Page]` (origin + path).
+- **Privacy note.** `[privacy]` in the note becomes a link to `pages['privacy-policy'].url`, else
+  `shop.privacy_policy.url`, the same lookup the footer uses. Shopify prefixes that URL with the
+  page language.
+- **After the post** Shopify reloads the page at `#KcPractitionerRequest`:
+  - Success (`form.posted_successfully?`): the Liquid renders the kPNI item `open` with a thank-you
+    in place of the fields (`role="status"`, `aria-live="polite"`). The script sets the text again
+    so screen readers announce it, then focuses it and scrolls it into view.
+  - Errors (`form.errors`): the item is open and an alert lists Shopify's messages with links to the
+    fields. The email field gets `aria-invalid` and its message. Name, email, phone and message come
+    back from `form.*`. Profession, the ticks and the address are not returned by Shopify, so the
+    script keeps them in this tab's `sessionStorage` for that one reload and clears them at once.
+    Any other page load also clears them.
+- **No clash with other forms.** `form.posted_successfully?` and `form.errors` belong to the form
+  type. The footer newsletter is `{% form 'customer' %}`, which Shopify answers with
+  `customer_posted`, so neither form shows the other's state. No other contact form renders on the
+  PDP templates (`grep "form 'contact'"`: only `sections/contact-form.liquid` and the withdrawal
+  section). If a second contact form were ever added to the PDP, both would show success together.
+- **Kill switch.** Untick "Show the request form" on the block and the snippet renders nothing. The
+  link stays as it is (fixture variant `en-disabled`).
+
+## Where the requests go (Victor checks, nothing changed in Admin)
+
+Shopify sends every contact-form post to the store's customer-facing email address: **Settings →
+General → Store details**, shown as "Sender email" in the current admin (older admins called it
+"Customer email"). The withdrawal statements go to the same inbox. The email arrives as Shopify's
+"New customer message" with the fields above. `Type: Practitioner request: evidence pack / samples`
+tells it apart.
+
+- R76d (25 Oct): the address is `info@karmicare.com`, and the mail comes from
+  `mailer@shopify.com`. The Klaviyo alert of KLAVIYO-FLOW.md adds a copy from karmicare.com.
+- If that address is victor@karmicare.com, nothing to do.
+- If it is care@ (or another inbox), changing it also changes the From address of every order
+  email. The lighter route is a Gmail filter on that inbox: messages containing "Practitioner
+  request: evidence pack" forward to victor@karmicare.com. That is Victor's call.
+- Shopify may show its hCaptcha check before accepting a contact post. That is Shopify's flow and
+  the theme cannot change it.
+
+Victor can confirm the route with one real request from the live PDP once DH has shipped it. I sent
+nothing to the store.
+
+## Copy for Victor's approval (EN)
+
+Peer to peer and evidence first, with few colons or dashes. No commodity words, no claims, numbers
+or new promises. "A person reads every…" follows the withdrawal page's "A person reads every
+message".
+
+| Setting | EN |
+| --- | --- |
+| Title | Request the practitioner pack |
+| Intro | Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email. |
+| Name | Name |
+| Profession | Profession and practice |
+| Profession help | For example kPNI therapist, practice name |
+| Email | Email |
+| Phone | Phone (optional) |
+| Choice question | What would you like? |
+| Choice help | Choose one or both. |
+| Choices | Evidence pack / Samples for my practice |
+| Address | Practice address (needed for samples) |
+| Message | Message (optional) |
+| Privacy note | We only process these details to answer your request. More in our [privacy]. (link text "Privacy Policy") |
+| Button | Send request |
+| Errors | Please fill in your name. / Please fill in your profession and practice. / Please fill in your email address. / Please enter a valid email address. / Choose the evidence pack, samples or both. / Please fill in the practice address for the samples. |
+| Shopify refused it | Your request was not sent. Please check the details below and try again. |
+| Thank-you | Request received / Thank you. We reply by email to the address you gave. |
+
+Open points for Victor:
+
+1. **Button.** "Send request" is a form action, not a plan CTA, so I did not use "Begin your …".
+   If the Begin rule covers form buttons too, change `request_button`.
+2. **Speed of reply.** No time is promised ("within two working days" would be a new promise).
+3. **Dentists link.** The "For dentists" item's link scrolls to the founder quote. It could open
+   the same form later, but that is not in scope here.
+
+NL and FR: send the 26 template keys `sections.main.blocks.product_faq_block.settings.request_*`
+(both product templates) to source-copy once Victor approves the EN. The fixture's NL and FR
+strings are placeholders for the length test only.
+
+## Checks
+
+Fixture: liquidjs renders this branch's `snippets/product-faq.liquid` and the new snippet, with
+`{% form %}` stubbed to mock `form` objects (default, success, error). The FAQ items come from a
+saved DOM of the live PDP (24 Oct 17:18 CEST, `live-pdp.html` from the xylitol-image lane), and the
+output is spliced into that DOM. The form action points at the localhost server and a fixture
+listener stops every submit, so nothing reaches the store. Served with `python3 -m http.server`
+on 127.0.0.1:9376 and run in Orca's browser with an isolated anonymous profile.
+
+| Check | Result |
+| --- | --- |
+| Toggle: button, `aria-controls`, starts closed, click opens right under the link, click closes | pass |
+| Required fields: empty Send blocked, errors on name, profession, email and the choice, focus on name | pass |
+| Typing clears an error; bad email shows the format message | pass |
+| Samples ticked: address required, only the address error, focus there; unticked: optional again | pass |
+| No choice ticked: choice error, focus on the first box; ticking clears it | pass |
+| Valid Send goes through (stopped by the fixture) with all inbox keys and hidden fields | pass |
+| Success: item open, thank-you focused, `role=status` + `aria-live`, other items closed, footer newsletter not in success | pass |
+| Error: item open, alert focused, email `aria-invalid` + message, values kept, alert links to the field | pass |
+| Labels on every field, `aria-describedby` targets exist, legend on the choices | pass |
+| No-JS (all scripts stripped): link untouched (`href="#"`), no button, form visible, native `required` | pass |
+| Block setting off: no form, link untouched | pass |
+| No horizontal overflow at 390 / 750 / 1440, EN, NL and FR (FR has the longest strings) | pass |
+| Contrast, Day / Night: labels and input text 15.75, help and note 7.28 / 7.94, alert and thank-you 11.95, input border 7.28 / 7.94 | AA pass |
+| Real keys (`orca keypress`): Enter and Space toggle; Tab goes name → profession → email → phone → pack → samples → address; Enter in a field runs the checks | pass |
+
+Not observable in this setup:
+
+- The `:focus-visible` ring. The Orca window had no OS focus (`document.hasFocus()` false), so the
+  pseudo-class never matched. The rings are in the CSS: a 2px `--kc-mapped-border-focus-strong`
+  outline on fields, boxes, the toggle, links and the alert/thank-you, 15.75:1 against the
+  background in Day and Night.
+- A real Shopify post, hCaptcha and Shopify's own error wording. No submissions to the live store.
+
+Theme Check (`shopify theme check --fail-level error`): exit 0, 0 errors, 19 warnings (the
+baseline), none in the changed files.
+
+Screenshots (22) and the fixture scripts are in the session scratchpad
+`/private/tmp/claude-501/-Users-iamvictorious-IdeaProjects-orca-workspaces-karmicare-shopify-theme-practitioner-form/278123b6-4698-4965-9305-76380fe130fe/scratchpad/fx/`
+(`render.mjs`, `fx.js`, `run.sh`, `shot.sh`, `keys.sh`, `shots/`, `results/`).
+
+## Cleanup check
+
+Nothing became obsolete: the diff adds only. No class, setting, snippet or asset was removed or
+renamed (`git diff f4dce75 --stat` shows two lines replaced, both in the templates' `product_faq_block`
+settings, where `"default_to_subscription": true` gained a comma). The new names are referenced:
+`git grep -n "kc-practitioner-request"` hits only `snippets/product-faq.liquid` (render) and
+`snippets/kc-practitioner-request.liquid` (the CSS and JS tags).
