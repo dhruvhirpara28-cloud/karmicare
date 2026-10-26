@@ -44,6 +44,7 @@ WORD_EXCEPTIONS = {
     ("footer-group:footer/copyright_text", "product"): "compliance statement mirroring the EN regulatory line; copy owner decides (REPORT.md)",
     ("product.subscription-item:main/treatment_journey_block/disclaimer_text", "gebruik"): "approved Figma NL (3738:27474); conflict listed for the copy owner",
     ("product:main/treatment_journey_block/disclaimer_text", "gebruik"): "approved Figma NL (3738:27474); conflict listed for the copy owner",
+    ("product.subscription-item:main/highlights_slider_9wAjAb/text_1", "gebruikt"): "Victor 25 Oct (R78b, via the PDP lane): 'Used en Gebruikt is ok'",
 }
 # street and number, optional box, postcode, optional city and country: "Vizierstraat 28, 8000 Bruges, Belgium"
 ADDRESS = re.compile(r"[A-Z][^,<>·().:;]{2,60}?\d+[a-z]?(?:, (?:box|bus) \d+)?, \d{4}(?: [A-Z][a-zé]+)?(?:, [A-Z][a-z]+)?")

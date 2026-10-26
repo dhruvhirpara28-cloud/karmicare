@@ -2,12 +2,12 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "e4d806146e401d40a2befeeabdcb7d1eef6a1ad5",
- "source_entries": 524,
+ "source_digest": "e09fc93cd094813ea0e21a773e2f6c90e33483d4",
+ "source_entries": 540,
  "counts": {
-  "translated": 163,
+  "translated": 174,
   "pending-claim-review": 24,
-  "held": 41,
+  "held": 46,
   "dawn-nl": 15,
   "theme-key": 31,
   "admin": 250
@@ -56,12 +56,24 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_1",
-   "en": "Used by 100+ kPNI practitioners & functional dentists",
-   "en_sha1": "dc9175aacf9760fdfe7a7e847d7138a6aa850467",
-   "nl": "In de praktijk bij 100+ kPNI-therapeuten & functionele tandartsen",
+   "en": "Used and recommended by 100+ kPNI practitioners",
+   "en_sha1": "2b27f9a40af33c0ce713197eb5c61ea1e6b7a698",
+   "nl": "Gebruikt en aanbevolen door 100+ kPNI-therapeuten",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: kPNI practitioners → kPNI-therapeuten (products.md); practitioner(s) in general → zorgverlener(s). R2 (review F6): 'Used by' → 'In de praktijk bij' (brand rule); the claim (C81) is still pending; claims gate cleared 24 Oct: C81 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
+   "notes": "TERM: kPNI practitioners → kPNI-therapeuten (products.md); practitioner(s) in general → zorgverlener(s). R2 (review F6): 'Used by' → 'In de praktijk bij' (brand rule); the claim (C81) is still pending; claims gate cleared 24 Oct: C81 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b); 26 Oct: Victor 25 Oct via the PDP lane (R78/R78b f6d0e79, 80e0524): two pills, 'Used en Gebruikt is ok', 'kPNI-therapeuten' with the hyphen"
+  },
+  {
+   "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_5",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.highlights_slider_9wAjAb.settings.text_5",
+   "en": "Recommended by functional dentists",
+   "en_sha1": "868786743ac598ab0c5cf5b33504914fdfa3a4bd",
+   "nl": "Aanbevolen door functionele tandartsen",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; C104 confirmed by Victor 25 Oct"
   },
   {
    "id": "product.subscription-item:main/highlights_slider_9wAjAb/text_2",
@@ -6765,10 +6777,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_profession",
    "en": "Profession and practice",
    "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
-   "nl": "Beroep en praktijk",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); retired 26 Oct: the setting left the template in R76e+f (live main 57e6588 (release 11)); profession is now a radio group plus 'Your profession' and 'Practice name'; was translated: Beroep en praktijk"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_help_profession",
@@ -6777,10 +6789,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_help_profession",
    "en": "For example kPNI therapist, practice name",
    "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
-   "nl": "Bijvoorbeeld kPNI-therapeut, naam van de praktijk",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); retired 26 Oct: the setting left the template in R76e+f (live main 57e6588 (release 11)); profession is now a radio group plus 'Your profession' and 'Practice name'; was translated: Bijvoorbeeld kPNI-therapeut, naam van de praktijk"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_email",
@@ -6933,10 +6945,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession",
    "en": "Please fill in your profession and practice.",
    "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
-   "nl": "Vul je beroep en praktijk in.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); retired 26 Oct: the setting left the template in R76e+f (live main 57e6588 (release 11)); profession is now a radio group plus 'Your profession' and 'Practice name'; was translated: Vul je beroep en praktijk in."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_email",
@@ -7021,6 +7033,186 @@
    "status": "translated",
    "flags": [],
    "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_legend_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_legend_profession",
+   "en": "Profession",
+   "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
+   "nl": "Beroep",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_dentist",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
+   "en": "Dentist",
+   "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
+   "nl": "Tandarts",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_hygienist",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
+   "en": "Dental hygienist",
+   "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
+   "nl": "Mondhygiënist",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_kpni",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
+   "en": "kPNI therapist",
+   "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
+   "nl": "kPNI-therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_natural",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
+   "en": "Orthomolecular or naturopathic practitioner",
+   "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
+   "nl": "Orthomoleculair of natuurgeneeskundig therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_gp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
+   "en": "General practitioner",
+   "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
+   "nl": "Huisarts",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_pharmacist",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
+   "en": "Pharmacist",
+   "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
+   "nl": "Apotheker",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_profession_other",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_other",
+   "en": "Other",
+   "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
+   "nl": "Andere",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_profession_other",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
+   "en": "Your profession",
+   "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
+   "nl": "Je beroep",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_label_practice",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_practice",
+   "en": "Practice name",
+   "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
+   "nl": "Naam van de praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_profession_choice",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
+   "en": "Choose your profession.",
+   "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
+   "nl": "Kies je beroep.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_profession_other",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
+   "en": "Please fill in your profession.",
+   "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
+   "nl": "Vul je beroep in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_error_practice",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_practice",
+   "en": "Please fill in your practice name.",
+   "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
+   "nl": "Vul de naam van je praktijk in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_klaviyo_company_id",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_klaviyo_company_id",
+   "en": "XfYq2r",
+   "en_sha1": "c61234abc465ed0e7a6901d74d735ed4fb21fb12",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "never translate: Klaviyo ID (landing desk, 26 Oct)"
+  },
+  {
+   "id": "product.subscription-item:main/product_faq_block/request_klaviyo_metric",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_klaviyo_metric",
+   "en": "Practitioner Request Submitted",
+   "en_sha1": "83b631adaae3ca0f945225a224c7b12a72d5fd49",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "never translate: Klaviyo ID (landing desk, 26 Oct)"
   }
  ]
 }
