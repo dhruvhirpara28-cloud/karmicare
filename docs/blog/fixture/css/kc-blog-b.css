@@ -235,7 +235,10 @@
 }
 
 .kc-blog-b-card__link:hover .kc-blog-b-card__title {
-  color: var(--kc-mapped-text-link-default-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
 }
 
 .kc-blog-b-card__excerpt {

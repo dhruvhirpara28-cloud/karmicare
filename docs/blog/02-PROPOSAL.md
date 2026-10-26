@@ -45,7 +45,7 @@ These are in `fixture/css/kc-blog-base.css`, scoped to `.kc-blog`, so nothing ou
 - **Body images** are never wider than the file (480 and 600 px thumbnails today) and sit centred. They have no `width`/`height` in the body HTML, so they still shift the text when they load (D7).
 - **Featured images** come from `image_url` + `image_tag` with the file's width and height, so they never jump.
 - **Meta row:** date · reading time, author off as today. Reading time is words ÷ 200, rounded up (D9): nano 16 min, morning 4 min.
-- **Links** are underlined in the heading colour, with the KC hover colour and a 2 px focus ring in `--kc-mapped-border-focus-strong`.
+- **Links** are underlined in the heading colour, with a 2 px focus ring in `--kc-mapped-border-focus-strong`. On hover the text keeps its colour and the underline thickens in the accent blue (see §2a for why the site's hover colour is not used).
 - **Sources** (the research-card pattern): the study links the body already contains, collected into one card at the end. The link text is the article's own anchor text, and the publisher name comes from the link's host (PubMed, PubMed Central, ScienceDirect, MDPI and nine more). Consumer sites (Healthline, Forbes, WebMD) are left out. Each source opens in a new tab, like the research cards. Nano shows 3 sources, wellness 3, fluoride 8, nootropics 18, morning none (so no card) (D4).
 - **End CTA to the Duo** reuses copy that is already on the homepage (D5):
   - eyebrow "Biorhythmic oral care";
@@ -55,6 +55,21 @@ These are in `fixture/css/kc-blog-base.css`, scoped to `.kc-blog`, so nothing ou
 - **Related:** "Keep reading" with the three newest other articles (D6).
 - **Index:** blog title as `h1`, then the cards, then numbered pagination.
 - **Reduced motion:** every transition in the blog CSS switches off. Nothing in the blog animates on its own, and nothing switches Day/Night on scroll.
+
+## 2a. Contrast in Day and Night
+
+Computed from the token values (`fixture/tools/contrast.py`). Translucent text is blended over the surface it sits on: page, accent (the gradient's far end) and card. Text needs 4.5:1; focus rings and control edges need 3:1.
+
+| Pair | Day: page / accent / card | Night: page / accent / card |
+|---|---|---|
+| Title, headings, links (`text-default-heading`) | 15.8 / 15.2 / 16.2 | 15.8 / 10.8 / 13.7 |
+| Body, meta, captions (`text-default-body`) | 7.3 / 7.1 / 7.4 | 7.9 / 6.0 / 7.1 |
+| Focus ring (`border-focus-strong`) | 15.8 / 15.2 / 16.2 | 15.8 / 10.8 / 13.7 |
+| Rail dots, pagination edge (`border-control-default`) | 7.3 / 7.1 / 7.4 | 7.9 / 6.0 / 7.1 |
+| Primary button label (normal / hover) | 15.8 / 13.7 | 15.8 / 13.8 |
+| Site link hover `link-default-hover` (#7fb9ff), **not used** | **2.0 / 1.9 / 2.0** | 8.0 / 5.5 / 6.9 |
+
+Night passes everywhere. Its weakest pair is body text on the accent end of the gradient, at 6.0:1. By Day only the site's link-hover colour fails, at 2:1, and the legal pages use it too. The blog CSS therefore does not change link colour on hover: the text stays navy or cream and the underline thickens in the accent blue (`shots/a-blog-hover-1440-day.png`). The quote rule and hairlines are decorative and carry no meaning. Whether the site-wide hover colour should change too is decision D15.
 
 ## 3. The three directions
 
@@ -147,6 +162,7 @@ Two things I'd take from the others, each as its own yes or no:
 | D12 | Index page size | 6 per page (today, so 8 articles = 2 pages) · 12 | **12**, so all eight fit on one page |
 | D13 | `lang` on untranslated bodies | add `lang="en"` on the body wrapper on `/nl` and `/fr` until source-copy translates · leave | **Leave** for now: Liquid cannot tell whether an article body is translated. Better to translate |
 | D14 | Day/Night | follows the clock with the manual override, as everywhere (no change) | no decision needed |
+| D15 | Link hover by Day | blog: text keeps its colour, underline thickens in the accent (as built) · site's `link-default-hover` #7fb9ff (2:1 on cream) · also fix the site-wide hover (legal pages and others, another lane) | **As built for the blog**, and a separate item for the site-wide token |
 | D16 | Values without a token (§3) | keep as commented literals · add tokens to the KC library first | **Literals now**, and add a long-form line-height token to the library when it is next exported |
 
 ## 6. New UI strings

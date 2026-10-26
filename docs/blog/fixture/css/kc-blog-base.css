@@ -40,7 +40,10 @@
 }
 
 a.kc-blog__eyebrow:hover {
-  color: var(--kc-mapped-text-link-default-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
 }
 
 html[data-kc-labels='site'] .kc-blog__eyebrow {
@@ -212,8 +215,11 @@ html[data-kc-labels='site'] .kc-blog__button {
   transition: color 0.2s ease;
 }
 
+/* Hover keeps the text colour and thickens the underline in the accent: link-default-hover
+   (#7fb9ff) is 2:1 on Day's cream, below 4.5:1 for text (tools/contrast.py) */
 .kc-blog__body a:hover {
-  color: var(--kc-mapped-text-link-default-hover) !important;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
 }
 
 .kc-blog a:focus-visible,
@@ -369,7 +375,10 @@ html[data-kc-labels='site'] .kc-blog__button {
 }
 
 .kc-blog-sources__link:hover .kc-blog-sources__title {
-  color: var(--kc-mapped-text-link-default-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
 }
 
 /* ---- End CTA to the Duo ------------------------------------------------------------------------ */
