@@ -503,6 +503,14 @@
       {{ content_for_layout }}
     </main>
 
+    {%- comment -%}
+      The practitioner request form, one for the site (R76k): the PDP FAQ links and the Trusted
+      Professionals button open it in a popup (sections/kc-practitioner-request.liquid).
+    {%- endcomment -%}
+    {%- if request.page_type == 'index' or request.page_type == 'product' -%}
+      {% sections 'practitioner-group' %}
+    {%- endif -%}
+
     {% sections 'footer-group' %}
 
     <ul hidden>

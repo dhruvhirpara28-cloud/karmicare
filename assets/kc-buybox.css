@@ -543,6 +543,13 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   line-height: var(--kc-buybox-body-line-height);
 }
 
+/* The line one step up from the buybox body, body-sm to body-md (Victor 26 Oct);
+   the note under it stays body-sm */
+.kc-buybox .tertiary-try-once-link .ft-line {
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+}
+
 .kc-buybox .tertiary-try-once-link .ft-note {
   margin-top: var(--kc-responsive-spacing-layout-xxs);
   font-size: var(--kc-buybox-body-size);
