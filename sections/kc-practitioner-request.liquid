@@ -1,0 +1,266 @@
+{%- comment -%}
+  Practitioner request form, one for the site (R76k, Victor 26 Oct: the Trusted Professionals
+  button opens it on the homepage too). It lives in sections/practitioner-group.json, which
+  layout/theme.liquid renders on the homepage and product pages, so its texts and their
+  translations are kept in one place. The links that open it (data-kc-pr-open): the PDP FAQ links
+  (snippets/product-faq.liquid) and the Trusted Professionals button
+  (sections/trusted-professionals.liquid). assets/kc-practitioner-request.js moves the form into
+  its popup; without JavaScript the links jump to it here (assets/kc-practitioner-request.css shows
+  the host only then).
+{%- endcomment -%}
+{%- if section.settings.request_enabled -%}
+  <div class="kc-pr-host" id="KcPractitionerRequest-host" data-kc-pr-host>
+    {%- render 'kc-practitioner-request', s: section.settings -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Practitioner request form",
+  "tag": "section",
+  "class": "kc-practitioner-request-section",
+  "enabled_on": {
+    "groups": [
+      "custom.practitioner"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Opens in a popup from the PDP FAQ links (their trigger is set in the product FAQ block) and from the Trusted Professionals button when its link is empty. Requests go to the store contact email (Settings > General > Store details)."
+    },
+    {
+      "type": "checkbox",
+      "id": "request_enabled",
+      "label": "Show the request form",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "request_klaviyo_company_id",
+      "label": "Klaviyo public API key (company ID)",
+      "info": "Filled: after Shopify accepts a request, one event goes to Klaviyo, whose flow emails the practitioner a confirmation and the team an alert. Empty: Shopify's contact email only."
+    },
+    {
+      "type": "text",
+      "id": "request_klaviyo_metric",
+      "label": "Klaviyo metric name",
+      "default": "Practitioner Request Submitted"
+    },
+    {
+      "type": "text",
+      "id": "request_title",
+      "label": "Title",
+      "default": "Request the practitioner pack"
+    },
+    {
+      "type": "textarea",
+      "id": "request_intro",
+      "label": "Intro",
+      "default": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email."
+    },
+    {
+      "type": "text",
+      "id": "request_label_name",
+      "label": "Name field",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "request_legend_profession",
+      "label": "Profession question",
+      "default": "Profession"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_dentist",
+      "label": "Profession: dentist",
+      "info": "The inbox and Klaviyo always receive the English value; these are the labels the visitor reads. Do not use |.",
+      "default": "Dentist"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_hygienist",
+      "label": "Profession: dental hygienist",
+      "default": "Dental hygienist"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_kpni",
+      "label": "Profession: kPNI therapist",
+      "default": "kPNI therapist"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_natural",
+      "label": "Profession: orthomolecular or naturopathic",
+      "default": "Orthomolecular or naturopathic practitioner"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_gp",
+      "label": "Profession: general practitioner",
+      "default": "General practitioner"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_pharmacist",
+      "label": "Profession: pharmacist",
+      "default": "Pharmacist"
+    },
+    {
+      "type": "text",
+      "id": "request_profession_other",
+      "label": "Profession: other",
+      "default": "Other"
+    },
+    {
+      "type": "text",
+      "id": "request_label_profession_other",
+      "label": "Other profession field",
+      "info": "Shows when Other is chosen.",
+      "default": "Your profession"
+    },
+    {
+      "type": "text",
+      "id": "request_label_practice",
+      "label": "Practice name field",
+      "default": "Practice name"
+    },
+    {
+      "type": "text",
+      "id": "request_label_email",
+      "label": "Email field",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "request_label_phone",
+      "label": "Phone field",
+      "default": "Phone (optional)"
+    },
+    {
+      "type": "text",
+      "id": "request_legend_wants",
+      "label": "Choice question",
+      "default": "What would you like?"
+    },
+    {
+      "type": "text",
+      "id": "request_help_wants",
+      "label": "Choice help",
+      "default": "Choose one or both."
+    },
+    {
+      "type": "text",
+      "id": "request_label_pack",
+      "label": "Evidence pack choice",
+      "default": "Evidence pack"
+    },
+    {
+      "type": "text",
+      "id": "request_label_samples",
+      "label": "Samples choice",
+      "default": "Samples for my practice"
+    },
+    {
+      "type": "text",
+      "id": "request_label_address",
+      "label": "Address field",
+      "info": "Required only when samples is ticked; the label says so.",
+      "default": "Practice address (needed for samples)"
+    },
+    {
+      "type": "text",
+      "id": "request_label_message",
+      "label": "Message field",
+      "default": "Message (optional)"
+    },
+    {
+      "type": "text",
+      "id": "request_privacy_text",
+      "label": "Privacy note",
+      "info": "[privacy] becomes the link to the Privacy Policy page in the page language.",
+      "default": "We only process these details to answer your request. More in our [privacy]."
+    },
+    {
+      "type": "text",
+      "id": "request_privacy_link_label",
+      "label": "Privacy link text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "text",
+      "id": "request_button",
+      "label": "Send button",
+      "default": "Send request"
+    },
+    {
+      "type": "text",
+      "id": "request_error_name",
+      "label": "Name missing",
+      "default": "Please fill in your name."
+    },
+    {
+      "type": "text",
+      "id": "request_error_profession_choice",
+      "label": "Profession not chosen",
+      "default": "Choose your profession."
+    },
+    {
+      "type": "text",
+      "id": "request_error_profession_other",
+      "label": "Other profession missing",
+      "default": "Please fill in your profession."
+    },
+    {
+      "type": "text",
+      "id": "request_error_practice",
+      "label": "Practice name missing",
+      "default": "Please fill in your practice name."
+    },
+    {
+      "type": "text",
+      "id": "request_error_email",
+      "label": "Email missing",
+      "default": "Please fill in your email address."
+    },
+    {
+      "type": "text",
+      "id": "request_error_email_format",
+      "label": "Email not valid",
+      "default": "Please enter a valid email address."
+    },
+    {
+      "type": "text",
+      "id": "request_error_wants",
+      "label": "No choice ticked",
+      "default": "Choose the evidence pack, samples or both."
+    },
+    {
+      "type": "text",
+      "id": "request_error_address",
+      "label": "Address missing",
+      "default": "Please fill in the practice address for the samples."
+    },
+    {
+      "type": "textarea",
+      "id": "request_error_generic",
+      "label": "Request refused by Shopify",
+      "default": "Your request was not sent. Please check the details below and try again."
+    },
+    {
+      "type": "text",
+      "id": "request_success_title",
+      "label": "Thank-you title",
+      "default": "Request received"
+    },
+    {
+      "type": "textarea",
+      "id": "request_success_text",
+      "label": "Thank-you text",
+      "default": "Thank you. We reply by email to the address you gave."
+    }
+  ]
+}
+{% endschema %}

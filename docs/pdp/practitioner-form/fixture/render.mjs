@@ -61,7 +61,14 @@ const sec = readFileSync(join(THEME, 'sections/main-product.liquid'), 'utf8');
 const schema = JSON.parse(sec.slice(sec.indexOf('{% schema %}') + 12, sec.indexOf('{% endschema %}')));
 const defaults = {};
 for (const s of schema.blocks.find((b) => b.type === 'product_faq').settings) if (s.id) defaults[s.id] = s.default;
-const EN = { ...defaults, ...faqBlock.settings };
+// Since R76k the form's texts live in sections/practitioner-group.json (schema defaults in
+// sections/kc-practitioner-request.liquid); the FAQ block keeps only its link triggers
+const groupSrc = readFileSync(join(THEME, 'sections/kc-practitioner-request.liquid'), 'utf8');
+const groupSchema = JSON.parse(groupSrc.slice(groupSrc.indexOf('{% schema %}') + 12, groupSrc.indexOf('{% endschema %}')));
+const groupDefaults = {};
+for (const s of groupSchema.settings) if (s.id) groupDefaults[s.id] = s.default;
+const groupValues = Object.values(JSON.parse(stripComment(readFileSync(join(THEME, 'sections/practitioner-group.json'), 'utf8'))).sections)[0].settings;
+const EN = { ...defaults, ...faqBlock.settings, ...groupDefaults, ...groupValues };
 // The PDP intro points at "the studies referenced above"; on the page that sentence has no "above".
 // The preview drops it and keeps the two other existing sentences (decision D4 in the proposal).
 EN.request_intro = 'Tell us about your practice and what you need. A person reads every request and replies by email.';
@@ -282,6 +289,21 @@ const replaceSection = (dom, idPart, html) => {
   const end = dom.indexOf('</section>', at) + '</section>'.length;
   return dom.slice(0, at) + open + html + '</section>' + dom.slice(end);
 };
+// The practitioner group (R76k): layout/theme.liquid renders sections/practitioner-group.json
+// between <main> and the footer group on the homepage and product pages. The section file is
+// rendered from its source (its own name would resolve to the snippet of the same name).
+const GROUP = JSON.parse(stripComment(readFileSync(join(THEME, 'sections/practitioner-group.json'), 'utf8')));
+const GROUP_SECTION = Object.entries(GROUP.sections)[0];
+async function renderGroup(liquid) {
+  const src = readFileSync(join(THEME, 'sections/kc-practitioner-request.liquid'), 'utf8').replace(/posted_successfully\?/g, 'posted_successfully_q');
+  const html = await liquid.parseAndRender(src, { section: { id: GROUP_SECTION[0], settings: GROUP_SECTION[1].settings } });
+  return `<div id="shopify-section-sections--fixture__${GROUP_SECTION[0]}" class="shopify-section shopify-section-group-practitioner-group">${html}</div>`;
+}
+const beforeFooter = (dom, html) => {
+  const at = dom.search(/<[a-z]+ id="shopify-section-sections--[^"]*__footer"/);
+  if (at < 0) throw new Error('footer group not found');
+  return dom.slice(0, at) + html + dom.slice(at);
+};
 const pdpSrc = absolute(readFileSync(join(LIVE, 'pdp-en.html'), 'utf8'));
 const { faq: liveFaq, items: ITEMS } = liveItems(pdpSrc);
 const faqScriptEnd = pdpSrc.indexOf('</script>', liveFaq.end) + '</script>'.length;
@@ -302,23 +324,37 @@ for (const [name, state] of [
   const trusted = await liquid.renderFile('trusted-professionals', { section: sectionOf(subTpl, 'trusted-professionals'), product: globals.product });
   let dom = pdpSrc.slice(0, liveFaq.start) + faqHtml + pdpSrc.slice(faqScriptEnd);
   dom = replaceSection(dom, 'trusted_professionals_HAqYth', trusted);
+  // the live page still carries the R76f form inside the FAQ item: drop its assets, then add the group
+  dom = dom.replace(/<link[^>]*cdn\/shop[^>]*kc-practitioner-request\.css[^>]*>/g, '').replace(/<script[^>]*cdn\/shop[^>]*kc-practitioner-request\.js[^>]*><\/script>/g, '');
+  dom = beforeFooter(dom, await renderGroup(liquid));
   writeFileSync(join(OUT, `${name}.html`), dom.replace('</body>', fxTag(name) + '</body>'));
   results.push(`${name}: triggers by text ${FAQ_SETTINGS.request_trigger_text}, trusted CTA ${/data-kc-pr-open/.test(trusted) ? 'opens the form' : 'no opener'}`);
 }
-{
-  const liquid = engine(FORMS.default, {
-    pages: {},
+for (const [name, state] of [
+  ['home-current', 'default'],
+  ['home-current-success', 'success'],
+  ['home-current-error', 'error'],
+]) {
+  const liquid = engine(FORMS[state], {
+    pages: { 'privacy-policy': { url: `${STORE}/pages/privacy-policy` } },
     shop: {},
     stamp: STAMP,
     request: { locale: { iso_code: 'en' }, origin: STORE, path: '/', page_type: 'index' },
   });
   const section = sectionOf(homeTpl, 'trusted-professionals');
-  // the product picker resolves to a product object; here the local PDP fixture
-  if (section.settings.request_product) section.settings.request_product = { url: 'pdp-current.html' };
   const trusted = await liquid.renderFile('trusted-professionals', { section });
   let dom = replaceSection(absolute(readFileSync(join(LIVE, 'home-en.html'), 'utf8')), 'trusted_professionals_HAqYth', trusted);
-  writeFileSync(join(OUT, 'home-current.html'), dom.replace('</body>', fxTag('home-current') + '</body>'));
-  results.push(`home-current: trusted CTA href ${(trusted.match(/href="([^"]*)"[^>]*data-kc-pr-open/) || [])[1]}`);
+  dom = beforeFooter(dom, await renderGroup(liquid));
+  writeFileSync(join(OUT, `${name}.html`), dom.replace('</body>', fxTag(name) + '</body>'));
+  if (name === 'home-current') results.push(`home-current: trusted CTA href ${(trusted.match(/href="([^"]*)"[^>]*data-kc-pr-open/) || [])[1]}`);
+}
+// the PDP without JavaScript: the links jump to the form at the end of the page
+{
+  const src = readFileSync(join(OUT, 'pdp-current.html'), 'utf8');
+  writeFileSync(
+    join(OUT, 'pdp-current-nojs.html'),
+    src.replace(/<script\b(?![^>]*>window\.FX_VARIANT)[\s\S]*?<\/script>/g, '').replace('<html class="js"', '<html class="no-js"').replace(/window\.FX_VARIANT="pdp-current"/, 'window.FX_VARIANT="pdp-current-nojs"')
+  );
 }
 
 // ---- the frame page: loads a variant in an iframe of a given size (scrolled captures stay drawn)

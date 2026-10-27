@@ -71,6 +71,7 @@
       } else {
         ok('form inline and visible', visible(form));
         ok('7 profession radios', document.querySelectorAll('[data-kc-pr-profession]').length === 7);
+        ok('every option has its label text', Array.from(document.querySelectorAll('.kc-pr__check span')).every(function (s) { return s.textContent.trim().length > 0; }));
         var col = $('.kc-professionals__inner');
         var r = col.getBoundingClientRect();
         ok('column at most 720px, 20px gutter', r.width <= 720.5 && Math.round(parseFloat(getComputedStyle(col).paddingLeft)) === 20, Math.round(r.width) + 'px');

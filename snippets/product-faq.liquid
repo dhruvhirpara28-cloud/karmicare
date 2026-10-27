@@ -1,56 +1,17 @@
 {%- liquid
   assign faq_items = product.metafields.custom.product_faq.value
 
-  # Practitioner request form (R76): it goes into the first item whose answer text has a link
-  # whose href contains the URL trigger or, failing that, whose text contains the text trigger
-  assign request_index = 0
-  assign request_open = false
+  # Practitioner request links (R76k): in the answers and section content, a link whose href
+  # contains the URL trigger, or whose text contains the text trigger, becomes a link to the request
+  # form (sections/kc-practitioner-request.liquid, rendered by the layout on this page). The script
+  # opens the form in its popup from it; without JavaScript it jumps to the form. Its FAQ question
+  # goes along as "Opened from". The triggers stay translatable block settings, as the FAQ text is.
+  assign request_on = false
   assign request_url = block.settings.request_trigger_url | strip
   assign request_text = block.settings.request_trigger_text | strip | downcase
-  if faq_items != blank and block.settings.request_enabled
-    for pass in (1..2)
-      if pass == 1 and request_url == blank
-        continue
-      endif
-      if pass == 2 and request_text == blank
-        continue
-      endif
-      for item in faq_items
-        if item.description == blank
-          continue
-        endif
-        assign item_index = forloop.index
-        assign item_html = item.description | metafield_tag
-        assign anchors = item_html | split: '<a '
-        for anchor_chunk in anchors offset: 1
-          assign anchor = anchor_chunk | split: '</a>' | first
-          assign anchor_attrs = anchor | split: '>' | first
-          if pass == 1 and anchor_attrs contains request_url
-            assign request_index = item_index
-            break
-          endif
-          assign anchor_text = anchor | remove_first: anchor_attrs | strip_html | downcase
-          if pass == 2 and anchor_text contains request_text
-            assign request_index = item_index
-            break
-          endif
-        endfor
-        if request_index > 0
-          break
-        endif
-      endfor
-      if request_index > 0
-        break
-      endif
-    endfor
-  endif
-
-  if request_index > 0
-    capture request_form
-      render 'kc-practitioner-request', s: block.settings, trigger_url: request_url, trigger_text: request_text
-    endcapture
-    if request_form contains 'data-kc-pr-state='
-      assign request_open = true
+  if block.settings.request_enabled
+    if request_url != blank or request_text != blank
+      assign request_on = true
     endif
   endif
 -%}
@@ -59,29 +20,68 @@
   <div class="kc-faq-block pdp">
     <div class="kc-faq-list">
       {%- for item in faq_items -%}
-        <details
-          class="kc-faq-item"
-          name="faq-accordion"
-          {% if request_open and forloop.index == request_index %}
-            open
-          {% endif %}
-        >
+        {%- liquid
+          assign description_html = ''
+          if item.description != blank
+            assign description_html = item.description | metafield_tag
+          endif
+          assign section_html = item.section_content
+          if request_on
+            assign from = item.title | strip_html | strip | escape
+            for part in (1..2)
+              if part == 1
+                assign source = description_html
+              else
+                assign source = section_html
+              endif
+              if source == blank
+                continue
+              endif
+              assign chunks = source | split: '<a '
+              assign rebuilt = chunks.first
+              for chunk in chunks offset: 1
+                # a new name: reassigning the loop variable itself is not reliable in Liquid
+                assign piece = chunk
+                assign anchor = chunk | split: '</a>' | first
+                assign attrs = anchor | split: '>' | first
+                assign anchor_text = anchor | remove_first: attrs | strip_html | downcase
+                assign hit = false
+                if request_url != blank and attrs contains request_url
+                  assign hit = true
+                elsif request_text != blank and anchor_text contains request_text
+                  assign hit = true
+                endif
+                if hit and attrs contains 'href="'
+                  assign old_href = attrs | split: 'href="' | last | split: '"' | first
+                  assign old_href_attr = 'href="' | append: old_href | append: '"'
+                  assign new_href_attr = 'href="#KcPractitionerRequest-panel" data-kc-pr-open data-kc-pr-from="' | append: from | append: '"'
+                  assign new_attrs = attrs | replace_first: old_href_attr, new_href_attr
+                  assign piece = chunk | replace_first: attrs, new_attrs
+                endif
+                assign rebuilt = rebuilt | append: '<a ' | append: piece
+              endfor
+              if part == 1
+                assign description_html = rebuilt
+              else
+                assign section_html = rebuilt
+              endif
+            endfor
+          endif
+        -%}
+        <details class="kc-faq-item" name="faq-accordion">
           <summary class="kc-faq-summary">
             <span>{{ item.title }}</span>
             {% render 'icon-plus-minus' %}
           </summary>
           <div class="kc-faq-body">
-            {%- if item.description != blank -%}
+            {%- if description_html != blank -%}
               <div class="kc-faq-description">
-                {{ item.description | metafield_tag }}
+                {{ description_html }}
               </div>
             {%- endif -%}
-            {%- if forloop.index == request_index -%}
-              {{ request_form }}
-            {%- endif -%}
-            {%- if item.section_content != blank -%}
+            {%- if section_html != blank -%}
               <div class="kc-faq-section-content">
-                {{ item.section_content }}
+                {{ section_html }}
               </div>
             {%- endif -%}
           </div>

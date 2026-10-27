@@ -179,25 +179,24 @@
               </svg>
             {%- endcapture -%}
             {%- liquid
-              # No link set: the button opens the practitioner request form (Victor, 26 Oct). On a
-              # product page that is this page's FAQ form, which assets/kc-practitioner-request.js
-              # opens in its popup; elsewhere the product picked below, opened at the form (the
-              # script opens the popup on arrival). Without either, "Coming soon" as before.
-              assign request_url = blank
+              # No link set: the button opens the practitioner request form (Victor, 26 Oct), which
+              # the layout renders on the homepage and product pages (sections/practitioner-group.json);
+              # assets/kc-practitioner-request.js opens it in its popup. Elsewhere "Coming soon".
+              assign request_from = blank
               if section.settings.button_link == blank or section.settings.button_link == '#'
-                if request.page_type == 'product' and product != blank
-                  assign request_url = product.url | append: '#KcPractitionerRequest-panel'
-                elsif section.settings.request_product != blank
-                  assign request_url = section.settings.request_product.url | append: '?from=home-trusted#KcPractitionerRequest-panel'
+                if request.page_type == 'index'
+                  assign request_from = 'Homepage: Trusted Professionals button'
+                elsif request.page_type == 'product'
+                  assign request_from = 'Product page: Trusted Professionals button'
                 endif
               endif
             -%}
-            {%- if request_url != blank -%}
+            {%- if request_from != blank -%}
               <a
-                href="{{ request_url }}"
+                href="#KcPractitionerRequest-panel"
                 class="karmicare__btn-secondary"
                 data-kc-pr-open
-                data-kc-pr-from="Trusted Professionals button"
+                data-kc-pr-from="{{ request_from }}"
               >
                 {{ section.settings.button_label }}
                 {{ cta_icon }}
@@ -388,13 +387,7 @@
       "type": "url",
       "id": "button_link",
       "label": "Button Link",
-      "info": "Empty: on a product page the button opens the practitioner request form there; elsewhere it opens the form on the product below"
-    },
-    {
-      "type": "product",
-      "id": "request_product",
-      "label": "Request form product",
-      "info": "Used when the button link is empty and this section is not on a product page: the button goes to this product and opens the request form. Empty shows Coming soon"
+      "info": "Empty: on the homepage and product pages the button opens the practitioner request form; elsewhere it shows Coming soon"
     },
     {
       "type": "select",
