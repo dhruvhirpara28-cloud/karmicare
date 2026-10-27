@@ -1,5 +1,17 @@
 # Round 7 · PDP trust pills, practitioner form
 
+**Next restart, after release 13 is live: the form lives in its own section group (landing desk 27 Oct, landing 85, practitioner-form `1f76c90`, integration `c996d23`).** All 37 `request_*` settings now sit on `sections/practitioner-group.json`, section `practitioner_request` (type `kc-practitioner-request`), one form for the whole site. The product templates' `product_faq_block` keeps only `request_trigger_url` and `request_trigger_text`. Read-only check on integration, 27 Oct:
+- **22 settings carried from round 3, same EN:** `request_title`, `request_intro`, the name/email/phone/address/message labels, `request_legend_wants`, `request_help_wants`, the pack/samples labels, `request_privacy_text`, `request_privacy_link_label`, `request_button`, the six errors, and the two success texts. Their NL/FR move over 1:1 from the registered values. The desk spoke of 16; the count on integration is 22, so this needs to be confirmed at the restart.
+- **13 R76e settings, same EN as in this round:** they take the NL/FR in the table further down.
+- **The 2 Klaviyo IDs** stay out.
+
+At the restart:
+1. New source rows `practitioner-group:practitioner_request/<setting>` (`section_group`, one resource for the whole site), with NL/FR as above.
+2. The `request_*` rows of both product templates become `retired`, except `request_trigger_url` and `request_trigger_text`; their registered translations stay without a key that uses them.
+3. Re-check the trigger text live.
+
+The form part of the plan then becomes NL 35 keys (22 + 13) and FR 34 (FR *Profession* equals the EN), instead of 26/24 per template.
+
 **Restarted 26 Oct against release 12 (live main `2f58500` = merchant-edit `be375ba`: fonts/colours, blog, practitioner form, clock).** Integration merged; the lane's theme files equal `2f58500`. `live/tools/live_vs_source.py` against `2f58500` finds two changes:
 - the clock `hint_label` on `index` and `product.subscription-item` now reads *DRAG THE DOT · EXPLORE 24 HOURS*;
 - the new blog template `templates/article.json` has a featured product block that repeats the homepage buy box.
