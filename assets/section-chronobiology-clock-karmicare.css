@@ -132,7 +132,10 @@ body.night-mode .chronobiology-clock {
 }
 
 /* ── Timeline: dial artwork and knob ── */
+/* flow-root keeps the dial's negative top margin inside the crop: overflow: clip alone does not
+   stop it collapsing through, which slid the window down and cut the orb's base on phones */
 .chronobiology-clock .timeline {
+  display: flow-root;
   position: relative;
   width: 100%;
   height: calc(var(--dial-size) * 338 / 422.8);
@@ -145,7 +148,8 @@ body.night-mode .chronobiology-clock {
   height: var(--dial-size);
   margin-top: calc(var(--dial-size) * -41 / 422.8);
   margin-left: calc((100% - var(--dial-size)) / 2);
-  isolation: isolate;
+  /* No isolation: the knob (10) and its time badge (9) must stack above the copy in the orb (5),
+     which lives outside the dial, while the orb artwork stays under it (Victor, 27 Oct) */
 }
 
 .chronobiology-clock .artwork {
@@ -481,7 +485,9 @@ body.night-mode .chronobiology-clock {
 }
 
 /* The explore pill, at every width: phones had no cue that the knob moves (Victor, 26 Oct).
-   One type step up from its first 11px (label-lg, Victor, 26 Oct). */
+   One type step up from its first 11px (label-lg, Victor, 26 Oct). Glass like the PDP pills
+   (kc-buybox .highlight-pill / .kc-journey-badge): the default border, glass fill and blur, in
+   place of the hairline and drop shadow (Victor, 27 Oct). */
 .chronobiology-clock .hint {
   display: inline-flex;
   align-items: center;
@@ -490,10 +496,11 @@ body.night-mode .chronobiology-clock {
   height: 36px;
   margin: 0;
   padding: 0 var(--kc-responsive-spacing-layout-sm);
-  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
   border-radius: var(--kc-shape-radius-full);
-  background: transparent;
-  filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
+  background-color: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
   font-family: var(--kc-font-role-identity);
   font-weight: 500;
   font-size: var(--kc-responsive-label-lg-text-size);
@@ -501,12 +508,21 @@ body.night-mode .chronobiology-clock {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
   color: var(--chrono-ink);
-  transition: border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
+  transition: border-color var(--theme-duration) var(--theme-ease), background-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
 }
 
 .chronobiology-clock .hint svg {
   flex-shrink: 0;
   color: var(--chrono-icon);
+}
+
+/* Narrow phones: tighter tracking and icon gap keep the longest label (FR, 37 characters) on one
+   line in the 320px a 360px screen leaves (Astra R93 B2) */
+@media (max-width: 389px) {
+  .chronobiology-clock .hint {
+    gap: 6px;
+    letter-spacing: .25px;
+  }
 }
 
 /* ── Caption and copy: under the orb on phones, inside it from 750 ── */
@@ -527,9 +543,11 @@ body.night-mode .chronobiology-clock {
 }
 
 /* The time badge: page-coloured, it rides inside the ring next to the knob */
+/* The script places it inside the ring, a step clockwise of the knob and clear of it (anticlockwise
+   where it would cover Awake or Asleep); it also paints under the knob (9 < 10) */
 .chronobiology-clock .knob-time {
   position: absolute;
-  z-index: 11;
+  z-index: 9;
   left: 50%;
   top: 50%;
   padding: 4px 10px;
@@ -545,6 +563,11 @@ body.night-mode .chronobiology-clock {
   white-space: nowrap;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+/* Only while it switches sides around a label, so it never trails the knob during a drag */
+.chronobiology-clock .knob-time.is-switching {
+  transition: left .25s ease, top .25s ease;
 }
 
 .chronobiology-clock--time-small .time-line {
@@ -652,6 +675,14 @@ body.night-mode .chronobiology-clock {
 @media (max-width: 749px) {
   .chronobiology-clock {
     --dial-size: min(604px, calc((100vw - 2 * var(--kc-responsive-spacing-page-gutter)) * 422.8 / 353));
+  }
+
+  /* Awake and Asleep stay in the orb on phones, one type step up from the dial-scaled 9-11px
+     (label-sm) and one weight up, Medium to Bold, the next weight the theme loads (Victor, 27 Oct) */
+  .chronobiology-clock .shift-label {
+    font-weight: 700;
+    font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: var(--kc-responsive-label-sm-line-height);
   }
 
   .chronobiology-clock .leader {

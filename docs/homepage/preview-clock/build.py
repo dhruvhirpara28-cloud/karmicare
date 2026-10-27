@@ -27,7 +27,8 @@ html = re.sub(r'(href|src|action)="/(?!/)', r'\1="' + LIVE + '/', html)
 # Swap the clock's two assets for the branch versions; a build stamp keeps browsers from reusing
 # an older copy of these and of the variant files
 STAMP = str(int(time.time()))
-for name in ('chronobiology-clock-karmicare.js', 'section-chronobiology-clock-karmicare.css'):
+for name in ('chronobiology-clock-karmicare.js', 'section-chronobiology-clock-karmicare.css',
+             'section-two-formulas-karmicare.css'):
     found = re.findall(r'https://www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+', html)
     assert found, name
     for url in set(found):
@@ -71,6 +72,18 @@ BAR = '''
 <script>
   (() => {
     const params = new URLSearchParams(location.search);
+    // ?at=HH:MM pins the clock's "now" for the preview (new Date() without arguments)
+    const at = /^(\d{1,2}):(\d{2})$/.exec(params.get('at') || '');
+    if (at) {
+      const RealDate = Date;
+      window.Date = class extends RealDate {
+        constructor(...args) {
+          super(...args);
+          if (!args.length) this.setHours(Number(at[1]), Number(at[2]), 0, 0);
+        }
+      };
+      window.Date.now = RealDate.now;
+    }
     if (params.get('fix')) document.documentElement.dataset.kcFix = params.get('fix').replace(/,/g, ' ');
     if (params.get('shift')) document.documentElement.style.setProperty('--kc-shift', params.get('shift') / 100);
     if (params.get('cap')) {
