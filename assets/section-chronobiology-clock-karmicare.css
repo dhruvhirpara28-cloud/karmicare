@@ -696,14 +696,15 @@ body.night-mode .chronobiology-clock {
     margin-bottom: 0;
   }
 
-  /* In the orb: centred on it (the dial sits at the top of the stage), the Awake and Asleep words
-     give way, and the text keeps the dark brand blue in Day and Night, as the orb artwork is the
-     same light-top, dark-base sphere in both (Victor, 26 Oct) */
+  /* In the orb (the dial sits at the top of the stage): 4% of the dial above its centre, on the
+     lighter part of the sphere, which brings Day to 4.9:1 or more in EN/NL/FR. The Awake and
+     Asleep words give way, and the text keeps the dark brand blue in Day and Night, as the orb
+     artwork is the same light-top, dark-base sphere in both (Victor, 26-27 Oct) */
   .chronobiology-clock .orb-text {
     position: absolute;
     z-index: 5;
     left: 50%;
-    top: calc(var(--dial-size) / 2);
+    top: calc(var(--dial-size) * .46);
     width: calc(var(--dial-size) * .46);
     max-width: none;
     margin: 0;
@@ -716,17 +717,26 @@ body.night-mode .chronobiology-clock {
     display: none;
   }
 
+  /* A thin light rim on the letters, not a glow, so they hold their edges over the darker lines
+     of the orb (Victor, 27 Oct) */
+  .chronobiology-clock .orb-text .time-line,
+  .chronobiology-clock .orb-text .state-copy {
+    text-shadow: 0 0 1px rgba(var(--kc-brand-original-off-white-rgb), .95), 0 0 2px rgba(var(--kc-brand-original-off-white-rgb), .8);
+  }
+
+  /* The caption one size step up (Nunito Bold 700 is the heaviest weight the theme loads) */
   .chronobiology-clock .orb-text .time-line {
     color: inherit;
-    font-size: calc(var(--dial-size) * 13 / 604);
+    font-size: calc(var(--dial-size) * 14 / 604);
     line-height: 1.25;
     white-space: nowrap;
   }
 
-  /* One type step up from the earlier in-orb copy (Victor, 26 Oct) */
+  /* One type step up from the earlier in-orb copy, in Medium (Victor, 26-27 Oct) */
   .chronobiology-clock .orb-text .state-copy {
     max-width: none;
     color: inherit;
+    font-weight: 500;
     font-size: calc(var(--dial-size) * 16 / 604);
     line-height: 1.3;
   }
