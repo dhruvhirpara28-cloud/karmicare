@@ -481,7 +481,9 @@ body.night-mode .chronobiology-clock {
 }
 
 /* The explore pill, at every width: phones had no cue that the knob moves (Victor, 26 Oct).
-   One type step up from its first 11px (label-lg, Victor, 26 Oct). */
+   One type step up from its first 11px (label-lg, Victor, 26 Oct). Glass like the PDP pills
+   (kc-buybox .highlight-pill / .kc-journey-badge): the default border, glass fill and blur, in
+   place of the hairline and drop shadow (Victor, 27 Oct). */
 .chronobiology-clock .hint {
   display: inline-flex;
   align-items: center;
@@ -490,10 +492,11 @@ body.night-mode .chronobiology-clock {
   height: 36px;
   margin: 0;
   padding: 0 var(--kc-responsive-spacing-layout-sm);
-  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
   border-radius: var(--kc-shape-radius-full);
-  background: transparent;
-  filter: drop-shadow(0 6px 8px rgba(var(--kc-brand-original-dark-blue-rgb), .12));
+  background-color: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
   font-family: var(--kc-font-role-identity);
   font-weight: 500;
   font-size: var(--kc-responsive-label-lg-text-size);
@@ -501,12 +504,21 @@ body.night-mode .chronobiology-clock {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
   color: var(--chrono-ink);
-  transition: border-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
+  transition: border-color var(--theme-duration) var(--theme-ease), background-color var(--theme-duration) var(--theme-ease), color var(--theme-duration) var(--theme-ease);
 }
 
 .chronobiology-clock .hint svg {
   flex-shrink: 0;
   color: var(--chrono-icon);
+}
+
+/* Narrow phones: tighter tracking and icon gap keep the longest label (FR, 37 characters) on one
+   line in the 320px a 360px screen leaves (Astra R93 B2) */
+@media (max-width: 389px) {
+  .chronobiology-clock .hint {
+    gap: 6px;
+    letter-spacing: .25px;
+  }
 }
 
 /* ── Caption and copy: under the orb on phones, inside it from 750 ── */
@@ -527,9 +539,10 @@ body.night-mode .chronobiology-clock {
 }
 
 /* The time badge: page-coloured, it rides inside the ring next to the knob */
+/* The script places it beside the knob, clear of it; it also paints under the knob (9 < 10) */
 .chronobiology-clock .knob-time {
   position: absolute;
-  z-index: 11;
+  z-index: 9;
   left: 50%;
   top: 50%;
   padding: 4px 10px;

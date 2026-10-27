@@ -24,13 +24,14 @@
     const knob = sectionEl.querySelector('.knob');
     const knobIcon = knob ? knob.querySelector('svg') : null;
     const orbit = sectionEl.querySelector('.orbit');
+    const dial = sectionEl.querySelector('.dial');
     const readout = sectionEl.querySelector('.readout');
     const timeOut = sectionEl.querySelector('.clock-time');
     const copyOut = sectionEl.querySelector('.clock-copy');
     const caption = sectionEl.querySelector('.clock-caption');
     const hint = sectionEl.querySelector('.hint');
 
-    if (!knob || !orbit || !readout || !timeOut || !copyOut || !caption) return;
+    if (!knob || !orbit || !dial || !readout || !timeOut || !copyOut || !caption) return;
 
     // Theme synchronization with site-wide Day / Night mode
     function syncTheme(mode) {
@@ -86,10 +87,36 @@
       knob.style.left = (50 + (178 / 604) * 100 * Math.sin(radians)) + '%';
       knob.style.top = (50 - (178 / 604) * 100 * Math.cos(radians)) + '%';
       knob.dataset.angle = String(angle);
-      // The time badge rides just inside the ring, towards the centre (144/604), so it never clips
-      // at the dial's edge on phones and stays clear of the copy in the orb
-      timeOut.style.left = (50 + (144 / 604) * 100 * Math.sin(radians)) + '%';
-      timeOut.style.top = (50 - (144 / 604) * 100 * Math.cos(radians)) + '%';
+      placeBadge();
+    }
+
+    // The time badge sits beside the knob along the ring, just far enough that it never covers the
+    // knob, even scaled while held, nor the copy in the orb (Astra R93 B1). It takes the clockwise
+    // side, or the other side where that would cover the 06:40 / 22:00 time labels.
+    const timeLabels = [...sectionEl.querySelectorAll('.time-label')];
+
+    function placeBadge() {
+      const size = dial.offsetWidth;
+      if (!size) return;
+      const radians = (Number(knob.dataset.angle) || 0) * Math.PI / 180;
+      const knobRadius = size * 178 / 604;
+      const tangentX = Math.cos(radians);
+      const tangentY = Math.sin(radians);
+      const halfAlong = Math.abs(tangentX) * timeOut.offsetWidth / 2 + Math.abs(tangentY) * timeOut.offsetHeight / 2;
+      const clearance = knob.offsetWidth * 1.1 / 2 + 6 + halfAlong;
+      const put = side => {
+        timeOut.style.left = (50 + (knobRadius * Math.sin(radians) + side * tangentX * clearance) / size * 100) + '%';
+        timeOut.style.top = (50 + (-knobRadius * Math.cos(radians) + side * tangentY * clearance) / size * 100) + '%';
+      };
+      const coversLabel = () => {
+        const badge = timeOut.getBoundingClientRect();
+        return timeLabels.some(label => {
+          const box = label.getBoundingClientRect();
+          return box.width && badge.left < box.right && badge.right > box.left && badge.top < box.bottom && badge.bottom > box.top;
+        });
+      };
+      put(1);
+      if (coversLabel()) put(-1);
     }
 
     function draw(minutes, preview = false) {
@@ -104,6 +131,7 @@
       const message = windowEntry ? readout.getAttribute('data-window-' + windowEntry[2]) || '' : '';
       timeOut.textContent = time;
       timeOut.dateTime = time;
+      placeBadge();
       copyOut.textContent = message;
       caption.textContent = (preview ? readout.dataset.captionPreview : readout.dataset.captionLive) || '';
       readout.dataset.mode = preview ? 'preview' : 'live';
@@ -325,15 +353,22 @@
     startTimer();
 
     reserveCopyHeight();
-    if (document.fonts) document.fonts.ready.then(reserveCopyHeight);
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        reserveCopyHeight();
+        placeBadge();
+      });
+    }
     // Remeasure on every resize, once per frame: a breakpoint can change the copy's type size while
-    // its width stays the same (380px on both sides of 750, Astra R92)
+    // its width stays the same (380px on both sides of 750, Astra R92), and the dial's size moves
+    // the badge
     let measureFrame = null;
     window.addEventListener('resize', () => {
       if (measureFrame !== null) return;
       measureFrame = requestAnimationFrame(() => {
         measureFrame = null;
         reserveCopyHeight();
+        placeBadge();
       });
     });
   }
