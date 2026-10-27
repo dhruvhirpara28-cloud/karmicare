@@ -93,35 +93,18 @@
 
 {%- capture kc_body_html -%}
   {%- comment -%}
-    Body pictures (R90 B2). The bodies link the files' 480/600px thumbnails without width and height.
-    Every picture is also in this store's Files at full size (checked 26 Oct), so the theme looks the
-    file up by name (images['name.jpg']) and prints it with image_tag: the file's own width and height
-    reserve the space before it loads, a srcset of up to 1920px, lazy, the body's alt text kept. The
-    lookup tries the file's own name, then the name without the 480/600px thumbnail suffix. A picture
-    that is not in Files keeps its tag exactly as written (R90b B4), and only gets lazy loading.
+    Body pictures. Every picture keeps its tag exactly as the article wrote it; only lazy loading and
+    async decoding are added when the tag has none. Hotfix 26 Oct: on the store, looking a picture up
+    in Files by name and passing it to image_url printed "Liquid error: invalid url input" in place of
+    every body picture, a failure the local liquidjs render could not show. Reserving each picture's
+    size (R90 B2) comes back only once a way is checked on a real Shopify render.
   {%- endcomment -%}
   {%- assign kc_img_parts = kc_body | split: '<img ' -%}
   {%- for kc_part in kc_img_parts -%}
     {%- if forloop.first -%}{{ kc_part }}{%- continue -%}{%- endif -%}
     {%- assign kc_tag = kc_part | split: '>' | first -%}
     {%- assign kc_after = kc_part | remove_first: kc_tag | remove_first: '>' -%}
-    {%- assign kc_src = kc_tag | split: 'src="' | last | split: '"' | first -%}
-    {%- assign kc_name = kc_src | split: '?' | first | split: '/' | last -%}
-    {%- assign kc_original = kc_name | replace: '_480x480.', '.' | replace: '_600x600.', '.' -%}
-    {%- assign kc_alt = '' -%}
-    {%- if kc_tag contains 'alt="' -%}
-      {%- assign kc_alt = kc_tag | split: 'alt="' | last | split: '"' | first -%}
-    {%- endif -%}
-    {%- assign kc_file = images[kc_name] -%}
-    {%- unless kc_file.width -%}
-      {%- assign kc_file = images[kc_original] -%}
-    {%- endunless -%}
-    {%- if kc_file.width -%}
-      {{- kc_file | image_url: width: 1920 | image_tag: widths: '480, 750, 1100, 1500, 1920', sizes: '(min-width: 1344px) 1280px, (min-width: 641px) calc(100vw - 64px), 100vw', loading: 'lazy', decoding: 'async', alt: kc_alt -}}
-    {%- else -%}
-      {%- comment -%} Not in Files (R90b B4): the tag stays exactly as written, so a valid external URL keeps working; only lazy loading and async decoding are added when the tag has none {%- endcomment -%}
-      <img{% unless kc_tag contains 'loading=' %} loading="lazy"{% endunless %}{% unless kc_tag contains 'decoding=' %} decoding="async"{% endunless %} {{ kc_tag }}>
-    {%- endif -%}
+    <img{% unless kc_tag contains 'loading=' %} loading="lazy"{% endunless %}{% unless kc_tag contains 'decoding=' %} decoding="async"{% endunless %} {{ kc_tag }}>
     {{- kc_after -}}
   {%- endfor -%}
 {%- endcapture -%}

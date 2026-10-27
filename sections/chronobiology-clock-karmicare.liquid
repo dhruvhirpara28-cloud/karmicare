@@ -53,6 +53,37 @@
       {%- endif -%}
     </div>
 
+    {%- comment -%}
+      Above the dial: the explore pill. The time rides on the knob, and the caption and copy sit in
+      the orb, under it on phones (Victor, 26 Oct, option E). The script's copy comes from the locale
+      keys: captions, aria-valuetext tails, the seven hour windows.
+    {%- endcomment -%}
+    <div
+      class="readout"
+      data-mode="live"
+      data-caption-live="{{ 'kc.clock.caption_live' | t }}"
+      data-caption-preview="{{ 'kc.clock.caption_preview' | t }}"
+      data-valuetext-live="{{ 'kc.clock.valuetext_live' | t }}"
+      data-valuetext-preview="{{ 'kc.clock.valuetext_preview' | t }}"
+      data-window-1="{{ 'kc.clock.window_1' | t }}"
+      data-window-2="{{ 'kc.clock.window_2' | t }}"
+      data-window-3="{{ 'kc.clock.window_3' | t }}"
+      data-window-4="{{ 'kc.clock.window_4' | t }}"
+      data-window-5="{{ 'kc.clock.window_5' | t }}"
+      data-window-6="{{ 'kc.clock.window_6' | t }}"
+      data-window-7="{{ 'kc.clock.window_7' | t }}"
+    >
+      <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
+        {%- comment -%} Figma "interaction hint · drag the ring" icon {%- endcomment -%}
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false">
+          <path d="M10.9773 5C10.4287 2.82467 9.30133 1.33333 8 1.33333C6.15933 1.33333 4.66667 4.318 4.66667 8C4.66667 11.682 6.15933 14.6667 8 14.6667C8.228 14.6667 8.45133 14.6207 8.66667 14.5333M10.1294 9.13802L12.6721 10.378L11.4321 12.9207M12.6667 10.38C11.464 10.97 9.81733 11.3333 8 11.3333C4.318 11.3333 1.33333 9.84067 1.33333 8C1.33333 6.15933 4.318 4.66667 8 4.66667C11.2253 4.66667 13.9153 5.812 14.5333 7.33333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ section.settings.hint_label | escape }}</span>
+      </button>
+      {%- comment -%} How the knob works, for screen readers only (the knob's aria-describedby) {%- endcomment -%}
+      <p class="visually-hidden" id="clock-help-{{ section.id }}">{{ 'kc.clock.help' | t }}</p>
+    </div>
+
     <div class="stage">
       <div class="timeline">
         <div class="dial">
@@ -110,7 +141,18 @@
               <path d="M22.9584 16.6392C19.7481 14.7222 16.662 14.2932 15.1283 15.8269C12.9591 17.9961 14.7174 23.2727 19.0567 27.612C23.396 31.9512 28.6726 33.7096 30.8418 31.5403C31.1105 31.2716 31.3195 30.9542 31.4704 30.5975M26.8358 22.5152L31.2937 20.98L32.8289 25.438M31.2897 20.9887C30.5676 23.1014 29.0552 25.4702 26.9135 27.612C22.5742 31.9512 17.2976 33.7096 15.1283 31.5403C12.9591 29.3711 14.7174 24.0945 19.0567 19.7552C22.8578 15.9541 27.3778 14.1337 29.899 15.1983" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
+
+          {%- comment -%} The time badge: it travels with the knob, inside the ring (the knob's aria-valuetext carries the time) {%- endcomment -%}
+          <time id="clock-time-{{ section.id }}" class="clock-time knob-time" aria-hidden="true">--:--</time>
         </div>
+      </div>
+
+      {%- comment -%} In the orb from 750px, under it on phones {%- endcomment -%}
+      <div class="orb-text">
+        <p class="time-line">
+          <span id="clock-caption-{{ section.id }}" class="clock-caption">{{ 'kc.clock.caption_live' | t }}</span>
+        </p>
+        <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
       </div>
 
       <div class="callouts">
@@ -138,38 +180,6 @@
           {%- endif -%}
         </section>
       </div>
-    </div>
-
-    {%- comment -%} The script's copy, from the locale keys: captions, aria-valuetext tails, the seven hour windows {%- endcomment -%}
-    <div
-      class="readout"
-      data-mode="live"
-      data-caption-live="{{ 'kc.clock.caption_live' | t }}"
-      data-caption-preview="{{ 'kc.clock.caption_preview' | t }}"
-      data-valuetext-live="{{ 'kc.clock.valuetext_live' | t }}"
-      data-valuetext-preview="{{ 'kc.clock.valuetext_preview' | t }}"
-      data-window-1="{{ 'kc.clock.window_1' | t }}"
-      data-window-2="{{ 'kc.clock.window_2' | t }}"
-      data-window-3="{{ 'kc.clock.window_3' | t }}"
-      data-window-4="{{ 'kc.clock.window_4' | t }}"
-      data-window-5="{{ 'kc.clock.window_5' | t }}"
-      data-window-6="{{ 'kc.clock.window_6' | t }}"
-      data-window-7="{{ 'kc.clock.window_7' | t }}"
-    >
-      <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
-        {%- comment -%} Figma "interaction hint · drag the ring" icon {%- endcomment -%}
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false">
-          <path d="M10.9773 5C10.4287 2.82467 9.30133 1.33333 8 1.33333C6.15933 1.33333 4.66667 4.318 4.66667 8C4.66667 11.682 6.15933 14.6667 8 14.6667C8.228 14.6667 8.45133 14.6207 8.66667 14.5333M10.1294 9.13802L12.6721 10.378L11.4321 12.9207M12.6667 10.38C11.464 10.97 9.81733 11.3333 8 11.3333C4.318 11.3333 1.33333 9.84067 1.33333 8C1.33333 6.15933 4.318 4.66667 8 4.66667C11.2253 4.66667 13.9153 5.812 14.5333 7.33333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>{{ section.settings.hint_label | escape }}</span>
-      </button>
-      <p class="time-line">
-        <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
-        <span id="clock-caption-{{ section.id }}" class="clock-caption">{{ 'kc.clock.caption_live' | t }}</span>
-      </p>
-      <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
-      {%- comment -%} How the knob works, for screen readers only (the knob's aria-describedby) {%- endcomment -%}
-      <p class="visually-hidden" id="clock-help-{{ section.id }}">{{ 'kc.clock.help' | t }}</p>
     </div>
 
     {%- if section.settings.footer_text != blank or section.settings.footer_link_text != blank -%}
@@ -288,7 +298,7 @@
       "type": "text",
       "id": "hint_label",
       "label": "Explore Button Label",
-      "info": "Shown under the dial at every width.",
+      "info": "Shown above the dial at every width.",
       "default": "DRAG THE DOT · EXPLORE 24 HOURS"
     },
     {

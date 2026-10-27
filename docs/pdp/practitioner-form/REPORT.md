@@ -1,5 +1,134 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76l: no dead links when the form is off (Astra R94 B1)
+
+Astra R94 (`docs/runtime-review/R94-PRACTITIONER-ONE-FORM-ASTRA.md`), B1: the form section's own
+switch (`request_enabled` in the group) left the FAQ links and the Trusted Professionals button
+pointing at `#KcPractitionerRequest-panel` with nothing to open.
+
+**Why Liquid alone cannot fix it**: the openers live in other sections (the product FAQ block, the
+Trusted Professionals section). A Shopify section cannot read another section's settings, nor
+whether the editor hid that section. So the fix has two layers:
+
+1. **The independent switch is gone.** `request_enabled` is removed from
+   `sections/kc-practitioner-request.liquid` and `sections/practitioner-group.json`, so the form
+   renders whenever its section is in the group. The links have their own off switches, as Astra
+   suggested: the product FAQ block's "Link the FAQ to the request form", and a link in the Trusted
+   Professionals button.
+2. **The editor can still hide or remove the section.** For that case:
+   - `snippets/product-faq.liquid` (when it marks links) and `sections/trusted-professionals.liquid`
+     (when the button is an opener) also load `kc-practitioner-request.js`.
+   - The script runs once (`window.__kcPractitionerRequest`). With no `[data-kc-pr]` on the page it
+     hides every `a[data-kc-pr-open]` (`display: none`, `aria-hidden`, `tabindex=-1`) instead of
+     leaving dead jump links.
+   - Deferred scripts run after parsing, so the form at the end of the page is already in the DOM
+     when it checks.
+   - **What stays open**: without JavaScript and with the section hidden, a link stays a jump to an
+     absent target. It goes nowhere and breaks nothing, but Liquid cannot know.
+
+**Cleanup**:
+`git grep -n request_enabled -- sections/kc-practitioner-request.liquid sections/practitioner-group.json`
+finds nothing. The FAQ block's `request_enabled` is a different setting and stays.
+
+### R76l checks
+
+`fixture/popup.sh` gained cases 9–11. `pdp-nogroup` and `home-nogroup` are the same pages without
+the group. Results are in `results/r94-popup.txt`, at 390 and 1440.
+
+| Case | Result |
+|---|---|
+| 9: PDP without the form | pass: the 3 openers are hidden (`display: none`, `aria-hidden`); no dialog; the script ran; 0 errors |
+| 10: homepage without the form | pass: the button is hidden and the section's bottom text stays; no dialog; 0 errors |
+| 11: several script tags | pass: 3 tags on the PDP, 1 dialog, one `showModal` call per click |
+| 1–8: the enabled flow | pass, unchanged: PDP and homepage openers, posts, thank-you and error reloads with Klaviyo `opened_from`, hash arrival, `showModal` fallback, no-JS jump |
+| Regression | pass: page checks 28/28; alignment in the popup 0.5px on the homepage and PDP |
+
+**Theme Check**: exit 0, 19 warnings.
+
+**Non-blockers N1–N3** stay open, as Astra wrote:
+- **N1**: Shopify runtime and editor proof of the section group (unpublished preview, owner's
+  release flow).
+- **N2**: the translation migration (source-copy).
+- **N3**: the intro copy, Victor's decision.
+
+## R76k: one form for the site, opened on the homepage too
+
+Victor, 26 Oct:
+- "de knop mag ook die popup openen" (R76j: the Trusted Professionals button);
+- "op de homepage willen we dat het daar gewoon opent";
+- his choice: "Eén formulier voor de site".
+
+**Where the form lives now**:
+- `sections/kc-practitioner-request.liquid` in a new section group,
+  `sections/practitioner-group.json` (type `custom.practitioner`, `enabled_on` that group only).
+- `layout/theme.liquid` renders the group between `<main>` and the footer group, on
+  `request.page_type` `index` and `product` only.
+- **One place** for the texts and their translations.
+
+**What opens it**: every `a[data-kc-pr-open]` on the page, a real link to
+`#KcPractitionerRequest-panel`.
+- `snippets/product-faq.liquid` marks the matching FAQ links: href contains `request_trigger_url`,
+  or the text contains `request_trigger_text`. Each gets that href, `data-kc-pr-open` and its FAQ
+  question as `data-kc-pr-from`. The form is no longer rendered inside the FAQ item.
+- `sections/trusted-professionals.liquid`: with no button link, on the homepage and product
+  pages, the button becomes the same link, with "Homepage: …" or "Product page: Trusted
+  Professionals button". Elsewhere it shows "Coming soon" as before.
+- R76j's `request_product` setting and its `index.json` value are gone again.
+
+**Script** (`assets/kc-practitioner-request.js`):
+- The FAQ text search and the link-to-button swap are gone (`findTriggers`, `itemTitle`,
+  `.kc-pr-trigger`). The links stay links, and the script intercepts their click.
+- Arriving with the hash opens the popup; "Opened from" is then "Link to the form".
+- `?from` and the `FROM` list are gone (R76j).
+- Fallback without the popup: the form shows in its host at the end of the page (`.is-open`).
+- Focus on close: the link used, else the first visible link, else blur.
+
+**No JavaScript**: the host is hidden (`.kc-pr-host`). It shows when a link jumps to it
+(`:target`, `:has(:target)`) and after a post (`:has([data-kc-pr-state])`).
+
+**Settings**:
+- The 37 copy and Klaviyo `request_*` settings moved from the `product_faq` block schema to the
+  new section's schema. Their EN values moved from `templates/product.json` and
+  `templates/product.subscription-item.json` to `sections/practitioner-group.json`.
+- The FAQ block keeps three:
+  - `request_enabled`, now labelled "Link the FAQ to the request form";
+  - `request_trigger_url`;
+  - `request_trigger_text`, so its live NL/FR translations "studiedossier" and "dossier
+    scientifique" stay.
+- **Translations**: Translate & Adapt keeps them per section. All 37 keys start untranslated on
+  the group and need re-entry. 16 have live NL/FR values today (the list is in
+  `PROFESSIONALS-V1-PROPOSAL.md` §4.2 and `fixture/live/form-texts-live.json`); the 13 R76e keys
+  were never translated.
+
+**Cleanup proof**:
+`git grep -n -E "request_product|home-trusted|findTriggers|itemTitle|kc-pr-trigger|data-trigger-(url|text)|request_open|request_index|FROM\[" -- assets snippets sections layout templates`
+finds nothing in our files; the only hits are `itemTitle` in `assets/loop-widget.js`, which is
+unrelated.
+
+**Open for Victor**: the intro "The evidence pack holds the studies referenced above." has no
+"above" on the homepage. Dropping that sentence is a copy decision; the proposal's D4 has the
+same point.
+
+### R76k checks
+
+The fixture renders the PDP with this branch's `product-faq`, `trusted-professionals` and the group
+at the layout's place, and the homepage with the real trusted section and the group
+(`fixture/popup.sh`, `results/r76k-popup.txt`, at 390 and 1440).
+
+| Case | Result |
+|---|---|
+| PDP: openers | pass: 3 (dentists, kPNI, button), all to the panel, `aria-haspopup`/`controls`. The panel is in the dialog; the host and FAQ hold no form; 0 errors |
+| PDP: each link | pass: opens with focus on the title. Opened from: "Product page: Trusted Professionals button", "For dentists", "For kPNI / Orthomolecular practitioners". Close returns focus to the link. At 1440 the button is mobile-only (skipped) |
+| PDP: post from dentists | pass: posted and Klaviyo `opened_from` "For dentists". The reload reopens the dialog with the dentists item open behind |
+| Homepage: the button | pass: the form is hidden before; the click opens the popup on the same page with "Homepage: Trusted Professionals button"; close returns focus to the button and unlocks |
+| Homepage: post | pass: the thank-you reload reopens with the thank-you and Klaviyo `opened_from` = homepage. The error reload has the alert focused, the practice and radio restored and no Klaviyo call |
+| Arrival with the hash | pass: opens on load with "Link to the form" and the hash dropped |
+| `showModal()` throws | pass: the link shows the form inline at the end of the page, focused, nothing locked, no errors |
+| No JavaScript | pass: the host is hidden; the 2 FAQ links point to the panel; after the jump the host is shown and the form visible |
+| Regression | pass: the parked prototype's page checks 28/28 (plus a new label-text check, which caught a fixture bug: the prototype read its texts from the product template); alignment in the popup 0.5px on the homepage and PDP |
+
+**Theme Check**: exit 0, 19 warnings.
+
 ## R76h: option labels wrap safely (Astra R76g N1)
 
 The landing desk relayed Astra's R76g non-blocker N1: at 360px a long Dutch label such as
