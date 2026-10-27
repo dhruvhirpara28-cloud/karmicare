@@ -22,6 +22,7 @@
     sectionEl._chronoInit = true;
 
     const knob = sectionEl.querySelector('.knob');
+    const knobIcon = knob ? knob.querySelector('svg') : null;
     const orbit = sectionEl.querySelector('.orbit');
     const readout = sectionEl.querySelector('.readout');
     const timeOut = sectionEl.querySelector('.clock-time');
@@ -46,9 +47,9 @@
     });
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // Until the visitor first takes the knob (once per visit), the knob waits two hours early and
-    // runs to the current time when the dial comes into view; then its halo pulses (.is-inviting)
-    // until the knob is taken (Victor, 26 Oct)
+    // Until the visitor first takes the knob (once per visit), the knob waits two hours early; when
+    // the section comes into view it turns once on itself while it runs to the current time, then
+    // its halo pulses (.is-inviting) until the knob is taken (Victor, 26 Oct)
     const exploredKey = 'kc-clock-explored';
     let explored = false;
     try { explored = sessionStorage.getItem(exploredKey) === '1'; } catch (_) { }
@@ -85,6 +86,10 @@
       knob.style.left = (50 + (178 / 604) * 100 * Math.sin(radians)) + '%';
       knob.style.top = (50 - (178 / 604) * 100 * Math.cos(radians)) + '%';
       knob.dataset.angle = String(angle);
+      // The time badge rides just inside the ring, towards the centre (144/604), so it never clips
+      // at the dial's edge on phones and stays clear of the copy in the orb
+      timeOut.style.left = (50 + (144 / 604) * 100 * Math.sin(radians)) + '%';
+      timeOut.style.top = (50 - (144 / 604) * 100 * Math.cos(radians)) + '%';
     }
 
     function draw(minutes, preview = false) {
@@ -135,6 +140,7 @@
     function stopReturn() {
       if (returnFrame !== null) cancelAnimationFrame(returnFrame);
       returnFrame = null;
+      if (knobIcon) knobIcon.style.transform = '';
     }
 
     function reset(animate = true, duration = 800) {
@@ -169,18 +175,20 @@
       returnFrame = requestAnimationFrame(step);
     }
 
-    // The knob runs from two hours early to now, easing in and out; the readout stays live
+    // From two hours early to now in 2.4 s, easing in and out, while the knob's icon turns 360 degrees
+    // on itself. The knob stays fully visible and the readout stays live.
     function arrive() {
       if (!previewPending) return;
       stopPreview();
       const from = displayedMinutes;
       const distance = normalize(minutesNow() - from + 720) - 720;
       const started = performance.now();
-      const duration = 1800;
+      const duration = 2400;
       function step(now) {
         const progress = Math.min(1, (now - started) / duration);
         const eased = progress < .5 ? 4 * Math.pow(progress, 3) : 1 - Math.pow(-2 * progress + 2, 3) / 2;
         positionKnob(from + distance * eased);
+        if (knobIcon) knobIcon.style.transform = 'rotate(' + (360 * eased) + 'deg)';
         if (progress < 1) {
           returnFrame = requestAnimationFrame(step);
         } else {
@@ -298,17 +306,17 @@
       if (event.matches) reset(false);
     });
 
-    // The run starts once half the dial is in view (on phones the clipped dial shows about two
-    // thirds at most). Not the empty .orbit: base.css hides div:empty, so it never intersects.
-    // With reduced motion or without an observer the knob stays on now and only the halo is set.
+    // The run starts as soon as 15% of the section is in view, so the knob is already moving when
+    // the dial arrives on screen (Victor, 26 Oct). With reduced motion or without an observer the
+    // knob stays on now and only the halo is set.
     if (!explored && !reducedMotion.matches && 'IntersectionObserver' in window) {
       previewPending = true;
       previewObserver = new IntersectionObserver(entries => {
         if (!entries.some(entry => entry.isIntersecting)) return;
         previewObserver.disconnect();
-        setTimeout(arrive, 250);
-      }, { threshold: 0.5 });
-      previewObserver.observe(orbit.parentElement);
+        arrive();
+      }, { threshold: 0.15 });
+      previewObserver.observe(sectionEl);
     } else if (!explored) {
       sectionEl.classList.add('is-inviting');
     }
