@@ -1,11 +1,11 @@
 {%- comment -%}
-  Practitioner request form (R76, popup R76b): the evidence pack and samples request of the kPNI
-  FAQ item. snippets/product-faq.liquid renders it once, inside the FAQ item whose answer holds the
-  trigger link, and opens that item after a post. assets/kc-practitioner-request.js moves this
-  panel into a modal <dialog> (the close button comes from the <template> below), turns the link
-  into the button that opens it, reopens it after a post with the thank-you or the errors, and
-  checks the fields before Shopify takes the post. Without JavaScript the form shows under the
-  answer and the link stays as it is.
+  Practitioner request form (R76, popup R76b, one form for the site R76k): the evidence pack and
+  samples request. sections/kc-practitioner-request.liquid renders it once per page (the layout
+  shows that section group on the homepage and product pages). Links marked data-kc-pr-open open
+  it: the PDP FAQ links (snippets/product-faq.liquid) and the Trusted Professionals button.
+  assets/kc-practitioner-request.js moves this panel into a modal <dialog> (the close button comes
+  from the <template> below), reopens it after a post with the thank-you or the errors, and checks
+  the fields before Shopify takes the post. Without JavaScript the links jump to the form here.
 
   The post is Shopify's own contact form, as on the withdrawal page: it goes to the store's contact
   email (Settings > General > Store details). The inbox keys are fixed English words, so every
@@ -14,11 +14,10 @@
   Klaviyo's flow emails the practitioner a confirmation and the team an alert, from karmicare.com.
 
   Accepts:
-  - s: the product_faq block settings (every visible string is a setting)
-  - trigger_url / trigger_text: how the script finds the link (block settings, already resolved)
+  - s: the kc-practitioner-request section settings (every visible string is a setting)
 
   Usage:
-  {% render 'kc-practitioner-request', s: block.settings, trigger_url: url, trigger_text: text %}
+  {% render 'kc-practitioner-request', s: section.settings %}
 {%- endcomment -%}
 
 {{ 'kc-practitioner-request.css' | asset_url | stylesheet_tag }}
@@ -39,8 +38,6 @@
   class="kc-pr"
   id="KcPractitionerRequest-panel"
   data-kc-pr
-  data-trigger-url="{{ trigger_url | escape }}"
-  data-trigger-text="{{ trigger_text | escape }}"
   data-klaviyo-company="{{ s.request_klaviyo_company_id | strip | escape }}"
   data-klaviyo-metric="{{ s.request_klaviyo_metric | strip | escape }}"
 >

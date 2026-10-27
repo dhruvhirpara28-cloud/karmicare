@@ -24,13 +24,15 @@
     const knob = sectionEl.querySelector('.knob');
     const knobIcon = knob ? knob.querySelector('svg') : null;
     const orbit = sectionEl.querySelector('.orbit');
+    const dial = sectionEl.querySelector('.dial');
+    const shiftLabels = [...sectionEl.querySelectorAll('.shift-label')];
     const readout = sectionEl.querySelector('.readout');
     const timeOut = sectionEl.querySelector('.clock-time');
     const copyOut = sectionEl.querySelector('.clock-copy');
     const caption = sectionEl.querySelector('.clock-caption');
     const hint = sectionEl.querySelector('.hint');
 
-    if (!knob || !orbit || !readout || !timeOut || !copyOut || !caption) return;
+    if (!knob || !orbit || !dial || !readout || !timeOut || !copyOut || !caption) return;
 
     // Theme synchronization with site-wide Day / Night mode
     function syncTheme(mode) {
@@ -86,10 +88,72 @@
       knob.style.left = (50 + (178 / 604) * 100 * Math.sin(radians)) + '%';
       knob.style.top = (50 - (178 / 604) * 100 * Math.cos(radians)) + '%';
       knob.dataset.angle = String(angle);
-      // The time badge rides just inside the ring, towards the centre (144/604), so it never clips
-      // at the dial's edge on phones and stays clear of the copy in the orb
-      timeOut.style.left = (50 + (144 / 604) * 100 * Math.sin(radians)) + '%';
-      timeOut.style.top = (50 - (144 / 604) * 100 * Math.cos(radians)) + '%';
+      placeBadge();
+    }
+
+    // The time badge rides inside the ring, along its inner edge, a step clockwise of the knob: the
+    // step is the smallest angle that keeps it clear of the knob, even scaled while held (Astra R93
+    // B1), and the radius keeps every corner inside the ring (Victor, 27 Oct). Where that place
+    // would cover the Awake or Asleep word (phones), it keeps to its side and moves further along
+    // the ring, or takes the other side, whichever clears the word first; each change glides
+    // (Astra R93b B3).
+    const badgeSteps = [1, 1.5, 2, 2.5, 3];
+    let badgePlace = '1:1';
+    let swapTimer = null;
+
+    function placeBadge() {
+      const size = dial.offsetWidth;
+      if (!size) return;
+      const radians = (Number(knob.dataset.angle) || 0) * Math.PI / 180;
+      const knobRadius = size * 178 / 604;
+      const halfWidth = timeOut.offsetWidth / 2;
+      const halfHeight = timeOut.offsetHeight / 2;
+      const badgeRadius = knobRadius - 4 - Math.hypot(halfWidth, halfHeight);
+      const clearance = knob.offsetWidth * 1.1 / 2 + 6 + halfWidth;
+      // Law of cosines: the angle at which the badge centre is `clearance` away from the knob centre
+      const cosStep = (knobRadius ** 2 + badgeRadius ** 2 - clearance ** 2) / (2 * knobRadius * badgeRadius);
+      const step = Math.acos(Math.max(-1, Math.min(1, cosStep)));
+      // Badge centre for a side and a multiple of the step, in px from the dial's centre
+      const centreFor = (side, times) => {
+        const angle = radians + side * step * times;
+        return [badgeRadius * Math.sin(angle), -badgeRadius * Math.cos(angle)];
+      };
+      // Worked out from the target place, not the badge's box, which may still be gliding; 2px of
+      // margin covers the rounding of offsetWidth/offsetHeight
+      const dialBox = dial.getBoundingClientRect();
+      const coversLabel = ([x, y]) => {
+        const left = dialBox.left + dialBox.width / 2 + x - halfWidth - 2;
+        const top = dialBox.top + dialBox.height / 2 + y - halfHeight - 2;
+        const right = left + 2 * halfWidth + 4;
+        const bottom = top + 2 * halfHeight + 4;
+        return shiftLabels.some(label => {
+          const box = label.getBoundingClientRect();
+          return box.width > 0 && left < box.right && right > box.left && top < box.bottom && bottom > box.top;
+        });
+      };
+      const currentSide = Number(badgePlace.split(':')[0]);
+      let side = 1;
+      let times = 1;
+      search: for (const multiple of badgeSteps) {
+        for (const candidate of [currentSide, -currentSide]) {
+          if (!coversLabel(centreFor(candidate, multiple))) {
+            side = candidate;
+            times = multiple;
+            break search;
+          }
+        }
+      }
+      const place = side + ':' + times;
+      if (place !== badgePlace) {
+        // A change of place glides; only then, so the badge never trails the knob during a drag
+        timeOut.classList.add('is-switching');
+        clearTimeout(swapTimer);
+        swapTimer = setTimeout(() => timeOut.classList.remove('is-switching'), 250);
+        badgePlace = place;
+      }
+      const [x, y] = centreFor(side, times);
+      timeOut.style.left = (50 + x / size * 100) + '%';
+      timeOut.style.top = (50 + y / size * 100) + '%';
     }
 
     function draw(minutes, preview = false) {
@@ -104,6 +168,7 @@
       const message = windowEntry ? readout.getAttribute('data-window-' + windowEntry[2]) || '' : '';
       timeOut.textContent = time;
       timeOut.dateTime = time;
+      placeBadge();
       copyOut.textContent = message;
       caption.textContent = (preview ? readout.dataset.captionPreview : readout.dataset.captionLive) || '';
       readout.dataset.mode = preview ? 'preview' : 'live';
@@ -325,15 +390,22 @@
     startTimer();
 
     reserveCopyHeight();
-    if (document.fonts) document.fonts.ready.then(reserveCopyHeight);
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        reserveCopyHeight();
+        placeBadge();
+      });
+    }
     // Remeasure on every resize, once per frame: a breakpoint can change the copy's type size while
-    // its width stays the same (380px on both sides of 750, Astra R92)
+    // its width stays the same (380px on both sides of 750, Astra R92), and the dial's size moves
+    // the badge
     let measureFrame = null;
     window.addEventListener('resize', () => {
       if (measureFrame !== null) return;
       measureFrame = requestAnimationFrame(() => {
         measureFrame = null;
         reserveCopyHeight();
+        placeBadge();
       });
     });
   }
