@@ -54,8 +54,9 @@
     </div>
 
     {%- comment -%}
-      Above the dial: the time and its copy, then the explore pill (Victor, 26 Oct). The script's
-      copy comes from the locale keys: captions, aria-valuetext tails, the seven hour windows.
+      Above the dial: the explore pill. The time rides on the knob, and the caption and copy sit in
+      the orb, under it on phones (Victor, 26 Oct, option E). The script's copy comes from the locale
+      keys: captions, aria-valuetext tails, the seven hour windows.
     {%- endcomment -%}
     <div
       class="readout"
@@ -72,11 +73,6 @@
       data-window-6="{{ 'kc.clock.window_6' | t }}"
       data-window-7="{{ 'kc.clock.window_7' | t }}"
     >
-      <p class="time-line">
-        <time id="clock-time-{{ section.id }}" class="clock-time">--:--</time> ·
-        <span id="clock-caption-{{ section.id }}" class="clock-caption">{{ 'kc.clock.caption_live' | t }}</span>
-      </p>
-      <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
       <button type="button" class="hint" aria-controls="clock-knob-{{ section.id }}">
         {%- comment -%} Figma "interaction hint · drag the ring" icon {%- endcomment -%}
         <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" focusable="false">
@@ -145,7 +141,18 @@
               <path d="M22.9584 16.6392C19.7481 14.7222 16.662 14.2932 15.1283 15.8269C12.9591 17.9961 14.7174 23.2727 19.0567 27.612C23.396 31.9512 28.6726 33.7096 30.8418 31.5403C31.1105 31.2716 31.3195 30.9542 31.4704 30.5975M26.8358 22.5152L31.2937 20.98L32.8289 25.438M31.2897 20.9887C30.5676 23.1014 29.0552 25.4702 26.9135 27.612C22.5742 31.9512 17.2976 33.7096 15.1283 31.5403C12.9591 29.3711 14.7174 24.0945 19.0567 19.7552C22.8578 15.9541 27.3778 14.1337 29.899 15.1983" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
+
+          {%- comment -%} The time badge: it travels with the knob, inside the ring (the knob's aria-valuetext carries the time) {%- endcomment -%}
+          <time id="clock-time-{{ section.id }}" class="clock-time knob-time" aria-hidden="true">--:--</time>
         </div>
+      </div>
+
+      {%- comment -%} In the orb from 750px, under it on phones {%- endcomment -%}
+      <div class="orb-text">
+        <p class="time-line">
+          <span id="clock-caption-{{ section.id }}" class="clock-caption">{{ 'kc.clock.caption_live' | t }}</span>
+        </p>
+        <p class="state-copy clock-copy" id="clock-copy-{{ section.id }}"></p>
       </div>
 
       <div class="callouts">
@@ -291,7 +298,7 @@
       "type": "text",
       "id": "hint_label",
       "label": "Explore Button Label",
-      "info": "Shown above the dial, under the time, at every width.",
+      "info": "Shown above the dial at every width.",
       "default": "DRAG THE DOT · EXPLORE 24 HOURS"
     },
     {
