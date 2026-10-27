@@ -27,7 +27,8 @@ html = re.sub(r'(href|src|action)="/(?!/)', r'\1="' + LIVE + '/', html)
 # Swap the clock's two assets for the branch versions; a build stamp keeps browsers from reusing
 # an older copy of these and of the variant files
 STAMP = str(int(time.time()))
-for name in ('chronobiology-clock-karmicare.js', 'section-chronobiology-clock-karmicare.css'):
+for name in ('chronobiology-clock-karmicare.js', 'section-chronobiology-clock-karmicare.css',
+             'section-two-formulas-karmicare.css'):
     found = re.findall(r'https://www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+', html)
     assert found, name
     for url in set(found):
