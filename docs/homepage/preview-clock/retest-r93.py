@@ -94,6 +94,6 @@ for lang, page in PAGES.items():
         ok = not bad and all(p['lines'] == 1 and p['fits'] for p in pills)
         failures += not ok
         print(json.dumps({'lang': lang, 'width': width, 'ok': ok, 'minKnobGap': worst['knobGap'],
-                          'maxOutsideDial': worst['outsideDial'], 'badPositions': bad[:3],
+                          'maxOutsideDial': worst['outsideDial'], 'badPositions': bad[:3], 'badCount': len(bad), 'badTimes': [b['time'] for b in bad],
                           'pills': [(p['text'][:22], p['lines'], p['pill']) for p in pills]}, ensure_ascii=False), flush=True)
 print('failures', failures)

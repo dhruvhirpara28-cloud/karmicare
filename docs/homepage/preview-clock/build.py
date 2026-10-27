@@ -72,6 +72,18 @@ BAR = '''
 <script>
   (() => {
     const params = new URLSearchParams(location.search);
+    // ?at=HH:MM pins the clock's "now" for the preview (new Date() without arguments)
+    const at = /^(\d{1,2}):(\d{2})$/.exec(params.get('at') || '');
+    if (at) {
+      const RealDate = Date;
+      window.Date = class extends RealDate {
+        constructor(...args) {
+          super(...args);
+          if (!args.length) this.setHours(Number(at[1]), Number(at[2]), 0, 0);
+        }
+      };
+      window.Date.now = RealDate.now;
+    }
     if (params.get('fix')) document.documentElement.dataset.kcFix = params.get('fix').replace(/,/g, ' ');
     if (params.get('shift')) document.documentElement.style.setProperty('--kc-shift', params.get('shift') / 100);
     if (params.get('cap')) {
