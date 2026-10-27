@@ -132,7 +132,10 @@ body.night-mode .chronobiology-clock {
 }
 
 /* ── Timeline: dial artwork and knob ── */
+/* flow-root keeps the dial's negative top margin inside the crop: overflow: clip alone does not
+   stop it collapsing through, which slid the window down and cut the orb's base on phones */
 .chronobiology-clock .timeline {
+  display: flow-root;
   position: relative;
   width: 100%;
   height: calc(var(--dial-size) * 338 / 422.8);
@@ -145,7 +148,8 @@ body.night-mode .chronobiology-clock {
   height: var(--dial-size);
   margin-top: calc(var(--dial-size) * -41 / 422.8);
   margin-left: calc((100% - var(--dial-size)) / 2);
-  isolation: isolate;
+  /* No isolation: the knob (10) and its time badge (9) must stack above the copy in the orb (5),
+     which lives outside the dial, while the orb artwork stays under it (Victor, 27 Oct) */
 }
 
 .chronobiology-clock .artwork {
@@ -539,7 +543,8 @@ body.night-mode .chronobiology-clock {
 }
 
 /* The time badge: page-coloured, it rides inside the ring next to the knob */
-/* The script places it beside the knob, clear of it; it also paints under the knob (9 < 10) */
+/* The script places it inside the ring, a step clockwise of the knob and clear of it; it also
+   paints under the knob (9 < 10) */
 .chronobiology-clock .knob-time {
   position: absolute;
   z-index: 9;
@@ -665,6 +670,14 @@ body.night-mode .chronobiology-clock {
 @media (max-width: 749px) {
   .chronobiology-clock {
     --dial-size: min(604px, calc((100vw - 2 * var(--kc-responsive-spacing-page-gutter)) * 422.8 / 353));
+  }
+
+  /* Awake and Asleep stay in the orb on phones, one type step up from the dial-scaled 9-11px
+     (label-sm) and one weight up, Medium to Bold, the next weight the theme loads (Victor, 27 Oct) */
+  .chronobiology-clock .shift-label {
+    font-weight: 700;
+    font-size: var(--kc-responsive-label-sm-text-size);
+    line-height: var(--kc-responsive-label-sm-line-height);
   }
 
   .chronobiology-clock .leader {

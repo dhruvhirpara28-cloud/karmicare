@@ -90,33 +90,24 @@
       placeBadge();
     }
 
-    // The time badge sits beside the knob along the ring, just far enough that it never covers the
-    // knob, even scaled while held, nor the copy in the orb (Astra R93 B1). It takes the clockwise
-    // side, or the other side where that would cover the 06:40 / 22:00 time labels.
-    const timeLabels = [...sectionEl.querySelectorAll('.time-label')];
-
+    // The time badge rides inside the ring, along its inner edge, a fixed step clockwise of the
+    // knob: the step is the smallest angle that keeps it clear of the knob, even scaled while held
+    // (Astra R93 B1), and the radius keeps every corner inside the ring (Victor, 27 Oct)
     function placeBadge() {
       const size = dial.offsetWidth;
       if (!size) return;
       const radians = (Number(knob.dataset.angle) || 0) * Math.PI / 180;
       const knobRadius = size * 178 / 604;
-      const tangentX = Math.cos(radians);
-      const tangentY = Math.sin(radians);
-      const halfAlong = Math.abs(tangentX) * timeOut.offsetWidth / 2 + Math.abs(tangentY) * timeOut.offsetHeight / 2;
-      const clearance = knob.offsetWidth * 1.1 / 2 + 6 + halfAlong;
-      const put = side => {
-        timeOut.style.left = (50 + (knobRadius * Math.sin(radians) + side * tangentX * clearance) / size * 100) + '%';
-        timeOut.style.top = (50 + (-knobRadius * Math.cos(radians) + side * tangentY * clearance) / size * 100) + '%';
-      };
-      const coversLabel = () => {
-        const badge = timeOut.getBoundingClientRect();
-        return timeLabels.some(label => {
-          const box = label.getBoundingClientRect();
-          return box.width && badge.left < box.right && badge.right > box.left && badge.top < box.bottom && badge.bottom > box.top;
-        });
-      };
-      put(1);
-      if (coversLabel()) put(-1);
+      const halfWidth = timeOut.offsetWidth / 2;
+      const halfHeight = timeOut.offsetHeight / 2;
+      const badgeRadius = knobRadius - 4 - Math.hypot(halfWidth, halfHeight);
+      const clearance = knob.offsetWidth * 1.1 / 2 + 6 + halfWidth;
+      // Law of cosines: the angle at which the badge centre is `clearance` away from the knob centre
+      const cosStep = (knobRadius ** 2 + badgeRadius ** 2 - clearance ** 2) / (2 * knobRadius * badgeRadius);
+      const step = Math.acos(Math.max(-1, Math.min(1, cosStep)));
+      const angle = radians + step;
+      timeOut.style.left = (50 + badgeRadius * Math.sin(angle) / size * 100) + '%';
+      timeOut.style.top = (50 - badgeRadius * Math.cos(angle) / size * 100) + '%';
     }
 
     function draw(minutes, preview = false) {
