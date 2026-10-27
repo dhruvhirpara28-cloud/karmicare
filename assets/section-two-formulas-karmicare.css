@@ -286,12 +286,16 @@ body.night-mode .two-formulas__image-wrap::before {
   list-style: none;
 }
 
+/* Glass like the PDP pills (kc-buybox .highlight-pill): the default border, glass fill and blur,
+   in place of the 12% currentColor line (Victor, 27 Oct) */
 .two-formulas__pills li {
   text-transform: uppercase;
-  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-default);
+  background-color: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
   font-weight: var(--font-500-weight);
   border-radius: var(--tertiary-border-radius);
-
 }
 
 @media screen and (min-width: 1200px) {
