@@ -145,3 +145,18 @@ Report: `docs/runtime-review/R90B-BLOG-LAYOUT-ASTRA.md`.
 | An external tag with its own `loading="eager"` | src untouched, no duplicate attribute, loads |
 
 **Regression:** `r90_check.py` ran 25 cases (nano EN/NL/FR, short, headaches × 360/390/750/990/1440). Picture edges, reserved heights, one h1 and no sideways scroll are unchanged. Theme Check: exit 0, 0 errors, 19 warnings in the theme. Astra's untracked `docs/runtime-review/r90b-tmp` export adds lint noise in this worktree only.
+
+## Hotfix: Liquid error in place of the body pictures (26 Oct, after landing)
+
+**Found on the live store** (release 12, main 2f58500), checked with `fixture/tools/probe-live*.js`. Every body picture of every article printed `Liquid error (sections/main-article line 120): invalid url input`. The Files lookup `images['name.jpg'] | image_url` worked in the local liquidjs render, where both are stubbed, but fails on Shopify. Everything else was live as built:
+- one h1, headings 23232333322;
+- "On this page" / "Op deze pagina";
+- Sources 3, Keep reading 3, the end CTA;
+- the index with 8 rows;
+- the global tokens live.
+
+**Hotfix:** the lookup is removed. Every body picture keeps its tag exactly as the article wrote it, with lazy loading and async decoding added when missing. The rendered tags equal the source (nano 4 of 4, morning 2 of 2), there is no Liquid error, and Theme Check gives 0 errors and 19 warnings.
+
+**Reopened: R90 B2** (pictures reserve no space). The way back is width/height for the 16 known files, checked on a real Shopify render (dev theme or preview) before it lands; or source-copy re-inserts the pictures with their sizes (D7).
+
+**Lesson:** the liquidjs fixture cannot prove Shopify-only objects and filters (`images`, `image_url` on Files). A change that relies on them needs a real Shopify render.
