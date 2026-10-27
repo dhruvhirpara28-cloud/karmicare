@@ -5,6 +5,7 @@
 ### Changelog
 | Date | Change |
 |------|--------|
+| 2026-10-27 | Scope: EN and FR only. The NL dash rows go to the new lane soft-launch-nl-voice (Victor 27 Oct), whose NL rewrites have no dashes. Source-copy stays owner of the NL files and the registration, and receives approved NL voice batches through the landing desk. |
 | 2026-10-26 | Inventory (read only) and batch plan. The rewrite tables follow per batch. Brief: landing desk, Victor 26 Oct. |
 
 Rule (Victor, 26 Oct):
@@ -16,7 +17,7 @@ Rule (Victor, 26 Oct):
   - a label with its explanation takes a colon or the middle dot "·".
 - Legal text keeps exactly the same meaning and gets an extra check.
 
-Round 8 starts after round 7 is written.
+Round 8 starts after round 7 is written. **Since 27 Oct round 8 covers EN and FR.** The NL rows (133 in the payloads, 4 in `locales/nl.json`) go to the NL voice lane.
 
 ## Inventory (26 Oct)
 
