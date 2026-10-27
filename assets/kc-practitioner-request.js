@@ -1,28 +1,29 @@
-/* kc-practitioner-request.js: the practitioner request form in the PDP FAQ
-   (snippets/kc-practitioner-request.liquid, R76; popup R76b; fallback R76c).
+/* kc-practitioner-request.js: the practitioner request form, one for the site
+   (sections/kc-practitioner-request.liquid in sections/practitioner-group.json, rendered by
+   layout/theme.liquid on the homepage and product pages; snippets/kc-practitioner-request.liquid).
+   R76, popup R76b, fallback R76c, one form for homepage and PDP R76k.
 
-   - Finds the trigger links in the FAQ (answers and section content of every item, so also the
-     "For dentists" note; href contains data-trigger-url, else text contains data-trigger-text) and
-     swaps each for a button with the same content and classes. The form panel moves into a modal
-     <dialog> on body (a dialog inside a closed <details> would not render), which every button
-     opens; contact[Opened from] gets the FAQ question above the button used. Links elsewhere with
-     data-kc-pr-open (the Trusted Professionals button, sections/trusted-professionals.liquid) open
-     it too, with their data-kc-pr-from; arriving with #KcPractitionerRequest-panel (that button on
-     the homepage links to the product so) opens it on load. No link found, or no
-     showModal(): the form stays inline, as without JavaScript. If showModal() throws when it is
-     called, the panel, the links and the inline form come back in the FAQ item and the page is
-     not locked.
+   - Every link on the page marked data-kc-pr-open opens the form: the two PDP FAQ links
+     (snippets/product-faq.liquid marks them) and the Trusted Professionals button
+     (sections/trusted-professionals.liquid). They are real links to #KcPractitionerRequest-panel,
+     so without JavaScript they jump to the form at the bottom of the page. With JavaScript the
+     panel moves into a modal <dialog> on body and the links open it; contact[Opened from] gets
+     the link's data-kc-pr-from. Arriving with #KcPractitionerRequest-panel opens it on load. No
+     link on the page, or no showModal(): the form stays in its host, shown only when targeted
+     (CSS). If showModal() throws when it is called, the panel goes back to its host, which shows,
+     and the page is not locked. No form on the page (its section hidden or removed in the
+     editor): the links are hidden, not left as dead jump links (R94 B1).
    - The dialog, as the professionals quote panel: showModal, scrim, close button, Escape and a
      click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
      (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
-     the button.
+     the link used (or the first visible one).
    - Checks the fields before the post: name, a profession (and its text when "Other" is chosen;
      that field shows only then), practice name, email, at least one of evidence pack and samples,
      and the practice address when samples is ticked. Messages come from the settings.
-   - Shopify reloads the page after the post. The item is already open (Liquid); the dialog opens
-     again with the thank-you (announced) or the alert, and focus goes there. On an error the fields
-     Shopify does not give back are restored from this tab's sessionStorage, which is cleared again
-     at once.
+   - Shopify reloads the page after the post. The dialog opens again with the thank-you
+     (announced) or the alert, the FAQ item of the link used is open behind it, and focus goes
+     there. On an error the fields Shopify does not give back are restored from this tab's
+     sessionStorage, which is cleared again at once.
    - With the Klaviyo key set (data-klaviyo-company), the thank-you reload sends one event with the
      request from that same sessionStorage snapshot to Klaviyo's public endpoint; Klaviyo's flow
      emails the confirmation and the team alert. Only after Shopify accepted the post, so a refused
@@ -32,6 +33,11 @@
 (function () {
   'use strict';
 
+  /* The form section and every section with an opener load this file, so it can find out
+     whether the form is on the page; it runs once */
+  if (window.__kcPractitionerRequest) return;
+  window.__kcPractitionerRequest = true;
+
   var STORE_KEY = 'kc-practitioner-request';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var RESTORED = ['profession_other', 'practice', 'pack', 'samples', 'address', 'name', 'phone', 'body'];
@@ -40,8 +46,8 @@
   var KLAVIYO_REVISION = '2026-10-15';
   var KLAVIYO_METRIC = 'Practitioner Request Submitted';
   var KLAVIYO_TIMEOUT = 8000;
-  /* ?from= on a link to the form: a fixed list, so no free text reaches the inbox */
-  var FROM = { 'home-trusted': 'Homepage: Trusted Professionals button' };
+  /* "Opened from" when the form opens on arrival through a link from elsewhere */
+  var DIRECT = 'Link to the form';
 
   function store(action, value) {
     try {
@@ -54,89 +60,38 @@
     return null;
   }
 
-  /* Every trigger link in the FAQ: the answers and the section content of all items (the kPNI
-     answer, the "For dentists" note), by URL first, else by text. They all open the one form. */
-  function findTriggers(root) {
-    var faq = root.closest('.kc-faq-block') || root.closest('.kc-faq-item');
-    if (!faq) return [];
-    var links = Array.prototype.slice.call(
-      faq.querySelectorAll('.kc-faq-description a, .kc-faq-section-content a')
-    );
-    var url = root.getAttribute('data-trigger-url') || '';
-    var text = (root.getAttribute('data-trigger-text') || '').toLowerCase();
-    var found = [];
-    if (url) {
-      found = links.filter(function (a) {
-        return (a.getAttribute('href') || '').indexOf(url) !== -1;
-      });
-    }
-    if (!found.length && text) {
-      found = links.filter(function (a) {
-        return a.textContent.toLowerCase().indexOf(text) !== -1;
-      });
-    }
-    return found;
-  }
-
-  /* The FAQ question above a trigger, for "Opened from" in the inbox and in Klaviyo */
-  function itemTitle(el) {
-    var item = el && el.closest('.kc-faq-item');
-    var summary = item && item.querySelector('.kc-faq-summary');
-    return summary ? summary.textContent.trim() : '';
-  }
-
   function init(root) {
     var form = root.querySelector('form');
     if (!form) return;
     var state = root.querySelector('[data-kc-pr-state]');
     var stateName = state ? state.getAttribute('data-kc-pr-state') : '';
-    var links = findTriggers(root);
-    /* links elsewhere on the page that open the form too (the Trusted Professionals button); they
-       stay links to #KcPractitionerRequest-panel, so without the popup they still reach the form */
+    /* the links that open the form: FAQ links and the Trusted Professionals button */
     var openers = Array.prototype.slice.call(document.querySelectorAll('a[data-kc-pr-open]'));
+    var host = root.closest('[data-kc-pr-host]');
     var dialog = null;
-    var buttons = [];
-    /* every control that can open the dialog, for the snapshot after a post */
-    var all = [];
-    /* the button the visitor opened the form with; focus returns there */
-    var button = null;
+    /* the link the visitor opened the form with; focus returns there */
+    var opener = null;
     var home = null;
     var openedFrom = form.querySelector('input[type=hidden][name="contact[Opened from]"]');
     var pending = stateName ? store('get') : null;
 
-    if (links.length && typeof document.createElement('dialog').showModal === 'function') {
-      /* marks the panel's place in the FAQ item, for the inline fallback */
+    if (openers.length && typeof document.createElement('dialog').showModal === 'function') {
+      /* marks the panel's place in its host, for the inline fallback */
       home = document.createComment('kc-practitioner-request');
       root.parentNode.insertBefore(home, root);
       dialog = buildDialog(root, stateName, afterClose);
-      buttons = links.map(function (link) {
-        var trigger = document.createElement('button');
-        trigger.type = 'button';
-        /* the link's own classes keep its look (the dentists note styles .rda-link) */
-        trigger.className = (link.className ? link.className + ' ' : '') + 'kc-pr-trigger';
-        trigger.innerHTML = link.innerHTML;
-        trigger.setAttribute('aria-haspopup', 'dialog');
-        trigger.setAttribute('aria-controls', dialog.id);
-        link.replaceWith(trigger);
-        trigger.addEventListener('click', function () {
-          use(trigger);
-          show(null);
-        });
-        return trigger;
-      });
-      openers.forEach(function (opener) {
-        opener.setAttribute('aria-haspopup', 'dialog');
-        opener.setAttribute('aria-controls', dialog.id);
-        opener.addEventListener('click', function (event) {
+      openers.forEach(function (link) {
+        link.setAttribute('aria-haspopup', 'dialog');
+        link.setAttribute('aria-controls', dialog.id);
+        link.addEventListener('click', function (event) {
           event.preventDefault();
-          use(opener);
+          use(link);
           show(null);
         });
       });
-      all = buttons.concat(openers);
-      /* after a post: the control the request was opened with, and its item open behind */
-      var before = pending && all[pending.opener];
-      use(before || buttons[0]);
+      /* after a post: the link the request was opened with, and its FAQ item open behind */
+      var before = pending && openers[pending.opener];
+      use(before || openers[0]);
       if (before) {
         var beforeItem = before.closest('.kc-faq-item');
         if (beforeItem) beforeItem.open = true;
@@ -144,14 +99,14 @@
       dialog.addEventListener('close', afterClose);
     }
 
-    function use(trigger) {
-      button = trigger;
-      if (openedFrom) openedFrom.value = trigger.getAttribute('data-kc-pr-from') || itemTitle(trigger);
+    function use(link) {
+      opener = link;
+      if (openedFrom) openedFrom.value = (link && link.getAttribute('data-kc-pr-from')) || '';
     }
 
     /* Opens the dialog and focuses the target: the thank-you or the alert after a reload, else the
        form title. The page is locked only once showModal() has worked. If it throws, the form goes
-       back inline into the FAQ item, as without JavaScript. An open dialog is not opened twice. */
+       back to its host, as without JavaScript. An open dialog is not opened twice. */
     function show(target) {
       if (dialog && !dialog.open) {
         try {
@@ -165,6 +120,7 @@
         focus.setAttribute('tabindex', '-1');
       }
       if (!dialog) {
+        if (host) host.classList.add('is-open');
         reveal(focus);
         return;
       }
@@ -173,34 +129,29 @@
       if (focus) focus.focus();
     }
 
-    /* The inline form of R76: the panel back in its place under the answer, the original link
-       back, the dialog gone, the item open */
+    /* The inline form: the panel back in its host, which shows; the dialog gone. The links keep
+       their click handlers and now scroll to it. */
     function backInline() {
       home.parentNode.insertBefore(root, home);
       home.remove();
-      buttons.forEach(function (trigger, i) {
-        trigger.replaceWith(links[i]);
-      });
       dialog.removeEventListener('close', afterClose);
       dialog.remove();
       dialog = null;
-      buttons = [];
-      button = null;
-      if (openedFrom) openedFrom.value = '';
-      var item = root.closest('.kc-faq-item');
-      if (item) item.open = true;
+      if (host) host.classList.add('is-open');
     }
 
     /* The close button and the scrim call this at once; Escape reaches it through the close event,
        which the browser fires a task later */
     function afterClose() {
-      if (!button || !document.body.classList.contains('overflow-hidden')) return;
+      if (!document.body.classList.contains('overflow-hidden')) return;
       document.body.classList.remove('overflow-hidden');
-      /* the Trusted Professionals button may be hidden at this width (it is mobile-only on the
-         PDP): then the first visible FAQ link takes focus, without moving the page; with none
-         visible, focus leaves the closed dialog instead of staying in it */
-      var target = [button].concat(buttons).filter(shown)[0];
-      if (target) target.focus(target === button ? undefined : { preventScroll: true });
+      /* the link used may be hidden at this width (the Trusted button is mobile-only on the PDP):
+         then the first visible link takes focus, without moving the page; with none visible,
+         focus leaves the closed dialog instead of staying in it */
+      var target = [opener].concat(openers).filter(function (el) {
+        return el && shown(el);
+      })[0];
+      if (target) target.focus(target === opener ? undefined : { preventScroll: true });
       if (dialog && dialog.contains(document.activeElement)) document.activeElement.blur();
     }
 
@@ -388,7 +339,7 @@
       /* for the Klaviyo event on the thank-you reload: the profession as the visitor read it */
       snapshot.profession_label = chosen ? chosen.parentNode.textContent.trim() : '';
       snapshot.email = fields.email ? fields.email.value.trim() : '';
-      snapshot.opener = all.indexOf(button);
+      snapshot.opener = openers.indexOf(opener);
       snapshot.opened_from = openedFrom ? openedFrom.value : '';
       snapshot.language = hiddenValue(form, 'Language');
       snapshot.page = hiddenValue(form, 'Page');
@@ -401,11 +352,10 @@
     if (stateName === 'error') {
       show(state);
     } else if (!stateName && dialog && window.location.hash === '#' + root.id) {
-      /* arriving through a link to the form (the homepage's Trusted Professionals button): open
-         it, say where the visitor came from, and drop the hash so a reload does not reopen it */
-      use(openers[0] || buttons[0]);
-      var from = FROM[new URLSearchParams(window.location.search).get('from')];
-      if (from && openedFrom) openedFrom.value = from;
+      /* arriving through a link to the form: open it, and drop the hash so a reload does not
+         reopen it */
+      use(openers[0]);
+      if (openedFrom) openedFrom.value = DIRECT;
       try {
         window.history.replaceState(null, '', window.location.pathname + window.location.search);
       } catch (e) {
@@ -558,5 +508,17 @@
     return dialog;
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('[data-kc-pr]'), init);
+  /* No form on this page (the editor hid or removed the practitioner section): the links that
+     would open it have nothing to open, so they go instead of staying as dead jump links */
+  function retireOpeners() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-kc-pr-open]'), function (link) {
+      link.style.display = 'none';
+      link.setAttribute('aria-hidden', 'true');
+      link.setAttribute('tabindex', '-1');
+    });
+  }
+
+  var roots = document.querySelectorAll('[data-kc-pr]');
+  if (roots.length) Array.prototype.forEach.call(roots, init);
+  else retireOpeners();
 })();

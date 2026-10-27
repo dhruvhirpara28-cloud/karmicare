@@ -169,26 +169,25 @@
   }
 }
 
-/* The trigger link, once the script has made it a button: it keeps the answer link's look */
-.kc-pr-trigger {
-  display: inline;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-  text-align: left;
-  text-decoration: underline;
-  text-underline-offset: var(--kc-responsive-spacing-layout-xxs, 3px);
-  cursor: pointer;
+/* The form's home at the end of the page (sections/kc-practitioner-request.liquid). With the
+   popup the panel leaves it, so the host shows only without the popup: when a link jumped to the
+   form (no JavaScript), after a post without JavaScript (the state is inside), or when the script
+   put the form back inline (.is-open). The column is the legal pages' 720px. */
+.kc-pr-host {
+  display: none;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px var(--kc-responsive-spacing-layout-xl);
+  scroll-margin-top: 120px;
 }
 
-.kc-pr-trigger:focus-visible {
-  outline: 2px solid var(--kc-mapped-border-focus-strong);
-  outline-offset: 2px;
-  border-radius: 2px;
+.kc-pr-host.is-open,
+.kc-pr-host:target,
+.kc-pr-host:has(:target),
+.kc-pr-host:has([data-kc-pr-state]) {
+  display: block;
 }
 
 /* Paragraph rules carry .kc-pr in front: product-faq.css spaces every .kc-faq-body p */

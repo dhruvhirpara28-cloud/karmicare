@@ -1,0 +1,44 @@
+######## width 390
+== 1 PDP: three links open the one popup; the form is not on the page
+openers 3 | all to #KcPractitionerRequest-panel true | aria true | panel in dialog true | host shown false | form inside the FAQ false | errors 0
+== 2 PDP: the button, then the two FAQ links
+button: open true, focus kc-pr__title, from Product page: Trusted Professionals button | close -> the button | dentists: open true, from For dentists | close -> the dentists link | kPNI: open true, from For kPNI / Orthomolecular practitioners | close -> the kPNI link, unlocked true, url 
+== 3 PDP: post from the dentists link, then the thank-you reload
+posted Opened from: For dentists | snapshot opener 0
+thank-you dialog true | dentists item open true | klaviyo opened_from: For dentists | close -> the dentists link | errors 0
+== 4 homepage: the button opens the popup right there
+form hidden before true | href #KcPractitionerRequest-panel | open true | same page true | focus kc-pr__title | from Homepage: Trusted Professionals button | close -> the button, unlocked true | errors 0
+== 5 homepage: post, then the thank-you and the error reloads
+snapshot from Homepage: Trusted Professionals button opener 0
+thank-you dialog true | focus kc-pr__success | klaviyo opened_from: Homepage: Trusted Professionals button | close -> the button
+saved
+error dialog true | alert focused true | practice restored Praktijk Peeters | radio restored true | from Homepage: Trusted Professionals button | klaviyo calls 0
+== 6 PDP: arriving with #KcPractitionerRequest-panel opens the popup
+open on arrival true | from Link to the form | hash after "" | close -> the button
+== 7 showModal throws: the links bring the form inline at the end of the page
+dialog false | host shown true | form in host true | focus kc-pr__title | locked false | errors 0
+== 8 no JavaScript: the form is hidden until a link jumps to it
+host before none | FAQ links 2
+after the jump: host block | form visible true
+######## width 1440
+== 1 PDP: three links open the one popup; the form is not on the page
+openers 3 | all to #KcPractitionerRequest-panel true | aria true | panel in dialog true | host shown false | form inside the FAQ false | errors 0
+== 2 PDP: the button, then the two FAQ links
+button hidden at this width (mobile-only on the PDP) | dentists: open true, from For dentists | close -> the dentists link | kPNI: open true, from For kPNI / Orthomolecular practitioners | close -> the kPNI link, unlocked true, url 
+== 3 PDP: post from the dentists link, then the thank-you reload
+posted Opened from: For dentists | snapshot opener 0
+thank-you dialog true | dentists item open true | klaviyo opened_from: For dentists | close -> the dentists link | errors 0
+== 4 homepage: the button opens the popup right there
+form hidden before true | href #KcPractitionerRequest-panel | open true | same page true | focus kc-pr__title | from Homepage: Trusted Professionals button | close -> the button, unlocked true | errors 0
+== 5 homepage: post, then the thank-you and the error reloads
+snapshot from Homepage: Trusted Professionals button opener 0
+thank-you dialog true | focus kc-pr__success | klaviyo opened_from: Homepage: Trusted Professionals button | close -> the button
+saved
+error dialog true | alert focused true | practice restored Praktijk Peeters | radio restored true | from Homepage: Trusted Professionals button | klaviyo calls 0
+== 6 PDP: arriving with #KcPractitionerRequest-panel opens the popup
+open on arrival true | from Link to the form | hash after "" | close -> BODY.gradient
+== 7 showModal throws: the links bring the form inline at the end of the page
+dialog false | host shown true | form in host true | focus kc-pr__title | locked false | errors 0
+== 8 no JavaScript: the form is hidden until a link jumps to it
+host before none | FAQ links 2
+after the jump: host block | form visible true
