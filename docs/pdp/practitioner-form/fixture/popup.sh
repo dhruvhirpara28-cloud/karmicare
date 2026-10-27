@@ -49,3 +49,15 @@ go "pdp-current-nojs.html?n=$N"
 ev "(() => { $H const before = getComputedStyle(host()).display; return 'host before ' + before + ' | FAQ links ' + document.querySelectorAll('.kc-faq-body a[href=\"#KcPractitionerRequest-panel\"]').length; })()"
 go "pdp-current-nojs.html?n=${N}c#KcPractitionerRequest-panel"
 ev "(() => { $H const h = host(); return 'after the jump: host ' + getComputedStyle(h).display + ' | form visible ' + (h.querySelector('form').getClientRects().length > 0); })()"
+
+echo "== 9 R94 B1: PDP with the form's section hidden or removed: the links go"
+go "pdp-nogroup.html?n=$N"
+ev "new Promise(r => setTimeout(r, 300)).then(() => { $H const o = Array.from(document.querySelectorAll('a[data-kc-pr-open]')); return 'form on page ' + !!document.querySelector('[data-kc-pr]') + ' | openers ' + o.length + ' | all hidden ' + o.every(a => !a.checkVisibility() && getComputedStyle(a).display === 'none') + ' | aria-hidden ' + o.every(a => a.getAttribute('aria-hidden') === 'true') + ' | dialog ' + !!dlg() + ' | script ran ' + !!window.__kcPractitionerRequest + ' | errors ' + window.__fxErrors.length; })"
+
+echo "== 10 R94 B1: homepage with the form's section hidden or removed: the button goes"
+go "home-nogroup.html?n=$N"
+ev "new Promise(r => setTimeout(r, 300)).then(() => { $H const c = document.querySelector('.trusted-professionals a[data-kc-pr-open]'); const text = document.querySelector('.trusted-professionals__bottom-text'); return 'form on page ' + !!document.querySelector('[data-kc-pr]') + ' | button hidden ' + (c && getComputedStyle(c).display === 'none') + ' | bottom text still shown ' + !!(text && text.checkVisibility()) + ' | dialog ' + !!dlg() + ' | errors ' + window.__fxErrors.length; })"
+
+echo "== 11 several script tags, one run: one dialog, each link bound once"
+go "pdp-current.html?n=${N}d"
+ev "(() => { $H const tags = document.querySelectorAll('script[src*=\"kc-practitioner-request.js\"]').length; const dialogs = document.querySelectorAll('dialog.kc-pr-dialog').length; let opened = 0; const d = dlg(); const orig = d.showModal.bind(d); d.showModal = function () { opened += 1; return orig(); }; kpni().closest('.kc-faq-item').open = true; kpni().click(); settle(); d.querySelector('[data-kc-pr-close]').click(); return 'script tags ' + tags + ' | dialogs ' + dialogs + ' | showModal calls for one click ' + opened; })()"

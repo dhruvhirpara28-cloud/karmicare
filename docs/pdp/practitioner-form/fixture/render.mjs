@@ -326,6 +326,8 @@ for (const [name, state] of [
   dom = replaceSection(dom, 'trusted_professionals_HAqYth', trusted);
   // the live page still carries the R76f form inside the FAQ item: drop its assets, then add the group
   dom = dom.replace(/<link[^>]*cdn\/shop[^>]*kc-practitioner-request\.css[^>]*>/g, '').replace(/<script[^>]*cdn\/shop[^>]*kc-practitioner-request\.js[^>]*><\/script>/g, '');
+  // R94 B1: the same page with the form's section hidden or removed in the editor
+  if (state === 'default') writeFileSync(join(OUT, 'pdp-nogroup.html'), dom.replace('</body>', fxTag('pdp-nogroup') + '</body>'));
   dom = beforeFooter(dom, await renderGroup(liquid));
   writeFileSync(join(OUT, `${name}.html`), dom.replace('</body>', fxTag(name) + '</body>'));
   results.push(`${name}: triggers by text ${FAQ_SETTINGS.request_trigger_text}, trusted CTA ${/data-kc-pr-open/.test(trusted) ? 'opens the form' : 'no opener'}`);
@@ -344,6 +346,7 @@ for (const [name, state] of [
   const section = sectionOf(homeTpl, 'trusted-professionals');
   const trusted = await liquid.renderFile('trusted-professionals', { section });
   let dom = replaceSection(absolute(readFileSync(join(LIVE, 'home-en.html'), 'utf8')), 'trusted_professionals_HAqYth', trusted);
+  if (state === 'default') writeFileSync(join(OUT, 'home-nogroup.html'), dom.replace('</body>', fxTag('home-nogroup') + '</body>'));
   dom = beforeFooter(dom, await renderGroup(liquid));
   writeFileSync(join(OUT, `${name}.html`), dom.replace('</body>', fxTag(name) + '</body>'));
   if (name === 'home-current') results.push(`home-current: trusted CTA href ${(trusted.match(/href="([^"]*)"[^>]*data-kc-pr-open/) || [])[1]}`);

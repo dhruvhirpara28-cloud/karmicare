@@ -17,6 +17,13 @@
 -%}
 {%- if faq_items != blank -%}
   {{ 'product-faq.css' | asset_url | stylesheet_tag }}
+  {%- if request_on -%}
+    {%- comment -%}
+      The links below open the form, which another section renders; the script runs once and hides
+      them when that section is hidden or removed (R94 B1)
+    {%- endcomment -%}
+    <script src="{{ 'kc-practitioner-request.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
   <div class="kc-faq-block pdp">
     <div class="kc-faq-list">
       {%- for item in faq_items -%}

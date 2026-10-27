@@ -1,5 +1,56 @@
 # R76: practitioner request form in the kPNI FAQ item
 
+## R76l: no dead links when the form is off (Astra R94 B1)
+
+Astra R94 (`docs/runtime-review/R94-PRACTITIONER-ONE-FORM-ASTRA.md`), B1: the form section's own
+switch (`request_enabled` in the group) left the FAQ links and the Trusted Professionals button
+pointing at `#KcPractitionerRequest-panel` with nothing to open.
+
+**Why Liquid alone cannot fix it**: the openers live in other sections (the product FAQ block, the
+Trusted Professionals section). A Shopify section cannot read another section's settings, nor
+whether the editor hid that section. So the fix has two layers:
+
+1. **The independent switch is gone.** `request_enabled` is removed from
+   `sections/kc-practitioner-request.liquid` and `sections/practitioner-group.json`, so the form
+   renders whenever its section is in the group. The links have their own off switches, as Astra
+   suggested: the product FAQ block's "Link the FAQ to the request form", and a link in the Trusted
+   Professionals button.
+2. **The editor can still hide or remove the section.** For that case:
+   - `snippets/product-faq.liquid` (when it marks links) and `sections/trusted-professionals.liquid`
+     (when the button is an opener) also load `kc-practitioner-request.js`.
+   - The script runs once (`window.__kcPractitionerRequest`). With no `[data-kc-pr]` on the page it
+     hides every `a[data-kc-pr-open]` (`display: none`, `aria-hidden`, `tabindex=-1`) instead of
+     leaving dead jump links.
+   - Deferred scripts run after parsing, so the form at the end of the page is already in the DOM
+     when it checks.
+   - **What stays open**: without JavaScript and with the section hidden, a link stays a jump to an
+     absent target. It goes nowhere and breaks nothing, but Liquid cannot know.
+
+**Cleanup**:
+`git grep -n request_enabled -- sections/kc-practitioner-request.liquid sections/practitioner-group.json`
+finds nothing. The FAQ block's `request_enabled` is a different setting and stays.
+
+### R76l checks
+
+`fixture/popup.sh` gained cases 9–11. `pdp-nogroup` and `home-nogroup` are the same pages without
+the group. Results are in `results/r94-popup.txt`, at 390 and 1440.
+
+| Case | Result |
+|---|---|
+| 9: PDP without the form | pass: the 3 openers are hidden (`display: none`, `aria-hidden`); no dialog; the script ran; 0 errors |
+| 10: homepage without the form | pass: the button is hidden and the section's bottom text stays; no dialog; 0 errors |
+| 11: several script tags | pass: 3 tags on the PDP, 1 dialog, one `showModal` call per click |
+| 1–8: the enabled flow | pass, unchanged: PDP and homepage openers, posts, thank-you and error reloads with Klaviyo `opened_from`, hash arrival, `showModal` fallback, no-JS jump |
+| Regression | pass: page checks 28/28; alignment in the popup 0.5px on the homepage and PDP |
+
+**Theme Check**: exit 0, 19 warnings.
+
+**Non-blockers N1–N3** stay open, as Astra wrote:
+- **N1**: Shopify runtime and editor proof of the section group (unpublished preview, owner's
+  release flow).
+- **N2**: the translation migration (source-copy).
+- **N3**: the intro copy, Victor's decision.
+
 ## R76k: one form for the site, opened on the homepage too
 
 Victor, 26 Oct:

@@ -11,7 +11,8 @@
      the link's data-kc-pr-from. Arriving with #KcPractitionerRequest-panel opens it on load. No
      link on the page, or no showModal(): the form stays in its host, shown only when targeted
      (CSS). If showModal() throws when it is called, the panel goes back to its host, which shows,
-     and the page is not locked.
+     and the page is not locked. No form on the page (its section hidden or removed in the
+     editor): the links are hidden, not left as dead jump links (R94 B1).
    - The dialog, as the professionals quote panel: showModal, scrim, close button, Escape and a
      click on the scrim close it, body.overflow-hidden locks the page. Focus goes to the form title
      (no keyboard popping up on phones), Tab wraps inside the dialog, and on close focus returns to
@@ -31,6 +32,11 @@
 
 (function () {
   'use strict';
+
+  /* The form section and every section with an opener load this file, so it can find out
+     whether the form is on the page; it runs once */
+  if (window.__kcPractitionerRequest) return;
+  window.__kcPractitionerRequest = true;
 
   var STORE_KEY = 'kc-practitioner-request';
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -502,5 +508,17 @@
     return dialog;
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll('[data-kc-pr]'), init);
+  /* No form on this page (the editor hid or removed the practitioner section): the links that
+     would open it have nothing to open, so they go instead of staying as dead jump links */
+  function retireOpeners() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-kc-pr-open]'), function (link) {
+      link.style.display = 'none';
+      link.setAttribute('aria-hidden', 'true');
+      link.setAttribute('tabindex', '-1');
+    });
+  }
+
+  var roots = document.querySelectorAll('[data-kc-pr]');
+  if (roots.length) Array.prototype.forEach.call(roots, init);
+  else retireOpeners();
 })();

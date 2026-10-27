@@ -8,11 +8,15 @@
   its popup; without JavaScript the links jump to it here (assets/kc-practitioner-request.css shows
   the host only then).
 {%- endcomment -%}
-{%- if section.settings.request_enabled -%}
-  <div class="kc-pr-host" id="KcPractitionerRequest-host" data-kc-pr-host>
-    {%- render 'kc-practitioner-request', s: section.settings -%}
-  </div>
-{%- endif -%}
+{%- comment -%}
+  No on/off switch here (R94 B1): the links that open this form live in other sections and cannot
+  read its settings. To turn the links off, use the product FAQ block's switch and give the Trusted
+  Professionals button a link. If the editor hides or removes this section all the same, the script
+  (also loaded by those sections) hides the links instead of leaving them dead.
+{%- endcomment -%}
+<div class="kc-pr-host" id="KcPractitionerRequest-host" data-kc-pr-host>
+  {%- render 'kc-practitioner-request', s: section.settings -%}
+</div>
 
 {% schema %}
 {
@@ -28,12 +32,6 @@
     {
       "type": "paragraph",
       "content": "Opens in a popup from the PDP FAQ links (their trigger is set in the product FAQ block) and from the Trusted Professionals button when its link is empty. Requests go to the store contact email (Settings > General > Store details)."
-    },
-    {
-      "type": "checkbox",
-      "id": "request_enabled",
-      "label": "Show the request form",
-      "default": true
     },
     {
       "type": "text",
