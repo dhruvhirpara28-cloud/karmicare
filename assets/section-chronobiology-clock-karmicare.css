@@ -543,8 +543,8 @@ body.night-mode .chronobiology-clock {
 }
 
 /* The time badge: page-coloured, it rides inside the ring next to the knob */
-/* The script places it inside the ring, a step clockwise of the knob and clear of it; it also
-   paints under the knob (9 < 10) */
+/* The script places it inside the ring, a step clockwise of the knob and clear of it (anticlockwise
+   where it would cover Awake or Asleep); it also paints under the knob (9 < 10) */
 .chronobiology-clock .knob-time {
   position: absolute;
   z-index: 9;
@@ -563,6 +563,11 @@ body.night-mode .chronobiology-clock {
   white-space: nowrap;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+/* Only while it switches sides around a label, so it never trails the knob during a drag */
+.chronobiology-clock .knob-time.is-switching {
+  transition: left .25s ease, top .25s ease;
 }
 
 .chronobiology-clock--time-small .time-line {

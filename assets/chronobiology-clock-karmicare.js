@@ -25,6 +25,7 @@
     const knobIcon = knob ? knob.querySelector('svg') : null;
     const orbit = sectionEl.querySelector('.orbit');
     const dial = sectionEl.querySelector('.dial');
+    const shiftLabels = [...sectionEl.querySelectorAll('.shift-label')];
     const readout = sectionEl.querySelector('.readout');
     const timeOut = sectionEl.querySelector('.clock-time');
     const copyOut = sectionEl.querySelector('.clock-copy');
@@ -90,9 +91,16 @@
       placeBadge();
     }
 
-    // The time badge rides inside the ring, along its inner edge, a fixed step clockwise of the
-    // knob: the step is the smallest angle that keeps it clear of the knob, even scaled while held
-    // (Astra R93 B1), and the radius keeps every corner inside the ring (Victor, 27 Oct)
+    // The time badge rides inside the ring, along its inner edge, a step clockwise of the knob: the
+    // step is the smallest angle that keeps it clear of the knob, even scaled while held (Astra R93
+    // B1), and the radius keeps every corner inside the ring (Victor, 27 Oct). Where that place
+    // would cover the Awake or Asleep word (phones), it keeps to its side and moves further along
+    // the ring, or takes the other side, whichever clears the word first; each change glides
+    // (Astra R93b B3).
+    const badgeSteps = [1, 1.5, 2, 2.5, 3];
+    let badgePlace = '1:1';
+    let swapTimer = null;
+
     function placeBadge() {
       const size = dial.offsetWidth;
       if (!size) return;
@@ -105,9 +113,47 @@
       // Law of cosines: the angle at which the badge centre is `clearance` away from the knob centre
       const cosStep = (knobRadius ** 2 + badgeRadius ** 2 - clearance ** 2) / (2 * knobRadius * badgeRadius);
       const step = Math.acos(Math.max(-1, Math.min(1, cosStep)));
-      const angle = radians + step;
-      timeOut.style.left = (50 + badgeRadius * Math.sin(angle) / size * 100) + '%';
-      timeOut.style.top = (50 - badgeRadius * Math.cos(angle) / size * 100) + '%';
+      // Badge centre for a side and a multiple of the step, in px from the dial's centre
+      const centreFor = (side, times) => {
+        const angle = radians + side * step * times;
+        return [badgeRadius * Math.sin(angle), -badgeRadius * Math.cos(angle)];
+      };
+      // Worked out from the target place, not the badge's box, which may still be gliding; 2px of
+      // margin covers the rounding of offsetWidth/offsetHeight
+      const dialBox = dial.getBoundingClientRect();
+      const coversLabel = ([x, y]) => {
+        const left = dialBox.left + dialBox.width / 2 + x - halfWidth - 2;
+        const top = dialBox.top + dialBox.height / 2 + y - halfHeight - 2;
+        const right = left + 2 * halfWidth + 4;
+        const bottom = top + 2 * halfHeight + 4;
+        return shiftLabels.some(label => {
+          const box = label.getBoundingClientRect();
+          return box.width > 0 && left < box.right && right > box.left && top < box.bottom && bottom > box.top;
+        });
+      };
+      const currentSide = Number(badgePlace.split(':')[0]);
+      let side = 1;
+      let times = 1;
+      search: for (const multiple of badgeSteps) {
+        for (const candidate of [currentSide, -currentSide]) {
+          if (!coversLabel(centreFor(candidate, multiple))) {
+            side = candidate;
+            times = multiple;
+            break search;
+          }
+        }
+      }
+      const place = side + ':' + times;
+      if (place !== badgePlace) {
+        // A change of place glides; only then, so the badge never trails the knob during a drag
+        timeOut.classList.add('is-switching');
+        clearTimeout(swapTimer);
+        swapTimer = setTimeout(() => timeOut.classList.remove('is-switching'), 250);
+        badgePlace = place;
+      }
+      const [x, y] = centreFor(side, times);
+      timeOut.style.left = (50 + x / size * 100) + '%';
+      timeOut.style.top = (50 + y / size * 100) + '%';
     }
 
     function draw(minutes, preview = false) {
