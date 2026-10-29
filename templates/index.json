@@ -48,18 +48,6 @@
             "blob_bg_night": "radial-gradient(50% 50% at 50% 50%, rgba(67, 121, 192, 0.35) 0%, rgba(67, 121, 192, 0.15) 42%, rgba(67, 121, 192, 0) 100%)"
           }
         },
-        "testimonial_badge_h8d3WL": {
-          "type": "testimonial_badge",
-          "settings": {
-            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
-            "rating_text": "4.8 (234)",
-            "star_color": "#7FB9FF",
-            "heading": "Backed by health professionals",
-            "link": "#shopify-section-template--27582179377533__trusted_professionals_HAqYth",
-            "text_color_day": "#191f38",
-            "text_color_night": "#ffffff"
-          }
-        },
         "rhythm_toggle_ffWVXt": {
           "type": "rhythm_toggle",
           "settings": {
@@ -79,6 +67,21 @@
             "pill_active_text_night": "#fffbf6",
             "pill_inactive_text_night": "#fffbf6",
             "block_bg_night": ""
+          }
+        },
+        "testimonial_badge_h8d3WL": {
+          "type": "testimonial_badge",
+          "settings": {
+            "image": "shopify://shop_images/Dr._Stephanie_Spreuwers.png",
+            "rotate_professionals": true,
+            "rating_text": "4.8 (234)",
+            "star_color": "#7fb9ff",
+            "heading": "Backed by health professionals",
+            "link": "#shopify-section-template--27582179377533__trusted_professionals_HAqYth",
+            "text_color_day": "#191f38",
+            "bg_color_day": "",
+            "text_color_night": "#ffffff",
+            "bg_color_night": ""
           }
         }
       },
@@ -184,6 +187,7 @@
         "night_title": "Your mouth switches to repair",
         "night_text": "Melatonin rises and saliva slows to a trickle. What's on your enamel at 22:00 is still there at 07:00.",
         "hint_label": "DRAG THE DOT · EXPLORE 24 HOURS",
+        "time_label_size": "large",
         "footer_text": "",
         "footer_link_text": "",
         "footer_link": "",
@@ -446,6 +450,7 @@
         "bottom_text": "<p>These practitioners recommend Karmicare between visits. Not to replace their care, but to make the brushings between appointments count for something.</p>",
         "button_label": "REQUEST A PRACTITIONER SAMPLE",
         "button_link": "",
+        "footer_display": "mobile",
         "card_bg_color_day": "",
         "card_bg_color_night": "",
         "marquee": true,
@@ -470,87 +475,92 @@
       "blocks": {
         "card_bDxUVT": {
           "type": "card",
+          "source": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"] }}",
           "settings": {
-            "subheading": "NANO-HYDROXYAPATITE",
-            "heading": "Nano-HAp sealed 98% of open dentine tubules.",
-            "subtext": "Human dentine discs · 7 days",
-            "result_label": "RESULT",
-            "result_text": "98% occlusion vs 82% and 65% for two other desensitising technologies",
-            "method_label": "METHOD",
-            "method_text": "In vitro SEM comparison of three pastes, ~1% nHAp.",
-            "link_label": "Kulal et al. · 2016 · J Clin Diagn Res",
-            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5121804/",
-            "logo": "shopify://shop_images/Logo.png",
-            "image": "shopify://shop_images/Picture_1.png",
-            "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
+            "subheading": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].subheading.value }}",
+            "heading": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].heading.value }}",
+            "subtext": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].subtext.value }}",
+            "result_label": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].result_label.value }}",
+            "result_text": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].result_text.value }}",
+            "method_label": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].method_label.value }}",
+            "method_text": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].method_text.value }}",
+            "link_label": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].link_label.value }}",
+            "link_url": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].link_url.value }}",
+            "logo": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].logo_image.value }}",
+            "image": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].image.value }}",
+            "image_badge": "{{ metaobjects.research_card_new[\"nano-hydroxyapatite\"].image_badge_text.value }}"
           }
         },
         "card_yMiD9D": {
           "type": "card",
+          "source": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"] }}",
           "settings": {
-            "subheading": "ORAL–SLEEP CONNECTION",
-            "heading": "Poorer oral health was linked with poorer sleep.",
-            "subtext": "36,559 people · 8 studies",
-            "result_label": "RESULT",
-            "result_text": "SMD 2.17 · p = 0.004 · 95% CI 0.68–3.66&nbsp;",
-            "method_label": "METHOD",
-            "method_text": "Meta-analysis of 8 studies, 2015–2023.",
-            "link_label": "Lei & Hu · 2025 · Biomedical Reports",
-            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11704870/",
-            "logo": "shopify://shop_images/Logo-2.png",
-            "image": "shopify://shop_images/Sleep_airway.png",
-            "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
+            "subheading": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].subheading.value }}",
+            "heading": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].heading.value }}",
+            "subtext": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].subtext.value }}",
+            "result_label": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].result_label.value }}",
+            "result_text": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].result_text.value }}",
+            "method_label": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].method_label.value }}",
+            "method_text": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].method_text.value }}",
+            "link_label": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].link_label.value }}",
+            "link_url": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].link_url.value }}",
+            "logo": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].logo_image.value }}",
+            "image": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].image.value }}",
+            "image_badge": "{{ metaobjects.research_card_new[\"oral-sleep-connection\"].image_badge_text.value }}"
           }
         },
         "card_fmFMFd": {
           "type": "card",
+          "source": "{{ metaobjects.research_card_new.xylitol }}",
           "settings": {
-            "subheading": "XYLITOL",
-            "heading": "Xylitol lowered tooth decay compared with controls.",
-            "subtext": "1,478 people · 7 trials",
-            "result_label": "Result",
-            "result_text": "SMD −1.09 · p < 0.00001 · 95% CI −1.34 to −0.83",
-            "method_label": "Method",
-            "method_text": "Systematic review and meta-analysis of 7 clinical trials.",
-            "link_label": "Janakiram et al. · 2017 · J Nat Sci Biol Med",
-            "link_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5320817/",
-            "logo": "shopify://shop_images/Logo_1.png",
-            "image": "shopify://shop_images/kc-research-xylitol-specimen-1122x1402-v1.jpg",
-            "image_badge": "XYLITOL CRYSTALS"
+            "subheading": "{{ metaobjects.research_card_new.xylitol.subheading.value }}",
+            "heading": "{{ metaobjects.research_card_new.xylitol.heading.value }}",
+            "subtext": "{{ metaobjects.research_card_new.xylitol.subtext.value }}",
+            "result_label": "{{ metaobjects.research_card_new.xylitol.result_label.value }}",
+            "result_text": "{{ metaobjects.research_card_new.xylitol.result_text.value }}",
+            "method_label": "{{ metaobjects.research_card_new.xylitol.method_label.value }}",
+            "method_text": "{{ metaobjects.research_card_new.xylitol.method_text.value }}",
+            "link_label": "{{ metaobjects.research_card_new.xylitol.link_label.value }}",
+            "link_url": "{{ metaobjects.research_card_new.xylitol.link_url.value }}",
+            "logo": "{{ metaobjects.research_card_new.xylitol.logo_image.value }}",
+            "image": "{{ metaobjects.research_card_new.xylitol.image.value }}",
+            "image_badge": "{{ metaobjects.research_card_new.xylitol.image_badge_text.value }}"
           }
         },
         "card_Hi7YUD": {
           "type": "card",
+          "source": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"] }}",
           "settings": {
-            "subheading": "NANO-HYDROXYAPATITE",
-            "heading": "Nano-HAp beat fluoride on tooth sensitivity.",
-            "subtext": "105 people · 4 weeks",
-            "result_label": "RESULT",
-            "result_text": "Lower cold-air and tactile sensitivity vs fluoride and placebo, p < 0.05",
-            "method_label": "METHOD",
-            "method_text": "Double-blind randomised controlled trial, three arms.",
-            "link_label": "Vano et al. · 2018 · Clin Oral Investig",
-            "link_url": "https://doi.org/10.1007/s00784-017-2113-3",
-            "logo": "shopify://shop_images/Logo_2.png",
-            "image": "shopify://shop_images/kc-research-nhap-tubules-2000x2400-v1.jpg",
-            "image_badge": "DENTINE TUBULES"
+            "subheading": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].subheading.value }}",
+            "heading": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].heading.value }}",
+            "subtext": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].subtext.value }}",
+            "result_label": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].result_label.value }}",
+            "result_text": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].result_text.value }}",
+            "method_label": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].method_label.value }}",
+            "method_text": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].method_text.value }}",
+            "link_label": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].link_label.value }}",
+            "link_url": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].link_url.value }}",
+            "logo": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].logo_image.value }}",
+            "image": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].image.value }}",
+            "image_badge": "{{ metaobjects.research_card_new[\"nano-hydroxyapatites\"].image_badge_text.value }}"
           }
         },
         "card_JeERX6": {
           "type": "card",
+          "source": "{{ metaobjects.research_card_new[\"sls-free\"] }}",
           "settings": {
-            "subheading": "SLS-FREE",
-            "heading": "No SLS meant fewer and shorter canker sores.",
-            "subtext": "124 people · 4 crossover RCTs",
-            "result_label": "RESULT",
-            "result_text": "Fewer ulcers, shorter duration, fewer episodes, less pain",
-            "method_label": "METHOD",
-            "method_text": "Systematic review and meta-analysis of 4 crossover RCTs.",
-            "link_label": "Alli et al. · 2019 · J Oral Pathol Med",
-            "link_url": "https://doi.org/10.1111/jop.12845",
-            "logo": "shopify://shop_images/Logo_3.png",
-            "image": "shopify://shop_images/kc-research-sls-mucosa-2000x2400-v1.jpg",
-            "image_badge": "ORAL MUCOSA"
+            "subheading": "{{ metaobjects.research_card_new[\"sls-free\"].subheading.value }}",
+            "heading": "{{ metaobjects.research_card_new[\"sls-free\"].heading.value }}",
+            "subtext": "{{ metaobjects.research_card_new[\"sls-free\"].subtext.value }}",
+            "result_label": "{{ metaobjects.research_card_new[\"sls-free\"].result_label.value }}",
+            "result_text": "{{ metaobjects.research_card_new[\"sls-free\"].result_text.value }}",
+            "method_label": "{{ metaobjects.research_card_new[\"sls-free\"].method_label.value }}",
+            "method_text": "{{ metaobjects.research_card_new[\"sls-free\"].method_text.value }}",
+            "link_label": "{{ metaobjects.research_card_new[\"sls-free\"].link_label.value }}",
+            "link_url": "{{ metaobjects.research_card_new[\"sls-free\"].link_url.value }}",
+            "logo": "{{ metaobjects.research_card_new[\"sls-free\"].logo_image.value }}",
+            "image": "{{ metaobjects.research_card_new[\"sls-free\"].image.value }}",
+            "image_badge": "{{ metaobjects.research_card_new[\"sls-free\"].image_badge_text.value }}"
           }
         }
       },
@@ -565,6 +575,7 @@
       "settings": {
         "subheading": "CLINICALLY BACKED ORAL CARE",
         "heading": "The research behind the system",
+        "cards": [],
         "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
         "button_label": "Explore the full evidence base",
         "button_link": "",
@@ -578,7 +589,10 @@
         "padding_top_mobile": 64,
         "padding_bottom_mobile": 48,
         "show_border_top": false,
+        "show_border_top_mobile": true,
         "show_border_bottom": false,
+        "marquee": true,
+        "marquee_speed": 22,
         "slider_desktop": true,
         "slider_laptop": false,
         "slider_tablet": false,
@@ -586,9 +600,56 @@
         "columns_desktop": "2",
         "columns_laptop": "2",
         "columns_tablet": "1",
-        "columns_mobile": "1.2",
-        "marquee": true,
-        "marquee_speed": 22
+        "columns_mobile": "1.2"
+      }
+    },
+    "care_comes_back": {
+      "type": "care-comes-back",
+      "blocks": {
+        "step_ritual": {
+          "type": "step",
+          "settings": {
+            "title": "Your ritual",
+            "text": "Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year."
+          }
+        },
+        "step_checkup": {
+          "type": "step",
+          "settings": {
+            "title": "Your check-up",
+            "text": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay."
+          }
+        },
+        "step_next_order": {
+          "type": "step",
+          "settings": {
+            "title": "Your next order",
+            "text": "Spend Care Credit on any order. It stays valid while you are a member, and for 12 months after."
+          }
+        }
+      },
+      "block_order": [
+        "step_ritual",
+        "step_checkup",
+        "step_next_order"
+      ],
+      "settings": {
+        "show_step_numbers": true,
+        "eyebrow": "Return on Care",
+        "heading": "The care you already do. <em>Now designed to give back.</em>",
+        "intro": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
+        "receipt_title": "Your first Year in Care Credit",
+        "receipt_column_label": "Received",
+        "total_label": "Up to",
+        "total": "€110.80",
+        "fine_print": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
+        "terms_link": "shopify://pages/terms-and-conditions-1",
+        "terms_link_label": "Terms, clauses 10 and 11",
+        "surface": "accent",
+        "padding_top_desktop": 120,
+        "padding_bottom_desktop": 120,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
       }
     },
     "km_faq_accordion_FYcArV": {
@@ -600,6 +661,15 @@
             "category": "The system",
             "question": "Why two formulas instead of one?",
             "answer": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure to acids, sugars and coffee, so Awake protects, activates and brightens. Night is repair, when saliva drops and your body regenerates, so Asleep soothes, supports your mouth’s balance and helps remineralise. Spit, don’t rinse. Left on after the evening brush, it gets extended contact time.</p>"
+          }
+        },
+        "faq_item_AL3DKF": {
+          "type": "faq_item",
+          "disabled": true,
+          "settings": {
+            "category": "Ingredients & safety",
+            "question": "Is Karmicare fluoride-free?",
+            "answer": "<p>Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawbacks.</p>"
           }
         },
         "faq_item_kLMHax": {
@@ -617,15 +687,6 @@
             "category": "Ingredients & safety",
             "question": "Can I combine Karmicare with fluoride toothpaste or rinses?",
             "answer": "<p>Better not. Fluoride and nano-hydroxyapatite compete for the same enamel surface, so alternating dilutes both. If you switch, switch fully: Awake in the morning, Asleep at night. Your dentist can tell you if a fluoride treatment is needed for a specific reason.</p>"
-          }
-        },
-        "faq_item_AL3DKF": {
-          "type": "faq_item",
-          "disabled": true,
-          "settings": {
-            "category": "Ingredients & safety",
-            "question": "Is Karmicare fluoride-free?",
-            "answer": "<p>Karmicare is fluoride-free, and always will be. Fluoride’s benefits don’t outweigh its known drawbacks.</p>"
           }
         },
         "faq_item_Pz4mRk": {
@@ -734,8 +795,6 @@
       "name": "t:sections.featured-product.presets.name",
       "settings": {
         "product": "karmicare-biorhythmic-oral-care-system",
-        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
-        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
         "secondary_background": false,
         "media_size": "medium",
         "constrain_to_viewport": true,
@@ -745,57 +804,24 @@
         "hide_variants": false,
         "enable_video_looping": false,
         "remove_first_media_bg": true,
+        "show_hero_animation": true,
+        "kc_hero_product_handle": "karmicare-biorhythmic-oral-care-system",
+        "kc_hero_am_hevc": "kc-anim-am-hero-1080x960-hevc-alpha-v1.mov",
+        "kc_hero_am_webm": "https://cdn.shopify.com/videos/c/o/v/f31d4a6d77894037b3c95fb9acbfd5a7.webm",
+        "kc_hero_am_poster": "kc-anim-am-hero-1080x960-poster-v1.webp",
+        "kc_hero_am_still": "kc-anim-am-hero-1080x960-poster-landed-v1.webp",
+        "kc_hero_am_animated": "kc-anim-am-hero-540x480-animated-v1.webp",
+        "kc_hero_pm_hevc": "kc-anim-pm-hero-1080x960-hevc-alpha-v1.mov",
+        "kc_hero_pm_webm": "https://cdn.shopify.com/videos/c/o/v/eb4ad337711a41f8b4160e1c88dfa1ed.webm",
+        "kc_hero_pm_poster": "kc-anim-pm-hero-1080x960-poster-v1.webp",
+        "kc_hero_pm_still": "kc-anim-pm-hero-1080x960-poster-landed-v1.webp",
+        "kc_hero_pm_animated": "kc-anim-pm-hero-540x480-animated-v1.webp",
+        "benefits_layout": "stacked",
         "padding_top": 120,
         "padding_bottom": 120,
         "padding_top_mobile": 48,
         "padding_bottom_mobile": 48,
-        "surface": "page",
-        "show_hero_animation": true,
-        "benefits_layout": "stacked"
-      }
-    },
-    "care_comes_back": {
-      "type": "care-comes-back",
-      "blocks": {
-        "step_ritual": {
-          "type": "step",
-          "settings": {
-            "title": "Your ritual",
-            "text": "Two minutes, morning and night. Your membership returns Care Credit: 10% of every 60-Day Rhythm, 20% of the Year."
-          }
-        },
-        "step_checkup": {
-          "type": "step",
-          "settings": {
-            "title": "Your check-up",
-            "text": "On the Year, a check-up after month six adds €40 in Care Credit, once per membership year. You walk in with something to gain, not only something to pay."
-          }
-        },
-        "step_next_order": {
-          "type": "step",
-          "settings": {
-            "title": "Your next order",
-            "text": "Spend Care Credit on any order. It stays valid while you are a member, and for 12 months after."
-          }
-        }
-      },
-      "block_order": [
-        "step_ritual",
-        "step_checkup",
-        "step_next_order"
-      ],
-      "settings": {
-        "eyebrow": "Return on Care",
-        "heading": "The care you already do. <em>Now designed to give back.</em>",
-        "intro": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
-        "fine_print": "Care Credit is Karmicare credit: spend it on more care. It rewards the visit, not the verdict. Not insurance, and not a payment towards treatment.",
-        "terms_link": "shopify://pages/terms-and-conditions-1",
-        "terms_link_label": "Terms, clauses 10 and 11",
-        "padding_top_desktop": 120,
-        "padding_bottom_desktop": 120,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48,
-        "surface": "accent"
+        "surface": "page"
       }
     }
   },
