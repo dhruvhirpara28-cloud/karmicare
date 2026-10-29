@@ -152,6 +152,8 @@
           "type": "product_faq",
           "settings": {
             "default_to_subscription": true,
+            "request_enabled": true,
+            "request_trigger_url": "mailto:victor@karmicare.com",
             "request_trigger_text": "evidence pack"
           }
         },
@@ -522,10 +524,97 @@
         "padding_bottom_mobile": 48
       }
     },
+    "kc_review_widget_NUEtim": {
+      "type": "kc-review-widget",
+      "blocks": {
+        "judge_me_reviews_review_widget_FYQUMG": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_FYQUMG"
+      ],
+      "disabled": true,
+      "name": "Judge.me Reviews",
+      "settings": {
+        "surface": "transition",
+        "subheading": "Customer experience",
+        "heading": "What they noticed, <strong>and their dentist did too</strong>",
+        "heading_bold_opacity": 70,
+        "include_margins": true,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
     "research_behind_system_EkjATL": {
       "type": "research-behind-system",
       "blocks": {
-        "card_bDxUVT": {
+        "card_8RcyUh": {
+          "type": "card",
+          "repeater": "{{ product.metafields.custom.research_cards.value }}",
+          "settings": {
+            "subheading": "{{ block.repeater.subheading.value }}",
+            "heading": "{{ block.repeater.heading.value }}",
+            "subtext": "{{ block.repeater.subtext.value }}",
+            "result_label": "{{ block.repeater.result_label.value }}",
+            "result_text": "{{ block.repeater.result_text.value }}",
+            "method_label": "{{ block.repeater.method_label.value }}",
+            "method_text": "{{ block.repeater.method_text.value }}",
+            "link_label": "{{ block.repeater.link_label.value }}",
+            "link_url": "{{ block.repeater.link_url.value }}",
+            "logo": "{{ block.repeater.logo_image.value }}",
+            "image": "{{ block.repeater.image.value }}",
+            "image_badge": "{{ block.repeater.image_badge_text.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "card_8RcyUh"
+      ],
+      "name": "Research Behind System",
+      "settings": {
+        "subheading": "CLINICALLY BACKED ORAL CARE",
+        "heading": "The research <em>behind the system</em>",
+        "cards": [],
+        "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
+        "button_label": "Explore the full evidence base",
+        "button_link": "",
+        "surface": "transition",
+        "text_color_day": "",
+        "card_bg_color_day": "",
+        "text_color_night": "",
+        "card_bg_color_night": "",
+        "padding_top_desktop": 120,
+        "padding_bottom_desktop": 120,
+        "padding_top_mobile": 64,
+        "padding_bottom_mobile": 48,
+        "show_border_top": false,
+        "show_border_top_mobile": true,
+        "show_border_bottom": false,
+        "marquee": true,
+        "marquee_speed": 22,
+        "slider_desktop": true,
+        "slider_laptop": false,
+        "slider_tablet": false,
+        "slider_mobile": true,
+        "columns_desktop": "1.9",
+        "columns_laptop": "2",
+        "columns_tablet": "1",
+        "columns_mobile": "1.2"
+      }
+    },
+    "research_behind_system_DDhkPy": {
+      "type": "research-behind-system",
+      "blocks": {
+        "card_BBJrMr": {
           "type": "card",
           "settings": {
             "subheading": "NANO-HYDROXYAPATITE",
@@ -542,7 +631,7 @@
             "image_badge": "DENTINE TUBULES · OPEN AND OCCLUDED"
           }
         },
-        "card_yMiD9D": {
+        "card_Ty3EWz": {
           "type": "card",
           "settings": {
             "subheading": "ORAL–SLEEP CONNECTION",
@@ -559,7 +648,7 @@
             "image_badge": "SLEEP · AIRWAY AND ORAL CAVITY"
           }
         },
-        "card_fmFMFd": {
+        "card_3fLVT6": {
           "type": "card",
           "settings": {
             "subheading": "XYLITOL",
@@ -576,7 +665,7 @@
             "image_badge": "XYLITOL CRYSTALS"
           }
         },
-        "card_Hi7YUD": {
+        "card_nUmEqw": {
           "type": "card",
           "settings": {
             "subheading": "NANO-HYDROXYAPATITE",
@@ -593,7 +682,7 @@
             "image_badge": "DENTINE TUBULES"
           }
         },
-        "card_JeERX6": {
+        "card_XhtHVb": {
           "type": "card",
           "settings": {
             "subheading": "SLS-FREE",
@@ -612,16 +701,18 @@
         }
       },
       "block_order": [
-        "card_bDxUVT",
-        "card_yMiD9D",
-        "card_fmFMFd",
-        "card_Hi7YUD",
-        "card_JeERX6"
+        "card_BBJrMr",
+        "card_Ty3EWz",
+        "card_3fLVT6",
+        "card_nUmEqw",
+        "card_XhtHVb"
       ],
+      "disabled": true,
       "name": "Research Behind System",
       "settings": {
         "subheading": "CLINICALLY BACKED ORAL CARE",
         "heading": "The research <em>behind the system</em>",
+        "cards": [],
         "bottom_text": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
         "button_label": "Explore the full evidence base",
         "button_link": "",
@@ -833,7 +924,9 @@
     "trusted_professionals_HAqYth",
     "how_it_works_steps_aAgVmF",
     "comparison_table_r8CDbT",
+    "kc_review_widget_NUEtim",
     "research_behind_system_EkjATL",
+    "research_behind_system_DDhkPy",
     "care_comes_back",
     "product_compare_plans_gz9xxx",
     "featured_product_Eb93Xa"
