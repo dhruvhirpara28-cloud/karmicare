@@ -15,7 +15,7 @@ Hold and gate invariants: the source decides, the payload follows (a hold is alw
   H7  held                         -> a reason in notes
   H8  retired (the theme no longer reads it) -> held
 Exact spans in translated entries:
-  S1  every postal address in the EN appears unchanged in the NL
+  S1  every postal address in the EN appears in the NL in its Dutch form (Brugge, Brussel, België, bus; Victor 25 Oct)
   S2  the NL has as many (*) markers as the EN
 Brand words in ordinary copy (translated entries that are not legal text and not Dawn keys):
   W1  no commodity word, compounds included: product, tube, gebruik, (aan/in)koop, kopen, (ge)kocht. Not commodity words, and so
@@ -44,9 +44,18 @@ WORD_EXCEPTIONS = {
     ("footer-group:footer/copyright_text", "product"): "compliance statement mirroring the EN regulatory line; copy owner decides (REPORT.md)",
     ("product.subscription-item:main/treatment_journey_block/disclaimer_text", "gebruik"): "approved Figma NL (3738:27474); conflict listed for the copy owner",
     ("product:main/treatment_journey_block/disclaimer_text", "gebruik"): "approved Figma NL (3738:27474); conflict listed for the copy owner",
+    ("product.subscription-item:main/highlights_slider_9wAjAb/text_1", "gebruikt"): "Victor 25 Oct (R78b, via the PDP lane): 'Used en Gebruikt is ok'",
 }
 # street and number, optional box, postcode, optional city and country: "Vizierstraat 28, 8000 Bruges, Belgium"
 ADDRESS = re.compile(r"[A-Z][^,<>·().:;]{2,60}?\d+[a-z]?(?:, (?:box|bus) \d+)?, \d{4}(?: [A-Z][a-zé]+)?(?:, [A-Z][a-z]+)?")
+# Victor, 25 Oct ("België"): the NL writes the address in its official Dutch form
+LOCAL = [("Belgium", "België"), ("Brussels", "Brussel"), ("Bruges", "Brugge"), ("box", "bus")]
+
+
+def localize(address):
+    for en, nl in LOCAL:
+        address = re.sub(r"\b%s\b" % en, nl, address)
+    return address
 
 
 def plain(s):
@@ -80,8 +89,8 @@ def gates(e, r):
     if not held and r["nl"]:
         en, nl = plain(r["en"]), plain(r["nl"])
         for m in ADDRESS.finditer(en):
-            if m.group(0) not in nl:
-                out.append("S1 address changed: " + m.group(0))
+            if localize(m.group(0)) not in nl:
+                out.append("S1 address changed: " + localize(m.group(0)))
         if r["en"].count("(*)") != r["nl"].count("(*)"):
             out.append("S2 (*) markers %d in EN, %d in NL" % (r["en"].count("(*)"), r["nl"].count("(*)")))
         if ordinary(e, r):

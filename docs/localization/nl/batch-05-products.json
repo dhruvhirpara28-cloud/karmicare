@@ -2,12 +2,13 @@
  "lang": "nl",
  "batch": "batch-05-products",
  "source": "docs/source-copy/batches/batch-05-products.json",
- "source_digest": "3b9c8c4105d708ab6e1762ba185f5ecc8891e96d",
- "source_entries": 77,
+ "source_digest": "78d85b206273a06783ba5531a6bbdfd56f5c9ba9",
+ "source_entries": 128,
  "counts": {
-  "pending-claim-review": 25,
-  "translated": 14,
-  "admin": 38
+  "pending-claim-review": 15,
+  "translated": 50,
+  "held": 19,
+  "admin": 44
  },
  "fit_risk": [],
  "status_legend": {
@@ -223,12 +224,10 @@
    "key_path": "seo.title",
    "en": "Karmicare Complete Hygiene Kit – KARMICARE",
    "en_sha1": "2b5a70e4e34c23a25453f29db060047fa696429d",
-   "nl": "Karmicare compleet hygiënepakket – KARMICARE",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Karmicare compleet hygiënepakket – KARMICARE"
   },
   {
    "id": "admin:product:complete-hygiene-kit:seo.description",
@@ -237,13 +236,10 @@
    "key_path": "seo.description",
    "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss",
    "en_sha1": "ea8a3c780636756e532ad6f2949fd5676412f0c1",
-   "nl": "Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field; retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss"
   },
   {
    "id": "admin:app:judge-me:preview_badge.stars",
@@ -280,12 +276,10 @@
    "key_path": "seo.title",
    "en": "KARMICARE Ultra Soft Morning Toothbrush",
    "en_sha1": "3d739abc9959367e2eb70ba19b1ee2665ee3be98",
-   "nl": "KARMICARE ultrazachte ochtendtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: KARMICARE ultrazachte ochtendtandenborstel"
   },
   {
    "id": "admin:product:morning-toothbrush:seo.description",
@@ -294,12 +288,10 @@
    "key_path": "seo.description",
    "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by ea",
    "en_sha1": "cba576cb9faaf5420d4b8e7a0d4ead12c813b0d8",
-   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt. De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "EN meta is the body cut mid-word ('by ea'); NL completes the sentence from the body. EN typos read as intended: 'dispurge' = disperse, 'of' = or, 'nurished' = nourished; R2 (review F6): 'onze tandpasta' → 'onze formule', as in the body (brand rule)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN meta is the body cut mid-word ('by ea'); NL completes the sentence from the body. EN typos read as intended: 'dispurge' = disperse, 'of' = or, 'nurished' = nourished; R2 (review F6): 'onze tandpasta' → 'onze formule', as in the body (brand rule); retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt. De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule."
   },
   {
    "id": "admin:product:evening-toothbrush:seo.title",
@@ -308,13 +300,10 @@
    "key_path": "seo.title",
    "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
    "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
-   "nl": "KARMICARE ultrazachte ontgiftende avondtandenborstel",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: KARMICARE ultrazachte ontgiftende avondtandenborstel"
   },
   {
    "id": "admin:product:evening-toothbrush:seo.description",
@@ -323,13 +312,10 @@
    "key_path": "seo.description",
    "en": "The bristles are extremely soft and coated with activated charcoal.The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.Head is not too big or too small. Perfectly fits 2 to 4 applicati",
    "en_sha1": "9f96b288b484715fd2f51172558f3cc26ffdb85d",
-   "nl": "De borstelharen zijn extreem zacht en bedekt met actieve kool. De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken. De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake of Asleep.",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "EN meta cut mid-word ('applicati'); NL completes the sentence. '2 to 4 applications' predates the 1-pump dose (products.md, 4 Aug)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN meta cut mid-word ('applicati'); NL completes the sentence. '2 to 4 applications' predates the 1-pump dose (products.md, 4 Aug); retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: De borstelharen zijn extreem zacht en bedekt met actieve kool. De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken. De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake of Asleep."
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:seo.title",
@@ -380,15 +366,14 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "seo.title",
-   "en": "KARMICARE Ultra-soft Detoxifying Evening Toothbrush",
-   "en_sha1": "8e772d3842b6dbae472162ce6a3258a65fe28f01",
-   "nl": "KARMICARE ultrazachte ontgiftende avondtandenborstel",
-   "status": "pending-claim-review",
+   "en": "KARMICARE Ultra-soft Evening Toothbrush",
+   "en_sha1": "0647fdc97160188cec8bcd35bbe45f6e80e1ec9a",
+   "nl": "KARMICARE ultrazachte avondtandenborstel",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: 'Detoxifying' / 'ontgiftende' / 'détoxifiante' dropped with the EN (no activated charcoal)"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:seo.description",
@@ -438,14 +423,14 @@
    "resource_type": "product",
    "file_or_handle": "asleep-evening-toothpaste-2-0",
    "key_path": "seo.title",
-   "en": "Karmicare Asleep Evening Toothpaste – KARMICARE",
-   "en_sha1": "3044149ef06e70ef32c5af63450bbe896aed24c3",
-   "nl": "Karmicare Asleep-avondtandpasta – KARMICARE",
+   "en": "Karmicare Asleep Evening Toothpaste",
+   "en_sha1": "e6ccd55ad08ff1c48d0d287914ddb0e91fd03309",
+   "nl": "Karmicare Asleep-avondtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: ' – KARMICARE' dropped with the EN (Admin search engine listing)"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:seo.description",
@@ -467,14 +452,14 @@
    "resource_type": "product",
    "file_or_handle": "awake-morning-toothpaste-2-0",
    "key_path": "seo.title",
-   "en": "Karmicare Awake Morning Toothpaste – KARMICARE",
-   "en_sha1": "35586ce5a7d7c92a3db37e20b4a770759731fb66",
-   "nl": "Karmicare Awake-ochtendtandpasta – KARMICARE",
+   "en": "Karmicare Awake Morning Toothpaste",
+   "en_sha1": "0319a56dfd6fa949e6de0442680e016c713d6f6c",
+   "nl": "Karmicare Awake-ochtendtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: ' – KARMICARE' dropped with the EN (Admin search engine listing)"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:seo.description",
@@ -498,12 +483,10 @@
    "key_path": "title",
    "en": "Complete Hygiene Kit",
    "en_sha1": "7c9bdc6a50f7375e296c9335847e262e8fda36ab",
-   "nl": "Compleet hygiënepakket",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "TERM: Kit → pakket (as welkomstpakket); Set → set"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "TERM: Kit → pakket (as welkomstpakket); Set → set; retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Compleet hygiënepakket"
   },
   {
    "id": "admin:product:complete-hygiene-kit:body_html#b001",
@@ -512,13 +495,10 @@
    "key_path": "body_html#b001",
    "en": "Get the full hygiene kit including the Biorhythmic Oral Hygiene Set, Morning Toothbrush, Evening Toothbrush and Whitening Charcoal Floss<br><br><br>",
    "en_sha1": "e92ed45a2b78310dc7ca705e60b0fd01fcff0ae2",
-   "nl": "Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss<br><br><br>",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "R2 (review F5): pending-claim-review, same claim wording as a gated field; retired 25 Oct: the product Complete Hygiene Kit is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: Ontvang het volledige hygiënepakket met de bioritmische mondhygiëneset, de ochtendtandenborstel, de avondtandenborstel en de witmakende houtskoolfloss<br><br><br>"
   },
   {
    "id": "admin:product:morning-toothbrush:title",
@@ -527,12 +507,10 @@
    "key_path": "title",
    "en": "Morning Toothbrush",
    "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
-   "nl": "Ochtendtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "TERM: Morning Toothbrush (product title) → Ochtendtandenborstel; the buy-box short form stays 'Ultrazachte ochtendborstel'"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "TERM: Morning Toothbrush (product title) → Ochtendtandenborstel; the buy-box short form stays 'Ultrazachte ochtendborstel'; retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Ochtendtandenborstel"
   },
   {
    "id": "admin:product:morning-toothbrush:body_html#b001",
@@ -541,13 +519,10 @@
    "key_path": "body_html#b001",
    "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
    "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
-   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier.",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "EN typos read as intended ('dispurge' = disperse, 'of' = or, 'nurished' = nourished). '2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN typos read as intended ('dispurge' = disperse, 'of' = or, 'nurished' = nourished). '2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule); retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier."
   },
   {
    "id": "admin:product:morning-toothbrush:media.27295901057206.alt",
@@ -556,12 +531,10 @@
    "key_path": "media.27295901057206.alt",
    "en": "Karmicare Morning Toothbrush",
    "en_sha1": "6e91bb9b99d34dc597da741c5d4f7007f1d631f1",
-   "nl": "Karmicare-ochtendtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "retired 25 Oct: the product Morning Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Karmicare-ochtendtandenborstel"
   },
   {
    "id": "admin:product:evening-toothbrush:title",
@@ -570,12 +543,10 @@
    "key_path": "title",
    "en": "Evening Toothbrush",
    "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
-   "nl": "Avondtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "TERM: Evening Toothbrush (product title) → Avondtandenborstel"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "TERM: Evening Toothbrush (product title) → Avondtandenborstel; retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Avondtandenborstel"
   },
   {
    "id": "admin:product:evening-toothbrush:body_html#b001",
@@ -584,13 +555,10 @@
    "key_path": "body_html#b001",
    "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
    "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
-   "nl": "De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier.",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "'2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "'2 to 4 applications' predates the 1-pump dose. Link still points to the old /en/product/ URL (kept); retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was pending-claim-review: De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier."
   },
   {
    "id": "admin:product:evening-toothbrush:media.27295901221046.alt",
@@ -599,12 +567,10 @@
    "key_path": "media.27295901221046.alt",
    "en": "Karmicare Avond Tandenborstel",
    "en_sha1": "bd86191186eaff63d74b19524628df4560365a0e",
-   "nl": "Karmicare-avondtandenborstel",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "EN alt is already Dutch ('Karmicare Avond Tandenborstel'); the EN source should read 'Karmicare Evening Toothbrush'"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "EN alt is already Dutch ('Karmicare Avond Tandenborstel'); the EN source should read 'Karmicare Evening Toothbrush'; retired 25 Oct: the product Evening Toothbrush is Draft in the Admin (set by source-copy at Victor's request; 'enkel producten met 2.0, de floss en de active awake + asleep systeem zullen verkoopbaar zijn'), so its storefront page is gone; was admin: Karmicare-avondtandenborstel"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:title",
@@ -626,15 +592,42 @@
    "resource_type": "product",
    "file_or_handle": "whitening-charcoal-dental-floss",
    "key_path": "body_html#b001",
-   "en": "Ultrathin bamboo charcoal dental floss without flavour.<br><br>Helps remove tenacious plaque without damaging enamel.<br><br>Whitening in between your teeth while flossing helps get rid of the lower yellow coffee stains near the gumline.<br><br>Remove food rests and other residue stuck between your teeth.<br><br>*Coated charcoal thread aids in removing tartar and plaque leaving your gums fresh and clean.",
-   "en_sha1": "36e86a4fd6675dc28b89bb2e60087c19f5b59350",
-   "nl": "Ultradunne floss van bamboehoutskool, zonder smaak.<br><br>Helpt hardnekkige tandplak te verwijderen zonder het glazuur te beschadigen.<br><br>Witmaken tussen je tanden tijdens het flossen helpt de gele koffievlekken laag bij de tandvleesrand weg te werken.<br><br>Verwijder etensresten en ander vuil dat tussen je tanden vastzit.<br><br>*De gecoate houtskooldraad helpt tandsteen en tandplak te verwijderen en laat je tandvlees fris en schoon achter.",
-   "status": "pending-claim-review",
+   "en": "Ultra-thin bamboo charcoal dental floss, without flavour.",
+   "en_sha1": "0c91e345ec458e7e46aa3764be3f22f9f9ef6972",
+   "nl": "Ultradunne floss van bamboehoutskool, zonder smaak.",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": "The '*' has no footnote in the EN either"
+   "notes": "The '*' has no footnote in the EN either; 25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b002",
+   "key_path": "body_html#b002",
+   "nl": "Helpt hardnekkige tandplak te verwijderen zonder het glazuur te beschadigen.",
+   "en": "Helps remove stubborn plaque without damaging enamel.",
+   "en_sha1": "8a32dd2684f2cc0bbe62495dde28234370bf101e",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "whitening-charcoal-dental-floss",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:whitening-charcoal-dental-floss:body_html#b003",
+   "key_path": "body_html#b003",
+   "nl": "Helpt etensresten en ander vuil tussen je tanden te verwijderen.",
+   "en": "Helps remove food remains and other residue stuck between your teeth.",
+   "en_sha1": "6276cc826a0812c4e567438556be76e917f2e2f7",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
   },
   {
    "id": "admin:product:whitening-charcoal-dental-floss:media.27295901876406.alt",
@@ -698,29 +691,84 @@
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "title",
-   "en": "Evening Toothbrush 2.0",
-   "en_sha1": "57257b08045994042e5eb82673a6313ed48189fd",
-   "nl": "Avondtandenborstel 2.0",
+   "en": "Evening Toothbrush",
+   "en_sha1": "326c50cbf8614d595d3eeb77d19d140d4ba9e1ae",
+   "nl": "Avondtandenborstel",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title; 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:body_html#b001",
    "resource_type": "product",
    "file_or_handle": "evening-toothbrush-2-0",
    "key_path": "body_html#b001",
-   "en": "The bristles are extremely soft and coated with activated charcoal.<br><br>The ultra thin, featherlight bristle hairs help to get off plaque easily without being abrasive. This helps your teeth get back to their pearly white colour without polishing or bleaching.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/morning-toothbrush\">Morning Toothbrush.</a><br><br>End your day the KARMICARE way.",
-   "en_sha1": "332e36805eb8100b960cecd4a166729fb220e45f",
-   "nl": "De borstelharen zijn extreem zacht en bedekt met actieve kool.<br><br>De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren. Dit helpt je tanden hun parelwitte kleur terug te krijgen, zonder polijsten of bleken.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep-tandpasta.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/morning-toothbrush\">ochtendtandenborstel van KARMICARE.</a><br><br>Sluit je dag af op de KARMICARE-manier.",
-   "status": "pending-claim-review",
+   "en": "The bristles are extremely soft.",
+   "en_sha1": "f15f37461f85a92972f6373309523a1cdbc47dc6",
+   "nl": "De borstelharen zijn extreem zacht.",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": "'2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL and to the legacy brush (kept)"
+   "notes": "'2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL and to the legacy brush (kept); 25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b002",
+   "key_path": "body_html#b002",
+   "nl": "De ultradunne, vederlichte borstelhaartjes helpen tandplak gemakkelijk te verwijderen zonder te schuren.",
+   "en": "The ultra-thin, featherlight bristles help remove plaque easily without being abrasive.",
+   "en_sha1": "d7c4483ac2cef6c5fbd3a0958120dffe851e95b8",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b003",
+   "key_path": "body_html#b003",
+   "nl": "De kop is niet te groot en niet te klein. Hij is perfect voor één pompje Awake of Asleep.",
+   "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+   "en_sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b004",
+   "key_path": "body_html#b004",
+   "nl": "Gaat langer mee in combinatie met de <a href=\"/nl/products/morning-toothbrush-2-0\" title=\"KARMICARE ochtendtandenborstel\">ochtendtandenborstel</a> van KARMICARE.",
+   "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/morning-toothbrush-2-0\" title=\"KARMICARE Morning Toothbrush\">Morning Toothbrush</a>.",
+   "en_sha1": "a19c170754d13863501d4caf42bfaef30259710c",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "evening-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:evening-toothbrush-2-0:body_html#b005",
+   "key_path": "body_html#b005",
+   "nl": "Sluit je dag af op de KARMICARE-manier.",
+   "en": "End your day the KARMICARE way.",
+   "en_sha1": "b9ebf1fb40fa30d6748c87540568ae67ab8643cb",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
   },
   {
    "id": "admin:product:evening-toothbrush-2-0:media.27295901221046.alt",
@@ -783,29 +831,84 @@
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "title",
-   "en": "Morning Toothbrush 2.0",
-   "en_sha1": "7a5d469b0ae821018e2f8ae3d34c05f82eec1f30",
-   "nl": "Ochtendtandenborstel 2.0",
+   "en": "Morning Toothbrush",
+   "en_sha1": "852774d69108fa392ef4de091591bce3eb7f0d31",
+   "nl": "Ochtendtandenborstel",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN)"
+   "notes": "revised in assembly: same Shopify product title inventoried twice; faithful title (the Figma 'Ultrazachte ochtendborstel' is a buy-box label for a different EN); 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:morning-toothbrush-2-0:body_html#b001",
    "resource_type": "product",
    "file_or_handle": "morning-toothbrush-2-0",
    "key_path": "body_html#b001",
-   "en": "The bristles are extremely soft so you can gently clean teeth and gums with ultimate care.<br><br>The ultra thin, featherlight bristle hairs helps to dispurge the toothpaste and makes sure the Awake of Asleep reach the smallest, darkest places between teeth and your gumline. Making sure your teeth and gums are nurished by each mineral in our toothpaste.<br><br>Head is not too big or too small. Perfectly fits 2 to 4 applications with Awake/Asleep toothpaste.<br><br>Lasting longer when combined with KARMICARE <a href=\"https://karmicare.com/en/product/evening-toothbrush\">Evening Toothbrush</a>.<br><br>Kickstart your day the KARMICARE way.",
-   "en_sha1": "1ce9261a47d9971e0f35e5b2bd833537e99f788f",
-   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.<br><br>De ultradunne, vederlichte borstelhaartjes verspreiden de tandpasta en zorgen ervoor dat Awake of Asleep de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand bereikt. Zo worden je tanden en tandvlees gevoed door elk mineraal in onze formule.<br><br>De kop is niet te groot en niet te klein: perfect voor 2 tot 4 doseringen Awake/Asleep.<br><br>Gaat langer mee in combinatie met de <a href=\"https://karmicare.com/en/product/evening-toothbrush\">avondtandenborstel</a> van KARMICARE.<br><br>Start je dag op de KARMICARE-manier.",
-   "status": "pending-claim-review",
+   "en": "The bristles are extremely soft, so you can gently clean teeth and gums with ultimate care.",
+   "en_sha1": "1f3f2366eb50cd1a5d273534eeed83426ed1b3f7",
+   "nl": "De borstelharen zijn extreem zacht, zodat je je tanden en tandvlees voorzichtig en met de grootste zorg reinigt.",
+   "status": "admin",
    "flags": [
-    "admin",
-    "pending-claim-review"
+    "admin"
    ],
-   "notes": "EN typos read as intended ('dispurge', 'of', 'nurished'). '2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule)"
+   "notes": "EN typos read as intended ('dispurge', 'of', 'nurished'). '2 to 4 applications' predates the 1-pump dose. Link points to the old /en/product/ URL (kept); R2 (review F5): pending-claim-review for the retired '2 to 4' dose, like the evening brushes; the EN owner resolves the dose, NL keeps the source number; R2 (review F6): 'onze tandpasta' → 'onze formule', 'Awake/Asleep-tandpasta' → 'Awake/Asleep'; the first mention stays (brand rule); 25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b002",
+   "key_path": "body_html#b002",
+   "nl": "De ultradunne, vederlichte borstelhaartjes helpen Awake of Asleep te verspreiden tot in de kleinste, donkerste plekjes tussen je tanden en langs je tandvleesrand.",
+   "en": "The ultra-thin, featherlight bristles help spread Awake or Asleep to the smallest, darkest places between your teeth and along your gumline.",
+   "en_sha1": "8d7bd63228e5bd523e79c43ad2e99ce4f3115252",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b003",
+   "key_path": "body_html#b003",
+   "nl": "De kop is niet te groot en niet te klein. Hij is perfect voor één pompje Awake of Asleep.",
+   "en": "The head is not too big and not too small. It perfectly fits one pump of Awake or Asleep.",
+   "en_sha1": "b1fcf9fb34d4fb45c51c2ff0fb4ee1b705be6392",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b004",
+   "key_path": "body_html#b004",
+   "nl": "Gaat langer mee in combinatie met de <a href=\"/nl/products/evening-toothbrush-2-0\" title=\"KARMICARE avondtandenborstel\">avondtandenborstel</a> van KARMICARE.",
+   "en": "Lasts longer when combined with the KARMICARE <a href=\"/products/evening-toothbrush-2-0\" title=\"KARMICARE Evening Toothbrush\">Evening Toothbrush</a>.",
+   "en_sha1": "ae79bc192307f85e18b12770c05a5e3274bddea0",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
+  },
+  {
+   "resource_type": "product",
+   "file_or_handle": "morning-toothbrush-2-0",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "id": "admin:product:morning-toothbrush-2-0:body_html#b005",
+   "key_path": "body_html#b005",
+   "nl": "Start je dag op de KARMICARE-manier.",
+   "en": "Kickstart your day the KARMICARE way.",
+   "en_sha1": "729f4f13b41da5043e75ce6d03db54d630821b24",
+   "notes": "25 Oct: from the existing translation with the cuts of the cleaned EN (Victor 25 Oct ('ja graag productteksten opschonen', no activated charcoal on the evening brush, 'one pump' sentence back); set in the Admin by source-copy); link to the NL product page"
   },
   {
    "id": "admin:product:morning-toothbrush-2-0:media.27295901057206.alt",
@@ -868,14 +971,14 @@
    "resource_type": "product",
    "file_or_handle": "asleep-evening-toothpaste-2-0",
    "key_path": "title",
-   "en": "Asleep Evening Toothpaste 2.0",
-   "en_sha1": "3452e86673de47a289dd6f79fd7a6e427918f28e",
-   "nl": "Asleep-avondtandpasta 2.0",
+   "en": "Asleep Evening Toothpaste",
+   "en_sha1": "9ba9a5aa6572bbb96900d4258b57de559ca634f4",
+   "nl": "Asleep-avondtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "TERM: Asleep Evening Toothpaste → Asleep-avondtandpasta (brand + noun with a hyphen, as Het Karmicare-jaar)"
+   "notes": "TERM: Asleep Evening Toothpaste → Asleep-avondtandpasta (brand + noun with a hyphen, as Het Karmicare-jaar); 25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:asleep-evening-toothpaste-2-0:body_html#b001",
@@ -983,14 +1086,14 @@
    "resource_type": "product",
    "file_or_handle": "awake-morning-toothpaste-2-0",
    "key_path": "title",
-   "en": "Awake Morning Toothpaste 2.0",
-   "en_sha1": "d1ad2e7225eace6463e4e74a68753960e4b89f32",
-   "nl": "Awake-ochtendtandpasta 2.0",
+   "en": "Awake Morning Toothpaste",
+   "en_sha1": "c4e67f1a8668319b7b239040d3f674b16ad5b57a",
+   "nl": "Awake-ochtendtandpasta",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "25 Oct: '2.0' dropped with the EN product name"
   },
   {
    "id": "admin:product:awake-morning-toothpaste-2-0:body_html#b001",
@@ -1092,6 +1195,498 @@
     "admin"
    ],
    "notes": "EN leading space dropped"
+  },
+  {
+   "id": "product:main/product_faq_block/request_trigger_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_trigger_text",
+   "en": "evidence pack",
+   "en_sha1": "e6a3562addd7d50b4ac6bb8f3f4f4e9475455ac2",
+   "nl": "studiedossier",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_title",
+   "en": "Request the practitioner pack",
+   "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
+   "nl": "Vraag het pakket voor zorgverleners aan",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_intro",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_intro",
+   "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+   "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
+   "nl": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_name",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_name",
+   "en": "Name",
+   "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
+   "nl": "Naam",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_profession",
+   "en": "Profession and practice",
+   "en_sha1": "6359220286a013c4f27c8f9d57faaf37734dc552",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); retired 26 Oct: the setting left the template in R76e+f (live main 57e6588 (release 11)); profession is now a radio group plus 'Your profession' and 'Practice name'; was translated: Beroep en praktijk"
+  },
+  {
+   "id": "product:main/product_faq_block/request_help_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_help_profession",
+   "en": "For example kPNI therapist, practice name",
+   "en_sha1": "af603899834b8bcb240e9bbfad6c8d38ae1590a9",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); retired 26 Oct: the setting left the template in R76e+f (live main 57e6588 (release 11)); profession is now a radio group plus 'Your profession' and 'Practice name'; was translated: Bijvoorbeeld kPNI-therapeut, naam van de praktijk"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_email",
+   "en": "Email",
+   "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+   "nl": "E-mailadres",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_phone",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_phone",
+   "en": "Phone (optional)",
+   "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
+   "nl": "Telefoon (optioneel)",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_legend_wants",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
+   "en": "What would you like?",
+   "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
+   "nl": "Wat wil je ontvangen?",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_help_wants",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_help_wants",
+   "en": "Choose one or both.",
+   "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
+   "nl": "Kies er één of beide.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_pack",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_pack",
+   "en": "Evidence pack",
+   "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
+   "nl": "Studiedossier",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_samples",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_samples",
+   "en": "Samples for my practice",
+   "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
+   "nl": "Proefpakketten voor mijn praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_address",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_address",
+   "en": "Practice address (needed for samples)",
+   "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
+   "nl": "Praktijkadres (nodig voor de proefpakketten)",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_message",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_message",
+   "en": "Message (optional)",
+   "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
+   "nl": "Bericht (optioneel)",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_privacy_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
+   "en": "We only process these details to answer your request. More in our [privacy].",
+   "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
+   "nl": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_privacy_link_label",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
+   "en": "Privacy Policy",
+   "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+   "nl": "privacybeleid",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_button",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_button",
+   "en": "Send request",
+   "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
+   "nl": "Aanvraag versturen",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_name",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_name",
+   "en": "Please fill in your name.",
+   "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+   "nl": "Vul je naam in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession",
+   "en": "Please fill in your profession and practice.",
+   "en_sha1": "da27cf0f0339c03417cc61beb512ee232934b568",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); retired 26 Oct: the setting left the template in R76e+f (live main 57e6588 (release 11)); profession is now a radio group plus 'Your profession' and 'Practice name'; was translated: Vul je beroep en praktijk in."
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_email",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_email",
+   "en": "Please fill in your email address.",
+   "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+   "nl": "Vul je e-mailadres in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_email_format",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
+   "en": "Please enter a valid email address.",
+   "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+   "nl": "Vul een geldig e-mailadres in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_wants",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_wants",
+   "en": "Choose the evidence pack, samples or both.",
+   "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
+   "nl": "Kies het studiedossier, proefpakketten of beide.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_address",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_address",
+   "en": "Please fill in the practice address for the samples.",
+   "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
+   "nl": "Vul het praktijkadres in voor de proefpakketten.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_generic",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_generic",
+   "en": "Your request was not sent. Please check the details below and try again.",
+   "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
+   "nl": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_success_title",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_success_title",
+   "en": "Request received",
+   "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
+   "nl": "Aanvraag ontvangen",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_success_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_success_text",
+   "en": "Thank you. We reply by email to the address you gave.",
+   "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
+   "nl": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_legend_profession",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_legend_profession",
+   "en": "Profession",
+   "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
+   "nl": "Beroep",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_dentist",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
+   "en": "Dentist",
+   "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
+   "nl": "Tandarts",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_hygienist",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
+   "en": "Dental hygienist",
+   "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
+   "nl": "Mondhygiënist",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_kpni",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
+   "en": "kPNI therapist",
+   "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
+   "nl": "kPNI-therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_natural",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
+   "en": "Orthomolecular or naturopathic practitioner",
+   "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
+   "nl": "Orthomoleculair of natuurgeneeskundig therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_gp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
+   "en": "General practitioner",
+   "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
+   "nl": "Huisarts",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_pharmacist",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
+   "en": "Pharmacist",
+   "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
+   "nl": "Apotheker",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_profession_other",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_other",
+   "en": "Other",
+   "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
+   "nl": "Andere",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_profession_other",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
+   "en": "Your profession",
+   "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
+   "nl": "Je beroep",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_label_practice",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_label_practice",
+   "en": "Practice name",
+   "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
+   "nl": "Naam van de praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_profession_choice",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
+   "en": "Choose your profession.",
+   "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
+   "nl": "Kies je beroep.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_profession_other",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
+   "en": "Please fill in your profession.",
+   "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
+   "nl": "Vul je beroep in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_error_practice",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_error_practice",
+   "en": "Please fill in your practice name.",
+   "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
+   "nl": "Vul de naam van je praktijk in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+  },
+  {
+   "id": "product:main/product_faq_block/request_klaviyo_company_id",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_klaviyo_company_id",
+   "en": "XfYq2r",
+   "en_sha1": "c61234abc465ed0e7a6901d74d735ed4fb21fb12",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "never translate: Klaviyo ID (landing desk, 26 Oct)"
+  },
+  {
+   "id": "product:main/product_faq_block/request_klaviyo_metric",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.json",
+   "key_path": "sections.main.blocks.product_faq_block.settings.request_klaviyo_metric",
+   "en": "Practitioner Request Submitted",
+   "en_sha1": "83b631adaae3ca0f945225a224c7b12a72d5fd49",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "never translate: Klaviyo ID (landing desk, 26 Oct)"
   }
  ]
 }

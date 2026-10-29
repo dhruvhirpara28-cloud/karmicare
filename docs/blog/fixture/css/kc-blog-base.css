@@ -1,0 +1,469 @@
+/* kc-blog-base.css: what the three blog directions share (proposal fixture, docs/blog/02-PROPOSAL.md).
+   Scoped to .kc-blog, so nothing outside the blog changes. Colours, type and spacing read
+   assets/kc-tokens.css; Day and Night follow body.day-mode / body.night-mode as everywhere else.
+   A px or rem literal says why in a comment.
+
+   Labels: Victor's brief asks for Proxima Nova only and sentence-case labels; the site's eyebrows
+   and buttons are Nunito uppercase today. The default below is the brief. The site style is the
+   variant html[data-kc-labels='site'], so the previews can show both (decision D2). */
+
+.kc-blog {
+  --kc-blog-measure: 68rem; /* the legal page's text column (kc-policy-page.css): ~70 characters at 20px */
+  --kc-blog-gutter: var(--kc-responsive-spacing-page-gutter);
+  --kc-blog-wide: 137.6rem; /* --kc-responsive-spacing-page-container at 1440 */
+  --kc-blog-para: var(--kc-responsive-spacing-layout-lg);
+  /* Secondary text (date, reading time, publisher, list markers). Today the caption token, which
+     the global lane makes solid (docs/blog/NOTE-GLOBAL-TOKEN-CHANGES.md); decision D23 asks
+     whether it should then move to the solid, softer --kc-mapped-text-primary-default-muted. */
+  --kc-blog-soft-text: var(--kc-mapped-text-default-caption);
+  color: var(--kc-mapped-text-default-heading);
+  font-family: var(--kc-font-use-body);
+}
+
+.kc-blog__wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--kc-blog-measure) + 2 * var(--kc-blog-gutter));
+  margin-inline: auto;
+  padding-inline: var(--kc-blog-gutter);
+}
+
+.kc-blog__wrap--wide {
+  max-width: calc(var(--kc-blog-wide) + 2 * var(--kc-blog-gutter));
+}
+
+/* ---- Labels: eyebrow, meta row ---------------------------------------------------------------
+   Eyebrows look like the homepage's section eyebrows (.kc-caption-subheading .subtitle-item:
+   Nunito 700, uppercase, 1.7px tracking, the heading colour), Victor 26 Oct (D2 for eyebrows). */
+.kc-blog__eyebrow {
+  display: block;
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  font-family: var(--kc-font-use-brand);
+  font-size: var(--font-body-small-size);
+  line-height: normal;
+  font-weight: var(--font-700-weight);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+a.kc-blog__eyebrow:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
+}
+
+.kc-blog__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--kc-responsive-spacing-layout-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-blog-soft-text);
+}
+
+.kc-blog__meta > li + li::before {
+  content: '·' / '';
+  margin-inline-end: var(--kc-responsive-spacing-layout-xs);
+}
+
+/* ---- Buttons: the theme's .karmicare__btn-primary / -secondary (snippets/button-styles.liquid)
+   keep their colours and states; the brief's label style is a modifier ------------------------ */
+.kc-blog__button {
+  min-height: var(--kc-responsive-size-control-min-height);
+  border-radius: var(--kc-shape-radius-sm);
+  font-family: var(--kc-font-use-ui);
+  font-weight: var(--font-600-weight);
+  font-size: var(--kc-responsive-body-md-text-size);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-kc-labels='site'] .kc-blog__button {
+  font-family: var(--kc-font-use-brand);
+  font-weight: var(--font-700-weight);
+  font-size: var(--font-body-small-size-desktop);
+  letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
+  text-transform: uppercase;
+}
+
+/* ---- Title ------------------------------------------------------------------------------------ */
+.kc-blog__title {
+  margin: 0;
+  font-family: var(--kc-font-use-heading);
+  font-size: var(--kc-responsive-h1-text-size);
+  line-height: var(--kc-responsive-h1-line-height);
+  letter-spacing: var(--kc-responsive-h1-letter-spacing);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+  text-wrap: balance;
+}
+
+.kc-blog__standfirst {
+  margin: var(--kc-responsive-spacing-layout-lg) 0 0;
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  color: var(--kc-mapped-text-default-body);
+  text-wrap: pretty;
+}
+
+/* ---- Media: width and height come from Liquid (image_url + image_tag), so nothing jumps -------- */
+.kc-blog__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--kc-shape-radius-lg);
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+.kc-blog__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- The article body -------------------------------------------------------------------------
+   The 2024 articles carry editor inline styles (font sizes, link colours #004aad / #333399, a
+   margin on every line, a 90% div). Inline styles beat any rule, so the properties they set are
+   reset here with !important, inside .kc-blog__body only (docs/blog/01-INVENTORY.md §4). */
+.kc-blog__body {
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  color: var(--kc-mapped-text-default-body);
+  overflow-wrap: break-word;
+}
+
+.kc-blog__body [style] {
+  font-family: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+}
+
+.kc-blog__body :is(p, li, ul, ol, div, span, a, strong, b, em, i)[style] {
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+.kc-blog__body div[style] {
+  width: auto !important;
+}
+
+.kc-blog__body span[style] {
+  font-weight: inherit !important;
+}
+
+.kc-blog__body :is(p, ul, ol, blockquote, table, div[style]) {
+  margin: 0 0 var(--kc-blog-para) !important;
+}
+
+.kc-blog__body > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.kc-blog__body p:empty {
+  display: none;
+}
+
+/* Headings by their place, not their tag: the nano article uses h1 for its sections, the wellness
+   article an h5. Section = h4 size, sub = body-lg semibold. */
+.kc-blog__body :is(h1, h2, h3, h4, h5, h6) {
+  margin: var(--kc-responsive-spacing-layout-3xl) 0 var(--kc-responsive-spacing-layout-md) !important;
+  font-family: var(--kc-font-use-heading) !important;
+  font-weight: var(--font-500-weight) !important;
+  color: var(--kc-mapped-text-default-heading) !important;
+  /* Body headings fill the line, as on the reference; only the title is balanced. "pretty" just
+     keeps a single word from ending up alone on the last line (Victor, 26 Oct: headings looked cut) */
+  text-wrap: pretty;
+}
+
+.kc-blog__body :is(h1, h2),
+.kc-blog__body:has(h1) h1 {
+  font-size: var(--kc-responsive-h4-text-size) !important;
+  line-height: var(--kc-responsive-h4-line-height) !important;
+  letter-spacing: var(--kc-responsive-h4-letter-spacing-sm) !important;
+}
+
+.kc-blog__body :is(h3, h4, h5, h6),
+.kc-blog__body:has(h1) h2 {
+  margin-top: var(--kc-responsive-spacing-layout-2xl) !important;
+  font-size: var(--kc-responsive-body-lg-text-size) !important;
+  line-height: var(--kc-responsive-body-lg-line-height) !important;
+  letter-spacing: 0 !important;
+  font-weight: var(--font-600-weight) !important;
+}
+
+.kc-blog__body > :is(h1, h2, h3, h4, h5, h6):first-child,
+.kc-blog__body :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0 !important;
+}
+
+.kc-blog__body :is(strong, b) {
+  font-weight: var(--font-600-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* No italics as accent (brief); em stays readable as emphasis */
+.kc-blog__body :is(em, i) {
+  font-style: italic;
+}
+
+.kc-blog__body a {
+  color: var(--kc-mapped-text-default-heading) !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.2s ease;
+}
+
+/* Hover keeps the text colour and thickens the underline in the accent: link-default-hover
+   (#7fb9ff) is 2:1 on Day's cream, below 4.5:1 for text (tools/contrast.py) */
+.kc-blog__body a:hover {
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+}
+
+.kc-blog a:focus-visible,
+.kc-blog summary:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.kc-blog__body :is(ul, ol) {
+  padding-inline-start: 2.2rem !important; /* the legal page's list indent */
+}
+
+.kc-blog__body li {
+  margin: 0 !important;
+}
+
+.kc-blog__body li + li {
+  margin-top: var(--kc-responsive-spacing-layout-xs) !important;
+}
+
+.kc-blog__body li::marker {
+  color: var(--kc-blog-soft-text);
+}
+
+/* Body images are 480-600px thumbnails without width and height (01-INVENTORY §4.3): never wider
+   than they are, centred, rounded. Their height is unknown until they load (decision D7). */
+.kc-blog__body img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto !important;
+  margin: 0 auto;
+  border-radius: var(--kc-shape-radius-md);
+}
+
+/* Dawn's base.css makes .rte blockquote inline-flex (its paragraphs sit side by side) and italic;
+   here a quote is a block with an accent rule, upright: the rule marks it, not the slant */
+.kc-blog__body blockquote {
+  display: block;
+  margin-inline: 0 !important;
+  padding: 0 0 0 var(--kc-responsive-spacing-layout-lg);
+  border-inline-start: var(--kc-shape-stroke-thick) solid var(--kc-mapped-surface-accent-default);
+  font-style: normal;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog__body blockquote :is(i, em) {
+  font-style: normal;
+}
+
+.kc-blog__body blockquote > :last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Tables scroll inside their own box on phones; the page never scrolls sideways */
+.kc-blog__body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+}
+
+.kc-blog__body :is(th, td) {
+  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-sm) 0;
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+  text-align: start;
+  vertical-align: top;
+  min-width: 12rem; /* a column never collapses to one word per line */
+}
+
+.kc-blog__body th {
+  color: var(--kc-mapped-text-default-heading);
+  font-weight: var(--font-600-weight);
+  border-bottom-color: var(--kc-mapped-border-primary-rule);
+}
+
+/* ---- Sources: the study links the body already has, as a research card ----------------------- */
+.kc-blog-sources {
+  position: relative;
+  padding: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-layout-lg);
+  border-radius: var(--kc-shape-radius-lg);
+  background: var(--kc-mapped-surface-page-secondary);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-sources::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--kc-shape-stroke-thin) solid var(--kc-mapped-border-primary-hairline);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.kc-blog-sources__heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  font-weight: var(--font-500-weight);
+}
+
+.kc-blog-sources__note {
+  margin: 0 0 var(--kc-responsive-spacing-layout-lg);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-blog-sources__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-sources__item {
+  border-bottom: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-sources__link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem var(--kc-responsive-spacing-layout-md);
+  align-items: center;
+  padding-block: var(--kc-responsive-spacing-layout-md);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+.kc-blog-sources__title {
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+}
+
+.kc-blog-sources__title::first-letter {
+  text-transform: uppercase;
+}
+
+.kc-blog-sources__host {
+  grid-column: 1;
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  color: var(--kc-blog-soft-text);
+}
+
+.kc-blog-sources__link svg {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  flex: 0 0 auto;
+}
+
+.kc-blog-sources__link:hover .kc-blog-sources__title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
+}
+
+/* ---- End CTA to the Duo ------------------------------------------------------------------------ */
+.kc-blog-cta__heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-md);
+  font-size: var(--kc-responsive-h4-text-size);
+  line-height: var(--kc-responsive-h4-line-height);
+  letter-spacing: var(--kc-responsive-h4-letter-spacing-sm);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-cta__heading span {
+  display: block;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-blog-cta__text {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xl);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+/* ---- Section heading (related, index) --------------------------------------------------------- */
+.kc-blog__section-heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xl);
+  font-size: var(--kc-responsive-h3-text-size);
+  line-height: var(--kc-responsive-h3-line-height);
+  letter-spacing: var(--kc-responsive-h3-letter-spacing);
+  font-weight: var(--font-500-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* ---- Pagination ------------------------------------------------------------------------------- */
+.kc-blog-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin: var(--kc-responsive-spacing-layout-2xl) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-blog-pagination a,
+.kc-blog-pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--kc-responsive-size-control-min-width);
+  min-height: var(--kc-responsive-size-control-min-height);
+  border-radius: var(--kc-shape-radius-sm);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+  font-size: var(--kc-responsive-body-md-text-size);
+}
+
+.kc-blog-pagination a:hover {
+  background: var(--kc-mapped-surface-primary-default-hover);
+}
+
+.kc-blog-pagination [aria-current='page'] {
+  border: 1px solid var(--kc-mapped-border-control-default);
+}
+
+/* ---- Visually hidden (Dawn has .visually-hidden; repeated so the fixture does not depend on it) */
+.kc-blog .kc-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kc-blog *,
+  .kc-blog *::before,
+  .kc-blog *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

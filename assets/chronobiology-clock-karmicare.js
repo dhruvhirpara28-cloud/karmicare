@@ -22,14 +22,17 @@
     sectionEl._chronoInit = true;
 
     const knob = sectionEl.querySelector('.knob');
+    const knobIcon = knob ? knob.querySelector('svg') : null;
     const orbit = sectionEl.querySelector('.orbit');
+    const dial = sectionEl.querySelector('.dial');
+    const shiftLabels = [...sectionEl.querySelectorAll('.shift-label')];
     const readout = sectionEl.querySelector('.readout');
     const timeOut = sectionEl.querySelector('.clock-time');
     const copyOut = sectionEl.querySelector('.clock-copy');
     const caption = sectionEl.querySelector('.clock-caption');
     const hint = sectionEl.querySelector('.hint');
 
-    if (!knob || !orbit || !readout || !timeOut || !copyOut || !caption) return;
+    if (!knob || !orbit || !dial || !readout || !timeOut || !copyOut || !caption) return;
 
     // Theme synchronization with site-wide Day / Night mode
     function syncTheme(mode) {
@@ -46,6 +49,20 @@
     });
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
+    // Until the visitor first takes the knob (once per visit), the knob waits two hours early; when
+    // the section comes into view it turns once on itself while it runs to the current time, then
+    // its halo pulses (.is-inviting) until the knob is taken (Victor, 26 Oct)
+    const exploredKey = 'kc-clock-explored';
+    let explored = false;
+    try { explored = sessionStorage.getItem(exploredKey) === '1'; } catch (_) { }
+
+    function markExplored() {
+      if (explored) return;
+      explored = true;
+      sectionEl.classList.remove('is-inviting');
+      try { sessionStorage.setItem(exploredKey, '1'); } catch (_) { }
+    }
+
     let pointerId = null;
     let heldKey = null;
     let selected = 0;
@@ -54,8 +71,9 @@
     let timer = null;
 
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    let introPending = false; // Disabled: intro animation unreliable in Shopify (observer may not fire)
-    let introObserver = null;
+    const previewOffset = -120;
+    let previewPending = false;
+    let previewObserver = null;
 
     const normalize = minutes => ((minutes % 1440) + 1440) % 1440;
     const format = minutes => String(Math.floor(minutes / 60)).padStart(2, '0') + ':' + String(minutes % 60).padStart(2, '0');
@@ -70,6 +88,72 @@
       knob.style.left = (50 + (178 / 604) * 100 * Math.sin(radians)) + '%';
       knob.style.top = (50 - (178 / 604) * 100 * Math.cos(radians)) + '%';
       knob.dataset.angle = String(angle);
+      placeBadge();
+    }
+
+    // The time badge rides inside the ring, along its inner edge, a step clockwise of the knob: the
+    // step is the smallest angle that keeps it clear of the knob, even scaled while held (Astra R93
+    // B1), and the radius keeps every corner inside the ring (Victor, 27 Oct). Where that place
+    // would cover the Awake or Asleep word (phones), it keeps to its side and moves further along
+    // the ring, or takes the other side, whichever clears the word first; each change glides
+    // (Astra R93b B3).
+    const badgeSteps = [1, 1.5, 2, 2.5, 3];
+    let badgePlace = '1:1';
+    let swapTimer = null;
+
+    function placeBadge() {
+      const size = dial.offsetWidth;
+      if (!size) return;
+      const radians = (Number(knob.dataset.angle) || 0) * Math.PI / 180;
+      const knobRadius = size * 178 / 604;
+      const halfWidth = timeOut.offsetWidth / 2;
+      const halfHeight = timeOut.offsetHeight / 2;
+      const badgeRadius = knobRadius - 4 - Math.hypot(halfWidth, halfHeight);
+      const clearance = knob.offsetWidth * 1.1 / 2 + 6 + halfWidth;
+      // Law of cosines: the angle at which the badge centre is `clearance` away from the knob centre
+      const cosStep = (knobRadius ** 2 + badgeRadius ** 2 - clearance ** 2) / (2 * knobRadius * badgeRadius);
+      const step = Math.acos(Math.max(-1, Math.min(1, cosStep)));
+      // Badge centre for a side and a multiple of the step, in px from the dial's centre
+      const centreFor = (side, times) => {
+        const angle = radians + side * step * times;
+        return [badgeRadius * Math.sin(angle), -badgeRadius * Math.cos(angle)];
+      };
+      // Worked out from the target place, not the badge's box, which may still be gliding; 2px of
+      // margin covers the rounding of offsetWidth/offsetHeight
+      const dialBox = dial.getBoundingClientRect();
+      const coversLabel = ([x, y]) => {
+        const left = dialBox.left + dialBox.width / 2 + x - halfWidth - 2;
+        const top = dialBox.top + dialBox.height / 2 + y - halfHeight - 2;
+        const right = left + 2 * halfWidth + 4;
+        const bottom = top + 2 * halfHeight + 4;
+        return shiftLabels.some(label => {
+          const box = label.getBoundingClientRect();
+          return box.width > 0 && left < box.right && right > box.left && top < box.bottom && bottom > box.top;
+        });
+      };
+      const currentSide = Number(badgePlace.split(':')[0]);
+      let side = 1;
+      let times = 1;
+      search: for (const multiple of badgeSteps) {
+        for (const candidate of [currentSide, -currentSide]) {
+          if (!coversLabel(centreFor(candidate, multiple))) {
+            side = candidate;
+            times = multiple;
+            break search;
+          }
+        }
+      }
+      const place = side + ':' + times;
+      if (place !== badgePlace) {
+        // A change of place glides; only then, so the badge never trails the knob during a drag
+        timeOut.classList.add('is-switching');
+        clearTimeout(swapTimer);
+        swapTimer = setTimeout(() => timeOut.classList.remove('is-switching'), 250);
+        badgePlace = place;
+      }
+      const [x, y] = centreFor(side, times);
+      timeOut.style.left = (50 + x / size * 100) + '%';
+      timeOut.style.top = (50 + y / size * 100) + '%';
     }
 
     function draw(minutes, preview = false) {
@@ -84,6 +168,7 @@
       const message = windowEntry ? readout.getAttribute('data-window-' + windowEntry[2]) || '' : '';
       timeOut.textContent = time;
       timeOut.dateTime = time;
+      placeBadge();
       copyOut.textContent = message;
       caption.textContent = (preview ? readout.dataset.captionPreview : readout.dataset.captionLive) || '';
       readout.dataset.mode = preview ? 'preview' : 'live';
@@ -94,19 +179,33 @@
     function live() {
       const now = minutesNow();
       draw(now, false);
-      if (introPending) positionKnob(now - 180);
+      if (previewPending) positionKnob(now + previewOffset);
     }
 
-    function finishIntro() {
-      introPending = false;
-      if (introObserver) introObserver.disconnect();
-      introObserver = null;
+    // The copy sits above the dial, so it keeps the height of its longest window message in this
+    // language and width: dragging through the hours must not move the dial under the finger
+    function reserveCopyHeight() {
+      const shown = copyOut.textContent;
+      copyOut.style.minHeight = '';
+      let tallest = 0;
+      windows.forEach(([, , n]) => {
+        copyOut.textContent = readout.getAttribute('data-window-' + n) || '';
+        tallest = Math.max(tallest, copyOut.getBoundingClientRect().height);
+      });
+      copyOut.textContent = shown;
+      copyOut.style.minHeight = Math.ceil(tallest) + 'px';
+    }
+
+    function stopPreview() {
+      previewPending = false;
+      if (previewObserver) previewObserver.disconnect();
+      previewObserver = null;
     }
 
     function stopReturn() {
       if (returnFrame !== null) cancelAnimationFrame(returnFrame);
       returnFrame = null;
-      knob.classList.remove('is-introducing');
+      if (knobIcon) knobIcon.style.transform = '';
     }
 
     function reset(animate = true, duration = 800) {
@@ -118,7 +217,7 @@
       if (previousPointer !== null && knob.hasPointerCapture(previousPointer)) {
         try { knob.releasePointerCapture(previousPointer); } catch (_) { }
       }
-      finishIntro();
+      stopPreview();
       stopReturn();
       const from = displayedMinutes;
       // Interpolate time around the shortest arc, including across midnight
@@ -141,17 +240,36 @@
       returnFrame = requestAnimationFrame(step);
     }
 
-    function introduceClock() {
-      if (!introPending) return;
-      // One clockwise sweep teaches circular path
-      reset(true, 1600);
-      if (returnFrame !== null) knob.classList.add('is-introducing');
+    // From two hours early to now in 2.4 s, easing in and out, while the knob's icon turns 360 degrees
+    // on itself. The knob stays fully visible and the readout stays live.
+    function arrive() {
+      if (!previewPending) return;
+      stopPreview();
+      const from = displayedMinutes;
+      const distance = normalize(minutesNow() - from + 720) - 720;
+      const started = performance.now();
+      const duration = 2400;
+      function step(now) {
+        const progress = Math.min(1, (now - started) / duration);
+        const eased = progress < .5 ? 4 * Math.pow(progress, 3) : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        positionKnob(from + distance * eased);
+        if (knobIcon) knobIcon.style.transform = 'rotate(' + (360 * eased) + 'deg)';
+        if (progress < 1) {
+          returnFrame = requestAnimationFrame(step);
+        } else {
+          stopReturn();
+          live();
+          if (!explored) sectionEl.classList.add('is-inviting');
+        }
+      }
+      returnFrame = requestAnimationFrame(step);
     }
 
     knob.addEventListener('pointerdown', event => {
       if (!event.isPrimary || event.button !== 0 || pointerId !== null) return;
       event.preventDefault();
-      finishIntro();
+      markExplored();
+      stopPreview();
       stopReturn();
       knob.focus({ preventScroll: true });
       heldKey = null;
@@ -194,8 +312,9 @@
       if (!(event.key in deltas) && event.key !== 'Home' && event.key !== 'End') return;
       event.preventDefault();
       if (pointerId !== null) return;
+      markExplored();
       const wasReturning = returnFrame !== null;
-      finishIntro();
+      stopPreview();
       stopReturn();
       if (wasReturning) selected = normalize(Math.round(displayedMinutes));
       if (!heldKey && !wasReturning) selected = Math.min(1435, Math.round(minutesNow() / 5) * 5);
@@ -216,7 +335,7 @@
     });
 
     window.addEventListener('blur', () => {
-      if (!introPending) reset();
+      if (!previewPending) reset();
     });
 
     if (hint) {
@@ -232,7 +351,7 @@
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (!introPending) reset(false);
+        if (!previewPending) reset(false);
       } else if (pointerId === null && !heldKey && returnFrame === null) {
         live();
       }
@@ -244,7 +363,7 @@
     });
 
     window.addEventListener('pageshow', event => {
-      if (event.persisted && !introPending) reset(false);
+      if (event.persisted && !previewPending) reset(false);
       startTimer();
     });
 
@@ -252,19 +371,43 @@
       if (event.matches) reset(false);
     });
 
+    // The run starts as soon as 15% of the section is in view, so the knob is already moving when
+    // the dial arrives on screen (Victor, 26 Oct). With reduced motion or without an observer the
+    // knob stays on now and only the halo is set.
+    if (!explored && !reducedMotion.matches && 'IntersectionObserver' in window) {
+      previewPending = true;
+      previewObserver = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        previewObserver.disconnect();
+        arrive();
+      }, { threshold: 0.15 });
+      previewObserver.observe(sectionEl);
+    } else if (!explored) {
+      sectionEl.classList.add('is-inviting');
+    }
+
     live();
     startTimer();
 
-    if (introPending && 'IntersectionObserver' in window) {
-      introObserver = new IntersectionObserver(entries => {
-        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.1)) {
-          introduceClock();
-        }
-      }, { threshold: 0.1 });
-      introObserver.observe(orbit);
-    } else if (introPending) {
-      reset(false);
+    reserveCopyHeight();
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        reserveCopyHeight();
+        placeBadge();
+      });
     }
+    // Remeasure on every resize, once per frame: a breakpoint can change the copy's type size while
+    // its width stays the same (380px on both sides of 750, Astra R92), and the dial's size moves
+    // the badge
+    let measureFrame = null;
+    window.addEventListener('resize', () => {
+      if (measureFrame !== null) return;
+      measureFrame = requestAnimationFrame(() => {
+        measureFrame = null;
+        reserveCopyHeight();
+        placeBadge();
+      });
+    });
   }
 
   function setupAllClocks() {

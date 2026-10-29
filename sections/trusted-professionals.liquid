@@ -178,7 +178,32 @@
                 <path d="M0.75 5.41667L10.0833 5.41667M5.41667 10.0833L10.0833 5.41667L5.41667 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             {%- endcapture -%}
-            {%- if section.settings.button_link == blank or section.settings.button_link == '#' -%}
+            {%- liquid
+              # No link set: the button opens the practitioner request form (Victor, 26 Oct), which
+              # the layout renders on the homepage and product pages (sections/practitioner-group.json);
+              # assets/kc-practitioner-request.js opens it in its popup. Elsewhere "Coming soon".
+              assign request_from = blank
+              if section.settings.button_link == blank or section.settings.button_link == '#'
+                if request.page_type == 'index'
+                  assign request_from = 'Homepage: Trusted Professionals button'
+                elsif request.page_type == 'product'
+                  assign request_from = 'Product page: Trusted Professionals button'
+                endif
+              endif
+            -%}
+            {%- if request_from != blank -%}
+              {%- comment -%} it hides this link if the form's section is hidden or removed (R94 B1) {%- endcomment -%}
+              <script src="{{ 'kc-practitioner-request.js' | asset_url }}" defer="defer"></script>
+              <a
+                href="#KcPractitionerRequest-panel"
+                class="karmicare__btn-secondary"
+                data-kc-pr-open
+                data-kc-pr-from="{{ request_from }}"
+              >
+                {{ section.settings.button_label }}
+                {{ cta_icon }}
+              </a>
+            {%- elsif section.settings.button_link == blank or section.settings.button_link == '#' -%}
               {%- comment -%} No page yet: the shared "Coming soon" state (Victor's rule H8) {%- endcomment -%}
               {{ 'kc-coming-soon.css' | asset_url | stylesheet_tag }}
               <script src="{{ 'kc-coming-soon.js' | asset_url }}" defer="defer"></script>
@@ -363,7 +388,8 @@
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button Link"
+      "label": "Button Link",
+      "info": "Empty: on the homepage and product pages the button opens the practitioner request form; elsewhere it shows Coming soon"
     },
     {
       "type": "select",

@@ -121,8 +121,6 @@
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-mapped-text-default-body);
-  /* .opacity-xl dims it to 0.7; the body colour already carries the 68% / 76% */
-  opacity: 1;
 }
 
 .kc-buybox .product__description p {
@@ -181,8 +179,13 @@
    2. Plan cards (Loop widget)
    ============================================================ */
 
+/* Loop clips the container (overflow: hidden), which cut off the top of the
+   first plan's Care Credit popover where it opens above the card (Victor,
+   25 Oct). Clip sideways only, so popovers can rise above the cards. */
 .kc-buybox .loop-subscription-container {
   margin-top: var(--kc-responsive-spacing-layout-comfortable);
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* Loop dashboard: margin 10px 0 15px !important on the fieldset */
@@ -265,14 +268,13 @@
   color: var(--kc-buybox-text);
 }
 
-/* "Renews every 60 days" / "€0.49 / brushing" (base.css dims it to 0.7) */
+/* "Renews every 60 days" / "€0.49 / brushing", in the body colour */
 .kc-buybox .kc-plan-subrow {
   margin-top: 0;
   gap: 0;
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
   color: var(--kc-mapped-text-default-body);
-  opacity: 1;
 }
 
 .kc-buybox .loop-subscription-group-price-amount {
@@ -539,6 +541,13 @@ body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button {
   padding-top: var(--kc-responsive-spacing-layout-md);
   font-size: var(--kc-buybox-body-size);
   line-height: var(--kc-buybox-body-line-height);
+}
+
+/* The line one step up from the buybox body, body-sm to body-md (Victor 26 Oct);
+   the note under it stays body-sm */
+.kc-buybox .tertiary-try-once-link .ft-line {
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
 }
 
 .kc-buybox .tertiary-try-once-link .ft-note {

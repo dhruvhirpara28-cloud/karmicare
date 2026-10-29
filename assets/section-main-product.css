@@ -276,7 +276,7 @@ product-info {
 a.product__text {
   display: block;
   text-decoration: none;
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgb(var(--color-foreground));
 }
 
 .product__text.caption-with-letter-spacing {
@@ -1734,6 +1734,18 @@ a.product__text {
 /* Fix product media image containment styling */
 .product-media-container.media-fit-contain .media>img {
   object-fit: contain !important;
+}
+
+/* "Or Try once · €67": a text link in the link colours, as the sticky cart's Try once
+   (component-sticky-cart.css). Loop's .kc-try-once-btn (snippets/loop-widget.css.liquid) paints
+   it accent blue, about 2:1 on cream (Victor 26 Oct). In Day the hover also gets the global
+   underline (base.css). */
+.tertiary-try-once-link .kc-try-once-btn {
+  color: var(--kc-mapped-text-link-default);
+}
+
+.tertiary-try-once-link .kc-try-once-btn:hover {
+  color: var(--kc-mapped-text-link-default-hover);
 }
 
 /* KC Tooltip */

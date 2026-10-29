@@ -1,0 +1,350 @@
+/* Direction B · Editorial with a reading rail.
+   A split hero (title left, picture right from 990px; picture under the title on phones) in the
+   wide container, then the body in its 680px column beside a rail that lists the article's
+   sections. The rail is the one memorable element: the Figma "path stop" (KC | Shopify Store
+   3592:130087), a hairline with a dot per section; the section you are reading fills its dot.
+   On phones and tablets the rail is an "On this page" disclosure above the body.
+   Index: a lead article, then a grid of 16:9 cards. */
+
+/* One frame for the article page: the rail, its gap and the text column. Hero, body, CTA and
+   related all align to it, so the title starts where the rail does. */
+.kc-blog {
+  --kc-blog-b-frame: calc(24rem + var(--kc-responsive-spacing-layout-3xl) + var(--kc-blog-measure));
+}
+
+.kc-blog__wrap.kc-blog-b__frame {
+  max-width: calc(var(--kc-blog-b-frame) + 2 * var(--kc-blog-gutter));
+}
+
+/* ---- Hero (page -> accent) -------------------------------------------------------------------- */
+.kc-blog-b__hero {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-layout-3xl);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-b__hero-grid {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-2xl);
+  align-items: center;
+}
+
+.kc-blog-b__hero .kc-blog__meta {
+  margin-top: var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-blog-b__hero .kc-blog__media {
+  aspect-ratio: 4 / 3;
+}
+
+.kc-blog-b__hero .kc-blog__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Body + rail (accent -> page) ------------------------------------------------------------- */
+.kc-blog-b__main {
+  padding-block: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-section-xs);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) min(100%, 120rem));
+}
+
+.kc-blog-b__layout {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-xl);
+}
+
+.kc-blog-b__column {
+  min-width: 0;
+  max-width: var(--kc-blog-measure);
+}
+
+/* Disclosure on phones */
+.kc-blog-toc {
+  border-block: 1px solid var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-toc > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--kc-responsive-size-control-min-height);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--kc-responsive-body-md-text-size);
+  font-weight: var(--font-600-weight);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-toc > summary::-webkit-details-marker {
+  display: none;
+}
+
+.kc-blog-toc > summary svg {
+  transition: transform 0.2s ease;
+}
+
+.kc-blog-toc[open] > summary svg {
+  transform: rotate(180deg);
+}
+
+/* The path: a hairline with a dot per section */
+.kc-blog-toc__list {
+  position: relative;
+  margin: 0;
+  padding: var(--kc-responsive-spacing-layout-xs) 0 var(--kc-responsive-spacing-layout-md);
+  list-style: none;
+}
+
+.kc-blog-toc__list::before {
+  content: '';
+  position: absolute;
+  inset-block: 2rem;
+  inset-inline-start: 0.4rem; /* centre of the 9px dot */
+  border-inline-start: 1px solid var(--kc-mapped-border-primary-rule);
+}
+
+.kc-blog-toc__link {
+  position: relative;
+  display: block;
+  padding: var(--kc-responsive-spacing-layout-xs) 0 var(--kc-responsive-spacing-layout-xs) 2.4rem;
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  color: var(--kc-mapped-text-default-body);
+  text-decoration: none;
+}
+
+.kc-blog-toc__link::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(var(--kc-responsive-spacing-layout-xs) + 0.6rem);
+  width: 0.9rem;
+  height: 0.9rem;
+  box-sizing: border-box;
+  border: 1px solid var(--kc-mapped-border-control-default);
+  border-radius: var(--kc-shape-radius-full);
+  background: var(--kc-mapped-surface-page);
+}
+
+.kc-blog-toc__link:hover {
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-toc__link[aria-current='true'] {
+  color: var(--kc-mapped-text-default-heading);
+  font-weight: var(--font-600-weight);
+}
+
+.kc-blog-toc__link[aria-current='true']::before {
+  border-color: var(--kc-mapped-text-default-heading);
+  background: var(--kc-mapped-text-default-heading);
+}
+
+.kc-blog-toc__title {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+  font-weight: var(--font-600-weight);
+  color: var(--kc-mapped-text-default-caption);
+}
+
+/* ---- Sources as a grid of small research cards ------------------------------------------------ */
+.kc-blog-b__end {
+  padding-block: var(--kc-responsive-spacing-layout-3xl) 0;
+}
+
+/* ---- CTA band: packshot + copy (accent hold) -------------------------------------------------- */
+.kc-blog-b__cta {
+  padding-block: var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-b__cta-card {
+  display: grid;
+  overflow: hidden;
+  border-radius: var(--kc-shape-radius-lg);
+  background: var(--kc-mapped-surface-page-secondary);
+  box-shadow: inset 0 0 0 1px var(--kc-mapped-border-primary-hairline);
+}
+
+.kc-blog-b__cta-media {
+  display: grid;
+  place-items: center;
+  padding: var(--kc-responsive-spacing-layout-xl);
+  background: var(--kc-mapped-gradient-section-accent);
+}
+
+.kc-blog-b__cta-media img {
+  display: block;
+  width: min(100%, 32rem); /* the packshot's own crop: two tubes need no more */
+  height: auto;
+}
+
+.kc-blog-b__cta-copy {
+  align-self: center;
+  padding: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-layout-lg);
+}
+
+/* ---- Cards (related, index) ------------------------------------------------------------------- */
+.kc-blog-b__related {
+  padding-block: 0 var(--kc-responsive-spacing-section-comfortable);
+}
+
+.kc-blog-b-grid {
+  display: grid;
+  gap: var(--kc-responsive-spacing-layout-2xl) var(--kc-responsive-spacing-grid-gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kc-blog-b-card__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-md);
+  color: var(--kc-mapped-text-default-heading);
+  text-decoration: none;
+}
+
+.kc-blog-b-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-blog-b-card .kc-blog__media {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.kc-blog-b-card .kc-blog__media img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.kc-blog-b-card__link:hover .kc-blog__media img {
+  transform: scale(1.03);
+}
+
+.kc-blog-b-card__title {
+  margin: 0;
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: var(--kc-responsive-h5-line-height);
+  letter-spacing: var(--kc-responsive-h5-letter-spacing);
+  font-weight: var(--font-500-weight);
+  text-wrap: balance;
+}
+
+.kc-blog-b-card__link:hover .kc-blog-b-card__title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--kc-mapped-surface-accent-default);
+  text-underline-offset: 0.2em;
+}
+
+.kc-blog-b-card__excerpt {
+  margin: 0;
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
+  color: var(--kc-mapped-text-default-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Lead card on the index */
+.kc-blog-b-lead {
+  margin-bottom: var(--kc-responsive-spacing-layout-3xl);
+}
+
+.kc-blog-b-lead .kc-blog-b-card__title {
+  font-size: var(--kc-responsive-h3-text-size);
+  line-height: var(--kc-responsive-h3-line-height);
+  letter-spacing: var(--kc-responsive-h3-letter-spacing);
+}
+
+.kc-blog-b-index__head {
+  padding-block: var(--kc-responsive-spacing-layout-2xl);
+  background: linear-gradient(180deg, var(--kc-mapped-surface-page) 0%, var(--kc-mapped-gradient-section-accent) 100%);
+}
+
+.kc-blog-b-index__body {
+  padding-block: var(--kc-responsive-spacing-layout-xl) var(--kc-responsive-spacing-section-comfortable);
+  background: linear-gradient(180deg, var(--kc-mapped-gradient-section-accent) 0%, var(--kc-mapped-surface-page) 100%);
+}
+
+@media screen and (min-width: 750px) {
+  .kc-blog-b__hero,
+  .kc-blog-b-index__head {
+    padding-block: var(--kc-responsive-spacing-layout-3xl);
+  }
+
+  .kc-blog-b-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kc-blog-b__cta-card {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .kc-blog-b__cta-copy {
+    padding: var(--kc-responsive-spacing-layout-2xl);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .kc-blog-b__hero-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--kc-responsive-spacing-layout-3xl);
+  }
+
+  .kc-blog-b__layout {
+    grid-template-columns: [rail] 24rem [text] minmax(0, var(--kc-blog-measure)); /* rail 240px, the Figma path column */
+    justify-content: center;
+    gap: var(--kc-responsive-spacing-layout-3xl);
+  }
+
+  /* The text keeps its column when an article has too few sections for a rail */
+  .kc-blog-b__column {
+    grid-column: text;
+  }
+
+  .kc-blog-b__rail {
+    position: sticky;
+    top: calc(var(--kc-navigation-clearance) + 1.6rem);
+    align-self: start;
+    max-height: calc(100vh - var(--kc-navigation-clearance) - 3.2rem);
+    overflow-y: auto;
+  }
+
+  /* On the rail the disclosure is always open and has no summary row */
+  .kc-blog-b__rail .kc-blog-toc {
+    border: 0;
+  }
+
+  .kc-blog-b__rail .kc-blog-toc > summary {
+    display: none;
+  }
+
+  .kc-blog-b-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .kc-blog-b-lead .kc-blog-b-card__link {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--kc-responsive-spacing-layout-2xl);
+    align-items: center;
+  }
+
+  .kc-blog-b-lead .kc-blog-b-card__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kc-responsive-spacing-layout-md);
+  }
+}
+
+/* The lead card has the full row at every width */
+.kc-blog-b-grid.kc-blog-b-grid--lead {
+  grid-template-columns: minmax(0, 1fr);
+}

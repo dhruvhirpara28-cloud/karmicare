@@ -2,14 +2,14 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "d2fa48f5c7de995b574c28c65cd2ee7bc4444a34",
+ "source_digest": "2637293ba890353bcf3d8871bf418e9318c36a3c",
  "source_entries": 232,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 171,
-  "held": 25,
+  "translated": 174,
+  "held": 22,
   "locale-present": 2,
   "theme-key": 32,
   "admin": 2
@@ -261,7 +261,7 @@
    "status": "translated",
    "flags": [],
    "notes": "Claims C65 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 1",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C65"
    ]
@@ -405,7 +405,7 @@
    "status": "translated",
    "flags": [],
    "notes": "Claims C53 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 10",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C27",
     "C53"
@@ -491,7 +491,7 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_link_text",
    "en": "Read the science",
    "en_sha1": "9d735e7e921227ea13fa840a0fc712c8b9748ee6",
-   "fr": "",
+   "fr": null,
    "status": "held",
    "flags": [],
    "notes": "retired 24 Oct: 'Read the science' link held until the Science page exists (Victor; homepage lane 1a65780, landing 42); was 'Read the science'; was translated: Découvrir la science",
@@ -643,7 +643,7 @@
    "status": "translated",
    "flags": [],
    "notes": "'BIOFILM PREVENTION' translated as written ('PRÉVENTION DU BIOFILM', C33). If the EN moves to the allowed verb, the FR becomes 'AIDE À RÉDUIRE LE BIOFILM'. Claims C33 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C02",
     "C30",
@@ -979,7 +979,7 @@
    "status": "translated",
    "flags": [],
    "notes": "claim hold waived by Victor 20 Oct for translation; claims review still pending for publication. Hold reason was: unsupported-claim: C35 (CLAIMS-REVIEW.md); translate after the EN is fixed or removed; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 3",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C35"
    ]
@@ -1008,7 +1008,7 @@
    "status": "translated",
    "flags": [],
    "notes": "The EN has a double space after the comma; the FR has one. Claims C41 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 4",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C41"
    ]
@@ -1024,7 +1024,7 @@
    "status": "translated",
    "flags": [],
    "notes": "Claims C40 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 5",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C40"
    ]
@@ -1066,7 +1066,7 @@
    "status": "translated",
    "flags": [],
    "notes": "Claims C12 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 6",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C12"
    ]
@@ -1150,7 +1150,7 @@
    "status": "translated",
    "flags": [],
    "notes": "Claims C70 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 7",
-   "source_status": "needs-review",
+   "source_status": "corrected",
    "claims": [
     "C70"
    ]
@@ -1244,12 +1244,12 @@
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_8dRing.settings.text",
    "en": "Pharmacist, Orthomolecular Practitioner, kPNI Coordinator",
    "en_sha1": "8599e937a96696800cc5f4a948b457a996931b25",
-   "fr": "Pharmacie, thérapie orthomoléculaire, coordination kPNI",
+   "fr": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
    "status": "translated",
    "flags": [
     "gendered-title"
    ],
-   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. EN Therapist became Practitioner (21 Oct, 41ae772); FR keeps the epicene 'thérapeute' (as NL keeps 'therapeut'), since 'praticien' would assume a gender. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3). EN updated 21 Oct (41ae772), was: \"Pharmacist, Orthomolecular Therapist, kPNI Coordinator\"",
+   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. EN Therapist became Practitioner (21 Oct, 41ae772); FR keeps the epicene 'thérapeute' (as NL keeps 'therapeut'), since 'praticien' would assume a gender. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3). EN updated 21 Oct (41ae772), was: \"Pharmacist, Orthomolecular Therapist, kPNI Coordinator\"; 25 Oct: released with 'Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI' (Victor 24 Oct 'toon leen haar fr titel' and 25 Oct 'we hadden Pharmacienne toch al bevestigd voor leen?': the feminine form of her metaobject designation, registered in round 2); was 'Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI'",
    "source_status": "corrected"
   },
   {
@@ -1819,13 +1819,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.image_badge",
-   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "",
-   "status": "held",
+   "en": "XYLITOL CRYSTALS",
+   "en_sha1": "050e880a66c51bc59d0a1e98be90179219ae5f9c",
+   "fr": "CRISTAUX DE XYLITOL",
+   "status": "translated",
    "flags": [],
-   "notes": "retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "source_status": "approved"
+   "notes": "retired 24 Oct: badge emptied with the xylitol specimen photo (xylitol-image lane 3dcf449, Victor); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS; un-retired 25 Oct with the new EN 'XYLITOL CRYSTALS' (landing 55); FR from the glossary",
+   "source_status": "corrected"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_Hi7YUD/subheading",
@@ -1942,13 +1942,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_Hi7YUD.settings.image_badge",
-   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "",
-   "status": "held",
+   "en": "DENTINE TUBULES",
+   "en_sha1": "526bbfe73690770dfb63072c6a7b369415a71169",
+   "fr": "TUBULES DENTINAIRES",
+   "status": "translated",
    "flags": [],
-   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "source_status": "approved"
+   "notes": "retired 25 Oct: image badge emptied with the V3 photo of the Vano card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS; un-retired 25 Oct with the new EN 'DENTINE TUBULES' (landing 55); FR from the glossary",
+   "source_status": "corrected"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_JeERX6/subheading",
@@ -2067,13 +2067,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_JeERX6.settings.image_badge",
-   "en": "DENTINE TUBULES · OPEN AND OCCLUDED",
-   "en_sha1": "cf00cdb53dd2988151e71a679cb02e9f0dbc043f",
-   "fr": "",
-   "status": "held",
+   "en": "ORAL MUCOSA",
+   "en_sha1": "cfa35cc727bab180a785fb9db82f0439d6a6e365",
+   "fr": "MUQUEUSE BUCCALE",
+   "status": "translated",
    "flags": [],
-   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge; translated as written, homepage owner to confirm the badge.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS",
-   "source_status": "approved"
+   "notes": "Observation: the SLS card carries the nHAp card's 'DENTINE TUBULES' badge; translated as written, homepage owner to confirm the badge.; retired 25 Oct: image badge emptied with the V3 photo of the Alli card (xylitol-image lane cf7d749, live main 70d4316 (merchant-edit 9a0594b)); was 'DENTINE TUBULES · OPEN AND OCCLUDED'; was translated: TUBULES DENTINAIRES · OUVERTS ET OBTURÉS; un-retired 25 Oct with the new EN 'ORAL MUCOSA' (landing 55); FR from the glossary",
+   "source_status": "corrected"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/heading",
@@ -2138,7 +2138,7 @@
    "status": "translated",
    "flags": [],
    "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 11",
-   "source_status": "approved",
+   "source_status": "corrected",
    "claims": [
     "C25"
    ]
@@ -2584,7 +2584,7 @@
    "status": "translated",
    "flags": [],
    "notes": "; 25 Oct: 'jamais pour votre facture dentaire' removed with the EN (Victor, 25 Oct)",
-   "source_status": "approved"
+   "source_status": "corrected"
   },
   {
    "id": "index:care_comes_back/terms_link_label",
@@ -3143,12 +3143,12 @@
    "resource_type": "shop",
    "file_or_handle": "shop",
    "key_path": "online_store.preferences.homepage_title",
-   "en": "KARMICARE - Biorhythmic Oral Health",
-   "en_sha1": "b04ccb30266af5344472d142778361e88922b676",
-   "fr": "KARMICARE - Santé bucco-dentaire biorythmique",
+   "en": "KARMICARE | Fluoride-Free Nano-Hydroxyapatite Toothpaste",
+   "en_sha1": "03a76f246e4562fc419597bb1357c21082c47ff1",
+   "fr": "KARMICARE | Dentifrice sans fluor à la nano-hydroxyapatite",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "25 Oct: EN 'Oral Health' became 'Oral Care' live; FR as the approved 'Biorhythmic Oral Care' strings; 25 Oct: Victor's homepage SEO (HOMEPAGE-SEO.md), registered by hand",
    "source_status": "admin-held"
   },
   {
@@ -3156,12 +3156,12 @@
    "resource_type": "shop",
    "file_or_handle": "shop",
    "key_path": "online_store.preferences.homepage_meta_description",
-   "en": "Karmicare designs biorhythmic toothpastes formulated with clean ingredients, nootropics and plant extracts to elevate your morning and night. Nano Hydroxyapatite, fluoride free toothpaste.",
-   "en_sha1": "18e4077f8b1bd4047307d316d0add139a8cea4b4",
-   "fr": "Karmicare conçoit des dentifrices biorythmiques formulés avec des ingrédients sains, des nootropiques et des extraits de plantes pour sublimer vos matins et vos soirs. Formule sans fluor à la nano-hydroxyapatite.",
+   "en": "Awake for the morning, Asleep for the evening. Fluoride-free, SLS-free formulas with nano-hydroxyapatite for your daily care ritual.",
+   "en_sha1": "5bd4c337ca8baf2c8bc5a34c07657a5500816a46",
+   "fr": "Awake pour le matin, Asleep pour le soir. Des formules sans fluor ni SLS, à la nano-hydroxyapatite, pour votre rituel de soin quotidien.",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "; 25 Oct: Victor's homepage SEO (HOMEPAGE-SEO.md), registered by hand",
    "source_status": "admin-held"
   },
   {

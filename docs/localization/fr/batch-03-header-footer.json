@@ -16,7 +16,7 @@
  },
  "flag_counts": {
   "pending-claim-review": 1,
-  "legal-review": 5,
+  "legal-review": 7,
   "wording-adapted": 1
  },
  "entries": [
@@ -66,14 +66,14 @@
    "key_path": "sections.footer.settings.copyright_text",
    "en": "<p>Copyright © ∞ KARMICARE. All rights reserved. KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) is a Belgian product formulated by certified chemists and manufactured under GMP. Formulations are CPNP notified and comply with the EU Cosmetic Regulation (EC) No 1223/2009. Packaging (Awake, Asleep bottle and shipping envelope) are recyclable.</p><p>KARMICARE™ is a brand of KARMICA bv. Vizierstraat 28, 8000, Belgium. Company number 0676.972.896 and VAT number BE0676.972.896 - Belfius: BE73 0689 0664 2960.</p>",
    "en_sha1": "b2d215640991f2039c2d1ca3b244c7f48b57a864",
-   "fr": "<p>Copyright © ∞ KARMICARE. Tous droits réservés. Le KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) est une création belge, formulée par des chimistes certifiés et fabriquée selon les BPF. Les formules sont notifiées au CPNP et conformes au règlement (CE) n° 1223/2009 relatif aux produits cosmétiques. Les emballages (flacons Awake et Asleep et enveloppe d’expédition) sont recyclables.</p><p>KARMICARE™ est une marque de KARMICA bv. Vizierstraat 28, 8000, Belgium. Numéro d’entreprise 0676.972.896 et numéro de TVA BE0676.972.896 - Belfius : BE73 0689 0664 2960.</p>",
+   "fr": "<p>Copyright © ∞ KARMICARE. Tous droits réservés. Le KARMICARE™ Biorhythmic Toothpaste Kit (Awake + Asleep) est une création belge, formulée par des chimistes certifiés et fabriquée selon les BPF. Les formules sont notifiées au CPNP et conformes au règlement (CE) n° 1223/2009 relatif aux produits cosmétiques. Les emballages (flacons Awake et Asleep et enveloppe d’expédition) sont recyclables.</p><p>KARMICARE™ est une marque de KARMICA bv. Vizierstraat 28, 8000, Belgique. Numéro d’entreprise 0676.972.896 et numéro de TVA BE0676.972.896 - Belfius : BE73 0689 0664 2960.</p>",
    "status": "translated",
    "flags": [
     "pending-claim-review",
     "legal-review",
     "wording-adapted"
    ],
-   "notes": "Company name, numbers, VAT, IBAN and street address kept exactly. 'a Belgian product' rendered 'une création belge' (banned word 'product'); the regulation keeps its official French title. The address has no city after 8000 in the EN either. R2 F8 (CHANGES-R2 §6): postal addresses exactly as in the EN; the official French forms (boîte 1, Bruxelles, Belgique) only if Victor decides so. Claims C99 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "Company name, numbers, VAT, IBAN and street address kept exactly. 'a Belgian product' rendered 'une création belge' (banned word 'product'); the regulation keeps its official French title. The address has no city after 8000 in the EN either. R2 F8 (CHANGES-R2 §6): postal addresses exactly as in the EN; the official French forms (boîte 1, Bruxelles, Belgique) only if Victor decides so. Claims C99 need Clinical Research sign-off; translated faithfully, not softened.; 25 Oct: postal address in its local form (Victor: Belgique / België)",
    "source_status": "corrected",
    "claims": [
     "C99"
@@ -298,7 +298,7 @@
    "status": "theme-key",
    "flags": [],
    "notes": "; 25 Oct: button S’inscrire (Victor, 25 Oct)",
-   "source_status": "needs-key"
+   "source_status": "corrected"
   },
   {
    "id": "liquid:sections/footer.liquid:694",
@@ -313,7 +313,7 @@
     "legal-review"
    ],
    "notes": "D4 notice (Victor 23 Oct EN, FR 24 Oct in session); 'Dental Check-up Reward' → 'récompense contrôle dentaire' (glossary); the single <a> is the privacy policy",
-   "source_status": "needs-key"
+   "source_status": "corrected"
   },
   {
    "id": "liquid:sections/footer.liquid:850",
@@ -614,9 +614,11 @@
    "key_path": "sections.footer.settings.legal_guarantee_label",
    "en": "Your legal guarantee rights",
    "en_sha1": "068b297c26b1f94a04b78805103a1a6082a99d68",
-   "fr": "",
+   "fr": null,
    "status": "held",
-   "flags": [],
+   "flags": [
+    "legal-review"
+   ],
    "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: The Commission’s example sentence; lands on Consumer Rights section 4 (`#two-year-guarantee`), where the notice sits. Victor, 24 Oct.; new 25 Oct; retired 25 Oct: the label is a schema default the live footer-group never stores, so registration cannot reach it; the footer now falls back to the locale key kc.footer.legal_guarantee (global-footer lane, landing desk brief msg_69df45814299; Victor 'ja codefix voor labels'), so this row leaves the registration; was translated: Vos droits à la garantie légale",
    "source_status": "approved"
   },
@@ -627,9 +629,11 @@
    "key_path": "sections.footer.settings.legal_withdrawal_label",
    "en": "Withdraw from contract here",
    "en_sha1": "95554994d6d4d636b284bbbfbbfe72953ada98a4",
-   "fr": "",
+   "fr": null,
    "status": "held",
-   "flags": [],
+   "flags": [
+    "legal-review"
+   ],
    "notes": "from docs/launch-gate/withdrawal/TRANSLATIONS-HANDOFF.md: Statutory label; this is the \"withdrawal function\" link the law wants prominently displayed.; new 25 Oct; retired 25 Oct: the label is a schema default the live footer-group never stores, so registration cannot reach it; the footer now falls back to the locale key kc.footer.legal_withdrawal (global-footer lane, landing desk brief msg_69df45814299; Victor 'ja codefix voor labels'), so this row leaves the registration; was translated: Renoncer au contrat ici",
    "source_status": "approved"
   },
