@@ -1,0 +1,76 @@
+{
+  "lang": "fr",
+  "status": "offline only; no live keys/digests resolved; not registered",
+  "builder_sha256": "2eec7714663a67b859cd149296d9bb301e8875162496cd1bc561dc9243f700a1",
+  "resources": [
+    {
+      "shopify_type": "ONLINE_STORE_THEME_JSON_TEMPLATE",
+      "owner": "templates/index.json",
+      "batch": "batch-01-homepage",
+      "page": "index",
+      "items": [
+        {
+          "id": "index:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+          "kind": "match",
+          "key": null,
+          "field": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+          "en": "<p>“Supporting my biorhythm is important to me. Brushing my teeth with Karmicare fits into my daily ritual to help my nervous system transition between day and night. I also find that it helps me enormously to keep my receding gums under control.”</p>",
+          "en_sha1": "622a488d7104dc54f5e67bf9032e7c04697514d5",
+          "value": "<p>“Soutenir mon biorythme est important pour moi. Me brosser les dents avec Karmicare s’inscrit dans mon rituel quotidien pour aider mon système nerveux à passer du jour à la nuit et inversement. Je constate également que cela m’aide énormément à garder ma récession gingivale sous contrôle.”</p>",
+          "gates": [
+            "pending-claim-review"
+          ],
+          "hold": [
+            "pending-claim-review",
+            "review hold (holds.json): Kim Verlot: nervous-system and receding-gum claims require review before public marketing; source cb09296, 29 Oct 2026."
+          ],
+          "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+          "status": {
+            "drafted": true,
+            "registered": false
+          },
+          "hint": [
+            "trusted_professionals_HAqYth",
+            "card_qAPajg",
+            "hover_text"
+          ]
+        }
+      ]
+    },
+    {
+      "shopify_type": "ONLINE_STORE_THEME_JSON_TEMPLATE",
+      "owner": "templates/product.subscription-item.json",
+      "batch": "batch-02-pdp",
+      "page": "product.subscription-item",
+      "items": [
+        {
+          "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+          "kind": "match",
+          "key": null,
+          "field": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+          "en": "<p>“Supporting my biorhythm is important to me. Brushing my teeth with Karmicare fits into my daily ritual to help my nervous system transition between day and night. I also find that it helps me enormously to keep my receding gums under control.”</p>",
+          "en_sha1": "622a488d7104dc54f5e67bf9032e7c04697514d5",
+          "value": "<p>“Soutenir mon biorythme est important pour moi. Me brosser les dents avec Karmicare s’inscrit dans mon rituel quotidien pour aider mon système nerveux à passer du jour à la nuit et inversement. Je constate également que cela m’aide énormément à garder ma récession gingivale sous contrôle.”</p>",
+          "gates": [
+            "pending-claim-review"
+          ],
+          "hold": [
+            "pending-claim-review",
+            "review hold (holds.json): Kim Verlot: nervous-system and receding-gum claims require review before public marketing; source cb09296, 29 Oct 2026."
+          ],
+          "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
+          "status": {
+            "drafted": true,
+            "registered": false
+          },
+          "hint": [
+            "trusted_professionals_HAqYth",
+            "card_qAPajg",
+            "hover_text"
+          ]
+        }
+      ]
+    }
+  ],
+  "skipped": {}
+}
