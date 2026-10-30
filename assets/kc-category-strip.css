@@ -40,7 +40,8 @@
   font-family: var(--kc-font-role-identity);
   font-size: var(--kc-responsive-label-sm-text-size);
   line-height: 1;
-  font-weight: var(--font-700-weight, 700);
+  /* Same weight as the hero badge rating and its heading (Victor, 30 Oct 2026; was 700) */
+  font-weight: var(--font-600-weight, 600);
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   text-transform: uppercase;
   white-space: nowrap;
