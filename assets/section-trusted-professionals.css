@@ -641,6 +641,14 @@ trusted-professionals-quotes {
   object-position: 50% 15%;
 }
 
+/* This portrait has extra headroom. Align Kim with the other professionals;
+   both containers clip the crop, including the image cloned into the panel. */
+.trusted-professionals__card-image img[src*="/kc-professional-kim-verlot"],
+.trusted-professionals__panel-media img[src*="/kc-professional-kim-verlot"] {
+  transform: scale(1.12);
+  transform-origin: 100% 100%;
+}
+
 .trusted-professionals__panel-meta {
   display: flex;
   flex-direction: column;
