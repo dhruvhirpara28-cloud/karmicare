@@ -50,3 +50,17 @@
 .kc-category-strip__count {
   color: var(--kc-mapped-text-default-body);
 }
+
+/* Phones: the rating sits above the artwork (Victor, 30 Oct 2026), so the row
+   never wraps the rating under the logo at 375 px (R95 Astra finding 3). */
+@media screen and (max-width: 749px) {
+  .kc-category-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--kc-responsive-spacing-layout-xs, 8px);
+  }
+
+  .kc-category-strip__rating {
+    order: -1;
+  }
+}
