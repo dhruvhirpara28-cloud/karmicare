@@ -6,8 +6,9 @@
   The rating has two sources, chosen with the block's rating_source setting:
   - fixed (default): the combined Karmicare figure set in the block
     (rating_value, rating_count), the same number as the homepage hero badge
-    (Victor, 29 Oct 2026; docs/reviews/PLAN.md D-2). Printed as value/5 (count),
-    for example 4.7/5 (110).
+    (Victor, 29 Oct 2026; docs/reviews/PLAN.md D-2). Printed as value (count)
+    in the original form, for example 4.7 (110) (Victor, 30 Oct 2026); the
+    scale is only in the accessible name.
   - metafield: Shopify's standard product rating metafields (reviews.rating,
     reviews.rating_count), which review apps such as Judge.me fill in. With no
     reviews the rating is left out, never shown as 0.
@@ -34,7 +35,7 @@
       if rating != blank and rating_count > 0
         assign show_rating = true
         assign rating_value = rating.rating | round: 1 | append: ''
-        assign rating_max = rating.scale_max | default: 5
+        assign rating_max = rating.scale_max | default: 5 | round
       endif
     else
       assign rating_value = block.settings.rating_value | strip | escape
@@ -74,7 +75,7 @@
     >
       {{- 'kc-icon-star-filled.svg' | inline_asset_content -}}
       <span class="kc-category-strip__score" aria-hidden="true">
-        {{- rating_value }}/{{ rating_max }} <span class="kc-category-strip__count">({{ rating_count }})</span>
+        {{- rating_value }} <span class="kc-category-strip__count">({{ rating_count }})</span>
       </span>
     </span>
   {%- endif -%}

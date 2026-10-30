@@ -118,11 +118,11 @@ const aria = (html) => { const m = html.match(/class="kc-category-strip__rating"
 const WITH = { rating: { value: { rating: 4.6, scale_max: 5 } }, rating_count: { value: 12 } };
 const strips = {};
 const variants = [
-  ['fixed-en', 'en', stripBlock.settings, null, '4.7/5 (110)', '4.7 out of 5 stars, 110 total reviews'],
-  ['fixed-nl', 'nl', stripBlock.settings, null, '4,7/5 (110)', '4,7 van de 5 sterren, 110 totaal aantal recensies'],
-  ['fixed-fr', 'fr', stripBlock.settings, null, '4,7/5 (110)', '4,7 sur 5 étoiles, 110 total des critiques'],
-  ['metafield-en', 'en', { ...stripBlock.settings, rating_source: 'metafield' }, WITH, '4.6/5 (12)', '4.6 out of 5 stars, 12 total reviews'],
-  ['metafield-nl', 'nl', { ...stripBlock.settings, rating_source: 'metafield' }, WITH, '4,6/5 (12)', '4,6 van de 5 sterren, 12 totaal aantal recensies'],
+  ['fixed-en', 'en', stripBlock.settings, null, '4.7 (110)', '4.7 out of 5 stars, 110 total reviews'],
+  ['fixed-nl', 'nl', stripBlock.settings, null, '4,7 (110)', '4,7 van de 5 sterren, 110 totaal aantal recensies'],
+  ['fixed-fr', 'fr', stripBlock.settings, null, '4,7 (110)', '4,7 sur 5 étoiles, 110 total des critiques'],
+  ['metafield-en', 'en', { ...stripBlock.settings, rating_source: 'metafield' }, WITH, '4.6 (12)', '4.6 out of 5 stars, 12 total reviews'],
+  ['metafield-nl', 'nl', { ...stripBlock.settings, rating_source: 'metafield' }, WITH, '4,6 (12)', '4,6 van de 5 sterren, 12 totaal aantal recensies'],
   ['metafield-empty-en', 'en', { ...stripBlock.settings, rating_source: 'metafield' }, null, null, null],
   ['fixed-count-0-en', 'en', { ...stripBlock.settings, rating_count: 0 }, null, null, null],
   ['fixed-off-en', 'en', { ...stripBlock.settings, show_rating: false }, null, null, null],
@@ -138,17 +138,17 @@ for (const [name, iso, settings, meta, wantScore, wantAria] of variants) {
   if (wantScore) check(/class="kc-category-strip__rating"\s+role="img"/.test(html) && /kc-icon--star/.test(html) && /kc-category-strip__count/.test(html), `strip ${name}: rating span has role="img", the star icon and the count span`);
 }
 check(stripBlock.settings.rating_source === 'fixed' && stripBlock.settings.rating_value === '4.7' && stripBlock.settings.rating_count === 110 && stripBlock.settings.show_rating === true, `template product.subscription-item.json category_strip_block: ${JSON.stringify(stripBlock.settings)}`);
-check(badgeBlock.settings.rating_text === '4.7/5 (110)', `template index.json ${badgeKey} rating_text: ${JSON.stringify(badgeBlock.settings.rating_text)}`);
+check(badgeBlock.settings.rating_text === '4.7 (110)', `template index.json ${badgeKey} rating_text: ${JSON.stringify(badgeBlock.settings.rating_text)}`);
 const schemaDefault = heroSrc.match(/"id": "rating_text",[\s\S]*?"default": "([^"]*)"/);
-check(schemaDefault && schemaDefault[1] === '4.7/5 (110)', `hero schema default rating_text: ${JSON.stringify(schemaDefault && schemaDefault[1])}`);
+check(schemaDefault && schemaDefault[1] === '4.7 (110)', `hero schema default rating_text: ${JSON.stringify(schemaDefault && schemaDefault[1])}`);
 
 const heroes = {
   en: renderBadge('en', badgeBlock.settings.rating_text),
-  nl: renderBadge('nl', '4,7/5 (110)'), // the NL/FR value source-copy registers for this setting
+  nl: renderBadge('nl', '4,7 (110)'), // the NL/FR value source-copy registers for this setting
 };
 for (const [iso, html] of Object.entries(heroes)) {
   const text = (html.match(/hero-karmicare__badge-rating-text">([^<]*)</) || [])[1];
-  check(text === (iso === 'en' ? '4.7/5 (110)' : '4,7/5 (110)'), `hero badge ${iso}: rating text ${JSON.stringify(text)}`);
+  check(text === (iso === 'en' ? '4.7 (110)' : '4,7 (110)'), `hero badge ${iso}: rating text ${JSON.stringify(text)}`);
   check(/<a\s+href="#shopify-section-[^"]+"\s+class="hero-karmicare__badge /.test(html), `hero badge ${iso}: the whole badge keeps its Trusted Professionals link`);
   const ratingPart = html.slice(html.indexOf('hero-karmicare__badge-rating"'), html.indexOf('hero-karmicare__badge-heading-wrap'));
   check(!/<a[\s>]/.test(ratingPart), `hero badge ${iso}: no separate link on the rating line`);
@@ -186,7 +186,7 @@ const page = `<!doctype html>
 <pre id="fx-report" class="fx-report">waiting…</pre>
 <div class="fx-heroes">
 <div class="fx-hero-variant" data-variant="en"><p class="fx-title">Hero badge · EN · templates/index.json rating_text</p>${heroes.en}</div>
-<div class="fx-hero-variant" data-variant="nl"><p class="fx-title">Hero badge · NL/FR · the value source-copy registers (4,7/5 (110))</p>${heroes.nl}</div>
+<div class="fx-hero-variant" data-variant="nl"><p class="fx-title">Hero badge · NL/FR · the value source-copy registers (4,7 (110))</p>${heroes.nl}</div>
 </div>
 ${stripVariant('fixed-en', 'Strip · fixed · EN (template values)')}
 ${stripVariant('fixed-nl', 'Strip · fixed · NL')}
