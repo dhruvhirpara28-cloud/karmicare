@@ -2,11 +2,11 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "2637293ba890353bcf3d8871bf418e9318c36a3c",
+ "source_digest": "4570fe98e3ba0bada3a1f5c4b295e6adbefe10a0",
  "source_entries": 232,
  "counts": {
-  "translated": 167,
-  "held": 21,
+  "translated": 166,
+  "held": 22,
   "pending-claim-review": 7,
   "dawn-nl": 2,
   "theme-key": 33,
@@ -50,10 +50,10 @@
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.heading_RHmd8h.settings.heading",
    "en": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
    "en_sha1": "27396ef93a1b975c6c4d1ec7d270713d993a1caa",
-   "nl": "Je mond heeft een ritme <strong>Nu je mondzorg ook</strong>",
+   "nl": "Je mond heeft een ritme. <strong>Volg het.</strong>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/text_Y7L3hV/text",
@@ -62,10 +62,10 @@
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.text_Y7L3hV.settings.text",
    "en": "Karmicare is a day-and-night oral care system designed around your mouth’s 24-hour rhythm. Awake for activation. Asleep for restoration.",
    "en_sha1": "1c9b9da1cffdaaf162e51bd94661750cc6fa934a",
-   "nl": "Karmicare is een mondzorgsysteem voor dag en nacht, ontworpen rond het 24-uursritme van je mond. Awake voor activatie. Asleep voor herstel.",
+   "nl": "Karmicare is mondzorg voor dag en nacht. Twee formules op het 24-uursritme van je mond. Awake activeert. Asleep herstelt.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/buttons_DpYxth/button_label_1",
@@ -86,12 +86,12 @@
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.buttons_DpYxth.settings.button_label_2",
    "en": "WHY TWO FORMULAS?",
    "en_sha1": "cf338d8c497d9797288b9469773fe3ae36f7bfd9",
-   "nl": "WAAROM TWEE FORMULES?",
+   "nl": "WAAROM TWEE?",
    "status": "translated",
    "flags": [
     "fit-risk"
    ],
-   "notes": "21 vs 17 chars; no shorter natural Dutch for 'why two formulas'"
+   "notes": "21 vs 17 chars; no shorter natural Dutch for 'why two formulas'; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/rhythm_toggle_ffWVXt/awake_label",
@@ -162,10 +162,10 @@
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.heading",
    "en": "Backed by health professionals",
    "en_sha1": "374eca1b99e0cc7ecd8eccd456238aaf2cc143bc",
-   "nl": "Gesteund door zorgprofessionals",
+   "nl": "Aanbevolen door zorgprofessionals",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:stat_strip_karmicare/tagline",
@@ -248,10 +248,10 @@
    "key_path": "sections.stat_strip_karmicare.blocks.stat_3.settings.text",
    "en": "Formulated on peer-reviewed studies",
    "en_sha1": "afb08ae4f6ad59d0f94704a9237bfe51c6c174e4",
-   "nl": "Geformuleerd op basis van peer-reviewed studies",
+   "nl": "Op basis van wetenschappelijk getoetste studies",
    "status": "translated",
    "flags": [],
-   "notes": "EN says +36 studies here, 39 on the product page highlight and 'more than 38,000 people' in the research section; kept as EN, the numbers need one source; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 1"
+   "notes": "EN says +36 studies here, 39 on the product page highlight and 'more than 38,000 people' in the research section; kept as EN, the numbers need one source; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 1; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:stat_strip_karmicare/stat_4/heading",
@@ -272,10 +272,10 @@
    "key_path": "sections.stat_strip_karmicare.blocks.stat_4.settings.text",
    "en": "of AM/PM care per duo",
    "en_sha1": "843612d02206f1110fc5292baf9f767f99e1eaee",
-   "nl": "AM/PM-zorg per duo",
+   "nl": "dag- en nachtzorg per duo",
    "status": "translated",
    "flags": [],
-   "notes": "AM/PM kept to fit (common in Dutch beauty copy); if space allows: 'ochtend- en avondzorg per duo'"
+   "notes": "AM/PM kept to fit (common in Dutch beauty copy); if space allows: 'ochtend- en avondzorg per duo'; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:stat_strip_karmicare/stat_5/heading",
@@ -322,10 +322,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.title",
    "en": "Your mouth runs on a 24-hour clock.",
    "en_sha1": "6a076c3bc27f0f2268b68939509917bf9bbab008",
-   "nl": "Je mond loopt op een 24-uursklok.",
+   "nl": "Je mond volgt een 24-uursklok.",
    "status": "translated",
    "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Je mond volgt een 24-uursklok."
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Je mond volgt een 24-uursklok.; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:chronobiology_clock_karmicare/description",
@@ -372,10 +372,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.morning_text",
    "en": "Cortisol rises. Morning brings coffee, breakfast and the day's first acids. Enamel needs its shield on first.",
    "en_sha1": "1ba693b22fcc97e236687835d3bdc6462be0453b",
-   "nl": "Cortisol stijgt. De ochtend brengt koffie, ontbijt en de eerste zuren van de dag. Je glazuur heeft eerst zijn schild nodig.",
+   "nl": "Cortisol stijgt. Dan komen koffie, ontbijt en de eerste zuren van de dag. Je glazuur heeft eerst zijn schild nodig.",
    "status": "translated",
    "flags": [],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Glazuur heeft eerst zijn schild nodig.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 10"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Cortisol stijgt; koffie, ontbijt en de eerste zuren van de dag volgen. Glazuur heeft eerst zijn schild nodig.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 10; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:chronobiology_clock_karmicare/night_badge",
@@ -420,12 +420,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.chronobiology_clock_karmicare.settings.hint_label",
-   "en": "DRAG THE RING · EXPLORE 24 HOURS",
-   "en_sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8",
-   "nl": "SLEEP AAN DE RING · VERKEN 24 UUR",
+   "en": "DRAG THE DOT · EXPLORE 24 HOURS",
+   "en_sha1": "d146b9c379fc398f50270b495c5a1c7c3250a62b",
+   "nl": "SLEEP DE BOL · VERKEN 24 UUR",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "26 Oct: clock hint approved by Victor (FR shortened to fit one line at 360)"
   },
   {
    "id": "index:chronobiology_clock_karmicare/footer_text",
@@ -434,10 +434,10 @@
    "key_path": "sections.chronobiology_clock_karmicare.settings.footer_text",
    "en": "Formulated for both shifts: Awake by day, Asleep by night.",
    "en_sha1": "61d06b63816484d100ca48ce1a77cad5d383ab1e",
-   "nl": "Geformuleerd voor beide diensten: Awake overdag, Asleep 's nachts.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": ""
+   "notes": "retired 26 Oct: the clock footer text is empty on the homepage branch (Victor: 'may go for now', via the landing desk); left out of the registration as footer_link_text; was translated: Geformuleerd voor beide diensten: Awake overdag, Asleep 's nachts."
   },
   {
    "id": "index:chronobiology_clock_karmicare/footer_link_text",
@@ -470,10 +470,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.heading",
    "en": "Two formulas. One system. <strong>Designed around you.</strong>",
    "en_sha1": "937d227b7be59d066c5fc069631a970314e357d1",
-   "nl": "Twee formules. Eén systeem. <strong>Ontworpen rond jou.</strong>",
+   "nl": "Twee formules. Eén systeem. <strong>Op jouw ritme.</strong>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/button_label",
@@ -494,10 +494,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.button_subtext",
    "en": "€0.49 / brushing ritual",
    "en_sha1": "108f6abba1c4bf98e74f239bc73661725990cad4",
-   "nl": "€0,49 / poetsritueel",
+   "nl": "€0,49 / poetsbeurt",
    "status": "translated",
    "flags": [],
-   "notes": "TERM: brushing ritual → poetsritueel"
+   "notes": "TERM: brushing ritual → poetsritueel; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/left_heading",
@@ -506,10 +506,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.left_heading",
    "en": "Activated and strengthened by day",
    "en_sha1": "52a11b9e527b738f37d38dd191b57d274314ab73",
-   "nl": "'s Morgens geactiveerd en versterkt",
+   "nl": "Activeert en versterkt overdag",
    "status": "translated",
    "flags": [],
-   "notes": "morning, not day: mirrors ''s Nachts gezuiverd en hersteld' and 'Je ochtendritueel'; EN keeps 'by day' (Victor, 23 Oct)"
+   "notes": "morning, not day: mirrors ''s Nachts gezuiverd en hersteld' and 'Je ochtendritueel'; EN keeps 'by day' (Victor, 23 Oct); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/left_text",
@@ -518,10 +518,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.left_text",
    "en": "Guarana, mint and lime — a mineral shield for everything ahead. Your morning ritual, activated.",
    "en_sha1": "c10d6776164399823a2ab386920bea7b08f3054b",
-   "nl": "Guarana, munt en limoen — een mineraal schild voor alles wat voor je ligt. Je ochtendritueel, geactiveerd.",
+   "nl": "Guarana, munt en limoen. Een mineraal schild voor de dag die komt. Je ochtendritueel begint hier.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/left_button_label",
@@ -542,10 +542,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.right_heading",
    "en": "Purified and restored by night",
    "en_sha1": "9fa357b294b55bf318d29a9485744386026a7182",
-   "nl": "'s Nachts gezuiverd en hersteld",
+   "nl": "Zuivert en herstelt 's nachts",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/right_text",
@@ -554,10 +554,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.right_text",
    "en": "Valerian, cinnamon and orange — a gentle reset for everything behind. Your evening ritual, complete.",
    "en_sha1": "70d9e0e16909c395e86edee9b9cd0ff57c7a0f1d",
-   "nl": "Valeriaan, kaneel en sinaasappel — een zachte reset voor alles wat achter je ligt. Je avondritueel, compleet.",
+   "nl": "Valeriaan, kaneel en sinaasappel. Een zachte afsluiting voor alles wat achter je ligt. Je avondritueel is compleet.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:two_formulas_karmicare/right_button_label",
@@ -578,10 +578,10 @@
    "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
    "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
    "en_sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467",
-   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>HELPT BIOFILM VERMINDEREN</li><li>BELGISCHE FORMULERING</li><li>VEGAN & HALAL</li></ul>",
+   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>HELPT BIOFILM VERMINDEREN</li><li>BELGISCHE FORMULE</li><li>VEGAN & HALAL</li></ul>",
    "status": "translated",
    "flags": [],
-   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2"
+   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/subheading",
@@ -614,10 +614,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.text",
    "en": "<p>You brush every day. Karmicare makes those two minutes do more: strengthen enamel, settle gums, keep your mouth in balance, morning and night. Not because you brush wrong. Because brushing cleans, and your mouth needs more than clean.</p>",
    "en_sha1": "d56bd9f030f7c0c18df805dddcd62cf73021e9c5",
-   "nl": "<p>Je poetst elke dag. Karmicare laat die twee minuten meer doen: glazuur versterken, tandvlees tot rust brengen, je mond in balans houden, 's ochtends en 's avonds. Niet omdat je verkeerd poetst. Maar omdat poetsen reinigt, en je mond meer nodig heeft dan schoon.</p>",
+   "nl": "<p>Je poetst elke dag. Karmicare haalt meer uit die twee minuten: sterker glazuur, rustiger tandvlees, een mond in balans, 's ochtends en 's avonds. Niet omdat je verkeerd poetst. Poetsen maakt schoon, en je mond heeft meer nodig dan schoon alleen.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "'settle gums' → 'tandvlees tot rust brengen' (not 'kalmeren' = soothe, to keep the claim as is); claims gate cleared 24 Oct: C20 approved, C32 approved, C34 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
+   "notes": "'settle gums' → 'tandvlees tot rust brengen' (not 'kalmeren' = soothe, to keep the claim as is); claims gate cleared 24 Oct: C20 approved, C32 approved, C34 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/button_label",
@@ -638,10 +638,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.button_subtext",
    "en": "€0.49 / brushing ritual",
    "en_sha1": "108f6abba1c4bf98e74f239bc73661725990cad4",
-   "nl": "€0,49 / poetsritueel",
+   "nl": "€0,49 / poetsbeurt",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/bottom_note",
@@ -650,10 +650,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.settings.bottom_note",
    "en": "*Reported outcomes vary. Mechanisms and published evidence are shown separately.",
    "en_sha1": "9263b9be81c0ca28e6468183a3e75670348df822",
-   "nl": "*Gerapporteerde resultaten verschillen. Werkingsmechanismen en gepubliceerd bewijs worden apart getoond.",
+   "nl": "*Gemelde resultaten verschillen. Werking en gepubliceerd onderzoek tonen we apart.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/label",
@@ -674,10 +674,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_qMHDBq.settings.heading",
    "en": "Teeth that feel strong",
    "en_sha1": "e7323cf3895d46f2707f6e70fe1ec1fc9bbed88d",
-   "nl": "Sterk aanvoelende tanden",
+   "nl": "Voelbaar sterke tanden",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_qMHDBq/text",
@@ -796,10 +796,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_aXhzDi.settings.text",
    "en": "<p>Remineralisation lifts the surface. No bleach, no strips.</p>",
    "en_sha1": "33072db0237910f7ff82e4ba3ae7dc7215a12325",
-   "nl": "<p>Remineralisatie frist het oppervlak op. Geen bleekmiddel, geen strips.</p>",
+   "nl": "<p>Remineralisatie haalt het oppervlak op. Geen bleekmiddel, geen strips.</p>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_QdCWaE/label",
@@ -832,10 +832,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_QdCWaE.settings.text",
    "en": "<p>Supports your mouth’s own balance. Less plaque, day and night.</p>",
    "en_sha1": "0f7e84a549d7f63a18cf42cd0d2552ece9a6fc71",
-   "nl": "<p>Ondersteunt het eigen evenwicht van je mond. Minder tandplak, dag en nacht.</p>",
+   "nl": "<p>Ondersteunt de eigen balans van je mond. Minder tandplak, dag en nacht.</p>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_VP8KGi/label",
@@ -928,10 +928,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.heading",
    "en": "Wake up smoother",
    "en_sha1": "0983f6160de299969ba53cfe54ac8a99d28c1c98",
-   "nl": "Gladder ontwaken",
+   "nl": "Glad wakker worden",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_AGFiEX/text",
@@ -940,10 +940,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_AGFiEX.settings.text",
    "en": "<p>Spit, don’t rinse. With you all night. Feel it before breakfast.</p>",
    "en_sha1": "de7bf03ee0818fced8de342d17539c832f496e49",
-   "nl": "<p>Spugen, niet spoelen. De hele nacht bij je. Voel het nog voor het ontbijt.</p>",
+   "nl": "<p>Spugen, niet spoelen. Blijft de hele nacht bij je. Voel het nog voor het ontbijt.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 6"
+   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 6; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/card_jN7XcL/label",
@@ -978,10 +978,10 @@
    "key_path": "sections.product_benefits_karmicare_bcQ6tp.blocks.card_jN7XcL.settings.text",
    "en": "<p>All the minerals your mouth needs in one press. Hygienic, precise, nothing wasted.</p>",
    "en_sha1": "0c8fa91a80d520f60e04c1a731c21df20fa8667e",
-   "nl": "<p>Alle mineralen die je mond nodig heeft in één pompje. Hygiënisch, nauwkeurig, niets verspild.</p>",
+   "nl": "<p>Alle mineralen die je mond nodig heeft, in één druk. Hygiënisch, precies, zonder verspilling.</p>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/subheading",
@@ -1002,10 +1002,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.settings.heading",
    "en": "Trusted by professionals <strong>who look beyond the teeth</strong>",
    "en_sha1": "bd60574c1ade21d60f2f755fcdb239cb92accdfd",
-   "nl": "Vertrouwd door professionals <strong>die verder kijken dan de tanden</strong>",
+   "nl": "Aanbevolen door professionals <strong>die verder kijken dan tanden</strong>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/bottom_text",
@@ -1014,10 +1014,10 @@
    "key_path": "sections.trusted_professionals_HAqYth.settings.bottom_text",
    "en": "<p>These practitioners recommend Karmicare between visits. Not to replace their care, but to make the brushings between appointments count for something.</p>",
    "en_sha1": "72f44811074d851bc8c7f398aa632735e542afc9",
-   "nl": "<p>Deze zorgverleners raden Karmicare aan voor de periode tussen twee bezoeken. Niet om hun zorg te vervangen, maar om de poetsbeurten tussen de afspraken door iets te laten betekenen.</p>",
+   "nl": "<p>Deze zorgverleners raden Karmicare aan voor de tijd tussen twee bezoeken. Niet in plaats van hun zorg, maar zodat elke poetsbeurt tussen twee afspraken ook iets oplevert.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "'prevented' rendered literally ('voorkomen') because the EN says it (C70); JEP/DETIC bans 'voorkomt' in claims, claims reviewer to check. TERM: practitioner → zorgverlener; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 7"
+   "notes": "'prevented' rendered literally ('voorkomen') because the EN says it (C70); JEP/DETIC bans 'voorkomt' in claims, claims reviewer to check. TERM: practitioner → zorgverlener; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 7; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/button_label",
@@ -1258,10 +1258,10 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.bottom_text",
    "en": "<p>Built for people who read the label, check the research and want their daily care to hold up. Meta-analyses and randomised controlled trials, the top of the evidence hierarchy, alongside laboratory studies. Published in peer-reviewed journals and covering more than 38,000 people between them.&nbsp;</p>",
    "en_sha1": "6d897cef81c16860c46266a09c7167026ab8ad27",
-   "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek checken en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften en samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
+   "nl": "<p>Gemaakt voor mensen die het etiket lezen, het onderzoek nalezen en willen dat hun dagelijkse zorg de toets doorstaat. Meta-analyses en gerandomiseerde gecontroleerde studies, de top van de bewijshiërarchie, naast laboratoriumstudies. Gepubliceerd in peer-reviewed tijdschriften, samen goed voor meer dan 38.000 mensen.&nbsp;</p>",
    "status": "translated",
    "flags": [],
-   "notes": "claims gate cleared 24 Oct: C68 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
+   "notes": "claims gate cleared 24 Oct: C68 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:research_behind_system_EkjATL/button_label",
@@ -1270,12 +1270,12 @@
    "key_path": "sections.research_behind_system_EkjATL.settings.button_label",
    "en": "Explore the full evidence base",
    "en_sha1": "0fa1ec9d5064dcacc5914eb584d9f6410eaea971",
-   "nl": "Ontdek de volledige wetenschappelijke basis",
+   "nl": "Bekijk al het onderzoek",
    "status": "translated",
    "flags": [
     "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek het volledige bewijs; Button label, 30 → 43 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Ontdek het volledige bewijs; Button label, 30 → 43 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_bDxUVT/subheading",
@@ -1516,10 +1516,10 @@
    "key_path": "sections.research_behind_system_EkjATL.blocks.card_fmFMFd.settings.heading",
    "en": "Xylitol lowered tooth decay compared with controls.",
    "en_sha1": "21d0c73d004ce24a9e7bbe2d7a144f87f9263875",
-   "nl": "Xylitol verminderde tandbederf ten opzichte van controlegroepen.",
+   "nl": "Xylitol verminderde cariës ten opzichte van controlegroepen.",
    "status": "translated",
    "flags": [],
-   "notes": "claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
+   "notes": "claims gate cleared 24 Oct: C62 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:research_behind_system_EkjATL/card_fmFMFd/subtext",
@@ -1846,10 +1846,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.settings.subtext",
    "en": "Everything people usually ask before switching to a day-and-night oral care system.",
    "en_sha1": "1a4b52746156fd00b023fa0f7826f5298e497c26",
-   "nl": "Alles wat mensen meestal vragen voor ze overstappen op een mondzorgsysteem voor dag en nacht.",
+   "nl": "Wat mensen meestal willen weten voor ze overstappen op mondzorg voor dag en nacht.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_TNnqTQ/category",
@@ -1882,10 +1882,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_TNnqTQ.settings.answer",
    "en": "<p>Because your mouth doesn’t do the same job all day. Daytime is exposure to acids, sugars and coffee, so Awake protects, activates and brightens. Night is repair, when saliva drops and your body regenerates, so Asleep soothes, supports your mouth’s balance and helps remineralise. Spit, don’t rinse. Left on after the evening brush, it gets extended contact time.</p>",
    "en_sha1": "bcbc6adc230c2b6b6abbab80717b52522abc967b",
-   "nl": "<p>Omdat je mond niet de hele dag hetzelfde werk doet. Overdag draait het om blootstelling aan zuren, suikers en koffie, dus Awake beschermt, activeert en maakt stralender. ’s Nachts draait het om herstel, je speeksel neemt af en je lichaam regenereert, dus Asleep verzacht, ondersteunt de balans van je mond en helpt remineraliseren. Spugen, niet spoelen. Blijft het na het avondpoetsen zitten, dan krijgt het een verlengde contacttijd.</p>",
+   "nl": "<p>Omdat je mond niet de hele dag hetzelfde werk doet. Overdag draait het om blootstelling aan zuren, suikers en koffie, dus Awake beschermt, activeert en maakt stralender. 's Nachts draait het om herstel, je speeksel neemt af en je lichaam regenereert, dus Asleep verzacht, ondersteunt de balans van je mond en helpt remineraliseren. Spugen, niet spoelen. Blijft het na het avondpoetsen zitten, dan werkt het langer door.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 11"
+   "notes": "EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 11; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_kLMHax/category",
@@ -1918,10 +1918,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_kLMHax.settings.answer",
    "en": "<p>About 64 days — one full cycle. One pump per ritual, Awake in the morning and Asleep at night, and each formula carries a little over two months of them. A delivery every 60 days keeps you a few days ahead.</p>",
    "en_sha1": "7f5374924b4b5a3da5b502d0c49748566724f7d3",
-   "nl": "<p>Ongeveer 64 dagen — één volledige cyclus. Eén pompje per ritueel, Awake 's ochtends en Asleep 's avonds, en elke formule bevat er iets meer dan twee maanden van. Met een levering om de 60 dagen loop je steeds een paar dagen voor.</p>",
+   "nl": "<p>Ongeveer 64 dagen, één volledige cyclus. Eén pompje per poetsbeurt, Awake 's ochtends en Asleep 's avonds, en elke formule bevat er ruim twee maanden van. Met een levering om de 60 dagen loop je altijd een paar dagen voor.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "one pump → één pompje (glossary); supply claim C07 (approved); EN updated 21 Oct (41ae772); 24 Oct: dosage (0,45 ml) dropped in EN and NL (Victor)"
+   "notes": "one pump → één pompje (glossary); supply claim C07 (approved); EN updated 21 Oct (41ae772); 24 Oct: dosage (0,45 ml) dropped in EN and NL (Victor); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:km_faq_accordion_FYcArV/faq_item_7jmEGi/category",
@@ -2242,10 +2242,10 @@
    "key_path": "sections.care_comes_back.settings.heading",
    "en": "The care you already do. <em>Now designed to give back.</em>",
    "en_sha1": "b5ef431c0216216e73ac82fe1f15a63cb3e160b1",
-   "nl": "De zorg die je al geeft. <em>Nu ontworpen om terug te geven.</em>",
+   "nl": "De zorg die je al geeft. <em>Nu krijg je er iets voor terug.</em>",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:care_comes_back/intro",
@@ -2254,10 +2254,10 @@
    "key_path": "sections.care_comes_back.settings.intro",
    "en": "Karmicare is a care system: the ritual arrives on your rhythm, and your care builds Care Credit as you go.",
    "en_sha1": "a121a9321a9e14379d38a5f8511c4230b597a2a5",
-   "nl": "Karmicare is een zorgsysteem: het ritueel komt op jouw ritme bij je aan, en je zorg bouwt gaandeweg Care Credit op.",
+   "nl": "Karmicare is een zorgsysteem. Het ritueel komt op jouw ritme bij je thuis, en je zorg bouwt gaandeweg Care Credit op.",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "index:care_comes_back/fine_print",
@@ -2540,12 +2540,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:11",
    "en": "saliva is only now picking up after the night, and the enamel is least protected before your first drink",
    "en_sha1": "c7bca695dfe2f7be9903a37adb79ecbf9d8531e2",
-   "nl": "het speeksel komt na de nacht nu pas op gang, en het glazuur is het minst beschermd vóór je eerste drankje",
+   "nl": "je speeksel komt na de nacht nu pas op gang, en je glazuur is het minst beschermd vóór je eerste slok",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": "claims gate cleared 24 Oct: C54 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b)"
+   "notes": "claims gate cleared 24 Oct: C54 kept decided in docs/launch-gate/claims/REPORT.md (R59, R59b); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:12",
@@ -2554,12 +2554,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:12",
    "en": "breakfast and coffee dropped the pH within minutes — saliva spends the next half hour bringing it back",
    "en_sha1": "58bd19a4b901828d294b250a39e10097c209bdf0",
-   "nl": "ontbijt en koffie deden de pH binnen enkele minuten dalen — het speeksel heeft het volgende halfuur nodig om hem weer op peil te brengen",
+   "nl": "ontbijt en koffie lieten de pH in enkele minuten dalen, je speeksel heeft nu een halfuur nodig om hem weer op peil te brengen",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:13",
@@ -2568,12 +2568,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:13",
    "en": "lunch restarts the cycle: every eating occasion opens a fresh acid window, whatever its size",
    "en_sha1": "f9936681dbd5df0d8bd3d615f77ac90ddad92c3a",
-   "nl": "de lunch start de cyclus opnieuw: elk eetmoment opent een nieuw zuurvenster, hoe klein of groot ook",
+   "nl": "de lunch start de cyclus opnieuw, want elk eetmoment opent een nieuw zuurvenster, groot of klein",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:14",
@@ -2582,12 +2582,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:14",
    "en": "grazing hours — the most frequent acid challenge of the day, and it is how often, not how much",
    "en_sha1": "7c6f20d1c457dd59d6945d4e1e6fa5d518a1f72a",
-   "nl": "snackuren — de zuuraanval die het vaakst terugkomt, en het gaat om hoe vaak, niet om hoeveel",
+   "nl": "snackuren, de zuuraanval die het vaakst terugkomt. Het gaat om hoe vaak, niet om hoeveel",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:15",
@@ -2596,12 +2596,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:15",
    "en": "the last big acid window of the day; after this, saliva starts winding down",
    "en_sha1": "482dc38832bc18f7cf09998958f1bd9ddcd17250",
-   "nl": "het laatste grote zuurvenster van de dag; daarna begint het speeksel af te nemen",
+   "nl": "het laatste grote zuurvenster van de dag, daarna neemt je speeksel af",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:16",
@@ -2610,12 +2610,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:16",
    "en": "melatonin is rising and salivary flow is dropping — what is left on the enamel now stays for hours",
    "en_sha1": "d1308293ce564a28b29c6d1414437ca5c80dcf9b",
-   "nl": "melatonine stijgt en de speekselproductie daalt — wat nu op het glazuur achterblijft, blijft er urenlang zitten",
+   "nl": "melatonine stijgt en je speeksel neemt af. Wat nu op je glazuur achterblijft, blijft er uren zitten",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": ""
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:assets/chronobiology-clock-karmicare.js:17",
@@ -2624,12 +2624,12 @@
    "key_path": "assets/chronobiology-clock-karmicare.js:17",
    "en": "saliva is near its minimum and clearance has almost stopped: the longest unguarded stretch, and the repair window",
    "en_sha1": "7d622f4e77e13c0fe3a0d145a72a84a7611bbe5e",
-   "nl": "het speeksel zit vlak bij zijn minimum en de zelfreiniging ligt bijna stil: de langste onbewaakte periode, en het herstelvenster",
+   "nl": "je speeksel is op zijn laagst en de zelfreiniging ligt bijna stil. De langste onbewaakte uren van de dag, en het venster voor herstel",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": "'clearance' (oral clearance) → 'zelfreiniging' (of the mouth)"
+   "notes": "'clearance' (oral clearance) → 'zelfreiniging' (of the mouth); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "liquid:sections/km-faq-accordion.liquid:155",
@@ -2708,13 +2708,13 @@
    "key_path": "snippets/loop-widget-standard.liquid:123",
    "en": "One time Purchase",
    "en_sha1": "1da912a7ae41ae5c7bb965247a7118dbd1f84d43",
-   "nl": "Eenmalige bestelling",
+   "nl": "Eenmalig proberen",
    "status": "theme-key",
    "flags": [
     "theme-key",
     "fit-risk"
    ],
-   "notes": "20 vs 17 chars; 'one-time order' per the glossary. If this label shows the Try Once plan, use the approved 'Eenmalig proberen' (17)"
+   "notes": "20 vs 17 chars; 'one-time order' per the glossary. If this label shows the Try Once plan, use the approved 'Eenmalig proberen' (17); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); no live channel: hardcoded in the off-limits Loop widget files (needs-key)"
   },
   {
    "id": "liquid:snippets/loop-widget-standard.liquid:140",
@@ -2766,13 +2766,13 @@
    "key_path": "assets/loop-widget.js:2463",
    "en": "Renews",
    "en_sha1": "78906379a6ef5b31bc338154955072b3b70867b9",
-   "nl": "Verlengd",
+   "nl": "Vernieuwt",
    "status": "theme-key",
    "flags": [
     "theme-key",
     "fit-risk"
    ],
-   "notes": "The word that replaces 'ships' in the plan's option text. Dutch puts it at the end of the line, so the Loop owner should key the whole line: 'Renews every {{ days }} days' → 'Elke {{ days }} dagen verlengd' (approved Figma NL 'Elke 60 dagen verlengd'). Word-for-word substitution would give 'Verlengd elke 60 dagen'. Added in R1 (F3)."
+   "notes": "The word that replaces 'ships' in the plan's option text. Dutch puts it at the end of the line, so the Loop owner should key the whole line: 'Renews every {{ days }} days' → 'Elke {{ days }} dagen verlengd' (approved Figma NL 'Elke 60 dagen verlengd'). Word-for-word substitution would give 'Verlengd elke 60 dagen'. Added in R1 (F3).; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); no live channel: hardcoded in the off-limits Loop widget files (needs-key)"
   },
   {
    "id": "liquid:assets/loop-widget.js:2464",
@@ -2795,12 +2795,12 @@
    "key_path": "assets/loop-widget.js:2468",
    "en": "Renews every year",
    "en_sha1": "dfa0437557a08f887f7aebd6b57f806a51f49db5",
-   "nl": "Elk jaar verlengd",
+   "nl": "Vernieuwt elk jaar",
    "status": "theme-key",
    "flags": [
     "theme-key"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Jaarlijks verlengd"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Jaarlijks verlengd; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); no live channel: hardcoded in the off-limits Loop widget files (needs-key)"
   },
   {
    "id": "liquid:assets/loop-widget.js:2213",
@@ -2837,12 +2837,12 @@
    "key_path": "online_store.preferences.homepage_title",
    "en": "KARMICARE | Fluoride-Free Nano-Hydroxyapatite Toothpaste",
    "en_sha1": "03a76f246e4562fc419597bb1357c21082c47ff1",
-   "nl": "KARMICARE | Fluoridevrije nano-hydroxyapatiet tandpasta",
+   "nl": "KARMICARE | Fluoridevrije tandpasta met nano-hydroxyapatiet",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "25 Oct: EN 'Oral Health' became 'Oral Care' live; NL as the approved 'Biorhythmic Oral Care' strings; 25 Oct: Victor's homepage SEO (HOMEPAGE-SEO.md), registered by hand"
+   "notes": "25 Oct: EN 'Oral Health' became 'Oral Care' live; NL as the approved 'Biorhythmic Oral Care' strings; 25 Oct: Victor's homepage SEO (HOMEPAGE-SEO.md), registered by hand; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "admin:shop:online_store.preferences.homepage_meta_description",
@@ -2889,10 +2889,10 @@
    "key_path": "sections.km_faq_accordion_FYcArV.blocks.faq_item_Pz4mRk.settings.answer",
    "en": "<p>Your membership is completely in your hands. Amend when desired.</p>",
    "en_sha1": "b4c11f3f81bcc5e0e700be6f1cd43d51bd7c35c6",
-   "nl": "<p>Je lidmaatschap ligt volledig in jouw handen. Pas het aan wanneer je wilt.</p>",
+   "nl": "<p>Jij bepaalt. Pauzeer, sla over of zeg op wanneer je wilt.</p>",
    "status": "translated",
    "flags": [],
-   "notes": "new 21 Oct (41ae772)"
+   "notes": "new 21 Oct (41ae772); 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
   },
   {
    "id": "locale:kc.clock.loading",

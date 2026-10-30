@@ -1,10 +1,58 @@
 # Round 7 · PDP trust pills, practitioner form
 
+**Timing (landing desk 27 Oct):** release 13 is live (main `fff913d`, landings 79–83), but the form's section group is in **release 14** (landings 84–85, merchant-edit `b528931`). Round 7 restarts as a whole after release 14 is live: the form, the pills, the clock hint and the blog block. The desk confirmed the 22 carried settings, on condition that their EN is byte-identical to round 3; at the restart, `live_vs_source.py` against the release 14 main checks that.
+
+**Next restart: the form lives in its own section group (landing desk 27 Oct, landing 85, practitioner-form `1f76c90`, integration `c996d23`).** All 37 `request_*` settings now sit on `sections/practitioner-group.json`, section `practitioner_request` (type `kc-practitioner-request`), one form for the whole site. The product templates' `product_faq_block` keeps only `request_trigger_url` and `request_trigger_text`. Read-only check on integration, 27 Oct:
+- **22 settings carried from round 3, same EN:** `request_title`, `request_intro`, the name/email/phone/address/message labels, `request_legend_wants`, `request_help_wants`, the pack/samples labels, `request_privacy_text`, `request_privacy_link_label`, `request_button`, the six errors, and the two success texts. Their NL/FR move over 1:1 from the registered values. The desk confirmed 22 (its 16 came from an older count).
+- **13 R76e settings, same EN as in this round:** they take the NL/FR in the table further down.
+- **The 2 Klaviyo IDs** stay out.
+
+At the restart:
+1. New source rows `practitioner-group:practitioner_request/<setting>` (`section_group`, one resource for the whole site), with NL/FR as above.
+2. The `request_*` rows of both product templates become `retired`, except `request_trigger_url` and `request_trigger_text`; their registered translations stay without a key that uses them.
+3. Re-check the trigger text live.
+
+The form part of the plan then becomes NL 35 keys (22 + 13) and FR 34 (FR *Profession* equals the EN), instead of 26/24 per template.
+
+**Restarted 26 Oct against release 12 (live main `2f58500` = merchant-edit `be375ba`: fonts/colours, blog, practitioner form, clock).** Integration merged; the lane's theme files equal `2f58500`. `live/tools/live_vs_source.py` against `2f58500` finds two changes:
+- the clock `hint_label` on `index` and `product.subscription-item` now reads *DRAG THE DOT · EXPLORE 24 HOURS*;
+- the new blog template `templates/article.json` has a featured product block that repeats the homepage buy box.
+
+The other text settings without a source row are not copy: Klaviyo IDs, colours, file names and Liquid references. The plans now hold:
+
+| Item | NL | FR |
+|---|---:|---:|
+| PDP pills `text_1` (changed), `text_5` (new) | 2 | 2 |
+| Practitioner form, 13 new `request_*` settings on both product templates (Klaviyo IDs out) | 26 | 24 (FR *Profession* equals the EN) |
+| Clock hint, NL *SLEEP DE BOL · VERKEN 24 UUR*, FR *GLISSEZ LE POINT · 24 HEURES* | 2 | 2 |
+| Blog featured product block, 11 copy settings (`article:featured_product_kc_blog/…`, batch 08 because batch 07 is held as blog content), NL/FR from their exact homepage twins, which are already registered | 11 | 11 |
+| **Expected** | **41** | **39** |
+
+The dry run can add byte-only re-registers. The blog keys of direction D are already in the locales (`b8b0331`).
+
+The trigger text was re-checked live on release 12 in the Orca browser, read only. curl now gets a 403 from www, probably Shopify's bot protection after the day's checks.
+- **NL:** the theme renders `data-trigger-text` "studiedossier", and both links contain it: "Vraag het studiedossier, …" and "Studiedossier en proefpakketten voor zorgverleners beschikbaar →".
+- **FR:** "dossier scientifique", in "Demandez le dossier scientifique, …" and "Dossier scientifique et échantillons disponibles pour les praticiens →".
+
+FR `check.py`: 75, NL `validate.py`: 62, both unchanged. `digest.py` passes.
+
+**Clock footer text on the homepage out (landing desk 26 Oct, Victor: "may go for now").** `index:chronobiology_clock_karmicare/footer_text` ("Formulated for both shifts: Awake by day, Asleep by night.") is empty on the homepage branch, so it is `retired` in the EN source and held in NL/FR, as `footer_link_text` was. It was already registered, so the expected keys do not change: still NL 41, FR 39. The PDP row `product.subscription-item:…/footer_text` goes as well (Victor, 26 Oct, via the desk): `retired` and held the same way. It was registered already too, so the expected keys stay NL 41, FR 39.
+
 **Parked 26 Oct (landing desk, Victor: "translations come last"):** the plans stay as committed at `1aaae63`, and no dry run has been made. Round 7 restarts against the new live text once the font/token change and the blog have landed. At the restart:
 1. merge `karmicare/soft-launch`;
 2. compare the source with the new live main;
 3. rebuild the plans;
 4. re-check the trigger text in the live NL/FR FAQ.
+
+**Also in at the restart: clock hint (Victor approved 26 Oct, via the landing desk).** `chronobiology_clock_karmicare/hint_label`, on both `index` and `product.subscription-item` (INVENTORY #31, #41):
+
+| | Now (source and registered) | New, approved |
+|---|---|---|
+| EN | DRAG THE RING · EXPLORE 24 HOURS | DRAG THE DOT · EXPLORE 24 HOURS |
+| NL | SLEEP AAN DE RING · VERKEN 24 UUR | SLEEP DE BOL · VERKEN 24 UUR |
+| FR | GLISSEZ L’ANNEAU · EXPLOREZ 24 HEURES | GLISSEZ LE POINT · 24 HEURES (Victor 26 Oct, shortened to fit one line at 360; replaces "GLISSEZ LE POINT · EXPLOREZ 24 HEURES") |
+
+At the restart, take the EN from the live template. It must read exactly as above. Then the row becomes `corrected` (`old_en` kept), and NL/FR get the approved text. The registration overwrites the earlier NL/FR value.
 
 **Change reversed 26 Oct (landing desk, Victor):** the form stays on the PDP as the popup, opened from both FAQ links; the professionals page is parked. The 52 holds are lifted, and the plans are again identical to `1ec484d`: pills 1 and 5 plus the 13 new `request_*` settings on both product templates. The Klaviyo ID settings stay out. Expected again: NL 28 keys, FR 26. The trigger text was re-checked live the same day: both NL links contain *studiedossier*, both FR links *dossier scientifique*.
 

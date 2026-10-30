@@ -1,6 +1,6 @@
 {
  "batch": "batch-01-homepage",
- "digest": "2637293ba890353bcf3d8871bf418e9318c36a3c",
+ "digest": "4570fe98e3ba0bada3a1f5c4b295e6adbefe10a0",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -544,14 +544,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.chronobiology_clock_karmicare.settings.hint_label",
-   "en": "DRAG THE RING · EXPLORE 24 HOURS",
-   "sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8",
-   "status": "approved",
+   "en": "DRAG THE DOT · EXPLORE 24 HOURS",
+   "sha1": "d146b9c379fc398f50270b495c5a1c7c3250a62b",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 26 Oct from live main 2f58500 (release 12): clock hint (Victor 26 Oct)",
    "setting_type": "text",
    "section_type": "chronobiology-clock-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "DRAG THE RING · EXPLORE 24 HOURS",
+   "old_sha1": "3ffe237f9ac45c702bd8cafedeaa9899aca73dc8"
   },
   {
    "id": "index:chronobiology_clock_karmicare/footer_text",
@@ -567,7 +569,8 @@
    "notes": "type text",
    "setting_type": "text",
    "section_type": "chronobiology-clock-karmicare",
-   "rendered": true
+   "rendered": true,
+   "retired": "retired 26 Oct: the clock footer text is empty on the homepage branch (Victor: 'may go for now', via the landing desk); left out of the registration as footer_link_text; was 'Formulated for both shifts: Awake by day, Asleep by night.'"
   },
   {
    "id": "index:chronobiology_clock_karmicare/footer_link_text",
