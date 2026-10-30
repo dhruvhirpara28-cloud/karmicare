@@ -63,18 +63,20 @@ for route in ['/', '/products/karmicare-biorhythmic-oral-care-system']:
                 orca('exec', '--command', 'screenshot --full')
                 time.sleep(0.2)
                 orca('exec', '--command', 'screenshot --full')
-                data = js('(()=>{const c=document.querySelector(' + json.dumps(CARD) + '),q=c.querySelector(".trusted-professionals__card-quote-text"),i=c.querySelector("img"),h=c.querySelector(".trusted-professionals__card-quote-inner");return {count:document.querySelectorAll(' + json.dumps(CARD) + ').length,name:c.querySelector("h3").textContent.trim(),title:c.querySelector(".trusted-professionals__card-title").textContent.trim(),quote:q.textContent.trim(),imageLoaded:i.complete&&i.naturalWidth>0,imageWidth:i.naturalWidth,cardWidth:c.clientWidth,cardHeight:c.clientHeight,long:c.hasAttribute("data-long-quote"),quoteHeight:q.clientHeight,quoteScroll:q.scrollHeight,overflow:getComputedStyle(h).overflowY,mode:document.body.className,pageOverflow:document.documentElement.scrollWidth>innerWidth}})()')
+                data = js('(()=>{const c=document.querySelector(' + json.dumps(CARD) + '),q=c.querySelector(".trusted-professionals__card-quote-text"),i=c.querySelector("img"),h=c.querySelector(".trusted-professionals__card-quote-inner");return {count:document.querySelectorAll(' + json.dumps(CARD) + ').length,name:c.querySelector("h3").textContent.trim(),title:c.querySelector(".trusted-professionals__card-title").textContent.trim(),quote:q.textContent.trim(),imageLoaded:i.complete&&i.naturalWidth>0,imageWidth:i.naturalWidth,imageSrc:i.currentSrc,cardWidth:c.clientWidth,cardHeight:c.clientHeight,long:c.hasAttribute("data-long-quote"),quoteHeight:q.clientHeight,quoteScroll:q.scrollHeight,overflow:getComputedStyle(h).overflowY,mode:document.body.className,pageOverflow:document.documentElement.scrollWidth>innerWidth}})()')
                 assert data['count'] == 1 and data['name'] == 'Kim Verlot', data
                 assert data['title'] == 'Breathing Coach, Heart Coherence Specialist', data
                 assert data['quote'] == '“' + TEXTS[lang] + '”', data
                 assert data['imageLoaded'] and mode + '-mode' in data['mode'], data
+                assert 'kc-professional-kim-verlot' in data['imageSrc'], data
                 assert not data['pageOverflow'], data
                 if width < 750:
                     assert data['long'], data
                     js('document.querySelector(' + json.dumps(CARD) + ').querySelector("button").click()')
                     time.sleep(0.3)
-                    panel = js('(()=>{const p=document.querySelector("dialog.trusted-professionals__panel[open]");p.scrollTop=p.scrollHeight;return {quote:p.querySelector("[data-quote-panel-quote]").textContent.trim(),name:p.querySelector("[data-quote-panel-name]").textContent,scrollTop:p.scrollTop,scrollHeight:p.scrollHeight,height:p.clientHeight,width:p.clientWidth,focusInside:p.contains(document.activeElement)}})()')
+                    panel = js('(()=>{const p=document.querySelector("dialog.trusted-professionals__panel[open]");p.scrollTop=p.scrollHeight;return {quote:p.querySelector("[data-quote-panel-quote]").textContent.trim(),name:p.querySelector("[data-quote-panel-name]").textContent,scrollTop:p.scrollTop,scrollHeight:p.scrollHeight,height:p.clientHeight,width:p.clientWidth,imageSrc:p.querySelector("img").currentSrc,imageLoaded:p.querySelector("img").complete&&p.querySelector("img").naturalWidth>0,focusInside:p.contains(document.activeElement)}})()')
                     assert panel['quote'] == data['quote'] and panel['name'] == data['name'] and panel['focusInside'], panel
+                    assert panel['imageLoaded'] and 'kc-professional-kim-verlot' in panel['imageSrc'], panel
                     data['panel'] = panel
                 else:
                     assert data['overflow'] == 'auto', data

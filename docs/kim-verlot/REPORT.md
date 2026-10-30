@@ -1,6 +1,6 @@
 # Kim Verlot · websitevoorbereiding · 29 oktober 2026
 
-Status bijgewerkt 30 oktober 2026: Victor heeft de preview goedgekeurd (“ziet er goed uit”). De onafhankelijke Astra-review is **APPROVE voor technische voorbereiding**. Lokale implementatie en eigen unpublished preview zijn gereed; publieke vrijgave blijft open. De nieuwe foto wacht op Files-upload en de claims wachten op beoordeling. Geen claimvrijgave afgeleid uit het websiteverzoek.
+Status bijgewerkt 30 oktober 2026: Victor heeft de preview goedgekeurd (“ziet er goed uit”). De onafhankelijke Astra-review is **APPROVE voor technische voorbereiding**. Lokale implementatie en eigen unpublished preview zijn gereed; publieke vrijgave blijft open. Actuele status: Victor bevestigde op 30 oktober dat de claimreview is geaccepteerd. Het Figma-portret is op zijn expliciete verzoek geüpload. NL/FR wachten op de nieuwe EN-bron in het gepubliceerde theme; zie het laatste vervolg hieronder. Oudere secties beschrijven de voorbereiding vóór deze besluiten.
 
 Themecommit: `a380ad5` — `feat(professionals): add Kim Verlot full source testimonial` (twee templates, lokaal).
 
@@ -97,3 +97,13 @@ Victor gaf expliciet opdracht: “commit en merge naar merchant”. Daarmee is d
 Ten opzichte van merchant `7d4607f` wijzigen uitsluitend de twee volledige EN `hover_text`-velden. Alle overige templatewaarden zijn structureel identiek en de gelijktijdige rating-CSS is byte-identiek behouden. Docs zijn uit de landingtree gehouden en blijven op deze lane. Theme Check op de uiteindelijke landingtree: exit 0, 0 errors, 19 warnings. Geen nieuwe themecode na Astra buiten de reeds afzonderlijk gelande rating-CSS; de Kim-delta blijft exact de beoordeelde quote.
 
 Geen push, PR, main-merge, publicatie of Admin-write uitgevoerd. Bestaande ongetrackte `.claude/` in merchant ongemoeid gelaten. De lokale merge heft de publieke claimhold niet op. Nieuwe foto en NL/FR-registratie blijven voorbereid, niet uitgevoerd. De bestaande Shopify-foto blijft gekoppeld.
+
+## Claimakkoord en echte foto-upload · 30 oktober 2026
+
+Victor bevestigde expliciet “claimreview is geaccepteerd”; `claim-decision.json` registreert dit als eigenaarsbesluit voor precies Kims twee quotevelden, zonder zelfstandige klinische validatie te claimen. De vier locale-payloadregels en EN-bronregistratie zijn bijgewerkt; de Kim-only builder houdt nu nul items tegen. De volledige EN/NL/FR-tekst is ongewijzigd.
+
+Victor vroeg vervolgens de foto in Shopify te uploaden en zette Orca open op Files. Via die pagina is uitsluitend `kc-professional-kim-verlot.png` geüpload. Shopify bevestigde de upload, de naam zonder suffix en 1086 × 1448. MediaImage `70092619088253`; de originele CDN-URL antwoordde 200. `portrait-manifest.json` bevat de URL. Beide bestaande template-imagevelden verwijzen nu naar `shopify://shop_images/kc-professional-kim-verlot.png`; hero en mobiel paneel volgen die kaartbron. Geen andere Admin-content gewijzigd.
+
+De read-only registratiecheck bevestigt MAIN `187295564157`, maar meldt voor beide quotes in beide talen `missing`: geen live key met de vereiste section/block/hover_text-identiteit. Dit is de resterende registratieafhankelijkheid; de claimhold is opgeheven. `dry-run.py` hergebruikt de bestaande registratierunner met uitsluitend Kims templateplannen en lege, expliciete template-only bindings. Zo worden geen niet-gerelateerde metaobjectbindings meegenomen. Geen vertalingen geschreven. Na publicatie van de EN-bron moet de dry-run opnieuw uitgevoerd en het nieuwe concrete checksum-resultaat beoordeeld worden; de huidige nul-operaties zijn geen uitvoerbare registratiegoedkeuring.
+
+Victor vroeg “als je klaar bent commit en merge naar merchant”. De fotowijziging wordt daarom lokaal gecommit en via de theme-only landingroute naar merchant gebracht; geen push/main-merge/publicatie.
