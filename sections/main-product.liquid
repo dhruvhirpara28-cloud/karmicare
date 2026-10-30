@@ -1338,8 +1338,37 @@
           "type": "checkbox",
           "id": "show_rating",
           "label": "Show star rating",
-          "info": "Reads the product's reviews.rating and reviews.rating_count metafields (filled by the review app). Hidden while the product has no reviews.",
           "default": true
+        },
+        {
+          "type": "select",
+          "id": "rating_source",
+          "label": "Rating source",
+          "options": [
+            {
+              "value": "fixed",
+              "label": "Fixed figure (set below)"
+            },
+            {
+              "value": "metafield",
+              "label": "Product metafield (review app)"
+            }
+          ],
+          "default": "fixed",
+          "info": "Fixed: the combined Karmicare rating set below, the same figure as the homepage hero badge (Victor, 29 Oct 2026). Product metafield: the product's reviews.rating and reviews.rating_count, filled by the review app; hidden while the product has no reviews."
+        },
+        {
+          "type": "text",
+          "id": "rating_value",
+          "label": "Fixed rating value",
+          "default": "4.7",
+          "info": "Out of 5, with a decimal point. Dutch and French show it with a decimal comma automatically."
+        },
+        {
+          "type": "number",
+          "id": "rating_count",
+          "label": "Fixed review count",
+          "default": 110
         }
       ]
     },
