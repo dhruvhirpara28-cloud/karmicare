@@ -1,0 +1,46 @@
+/* What layout/theme.liquid sets on :root and html for the stylesheets to work */
+:root {
+  --page-width: 148rem;
+  --page-gutter: 3.2rem;
+  --font-body-scale: 1;
+  --color-background: 255, 251, 246;
+  --color-foreground: 25, 31, 56;
+  --font-body-family: "proxima-nova", "Proxima Nova", sans-serif;
+  --font-heading-family: "proxima-nova", "Proxima Nova", sans-serif;
+  /* layout/theme.liquid L221: settings.body_small_font_size_all (schema default 12) / 10 */
+  --kc-responsive-label-sm-text-size: 1.2rem;
+}
+html { font-size: 62.5%; }
+body {
+  margin: 0;
+  font-family: var(--font-body-family);
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+}
+/* Fixture chrome */
+.fx-bar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  padding: 8px 16px; background: #111; color: #fff;
+  font: 13px/1.4 system-ui, sans-serif;
+}
+.fx-bar button { font: inherit; padding: 4px 10px; }
+.fx-report {
+  margin: 0; padding: 8px 16px;
+  font: 11px/1.4 ui-monospace, monospace; white-space: pre-wrap;
+  background: #f3f3f3; color: #000;
+}
+.fx-title { margin: 0; padding: 4px 16px; font: 12px/1.4 system-ui, sans-serif; background: rgba(0, 0, 0, 0.08); }
+.fx-framed .fx-bar, .fx-framed .fx-report { display: none; }
+
+/* The hero's first screen, reduced to a band: the badge sits absolute at its bottom left on
+   desktop (section-hero-karmicare.css) and in the flow below 990 */
+.fx-hero { position: relative; min-height: 120px; padding: 12px 16px; background: var(--kc-mapped-surface-page); }
+.fx-hero .hero-karmicare { position: relative; min-height: 96px; }
+
+/* The PDP buybox column: at 1440 the product info wrapper is max(40%, 44rem) of the 134rem page
+   minus 4rem padding (section-main-product.css), on phones the page minus 1.5rem each side */
+.fx-buybox { margin: 12px 1.5rem; width: calc(100% - 3rem); }
+@media screen and (min-width: 990px) {
+  .fx-buybox { margin: 12px 5rem; width: 48.4rem; }
+}

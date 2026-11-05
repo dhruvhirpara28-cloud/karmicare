@@ -1,10 +1,19 @@
 {%- comment -%}
-  Category strip above the product title: the "KARMICARE | Biorhythmic Oral Care"
-  artwork and the star rating (Figma 3391:12111).
+  Category strip above the product title, inside the buybox: the
+  "KARMICARE | Biorhythmic Oral Care" artwork and the star rating
+  (Figma 4121:142856 EN, 4121:144413 NL, mobile 4121:145970).
 
-  The rating reads Shopify's standard product rating metafields
-  (reviews.rating, reviews.rating_count), which review apps such as Judge.me
-  fill in. With no reviews the rating is left out, never shown as 0.
+  The rating has two sources, chosen with the block's rating_source setting:
+  - fixed (default): the combined Karmicare figure set in the block
+    (rating_value, rating_count), the same number as the homepage hero badge
+    (Victor, 29 Oct 2026; docs/reviews/PLAN.md D-2). Printed as value (count)
+    in the original form, for example 4.7 (110) (Victor, 30 Oct 2026); the
+    scale is only in the accessible name.
+  - metafield: Shopify's standard product rating metafields (reviews.rating,
+    reviews.rating_count), which review apps such as Judge.me fill in. With no
+    reviews the rating is left out, never shown as 0.
+  Dutch and French print the value with a decimal comma (4,7), English with a
+  point (4.7). The rating is never a link (Victor, 25 Oct 2026).
 
   Accepts:
   - block: {Object} the category_strip block
@@ -17,11 +26,32 @@
 {{ 'kc-category-strip.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign rating = product.metafields.reviews.rating.value
-  assign rating_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count | plus: 0
   assign show_rating = false
-  if block.settings.show_rating and rating != blank and rating_count > 0
-    assign show_rating = true
+  assign rating_max = 5
+  if block.settings.show_rating
+    if block.settings.rating_source == 'metafield'
+      assign rating = product.metafields.reviews.rating.value
+      assign rating_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count | plus: 0
+      if rating != blank and rating_count > 0
+        assign show_rating = true
+        assign rating_value = rating.rating | round: 1 | append: ''
+        assign rating_max = rating.scale_max | default: 5 | round
+      endif
+    else
+      assign rating_value = block.settings.rating_value | strip | escape
+      assign rating_count = block.settings.rating_count | plus: 0
+      if rating_value != blank and rating_count > 0
+        assign show_rating = true
+      endif
+    endif
+  endif
+
+  # Decimal comma for Dutch and French, as in the hero badge's translated rating text
+  if show_rating
+    assign rating_locale = request.locale.iso_code | slice: 0, 2
+    if rating_locale == 'nl' or rating_locale == 'fr'
+      assign rating_value = rating_value | replace: '.', ','
+    endif
   endif
 -%}
 
@@ -38,11 +68,10 @@
   ></span>
 
   {%- if show_rating -%}
-    {%- assign rating_value = rating.rating | round: 1 -%}
     <span
       class="kc-category-strip__rating"
       role="img"
-      aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: rating_value, rating_max: rating.scale_max }}, {{ rating_count }} reviews"
+      aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: rating_value, rating_max: rating_max }}, {{ rating_count }} {{ 'accessibility.total_reviews' | t }}"
     >
       {{- 'kc-icon-star-filled.svg' | inline_asset_content -}}
       <span class="kc-category-strip__score" aria-hidden="true">
