@@ -18,7 +18,8 @@
  * - KCPlanSelect.replaceChoice(productId, planId, add): one purchase choice of a plan product in the
  *   cart; every add-to-cart path adds the product through it (clearPurchaseChoice, then the add, one
  *   at a time on the page; the earlier choice comes back when the add is rejected). manages(productId)
- *   tells which products it handles.
+ *   tells which products it handles. A choice on its way to checkout sends Hotjar's checkout events
+ *   (trackCheckout(planId): kc_checkout and kc_checkout_once, _60day or _year) right before its add.
  * - KCPlanSelect.plan(planId): type, interval, deliveries, Check-up Reward, Duos per delivery, duos,
  *   brushings and Return on Care of a plan, by ID: the pricing summary, the plan cards, the Welcome Kit
  *   and the sticky bar read plans here instead of by name. selectedPlanId() and allowed() serve the
@@ -888,6 +889,27 @@
     return 'lost';
   }
 
+  // Hotjar events for a purchase on its way to checkout (Hotjar analysis 4 Nov, finding 3): Shopify
+  // checkout runs no theme scripts, so a recording can only be filtered by what the page sends before it
+  // leaves. kc_checkout and one plan event by selling plan ID, never the visible name (Hotjar events take
+  // no properties, so the plan is in the name). Hotjar exists only with analytics consent
+  // (snippets/kc-hotjar-consent.liquid): without it, or when hj fails, nothing happens and nothing changes
+  // on the way to checkout.
+  const CHECKOUT_EVENTS = { once: 'kc_checkout_once', '60-day': 'kc_checkout_60day', year: 'kc_checkout_year' };
+
+  function trackCheckout(planId) {
+    if (typeof window.hj !== 'function') return;
+    try {
+      const id = String(planId == null ? '' : planId).trim();
+      const entry = id ? plan(id) : null;
+      window.hj('event', 'kc_checkout');
+      const name = CHECKOUT_EVENTS[id ? entry && entry.type : 'once'];
+      if (name) window.hj('event', name);
+    } catch (e) {
+      warn('Hotjar checkout event failed: ' + (e && e.message ? e.message : e));
+    }
+  }
+
   let purchaseQueue = Promise.resolve();
   let choicesRequested = 0;
   // Set once a replacement sends the page to checkout: later replacements leave the cart as it is
@@ -915,6 +937,10 @@
         throw skipped;
       }
       const removed = await clearPurchaseChoice(productId, sellingPlanId);
+      // Hotjar's checkout events (trackCheckout) before the add, whose few hundred ms let Hotjar send them
+      // before the page leaves: once, for a choice on its way to checkout (finish) that no later choice
+      // has superseded so far. A choice asked for while this add runs sends its own set.
+      if (finish && ticket === choicesRequested) trackCheckout(sellingPlanId);
       let response;
       try {
         response = await add();
@@ -1420,6 +1446,7 @@
     subscriptionName: subscriptionName,
     syncCartSubscriptionName: syncCartSubscriptionName,
     replaceChoice: replaceChoice,
+    trackCheckout: trackCheckout,
     manages: manages,
     productIdOfVariant: productIdOfVariant,
     plan: plan,
