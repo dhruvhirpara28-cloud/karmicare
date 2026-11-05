@@ -17,6 +17,8 @@
 
 Not in this batch: the Loop key `:103` "Kies je ritme". It waits for the PDP batch.
 
+**Hero badge, 5 Nov.** `testimonial_badge_h8d3WL/heading` becomes NL "Aanbevolen door professionals" (was "Aanbevolen door zorgprofessionals") and FR "Recommandé par des professionnels" (was "Soutenu par des professionnels de santé"). Victor decided on 3 Nov in the NL voice lane (`soft-launch-nl-voice` `9c64d15`) and confirmed it in this session on 5 Nov, before the write. The NL row was not yet registered, so it still goes in with this batch. The FR row becomes a new write. Both values were changed in the payloads and in the plans directly, without a rebuild, because the hero rating "4,7 (110)" lives only in the plans (`3ed0938`). The dry runs of 5 Nov (NL `355b9fa0b3298a46`, FR `ad578963a4a204a6`) are therefore void; new dry runs follow.
+
 **Markup.** The batch shows the NL without the payload's HTML. Each new text gets the same markup as the current NL:
 - a whole-text `<p>…</p>` around 13 rows;
 - the inline `<strong>` in the professionals heading and the `<em>` in the Care comes back heading, around the same part of the new sentence.
