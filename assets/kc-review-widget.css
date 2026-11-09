@@ -1,0 +1,656 @@
+/*
+ * Karmicare: Day and Night styling for Judge.me Review Widget & Preview Badge
+ * Clean specificity-based CSS without !important
+ * Tokens only: Awake (day-mode) and Asleep (night-mode)
+ */
+
+/* ==========================================================================
+   CSS Custom Properties for Day & Night Modes
+   ========================================================================== */
+:root,
+body,
+body.day-mode,
+body:not(.night-mode) {
+  --kc-review-text: var(--kc-brand-original-dark-blue);
+  --kc-review-heading: var(--kc-brand-original-dark-blue);
+  --kc-review-muted: rgba(var(--kc-brand-original-dark-blue-rgb), 0.65);
+  --kc-review-subtle: rgba(var(--kc-brand-original-dark-blue-rgb), 0.45);
+  --kc-review-border: rgba(var(--kc-brand-original-dark-blue-rgb), 0.12);
+  --kc-review-border-strong: rgba(var(--kc-brand-original-dark-blue-rgb), 0.24);
+  --kc-review-card-bg: var(--kc-brand-fixed-white);
+  --kc-review-card-border: rgba(var(--kc-brand-original-dark-blue-rgb), 0.12);
+  --kc-review-card-shadow: 0 2px 10px rgba(var(--kc-brand-original-dark-blue-rgb), 0.04);
+  --kc-review-control-bg: var(--kc-brand-fixed-white);
+  --kc-review-control-border: rgba(var(--kc-brand-original-dark-blue-rgb), 0.16);
+  --kc-review-avatar-bg: var(--kc-brand-original-grey);
+  --kc-review-avatar-text: var(--kc-brand-original-dark-blue);
+  --kc-review-badge-bg: rgba(var(--kc-brand-original-light-blue-accent-rgb), 0.15);
+  --kc-review-badge-text: var(--kc-brand-original-middle-blue-1);
+  --kc-review-badge-border: rgba(var(--kc-brand-original-light-blue-accent-rgb), 0.45);
+  --kc-review-modal-bg: var(--kc-brand-original-off-white);
+  --kc-review-modal-overlay: rgba(10, 12, 21, 0.5);
+  --kc-review-star-color: var(--kc-brand-original-light-blue-accent);
+  --kc-review-accent-color: var(--kc-brand-original-light-blue-accent);
+  --kc-review-accent-text: var(--kc-brand-fixed-accent-text);
+  --kc-review-tag-active-bg: rgba(var(--kc-brand-original-dark-blue-rgb), 0.05);
+}
+
+body.night-mode {
+  --kc-review-text: var(--kc-brand-original-off-white);
+  --kc-review-heading: var(--kc-brand-original-off-white);
+  --kc-review-muted: rgba(var(--kc-brand-original-off-white-rgb), 0.68);
+  --kc-review-subtle: rgba(var(--kc-brand-original-off-white-rgb), 0.45);
+  --kc-review-border: rgba(var(--kc-brand-original-off-white-rgb), 0.12);
+  --kc-review-border-strong: rgba(var(--kc-brand-original-light-blue-accent-rgb), 0.45);
+  --kc-review-card-bg: var(--kc-brand-original-middle-blue-2);
+  --kc-review-card-border: rgba(var(--kc-brand-original-off-white-rgb), 0.16);
+  --kc-review-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --kc-review-control-bg: var(--kc-brand-original-middle-blue-2);
+  --kc-review-control-border: rgba(var(--kc-brand-original-off-white-rgb), 0.2);
+  --kc-review-avatar-bg: var(--kc-brand-original-middle-blue-1);
+  --kc-review-avatar-text: var(--kc-brand-original-off-white);
+  --kc-review-badge-bg: rgba(var(--kc-brand-original-light-blue-accent-rgb), 0.15);
+  --kc-review-badge-text: var(--kc-brand-original-light-blue-accent);
+  --kc-review-badge-border: rgba(var(--kc-brand-original-light-blue-accent-rgb), 0.45);
+  --kc-review-modal-bg: var(--kc-brand-original-dark-blue);
+  --kc-review-modal-overlay: rgba(10, 12, 21, 0.75);
+  --kc-review-star-color: var(--kc-brand-original-light-blue-accent);
+  --kc-review-accent-color: var(--kc-brand-original-light-blue-accent);
+  --kc-review-accent-text: var(--kc-brand-fixed-accent-text);
+  --kc-review-tag-active-bg: rgba(var(--kc-brand-original-off-white-rgb), 0.08);
+}
+
+/* ==========================================================================
+   Judge.me Internal CSS Variables Mapping
+   ========================================================================== */
+#judgeme_product_reviews *,
+.jdgm-widget *,
+.jm-review-widget *,
+.jm-review-item *,
+.jdgm-review-card * {
+  --jm-review-widget-text-color: var(--kc-review-text);
+  --jm-review-widget-lighter-text-color: var(--kc-review-muted);
+  --jm-review-widget-star-and-histogram-color: var(--kc-review-star-color);
+  --jm-review-widget-button-color: var(--kc-review-accent-color);
+  --jm-review-widget-button-text-color: var(--kc-review-accent-text);
+  --jm-widget-primary-color: var(--kc-review-accent-color);
+  --jm-review-widget-form-background-color: var(--kc-review-modal-bg);
+  --jm-review-widget-form-button-color: var(--kc-review-accent-color);
+  --jm-review-widget-form-button-text-color: var(--kc-review-accent-text);
+  --jm-review-widget-form-field-background-color: var(--kc-review-control-bg);
+  --jm-review-widget-form-modal-overlay-color: var(--kc-review-modal-overlay);
+  --jm-review-widget-form-text-color: var(--kc-review-text);
+  --jm-tabs-active-border-color: var(--kc-review-heading);
+  --jm-tabs-item-text-color: var(--kc-review-muted);
+  --jm-tabs-text-active-color: var(--kc-review-heading);
+  --jm-tabs-dropdown-border-color: var(--kc-review-border-strong);
+}
+
+/* ==========================================================================
+   Widget Container Layout & Spacing
+   ========================================================================== */
+#judgeme_product_reviews,
+.jdgm-review-widget {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: var(--kc-font-use-body, "Proxima Nova", sans-serif);
+  color: var(--kc-review-text);
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   Header: Title
+   ========================================================================== */
+#judgeme_product_reviews .jm-review-widget-minimal-header__title,
+#judgeme_product_reviews .jdgm-rev-widg__title,
+#judgeme_product_reviews .jdgm-widget-title,
+.jdgm-review-widget .jm-review-widget-minimal-header__title,
+.jdgm-review-widget .jdgm-rev-widg__title {
+  font-family: var(--kc-font-role-backbone, "Proxima Nova", sans-serif);
+  font-size: var(--kc-responsive-h3-text-size, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: var(--kc-review-heading);
+}
+
+/* ==========================================================================
+   Tabs: Product Reviews vs Store Reviews
+   ========================================================================== */
+#judgeme_product_reviews .jdgm-tabs {
+  margin-top: 16px;
+}
+
+#judgeme_product_reviews .jdgm-tablist__list {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--kc-review-border);
+}
+
+#judgeme_product_reviews .jdgm-tab {
+  font-family: var(--kc-font-use-body, "Proxima Nova", sans-serif);
+  background: transparent;
+  border: none;
+  padding: 10px 4px 14px 4px;
+  cursor: pointer;
+  color: var(--kc-review-muted);
+  transition: color 0.2s ease;
+}
+
+#judgeme_product_reviews .jdgm-tab:hover {
+  color: var(--kc-review-heading);
+}
+
+#judgeme_product_reviews .jdgm-tab--active {
+  color: var(--kc-review-heading);
+}
+
+#judgeme_product_reviews .jdgm-tablist__activeBar {
+  height: 2px;
+  background-color: var(--kc-review-heading);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tab Dropdown (Mobile) */
+#judgeme_product_reviews .jdgm-tab-dropdown__label {
+  color: var(--kc-review-heading);
+}
+
+#judgeme_product_reviews .jdgm-tab-dropdown__select {
+  background-color: var(--kc-review-control-bg);
+  color: var(--kc-review-text);
+  border: 1px solid var(--kc-review-control-border);
+  border-radius: var(--kc-shape-radius-sm, 8px);
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Filter & Sort Controls
+   ========================================================================== */
+#judgeme_product_reviews .jm-custom-answer-filter,
+#judgeme_product_reviews .jm-button--secondary {
+  border-radius: var(--kc-shape-radius-full, 999px);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: var(--kc-review-control-bg);
+  color: var(--kc-review-text);
+  border: 1px solid var(--kc-review-control-border);
+  transition: all 0.2s ease;
+}
+
+#judgeme_product_reviews .jm-custom-answer-filter:hover,
+#judgeme_product_reviews .jm-button--secondary:hover {
+  border-color: var(--kc-review-accent-color);
+}
+
+#judgeme_product_reviews .jm-custom-answer-filter--active {
+  background: var(--kc-review-tag-active-bg);
+  border-color: var(--kc-review-accent-color);
+  color: var(--kc-review-text);
+}
+
+#judgeme_product_reviews .jm-custom-answer-filter__icon svg,
+#judgeme_product_reviews .jm-custom-answer-filter svg {
+  color: var(--kc-review-accent-color);
+  fill: currentColor;
+}
+
+#judgeme_product_reviews .jm-custom-answer-filter__text {
+  color: var(--kc-review-text);
+}
+
+#judgeme_product_reviews .jm-sort-filter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+#judgeme_product_reviews .jm-sort-filter__select,
+#judgeme_product_reviews .jdgm-sort-dropdown {
+  border-radius: var(--kc-shape-radius-full, 999px);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 36px 8px 34px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--kc-review-control-bg);
+  color: var(--kc-review-text);
+  border: 1px solid var(--kc-review-control-border);
+  transition: border-color 0.2s ease;
+}
+
+#judgeme_product_reviews .jm-sort-filter__select option {
+  background-color: var(--kc-review-control-bg);
+  color: var(--kc-review-text);
+}
+
+#judgeme_product_reviews .jm-sort-filter__icon {
+  pointer-events: none;
+  color: var(--kc-review-muted);
+}
+
+#judgeme_product_reviews .jm-sort-filter__icon svg {
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   Filter Panel & Rating Filter Tags
+   ========================================================================== */
+#judgeme_product_reviews .jm-filter-panel {
+  border-radius: var(--kc-shape-radius-md, 12px);
+  padding: 16px 20px;
+  margin-top: 12px;
+  background: var(--kc-review-tag-active-bg);
+  border: 1px solid var(--kc-review-border);
+}
+
+#judgeme_product_reviews .jm-filter-panel p.jm-text {
+  color: var(--kc-review-text);
+}
+
+#judgeme_product_reviews .jm-filter-panel__clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--kc-review-accent-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+#judgeme_product_reviews .jm-rating-filter__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: var(--kc-shape-radius-full, 999px);
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--kc-review-control-bg);
+  color: var(--kc-review-text);
+  border: 1px solid var(--kc-review-control-border);
+  transition: all 0.2s ease;
+}
+
+#judgeme_product_reviews .jm-rating-filter__tag:hover {
+  border-color: var(--kc-review-accent-color);
+  background: var(--kc-review-tag-active-bg);
+}
+
+#judgeme_product_reviews .jm-rating-filter__tag:has(input:checked) {
+  background: var(--kc-review-accent-color);
+  color: var(--kc-review-accent-text);
+  border-color: var(--kc-review-accent-color);
+}
+
+#judgeme_product_reviews .jm-rating-filter__star {
+  color: var(--kc-review-star-color);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Review Cards & Review Items (Grid & List Layouts)
+   ========================================================================== */
+#judgeme_product_reviews .jdgm-review-list {
+  margin-top: 24px;
+}
+
+/* Card Layout: .jdgm-review-card */
+#judgeme_product_reviews .jdgm-review-card {
+  border-radius: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#judgeme_product_reviews .jdgm-review-card,
+#judgeme_product_reviews .jdgm-review-card__content {
+  background-color: var(--kc-review-card-bg);
+  border: 1px solid var(--kc-review-card-border);
+  box-shadow: var(--kc-review-card-shadow);
+  border-radius: var(--extra-primary-border-radius);
+  box-sizing: border-box;
+}
+
+#judgeme_product_reviews .jdgm-review-card__content {
+  padding: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#judgeme_product_reviews .jdgm-review-card:has(.jdgm-review-card__content) {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+#judgeme_product_reviews .jdgm-review-card:hover .jdgm-review-card__content,
+#judgeme_product_reviews .jdgm-review-card:hover {
+  border-color: var(--kc-review-border-strong);
+}
+
+/* List Layout: .jm-review-item */
+#judgeme_product_reviews .jm-review-item {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  background: transparent;
+  border-bottom: 1px solid var(--kc-review-border);
+}
+
+#judgeme_product_reviews .jm-review-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Stars */
+#judgeme_product_reviews .jm-star-rating,
+#judgeme_product_reviews .jdgm-star,
+#judgeme_product_reviews .jm-star-rating__font-icon {
+  color: var(--kc-review-star-color);
+}
+
+#judgeme_product_reviews .jm-star-rating__font-icon {
+  font-size: 1.4em;
+}
+
+/* Reviewer Name */
+#judgeme_product_reviews .jdgm-review-card__name,
+#judgeme_product_reviews p.jdgm-review-card__name,
+#judgeme_product_reviews .jm-reviewer-info__name,
+#judgeme_product_reviews .jdgm-rev__author {
+  font-size: var(--kc-font-size-m-base);
+  margin: 0;
+  color: var(--kc-review-heading);
+}
+
+/* Verified Buyer Badge */
+
+
+#judgeme_product_reviews .jm-verified-buyer-badge__text,
+#judgeme_product_reviews .jm-verified-buyer-badge p.jm-text,
+#judgeme_product_reviews .jdgm-rev__buyer-badge {
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--kc-review-badge-text);
+}
+
+/* Review Date */
+#judgeme_product_reviews time,
+#judgeme_product_reviews .jdgm-rev__timestamp,
+#judgeme_product_reviews .jdgm-review-card time,
+#judgeme_product_reviews .jm-reviewer-info__details time,
+#judgeme_product_reviews .jm-reviewer-info .jm-text:last-child {
+  color: var(--kc-review-muted);
+}
+
+/* Review Titles & Body */
+#judgeme_product_reviews .jdgm-rev__title,
+#judgeme_product_reviews .jdgm-review-card__title {
+  margin-bottom: 6px;
+  color: var(--kc-review-heading);
+}
+
+#judgeme_product_reviews .jm-review-content__body,
+#judgeme_product_reviews .jdgm-review-content__body-content,
+#judgeme_product_reviews .jdgm-review-content__body-content p,
+#judgeme_product_reviews .jdgm-review-card p,
+#judgeme_product_reviews .jdgm-review-card__content p,
+#judgeme_product_reviews .jdgm-rev__body,
+#judgeme_product_reviews .jdgm-rev__body p,
+#judgeme_product_reviews .jm-text {
+  margin: 0;
+  color: var(--kc-review-text);
+}
+
+/* Reviewer Avatar */
+#judgeme_product_reviews .jm-reviewer-avatar {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--kc-review-avatar-bg);
+  border: 1px solid var(--kc-review-border);
+}
+
+#judgeme_product_reviews .jm-reviewer-avatar__initial .jm-text {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kc-review-avatar-text);
+}
+
+/* ==========================================================================
+   Empty State & Write A Review Button
+   ========================================================================== */
+#judgeme_product_reviews .jm-review-widget[data-empty-state="empty_widget"],
+#judgeme_product_reviews .jdgm-widget--empty-state {
+  text-align: center;
+  padding: 48px 20px;
+}
+
+#judgeme_product_reviews .jm-review-widget[data-empty-state="empty_widget"] p,
+#judgeme_product_reviews .jdgm-rev-widg__summary-text {
+  color: var(--kc-review-muted);
+}
+
+#judgeme_product_reviews .jdgm-write-rev-link,
+#judgeme_product_reviews .jm-button--primary,
+#judgeme_product_reviews .jm-review-widget-minimal-header__button-and-filters button.jm-button {
+  background-color: var(--kc-review-accent-color);
+  color: var(--kc-review-accent-text);
+  border: none;
+  border-radius: var(--kc-shape-radius-full, 999px);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 24px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+#judgeme_product_reviews .jdgm-write-rev-link:hover,
+#judgeme_product_reviews .jm-button--primary:hover,
+#judgeme_product_reviews .jm-review-widget-minimal-header__button-and-filters button.jm-button:hover {
+  background-color: var(--kc-mapped-surface-accent-default-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Review Form & Modal (Write A Review Flow)
+   ========================================================================== */
+.jdgm-modal {
+  background-color: var(--kc-review-modal-overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.jdgm-modal__content,
+.jdgm-form-wrapper {
+  background-color: var(--kc-review-modal-bg);
+  color: var(--kc-review-text);
+  border: 1px solid var(--kc-review-border);
+  border-radius: var(--kc-shape-radius-lg, 20px);
+  padding: 32px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.jdgm-form__title,
+.jdgm-form__label,
+.jdgm-form label {
+  color: var(--kc-review-heading);
+}
+
+.jdgm-form__title {
+  font-family: var(--kc-font-role-backbone, "Proxima Nova", sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.jdgm-form__label,
+.jdgm-form label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.jdgm-form__input,
+.jdgm-form input[type="text"],
+.jdgm-form input[type="email"],
+.jdgm-form textarea {
+  background-color: var(--kc-review-control-bg);
+  color: var(--kc-review-text);
+  border: 1px solid var(--kc-review-control-border);
+  border-radius: var(--kc-shape-radius-sm, 8px);
+  padding: 10px 14px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.jdgm-form__input::placeholder,
+.jdgm-form textarea::placeholder {
+  color: var(--kc-review-subtle);
+}
+
+.jdgm-form__input:focus,
+.jdgm-form input[type="text"]:focus,
+.jdgm-form input[type="email"]:focus,
+.jdgm-form textarea:focus {
+  border-color: var(--kc-review-accent-color);
+}
+
+.jdgm-form__submit {
+  background-color: var(--kc-review-accent-color);
+  color: var(--kc-review-accent-text);
+  border: none;
+  border-radius: var(--kc-shape-radius-full, 999px);
+  padding: 12px 28px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jdgm-form__submit:hover {
+  background-color: var(--kc-mapped-surface-accent-default-hover);
+}
+
+.jdgm-modal__close-callback {
+  color: var(--kc-review-heading);
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+#judgeme_product_reviews .jdgm-paginate {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+#judgeme_product_reviews .jdgm-paginate__page {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--kc-shape-radius-sm, 8px);
+  text-decoration: none;
+  color: var(--kc-review-muted);
+  transition: all 0.2s ease;
+}
+
+#judgeme_product_reviews .jdgm-paginate__page:hover {
+  color: var(--kc-review-heading);
+  background-color: var(--kc-review-tag-active-bg);
+}
+
+#judgeme_product_reviews .jdgm-paginate__page.jdgm-cur {
+  color: var(--kc-review-accent-text);
+  background-color: var(--kc-review-accent-color);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Preview Badge (Product Page / Collection Stars)
+   ========================================================================== */
+.jdgm-preview-badge,
+.jdgm-widget.jdgm-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jdgm-prev-badge__stars,
+.jdgm-prev-badge__stars .jdgm-star {
+  color: var(--kc-review-star-color);
+}
+
+.jdgm-prev-badge__text {
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--kc-review-muted);
+}
+
+.jdgm-prev-badge__text:hover {
+  color: var(--kc-review-heading);
+}
+
+/* ==========================================================================
+   Review Section Header
+   ========================================================================== */
+.kc-review-section {
+  position: relative;
+  overflow-x: clip;
+}
+
+.kc-review-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kc-responsive-spacing-layout-lg, 1.6rem);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-review-section__header .kc-caption-subheading {
+  margin: 0;
+  font-size: var(--kc-responsive-label-lg-text-size, 1.2rem);
+  line-height: var(--kc-responsive-label-lg-line-height, 1.6rem);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-review-section__header h2 {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone, inherit);
+  font-size: var(--kc-responsive-h2-text-size, 3.2rem);
+  line-height: var(--kc-responsive-h2-line-height, 1.2);
+  letter-spacing: var(--kc-responsive-h2-letter-spacing, -0.02em);
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-review-section__header h2 strong,
+.kc-review-section__header h2 b {
+  display: block;
+  font-weight: inherit;
+  color: var(--kc-mapped-text-default-body, var(--kc-review-text));
+}
