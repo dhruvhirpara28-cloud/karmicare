@@ -2,10 +2,10 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "ff022eabd54e38feee96a35de34b2dc724aedf5e",
- "source_entries": 540,
+ "source_digest": "f28c2c6062289119b41b11aa4a451200a0a642be",
+ "source_entries": 541,
  "counts": {
-  "translated": 173,
+  "translated": 174,
   "pending-claim-review": 24,
   "held": 47,
   "dawn-nl": 15,
@@ -764,12 +764,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
-   "en": "Former GP, Lifestyle Medicine",
-   "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "nl": "Voormalig huisarts, leefstijlgeneeskunde",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "en_sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "nl": "Huisarts, sport- en leefstijlgeneeskunde",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "9 Nov: Kris title, approved by Victor 2 Nov (REQUEST-2026-11-02-kris-title.md)"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/heading",
@@ -830,6 +830,18 @@
    "status": "translated",
    "flags": [],
    "notes": ""
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+   "en": "<p>“Living in sync with my biorhythm matters to me. Brushing with Karmicare is part of the daily ritual that helps my nervous system switch between day and night. I also find it makes a huge difference in keeping my receding gums in check.”</p>",
+   "en_sha1": "6ca4ebace868a0d0bfc7e28f5b92f2b86eba59e0",
+   "nl": "<p>“Mijn bioritme ondersteunen is voor mij belangrijk. Tandenpoetsen met Karmicare past in mijn dagelijks ritueel om mijn zenuwstelsel te helpen schakelen tussen dag en nacht. Daarnaast ervaar ik dat het me enorm helpt mijn teruggetrokken tandvlees onder controle te houden.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "9 Nov: Kim's own Dutch original; approved by Victor 8 Nov (wording) and 9 Nov (claims), KIM-VERLOT-QUOTE.md"
   },
   {
    "id": "product.subscription-item:how_it_works_steps_aAgVmF/subtitle",

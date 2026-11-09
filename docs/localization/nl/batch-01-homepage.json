@@ -2,10 +2,10 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "4570fe98e3ba0bada3a1f5c4b295e6adbefe10a0",
- "source_entries": 232,
+ "source_digest": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94",
+ "source_entries": 233,
  "counts": {
-  "translated": 166,
+  "translated": 167,
   "held": 22,
   "pending-claim-review": 7,
   "dawn-nl": 2,
@@ -146,14 +146,14 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.rating_text",
-   "en": "4.8 (234)",
-   "en_sha1": "0b0daa0d40d9275488f9ceafd8dfaae471350a75",
-   "nl": "4,8 (234)",
+   "en": "4.7 (110)",
+   "en_sha1": "c8134634aeacc7df39994da8892a74dbe6d13a61",
+   "nl": "4,7 (110)",
    "status": "pending-claim-review",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "9 Nov: combined rating as registered 6 Nov from the plans (3ed0938)"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/testimonial_badge_h8d3WL/heading",
@@ -1160,12 +1160,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
-   "en": "Former GP, Lifestyle Medicine",
-   "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "nl": "Voormalig huisarts, leefstijlgeneeskunde",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "en_sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "nl": "Huisarts, sport- en leefstijlgeneeskunde",
    "status": "translated",
    "flags": [],
-   "notes": ""
+   "notes": "9 Nov: Kris title, approved by Victor 2 Nov (REQUEST-2026-11-02-kris-title.md)"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_CtQgU9/heading",
@@ -1226,6 +1226,18 @@
    "status": "translated",
    "flags": [],
    "notes": ""
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+   "en": "<p>“Living in sync with my biorhythm matters to me. Brushing with Karmicare is part of the daily ritual that helps my nervous system switch between day and night. I also find it makes a huge difference in keeping my receding gums in check.”</p>",
+   "en_sha1": "6ca4ebace868a0d0bfc7e28f5b92f2b86eba59e0",
+   "nl": "<p>“Mijn bioritme ondersteunen is voor mij belangrijk. Tandenpoetsen met Karmicare past in mijn dagelijks ritueel om mijn zenuwstelsel te helpen schakelen tussen dag en nacht. Daarnaast ervaar ik dat het me enorm helpt mijn teruggetrokken tandvlees onder controle te houden.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "9 Nov: Kim's own Dutch original; approved by Victor 8 Nov (wording) and 9 Nov (claims), KIM-VERLOT-QUOTE.md"
   },
   {
    "id": "index:research_behind_system_EkjATL/subheading",

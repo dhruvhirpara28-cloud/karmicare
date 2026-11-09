@@ -33,12 +33,12 @@
  "captured": "batches 01-03: 2026-10-19 19:15 CEST; batches 04-08: 2026-10-19 20:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "batches": {
   "batch-01-homepage": {
-   "entries": 232,
-   "digest": "4570fe98e3ba0bada3a1f5c4b295e6adbefe10a0"
+   "entries": 233,
+   "digest": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94"
   },
   "batch-02-pdp": {
-   "entries": 540,
-   "digest": "ff022eabd54e38feee96a35de34b2dc724aedf5e"
+   "entries": 541,
+   "digest": "f28c2c6062289119b41b11aa4a451200a0a642be"
   },
   "batch-03-header-footer": {
    "entries": 48,
@@ -203,18 +203,20 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.rating_text",
-   "en": "4.8 (234)",
-   "sha1": "0b0daa0d40d9275488f9ceafd8dfaae471350a75",
+   "en": "4.7 (110)",
+   "sha1": "c8134634aeacc7df39994da8892a74dbe6d13a61",
    "status": "needs-review",
    "never_translate": false,
-   "notes": "type text; claims C82: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "type text; claims C82: needs-review (CLAIMS-REVIEW.md); EN updated 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): combined rating (reviews lane R95, Victor 29/30 Oct)",
    "claims": [
     "C82"
    ],
    "claim_status": "needs-review",
    "setting_type": "text",
    "section_type": "hero-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "4.8 (234)",
+   "old_sha1": "0b0daa0d40d9275488f9ceafd8dfaae471350a75"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/testimonial_badge_h8d3WL/heading",
@@ -1674,14 +1676,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
-   "en": "Former GP, Lifestyle Medicine",
-   "sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "status": "approved",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): Kris is a practising GP and sports physician (Victor 2 Nov)",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Former GP, Lifestyle Medicine",
+   "old_sha1": "286d4100f14c27ef00d39556d54b45204566d07d"
   },
   {
    "id": "index:trusted_professionals_HAqYth/card_CtQgU9/heading",
@@ -1768,6 +1772,22 @@
    "never_translate": false,
    "notes": "type text",
    "setting_type": "text",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "index:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+   "batch": "batch-01-homepage",
+   "page": "home",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/index.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+   "en": "<p>“Living in sync with my biorhythm matters to me. Brushing with Karmicare is part of the daily ritual that helps my nervous system switch between day and night. I also find it makes a huge difference in keeping my receding gums in check.”</p>",
+   "sha1": "6ca4ebace868a0d0bfc7e28f5b92f2b86eba59e0",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type richtext; new 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): Kim Verlot's quote, written in Dutch by Kim; EN and FR transcreated, approved by Victor 8 Nov (KIM-VERLOT-QUOTE.md); claims 'nervous system' and 'receding gums' approved by Victor 9 Nov",
+   "setting_type": "richtext",
    "section_type": "trusted-professionals",
    "rendered": true
   },
@@ -4931,14 +4951,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
-   "en": "Former GP, Lifestyle Medicine",
-   "sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "status": "approved",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): Kris is a practising GP and sports physician (Victor 2 Nov)",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Former GP, Lifestyle Medicine",
+   "old_sha1": "286d4100f14c27ef00d39556d54b45204566d07d"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/heading",
@@ -5025,6 +5047,22 @@
    "never_translate": false,
    "notes": "type text",
    "setting_type": "text",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+   "en": "<p>“Living in sync with my biorhythm matters to me. Brushing with Karmicare is part of the daily ritual that helps my nervous system switch between day and night. I also find it makes a huge difference in keeping my receding gums in check.”</p>",
+   "sha1": "6ca4ebace868a0d0bfc7e28f5b92f2b86eba59e0",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type richtext; new 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): Kim Verlot's quote, written in Dutch by Kim; EN and FR transcreated, approved by Victor 8 Nov (KIM-VERLOT-QUOTE.md); claims 'nervous system' and 'receding gums' approved by Victor 9 Nov",
+   "setting_type": "richtext",
    "section_type": "trusted-professionals",
    "rendered": true
   },

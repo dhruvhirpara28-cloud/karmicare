@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "ff022eabd54e38feee96a35de34b2dc724aedf5e",
+ "digest": "f28c2c6062289119b41b11aa4a451200a0a642be",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -1002,14 +1002,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
-   "en": "Former GP, Lifestyle Medicine",
-   "sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "status": "approved",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; EN updated 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): Kris is a practising GP and sports physician (Victor 2 Nov)",
    "setting_type": "text",
    "section_type": "trusted-professionals",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Former GP, Lifestyle Medicine",
+   "old_sha1": "286d4100f14c27ef00d39556d54b45204566d07d"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/heading",
@@ -1096,6 +1098,22 @@
    "never_translate": false,
    "notes": "type text",
    "setting_type": "text",
+   "section_type": "trusted-professionals",
+   "rendered": true
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+   "batch": "batch-02-pdp",
+   "page": "pdp",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+   "en": "<p>“Living in sync with my biorhythm matters to me. Brushing with Karmicare is part of the daily ritual that helps my nervous system switch between day and night. I also find it makes a huge difference in keeping my receding gums in check.”</p>",
+   "sha1": "6ca4ebace868a0d0bfc7e28f5b92f2b86eba59e0",
+   "status": "approved",
+   "never_translate": false,
+   "notes": "type richtext; new 9 Nov from live main (merchant-edit 83d060e, checked on www.karmicare.com 9 Nov): Kim Verlot's quote, written in Dutch by Kim; EN and FR transcreated, approved by Victor 8 Nov (KIM-VERLOT-QUOTE.md); claims 'nervous system' and 'receding gums' approved by Victor 9 Nov",
+   "setting_type": "richtext",
    "section_type": "trusted-professionals",
    "rendered": true
   },

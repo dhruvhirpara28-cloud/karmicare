@@ -34,7 +34,7 @@ Same markup as the other professional cards: `<p>“…”</p>`, curly quotes in
 
 ## Steps
 
-1. **EN in the theme**, through Victor's theme session and a release: both `hover_text` values above. Not in this lane.
-2. **Source-copy, after the pending write** (NL `b79d74664010be19`, FR `8905277dc1fbd989`), so those checksums stay valid: add the two EN rows to `en-source.json` and batches 01/02, the NL and FR rows to the payloads, and a hold per row and language in `holds.json`.
-3. **Claim review stays open.** The 29 Oct handoff (`kim-verlot` `81d3a59`, REPORT.md) flagged "nervous system" and above all "receding gums" for a claim review. This approval covers the wording, not the claims. The rows stay held until Victor's dated claim decision.
-4. After the claim decision and the EN release: lift the holds, dry run, desk review, Victor writes, check /nl and /fr on www.karmicare.com.
+1. **EN in the theme**: done. On 9 Nov the new EN is live on the homepage and the PDP (www.karmicare.com, Orca same-origin fetch) and on local main (merchant-edit `83d060e`); sha1 matches.
+2. **Claims approved** by Victor on 9 Nov 2026 in the source-copy session: "de claims zijn goedgekeurd". This covers "help my nervous system switch between day and night" and "keeping my receding gums in check" (and their NL/FR), flagged in the 29 Oct handoff (`kim-verlot` `81d3a59`, REPORT.md). So no hold.
+3. **Source-copy** (9 Nov, after the 6 Nov write): the two EN rows are in `en-source.json` and batches 01/02, NL and FR in the payloads, plans rebuilt (`live/tools/apply_kim_kris_rating.py`). The same round carries Kris's title (`REQUEST-2026-11-02-kris-title.md`).
+4. Next: dry run, desk review, Victor writes, check /nl and /fr on www.karmicare.com.

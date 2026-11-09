@@ -2,13 +2,13 @@
  "batch": "batch-02-pdp",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "ff022eabd54e38feee96a35de34b2dc724aedf5e",
- "source_entries": 540,
+ "source_digest": "f28c2c6062289119b41b11aa4a451200a0a642be",
+ "source_entries": 541,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
-  "translated": 176,
+  "translated": 177,
   "held": 47,
   "locale-present": 15,
   "theme-key": 31,
@@ -855,15 +855,15 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/product.subscription-item.json",
    "key_path": "sections.trusted_professionals_HAqYth.blocks.card_Ah46TM.settings.text",
-   "en": "Former GP, Lifestyle Medicine",
-   "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "fr": "Ex-médecin généraliste, médecine du mode de vie",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "en_sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "fr": "Médecin généraliste, médecine du sport et du mode de vie",
    "status": "translated",
    "flags": [
     "gendered-title"
    ],
-   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).",
-   "source_status": "approved"
+   "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).; 9 Nov: Kris title, approved by Victor 2 Nov (REQUEST-2026-11-02-kris-title.md)",
+   "source_status": "corrected"
   },
   {
    "id": "product.subscription-item:trusted_professionals_HAqYth/card_CtQgU9/heading",
@@ -936,6 +936,19 @@
     "gendered-title"
    ],
    "notes": "Practitioner title: French titles are gendered; written in an epicene form (field or epicene noun) so no gender is assumed. Confirm the wording with the practitioner together with the current title (45 brief launch gate 3).",
+   "source_status": "approved"
+  },
+  {
+   "id": "product.subscription-item:trusted_professionals_HAqYth/card_qAPajg/hover_text",
+   "resource_type": "template_setting",
+   "file_or_handle": "templates/product.subscription-item.json",
+   "key_path": "sections.trusted_professionals_HAqYth.blocks.card_qAPajg.settings.hover_text",
+   "en": "<p>“Living in sync with my biorhythm matters to me. Brushing with Karmicare is part of the daily ritual that helps my nervous system switch between day and night. I also find it makes a huge difference in keeping my receding gums in check.”</p>",
+   "en_sha1": "6ca4ebace868a0d0bfc7e28f5b92f2b86eba59e0",
+   "fr": "<p>“Respecter mon biorythme me tient à cœur. Me brosser les dents avec Karmicare fait partie du rituel quotidien qui aide mon système nerveux à basculer entre le jour et la nuit. Je constate aussi que cela m’aide énormément à contenir le recul de mes gencives.”</p>",
+   "status": "translated",
+   "flags": [],
+   "notes": "9 Nov: transcreated from Kim's Dutch; approved by Victor 8 Nov (wording) and 9 Nov (claims), KIM-VERLOT-QUOTE.md",
    "source_status": "approved"
   },
   {
