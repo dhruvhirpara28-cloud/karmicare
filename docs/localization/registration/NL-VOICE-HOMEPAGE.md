@@ -17,6 +17,8 @@
 
 Not in this batch: the Loop key `:103` "Kies je ritme". It waits for the PDP batch.
 
+**Hero H1, 10 Nov.** The batch at `ebd4bd7` carried "Je mond heeft een ritme. **Volg het.**". Victor revoked it on 30 Oct after the localhost preview (`soft-launch-nl-voice` `b97d7bf`): the H1 stays "Je mond heeft een ritme **Nu je mondzorg ook**". That commit never reached source-copy, so the write of 6 Nov registered "Volg het." on /nl. Victor saw it live on 10 Nov. The payload is back to the kept H1; the next write restores it. The footer slogan follows in the header-footer batch.
+
 **Hero badge, 5 Nov.** `testimonial_badge_h8d3WL/heading` becomes NL "Aanbevolen door professionals" (was "Aanbevolen door zorgprofessionals") and FR "Recommandé par des professionnels" (was "Soutenu par des professionnels de santé"). Victor decided on 3 Nov in the NL voice lane (`soft-launch-nl-voice` `9c64d15`) and confirmed it in this session on 5 Nov, before the write. The NL row was not yet registered, so it still goes in with this batch. The FR row becomes a new write. Both values were changed in the payloads and in the plans directly, without a rebuild, because the hero rating "4,7 (110)" lives only in the plans (`3ed0938`). The dry runs of 5 Nov (NL `355b9fa0b3298a46`, FR `ad578963a4a204a6`) are therefore void; new dry runs follow.
 
 **Markup.** The batch shows the NL without the payload's HTML. Each new text gets the same markup as the current NL:
