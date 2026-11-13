@@ -2,17 +2,17 @@
  "batch": "batch-02-pdp",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "f28c2c6062289119b41b11aa4a451200a0a642be",
- "source_entries": 541,
+ "source_digest": "41a79fb75c76f5866a697eb63f99ca7e836e364f",
+ "source_entries": 543,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "translated": 177,
-  "held": 47,
+  "held": 57,
   "locale-present": 15,
   "theme-key": 31,
-  "admin": 271
+  "admin": 263
  },
  "flag_counts": {
   "wording-adapted": 14,
@@ -23,7 +23,7 @@
   "not-rendered": 6,
   "legal-review": 1,
   "source-defect": 3,
-  "invariant": 15
+  "invariant": 13
  },
  "entries": [
   {
@@ -3767,10 +3767,10 @@
    "key_path": "custom.product_faq#01",
    "en": "Why Karmicare",
    "en_sha1": "c52b2def440fe0cc30a8619e02255e549c1c08e2",
-   "fr": "Pourquoi Karmicare",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Pourquoi Karmicare",
    "source_status": "admin-held"
   },
   {
@@ -3780,10 +3780,10 @@
    "key_path": "custom.product_faq#02",
    "en": "Karmicare cares for both your mouth and your state of mind through two distinct brushing experiences. One that helps you begin the day, and one that helps you let it go",
    "en_sha1": "d447b6085f818939c4d28280c6ad3bd74d69ccb3",
-   "fr": "Karmicare prend soin de votre bouche comme de votre état d’esprit, à travers deux expériences de brossage distinctes. L’une vous aide à commencer la journée, l’autre à la laisser derrière vous",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Karmicare prend soin de votre bouche comme de votre état d’esprit, à travers deux expériences de brossage distinctes. L’une vous aide à commencer la journée, l’autre à la laisser derrière vous",
    "source_status": "admin-held"
   },
   {
@@ -4350,13 +4350,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#45",
-   "en": "Before you start",
-   "en_sha1": "2c445dd5994fd48a7f879efa85cd15aa5394f95f",
-   "fr": "Avant de commencer",
+   "en": "Run your tongue over your teeth. That faint fuzz is your before.",
+   "en_sha1": "26fdab760e683fb7b6c880c52a4156878dfc3bd2",
+   "fr": "Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ.",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md)",
+   "source_status": "admin-held",
+   "old_fr": "Avant de commencer"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#46",
@@ -4365,10 +4366,10 @@
    "key_path": "custom.product_faq#46",
    "en": "a faint fuzz in the morning, the day’s coffee and talking in the evening. Don’t judge it — that’s your before.",
    "en_sha1": "f15a44db2ab4b4b219bce06b502d1cdc270b3224",
-   "fr": "un léger voile le matin, le café et les conversations de la journée le soir. Ne jugez pas — c’est votre \"avant\".",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: un léger voile le matin, le café et les conversations de la journée le soir. Ne jugez pas — c’est votre \"avant\".",
    "source_status": "admin-held"
   },
   {
@@ -4389,13 +4390,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#48",
-   "en": "bright peppermint and lime, guarana underneath — a velvety foam, made with fermentation-derived glycolipids, so nothing stings and nothing goes dry. Spit, don’t rinse. Tongue again: the fuzz is gone, every tooth a smooth, glassy edge.",
-   "en_sha1": "474201389308a882d880ca97b5d7ce5005565e69",
-   "fr": "menthe poivrée et citron vert éclatants, guarana en fond — une mousse veloutée, à base de glycolipides issus de la fermentation : rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : le voile a disparu, chaque dent est lisse comme du verre.",
+   "en": ": bright peppermint and lime, guarana underneath. A velvety foam, nothing stings, nothing goes dry. Spit, don’t rinse. Tongue again: every tooth a smooth, glassy edge.",
+   "en_sha1": "9f5dd8a3513c1945806cc962ab12a69ebc881084",
+   "fr": " : menthe poivrée et citron vert éclatants, guarana en fond. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre.",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md)",
+   "source_status": "admin-held",
+   "old_fr": "menthe poivrée et citron vert éclatants, guarana en fond — une mousse veloutée, à base de glycolipides issus de la fermentation : rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : le voile a disparu, chaque dent est lisse comme du verre."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#49",
@@ -4415,13 +4417,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#50",
-   "en": "warm orange and cassia cinnamon, valerian in the background, intentionally mint-free. Spit and leave it.",
-   "en_sha1": "9ecc7a8625ff9e14c6691b5410c27fac76d963ec",
-   "fr": "orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir.",
+   "en": ": warm orange and cassia cinnamon, valerian in the background, mint-free on purpose. Spit and leave it on. Smooth, with a fine, even coat, as if the day had been closed.",
+   "en_sha1": "91355356124b11de43f8cce9bd1f78b55d62bc7b",
+   "fr": " : orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée.",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md)",
+   "source_status": "admin-held",
+   "old_fr": "orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#51",
@@ -4430,10 +4433,10 @@
    "key_path": "custom.product_faq#51",
    "en": "Tongue over teeth:",
    "en_sha1": "468cefa206bdbf9006bd892e8afdee0dbe5de2c2",
-   "fr": "La langue sur les dents :",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: La langue sur les dents :",
    "source_status": "admin-held"
   },
   {
@@ -4443,10 +4446,10 @@
    "key_path": "custom.product_faq#52",
    "en": "smooth, and a fine, even coat — as if the day had been closed.",
    "en_sha1": "6099883b7a1691fec58f3341175eb3a6a74e3f57",
-   "fr": "lisse, avec un voile fin et régulier — comme si la journée avait été refermée.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: lisse, avec un voile fin et régulier — comme si la journée avait été refermée.",
    "source_status": "admin-held"
   },
   {
@@ -4456,10 +4459,10 @@
    "key_path": "custom.product_faq#53",
    "en": "The first week:",
    "en_sha1": "008ac32e31d6ec83d76dea9b63551fcd3776922b",
-   "fr": "La première semaine :",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: La première semaine :",
    "source_status": "admin-held"
   },
   {
@@ -4467,13 +4470,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#54",
-   "en": "the velvety foam and the leave-on feel are what people notice first. By the fifth brush it’s the smoothness. Two seconds, twice a day, and you know.",
-   "en_sha1": "4ff8786eb62c398912272370571a1391aad44ddb",
-   "fr": "la mousse veloutée et la sensation leave-on sont ce que l’on remarque d’abord. Dès le cinquième brossage, c’est la douceur. Deux secondes, deux fois par jour, et vous savez.",
+   "en": "Two seconds, twice a day, and you know.",
+   "en_sha1": "a710d865c90fc04d441217fd9870e774e8095971",
+   "fr": "Deux secondes, deux fois par jour, et vous savez.",
    "status": "admin",
    "flags": [],
-   "notes": "'Two seconds' kept as in EN.",
-   "source_status": "admin-held"
+   "notes": "'Two seconds' kept as in EN.; 13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md)",
+   "source_status": "admin-held",
+   "old_fr": "la mousse veloutée et la sensation leave-on sont ce que l’on remarque d’abord. Dès le cinquième brossage, c’est la douceur. Deux secondes, deux fois par jour, et vous savez."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#55",
@@ -4791,6 +4795,19 @@
    "source_status": "admin-held"
   },
   {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#127",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#127",
+   "en": "For professionals",
+   "en_sha1": "5a277184d5da8304338bafb8b5bbeed3af2684e3",
+   "fr": "Pour les professionnels",
+   "status": "admin",
+   "flags": [],
+   "notes": "13 Nov: title of For professionals (was For dentists), admin 13 Nov (REQUEST-2026-11-13-pdp-accordions.md); NL/FR as asked by Victor's main session",
+   "source_status": "admin-held"
+  },
+  {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#78",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
@@ -5080,10 +5097,23 @@
    "key_path": "custom.product_faq#99",
    "en": "For kPNI / Orthomolecular practitioners",
    "en_sha1": "1608e8cd31f27603c3cced056c2921e6575b9764",
-   "fr": "Pour les praticiens kPNI / orthomoléculaires",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Pour les praticiens kPNI / orthomoléculaires",
+   "source_status": "admin-held"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#128",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#128",
+   "en": "For kPNI and orthomolecular practitioners",
+   "en_sha1": "54edb4fdd6e668de35947ff46d85f39f5cbd2b32",
+   "fr": "Pour les praticiens kPNI et orthomoléculaires",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: kPNI label inside For professionals, admin 13 Nov (REQUEST-2026-11-13-pdp-accordions.md); NL/FR as asked by Victor's main session",
    "source_status": "admin-held"
   },
   {
@@ -5166,12 +5196,12 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#105",
-   "en": "Oral–gut–brain axis",
-   "en_sha1": "70b3a83ccd09966eb23bf13af81029031ac7ae82",
-   "fr": "Axe bouche–intestin–cerveau",
+   "en": "Oral–gut–brain axis.",
+   "en_sha1": "6a16efe4d196f0a10bb77943fa701dc682dacb7a",
+   "fr": "Axe bouche–intestin–cerveau.",
    "status": "admin",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: same words, the full stop moved into the bold run (REQUEST-2026-11-13-pdp-accordions.md)",
    "source_status": "admin-held"
   },
   {
@@ -5179,14 +5209,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#106",
-   "en": ". What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.",
-   "en_sha1": "14ae2dda53fb9cf49e41157783e12b8b0d841e67",
-   "fr": ". Ce qui se dépose dans la bouche est avalé toute la nuit ; le microbiome buccal se situe en amont de l’intestin et de sa signalisation. Cinq études dans le dossier.",
+   "en": "What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.",
+   "en_sha1": "f3e18b14b6636bf000e2bd79dba2cd91859b6375",
+   "fr": "Ce qui se dépose dans la bouche est avalé toute la nuit ; le microbiome buccal se situe en amont de l’intestin et de sa signalisation. Cinq études dans le dossier.",
    "status": "admin",
    "flags": [
     "pending-claim-review"
    ],
-   "notes": "Claims C43 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "Claims C43 need Clinical Research sign-off; translated faithfully, not softened.; 13 Nov: same words, the full stop moved into the bold run (REQUEST-2026-11-13-pdp-accordions.md)",
    "source_status": "admin-held",
    "claims": [
     "C43"
@@ -5199,10 +5229,10 @@
    "key_path": "custom.product_faq#107",
    "en": "Practitioner evidence pack and samples available →",
    "en_sha1": "78c94a7183796b976be92c559b59999a3bf9188b",
-   "fr": "Dossier scientifique et échantillons disponibles pour les praticiens →",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Dossier scientifique et échantillons disponibles pour les praticiens →",
    "source_status": "admin-held"
   },
   {
@@ -5459,12 +5489,10 @@
    "key_path": "custom.product_faq#125",
    "en": "Awake:",
    "en_sha1": "f3f3c7c8d040cb18e2600ce76135201847e1ea89",
-   "fr": "Awake:",
-   "status": "admin",
-   "flags": [
-    "invariant"
-   ],
-   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).; 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Awake:",
    "source_status": "admin-held"
   },
   {
@@ -5474,12 +5502,10 @@
    "key_path": "custom.product_faq#126",
    "en": "Asleep:",
    "en_sha1": "b84db316a641a2746cd885a78ab2b5277d6956ab",
-   "fr": "Asleep:",
-   "status": "admin",
-   "flags": [
-    "invariant"
-   ],
-   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "Invariant segment (name, code, symbol or INCI list): FR = EN exactly (landing desk, wave 2c, 23 Oct).; 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Asleep:",
    "source_status": "admin-held"
   },
   {
