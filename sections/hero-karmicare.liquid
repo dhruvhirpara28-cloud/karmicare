@@ -327,7 +327,7 @@
               <a
                 href="{{ badge_link }}"
                 class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}"
-                aria-label="{{ block.settings.heading | default: 'Backed by health professionals' | escape }}"
+                aria-label="{{ block.settings.heading | default: 'Recommended by professionals' | escape }}"
               >
             {%- else -%}
               <div class="hero-karmicare__badge hero-karmicare__badge-{{ block.id }}">
@@ -1099,7 +1099,7 @@
           "type": "text",
           "id": "heading",
           "label": "Heading Text",
-          "default": "Backed by health professionals"
+          "default": "Recommended by professionals"
         },
         {
           "type": "url",
