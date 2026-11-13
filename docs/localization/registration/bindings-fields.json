@@ -2367,64 +2367,6 @@
      }
     }
    },
-   "gid://shopify/Metaobject/564998570365|designation": {
-    "proposal_hash": "7d5ea529228548cf08587afcc92af62b86ef5ed5216154a867e5f468fbac7759",
-    "evidence": {
-     "locale": "nl",
-     "family": "custom.professional_testimonials",
-     "product": "karmicare-biorhythmic-oral-care-system",
-     "en": "Former GP, Lifestyle Medicine",
-     "paths": [
-      [
-       {
-        "from": "gid://shopify/Product/15977093923197",
-        "metafield": "gid://shopify/Metafield/203251815711101",
-        "via": "custom.professional_testimonials",
-        "type": "list.metaobject_reference",
-        "to": "gid://shopify/Metaobject/564998570365",
-        "to_type": "professional_testimonial",
-        "to_handle": "dr-kris-sienaert"
-       }
-      ]
-     ],
-     "destination": {
-      "gid": "gid://shopify/Metaobject/564998570365",
-      "type": "professional_testimonial",
-      "handle": "dr-kris-sienaert"
-     },
-     "field": {
-      "key": "designation",
-      "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-      "en_digest": "3a92d018471951617e9a870710a36cfb27c12d1ed411bf510315dfabe295893d"
-     },
-     "spans": [
-      {
-       "at": [
-        0,
-        29
-       ],
-       "items": [
-        "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#10"
-       ],
-       "en": "Former GP, Lifestyle Medicine",
-       "value": "Voormalig huisarts, leefstijlgeneeskunde",
-       "statuses": [
-        "approved"
-       ]
-      }
-     ],
-     "assembled": "Voormalig huisarts, leefstijlgeneeskunde",
-     "scope": {
-      "complete": false
-     },
-     "proposal_hash": "7d5ea529228548cf08587afcc92af62b86ef5ed5216154a867e5f468fbac7759",
-     "current": {
-      "present": false,
-      "value": null,
-      "outdated": false
-     }
-    }
-   },
    "gid://shopify/Metaobject/564999029117|designation": {
     "proposal_hash": "391bfdb45afd1139e9b666548e96b4e5b405558b41813d8402cf4b42cc17efbd",
     "evidence": {
@@ -7302,6 +7244,612 @@
       "complete": false
      }
     }
+   },
+   "gid://shopify/Metaobject/515151397245|title": {
+    "proposal_hash": "bbf346ba4cb78c3b7334acf3e5aa6a1f6ece82112f1286d3c84daa2781aaa379",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.product_faq",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "For professionals",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200051379077501",
+        "via": "custom.product_faq",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/515151397245",
+        "to_type": "product_faq_items",
+        "to_handle": "for-dentists"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/515151397245",
+      "type": "product_faq_items",
+      "handle": "for-dentists"
+     },
+     "field": {
+      "key": "title",
+      "en_sha1": "5a277184d5da8304338bafb8b5bbeed3af2684e3",
+      "en_digest": "d2cfcdb081c71c1cbaea769183bb8082b405d1ac02fe6abca4f336ba6a2a6c9c"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        17
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#127"
+       ],
+       "en": "For professionals",
+       "value": "Voor professionals",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Voor professionals",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "bbf346ba4cb78c3b7334acf3e5aa6a1f6ece82112f1286d3c84daa2781aaa379",
+     "current": {
+      "present": true,
+      "value": "Voor tandartsen",
+      "outdated": true
+     }
+    }
+   },
+   "gid://shopify/Metaobject/515151397245|section_content": {
+    "proposal_hash": "f80451c7b5e4bb640b350e1f8398a635d5bde034b86ae8c64cacc269eee330e7",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.product_faq",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "<div class=\"bf-body\">\n<p class=\"acc-tags-label\">For dentists</p>\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formula</th><th>RDA</th><th>Safety · ISO&nbsp;11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · AM</td><td class=\"num\">93.25</td><td><span class=\"rda-ok\">✓</span> 63% below limit</td></tr>\n<tr><td><b>Asleep</b> · PM</td><td class=\"num\">72.32</td><td><span class=\"rda-ok\">✓</span> 71% below limit</td></tr>\n<tr class=\"rda-limit-row\"><td>ISO&nbsp;11609 limit</td><td class=\"num\">250</td><td>Maximum allowed</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Activated charcoal, in Asleep only.</strong>\n      Pharmaceutical grade (Ph. Eur. “Charcoal, Activated”), steam-activated from a\n      100% natural, renewable raw material. Particle size D50 20 µm\n      (D10 4 · D90 60 µm), BET surface ≈ 1,700 m²/g. It is in the formula for\n      adsorption, not abrasion: at RDA 72, Asleep is the gentler of the two —\n      this is not a charcoal-whitening paste.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp <100 nm · rod-shaped, per SCCS</span>\n<span class=\"acc-tag is-spec\">Low–medium abrasivity</span>\n<span class=\"acc-tag is-spec\">Fluoride-free</span>\n<span class=\"acc-tag is-spec\">Mineral whitening</span>\n<span class=\"acc-tag is-spec\">Leave-on safe</span>\n<span class=\"acc-tag is-spec\">Safe to swallow</span>\n<span class=\"acc-tag is-spec\">EU CPNP-notified</span>\n</div>\n<p class=\"acc-tags-label\">For kPNI and orthomolecular practitioners</p>\n<p>The missing oral-care piece in your protocols — biorhythmic, fluoride-free and connected through the oral–gut–brain axis.</p>\n<p><strong>Hormone-aware.</strong> Formulated without fluoride and without known endocrine-active ingredients, for practitioners who run thyroid- and pineal-aware protocols. The pineal–melatonin and fluoride–sleep literature is in the evidence pack.</p>\n<p><strong>Built on the body’s rhythm.</strong> Awake for the cortisol morning, Asleep for the repair night — supporting the natural recovery process instead of interrupting it.</p>\n<p><strong>Oral–gut–brain axis.</strong> What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.</p>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Request the evidence pack, patient-ready materials, professional samples and technical documentation →</a></p>\n</div>",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200051379077501",
+        "via": "custom.product_faq",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/515151397245",
+        "to_type": "product_faq_items",
+        "to_handle": "for-dentists"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/515151397245",
+      "type": "product_faq_items",
+      "handle": "for-dentists"
+     },
+     "field": {
+      "key": "section_content",
+      "en_sha1": "4dd0d0020634cbbd56ee5ab88a301d267373d35d",
+      "en_digest": "ac2c36411c8777f0047a23df564d66f5f8dcae0e88be370859262387cb30d675"
+     },
+     "spans": [
+      {
+       "at": [
+        48,
+        60
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#77"
+       ],
+       "en": "For dentists",
+       "value": "Voor tandartsen",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        127,
+        134
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#78"
+       ],
+       "en": "Formula",
+       "value": "Formule",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        143,
+        146
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#111"
+       ],
+       "en": "RDA",
+       "value": "RDA",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        155,
+        178
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#80"
+       ],
+       "en": "Safety · ISO 11609",
+       "value": "Veiligheid · ISO 11609",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        216,
+        221
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112"
+       ],
+       "en": "Awake",
+       "value": "Awake",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        226,
+        230
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#114"
+       ],
+       "en": "· AM",
+       "value": "· AM",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        251,
+        256
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116"
+       ],
+       "en": "93.25",
+       "value": "93,25",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        286,
+        287
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118"
+       ],
+       "en": "✓",
+       "value": "✓",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        295,
+        310
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#83"
+       ],
+       "en": "63% below limit",
+       "value": "63% onder de limiet",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        332,
+        338
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113"
+       ],
+       "en": "Asleep",
+       "value": "Asleep",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        343,
+        347
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#115"
+       ],
+       "en": "· PM",
+       "value": "· PM",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        368,
+        373
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117"
+       ],
+       "en": "72.32",
+       "value": "72,32",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        403,
+        404
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118"
+       ],
+       "en": "✓",
+       "value": "✓",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        412,
+        427
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#86"
+       ],
+       "en": "71% below limit",
+       "value": "71% onder de limiet",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        468,
+        488
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#87"
+       ],
+       "en": "ISO 11609 limit",
+       "value": "ISO 11609-limiet",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        509,
+        512
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#119"
+       ],
+       "en": "250",
+       "value": "250",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        521,
+        536
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#88"
+       ],
+       "en": "Maximum allowed",
+       "value": "Maximaal toegestaan",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        643,
+        644
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#120"
+       ],
+       "en": "i",
+       "value": "i",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        713,
+        748
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#89"
+       ],
+       "en": "Activated charcoal, in Asleep only.",
+       "value": "Actieve kool, alleen in Asleep.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        764,
+        1111
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#90"
+       ],
+       "en": "Pharmaceutical grade (Ph. Eur. “Charcoal, Activated”), steam-activated from a 100% natural, renewable raw material. Particle size D50 20 µm (D10 4 · D90 60 µm), BET surface ≈ 1,700 m²/g. It is in the formula for adsorption, not abrasion: at RDA 72, Asleep is the gentler of the two — this is not a charcoal-whitening paste.",
+       "value": "Farmaceutische kwaliteit (Ph. Eur. “Charcoal, Activated”), met stoom geactiveerd uit een 100% natuurlijke, hernieuwbare grondstof. Deeltjesgrootte D50 20 µm (D10 4 · D90 60 µm), BET-oppervlak ≈ 1.700 m²/g. Het zit in de formule voor adsorptie, niet voor abrasie: met RDA 72 is Asleep de zachtste van de twee — dit is geen whiteningpasta met houtskool.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1200,
+        1235
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#92"
+       ],
+       "en": "nHAp <100 nm · rod-shaped, per SCCS",
+       "value": "nHAp <100 nm · staafvormig, volgens SCCS",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1273,
+        1294
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#93"
+       ],
+       "en": "Low–medium abrasivity",
+       "value": "Laag–gemiddeld abrasief",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1332,
+        1345
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#22"
+       ],
+       "en": "Fluoride-free",
+       "value": "Fluoridevrij",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1383,
+        1400
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#94"
+       ],
+       "en": "Mineral whitening",
+       "value": "Minerale whitening",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1438,
+        1451
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#95"
+       ],
+       "en": "Leave-on safe",
+       "value": "Leave-on-veilig",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1489,
+        1504
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96"
+       ],
+       "en": "Safe to swallow",
+       "value": "Veilig bij inslikken",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1542,
+        1558
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#97"
+       ],
+       "en": "EU CPNP-notified",
+       "value": "EU-CPNP-aangemeld",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1599,
+        1640
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#128"
+       ],
+       "en": "For kPNI and orthomolecular practitioners",
+       "value": "Voor kPNI- en orthomoleculaire therapeuten",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1648,
+        1769
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#100"
+       ],
+       "en": "The missing oral-care piece in your protocols — biorhythmic, fluoride-free and connected through the oral–gut–brain axis.",
+       "value": "Het ontbrekende stukje mondzorg in je protocollen — bioritmisch, fluoridevrij en verbonden via de mond-darm-hersenas.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1785,
+        1799
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#101"
+       ],
+       "en": "Hormone-aware.",
+       "value": "Hormoonbewust.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1809,
+        2023
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#102"
+       ],
+       "en": "Formulated without fluoride and without known endocrine-active ingredients, for practitioners who run thyroid- and pineal-aware protocols. The pineal–melatonin and fluoride–sleep literature is in the evidence pack.",
+       "value": "Geformuleerd zonder fluoride en zonder bekende endocrien actieve ingrediënten, voor therapeuten met schildklier- en pijnappelklierbewuste protocollen. De literatuur over pijnappelklier en melatonine en over fluoride en slaap zit in het studiedossier.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2039,
+        2066
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#103"
+       ],
+       "en": "Built on the body’s rhythm.",
+       "value": "Gebouwd op het ritme van het lichaam.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2076,
+        2205
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#104"
+       ],
+       "en": "Awake for the cortisol morning, Asleep for the repair night — supporting the natural recovery process instead of interrupting it.",
+       "value": "Awake voor de cortisolochtend, Asleep voor de herstelnacht — ter ondersteuning van het natuurlijke herstelproces, in plaats van het te onderbreken.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2221,
+        2241
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#105"
+       ],
+       "en": "Oral–gut–brain axis.",
+       "value": "Mond-darm-hersenas.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2251,
+        2391
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#106"
+       ],
+       "en": "What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.",
+       "value": "Wat zich in de mond nestelt, wordt de hele nacht ingeslikt; het mondmicrobioom ligt stroomopwaarts van de darm en zijn signalen. Vijf studies in het dossier.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2478,
+        2580
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#98"
+       ],
+       "en": "Request the evidence pack, patient-ready materials, professional samples and technical documentation →",
+       "value": "Vraag het studiedossier, kant-en-klaar patiëntenmateriaal, proefpakketten voor professionals en technische documentatie aan →",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "<div class=\"bf-body\">\n<p class=\"acc-tags-label\">Voor tandartsen</p>\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formule</th><th>RDA</th><th>Veiligheid · ISO 11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · AM</td><td class=\"num\">93,25</td><td><span class=\"rda-ok\">✓</span> 63% onder de limiet</td></tr>\n<tr><td><b>Asleep</b> · PM</td><td class=\"num\">72,32</td><td><span class=\"rda-ok\">✓</span> 71% onder de limiet</td></tr>\n<tr class=\"rda-limit-row\"><td>ISO 11609-limiet</td><td class=\"num\">250</td><td>Maximaal toegestaan</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Actieve kool, alleen in Asleep.</strong>\n      Farmaceutische kwaliteit (Ph. Eur. “Charcoal, Activated”), met stoom geactiveerd uit een 100% natuurlijke, hernieuwbare grondstof. Deeltjesgrootte D50 20 µm (D10 4 · D90 60 µm), BET-oppervlak ≈ 1.700 m²/g. Het zit in de formule voor adsorptie, niet voor abrasie: met RDA 72 is Asleep de zachtste van de twee — dit is geen whiteningpasta met houtskool.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp &lt;100 nm · staafvormig, volgens SCCS</span>\n<span class=\"acc-tag is-spec\">Laag–gemiddeld abrasief</span>\n<span class=\"acc-tag is-spec\">Fluoridevrij</span>\n<span class=\"acc-tag is-spec\">Minerale whitening</span>\n<span class=\"acc-tag is-spec\">Leave-on-veilig</span>\n<span class=\"acc-tag is-spec\">Veilig bij inslikken</span>\n<span class=\"acc-tag is-spec\">EU-CPNP-aangemeld</span>\n</div>\n<p class=\"acc-tags-label\">Voor kPNI- en orthomoleculaire therapeuten</p>\n<p>Het ontbrekende stukje mondzorg in je protocollen — bioritmisch, fluoridevrij en verbonden via de mond-darm-hersenas.</p>\n<p><strong>Hormoonbewust.</strong> Geformuleerd zonder fluoride en zonder bekende endocrien actieve ingrediënten, voor therapeuten met schildklier- en pijnappelklierbewuste protocollen. De literatuur over pijnappelklier en melatonine en over fluoride en slaap zit in het studiedossier.</p>\n<p><strong>Gebouwd op het ritme van het lichaam.</strong> Awake voor de cortisolochtend, Asleep voor de herstelnacht — ter ondersteuning van het natuurlijke herstelproces, in plaats van het te onderbreken.</p>\n<p><strong>Mond-darm-hersenas.</strong> Wat zich in de mond nestelt, wordt de hele nacht ingeslikt; het mondmicrobioom ligt stroomopwaarts van de darm en zijn signalen. Vijf studies in het dossier.</p>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Vraag het studiedossier, kant-en-klaar patiëntenmateriaal, proefpakketten voor professionals en technische documentatie aan →</a></p>\n</div>",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "f80451c7b5e4bb640b350e1f8398a635d5bde034b86ae8c64cacc269eee330e7",
+     "current": {
+      "present": true,
+      "value": "<div class=\"bf-body\">\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formule</th><th>RDA</th><th>Veiligheid · ISO 11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · AM</td><td class=\"num\">93,25</td><td><span class=\"rda-ok\">✓</span> 63% onder de limiet</td></tr>\n<tr><td><b>Asleep</b> · PM</td><td class=\"num\">72,32</td><td><span class=\"rda-ok\">✓</span> 71% onder de limiet</td></tr>\n<tr class=\"rda-limit-row\"><td>ISO 11609-limiet</td><td class=\"num\">250</td><td>Maximaal toegestaan</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Actieve kool, alleen in Asleep.</strong>\n      Farmaceutische kwaliteit (Ph. Eur. “Charcoal, Activated”), met stoom geactiveerd uit een 100% natuurlijke, hernieuwbare grondstof. Deeltjesgrootte D50 20 µm (D10 4 · D90 60 µm), BET-oppervlak ≈ 1.700 m²/g. Het zit in de formule voor adsorptie, niet voor abrasie: met RDA 72 is Asleep de zachtste van de twee — dit is geen whiteningpasta met houtskool.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp &lt;100 nm · staafvormig, volgens SCCS</span>\n<span class=\"acc-tag is-spec\">Laag–gemiddeld abrasief</span>\n<span class=\"acc-tag is-spec\">Fluoridevrij</span>\n<span class=\"acc-tag is-spec\">Minerale whitening</span>\n<span class=\"acc-tag is-spec\">Leave-on-veilig</span>\n<span class=\"acc-tag is-spec\">Veilig bij inslikken</span>\n<span class=\"acc-tag is-spec\">EU-CPNP-aangemeld</span>\n</div>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Vraag het studiedossier, kant-en-klaar patiëntenmateriaal, proefpakketten voor professionals en technische documentatie aan →</a></p>\n</div>",
+      "outdated": true
+     }
+    }
    }
   },
   "fr": {
@@ -9908,64 +10456,6 @@
       "complete": false
      },
      "proposal_hash": "a0706007835bc6405746972a8f1abfc0fe34f591813eb16045e47fb6bb6f162e",
-     "current": {
-      "present": false,
-      "value": null,
-      "outdated": false
-     }
-    }
-   },
-   "gid://shopify/Metaobject/564998570365|designation": {
-    "proposal_hash": "993d58ae3d5e1362b44a643d378f26c1ae633eaea472f3a85c282acbdb70459f",
-    "evidence": {
-     "locale": "fr",
-     "family": "custom.professional_testimonials",
-     "product": "karmicare-biorhythmic-oral-care-system",
-     "en": "Former GP, Lifestyle Medicine",
-     "paths": [
-      [
-       {
-        "from": "gid://shopify/Product/15977093923197",
-        "metafield": "gid://shopify/Metafield/203251815711101",
-        "via": "custom.professional_testimonials",
-        "type": "list.metaobject_reference",
-        "to": "gid://shopify/Metaobject/564998570365",
-        "to_type": "professional_testimonial",
-        "to_handle": "dr-kris-sienaert"
-       }
-      ]
-     ],
-     "destination": {
-      "gid": "gid://shopify/Metaobject/564998570365",
-      "type": "professional_testimonial",
-      "handle": "dr-kris-sienaert"
-     },
-     "field": {
-      "key": "designation",
-      "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-      "en_digest": "3a92d018471951617e9a870710a36cfb27c12d1ed411bf510315dfabe295893d"
-     },
-     "spans": [
-      {
-       "at": [
-        0,
-        29
-       ],
-       "items": [
-        "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#10"
-       ],
-       "en": "Former GP, Lifestyle Medicine",
-       "value": "Ex-médecin généraliste, médecine du mode de vie",
-       "statuses": [
-        "approved"
-       ]
-      }
-     ],
-     "assembled": "Ex-médecin généraliste, médecine du mode de vie",
-     "scope": {
-      "complete": false
-     },
-     "proposal_hash": "993d58ae3d5e1362b44a643d378f26c1ae633eaea472f3a85c282acbdb70459f",
      "current": {
       "present": false,
       "value": null,
@@ -14997,6 +15487,614 @@
      "assembled": "Pharmacienne, thérapeute orthomoléculaire, coordinatrice kPNI",
      "scope": {
       "complete": false
+     }
+    }
+   },
+   "gid://shopify/Metaobject/515151397245|title": {
+    "proposal_hash": "bf7bbffb59c018b2a63148be2763c27a9a9fea8e1544a1d918ab16abc73c136f",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.product_faq",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "For professionals",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200051379077501",
+        "via": "custom.product_faq",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/515151397245",
+        "to_type": "product_faq_items",
+        "to_handle": "for-dentists"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/515151397245",
+      "type": "product_faq_items",
+      "handle": "for-dentists"
+     },
+     "field": {
+      "key": "title",
+      "en_sha1": "5a277184d5da8304338bafb8b5bbeed3af2684e3",
+      "en_digest": "d2cfcdb081c71c1cbaea769183bb8082b405d1ac02fe6abca4f336ba6a2a6c9c"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        17
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#127"
+       ],
+       "en": "For professionals",
+       "value": "Pour les professionnels",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Pour les professionnels",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "bf7bbffb59c018b2a63148be2763c27a9a9fea8e1544a1d918ab16abc73c136f",
+     "current": {
+      "present": true,
+      "value": "Pour les dentistes",
+      "outdated": true
+     }
+    }
+   },
+   "gid://shopify/Metaobject/515151397245|section_content": {
+    "proposal_hash": "c974ab4d7fb372bc6354318e1f870f0450174a09d3f283d02da985f13e0c74e0",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.product_faq",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "<div class=\"bf-body\">\n<p class=\"acc-tags-label\">For dentists</p>\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formula</th><th>RDA</th><th>Safety · ISO&nbsp;11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · AM</td><td class=\"num\">93.25</td><td><span class=\"rda-ok\">✓</span> 63% below limit</td></tr>\n<tr><td><b>Asleep</b> · PM</td><td class=\"num\">72.32</td><td><span class=\"rda-ok\">✓</span> 71% below limit</td></tr>\n<tr class=\"rda-limit-row\"><td>ISO&nbsp;11609 limit</td><td class=\"num\">250</td><td>Maximum allowed</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Activated charcoal, in Asleep only.</strong>\n      Pharmaceutical grade (Ph. Eur. “Charcoal, Activated”), steam-activated from a\n      100% natural, renewable raw material. Particle size D50 20 µm\n      (D10 4 · D90 60 µm), BET surface ≈ 1,700 m²/g. It is in the formula for\n      adsorption, not abrasion: at RDA 72, Asleep is the gentler of the two —\n      this is not a charcoal-whitening paste.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp <100 nm · rod-shaped, per SCCS</span>\n<span class=\"acc-tag is-spec\">Low–medium abrasivity</span>\n<span class=\"acc-tag is-spec\">Fluoride-free</span>\n<span class=\"acc-tag is-spec\">Mineral whitening</span>\n<span class=\"acc-tag is-spec\">Leave-on safe</span>\n<span class=\"acc-tag is-spec\">Safe to swallow</span>\n<span class=\"acc-tag is-spec\">EU CPNP-notified</span>\n</div>\n<p class=\"acc-tags-label\">For kPNI and orthomolecular practitioners</p>\n<p>The missing oral-care piece in your protocols — biorhythmic, fluoride-free and connected through the oral–gut–brain axis.</p>\n<p><strong>Hormone-aware.</strong> Formulated without fluoride and without known endocrine-active ingredients, for practitioners who run thyroid- and pineal-aware protocols. The pineal–melatonin and fluoride–sleep literature is in the evidence pack.</p>\n<p><strong>Built on the body’s rhythm.</strong> Awake for the cortisol morning, Asleep for the repair night — supporting the natural recovery process instead of interrupting it.</p>\n<p><strong>Oral–gut–brain axis.</strong> What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.</p>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Request the evidence pack, patient-ready materials, professional samples and technical documentation →</a></p>\n</div>",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200051379077501",
+        "via": "custom.product_faq",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/515151397245",
+        "to_type": "product_faq_items",
+        "to_handle": "for-dentists"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/515151397245",
+      "type": "product_faq_items",
+      "handle": "for-dentists"
+     },
+     "field": {
+      "key": "section_content",
+      "en_sha1": "4dd0d0020634cbbd56ee5ab88a301d267373d35d",
+      "en_digest": "ac2c36411c8777f0047a23df564d66f5f8dcae0e88be370859262387cb30d675"
+     },
+     "spans": [
+      {
+       "at": [
+        48,
+        60
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#77"
+       ],
+       "en": "For dentists",
+       "value": "Pour les dentistes",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        127,
+        134
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#78"
+       ],
+       "en": "Formula",
+       "value": "Formule",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        143,
+        146
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#111"
+       ],
+       "en": "RDA",
+       "value": "RDA",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        155,
+        178
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#80"
+       ],
+       "en": "Safety · ISO 11609",
+       "value": "Sécurité · ISO 11609",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        216,
+        221
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112"
+       ],
+       "en": "Awake",
+       "value": "Awake",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        226,
+        230
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#114",
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#82"
+       ],
+       "en": "· AM",
+       "value": "· matin",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        251,
+        256
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#116"
+       ],
+       "en": "93.25",
+       "value": "93,25",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        286,
+        287
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118"
+       ],
+       "en": "✓",
+       "value": "✓",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        295,
+        310
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#83"
+       ],
+       "en": "63% below limit",
+       "value": "63 % sous la limite",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        332,
+        338
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113"
+       ],
+       "en": "Asleep",
+       "value": "Asleep",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        343,
+        347
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#115",
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#85"
+       ],
+       "en": "· PM",
+       "value": "· soir",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        368,
+        373
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#117"
+       ],
+       "en": "72.32",
+       "value": "72,32",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        403,
+        404
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#118"
+       ],
+       "en": "✓",
+       "value": "✓",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        412,
+        427
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#86"
+       ],
+       "en": "71% below limit",
+       "value": "71 % sous la limite",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        468,
+        488
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#87"
+       ],
+       "en": "ISO 11609 limit",
+       "value": "Limite ISO 11609",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        509,
+        512
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#119"
+       ],
+       "en": "250",
+       "value": "250",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        521,
+        536
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#88"
+       ],
+       "en": "Maximum allowed",
+       "value": "Maximum autorisé",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        643,
+        644
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#120"
+       ],
+       "en": "i",
+       "value": "i",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        713,
+        748
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#89"
+       ],
+       "en": "Activated charcoal, in Asleep only.",
+       "value": "Charbon actif, uniquement dans Asleep.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        764,
+        1111
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#90"
+       ],
+       "en": "Pharmaceutical grade (Ph. Eur. “Charcoal, Activated”), steam-activated from a 100% natural, renewable raw material. Particle size D50 20 µm (D10 4 · D90 60 µm), BET surface ≈ 1,700 m²/g. It is in the formula for adsorption, not abrasion: at RDA 72, Asleep is the gentler of the two — this is not a charcoal-whitening paste.",
+       "value": "Qualité pharmaceutique (Ph. Eur. “Charcoal, Activated”), activé à la vapeur à partir d’une matière première 100 % naturelle et renouvelable. Granulométrie D50 20 µm (D10 4 · D90 60 µm), surface BET ≈ 1 700 m²/g. Il est dans la formule pour l’adsorption, pas pour l’abrasion : avec un RDA de 72, Asleep est la plus douce des deux — ce n’est pas une pâte blanchissante au charbon.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1200,
+        1235
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#92"
+       ],
+       "en": "nHAp <100 nm · rod-shaped, per SCCS",
+       "value": "nHAp <100 nm · en bâtonnets, selon le SCCS",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1273,
+        1294
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#93"
+       ],
+       "en": "Low–medium abrasivity",
+       "value": "Abrasivité faible à moyenne",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1332,
+        1345
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#22"
+       ],
+       "en": "Fluoride-free",
+       "value": "Sans fluor",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1383,
+        1400
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#94"
+       ],
+       "en": "Mineral whitening",
+       "value": "Blanchiment minéral",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1438,
+        1451
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#95"
+       ],
+       "en": "Leave-on safe",
+       "value": "Sûr en leave-on",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1489,
+        1504
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96"
+       ],
+       "en": "Safe to swallow",
+       "value": "Sans danger en cas d’ingestion",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1542,
+        1558
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#97"
+       ],
+       "en": "EU CPNP-notified",
+       "value": "Notifié au CPNP (UE)",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1599,
+        1640
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#128"
+       ],
+       "en": "For kPNI and orthomolecular practitioners",
+       "value": "Pour les praticiens kPNI et orthomoléculaires",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1648,
+        1769
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#100"
+       ],
+       "en": "The missing oral-care piece in your protocols — biorhythmic, fluoride-free and connected through the oral–gut–brain axis.",
+       "value": "La pièce bucco-dentaire qui manquait à vos protocoles — biorythmique, sans fluor et reliée par l’axe bouche–intestin–cerveau.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1785,
+        1799
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#101"
+       ],
+       "en": "Hormone-aware.",
+       "value": "Une attention aux hormones.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        1809,
+        2023
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#102"
+       ],
+       "en": "Formulated without fluoride and without known endocrine-active ingredients, for practitioners who run thyroid- and pineal-aware protocols. The pineal–melatonin and fluoride–sleep literature is in the evidence pack.",
+       "value": "Formulé sans fluor et sans ingrédients connus pour leur activité endocrinienne, pour les praticiens qui mènent des protocoles attentifs à la thyroïde et à la glande pinéale. La littérature sur les liens pinéale–mélatonine et fluor–sommeil figure dans le dossier scientifique.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2039,
+        2066
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#103"
+       ],
+       "en": "Built on the body’s rhythm.",
+       "value": "Fondé sur le rythme du corps.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2076,
+        2205
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#104"
+       ],
+       "en": "Awake for the cortisol morning, Asleep for the repair night — supporting the natural recovery process instead of interrupting it.",
+       "value": "Awake pour le matin du cortisol, Asleep pour la nuit de réparation — en soutenant le processus naturel de récupération au lieu de l’interrompre.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2221,
+        2241
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#105"
+       ],
+       "en": "Oral–gut–brain axis.",
+       "value": "Axe bouche–intestin–cerveau.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2251,
+        2391
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#106"
+       ],
+       "en": "What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.",
+       "value": "Ce qui se dépose dans la bouche est avalé toute la nuit ; le microbiome buccal se situe en amont de l’intestin et de sa signalisation. Cinq études dans le dossier.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "at": [
+        2478,
+        2580
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#98"
+       ],
+       "en": "Request the evidence pack, patient-ready materials, professional samples and technical documentation →",
+       "value": "Demandez le dossier scientifique, des supports prêts pour vos patients, des échantillons professionnels et la documentation technique →",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "<div class=\"bf-body\">\n<p class=\"acc-tags-label\">Pour les dentistes</p>\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formule</th><th>RDA</th><th>Sécurité · ISO 11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · matin</td><td class=\"num\">93,25</td><td><span class=\"rda-ok\">✓</span> 63 % sous la limite</td></tr>\n<tr><td><b>Asleep</b> · soir</td><td class=\"num\">72,32</td><td><span class=\"rda-ok\">✓</span> 71 % sous la limite</td></tr>\n<tr class=\"rda-limit-row\"><td>Limite ISO 11609</td><td class=\"num\">250</td><td>Maximum autorisé</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Charbon actif, uniquement dans Asleep.</strong>\n      Qualité pharmaceutique (Ph. Eur. “Charcoal, Activated”), activé à la vapeur à partir d’une matière première 100 % naturelle et renouvelable. Granulométrie D50 20 µm (D10 4 · D90 60 µm), surface BET ≈ 1 700 m²/g. Il est dans la formule pour l’adsorption, pas pour l’abrasion : avec un RDA de 72, Asleep est la plus douce des deux — ce n’est pas une pâte blanchissante au charbon.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp &lt;100 nm · en bâtonnets, selon le SCCS</span>\n<span class=\"acc-tag is-spec\">Abrasivité faible à moyenne</span>\n<span class=\"acc-tag is-spec\">Sans fluor</span>\n<span class=\"acc-tag is-spec\">Blanchiment minéral</span>\n<span class=\"acc-tag is-spec\">Sûr en leave-on</span>\n<span class=\"acc-tag is-spec\">Sans danger en cas d’ingestion</span>\n<span class=\"acc-tag is-spec\">Notifié au CPNP (UE)</span>\n</div>\n<p class=\"acc-tags-label\">Pour les praticiens kPNI et orthomoléculaires</p>\n<p>La pièce bucco-dentaire qui manquait à vos protocoles — biorythmique, sans fluor et reliée par l’axe bouche–intestin–cerveau.</p>\n<p><strong>Une attention aux hormones.</strong> Formulé sans fluor et sans ingrédients connus pour leur activité endocrinienne, pour les praticiens qui mènent des protocoles attentifs à la thyroïde et à la glande pinéale. La littérature sur les liens pinéale–mélatonine et fluor–sommeil figure dans le dossier scientifique.</p>\n<p><strong>Fondé sur le rythme du corps.</strong> Awake pour le matin du cortisol, Asleep pour la nuit de réparation — en soutenant le processus naturel de récupération au lieu de l’interrompre.</p>\n<p><strong>Axe bouche–intestin–cerveau.</strong> Ce qui se dépose dans la bouche est avalé toute la nuit ; le microbiome buccal se situe en amont de l’intestin et de sa signalisation. Cinq études dans le dossier.</p>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Demandez le dossier scientifique, des supports prêts pour vos patients, des échantillons professionnels et la documentation technique →</a></p>\n</div>",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "c974ab4d7fb372bc6354318e1f870f0450174a09d3f283d02da985f13e0c74e0",
+     "current": {
+      "present": true,
+      "value": "<div class=\"bf-body\">\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formule</th><th>RDA</th><th>Sécurité · ISO 11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · matin</td><td class=\"num\">93,25</td><td><span class=\"rda-ok\">✓</span> 63 % sous la limite</td></tr>\n<tr><td><b>Asleep</b> · soir</td><td class=\"num\">72,32</td><td><span class=\"rda-ok\">✓</span> 71 % sous la limite</td></tr>\n<tr class=\"rda-limit-row\"><td>Limite ISO 11609</td><td class=\"num\">250</td><td>Maximum autorisé</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Charbon actif, uniquement dans Asleep.</strong>\n      Qualité pharmaceutique (Ph. Eur. “Charcoal, Activated”), activé à la vapeur à partir d’une matière première 100 % naturelle et renouvelable. Granulométrie D50 20 µm (D10 4 · D90 60 µm), surface BET ≈ 1 700 m²/g. Il est dans la formule pour l’adsorption, pas pour l’abrasion : avec un RDA de 72, Asleep est la plus douce des deux — ce n’est pas une pâte blanchissante au charbon.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp &lt;100 nm · en bâtonnets, selon le SCCS</span>\n<span class=\"acc-tag is-spec\">Abrasivité faible à moyenne</span>\n<span class=\"acc-tag is-spec\">Sans fluor</span>\n<span class=\"acc-tag is-spec\">Blanchiment minéral</span>\n<span class=\"acc-tag is-spec\">Sûr en leave-on</span>\n<span class=\"acc-tag is-spec\">Sans danger en cas d’ingestion</span>\n<span class=\"acc-tag is-spec\">Notifié au CPNP (UE)</span>\n</div>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Demandez le dossier scientifique, des supports prêts pour vos patients, des échantillons professionnels et la documentation technique →</a></p>\n</div>",
+      "outdated": true
      }
     }
    }

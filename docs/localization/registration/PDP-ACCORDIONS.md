@@ -29,15 +29,38 @@ The next dry run proposes the new fields (`live/fields-proposed-<lang>.json`). R
 
 ## Taste & feel NL and FR: wait for Victor's OK
 
+Victor's choices for the NL on 13 Nov (via the other source-copy chat): *Spugen* (not *spuwen*), *startpunt*, and the words the live NL already uses (*Glijd met je tong*, *ruw laagje*, *fluweelzacht schuim*, *Nog eens met je tong*, *een gladde rand, als glas*, *alsof de dag werd afgesloten*). The opener #45 has its NL. #54 is unchanged.
+
+Still open:
+- **NL Awake #48 and Asleep #50**: the ingredient phrase.
+  - Victor's version: *met een activerende ondertoon van guarana* and *met een rustgevende ondertoon van valeriaan*.
+  - The other chat flagged *rustgevend* as the calming effect brand rule #16 rules out (C40/C41). The pair also reads like the dropped "Focus by day, calm by night".
+  - The other chat's alternative: *verfrissende ondertoon van guarana* ("refreshes" is on the allowed list) and *verzachtende ondertoon van valeriaan* (as the approved "Valeriaan verzacht de mond", 24 Oct).
+  - The rows stay as they are until Victor picks one version.
+- **FR**: the whole Taste & feel, and the guarana and valerian phrase to match the NL choice.
+
 | | Opening | Awake | Asleep | Close |
 |---|---|---|---|---|
-| NL (main session's proposal) | Ga met je tong over je tanden. Dat lichte laagje is je nulpunt. | frisse pepermunt en limoen, met guarana eronder. Een fluwelen schuim, niets prikt, niets droogt uit. Spuwen, niet spoelen. Tong er nog eens over: elke tand een gladde, glazige rand. | warme sinaasappel en cassiakaneel, valeriaan op de achtergrond, bewust zonder munt. Spuwen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag is afgesloten. | Twee seconden, twee keer per dag, en je weet het. |
-| FR (new) | Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ. | menthe poivrée et citron vert éclatants, guarana en fond. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre. | orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée. | Deux secondes, deux fois par jour, et vous savez. |
+| NL | Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt. | frisse pepermunt en limoen, met een … ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas. | warme sinaasappel en cassiakaneel, … valeriaan …, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten. | Twee seconden, twee keer per dag, en je weet het. |
+| FR (draft) | Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ. | menthe poivrée et citron vert éclatants, guarana en fond. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre. | orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée. | Deux secondes, deux fois par jour, et vous savez. |
 
 The Taste & feel field binding is only added after Victor's OK. Until then the field is proposed and never written.
 
-## Effect on the pending NL H1 write
+## Dry run of 13 Nov 15:05 and the follow-up
 
-The admin change of 13 Nov voids the NL dry run `d0f1203e7b09898a` (hero H1 back to "Nu je mondzorg ook"). With the old bindings, any write would also abort on the stale fields. The H1 now goes in with this round's dry run.
+Victor ran `register.py --theme-id 187295564157` (NL `39ddfe4a31848cca`, FR `976a585e5dffc1fb`; never written):
+- 17 byte-only ops per language;
+- 3 field proposals (For professionals title and section_content, Taste & feel description);
+- 1 stale binding, Kris `564998570365|designation`. Victor had already changed that designation in Admin to "GP, Sports & Lifestyle Medicine", so the field no longer matched its row.
 
-Checks: FR `check.py` 75, NL `validate.py` 62, both unchanged. `digest.py` passes. `plan_delta.py HEAD`: per language 2 added (#127 #128), 10 removed (retired), 6 changed (#45 #48 #50 #54 #105 #106).
+Follow-up (`live/tools/apply_dryrun_followup.py`):
+- **Kris**: row `custom.professional_testimonials#10` takes that EN (sha1 `6d0ee676…`) and the NL/FR Victor approved on 2 Nov. The stale binding is removed, so the next dry run proposes the field again. The metaobject's placeholder description stays untranslated.
+- **For professionals**: both proposals were reviewed and bound, NL and FR. The assembly is the registered dentists HTML plus the two labels and the registered kPNI text.
+
+## The NL H1 was written on 10 Nov
+
+This section first said the admin change voided the NL dry run `d0f1203e7b09898a`. That was wrong: Victor wrote it on 10 Nov at 13:45 (`live/journal-nl.jsonl`, 21 of 21 confirmed). The H1 shows `same` in the dry run of 13 Nov. The run is now in `RUNS.md`. There was no FR run that day.
+
+Checks: FR `check.py` 75, NL `validate.py` 62, both unchanged. `digest.py` passes. `plan_delta.py HEAD`:
+- at c5d6202, per language: 2 added (#127 #128), 10 removed (retired), 6 changed (#45 #48 #50 #54 #105 #106);
+- in the follow-up: Kris #10 changed (NL and FR), #45 changed (NL).
