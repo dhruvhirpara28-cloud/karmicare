@@ -31,20 +31,19 @@ The next dry run proposes the new fields (`live/fields-proposed-<lang>.json`). R
 
 Victor's choices for the NL on 13 Nov (via the other source-copy chat): *Spugen* (not *spuwen*), *startpunt*, and the words the live NL already uses (*Glijd met je tong*, *ruw laagje*, *fluweelzacht schuim*, *Nog eens met je tong*, *een gladde rand, als glas*, *alsof de dag werd afgesloten*). The opener #45 has its NL. #54 is unchanged.
 
-Still open:
-- **NL Awake #48 and Asleep #50**: the ingredient phrase.
-  - Victor's version: *met een activerende ondertoon van guarana* and *met een rustgevende ondertoon van valeriaan*.
-  - The other chat flagged *rustgevend* as the calming effect brand rule #16 rules out (C40/C41). The pair also reads like the dropped "Focus by day, calm by night".
-  - The other chat's alternative: *verfrissende ondertoon van guarana* ("refreshes" is on the allowed list) and *verzachtende ondertoon van valeriaan* (as the approved "Valeriaan verzacht de mond", 24 Oct).
-  - The rows stay as they are until Victor picks one version.
-- **FR**: the whole Taste & feel, and the guarana and valerian phrase to match the NL choice.
+**NL Awake #48 and Asleep #50: Victor chose version A on 14 Nov** (`live/tools/apply_taste_feel_a.py`): *met een activerende ondertoon van guarana* and *met een rustgevende ondertoon van valeriaan*.
+- Flagged before his choice, by both source-copy chats: *rustgevend* is the calming effect brand rule #16 rules out (C40/C41), and the pair reads like the dropped "Focus by day, calm by night".
+- The alternative B was *verfrissende* / *verzachtende ondertoon*. Victor chose A knowingly: *activerend* follows the approved hero line "Awake activeert".
+- The NL is final.
+
+Still open: **FR**, Victor's OK on the whole Taste & feel. The FR mirrors A: *une note tonifiante de guarana* and *une note apaisante de valériane* (no *vive*, which reads as "living", like *levendig*).
 
 | | Opening | Awake | Asleep | Close |
 |---|---|---|---|---|
-| NL | Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt. | frisse pepermunt en limoen, met een … ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas. | warme sinaasappel en cassiakaneel, … valeriaan …, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten. | Twee seconden, twee keer per dag, en je weet het. |
-| FR (draft) | Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ. | menthe poivrée et citron vert éclatants, guarana en fond. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre. | orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée. | Deux secondes, deux fois par jour, et vous savez. |
+| NL | Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt. | frisse pepermunt en limoen, met een activerende ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas. | warme sinaasappel en cassiakaneel, met een rustgevende ondertoon van valeriaan, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten. | Twee seconden, twee keer per dag, en je weet het. |
+| FR (draft) | Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ. | menthe poivrée et citron vert éclatants, avec une note tonifiante de guarana. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre. | orange chaude et cannelle cassia, avec une note apaisante de valériane, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée. | Deux secondes, deux fois par jour, et vous savez. |
 
-The Taste & feel field binding is only added after Victor's OK. Until then the field is proposed and never written.
+The Taste & feel field binding is added per language: NL from the next dry run's proposal, FR only after Victor's OK. Until then the field is proposed and never written.
 
 ## Dry run of 13 Nov 15:05 and the follow-up
 
