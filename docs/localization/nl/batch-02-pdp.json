@@ -2,15 +2,15 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "f28c2c6062289119b41b11aa4a451200a0a642be",
- "source_entries": 541,
+ "source_digest": "c5de6bd50f3626144da00cace83d8eb2503b28d2",
+ "source_entries": 543,
  "counts": {
   "translated": 174,
   "pending-claim-review": 24,
-  "held": 47,
+  "held": 57,
   "dawn-nl": 15,
   "theme-key": 31,
-  "admin": 250
+  "admin": 242
  },
  "fit_risk": [
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
@@ -3513,12 +3513,10 @@
    "key_path": "custom.product_faq#01",
    "en": "Why Karmicare",
    "en_sha1": "c52b2def440fe0cc30a8619e02255e549c1c08e2",
-   "nl": "Waarom Karmicare",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Waarom Karmicare"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#02",
@@ -3527,12 +3525,10 @@
    "key_path": "custom.product_faq#02",
    "en": "Karmicare cares for both your mouth and your state of mind through two distinct brushing experiences. One that helps you begin the day, and one that helps you let it go",
    "en_sha1": "d447b6085f818939c4d28280c6ad3bd74d69ccb3",
-   "nl": "Karmicare zorgt voor je mond én je gemoedstoestand, met twee aparte poetservaringen. Eén die je helpt de dag te beginnen, en één die je helpt hem los te laten",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "No final full stop, as in the EN."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "No final full stop, as in the EN.; 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Karmicare zorgt voor je mond én je gemoedstoestand, met twee aparte poetservaringen. Eén die je helpt de dag te beginnen, en één die je helpt hem los te laten"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#03",
@@ -4126,14 +4122,15 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#45",
-   "en": "Before you start",
-   "en_sha1": "2c445dd5994fd48a7f879efa85cd15aa5394f95f",
-   "nl": "Voor je begint",
+   "en": "Run your tongue over your teeth. That faint fuzz is your before.",
+   "en_sha1": "26fdab760e683fb7b6c880c52a4156878dfc3bd2",
+   "nl": "Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "Lead-in for #46, which starts in lower case as in the EN."
+   "notes": "Lead-in for #46, which starts in lower case as in the EN.; 13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md); 13 Nov: Victor chose 'Glijd met je tong', 'startpunt' and the live NL words",
+   "old_nl": "Voor je begint"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#46",
@@ -4142,12 +4139,10 @@
    "key_path": "custom.product_faq#46",
    "en": "a faint fuzz in the morning, the day’s coffee and talking in the evening. Don’t judge it — that’s your before.",
    "en_sha1": "f15a44db2ab4b4b219bce06b502d1cdc270b3224",
-   "nl": "een licht, ruw laagje 's ochtends, 's avonds de koffie en het gepraat van de dag. Oordeel er niet over — dat is je ‘vóór’.",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "'that's your before' (before/after) → 'je ‘vóór’'; accent marks the meaning."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "'that's your before' (before/after) → 'je ‘vóór’'; accent marks the meaning.; 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: een licht, ruw laagje 's ochtends, 's avonds de koffie en het gepraat van de dag. Oordeel er niet over — dat is je ‘vóór’."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#47",
@@ -4166,14 +4161,15 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#48",
-   "en": "bright peppermint and lime, guarana underneath — a velvety foam, made with fermentation-derived glycolipids, so nothing stings and nothing goes dry. Spit, don’t rinse. Tongue again: the fuzz is gone, every tooth a smooth, glassy edge.",
-   "en_sha1": "474201389308a882d880ca97b5d7ce5005565e69",
-   "nl": "frisse pepermunt en limoen, met guarana eronder — een fluweelzacht schuim, gemaakt met glycolipiden uit fermentatie, zodat niets prikt en niets uitdroogt. Spugen, niet spoelen. Nog eens met je tong: het ruwe laagje is weg, elke tand een gladde rand, als glas.",
+   "en": ": bright peppermint and lime, guarana underneath. A velvety foam, nothing stings, nothing goes dry. Spit, don’t rinse. Tongue again: every tooth a smooth, glassy edge.",
+   "en_sha1": "9f5dd8a3513c1945806cc962ab12a69ebc881084",
+   "nl": ": frisse pepermunt en limoen, met een activerende ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md); 14 Nov: Victor chose version A for the guarana/valerian phrase and the live NL words",
+   "old_nl": "frisse pepermunt en limoen, met guarana eronder — een fluweelzacht schuim, gemaakt met glycolipiden uit fermentatie, zodat niets prikt en niets uitdroogt. Spugen, niet spoelen. Nog eens met je tong: het ruwe laagje is weg, elke tand een gladde rand, als glas."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#49",
@@ -4192,14 +4188,15 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#50",
-   "en": "warm orange and cassia cinnamon, valerian in the background, intentionally mint-free. Spit and leave it.",
-   "en_sha1": "9ecc7a8625ff9e14c6691b5410c27fac76d963ec",
-   "nl": "warme sinaasappel en cassiakaneel, valeriaan op de achtergrond, bewust zonder munt. Spugen en laten zitten.",
+   "en": ": warm orange and cassia cinnamon, valerian in the background, mint-free on purpose. Spit and leave it on. Smooth, with a fine, even coat, as if the day had been closed.",
+   "en_sha1": "91355356124b11de43f8cce9bd1f78b55d62bc7b",
+   "nl": ": warme sinaasappel en cassiakaneel, met een rustgevende ondertoon van valeriaan, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md); 14 Nov: Victor chose version A for the guarana/valerian phrase and the live NL words",
+   "old_nl": "warme sinaasappel en cassiakaneel, valeriaan op de achtergrond, bewust zonder munt. Spugen en laten zitten."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#51",
@@ -4208,12 +4205,10 @@
    "key_path": "custom.product_faq#51",
    "en": "Tongue over teeth:",
    "en_sha1": "468cefa206bdbf9006bd892e8afdee0dbe5de2c2",
-   "nl": "Tong over je tanden:",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Tong over je tanden:"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#52",
@@ -4222,12 +4217,10 @@
    "key_path": "custom.product_faq#52",
    "en": "smooth, and a fine, even coat — as if the day had been closed.",
    "en_sha1": "6099883b7a1691fec58f3341175eb3a6a74e3f57",
-   "nl": "glad, met een fijn, egaal laagje — alsof de dag werd afgesloten.",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: glad, met een fijn, egaal laagje — alsof de dag werd afgesloten."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#53",
@@ -4236,26 +4229,25 @@
    "key_path": "custom.product_faq#53",
    "en": "The first week:",
    "en_sha1": "008ac32e31d6ec83d76dea9b63551fcd3776922b",
-   "nl": "De eerste week:",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: De eerste week:"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#54",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#54",
-   "en": "the velvety foam and the leave-on feel are what people notice first. By the fifth brush it’s the smoothness. Two seconds, twice a day, and you know.",
-   "en_sha1": "4ff8786eb62c398912272370571a1391aad44ddb",
-   "nl": "het fluweelzachte schuim en het leave-on-gevoel vallen mensen als eerste op. Bij de vijfde poetsbeurt is het de gladheid. Twee seconden, twee keer per dag, en je weet het.",
+   "en": "Two seconds, twice a day, and you know.",
+   "en_sha1": "a710d865c90fc04d441217fd9870e774e8095971",
+   "nl": "Twee seconden, twee keer per dag, en je weet het.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "13 Nov: Taste & feel rewritten in admin 13 Nov; NL proposed by Victor's main session, FR new: both wait for Victor's OK (REQUEST-2026-11-13-pdp-accordions.md)",
+   "old_nl": "het fluweelzachte schuim en het leave-on-gevoel vallen mensen als eerste op. Bij de vijfde poetsbeurt is het de gladheid. Twee seconden, twee keer per dag, en je weet het."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#55",
@@ -4581,6 +4573,20 @@
    "notes": ""
   },
   {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#127",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#127",
+   "en": "For professionals",
+   "en_sha1": "5a277184d5da8304338bafb8b5bbeed3af2684e3",
+   "nl": "Voor professionals",
+   "status": "admin",
+   "flags": [
+    "admin"
+   ],
+   "notes": "13 Nov: title of For professionals (was For dentists), admin 13 Nov (REQUEST-2026-11-13-pdp-accordions.md); NL/FR as asked by Victor's main session"
+  },
+  {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#78",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
@@ -4878,12 +4884,24 @@
    "key_path": "custom.product_faq#99",
    "en": "For kPNI / Orthomolecular practitioners",
    "en_sha1": "1608e8cd31f27603c3cced056c2921e6575b9764",
-   "nl": "Voor kPNI- / orthomoleculaire therapeuten",
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Voor kPNI- en orthomoleculaire therapeuten; 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Voor kPNI- / orthomoleculaire therapeuten"
+  },
+  {
+   "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#128",
+   "resource_type": "metafield",
+   "file_or_handle": "karmicare-biorhythmic-oral-care-system",
+   "key_path": "custom.product_faq#128",
+   "en": "For kPNI and orthomolecular practitioners",
+   "en_sha1": "54edb4fdd6e668de35947ff46d85f39f5cbd2b32",
+   "nl": "Voor kPNI- en orthomoleculaire therapeuten",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Voor kPNI- en orthomoleculaire therapeuten"
+   "notes": "13 Nov: kPNI label inside For professionals, admin 13 Nov (REQUEST-2026-11-13-pdp-accordions.md); NL/FR as asked by Victor's main session"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#100",
@@ -4962,29 +4980,29 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#105",
-   "en": "Oral–gut–brain axis",
-   "en_sha1": "70b3a83ccd09966eb23bf13af81029031ac7ae82",
-   "nl": "Mond-darm-hersenas",
+   "en": "Oral–gut–brain axis.",
+   "en_sha1": "6a16efe4d196f0a10bb77943fa701dc682dacb7a",
+   "nl": "Mond-darm-hersenas.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "Joins with #106, which starts with '. '."
+   "notes": "Joins with #106, which starts with '. '.; 13 Nov: same words, the full stop moved into the bold run (REQUEST-2026-11-13-pdp-accordions.md)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#106",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.product_faq#106",
-   "en": ". What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.",
-   "en_sha1": "14ae2dda53fb9cf49e41157783e12b8b0d841e67",
-   "nl": ". Wat zich in de mond nestelt, wordt de hele nacht ingeslikt; het mondmicrobioom ligt stroomopwaarts van de darm en zijn signalen. Vijf studies in het dossier.",
+   "en": "What settles in the mouth is swallowed all night; the oral microbiome sits upstream of the gut and its signalling. Five studies in the pack.",
+   "en_sha1": "f3e18b14b6636bf000e2bd79dba2cd91859b6375",
+   "nl": "Wat zich in de mond nestelt, wordt de hele nacht ingeslikt; het mondmicrobioom ligt stroomopwaarts van de darm en zijn signalen. Vijf studies in het dossier.",
    "status": "pending-claim-review",
    "flags": [
     "admin",
     "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "13 Nov: same words, the full stop moved into the bold run (REQUEST-2026-11-13-pdp-accordions.md)"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#107",
@@ -4993,12 +5011,10 @@
    "key_path": "custom.product_faq#107",
    "en": "Practitioner evidence pack and samples available →",
    "en_sha1": "78c94a7183796b976be92c559b59999a3bf9188b",
-   "nl": "Studiedossier en proefpakketten voor zorgverleners beschikbaar →",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Studiedossier en proefpakketten voor zorgverleners beschikbaar →"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#108",
@@ -5260,13 +5276,10 @@
    "key_path": "custom.product_faq#125",
    "en": "Awake:",
    "en_sha1": "f3f3c7c8d040cb18e2600ce76135201847e1ea89",
-   "nl": "Awake:",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "invariant"
-   ],
-   "notes": "invariant: kept as in EN (formula name (brand) as a label)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "invariant: kept as in EN (formula name (brand) as a label); 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Awake:"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#126",
@@ -5275,13 +5288,10 @@
    "key_path": "custom.product_faq#126",
    "en": "Asleep:",
    "en_sha1": "b84db316a641a2746cd885a78ab2b5277d6956ab",
-   "nl": "Asleep:",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "invariant"
-   ],
-   "notes": "invariant: kept as in EN (formula name (brand) as a label)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "invariant: kept as in EN (formula name (brand) as a label); 13 Nov: source row retired (REQUEST-2026-11-13-pdp-accordions.md); was admin: Asleep:"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#01",
@@ -5957,14 +5967,15 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.professional_testimonials#10",
-   "en": "Former GP, Lifestyle Medicine",
-   "en_sha1": "286d4100f14c27ef00d39556d54b45204566d07d",
-   "nl": "Voormalig huisarts, leefstijlgeneeskunde",
+   "en": "GP, Sports & Lifestyle Medicine",
+   "en_sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+   "nl": "Huisarts, sport- en leefstijlgeneeskunde",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "13 Nov: Kris title as on the templates, approved by Victor 2 Nov",
+   "old_nl": "Voormalig huisarts, leefstijlgeneeskunde"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#11",
