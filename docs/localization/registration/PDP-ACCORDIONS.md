@@ -56,6 +56,18 @@ Follow-up (`live/tools/apply_dryrun_followup.py`):
 - **Kris**: row `custom.professional_testimonials#10` takes that EN (sha1 `6d0ee676…`) and the NL/FR Victor approved on 2 Nov. The stale binding is removed, so the next dry run proposes the field again. The metaobject's placeholder description stays untranslated.
 - **For professionals**: both proposals were reviewed and bound, NL and FR. The assembly is the registered dentists HTML plus the two labels and the registered kPNI text.
 
+## Dry run of 14 Nov 21:03 and the last bindings
+
+Victor ran `register.py --theme-id 187295564157` (NL `1dcd122a7ec86940`, FR `d3f18f3290d2dec5`; never written):
+- 19 register per language: the 17 byte-only metaobject re-registers and the two bound For professionals fields;
+- 2 field proposals, Kris `564998570365|designation` and Taste & feel `564940013949|description`; no stale bindings.
+
+Both proposals were reviewed and bound, NL and FR (`live/tools/bind_dryrun_20261114.py`):
+- Kris: the NL/FR of 2 Nov replace "Voormalig huisarts…" / "Ex-médecin généraliste…".
+- Taste & feel: four paragraphs as the EN, with the bold Awake and Asleep runs and the approved NL/FR.
+
+The next dry run carries them as mutations and gives the checksum for the write.
+
 ## The NL H1 was written on 10 Nov
 
 This section first said the admin change voided the NL dry run `d0f1203e7b09898a`. That was wrong: Victor wrote it on 10 Nov at 13:45 (`live/journal-nl.jsonl`, 21 of 21 confirmed). The H1 shows `same` in the dry run of 13 Nov. The run is now in `RUNS.md`. There was no FR run that day.

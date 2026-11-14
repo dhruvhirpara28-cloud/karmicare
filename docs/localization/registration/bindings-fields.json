@@ -7850,6 +7850,210 @@
       "outdated": true
      }
     }
+   },
+   "gid://shopify/Metaobject/564998570365|designation": {
+    "proposal_hash": "1ed64738058f64b2fc5550159372a12a32f3ca02d1bcebcd713ef6936e41abf4",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.professional_testimonials",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "GP, Sports & Lifestyle Medicine",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203251815711101",
+        "via": "custom.professional_testimonials",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/564998570365",
+        "to_type": "professional_testimonial",
+        "to_handle": "dr-kris-sienaert"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/564998570365",
+      "type": "professional_testimonial",
+      "handle": "dr-kris-sienaert"
+     },
+     "field": {
+      "key": "designation",
+      "en_sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+      "en_digest": "5af7ecd716f2662bd9e57a7827cf4f3f9d52fcbe9139234b806d93efaf2539c0"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        31
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#10"
+       ],
+       "en": "GP, Sports & Lifestyle Medicine",
+       "value": "Huisarts, sport- en leefstijlgeneeskunde",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Huisarts, sport- en leefstijlgeneeskunde",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "1ed64738058f64b2fc5550159372a12a32f3ca02d1bcebcd713ef6936e41abf4",
+     "current": {
+      "present": true,
+      "value": "Voormalig huisarts, leefstijlgeneeskunde",
+      "outdated": true
+     }
+    }
+   },
+   "gid://shopify/Metaobject/564940013949|description": {
+    "proposal_hash": "23c32bbf88c881b1560af2d7d547cb7b569cc6663618e386640628ca92049f4b",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.product_faq",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Run your tongue over your teeth. That faint fuzz is your before.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Awake\",\"bold\":true},{\"type\":\"text\",\"value\":\": bright peppermint and lime, guarana underneath. A velvety foam, nothing stings, nothing goes dry. Spit, don’t rinse. Tongue again: every tooth a smooth, glassy edge.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Asleep\",\"bold\":true},{\"type\":\"text\",\"value\":\": warm orange and cassia cinnamon, valerian in the background, mint-free on purpose. Spit and leave it on. Smooth, with a fine, even coat, as if the day had been closed.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Two seconds, twice a day, and you know.\"}]}]}",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200051379077501",
+        "via": "custom.product_faq",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/564940013949",
+        "to_type": "product_faq_items",
+        "to_handle": "taste-feel"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/564940013949",
+      "type": "product_faq_items",
+      "handle": "taste-feel"
+     },
+     "field": {
+      "key": "description",
+      "en_sha1": "ebffde27942ff6154719ba2f9e6dfe68fa0c16a9",
+      "en_digest": "4c3dd03566cc35cdbfa3833d8d2a4f297a00fe52d17cecffcb8936024fd17ae7"
+     },
+     "spans": [
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#45"
+       ],
+       "en": "Run your tongue over your teeth. That faint fuzz is your before.",
+       "value": "Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        1,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112"
+       ],
+       "en": "Awake",
+       "value": "Awake",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        1,
+        "children",
+        1,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#48"
+       ],
+       "en": ": bright peppermint and lime, guarana underneath. A velvety foam, nothing stings, nothing goes dry. Spit, don’t rinse. Tongue again: every tooth a smooth, glassy edge.",
+       "value": ": frisse pepermunt en limoen, met een activerende ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        2,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113"
+       ],
+       "en": "Asleep",
+       "value": "Asleep",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        2,
+        "children",
+        1,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#50"
+       ],
+       "en": ": warm orange and cassia cinnamon, valerian in the background, mint-free on purpose. Spit and leave it on. Smooth, with a fine, even coat, as if the day had been closed.",
+       "value": ": warme sinaasappel en cassiakaneel, met een rustgevende ondertoon van valeriaan, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        3,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#54"
+       ],
+       "en": "Two seconds, twice a day, and you know.",
+       "value": "Twee seconden, twee keer per dag, en je weet het.",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "{\"type\": \"root\", \"children\": [{\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt.\"}]}, {\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Awake\", \"bold\": true}, {\"type\": \"text\", \"value\": \": frisse pepermunt en limoen, met een activerende ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas.\"}]}, {\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Asleep\", \"bold\": true}, {\"type\": \"text\", \"value\": \": warme sinaasappel en cassiakaneel, met een rustgevende ondertoon van valeriaan, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten.\"}]}, {\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Twee seconden, twee keer per dag, en je weet het.\"}]}]}",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "23c32bbf88c881b1560af2d7d547cb7b569cc6663618e386640628ca92049f4b",
+     "current": {
+      "present": true,
+      "value": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Voor je begint\",\"bold\":true},{\"type\":\"text\",\"value\":\".  \\n\"},{\"type\":\"text\",\"value\":\"Glijd met je tong over je tanden:\",\"italic\":true},{\"type\":\"text\",\"value\":\" een licht, ruw laagje 's ochtends, 's avonds de koffie en het gepraat van de dag. Oordeel er niet over — dat is je ‘vóór’.\\n\\n\"},{\"type\":\"text\",\"value\":\"Awake:\",\"bold\":true},{\"type\":\"text\",\"value\":\" frisse pepermunt en limoen, met guarana eronder — een fluweelzacht schuim, gemaakt met glycolipiden uit fermentatie, zodat niets prikt en niets uitdroogt. Spugen, niet spoelen. Nog eens met je tong: het ruwe laagje is weg, elke tand een gladde rand, als glas.\\n\\n\"},{\"type\":\"text\",\"value\":\"Asleep:\",\"bold\":true},{\"type\":\"text\",\"value\":\" warme sinaasappel en cassiakaneel, valeriaan op de achtergrond, bewust zonder munt. Spugen en laten zitten.  \"},{\"type\":\"text\",\"value\":\"Tong over je tanden:\",\"italic\":true},{\"type\":\"text\",\"value\":\" glad, met een fijn, egaal laagje — alsof de dag werd afgesloten.\\n\\n\"},{\"type\":\"text\",\"value\":\"De eerste week:\",\"bold\":true},{\"type\":\"text\",\"value\":\" het fluweelzachte schuim en het leave-on-gevoel vallen mensen als eerste op. Bij de vijfde poetsbeurt is het de gladheid. Twee seconden, twee keer per dag, en je weet het.\"}]}]}",
+      "outdated": true
+     }
+    }
    }
   },
   "fr": {
@@ -16094,6 +16298,210 @@
      "current": {
       "present": true,
       "value": "<div class=\"bf-body\">\n<div class=\"rda-data\">\n<table class=\"rda-tbl\">\n<thead><tr><th>Formule</th><th>RDA</th><th>Sécurité · ISO 11609</th></tr></thead>\n<tbody>\n<tr><td><b>Awake</b> · matin</td><td class=\"num\">93,25</td><td><span class=\"rda-ok\">✓</span> 63 % sous la limite</td></tr>\n<tr><td><b>Asleep</b> · soir</td><td class=\"num\">72,32</td><td><span class=\"rda-ok\">✓</span> 71 % sous la limite</td></tr>\n<tr class=\"rda-limit-row\"><td>Limite ISO 11609</td><td class=\"num\">250</td><td>Maximum autorisé</td></tr>\n</tbody>\n</table>\n<div class=\"bf-charcoal-note\">\n    <div class=\"bf-charcoal-icon\">\n      <span>i</span>\n    </div>\n\n    <div class=\"bf-charcoal-text\">\n      <strong>Charbon actif, uniquement dans Asleep.</strong>\n      Qualité pharmaceutique (Ph. Eur. “Charcoal, Activated”), activé à la vapeur à partir d’une matière première 100 % naturelle et renouvelable. Granulométrie D50 20 µm (D10 4 · D90 60 µm), surface BET ≈ 1 700 m²/g. Il est dans la formule pour l’adsorption, pas pour l’abrasion : avec un RDA de 72, Asleep est la plus douce des deux — ce n’est pas une pâte blanchissante au charbon.\n    </div>\n  </div>\n<div class=\"acc-tags acc-tags-under\">\n<span class=\"acc-tag is-spec\">nHAp &lt;100 nm · en bâtonnets, selon le SCCS</span>\n<span class=\"acc-tag is-spec\">Abrasivité faible à moyenne</span>\n<span class=\"acc-tag is-spec\">Sans fluor</span>\n<span class=\"acc-tag is-spec\">Blanchiment minéral</span>\n<span class=\"acc-tag is-spec\">Sûr en leave-on</span>\n<span class=\"acc-tag is-spec\">Sans danger en cas d’ingestion</span>\n<span class=\"acc-tag is-spec\">Notifié au CPNP (UE)</span>\n</div>\n<p class=\"rda-practice\"><a class=\"rda-link\" data-scroll=\".founder-quote\" href=\"#\">Demandez le dossier scientifique, des supports prêts pour vos patients, des échantillons professionnels et la documentation technique →</a></p>\n</div>",
+      "outdated": true
+     }
+    }
+   },
+   "gid://shopify/Metaobject/564998570365|designation": {
+    "proposal_hash": "16d9588fc456358de03826e3a5e9761246535039652f6c6efd7e14999adfe1eb",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.professional_testimonials",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "GP, Sports & Lifestyle Medicine",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203251815711101",
+        "via": "custom.professional_testimonials",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/564998570365",
+        "to_type": "professional_testimonial",
+        "to_handle": "dr-kris-sienaert"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/564998570365",
+      "type": "professional_testimonial",
+      "handle": "dr-kris-sienaert"
+     },
+     "field": {
+      "key": "designation",
+      "en_sha1": "6d0ee676300fe86fc0bde541b21dfe270b7ae6e2",
+      "en_digest": "5af7ecd716f2662bd9e57a7827cf4f3f9d52fcbe9139234b806d93efaf2539c0"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        31
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#10"
+       ],
+       "en": "GP, Sports & Lifestyle Medicine",
+       "value": "Médecin généraliste, médecine du sport et du mode de vie",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Médecin généraliste, médecine du sport et du mode de vie",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "16d9588fc456358de03826e3a5e9761246535039652f6c6efd7e14999adfe1eb",
+     "current": {
+      "present": true,
+      "value": "Ex-médecin généraliste, médecine du mode de vie",
+      "outdated": true
+     }
+    }
+   },
+   "gid://shopify/Metaobject/564940013949|description": {
+    "proposal_hash": "fa8ef40da4562354fa774abd8ebc1c2eb07b068b7cd3ba8c9e9525829e71b0b8",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.product_faq",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Run your tongue over your teeth. That faint fuzz is your before.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Awake\",\"bold\":true},{\"type\":\"text\",\"value\":\": bright peppermint and lime, guarana underneath. A velvety foam, nothing stings, nothing goes dry. Spit, don’t rinse. Tongue again: every tooth a smooth, glassy edge.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Asleep\",\"bold\":true},{\"type\":\"text\",\"value\":\": warm orange and cassia cinnamon, valerian in the background, mint-free on purpose. Spit and leave it on. Smooth, with a fine, even coat, as if the day had been closed.\"}]},{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Two seconds, twice a day, and you know.\"}]}]}",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200051379077501",
+        "via": "custom.product_faq",
+        "type": "list.metaobject_reference",
+        "to": "gid://shopify/Metaobject/564940013949",
+        "to_type": "product_faq_items",
+        "to_handle": "taste-feel"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/564940013949",
+      "type": "product_faq_items",
+      "handle": "taste-feel"
+     },
+     "field": {
+      "key": "description",
+      "en_sha1": "ebffde27942ff6154719ba2f9e6dfe68fa0c16a9",
+      "en_digest": "4c3dd03566cc35cdbfa3833d8d2a4f297a00fe52d17cecffcb8936024fd17ae7"
+     },
+     "spans": [
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#45"
+       ],
+       "en": "Run your tongue over your teeth. That faint fuzz is your before.",
+       "value": "Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        1,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#112"
+       ],
+       "en": "Awake",
+       "value": "Awake",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        1,
+        "children",
+        1,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#48"
+       ],
+       "en": ": bright peppermint and lime, guarana underneath. A velvety foam, nothing stings, nothing goes dry. Spit, don’t rinse. Tongue again: every tooth a smooth, glassy edge.",
+       "value": " : menthe poivrée et citron vert éclatants, avec une note tonifiante de guarana. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        2,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#113"
+       ],
+       "en": "Asleep",
+       "value": "Asleep",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        2,
+        "children",
+        1,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#50"
+       ],
+       "en": ": warm orange and cassia cinnamon, valerian in the background, mint-free on purpose. Spit and leave it on. Smooth, with a fine, even coat, as if the day had been closed.",
+       "value": " : orange chaude et cannelle cassia, avec une note apaisante de valériane, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée.",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        3,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#54"
+       ],
+       "en": "Two seconds, twice a day, and you know.",
+       "value": "Deux secondes, deux fois par jour, et vous savez.",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "{\"type\": \"root\", \"children\": [{\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ.\"}]}, {\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Awake\", \"bold\": true}, {\"type\": \"text\", \"value\": \" : menthe poivrée et citron vert éclatants, avec une note tonifiante de guarana. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre.\"}]}, {\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Asleep\", \"bold\": true}, {\"type\": \"text\", \"value\": \" : orange chaude et cannelle cassia, avec une note apaisante de valériane, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée.\"}]}, {\"type\": \"paragraph\", \"children\": [{\"type\": \"text\", \"value\": \"Deux secondes, deux fois par jour, et vous savez.\"}]}]}",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "fa8ef40da4562354fa774abd8ebc1c2eb07b068b7cd3ba8c9e9525829e71b0b8",
+     "current": {
+      "present": true,
+      "value": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Avant de commencer\",\"bold\":true},{\"type\":\"text\",\"value\":\".  \\n\"},{\"type\":\"text\",\"value\":\"Passez la langue sur vos dents :\",\"italic\":true},{\"type\":\"text\",\"value\":\" un léger voile le matin, le café et les conversations de la journée le soir. Ne jugez pas — c’est votre \\\"avant\\\".\\n\\n\"},{\"type\":\"text\",\"value\":\"Awake:\",\"bold\":true},{\"type\":\"text\",\"value\":\" menthe poivrée et citron vert éclatants, guarana en fond — une mousse veloutée, à base de glycolipides issus de la fermentation : rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : le voile a disparu, chaque dent est lisse comme du verre.\\n\\n\"},{\"type\":\"text\",\"value\":\"Asleep:\",\"bold\":true},{\"type\":\"text\",\"value\":\" orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir.  \"},{\"type\":\"text\",\"value\":\"La langue sur les dents :\",\"italic\":true},{\"type\":\"text\",\"value\":\" lisse, avec un voile fin et régulier — comme si la journée avait été refermée.\\n\\n\"},{\"type\":\"text\",\"value\":\"La première semaine :\",\"bold\":true},{\"type\":\"text\",\"value\":\" la mousse veloutée et la sensation leave-on sont ce que l’on remarque d’abord. Dès le cinquième brossage, c’est la douceur. Deux secondes, deux fois par jour, et vous savez.\"}]}]}",
       "outdated": true
      }
     }
