@@ -2364,6 +2364,7 @@ function updatePriceInParentElementsLoop({ productId }) {
 /* ============================================================
    KC CUSTOM FUNCTIONS
    - kcPlanPrice                        : what the checkout charges for a plan
+   - kcLabelText                        : a kc.receipt.* text in the page language
    - updateSubscriptionGroupCardSubRow  : Plan card sub-row
    - updateKcPricingSummary             : "Total today" summary box
    ============================================================ */
@@ -2404,6 +2405,16 @@ function kcCardAllocation(productId, variant, groupId) {
 }
 
 /**
+ * KC: a text in the page language. The kc.receipt.* keys are data attributes on .kc-pricing-summary
+ * (snippets/kc-receipt-labels.liquid); [count] and [price] are filled from values. English where the
+ * element or the attribute is missing. Shared by the plan cards and the receipt.
+ */
+function kcLabelText(labelsEl, key, english, values = {}) {
+    return String((key && labelsEl?.dataset?.[key]) || english)
+        .replace(/\[(count|price)\]/g, (match, name) => (name in values ? values[name] : match));
+}
+
+/**
  * Plan card sub-row (dynamic, per variant selection)
  * LEFT  (.loop-subscription-group-text):          "£0.43 / brushing · ships every 60 days"
  * RIGHT (.loop-subscription-group-price-container): "/ 60 days"
@@ -2414,6 +2425,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
     if (!loopContainer) return;
 
     const dayMap = { day: 1, week: 7, month: 30, year: 365 };
+    // KC: the cards' own labels in the page language, from the receipt's data attributes
+    const labelsEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
 
     loopContainer.querySelectorAll('.loop-subscription-group').forEach((groupEl) => {
         const radio = groupEl.querySelector('.loop-subscription-group-radio');
@@ -2448,8 +2461,10 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const perBrushingCents = Math.round(kcPlanPrice(alloc) / totalBrushings);
         const perBrushingFormatted = loopFormatMoney(perBrushingCents, true);
 
-        // 4. Right-side short label: "/ year" or "/ 60 days"
-        const rightLabel = isAnnual ? '/ year' : `/ ${billingDays} days`;
+        // 4. Right-side short label: "/ year" or "/ 60 days" (kc.receipt.per_year, kc.receipt.per_days)
+        const rightLabel = isAnnual
+            ? kcLabelText(labelsEl, 'kcPerYear', '/ year')
+            : kcLabelText(labelsEl, 'kcPerDays', '/ [count] days', { count: billingDays });
 
         // LEFT: inject/update .kc-plan-subrow inside .loop-subscription-group-text (below plan name)
         const textContainer = groupEl.querySelector('.loop-subscription-group-text');
@@ -2460,12 +2475,16 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 subRow.className = 'kc-plan-subrow';
                 textContainer.appendChild(subRow);
             }
+            // English option text only: Loop's Dutch and French option texts have no "ships"
             let formattedOptionText = optionText.replace(/ships/i, 'Renews');
-            const perBrushingLine = `${perBrushingFormatted} / brushing`;
+            // kc.receipt.per_brushing
+            const perBrushingLine = kcLabelText(labelsEl, 'kcPerBrushing', '[price] / brushing', {
+                price: perBrushingFormatted,
+            });
             if (isAnnual) {
                 // Figma: "Renews every year" / "€0.49 / brushing" (Victor 16 Oct: without the
-                // Figma "· 6 duos in two deliveries")
-                formattedOptionText = 'Renews every year';
+                // Figma "· 6 duos in two deliveries"). kc.receipt.renews_year
+                formattedOptionText = kcLabelText(labelsEl, 'kcRenewsYear', 'Renews every year');
             }
             subRow.innerHTML = formattedOptionText
                 ? `<div>${formattedOptionText}</div> <div>${perBrushingLine}</div>`
@@ -2589,9 +2608,7 @@ function updateKcPricingSummary(productId, variant) {
     // KC: the receipt's texts in the page language: kc.receipt.* keys as data attributes on the
     // summary (snippets/kc-receipt-labels.liquid), [count] and [price] filled here. English where an
     // attribute is missing.
-    const kcReceiptText = (key, english, values = {}) =>
-        String((key && summaryEl.dataset[key]) || english)
-            .replace(/\[(count|price)\]/g, (match, name) => (name in values ? values[name] : match));
+    const kcReceiptText = (key, english, values) => kcLabelText(summaryEl, key, english, values);
 
     // Build billing interval label (e.g. "billed every 8 weeks", "billed yearly")
     let intervalLabel = '';
