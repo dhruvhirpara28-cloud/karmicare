@@ -36,14 +36,14 @@ Victor's choices for the NL on 13 Nov (via the other source-copy chat): *Spugen*
 - The alternative B was *verfrissende* / *verzachtende ondertoon*. Victor chose A knowingly: *activerend* follows the approved hero line "Awake activeert".
 - The NL is final.
 
-Still open: **FR**, Victor's OK on the whole Taste & feel. The FR mirrors A: *une note tonifiante de guarana* and *une note apaisante de valériane* (no *vive*, which reads as "living", like *levendig*).
+**FR: Victor's OK on the whole Taste & feel, 14 Nov** ("ja voor beide nl en fr"). The FR mirrors A: *une note tonifiante de guarana* and *une note apaisante de valériane* (no *vive*, which reads as "living", like *levendig*).
 
 | | Opening | Awake | Asleep | Close |
 |---|---|---|---|---|
 | NL | Glijd met je tong over je tanden. Dat lichte, ruwe laagje is je startpunt. | frisse pepermunt en limoen, met een activerende ondertoon van guarana. Een fluweelzacht schuim, niets prikt, niets droogt uit. Spugen, niet spoelen. Nog eens met je tong: elke tand een gladde rand, als glas. | warme sinaasappel en cassiakaneel, met een rustgevende ondertoon van valeriaan, bewust zonder munt. Spugen en laten zitten. Glad, met een fijn, egaal laagje, alsof de dag werd afgesloten. | Twee seconden, twee keer per dag, en je weet het. |
-| FR (draft) | Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ. | menthe poivrée et citron vert éclatants, avec une note tonifiante de guarana. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre. | orange chaude et cannelle cassia, avec une note apaisante de valériane, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée. | Deux secondes, deux fois par jour, et vous savez. |
+| FR | Passez la langue sur vos dents. Ce léger voile, c’est votre point de départ. | menthe poivrée et citron vert éclatants, avec une note tonifiante de guarana. Une mousse veloutée, rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : chaque dent est lisse comme du verre. | orange chaude et cannelle cassia, avec une note apaisante de valériane, volontairement sans menthe. Crachez et laissez agir. Lisse, avec un voile fin et régulier, comme si la journée avait été refermée. | Deux secondes, deux fois par jour, et vous savez. |
 
-The Taste & feel field binding is added per language: NL from the next dry run's proposal, FR only after Victor's OK. Until then the field is proposed and never written.
+The Taste & feel field binding (NL and FR) is added from the next dry run's proposal, after review. Until then the field is proposed and never written.
 
 ## Dry run of 13 Nov 15:05 and the follow-up
 
