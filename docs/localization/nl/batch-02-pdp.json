@@ -2,15 +2,15 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "c5de6bd50f3626144da00cace83d8eb2503b28d2",
+ "source_digest": "1f2348a17debfbc0cc32487923b861a239387b0d",
  "source_entries": 543,
  "counts": {
   "translated": 174,
   "pending-claim-review": 24,
-  "held": 57,
+  "held": 58,
   "dawn-nl": 15,
   "theme-key": 31,
-  "admin": 242
+  "admin": 241
  },
  "fit_risk": [
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
@@ -6048,14 +6048,15 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.mission_card#02",
-   "en": "Strengthen your teeth.",
-   "en_sha1": "2fef464f2dd9ae8177d141172ab8e371c9a59b47",
-   "nl": "Versterk je tanden.",
+   "en": "Strengthen your teeth. Strengthen yourself.",
+   "en_sha1": "a9a5372453148200671401e0d2b4ff1a4d6393db",
+   "nl": "Versterk je tanden. Versterk jezelf.",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "Brand promise (binding)."
+   "notes": "Brand promise (binding).; 15 Nov: whole tagline in one row; NL as Victor wrote it 15 Nov",
+   "old_nl": "Versterk je tanden."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#03",
@@ -6064,12 +6065,10 @@
    "key_path": "custom.mission_card#03",
    "en": "Strengthen yourself.",
    "en_sha1": "0310c6d52680845d4ba55b7fdb746e0e5ad95844",
-   "nl": "Versterk jezelf.",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #02); was admin: Versterk jezelf."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#04",

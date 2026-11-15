@@ -38,7 +38,7 @@
   },
   "batch-02-pdp": {
    "entries": 543,
-   "digest": "c5de6bd50f3626144da00cace83d8eb2503b28d2"
+   "digest": "1f2348a17debfbc0cc32487923b861a239387b0d"
   },
   "batch-03-header-footer": {
    "entries": 48,
@@ -10584,11 +10584,13 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.mission_card#02",
-   "en": "Strengthen your teeth.",
-   "sha1": "2fef464f2dd9ae8177d141172ab8e371c9a59b47",
+   "en": "Strengthen your teeth. Strengthen yourself.",
+   "sha1": "a9a5372453148200671401e0d2b4ff1a4d6393db",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: joined with #03, the mission card's highlight_text holds the whole line in one bold run (field route: split sentence)",
+   "old_en": "Strengthen your teeth.",
+   "old_sha1": "2fef464f2dd9ae8177d141172ab8e371c9a59b47"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#03",
@@ -10601,7 +10603,8 @@
    "sha1": "0310c6d52680845d4ba55b7fdb746e0e5ad95844",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #02, the mission card's highlight_text holds the whole line in one bold run (field route: split sentence); was 'Strengthen yourself.'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#04",
