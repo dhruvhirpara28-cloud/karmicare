@@ -1,12 +1,12 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "cfdd99c3044d",
+  "en-source.json": "9d63943a3194",
   "registered.json": "c0fc5d8bf7c2",
   "holds.json": "d0d575c65dd8",
   "releases.json": "1571d1e3719b",
   "fr/batch-01-homepage.json": "60fc231ea491",
-  "fr/batch-02-pdp.json": "d7edfda6c087",
+  "fr/batch-02-pdp.json": "aa7ca84dfe11",
   "fr/batch-03-header-footer.json": "91a25a38e027",
   "fr/batch-04-legal.json": "e48e5cb67caa",
   "fr/batch-05-products.json": "74b6cc09446e",
@@ -16,7 +16,7 @@
  },
  "batches": {
   "batch-01-homepage": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94",
-  "batch-02-pdp": "c5de6bd50f3626144da00cace83d8eb2503b28d2",
+  "batch-02-pdp": "1f2348a17debfbc0cc32487923b861a239387b0d",
   "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
   "batch-05-products": "78d85b206273a06783ba5531a6bbdfd56f5c9ba9",
@@ -11066,25 +11066,9 @@
      "kind": "match",
      "key": null,
      "field": "custom.mission_card#02",
-     "en": "Strengthen your teeth.",
-     "en_sha1": "2fef464f2dd9ae8177d141172ab8e371c9a59b47",
-     "value": "Renforcez vos dents.",
-     "gates": [],
-     "hold": [],
-     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     }
-    },
-    {
-     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#03",
-     "kind": "match",
-     "key": null,
-     "field": "custom.mission_card#03",
-     "en": "Strengthen yourself.",
-     "en_sha1": "0310c6d52680845d4ba55b7fdb746e0e5ad95844",
-     "value": "Renforcez-vous.",
+     "en": "Strengthen your teeth. Strengthen yourself.",
+     "en_sha1": "a9a5372453148200671401e0d2b4ff1a4d6393db",
+     "value": "Renforcez vos dents. Renforcez-vous.",
      "gates": [],
      "hold": [],
      "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",

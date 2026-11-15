@@ -2,17 +2,17 @@
  "batch": "batch-02-pdp",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "c5de6bd50f3626144da00cace83d8eb2503b28d2",
+ "source_digest": "1f2348a17debfbc0cc32487923b861a239387b0d",
  "source_entries": 543,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "translated": 177,
-  "held": 57,
+  "held": 58,
   "locale-present": 15,
   "theme-key": 31,
-  "admin": 263
+  "admin": 262
  },
  "flag_counts": {
   "wording-adapted": 14,
@@ -6244,13 +6244,14 @@
    "resource_type": "metaobject",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.mission_card#02",
-   "en": "Strengthen your teeth.",
-   "en_sha1": "2fef464f2dd9ae8177d141172ab8e371c9a59b47",
-   "fr": "Renforcez vos dents.",
+   "en": "Strengthen your teeth. Strengthen yourself.",
+   "en_sha1": "a9a5372453148200671401e0d2b4ff1a4d6393db",
+   "fr": "Renforcez vos dents. Renforcez-vous.",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "15 Nov: whole tagline in one row, the two registered FR rows joined",
+   "source_status": "admin-held",
+   "old_fr": "Renforcez vos dents."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#03",
@@ -6259,10 +6260,10 @@
    "key_path": "custom.mission_card#03",
    "en": "Strengthen yourself.",
    "en_sha1": "0310c6d52680845d4ba55b7fdb746e0e5ad95844",
-   "fr": "Renforcez-vous.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #02); was admin: Renforcez-vous.",
    "source_status": "admin-held"
   },
   {
