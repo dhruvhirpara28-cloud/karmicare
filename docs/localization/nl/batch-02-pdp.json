@@ -2,15 +2,15 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "1f2348a17debfbc0cc32487923b861a239387b0d",
+ "source_digest": "eabb2d7dd97c7cf2f873d1a3c8a687dd04897bb8",
  "source_entries": 543,
  "counts": {
   "translated": 174,
   "pending-claim-review": 24,
-  "held": 58,
+  "held": 85,
   "dawn-nl": 15,
   "theme-key": 31,
-  "admin": 241
+  "admin": 214
  },
  "fit_risk": [
   "product.subscription-item:main/loop_subscriptions_WEk4XJ/welcome_kit_title",
@@ -30,11 +30,11 @@
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#32",
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#55",
   "admin:karmicare-biorhythmic-oral-care-system:custom.product_faq#96",
-  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#13",
-  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#18",
-  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#23",
-  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#29",
-  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#34",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#10",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#15",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#20",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#25",
+  "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#30",
   "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#03",
   "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#11",
   "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table|shop.metaobjects.compare_value#14",
@@ -5368,14 +5368,15 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#06",
-   "en": "Compare",
-   "en_sha1": "8d105cf44d3926289e65c1c83d8e37cb23fd049e",
-   "nl": "Vergelijk",
+   "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+   "en_sha1": "f4444d8ba5c509c39a03f02a546c470b546d4057",
+   "nl": "Vergelijk | logo | Gewoon poetsen | Supplementen | Huidverzorging",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": ""
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "old_nl": "Vergelijk"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#07",
@@ -5384,12 +5385,10 @@
    "key_path": "custom.comparison_section#07",
    "en": "Regular brushing",
    "en_sha1": "bef5351fdae01ebdb12e6ffa2e6b1e39b00d4557",
-   "nl": "Gewoon poetsen",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #06); was admin: Gewoon poetsen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#08",
@@ -5398,12 +5397,10 @@
    "key_path": "custom.comparison_section#08",
    "en": "Daily supplements",
    "en_sha1": "4d9da320fcaf8bd429a1e466bc4391e5b84fce6e",
-   "nl": "Supplementen",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "Approved table header (Figma NL)."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "Approved table header (Figma NL).; 15 Nov: source row retired (joined into #06); was admin: Supplementen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#09",
@@ -5412,26 +5409,26 @@
    "key_path": "custom.comparison_section#09",
    "en": "Skincare routine",
    "en_sha1": "23f7f5c3aba62df6702d16adc21f9618f198fd92",
-   "nl": "Huidverzorging",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "Approved table header (Figma NL)."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "Approved table header (Figma NL).; 15 Nov: source row retired (joined into #06); was admin: Huidverzorging"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#10",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#10",
-   "en": "It’s timed to your biology",
-   "en_sha1": "57480b439eae842ea04e0db7d0d98181c75b1b1e",
-   "nl": "Afgestemd op je biologie",
+   "en": "It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention",
+   "en_sha1": "f43ff774e8629442ead447ae1bc25168b7a73c6f",
+   "nl": "Afgestemd op je biologie | De eigen 24-uurscyclus van je mond | Dezelfde formule, elk uur | Eén dosis voor iedereen | AM/PM uit gewoonte",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": ""
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "old_nl": "Afgestemd op je biologie"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#11",
@@ -5440,12 +5437,10 @@
    "key_path": "custom.comparison_section#11",
    "en": "Your mouth’s own 24-hour cycle",
    "en_sha1": "4888babccc5059f974a878551f09250d0d369075",
-   "nl": "De eigen 24-uurscyclus van je mond",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #10); was admin: De eigen 24-uurscyclus van je mond"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#12",
@@ -5454,12 +5449,10 @@
    "key_path": "custom.comparison_section#12",
    "en": "Same formula, any hour",
    "en_sha1": "f981e4dc00e086ed85f3f51defd5baabe3fcddda",
-   "nl": "Dezelfde formule, elk uur",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Zelfde formule, elk uur"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Zelfde formule, elk uur; 15 Nov: source row retired (joined into #10); was admin: Dezelfde formule, elk uur"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#13",
@@ -5468,13 +5461,10 @@
    "key_path": "custom.comparison_section#13",
    "en": "One dose fits all",
    "en_sha1": "b129c6677618bb20e50746c6c40e39c87fe8cfe1",
-   "nl": "Eén dosis voor iedereen",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "fit-risk"
-   ],
-   "notes": "17 → 23 chars."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "17 → 23 chars.; 15 Nov: source row retired (joined into #10); was admin: Eén dosis voor iedereen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#14",
@@ -5483,27 +5473,27 @@
    "key_path": "custom.comparison_section#14",
    "en": "AM/PM by convention",
    "en_sha1": "e592fd3c124e53276515d648b6505a7faac76a36",
-   "nl": "AM/PM uit gewoonte",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #10); was admin: AM/PM uit gewoonte"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#15",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#15",
-   "en": "You feel it straight away",
-   "en_sha1": "cdcdf58b773c890ea8dbc14b865bb4867ef2ff00",
-   "nl": "Je voelt het meteen",
+   "en": "You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel",
+   "en_sha1": "9ceac39aa000e5522bd1288180f09d2661883414",
+   "nl": "Je voelt het meteen | Guarana overdag, valeriaan ’s nachts | Munt, en dan niets | Weken voor je iets merkt | Niets te voelen",
    "status": "pending-claim-review",
    "flags": [
     "admin",
+    "fit-risk",
     "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "15 Nov: whole table row, the registered cells joined; carries the claim review of #15",
+   "old_nl": "Je voelt het meteen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#16",
@@ -5512,12 +5502,10 @@
    "key_path": "custom.comparison_section#16",
    "en": "Guarana by day, valerian by night",
    "en_sha1": "92faa350dcc22dc09cee7ed541d7e07bf5f5b8af",
-   "nl": "Guarana overdag, valeriaan ’s nachts",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Guarana overdag, valeriaan 's nachts"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Guarana overdag, valeriaan 's nachts; 15 Nov: source row retired (joined into #15); was admin: Guarana overdag, valeriaan ’s nachts"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#17",
@@ -5526,12 +5514,10 @@
    "key_path": "custom.comparison_section#17",
    "en": "Mint, then nothing",
    "en_sha1": "b40d12a7688a08ca48c637cd63dee746f0582d0f",
-   "nl": "Munt, en dan niets",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #15); was admin: Munt, en dan niets"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#18",
@@ -5540,13 +5526,10 @@
    "key_path": "custom.comparison_section#18",
    "en": "Weeks to notice",
    "en_sha1": "85ad3d08431c6e3ef6bf889b859a794359a4896d",
-   "nl": "Weken voor je iets merkt",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "fit-risk"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Merkbaar na weken; Comparison-table cell, 15 → 24 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Merkbaar na weken; Comparison-table cell, 15 → 24 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7); 15 Nov: source row retired (joined into #15); was admin: Weken voor je iets merkt"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#19",
@@ -5555,26 +5538,27 @@
    "key_path": "custom.comparison_section#19",
    "en": "Nothing to feel",
    "en_sha1": "7c3112e1d1c569d2a2b56e75fe9cb181493e179d",
-   "nl": "Niets te voelen",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #15); was admin: Niets te voelen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#20",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#20",
-   "en": "It reaches past your teeth",
-   "en_sha1": "87e4f0ae8774d5c8b3a365dfca58bbc117347526",
-   "nl": "Het reikt verder dan je tanden",
-   "status": "admin",
+   "en": "It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin",
+   "en_sha1": "53391e552d24db5949e967f3abea82c614222802",
+   "nl": "Het reikt verder dan je tanden | Mond-darm-brein, dieper dan glazuur | Alleen mechanische reiniging | Systemisch, niet in de mond | Stopt bij de huid",
+   "status": "pending-claim-review",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk",
+    "pending-claim-review"
    ],
-   "notes": ""
+   "notes": "15 Nov: whole table row, the registered cells joined; carries the claim review of #21",
+   "old_nl": "Het reikt verder dan je tanden"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#21",
@@ -5583,13 +5567,10 @@
    "key_path": "custom.comparison_section#21",
    "en": "Oral-gut-brain, deeper than enamel",
    "en_sha1": "c98fc6d2f47ad77cadcd796c9faa74342af37dbd",
-   "nl": "Mond-darm-brein, dieper dan glazuur",
-   "status": "pending-claim-review",
-   "flags": [
-    "admin",
-    "pending-claim-review"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Mond-darm-hersenen, dieper dan glazuur"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Mond-darm-hersenen, dieper dan glazuur; 15 Nov: source row retired (joined into #20); was pending-claim-review: Mond-darm-brein, dieper dan glazuur"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#22",
@@ -5598,12 +5579,10 @@
    "key_path": "custom.comparison_section#22",
    "en": "Mechanical cleaning only",
    "en_sha1": "7e45159d12dbee6ee0751a5c3926409362c4d9b1",
-   "nl": "Alleen mechanische reiniging",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #20); was admin: Alleen mechanische reiniging"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#23",
@@ -5612,13 +5591,10 @@
    "key_path": "custom.comparison_section#23",
    "en": "Systemic, not oral",
    "en_sha1": "42c091f7ec2e5212dfe9dedc87e74bb586bd6d75",
-   "nl": "Systemisch, niet in de mond",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "fit-risk"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systemisch, niet oraal; Comparison-table cell, 18 → 27 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7)"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Systemisch, niet oraal; Comparison-table cell, 18 → 27 chars; approved Figma NL (3738:27474), kept; visual QA decides whether the slot needs a layout change (R2, review F7); 15 Nov: source row retired (joined into #20); was admin: Systemisch, niet in de mond"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#24",
@@ -5627,26 +5603,26 @@
    "key_path": "custom.comparison_section#24",
    "en": "Stops at the skin",
    "en_sha1": "39fcd7daa5a955cbb896003f9a560d6097278df8",
-   "nl": "Stopt bij de huid",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #20); was admin: Stopt bij de huid"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#25",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#25",
-   "en": "It keeps working after you stop",
-   "en_sha1": "c3925ee8b4d4f02ad961206e7ceeb0ba21d74c8c",
-   "nl": "Het blijft werken nadat je stopt",
+   "en": "It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only",
+   "en_sha1": "b5089bf02b749e49b681f1f8a47d0dc6f56daa8d",
+   "nl": "Het blijft werken nadat je stopt | Leave-on. Niet naspoelen. Langere contacttijd. | In seconden weggespoeld | Niets lokaal | Alleen de huid",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Het werkt door als jij stopt"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Het werkt door als jij stopt; 15 Nov: whole table row, the registered cells joined",
+   "old_nl": "Het blijft werken nadat je stopt"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#26",
@@ -5655,12 +5631,10 @@
    "key_path": "custom.comparison_section#26",
    "en": "Leave-on. No rinse. Extended contact time.",
    "en_sha1": "cddee8363a6f12eba074d577d937e79b343bc802",
-   "nl": "Leave-on. Niet naspoelen. Langere contacttijd.",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #25); was admin: Leave-on. Niet naspoelen. Langere contacttijd."
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#27",
@@ -5669,12 +5643,10 @@
    "key_path": "custom.comparison_section#27",
    "en": "Rinsed away in seconds",
    "en_sha1": "160dd136a8d8d413ae507174d1aae6c58aa08c3f",
-   "nl": "In seconden weggespoeld",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #25); was admin: In seconden weggespoeld"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#28",
@@ -5683,12 +5655,10 @@
    "key_path": "custom.comparison_section#28",
    "en": "Nothing local",
    "en_sha1": "fe2f5555fc9fabcd36e1043ba02571886a3efec6",
-   "nl": "Niets lokaal",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #25); was admin: Niets lokaal"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#29",
@@ -5697,27 +5667,26 @@
    "key_path": "custom.comparison_section#29",
    "en": "Skin only",
    "en_sha1": "32e9f403cd4c39de61b30e576f3a96129bf7f91b",
-   "nl": "Alleen de huid",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "fit-risk"
-   ],
-   "notes": "9 → 14 chars; 'Alleen huid' (11) if the cell is tight."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "9 → 14 chars; 'Alleen huid' (11) if the cell is tight.; 15 Nov: source row retired (joined into #25); was admin: Alleen de huid"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#30",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#30",
-   "en": "It feeds, not just cleans",
-   "en_sha1": "928ef73adc433b3f3aee5e3567ca2ef915e69186",
-   "nl": "Het voedt, het reinigt niet alleen",
+   "en": "It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only",
+   "en_sha1": "4d2111d8625f11bcf0da8b4368eced026c96e0bc",
+   "nl": "Het voedt, het reinigt niet alleen | Eén pompje, mineralen en balans | Knijpen, gokken, wegspoelen | Niets bereikt je glazuur | Alleen oppervlaktevernieuwing",
    "status": "admin",
    "flags": [
-    "admin"
+    "admin",
+    "fit-risk"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Het voedt én reinigt"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Het voedt én reinigt; 15 Nov: whole table row, the registered cells joined",
+   "old_nl": "Het voedt, het reinigt niet alleen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#31",
@@ -5726,12 +5695,10 @@
    "key_path": "custom.comparison_section#31",
    "en": "One pump, minerals and balance",
    "en_sha1": "2d01f8b39a3bea1078165c35110dc1e79aeb5089",
-   "nl": "Eén pompje, mineralen en balans",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #30); was admin: Eén pompje, mineralen en balans"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#32",
@@ -5740,12 +5707,10 @@
    "key_path": "custom.comparison_section#32",
    "en": "Squeeze, guess, rinse away",
    "en_sha1": "88f660cc563d0e1cd3212bdea92e7cf4752ae3c0",
-   "nl": "Knijpen, gokken, wegspoelen",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #30); was admin: Knijpen, gokken, wegspoelen"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#33",
@@ -5754,12 +5719,10 @@
    "key_path": "custom.comparison_section#33",
    "en": "Nothing reaches enamel",
    "en_sha1": "25359742fb1372ce27162a1bbc98d0a623e788e2",
-   "nl": "Niets bereikt je glazuur",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Niets bereikt het glazuur"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Niets bereikt het glazuur; 15 Nov: source row retired (joined into #30); was admin: Niets bereikt je glazuur"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#34",
@@ -5768,27 +5731,25 @@
    "key_path": "custom.comparison_section#34",
    "en": "Surface renewal only",
    "en_sha1": "172d187fbfe5d877da8405832dee53e55c054213",
-   "nl": "Alleen oppervlaktevernieuwing",
-   "status": "admin",
-   "flags": [
-    "admin",
-    "fit-risk"
-   ],
-   "notes": "20 → 29 chars; the Dutch compound has no shorter form."
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "20 → 29 chars; the Dutch compound has no shorter form.; 15 Nov: source row retired (joined into #30); was admin: Alleen oppervlaktevernieuwing"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#35",
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#35",
-   "en": "The person it makes you",
-   "en_sha1": "2a2ee8c0cf928bd32584231fe13eac94f5489be5",
-   "nl": "Wie het van je maakt",
+   "en": "The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface",
+   "en_sha1": "508964d0834e22cfa854e1d5f526e33157d882a9",
+   "nl": "Wie het van je maakt | Iemand die voor zichzelf zorgt | Iemand die een vakje afvinkt | Iemand die het van plan is | Iemand die de buitenkant verzorgt",
    "status": "admin",
    "flags": [
     "admin"
    ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Wie je erdoor wordt"
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Wie je erdoor wordt; 15 Nov: whole table row, the registered cells joined",
+   "old_nl": "Wie het van je maakt"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#36",
@@ -5797,12 +5758,10 @@
    "key_path": "custom.comparison_section#36",
    "en": "Someone who tends to themselves",
    "en_sha1": "f4b7ec29b79de6ae074c423fd0a9db04d2a917c9",
-   "nl": "Iemand die voor zichzelf zorgt",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #35); was admin: Iemand die voor zichzelf zorgt"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#37",
@@ -5811,12 +5770,10 @@
    "key_path": "custom.comparison_section#37",
    "en": "Someone who ticks a box",
    "en_sha1": "d512606099baac70ffe458d9686b01e8b713f3d5",
-   "nl": "Iemand die een vakje afvinkt",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Iemand die iets afvinkt"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Iemand die iets afvinkt; 15 Nov: source row retired (joined into #35); was admin: Iemand die een vakje afvinkt"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#38",
@@ -5825,12 +5782,10 @@
    "key_path": "custom.comparison_section#38",
    "en": "Someone who means to",
    "en_sha1": "05b1e7a3f564b49d2e8d39a22f4d8f52b536e500",
-   "nl": "Iemand die het van plan is",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Iemand die het wel wil"
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "revised in assembly: approved NL from Figma 'Dutch offer 2.0 · NL' (3738:27474); translator had: Iemand die het wel wil; 15 Nov: source row retired (joined into #35); was admin: Iemand die het van plan is"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#39",
@@ -5839,12 +5794,10 @@
    "key_path": "custom.comparison_section#39",
    "en": "Someone who tends the surface",
    "en_sha1": "5a9d8af76ac30463e31106418dc348da691f036e",
-   "nl": "Iemand die de buitenkant verzorgt",
-   "status": "admin",
-   "flags": [
-    "admin"
-   ],
-   "notes": ""
+   "nl": "",
+   "status": "held",
+   "flags": [],
+   "notes": "15 Nov: source row retired (joined into #35); was admin: Iemand die de buitenkant verzorgt"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#01",

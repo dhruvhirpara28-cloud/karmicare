@@ -1,6 +1,6 @@
 {
  "batch": "batch-02-pdp",
- "digest": "1f2348a17debfbc0cc32487923b861a239387b0d",
+ "digest": "eabb2d7dd97c7cf2f873d1a3c8a687dd04897bb8",
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "captured": "2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259)",
  "entries": [
@@ -5988,11 +5988,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#06",
-   "en": "Compare",
-   "sha1": "8d105cf44d3926289e65c1c83d8e37cb23fd049e",
+   "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+   "sha1": "f4444d8ba5c509c39a03f02a546c470b546d4057",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
+   "old_en": "Compare",
+   "old_sha1": "8d105cf44d3926289e65c1c83d8e37cb23fd049e"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#07",
@@ -6005,7 +6007,8 @@
    "sha1": "bef5351fdae01ebdb12e6ffa2e6b1e39b00d4557",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #06, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Regular brushing'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#08",
@@ -6018,7 +6021,8 @@
    "sha1": "4d9da320fcaf8bd429a1e466bc4391e5b84fce6e",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #06, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Daily supplements'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#09",
@@ -6031,7 +6035,8 @@
    "sha1": "23f7f5c3aba62df6702d16adc21f9618f198fd92",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #06, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Skincare routine'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#10",
@@ -6040,11 +6045,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#10",
-   "en": "It’s timed to your biology",
-   "sha1": "57480b439eae842ea04e0db7d0d98181c75b1b1e",
+   "en": "It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention",
+   "sha1": "f43ff774e8629442ead447ae1bc25168b7a73c6f",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
+   "old_en": "It’s timed to your biology",
+   "old_sha1": "57480b439eae842ea04e0db7d0d98181c75b1b1e"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#11",
@@ -6057,7 +6064,8 @@
    "sha1": "4888babccc5059f974a878551f09250d0d369075",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #10, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Your mouth’s own 24-hour cycle'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#12",
@@ -6070,7 +6078,8 @@
    "sha1": "f981e4dc00e086ed85f3f51defd5baabe3fcddda",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #10, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Same formula, any hour'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#13",
@@ -6083,7 +6092,8 @@
    "sha1": "b129c6677618bb20e50746c6c40e39c87fe8cfe1",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #10, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'One dose fits all'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#14",
@@ -6096,7 +6106,8 @@
    "sha1": "e592fd3c124e53276515d648b6505a7faac76a36",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #10, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'AM/PM by convention'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#15",
@@ -6105,15 +6116,17 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#15",
-   "en": "You feel it straight away",
-   "sha1": "cdcdf58b773c890ea8dbc14b865bb4867ef2ff00",
+   "en": "You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel",
+   "sha1": "9ceac39aa000e5522bd1288180f09d2661883414",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C45: needs-review (CLAIMS-REVIEW.md)",
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); claims C45: needs-review (CLAIMS-REVIEW.md); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
    "claims": [
     "C45"
    ],
-   "claim_status": "needs-review"
+   "claim_status": "needs-review",
+   "old_en": "You feel it straight away",
+   "old_sha1": "cdcdf58b773c890ea8dbc14b865bb4867ef2ff00"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#16",
@@ -6126,7 +6139,8 @@
    "sha1": "92faa350dcc22dc09cee7ed541d7e07bf5f5b8af",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #15, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Guarana by day, valerian by night'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#17",
@@ -6139,7 +6153,8 @@
    "sha1": "b40d12a7688a08ca48c637cd63dee746f0582d0f",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #15, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Mint, then nothing'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#18",
@@ -6152,7 +6167,8 @@
    "sha1": "85ad3d08431c6e3ef6bf889b859a794359a4896d",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #15, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Weeks to notice'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#19",
@@ -6165,7 +6181,8 @@
    "sha1": "7c3112e1d1c569d2a2b56e75fe9cb181493e179d",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #15, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Nothing to feel'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#20",
@@ -6174,11 +6191,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#20",
-   "en": "It reaches past your teeth",
-   "sha1": "87e4f0ae8774d5c8b3a365dfca58bbc117347526",
+   "en": "It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin",
+   "sha1": "53391e552d24db5949e967f3abea82c614222802",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
+   "old_en": "It reaches past your teeth",
+   "old_sha1": "87e4f0ae8774d5c8b3a365dfca58bbc117347526"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#21",
@@ -6195,7 +6214,8 @@
    "claims": [
     "C42"
    ],
-   "claim_status": "needs-review"
+   "claim_status": "needs-review",
+   "retired": "retired 15 Nov: joined into #20, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Oral-gut-brain, deeper than enamel'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#22",
@@ -6208,7 +6228,8 @@
    "sha1": "7e45159d12dbee6ee0751a5c3926409362c4d9b1",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #20, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Mechanical cleaning only'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#23",
@@ -6221,7 +6242,8 @@
    "sha1": "42c091f7ec2e5212dfe9dedc87e74bb586bd6d75",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #20, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Systemic, not oral'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#24",
@@ -6234,7 +6256,8 @@
    "sha1": "39fcd7daa5a955cbb896003f9a560d6097278df8",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #20, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Stops at the skin'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#25",
@@ -6243,11 +6266,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#25",
-   "en": "It keeps working after you stop",
-   "sha1": "c3925ee8b4d4f02ad961206e7ceeb0ba21d74c8c",
+   "en": "It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only",
+   "sha1": "b5089bf02b749e49b681f1f8a47d0dc6f56daa8d",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
+   "old_en": "It keeps working after you stop",
+   "old_sha1": "c3925ee8b4d4f02ad961206e7ceeb0ba21d74c8c"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#26",
@@ -6260,7 +6285,8 @@
    "sha1": "cddee8363a6f12eba074d577d937e79b343bc802",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #25, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Leave-on. No rinse. Extended contact time.'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#27",
@@ -6273,7 +6299,8 @@
    "sha1": "160dd136a8d8d413ae507174d1aae6c58aa08c3f",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #25, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Rinsed away in seconds'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#28",
@@ -6286,7 +6313,8 @@
    "sha1": "fe2f5555fc9fabcd36e1043ba02571886a3efec6",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #25, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Nothing local'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#29",
@@ -6299,7 +6327,8 @@
    "sha1": "32e9f403cd4c39de61b30e576f3a96129bf7f91b",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #25, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Skin only'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#30",
@@ -6308,11 +6337,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#30",
-   "en": "It feeds, not just cleans",
-   "sha1": "928ef73adc433b3f3aee5e3567ca2ef915e69186",
+   "en": "It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only",
+   "sha1": "4d2111d8625f11bcf0da8b4368eced026c96e0bc",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
+   "old_en": "It feeds, not just cleans",
+   "old_sha1": "928ef73adc433b3f3aee5e3567ca2ef915e69186"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#31",
@@ -6325,7 +6356,8 @@
    "sha1": "2d01f8b39a3bea1078165c35110dc1e79aeb5089",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #30, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'One pump, minerals and balance'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#32",
@@ -6338,7 +6370,8 @@
    "sha1": "88f660cc563d0e1cd3212bdea92e7cf4752ae3c0",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #30, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Squeeze, guess, rinse away'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#33",
@@ -6351,7 +6384,8 @@
    "sha1": "25359742fb1372ce27162a1bbc98d0a623e788e2",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #30, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Nothing reaches enamel'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#34",
@@ -6364,7 +6398,8 @@
    "sha1": "172d187fbfe5d877da8405832dee53e55c054213",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #30, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Surface renewal only'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#35",
@@ -6373,11 +6408,13 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#35",
-   "en": "The person it makes you",
-   "sha1": "2a2ee8c0cf928bd32584231fe13eac94f5489be5",
+   "en": "The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface",
+   "sha1": "508964d0834e22cfa854e1d5f526e33157d882a9",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin); 15 Nov: one row per table row, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence)",
+   "old_en": "The person it makes you",
+   "old_sha1": "2a2ee8c0cf928bd32584231fe13eac94f5489be5"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#36",
@@ -6390,7 +6427,8 @@
    "sha1": "f4b7ec29b79de6ae074c423fd0a9db04d2a917c9",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #35, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Someone who tends to themselves'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#37",
@@ -6403,7 +6441,8 @@
    "sha1": "d512606099baac70ffe458d9686b01e8b713f3d5",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #35, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Someone who ticks a box'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#38",
@@ -6416,7 +6455,8 @@
    "sha1": "05b1e7a3f564b49d2e8d39a22f4d8f52b536e500",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #35, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Someone who means to'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#39",
@@ -6429,7 +6469,8 @@
    "sha1": "5a9d8af76ac30463e31106418dc348da691f036e",
    "status": "admin-held",
    "never_translate": false,
-   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)"
+   "notes": "captured 2026-10-19 19:15 CEST (karmicares.myshopify.com, live theme = 3bae259); live text segment (field structure lives in the admin)",
+   "retired": "retired 15 Nov: joined into #35, the compare table stores each table row as one text, cells joined by ' | ' (field route: split sentence); was 'Someone who tends the surface'"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.professional_testimonials#01",

@@ -2,17 +2,17 @@
  "batch": "batch-02-pdp",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "1f2348a17debfbc0cc32487923b861a239387b0d",
+ "source_digest": "eabb2d7dd97c7cf2f873d1a3c8a687dd04897bb8",
  "source_entries": 543,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
  "conventions": "Warm vous; French typography (U+00A0 before : ; ! ? € % » and after «, U+202F thousands, decimal comma, typographic apostrophe); Awake, Asleep, Care Credit, Return on Care, Leave-on, Karmicare stay English; plan names Rythme 60 jours, L'année Karmicare, Essayer une fois (proposed). See docs/localization/fr/REPORT.md.",
  "counts": {
   "translated": 177,
-  "held": 58,
+  "held": 85,
   "locale-present": 15,
   "theme-key": 31,
-  "admin": 262
+  "admin": 235
  },
  "flag_counts": {
   "wording-adapted": 14,
@@ -5578,13 +5578,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#06",
-   "en": "Compare",
-   "en_sha1": "8d105cf44d3926289e65c1c83d8e37cb23fd049e",
-   "fr": "Comparer",
+   "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+   "en_sha1": "f4444d8ba5c509c39a03f02a546c470b546d4057",
+   "fr": "Comparer | logo | Brossage classique | Compléments quotidiens | Soins de la peau",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "source_status": "admin-held",
+   "old_fr": "Comparer"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#07",
@@ -5593,10 +5594,10 @@
    "key_path": "custom.comparison_section#07",
    "en": "Regular brushing",
    "en_sha1": "bef5351fdae01ebdb12e6ffa2e6b1e39b00d4557",
-   "fr": "Brossage classique",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #06); was admin: Brossage classique",
    "source_status": "admin-held"
   },
   {
@@ -5606,10 +5607,10 @@
    "key_path": "custom.comparison_section#08",
    "en": "Daily supplements",
    "en_sha1": "4d9da320fcaf8bd429a1e466bc4391e5b84fce6e",
-   "fr": "Compléments quotidiens",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #06); was admin: Compléments quotidiens",
    "source_status": "admin-held"
   },
   {
@@ -5619,10 +5620,10 @@
    "key_path": "custom.comparison_section#09",
    "en": "Skincare routine",
    "en_sha1": "23f7f5c3aba62df6702d16adc21f9618f198fd92",
-   "fr": "Soins de la peau",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #06); was admin: Soins de la peau",
    "source_status": "admin-held"
   },
   {
@@ -5630,13 +5631,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#10",
-   "en": "It’s timed to your biology",
-   "en_sha1": "57480b439eae842ea04e0db7d0d98181c75b1b1e",
-   "fr": "Calé sur votre biologie",
+   "en": "It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention",
+   "en_sha1": "f43ff774e8629442ead447ae1bc25168b7a73c6f",
+   "fr": "Calé sur votre biologie | Le cycle de 24 heures propre à votre bouche | Même formule, à toute heure | Une seule dose pour tous | Matin/soir par convention",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "source_status": "admin-held",
+   "old_fr": "Calé sur votre biologie"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#11",
@@ -5645,10 +5647,10 @@
    "key_path": "custom.comparison_section#11",
    "en": "Your mouth’s own 24-hour cycle",
    "en_sha1": "4888babccc5059f974a878551f09250d0d369075",
-   "fr": "Le cycle de 24 heures propre à votre bouche",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #10); was admin: Le cycle de 24 heures propre à votre bouche",
    "source_status": "admin-held"
   },
   {
@@ -5658,10 +5660,10 @@
    "key_path": "custom.comparison_section#12",
    "en": "Same formula, any hour",
    "en_sha1": "f981e4dc00e086ed85f3f51defd5baabe3fcddda",
-   "fr": "Même formule, à toute heure",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #10); was admin: Même formule, à toute heure",
    "source_status": "admin-held"
   },
   {
@@ -5671,10 +5673,10 @@
    "key_path": "custom.comparison_section#13",
    "en": "One dose fits all",
    "en_sha1": "b129c6677618bb20e50746c6c40e39c87fe8cfe1",
-   "fr": "Une seule dose pour tous",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #10); was admin: Une seule dose pour tous",
    "source_status": "admin-held"
   },
   {
@@ -5684,10 +5686,10 @@
    "key_path": "custom.comparison_section#14",
    "en": "AM/PM by convention",
    "en_sha1": "e592fd3c124e53276515d648b6505a7faac76a36",
-   "fr": "Matin/soir par convention",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #10); was admin: Matin/soir par convention",
    "source_status": "admin-held"
   },
   {
@@ -5695,18 +5697,20 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#15",
-   "en": "You feel it straight away",
-   "en_sha1": "cdcdf58b773c890ea8dbc14b865bb4867ef2ff00",
-   "fr": "Vous le sentez tout de suite",
+   "en": "You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel",
+   "en_sha1": "9ceac39aa000e5522bd1288180f09d2661883414",
+   "fr": "Vous le sentez tout de suite | Guarana le jour, valériane la nuit | De la menthe, puis plus rien | Des semaines d’attente | Rien à ressentir",
    "status": "admin",
    "flags": [
+    "fit-risk",
     "pending-claim-review"
    ],
-   "notes": "Claims C45 need Clinical Research sign-off; translated faithfully, not softened.",
+   "notes": "Claims C45 need Clinical Research sign-off; translated faithfully, not softened.; 15 Nov: whole table row, the registered cells joined; carries the claim review of #15",
    "source_status": "admin-held",
    "claims": [
     "C45"
-   ]
+   ],
+   "old_fr": "Vous le sentez tout de suite"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#16",
@@ -5715,10 +5719,10 @@
    "key_path": "custom.comparison_section#16",
    "en": "Guarana by day, valerian by night",
    "en_sha1": "92faa350dcc22dc09cee7ed541d7e07bf5f5b8af",
-   "fr": "Guarana le jour, valériane la nuit",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #15); was admin: Guarana le jour, valériane la nuit",
    "source_status": "admin-held"
   },
   {
@@ -5728,10 +5732,10 @@
    "key_path": "custom.comparison_section#17",
    "en": "Mint, then nothing",
    "en_sha1": "b40d12a7688a08ca48c637cd63dee746f0582d0f",
-   "fr": "De la menthe, puis plus rien",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #15); was admin: De la menthe, puis plus rien",
    "source_status": "admin-held"
   },
   {
@@ -5741,12 +5745,10 @@
    "key_path": "custom.comparison_section#18",
    "en": "Weeks to notice",
    "en_sha1": "85ad3d08431c6e3ef6bf889b859a794359a4896d",
-   "fr": "Des semaines d’attente",
-   "status": "admin",
-   "flags": [
-    "fit-risk"
-   ],
-   "notes": "Table cell. Literal 'Des semaines avant de remarquer quoi que ce soit' is too long; short form used.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "Table cell. Literal 'Des semaines avant de remarquer quoi que ce soit' is too long; short form used.; 15 Nov: source row retired (joined into #15); was admin: Des semaines d’attente",
    "source_status": "admin-held"
   },
   {
@@ -5756,10 +5758,10 @@
    "key_path": "custom.comparison_section#19",
    "en": "Nothing to feel",
    "en_sha1": "7c3112e1d1c569d2a2b56e75fe9cb181493e179d",
-   "fr": "Rien à ressentir",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #15); was admin: Rien à ressentir",
    "source_status": "admin-held"
   },
   {
@@ -5767,13 +5769,17 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#20",
-   "en": "It reaches past your teeth",
-   "en_sha1": "87e4f0ae8774d5c8b3a365dfca58bbc117347526",
-   "fr": "Va au-delà de vos dents",
+   "en": "It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin",
+   "en_sha1": "53391e552d24db5949e967f3abea82c614222802",
+   "fr": "Va au-delà de vos dents | Bouche-intestin-cerveau, plus profond que l’émail | Nettoyage mécanique uniquement | Systémique, pas buccal | S’arrête à la peau",
    "status": "admin",
-   "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "flags": [
+    "fit-risk",
+    "pending-claim-review"
+   ],
+   "notes": "15 Nov: whole table row, the registered cells joined; carries the claim review of #21",
+   "source_status": "admin-held",
+   "old_fr": "Va au-delà de vos dents"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#21",
@@ -5782,12 +5788,10 @@
    "key_path": "custom.comparison_section#21",
    "en": "Oral-gut-brain, deeper than enamel",
    "en_sha1": "c98fc6d2f47ad77cadcd796c9faa74342af37dbd",
-   "fr": "Bouche-intestin-cerveau, plus profond que l’émail",
-   "status": "admin",
-   "flags": [
-    "pending-claim-review"
-   ],
-   "notes": "Claims C42 need Clinical Research sign-off; translated faithfully, not softened.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "Claims C42 need Clinical Research sign-off; translated faithfully, not softened.; 15 Nov: source row retired (joined into #20); was admin: Bouche-intestin-cerveau, plus profond que l’émail",
    "source_status": "admin-held",
    "claims": [
     "C42"
@@ -5800,10 +5804,10 @@
    "key_path": "custom.comparison_section#22",
    "en": "Mechanical cleaning only",
    "en_sha1": "7e45159d12dbee6ee0751a5c3926409362c4d9b1",
-   "fr": "Nettoyage mécanique uniquement",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #20); was admin: Nettoyage mécanique uniquement",
    "source_status": "admin-held"
   },
   {
@@ -5813,12 +5817,10 @@
    "key_path": "custom.comparison_section#23",
    "en": "Systemic, not oral",
    "en_sha1": "42c091f7ec2e5212dfe9dedc87e74bb586bd6d75",
-   "fr": "Systémique, pas buccal",
-   "status": "admin",
-   "flags": [
-    "fit-risk"
-   ],
-   "notes": "R2 F7: comparison-table cell, 22 chars vs EN 18; exact FR kept, fit checked at the integration preview.",
+   "fr": null,
+   "status": "held",
+   "flags": [],
+   "notes": "R2 F7: comparison-table cell, 22 chars vs EN 18; exact FR kept, fit checked at the integration preview.; 15 Nov: source row retired (joined into #20); was admin: Systémique, pas buccal",
    "source_status": "admin-held"
   },
   {
@@ -5828,10 +5830,10 @@
    "key_path": "custom.comparison_section#24",
    "en": "Stops at the skin",
    "en_sha1": "39fcd7daa5a955cbb896003f9a560d6097278df8",
-   "fr": "S’arrête à la peau",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #20); was admin: S’arrête à la peau",
    "source_status": "admin-held"
   },
   {
@@ -5839,13 +5841,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#25",
-   "en": "It keeps working after you stop",
-   "en_sha1": "c3925ee8b4d4f02ad961206e7ceeb0ba21d74c8c",
-   "fr": "Continue d’agir après le brossage",
+   "en": "It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only",
+   "en_sha1": "b5089bf02b749e49b681f1f8a47d0dc6f56daa8d",
+   "fr": "Continue d’agir après le brossage | Leave-on. Sans rinçage. Temps de contact prolongé. | Rincé en quelques secondes | Rien de local | Peau uniquement",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "source_status": "admin-held",
+   "old_fr": "Continue d’agir après le brossage"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#26",
@@ -5854,10 +5857,10 @@
    "key_path": "custom.comparison_section#26",
    "en": "Leave-on. No rinse. Extended contact time.",
    "en_sha1": "cddee8363a6f12eba074d577d937e79b343bc802",
-   "fr": "Leave-on. Sans rinçage. Temps de contact prolongé.",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #25); was admin: Leave-on. Sans rinçage. Temps de contact prolongé.",
    "source_status": "admin-held"
   },
   {
@@ -5867,10 +5870,10 @@
    "key_path": "custom.comparison_section#27",
    "en": "Rinsed away in seconds",
    "en_sha1": "160dd136a8d8d413ae507174d1aae6c58aa08c3f",
-   "fr": "Rincé en quelques secondes",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #25); was admin: Rincé en quelques secondes",
    "source_status": "admin-held"
   },
   {
@@ -5880,10 +5883,10 @@
    "key_path": "custom.comparison_section#28",
    "en": "Nothing local",
    "en_sha1": "fe2f5555fc9fabcd36e1043ba02571886a3efec6",
-   "fr": "Rien de local",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #25); was admin: Rien de local",
    "source_status": "admin-held"
   },
   {
@@ -5893,10 +5896,10 @@
    "key_path": "custom.comparison_section#29",
    "en": "Skin only",
    "en_sha1": "32e9f403cd4c39de61b30e576f3a96129bf7f91b",
-   "fr": "Peau uniquement",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #25); was admin: Peau uniquement",
    "source_status": "admin-held"
   },
   {
@@ -5904,13 +5907,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#30",
-   "en": "It feeds, not just cleans",
-   "en_sha1": "928ef73adc433b3f3aee5e3567ca2ef915e69186",
-   "fr": "Nourrit, ne fait pas que nettoyer",
+   "en": "It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only",
+   "en_sha1": "4d2111d8625f11bcf0da8b4368eced026c96e0bc",
+   "fr": "Nourrit, ne fait pas que nettoyer | Une pression, minéraux et équilibre | Presser, deviner, rincer | Rien n’atteint l’émail | Renouvellement de surface uniquement",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "source_status": "admin-held",
+   "old_fr": "Nourrit, ne fait pas que nettoyer"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#31",
@@ -5919,10 +5923,10 @@
    "key_path": "custom.comparison_section#31",
    "en": "One pump, minerals and balance",
    "en_sha1": "2d01f8b39a3bea1078165c35110dc1e79aeb5089",
-   "fr": "Une pression, minéraux et équilibre",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #30); was admin: Une pression, minéraux et équilibre",
    "source_status": "admin-held"
   },
   {
@@ -5932,10 +5936,10 @@
    "key_path": "custom.comparison_section#32",
    "en": "Squeeze, guess, rinse away",
    "en_sha1": "88f660cc563d0e1cd3212bdea92e7cf4752ae3c0",
-   "fr": "Presser, deviner, rincer",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #30); was admin: Presser, deviner, rincer",
    "source_status": "admin-held"
   },
   {
@@ -5945,10 +5949,10 @@
    "key_path": "custom.comparison_section#33",
    "en": "Nothing reaches enamel",
    "en_sha1": "25359742fb1372ce27162a1bbc98d0a623e788e2",
-   "fr": "Rien n’atteint l’émail",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #30); was admin: Rien n’atteint l’émail",
    "source_status": "admin-held"
   },
   {
@@ -5958,10 +5962,10 @@
    "key_path": "custom.comparison_section#34",
    "en": "Surface renewal only",
    "en_sha1": "172d187fbfe5d877da8405832dee53e55c054213",
-   "fr": "Renouvellement de surface uniquement",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #30); was admin: Renouvellement de surface uniquement",
    "source_status": "admin-held"
   },
   {
@@ -5969,13 +5973,14 @@
    "resource_type": "metafield",
    "file_or_handle": "karmicare-biorhythmic-oral-care-system",
    "key_path": "custom.comparison_section#35",
-   "en": "The person it makes you",
-   "en_sha1": "2a2ee8c0cf928bd32584231fe13eac94f5489be5",
-   "fr": "La personne que vous devenez",
+   "en": "The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface",
+   "en_sha1": "508964d0834e22cfa854e1d5f526e33157d882a9",
+   "fr": "La personne que vous devenez | Quelqu’un qui prend soin de soi | Quelqu’un qui coche une case | Quelqu’un qui compte s’y mettre | Quelqu’un qui s’occupe de la surface",
    "status": "admin",
    "flags": [],
-   "notes": "",
-   "source_status": "admin-held"
+   "notes": "15 Nov: whole table row, the registered cells joined",
+   "source_status": "admin-held",
+   "old_fr": "La personne que vous devenez"
   },
   {
    "id": "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#36",
@@ -5984,10 +5989,10 @@
    "key_path": "custom.comparison_section#36",
    "en": "Someone who tends to themselves",
    "en_sha1": "f4b7ec29b79de6ae074c423fd0a9db04d2a917c9",
-   "fr": "Quelqu’un qui prend soin de soi",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #35); was admin: Quelqu’un qui prend soin de soi",
    "source_status": "admin-held"
   },
   {
@@ -5997,10 +6002,10 @@
    "key_path": "custom.comparison_section#37",
    "en": "Someone who ticks a box",
    "en_sha1": "d512606099baac70ffe458d9686b01e8b713f3d5",
-   "fr": "Quelqu’un qui coche une case",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #35); was admin: Quelqu’un qui coche une case",
    "source_status": "admin-held"
   },
   {
@@ -6010,10 +6015,10 @@
    "key_path": "custom.comparison_section#38",
    "en": "Someone who means to",
    "en_sha1": "05b1e7a3f564b49d2e8d39a22f4d8f52b536e500",
-   "fr": "Quelqu’un qui compte s’y mettre",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #35); was admin: Quelqu’un qui compte s’y mettre",
    "source_status": "admin-held"
   },
   {
@@ -6023,10 +6028,10 @@
    "key_path": "custom.comparison_section#39",
    "en": "Someone who tends the surface",
    "en_sha1": "5a9d8af76ac30463e31106418dc348da691f036e",
-   "fr": "Quelqu’un qui s’occupe de la surface",
-   "status": "admin",
+   "fr": null,
+   "status": "held",
    "flags": [],
-   "notes": "",
+   "notes": "15 Nov: source row retired (joined into #35); was admin: Quelqu’un qui s’occupe de la surface",
    "source_status": "admin-held"
   },
   {
