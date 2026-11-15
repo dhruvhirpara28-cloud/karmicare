@@ -6,7 +6,7 @@
   "holds.json": "d0d575c65dd8",
   "releases.json": "1571d1e3719b",
   "nl/batch-01-homepage.json": "f0cd59a12fa6",
-  "nl/batch-02-pdp.json": "04604b5d6077",
+  "nl/batch-02-pdp.json": "5657bb368ed8",
   "nl/batch-03-header-footer.json": "9a44141ef8bc",
   "nl/batch-04-legal.json": "515999d1889d",
   "nl/batch-05-products.json": "15d55ffa0a80",
@@ -11230,6 +11230,23 @@
       "drafted": true,
       "registered": false
      }
+    },
+    {
+     "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#05",
+     "kind": "match",
+     "key": null,
+     "field": "custom.compare_table_header_footer#05",
+     "en": "Care Credit:",
+     "en_sha1": "277b70593c1f4946be97c034d69a1dfd1a2c0f2b",
+     "value": "Care Credit:",
+     "gates": [],
+     "hold": [],
+     "how": "metaobject reached through the product's metafield reference, field matched on the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "invariant": true
     },
     {
      "id": "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#06",
