@@ -8295,6 +8295,101 @@
       "outdated": false
      }
     }
+   },
+   "gid://shopify/Metaobject/516252696957|footer": {
+    "proposal_hash": "abeca0b524ecf31df80edce4ff20dac72a509325170aaa8a0c719de5739aa4ef",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.compare_table_header_footer",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Every subscription earns \"},{\"type\":\"text\",\"value\":\"Care Credit:\",\"bold\":true},{\"type\":\"text\",\"value\":\" a return on the care you keep.\\n\"}]}]}",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/200191419351421",
+        "via": "custom.compare_table_header_footer",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/516252696957",
+        "to_type": "compare_table_header_footer",
+        "to_handle": "choose-your-rhythm-1"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/516252696957",
+      "type": "compare_table_header_footer",
+      "handle": "choose-your-rhythm-1"
+     },
+     "field": {
+      "key": "footer",
+      "en_sha1": "bd613dc1399eba884ff2ef8253c92890432f84ea",
+      "en_digest": "4f1082c05ed9716a6bf0659fa843fca533c6d28f2fcf8cabea31b27d8398154e"
+     },
+     "spans": [
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#04"
+       ],
+       "en": "Every subscription earns",
+       "value": "Met elk lidmaatschap verdien je",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        1,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#05"
+       ],
+       "en": "Care Credit:",
+       "value": "Care Credit:",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        2,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.compare_table_header_footer#06"
+       ],
+       "en": "a return on the care you keep.",
+       "value": "een rendement op je dagelijkse zorg.",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Met elk lidmaatschap verdien je \"},{\"type\":\"text\",\"value\":\"Care Credit:\",\"bold\":true},{\"type\":\"text\",\"value\":\" een rendement op je dagelijkse zorg.\\n\"}]}]}",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "abeca0b524ecf31df80edce4ff20dac72a509325170aaa8a0c719de5739aa4ef",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
+     }
+    }
    }
   },
   "fr": {
