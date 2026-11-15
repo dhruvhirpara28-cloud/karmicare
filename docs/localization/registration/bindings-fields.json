@@ -8054,6 +8054,247 @@
       "outdated": true
      }
     }
+   },
+   "gid://shopify/Metaobject/563794772349|table_title": {
+    "proposal_hash": "64dc54942ae62e586be9c9bfeb88e29bf355217293e6a2eb50ab213fb3941525",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.comparison_section",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203128430068093",
+        "via": "custom.comparison_section",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/563794772349",
+        "to_type": "comparison_section",
+        "to_handle": "care-that-compounds"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/563794772349",
+      "type": "comparison_section",
+      "handle": "care-that-compounds"
+     },
+     "field": {
+      "key": "table_title",
+      "en_sha1": "f4444d8ba5c509c39a03f02a546c470b546d4057",
+      "en_digest": "68a375c5b227ecb0f638b19421dfcaa92f2a53783ca82564cc822b26a2dcbeb6"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        72
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#06"
+       ],
+       "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+       "value": "Vergelijk | logo | Gewoon poetsen | Supplementen | Huidverzorging",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Vergelijk | logo | Gewoon poetsen | Supplementen | Huidverzorging",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "64dc54942ae62e586be9c9bfeb88e29bf355217293e6a2eb50ab213fb3941525",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
+     }
+    }
+   },
+   "gid://shopify/Metaobject/563794772349|table_list": {
+    "proposal_hash": "a8097844c3887bc0f4cf0339edc9e7fbd9b269b4e492c772529a2b1eeac30941",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.comparison_section",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "[\"It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention\",\"You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel\",\"It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin\",\"It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only\",\"It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only\",\"The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface\"]",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203128430068093",
+        "via": "custom.comparison_section",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/563794772349",
+        "to_type": "comparison_section",
+        "to_handle": "care-that-compounds"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/563794772349",
+      "type": "comparison_section",
+      "handle": "care-that-compounds"
+     },
+     "field": {
+      "key": "table_list",
+      "en_sha1": "11dd9c9446093eb9bb0c2e1f90d2e25f209d1062",
+      "en_digest": "ff0b09445227dbcfcfbfd9088a4903fadbecee50f648972d84c7dc6d35416e8d"
+     },
+     "spans": [
+      {
+       "path": [
+        0
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#10"
+       ],
+       "en": "It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention",
+       "value": "Afgestemd op je biologie | De eigen 24-uurscyclus van je mond | Dezelfde formule, elk uur | Eén dosis voor iedereen | AM/PM uit gewoonte",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        1
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#15"
+       ],
+       "en": "You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel",
+       "value": "Je voelt het meteen | Guarana overdag, valeriaan ’s nachts | Munt, en dan niets | Weken voor je iets merkt | Niets te voelen",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        2
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#20"
+       ],
+       "en": "It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin",
+       "value": "Het reikt verder dan je tanden | Mond-darm-brein, dieper dan glazuur | Alleen mechanische reiniging | Systemisch, niet in de mond | Stopt bij de huid",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        3
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#25"
+       ],
+       "en": "It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only",
+       "value": "Het blijft werken nadat je stopt | Leave-on. Niet naspoelen. Langere contacttijd. | In seconden weggespoeld | Niets lokaal | Alleen de huid",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        4
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#30"
+       ],
+       "en": "It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only",
+       "value": "Het voedt, het reinigt niet alleen | Eén pompje, mineralen en balans | Knijpen, gokken, wegspoelen | Niets bereikt je glazuur | Alleen oppervlaktevernieuwing",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        5
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#35"
+       ],
+       "en": "The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface",
+       "value": "Wie het van je maakt | Iemand die voor zichzelf zorgt | Iemand die een vakje afvinkt | Iemand die het van plan is | Iemand die de buitenkant verzorgt",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "[\"Afgestemd op je biologie | De eigen 24-uurscyclus van je mond | Dezelfde formule, elk uur | Eén dosis voor iedereen | AM/PM uit gewoonte\", \"Je voelt het meteen | Guarana overdag, valeriaan ’s nachts | Munt, en dan niets | Weken voor je iets merkt | Niets te voelen\", \"Het reikt verder dan je tanden | Mond-darm-brein, dieper dan glazuur | Alleen mechanische reiniging | Systemisch, niet in de mond | Stopt bij de huid\", \"Het blijft werken nadat je stopt | Leave-on. Niet naspoelen. Langere contacttijd. | In seconden weggespoeld | Niets lokaal | Alleen de huid\", \"Het voedt, het reinigt niet alleen | Eén pompje, mineralen en balans | Knijpen, gokken, wegspoelen | Niets bereikt je glazuur | Alleen oppervlaktevernieuwing\", \"Wie het van je maakt | Iemand die voor zichzelf zorgt | Iemand die een vakje afvinkt | Iemand die het van plan is | Iemand die de buitenkant verzorgt\"]",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "a8097844c3887bc0f4cf0339edc9e7fbd9b269b4e492c772529a2b1eeac30941",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
+     }
+    }
+   },
+   "gid://shopify/Metaobject/515069215101|highlight_text": {
+    "proposal_hash": "12f2251733be4d7db79c13de63b079c7d37e41960f8a8142fdd7321a087d00b7",
+    "evidence": {
+     "locale": "nl",
+     "family": "custom.mission_card",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Strengthen your teeth. Strengthen yourself.\",\"bold\":true}]}]}",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203235560358269",
+        "via": "custom.mission_card",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/515069215101",
+        "to_type": "mission_card",
+        "to_handle": "our-mission"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/515069215101",
+      "type": "mission_card",
+      "handle": "our-mission"
+     },
+     "field": {
+      "key": "highlight_text",
+      "en_sha1": "f2abc03f82f760493d7f502df76802bc9a9d3629",
+      "en_digest": "e207f9568f16749e9250cd2cfb50e671aa1f4fe89bb739676808c75786829eae"
+     },
+     "spans": [
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#02"
+       ],
+       "en": "Strengthen your teeth. Strengthen yourself.",
+       "value": "Versterk je tanden. Versterk jezelf.",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Versterk je tanden. Versterk jezelf.\",\"bold\":true}]}]}",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "12f2251733be4d7db79c13de63b079c7d37e41960f8a8142fdd7321a087d00b7",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
+     }
+    }
    }
   },
   "fr": {
@@ -16503,6 +16744,247 @@
       "present": true,
       "value": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Avant de commencer\",\"bold\":true},{\"type\":\"text\",\"value\":\".  \\n\"},{\"type\":\"text\",\"value\":\"Passez la langue sur vos dents :\",\"italic\":true},{\"type\":\"text\",\"value\":\" un léger voile le matin, le café et les conversations de la journée le soir. Ne jugez pas — c’est votre \\\"avant\\\".\\n\\n\"},{\"type\":\"text\",\"value\":\"Awake:\",\"bold\":true},{\"type\":\"text\",\"value\":\" menthe poivrée et citron vert éclatants, guarana en fond — une mousse veloutée, à base de glycolipides issus de la fermentation : rien ne pique, rien ne dessèche. Crachez, ne rincez pas. Repassez la langue : le voile a disparu, chaque dent est lisse comme du verre.\\n\\n\"},{\"type\":\"text\",\"value\":\"Asleep:\",\"bold\":true},{\"type\":\"text\",\"value\":\" orange chaude et cannelle cassia, valériane en fond, volontairement sans menthe. Crachez et laissez agir.  \"},{\"type\":\"text\",\"value\":\"La langue sur les dents :\",\"italic\":true},{\"type\":\"text\",\"value\":\" lisse, avec un voile fin et régulier — comme si la journée avait été refermée.\\n\\n\"},{\"type\":\"text\",\"value\":\"La première semaine :\",\"bold\":true},{\"type\":\"text\",\"value\":\" la mousse veloutée et la sensation leave-on sont ce que l’on remarque d’abord. Dès le cinquième brossage, c’est la douceur. Deux secondes, deux fois par jour, et vous savez.\"}]}]}",
       "outdated": true
+     }
+    }
+   },
+   "gid://shopify/Metaobject/563794772349|table_title": {
+    "proposal_hash": "af66629731f690f7c231ee0c84becf82051b91c4644db136f95eb3ad74d4ac11",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.comparison_section",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203128430068093",
+        "via": "custom.comparison_section",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/563794772349",
+        "to_type": "comparison_section",
+        "to_handle": "care-that-compounds"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/563794772349",
+      "type": "comparison_section",
+      "handle": "care-that-compounds"
+     },
+     "field": {
+      "key": "table_title",
+      "en_sha1": "f4444d8ba5c509c39a03f02a546c470b546d4057",
+      "en_digest": "68a375c5b227ecb0f638b19421dfcaa92f2a53783ca82564cc822b26a2dcbeb6"
+     },
+     "spans": [
+      {
+       "at": [
+        0,
+        72
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#06"
+       ],
+       "en": "Compare | logo | Regular brushing | Daily supplements | Skincare routine",
+       "value": "Comparer | logo | Brossage classique | Compléments quotidiens | Soins de la peau",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "Comparer | logo | Brossage classique | Compléments quotidiens | Soins de la peau",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "af66629731f690f7c231ee0c84becf82051b91c4644db136f95eb3ad74d4ac11",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
+     }
+    }
+   },
+   "gid://shopify/Metaobject/563794772349|table_list": {
+    "proposal_hash": "650ae88a0683428de1cfd4f9afcbabe02f83ec8fefdf252e38aeedba342be1e9",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.comparison_section",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "[\"It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention\",\"You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel\",\"It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin\",\"It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only\",\"It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only\",\"The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface\"]",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203128430068093",
+        "via": "custom.comparison_section",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/563794772349",
+        "to_type": "comparison_section",
+        "to_handle": "care-that-compounds"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/563794772349",
+      "type": "comparison_section",
+      "handle": "care-that-compounds"
+     },
+     "field": {
+      "key": "table_list",
+      "en_sha1": "11dd9c9446093eb9bb0c2e1f90d2e25f209d1062",
+      "en_digest": "ff0b09445227dbcfcfbfd9088a4903fadbecee50f648972d84c7dc6d35416e8d"
+     },
+     "spans": [
+      {
+       "path": [
+        0
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#10"
+       ],
+       "en": "It’s timed to your biology | Your mouth’s own 24-hour cycle | Same formula, any hour | One dose fits all | AM/PM by convention",
+       "value": "Calé sur votre biologie | Le cycle de 24 heures propre à votre bouche | Même formule, à toute heure | Une seule dose pour tous | Matin/soir par convention",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        1
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#15"
+       ],
+       "en": "You feel it straight away | Guarana by day, valerian by night | Mint, then nothing | Weeks to notice | Nothing to feel",
+       "value": "Vous le sentez tout de suite | Guarana le jour, valériane la nuit | De la menthe, puis plus rien | Des semaines d’attente | Rien à ressentir",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        2
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#20"
+       ],
+       "en": "It reaches past your teeth | Oral-gut-brain, deeper than enamel | Mechanical cleaning only | Systemic, not oral | Stops at the skin",
+       "value": "Va au-delà de vos dents | Bouche-intestin-cerveau, plus profond que l’émail | Nettoyage mécanique uniquement | Systémique, pas buccal | S’arrête à la peau",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        3
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#25"
+       ],
+       "en": "It keeps working after you stop | Leave-on. No rinse. Extended contact time. | Rinsed away in seconds | Nothing local | Skin only",
+       "value": "Continue d’agir après le brossage | Leave-on. Sans rinçage. Temps de contact prolongé. | Rincé en quelques secondes | Rien de local | Peau uniquement",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        4
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#30"
+       ],
+       "en": "It feeds, not just cleans | One pump, minerals and balance | Squeeze, guess, rinse away | Nothing reaches enamel | Surface renewal only",
+       "value": "Nourrit, ne fait pas que nettoyer | Une pression, minéraux et équilibre | Presser, deviner, rincer | Rien n’atteint l’émail | Renouvellement de surface uniquement",
+       "statuses": [
+        "approved"
+       ]
+      },
+      {
+       "path": [
+        5
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.comparison_section#35"
+       ],
+       "en": "The person it makes you | Someone who tends to themselves | Someone who ticks a box | Someone who means to | Someone who tends the surface",
+       "value": "La personne que vous devenez | Quelqu’un qui prend soin de soi | Quelqu’un qui coche une case | Quelqu’un qui compte s’y mettre | Quelqu’un qui s’occupe de la surface",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "[\"Calé sur votre biologie | Le cycle de 24 heures propre à votre bouche | Même formule, à toute heure | Une seule dose pour tous | Matin/soir par convention\", \"Vous le sentez tout de suite | Guarana le jour, valériane la nuit | De la menthe, puis plus rien | Des semaines d’attente | Rien à ressentir\", \"Va au-delà de vos dents | Bouche-intestin-cerveau, plus profond que l’émail | Nettoyage mécanique uniquement | Systémique, pas buccal | S’arrête à la peau\", \"Continue d’agir après le brossage | Leave-on. Sans rinçage. Temps de contact prolongé. | Rincé en quelques secondes | Rien de local | Peau uniquement\", \"Nourrit, ne fait pas que nettoyer | Une pression, minéraux et équilibre | Presser, deviner, rincer | Rien n’atteint l’émail | Renouvellement de surface uniquement\", \"La personne que vous devenez | Quelqu’un qui prend soin de soi | Quelqu’un qui coche une case | Quelqu’un qui compte s’y mettre | Quelqu’un qui s’occupe de la surface\"]",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "650ae88a0683428de1cfd4f9afcbabe02f83ec8fefdf252e38aeedba342be1e9",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
+     }
+    }
+   },
+   "gid://shopify/Metaobject/515069215101|highlight_text": {
+    "proposal_hash": "d5f7b9ed1edac477b49a80edfa6ecb50591b07e7e26a18650432b7b017d085d8",
+    "evidence": {
+     "locale": "fr",
+     "family": "custom.mission_card",
+     "product": "karmicare-biorhythmic-oral-care-system",
+     "en": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Strengthen your teeth. Strengthen yourself.\",\"bold\":true}]}]}",
+     "paths": [
+      [
+       {
+        "from": "gid://shopify/Product/15977093923197",
+        "metafield": "gid://shopify/Metafield/203235560358269",
+        "via": "custom.mission_card",
+        "type": "metaobject_reference",
+        "to": "gid://shopify/Metaobject/515069215101",
+        "to_type": "mission_card",
+        "to_handle": "our-mission"
+       }
+      ]
+     ],
+     "destination": {
+      "gid": "gid://shopify/Metaobject/515069215101",
+      "type": "mission_card",
+      "handle": "our-mission"
+     },
+     "field": {
+      "key": "highlight_text",
+      "en_sha1": "f2abc03f82f760493d7f502df76802bc9a9d3629",
+      "en_digest": "e207f9568f16749e9250cd2cfb50e671aa1f4fe89bb739676808c75786829eae"
+     },
+     "spans": [
+      {
+       "path": [
+        "children",
+        0,
+        "children",
+        0,
+        "value"
+       ],
+       "items": [
+        "admin:karmicare-biorhythmic-oral-care-system:custom.mission_card#02"
+       ],
+       "en": "Strengthen your teeth. Strengthen yourself.",
+       "value": "Renforcez vos dents. Renforcez-vous.",
+       "statuses": [
+        "approved"
+       ]
+      }
+     ],
+     "assembled": "{\"type\":\"root\",\"children\":[{\"type\":\"paragraph\",\"children\":[{\"type\":\"text\",\"value\":\"Renforcez vos dents. Renforcez-vous.\",\"bold\":true}]}]}",
+     "scope": {
+      "complete": false
+     },
+     "proposal_hash": "d5f7b9ed1edac477b49a80edfa6ecb50591b07e7e26a18650432b7b017d085d8",
+     "current": {
+      "present": false,
+      "value": null,
+      "outdated": false
      }
     }
    }
