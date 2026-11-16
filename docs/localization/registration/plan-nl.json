@@ -1,22 +1,22 @@
 {
  "lang": "nl",
  "inputs": {
-  "en-source.json": "fb85e8ba6168",
+  "en-source.json": "ee7ed3225940",
   "registered.json": "c0fc5d8bf7c2",
   "holds.json": "d0d575c65dd8",
   "releases.json": "1571d1e3719b",
   "nl/batch-01-homepage.json": "f0cd59a12fa6",
-  "nl/batch-02-pdp.json": "546cf9003631",
+  "nl/batch-02-pdp.json": "2695b17e1c47",
   "nl/batch-03-header-footer.json": "9a44141ef8bc",
   "nl/batch-04-legal.json": "515999d1889d",
-  "nl/batch-05-products.json": "15d55ffa0a80",
+  "nl/batch-05-products.json": "71ac66c29412",
   "nl/batch-06-content-pages.json": "681e4d3075f7",
   "nl/batch-07-collections-blog.json": "e0944b1775df",
   "nl/batch-08-system.json": "e7c57f5501d4"
  },
  "batches": {
   "batch-01-homepage": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94",
-  "batch-02-pdp": "eabb2d7dd97c7cf2f873d1a3c8a687dd04897bb8",
+  "batch-02-pdp": "81f6536895ce45e7a83fab8ca78ca10101764fe2",
   "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
   "batch-05-products": "78d85b206273a06783ba5531a6bbdfd56f5c9ba9",
@@ -6500,767 +6500,6 @@
       "product_faq_block",
       "request_trigger_text"
      ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_title",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_title",
-     "en": "Request the practitioner pack",
-     "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
-     "value": "Vraag het pakket voor zorgverleners aan",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_title"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_intro",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_intro",
-     "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
-     "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
-     "value": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_intro"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_name",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_name",
-     "en": "Name",
-     "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
-     "value": "Naam",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_name"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_email",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_email",
-     "en": "Email",
-     "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
-     "value": "E-mailadres",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_email"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_phone",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_phone",
-     "en": "Phone (optional)",
-     "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
-     "value": "Telefoon (optioneel)",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_phone"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_legend_wants",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
-     "en": "What would you like?",
-     "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
-     "value": "Wat wil je ontvangen?",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_legend_wants"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_help_wants",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_help_wants",
-     "en": "Choose one or both.",
-     "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
-     "value": "Kies er één of beide.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_help_wants"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_pack",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_pack",
-     "en": "Evidence pack",
-     "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
-     "value": "Studiedossier",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_pack"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_samples",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_samples",
-     "en": "Samples for my practice",
-     "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
-     "value": "Proefpakketten voor mijn praktijk",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_samples"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_address",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_address",
-     "en": "Practice address (needed for samples)",
-     "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
-     "value": "Praktijkadres (nodig voor de proefpakketten)",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_address"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_message",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_message",
-     "en": "Message (optional)",
-     "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
-     "value": "Bericht (optioneel)",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_message"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_privacy_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
-     "en": "We only process these details to answer your request. More in our [privacy].",
-     "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
-     "value": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_privacy_text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_privacy_link_label",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
-     "en": "Privacy Policy",
-     "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
-     "value": "privacybeleid",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_privacy_link_label"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_button",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_button",
-     "en": "Send request",
-     "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
-     "value": "Aanvraag versturen",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_button"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_name",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_name",
-     "en": "Please fill in your name.",
-     "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
-     "value": "Vul je naam in.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_name"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_email",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_email",
-     "en": "Please fill in your email address.",
-     "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
-     "value": "Vul je e-mailadres in.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_email"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_email_format",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
-     "en": "Please enter a valid email address.",
-     "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
-     "value": "Vul een geldig e-mailadres in.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_email_format"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_wants",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_wants",
-     "en": "Choose the evidence pack, samples or both.",
-     "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
-     "value": "Kies het studiedossier, proefpakketten of beide.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_wants"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_address",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_address",
-     "en": "Please fill in the practice address for the samples.",
-     "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
-     "value": "Vul het praktijkadres in voor de proefpakketten.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_address"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_generic",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_generic",
-     "en": "Your request was not sent. Please check the details below and try again.",
-     "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
-     "value": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_generic"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_success_title",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_success_title",
-     "en": "Request received",
-     "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
-     "value": "Aanvraag ontvangen",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_success_title"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_success_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_success_text",
-     "en": "Thank you. We reply by email to the address you gave.",
-     "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
-     "value": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_success_text"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_legend_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_legend_profession",
-     "en": "Profession",
-     "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
-     "value": "Beroep",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_legend_profession"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_dentist",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
-     "en": "Dentist",
-     "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
-     "value": "Tandarts",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_dentist"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_hygienist",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
-     "en": "Dental hygienist",
-     "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
-     "value": "Mondhygiënist",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_hygienist"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_kpni",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
-     "en": "kPNI therapist",
-     "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
-     "value": "kPNI-therapeut",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_kpni"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_natural",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
-     "en": "Orthomolecular or naturopathic practitioner",
-     "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
-     "value": "Orthomoleculair of natuurgeneeskundig therapeut",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_natural"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_gp",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
-     "en": "General practitioner",
-     "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
-     "value": "Huisarts",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_gp"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_pharmacist",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
-     "en": "Pharmacist",
-     "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
-     "value": "Apotheker",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_pharmacist"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_profession_other",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_other",
-     "en": "Other",
-     "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
-     "value": "Andere",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_other"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_profession_other",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
-     "en": "Your profession",
-     "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
-     "value": "Je beroep",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_profession_other"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_label_practice",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_practice",
-     "en": "Practice name",
-     "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
-     "value": "Naam van de praktijk",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_practice"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_profession_choice",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
-     "en": "Choose your profession.",
-     "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
-     "value": "Kies je beroep.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_profession_choice"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_profession_other",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
-     "en": "Please fill in your profession.",
-     "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
-     "value": "Vul je beroep in.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_profession_other"
-     ]
-    },
-    {
-     "id": "product.subscription-item:main/product_faq_block/request_error_practice",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_practice",
-     "en": "Please fill in your practice name.",
-     "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
-     "value": "Vul de naam van je praktijk in.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_practice"
-     ]
     }
    ]
   },
@@ -11327,6 +10566,714 @@
       "drafted": true,
       "registered": false
      }
+    }
+   ]
+  },
+  {
+   "shopify_type": "ONLINE_STORE_THEME_SECTION_GROUP",
+   "owner": "sections/practitioner-group.json",
+   "batch": "batch-02-pdp",
+   "page": "all pages (form opened from the PDP FAQ)",
+   "items": [
+    {
+     "id": "practitioner-group:practitioner_request/request_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_title",
+     "en": "Request the practitioner pack",
+     "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
+     "value": "Vraag het pakket voor zorgverleners aan",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_title"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_intro",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_intro",
+     "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+     "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
+     "value": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_intro"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_name",
+     "en": "Name",
+     "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
+     "value": "Naam",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_name"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_legend_profession",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_legend_profession",
+     "en": "Profession",
+     "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
+     "value": "Beroep",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_legend_profession"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_dentist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_dentist",
+     "en": "Dentist",
+     "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
+     "value": "Tandarts",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_dentist"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_hygienist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_hygienist",
+     "en": "Dental hygienist",
+     "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
+     "value": "Mondhygiënist",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_hygienist"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_kpni",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_kpni",
+     "en": "kPNI therapist",
+     "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
+     "value": "kPNI-therapeut",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_kpni"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_natural",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_natural",
+     "en": "Orthomolecular or naturopathic practitioner",
+     "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
+     "value": "Orthomoleculair of natuurgeneeskundig therapeut",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_natural"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_gp",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_gp",
+     "en": "General practitioner",
+     "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
+     "value": "Huisarts",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_gp"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_pharmacist",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_pharmacist",
+     "en": "Pharmacist",
+     "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
+     "value": "Apotheker",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_pharmacist"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_profession_other",
+     "en": "Other",
+     "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
+     "value": "Andere",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_profession_other"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_profession_other",
+     "en": "Your profession",
+     "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
+     "value": "Je beroep",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_profession_other"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_practice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_practice",
+     "en": "Practice name",
+     "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
+     "value": "Naam van de praktijk",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_practice"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_email",
+     "en": "Email",
+     "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+     "value": "E-mailadres",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_email"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_phone",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_phone",
+     "en": "Phone (optional)",
+     "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
+     "value": "Telefoon (optioneel)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_phone"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_legend_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_legend_wants",
+     "en": "What would you like?",
+     "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
+     "value": "Wat wil je ontvangen?",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_legend_wants"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_help_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_help_wants",
+     "en": "Choose one or both.",
+     "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
+     "value": "Kies er één of beide.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_help_wants"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_pack",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_pack",
+     "en": "Evidence pack",
+     "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
+     "value": "Studiedossier",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_pack"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_samples",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_samples",
+     "en": "Samples for my practice",
+     "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
+     "value": "Proefpakketten voor mijn praktijk",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_samples"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_address",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_address",
+     "en": "Practice address (needed for samples)",
+     "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
+     "value": "Praktijkadres (nodig voor de proefpakketten)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_address"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_label_message",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_label_message",
+     "en": "Message (optional)",
+     "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
+     "value": "Bericht (optioneel)",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_label_message"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_privacy_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_privacy_text",
+     "en": "We only process these details to answer your request. More in our [privacy].",
+     "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
+     "value": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_privacy_text"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_privacy_link_label",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_privacy_link_label",
+     "en": "Privacy Policy",
+     "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+     "value": "privacybeleid",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_privacy_link_label"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_button",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_button",
+     "en": "Send request",
+     "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
+     "value": "Aanvraag versturen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_button"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_name",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_name",
+     "en": "Please fill in your name.",
+     "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+     "value": "Vul je naam in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_name"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_profession_choice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_profession_choice",
+     "en": "Choose your profession.",
+     "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
+     "value": "Kies je beroep.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_profession_choice"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_profession_other",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_profession_other",
+     "en": "Please fill in your profession.",
+     "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
+     "value": "Vul je beroep in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_profession_other"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_practice",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_practice",
+     "en": "Please fill in your practice name.",
+     "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
+     "value": "Vul de naam van je praktijk in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_practice"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_email",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_email",
+     "en": "Please fill in your email address.",
+     "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+     "value": "Vul je e-mailadres in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_email"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_email_format",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_email_format",
+     "en": "Please enter a valid email address.",
+     "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+     "value": "Vul een geldig e-mailadres in.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_email_format"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_wants",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_wants",
+     "en": "Choose the evidence pack, samples or both.",
+     "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
+     "value": "Kies het studiedossier, proefpakketten of beide.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_wants"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_address",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_address",
+     "en": "Please fill in the practice address for the samples.",
+     "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
+     "value": "Vul het praktijkadres in voor de proefpakketten.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_address"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_error_generic",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_error_generic",
+     "en": "Your request was not sent. Please check the details below and try again.",
+     "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
+     "value": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_error_generic"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_success_title",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_success_title",
+     "en": "Request received",
+     "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
+     "value": "Aanvraag ontvangen",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_success_title"
+     ]
+    },
+    {
+     "id": "practitioner-group:practitioner_request/request_success_text",
+     "kind": "match",
+     "key": null,
+     "field": "sections.practitioner_request.settings.request_success_text",
+     "en": "Thank you. We reply by email to the address you gave.",
+     "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
+     "value": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
+     "gates": [],
+     "hold": [],
+     "how": "key of the published theme's section group (GID proves --theme-id), every hint a key token, then the EN sha1",
+     "status": {
+      "drafted": true,
+      "registered": false
+     },
+     "hint": [
+      "practitioner_request",
+      "request_success_text"
+     ]
     }
    ]
   },
@@ -24124,767 +24071,6 @@
       "main",
       "product_faq_block",
       "request_trigger_text"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_title",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_title",
-     "en": "Request the practitioner pack",
-     "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
-     "value": "Vraag het pakket voor zorgverleners aan",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_title"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_intro",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_intro",
-     "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
-     "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
-     "value": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_intro"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_name",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_name",
-     "en": "Name",
-     "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
-     "value": "Naam",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_name"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_email",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_email",
-     "en": "Email",
-     "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
-     "value": "E-mailadres",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_email"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_phone",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_phone",
-     "en": "Phone (optional)",
-     "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
-     "value": "Telefoon (optioneel)",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_phone"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_legend_wants",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
-     "en": "What would you like?",
-     "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
-     "value": "Wat wil je ontvangen?",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_legend_wants"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_help_wants",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_help_wants",
-     "en": "Choose one or both.",
-     "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
-     "value": "Kies er één of beide.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_help_wants"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_pack",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_pack",
-     "en": "Evidence pack",
-     "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
-     "value": "Studiedossier",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_pack"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_samples",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_samples",
-     "en": "Samples for my practice",
-     "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
-     "value": "Proefpakketten voor mijn praktijk",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_samples"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_address",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_address",
-     "en": "Practice address (needed for samples)",
-     "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
-     "value": "Praktijkadres (nodig voor de proefpakketten)",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_address"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_message",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_message",
-     "en": "Message (optional)",
-     "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
-     "value": "Bericht (optioneel)",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_message"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_privacy_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
-     "en": "We only process these details to answer your request. More in our [privacy].",
-     "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
-     "value": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_privacy_text"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_privacy_link_label",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
-     "en": "Privacy Policy",
-     "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
-     "value": "privacybeleid",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_privacy_link_label"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_button",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_button",
-     "en": "Send request",
-     "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
-     "value": "Aanvraag versturen",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_button"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_name",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_name",
-     "en": "Please fill in your name.",
-     "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
-     "value": "Vul je naam in.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_name"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_email",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_email",
-     "en": "Please fill in your email address.",
-     "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
-     "value": "Vul je e-mailadres in.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_email"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_email_format",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
-     "en": "Please enter a valid email address.",
-     "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
-     "value": "Vul een geldig e-mailadres in.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_email_format"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_wants",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_wants",
-     "en": "Choose the evidence pack, samples or both.",
-     "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
-     "value": "Kies het studiedossier, proefpakketten of beide.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_wants"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_address",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_address",
-     "en": "Please fill in the practice address for the samples.",
-     "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
-     "value": "Vul het praktijkadres in voor de proefpakketten.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_address"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_generic",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_generic",
-     "en": "Your request was not sent. Please check the details below and try again.",
-     "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
-     "value": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_generic"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_success_title",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_success_title",
-     "en": "Request received",
-     "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
-     "value": "Aanvraag ontvangen",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_success_title"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_success_text",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_success_text",
-     "en": "Thank you. We reply by email to the address you gave.",
-     "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
-     "value": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
-     "gates": [],
-     "hold": [],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_success_text"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_legend_profession",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_legend_profession",
-     "en": "Profession",
-     "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
-     "value": "Beroep",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_legend_profession"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_dentist",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
-     "en": "Dentist",
-     "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
-     "value": "Tandarts",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_dentist"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_hygienist",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
-     "en": "Dental hygienist",
-     "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
-     "value": "Mondhygiënist",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_hygienist"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_kpni",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
-     "en": "kPNI therapist",
-     "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
-     "value": "kPNI-therapeut",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_kpni"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_natural",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
-     "en": "Orthomolecular or naturopathic practitioner",
-     "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
-     "value": "Orthomoleculair of natuurgeneeskundig therapeut",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_natural"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_gp",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
-     "en": "General practitioner",
-     "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
-     "value": "Huisarts",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_gp"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_pharmacist",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
-     "en": "Pharmacist",
-     "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
-     "value": "Apotheker",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_pharmacist"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_profession_other",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_profession_other",
-     "en": "Other",
-     "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
-     "value": "Andere",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_profession_other"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_profession_other",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
-     "en": "Your profession",
-     "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
-     "value": "Je beroep",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_profession_other"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_label_practice",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_label_practice",
-     "en": "Practice name",
-     "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
-     "value": "Naam van de praktijk",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_label_practice"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_profession_choice",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
-     "en": "Choose your profession.",
-     "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
-     "value": "Kies je beroep.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_profession_choice"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_profession_other",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
-     "en": "Please fill in your profession.",
-     "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
-     "value": "Vul je beroep in.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_profession_other"
-     ]
-    },
-    {
-     "id": "product:main/product_faq_block/request_error_practice",
-     "kind": "match",
-     "key": null,
-     "field": "sections.main.blocks.product_faq_block.settings.request_error_practice",
-     "en": "Please fill in your practice name.",
-     "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
-     "value": "Vul de naam van je praktijk in.",
-     "gates": [],
-     "hold": [
-      "review hold (holds.json): hold 27 Oct (landing desk): the practitioner form moves to its own section group sections/practitioner-group.json in release 14; the form part of round 7 registers there after release 14 is live, not on the product templates"
-     ],
-     "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",
-     "status": {
-      "drafted": true,
-      "registered": false
-     },
-     "hint": [
-      "main",
-      "product_faq_block",
-      "request_error_practice"
      ]
     }
    ]

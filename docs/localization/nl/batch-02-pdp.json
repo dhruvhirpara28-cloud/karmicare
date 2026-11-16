@@ -2,12 +2,12 @@
  "lang": "nl",
  "batch": "batch-02-pdp",
  "source": "docs/source-copy/batches/batch-02-pdp.json",
- "source_digest": "eabb2d7dd97c7cf2f873d1a3c8a687dd04897bb8",
- "source_entries": 543,
+ "source_digest": "81f6536895ce45e7a83fab8ca78ca10101764fe2",
+ "source_entries": 578,
  "counts": {
   "translated": 174,
   "pending-claim-review": 24,
-  "held": 85,
+  "held": 120,
   "dawn-nl": 15,
   "theme-key": 31,
   "admin": 214
@@ -6717,10 +6717,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_title",
    "en": "Request the practitioner pack",
    "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
-   "nl": "Vraag het pakket voor zorgverleners aan",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vraag het pakket voor zorgverleners aan"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_intro",
@@ -6729,10 +6729,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_intro",
    "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
    "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
-   "nl": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_name",
@@ -6741,10 +6741,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_name",
    "en": "Name",
    "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
-   "nl": "Naam",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Naam"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_profession",
@@ -6777,10 +6777,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_email",
    "en": "Email",
    "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
-   "nl": "E-mailadres",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: E-mailadres"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_phone",
@@ -6789,10 +6789,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_phone",
    "en": "Phone (optional)",
    "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
-   "nl": "Telefoon (optioneel)",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Telefoon (optioneel)"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_legend_wants",
@@ -6801,10 +6801,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_legend_wants",
    "en": "What would you like?",
    "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
-   "nl": "Wat wil je ontvangen?",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Wat wil je ontvangen?"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_help_wants",
@@ -6813,10 +6813,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_help_wants",
    "en": "Choose one or both.",
    "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
-   "nl": "Kies er één of beide.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Kies er één of beide."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_pack",
@@ -6825,10 +6825,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_pack",
    "en": "Evidence pack",
    "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
-   "nl": "Studiedossier",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Studiedossier"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_samples",
@@ -6837,10 +6837,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_samples",
    "en": "Samples for my practice",
    "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
-   "nl": "Proefpakketten voor mijn praktijk",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Proefpakketten voor mijn praktijk"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_address",
@@ -6849,10 +6849,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_address",
    "en": "Practice address (needed for samples)",
    "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
-   "nl": "Praktijkadres (nodig voor de proefpakketten)",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Praktijkadres (nodig voor de proefpakketten)"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_message",
@@ -6861,10 +6861,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_message",
    "en": "Message (optional)",
    "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
-   "nl": "Bericht (optioneel)",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Bericht (optioneel)"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_privacy_text",
@@ -6873,10 +6873,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_privacy_text",
    "en": "We only process these details to answer your request. More in our [privacy].",
    "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
-   "nl": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy]."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_privacy_link_label",
@@ -6885,10 +6885,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_privacy_link_label",
    "en": "Privacy Policy",
    "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
-   "nl": "privacybeleid",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: privacybeleid"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_button",
@@ -6897,10 +6897,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_button",
    "en": "Send request",
    "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
-   "nl": "Aanvraag versturen",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Aanvraag versturen"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_name",
@@ -6909,10 +6909,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_name",
    "en": "Please fill in your name.",
    "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
-   "nl": "Vul je naam in.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vul je naam in."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_profession",
@@ -6933,10 +6933,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_email",
    "en": "Please fill in your email address.",
    "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
-   "nl": "Vul je e-mailadres in.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vul je e-mailadres in."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_email_format",
@@ -6945,10 +6945,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_email_format",
    "en": "Please enter a valid email address.",
    "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
-   "nl": "Vul een geldig e-mailadres in.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vul een geldig e-mailadres in."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_wants",
@@ -6957,10 +6957,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_wants",
    "en": "Choose the evidence pack, samples or both.",
    "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
-   "nl": "Kies het studiedossier, proefpakketten of beide.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Kies het studiedossier, proefpakketten of beide."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_address",
@@ -6969,10 +6969,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_address",
    "en": "Please fill in the practice address for the samples.",
    "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
-   "nl": "Vul het praktijkadres in voor de proefpakketten.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vul het praktijkadres in voor de proefpakketten."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_generic",
@@ -6981,10 +6981,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_generic",
    "en": "Your request was not sent. Please check the details below and try again.",
    "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
-   "nl": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_success_title",
@@ -6993,10 +6993,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_success_title",
    "en": "Request received",
    "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
-   "nl": "Aanvraag ontvangen",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Aanvraag ontvangen"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_success_text",
@@ -7005,10 +7005,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_success_text",
    "en": "Thank you. We reply by email to the address you gave.",
    "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
-   "nl": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md)"
+   "notes": "new 25 Oct; NL/FR: wording of the withdrawal form (R73) and the FAQ's evidence-pack term (studiedossier / dossier scientifique, custom.product_faq#98, #107); trigger text is the fallback match on the FAQ link text (docs/pdp/practitioner-form/REPORT.md); 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Dank je. We antwoorden per e-mail op het adres dat je opgaf."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_legend_profession",
@@ -7017,10 +7017,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_legend_profession",
    "en": "Profession",
    "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
-   "nl": "Beroep",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Beroep"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_dentist",
@@ -7029,10 +7029,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_dentist",
    "en": "Dentist",
    "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
-   "nl": "Tandarts",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Tandarts"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_hygienist",
@@ -7041,10 +7041,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_hygienist",
    "en": "Dental hygienist",
    "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
-   "nl": "Mondhygiënist",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Mondhygiënist"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_kpni",
@@ -7053,10 +7053,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_kpni",
    "en": "kPNI therapist",
    "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
-   "nl": "kPNI-therapeut",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: kPNI-therapeut"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_natural",
@@ -7065,10 +7065,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_natural",
    "en": "Orthomolecular or naturopathic practitioner",
    "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
-   "nl": "Orthomoleculair of natuurgeneeskundig therapeut",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Orthomoleculair of natuurgeneeskundig therapeut"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_gp",
@@ -7077,10 +7077,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_gp",
    "en": "General practitioner",
    "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
-   "nl": "Huisarts",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Huisarts"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_pharmacist",
@@ -7089,10 +7089,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_pharmacist",
    "en": "Pharmacist",
    "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
-   "nl": "Apotheker",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Apotheker"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_profession_other",
@@ -7101,10 +7101,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_profession_other",
    "en": "Other",
    "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
-   "nl": "Andere",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Andere"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_profession_other",
@@ -7113,10 +7113,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_profession_other",
    "en": "Your profession",
    "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
-   "nl": "Je beroep",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Je beroep"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_label_practice",
@@ -7125,10 +7125,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_label_practice",
    "en": "Practice name",
    "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
-   "nl": "Naam van de praktijk",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Naam van de praktijk"
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_profession_choice",
@@ -7137,10 +7137,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession_choice",
    "en": "Choose your profession.",
    "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
-   "nl": "Kies je beroep.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Kies je beroep."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_profession_other",
@@ -7149,10 +7149,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_profession_other",
    "en": "Please fill in your profession.",
    "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
-   "nl": "Vul je beroep in.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vul je beroep in."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_error_practice",
@@ -7161,10 +7161,10 @@
    "key_path": "sections.main.blocks.product_faq_block.settings.request_error_practice",
    "en": "Please fill in your practice name.",
    "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
-   "nl": "Vul de naam van je praktijk in.",
-   "status": "translated",
+   "nl": "",
+   "status": "held",
    "flags": [],
-   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code"
+   "notes": "new 26 Oct; NL/FR in the form's wording (round 3: je/vous, 'praktijk'/'cabinet'); radio labels kept short (landing desk); the posted values stay English in the code; 16 Nov: source row retired (the form moved to sections/practitioner-group.json (release 14), one form for the whole site); was translated: Vul de naam van je praktijk in."
   },
   {
    "id": "product.subscription-item:main/product_faq_block/request_klaviyo_company_id",
@@ -7189,6 +7189,426 @@
    "status": "held",
    "flags": [],
    "notes": "never translate: Klaviyo ID (landing desk, 26 Oct)"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_title",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_title",
+   "en": "Request the practitioner pack",
+   "en_sha1": "fe3b07f8d3234b7d16918436c3853b33eea901ee",
+   "nl": "Vraag het pakket voor zorgverleners aan",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_title"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_intro",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_intro",
+   "en": "Tell us about your practice and what you need. The evidence pack holds the studies referenced above. A person reads every request and replies by email.",
+   "en_sha1": "0cbf17f9a9eeed8d4d06012392eb4503defc00b6",
+   "nl": "Vertel ons over je praktijk en wat je nodig hebt. Het studiedossier bevat de studies waarnaar hierboven verwezen wordt. Elke aanvraag wordt door een mens gelezen en per e-mail beantwoord.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_intro"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_name",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_name",
+   "en": "Name",
+   "en_sha1": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
+   "nl": "Naam",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_name"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_legend_profession",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_legend_profession",
+   "en": "Profession",
+   "en_sha1": "6f528041b7e1477e50097fc53d515f6ffe1b285f",
+   "nl": "Beroep",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_legend_profession"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_dentist",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_dentist",
+   "en": "Dentist",
+   "en_sha1": "379f4ff291406a7cf491cc75c44574d4ac8eccc6",
+   "nl": "Tandarts",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_dentist"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_hygienist",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_hygienist",
+   "en": "Dental hygienist",
+   "en_sha1": "1bb0cc96b08ace7d22c1614ead647e2a3e75e15d",
+   "nl": "Mondhygiënist",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_hygienist"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_kpni",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_kpni",
+   "en": "kPNI therapist",
+   "en_sha1": "44b58cac6020fbafcb293243db4c4b009a390746",
+   "nl": "kPNI-therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_kpni"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_natural",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_natural",
+   "en": "Orthomolecular or naturopathic practitioner",
+   "en_sha1": "b63f8c7aae49b69baea8232192d0902fd7757059",
+   "nl": "Orthomoleculair of natuurgeneeskundig therapeut",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_natural"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_gp",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_gp",
+   "en": "General practitioner",
+   "en_sha1": "370e38743900f392f6af4dd2b6cd0077abaa5878",
+   "nl": "Huisarts",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_gp"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_pharmacist",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_pharmacist",
+   "en": "Pharmacist",
+   "en_sha1": "869aa56da85a0fd5a03f299096a8ef16a37918c3",
+   "nl": "Apotheker",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_pharmacist"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_profession_other",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_profession_other",
+   "en": "Other",
+   "en_sha1": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
+   "nl": "Andere",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_profession_other"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_profession_other",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_profession_other",
+   "en": "Your profession",
+   "en_sha1": "df56409a526790a000ee336fa00cae6448da2d92",
+   "nl": "Je beroep",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_profession_other"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_practice",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_practice",
+   "en": "Practice name",
+   "en_sha1": "d810f1652c1afa2bee995e2ec2150cd9ee4a1b58",
+   "nl": "Naam van de praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_practice"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_email",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_email",
+   "en": "Email",
+   "en_sha1": "84add5b2952787581cb9a8851eef63d1ec75d22b",
+   "nl": "E-mailadres",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_email"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_phone",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_phone",
+   "en": "Phone (optional)",
+   "en_sha1": "df21aeef8f34a6a89c3946c46560bdd844a11ea3",
+   "nl": "Telefoon (optioneel)",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_phone"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_legend_wants",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_legend_wants",
+   "en": "What would you like?",
+   "en_sha1": "81b23a7eee71096693fa115255c7b660c42494d0",
+   "nl": "Wat wil je ontvangen?",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_legend_wants"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_help_wants",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_help_wants",
+   "en": "Choose one or both.",
+   "en_sha1": "219f947d3bbe80ace3da2d9554e410ef7eff90c0",
+   "nl": "Kies er één of beide.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_help_wants"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_pack",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_pack",
+   "en": "Evidence pack",
+   "en_sha1": "d370c66277f5d65abd9eb58027c67e20e9d27448",
+   "nl": "Studiedossier",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_pack"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_samples",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_samples",
+   "en": "Samples for my practice",
+   "en_sha1": "24661c382dc3d46a5fecde32198b3a0dcb38a450",
+   "nl": "Proefpakketten voor mijn praktijk",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_samples"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_address",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_address",
+   "en": "Practice address (needed for samples)",
+   "en_sha1": "a16fedf05b181c425f07c6dea19e2ff83db54f5a",
+   "nl": "Praktijkadres (nodig voor de proefpakketten)",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_address"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_label_message",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_label_message",
+   "en": "Message (optional)",
+   "en_sha1": "e0def023c1416df25dde63ce19724b8830e7b9d2",
+   "nl": "Bericht (optioneel)",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_label_message"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_privacy_text",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_privacy_text",
+   "en": "We only process these details to answer your request. More in our [privacy].",
+   "en_sha1": "c554d76356ef2fa73daa1a6adf7a418ceecd8c84",
+   "nl": "We verwerken deze gegevens alleen om je aanvraag te beantwoorden. Meer daarover in ons [privacy].",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_privacy_text"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_privacy_link_label",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_privacy_link_label",
+   "en": "Privacy Policy",
+   "en_sha1": "9db108ba6b7f6571356060929e37dae65878cfca",
+   "nl": "privacybeleid",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_privacy_link_label"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_button",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_button",
+   "en": "Send request",
+   "en_sha1": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
+   "nl": "Aanvraag versturen",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_button"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_name",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_name",
+   "en": "Please fill in your name.",
+   "en_sha1": "eccc6883e288c09ab9781da6143f8cb843ae4fe9",
+   "nl": "Vul je naam in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_name"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_profession_choice",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_profession_choice",
+   "en": "Choose your profession.",
+   "en_sha1": "21095e34f976b52d3351fa781816ad326531998b",
+   "nl": "Kies je beroep.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_profession_choice"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_profession_other",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_profession_other",
+   "en": "Please fill in your profession.",
+   "en_sha1": "3bfbab878769927785eff0a0c70b4ef3d11a53dc",
+   "nl": "Vul je beroep in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_profession_other"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_practice",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_practice",
+   "en": "Please fill in your practice name.",
+   "en_sha1": "3d5170f74bd8c0d021b715462605c4f9e7454f6a",
+   "nl": "Vul de naam van je praktijk in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_practice"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_email",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_email",
+   "en": "Please fill in your email address.",
+   "en_sha1": "4fe58d6efe4468016dfcb046b59199a2859ae136",
+   "nl": "Vul je e-mailadres in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_email"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_email_format",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_email_format",
+   "en": "Please enter a valid email address.",
+   "en_sha1": "d2306dd8970ff616631a3501791297f31475e416",
+   "nl": "Vul een geldig e-mailadres in.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_email_format"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_wants",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_wants",
+   "en": "Choose the evidence pack, samples or both.",
+   "en_sha1": "5368cfd84e13af5d11708e21567b928bd5b14c1a",
+   "nl": "Kies het studiedossier, proefpakketten of beide.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_wants"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_address",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_address",
+   "en": "Please fill in the practice address for the samples.",
+   "en_sha1": "eaf057beaba01d046561f72214b191b4360f47ac",
+   "nl": "Vul het praktijkadres in voor de proefpakketten.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_address"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_error_generic",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_error_generic",
+   "en": "Your request was not sent. Please check the details below and try again.",
+   "en_sha1": "12e5191edbc6f30089fc42b1d3c2fe3f56253987",
+   "nl": "Je aanvraag is niet verzonden. Controleer de gegevens hieronder en probeer het opnieuw.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_error_generic"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_success_title",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_success_title",
+   "en": "Request received",
+   "en_sha1": "d5656f0ed572005d2f5fd7af96c1657e22534f97",
+   "nl": "Aanvraag ontvangen",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_success_title"
+  },
+  {
+   "id": "practitioner-group:practitioner_request/request_success_text",
+   "resource_type": "section_group",
+   "file_or_handle": "sections/practitioner-group.json",
+   "key_path": "sections.practitioner_request.settings.request_success_text",
+   "en": "Thank you. We reply by email to the address you gave.",
+   "en_sha1": "58eea597ce85b7153154b7f99b97fbeac97803a4",
+   "nl": "Dank je. We antwoorden per e-mail op het adres dat je opgaf.",
+   "status": "translated",
+   "flags": [],
+   "notes": "16 Nov: the form moved to sections/practitioner-group.json (release 14), one form for the whole site; NL as registered on product.subscription-item:main/product_faq_block/request_success_text"
   }
  ]
 }

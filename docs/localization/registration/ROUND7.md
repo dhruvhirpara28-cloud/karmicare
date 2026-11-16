@@ -1,5 +1,10 @@
 # Round 7 · PDP trust pills, practitioner form
 
+**Form moved to its section group, 16 Nov (Victor: the form is still English on /nl and /fr).** Live main has the 37 `request_*` settings on `sections/practitioner-group.json` (same content as this branch apart from Shopify's comment header); the product templates keep only `request_enabled`, `request_trigger_url` and `request_trigger_text`. `live/tools/apply_practitioner_group.py`:
+- 35 new source rows `practitioner-group:practitioner_request/<setting>` (`section_group`, batch-02-pdp); the 2 Klaviyo IDs get none. Each EN equals its old template twin, and NL/FR are the registered values of that twin.
+- The template `request_*` rows of `product.subscription-item` and `product` are retired and held, except the trigger URL and text.
+- Plans: NL +35 / −44, FR +34 / −44 (FR *Profession* equals the EN). NL `validate.py` 62, FR `check.py` 75, `digest.py` ok.
+
 **Timing (landing desk 27 Oct):** release 13 is live (main `fff913d`, landings 79–83), but the form's section group is in **release 14** (landings 84–85, merchant-edit `b528931`). Round 7 restarts as a whole after release 14 is live: the form, the pills, the clock hint and the blog block. The desk confirmed the 22 carried settings, on condition that their EN is byte-identical to round 3; at the restart, `live_vs_source.py` against the release 14 main checks that.
 
 **Next restart: the form lives in its own section group (landing desk 27 Oct, landing 85, practitioner-form `1f76c90`, integration `c996d23`).** All 37 `request_*` settings now sit on `sections/practitioner-group.json`, section `practitioner_request` (type `kc-practitioner-request`), one form for the whole site. The product templates' `product_faq_block` keeps only `request_trigger_url` and `request_trigger_text`. Read-only check on integration, 27 Oct:
