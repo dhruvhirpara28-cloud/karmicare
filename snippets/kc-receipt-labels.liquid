@@ -5,6 +5,10 @@
   kc.receipt.* in locales/*.json (EN, NL, FR; Victor 20 Oct). Without an attribute the script
   writes the English text.
 
+  The plan cards above the receipt read the same attributes (updateSubscriptionGroupCardSubRow,
+  through kcLabelText): per-days with [count] = the plan's billing days, per-year, and their own
+  two, renews-year and per-brushing ([price] = the plan's price per brushing).
+
   Usage:
   <div class="kc-pricing-summary" {% render 'kc-receipt-labels' %}>
 {%- endcomment -%}
@@ -26,3 +30,5 @@ data-kc-billed-year="{{ 'kc.receipt.billed_year' | t }}"
 data-kc-billed-years="{{ 'kc.receipt.billed_years' | t }}"
 data-kc-one-time="{{ 'kc.receipt.one_time' | t }}"
 data-kc-one-time-note="{{ 'kc.receipt.one_time_note' | t }}"
+data-kc-renews-year="{{ 'kc.receipt.renews_year' | t }}"
+data-kc-per-brushing="{{ 'kc.receipt.per_brushing' | t }}"
