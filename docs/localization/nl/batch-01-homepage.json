@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94",
+ "source_digest": "db7e7844293bc7bcb8f63de46a28569d6ef8d490",
  "source_entries": 233,
  "counts": {
   "translated": 167,
@@ -160,12 +160,12 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.heading",
-   "en": "Backed by health professionals",
-   "en_sha1": "374eca1b99e0cc7ecd8eccd456238aaf2cc143bc",
+   "en": "Recommended by professionals",
+   "en_sha1": "ad20babb957b86501273a11a1cd2d03abd674cab",
    "nl": "Aanbevolen door professionals",
    "status": "translated",
    "flags": [],
-   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); 5 Nov: without 'zorg' (soft-launch-nl-voice 9c64d15, Victor 3 Nov; Victor confirmed in the source-copy session 5 Nov)"
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); 5 Nov: without 'zorg' (soft-launch-nl-voice 9c64d15, Victor 3 Nov; Victor confirmed in the source-copy session 5 Nov); 19 Nov: EN now 'Recommended by professionals' (live main 5cdbc14); NL unchanged"
   },
   {
    "id": "index:stat_strip_karmicare/tagline",
@@ -576,12 +576,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
-   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
-   "en_sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467",
-   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>HELPT BIOFILM VERMINDEREN</li><li>BELGISCHE FORMULE</li><li>VEGAN & HALAL</li></ul>",
+   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>FERMENTED CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "en_sha1": "3b0f09bb66508de2d88072c759d3bbc49de91d5c",
+   "nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>GEFERMENTEERDE REINIGING</li><li>HELPT BIOFILM VERMINDEREN</li><li>BELGISCHE FORMULE</li><li>VEGAN & HALAL</li></ul>",
    "status": "translated",
    "flags": [],
-   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct)"
+   "notes": "BIOFILM PREVENTION translated literally (C33) as the EN says it; the JEP/DETIC code bans prevention wording, allowed form would be 'helpt biofilm verminderen'; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); NL from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2; 27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); 19 Nov: REINIGING MET GLYCOLIPIDEN -> GEFERMENTEERDE REINIGING (EN GLYCOLIPID CLEANSING -> FERMENTED CLEANSING)",
+   "old_nl": "<ul><li>FLUORIDEVRIJ & SLS-VRIJ</li><li>MICROBIOOMBEWUST</li><li>NANO-HYDROXYAPATIET (NHAP)</li><li>SYNERGETISCH EFFECT</li><li>FLUWEELZACHT SCHUIM</li><li>REINIGING MET GLYCOLIPIDEN</li><li>HELPT BIOFILM VERMINDEREN</li><li>BELGISCHE FORMULE</li><li>VEGAN & HALAL</li></ul>"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/subheading",

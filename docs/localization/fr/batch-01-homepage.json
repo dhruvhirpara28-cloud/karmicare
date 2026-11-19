@@ -2,7 +2,7 @@
  "batch": "batch-01-homepage",
  "lang": "fr",
  "source_file": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94",
+ "source_digest": "db7e7844293bc7bcb8f63de46a28569d6ef8d490",
  "source_entries": 233,
  "digest_rule": "sha1 over the entries' sha1(en) values, sorted, joined with \\n",
  "translated": "2026-10-19",
@@ -153,13 +153,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.heading",
-   "en": "Backed by health professionals",
-   "en_sha1": "374eca1b99e0cc7ecd8eccd456238aaf2cc143bc",
+   "en": "Recommended by professionals",
+   "en_sha1": "ad20babb957b86501273a11a1cd2d03abd674cab",
    "fr": "Recommandé par des professionnels",
    "status": "translated",
    "flags": [],
-   "notes": "5 Nov: follows the NL hero badge 'Aanbevolen door professionals' (soft-launch-nl-voice 9c64d15, Victor 3 Nov; Victor confirmed in the source-copy session 5 Nov); was 'Soutenu par des professionnels de santé'",
-   "source_status": "approved"
+   "notes": "5 Nov: follows the NL hero badge 'Aanbevolen door professionals' (soft-launch-nl-voice 9c64d15, Victor 3 Nov; Victor confirmed in the source-copy session 5 Nov); was 'Soutenu par des professionnels de santé'; 19 Nov: EN now 'Recommended by professionals' (live main 5cdbc14); FR unchanged",
+   "source_status": "corrected"
   },
   {
    "id": "index:stat_strip_karmicare/tagline",
@@ -637,18 +637,19 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
-   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
-   "en_sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467",
-   "fr": "<ul><li>SANS FLUOR & SANS SLS</li><li>RESPECTUEUX DU MICROBIOME</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>EFFET SYNERGIQUE</li><li>MOUSSE VELOUTÉE</li><li>NETTOYAGE AUX GLYCOLIPIDES</li><li>AIDE À RÉDUIRE LE BIOFILM</li><li>FORMULATION BELGE</li><li>VEGAN & HALAL</li></ul>",
+   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>FERMENTED CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "en_sha1": "3b0f09bb66508de2d88072c759d3bbc49de91d5c",
+   "fr": "<ul><li>SANS FLUOR & SANS SLS</li><li>RESPECTUEUX DU MICROBIOME</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>EFFET SYNERGIQUE</li><li>MOUSSE VELOUTÉE</li><li>NETTOYAGE FERMENTÉ</li><li>AIDE À RÉDUIRE LE BIOFILM</li><li>FORMULATION BELGE</li><li>VEGAN & HALAL</li></ul>",
    "status": "translated",
    "flags": [],
-   "notes": "'BIOFILM PREVENTION' translated as written ('PRÉVENTION DU BIOFILM', C33). If the EN moves to the allowed verb, the FR becomes 'AIDE À RÉDUIRE LE BIOFILM'. Claims C33 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2",
+   "notes": "'BIOFILM PREVENTION' translated as written ('PRÉVENTION DU BIOFILM', C33). If the EN moves to the allowed verb, the FR becomes 'AIDE À RÉDUIRE LE BIOFILM'. Claims C33 need Clinical Research sign-off; translated faithfully, not softened.; EN updated 24 Oct (live main 85cdb59 (merchant-edit 4c2b0e9)); FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2; 19 Nov: NETTOYAGE AUX GLYCOLIPIDES -> NETTOYAGE FERMENTÉ (EN GLYCOLIPID CLEANSING -> FERMENTED CLEANSING)",
    "source_status": "corrected",
    "claims": [
     "C02",
     "C30",
     "C33"
-   ]
+   ],
+   "old_fr": "<ul><li>SANS FLUOR & SANS SLS</li><li>RESPECTUEUX DU MICROBIOME</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>EFFET SYNERGIQUE</li><li>MOUSSE VELOUTÉE</li><li>NETTOYAGE AUX GLYCOLIPIDES</li><li>AIDE À RÉDUIRE LE BIOFILM</li><li>FORMULATION BELGE</li><li>VEGAN & HALAL</li></ul>"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/subheading",

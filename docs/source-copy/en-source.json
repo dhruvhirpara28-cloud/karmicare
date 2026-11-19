@@ -34,7 +34,7 @@
  "batches": {
   "batch-01-homepage": {
    "entries": 233,
-   "digest": "b24ddaa03fb8d061599ba1ac4e652f08ab15db94"
+   "digest": "db7e7844293bc7bcb8f63de46a28569d6ef8d490"
   },
   "batch-02-pdp": {
    "entries": 578,
@@ -225,14 +225,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.testimonial_badge_h8d3WL.settings.heading",
-   "en": "Backed by health professionals",
-   "sha1": "374eca1b99e0cc7ecd8eccd456238aaf2cc143bc",
-   "status": "approved",
+   "en": "Recommended by professionals",
+   "sha1": "ad20babb957b86501273a11a1cd2d03abd674cab",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type text",
+   "notes": "type text; 19 Nov: EN live since main 5cdbc14 (16 Nov, merchant-edit 0e5b8b5), Victor 13 Nov; NL/FR unchanged",
    "setting_type": "text",
    "section_type": "hero-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Backed by health professionals",
+   "old_sha1": "374eca1b99e0cc7ecd8eccd456238aaf2cc143bc"
   },
   {
    "id": "index:stat_strip_karmicare/tagline",
@@ -828,11 +830,11 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.two_formulas_karmicare.settings.ingredients_list",
-   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
-   "sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467",
+   "en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>FERMENTED CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "sha1": "3b0f09bb66508de2d88072c759d3bbc49de91d5c",
    "status": "corrected",
    "never_translate": false,
-   "notes": "type richtext; claims C02, C30, C33: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2",
+   "notes": "type richtext; claims C02, C30, C33: needs-review (CLAIMS-REVIEW.md); EN updated 24 Oct from live main 85cdb59 (merchant-edit 4c2b0e9); NL/FR from docs/launch-gate/claims/TRANSLATIONS-HANDOFF.md row 2; 19 Nov: Victor via the landing desk: GLYCOLIPID CLEANSING becomes FERMENTED CLEANSING (theme f912167); no new claim (PDP INCI 'Glycolipids, fermented sugar')",
    "claims": [
     "C02",
     "C30",
@@ -842,8 +844,8 @@
    "setting_type": "richtext",
    "section_type": "two-formulas-karmicare",
    "rendered": true,
-   "old_en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>BIOFILM PREVENTION</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
-   "old_sha1": "9b0de1e400cbe4cba706cac39339d2ec4852301d"
+   "old_en": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>GLYCOLIPID CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+   "old_sha1": "687dc9244ba7bebf0ae0791d6bbd85a5f592f467"
   },
   {
    "id": "index:product_benefits_karmicare_bcQ6tp/subheading",
