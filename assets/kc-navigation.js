@@ -2,7 +2,9 @@
 // the navigation for the page clearance, hides the bar on scroll down and brings it back after 10px of
 // scrolling up where data-hide-on-scroll is true (product pages). Replaces Dawn's StickyHeader and keeps
 // its contract: preventHide (menus), the preventHeaderReveal event (media gallery), --header-height and
-// --header-bottom-position(-desktop).
+// --header-bottom-position(-desktop). It does not place the bar: position: sticky does, in step with
+// the scroll. What it publishes on the root stays the same while the page scrolls, and a value is only
+// written when it changed, so a scroll frame does not restyle the page.
 if (!customElements.get('sticky-header')) {
   customElements.define('sticky-header', class extends HTMLElement {
     connectedCallback() {
@@ -65,24 +67,23 @@ if (!customElements.get('sticky-header')) {
       const delta = y - this.lastY;
       this.lastY = y;
       if (this.preventReveal && delta !== 0) this.releaseReveal();
-      // Not clamped at 0: once the announcement bar has scrolled away the value goes negative and
-      // kc-navigation.css takes the larger of it and --kc-navigation-floor
-      let announcementBottom = null;
-      const scrollsWithPage = this.dataset.stickyType === 'none' && this.dataset.hideOnScroll !== 'true';
+      // The announcement bar's bottom edge on the page, not on screen, so it is its height and the
+      // scroll does not change it (0 without a bar, or with an empty one that Dawn hides)
+      let announcementBottom = 0;
       this.announcements.forEach(element => {
-        if (element.isConnected) {
-          const bottom = element.getBoundingClientRect().bottom + (scrollsWithPage ? y : 0);
-          announcementBottom = announcementBottom === null ? bottom : Math.max(announcementBottom, bottom);
+        const rect = element.getBoundingClientRect();
+        if (element.isConnected && rect.height > 0) {
+          announcementBottom = Math.max(announcementBottom, rect.bottom + window.scrollY);
         }
       });
-      // No announcement bar: the top of the page, which scrolls away like the bar would (0 when the
-      // navigation scrolls with the page itself)
-      if (announcementBottom === null) announcementBottom = scrollsWithPage ? 0 : -y;
       const root = document.documentElement.style;
-      root.setProperty('--kc-navigation-top', `${Math.ceil(announcementBottom)}px`);
+      const publish = (name, value) => {
+        if (root.getPropertyValue(name) !== value) root.setProperty(name, value);
+      };
+      publish('--kc-navigation-top', `${Math.ceil(announcementBottom)}px`);
       const height = Math.ceil(this.section.offsetHeight);
-      root.setProperty('--kc-navigation-clearance', `${height}px`);
-      root.setProperty('--header-height', `${height}px`);
+      publish('--kc-navigation-clearance', `${height}px`);
+      publish('--header-height', `${height}px`);
 
       if (this.dataset.hideOnScroll === 'true') {
         if (y <= 10) {
@@ -100,8 +101,8 @@ if (!customElements.get('sticky-header')) {
       this.section.classList.add('kc-header-autohide--ready');
       this.section.classList.toggle('scrolled-past-header', y > height);
       const bottom = Math.max(0, Math.ceil(this.section.getBoundingClientRect().bottom));
-      root.setProperty('--header-bottom-position', `${bottom}px`);
-      root.setProperty('--header-bottom-position-desktop', `${bottom}px`);
+      publish('--header-bottom-position', `${bottom}px`);
+      publish('--header-bottom-position-desktop', `${bottom}px`);
     }
 
     disconnectedCallback() {
