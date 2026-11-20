@@ -34,7 +34,7 @@
  "batches": {
   "batch-01-homepage": {
    "entries": 233,
-   "digest": "db7e7844293bc7bcb8f63de46a28569d6ef8d490"
+   "digest": "33a927e21e6fc4ba4c54fd3c2380840cf8676430"
   },
   "batch-02-pdp": {
    "entries": 578,
@@ -73,14 +73,16 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.heading_RHmd8h.settings.heading",
-   "en": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
-   "sha1": "27396ef93a1b975c6c4d1ec7d270713d993a1caa",
-   "status": "approved",
+   "en": "Your mouth has a rhythm. <strong>Does your oral care?</strong>",
+   "sha1": "f47c60ca0b2fbda75a70d2abe5c8a5ad8a9c8b22",
+   "status": "corrected",
    "never_translate": false,
-   "notes": "type inline_richtext",
+   "notes": "type inline_richtext; 20 Nov: Victor chose option A: the H1 becomes a question (theme 8eaead7); footer slogan unchanged",
    "setting_type": "inline_richtext",
    "section_type": "hero-karmicare",
-   "rendered": true
+   "rendered": true,
+   "old_en": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
+   "old_sha1": "27396ef93a1b975c6c4d1ec7d270713d993a1caa"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/text_Y7L3hV/text",

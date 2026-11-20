@@ -1,11 +1,11 @@
 {
  "lang": "fr",
  "inputs": {
-  "en-source.json": "afd9b18434b4",
+  "en-source.json": "c13fb71c65e8",
   "registered.json": "c0fc5d8bf7c2",
   "holds.json": "d0d575c65dd8",
   "releases.json": "1571d1e3719b",
-  "fr/batch-01-homepage.json": "c91f141e98f3",
+  "fr/batch-01-homepage.json": "b018177ff733",
   "fr/batch-02-pdp.json": "3e6b2c438362",
   "fr/batch-03-header-footer.json": "91a25a38e027",
   "fr/batch-04-legal.json": "e48e5cb67caa",
@@ -15,7 +15,7 @@
   "fr/batch-08-system.json": "33937b1041f0"
  },
  "batches": {
-  "batch-01-homepage": "db7e7844293bc7bcb8f63de46a28569d6ef8d490",
+  "batch-01-homepage": "33a927e21e6fc4ba4c54fd3c2380840cf8676430",
   "batch-02-pdp": "81f6536895ce45e7a83fab8ca78ca10101764fe2",
   "batch-03-header-footer": "2bf838600269a9c831c92132ba41ccab674eda67",
   "batch-04-legal": "4ead9703b4cfc2fc346b6e25843f38afec1124e7",
@@ -37,9 +37,9 @@
      "kind": "match",
      "key": null,
      "field": "sections.hero_karmicare_XKKLDK.blocks.heading_RHmd8h.settings.heading",
-     "en": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
-     "en_sha1": "27396ef93a1b975c6c4d1ec7d270713d993a1caa",
-     "value": "Votre bouche a son rythme <strong>Désormais, vos soins aussi</strong>",
+     "en": "Your mouth has a rhythm. <strong>Does your oral care?</strong>",
+     "en_sha1": "f47c60ca0b2fbda75a70d2abe5c8a5ad8a9c8b22",
+     "value": "Votre bouche a son rythme. <strong>Et vos soins ?</strong>",
      "gates": [],
      "hold": [],
      "how": "key of the published theme's template (GID proves --theme-id), every hint a key token, then the EN sha1",

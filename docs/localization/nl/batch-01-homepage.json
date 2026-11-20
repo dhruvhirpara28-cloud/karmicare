@@ -2,7 +2,7 @@
  "lang": "nl",
  "batch": "batch-01-homepage",
  "source": "docs/source-copy/batches/batch-01-homepage.json",
- "source_digest": "db7e7844293bc7bcb8f63de46a28569d6ef8d490",
+ "source_digest": "33a927e21e6fc4ba4c54fd3c2380840cf8676430",
  "source_entries": 233,
  "counts": {
   "translated": 167,
@@ -48,12 +48,13 @@
    "resource_type": "template_setting",
    "file_or_handle": "templates/index.json",
    "key_path": "sections.hero_karmicare_XKKLDK.blocks.heading_RHmd8h.settings.heading",
-   "en": "Your mouth has a rhythm <strong>Now your oral care too</strong>",
-   "en_sha1": "27396ef93a1b975c6c4d1ec7d270713d993a1caa",
-   "nl": "Je mond heeft een ritme <strong>Nu je mondzorg ook</strong>",
+   "en": "Your mouth has a rhythm. <strong>Does your oral care?</strong>",
+   "en_sha1": "f47c60ca0b2fbda75a70d2abe5c8a5ad8a9c8b22",
+   "nl": "Je mond heeft een ritme. <strong>Je mondzorg ook?</strong>",
    "status": "translated",
    "flags": [],
-   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); 10 Nov: back to the H1 Victor kept on 30 Oct after the localhost preview ('Volg het.' revoked, soft-launch-nl-voice b97d7bf); 'Volg het.' was registered on 6 Nov by mistake because b97d7bf had not reached source-copy"
+   "notes": "27 Oct: NL voice batch homepage (soft-launch-nl-voice 03-BATCH-homepage.md @ ebd4bd7, Victor approved 27 Oct); 10 Nov: back to the H1 Victor kept on 30 Oct after the localhost preview ('Volg het.' revoked, soft-launch-nl-voice b97d7bf); 'Volg het.' was registered on 6 Nov by mistake because b97d7bf had not reached source-copy; 20 Nov: Victor chose option A: the H1 becomes a question (theme 8eaead7); footer slogan unchanged",
+   "old_nl": "Je mond heeft een ritme <strong>Nu je mondzorg ook</strong>"
   },
   {
    "id": "index:hero_karmicare_XKKLDK/text_Y7L3hV/text",
