@@ -1,0 +1,52 @@
+{%- layout none -%}
+{%- comment -%}
+  Google Merchant Center supplemental feed (tab-separated), from the localized gallery metafields.
+
+  URL: /nl/collections/all?view=kc-feed-google and /fr/collections/all?view=kc-feed-google
+  The page's language picks the metafield (custom.gallery_nl or custom.gallery_fr). One row per
+  variant of each product in the collection whose metafield holds images: id, image_link (the first
+  image) and additional_image_link (the next ones, at most ten, comma-separated).
+
+  The id is the one the Google & YouTube app gives a Shopify item: shopify_<country>_<product id>_<variant id>,
+  with the country of the request (add &country=NL or &country=FR to the URL for another market).
+  Only products that are active and published to the Online Store are in a collection, so a draft
+  or unlisted product never gets a row. Not linked from any page or sitemap.
+  Setup, evidence and limits: docs/pdp/localized-gallery/
+{%- endcomment -%}
+{%- liquid
+  assign kc_feed_newline = '%0A' | url_decode
+  assign kc_feed_tab = '%09' | url_decode
+  assign kc_feed_language = request.locale.iso_code | slice: 0, 2
+  assign kc_feed_key = ''
+  if kc_feed_language == 'nl' or kc_feed_language == 'fr'
+    assign kc_feed_key = 'gallery_' | append: kc_feed_language
+  endif
+  assign kc_feed_id_prefix = 'shopify_' | append: localization.country.iso_code | append: '_'
+
+  echo 'id' | append: kc_feed_tab | append: 'image_link' | append: kc_feed_tab | append: 'additional_image_link' | append: kc_feed_newline
+  paginate collection.products by 250
+    for product in collection.products
+      if kc_feed_key == blank
+        break
+      endif
+      assign kc_feed_images = product.metafields.custom[kc_feed_key].value | where: 'media_type', 'image'
+      if kc_feed_images.size > 0
+        capture kc_feed_additional
+          for image in kc_feed_images offset: 1 limit: 10
+            unless forloop.first
+              echo ','
+            endunless
+            echo 'https:'
+            echo image | image_url: width: 2048
+          endfor
+        endcapture
+        for variant in product.variants
+          echo kc_feed_id_prefix | append: product.id | append: '_' | append: variant.id | append: kc_feed_tab
+          echo 'https:'
+          echo kc_feed_images.first | image_url: width: 2048
+          echo kc_feed_tab | append: kc_feed_additional | append: kc_feed_newline
+        endfor
+      endif
+    endfor
+  endpaginate
+-%}

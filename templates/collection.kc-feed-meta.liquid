@@ -1,0 +1,72 @@
+{%- layout none -%}
+{%- comment -%}
+  Meta catalog language override feed (CSV), from the localized gallery metafields.
+
+  URL: /nl/collections/all?view=kc-feed-meta and /fr/collections/all?view=kc-feed-meta
+  The page's language picks the metafield (custom.gallery_nl or custom.gallery_fr) and the override
+  value (nl_XX or fr_XX). One row per variant of each product in the collection whose metafield
+  holds images: id (the variant id, Meta's content ID for a Shopify catalog), override, and
+  image[0].url onwards in the metafield's order. Products without images in the metafield get no row,
+  so English and any other language print the header only.
+
+  Only products that are active and published to the Online Store are in a collection, so a draft
+  or unlisted product never gets a row. Not linked from any page or sitemap.
+  Setup, evidence and limits: docs/pdp/localized-gallery/
+{%- endcomment -%}
+{%- liquid
+  assign kc_feed_newline = '%0A' | url_decode
+  assign kc_feed_language = request.locale.iso_code | slice: 0, 2
+  assign kc_feed_key = ''
+  if kc_feed_language == 'nl' or kc_feed_language == 'fr'
+    assign kc_feed_key = 'gallery_' | append: kc_feed_language
+  endif
+  assign kc_feed_override = kc_feed_language | append: '_XX'
+
+  assign kc_feed_columns = 1
+  assign kc_feed_rows = ''
+  paginate collection.products by 250
+    for product in collection.products
+      if kc_feed_key == blank
+        break
+      endif
+      assign kc_feed_images = product.metafields.custom[kc_feed_key].value | where: 'media_type', 'image'
+      if kc_feed_images.size > 0
+        if kc_feed_images.size > kc_feed_columns
+          assign kc_feed_columns = kc_feed_images.size
+        endif
+        capture kc_feed_urls
+          for image in kc_feed_images
+            echo ',"https:'
+            echo image | image_url: width: 2048
+            echo '"'
+          endfor
+        endcapture
+        for variant in product.variants
+          assign kc_feed_rows = kc_feed_rows | append: variant.id | append: ',' | append: kc_feed_override | append: kc_feed_urls | append: '|' | append: kc_feed_images.size | append: kc_feed_newline
+        endfor
+      endif
+    endfor
+  endpaginate
+
+  echo 'id,override'
+  for index in (1..kc_feed_columns)
+    echo ',image['
+    echo forloop.index0
+    echo '].url'
+  endfor
+  echo kc_feed_newline
+
+  # Each stored row ends in "|<its image count>": pad it with empty cells up to the widest row
+  assign kc_feed_lines = kc_feed_rows | split: kc_feed_newline
+  for line in kc_feed_lines
+    assign kc_feed_parts = line | split: '|'
+    echo kc_feed_parts.first
+    assign kc_feed_missing = kc_feed_columns | minus: kc_feed_parts.last
+    if kc_feed_missing > 0
+      for index in (1..kc_feed_missing)
+        echo ','
+      endfor
+    endif
+    echo kc_feed_newline
+  endfor
+-%}
