@@ -15,6 +15,7 @@ if (!customElements.get('sticky-header')) {
       this.lastY = this.scrollPosition();
       this.climbed = 0;
       this.preventReveal = false;
+      this.hiddenTop = -1;
       this.shouldHide = this.dataset.hideOnScroll === 'true' && this.lastY > 10;
       this.schedule = () => {
         if (!this.frame) this.frame = requestAnimationFrame(() => this.update());
@@ -97,6 +98,17 @@ if (!customElements.get('sticky-header')) {
           if (this.climbed >= 10 && !this.preventReveal) this.shouldHide = false;
         }
       }
+      // How far from the top of the screen the section sits as it hides: the bar slides that far and
+      // its own height (kc-navigation.css). Written when a hide begins, so the slide's end does not
+      // move during the slide, and again only if the hidden section has moved further down.
+      if (this.shouldHide) {
+        const top = Math.max(0, Math.ceil(this.section.offsetTop - window.scrollY));
+        const hiding = !this.section.classList.contains('kc-header-autohide--hidden');
+        if (hiding || top > this.hiddenTop) {
+          this.hiddenTop = top;
+          this.section.style.setProperty('--kc-navigation-y', `${top}px`);
+        }
+      }
       this.section.classList.toggle('kc-header-autohide--hidden', this.shouldHide);
       this.section.classList.add('kc-header-autohide--ready');
       this.section.classList.toggle('scrolled-past-header', y > height);
@@ -111,6 +123,7 @@ if (!customElements.get('sticky-header')) {
       clearTimeout(this.revealTimer);
       cancelAnimationFrame(this.frame);
       this.frame = 0;
+      this.section?.style.removeProperty('--kc-navigation-y');
       if (!document.querySelector('sticky-header')) {
         const root = document.documentElement.style;
         ['--kc-navigation-top', '--kc-navigation-clearance', '--header-height',

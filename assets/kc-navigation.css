@@ -35,7 +35,8 @@
    against the announcement bar (Victor, 20 Nov). The negative margin gives the section's height back
    to the page, so the first section still starts right under the announcement bar. */
 .section-header.shopify-section-group-header-group {
-  /* Highest the section sits on screen: under the announcement bar at the top of the page */
+  /* Highest the section sits on screen: under the announcement bar at the top of the page. The
+     script replaces it with where the section sits when a hide begins. */
   --kc-navigation-y: max(var(--kc-navigation-top), var(--kc-navigation-floor));
   position: sticky;
   top: var(--kc-navigation-floor);
@@ -63,22 +64,30 @@
   pointer-events: auto;
 }
 
-/* Hide on scroll (product pages, or sticky_header_type on-scroll-up): slides up at once, comes back
-   after 0.15s. It stays while a menu is open or keyboard focus is inside it. It slides its own height,
-   the highest it can sit (--kc-navigation-y) and 1.6rem more: the bar's elevation-md shadow reaches
-   16px below it. */
+/* Hide on scroll (product pages, or sticky_header_type on-scroll-up), calm (Victor, 20 Nov): the bar
+   glides up in 0.5s, starting gently, and comes back after 0.15s in 0.4s, settling gently. Its shadow
+   fades out and in with the slide: sections/header.liquid reads --kc-navigation-slide and
+   --kc-navigation-shadow. The bar stays while a menu is open or keyboard focus is inside it. It slides
+   its own height, as far as it sat from the top when the slide began (--kc-navigation-y, set by
+   assets/kc-navigation.js) and 1.6rem more: the bar's elevation-md shadow reaches 16px below it. */
 .section-header.kc-header-autohide--ready {
-  transition: transform 0.3s ease 0.15s;
+  --kc-navigation-slide: 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  transition: transform var(--kc-navigation-slide);
+}
+
+.section-header.kc-header-autohide--hidden {
+  --kc-navigation-slide: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section-header.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
+  --kc-navigation-shadow: none;
   transform: translateY(calc(-100% - var(--kc-navigation-y) - 1.6rem));
-  transition-delay: 0s;
 }
 
 .section-header.menu-open,
 .section-header:has(details[open]),
 .section-header:has(:focus-visible) {
+  --kc-navigation-slide: 0s;
   transition: none;
 }
 
@@ -98,8 +107,10 @@
   scroll-margin-top: calc(var(--kc-navigation-clearance) + 1.6rem);
 }
 
+/* Reduced motion: no slide and no fade, the bar and its shadow are there or not */
 @media (prefers-reduced-motion: reduce) {
   .section-header.kc-header-autohide--ready {
+    --kc-navigation-slide: 0s;
     transition: none;
   }
 }
