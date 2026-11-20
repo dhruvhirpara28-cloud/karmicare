@@ -11,6 +11,19 @@
   elsif request.page_type == 'password'
     assign og_url = request.origin
   endif
+
+  # Localized gallery: on a Dutch or French product page the share image is the first image of
+  # custom.gallery_nl / custom.gallery_fr. Empty, or any other page: Shopify's page image.
+  assign og_image = page_image
+  capture kc_gallery_key
+    render 'kc-localized-gallery-key'
+  endcapture
+  if kc_gallery_key != blank
+    assign kc_gallery_images = product.metafields.custom[kc_gallery_key].value | where: 'media_type', 'image'
+    if kc_gallery_images.size > 0
+      assign og_image = kc_gallery_images.first
+    endif
+  endif
 %}
 
 <meta property="og:site_name" content="{{ shop.name }}">
@@ -19,11 +32,11 @@
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
 
-{%- if page_image -%}
-  <meta property="og:image" content="http:{{ page_image | image_url }}">
-  <meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
-  <meta property="og:image:width" content="{{ page_image.width }}">
-  <meta property="og:image:height" content="{{ page_image.height }}">
+{%- if og_image -%}
+  <meta property="og:image" content="http:{{ og_image | image_url }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image | image_url }}">
+  <meta property="og:image:width" content="{{ og_image.width }}">
+  <meta property="og:image:height" content="{{ og_image.height }}">
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}

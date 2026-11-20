@@ -19,6 +19,15 @@
     endif
   endif
 
+  # Localized gallery, as in main-product: on a Dutch or French product page the images of
+  # custom.gallery_nl / custom.gallery_fr take the place of the product media. Empty: no change.
+  capture kc_gallery_key
+    render 'kc-localized-gallery-key'
+  endcapture
+  if kc_gallery_key != blank and placeholder != true
+    assign kc_gallery_images = product.metafields.custom[kc_gallery_key].value | where: 'media_type', 'image'
+  endif
+
   # "Show first subscription only" (the end CTA) shows one fixed offer: the variant's first public
   # selling plan (snippets/kc-plan-public.liquid), or its first selling plan while no compare plan
   # holds a valid public ID. The offer box below and the buy button both read it, so the button buys
@@ -124,7 +133,12 @@
             </div>
             {% render 'kc-hero-animation', part: 'assets' %}
           {%- elsif placeholder != true -%}
-            {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
+            {% render 'product-media-gallery',
+              product: product,
+              variant_images: variant_images,
+              limit: 1,
+              localized_images: kc_gallery_images
+            %}
           {%- else -%}
             <div class="product__media-item{% if section.settings.remove_first_media_bg %} remove-first-bg{% endif %}">
               <div
@@ -789,7 +803,11 @@
         </div>
       </div>
       {%- unless kc_hero -%}
-        {% render 'product-media-modal', product: product, variant_images: variant_images %}
+        {% render 'product-media-modal',
+          product: product,
+          variant_images: variant_images,
+          localized_images: kc_gallery_images
+        %}
       {%- endunless -%}
     </div>
   </section>
@@ -813,7 +831,7 @@
   {%- endif -%}
 
   <script type="application/ld+json">
-    {{ product | structured_data }}
+    {% render 'kc-product-structured-data', product: product, image: kc_gallery_images.first %}
   </script>
 
   {%- if kc_hero -%}

@@ -4,6 +4,8 @@
   Accepts:
   - product: {Object} Product liquid object
   - variant_images: {Array} Product images associated with a variant
+  - localized_images: {Array} (optional) Images that replace the product media in the page's language
+    (see 'kc-localized-gallery-key'). Empty or missing: the product media, as before.
 
   Usage:
   {% render 'product-media-modal' %}
@@ -33,13 +35,22 @@
       tabindex="0"
     >
       {%- liquid
-        if product.selected_or_first_available_variant.featured_media != null
-          assign media = product.selected_or_first_available_variant.featured_media
+        # The same choice as in 'product-media-gallery', so the zoom shows the images the gallery shows
+        assign kc_gallery_media = product.media
+        assign kc_variant_media = product.selected_or_first_available_variant.featured_media
+        if localized_images.size > 0
+          assign kc_gallery_media = localized_images
+          assign kc_variant_media = nil
+          assign variant_images = nil
+        endif
+
+        if kc_variant_media != null
+          assign media = kc_variant_media
           render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
         endif
       -%}
 
-      {%- for media in product.media -%}
+      {%- for media in kc_gallery_media -%}
         {%- liquid
           if section.settings.hide_variants and variant_images contains media.src or variant_images contains media.id
             assign variant_image = true
@@ -47,7 +58,7 @@
             assign variant_image = false
           endif
 
-          unless media.id == product.selected_or_first_available_variant.featured_media.id
+          unless media.id == kc_variant_media.id
             render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
           endunless
         -%}

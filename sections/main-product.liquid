@@ -89,12 +89,23 @@
     >
   {%- endif -%}
 
+  {%- liquid
+    # Localized gallery: in Dutch and French the images of custom.gallery_nl / custom.gallery_fr take the
+    # place of the product media in the gallery, the zoom and the structured data. Empty: no change.
+    capture kc_gallery_key
+      render 'kc-localized-gallery-key'
+    endcapture
+    if kc_gallery_key != blank
+      assign kc_gallery_images = product.metafields.custom[kc_gallery_key].value | where: 'media_type', 'image'
+    endif
+  -%}
+
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
-          {% render 'product-media-gallery', variant_images: variant_images %}
+          {% render 'product-media-gallery', variant_images: variant_images, localized_images: kc_gallery_images %}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section
@@ -842,7 +853,7 @@
         </div>
       </div>
 
-      {% render 'product-media-modal', variant_images: variant_images %}
+      {% render 'product-media-modal', variant_images: variant_images, localized_images: kc_gallery_images %}
 
       {% assign popups = section.blocks | where: 'type', 'popup' %}
       {%- for block in popups -%}
@@ -891,7 +902,7 @@
       -%}
 
       <script type="application/ld+json">
-        {{ product | structured_data }}
+        {% render 'kc-product-structured-data', product: product, image: kc_gallery_images.first %}
       </script>
     </div>
   </product-component>

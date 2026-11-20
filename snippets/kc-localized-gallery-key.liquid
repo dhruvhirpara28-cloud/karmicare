@@ -1,0 +1,24 @@
+{%- comment -%}
+  Prints the key of the product metafield that holds the gallery images for the page's language:
+  gallery_nl in Dutch and gallery_fr in French (namespace custom, type list.file_reference).
+  Prints nothing in any other language and on every page that is not a product page; the native
+  product media apply there. The feed template reads the same two metafields.
+
+  The caller decides on the images, so an empty or missing metafield also keeps the native media:
+    capture kc_gallery_key
+      render 'kc-localized-gallery-key'
+    endcapture
+    if kc_gallery_key != blank
+      assign kc_gallery_images = product.metafields.custom[kc_gallery_key].value | where: 'media_type', 'image'
+    endif
+
+  Admin steps and evidence: docs/pdp/localized-gallery/
+{%- endcomment -%}
+{%- liquid
+  if request.page_type == 'product'
+    assign kc_gallery_language = request.locale.iso_code | slice: 0, 2
+    if kc_gallery_language == 'nl' or kc_gallery_language == 'fr'
+      echo 'gallery_' | append: kc_gallery_language
+    endif
+  endif
+-%}
