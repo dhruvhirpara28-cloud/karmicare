@@ -65,7 +65,8 @@
 }
 
 /* Hide on scroll (product pages, or sticky_header_type on-scroll-up), calm (Victor, 20 Nov): the bar
-   glides up in 0.5s, starting gently, and comes back after 0.15s in 0.4s, settling gently. Its shadow
+   glides up in 0.5s, starting gently, and comes back after 0.15s in 0.4s, settling gently. The 2s it
+   waits before it hides is the script's (HIDE_DELAY_MS in assets/kc-navigation.js). Its shadow
    fades out and in with the slide: sections/header.liquid reads --kc-navigation-slide and
    --kc-navigation-shadow. The bar stays while a menu is open or keyboard focus is inside it. It slides
    its own height, as far as it sat from the top when the slide began (--kc-navigation-y, set by

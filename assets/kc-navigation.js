@@ -1,11 +1,15 @@
 // The floating navigation's controller (assets/kc-navigation.css): measures the announcement bar and
-// the navigation for the page clearance, hides the bar on scroll down and brings it back after 10px of
-// scrolling up where data-hide-on-scroll is true (product pages). Replaces Dawn's StickyHeader and keeps
-// its contract: preventHide (menus), the preventHeaderReveal event (media gallery), --header-height and
-// --header-bottom-position(-desktop). It does not place the bar: position: sticky does, in step with
-// the scroll. What it publishes on the root stays the same while the page scrolls, and a value is only
-// written when it changed, so a scroll frame does not restyle the page.
+// the navigation for the page clearance, hides the bar 2s after a scroll down began and brings it back
+// after 10px of scrolling up where data-hide-on-scroll is true (product pages). Replaces Dawn's
+// StickyHeader and keeps its contract: preventHide (menus), the preventHeaderReveal event (media
+// gallery), --header-height and --header-bottom-position(-desktop). It does not place the bar:
+// position: sticky does, in step with the scroll. What it publishes on the root stays the same while
+// the page scrolls, and a value is only written when it changed, so a scroll frame does not restyle
+// the page.
 if (!customElements.get('sticky-header')) {
+  // The bar stays this long after a scroll down began, then slides away (Victor, 21 Nov)
+  const HIDE_DELAY_MS = 2000;
+
   customElements.define('sticky-header', class extends HTMLElement {
     connectedCallback() {
       this.section = this.closest('.section-header');
@@ -52,6 +56,28 @@ if (!customElements.get('sticky-header')) {
       }, 66);
     }
 
+    // A menu or the search is open: the bar stays
+    held() {
+      return this.preventHide || this.section.classList.contains('menu-open') ||
+        this.querySelector('predictive-search')?.isOpen;
+    }
+
+    // One timer per scroll down: later frames of the same scroll do not restart it
+    startHide() {
+      if (this.shouldHide || this.hideTimer) return;
+      this.hideTimer = setTimeout(() => {
+        this.hideTimer = 0;
+        if (this.held()) return;
+        this.shouldHide = true;
+        this.schedule();
+      }, HIDE_DELAY_MS);
+    }
+
+    cancelHide() {
+      clearTimeout(this.hideTimer);
+      this.hideTimer = 0;
+    }
+
     observeSizes() {
       this.observer?.disconnect();
       this.announcements = Array.from(document.querySelectorAll('.announcement-bar-section'));
@@ -88,12 +114,14 @@ if (!customElements.get('sticky-header')) {
 
       if (this.dataset.hideOnScroll === 'true') {
         if (y <= 10) {
+          this.cancelHide();
           this.shouldHide = false;
           this.climbed = 0;
-        } else if (delta > 0 && !this.preventHide && !this.querySelector('predictive-search')?.isOpen) {
-          this.shouldHide = true;
+        } else if (delta > 0 && !this.held()) {
+          this.startHide();
           this.climbed = 0;
         } else if (delta < 0) {
+          this.cancelHide();
           this.climbed -= delta;
           if (this.climbed >= 10 && !this.preventReveal) this.shouldHide = false;
         }
@@ -121,6 +149,7 @@ if (!customElements.get('sticky-header')) {
       this.abort?.abort();
       this.observer?.disconnect();
       clearTimeout(this.revealTimer);
+      this.cancelHide();
       cancelAnimationFrame(this.frame);
       this.frame = 0;
       this.section?.style.removeProperty('--kc-navigation-y');
