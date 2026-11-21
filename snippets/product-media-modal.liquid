@@ -46,7 +46,7 @@
 
         if kc_variant_media != null
           assign media = kc_variant_media
-          render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
+          render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants, alt_fallback: product.title
         endif
       -%}
 
@@ -59,7 +59,7 @@
           endif
 
           unless media.id == kc_variant_media.id
-            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
+            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image, alt_fallback: product.title
           endunless
         -%}
       {%- endfor -%}

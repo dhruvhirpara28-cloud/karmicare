@@ -5,6 +5,7 @@
   - media: {Object} Product Media object
   - loop: {Boolean} Enable video looping (optional)
   - variant_image: {Boolean} Whether or not media is associated with a variant
+  - alt_fallback: {String} Alt text for an image that has none, the product title (optional, see 'kc-media-alt')
 
   Usage:
   {% render 'product-media',
@@ -15,6 +16,9 @@
 {% endcomment %}
 
 {%- if media.media_type == 'image' -%}
+  {%- capture media_alt -%}
+    {%- render 'kc-media-alt', alt: media.alt, fallback: alt_fallback -%}
+  {%- endcapture -%}
   <img
     class="global-media-settings global-media-settings--no-shadow{% if variant_image %} product__media-item--variant{% endif %}"
     srcset="
@@ -30,13 +34,16 @@
     "
     sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
     src="{{ media.preview_image | image_url: width: 1445 }}"
-    alt="{{ media.alt | escape }}"
+    alt="{{ media_alt | escape }}"
     loading="lazy"
     width="1100"
     height="{{ 1100 | divided_by: media.preview_image.aspect_ratio | ceil }}"
     data-media-id="{{ media.id }}"
   >
 {%- else -%}
+  {%- capture media_alt -%}
+    {%- render 'kc-media-alt', alt: media.preview_image.alt, fallback: alt_fallback -%}
+  {%- endcapture -%}
   {%- if media.media_type == 'model' -%}
     <div class="product-media-modal__model" data-media-id="{{ media.id }}">
       <product-model
@@ -72,7 +79,7 @@
       loading="lazy"
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
-      alt="{{ media.preview_image.alt | escape }}"
+      alt="{{ media_alt | escape }}"
     >
   </button>
   <template>

@@ -151,7 +151,8 @@
             media_width: media_width,
             media_fit: section.settings.media_fit,
             constrain_to_viewport: section.settings.constrain_to_viewport,
-            lazy_load: false
+            lazy_load: false,
+            alt_fallback: product.title
           %}
         </li>
       {%- endif -%}
@@ -192,7 +193,8 @@
               media_width: media_width,
               media_fit: section.settings.media_fit,
               constrain_to_viewport: section.settings.constrain_to_viewport,
-              lazy_load: lazy_load
+              lazy_load: lazy_load,
+              alt_fallback: product.title
             %}
           </li>
         {%- endunless -%}
@@ -355,6 +357,9 @@
               endif
             endcapture
             assign media_index = media_index | plus: 1
+            capture thumbnail_alt
+              render 'kc-media-alt', alt: featured_media.alt, fallback: product.title
+            endcapture
           -%}
           <li
             id="Slide-Thumbnails-{{ section.id }}-0"
@@ -382,7 +387,7 @@
                   sizes: sizes,
                   widths: '54, 74, 104, 162, 208, 324, 416',
                   id: thumbnail_id,
-                  alt: featured_media.alt
+                  alt: thumbnail_alt
                 | escape
               }}
             </button>
@@ -404,6 +409,9 @@
                 endif
               endcapture
               assign media_index = media_index | plus: 1
+              capture thumbnail_alt
+                render 'kc-media-alt', alt: media.alt, fallback: product.title
+              endcapture
             -%}
             <li
               id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}"
@@ -448,7 +456,7 @@
                     sizes: sizes,
                     widths: '54, 74, 104, 162, 208, 324, 416',
                     id: thumbnail_id,
-                    alt: media.alt
+                    alt: thumbnail_alt
                   | escape
                 }}
               </button>
