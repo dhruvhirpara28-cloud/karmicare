@@ -320,6 +320,36 @@
         "padding_bottom_mobile": 48
       }
     },
+    "two_formulas_karmicare": {
+      "type": "two-formulas-karmicare",
+      "settings": {
+        "subheading": "BIORHYTHMIC ORAL CARE",
+        "heading": "Two formulas. One system. <strong>Designed around you.</strong>",
+        "heading_bold_opacity": 70,
+        "button_label": "",
+        "button_link": "",
+        "button_subtext": "",
+        "main_image": "shopify://shop_images/kc-two-formulas-duo.png",
+        "left_heading": "Activated and strengthened by day",
+        "left_text": "Guarana, mint and lime. A mineral shield for everything ahead. Your morning ritual, activated.",
+        "left_button_label": "",
+        "left_button_link": "",
+        "right_heading": "Purified and restored by night",
+        "right_text": "Valerian, cinnamon and orange. A deep reset and renewal for everything behind. Your evening ritual, complete.",
+        "right_button_label": "",
+        "right_button_link": "",
+        "ingredients_list": "<ul><li>FLUORIDE-FREE & SLS-FREE</li><li>MICROBIOME-CONSCIOUS</li><li>NANO-HYDROXYAPATITE (NHAP)</li><li>SYNERGETIC EFFECT</li><li>VELVETY FOAM</li><li>FERMENTED CLEANSING</li><li>HELPS REDUCE BIOFILM</li><li>BELGIAN FORMULATION</li><li>VEGAN & HALAL</li></ul>",
+        "show_bg_clock": true,
+        "bg_clock_image": "shopify://shop_images/bg_clock_1.svg",
+        "surface": "page",
+        "text_color_day": "#191f38",
+        "text_color_night": "#ffffff",
+        "padding_top": 160,
+        "padding_bottom": 160,
+        "padding_top_mobile": 44,
+        "padding_bottom_mobile": 44
+      }
+    },
     "trusted_professionals_HAqYth": {
       "type": "trusted-professionals",
       "blocks": {
@@ -933,8 +963,9 @@
   },
   "order": [
     "main",
-    "chronobiology_clock_karmicare",
     "trusted_professionals_HAqYth",
+    "two_formulas_karmicare",
+    "chronobiology_clock_karmicare",
     "how_it_works_steps_aAgVmF",
     "comparison_table_r8CDbT",
     "kc_review_widget_NUEtim",
