@@ -448,10 +448,10 @@
       }
     }
 
-    /* When the bar shows: only once the visitor has scrolled past the buybox's first plan card (Victor,
-       20 Oct), never while another way to begin is on screen (P8: the section of the
-       comparison table, the plans table or the end CTA, whole, so the bar never covers their cards),
-       and only once it knows the plan */
+    /* When the bar shows: only once the buybox's own buy button has left the screen completely (Victor,
+       21 Nov; from 20 Oct it was the first plan card), never while another way to begin is on screen
+       (P8: the section of the comparison table, the plans table or the end CTA, whole, so the bar never
+       covers their cards), and only once it knows the plan */
     var CTA_SELECTOR = '.product-form__submit, .comparison-section__button, [data-kc-plan-choose]';
     var buyboxCta = null;
     var pastBuybox = false;
@@ -469,21 +469,15 @@
     });
     observers.push(ctaObserver);
 
-    // Past the buybox = the bottom of its first plan card on screen (Loop's first shown selling plan
-    // group) above the screen; without plan cards, the bottom of the buybox CTA. Measured afresh at every
-    // visibility decision (updateVisibility), because Loop renders and re-renders the cards late and the
-    // page can move without a scroll; read from geometry, not an observer threshold: a jump from below
-    // the screen to above it crosses no threshold.
-    function firstPlanCard() {
-      var cards = document.querySelectorAll('.product__info-container .loop-subscription-group');
-      for (var i = 0; i < cards.length; i++) {
-        if (cards[i].getClientRects().length) return cards[i];
-      }
-      return null;
-    }
+    // Past the buybox = the buybox's own buy button (buyboxCta) entirely above the top of the screen:
+    // its bottom edge at 0 or higher up. Any part of it back on screen hides the bar again (Victor,
+    // 21 Nov). Without a buy button in the buybox (none found, or one that is not rendered, whose box
+    // reads 0) the bar shows as soon as it knows the plan, as it always did. Measured afresh at every
+    // visibility decision (updateVisibility), because Loop renders and re-renders the plan cards above
+    // the button late and the page can move without a scroll; read from geometry, not an observer
+    // threshold: a jump from below the screen to above it crosses no threshold.
     function measureBuybox() {
-      var edge = firstPlanCard() || buyboxCta;
-      pastBuybox = !edge || edge.getBoundingClientRect().bottom <= 0;
+      pastBuybox = !buyboxCta || buyboxCta.getBoundingClientRect().bottom <= 0;
     }
 
     function watchCtas() {
@@ -607,7 +601,8 @@
         var barResize = new ResizeObserver(reservePageEnd);
         barResize.observe(bar);
         observers.push(barResize);
-        // The plan cards move without a scroll while Loop renders them and while media above them loads
+        // The buy button moves without a scroll while Loop renders the plan cards above it and while
+        // media above them loads
         var layoutResize = new ResizeObserver(function () {
           updateVisibility();
         });

@@ -61,7 +61,8 @@
 
   #shopify-section-{{ section.id }} .header {
     border-radius: var(--kc-shape-radius-sm);
-    box-shadow: var(--kc-elevation-md);
+    /* The shadow fades out and in with the hide-on-scroll slide (assets/kc-navigation.css) */
+    box-shadow: var(--kc-navigation-shadow, var(--kc-elevation-md));
     max-width: 1200px;
     margin: 1.2rem auto;
     align-items: center;
@@ -381,7 +382,7 @@
   /* Smooth transition for background color changes (prevents jerk when returning to top) */
   #shopify-section-{{ section.id }} .header,
   #shopify-section-{{ section.id }} .header::before {
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow var(--kc-navigation-slide, 0s);
   }
 
   /* ── GLASS BACKGROUND ──

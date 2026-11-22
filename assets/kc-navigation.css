@@ -1,10 +1,11 @@
 /* Floating navigation (Victor, 20 Oct): the announcement bar stays in the page flow; the navigation
    owns only its compact bar, floating over the page; the first section of each page owns its
    background and gets the bar's height as top clearance. assets/kc-navigation.js measures and
-   publishes the values below; these are the values before it runs. */
+   publishes the values below; these are the values before it runs. None of them changes while the
+   page scrolls. */
 :root {
   --kc-navigation-clearance: 7.2rem;
-  /* Bottom of the announcement bar on screen (negative once it has scrolled away) */
+  /* Height of the announcement bar above the navigation (0 without one) */
   --kc-navigation-top: 0px;
   /* Lowest the section goes once the announcement bar is gone: 0 on product pages, set so the bar
      sits 16px from the top everywhere else (sections/header.liquid) */
@@ -29,21 +30,28 @@
   }
 }
 
+/* Sticky: the browser itself moves the section with the scroll, up with the announcement bar until
+   it reaches the floor. A position set by script arrives a frame after the scroll, and the bar shook
+   against the announcement bar (Victor, 20 Nov). The negative margin gives the section's height back
+   to the page, so the first section still starts right under the announcement bar. */
 .section-header.shopify-section-group-header-group {
+  /* Highest the section sits on screen: under the announcement bar at the top of the page. The
+     script replaces it with where the section sits when a hide begins. */
   --kc-navigation-y: max(var(--kc-navigation-top), var(--kc-navigation-floor));
-  position: fixed;
-  inset-inline: 0;
-  top: var(--kc-navigation-y);
+  position: sticky;
+  top: var(--kc-navigation-floor);
   z-index: 100;
-  margin: 0;
+  margin: 0 0 calc(-1 * var(--kc-navigation-clearance));
   background: transparent;
   /* The empty space around the compact bar lets clicks through to the page */
   pointer-events: none;
 }
 
-/* sticky_header_type none: the bar scrolls away with the page */
+/* sticky_header_type none: the bar scrolls away with the page, from the floor when no announcement
+   bar holds it lower */
 .section-header:has(sticky-header[data-sticky-type='none'][data-hide-on-scroll='false']) {
-  position: absolute;
+  position: relative;
+  top: max(0px, var(--kc-navigation-floor) - var(--kc-navigation-top));
 }
 
 .section-header > sticky-header.header-wrapper {
@@ -56,21 +64,31 @@
   pointer-events: auto;
 }
 
-/* Hide on scroll (product pages, or sticky_header_type on-scroll-up): slides up at once, comes back
-   after 0.15s. It stays while a menu is open or keyboard focus is inside it. 1.6rem further: the
-   bar's elevation-md shadow reaches 16px below it. */
+/* Hide on scroll (product pages, or sticky_header_type on-scroll-up), calm (Victor, 20 Nov): the bar
+   glides up in 0.5s, starting gently, and comes back after 0.15s in 0.4s, settling gently. The 2s it
+   waits before it hides is the script's (HIDE_DELAY_MS in assets/kc-navigation.js). Its shadow
+   fades out and in with the slide: sections/header.liquid reads --kc-navigation-slide and
+   --kc-navigation-shadow. The bar stays while a menu is open or keyboard focus is inside it. It slides
+   its own height, as far as it sat from the top when the slide began (--kc-navigation-y, set by
+   assets/kc-navigation.js) and 1.6rem more: the bar's elevation-md shadow reaches 16px below it. */
 .section-header.kc-header-autohide--ready {
-  transition: transform 0.3s ease 0.15s;
+  --kc-navigation-slide: 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  transition: transform var(--kc-navigation-slide);
+}
+
+.section-header.kc-header-autohide--hidden {
+  --kc-navigation-slide: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section-header.kc-header-autohide--hidden:not(.menu-open):not(:has(details[open])):not(:has(:focus-visible)) {
+  --kc-navigation-shadow: none;
   transform: translateY(calc(-100% - var(--kc-navigation-y) - 1.6rem));
-  transition-delay: 0s;
 }
 
 .section-header.menu-open,
 .section-header:has(details[open]),
 .section-header:has(:focus-visible) {
+  --kc-navigation-slide: 0s;
   transition: none;
 }
 
@@ -90,8 +108,10 @@
   scroll-margin-top: calc(var(--kc-navigation-clearance) + 1.6rem);
 }
 
+/* Reduced motion: no slide and no fade, the bar and its shadow are there or not */
 @media (prefers-reduced-motion: reduce) {
   .section-header.kc-header-autohide--ready {
+    --kc-navigation-slide: 0s;
     transition: none;
   }
 }

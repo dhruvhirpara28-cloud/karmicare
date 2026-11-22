@@ -119,6 +119,12 @@
         } catch (e) { console.warn('[KarmiAddToCart] Subscription Name sync failed', e); }
       };
 
+      // Hotjar's checkout events (assets/kc-plan-select.js trackCheckout) before the add: a plan product's
+      // choice sends them in replaceChoice, once, for the choice that is still the last one
+      if (!replacesChoice && window.KCPlanSelect && typeof window.KCPlanSelect.trackCheckout === 'function') {
+        window.KCPlanSelect.trackCheckout(isSubscription ? sellingPlanId : '');
+      }
+
       // One replacement at a time (assets/kc-plan-select.js replaceChoice): the sync and the way to
       // checkout run in the same turn, only the last of several quick choices goes to checkout, and a
       // failed add puts the earlier choice back

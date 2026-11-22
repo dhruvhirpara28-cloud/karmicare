@@ -23,9 +23,11 @@
 {%- style -%}
   /* KC announcement bar: Figma homepage desktop 2642:1903 (28px, hairline below) and mobile
      2766:10306 (30px, one line scrolling in from the page gutter). Colours default to the
-     KC tokens; the Day/Night colour settings below override them when filled. */
+     KC tokens; the Day/Night colour settings below override them when filled. The background is
+     the page colour (Victor, 20 Nov): one token holds the Day and the Night value, and the id
+     outranks Dawn's .gradient on this element. */
   #AnnouncementBar-{{ section.id }} {
-    background: var(--kc-mapped-gradient-section-accent);
+    background: var(--kc-mapped-surface-page);
     color: var(--kc-mapped-text-default-heading);
   }
   #AnnouncementBar-{{ section.id }} .announcement-bar {
@@ -533,7 +535,8 @@
     {
       "type": "color",
       "id": "bg_color_day",
-      "label": "Background color (Day)"
+      "label": "Background color (Day)",
+      "info": "Empty: the bar takes the page colour."
     },
     {
       "type": "color",
@@ -552,7 +555,8 @@
     {
       "type": "color",
       "id": "bg_color_night",
-      "label": "Background color (Night)"
+      "label": "Background color (Night)",
+      "info": "Empty: the bar takes the page colour."
     },
     {
       "type": "color",
