@@ -3637,6 +3637,14 @@ body>* {
   text-transform: uppercase;
 }
 
+/* Section eyebrow: Figma Label/Large in every section, 13/16 on mobile and 14/16 from 750px
+   (Victor, 22 Nov: every eyebrow at the token's size). Without it an eyebrow took the small body
+   size above, 12px on mobile, wherever its section had no rule of its own. */
+.kc-caption-subheading.subtitle-item {
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
+}
+
 .body-gl-nunito-xsm {
   letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
   font-size: var(--kc-responsive-label-sm-text-size);
