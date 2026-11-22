@@ -22,13 +22,18 @@
 
 {%- style -%}
   /* KC announcement bar: Figma homepage desktop 2642:1903 (28px, hairline below) and mobile
-     2766:10306 (30px, one line scrolling in from the page gutter). Colours default to the
-     KC tokens; the Day/Night colour settings below override them when filled. The background is
-     the page colour (Victor, 20 Nov): one token holds the Day and the Night value, and the id
-     outranks Dawn's .gradient on this element. */
+     2766:10306 (one line scrolling in from the page gutter; its size and hairline are Victor's
+     of 22 Nov, see the mobile block). Colours default to the KC tokens; the Day/Night colour
+     settings below override them when filled. The background is the page colour (Victor,
+     20 Nov): one token holds the Day and the Night value, and the id outranks Dawn's .gradient
+     on this element. */
   #AnnouncementBar-{{ section.id }} {
     background: var(--kc-mapped-surface-page);
     color: var(--kc-mapped-text-default-heading);
+    /* iOS Safari may enlarge text in a row wider than the screen, as the moving line is: on
+       Victor's iPhone it stood about one and a half times its CSS size (22 Nov). Held at 100% */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   #AnnouncementBar-{{ section.id }} .announcement-bar {
     color: inherit;
@@ -124,13 +129,12 @@
     display: none;
   }
 
-  /* Mobile: 30px bar, no hairline (Figma 2766:10306). The line starts at the page gutter and
-     scrolls left. Type 10/14 as in Figma, under the 12px block setting; no token has that
-     size. With reduced motion the line stands still and wraps, centred between the gutters. */
+  /* Mobile (Victor, 22 Nov; was Figma 2766:10306, 10/14 without a hairline): the line has the
+     type of the section eyebrows, Figma Label/Large (13/16 on mobile, Nunito letter spacing), and
+     the hairline closes the bar as on desktop. 32px bar: 8px above a 16px line, 7px and the
+     hairline below. The line starts at the page gutter and scrolls left. With reduced motion it
+     stands still and wraps, centred between the gutters. */
   @media screen and (max-width: 749px) {
-    #AnnouncementBar-{{ section.id }}.utility-bar--bottom-border {
-      border-bottom: none;
-    }
     #AnnouncementBar-{{ section.id }} .utility-bar__grid {
       padding: 0;
     }
@@ -139,10 +143,10 @@
     }
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message {
       min-height: 0;
-      padding: 0.8rem 0;
-      font-size: 1rem;
-      line-height: 1.4rem;
-      letter-spacing: var(--kc-responsive-caption-letter-spacing);
+      padding: 0.8rem 0 0.7rem;
+      font-size: var(--kc-responsive-label-lg-text-size);
+      line-height: var(--kc-responsive-label-lg-line-height);
+      letter-spacing: var(--kc-responsive-Nunito-letter-spacing);
     }
     #AnnouncementBar-{{ section.id }} .announcement-bar--marquee .announcement-bar__message > span {
       line-height: inherit;

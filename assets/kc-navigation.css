@@ -12,10 +12,10 @@
   --kc-navigation-floor: 0px;
 }
 
-/* The announcement bar's height before the script measures it (30px, 39px from 750px, 28px from
+/* The announcement bar's height before the script measures it (32px, 39px from 750px, 28px from
    990px), so the bar does not move when it does */
 :root:has(.announcement-bar-section) {
-  --kc-navigation-top: 3rem;
+  --kc-navigation-top: 3.2rem;
 }
 
 @media screen and (min-width: 750px) {
