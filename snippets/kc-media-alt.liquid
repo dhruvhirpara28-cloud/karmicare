@@ -1,0 +1,20 @@
+{%- comment -%}
+  Prints the alt text of a gallery image: its own alt, or the fallback when that alt is empty or
+  only spaces. An existing alt always wins. The gallery and the zoom modal pass the product title,
+  so a localized image (custom.gallery_nl / custom.gallery_fr) without alt text in Files is not
+  silent. The value is not escaped here: the caller escapes it or hands it to image_tag.
+
+  Accepts:
+  - alt: {String} The image's own alt text
+  - fallback: {String} What to print when there is none
+
+  Usage:
+  {%- capture media_alt -%}
+    {%- render 'kc-media-alt', alt: media.alt, fallback: product.title -%}
+  {%- endcapture -%}
+{%- endcomment -%}
+{%- if alt == blank -%}
+  {{- fallback -}}
+{%- else -%}
+  {{- alt -}}
+{%- endif -%}

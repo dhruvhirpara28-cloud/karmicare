@@ -1,0 +1,29 @@
+{%- comment -%}
+  Prints Shopify's structured data (JSON-LD) for a product. With `image`, the product image in it is
+  replaced by that image, in the same format (https, width 1920): the localized gallery's first image
+  on a Dutch or French product page. Without `image` the output is Shopify's, unchanged.
+
+  Accepts:
+  - product: {Object} Product liquid object
+  - image: {Object} (optional) Image that replaces the product image
+
+  Usage:
+  {% render 'kc-product-structured-data', product: product, image: kc_gallery_images.first %}
+{%- endcomment -%}
+{%- liquid
+  if image
+    capture kc_structured_data
+      echo product | structured_data
+    endcapture
+    # Shopify prints one image as "image":"<url>". Any other shape is left as it is.
+    assign kc_structured_parts = kc_structured_data | split: '"image":"'
+    if kc_structured_parts.size > 1
+      assign kc_structured_old = kc_structured_parts[1] | split: '"' | first | prepend: '"image":"' | append: '"'
+      assign kc_structured_new = image | image_url: width: 1920 | prepend: 'https:' | json | prepend: '"image":'
+      assign kc_structured_data = kc_structured_data | replace_first: kc_structured_old, kc_structured_new
+    endif
+    echo kc_structured_data
+  else
+    echo product | structured_data
+  endif
+-%}

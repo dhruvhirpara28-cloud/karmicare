@@ -483,8 +483,9 @@ a.kc-blog__eyebrow:hover {
 .kc-blog-toc__eyebrow {
   display: block;
   margin: 0 0 var(--kc-responsive-spacing-layout-md);
-  font-size: var(--kc-responsive-label-sm-text-size);
-  line-height: 1.2rem; /* the legal eyebrow on phones */
+  /* the legal eyebrow on phones: Label/Large, 13/16 */
+  font-size: var(--kc-responsive-label-lg-text-size);
+  line-height: var(--kc-responsive-label-lg-line-height);
 }
 
 .kc-blog-toc__list {

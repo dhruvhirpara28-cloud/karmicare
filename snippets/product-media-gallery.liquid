@@ -6,12 +6,26 @@
   - product: {Object} Product liquid object
   - variant_images: {Array} Product images associated with a variant
   - limit: {Number} (optional) When passed, limits the number of media items to render
+  - localized_images: {Array} (optional) Images that replace the product media in the page's language
+    (see 'kc-localized-gallery-key'). Empty or missing: the product media, as before.
 
   Usage:
   {% render 'product-media-gallery' %}
 {% endcomment %}
 
 {%- liquid
+  # Localized gallery: the list takes the place of product.media, in the same order. It holds images
+  # only, so the variant featured media and the variant images do not apply to it.
+  assign kc_gallery_media = product.media
+  assign kc_variant_media = product.selected_or_first_available_variant.featured_media
+  assign kc_gallery_localized = false
+  if localized_images.size > 0
+    assign kc_gallery_localized = true
+    assign kc_gallery_media = localized_images
+    assign kc_variant_media = nil
+    assign variant_images = nil
+  endif
+
   if section.settings.hide_variants and variant_images.size == product.media.size
     assign single_media_visible = true
   endif
@@ -20,7 +34,7 @@
     assign single_media_visible = true
   endif
 
-  assign media_count = product.media.size
+  assign media_count = kc_gallery_media.size
   if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
     assign media_count = media_count | minus: variant_images.size | plus: 1
   endif
@@ -35,11 +49,20 @@
       assign kc_hero_modes = 'am,pm' | split: ','
       assign kc_hero_videos = product.media | where: 'media_type', 'video'
       assign kc_hero_alt = kc_hero_videos.first.alt | default: product.title
-      assign media_count = media_count | minus: kc_hero_videos.size | plus: 1
-      # The featured still duplicates the animation in the gallery; it stays the product's featured image elsewhere
-      if product.featured_media.media_type == 'image'
-        assign kc_hero_skip_id = product.featured_media.id
-        assign media_count = media_count | minus: 1
+      if kc_gallery_localized
+        # No videos in the localized list. Its first image is the featured still in that language.
+        assign media_count = media_count | plus: 1
+        if product.featured_media.media_type == 'image'
+          assign kc_hero_skip_id = kc_gallery_media.first.id
+          assign media_count = media_count | minus: 1
+        endif
+      else
+        assign media_count = media_count | minus: kc_hero_videos.size | plus: 1
+        # The featured still duplicates the animation in the gallery; it stays the product's featured image elsewhere
+        if product.featured_media.media_type == 'image'
+          assign kc_hero_skip_id = product.featured_media.id
+          assign media_count = media_count | minus: 1
+        endif
       endif
     endif
   endif
@@ -108,8 +131,8 @@
           </div>
         </li>
       {%- endif -%}
-      {%- if product.selected_or_first_available_variant.featured_media != null -%}
-        {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+      {%- if kc_variant_media != null -%}
+        {%- assign featured_media = kc_variant_media -%}
         <li
           id="Slide-{{ section.id }}-{{ featured_media.id }}"
           class="product__media-item grid__item slider__slide{% unless kc_hero %} is-active{% endunless %}{% if single_media_visible %} product__media-item--single{% endif %}{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
@@ -128,11 +151,12 @@
             media_width: media_width,
             media_fit: section.settings.media_fit,
             constrain_to_viewport: section.settings.constrain_to_viewport,
-            lazy_load: false
+            lazy_load: false,
+            alt_fallback: product.title
           %}
         </li>
       {%- endif -%}
-      {%- for media in product.media -%}
+      {%- for media in kc_gallery_media -%}
         {% if media_position >= limit
           or media_position >= 1
           and section.settings.hide_variants
@@ -144,10 +168,10 @@
           {% continue %}
         {% endif %}
 
-        {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+        {%- unless media.id == kc_variant_media.id -%}
           <li
             id="Slide-{{ section.id }}-{{ media.id }}"
-            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if kc_hero == false and product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if kc_hero == false and kc_variant_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             data-media-id="{{ section.id }}-{{ media.id }}"
           >
             {%- liquid
@@ -169,7 +193,8 @@
               media_width: media_width,
               media_fit: section.settings.media_fit,
               constrain_to_viewport: section.settings.constrain_to_viewport,
-              lazy_load: lazy_load
+              lazy_load: lazy_load,
+              alt_fallback: product.title
             %}
           </li>
         {%- endunless -%}
@@ -332,6 +357,9 @@
               endif
             endcapture
             assign media_index = media_index | plus: 1
+            capture thumbnail_alt
+              render 'kc-media-alt', alt: featured_media.alt, fallback: product.title
+            endcapture
           -%}
           <li
             id="Slide-Thumbnails-{{ section.id }}-0"
@@ -359,17 +387,17 @@
                   sizes: sizes,
                   widths: '54, 74, 104, 162, 208, 324, 416',
                   id: thumbnail_id,
-                  alt: featured_media.alt
+                  alt: thumbnail_alt
                 | escape
               }}
             </button>
           </li>
         {%- endif -%}
-        {%- for media in product.media -%}
+        {%- for media in kc_gallery_media -%}
           {% if kc_hero and media.media_type == 'video' or media.id == kc_hero_skip_id %}
             {% continue %}
           {% endif %}
-          {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+          {%- unless media.id == kc_variant_media.id -%}
             {%- liquid
               capture media_index
                 if media.media_type == 'model'
@@ -381,6 +409,9 @@
                 endif
               endcapture
               assign media_index = media_index | plus: 1
+              capture thumbnail_alt
+                render 'kc-media-alt', alt: media.alt, fallback: product.title
+              endcapture
             -%}
             <li
               id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}"
@@ -408,8 +439,8 @@
                 class="thumbnail global-media-settings global-media-settings--no-shadow"
                 aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
                 {% if kc_hero == false
-                  and media == product.selected_or_first_available_variant.featured_media
-                  or product.selected_or_first_available_variant.featured_media == null
+                  and media == kc_variant_media
+                  or kc_variant_media == null
                   and forloop.index == 1
                 %}
                   aria-current="true"
@@ -425,7 +456,7 @@
                     sizes: sizes,
                     widths: '54, 74, 104, 162, 208, 324, 416',
                     id: thumbnail_id,
-                    alt: media.alt
+                    alt: thumbnail_alt
                   | escape
                 }}
               </button>
