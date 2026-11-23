@@ -10,8 +10,10 @@ media-gallery.kc-gallery-fit .product-media-container video {
    87.1% of the video height (the brush heads at the start, the floor shadow at the bottom); in the
    landed last frame the left brush head starts at 16.8%, the right one at 19.3%. Poster, video,
    animated WebP and the landed still share one img/video transform, so a swap never moves it.
-   - Below 750 the frame is square and the video sits at its top, so the free space is below: 1.2x
-     from the top, the animation lands at 6.2% to 92.9% of the frame, inside it (Victor, 20 Oct).
+   - Below 750 the frame is square and the video (1.125:1) sits at its top at its own size, so no
+     side is cut. It moves down 4% of the frame, which centres the landed kit (16.8% to 86.77% of the
+     video height) in the frame, level with the images that follow (Victor, 23 Nov; the 1.2x of
+     20 Oct cut 8.3% off the left and the right and landed the kit 5% low).
    - From 750, as large as it fits, up to 1.5x (Victor, 24 Oct, "zo groot als past, tot 1,5"):
      assets/kc-gallery.js finds the largest scale at which the whole animation keeps 16px clear of the
      viewport's edges and the buybox text (R51; the intro may pass briefly behind the header), and sets
@@ -28,7 +30,8 @@ media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation {
 
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode img,
 media-gallery.kc-gallery-fit .product__media-item .kc-hero-animation__mode video {
-  transform: scale(1.2);
+  transform: translateY(4%);
+  /* the origin the 750 poses below scale from */
   transform-origin: center top;
 }
 
