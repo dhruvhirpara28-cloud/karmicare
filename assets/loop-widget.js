@@ -1294,8 +1294,10 @@ function applyDefaultSelectionBasedOnLoopSettings(selectedVariant, productId) {
     const loopContainer = getLoopSubscriptionContainer(productId);
     const themeDefaultToSubscription = loopContainer ? loopContainer.dataset.defaultToSubscription === 'true' : false;
 
-    const shouldDefaultToSubscription = themeDefaultToSubscription ||
-        window.loopPropsUI?.byDefaultChooseSubscriptionOption;
+    // KC CUSTOM: with the Try once card (kcOnceCard) the one-time option starts selected, whatever the
+    // theme or Loop admin "default to subscription" says
+    const shouldDefaultToSubscription = !kcOnceCard(productId) && (themeDefaultToSubscription ||
+        window.loopPropsUI?.byDefaultChooseSubscriptionOption);
 
     if (shouldDefaultToSubscription) {
         defaultSelectFirstSellingPlanLoop(selectedVariant, productId);
@@ -2572,6 +2574,8 @@ function updateKcPricingSummary(productId, variant) {
     if (!summaryEl) return;
 
     let tryOnceContainer = document.querySelector(`#kc-try-once-container-${productId}`);
+    // KC: the Try once link only in the link layout; the card layout shows Try once as a plan card
+    const tryOnceDisplay = kcOnceCard(productId) ? 'none' : 'block';
 
     if (isOneTime) {
         // Hide default price block
@@ -2579,14 +2583,14 @@ function updateKcPricingSummary(productId, variant) {
         if (taxBlock) taxBlock.style.display = 'none';
         if (installmentBlock) installmentBlock.style.display = 'none';
 
-        if (tryOnceContainer) tryOnceContainer.style.display = 'block';
+        if (tryOnceContainer) tryOnceContainer.style.display = tryOnceDisplay;
     } else {
         // Subscription: hide default price block, show summary, show try once link
         if (priceBlock) priceBlock.style.display = 'none';
         if (taxBlock) taxBlock.style.display = 'none';
         if (installmentBlock) installmentBlock.style.display = 'none';
 
-        if (tryOnceContainer) tryOnceContainer.style.display = 'block';
+        if (tryOnceContainer) tryOnceContainer.style.display = tryOnceDisplay;
     }
 
     const sellingPlanAllocation = window?.loopProps[productId]?.sellingPlanAllocation;
@@ -2805,9 +2809,14 @@ function getWelcomeKitValueCents() {
 
 // CTA label per selected plan, by selling plan ID. The buy button carries data-plan-labels
 // ({"712106115453": "Start my 60-Day rhythm", …}) from the buy_buttons block;
-// plans without a label, and one-time, use the button's default text.
+// plans without a label, and one-time, use the button's default text. With the Try once card
+// (kcOnceCard) the buybox CTA says the sticky bar's Try once CTA (kc.sticky_cart.cta_once_html)
+// while Try once is selected.
 function updateKcPlanButtonLabel(productId, isOneTime) {
     const sellingPlanId = String(window.loopProps?.[productId]?.sellingPlanId || '').trim();
+    const onceLabel = isOneTime && kcOnceCard(productId)
+        ? document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceCta || ''
+        : '';
     document.querySelectorAll('.product-form__custom-submit[data-plan-labels]').forEach((button) => {
         const labelEl = button.querySelector('.kc-cta-label');
         if (!labelEl) return;
@@ -2819,19 +2828,127 @@ function updateKcPlanButtonLabel(productId, isOneTime) {
             console.warn('[KC plans] Custom Button Text per plan: lines must start with a selling plan ID', keys);
         }
         const match = !isOneTime && sellingPlanId && Object.keys(labels).find((key) => key.trim() === sellingPlanId);
-        labelEl.textContent = match ? labels[match] : button.dataset.defaultLabel;
+        const onceHere = onceLabel && button.closest('.kc-buybox');
+        labelEl.textContent = match ? labels[match] : onceHere ? onceLabel : button.dataset.defaultLabel;
     });
+}
+
+/**
+ * KC: the buybox's Try once layout, from the Loop block setting "Try once" (sections/main-product.liquid,
+ * data-kc-once-layout on the buybox's Try once container, the first one on the page): "card" shows
+ * Loop's own one-time option as the first plan card and starts on it; anything else (default "link")
+ * keeps today's link under the cards. docs/buybox-ab/PLAN.md
+ */
+function kcOnceCard(productId) {
+    const container = document.querySelector(`#kc-try-once-container-${productId}`);
+    return container?.dataset?.kcOnceLayout === 'card';
+}
+
+// KC: an element's lines as <div>s, written only when they change (the plan config watches the widget)
+function kcSetLines(element, lines) {
+    const key = JSON.stringify(lines);
+    if (element.dataset.kcLines === key) return;
+    element.dataset.kcLines = key;
+    element.replaceChildren(...lines.map((line) => {
+        const div = document.createElement('div');
+        div.textContent = line;
+        return div;
+    }));
+}
+
+/**
+ * KC: Loop's one-time option as the first plan card (kcOnceCard), in the plan card's structure: title
+ * and sub-row on the left, price and "one-time" on the right, the guarantee and the €0 note while it
+ * is selected (snippets/loop-widget.css.liquid, .kc-once-card). Texts in the page language: data
+ * attributes on the Try once container (kc.sticky_cart.*, the block's Try once note) and kc.receipt.*
+ * on the pricing summary. Runs after every Loop update, as Loop writes its own label on every init.
+ */
+function kcRenderOnceCard(productId, variant, loopContainer) {
+    const top = loopContainer.querySelector('#loop-one-time-purchase-option-at-top');
+    const bottom = loopContainer.querySelector('#loop-one-time-purchase-option-at-bottom');
+    if (!top) return;
+    // Loop admin "one-time at bottom" moves the option under the plans: back on top, nodes and listeners
+    if (bottom && bottom.querySelector('.loop-one-time-purchase-option') && !top.querySelector('.loop-one-time-purchase-option')) {
+        while (bottom.firstChild) top.appendChild(bottom.firstChild);
+    }
+    if (bottom) bottom.style.setProperty('display', 'none', 'important');
+    top.style.removeProperty('display');
+    top.removeAttribute('aria-hidden');
+
+    const option = top.querySelector('.loop-one-time-purchase-option');
+    if (!option) return;
+    const texts = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset || {};
+    const labelsEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
+    const addClass = (element, name) => {
+        if (element && !element.classList.contains(name)) element.classList.add(name);
+    };
+
+    // LEFT: title and sub-row in one column, as .loop-subscription-group-text
+    const label = option.querySelector('.loop-one-time-purchase-option-label');
+    let text = option.querySelector('.kc-once-text');
+    if (!text) {
+        text = document.createElement('div');
+        text.className = 'kc-once-text';
+        option.insertBefore(text, label || option.querySelector('.loop-one-time-purchase-option-price-container'));
+        if (label) text.appendChild(label);
+    }
+    if (label) {
+        addClass(label, 'h5');
+        if (texts.kcOnceTitle && label.textContent !== texts.kcOnceTitle) label.textContent = texts.kcOnceTitle;
+    }
+
+    let subRow = text.querySelector('.kc-plan-subrow');
+    if (!subRow) {
+        subRow = document.createElement('div');
+        subRow.className = 'kc-plan-subrow';
+        text.appendChild(subRow);
+    }
+    // One Duo is 120 brushings, as the summary's one-time line
+    const perBrushing = loopFormatMoney(Math.round(variant.price / 120), true);
+    kcSetLines(subRow, [
+        kcLabelText(labelsEl, 'kcPerBrushing', '[price] / brushing', { price: perBrushing }),
+        texts.kcOnceDelivery,
+    ].filter(Boolean));
+
+    let details = text.querySelector('.kc-once-details');
+    if (!details) {
+        details = document.createElement('div');
+        details.className = 'kc-once-details';
+        text.appendChild(details);
+    }
+    kcSetLines(details, [texts.kcOnceGuarantee, texts.kcOnceNote].filter(Boolean));
+
+    // RIGHT: price and "one-time", as the plan cards' "/ 60 days"
+    addClass(option.querySelector('.loop-one-time-purchase-option-price-amount'), 'h5');
+    const priceContainer = option.querySelector('.loop-one-time-purchase-option-price-container');
+    if (priceContainer) {
+        let intervalEl = priceContainer.querySelector('.kc-plan-interval-label');
+        if (!intervalEl) {
+            intervalEl = document.createElement('span');
+            intervalEl.className = 'kc-plan-interval-label';
+            priceContainer.appendChild(intervalEl);
+        }
+        const interval = kcLabelText(labelsEl, 'kcOneTime', 'one-time');
+        if (intervalEl.textContent !== interval) intervalEl.textContent = interval;
+    }
 }
 
 function injectOrUpdateKcTryOnceLink(productId, variant) {
     if (!variant) return;
 
+    const card = kcOnceCard(productId);
     const loopContainer = getLoopSubscriptionContainer(productId);
     if (loopContainer) {
-        const topCard = loopContainer.querySelector('#loop-one-time-purchase-option-at-top');
-        if (topCard) {
-            topCard.style.setProperty('display', 'none', 'important');
-            topCard.setAttribute('aria-hidden', 'true');
+        if (loopContainer.classList.contains('kc-once-card') !== card) loopContainer.classList.toggle('kc-once-card', card);
+        if (card) {
+            kcRenderOnceCard(productId, variant, loopContainer);
+        } else {
+            // Link layout: Loop's one-time option stays hidden, on top or where Loop admin "one-time at
+            // bottom" put it
+            loopContainer.querySelectorAll('.loop-one-time-purchase-option-position').forEach((position) => {
+                position.style.setProperty('display', 'none', 'important');
+                position.setAttribute('aria-hidden', 'true');
+            });
         }
     }
 
@@ -3202,7 +3319,9 @@ function clickUpdatedSPGLoop(productId) {
 
     const loopContainer = getLoopSubscriptionContainer(productId);
     const themeDefaultToSubscription = loopContainer ? loopContainer.dataset.defaultToSubscription === 'true' : false;
-    const shouldDefaultToSub = themeDefaultToSubscription || window.loopPropsUI.byDefaultChooseSubscriptionOption;
+    // KC CUSTOM: the Try once card (kcOnceCard) starts on one time, as applyDefaultSelectionBasedOnLoopSettings
+    const shouldDefaultToSub = !kcOnceCard(productId) &&
+        (themeDefaultToSubscription || window.loopPropsUI.byDefaultChooseSubscriptionOption);
 
     if (isProductBundle(productId)) {
         if (

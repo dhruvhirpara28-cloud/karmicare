@@ -60,12 +60,13 @@ Changed (switch OFF keeps today's behaviour in each):
 
 | File | Change |
 |---|---|
-| `sections/main-product.liquid` | Loop block schema: new `select` setting `try_once_layout`. The `price` block's `#kc-try-once-container-<id>` gets `data-kc-once-layout` plus the card texts as data attributes (title, details, CTA, from existing locale keys and the existing block settings). The `kc-plan-config` render passes `default_to_subscription: false` when the layout is `card`. |
+| `sections/main-product.liquid` | Loop block schema: new `select` setting `try_once_layout`. The `price` block's `#kc-try-once-container-<id>` gets `data-kc-once-layout` plus the card texts as data attributes (title, details, CTA, from existing locale keys and the existing block settings). The `kc-plan-config` render also passes `try_once_layout`. |
+| `snippets/kc-plan-config.liquid` | `defaultToSubscription` is false when `try_once_layout` is `card` (the `if` sits here so `main-product.liquid` keeps its Liquid complexity of 124). |
 | `assets/loop-widget.js` | `kcOnceCard(productId)` helper (reads the attribute above). `applyDefaultSelectionBasedOnLoopSettings` and the bundle default (l.3204): card layout selects one time, whatever the theme or Loop admin "default to subscription" says. `injectOrUpdateKcTryOnceLink`: card layout shows the top option as a card (class `kc-once-card` on the buybox container, plan card structure: label + sub-row, price + "one-time", details when selected), hides the link; link layout as today, plus it now also hides a one-time option Loop moved to the bottom. `updateKcPricingSummary`: keeps the link hidden in card layout. `updateKcPlanButtonLabel`: buybox CTA label for one time in card layout. |
-| `snippets/loop-widget.css.liquid` | New rules scoped to `.kc-once-card`: plan card box, border and selected state for the one-time option, details shown only when selected. Nothing outside that scope changes. |
+| `assets/kc-buybox.css` | New rules scoped to `.kc-once-card`, next to the plan card rules they copy (that is where the plan cards get their look, not the Loop CSS): plan card box, radio, type, selected state, details shown only when selected. Same specificity as the plan card rules, so the Day rules in `section-main-product.css` apply to both alike. Plus the selected one-time price colour (accent in Night, heading colour in Day, as the plan cards). |
 | `assets/kc-plan-select.js` | `syncCartSubscriptionName` also keeps the cart attribute `Buybox layout` (section 5) on the page's layout; `trackCheckout` adds `kc_layout_link` / `kc_layout_card`. |
 
-Untouched: `snippets/loop-widget-standard.liquid` (Loop-generated; not needed), `assets/loop-widget.css`,
+Untouched: `snippets/loop-widget-standard.liquid` (Loop-generated; not needed), `snippets/loop-widget.css.liquid`, `assets/loop-widget.css`,
 `assets/karmi-add-to-cart.js`, `snippets/sticky-cart-block.liquid`, `snippets/custom-button-script.liquid`,
 `sections/featured-product.liquid` (end CTA keeps its fixed 60-Day offer), all templates,
 `config/settings_data.json`, `assets/kc-tokens.css`, every locale file.

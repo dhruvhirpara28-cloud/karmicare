@@ -147,13 +147,24 @@
                       price_class: 'price--large'
                     -%}
                   </div>
+                  {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
+                  {%- comment -%}
+                    Try once layout (Loop block setting "Try once", docs/buybox-ab/PLAN.md): "link" is the
+                    link below (today), "card" shows Loop's own one-time option as the first plan card,
+                    selected on load (assets/loop-widget.js kcOnceCard). The card's texts ride along here.
+                  {%- endcomment -%}
                   <div
                     id="kc-try-once-container-{{ product.id }}"
                     class="tertiary-try-once-link figma-tryonce v9bb"
                     data-active-plan="once"
+                    data-kc-once-layout="{{ loop_block.settings.try_once_layout | default: 'link' | escape }}"
+                    data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
+                    data-kc-once-delivery="{{ 'kc.sticky_cart.delivery_once_html' | t | escape }}"
+                    data-kc-once-guarantee="{{ 'kc.sticky_cart.guarantee_once_html' | t | escape }}"
+                    data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
+                    data-kc-once-cta="{{ 'kc.sticky_cart.cta_once_html' | t | escape }}"
                     style="display: none;"
                   >
-                    {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <span class="ft-line">
                       {{ 'kc.plans.or' | t }}
                       <button class="ft-link kc-try-once-btn" data-plan="once" type="button">
@@ -633,13 +644,15 @@
                     {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
                     {%- comment -%}
                       Public plans only, selected by selling plan ID; "Default to subscription" starts
-                      on the first public plan (assets/kc-plan-select.js).
+                      on the first public plan (assets/kc-plan-select.js). With "Try once: card on top"
+                      the Try once card starts selected instead.
                     {%- endcomment -%}
                     {%- render 'kc-plan-config',
                       product: product,
                       section: section,
                       role: 'buybox',
-                      default_to_subscription: block.settings.default_to_subscription
+                      default_to_subscription: block.settings.default_to_subscription,
+                      try_once_layout: block.settings.try_once_layout
                     -%}
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
@@ -2935,6 +2948,23 @@
         {
           "type": "header",
           "content": "Try Once Link Settings"
+        },
+        {
+          "type": "select",
+          "id": "try_once_layout",
+          "label": "Try once",
+          "info": "Card on top: Try once is the first plan card and starts selected, so \"Default to first subscription\" is ignored. The link texts below are then not shown.",
+          "options": [
+            {
+              "value": "link",
+              "label": "Link under the cards"
+            },
+            {
+              "value": "card",
+              "label": "Card on top, preselected"
+            }
+          ],
+          "default": "link"
         },
         {
           "type": "text",

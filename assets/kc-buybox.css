@@ -292,6 +292,90 @@
   opacity: 1;
 }
 
+/* Try once card (Loop block "Try once: card on top", docs/buybox-ab/PLAN.md): Loop's one-time
+   option as the first plan card, with the plan card rules above. The box is the option's position
+   wrapper, the padding sits on the option. .kc-once-card (on the buybox's Loop container, set by
+   assets/loop-widget.js) stands where the plan rules have .kc-buybox, so every rule keeps the plan
+   card's specificity and the Day rules in section-main-product.css win over both alike. */
+.kc-once-card .loop-one-time-purchase-option-position {
+  background: var(--kc-buybox-surface-card);
+  border: var(--kc-shape-stroke-thick, 2px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-md);
+  box-shadow: var(--kc-elevation-xs);
+}
+
+.kc-once-card .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) {
+  background: var(--kc-mapped-surface-page);
+  border-color: var(--kc-mapped-border-focus-default);
+  box-shadow: var(--kc-elevation-lg);
+}
+
+.kc-once-card .loop-one-time-purchase-option-position .loop-one-time-purchase-option {
+  padding: var(--kc-responsive-spacing-layout-comfortable) var(--kc-responsive-spacing-layout-lg);
+  cursor: pointer;
+}
+
+.kc-once-card .loop-one-time-purchase-option .loop-one-time-purchase-option-radio {
+  margin: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs) 0 0;
+  border: var(--kc-shape-stroke-medium, 1.5px) solid var(--kc-mapped-border-inverse-default);
+}
+
+.kc-once-card .loop-one-time-purchase-option .loop-one-time-purchase-option-radio:checked {
+  border-color: var(--kc-mapped-border-focus-default);
+}
+
+/* Title and sub-row in one column, as .loop-subscription-group-text */
+.kc-once-card .kc-once-text {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  justify-content: center;
+  min-width: 0;
+}
+
+.kc-once-card .loop-one-time-purchase-option-label {
+  flex: none;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: var(--kc-responsive-body-lg-letter-spacing);
+  cursor: pointer;
+}
+
+.kc-once-card .loop-one-time-purchase-option-price-amount {
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-700-weight, 700);
+}
+
+.kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .loop-one-time-purchase-option-label,
+.kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .loop-one-time-purchase-option-price-amount {
+  color: var(--kc-buybox-text);
+}
+
+/* Selected price: Loop's accent (Night), the heading colour in Day, as the plan cards */
+.loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option-price-amount {
+  color: var(--kc-mapped-text-accent-default);
+}
+
+body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option-price-amount {
+  color: var(--kc-mapped-text-default-heading);
+}
+
+/* Guarantee and €0 note, shown while Try once is selected (as the plan cards' descriptions) */
+.kc-once-card .kc-once-details {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-details {
+  display: none;
+}
+
 /* Care Credit / Dental Checkup chips, under the titles (radio 20 + gap 8) */
 .kc-buybox .kc-return_care-tooltip {
   display: flex;
