@@ -12,10 +12,10 @@ the branch's `main-product.liquid` / `kc-plan-config.liquid` changes emulated in
 (`preview/build.py`). Loop, prices and the sticky bar run for real; `/cart.js` answers an empty cart,
 so nothing can be bought from it.
 
-- Switch ON: http://127.0.0.1:9372/on/en/products/karmicare-biorhythmic-oral-care-system
+- Switch ON: http://127.0.0.1:9374/on/en/products/karmicare-biorhythmic-oral-care-system
   (also `/on/nl/…`, `/on/fr/…`)
-- Switch OFF: http://127.0.0.1:9372/off/en/products/karmicare-biorhythmic-oral-care-system
-- Live, untouched, for comparison: http://127.0.0.1:9372/live/en/products/karmicare-biorhythmic-oral-care-system
+- Switch OFF: http://127.0.0.1:9374/off/en/products/karmicare-biorhythmic-oral-care-system
+- Live, untouched, for comparison: http://127.0.0.1:9374/live/en/products/karmicare-biorhythmic-oral-care-system
 - Day/Night: the PDP has no toggle; it follows the clock (`assets/day-night-mode.js`). The shots set
   the body class `day-mode` / `night-mode`.
 
@@ -81,6 +81,17 @@ when the last path part is the handle (`getCurrentPathLoop`).
    ("€ 59 € 67" wrapped at 390 px before `white-space: nowrap`), contrast 6.0:1 Day and 7.5:1 Night.
    OFF: title and prices as live (`off-*-top.png`, `off-*.png`). Theme Check exit 0, 19 warnings,
    complexity 124.
+
+8. **Copy proposals on the preview** (Victor: "pas jouw voorstellen toe op de preview"): variant
+   `/copy/en/…` = switch ON plus PLAN.md 4b, EN only, built by `preview/copy_proposals.py`: the two
+   plan descriptions replaced in Loop's product JSON (what a Loop admin edit would deliver), the 60-Day
+   option text "A new Duo every 60 days", the Year sub-row via `data-kc-renews-year`, and the Year's
+   "€59 per Duo, billed once a year" drawn by `preview/copy-overlay.js` (no source in the theme yet).
+   Theme code untouched. Shots `copy-en-{390,1440}-{day,night}{,-60day,-year}.png`, with `on-en-*-60day`
+   / `-year` for before. Card heights at 390 (closed / open): 60-Day 206 / 545 (was 206 / 567), Year
+   315 / 628 (was 249 / 592): the Year gets two sub-row lines and longer chips. The receipt rows under
+   the cards still say "Care Credit back in your account" and "Dental Check-up Reward" (block
+   settings, not in the proposals).
 
 ## Not tested here (needs a dev theme with a cart, no payment)
 

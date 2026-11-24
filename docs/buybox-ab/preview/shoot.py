@@ -11,7 +11,7 @@ from pathlib import Path
 
 PAGE, SHOTS, PROBE = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3]).read_text()
 ONLY = set(sys.argv[4:])
-BASE = 'http://127.0.0.1:9372'
+BASE = 'http://127.0.0.1:9374'
 HANDLE = 'karmicare-biorhythmic-oral-care-system'
 
 SHOTS_LIST = []
@@ -28,6 +28,13 @@ for switch in ('off', 'on'):
             SHOTS_LIST.append((f'{switch}-en-{width}-{mode}-top', switch, 'en', width, mode))
 for lang in ('nl', 'fr'):
     SHOTS_LIST.append((f'on-{lang}-390-day-top', 'on', lang, 390, 'day'))
+# /copy/ (PLAN.md 4b proposals); "-60day" / "-year": that card selected, scrolled to it
+for width in (390, 1440):
+    for mode in ('day', 'night'):
+        for suffix in ('', '-60day', '-year'):
+            SHOTS_LIST.append((f'copy-en-{width}-{mode}{suffix}', 'copy', 'en', width, mode))
+            if suffix:
+                SHOTS_LIST.append((f'on-en-{width}-{mode}{suffix}', 'on', 'en', width, mode))
 
 
 def orca(*args):
@@ -66,12 +73,22 @@ for name, switch, lang, width, mode in SHOTS_LIST:
         time.sleep(1)
     # kc-plan-select settles 800 ms after Loop; give the end CTA and the guard their time too
     time.sleep(2.5)
+    pick = 1 if name.endswith('-60day') else 2 if name.endswith('-year') else 0
+    if pick:
+        evaluate(
+            "(() => { const radios = Array.from(document.querySelectorAll('.kc-buybox input[name=loop_purchase_option]'))"
+            ".filter((r) => r.closest('.loop-one-time-purchase-option-position, .loop-subscription-group').checkVisibility());"
+            " radios[%d].click(); return radios[%d].checked; })()" % (pick, pick)
+        )
+        shot()
+        time.sleep(1.5)
     evaluate(
         "(() => { document.body.classList.remove('day-mode', 'night-mode'); document.body.classList.add('%s-mode');"
         " const el = %s;"
         " window.scrollTo(0, el.getBoundingClientRect().top + scrollY - %d); return scrollY; })()" % (
             mode,
             "document.querySelector('.kc-buybox .product__title')" if name.endswith('-top')
+            else "document.querySelector('.kc-buybox input[name=loop_purchase_option]:checked').closest('.loop-subscription-group')" if pick
             else "document.querySelector('.kc-buybox .loop-purchase-options-label') || document.querySelector('#loop-selling-plan-fieldset')",
             90 if width < 750 else 140,
         )

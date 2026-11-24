@@ -21,7 +21,7 @@ class Handler(SimpleHTTPRequestHandler):
             self.wfile.write(EMPTY_CART)
             return
         parts = path.strip('/').split('/')
-        if len(parts) == 4 and parts[0] in ('on', 'off', 'live') and parts[2] == 'products' and '.' not in parts[3]:
+        if len(parts) == 4 and parts[0] in ('on', 'off', 'live', 'copy') and parts[2] == 'products' and '.' not in parts[3]:
             self.path = '/' + '/'.join(parts) + '.html'
         return super().do_GET()
 

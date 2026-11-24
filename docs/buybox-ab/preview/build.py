@@ -13,6 +13,9 @@ import shutil
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent))
+import copy_proposals  # noqa: E402
+
 LIVE, WORKTREE, SERVE = (Path(a) for a in sys.argv[1:4])
 PID = '15977093923197'
 HANDLE = 'karmicare-biorhythmic-oral-care-system'
@@ -100,6 +103,12 @@ def build(lang, layout):
     out = SERVE / ('on' if layout == 'card' else 'off') / lang / 'products' / f'{HANDLE}.html'
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(page)
+    if layout == 'card' and lang == 'en':
+        # /copy/: switch ON plus the copy proposals of PLAN.md 4b (copy_proposals.py)
+        copy_out = SERVE / 'copy' / lang / 'products' / f'{HANDLE}.html'
+        copy_out.parent.mkdir(parents=True, exist_ok=True)
+        copy_out.write_text(copy_proposals.apply(page))
+        print(copy_out)
     return out
 
 
@@ -138,6 +147,7 @@ for handle, pid in (('awake-morning-toothpaste-2-0', '16060347875709'), ('asleep
     print(build_single(handle, pid, True))
 for name in ASSETS:
     shutil.copy(WORKTREE / 'assets' / name, SERVE / 'assets' / name)
+shutil.copy(Path(__file__).with_name('copy-overlay.js'), SERVE / 'assets' / 'copy-overlay.js')
 for lang in PAGES:
     print(build_live(lang))
     for layout in ('link', 'card'):
