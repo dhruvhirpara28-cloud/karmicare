@@ -596,10 +596,17 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
 
 /* "Brushing & Beyond": its own row at the bottom right of the card,
    flush with the card edge instead of hanging over the border. */
-.kc-buybox .kc-bottom_label {
+.kc-buybox .kc-bottom_label,
+.kc-buybox .kc-plan-badge {
   display: flex;
   justify-content: flex-end;
   margin: var(--kc-responsive-spacing-layout-xs) calc(var(--kc-responsive-spacing-layout-lg) * -1) calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
+}
+
+/* A plan badge (Loop block "Plan badges", with the Try once card) sits in the card's flex-wrapped plan
+   container: its own full row, grown over the negative margins to the card edges */
+.kc-buybox .kc-plan-badge {
+  flex: 1 0 100%;
 }
 
 .kc-buybox .kc-bottom_label:empty {

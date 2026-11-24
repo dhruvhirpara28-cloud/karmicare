@@ -67,6 +67,13 @@ when the last path part is the handle (`getCurrentPathLoop`).
 5. **Theme Check** `--fail-level error`: exit 0, 19 warnings as on the base commit (`main-product.liquid`
    Liquid complexity 124 before and after).
 
+6. **60-Day badge** (Victor's follow-up, PLAN.md section 4): the preview fills "Plan badges" with
+   `712106115453: Most picked` on both OFF and ON pages. ON: "MOST PICKED" at the bottom right of the
+   60-Day card only, Day and Night, 390 and 1440, also below the opened description when 60-Day is
+   selected (`on-en-390-day-60day-selected.png`, badge row 356 px in a 360 px card, flush with the
+   edges like the Year's). OFF: no badge (`probes.json`, off-en-390-day and off-en-1440-day). NL and FR
+   show the English text until it is translated. Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

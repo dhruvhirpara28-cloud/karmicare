@@ -111,6 +111,18 @@ existing CTA. If Victor wants the rule here too: EN "Begin your first Duo" (VOOR
 source-copy lane via the desk. Today's fallback "Begin Now" (`custom_button_text`) is not used in card
 layout.
 
+**60-Day badge (Victor, 24 Nov, in the lane chat):** "bij de 60 day mag er ook een badge onder aan
+met 'most picked' of een equivalent ervan". New Loop block setting **Plan badges (card on top only)**,
+one line per plan, `712106115453: Most picked`, matched by selling plan ID (as the per-plan CTA
+labels). It shows only with "Try once: card on top", at the bottom right of the card in the look of the
+Year's "Brushing & Beyond" (`.kc-testimonial-button`), so one flip still turns the whole new layout on
+or off. No template sets it: Victor fills it in the editor with the flip. Two open points:
+- **Claim:** "Most picked" says most buyers choose the 60-Day plan. Under EU consumer law that has to
+  be true and provable (order data). If it is not, or not yet, a wording without a popularity claim
+  is safer (VOORSTEL, to choose with Victor).
+- **NL/FR:** the text is a block setting value, so NL/FR come through Translate & Adapt like "Brushing
+  & Beyond"; until then /nl and /fr show the English text. Wording via the source-copy lane.
+
 The summary box under the cards already has a one-time state ("Total today €67 one-time", "€0.56 per
 brushing · no Care Credit", no rewards rows). No other new text.
 

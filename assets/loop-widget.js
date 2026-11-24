@@ -2429,6 +2429,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
     const dayMap = { day: 1, week: 7, month: 30, year: 365 };
     // KC: the cards' own labels in the page language, from the receipt's data attributes
     const labelsEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
+    // KC: badge per selling plan ID, only with the Try once card (kcPlanBadges)
+    const badges = kcPlanBadges(productId);
 
     loopContainer.querySelectorAll('.loop-subscription-group').forEach((groupEl) => {
         const radio = groupEl.querySelector('.loop-subscription-group-radio');
@@ -2437,6 +2439,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         // KC: the card's selected, offered, allowed plan, not the group's first one
         const alloc = kcCardAllocation(productId, variant, radio.dataset.id);
         if (!alloc?.price) return;
+
+        kcUpdatePlanBadge(groupEl, badges[String(alloc.selling_plan_id)] || '');
 
         // 1. Shipping label — read directly from Loop's <select> option (e.g. "ships every 60 days")
         const select = groupEl.querySelector('.loop-selling-plan-selector');
@@ -2842,6 +2846,48 @@ function updateKcPlanButtonLabel(productId, isOneTime) {
 function kcOnceCard(productId) {
     const container = document.querySelector(`#kc-try-once-container-${productId}`);
     return container?.dataset?.kcOnceLayout === 'card';
+}
+
+/**
+ * KC: plan badges by selling plan ID, from the Loop block setting "Plan badges" (one "712106115453:
+ * Most picked" per line, #kc-plan-badges-<product id> in sections/main-product.liquid). Only with the
+ * Try once card (kcOnceCard), so the link layout stays as it was. docs/buybox-ab/PLAN.md
+ */
+function kcPlanBadges(productId) {
+    if (!kcOnceCard(productId)) return {};
+    let text = '';
+    try {
+        text = JSON.parse(document.querySelector(`#kc-plan-badges-${productId}`)?.textContent || 'null') || '';
+    } catch (e) {
+        text = '';
+    }
+    const badges = {};
+    String(text).split(/\r?\n/).forEach((line) => {
+        const colon = line.indexOf(':');
+        if (colon < 0) return;
+        const planId = line.slice(0, colon).trim();
+        const label = line.slice(colon + 1).trim();
+        if (/^\d+$/.test(planId) && label) badges[planId] = label;
+    });
+    return badges;
+}
+
+// KC: a plan card's badge at its bottom, in the look of the Year's "Brushing & Beyond"
+// (.kc-testimonial-button); removed when the card's plan has none
+function kcUpdatePlanBadge(groupEl, text) {
+    const host = groupEl.querySelector('.loop-subscription-group-selling-plans-container') || groupEl;
+    let badge = host.querySelector(':scope > .kc-plan-badge');
+    if (!text) {
+        if (badge) badge.remove();
+        return;
+    }
+    if (!badge) {
+        badge = document.createElement('div');
+        badge.className = 'kc-plan-badge';
+        badge.appendChild(document.createElement('span')).className = 'kc-testimonial-button';
+        host.appendChild(badge);
+    }
+    if (badge.firstElementChild.textContent !== text) badge.firstElementChild.textContent = text;
 }
 
 // KC: an element's lines as <div>s, written only when they change (the plan config watches the widget)

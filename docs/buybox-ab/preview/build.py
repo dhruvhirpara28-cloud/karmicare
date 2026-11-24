@@ -66,6 +66,11 @@ def build(lang, layout):
         assert '"defaultToSubscription": true' in body
         page = page[: buybox[0].start(1)] + body.replace('"defaultToSubscription": true', '"defaultToSubscription": false', 1) + page[buybox[0].end(1):]
 
+    # Loop block "Plan badges" filled in as Victor asked (24 Nov), on OFF too: the link layout must ignore it
+    badges = f'<script type="application/json" id="kc-plan-badges-{PID}">"712106115453: Most picked"</script>'
+    assert page.count('</body>') == 1
+    page = page.replace('</body>', badges + '</body>', 1)
+
     for name in ASSETS:
         pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'
         page, count = re.subn(pattern, f'/assets/{name}?lane=buybox-ab', page)

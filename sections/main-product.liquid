@@ -654,6 +654,10 @@
                       default_to_subscription: block.settings.default_to_subscription,
                       try_once_layout: block.settings.try_once_layout
                     -%}
+                    {%- comment -%} Plan badges, "selling plan ID: text" per line (assets/loop-widget.js kcPlanBadges) {%- endcomment -%}
+                    <script type="application/json" id="kc-plan-badges-{{ product.id }}">
+                      {{- block.settings.plan_badges | json -}}
+                    </script>
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                 {%- when 'buy_buttons' -%}
@@ -2965,6 +2969,12 @@
             }
           ],
           "default": "link"
+        },
+        {
+          "type": "textarea",
+          "id": "plan_badges",
+          "label": "Plan badges (card on top only)",
+          "info": "Shown only with \"Try once: card on top\". One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
         },
         {
           "type": "text",
