@@ -11,7 +11,7 @@ from pathlib import Path
 
 PAGE, SHOTS, PROBE = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3]).read_text()
 ONLY = set(sys.argv[4:])
-BASE = 'http://127.0.0.1:9374'
+BASE = 'http://127.0.0.1:9376'
 HANDLE = 'karmicare-biorhythmic-oral-care-system'
 
 SHOTS_LIST = []
@@ -35,6 +35,18 @@ for width in (390, 1440):
             SHOTS_LIST.append((f'copy-en-{width}-{mode}{suffix}', 'copy', 'en', width, mode))
             if suffix:
                 SHOTS_LIST.append((f'on-en-{width}-{mode}{suffix}', 'on', 'en', width, mode))
+# /year/ (Year as a link under the cards): plans header and lower buybox, EN Day/Night, NL/FR
+for width in (390, 1440):
+    for mode in ('day', 'night'):
+        SHOTS_LIST.append((f'year-en-{width}-{mode}', 'year', 'en', width, mode))
+        SHOTS_LIST.append((f'year-en-{width}-{mode}-once-buy', 'year', 'en', width, mode))
+for lang in ('nl', 'fr'):
+    SHOTS_LIST.append((f'year-{lang}-390-day', 'year', lang, 390, 'day'))
+# /badge/ (badge as a light-blue tab on the card edge): plans header, and with the Year card open
+for width in (390, 1440):
+    for mode in ('day', 'night'):
+        SHOTS_LIST.append((f'badge-en-{width}-{mode}', 'badge', 'en', width, mode))
+        SHOTS_LIST.append((f'badge-en-{width}-{mode}-year', 'badge', 'en', width, mode))
 # "-buy": the lower buybox (end of the cards, receipt, CTA, trust row) per state, before (on) and after (copy)
 for switch in ('on', 'copy'):
     for width in (390, 1440):

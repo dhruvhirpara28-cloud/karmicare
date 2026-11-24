@@ -153,6 +153,7 @@
                     -%}
                   </div>
                   {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
+                  {%- assign kc_once_cta_default = 'kc.sticky_cart.cta_once_html' | t -%}
                   {%- comment -%}
                     Try once layout (Loop block setting "Try once", docs/buybox-ab/PLAN.md): "link" is the
                     link below (today), "card" shows Loop's own one-time option as the first plan card,
@@ -166,7 +167,10 @@
                     data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
                     data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"
                     data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
-                    data-kc-once-cta="{{ 'kc.sticky_cart.cta_once_html' | t | escape }}"
+                    data-kc-once-cta="{{ loop_block.settings.try_once_cta | default: kc_once_cta_default | escape }}"
+                    data-kc-or="{{ 'kc.plans.or' | t | escape }}"
+                    data-kc-credit="{{ 'kc.sticky_cart.credit_html' | t | escape }}"
+                    data-kc-credit-checkup="{{ 'kc.sticky_cart.credit_checkup_html' | t | escape }}"
                     style="display: none;"
                   >
                     <span class="ft-line">
@@ -663,7 +667,7 @@
                       "selling plan ID: text" per line, and the plans with the one-time price struck through
                     {%- endcomment -%}
                     <script type="application/json" id="kc-plan-extras-{{ product.id }}">
-                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}}
+                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}}
                     </script>
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
@@ -2992,10 +2996,22 @@
           "default": "link"
         },
         {
+          "type": "text",
+          "id": "try_once_cta",
+          "label": "Try once: button text (card on top only)",
+          "info": "The buy button while Try once is selected, e.g. \"Try once, purchase now\". Blank: the sticky bar's Try once text (\"Try once\")."
+        },
+        {
           "type": "textarea",
           "id": "plan_badges",
           "label": "Plan badges (card on top only)",
           "info": "Shown only with \"Try once: card on top\". One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
+        },
+        {
+          "type": "text",
+          "id": "plans_as_link",
+          "label": "Plans as a link under the cards (card on top only)",
+          "info": "Selling plan IDs, comma-separated, e.g. 712155431293. Shown only with \"Try once: card on top\": the plan is a text link after the cards (\"Or The Karmicare Year · €354 / year\") until it is chosen, then its card opens."
         },
         {
           "type": "text",

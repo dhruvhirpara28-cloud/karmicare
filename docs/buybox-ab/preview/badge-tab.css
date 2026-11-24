@@ -1,0 +1,28 @@
+/* Preview only (/badge/ variant, docs/buybox-ab/PLAN.md section 4c): the plan badge ("Most picked") as a
+   small tab on the card's top edge in the brand's light blue, instead of a gold row at the bottom. Gold
+   stays the Year's ("Brushing & Beyond"), and the card loses the badge row. */
+.kc-buybox .kc-plan-badge {
+  position: absolute;
+  top: 0;
+  right: var(--kc-responsive-spacing-layout-lg);
+  margin: 0;
+  transform: translateY(-50%);
+  display: block;
+  flex: none;
+  z-index: 2;
+}
+
+.kc-buybox .kc-plan-badge .kc-testimonial-button,
+body.night-mode [class*=color-scheme-] .kc-buybox .kc-plan-badge .kc-testimonial-button {
+  position: static;
+  display: inline-block;
+  padding: 2px var(--kc-responsive-spacing-layout-xs);
+  border-radius: 999px;
+  background: var(--kc-mapped-surface-accent-default);
+  box-shadow: none;
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: var(--kc-responsive-label-sm-line-height);
+  letter-spacing: var(--kc-responsive-label-sm-letter-spacing);
+  font-weight: var(--font-700-weight, 700);
+}

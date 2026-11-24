@@ -380,6 +380,12 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
   padding-right: var(--kc-responsive-spacing-layout-sm);
 }
 
+/* A plan folded into a link after the cards (Loop block "Plans as a link under the cards",
+   assets/loop-widget.js kcUpdatePlanLink): its card stays out until the plan is chosen */
+.kc-once-card .kc-plan-as-link {
+  display: none !important;
+}
+
 /* Radio, plan name and price on one line (Victor, 24 Nov): the radio's centre on the centre of the
    name's capitals. That is the centre of the 26 / 28 px line plus half of what the text grows over
    18 px (measured with canvas font metrics, docs/buybox-ab/preview/align.js: 0 px off at 390 and
@@ -617,21 +623,22 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
 }
 
 /* "€67 €59": the one-time price of the same Duos struck through before the plan price, in a lighter
-   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov). A row of
-   two blocks in the same size and line height, top-aligned: the price sits exactly as on the other
+   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov). Two grid
+   columns in the same size and line height, top-aligned: the price sits exactly as on the other
    cards, level with the plan name (baseline alignment moved the bold price 0.5 px down to the
-   regular one); "/ 60 days" takes the next row. */
+   regular one), and the pair never wraps, also with "€ 67 € 59" in Dutch at 390 px; "/ 60 days"
+   spans the row under it. */
 .kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: end;
+  align-items: start;
   column-gap: var(--kc-responsive-spacing-layout-xxs);
   white-space: nowrap;
 }
 
 .kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) .kc-plan-interval-label {
-  flex: 0 0 100%;
+  grid-column: 1 / -1;
 }
 
 .kc-buybox .kc-plan-compare {

@@ -12,10 +12,10 @@ the branch's `main-product.liquid` / `kc-plan-config.liquid` changes emulated in
 (`preview/build.py`). Loop, prices and the sticky bar run for real; `/cart.js` answers an empty cart,
 so nothing can be bought from it.
 
-- Switch ON: http://127.0.0.1:9374/on/en/products/karmicare-biorhythmic-oral-care-system
+- Switch ON: http://127.0.0.1:9376/on/en/products/karmicare-biorhythmic-oral-care-system
   (also `/on/nl/…`, `/on/fr/…`)
-- Switch OFF: http://127.0.0.1:9374/off/en/products/karmicare-biorhythmic-oral-care-system
-- Live, untouched, for comparison: http://127.0.0.1:9374/live/en/products/karmicare-biorhythmic-oral-care-system
+- Switch OFF: http://127.0.0.1:9376/off/en/products/karmicare-biorhythmic-oral-care-system
+- Live, untouched, for comparison: http://127.0.0.1:9376/live/en/products/karmicare-biorhythmic-oral-care-system
 - Day/Night: the PDP has no toggle; it follows the clock (`assets/day-night-mode.js`). The shots set
   the body class `day-mode` / `night-mode`.
 
@@ -111,6 +111,23 @@ when the last path part is the handle (`getCurrentPathLoop`).
     shipping" (the block's Try once shipping text, NL "+ verzending", FR "+ livraison"), no guarantee
     line, the €0 note as a chip like the plan cards' chips. Copy variant receipt for Try once: "€0.56
     per brushing + shipping". Theme Check exit 0, 19 warnings, complexity 124.
+
+11. **Year as a link, badge tab, card sizes, Try once CTA** (Victor, 24 Nov; PLAN.md 4c):
+    - `/year/` (EN, NL, FR): Try once and 60-Day as cards, then "Or The Karmicare Year · €354 / year"
+      with "+ €70.80 Care Credit + €40 Check-up Reward". `preview/year_check.py`: on load Try once
+      selected and no Year card; a click on the link opens the Year card, selects it, CTA "Begin your
+      Karmicare Year", receipt with Care Credit, Check-up Reward and Welcome Kit; back to Try once the
+      Year card stays. Shots `year-*.png`.
+    - `/badge/`: "Most picked" as a light-blue tab on the 60-Day card's top edge (`preview/badge-tab.css`,
+      preview only). Shots `badge-*.png`, `-year` with the Year card open next to it.
+    - Card parts at 390, Try once selected (`preview/card_parts.js`), plans header to trust row:
+      `/on/` 877 px, `/year/` 722 px, `/badge/` 847 px. Per card (total / padding / sub-row / chips /
+      badge row): Try once 154/32/22/62/0, 60-Day 206/32/44/62/38 (badge tab: 176, badge 20 on the
+      edge), Year 249/32/44/105/38.
+    - CTA with Try once selected: Loop block setting "Try once: button text (card on top only)", the
+      preview filled with "Try once, purchase now" on every language (Shopify shows the English
+      value on /nl and /fr until it is translated).
+    Theme Check exit 0, 19 warnings, complexity 124.
 
 ## Not tested here (needs a dev theme with a cart, no payment)
 

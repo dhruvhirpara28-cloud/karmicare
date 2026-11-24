@@ -20,7 +20,8 @@
     onceSub: '[price] per brushing + shipping',
     rhythmSub: 'Then [price] every 60 days. Pause or stop anytime.',
     yearSub: 'Then [price] once a year. Stop anytime before your renewal.',
-    onceCta: 'Begin your first Duo',
+    // Victor's own text (24 Nov), in place of the VOORSTEL "Begin your first Duo"
+    onceCta: 'Try once, purchase now',
     trust: {
       // Shipping is already in the card and the receipt: two items for Try once
       once: ['14-day money-back guarantee', 'One Duo, no renewal'],

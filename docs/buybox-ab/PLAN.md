@@ -105,7 +105,7 @@ Only existing texts, EN shown, NL/FR already in the locales or the block setting
 
 Victor (24 Nov): "+ shipping" right after the per-brushing price instead of a sentence of its own, no
 guarantee line on the Try once card, the €0 sentence as a chip for consistency with the other cards.
-| Buybox CTA with Try once selected | `kc.sticky_cart.cta_once_html` (the sticky bar's CTA) | Try once |
+| Buybox CTA with Try once selected | Loop block setting "Try once: button text (card on top only)", blank = `kc.sticky_cart.cta_once_html` | Try once, purchase now (Victor, 24 Nov) |
 
 Open copy point, **VOORSTEL**: the CTA rule is "Begin your …", and "Try once" is the sticky bar's
 existing CTA. If Victor wants the rule here too: EN "Begin your first Duo" (VOORSTEL), NL/FR through the
@@ -179,7 +179,7 @@ trust row says what protects you, per plan.
 | Receipt, 60-Day | "Billed every 60 days" + "/ 60 days" | "Then €59 every 60 days. Pause or stop anytime." | Says the next charge and the way out; drops the double interval | kc.receipt.billed_days |
 | Receipt, Year | "Billed yearly" + "/ year" | "Then €354 once a year. Stop anytime before your renewal." | Same, from the sticky bar's "stop anytime before renewal" | kc.receipt.billed_year |
 | Receipt tooltip | "Care Credit is Return on Care in euros — spendable on …" | "Care Credit is Karmicare credit in euros, to spend on member products and accessories. It lands in your account with your plan, so caring for your teeth pays you back." | No em dash, one name for one thing | Loop block setting |
-| CTA, Try once | "Try once" | "Begin your first Duo" | The "Begin your …" rule | kc key (VOORSTEL) |
+| CTA, Try once | "Try once" | "Try once, purchase now" (Victor, 24 Nov; replaces my "Begin your first Duo") | Says that this button buys at once | Loop block setting "Try once: button text" |
 | CTA, 60-Day / Year | "Begin your 60-Day Rhythm" / "Begin your Karmicare Year" | unchanged | Already clear | buy buttons block |
 | Trust row, Try once | "60-day money-back guarantee · Gift, pause or cancel · Free shipping" | "14-day money-back guarantee · One Duo, no renewal" | **Today's row is wrong for Try once** (see below) | theme, per plan |
 | Trust row, 60-Day | "60-day money-back guarantee · Gift, pause or cancel · Free shipping" | "60-day money-back guarantee · Pause or stop anytime · Free shipping" | Same words as the card list | icon with text block |
@@ -200,6 +200,31 @@ go in this lane after Victor's OK; NL/FR of everything go through source-copy vi
 
 The summary box under the cards already has a one-time state ("Total today €67 one-time", "€0.56 per
 brushing · no Care Credit", no rewards rows). No other new text.
+
+## 4c. Badges, card size and the Year as a link (Victor, 24 Nov)
+
+**Two gold badges clash.** VOORSTEL: gold stays the Year's ("Brushing & Beyond", the premium plan);
+"Most picked" becomes a small pill in the brand's light blue (`--kc-mapped-surface-accent-default`, text
+`--kc-mapped-text-accent-default-on-accent`) on the card's top edge, as a tab. Two colours, two
+places, two meanings, and the 60-Day card loses its badge row. Preview `/badge/` (preview-only CSS
+`preview/badge-tab.css`; becomes a theme rule after Victor's OK).
+
+**The options are large.** Measured at 390 px (NOTES.md result 11). VOORSTEL, most effect first:
+1. The Year as a link under the cards (built, below): the whole Year card goes until it is chosen.
+2. Chips only on the selected card: closed cards show name, one sub-row line and price; Care Credit
+   and Check-up chips appear when the card is chosen, as the lists do now.
+3. One sub-row line: "€0.49 / brushing · every 60 days" instead of two lines.
+4. The badge as a tab on the edge (above) instead of a row at the bottom.
+5. Card padding at 390 from the "comfortable / lg" spacing to "md".
+
+**Year as a link (built):** Loop block setting "Plans as a link under the cards (card on top only)",
+plan IDs (`712155431293`). With the card layout the plan's card stays out and a tertiary link follows
+the cards in the old Try once link's look: "Or The Karmicare Year · €354 / year", under it "+ €70.80
+Care Credit + €40 Check-up Reward" (the sticky bar's text, all three languages). A click opens the Year
+card, selects it, and the receipt and CTA follow; once opened it stays a card on that page view (no
+jumping back). Chosen another way (compare table, sticky bar) it opens too. Preview `/year/` in EN, NL
+and FR. Open point: the link could also go straight to checkout as the old Try once link did; for a
+€354 plan I kept the receipt in between.
 
 ## 5. Tracking
 

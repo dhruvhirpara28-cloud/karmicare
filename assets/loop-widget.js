@@ -2512,7 +2512,76 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             }
             labelEl.textContent = rightLabel;
         }
+
+        // KC: a plan shown as a link under the cards until it is chosen (kcPlanExtras asLink)
+        const asLink = extras.asLink.includes(String(alloc.selling_plan_id));
+        const returnOnCare = parseInt(option?.dataset?.returnOnCare) || kcPlan?.careCreditPercent || 0;
+        kcUpdatePlanLink(productId, loopContainer, groupEl, asLink ? {
+            price: loopFormatMoney(kcPlanPrice(alloc), true),
+            interval: rightLabel,
+            credit: loopFormatMoney(Math.round(kcPlanPrice(alloc) * returnOnCare / 100), true),
+            checkupReward: Boolean(kcPlan?.checkupReward),
+        } : null);
     });
+}
+
+/**
+ * KC: a plan card folded into a tertiary link after the cards ("Or The Karmicare Year · €354 / year",
+ * "+ €70.80 Care Credit + €40 Check-up Reward"), in the old Try once link's look (.tertiary-try-once-link),
+ * with the card layout only (Loop block "Plans as a link under the cards", Victor 24 Nov). The card stays
+ * hidden until the plan is chosen: a click on the link, or any other way (compare table, sticky bar);
+ * then the card opens for good on this page and the link goes. Texts: "Or" (kc.plans.or), the plan
+ * name (Shopify's translated group name), the card's own price and interval, the sticky bar's Care
+ * Credit lines (kc.sticky_cart.credit_html / credit_checkup_html). The link sits inside the Loop
+ * container, so kc-plan-select counts its click as the shopper's own plan choice.
+ */
+function kcUpdatePlanLink(productId, loopContainer, groupEl, data) {
+    const radio = groupEl.querySelector('.loop-subscription-group-radio');
+    const wrapper = groupEl.closest('[id^="loop-selling_plan_group-"]') || groupEl;
+    const groupId = radio?.dataset?.id || '';
+    const fieldset = loopContainer.querySelector('#loop-selling-plan-fieldset');
+    let link = loopContainer.querySelector(`.kc-plan-link[data-group-id="${groupId}"]`);
+    if (radio?.checked) groupEl.dataset.kcLinkOpened = 'true';
+    const folded = Boolean(data) && groupEl.dataset.kcLinkOpened !== 'true';
+
+    if (wrapper.classList.contains('kc-plan-as-link') !== folded) wrapper.classList.toggle('kc-plan-as-link', folded);
+    if (!folded) {
+        if (link) link.remove();
+        return;
+    }
+
+    if (!link) {
+        link = document.createElement('div');
+        link.className = 'tertiary-try-once-link figma-tryonce v9bb kc-plan-link';
+        link.dataset.groupId = groupId;
+        link.innerHTML = '<span class="ft-line"><span class="kc-plan-link__or"></span> '
+            // kc-try-once-btn: the old Try once link's text-link look (only read inside its own container)
+            + '<button class="ft-link kc-try-once-btn kc-plan-link__btn" type="button"></button> '
+            + '<span class="ft-ship kc-plan-link__interval"></span></span><br>'
+            + '<span class="ft-note kc-plan-link__note"></span>';
+        link.querySelector('button').addEventListener('click', (event) => {
+            event.preventDefault();
+            groupEl.dataset.kcLinkOpened = 'true';
+            wrapper.classList.remove('kc-plan-as-link');
+            link.remove();
+            radio.click();
+            radio.focus({ preventScroll: true });
+        });
+        const links = loopContainer.querySelectorAll('.kc-plan-link');
+        (links.length ? links[links.length - 1] : fieldset).after(link);
+    }
+
+    const texts = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset || {};
+    const name = groupEl.querySelector('.loop-subscription-group-label')?.textContent.trim() || '';
+    const set = (selector, text) => {
+        const el = link.querySelector(selector);
+        if (el && el.textContent !== text) el.textContent = text;
+    };
+    set('.kc-plan-link__or', texts.kcOr || 'Or');
+    set('.kc-plan-link__btn', `${name} · ${data.price}`);
+    set('.kc-plan-link__interval', data.interval);
+    const note = data.checkupReward ? texts.kcCreditCheckup : texts.kcCredit;
+    set('.kc-plan-link__note', (note || '').replace('[credit]', data.credit));
 }
 
 /**
@@ -2860,7 +2929,7 @@ function kcOnceCard(productId) {
  * docs/buybox-ab/PLAN.md
  */
 function kcPlanExtras(productId) {
-    const extras = { badges: {}, compareOnce: [] };
+    const extras = { badges: {}, compareOnce: [], asLink: [] };
     if (!kcOnceCard(productId)) return extras;
     let data = {};
     try {
@@ -2875,7 +2944,9 @@ function kcPlanExtras(productId) {
         const label = line.slice(colon + 1).trim();
         if (/^\d+$/.test(planId) && label) extras.badges[planId] = label;
     });
-    extras.compareOnce = String(data.compareOnce || '').split(',').map((id) => id.trim()).filter((id) => /^\d+$/.test(id));
+    const ids = (value) => String(value || '').split(',').map((id) => id.trim()).filter((id) => /^\d+$/.test(id));
+    extras.compareOnce = ids(data.compareOnce);
+    extras.asLink = ids(data.asLink);
     return extras;
 }
 

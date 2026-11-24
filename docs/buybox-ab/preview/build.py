@@ -27,7 +27,8 @@ LOCALES = {'en': 'en.default.json', 'nl': 'nl.json', 'fr': 'fr.json'}
 def locale(lang):
     text = (WORKTREE / 'locales' / LOCALES[lang]).read_text()
     text = re.sub(r'^\s*/\*.*?\*/', '', text, flags=re.S)
-    return json.loads(text)['kc']['sticky_cart']
+    kc = json.loads(text)['kc']
+    return dict(kc['sticky_cart'], plans_or=kc['plans']['or'])
 
 
 def build_live(lang):
@@ -52,7 +53,12 @@ def build(lang, layout):
         'data-kc-once-title': sticky['title_once_html'],
         'data-kc-once-shipping': html.unescape(re.search(r'class="ft-ship">([^<]*)', page).group(1).strip()),
         'data-kc-once-note': html.unescape(note),
-        'data-kc-once-cta': sticky['cta_once_html'],
+        # Loop block "Try once: button text" filled in by Victor (24 Nov), EN only: until it is translated
+        # Shopify shows the English value on /nl and /fr too
+        'data-kc-once-cta': 'Try once, purchase now',
+        'data-kc-or': sticky['plans_or'],
+        'data-kc-credit': sticky['credit_html'],
+        'data-kc-credit-checkup': sticky['credit_checkup_html'],
     }
     attr_text = ''.join(f'\n                    {k}="{html.escape(v, quote=True)}"' for k, v in attrs.items())
     anchor = f'id="kc-try-once-container-{PID}"\n                    class="tertiary-try-once-link figma-tryonce v9bb"\n                    data-active-plan="once"'
@@ -71,7 +77,7 @@ def build(lang, layout):
     # Loop block "Plan badges" and "One-time price struck through" filled in as Victor asked (24 Nov), on
     # OFF too: the link layout must ignore them
     extras = (f'<script type="application/json" id="kc-plan-extras-{PID}">'
-              '{"badges": "712106115453: Most picked", "compareOnce": "712106115453"}</script>')
+              '{"badges": "712106115453: Most picked", "compareOnce": "712106115453", "asLink": ""}</script>')
     assert page.count('</body>') == 1
     page = page.replace('</body>', extras + '</body>', 1)
 
@@ -108,6 +114,19 @@ def build(lang, layout):
         copy_out.parent.mkdir(parents=True, exist_ok=True)
         copy_out.write_text(copy_proposals.apply(page))
         print(copy_out)
+    if layout == 'card':
+        # /year/: switch ON plus "Plans as a link under the cards" = the Year (Victor, 24 Nov)
+        year_out = SERVE / 'year' / lang / 'products' / f'{HANDLE}.html'
+        year_out.parent.mkdir(parents=True, exist_ok=True)
+        year_page = page.replace('"asLink": ""', '"asLink": "712155431293"', 1)
+        assert year_page != page, 'asLink'
+        year_out.write_text(year_page)
+        print(year_out)
+        # /badge/: switch ON with the plan badge as a light-blue tab on the card edge (badge-tab.css)
+        badge_out = SERVE / 'badge' / lang / 'products' / f'{HANDLE}.html'
+        badge_out.parent.mkdir(parents=True, exist_ok=True)
+        badge_out.write_text(page.replace('</head>', '<link rel="stylesheet" href="/assets/badge-tab.css"></head>', 1))
+        print(badge_out)
     return out
 
 
@@ -147,6 +166,7 @@ for handle, pid in (('awake-morning-toothpaste-2-0', '16060347875709'), ('asleep
 for name in ASSETS:
     shutil.copy(WORKTREE / 'assets' / name, SERVE / 'assets' / name)
 shutil.copy(Path(__file__).with_name('copy-overlay.js'), SERVE / 'assets' / 'copy-overlay.js')
+shutil.copy(Path(__file__).with_name('badge-tab.css'), SERVE / 'assets' / 'badge-tab.css')
 for lang in PAGES:
     print(build_live(lang))
     for layout in ('link', 'card'):
