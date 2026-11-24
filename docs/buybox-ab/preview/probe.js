@@ -21,6 +21,7 @@
     sellingPlan: document.querySelector('#product-form-' + (summary && summary.dataset.sectionId) + ' [name=selling_plan]')?.value ?? null,
     loopGroup: window.loopProps && window.loopProps[pid] && window.loopProps[pid].sellingPlanGroupId,
     sticky: (document.querySelector('[data-sc-field="title"], .sc-title') || {}).textContent || null,
+    trust: Array.from(document.querySelectorAll('.kc-buybox .icon-with-text__item .inline-richtext')).map((el) => el.textContent.trim()),
     cards,
   });
 })()

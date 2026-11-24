@@ -164,6 +164,35 @@ stop. Every line below comes from text already on the site or in the Terms; no n
 | Tooltips | "… Care Credit — in euros …", "20% Return on Care — 2× the bi-monthly rate —" | No em dashes, no "Return on Care" next to "Care Credit": one name for one thing | Brand style; two names for one thing confuse | Loop plan description |
 | Everywhere | Duo / duo / Duet | One spelling: Duo | Consistency with the new title | all |
 
+**Below the cards (Victor: "de volledige buy box, ook de receipt details & CTA knop"):** the
+receipt says what you pay today, when you pay next and what comes back; the CTA says what starts; the
+trust row says what protects you, per plan.
+
+| Where | Today | VOORSTEL | Why | Lives in |
+|---|---|---|---|---|
+| Receipt, Try once | "€0.56 per brushing · no Care Credit" under "Total today €67" | "Shipping calculated at checkout" | €67 is not all you pay; per brushing and €0 Care Credit are already on the card | kc.receipt.one_time_note |
+| Receipt, members | "Care Credit back in your account" | "Care Credit back, to spend on more care" | Same words as the card chip | Loop block setting |
+| Receipt, Year | "Dental Check-up Reward" | "After a dental check-up from month 6" | Says when it comes, as the chip | Loop block setting |
+| Receipt, members | "Welcome Kit on first order (value €21) FREE" | "Welcome Kit with your first order (€21 value) FREE" | Same words as the card list | Loop block setting |
+| Receipt, members | (none) | New row "Shipping FREE" | Try once pays shipping, members do not; now the difference shows | theme (new row, kc key) |
+| Receipt, 60-Day | "Billed every 60 days" + "/ 60 days" | "Then €59 every 60 days. Pause or stop anytime." | Says the next charge and the way out; drops the double interval | kc.receipt.billed_days |
+| Receipt, Year | "Billed yearly" + "/ year" | "Then €354 once a year. Stop anytime before your renewal." | Same, from the sticky bar's "stop anytime before renewal" | kc.receipt.billed_year |
+| Receipt tooltip | "Care Credit is Return on Care in euros — spendable on …" | "Care Credit is Karmicare credit in euros, to spend on member products and accessories. It lands in your account with your plan, so caring for your teeth pays you back." | No em dash, one name for one thing | Loop block setting |
+| CTA, Try once | "Try once" | "Begin your first Duo" | The "Begin your …" rule | kc key (VOORSTEL) |
+| CTA, 60-Day / Year | "Begin your 60-Day Rhythm" / "Begin your Karmicare Year" | unchanged | Already clear | buy buttons block |
+| Trust row, Try once | "60-day money-back guarantee · Gift, pause or cancel · Free shipping" | "14-day money-back guarantee · One Duo, no renewal" | **Today's row is wrong for Try once** (see below) | theme, per plan |
+| Trust row, 60-Day | "60-day money-back guarantee · Gift, pause or cancel · Free shipping" | "60-day money-back guarantee · Pause or stop anytime · Free shipping" | Same words as the card list | icon with text block |
+| Trust row, Year | same as 60-Day | "60-day money-back guarantee · Stop anytime before renewal · Free shipping" | The Year renews once a year | theme, per plan |
+
+**Must fix before the card layout goes live, copy or not:** the trust row under the CTA is one fixed
+block ("60-day money-back guarantee · Gift, pause or cancel · Free shipping"). It was only ever seen
+with a membership selected, because Try once could not be selected in the buybox. With the Try once
+card preselected it now tells a Try once buyer about a 60-day guarantee (Try once has 14 days), about
+pausing (there is nothing to pause) and free shipping (Try once pays shipping). The `/on/` prototype
+shows exactly that (`shots/on-en-390-day-once-buy.png`). Fix: the row follows the selected plan, from
+existing texts (kc.sticky_cart.guarantee_once_html, …), in assets/loop-widget.js with the card layout.
+The pause icon next to "One Duo, no renewal" would need another icon.
+
 Loop plan descriptions are Loop admin texts with their own Loop Multilingual copies per language, so
 they change in Loop admin (Victor or a lane with that go), never from the theme. The theme lines can
 go in this lane after Victor's OK; NL/FR of everything go through source-copy via the desk.

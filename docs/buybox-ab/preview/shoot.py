@@ -35,6 +35,12 @@ for width in (390, 1440):
             SHOTS_LIST.append((f'copy-en-{width}-{mode}{suffix}', 'copy', 'en', width, mode))
             if suffix:
                 SHOTS_LIST.append((f'on-en-{width}-{mode}{suffix}', 'on', 'en', width, mode))
+# "-buy": the lower buybox (end of the cards, receipt, CTA, trust row) per state, before (on) and after (copy)
+for switch in ('on', 'copy'):
+    for width in (390, 1440):
+        for mode in ('day', 'night'):
+            for state in ('-once', '-60day', '-year'):
+                SHOTS_LIST.append((f'{switch}-en-{width}-{mode}{state}-buy', switch, 'en', width, mode))
 
 
 def orca(*args):
@@ -73,7 +79,7 @@ for name, switch, lang, width, mode in SHOTS_LIST:
         time.sleep(1)
     # kc-plan-select settles 800 ms after Loop; give the end CTA and the guard their time too
     time.sleep(2.5)
-    pick = 1 if name.endswith('-60day') else 2 if name.endswith('-year') else 0
+    pick = 1 if '-60day' in name else 2 if '-year' in name else 0
     if pick:
         evaluate(
             "(() => { const radios = Array.from(document.querySelectorAll('.kc-buybox input[name=loop_purchase_option]'))"
@@ -87,10 +93,12 @@ for name, switch, lang, width, mode in SHOTS_LIST:
         " const el = %s;"
         " window.scrollTo(0, el.getBoundingClientRect().top + scrollY - %d); return scrollY; })()" % (
             mode,
-            "document.querySelector('.kc-buybox .product__title')" if name.endswith('-top')
+            "document.querySelector('.kc-buybox .icon-with-text')" if name.endswith('-buy')
+            else "document.querySelector('.kc-buybox .product__title')" if name.endswith('-top')
             else "document.querySelector('.kc-buybox input[name=loop_purchase_option]:checked').closest('.loop-subscription-group')" if pick
             else "document.querySelector('.kc-buybox .loop-purchase-options-label') || document.querySelector('#loop-selling-plan-fieldset')",
-            90 if width < 750 else 140,
+            # "-buy": the trust row near the bottom of the 900 px frame, the receipt and CTA above it
+            760 if name.endswith('-buy') else 90 if width < 750 else 140,
         )
     )
     orca(*viewport)

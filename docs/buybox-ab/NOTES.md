@@ -93,6 +93,15 @@ when the last path part is the handle (`getCurrentPathLoop`).
    the cards still say "Care Credit back in your account" and "Dental Check-up Reward" (block
    settings, not in the proposals).
 
+9. **Whole buybox in the copy variant** (Victor: "de volledige buy box, ook de receipt details & CTA
+   knop"): `preview/copy-overlay.js` also rewrites, per selected plan, the receipt (labels, tooltip, a
+   "Shipping FREE" row for members, the line under "Total today"), the Try once CTA ("Begin your first
+   Duo") and the trust row under the CTA. Shots `{on,copy}-en-{390,1440}-{day,night}-{once,60day,year}-buy.png`
+   (on = before, copy = after), framed on the end of the cards, the receipt, the CTA and the trust row.
+   Found on the way: in `/on/` with Try once selected the trust row still says "60-day money-back
+   guarantee · Gift, pause or cancel · Free shipping" (PLAN.md 4b, must fix before live).
+   `preview/below_cards.js` lists the visible buybox below the cards per state.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the
