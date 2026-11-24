@@ -50,8 +50,7 @@ def build(lang, layout):
     attrs = {
         'data-kc-once-layout': layout,
         'data-kc-once-title': sticky['title_once_html'],
-        'data-kc-once-delivery': sticky['delivery_once_html'],
-        'data-kc-once-guarantee': sticky['guarantee_once_html'],
+        'data-kc-once-shipping': html.unescape(re.search(r'class="ft-ship">([^<]*)', page).group(1).strip()),
         'data-kc-once-note': html.unescape(note),
         'data-kc-once-cta': sticky['cta_once_html'],
     }
@@ -124,8 +123,8 @@ def build_single(handle, pid, lane):
         anchor = f'id="kc-try-once-container-{pid}"\n                    class="tertiary-try-once-link figma-tryonce v9bb"\n                    data-active-plan="once"'
         assert page.count(anchor) == 1, handle
         en = locale('en')
-        attrs = {'data-kc-once-layout': 'link', 'data-kc-once-title': en['title_once_html'], 'data-kc-once-delivery': en['delivery_once_html'],
-                 'data-kc-once-guarantee': en['guarantee_once_html'], 'data-kc-once-note': '', 'data-kc-once-cta': en['cta_once_html']}
+        attrs = {'data-kc-once-layout': 'link', 'data-kc-once-title': en['title_once_html'], 'data-kc-once-shipping': '',
+                 'data-kc-once-note': '', 'data-kc-once-cta': en['cta_once_html']}
         page = page.replace(anchor, anchor + ''.join(f'\n                    {k}="{html.escape(v, quote=True)}"' for k, v in attrs.items()), 1)
         for name in ASSETS:
             pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'

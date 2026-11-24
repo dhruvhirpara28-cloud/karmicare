@@ -100,10 +100,11 @@ Only existing texts, EN shown, NL/FR already in the locales or the block setting
 |---|---|---|
 | Title | `kc.sticky_cart.title_once_html` | Try Once · 1 Duo |
 | Price, right | Loop's one-time price + `kc.receipt.one_time` | €67 / one-time |
-| Sub-row 1 | `kc.receipt.per_brushing` (price / 120 brushings, as the summary) | €0.56 / brushing |
-| Sub-row 2 | `kc.sticky_cart.delivery_once_html` | Shipping calculated at checkout |
-| Details, when selected | `kc.sticky_cart.guarantee_once_html` | 14-day money-back guarantee |
-| Details, when selected | block setting `try_once_note` | €0 Care Credit · €0 Dental Check-up Reward |
+| Sub-row | `kc.receipt.per_brushing` (price / 120 brushings, as the summary) + block setting `try_once_shipping` | €0.56 / brushing + shipping |
+| Chip, always shown, as the plan cards' Care Credit chips | block setting `try_once_note` | €0 Care Credit · €0 Dental Check-up Reward |
+
+Victor (24 Nov): "+ shipping" right after the per-brushing price instead of a sentence of its own, no
+guarantee line on the Try once card, the €0 sentence as a chip for consistency with the other cards.
 | Buybox CTA with Try once selected | `kc.sticky_cart.cta_once_html` (the sticky bar's CTA) | Try once |
 
 Open copy point, **VOORSTEL**: the CTA rule is "Begin your …", and "Try once" is the sticky bar's
@@ -133,8 +134,8 @@ or off. No template sets it: Victor fills it in the editor with the flip. Two op
   the product title in Shopify does not change. Line 1 needs NL/FR through Translate & Adapt.
   Open point: the title says "Duet", every card, the sticky bar and the receipt say "Duo".
 - Loop block, new setting "One-time price struck through (card on top only)", plan IDs
-  (`712106115453`): "€59 ~~€67~~", the one-time price of the plan's Duos (1 for the 60-Day) after the
-  plan price, body colour at 70 % (contrast 6.0:1 Day, 7.5:1 Night), hidden from screen readers as it
+  (`712106115453`): "~~€67~~ €59", the one-time price of the plan's Duos (1 for the 60-Day) before the
+  plan price (Victor, 24 Nov), body colour at 70 % (contrast 6.0:1 Day, 7.5:1 Night), hidden from screen readers as it
   repeats the Try once price. Open point: a struck price reads as a price reduction. €67 is today's
   one-time price of the same Duo, shown in the card above, so it is a comparison of two current
   offers, not an earlier price; the Terms' Omnibus clause (lowest price of the last 30 days) is about

@@ -164,8 +164,7 @@
                     data-active-plan="once"
                     data-kc-once-layout="{{ loop_block.settings.try_once_layout | default: 'link' | escape }}"
                     data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
-                    data-kc-once-delivery="{{ 'kc.sticky_cart.delivery_once_html' | t | escape }}"
-                    data-kc-once-guarantee="{{ 'kc.sticky_cart.guarantee_once_html' | t | escape }}"
+                    data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"
                     data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
                     data-kc-once-cta="{{ 'kc.sticky_cart.cta_once_html' | t | escape }}"
                     style="display: none;"
@@ -3002,7 +3001,7 @@
           "type": "text",
           "id": "plan_compare_once",
           "label": "One-time price struck through (card on top only)",
-          "info": "Selling plan IDs, comma-separated, e.g. 712106115453. Shown only with \"Try once: card on top\": the card shows the one-time price of the same number of Duos after its own price, struck through."
+          "info": "Selling plan IDs, comma-separated, e.g. 712106115453. Shown only with \"Try once: card on top\": the card shows the one-time price of the same number of Duos, struck through, before its own price."
         },
         {
           "type": "text",

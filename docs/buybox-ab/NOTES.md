@@ -102,6 +102,16 @@ when the last path part is the handle (`getCurrentPathLoop`).
    guarantee · Gift, pause or cancel · Free shipping" (PLAN.md 4b, must fix before live).
    `preview/below_cards.js` lists the visible buybox below the cards per state.
 
+10. **Alignment and Try once card** (Victor, 24 Nov): struck price before the price ("€67 €59"); the
+    radio, plan name and price on one line, measured with `preview/align.js` (canvas font metrics: the
+    centre of the name's capitals against the radio's centre and the price's capitals). Before, at
+    1440: radio 1.8 px high, €59 0.5 px low next to the struck price; after, at 390 and 1440, on and
+    copy: radio ≤ 0.2 px, price 0 px, struck price ≤ 0.3 px. With the card layout only; the link
+    layout keeps its radio offset (OFF still equals live). Try once card: "€0.56 / brushing +
+    shipping" (the block's Try once shipping text, NL "+ verzending", FR "+ livraison"), no guarantee
+    line, the €0 note as a chip like the plan cards' chips. Copy variant receipt for Try once: "€0.56
+    per brushing + shipping". Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

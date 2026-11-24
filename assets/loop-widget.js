@@ -2461,7 +2461,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const option = select?.querySelector(`option[value="${alloc.selling_plan_id}"]`);
         const duosCount = parseInt(option?.dataset?.duos) || 1;
 
-        // KC: the one-time price of the same Duos, struck through after the plan price (kcPlanExtras)
+        // KC: the one-time price of the same Duos, struck through before the plan price (kcPlanExtras)
         const comparesOnce = extras.compareOnce.includes(String(alloc.selling_plan_id));
         kcUpdatePlanCompare(groupEl, comparesOnce ? loopFormatMoney(variant.price * duosCount, true) : '');
         const brushingsPerDuo = parseInt(option?.dataset?.brushings) || 120;
@@ -2879,7 +2879,7 @@ function kcPlanExtras(productId) {
     return extras;
 }
 
-// KC: the one-time price of the plan's Duos struck through after the plan price (kcPlanExtras); removed
+// KC: the one-time price of the plan's Duos struck through before the plan price (kcPlanExtras); removed
 // for a plan without it. Read out as nothing: it repeats the Try once price the card above says.
 function kcUpdatePlanCompare(groupEl, text) {
     const amount = groupEl.querySelector('.loop-subscription-group-price-amount');
@@ -2893,7 +2893,8 @@ function kcUpdatePlanCompare(groupEl, text) {
         compare = document.createElement('s');
         compare.className = 'kc-plan-compare';
         compare.setAttribute('aria-hidden', 'true');
-        amount.after(compare);
+        // "€67 €59": the struck price before the plan price (Victor, 24 Nov)
+        amount.before(compare);
     }
     if (compare.textContent !== text) compare.textContent = text;
 }
@@ -2930,10 +2931,11 @@ function kcSetLines(element, lines) {
 
 /**
  * KC: Loop's one-time option as the first plan card (kcOnceCard), in the plan card's structure: title
- * and sub-row on the left, price and "one-time" on the right, the guarantee and the €0 note while it
- * is selected (snippets/loop-widget.css.liquid, .kc-once-card). Texts in the page language: data
- * attributes on the Try once container (kc.sticky_cart.*, the block's Try once note) and kc.receipt.*
- * on the pricing summary. Runs after every Loop update, as Loop writes its own label on every init.
+ * and "€0.56 / brushing + shipping" on the left, price and "one-time" on the right, the €0 note as a
+ * chip in its own row (assets/kc-buybox.css, .kc-once-card). Texts in the page language: data
+ * attributes on the Try once container (kc.sticky_cart.title_once_html, the block's Try once shipping
+ * text and note) and kc.receipt.* on the pricing summary. Runs after every Loop update, as Loop writes
+ * its own label on every init.
  */
 function kcRenderOnceCard(productId, variant, loopContainer) {
     const top = loopContainer.querySelector('#loop-one-time-purchase-option-at-top');
@@ -2975,20 +2977,28 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
         subRow.className = 'kc-plan-subrow';
         text.appendChild(subRow);
     }
-    // One Duo is 120 brushings, as the summary's one-time line
+    // One Duo is 120 brushings, as the summary's one-time line; "+ shipping" (the block's Try once
+    // shipping text) right after it, one line (Victor, 24 Nov)
     const perBrushing = loopFormatMoney(Math.round(variant.price / 120), true);
     kcSetLines(subRow, [
-        kcLabelText(labelsEl, 'kcPerBrushing', '[price] / brushing', { price: perBrushing }),
-        texts.kcOnceDelivery,
-    ].filter(Boolean));
+        [kcLabelText(labelsEl, 'kcPerBrushing', '[price] / brushing', { price: perBrushing }), texts.kcOnceShipping]
+            .filter(Boolean).join(' '),
+    ]);
 
-    let details = text.querySelector('.kc-once-details');
-    if (!details) {
-        details = document.createElement('div');
-        details.className = 'kc-once-details';
-        text.appendChild(details);
+    // The block's Try once note ("€0 Care Credit · €0 Dental Check-up Reward") as a chip in its own row
+    // under the title, as the plan cards' Care Credit chips (.kc-return_care-tooltip, assets/kc-buybox.css)
+    let chips = option.querySelector(':scope > .kc-return_care-tooltip');
+    if (!texts.kcOnceNote) {
+        if (chips) chips.remove();
+    } else {
+        if (!chips) {
+            chips = document.createElement('div');
+            chips.className = 'kc-return_care-tooltip kc-once-chips';
+            chips.appendChild(document.createElement('div')).className = 'kc-return_care';
+            option.appendChild(chips);
+        }
+        if (chips.firstElementChild.textContent !== texts.kcOnceNote) chips.firstElementChild.textContent = texts.kcOnceNote;
     }
-    kcSetLines(details, [texts.kcOnceGuarantee, texts.kcOnceNote].filter(Boolean));
 
     // RIGHT: price and "one-time", as the plan cards' "/ 60 days"
     addClass(option.querySelector('.loop-one-time-purchase-option-price-amount'), 'h5');

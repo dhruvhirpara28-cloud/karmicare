@@ -365,15 +365,28 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
 }
 
 /* Guarantee and €0 note, shown while Try once is selected (as the plan cards' descriptions) */
-.kc-once-card .kc-once-details {
-  margin-top: var(--kc-responsive-spacing-layout-xs);
-  font-size: var(--kc-buybox-body-size);
-  line-height: var(--kc-buybox-body-line-height);
-  color: var(--kc-mapped-text-default-body);
+/* The €0 note as a chip in its own row under the title, as the plan cards' Care Credit chips
+   (.kc-return_care-tooltip below); no ⓘ in it, so no gutter for one on the right */
+.kc-once-card .loop-one-time-purchase-option-position .loop-one-time-purchase-option {
+  flex-wrap: wrap;
 }
 
-.kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-details {
-  display: none;
+.kc-once-card .kc-once-chips {
+  flex: 0 0 100%;
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .kc-once-card .kc-once-chips .kc-return_care {
+  padding-right: var(--kc-responsive-spacing-layout-sm);
+}
+
+/* Radio, plan name and price on one line (Victor, 24 Nov): the radio's centre on the centre of the
+   name's capitals. That is the centre of the 26 / 28 px line plus half of what the text grows over
+   18 px (measured with canvas font metrics, docs/buybox-ab/preview/align.js: 0 px off at 390 and
+   1440). With the card layout only, so the link layout stays as live. */
+.kc-once-card .loop-subscription-group .loop-subscription-group-radio,
+.kc-once-card .loop-one-time-purchase-option .loop-one-time-purchase-option-radio {
+  margin-top: calc((var(--kc-responsive-body-lg-line-height) - var(--kc-buybox-radio-size)) / 2 + (var(--kc-responsive-body-lg-text-size) - 18px) / 2);
 }
 
 /* Care Credit / Dental Checkup chips, under the titles (radio 20 + gap 8) */
@@ -603,18 +616,25 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
   margin: var(--kc-responsive-spacing-layout-xs) calc(var(--kc-responsive-spacing-layout-lg) * -1) calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
 }
 
-/* "€59 €67": the one-time price of the same Duos struck through after the plan price, in a lighter
-   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov) */
+/* "€67 €59": the one-time price of the same Duos struck through before the plan price, in a lighter
+   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov). A row of
+   two blocks in the same size and line height, top-aligned: the price sits exactly as on the other
+   cards, level with the plan name (baseline alignment moved the bold price 0.5 px down to the
+   regular one); "/ 60 days" takes the next row. */
 .kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: flex-start;
+  column-gap: var(--kc-responsive-spacing-layout-xxs);
   white-space: nowrap;
 }
 
-.kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) .loop-subscription-group-price-amount {
-  display: inline;
+.kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) .kc-plan-interval-label {
+  flex: 0 0 100%;
 }
 
 .kc-buybox .kc-plan-compare {
-  margin-left: var(--kc-responsive-spacing-layout-xxs);
   font-family: var(--kc-font-role-backbone);
   font-size: var(--kc-responsive-body-lg-text-size);
   line-height: var(--kc-responsive-body-lg-line-height);

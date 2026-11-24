@@ -16,7 +16,8 @@
     kitTemplate: 'Welcome Kit with your first order ([value] value)',
     shipping: 'Shipping',
     shippingFree: 'Free',
-    onceSub: 'Shipping calculated at checkout',
+    // "+ shipping" right after the per-brushing price, no sentence of its own (Victor, 24 Nov)
+    onceSub: '[price] per brushing + shipping',
     rhythmSub: 'Then [price] every 60 days. Pause or stop anytime.',
     yearSub: 'Then [price] once a year. Stop anytime before your renewal.',
     onceCta: 'Begin your first Duo',
@@ -96,8 +97,9 @@
     var sub = summary.querySelector('.kc-pricing-summary__per-brushing');
     var interval = summary.querySelector('.kc-pricing-summary__interval');
     var total = price ? price.textContent.trim() : '';
-    if (plan === ONCE) {
-      set(sub, COPY.onceSub);
+    if (plan === ONCE && total) {
+      // One Duo is 120 brushings, as the card
+      set(sub, COPY.onceSub.replace('[price]', loopFormatMoney(Math.round(cents(total) / 120), true)));
     } else if (plan === RHYTHM && total) {
       set(sub, COPY.rhythmSub.replace('[price]', total));
       set(interval, '');
