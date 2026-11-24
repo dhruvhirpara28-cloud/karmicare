@@ -2511,6 +2511,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 priceContainer.appendChild(labelEl);
             }
             labelEl.textContent = rightLabel;
+            kcEnsureMoreChevron(priceContainer);
         }
 
         // KC: a plan shown as a link under the cards until it is chosen (kcPlanExtras asLink)
@@ -2522,6 +2523,9 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             credit: loopFormatMoney(Math.round(kcPlanPrice(alloc) * returnOnCare / 100), true),
             checkupReward: Boolean(kcPlan?.checkupReward),
         } : null);
+
+        // KC: the ribbon once the card's price, struck price included, is in place
+        kcPlaceRibbon(groupEl);
     });
 }
 
@@ -2870,6 +2874,7 @@ function updateKcPricingSummary(productId, variant) {
     }
 
     updateKcPlanButtonLabel(productId, isOneTime);
+    kcUpdatePromises(productId, isOneTime);
     summaryEl.style.display = 'block';
 }
 
@@ -2929,7 +2934,7 @@ function kcOnceCard(productId) {
  * docs/buybox-ab/PLAN.md
  */
 function kcPlanExtras(productId) {
-    const extras = { badges: {}, compareOnce: [], asLink: [] };
+    const extras = { badges: {}, compareOnce: [], asLink: [], chipsSelectedOnly: false };
     if (!kcOnceCard(productId)) return extras;
     let data = {};
     try {
@@ -2947,6 +2952,7 @@ function kcPlanExtras(productId) {
     const ids = (value) => String(value || '').split(',').map((id) => id.trim()).filter((id) => /^\d+$/.test(id));
     extras.compareOnce = ids(data.compareOnce);
     extras.asLink = ids(data.asLink);
+    extras.chipsSelectedOnly = data.chipsSelectedOnly === true;
     return extras;
 }
 
@@ -2970,22 +2976,77 @@ function kcUpdatePlanCompare(groupEl, text) {
     if (compare.textContent !== text) compare.textContent = text;
 }
 
-// KC: a plan card's badge at its bottom, in the look of the Year's "Brushing & Beyond"
-// (.kc-testimonial-button); removed when the card's plan has none
+/**
+ * KC: the promises under the CTA (the buybox's icon-with-text row) follow the selected plan with the
+ * Try once card (Victor, 24 Nov): for Try once the first item says the Try once guarantee
+ * (kc.sticky_cart.guarantee_once_html, "14-day money-back guarantee") and the other items (pause,
+ * free shipping) go; for a plan the block's own items come back as they were. The block's order is
+ * guarantee, pause, shipping (templates/product.subscription-item.json).
+ */
+function kcUpdatePromises(productId, isOneTime) {
+    if (!kcOnceCard(productId)) return;
+    const row = document.querySelector('.kc-buybox .icon-with-text');
+    if (!row) return;
+    const guarantee = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceGuarantee || '';
+    row.querySelectorAll('.icon-with-text__item').forEach((item, index) => {
+        const text = item.querySelector('.inline-richtext');
+        if (!text) return;
+        if (item.dataset.kcPromise === undefined) item.dataset.kcPromise = text.innerHTML;
+        const shown = !isOneTime || (index === 0 && Boolean(guarantee));
+        if (isOneTime && shown && text.textContent !== guarantee) text.textContent = guarantee;
+        if (!isOneTime && text.innerHTML !== item.dataset.kcPromise) text.innerHTML = item.dataset.kcPromise;
+        const display = shown ? '' : 'none';
+        if (item.style.display !== display) item.style.display = display;
+    });
+}
+
+// KC: a down chevron at the end of a card's price column, shown only when the card's chips are folded
+// away (.kc-chips-selected-only, assets/kc-buybox.css): a sign that the card holds more. Decorative.
+function kcEnsureMoreChevron(priceContainer) {
+    let chevron = priceContainer.querySelector(':scope > .kc-plan-more');
+    if (!chevron) {
+        chevron = document.createElement('span');
+        chevron.className = 'kc-plan-more';
+        chevron.setAttribute('aria-hidden', 'true');
+    }
+    // Last, after "/ 60 days"
+    if (priceContainer.lastElementChild !== chevron) priceContainer.appendChild(chevron);
+}
+
+// KC: a plan card's badge as a ribbon over the card's top edge, between the title and the price
+// (Victor, 24 Nov; assets/kc-buybox.css .kc-plan-ribbon). Removed when the card's plan has none.
 function kcUpdatePlanBadge(groupEl, text) {
-    const host = groupEl.querySelector('.loop-subscription-group-selling-plans-container') || groupEl;
-    let badge = host.querySelector(':scope > .kc-plan-badge');
+    let ribbon = groupEl.querySelector(':scope > .kc-plan-ribbon');
     if (!text) {
-        if (badge) badge.remove();
+        if (ribbon) ribbon.remove();
         return;
     }
-    if (!badge) {
-        badge = document.createElement('div');
-        badge.className = 'kc-plan-badge';
-        badge.appendChild(document.createElement('span')).className = 'kc-testimonial-button';
-        host.appendChild(badge);
+    if (!ribbon) {
+        ribbon = document.createElement('span');
+        ribbon.className = 'kc-plan-ribbon';
+        groupEl.appendChild(ribbon);
+        // Again on every size change of the card (width, fonts loading, the struck price arriving)
+        if (window.ResizeObserver) new ResizeObserver(() => kcPlaceRibbon(groupEl)).observe(groupEl);
     }
-    if (badge.firstElementChild.textContent !== text) badge.firstElementChild.textContent = text;
+    if (ribbon.textContent !== text) ribbon.textContent = text;
+    kcPlaceRibbon(groupEl);
+}
+
+// KC: the ribbon's horizontal centre midway between the end of the plan title and the start of the
+// price as shown (the struck price when there is one), in px from the card's left edge
+function kcPlaceRibbon(groupEl) {
+    const ribbon = groupEl.querySelector(':scope > .kc-plan-ribbon');
+    const title = groupEl.querySelector('.loop-subscription-group-label');
+    const price = groupEl.querySelector('.kc-plan-compare') || groupEl.querySelector('.loop-subscription-group-price-amount');
+    const card = groupEl.getBoundingClientRect();
+    if (!ribbon || !title || !price || !card.width) return;
+    const range = document.createRange();
+    range.selectNodeContents(title);
+    const titleEnd = range.getBoundingClientRect().right;
+    range.selectNodeContents(price);
+    const priceStart = range.getBoundingClientRect().left;
+    const x = `${Math.round((titleEnd + priceStart) / 2 - card.left)}px`;
+    if (ribbon.style.getPropertyValue('--kc-ribbon-x') !== x) ribbon.style.setProperty('--kc-ribbon-x', x);
 }
 
 // KC: an element's lines as <div>s, written only when they change (the plan config watches the widget)
@@ -3083,6 +3144,7 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
         }
         const interval = kcLabelText(labelsEl, 'kcOneTime', 'one-time');
         if (intervalEl.textContent !== interval) intervalEl.textContent = interval;
+        kcEnsureMoreChevron(priceContainer);
     }
 }
 
@@ -3093,6 +3155,11 @@ function injectOrUpdateKcTryOnceLink(productId, variant) {
     const loopContainer = getLoopSubscriptionContainer(productId);
     if (loopContainer) {
         if (loopContainer.classList.contains('kc-once-card') !== card) loopContainer.classList.toggle('kc-once-card', card);
+        // Chips on the selected card only (Loop block "Plan chips: selected card only", card layout)
+        const chipsSelectedOnly = card && kcPlanExtras(productId).chipsSelectedOnly;
+        if (loopContainer.classList.contains('kc-chips-selected-only') !== chipsSelectedOnly) {
+            loopContainer.classList.toggle('kc-chips-selected-only', chipsSelectedOnly);
+        }
         if (card) {
             kcRenderOnceCard(productId, variant, loopContainer);
         } else {

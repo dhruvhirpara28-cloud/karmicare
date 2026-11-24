@@ -166,6 +166,7 @@
                     data-kc-once-layout="{{ loop_block.settings.try_once_layout | default: 'link' | escape }}"
                     data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
                     data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"
+                    data-kc-once-guarantee="{{ 'kc.sticky_cart.guarantee_once_html' | t | escape }}"
                     data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
                     data-kc-once-cta="{{ loop_block.settings.try_once_cta | default: kc_once_cta_default | escape }}"
                     data-kc-or="{{ 'kc.plans.or' | t | escape }}"
@@ -667,7 +668,7 @@
                       "selling plan ID: text" per line, and the plans with the one-time price struck through
                     {%- endcomment -%}
                     <script type="application/json" id="kc-plan-extras-{{ product.id }}">
-                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}}
+                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}, "chipsSelectedOnly": {{ block.settings.chips_selected_only | json }}}
                     </script>
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
@@ -3005,7 +3006,14 @@
           "type": "textarea",
           "id": "plan_badges",
           "label": "Plan badges (card on top only)",
-          "info": "Shown only with \"Try once: card on top\". One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
+          "info": "Shown only with \"Try once: card on top\", as a ribbon over the card's top edge. One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
+        },
+        {
+          "type": "checkbox",
+          "id": "chips_selected_only",
+          "label": "Plan chips: selected card only (card on top only)",
+          "info": "Shown only with \"Try once: card on top\". The Care Credit and Check-up chips show on the selected card only; the other cards show a chevron under the price.",
+          "default": false
         },
         {
           "type": "text",

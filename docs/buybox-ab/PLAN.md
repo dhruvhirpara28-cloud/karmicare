@@ -203,16 +203,31 @@ brushing · no Care Credit", no rewards rows). No other new text.
 
 ## 4c. Badges, card size and the Year as a link (Victor, 24 Nov)
 
-**Two gold badges clash.** VOORSTEL: gold stays the Year's ("Brushing & Beyond", the premium plan);
-"Most picked" becomes a small pill in the brand's light blue (`--kc-mapped-surface-accent-default`, text
-`--kc-mapped-text-accent-default-on-accent`) on the card's top edge, as a tab. Two colours, two
-places, two meanings, and the 60-Day card loses its badge row. Preview `/badge/` (preview-only CSS
-`preview/badge-tab.css`; becomes a theme rule after Victor's OK).
+**Two gold badges clash.** Built (Victor, 24 Nov: "een ribbon die over de rand bovenaan de kaart
+komt tussen de titel en de prijs"): gold stays the Year's ("Brushing & Beyond", the premium plan);
+"Most picked" is a ribbon in the brand's light blue (`--kc-mapped-surface-accent-default`, text
+`--kc-mapped-text-accent-default-on-accent`, notched ends) centred on the 60-Day card's top border,
+horizontally midway between the end of the title and the start of the price (`kcPlaceRibbon`, again
+on every resize). The 60-Day card loses its bottom badge row. Same setting "Plan badges".
+
+**Promises under the CTA follow the plan** (Victor, 24 Nov), in the theme with the card layout
+(`kcUpdatePromises`): Try once shows only "14-day money-back guarantee"
+(kc.sticky_cart.guarantee_once_html); pause and free shipping go. A plan shows the block's own three.
+
+**Nothing said twice.** The previews are built from the live page each time; the Loop admin texts
+(plan lists) are the live ones in `/on/` and `/year/`, so the live duplicates show there (guarantee
+and pause in the list and in the promises, Care Credit in the chip and the receipt). `/copy/` and
+`/full/` apply PLAN.md 4b without them: the lists leave out guarantee and pause / stop (the promises
+hold them per plan), the receipt uses short labels ("Care Credit back", "Check-up Reward", "Welcome
+Kit (€21 value)"), no shipping row (the promises say free shipping), the line under "Total today" is
+"Then €59 every 60 days" / "Then €354 once a year" / for Try once "+ shipping" without "one-time".
+`preview/state_check.py` finds no line twice in `/full/` with Try once or 60-Day selected.
 
 **The options are large.** Measured at 390 px (NOTES.md result 11). VOORSTEL, most effect first:
 1. The Year as a link under the cards (built, below): the whole Year card goes until it is chosen.
-2. Chips only on the selected card: closed cards show name, one sub-row line and price; Care Credit
-   and Check-up chips appear when the card is chosen, as the lists do now.
+2. Chips only on the selected card (built, Victor 24 Nov: Loop block setting "Plan chips: selected
+   card only"): closed cards show name, sub-row and price, plus a down chevron under the price as a
+   sign there is more; Care Credit and Check-up chips appear when the card is chosen. Preview `/chips/`.
 3. One sub-row line: "€0.49 / brushing · every 60 days" instead of two lines.
 4. The badge as a tab on the edge (above) instead of a row at the bottom.
 5. Card padding at 390 from the "comfortable / lg" spacing to "md".

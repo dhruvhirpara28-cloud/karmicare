@@ -52,6 +52,7 @@ def build(lang, layout):
         'data-kc-once-layout': layout,
         'data-kc-once-title': sticky['title_once_html'],
         'data-kc-once-shipping': html.unescape(re.search(r'class="ft-ship">([^<]*)', page).group(1).strip()),
+        'data-kc-once-guarantee': sticky['guarantee_once_html'],
         'data-kc-once-note': html.unescape(note),
         # Loop block "Try once: button text" filled in by Victor (24 Nov), EN only: until it is translated
         # Shopify shows the English value on /nl and /fr too
@@ -77,7 +78,8 @@ def build(lang, layout):
     # Loop block "Plan badges" and "One-time price struck through" filled in as Victor asked (24 Nov), on
     # OFF too: the link layout must ignore them
     extras = (f'<script type="application/json" id="kc-plan-extras-{PID}">'
-              '{"badges": "712106115453: Most picked", "compareOnce": "712106115453", "asLink": ""}</script>')
+              '{"badges": "712106115453: Most picked", "compareOnce": "712106115453", "asLink": "", '
+              '"chipsSelectedOnly": false}</script>')
     assert page.count('</body>') == 1
     page = page.replace('</body>', extras + '</body>', 1)
 
@@ -122,11 +124,20 @@ def build(lang, layout):
         assert year_page != page, 'asLink'
         year_out.write_text(year_page)
         print(year_out)
-        # /badge/: switch ON with the plan badge as a light-blue tab on the card edge (badge-tab.css)
-        badge_out = SERVE / 'badge' / lang / 'products' / f'{HANDLE}.html'
-        badge_out.parent.mkdir(parents=True, exist_ok=True)
-        badge_out.write_text(page.replace('</head>', '<link rel="stylesheet" href="/assets/badge-tab.css"></head>', 1))
-        print(badge_out)
+        if lang == 'en':
+            # /full/: everything together, the Year as a link plus the copy proposals (EN only)
+            full_out = SERVE / 'full' / lang / 'products' / f'{HANDLE}.html'
+            full_out.parent.mkdir(parents=True, exist_ok=True)
+            full_page = copy_proposals.apply(year_page)
+            full_out.write_text(full_page)
+            print(full_out)
+            # /chips/: /full/ with "Plan chips: selected card only" on (Victor, 24 Nov)
+            chips_out = SERVE / 'chips' / lang / 'products' / f'{HANDLE}.html'
+            chips_out.parent.mkdir(parents=True, exist_ok=True)
+            chips_page = full_page.replace('"chipsSelectedOnly": false', '"chipsSelectedOnly": true', 1)
+            assert chips_page != full_page, 'chipsSelectedOnly'
+            chips_out.write_text(chips_page)
+            print(chips_out)
     return out
 
 
@@ -166,7 +177,6 @@ for handle, pid in (('awake-morning-toothpaste-2-0', '16060347875709'), ('asleep
 for name in ASSETS:
     shutil.copy(WORKTREE / 'assets' / name, SERVE / 'assets' / name)
 shutil.copy(Path(__file__).with_name('copy-overlay.js'), SERVE / 'assets' / 'copy-overlay.js')
-shutil.copy(Path(__file__).with_name('badge-tab.css'), SERVE / 'assets' / 'badge-tab.css')
 for lang in PAGES:
     print(build_live(lang))
     for layout in ('link', 'card'):

@@ -1,6 +1,8 @@
-"""The copy proposals of PLAN.md section 4b (VOORSTEL, EN only) as the preview's /copy/ variant applies
-them: what a Loop admin change (plan descriptions, plan option text) and a kc.receipt key change would
-deliver, plus the Year's "per Duo" line, which has no source yet (copy-overlay.js)."""
+"""The copy proposals of PLAN.md section 4b (VOORSTEL, EN only) as the preview's /copy/ and /full/
+variants apply them: what a Loop admin change (plan descriptions, plan option text) and a kc.receipt key
+change would deliver, plus the Year's "per Duo" line, which has no source yet (copy-overlay.js).
+Nothing is said twice in the buybox (Victor, 24 Nov): the money-back guarantee and pause / stop are in
+the promises under the CTA (per plan), Care Credit in the chip, so the card lists leave them out."""
 import json
 import re
 
@@ -20,12 +22,7 @@ RHYTHM_DESCRIPTION = """<div class="block__loop-description">
   <div class="kc-description-list">
 <span class="arrow">✓</span> <strong>1 Duo</strong>, Awake + Asleep, for 60 days</div>
   <div class="kc-description-list">
-<span class="arrow">✓</span> <strong>Pause or stop anytime</strong>, no lock-in</div>
-  <div class="kc-description-list">
 <span class="arrow">✓</span> <strong>An email 5 days before</strong> every renewal</div>
-  <div class="kc-description-list">
-<span class="arrow">✓</span> <strong>60-day money-back guarantee</strong>
-</div>
   <div class="kc-description-list">
 <span class="arrow">✓</span> <strong>Your price stays the same</strong> while you stay</div>
   <div class="kc-description-list">
@@ -47,12 +44,7 @@ YEAR_DESCRIPTION = """<div class="block__loop-description">
     </div>
   </div>
   <div class="kc-description-list">
-<span class="arrow">✓</span> <strong>Stop anytime</strong> before your renewal</div>
-  <div class="kc-description-list">
 <span class="arrow">✓</span> <strong>An email 30 and 7 days before</strong> your renewal</div>
-  <div class="kc-description-list">
-<span class="arrow">✓</span> <strong>60-day money-back guarantee</strong>
-</div>
   <div class="kc-description-list">
 <span class="arrow">✓</span> <strong>Your price stays the same</strong> while you stay</div>
   <div class="kc-description-list">

@@ -129,6 +129,27 @@ when the last path part is the handle (`getCurrentPathLoop`).
       value on /nl and /fr until it is translated).
     Theme Check exit 0, 19 warnings, complexity 124.
 
+12. **Ribbon, promises per plan, `/full/`** (Victor, 24 Nov): `preview/state_check.py` per variant
+    (on, year, full), width (390, 1440) and selected plan (Try once, 60-Day, Year, Try once again), in
+    `shots/states.json`:
+    - Promises: Try once "14-day money-back guarantee" only (theme); 60-Day and Year the block's
+      three; in `/full/` the copy proposals on top.
+    - Ribbon "Most picked": centre on the 60-Day card's top border 0 px; 1440 px 52 px from the
+      title's end, 48 px to the price; 390 px the gap is narrower than the ribbon (-4 / -9 px), it
+      stays on the border line above both.
+    - Text twice between the plans header and the promises: `/full/` none with Try once or 60-Day
+      selected; with the Year card open only the same line on two plans ("€0.49 / brushing", the
+      Care Credit chip label). `/on/` and `/year/` show the live duplicates (live Loop texts).
+    - `/badge/` (tab idea) is gone, replaced by the ribbon in the theme. Shots `full-*.png`.
+    Theme Check exit 0, 19 warnings, complexity 124.
+
+13. **Chips on the selected card only, `/chips/`** (Victor, 24 Nov): `/full/` with the Loop block
+    setting "Plan chips: selected card only" on. Closed cards keep name, sub-row and price, and show a
+    down chevron under the price (`/ 60 days`, `one-time`). At 390 px with Try once selected the 60-Day
+    card goes from 176 to 114 px; with 60-Day selected its chip shows and Try once folds to 100 px with
+    the chevron. Shots `chips-en-{390,1440}-{day,night}{,-60day}.png`. OFF still equals live (probes
+    equal, 390 px 0 % pixels). Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

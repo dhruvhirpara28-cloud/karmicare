@@ -386,6 +386,34 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
   display: none !important;
 }
 
+/* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
+   card, Victor 24 Nov): the other cards keep name, sub-row and price, and a down chevron under the
+   price says there is more (assets/loop-widget.js kcEnsureMoreChevron) */
+.kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-return_care-tooltip,
+.kc-chips-selected-only .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-chips {
+  display: none;
+}
+
+.kc-buybox .kc-plan-more {
+  display: none;
+}
+
+.kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-plan-more,
+.kc-chips-selected-only .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-plan-more {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: var(--kc-responsive-spacing-layout-xs) 3px 0 auto;
+  border-right: var(--kc-shape-stroke-medium, 1.5px) solid var(--kc-mapped-text-default-body);
+  border-bottom: var(--kc-shape-stroke-medium, 1.5px) solid var(--kc-mapped-text-default-body);
+  transform: rotate(45deg);
+}
+
+.kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) .kc-plan-more {
+  grid-column: 1 / -1;
+  justify-self: end;
+}
+
 /* Radio, plan name and price on one line (Victor, 24 Nov): the radio's centre on the centre of the
    name's capitals. That is the centre of the 26 / 28 px line plus half of what the text grows over
    18 px (measured with canvas font metrics, docs/buybox-ab/preview/align.js: 0 px off at 390 and
@@ -615,8 +643,7 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
 
 /* "Brushing & Beyond": its own row at the bottom right of the card,
    flush with the card edge instead of hanging over the border. */
-.kc-buybox .kc-bottom_label,
-.kc-buybox .kc-plan-badge {
+.kc-buybox .kc-bottom_label {
   display: flex;
   justify-content: flex-end;
   margin: var(--kc-responsive-spacing-layout-xs) calc(var(--kc-responsive-spacing-layout-lg) * -1) calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
@@ -661,10 +688,28 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
   color: var(--kc-heading-second-tone);
 }
 
-/* A plan badge (Loop block "Plan badges", with the Try once card) sits in the card's flex-wrapped plan
-   container: its own full row, grown over the negative margins to the card edges */
-.kc-buybox .kc-plan-badge {
-  flex: 1 0 100%;
+/* "Most picked" (Loop block "Plan badges", with the Try once card): a ribbon over the card's top edge,
+   between the title and the price (Victor, 24 Nov), in the brand's light blue, so gold stays the
+   Year's "Brushing & Beyond". Centred on the card's top border line, horizontally midway between the
+   end of the title and the start of the price: assets/loop-widget.js kcPlaceRibbon sets
+   --kc-ribbon-x from both and again on every resize (the middle of the card without it). */
+.kc-buybox .kc-plan-ribbon {
+  position: absolute;
+  left: var(--kc-ribbon-x, 50%);
+  top: calc(var(--kc-shape-stroke-thick, 2px) / -2);
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  padding: 2px calc(var(--kc-responsive-spacing-layout-sm) + 4px);
+  background: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: var(--kc-responsive-label-sm-line-height);
+  letter-spacing: var(--kc-responsive-label-sm-letter-spacing);
+  font-weight: var(--font-700-weight, 700);
+  text-transform: uppercase;
+  white-space: nowrap;
+  /* Ribbon ends: a notch cut into both short sides */
+  clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%, 6px 50%);
 }
 
 .kc-buybox .kc-bottom_label:empty {

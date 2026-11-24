@@ -42,11 +42,17 @@ for width in (390, 1440):
         SHOTS_LIST.append((f'year-en-{width}-{mode}-once-buy', 'year', 'en', width, mode))
 for lang in ('nl', 'fr'):
     SHOTS_LIST.append((f'year-{lang}-390-day', 'year', lang, 390, 'day'))
-# /badge/ (badge as a light-blue tab on the card edge): plans header, and with the Year card open
+# /full/ (Year as a link + copy proposals): plans header, lower buybox per state (60-Day as a card)
 for width in (390, 1440):
     for mode in ('day', 'night'):
-        SHOTS_LIST.append((f'badge-en-{width}-{mode}', 'badge', 'en', width, mode))
-        SHOTS_LIST.append((f'badge-en-{width}-{mode}-year', 'badge', 'en', width, mode))
+        SHOTS_LIST.append((f'full-en-{width}-{mode}', 'full', 'en', width, mode))
+        SHOTS_LIST.append((f'full-en-{width}-{mode}-once-buy', 'full', 'en', width, mode))
+        SHOTS_LIST.append((f'full-en-{width}-{mode}-60day-buy', 'full', 'en', width, mode))
+# /chips/ (/full/ with chips on the selected card only): plans header per state
+for width in (390, 1440):
+    for mode in ('day', 'night'):
+        for state in ('', '-60day'):
+            SHOTS_LIST.append((f'chips-en-{width}-{mode}{state}', 'chips', 'en', width, mode))
 # "-buy": the lower buybox (end of the cards, receipt, CTA, trust row) per state, before (on) and after (copy)
 for switch in ('on', 'copy'):
     for width in (390, 1440):

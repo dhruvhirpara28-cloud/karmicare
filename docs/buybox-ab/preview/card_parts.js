@@ -16,7 +16,7 @@
         padding: Math.round(parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)),
         subRow: h(card.querySelector('.kc-plan-subrow')),
         chips: h(card.querySelector('.kc-return_care-tooltip')),
-        badgeRow: h(card.querySelector('.kc-plan-badge')) || h(card.querySelector('.kc-bottom_label')),
+        badgeRow: h(card.querySelector('.kc-bottom_label')),
       };
     }),
   });

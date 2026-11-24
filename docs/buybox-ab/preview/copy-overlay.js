@@ -1,6 +1,6 @@
-/* Preview only (/copy/ variant, docs/buybox-ab/PLAN.md 4b): the copy proposals that the theme draws
-   itself, per selected plan, over the whole buybox: the Year's "per Duo" line, the receipt (rows, total
-   sub-line, a shipping row), the CTA for Try once and the trust row under the CTA. Not theme code: what
+/* Preview only (/copy/ and /full/ variants, docs/buybox-ab/PLAN.md 4b): the copy proposals that the
+   theme draws itself, per selected plan, over the whole buybox: the Year's "per Duo" line, the receipt
+   (row labels, total sub-line), the CTA for Try once and the trust row under the CTA. Not theme code: what
    Victor keeps becomes kc.* keys, block settings and lines in assets/loop-widget.js. Writes only what
    differs, so the theme's own updates and this observer settle. */
 (function () {
@@ -9,17 +9,17 @@
   var YEAR = 'ab8930cda8d5182e7420ef18797bb86a2f9ae26c';
   var YEAR_DUOS = 6;
 
+  // Nothing twice in the buybox (Victor, 24 Nov): the receipt names what the cards explain in short
+  // labels, the promises under the CTA hold guarantee, pause / stop and shipping, per plan
   var COPY = {
-    creditTitle: 'Care Credit back, to spend on more care',
+    creditTitle: 'Care Credit back',
     creditTip: 'Care Credit is Karmicare credit in euros, to spend on member products and accessories. It lands in your account with your plan, so caring for your teeth pays you back.',
-    checkupTitle: 'After a dental check-up from month 6',
-    kitTemplate: 'Welcome Kit with your first order ([value] value)',
-    shipping: 'Shipping',
-    shippingFree: 'Free',
-    // "+ shipping" right after the per-brushing price, no sentence of its own (Victor, 24 Nov)
-    onceSub: '[price] per brushing + shipping',
-    rhythmSub: 'Then [price] every 60 days. Pause or stop anytime.',
-    yearSub: 'Then [price] once a year. Stop anytime before your renewal.',
+    checkupTitle: 'Check-up Reward',
+    kitTemplate: 'Welcome Kit ([value] value)',
+    // Try once: the per-brushing price is on the card; the receipt only adds what is not in the total
+    onceSub: '+ shipping',
+    rhythmSub: 'Then [price] every 60 days',
+    yearSub: 'Then [price] once a year',
     // Victor's own text (24 Nov), in place of the VOORSTEL "Begin your first Duo"
     onceCta: 'Try once, purchase now',
     trust: {
@@ -47,7 +47,8 @@
       var price = group.querySelector('.loop-subscription-group-price-amount');
       var total = price && cents(price.textContent);
       if (!sub || !total) return;
-      var text = loopFormatMoney(Math.round(total / YEAR_DUOS), true) + ' per Duo, billed once a year';
+      // "billed once a year" is the receipt's line ("Then €354 once a year"): not twice
+      var text = loopFormatMoney(Math.round(total / YEAR_DUOS), true) + ' per Duo';
       var line = sub.querySelector('.kc-copy-per-duo');
       if (line && line.textContent === text && sub.children[1] === line) return;
       if (!line) {
@@ -74,33 +75,14 @@
       if (value) set(kitLabel, COPY.kitTemplate.replace('[value]', value));
     }
 
-    // Members ship free: a row of its own, after the Welcome Kit, as the receipt's other rows
-    var rewards = summary.querySelector('.kc-pricing-summary__rewards');
-    var shipping = summary.querySelector('.kc-copy-shipping-row');
-    if (rewards && kit && !shipping) {
-      shipping = kit.cloneNode(true);
-      shipping.className = 'kc-reward-row kc-copy-shipping-row';
-      shipping.removeAttribute('style');
-      shipping.querySelector('.kc-welcome-kit-label').className = 'kc-copy-shipping-label';
-      shipping.querySelector('.kc-welcome-kit-value').className = 'kc-copy-shipping-value';
-      rewards.appendChild(shipping);
-    }
-    if (shipping) {
-      set(shipping.querySelector('.kc-copy-shipping-label'), COPY.shipping);
-      // The same word as the Welcome Kit's value ("FREE"), so the two rows read alike
-      var kitValue = kit.querySelector('.kc-welcome-kit-value');
-      set(shipping.querySelector('.kc-copy-shipping-value'), (kitValue && kitValue.textContent.trim()) || COPY.shippingFree);
-      var display = plan === ONCE ? 'none' : 'flex';
-      if (shipping.style.display !== display) shipping.style.display = display;
-    }
-
     var price = summary.querySelector('.kc-pricing-summary__price');
     var sub = summary.querySelector('.kc-pricing-summary__per-brushing');
     var interval = summary.querySelector('.kc-pricing-summary__interval');
     var total = price ? price.textContent.trim() : '';
     if (plan === ONCE && total) {
-      // One Duo is 120 brushings, as the card
-      set(sub, COPY.onceSub.replace('[price]', loopFormatMoney(Math.round(cents(total) / 120), true)));
+      set(sub, COPY.onceSub);
+      // "one-time" is on the Try once card already
+      set(interval, '');
     } else if (plan === RHYTHM && total) {
       set(sub, COPY.rhythmSub.replace('[price]', total));
       set(interval, '');
