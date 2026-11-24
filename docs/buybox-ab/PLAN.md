@@ -123,6 +123,51 @@ or off. No template sets it: Victor fills it in the editor with the flip. Two op
 - **NL/FR:** the text is a block setting value, so NL/FR come through Translate & Adapt like "Brushing
   & Beyond"; until then /nl and /fr show the English text. Wording via the source-copy lane.
 
+**Two-line title and struck €67 (Victor, 24 Nov, lane chat):**
+- Title block, new settings "Title line 1 (Try once card on top only)" and "Line 2: leave out at the
+  start of the product title" (default "Awake & Asleep"), in `snippets/kc-product-title.liquid`. With the
+  card layout and line 1 filled: one H1 with line 1 "Karmicare Duet: Awake & Asleep" and line 2 the
+  product title in the page language minus "Awake & Asleep" ("Fluoride-Free Nano-Hydroxyapatite
+  Toothpaste, Day & Night System"; NL and FR from the product's own translation) in
+  `--kc-heading-second-tone`, the second tone of the section titles. The SEO keywords stay in the H1;
+  the product title in Shopify does not change. Line 1 needs NL/FR through Translate & Adapt.
+  Open point: the title says "Duet", every card, the sticky bar and the receipt say "Duo".
+- Loop block, new setting "One-time price struck through (card on top only)", plan IDs
+  (`712106115453`): "€59 ~~€67~~", the one-time price of the plan's Duos (1 for the 60-Day) after the
+  plan price, body colour at 70 % (contrast 6.0:1 Day, 7.5:1 Night), hidden from screen readers as it
+  repeats the Try once price. Open point: a struck price reads as a price reduction. €67 is today's
+  one-time price of the same Duo, shown in the card above, so it is a comparison of two current
+  offers, not an earlier price; the Terms' Omnibus clause (lowest price of the last 30 days) is about
+  reductions. Worth a yes from whoever checks the legal pages before it goes live.
+
+## 4b. Copy proposals for the membership cards (VOORSTEL, EN only)
+
+Goal (Victor): make the plans foolproof. What a first-time visitor has to understand in five seconds:
+what arrives and when, what it costs and when it is charged, what Care Credit is, and that they can
+stop. Every line below comes from text already on the site or in the Terms; no new claims or numbers
+(the "€59 per Duo" is the Year price divided by its 6 Duos).
+
+| Where | Today | VOORSTEL | Why | Lives in |
+|---|---|---|---|---|
+| 60-Day sub-row | Renews every 60 days | A new Duo every 60 days | Says what arrives; "renews" is subscription jargon | theme (loop-widget.js, kc.receipt key) |
+| 60-Day chip | €5.90 Care Credit back in your account | €5.90 Care Credit back, to spend on more care | Says what Care Credit is for (sticky bar: "spend it on more care") | Loop plan description |
+| 60-Day list | Awake + Asleep duo one complete 60-day cycle | 1 Duo, Awake + Asleep, for 60 days | Shorter, same fact | Loop plan description |
+| 60-Day list | Gift, pause or cancel anytime | Pause or stop anytime, no lock-in | "No lock-in" is the Terms' own promise | Loop plan description |
+| 60-Day list | (none) | An email 5 days before every renewal | Takes away the fear of a forgotten charge (Terms, "Renewal reminder") | Loop plan description |
+| 60-Day list | Inflation-proof member price | Your price stays the same while you stay | Plain words for Terms "member price protection" | Loop plan description |
+| 60-Day list | €5.90 Care Credit back on orders | (drop) | Repeats the chip | Loop plan description |
+| 60-Day list | Free Welcome Kit (on first order) | Welcome Kit with your first order: two toothbrushes + floss, free | Says what is in it (sticky bar text) | Loop plan description |
+| Year sub-row | Renews every year | 6 Duos a year: 3 now, 3 in month 6 | What arrives (Loop's own option text); Victor removed the deliveries line on 16 Oct, so his call | theme (loop-widget.js) |
+| Year price | €354 / year | €354 / year, billed once (€59 per Duo) | Makes the year comparable with the 60-Day | theme |
+| Year chip | €40 Dental Check-up Reward | €40 Care Credit after a dental check-up from month 6 | The tooltip text, without needing the tooltip | Loop plan description |
+| Year list | (none) | An email 30 and 7 days before your renewal | Same reassurance (Terms, "Renewal reminder") | Loop plan description |
+| Tooltips | "… Care Credit — in euros …", "20% Return on Care — 2× the bi-monthly rate —" | No em dashes, no "Return on Care" next to "Care Credit": one name for one thing | Brand style; two names for one thing confuse | Loop plan description |
+| Everywhere | Duo / duo / Duet | One spelling: Duo | Consistency with the new title | all |
+
+Loop plan descriptions are Loop admin texts with their own Loop Multilingual copies per language, so
+they change in Loop admin (Victor or a lane with that go), never from the theme. The theme lines can
+go in this lane after Victor's OK; NL/FR of everything go through source-copy via the desk.
+
 The summary box under the cards already has a one-time state ("Total today €67 one-time", "€0.56 per
 brushing · no Care Credit", no rewards rows). No other new text.
 

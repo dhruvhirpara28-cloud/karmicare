@@ -66,10 +66,25 @@ def build(lang, layout):
         assert '"defaultToSubscription": true' in body
         page = page[: buybox[0].start(1)] + body.replace('"defaultToSubscription": true', '"defaultToSubscription": false', 1) + page[buybox[0].end(1):]
 
-    # Loop block "Plan badges" filled in as Victor asked (24 Nov), on OFF too: the link layout must ignore it
-    badges = f'<script type="application/json" id="kc-plan-badges-{PID}">"712106115453: Most picked"</script>'
+    # Loop block "Plan badges" and "One-time price struck through" filled in as Victor asked (24 Nov), on
+    # OFF too: the link layout must ignore them
+    extras = (f'<script type="application/json" id="kc-plan-extras-{PID}">'
+              '{"badges": "712106115453: Most picked", "compareOnce": "712106115453"}</script>')
     assert page.count('</body>') == 1
-    page = page.replace('</body>', badges + '</body>', 1)
+    page = page.replace('</body>', extras + '</body>', 1)
+
+    # Title block "Title line 1" filled in (Victor, 24 Nov): snippets/kc-product-title.liquid's output with
+    # the card layout; the link layout keeps the product title
+    if layout == 'card':
+        match = re.search(r'<h1 class="h4">([^<]*)</h1>', page)
+        title = html.unescape(match.group(1))
+        leave_out = 'Awake & Asleep'
+        line_2 = title[len(leave_out):].strip() if title.startswith(leave_out) else title
+        line_2 = line_2[:1].upper() + line_2[1:]
+        two_lines = ('<h1 class="h4 kc-product-title">\n    <span class="kc-product-title__name">'
+                     + html.escape('Karmicare Duet: Awake & Asleep') + '</span>\n    <span class="kc-product-title__line">'
+                     + html.escape(line_2) + '</span>\n  </h1>')
+        page = page[: match.start()] + two_lines + page[match.end():]
 
     for name in ASSETS:
         pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'

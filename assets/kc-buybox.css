@@ -603,6 +603,37 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
   margin: var(--kc-responsive-spacing-layout-xs) calc(var(--kc-responsive-spacing-layout-lg) * -1) calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
 }
 
+/* "€59 €67": the one-time price of the same Duos struck through after the plan price, in a lighter
+   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov) */
+.kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) {
+  white-space: nowrap;
+}
+
+.kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) .loop-subscription-group-price-amount {
+  display: inline;
+}
+
+.kc-buybox .kc-plan-compare {
+  margin-left: var(--kc-responsive-spacing-layout-xxs);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-lg-text-size);
+  line-height: var(--kc-responsive-body-lg-line-height);
+  font-weight: var(--font-400-weight, 400);
+  color: var(--kc-mapped-text-default-body);
+  opacity: 0.7;
+}
+
+/* Two-line product title with the Try once card (snippets/kc-product-title.liquid): line 2 in the
+   second tone of the section titles (base.css --kc-heading-second-tone) */
+.kc-buybox .kc-product-title__name,
+.kc-buybox .kc-product-title__line {
+  display: block;
+}
+
+.kc-buybox .kc-product-title__line {
+  color: var(--kc-heading-second-tone);
+}
+
 /* A plan badge (Loop block "Plan badges", with the Try once card) sits in the card's flex-wrapped plan
    container: its own full row, grown over the negative margins to the card edges */
 .kc-buybox .kc-plan-badge {

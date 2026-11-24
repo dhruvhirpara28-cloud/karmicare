@@ -130,8 +130,13 @@
                 {%- when 'category_strip' -%}
                   {%- render 'product-category-strip', block: block, product: product -%}
                 {%- when 'title' -%}
+                  {%- assign kc_title_loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    <h1 class="h4">{{ product.title | escape }}</h1>
+                    {%- render 'kc-product-title',
+                      product: product,
+                      block: block,
+                      layout: kc_title_loop_block.settings.try_once_layout
+                    -%}
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
                         {{ product.title | escape }}
@@ -654,9 +659,12 @@
                       default_to_subscription: block.settings.default_to_subscription,
                       try_once_layout: block.settings.try_once_layout
                     -%}
-                    {%- comment -%} Plan badges, "selling plan ID: text" per line (assets/loop-widget.js kcPlanBadges) {%- endcomment -%}
-                    <script type="application/json" id="kc-plan-badges-{{ product.id }}">
-                      {{- block.settings.plan_badges | json -}}
+                    {%- comment -%}
+                      Plan card extras with the Try once card (assets/loop-widget.js kcPlanExtras): badges,
+                      "selling plan ID: text" per line, and the plans with the one-time price struck through
+                    {%- endcomment -%}
+                    <script type="application/json" id="kc-plan-extras-{{ product.id }}">
+                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}}
                     </script>
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
@@ -1454,7 +1462,21 @@
     {
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_line_1",
+          "label": "Title line 1 (Try once card on top only)",
+          "info": "Shown only with the Loop block's \"Try once: card on top\". Line 2 is then the product title in the page language, in the second tone of the section titles. Blank: the product title, as before."
+        },
+        {
+          "type": "text",
+          "id": "title_line_2_remove",
+          "label": "Line 2: leave out at the start of the product title",
+          "default": "Awake & Asleep"
+        }
+      ]
     },
     {
       "type": "price",
@@ -2975,6 +2997,12 @@
           "id": "plan_badges",
           "label": "Plan badges (card on top only)",
           "info": "Shown only with \"Try once: card on top\". One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
+        },
+        {
+          "type": "text",
+          "id": "plan_compare_once",
+          "label": "One-time price struck through (card on top only)",
+          "info": "Selling plan IDs, comma-separated, e.g. 712106115453. Shown only with \"Try once: card on top\": the card shows the one-time price of the same number of Duos after its own price, struck through."
         },
         {
           "type": "text",

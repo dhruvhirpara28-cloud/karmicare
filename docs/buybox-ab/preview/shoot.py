@@ -21,6 +21,13 @@ for switch in ('live', 'off', 'on'):
             SHOTS_LIST.append((f'{switch}-en-{width}-{mode}', switch, 'en', width, mode))
 for lang in ('nl', 'fr'):
     SHOTS_LIST.append((f'on-{lang}-390-day', 'on', lang, 390, 'day'))
+# "-top": scrolled to the product title instead of the plans header
+for switch in ('off', 'on'):
+    for width in (390, 1440):
+        for mode in ('day', 'night'):
+            SHOTS_LIST.append((f'{switch}-en-{width}-{mode}-top', switch, 'en', width, mode))
+for lang in ('nl', 'fr'):
+    SHOTS_LIST.append((f'on-{lang}-390-day-top', 'on', lang, 390, 'day'))
 
 
 def orca(*args):
@@ -61,8 +68,13 @@ for name, switch, lang, width, mode in SHOTS_LIST:
     time.sleep(2.5)
     evaluate(
         "(() => { document.body.classList.remove('day-mode', 'night-mode'); document.body.classList.add('%s-mode');"
-        " const el = document.querySelector('.kc-buybox .loop-purchase-options-label') || document.querySelector('#loop-selling-plan-fieldset');"
-        " window.scrollTo(0, el.getBoundingClientRect().top + scrollY - %d); return scrollY; })()" % (mode, 90 if width < 750 else 140)
+        " const el = %s;"
+        " window.scrollTo(0, el.getBoundingClientRect().top + scrollY - %d); return scrollY; })()" % (
+            mode,
+            "document.querySelector('.kc-buybox .product__title')" if name.endswith('-top')
+            else "document.querySelector('.kc-buybox .loop-purchase-options-label') || document.querySelector('#loop-selling-plan-fieldset')",
+            90 if width < 750 else 140,
+        )
     )
     orca(*viewport)
     shot()

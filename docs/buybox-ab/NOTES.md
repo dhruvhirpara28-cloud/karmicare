@@ -74,6 +74,14 @@ when the last path part is the handle (`getCurrentPathLoop`).
    edges like the Year's). OFF: no badge (`probes.json`, off-en-390-day and off-en-1440-day). NL and FR
    show the English text until it is translated. Theme Check exit 0, 19 warnings, complexity 124.
 
+7. **Two-line title and struck €67** (Victor's follow-up, PLAN.md section 4): the preview fills "Title
+   line 1" with "Karmicare Duet: Awake & Asleep" and "One-time price struck through" with
+   712106115453. ON: H1 in two lines, line 2 in the section titles' second tone, EN/NL/FR from the
+   product's own title (`on-*-top.png`); "€59 €67" on the 60-Day card only, one line also in NL
+   ("€ 59 € 67" wrapped at 390 px before `white-space: nowrap`), contrast 6.0:1 Day and 7.5:1 Night.
+   OFF: title and prices as live (`off-*-top.png`, `off-*.png`). Theme Check exit 0, 19 warnings,
+   complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

@@ -2429,8 +2429,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
     const dayMap = { day: 1, week: 7, month: 30, year: 365 };
     // KC: the cards' own labels in the page language, from the receipt's data attributes
     const labelsEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
-    // KC: badge per selling plan ID, only with the Try once card (kcPlanBadges)
-    const badges = kcPlanBadges(productId);
+    // KC: badge and struck-through one-time price per selling plan ID, only with the Try once card
+    const extras = kcPlanExtras(productId);
 
     loopContainer.querySelectorAll('.loop-subscription-group').forEach((groupEl) => {
         const radio = groupEl.querySelector('.loop-subscription-group-radio');
@@ -2440,7 +2440,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         const alloc = kcCardAllocation(productId, variant, radio.dataset.id);
         if (!alloc?.price) return;
 
-        kcUpdatePlanBadge(groupEl, badges[String(alloc.selling_plan_id)] || '');
+        kcUpdatePlanBadge(groupEl, extras.badges[String(alloc.selling_plan_id)] || '');
 
         // 1. Shipping label — read directly from Loop's <select> option (e.g. "ships every 60 days")
         const select = groupEl.querySelector('.loop-selling-plan-selector');
@@ -2460,6 +2460,10 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         // Determine duos for calculation
         const option = select?.querySelector(`option[value="${alloc.selling_plan_id}"]`);
         const duosCount = parseInt(option?.dataset?.duos) || 1;
+
+        // KC: the one-time price of the same Duos, struck through after the plan price (kcPlanExtras)
+        const comparesOnce = extras.compareOnce.includes(String(alloc.selling_plan_id));
+        kcUpdatePlanCompare(groupEl, comparesOnce ? loopFormatMoney(variant.price * duosCount, true) : '');
         const brushingsPerDuo = parseInt(option?.dataset?.brushings) || 120;
 
         // 3. Per-brushing cost (what the checkout charges ÷ (duos * 120))
@@ -2849,27 +2853,49 @@ function kcOnceCard(productId) {
 }
 
 /**
- * KC: plan badges by selling plan ID, from the Loop block setting "Plan badges" (one "712106115453:
- * Most picked" per line, #kc-plan-badges-<product id> in sections/main-product.liquid). Only with the
- * Try once card (kcOnceCard), so the link layout stays as it was. docs/buybox-ab/PLAN.md
+ * KC: plan card extras by selling plan ID, from the Loop block settings (#kc-plan-extras-<product id> in
+ * sections/main-product.liquid): badges ("Plan badges", one "712106115453: Most picked" per line) and
+ * the plans that show the one-time price struck through ("One-time price struck through", comma-
+ * separated IDs). Only with the Try once card (kcOnceCard), so the link layout stays as it was.
+ * docs/buybox-ab/PLAN.md
  */
-function kcPlanBadges(productId) {
-    if (!kcOnceCard(productId)) return {};
-    let text = '';
+function kcPlanExtras(productId) {
+    const extras = { badges: {}, compareOnce: [] };
+    if (!kcOnceCard(productId)) return extras;
+    let data = {};
     try {
-        text = JSON.parse(document.querySelector(`#kc-plan-badges-${productId}`)?.textContent || 'null') || '';
+        data = JSON.parse(document.querySelector(`#kc-plan-extras-${productId}`)?.textContent || '{}') || {};
     } catch (e) {
-        text = '';
+        data = {};
     }
-    const badges = {};
-    String(text).split(/\r?\n/).forEach((line) => {
+    String(data.badges || '').split(/\r?\n/).forEach((line) => {
         const colon = line.indexOf(':');
         if (colon < 0) return;
         const planId = line.slice(0, colon).trim();
         const label = line.slice(colon + 1).trim();
-        if (/^\d+$/.test(planId) && label) badges[planId] = label;
+        if (/^\d+$/.test(planId) && label) extras.badges[planId] = label;
     });
-    return badges;
+    extras.compareOnce = String(data.compareOnce || '').split(',').map((id) => id.trim()).filter((id) => /^\d+$/.test(id));
+    return extras;
+}
+
+// KC: the one-time price of the plan's Duos struck through after the plan price (kcPlanExtras); removed
+// for a plan without it. Read out as nothing: it repeats the Try once price the card above says.
+function kcUpdatePlanCompare(groupEl, text) {
+    const amount = groupEl.querySelector('.loop-subscription-group-price-amount');
+    if (!amount) return;
+    let compare = amount.parentElement.querySelector(':scope > .kc-plan-compare');
+    if (!text) {
+        if (compare) compare.remove();
+        return;
+    }
+    if (!compare) {
+        compare = document.createElement('s');
+        compare.className = 'kc-plan-compare';
+        compare.setAttribute('aria-hidden', 'true');
+        amount.after(compare);
+    }
+    if (compare.textContent !== text) compare.textContent = text;
 }
 
 // KC: a plan card's badge at its bottom, in the look of the Year's "Brushing & Beyond"
