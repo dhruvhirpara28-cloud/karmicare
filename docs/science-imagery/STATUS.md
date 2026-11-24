@@ -1,7 +1,9 @@
 # Science imagery — parked
 
-**Decision date:** 24 November 2026  
-**Owner:** Victor  
+**Decision date:** 24 November 2026
+
+**Owner:** Victor
+
 **Status:** Parked; imagery work will move to an agency.
 
 Victor asked to park this lane because an agency will handle imagery, and authorized committing and integrating this status. No further in-house imagery production, image selection, upload or release work is scheduled in this lane.
