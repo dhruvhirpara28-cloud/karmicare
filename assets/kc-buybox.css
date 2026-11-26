@@ -386,6 +386,164 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
   display: none !important;
 }
 
+/* Plan dialogs (Loop block "Plan link opens", assets/loop-widget.js kcOpenPlanDialog, Victor 26 Nov):
+   the plan behind a plan link in a popup over a soft blur, or in a side panel with the landed still of
+   the kit. The dialog sits in .kc-buybox, so the plan card rules above dress the plan inside it; here
+   the plan loses its card box (the dialog is the box) and its radio indent. */
+.kc-buybox .kc-plan-dialog {
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-plan-dialog::backdrop {
+  background: rgba(255, 251, 246, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
+  background: rgba(25, 31, 56, 0.45);
+}
+
+.kc-buybox .kc-plan-dialog__inner {
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+  padding: var(--kc-responsive-spacing-layout-lg);
+  background: var(--kc-mapped-surface-page);
+  box-shadow: var(--kc-elevation-lg);
+}
+
+/* Centred: the theme resets the dialog's own auto margin */
+.kc-buybox .kc-plan-dialog--popup {
+  margin: auto;
+}
+
+.kc-buybox .kc-plan-dialog--popup .kc-plan-dialog__inner {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100dvh - 64px);
+  border: var(--kc-shape-stroke-thick, 2px) solid var(--kc-mapped-border-focus-default);
+  border-radius: var(--kc-shape-radius-md);
+}
+
+.kc-buybox .kc-plan-dialog--panel {
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: 100dvh;
+}
+
+.kc-buybox .kc-plan-dialog--panel .kc-plan-dialog__inner {
+  width: min(440px, 100vw);
+  height: 100%;
+  border-left: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kc-buybox .kc-plan-dialog--popup[open] .kc-plan-dialog__inner {
+    animation: kc-plan-popup-in 0.2s ease-out;
+  }
+
+  .kc-buybox .kc-plan-dialog--panel[open] .kc-plan-dialog__inner {
+    animation: kc-plan-panel-in 0.3s ease-out;
+  }
+}
+
+@keyframes kc-plan-popup-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes kc-plan-panel-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+
+/* The landed still of the kit, edge to edge at the top of the panel */
+.kc-buybox .kc-plan-dialog__image {
+  display: block;
+  width: calc(100% + 2 * var(--kc-responsive-spacing-layout-lg));
+  height: auto;
+  margin: calc(-1 * var(--kc-responsive-spacing-layout-lg)) calc(-1 * var(--kc-responsive-spacing-layout-lg)) var(--kc-responsive-spacing-layout-lg);
+}
+
+.kc-buybox .kc-plan-dialog__close {
+  position: absolute;
+  top: var(--kc-responsive-spacing-layout-sm);
+  right: var(--kc-responsive-spacing-layout-sm);
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: 50%;
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-buybox-text);
+  cursor: pointer;
+}
+
+.kc-buybox .kc-plan-dialog__close::before,
+.kc-buybox .kc-plan-dialog__close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  border-top: var(--kc-shape-stroke-medium, 1.5px) solid currentColor;
+}
+
+.kc-buybox .kc-plan-dialog__close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.kc-buybox .kc-plan-dialog__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* The plan inside: no card box of its own, no radio indent */
+.kc-buybox .kc-plan-dialog .loop-subscription-group.kc-plan-dialog__plan {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Room for the close button next to the price only, so the plan's divider runs the full width */
+.kc-buybox .kc-plan-dialog--popup .kc-plan-dialog__plan > .loop-subscription-group-price-container {
+  margin-right: 44px;
+}
+
+.kc-buybox .kc-plan-dialog .kc-return_care-tooltip {
+  padding-left: 0;
+}
+
+.kc-buybox .kc-plan-dialog .kc-bottom_label {
+  justify-content: flex-start;
+  margin: var(--kc-responsive-spacing-layout-sm) 0 0;
+}
+
+.kc-buybox .kc-plan-dialog .kc-bottom_label .kc-testimonial-button {
+  border-radius: 999px;
+}
+
+/* The space above the button sits under the plan: the buybox CTA rule sets margin: 0 !important */
+.kc-buybox .kc-plan-dialog .loop-subscription-group.kc-plan-dialog__plan {
+  margin-bottom: var(--kc-responsive-spacing-layout-lg);
+}
+
+/* In the side panel the button stays in view at the bottom while the plan scrolls */
+.kc-buybox .kc-plan-dialog--panel .kc-plan-dialog__cta.product-form__custom-submit {
+  position: sticky;
+  bottom: 0;
+  /* Over the plan's badges while they scroll under it ("Brushing & Beyond" has z-index 2) */
+  z-index: 3;
+  box-shadow: 0 calc(-1 * var(--kc-responsive-spacing-layout-lg)) var(--kc-responsive-spacing-layout-lg) var(--kc-mapped-surface-page);
+}
+
 /* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
    card, Victor 24 Nov): the other cards keep name, sub-row and price, and a down chevron under the
    price says there is more (assets/loop-widget.js kcEnsureMoreChevron) */
@@ -650,16 +808,15 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
 }
 
 /* "€67 €59": the one-time price of the same Duos struck through before the plan price, in a lighter
-   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov). Two grid
-   columns in the same size and line height, top-aligned: the price sits exactly as on the other
-   cards, level with the plan name (baseline alignment moved the bold price 0.5 px down to the
-   regular one), and the pair never wraps, also with "€ 67 € 59" in Dutch at 390 px; "/ 60 days"
-   spans the row under it. */
+   tone (Loop block "One-time price struck through", with the Try once card, Victor 24 Nov), one size
+   smaller with a slanted line (Victor, 26 Nov). Two grid columns on one baseline: the larger price
+   sets it, so the price sits exactly as on the other cards, level with the plan name, and the pair
+   never wraps, also with "€ 67 € 59" in Dutch at 390 px; "/ 60 days" spans the row under it. */
 .kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: end;
-  align-items: start;
+  align-items: baseline;
   column-gap: var(--kc-responsive-spacing-layout-xxs);
   white-space: nowrap;
 }
@@ -669,12 +826,25 @@ body.day-mode .loop-one-time-purchase-option-position:has(.loop-one-time-purchas
 }
 
 .kc-buybox .kc-plan-compare {
+  position: relative;
   font-family: var(--kc-font-role-backbone);
-  font-size: var(--kc-responsive-body-lg-text-size);
-  line-height: var(--kc-responsive-body-lg-line-height);
+  font-size: var(--kc-responsive-body-md-text-size);
+  line-height: var(--kc-responsive-body-md-line-height);
   font-weight: var(--font-400-weight, 400);
   color: var(--kc-mapped-text-default-body);
   opacity: 0.7;
+  text-decoration: none;
+}
+
+/* The slanted strike: a line through the middle of the number, a little wider than it */
+.kc-buybox .kc-plan-compare::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 50%;
+  border-top: var(--kc-shape-stroke-medium, 1.5px) solid currentColor;
+  transform: rotate(-12deg);
 }
 
 /* Two-line product title with the Try once card (snippets/kc-product-title.liquid): line 2 in the

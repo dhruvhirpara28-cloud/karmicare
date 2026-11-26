@@ -150,6 +150,26 @@ when the last path part is the handle (`getCurrentPathLoop`).
     the chevron. Shots `chips-en-{390,1440}-{day,night}{,-60day}.png`. OFF still equals live (probes
     equal, 390 px 0 % pixels). Theme Check exit 0, 19 warnings, complexity 124.
 
+14. **Live card texts, smaller slanted strike, Year in a popup or side panel** (Victor, 26 Nov):
+    - The plan cards keep Loop's live texts and values, benefit lines included, in every variant
+      except `/copy/` (kept as the record of PLAN.md 4b). `/full/` is gone; `/chips/` is now `/year/`
+      with chips on the selected card only. The live page was fetched again on 26 Nov (theme
+      `karmicare/main`); its `loop-widget.js`, `kc-plan-select.js`, `karmi-add-to-cart.js` and
+      `kc-buybox.css` still have the branch base's content (same functions, only minifier changes).
+    - Struck "€67": one size smaller (body-md), the line slanted (−12°), on the price's baseline;
+      `align.js`: price 0 px at 390 and 1440, the smaller struck price 0.9 / −0.1 px.
+    - Loop block "Plan link opens": `/popup/` (popup in the middle over an 8 px blur) and `/panel/`
+      (side panel, 440 px on desktop, full width on a phone, the hero animation's landed still,
+      Awake in Day and Asleep in Night, above the plan, the button kept in view at the bottom).
+      `preview/dialog_check.py` (`shots/dialogs.json`, `popup-*-open.png`, `panel-*-open.png`): the
+      dialog shows the Year's live title, price, both chips, all six benefit lines and the three kit
+      tiles; "Close" in the page language; Esc and a click on the blur close it; its button "Begin
+      your Karmicare Year" chooses the Year and presses the buybox CTA, which calls karmiAddToCart
+      with selling plan 712155431293 and the Welcome Kit (recorded, no cart touched).
+    - The Welcome Kit tiles are built by one helper for the buybox and the dialog
+      (`kcWelcomeKitParts`); the buybox still shows its three clickable tiles in the selected plan.
+    Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

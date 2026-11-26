@@ -27,8 +27,9 @@ LOCALES = {'en': 'en.default.json', 'nl': 'nl.json', 'fr': 'fr.json'}
 def locale(lang):
     text = (WORKTREE / 'locales' / LOCALES[lang]).read_text()
     text = re.sub(r'^\s*/\*.*?\*/', '', text, flags=re.S)
-    kc = json.loads(text)['kc']
-    return dict(kc['sticky_cart'], plans_or=kc['plans']['or'])
+    data = json.loads(text)
+    kc = data['kc']
+    return dict(kc['sticky_cart'], plans_or=kc['plans']['or'], close=data['accessibility']['close'])
 
 
 def build_live(lang):
@@ -76,10 +77,12 @@ def build(lang, layout):
         page = page[: buybox[0].start(1)] + body.replace('"defaultToSubscription": true', '"defaultToSubscription": false', 1) + page[buybox[0].end(1):]
 
     # Loop block "Plan badges" and "One-time price struck through" filled in as Victor asked (24 Nov), on
-    # OFF too: the link layout must ignore them
+    # OFF too: the link layout must ignore them. The rest at its default; the variants below change it.
     extras = (f'<script type="application/json" id="kc-plan-extras-{PID}">'
-              '{"badges": "712106115453: Most picked", "compareOnce": "712106115453", "asLink": "", '
-              '"chipsSelectedOnly": false}</script>')
+              + json.dumps({'badges': '712106115453: Most picked', 'compareOnce': '712106115453', 'asLink': '',
+                            'chipsSelectedOnly': False, 'linkOpens': 'card', 'closeLabel': sticky['close']},
+                           ensure_ascii=False)
+              + '</script>')
     assert page.count('</body>') == 1
     page = page.replace('</body>', extras + '</body>', 1)
 
@@ -124,20 +127,20 @@ def build(lang, layout):
         assert year_page != page, 'asLink'
         year_out.write_text(year_page)
         print(year_out)
-        if lang == 'en':
-            # /full/: everything together, the Year as a link plus the copy proposals (EN only)
-            full_out = SERVE / 'full' / lang / 'products' / f'{HANDLE}.html'
-            full_out.parent.mkdir(parents=True, exist_ok=True)
-            full_page = copy_proposals.apply(year_page)
-            full_out.write_text(full_page)
-            print(full_out)
-            # /chips/: /full/ with "Plan chips: selected card only" on (Victor, 24 Nov)
-            chips_out = SERVE / 'chips' / lang / 'products' / f'{HANDLE}.html'
-            chips_out.parent.mkdir(parents=True, exist_ok=True)
-            chips_page = full_page.replace('"chipsSelectedOnly": false', '"chipsSelectedOnly": true', 1)
-            assert chips_page != full_page, 'chipsSelectedOnly'
-            chips_out.write_text(chips_page)
-            print(chips_out)
+        # On /year/, with the plan cards' live texts (Victor, 26 Nov: "zoiezo de tekst en waarden zelfde
+        # zoals live in de plan kaarten"): /chips/ chips on the selected card only, /popup/ and /panel/
+        # the Year link opening a popup or a side panel
+        for variant, old, new in (
+            ('chips', '"chipsSelectedOnly": false', '"chipsSelectedOnly": true'),
+            ('popup', '"linkOpens": "card"', '"linkOpens": "popup"'),
+            ('panel', '"linkOpens": "card"', '"linkOpens": "panel"'),
+        ):
+            variant_page = year_page.replace(old, new, 1)
+            assert variant_page != year_page, variant
+            variant_out = SERVE / variant / lang / 'products' / f'{HANDLE}.html'
+            variant_out.parent.mkdir(parents=True, exist_ok=True)
+            variant_out.write_text(variant_page)
+            print(variant_out)
     return out
 
 

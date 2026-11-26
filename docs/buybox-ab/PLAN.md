@@ -241,6 +241,16 @@ jumping back). Chosen another way (compare table, sticky bar) it opens too. Prev
 and FR. Open point: the link could also go straight to checkout as the old Try once link did; for a
 €354 plan I kept the receipt in between.
 
+**Plan cards stay live (Victor, 26 Nov):** "ik wil zoiezo de tekst en waarden zelfde zoals live in de
+plan kaarten, ook de bullets benefits lijnen". The copy proposals of 4b stay a record (`/copy/`) and are
+not part of the candidate versions.
+
+**The Year link in a popup or a side panel (built, Victor 26 Nov):** Loop block setting "Plan link opens
+(card on top only)": its card (default), a popup in the middle of the screen over a soft blur, or a side
+panel with the landed still of the kit (the hero animation's own still, Day and Night) above the plan.
+Inside is the Year card itself (live texts, prices, chips, benefit lines, kit tiles); its button is the
+buybox CTA for the Year, which chooses the Year and buys through the buybox's own path.
+
 ## 5. Tracking
 
 - **Hotjar per plan, every buy path:** `kc_checkout` + `kc_checkout_once` / `_60day` / `_year` already

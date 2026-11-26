@@ -2153,12 +2153,40 @@ function updateWelcomeKitUI(productId) {
     const qualifies = checkPlanQualifiesForWelcomeKit(productId);
     if (!qualifies) return;
 
+    const kit = kcWelcomeKitParts();
+    if (!kit) return;
+    const { title, totalValue, productsHtml } = kit;
+    const formattedTotalValue = loopFormatMoney(totalValue, true);
+
+    const welcomeKitContainer = document.createElement("div");
+    welcomeKitContainer.className = "loop-welcome-kit-section";
+
+    // KC: open for the subscription selected in the buybox (the kit sits in that plan's description),
+    // unless the shopper closed it; no longer tied to the first plan radio on the page.
+    if (!window.loopWelcomeKitExpanded) {
+        window.loopWelcomeKitExpanded = {};
+    }
+    const isCurrentlyExpanded = window.loopWelcomeKitExpanded[productId] !== false;
+    if (isCurrentlyExpanded) {
+        welcomeKitContainer.classList.add("is-expanded");
+    }
+
+    welcomeKitContainer.innerHTML = kcWelcomeKitSectionHtml(kit);
+    kcUpdateWelcomeKitListeners(productId, welcomeKitContainer, descriptionElement, formattedTotalValue);
+}
+
+/**
+ * KC: the Welcome Kit's title, total value and product tiles from #loop-welcome-kit-data (the Loop
+ * block's Welcome Kit products), null without them. Shared by the buybox (updateWelcomeKitUI) and the
+ * plan dialog (kcOpenPlanDialog), so both show the same tiles.
+ */
+function kcWelcomeKitParts() {
     const dataEl = document.querySelector("#loop-welcome-kit-data");
-    if (!dataEl) return;
+    if (!dataEl) return null;
 
     const title = dataEl.dataset.title || "Welcome Kit · with first order";
     const productItems = dataEl.querySelectorAll(".loop-welcome-kit-product-item");
-    if (productItems.length === 0) return;
+    if (productItems.length === 0) return null;
 
     let totalValue = 0;
     let productsHtml = "";
@@ -2193,22 +2221,13 @@ function updateWelcomeKitUI(productId) {
         `;
     });
 
+    return { title, totalValue, productsHtml };
+}
+
+// KC: the Welcome Kit section's inner markup from kcWelcomeKitParts()
+function kcWelcomeKitSectionHtml({ title, totalValue, productsHtml }) {
     const formattedTotalValue = loopFormatMoney(totalValue, true);
-
-    const welcomeKitContainer = document.createElement("div");
-    welcomeKitContainer.className = "loop-welcome-kit-section";
-
-    // KC: open for the subscription selected in the buybox (the kit sits in that plan's description),
-    // unless the shopper closed it; no longer tied to the first plan radio on the page.
-    if (!window.loopWelcomeKitExpanded) {
-        window.loopWelcomeKitExpanded = {};
-    }
-    const isCurrentlyExpanded = window.loopWelcomeKitExpanded[productId] !== false;
-    if (isCurrentlyExpanded) {
-        welcomeKitContainer.classList.add("is-expanded");
-    }
-
-    welcomeKitContainer.innerHTML = `
+    return `
         <div class="loop-welcome-kit-header">
             <span class="loop-welcome-kit-title">${title}</span>
             <div style="display: flex; align-items: center;">
@@ -2220,7 +2239,10 @@ function updateWelcomeKitUI(productId) {
             ${productsHtml}
         </div>
     `;
+}
 
+// The buybox's Welcome Kit section: collapse toggle, product popups, its place in the plan description
+function kcUpdateWelcomeKitListeners(productId, welcomeKitContainer, descriptionElement, formattedTotalValue) {
     // Attach event listener for collapsing/expanding
     const header = welcomeKitContainer.querySelector(".loop-welcome-kit-header");
     header.addEventListener("click", (e) => {
@@ -2247,7 +2269,7 @@ function updateWelcomeKitUI(productId) {
         });
     });
 
-    // (Variables variant, loopPropsProduct, and descriptionElement are already declared at the top of the function)
+    // (descriptionElement and formattedTotalValue come from updateWelcomeKitUI)
 
     if (descriptionElement) {
         descriptionElement.classList.remove("loop-display-none");
@@ -2522,6 +2544,7 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             interval: rightLabel,
             credit: loopFormatMoney(Math.round(kcPlanPrice(alloc) * returnOnCare / 100), true),
             checkupReward: Boolean(kcPlan?.checkupReward),
+            planId: String(alloc.selling_plan_id),
         } : null);
 
         // KC: the ribbon once the card's price, struck price included, is in place
@@ -2563,13 +2586,21 @@ function kcUpdatePlanLink(productId, loopContainer, groupEl, data) {
             + '<button class="ft-link kc-try-once-btn kc-plan-link__btn" type="button"></button> '
             + '<span class="ft-ship kc-plan-link__interval"></span></span><br>'
             + '<span class="ft-note kc-plan-link__note"></span>';
-        link.querySelector('button').addEventListener('click', (event) => {
-            event.preventDefault();
+        // Choose the plan in the buybox: its card opens for good on this page, the link goes
+        const choose = () => {
             groupEl.dataset.kcLinkOpened = 'true';
             wrapper.classList.remove('kc-plan-as-link');
             link.remove();
             radio.click();
             radio.focus({ preventScroll: true });
+        };
+        const button = link.querySelector('button');
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            // Loop block "Plan link opens": the card (choose), or the plan in a popup or side panel
+            const opens = kcPlanExtras(productId).linkOpens;
+            if (opens === 'card') choose();
+            else kcOpenPlanDialog(productId, groupEl, opens, link.dataset.planId, choose, button);
         });
         const links = loopContainer.querySelectorAll('.kc-plan-link');
         (links.length ? links[links.length - 1] : fieldset).after(link);
@@ -2581,6 +2612,7 @@ function kcUpdatePlanLink(productId, loopContainer, groupEl, data) {
         const el = link.querySelector(selector);
         if (el && el.textContent !== text) el.textContent = text;
     };
+    if (link.dataset.planId !== data.planId) link.dataset.planId = data.planId;
     set('.kc-plan-link__or', texts.kcOr || 'Or');
     set('.kc-plan-link__btn', `${name} · ${data.price}`);
     set('.kc-plan-link__interval', data.interval);
@@ -2934,7 +2966,7 @@ function kcOnceCard(productId) {
  * docs/buybox-ab/PLAN.md
  */
 function kcPlanExtras(productId) {
-    const extras = { badges: {}, compareOnce: [], asLink: [], chipsSelectedOnly: false };
+    const extras = { badges: {}, compareOnce: [], asLink: [], chipsSelectedOnly: false, linkOpens: 'card', closeLabel: 'Close' };
     if (!kcOnceCard(productId)) return extras;
     let data = {};
     try {
@@ -2953,6 +2985,8 @@ function kcPlanExtras(productId) {
     extras.compareOnce = ids(data.compareOnce);
     extras.asLink = ids(data.asLink);
     extras.chipsSelectedOnly = data.chipsSelectedOnly === true;
+    if (data.linkOpens === 'popup' || data.linkOpens === 'panel') extras.linkOpens = data.linkOpens;
+    if (data.closeLabel) extras.closeLabel = String(data.closeLabel);
     return extras;
 }
 
@@ -2998,6 +3032,115 @@ function kcUpdatePromises(productId, isOneTime) {
         const display = shown ? '' : 'none';
         if (item.style.display !== display) item.style.display = display;
     });
+}
+
+/**
+ * KC: a plan link's plan in a <dialog> instead of its card (Loop block "Plan link opens", Victor 26 Nov):
+ * "popup" in the middle of the screen over a soft blur, "panel" as a side panel with the landed still of
+ * the kit above the plan (the hero animation's data-still: Awake in Day, Asleep in Night). The plan is
+ * the card itself, cloned without its radio, so its texts, prices, chips and benefit lines are Loop's
+ * live ones. The button under it is the buybox CTA for that plan (its per-plan label): it chooses the
+ * plan in the buybox (the card opens, the link goes) and presses the buybox CTA, so the purchase takes
+ * the buybox's own path (karmiAddToCart). Esc, the close button and a click on the blur close it;
+ * focus goes back to the link.
+ */
+function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
+    const box = groupEl.closest('.kc-buybox');
+    if (!box || typeof HTMLDialogElement !== 'function') {
+        choose();
+        return;
+    }
+    const extras = kcPlanExtras(productId);
+    let dialog = box.querySelector(':scope > dialog.kc-plan-dialog');
+    if (!dialog) {
+        dialog = document.createElement('dialog');
+        // A click on the dialog itself is a click on the blur around the content
+        dialog.addEventListener('click', (event) => {
+            if (event.target === dialog) dialog.close();
+        });
+        dialog.addEventListener('close', () => {
+            if (dialog.kcOpener && dialog.kcOpener.isConnected) dialog.kcOpener.focus({ preventScroll: true });
+        });
+        box.appendChild(dialog);
+    }
+    dialog.className = `kc-plan-dialog kc-plan-dialog--${mode}`;
+    dialog.kcOpener = opener;
+
+    const inner = document.createElement('div');
+    inner.className = 'kc-plan-dialog__inner';
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'kc-plan-dialog__close';
+    close.setAttribute('aria-label', extras.closeLabel);
+    close.addEventListener('click', () => dialog.close());
+    inner.appendChild(close);
+
+    if (mode === 'panel') {
+        const night = document.body.classList.contains('night-mode');
+        const still = document.querySelector(`.kc-hero-animation__mode--${night ? 'pm' : 'am'}[data-still]`)
+            || document.querySelector('.kc-hero-animation__mode[data-still]');
+        if (still) {
+            const image = document.createElement('img');
+            image.className = 'kc-plan-dialog__image';
+            image.src = still.dataset.still;
+            image.alt = still.querySelector('img')?.alt || '';
+            image.width = 1080;
+            image.height = 960;
+            inner.appendChild(image);
+        }
+    }
+
+    const plan = groupEl.cloneNode(true);
+    plan.querySelectorAll('input, select, .kc-plan-ribbon, .kc-plan-more').forEach((el) => el.remove());
+    plan.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+    plan.querySelectorAll('label[for]').forEach((el) => el.removeAttribute('for'));
+    plan.removeAttribute('id');
+    plan.classList.add('kc-plan-dialog__plan');
+    // The Welcome Kit tiles: the buybox shows them in the selected plan only, so the dialog builds its own
+    // from the same data (kcWelcomeKitParts) for a plan that gets the kit (the block's Welcome Kit plan
+    // IDs, blank = every subscription). Not clickable here: the product popup would open under the dialog.
+    const kitTarget = plan.querySelector('.block__show-welcome-kit');
+    const kit = kcWelcomeKitParts();
+    const kitPlans = (document.querySelector('#loop-welcome-kit-data')?.dataset?.plans || '')
+        .split(',').map((id) => id.trim()).filter(Boolean);
+    if (kitTarget && kit && (kitPlans.length === 0 || kitPlans.includes(planId))) {
+        const section = document.createElement('div');
+        section.className = 'loop-welcome-kit-section is-expanded';
+        section.innerHTML = kcWelcomeKitSectionHtml(kit);
+        section.querySelectorAll('.loop-wk-clickable').forEach((tile) => {
+            tile.classList.remove('loop-wk-clickable');
+            tile.style.removeProperty('cursor');
+        });
+        kitTarget.replaceChildren(section);
+    }
+    const title = plan.querySelector('.loop-subscription-group-label');
+    if (title) {
+        title.id = `kc-plan-dialog-title-${productId}`;
+        dialog.setAttribute('aria-labelledby', title.id);
+    }
+    inner.appendChild(plan);
+
+    // The buybox CTA's label for this plan (Custom Button Text per plan), else its default
+    const buyboxCta = box.querySelector('.product-form__custom-submit[data-plan-labels]');
+    let labels = {};
+    try { labels = JSON.parse(buyboxCta?.dataset?.planLabels || '{}'); } catch (e) { labels = {}; }
+    const labelKey = Object.keys(labels).find((key) => key.trim() === planId);
+    const cta = document.createElement('button');
+    cta.type = 'button';
+    // The buybox CTA's look; without data-plan-labels and the buybox CTA's id, no script takes it for that one
+    cta.className = 'button button--full-width button--primary product-form__custom-submit block__animate-button kc-plan-dialog__cta';
+    cta.textContent = (labelKey && labels[labelKey]) || buyboxCta?.dataset?.defaultLabel || '';
+    cta.addEventListener('click', () => {
+        dialog.close();
+        choose();
+        // After Loop has put the plan in the form (the radio's click runs it at once)
+        setTimeout(() => buyboxCta && buyboxCta.click(), 0);
+    });
+    inner.appendChild(cta);
+
+    dialog.replaceChildren(inner);
+    if (!dialog.open) dialog.showModal();
 }
 
 // KC: a down chevron at the end of a card's price column, shown only when the card's chips are folded

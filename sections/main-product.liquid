@@ -668,7 +668,7 @@
                       "selling plan ID: text" per line, and the plans with the one-time price struck through
                     {%- endcomment -%}
                     <script type="application/json" id="kc-plan-extras-{{ product.id }}">
-                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}, "chipsSelectedOnly": {{ block.settings.chips_selected_only | json }}}
+                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}, "chipsSelectedOnly": {{ block.settings.chips_selected_only | json }}, "linkOpens": {{ block.settings.plan_link_opens | default: 'card' | json }}, "closeLabel": {{ 'accessibility.close' | t | json }}}
                     </script>
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
@@ -3020,6 +3020,27 @@
           "id": "plans_as_link",
           "label": "Plans as a link under the cards (card on top only)",
           "info": "Selling plan IDs, comma-separated, e.g. 712155431293. Shown only with \"Try once: card on top\": the plan is a text link after the cards (\"Or The Karmicare Year · €354 / year\") until it is chosen, then its card opens."
+        },
+        {
+          "type": "select",
+          "id": "plan_link_opens",
+          "label": "Plan link opens (card on top only)",
+          "info": "What a click on a plan link under the cards does: open the plan's card in the buybox, a popup in the middle of the screen over a soft blur, or a side panel with the landed still of the kit above the plan.",
+          "options": [
+            {
+              "value": "card",
+              "label": "Its card"
+            },
+            {
+              "value": "popup",
+              "label": "A popup"
+            },
+            {
+              "value": "panel",
+              "label": "A side panel"
+            }
+          ],
+          "default": "card"
         },
         {
           "type": "text",
