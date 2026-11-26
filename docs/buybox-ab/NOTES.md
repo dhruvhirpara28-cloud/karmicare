@@ -169,6 +169,9 @@ when the last path part is the handle (`getCurrentPathLoop`).
     - The Welcome Kit tiles are built by one helper for the buybox and the dialog
       (`kcWelcomeKitParts`); the buybox still shows its three clickable tiles in the selected plan.
     Theme Check exit 0, 19 warnings, complexity 124.
+15. **`/compact/`** (the lane's preference, 26 Nov): switch ON, three cards with live texts, chips on
+    the selected card only. At 390 px with Try once selected, plans header to promises 680 px (today's
+    card layout 877, Year as a link 722); cards 154 / 114 / 144 px. Shot `compact-en-390-day.png`.
 
 ## Not tested here (needs a dev theme with a cart, no payment)
 

@@ -48,7 +48,12 @@ for width in (390, 1440):
         SHOTS_LIST.append((f'full-en-{width}-{mode}', 'full', 'en', width, mode))
         SHOTS_LIST.append((f'full-en-{width}-{mode}-once-buy', 'full', 'en', width, mode))
         SHOTS_LIST.append((f'full-en-{width}-{mode}-60day-buy', 'full', 'en', width, mode))
-# /chips/ (/full/ with chips on the selected card only): plans header per state
+# /compact/ (three cards, chips on the selected card only): plans header per state
+for width in (390, 1440):
+    for mode in ('day', 'night'):
+        for state in ('', '-60day', '-year'):
+            SHOTS_LIST.append((f'compact-en-{width}-{mode}{state}', 'compact', 'en', width, mode))
+# /chips/ (/year/ with chips on the selected card only): plans header per state
 for width in (390, 1440):
     for mode in ('day', 'night'):
         for state in ('', '-60day'):

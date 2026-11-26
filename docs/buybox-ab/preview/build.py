@@ -120,6 +120,13 @@ def build(lang, layout):
         copy_out.write_text(copy_proposals.apply(page))
         print(copy_out)
     if layout == 'card':
+        # /compact/: switch ON, three cards, chips on the selected card only (the lane's preference, 26 Nov)
+        compact_page = page.replace('"chipsSelectedOnly": false', '"chipsSelectedOnly": true', 1)
+        assert compact_page != page, 'compact'
+        compact_out = SERVE / 'compact' / lang / 'products' / f'{HANDLE}.html'
+        compact_out.parent.mkdir(parents=True, exist_ok=True)
+        compact_out.write_text(compact_page)
+        print(compact_out)
         # /year/: switch ON plus "Plans as a link under the cards" = the Year (Victor, 24 Nov)
         year_out = SERVE / 'year' / lang / 'products' / f'{HANDLE}.html'
         year_out.parent.mkdir(parents=True, exist_ok=True)
