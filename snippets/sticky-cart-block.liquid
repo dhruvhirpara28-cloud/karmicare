@@ -374,7 +374,9 @@
       if (onceQuantity > 1) title = window.KCOnceQuantity.titleFor(title, copy.title_year, onceQuantity);
       var quantityInput = form.querySelector('input[name="quantity"]');
       if (quantityInput && quantityInput.value !== String(onceQuantity)) quantityInput.value = String(onceQuantity);
-      var cut = plain ? -1 : title.indexOf(' · ');
+      // The closed bar shows the title up to " · "; with a quantity the whole of it, as the Try once card
+      // ("Try Once · 3 Duos", Victor 27 Nov)
+      var cut = plain || onceQuantity > 1 ? -1 : title.indexOf(' · ');
       setText('name', cut === -1 ? title : title.slice(0, cut));
       setText('rest', cut === -1 ? '' : title.slice(cut));
       // Every plan's price line is its price per brushing (Victor, 25 Oct)
@@ -397,10 +399,17 @@
       bar.querySelector('[data-sc-row="guarantee"]').hidden = plain;
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
       bar.querySelector('[data-sc-row="stop"]').hidden = once;
-      setText('cta', plain ? cfg.buttonText || '' : copy['cta_' + state.type]);
+      // Try once: the buybox's own button text (Loop block "Try once: button text", default this same key)
+      var onceContainer = state.type === 'once' && document.getElementById('kc-try-once-container-' + cfg.productId);
+      var onceCta = onceContainer ? onceContainer.getAttribute('data-kc-once-cta') || '' : '';
+      setText('cta', plain ? cfg.buttonText || '' : onceCta || copy['cta_' + state.type]);
       // Try once only where one time can be bought: not on subscription-only products
-      var tryOnceText = !once && !cfg.requiresPlan && state.oneTimePrice != null ? fill(copy.try_once, { price: money(state.oneTimePrice) }) : '';
+      // With a plan selected, the link offers what the Try once card shows: its chosen quantity (Victor,
+      // 27 Nov), and buys that (assets/kc-plan-select.js tryOnce reads data-kc-once-quantity)
+      var onceChosen = window.KCOnceQuantity && window.KCOnceQuantity.chosen ? window.KCOnceQuantity.chosen(cfg.productId) : 1;
+      var tryOnceText = !once && !cfg.requiresPlan && state.oneTimePrice != null ? fill(copy.try_once, { price: money(state.oneTimePrice * onceChosen) }) : '';
       setText('try-once', tryOnceText);
+      field('try-once').dataset.kcOnceQuantity = String(onceChosen);
       // A blank setting hides the link rather than leaving an empty, focusable button
       field('try-once').hidden = !tryOnceText.trim();
       if (variantInput.value !== state.variantId) variantInput.value = state.variantId;

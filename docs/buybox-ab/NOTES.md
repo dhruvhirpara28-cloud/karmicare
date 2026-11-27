@@ -276,6 +276,21 @@ when the last path part is the handle (`getCurrentPathLoop`).
       `candidate-en-390-day-once-kept-*.png`.
     - `qty_check.py` re-run: same adds as result 21. Theme Check exit 0, 19 warnings.
 
+23. **Stepper by the pill everywhere, sticky bar follows the card** (Victor, 27 Nov),
+    `preview/sticky_check.py`, `shots/sticky.json`, at quantity 3:
+    - Stepper at the right of the €0 pill on every screen (EN, NL at 390 and 1440): same row, 8 px
+      after the pill at 390, right edge at the card's padding (20 / 24 px), after the pill in the DOM so
+      the tab order follows the screen. Titles on one line. Shots `candidate-{en,nl}-*-day-stepper-pill.png`.
+    - Sticky bar, Try once at 3: the closed bar shows "Try Once · 3 Duos" (NL "Eenmalig proberen · 3 duo's",
+      a no-break space keeps "3 duo's" together), button text as the buybox's, its form 3.
+    - Sticky bar, 60-Day selected: "Not ready for a membership? Try once for €201", and the link buys 3.
+      A comparison table's Try once buys 1 (it shows one Duo). `karmi-add-to-cart.js` now takes the
+      quantity from a fixed one time's button; the preview serves the lane's copy of it.
+    - The buybox's Try once button text is a block setting: one text for every language ("Try once,
+      purchase now" on the NL page too, also in the sticky bar now). It needs a locale key from the copy
+      lane before the switch goes on.
+    - `qty_check.py` re-run: same adds. Theme Check exit 0, 19 warnings.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

@@ -486,7 +486,11 @@
       warn('Try Once: karmiAddToCart is not loaded');
       return Promise.resolve(false);
     }
-    return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true })).then(
+    // Exactly the quantity its button offers: the sticky bar's link carries the Try once card's chosen
+    // quantity (data-kc-once-quantity); a comparison table's Try once shows one Duo and buys one, whatever
+    // the buybox form's quantity field holds
+    const quantity = Math.max(parseInt(button && button.dataset.kcOnceQuantity, 10) || 1, 1);
+    return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true, quantity: quantity })).then(
       () => true
     );
   }

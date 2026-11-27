@@ -641,10 +641,8 @@ html.kc-plan-dialog-open {
 
 
 /* The Try once quantity (Loop block "Try once: maximum quantity", assets/loop-widget.js
-   kcUpdateOnceStepper): a − / + pill while Try once is selected, in the card's own row, never a row of
-   its own (Victor, 27 Nov). From 750 px it sits on the title line, right before the price; on a phone
-   title, stepper and price do not fit one line (288 px for 322), so it sits at the right of the pill's
-   row, the pill taking the rest. */
+   kcUpdateOnceStepper): a − / + pill while Try once is selected, at the right of the €0 pill's row on
+   every screen, the pill taking the rest (Victor, 27 Nov). It follows the pill in the DOM too. */
 .kc-once-card .kc-once-stepper {
   display: inline-flex;
   flex: none;
@@ -655,44 +653,36 @@ html.kc-plan-dialog-open {
   background: var(--kc-buybox-surface-chip, transparent);
 }
 
-/* The price column at its own width (Loop gives it flex: 1), so the title keeps the room the stepper
-   does not take ("Eenmalig proberen · 3 duo's" on one line at 1440) */
+/* The price column at its own width (Loop gives it flex: 1), so the longer title with a quantity keeps
+   one line ("Eenmalig proberen · 3 duo's" at 390) */
 .kc-once-card .loop-one-time-purchase-option:has(> .kc-once-stepper) > .loop-one-time-purchase-option-price-container {
   flex: none;
 }
 
-@media screen and (min-width: 750px) {
-  .kc-once-card .kc-once-stepper {
-    align-self: flex-start;
-    /* Centred on the title's first line */
-    margin: calc((var(--kc-responsive-body-lg-line-height) - 32px) / 2) var(--kc-responsive-spacing-layout-xs) 0;
-  }
+/* Right-aligned in the pill's row; with no pill, alone at the right */
+.kc-once-card .loop-one-time-purchase-option > .kc-once-stepper {
+  order: 5;
+  align-self: center;
+  margin: var(--kc-responsive-spacing-layout-xs) 0 0 auto;
 }
 
-@media screen and (max-width: 749px) {
-  .kc-once-card .loop-one-time-purchase-option > .kc-once-stepper {
-    order: 5;
-    align-self: center;
-    margin: var(--kc-responsive-spacing-layout-xs) 0 0 var(--kc-responsive-spacing-layout-xs);
-  }
+.kc-once-card .loop-one-time-purchase-option > .kc-once-chips {
+  order: 4;
+}
 
-  .kc-once-card .loop-one-time-purchase-option > .kc-once-chips {
-    order: 4;
-  }
+/* A full-width break before the pill's row, so title and price keep the first row to themselves */
+.kc-once-card .loop-one-time-purchase-option:has(> .kc-once-stepper)::after {
+  content: '';
+  order: 3;
+  flex: 0 0 100%;
+  height: 0;
+}
 
-  /* A full-width break before the pill's row, so title and price keep the first row to themselves */
-  .kc-once-card .loop-one-time-purchase-option:has(> .kc-once-stepper)::after {
-    content: '';
-    order: 3;
-    flex: 0 0 100%;
-    height: 0;
-  }
-
-  /* The pill shares its row with the stepper while both show */
-  .kc-once-card .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option:has(> .kc-once-stepper) > .kc-once-chips {
-    flex: 1 1 calc(100% - 96px - var(--kc-responsive-spacing-layout-xs));
-    min-width: 0;
-  }
+/* The pill shares its row with the stepper while both show, 8 px between them */
+.kc-once-card .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option:has(> .kc-once-stepper) > .kc-once-chips {
+  flex: 1 1 calc(100% - 96px - var(--kc-responsive-spacing-layout-xs));
+  min-width: 0;
+  margin-right: var(--kc-responsive-spacing-layout-xs);
 }
 
 .kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-stepper {

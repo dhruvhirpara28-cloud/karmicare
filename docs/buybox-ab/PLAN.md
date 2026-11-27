@@ -282,10 +282,11 @@ What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_ch
 |---|---|---|
 | Try once card | Title "Try Once · 3 Duos" (NL "Eenmalig proberen · 3 duo's", FR "Essayer une fois · 3 duos", built from the existing "1 Duo" and "6 Duos" titles), price €201, per brushing stays €0.56 | yes |
 | Receipt | "Total today €201", per brushing per Duo | yes |
-| Sticky bar | Title "Try Once · 3 Duos", its own form buys 3 | yes |
+| Sticky bar | Title "Try Once · 3 Duos" also in the closed bar, its button text as the buybox's ("Try once, purchase now"), its own form buys 3 | yes |
 | Buy (buybox CTA → karmiAddToCart → replaceChoice) | One line, quantity 3, no selling plan, no kit, no Subscription Name | yes |
 | 60-Day / Year selected | The field goes back to 1; the plan adds its own Duos per delivery with the kit and Subscription Name. The Try once card keeps showing the chosen quantity ("3 Duos", €201), and selecting it again puts the field back at 3 (Victor, 27 Nov; `preview/memory_check.py`) | yes |
-| Sticky "Try once for €67" link, comparison tables' Try once | Send the buybox form; with a plan selected the field is 1, so they buy the one Duo they show | by the field at 1 |
+| Sticky "Try once for …" link (a plan selected) | Follows the card: "Try once for €201" at 3, and buys 3 (`tryOnce` passes the quantity its button carries) | yes (`preview/sticky_check.py`) |
+| Comparison tables' Try once | Show one Duo and buy one, whatever the buybox's quantity | yes |
 
 **Still to change or decide, so it keeps working:**
 
@@ -311,29 +312,78 @@ What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_ch
 | Legal | Struck "€67" next to "€59" (two current offers, not a reduction); "Most picked" needs order data behind it; "guaranteed fresh stock" is a promise for the month 6 delivery; Try once quantity vs the Terms (#1). |
 | Test on a dev theme with a cart, no payment | One time 1 and 3 Duos, 60-Day, Year from the panel: cart lines, kit nested, Subscription Name, "Buybox layout" attribute, Hotjar events; NL and FR; iOS Safari. |
 
-## 4e. Asking "how many people" (question from Victor, 27 Nov, nothing built)
+## 4e. Quantities and people (VOORSTEL, nothing built)
+
+**Victor's direction (27 Nov):** with Try once people think in amounts, with a plan in people. The Year is
+taken **per person**, so the €40 Dental Check-up Reward lands on the right person.
 
 One Duo is 120 brushings: one person, twice a day, 60 days (the 60-Day card's own "one complete 60-day
-cycle"). A household of N people then needs N Duos per delivery on the same rhythm. In Loop that is the
-**quantity of the subscription line**, on the same selling plan. A shorter interval (1 Duo every 30 days)
-would need new selling plans and breaks "60-Day Rhythm", so quantity it is.
+cycle"). So a person on a plan is one Duo per 60 days, and a Year per person is 6 Duos (3 now, 3 in
+month 6).
 
-| Area | What changes | Who |
+### What each card counts, and what it buys
+
+| People / Duos | Try once (counts Duos) | 60-Day Rhythm (counts people) | The Karmicare Year (counts people) |
+|---|---|---|---|
+| 1 | 1 Duo, €67 | 1 Duo / 60 days, €59 | 1 membership, 6 Duos, €354 / year |
+| 2 | 2 Duos, €134 | 2 Duos / 60 days, €118 | 2 memberships, 12 Duos, €708 / year |
+| 3 | 3 Duos, €201 | 3 Duos / 60 days, €177 | 3 memberships, 18 Duos, €1,062 / year |
+| 4 (max) | 4 Duos, €268 | 4 Duos / 60 days, €236 | 4 memberships, 24 Duos, €1,416 / year |
+| Per brushing | €0.56 | €0.49 | €0.49 |
+| Care Credit | none | €5.90 per person | €70.80 per person |
+| Check-up Reward | none | none | €40 per person |
+| Welcome Kit | none | one per person (proposal) | one per person (proposal) |
+
+A maximum of 4 people (a Loop block setting like "Try once: maximum quantity", 1 = no control, as today).
+
+### On the page
+
+- **One place, one control:** on the selected card, at the right of its pill, where the Try once stepper
+  is now. Try once shows a plain number (the title says "3 Duos"). The plans show the same stepper with a
+  person icon before the number (Lucide "user", the icon set the sticky bar already uses), so a count of
+  people never reads as a count of Duos.
+- **Plan cards follow the count:** title "60-Day Rhythm · 2 people", price €118 / 60 days, per brushing
+  unchanged, the Care Credit pill x 2. The Year in the side panel gets the same control next to its pills,
+  and its footer button buys what the panel shows.
+- **One count for both plans:** 60-Day and Year share the number of people (the household does not change
+  when you switch plans). Try once keeps its own Duos, as now.
+- **Receipt and sticky bar** follow the selected card, as Try once does now.
+
+### In the cart, and where it is not certain yet
+
+| Plan | Cart lines | What it gives |
 |---|---|---|
-| Theme, buybox | One control "people" sets the quantity for whichever card is selected: Try once N Duos, 60-Day N Duos every 60 days, Year 6 x N. Card price, receipt, sticky bar and comparison tables multiply; per brushing stays. `kc-plan-select.js` quantityFor today buys each plan's own units at quantity 1: it would multiply them by N. | lane |
-| Welcome Kit | Today one kit per order (2 toothbrushes + floss, nested lines). For N people: N kits (N x €21 value given away) or one kit (one person has no brush). Cost decision. | Victor |
-| Care Credit (Loop Loyalty) | The chip shows a share of the price (€5.90 of €59, €70.80 of €354); whether Loop Loyalty pays it on line total x N or per subscription depends on its rule (per € spent scales, a fixed amount per order does not). Read the rule before the chip shows x N. | Victor (Loop admin, read) |
-| €40 Check-up Reward (Year) | Per account or per person? Proof is per check-up, so per person is the natural reading, but the Terms and the claim flow are written for one subscriber. | legal lane, Victor |
-| Loop subscription | Quantity >1 on a subscription is standard: the customer portal can change it later, skip/pause/cancel act on the whole household line. Inflation-proof price is per unit, unchanged. Loop Multilingual texts unchanged. | none |
-| Shipping, stock | 60-Day ships free today; N Duos per parcel changes weight and cost per order. Year "3 now, 3 in month 6, guaranteed fresh stock" becomes 3N + 3N. | Victor |
-| Terms | Plans and the money-back guarantee are written per Duo / per subscription; "per household" needs wording. | legal lane |
-| Copy | "How many people?", "for 2 people" and the like do not exist yet in EN/NL/FR: blocked until the copy lane writes them (AGENTS.md §3). | copy lane via desk |
-| Test | A question before the cards is one more step before the CTA: an A/B variable of its own, not part of this switch. | Victor |
+| Try once | 1 line, quantity N (built) | one order |
+| 60-Day | 1 line, selling plan 60-Day, quantity N; kit lines quantity N, nested | **one** subscription for the household: one parcel, one skip/pause/cancel. Proposal: simplest; the trade-off is that one person cannot move to the Year on their own. |
+| Year | N lines, each the Year plan at its 3 Duos per delivery, each with its own kit and a hidden line property `_member` 1..N, so Shopify keeps them apart | the aim: N memberships, one per person |
 
-**Try once too?** Yes, if people is asked at all: one concept on every card. The Try once stepper counts
-Duos, a people control on the plans counts people; two different counters side by side read as a
-mistake. With people, "Try Once · 2 people" stays a trial (a household trying once), where "Try Once ·
-4 Duos" for one person is stocking up, which the 60-Day plan does better and cheaper.
+**Open, blocks the Year per person:** whether N lines with the same selling plan in one checkout become N
+Loop subscriptions or one. A Shopify community answer says lines that share a selling plan are merged into
+one subscription contract; Loop's help only describes merging subscriptions by hand, nothing about
+splitting. Ask Loop support before building. If it is one subscription with N lines: the reward can still
+be per person if the claim goes per line (`_member`), but cancelling or pausing then acts on everyone.
+The other ways (one checkout per person, or splitting after the order through Loop's API) cost far more.
+
+**Who is the person:** the reward needs to know whose check-up it is. Proposal: ask the name after the
+order (account or the reward claim), not in the buybox, so buying stays one step. Names of other people in
+the household are personal data of third parties: privacy notice (legal lane).
+
+### Still needed before anything is built
+
+| Area | What | Who |
+|---|---|---|
+| Loop support | Same-plan lines in one checkout: N subscriptions or one? Can Loop make one per line? | Victor |
+| Care Credit (Loop Loyalty) | Does it pay on the line total (x N) or a fixed amount per subscription? The pill can show x N only if it pays that. | Victor (Loop admin, read) |
+| Welcome Kit | One per person (N x €21 value) or one per order. | Victor |
+| Terms | Membership per person, guarantee per membership, Try once more than one Duo (4d #1), people's names for the reward. | legal lane |
+| Shipping, stock | Free plan shipping with N Duos per parcel; Year 3N now + 3N in month 6 ("guaranteed fresh stock"). | Victor |
+| Copy | "person / people", "persoon / personen", "personne / personnes", "Number of people" for the control, "per person" on the reward pill: none exists in EN/NL/FR. Blocked until the copy lane writes them (AGENTS.md §3). | copy lane via desk |
+| Test | The count is a new variable: its own A/B arm, after this switch has run. | Victor |
+
+Theme work once those answers are in: `assets/loop-widget.js` (control on plan cards and in the panel,
+prices and pills x N), `assets/kc-plan-select.js` (quantityFor x N for the 60-Day, N lines with `_member`
+and a kit each for the Year), `assets/karmi-add-to-cart.js` (more than one main line), the sticky bar,
+the receipt, Hotjar (people as a property).
 
 ## 5. Tracking
 

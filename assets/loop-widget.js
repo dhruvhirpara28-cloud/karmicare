@@ -3268,12 +3268,14 @@ function kcOnceTitleFor(title, many, quantity) {
     if (!title || quantity <= 1) return title;
     const plural = String(many || '').match(/\d+\s+(.+)$/);
     if (!plural || !/\b1\s+\S+\s*$/.test(title)) return title;
-    return title.replace(/\b1(\s+)\S+\s*$/, `${quantity}$1${plural[1]}`);
+    // A no-break space keeps "3 duo's" together when the title wraps (the sticky bar on a phone)
+    return title.replace(/\b1\s+\S+\s*$/, `${quantity} ${plural[1]}`);
 }
 
-window.KCOnceQuantity = { get: kcOnceQuantity, titleFor: kcOnceTitleFor };
+// get: what a one-time order buys now (1 with a plan selected); chosen: what the Try once card shows
+window.KCOnceQuantity = { get: kcOnceQuantity, chosen: kcOnceChosen, titleFor: kcOnceTitleFor };
 
-// KC: the − / + control on the Try once card while it is selected, in the card's row before the price
+// KC: the − / + control on the Try once card while it is selected, at the right of the €0 pill
 // (assets/kc-buybox.css .kc-once-stepper)
 function kcUpdateOnceStepper(productId, variant, text, texts) {
     const max = kcOnceMax(productId);
@@ -3304,9 +3306,13 @@ function kcUpdateOnceStepper(productId, variant, text, texts) {
             updateKcPricingSummary(productId, current);
             document.dispatchEvent(new CustomEvent('kc:once-quantity', { detail: { productId, quantity: next } }));
         });
-        // In the card's own row, before the price: on the title line on wider screens, next to the pill
-        // on a phone (assets/kc-buybox.css)
-        option.insertBefore(stepper, option.querySelector(':scope > .loop-one-time-purchase-option-price-container'));
+    }
+    // Right after the €0 pill, as it shows (at its right, assets/kc-buybox.css): the reading and tab order
+    // follow the screen. Without a pill, at the end of the card's row.
+    const chips = option.querySelector(':scope > .kc-once-chips');
+    if (chips ? chips.nextElementSibling !== stepper : option.lastElementChild !== stepper) {
+        if (chips) chips.after(stepper);
+        else option.appendChild(stepper);
     }
     // The card keeps the chosen quantity, but with a plan selected the field is 1: every other one-time
     // path that sends the buybox form (the sticky bar's "Try once for €67", the comparison tables' Try

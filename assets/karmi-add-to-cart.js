@@ -58,8 +58,10 @@
 
       // A plan product's subscription adds its plan's Duos per delivery (year plans: theme setting "Year
       // plans: Duos per delivery"); one time (Try Once) and other products keep the form's quantity
+      // A fixed one time (Try Once, assets/kc-plan-select.js) passes the quantity its button offers
       const quantityInput = form.querySelector('[name="quantity"]');
-      const formQuantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+      const fixedQuantity = isFixedOneTime && options && parseInt(options.quantity, 10) > 0 ? parseInt(options.quantity, 10) : 0;
+      const formQuantity = fixedQuantity || (quantityInput ? parseInt(quantityInput.value) || 1 : 1);
       const quantity = window.KCPlanSelect
         ? window.KCPlanSelect.quantityFor(productId, isSubscription ? sellingPlanId : '', formQuantity)
         : formQuantity;

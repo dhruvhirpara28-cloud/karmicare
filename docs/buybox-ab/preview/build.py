@@ -1,7 +1,7 @@
 """Buybox-ab localhost preview builder.
 
 Takes the live Duo PDP HTML (EN/NL/FR, fetched cookie-less) and writes, per language, a switch OFF
-and a switch ON page: the lane's assets (loop-widget.js, kc-plan-select.js, kc-buybox.css) replace
+and a switch ON page: the lane's assets (loop-widget.js, kc-plan-select.js, kc-buybox.css, karmi-add-to-cart.js) replace
 the live ones, and the Liquid output of the lane's main-product.liquid / kc-plan-config.liquid
 changes is emulated (data-kc-once-* on the buybox Try once container, defaultToSubscription false
 for the buybox when ON). Usage: python3 -I build.py <live-html-dir> <worktree> <serve-dir>
@@ -19,7 +19,7 @@ import copy_proposals  # noqa: E402
 LIVE, WORKTREE, SERVE = (Path(a) for a in sys.argv[1:4])
 PID = '15977093923197'
 HANDLE = 'karmicare-biorhythmic-oral-care-system'
-ASSETS = ['loop-widget.js', 'kc-plan-select.js', 'kc-buybox.css']
+ASSETS = ['loop-widget.js', 'kc-plan-select.js', 'kc-buybox.css', 'karmi-add-to-cart.js']
 PAGES = {'en': 'duo.html', 'nl': 'duo-nl.html', 'fr': 'duo-fr.html'}
 LOCALES = {'en': 'en.default.json', 'nl': 'nl.json', 'fr': 'fr.json'}
 
@@ -139,6 +139,22 @@ def build(lang, layout):
     change_line = "if (event.target && event.target.closest && event.target.closest('.product__info-container')) queueRender();\n      });"
     assert page.count(change_line) == 1, 'sticky change line'
     page = page.replace(change_line, change_line + "\n      on(document, 'kc:once-quantity', queueRender);", 1)
+    # ... and its Try once link with a plan selected: the card's chosen quantity, in the price and the buy
+    try_line = "var tryOnceText = !once && !cfg.requiresPlan && state.oneTimePrice != null ? fill(copy.try_once, { price: money(state.oneTimePrice) }) : '';"
+    assert page.count(try_line) == 1, 'sticky try once line'
+    page = page.replace(try_line, "var onceChosen = window.KCOnceQuantity && window.KCOnceQuantity.chosen ? window.KCOnceQuantity.chosen(cfg.productId) : 1;\n      "
+                        + try_line.replace('money(state.oneTimePrice)', 'money(state.oneTimePrice * onceChosen)'), 1)
+    cut_line = "var cut = plain ? -1 : title.indexOf(' · ');"
+    assert page.count(cut_line) == 1, 'sticky cut line'
+    page = page.replace(cut_line, "var cut = plain || onceQuantity > 1 ? -1 : title.indexOf(' · ');", 1)
+    cta_line = "setText('cta', plain ? cfg.buttonText || '' : copy['cta_' + state.type]);"
+    assert page.count(cta_line) == 1, 'sticky cta line'
+    page = page.replace(cta_line, "var onceContainer = state.type === 'once' && document.getElementById('kc-try-once-container-' + cfg.productId);\n"
+                        "      var onceCta = onceContainer ? onceContainer.getAttribute('data-kc-once-cta') || '' : '';\n"
+                        "      setText('cta', plain ? cfg.buttonText || '' : onceCta || copy['cta_' + state.type]);", 1)
+    try_set = "setText('try-once', tryOnceText);"
+    assert page.count(try_set) == 1, 'sticky try once set'
+    page = page.replace(try_set, try_set + "\n      field('try-once').dataset.kcOnceQuantity = String(onceChosen);", 1)
 
     for name in ASSETS:
         pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'
