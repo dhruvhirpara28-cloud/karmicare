@@ -3016,29 +3016,16 @@ function kcUpdatePlanCompare(groupEl, text) {
 }
 
 /**
- * KC: the promises under the CTA (the buybox's icon-with-text row) follow the selected plan with the
- * Try once card (Victor, 24 Nov): for Try once the first item says the Try once guarantee
- * (kc.sticky_cart.guarantee_once_html, "14-day money-back guarantee") and the other items (pause,
- * free shipping) go; for a plan the block's own items come back as they were. The block's order is
- * guarantee, pause, shipping (templates/product.subscription-item.json).
+ * KC: the promises under the CTA (the buybox's icon-with-text row: 60-day guarantee, pause, free
+ * shipping) are the plans' promises: with the Try once card, the row is hidden while Try once is
+ * selected (Victor, 27 Nov) and back for a plan.
  */
 function kcUpdatePromises(productId, isOneTime) {
     if (!kcOnceCard(productId)) return;
     const row = document.querySelector('.kc-buybox .icon-with-text');
     if (!row) return;
-    const guarantee = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceGuarantee || '';
-    // Try once: the guarantee as text only, without its icon (Victor, 27 Nov; assets/kc-buybox.css)
-    if (row.classList.contains('kc-promises--once') !== isOneTime) row.classList.toggle('kc-promises--once', isOneTime);
-    row.querySelectorAll('.icon-with-text__item').forEach((item, index) => {
-        const text = item.querySelector('.inline-richtext');
-        if (!text) return;
-        if (item.dataset.kcPromise === undefined) item.dataset.kcPromise = text.innerHTML;
-        const shown = !isOneTime || (index === 0 && Boolean(guarantee));
-        if (isOneTime && shown && text.textContent !== guarantee) text.textContent = guarantee;
-        if (!isOneTime && text.innerHTML !== item.dataset.kcPromise) text.innerHTML = item.dataset.kcPromise;
-        const display = shown ? '' : 'none';
-        if (item.style.display !== display) item.style.display = display;
-    });
+    const display = isOneTime ? 'none' : '';
+    if (row.style.display !== display) row.style.display = display;
 }
 
 /**
@@ -3068,6 +3055,8 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
             if (event.target === dialog) dialog.close();
         });
         dialog.addEventListener('close', () => {
+            // The page scrolls again (locked while the dialog is open)
+            document.documentElement.classList.remove('kc-plan-dialog-open');
             if (dialog.kcOpener && dialog.kcOpener.isConnected) dialog.kcOpener.focus({ preventScroll: true });
         });
         box.appendChild(dialog);
@@ -3187,6 +3176,8 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
 
     dialog.replaceChildren(inner);
     if (!dialog.open) dialog.showModal();
+    // The page behind stays put while the dialog is open (Victor, 27 Nov; assets/kc-buybox.css)
+    document.documentElement.classList.add('kc-plan-dialog-open');
 }
 
 // KC: a plan card's badge ("Most picked") at the bottom right of the card, in the look and place of the

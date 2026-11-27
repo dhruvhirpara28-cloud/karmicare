@@ -85,7 +85,6 @@ def build(lang, layout):
         'data-kc-once-layout': layout,
         'data-kc-once-title': sticky['title_once_html'],
         'data-kc-once-shipping': html.unescape(re.search(r'class="ft-ship">([^<]*)', page).group(1).strip()),
-        'data-kc-once-guarantee': sticky['guarantee_once_html'],
         'data-kc-once-note': html.unescape(note),
         # Loop block "Try once: button text" filled in by Victor (24 Nov), EN only: until it is translated
         # Shopify shows the English value on /nl and /fr too

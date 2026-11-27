@@ -198,6 +198,22 @@ when the last path part is the handle (`getCurrentPathLoop`).
     712155431293 (recorded). Shots `candidate-en-*-open.png`. Theme Check exit 0, 19 warnings,
     complexity 124.
 
+18. **No promises with Try once, tighter closed card, silver ring, page lock** (Victor, 27 Nov;
+    `preview/round_check.py`, `shots/round-27nov.json`):
+    - With Try once selected the promises row under the CTA is hidden; with a plan its three promises
+      and icons are back. The data attribute for the Try once guarantee is removed (no longer read).
+    - Compact, closed cards: no gap above the badge; the closed 60-Day card 128 px (was 144).
+    - The selected 60-Day card (the one with the silver badge): its border is a silver ring with a
+      light band running round (`kc-silver-shine`, 2.8 s), still silver with reduced motion. Shots
+      `candidate-en-*-60day-silver.png` (a still cannot show the motion).
+    - Side panel: the page behind is locked (html.kc-plan-dialog-open, overflow hidden, scrollbar room
+      kept). With a real mouse wheel: without the panel the page scrolls 600 → 1100; with it open,
+      the wheel over the blur leaves the page at 600; inside the panel the panel scrolls to its end
+      (253 px) and the page stays at 600. Esc releases the lock.
+    - The footer line: body text colour at 25 % (the colour scheme's foreground was cream on the cream
+      panel), and the fade above it no longer covers it. Shots `candidate-en-*-day-panel-footer.png`.
+    Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

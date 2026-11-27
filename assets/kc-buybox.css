@@ -422,10 +422,19 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   box-shadow: var(--kc-elevation-lg);
 }
 
+/* The page behind does not scroll while a plan dialog is open (assets/loop-widget.js), and keeps its
+   scrollbar's room so nothing shifts */
+html.kc-plan-dialog-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
 .kc-buybox .kc-plan-dialog__body {
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
+  /* Scrolling to the end of the panel does not carry on to the page */
+  overscroll-behavior: contain;
   padding: var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-md);
 }
 
@@ -433,7 +442,9 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   position: relative;
   flex: none;
   padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg);
-  border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  /* A line in the body text colour at a quarter strength, so it shows in Day (navy on cream) and
+     Night (cream on navy); the colour scheme's foreground stayed cream on the cream panel */
+  border-top: var(--kc-shape-stroke-thin, 1px) solid color-mix(in srgb, var(--kc-mapped-text-default-body) 25%, transparent);
   background: var(--kc-mapped-surface-page);
 }
 
@@ -442,7 +453,8 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 100%;
+  /* Above the footer's top line, not over it (the containing block is the padding box) */
+  bottom: calc(100% + var(--kc-shape-stroke-thin, 1px));
   height: var(--kc-responsive-spacing-layout-lg);
   background: linear-gradient(to bottom, transparent, var(--kc-mapped-surface-page));
   pointer-events: none;
@@ -593,23 +605,58 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
 }
 
 
-/* Promises under the CTA with Try once selected (assets/loop-widget.js kcUpdatePromises): the 14-day
-   guarantee as text only, without its icon (Victor, 27 Nov) */
-.kc-buybox .icon-with-text.kc-promises--once .icon-with-text__item > :not(.inline-richtext) {
-  display: none;
-}
-
-/* The one promise left takes the whole row, on one line */
-.kc-buybox .icon-with-text.kc-promises--once .icon-with-text__item {
-  flex: 1 1 100%;
-  max-width: none;
-}
-
 /* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
    card, Victor 24 Nov): the other cards keep name, sub-row and price */
 .kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-return_care-tooltip,
 .kc-chips-selected-only .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-chips {
   display: none;
+}
+
+/* A closed card has nothing between its sub-row and its badge: no gap above the badge (Victor, 27 Nov:
+   the 60-Day card a little smaller at the bottom; the Year's gold badge alike) */
+.kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .loop-subscription-group-selling-plans-container {
+  margin-top: 0;
+}
+
+.kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-plan-badge,
+.kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-bottom_label {
+  margin-top: 0;
+}
+
+/* The card with the silver badge ("Most picked"), selected: its border shines in silver (Victor, 27 Nov).
+   A ring on the border line only (the mask keeps the padding box out) with a light band running round;
+   still silver without motion when reduced motion is asked. The card's own border colour and Day ring
+   step aside for it. */
+body .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked) {
+  border-color: transparent;
+  box-shadow: var(--kc-elevation-lg);
+}
+
+.kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--kc-shape-stroke-thick, 2px));
+  z-index: 1;
+  padding: var(--kc-shape-stroke-thick, 2px);
+  border-radius: var(--kc-shape-radius-md);
+  background:
+    linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.95) 48%, transparent 61%) 0 0 / 250% 100% no-repeat,
+    linear-gradient(160deg, #8d939b, #c9ced4 40%, #f1f3f5 50%, #c9ced4 60%, #8d939b);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before {
+    animation: kc-silver-shine 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes kc-silver-shine {
+  from { background-position: 150% 0, 0 0; }
+  to { background-position: -150% 0, 0 0; }
 }
 
 /* An opened plan does not say a chip twice (Victor, 27 Nov): with a Care Credit chip in the card (its
