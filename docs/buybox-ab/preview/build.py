@@ -207,8 +207,8 @@ def build(lang, layout):
                 '"panelText": ""',
                 '"panelText": ' + json.dumps('712155431293: ' + PROMISE_VOORSTEL, ensure_ascii=False),
             ), (
-                # "Try once: maximum quantity" 4 (Victor, 27 Nov: a quantity for Try once; 4 as a proposal)
-                'data-kc-once-max="1"', 'data-kc-once-max="4"',
+                # "Try once: maximum quantity" 6 (Victor, 27 Nov: 4 as a proposal, then 6 for the MVP)
+                'data-kc-once-max="1"', 'data-kc-once-max="6"',
             )]),
         ):
             variant_page = year_page

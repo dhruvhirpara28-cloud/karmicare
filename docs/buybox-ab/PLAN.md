@@ -390,7 +390,7 @@ Loop block settings for it (theme editor, Duo template), the values `/candidate/
 | Setting | Value |
 |---|---|
 | Try once | Card on top |
-| Try once: maximum quantity | to decide (the setting allows 1 to 6; `/candidate/` runs 4, see below) |
+| Try once: maximum quantity | 6 (Victor, 27 Nov) |
 | Try once: button text | Try once, purchase now |
 | Plan badges | `712106115453: Most picked` |
 | One-time price struck through | `712106115453` |
@@ -412,7 +412,40 @@ so the plan stays the visibly better choice.
 | NL/FR of the three new setting texts (button, badge, panel text). They are block settings like "+ shipping" and the €0 note, which are already translated on /nl and /fr (Translate & Adapt); until then those pages show the English values. Translations keep the plan ID prefix. | copy lane via desk |
 | Loop admin: Year description "…, guaranteed fresh stock" + Loop Multilingual (the preview only emulates it) | Victor |
 | A render on a real Shopify theme with a cart, no payment (4d test row): Liquid only ran in the localhost preview | lane, on a dev theme, coordinated with the desk (shared dev theme) |
-| How it goes on: the values in `templates/product.subscription-item.json` in git (DH's deploy switches it on, the editor stays the way back), or set by hand in the live editor after the deploy | Victor |
+| How it goes on: **in git** (Victor, 27 Nov). The values above are in `templates/product.subscription-item.json`, so DH's deploy switches it on, and the theme editor is the way back ("Try once" to Link). The deploy writes the whole template: settings changed in the live editor since main took it back last would be lost, so compare the live template with main before it ships. | DH, desk |
+
+**Loop admin, read on 27 Nov (nothing changed):**
+
+- **Care Credit** is Loop Loyalty, two active programs on "Order placed with Loop" and "Checkout order placed
+  with subscriptions", matched on the order attribute `Subscription Name`: "60-Day Supply" earns 10 %,
+  "Year Supply" 20 % (or one of Loop's checkout link IDs), as a percentage of the order. So it follows the
+  amount, as Victor said. The buybox sets that attribute: the Year bought from the side panel sends
+  "Year Supply" with the plan and the kit, Try once at 3 clears it (`preview/year_attr_check.py`,
+  `shots/year-attributes.json`). The "Buybox layout" attribute is not a condition, so it changes nothing.
+- A third program, "Onetime- 10%", is a **draft**: one-time orders, from a customer's 4th one-time order on.
+  If it is switched on, the Try once note "€0 Care Credit" is no longer true for those customers.
+- **Year plan text** in Loop (selling plan "New Year Supply (Prepaid): (59*6) = €354", the storefront one):
+  "6 duos a year (3 now, 3 in month 6)", without "guaranteed fresh stock" yet. Its Check-up Reward tooltip
+  says "€40 in Care Credit is added to your account": per account, so a second person on their own email
+  gets their own reward, kit and Care Credit.
+
+## 4g. Stepper or dropdown for the quantity (question from Victor, 27 Nov, nothing built)
+
+Victor's idea: a dropdown, so the control can say what it counts ("Personen: N" on the 60-Day later, the
+amount on Try once). What has to be checked if it replaces the stepper:
+
+| # | Check | How |
+|---|---|---|
+| 1 | iOS Safari zooms the whole page when a `<select>` under 16 px font size gets focus. The control needs 16 px on phones. | real iPhone |
+| 2 | The native picker (iOS wheel, Android sheet) only shows on a real phone; the Orca browser is Chromium on a desktop. | real iPhone and Android, the preview on the LAN or a dev theme |
+| 3 | Width in the pill's row: "Aantal: 6 ▾", "Personen: 4 ▾", FR "Personnes : 4 ▾" are wider than the 90 px stepper, so the €0 pill gets narrower and may take 3 lines at 360 / 390 px. | EN, NL, FR at 360, 390, 1440 |
+| 4 | Loop rewrites the widget on every update and the card is one big tap target. Tapping the select must not reselect the card or move the select while its picker is open (iOS closes it). | real iPhone, plus a click test |
+| 5 | Night mode: the option list takes the OS colours; the closed select needs the theme's colours and its own chevron. | Day and Night |
+| 6 | Screen readers: a select with a visible label reads well by itself ("Aantal, 3"); check VoiceOver and the label. | VoiceOver |
+| 7 | Copy: for Try once Dawn's "Quantity" / "Aantal" / "Quantité" exists. "Personen" / "personnes" does not: copy lane. Option texts "1 persoon", "2 personen" need no colon (Victor's style asks for few). FR needs a no-break space before a colon. | copy lane |
+| 8 | Everything the stepper feeds stays: title "· 3 Duos", card price, receipt, sticky bar, the remembered quantity, the buy paths (`qty_check`, `memory_check`, `sticky_check`, new selectors). | preview checks |
+| 9 | Hotjar shows native selects poorly in recordings; an event with the chosen number keeps it measurable. | Hotjar |
+| 10 | "Personen" on the 60-Day is the later step (4e): quantityFor x N, a kit per person, Terms. Care Credit follows by itself (a percentage, read in Loop). | when 60-Day people is built |
 
 ## 5. Tracking
 

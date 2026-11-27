@@ -1,0 +1,88 @@
+{
+ "Year from the side panel": [
+  {
+   "url": "/cart/update.js",
+   "body": {
+    "attributes": {
+     "Subscription Name": "Year Supply"
+    }
+   }
+  },
+  {
+   "url": "/cart/add.js",
+   "body": {
+    "items": [
+     {
+      "id": 58451672170877,
+      "quantity": 3,
+      "selling_plan": 712155431293
+     },
+     {
+      "id": 58801117200765,
+      "quantity": 1,
+      "properties": {
+       "_welcome_kit": "true"
+      },
+      "parent_id": 58451672170877
+     },
+     {
+      "id": 58801116840317,
+      "quantity": 1,
+      "properties": {
+       "_welcome_kit": "true"
+      },
+      "parent_id": 58451672170877
+     },
+     {
+      "id": 42732469092534,
+      "quantity": 1,
+      "properties": {
+       "_welcome_kit": "true"
+      },
+      "parent_id": 58451672170877
+     }
+    ],
+    "attributes": {
+     "Subscription Name": "Year Supply"
+    }
+   }
+  },
+  {
+   "url": "/cart/update.js",
+   "body": {
+    "attributes": {
+     "Buybox layout": "card"
+    }
+   }
+  }
+ ],
+ "Try once at 3": [
+  {
+   "url": "/cart/update.js",
+   "body": {
+    "attributes": {
+     "Subscription Name": ""
+    }
+   }
+  },
+  {
+   "url": "/cart/add.js",
+   "body": {
+    "items": [
+     {
+      "id": 58451672170877,
+      "quantity": 3
+     }
+    ]
+   }
+  },
+  {
+   "url": "/cart/update.js",
+   "body": {
+    "attributes": {
+     "Buybox layout": "card"
+    }
+   }
+  }
+ ]
+}
