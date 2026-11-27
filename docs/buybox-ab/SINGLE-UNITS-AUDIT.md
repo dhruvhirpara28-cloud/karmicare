@@ -136,6 +136,33 @@ accessories, **but not the Duo**.
 - A search summary mentioned a portal setting "Show unlisted products". No Loop page I could open confirms
   it, and it is not in Loop's Settings overview. **Ask Loop support before relying on Unlisted.**
 
+### Test: Awake set to Unlisted (Victor, 27 Nov evening)
+
+Victor asked for it: "put Awake to unlisted and see if it's available in Loop portal". Awake was **Unlisted
+from 20:52 to 21:10 UTC** (Shopify admin, status only), then set back to Active.
+
+- **Loop portal.** I checked one active 60-Day subscription's portal, opened with "Access customer portal"
+  in the Loop admin (Victor's own subscriptions are cancelled or paused, and those show no add-ons).
+  - Awake stayed offered in "Goes well with your next order" and in "See more products", with its ADD /
+    SELECT button. That held from the first check to 17 minutes after the change (11 reloads,
+    `preview/unlisted_portal_watch.py`).
+  - Only the list was read. No ADD was clicked, so whether adding an Unlisted product goes through is
+    **not** tested. Nothing about the customer was recorded.
+- **Store, about 2 minutes after the change.**
+  - Gone: `/collections/all`, the Karmicare Collection, `/products.json` and the sitemap.
+  - The PDP carried `noindex,nofollow` and still sold by direct URL (3 buy forms).
+  - The predictive search still suggested it (cache).
+- **After setting it back:** `/products.json` lists Awake again and the PDP has no `robots` meta.
+
+**What this changes.** Loop's help says Unlisted products are kept out of customer-facing surfaces, but on
+this store its portal upsell kept offering Awake. That makes option A workable for the single tubes.
+
+Before relying on it, check two things:
+1. That ADD works for an Unlisted product. Use a test subscription, never a customer's.
+2. That the portal still offers it a day later, after Loop's own product sync.
+
+The accessories stay Active either way (kit lines, `product_list` settings).
+
 ## 4. Options
 
 **What each one hides:**
@@ -172,9 +199,9 @@ accessories, **but not the Duo**.
 keeps the products active and on the Online Store, which is what Loop's upsell and the Welcome Kit lines
 depend on. It takes them off every other surface.
 
-Unlisted (A) would be the one-switch version. Move to it only if Loop support confirms that Unlisted products
-still show in portal upsells, and even then keep the accessories Active (kit). The theme redirect is needed
-in A and C alike.
+Unlisted (A) would be the one-switch version. The 27 Nov test (section 3) shows the portal upsell keeping an
+Unlisted Awake, so A is open for the single tubes once ADD and the next-day check pass. Even then keep the
+accessories Active (kit). The theme redirect is needed in A and C alike.
 
 ### Theme changes (this lane, later, on Victor's go)
 
