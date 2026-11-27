@@ -3036,6 +3036,126 @@ function kcUpdatePromises(productId, isOneTime) {
     else row.removeAttribute('aria-hidden');
 }
 
+// KC: on a phone the side panel and its (i) sheets come up from the bottom (Victor, 27 Nov; assets/kc-buybox.css
+// .kc-plan-dialog--panel, .kc-info-sheet)
+const kcPhone = () => window.matchMedia('(max-width: 749px)').matches;
+
+// KC: a bottom sheet slides down before it closes: a phone, motion allowed, else at once
+function kcCloseSheet(sheet) {
+    if (!sheet.open || sheet.classList.contains('is-closing')) return;
+    const slides = kcPhone() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        && (sheet.classList.contains('kc-plan-dialog--panel') || sheet.classList.contains('kc-info-sheet'));
+    if (!slides) {
+        sheet.close();
+        return;
+    }
+    sheet.classList.add('is-closing');
+    let done = false;
+    const finish = () => {
+        if (done) return;
+        done = true;
+        sheet.classList.remove('is-closing');
+        sheet.close();
+    };
+    const inner = sheet.firstElementChild;
+    if (inner) {
+        inner.addEventListener('animationend', function onEnd(event) {
+            if (event.target !== inner) return;
+            inner.removeEventListener('animationend', onEnd);
+            finish();
+        });
+    }
+    setTimeout(finish, 400);
+}
+
+/**
+ * KC: an (i) in the Year's side panel on a phone (Victor, 27 Nov: the hover popover is too small to read
+ * there): its text in a small sheet from the bottom, over the panel, in body text size, with the chip's
+ * own words as its heading. A tap outside it (or Esc) slides it away; focus goes back to the (i). First
+ * in the side panel only, before every (i) on a phone gets it.
+ */
+function kcOpenInfoSheet(parent, tip, closeLabel) {
+    const popover = tip.querySelector('.info-tip-popover');
+    if (!popover) return;
+    let sheet = parent.querySelector(':scope > dialog.kc-info-sheet');
+    if (!sheet) {
+        sheet = document.createElement('dialog');
+        sheet.className = 'kc-info-sheet';
+        // A click on the sheet itself is a click outside its content
+        sheet.addEventListener('click', (event) => {
+            if (event.target === sheet) kcCloseSheet(sheet);
+        });
+        sheet.addEventListener('cancel', (event) => {
+            event.preventDefault();
+            kcCloseSheet(sheet);
+        });
+        sheet.addEventListener('close', () => {
+            if (sheet.kcOpener && sheet.kcOpener.isConnected) sheet.kcOpener.focus({ preventScroll: true });
+        });
+        parent.appendChild(sheet);
+    }
+    sheet.kcOpener = tip;
+    const inner = document.createElement('div');
+    inner.className = 'kc-info-sheet__inner';
+    const handle = document.createElement('span');
+    handle.className = 'kc-info-sheet__handle';
+    handle.setAttribute('aria-hidden', 'true');
+    // For keyboards and screen readers: shown only when it has keyboard focus
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'kc-info-sheet__close';
+    close.textContent = closeLabel || 'Close';
+    close.addEventListener('click', () => kcCloseSheet(sheet));
+    const heading = document.createElement('p');
+    heading.className = 'kc-info-sheet__heading';
+    heading.id = 'kc-info-sheet-heading';
+    heading.textContent = tip.getAttribute('aria-label') || '';
+    const text = document.createElement('div');
+    text.className = 'kc-info-sheet__text';
+    const paragraphs = popover.querySelectorAll('p');
+    if (paragraphs.length) {
+        paragraphs.forEach((p) => text.appendChild(p.cloneNode(true)));
+    } else {
+        const p = document.createElement('p');
+        p.textContent = popover.textContent.trim();
+        text.appendChild(p);
+    }
+    inner.append(handle, close, heading, text);
+    sheet.setAttribute('aria-labelledby', heading.id);
+    sheet.replaceChildren(inner);
+    sheet.classList.remove('is-closing');
+    if (!sheet.open) sheet.showModal();
+}
+
+// KC: the (i)s in a side panel's plan as buttons that open their sheet on a phone; wider screens keep the
+// hover popover
+function kcBindInfoSheets(dialog, plan, closeLabel) {
+    plan.querySelectorAll('.info-tip').forEach((tip) => {
+        if (!tip.querySelector('.info-tip-popover')) return;
+        const chip = tip.closest('.kc-return_care');
+        let label = '';
+        if (chip) {
+            const words = chip.cloneNode(true);
+            words.querySelectorAll('.info-tip').forEach((el) => el.remove());
+            label = words.textContent.replace(/\s+/g, ' ').trim();
+        }
+        tip.setAttribute('role', 'button');
+        tip.setAttribute('tabindex', '0');
+        tip.setAttribute('aria-haspopup', 'dialog');
+        if (label) tip.setAttribute('aria-label', label);
+        const open = (event) => {
+            if (!kcPhone()) return;
+            event.preventDefault();
+            event.stopPropagation();
+            kcOpenInfoSheet(dialog, tip, closeLabel);
+        };
+        tip.addEventListener('click', open);
+        tip.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') open(event);
+        });
+    });
+}
+
 /**
  * KC: a plan link's plan in a <dialog> instead of its card (Loop block "Plan link opens", Victor 26 Nov):
  * "popup" in the middle of the screen over a soft blur, "panel" as a side panel with the landed still of
@@ -3058,9 +3178,14 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     let dialog = box.querySelector(':scope > dialog.kc-plan-dialog');
     if (!dialog) {
         dialog = document.createElement('dialog');
-        // A click on the dialog itself is a click on the blur around the content
+        // A click on the dialog itself is a click on the blur around the content. On a phone the side
+        // panel slides down first (kcCloseSheet), also for Esc and the close button.
         dialog.addEventListener('click', (event) => {
-            if (event.target === dialog) dialog.close();
+            if (event.target === dialog) kcCloseSheet(dialog);
+        });
+        dialog.addEventListener('cancel', (event) => {
+            event.preventDefault();
+            kcCloseSheet(dialog);
         });
         dialog.addEventListener('close', () => {
             // The page scrolls again (locked while the dialog is open)
@@ -3085,7 +3210,7 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     close.type = 'button';
     close.className = 'kc-plan-dialog__close';
     close.setAttribute('aria-label', extras.closeLabel);
-    close.addEventListener('click', () => dialog.close());
+    close.addEventListener('click', () => kcCloseSheet(dialog));
 
     // The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, no badge look, next to
     // the close button (Victor, 27 Nov). Without a badge the close button sits alone at the top right.
@@ -3169,6 +3294,8 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
         }
         plan.insertBefore(promise, plan.querySelector(':scope > .loop-subscription-group-selling-plans-container'));
     }
+    // The (i)s open their own small sheet on a phone (side panel only, for now)
+    if (mode === 'panel') kcBindInfoSheets(dialog, plan, extras.closeLabel);
     body.appendChild(plan);
 
     // The buybox CTA's label for this plan (Custom Button Text per plan), else its default

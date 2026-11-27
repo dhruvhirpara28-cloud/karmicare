@@ -570,6 +570,141 @@ html.kc-plan-dialog-open {
   to { transform: none; }
 }
 
+@keyframes kc-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+
+@keyframes kc-sheet-out {
+  from { transform: none; }
+  to { transform: translateY(100%); }
+}
+
+/* On a phone the side panel is a sheet from the bottom (Victor, 27 Nov): full width, the page's blur
+   showing above it, rounded top corners; it slides up on opening and down on closing
+   (assets/loop-widget.js kcCloseSheet adds .is-closing) */
+@media screen and (max-width: 749px) {
+  .kc-buybox .kc-plan-dialog--panel {
+    margin: auto 0 0;
+    width: 100%;
+    height: calc(100dvh - var(--kc-responsive-spacing-layout-spacious));
+    max-height: calc(100dvh - var(--kc-responsive-spacing-layout-spacious));
+  }
+
+  .kc-buybox .kc-plan-dialog--panel .kc-plan-dialog__inner {
+    width: 100%;
+    border-left: none;
+    border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+    border-radius: var(--kc-shape-radius-md) var(--kc-shape-radius-md) 0 0;
+  }
+
+  /* The (i)s in the panel open their sheet; their hover popover stays out of the way */
+  .kc-buybox .kc-plan-dialog--panel .info-tip {
+    cursor: pointer;
+  }
+
+  .kc-buybox .kc-plan-dialog--panel .info-tip .info-tip-popover {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+  .kc-buybox .kc-plan-dialog--panel[open] .kc-plan-dialog__inner {
+    animation: kc-sheet-in 0.3s ease-out;
+  }
+
+  .kc-buybox .kc-plan-dialog--panel.is-closing .kc-plan-dialog__inner,
+  .kc-buybox .kc-info-sheet.is-closing .kc-info-sheet__inner {
+    animation: kc-sheet-out 0.25s ease-in forwards;
+  }
+
+  .kc-buybox .kc-info-sheet[open] .kc-info-sheet__inner {
+    animation: kc-sheet-in 0.25s ease-out;
+  }
+}
+
+/* An (i)'s text in a small sheet over the side panel (assets/loop-widget.js kcOpenInfoSheet): body text
+   size, the chip's words as its heading, a handle on top; a tap outside it closes it */
+.kc-buybox .kc-info-sheet {
+  margin: auto 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 70dvh;
+  border: none;
+  background: transparent;
+  overflow: visible;
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-info-sheet::backdrop {
+  background: rgba(25, 31, 56, 0.2);
+}
+
+.kc-buybox .kc-info-sheet__inner {
+  position: relative;
+  box-sizing: border-box;
+  max-height: 70dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-lg)
+    calc(var(--kc-responsive-spacing-layout-lg) + env(safe-area-inset-bottom, 0px));
+  border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-md) var(--kc-shape-radius-md) 0 0;
+  background: var(--kc-mapped-surface-page);
+  box-shadow: var(--kc-elevation-lg);
+}
+
+.kc-buybox .kc-info-sheet__handle {
+  display: block;
+  width: 36px;
+  height: 4px;
+  margin: 0 auto var(--kc-responsive-spacing-layout-md);
+  border-radius: var(--kc-shape-radius-full, 999px);
+  background: var(--kc-mapped-border-primary-default);
+}
+
+.kc-buybox .kc-info-sheet__heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xs);
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  font-weight: var(--font-700-weight, 700);
+  color: var(--kc-buybox-text);
+}
+
+.kc-buybox .kc-info-sheet__text p {
+  margin: 0;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-buybox .kc-info-sheet__text p + p {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+/* For keyboards and screen readers only: out of sight until it has keyboard focus */
+.kc-buybox .kc-info-sheet__close {
+  position: absolute;
+  top: var(--kc-responsive-spacing-layout-xs);
+  right: var(--kc-responsive-spacing-layout-sm);
+  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-full, 999px);
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-buybox-text);
+  font-size: var(--kc-buybox-body-size);
+  clip-path: inset(50%);
+  opacity: 0;
+}
+
+.kc-buybox .kc-info-sheet__close:focus-visible {
+  clip-path: none;
+  opacity: 1;
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: 2px;
+}
+
 /* The landed still of the kit (Victor, 27 Nov: higher up and bigger, 90 % wide within the panel's
    padding). Both stills (Awake, Asleep: 1080 x 960) hold the kit in x 154-938, y 162-835 with transparent
    margins around it; the frame has the kit's own proportions and the image is sized and shifted so

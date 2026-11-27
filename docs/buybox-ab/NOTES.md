@@ -311,6 +311,20 @@ when the last path part is the handle (`getCurrentPathLoop`).
       DH may want to know for unpublished-theme previews.
     - Preview on the wifi network for Victor's iPhone: `server.py <dir> 9377 0.0.0.0`.
 
+25. **Year panel as a bottom sheet, (i) sheets** (Victor, 27 Nov), `preview/sheet_check.py`, `shots/sheets.json`:
+    - Below 750 px the side panel comes up from the bottom (`kc-sheet-in`), full width, 24 px of the
+      blurred page above it, 12 px top corners; it slides down on the close button, Esc and a tap on the
+      blur (`kcCloseSheet`, 0.25 s, at once with reduced motion). The buy button closes it at once, as before.
+      From 750 px the side panel is unchanged (from the right; no sheet).
+    - The two (i)s in the panel (Care Credit, Check-up Reward) are buttons there: on a phone each opens a
+      small sheet over the panel with the chip's words as the heading and the tooltip text at body size
+      (15 px at 390, it was the popover's small size), a handle on top, the panel dimmed behind it. A tap
+      outside slides it down; Esc too; focus goes back to the (i). EN and NL checked. The hover popover is
+      off in the panel on a phone. A "Close" button for keyboards and screen readers shows only on
+      keyboard focus.
+    - Only in the Year's side panel for now (Victor: try it there before every (i) on a phone).
+    - The tooltip texts come from Loop and still hold dashes (copy lane, msg_c12815e2af50).
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the
