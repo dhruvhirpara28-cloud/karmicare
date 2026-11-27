@@ -413,7 +413,7 @@ so the plan stays the visibly better choice.
 | Loop admin: Year description "…, guaranteed fresh stock" + Loop Multilingual (the preview only emulates it) | Victor |
 | A render on a real Shopify theme with a cart, no payment: **done 27 Nov** on an unpublished test theme (NOTES 24), EN/NL/FR render, Try once x3, 60-Day, Year from the panel in a real cart | done |
 | Stepper or dropdown (4g): Victor tests the stepper on his iPhone first | Victor |
-| How it goes on: **in git** (Victor, 27 Nov). The values above are in `templates/product.subscription-item.json`, so DH's deploy switches it on, and the theme editor is the way back ("Try once" to Link). The deploy writes the whole template: settings changed in the live editor since main took it back last would be lost, so compare the live template with main before it ships. | DH, desk |
+| How it goes on: **in git** (Victor, 27 Nov). The values above are in `templates/product.subscription-item.json`, so DH's deploy switches it on, and the theme editor is the way back ("Try once" to Link). The (i) sheets on phones are their own feature with their own way back: Theme settings > Tooltips, "Phones: (i) tooltips as a sheet from the bottom" (on by default; Astra R1 P1). The deploy writes the whole template: settings changed in the live editor since main took it back last would be lost, so compare the live template with main before it ships. | DH, desk |
 
 **Loop admin, read on 27 Nov (nothing changed):**
 

@@ -410,8 +410,8 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   background: rgba(25, 31, 56, 0.45);
 }
 
-/* A scrolling body and a footer with the button, fixed at the bottom (Victor, 27 Nov): a line above the
-   footer, and the body fading out under it */
+/* A scrolling body between a title bar and a footer with the button, both glass and fixed (Victor,
+   27 Nov): the body scrolls under them */
 .kc-buybox .kc-plan-dialog__inner {
   position: relative;
   box-sizing: border-box;

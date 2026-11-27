@@ -2155,7 +2155,7 @@ function updateWelcomeKitUI(productId) {
 
     const kit = kcWelcomeKitParts();
     if (!kit) return;
-    const { title, totalValue, productsHtml } = kit;
+    const { totalValue } = kit;
     const formattedTotalValue = loopFormatMoney(totalValue, true);
 
     const welcomeKitContainer = document.createElement("div");
@@ -3084,8 +3084,8 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     dialog.className = `kc-plan-dialog kc-plan-dialog--${mode}`;
     dialog.kcOpener = opener;
 
-    // The dialog: a scrolling body (badges, image, plan, its text) and a footer with the button, fixed
-    // at the bottom with a line above it, the body scrolling under a soft fade (Victor, 27 Nov)
+    // The dialog: a title bar on top and a footer with the button at the bottom, both glass and fixed, with
+    // the body (image, plan, its text) scrolling under them (Victor, 27 Nov; assets/kc-buybox.css)
     const inner = document.createElement('div');
     inner.className = 'kc-plan-dialog__inner';
     const body = document.createElement('div');
@@ -3287,6 +3287,30 @@ function kcOnceTitleFor(title, many, quantity) {
 // get: what a one-time order buys now (1 with a plan selected); chosen: what the Try once card shows
 window.KCOnceQuantity = { get: kcOnceQuantity, chosen: kcOnceChosen, titleFor: kcOnceTitleFor };
 
+// KC: a click on a Try once stepper (kcUpdateOnceStepper), one listener for the whole document: the product
+// from the stepper's data-kc-product-id and the quantity field looked up at the click, so a stepper whose
+// markup Loop copied (its "one-time at bottom" option) keeps working (Astra R1 P2)
+function kcOnceStepperClick(event) {
+    const button = event.target.closest && event.target.closest('.kc-once-stepper__button');
+    const stepper = button && button.closest('.kc-once-stepper');
+    const productId = stepper && stepper.dataset.kcProductId;
+    if (!productId) return;
+    const input = kcOnceQuantityInput(productId, true);
+    if (!input) return;
+    const next = Math.min(Math.max(kcOnceChosen(productId) + Number(button.dataset.step), 1), kcOnceMax(productId));
+    input.dataset.kcChosen = String(next);
+    input.value = String(next);
+    const current = findSelectedVariantLoop(productId);
+    kcRenderOnceCard(productId, current, getLoopSubscriptionContainer(productId));
+    updateKcPricingSummary(productId, current);
+    document.dispatchEvent(new CustomEvent('kc:once-quantity', { detail: { productId, quantity: next } }));
+}
+
+if (!window.kcOnceStepperBound) {
+    window.kcOnceStepperBound = true;
+    document.addEventListener('click', kcOnceStepperClick);
+}
+
 // KC: the − / + control on the Try once card while it is selected, at the right of the €0 pill
 // (assets/kc-buybox.css .kc-once-stepper)
 function kcUpdateOnceStepper(productId, variant, text, texts) {
@@ -3304,20 +3328,12 @@ function kcUpdateOnceStepper(productId, variant, text, texts) {
         stepper = document.createElement('div');
         stepper.className = 'kc-once-stepper';
         stepper.setAttribute('role', 'group');
+        // Its clicks: kcOnceStepperClick, from the document (Loop's "one-time at bottom" copies the
+        // option's markup, which a listener on the node would not survive)
+        stepper.dataset.kcProductId = String(productId);
         stepper.innerHTML = '<button type="button" class="kc-once-stepper__button" data-step="-1"></button>'
             + '<output class="kc-once-stepper__value" aria-live="polite"></output>'
             + '<button type="button" class="kc-once-stepper__button" data-step="1"></button>';
-        stepper.addEventListener('click', (event) => {
-            const button = event.target.closest('.kc-once-stepper__button');
-            if (!button) return;
-            const next = Math.min(Math.max(kcOnceChosen(productId) + Number(button.dataset.step), 1), kcOnceMax(productId));
-            input.dataset.kcChosen = String(next);
-            input.value = String(next);
-            const current = findSelectedVariantLoop(productId);
-            kcRenderOnceCard(productId, current, getLoopSubscriptionContainer(productId));
-            updateKcPricingSummary(productId, current);
-            document.dispatchEvent(new CustomEvent('kc:once-quantity', { detail: { productId, quantity: next } }));
-        });
     }
     // Right after the €0 pill, as it shows (at its right, assets/kc-buybox.css): the reading and tab order
     // follow the screen. Without a pill, at the end of the card's row.
@@ -3326,9 +3342,10 @@ function kcUpdateOnceStepper(productId, variant, text, texts) {
         if (chips) chips.after(stepper);
         else option.appendChild(stepper);
     }
-    // The card keeps the chosen quantity, but with a plan selected the field is 1: every other one-time
-    // path that sends the buybox form (the sticky bar's "Try once for €67", the comparison tables' Try
-    // once) buys the one Duo it shows. Try once selected again: the field is the chosen quantity again.
+    // The card keeps the chosen quantity, but with a plan selected the form's field is 1, so nothing that
+    // sends the buybox form with a plan selected can multiply it. The fixed one-time links pass their own
+    // quantity (assets/kc-plan-select.js tryOnce): the sticky bar's "Try once for …" the chosen one, the
+    // comparison tables' Try once 1. Try once selected again: the field is the chosen quantity again.
     if (!input.dataset.kcChosen) input.dataset.kcChosen = '1';
     const buys = String(kcOnceQuantity(productId));
     if (input.value !== buys) input.value = buys;
@@ -4324,7 +4341,10 @@ function overrideAddToCartButtonLoop(productId) {
         submitButtons.forEach((btn) => {
             btn = removeAllEventListenersLoop(btn);
             btn.addEventListener("click", (event) => {
-                const quantity = document.querySelector(
+                // KC: the Try once card's quantity field when the buybox has one (1 with a plan selected,
+                // the plan's units then come from kc-plan-select.js quantityFor); else Loop's own selector
+                // (Astra R1 P2)
+                const quantity = kcOnceQuantityInput(productId, false) || document.querySelector(
                     PRODUCT_QUANTITY_SELECTOR
                 );
                 loopHandleAddToCart(event, productId, quantity?.value);

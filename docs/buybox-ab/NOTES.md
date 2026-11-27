@@ -351,6 +351,23 @@ when the last path part is the handle (`getCurrentPathLoop`).
       (close label "Close", 4 decorated (i)s, opens). `node --check` on the changed scripts; Theme Check
       exit 0, 19 warnings.
 
+27. **Astra R1 and its fixes** (Victor, 27 Nov: "voer de astra review ook uit"). Codex `gpt-6-astra` xhigh,
+    read only, task_fd2d9ca69982; report `docs/buybox-ab/review/ASTRA-R1.md`: ready with fixes, 0 P0, 1 P1,
+    2 P2, 1 nit. Fixed:
+    - P1, the (i) sheets stayed on after "Try once" = Link. They are a feature of their own (Victor: every
+      (i) on a phone), so they got their own way back: theme setting `kc_info_sheets` ("Tooltips", on by
+      default, `config/settings_schema.json`); `layout/theme.liquid` loads the CSS and script only with it.
+      The test theme (its settings_data has no value for it) loads both: the schema default works.
+    - P2, after Loop's "one-time at bottom" copies the option's markup, the stepper lost its click
+      listener. Now one document listener (`kcOnceStepperClick`) with the product on the stepper
+      (`data-kc-product-id`) and the quantity field looked up per click. `preview/astra_r1_check.py`: two
+      such re-renders, + still goes 2 > 3 > 4, one stepper, field and title follow.
+    - P2, Loop's own add button override (preset bundles, off today) read Dawn's `.quantity__input`, absent
+      here, so 1. Now the Try once field first (`overrideAddToCartButtonLoop`); the probe hands quantity 4.
+    - nit: the stale comments (sticky link buying 1, the footer fade) and the unused destructuring.
+    - Regression: qty, memory, sticky, year_attr, sheet_check (16 sheets EN/NL) as before. Theme Check exit
+      0, 19 warnings; `node --check`.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the
