@@ -377,6 +377,12 @@ when the last path part is the handle (`getCurrentPathLoop`).
     installment form first and with the purchase form first (the unscoped helper alone would give 4); the
     Duo still passes 4. Theme Check exit 0.
 
+29. **Astra R3** (task_d0495d39aa27, `docs/buybox-ab/review/ASTRA-R3.md`): **ready**, 0 P0, 0 P1, 0 P2, 0 nit.
+    R2's P2 resolved (reproduced with the old function, fixed in both form orders, Duo one time and plan
+    quantities unchanged, products without the field as before), plus a P0/P1 sanity pass over the whole
+    lane diff. Its limits: a code-review verdict, not a device test (iOS, VoiceOver), a real setting toggle
+    or a live cart.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the
