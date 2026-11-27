@@ -60,6 +60,17 @@ result['override quantity'] = ev(
     " overrideAddToCartButtonLoop('" + PID + "'); const form = document.querySelector('.kc-buybox [data-loop-product-id=\"" + PID + "\"]');"
     " const btn = form && (form.querySelector('button[type=submit]') || form.querySelector('button')); if (!btn) return JSON.stringify({ noButton: true });"
     " btn.click(); window.loopHandleAddToCart = real; return JSON.stringify(Object.assign({ field: (document.querySelector('.kc-buybox input.kc-once-quantity') || {}).value }, window.__kcAdd)); })()")
+# Astra R2 P2: another product's bundle form (quantity 2) never takes the Duo's Try once quantity, with
+# the buybox's installment form first (as served) and with its purchase form first (installment id renamed)
+result['other product, both form orders'] = ev(
+    "(() => { const res = {}; const real = window.loopHandleAddToCart; const other = document.createElement('form');"
+    " other.setAttribute('data-loop-product-id', 'kc-r2-other'); other.innerHTML = '<input class=\"quantity__input\" value=\"2\"><button type=\"submit\">x</button>';"
+    " document.body.appendChild(other);"
+    " const run = (label) => { window.__kcAdd = null; window.loopHandleAddToCart = (e, p, q) => { e.preventDefault(); window.__kcAdd = q; };"
+    " overrideAddToCartButtonLoop('kc-r2-other'); other.querySelector('button').click(); res[label] = window.__kcAdd; };"
+    " run('installment form first'); const inst = Array.from(document.querySelectorAll('.kc-buybox form[id^=\"product-form-\"]')).find((f) => !f.querySelector('.kc-once-quantity'));"
+    " const oldId = inst && inst.id; if (inst) inst.id = 'kc-r2-renamed'; res.helperFieldWithPurchaseFirst = (kcOnceQuantityInput('kc-r2-other', false) || {}).value || null;"
+    " run('purchase form first'); if (inst) inst.id = oldId; window.loopHandleAddToCart = real; other.remove(); return JSON.stringify(res); })()")
 layout = Path(__file__).resolve().parents[3] / 'layout' / 'theme.liquid'
 text = layout.read_text()
 gate = re.search(r"\{%-\s*if settings\.kc_info_sheets\s*-%\}(.*?)\{%-\s*endif\s*-%\}", text, flags=re.S)

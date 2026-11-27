@@ -368,6 +368,15 @@ when the last path part is the handle (`getCurrentPathLoop`).
     - Regression: qty, memory, sticky, year_attr, sheet_check (16 sheets EN/NL) as before. Theme Check exit
       0, 19 warnings; `node --check`.
 
+28. **Astra R2** (task_2e2a4a55b82b, `docs/buybox-ab/review/ASTRA-R2.md`): ready with fixes, 0 P0, 0 P1, 1 P2.
+    The R1 P1, the stepper P2 and the nit resolved; the override P2 partly: on a page with another
+    product's bundle form, `kcOnceQuantityInput`'s generic fallback could hand that product the Duo's
+    Try once quantity when the buybox's purchase form comes before its installment form. Fixed: the
+    override takes the Try once field only when its form's `data-loop-product-id` is that very product,
+    else Loop's own selector as before. `preview/astra_r1_check.py`: the other product passes 2 with the
+    installment form first and with the purchase form first (the unscoped helper alone would give 4); the
+    Duo still passes 4. Theme Check exit 0.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

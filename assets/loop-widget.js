@@ -4341,10 +4341,14 @@ function overrideAddToCartButtonLoop(productId) {
         submitButtons.forEach((btn) => {
             btn = removeAllEventListenersLoop(btn);
             btn.addEventListener("click", (event) => {
-                // KC: the Try once card's quantity field when the buybox has one (1 with a plan selected,
-                // the plan's units then come from kc-plan-select.js quantityFor); else Loop's own selector
-                // (Astra R1 P2)
-                const quantity = kcOnceQuantityInput(productId, false) || document.querySelector(
+                // KC: the Try once card's quantity field when the buybox has one for this very product (its
+                // form's data-loop-product-id; 1 with a plan selected, the plan's units then come from
+                // kc-plan-select.js quantityFor); else Loop's own selector, as before (Astra R1 P2, R2 P2:
+                // another product never takes the Duo's quantity)
+                const onceField = kcOnceQuantityInput(productId, false);
+                const ownField = onceField && onceField.form
+                    && onceField.form.dataset.loopProductId === String(productId) ? onceField : null;
+                const quantity = ownField || document.querySelector(
                     PRODUCT_QUANTITY_SELECTOR
                 );
                 loopHandleAddToCart(event, productId, quantity?.value);
