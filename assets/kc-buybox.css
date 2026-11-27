@@ -455,20 +455,29 @@ html.kc-plan-dialog-open {
   backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
-/* The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, plain, the close button
-   beside it (Victor, 27 Nov); the image follows right under it */
+/* The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, the close button beside
+   it (Victor, 27 Nov). The bar stays put and the content scrolls under it: glass as the footer, with
+   its hairline below, and room around the 44 px close button on every side. */
 .kc-buybox .kc-plan-dialog__header {
-  flex: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--kc-responsive-spacing-layout-sm);
-  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-sm) 0 var(--kc-responsive-spacing-layout-lg);
+  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-lg);
+  border-bottom: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-glass-border);
+  background: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
-/* The image right under the title */
+/* The body starts under the bar (its padding, the close button, its hairline) with a small gap */
 .kc-buybox .kc-plan-dialog__header + .kc-plan-dialog__body {
-  padding-top: var(--kc-responsive-spacing-layout-xs);
+  padding-top: calc(2 * var(--kc-responsive-spacing-layout-md) + 44px + var(--kc-shape-stroke-thin, 1px) + var(--kc-responsive-spacing-layout-xs));
 }
 
 .kc-buybox .kc-plan-dialog__header-title {

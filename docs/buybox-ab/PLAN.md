@@ -284,7 +284,7 @@ What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_ch
 | Receipt | "Total today €201", per brushing per Duo | yes |
 | Sticky bar | Title "Try Once · 3 Duos", its own form buys 3 | yes |
 | Buy (buybox CTA → karmiAddToCart → replaceChoice) | One line, quantity 3, no selling plan, no kit, no Subscription Name | yes |
-| 60-Day / Year selected | The field goes back to 1; the plan adds its own Duos per delivery with the kit and Subscription Name | yes |
+| 60-Day / Year selected | The field goes back to 1; the plan adds its own Duos per delivery with the kit and Subscription Name. The Try once card keeps showing the chosen quantity ("3 Duos", €201), and selecting it again puts the field back at 3 (Victor, 27 Nov; `preview/memory_check.py`) | yes |
 | Sticky "Try once for €67" link, comparison tables' Try once | Send the buybox form; with a plan selected the field is 1, so they buy the one Duo they show | by the field at 1 |
 
 **Still to change or decide, so it keeps working:**
@@ -310,6 +310,30 @@ What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_ch
 | Copy lane via desk | NL/FR: the promise text, "Try once, purchase now", "Most picked"; the dashes (product description, tooltips), sent 27 Nov. |
 | Legal | Struck "€67" next to "€59" (two current offers, not a reduction); "Most picked" needs order data behind it; "guaranteed fresh stock" is a promise for the month 6 delivery; Try once quantity vs the Terms (#1). |
 | Test on a dev theme with a cart, no payment | One time 1 and 3 Duos, 60-Day, Year from the panel: cart lines, kit nested, Subscription Name, "Buybox layout" attribute, Hotjar events; NL and FR; iOS Safari. |
+
+## 4e. Asking "how many people" (question from Victor, 27 Nov, nothing built)
+
+One Duo is 120 brushings: one person, twice a day, 60 days (the 60-Day card's own "one complete 60-day
+cycle"). A household of N people then needs N Duos per delivery on the same rhythm. In Loop that is the
+**quantity of the subscription line**, on the same selling plan. A shorter interval (1 Duo every 30 days)
+would need new selling plans and breaks "60-Day Rhythm", so quantity it is.
+
+| Area | What changes | Who |
+|---|---|---|
+| Theme, buybox | One control "people" sets the quantity for whichever card is selected: Try once N Duos, 60-Day N Duos every 60 days, Year 6 x N. Card price, receipt, sticky bar and comparison tables multiply; per brushing stays. `kc-plan-select.js` quantityFor today buys each plan's own units at quantity 1: it would multiply them by N. | lane |
+| Welcome Kit | Today one kit per order (2 toothbrushes + floss, nested lines). For N people: N kits (N x €21 value given away) or one kit (one person has no brush). Cost decision. | Victor |
+| Care Credit (Loop Loyalty) | The chip shows a share of the price (€5.90 of €59, €70.80 of €354); whether Loop Loyalty pays it on line total x N or per subscription depends on its rule (per € spent scales, a fixed amount per order does not). Read the rule before the chip shows x N. | Victor (Loop admin, read) |
+| €40 Check-up Reward (Year) | Per account or per person? Proof is per check-up, so per person is the natural reading, but the Terms and the claim flow are written for one subscriber. | legal lane, Victor |
+| Loop subscription | Quantity >1 on a subscription is standard: the customer portal can change it later, skip/pause/cancel act on the whole household line. Inflation-proof price is per unit, unchanged. Loop Multilingual texts unchanged. | none |
+| Shipping, stock | 60-Day ships free today; N Duos per parcel changes weight and cost per order. Year "3 now, 3 in month 6, guaranteed fresh stock" becomes 3N + 3N. | Victor |
+| Terms | Plans and the money-back guarantee are written per Duo / per subscription; "per household" needs wording. | legal lane |
+| Copy | "How many people?", "for 2 people" and the like do not exist yet in EN/NL/FR: blocked until the copy lane writes them (AGENTS.md §3). | copy lane via desk |
+| Test | A question before the cards is one more step before the CTA: an A/B variable of its own, not part of this switch. | Victor |
+
+**Try once too?** Yes, if people is asked at all: one concept on every card. The Try once stepper counts
+Duos, a people control on the plans counts people; two different counters side by side read as a
+mistake. With people, "Try Once · 2 people" stays a trial (a household trying once), where "Try Once ·
+4 Duos" for one person is stocking up, which the 60-Day plan does better and cheaper.
 
 ## 5. Tracking
 

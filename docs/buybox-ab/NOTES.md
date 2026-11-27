@@ -264,6 +264,18 @@ when the last path part is the handle (`getCurrentPathLoop`).
     - `qty_check.py` re-run: Try once x3 adds one line quantity 3, 60-Day adds the plan at 1 with the
       kit. Theme Check exit 0, 19 warnings.
 
+22. **Try once keeps its quantity, panel title bar fixed** (Victor, 27 Nov), `preview/memory_check.py`,
+    `shots/memory.json`, EN 390, adds recorded (nothing reaches a cart):
+    - At 3, then 60-Day selected: the Try once card still says "Try Once · 3 Duos" €201 (stepper hidden
+      with the card unselected), Total today €59. The sticky "Try once" link then adds quantity 1, as it
+      shows €67. Try once selected again: stepper 3, Total today €201, the buybox CTA adds quantity 3.
+      The chosen quantity sits in the field's `data-kc-chosen`; the field is 1 while a plan is selected.
+    - Side panel: the title bar stays at the top while the body scrolls under it (scrollTop 170 at 390,
+      193 at 1440, bar at 0), glass as the footer (blur 20 px, 1 px hairline below). Room around the
+      close button: 12 px at 390, 16 px at 1440. Shots `candidate-en-*-day-panel-bar-scrolled.png`,
+      `candidate-en-390-day-once-kept-*.png`.
+    - `qty_check.py` re-run: same adds as result 21. Theme Check exit 0, 19 warnings.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

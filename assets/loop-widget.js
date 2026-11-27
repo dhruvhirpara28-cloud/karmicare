@@ -3244,11 +3244,18 @@ function kcOnceQuantityInput(productId, create) {
     return input;
 }
 
-function kcOnceQuantity(productId) {
+// The quantity chosen on the Try once card. The card keeps it while a plan is selected (Victor, 27 Nov), in
+// the field's data-kc-chosen; the field itself (what the form buys) is 1 then, see kcUpdateOnceStepper.
+function kcOnceChosen(productId) {
     const max = kcOnceMax(productId);
     if (max <= 1) return 1;
-    const value = parseInt(kcOnceQuantityInput(productId, false)?.value, 10);
+    const value = parseInt(kcOnceQuantityInput(productId, false)?.dataset?.kcChosen, 10);
     return Number.isFinite(value) ? Math.min(Math.max(value, 1), max) : 1;
+}
+
+// The quantity a one-time order buys now: the chosen one with Try once selected, 1 with a plan selected
+function kcOnceQuantity(productId) {
+    return determineOneTimeOrderLoop(productId) ? kcOnceChosen(productId) : 1;
 }
 
 /**
@@ -3289,7 +3296,8 @@ function kcUpdateOnceStepper(productId, variant, text, texts) {
         stepper.addEventListener('click', (event) => {
             const button = event.target.closest('.kc-once-stepper__button');
             if (!button) return;
-            const next = Math.min(Math.max(kcOnceQuantity(productId) + Number(button.dataset.step), 1), kcOnceMax(productId));
+            const next = Math.min(Math.max(kcOnceChosen(productId) + Number(button.dataset.step), 1), kcOnceMax(productId));
+            input.dataset.kcChosen = String(next);
             input.value = String(next);
             const current = findSelectedVariantLoop(productId);
             kcRenderOnceCard(productId, current, getLoopSubscriptionContainer(productId));
@@ -3300,11 +3308,13 @@ function kcUpdateOnceStepper(productId, variant, text, texts) {
         // on a phone (assets/kc-buybox.css)
         option.insertBefore(stepper, option.querySelector(':scope > .loop-one-time-purchase-option-price-container'));
     }
-    // With a plan selected the field is back at 1: every other one-time path that sends the buybox form
-    // (the sticky bar's "Try once for €67", the comparison tables' Try once) buys the one Duo it shows
-    if (!determineOneTimeOrderLoop(productId) && input.value !== '1') input.value = '1';
-    const quantity = kcOnceQuantity(productId);
-    if (input.value !== String(quantity)) input.value = String(quantity);
+    // The card keeps the chosen quantity, but with a plan selected the field is 1: every other one-time
+    // path that sends the buybox form (the sticky bar's "Try once for €67", the comparison tables' Try
+    // once) buys the one Duo it shows. Try once selected again: the field is the chosen quantity again.
+    if (!input.dataset.kcChosen) input.dataset.kcChosen = '1';
+    const buys = String(kcOnceQuantity(productId));
+    if (input.value !== buys) input.value = buys;
+    const quantity = kcOnceChosen(productId);
     stepper.setAttribute('aria-label', texts.kcQtyLabel || 'Quantity');
     const [minus, plus] = stepper.querySelectorAll('.kc-once-stepper__button');
     minus.setAttribute('aria-label', texts.kcQtyDecrease || 'Decrease quantity');
@@ -3367,7 +3377,7 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
     if (label) {
         addClass(label, 'h5');
         // "Try Once · 1 Duo", or "· 2 Duos" … with a quantity (kcOnceTitleFor)
-        const title = kcOnceTitleFor(texts.kcOnceTitle, texts.kcTitleMany, kcOnceQuantity(productId));
+        const title = kcOnceTitleFor(texts.kcOnceTitle, texts.kcTitleMany, kcOnceChosen(productId));
         if (title && label.textContent !== title) label.textContent = title;
     }
 
@@ -3417,7 +3427,7 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
     // Quantity: the − / + control, and the card's price as the total. Loop writes its unit price into
     // #loop-price-one-time after this on every update, so the total follows right after it.
     kcUpdateOnceStepper(productId, variant, text, texts);
-    const quantity = kcOnceQuantity(productId);
+    const quantity = kcOnceChosen(productId);
     setTimeout(() => {
         const amount = option.querySelector('#loop-price-one-time');
         const total = loopFormatMoney(variant.price * quantity, true);
