@@ -344,7 +344,7 @@ What a second Year checkout by the same customer means today:
 
 | What | Today | Who |
 |---|---|---|
-| Welcome Kit | Withheld for a logged-in customer tagged `FREE WELCOME KIT RECEIVED` (`snippets/kc-plan-config.liquid`). A second Year bought from the same account brings no kit, so the second person gets no toothbrushes; as a guest it does. Keep one kit per account, or give one per membership (tag rule, admin/Flow)? | Victor |
+| Welcome Kit | **One per person (Victor, 27 Nov).** Today it is withheld for a logged-in customer tagged `FREE WELCOME KIT RECEIVED` (`snippets/kc-plan-config.liquid`), so a second Year bought from the same account brings no kit; as a guest, or with the second person's own email, it does. Simplest fit with "per person" and no build: the second person checks out with their own email (kit, Care Credit and reward then all land with them). A kit per membership on one account would need a different rule than the customer tag. | Victor |
 | €40 Check-up Reward | Per membership: both memberships sit under the buyer's account, so the claim must say which membership (person) it is for. | Victor, legal lane |
 | Care Credit | Loop Loyalty credits the account that bought: both memberships' credit lands with the buyer. | Victor (Loop admin, read) |
 | Copy | Nothing on the page says a Year is for one person. If that needs saying ("per person", "for a second person, check out again"), the copy lane writes it. | copy lane via desk |
@@ -367,8 +367,8 @@ Before the 60-Day count is built:
 
 | Area | What | Who |
 |---|---|---|
-| Care Credit (Loop Loyalty) | Paid on the line total (x N) or a fixed amount per subscription? The pill shows x N only if it pays that. | Victor (Loop admin, read) |
-| Welcome Kit | N kits for N people (N x €21 value) or one per order. | Victor |
+| Care Credit (Loop Loyalty) | A percentage of the amount (Victor, 27 Nov), so it follows N; to be read in Loop admin: on which amount, and none on one-time orders. | lane, Loop admin read |
+| Welcome Kit | One per person (Victor, 27 Nov): N kits for N people (N x €21 value). | decided |
 | Terms | Plan per household, guarantee per subscription; Try once more than one Duo (4d #1). | legal lane |
 | Shipping, stock | Free plan shipping with N Duos per parcel. | Victor |
 | Copy | "person / people", "persoon / personen", "personne / personnes", "Number of people": none exists in EN/NL/FR. Blocked until the copy lane writes them (AGENTS.md §3). | copy lane via desk |
@@ -377,6 +377,42 @@ Before the 60-Day count is built:
 Theme work then: `assets/loop-widget.js` (control on the 60-Day card, price and pill x N),
 `assets/kc-plan-select.js` (quantityFor x N for the 60-Day, kit lines x N), the sticky bar, the receipt,
 Hotjar (people as a property).
+
+## 4f. MVP (Victor, 27 Nov)
+
+**In:** the card layout as in `/candidate/`: Try once first and preselected, with its quantity (several Duos
+in one order); 60-Day with "Most picked" and the struck "€67"; the Year as a link that opens the side panel
+(promise text, kit image, glass title bar and footer); chips on the selected card only. **Later:** more
+people on the 60-Day (4e). **Not in this phase:** a Year for more than one person in one checkout.
+
+Loop block settings for it (theme editor, Duo template), the values `/candidate/` runs on:
+
+| Setting | Value |
+|---|---|
+| Try once | Card on top |
+| Try once: maximum quantity | to decide (the setting allows 1 to 6; `/candidate/` runs 4, see below) |
+| Try once: button text | Try once, purchase now |
+| Plan badges | `712106115453: Most picked` |
+| One-time price struck through | `712106115453` |
+| Plans as a link under the cards | `712155431293` |
+| Plan link opens | Side panel |
+| Plan popup / side panel: text per plan | `712155431293: Your dentist sees you once or twice a year. …` (the promise, 4c) |
+| Plan chips: selected card only | on |
+
+**Maximum quantity.** No hard reason for 4: it was the preview's value. The setting goes to 6, the code caps
+it there. What limits it in practice: stock (above it Shopify refuses the add), shipping rates for a heavier
+parcel, and the Terms (4d #1). 6 is a Year's worth of Duos: at 6, Try once is €402 against €354 for the Year,
+so the plan stays the visibly better choice.
+
+**Before it goes live:**
+
+| Item | Who |
+|---|---|
+| Terms: Try once for more than one Duo (4d #1) | legal lane via desk |
+| NL/FR of the three new setting texts (button, badge, panel text). They are block settings like "+ shipping" and the €0 note, which are already translated on /nl and /fr (Translate & Adapt); until then those pages show the English values. Translations keep the plan ID prefix. | copy lane via desk |
+| Loop admin: Year description "…, guaranteed fresh stock" + Loop Multilingual (the preview only emulates it) | Victor |
+| A render on a real Shopify theme with a cart, no payment (4d test row): Liquid only ran in the localhost preview | lane, on a dev theme, coordinated with the desk (shared dev theme) |
+| How it goes on: the values in `templates/product.subscription-item.json` in git (DH's deploy switches it on, the editor stays the way back), or set by hand in the live editor after the deploy | Victor |
 
 ## 5. Tracking
 
