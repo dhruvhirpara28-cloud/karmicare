@@ -291,6 +291,26 @@ when the last path part is the handle (`getCurrentPathLoop`).
       lane before the switch goes on.
     - `qty_check.py` re-run: same adds. Theme Check exit 0, 19 warnings.
 
+24. **Real Shopify render and cart, MVP settings** (Victor, 27 Nov: "je mag gerust ook een dev theme test
+    aanmaken"), `preview/theme_test.py`, `shots/theme-test.json`:
+    - The branch at 91d3eba+ pushed as an **unpublished** theme "buybox-ab test 27 Nov (lane test, delete
+      after)", id 191258984829 (`shopify theme push --unpublished`; not the shared development theme).
+      Opened with `?preview_theme_id=` in an isolated Orca profile.
+    - EN, NL, FR: the test theme renders (Shopify.theme 191258984829, unpublished), no "Liquid error",
+      Try once card preselected with the stepper, "Most picked", the Year link, maximum 6, the extras JSON
+      with the template's values, the sticky link's quantity attribute. Button "Try once, purchase now"
+      in all three (a block setting, translated later).
+    - Real adds to the profile's own cart, never to checkout (the theme's redirect pointed at a 404):
+      Try once x3 = one line, quantity 3, €201, no plan, no Subscription Name; 60-Day = plan 712106115453
+      quantity 1 + three kit lines, "60-Day Supply"; the Year from the side panel = plan 712155431293
+      quantity 3, €354 + kit, "Year Supply". Each choice replaced the one before. "Buybox layout: card" on
+      all. Cart cleared at the end.
+    - Not from this branch: on the test theme the inline `day-night-sun.js` renders empty (the asset itself
+      is there on the CDN, 200), so no Day/Night class: the selected card shows Night's accent colours and
+      the menu icon is missing. The branch does not touch those files; the live theme has the script.
+      DH may want to know for unpublished-theme previews.
+    - Preview on the wifi network for Victor's iPhone: `server.py <dir> 9377 0.0.0.0`.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

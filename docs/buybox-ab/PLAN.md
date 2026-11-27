@@ -411,7 +411,8 @@ so the plan stays the visibly better choice.
 | Terms: Try once for more than one Duo (4d #1) | legal lane via desk |
 | NL/FR of the three new setting texts (button, badge, panel text). They are block settings like "+ shipping" and the €0 note, which are already translated on /nl and /fr (Translate & Adapt); until then those pages show the English values. Translations keep the plan ID prefix. | copy lane via desk |
 | Loop admin: Year description "…, guaranteed fresh stock" + Loop Multilingual (the preview only emulates it) | Victor |
-| A render on a real Shopify theme with a cart, no payment (4d test row): Liquid only ran in the localhost preview | lane, on a dev theme, coordinated with the desk (shared dev theme) |
+| A render on a real Shopify theme with a cart, no payment: **done 27 Nov** on an unpublished test theme (NOTES 24), EN/NL/FR render, Try once x3, 60-Day, Year from the panel in a real cart | done |
+| Stepper or dropdown (4g): Victor tests the stepper on his iPhone first | Victor |
 | How it goes on: **in git** (Victor, 27 Nov). The values above are in `templates/product.subscription-item.json`, so DH's deploy switches it on, and the theme editor is the way back ("Try once" to Link). The deploy writes the whole template: settings changed in the live editor since main took it back last would be lost, so compare the live template with main before it ships. | DH, desk |
 
 **Loop admin, read on 27 Nov (nothing changed):**

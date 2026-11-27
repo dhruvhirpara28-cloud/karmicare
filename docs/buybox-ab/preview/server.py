@@ -1,6 +1,7 @@
 """Buybox-ab localhost preview server: /off|on/<lang>/products/<handle> serves the built page (Loop needs
 the product handle as the last path part), /cart.js an empty cart, the rest from the serve dir.
-Usage: python3 -I server.py <serve-dir> <port>"""
+Usage: python3 -I server.py <serve-dir> <port> [host]: host 127.0.0.1 by default; 0.0.0.0 serves the wifi
+network too, for a phone (Victor, 27 Nov)."""
 import json
 import sys
 from functools import partial
@@ -8,6 +9,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 
 SERVE, PORT = sys.argv[1], int(sys.argv[2])
+HOST = sys.argv[3] if len(sys.argv) > 3 else '127.0.0.1'
 EMPTY_CART = json.dumps({'token': 'preview', 'items': [], 'attributes': {}, 'item_count': 0, 'total_price': 0}).encode()
 
 
@@ -33,4 +35,4 @@ class Handler(SimpleHTTPRequestHandler):
         pass
 
 
-ThreadingHTTPServer(('127.0.0.1', PORT), partial(Handler, directory=SERVE)).serve_forever()
+ThreadingHTTPServer((HOST, PORT), partial(Handler, directory=SERVE)).serve_forever()

@@ -1,0 +1,171 @@
+{
+ "render /en": {
+  "theme": [
+   191258984829,
+   "unpublished"
+  ],
+  "liquidErrors": [],
+  "onceCard": true,
+  "onceChecked": true,
+  "title": "Try Once · 1 Duo",
+  "stepper": true,
+  "yearLink": "Or The Karmicare Year · €354 / year+ €70.80 Care Credit + €40 Check-up Reward",
+  "badge": "Most picked",
+  "cta": "\n              Try once, purchase now\n\n\n  \n\n\n",
+  "extras": "\n                      {\"badges\": \"712106115453: Most picked\", \"compareOnce\": \"712106115453\", \"asLink\": \"712155431293\", \"chipsSelectedOnly\": true, \"linkOpens\": \"panel\", \"panelText\": \"712155431293: Your dentist sees you once or twice a year. We are there day and night, from the moment you leave the chair until you sit back down. So you can walk into every check-up ready, and out with peace of mind.\", \"closeLabel\": \"Close\"}\n                    ",
+  "onceMax": "6",
+  "stickyTryOnceQuantityAttr": true
+ },
+ "render /nl": {
+  "theme": [
+   191258984829,
+   "unpublished"
+  ],
+  "liquidErrors": [],
+  "onceCard": true,
+  "onceChecked": true,
+  "title": "Eenmalig proberen · 1 duo",
+  "stepper": true,
+  "yearLink": "Of Het Karmicare-jaar · € 354 / jaar+ € 70,80 Care Credit + €40 controlebeloning",
+  "badge": "Most picked",
+  "cta": "\n              Try once, purchase now\n\n\n  \n\n",
+  "extras": "\n                      {\"badges\": \"712106115453: Most picked\", \"compareOnce\": \"712106115453\", \"asLink\": \"712155431293\", \"chipsSelectedOnly\": true, \"linkOpens\": \"panel\", \"panelText\": \"712155431293: Your dentist sees you once or twice a year. We are there day and night, from the moment you leave the chair until you sit back down. So you can walk into every check-up ready, and out with peace of mind.\", \"closeLabel\": \"Sluiten\"}\n                    ",
+  "onceMax": "6",
+  "stickyTryOnceQuantityAttr": true
+ },
+ "render /fr": {
+  "theme": [
+   191258984829,
+   "unpublished"
+  ],
+  "liquidErrors": [],
+  "onceCard": true,
+  "onceChecked": true,
+  "title": "Essayer une fois · 1 duo",
+  "stepper": true,
+  "yearLink": "Ou L’année Karmicare · 354 € / an+ 70,80 € Care Credit + 40 € récompense contrôle",
+  "badge": "Most picked",
+  "cta": "\n              Try once, purchase now\n\n\n  \n\n\n",
+  "extras": "\n                      {\"badges\": \"712106115453: Most picked\", \"compareOnce\": \"712106115453\", \"asLink\": \"712155431293\", \"chipsSelectedOnly\": true, \"linkOpens\": \"panel\", \"panelText\": \"712155431293: Your dentist sees you once or twice a year. We are there day and night, from the moment you leave the chair until you sit back down. So you can walk into every check-up ready, and out with peace of mind.\", \"closeLabel\": \"Fermer\"}\n                    ",
+  "onceMax": "6",
+  "stickyTryOnceQuantityAttr": true
+ },
+ "buy Try once x3": {
+  "landedOn": "https://www.karmicare.com/kc-lane-test-no-checkout/checkout",
+  "cart": {
+   "attributes": {
+    "Buybox layout": "card"
+   },
+   "items": [
+    {
+     "id": 58451672170877,
+     "qty": 3,
+     "plan": null,
+     "props": {},
+     "price": 20100
+    }
+   ],
+   "total": 20100
+  }
+ },
+ "buy 60-Day": {
+  "landedOn": "https://www.karmicare.com/kc-lane-test-no-checkout/checkout?discount=Welcome%20Kit",
+  "cart": {
+   "attributes": {
+    "Buybox layout": "card",
+    "Subscription Name": "60-Day Supply"
+   },
+   "items": [
+    {
+     "id": 58451672170877,
+     "qty": 1,
+     "plan": 712106115453,
+     "props": {},
+     "price": 5900
+    },
+    {
+     "id": 58801117200765,
+     "qty": 1,
+     "plan": null,
+     "props": {
+      "_welcome_kit": "true"
+     },
+     "price": 600
+    },
+    {
+     "id": 58801116840317,
+     "qty": 1,
+     "plan": null,
+     "props": {
+      "_welcome_kit": "true"
+     },
+     "price": 600
+    },
+    {
+     "id": 42732469092534,
+     "qty": 1,
+     "plan": null,
+     "props": {
+      "_welcome_kit": "true"
+     },
+     "price": 900
+    }
+   ],
+   "total": 8000
+  }
+ },
+ "buy Year from the side panel": {
+  "landedOn": "https://www.karmicare.com/kc-lane-test-no-checkout/checkout?discount=Welcome%20Kit",
+  "cart": {
+   "attributes": {
+    "Buybox layout": "card",
+    "Subscription Name": "Year Supply"
+   },
+   "items": [
+    {
+     "id": 58451672170877,
+     "qty": 3,
+     "plan": 712155431293,
+     "props": {},
+     "price": 35400
+    },
+    {
+     "id": 58801117200765,
+     "qty": 1,
+     "plan": null,
+     "props": {
+      "_welcome_kit": "true"
+     },
+     "price": 600
+    },
+    {
+     "id": 58801116840317,
+     "qty": 1,
+     "plan": null,
+     "props": {
+      "_welcome_kit": "true"
+     },
+     "price": 600
+    },
+    {
+     "id": 42732469092534,
+     "qty": 1,
+     "plan": null,
+     "props": {
+      "_welcome_kit": "true"
+     },
+     "price": 900
+    }
+   ],
+   "total": 37500
+  }
+ },
+ "cart cleared": {
+  "attributes": {
+   "Buybox layout": "card",
+   "Subscription Name": "Year Supply"
+  },
+  "items": [],
+  "total": 0
+ }
+}
