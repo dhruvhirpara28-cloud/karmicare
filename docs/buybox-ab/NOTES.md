@@ -214,6 +214,25 @@ when the last path part is the handle (`getCurrentPathLoop`).
       panel), and the fade above it no longer covers it. Shots `candidate-en-*-day-panel-footer.png`.
     Theme Check exit 0, 19 warnings, complexity 124.
 
+19. **Calmer rings, room under the CTA, promise text, bigger kit, glass footer** (Victor, 27 Nov;
+    `preview/round2_check.py`, `shots/round2-27nov.json`):
+    - One ring rule for the selected card: 60-Day in silver, Try once a light band over its own blue
+      border. The band is softer (white at 55 %), crosses in 60 % of a 7 s cycle and rests. The Loop
+      container is `overflow: visible` with the card layout, so the cards' shadows are no longer cut.
+    - With Try once the promises row is invisible but keeps its room: CTA to "What you'll feel" 100 px
+      for Try once and for 60-Day (390 px).
+    - The Year's text (VOORSTEL, no heading): "Your dentist sees you once or twice a year. We are
+      there day and night, from the moment you leave the chair until you sit back down. So you can
+      walk into every check-up ready, and out with peace of mind." The setting takes "ID: text" or
+      "ID: heading | text".
+    - Panel image: cropped to the kit (x 154-938, y 162-835 of 1080 x 960 in both stills) in a frame
+      90 % of the panel's inner width (measured 0.900 at 390 and 1440).
+    - Panel footer: glass over the scrolling content (`--kc-mapped-surface-glass-default`, hairline
+      `--kc-mapped-border-glass-border`, blur `--kc-shape-blur-md` 20 px), as the sticky bar and the
+      professional cards; the fade is gone. Shots `candidate-en-*-panel-top.png`, `-panel-scrolled.png`,
+      `candidate-en-*-day-rings-*.png`.
+    Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

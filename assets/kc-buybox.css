@@ -435,29 +435,24 @@ html.kc-plan-dialog-open {
   overflow: auto;
   /* Scrolling to the end of the panel does not carry on to the page */
   overscroll-behavior: contain;
-  padding: var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-md);
+  /* Room at the end for the glass footer over it (its padding, the button, a gap) */
+  padding: var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg)
+    calc(var(--kc-responsive-spacing-layout-md) + var(--kc-responsive-size-button-lg-height) + 2 * var(--kc-responsive-spacing-layout-lg));
 }
 
+/* The button's footer is glass over the scrolling content (Victor, 27 Nov), as the sticky bar and the
+   professional cards: the glass fill, its hairline on top and the library's blur */
 .kc-buybox .kc-plan-dialog__footer {
-  position: relative;
-  flex: none;
-  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg);
-  /* A line in the body text colour at a quarter strength, so it shows in Day (navy on cream) and
-     Night (cream on navy); the colour scheme's foreground stayed cream on the cream panel */
-  border-top: var(--kc-shape-stroke-thin, 1px) solid color-mix(in srgb, var(--kc-mapped-text-default-body) 25%, transparent);
-  background: var(--kc-mapped-surface-page);
-}
-
-.kc-buybox .kc-plan-dialog__footer::before {
-  content: '';
   position: absolute;
   left: 0;
   right: 0;
-  /* Above the footer's top line, not over it (the containing block is the padding box) */
-  bottom: calc(100% + var(--kc-shape-stroke-thin, 1px));
-  height: var(--kc-responsive-spacing-layout-lg);
-  background: linear-gradient(to bottom, transparent, var(--kc-mapped-surface-page));
-  pointer-events: none;
+  bottom: 0;
+  z-index: 2;
+  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg);
+  border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-glass-border);
+  background: var(--kc-mapped-surface-glass-default);
+  -webkit-backdrop-filter: blur(var(--kc-shape-blur-md));
+  backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
 /* The plan's badges on top, above the image, as round pills */
@@ -546,12 +541,23 @@ html.kc-plan-dialog-open {
   to { transform: none; }
 }
 
-/* The landed still of the kit, edge to edge across the panel, under its badges */
+/* The landed still of the kit (Victor, 27 Nov: higher up and bigger, 90 % wide within the panel's
+   padding). Both stills (Awake, Asleep: 1080 x 960) hold the kit in x 154-938, y 162-835 with transparent
+   margins around it; the frame has the kit's own proportions and the image is sized and shifted so
+   exactly that part fills it (percentages of the frame's width). */
 .kc-buybox .kc-plan-dialog__image {
+  width: 90%;
+  aspect-ratio: 784 / 673;
+  margin: 0 auto var(--kc-responsive-spacing-layout-lg);
+  overflow: hidden;
+}
+
+.kc-buybox .kc-plan-dialog__image img {
   display: block;
-  width: calc(100% + 2 * var(--kc-responsive-spacing-layout-lg));
+  width: calc(100% * 1080 / 784);
+  max-width: none;
   height: auto;
-  margin: 0 calc(-1 * var(--kc-responsive-spacing-layout-lg)) var(--kc-responsive-spacing-layout-lg);
+  margin: calc(-100% * 162 / 784) 0 0 calc(-100% * 154 / 784);
 }
 
 .kc-buybox .kc-plan-dialog__close {
@@ -623,40 +629,56 @@ html.kc-plan-dialog-open {
   margin-top: 0;
 }
 
-/* The card with the silver badge ("Most picked"), selected: its border shines in silver (Victor, 27 Nov).
-   A ring on the border line only (the mask keeps the padding box out) with a light band running round;
-   still silver without motion when reduced motion is asked. The card's own border colour and Day ring
-   step aside for it. */
+/* The selected card's border shines (Victor, 27 Nov): the card with the silver badge ("Most picked") in
+   silver, the Try once card in its own blue. A ring on the border line only (the mask keeps the
+   padding box out) with a soft light band passing slowly and resting between passes; still, without
+   the band's motion, when reduced motion is asked. The 60-Day card's own border colour and Day ring
+   step aside for the silver; the Try once card keeps its blue border under a band alone. With the card
+   layout the Loop container no longer clips the cards' shadows (it is overflow: hidden in the Loop CSS). */
+.kc-buybox .loop-subscription-container.kc-once-card {
+  overflow: visible;
+}
+
 body .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked) {
   border-color: transparent;
   box-shadow: var(--kc-elevation-lg);
 }
 
-.kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before {
+.kc-once-card .loop-one-time-purchase-option-position {
+  position: relative;
+}
+
+.kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before,
+.kc-once-card .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked)::before {
   content: '';
   position: absolute;
   inset: calc(-1 * var(--kc-shape-stroke-thick, 2px));
   z-index: 1;
   padding: var(--kc-shape-stroke-thick, 2px);
   border-radius: var(--kc-shape-radius-md);
-  background:
-    linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.95) 48%, transparent 61%) 0 0 / 250% 100% no-repeat,
-    linear-gradient(160deg, #8d939b, #c9ced4 40%, #f1f3f5 50%, #c9ced4 60%, #8d939b);
+  background: var(--kc-ring-shine), var(--kc-ring-base, transparent);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
+  --kc-ring-shine: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.55) 50%, transparent 60%) 150% 0 / 250% 100% no-repeat;
+}
+
+.kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before {
+  --kc-ring-base: linear-gradient(160deg, #9aa0a8, #c9ced4 40%, #e9ecef 50%, #c9ced4 60%, #9aa0a8);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before {
-    animation: kc-silver-shine 2.8s ease-in-out infinite;
+  .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscription-group-radio:checked)::before,
+  .kc-once-card .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked)::before {
+    animation: kc-ring-shine 7s ease-in-out infinite;
   }
 }
 
-@keyframes kc-silver-shine {
-  from { background-position: 150% 0, 0 0; }
-  to { background-position: -150% 0, 0 0; }
+/* The band crosses in the first 60 % of the cycle, then rests out of sight */
+@keyframes kc-ring-shine {
+  0% { background-position: 150% 0, 0 0; }
+  60%, 100% { background-position: -150% 0, 0 0; }
 }
 
 /* An opened plan does not say a chip twice (Victor, 27 Nov): with a Care Credit chip in the card (its

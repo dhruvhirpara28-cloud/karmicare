@@ -2983,14 +2983,17 @@ function kcPlanExtras(productId) {
     extras.chipsSelectedOnly = data.chipsSelectedOnly === true;
     if (data.linkOpens === 'popup' || data.linkOpens === 'panel') extras.linkOpens = data.linkOpens;
     if (data.closeLabel) extras.closeLabel = String(data.closeLabel);
-    // "Plan popup / side panel: text per plan": "712155431293: Heading | Text" per line
+    // "Plan popup / side panel: text per plan", one line per plan
     String(data.panelText || '').split(/\r?\n/).forEach((line) => {
         const colon = line.indexOf(':');
         if (colon < 0) return;
         const planId = line.slice(0, colon).trim();
-        const [heading, ...rest] = line.slice(colon + 1).split('|');
-        const text = rest.join('|').trim();
-        if (/^\d+$/.test(planId) && (heading.trim() || text)) extras.panelText[planId] = { heading: heading.trim(), text };
+        // "ID: text", or "ID: heading | text" for a small heading above it
+        const value = line.slice(colon + 1);
+        const bar = value.indexOf('|');
+        const heading = bar < 0 ? '' : value.slice(0, bar).trim();
+        const text = (bar < 0 ? value : value.slice(bar + 1)).trim();
+        if (/^\d+$/.test(planId) && (heading || text)) extras.panelText[planId] = { heading, text };
     });
     return extras;
 }
@@ -3017,15 +3020,18 @@ function kcUpdatePlanCompare(groupEl, text) {
 
 /**
  * KC: the promises under the CTA (the buybox's icon-with-text row: 60-day guarantee, pause, free
- * shipping) are the plans' promises: with the Try once card, the row is hidden while Try once is
- * selected (Victor, 27 Nov) and back for a plan.
+ * shipping) are the plans' promises: with the Try once card, the row is invisible while Try once is
+ * selected and back for a plan (Victor, 27 Nov). It keeps its room, so the space under the CTA is the
+ * same for every plan.
  */
 function kcUpdatePromises(productId, isOneTime) {
     if (!kcOnceCard(productId)) return;
     const row = document.querySelector('.kc-buybox .icon-with-text');
     if (!row) return;
-    const display = isOneTime ? 'none' : '';
-    if (row.style.display !== display) row.style.display = display;
+    const visibility = isOneTime ? 'hidden' : '';
+    if (row.style.visibility !== visibility) row.style.visibility = visibility;
+    if (isOneTime) row.setAttribute('aria-hidden', 'true');
+    else row.removeAttribute('aria-hidden');
 }
 
 /**
@@ -3090,13 +3096,16 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
         const still = document.querySelector(`.kc-hero-animation__mode--${night ? 'pm' : 'am'}[data-still]`)
             || document.querySelector('.kc-hero-animation__mode[data-still]');
         if (still) {
+            // The kit cropped to its own edges in a frame 90 % of the panel's inner width (assets/kc-buybox.css)
+            const frame = document.createElement('div');
+            frame.className = 'kc-plan-dialog__image';
             const image = document.createElement('img');
-            image.className = 'kc-plan-dialog__image';
             image.src = still.dataset.still;
             image.alt = still.querySelector('img')?.alt || '';
             image.width = 1080;
             image.height = 960;
-            body.appendChild(image);
+            frame.appendChild(image);
+            body.appendChild(frame);
         }
     }
 

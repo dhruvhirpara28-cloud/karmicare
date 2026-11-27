@@ -216,10 +216,11 @@ footer fixed at the bottom, a line above it and the content fading out under it;
 title and price the block's text for the plan (new setting "Plan popup / side panel: text per plan").
 VOORSTEL (EN, from Victor's brief; NL/FR through source-copy):
 
-> **The Karmicare promise**
-> Your oral health partner, from the moment you leave the dentist's chair until you sit down in it
-> again. Your dentist sees you once or twice a year. We are there twice a day, every day. We help you
-> walk into every check-up ready, and out with peace of mind.
+> Your dentist sees you once or twice a year. We are there day and night, from the moment you leave
+> the chair until you sit back down. So you can walk into every check-up ready, and out with peace of
+> mind.
+
+(Second version, 27 Nov: the customer's benefit, "We are there day and night", no heading above it.)
 
 "6 duos a year (3 now, 3 in month 6), guaranteed fresh stock": the line is the Year's plan description
 in Loop admin. That edit is not the theme's: it goes live at once for every visitor (today's layout

@@ -46,12 +46,12 @@ def build_live(lang):
 
 
 # Loop block "Plan popup / side panel: text per plan" for the Year, as the lane drafted it (VOORSTEL,
-# EN, 27 Nov, from Victor's brief: oral health partner from chair to chair, dentist once or twice a year,
-# us twice a day, healthy patients in the chair, peace of mind)
+# EN, 27 Nov, from Victor's brief, second version: the customer's benefit, "We are there day and
+# night", no heading)
 PROMISE_VOORSTEL = (
-    "Your oral health partner, from the moment you leave the dentist's chair until you sit down in it "
-    "again. Your dentist sees you once or twice a year. We are there twice a day, every day. We help you "
-    "walk into every check-up ready, and out with peace of mind."
+    "Your dentist sees you once or twice a year. We are there day and night, from the moment you leave "
+    "the chair until you sit back down. So you can walk into every check-up ready, and out with peace "
+    "of mind."
 )
 
 
@@ -180,7 +180,7 @@ def build(lang, layout):
             ('panel', [panel]),
             ('candidate', [chips, panel, (
                 '"panelText": ""',
-                '"panelText": ' + json.dumps('712155431293: The Karmicare promise | ' + PROMISE_VOORSTEL, ensure_ascii=False),
+                '"panelText": ' + json.dumps('712155431293: ' + PROMISE_VOORSTEL, ensure_ascii=False),
             )]),
         ):
             variant_page = year_page
