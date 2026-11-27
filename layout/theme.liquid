@@ -91,6 +91,13 @@
       {%- endcomment -%}
       <script src="{{ 'kc-plan-select.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'karmi-add-to-cart.js' | asset_url }}" defer="defer"></script>
+      {%- comment -%} The (i) tooltips as a sheet from the bottom on a phone, wherever these templates show one {%- endcomment -%}
+      {{ 'kc-info-sheet.css' | asset_url | stylesheet_tag }}
+      <script
+        src="{{ 'kc-info-sheet.js' | asset_url }}"
+        data-close-label="{{ 'accessibility.close' | t | escape }}"
+        defer="defer"
+      ></script>
     {%- endif -%}
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>

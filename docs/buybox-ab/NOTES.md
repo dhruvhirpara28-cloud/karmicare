@@ -325,6 +325,32 @@ when the last path part is the handle (`getCurrentPathLoop`).
     - Only in the Year's side panel for now (Victor: try it there before every (i) on a phone).
     - The tooltip texts come from Loop and still hold dashes (copy lane, msg_c12815e2af50).
 
+26. **Every (i) on a phone, review, full regression** (Victor, 27 Nov: "doortrekken voor alle (i)tjes op
+    mobile", 24 px extra at the bottom; then "verifiëren of dit volledig bugvrij is en de code clean"):
+    - `assets/kc-info-sheet.js` + `.css`, loaded by `layout/theme.liquid` with the Loop widget (product,
+      index, article): every `.info-tip` with a popover is a button on a phone and opens the sheet (pills in
+      the plan cards, receipt rows, comparison tables, the Year panel). Bottom padding 20 + 24 px. The
+      Year-only code left `loop-widget.js` and `kc-buybox.css`; the side panel's slide-down uses
+      `KCSheet.close`. From 750 px nothing changes (the tables' own tap toggle works up to 768 px as before).
+    - `preview/sheet_check.py`, `shots/sheets.json`, EN + NL at 390: 6 visible (i)s on the page + 2 in the
+      panel, each opens with its words as heading, 15 px text, the page locked, closes on a tap outside
+      and on Esc, focus back on its own (i); the panel stays open under it. At 1440: no sheet, the panel
+      closes at once.
+    - Fixed on the way: a closed sheet's late `close` event could unlock the page or take focus while the
+      next one was open (now ignored when open again; the (i) has focus before the sheet opens, so the
+      browser gives it back). On desktop the side panel waited 0.4 s before closing (its opening animation
+      was taken for a closing one).
+    - Code review (`/code-review high`, main...HEAD): fixed the sticky bar using the card-only button text
+      in the link layout too, the "Plan badges" help text (still said ribbon), a joined attribute line.
+      Open, not code: NL/FR of the three new setting texts (copy lane), Terms for Try once above 1 Duo,
+      "Most picked" needs data (legal); kc-gallery.css translate note is merchant-edit's commit 468ce3a.
+    - Regression: qty, memory, sticky, year_attr checks as before; switch on Link = live (probe same,
+      pixels 0 % at 390 and 1440 Day, 0.007 % 1440 Night); Awake/Asleep same as live (only the live
+      cross-origin "Script error." twice). Test theme 191258984829 updated: EN/NL/FR render without Liquid
+      errors, real cart Try once x3 / 60-Day / Year from the panel as in result 24, the sheet loads there
+      (close label "Close", 4 decorated (i)s, opens). `node --check` on the changed scripts; Theme Check
+      exit 0, 19 warnings.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

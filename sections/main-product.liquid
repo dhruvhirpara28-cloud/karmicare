@@ -160,7 +160,8 @@
                     data-active-plan="once"
                     data-kc-once-layout="{{ loop_block.settings.try_once_layout | default: 'link' | escape }}"
                     data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
-                    data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"                    data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
+                    data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"
+                    data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
                     data-kc-once-max="{{ loop_block.settings.try_once_max_quantity | default: 1 }}"
                     data-kc-title-many="{{ 'kc.sticky_cart.title_year_html' | t | escape }}"
                     data-kc-qty-label="{{ 'products.product.quantity.label' | t | escape }}"
@@ -3000,7 +3001,7 @@
           "type": "textarea",
           "id": "plan_badges",
           "label": "Plan badges (card on top only)",
-          "info": "Shown only with \"Try once: card on top\", as a ribbon over the card's top edge. One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
+          "info": "Shown only with \"Try once: card on top\", at the bottom right of the plan's card in the look of the Year's badge, with a silver shine. One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
         },
         {
           "type": "checkbox",

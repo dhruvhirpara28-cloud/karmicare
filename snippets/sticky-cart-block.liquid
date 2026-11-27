@@ -399,9 +399,12 @@
       bar.querySelector('[data-sc-row="guarantee"]').hidden = plain;
       setText('stop', state.type === 'year' ? copy.stop_year : copy.stop_rhythm);
       bar.querySelector('[data-sc-row="stop"]').hidden = once;
-      // Try once: the buybox's own button text (Loop block "Try once: button text", default this same key)
+      // Try once as the card on top: the buybox's own button text (Loop block "Try once: button text (card
+      // on top only)"); with the link under the cards, this block's own text as before
       var onceContainer = state.type === 'once' && document.getElementById('kc-try-once-container-' + cfg.productId);
-      var onceCta = onceContainer ? onceContainer.getAttribute('data-kc-once-cta') || '' : '';
+      var onceCta = onceContainer && onceContainer.getAttribute('data-kc-once-layout') === 'card'
+        ? onceContainer.getAttribute('data-kc-once-cta') || ''
+        : '';
       setText('cta', plain ? cfg.buttonText || '' : onceCta || copy['cta_' + state.type]);
       // Try once only where one time can be bought: not on subscription-only products
       // With a plan selected, the link offers what the Try once card shows: its chosen quantity (Victor,

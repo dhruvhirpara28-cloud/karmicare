@@ -292,7 +292,7 @@ What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_ch
 
 | # | Where | What | Who |
 |---|---|---|---|
-| 1 | Terms (legal) | The Terms say "Try Once is a single duo without renewal" and the 14-day guarantee is for "the duo". More Duos per Try once order needs those clauses changed (guarantee per order or per Duo, "one money-back guarantee per customer"). Until then the maximum stays 1. | legal lane via desk, Victor |
+| 1 | Terms (legal) | The Terms say "Try Once is a single duo without renewal" and the 14-day guarantee is for "the duo". More Duos per Try once order needs those clauses changed (guarantee per order or per Duo, "one money-back guarantee per customer"). Victor set the maximum to 6 for the MVP (27 Nov, 4f): the Terms change has to be live before or with it. | legal lane via desk, Victor |
 | 2 | Shopify admin, shipping | Try once pays shipping by zone; check that the rates still fit 2 to 4 Duos (weight or price tiers). Read only from here. | Victor |
 | 3 | Shopify admin, inventory | Above the Duo's stock Shopify refuses the add; the buybox shows Shopify's message and keeps the earlier cart. Set the maximum below normal stock. | Victor |
 | 4 | Loop, nothing to change | One-time lines are not Loop subscriptions; Loop Loyalty gives no Care Credit on them; the Welcome Kit and Subscription Name stay on plans only (verified). | none |
@@ -306,7 +306,7 @@ What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_ch
 
 | Area | Item |
 |---|---|
-| Theme editor (Victor, live theme) | Loop block: "Try once" card on top; "Plan chips: selected card only" on; "Plans as a link" `712155431293`; "Plan link opens" side panel; "Plan badges" `712106115453: Most picked`; "One-time price struck through" `712106115453`; "Try once: button text" "Try once, purchase now"; "Plan popup / side panel: text per plan" (the promise); "Try once: maximum quantity" (1 until #1 above). The editor writes `templates/product.subscription-item.json` in the live theme: main must take it back. |
+| Theme settings | In git since 27 Nov (4f): `templates/product.subscription-item.json` holds the MVP values, maximum 6. |
 | Loop admin (Victor or a lane with that go) | Year description "6 duos a year (3 now, 3 in month 6), guaranteed fresh stock" + Loop Multilingual NL/FR (goes live at once for everyone); the dashes in the Care Credit tooltips (copy lane). |
 | Copy lane via desk | NL/FR: the promise text, "Try once, purchase now", "Most picked"; the dashes (product description, tooltips), sent 27 Nov. |
 | Legal | Struck "€67" next to "€59" (two current offers, not a reduction); "Most picked" needs order data behind it; "guaranteed fresh stock" is a promise for the month 6 delivery; Try once quantity vs the Terms (#1). |

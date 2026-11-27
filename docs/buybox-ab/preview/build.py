@@ -150,7 +150,9 @@ def build(lang, layout):
     cta_line = "setText('cta', plain ? cfg.buttonText || '' : copy['cta_' + state.type]);"
     assert page.count(cta_line) == 1, 'sticky cta line'
     page = page.replace(cta_line, "var onceContainer = state.type === 'once' && document.getElementById('kc-try-once-container-' + cfg.productId);\n"
-                        "      var onceCta = onceContainer ? onceContainer.getAttribute('data-kc-once-cta') || '' : '';\n"
+                        "      var onceCta = onceContainer && onceContainer.getAttribute('data-kc-once-layout') === 'card'\n"
+                        "        ? onceContainer.getAttribute('data-kc-once-cta') || ''\n"
+                        "        : '';\n"
                         "      setText('cta', plain ? cfg.buttonText || '' : onceCta || copy['cta_' + state.type]);", 1)
     try_set = "setText('try-once', tryOnceText);"
     assert page.count(try_set) == 1, 'sticky try once set'
@@ -160,6 +162,7 @@ def build(lang, layout):
         pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'
         page, count = re.subn(pattern, f'/assets/{name}?lane=buybox-ab', page)
         assert count >= 1, name
+    page = with_info_sheet(page, sticky['close'])
 
     # Everything else from the live store
     page = page.replace('"//www.karmicare.com/', '"https://www.karmicare.com/')
@@ -229,6 +232,15 @@ def build(lang, layout):
 ERRORS = '<script>window.__errs = []; addEventListener("error", (e) => window.__errs.push(String(e.message)));</script>'
 
 
+def with_info_sheet(page, close_label):
+    """The lane's new files as layout/theme.liquid loads them on product, index and article pages: the (i)
+    sheet on a phone (assets/kc-info-sheet.css / .js, Victor 27 Nov)."""
+    tags = ('<link rel="stylesheet" href="/assets/kc-info-sheet.css?lane=buybox-ab">'
+            f'<script src="/assets/kc-info-sheet.js?lane=buybox-ab" data-close-label="{html.escape(close_label, quote=True)}" defer="defer"></script>')
+    assert page.count('</head>') == 1, 'head'
+    return page.replace('</head>', tags + '</head>', 1)
+
+
 def build_single(handle, pid, lane):
     """Awake / Asleep (templates/product.json, no Loop block): live as is, or with the lane's assets and
     the container attributes main-product.liquid renders without a Loop block (layout 'link', blank note).
@@ -244,6 +256,7 @@ def build_single(handle, pid, lane):
         for name in ASSETS:
             pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'
             page = re.sub(pattern, f'/assets/{name}?lane=buybox-ab', page)
+        page = with_info_sheet(page, en['close'])
     page = page.replace('<head>', '<head>' + ERRORS, 1)
     page = page.replace('"//www.karmicare.com/', '"https://www.karmicare.com/')
     page = page.replace(' //www.karmicare.com/', ' https://www.karmicare.com/')
@@ -259,7 +272,7 @@ def build_single(handle, pid, lane):
 for handle, pid in (('awake-morning-toothpaste-2-0', '16060347875709'), ('asleep-evening-toothpaste-2-0', '16060345450877')):
     print(build_single(handle, pid, False))
     print(build_single(handle, pid, True))
-for name in ASSETS:
+for name in ASSETS + ['kc-info-sheet.css', 'kc-info-sheet.js']:
     shutil.copy(WORKTREE / 'assets' / name, SERVE / 'assets' / name)
 shutil.copy(Path(__file__).with_name('copy-overlay.js'), SERVE / 'assets' / 'copy-overlay.js')
 for lang in PAGES:

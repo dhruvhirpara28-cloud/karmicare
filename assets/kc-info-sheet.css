@@ -1,0 +1,132 @@
+/* The (i) tooltips' sheet on a phone (assets/kc-info-sheet.js, Victor 27 Nov): a small sheet from the
+   bottom, body text size, the words next to the (i) as its heading, a handle on top. A tap outside it
+   closes it; it slides down first (.is-closing). 24 px more room at the bottom than at the sides
+   (Victor, 27 Nov). */
+.kc-info-sheet {
+  margin: auto 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 70dvh;
+  border: none;
+  background: transparent;
+  overflow: visible;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-info-sheet::backdrop {
+  background: rgba(25, 31, 56, 0.2);
+}
+
+.kc-info-sheet__inner {
+  position: relative;
+  box-sizing: border-box;
+  max-height: 70dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-lg)
+    calc(var(--kc-responsive-spacing-layout-lg) + var(--kc-responsive-spacing-layout-xl) + env(safe-area-inset-bottom, 0px));
+  border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-md) var(--kc-shape-radius-md) 0 0;
+  background: var(--kc-mapped-surface-page);
+  box-shadow: var(--kc-elevation-lg);
+  text-align: left;
+}
+
+/* Focused on opening (assets/kc-info-sheet.js) only to be read first: no ring around the whole sheet */
+.kc-info-sheet__inner:focus {
+  outline: none;
+}
+
+.kc-info-sheet__handle {
+  display: block;
+  width: 36px;
+  height: 4px;
+  margin: 0 auto var(--kc-responsive-spacing-layout-md);
+  border-radius: var(--kc-shape-radius-full, 999px);
+  background: var(--kc-mapped-border-primary-default);
+}
+
+.kc-info-sheet__heading {
+  margin: 0 0 var(--kc-responsive-spacing-layout-xs);
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  font-weight: var(--font-700-weight, 700);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--kc-mapped-text-default-heading);
+}
+
+.kc-info-sheet__text p {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  line-height: var(--kc-responsive-body-sm-line-height);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-info-sheet__text p + p {
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+/* For keyboards and screen readers only: out of sight until it has keyboard focus */
+.kc-info-sheet__close {
+  position: absolute;
+  top: var(--kc-responsive-spacing-layout-xs);
+  right: var(--kc-responsive-spacing-layout-sm);
+  padding: var(--kc-responsive-spacing-layout-xxs) var(--kc-responsive-spacing-layout-xs);
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-full, 999px);
+  background: var(--kc-mapped-surface-page);
+  color: var(--kc-mapped-text-default-heading);
+  font-size: var(--kc-responsive-body-sm-text-size);
+  clip-path: inset(50%);
+  opacity: 0;
+}
+
+.kc-info-sheet__close:focus-visible {
+  clip-path: none;
+  opacity: 1;
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: 2px;
+}
+
+/* The page behind stays put while the sheet is open */
+html.kc-info-sheet-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+@keyframes kc-info-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+
+@keyframes kc-info-sheet-out {
+  from { transform: none; }
+  to { transform: translateY(100%); }
+}
+
+/* On a phone, with the script running (html.kc-info-sheets): the sheet instead of the hover popover */
+@media screen and (max-width: 749px) {
+  html.kc-info-sheets .info-tip .info-tip-popover {
+    display: none;
+  }
+
+  html.kc-info-sheets .info-tip[data-kc-sheet] {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+  .kc-info-sheet[open] .kc-info-sheet__inner {
+    animation: kc-info-sheet-in 0.25s ease-out;
+  }
+
+  .kc-info-sheet.is-closing .kc-info-sheet__inner {
+    animation: kc-info-sheet-out 0.25s ease-in forwards;
+  }
+}

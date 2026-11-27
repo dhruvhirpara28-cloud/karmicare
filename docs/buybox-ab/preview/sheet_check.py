@@ -1,8 +1,10 @@
-"""/candidate/: the Year's side panel as a sheet from the bottom on a phone, and its (i)s as small sheets
-(Victor, 27 Nov). At 390 (EN, NL): the panel's animation and place, each (i) opens a sheet with the chip's
-words and the tooltip text in body size, a click outside closes it after sliding down, focus back on the
-(i), Esc closes it too; the panel slides down on its close button. At 1440: the side panel as before and
-an (i) opens no sheet. Screenshots. Usage: python3 -I sheet_check.py <page-id> <port> <shots> <out.json>"""
+"""/candidate/: the (i) sheet on a phone for every (i) on the Duo page (Victor, 27 Nov: first the Year's side
+panel, then all of them), and the Year's side panel as a sheet from the bottom. At 390 (EN, NL), with
+60-Day selected so its pill and the receipt rows show: every visible (i) on the page and the two in the
+side panel open the sheet (heading = the words next to the (i), text at body size, 24 px extra room at the
+bottom), a click outside closes it after sliding down, focus back on the (i); Esc too; the panel slides
+down on its close button. At 1440: no sheet, a comparison table's (i) still toggles its popover, the side
+panel comes from the right. Screenshots. Usage: python3 -I sheet_check.py <page-id> <port> <shots> <out.json>"""
 import json
 import shutil
 import subprocess
@@ -12,24 +14,22 @@ from pathlib import Path
 
 PAGE, PORT, SHOTS, OUT = sys.argv[1], sys.argv[2], Path(sys.argv[3]), Path(sys.argv[4])
 URL = 'http://127.0.0.1:{port}/candidate/{lang}/products/karmicare-biorhythmic-oral-care-system'
-PANEL = r"""JSON.stringify((() => {
-  const d = document.querySelector('.kc-buybox dialog.kc-plan-dialog');
-  const inner = d.querySelector('.kc-plan-dialog__inner'), r = inner.getBoundingClientRect();
-  return { open: d.open, animation: getComputedStyle(inner).animationName, rect: [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.bottom)],
-    viewport: [innerWidth, innerHeight], radius: getComputedStyle(inner).borderTopLeftRadius,
-    tips: d.querySelectorAll('.info-tip[role=button]').length };
-})())"""
+TIPS = r"""(() => { window.__tips = Array.from(document.querySelectorAll('.info-tip')).filter((t) => t.querySelector('.info-tip-popover') && t.checkVisibility() && !t.closest('dialog'));
+  return JSON.stringify(window.__tips.map((t) => [t.getAttribute('aria-label'), t.getAttribute('role'), t.closest('.kc-pricing-summary') ? 'receipt' : t.closest('.loop-subscription-group') ? 'plan card' : t.closest('[class*="compare"]') ? 'comparison' : 'other'])); })()"""
 SHEET = r"""JSON.stringify((() => {
-  const s = document.querySelector('.kc-buybox dialog.kc-info-sheet');
-  if (!s) return { sheet: null };
-  const inner = s.querySelector('.kc-info-sheet__inner'), r = inner.getBoundingClientRect();
-  const p = s.querySelector('.kc-info-sheet__text p');
-  return { open: s.open, animation: getComputedStyle(inner).animationName, rect: [Math.round(r.top), Math.round(r.width), Math.round(r.bottom)],
-    heading: s.querySelector('.kc-info-sheet__heading').textContent, text: s.querySelector('.kc-info-sheet__text').textContent.trim().slice(0, 90),
-    textSize: p && getComputedStyle(p).fontSize, popoverShown: Array.from(document.querySelectorAll('.kc-plan-dialog .info-tip-popover')).some((x) => x.checkVisibility()) };
+  const s = document.querySelector('dialog.kc-info-sheet');
+  if (!s || !s.open) return { open: false };
+  const inner = s.querySelector('.kc-info-sheet__inner'), p = s.querySelector('.kc-info-sheet__text p');
+  const cs = getComputedStyle(inner);
+  return { open: true, inBody: s.parentElement === document.body, animation: cs.animationName, paddingBottom: cs.paddingBottom, paddingSide: cs.paddingLeft,
+    heading: (s.querySelector('.kc-info-sheet__heading') || {}).textContent || '', text: s.querySelector('.kc-info-sheet__text').textContent.trim().slice(0, 70),
+    textSize: p && getComputedStyle(p).fontSize, pageLocked: getComputedStyle(document.documentElement).overflow === 'hidden',
+    popoverShown: Array.from(document.querySelectorAll('.info-tip-popover')).some((x) => getComputedStyle(x).display !== 'none' && getComputedStyle(x).visibility === 'visible' && getComputedStyle(x).opacity !== '0') };
 })())"""
-STATE = r"""JSON.stringify({ sheetOpen: !!(document.querySelector('.kc-info-sheet') || {}).open, panelOpen: document.querySelector('.kc-buybox dialog.kc-plan-dialog').open,
-  focus: document.activeElement ? document.activeElement.className + ' ' + (document.activeElement.getAttribute('aria-label') || '') : '' })"""
+STATE = r"""JSON.stringify({ sheetOpen: !!(document.querySelector('dialog.kc-info-sheet') || {}).open, panelOpen: !!(document.querySelector('.kc-buybox dialog.kc-plan-dialog') || {}).open,
+  focusOnTip: !!(document.activeElement && document.activeElement.classList.contains('info-tip')), focus: document.activeElement ? (document.activeElement.getAttribute('aria-label') || document.activeElement.className) : '' })"""
+OUTSIDE = "document.querySelector('dialog.kc-info-sheet').dispatchEvent(new MouseEvent('click', { bubbles: true }))"
+RADIO = "(() => { const r = Array.from(document.querySelectorAll('.kc-buybox input[name=loop_purchase_option]')).filter((x) => x.closest('.loop-one-time-purchase-option-position, .loop-subscription-group').checkVisibility()); r[1].click(); return 1; })()"
 
 
 def orca(*args):
@@ -51,48 +51,76 @@ def shot(name):
     shutil.copy(orca('screenshot')['result']['path'], SHOTS / name)
 
 
-def tip(index):
-    return f"document.querySelectorAll('.kc-buybox dialog.kc-plan-dialog .info-tip[role=button]')[{index}]"
-
-
-result = {}
-for lang, width in (('en', 390), ('nl', 390), ('en', 1440)):
+def load(lang, width):
     orca('goto', '--url', URL.format(port=PORT, lang=lang))
     view(width)
     for _ in range(6):
         orca('screenshot')
-    time.sleep(2.5)
-    key = f'{lang} {width}'
-    ev("document.querySelector('.kc-buybox .kc-plan-link__btn').click()")
-    result[f'{key} panel'] = ev(PANEL)
+    time.sleep(3)
+
+
+def open_close(key, tip, shoot=None):
+    ev(f"{tip}.scrollIntoView({{ block: 'center' }})")
+    ev(f"{tip}.click()")
+    result[key] = ev(SHEET)
+    time.sleep(0.4)
+    if shoot:
+        view(390)
+        shot(shoot)
+    ev(OUTSIDE)
+    result[key]['closing'] = ev("document.querySelector('dialog.kc-info-sheet').classList.contains('is-closing')")
     time.sleep(0.6)
-    view(width)
-    shot(f'candidate-{lang}-{width}-day-sheet-panel.png')
-    tips = result[f'{key} panel']['tips']
-    for index in range(tips):
-        ev(f"{tip(index)}.scrollIntoView({{ block: 'center' }})")
-        ev(f"{tip(index)}.click()")
-        result[f'{key} (i) {index + 1}'] = ev(SHEET)
-        time.sleep(0.5)
-        if index == 0 and width < 750:
-            view(width)
-            shot(f'candidate-{lang}-{width}-day-info-sheet.png')
-        if width < 750:
-            # A click outside the sheet's content is a click on the sheet element itself
-            ev("document.querySelector('.kc-info-sheet').dispatchEvent(new MouseEvent('click', { bubbles: true }))")
-            result[f'{key} (i) {index + 1} closing'] = ev("document.querySelector('.kc-info-sheet').classList.contains('is-closing')")
-            time.sleep(0.6)
-            result[f'{key} (i) {index + 1} after outside click'] = ev(STATE)
-    if width < 750 and tips:
-        ev(f"{tip(0)}.click()")
-        time.sleep(0.4)
-        ev("document.querySelector('.kc-info-sheet').dispatchEvent(new Event('cancel', { cancelable: true }))")
-        time.sleep(0.6)
-        result[f'{key} Esc on the (i) sheet'] = ev(STATE)
-        ev("document.querySelector('.kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__close').click()")
-        result[f'{key} panel closing'] = ev("document.querySelector('.kc-buybox dialog.kc-plan-dialog').classList.contains('is-closing')")
-        time.sleep(0.6)
-        result[f'{key} panel after close'] = ev(STATE)
+    result[key]['after outside click'] = ev(STATE)
+
+
+result = {}
+for lang in ('en', 'nl'):
+    load(lang, 390)
+    ev(RADIO)
+    time.sleep(1.5)
+    tips = ev(TIPS)
+    result[f'{lang} 390 visible (i)s'] = tips
+    for index, (label, _role, where) in enumerate(tips):
+        open_close(f'{lang} 390 (i) {index + 1} {where}', f'window.__tips[{index}]',
+                   f'candidate-{lang}-390-day-info-sheet-{where.replace(" ", "-")}.png' if index == 0 or where == 'comparison' else None)
+    ev(f'window.__tips[0].click()')
+    time.sleep(0.4)
+    ev("document.querySelector('dialog.kc-info-sheet').dispatchEvent(new Event('cancel', { cancelable: true }))")
+    time.sleep(0.6)
+    result[f'{lang} 390 Esc'] = ev(STATE)
+    # The Year's side panel and its (i)s
+    ev("window.scrollTo(0, 0)")
+    ev("document.querySelector('.kc-buybox .kc-plan-link__btn') ? document.querySelector('.kc-buybox .kc-plan-link__btn').click() : null")
+    time.sleep(0.3)
+    result[f'{lang} 390 panel animation'] = ev("getComputedStyle(document.querySelector('.kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__inner')).animationName")
+    count = int(ev("String(document.querySelectorAll('.kc-buybox dialog.kc-plan-dialog .info-tip').length)"))
+    for index in range(count):
+        open_close(f'{lang} 390 panel (i) {index + 1}', f"document.querySelectorAll('.kc-buybox dialog.kc-plan-dialog .info-tip')[{index}]",
+                   f'candidate-{lang}-390-day-info-sheet-panel.png' if index == 0 else None)
+        result[f'{lang} 390 panel (i) {index + 1}']['panel still open'] = ev("document.querySelector('.kc-buybox dialog.kc-plan-dialog').open")
+    ev("document.querySelector('.kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__close').click()")
+    result[f'{lang} 390 panel closing'] = ev("document.querySelector('.kc-buybox dialog.kc-plan-dialog').classList.contains('is-closing')")
+    time.sleep(0.6)
+    result[f'{lang} 390 panel after close'] = ev(STATE)
+
+load('en', 1440)
+ev(RADIO)
+time.sleep(1.5)
+tips = ev(TIPS)
+result['en 1440 visible (i)s'] = tips
+compare = next((i for i, t in enumerate(tips) if t[2] == 'comparison'), None)
+if compare is not None:
+    ev(f"window.__tips[{compare}].scrollIntoView({{ block: 'center' }})")
+    ev(f"window.__tips[{compare}].click()")
+    result['en 1440 comparison (i) click'] = ev(f"JSON.stringify({{ activeTip: window.__tips[{compare}].classList.contains('active-tip'), sheet: !!(document.querySelector('dialog.kc-info-sheet') || {{}}).open }})")
+ev("window.__tips[0].click()")
+result['en 1440 first (i) click'] = ev("JSON.stringify({ sheet: !!(document.querySelector('dialog.kc-info-sheet') || {}).open })")
+ev("window.scrollTo(0, 0)")
+ev("document.querySelector('.kc-buybox .kc-plan-link__btn').click()")
+time.sleep(0.2)
+result['en 1440 panel animation'] = ev("getComputedStyle(document.querySelector('.kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__inner')).animationName")
+ev("document.querySelector('.kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__close').click()")
+result['en 1440 panel closed at once'] = ev("!document.querySelector('.kc-buybox dialog.kc-plan-dialog').open")
 for key, value in result.items():
     print(key, json.dumps(value, ensure_ascii=False))
 OUT.write_text(json.dumps(result, indent=1, ensure_ascii=False))
