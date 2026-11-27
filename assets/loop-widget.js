@@ -3087,17 +3087,16 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     close.setAttribute('aria-label', extras.closeLabel);
     close.addEventListener('click', () => dialog.close());
 
-    // The plan's badge ("Brushing & Beyond") as a strip across the top of the dialog, hanging there
-    // with rounded inner corners, the close button in it (Victor, 27 Nov). Without a badge the close
-    // button sits alone at the top right.
+    // The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, no badge look, next to
+    // the close button (Victor, 27 Nov). Without a badge the close button sits alone at the top right.
     const badgeText = groupEl.querySelector('.kc-bottom_label .kc-testimonial-button, .kc-plan-badge .kc-testimonial-button');
     if (badgeText && badgeText.textContent.trim()) {
         const header = document.createElement('div');
-        header.className = `kc-plan-dialog__header ${badgeText.className}`;
-        const label = document.createElement('span');
-        label.className = 'kc-plan-dialog__header-label';
-        label.textContent = badgeText.textContent.trim();
-        header.appendChild(label);
+        header.className = 'kc-plan-dialog__header';
+        const heading = document.createElement('p');
+        heading.className = 'kc-plan-dialog__header-title';
+        heading.textContent = badgeText.textContent.trim();
+        header.appendChild(heading);
         header.appendChild(close);
         inner.appendChild(header);
     } else {
@@ -3267,10 +3266,12 @@ function kcOnceTitleFor(title, many, quantity) {
 
 window.KCOnceQuantity = { get: kcOnceQuantity, titleFor: kcOnceTitleFor };
 
-// KC: the − / + control on the Try once card while it is selected (assets/kc-buybox.css .kc-once-stepper)
+// KC: the − / + control on the Try once card while it is selected, in the card's row before the price
+// (assets/kc-buybox.css .kc-once-stepper)
 function kcUpdateOnceStepper(productId, variant, text, texts) {
     const max = kcOnceMax(productId);
-    let stepper = text.querySelector('.kc-once-stepper');
+    const option = text.closest('.loop-one-time-purchase-option') || text.parentElement;
+    let stepper = option.querySelector('.kc-once-stepper');
     if (max <= 1) {
         if (stepper) stepper.remove();
         const input = kcOnceQuantityInput(productId, false);
@@ -3295,9 +3296,9 @@ function kcUpdateOnceStepper(productId, variant, text, texts) {
             updateKcPricingSummary(productId, current);
             document.dispatchEvent(new CustomEvent('kc:once-quantity', { detail: { productId, quantity: next } }));
         });
-        const plan = text.querySelector('.kc-plan-subrow');
-        if (plan) plan.after(stepper);
-        else text.appendChild(stepper);
+        // In the card's own row, before the price: on the title line on wider screens, next to the pill
+        // on a phone (assets/kc-buybox.css)
+        option.insertBefore(stepper, option.querySelector(':scope > .loop-one-time-purchase-option-price-container'));
     }
     // With a plan selected the field is back at 1: every other one-time path that sends the buybox form
     // (the sticky bar's "Try once for €67", the comparison tables' Try once) buys the one Duo it shows

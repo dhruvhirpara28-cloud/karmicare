@@ -249,6 +249,21 @@ when the last path part is the handle (`getCurrentPathLoop`).
     - The dashes (product description EN/NL/FR, Loop tooltips, receipt tooltip) went to the desk for the
       copy lane (message msg_c12815e2af50).
 
+21. **Stepper in the card's row, panel title** (Victor, 27 Nov), `preview/stepper_check.py`,
+    `shots/stepper.json`, at quantity 3:
+    - From 750 px the stepper sits on the title line, 8 px before the price (EN and NL title on one
+      line at 1440; the price column takes only its own width now). On a phone title, stepper and price
+      do not fit one line (288 px for 322), so the stepper sits at the right of the €0 pill's row,
+      20 px from the card edge, and the pill takes the rest (EN and NL at 390).
+    - Fixed on the way: the stepper was looked up in the title column after it moved, so every Loop
+      update added another one. It is looked up in the card row now; one stepper.
+    - Side panel: no gold strip. "Brushing & Beyond" is a plain title (h5 size, bold) with the close
+      button (44 x 44, focused on opening) on its line; the image starts right under it (60 px from
+      the top at 390, 64 at 1440). Shots `candidate-{en,nl}-{390,1440}-day-stepper.png`,
+      `candidate-en-*-day-panel-title.png`.
+    - `qty_check.py` re-run: Try once x3 adds one line quantity 3, 60-Day adds the plan at 1 with the
+      kit. Theme Check exit 0, 19 warnings.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

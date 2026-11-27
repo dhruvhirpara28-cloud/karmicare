@@ -455,29 +455,32 @@ html.kc-plan-dialog-open {
   backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
-/* The plan's badge as a strip across the top of the dialog, hanging with its inner (bottom) corners
-   rounded, the close button in it (Victor, 27 Nov). It keeps the badge's own look (gold or silver
-   gradient, its text colour) from .kc-testimonial-button; only size and shape change here (body and
-   dialog in the selector: above the badge's Night rule). */
-body .kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__header.kc-testimonial-button {
-  position: relative;
-  z-index: 2;
+/* The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, plain, the close button
+   beside it (Victor, 27 Nov); the image follows right under it */
+.kc-buybox .kc-plan-dialog__header {
   flex: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--kc-responsive-spacing-layout-sm);
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 56px;
-  margin: 0;
-  padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-lg);
-  border-radius: 0 0 var(--kc-shape-radius-md) var(--kc-shape-radius-md);
-  text-align: left;
+  padding: var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-sm) 0 var(--kc-responsive-spacing-layout-lg);
 }
 
-/* The close button in the strip: the strip's text colour on its gold or silver, a 44 px target and a
-   clear focus ring */
+/* The image right under the title */
+.kc-buybox .kc-plan-dialog__header + .kc-plan-dialog__body {
+  padding-top: var(--kc-responsive-spacing-layout-xs);
+}
+
+.kc-buybox .kc-plan-dialog__header-title {
+  margin: 0;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-responsive-h5-text-size);
+  line-height: 1.2;
+  font-weight: var(--font-700-weight, 700);
+  color: var(--kc-buybox-text);
+}
+
+/* The close button beside the title: a 44 px target and a clear focus ring */
 .kc-buybox .kc-plan-dialog__header .kc-plan-dialog__close {
   position: relative;
   top: auto;
@@ -485,9 +488,6 @@ body .kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__header.kc-testimonial-but
   flex: none;
   width: 44px;
   height: 44px;
-  border: var(--kc-shape-stroke-thin, 1px) solid currentColor;
-  background: transparent;
-  color: inherit;
 }
 
 .kc-buybox .kc-plan-dialog__close:focus-visible {
@@ -632,15 +632,58 @@ body .kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__header.kc-testimonial-but
 
 
 /* The Try once quantity (Loop block "Try once: maximum quantity", assets/loop-widget.js
-   kcUpdateOnceStepper): a − / + pill under the sub-row while Try once is selected (Victor, 27 Nov) */
+   kcUpdateOnceStepper): a − / + pill while Try once is selected, in the card's own row, never a row of
+   its own (Victor, 27 Nov). From 750 px it sits on the title line, right before the price; on a phone
+   title, stepper and price do not fit one line (288 px for 322), so it sits at the right of the pill's
+   row, the pill taking the rest. */
 .kc-once-card .kc-once-stepper {
   display: inline-flex;
-  align-self: flex-start;
+  flex: none;
   align-items: center;
-  margin-top: var(--kc-responsive-spacing-layout-xs);
+  height: 32px;
   border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
   border-radius: var(--kc-shape-radius-full, 999px);
   background: var(--kc-buybox-surface-chip, transparent);
+}
+
+/* The price column at its own width (Loop gives it flex: 1), so the title keeps the room the stepper
+   does not take ("Eenmalig proberen · 3 duo's" on one line at 1440) */
+.kc-once-card .loop-one-time-purchase-option:has(> .kc-once-stepper) > .loop-one-time-purchase-option-price-container {
+  flex: none;
+}
+
+@media screen and (min-width: 750px) {
+  .kc-once-card .kc-once-stepper {
+    align-self: flex-start;
+    /* Centred on the title's first line */
+    margin: calc((var(--kc-responsive-body-lg-line-height) - 32px) / 2) var(--kc-responsive-spacing-layout-xs) 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .kc-once-card .loop-one-time-purchase-option > .kc-once-stepper {
+    order: 5;
+    align-self: center;
+    margin: var(--kc-responsive-spacing-layout-xs) 0 0 var(--kc-responsive-spacing-layout-xs);
+  }
+
+  .kc-once-card .loop-one-time-purchase-option > .kc-once-chips {
+    order: 4;
+  }
+
+  /* A full-width break before the pill's row, so title and price keep the first row to themselves */
+  .kc-once-card .loop-one-time-purchase-option:has(> .kc-once-stepper)::after {
+    content: '';
+    order: 3;
+    flex: 0 0 100%;
+    height: 0;
+  }
+
+  /* The pill shares its row with the stepper while both show */
+  .kc-once-card .loop-one-time-purchase-option-position:has(.loop-one-time-purchase-option-radio:checked) .loop-one-time-purchase-option:has(> .kc-once-stepper) > .kc-once-chips {
+    flex: 1 1 calc(100% - 96px - var(--kc-responsive-spacing-layout-xs));
+    min-width: 0;
+  }
 }
 
 .kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-stepper {
@@ -649,8 +692,8 @@ body .kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__header.kc-testimonial-but
 
 .kc-once-card .kc-once-stepper__button {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: 0;
   border-radius: 50%;
