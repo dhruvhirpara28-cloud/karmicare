@@ -410,13 +410,84 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   background: rgba(25, 31, 56, 0.45);
 }
 
+/* A scrolling body and a footer with the button, fixed at the bottom (Victor, 27 Nov): a line above the
+   footer, and the body fading out under it */
 .kc-buybox .kc-plan-dialog__inner {
   position: relative;
   box-sizing: border-box;
-  overflow: auto;
-  padding: var(--kc-responsive-spacing-layout-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: var(--kc-mapped-surface-page);
   box-shadow: var(--kc-elevation-lg);
+}
+
+.kc-buybox .kc-plan-dialog__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-md);
+}
+
+.kc-buybox .kc-plan-dialog__footer {
+  position: relative;
+  flex: none;
+  padding: var(--kc-responsive-spacing-layout-md) var(--kc-responsive-spacing-layout-lg) var(--kc-responsive-spacing-layout-lg);
+  border-top: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  background: var(--kc-mapped-surface-page);
+}
+
+.kc-buybox .kc-plan-dialog__footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: var(--kc-responsive-spacing-layout-lg);
+  background: linear-gradient(to bottom, transparent, var(--kc-mapped-surface-page));
+  pointer-events: none;
+}
+
+/* The plan's badges on top, above the image, as round pills */
+.kc-buybox .kc-plan-dialog__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--kc-responsive-spacing-layout-xs);
+  margin-bottom: var(--kc-responsive-spacing-layout-sm);
+  padding-right: 44px;
+}
+
+.kc-buybox .kc-plan-dialog__badges .kc-bottom_label,
+.kc-buybox .kc-plan-dialog__badges .kc-plan-badge {
+  flex: none;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.kc-buybox .kc-plan-dialog__badges .kc-testimonial-button {
+  border-radius: 999px;
+}
+
+/* The plan's own text (Loop block "Plan popup / side panel: text per plan") under its title and price */
+.kc-buybox .kc-plan-dialog__text {
+  flex: 0 0 100%;
+  margin-top: var(--kc-responsive-spacing-layout-md);
+}
+
+.kc-buybox .kc-plan-dialog__text p {
+  margin: 0;
+  font-size: var(--kc-buybox-body-size);
+  line-height: var(--kc-buybox-body-line-height);
+  color: var(--kc-mapped-text-default-body);
+}
+
+.kc-buybox .kc-plan-dialog__text .kc-plan-dialog__text-heading {
+  margin-bottom: var(--kc-responsive-spacing-layout-xxs);
+  font-size: var(--kc-responsive-label-sm-text-size);
+  line-height: var(--kc-responsive-label-sm-line-height);
+  letter-spacing: var(--kc-responsive-label-sm-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kc-mapped-surface-accent-default);
 }
 
 /* Centred: the theme resets the dialog's own auto margin */
@@ -463,12 +534,12 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   to { transform: none; }
 }
 
-/* The landed still of the kit, edge to edge at the top of the panel */
+/* The landed still of the kit, edge to edge across the panel, under its badges */
 .kc-buybox .kc-plan-dialog__image {
   display: block;
   width: calc(100% + 2 * var(--kc-responsive-spacing-layout-lg));
   height: auto;
-  margin: calc(-1 * var(--kc-responsive-spacing-layout-lg)) calc(-1 * var(--kc-responsive-spacing-layout-lg)) var(--kc-responsive-spacing-layout-lg);
+  margin: 0 calc(-1 * var(--kc-responsive-spacing-layout-lg)) var(--kc-responsive-spacing-layout-lg);
 }
 
 .kc-buybox .kc-plan-dialog__close {
@@ -521,28 +592,6 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   padding-left: 0;
 }
 
-.kc-buybox .kc-plan-dialog .kc-bottom_label {
-  justify-content: flex-start;
-  margin: var(--kc-responsive-spacing-layout-sm) 0 0;
-}
-
-.kc-buybox .kc-plan-dialog .kc-bottom_label .kc-testimonial-button {
-  border-radius: 999px;
-}
-
-/* The space above the button sits under the plan: the buybox CTA rule sets margin: 0 !important */
-.kc-buybox .kc-plan-dialog .loop-subscription-group.kc-plan-dialog__plan {
-  margin-bottom: var(--kc-responsive-spacing-layout-lg);
-}
-
-/* In the side panel the button stays in view at the bottom while the plan scrolls */
-.kc-buybox .kc-plan-dialog--panel .kc-plan-dialog__cta.product-form__custom-submit {
-  position: sticky;
-  bottom: 0;
-  /* Over the plan's badges while they scroll under it ("Brushing & Beyond" has z-index 2) */
-  z-index: 3;
-  box-shadow: 0 calc(-1 * var(--kc-responsive-spacing-layout-lg)) var(--kc-responsive-spacing-layout-lg) var(--kc-mapped-surface-page);
-}
 
 /* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
    card, Victor 24 Nov): the other cards keep name, sub-row and price */

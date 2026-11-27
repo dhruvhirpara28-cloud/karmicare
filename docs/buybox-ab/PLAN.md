@@ -211,6 +211,21 @@ card, flush with the edge), with a silver gradient shine instead of gold. Same s
 as a link that opens the side panel: `/candidate/`. An opened plan leaves out the benefit line that
 repeats its Care Credit pill.
 
+**Side panel, 27 Nov (Victor):** badges ("Brushing & Beyond") on top above the image; the button in a
+footer fixed at the bottom, a line above it and the content fading out under it; under the Year's
+title and price the block's text for the plan (new setting "Plan popup / side panel: text per plan").
+VOORSTEL (EN, from Victor's brief; NL/FR through source-copy):
+
+> **The Karmicare promise**
+> Your oral health partner, from the moment you leave the dentist's chair until you sit down in it
+> again. Your dentist sees you once or twice a year. We are there twice a day, every day. We help you
+> walk into every check-up ready, and out with peace of mind.
+
+"6 duos a year (3 now, 3 in month 6), guaranteed fresh stock": the line is the Year's plan description
+in Loop admin. That edit is not the theme's: it goes live at once for every visitor (today's layout
+too) and needs its NL/FR copies in Loop Multilingual. `/candidate/` shows it as that edit would (EN).
+"Guaranteed fresh stock" is a promise; it has to hold for the second delivery in month 6.
+
 **Promises under the CTA follow the plan** (Victor, 24 Nov), in the theme with the card layout
 (`kcUpdatePromises`): Try once shows only "14-day money-back guarantee"
 (kc.sticky_cart.guarantee_once_html); pause and free shipping go. A plan shows the block's own three.

@@ -2962,7 +2962,7 @@ function kcOnceCard(productId) {
  * docs/buybox-ab/PLAN.md
  */
 function kcPlanExtras(productId) {
-    const extras = { badges: {}, compareOnce: [], asLink: [], chipsSelectedOnly: false, linkOpens: 'card', closeLabel: 'Close' };
+    const extras = { badges: {}, compareOnce: [], asLink: [], chipsSelectedOnly: false, linkOpens: 'card', closeLabel: 'Close', panelText: {} };
     if (!kcOnceCard(productId)) return extras;
     let data = {};
     try {
@@ -2983,6 +2983,15 @@ function kcPlanExtras(productId) {
     extras.chipsSelectedOnly = data.chipsSelectedOnly === true;
     if (data.linkOpens === 'popup' || data.linkOpens === 'panel') extras.linkOpens = data.linkOpens;
     if (data.closeLabel) extras.closeLabel = String(data.closeLabel);
+    // "Plan popup / side panel: text per plan": "712155431293: Heading | Text" per line
+    String(data.panelText || '').split(/\r?\n/).forEach((line) => {
+        const colon = line.indexOf(':');
+        if (colon < 0) return;
+        const planId = line.slice(0, colon).trim();
+        const [heading, ...rest] = line.slice(colon + 1).split('|');
+        const text = rest.join('|').trim();
+        if (/^\d+$/.test(planId) && (heading.trim() || text)) extras.panelText[planId] = { heading: heading.trim(), text };
+    });
     return extras;
 }
 
@@ -3035,10 +3044,12 @@ function kcUpdatePromises(productId, isOneTime) {
  * "popup" in the middle of the screen over a soft blur, "panel" as a side panel with the landed still of
  * the kit above the plan (the hero animation's data-still: Awake in Day, Asleep in Night). The plan is
  * the card itself, cloned without its radio, so its texts, prices, chips and benefit lines are Loop's
- * live ones. The button under it is the buybox CTA for that plan (its per-plan label): it chooses the
- * plan in the buybox (the card opens, the link goes) and presses the buybox CTA, so the purchase takes
- * the buybox's own path (karmiAddToCart). Esc, the close button and a click on the blur close it;
- * focus goes back to the link.
+ * live ones; its badges ("Brushing & Beyond") go on top, above the image, and the block's text for the
+ * plan ("Plan popup / side panel: text per plan") under its title and price. The body scrolls; the
+ * footer holds the button, fixed at the bottom. The button is the buybox CTA for that plan (its
+ * per-plan label): it chooses the plan in the buybox (the card opens, the link goes) and presses the
+ * buybox CTA, so the purchase takes the buybox's own path (karmiAddToCart). Esc, the close button and
+ * a click on the blur close it; focus goes back to the link.
  */
 function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     const box = groupEl.closest('.kc-buybox');
@@ -3062,8 +3073,14 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     dialog.className = `kc-plan-dialog kc-plan-dialog--${mode}`;
     dialog.kcOpener = opener;
 
+    // The dialog: a scrolling body (badges, image, plan, its text) and a footer with the button, fixed
+    // at the bottom with a line above it, the body scrolling under a soft fade (Victor, 27 Nov)
     const inner = document.createElement('div');
     inner.className = 'kc-plan-dialog__inner';
+    const body = document.createElement('div');
+    body.className = 'kc-plan-dialog__body';
+    const footer = document.createElement('div');
+    footer.className = 'kc-plan-dialog__footer';
 
     const close = document.createElement('button');
     close.type = 'button';
@@ -3071,6 +3088,11 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     close.setAttribute('aria-label', extras.closeLabel);
     close.addEventListener('click', () => dialog.close());
     inner.appendChild(close);
+
+    // The plan's badges ("Brushing & Beyond") on top, above the image (Victor, 27 Nov)
+    const badges = document.createElement('div');
+    badges.className = 'kc-plan-dialog__badges';
+    body.appendChild(badges);
 
     if (mode === 'panel') {
         const night = document.body.classList.contains('night-mode');
@@ -3083,7 +3105,7 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
             image.alt = still.querySelector('img')?.alt || '';
             image.width = 1080;
             image.height = 960;
-            inner.appendChild(image);
+            body.appendChild(image);
         }
     }
 
@@ -3115,7 +3137,31 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
         title.id = `kc-plan-dialog-title-${productId}`;
         dialog.setAttribute('aria-labelledby', title.id);
     }
-    inner.appendChild(plan);
+    // Badges out of the plan to the top of the body
+    plan.querySelectorAll('.kc-bottom_label, .kc-plan-badge').forEach((badge) => {
+        if (badge.textContent.trim()) badges.appendChild(badge);
+        else badge.remove();
+    });
+    if (!badges.childElementCount) badges.remove();
+    // The plan's own text ("Plan popup / side panel: text per plan"), under its title and price
+    const panelText = extras.panelText[planId];
+    if (panelText) {
+        const promise = document.createElement('div');
+        promise.className = 'kc-plan-dialog__text';
+        if (panelText.heading) {
+            const heading = document.createElement('p');
+            heading.className = 'kc-plan-dialog__text-heading';
+            heading.textContent = panelText.heading;
+            promise.appendChild(heading);
+        }
+        if (panelText.text) {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = panelText.text;
+            promise.appendChild(paragraph);
+        }
+        plan.insertBefore(promise, plan.querySelector(':scope > .loop-subscription-group-selling-plans-container'));
+    }
+    body.appendChild(plan);
 
     // The buybox CTA's label for this plan (Custom Button Text per plan), else its default
     const buyboxCta = box.querySelector('.product-form__custom-submit[data-plan-labels]');
@@ -3133,7 +3179,9 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
         // After Loop has put the plan in the form (the radio's click runs it at once)
         setTimeout(() => buyboxCta && buyboxCta.click(), 0);
     });
-    inner.appendChild(cta);
+    footer.appendChild(cta);
+    inner.appendChild(body);
+    inner.appendChild(footer);
 
     dialog.replaceChildren(inner);
     if (!dialog.open) dialog.showModal();

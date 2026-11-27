@@ -45,6 +45,38 @@ def build_live(lang):
     return out
 
 
+# Loop block "Plan popup / side panel: text per plan" for the Year, as the lane drafted it (VOORSTEL,
+# EN, 27 Nov, from Victor's brief: oral health partner from chair to chair, dentist once or twice a year,
+# us twice a day, healthy patients in the chair, peace of mind)
+PROMISE_VOORSTEL = (
+    "Your oral health partner, from the moment you leave the dentist's chair until you sit down in it "
+    "again. Your dentist sees you once or twice a year. We are there twice a day, every day. We help you "
+    "walk into every check-up ready, and out with peace of mind."
+)
+
+
+def fresh_stock(page):
+    """The Year's "6 duos a year (3 now, 3 in month 6)" line with ", guaranteed fresh stock" (Victor, 27 Nov):
+    a Loop admin text, so emulated in Loop's product JSON as that edit would deliver it (EN only)."""
+    pattern = r'(<script class="loopProductQuickJson-' + PID + r'" type="application/json">)(.*?)(</script>)'
+    count = 0
+
+    def patch(match):
+        nonlocal count
+        product = json.loads(match.group(2))
+        for group in product['selling_plan_groups']:
+            for plan in group['selling_plans']:
+                if str(plan['id']) == '712155431293' and '(3 now, 3 in month 6)</div>' in plan['description']:
+                    plan['description'] = plan['description'].replace(
+                        '(3 now, 3 in month 6)</div>', '(3 now, 3 in month 6), guaranteed fresh stock</div>', 1)
+                    count += 1
+        return match.group(1) + json.dumps(product, ensure_ascii=False) + match.group(3)
+
+    page = re.sub(pattern, patch, page, flags=re.S)
+    assert count == 2, f'fresh stock: {count}'
+    return page
+
+
 def build(lang, layout):
     page = (LIVE / PAGES[lang]).read_text()
     sticky = locale(lang)
@@ -80,7 +112,8 @@ def build(lang, layout):
     # OFF too: the link layout must ignore them. The rest at its default; the variants below change it.
     extras = (f'<script type="application/json" id="kc-plan-extras-{PID}">'
               + json.dumps({'badges': '712106115453: Most picked', 'compareOnce': '712106115453', 'asLink': '',
-                            'chipsSelectedOnly': False, 'linkOpens': 'card', 'closeLabel': sticky['close']},
+                            'chipsSelectedOnly': False, 'linkOpens': 'card', 'closeLabel': sticky['close'],
+                            'panelText': ''},
                            ensure_ascii=False)
               + '</script>')
     assert page.count('</body>') == 1
@@ -146,7 +179,10 @@ def build(lang, layout):
             ('chips', [chips]),
             ('popup', [popup]),
             ('panel', [panel]),
-            ('candidate', [chips, panel]),
+            ('candidate', [chips, panel, (
+                '"panelText": ""',
+                '"panelText": ' + json.dumps('712155431293: The Karmicare promise | ' + PROMISE_VOORSTEL, ensure_ascii=False),
+            )]),
         ):
             variant_page = year_page
             for old, new in changes:
@@ -155,6 +191,9 @@ def build(lang, layout):
                 variant_page = changed
             variant_out = SERVE / variant / lang / 'products' / f'{HANDLE}.html'
             variant_out.parent.mkdir(parents=True, exist_ok=True)
+            # The Loop admin edit is EN; NL and FR come through Loop Multilingual
+            if variant == 'candidate' and lang == 'en':
+                variant_page = fresh_stock(variant_page)
             variant_out.write_text(variant_page)
             print(variant_out)
     return out

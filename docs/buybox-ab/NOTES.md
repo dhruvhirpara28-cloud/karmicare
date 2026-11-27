@@ -189,6 +189,15 @@ when the last path part is the handle (`getCurrentPathLoop`).
     - Purchase from the panel: karmiAddToCart with plan 712155431293 and the Welcome Kit (recorded).
       OFF equals live at 390 Day and Night (0 % pixels). Theme Check exit 0, 19 warnings, complexity 124.
 
+17. **Side panel layout, promise text, fresh stock** (Victor, 27 Nov): the dialog is a scrolling
+    body and a footer with the button (line above, fade under); badges on top above the image; the
+    Year's text from "Plan popup / side panel: text per plan" (VOORSTEL in PLAN.md) under its title
+    and price; "guaranteed fresh stock" emulated as the Loop admin edit (EN, `/candidate/` only).
+    `dialog_check.py candidate`: kit 3 tiles, landed still per mode, first benefit line with
+    "guaranteed fresh stock", Esc and blur close, purchase through the buybox CTA with plan
+    712155431293 (recorded). Shots `candidate-en-*-open.png`. Theme Check exit 0, 19 warnings,
+    complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the
