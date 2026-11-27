@@ -408,7 +408,7 @@ so the plan stays the visibly better choice.
 
 | Item | Who |
 |---|---|
-| Terms: Try once for more than one Duo (4d #1) | legal lane via desk |
+| Terms: Try once for more than one Duo (4d #1). **Victor, 27 Nov: the maximum stays 6, the Terms are updated after launch** (not a release gate) | legal lane via desk, after launch |
 | NL/FR of the three new setting texts (button, badge, panel text). They are block settings like "+ shipping" and the €0 note, which are already translated on /nl and /fr (Translate & Adapt); until then those pages show the English values. Translations keep the plan ID prefix. | copy lane via desk |
 | Loop admin: Year description "…, guaranteed fresh stock" + Loop Multilingual (the preview only emulates it) | Victor |
 | A render on a real Shopify theme with a cart, no payment: **done 27 Nov** on an unpublished test theme (NOTES 24), EN/NL/FR render, Try once x3, 60-Day, Year from the panel in a real cart | done |
