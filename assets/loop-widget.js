@@ -3027,6 +3027,8 @@ function kcUpdatePromises(productId, isOneTime) {
     const row = document.querySelector('.kc-buybox .icon-with-text');
     if (!row) return;
     const guarantee = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceGuarantee || '';
+    // Try once: the guarantee as text only, without its icon (Victor, 27 Nov; assets/kc-buybox.css)
+    if (row.classList.contains('kc-promises--once') !== isOneTime) row.classList.toggle('kc-promises--once', isOneTime);
     row.querySelectorAll('.icon-with-text__item').forEach((item, index) => {
         const text = item.querySelector('.inline-richtext');
         if (!text) return;

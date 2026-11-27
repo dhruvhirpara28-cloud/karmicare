@@ -593,6 +593,18 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
 }
 
 
+/* Promises under the CTA with Try once selected (assets/loop-widget.js kcUpdatePromises): the 14-day
+   guarantee as text only, without its icon (Victor, 27 Nov) */
+.kc-buybox .icon-with-text.kc-promises--once .icon-with-text__item > :not(.inline-richtext) {
+  display: none;
+}
+
+/* The one promise left takes the whole row, on one line */
+.kc-buybox .icon-with-text.kc-promises--once .icon-with-text__item {
+  flex: 1 1 100%;
+  max-width: none;
+}
+
 /* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
    card, Victor 24 Nov): the other cards keep name, sub-row and price */
 .kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-return_care-tooltip,
