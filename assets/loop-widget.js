@@ -3097,6 +3097,9 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     close.type = 'button';
     close.className = 'kc-plan-dialog__close';
     close.setAttribute('aria-label', extras.closeLabel);
+    // The site's close icon, as on the professionals' quote panel (sections/main-product.liquid template)
+    const closeIcon = document.getElementById(`kc-icon-close-${productId}`);
+    if (closeIcon && closeIcon.content) close.appendChild(closeIcon.content.cloneNode(true));
     close.addEventListener('click', () => kcCloseSheet(dialog));
 
     // The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, no badge look, next to

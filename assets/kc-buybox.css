@@ -477,7 +477,7 @@ html.kc-plan-dialog-open {
 
 /* The body starts under the bar (its padding, the close button, its hairline) with a small gap */
 .kc-buybox .kc-plan-dialog__header + .kc-plan-dialog__body {
-  padding-top: calc(2 * var(--kc-responsive-spacing-layout-md) + 44px + var(--kc-shape-stroke-thin, 1px) + var(--kc-responsive-spacing-layout-xs));
+  padding-top: calc(2 * var(--kc-responsive-spacing-layout-md) + var(--kc-responsive-size-button-sm-height) + var(--kc-shape-stroke-thin, 1px) + var(--kc-responsive-spacing-layout-xs));
 }
 
 .kc-buybox .kc-plan-dialog__header-title {
@@ -489,19 +489,12 @@ html.kc-plan-dialog-open {
   color: var(--kc-buybox-text);
 }
 
-/* The close button beside the title: a 44 px target and a clear focus ring */
+/* The close button beside the title, in the bar's flow */
 .kc-buybox .kc-plan-dialog__header .kc-plan-dialog__close {
   position: relative;
   top: auto;
   right: auto;
   flex: none;
-  width: 44px;
-  height: 44px;
-}
-
-.kc-buybox .kc-plan-dialog__close:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
 }
 
 /* The plan's own text (Loop block "Plan popup / side panel: text per plan") under its title and price */
@@ -629,37 +622,42 @@ html.kc-plan-dialog-open {
   margin: calc(-100% * 162 / 784) 0 0 calc(-100% * 154 / 784);
 }
 
+/* The close button: the same KC/Button as the professionals' quote panel (Victor, 27 Nov: one close
+   button across the site; assets/section-trusted-professionals.css .trusted-professionals__panel-close):
+   40 x 40 on surface/accent, small radius, the kc-icon-close icon (a <template> in
+   sections/main-product.liquid, cloned by assets/loop-widget.js) */
 .kc-buybox .kc-plan-dialog__close {
   position: absolute;
   top: var(--kc-responsive-spacing-layout-sm);
   right: var(--kc-responsive-spacing-layout-sm);
   z-index: 1;
-  width: 36px;
-  height: 36px;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--kc-responsive-size-button-sm-height);
+  height: var(--kc-responsive-size-button-sm-height);
   padding: 0;
-  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
-  border-radius: 50%;
-  background: var(--kc-mapped-surface-page);
-  color: var(--kc-buybox-text);
+  border: 0;
+  border-radius: var(--kc-shape-radius-sm);
+  background-color: var(--kc-mapped-surface-accent-default);
+  color: var(--kc-mapped-text-accent-default-on-accent);
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.kc-buybox .kc-plan-dialog__close::before,
-.kc-buybox .kc-plan-dialog__close::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 14px;
-  border-top: var(--kc-shape-stroke-medium, 1.5px) solid currentColor;
+.kc-buybox .kc-plan-dialog__close:hover {
+  background-color: var(--kc-mapped-surface-accent-default-hover);
 }
 
-.kc-buybox .kc-plan-dialog__close::before {
-  transform: translate(-50%, -50%) rotate(45deg);
+.kc-buybox .kc-plan-dialog__close:focus-visible {
+  outline: var(--kc-shape-stroke-medium) solid var(--kc-mapped-border-focus-strong);
+  outline-offset: 2px;
 }
 
-.kc-buybox .kc-plan-dialog__close::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
+.kc-buybox .kc-plan-dialog__close .kc-icon {
+  width: var(--kc-responsive-size-icon-sm);
+  height: var(--kc-responsive-size-icon-sm);
 }
 
 /* The plan inside: no card box of its own, no radio indent */

@@ -122,7 +122,9 @@ def build(lang, layout):
                             'chipsSelectedOnly': False, 'linkOpens': 'card', 'closeLabel': sticky['close'],
                             'panelText': ''},
                            ensure_ascii=False)
-              + '</script>')
+              + '</script>'
+              # The plan dialog's close icon, as sections/main-product.liquid renders it for popup / panel
+              + f'<template id="kc-icon-close-{PID}">' + (WORKTREE / 'assets' / 'kc-icon-close.svg').read_text() + '</template>')
     assert page.count('</body>') == 1
     page = page.replace('</body>', extras + '</body>', 1)
 

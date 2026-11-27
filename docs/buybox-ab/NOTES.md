@@ -383,6 +383,16 @@ when the last path part is the handle (`getCurrentPathLoop`).
     lane diff. Its limits: a code-review verdict, not a device test (iOS, VoiceOver), a real setting toggle
     or a live cart.
 
+30. **One close button** (Victor, 27 Nov: the Year panel's close button is the one of the professionals'
+    quote panel on mobile; reuse the UI elements that exist). `.kc-plan-dialog__close` now takes the same
+    KC/Button tokens as `.trusted-professionals__panel-close` (40 x 40, `--kc-shape-radius-sm`, surface
+    accent, on-accent icon colour, accent hover, focus ring `--kc-mapped-border-focus-strong`) and the same
+    icon, `kc-icon-close.svg`: a `<template id="kc-icon-close-{{ product.id }}">` next to the plan extras
+    in `sections/main-product.liquid` (only with the popup or the side panel), cloned by
+    `kcOpenPlanDialog`. The drawn cross and the 36 / 44 px circle are gone. `preview/close_check.py`,
+    `shots/close.json`: both buttons compute alike at 390 (40 x 40, 8 px, rgb(127, 185, 255) on
+    rgb(10, 22, 40), 16 px icon, "Close"). Theme Check exit 0.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

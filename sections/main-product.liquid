@@ -669,6 +669,13 @@
                     <script type="application/json" id="kc-plan-extras-{{ product.id }}">
                       {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}, "chipsSelectedOnly": {{ block.settings.chips_selected_only | json }}, "linkOpens": {{ block.settings.plan_link_opens | default: 'card' | json }}, "panelText": {{ block.settings.plan_panel_text | json }}, "closeLabel": {{ 'accessibility.close' | t | json }}}
                     </script>
+                    {%- comment -%}
+                      The plan popup / side panel's close icon, the one the professionals' quote panel uses
+                      (assets/loop-widget.js kcOpenPlanDialog clones it)
+                    {%- endcomment -%}
+                    {%- if block.settings.plan_link_opens == 'popup' or block.settings.plan_link_opens == 'panel' -%}
+                      <template id="kc-icon-close-{{ product.id }}">{{ 'kc-icon-close.svg' | inline_asset_content }}</template>
+                    {%- endif -%}
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                 {%- when 'buy_buttons' -%}
