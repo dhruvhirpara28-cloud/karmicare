@@ -2801,7 +2801,9 @@ function updateKcPricingSummary(productId, variant) {
     if (isOneTime) {
         // One-time styling overrides
         const oneTimePriceCents = variant.price;
-        totalFormatted = loopFormatMoney(oneTimePriceCents, true);
+        // Total today: the Try once quantity's price (kcOnceQuantity, 1 without the control); per brushing
+        // stays the price of one Duo
+        totalFormatted = loopFormatMoney(oneTimePriceCents * kcOnceQuantity(productId), true);
         intervalLabel = kcReceiptText('kcOneTime', 'one-time');
         // Assume 120 brushings (60 days) for one-time standard size as fallback
         const perBrushingCents = Math.round(oneTimePriceCents / 120);
@@ -3084,12 +3086,23 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     close.className = 'kc-plan-dialog__close';
     close.setAttribute('aria-label', extras.closeLabel);
     close.addEventListener('click', () => dialog.close());
-    inner.appendChild(close);
 
-    // The plan's badges ("Brushing & Beyond") on top, above the image (Victor, 27 Nov)
-    const badges = document.createElement('div');
-    badges.className = 'kc-plan-dialog__badges';
-    body.appendChild(badges);
+    // The plan's badge ("Brushing & Beyond") as a strip across the top of the dialog, hanging there
+    // with rounded inner corners, the close button in it (Victor, 27 Nov). Without a badge the close
+    // button sits alone at the top right.
+    const badgeText = groupEl.querySelector('.kc-bottom_label .kc-testimonial-button, .kc-plan-badge .kc-testimonial-button');
+    if (badgeText && badgeText.textContent.trim()) {
+        const header = document.createElement('div');
+        header.className = `kc-plan-dialog__header ${badgeText.className}`;
+        const label = document.createElement('span');
+        label.className = 'kc-plan-dialog__header-label';
+        label.textContent = badgeText.textContent.trim();
+        header.appendChild(label);
+        header.appendChild(close);
+        inner.appendChild(header);
+    } else {
+        inner.appendChild(close);
+    }
 
     if (mode === 'panel') {
         const night = document.body.classList.contains('night-mode');
@@ -3137,12 +3150,8 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
         title.id = `kc-plan-dialog-title-${productId}`;
         dialog.setAttribute('aria-labelledby', title.id);
     }
-    // Badges out of the plan to the top of the body
-    plan.querySelectorAll('.kc-bottom_label, .kc-plan-badge').forEach((badge) => {
-        if (badge.textContent.trim()) badges.appendChild(badge);
-        else badge.remove();
-    });
-    if (!badges.childElementCount) badges.remove();
+    // The badge is the strip on top now: out of the plan
+    plan.querySelectorAll('.kc-bottom_label, .kc-plan-badge').forEach((badge) => badge.remove());
     // The plan's own text ("Plan popup / side panel: text per plan"), under its title and price
     const panelText = extras.panelText[planId];
     if (panelText) {
@@ -3208,6 +3217,103 @@ function kcUpdatePlanBadge(groupEl, text) {
     if (badge.firstElementChild.textContent !== text) badge.firstElementChild.textContent = text;
 }
 
+/**
+ * KC: the Try once quantity (Loop block "Try once: maximum quantity", Victor 27 Nov). It lives in a hidden
+ * quantity field of the buybox's product form, which karmiAddToCart reads for one time (a plan buys its
+ * own Duos per delivery, assets/kc-plan-select.js quantityFor); the sticky bar mirrors it. Maximum 1 (the
+ * default): no field, no control, one Duo as before.
+ */
+function kcOnceMax(productId) {
+    if (!kcOnceCard(productId)) return 1;
+    const max = parseInt(document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceMax, 10);
+    return Number.isFinite(max) && max > 1 ? Math.min(max, 6) : 1;
+}
+
+function kcOnceQuantityInput(productId, create) {
+    const form = document.querySelector(`.kc-buybox form[data-loop-product-id="${productId}"]`)
+        || document.querySelector('.kc-buybox form[id^="product-form-"]');
+    if (!form) return null;
+    let input = form.querySelector('input[name="quantity"].kc-once-quantity');
+    if (!input && create) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'quantity';
+        input.className = 'kc-once-quantity';
+        input.value = '1';
+        form.appendChild(input);
+    }
+    return input;
+}
+
+function kcOnceQuantity(productId) {
+    const max = kcOnceMax(productId);
+    if (max <= 1) return 1;
+    const value = parseInt(kcOnceQuantityInput(productId, false)?.value, 10);
+    return Number.isFinite(value) ? Math.min(Math.max(value, 1), max) : 1;
+}
+
+/**
+ * KC: the Try once title for a quantity, from texts already translated: "Try Once · 1 Duo"
+ * (kc.sticky_cart.title_once_html) with its 1 replaced by the quantity and its unit by the plural of
+ * "The Karmicare Year · 6 Duos" (kc.sticky_cart.title_year_html): "Try Once · 2 Duos", "Eenmalig
+ * proberen · 2 duo's", "Essayer une fois · 2 duos". The title as it is when a pattern is missing.
+ */
+function kcOnceTitleFor(title, many, quantity) {
+    if (!title || quantity <= 1) return title;
+    const plural = String(many || '').match(/\d+\s+(.+)$/);
+    if (!plural || !/\b1\s+\S+\s*$/.test(title)) return title;
+    return title.replace(/\b1(\s+)\S+\s*$/, `${quantity}$1${plural[1]}`);
+}
+
+window.KCOnceQuantity = { get: kcOnceQuantity, titleFor: kcOnceTitleFor };
+
+// KC: the − / + control on the Try once card while it is selected (assets/kc-buybox.css .kc-once-stepper)
+function kcUpdateOnceStepper(productId, variant, text, texts) {
+    const max = kcOnceMax(productId);
+    let stepper = text.querySelector('.kc-once-stepper');
+    if (max <= 1) {
+        if (stepper) stepper.remove();
+        const input = kcOnceQuantityInput(productId, false);
+        if (input) input.remove();
+        return;
+    }
+    const input = kcOnceQuantityInput(productId, true);
+    if (!stepper) {
+        stepper = document.createElement('div');
+        stepper.className = 'kc-once-stepper';
+        stepper.setAttribute('role', 'group');
+        stepper.innerHTML = '<button type="button" class="kc-once-stepper__button" data-step="-1"></button>'
+            + '<output class="kc-once-stepper__value" aria-live="polite"></output>'
+            + '<button type="button" class="kc-once-stepper__button" data-step="1"></button>';
+        stepper.addEventListener('click', (event) => {
+            const button = event.target.closest('.kc-once-stepper__button');
+            if (!button) return;
+            const next = Math.min(Math.max(kcOnceQuantity(productId) + Number(button.dataset.step), 1), kcOnceMax(productId));
+            input.value = String(next);
+            const current = findSelectedVariantLoop(productId);
+            kcRenderOnceCard(productId, current, getLoopSubscriptionContainer(productId));
+            updateKcPricingSummary(productId, current);
+            document.dispatchEvent(new CustomEvent('kc:once-quantity', { detail: { productId, quantity: next } }));
+        });
+        const plan = text.querySelector('.kc-plan-subrow');
+        if (plan) plan.after(stepper);
+        else text.appendChild(stepper);
+    }
+    // With a plan selected the field is back at 1: every other one-time path that sends the buybox form
+    // (the sticky bar's "Try once for €67", the comparison tables' Try once) buys the one Duo it shows
+    if (!determineOneTimeOrderLoop(productId) && input.value !== '1') input.value = '1';
+    const quantity = kcOnceQuantity(productId);
+    if (input.value !== String(quantity)) input.value = String(quantity);
+    stepper.setAttribute('aria-label', texts.kcQtyLabel || 'Quantity');
+    const [minus, plus] = stepper.querySelectorAll('.kc-once-stepper__button');
+    minus.setAttribute('aria-label', texts.kcQtyDecrease || 'Decrease quantity');
+    plus.setAttribute('aria-label', texts.kcQtyIncrease || 'Increase quantity');
+    minus.disabled = quantity <= 1;
+    plus.disabled = quantity >= max;
+    const value = stepper.querySelector('.kc-once-stepper__value');
+    if (value.textContent !== String(quantity)) value.textContent = String(quantity);
+}
+
 // KC: an element's lines as <div>s, written only when they change (the plan config watches the widget)
 function kcSetLines(element, lines) {
     const key = JSON.stringify(lines);
@@ -3259,7 +3365,9 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
     }
     if (label) {
         addClass(label, 'h5');
-        if (texts.kcOnceTitle && label.textContent !== texts.kcOnceTitle) label.textContent = texts.kcOnceTitle;
+        // "Try Once · 1 Duo", or "· 2 Duos" … with a quantity (kcOnceTitleFor)
+        const title = kcOnceTitleFor(texts.kcOnceTitle, texts.kcTitleMany, kcOnceQuantity(productId));
+        if (title && label.textContent !== title) label.textContent = title;
     }
 
     let subRow = text.querySelector('.kc-plan-subrow');
@@ -3304,6 +3412,16 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
         const interval = kcLabelText(labelsEl, 'kcOneTime', 'one-time');
         if (intervalEl.textContent !== interval) intervalEl.textContent = interval;
     }
+
+    // Quantity: the − / + control, and the card's price as the total. Loop writes its unit price into
+    // #loop-price-one-time after this on every update, so the total follows right after it.
+    kcUpdateOnceStepper(productId, variant, text, texts);
+    const quantity = kcOnceQuantity(productId);
+    setTimeout(() => {
+        const amount = option.querySelector('#loop-price-one-time');
+        const total = loopFormatMoney(variant.price * quantity, true);
+        if (amount && amount.textContent.trim() !== total) amount.textContent = total;
+    }, 0);
 }
 
 function injectOrUpdateKcTryOnceLink(productId, variant) {

@@ -233,6 +233,22 @@ when the last path part is the handle (`getCurrentPathLoop`).
       `candidate-en-*-day-rings-*.png`.
     Theme Check exit 0, 19 warnings, complexity 124.
 
+20. **Product name as live, panel strip, 8 px, Try once quantity** (Victor, 27 Nov):
+    - The two-line title code is removed (snippet, settings, CSS, preview emulation); the title block
+      is back as on main. History: commit 1f4df7d.
+    - 8 px between the struck "€67" and "€59" (`--kc-responsive-spacing-layout-xs`).
+    - Side panel: the badge ("Brushing & Beyond") is a strip across the top, full width, bottom corners
+      12 px, with the close button in it: 44 x 44, the strip's dark text colour on gold, a focus ring,
+      focused on opening, "Close" / "Sluiten" / "Fermer". Shots `candidate-en-390-*-panel-header.png`.
+    - Try once quantity (PLAN.md 4d): `preview/qty_check.py`, `shots/quantity.json`, max 4 in
+      `/candidate/`: at 3 the card says "Try Once · 3 Duos" €201, Total today €201, the sticky bar
+      "Try Once · 3 Duos" and its form 3; the recorded add is one line, quantity 3. With 60-Day
+      selected the field is 1 and the add is the plan (quantity 1, kit nested, Subscription Name).
+      NL "Eenmalig proberen · 2 duo's", FR "Essayer une fois · 2 duos". Shot
+      `candidate-en-390-day-once-quantity-3.png`.
+    - The dashes (product description EN/NL/FR, Loop tooltips, receipt tooltip) went to the desk for the
+      copy lane (message msg_c12815e2af50).
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

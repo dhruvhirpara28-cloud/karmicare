@@ -1,0 +1,100 @@
+{
+ "en start": {
+  "title": "Try Once · 1 Duo",
+  "cardPrice": "€67",
+  "stepper": "1",
+  "stepperShown": true,
+  "total": "€67",
+  "perBrushing": "€0.56 per brushing · no Care Credit",
+  "stickyTitle": "",
+  "stickyQuantity": "1"
+ },
+ "en quantity 3": {
+  "title": "Try Once · 3 Duos",
+  "cardPrice": "€201",
+  "stepper": "3",
+  "stepperShown": true,
+  "total": "€201",
+  "perBrushing": "€0.56 per brushing · no Care Credit",
+  "stickyTitle": "",
+  "stickyQuantity": "3"
+ },
+ "en buy Try once x3": [
+  {
+   "items": [
+    {
+     "id": 58451672170877,
+     "quantity": 3
+    }
+   ]
+  }
+ ],
+ "en 60-Day with field at 3": {
+  "title": "Try Once · 1 Duo",
+  "cardPrice": "€67",
+  "stepper": "1",
+  "stepperShown": false,
+  "total": "€59",
+  "perBrushing": "Billed every 60 days",
+  "stickyTitle": "",
+  "stickyQuantity": "1"
+ },
+ "en buy 60-Day": [
+  {
+   "items": [
+    {
+     "id": 58451672170877,
+     "quantity": 1,
+     "selling_plan": 712106115453
+    },
+    {
+     "id": 58801117200765,
+     "quantity": 1,
+     "properties": {
+      "_welcome_kit": "true"
+     },
+     "parent_id": 58451672170877
+    },
+    {
+     "id": 58801116840317,
+     "quantity": 1,
+     "properties": {
+      "_welcome_kit": "true"
+     },
+     "parent_id": 58451672170877
+    },
+    {
+     "id": 42732469092534,
+     "quantity": 1,
+     "properties": {
+      "_welcome_kit": "true"
+     },
+     "parent_id": 58451672170877
+    }
+   ],
+   "attributes": {
+    "Subscription Name": "60-Day Supply"
+   }
+  }
+ ],
+ "nl quantity 2": {
+  "title": "Eenmalig proberen · 2 duo's",
+  "cardPrice": "€ 134",
+  "stepper": "2",
+  "stepperShown": true,
+  "total": "€ 134",
+  "perBrushing": "€ 0,56 per poetsbeurt · geen Care Credit",
+  "stickyTitle": "",
+  "stickyQuantity": "2"
+ },
+ "fr quantity 2": {
+  "title": "Essayer une fois · 2 duos",
+  "cardPrice": "134 €",
+  "stepper": "2",
+  "stepperShown": true,
+  "total": "134 €",
+  "perBrushing": "0,56 € par brossage · sans Care Credit",
+  "stickyTitle": "",
+  "stickyQuantity": "2"
+ }
+}

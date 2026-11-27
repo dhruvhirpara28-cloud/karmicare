@@ -368,6 +368,12 @@
       var plain = state.type === 'product';
       var once = state.type === 'once' || plain;
       var title = plain ? cfg.productTitle || '' : copy['title_' + state.type] || '';
+      // Try once with a quantity (assets/loop-widget.js KCOnceQuantity): "Try Once · 2 Duos", and the bar
+      // buys that quantity; a plan buys its own Duos per delivery (quantity 1 here)
+      var onceQuantity = state.type === 'once' && window.KCOnceQuantity ? window.KCOnceQuantity.get(cfg.productId) : 1;
+      if (onceQuantity > 1) title = window.KCOnceQuantity.titleFor(title, copy.title_year, onceQuantity);
+      var quantityInput = form.querySelector('input[name="quantity"]');
+      if (quantityInput && quantityInput.value !== String(onceQuantity)) quantityInput.value = String(onceQuantity);
       var cut = plain ? -1 : title.indexOf(' · ');
       setText('name', cut === -1 ? title : title.slice(0, cut));
       setText('rest', cut === -1 ? '' : title.slice(cut));
@@ -621,6 +627,8 @@
       on(document, 'change', function (event) {
         if (event.target && event.target.closest && event.target.closest('.product__info-container')) queueRender();
       });
+      // The Try once quantity in the buybox (assets/loop-widget.js)
+      on(document, 'kc:once-quantity', queueRender);
       // Theme editor: the section is reloaded or removed; its new script builds a fresh bar
       on(document, 'shopify:section:unload', function (event) {
         if (sectionId && event.target && event.target.id === sectionId) dispose();

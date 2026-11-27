@@ -455,24 +455,44 @@ html.kc-plan-dialog-open {
   backdrop-filter: blur(var(--kc-shape-blur-md));
 }
 
-/* The plan's badges on top, above the image, as round pills */
-.kc-buybox .kc-plan-dialog__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--kc-responsive-spacing-layout-xs);
-  margin-bottom: var(--kc-responsive-spacing-layout-sm);
-  padding-right: 44px;
-}
-
-.kc-buybox .kc-plan-dialog__badges .kc-bottom_label,
-.kc-buybox .kc-plan-dialog__badges .kc-plan-badge {
+/* The plan's badge as a strip across the top of the dialog, hanging with its inner (bottom) corners
+   rounded, the close button in it (Victor, 27 Nov). It keeps the badge's own look (gold or silver
+   gradient, its text colour) from .kc-testimonial-button; only size and shape change here (body and
+   dialog in the selector: above the badge's Night rule). */
+body .kc-buybox dialog.kc-plan-dialog .kc-plan-dialog__header.kc-testimonial-button {
+  position: relative;
+  z-index: 2;
   flex: none;
-  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kc-responsive-spacing-layout-sm);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 56px;
   margin: 0;
+  padding: var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-sm) var(--kc-responsive-spacing-layout-xs) var(--kc-responsive-spacing-layout-lg);
+  border-radius: 0 0 var(--kc-shape-radius-md) var(--kc-shape-radius-md);
+  text-align: left;
 }
 
-.kc-buybox .kc-plan-dialog__badges .kc-testimonial-button {
-  border-radius: 999px;
+/* The close button in the strip: the strip's text colour on its gold or silver, a 44 px target and a
+   clear focus ring */
+.kc-buybox .kc-plan-dialog__header .kc-plan-dialog__close {
+  position: relative;
+  top: auto;
+  right: auto;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: var(--kc-shape-stroke-thin, 1px) solid currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+.kc-buybox .kc-plan-dialog__close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 /* The plan's own text (Loop block "Plan popup / side panel: text per plan") under its title and price */
@@ -610,6 +630,68 @@ html.kc-plan-dialog-open {
   padding-left: 0;
 }
 
+
+/* The Try once quantity (Loop block "Try once: maximum quantity", assets/loop-widget.js
+   kcUpdateOnceStepper): a − / + pill under the sub-row while Try once is selected (Victor, 27 Nov) */
+.kc-once-card .kc-once-stepper {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  margin-top: var(--kc-responsive-spacing-layout-xs);
+  border: var(--kc-shape-stroke-thin, 1px) solid var(--kc-mapped-border-primary-default);
+  border-radius: var(--kc-shape-radius-full, 999px);
+  background: var(--kc-buybox-surface-chip, transparent);
+}
+
+.kc-once-card .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-stepper {
+  display: none;
+}
+
+.kc-once-card .kc-once-stepper__button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--kc-buybox-text);
+  cursor: pointer;
+}
+
+.kc-once-card .kc-once-stepper__button::before,
+.kc-once-card .kc-once-stepper__button[data-step="1"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  border-top: var(--kc-shape-stroke-medium, 1.5px) solid currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.kc-once-card .kc-once-stepper__button[data-step="1"]::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.kc-once-card .kc-once-stepper__button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.kc-once-card .kc-once-stepper__button:focus-visible {
+  outline: 2px solid var(--kc-mapped-border-focus-default);
+  outline-offset: -2px;
+}
+
+.kc-once-card .kc-once-stepper__value {
+  min-width: 24px;
+  text-align: center;
+  font-family: var(--kc-font-role-backbone);
+  font-size: var(--kc-buybox-body-size);
+  font-weight: var(--font-700-weight, 700);
+  color: var(--kc-buybox-text);
+}
 
 /* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
    card, Victor 24 Nov): the other cards keep name, sub-row and price */
@@ -935,7 +1017,8 @@ body .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscript
   grid-template-columns: auto auto;
   justify-content: end;
   align-items: baseline;
-  column-gap: var(--kc-responsive-spacing-layout-xxs);
+  /* 8 px between the struck price and the price (Victor, 27 Nov) */
+  column-gap: var(--kc-responsive-spacing-layout-xs);
   white-space: nowrap;
 }
 
@@ -963,17 +1046,6 @@ body .kc-buybox .loop-subscription-group:has(.kc-plan-badge):has(.loop-subscript
   top: 50%;
   border-top: var(--kc-shape-stroke-medium, 1.5px) solid currentColor;
   transform: rotate(-12deg);
-}
-
-/* Two-line product title with the Try once card (snippets/kc-product-title.liquid): line 2 in the
-   second tone of the section titles (base.css --kc-heading-second-tone) */
-.kc-buybox .kc-product-title__name,
-.kc-buybox .kc-product-title__line {
-  display: block;
-}
-
-.kc-buybox .kc-product-title__line {
-  color: var(--kc-heading-second-tone);
 }
 
 /* "Most picked" (Loop block "Plan badges", with the Try once card): the Year's "Brushing & Beyond" badge

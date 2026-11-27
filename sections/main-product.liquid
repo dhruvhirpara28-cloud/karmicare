@@ -130,13 +130,8 @@
                 {%- when 'category_strip' -%}
                   {%- render 'product-category-strip', block: block, product: product -%}
                 {%- when 'title' -%}
-                  {%- assign kc_title_loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    {%- render 'kc-product-title',
-                      product: product,
-                      block: block,
-                      layout: kc_title_loop_block.settings.try_once_layout
-                    -%}
+                    <h1 class="h4">{{ product.title | escape }}</h1>
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
                         {{ product.title | escape }}
@@ -166,6 +161,11 @@
                     data-kc-once-layout="{{ loop_block.settings.try_once_layout | default: 'link' | escape }}"
                     data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
                     data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"                    data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
+                    data-kc-once-max="{{ loop_block.settings.try_once_max_quantity | default: 1 }}"
+                    data-kc-title-many="{{ 'kc.sticky_cart.title_year_html' | t | escape }}"
+                    data-kc-qty-label="{{ 'products.product.quantity.label' | t | escape }}"
+                    data-kc-qty-decrease="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}"
+                    data-kc-qty-increase="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}"
                     data-kc-once-cta="{{ loop_block.settings.try_once_cta | default: kc_once_cta_default | escape }}"
                     data-kc-or="{{ 'kc.plans.or' | t | escape }}"
                     data-kc-credit="{{ 'kc.sticky_cart.credit_html' | t | escape }}"
@@ -1464,21 +1464,7 @@
     {
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "title_line_1",
-          "label": "Title line 1 (Try once card on top only)",
-          "info": "Shown only with the Loop block's \"Try once: card on top\". Line 2 is then the product title in the page language, in the second tone of the section titles. Blank: the product title, as before."
-        },
-        {
-          "type": "text",
-          "id": "title_line_2_remove",
-          "label": "Line 2: leave out at the start of the product title",
-          "default": "Awake & Asleep"
-        }
-      ]
+      "limit": 1
     },
     {
       "type": "price",
@@ -2993,6 +2979,16 @@
             }
           ],
           "default": "link"
+        },
+        {
+          "type": "range",
+          "id": "try_once_max_quantity",
+          "label": "Try once: maximum quantity (card on top only)",
+          "info": "1: one Duo, no quantity control. Higher: a − / + control on the Try once card; the total, the titles and the sticky bar follow the quantity.",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 1
         },
         {
           "type": "text",

@@ -29,7 +29,9 @@ def locale(lang):
     text = re.sub(r'^\s*/\*.*?\*/', '', text, flags=re.S)
     data = json.loads(text)
     kc = data['kc']
-    return dict(kc['sticky_cart'], plans_or=kc['plans']['or'], close=data['accessibility']['close'])
+    quantity = data['products']['product']['quantity']
+    return dict(kc['sticky_cart'], plans_or=kc['plans']['or'], close=data['accessibility']['close'],
+                qty_label=quantity['label'], qty_decrease=quantity['decrease'], qty_increase=quantity['increase'])
 
 
 def build_live(lang):
@@ -81,11 +83,17 @@ def build(lang, layout):
     page = (LIVE / PAGES[lang]).read_text()
     sticky = locale(lang)
     note = re.search(r'class="ft-note">([^<]*)', page).group(1).strip()
+    product_title = html.unescape(re.search(r'<h1 class="h4">([^<]*)</h1>', page).group(1))
     attrs = {
         'data-kc-once-layout': layout,
         'data-kc-once-title': sticky['title_once_html'],
         'data-kc-once-shipping': html.unescape(re.search(r'class="ft-ship">([^<]*)', page).group(1).strip()),
         'data-kc-once-note': html.unescape(note),
+        'data-kc-once-max': '1',
+        'data-kc-title-many': sticky['title_year_html'],
+        'data-kc-qty-label': sticky['qty_label'],
+        'data-kc-qty-decrease': sticky['qty_decrease'].replace('{{ product }}', product_title),
+        'data-kc-qty-increase': sticky['qty_increase'].replace('{{ product }}', product_title),
         # Loop block "Try once: button text" filled in by Victor (24 Nov), EN only: until it is translated
         # Shopify shows the English value on /nl and /fr too
         'data-kc-once-cta': 'Try once, purchase now',
@@ -118,18 +126,19 @@ def build(lang, layout):
     assert page.count('</body>') == 1
     page = page.replace('</body>', extras + '</body>', 1)
 
-    # Title block "Title line 1" filled in (Victor, 24 Nov): snippets/kc-product-title.liquid's output with
-    # the card layout; the link layout keeps the product title
-    if layout == 'card':
-        match = re.search(r'<h1 class="h4">([^<]*)</h1>', page)
-        title = html.unescape(match.group(1))
-        leave_out = 'Awake & Asleep'
-        line_2 = title[len(leave_out):].strip() if title.startswith(leave_out) else title
-        line_2 = line_2[:1].upper() + line_2[1:]
-        two_lines = ('<h1 class="h4 kc-product-title">\n    <span class="kc-product-title__name">'
-                     + html.escape('Karmicare Duet: Awake & Asleep') + '</span>\n    <span class="kc-product-title__line">'
-                     + html.escape(line_2) + '</span>\n  </h1>')
-        page = page[: match.start()] + two_lines + page[match.end():]
+    # snippets/sticky-cart-block.liquid renders its script into the page: the lane's two changes (the Try
+    # once quantity in the title and the bar's quantity field, and a render on kc:once-quantity), as Liquid
+    # would render them
+    title_line = "      var title = plain ? cfg.productTitle || '' : copy['title_' + state.type] || '';"
+    assert page.count(title_line) == 1, 'sticky title line'
+    page = page.replace(title_line, title_line + """
+      var onceQuantity = state.type === 'once' && window.KCOnceQuantity ? window.KCOnceQuantity.get(cfg.productId) : 1;
+      if (onceQuantity > 1) title = window.KCOnceQuantity.titleFor(title, copy.title_year, onceQuantity);
+      var quantityInput = form.querySelector('input[name="quantity"]');
+      if (quantityInput && quantityInput.value !== String(onceQuantity)) quantityInput.value = String(onceQuantity);""", 1)
+    change_line = "if (event.target && event.target.closest && event.target.closest('.product__info-container')) queueRender();\n      });"
+    assert page.count(change_line) == 1, 'sticky change line'
+    page = page.replace(change_line, change_line + "\n      on(document, 'kc:once-quantity', queueRender);", 1)
 
     for name in ASSETS:
         pattern = r'//www\.karmicare\.com/cdn/shop/t/\d+/assets/' + re.escape(name) + r'\?v=\d+'
@@ -181,6 +190,9 @@ def build(lang, layout):
             ('candidate', [chips, panel, (
                 '"panelText": ""',
                 '"panelText": ' + json.dumps('712155431293: ' + PROMISE_VOORSTEL, ensure_ascii=False),
+            ), (
+                # "Try once: maximum quantity" 4 (Victor, 27 Nov: a quantity for Try once; 4 as a proposal)
+                'data-kc-once-max="1"', 'data-kc-once-max="4"',
             )]),
         ):
             variant_page = year_page

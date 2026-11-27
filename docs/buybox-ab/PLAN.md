@@ -268,6 +268,49 @@ panel with the landed still of the kit (the hero animation's own still, Day and 
 Inside is the Year card itself (live texts, prices, chips, benefit lines, kit tiles); its button is the
 buybox CTA for the Year, which chooses the Year and buys through the buybox's own path.
 
+## 4d. Try once quantity, and what still has to change (Victor, 27 Nov)
+
+**Built.** Loop block setting "Try once: maximum quantity (card on top only)", 1 to 6, default 1 (no
+control, as before). Above 1, a − / + stepper on the Try once card while it is selected. The quantity
+lives in a hidden `quantity` field of the buybox form. A stepper over a dropdown: one tap per Duo,
+compact on a phone, and the number stays in view next to the price.
+
+What follows the quantity, verified in `/candidate/` with max 4 (`preview/qty_check.py`,
+`shots/quantity.json`); the add to cart is recorded, nothing reaches a cart:
+
+| Place | What it does | Verified |
+|---|---|---|
+| Try once card | Title "Try Once · 3 Duos" (NL "Eenmalig proberen · 3 duo's", FR "Essayer une fois · 3 duos", built from the existing "1 Duo" and "6 Duos" titles), price €201, per brushing stays €0.56 | yes |
+| Receipt | "Total today €201", per brushing per Duo | yes |
+| Sticky bar | Title "Try Once · 3 Duos", its own form buys 3 | yes |
+| Buy (buybox CTA → karmiAddToCart → replaceChoice) | One line, quantity 3, no selling plan, no kit, no Subscription Name | yes |
+| 60-Day / Year selected | The field goes back to 1; the plan adds its own Duos per delivery with the kit and Subscription Name | yes |
+| Sticky "Try once for €67" link, comparison tables' Try once | Send the buybox form; with a plan selected the field is 1, so they buy the one Duo they show | by the field at 1 |
+
+**Still to change or decide, so it keeps working:**
+
+| # | Where | What | Who |
+|---|---|---|---|
+| 1 | Terms (legal) | The Terms say "Try Once is a single duo without renewal" and the 14-day guarantee is for "the duo". More Duos per Try once order needs those clauses changed (guarantee per order or per Duo, "one money-back guarantee per customer"). Until then the maximum stays 1. | legal lane via desk, Victor |
+| 2 | Shopify admin, shipping | Try once pays shipping by zone; check that the rates still fit 2 to 4 Duos (weight or price tiers). Read only from here. | Victor |
+| 3 | Shopify admin, inventory | Above the Duo's stock Shopify refuses the add; the buybox shows Shopify's message and keeps the earlier cart. Set the maximum below normal stock. | Victor |
+| 4 | Loop, nothing to change | One-time lines are not Loop subscriptions; Loop Loyalty gives no Care Credit on them; the Welcome Kit and Subscription Name stay on plans only (verified). | none |
+| 5 | Loop widget updates | Loop writes its unit price into the Try once price after every update; the theme writes the total right after it (`setTimeout 0`). A Loop update of `loop-widget.js` must keep that order; retest the price after any Loop update. | lane, at Loop updates |
+| 6 | Loop's own add path | `shopifyAddToCartByLoopWidget` (Loop's preset bundle event) takes the form; with a plan selected the field is 1, so a plan can never be multiplied by a Try once quantity. | none (covered) |
+| 7 | Express checkout | Off on the Duo template. If it is turned on, Shopify's button buys the form, quantity included, only while Try once is selected. | decide if turned on |
+| 8 | Copy | No new text: titles from existing keys, the control's labels from Dawn ("Quantity", "Decrease / Increase quantity for …", translated). | none |
+| 9 | Tracking | Hotjar `kc_checkout_once` and the "Buybox layout" attribute stay as they are; the quantity is in the order line. | none |
+
+**Everything still open before this goes live (all decisions, nothing pushed):**
+
+| Area | Item |
+|---|---|
+| Theme editor (Victor, live theme) | Loop block: "Try once" card on top; "Plan chips: selected card only" on; "Plans as a link" `712155431293`; "Plan link opens" side panel; "Plan badges" `712106115453: Most picked`; "One-time price struck through" `712106115453`; "Try once: button text" "Try once, purchase now"; "Plan popup / side panel: text per plan" (the promise); "Try once: maximum quantity" (1 until #1 above). The editor writes `templates/product.subscription-item.json` in the live theme: main must take it back. |
+| Loop admin (Victor or a lane with that go) | Year description "6 duos a year (3 now, 3 in month 6), guaranteed fresh stock" + Loop Multilingual NL/FR (goes live at once for everyone); the dashes in the Care Credit tooltips (copy lane). |
+| Copy lane via desk | NL/FR: the promise text, "Try once, purchase now", "Most picked"; the dashes (product description, tooltips), sent 27 Nov. |
+| Legal | Struck "€67" next to "€59" (two current offers, not a reduction); "Most picked" needs order data behind it; "guaranteed fresh stock" is a promise for the month 6 delivery; Try once quantity vs the Terms (#1). |
+| Test on a dev theme with a cart, no payment | One time 1 and 3 Duos, 60-Day, Year from the panel: cart lines, kit nested, Subscription Name, "Buybox layout" attribute, Hotjar events; NL and FR; iOS Safari. |
+
 ## 5. Tracking
 
 - **Hotjar per plan, every buy path:** `kc_checkout` + `kc_checkout_once` / `_60day` / `_year` already
