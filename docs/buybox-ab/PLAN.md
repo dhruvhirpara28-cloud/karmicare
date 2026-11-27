@@ -422,8 +422,8 @@ so the plan stays the visibly better choice.
   amount, as Victor said. The buybox sets that attribute: the Year bought from the side panel sends
   "Year Supply" with the plan and the kit, Try once at 3 clears it (`preview/year_attr_check.py`,
   `shots/year-attributes.json`). The "Buybox layout" attribute is not a condition, so it changes nothing.
-- A third program, "Onetime- 10%", is a **draft**: one-time orders, from a customer's 4th one-time order on.
-  If it is switched on, the Try once note "€0 Care Credit" is no longer true for those customers.
+- A third program, "Onetime- 10%" (draft), is for reactivating migrated older customers (Victor, 27 Nov),
+  not part of the buybox.
 - **Year plan text** in Loop (selling plan "New Year Supply (Prepaid): (59*6) = €354", the storefront one):
   "6 duos a year (3 now, 3 in month 6)", without "guaranteed fresh stock" yet. Its Check-up Reward tooltip
   says "€40 in Care Credit is added to your account": per account, so a second person on their own email
