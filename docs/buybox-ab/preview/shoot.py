@@ -48,6 +48,14 @@ for width in (390, 1440):
         SHOTS_LIST.append((f'full-en-{width}-{mode}', 'full', 'en', width, mode))
         SHOTS_LIST.append((f'full-en-{width}-{mode}-once-buy', 'full', 'en', width, mode))
         SHOTS_LIST.append((f'full-en-{width}-{mode}-60day-buy', 'full', 'en', width, mode))
+# /candidate/ (compact + the Year as a link opening the side panel, Victor's lean 27 Nov)
+for width in (390, 1440):
+    for mode in ('day', 'night'):
+        for state in ('', '-60day'):
+            SHOTS_LIST.append((f'candidate-en-{width}-{mode}{state}', 'candidate', 'en', width, mode))
+        SHOTS_LIST.append((f'candidate-en-{width}-{mode}-once-buy', 'candidate', 'en', width, mode))
+for lang in ('nl', 'fr'):
+    SHOTS_LIST.append((f'candidate-{lang}-390-day', 'candidate', lang, 390, 'day'))
 # /compact/ (three cards, chips on the selected card only): plans header per state
 for width in (390, 1440):
     for mode in ('day', 'night'):

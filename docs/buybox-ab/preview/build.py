@@ -137,13 +137,22 @@ def build(lang, layout):
         # On /year/, with the plan cards' live texts (Victor, 26 Nov: "zoiezo de tekst en waarden zelfde
         # zoals live in de plan kaarten"): /chips/ chips on the selected card only, /popup/ and /panel/
         # the Year link opening a popup or a side panel
-        for variant, old, new in (
-            ('chips', '"chipsSelectedOnly": false', '"chipsSelectedOnly": true'),
-            ('popup', '"linkOpens": "card"', '"linkOpens": "popup"'),
-            ('panel', '"linkOpens": "card"', '"linkOpens": "panel"'),
+        chips = ('"chipsSelectedOnly": false', '"chipsSelectedOnly": true')
+        popup = ('"linkOpens": "card"', '"linkOpens": "popup"')
+        panel = ('"linkOpens": "card"', '"linkOpens": "panel"')
+        # /candidate/: Victor's lean (27 Nov), compact (chips on the selected card only) with the Year as a
+        # link that opens the side panel
+        for variant, changes in (
+            ('chips', [chips]),
+            ('popup', [popup]),
+            ('panel', [panel]),
+            ('candidate', [chips, panel]),
         ):
-            variant_page = year_page.replace(old, new, 1)
-            assert variant_page != year_page, variant
+            variant_page = year_page
+            for old, new in changes:
+                changed = variant_page.replace(old, new, 1)
+                assert changed != variant_page, variant
+                variant_page = changed
             variant_out = SERVE / variant / lang / 'products' / f'{HANDLE}.html'
             variant_out.parent.mkdir(parents=True, exist_ok=True)
             variant_out.write_text(variant_page)

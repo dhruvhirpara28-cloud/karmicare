@@ -2533,7 +2533,6 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
                 priceContainer.appendChild(labelEl);
             }
             labelEl.textContent = rightLabel;
-            kcEnsureMoreChevron(priceContainer);
         }
 
         // KC: a plan shown as a link under the cards until it is chosen (kcPlanExtras asLink)
@@ -2546,9 +2545,6 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             checkupReward: Boolean(kcPlan?.checkupReward),
             planId: String(alloc.selling_plan_id),
         } : null);
-
-        // KC: the ribbon once the card's price, struck price included, is in place
-        kcPlaceRibbon(groupEl);
     });
 }
 
@@ -3092,7 +3088,7 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     }
 
     const plan = groupEl.cloneNode(true);
-    plan.querySelectorAll('input, select, .kc-plan-ribbon, .kc-plan-more').forEach((el) => el.remove());
+    plan.querySelectorAll('input, select').forEach((el) => el.remove());
     plan.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
     plan.querySelectorAll('label[for]').forEach((el) => el.removeAttribute('for'));
     plan.removeAttribute('id');
@@ -3143,53 +3139,23 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     if (!dialog.open) dialog.showModal();
 }
 
-// KC: a down chevron at the end of a card's price column, shown only when the card's chips are folded
-// away (.kc-chips-selected-only, assets/kc-buybox.css): a sign that the card holds more. Decorative.
-function kcEnsureMoreChevron(priceContainer) {
-    let chevron = priceContainer.querySelector(':scope > .kc-plan-more');
-    if (!chevron) {
-        chevron = document.createElement('span');
-        chevron.className = 'kc-plan-more';
-        chevron.setAttribute('aria-hidden', 'true');
-    }
-    // Last, after "/ 60 days"
-    if (priceContainer.lastElementChild !== chevron) priceContainer.appendChild(chevron);
-}
-
-// KC: a plan card's badge as a ribbon over the card's top edge, between the title and the price
-// (Victor, 24 Nov; assets/kc-buybox.css .kc-plan-ribbon). Removed when the card's plan has none.
+// KC: a plan card's badge ("Most picked") at the bottom right of the card, in the look and place of the
+// Year's "Brushing & Beyond" (.kc-testimonial-button) with a silver shine instead of gold (Victor, 27 Nov;
+// assets/kc-buybox.css .kc-plan-badge). Removed when the card's plan has none.
 function kcUpdatePlanBadge(groupEl, text) {
-    let ribbon = groupEl.querySelector(':scope > .kc-plan-ribbon');
+    const host = groupEl.querySelector('.loop-subscription-group-selling-plans-container') || groupEl;
+    let badge = host.querySelector(':scope > .kc-plan-badge');
     if (!text) {
-        if (ribbon) ribbon.remove();
+        if (badge) badge.remove();
         return;
     }
-    if (!ribbon) {
-        ribbon = document.createElement('span');
-        ribbon.className = 'kc-plan-ribbon';
-        groupEl.appendChild(ribbon);
-        // Again on every size change of the card (width, fonts loading, the struck price arriving)
-        if (window.ResizeObserver) new ResizeObserver(() => kcPlaceRibbon(groupEl)).observe(groupEl);
+    if (!badge) {
+        badge = document.createElement('div');
+        badge.className = 'kc-plan-badge';
+        badge.appendChild(document.createElement('span')).className = 'kc-testimonial-button kc-testimonial-button--silver';
+        host.appendChild(badge);
     }
-    if (ribbon.textContent !== text) ribbon.textContent = text;
-    kcPlaceRibbon(groupEl);
-}
-
-// KC: the ribbon's horizontal centre midway between the end of the plan title and the start of the
-// price as shown (the struck price when there is one), in px from the card's left edge
-function kcPlaceRibbon(groupEl) {
-    const ribbon = groupEl.querySelector(':scope > .kc-plan-ribbon');
-    const title = groupEl.querySelector('.loop-subscription-group-label');
-    const price = groupEl.querySelector('.kc-plan-compare') || groupEl.querySelector('.loop-subscription-group-price-amount');
-    const card = groupEl.getBoundingClientRect();
-    if (!ribbon || !title || !price || !card.width) return;
-    const range = document.createRange();
-    range.selectNodeContents(title);
-    const titleEnd = range.getBoundingClientRect().right;
-    range.selectNodeContents(price);
-    const priceStart = range.getBoundingClientRect().left;
-    const x = `${Math.round((titleEnd + priceStart) / 2 - card.left)}px`;
-    if (ribbon.style.getPropertyValue('--kc-ribbon-x') !== x) ribbon.style.setProperty('--kc-ribbon-x', x);
+    if (badge.firstElementChild.textContent !== text) badge.firstElementChild.textContent = text;
 }
 
 // KC: an element's lines as <div>s, written only when they change (the plan config watches the widget)
@@ -3287,7 +3253,6 @@ function kcRenderOnceCard(productId, variant, loopContainer) {
         }
         const interval = kcLabelText(labelsEl, 'kcOneTime', 'one-time');
         if (intervalEl.textContent !== interval) intervalEl.textContent = interval;
-        kcEnsureMoreChevron(priceContainer);
     }
 }
 

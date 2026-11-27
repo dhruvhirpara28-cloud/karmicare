@@ -173,6 +173,22 @@ when the last path part is the handle (`getCurrentPathLoop`).
     the selected card only. At 390 px with Try once selected, plans header to promises 680 px (today's
     card layout 877, Year as a link 722); cards 154 / 114 / 144 px. Shot `compact-en-390-day.png`.
 
+16. **`/candidate/`, silver badge, no chevrons, no pill twice** (Victor, 27 Nov: "ik ben geneigd om
+    voor compact te gaan en de karmicare year als tertiery link die een zijpaneel opent"):
+    - `/candidate/` = switch ON, chips on the selected card only, the Year as a link that opens the
+      side panel. Shots `candidate-*.png`, `candidate-en-*-open.png` (panel), checks
+      `shots/states-candidate.json`, `shots/dialogs-candidate.json`.
+    - Chevrons removed (code and CSS). "Most picked" is the "Brushing & Beyond" badge (look and place,
+      bottom right of the card, flush with the edge) with a silver gradient shine; the ribbon and its
+      positioning code are removed.
+    - An opened plan leaves out the benefit line that repeats its Care Credit pill ("€5.90 / €70.80
+      Care Credit back on orders"), in the cards and in the panel (5 lines instead of 6 for the Year).
+    - Still said twice with 60-Day open (live texts, not pill against list): "Care Credit back in your
+      account" in the pill and the receipt; "Gift, pause or cancel" and "60-day money-back guarantee"
+      in the list and the promises; "/ 60 days" on the card and in the receipt.
+    - Purchase from the panel: karmiAddToCart with plan 712155431293 and the Welcome Kit (recorded).
+      OFF equals live at 390 Day and Night (0 % pixels). Theme Check exit 0, 19 warnings, complexity 124.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the

@@ -545,31 +545,18 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
 }
 
 /* Chips on the selected card only (Loop block "Plan chips: selected card only", with the Try once
-   card, Victor 24 Nov): the other cards keep name, sub-row and price, and a down chevron under the
-   price says there is more (assets/loop-widget.js kcEnsureMoreChevron) */
+   card, Victor 24 Nov): the other cards keep name, sub-row and price */
 .kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-return_care-tooltip,
 .kc-chips-selected-only .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-once-chips {
   display: none;
 }
 
-.kc-buybox .kc-plan-more {
-  display: none;
-}
-
-.kc-chips-selected-only .loop-subscription-group:not(:has(.loop-subscription-group-radio:checked)) .kc-plan-more,
-.kc-chips-selected-only .loop-one-time-purchase-option-position:not(:has(.loop-one-time-purchase-option-radio:checked)) .kc-plan-more {
-  display: block;
-  width: 8px;
-  height: 8px;
-  margin: var(--kc-responsive-spacing-layout-xs) 3px 0 auto;
-  border-right: var(--kc-shape-stroke-medium, 1.5px) solid var(--kc-mapped-text-default-body);
-  border-bottom: var(--kc-shape-stroke-medium, 1.5px) solid var(--kc-mapped-text-default-body);
-  transform: rotate(45deg);
-}
-
-.kc-buybox .loop-subscription-group-price-container:has(.kc-plan-compare) .kc-plan-more {
-  grid-column: 1 / -1;
-  justify-self: end;
+/* An opened plan does not say a chip twice (Victor, 27 Nov): with a Care Credit chip in the card (its
+   amount in .kc-dynamic_price), the benefit line with the same amount ("€5.90 Care Credit back on
+   orders") stays out. In the cards with the Try once card and in the plan dialog. */
+.kc-once-card .block__loop-description:has(> .kc-return_care-tooltip .kc-dynamic_price) > .kc-description-list:has(.kc-dynamic_price),
+.kc-buybox .kc-plan-dialog .block__loop-description:has(> .kc-return_care-tooltip .kc-dynamic_price) > .kc-description-list:has(.kc-dynamic_price) {
+  display: none !important;
 }
 
 /* Radio, plan name and price on one line (Victor, 24 Nov): the radio's centre on the centre of the
@@ -801,7 +788,8 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
 
 /* "Brushing & Beyond": its own row at the bottom right of the card,
    flush with the card edge instead of hanging over the border. */
-.kc-buybox .kc-bottom_label {
+.kc-buybox .kc-bottom_label,
+.kc-buybox .kc-plan-badge {
   display: flex;
   justify-content: flex-end;
   margin: var(--kc-responsive-spacing-layout-xs) calc(var(--kc-responsive-spacing-layout-lg) * -1) calc(var(--kc-responsive-spacing-layout-comfortable) * -1);
@@ -858,28 +846,18 @@ body.night-mode .kc-buybox .kc-plan-dialog::backdrop {
   color: var(--kc-heading-second-tone);
 }
 
-/* "Most picked" (Loop block "Plan badges", with the Try once card): a ribbon over the card's top edge,
-   between the title and the price (Victor, 24 Nov), in the brand's light blue, so gold stays the
-   Year's "Brushing & Beyond". Centred on the card's top border line, horizontally midway between the
-   end of the title and the start of the price: assets/loop-widget.js kcPlaceRibbon sets
-   --kc-ribbon-x from both and again on every resize (the middle of the card without it). */
-.kc-buybox .kc-plan-ribbon {
-  position: absolute;
-  left: var(--kc-ribbon-x, 50%);
-  top: calc(var(--kc-shape-stroke-thick, 2px) / -2);
-  z-index: 2;
-  transform: translate(-50%, -50%);
-  padding: 2px calc(var(--kc-responsive-spacing-layout-sm) + 4px);
-  background: var(--kc-mapped-surface-accent-default);
-  color: var(--kc-mapped-text-accent-default-on-accent);
-  font-size: var(--kc-responsive-label-sm-text-size);
-  line-height: var(--kc-responsive-label-sm-line-height);
-  letter-spacing: var(--kc-responsive-label-sm-letter-spacing);
-  font-weight: var(--font-700-weight, 700);
-  text-transform: uppercase;
-  white-space: nowrap;
-  /* Ribbon ends: a notch cut into both short sides */
-  clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%, 6px 50%);
+/* "Most picked" (Loop block "Plan badges", with the Try once card): the Year's "Brushing & Beyond" badge
+   (look and place) with a silver shine instead of gold (Victor, 27 Nov). It sits in the card's
+   flex-wrapped plan container: its own full row, grown over the negative margins to the card edges. */
+.kc-buybox .kc-plan-badge {
+  flex: 1 0 100%;
+}
+
+.kc-buybox .kc-testimonial-button.kc-testimonial-button--silver,
+body.night-mode [class*=color-scheme-] .kc-buybox .kc-testimonial-button.kc-testimonial-button--silver {
+  background: linear-gradient(160deg, #8d939b 13.2%, #b4bac2 27.9%, #dde1e6 41.2%, #f7f8fa 50%, #dde1e6 58.8%, #b4bac2 72.1%, #8d939b 86.8%);
+  box-shadow: 0 4px 14px -2px rgba(120, 128, 140, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 0 rgba(70, 76, 86, 0.35);
+  color: #191f38;
 }
 
 .kc-buybox .kc-bottom_label:empty {

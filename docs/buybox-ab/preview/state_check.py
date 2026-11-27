@@ -34,7 +34,7 @@ PROBE = r"""JSON.stringify((() => {
   lines.filter((l) => l.length > 6 && !/^[€\d\s.,/+·-]+$/.test(l)).forEach((l) => { const k = l.toLowerCase(); counts[k] = (counts[k] || 0) + 1; });
   const twice = Object.keys(counts).filter((k) => counts[k] > 1);
   let ribbon = null;
-  const band = box.querySelector('.kc-plan-ribbon');
+  const band = box.querySelector('.kc-plan-badge .kc-testimonial-button');
   if (vis(band)) {
     const card = band.closest('.loop-subscription-group');
     const b = band.getBoundingClientRect(), c = card.getBoundingClientRect();

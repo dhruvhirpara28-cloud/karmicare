@@ -203,12 +203,13 @@ brushing · no Care Credit", no rewards rows). No other new text.
 
 ## 4c. Badges, card size and the Year as a link (Victor, 24 Nov)
 
-**Two gold badges clash.** Built (Victor, 24 Nov: "een ribbon die over de rand bovenaan de kaart
-komt tussen de titel en de prijs"): gold stays the Year's ("Brushing & Beyond", the premium plan);
-"Most picked" is a ribbon in the brand's light blue (`--kc-mapped-surface-accent-default`, text
-`--kc-mapped-text-accent-default-on-accent`, notched ends) centred on the 60-Day card's top border,
-horizontally midway between the end of the title and the start of the price (`kcPlaceRibbon`, again
-on every resize). The 60-Day card loses its bottom badge row. Same setting "Plan badges".
+**Two gold badges clash.** Built (Victor, 27 Nov, after a light-blue ribbon on the top edge on 24
+Nov): "Most picked" is the Year's "Brushing & Beyond" badge, same look and place (bottom right of the
+card, flush with the edge), with a silver gradient shine instead of gold. Same setting "Plan badges".
+
+**Candidate (Victor, 27 Nov):** compact (chips on the selected card only, no chevrons) with the Year
+as a link that opens the side panel: `/candidate/`. An opened plan leaves out the benefit line that
+repeats its Care Credit pill.
 
 **Promises under the CTA follow the plan** (Victor, 24 Nov), in the theme with the card layout
 (`kcUpdatePromises`): Try once shows only "14-day money-back guarantee"

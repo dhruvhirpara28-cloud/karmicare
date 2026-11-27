@@ -2,7 +2,7 @@
 width and Day/Night, closing by Esc and by a click on the blur, and the dialog's button: it chooses the
 Year in the buybox and presses the buybox CTA, which calls karmiAddToCart with the Year's selling plan in
 the form. karmiAddToCart is replaced by a recorder first, so no cart or checkout is touched.
-Usage: python3 -I dialog_check.py <page-id> <port> <shots-dir> <out.json>"""
+Usage: python3 -I dialog_check.py <page-id> <port> <shots-dir> <out.json> [variant ...]"""
 import json
 import shutil
 import subprocess
@@ -11,6 +11,7 @@ import time
 from pathlib import Path
 
 PAGE, PORT, SHOTS, OUT = sys.argv[1], sys.argv[2], Path(sys.argv[3]), Path(sys.argv[4])
+VARIANTS = sys.argv[5:] or ['popup', 'panel']
 URL = 'http://127.0.0.1:{port}/{variant}/en/products/karmicare-biorhythmic-oral-care-system'
 
 INFO = r"""JSON.stringify((() => {
@@ -62,7 +63,7 @@ def load(variant, width, mode):
 
 
 result = {}
-for variant in ('popup', 'panel'):
+for variant in VARIANTS:
     for width in (390, 1440):
         for mode in ('day', 'night'):
             load(variant, width, mode)
