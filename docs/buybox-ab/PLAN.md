@@ -391,7 +391,7 @@ Loop block settings for it (theme editor, Duo template), the values `/candidate/
 |---|---|
 | Try once | Card on top |
 | Try once: maximum quantity | 6 (Victor, 27 Nov) |
-| Try once: button text | Try once, purchase now |
+| Try once: button text | One-time purchase (Victor, 28 Nov; was "Try once, purchase now") |
 | Plan badges | `712106115453: Most picked` |
 | One-time price struck through | `712106115453` |
 | Plans as a link under the cards | `712155431293` |
@@ -414,6 +414,21 @@ so the plan stays the visibly better choice.
 | A render on a real Shopify theme with a cart, no payment: **done 27 Nov** on an unpublished test theme (NOTES 24), EN/NL/FR render, Try once x3, 60-Day, Year from the panel in a real cart | done |
 | Stepper or dropdown (4g): Victor tests the stepper on his iPhone first | Victor |
 | How it goes on: **in git** (Victor, 27 Nov). The values above are in `templates/product.subscription-item.json`, so DH's deploy switches it on, and the theme editor is the way back ("Try once" to Link). The (i) sheets on phones are their own feature with their own way back: Theme settings > Tooltips, "Phones: (i) tooltips as a sheet from the bottom" (on by default; Astra R1 P1). The deploy writes the whole template: settings changed in the live editor since main took it back last would be lost, so compare the live template with main before it ships. | DH, desk |
+
+**Copy decisions (Victor, 28 Nov, on the copy lane's BUYBOX-COPY-2026-11-27, source-copy 2a8f829):**
+
+| Item | Decision | Who does it |
+|---|---|---|
+| One-time card name | "One-time · N Duos" / NL "Eenmalig · N duo's" / FR "Achat unique · N duos" instead of "Try Once": "try" does not fit 3 to 6 Duos. The sticky bar follows; the comparison tables keep their "Try once" for now | copy lane (`kc.sticky_cart.title_once_html` and the sticky's Try once texts) |
+| Button | "One-time purchase" / NL "Eenmalige aankoop" / FR "Achat unique" | EN in the template (this lane, done); NL/FR copy lane |
+| Badge | NL "Meest gekozen", FR "Le plus choisi" | copy lane |
+| Side-panel promise | NL ends "Zo stap je zelfzekerder naar binnen en buiten."; EN and FR follow that sentence | copy lane writes EN/FR; EN then in the template |
+| Year line in Loop | unchanged ("6 duos a year (3 now, 3 in month 6)"); the fresh stock goes into an (i) on that line | copy lane writes the (i) text; Victor puts it in Loop (+ Loop Multilingual) |
+| Translations | registered **with** the deploy, not after it | desk, copy lane |
+| Care Credit tooltips | one formula, no "Return on Care", no dashes; plural in the receipt tooltip | copy lane (theme + Translate & Adapt), Victor (Loop, compare metaobjects) |
+| "Return on Care" spots | Care Credit in the receipt line, the FAQ category and the comparison row; the eyebrow stays | copy lane, Victor (metaobject) |
+| Duo description | last sentence without the dash, as proposed | Victor (admin), copy lane (NL/FR) |
+| "What you'll feel" lines | not yet | none |
 
 **Loop admin, read on 27 Nov (nothing changed):**
 

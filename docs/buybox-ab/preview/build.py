@@ -57,28 +57,6 @@ PROMISE_VOORSTEL = (
 )
 
 
-def fresh_stock(page):
-    """The Year's "6 duos a year (3 now, 3 in month 6)" line with ", guaranteed fresh stock" (Victor, 27 Nov):
-    a Loop admin text, so emulated in Loop's product JSON as that edit would deliver it (EN only)."""
-    pattern = r'(<script class="loopProductQuickJson-' + PID + r'" type="application/json">)(.*?)(</script>)'
-    count = 0
-
-    def patch(match):
-        nonlocal count
-        product = json.loads(match.group(2))
-        for group in product['selling_plan_groups']:
-            for plan in group['selling_plans']:
-                if str(plan['id']) == '712155431293' and '(3 now, 3 in month 6)</div>' in plan['description']:
-                    plan['description'] = plan['description'].replace(
-                        '(3 now, 3 in month 6)</div>', '(3 now, 3 in month 6), guaranteed fresh stock</div>', 1)
-                    count += 1
-        return match.group(1) + json.dumps(product, ensure_ascii=False) + match.group(3)
-
-    page = re.sub(pattern, patch, page, flags=re.S)
-    assert count == 2, f'fresh stock: {count}'
-    return page
-
-
 def build(lang, layout):
     page = (LIVE / PAGES[lang]).read_text()
     sticky = locale(lang)
@@ -94,9 +72,9 @@ def build(lang, layout):
         'data-kc-qty-label': sticky['qty_label'],
         'data-kc-qty-decrease': sticky['qty_decrease'].replace('{{ product }}', product_title),
         'data-kc-qty-increase': sticky['qty_increase'].replace('{{ product }}', product_title),
-        # Loop block "Try once: button text" filled in by Victor (24 Nov), EN only: until it is translated
-        # Shopify shows the English value on /nl and /fr too
-        'data-kc-once-cta': 'Try once, purchase now',
+        # Loop block "Try once: button text" as in the template (Victor, 28 Nov: "One-time purchase"), EN
+        # only: until it is translated Shopify shows the English value on /nl and /fr too
+        'data-kc-once-cta': 'One-time purchase',
         'data-kc-or': sticky['plans_or'],
         'data-kc-credit': sticky['credit_html'],
         'data-kc-credit-checkup': sticky['credit_checkup_html'],
@@ -223,9 +201,8 @@ def build(lang, layout):
                 variant_page = changed
             variant_out = SERVE / variant / lang / 'products' / f'{HANDLE}.html'
             variant_out.parent.mkdir(parents=True, exist_ok=True)
-            # The Loop admin edit is EN; NL and FR come through Loop Multilingual
-            if variant == 'candidate' and lang == 'en':
-                variant_page = fresh_stock(variant_page)
+            # No emulated Loop edit any more: Victor (28 Nov) keeps the Year line as it is and puts the
+            # fresh stock in an (i) still to be written (copy lane), so fresh_stock() is not applied
             variant_out.write_text(variant_page)
             print(variant_out)
     return out
