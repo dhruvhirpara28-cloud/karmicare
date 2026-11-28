@@ -393,6 +393,13 @@ when the last path part is the handle (`getCurrentPathLoop`).
     `shots/close.json`: both buttons compute alike at 390 (40 x 40, 8 px, rgb(127, 185, 255) on
     rgb(10, 22, 40), 16 px icon, "Close"). Theme Check exit 0.
 
+31. **Astra R4 and R5** (`docs/buybox-ab/review/ASTRA-R4.md`, `ASTRA-R5.md`). R4 on the close button change:
+    ready with fixes, 0 P0, 0 P1, 0 P2, 3 nits; the two close buttons matched in all 16 cases it measured
+    (Day/Night, 390/1440, panel/popup, with/without title bar). The nits were fixed in 9de5fd9 (template
+    by data attribute in its own buybox, only when a dialog can open, the comment's 44 px). R5 on that fix:
+    **ready**, 0 findings. The real test theme renders the template and the icon, no Liquid error. The
+    Astra review of the buybox v2 is complete: R1 to R5, last verdict ready on 9de5fd9.
+
 ## Not tested here (needs a dev theme with a cart, no payment)
 
 - Cart and checkout lines for one time (1 Duo, no selling plan, no kit, no "Subscription Name") and the
