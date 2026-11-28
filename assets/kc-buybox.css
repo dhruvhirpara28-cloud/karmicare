@@ -457,7 +457,8 @@ html.kc-plan-dialog-open {
 
 /* The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, the close button beside
    it (Victor, 27 Nov). The bar stays put and the content scrolls under it: glass as the footer, with
-   its hairline below, and room around the 44 px close button on every side. */
+   its hairline below, and room around the close button (--kc-responsive-size-button-sm-height) on every
+   side. */
 .kc-buybox .kc-plan-dialog__header {
   position: absolute;
   top: 0;

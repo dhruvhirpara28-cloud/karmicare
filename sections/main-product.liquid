@@ -671,10 +671,13 @@
                     </script>
                     {%- comment -%}
                       The plan popup / side panel's close icon, the one the professionals' quote panel uses
-                      (assets/loop-widget.js kcOpenPlanDialog clones it)
+                      (assets/loop-widget.js kcOpenPlanDialog clones it from its own buybox). Only when a
+                      dialog can open: the card layout, a plan as a link, and the popup or the side panel.
                     {%- endcomment -%}
-                    {%- if block.settings.plan_link_opens == 'popup' or block.settings.plan_link_opens == 'panel' -%}
-                      <template id="kc-icon-close-{{ product.id }}">{{ 'kc-icon-close.svg' | inline_asset_content }}</template>
+                    {%- if block.settings.try_once_layout == 'card' and block.settings.plans_as_link != blank -%}
+                      {%- if block.settings.plan_link_opens == 'popup' or block.settings.plan_link_opens == 'panel' -%}
+                        <template data-kc-icon-close>{{ 'kc-icon-close.svg' | inline_asset_content }}</template>
+                      {%- endif -%}
                     {%- endif -%}
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}

@@ -3097,8 +3097,10 @@ function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
     close.type = 'button';
     close.className = 'kc-plan-dialog__close';
     close.setAttribute('aria-label', extras.closeLabel);
-    // The site's close icon, as on the professionals' quote panel (sections/main-product.liquid template)
-    const closeIcon = document.getElementById(`kc-icon-close-${productId}`);
+    // The site's close icon, as on the professionals' quote panel (sections/main-product.liquid template):
+    // this buybox's own, else any on the page (the same inert SVG)
+    const closeIcon = box.querySelector('template[data-kc-icon-close]')
+        || document.querySelector('template[data-kc-icon-close]');
     if (closeIcon && closeIcon.content) close.appendChild(closeIcon.content.cloneNode(true));
     close.addEventListener('click', () => kcCloseSheet(dialog));
 

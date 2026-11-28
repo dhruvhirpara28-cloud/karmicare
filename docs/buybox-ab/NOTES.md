@@ -387,9 +387,9 @@ when the last path part is the handle (`getCurrentPathLoop`).
     quote panel on mobile; reuse the UI elements that exist). `.kc-plan-dialog__close` now takes the same
     KC/Button tokens as `.trusted-professionals__panel-close` (40 x 40, `--kc-shape-radius-sm`, surface
     accent, on-accent icon colour, accent hover, focus ring `--kc-mapped-border-focus-strong`) and the same
-    icon, `kc-icon-close.svg`: a `<template id="kc-icon-close-{{ product.id }}">` next to the plan extras
-    in `sections/main-product.liquid` (only with the popup or the side panel), cloned by
-    `kcOpenPlanDialog`. The drawn cross and the 36 / 44 px circle are gone. `preview/close_check.py`,
+    icon, `kc-icon-close.svg`: a `<template data-kc-icon-close>` next to the plan extras in
+    `sections/main-product.liquid` (only with the card layout, a plan as a link and the popup or the side
+    panel; Astra R4 nits), cloned by `kcOpenPlanDialog` from its own buybox. The drawn cross and the 36 / 44 px circle are gone. `preview/close_check.py`,
     `shots/close.json`: both buttons compute alike at 390 (40 x 40, 8 px, rgb(127, 185, 255) on
     rgb(10, 22, 40), 16 px icon, "Close"). Theme Check exit 0.
 
