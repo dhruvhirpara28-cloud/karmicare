@@ -1294,8 +1294,10 @@ function applyDefaultSelectionBasedOnLoopSettings(selectedVariant, productId) {
     const loopContainer = getLoopSubscriptionContainer(productId);
     const themeDefaultToSubscription = loopContainer ? loopContainer.dataset.defaultToSubscription === 'true' : false;
 
-    const shouldDefaultToSubscription = themeDefaultToSubscription ||
-        window.loopPropsUI?.byDefaultChooseSubscriptionOption;
+    // KC CUSTOM: with the Try once card (kcOnceCard) the one-time option starts selected, whatever the
+    // theme or Loop admin "default to subscription" says
+    const shouldDefaultToSubscription = !kcOnceCard(productId) && (themeDefaultToSubscription ||
+        window.loopPropsUI?.byDefaultChooseSubscriptionOption);
 
     if (shouldDefaultToSubscription) {
         defaultSelectFirstSellingPlanLoop(selectedVariant, productId);
@@ -2151,12 +2153,40 @@ function updateWelcomeKitUI(productId) {
     const qualifies = checkPlanQualifiesForWelcomeKit(productId);
     if (!qualifies) return;
 
+    const kit = kcWelcomeKitParts();
+    if (!kit) return;
+    const { totalValue } = kit;
+    const formattedTotalValue = loopFormatMoney(totalValue, true);
+
+    const welcomeKitContainer = document.createElement("div");
+    welcomeKitContainer.className = "loop-welcome-kit-section";
+
+    // KC: open for the subscription selected in the buybox (the kit sits in that plan's description),
+    // unless the shopper closed it; no longer tied to the first plan radio on the page.
+    if (!window.loopWelcomeKitExpanded) {
+        window.loopWelcomeKitExpanded = {};
+    }
+    const isCurrentlyExpanded = window.loopWelcomeKitExpanded[productId] !== false;
+    if (isCurrentlyExpanded) {
+        welcomeKitContainer.classList.add("is-expanded");
+    }
+
+    welcomeKitContainer.innerHTML = kcWelcomeKitSectionHtml(kit);
+    kcUpdateWelcomeKitListeners(productId, welcomeKitContainer, descriptionElement, formattedTotalValue);
+}
+
+/**
+ * KC: the Welcome Kit's title, total value and product tiles from #loop-welcome-kit-data (the Loop
+ * block's Welcome Kit products), null without them. Shared by the buybox (updateWelcomeKitUI) and the
+ * plan dialog (kcOpenPlanDialog), so both show the same tiles.
+ */
+function kcWelcomeKitParts() {
     const dataEl = document.querySelector("#loop-welcome-kit-data");
-    if (!dataEl) return;
+    if (!dataEl) return null;
 
     const title = dataEl.dataset.title || "Welcome Kit · with first order";
     const productItems = dataEl.querySelectorAll(".loop-welcome-kit-product-item");
-    if (productItems.length === 0) return;
+    if (productItems.length === 0) return null;
 
     let totalValue = 0;
     let productsHtml = "";
@@ -2191,22 +2221,13 @@ function updateWelcomeKitUI(productId) {
         `;
     });
 
+    return { title, totalValue, productsHtml };
+}
+
+// KC: the Welcome Kit section's inner markup from kcWelcomeKitParts()
+function kcWelcomeKitSectionHtml({ title, totalValue, productsHtml }) {
     const formattedTotalValue = loopFormatMoney(totalValue, true);
-
-    const welcomeKitContainer = document.createElement("div");
-    welcomeKitContainer.className = "loop-welcome-kit-section";
-
-    // KC: open for the subscription selected in the buybox (the kit sits in that plan's description),
-    // unless the shopper closed it; no longer tied to the first plan radio on the page.
-    if (!window.loopWelcomeKitExpanded) {
-        window.loopWelcomeKitExpanded = {};
-    }
-    const isCurrentlyExpanded = window.loopWelcomeKitExpanded[productId] !== false;
-    if (isCurrentlyExpanded) {
-        welcomeKitContainer.classList.add("is-expanded");
-    }
-
-    welcomeKitContainer.innerHTML = `
+    return `
         <div class="loop-welcome-kit-header">
             <span class="loop-welcome-kit-title">${title}</span>
             <div style="display: flex; align-items: center;">
@@ -2218,7 +2239,10 @@ function updateWelcomeKitUI(productId) {
             ${productsHtml}
         </div>
     `;
+}
 
+// The buybox's Welcome Kit section: collapse toggle, product popups, its place in the plan description
+function kcUpdateWelcomeKitListeners(productId, welcomeKitContainer, descriptionElement, formattedTotalValue) {
     // Attach event listener for collapsing/expanding
     const header = welcomeKitContainer.querySelector(".loop-welcome-kit-header");
     header.addEventListener("click", (e) => {
@@ -2245,7 +2269,7 @@ function updateWelcomeKitUI(productId) {
         });
     });
 
-    // (Variables variant, loopPropsProduct, and descriptionElement are already declared at the top of the function)
+    // (descriptionElement and formattedTotalValue come from updateWelcomeKitUI)
 
     if (descriptionElement) {
         descriptionElement.classList.remove("loop-display-none");
@@ -2427,6 +2451,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
     const dayMap = { day: 1, week: 7, month: 30, year: 365 };
     // KC: the cards' own labels in the page language, from the receipt's data attributes
     const labelsEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
+    // KC: badge and struck-through one-time price per selling plan ID, only with the Try once card
+    const extras = kcPlanExtras(productId);
 
     loopContainer.querySelectorAll('.loop-subscription-group').forEach((groupEl) => {
         const radio = groupEl.querySelector('.loop-subscription-group-radio');
@@ -2435,6 +2461,8 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         // KC: the card's selected, offered, allowed plan, not the group's first one
         const alloc = kcCardAllocation(productId, variant, radio.dataset.id);
         if (!alloc?.price) return;
+
+        kcUpdatePlanBadge(groupEl, extras.badges[String(alloc.selling_plan_id)] || '');
 
         // 1. Shipping label — read directly from Loop's <select> option (e.g. "ships every 60 days")
         const select = groupEl.querySelector('.loop-selling-plan-selector');
@@ -2454,6 +2482,10 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
         // Determine duos for calculation
         const option = select?.querySelector(`option[value="${alloc.selling_plan_id}"]`);
         const duosCount = parseInt(option?.dataset?.duos) || 1;
+
+        // KC: the one-time price of the same Duos, struck through before the plan price (kcPlanExtras)
+        const comparesOnce = extras.compareOnce.includes(String(alloc.selling_plan_id));
+        kcUpdatePlanCompare(groupEl, comparesOnce ? loopFormatMoney(variant.price * duosCount, true) : '');
         const brushingsPerDuo = parseInt(option?.dataset?.brushings) || 120;
 
         // 3. Per-brushing cost (what the checkout charges ÷ (duos * 120))
@@ -2502,7 +2534,86 @@ function updateSubscriptionGroupCardSubRow(productId, variant) {
             }
             labelEl.textContent = rightLabel;
         }
+
+        // KC: a plan shown as a link under the cards until it is chosen (kcPlanExtras asLink)
+        const asLink = extras.asLink.includes(String(alloc.selling_plan_id));
+        const returnOnCare = parseInt(option?.dataset?.returnOnCare) || kcPlan?.careCreditPercent || 0;
+        kcUpdatePlanLink(productId, loopContainer, groupEl, asLink ? {
+            price: loopFormatMoney(kcPlanPrice(alloc), true),
+            interval: rightLabel,
+            credit: loopFormatMoney(Math.round(kcPlanPrice(alloc) * returnOnCare / 100), true),
+            checkupReward: Boolean(kcPlan?.checkupReward),
+            planId: String(alloc.selling_plan_id),
+        } : null);
     });
+}
+
+/**
+ * KC: a plan card folded into a tertiary link after the cards ("Or The Karmicare Year · €354 / year",
+ * "+ €70.80 Care Credit + €40 Check-up Reward"), in the old Try once link's look (.tertiary-try-once-link),
+ * with the card layout only (Loop block "Plans as a link under the cards", Victor 24 Nov). The card stays
+ * hidden until the plan is chosen: a click on the link, or any other way (compare table, sticky bar);
+ * then the card opens for good on this page and the link goes. Texts: "Or" (kc.plans.or), the plan
+ * name (Shopify's translated group name), the card's own price and interval, the sticky bar's Care
+ * Credit lines (kc.sticky_cart.credit_html / credit_checkup_html). The link sits inside the Loop
+ * container, so kc-plan-select counts its click as the shopper's own plan choice.
+ */
+function kcUpdatePlanLink(productId, loopContainer, groupEl, data) {
+    const radio = groupEl.querySelector('.loop-subscription-group-radio');
+    const wrapper = groupEl.closest('[id^="loop-selling_plan_group-"]') || groupEl;
+    const groupId = radio?.dataset?.id || '';
+    const fieldset = loopContainer.querySelector('#loop-selling-plan-fieldset');
+    let link = loopContainer.querySelector(`.kc-plan-link[data-group-id="${groupId}"]`);
+    if (radio?.checked) groupEl.dataset.kcLinkOpened = 'true';
+    const folded = Boolean(data) && groupEl.dataset.kcLinkOpened !== 'true';
+
+    if (wrapper.classList.contains('kc-plan-as-link') !== folded) wrapper.classList.toggle('kc-plan-as-link', folded);
+    if (!folded) {
+        if (link) link.remove();
+        return;
+    }
+
+    if (!link) {
+        link = document.createElement('div');
+        link.className = 'tertiary-try-once-link figma-tryonce v9bb kc-plan-link';
+        link.dataset.groupId = groupId;
+        link.innerHTML = '<span class="ft-line"><span class="kc-plan-link__or"></span> '
+            // kc-try-once-btn: the old Try once link's text-link look (only read inside its own container)
+            + '<button class="ft-link kc-try-once-btn kc-plan-link__btn" type="button"></button> '
+            + '<span class="ft-ship kc-plan-link__interval"></span></span><br>'
+            + '<span class="ft-note kc-plan-link__note"></span>';
+        // Choose the plan in the buybox: its card opens for good on this page, the link goes
+        const choose = () => {
+            groupEl.dataset.kcLinkOpened = 'true';
+            wrapper.classList.remove('kc-plan-as-link');
+            link.remove();
+            radio.click();
+            radio.focus({ preventScroll: true });
+        };
+        const button = link.querySelector('button');
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            // Loop block "Plan link opens": the card (choose), or the plan in a popup or side panel
+            const opens = kcPlanExtras(productId).linkOpens;
+            if (opens === 'card') choose();
+            else kcOpenPlanDialog(productId, groupEl, opens, link.dataset.planId, choose, button);
+        });
+        const links = loopContainer.querySelectorAll('.kc-plan-link');
+        (links.length ? links[links.length - 1] : fieldset).after(link);
+    }
+
+    const texts = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset || {};
+    const name = groupEl.querySelector('.loop-subscription-group-label')?.textContent.trim() || '';
+    const set = (selector, text) => {
+        const el = link.querySelector(selector);
+        if (el && el.textContent !== text) el.textContent = text;
+    };
+    if (link.dataset.planId !== data.planId) link.dataset.planId = data.planId;
+    set('.kc-plan-link__or', texts.kcOr || 'Or');
+    set('.kc-plan-link__btn', `${name} · ${data.price}`);
+    set('.kc-plan-link__interval', data.interval);
+    const note = data.checkupReward ? texts.kcCreditCheckup : texts.kcCredit;
+    set('.kc-plan-link__note', (note || '').replace('[credit]', data.credit));
 }
 
 /**
@@ -2572,6 +2683,8 @@ function updateKcPricingSummary(productId, variant) {
     if (!summaryEl) return;
 
     let tryOnceContainer = document.querySelector(`#kc-try-once-container-${productId}`);
+    // KC: the Try once link only in the link layout; the card layout shows Try once as a plan card
+    const tryOnceDisplay = kcOnceCard(productId) ? 'none' : 'block';
 
     if (isOneTime) {
         // Hide default price block
@@ -2579,14 +2692,14 @@ function updateKcPricingSummary(productId, variant) {
         if (taxBlock) taxBlock.style.display = 'none';
         if (installmentBlock) installmentBlock.style.display = 'none';
 
-        if (tryOnceContainer) tryOnceContainer.style.display = 'block';
+        if (tryOnceContainer) tryOnceContainer.style.display = tryOnceDisplay;
     } else {
         // Subscription: hide default price block, show summary, show try once link
         if (priceBlock) priceBlock.style.display = 'none';
         if (taxBlock) taxBlock.style.display = 'none';
         if (installmentBlock) installmentBlock.style.display = 'none';
 
-        if (tryOnceContainer) tryOnceContainer.style.display = 'block';
+        if (tryOnceContainer) tryOnceContainer.style.display = tryOnceDisplay;
     }
 
     const sellingPlanAllocation = window?.loopProps[productId]?.sellingPlanAllocation;
@@ -2688,7 +2801,9 @@ function updateKcPricingSummary(productId, variant) {
     if (isOneTime) {
         // One-time styling overrides
         const oneTimePriceCents = variant.price;
-        totalFormatted = loopFormatMoney(oneTimePriceCents, true);
+        // Total today: the Try once quantity's price (kcOnceQuantity, 1 without the control); per brushing
+        // stays the price of one Duo
+        totalFormatted = loopFormatMoney(oneTimePriceCents * kcOnceQuantity(productId), true);
         intervalLabel = kcReceiptText('kcOneTime', 'one-time');
         // Assume 120 brushings (60 days) for one-time standard size as fallback
         const perBrushingCents = Math.round(oneTimePriceCents / 120);
@@ -2789,6 +2904,7 @@ function updateKcPricingSummary(productId, variant) {
     }
 
     updateKcPlanButtonLabel(productId, isOneTime);
+    kcUpdatePromises(productId, isOneTime);
     summaryEl.style.display = 'block';
 }
 
@@ -2805,9 +2921,14 @@ function getWelcomeKitValueCents() {
 
 // CTA label per selected plan, by selling plan ID. The buy button carries data-plan-labels
 // ({"712106115453": "Start my 60-Day rhythm", …}) from the buy_buttons block;
-// plans without a label, and one-time, use the button's default text.
+// plans without a label, and one-time, use the button's default text. With the Try once card
+// (kcOnceCard) the buybox CTA says the sticky bar's Try once CTA (kc.sticky_cart.cta_once_html)
+// while Try once is selected.
 function updateKcPlanButtonLabel(productId, isOneTime) {
     const sellingPlanId = String(window.loopProps?.[productId]?.sellingPlanId || '').trim();
+    const onceLabel = isOneTime && kcOnceCard(productId)
+        ? document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceCta || ''
+        : '';
     document.querySelectorAll('.product-form__custom-submit[data-plan-labels]').forEach((button) => {
         const labelEl = button.querySelector('.kc-cta-label');
         if (!labelEl) return;
@@ -2819,19 +2940,562 @@ function updateKcPlanButtonLabel(productId, isOneTime) {
             console.warn('[KC plans] Custom Button Text per plan: lines must start with a selling plan ID', keys);
         }
         const match = !isOneTime && sellingPlanId && Object.keys(labels).find((key) => key.trim() === sellingPlanId);
-        labelEl.textContent = match ? labels[match] : button.dataset.defaultLabel;
+        const onceHere = onceLabel && button.closest('.kc-buybox');
+        labelEl.textContent = match ? labels[match] : onceHere ? onceLabel : button.dataset.defaultLabel;
     });
+}
+
+/**
+ * KC: the buybox's Try once layout, from the Loop block setting "Try once" (sections/main-product.liquid,
+ * data-kc-once-layout on the buybox's Try once container, the first one on the page): "card" shows
+ * Loop's own one-time option as the first plan card and starts on it; anything else (default "link")
+ * keeps today's link under the cards. docs/buybox-ab/PLAN.md
+ */
+function kcOnceCard(productId) {
+    const container = document.querySelector(`#kc-try-once-container-${productId}`);
+    return container?.dataset?.kcOnceLayout === 'card';
+}
+
+/**
+ * KC: plan card extras by selling plan ID, from the Loop block settings (#kc-plan-extras-<product id> in
+ * sections/main-product.liquid): badges ("Plan badges", one "712106115453: Most picked" per line) and
+ * the plans that show the one-time price struck through ("One-time price struck through", comma-
+ * separated IDs). Only with the Try once card (kcOnceCard), so the link layout stays as it was.
+ * docs/buybox-ab/PLAN.md
+ */
+function kcPlanExtras(productId) {
+    const extras = { badges: {}, compareOnce: [], asLink: [], chipsSelectedOnly: false, linkOpens: 'card', closeLabel: 'Close', panelText: {} };
+    if (!kcOnceCard(productId)) return extras;
+    let data = {};
+    try {
+        data = JSON.parse(document.querySelector(`#kc-plan-extras-${productId}`)?.textContent || '{}') || {};
+    } catch (e) {
+        data = {};
+    }
+    String(data.badges || '').split(/\r?\n/).forEach((line) => {
+        const colon = line.indexOf(':');
+        if (colon < 0) return;
+        const planId = line.slice(0, colon).trim();
+        const label = line.slice(colon + 1).trim();
+        if (/^\d+$/.test(planId) && label) extras.badges[planId] = label;
+    });
+    const ids = (value) => String(value || '').split(',').map((id) => id.trim()).filter((id) => /^\d+$/.test(id));
+    extras.compareOnce = ids(data.compareOnce);
+    extras.asLink = ids(data.asLink);
+    extras.chipsSelectedOnly = data.chipsSelectedOnly === true;
+    if (data.linkOpens === 'popup' || data.linkOpens === 'panel') extras.linkOpens = data.linkOpens;
+    if (data.closeLabel) extras.closeLabel = String(data.closeLabel);
+    // "Plan popup / side panel: text per plan", one line per plan
+    String(data.panelText || '').split(/\r?\n/).forEach((line) => {
+        const colon = line.indexOf(':');
+        if (colon < 0) return;
+        const planId = line.slice(0, colon).trim();
+        // "ID: text", or "ID: heading | text" for a small heading above it
+        const value = line.slice(colon + 1);
+        const bar = value.indexOf('|');
+        const heading = bar < 0 ? '' : value.slice(0, bar).trim();
+        const text = (bar < 0 ? value : value.slice(bar + 1)).trim();
+        if (/^\d+$/.test(planId) && (heading || text)) extras.panelText[planId] = { heading, text };
+    });
+    return extras;
+}
+
+// KC: the one-time price of the plan's Duos struck through before the plan price (kcPlanExtras); removed
+// for a plan without it. Read out as nothing: it repeats the Try once price the card above says.
+function kcUpdatePlanCompare(groupEl, text) {
+    const amount = groupEl.querySelector('.loop-subscription-group-price-amount');
+    if (!amount) return;
+    let compare = amount.parentElement.querySelector(':scope > .kc-plan-compare');
+    if (!text) {
+        if (compare) compare.remove();
+        return;
+    }
+    if (!compare) {
+        compare = document.createElement('s');
+        compare.className = 'kc-plan-compare';
+        compare.setAttribute('aria-hidden', 'true');
+        // "€67 €59": the struck price before the plan price (Victor, 24 Nov)
+        amount.before(compare);
+    }
+    if (compare.textContent !== text) compare.textContent = text;
+}
+
+/**
+ * KC: the promises under the CTA (the buybox's icon-with-text row: 60-day guarantee, pause, free
+ * shipping) are the plans' promises: with the Try once card, the row is invisible while Try once is
+ * selected and back for a plan (Victor, 27 Nov). It keeps its room, so the space under the CTA is the
+ * same for every plan.
+ */
+function kcUpdatePromises(productId, isOneTime) {
+    if (!kcOnceCard(productId)) return;
+    const row = document.querySelector('.kc-buybox .icon-with-text');
+    if (!row) return;
+    const visibility = isOneTime ? 'hidden' : '';
+    if (row.style.visibility !== visibility) row.style.visibility = visibility;
+    if (isOneTime) row.setAttribute('aria-hidden', 'true');
+    else row.removeAttribute('aria-hidden');
+}
+
+// KC: on a phone the side panel slides down before it closes (assets/kc-info-sheet.js KCSheet.close; the
+// slide is assets/kc-buybox.css .kc-plan-dialog--panel.is-closing), else it closes at once
+function kcCloseSheet(dialog) {
+    if (window.KCSheet) window.KCSheet.close(dialog);
+    else dialog.close();
+}
+
+/**
+ * KC: a plan link's plan in a <dialog> instead of its card (Loop block "Plan link opens", Victor 26 Nov):
+ * "popup" in the middle of the screen over a soft blur, "panel" as a side panel with the landed still of
+ * the kit above the plan (the hero animation's data-still: Awake in Day, Asleep in Night). The plan is
+ * the card itself, cloned without its radio, so its texts, prices, chips and benefit lines are Loop's
+ * live ones; its badges ("Brushing & Beyond") go on top, above the image, and the block's text for the
+ * plan ("Plan popup / side panel: text per plan") under its title and price. The body scrolls; the
+ * footer holds the button, fixed at the bottom. The button is the buybox CTA for that plan (its
+ * per-plan label): it chooses the plan in the buybox (the card opens, the link goes) and presses the
+ * buybox CTA, so the purchase takes the buybox's own path (karmiAddToCart). Esc, the close button and
+ * a click on the blur close it; focus goes back to the link.
+ */
+function kcOpenPlanDialog(productId, groupEl, mode, planId, choose, opener) {
+    const box = groupEl.closest('.kc-buybox');
+    if (!box || typeof HTMLDialogElement !== 'function') {
+        choose();
+        return;
+    }
+    const extras = kcPlanExtras(productId);
+    let dialog = box.querySelector(':scope > dialog.kc-plan-dialog');
+    if (!dialog) {
+        dialog = document.createElement('dialog');
+        // A click on the dialog itself is a click on the blur around the content. On a phone the side
+        // panel slides down first (kcCloseSheet), also for Esc and the close button.
+        dialog.addEventListener('click', (event) => {
+            if (event.target === dialog) kcCloseSheet(dialog);
+        });
+        dialog.addEventListener('cancel', (event) => {
+            event.preventDefault();
+            kcCloseSheet(dialog);
+        });
+        dialog.addEventListener('close', () => {
+            // The page scrolls again (locked while the dialog is open)
+            document.documentElement.classList.remove('kc-plan-dialog-open');
+            if (dialog.kcOpener && dialog.kcOpener.isConnected) dialog.kcOpener.focus({ preventScroll: true });
+        });
+        box.appendChild(dialog);
+    }
+    dialog.className = `kc-plan-dialog kc-plan-dialog--${mode}`;
+    dialog.kcOpener = opener;
+
+    // The dialog: a title bar on top and a footer with the button at the bottom, both glass and fixed, with
+    // the body (image, plan, its text) scrolling under them (Victor, 27 Nov; assets/kc-buybox.css)
+    const inner = document.createElement('div');
+    inner.className = 'kc-plan-dialog__inner';
+    const body = document.createElement('div');
+    body.className = 'kc-plan-dialog__body';
+    const footer = document.createElement('div');
+    footer.className = 'kc-plan-dialog__footer';
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'kc-plan-dialog__close';
+    close.setAttribute('aria-label', extras.closeLabel);
+    // The site's close icon, as on the professionals' quote panel (sections/main-product.liquid template):
+    // this buybox's own, else any on the page (the same inert SVG)
+    const closeIcon = box.querySelector('template[data-kc-icon-close]')
+        || document.querySelector('template[data-kc-icon-close]');
+    if (closeIcon && closeIcon.content) close.appendChild(closeIcon.content.cloneNode(true));
+    close.addEventListener('click', () => kcCloseSheet(dialog));
+
+    // The plan's badge text ("Brushing & Beyond") as the dialog's title at the top, no badge look, next to
+    // the close button (Victor, 27 Nov). Without a badge the close button sits alone at the top right.
+    const badgeText = groupEl.querySelector('.kc-bottom_label .kc-testimonial-button, .kc-plan-badge .kc-testimonial-button');
+    if (badgeText && badgeText.textContent.trim()) {
+        const header = document.createElement('div');
+        header.className = 'kc-plan-dialog__header';
+        const heading = document.createElement('p');
+        heading.className = 'kc-plan-dialog__header-title';
+        heading.textContent = badgeText.textContent.trim();
+        header.appendChild(heading);
+        header.appendChild(close);
+        inner.appendChild(header);
+    } else {
+        inner.appendChild(close);
+    }
+
+    if (mode === 'panel') {
+        const night = document.body.classList.contains('night-mode');
+        const still = document.querySelector(`.kc-hero-animation__mode--${night ? 'pm' : 'am'}[data-still]`)
+            || document.querySelector('.kc-hero-animation__mode[data-still]');
+        if (still) {
+            // The kit cropped to its own edges in a frame 90 % of the panel's inner width (assets/kc-buybox.css)
+            const frame = document.createElement('div');
+            frame.className = 'kc-plan-dialog__image';
+            const image = document.createElement('img');
+            image.src = still.dataset.still;
+            image.alt = still.querySelector('img')?.alt || '';
+            image.width = 1080;
+            image.height = 960;
+            frame.appendChild(image);
+            body.appendChild(frame);
+        }
+    }
+
+    const plan = groupEl.cloneNode(true);
+    plan.querySelectorAll('input, select').forEach((el) => el.remove());
+    plan.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+    plan.querySelectorAll('label[for]').forEach((el) => el.removeAttribute('for'));
+    plan.removeAttribute('id');
+    plan.classList.add('kc-plan-dialog__plan');
+    // The Welcome Kit tiles: the buybox shows them in the selected plan only, so the dialog builds its own
+    // from the same data (kcWelcomeKitParts) for a plan that gets the kit (the block's Welcome Kit plan
+    // IDs, blank = every subscription). Not clickable here: the product popup would open under the dialog.
+    const kitTarget = plan.querySelector('.block__show-welcome-kit');
+    const kit = kcWelcomeKitParts();
+    const kitPlans = (document.querySelector('#loop-welcome-kit-data')?.dataset?.plans || '')
+        .split(',').map((id) => id.trim()).filter(Boolean);
+    if (kitTarget && kit && (kitPlans.length === 0 || kitPlans.includes(planId))) {
+        const section = document.createElement('div');
+        section.className = 'loop-welcome-kit-section is-expanded';
+        section.innerHTML = kcWelcomeKitSectionHtml(kit);
+        section.querySelectorAll('.loop-wk-clickable').forEach((tile) => {
+            tile.classList.remove('loop-wk-clickable');
+            tile.style.removeProperty('cursor');
+        });
+        kitTarget.replaceChildren(section);
+    }
+    const title = plan.querySelector('.loop-subscription-group-label');
+    if (title) {
+        title.id = `kc-plan-dialog-title-${productId}`;
+        dialog.setAttribute('aria-labelledby', title.id);
+    }
+    // The badge is the strip on top now: out of the plan
+    plan.querySelectorAll('.kc-bottom_label, .kc-plan-badge').forEach((badge) => badge.remove());
+    // The plan's own text ("Plan popup / side panel: text per plan"), under its title and price
+    const panelText = extras.panelText[planId];
+    if (panelText) {
+        const promise = document.createElement('div');
+        promise.className = 'kc-plan-dialog__text';
+        if (panelText.heading) {
+            const heading = document.createElement('p');
+            heading.className = 'kc-plan-dialog__text-heading';
+            heading.textContent = panelText.heading;
+            promise.appendChild(heading);
+        }
+        if (panelText.text) {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = panelText.text;
+            promise.appendChild(paragraph);
+        }
+        plan.insertBefore(promise, plan.querySelector(':scope > .loop-subscription-group-selling-plans-container'));
+    }
+    body.appendChild(plan);
+
+    // The buybox CTA's label for this plan (Custom Button Text per plan), else its default
+    const buyboxCta = box.querySelector('.product-form__custom-submit[data-plan-labels]');
+    let labels = {};
+    try { labels = JSON.parse(buyboxCta?.dataset?.planLabels || '{}'); } catch (e) { labels = {}; }
+    const labelKey = Object.keys(labels).find((key) => key.trim() === planId);
+    const cta = document.createElement('button');
+    cta.type = 'button';
+    // The buybox CTA's look; without data-plan-labels and the buybox CTA's id, no script takes it for that one
+    cta.className = 'button button--full-width button--primary product-form__custom-submit block__animate-button kc-plan-dialog__cta';
+    cta.textContent = (labelKey && labels[labelKey]) || buyboxCta?.dataset?.defaultLabel || '';
+    cta.addEventListener('click', () => {
+        dialog.close();
+        choose();
+        // After Loop has put the plan in the form (the radio's click runs it at once)
+        setTimeout(() => buyboxCta && buyboxCta.click(), 0);
+    });
+    footer.appendChild(cta);
+    inner.appendChild(body);
+    inner.appendChild(footer);
+
+    dialog.replaceChildren(inner);
+    if (!dialog.open) dialog.showModal();
+    // The page behind stays put while the dialog is open (Victor, 27 Nov; assets/kc-buybox.css)
+    document.documentElement.classList.add('kc-plan-dialog-open');
+}
+
+// KC: a plan card's badge ("Most picked") at the bottom right of the card, in the look and place of the
+// Year's "Brushing & Beyond" (.kc-testimonial-button) with a silver shine instead of gold (Victor, 27 Nov;
+// assets/kc-buybox.css .kc-plan-badge). Removed when the card's plan has none.
+function kcUpdatePlanBadge(groupEl, text) {
+    const host = groupEl.querySelector('.loop-subscription-group-selling-plans-container') || groupEl;
+    let badge = host.querySelector(':scope > .kc-plan-badge');
+    if (!text) {
+        if (badge) badge.remove();
+        return;
+    }
+    if (!badge) {
+        badge = document.createElement('div');
+        badge.className = 'kc-plan-badge';
+        badge.appendChild(document.createElement('span')).className = 'kc-testimonial-button kc-testimonial-button--silver';
+        host.appendChild(badge);
+    }
+    if (badge.firstElementChild.textContent !== text) badge.firstElementChild.textContent = text;
+}
+
+/**
+ * KC: the Try once quantity (Loop block "Try once: maximum quantity", Victor 27 Nov). It lives in a hidden
+ * quantity field of the buybox's product form, which karmiAddToCart reads for one time (a plan buys its
+ * own Duos per delivery, assets/kc-plan-select.js quantityFor); the sticky bar mirrors it. Maximum 1 (the
+ * default): no field, no control, one Duo as before.
+ */
+function kcOnceMax(productId) {
+    if (!kcOnceCard(productId)) return 1;
+    const max = parseInt(document.querySelector(`#kc-try-once-container-${productId}`)?.dataset?.kcOnceMax, 10);
+    return Number.isFinite(max) && max > 1 ? Math.min(max, 6) : 1;
+}
+
+function kcOnceQuantityInput(productId, create) {
+    const form = document.querySelector(`.kc-buybox form[data-loop-product-id="${productId}"]`)
+        || document.querySelector('.kc-buybox form[id^="product-form-"]');
+    if (!form) return null;
+    let input = form.querySelector('input[name="quantity"].kc-once-quantity');
+    if (!input && create) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'quantity';
+        input.className = 'kc-once-quantity';
+        input.value = '1';
+        form.appendChild(input);
+    }
+    return input;
+}
+
+// The quantity chosen on the Try once card. The card keeps it while a plan is selected (Victor, 27 Nov), in
+// the field's data-kc-chosen; the field itself (what the form buys) is 1 then, see kcUpdateOnceStepper.
+function kcOnceChosen(productId) {
+    const max = kcOnceMax(productId);
+    if (max <= 1) return 1;
+    const value = parseInt(kcOnceQuantityInput(productId, false)?.dataset?.kcChosen, 10);
+    return Number.isFinite(value) ? Math.min(Math.max(value, 1), max) : 1;
+}
+
+// The quantity a one-time order buys now: the chosen one with Try once selected, 1 with a plan selected
+function kcOnceQuantity(productId) {
+    return determineOneTimeOrderLoop(productId) ? kcOnceChosen(productId) : 1;
+}
+
+/**
+ * KC: the Try once title for a quantity, from texts already translated: "Try Once · 1 Duo"
+ * (kc.sticky_cart.title_once_html) with its 1 replaced by the quantity and its unit by the plural of
+ * "The Karmicare Year · 6 Duos" (kc.sticky_cart.title_year_html): "Try Once · 2 Duos", "Eenmalig
+ * proberen · 2 duo's", "Essayer une fois · 2 duos". The title as it is when a pattern is missing.
+ */
+function kcOnceTitleFor(title, many, quantity) {
+    if (!title || quantity <= 1) return title;
+    const plural = String(many || '').match(/\d+\s+(.+)$/);
+    if (!plural || !/\b1\s+\S+\s*$/.test(title)) return title;
+    // A no-break space keeps "3 duo's" together when the title wraps (the sticky bar on a phone)
+    return title.replace(/\b1\s+\S+\s*$/, `${quantity} ${plural[1]}`);
+}
+
+// get: what a one-time order buys now (1 with a plan selected); chosen: what the Try once card shows
+window.KCOnceQuantity = { get: kcOnceQuantity, chosen: kcOnceChosen, titleFor: kcOnceTitleFor };
+
+// KC: a click on a Try once stepper (kcUpdateOnceStepper), one listener for the whole document: the product
+// from the stepper's data-kc-product-id and the quantity field looked up at the click, so a stepper whose
+// markup Loop copied (its "one-time at bottom" option) keeps working (Astra R1 P2)
+function kcOnceStepperClick(event) {
+    const button = event.target.closest && event.target.closest('.kc-once-stepper__button');
+    const stepper = button && button.closest('.kc-once-stepper');
+    const productId = stepper && stepper.dataset.kcProductId;
+    if (!productId) return;
+    const input = kcOnceQuantityInput(productId, true);
+    if (!input) return;
+    const next = Math.min(Math.max(kcOnceChosen(productId) + Number(button.dataset.step), 1), kcOnceMax(productId));
+    input.dataset.kcChosen = String(next);
+    input.value = String(next);
+    const current = findSelectedVariantLoop(productId);
+    kcRenderOnceCard(productId, current, getLoopSubscriptionContainer(productId));
+    updateKcPricingSummary(productId, current);
+    document.dispatchEvent(new CustomEvent('kc:once-quantity', { detail: { productId, quantity: next } }));
+}
+
+if (!window.kcOnceStepperBound) {
+    window.kcOnceStepperBound = true;
+    document.addEventListener('click', kcOnceStepperClick);
+}
+
+// KC: the − / + control on the Try once card while it is selected, at the right of the €0 pill
+// (assets/kc-buybox.css .kc-once-stepper)
+function kcUpdateOnceStepper(productId, variant, text, texts) {
+    const max = kcOnceMax(productId);
+    const option = text.closest('.loop-one-time-purchase-option') || text.parentElement;
+    let stepper = option.querySelector('.kc-once-stepper');
+    if (max <= 1) {
+        if (stepper) stepper.remove();
+        const input = kcOnceQuantityInput(productId, false);
+        if (input) input.remove();
+        return;
+    }
+    const input = kcOnceQuantityInput(productId, true);
+    if (!stepper) {
+        stepper = document.createElement('div');
+        stepper.className = 'kc-once-stepper';
+        stepper.setAttribute('role', 'group');
+        // Its clicks: kcOnceStepperClick, from the document (Loop's "one-time at bottom" copies the
+        // option's markup, which a listener on the node would not survive)
+        stepper.dataset.kcProductId = String(productId);
+        stepper.innerHTML = '<button type="button" class="kc-once-stepper__button" data-step="-1"></button>'
+            + '<output class="kc-once-stepper__value" aria-live="polite"></output>'
+            + '<button type="button" class="kc-once-stepper__button" data-step="1"></button>';
+    }
+    // Right after the €0 pill, as it shows (at its right, assets/kc-buybox.css): the reading and tab order
+    // follow the screen. Without a pill, at the end of the card's row.
+    const chips = option.querySelector(':scope > .kc-once-chips');
+    if (chips ? chips.nextElementSibling !== stepper : option.lastElementChild !== stepper) {
+        if (chips) chips.after(stepper);
+        else option.appendChild(stepper);
+    }
+    // The card keeps the chosen quantity, but with a plan selected the form's field is 1, so nothing that
+    // sends the buybox form with a plan selected can multiply it. The fixed one-time links pass their own
+    // quantity (assets/kc-plan-select.js tryOnce): the sticky bar's "Try once for …" the chosen one, the
+    // comparison tables' Try once 1. Try once selected again: the field is the chosen quantity again.
+    if (!input.dataset.kcChosen) input.dataset.kcChosen = '1';
+    const buys = String(kcOnceQuantity(productId));
+    if (input.value !== buys) input.value = buys;
+    const quantity = kcOnceChosen(productId);
+    stepper.setAttribute('aria-label', texts.kcQtyLabel || 'Quantity');
+    const [minus, plus] = stepper.querySelectorAll('.kc-once-stepper__button');
+    minus.setAttribute('aria-label', texts.kcQtyDecrease || 'Decrease quantity');
+    plus.setAttribute('aria-label', texts.kcQtyIncrease || 'Increase quantity');
+    minus.disabled = quantity <= 1;
+    plus.disabled = quantity >= max;
+    const value = stepper.querySelector('.kc-once-stepper__value');
+    if (value.textContent !== String(quantity)) value.textContent = String(quantity);
+}
+
+// KC: an element's lines as <div>s, written only when they change (the plan config watches the widget)
+function kcSetLines(element, lines) {
+    const key = JSON.stringify(lines);
+    if (element.dataset.kcLines === key) return;
+    element.dataset.kcLines = key;
+    element.replaceChildren(...lines.map((line) => {
+        const div = document.createElement('div');
+        div.textContent = line;
+        return div;
+    }));
+}
+
+/**
+ * KC: Loop's one-time option as the first plan card (kcOnceCard), in the plan card's structure: title
+ * and "€0.56 / brushing + shipping" on the left, price and "one-time" on the right, the €0 note as a
+ * chip in its own row (assets/kc-buybox.css, .kc-once-card). Texts in the page language: data
+ * attributes on the Try once container (kc.sticky_cart.title_once_html, the block's Try once shipping
+ * text and note) and kc.receipt.* on the pricing summary. Runs after every Loop update, as Loop writes
+ * its own label on every init.
+ */
+function kcRenderOnceCard(productId, variant, loopContainer) {
+    const top = loopContainer.querySelector('#loop-one-time-purchase-option-at-top');
+    const bottom = loopContainer.querySelector('#loop-one-time-purchase-option-at-bottom');
+    if (!top) return;
+    // Loop admin "one-time at bottom" moves the option under the plans: back on top, nodes and listeners
+    if (bottom && bottom.querySelector('.loop-one-time-purchase-option') && !top.querySelector('.loop-one-time-purchase-option')) {
+        while (bottom.firstChild) top.appendChild(bottom.firstChild);
+    }
+    if (bottom) bottom.style.setProperty('display', 'none', 'important');
+    top.style.removeProperty('display');
+    top.removeAttribute('aria-hidden');
+
+    const option = top.querySelector('.loop-one-time-purchase-option');
+    if (!option) return;
+    const texts = document.querySelector(`#kc-try-once-container-${productId}`)?.dataset || {};
+    const labelsEl = document.querySelector('.kc-pricing-summary[id^="kc-pricing-summary-"]');
+    const addClass = (element, name) => {
+        if (element && !element.classList.contains(name)) element.classList.add(name);
+    };
+
+    // LEFT: title and sub-row in one column, as .loop-subscription-group-text
+    const label = option.querySelector('.loop-one-time-purchase-option-label');
+    let text = option.querySelector('.kc-once-text');
+    if (!text) {
+        text = document.createElement('div');
+        text.className = 'kc-once-text';
+        option.insertBefore(text, label || option.querySelector('.loop-one-time-purchase-option-price-container'));
+        if (label) text.appendChild(label);
+    }
+    if (label) {
+        addClass(label, 'h5');
+        // "Try Once · 1 Duo", or "· 2 Duos" … with a quantity (kcOnceTitleFor)
+        const title = kcOnceTitleFor(texts.kcOnceTitle, texts.kcTitleMany, kcOnceChosen(productId));
+        if (title && label.textContent !== title) label.textContent = title;
+    }
+
+    let subRow = text.querySelector('.kc-plan-subrow');
+    if (!subRow) {
+        subRow = document.createElement('div');
+        subRow.className = 'kc-plan-subrow';
+        text.appendChild(subRow);
+    }
+    // One Duo is 120 brushings, as the summary's one-time line; "+ shipping" (the block's Try once
+    // shipping text) right after it, one line (Victor, 24 Nov)
+    const perBrushing = loopFormatMoney(Math.round(variant.price / 120), true);
+    kcSetLines(subRow, [
+        [kcLabelText(labelsEl, 'kcPerBrushing', '[price] / brushing', { price: perBrushing }), texts.kcOnceShipping]
+            .filter(Boolean).join(' '),
+    ]);
+
+    // The block's Try once note ("€0 Care Credit · €0 Dental Check-up Reward") as a chip in its own row
+    // under the title, as the plan cards' Care Credit chips (.kc-return_care-tooltip, assets/kc-buybox.css)
+    let chips = option.querySelector(':scope > .kc-return_care-tooltip');
+    if (!texts.kcOnceNote) {
+        if (chips) chips.remove();
+    } else {
+        if (!chips) {
+            chips = document.createElement('div');
+            chips.className = 'kc-return_care-tooltip kc-once-chips';
+            chips.appendChild(document.createElement('div')).className = 'kc-return_care';
+            option.appendChild(chips);
+        }
+        if (chips.firstElementChild.textContent !== texts.kcOnceNote) chips.firstElementChild.textContent = texts.kcOnceNote;
+    }
+
+    // RIGHT: price and "one-time", as the plan cards' "/ 60 days"
+    addClass(option.querySelector('.loop-one-time-purchase-option-price-amount'), 'h5');
+    const priceContainer = option.querySelector('.loop-one-time-purchase-option-price-container');
+    if (priceContainer) {
+        let intervalEl = priceContainer.querySelector('.kc-plan-interval-label');
+        if (!intervalEl) {
+            intervalEl = document.createElement('span');
+            intervalEl.className = 'kc-plan-interval-label';
+            priceContainer.appendChild(intervalEl);
+        }
+        const interval = kcLabelText(labelsEl, 'kcOneTime', 'one-time');
+        if (intervalEl.textContent !== interval) intervalEl.textContent = interval;
+    }
+
+    // Quantity: the − / + control, and the card's price as the total. Loop writes its unit price into
+    // #loop-price-one-time after this on every update, so the total follows right after it.
+    kcUpdateOnceStepper(productId, variant, text, texts);
+    const quantity = kcOnceChosen(productId);
+    setTimeout(() => {
+        const amount = option.querySelector('#loop-price-one-time');
+        const total = loopFormatMoney(variant.price * quantity, true);
+        if (amount && amount.textContent.trim() !== total) amount.textContent = total;
+    }, 0);
 }
 
 function injectOrUpdateKcTryOnceLink(productId, variant) {
     if (!variant) return;
 
+    const card = kcOnceCard(productId);
     const loopContainer = getLoopSubscriptionContainer(productId);
     if (loopContainer) {
-        const topCard = loopContainer.querySelector('#loop-one-time-purchase-option-at-top');
-        if (topCard) {
-            topCard.style.setProperty('display', 'none', 'important');
-            topCard.setAttribute('aria-hidden', 'true');
+        if (loopContainer.classList.contains('kc-once-card') !== card) loopContainer.classList.toggle('kc-once-card', card);
+        // Chips on the selected card only (Loop block "Plan chips: selected card only", card layout)
+        const chipsSelectedOnly = card && kcPlanExtras(productId).chipsSelectedOnly;
+        if (loopContainer.classList.contains('kc-chips-selected-only') !== chipsSelectedOnly) {
+            loopContainer.classList.toggle('kc-chips-selected-only', chipsSelectedOnly);
+        }
+        if (card) {
+            kcRenderOnceCard(productId, variant, loopContainer);
+        } else {
+            // Link layout: Loop's one-time option stays hidden, on top or where Loop admin "one-time at
+            // bottom" put it
+            loopContainer.querySelectorAll('.loop-one-time-purchase-option-position').forEach((position) => {
+                position.style.setProperty('display', 'none', 'important');
+                position.setAttribute('aria-hidden', 'true');
+            });
         }
     }
 
@@ -3202,7 +3866,9 @@ function clickUpdatedSPGLoop(productId) {
 
     const loopContainer = getLoopSubscriptionContainer(productId);
     const themeDefaultToSubscription = loopContainer ? loopContainer.dataset.defaultToSubscription === 'true' : false;
-    const shouldDefaultToSub = themeDefaultToSubscription || window.loopPropsUI.byDefaultChooseSubscriptionOption;
+    // KC CUSTOM: the Try once card (kcOnceCard) starts on one time, as applyDefaultSelectionBasedOnLoopSettings
+    const shouldDefaultToSub = !kcOnceCard(productId) &&
+        (themeDefaultToSubscription || window.loopPropsUI.byDefaultChooseSubscriptionOption);
 
     if (isProductBundle(productId)) {
         if (
@@ -3680,7 +4346,14 @@ function overrideAddToCartButtonLoop(productId) {
         submitButtons.forEach((btn) => {
             btn = removeAllEventListenersLoop(btn);
             btn.addEventListener("click", (event) => {
-                const quantity = document.querySelector(
+                // KC: the Try once card's quantity field when the buybox has one for this very product (its
+                // form's data-loop-product-id; 1 with a plan selected, the plan's units then come from
+                // kc-plan-select.js quantityFor); else Loop's own selector, as before (Astra R1 P2, R2 P2:
+                // another product never takes the Duo's quantity)
+                const onceField = kcOnceQuantityInput(productId, false);
+                const ownField = onceField && onceField.form
+                    && onceField.form.dataset.loopProductId === String(productId) ? onceField : null;
+                const quantity = ownField || document.querySelector(
                     PRODUCT_QUANTITY_SELECTOR
                 );
                 loopHandleAddToCart(event, productId, quantity?.value);

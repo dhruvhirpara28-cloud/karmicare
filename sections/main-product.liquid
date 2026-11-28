@@ -147,13 +147,32 @@
                       price_class: 'price--large'
                     -%}
                   </div>
+                  {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
+                  {%- assign kc_once_cta_default = 'kc.sticky_cart.cta_once_html' | t -%}
+                  {%- comment -%}
+                    Try once layout (Loop block setting "Try once", docs/buybox-ab/PLAN.md): "link" is the
+                    link below (today), "card" shows Loop's own one-time option as the first plan card,
+                    selected on load (assets/loop-widget.js kcOnceCard). The card's texts ride along here.
+                  {%- endcomment -%}
                   <div
                     id="kc-try-once-container-{{ product.id }}"
                     class="tertiary-try-once-link figma-tryonce v9bb"
                     data-active-plan="once"
+                    data-kc-once-layout="{{ loop_block.settings.try_once_layout | default: 'link' | escape }}"
+                    data-kc-once-title="{{ 'kc.sticky_cart.title_once_html' | t | escape }}"
+                    data-kc-once-shipping="{{ loop_block.settings.try_once_shipping | escape }}"
+                    data-kc-once-note="{{ loop_block.settings.try_once_note | escape }}"
+                    data-kc-once-max="{{ loop_block.settings.try_once_max_quantity | default: 1 }}"
+                    data-kc-title-many="{{ 'kc.sticky_cart.title_year_html' | t | escape }}"
+                    data-kc-qty-label="{{ 'products.product.quantity.label' | t | escape }}"
+                    data-kc-qty-decrease="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}"
+                    data-kc-qty-increase="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}"
+                    data-kc-once-cta="{{ loop_block.settings.try_once_cta | default: kc_once_cta_default | escape }}"
+                    data-kc-or="{{ 'kc.plans.or' | t | escape }}"
+                    data-kc-credit="{{ 'kc.sticky_cart.credit_html' | t | escape }}"
+                    data-kc-credit-checkup="{{ 'kc.sticky_cart.credit_checkup_html' | t | escape }}"
                     style="display: none;"
                   >
-                    {%- assign loop_block = section.blocks | where: 'type', 'loop_subscriptions' | first -%}
                     <span class="ft-line">
                       {{ 'kc.plans.or' | t }}
                       <button class="ft-link kc-try-once-btn" data-plan="once" type="button">
@@ -633,14 +652,33 @@
                     {%- render 'loop-subscriptions', type: 'product-widget', product: product, block: block -%}
                     {%- comment -%}
                       Public plans only, selected by selling plan ID; "Default to subscription" starts
-                      on the first public plan (assets/kc-plan-select.js).
+                      on the first public plan (assets/kc-plan-select.js). With "Try once: card on top"
+                      the Try once card starts selected instead.
                     {%- endcomment -%}
                     {%- render 'kc-plan-config',
                       product: product,
                       section: section,
                       role: 'buybox',
-                      default_to_subscription: block.settings.default_to_subscription
+                      default_to_subscription: block.settings.default_to_subscription,
+                      try_once_layout: block.settings.try_once_layout
                     -%}
+                    {%- comment -%}
+                      Plan card extras with the Try once card (assets/loop-widget.js kcPlanExtras): badges,
+                      "selling plan ID: text" per line, and the plans with the one-time price struck through
+                    {%- endcomment -%}
+                    <script type="application/json" id="kc-plan-extras-{{ product.id }}">
+                      {"badges": {{ block.settings.plan_badges | json }}, "compareOnce": {{ block.settings.plan_compare_once | json }}, "asLink": {{ block.settings.plans_as_link | json }}, "chipsSelectedOnly": {{ block.settings.chips_selected_only | json }}, "linkOpens": {{ block.settings.plan_link_opens | default: 'card' | json }}, "panelText": {{ block.settings.plan_panel_text | json }}, "closeLabel": {{ 'accessibility.close' | t | json }}}
+                    </script>
+                    {%- comment -%}
+                      The plan popup / side panel's close icon, the one the professionals' quote panel uses
+                      (assets/loop-widget.js kcOpenPlanDialog clones it from its own buybox). Only when a
+                      dialog can open: the card layout, a plan as a link, and the popup or the side panel.
+                    {%- endcomment -%}
+                    {%- if block.settings.try_once_layout == 'card' and block.settings.plans_as_link != blank -%}
+                      {%- if block.settings.plan_link_opens == 'popup' or block.settings.plan_link_opens == 'panel' -%}
+                        <template data-kc-icon-close>{{ 'kc-icon-close.svg' | inline_asset_content }}</template>
+                      {%- endif -%}
+                    {%- endif -%}
                   {%- endif -%}
                   {%- comment -%} LOOP WIDGET CODE ENDS {%- endcomment -%}
                 {%- when 'buy_buttons' -%}
@@ -2935,6 +2973,91 @@
         {
           "type": "header",
           "content": "Try Once Link Settings"
+        },
+        {
+          "type": "select",
+          "id": "try_once_layout",
+          "label": "Try once",
+          "info": "Card on top: Try once is the first plan card and starts selected, so \"Default to first subscription\" is ignored. The link texts below are then not shown.",
+          "options": [
+            {
+              "value": "link",
+              "label": "Link under the cards"
+            },
+            {
+              "value": "card",
+              "label": "Card on top, preselected"
+            }
+          ],
+          "default": "link"
+        },
+        {
+          "type": "range",
+          "id": "try_once_max_quantity",
+          "label": "Try once: maximum quantity (card on top only)",
+          "info": "1: one Duo, no quantity control. Higher: a − / + control on the Try once card; the total, the titles and the sticky bar follow the quantity.",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "try_once_cta",
+          "label": "Try once: button text (card on top only)",
+          "info": "The buy button while Try once is selected, e.g. \"Try once, purchase now\". Blank: the sticky bar's Try once text (\"Try once\")."
+        },
+        {
+          "type": "textarea",
+          "id": "plan_badges",
+          "label": "Plan badges (card on top only)",
+          "info": "Shown only with \"Try once: card on top\", at the bottom right of the plan's card in the look of the Year's badge, with a silver shine. One line per plan: selling plan ID, a colon, the badge text, e.g. 712106115453: Most picked. Plans are matched by ID, so renaming or translating a plan keeps its badge."
+        },
+        {
+          "type": "checkbox",
+          "id": "chips_selected_only",
+          "label": "Plan chips: selected card only (card on top only)",
+          "info": "Shown only with \"Try once: card on top\". The Care Credit and Check-up chips show on the selected card only.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "plans_as_link",
+          "label": "Plans as a link under the cards (card on top only)",
+          "info": "Selling plan IDs, comma-separated, e.g. 712155431293. Shown only with \"Try once: card on top\": the plan is a text link after the cards (\"Or The Karmicare Year · €354 / year\") until it is chosen, then its card opens."
+        },
+        {
+          "type": "select",
+          "id": "plan_link_opens",
+          "label": "Plan link opens (card on top only)",
+          "info": "What a click on a plan link under the cards does: open the plan's card in the buybox, a popup in the middle of the screen over a soft blur, or a side panel with the landed still of the kit above the plan.",
+          "options": [
+            {
+              "value": "card",
+              "label": "Its card"
+            },
+            {
+              "value": "popup",
+              "label": "A popup"
+            },
+            {
+              "value": "panel",
+              "label": "A side panel"
+            }
+          ],
+          "default": "card"
+        },
+        {
+          "type": "textarea",
+          "id": "plan_panel_text",
+          "label": "Plan popup / side panel: text per plan",
+          "info": "Shown in the plan's popup or side panel, under its title and price. One line per plan: selling plan ID, a colon and the text, e.g. 712155431293: Your dentist sees you once or twice a year. … For a small heading above it: ID: heading | text."
+        },
+        {
+          "type": "text",
+          "id": "plan_compare_once",
+          "label": "One-time price struck through (card on top only)",
+          "info": "Selling plan IDs, comma-separated, e.g. 712106115453. Shown only with \"Try once: card on top\": the card shows the one-time price of the same number of Duos, struck through, before its own price."
         },
         {
           "type": "text",

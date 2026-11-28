@@ -14,7 +14,8 @@
  * - KCPlanSelect.subscriptionName(planId): the "Subscription Name" order attribute Loop Loyalty needs
  *   for Care Credit, by plan ID. Every add-to-cart path (loop-widget.js, karmi-add-to-cart.js,
  *   product-form.js) reads it here; syncCartSubscriptionName() keeps the cart's value in line with
- *   the subscription lines in it.
+ *   the subscription lines in it, and sets the "Buybox layout" attribute (link or card, the Loop block
+ *   setting "Try once") on a page with plan cards.
  * - KCPlanSelect.replaceChoice(productId, planId, add): one purchase choice of a plan product in the
  *   cart; every add-to-cart path adds the product through it (clearPurchaseChoice, then the add, one
  *   at a time on the page; the earlier choice comes back when the add is rejected). manages(productId)
@@ -485,7 +486,11 @@
       warn('Try Once: karmiAddToCart is not loaded');
       return Promise.resolve(false);
     }
-    return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true })).then(
+    // Exactly the quantity its button offers: the sticky bar's link carries the Try once card's chosen
+    // quantity (data-kc-once-quantity); a comparison table's Try once shows one Duo and buys one, whatever
+    // the buybox form's quantity field holds
+    const quantity = Math.max(parseInt(button && button.dataset.kcOnceQuantity, 10) || 1, 1);
+    return Promise.resolve(window.karmiAddToCart(form, button || null, { oneTime: true, quantity: quantity })).then(
       () => true
     );
   }
@@ -733,14 +738,34 @@
     const ordered = planIds.includes(preferred) ? [preferred].concat(planIds) : planIds;
     const wanted = ordered.map(subscriptionName).find(Boolean) || '';
     const current = (cart.attributes && cart.attributes['Subscription Name']) || '';
-    if (current !== wanted) {
+    const attributes = {};
+    if (current !== wanted) attributes['Subscription Name'] = wanted;
+    // The order also carries the buybox layout it came from (buyboxLayout), for the before/after read
+    const layout = buyboxLayout();
+    if (layout && ((cart.attributes && cart.attributes[LAYOUT_ATTRIBUTE]) || '') !== layout) {
+      attributes[LAYOUT_ATTRIBUTE] = layout;
+    }
+    if (Object.keys(attributes).length) {
       await fetch('/cart/update.js', {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify({ attributes: { 'Subscription Name': wanted } }),
+        body: JSON.stringify({ attributes: attributes }),
       });
     }
     return wanted;
+  }
+
+  // The buybox's Try once layout on a page with plan cards (Loop block setting "Try once",
+  // data-kc-once-layout in sections/main-product.liquid): 'link' (default) or 'card'; '' on a page
+  // without a buybox Loop widget, where the cart attribute is left as it is. docs/buybox-ab/PLAN.md
+  const LAYOUT_ATTRIBUTE = 'Buybox layout';
+
+  function buyboxLayout() {
+    readConfigs();
+    const hasBuybox = Object.keys(products).some((productId) => buyboxOf(products[productId]));
+    if (!hasBuybox) return '';
+    const box = document.querySelector('.kc-buybox [data-kc-once-layout]');
+    return (box && box.dataset.kcOnceLayout) === 'card' ? 'card' : 'link';
   }
 
   // The product a variant belongs to, from Loop's product data on the page ('' when unknown)
@@ -905,6 +930,9 @@
       window.hj('event', 'kc_checkout');
       const name = CHECKOUT_EVENTS[id ? entry && entry.type : 'once'];
       if (name) window.hj('event', name);
+      // And the buybox layout of the page (kc_layout_link / kc_layout_card), for the before/after read
+      const layout = buyboxLayout();
+      if (layout) window.hj('event', 'kc_layout_' + layout);
     } catch (e) {
       warn('Hotjar checkout event failed: ' + (e && e.message ? e.message : e));
     }

@@ -8,6 +8,8 @@
   - role: {String} 'buybox' (main-product) or 'end-cta' (featured-product). Compare plans and Try Once
     always act on the buybox.
   - default_to_subscription: {Boolean} the Loop block setting: start on the first public plan
+  - try_once_layout: {String} optional, the Loop block setting "Try once": 'card' starts on the Try once
+    card (docs/buybox-ab/PLAN.md), so the widget never defaults to a plan; 'link' or blank as before
 
   Every selling plan of the product is listed with its group, whether it is public, its type, its Duos
   per delivery and expected year total (snippets/kc-plan-type.liquid), its "Subscription Name" for Loop
@@ -85,7 +87,7 @@
     "role": {{ role | json }},
     "sectionId": {{ section.id | json }},
     "formId": {{ 'product-form-' | append: section.id | json }},
-    "defaultToSubscription": {% if default_to_subscription %}true{% else %}false{% endif %},
+    "defaultToSubscription": {% if default_to_subscription and try_once_layout != 'card' %}true{% else %}false{% endif %},
     "kitVariantIds": {{ kc_kit_variant_ids | json }},
     "kitHandles": {{ kc_kit_handles }},
     "welcomeKit": {{ kc_welcome_kit }},
